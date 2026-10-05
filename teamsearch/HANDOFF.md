@@ -328,7 +328,7 @@ Usage:
   - TR sheet was sharing it at 96 threads, from 2:17 pm, at the user's request.
   - Saved on the Mac in `cloud_results/v12`: 19,629 screening games, up to round 1's 100/668 teams, plus the pre-filter cache.
   - To resume on a new box (launch with 40 GB storage), after setup and the smoke test: `rsync -az cloud_results/v12/runs/ BOX:champions-sims/teamsearch/runs/` and `rsync cloud_results/v12/climb_prefilter_r1.json BOX:champions-sims/teamsearch/`, then start round 1 as before. Finished jobs are reused; start files are regenerated identically.
-- **Relaunched in Spain (Oct 5, 4:08 pm):** eu-south-2 c7a.48xlarge spot, 40 GB root, key champions-aws-spain. The Ohio box's spot request status was `instance-terminated-no-capacity`, i.e. AWS reclaimed it.
+- **Relaunched in Spain (Oct 5, 4:08 pm):** eu-south-2 c7a.48xlarge spot, 40 GB root, that region's own key pair. The Ohio box's spot request status was `instance-terminated-no-capacity`, i.e. AWS reclaimed it.
   - Smoke test 54/54 identical.
   - Restored the 19,629 saved screening games and the pre-filter cache; round 1 resumed at 100/668 screening teams.
   - The climb runs at 32×3 while TR sheet uses the other 96 threads (tmux `trsheet`; expected done ~7:20 pm).

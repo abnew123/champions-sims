@@ -43,10 +43,16 @@ Built, all in `evalbar/` (run the Python from the repo root; `common.py` finds t
 - `build.py <id> acc=... engine=<evalpos output> pos=<positions>` fills the page's options panel. The published page (version 2) shows the
   demo game with the version 0 bar and the engine's options at 32 seeds.
 
-Running / next: the accuracy sample (`out/acc_p1.jsonl`, 3,968 positions from 560 of the first 600 sample games, 8 seeds, output
-`out/acc_eval.jsonl`, resumable with `engine.py run`). Then `accuracy.py out/acc_eval.jsonl` compares the engine value, static value,
-refitted features and version 0 plus engine against version 0 on the same positions; the bar switches to the engine only if it wins, with
-its values rescaled to real outcomes. Cores: TR sheet and Battle sim agreed to 3 threads for this run; ask the user before going above one.
+**Result (2026-10-05, 560 held-out games, 3,968 positions, staged 32 samples, `results/accuracy_engine.json`):** the engine's one-turn
+value, rescaled to real outcomes (log-odds times 0.744), has log loss 0.525 against version 0's 0.568 on the same positions (difference
+-0.043 ± 0.009 by game resampling), favourite won 72.3% against 69.0%, calibrated in every 10% bucket, and is better at every turn
+number. Adding version 0 to it adds nothing; the static value (-0.010) and the 20 features refitted on real games (-0.009) gain little.
+Caveat: the engine knows each side's whole brought four and their sets from hindsight; version 0 only knows how many are left. The
+published page (version 3) takes its bar from the rescaled engine value: `build.py <id> acc=evalbar/results/accuracy_engine.json
+engine=... pos=... cal=0.7438`. The rescale weight depends on the sampling (flat 8 samples gave 0.56), so refit it if the mode changes.
+
+Possible next steps (not asked for yet): more demo games, flagging Perish Song positions on the page, Battle sim extending the engine data
+(210 games need a missing species or ability), step 2 (the user's recorded games, a belief over the opponent's hidden sets).
 
 ## Scope the user approved: step 1 only
 

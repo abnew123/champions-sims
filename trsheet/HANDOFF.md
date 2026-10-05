@@ -112,12 +112,22 @@ thread maintains the kit and owns `sheets/trick-room-six/`.
    Trick Room -5.9 +- 2.5, from physical leads). Done: `team.json`, `pssim/myteam_real.json`, the card, the Matchups column (the
    Version 15 page's), the six tabs' whole-game % and turn-one lines (36 jobs re-run through the kit), the generic grid's Torkoal cells;
    Battle sim and Team search use the same sets. Published in Version 17.
-2. **Rerun the picks on the new planner.** The whole-game numbers above come from the old planner. Known biases: Perish far too high (the
-   sim's Perish teams almost never trap and sing; real teams beat Perish 48%, the sim says 76%+), the Trick Room tab inflated (about a quarter
-   of the modelled "TR" teams lead Delphox and never set Trick Room), status and setup undervalued, opponents double-Protect too much (worth
-   about 2 points to us, 7 vs Tailwind). The Battle sim thread has a new setup (champ-battle-v8, `DP2=1 RACE=1`, `egvalue7.json`) and is
-   still validating it. When it says the setup is final: rerun the bring matrix and confirmation (about an hour on a 192-core AWS spot box,
-   see the aws-setup memory; the user starts the box), then rebuild the page.
+2. **Rerun the picks on the final planner: ready, waiting for the user's go-ahead and a cloud box.** Battle sim declared the setup
+   final on 2026-10-05: champ-battle-v12, `DP2=1 RACE=1`, `pssim/egvalue9.json` (one value file for every team), the team's generic grid.
+   It is `current` in `sheetkit/sim.json` (`v12-dp2-race-eg9`), this folder's `grid_dir` now defaults to `work/grid`, and `kit.py
+   trick-room-six smoke` runs on it. The rerun is the kit's steps in order: `matrix jobs`, `matrix run` (86,400 games), `matrix
+   report`, `confirm jobs`, `confirm run`, `confirm decide --write`, `t1 jobs`, `t1 run`, `t1 solve`, `page`; about 1.5-2 hours on a
+   192-core spot box for the matrix and confirmation (the user starts the box, during the day; see the aws-setup memory and
+   `teamsearch/cloud/README.md`; the kit has not run on a box yet, so pack `sheetkit/`, the team folder with `work/grid`, and
+   `native/champ/src_battle_v12.tar.gz` with the usual bundle). Use fresh game indices (used so far: 0-23, 200-263, 400-431, 600-615,
+   1000-1047, 2000-2063, 3000-3003, 4000-4015, 5000-5003, 6000-6002; the defaults 600 and 1000 were the old planner's, which is fine
+   since the new planner's games are different games, but say which you used). What to expect (Battle sim): a stronger player on both
+   sides; the six's overall share about the same (72 -> 73% in 480-game tests) but single tabs move by up to 10 points, so treat it as
+   a fresh ranking, not comparable with Version 17's numbers. The sim's matchup error against real regional results is about 6
+   win-rate points per archetype in every setup, so whole-game % ranks fours within a tab better than it predicts absolute win rates.
+   **Perish (the user's call before the rerun):** the sim cannot play Perish trap properly, and the user's view is to use a stock
+   real-data rate for Perish matchups, as Team search does (`TS_PERISH=real`, 45-53% by archetype). The sheet's Perish tab still shows
+   the sim's 91%. Ask how to present that tab. Also revisit item 3 in the rerun.
 3. **Rain near miss.** Blastoise + Farigiraf / Torkoal, Incineroar beat the sheet's Rain pick by 6.8 +- 4.5 on fresh games (1.49 SE, just
    under the bar); all of it against non-Pelipper leads (Dragonite + Gholdengo 77 vs 35, Archaludon + Grimmsnarl 62 vs 27). Revisit in the rerun.
 4. **Species tells and per-archetype strategy guides** were delivered in chat only (`pssim/results/bringmx_report.txt`,

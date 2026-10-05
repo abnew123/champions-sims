@@ -8,11 +8,14 @@ usage: ../.venv/bin/python3 build_egvalue9.py <TR six dir> <@file listing the ot
 env: W_TR=<share of the total weight given to the TR six's games, default: by game count>"""
 import json, glob, sys, os, numpy as np
 e7 = json.load(open('egvalue7.json')); R = json.load(open('results/fit_real_value.json')); real = dict(zip(R['names'], R['real'][1:]))
-HAND = [4, 5, 8, 16, 17]; TIED = {11: 'slp', 12: 'par', 13: 'brn', 14: 'tw'}; ratio = {i: real[k] / real['hp'] for i, k in TIED.items()}
+HAND = [4, 5, 8, 16, 17]; TIED = {11: 'slp', 12: 'par', 13: 'brn', 14: 'tw'}
+if os.environ.get('TIE_TR'): TIED[3] = 'tr'   # TIE_TR=1: Trick Room turns x speed edge at its real-game ratio too (for the symmetric bar value, where the free fit gives 0.07)
+ratio = {i: real[k] / real['hp'] for i, k in TIED.items()}
 SYM = bool(os.environ.get('SYM'))      # SYM=1: a value that reads the same from either side (for the eval bar): every position is also
                                        # used mirrored (features negated, outcome flipped), so the intercept is 0, and the two matchup-grid
                                        # features (which only exist for a prepared side-0 team) are left out. Writes <out> with b0 = 0.
 FREE = [1, 2, 3, 9, 10, 15, 18, 19] if SYM else [1, 2, 3, 6, 7, 9, 10, 15, 18, 19]; SPLIT = bool(os.environ.get('SPLIT_TR'))
+if 3 in TIED: FREE.remove(3)
 names = e7['names']
 def load(ds):
     X, y, G, T = [], [], [], []
@@ -75,7 +78,7 @@ if len(sys.argv) > 3 and SYM and not SPLIT:
     for i in TIED: Wv[i] = float(ratio[i] * sl[0])
     for k, i in enumerate(FREE): Wv[i] = float(sl[k + 1])
     json.dump({'b0': 0.0, 'w': Wv[:20], 'names': names + ['race: KO edge', 'race: HP edge'], 'hand_set': e7['hand_set'],
-               'note': 'Symmetric value for the eval bar: egvalue9\'s model fitted on the same eleven teams\' self-play with every position mirrored, intercept 0, no grid features. Use with RACE=1 CALC_DATA=..., TRSYM=1 and an empty GRID_DIR.'},
+               'note': 'Symmetric value for the eval bar: egvalue9\'s model fitted on the same eleven teams\' self-play with every position mirrored, intercept 0, no grid features. Use with RACE=1 CALC_DATA=..., TRSYM=1 and an empty GRID_DIR.' + (' Trick Room turns x speed edge tied to the HP weight at the real-game ratio (TIE_TR=1).' if 3 in TIED else '')},
               open(sys.argv[3], 'w'), indent=1)
     print(f"\nwrote {sys.argv[3]} (symmetric; fitted intercept {w[0]:+.4f}, written as 0)")
 elif len(sys.argv) > 3 and not SPLIT:

@@ -13,6 +13,14 @@ This folder is the machinery behind the **Trick Room Six** sheet (Pokémon Champ
   dependencies, build output, results and other large generated files, local binaries, and data with names (game recordings, replay logs,
   scraped tournament pages). Commits use the no-reply email in the repo's git config. License: MIT (`LICENSE`); Showdown's notice, data
   sources and the trademark line are in `NOTICE.md`.
+  **Privacy hooks (since 2026-10-05, 6:50 pm):** `.githooks/pre-commit` and `commit-msg` run `tools/privacy_scan.py`, which refuses a
+  commit whose added lines, file names or message carry an email, an absolute `/Users/` path, an IP or EC2 address, a key, a Showdown
+  replay line with a username, or any string in the private list `.git/private-patterns.txt` (one case-insensitive regex per line; the
+  user's names, opponents' names, key-pair names; it is in the git directory, never tracked, shared by every worktree). Installed with
+  `python3 tools/privacy_scan.py install` (sets `core.hooksPath` to the absolute `.githooks` path, so the Eval bar worktree runs the
+  same hooks); a refusal lists `file:line: what: the line`; fix the text, never `--no-verify`. Add a new private string by appending a
+  line to that file. Pre-public checks: `python3 tools/privacy_scan.py tree` (every tracked file) and `history origin/main` (every
+  pushed commit, added lines and messages); on 2026-10-05 the latter finds one thing to purge, an AWS key-pair name in `cc65069`.
 - **Current battle-sim setup (final as of 2026-10-05, for every team; amended the same day: v13 and `RACE_TIES=avg`).** From `pssim/`:
   `RACE_TIES=avg DP2=1 RACE=1 CALC_DATA=../native/champions_data.json BATTLE_ANTICIPATE=1 EG_VALUE=egvalue9.json GRID_DIR=<the team's
   generic grid> ../native/champ/bin/champ-battle-v13 battle ../native/engine_data_spot.json <starts.jsonl> <outdir> <threads>`

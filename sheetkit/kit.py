@@ -5,6 +5,8 @@
   python3 sheetkit/kit.py <team> status                    what exists in sheets/<team>/ and what the next step is
   python3 sheetkit/kit.py <team> smoke                     2 whole games, 1 turn-one job and a page in work/smoke/: about a minute, 1 core
   python3 sheetkit/kit.py <team> grid [--workers N]        one-on-one cells for the six (the full-battle planner needs them)
+  python3 sheetkit/kit.py <team> charts [--workers N]      Coverage and Matchups for the page, from the grid -> charts.json
+  python3 sheetkit/kit.py <team> speed                     the Speed table: the six among the common opposing spreads -> speed.json
   python3 sheetkit/kit.py <team> matrix jobs               all 90 fours x each archetype's opposing leads
   python3 sheetkit/kit.py <team> matrix run [--games 16] [--g0 600] [--threads N] [--only 0,3] [--setup NAME]
   python3 sheetkit/kit.py <team> matrix report             best fours, worth of bringing each Pokemon, species tells
@@ -43,6 +45,9 @@ def status(sheet):
     else: print("  picks     none yet (run: confirm decide --write)")
     tj = len(rj(sheet.w('t1', 'jobs.json'))) if os.path.exists(sheet.w('t1', 'jobs.json')) else 0
     print(f"  t1        {n('t1', 'res')} of {tj} jobs done; t1.json {'ok' if ex('t1.json') else 'missing'}" if tj else "  t1        no jobs yet")
+    ch = rj(sheet.p('charts.json')) if ex('charts.json') else None; sp = rj(sheet.p('speed.json')) if ex('speed.json') else None
+    print(f"  charts    {len(ch['matchups'])} threats x {len(ch['attackers'])} attackers" if ch else "  charts    none (run: charts)")
+    print(f"  speed     {len(sp['rows'])} rows{' (hand-written)' if sp.get('hand') else ''}" if sp else "  speed     none (run: speed)")
     print(f"  page      {'sheet.html built' if ex('sheet.html') else 'not built'}; published: {sheet.cfg.get('published', 'never')}  {sheet.cfg.get('artifact', '')}")
 
 def init(slug):
@@ -92,6 +97,10 @@ def main():
     elif a.step == 'smoke': smoke(sheet)
     elif a.step == 'grid':
         import grid; grid.build(sheet, threads_arg(a.threads, a.force))
+    elif a.step == 'charts':
+        import charts; charts.build(sheet, threads_arg(a.threads, a.force), a.out)
+    elif a.step == 'speed':
+        import speed; speed.build(sheet, a.out, a.force)
     elif step == ('matrix', 'jobs'): P.write_matrix_jobs(sheet)
     elif step == ('matrix', 'run'): P.run_matrix(sheet, a.games or 16, 600 if a.g0 is None else a.g0, a.threads, a.setup, ints(a.only), a.force)
     elif step == ('matrix', 'report'):
@@ -115,6 +124,8 @@ def main():
     elif step == ('t1', 'solve'): d = T1.solve(sheet); print(f"t1.json: {len(d['plans'])} plans")
     elif a.step == 'page':
         out = a.out or sheet.p('sheet.html'); s, L = PG.render(sheet); open(out, 'w').write(s)
+        os.makedirs(sheet.w(), exist_ok=True)                    # the same page with the charset and viewport lines a published Artifact gets
+        open(sheet.w('preview.html'), 'w').write('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">\n' + s)
         bad = PG.check_leads(sheet, L)
         print(f"{os.path.relpath(out, ROOT)} written ({len(s)} bytes, {len(L)} tabs)" + ('' if not bad else '\nPROBLEMS:\n  ' + '\n  '.join(bad)))
         if a.compare:

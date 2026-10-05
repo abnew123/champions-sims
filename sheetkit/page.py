@@ -144,11 +144,12 @@ def render(sheet, L=None):
     if have['matchups']:
         slots.update(MX_INTRO=text['mx_intro'], MX_FOOT=text['mx_foot'], MX_COLSPAN=str(len(N) + 1), MX_DEFAULT='true' if tr_first else 'false',
                      MX_BAR=btn(1, True) + btn(0, False) if tr_first else btn(0, True) + btn(1, False),
-                     MX_HEAD=''.join(f'<th scope="col"><span class="lg">{mine(n)}</span><span class="sm">{short.get(n, mine(n))}</span></th>' for n in N),
+                     MX_HEAD=''.join(f'<th scope="col"><span class="lg">{mine(n)}</span><span class="sm">{short.get(n) or (mine(n) if len(mine(n)) <= 6 else mine(n)[:5])}</span></th>' for n in N),
                      N_DATA='const N=' + cj([mine(n) for n in N]) + ';', X_DATA='const X=' + cj(charts['matchups']) + ';')
     if have['charts']: slots['XROW_TABLES'] = cj([i for i, k in (('covbody', 'coverage'), ('mxbody', 'matchups')) if have[k]])
     if have['speed']:
-        slots.update(SPEED_H2=h2, SPEED_INTRO=text['speed_intro'], SPEED_FOOT=text['speed_foot'], SPEED_COMMENT=h2[0].lower() + h2[1:],
+        foot = f'  <p class="body spdnote">{text["speed_foot"]}</p>' if text.get('speed_foot') else ''
+        slots.update(SPEED_H2=h2, SPEED_INTRO=text['speed_intro'], SPEED_FOOT=foot, SPEED_COMMENT=h2[0].lower() + h2[1:],
                      R_DATA='const R=[' + ',\n '.join(cj(r) for r in speed['rows']) + '];')
     missing = set(re.findall(r'\{\{([A-Z0-9_]+)\}\}', T)) - set(slots)
     assert not missing, f'template slots without a value: {missing}'

@@ -30,7 +30,8 @@ python3 sheetkit/kit.py <team> status
 | 3 | `matrix jobs`, `matrix run`, `matrix report` | All 90 fours (lead + back) against each archetype's 6 opposing leads, 16 games each, the same games for every four | 86,400 games, about 110-130 core-hours: a cloud box |
 | 4 | `confirm jobs`, `confirm run`, `confirm decide --write` | Each archetype's top 5 fours plus the current pick on 48 fresh games per opposing lead; writes `picks.json` | about 17,000 games, 22-26 core-hours |
 | 5 | `t1 jobs`, `t1 run`, `t1 solve` | Turn-one lines for each pick with its real back row (12 samples per cell, opposing Indeedee-F item variants); writes `t1.json` | about 25 minutes on 3 workers |
-| 6 | `page [--compare other.html]` | Builds `sheet.html` from the template, `picks.json`, `t1.json` and the team's text | seconds |
+| 6 | `charts [--workers N]`, `speed` | Coverage and Matchups from the grid (`charts.json`); the Speed table from ladder spread stats (`speed.json`) | seconds |
+| 7 | `page [--compare other.html]` | Builds `sheet.html` from the template, `picks.json`, `t1.json`, the charts and the team's text | seconds |
 
 Every run resumes where it stopped (finished jobs are skipped), writes its log to `pssim/kit_<team>_<step>.log`, and shows on the
 progress page (`sim-progress` in `.claude/launch.json`, port 8766). Start long runs in the background (`nohup ... &`).
@@ -68,9 +69,9 @@ is taken. Use fresh game indices for every confirmation (the defaults are 600 fo
 2. Edit `sheet.json` (options below) and `text.json` (the page's prose; the starter has the parts that are true of every sheet).
 3. `grid`, then `smoke`. If either fails, the set uses something a simulator does not know (see the two lists below): fix that before
    spending compute.
-4. `matrix`, `confirm`, `t1`, then write `notes.json` (one short mechanics note per archetype card, keyed by the archetype's model
+4. `charts` and `speed` (cheap, and they tell you early what the six cannot hit), then `matrix`, `confirm`, `t1`. Write `notes.json` (one short mechanics note per archetype card, keyed by the archetype's model
    name: why a line looks odd, what blocks what) and `cards.json` (per Pokémon: `role`, `note`, `src`).
-5. `page`, look at it in the browser at phone and desktop width, and publish it as an Artifact only when the user asks. Record the
+5. `page`, look at `work/preview.html` in the browser at phone and desktop width, and publish `sheet.html` as an Artifact only when the user asks. Record the
    Artifact link and version in `sheet.json`.
 
 ### `sheet.json`
@@ -88,7 +89,9 @@ is taken. Use fresh game indices for every confirmation (the defaults are 600 fo
 | `t1.stat_move` | A move whose turn-one click rate is shown on each card ("Sets Trick Room 100%"). Leave out for none |
 | `t1.exclude_moves` | Turn-one actions never to click, as `": <text>"` fragments of the action label |
 | `lines.short_moves`, `lines.rewrites` | How turn-one lines are written: shorter move names, and one move shown in place of another against one target |
+| `threats` | The rows of Coverage and Matchups: names from the grid's 46 threats. Default: the 29 with usage numbers (`team-sheet.html.usage.json`) |
 | `matchups_default` | `tr` or `notr`: which Matchups grid shows first |
+| `speed.order`, `speed.top`, `speed.tiers`, `speed.range` | The Speed table: `fastest-first` or `slowest-first`; how many of the most-used Pokémon to list (30); how many Speeds per Pokémon (2); `[low, high]` outside which everything folds into one row |
 | `theme` | The page's ten colour tokens, light and dark |
 
 ### What the page is built from
@@ -103,8 +106,17 @@ is taken. Use fresh game indices for every confirmation (the defaults are 600 fo
 | `notes.json` | The note under each card |
 | `team.json` + `cards.json` | The team cards (formes, types and stats are computed) |
 | `text.json` | `title`, `sub`, `leads_intro` (paragraphs), `leads_method`, `team_h2`, `team_intro`, `footer` (paragraphs); with the optional sections also `cov_intro`, `mx_intro`, `mx_foot`, `speed_h2`, `speed_intro`, `speed_foot` |
-| `charts.json` | Optional: Coverage (`coverage`) and Matchups (`attackers`, `matchups`) |
-| `speed.json` | Optional: the Speed table (`rows`: `[speed, yours, theirs, tie note]`) |
+| `charts.json` | Optional: Coverage (`coverage`) and Matchups (`attackers`, `matchups`), written by `charts` |
+| `speed.json` | Optional: the Speed table (`rows`: `[speed, yours, theirs, tie note]`), written by `speed`. Mark a hand-written one `"hand": true` and `speed` leaves it alone |
+
+`charts` words each Matchups cell the way the first sheet's grid did: verdict, damage each way, who moves first, whether the win needs
+the item intact, and the move line where best play is not the obvious one. A Pokémon with no attacking move gets no column. `speed`
+labels each opposing Speed by nature and Speed points from Smogon's September 2026 Reg M-C spread stats; it is a starting point, so trim
+it with the `speed` options until it shows what matters for your six. The starter `text.json` has prose for all three sections that is
+true of any team; add what is specific to yours (your own weather or terrain, a spout move, an item).
+
+`page` also writes `work/preview.html`, the same page with the charset and viewport lines a published Artifact gets. Open that one to
+check phone width (`sheets-preview` in `.claude/launch.json` serves `sheets/` on port 8768).
 
 The "Which tab" guide and the tab list come from `sheetkit/archetypes.json` and are the same on every sheet. `page` reports (and exits
 with an error for) a card whose turn-one line switches to a Pokémon outside its back row, or whose line weights do not sum to 100.
@@ -134,9 +146,7 @@ run (none of the Trick Room Six's 15,552 confirmation games were flagged). Ask B
 
 ## Not in the kit yet
 
-- **Coverage, Matchups and Speed for a new team.** The Trick Room Six sheet carries its own (`charts.json`, `speed.json`, built by the
-  old scripts in `trsheet/` and `mxtr/`). `grid` already produces the cells a Matchups grid needs; turning them into `charts.json` is
-  the next piece. Until then a new team's page has Leads and Team only.
+- **Effective Speed.** The Speed table lists raw Speed only: no Tailwind, Choice Scarf, Unburden or weather-speed rows.
 - **Cloud runs through the kit.** The commands are the same on a Linux box once the repo bundle, `sheetkit/` and the team folder
   (with `work/grid` and the job files) are there, but that route has not been run yet.
 - **Species tells and per-archetype guides** exist as a report (`matrix report`), not as page content.
@@ -145,10 +155,12 @@ run (none of the Trick Room Six's 15,552 confirmation games were flagged). Ask B
 
 `sheets/trick-room-six/` was imported from the published Version 16 page and the results that built it. Its `work/` links to the old
 result folders in `pssim/results/` (`python3 sheetkit/selftest_tr.py --link` recreates the links), and `grid_dir` points at the
-hand-built grid the published picks were run with (`mxtr_t22/`). The kit's own `grid` step reproduces that grid in 456 of its 460 cells;
-the four that differ are Incineroar cells where the generic code models White Herb.
+hand-built grid the published picks were run with. The kit's own `grid` step reproduces that grid in 456 of its 460 cells; the four
+that differ are Incineroar cells where the generic code models White Herb. Its `charts.json` is still the hand-built one from the
+published page (the kit's `charts` step reproduces it except in the Incineroar column), and its `speed.json` is hand-written.
 
 The self-test checks, against the files the old pipeline left behind: the 5,400 matrix jobs, the confirmation jobs, the ten picks
-with their win shares, the 60 turn-one jobs, their Speeds, all 60 solved turn-one plans, and the page (data by value; markup, styles
-and scripts byte for byte). One difference is by design: two opposing leads with exactly the same share are now listed in the
+with their win shares, the 60 turn-one jobs, their Speeds, all 60 solved turn-one plans, the page (data by value; markup, styles
+and scripts byte for byte), and Coverage and Matchups (Coverage identical; Matchups identical in 340 of 350 cells, the other ten being
+Incineroar's White Herb cells). Its inputs are frozen in `sheetkit/fixtures/tr-v16/`. One difference is by design: two opposing leads with exactly the same share are now listed in the
 opponent model's order, which swaps two rows on three tabs.

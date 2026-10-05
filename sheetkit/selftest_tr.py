@@ -3,8 +3,11 @@
 against the files the old hand-run pipeline left in pssim/ and trsheet/. No sims are run; the turn-one solve takes a minute or two.
 
   python3 sheetkit/selftest_tr.py            every check
-  python3 sheetkit/selftest_tr.py --link     also (re)create sheets/trick-room-six/work/ as links to the old results, so the kit's
-                                             own steps (matrix report, confirm decide, t1 solve, page) run on the Trick Room Six
+  python3 sheetkit/selftest_tr.py --link     also (re)create sheets/trick-room-six/work/{matrix,confirm} as links to the old results,
+                                             so the kit's matrix report and confirm decide run on the Trick Room Six
+
+The inputs are frozen in sheetkit/fixtures/tr-v16/ (the six, config, text and charts as published), so the test keeps its meaning
+while sheets/trick-room-six/ moves on.
 
 Run it after any change to the kit: a failure means the change altered what an existing sheet would say."""
 import sys, os, glob, tempfile, shutil
@@ -13,7 +16,7 @@ from common import *
 import picks as P, t1 as T1, page as PG
 
 R = os.path.join(PSSIM, 'results')
-sheet = Sheet('trick-room-six'); ok = True
+sheet = Sheet(os.path.join(KIT, 'fixtures', 'tr-v16')); ok = True      # the six, text and charts as published in Version 16 (frozen)
 def check(name, cond, detail=''):
     global ok; ok &= bool(cond); print(f"{'PASS' if cond else 'FAIL'}  {name}{'  ' + detail if detail else ''}", flush=True)
 def jkey(j): return (j['arch'], j['k'], tuple(j['lead']), tuple(j['back']))
@@ -78,16 +81,25 @@ try:
     check('page: equals trsheet/tr-sheet.html (six data blocks by value; markup, styles and scripts byte for byte)', not d, '; '.join(d + notes))
     bad = PG.check_leads(sheet, L); check('page: every turn-one switch goes to the card\'s back row; lines sum to 100%', not bad, '; '.join(bad))
 
-    if '--link' in sys.argv:
+    # 8. Coverage and Matchups from the generic one-on-one grid (the first run builds the fixture's grid cells: about a CPU-minute)
+    import charts as CH
+    CH.build.__globals__['print'] = lambda *a, **k: None
+    CH.build(sheet, 1, f'{tmp}/charts.json'); gen, old = rj(f'{tmp}/charts.json'), rj(sheet.p('charts.json'))
+    cells = [(r[0], gen['attackers'][j], x, y) for r, q in zip(gen['matchups'], old['matchups']) for m in (2, 3) for j, (x, y) in enumerate(zip(r[m], q[m]))]
+    diff = [c for c in cells if c[2] != c[3]]; verdicts = [c for c in diff if (c[2]['v'], c[2].get('p')) != (c[3]['v'], c[3].get('p'))]
+    check('charts: Coverage equals the published table (35 threats, 5 attackers)', gen['coverage'] == old['coverage'] and gen['attackers'] == old['attackers'])
+    check(f'charts: Matchups equal the published grid in {len(cells) - len(diff)} of {len(cells)} cells; the rest are Incineroar cells (White Herb is now modelled)',
+          [r[:2] for r in gen['matchups']] == [r[:2] for r in old['matchups']] and {c[1] for c in diff} <= {'Incineroar'} and len(diff) == 10 and len(verdicts) == 4,
+          f'{len(diff)} differ, {len(verdicts)} of them in the verdict')
+
+    if '--link' in sys.argv:                                     # the live folder's matrix and confirmation results (the basis of its picks)
+        live = Sheet('trick-room-six')
         for i in range(len(ARCHS)):
             for suf in ('', 'r'):
-                if os.path.isdir(f'{R}/bringmx_{i}{suf}'): link(f'{R}/bringmx_{i}{suf}', sheet.w('matrix', f'res_{i}{suf}'))
-        for x in ('a', 'b'): link(f'{R}/bringcf_{x}', sheet.w('confirm', f'res_{x}'))
-        P.write_matrix_jobs.__globals__['print'] = lambda *a, **k: None; P.write_matrix_jobs(sheet)
-        wj(jobs, sheet.w('t1', 'jobs.json')); wj(items, sheet.w('t1', 'jobs_items.json')); shutil.copy(f'{tmp}/speeds.json', sheet.w('t1', 'speeds.json'))
-        t1_results(jobs, sheet.w('t1', 'res'))
-        for it in T1.ITEM_VARIANTS: t1_results(items, sheet.w('t1', f'res_{it}'), f'_{it}')
-        print('linked: sheets/trick-room-six/work/{matrix,confirm,t1} now point at the old results')
+                if os.path.isdir(f'{R}/bringmx_{i}{suf}'): link(f'{R}/bringmx_{i}{suf}', live.w('matrix', f'res_{i}{suf}'))
+            wj(P.matrix_jobs(live, ARCHS[i]), live.w('matrix', f'jobs_{i}.json'))
+        for x in ('a', 'b'): link(f'{R}/bringcf_{x}', live.w('confirm', f'res_{x}'))
+        print('linked: sheets/trick-room-six/work/{matrix,confirm} now point at the old results')
 finally:
     shutil.rmtree(tmp, ignore_errors=True)
 print('\nALL PASS' if ok else '\nFAILED')

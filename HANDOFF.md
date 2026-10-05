@@ -13,12 +13,12 @@ This folder is the machinery behind the **Trick Room Six** sheet (Pokémon Champ
   dependencies, build output, results and other large generated files, local binaries, and data with names (game recordings, replay logs,
   scraped tournament pages). Commits use the no-reply email in the repo's git config. License: MIT (`LICENSE`); Showdown's notice, data
   sources and the trademark line are in `NOTICE.md`.
-- **Current battle-sim setup (final as of 2026-10-05, for every team).** From `pssim/`:
-  `DP2=1 RACE=1 CALC_DATA=../native/champions_data.json BATTLE_ANTICIPATE=1 EG_VALUE=egvalue9.json GRID_DIR=<the team's generic grid>
-  ../native/champ/bin/champ-battle-v12 battle ../native/engine_data_spot.json <starts.jsonl> <outdir> <threads>`
-  (source of the binary: `native/champ/src_battle_v12.tar.gz`). Perish matchups: use real-data rates, not the sim. Why and how it was
-  tested: the last bullets of "Double Protect, real-game value weights" below. Version 16 of the sheet still shows numbers from the old
-  setup (champ-battle-v4 + egvalue5).
+- **Current battle-sim setup (final as of 2026-10-05, for every team; amended the same day: v13 and `RACE_TIES=avg`).** From `pssim/`:
+  `RACE_TIES=avg DP2=1 RACE=1 CALC_DATA=../native/champions_data.json BATTLE_ANTICIPATE=1 EG_VALUE=egvalue9.json GRID_DIR=<the team's
+  generic grid> ../native/champ/bin/champ-battle-v13 battle ../native/engine_data_spot.json <starts.jsonl> <outdir> <threads>`
+  (source of the binary: `native/champ/src_battle_v13.tar.gz`; without `RACE_TIES` v13 plays v12's games). Perish matchups: use
+  real-data rates, not the sim. Why and how it was tested: the last bullets of "Double Protect, real-game value weights" below. Version 16
+  of the sheet still shows numbers from the old setup (champ-battle-v4 + egvalue5).
 - Published sheet: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6 (Version 16 as of 2026-10-04; the sections below record each version). The page source is `trsheet/tr-sheet.html`.
 - Do not touch the older sheet "Low-Variance Six" (https://claude.ai/artifact/DEF8ycjXrKGXokgH26he9A).
 - The player plays on mobile, prefers low downside variance, and wants accurate, battle-useful content. He has a math and poker/game-theory background, so exact reasoning is welcome. Give short status updates during long runs.
@@ -480,3 +480,13 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     the Trick Room weight and the team intercept are partly entangled.
   - History was rewritten on 2026-10-05 to remove three opponents' in-game names from the recording spot notes (all commit hashes
     changed; any hash quoted above from before that date is stale: find commits by message).
+  - **champ-battle-v13** = v12 + `champ evalpos` (evalpos.rs: per position, the turn solved as in battles with every cell averaged over
+    `EVAL_SEEDS` seeds; value, static value, features, and every option of both sides with its mix weight, value and whether it was the
+    choice made; for the Eval bar thread) + `RACE_TIES=avg` + an empty grid now gives grid features of exactly 0.
+  - **Speed ties in the race (found through the eval bar's swap-sides check):** the race feature let side 0 move first on every Speed tie
+    between opposing Pokemon, so side 0 was favoured in mirrors (a Garchomp mirror read 0.46 from one side and 0.34 from the other).
+    `RACE_TIES=avg` runs the race with each side winning the ties and averages; features are then exact mirror images under a side swap.
+    Effect on the TR six in the final setup (`ties_test_run.sh`, results/h2h_ties_avg vs h2h_g9_g9, 480 games): overall -0.4 +- 0.8,
+    393 games identical; all of the change is against opposing Farigiraf leads (Trick Room tab -13 +- 10, Indeedee TR +4 +- 3). It is a
+    correctness fix, so it is part of the final setup from here on.
+  - Luck in `evalpos`: the same position from the two sides differed by up to 0.14 with 8 seeds, 0.05 with 32, 0.03 with 96.

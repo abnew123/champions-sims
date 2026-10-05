@@ -42,6 +42,8 @@ SIMS = {
     # v13 (Battle sim, 2026-10-05): v12 + RACE_TIES=avg (the race used to give side 0 every Speed tie; now it averages both
     # orders, so features mirror exactly under a side swap). The climb rerun's setup.
     'v13g': dict(bin='champ-battle-v13', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg')),
+    # v14: the same games as v13, ~25-39% faster (memoised features, mimalloc); taken at a round boundary (outputs tagged v14g)
+    'v14g': dict(bin='champ-battle-v14', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg')),
 }
 def sim(): return os.environ.get('TS_SIM', 'v3')
 def out_tag(seed0, per_job): return f'{seed0}_{per_job}' if sim() == 'v3' else f'{sim()}_{seed0}_{per_job}'

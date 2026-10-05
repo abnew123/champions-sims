@@ -16,7 +16,8 @@
 //! A position that cannot be handled gives {name, error}; the run goes on. Output is appended as positions finish (any order, keyed by
 //! name); names already in the output file are skipped, so a run resumes.
 //!   champ evalpos <engine_data.json> <positions.jsonl> <out.jsonl> [threads=1]
-//! env: EG_VALUE (and RACE / CALC_DATA, TRSYM, GRID_DIR as for battles), EVAL_SEEDS, EVAL_TOP (joint actions listed, default 8)
+//! env: EG_VALUE (and RACE / CALC_DATA, TRSYM, GRID_DIR as for battles), EVAL_SEEDS, EVAL_TOP (joint actions listed, default 8),
+//!      EVAL_ADAPT=1 (staged seeds: see eval_one; adds stages, sims, cells_full to the output), EVAL_STAGES, EVAL_MARGINS
 use crate::battle::*;
 use crate::plan::*;
 use crate::prng::{Mode, Prng};
@@ -28,19 +29,23 @@ use std::io::Write;
 
 fn env_usize(name: &str, default: usize) -> usize { std::env::var(name).ok().and_then(|x| x.parse().ok()).unwrap_or(default) }
 
-struct Cells<'a> { b: &'a Battle, cfg: &'a Cfg, msw: &'a [[PChoice; 2]], tsw: &'a [[PChoice; 2]], cs: Vec<[u16; 4]>, cache: HashMap<(usize, usize), f64>, uns: Vec<String> }
+struct Cells<'a> { b: &'a Battle, cfg: &'a Cfg, msw: &'a [[PChoice; 2]], tsw: &'a [[PChoice; 2]], cs: Vec<[u16; 4]>, base: usize,
+                   acc: HashMap<(usize, usize), (f64, usize)>, sims: usize, uns: Vec<String> }
 impl<'a> Cells<'a> {
-    /// side 0's value after the turn (i, j), averaged over the seeds
-    fn get(&mut self, i: usize, j: usize) -> f64 {
-        if let Some(v) = self.cache.get(&(i, j)) { return *v; }
-        let mut s = 0.0;
-        for c in &self.cs {
-            let mut x = self.b.clone(); x.prng = Prng::gen5(*c); x.run_turn([self.msw[i], self.tsw[j]]); resolve_switches(&mut x, self.cfg, None);
+    /// side 0's value after the turn (i, j), averaged over at least n seeds (always the first seeds of the list, so more seeds only add)
+    fn ensure(&mut self, i: usize, j: usize, n: usize) -> f64 {
+        let (mut s, mut c) = self.acc.get(&(i, j)).copied().unwrap_or((0.0, 0));
+        if c >= n { return s / c as f64; }
+        while c < n {
+            let mut x = self.b.clone(); x.prng = Prng::gen5(self.cs[c]); x.run_turn([self.msw[i], self.tsw[j]]); resolve_switches(&mut x, self.cfg, None);
             s += value(&mut x, self.cfg);
             for u in &x.unsupported { if !self.uns.contains(u) { self.uns.push(u.clone()); } }
+            c += 1; self.sims += 1;
         }
-        let v = s / self.cs.len() as f64; self.cache.insert((i, j), v); v
+        self.acc.insert((i, j), (s, c)); s / c as f64
     }
+    /// the cell at its current precision (at least the base number of seeds)
+    fn get(&mut self, i: usize, j: usize) -> f64 { let n = self.base; self.ensure(i, j, n) }
 }
 fn choice_json(b: &Battle, s: u8, c: &PChoice) -> Value {
     match c { PChoice::Move(k, t, mega) => json!([k, t, mega]), PChoice::Switch(p) => json!(["switch", b.mon_at_position(s, *p).map(|m| m.1)]), PChoice::Pass => Value::Null }
@@ -103,34 +108,72 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
     let mns: Vec<usize> = (0..msw.len()).filter(|i| no_sw(&msw[*i])).collect();
     let tns: Vec<usize> = (0..tsw.len()).filter(|j| no_sw(&tsw[*j])).collect();
     let cs: Vec<[u16; 4]> = (0..nseeds).map(|k| seed4(key ^ ((k as u64) << 52))).collect();
-    let mut cells = Cells { b: &b, cfg, msw: &msw, tsw: &tsw, cs, cache: HashMap::new(), uns: vec![] };
-    // each side's own matrix: all its options against the other side staying in (as battle4.rs), then the anticipation pass
-    let am: Vec<Vec<f64>> = (0..msw.len()).map(|i| tns.iter().map(|&j| cells.get(i, j)).collect()).collect();
-    let at: Vec<Vec<f64>> = mns.iter().map(|&i| (0..tsw.len()).map(|j| cells.get(i, j)).collect()).collect();
-    let mut x = if tns.is_empty() { vec![1.0 / msw.len() as f64; msw.len()] } else { nash(&am, 400).0 };
-    let mut y = if mns.is_empty() { vec![1.0 / tsw.len() as f64; tsw.len()] } else { nash(&at, 400).1 };
-    let isw: Vec<usize> = (0..msw.len()).filter(|i| !no_sw(&msw[*i]) && x[*i] > 0.02).collect();
-    let jsw: Vec<usize> = (0..tsw.len()).filter(|j| !no_sw(&tsw[*j]) && y[*j] > 0.02).collect();
-    if !jsw.is_empty() {
-        let cols: Vec<usize> = tns.iter().copied().chain(jsw.iter().copied()).collect();
-        let am2: Vec<Vec<f64>> = (0..msw.len()).map(|i| cols.iter().map(|&j| cells.get(i, j)).collect()).collect();
-        x = nash(&am2, 400).0;
+    // EVAL_ADAPT=1: luck samples go where they matter. Every cell gets the first stage's seeds; then, stage by stage, only the options
+    // still in contention (in a side's mix, or within the stage's margin of that side's best option) get their cells against the other
+    // side's contenders raised to the next stage's seeds, and the turn is solved again. Default stages 2, 8, EVAL_SEEDS with margins
+    // 0.15, 0.06 (EVAL_STAGES / EVAL_MARGINS override). Without it every cell gets EVAL_SEEDS seeds, as before.
+    let adapt = std::env::var("EVAL_ADAPT").is_ok();
+    let list = |name: &str| -> Option<Vec<f64>> { std::env::var(name).ok().map(|v| v.split(',').filter_map(|x| x.trim().parse().ok()).collect()) };
+    let mut stages: Vec<usize> = if adapt { list("EVAL_STAGES").map(|v| v.iter().map(|x| *x as usize).collect()).unwrap_or(vec![2, 8, nseeds]) } else { vec![nseeds] };
+    stages.retain(|n| *n >= 1 && *n <= nseeds); stages.sort(); stages.dedup(); if stages.last() != Some(&nseeds) { stages.push(nseeds); }
+    let margins: Vec<f64> = list("EVAL_MARGINS").unwrap_or(vec![0.15, 0.06]);
+    let mut cells = Cells { b: &b, cfg, msw: &msw, tsw: &tsw, cs, base: stages[0], acc: HashMap::new(), sims: 0, uns: vec![] };
+    // one solve at the cells' current precision: each side's own matrix (all its options against the other side staying in, as
+    // battle4.rs), the anticipation pass, then every option's value against the other side's mix (its support above 0.01%)
+    let solve = |cells: &mut Cells| -> (Vec<f64>, Vec<f64>, Vec<f64>, Vec<f64>) {
+        let am: Vec<Vec<f64>> = (0..msw.len()).map(|i| tns.iter().map(|&j| cells.get(i, j)).collect()).collect();
+        let at: Vec<Vec<f64>> = mns.iter().map(|&i| (0..tsw.len()).map(|j| cells.get(i, j)).collect()).collect();
+        let mut x = if tns.is_empty() { vec![1.0 / msw.len() as f64; msw.len()] } else { nash(&am, 400).0 };
+        let mut y = if mns.is_empty() { vec![1.0 / tsw.len() as f64; tsw.len()] } else { nash(&at, 400).1 };
+        let isw: Vec<usize> = (0..msw.len()).filter(|i| !no_sw(&msw[*i]) && x[*i] > 0.02).collect();
+        let jsw: Vec<usize> = (0..tsw.len()).filter(|j| !no_sw(&tsw[*j]) && y[*j] > 0.02).collect();
+        if !jsw.is_empty() {
+            let cols: Vec<usize> = tns.iter().copied().chain(jsw.iter().copied()).collect();
+            let am2: Vec<Vec<f64>> = (0..msw.len()).map(|i| cols.iter().map(|&j| cells.get(i, j)).collect()).collect();
+            x = nash(&am2, 400).0;
+        }
+        if !isw.is_empty() {
+            let rows: Vec<usize> = mns.iter().copied().chain(isw.iter().copied()).collect();
+            let at2: Vec<Vec<f64>> = rows.iter().map(|&i| (0..tsw.len()).map(|j| cells.get(i, j)).collect()).collect();
+            y = nash(&at2, 400).1;
+        }
+        let ysup: Vec<usize> = (0..tsw.len()).filter(|j| y[*j] > 1e-4).collect(); let ytot: f64 = ysup.iter().map(|&j| y[j]).sum();
+        let xsup: Vec<usize> = (0..msw.len()).filter(|i| x[*i] > 1e-4).collect(); let xtot: f64 = xsup.iter().map(|&i| x[i]).sum();
+        let rv: Vec<f64> = (0..msw.len()).map(|i| ysup.iter().map(|&j| y[j] * cells.get(i, j)).sum::<f64>() / ytot).collect();
+        let cv: Vec<f64> = (0..tsw.len()).map(|j| xsup.iter().map(|&i| x[i] * cells.get(i, j)).sum::<f64>() / xtot).collect();
+        (x, y, rv, cv)
+    };
+    let (mut x, mut y, mut rv, mut cv) = solve(&mut cells);
+    // the joint actions actually made (when every living slot's choice is known) always count as in contention, so what a played
+    // move cost is measured at full precision even when it is far from the best options
+    let actual_joint = |s: u8, opts: &[[PChoice; 2]], actual: &Value| -> Option<usize> {
+        let alive: Vec<bool> = (0..2).map(|i| b.sides[s as usize].active[i].map(|p| !b.p((s, p)).fainted).unwrap_or(false)).collect();
+        let act: Vec<Option<PChoice>> = (0..2).map(|i| if alive[i] { parse_actual(&b, s, &actual[i]) } else { None }).collect();
+        if !(0..2).all(|i| !alive[i] || act[i].is_some()) { return None; }
+        opts.iter().position(|c| (0..2).all(|i| !alive[i] || same(&c[i], act[i].as_ref().unwrap()))) };
+    let (act_i, act_j) = (actual_joint(0, &msw, &sp["actual"]), actual_joint(1, &tsw, &sp["their_actual"]));
+    for (r, &n) in stages.iter().enumerate().skip(1) {
+        let margin = margins.get(r - 1).or(margins.last()).copied().unwrap_or(0.06);
+        for _ in 0..3 {
+            let best_r = rv.iter().cloned().fold(f64::MIN, f64::max); let best_c = cv.iter().cloned().fold(f64::MAX, f64::min);
+            let rows: Vec<usize> = (0..msw.len()).filter(|&i| x[i] > 1e-3 || rv[i] >= best_r - margin).collect();
+            let cols: Vec<usize> = (0..tsw.len()).filter(|&j| y[j] > 1e-3 || cv[j] <= best_c + margin || Some(j) == act_j).collect();
+            let rows: Vec<usize> = if let Some(a) = act_i { if rows.contains(&a) { rows } else { let mut r = rows; r.push(a); r } } else { rows };
+            let before = cells.sims;
+            for &i in &rows { for &j in &cols { cells.ensure(i, j, n); } }
+            if cells.sims == before { break; }
+            (x, y, rv, cv) = solve(&mut cells);
+        }
     }
-    if !isw.is_empty() {
-        let rows: Vec<usize> = mns.iter().copied().chain(isw.iter().copied()).collect();
-        let at2: Vec<Vec<f64>> = rows.iter().map(|&i| (0..tsw.len()).map(|j| cells.get(i, j)).collect()).collect();
-        y = nash(&at2, 400).1;
-    }
-    // every option's value against the other side's mix (the support above 0.01%)
-    let ysup: Vec<usize> = (0..tsw.len()).filter(|j| y[*j] > 1e-4).collect(); let ytot: f64 = ysup.iter().map(|&j| y[j]).sum();
     let xsup: Vec<usize> = (0..msw.len()).filter(|i| x[*i] > 1e-4).collect(); let xtot: f64 = xsup.iter().map(|&i| x[i]).sum();
-    let rv: Vec<f64> = (0..msw.len()).map(|i| ysup.iter().map(|&j| y[j] * cells.get(i, j)).sum::<f64>() / ytot).collect();
-    let cv: Vec<f64> = (0..tsw.len()).map(|j| xsup.iter().map(|&i| x[i] * cells.get(i, j)).sum::<f64>() / xtot).collect();
     let v = xsup.iter().map(|&i| x[i] * rv[i]).sum::<f64>() / xtot;
     let own1: Vec<f64> = cv.iter().map(|z| 1.0 - z).collect();
     let s0 = side_report(&b, 0, &msw, &x, &rv, &sp["actual"], top); let s1 = side_report(&b, 1, &tsw, &y, &own1, &sp["their_actual"], top);
-    json!({"value": v, "static": stat, "feats": f, "seeds": nseeds, "options": [msw.len(), tsw.len()], "cells": cells.cache.len(),
-           "ms": t0.elapsed().as_millis() as u64, "unsupported": cells.uns, "sides": [s0, s1]})
+    let full = cells.acc.values().filter(|c| c.1 >= nseeds).count();
+    let mut out = json!({"value": v, "static": stat, "feats": f, "seeds": nseeds, "options": [msw.len(), tsw.len()], "cells": cells.acc.len(),
+           "ms": t0.elapsed().as_millis() as u64, "unsupported": cells.uns, "sides": [s0, s1]});
+    if adapt { let o = out.as_object_mut().unwrap(); o.insert("stages".into(), json!(stages)); o.insert("sims".into(), json!(cells.sims)); o.insert("cells_full".into(), json!(full)); }
+    out
 }
 
 pub fn main(args: &[String]) {

@@ -14,6 +14,30 @@ Read the root `HANDOFF.md` first bullets (threads, git rules, the current battle
 Talk to the other threads directly with SendMessage; do not relay through the user. You use the engine as a tool. Do not edit
 `native/champ/src`, `pssim/egvalue*.json` or the other threads' folders: ask **Battle sim** for engine or value changes (list below).
 
+## State (2026-10-05, end of the first session)
+
+Built, all in `evalbar/` (run the Python from the repo root; `common.py` finds the main folder's git-ignored data when run in a worktree):
+
+- `replay.py`: log -> per-turn position (for the page and for the engine rebuild), what happened each turn as text, and what each slot
+  chose. No usernames or nicknames leave it; checked on all 4,530 cached Bo3 logs (no errors).
+- `build.py <replay id> [accuracy json]`: writes the page for one game to `evalbar/out/` (git-ignored) from `page.html`; `build.py pick`
+  lists good demo games. The published page (private artifact, version 0, bar only): https://claude.ai/artifact/TuFFPZuzKoeo8w4Cx9NiRQ
+  (republish `evalbar/out/eval-bar.html`, a copy of the built page, to keep that URL). The page already has a per-Pokémon options panel
+  that shows when a step carries `opt` (`{p1: [{mon, played, options: [{l, w, v, played}]}], p2: [...]}`); nothing fills it yet.
+- `accuracy.py`: out-of-sample scores (five folds by game). **Version 0 baseline: log loss 0.549, favourite won 70.3%, calibrated**
+  (`results/accuracy_v0.json`); with engine result files as arguments it scores the engine value, static value, refitted features and
+  version 0 plus engine on the same positions.
+- `spots.py` + `positions.js`: every turn of a game rebuilt as an engine state, from each player's side, with the choices actually made.
+  Coverage: 4,170 of 4,530 games (29,959 positions): 2,634 games clean, 1,124 with a stand-in for a brought Pokémon that never appeared,
+  412 with moves or items the engine data lacks dropped from the sets; 200 games need a species or ability the engine lacks, 126 use
+  Illusion, Transform or a forme change (mostly Aegislash), 894 positions come after a Perish Song (flagged). Today's `champ spot` runs on
+  these states (smoke test: turn 2 of the demo game, symmetric within seed jitter) but playouts cost about 1.5 s per game on one thread.
+
+Waiting on **Battle sim** for `champ evalpos` (asked 2026-10-05): one line per position with the one-turn equilibrium value averaged over
+seeds, the static value and feature vector, and for both sides every option per slot with its weight and value; optional playouts. It has
+already delivered `pssim/egvalue9_sym.json` (symmetric value: use with `RACE=1 TRSYM=1` and an empty `GRID_DIR`). Next: run it on all
+buildable positions (agree a core split first), `accuracy.py` on the output, fill the options panel, republish, show the user one game.
+
 ## Scope the user approved: step 1 only
 
 A prototype on **Showdown replays** (exact logs, so no video parsing): a page that steps through one game turn by turn and shows

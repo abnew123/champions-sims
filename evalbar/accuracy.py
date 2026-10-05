@@ -1,14 +1,24 @@
-"""How good is the bar? Scores a win-chance model on the cached real games, at the start of every turn, against who won.
-Version 0 (the eleven replay features -> logistic model) is scored out of sample: five folds split by game, fitted on four, scored on the fifth.
+"""How good is the bar? Scores win-chance models on the cached real games, at the start of every turn, against who won.
+Everything is scored out of sample: five folds split by game, each model fitted on four and scored on the fifth (fits are logistic
+regressions on features that flip sign when the sides are swapped, so every model is symmetric between the players).
+  version 0          the eleven replay features (pssim/replay_feats.py)
+With engine results (lines from the engine's position evaluation, named "<replay id> t<turn> p1"), on the positions that have them:
+  engine value       the engine's one-turn equilibrium value, rescaled to real outcomes (one weight on its log-odds)
+  engine static      the same for the value function at the position, no lookahead
+  engine features    the planner's full feature vector, weights refitted on real games
+  v0 + engine        the eleven replay features plus the engine value's log-odds
 Prints and writes: log loss and Brier score per position (a coin flip scores 0.693 and 0.25), how often the favourite won, the same by turn
 number, and calibration (of the positions rated 60-70%, how many were won).
-usage (needs numpy: the main folder's .venv): python3 evalbar/accuracy.py [out.json=evalbar/results/accuracy_v0.json]"""
+usage (needs numpy: the main folder's .venv): python3 evalbar/accuracy.py [engine results .jsonl ...]
+       writes evalbar/results/accuracy_v0.json, or accuracy_engine.json when engine results are given"""
 import os, sys, json, math, zlib
 import numpy as np
 import common as C
 RF = C.replay_feats(); sys.path.insert(0, C.PSSIM)
 from fit_real_value import fit
 EDGES = [0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1.0000001]
+fold = lambda rid: zlib.crc32(rid.encode()) % 5
+logit = lambda v: math.log(min(1 - 1e-4, max(1e-4, v)) / (1 - min(1 - 1e-4, max(1e-4, v))))
 def score(rows):
     """rows: (game, turn, player 1's win chance, player 1 won)"""
     p = np.clip(np.array([r[2] for r in rows]), 1e-6, 1 - 1e-6); y = np.array([r[3] for r in rows], float)
@@ -31,22 +41,41 @@ def show(tag, s):
           f"Brier {s['brier']:.4f} | favourite won {100 * s['favourite_won']:.1f}%")
     print('   by turn: ' + '  '.join(f"t{b['turn']} {b['log_loss']:.3f}/{100 * b['favourite_won']:.0f}%" for b in s['by_turn']))
     print('   calibration (rated -> won): ' + '  '.join(f"{100 * c['rated']:.0f}->{100 * c['won']:.0f}" for c in s['calibration']))
-if __name__ == '__main__':
-    G = []
-    for rid, log in C.games():
-        try: rows, w, _ = RF.game(log)
-        except Exception: continue
-        if w is not None and rows: G.append((rid, rows, 1 if w == 'p1' else 0))
-    fold = lambda rid: zlib.crc32(rid.encode()) % 5
+def cv(rows, feats):
+    """rows: dicts with g, t, y; feats(row) -> feature list. Out-of-sample predictions as (game, turn, p, won)."""
     scored = []
     for k in range(5):
         X = []; y = []
-        for rid, rows, won in G:
-            if fold(rid) == k: continue
-            for t, f in rows: X.append(f); y.append(won); X.append([-v for v in f]); y.append(1 - won)
+        for r in rows:
+            if fold(r['g']) == k: continue
+            f = feats(r); X.append(f); y.append(r['y']); X.append([-v for v in f]); y.append(1 - r['y'])
         w = fit(np.array(X, float), np.array(y, float)).tolist()
-        for rid, rows, won in G:
-            if fold(rid) == k: scored += [(rid, t, C.v0(w, f), won) for t, f in rows]
-    s = score(scored); show('version 0, out of sample', s)
-    outf = sys.argv[1] if len(sys.argv) > 1 else os.path.join(C.HERE, 'results', 'accuracy_v0.json')
-    os.makedirs(os.path.dirname(outf), exist_ok=True); json.dump({'model': 'v0: 11 replay features, logistic, 5-fold by game', **s}, open(outf, 'w'), indent=1)
+        scored += [(r['g'], r['t'], C.v0(w, feats(r)), r['y']) for r in rows if fold(r['g']) == k]
+    return scored
+def real_rows():
+    rows = []
+    for rid, log in C.games():
+        try: fr, w, _ = RF.game(log)
+        except Exception: continue
+        if w is not None and fr: rows += [{'g': rid, 't': t, 'f': f, 'y': 1 if w == 'p1' else 0} for t, f in fr]
+    return rows
+if __name__ == '__main__':
+    rows = real_rows(); out = {}
+    if len(sys.argv) < 2:
+        s = score(cv(rows, lambda r: r['f'])); show('version 0, out of sample', s)
+        outf = os.path.join(C.HERE, 'results', 'accuracy_v0.json'); out = {'model': 'v0: 11 replay features, logistic, 5-fold by game', **s}
+    else:
+        eng = {}
+        for f in sys.argv[1:]:
+            for l in open(f):
+                d = json.loads(l)
+                if d.get('value') is not None and d['name'].endswith(' p1'): eng[d['name'][:-3]] = d
+        sub = [{**r, 'e': eng[f"{r['g']} t{r['t']}"]} for r in rows if f"{r['g']} t{r['t']}" in eng]
+        models = {'version 0 (same positions)': lambda r: r['f'], 'engine value': lambda r: [logit(r['e']['value'])],
+                  'v0 + engine': lambda r: r['f'] + [logit(r['e']['value'])]}
+        if sub and sub[0]['e'].get('static') is not None: models['engine static'] = lambda r: [logit(r['e']['static'])]
+        if sub and sub[0]['e'].get('feats'): models['engine features'] = lambda r: r['e']['feats']
+        for nm, fx in models.items():
+            s = score(cv(sub, fx)); show(nm, s); out[nm] = s
+        outf = os.path.join(C.HERE, 'results', 'accuracy_engine.json')
+    os.makedirs(os.path.dirname(outf), exist_ok=True); json.dump(out, open(outf, 'w'), indent=1)

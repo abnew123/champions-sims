@@ -286,3 +286,7 @@ Usage:
   - Perish is the last archetype, so the other 54 jobs keep their indices and paired seeds. Starts go to `starts_*_live.jsonl`. `climb.paired` adds the fixed Perish shift (non-zero only when a swap changes the team's archetype).
   - Use it for the climb rerun. It also saves 10% of the battles. Tested with fake battles: read, search, paired and run_team.
   - `cloud/pack.sh` now also bundles every `pssim/egvalue*.json` and `pssim/pro_replays.py` (the archetype classifier).
+- **Decomposition of v3 → v8 (Oct 5, 3:48 am; `decomp.py`, `decomp.json`; Battle sim's request):** the 10 simcmp teams against Sun / Indeedee TR / Snow only, same games. Setups: A = v3, B = + status weights (egvalue6b), C = + race (egvalue7 + RACE), D = + DP2 = v8.
+  - Win share A → B → C → D: Sun 67.4 → 61.6 → 52.2 → 51.9; Indeedee TR 69.6 → 68.0 → 56.2 → 57.8; Snow 67.1 → 65.4 → 58.2 → 58.5.
+  - The race is the main step; DP2 does nothing. Opponents get Trick Room up more under the race (Sun 45 → 51%, Indeedee TR 29 → 38% by turn 3), but Snow never sets TR and still drops 7, so the effect is broader than TR.
+  - A run of only these archetypes' jobs reproduces the full run's games exactly (seeds key on arch, k, g). Setups 'v8b' / 'v8c' are in evaluate.SIMS.

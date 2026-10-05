@@ -24,6 +24,10 @@ SIMS = {
     'v3': dict(bin='champ-battle-v3', eg='egvalue5.json', env={'BATTLE_ANTICIPATE': '1'}),
     'v8': dict(bin='champ-battle-v8', eg='egvalue7.json',
                env={'BATTLE_ANTICIPATE': '1', 'DP2': '1', 'RACE': '1', 'CALC_DATA': '../native/champions_data.json'}),
+    # in-between setups for Battle sim's decomposition of v3 -> v8 (decomp.py): status weights only; status weights + race
+    'v8b': dict(bin='champ-battle-v8', eg='egvalue6b.json', env={'BATTLE_ANTICIPATE': '1'}),
+    'v8c': dict(bin='champ-battle-v8', eg='egvalue7.json',
+                env={'BATTLE_ANTICIPATE': '1', 'RACE': '1', 'CALC_DATA': '../native/champions_data.json'}),
 }
 def sim(): return os.environ.get('TS_SIM', 'v3')
 def out_tag(seed0, per_job): return f'{seed0}_{per_job}' if sim() == 'v3' else f'{sim()}_{seed0}_{per_job}'

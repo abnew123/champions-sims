@@ -1,0 +1,4 @@
+#!/bin/sh
+# Refuses a commit whose message carries a person's name, an email, a home path or an address (tools/privacy_scan.py).
+HERE=$(cd "$(dirname "$0")" && pwd)
+exec python3 "$HERE/../tools/privacy_scan.py" msg "$1"

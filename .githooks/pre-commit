@@ -1,0 +1,5 @@
+#!/bin/sh
+# Refuses a commit whose added lines or file names carry a person's name, an email, an absolute home path, a server address or a
+# key (tools/privacy_scan.py). Installed by `python3 tools/privacy_scan.py install`; runs from the checkout being committed to.
+HERE=$(cd "$(dirname "$0")" && pwd)
+exec python3 "$HERE/../tools/privacy_scan.py" staged

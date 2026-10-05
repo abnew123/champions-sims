@@ -132,7 +132,7 @@ def sharpen(items, seed_base, label, rnd=None):
             runs[(key_s(it['cur']), json.dumps(it['cur_brings'], sort_keys=True))] = (it['cur'], it['cur_brings'])
             for c in it['pending']: runs[(key_s(c['team']), json.dumps(c['brings'], sort_keys=True))] = (c['team'], c['brings'])
         keys = list(runs)
-        progress(round=rnd, mode=label, phase='sharpen', batch=b, starts=len(need), teams=len(keys), seed=seed, per_job=SEQ['batch_pj'], jobs_per_team=60)
+        progress(round=rnd, mode=label, phase='sharpen', batch=b, starts=len(need), teams=len(keys), seed=seed, per_job=SEQ['batch_pj'], jobs_per_team=live_jobs())
         print(time.strftime('%I:%M %p'), f"  {label}: batch {b}: {len(need)} undecided start(s), {len(keys)} teams x {60 * SEQ['batch_pj']} games", flush=True)
         res = dict(zip(keys, E.evaluate_fixed([runs[k][0] for k in keys], [runs[k][1] for k in keys], SEQ['batch_pj'], seed)))
         for it in need:
@@ -144,8 +144,12 @@ def sharpen(items, seed_base, label, rnd=None):
 
 PROGRESS = os.environ.get('TS_PROGRESS', os.path.join(HERE, 'climb_progress.json'))
 def progress(**k):
-    """phase marker for status_server.py: which battles the current phase is waiting for"""
-    json.dump(dict(k, at=time.time()), open(PROGRESS, 'w'))
+    """phase marker for status_server.py: which battles the current phase is waiting for (sim = the output tag's setup)"""
+    json.dump(dict(k, at=time.time(), sim=os.environ.get('TS_SIM', 'v3')), open(PROGRESS, 'w'))
+def live_jobs():
+    """battle jobs per team per bring: 6 lead pairs x the archetypes actually battled (Perish is skipped with TS_PERISH=real)"""
+    import evaluate as E
+    return len(E.live_archs()) * E.P.K
 
 def run_round(mode):
     import random, evaluate as E, policy as P
@@ -182,13 +186,13 @@ def run_round(mode):
     print(f"round {rnd} ({mode}): {len(active)} teams, about {games} games", flush=True)
     uniq = lambda ts: list({key_s(t): t for t in ts}.values())
     scr_teams = uniq([p['cur'] for p in plan.values()] + [x[3] for p in plan.values() for x in p['top'] + p['rand']])
-    progress(round=rnd, mode=mode, phase='screen', starts=len(active), teams=len(scr_teams), seed=seed_s, per_job=1, jobs_per_team=60 * cfg['bring_k'])
+    progress(round=rnd, mode=mode, phase='screen', starts=len(active), teams=len(scr_teams), seed=seed_s, per_job=1, jobs_per_team=live_jobs() * cfg['bring_k'])
     os.environ['TS_BRING_K'] = str(cfg['bring_k'])
     scr = dict(zip(map(key_s, scr_teams), E.search_many(scr_teams, seed_s)))
     for n, p in plan.items():
         p['ranked'] = sorted(p['top'] + p['rand'], key=lambda x: -paired(scr[key_s(p['cur'])], scr[key_s(x[3])])[0])[:cfg['top_k']]
     con_teams = uniq([p['cur'] for p in plan.values()] + [x[3] for p in plan.values() for x in p['ranked']])
-    progress(round=rnd, mode=mode, phase='confirm', starts=len(active), teams=len(con_teams), seed=seed_c, per_job=cfg['confirm_pj'], jobs_per_team=60)
+    progress(round=rnd, mode=mode, phase='confirm', starts=len(active), teams=len(con_teams), seed=seed_c, per_job=cfg['confirm_pj'], jobs_per_team=live_jobs())
     con = dict(zip(map(key_s, con_teams), E.evaluate_fixed(con_teams, [scr[key_s(t)]['chosen'] for t in con_teams], cfg['confirm_pj'], seed_c)))
     accepted_megas = []
     items = [dict(start=n, cur=p['cur'], cur_brings=scr[key_s(p['cur'])]['chosen'],

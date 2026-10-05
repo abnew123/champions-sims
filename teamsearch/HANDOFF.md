@@ -333,3 +333,9 @@ Usage:
   - Restored the 19,629 saved screening games and the pre-filter cache; round 1 resumed at 100/668 screening teams.
   - The climb runs at 32×3 while TR sheet uses the other 96 threads (tmux `trsheet`; expected done ~7:20 pm).
   - Watchdog 12 h cap from 4:08 pm; auto_rounds up to the same cap. The pull loop goes to `cloud_results/v12`.
+- **Switched to v13 (Oct 5, 5:20 pm; Battle sim's amendment):** champ-battle-v13 + RACE_TIES=avg. v12's race gave side 0 every Speed tie, which favoured sixes on common Speed numbers. Setup `v13g` in evaluate.SIMS; `cloud/run_env.sh` now sets TS_SIM=v13g.
+  - The v12g round 1 was stopped at about 240/668 screening teams; its outputs stay on the box and in `cloud_results/v12` as out_v12g_*.
+  - Round 1 restarted from scratch under v13g at 32×3. TR sheet also restarted on v13, at 96 threads.
+  - v13 was built on the box with the new `cloud/build_battle.sh`: build only, no package reinstall.
+  - New Mac reference `cloud/reference_v13g.json` (0.5762; 53 of 54 jobs identical to v12g). The box matches it 54/54.
+  - The results folder on the Mac is still `cloud_results/v12` (now v13g outputs too).

@@ -4,7 +4,7 @@
 # from the snapshot source after checking it against the checksum the other thread recorded.
 set -e
 cd "$(dirname "$0")/../.."
-SRC=${1:-src_battle_v12.tar.gz}; NAME=${SRC#src_}; NAME=champ-${NAME%.tar.gz}; NAME=${NAME//_/-}   # src_battle_v3.tar.gz -> champ-battle-v3
+SRC=${1:-src_battle_v13.tar.gz}; NAME=${SRC#src_}; NAME=champ-${NAME%.tar.gz}; NAME=${NAME//_/-}   # src_battle_v3.tar.gz -> champ-battle-v3
 
 echo "== packages"
 sudo apt-get update -qq

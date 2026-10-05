@@ -1,0 +1,306 @@
+<title>Eval Bar</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+/* Layout: one column; the bar and the turn stepper stay pinned to the top, the game scrolls underneath (graph, board, what happened). */
+:root{
+  --ground:#f4f3f7; --panel:#ffffff; --panel-2:#faf9fc;
+  --ink:#16141b; --ink2:#55525f; --ink3:#858292;
+  --rule:#dfdce6; --rule-2:#ecebf1;
+  --accent:#6a43c7; --accent-soft:#ece6fb;
+  --p1:#2a78d6; --p2:#eb6834;
+  --ok:#00734f; --warn:#8a5e00; --off:#b8431c;
+  --hp-ok:#1b9a6c; --hp-warn:#d49a12; --hp-off:#d2502a;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --disp:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --body:'Source Sans 3',system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#141318; --panel:#1c1b21; --panel-2:#222128;
+  --ink:#f2f1f6; --ink2:#aca9b7; --ink3:#7b7886;
+  --rule:#2e2c36; --rule-2:#27252e;
+  --accent:#a68cf3; --accent-soft:#2a2342;
+  --p1:#3987e5; --p2:#d95926;
+  --ok:#4cc79a; --warn:#e0a83c; --off:#f08055;
+  --hp-ok:#2fae7e; --hp-warn:#d49a12; --hp-off:#e0603a;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --ground:#141318; --panel:#1c1b21; --panel-2:#222128;
+  --ink:#f2f1f6; --ink2:#aca9b7; --ink3:#7b7886;
+  --rule:#2e2c36; --rule-2:#27252e;
+  --accent:#a68cf3; --accent-soft:#2a2342;
+  --p1:#3987e5; --p2:#d95926;
+  --ok:#4cc79a; --warn:#e0a83c; --off:#f08055;
+  --hp-ok:#2fae7e; --hp-warn:#d49a12; --hp-off:#e0603a;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;margin:0;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding-inline:16px;padding-block:28px 56px;display:flex;flex-direction:column;gap:22px}
+h1,h2,h3{font-family:var(--disp);text-wrap:balance;margin:0}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--disp);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
+header h1{font-size:clamp(28px,6vw,40px);font-weight:700;letter-spacing:-.02em;line-height:1.05;margin-top:6px}
+.sub{color:var(--ink2);margin:8px 0 0;max-width:66ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{font-family:var(--mono);font-size:11px;padding:4px 9px;border:1px solid var(--rule);border-radius:3px;color:var(--ink2);background:var(--panel)}
+.sw{display:inline-block;width:9px;height:9px;border-radius:2px;flex:none}
+.sw.p1{background:var(--p1)} .sw.p2{background:var(--p2)} .sw.none{background:var(--ink3)}
+
+/* the pinned bar */
+.live{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--ground);border-bottom:2px solid var(--ink);
+  padding-block:10px 10px;display:flex;flex-direction:column;gap:8px}
+.sides{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.side{display:flex;align-items:baseline;gap:8px;min-width:0}
+.side .who{font-family:var(--disp);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);display:flex;align-items:center;gap:6px}
+.side .pc{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.bar{position:relative;display:flex;gap:2px;height:16px}
+.bar i{display:block;height:100%;min-width:0;transition:flex-basis .35s ease}
+.bar .a{background:var(--p1);border-radius:4px 0 0 4px}
+.bar .b{background:var(--p2);border-radius:0 4px 4px 0;flex:1}
+.bar::after{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--ink);opacity:.55}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nav button{font-family:var(--disp);font-size:13px;font-weight:600;color:var(--ink);background:var(--panel);border:1px solid var(--rule);border-radius:4px;
+  padding:8px 14px;min-width:84px;cursor:pointer}
+.nav button:hover:not(:disabled){border-color:var(--ink3)}
+.nav button:disabled{color:var(--ink3);cursor:default;opacity:.6}
+.nav button:focus-visible,.hit:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.where{font-family:var(--disp);font-weight:600;font-size:15px;text-align:center}
+.where small{display:block;font-family:var(--body);font-weight:400;font-size:12.5px;color:var(--ink2)}
+
+section > h2{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin-bottom:10px}
+
+/* graph */
+.graph{position:relative;background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:10px 6px 4px}
+.graph svg{display:block;width:100%;height:auto;overflow:visible}
+.graph text{font-family:var(--mono);font-size:10.5px;fill:var(--ink3)}
+.graph .lab{font-family:var(--disp);font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;fill:var(--ink2)}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--ground);font-size:12px;padding:4px 8px;border-radius:3px;white-space:nowrap;transform:translate(-50%,-100%)}
+
+/* board */
+.field{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.board{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.team{background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:10px 10px 6px;min-width:0}
+.team h3{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);margin-bottom:6px}
+.team h3 .left{margin-left:auto;font-family:var(--mono);font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink3);font-size:11px}
+.grp{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);font-family:var(--disp);font-weight:600;margin:8px 0 2px}
+.mon{padding:6px 0;border-top:1px solid var(--rule-2);min-width:0}
+.grp + .mon{border-top:0}
+.mon .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.mon .nm{font-weight:600;overflow-wrap:anywhere;line-height:1.25}
+.mon .hpn{font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums;color:var(--ink2);flex:none}
+.hp{height:5px;background:var(--rule);border-radius:3px;margin:4px 0 4px;overflow:hidden}
+.hp i{display:block;height:100%;border-radius:3px}
+.hp .ok{background:var(--hp-ok)} .hp .warn{background:var(--hp-warn)} .hp .off{background:var(--hp-off)}
+.tags{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;font-size:12px;color:var(--ink3);line-height:1.3}
+.tag{font-family:var(--mono);font-size:10.5px;padding:1px 5px;border-radius:3px;border:1px solid var(--rule);color:var(--ink2);background:var(--panel-2);white-space:nowrap}
+.tag.up{color:var(--ok)} .tag.down{color:var(--off)} .tag.st{color:var(--warn)}
+.item.gone{text-decoration:line-through}
+.mon.bench .nm{font-weight:400}
+.mon.out .nm,.mon.out .hpn{color:var(--ink3)} .mon.out .nm{text-decoration:line-through;font-weight:400}
+.mon.unseen .nm{color:var(--ink2);font-weight:400}
+
+/* what happened */
+.ev{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.ev > li{padding:8px 0;border-top:1px solid var(--rule-2)}
+.ev > li:first-child{border-top:0;padding-top:0}
+.ev .head{font-weight:600;min-width:0;overflow-wrap:anywhere}
+.ev .head.plain{font-weight:600;color:var(--ink2)}
+.ev ul{list-style:none;margin:2px 0 0;padding:0 0 0 11px;color:var(--ink2);font-size:14px}
+.m{white-space:nowrap}
+.m .sw{width:7px;height:7px;margin:0 4px 1px 0;vertical-align:middle}
+.after{margin-top:12px;padding:10px 12px;background:var(--panel);border:1px solid var(--rule);border-radius:4px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline}
+.after .k{font-family:var(--disp);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.after .v{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.after .d{font-family:var(--mono);font-size:12.5px;color:var(--ink2)}
+.none{color:var(--ink2)}
+.notes{border-top:1px solid var(--rule);padding-top:16px;color:var(--ink2);font-size:14px}
+.notes p{margin:0 0 8px;max-width:70ch}
+.notes b{color:var(--ink);font-weight:600}
+@media (max-width:480px){
+  .side .pc{font-size:22px}
+  .nav button{min-width:72px;padding:8px 10px}
+  .team{padding:8px 8px 4px}
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Prototype · version 0</div>
+    <h1>Eval bar</h1>
+    <p class="sub" id="sub"></p>
+    <div class="meta" id="meta"></div>
+  </header>
+
+  <div class="live" id="live">
+    <div class="sides">
+      <div class="side"><span class="who"><i class="sw p1"></i>Player 1</span><span class="pc" id="pc1"></span></div>
+      <div class="side"><span class="pc" id="pc2"></span><span class="who">Player 2<i class="sw p2"></i></span></div>
+    </div>
+    <div class="bar" id="bar" role="img"><i class="a" id="barA"></i><i class="b"></i></div>
+    <div class="nav">
+      <button id="prev" type="button">‹ Back</button>
+      <div class="where" id="where"></div>
+      <button id="next" type="button">Next ›</button>
+    </div>
+  </div>
+
+  <section>
+    <h2>Player 1's win chance through the game</h2>
+    <div class="graph" id="graph"></div>
+  </section>
+
+  <section>
+    <h2 id="boardTitle"></h2>
+    <div class="field" id="field"></div>
+    <div class="board" id="board"></div>
+  </section>
+
+  <section>
+    <h2 id="evTitle"></h2>
+    <div id="events"></div>
+  </section>
+
+  <section class="notes" id="notes"></section>
+</div>
+
+<script>
+const G = /*DATA*/null;
+const N = G.steps.length;                                   // steps 0..N-1 are turns 1..N; step N is the result
+const WP = G.steps.map(s => s.wp).concat([G.final.wp === null ? G.steps[N - 1].wp : G.final.wp]);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const $ = id => document.getElementById(id);
+const pct = (x, live) => { const v = Math.round(100 * x); return live ? Math.max(1, Math.min(99, v)) : v; };
+const who = s => 'Player ' + s[1];
+const seg = segs => segs.map(x => typeof x === 'string' ? esc(x) : `<span class="m"><i class="sw ${x[0]}"></i>${esc(x[1])}</span>`).join('');
+const STAT = {atk: 'Atk', def: 'Def', spa: 'SpA', spd: 'SpD', spe: 'Spe', accuracy: 'Acc', evasion: 'Eva'};
+const STATUS = {slp: 'Asleep', brn: 'Burned', par: 'Paralysed', psn: 'Poisoned', tox: 'Badly poisoned', frz: 'Frozen'};
+let cur = 0;
+
+function head() {
+  const turns = `${N} turns`, r = G.rating ? `players rated about ${Math.round(G.rating)}` : null;
+  $('sub').textContent = 'One Reg M-C best-of-three ladder game from Showdown, turn by turn: who is winning at the start of each turn, and what happened next.';
+  $('meta').innerHTML = [turns, r, G.winner ? `${who(G.winner)} won${G.forfeit ? ' by forfeit' : ''}` : 'no result', 'replay ' + G.id.split('-').pop()]
+    .filter(Boolean).map(x => `<span class="chip">${esc(x)}</span>`).join('');
+}
+
+function bar() {
+  const live = cur < N || G.final.wp === null, a = pct(WP[cur], live), b = 100 - a;
+  $('pc1').textContent = a + '%'; $('pc2').textContent = b + '%';
+  $('barA').style.flexBasis = `calc(${a}% - 1px)`;
+  $('bar').setAttribute('aria-label', `Player 1 ${a}%, Player 2 ${b}%`);
+  $('where').innerHTML = cur < N ? `Turn ${G.steps[cur].turn} of ${N}<small>at the start of the turn</small>`
+    : `Result<small>${G.winner ? who(G.winner) + ' won' + (G.forfeit ? ' by forfeit' : '') : 'no winner recorded'}</small>`;
+  $('prev').disabled = cur === 0; $('next').disabled = cur === N;
+}
+
+function graph() {
+  const box = $('graph'), W = Math.max(280, box.clientWidth - 12), H = 170, L = 36, R = 14, T = 16, B = 24;
+  const x = i => L + (W - L - R) * i / N, y = v => T + (H - T - B) * (1 - v);
+  const pts = WP.map((v, i) => [x(i), y(v)]);
+  const line = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+  const area = `${line} L${x(N)} ${y(.5)} L${x(0)} ${y(.5)} Z`;
+  const step = (W - L - R) / N;
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Player 1's win chance at the start of each turn">
+    <defs><clipPath id="up"><rect x="0" y="0" width="${W}" height="${y(.5)}"/></clipPath><clipPath id="dn"><rect x="0" y="${y(.5)}" width="${W}" height="${H}"/></clipPath></defs>`;
+  for (const v of [0, .25, .5, .75, 1]) s += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--rule${v === .5 ? '' : '-2'})" stroke-width="1" fill="none"/>
+    <text x="${L - 6}" y="${y(v) + 3.5}" text-anchor="end">${100 * v}%</text>`;
+  s += `<path d="${area}" fill="var(--p1)" opacity=".28" clip-path="url(#up)"/><path d="${area}" fill="var(--p2)" opacity=".28" clip-path="url(#dn)"/>`;
+  s += `<text class="lab" x="${L + 6}" y="${T + 11}">Player 1 ahead</text><text class="lab" x="${L + 6}" y="${H - B - 6}">Player 2 ahead</text>`;
+  s += `<line x1="${x(cur)}" x2="${x(cur)}" y1="${T}" y2="${H - B}" stroke="var(--ink)" stroke-width="1" fill="none" opacity=".5"/>`;
+  s += `<path d="${line}" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+  pts.forEach((p, i) => { s += `<circle cx="${p[0]}" cy="${p[1]}" r="${i === cur ? 5.5 : 3.5}" fill="${i === cur ? 'var(--accent)' : 'var(--ink)'}" stroke="var(--panel)" stroke-width="2"/>`; });
+  const every = N > 16 ? 2 : 1;
+  for (let i = 0; i <= N; i++) if (i === N || i % every === 0) s += `<text x="${x(i)}" y="${H - 7}" text-anchor="middle" ${i === cur ? 'style="fill:var(--ink);font-weight:700"' : ''}>${i === N ? 'End' : G.steps[i].turn}</text>`;
+  for (let i = 0; i <= N; i++) s += `<rect class="hit" data-i="${i}" tabindex="0" role="button" aria-label="${i === N ? 'Result' : 'Turn ' + G.steps[i].turn}" x="${x(i) - step / 2}" y="0" width="${step}" height="${H}" fill="transparent" style="cursor:pointer"/>`;
+  box.innerHTML = s + '</svg><div class="tip" id="tip" hidden></div>';
+  const tip = $('tip');
+  box.querySelectorAll('.hit').forEach(r => {
+    const i = +r.dataset.i;
+    const show = () => { const a = pct(WP[i], i < N); tip.textContent = `${i === N ? 'Result' : 'Turn ' + G.steps[i].turn}: Player 1 ${a}%, Player 2 ${100 - a}%`;
+      const left = Math.max(110, Math.min(box.clientWidth - 110, 6 + pts[i][0] * (box.clientWidth - 12) / W)); tip.style.left = left + 'px'; tip.style.top = (10 + pts[i][1] - 10) + 'px'; tip.hidden = false; };
+    r.addEventListener('mouseenter', show); r.addEventListener('focus', show);
+    r.addEventListener('mouseleave', () => { tip.hidden = true; }); r.addEventListener('blur', () => { tip.hidden = true; });
+    r.addEventListener('click', () => go(i));
+    r.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(i); } });
+  });
+}
+
+function monHtml(m) {
+  const cls = m.f ? 'out' : !m.seen ? 'unseen' : m.slot ? 'on' : 'bench';
+  const hpc = m.hp > 50 ? 'ok' : m.hp > 20 ? 'warn' : 'off';
+  const tags = [];
+  if (m.st) tags.push(`<span class="tag st">${STATUS[m.st] || esc(m.st)}</span>`);
+  for (const [k, v] of Object.entries(m.b)) tags.push(`<span class="tag ${v > 0 ? 'up' : 'down'}">${STAT[k] || esc(k)} ${v > 0 ? '+' : '−'}${Math.abs(v)}</span>`);
+  if (m.item) tags.push(`<span class="item${m.gone ? ' gone' : ''}">${esc(m.item)}</span>`);
+  if (!m.seen) tags.push('<span>not sent in yet</span>');
+  return `<div class="mon ${cls}"><div class="top"><span class="nm">${esc(m.n)}</span><span class="hpn">${m.f ? 'fainted' : m.hp + '%'}</span></div>
+    ${m.f ? '' : `<div class="hp"><i class="${hpc}" style="width:${m.hp}%"></i></div>`}<div class="tags">${m.f ? '' : tags.join('')}</div></div>`;
+}
+
+function board() {
+  const st = cur < N ? G.steps[cur].state : G.final.state, f = st.field, chips = [];
+  $('boardTitle').textContent = cur < N ? `The position at the start of turn ${G.steps[cur].turn}` : 'The final position';
+  const turns = n => n ? ` · ${n} turn${n === 1 ? '' : 's'} left` : '';
+  if (f.weather) chips.push(f.weather + turns(f.wturns));
+  if (f.terrain) chips.push(f.terrain + ' Terrain' + turns(f.tturns));
+  if (f.tr) chips.push('Trick Room' + turns(f.tr));
+  for (const sd of ['p1', 'p2']) {
+    if (st[sd].tailwind) chips.push(`Tailwind for ${who(sd)}` + turns(st[sd].tailwind));
+    for (const [k, v] of Object.entries(st[sd].screens)) chips.push(`${k} for ${who(sd)}` + turns(v));
+    for (const h of st[sd].hazards) chips.push(`${h} on ${who(sd)}'s side`);
+  }
+  $('field').innerHTML = chips.map(c => `<span class="chip">${esc(c)}</span>`).join('');
+  $('field').hidden = !chips.length;
+  $('board').innerHTML = ['p1', 'p2'].map(sd => {
+    const ms = st[sd].mons, on = ms.filter(m => m.slot && !m.f).sort((a, b) => a.slot < b.slot ? -1 : 1), back = ms.filter(m => !(m.slot && !m.f));
+    const left = ms.filter(m => !m.f).length + Math.max(0, 4 - ms.length);
+    return `<div class="team"><h3><i class="sw ${sd}"></i>${who(sd)}<span class="left">${left} left</span></h3>
+      ${on.length ? '<div class="grp">On the field</div>' + on.map(monHtml).join('') : ''}
+      ${back.length ? '<div class="grp">In the back</div>' + back.map(monHtml).join('') : ''}</div>`;
+  }).join('');
+}
+
+function events() {
+  if (cur === N) {
+    $('evTitle').textContent = 'Result';
+    $('events').innerHTML = `<p class="none">${G.winner ? `<span class="m"><i class="sw ${G.winner}"></i>${who(G.winner)}</span> won${G.forfeit ? ' when the other player forfeited' : ''} after ${N} turns.` : 'The log has no winner.'}</p>`;
+    return;
+  }
+  const s = G.steps[cur];
+  $('evTitle').textContent = `What happened in turn ${s.turn}`;
+  const a = pct(WP[cur], true), b = pct(WP[cur + 1], cur + 1 < N || G.final.wp === null), d = b - a;
+  const rows = s.events.map(e => `<li><div class="head${e.side ? '' : ' plain'}">${seg(e.head)}</div>
+    ${e.notes.length ? '<ul>' + e.notes.map(n => `<li>${seg(n)}</li>`).join('') + '</ul>' : ''}</li>`).join('');
+  $('events').innerHTML = (rows ? `<ol class="ev">${rows}</ol>` : '<p class="none">Nothing was recorded for this turn.</p>') +
+    `<div class="after"><span class="k">${cur + 1 < N ? 'Bar after this turn' : 'Result'}</span><span class="v">Player 1 ${a}% → ${b}%</span>
+     <span class="d">${d === 0 ? 'no change' : `${Math.abs(d)} points towards ${d > 0 ? 'Player 1' : 'Player 2'}`}</span></div>`;
+}
+
+function notes() {
+  const a = G.acc, f = v => (100 * v).toFixed(0) + '%';
+  const cal = a && a.calibration.find(c => c.lo >= .7 && c.lo < .8);
+  $('notes').innerHTML = `
+    <p><b>How the bar is made (version 0).</b> A model fitted on ${a ? a.games.toLocaleString('en-US') : 'about 4,500'} real Reg M-C games reads eleven things at the start of the turn: share of HP left, Pokémon left, stat boosts on the field, Trick Room and who is slower, who used Protect last turn, type matchups, sleep, paralysis, burn or poison, Tailwind, and screens. It does not look ahead and knows nothing about the moves each Pokémon could click.</p>
+    ${a ? `<p><b>How good it is.</b> On games it was not fitted on, the side it favoured won ${f(a.favourite_won)} of the time, counting every turn of every game. Log loss ${a.log_loss.toFixed(3)} (a coin flip scores 0.693; lower is better).${cal ? ` It is well calibrated: positions it rated around ${f(cal.rated)} were won ${f(cal.won)} of the time.` : ''}</p>` : ''}
+    <p><b>Hindsight.</b> Each bench lists all the Pokémon that player brought, which the opponent only learned as they came in. Items come from the open team sheets. The bar itself counts a Pokémon that has not come in yet as full HP.</p>
+    ${G.perish ? '<p><b>Perish Song was used in this game.</b> Treat the bar with care around it.</p>' : ''}
+    <p><b>Not here yet.</b> The best options for each Pokémon on the field, with how often the planner would pick each and what each is worth. That needs the battle engine and is the next version.</p>`;
+}
+
+function go(i) {
+  cur = Math.max(0, Math.min(N, i)); bar(); graph(); board(); events();
+}
+function start(saved) {
+  head(); notes(); go(saved && Number.isInteger(saved.cur) ? saved.cur : 0);
+  $('prev').addEventListener('click', () => go(cur - 1)); $('next').addEventListener('click', () => go(cur + 1));
+  document.addEventListener('keydown', e => {
+    if (e.target.closest && e.target.closest('.hit')) return;
+    if (e.key === 'ArrowLeft') go(cur - 1); else if (e.key === 'ArrowRight') go(cur + 1);
+  });
+  let rz; window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(graph, 120); });
+  window.claude?.hot?.snapshot?.(() => ({cur}));
+}
+if (window.claude?.hot?.ready) window.claude.hot.ready(start); else start(window.claude?.hot?.data ?? {});
+</script>

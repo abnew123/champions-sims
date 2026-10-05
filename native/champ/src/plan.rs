@@ -120,7 +120,7 @@ fn grid_feats(b: &Battle, cfg: &Cfg) -> [f64; 2] {
     let g = if tr { &cfg.grid_tr } else { &cfg.grid_notr };
     let mine: Vec<String> = alive(b, 0).iter().map(|m| { let n = base_name(b, *m); n.split("-Mega").next().unwrap().to_string() }).collect();
     let foes: Vec<String> = alive(b, 1).iter().filter_map(|m| gname(b, cfg, *m)).collect();
-    if mine.is_empty() || foes.is_empty() { return [0.0, 0.0]; }
+    if mine.is_empty() || foes.is_empty() || g.is_empty() { return [0.0, 0.0]; }
     let cell = |f: &str, mi: &str| g.get(&format!("{}|{}", f, mi)).copied();
     let cov = foes.iter().map(|f| mine.iter().map(|mi| cell(f, mi).unwrap_or(0.0)).fold(0.0f64, f64::max)).sum::<f64>() / foes.len() as f64;
     let exp = mine.iter().map(|mi| foes.iter().map(|f| cell(f, mi).unwrap_or(0.5)).fold(1.0f64, f64::min)).sum::<f64>() / mine.len() as f64;
@@ -227,35 +227,48 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 2] {
         }
     }
     let spe: Vec<f64> = (0..n).map(|i| b.get_stat(units[i], 5, false, false) as f64).collect();
-    let mut hp: Vec<f64> = (0..n).map(|i| b.p(units[i]).hp as f64).collect(); let hp0 = hp.clone();
+    let hp0: Vec<f64> = (0..n).map(|i| b.p(units[i]).hp as f64).collect();
     let maxhp: Vec<f64> = (0..n).map(|i| b.p(units[i]).maxhp.max(1) as f64).collect();
     let status: Vec<Id> = (0..n).map(|i| b.p(units[i]).status).collect();
     let wake: Vec<usize> = (0..n).map(|i| match status[i] { "slp" => b.p(units[i]).status_state.n("time").map(|t| t.max(1.0) as usize).unwrap_or(2), "frz" => 3, _ => 1 }).collect();
     let lefties: Vec<bool> = (0..n).map(|i| b.p(units[i]).item == "leftovers").collect();
-    let mut ko = [0.0f64; 2];
-    for k in 1..=RACE_T {
-        let tr_on = k <= tr_left;
-        let eff_spe = |i: usize| { let s = side(i) as usize; let x = if tw_left[s] > 0 && k > tw_left[s] { spe[i] / 2.0 } else { spe[i] }; if tr_on { -x } else { x } };
-        let mut order: Vec<usize> = (0..n).filter(|&i| hp[i] > 0.0).collect();
-        order.sort_by(|&x, &y| eff_spe(y).partial_cmp(&eff_spe(x)).unwrap());
-        for &i in &order {
-            if hp[i] <= 0.0 || k < wake[i] || opts[i].is_empty() { continue; }
-            let pf = if status[i] == "par" { 0.875 } else { 1.0 };
-            let score = |o: &Vec<f64>| (0..n).filter(|&j| hp[j] > 0.0 && o[j] > 0.0).map(|j| (o[j] * pf).min(hp[j]) / maxhp[j] + if o[j] * pf >= hp[j] { 1.0 } else { 0.0 }).sum::<f64>();
-            let best = opts[i].iter().max_by(|x, y| score(x).partial_cmp(&score(y)).unwrap()).unwrap().clone();
-            for j in 0..n {
-                if hp[j] > 0.0 && best[j] > 0.0 { hp[j] -= best[j] * pf; if hp[j] <= 0.0 { ko[side(j) as usize] += 1.0 / k as f64; } }
+    // one race; `first` = the side that moves first when opposing Pokemon tie on Speed (0 reproduces the original order)
+    let run = |first: u8| -> ([f64; 2], Vec<f64>) {
+        let mut hp = hp0.clone(); let mut ko = [0.0f64; 2];
+        for k in 1..=RACE_T {
+            let tr_on = k <= tr_left;
+            let eff_spe = |i: usize| { let s = side(i) as usize; let x = if tw_left[s] > 0 && k > tw_left[s] { spe[i] / 2.0 } else { spe[i] }; if tr_on { -x } else { x } };
+            let mut order: Vec<usize> = (0..n).filter(|&i| hp[i] > 0.0).collect();
+            order.sort_by(|&x, &y| eff_spe(y).partial_cmp(&eff_spe(x)).unwrap().then_with(|| if side(x) == side(y) { std::cmp::Ordering::Equal }
+                else if side(x) == first { std::cmp::Ordering::Less } else { std::cmp::Ordering::Greater }));
+            for &i in &order {
+                if hp[i] <= 0.0 || k < wake[i] || opts[i].is_empty() { continue; }
+                let pf = if status[i] == "par" { 0.875 } else { 1.0 };
+                let score = |o: &Vec<f64>| (0..n).filter(|&j| hp[j] > 0.0 && o[j] > 0.0).map(|j| (o[j] * pf).min(hp[j]) / maxhp[j] + if o[j] * pf >= hp[j] { 1.0 } else { 0.0 }).sum::<f64>();
+                let best = opts[i].iter().max_by(|x, y| score(x).partial_cmp(&score(y)).unwrap()).unwrap().clone();
+                for j in 0..n {
+                    if hp[j] > 0.0 && best[j] > 0.0 { hp[j] -= best[j] * pf; if hp[j] <= 0.0 { ko[side(j) as usize] += 1.0 / k as f64; } }
+                }
             }
+            for i in 0..n {
+                if hp[i] <= 0.0 { continue; }
+                let chip = match status[i] { "brn" => maxhp[i] / 16.0, "psn" | "tox" => maxhp[i] / 8.0, _ => 0.0 };
+                hp[i] = (hp[i] - chip + if lefties[i] { maxhp[i] / 16.0 } else { 0.0 }).min(maxhp[i]);
+                if hp[i] <= 0.0 { ko[side(i) as usize] += 1.0 / k as f64; }
+            }
+            if (0..n).filter(|&i| side(i) == 0).all(|i| hp[i] <= 0.0) || (0..n).filter(|&i| side(i) == 1).all(|i| hp[i] <= 0.0) { break; }
         }
-        for i in 0..n {
-            if hp[i] <= 0.0 { continue; }
-            let chip = match status[i] { "brn" => maxhp[i] / 16.0, "psn" | "tox" => maxhp[i] / 8.0, _ => 0.0 };
-            hp[i] = (hp[i] - chip + if lefties[i] { maxhp[i] / 16.0 } else { 0.0 }).min(maxhp[i]);
-            if hp[i] <= 0.0 { ko[side(i) as usize] += 1.0 / k as f64; }
-        }
-        if (0..n).filter(|&i| side(i) == 0).all(|i| hp[i] <= 0.0) || (0..n).filter(|&i| side(i) == 1).all(|i| hp[i] <= 0.0) { break; }
+        (ko, hp)
+    };
+    let edges = |ko: &[f64; 2], hp: &Vec<f64>| -> [f64; 2] {
+        let lost = |s: u8| (0..n).filter(|&i| side(i) == s).map(|i| (hp0[i] - hp[i].max(0.0)) / maxhp[i]).sum::<f64>();
+        [ko[1] - ko[0], lost(1) - lost(0)] };
+    let (ko, hp) = run(0); let mut out = edges(&ko, &hp);
+    // RACE_TIES=avg (champ-battle-v13): a Speed tie between opposing Pokemon is a coin flip in the game, so the race is run with each
+    // side winning the ties and the two results are averaged. Without it side 0 always moves first on a tie (the original behaviour).
+    if race_ties_avg() && (0..n).any(|i| (0..n).any(|j| side(i) != side(j) && spe[i] == spe[j])) {
+        let (ko1, hp1) = run(1); let o1 = edges(&ko1, &hp1); out = [(out[0] + o1[0]) / 2.0, (out[1] + o1[1]) / 2.0];
     }
-    let lost = |s: u8| (0..n).filter(|&i| side(i) == s).map(|i| (hp0[i] - hp[i].max(0.0)) / maxhp[i]).sum::<f64>();
     if std::env::var("RACE_DEBUG").is_ok() {                   // first few calls only: units, best hit % on each foe, Speed, outcome
         static CNT: std::sync::atomic::AtomicUsize = std::sync::atomic::AtomicUsize::new(0);
         if CNT.fetch_add(1, std::sync::atomic::Ordering::Relaxed) < 6 {
@@ -263,14 +276,15 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 2] {
             for i in 0..n {
                 let best: Vec<String> = (0..n).filter(|&j| side(j) != side(i)).map(|j| format!("{} {:.0}%", b.p(units[j]).species,
                     100.0 * opts[i].iter().map(|o| o[j]).fold(0.0, f64::max) / maxhp[j])).collect();
-                lines.push(format!("  s{} {} hp {:.0}% spe {} -> {} | end hp {:.0}%", side(i), b.p(units[i]).species, 100.0 * hp0[i] / maxhp[i], spe[i], best.join(", "), 100.0 * hp[i].max(0.0) / maxhp[i]));
+                lines.push(format!("  s{} {} hp {:.0}% spe {} -> {} | end hp {:.0}% (side 0 first on ties)", side(i), b.p(units[i]).species, 100.0 * hp0[i] / maxhp[i], spe[i], best.join(", "), 100.0 * hp[i].max(0.0) / maxhp[i]));
             }
-            lines.push(format!("  KO edge {:+.2}, HP edge {:+.2}", ko[1] - ko[0], lost(1) - lost(0)));
+            lines.push(format!("  KO edge {:+.2}, HP edge {:+.2}", out[0], out[1]));
             eprintln!("{}", lines.join("\n"));
         }
     }
-    [ko[1] - ko[0], lost(1) - lost(0)]
+    out
 }
+fn race_ties_avg() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("RACE_TIES").map(|v| v == "avg").unwrap_or(false)) }
 fn perish_adj(b: &Battle, w: &[f64]) -> f64 {
     let al = [alive(b, 0), alive(b, 1)];
     let t = |m: &MonRef| find(&b.p(*m).volatiles, "perishsong").and_then(|s| s.duration);

@@ -1,7 +1,9 @@
 """Replay -> what the engine needs to rebuild the position at the start of every turn (positions.js turns these into engine states).
 Hindsight and guesses, as the handoff allows for step 1: each side's four are the Pokemon that appeared anywhere in the game; sets are the
 open team sheet (item, ability, nature, moves); stat points are not on the sheet, so they are the species' most common spread
-(regionals/smogon_mc_sets.json) when its nature agrees with the sheet, else a plain spread that fits the nature.
+(regionals/smogon_mc_sets.json) when its nature agrees with the sheet, else a plain spread that fits the nature. A brought Pokemon that never
+came in is replaced by a stand-in from the unused team-sheet entries. Moves and items the engine data lacks are dropped from the set (listed
+in the spec's 'dropped'); a species, form or ability it lacks rules the game out.
 specs(rid, log) -> (list of position specs, reason the game was skipped or '').
 usage: python3 evalbar/spots.py <out.json> <replay id> [more ids]     (ids as in the replay cache, without .log)"""
 import os, sys, json
@@ -24,36 +26,43 @@ def evs_for(species, item, nature, moves):
     else: ev.update({'hp': 32, att: 32, 'spe': 2})
     return [ev[k] for k in ORDER]
 def missing(st):
-    """parts of a set the engine data does not have"""
-    out = []
-    if toid(st['species']) not in E['species']: out.append(st['species'])
+    """parts of a set the engine data does not have: (species, forms and abilities, which rule the game out; moves and items, which are dropped)"""
+    hard = []
+    if toid(st['species']) not in E['species']: hard.append(st['species'])
     mg = mega_of(st['species'], st['item'])
-    if mg and toid(mg) not in E['species']: out.append(mg)
-    if st['item'] and toid(st['item']) not in E['items']: out.append(st['item'])
-    if toid(st['ability']) not in E['abilities']: out.append(st['ability'])
-    return out + [m for m in st['moves'] if toid(m) not in E['moves']]
+    if mg and toid(mg) not in E['species']: hard.append(mg)
+    if toid(st['ability']) not in E['abilities']: hard.append(st['ability'])
+    return hard, [m for m in st['moves'] if toid(m) not in E['moves']] + ([st['item']] if st['item'] and toid(st['item']) not in E['items'] else [])
+def fit_set(st, dropped):
+    """the set as the engine can play it: unknown moves and an unknown item are left out (and listed in dropped); None if that cannot be done"""
+    hard, soft = missing(st)
+    if hard: return None, hard
+    moves = [m for m in st['moves'] if toid(m) in E['moves']]
+    if not moves: return None, soft
+    dropped += soft
+    item = st['item'] if toid(st['item']) in E['items'] else ''
+    return {**st, 'moves': moves, 'item': item, 'evs': evs_for(st['species'], st['item'], st['nature'], st['moves'])}, []
 def specs(rid, log):
     g = R.parse(log)
     if g['odd']: return [], 'mechanic not rebuilt: ' + ', '.join(g['odd'])
-    sets = {}; guess = {'p1': [], 'p2': []}
+    sets = {}; guess = {'p1': [], 'p2': []}; dropped = []
     for sd in ('p1', 'p2'):
         seen = set()
         for m in g['final'][sd]['mons']:
             key = toid(m['sp']) if toid(m['sp']) in g['sheets'][sd] else toid(m['sp'].split('-')[0])
             sh = g['sheets'][sd].get(key)
             if not sh: return [], 'no team sheet entry'
-            seen.add(key); st = {'species': m['sp'], 'item': sh['item'], 'ability': sh['ability'], 'nature': sh['nature'], 'moves': sh['moves']}
-            if missing(st): return [], 'not in the engine data: ' + ', '.join(missing(st))
-            st['evs'] = evs_for(m['sp'], sh['item'], sh['nature'], sh['moves']); sets[(sd, m['sp'])] = st
+            seen.add(key); st, bad = fit_set({'species': m['sp'], 'item': sh['item'], 'ability': sh['ability'], 'nature': sh['nature'], 'moves': sh['moves']}, dropped)
+            if not st: return [], 'not in the engine data: ' + ', '.join(bad)
+            sets[(sd, m['sp'])] = st
         # a brought Pokemon that never came in is unknown even in hindsight: stand in the first unused team-sheet entries the engine knows
         megas = sum(bool(mega_of(sets[(sd, m['sp'])]['species'], sets[(sd, m['sp'])]['item'])) for m in g['final'][sd]['mons'])
         rest = [sh for key, sh in g['sheets'][sd].items() if key not in seen]
         rest.sort(key=lambda sh: bool(mega_of(sh['species'], sh['item'])) and megas > 0)          # prefer not to add a second Mega Stone holder
         for sh in rest:
             if len(g['final'][sd]['mons']) + len(guess[sd]) >= 4: break
-            st = {'species': sh['species'], 'item': sh['item'], 'ability': sh['ability'], 'nature': sh['nature'], 'moves': sh['moves']}
-            if missing(st): continue
-            st['evs'] = evs_for(sh['species'], sh['item'], sh['nature'], sh['moves']); guess[sd].append(st)
+            st, bad = fit_set({'species': sh['species'], 'item': sh['item'], 'ability': sh['ability'], 'nature': sh['nature'], 'moves': sh['moves']}, [])
+            if st: guess[sd].append(st)
         if len(g['final'][sd]['mons']) + len(guess[sd]) < 4: return [], 'a brought Pokemon never appeared and no stand-in is in the engine data'
     out = []
     for s in g['steps']:
@@ -63,14 +72,14 @@ def specs(rid, log):
             S = s['state'][sd]; ms = S['mons']
             order = sorted(ms, key=lambda m: (0 if m['pos'] == 'a' else 1 if m['pos'] == 'b' else 2 if not m['f'] else 3))
             mons = [{**sets[(sd, m['sp'])], 'mega': m['mega'], 'hpPct': m['hp'], 'fainted': m['f'], 'status': m['st'], 'slept': m['slept'], 'boosts': m['b'],
-                     'itemNow': '' if m['gone'] else m['item'], 'moved': m['moved'], 'stall': m['stall'], 'lock': m['lock'], 'vol': m['vol'], 'onField': bool(m['pos']),
+                     'itemNow': '' if m['gone'] or toid(m['item']) not in E['items'] else m['item'], 'moved': m['moved'], 'stall': m['stall'], 'lock': m['lock'], 'vol': m['vol'], 'onField': bool(m['pos']),
                      'last': m['last'], 'volarg': m['volarg']} for m in order]
             mons += [{**st, 'mega': False, 'hpPct': 100, 'fainted': False, 'status': '', 'slept': 0, 'boosts': {}, 'itemNow': st['item'], 'moved': False, 'stall': False,
                       'lock': '', 'vol': [], 'onField': False, 'last': '', 'volarg': {}, 'standIn': True} for st in guess[sd]]
             sides.append({'mons': mons, 'tailwind': S['tailwind'], 'screens': S['screens'], 'hazards': S['hazards']})
         f = s['state']['field']
         acts = [[s['acts'].get(sd + x) for x in 'ab'] for sd in ('p1', 'p2')]
-        out.append({'name': f"{rid} t{s['turn']}", 'turn': s['turn'], 'sides': sides, 'acts': acts, 'perish': s['state']['perish'], 'standIns': len(guess['p1']) + len(guess['p2']),
+        out.append({'name': f"{rid} t{s['turn']}", 'turn': s['turn'], 'sides': sides, 'acts': acts, 'perish': s['state']['perish'], 'standIns': len(guess['p1']) + len(guess['p2']), 'dropped': dropped,
                     'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None, 'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}})
     return out, ''
 if __name__ == '__main__':

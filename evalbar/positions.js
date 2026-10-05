@@ -1,7 +1,8 @@
 // Engine states for replay positions (the eval bar). Each spec from spots.py (both teams' sets and every Pokemon's state at the start of a
 // turn) is rebuilt in Showdown and exported in the engine's state format, once from each player's side: line "<name> p1" has replay
 // player 1 as the engine's side 0, line "<name> p2" has player 2 there. Team order: slot a, slot b, then the bench.
-// Each line: {name, turn, side, perish, standIns, approx, state, actual, their_actual}. perish: Perish Song has been used (the planner cannot
+// Each line: {name, turn, side, perish, standIns, dropped, approx, state, actual, their_actual}. dropped: moves and items left out of the sets
+// because the engine data lacks them. perish: Perish Song has been used (the planner cannot
 // play the trap). standIns: brought Pokemon that never appeared and were filled in from the team sheet. actual / their_actual: what each slot of side 0 / side 1 chose, as the
 // engine's choice ([move index, target, mega] or ['switch', team index]); null for a slot whose choice the log does not show (flinched,
 // fainted first). approx: state details that were left out.
@@ -86,7 +87,7 @@ function build(spec, flip) {
     return {c: [k, t, !!a.mega], unsure: !!a.unsure};
   };
   const pack = si => [0, 1].map(i => { const c = choice(si, i); return c && c.c ? {choice: c.c, unsure: c.unsure} : c ? {choice: c, unsure: false} : null; });
-  return {name: `${spec.name} ${flip ? 'p2' : 'p1'}`, turn: spec.turn, side: flip ? 'p2' : 'p1', perish: !!spec.perish, standIns: spec.standIns || 0, approx: [...new Set(approx)],
+  return {name: `${spec.name} ${flip ? 'p2' : 'p1'}`, turn: spec.turn, side: flip ? 'p2' : 'p1', perish: !!spec.perish, standIns: spec.standIns || 0, dropped: spec.dropped || [], approx: [...new Set(approx)],
           actual: pack(0), their_actual: pack(1), state: exportState(b)};
 }
 const out = fs.createWriteStream(outf); let n = 0, bad = 0;

@@ -1,0 +1,63 @@
+{
+ "id": "b2g1", "title": "Game 4", "recorded": "2026-10-02", "result": "win", "how": "the opponent forfeited during turn 4",
+ "mine": ["Farigiraf", "Blastoise", "Torkoal", "Kingambit"],
+ "my_overrides": {"Kingambit": {"nature": "Brave"}},
+ "theirs": [
+  {"species": "Kingambit"},
+  {"species": "Milotic", "moves": ["Muddy Water"]},
+  {"species": "Barbaracle", "from": "Barbaracle-Mega", "moves": ["Rock Slide"]},
+  {"species": "Altaria", "moves": ["Flamethrower"]}
+ ],
+ "turns": [
+  {"turn": 1,
+   "p1": {"Farigiraf": {"slot": "a", "hp": 225}, "Blastoise": {"slot": "b", "hp": 186}},
+   "p2": {"Kingambit": {"slot": "a", "pct": 100}, "Milotic": {"slot": "b", "pct": 100}},
+   "acts": {"p1": {"a": {"move": "Trick Room"}, "b": {"move": "Aura Sphere", "target": "p2a", "mega": true}},
+            "p2": {"b": {"move": "Muddy Water"}}},
+   "events": [
+    [null, "Leads: Farigiraf and Blastoise against Kingambit and Milotic", []],
+    ["p1", "Blastoise Mega Evolved", []],
+    ["p2", "Milotic used Muddy Water", ["Farigiraf 100% → 76%", "Mega Blastoise 100% → 89% (not very effective)"]],
+    ["p1", "Mega Blastoise used Aura Sphere on Kingambit", ["Kingambit fainted (extremely effective)"]],
+    ["p1", "Farigiraf used Trick Room", ["Trick Room started"]]
+   ]},
+  {"turn": 2,
+   "p1": {"Farigiraf": {"hp": 171}, "Blastoise": {"hp": 166, "mega": true}},
+   "p2": {"Kingambit": {"slot": "", "f": true}, "Barbaracle": {"slot": "a", "pct": 100}},
+   "field": {"tr": 4},
+   "acts": {"p1": {"a": {"move": "Thunderbolt", "target": "p2b"}, "b": {"move": "Aura Sphere", "target": "p2a"}},
+            "p2": {"a": {"move": "Rock Slide", "mega": true}, "b": {"move": "Muddy Water"}}},
+   "events": [
+    [null, "Barbaracle came in", []],
+    ["p2", "Barbaracle Mega Evolved", []],
+    ["p1", "Farigiraf used Thunderbolt on Milotic", ["Milotic 100% → 67% (super effective)"]],
+    ["p1", "Mega Blastoise used Aura Sphere on Mega Barbaracle", ["Mega Barbaracle 100% → 11% (super effective)"]],
+    ["p2", "Mega Barbaracle used Rock Slide", []],
+    ["p2", "Milotic used Muddy Water", ["Farigiraf 76% → 48% (its Sitrus Berry was used along the way)", "Mega Blastoise 89% → 51% over the turn"]]
+   ]},
+  {"turn": 3,
+   "p1": {"Farigiraf": {"hp": 109, "gone": true}, "Blastoise": {"hp": 95}},
+   "p2": {"Milotic": {"pct": 67}, "Barbaracle": {"pct": 11, "mega": true}},
+   "field": {"tr": 3},
+   "acts": {"p1": {"a": {"move": "Thunderbolt", "target": "p2b"}, "b": {"move": "Water Spout"}},
+            "p2": {"b": {"move": "Muddy Water"}}},
+   "events": [
+    ["p1", "Farigiraf used Thunderbolt on Milotic", ["super effective"]],
+    ["p1", "Mega Blastoise used Water Spout", ["Mega Barbaracle fainted (super effective)", "Milotic (not very effective)"]],
+    ["p2", "Milotic used Muddy Water", ["Farigiraf 48% → 25%", "Mega Blastoise 51% → 40% (not very effective)"]]
+   ]},
+  {"turn": 4,
+   "p1": {"Farigiraf": {"hp": 57}, "Blastoise": {"hp": 74}},
+   "p2": {"Barbaracle": {"slot": "", "f": true}, "Milotic": {"pct": 49}, "Altaria": {"slot": "a", "pct": 100}},
+   "field": {"tr": 2},
+   "acts": {"p1": {"a": {"move": "Thunderbolt", "target": "p2b"}, "b": {"move": "Dark Pulse", "target": "p2b"}},
+            "p2": {"a": {"move": "Flamethrower"}}},
+   "events": [
+    [null, "Altaria came in", []],
+    ["p1", "Farigiraf used Thunderbolt on Milotic", ["super effective"]],
+    ["p1", "Mega Blastoise used Dark Pulse on Milotic", ["Milotic fainted"]],
+    ["p2", "Altaria used Flamethrower", []],
+    [null, "The opponent forfeited", []]
+   ]}
+ ]
+}

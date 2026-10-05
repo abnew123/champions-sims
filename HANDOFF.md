@@ -5,10 +5,13 @@ This folder is the machinery behind the **Trick Room Six** sheet (Pokémon Champ
 - **Threads (since 2026-10-05):** the work is split across three Claude sessions. "TR sheet" owns the sheet (start at `trsheet/HANDOFF.md`),
   "Battle sim" owns the full-battle simulator and planner (`native/champ/`, the position value, replay analysis; sections "Full 4v4 battle
   sim" and "Double Protect, real-game value weights" below), "Team search" owns `teamsearch/`. They coordinate by SendMessage.
-- **Git (since 2026-10-05):** the folder is a local git repo (branch `main`). Each thread commits its own area with explicit paths (no
-  `git add -A`). `.gitignore` keeps out dependencies, build output, results and other large generated files, local binaries, and anything
-  with other people's names (game recordings, replay logs, scraped tournament pages, files with player names or usernames): keep it that
-  way, since the history would become public if the repo does. Not pushed anywhere unless the user asks.
+- **Git (since 2026-10-05):** the folder is a git repo (branch `main`) with a private GitHub remote, `abnew123/champions-sims`; the user
+  reviews it before it goes public. Each thread commits its own area with explicit paths (no `git add -A`) and pushes only when the user
+  asks. Keep names out of everything tracked: write "the user" or "the player", never a real name, the Mac username, absolute `/Users/`
+  paths or an email, and no other people's names either (opponents, Showdown usernames, tournament players). `.gitignore` keeps out
+  dependencies, build output, results and other large generated files, local binaries, and data with names (game recordings, replay logs,
+  scraped tournament pages). Commits use the no-reply email in the repo's git config. License: MIT (`LICENSE`); Showdown's notice, data
+  sources and the trademark line are in `NOTICE.md`.
 - Published sheet: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6 (Version 16 as of 2026-10-04; the sections below record each version). The page source is `trsheet/tr-sheet.html`.
 - Do not touch the older sheet "Low-Variance Six" (https://claude.ai/artifact/DEF8ycjXrKGXokgH26he9A).
 - The player plays on mobile, prefers low downside variance, and wants accurate, battle-useful content. He has a math and poker/game-theory background, so exact reasoning is welcome. Give short status updates during long runs.

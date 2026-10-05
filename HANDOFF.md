@@ -301,7 +301,7 @@ residuals) with Rust ports of the in-scope move/ability/item/condition handlers 
   Vision OCR, `parse.py` timeline). Batches in recordings/batch1, batch2.
 - **Decision review**: `native/spot_starts.js` builds positions from `recordings/spots.json` (sets: MYTEAM + Smogon M-C sets with revealed
   info; HP, boosts, Mega, fainted, field; `actual` and optional `their_actual`). `champ spot` (built to native/champ/target_spot; uses
-  native/engine_data_spot.json = engine data + EXTRA_MOVES=megahorn) plays every kept cell to the end with the planner (switches allowed on
+  native/engine_data_spot.json = engine data + EXTRA_MOVES=megahorn, since 2026-10-05 also EXTRA_SPECIES=barbaracle,houndstone EXTRA_ITEMS=barbaracite for the Eval bar's recorded games; additive only) plays every kept cell to the end with the planner (switches allowed on
   the first turn, forced replacements after), 8 games per cell. Output: recordings/review_v2.json, whatif_review.json.
 - **Indeedee-slot study** (`pssim/cand_run.sh`, team files myteam_x_<tag>.json keep the key "Indeedee-F" so all job files apply):
   2v2 slot pairs (TR up / down): +Psychic +11.3/+6.8, Own Tempo -6.7/-2.5, Sinistcha -0.5/-4.6, Hatterene +17.8/+0.6, Rillaboom +16.9/+8.8.

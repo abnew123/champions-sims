@@ -1,0 +1,7 @@
+old_old egvalue5.json egvalue5.json none
+new_old egvalue8.json egvalue5.json 0
+old_new egvalue5.json egvalue8.json 1
+new_new egvalue8.json egvalue8.json both
+nr_nr egvalue8_norace.json egvalue8_norace.json both
+race_nr egvalue8.json egvalue8_norace.json both
+nr_race egvalue8_norace.json egvalue8.json both

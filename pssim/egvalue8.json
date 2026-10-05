@@ -1,0 +1,141 @@
+{
+ "b0": -0.41469051731143447,
+ "w": [
+  1.1177425375715297,
+  1.0405204732808262,
+  0.2025753340514207,
+  0.2996169133618725,
+  -0.9,
+  -0.1,
+  0.15503965618840046,
+  1.1554559033855565,
+  -0.9045199716990324,
+  -0.5850041223263193,
+  0.3695045338669226,
+  -0.8507286427394037,
+  -0.3669552733113291,
+  -0.2759153213092429,
+  0.21090918295651898,
+  0.16451533553768893,
+  -0.5,
+  -0.3,
+  0.6458821945532047,
+  -0.15406579162780148
+ ],
+ "names": [
+  "HP share (Pokemon)",
+  "Pokemon alive",
+  "attack stages",
+  "TR turns x speed edge",
+  "locked into status",
+  "locked into attack",
+  "grid coverage",
+  "grid exposure",
+  "must recharge",
+  "Protected last turn",
+  "type edge",
+  "asleep/frozen",
+  "paralysed",
+  "burned/poisoned",
+  "Tailwind turns (no TR)",
+  "screen turns",
+  "Encored",
+  "holding a Tricked Choice item",
+  "race: KO edge",
+  "race: HP edge"
+ ],
+ "hand_set": {
+  "locked into status": -0.9,
+  "locked into attack": -0.1,
+  "Encored": -0.5,
+  "holding a Tricked Choice item": -0.3,
+  "must recharge": -0.9045199716990324
+ },
+ "calib": [
+  [
+   0,
+   0.02,
+   5727,
+   0.006710951130516953,
+   16.0
+  ],
+  [
+   0.02,
+   0.05,
+   2810,
+   0.03345438422102954,
+   84.0
+  ],
+  [
+   0.05,
+   0.1,
+   2968,
+   0.07346833463119572,
+   201.0
+  ],
+  [
+   0.1,
+   0.2,
+   4622,
+   0.15018097695821217,
+   775.0
+  ],
+  [
+   0.2,
+   0.35,
+   5916,
+   0.2719059254116777,
+   1706.0
+  ],
+  [
+   0.35,
+   0.5,
+   5593,
+   0.42382887025067806,
+   2401.0
+  ],
+  [
+   0.5,
+   0.65,
+   5593,
+   0.5761711297493218,
+   3192.0
+  ],
+  [
+   0.65,
+   0.8,
+   5916,
+   0.7280940745883223,
+   4210.0
+  ],
+  [
+   0.8,
+   0.9,
+   4622,
+   0.8498190230417878,
+   3847.0
+  ],
+  [
+   0.9,
+   0.95,
+   2968,
+   0.9265316653688043,
+   2767.0
+  ],
+  [
+   0.95,
+   0.98,
+   2810,
+   0.9665456157789706,
+   2726.0
+  ],
+  [
+   0.98,
+   1.0,
+   5727,
+   0.9932890488694831,
+   5711.0
+  ]
+ ],
+ "note": "Refit on results/refit8 (3556 self-play games: Torkoal 32 HP / 2 SpD, generic grid, champ-battle-v8 DP2 RACE, played with egvalue7). asleep/paralysed/burned/Tailwind tied to the HP weight at their real-game ratios; hand-set as egvalue5. Needs RACE=1 CALC_DATA=..."
+}

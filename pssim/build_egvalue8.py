@@ -14,7 +14,7 @@ e7 = json.load(open('egvalue7.json')); R = json.load(open('results/fit_real_valu
 HAND = [4, 5, 8, 16, 17]; TIED = {11: 'slp', 12: 'par', 13: 'brn', 14: 'tw'}
 if os.environ.get('TR_REAL'): TIED[3] = 'tr'
 ratio = {i: real[k] / real['hp'] for i, k in TIED.items()}
-FREE = [i for i in (1, 2, 3, 6, 7, 9, 10, 15, 18, 19) if i not in TIED]
+FREE = [i for i in (1, 2, 3, 6, 7, 9, 10, 15, 18, 19) if i not in TIED and not (os.environ.get('NORACE') and i >= 18)]   # NORACE=1: no race weights (a comparison variant)
 X, y, G = [], [], []
 for f in glob.glob(d + '/*.json'):
     r = json.load(open(f))
@@ -38,7 +38,7 @@ def cv(A):
     for k in range(5):
         tr, te = fi != k, fi == k; w = fit(A[tr], y[tr], off[tr]); P[te] = 1 / (1 + np.exp(-(w[0] + A[te] @ w[1:] + off[te])))
     P = np.clip(P, 1e-9, 1 - 1e-9); return -np.mean(y * np.log(P) + (1 - y) * np.log(1 - P)), P
-ll, P = cv(A); ll_norace, _ = cv(A[:, :-2])
+ll, P = cv(A); ll_norace, _ = cv(A[:, :-2]) if not os.environ.get('NORACE') else (float('nan'), None)
 print(f"{len(ug)} games, {len(y)} positions; my win rate {y.mean():.3f}; 5-fold log loss {ll:.4f} (without the race features {ll_norace:.4f})")
 w = fit(A, y, off)
 idx = {g: np.where(G == g)[0] for g in ug}; B = []
@@ -46,7 +46,7 @@ for _ in range(40):
     rows = np.concatenate([idx[g] for g in rng.choice(ug, len(ug))]); B.append(fit(A[rows], y[rows], off[rows]))
 se = np.std(B, axis=0)
 names = e7['names']; W = list(e7['w'])
-W[0] = float(w[1])
+W[0] = float(w[1]); W = W[:18] + [0.0, 0.0] if os.environ.get('NORACE') else W
 for i in TIED: W[i] = float(ratio[i] * w[1])
 for k, i in enumerate(FREE): W[i] = float(w[k + 2])
 print(f"   {'intercept':30s} {e7['b0']:+.3f} -> {w[0]:+.3f} ± {se[0]:.3f}")

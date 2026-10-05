@@ -58,8 +58,10 @@ pub(crate) fn resolve_switches(b: &mut Battle, cfg: &Cfg, mut rng: Option<&mut f
             if o.is_empty() { o.push([PChoice::Pass; 2]); }
             o }).collect();
         let (i, j) = if opts[0].len() * opts[1].len() == 1 { (0, 0) } else {
-            let a: Vec<Vec<f64>> = opts[0].iter().map(|x| opts[1].iter().map(|y| { let mut c = b.clone(); c.choose_switches([*x, *y]); value(&mut c, cfg) }).collect()).collect();
-            let (x, y) = nash(&a, 200);
+            let a2: Vec<Vec<(f64, f64)>> = opts[0].iter().map(|x| opts[1].iter().map(|y| { let mut c = b.clone(); c.choose_switches([*x, *y]); value2(&mut c, cfg) }).collect()).collect();
+            let a: Vec<Vec<f64>> = a2.iter().map(|r| r.iter().map(|v| v.0).collect()).collect();
+            let (x, mut y) = nash(&a, 200);
+            if cfg.vw_b.is_some() { let ab: Vec<Vec<f64>> = a2.iter().map(|r| r.iter().map(|v| v.1).collect()).collect(); y = nash(&ab, 200).1; }   // each side by its own value
             let am = |p: &[f64]| p.iter().enumerate().fold((0, -1.0), |m, (k, v)| if *v > m.1 { (k, *v) } else { m }).0;
             match rng.as_deref_mut() { Some(r) => (sample(&x, r), sample(&y, r)), None => (am(&x), am(&y)) }
         };

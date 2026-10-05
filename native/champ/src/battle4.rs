@@ -23,9 +23,12 @@ fn can_damage(b: &Battle, s: u8) -> bool {
         p.move_slots.iter().any(|sl| sl.pp > 0 && b.dex.mv(sl.id).tmpl.category != "Status") || p.move_slots.iter().all(|sl| sl.pp <= 0))
 }
 fn dp2_log() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("DP2_LOG").is_ok()) }
+/// DP2_SIDE=0|1 (champ-battle-v12): run the two-turn Protect check for that side only
+fn dp2_side() -> Option<u8> { static F: std::sync::OnceLock<Option<u8>> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("DP2_SIDE").ok().and_then(|x| x.parse().ok())) }
 fn dp2() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("DP2").is_ok()) }
 /// DP2: side 0's value of a position after one more turn played as a small matrix game (reduced_options for both sides, one seed)
-fn next_value(b: &Battle, cfg: &Cfg, seed: [u16; 4]) -> f64 {
+fn next_value(b: &Battle, cfg: &Cfg, seed: [u16; 4], s: u8) -> f64 {
+    let value = |x: &mut Battle, cfg: &Cfg| { let v = value2(x, cfg); if s == 0 { v.0 } else { v.1 } };
     let mut z = b.clone();
     if z.ended { return value(&mut z, cfg); }
     let o: Vec<Vec<[PChoice; 2]>> = (0..2u8).map(|s| rjoint(&mut z, s)).collect();
@@ -72,17 +75,18 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool) -> Ou
         let mns: Vec<usize> = (0..msw.len()).filter(|i| no_sw(&msw[*i])).collect();
         let tns: Vec<usize> = (0..tsw.len()).filter(|j| no_sw(&tsw[*j])).collect();
         let cs: Vec<[u16; 4]> = (0..ns()).map(|k| seed4(key ^ ((turn as u64) << 40) ^ ((k as u64) << 52))).collect();
-        let mut cache: HashMap<(usize, usize), f64> = HashMap::new();
-        let mut cell = |i: usize, j: usize, b: &Battle| -> f64 {
+        let mut cache: HashMap<(usize, usize), (f64, f64)> = HashMap::new();
+        // each cell as (side 0's value, side 1's value); the two differ only with EG_VALUE_B
+        let mut cell2 = |i: usize, j: usize, b: &Battle| -> (f64, f64) {
             *cache.entry((i, j)).or_insert_with(|| {
-                let mut s = 0.0;
-                for c in &cs { let mut x = b.clone(); x.prng = Prng::gen5(*c); x.run_turn([msw[i], tsw[j]]); resolve_switches(&mut x, cfg, None); s += value(&mut x, cfg); }
-                s / cs.len() as f64 })
+                let mut s = (0.0, 0.0);
+                for c in &cs { let mut x = b.clone(); x.prng = Prng::gen5(*c); x.run_turn([msw[i], tsw[j]]); resolve_switches(&mut x, cfg, None); let v = value2(&mut x, cfg); s.0 += v.0; s.1 += v.1; }
+                (s.0 / cs.len() as f64, s.1 / cs.len() as f64) })
         };
         // my matrix: all my options (moves + switches) vs their non-switch options
-        let am: Vec<Vec<f64>> = (0..msw.len()).map(|i| tns.iter().map(|&j| cell(i, j, &b)).collect()).collect();
+        let am: Vec<Vec<f64>> = (0..msw.len()).map(|i| tns.iter().map(|&j| cell2(i, j, &b).0).collect()).collect();
         // their matrix: my non-switch options vs all their options
-        let at: Vec<Vec<f64>> = mns.iter().map(|&i| (0..tsw.len()).map(|j| cell(i, j, &b)).collect()).collect();
+        let at: Vec<Vec<f64>> = mns.iter().map(|&i| (0..tsw.len()).map(|j| cell2(i, j, &b).1).collect()).collect();
         let (mut x, _) = if tns.is_empty() { (vec![1.0 / msw.len() as f64; msw.len()], vec![]) } else { nash(&am, 400) };
         let (_, mut y) = if mns.is_empty() { (vec![], vec![1.0 / tsw.len() as f64; tsw.len()]) } else { nash(&at, 400) };
         let (mut xcols, mut yrows) = (tns.clone(), mns.clone());
@@ -93,12 +97,12 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool) -> Ou
             let jsw: Vec<usize> = (0..tsw.len()).filter(|j| !no_sw(&tsw[*j]) && y[*j] > 0.02).collect();
             if !jsw.is_empty() {
                 let cols: Vec<usize> = tns.iter().copied().chain(jsw.iter().copied()).collect();
-                let am2: Vec<Vec<f64>> = (0..msw.len()).map(|i| cols.iter().map(|&j| cell(i, j, &b)).collect()).collect();
+                let am2: Vec<Vec<f64>> = (0..msw.len()).map(|i| cols.iter().map(|&j| cell2(i, j, &b).0).collect()).collect();
                 x = nash(&am2, 400).0; xcols = cols;
             }
             if !isw.is_empty() {
                 let rows: Vec<usize> = mns.iter().copied().chain(isw.iter().copied()).collect();
-                let at2: Vec<Vec<f64>> = rows.iter().map(|&i| (0..tsw.len()).map(|j| cell(i, j, &b)).collect()).collect();
+                let at2: Vec<Vec<f64>> = rows.iter().map(|&i| (0..tsw.len()).map(|j| cell2(i, j, &b).1).collect()).collect();
                 y = nash(&at2, 400).1; yrows = rows;
             }
         }
@@ -110,7 +114,7 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool) -> Ou
         // alternative, that Pokemon's Protect-again options are dropped and the side's mix is re-solved on the same rows / columns.
         if dp2() && !xcols.is_empty() && !yrows.is_empty() {
             let mut pruned: [Vec<usize>; 2] = [vec![], vec![]];
-            for s in 0..2u8 { for k in 0..2usize {
+            for s in 0..2u8 { if dp2_side().map(|x| x != s).unwrap_or(false) { continue; } for k in 0..2usize {
                 let Some(pi) = b.sides[s as usize].active[k] else { continue }; let m = (s, pi);
                 if b.p(m).fainted || find(&b.p(m).volatiles, "stall").is_none() { continue; }
                 let opts: Vec<[PChoice; 2]> = if s == 0 { msw.clone() } else { tsw.clone() };
@@ -131,7 +135,7 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool) -> Ou
                 for (gi, g) in [&prot, &others, &sws].iter().enumerate() {
                     let mut bv: Option<(usize, f64)> = None;
                     for &i in g.iter() {
-                        let mut v = 0.0; for &(j, w) in &resp { v += w * if s == 0 { cell(i, j, &b) } else { cell(j, i, &b) }; }
+                        let mut v = 0.0; for &(j, w) in &resp { v += w * if s == 0 { cell2(i, j, &b).0 } else { cell2(j, i, &b).1 }; }
                         let v = if s == 0 { v } else { -v };
                         if bv.map(|z| v > z.1).unwrap_or(true) { bv = Some((i, v)); }
                     }
@@ -144,7 +148,7 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool) -> Ou
                 let sb = seed4(key ^ ((turn as u64) << 40) ^ (0xD3u64 << 52) ^ ((s as u64) << 36) ^ ((k as u64) << 32));
                 let v2 = |i: usize| -> f64 { resp.iter().map(|&(j, w)| {
                     let mut z = b.clone(); z.prng = Prng::gen5(sa); z.run_turn(if s == 0 { [msw[i], tsw[j]] } else { [msw[j], tsw[i]] });
-                    resolve_switches(&mut z, cfg, None); w * next_value(&z, cfg, sb) }).sum() };
+                    resolve_switches(&mut z, cfg, None); w * next_value(&z, cfg, sb, s) }).sum() };
                 let vp = v2(bp); let va: Vec<f64> = alts.iter().map(|&i| v2(i)).collect();
                 let worse = if s == 0 { vp < va.iter().cloned().fold(f64::MIN, f64::max) } else { vp > va.iter().cloned().fold(f64::MAX, f64::min) };
                 // DP2_LOG=1 (champ-battle-v10): one record per check, values from the acting side's view: for the best Protect-again / other
@@ -171,11 +175,11 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool) -> Ou
                 dp2s[2 * s as usize + 1] += 1; pruned[s as usize].extend(prot.iter().copied());
                 if s == 0 {
                     let rows: Vec<usize> = (0..msw.len()).filter(|i| !pruned[0].contains(i)).collect(); if rows.is_empty() { continue; }
-                    let a: Vec<Vec<f64>> = rows.iter().map(|&i| xcols.iter().map(|&j| cell(i, j, &b)).collect()).collect();
+                    let a: Vec<Vec<f64>> = rows.iter().map(|&i| xcols.iter().map(|&j| cell2(i, j, &b).0).collect()).collect();
                     let (xr, _) = nash(&a, 400); let mut xn = vec![0.0; msw.len()]; for (r, &i) in rows.iter().enumerate() { xn[i] = xr[r]; } x = xn;
                 } else {
                     let cols: Vec<usize> = (0..tsw.len()).filter(|j| !pruned[1].contains(j)).collect(); if cols.is_empty() { continue; }
-                    let a: Vec<Vec<f64>> = yrows.iter().map(|&i| cols.iter().map(|&j| cell(i, j, &b)).collect()).collect();
+                    let a: Vec<Vec<f64>> = yrows.iter().map(|&i| cols.iter().map(|&j| cell2(i, j, &b).1).collect()).collect();
                     let (_, yc) = nash(&a, 400); let mut yn = vec![0.0; tsw.len()]; for (c, &j) in cols.iter().enumerate() { yn[j] = yc[c]; } y = yn;
                 }
             } }

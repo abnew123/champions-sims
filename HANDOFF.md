@@ -437,3 +437,15 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     with egvalue7), `build_egvalue8.py` (status / Tailwind tied to the HP weight at real-game ratios; calibration by bucket on held-out games).
   - Bar for calling a setup final: Team search's 10-team comparison against real regional results, RMS matchup error over the nine
     non-Perish archetypes (v3 + egvalue5: 0.26 log-odds; v8 + DP2 + RACE + egvalue7: 0.25; sim noise ~0.14).
+  - `egvalue8.json` (`build_egvalue8.py` on results/refit8, 3,556 games): held-out log loss 0.384 (0.406 without race); calibration on
+    held-out games is on the diagonal in every bucket, so egvalue7's mid-range over-confidence was a mismatch between weights and the
+    games they were used on. `egvalue8_norace.json` = the same fit without the race weights (`NORACE=1`).
+  - `champ-battle-v12` = v11 + `EG_VALUE_B=<file>` (side 1 plans with its own weights; each side solves its own matrix, replacement
+    choices too) + `DP2_SIDE=0|1`. Unset: v8's games; the same file on both sides through the new path: identical games.
+  - Head-to-head on the TR six (`h2h_run.sh`, `h2h_arms.txt`, `h2h_report.py`, results/h2h_*, 480 games per arm, my win share):
+    old/old 71.7; new mine only 76.5 (+4.8 +- 3.2); new theirs only 65.1 (-6.7 +- 3.3); new/new 70.4. Race only (egvalue8 vs
+    egvalue8_norace): neither 74.1; mine only 76.2 (+2.1 +- 3.0); theirs only 65.8 (-8.3 +- 2.8). The new value is a stronger player
+    (~5 points to its user); the race helps the opponents more than the TR six.
+  - Team search's decomposition on its 10 teams (teamsearch/decomp.py): the drop vs Sun / Indeedee TR / Snow arrives with the race
+    (-9 / -12 / -7), not with the Protect check (0) or the status weights (Sun -6 only). Pending: its one-side-only arms with v12 and a
+    multi-team self-play run with features, for a value fitted on more than the TR six.

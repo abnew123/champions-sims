@@ -19,6 +19,8 @@ pub struct Cfg {
     /// matchup grid cells ("foe|mine" -> value), with and without Trick Room
     pub grid_tr: FxMap<String, f64>, pub grid_notr: FxMap<String, f64>, pub gfoes: Vec<String>,
     pub vw: Option<(f64, Vec<f64>)>, pub autopilot: bool,
+    /// EG_VALUE_B (champ-battle-v12): value weights side 1 plans with (head-to-head tests of two values); None = the same as side 0
+    pub vw_b: Option<(f64, Vec<f64>)>,
     /// RACE=1 + CALC_DATA=<champions_data.json>: the damage-race features (race_feats) are appended to the position features
     pub cdata: Option<&'static crate::data::Data>,
 }
@@ -39,15 +41,16 @@ pub fn load_cfg(grid_dir: &str) -> Cfg {
             }
         }
     }
-    let vw = std::env::var("EG_VALUE").ok().map(|p| {
-        let v: Value = serde_json::from_str(&std::fs::read_to_string(&p).expect("EG_VALUE file")).unwrap();
-        (v["b0"].as_f64().unwrap(), v["w"].as_array().unwrap().iter().map(|x| x.as_f64().unwrap()).collect())
+    let load_vw = |name: &str| std::env::var(name).ok().map(|p| {
+        let v: Value = serde_json::from_str(&std::fs::read_to_string(&p).expect("value file")).unwrap();
+        (v["b0"].as_f64().unwrap(), v["w"].as_array().unwrap().iter().map(|x| x.as_f64().unwrap()).collect::<Vec<f64>>())
     });
+    let vw = load_vw("EG_VALUE"); let vw_b = load_vw("EG_VALUE_B");
     let [grid_tr, grid_notr] = grids;
     let cdata: Option<&'static crate::data::Data> = std::env::var("RACE").ok().map(|_| {
         let p = std::env::var("CALC_DATA").expect("RACE=1 needs CALC_DATA=<champions_data.json>");
         &*Box::leak(Box::new(crate::data::Data::load(&p))) });
-    Cfg { grid_tr, grid_notr, gfoes, vw, autopilot: std::env::var("EG_AUTOPILOT").is_ok(), cdata }
+    Cfg { grid_tr, grid_notr, gfoes, vw, autopilot: std::env::var("EG_AUTOPILOT").is_ok(), vw_b, cdata }
 }
 
 fn sp_name(b: &Battle, m: MonRef) -> Id { b.dex.species.get(b.p(m).species).map(|s| s.name).unwrap_or("") }
@@ -319,6 +322,15 @@ fn tr_keep(b: &Battle, s: u8) -> bool {
     if !trsym() { return s == 0; }
     let ms = |x: u8| { let a = alive(b, x); a.iter().map(|m| b.p(*m).stored[5] as f64).sum::<f64>() / a.len().max(1) as f64 };
     ms(s) < ms(1 - s)
+}
+/// side 0's win chance as each side sees it: (with side 0's weights, with side 1's weights); equal unless EG_VALUE_B is set
+pub fn value2(b: &mut Battle, cfg: &Cfg) -> (f64, f64) {
+    let Some((b1, w1)) = &cfg.vw_b else { let v = value(b, cfg); return (v, v); };
+    if b.ended { let v = match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 }; return (v, v); }
+    let f = feats(b, cfg);
+    let ev = |b0: f64, w: &Vec<f64>| { let mut z = b0; for k in 0..w.len().min(f.len()) { z += w[k] * f[k]; } z += perish_adj(b, w); 1.0 / (1.0 + (-z).exp()) };
+    let va = match &cfg.vw { Some((b0, w)) => ev(*b0, w), None => ev(*b1, w1) };
+    (va, ev(*b1, w1))
 }
 pub fn value(b: &mut Battle, cfg: &Cfg) -> f64 {
     if b.ended { return match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 }; }

@@ -88,8 +88,9 @@ thread maintains the kit and owns `sheets/trick-room-six/`.
   cells. `speed.json` is still hand-written (`"hand": true`).
 - Not in the kit yet: effective-Speed rows (Tailwind, Scarf, Unburden, weather), cloud runs through the kit
   (same commands on the box, untested), species tells on the page.
-- A static preview of built pages: `sheets-preview` in `.claude/launch.json` (port 8768, serves `sheets/`). It sends no charset, so
-  accented characters look wrong there; the published Artifact is fine.
+- One progress page for all threads since 2026-10-05 (the user asked): `status_server.py`, `sim-progress` in `.claude/launch.json`,
+  port 8766, with sections Sheets (kit runs, also ones pulled from a cloud box), Battle sim and Team search (that thread's own cards).
+  The same server shows built sheets at `/sheets/<team>/work/preview.html`; the separate `sheets-preview` entry is gone.
 
 ## How the current page was built
 

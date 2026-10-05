@@ -33,8 +33,9 @@ python3 sheetkit/kit.py <team> status
 | 6 | `charts [--workers N]`, `speed` | Coverage and Matchups from the grid (`charts.json`); the Speed table from ladder spread stats (`speed.json`) | seconds |
 | 7 | `page [--compare other.html]` | Builds `sheet.html` from the template, `picks.json`, `t1.json`, the charts and the team's text | seconds |
 
-Every run resumes where it stopped (finished jobs are skipped), writes its log to `pssim/kit_<team>_<step>.log`, and shows on the
-progress page (`sim-progress` in `.claude/launch.json`, port 8766). Start long runs in the background (`nohup ... &`).
+Every run resumes where it stopped (finished jobs are skipped), writes its log to `pssim/kit_<team>_<step>.log`, and shows under
+"Sheets" on the one progress page all threads share (`status_server.py`, `sim-progress` in `.claude/launch.json`, port 8766), also
+when it runs on a cloud box and the results are only pulled back. Start long runs in the background (`nohup ... &`).
 
 **How a pick is decided.** Seeds depend on the opponent and the game index only, so every four plays the same games and all comparisons
 are paired. Picking the best of 90 on the same games flatters the winner, so the matrix only nominates; `confirm decide` keeps the
@@ -53,7 +54,9 @@ The box is set up once the way `teamsearch/cloud/README.md` describes (steps 0-3
    `setsid nohup python3 sheetkit/kit.py <team> matrix run --threads 180 > matrix.out 2>&1 &`. `--threads` is how many cores you
    take; on Linux the kit spreads them over battle processes of 3 threads each (one process with many threads runs about ten times
    slower there), dealing the jobs round-robin so the processes finish together. If the box is shared, agree the split first.
-4. `sheetkit/cloud/pull.sh <host> <key file> <team>` copies results back (repeat as often as you like); `status` shows progress.
+4. `sheetkit/cloud/pull.sh <host> <key file> <team>` copies results back (repeat every ten minutes or so: a spot box can be taken
+   away without notice, and only what was pulled survives); `status` and the progress page show how far it is. To resume on a new
+   box, push again: results already on the Mac are sent along and skipped by the run.
 5. `matrix report`, `confirm jobs`, push again, `confirm run` on the box, pull, `confirm decide --write`.
 
 A result folder holds one run: the kit refuses to add games to a folder whose results came from other sets, another sim setup or
@@ -133,7 +136,8 @@ it with the `speed` options until it shows what matters for your six. The starte
 true of any team; add what is specific to yours (your own weather or terrain, a spout move, an item).
 
 `page` also writes `work/preview.html`, the same page with the charset and viewport lines a published Artifact gets. Open that one to
-check phone width (`sheets-preview` in `.claude/launch.json` serves `sheets/` on port 8768).
+check phone width: the progress page's server also serves `sheets/`, so it is at
+`http://localhost:8766/sheets/<team>/work/preview.html` (`sim-progress` in `.claude/launch.json`).
 
 The "Which tab" guide and the tab list come from `sheetkit/archetypes.json` and are the same on every sheet. `page` reports (and exits
 with an error for) a card whose turn-one line switches to a Pokémon outside its back row, or whose line weights do not sum to 100.

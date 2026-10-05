@@ -490,3 +490,13 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     393 games identical; all of the change is against opposing Farigiraf leads (Trick Room tab -13 +- 10, Indeedee TR +4 +- 3). It is a
     correctness fix, so it is part of the final setup from here on.
   - Luck in `evalpos`: the same position from the two sides differed by up to 0.14 with 8 seeds, 0.05 with 32, 0.03 with 96.
+  - **champ-battle-v14 = v13, faster, same games** (2026-10-05). A profile of v13 showed the value function at a third of run time (a
+    tenth of all time building strings for matchup-grid lookups, 8% recomputing the type-edge feature) and 37% in the system allocator.
+    Changes: grid names and cells memoised per thread (no strings on the hot path); type edge computes the attackers' move types once
+    per call and memoises type-vs-types effectiveness; the mimalloc allocator (Cargo feature `fast-alloc`, on by default; needs a C
+    compiler and crates.io at build time; `cargo build --release --no-default-features` builds without it); `codegen-units = 1`.
+    Checked identical to v13: 120 battles across all ten archetypes (results, per-turn states, Protect-check counters) and 20 evalpos
+    positions (every output field). Speed, one thread on the Mac: 20 battles 150 s -> 92 s (-39%); 20 evalpos positions 74 s -> 54 s
+    (-27%). Flags and the final setup are unchanged; only the binary name changes. What is left is the engine itself: simulating turns
+    is now 69% of run time, nearly all of it in event dispatch (handler lookups by string key; `get_stat` alone triggers a fifth of all
+    events). Speeding that up means restructuring handler lookup and would need the Showdown differential tests (`champ turn`) rerun.

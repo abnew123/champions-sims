@@ -5,6 +5,12 @@
 mod calc; mod data; mod prng; mod dex; mod state; mod battle; mod sim; mod handlers; mod turntest; mod plan; mod spreads; mod spot; mod battle4; mod evalpos;
 use calc::*; use serde_json::Value; use std::collections::BTreeMap;
 
+// The planner allocates heavily (cloned battle states, small vectors in the event system); mimalloc is much faster than the
+// system allocator for that. Results do not depend on the allocator.
+#[cfg(feature = "fast-alloc")]
+#[global_allocator]
+static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+
 fn mon(v: &Value) -> Mon {
     let sp = &v["sp"]; let b = &v["boosts"];
     Mon { species: v["species"].as_str().unwrap().into(), item: v["item"].as_str().unwrap_or("").into(), ability: v["ability"].as_str().unwrap_or("").into(),

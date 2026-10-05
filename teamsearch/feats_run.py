@@ -21,7 +21,7 @@ if __name__ == '__main__':
     for n in S.DEFAULT:
         team, fixed, label, _ = S.latest(n)
         r = E.run_team(team, 4, SEED, thr(), fixed=fixed, label=label)
-        d = os.path.join(HERE, 'runs', f'{E.team_key(team)}_{label}', f'out_{E.out_tag(SEED, 4)}')
+        d = os.path.join('runs', f'{E.team_key(team)}_{label}', f'out_{E.out_tag(SEED, 4)}')        # relative to teamsearch/
         dirs.append(d)
         print(time.strftime('%I:%M %p'), n, f"{100 * r['score']:.1f}", d, flush=True)
     open(os.path.join(HERE, f"feats_run_dirs_{E.sim()}.txt"), 'w').write('\n'.join(dirs) + '\n')

@@ -1,0 +1,14 @@
+{
+ "title": "NAME OF THE SHEET",
+ "sub": "The six, in one line: what to lead and the sets to train.",
+ "leads_intro": [
+  "Pick the lead at team preview, then the turn-one line for what they send out. Percentages are how often to click each line; use any randomizer. The two numbers are your win chance after turn one against how the Showdown ladder clicks, then against a player who reads your mix; red means the lead loses turn one.",
+  "Each tab shows the four to bring: the lead and back row that won the most whole-game sims against that archetype (both sides switching, every turn played out, endgames included). Its lines are the turn-one plan for that lead."
+ ],
+ "leads_method": "The lead and back row shown won the most whole-game sims: full 4v4 battles in a native port of Showdown&rsquo;s engine, both sides playing each turn&rsquo;s best mix (switches included) to the end, against the archetype&rsquo;s six most common leads with the back rows they bring in 5,000 Showdown M-C Bo3 replays. Every four of the six was tried, and the leaders were replayed head to head on fresh games. The turn-one lines were run with 12 RNG samples per cell in Showdown&rsquo;s engine with Champions mechanics and scored with a win model fit on 7,781 games. Their Indeedee F&rsquo;s item is mixed at replay rates: Rocky Helmet 48%, Colbur Berry 32%, Psychic Seed 20%. Their other leads are not simulated.",
+ "team_h2": "The six",
+ "team_intro": "Stat points (SP) are what you assign in the game; the stat row is the result at level 50, after Mega Evolution for the Mega.",
+ "footer": [
+  "<b>Damage.</b> The leads were simulated in Showdown&rsquo;s own engine with Champions mechanics."
+ ]
+}

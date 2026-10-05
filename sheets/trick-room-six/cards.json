@@ -1,0 +1,32 @@
+{
+ "Blastoise": {
+  "role": "Attacker",
+  "note": "Water Spout is its spread nuke. Mega Launcher adds half again to Aura Sphere and Dark Pulse: Dark Pulse one-shots the usual Gholdengo and Mega Gengar spreads, though not their bulky ones.",
+  "src": "Quiet on 71% of Mega Blastoise with exactly these moves (Pokémon Zone); 32 HP / 32 SpA is the most common Quiet spread."
+ },
+ "Torkoal": {
+  "role": "Attacker",
+  "note": "Sets sun when it comes in. Eruption in sun is the team&rsquo;s biggest hit; Weather Ball is a Fire move in sun.",
+  "src": "Points moved from HP to Special Defense: its Defense is already high and its Special Defense low. Survives two Mega Salamence Hyper Voices 83% of the time (was 14%) and Mega Garchomp&rsquo;s Draco Meteor 69% (was 25%), for a little less against rare physical hitters."
+ },
+ "Indeedee-F": {
+  "role": "Setter",
+  "note": "Psychic Terrain on entry, and the seed turns it into +1 Special Defense at once. Follow Me or Trick Room, not both in one turn; Healing Wish sends a fresh attacker in at full HP.",
+  "src": "Most common spread on MetaVGC (42%). Psychic Seed over Colbur Berry, the most common item: in the lead sims it scored a little higher overall, and Colbur only came out ahead when they lead Kingambit. Female Indeedee: it has Follow Me."
+ },
+ "Farigiraf": {
+  "role": "Setter",
+  "note": "The bulky setter. Armor Tail blocks their priority moves, Fake Out included, on it and its partner.",
+  "src": "Farigiraf spreads are scattered; this is the most common Relaxed one (12% on MetaVGC). Relaxed is the most common nature for this exact set on Trick Room teams in the replay data."
+ },
+ "Kingambit": {
+  "role": "Attacker",
+  "note": "Kowtow Cleave never misses. Defiant turns an Intimidate into +2 Attack. Low Kick for opposing Kingambit, Tyranitar and Incineroar.",
+  "src": "The most common spread, but Brave instead of the usual Adamant: the same Attack, and 63 Speed moves before every Adamant Kingambit under Trick Room instead of tying the 70s. Chople Berry is the most common Kingambit item on the ladder (29%)."
+ },
+ "Incineroar": {
+  "role": "Support",
+  "note": "Fake Out and Intimidate on the lead, and again each time it switches back in. Throat Chop is its hit on Indeedee, whose terrain blocks Fake Out; Close Combat is for Kingambit, Incineroar and Tyranitar. White Herb undoes one drop: Attack after their Intimidate, or both Defenses after Close Combat.",
+  "src": "The most common Incineroar set on Indeedee Trick Room teams in the replays (157 of 532 there). Brave with no Speed points gives 72 Speed, the same as your Farigiraf; HP and Attack are maxed like your other slow attackers. Why it over Hatterene: the best lead per archetype scores 2.6 points higher on turn one (weighted by how common each archetype is). In the 2v2 endgame sim the two are about even in the back with Trick Room up (Hatterene + a partner 1 point behind Incineroar + the same partner) and Incineroar is 4.5 points ahead without it. Hatterene is much better in the back against Tailwind (about +24) and somewhat better against Rain + Sun and Sand with Trick Room up; Incineroar is much better against Indeedee TR, Balance, Snow and Trick Room teams."
+ }
+}

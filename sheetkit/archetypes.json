@@ -1,0 +1,30 @@
+{
+ "note": "The opponent model's archetypes (pssim/opp_model_{a,b}.json, mined from 5,000 Showdown M-C Bo3 replays), shared by every sheet. 'archetypes' is in ladder-share order: a bring-matrix job file's index is the position here. 'model' is the name used in the opponent model and in every result file; 'key' and 'tab' are the page's tab id and label; 'share' is the percentage of M-C ladder teams.",
+ "archetypes": [
+  {"model": "Tailwind goodstuffs", "key": "tw", "tab": "Tailwind", "share": 26.2},
+  {"model": "Sun", "key": "sun", "tab": "Sun", "share": 12.0},
+  {"model": "Indeedee TR / Psychic Terrain", "key": "indeedee", "tab": "Indeedee TR", "share": 11.9},
+  {"model": "Rain", "key": "rain", "tab": "Rain", "share": 10.5},
+  {"model": "Balance, no speed control", "key": "balance", "tab": "Balance", "share": 9.3},
+  {"model": "Sand", "key": "sand", "tab": "Sand", "share": 9.0},
+  {"model": "Snow", "key": "snow", "tab": "Snow", "share": 7.8},
+  {"model": "Trick Room without Indeedee", "key": "tr", "tab": "Trick Room", "share": 6.7},
+  {"model": "Rain + sun", "key": "rainsun", "tab": "Rain + Sun", "share": 3.3},
+  {"model": "Perish trap", "key": "perish", "tab": "Perish", "share": 3.3}
+ ],
+ "tab_order": ["tw", "indeedee", "sun", "rain", "balance", "sand", "snow", "tr", "rainsun", "perish"],
+ "guide_note": "Which tab: the first match in their six, top to bottom.",
+ "guide": [
+  ["Gengar", "perish"],
+  ["Charizard + Pelipper or Politoed", "rainsun"],
+  ["Charizard or Torkoal", "sun"],
+  ["Pelipper or Politoed", "rain"],
+  ["Tyranitar", "sand"],
+  ["Froslass, Alolan Ninetales or Vanilluxe", "snow"],
+  ["Indeedee", "indeedee"],
+  ["Farigiraf or Sinistcha", "tr"],
+  ["Salamence, Whimsicott, Talonflame or Staraptor", "tw"],
+  ["none of these", "balance"]
+ ],
+ "their_names": {"Indeedee-F": "Indeedee F", "Indeedee": "Indeedee M", "Arcanine-Hisui": "Arcanine-H", "Floette-Eternal": "Floette"}
+}

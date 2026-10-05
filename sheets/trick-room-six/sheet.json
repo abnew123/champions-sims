@@ -1,0 +1,74 @@
+{
+ "name": "Trick Room Six",
+ "artifact": "https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6",
+ "published": "Version 16 (2026-10-04)",
+ "team": "team.json",
+ "lead_order": [
+  "Incineroar",
+  "Indeedee-F",
+  "Farigiraf",
+  "Torkoal",
+  "Kingambit",
+  "Blastoise"
+ ],
+ "my_names": {
+  "Indeedee-F": "Indeedee"
+ },
+ "short_names": {
+  "Blastoise": "Blast",
+  "Torkoal": "Tork",
+  "Farigiraf": "Fari",
+  "Kingambit": "Gambit",
+  "Incineroar": "Incin"
+ },
+ "storage_key": "trsix-leads-tab",
+ "grid_dir": "../../mxtr_t22",
+ "t1": {
+  "reader_w": 0.75,
+  "tr_credit": "slower-four",
+  "tw_under_tr": "zero",
+  "trmult_file": "../../pssim/trmult_final.json",
+  "stat_move": "Trick Room"
+ },
+ "lines": {
+  "short_moves": {
+   "Kowtow Cleave": "Kowtow"
+  },
+  "rewrites": [
+   {
+    "mon": "Kingambit",
+    "move": "Kowtow Cleave",
+    "target": "Sneasler",
+    "show": "Iron Head"
+   }
+  ]
+ },
+ "matchups_default": "tr",
+ "theme": {
+  "note": "Layout: one reading column, sticky section bar; same type system as the Low-Variance Six sheet, violet for Trick Room",
+  "light": {
+   "ground": "#f4f3f7",
+   "panel": "#ffffff",
+   "panel-2": "#faf9fc",
+   "ink": "#16141b",
+   "ink2": "#55525f",
+   "ink3": "#858292",
+   "rule": "#dfdce6",
+   "rule-2": "#ecebf1",
+   "accent": "#6a43c7",
+   "accent-soft": "#ece6fb"
+  },
+  "dark": {
+   "ground": "#141318",
+   "panel": "#1c1b21",
+   "panel-2": "#222128",
+   "ink": "#f2f1f6",
+   "ink2": "#aca9b7",
+   "ink3": "#7b7886",
+   "rule": "#2e2c36",
+   "rule-2": "#27252e",
+   "accent": "#a68cf3",
+   "accent-soft": "#2a2342"
+  }
+ }
+}

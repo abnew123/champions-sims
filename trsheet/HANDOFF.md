@@ -45,6 +45,40 @@ Talk to the other threads directly with SendMessage (names above); do not relay 
 
   Ladder-weighted 75.6%.
 
+## Sheet kit (2026-10-05): how a sheet is built from now on
+
+The user asked for sheet threads to be generic: one thread per team on a shared kit. The kit is `sheetkit/` (read `sheetkit/README.md`
+first: steps, rules for every sheet thread, a new team's checklist, what the simulators leave out); each team has `sheets/<team>/`. This
+thread maintains the kit and owns `sheets/trick-room-six/`.
+
+- One command per step: `python3 sheetkit/kit.py <team> init | status | grid | smoke | matrix jobs|run|report | confirm jobs|run|decide |
+  t1 jobs|run|solve | page`. Sim setups are named in `sheetkit/sim.json`; `current` is `v4-eg5` (what Version 16 used) until Battle sim
+  says the new planner setup is final.
+- `python3 sheetkit/selftest_tr.py` rebuilds the Trick Room Six sheet from the raw results in `pssim/results/` and checks every step
+  against the old pipeline's files (matrix jobs, confirmation jobs, picks, turn-one jobs, Speeds, all 60 solved plans, the page). All
+  pass. The one intended difference: opposing leads with exactly equal share are listed in the opponent model's order, which swaps two
+  rows on three tabs (Balance, Snow, Trick Room). Run it after every kit change.
+- `sheets/trick-room-six/`: `team.json` (= `pssim/myteam_real.json`), `sheet.json`, `text.json`, `cards.json`, `notes.json`, `charts.json`
+  and `speed.json` (imported from the Version 16 page), `picks.json` (= `bringcf_picks.json`), `t1.json` (the 60 plans of the picks),
+  `sheet.html` (the kit's build). `work/` links to the old result folders (`selftest_tr.py --link`).
+- **The next published version is built with `kit.py trick-room-six page`**; then copy `sheets/trick-room-six/sheet.html` over
+  `trsheet/tr-sheet.html` (the published source) or switch the published source to the kit's file and say so here. The section below
+  ("How the current page was built") describes the old hand-run route, kept for history; the scripts it names still work.
+- The kit's `grid` step (Team search's generic one-on-one code, read-only) matches the hand-built `mxtr_t22/` grid in 456 of 460
+  cells; the four that differ are Incineroar cells where the generic code models White Herb, and it adds cells for Indeedee-F. The
+  Trick Room Six still points at `mxtr_t22/` (`grid_dir` in its `sheet.json`). Agreed with Battle sim (2026-10-05): the rerun on the
+  new planner (open item 2) uses the generic grid, already built at `sheets/trick-room-six/work/grid/` with the current sets (Torkoal
+  12 HP / 22 SpD); Battle sim fits the final value file on self-play games that read it. To switch: delete `grid_dir` from `sheet.json`.
+  If the Torkoal spread changes (open item 1): edit `team.json`, rerun `grid`, and tell Battle sim at once, since its refit must use
+  the same sets. Version 16's own numbers were run with `GRID_DIR=../mxtr` (old Torkoal cells; `mxtr_t22` did not exist yet).
+- A second team was dry-run in a scratch folder (the user's Rillaboom / Incineroar / Sneasler / Gholdengo / Kingambit / Mega Salamence
+  six, sets from `teamsearch/teams/low_variance_six.json`): `init`, `grid`, `smoke` and a page all work with nothing Trick Room-specific.
+  No folder was created under `sheets/` for it: that team's thread does `init` itself.
+- Not in the kit yet: Coverage / Matchups / Speed for a new team (the Trick Room Six carries its own data), cloud runs through the kit
+  (same commands on the box, untested), species tells on the page.
+- A static preview of built pages: `sheets-preview` in `.claude/launch.json` (port 8768, serves `sheets/`). It sends no charset, so
+  accented characters look wrong there; the published Artifact is fine.
+
 ## How the current page was built
 
 1. Picks: bring matrix (all 90 fours x 6 opposing leads x 16 games per archetype, `pssim/bringmx_report.py`) and a fresh-game

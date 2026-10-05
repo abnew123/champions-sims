@@ -14,6 +14,7 @@ native/champ/bin/*
 /results/
 pssim/results/
 teamsearch/runs/
+sheets/*/work/
 teamsearch/cloud_results/*
 !teamsearch/cloud_results/climb_state.json
 !teamsearch/cloud_results/climb_log.jsonl

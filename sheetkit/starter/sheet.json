@@ -1,0 +1,18 @@
+{
+ "name": "NAME OF THE SHEET",
+ "artifact": "",
+ "published": "never",
+ "team": "team.json",
+ "my_names": {},
+ "short_names": {},
+ "t1": {"reader_w": 0.75, "tr_credit": "fitted"},
+ "lines": {"short_moves": {}, "rewrites": []},
+ "matchups_default": "notr",
+ "theme": {
+  "note": "Layout: one reading column, sticky section bar",
+  "light": {"ground": "#f3f4f7", "panel": "#ffffff", "panel-2": "#f9fafc", "ink": "#14161b", "ink2": "#51555f", "ink3": "#808592",
+            "rule": "#dcdfe6", "rule-2": "#eaecf1", "accent": "#2459c4", "accent-soft": "#e4ecfb"},
+  "dark": {"ground": "#131418", "panel": "#1b1c21", "panel-2": "#212228", "ink": "#f1f2f6", "ink2": "#a9acb7", "ink3": "#787b86",
+           "rule": "#2c2e36", "rule-2": "#25272e", "accent": "#8fb2f5", "accent-soft": "#1f2a44"}
+ }
+}

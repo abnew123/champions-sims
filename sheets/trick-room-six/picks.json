@@ -1,0 +1,177 @@
+{
+ "made": "2026-10-04",
+ "setup": "v4-eg5",
+ "picks": {
+  "Tailwind goodstuffs": {
+   "lead": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "v": 0.92,
+   "n": 288,
+   "source": "bring matrix + fresh confirmation",
+   "changed": false,
+   "best": "Farigiraf+Incineroar / Blastoise+Kingambit",
+   "best_v": 0.949,
+   "sheet_v": 0.92
+  },
+  "Sun": {
+   "lead": [
+    "Blastoise",
+    "Kingambit"
+   ],
+   "back": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "v": 0.515,
+   "n": 288,
+   "source": "bring matrix + fresh confirmation",
+   "changed": false,
+   "best": "Blastoise+Incineroar / Farigiraf+Kingambit",
+   "best_v": 0.519,
+   "sheet_v": 0.515
+  },
+  "Indeedee TR / Psychic Terrain": {
+   "lead": [
+    "Farigiraf",
+    "Kingambit"
+   ],
+   "back": [
+    "Blastoise",
+    "Incineroar"
+   ],
+   "v": 0.68,
+   "n": 288,
+   "source": "bring matrix + fresh confirmation",
+   "changed": true,
+   "best": "Farigiraf+Kingambit / Blastoise+Incineroar",
+   "best_v": 0.68,
+   "sheet_v": 0.599
+  },
+  "Rain": {
+   "lead": [
+    "Torkoal",
+    "Incineroar"
+   ],
+   "back": [
+    "Blastoise",
+    "Farigiraf"
+   ],
+   "v": 0.584,
+   "n": 288,
+   "source": "bring matrix + fresh confirmation",
+   "changed": false,
+   "best": "Blastoise+Farigiraf / Torkoal+Incineroar",
+   "best_v": 0.652,
+   "sheet_v": 0.584
+  },
+  "Balance, no speed control": {
+   "lead": [
+    "Blastoise",
+    "Farigiraf"
+   ],
+   "back": [
+    "Kingambit",
+    "Incineroar"
+   ],
+   "v": 0.8,
+   "n": 288,
+   "source": "bring matrix + fresh confirmation",
+   "changed": false,
+   "best": "Farigiraf+Incineroar / Blastoise+Torkoal",
+   "best_v": 0.811,
+   "sheet_v": 0.8
+  },
+  "Sand": {
+   "lead": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "back": [
+    "Blastoise",
+    "Kingambit"
+   ],
+   "v": 0.828,
+   "n": 288,
+   "source": "bring matrix + fresh confirmation",
+   "changed": false,
+   "best": "Farigiraf+Incineroar / Blastoise+Kingambit",
+   "best_v": 0.828,
+   "sheet_v": 0.828
+  },
+  "Snow": {
+   "lead": [
+    "Blastoise",
+    "Farigiraf"
+   ],
+   "back": [
+    "Torkoal",
+    "Incineroar"
+   ],
+   "v": 0.849,
+   "n": 288,
+   "source": "bring matrix + fresh confirmation",
+   "changed": false,
+   "best": "Farigiraf+Incineroar / Torkoal+Kingambit",
+   "best_v": 0.883,
+   "sheet_v": 0.849
+  },
+  "Trick Room without Indeedee": {
+   "lead": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "back": [
+    "Blastoise",
+    "Torkoal"
+   ],
+   "v": 0.726,
+   "n": 288,
+   "source": "bring matrix + fresh confirmation",
+   "changed": false,
+   "best": "Blastoise+Kingambit / Torkoal+Incineroar",
+   "best_v": 0.754,
+   "sheet_v": 0.726
+  },
+  "Rain + sun": {
+   "lead": [
+    "Blastoise",
+    "Incineroar"
+   ],
+   "back": [
+    "Torkoal",
+    "Farigiraf"
+   ],
+   "v": 0.481,
+   "n": 288,
+   "source": "bring matrix + fresh confirmation",
+   "changed": false,
+   "best": "Blastoise+Farigiraf / Torkoal+Incineroar",
+   "best_v": 0.484,
+   "sheet_v": 0.481
+  },
+  "Perish trap": {
+   "lead": [
+    "Blastoise",
+    "Kingambit"
+   ],
+   "back": [
+    "Torkoal",
+    "Farigiraf"
+   ],
+   "v": 0.952,
+   "n": 288,
+   "source": "bring matrix + fresh confirmation",
+   "changed": false,
+   "best": "Blastoise+Kingambit / Torkoal+Farigiraf",
+   "best_v": 0.952,
+   "sheet_v": 0.952
+  }
+ },
+ "games": "48 fresh games per opposing lead (first game index 1000), 288 per four"
+}

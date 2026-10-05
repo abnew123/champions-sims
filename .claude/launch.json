@@ -18,6 +18,18 @@
         "8767"
       ],
       "port": 8767
+    },
+    {
+      "name": "sheets-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8768",
+        "--directory",
+        "sheets"
+      ],
+      "port": 8768
     }
   ]
 }

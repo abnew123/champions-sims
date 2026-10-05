@@ -120,7 +120,9 @@ thread maintains the kit and owns `sheets/trick-room-six/`.
    (`v13-dp2-race-eg9`). History of the day: a first box was reclaimed at 511 jobs; on the second, 2,667 jobs ran on v12 before Battle
    sim amended the setup (v12's damage race gave our side every Speed tie, worth about 13 points on the Trick Room tab's mirrors);
    those v12 results are kept in `work/matrix_v12/` as a paired sample (same game indices) and the matrix restarted on v13. On Linux
-   the kit runs battle processes of 3 threads (one process with 96 threads took 50 s per game). The rerun is the kit's steps in order: `matrix jobs`, `matrix run` (86,400 games), `matrix
+   the kit runs battle processes of 3 threads (one process with 96 threads took 50 s per game). The matrix was switched at 6:00 pm
+   to v14 and the kit's `current` is now v15: both play exactly v13's games, faster, so all of them share one results folder. The box
+   has v12-v14 but no v15, so start the confirmation there with `--setup v14-dp2-race-eg9` (or have v15 built there first). The rerun is the kit's steps in order: `matrix jobs`, `matrix run` (86,400 games), `matrix
    report`, `confirm jobs`, `confirm run`, `confirm decide --write`, `t1 jobs`, `t1 run`, `t1 solve`, `page`; about 1.5-2 hours on a
    192-core spot box for the matrix and confirmation (the user starts the box, during the day; see the aws-setup memory and
    `teamsearch/cloud/README.md`; the kit has not run on a box yet, so pack `sheetkit/`, the team folder with `work/grid`, and

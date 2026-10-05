@@ -1,6 +1,6 @@
 {
  "note": "Named full-battle sim setups. Every sheet thread runs 'current' unless it says otherwise; only the kit maintainer moves 'current', and only when the Battle sim thread says a setup is final. Paths are relative to the repo root. 'env' is passed to the binary as is; EG_VALUE and GRID_DIR are added by the kit (GRID_DIR is the team's own grid). A setup with a 'games' field plays exactly the games of the setup it names; result folders are stamped with that name.",
- "current": "v14-dp2-race-eg9",
+ "current": "v15-dp2-race-eg9",
  "setups": {
   "v4-eg5": {
    "binary": "native/champ/bin/champ-battle-v4",
@@ -41,7 +41,24 @@
    "env_paths": [
     "CALC_DATA"
    ],
-   "status": "FINAL (Battle sim, 2026-10-05): plays exactly v13-dp2-race-eg9's games, faster (about 39% on the Mac, less on Linux), so its results may share a folder with v13's ('games' names the setup whose games it plays). Two-turn Protect check, damage race with Speed ties averaged over both sides, one value file for every team; use the team's own generic grid. Linux source: native/champ/src_battle_v14.tar.gz (needs crates.io and a C compiler for the mimalloc allocator; --no-default-features builds without it). Not comparable with v4-eg5 numbers.",
+   "status": "Same games and speed as v15-dp2-race-eg9; kept for runs already going on a box that has only this build. plays exactly v13-dp2-race-eg9's games, faster (about 39% on the Mac, less on Linux), so its results may share a folder with v13's ('games' names the setup whose games it plays). Two-turn Protect check, damage race with Speed ties averaged over both sides, one value file for every team; use the team's own generic grid. Linux source: native/champ/src_battle_v14.tar.gz (needs crates.io and a C compiler for the mimalloc allocator; --no-default-features builds without it). Not comparable with v4-eg5 numbers.",
+   "games": "v13-dp2-race-eg9"
+  },
+  "v15-dp2-race-eg9": {
+   "binary": "native/champ/bin/champ-battle-v15",
+   "value": "pssim/egvalue9.json",
+   "engine_data": "native/engine_data_spot.json",
+   "env": {
+    "BATTLE_ANTICIPATE": "1",
+    "DP2": "1",
+    "RACE": "1",
+    "RACE_TIES": "avg",
+    "CALC_DATA": "native/champions_data.json"
+   },
+   "env_paths": [
+    "CALC_DATA"
+   ],
+   "status": "FINAL (Battle sim, 2026-10-05): the build to use for new runs; plays exactly v13-dp2-race-eg9's games, faster (about 39% on the Mac, less on Linux), so its results may share a folder with v13's ('games' names the setup whose games it plays). Two-turn Protect check, damage race with Speed ties averaged over both sides, one value file for every team; use the team's own generic grid. Linux source: native/champ/src_battle_v15.tar.gz (needs crates.io and a C compiler for the mimalloc allocator; --no-default-features builds without it). Not comparable with v4-eg5 numbers.",
    "games": "v13-dp2-race-eg9"
   }
  }

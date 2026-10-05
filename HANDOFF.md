@@ -2,11 +2,10 @@
 
 This folder is the machinery behind the **Trick Room Six** sheet (Pokémon Champions VGC doubles, Reg M-C), moved out of a Claude Cowork session so it can run on all cores of a Mac. Read this file first.
 
-- **Threads (since 2026-10-05):** the work is split across three Claude sessions. "TR sheet" owns the sheet (start at `trsheet/HANDOFF.md`),
-  "Battle sim" owns the full-battle simulator and planner (`native/champ/`, the position value, replay analysis; sections "Full 4v4 battle
-  sim" and "Double Protect, real-game value weights" below), "Team search" owns `teamsearch/`. They coordinate by SendMessage.
-- **Sheet kit (since 2026-10-05):** sheets are built with `sheetkit/` (shared steps and page template, maintained by "TR sheet"), one
-  folder per team in `sheets/<team>/`, one thread per team. A new sheet thread starts at `sheetkit/README.md`.
+- **Threads (since 2026-10-05):** the work is split across four Claude sessions. "TR sheet" owns the sheets and the sheet kit (start at
+  `trsheet/HANDOFF.md`), "Battle sim" owns the full-battle simulator and planner (`native/champ/`, the position value, replay analysis;
+  sections "Full 4v4 battle sim" and "Double Protect, real-game value weights" below), "Team search" owns `teamsearch/`, and "Eval bar"
+  owns `evalbar/` (a chess-style evaluation bar for games; start at `evalbar/HANDOFF.md`). They coordinate by SendMessage.
 - **Git (since 2026-10-05):** the folder is a git repo (branch `main`) with a private GitHub remote, `abnew123/champions-sims`; the user
   reviews it before it goes public. Each thread commits its own area with explicit paths (no `git add -A`) and pushes only when the user
   asks. Keep names out of everything tracked: write "the user" or "the player", never a real name, the Mac username, absolute `/Users/`

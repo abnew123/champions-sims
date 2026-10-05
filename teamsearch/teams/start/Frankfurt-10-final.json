@@ -1,0 +1,122 @@
+{
+ "Raichu": {
+  "species": "Raichu",
+  "item": "Raichunite Y",
+  "ability": "Lightning Rod",
+  "nature": "Timid",
+  "evs": [
+   32,
+   0,
+   11,
+   0,
+   0,
+   23
+  ],
+  "moves": [
+   "Fake Out",
+   "Focus Blast",
+   "Zap Cannon",
+   "Protect"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Sitrus Berry",
+  "ability": "Intimidate",
+  "nature": "Impish",
+  "evs": [
+   32,
+   0,
+   20,
+   0,
+   14,
+   0
+  ],
+  "moves": [
+   "Fake Out",
+   "Helping Hand",
+   "Flare Blitz",
+   "Parting Shot"
+  ]
+ },
+ "Garchomp": {
+  "species": "Garchomp",
+  "item": "Choice Scarf",
+  "ability": "Rough Skin",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Stomping Tantrum",
+   "Dragon Claw",
+   "Earthquake",
+   "Rock Slide"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "Grassy Seed",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Close Combat",
+   "Dire Claw",
+   "Rock Slide",
+   "Protect"
+  ]
+ },
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Focus Sash",
+  "ability": "Defiant",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Kowtow Cleave",
+   "Sucker Punch",
+   "Iron Head",
+   "Low Kick"
+  ]
+ },
+ "Delphox": {
+  "species": "Delphox",
+  "item": "Delphoxite",
+  "ability": "Blaze",
+  "nature": "Timid",
+  "evs": [
+   9,
+   0,
+   14,
+   11,
+   0,
+   32
+  ],
+  "moves": [
+   "Heat Wave",
+   "Psychic",
+   "Nasty Plot",
+   "Protect"
+  ]
+ }
+}

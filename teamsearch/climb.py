@@ -161,7 +161,7 @@ def run_round(mode):
     nbs = {n: neighbours(st['teams'][n]['team'], st['cap']) for n in active}
     flat = list({key_s(x[3]): x[3] for n in active for x in nbs[n]}.values())
     t0 = time.time()
-    cache = os.path.join(HERE, f'climb_prefilter_r{rnd}.json')         # so a relaunch (e.g. to change threads) skips this step
+    cache = os.path.join(os.environ.get('TS_CACHE_DIR', HERE), f'climb_prefilter_r{rnd}.json')   # so a relaunch skips this step
     msc = json.load(open(cache)) if os.path.exists(cache) else {}
     todo = [t for t in flat if key_s(t) not in msc]
     if todo:

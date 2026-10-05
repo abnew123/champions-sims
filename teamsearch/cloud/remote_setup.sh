@@ -1,10 +1,10 @@
 #!/bin/bash
-# One-time setup on a fresh Ubuntu 24.04 x86_64 box (run there, from the unpacked bundle's root: ./teamsearch/cloud/remote_setup.sh).
+# One-time setup on a fresh Ubuntu 24.04 or 26.04 x86_64 box (run there, from the unpacked bundle's root: ./teamsearch/cloud/remote_setup.sh).
 # Installs Node, Python and Rust; installs Showdown's engine + this project's Champions fixes (setup.sh); builds the battle binary
 # from the snapshot source after checking it against the checksum the other thread recorded.
 set -e
 cd "$(dirname "$0")/../.."
-SRC=${1:-src_battle_v3.tar.gz}; NAME=${SRC#src_}; NAME=champ-${NAME%.tar.gz}; NAME=${NAME//_/-}   # src_battle_v3.tar.gz -> champ-battle-v3
+SRC=${1:-src_battle_v12.tar.gz}; NAME=${SRC#src_}; NAME=champ-${NAME%.tar.gz}; NAME=${NAME//_/-}   # src_battle_v3.tar.gz -> champ-battle-v3
 
 echo "== packages"
 sudo apt-get update -qq

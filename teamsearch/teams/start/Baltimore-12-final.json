@@ -1,0 +1,122 @@
+{
+ "Garchomp": {
+  "species": "Garchomp",
+  "item": "Choice Scarf",
+  "ability": "Rough Skin",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Stomping Tantrum",
+   "Dragon Claw",
+   "Earthquake",
+   "Rock Slide"
+  ]
+ },
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Life Orb",
+  "ability": "Defiant",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Kowtow Cleave",
+   "Swords Dance",
+   "Sucker Punch",
+   "Protect"
+  ]
+ },
+ "Archaludon": {
+  "species": "Archaludon",
+  "item": "Leftovers",
+  "ability": "Stamina",
+  "nature": "Bold",
+  "evs": [
+   32,
+   0,
+   1,
+   1,
+   32,
+   0
+  ],
+  "moves": [
+   "Protect",
+   "Electro Shot",
+   "Dragon Pulse",
+   "Flash Cannon"
+  ]
+ },
+ "Delphox": {
+  "species": "Delphox",
+  "item": "Delphoxite",
+  "ability": "Blaze",
+  "nature": "Timid",
+  "evs": [
+   9,
+   0,
+   14,
+   11,
+   0,
+   32
+  ],
+  "moves": [
+   "Heat Wave",
+   "Psychic",
+   "Nasty Plot",
+   "Protect"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Sitrus Berry",
+  "ability": "Intimidate",
+  "nature": "Impish",
+  "evs": [
+   32,
+   0,
+   20,
+   0,
+   14,
+   0
+  ],
+  "moves": [
+   "Fake Out",
+   "Flare Blitz",
+   "Throat Chop",
+   "Parting Shot"
+  ]
+ },
+ "Indeedee-F": {
+  "species": "Indeedee-F",
+  "item": "Rocky Helmet",
+  "ability": "Psychic Surge",
+  "nature": "Bold",
+  "evs": [
+   32,
+   0,
+   32,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Psychic",
+   "Follow Me",
+   "Helping Hand",
+   "Protect"
+  ]
+ }
+}

@@ -110,6 +110,12 @@ for name, (arch, ut) in USER_TEAMS.items():
     index[name] = dict(event='user', place=None, arch=arch, pid=None,
                        gids=[gid[L.set_key(dict(species=s['species'], item=s['item'], ability=s['ability'], nature=s['nature'],
                                                   evs=s['evs'], moves=s['moves']))] for s in ut.values()], spreads=['user'] * 6)
+FINALS = os.path.join(HERE, 'teams', 'climb_finals.json')      # earlier climbs' best sixes as extra starts (user, 2026-10-05)
+if os.path.exists(FINALS):
+    for name, f in json.load(open(FINALS)).items():
+        team = {grid[g]['species']: {k: v for k, v in grid[g].items() if k != 'regional_count'} for g in f['gids']}
+        json.dump(team, open(os.path.join(HERE, 'teams', 'start', name + '.json'), 'w'), indent=1)
+        index[name] = dict(event='climb', place=None, arch=None, pid=None, gids=f['gids'], spreads=['climb'] * 6, note=f['note'])
 json.dump(index, open(os.path.join(HERE, 'teams', 'start', 'index.json'), 'w'), indent=1)
 json.dump(field, open(os.path.join(HERE, 'field', 'regional_field.json'), 'w'))
 

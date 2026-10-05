@@ -303,3 +303,19 @@ Usage:
   - Sim-vs-real RMS without Perish: v3 0.26, v8 0.25, v12g 0.26. Unchanged.
   - The structural pattern persists: Rain, TR w/o Indeedee, Indeedee TR and Rain+Sun come out 0.3–0.4 too hard; Tailwind and Balance 0.25–0.33 too easy. The rough floor of this bar is ~0.15–0.2.
   - Proposed climb setup: TS_SIM=v12g (champ-battle-v12, egvalue9, RACE, DP2, anticipation) + TS_PERISH=real. Waiting on Battle sim to call it final.
+
+### Climb rerun under the final setup (prepared Oct 5, 7:20 am; not started — the user launches the box in the daytime)
+- **Setup:** `cloud/run_env.sh` = TS_SIM=v12g (champ-battle-v12, egvalue9 general intercept, RACE, DP2, anticipation; Battle sim called it final) + TS_PERISH=real.
+- **Starts:** 52. The 48 regional top-16 teams, trick_room_six (Torkoal back to 32 HP), low_variance_six, and two earlier finals from `teams/climb_finals.json`:
+  - Baltimore-12-final: #1 of the 10 under v12g.
+  - Frankfurt-10-final: v3's #1.
+  - `build_sets.py` adds them to the start index.
+- **Fresh climb on the box:** `pack.sh` leaves out `cloud_results/`, `regmatch/`, `bring/previews.json` and every `climb_*` file. The bundle is ~2 MB and defaults to src_battle_v12; its checksum line was added by Battle sim.
+- **Results home:** `pull_loop.sh HOST KEY cloud_results/v12`, so the first climb's tracked results stay put. Then `report.py cloud_results/v12`.
+- **Smoke test:** `cloud/reference_v12g.json` = `evaluate.py trick_room_six 1 0` on the Mac under run_env: 54 games, score 0.5667, 6.1 s per game per core. The box must match it exactly.
+- **Script changes:**
+  - `relaunch.sh` and `auto_rounds.sh` source run_env.sh; `auto_rounds.sh` takes seconds per climbing start (default 210).
+  - `watchdog.sh` takes MAX_H as its second argument.
+  - `climb.py` takes TS_CACHE_DIR for the pre-filter cache, used by sandbox tests.
+- **Plumbing test (7:19 am, sandbox, 1 start, test mode, ~400 games):** the round ran under v12g. Brings covered 9 archetypes (no Perish), sequential testing ran an extra batch, and state was written only to the sandbox.
+- **Size:** round 1 ≈ 155k games ≈ 2.5–3 h on a c7a.48xlarge. Spain is ~$1.16/h if its quota is granted; otherwise Ohio zone 2b, ~$2.44/h.

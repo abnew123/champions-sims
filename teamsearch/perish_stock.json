@@ -1,0 +1,29 @@
+{
+ "source": "Reg M-C regionals (Baltimore, Brisbane, Frankfurt), pokedata.ovh standings",
+ "prior_matches": 30,
+ "pooled": 0.4752,
+ "matches": {
+  "Tailwind": 314,
+  "Sun": 135,
+  "Indeedee TR": 132,
+  "Rain": 109,
+  "Balance": 124,
+  "Sand": 101,
+  "Snow": 76,
+  "Trick Room": 69,
+  "Rain + Sun": 55,
+  "Perish": 84
+ },
+ "rate": {
+  "Tailwind": 0.4668,
+  "Sun": 0.5299,
+  "Indeedee TR": 0.45,
+  "Rain": 0.4682,
+  "Balance": 0.4735,
+  "Sand": 0.4663,
+  "Snow": 0.4488,
+  "Trick Room": 0.5161,
+  "Rain + Sun": 0.4637,
+  "Perish": 0.4935
+ }
+}

@@ -94,6 +94,9 @@ def paired(a, b):
             d.append(sb / nb - sa / na); w.append(E.P.ARCH_SHARE[arch] * E.P.pair_shares(arch)[k])
     d, w = np.array(d), np.array(w) / sum(w)
     m = float(w @ d); se = float(np.sqrt(np.sum(w ** 2 * (d - m) ** 2) * len(d) / max(1, len(d) - 1)))
+    if E.perish_real():                 # Perish is a fixed real rate per team archetype: no noise, only a shift if the archetype changes
+        f = E.P.ARCH_SHARE[E.PERISH] / sum(E.P.ARCH_SHARE.values())
+        m, se = (1 - f) * m + f * (b['by_arch'][E.PERISH] - a['by_arch'][E.PERISH]), (1 - f) * se
     return m, se
 
 def pooled(batches):

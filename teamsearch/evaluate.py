@@ -6,7 +6,7 @@ Score = sum over archetypes of share x (lead-pair-share-weighted mean win share 
 can't run ('unsupported') are dropped.
 
 Per team, under runs/<team key>/: myteam.json, jobs.json, grid/ (one-on-one cells for the planner), starts_*.jsonl, out_*/.
-  env: TS_EG_VALUE (value weights, default pssim/egvalue5.json: 4v4 self-play, second round), TS_ANTICIPATE (default 1), TS_PARALLEL (teams at once, default 1), TS_THREADS (threads each)
+  env: TS_SIM (sim setup, see SIMS), TS_PERISH=real (Perish trap from real data, see perish_stock.py), TS_EG_VALUE (value weights, default pssim/egvalue5.json: 4v4 self-play, second round), TS_ANTICIPATE (default 1), TS_PARALLEL (teams at once, default 1), TS_THREADS (threads each)
 """
 import json, os, sys, hashlib, subprocess, time, shutil
 from concurrent.futures import ThreadPoolExecutor
@@ -34,6 +34,22 @@ def sim_env():
     e = dict(SIMS[sim()]['env']); e['EG_VALUE'] = os.environ.get('TS_EG_VALUE', os.path.join(PS, SIMS[sim()]['eg']))
     if 'TS_ANTICIPATE' in os.environ: e['BATTLE_ANTICIPATE'] = os.environ['TS_ANTICIPATE']
     return e
+
+# Perish trap from real data (TS_PERISH=real; user, 2026-10-05; table from perish_stock.py): its 6 jobs are skipped and the
+# archetype is scored at the real regional rate that teams of our team's archetype had against Perish. Perish is the last
+# archetype, so the other 54 jobs keep their indices (and their paired seeds).
+PERISH = 'Perish trap'
+assert ARCHS[-1] == PERISH
+def perish_real(): return os.environ.get('TS_PERISH') == 'real'
+def live_archs(): return [a for a in ARCHS if not (perish_real() and a == PERISH)]
+_STOCK = {}
+def perish_stock(species):
+    """real per-game win rate vs Perish for a team of these species (pssim/pro_replays.arch labels, as in archmatch.py)"""
+    if not _STOCK:
+        _STOCK.update(json.load(open(os.path.join(HERE, 'perish_stock.json'))))
+        if PS not in sys.path: sys.path.insert(0, PS)
+    from pro_replays import arch
+    return _STOCK['rate'].get(arch(list(species)), _STOCK['pooled'])
 
 def team_key(gids): return hashlib.md5('|'.join(sorted(gids)).encode()).hexdigest()[:12]
 
@@ -70,10 +86,14 @@ def prepare(gids, fixed=None, label=''):
 def run_team(gids, per_job, seed0, threads, fixed=None, label=''):
     d = prepare(gids, fixed, label)
     tag = f'{seed0}_{per_job}'
-    starts, out = os.path.join(d, f'starts_{tag}.jsonl'), os.path.join(d, f'out_{out_tag(seed0, per_job)}')
+    jobs_f, sfx = os.path.join(d, 'jobs.json'), ''
+    if perish_real():                                   # only the live archetypes' jobs (a prefix of jobs.json)
+        jobs_f, sfx = os.path.join(d, 'jobs_live.json'), '_live'
+        json.dump(json.load(open(os.path.join(d, 'jobs.json')))[:len(live_archs()) * P.K], open(jobs_f, 'w'), indent=0)
+    starts, out = os.path.join(d, f'starts_{tag}{sfx}.jsonl'), os.path.join(d, f'out_{out_tag(seed0, per_job)}')
     env = dict(os.environ, MYTEAM=os.path.join(d, 'myteam.json'))
     if not os.path.exists(starts):
-        subprocess.run(['node', '../native/battle_starts.js', os.path.join(d, 'jobs.json'), starts + '.tmp', str(per_job), str(seed0)],
+        subprocess.run(['node', '../native/battle_starts.js', jobs_f, starts + '.tmp', str(per_job), str(seed0)],
                        cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL)
         os.replace(starts + '.tmp', starts)
     env.update(sim_env(), GRID_DIR=os.path.join(d, 'grid'))
@@ -100,13 +120,17 @@ def run_jobs(gids, jobs, per_job, seed0, threads, label):
 
 def read(d, tag):
     jobs = json.load(open(os.path.join(d, 'jobs.json')))
-    per = {}
+    live = live_archs(); per = {}
     for j, job in enumerate(jobs):
+        if job['arch'] not in live: continue
         r = json.load(open(os.path.join(d, f'out_{tag}', f'{j}.json')))
         vs = [row['v'] for row in r['rows'] if not row.get('unsupported')]
         per[j] = (sum(vs), len(vs))
     score, games, by_arch = 0.0, 0, {}
     for arch in ARCHS:
+        if arch not in live:
+            by_arch[arch] = perish_stock(json.load(open(os.path.join(d, 'myteam.json'))))
+            score += P.ARCH_SHARE[arch] * by_arch[arch]; continue
         shares = P.pair_shares(arch); num = den = 0.0
         for k in range(P.K):
             j = ARCHS.index(arch) * P.K + k; s, n = per[j]; games += n
@@ -119,9 +143,10 @@ def search_team(gids, seed0, threads, K=None, sp=1):
     """bring search: battle the outcome-fitted model's top K (lead, back) choices per archetype, sp games per opposing lead pair,
     and keep each archetype's best. Returns the chosen brings and their (selection-biased) results, laid out as the usual 60 jobs."""
     K = K or int(os.environ.get('TS_BRING_K', 3))
-    R = {a: P.ranked_outcome(gids, a)[:K] for a in ARCHS}
+    live = live_archs()
+    R = {a: P.ranked_outcome(gids, a)[:K] for a in live}
     jobs, meta = [], []
-    for a in ARCHS:
+    for a in live:
         for c, (lead, back) in enumerate(R[a]):
             for k in range(P.K):
                 jobs.append(dict(arch=a, k=k, lead=[G[g]['species'] for g in lead], back=[G[g]['species'] for g in back])); meta.append((a, c, k))
@@ -135,11 +160,11 @@ def search_team(gids, seed0, threads, K=None, sp=1):
             s_, n_ = val[(a, c, k)]
             if n_: num += sh[k] * s_ / n_; den += sh[k]
         return num / den if den else 0.0
-    best = {a: max(range(len(R[a])), key=lambda c: arch_v(a, c)) for a in ARCHS}
-    per = {ARCHS.index(a) * P.K + k: val[(a, best[a], k)] for a in ARCHS for k in range(P.K)}
-    by_arch = {a: arch_v(a, best[a]) for a in ARCHS}
+    best = {a: max(range(len(R[a])), key=lambda c: arch_v(a, c)) for a in live}
+    per = {ARCHS.index(a) * P.K + k: val[(a, best[a], k)] for a in live for k in range(P.K)}
+    by_arch = {a: arch_v(a, best[a]) if a in live else perish_stock([G[g]['species'] for g in gids]) for a in ARCHS}
     return dict(score=sum(P.ARCH_SHARE[a] * by_arch[a] for a in ARCHS) / sum(P.ARCH_SHARE.values()), by_arch=by_arch, per_job=per,
-                games=sum(n for _, n in val.values()), chosen={a: R[a][best[a]] for a in ARCHS}, rank={a: best[a] + 1 for a in ARCHS})
+                games=sum(n for _, n in val.values()), chosen={a: R[a][best[a]] for a in live}, rank={a: best[a] + 1 for a in live})
 
 def parallel(fn, items, label):
     par = int(os.environ.get('TS_PARALLEL', 1)); done = [0]; t0 = time.time()

@@ -14,6 +14,12 @@ This folder is the machinery behind the **Trick Room Six** sheet (Pokémon Champ
   dependencies, build output, results and other large generated files, local binaries, and data with names (game recordings, replay logs,
   scraped tournament pages). Commits use the no-reply email in the repo's git config. License: MIT (`LICENSE`); Showdown's notice, data
   sources and the trademark line are in `NOTICE.md`.
+- **Current battle-sim setup (final as of 2026-10-05, for every team).** From `pssim/`:
+  `DP2=1 RACE=1 CALC_DATA=../native/champions_data.json BATTLE_ANTICIPATE=1 EG_VALUE=egvalue9.json GRID_DIR=<the team's generic grid>
+  ../native/champ/bin/champ-battle-v12 battle ../native/engine_data_spot.json <starts.jsonl> <outdir> <threads>`
+  (source of the binary: `native/champ/src_battle_v12.tar.gz`). Perish matchups: use real-data rates, not the sim. Why and how it was
+  tested: the last bullets of "Double Protect, real-game value weights" below. Version 16 of the sheet still shows numbers from the old
+  setup (champ-battle-v4 + egvalue5).
 - Published sheet: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6 (Version 16 as of 2026-10-04; the sections below record each version). The page source is `trsheet/tr-sheet.html`.
 - Do not touch the older sheet "Low-Variance Six" (https://claude.ai/artifact/DEF8ycjXrKGXokgH26he9A).
 - The player plays on mobile, prefers low downside variance, and wants accurate, battle-useful content. He has a math and poker/game-theory background, so exact reasoning is welcome. Give short status updates during long runs.
@@ -460,3 +466,11 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
   - Head-to-head on the TR six, egvalue9 vs egvalue8 (`ARMS=h2h_arms9.txt LOG=h2h9.log ./h2h_run.sh`, results/h2h9_report.txt; baseline
     egvalue8 both sides 70.4): egvalue9 mine 72.9 (+2.5 +- 1.7); egvalue9 theirs 72.3 (+1.9 +- 1.9); both 72.9; general intercept on both
     72.6 (-0.3 +- 2.5 vs the TR-six intercept). The pooled slopes play as well on the TR six, and the intercept does not matter there.
+  - Team search's checks of egvalue9 (teamsearch/intercept_test.py, simreal.py; 2,400 games per arm on its ten teams): each team's own
+    intercept vs the general one changes scores by 2.1 points on average with no pattern (rank correlation 0.90), so one general file;
+    matchup error against real regional results over the nine non-Perish archetypes is 0.26 log-odds (v3 0.26, v8 0.25): unchanged.
+    The remaining error has the same shape in every setup (Rain, the Trick Room archetypes and Rain + Sun 0.3-0.4 too hard as opponents;
+    Tailwind and Balance 0.25-0.33 too easy) and probably lives in the replay archetype models (leads, brings), not in the value.
+  - **Final setup: champ-battle-v12 + egvalue9.json + RACE=1 + DP2=1 + anticipation** (see the top of this file). What it is: status and
+    Tailwind weights from real games; a damage-race feature; a two-turn check on second Protects; slopes fitted on eleven teams. What it
+    is not: it cannot play Perish trap, and absolute matchup win rates carry about 6 points of error per archetype.

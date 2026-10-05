@@ -82,10 +82,10 @@ fn move_type(b: &Battle, m: MonRef, mid: Id) -> Id {
 }
 thread_local! {
     /// (attacking type, defender's types) -> None if immune, else the clamped effectiveness exponent (speed only: same numbers as before)
-    static TEFF: std::cell::RefCell<FxMap<(Id, Id, Id, Id), Option<i64>>> = std::cell::RefCell::new(FxMap::default());
+    static TEFF: std::cell::RefCell<FxMap<(PId, PId, PId, PId), Option<i64>>> = std::cell::RefCell::new(FxMap::default());
     /// grid name of a foe (base species, is Mega, item) and grid cells ((Trick Room grid?, foe key, my base species) -> cell)
-    static GFOE: std::cell::RefCell<FxMap<(Id, bool, Id), Option<String>>> = std::cell::RefCell::new(FxMap::default());
-    static GCELL: std::cell::RefCell<FxMap<(bool, Id, bool, Id, Id), Option<f64>>> = std::cell::RefCell::new(FxMap::default());
+    static GFOE: std::cell::RefCell<FxMap<(PId, bool, PId), Option<String>>> = std::cell::RefCell::new(FxMap::default());
+    static GCELL: std::cell::RefCell<FxMap<(bool, PId, bool, PId, PId), Option<f64>>> = std::cell::RefCell::new(FxMap::default());
 }
 fn type_edge(b: &mut Battle, att: u8, def: u8) -> f64 {
     let (a, d) = (alive(b, att), alive(b, def));
@@ -108,9 +108,10 @@ fn type_edge(b: &mut Battle, att: u8, def: u8) -> f64 {
             for &ty in &atk {
                 if ty == "Ground" && lev { continue; }
                 let e = TEFF.with(|c| {
-                    if let Some(v) = c.borrow().get(&(ty, key3.0, key3.1, key3.2)) { return *v; }
+                    let k = (PId(ty), PId(key3.0), PId(key3.1), PId(key3.2));
+                    if let Some(v) = c.borrow().get(&k) { return *v; }
                     let v = if dtypes.iter().any(|t| b.dex.immune_type(ty, &[*t])) { None } else { Some(dtypes.iter().map(|t| b.dex.effectiveness(ty, t)).sum::<i64>().clamp(-2, 2)) };
-                    c.borrow_mut().insert((ty, key3.0, key3.1, key3.2), v); v });
+                    c.borrow_mut().insert(k, v); v });
                 if let Some(e) = e { best = best.max(e); }
             }
         } else {
@@ -144,14 +145,14 @@ fn grid_feats(b: &Battle, cfg: &Cfg) -> [f64; 2] {
     if g.is_empty() { return [0.0, 0.0]; }
     // names and cells are memoised per thread (the grid is fixed for the run), so no strings are built after the first lookup
     let mine: Vec<Id> = alive(b, 0).iter().map(|m| base_name(b, *m)).collect();
-    let foes: Vec<(Id, bool, Id)> = alive(b, 1).iter().filter_map(|m| {
-        let key = (base_name(b, *m), b.dex.species.get(b.p(*m).species).map(|s| s.is_mega).unwrap_or(false), b.p(*m).item);
+    let foes: Vec<(PId, bool, PId)> = alive(b, 1).iter().filter_map(|m| {
+        let key = (PId(base_name(b, *m)), b.dex.species.get(b.p(*m).species).map(|s| s.is_mega).unwrap_or(false), PId(b.p(*m).item));
         let ok = GFOE.with(|c| { if let Some(v) = c.borrow().get(&key) { return v.is_some(); }
             let v = gname(b, cfg, *m); let r = v.is_some(); c.borrow_mut().insert(key, v); r });
         if ok { Some(key) } else { None } }).collect();
     if mine.is_empty() || foes.is_empty() { return [0.0, 0.0]; }
-    let cell = |f: &(Id, bool, Id), mi: Id| -> Option<f64> {
-        let key = (tr, f.0, f.1, f.2, mi);
+    let cell = |f: &(PId, bool, PId), mi: Id| -> Option<f64> {
+        let key = (tr, f.0, f.1, f.2, PId(mi));
         GCELL.with(|c| { if let Some(v) = c.borrow().get(&key) { return *v; }
             let fname = GFOE.with(|x| x.borrow().get(f).cloned().flatten()).unwrap_or_default();
             let v = g.get(&format!("{}|{}", fname, mi.split("-Mega").next().unwrap())).copied();
@@ -207,8 +208,8 @@ const RACE_T: usize = 3;
 /// (Eruption / Water Spout for the attacker; Super Fang family / Hard Press, else full-HP Multiscale, for the target). Exact, so games
 /// are identical with and without it (RACE_NOCACHE=1 turns it off for that check).
 #[derive(Hash, PartialEq, Eq)]
-struct DKey { mv: Id, a: (Id, Id, Id, Id), d: (Id, Id, Id, Id), ab: [i64; 5], db: [i64; 5], ast: [i64; 6], dst: [i64; 6], hp_a: (i64, i64), hp_d: (i64, i64),
-              wx: Id, ter: Id, scr: u8, spread: bool }
+struct DKey { mv: PId, a: (PId, PId, PId, PId), d: (PId, PId, PId, PId), ab: [i64; 5], db: [i64; 5], ast: [i64; 6], dst: [i64; 6], hp_a: (i64, i64), hp_d: (i64, i64),
+              wx: PId, ter: PId, scr: u8, spread: bool }
 fn nocache() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("RACE_NOCACHE").is_ok()) }
 thread_local! { static DCACHE: std::cell::RefCell<FxMap<DKey, Option<i64>>> = std::cell::RefCell::new(FxMap::default()); }
 fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 2] {
@@ -218,6 +219,8 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 2] {
     let cmon = |b: &Battle, m: MonRef| { let p = b.p(m); crate::calc::Mon { species: p.species.to_string(), item: p.item.to_string(), ability: p.ability.to_string(),
         nature: p.nature.to_string(), sp: [0; 6], boosts: [p.boosts[0], p.boosts[1], p.boosts[2], p.boosts[3], p.boosts[4]], hp: p.hp, maxhp: p.maxhp, status: p.status.to_string() } };
     let screens = |b: &Battle, s: u8| -> Vec<String> { ["reflect", "lightscreen", "auroraveil"].iter().filter(|k| find(&b.sides[s as usize].side_conditions, k).is_some()).map(|k| k.to_string()).collect() };
+    // each side's screens once, as the memo's bitmask (the string list is only built on a memo miss)
+    let scr_bits: [u8; 2] = std::array::from_fn(|s| screens(b, s as u8).iter().fold(0u8, |m, x| m | match x.as_str() { "reflect" => 1, "lightscreen" => 2, _ => 4 }));
     let dur = |e: Option<&EState>| e.map(|x| x.duration.unwrap_or(5)).unwrap_or(0) as usize;
     let tr_left = dur(find(&b.field.pseudo, "trickroom"));
     let tw_left = [dur(find(&b.sides[0].side_conditions, "tailwind")), dur(find(&b.sides[1].side_conditions, "tailwind"))];
@@ -241,17 +244,16 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 2] {
                 for &j in tgts {
                     if !cd.species.contains_key(b.p(units[j]).species) { continue; }
                     let (pa, pd) = (b.p(units[i]), b.p(units[j]));
-                    let scr = screens(b, side(j));
                     let hp_a = if mid == "eruption" || mid == "waterspout" { (pa.hp, pa.maxhp) } else { (0, 0) };
                     let hp_d = if ["hardpress", "superfang", "ruination"].contains(&mid) { (pd.hp, pd.maxhp) } else { ((pd.hp >= pd.maxhp) as i64, 0) };
-                    let key = DKey { mv: mid, a: (pa.species, pa.item, pa.ability, pa.status), d: (pd.species, pd.item, pd.ability, pd.status),
+                    let key = DKey { mv: PId(mid), a: (PId(pa.species), PId(pa.item), PId(pa.ability), PId(pa.status)), d: (PId(pd.species), PId(pd.item), PId(pd.ability), PId(pd.status)),
                         ab: [pa.boosts[0], pa.boosts[1], pa.boosts[2], pa.boosts[3], pa.boosts[4]], db: [pd.boosts[0], pd.boosts[1], pd.boosts[2], pd.boosts[3], pd.boosts[4]],
-                        ast: pa.stored, dst: pd.stored, hp_a, hp_d, wx: b.field.weather, ter: b.field.terrain,
-                        scr: scr.iter().fold(0u8, |m, x| m | match x.as_str() { "reflect" => 1, "lightscreen" => 2, _ => 4 }), spread };
+                        ast: pa.stored, dst: pd.stored, hp_a, hp_d, wx: PId(b.field.weather), ter: PId(b.field.terrain),
+                        scr: scr_bits[side(j) as usize], spread };
                     let dmg = DCACHE.with(|c| {
                         if nocache() { c.borrow_mut().clear(); }
                         if let Some(v) = c.borrow().get(&key) { return *v; }
-                        let f = crate::calc::Field { weather: b.field.weather.to_string(), terrain: b.field.terrain.to_string(), screens: scr.clone(), spread, helping: false };
+                        let f = crate::calc::Field { weather: b.field.weather.to_string(), terrain: b.field.terrain.to_string(), screens: screens(b, side(j)), spread, helping: false };
                         let v = crate::calc::damage(cd, &cmon(b, units[i]), &cmon(b, units[j]), mid, &f, 7, false, &pa.stored, &pd.stored);
                         let mut m = c.borrow_mut(); if m.len() > 2_000_000 { m.clear(); } m.insert(key, v); v });
                     if let Some(dmg) = dmg { out[j] = dmg as f64 * acc * hits; }

@@ -46,7 +46,7 @@ pub struct EventCtx { pub id: Id, pub target: Tgt, pub source: Option<MonRef>, p
 
 #[derive(Clone, Debug)]
 pub struct Handler {
-    pub eff: Eff, pub etype: EType, pub cb: Id, pub holder: Holder, pub state: SLoc, pub absent: bool, pub cval: Option<CVal>, pub f: Option<HFn>,
+    pub eff: Eff, pub d: &'static EffData, pub etype: EType, pub cb: Id, pub holder: Holder, pub state: SLoc, pub absent: bool, pub cval: Option<CVal>, pub f: Option<HFn>,
     pub order: Option<f64>, pub priority: f64, pub speed: f64, pub sub_order: f64, pub effect_order: f64, pub index: Option<usize>, pub target: Option<MonRef>,
 }
 
@@ -162,6 +162,15 @@ impl Battle {
         s
     }
 
+    /// effect data of a pokemon's current ability / item / status through its per-pokemon cache (valid only while the cached
+    /// entry's id is the pokemon's current id; otherwise looked up again and stored)
+    #[inline] fn cached_eff(&self, c: &DCache, kind: Kind, want: Id) -> &'static EffData {
+        if let Some(d) = c.get() { if (d.id.as_ptr() == want.as_ptr() && d.id.len() == want.len()) || d.id == want { return d; } }
+        let d = self.dex.eff(kind, want); c.set(d); d
+    }
+    #[inline] pub fn ab_data(&self, m: MonRef) -> &'static EffData { let p = self.p(m); self.cached_eff(&p.ab_d, Kind::Ability, p.ability) }
+    #[inline] pub fn it_data(&self, m: MonRef) -> &'static EffData { let p = self.p(m); self.cached_eff(&p.it_d, Kind::Item, p.item) }
+    #[inline] pub fn st_data(&self, m: MonRef) -> &'static EffData { let p = self.p(m); self.cached_eff(&p.st_d, Kind::Cond, p.status) }
     pub fn etype_of(&self, e: &Eff) -> EType {
         match e.kind { Kind::Move => EType::Move, Kind::Ability => EType::Ability, Kind::Item => EType::Item, Kind::Species => EType::Pokemon,
                        Kind::Cond => self.dex.conds.get(e.id).map(|c| c.etype).unwrap_or(EType::Condition) }
@@ -172,9 +181,9 @@ impl Battle {
     pub fn ignoring_ability(&self, m: MonRef) -> bool {
         let p = self.p(m);
         if !p.is_active { return true; }
-        let ab = self.dex.eff(Kind::Ability, p.ability);
-        if ab.flag("notransform") && p.transformed { return true; }
-        if ab.flag("cantsuppress") { return false; }
+        let ab = self.ab_data(m);
+        if ab.notransform && p.transformed { return true; }
+        if ab.cantsuppress { return false; }
         if find(&p.volatiles, "gastroacid").is_some() { return true; }
         if p.item == "abilityshield" && !self.ignoring_item(m) || p.ability == "neutralizinggas" { return false; }
         for o in self.all_active() {
@@ -187,8 +196,7 @@ impl Battle {
         let p = self.p(m);
         if !p.is_active { return true; }
         if find(&p.volatiles, "embargo").is_some() || find(&self.field.pseudo, "magicroom").is_some() { return true; }
-        let it = self.dex.eff(Kind::Item, p.item);
-        !it.b("ignoreKlutz") && p.ability == "klutz" && !self.ignoring_ability(m)
+        p.ability == "klutz" && !self.it_data(m).ignore_klutz && !self.ignoring_ability(m)
     }
     pub fn has_ability(&self, m: MonRef, a: &str) -> bool { self.p(m).ability == a && !self.ignoring_ability(m) }
     pub fn has_item(&self, m: MonRef, i: &str) -> bool { self.p(m).item == i && !self.ignoring_item(m) }
@@ -201,7 +209,7 @@ impl Battle {
     pub fn suppressing_weather(&self) -> bool {
         for m in (0..2u8).flat_map(|s| self.side_active(s)) {
             let p = self.p(m);
-            if !p.fainted && !self.ignoring_ability(m) && self.dex.eff(Kind::Ability, p.ability).b("suppressWeather") && !p.ability_state.has("ending") { return true; }
+            if !p.fainted && self.ab_data(m).suppress_weather && !self.ignoring_ability(m) && !p.ability_state.has("ending") { return true; }
         }
         false
     }
@@ -210,21 +218,20 @@ impl Battle {
     // ---------- handler discovery ----------
     /// getCallback: the effect's on<Event> callback; for abilities/items an absent onSwitchIn falls back to onStart (with the sort keys
     /// still taken from onSwitchIn*, e.g. the seeds' onSwitchInPriority). Absent entries (sort keys only) are returned for getKey use.
-    fn get_callback(&self, holder_is_mon: bool, eff: &EffData, kind: Kind, cb: Id) -> Option<(Id, CbInfo)> {
-        let direct = eff.cbs.get(cb);
-        if let Some(c) = direct { if !c.absent || c.cval.is_some() { return Some((cb, c.clone())); } }
-        if holder_is_mon && cb == "onSwitchIn" && !eff.cbs.contains_key("onAnySwitchIn") &&
+    fn get_callback(&self, holder_is_mon: bool, eff: &EffData, kind: Kind, cb: Cb) -> Option<(Id, CbInfo)> {
+        let direct = eff.cbi(cb.i);
+        if let Some(c) = direct { if !c.absent || c.cval.is_some() { return Some((cb.name, c.clone())); } }
+        if holder_is_mon && cb.switch_in && eff.cbi(self.dex.i_on_any_switch_in).is_none() &&
            (matches!(kind, Kind::Ability | Kind::Item) || (eff.etype == EType::Status && (eff.id.starts_with("ability:") || eff.id.starts_with("item:")))) {
-            if let Some(st) = eff.cbs.get("onStart") { if !st.absent {
+            if let Some(st) = eff.cbi(self.dex.i_on_start) { if !st.absent {
                 let mut c = st.clone();
                 let keys = direct.cloned().unwrap_or_default(); c.order = keys.order; c.priority = keys.priority; c.sub_order = keys.sub_order;
-                return Some((id("onStart"), c));
+                return Some((self.dex.on_start, c));
             } }
         }
-        direct.map(|c| (cb, c.clone()))
+        direct.map(|c| (cb.name, c.clone()))
     }
-    fn mk_handler(&self, eff: Eff, cb: Id, called: Id, info: Option<&CbInfo>, holder: Holder, state: SLoc) -> Handler {
-        let d = self.dex.eff(eff.kind, eff.id);
+    fn mk_handler(&self, eff: Eff, d: &'static EffData, cb: Id, called: Id, info: Option<&CbInfo>, holder: Holder, state: SLoc) -> Handler {
         let etype = self.etype_of(&eff);
         let (absent, cval, order, priority, mut sub, f) = match info { Some(c) => (c.absent, c.cval.clone(), c.order, c.priority, c.sub_order, c.f), None => (true, None, None, 0.0, 0.0, None) };
         // resolvePriority: default subOrder by effect type
@@ -245,90 +252,98 @@ impl Battle {
                 speed -= idx / 4.0;
             }
         }
-        Handler { eff, etype, cb: called, holder, state, absent, cval, f, order: order.filter(|o| *o != 0.0), priority, speed, sub_order: sub, effect_order, index: None, target: None }
+        Handler { eff, d, etype, cb: called, holder, state, absent, cval, f, order: order.filter(|o| *o != 0.0), priority, speed, sub_order: sub, effect_order, index: None, target: None }
     }
-    pub fn find_pokemon_handlers(&self, m: MonRef, cb: Id, get_key: bool, out: &mut Vec<Handler>) {
-        if !get_key && cb != "onSwitchIn" && !self.dex.cb_names.contains(cb) { return; }
+    pub fn find_pokemon_handlers(&self, m: MonRef, cb: Cb, get_key: bool, out: &mut Vec<Handler>) {
+        if !get_key && !cb.switch_in && cb.i == NO_CB { return; }
         let p = self.p(m);
         let hm = Holder::Mon(m);
+        let skip = |d: &EffData| !get_key && !cb.switch_in && !d.has(cb.i);   // no callback, no sort keys wanted, no onStart stand-in
         if !p.status.is_empty() {
-            let d = self.dex.eff(Kind::Cond, p.status);
+            let d = self.st_data(m);
+            if skip(d) { } else {
             let c = self.get_callback(true, d, Kind::Cond, cb);
             if c.is_some() || (get_key && p.status_state.duration.unwrap_or(0) != 0) {
-                out.push(self.mk_handler(Eff::cond(p.status), cb, c.as_ref().map(|x| x.0).unwrap_or(cb), c.as_ref().map(|x| &x.1), hm, SLoc::Status(m)));
-            }
+                out.push(self.mk_handler(Eff::cond(p.status), d, cb.name, c.as_ref().map(|x| x.0).unwrap_or(cb.name), c.as_ref().map(|x| &x.1), hm, SLoc::Status(m)));
+            } }
         }
         for (vid, st) in &p.volatiles {
             let d = self.dex.eff(Kind::Cond, vid);
+            if skip(d) { continue; }
             let c = self.get_callback(true, d, Kind::Cond, cb);
             if c.is_some() || (get_key && st.duration.unwrap_or(0) != 0) {
-                out.push(self.mk_handler(Eff::cond(vid), cb, c.as_ref().map(|x| x.0).unwrap_or(cb), c.as_ref().map(|x| &x.1), hm, SLoc::Vol(m, vid)));
+                out.push(self.mk_handler(Eff::cond(vid), d, cb.name, c.as_ref().map(|x| x.0).unwrap_or(cb.name), c.as_ref().map(|x| &x.1), hm, SLoc::Vol(m, vid)));
             }
         }
         if !p.ability.is_empty() {
-            let d = self.dex.eff(Kind::Ability, p.ability);
+            let d = self.ab_data(m);
+            if skip(d) { } else {
             let c = self.get_callback(true, d, Kind::Ability, cb);
             if c.is_some() || (get_key && p.ability_state.duration.unwrap_or(0) != 0) {
-                out.push(self.mk_handler(Eff::new(Kind::Ability, p.ability), cb, c.as_ref().map(|x| x.0).unwrap_or(cb), c.as_ref().map(|x| &x.1), hm, SLoc::Ability(m)));
-            }
+                out.push(self.mk_handler(Eff::new(Kind::Ability, p.ability), d, cb.name, c.as_ref().map(|x| x.0).unwrap_or(cb.name), c.as_ref().map(|x| &x.1), hm, SLoc::Ability(m)));
+            } }
         }
         if !p.item.is_empty() {
-            let d = self.dex.eff(Kind::Item, p.item);
+            let d = self.it_data(m);
+            if skip(d) { } else {
             let c = self.get_callback(true, d, Kind::Item, cb);
             if c.is_some() || (get_key && p.item_state.duration.unwrap_or(0) != 0) {
-                out.push(self.mk_handler(Eff::new(Kind::Item, p.item), cb, c.as_ref().map(|x| x.0).unwrap_or(cb), c.as_ref().map(|x| &x.1), hm, SLoc::Item(m)));
-            }
+                out.push(self.mk_handler(Eff::new(Kind::Item, p.item), d, cb.name, c.as_ref().map(|x| x.0).unwrap_or(cb.name), c.as_ref().map(|x| &x.1), hm, SLoc::Item(m)));
+            } }
         }
         // species callbacks: none in Champions scope
         let side = &self.sides[m.0 as usize];
         if (p.position as usize) < 2 {
             for (cid, st) in &side.slot_conditions[p.position as usize] {
                 let d = self.dex.eff(Kind::Cond, cid);
+                if skip(d) { continue; }
                 let c = self.get_callback(true, d, Kind::Cond, cb);
                 if c.is_some() || (get_key && st.duration.unwrap_or(0) != 0) {
-                    out.push(self.mk_handler(Eff::cond(cid), cb, c.as_ref().map(|x| x.0).unwrap_or(cb), c.as_ref().map(|x| &x.1), hm, SLoc::Slot(m.0, p.position, cid)));
+                    out.push(self.mk_handler(Eff::cond(cid), d, cb.name, c.as_ref().map(|x| x.0).unwrap_or(cb.name), c.as_ref().map(|x| &x.1), hm, SLoc::Slot(m.0, p.position, cid)));
                 }
             }
         }
     }
-    pub fn find_side_handlers(&self, s: u8, cb: Id, get_key: bool, custom: Option<MonRef>, out: &mut Vec<Handler>) {
-        if !get_key && !self.dex.cb_names.contains(cb) { return; }
+    pub fn find_side_handlers(&self, s: u8, cb: Cb, get_key: bool, custom: Option<MonRef>, out: &mut Vec<Handler>) {
+        if !get_key && cb.i == NO_CB { return; }
         for (cid, st) in &self.sides[s as usize].side_conditions {
             let d = self.dex.eff(Kind::Cond, cid);
+            if !get_key && !d.has(cb.i) { continue; }   // holder is a side: no onStart stand-in
             let c = self.get_callback(false, d, Kind::Cond, cb);
             if c.is_some() || (get_key && st.duration.unwrap_or(0) != 0) {
                 let holder = custom.map(Holder::Mon).unwrap_or(Holder::Side(s));
-                out.push(self.mk_handler(Eff::cond(cid), cb, c.as_ref().map(|x| x.0).unwrap_or(cb), c.as_ref().map(|x| &x.1), holder, SLoc::SideC(s, cid)));
+                out.push(self.mk_handler(Eff::cond(cid), d, cb.name, c.as_ref().map(|x| x.0).unwrap_or(cb.name), c.as_ref().map(|x| &x.1), holder, SLoc::SideC(s, cid)));
             }
         }
     }
-    pub fn find_field_handlers(&self, cb: Id, get_key: bool, custom: Option<MonRef>, out: &mut Vec<Handler>) {
-        if !get_key && !self.dex.cb_names.contains(cb) { return; }
+    pub fn find_field_handlers(&self, cb: Cb, get_key: bool, custom: Option<MonRef>, out: &mut Vec<Handler>) {
+        if !get_key && cb.i == NO_CB { return; }
         let holder = custom.map(Holder::Mon).unwrap_or(Holder::Field);
         for (cid, st) in &self.field.pseudo {
             let d = self.dex.eff(Kind::Cond, cid);
+            if !get_key && !d.has(cb.i) { continue; }
             let c = self.get_callback(false, d, Kind::Cond, cb);
             if c.is_some() || (get_key && st.duration.unwrap_or(0) != 0) {
-                out.push(self.mk_handler(Eff::cond(cid), cb, c.as_ref().map(|x| x.0).unwrap_or(cb), c.as_ref().map(|x| &x.1), holder, SLoc::Pseudo(cid)));
+                out.push(self.mk_handler(Eff::cond(cid), d, cb.name, c.as_ref().map(|x| x.0).unwrap_or(cb.name), c.as_ref().map(|x| &x.1), holder, SLoc::Pseudo(cid)));
             }
         }
         if !self.field.weather.is_empty() {
             let d = self.dex.eff(Kind::Cond, self.field.weather);
             let c = self.get_callback(false, d, Kind::Cond, cb);
             if c.is_some() || (get_key && self.field.weather_state.duration.unwrap_or(0) != 0) {
-                out.push(self.mk_handler(Eff::cond(self.field.weather), cb, c.as_ref().map(|x| x.0).unwrap_or(cb), c.as_ref().map(|x| &x.1), holder, SLoc::Weather));
+                out.push(self.mk_handler(Eff::cond(self.field.weather), d, cb.name, c.as_ref().map(|x| x.0).unwrap_or(cb.name), c.as_ref().map(|x| &x.1), holder, SLoc::Weather));
             }
         }
         if !self.field.terrain.is_empty() {
             let d = self.dex.eff(Kind::Cond, self.field.terrain);
             let c = self.get_callback(false, d, Kind::Cond, cb);
             if c.is_some() || (get_key && self.field.terrain_state.duration.unwrap_or(0) != 0) {
-                out.push(self.mk_handler(Eff::cond(self.field.terrain), cb, c.as_ref().map(|x| x.0).unwrap_or(cb), c.as_ref().map(|x| &x.1), holder, SLoc::Terrain));
+                out.push(self.mk_handler(Eff::cond(self.field.terrain), d, cb.name, c.as_ref().map(|x| x.0).unwrap_or(cb.name), c.as_ref().map(|x| &x.1), holder, SLoc::Terrain));
             }
         }
     }
     pub fn find_event_handlers(&self, target: &Tgt, n: &EvNames, source: Option<MonRef>) -> Vec<Handler> {
-        let mut hs = Vec::with_capacity(8);
+        let mut hs = Vec::new();   // most events find nothing: allocate only on the first push
         if let Tgt::Mons(list) = target {
             for (i, t) in list.iter().enumerate() {
                 if let Some(m) = t {
@@ -340,23 +355,24 @@ impl Battle {
             return hs;
         }
         let prefixed = n.prefixed;
-        let on = n.on;
+        let on = n.on_c;
         let mut tside: Option<u8> = match target { Tgt::Side(s) => Some(*s), _ => None };
         let bubble = tside.is_some();
         if let Tgt::Mon(m) = target {
             if self.p(*m).is_active || source.map(|s| self.p(s).is_active).unwrap_or(false) {
                 self.find_pokemon_handlers(*m, on, false, &mut hs);
                 if prefixed {
-                    let (ally, any, foe) = (n.ally, n.any, n.foe);
-                    for a in self.allies_and_self(*m) { self.find_pokemon_handlers(a, ally, false, &mut hs); self.find_pokemon_handlers(a, any, false, &mut hs); }
-                    for f in self.foes(*m) { self.find_pokemon_handlers(f, foe, false, &mut hs); self.find_pokemon_handlers(f, any, false, &mut hs); }
+                    let (ally, any, foe) = (n.ally_c, n.any_c, n.foe_c);
+                    // a scan for a name no effect defines returns at once, so skip the loops when both names are such
+                    if ally.i != NO_CB || any.i != NO_CB { for a in self.allies_and_self(*m) { self.find_pokemon_handlers(a, ally, false, &mut hs); self.find_pokemon_handlers(a, any, false, &mut hs); } }
+                    if foe.i != NO_CB || any.i != NO_CB { for f in self.foes(*m) { self.find_pokemon_handlers(f, foe, false, &mut hs); self.find_pokemon_handlers(f, any, false, &mut hs); } }
                 }
                 tside = Some(m.0);
             }
         }
-        if let (Some(s), true) = (source, prefixed) { self.find_pokemon_handlers(s, n.source, false, &mut hs); }
+        if let (Some(s), true) = (source, prefixed) { self.find_pokemon_handlers(s, n.source_c, false, &mut hs); }
         if let Some(ts) = tside {
-            let (foe, any) = (n.foe, n.any);
+            let (foe, any) = (n.foe_c, n.any_c);
             for s in 0..2u8 {
                 if bubble {
                     for a in self.side_active(s) {
@@ -453,7 +469,7 @@ impl Battle {
     }
     fn handler_allowed(&self, h: &Handler, n: &EvNames) -> bool {
         if h.etype == EType::Status { if let Holder::Mon(m) = h.holder { if self.p(m).status != h.eff.id { return false; } } }
-        if h.etype == EType::Ability && self.active_move.is_some() && self.effdata(&h.eff).flag("breakable") { if let Holder::Mon(m) = h.holder { if self.suppressing_ability(Some(m)) { return false; } } }
+        if h.etype == EType::Ability && self.active_move.is_some() && h.d.breakable { if let Holder::Mon(m) = h.holder { if self.suppressing_ability(Some(m)) { return false; } } }
         if let Holder::Mon(m) = h.holder {
             if !n.start && !n.switch_in && !n.take_item && h.etype == EType::Item && self.ignoring_item(m) { return false; }
             else if !n.end && h.etype == EType::Ability && self.ignoring_ability(m) { return false; }
@@ -478,15 +494,19 @@ impl Battle {
             return (match relay { RV::Undef | RV::Null => RV::B(true), r => r }, ());
         }
         let mut hs = self.find_event_handlers(&target, n, source);
+        // nothing to run: the loop below would leave relay as it is (an integer relay through modify(n, 1) is unchanged), so return now
+        if hs.is_empty() && !on_effect {
+            return (match relay { RV::Undef | RV::Null => RV::B(true), r => r }, ());
+        }
         let mut temp_pushed = false;
         if on_effect {
             let se = src_eff.expect("onEffect without effect");
             let d = self.effdata(&se);
             let cbname = n.on;
-            if let Some(c) = d.cbs.get(cbname).filter(|c| !c.absent || c.cval.is_some()) {
+            if let Some(c) = d.cbi(n.on_c.i).filter(|c| !c.absent || c.cval.is_some()) {
                 let holder = match &target { Tgt::Mon(m) => Holder::Mon(*m), Tgt::Side(s) => Holder::Side(*s), Tgt::Field => Holder::Field, _ => Holder::Battle };
                 self.temp.push(EState::default()); temp_pushed = true;
-                let mut h = self.mk_handler(se, cbname, cbname, Some(c), holder, SLoc::Temp(self.temp.len() - 1));
+                let mut h = self.mk_handler(se, d, cbname, cbname, Some(c), holder, SLoc::Temp(self.temp.len() - 1));
                 h.absent = false;
                 hs.insert(0, h);
             }
@@ -535,19 +555,19 @@ impl Battle {
         // no callback: nothing to check or run
         let cbname = if eff.part.is_empty() { n.on } else { id(&format!("{}.on{}", eff.part, ev)) };
         let (cval, f) = if eff.part.is_empty() {
-            match d.cbs.get(cbname) { Some(i) if !i.absent || i.cval.is_some() => (i.cval.clone(), i.f), _ => return relay }
+            match d.cbi(n.on_c.i) { Some(i) if !i.absent || i.cval.is_some() => (i.cval.clone(), i.f), _ => return relay }
         } else { (None, None) };
         let etype = self.etype_of(&eff);
         if let Tgt::Mon(m) = target {
             if etype == EType::Status && self.p(m).status != eff.id { return relay; }
-            if n.switch_in && etype == EType::Ability && d.flag("breakable") && self.suppressing_ability(Some(m)) { return relay; }
+            if n.switch_in && etype == EType::Ability && d.breakable && self.suppressing_ability(Some(m)) { return relay; }
             if !n.start && !n.take_item && !n.set_ability && etype == EType::Item && self.ignoring_item(m) { return relay; }
             if !n.end && etype == EType::Ability && self.ignoring_ability(m) { return relay; }
         }
         if etype == EType::Weather && !n.field_srs && self.suppressing_weather() { return relay; }
         let mut temp_pushed = false;
         let loc = match state { Some(l) => l, None => { self.temp.push(EState::default()); temp_pushed = true; SLoc::Temp(self.temp.len() - 1) } };
-        let h = Handler { eff, etype, cb: cbname, holder: Holder::Battle, state: loc, absent: false, cval, f, order: None, priority: 0.0, speed: 0.0,
+        let h = Handler { eff, d, etype, cb: cbname, holder: Holder::Battle, state: loc, absent: false, cval, f, order: None, priority: 0.0, speed: 0.0,
                           sub_order: 0.0, effect_order: 0.0, index: None, target: None };
         let parent = self.event.take();
         self.event = Some(EventCtx { id: n.ev, target: target.clone(), source, effect: src_eff, modifier: f64::NAN });

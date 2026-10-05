@@ -23,8 +23,9 @@ This folder is the machinery behind the **Trick Room Six** sheet (Pokémon Champ
   pushed commit, added lines and messages); on 2026-10-05 the latter finds one thing to purge, an AWS key-pair name in `cc65069`.
 - **Current battle-sim setup (final as of 2026-10-05, for every team; amended the same day: v13 and `RACE_TIES=avg`).** From `pssim/`:
   `RACE_TIES=avg DP2=1 RACE=1 CALC_DATA=../native/champions_data.json BATTLE_ANTICIPATE=1 EG_VALUE=egvalue9.json GRID_DIR=<the team's
-  generic grid> ../native/champ/bin/champ-battle-v13 battle ../native/engine_data_spot.json <starts.jsonl> <outdir> <threads>`
-  (source of the binary: `native/champ/src_battle_v13.tar.gz`; without `RACE_TIES` v13 plays v12's games). Perish matchups: use
+  generic grid> ../native/champ/bin/champ-battle-v16 battle ../native/engine_data_spot.json <starts.jsonl> <outdir> <threads>`
+  (source of the binary: `native/champ/src_battle_v16.tar.gz`; v13, v14, v15 and v16 play identical games, v16 about 2.3x faster than
+  v13; without `RACE_TIES` they play v12's games). Perish matchups: use
   real-data rates, not the sim. Why and how it was tested: the last bullets of "Double Protect, real-game value weights" below. Version 16
   of the sheet still shows numbers from the old setup (champ-battle-v4 + egvalue5).
 - Published sheet: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6 (Version 16 as of 2026-10-04; the sections below record each version). The page source is `trsheet/tr-sheet.html`.
@@ -515,3 +516,21 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     32 seeds, one thread: flat 216 s, staged 45 s (4.8x; flat 8 seeds took 55 s). Against flat 32: position value within 0.0003,
     values of options in the mix within 0.002, the value of the move actually played within 0.0013, the same top option for every side
     (flat 8 agreed on 30 of 40 and was off by up to 0.07). Options outside the contention band keep their 2-seed values (noisy, by design).
+  - **champ-battle-v16 = v15 with a faster engine, same games** (2026-10-05, 8:30 pm). Profile of v15: handler discovery
+    (`find_event_handlers`) was 57% of all time, nearly all of it hashing and comparing strings: `cb_names.contains` on every
+    prefixed callback name (27%), `Dex::eff` lookups by id, `cbs.get` per effect, plus serde_json flag reads in the suppression checks.
+    Changes, all in `native/champ/src` (dex.rs, battle.rs, state.rs, plan.rs, sim.rs): every callback name gets a dense index at load
+    (123 names) and each effect a 128-bit mask plus an indexed table, so a scan is a bit test and discovery for a name no effect defines
+    (most prefixed variants) costs nothing; `EvNames` carries the indexed names; `Dex::eff` and `Dex::mv` are cached per thread by the
+    id's address (ids are interned, a `&'static str` never changes); each Pokemon caches the effect data of its ability, item and status,
+    validated against the current id on every read so it cannot go stale (`DCache`, an atomic pointer so the planner's threads may
+    share a start position); the breakable / cantsuppress / notransform / ignoreKlutz / suppressWeather flags are precomputed; an event
+    that finds no handler returns before building its context; the ally/foe loops are skipped when no effect defines those names; the
+    planner's memo keys (damage race, type effectiveness, grid cells) hash ids by address (`PId`: a different address only misses the
+    memo), and the race reads each side's screens once instead of allocating a string list per target. Checked: `champ turn` on all
+    6,900 Showdown positions in all four RNG modes still exact; 120 battles across the ten archetypes (results, per-turn states,
+    features, Protect counters, logs) identical to v15; 20 replay positions through `evalpos` (EVAL_ADAPT, 32 seeds, the Eval bar's
+    settings) identical in every field. Speed: engine benchmark 77.5 -> 27.2 us/turn (-65%); 20 battles on one Mac thread 64.5 s ->
+    29.6 s (-54%); the 120-battle set on three threads 145 s -> 59 s (-60%); evalpos -61%. What is left: the remaining event overhead
+    (`run_event` bookkeeping, `evn` lookups, the Boosts/Types vectors in `get_stat`/`get_types`) is about a quarter of run time, the
+    value function (race, type edge, grid) about a fifth, allocation about 7%.

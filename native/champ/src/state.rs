@@ -54,7 +54,21 @@ pub struct Pokemon {
     pub attacked_by: Vec<Attack>, pub stats_raised_this_turn: bool, pub stats_lowered_this_turn: bool, pub switch_flag: Option<Id>, pub force_switch_flag: bool,
     pub newly_switched: bool, pub being_called_back: bool, pub can_mega_evo: Option<Id>, pub transformed: bool,
     pub trapped: bool, pub maybe_trapped: bool, pub maybe_disabled: bool, pub maybe_locked: bool, pub skip_before_switch_out: bool,
+    /// cached effect data of the current ability / item / status (Battle::ab_data etc.): each entry is checked against the current id
+    /// before use, so it can never go stale
+    pub ab_d: DCache, pub it_d: DCache, pub st_d: DCache,
 }
+
+/// a refillable pointer to effect data, readable and writable through a shared reference (so lookups through &Battle can store it)
+/// and safe to share between the planner's threads, which only read and clone the start position
+#[derive(Default)]
+pub struct DCache(std::sync::atomic::AtomicPtr<EffData>);
+impl DCache {
+    #[inline] pub fn get(&self) -> Option<&'static EffData> { let p = self.0.load(std::sync::atomic::Ordering::Relaxed); if p.is_null() { None } else { Some(unsafe { &*p }) } }
+    #[inline] pub fn set(&self, d: &'static EffData) { self.0.store(d as *const EffData as *mut EffData, std::sync::atomic::Ordering::Relaxed); }
+}
+impl Clone for DCache { fn clone(&self) -> DCache { DCache(std::sync::atomic::AtomicPtr::new(self.0.load(std::sync::atomic::Ordering::Relaxed))) } }
+impl std::fmt::Debug for DCache { fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result { write!(f, "DCache({})", self.get().map(|d| d.id).unwrap_or("-")) } }
 
 #[derive(Clone, Debug)]
 pub struct Side {
@@ -113,6 +127,7 @@ fn mon(v: &Value, side: u8) -> Pokemon {
         id: id(m["id"].as_str().unwrap()), pp: m["pp"].as_i64().unwrap(), maxpp: m["maxpp"].as_i64().unwrap(),
         disabled: truthy_json(&m["disabled"]), disabled_hidden: m["disabled"].as_str() == Some("hidden"), disabled_source: "", used: m["used"].as_bool().unwrap_or(false) }).collect();
     Pokemon {
+        ab_d: DCache::default(), it_d: DCache::default(), st_d: DCache::default(),
         side, species: s("species"), base_species: s("baseSpecies"), set_species: id(&to_id(set["species"].as_str().unwrap())), set_item: id(&to_id(set["item"].as_str().unwrap_or(""))), nature: id(&to_id(set["nature"].as_str().unwrap_or(""))),
         evs: stats(&set["evs"]), set_ability: id(&to_id(set["ability"].as_str().unwrap_or(""))), level: v["level"].as_i64().unwrap_or(50),
         types: v["types"].as_array().unwrap().iter().map(|x| id(x.as_str().unwrap())).collect(), added_type: s("addedType"),

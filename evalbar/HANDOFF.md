@@ -37,6 +37,9 @@ Built, all in `evalbar/` (run the Python from the repo root; `common.py` finds t
   `champ-battle-v13 evalpos` with the bar's settings (`egvalue9_sym.json`, `RACE=1 RACE_TIES=avg TRSYM=1`, empty `GRID_DIR`, `EVAL_SEEDS`).
   One line per position: the one-turn equilibrium value, the static value and feature vector, and for both sides every option per slot
   with its weight and value. About 5 s per position at 8 seeds on one thread (turn 1 is the slowest), 21 s at 32 seeds.
+- `status.py`: this thread's cards on the shared progress page (http://localhost:8766, root `status_server.py`, which looks for
+  `evalbar/status.py` in the main checkout and else in the newest worktree). `engine.py run` writes the stamp a card is drawn from
+  (`out/<output>.run.json`; `EVAL_TITLE` names the card).
 - `build.py <id> acc=... engine=<evalpos output> pos=<positions>` fills the page's options panel. The published page (version 2) shows the
   demo game with the version 0 bar and the engine's options at 32 seeds.
 

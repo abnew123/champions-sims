@@ -22,7 +22,7 @@
   "Incineroar": "Incin"
  },
  "storage_key": "trsix-leads-tab",
- "grid_dir": "../../mxtr_t22",
+ "grid_dir": "../../mxtr",
  "t1": {
   "reader_w": 0.75,
   "tr_credit": "slower-four",
@@ -70,5 +70,43 @@
    "accent": "#a68cf3",
    "accent-soft": "#2a2342"
   }
- }
+ },
+ "threats": [
+  "Rillaboom",
+  "Sneasler",
+  "M-Salamence",
+  "Incineroar",
+  "Kingambit",
+  "Basculegion",
+  "M-Floette",
+  "Farigiraf",
+  "M-Golisopod",
+  "Pelipper",
+  "Indeedee-F",
+  "Gholdengo",
+  "Arcanine-H",
+  "Sylveon",
+  "Whimsicott",
+  "Archaludon",
+  "M-Tyranitar",
+  "M-Baxcalibur",
+  "Garchomp",
+  "M-Garchomp Z",
+  "Milotic",
+  "M-Charizard Y",
+  "M-Gardevoir",
+  "M-Raichu Y",
+  "M-Staraptor",
+  "M-Metagross",
+  "Volcarona",
+  "Corviknight",
+  "Dragapult",
+  "Torkoal",
+  "Hatterene",
+  "Indeedee",
+  "Armarouge",
+  "M-Gengar",
+  "Sinistcha"
+ ],
+ "built": "Version 17 (2026-10-05), not published yet"
 }

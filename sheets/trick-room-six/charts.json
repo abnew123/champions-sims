@@ -1489,7 +1489,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 66% (High Horsepower) · deals 177–209% (Eruption) · moves first · switching in wins T1, already out wins T2"
+     "t": "takes 59% (High Horsepower) · deals 177–209% (Eruption) · moves first · switching in wins T1, already out wins T2"
     },
     {
      "v": "lost",
@@ -1511,8 +1511,9 @@
      "t": "takes 217% (Wood Hammer) · deals 48–56% (Aura Sphere) · slower · switching in loses on entry, already out loses T2"
     },
     {
-     "v": "lost",
-     "t": "takes 66% (High Horsepower) · deals 177–209% (Eruption) · slower · switching in loses T1, already out loses T3"
+     "v": "roll",
+     "t": "takes 59% (High Horsepower) · deals 177–209% (Eruption) · slower · switching in loses T1, already out loses T3",
+     "p": 5
     },
     {
      "v": "lost",
@@ -1537,8 +1538,8 @@
      "t": "takes 73% (Close Combat) · deals 76–90% (Water Spout) · moves first · switching in loses T2, already out wins T3"
     },
     {
-     "v": "check",
-     "t": "takes 65% (Close Combat) · deals 100–118% (Eruption) · moves first · switching in loses, already out wins T3"
+     "v": "counter",
+     "t": "takes 58% (Close Combat) · deals 100–118% (Eruption) · moves first · switching in wins T1, already out wins T3"
     },
     {
      "v": "counter",
@@ -1561,8 +1562,9 @@
      "t": "takes 73% (Close Combat) · deals 76–90% (Water Spout) · slower · switching in loses T2, already out loses T3"
     },
     {
-     "v": "lost",
-     "t": "takes 65% (Close Combat) · deals 100–118% (Eruption) · slower · switching in loses T1, already out loses T3"
+     "v": "roll",
+     "t": "takes 58% (Close Combat) · deals 100–118% (Eruption) · slower · switching in loses T1, already out loses T3",
+     "p": 10
     },
     {
      "v": "counter",
@@ -1590,7 +1592,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 85% (Draco Meteor) · deals 45–53% (Eruption) · moves first · switching in loses T1, already out loses T2"
+     "t": "takes 92% (Draco Meteor) · deals 45–53% (Eruption) · moves first · switching in loses T1, already out loses T2"
     },
     {
      "v": "roll",
@@ -1613,7 +1615,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 85% (Draco Meteor) · deals 45–53% (Eruption) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 92% (Draco Meteor) · deals 45–53% (Eruption) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "lost",
@@ -1639,9 +1641,8 @@
      "p": 99
     },
     {
-     "v": "roll",
-     "t": "takes 32% (Flare Blitz) · deals 35–42% (Earth Power) · moves first · switching in loses T3, already out loses T4",
-     "p": 95
+     "v": "check",
+     "t": "takes 29% (Flare Blitz) · deals 35–42% (Earth Power) · moves first · switching in loses T3, already out wins T5"
     },
     {
      "v": "lost",
@@ -1663,7 +1664,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 32% (Flare Blitz) · deals 35–42% (Earth Power) · slower · switching in loses T3, already out loses T4"
+     "t": "takes 29% (Flare Blitz) · deals 35–42% (Earth Power) · slower · switching in loses T3, already out loses T5"
     },
     {
      "v": "lost",
@@ -1690,7 +1691,7 @@
     },
     {
      "v": "check",
-     "t": "takes 46% (Kowtow Cleave) · deals 154–183% (Eruption) · moves first · switching in loses, already out wins T1"
+     "t": "takes 41% (Kowtow Cleave) · deals 154–183% (Eruption) · moves first · switching in loses, already out wins T1"
     },
     {
      "v": "lost",
@@ -1714,7 +1715,7 @@
     },
     {
      "v": "check",
-     "t": "takes 46% (Kowtow Cleave) · deals 154–183% (Eruption) · slower · switching in loses T2, already out wins T2"
+     "t": "takes 41% (Kowtow Cleave) · deals 154–183% (Eruption) · slower · switching in loses T2, already out wins T2"
     },
     {
      "v": "lost",
@@ -1740,8 +1741,9 @@
      "t": "takes 95% (Last Respects) · deals 97–115% (Dark Pulse) · moves first · switching in loses T1, already out wins T1"
     },
     {
-     "v": "lost",
-     "t": "takes 99% (Wave Crash) · deals 45–53% (Eruption) · moves first · switching in loses T1, already out loses T2"
+     "v": "roll",
+     "t": "takes 88% (Wave Crash) · deals 45–53% (Eruption) · moves first · switching in loses T1, already out loses T2",
+     "p": 5
     },
     {
      "v": "check",
@@ -1763,7 +1765,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 99% (Wave Crash) · deals 45–53% (Eruption) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 88% (Wave Crash) · deals 45–53% (Eruption) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "lost",
@@ -1789,7 +1791,7 @@
     },
     {
      "v": "check",
-     "t": "takes 80% (Light of Ruin) · deals 67–80% (Eruption) · moves first · switching in loses T1, already out wins T2"
+     "t": "takes 86% (Light of Ruin) · deals 67–80% (Eruption) · moves first · switching in loses T1, already out wins T2"
     },
     {
      "v": "lost",
@@ -1812,7 +1814,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 80% (Light of Ruin) · deals 67–80% (Eruption) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 86% (Light of Ruin) · deals 67–80% (Eruption) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "lost",
@@ -1838,7 +1840,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 45% (Psychic) · deals 70–82% (Eruption) · moves first · switching in wins T2, already out wins T2"
+     "t": "takes 48% (Psychic) · deals 70–82% (Eruption) · moves first · switching in wins T2, already out wins T2"
     },
     {
      "v": "roll",
@@ -1861,7 +1863,7 @@
     },
     {
      "v": "check",
-     "t": "takes 45% (Psychic) · deals 70–82% (Eruption) · slower · switching in loses T2, already out wins T2"
+     "t": "takes 48% (Psychic) · deals 70–82% (Eruption) · slower · switching in loses T2, already out wins T2"
     },
     {
      "v": "lost",
@@ -1888,7 +1890,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 43% (Liquidation) · deals 252–298% (Eruption) · moves first · switching in wins T1, already out wins T1"
+     "t": "takes 38% (Liquidation) · deals 252–298% (Eruption) · moves first · switching in wins T1, already out wins T1"
     },
     {
      "v": "lost",
@@ -1910,7 +1912,7 @@
     },
     {
      "v": "check",
-     "t": "takes 43% (Liquidation) · deals 252–298% (Eruption) · slower · switching in loses T2, already out wins T1"
+     "t": "takes 38% (Liquidation) · deals 252–298% (Eruption) · slower · switching in loses T2, already out wins T1"
     },
     {
      "v": "lost",
@@ -1937,8 +1939,8 @@
     },
     {
      "v": "roll",
-     "t": "takes 54% (Hurricane) · deals 49–58% (Eruption) · moves first · switching in loses T1, already out loses T2",
-     "p": 90
+     "t": "takes 58% (Hurricane) · deals 49–58% (Eruption) · moves first · switching in loses T1, already out loses T2",
+     "p": 70
     },
     {
      "v": "counter",
@@ -1962,7 +1964,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 54% (Hurricane) · deals 49–58% (Eruption) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 58% (Hurricane) · deals 49–58% (Eruption) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "check",
@@ -1990,7 +1992,7 @@
     },
     {
      "v": "check",
-     "t": "takes 57% (Terrain Pulse) · deals 69–81% (Eruption) · moves first · switching in loses T1, already out wins T2"
+     "t": "takes 62% (Terrain Pulse) · deals 69–81% (Eruption) · moves first · switching in loses T1, already out wins T2"
     },
     {
      "v": "check",
@@ -2012,9 +2014,8 @@
      "t": "takes 42% (Terrain Pulse) · deals 52–62% (Water Spout) · slower · switching in loses T2, already out loses T3"
     },
     {
-     "v": "roll",
-     "t": "takes 57% (Terrain Pulse) · deals 69–81% (Eruption) · slower · switching in loses T1, already out loses T2",
-     "p": 10
+     "v": "lost",
+     "t": "takes 62% (Terrain Pulse) · deals 69–81% (Eruption) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "roll",
@@ -2041,7 +2042,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 80% (Shadow Ball) · deals 174–205% (Eruption) · moves first · switching in wins T1, already out wins T1"
+     "t": "takes 86% (Shadow Ball) · deals 174–205% (Eruption) · moves first · switching in wins T1, already out wins T1"
     },
     {
      "v": "lost",
@@ -2063,7 +2064,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 80% (Shadow Ball) · deals 174–205% (Eruption) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 86% (Shadow Ball) · deals 174–205% (Eruption) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "lost",
@@ -2089,7 +2090,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 134% (Head Smash) · deals 119–140% (Earth Power) · moves first · switching in loses on entry, already out loses T1"
+     "t": "takes 119% (Head Smash) · deals 119–140% (Earth Power) · moves first · switching in loses on entry, already out loses T1"
     },
     {
      "v": "roll",
@@ -2113,7 +2114,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 134% (Head Smash) · deals 119–140% (Earth Power) · slower · switching in loses on entry, already out loses T1"
+     "t": "takes 119% (Head Smash) · deals 119–140% (Earth Power) · slower · switching in loses on entry, already out loses T1"
     },
     {
      "v": "lost",
@@ -2141,7 +2142,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 59% (Hyper Beam) · deals 56–66% (Eruption) · moves first · switching in wins T2, already out wins T2"
+     "t": "takes 63% (Hyper Beam) · deals 56–66% (Eruption) · moves first · switching in wins T2, already out wins T2"
     },
     {
      "v": "lost",
@@ -2164,7 +2165,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 59% (Hyper Beam) · deals 56–66% (Eruption) · slower · switching in loses, already out loses T3"
+     "t": "takes 63% (Hyper Beam) · deals 56–66% (Eruption) · slower · switching in loses, already out loses T3"
     },
     {
      "v": "lost",
@@ -2191,7 +2192,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 24% (Moonblast) · deals 262–310% (Eruption) · moves first · switching in wins T2, already out wins T2"
+     "t": "takes 25% (Moonblast) · deals 262–310% (Eruption) · moves first · switching in wins T2, already out wins T2"
     },
     {
      "v": "counter",
@@ -2213,7 +2214,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 24% (Moonblast) · deals 262–310% (Eruption) · slower · switching in wins T2, already out wins T2"
+     "t": "takes 25% (Moonblast) · deals 262–310% (Eruption) · slower · switching in wins T2, already out wins T2"
     },
     {
      "v": "counter",
@@ -2240,7 +2241,7 @@
     },
     {
      "v": "check",
-     "t": "takes 78% (Electro Shot) · deals 87–103% (Eruption) · moves first · switching in loses, already out wins T2"
+     "t": "takes 84% (Electro Shot) · deals 87–103% (Eruption) · moves first · switching in loses, already out wins T2"
     },
     {
      "v": "lost",
@@ -2263,8 +2264,8 @@
     },
     {
      "v": "roll",
-     "t": "takes 78% (Electro Shot) · deals 87–103% (Eruption) · slower · switching in loses T2, already out loses",
-     "p": 90
+     "t": "takes 84% (Electro Shot) · deals 87–103% (Eruption) · slower · switching in loses T2, already out loses T3",
+     "p": 20
     },
     {
      "v": "lost",
@@ -2291,7 +2292,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 66% (Rock Slide) · deals 37–44% (Earth Power) · moves first · switching in loses T1, already out loses T2"
+     "t": "takes 59% (Rock Slide) · deals 37–44% (Earth Power) · moves first · switching in loses T1, already out loses T2"
     },
     {
      "v": "lost",
@@ -2314,7 +2315,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 66% (Rock Slide) · deals 37–44% (Earth Power) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 59% (Rock Slide) · deals 37–44% (Earth Power) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "lost",
@@ -2341,7 +2342,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 80% (Glaive Rush) · deals 73–87% (Eruption) · moves first · switching in loses T1, already out loses T1"
+     "t": "takes 71% (Glaive Rush) · deals 73–87% (Eruption) · moves first · switching in loses T1, already out loses T1"
     },
     {
      "v": "lost",
@@ -2365,7 +2366,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 80% (Glaive Rush) · deals 73–87% (Eruption) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 71% (Glaive Rush) · deals 73–87% (Eruption) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "lost",
@@ -2390,9 +2391,8 @@
      "t": "takes 63% (Dragon Claw) · deals 66–78% (Water Spout) · moves first · switching in loses T2, already out wins T3"
     },
     {
-     "v": "roll",
-     "t": "takes 106% (Earthquake) · deals 43–51% (Eruption) · moves first · switching in loses on entry, already out loses T1",
-     "p": 70
+     "v": "check",
+     "t": "takes 94% (Earthquake) · deals 43–51% (Eruption) · moves first · switching in loses T1, already out trades T2"
     },
     {
      "v": "check",
@@ -2417,7 +2417,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 106% (Earthquake) · deals 43–51% (Eruption) · slower · switching in loses on entry, already out loses T1"
+     "t": "takes 94% (Earthquake) · deals 43–51% (Eruption) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "roll",
@@ -2445,7 +2445,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 105% (Draco Meteor) · deals 43–51% (Eruption) · moves first · switching in loses on entry, already out loses T1"
+     "t": "takes 112% (Draco Meteor) · deals 43–51% (Eruption) · moves first · switching in loses on entry, already out loses T1"
     },
     {
      "v": "lost",
@@ -2469,7 +2469,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 105% (Draco Meteor) · deals 43–51% (Eruption) · slower · switching in loses on entry, already out loses T1"
+     "t": "takes 112% (Draco Meteor) · deals 43–51% (Eruption) · slower · switching in loses on entry, already out loses T1"
     },
     {
      "v": "lost",
@@ -2496,7 +2496,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 51% (Scald) · deals 26–31% (Eruption) · moves first · switching in loses T1, already out loses T2"
+     "t": "takes 54% (Scald) · deals 26–31% (Eruption) · moves first · switching in loses T1, already out loses T2"
     },
     {
      "v": "lost",
@@ -2518,7 +2518,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 51% (Scald) · deals 26–31% (Eruption) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 54% (Scald) · deals 26–31% (Eruption) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "lost",
@@ -2544,7 +2544,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 71% (Ancient Power) · deals 40–48% (Eruption) · moves first · switching in loses T1, already out loses T2"
+     "t": "takes 77% (Ancient Power) · deals 40–48% (Eruption) · moves first · switching in loses T1, already out loses T2"
     },
     {
      "v": "roll",
@@ -2567,7 +2567,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 71% (Ancient Power) · deals 40–48% (Eruption) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 77% (Ancient Power) · deals 40–48% (Eruption) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "lost",
@@ -2594,7 +2594,7 @@
     },
     {
      "v": "check",
-     "t": "takes 73% (Expanding Force) · deals 72–86% (Eruption) · moves first · switching in loses T1, already out wins T2"
+     "t": "takes 79% (Expanding Force) · deals 72–86% (Eruption) · moves first · switching in loses T1, already out wins T2"
     },
     {
      "v": "lost",
@@ -2616,7 +2616,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 73% (Expanding Force) · deals 72–86% (Eruption) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 79% (Expanding Force) · deals 72–86% (Eruption) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "lost",
@@ -2644,7 +2644,7 @@
     },
     {
      "v": "roll",
-     "t": "takes 96% (Zap Cannon) · deals 102–120% (Eruption) · moves first · switching in loses T1, already out loses T3",
+     "t": "takes 104% (Zap Cannon) · deals 102–120% (Eruption) · moves first · switching in loses on entry, already out loses T3",
      "p": 95
     },
     {
@@ -2669,7 +2669,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 96% (Zap Cannon) · deals 102–120% (Eruption) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 104% (Zap Cannon) · deals 102–120% (Eruption) · slower · switching in loses on entry, already out loses T1"
     },
     {
      "v": "lost",
@@ -2697,7 +2697,7 @@
     },
     {
      "v": "check",
-     "t": "takes 62% (Close Combat) · deals 81–95% (Eruption) · moves first · switching in loses T1, already out wins T2"
+     "t": "takes 55% (Close Combat) · deals 81–95% (Eruption) · moves first · switching in loses T1, already out wins T2"
     },
     {
      "v": "check",
@@ -2720,7 +2720,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 62% (Close Combat) · deals 81–95% (Eruption) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 55% (Close Combat) · deals 81–95% (Eruption) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "lost",
@@ -2746,7 +2746,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 64% (Psychic Fangs) · deals 139–164% (Eruption) · moves first · switching in wins T1, already out wins T1"
+     "t": "takes 56% (Psychic Fangs) · deals 139–164% (Eruption) · moves first · switching in wins T1, already out wins T1"
     },
     {
      "v": "lost",
@@ -2768,8 +2768,9 @@
      "t": "takes 72% (Psychic Fangs) · deals 75–89% (Dark Pulse) · slower · switching in loses T2, already out loses T3"
     },
     {
-     "v": "lost",
-     "t": "takes 64% (Psychic Fangs) · deals 139–164% (Eruption) · slower · switching in loses T1, already out loses T2"
+     "v": "roll",
+     "t": "takes 56% (Psychic Fangs) · deals 139–164% (Eruption) · slower · switching in loses T1, already out loses T2",
+     "p": 15
     },
     {
      "v": "lost",
@@ -2795,8 +2796,8 @@
      "t": "takes 59% (Giga Drain) · deals 119–143% (Water Spout) · moves first · switching in loses T2, already out wins T1"
     },
     {
-     "v": "counter",
-     "t": "takes 47% (Fiery Dance) · deals 80–94% (Eruption) · moves first · switching in wins T2, already out wins T2"
+     "v": "check",
+     "t": "takes 51% (Fiery Dance) · deals 80–94% (Eruption) · moves first · switching in loses T1, already out wins T2"
     },
     {
      "v": "lost",
@@ -2818,7 +2819,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 47% (Fiery Dance) · deals 80–94% (Eruption) · slower · switching in loses T2, already out loses T3"
+     "t": "takes 51% (Fiery Dance) · deals 80–94% (Eruption) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "lost",
@@ -2845,7 +2846,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 35% (Brave Bird) · deals 129–153% (Eruption) · moves first · switching in wins T1, already out wins T1"
+     "t": "takes 31% (Brave Bird) · deals 129–153% (Eruption) · moves first · switching in wins T1, already out wins T1"
     },
     {
      "v": "lost",
@@ -2867,8 +2868,8 @@
      "t": "takes 39% (Brave Bird) · deals 48–57% (Water Spout) · faster · switching in loses T3, already out loses"
     },
     {
-     "v": "check",
-     "t": "takes 35% (Brave Bird) · deals 129–153% (Eruption) · slower · switching in loses T2, already out wins T2"
+     "v": "counter",
+     "t": "takes 31% (Brave Bird) · deals 129–153% (Eruption) · slower · switching in wins T2, already out wins T2"
     },
     {
      "v": "lost",
@@ -2894,8 +2895,8 @@
     },
     {
      "v": "roll",
-     "t": "takes 108% (Draco Meteor) · deals 54–64% (Eruption) · moves first · switching in loses on entry, already out loses T1",
-     "p": 55
+     "t": "takes 115% (Draco Meteor) · deals 54–64% (Eruption) · moves first · switching in loses on entry, already out loses T1",
+     "p": 10
     },
     {
      "v": "check",
@@ -2917,7 +2918,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 108% (Draco Meteor) · deals 54–64% (Eruption) · slower · switching in loses on entry, already out loses T1"
+     "t": "takes 115% (Draco Meteor) · deals 54–64% (Eruption) · slower · switching in loses on entry, already out loses T1"
     },
     {
      "v": "roll",
@@ -2944,7 +2945,7 @@
     },
     {
      "v": "roll",
-     "t": "takes 70% (Earth Power) · deals 63–74% (Earth Power) · speed tie · switching in loses T1, already out loses T2",
+     "t": "takes 75% (Earth Power) · deals 63–74% (Earth Power) · speed tie · switching in loses T1, already out loses T2",
      "p": 50
     },
     {
@@ -2967,7 +2968,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 70% (Earth Power) · deals 63–74% (Earth Power) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 75% (Earth Power) · deals 63–74% (Earth Power) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "lost",
@@ -2995,7 +2996,7 @@
     },
     {
      "v": "check",
-     "t": "takes 82% (Expanding Force) · deals 84–99% (Eruption) · moves first · switching in loses T1, already out wins T2"
+     "t": "takes 88% (Expanding Force) · deals 84–99% (Eruption) · moves first · switching in loses T1, already out wins T2"
     },
     {
      "v": "roll",
@@ -3018,7 +3019,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 82% (Expanding Force) · deals 84–99% (Eruption) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 88% (Expanding Force) · deals 84–99% (Eruption) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "roll",
@@ -3045,7 +3046,7 @@
     },
     {
      "v": "check",
-     "t": "takes 76% (Expanding Force) · deals 86–102% (Eruption) · moves first · switching in loses T1, already out wins T2"
+     "t": "takes 82% (Expanding Force) · deals 86–102% (Eruption) · moves first · switching in loses T1, already out wins T2"
     },
     {
      "v": "check",
@@ -3069,7 +3070,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 76% (Expanding Force) · deals 86–102% (Eruption) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 82% (Expanding Force) · deals 86–102% (Eruption) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "roll",
@@ -3097,7 +3098,7 @@
     },
     {
      "v": "check",
-     "t": "takes 86% (Armor Cannon) · deals 53–62% (Earth Power) · moves first · switching in loses T1, already out wins T2"
+     "t": "takes 93% (Armor Cannon) · deals 53–62% (Earth Power) · moves first · switching in loses T1, already out wins T2"
     },
     {
      "v": "lost",
@@ -3121,7 +3122,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 86% (Armor Cannon) · deals 53–62% (Earth Power) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 93% (Armor Cannon) · deals 53–62% (Earth Power) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "lost",
@@ -3147,7 +3148,7 @@
     },
     {
      "v": "check",
-     "t": "takes 76% (Sludge Bomb) · deals 73–87% (Eruption) · moves first · switching in loses T1, already out wins T2"
+     "t": "takes 82% (Sludge Bomb) · deals 73–87% (Eruption) · moves first · switching in loses T1, already out wins T2"
     },
     {
      "v": "counter",
@@ -3171,7 +3172,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 76% (Sludge Bomb) · deals 73–87% (Eruption) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 82% (Sludge Bomb) · deals 73–87% (Eruption) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "check",
@@ -3199,7 +3200,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 16% (Matcha Gotcha) · deals 132–156% (Eruption) · moves first · switching in wins T1, already out wins T1"
+     "t": "takes 17% (Matcha Gotcha) · deals 132–156% (Eruption) · moves first · switching in wins T1, already out wins T1"
     },
     {
      "v": "roll",
@@ -3222,7 +3223,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 16% (Matcha Gotcha) · deals 132–156% (Eruption) · slower · switching in wins T1, already out wins T1"
+     "t": "takes 17% (Matcha Gotcha) · deals 132–156% (Eruption) · slower · switching in wins T1, already out wins T1"
     },
     {
      "v": "lost",

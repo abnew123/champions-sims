@@ -15,35 +15,44 @@ Talk to the other threads directly with SendMessage (names above); do not relay 
 ## The sheet now
 
 - Published: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6, **Version 16**. Source: `trsheet/tr-sheet.html`. Backups `tr-sheet.v11.html` ... `tr-sheet.v15.html`.
+- **Version 17 is built and waiting for the user's word to publish**: `sheets/trick-room-six/sheet.html` (kit build, 2026-10-05). Against
+  Version 16 it changes: Torkoal's card (back to 32 HP / 2 SpD) and its Matchups column; the whole-game % of the six tabs that bring
+  Torkoal (Rain 58 -> 54, Snow 85 -> 88, Rain + Sun 48 -> 50, Perish 95 -> 91, Tailwind and Trick Room unchanged after rounding); the Rain
+  tab's turn-one lines against four of its six opposing leads (the only tab that leads Torkoal; the 36 jobs of all six Torkoal tabs were
+  re-run, and the other five tabs' lines came out the same); and the order of equal-share opposing leads on three tabs. To publish:
+  Artifact `action: "read"` on the URL, publish `sheets/trick-room-six/sheet.html` with `url` set to it, copy it over
+  `trsheet/tr-sheet.html`, set `published` in the folder's `sheet.json`, commit.
 - To publish from a new conversation: Artifact `action: "read"` on that URL first, then publish `trsheet/tr-sheet.html` with `url` set to it. Never touch the older sheet "Low-Variance Six" (https://claude.ai/artifact/DEF8ycjXrKGXokgH26he9A).
-- The team (real sets, `pssim/myteam_real.json`; SP order HP/Atk/Def/SpA/SpD/Spe):
+- The team (real sets: `sheets/trick-room-six/team.json`, same as `pssim/myteam_real.json`; SP order HP/Atk/Def/SpA/SpD/Spe):
 
 | Pokémon | Item | Ability | Nature, SP | Moves |
 |---|---|---|---|---|
 | Mega Blastoise | Blastoisinite | Torrent → Mega Launcher | Quiet 32/0/0/32/2/0 | Fake Out, Water Spout, Aura Sphere, Dark Pulse |
-| Torkoal | Charcoal | Drought | Quiet 12/0/0/32/22/0 (see open item 1) | Eruption, Weather Ball, Earth Power, Protect |
+| Torkoal | Charcoal | Drought | Quiet 32/0/0/32/2/0 (back from 12/0/0/32/22/0 on 2026-10-05, the user's decision) | Eruption, Weather Ball, Earth Power, Protect |
 | Indeedee-F | Psychic Seed | Psychic Surge | Relaxed 32/0/32/0/2/0 | Follow Me, Helping Hand, Trick Room, Healing Wish |
 | Farigiraf | Sitrus Berry | Armor Tail | Relaxed 30/0/21/0/15/0 | Trick Room, Protect, Psychic, Thunderbolt |
 | Kingambit | Chople Berry | Defiant | Brave 32/32/0/0/2/0 | Iron Head, Kowtow Cleave, Low Kick, Sucker Punch |
 | Incineroar | White Herb | Intimidate | Brave 32/32/0/0/2/0 | Fake Out, Flare Blitz, Throat Chop, Close Combat |
 
 - Each Leads tab shows one card: the four to bring (lead + back row) that won the most whole-game sims, with its turn-one lines. Picks
-  (`pssim/bringcf_picks.json`; whole-game win % on 288 fresh games each, old planner: champ-battle-v4 + egvalue5):
+  (`sheets/trick-room-six/picks.json`; old planner: champ-battle-v4 + egvalue5. The fours are from the bring matrix and confirmation,
+  which ran with the 12 HP / 22 SpD Torkoal and were not re-chosen. Wins: the four tabs without Torkoal are the confirmation's 288 fresh
+  games; the six with it are the 32 HP arm of the spread A/B, 384 games each. Version 16 showed the confirmation numbers for all ten):
 
 | Tab (ladder share) | Lead / back | Wins |
 |---|---|---|
 | Tailwind (26.2) | Incineroar + Farigiraf / Torkoal, Kingambit | 92% |
 | Sun (12.0) | Kingambit + Blastoise / Farigiraf, Incineroar | 52% |
 | Indeedee TR (11.9) | Farigiraf + Kingambit / Blastoise, Incineroar | 68% |
-| Rain (10.5) | Incineroar + Torkoal / Blastoise, Farigiraf | 58% |
+| Rain (10.5) | Incineroar + Torkoal / Blastoise, Farigiraf | 54% |
 | Balance (9.3) | Farigiraf + Blastoise / Kingambit, Incineroar | 80% |
 | Sand (9.0) | Incineroar + Farigiraf / Blastoise, Kingambit | 83% |
-| Snow (7.8) | Farigiraf + Blastoise / Torkoal, Incineroar | 85% |
+| Snow (7.8) | Farigiraf + Blastoise / Torkoal, Incineroar | 88% |
 | Trick Room (6.7) | Incineroar + Farigiraf / Blastoise, Torkoal | 73% |
-| Rain + Sun (3.3) | Incineroar + Blastoise / Torkoal, Farigiraf | 48% |
-| Perish (3.3) | Kingambit + Blastoise / Torkoal, Farigiraf | 95% |
+| Rain + Sun (3.3) | Incineroar + Blastoise / Torkoal, Farigiraf | 50% |
+| Perish (3.3) | Kingambit + Blastoise / Torkoal, Farigiraf | 91% |
 
-  Ladder-weighted 75.6%.
+  Ladder-weighted 75.5% (Version 16: 75.6%).
 
 ## Sheet kit (2026-10-05): how a sheet is built from now on
 
@@ -54,7 +63,7 @@ thread maintains the kit and owns `sheets/trick-room-six/`.
 - One command per step: `python3 sheetkit/kit.py <team> init | status | grid | smoke | matrix jobs|run|report | confirm jobs|run|decide |
   t1 jobs|run|solve | page`. Sim setups are named in `sheetkit/sim.json`; `current` is `v4-eg5` (what Version 16 used) until Battle sim
   says the new planner setup is final.
-- `python3 sheetkit/selftest_tr.py` rebuilds the Trick Room Six sheet from the raw results in `pssim/results/` and checks every step
+- `python3 sheetkit/selftest_tr.py` rebuilds the Version 16 sheet (inputs frozen in `sheetkit/fixtures/tr-v16/`) from the raw results in `pssim/results/` and checks every step
   against the old pipeline's files (matrix jobs, confirmation jobs, picks, turn-one jobs, Speeds, all 60 solved plans, the page). All
   pass. The one intended difference: opposing leads with exactly equal share are listed in the opponent model's order, which swaps two
   rows on three tabs (Balance, Snow, Trick Room). Run it after every kit change.
@@ -74,7 +83,13 @@ thread maintains the kit and owns `sheets/trick-room-six/`.
 - A second team was dry-run in a scratch folder (the user's Rillaboom / Incineroar / Sneasler / Gholdengo / Kingambit / Mega Salamence
   six, sets from `teamsearch/teams/low_variance_six.json`): `init`, `grid`, `smoke` and a page all work with nothing Trick Room-specific.
   No folder was created under `sheets/` for it: that team's thread does `init` itself.
-- Not in the kit yet: Coverage / Matchups / Speed for a new team (the Trick Room Six carries its own data), cloud runs through the kit
+- Coverage, Matchups and Speed are generated since commit f19ce24 (`charts`, `speed`). For this six `charts` reproduces the published
+  Coverage exactly and Matchups in 340 of 350 cells; the ten that differ are Incineroar's (White Herb modelled: Mega Salamence TR-up
+  lost -> roll 55, Corviknight TR-up roll 65 -> check, Mega Gardevoir no-TR roll 15 -> check, Kingambit no-TR roll 40 -> 35, and six
+  detail-text changes). **Open decision for the user:** switch this sheet's Incineroar column to the generated cells
+  (`python3 sheetkit/kit.py trick-room-six charts`, recommended) or keep the published ones. `charts.json` still holds the hand-built
+  grid; `speed.json` is hand-written (`"hand": true`).
+- Not in the kit yet: effective-Speed rows (Tailwind, Scarf, Unburden, weather), cloud runs through the kit
   (same commands on the box, untested), species tells on the page.
 - A static preview of built pages: `sheets-preview` in `.claude/launch.json` (port 8768, serves `sheets/`). It sends no charset, so
   accented characters look wrong there; the published Artifact is fine.
@@ -93,13 +108,13 @@ thread maintains the kit and owns `sheets/trick-room-six/`.
 4. Check the page in the browser (Leads tabs, team card, Matchups rows) before publishing. Every turn-one switch must go to a Pokémon in
    that card's back row (v14 had switches to Pokémon outside the four; v15 fixed it by simulating with the real back rows).
 
-## Open items (the user decides; none is started)
+## Open items (the user decides)
 
-1. **Torkoal spread.** The user switched to 12 HP / 22 SpD on the 2v2 study's advice. A full-battle A/B on the same games
-   (`pssim/tork_ab_run.sh`, `tork_ab_report.py`, `results/tork_ab_report.txt`) says the new spread is about 1 point worse on the tabs that
-   bring Torkoal (Snow -5.4 +- 2.2, Trick Room -5.9 +- 2.5; others within noise), from physical leads (Sneasler, Incineroar). Recommendation
-   given: go back to 32 HP / 2 SpD (`pssim/myteam_real_tork32.json`). Not decided. If he switches back, v17 = Torkoal card and grid column
-   restored (`mxtr/gx_cells_*_inc.json` have the old-spread cells), old-spread whole-game %, and the Rain lead's turn-one lines re-run.
+1. **Torkoal spread: decided 2026-10-05, back to 32 HP / 2 SpD.** The full-battle A/B (`pssim/tork_ab_run.sh`, `tork_ab_report.py`,
+   `results/tork_ab_report.txt`) had the 12 HP / 22 SpD spread about 1 point worse on the tabs that bring Torkoal (Snow -5.4 +- 2.2,
+   Trick Room -5.9 +- 2.5, from physical leads). Done: `team.json`, `pssim/myteam_real.json`, the card, the Matchups column (the
+   Version 15 page's), the six tabs' whole-game % and turn-one lines (36 jobs re-run through the kit), the generic grid's Torkoal cells;
+   Battle sim and Team search use the same sets. Left: publish Version 17 when the user says so.
 2. **Rerun the picks on the new planner.** The whole-game numbers above come from the old planner. Known biases: Perish far too high (the
    sim's Perish teams almost never trap and sing; real teams beat Perish 48%, the sim says 76%+), the Trick Room tab inflated (about a quarter
    of the modelled "TR" teams lead Delphox and never set Trick Room), status and setup undervalued, opponents double-Protect too much (worth

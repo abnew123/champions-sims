@@ -110,9 +110,9 @@
     "vals": [
      [
       "Kingambit+Blastoise",
-      0.6511877890657023,
+      0.6510986587938474,
       0.5954657493405038,
-      0.6093962592718034,
+      0.6093739767038397,
       6
      ]
     ]
@@ -129,9 +129,9 @@
     "vals": [
      [
       "Kingambit+Blastoise",
-      0.6465485219461546,
+      0.6464352069102628,
       0.5903269183813049,
-      0.6043823192725173,
+      0.6043539905135444,
       6
      ]
     ]
@@ -162,9 +162,9 @@
     "vals": [
      [
       "Incineroar+Torkoal",
-      0.6871620927903097,
-      0.589385043094679,
-      0.6138293055185866,
+      0.6814507233331081,
+      0.5856362830506978,
+      0.6095898931213004,
       6
      ]
     ]
@@ -181,9 +181,9 @@
     "vals": [
      [
       "Incineroar+Torkoal",
-      0.6952582113936963,
-      0.5905546743875294,
-      0.6167305586390711,
+      0.6856001827812939,
+      0.5940217668101045,
+      0.616916370802902,
       6
      ]
     ]
@@ -200,9 +200,9 @@
     "vals": [
      [
       "Incineroar+Torkoal",
-      0.6818943258615314,
-      0.5893054120718214,
-      0.6124526405192489,
+      0.6788256220112867,
+      0.5807744876014056,
+      0.6052872712038759,
       6
      ]
     ]
@@ -524,23 +524,23 @@
  "plans": {
   "Rain||Incineroar+Torkoal||Pelipper + Sneasler": {
    "lines": null,
-   "pop": 0.6247763847427553,
-   "worst": 0.563290505301975,
+   "pop": 0.6309259956998144,
+   "worst": 0.5776883302925817,
    "full": [
-    0.624384898084017,
-    0.5785209798838664
+    0.6288771421134676,
+    0.584462442402003
    ],
    "reader": [
     [
-     0.39180074097750034,
+     0.39393718621614054,
      "Pelipper: Tailwind | Sneasler: Fake Out -> Torkoal"
     ],
     [
-     0.3413776453576431,
+     0.37559354385511595,
      "Pelipper: Hurricane -> Torkoal | Sneasler: Close Combat -> Torkoal"
     ],
     [
-     0.24672363774600048,
+     0.1957435338795804,
      "Pelipper: Tailwind | Sneasler: switch"
     ]
    ],
@@ -553,11 +553,11 @@
    "trCredit": 0.6221080935435995,
    "mix": [
     [
-     45,
+     40,
      "Incineroar: Flare Blitz -> Sneasler | Torkoal: Weather Ball -> Sneasler"
     ],
     [
-     30,
+     35,
      "Incineroar: switch -> Farigiraf | Torkoal: Eruption"
     ],
     [
@@ -576,11 +576,11 @@
    ],
    "reader": [
     [
-     0.6978293412409078,
+     0.6978293412409161,
      "Froslass: Aurora Veil | Sneasler: Close Combat -> Blastoise"
     ],
     [
-     0.273830964330309,
+     0.27383096433030946,
      "Froslass: Protect | Sneasler: switch"
     ]
    ],
@@ -616,7 +616,7 @@
    ],
    "reader": [
     [
-     0.8953952257666552,
+     0.8953952257666551,
      "Arcanine-Hisui: Head Smash -> Blastoise | Froslass: Blizzard"
     ]
    ],
@@ -780,23 +780,23 @@
   },
   "Perish trap||Kingambit+Blastoise||Archaludon + Politoed": {
    "lines": null,
-   "pop": 0.5053796592203105,
+   "pop": 0.5045988575156533,
    "worst": 0.4536346270553804,
    "full": [
-    0.5035007902826678,
-    0.4556798714566832
+    0.5027352362089436,
+    0.45572257824133094
    ],
    "reader": [
     [
-     0.5332048519774453,
+     0.5332048452376447,
      "Archaludon: Protect | Politoed: Perish Song"
     ],
     [
-     0.26283636608045613,
+     0.262836404545603,
      "Archaludon: Electro Shot -> Blastoise | Politoed: Perish Song"
     ],
     [
-     0.1558962174694554,
+     0.1558962239569405,
      "Archaludon: Electro Shot -> Blastoise | Politoed: switch"
     ]
    ],
@@ -948,23 +948,23 @@
   },
   "Rain||Incineroar+Torkoal||Archaludon + Grimmsnarl": {
    "lines": null,
-   "pop": 0.6299415937190866,
+   "pop": 0.6295064418357993,
    "worst": 0.5424898723633167,
    "full": [
-    0.6210150092151285,
-    0.5471951192027057
+    0.6211094257816889,
+    0.5466377119722293
    ],
    "reader": [
     [
-     0.5233124266022813,
+     0.5316110309473879,
      "Archaludon: Protect | Grimmsnarl: switch"
     ],
     [
-     0.2687110421958371,
+     0.25979990520370444,
      "Archaludon: Electro Shot -> Torkoal | Grimmsnarl: switch"
     ],
     [
-     0.20797653120188164,
+     0.20858906384890757,
      "Archaludon: Protect | Grimmsnarl: Light Screen"
     ]
    ],
@@ -996,11 +996,11 @@
    ],
    "reader": [
     [
-     0.5904628849534318,
+     0.5904628849534324,
      "Farigiraf: Helping Hand | Raichu: Focus Blast -> Incineroar"
     ],
     [
-     0.38758166259530036,
+     0.387581662595302,
      "Farigiraf: Imprison | Raichu: Zap Cannon -> Incineroar"
     ]
    ],
@@ -1068,11 +1068,11 @@
    ],
    "reader": [
     [
-     0.3888824625015618,
+     0.38888246250156216,
      "Farigiraf: Protect | Golisopod: switch"
     ],
     [
-     0.35769244679921114,
+     0.3576924467992111,
      "Farigiraf: Psychic -> Blastoise | Golisopod: Protect"
     ],
     [
@@ -1108,11 +1108,11 @@
    ],
    "reader": [
     [
-     0.815346055585817,
+     0.8153460555858179,
      "Gholdengo: Nasty Plot | Raichu: Zap Cannon -> Incineroar"
     ],
     [
-     0.18465394441418584,
+     0.1846539444141821,
      "Gholdengo: Make It Rain | Raichu: Zap Cannon -> Incineroar"
     ]
    ],
@@ -1288,11 +1288,11 @@
    ],
    "reader": [
     [
-     0.49389209668249234,
+     0.4938920966824938,
      "Arcanine-Hisui: Head Smash -> Incineroar | Raichu: Zap Cannon -> Incineroar"
     ],
     [
-     0.4550878872276786,
+     0.4550878872276779,
      "Arcanine-Hisui: Head Smash -> Incineroar | Raichu: switch"
     ]
    ],
@@ -1408,11 +1408,11 @@
    ],
    "reader": [
     [
-     0.7101904352321027,
+     0.7101904352321022,
      "Delphox: Heat Wave | Sneasler: Close Combat -> Incineroar"
     ],
     [
-     0.22298599587247833,
+     0.22298599587247858,
      "Delphox: Nasty Plot | Sneasler: switch"
     ]
    ],
@@ -1524,15 +1524,15 @@
    ],
    "reader": [
     [
-     0.4378424344918064,
+     0.43784243449180676,
      "Golisopod: switch | Grimmsnarl: Light Screen"
     ],
     [
-     0.2908688080092591,
+     0.2908688080092618,
      "Golisopod: Swords Dance | Grimmsnarl: switch"
     ],
     [
-     0.2712887574989343,
+     0.2712887574989319,
      "Golisopod: Protect | Grimmsnarl: switch"
     ]
    ],
@@ -1604,11 +1604,11 @@
    ],
    "reader": [
     [
-     0.6802727519307645,
+     0.6802727519307626,
      "Delphox: Nasty Plot | Incineroar: Parting Shot -> Incineroar"
     ],
     [
-     0.31972724806923586,
+     0.31972724806923764,
      "Delphox: Protect | Incineroar: Parting Shot -> Incineroar"
     ]
    ],
@@ -2012,15 +2012,15 @@
    ],
    "reader": [
     [
-     0.5224690863028882,
+     0.5224690863028886,
      "Gholdengo: Make It Rain | Salamence: Hyper Voice"
     ],
     [
-     0.2596145584620436,
+     0.25961455846204357,
      "Gholdengo: Protect | Salamence: Hyper Voice"
     ],
     [
-     0.21791635523506814,
+     0.21791635523506792,
      "Gholdengo: Nasty Plot | Salamence: Hyper Voice"
     ]
    ],
@@ -2116,23 +2116,19 @@
   },
   "Rain||Incineroar+Torkoal||Farigiraf + Golisopod": {
    "lines": null,
-   "pop": 0.7378015298574776,
-   "worst": 0.560635646337535,
+   "pop": 0.6859715822748652,
+   "worst": 0.5755092735041295,
    "full": [
-    0.729533909708821,
-    0.5644065756777201
+    0.7084893717402381,
+    0.5694074683672327
    ],
    "reader": [
     [
-     0.560005440230158,
+     0.8718005249958408,
      "Farigiraf: Twin Beam -> Torkoal | Golisopod: switch"
     ],
     [
-     0.24136396358750797,
-     "Farigiraf: Psychic -> Torkoal | Golisopod: Drill Run -> Torkoal"
-    ],
-    [
-     0.1986305961823333,
+     0.1281994750041584,
      "Farigiraf: switch | Golisopod: Drill Run -> Incineroar"
     ]
    ],
@@ -2145,11 +2141,11 @@
    "trCredit": 0.514500403491177,
    "mix": [
     [
-     50,
-     "Incineroar: Throat Chop -> Farigiraf | Torkoal: Weather Ball -> Golisopod"
+     75,
+     "Incineroar: Throat Chop -> Farigiraf | Torkoal: Weather Ball -> Farigiraf"
     ],
     [
-     50,
+     25,
      "Incineroar: Throat Chop -> Farigiraf | Torkoal: Eruption"
     ]
    ]
@@ -2200,19 +2196,19 @@
   },
   "Rain||Incineroar+Torkoal||Archaludon + Pelipper": {
    "lines": null,
-   "pop": 0.722197206925539,
-   "worst": 0.6019091403168176,
+   "pop": 0.7201867023096641,
+   "worst": 0.5935502413814222,
    "full": [
-    0.7222156507533544,
-    0.6021865748287304
+    0.7201349144502236,
+    0.594222486882174
    ],
    "reader": [
     [
-     0.5348889997946802,
+     0.5163647463416585,
      "Archaludon: Dragon Pulse -> Torkoal | Pelipper: Weather Ball -> Torkoal"
     ],
     [
-     0.46511100020531987,
+     0.48363525365834154,
      "Archaludon: Protect | Pelipper: Tailwind"
     ]
    ],
@@ -2225,11 +2221,11 @@
    "trCredit": 0.5958068544037786,
    "mix": [
     [
-     80,
+     75,
      "Incineroar: Fake Out -> Pelipper | Torkoal: Eruption"
     ],
     [
-     20,
+     25,
      "Incineroar: Fake Out -> Archaludon | Torkoal: Eruption"
     ]
    ]
@@ -2388,11 +2384,11 @@
    ],
    "reader": [
     [
-     0.543765197528568,
+     0.5437651975285436,
      "Farigiraf: Psychic -> Farigiraf | Kingambit: Protect"
     ],
     [
-     0.3232793643735587,
+     0.32327936437355786,
      "Farigiraf: Trick Room | Kingambit: Protect"
     ]
    ],
@@ -2420,7 +2416,7 @@
    ],
    "reader": [
     [
-     0.593121945734979,
+     0.5931219457349779,
      "Farigiraf: Hyper Voice | Incineroar: Parting Shot -> Incineroar"
     ],
     [
@@ -2604,15 +2600,15 @@
   },
   "Rain||Incineroar+Torkoal||Pelipper + Swampert": {
    "lines": null,
-   "pop": 0.723177387687922,
-   "worst": 0.6418532076924063,
+   "pop": 0.7198244307285567,
+   "worst": 0.6347691596062328,
    "full": [
-    0.723177387687922,
-    0.6418532076924063
+    0.7198244307285567,
+    0.6347691596062328
    ],
    "reader": [
     [
-     0.9675652042369819,
+     0.9268009304801756,
      "Pelipper: Hurricane -> Torkoal | Swampert: Earthquake"
     ]
    ],
@@ -2632,10 +2628,10 @@
   },
   "Perish trap||Kingambit+Blastoise||Archaludon + Gengar": {
    "lines": null,
-   "pop": 0.6580853165917524,
+   "pop": 0.6580621792067751,
    "worst": 0.5641984127673365,
    "full": [
-    0.6588229627128076,
+    0.6588007431966888,
     0.5646478437277347
    ],
    "reader": [
@@ -2672,24 +2668,24 @@
   },
   "Rain||Incineroar+Torkoal||Dragonite + Gholdengo": {
    "lines": null,
-   "pop": 0.5887057429705211,
-   "worst": 0.5190359491203905,
+   "pop": 0.5746916819726413,
+   "worst": 0.48209989360512256,
    "full": [
-    0.5886020379742382,
-    0.5198785938217488
+    0.5744565847654969,
+    0.4835495982528628
    ],
    "reader": [
     [
-     0.5820554602138724,
-     "Dragonite: Heat Wave | Gholdengo: Protect"
+     0.5632863341993646,
+     "Dragonite: Tailwind | Gholdengo: Power Gem -> Torkoal"
     ],
     [
-     0.2963633172698301,
-     "Dragonite: Protect | Gholdengo: Power Gem -> Torkoal"
-    ],
-    [
-     0.12158122251629684,
+     0.2591643954001689,
      "Dragonite: Tailwind | Gholdengo: Protect"
+    ],
+    [
+     0.1775492704004666,
+     "Dragonite: Dragon Pulse -> Incineroar | Gholdengo: Power Gem -> Incineroar"
     ]
    ],
    "share": 0.02,
@@ -2701,12 +2697,12 @@
    "trCredit": 0.6244342222209494,
    "mix": [
     [
-     85,
-     "Incineroar: Fake Out -> Dragonite | Torkoal: Weather Ball -> Gholdengo"
+     50,
+     "Incineroar: Fake Out -> Dragonite | Torkoal: Eruption"
     ],
     [
-     15,
-     "Incineroar: Fake Out -> Dragonite | Torkoal: Eruption"
+     50,
+     "Incineroar: Throat Chop -> Gholdengo | Torkoal: Protect"
     ]
    ]
   },

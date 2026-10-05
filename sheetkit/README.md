@@ -26,7 +26,7 @@ python3 sheetkit/kit.py <team> status
 |---|---|---|---|
 | 0 | `init` | Creates `sheets/<team>/` from `sheetkit/starter/` | none |
 | 1 | `grid [--workers N]` | One-on-one cells for the six against 46 threats, Trick Room up and not: the planner's `GRID_DIR` | about 1 CPU-minute |
-| 2 | `smoke` | Dry run of everything on one core: 2 whole games, 1 turn-one job, a page in `work/smoke/` | about 15 seconds |
+| 2 | `smoke` | Dry run of everything on one core: 2 whole games, 1 turn-one job, a draft page at `work/smoke/preview.html` | about 15 seconds |
 | 3 | `matrix jobs`, `matrix run`, `matrix report` | All 90 fours (lead + back) against each archetype's 6 opposing leads, 16 games each, the same games for every four | 86,400 games, about 110-130 core-hours: a cloud box |
 | 4 | `confirm jobs`, `confirm run`, `confirm decide --write` | Each archetype's top 5 fours plus the current pick on 48 fresh games per opposing lead; writes `picks.json` | about 17,000 games, 22-26 core-hours |
 | 5 | `t1 jobs`, `t1 run`, `t1 solve` | Turn-one lines for each pick with its real back row (12 samples per cell, opposing Indeedee-F item variants); writes `t1.json` | about 25 minutes on 3 workers |

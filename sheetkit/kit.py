@@ -23,6 +23,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import *
 import picks as P, t1 as T1, page as PG
 
+# a built page opened straight from disk needs the charset and viewport lines a published Artifact gets
+PREVIEW_HEAD = '<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">\n'
+
 def ints(s): return [int(x) for x in s.split(',')] if s else None
 
 def status(sheet):
@@ -77,8 +80,8 @@ def smoke(sheet):
     T1.speeds(sheet, os.path.join(d, 't1_jobs.json'), os.path.join(d, 'speeds.json'))
     t1 = T1.solve(sheet, res=os.path.join(d, 't1res'), speeds_path=os.path.join(d, 'speeds.json'), out=os.path.join(d, 't1.json'))
     for k, p in t1['plans'].items(): print(f"  turn one: {k.replace('||', ' | ')}: {p['mix']}")
-    s, L = PG.render(sheet, PG.leads_data(sheet, picks, t1, {})); open(os.path.join(d, 'sheet.html'), 'w').write(s)
-    print(f"  page: {os.path.relpath(os.path.join(d, 'sheet.html'), ROOT)} ({len(s)} bytes)\nsmoke run ok")
+    s, L = PG.render(sheet, PG.leads_data(sheet, picks, t1, {})); open(os.path.join(d, 'preview.html'), 'w').write(PREVIEW_HEAD + s)
+    print(f"  page: {os.path.relpath(os.path.join(d, 'preview.html'), ROOT)} ({len(s)} bytes; one Leads tab from this dry run, the other sections as they will be)\nsmoke run ok")
 
 def glob_json(d, pat='*.json'):
     import glob
@@ -124,8 +127,7 @@ def main():
     elif step == ('t1', 'solve'): d = T1.solve(sheet); print(f"t1.json: {len(d['plans'])} plans")
     elif a.step == 'page':
         out = a.out or sheet.p('sheet.html'); s, L = PG.render(sheet); open(out, 'w').write(s)
-        os.makedirs(sheet.w(), exist_ok=True)                    # the same page with the charset and viewport lines a published Artifact gets
-        open(sheet.w('preview.html'), 'w').write('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">\n' + s)
+        os.makedirs(sheet.w(), exist_ok=True); open(sheet.w('preview.html'), 'w').write(PREVIEW_HEAD + s)
         bad = PG.check_leads(sheet, L)
         print(f"{os.path.relpath(out, ROOT)} written ({len(s)} bytes, {len(L)} tabs)" + ('' if not bad else '\nPROBLEMS:\n  ' + '\n  '.join(bad)))
         if a.compare:

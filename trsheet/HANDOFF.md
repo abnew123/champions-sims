@@ -113,10 +113,14 @@ thread maintains the kit and owns `sheets/trick-room-six/`.
    Trick Room -5.9 +- 2.5, from physical leads). Done: `team.json`, `pssim/myteam_real.json`, the card, the Matchups column (the
    Version 15 page's), the six tabs' whole-game % and turn-one lines (36 jobs re-run through the kit), the generic grid's Torkoal cells;
    Battle sim and Team search use the same sets. Published in Version 17.
-2. **Rerun the picks on the final planner: ready, waiting for the user's go-ahead and a cloud box.** Battle sim declared the setup
-   final on 2026-10-05: champ-battle-v12, `DP2=1 RACE=1`, `pssim/egvalue9.json` (one value file for every team), the team's generic grid.
-   It is `current` in `sheetkit/sim.json` (`v12-dp2-race-eg9`), this folder's `grid_dir` now defaults to `work/grid`, and `kit.py
-   trick-room-six smoke` runs on it. The rerun is the kit's steps in order: `matrix jobs`, `matrix run` (86,400 games), `matrix
+2. **Rerun the picks on the final planner: RUNNING since 2026-10-05, 5:19 pm, on a shared cloud box** (96 of its 192 threads; Team
+   search's climb has the rest; host and key are in that day's messages with Team search, results are pulled to
+   `sheets/trick-room-six/work/matrix/` every 10 minutes). Setup: champ-battle-v13, `DP2=1 RACE=1 RACE_TIES=avg`,
+   `pssim/egvalue9.json` (one value file for every team), the team's generic grid: `current` in `sheetkit/sim.json`
+   (`v13-dp2-race-eg9`). History of the day: a first box was reclaimed at 511 jobs; on the second, 2,667 jobs ran on v12 before Battle
+   sim amended the setup (v12's damage race gave our side every Speed tie, worth about 13 points on the Trick Room tab's mirrors);
+   those v12 results are kept in `work/matrix_v12/` as a paired sample (same game indices) and the matrix restarted on v13. On Linux
+   the kit runs battle processes of 3 threads (one process with 96 threads took 50 s per game). The rerun is the kit's steps in order: `matrix jobs`, `matrix run` (86,400 games), `matrix
    report`, `confirm jobs`, `confirm run`, `confirm decide --write`, `t1 jobs`, `t1 run`, `t1 solve`, `page`; about 1.5-2 hours on a
    192-core spot box for the matrix and confirmation (the user starts the box, during the day; see the aws-setup memory and
    `teamsearch/cloud/README.md`; the kit has not run on a box yet, so pack `sheetkit/`, the team folder with `work/grid`, and

@@ -53,7 +53,11 @@ The box is set up once the way `teamsearch/cloud/README.md` describes (steps 0-3
 3. On the box, in `~/champions-sims`: `python3 sheetkit/kit.py <team> smoke`, then start the run detached, for example
    `setsid nohup python3 sheetkit/kit.py <team> matrix run --threads 180 > matrix.out 2>&1 &`. `--threads` is how many cores you
    take; on Linux the kit spreads them over battle processes of 3 threads each (one process with many threads runs about ten times
-   slower there), dealing the jobs round-robin so the processes finish together. If the box is shared, agree the split first.
+   slower there), dealing the jobs round-robin so the processes finish together. If the box is shared, agree the split first, and
+   do not start your run inside a tmux server another thread uses: a tmux server's process title is the command line of the session
+   that created it, so a `pkill -f` aimed at one run can match the server and kill every session in it (it happened both ways on
+   2026-10-05). Use `setsid nohup` as above, or your own server (`tmux -L <name>`), and stop a run only with patterns that contain
+   your own paths (`sheets/<team>`), fed to the box as a script (`ssh host 'bash -s' < stop.sh`), never typed inline.
 4. `sheetkit/cloud/pull.sh <host> <key file> <team>` copies results back (repeat every ten minutes or so: a spot box can be taken
    away without notice, and only what was pulled survives); `status` and the progress page show how far it is. To resume on a new
    box, push again: results already on the Mac are sent along and skipped by the run.

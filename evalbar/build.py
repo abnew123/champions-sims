@@ -1,10 +1,12 @@
 """Eval bar page for one cached replay.
   python3 evalbar/build.py pick                 lists cached games that make a good demo (high rated, played out, the lead changes hands)
-  python3 evalbar/build.py <replay id> [acc=<accuracy json>] [engine=<evalpos output .jsonl> pos=<the positions .jsonl it was run on>]
+  python3 evalbar/build.py <replay id> [acc=<accuracy json>] [engine=<evalpos output .jsonl> pos=<the positions .jsonl it was run on>] [cal=<weight>]
 writes evalbar/out/<replay id>.html. Without engine results the page is version 0 (the bar from the real-game win-chance model). With
 them every turn also gets each active Pokemon's options: how often the planner picks each, what each is worth, and which was played.
+With cal (the weight accuracy.py fits on the engine value's log-odds) the bar itself is the engine's value rescaled to real results, and
+the options' values are on the same scale; acc is then accuracy.py's engine results file.
 The page shows no usernames or nicknames (players are Player 1 / Player 2); build fails if one would get through."""
-import os, re, sys, json
+import os, re, sys, json, math
 import common as C, replay as R
 RF = C.replay_feats()
 def game_data(rid, log, w):
@@ -24,14 +26,16 @@ def label(l):
 def same(c, a):
     """is option c the choice a that was made? (move slot and target, or the switch target; the Mega flag is ignored)"""
     return c[:2] == a[:2]
-def options(e, pos):
-    """evalpos line + the position line it came from -> {'p1': [slot...], 'p2': [...]}, slot = {mon, played (True, or None if unknown), options: [{l, w, v, played}]}"""
+def options(e, pos, scale):
+    """evalpos line + the position line it came from -> {'p1': [slot...], 'p2': [...]}, slot = {mon, played (True, or None if unknown),
+    options: [{l, w, v, played, rough}]}. rough: in the staged mode an option more than 0.15 below its side's best kept a 2-sample value."""
     out = {}
     for s, sd, acts in ((0, 'p1', pos['actual']), (1, 'p2', pos['their_actual'])):
-        out[sd] = []
+        out[sd] = []; best = max((o['v'] for sl in e['sides'][s]['slots'] for o in sl['options']), default=1)
         for sl in e['sides'][s]['slots']:
             a = acts[sl['slot']]; a = a['choice'] if a else None
-            opts = [{'l': label(o['label']), 'w': round(o['w'], 3), 'v': round(o['v'], 3), 'played': bool(a) and same(o['c'], a)} for o in sl['options']]
+            opts = [{'l': label(o['label']), 'w': round(o['w'], 3), 'v': round(scale(o['v']), 3), 'played': bool(a) and same(o['c'], a),
+                     'rough': 'stages' in e and o['v'] < best - 0.15} for o in sl['options']]
             out[sd].append({'mon': R.disp(sl['mon']), 'played': True if any(o['played'] for o in opts) else None, 'options': opts})
     return out
 def leak_check(text, hidden):
@@ -56,13 +60,20 @@ if __name__ == '__main__':
     else:
         rid = sys.argv[1]; log = open(os.path.join(C.LOGS, rid + '.log')).read(); arg = dict(a.split('=', 1) for a in sys.argv[2:])
         d, hidden = game_data(rid, log, w)
-        d['acc'] = json.load(open(arg['acc'])) if 'acc' in arg else None
+        acc = json.load(open(arg['acc'])) if 'acc' in arg else None
+        d['acc'] = {**acc['engine value'], 'v0': acc['version 0 (same positions)']} if acc and 'engine value' in acc else acc
         if 'engine' in arg:
             ev = {x['name']: x for x in map(json.loads, open(arg['engine'])) if 'error' not in x}; ps = {x['name']: x for x in map(json.loads, open(arg['pos']))}
+            cal = float(arg['cal']) if 'cal' in arg else None
+            logit = lambda v: math.log(min(1 - 1e-4, max(1e-4, v)) / (1 - min(1 - 1e-4, max(1e-4, v))))
+            scale = (lambda v: C.sig(cal * logit(v))) if cal else (lambda v: v)
             for s in d['steps']:
                 nm = f"{rid} t{s['turn']} p1"
-                if nm in ev: s['opt'] = options(ev[nm], ps[nm]); s['ev'] = ev[nm]['value']
-            d['engine'] = {'turns': sum('opt' in s for s in d['steps']), 'seeds': max((x.get('seeds', 0) for x in ev.values()), default=0)}
+                if nm not in ev: continue
+                s['opt'] = options(ev[nm], ps[nm], scale); s['ev'] = scale(ev[nm]['value'])
+                if cal: s['wp0'] = s['wp']; s['wp'] = s['ev']
+            d['engine'] = {'turns': sum('opt' in s for s in d['steps']), 'seeds': max((x.get('seeds', 0) for x in ev.values()), default=0),
+                           'staged': any('stages' in x for x in ev.values()), 'bar': bool(cal), 'cal': cal}
         blob = json.dumps(d, ensure_ascii=False, separators=(',', ':')); leak_check(blob, hidden)
         page = open(os.path.join(C.HERE, 'page.html')).read().replace('/*DATA*/null', blob.replace('</', '<\\/'))
         os.makedirs(os.path.join(C.HERE, 'out'), exist_ok=True); outf = os.path.join(C.HERE, 'out', rid + '.html'); open(outf, 'w').write(page)

@@ -298,3 +298,8 @@ Usage:
   - **Done:** two passes, 2,400 games each, all with top-level 'feats'. The v8 pass (4:58 am, by mistake: simcmp sets TS_SIM=v8 on import) is in `feats_run_dirs_v8.txt`. The v12 pass (5:52 am) is in `feats_run_dirs_v12.txt`.
   - Battle sim's finding from the v8 pass: egvalue8 rates our teams ~14 points too low. Slopes transfer across teams; the intercept doesn't. egvalue9 will have pooled slopes plus a general intercept and per-team intercept files.
   - Next: `intercept_test.py` (general vs own intercept; its general arm is also the bar run, `simreal.py v8 v12g`).
+- **egvalue9 checks (Oct 5, 7:06 am; `intercept_test.py`, `simreal.py v3 v8 v12g v12t`):** pooled slopes over 11 teams; general intercept +0.54; per-team files in pssim/egvalue9_teams/.
+  - General vs own intercept, 10 teams × 2,400 games per arm: mean |diff| 2.1 points (about 1 SE), χ² p ≈ 0.16, rank correlation 0.90. The general intercept is fine for the climb.
+  - Sim-vs-real RMS without Perish: v3 0.26, v8 0.25, v12g 0.26. Unchanged.
+  - The structural pattern persists: Rain, TR w/o Indeedee, Indeedee TR and Rain+Sun come out 0.3–0.4 too hard; Tailwind and Balance 0.25–0.33 too easy. The rough floor of this bar is ~0.15–0.2.
+  - Proposed climb setup: TS_SIM=v12g (champ-battle-v12, egvalue9, RACE, DP2, anticipation) + TS_PERISH=real. Waiting on Battle sim to call it final.

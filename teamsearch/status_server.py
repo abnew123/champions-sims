@@ -3,12 +3,21 @@ port 8766, run read-only and embedded). Team-search cards, one per stage —
 one-on-one matrix cells, replay team previews, bring training battles, bring fit + check, hill-climb rounds — with job counts
 from the result folders and time left from the rate since the stage started. Refreshes in place every 10 s.
 usage: python3 status_server.py [port=8767]
-  TS_CLIMB_DIR=cloud_results/v12: read the hill climb's state, log and battles from results pulled from AWS (pull_loop.sh)"""
+The project's page (status_server.py, port 8766) shows these cards too, via cards() below.
+  TS_CLIMB_DIR=cloud_results/v12: read the hill climb from that folder; default: whichever of teamsearch/, cloud_results/v12/ and
+  cloud_results/ has the newest climb progress, state or round log (local runs, the AWS rerun's pulled results, the first AWS climb)"""
 import http.server, json, os, re, glob, time, datetime, html, sys, subprocess, runpy
 TS = os.path.dirname(os.path.abspath(__file__))
 J = lambda *p: os.path.join(TS, *p)
-CD = os.environ.get('TS_CLIMB_DIR')                  # the climb's results folder, relative to teamsearch/ (default: local)
-C = (lambda *p: os.path.join(TS, CD, *p)) if CD else J
+CLIMB_DIRS = ['', os.path.join('cloud_results', 'v12'), 'cloud_results']
+def climb_dir():
+    """(folder relative to teamsearch/, path joiner) for the hill climb's files: TS_CLIMB_DIR, else the candidate with the newest activity"""
+    cd = os.environ.get('TS_CLIMB_DIR')
+    if cd is None:
+        newest = lambda d: max([os.path.getmtime(f) for f in (J(d, 'climb_progress.json'), J(d, 'climb_state.json'), J(d, 'round.log'),
+                                                              J(d, 'round1.log')) if os.path.exists(f)] + [0])
+        cd = max(CLIMB_DIRS, key=newest)
+    return cd, (lambda *p: os.path.join(TS, cd, *p)) if cd else J
 
 def ampm(t, sec=False): return t.strftime('%-I:%M:%S %p' if sec else '%-I:%M %p').lower()
 def fmt(sec):
@@ -47,7 +56,9 @@ def other_thread():
     except Exception as e:
         return f'<p class="idle">Couldn\'t read the other thread\'s page ({html.escape(type(e).__name__)}); it\'s at <a href="http://localhost:8766">localhost:8766</a>.</p>'
 
-def page():
+def cards():
+    """the team search's progress cards as HTML (no heading); the project's page at 8766 calls this"""
+    CD, C = climb_dir()
     ps = subprocess.run(['ps', '-axo', 'command'], capture_output=True, text=True).stdout
     running = lambda pat: any(pat in l for l in ps.splitlines())
     cards = []
@@ -109,6 +120,9 @@ def page():
                        for m in sorted(last, key=lambda m: -m['best']['diff']))
         cards.append(f'''<div class="card finished"><div class="top"><b>Climb state after round {stt['round']}</b><span class="st">{act} still climbing</span></div>
           {f'<table><tr><th>start</th><th>best swap</th><th>gain (win-share pts)</th><th></th></tr>{rows}</table>' if rows else ''}</div>''')
+    return ''.join(cards)
+
+def page():
     now = datetime.datetime.now()
     return f'''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sim progress</title><style>
@@ -125,7 +139,7 @@ table{{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}}td,th{
 @media (max-width:520px){{table{{font-size:12px}}}}</style></head>
 <body><div class="wrap" id="wrap"><h1>Sim progress</h1>
 <div class="now">Updated {ampm(now, True)} &middot; refreshes every 10 s</div>
-<h2>Team search (this thread)</h2>{''.join(cards)}
+<h2>Team search (this thread)</h2>{cards()}
 <h2>Trick Room six sims (other thread)</h2>{other_thread()}</div>
 <script>
 setInterval(async () => {{ try {{ const r = await fetch('/?t=' + Date.now(), {{cache: 'no-store'}}); const t = await r.text();

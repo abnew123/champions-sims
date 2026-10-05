@@ -516,7 +516,7 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     32 seeds, one thread: flat 216 s, staged 45 s (4.8x; flat 8 seeds took 55 s). Against flat 32: position value within 0.0003,
     values of options in the mix within 0.002, the value of the move actually played within 0.0013, the same top option for every side
     (flat 8 agreed on 30 of 40 and was off by up to 0.07). Options outside the contention band keep their 2-seed values (noisy, by design).
-  - **champ-battle-v16 = v15 with a faster engine, same games** (2026-10-05, 8:30 pm). Profile of v15: handler discovery
+  - **champ-battle-v16 = v15 with a faster engine, same games** (2026-10-05, 7:20 pm). Profile of v15: handler discovery
     (`find_event_handlers`) was 57% of all time, nearly all of it hashing and comparing strings: `cb_names.contains` on every
     prefixed callback name (27%), `Dex::eff` lookups by id, `cbs.get` per effect, plus serde_json flag reads in the suppression checks.
     Changes, all in `native/champ/src` (dex.rs, battle.rs, state.rs, plan.rs, sim.rs): every callback name gets a dense index at load

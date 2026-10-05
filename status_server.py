@@ -78,21 +78,9 @@ def title(r):
     return f"{name}: {STEP[step]}" + (f" ({variant.group(1)} variant)" if variant else '')
 
 def team_search():
-    """the Team search thread's own cards, read from its page (teamsearch/status_server.py); a note if its layout changed"""
-    ts = os.path.join(HERE, 'teamsearch'); old = os.environ.get('TS_CLIMB_DIR')
-    try:
-        if old is None:                                       # show whichever climb moved last: the local one or one pulled from a cloud box
-            newest = lambda d: max([os.path.getmtime(f) for f in glob.glob(os.path.join(ts, d, 'round*.log')) + glob.glob(os.path.join(ts, d, 'climb_state.json'))] or [0])
-            dirs = [''] + [os.path.relpath(d, ts) for d in glob.glob(os.path.join(ts, 'cloud_results*')) + glob.glob(os.path.join(ts, 'cloud_results', '*')) if os.path.isdir(d)]
-            best = max(dirs, key=newest)
-            if best: os.environ['TS_CLIMB_DIR'] = best
-        o = runpy.run_path(os.path.join(ts, 'status_server.py'))['page']()
-        m = re.search(r'<h2>Team search[^<]*</h2>(.*?)<h2>', o, re.S)
-        return m.group(1) if m else '<p class="idle">Team search&rsquo;s page changed its layout; ask that thread.</p>'
-    except Exception as e:
-        return f'<p class="idle">Couldn&rsquo;t read Team search&rsquo;s cards ({html.escape(type(e).__name__)}).</p>'
-    finally:
-        if old is None: os.environ.pop('TS_CLIMB_DIR', None)
+    """the Team search thread's own cards (teamsearch/status_server.py cards(): it picks its climb folder itself)"""
+    try: return runpy.run_path(os.path.join(HERE, 'teamsearch', 'status_server.py'))['cards']()
+    except Exception as e: return f'<p class="idle">Couldn&rsquo;t read Team search&rsquo;s cards ({html.escape(type(e).__name__)}).</p>'
 
 def page():
     now = datetime.datetime.now()

@@ -9,15 +9,6 @@
         "8766"
       ],
       "port": 8766
-    },
-    {
-      "name": "teamsearch-progress",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": [
-        "teamsearch/status_server.py",
-        "8767"
-      ],
-      "port": 8767
     }
   ]
 }

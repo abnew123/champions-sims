@@ -1,0 +1,52 @@
+{
+ "id": "b2g2", "title": "Game 5", "recorded": "2026-10-02", "result": "loss", "how": "you forfeited during turn 3",
+ "mine": ["Incineroar", "Blastoise", "Kingambit", "Torkoal"],
+ "my_overrides": {"Kingambit": {"nature": "Brave"}},
+ "theirs": [
+  {"species": "Gardevoir", "from": "Gardevoir-Mega", "ability": "Trace", "moves": ["Hyper Voice", "Expanding Force"]},
+  {"species": "Indeedee-F", "moves": ["Follow Me"]},
+  {"species": "Archaludon", "moves": ["Thunderbolt", "Aura Sphere"]}
+ ],
+ "candidates": [{"species": "Sneasler", "w": 0.65}, {"species": "Basculegion", "w": 0.65}, {"species": "Charizard", "w": 0.55}],
+ "turns": [
+  {"turn": 1,
+   "p1": {"Incineroar": {"slot": "a", "hp": 202, "gone": true}, "Blastoise": {"slot": "b", "hp": 186, "b": {"atk": -1}}},
+   "p2": {"Gardevoir": {"slot": "a", "pct": 100, "b": {"atk": -1}}, "Indeedee-F": {"slot": "b", "pct": 100, "b": {"atk": -1}}},
+   "field": {"terrain": ["Psychic", 5]},
+   "acts": {"p1": {"a": {"move": "Flare Blitz", "target": "p2a"}, "b": {"move": "Dark Pulse", "target": "p2b", "mega": true}},
+            "p2": {"a": {"move": "Hyper Voice", "mega": true}, "b": {"move": "Follow Me"}}},
+   "events": [
+    [null, "Leads: Incineroar and Blastoise against Gardevoir and Indeedee", ["Psychic Terrain started (Psychic Surge)", "Incineroar's Intimidate: Gardevoir and Indeedee Attack −1", "Gardevoir traced Intimidate: Incineroar and Blastoise Attack −1", "Incineroar's White Herb undid its drop"]],
+    ["p2", "Gardevoir Mega Evolved", []],
+    ["p1", "Blastoise Mega Evolved", []],
+    ["p2", "Indeedee used Follow Me", ["Indeedee became the centre of attention"]],
+    ["p2", "Mega Gardevoir used Hyper Voice", ["Incineroar 100% → 39% over the turn", "Mega Blastoise 100% → 56%"]],
+    ["p1", "Mega Blastoise used Dark Pulse on Indeedee", ["super effective"]],
+    ["p1", "Incineroar used Flare Blitz", ["drawn into Indeedee by Follow Me", "Indeedee fainted"]]
+   ]},
+  {"turn": 2,
+   "p1": {"Incineroar": {"hp": 78}, "Blastoise": {"hp": 105, "mega": true}},
+   "p2": {"Gardevoir": {"mega": true}, "Indeedee-F": {"slot": "", "f": true}, "Archaludon": {"slot": "b", "pct": 100}},
+   "field": {"terrain": ["Psychic", 4]},
+   "acts": {"p1": {"a": {"move": "Throat Chop", "target": "p2a"}, "b": {"move": "Aura Sphere", "target": "p2b"}},
+            "p2": {"a": {"move": "Hyper Voice"}, "b": {"move": "Thunderbolt", "target": "p1b"}}},
+   "events": [
+    [null, "Archaludon came in", []],
+    ["p2", "Mega Gardevoir used Hyper Voice", ["Incineroar fainted"]],
+    ["p2", "Archaludon used Thunderbolt on Mega Blastoise", ["Mega Blastoise fainted (super effective)"]],
+    [null, "Your choices that did not get to happen: Throat Chop on Mega Gardevoir, Aura Sphere on Archaludon", []]
+   ]},
+  {"turn": 3,
+   "p1": {"Incineroar": {"slot": "", "f": true}, "Blastoise": {"slot": "", "f": true}, "Kingambit": {"slot": "a", "hp": 207}, "Torkoal": {"slot": "b", "hp": 177}},
+   "field": {"terrain": ["Psychic", 3], "weather": ["Sun", 5]},
+   "acts": {"p1": {"a": {"move": "Low Kick", "target": "p2b"}},
+            "p2": {"a": {"move": "Expanding Force"}, "b": {"move": "Aura Sphere", "target": "p1a"}}},
+   "events": [
+    [null, "Kingambit and Torkoal came in", ["Sun started (Drought)"]],
+    ["p2", "Mega Gardevoir used Expanding Force", ["Kingambit is immune", "Torkoal fainted"]],
+    ["p2", "Archaludon used Aura Sphere on Kingambit", ["extremely effective; Kingambit's Chople Berry halved it"]],
+    ["p1", "Kingambit used Low Kick on Archaludon", ["super effective", "Archaludon Defense +1 (Stamina)"]],
+    [null, "You forfeited", []]
+   ]}
+ ]
+}

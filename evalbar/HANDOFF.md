@@ -51,6 +51,15 @@ Caveat: the engine knows each side's whole brought four and their sets from hind
 published page (version 3) takes its bar from the rescaled engine value: `build.py <id> acc=evalbar/results/accuracy_engine.json
 engine=... pos=... cal=0.7438`. The rescale weight depends on the sampling (flat 8 samples gave 0.56), so refit it if the mode changes.
 
+**Recorded games (2026-10-05, the user asked):** `games/*.json` are the user's five recorded ladder games (recordings/batch1, batch2,
+read-only; TR sheet owns that pipeline) transcribed turn by turn by hand from the OCR timelines and frames (`games/README.md` has the
+format). `recorded.py positions out/rec_pos.jsonl`, `engine.py run out/rec_pos.jsonl out/rec_eval.jsonl`, `recorded.py page
+out/rec_eval.jsonl out/rec_pos.jsonl` -> `out/recorded.html`, published as https://claude.ai/artifact/L5i4RRKHCc4Bf2MXDqiAde (republish a
+copy named `out/ladder-games.html`). Your side is p1 ("You"), sets from `pssim/myteam_c_incin.json` with Brave Kingambit (the recordings
+show Torkoal at 177 HP, i.e. 32 HP points); the opponent's from Smogon M-C sets plus what each game revealed; an unseen fourth is averaged
+over its team-preview candidates. Caveat: `egvalue9_sym.json` weights Trick Room turns at 0.07 against egvalue9's 0.26, so the one-turn
+bar may undervalue setting Trick Room (asked Battle sim).
+
 Possible next steps (not asked for yet): more demo games, flagging Perish Song positions on the page, Battle sim extending the engine data
 (210 games need a missing species or ability), step 2 (the user's recorded games, a belief over the opponent's hidden sets).
 

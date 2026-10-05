@@ -1,0 +1,84 @@
+{
+ "id": "b1g3", "title": "Game 3", "recorded": "2026-10-02", "result": "loss", "how": "you forfeited at the start of turn 6",
+ "mine": ["Incineroar", "Blastoise", "Indeedee-F", "Kingambit"],
+ "my_overrides": {"Kingambit": {"nature": "Brave"}},
+ "theirs": [
+  {"species": "Indeedee-F", "item": "Rocky Helmet", "moves": ["Follow Me"], "note": "Rocky Helmet: Incineroar lost a sixth after Throat Chop"},
+  {"species": "Kommo-o", "item": "Leftovers", "moves": ["Clangorous Soul", "Aura Sphere", "Clanging Scales"], "note": "Leftovers: it healed 6% a turn"},
+  {"species": "Metagross", "from": "Metagross-Mega", "ability": "Clear Body", "moves": ["Psychic Fangs", "Steel Roller", "Protect"]},
+  {"species": "Incineroar"}
+ ],
+ "turns": [
+  {"turn": 1,
+   "p1": {"Incineroar": {"slot": "a", "hp": 202}, "Blastoise": {"slot": "b", "hp": 186}},
+   "p2": {"Indeedee-F": {"slot": "a", "pct": 100, "b": {"atk": -1}}, "Kommo-o": {"slot": "b", "pct": 100, "b": {"atk": -1}}},
+   "field": {"terrain": ["Psychic", 5]},
+   "acts": {"p1": {"a": {"move": "Throat Chop", "target": "p2a"}, "b": {"move": "Aura Sphere", "target": "p2b", "mega": true}},
+            "p2": {"a": {"move": "Follow Me"}, "b": {"move": "Clangorous Soul"}}},
+   "events": [
+    [null, "Leads: Incineroar and Blastoise against Indeedee and Kommo-o", ["Psychic Terrain started (Psychic Surge)", "Incineroar's Intimidate: Indeedee and Kommo-o Attack −1"]],
+    ["p1", "Blastoise Mega Evolved", []],
+    ["p2", "Indeedee used Follow Me", ["Indeedee became the centre of attention"]],
+    ["p2", "Kommo-o used Clangorous Soul", ["Kommo-o Attack, Defense, Sp. Atk, Sp. Def and Speed +1", "Kommo-o 100% → 67%"]],
+    ["p1", "Mega Blastoise used Aura Sphere", ["drawn into Indeedee by Follow Me"]],
+    ["p1", "Incineroar used Throat Chop on Indeedee", ["Indeedee fainted (super effective)", "Incineroar 100% → 84% (Rocky Helmet)"]],
+    [null, "End of turn", ["Kommo-o 67% → 73% (Leftovers)"]]
+   ]},
+  {"turn": 2,
+   "p1": {"Incineroar": {"hp": 169}, "Blastoise": {"mega": true}},
+   "p2": {"Indeedee-F": {"slot": "", "f": true}, "Kommo-o": {"pct": 73, "b": {"def": 1, "spa": 1, "spd": 1, "spe": 1}}, "Metagross": {"slot": "a", "pct": 100}},
+   "field": {"terrain": ["Psychic", 4]},
+   "acts": {"p1": {"b": {"move": "Water Spout"}},
+            "p2": {"a": {"move": "Psychic Fangs", "target": "p1b", "mega": true}, "b": {"move": "Aura Sphere", "target": "p1a"}}},
+   "events": [
+    [null, "Metagross came in", []],
+    ["p2", "Metagross Mega Evolved", []],
+    ["p2", "Kommo-o used Aura Sphere on Incineroar", ["Incineroar fainted (super effective)"]],
+    ["p2", "Mega Metagross used Psychic Fangs on Mega Blastoise", ["Mega Blastoise 100% → 32%"]],
+    ["p1", "Mega Blastoise used Water Spout", ["Mega Metagross 100% → 82%", "Kommo-o (not very effective)"]]
+   ]},
+  {"turn": 3,
+   "p1": {"Incineroar": {"slot": "", "f": true}, "Blastoise": {"hp": 59}, "Indeedee-F": {"slot": "a", "hp": 177, "b": {"spd": 1}, "gone": true}},
+   "p2": {"Kommo-o": {"pct": 71}, "Metagross": {"pct": 82, "mega": true}},
+   "field": {"terrain": ["Psychic", 3]},
+   "acts": {"p1": {"b": {"switch": "Kingambit"}},
+            "p2": {"a": {"move": "Steel Roller", "target": "p1a"}, "b": {"move": "Clanging Scales"}}},
+   "events": [
+    [null, "Indeedee came in for Incineroar", ["Indeedee's Psychic Seed: Sp. Def +1"]],
+    ["p1", "Mega Blastoise switched out for Kingambit", []],
+    ["p2", "Kommo-o used Clanging Scales", ["Kingambit 100% → 54% (not very effective, critical hit)", "Kommo-o Defense −1"]],
+    ["p2", "Mega Metagross used Steel Roller on Indeedee", ["Indeedee fainted", "Psychic Terrain ended"]]
+   ]},
+  {"turn": 4,
+   "p1": {"Indeedee-F": {"slot": "", "f": true}, "Blastoise": {"slot": "a"}, "Kingambit": {"slot": "b", "hp": 111}},
+   "p2": {"Kommo-o": {"pct": 76, "b": {"spa": 1, "spd": 1, "spe": 1}}},
+   "acts": {"p1": {"a": {"move": "Fake Out", "target": "p2b"}, "b": {"move": "Sucker Punch", "target": "p2a"}},
+            "p2": {"a": {"move": "Protect"}}},
+   "events": [
+    [null, "Mega Blastoise came back in for Indeedee", []],
+    ["p2", "Mega Metagross used Protect", []],
+    ["p1", "Mega Blastoise used Fake Out on Kommo-o", ["Kommo-o flinched"]],
+    ["p1", "Kingambit used Sucker Punch on Mega Metagross", ["it failed"]],
+    [null, "End of turn", ["Kommo-o 76% → 73% after Fake Out and Leftovers"]]
+   ]},
+  {"turn": 5,
+   "p2": {"Kommo-o": {"pct": 73}},
+   "stall": ["Metagross"],
+   "acts": {"p1": {"a": {"move": "Dark Pulse", "target": "p2a"}, "b": {"move": "Sucker Punch", "target": "p2a"}},
+            "p2": {"a": {"move": "Protect"}, "b": {"move": "Aura Sphere", "target": "p1b"}}},
+   "events": [
+    ["p2", "Mega Metagross used Protect", ["it failed (used twice in a row)"]],
+    ["p1", "Kingambit used Sucker Punch on Mega Metagross", ["it failed"]],
+    ["p2", "Kommo-o used Aura Sphere on Kingambit", ["Kingambit fainted (extremely effective)"]],
+    ["p1", "Mega Blastoise used Dark Pulse on Mega Metagross", ["Mega Metagross fainted (super effective)"]]
+   ]},
+  {"turn": 6,
+   "p1": {"Kingambit": {"slot": "", "f": true}, "Blastoise": {"b": {"atk": -1}}},
+   "p2": {"Metagross": {"slot": "", "f": true}, "Incineroar": {"slot": "a", "pct": 100}, "Kommo-o": {"pct": 79}},
+   "acts": {},
+   "events": [
+    [null, "Incineroar came in", ["Incineroar's Intimidate: Mega Blastoise Attack −1", "Kommo-o's HP is estimated (73% plus Leftovers)"]],
+    [null, "You forfeited", []]
+   ]}
+ ]
+}

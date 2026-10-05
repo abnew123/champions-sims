@@ -69,6 +69,11 @@ header h1{font-size:clamp(28px,6vw,40px);font-weight:700;letter-spacing:-.02em;l
 .where{font-family:var(--disp);font-weight:600;font-size:15px;text-align:center}
 .where small{display:block;font-family:var(--body);font-weight:400;font-size:12.5px;color:var(--ink2)}
 
+.games{display:flex;flex-wrap:wrap;gap:6px}
+.games button{font-family:var(--disp);font-size:13px;font-weight:600;color:var(--ink2);background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:7px 12px;cursor:pointer;display:flex;gap:7px;align-items:baseline}
+.games button small{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--ink3)}
+.games button.on{background:var(--accent-soft);color:var(--ink);border-color:var(--accent)}
+.games button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 section > h2{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin-bottom:10px}
 
 /* graph */
@@ -152,10 +157,12 @@ section > h2{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:u
     <div class="meta" id="meta"></div>
   </header>
 
+  <nav class="games" id="games" hidden aria-label="Games"></nav>
+
   <div class="live" id="live">
     <div class="sides">
-      <div class="side"><span class="who"><i class="sw p1"></i>Player 1</span><span class="pc" id="pc1"></span></div>
-      <div class="side"><span class="pc" id="pc2"></span><span class="who">Player 2<i class="sw p2"></i></span></div>
+      <div class="side"><span class="who"><i class="sw p1"></i><span id="n1">Player 1</span></span><span class="pc" id="pc1"></span></div>
+      <div class="side"><span class="pc" id="pc2"></span><span class="who"><span id="n2">Player 2</span><i class="sw p2"></i></span></div>
     </div>
     <div class="bar" id="bar" role="img"><i class="a" id="barA"></i><i class="b"></i></div>
     <div class="nav">
@@ -166,7 +173,7 @@ section > h2{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:u
   </div>
 
   <section>
-    <h2>Player 1's win chance through the game</h2>
+    <h2 id="graphTitle">Player 1's win chance through the game</h2>
     <div class="graph" id="graph"></div>
   </section>
 
@@ -191,34 +198,52 @@ section > h2{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:u
 </div>
 
 <script>
-const G = /*DATA*/null;
-const N = G.steps.length;                                   // steps 0..N-1 are turns 1..N; step N is the result
-const WP = G.steps.map(s => s.wp).concat([G.final.wp === null ? G.steps[N - 1].wp : G.final.wp]);
+const DATA = /*DATA*/null;
+const GAMES = DATA.games || [DATA], NAMES = DATA.names || null, REC = !!DATA.recorded;
+let G, N, WP, gi = 0;                                       // steps 0..N-1 are turns 1..N; step N is the result
+function load(k) {
+  gi = Math.max(0, Math.min(GAMES.length - 1, k)); G = GAMES[gi]; N = G.steps.length;
+  WP = G.steps.map(s => s.wp).concat([G.final.wp === null ? G.steps[N - 1].wp : G.final.wp]);
+}
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 const $ = id => document.getElementById(id);
 const pct = (x, live) => { const v = Math.round(100 * x); return live ? Math.max(1, Math.min(99, v)) : v; };
-const who = s => 'Player ' + s[1];
+const who = s => NAMES ? NAMES[s] : 'Player ' + s[1];
+const towards = s => NAMES ? {p1: 'you', p2: 'the opponent'}[s] : who(s);
 const seg = segs => segs.map(x => typeof x === 'string' ? esc(x) : `<span class="m"><i class="sw ${x[0]}"></i>${esc(x[1])}</span>`).join('');
 const STAT = {atk: 'Atk', def: 'Def', spa: 'SpA', spd: 'SpD', spe: 'Spe', accuracy: 'Acc', evasion: 'Eva'};
 const STATUS = {slp: 'Asleep', brn: 'Burned', par: 'Paralysed', psn: 'Poisoned', tox: 'Badly poisoned', frz: 'Frozen'};
 let cur = 0;
 
 function head() {
-  const turns = `${N} turns`, r = G.rating ? `players rated about ${Math.round(G.rating)}` : null;
-  $('sub').textContent = G.engine ? 'One Reg M-C best-of-three ladder game from Showdown, turn by turn: who is winning at the start of each turn, the best options for each Pokémon on the field, and what happened next.'
-    : 'One Reg M-C best-of-three ladder game from Showdown, turn by turn: who is winning at the start of each turn, and what happened next.';
-  if (G.engine) $('eyebrow').textContent = G.engine.bar ? 'Prototype · engine version' : 'Prototype · bar version 0 · options from the engine';
-  $('meta').innerHTML = [turns, r, G.winner ? `${who(G.winner)} won${G.forfeit ? ' by forfeit' : ''}` : 'no result', 'replay ' + G.id.split('-').pop()]
-    .filter(Boolean).map(x => `<span class="chip">${esc(x)}</span>`).join('');
+  const r = G.rating ? `players rated about ${Math.round(G.rating)}` : null;
+  $('n1').textContent = who('p1'); $('n2').textContent = who('p2');
+  $('graphTitle').textContent = NAMES ? 'Your win chance through the game' : "Player 1's win chance through the game";
+  if (REC) {
+    $('eyebrow').textContent = 'Your recorded ladder games';
+    $('sub').textContent = 'Your recorded Reg M-C ladder games, turn by turn: who is winning at the start of each turn, the best options for each Pokémon on the field, and what happened next.';
+    $('meta').innerHTML = [G.title, `${N} turn${N === 1 ? '' : 's'}`, `${G.result === 'win' ? 'You won' : 'You lost'}: ${G.how}`, `recorded ${G.recorded}`]
+      .map(x => `<span class="chip">${esc(x)}</span>`).join('');
+  } else {
+    $('sub').textContent = G.engine ? 'One Reg M-C best-of-three ladder game from Showdown, turn by turn: who is winning at the start of each turn, the best options for each Pokémon on the field, and what happened next.'
+      : 'One Reg M-C best-of-three ladder game from Showdown, turn by turn: who is winning at the start of each turn, and what happened next.';
+    if (G.engine) $('eyebrow').textContent = G.engine.bar ? 'Prototype · engine version' : 'Prototype · bar version 0 · options from the engine';
+    $('meta').innerHTML = [`${N} turns`, r, G.winner ? `${who(G.winner)} won${G.forfeit ? ' by forfeit' : ''}` : 'no result', 'replay ' + G.id.split('-').pop()]
+      .filter(Boolean).map(x => `<span class="chip">${esc(x)}</span>`).join('');
+  }
+  const nav = $('games'); nav.hidden = GAMES.length < 2;
+  nav.innerHTML = GAMES.map((g, k) => `<button type="button" data-k="${k}" class="${k === gi ? 'on' : ''}" aria-pressed="${k === gi}">${esc(g.title || 'Game ' + (k + 1))}<small>${g.result === 'win' ? 'won' : g.result === 'loss' ? 'lost' : ''}</small></button>`).join('');
+  nav.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { load(+b.dataset.k); head(); notes(); go(0); }));
 }
 
 function bar() {
   const live = cur < N || G.final.wp === null, a = pct(WP[cur], live), b = 100 - a;
   $('pc1').textContent = a + '%'; $('pc2').textContent = b + '%';
   $('barA').style.flexBasis = `calc(${a}% - 1px)`;
-  $('bar').setAttribute('aria-label', `Player 1 ${a}%, Player 2 ${b}%`);
+  $('bar').setAttribute('aria-label', `${who('p1')} ${a}%, ${who('p2')} ${b}%`);
   $('where').innerHTML = cur < N ? `Turn ${G.steps[cur].turn} of ${N}<small>at the start of the turn</small>`
     : `Result<small>${G.winner ? who(G.winner) + ' won' + (G.forfeit ? ' by forfeit' : '') : 'no winner recorded'}</small>`;
+  if (NAMES && cur === N) $('where').innerHTML = `Result<small>${G.result === 'win' ? 'You won' : 'You lost'}</small>`;
   $('prev').disabled = cur === 0; $('next').disabled = cur === N;
 }
 
@@ -229,12 +254,12 @@ function graph() {
   const line = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
   const area = `${line} L${x(N)} ${y(.5)} L${x(0)} ${y(.5)} Z`;
   const step = (W - L - R) / N;
-  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Player 1's win chance at the start of each turn">
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${who('p1')}'s win chance at the start of each turn">
     <defs><clipPath id="up"><rect x="0" y="0" width="${W}" height="${y(.5)}"/></clipPath><clipPath id="dn"><rect x="0" y="${y(.5)}" width="${W}" height="${H}"/></clipPath></defs>`;
   for (const v of [0, .25, .5, .75, 1]) s += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--rule${v === .5 ? '' : '-2'})" stroke-width="1" fill="none"/>
     <text x="${L - 6}" y="${y(v) + 3.5}" text-anchor="end">${100 * v}%</text>`;
   s += `<path d="${area}" fill="var(--p1)" opacity=".28" clip-path="url(#up)"/><path d="${area}" fill="var(--p2)" opacity=".28" clip-path="url(#dn)"/>`;
-  s += `<text class="lab" x="${L + 6}" y="${T + 11}">Player 1 ahead</text><text class="lab" x="${L + 6}" y="${H - B - 6}">Player 2 ahead</text>`;
+  s += `<text class="lab" x="${L + 6}" y="${T + 11}">${esc(who('p1'))} ahead</text><text class="lab" x="${L + 6}" y="${H - B - 6}">${esc(who('p2'))} ahead</text>`;
   s += `<line x1="${x(cur)}" x2="${x(cur)}" y1="${T}" y2="${H - B}" stroke="var(--ink)" stroke-width="1" fill="none" opacity=".5"/>`;
   s += `<path d="${line}" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
   pts.forEach((p, i) => { s += `<circle cx="${p[0]}" cy="${p[1]}" r="${i === cur ? 5.5 : 3.5}" fill="${i === cur ? 'var(--accent)' : 'var(--ink)'}" stroke="var(--panel)" stroke-width="2"/>`; });
@@ -245,7 +270,7 @@ function graph() {
   const tip = $('tip');
   box.querySelectorAll('.hit').forEach(r => {
     const i = +r.dataset.i;
-    const show = () => { const a = pct(WP[i], i < N); tip.textContent = `${i === N ? 'Result' : 'Turn ' + G.steps[i].turn}: Player 1 ${a}%, Player 2 ${100 - a}%`;
+    const show = () => { const a = pct(WP[i], i < N); tip.textContent = `${i === N ? 'Result' : 'Turn ' + G.steps[i].turn}: ${who('p1')} ${a}%, ${who('p2')} ${100 - a}%`;
       const left = Math.max(110, Math.min(box.clientWidth - 110, 6 + pts[i][0] * (box.clientWidth - 12) / W)); tip.style.left = left + 'px'; tip.style.top = (10 + pts[i][1] - 10) + 'px'; tip.hidden = false; };
     r.addEventListener('mouseenter', show); r.addEventListener('focus', show);
     r.addEventListener('mouseleave', () => { tip.hidden = true; }); r.addEventListener('blur', () => { tip.hidden = true; });
@@ -295,7 +320,7 @@ function options() {
   $('optTitle').textContent = `Best options at the start of turn ${G.steps[cur].turn}`;
   const pc = v => Math.round(100 * v) + '%', e1 = Math.max(1, Math.min(99, Math.round(100 * G.steps[cur].ev)));
   $('optNote').textContent = (G.engine.bar ? 'Picks: how often the planner would choose the option. Wins: that player\'s win chance if it is chosen and the opponent answers with their best mix.'
-    : `The engine's planner rates this position Player 1 ${e1}%, Player 2 ${100 - e1}%. Picks: how often it would choose the option. Wins: that player's win chance, on the engine's scale, if the option is chosen and the opponent answers with their best mix.`)
+    : `The engine's planner rates this position ${who('p1')} ${e1}%, ${who('p2')} ${100 - e1}%. Picks: how often it would choose the option. Wins: that player's win chance, on the engine's scale, if the option is chosen and the opponent answers with their best mix.`)
     + (G.engine.staged ? ' A value marked ~ is rough: the option is clearly worse and was sampled less.' : '');
   $('opts').innerHTML = ['p1', 'p2'].map(sd => o[sd].map(slot => {
     const all = slot.options.slice().sort((a, b) => b.w - a.w || b.v - a.v), top = all.slice(0, 5);
@@ -305,14 +330,15 @@ function options() {
     const more = all.length - top.length;
     return `<div class="ocard"><h3><i class="sw ${sd}"></i>${esc(slot.mon)}</h3>
       <div class="orow hd"><div>Option</div><div class="r">Picks</div><div class="r">Wins</div></div>${rows}
-      ${more > 0 || slot.played === null ? `<div class="omore">${[more > 0 ? `${more} more option${more === 1 ? '' : 's'} not shown` : '', slot.played === null ? 'the log does not show what it chose' : ''].filter(Boolean).join(' · ')}</div>` : ''}</div>`;
+      ${more > 0 || slot.played === null ? `<div class="omore">${[more > 0 ? `${more} more option${more === 1 ? '' : 's'} not shown` : '', slot.played === null ? `the ${REC ? 'recording' : 'log'} does not show what it chose` : ''].filter(Boolean).join(' · ')}</div>` : ''}</div>`;
   }).join('')).join('');
 }
 
 function events() {
   if (cur === N) {
     $('evTitle').textContent = 'Result';
-    $('events').innerHTML = `<p class="none">${G.winner ? `<span class="m"><i class="sw ${G.winner}"></i>${who(G.winner)}</span> won${G.forfeit ? ' when the other player forfeited' : ''} after ${N} turns.` : 'The log has no winner.'}</p>`;
+    $('events').innerHTML = REC ? `<p class="none">${G.result === 'win' ? 'You won' : 'You lost'}: ${esc(G.how)}.</p>`
+      : `<p class="none">${G.winner ? `<span class="m"><i class="sw ${G.winner}"></i>${who(G.winner)}</span> won${G.forfeit ? ' when the other player forfeited' : ''} after ${N} turns.` : 'The log has no winner.'}</p>`;
     return;
   }
   const s = G.steps[cur];
@@ -321,8 +347,8 @@ function events() {
   const rows = s.events.map(e => `<li><div class="head${e.side ? '' : ' plain'}">${seg(e.head)}</div>
     ${e.notes.length ? '<ul>' + e.notes.map(n => `<li>${seg(n)}</li>`).join('') + '</ul>' : ''}</li>`).join('');
   $('events').innerHTML = (rows ? `<ol class="ev">${rows}</ol>` : '<p class="none">Nothing was recorded for this turn.</p>') +
-    `<div class="after"><span class="k">${cur + 1 < N ? 'Bar after this turn' : 'Result'}</span><span class="v">Player 1 ${a}% → ${b}%</span>
-     <span class="d">${d === 0 ? 'no change' : `${Math.abs(d)} points towards ${d > 0 ? 'Player 1' : 'Player 2'}`}</span></div>`;
+    `<div class="after"><span class="k">${cur + 1 < N ? 'Bar after this turn' : 'Result'}</span><span class="v">${who('p1')} ${a}% → ${b}%</span>
+     <span class="d">${d === 0 ? 'no change' : `${Math.abs(d)} points towards ${d > 0 ? towards('p1') : towards('p2')}`}</span></div>`;
 }
 
 function notes() {
@@ -333,10 +359,12 @@ function notes() {
   const solve = `For each turn the battle engine plays every pair of choices one turn ahead (${samples}), scores the positions that result, and solves the turn as a game between the two players.`;
   let html;
   if (G.engine && G.engine.bar) {
-    html = `<p><b>How the bar is made.</b> ${solve} The bar is the value of that game for Player 1, rescaled so that it matches how real games turned out: the engine alone is too sure of itself, so its odds are pulled towards even (log-odds times ${G.engine.cal.toFixed(2)}).</p>
+    html = `<p><b>How the bar is made.</b> ${solve} The bar is the value of that game for ${REC ? 'you' : 'Player 1'}, rescaled so that it matches how real games turned out: the engine alone is too sure of itself, so its odds are pulled towards even (log-odds times ${G.engine.cal.toFixed(2)}).</p>
     <p><b>Best options.</b> Picks is each option's share of the solution, so a mixed answer means the planner would vary its play. Wins is on the same scale as the bar.</p>
     ${a ? `<p><b>How good it is.</b> On ${a.games.toLocaleString('en-US')} real games it was not fitted on (${a.positions.toLocaleString('en-US')} turns), the side it favoured won ${f(a.favourite_won)} of the time. Log loss ${a.log_loss.toFixed(3)}; the earlier bar without the engine scores ${a.v0.log_loss.toFixed(3)} on the same turns, and a coin flip 0.693 (lower is better).${cal ? ` Positions it rated around ${f(cal.rated)} were won ${f(cal.won)} of the time.` : ''}</p>` : ''}
-    <p><b>Hindsight and guesses.</b> Each bench lists all the Pokémon that player brought, which the opponent only learned as they came in, and the engine knows them too. Items, abilities, natures and moves come from the open team sheets. Stat points are not on team sheets: the engine assumes each Pokémon's most common spread.</p>`;
+    ${REC ? `<p><b>What it knows about your games.</b> Positions are transcribed from the screen recording, turn by turn. Your sets are exact. The opponent's are each species' most common Reg M-C set with what the game showed laid on top (moves used, items that activated, Mega Evolution); their stat points are guesses. Their HP comes from the on-screen percentages; the few values that had to be inferred say so in that turn's events.</p>
+    <p><b>Hindsight.</b> The engine knows the opponent's four from the start, which you only learned as they came in. Where one of their four never came in, the bar and the options average over the team-preview Pokémon it could have been, weighted by how often each is brought.</p>`
+      : `<p><b>Hindsight and guesses.</b> Each bench lists all the Pokémon that player brought, which the opponent only learned as they came in, and the engine knows them too. Items, abilities, natures and moves come from the open team sheets. Stat points are not on team sheets: the engine assumes each Pokémon's most common spread.</p>`}`;
   } else {
     html = `<p><b>How the bar is made (version 0).</b> ${how0}</p>
     ${a ? `<p><b>How good it is.</b> On games it was not fitted on, the side it favoured won ${f(a.favourite_won)} of the time, counting every turn of every game. Log loss ${a.log_loss.toFixed(3)} (a coin flip scores 0.693; lower is better).${cal ? ` It is well calibrated: positions it rated around ${f(cal.rated)} were won ${f(cal.won)} of the time.` : ''}</p>` : ''}
@@ -351,6 +379,7 @@ function go(i) {
   cur = Math.max(0, Math.min(N, i)); bar(); graph(); board(); options(); events();
 }
 function start(saved) {
+  load(saved && Number.isInteger(saved.gi) ? saved.gi : 0);
   head(); notes(); go(saved && Number.isInteger(saved.cur) ? saved.cur : 0);
   $('prev').addEventListener('click', () => go(cur - 1)); $('next').addEventListener('click', () => go(cur + 1));
   document.addEventListener('keydown', e => {
@@ -358,7 +387,7 @@ function start(saved) {
     if (e.key === 'ArrowLeft') go(cur - 1); else if (e.key === 'ArrowRight') go(cur + 1);
   });
   let rz; window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(graph, 120); });
-  window.claude?.hot?.snapshot?.(() => ({cur}));
+  window.claude?.hot?.snapshot?.(() => ({cur, gi}));
 }
 if (window.claude?.hot?.ready) window.claude.hot.ready(start); else start(window.claude?.hot?.data ?? {});
 </script>

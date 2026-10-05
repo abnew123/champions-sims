@@ -1,4 +1,4 @@
-"""Engine evaluation of replay positions: builds the positions and runs the engine's `evalpos` (champ-battle-v15) with the bar's settings (the symmetric value
+"""Engine evaluation of replay positions: builds the positions and runs the engine's `evalpos` (champ-battle-v16) with the bar's settings (the symmetric value
 file, damage race with Speed ties averaged, either side may reverse Trick Room, no matchup grid).
   python3 evalbar/engine.py positions <out.jsonl> [both|p1] <replay id ...>      positions for these games (default view: p1; evalpos reports both sides)
   python3 evalbar/engine.py positions <out.jsonl> [both|p1] sample <n> [skip]    for n cached games in a fixed shuffled order, after skipping `skip`
@@ -9,7 +9,7 @@ A run appends to <out.jsonl> and skips positions already in it, so it resumes. I
 localhost:8766 (status.py); EVAL_TITLE names its card. Agree cores with the other threads before threads > 1."""
 import os, sys, json, zlib, time, subprocess
 import common as C
-BIN = os.environ.get('CHAMP_BIN') or os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v15'); MP = os.path.join(C.MAIN, 'pssim')
+BIN = os.environ.get('CHAMP_BIN') or os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v16'); MP = os.path.join(C.MAIN, 'pssim')
 def positions(outf, views, ids):
     import spots as S
     specs = []; skipped = {}

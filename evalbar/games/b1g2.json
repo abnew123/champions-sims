@@ -1,0 +1,69 @@
+{
+ "id": "b1g2", "title": "Game 2", "recorded": "2026-10-02", "result": "loss", "how": "you lost in turn 5",
+ "mine": ["Farigiraf", "Blastoise", "Incineroar", "Kingambit"],
+ "my_overrides": {"Kingambit": {"nature": "Brave"}},
+ "theirs": [
+  {"species": "Zoroark-Hisui", "item": "Life Orb", "moves": ["Hyper Voice", "Grass Knot", "Shadow Ball", "Bitter Malice"], "note": "disguised as Kleavor (Illusion); the engine sees it as itself"},
+  {"species": "Excadrill", "item": "Focus Sash", "moves": ["Megahorn", "High Horsepower", "Protect", "Rock Slide"]},
+  {"species": "Tyranitar", "from": "Tyranitar-Mega", "moves": ["Rock Slide"]},
+  {"species": "Kleavor", "moves": ["Close Combat"]}
+ ],
+ "turns": [
+  {"turn": 1,
+   "p1": {"Farigiraf": {"slot": "a", "hp": 225}, "Blastoise": {"slot": "b", "hp": 186}},
+   "p2": {"Zoroark-Hisui": {"slot": "a", "pct": 100}, "Excadrill": {"slot": "b", "pct": 100}},
+   "acts": {"p1": {"a": {"move": "Trick Room"}, "b": {"move": "Water Spout", "mega": true}},
+            "p2": {"a": {"move": "Hyper Voice"}, "b": {"move": "Megahorn", "target": "p1a"}}},
+   "events": [
+    [null, "Leads: Farigiraf and Blastoise against “Kleavor” and Excadrill", ["the “Kleavor” is Zoroark-Hisui in disguise (Illusion)"]],
+    ["p1", "Blastoise Mega Evolved", []],
+    ["p2", "Zoroark-Hisui (as Kleavor) used Hyper Voice", ["Mega Blastoise 100% → 62%"]],
+    ["p2", "Excadrill used Megahorn on Farigiraf", ["Farigiraf fainted (super effective)"]],
+    ["p1", "Mega Blastoise used Water Spout", ["Excadrill 100% → 1% (super effective; Focus Sash)", "Zoroark-Hisui 100% → 3%, its disguise broke"]]
+   ]},
+  {"turn": 2,
+   "p1": {"Farigiraf": {"slot": "", "f": true}, "Blastoise": {"hp": 115, "mega": true}, "Incineroar": {"slot": "a", "hp": 202}},
+   "p2": {"Zoroark-Hisui": {"pct": 3, "b": {"atk": -1}}, "Excadrill": {"pct": 1, "b": {"atk": -1}, "gone": true}},
+   "acts": {"p1": {"a": {"move": "Fake Out", "target": "p2b"}},
+            "p2": {"a": {"move": "Grass Knot", "target": "p1b"}, "b": {"move": "Protect"}}},
+   "events": [
+    [null, "Incineroar came in for Farigiraf", ["Incineroar's Intimidate: Zoroark-Hisui and Excadrill Attack −1"]],
+    ["p2", "Excadrill used Protect", []],
+    ["p1", "Incineroar used Fake Out on Excadrill", ["Excadrill protected itself"]],
+    ["p2", "Zoroark-Hisui used Grass Knot on Mega Blastoise", ["Mega Blastoise fainted (super effective)", "Zoroark-Hisui fainted (Life Orb recoil)"]]
+   ]},
+  {"turn": 3,
+   "p1": {"Blastoise": {"slot": "", "f": true}, "Kingambit": {"slot": "b", "hp": 207}},
+   "p2": {"Zoroark-Hisui": {"slot": "", "f": true}, "Tyranitar": {"slot": "a", "pct": 100}},
+   "stall": ["Excadrill"],
+   "field": {"weather": ["Sandstorm", 5]},
+   "acts": {"p1": {"b": {"move": "Low Kick", "target": "p2a"}},
+            "p2": {"a": {"move": "Rock Slide", "mega": true}, "b": {"move": "High Horsepower", "target": "p1a"}}},
+   "events": [
+    [null, "Kingambit and Tyranitar came in", ["Sandstorm started (Sand Stream)"]],
+    ["p2", "Tyranitar Mega Evolved", []],
+    ["p2", "Excadrill used High Horsepower on Incineroar", ["super effective"]],
+    ["p2", "Mega Tyranitar used Rock Slide", ["Incineroar fainted (super effective)", "Kingambit 100% → 88% (not very effective)"]],
+    ["p1", "Kingambit used Low Kick on Mega Tyranitar", ["Mega Tyranitar fainted (extremely effective)"]]
+   ]},
+  {"turn": 4,
+   "p1": {"Incineroar": {"slot": "", "f": true}, "Kingambit": {"hp": 183}},
+   "p2": {"Tyranitar": {"slot": "", "f": true, "mega": true}, "Kleavor": {"slot": "a", "pct": 100}},
+   "field": {"weather": ["Sandstorm", 4]},
+   "acts": {"p1": {"b": {"move": "Sucker Punch", "target": "p2b"}}, "p2": {"a": {"move": "Close Combat", "target": "p1b"}}},
+   "events": [
+    [null, "Kleavor came in", []],
+    ["p1", "Kingambit used Sucker Punch on Excadrill", ["Excadrill fainted"]],
+    ["p2", "Kleavor used Close Combat on Kingambit", ["Kingambit 88% → 32% (extremely effective; its Chople Berry was used up)", "Kleavor Defense −1, Sp. Def −1"]]
+   ]},
+  {"turn": 5,
+   "p1": {"Kingambit": {"hp": 67, "gone": true}},
+   "p2": {"Excadrill": {"slot": "", "f": true}, "Kleavor": {"b": {"def": -1, "spd": -1}}},
+   "field": {"weather": ["Sandstorm", 3]},
+   "acts": {"p1": {"b": {"move": "Sucker Punch", "target": "p2a"}}, "p2": {"a": {"move": "Close Combat", "target": "p1b"}}},
+   "events": [
+    ["p1", "Kingambit used Sucker Punch on Kleavor", []],
+    ["p2", "Kleavor used Close Combat on Kingambit", ["Kingambit fainted (extremely effective)"]]
+   ]}
+ ]
+}

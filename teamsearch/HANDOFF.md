@@ -345,3 +345,7 @@ Usage:
 - **Shared-box incident (Oct 5, 5:59 pm):** we shared one tmux server, whose process title is the command of whichever session created it. TR sheet's `pkill -f 'sheetkit/kit.py ...'` matched the server and killed the climb's session; later my `pkill -f "[c]limb.py round"` killed theirs the same way.
   - The climb resumed from cache both times.
   - Fixes: the climb now runs on its own tmux server (`tmux -L climb`, in relaunch.sh, auto_rounds.sh and the README), and auto_rounds takes P×T from `cloud/threads.txt` ("32 3" while sharing). TR sheet moved off tmux to setsid nohup.
+- **v16 (Oct 5, 7:20 pm):** the same games again, ~2.3x faster than v14. Built on the box; a fresh 54-game run (tag v16g) matches cloud/reference_v13g.json 54/54.
+  - Round 1 finishes on the v16 binary under its v13g tag: `TS_BATTLE_BIN` overrides only the binary, so the round's cache stays valid.
+  - From round 2 the setup is v16g (`cloud/run_env.sh` keys on climb_state.json). v14g is no longer used.
+  - Relaunched at 32×3 with round 1 screening at 210/668.

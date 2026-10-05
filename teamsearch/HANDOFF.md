@@ -319,3 +319,8 @@ Usage:
   - `climb.py` takes TS_CACHE_DIR for the pre-filter cache, used by sandbox tests.
 - **Plumbing test (7:19 am, sandbox, 1 start, test mode, ~400 games):** the round ran under v12g. Brings covered 9 archetypes (no Perish), sequential testing ran an extra batch, and state was written only to the sandbox.
 - **Size:** round 1 ≈ 155k games ≈ 2.5–3 h on a c7a.48xlarge. Spain is ~$1.16/h if its quota is granted; otherwise Ohio zone 2b, ~$2.44/h.
+- **Rerun launched (Oct 5, 1:58 pm):** Ohio c7a.48xlarge spot, Ubuntu 24.04. Spain had no spot capacity; Ohio didn't at first either. Root volume grown 8 → 40 GB live (growpart + resize2fs); the default 8 GB is too small, since start files take ~15 KB per game.
+  - Smoke test: 54/54 jobs identical to the Mac reference (0.5667).
+  - Round 1 thorough on 52 starts at 60×3 threads in tmux `climb`.
+  - Watchdog: 12 h cap (start epoch in ~/start_epoch on the box). auto_rounds.sh runs later rounds up to the same cap.
+  - The Mac pull loop copies to `cloud_results/v12`.

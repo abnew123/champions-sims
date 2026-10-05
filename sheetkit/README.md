@@ -50,8 +50,9 @@ The box is set up once the way `teamsearch/cloud/README.md` describes (steps 0-3
 1. `python3 sheetkit/kit.py <team> grid` and `matrix jobs` here, so the grid and the job list exist.
 2. `sheetkit/cloud/push.sh <host> <key file> <team>` copies the kit and the team folder (and any shared simulator file the box lacks).
 3. On the box, in `~/champions-sims`: `python3 sheetkit/kit.py <team> smoke`, then start the run detached, for example
-   `setsid nohup python3 sheetkit/kit.py <team> matrix run --threads 180 > matrix.out 2>&1 &`. All jobs go through one work queue, so
-   every thread stays busy to the end; `--threads` is how many cores you take. If the box is shared, agree the split first.
+   `setsid nohup python3 sheetkit/kit.py <team> matrix run --threads 180 > matrix.out 2>&1 &`. `--threads` is how many cores you
+   take; on Linux the kit spreads them over battle processes of 3 threads each (one process with many threads runs about ten times
+   slower there), dealing the jobs round-robin so the processes finish together. If the box is shared, agree the split first.
 4. `sheetkit/cloud/pull.sh <host> <key file> <team>` copies results back (repeat as often as you like); `status` shows progress.
 5. `matrix report`, `confirm jobs`, push again, `confirm run` on the box, pull, `confirm decide --write`.
 

@@ -6,7 +6,7 @@
 
 Seeds depend on the opponent and the game index only, so every four meets the same games: all comparisons are paired, game by game.
 Result files are the battle binary's: {arch, pair, share, lead, back, theirs, rows: [{g, v, ms, ...}]}."""
-import glob, itertools, json, os, collections, datetime, hashlib, re, shutil
+import glob, itertools, json, os, collections, datetime, hashlib, re, shutil, concurrent.futures
 from common import *
 
 MIN_SE = 1.5        # a pick changes when the fresh-game leader beats it by at least this many paired standard errors
@@ -37,39 +37,47 @@ def stamp(outdir, want):
                  "Move that folder aside (do not mix runs) and start again.")
     wj(dict(want, date=datetime.date.today().isoformat()), p)
 
-def make_starts(sheet, jobs, todo, starts, games, g0, procs):
-    """Starting positions for jobs[i], i in todo, written to `starts` with each line's job number = i. battle_starts.js numbers the jobs of
-    the file it is given from 0, so the list is cut into slices built in parallel and the numbers are put back while merging.
-    Seeds depend on the opponent and the game index, not on the job number, so this plays the same games as one job file would."""
-    k = max(1, min(procs, 16, math.ceil(len(todo) / 40))); parts = [todo[c::k] for c in range(k)]; d = starts + '.parts'; os.makedirs(d, exist_ok=True)
-    ps = []
-    for c, part in enumerate(parts):
-        wj([jobs[i] for i in part], f'{d}/{c}.json')
-        ps.append(subprocess.Popen(['node', '../native/battle_starts.js', f'{d}/{c}.json', f'{d}/{c}.jsonl', str(games), str(g0)],
-                                   env=dict(os.environ, MYTEAM=sheet.team_path), cwd=PSSIM, stdout=subprocess.DEVNULL))
-    if any(p.wait() for p in ps): sys.exit('building the starting positions failed (node ../native/battle_starts.js)')
+PER_PROC = 3      # threads per battle process on Linux: the binary slows about tenfold with many threads in one process there (not on macOS)
+
+def make_starts(sheet, jobs, part, path, games, g0):
+    """Starting positions for jobs[i], i in part, written to `path` with each line's job number = i. battle_starts.js numbers the jobs
+    of the file it is given from 0; the numbers are put back here. Seeds depend on the opponent and the game index, not on the job
+    number, so every slicing of a job list plays the same games."""
+    wj([jobs[i] for i in part], path + '.jobs.json')
+    r = subprocess.run(['node', '../native/battle_starts.js', path + '.jobs.json', path + '.raw', str(games), str(g0)],
+                       env=dict(os.environ, MYTEAM=sheet.team_path), cwd=PSSIM, stdout=subprocess.DEVNULL)
+    if r.returncode: raise RuntimeError('building the starting positions failed (node ../native/battle_starts.js)')
     n = 0
-    with open(starts, 'w') as out:
-        for c, part in enumerate(parts):
-            for line in open(f'{d}/{c}.jsonl'):
-                m = re.match(r'\{"job":(\d+),', line); assert m, 'unexpected line from battle_starts.js'
-                out.write('{"job":%d,' % part[int(m.group(1))] + line[m.end():]); n += 1
-    shutil.rmtree(d); assert n == len(todo) * games, (n, len(todo), games)
+    with open(path, 'w') as out:
+        for line in open(path + '.raw'):
+            m = re.match(r'\{"job":(\d+),', line); assert m, 'unexpected line from battle_starts.js'
+            out.write('{"job":%d,' % part[int(m.group(1))] + line[m.end():]); n += 1
+    os.remove(path + '.raw'); os.remove(path + '.jobs.json'); assert n == len(part) * games, (n, len(part), games)
     return n
 
 def battle_run(sheet, step, jobs_path, outdir, games, g0, threads, setup, log, only=None):
-    """Play jobs_path's jobs (all, or the job numbers in `only`) for games g0 .. g0+games-1 with the full-battle sim, one work queue for
-    all of them. Resumes: jobs with a result file are skipped."""
-    S = sim_setup(setup); jobs = rj(jobs_path); starts = outdir + '.starts.jsonl'; os.makedirs(outdir, exist_ok=True)
+    """Play jobs_path's jobs (all, or the job numbers in `only`) for games g0 .. g0+games-1 with the full-battle sim. The jobs are dealt
+    round-robin to battle processes of a few threads each, so every process gets the same mix and they finish together.
+    Resumes: jobs with a result file are skipped."""
+    S = sim_setup(setup); jobs = rj(jobs_path); sd = outdir + '.starts'; os.makedirs(outdir, exist_ok=True)
     stamp(outdir, {'setup': S['name'], 'games': games, 'g0': g0, 'team': team_hash(sheet)})
     todo = [i for i in (only if only is not None else range(len(jobs))) if not os.path.exists(os.path.join(outdir, f'{i}.json'))]
-    log.start(jobs_path, outdir, f"{games} games, {threads} threads ({S['name']}, first game {g0}; {len(todo)} of {len(jobs)} jobs to play)")
+    per = PER_PROC if platform.system() == 'Linux' else threads
+    nproc = max(1, min(threads // per, len(todo))); parts = [todo[c::nproc] for c in range(nproc)]
+    log.start(jobs_path, outdir, f"{games} games, {threads} threads ({S['name']}, first game {g0}; {len(todo)} of {len(jobs)} jobs to play, "
+                                 f"{nproc} process{'es' if nproc > 1 else ''} x {min(per, threads)} threads)")
     if todo:
-        n = make_starts(sheet, jobs, todo, starts, games, g0, threads); log.line(f"{now()} {n} starting positions")
-        env = dict(S['env'], GRID_DIR=sheet.grid_dir())
+        shutil.rmtree(sd, ignore_errors=True); os.makedirs(sd)
+        with concurrent.futures.ThreadPoolExecutor(min(16, threads)) as ex:
+            n = sum(ex.map(lambda c: make_starts(sheet, jobs, parts[c], f'{sd}/{c}.jsonl', games, g0), range(nproc)))
+        log.line(f"{now()} {n} starting positions")
+        env = dict(os.environ, **S['env'], GRID_DIR=sheet.grid_dir())
         with open(outdir + '.err', 'a') as err:
-            run(['nice', '-n', '10', S['binary'], 'battle', S['engine_data'], starts, outdir, str(threads)], env=env, cwd=PSSIM, stderr=err)
-        os.remove(starts)
+            ps = [subprocess.Popen(['nice', '-n', '10', S['binary'], 'battle', S['engine_data'], f'{sd}/{c}.jsonl', outdir, str(min(per, threads))],
+                                   env=env, cwd=PSSIM, stderr=err) for c in range(nproc)]
+            bad = [c for c, p in enumerate(ps) if p.wait()]
+        if bad: sys.exit(f"{len(bad)} of {nproc} battle processes failed; see {outdir}.err (finished jobs are kept: run the same command again)")
+        shutil.rmtree(sd)
     log.done(outdir)
 
 def run_matrix(sheet, games=16, g0=600, threads=None, setup=None, only=None, force=False):

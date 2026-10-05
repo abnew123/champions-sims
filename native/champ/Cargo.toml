@@ -6,7 +6,15 @@ edition = "2021"
 [dependencies]
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+mimalloc = { version = "0.1", default-features = false, optional = true }
+
+# fast-alloc (on by default): the mimalloc allocator, about a quarter faster for the planner. It needs a C compiler to build;
+# `cargo build --release --no-default-features` builds without it and plays exactly the same games.
+[features]
+default = ["fast-alloc"]
+fast-alloc = ["dep:mimalloc"]
 
 [profile.release]
 opt-level = 3
 lto = true
+codegen-units = 1

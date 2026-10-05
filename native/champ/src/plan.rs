@@ -80,18 +80,41 @@ fn move_type(b: &Battle, m: MonRef, mid: Id) -> Id {
     if mv.mtype == "Normal" { match b.p(m).ability { "pixilate" => return "Fairy", "aerilate" => return "Flying", "refrigerate" => return "Ice", "galvanize" => return "Electric", _ => {} } }
     mv.mtype
 }
+thread_local! {
+    /// (attacking type, defender's types) -> None if immune, else the clamped effectiveness exponent (speed only: same numbers as before)
+    static TEFF: std::cell::RefCell<FxMap<(Id, Id, Id, Id), Option<i64>>> = std::cell::RefCell::new(FxMap::default());
+    /// grid name of a foe (base species, is Mega, item) and grid cells ((Trick Room grid?, foe key, my base species) -> cell)
+    static GFOE: std::cell::RefCell<FxMap<(Id, bool, Id), Option<String>>> = std::cell::RefCell::new(FxMap::default());
+    static GCELL: std::cell::RefCell<FxMap<(bool, Id, bool, Id, Id), Option<f64>>> = std::cell::RefCell::new(FxMap::default());
+}
 fn type_edge(b: &mut Battle, att: u8, def: u8) -> f64 {
     let (a, d) = (alive(b, att), alive(b, def));
     if a.is_empty() || d.is_empty() { return 0.0; }
+    // every attacker's damaging move types, once per call (the old loop redid this for every defender; the set of types is the same)
+    let mut atk: Vec<Id> = Vec::with_capacity(16);
+    for &am in &a {
+        for k in 0..b.p(am).move_slots.len() {
+            let mid = b.p(am).move_slots[k].id;
+            let mv = &b.dex.mv(mid).tmpl; if mv.category == "Status" || mid == "fakeout" { continue; }
+            let ty = move_type(b, am, mid); if !atk.contains(&ty) { atk.push(ty); }
+        }
+    }
     let mut t = 0.0;
     for &dm in &d {
         let dtypes = b.get_types(dm); let lev = b.has_ability(dm, "levitate");
         let mut best = -2i64;
-        for &am in &a {
-            let slots: Vec<Id> = b.p(am).move_slots.iter().map(|s| s.id).collect();
-            for mid in slots {
-                let mv = &b.dex.mv(mid).tmpl; if mv.category == "Status" || mid == "fakeout" { continue; }
-                let ty = move_type(b, am, mid);
+        if dtypes.len() <= 3 {
+            let key3 = (dtypes[0], if dtypes.len() > 1 { dtypes[1] } else { "" }, if dtypes.len() > 2 { dtypes[2] } else { "" });
+            for &ty in &atk {
+                if ty == "Ground" && lev { continue; }
+                let e = TEFF.with(|c| {
+                    if let Some(v) = c.borrow().get(&(ty, key3.0, key3.1, key3.2)) { return *v; }
+                    let v = if dtypes.iter().any(|t| b.dex.immune_type(ty, &[*t])) { None } else { Some(dtypes.iter().map(|t| b.dex.effectiveness(ty, t)).sum::<i64>().clamp(-2, 2)) };
+                    c.borrow_mut().insert((ty, key3.0, key3.1, key3.2), v); v });
+                if let Some(e) = e { best = best.max(e); }
+            }
+        } else {
+            for &ty in &atk {
                 if dtypes.iter().any(|t| b.dex.immune_type(ty, &[*t])) || (ty == "Ground" && lev) { continue; }
                 let e: i64 = dtypes.iter().map(|t| b.dex.effectiveness(ty, t)).sum();
                 best = best.max(e.clamp(-2, 2));
@@ -118,10 +141,21 @@ fn gname(b: &Battle, cfg: &Cfg, m: MonRef) -> Option<String> {
 fn grid_feats(b: &Battle, cfg: &Cfg) -> [f64; 2] {
     let tr = find(&b.field.pseudo, "trickroom").is_some();
     let g = if tr { &cfg.grid_tr } else { &cfg.grid_notr };
-    let mine: Vec<String> = alive(b, 0).iter().map(|m| { let n = base_name(b, *m); n.split("-Mega").next().unwrap().to_string() }).collect();
-    let foes: Vec<String> = alive(b, 1).iter().filter_map(|m| gname(b, cfg, *m)).collect();
-    if mine.is_empty() || foes.is_empty() || g.is_empty() { return [0.0, 0.0]; }
-    let cell = |f: &str, mi: &str| g.get(&format!("{}|{}", f, mi)).copied();
+    if g.is_empty() { return [0.0, 0.0]; }
+    // names and cells are memoised per thread (the grid is fixed for the run), so no strings are built after the first lookup
+    let mine: Vec<Id> = alive(b, 0).iter().map(|m| base_name(b, *m)).collect();
+    let foes: Vec<(Id, bool, Id)> = alive(b, 1).iter().filter_map(|m| {
+        let key = (base_name(b, *m), b.dex.species.get(b.p(*m).species).map(|s| s.is_mega).unwrap_or(false), b.p(*m).item);
+        let ok = GFOE.with(|c| { if let Some(v) = c.borrow().get(&key) { return v.is_some(); }
+            let v = gname(b, cfg, *m); let r = v.is_some(); c.borrow_mut().insert(key, v); r });
+        if ok { Some(key) } else { None } }).collect();
+    if mine.is_empty() || foes.is_empty() { return [0.0, 0.0]; }
+    let cell = |f: &(Id, bool, Id), mi: Id| -> Option<f64> {
+        let key = (tr, f.0, f.1, f.2, mi);
+        GCELL.with(|c| { if let Some(v) = c.borrow().get(&key) { return *v; }
+            let fname = GFOE.with(|x| x.borrow().get(f).cloned().flatten()).unwrap_or_default();
+            let v = g.get(&format!("{}|{}", fname, mi.split("-Mega").next().unwrap())).copied();
+            c.borrow_mut().insert(key, v); v }) };
     let cov = foes.iter().map(|f| mine.iter().map(|mi| cell(f, mi).unwrap_or(0.0)).fold(0.0f64, f64::max)).sum::<f64>() / foes.len() as f64;
     let exp = mine.iter().map(|mi| foes.iter().map(|f| cell(f, mi).unwrap_or(0.5)).fold(1.0f64, f64::min)).sum::<f64>() / mine.len() as f64;
     [cov - 0.5, exp - 0.5]

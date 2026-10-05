@@ -25,6 +25,14 @@ pub type FxMap<K, V> = HashMap<K, V, FxBuild>;
 
 pub type Id = &'static str;
 
+/// an Id hashed and compared by address and length instead of by contents, for memo keys: equal addresses mean equal strings, and a
+/// string that arrives under a different address merely misses the memo and is recomputed (never a wrong hit)
+#[derive(Clone, Copy, Debug)]
+pub struct PId(pub Id);
+impl PartialEq for PId { #[inline] fn eq(&self, o: &PId) -> bool { self.0.as_ptr() == o.0.as_ptr() && self.0.len() == o.0.len() } }
+impl Eq for PId {}
+impl std::hash::Hash for PId { #[inline] fn hash<H: Hasher>(&self, h: &mut H) { h.write_usize(self.0.as_ptr() as usize); h.write_usize(self.0.len()); } }
+
 static INTERN: OnceLock<Mutex<HashSet<&'static str, FxBuild>>> = OnceLock::new();
 /// Interned string (lives for the program; compare with == on &str)
 pub fn id(s: &str) -> Id {
@@ -37,12 +45,16 @@ pub fn id(s: &str) -> Id {
 #[derive(Debug)]
 pub struct EvNames {
     pub ev: Id, pub on: Id, pub ally: Id, pub foe: Id, pub any: Id, pub source: Id, pub on_field: Id, pub on_side: Id,
+    /// the same callback names with their dense indices (NO_CB when no effect defines the name), for handler discovery
+    pub on_c: Cb, pub ally_c: Cb, pub foe_c: Cb, pub any_c: Cb, pub source_c: Cb,
     /// some effect defines a handler under one of the runEvent prefixes
     pub possible: bool, pub prefixed: bool, pub left_to_right: bool,
     pub start: bool, pub switch_in: bool, pub take_item: bool, pub end: bool, pub weather: bool, pub residual: bool, pub set_ability: bool,
     pub field_srs: bool, pub damaging_hit: bool,
 }
 thread_local! {
+    static EFFC: std::cell::RefCell<FxMap<(usize, u8, usize, usize), &'static EffData>> = std::cell::RefCell::new(FxMap::default());
+    static MVC: std::cell::RefCell<FxMap<(usize, usize, usize), &'static MoveData>> = std::cell::RefCell::new(FxMap::default());
     static EVN: std::cell::RefCell<FxMap<(usize, usize), &'static EvNames>> = std::cell::RefCell::new(FxMap::default());
     static EVP: std::cell::RefCell<FxMap<(usize, usize), bool>> = std::cell::RefCell::new(FxMap::default());
     static CBN: std::cell::RefCell<FxMap<(usize, usize, usize), Id>> = std::cell::RefCell::new(FxMap::default());
@@ -53,6 +65,18 @@ pub fn cbn(prefix: &'static str, ev: &str) -> Id {
     let key = (prefix.as_ptr() as usize, ev.as_ptr() as usize, ev.len());
     CBN.with(|c| { if let Some(x) = c.borrow().get(&key) { return *x; }
         let v = id(&format!("{}{}", prefix, ev)); c.borrow_mut().insert(key, v); v })
+}
+/// a callback name with its dense index into every effect's `slots` table (NO_CB: no effect defines it, so discovery can stop at once)
+#[derive(Clone, Copy, Debug)]
+pub struct Cb { pub name: Id, pub i: u16, pub switch_in: bool }
+pub const NO_CB: u16 = u16::MAX;
+thread_local! { static CBI: std::cell::RefCell<FxMap<(usize, usize, usize, usize), Cb>> = std::cell::RefCell::new(FxMap::default()); }
+/// cbn() plus the index lookup, cached by the strings' addresses
+#[inline]
+pub fn cbi(dex: &Dex, prefix: &'static str, ev: &str) -> Cb {
+    let key = (dex as *const Dex as usize, prefix.as_ptr() as usize, ev.as_ptr() as usize, ev.len());
+    CBI.with(|c| { if let Some(x) = c.borrow().get(&key) { return *x; }
+        let v = dex.cb(cbn(prefix, ev)); c.borrow_mut().insert(key, v); v })
 }
 pub fn to_id(s: &str) -> String { s.to_lowercase().chars().filter(|c| c.is_ascii_alphanumeric()).collect() }
 
@@ -71,9 +95,21 @@ pub struct CbInfo { pub absent: bool, pub cval: Option<CVal>, pub order: Option<
 #[derive(Clone, Debug)]
 pub struct EffData {
     pub id: Id, pub name: Id, pub etype: EType, pub cbs: FxMap<Id, CbInfo>, pub fns: Vec<Id>, pub duration: Option<i64>, pub raw: Value,
+    /// the callbacks again, indexed: `slots[cb index]` is the position in `cbl` or NO_CB (built by Dex::index_callbacks); `cbmask`
+    /// has bit i set when callback index i is defined (there are fewer than 128 callback names)
+    pub slots: Box<[u16]>, pub cbl: Vec<(Id, CbInfo)>, pub cbmask: u128,
+    /// flags read on hot paths, precomputed from `raw`
+    pub breakable: bool, pub notransform: bool, pub cantsuppress: bool, pub ignore_klutz: bool, pub suppress_weather: bool,
 }
 impl EffData {
     pub fn cb(&self, name: &str) -> Option<&CbInfo> { self.cbs.get(name) }
+    /// the callback at a dense index (same contents as `cbs.get(name)`)
+    #[inline] pub fn cbi(&self, i: u16) -> Option<&CbInfo> {
+        if !self.has(i) { return None; }
+        match self.slots.get(i as usize) { Some(&p) if p != NO_CB => Some(&self.cbl[p as usize].1), _ => None }
+    }
+    /// does this effect define the callback with index i? (one bit test)
+    #[inline] pub fn has(&self, i: u16) -> bool { i < 128 && (self.cbmask >> i) & 1 == 1 }
     pub fn has_fn(&self, name: &str) -> bool { self.fns.iter().any(|f| *f == name) }
     pub fn flag(&self, f: &str) -> bool { self.raw.get("flags").and_then(|x| x.get(f)).map(|v| !v.is_null() && v != &Value::Bool(false) && v != &Value::from(0)).unwrap_or(false) }
     pub fn s(&self, k: &str) -> Option<Id> { self.raw.get(k).and_then(|v| v.as_str()).map(id) }
@@ -203,6 +239,8 @@ pub struct Dex {
     pub empty: EffData,
     /// every callback name defined by any effect (most prefixed variants like onAllyModifyAtk exist nowhere, so lookups can stop early)
     pub cb_names: std::collections::HashSet<Id, FxBuild>,
+    /// dense index of every callback name in cb_names; the indices of the names handler discovery needs by itself
+    pub cb_index: FxMap<Id, u16>, pub i_on_start: u16, pub i_on_any_switch_in: u16, pub on_start: Id,
 }
 
 fn etype(s: &str) -> EType {
@@ -224,8 +262,12 @@ fn parse_eff(v: &Value, default_type: EType) -> EffData {
         etype: v.get("effectType").and_then(|x| x.as_str()).map(etype).unwrap_or(default_type), cbs: parse_cbs(&v["cbs"]),
         fns: v.get("fns").and_then(|x| x.as_array()).map(|a| a.iter().map(|x| id(x.as_str().unwrap())).collect()).unwrap_or_default(),
         duration: v.get("duration").and_then(|x| x.as_i64()), raw: v.clone(),
+        slots: Box::new([]), cbl: vec![], cbmask: 0,
+        breakable: flag_of(v, "breakable"), notransform: flag_of(v, "notransform"), cantsuppress: flag_of(v, "cantsuppress"),
+        ignore_klutz: v.get("ignoreKlutz").map(truthy_json).unwrap_or(false), suppress_weather: v.get("suppressWeather").map(truthy_json).unwrap_or(false),
     }
 }
+fn flag_of(v: &Value, f: &str) -> bool { v.get("flags").and_then(|x| x.get(f)).map(|x| !x.is_null() && x != &Value::Bool(false) && x != &Value::from(0)).unwrap_or(false) }
 
 impl Dex {
     pub fn load(path: &str) -> Dex {
@@ -252,27 +294,51 @@ impl Dex {
         }
         let types = v["types"].as_object().unwrap().iter().map(|(t, m)| (id(t), m.as_object().unwrap().iter().map(|(a, x)| (id(a), x.as_i64().unwrap_or(0))).collect())).collect();
         let natures = v["natures"].as_object().unwrap().iter().map(|(n, x)| (id(n), (x["plus"].as_str().map(id), x["minus"].as_str().map(id)))).collect();
-        let empty = EffData { id: "", name: "", etype: EType::Condition, cbs: FxMap::default(), fns: vec![], duration: None, raw: Value::Null };
+        let empty = EffData { id: "", name: "", etype: EType::Condition, cbs: FxMap::default(), fns: vec![], duration: None, raw: Value::Null,
+                              slots: Box::new([]), cbl: vec![], cbmask: 0, breakable: false, notransform: false, cantsuppress: false, ignore_klutz: false, suppress_weather: false };
         let mut cb_names = std::collections::HashSet::default();
         for m in moves.values() { for k in m.eff.cbs.keys() { cb_names.insert(*k); } }
         for e in items.values().chain(abilities.values()).chain(conds.values()) { for k in e.cbs.keys() { cb_names.insert(*k); } }
         cb_names.insert(id("onStart"));
-        Dex { moves, items, abilities, conds, species, species_by_name, types, natures, empty, cb_names }
+        let mut names: Vec<Id> = cb_names.iter().copied().collect(); names.sort();
+        assert!(names.len() < 128, "too many callback names for the 128-bit callback mask");
+        let cb_index: FxMap<Id, u16> = names.iter().enumerate().map(|(i, n)| (*n, i as u16)).collect();
+        let (i_on_start, i_on_any_switch_in) = (cb_index[&id("onStart")], cb_index.get(&id("onAnySwitchIn")).copied().unwrap_or(NO_CB));
+        let mut d = Dex { moves, items, abilities, conds, species, species_by_name, types, natures, empty, cb_names, cb_index, i_on_start, i_on_any_switch_in, on_start: id("onStart") };
+        d.index_callbacks(); d
     }
+    /// (re)build every effect's indexed callback table from its `cbs` map
+    fn index_callbacks(&mut self) {
+        let n = self.cb_index.len(); let idx = &self.cb_index;
+        let build = |e: &mut EffData| {
+            let mut slots = vec![NO_CB; n]; let mut cbl: Vec<(Id, CbInfo)> = e.cbs.iter().map(|(k, c)| (*k, c.clone())).collect();
+            cbl.sort_by_key(|(k, _)| idx[k]);
+            let mut mask = 0u128;
+            for (p, (k, _)) in cbl.iter().enumerate() { slots[idx[k] as usize] = p as u16; mask |= 1u128 << idx[k]; }
+            e.slots = slots.into_boxed_slice(); e.cbl = cbl; e.cbmask = mask;
+        };
+        for m in self.moves.values_mut() { build(&mut m.eff); }
+        for e in self.items.values_mut().chain(self.abilities.values_mut()).chain(self.conds.values_mut()) { build(e); }
+    }
+    /// a callback name with its dense index
+    pub fn cb(&self, name: Id) -> Cb { Cb { name, i: self.cb_index.get(name).copied().unwrap_or(NO_CB), switch_in: name == "onSwitchIn" } }
     /// attach the Rust handler ports to the callbacks they implement, so dispatch needs no registry lookup
     pub fn attach(&mut self, reg: &FxMap<(Kind, Id, Id), crate::battle::HFn>) {
         for (k, m) in self.moves.iter_mut() { for (cb, c) in m.eff.cbs.iter_mut() { c.f = reg.get(&(Kind::Move, *k, *cb)).copied(); } }
         for (kind, map) in [(Kind::Item, &mut self.items), (Kind::Ability, &mut self.abilities), (Kind::Cond, &mut self.conds)] {
             for (k, e) in map.iter_mut() { for (cb, c) in e.cbs.iter_mut() { c.f = reg.get(&(kind, *k, *cb)).copied(); } }
         }
+        self.index_callbacks();
     }
     pub fn evn(&self, ev: &str) -> &'static EvNames {
         let key = (ev.as_ptr() as usize, ev.len());
         if let Some(x) = EVN.with(|c| c.borrow().get(&key).copied()) { return x; }
         let on = id(&format!("on{}", ev));
+        let (ally, foe, any, source) = (id(&format!("onAlly{}", ev)), id(&format!("onFoe{}", ev)), id(&format!("onAny{}", ev)), id(&format!("onSource{}", ev)));
         let n: &'static EvNames = Box::leak(Box::new(EvNames {
-            ev: id(ev), on, ally: id(&format!("onAlly{}", ev)), foe: id(&format!("onFoe{}", ev)), any: id(&format!("onAny{}", ev)), source: id(&format!("onSource{}", ev)),
+            ev: id(ev), on, ally, foe, any, source,
             on_field: id(&format!("onField{}", ev)), on_side: id(&format!("onSide{}", ev)),
+            on_c: self.cb(on), ally_c: self.cb(ally), foe_c: self.cb(foe), any_c: self.cb(any), source_c: self.cb(source),
             possible: ["on", "onAlly", "onFoe", "onAny", "onSource"].iter().any(|p| self.cb_names.contains(format!("{}{}", p, ev).as_str())),
             prefixed: !["BeforeTurn", "Update", "Weather", "WeatherChange", "TerrainChange"].contains(&ev),
             left_to_right: ["Invulnerability", "TryHit", "DamagingHit", "EntryHazard"].contains(&ev),
@@ -288,9 +354,22 @@ impl Dex {
             let v = ["on", "onAlly", "onFoe", "onAny", "onSource"].iter().any(|p| self.cb_names.contains(format!("{}{}", p, ev).as_str()));
             c.borrow_mut().insert(key, v); v })
     }
-    pub fn mv(&self, m: &str) -> &MoveData { self.moves.get(m).unwrap_or_else(|| panic!("move {}", m)) }
-    pub fn active_move(&self, m: &str) -> ActiveMove { self.mv(m).tmpl.clone() }
-    pub fn eff(&self, kind: Kind, i: &str) -> &EffData {
+    pub fn mv(&'static self, m: Id) -> &'static MoveData {
+        let key = (self as *const Dex as usize, m.as_ptr() as usize, m.len());
+        if let Some(x) = MVC.with(|c| c.borrow().get(&key).copied()) { return x; }
+        let r = self.moves.get(m).unwrap_or_else(|| panic!("move {}", m));
+        MVC.with(|c| c.borrow_mut().insert(key, r)); r
+    }
+    pub fn active_move(&self, m: &str) -> ActiveMove { self.moves.get(m).unwrap_or_else(|| panic!("move {}", m)).tmpl.clone() }
+    /// effect data by kind and id. Ids are interned (or literals), so the result is cached per thread by the string's address and
+    /// length (a &'static str never changes), which skips hashing and comparing the bytes on the hot discovery path.
+    pub fn eff(&'static self, kind: Kind, i: Id) -> &'static EffData {
+        let key = (self as *const Dex as usize, kind as u8, i.as_ptr() as usize, i.len());
+        if let Some(x) = EFFC.with(|c| c.borrow().get(&key).copied()) { return x; }
+        let r = self.eff_slow(kind, i);
+        EFFC.with(|c| c.borrow_mut().insert(key, r)); r
+    }
+    pub fn eff_slow(&self, kind: Kind, i: &str) -> &EffData {
         let r = match kind { Kind::Move => self.moves.get(i).map(|m| &m.eff), Kind::Ability => self.abilities.get(i), Kind::Item => self.items.get(i),
                              Kind::Cond => self.conds.get(i), Kind::Species => None };
         r.unwrap_or(&self.empty)

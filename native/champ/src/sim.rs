@@ -1650,13 +1650,13 @@ impl Battle {
     pub fn field_event(&mut self, ev: &str, targets: Option<Vec<MonRef>>) {
         let get_key = ev == "Residual";
         let mut hs: Vec<Handler> = vec![];
-        self.find_field_handlers(cbn("onField", ev), get_key, None, &mut hs);
+        self.find_field_handlers(cbi(self.dex, "onField", ev), get_key, None, &mut hs);
         for s in 0..2u8 {
-            self.find_side_handlers(s, cbn("onSide", ev), get_key, None, &mut hs);
+            self.find_side_handlers(s, cbi(self.dex, "onSide", ev), get_key, None, &mut hs);
             for a in self.side_active(s) {
-                if ev == "SwitchIn" { self.find_pokemon_handlers(a, cbn("onAny", ev), false, &mut hs); }
+                if ev == "SwitchIn" { self.find_pokemon_handlers(a, cbi(self.dex, "onAny", ev), false, &mut hs); }
                 if let Some(t) = &targets { if !t.contains(&a) { continue; } }
-                let cb = cbn("on", ev);
+                let cb = cbi(self.dex, "on", ev);
                 self.find_pokemon_handlers(a, cb, get_key, &mut hs);
                 self.find_side_handlers(s, cb, false, Some(a), &mut hs);
                 self.find_field_handlers(cb, false, Some(a), &mut hs);

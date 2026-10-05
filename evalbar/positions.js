@@ -36,6 +36,8 @@ function build(spec, flip) {
     for (const k of Object.keys(side.sideConditions)) side.removeSideCondition(k);
     sd.mons.forEach((x, k) => {
       const p = side.pokemon[k];
+      // forms other than Mega: Palafin's Hero and a busted Mimikyu last the game, Aegislash's Blade only until it leaves the field
+      if (x.forme && !x.fainted) p.formeChange(x.forme, null, !x.forme.startsWith('Aegislash'));
       if (x.fainted) { p.hp = 0; p.fainted = true; p.status = 'fnt'; p.isActive = false; side.pokemonLeft--; side.totalFainted++; return; }
       p.hp = Math.max(1, Math.min(p.maxhp, Math.round(p.maxhp * x.hpPct / 100)));
       for (const s of STATS) p.boosts[s] = (x.boosts || {})[s] || 0;

@@ -28,9 +28,9 @@ Built, all in `evalbar/` (run the Python from the repo root; `common.py` finds t
   (`results/accuracy_v0.json`); with engine result files as arguments it scores the engine value, static value, refitted features and
   version 0 plus engine on the same positions.
 - `spots.py` + `positions.js`: every turn of a game rebuilt as an engine state, from each player's side, with the choices actually made.
-  Coverage: 4,170 of 4,530 games (29,959 positions): 2,634 games clean, 1,124 with a stand-in for a brought Pokémon that never appeared,
-  412 with moves or items the engine data lacks dropped from the sets; 200 games need a species or ability the engine lacks, 126 use
-  Illusion, Transform or a forme change (mostly Aegislash), 894 positions come after a Perish Song (flagged). Today's `champ spot` runs on
+  Coverage: 4,254 of 4,530 games (30,598 positions): 2,684 games clean, 1,140 with a stand-in for a brought Pokémon that never appeared,
+  430 with moves or items the engine data lacks dropped from the sets; 210 games need a species or ability the engine lacks, 32 use
+  Illusion or Transform, 34 have no turn; about 900 positions come after a Perish Song (flagged). Today's `champ spot` runs on
   these states (smoke test: turn 2 of the demo game, symmetric within seed jitter) but playouts cost about 1.5 s per game on one thread.
 
 Waiting on **Battle sim** for `champ evalpos` (asked 2026-10-05): one line per position with the one-turn equilibrium value averaged over

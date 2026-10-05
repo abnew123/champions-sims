@@ -1,7 +1,7 @@
 """Replay log -> the position at the start of every turn and what happened in each turn, for the eval bar page.
 Nothing with a name leaves this module: players are 'p1' / 'p2' and every Pokemon is called by its species (nicknames are dropped).
 parse(log) returns {'steps': [...], 'winner': 'p1'|'p2'|None, 'forfeit': bool, 'perish': bool, 'rating': mean rating or None, 'sheets': team
-sheets, 'odd': mechanics the engine rebuild does not handle (Illusion, Transform, forme changes)}.
+sheets, 'odd': mechanics the engine rebuild does not handle (Illusion, Transform)}.
 A step is one turn: {'turn': t, 'state': position at the start of turn t, 'events': what happened in turn t, 'acts': what each slot chose
 ({'p1a': {'move', 'target' slot or '', 'mega', 'unsure' (the target may have been redirected)} | {'switch': species}}; a slot that could not
 act, e.g. flinched, is missing)}; step 0 is the leads.
@@ -38,13 +38,15 @@ def parse_sheet(s):
     return out
 class Mon:
     def __init__(s, side, species, sheet):
-        s.side = side; s.species = species; s.forme = species; s.hp = 100; s.status = ''; s.fainted = False; s.boosts = {}
+        s.side = side; s.species = species; s.forme = species; s.temp = False; s.hp = 100; s.status = ''; s.fainted = False; s.boosts = {}
         s.set = sheet.get(toid(species)) or sheet.get(toid(species.split('-')[0])) or {}
         s.item = s.set.get('item', ''); s.item_gone = False; s.vol = set()
         # for rebuilding the position in the engine: has it used a move action since coming in (Fake Out), did it Protect last turn,
         # the move a Choice item locks it into, turns already slept, has it Mega Evolved
         s.moved = False; s.stall = False; s.prot = False; s.lock = ''; s.slept = 0; s.mega = False; s.last = ''; s.volarg = {}
-    def leave(s): s.boosts = {}; s.vol = set(); s.moved = False; s.stall = False; s.prot = False; s.lock = ''; s.last = ''; s.volarg = {}
+    def leave(s):
+        s.boosts = {}; s.vol = set(); s.moved = False; s.stall = False; s.prot = False; s.lock = ''; s.last = ''; s.volarg = {}
+        if s.temp: s.forme = s.species; s.temp = False                  # a form taken in battle (Aegislash's Blade) ends on switching out
     def ref(s): return [s.side, disp(s.forme)]
 def hpval(tok):
     tok = tok.split()[0] if tok else ''
@@ -76,7 +78,7 @@ def parse(log):
             slot = {nick: pos[2] for pos, nick in active.items() if pos[:2] == sd}
             S[sd] = {'mons': [{'n': disp(m.forme), 'hp': m.hp, 'st': m.status, 'f': m.fainted, 'b': {k: v for k, v in m.boosts.items() if v},
                                'item': m.item, 'gone': m.item_gone, 'slot': '' if m.fainted else slot.get(nick, ''), 'seen': True,
-                               'sp': m.species, 'pos': slot.get(nick, ''), 'mega': m.mega, 'moved': m.moved, 'stall': m.stall, 'lock': m.lock, 'slept': m.slept, 'vol': sorted(m.vol), 'last': m.last, 'volarg': dict(m.volarg)}
+                               'sp': m.species, 'forme': '' if m.mega or m.forme == m.species else m.forme, 'pos': slot.get(nick, ''), 'mega': m.mega, 'moved': m.moved, 'stall': m.stall, 'lock': m.lock, 'slept': m.slept, 'vol': sorted(m.vol), 'last': m.last, 'volarg': dict(m.volarg)}
                               for nick in order[sd] for m in [mons[sd][nick]]],
                      'tailwind': sidec[sd]['tailwind'], 'screens': {k: v for k, v in sidec[sd]['screens'].items() if v}, 'hazards': list(sidec[sd]['hazards'])}
         S['perish'] = perish
@@ -129,7 +131,7 @@ def parse(log):
             if m:
                 m.forme = p[3].split(',')[0]
                 if k == 'detailschange' and 'Mega' in m.forme: m.mega = True; mega_now.add(id(m)); ev(m.side, [[m.side, disp(m.species)], ' Mega Evolved'])
-                elif 'Mega' not in m.forme: odd.add('forme change')
+                elif k == '-formechange': m.temp = m.forme != m.species
         elif k == 'move':
             m = mon(p[2]); tg = mon(p[4]) if len(p) > 4 and p[4] else None; last_user[0] = m
             if not m: continue
@@ -301,7 +303,7 @@ def parse(log):
         for sd in ('p1', 'p2'):
             for nick in order[sd][len(st[sd]['mons']):]:
                 m = mons[sd][nick]; st[sd]['mons'].append({'n': disp(m.species), 'hp': 100, 'st': '', 'f': False, 'b': {}, 'item': m.set.get('item', ''), 'gone': False, 'slot': '', 'seen': False,
-                                           'sp': m.species, 'pos': '', 'mega': False, 'moved': False, 'stall': False, 'lock': '', 'slept': 0, 'vol': [], 'last': '', 'volarg': {}})
+                                           'sp': m.species, 'forme': '', 'pos': '', 'mega': False, 'moved': False, 'stall': False, 'lock': '', 'slept': 0, 'vol': [], 'last': '', 'volarg': {}})
     # for the caller's leak check: nicknames that are not just the species, and the usernames
     hidden = sorted({n for sd in mons for n in mons[sd] if not toid(mons[sd][n].species).startswith(toid(n))} | {n for n in names.values() if n})
     return {'steps': steps, 'final': final, 'winner': winner, 'forfeit': forfeit, 'perish': perish, 'brought': {sd: len(order[sd]) for sd in order},

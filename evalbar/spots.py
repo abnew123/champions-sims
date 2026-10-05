@@ -45,6 +45,8 @@ def fit_set(st, dropped):
 def specs(rid, log):
     g = R.parse(log)
     if g['odd']: return [], 'mechanic not rebuilt: ' + ', '.join(g['odd'])
+    formes = {m['forme'] for s in g['steps'] if s['state'] for sd in ('p1', 'p2') for m in s['state'][sd]['mons'] if m['forme']}
+    if any(toid(x) not in E['species'] for x in formes): return [], 'not in the engine data: ' + ', '.join(sorted(formes))
     sets = {}; guess = {'p1': [], 'p2': []}; dropped = []
     for sd in ('p1', 'p2'):
         seen = set()
@@ -71,7 +73,7 @@ def specs(rid, log):
         for sd in ('p1', 'p2'):
             S = s['state'][sd]; ms = S['mons']
             order = sorted(ms, key=lambda m: (0 if m['pos'] == 'a' else 1 if m['pos'] == 'b' else 2 if not m['f'] else 3))
-            mons = [{**sets[(sd, m['sp'])], 'mega': m['mega'], 'hpPct': m['hp'], 'fainted': m['f'], 'status': m['st'], 'slept': m['slept'], 'boosts': m['b'],
+            mons = [{**sets[(sd, m['sp'])], 'forme': m['forme'], 'mega': m['mega'], 'hpPct': m['hp'], 'fainted': m['f'], 'status': m['st'], 'slept': m['slept'], 'boosts': m['b'],
                      'itemNow': '' if m['gone'] or toid(m['item']) not in E['items'] else m['item'], 'moved': m['moved'], 'stall': m['stall'], 'lock': m['lock'], 'vol': m['vol'], 'onField': bool(m['pos']),
                      'last': m['last'], 'volarg': m['volarg']} for m in order]
             mons += [{**st, 'mega': False, 'hpPct': 100, 'fainted': False, 'status': '', 'slept': 0, 'boosts': {}, 'itemNow': st['item'], 'moved': False, 'stall': False,

@@ -69,6 +69,13 @@ header h1{font-size:clamp(28px,6vw,40px);font-weight:700;letter-spacing:-.02em;l
 .where{font-family:var(--disp);font-weight:600;font-size:15px;text-align:center}
 .where small{display:block;font-family:var(--body);font-weight:400;font-size:12.5px;color:var(--ink2)}
 
+.picker{display:flex;flex-direction:column;gap:10px}
+.views{display:inline-flex;border:1px solid var(--rule);border-radius:4px;overflow:hidden;align-self:flex-start;max-width:100%}
+.views button{font-family:var(--disp);font-size:13px;font-weight:600;color:var(--ink2);background:var(--panel);border:0;padding:8px 14px;cursor:pointer}
+.views button + button{border-left:1px solid var(--rule)}
+.views button.on{background:var(--ink);color:var(--ground)}
+.views button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.vnote{font-size:13.5px;color:var(--ink2);margin:0;max-width:70ch}
 .games{display:flex;flex-wrap:wrap;gap:6px}
 .games button{font-family:var(--disp);font-size:13px;font-weight:600;color:var(--ink2);background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:7px 12px;cursor:pointer;display:flex;gap:7px;align-items:baseline}
 .games button small{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--ink3)}
@@ -157,7 +164,13 @@ section > h2{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:u
     <div class="meta" id="meta"></div>
   </header>
 
-  <nav class="games" id="games" hidden aria-label="Games"></nav>
+  <div class="picker" id="picker">
+    <div class="views" id="views" hidden role="group" aria-label="What the bar knows">
+      <button type="button" data-v="seen">As you saw it</button><button type="button" data-v="hind">With hindsight</button>
+    </div>
+    <p class="vnote" id="vnote" hidden></p>
+    <nav class="games" id="games" hidden aria-label="Games"></nav>
+  </div>
 
   <div class="live" id="live">
     <div class="sides">
@@ -199,9 +212,13 @@ section > h2{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:u
 
 <script>
 const DATA = /*DATA*/null;
-const GAMES = DATA.games || [DATA], NAMES = DATA.names || null, REC = !!DATA.recorded;
+const NAMES = DATA.names || null, REC = !!DATA.recorded, VIEWS = DATA.views || null;
+let view = VIEWS ? 'seen' : null, GAMES = VIEWS ? VIEWS[view] : DATA.games || [DATA];
 let G, N, WP, gi = 0;                                       // steps 0..N-1 are turns 1..N; step N is the result
+const VNOTE = {seen: 'Only what you knew at the start of each turn: their team preview, the Pokémon they had sent in, and what those had shown. Pokémon they had not sent in yet are averaged over.',
+               hind: 'Everything the game showed by its end, known from turn 1: their four Pokémon and what each revealed.'};
 function load(k) {
+  if (VIEWS) GAMES = VIEWS[view];
   gi = Math.max(0, Math.min(GAMES.length - 1, k)); G = GAMES[gi]; N = G.steps.length;
   WP = G.steps.map(s => s.wp).concat([G.final.wp === null ? G.steps[N - 1].wp : G.final.wp]);
 }
@@ -230,6 +247,10 @@ function head() {
     if (G.engine) $('eyebrow').textContent = G.engine.bar ? 'Prototype · engine version' : 'Prototype · bar version 0 · options from the engine';
     $('meta').innerHTML = [`${N} turns`, r, G.winner ? `${who(G.winner)} won${G.forfeit ? ' by forfeit' : ''}` : 'no result', 'replay ' + G.id.split('-').pop()]
       .filter(Boolean).map(x => `<span class="chip">${esc(x)}</span>`).join('');
+  }
+  if (VIEWS) {
+    $('views').hidden = false; $('vnote').hidden = false; $('vnote').textContent = VNOTE[view];
+    $('views').querySelectorAll('button').forEach(b => { b.classList.toggle('on', b.dataset.v === view); b.setAttribute('aria-pressed', b.dataset.v === view); });
   }
   const nav = $('games'); nav.hidden = GAMES.length < 2;
   nav.innerHTML = GAMES.map((g, k) => `<button type="button" data-k="${k}" class="${k === gi ? 'on' : ''}" aria-pressed="${k === gi}">${esc(g.title || 'Game ' + (k + 1))}<small>${g.result === 'win' ? 'won' : g.result === 'loss' ? 'lost' : ''}</small></button>`).join('');
@@ -280,6 +301,7 @@ function graph() {
 }
 
 function monHtml(m) {
+  if (m.pool) return `<div class="mon unseen"><div class="top"><span class="nm">${esc(m.n)}</span></div><div class="tags"><span>not sent in yet</span></div></div>`;
   const cls = m.f ? 'out' : !m.seen ? 'unseen' : m.slot ? 'on' : 'bench';
   const hpc = m.hp > 50 ? 'ok' : m.hp > 20 ? 'warn' : 'off';
   const tags = [];
@@ -362,8 +384,9 @@ function notes() {
     html = `<p><b>How the bar is made.</b> ${solve} The bar is the value of that game for ${REC ? 'you' : 'Player 1'}, rescaled so that it matches how real games turned out: the engine alone is too sure of itself, so its odds are pulled towards even (log-odds times ${G.engine.cal.toFixed(2)}).</p>
     <p><b>Best options.</b> Picks is each option's share of the solution, so a mixed answer means the planner would vary its play. Wins is on the same scale as the bar.</p>
     ${a ? `<p><b>How good it is.</b> On ${a.games.toLocaleString('en-US')} real games it was not fitted on (${a.positions.toLocaleString('en-US')} turns), the side it favoured won ${f(a.favourite_won)} of the time. Log loss ${a.log_loss.toFixed(3)}; the earlier bar without the engine scores ${a.v0.log_loss.toFixed(3)} on the same turns, and a coin flip 0.693 (lower is better).${cal ? ` Positions it rated around ${f(cal.rated)} were won ${f(cal.won)} of the time.` : ''}</p>` : ''}
-    ${REC ? `<p><b>What it knows about your games.</b> Positions are transcribed from the screen recording, turn by turn. Your sets are exact. The opponent's are each species' most common Reg M-C set with what the game showed laid on top (moves used, items that activated, Mega Evolution); their stat points are guesses. Their HP comes from the on-screen percentages; the few values that had to be inferred say so in that turn's events.</p>
-    <p><b>Hindsight.</b> The engine knows the opponent's four from the start, which you only learned as they came in. Where one of their four never came in, the bar and the options average over the team-preview Pokémon it could have been, weighted by how often each is brought.</p>`
+    ${REC ? `<p><b>What it knows about your games.</b> Positions are transcribed from the screen recording, turn by turn. Your sets are exact. The opponent's are each species' most common Reg M-C set (from Showdown team sheets) with what the game showed laid on top: moves used, items that activated, Mega Evolution. Their stat points are guesses. Their HP comes from the on-screen percentages; the few values that had to be inferred say so in that turn's events.</p>
+    ${G.view === 'seen' ? `<p><b>As you saw it.</b> The bar knows their team preview, the Pokémon that had come in by the start of the turn, and what those had shown by then. Every pair (or single) of preview Pokémon they could still have brought is evaluated, weighted by how often each is brought when it is on team preview, and the bar, the picks and the values are averaged over them. Illusion fools this view until it breaks, as it fooled you. The rescaling to real results was fitted on positions with full information, so this view is not separately calibrated.</p>`
+      : `<p><b>With hindsight.</b> The engine knows the opponent's four and everything they revealed from the start, which you only learned as the game went on. Where one of their four never came in, the bar and the options average over the team-preview Pokémon it could have been.</p>`}`
       : `<p><b>Hindsight and guesses.</b> Each bench lists all the Pokémon that player brought, which the opponent only learned as they came in, and the engine knows them too. Items, abilities, natures and moves come from the open team sheets. Stat points are not on team sheets: the engine assumes each Pokémon's most common spread.</p>`}`;
   } else {
     html = `<p><b>How the bar is made (version 0).</b> ${how0}</p>
@@ -379,15 +402,19 @@ function go(i) {
   cur = Math.max(0, Math.min(N, i)); bar(); graph(); board(); options(); events();
 }
 function start(saved) {
+  if (VIEWS && saved && VIEWS[saved.view]) view = saved.view;
   load(saved && Number.isInteger(saved.gi) ? saved.gi : 0);
   head(); notes(); go(saved && Number.isInteger(saved.cur) ? saved.cur : 0);
+  if (VIEWS) $('views').querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+    if (b.dataset.v === view) return; view = b.dataset.v; const c = cur; load(gi); head(); notes(); go(Math.min(c, N));
+  }));
   $('prev').addEventListener('click', () => go(cur - 1)); $('next').addEventListener('click', () => go(cur + 1));
   document.addEventListener('keydown', e => {
     if (e.target.closest && e.target.closest('.hit')) return;
     if (e.key === 'ArrowLeft') go(cur - 1); else if (e.key === 'ArrowRight') go(cur + 1);
   });
   let rz; window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(graph, 120); });
-  window.claude?.hot?.snapshot?.(() => ({cur, gi}));
+  window.claude?.hot?.snapshot?.(() => ({cur, gi, view}));
 }
 if (window.claude?.hot?.ready) window.claude.hot.ready(start); else start(window.claude?.hot?.data ?? {});
 </script>

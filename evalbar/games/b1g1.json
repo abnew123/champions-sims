@@ -1,6 +1,7 @@
 {
  "id": "b1g1", "title": "Game 1", "recorded": "2026-10-02", "result": "win", "how": "the opponent forfeited during turn 3",
  "mine": ["Incineroar", "Farigiraf", "Torkoal", "Kingambit"],
+ "preview": ["Floette-Eternal", "Kingambit", "Basculegion", "Rillaboom", "Salamence", "Sneasler"],
  "my_overrides": {"Kingambit": {"nature": "Brave"}},
  "theirs": [
   {"species": "Floette-Eternal", "from": "Floette-Mega", "ability": "Flower Veil", "moves": ["Moonblast"]},

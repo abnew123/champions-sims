@@ -6,7 +6,7 @@ file, damage race with Speed ties averaged, either side may reverse Trick Room, 
 staged=1 (EVAL_ADAPT): every cell gets 2 samples of the turn's luck, options still in contention 8, the closest ones all `seeds`; options
 more than 0.15 below a side's best keep their rough 2-sample value. staged=0 gives every cell `seeds` samples.
 A run appends to <out.jsonl> and skips positions already in it, so it resumes. It writes <out.jsonl>.run.json for the progress page at
-localhost:8766 (status.py); EVAL_TITLE names its card. Agree cores with the other threads before threads > 1."""
+localhost:8766 (status.py); EVAL_TITLE names its card. EG_VALUE picks another value file (in the main folder's pssim/). Agree cores with the other threads before threads > 1."""
 import os, sys, json, zlib, time, subprocess
 import common as C
 BIN = os.environ.get('CHAMP_BIN') or os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v16'); MP = os.path.join(C.MAIN, 'pssim')
@@ -32,7 +32,7 @@ def stamp(posf, outf, threads, seeds, staged, title=None):
               open(outf + '.run.json', 'w'))
 def run(posf, outf, threads=1, seeds=32, staged=1):
     grid = os.path.join(C.HERE, 'out', 'emptygrid'); os.makedirs(grid, exist_ok=True); stamp(posf, outf, threads, seeds, staged)
-    env = dict(os.environ, RACE_TIES='avg', EVAL_SEEDS=str(seeds), **({'EVAL_ADAPT': '1'} if staged else {}), EG_VALUE='egvalue9_sym.json', RACE='1', TRSYM='1', CALC_DATA='../native/champions_data.json', GRID_DIR=grid)
+    env = dict(os.environ, RACE_TIES='avg', EVAL_SEEDS=str(seeds), **({'EVAL_ADAPT': '1'} if staged else {}), EG_VALUE=os.environ.get('EG_VALUE', 'egvalue9_sym.json'), RACE='1', TRSYM='1', CALC_DATA='../native/champions_data.json', GRID_DIR=grid)
     subprocess.run([BIN, 'evalpos', '../native/engine_data_spot.json', os.path.abspath(posf), os.path.abspath(outf), str(threads)], cwd=MP, env=env, check=True)
 if __name__ == '__main__':
     a = sys.argv[1:]

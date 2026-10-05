@@ -1,6 +1,7 @@
 {
  "id": "b2g2", "title": "Game 5", "recorded": "2026-10-02", "result": "loss", "how": "you forfeited during turn 3",
  "mine": ["Incineroar", "Blastoise", "Kingambit", "Torkoal"],
+ "preview": ["Charizard", "Sneasler", "Gardevoir", "Basculegion", "Archaludon", "Indeedee-F"],
  "my_overrides": {"Kingambit": {"nature": "Brave"}},
  "theirs": [
   {"species": "Gardevoir", "from": "Gardevoir-Mega", "ability": "Trace", "moves": ["Hyper Voice", "Expanding Force"]},

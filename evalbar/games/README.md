@@ -9,6 +9,9 @@ One file per game. Fields:
 - `theirs`: their four as far as the game showed them, in the order they appeared. Each starts from the Smogon M-C set of `from` (else of
   `species`), with what the game revealed laid on top (`moves` listed first, then the set's own moves fill up to four; `item`, `ability`; `guess`: the item is
   a guess, so the page does not show it).
+- `preview`: their six at team preview (from the frames), for the "as you saw it" view. `item_from`: the turn from which you knew their
+  item (it activated the turn before). `appears_as`: what a Pokémon looked like before its Illusion broke (`until`: the first turn you
+  knew).
 - `candidates`: when one of their four never came in, the team-preview Pokémon it could have been, weighted by how often each is brought
   when on team preview (Reg M-C Bo3 replays). The bar averages over them.
 - `turns`: the position at the start of each turn. Per side, only what changed since the previous turn: `slot` (a, b, or "" for the

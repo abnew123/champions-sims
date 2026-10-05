@@ -60,6 +60,15 @@ show Torkoal at 177 HP, i.e. 32 HP points); the opponent's from Smogon M-C sets 
 over its team-preview candidates. Caveat: `egvalue9_sym.json` weights Trick Room turns at 0.07 against egvalue9's 0.26, so the one-turn
 bar may undervalue setting Trick Room (asked Battle sim).
 
+**Two views of the recorded games (the user asked, 2026-10-05):** "as you saw it" (default) knows only the team preview, the Pokémon
+that had come in (as they looked: Illusion fools it until it breaks) and what they had shown by the start of the turn; every set of
+preview Pokémon they could still have brought is evaluated and averaged, weighted by bring rates (`hypotheses()` in `recorded.py`).
+"With hindsight" knows their four and every reveal from turn 1. The opponent's unrevealed sets are the most common Reg M-C set per species
+from the Bo3 team sheets (`recorded.py commonsets` -> `results/common_sets.json`: item, ability, nature, top four moves, bring rate;
+stat points from the Smogon M-C set of the form played). Positions: `recorded.py positions` writes both views (names `<game> t<n>
+seen<k>` / `hind<k>`). The as-seen view uses the same rescale as the hindsight bar and is not separately calibrated; it could be,
+on the replay cache (open sheets, only the brought four hidden). Kept for review of finished games, not for use during a game.
+
 Possible next steps (not asked for yet): more demo games, flagging Perish Song positions on the page, Battle sim extending the engine data
 (210 games need a missing species or ability), step 2 (the user's recorded games, a belief over the opponent's hidden sets).
 

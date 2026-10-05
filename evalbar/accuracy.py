@@ -11,7 +11,9 @@ With engine results (lines from the engine's position evaluation, named "<replay
 Prints and writes: log loss and Brier score per position (a coin flip scores 0.693 and 0.25), how often the favourite won, the same by turn
 number, and calibration (of the positions rated 60-70%, how many were won).
 usage (needs numpy: the main folder's .venv): python3 evalbar/accuracy.py [engine results .jsonl ...]
-       writes evalbar/results/accuracy_v0.json, or accuracy_engine.json when engine results are given"""
+       writes evalbar/results/accuracy_v0.json, or accuracy_engine.json when engine results are given
+       python3 evalbar/accuracy.py compare <name>=<engine results .jsonl> <name>=<...> [out.json]
+       the engine value from each run, rescaled the same way, on the positions all runs share: overall and with Trick Room up"""
 import os, sys, json, math, zlib
 import numpy as np
 import common as C
@@ -68,8 +70,37 @@ def real_rows():
         except Exception: continue
         if w is not None and fr: rows += [{'g': rid, 't': t, 'f': f, 'y': 1 if w == 'p1' else 0} for t, f in fr]
     return rows
+def load_engine(f):
+    eng = {}
+    for l in open(f):
+        d = json.loads(l)
+        if d.get('value') is not None and d['name'].endswith(' p1'): eng[d['name'][:-3]] = d
+    return eng
+def compare(args, rows):
+    runs = [a.split('=', 1) for a in args if '=' in a]; outf = next((a for a in args if '=' not in a), None)
+    E = {nm: load_engine(f) for nm, f in runs}
+    keys = set.intersection(*(set(e) for e in E.values()))
+    sub = [{**r, 'e': {nm: E[nm][f"{r['g']} t{r['t']}"] for nm in E}} for r in rows if f"{r['g']} t{r['t']}" in keys]
+    tr = lambda r: r['e'][runs[0][0]]['feats'][3] != 0                          # Trick Room up (its feature is non-zero)
+    P = {}; out = {'positions': len(sub), 'tr_positions': sum(map(tr, sub))}
+    for nm in E:
+        P[nm] = cv(sub, lambda r, nm=nm: [logit(r['e'][nm]['value'])])
+        X = np.array([[logit(r['e'][nm]['value'])] for r in sub] + [[-logit(r['e'][nm]['value'])] for r in sub]); y = np.array([r['y'] for r in sub] + [1 - r['y'] for r in sub], float)
+        trk = {(r['g'], r['t']) for r in sub if tr(r)}
+        s_all = score(P[nm]); s_tr = score([p for p in P[nm] if (p[0], p[1]) in trk])
+        out[nm] = {'all': s_all, 'trick_room_up': s_tr, 'weight': fit(X, y).tolist()}
+        print(f"{nm}: log loss {s_all['log_loss']:.4f}, favourite won {100 * s_all['favourite_won']:.1f}% | Trick Room up ({s_tr['positions']} positions): "
+              f"log loss {s_tr['log_loss']:.4f}, favourite won {100 * s_tr['favourite_won']:.1f}% | weight on log-odds {out[nm]['weight'][1]:.3f}")
+    names = list(E)
+    for a in names[1:]:
+        trk = {(r['g'], r['t']) for r in sub if tr(r)}
+        d_all = paired(P[a], P[names[0]]); d_tr = paired([p for p in P[a] if (p[0], p[1]) in trk], [p for p in P[names[0]] if (p[0], p[1]) in trk])
+        out[f'{a} - {names[0]}'] = {'all': d_all, 'trick_room_up': d_tr}
+        print(f"{a} minus {names[0]}: log loss {d_all[0]:+.4f} ± {d_all[1]:.4f} overall, {d_tr[0]:+.4f} ± {d_tr[1]:.4f} with Trick Room up")
+    if outf: json.dump(out, open(outf, 'w'), indent=1)
 if __name__ == '__main__':
     rows = real_rows(); out = {}
+    if len(sys.argv) > 1 and sys.argv[1] == 'compare': compare(sys.argv[2:], rows); sys.exit()
     if len(sys.argv) < 2:
         s = score(cv(rows, lambda r: r['f'])); show('version 0, out of sample', s)
         outf = os.path.join(C.HERE, 'results', 'accuracy_v0.json'); out = {'model': 'v0: 11 replay features, logistic, 5-fold by game', **s}

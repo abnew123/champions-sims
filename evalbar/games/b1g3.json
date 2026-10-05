@@ -1,10 +1,11 @@
 {
  "id": "b1g3", "title": "Game 3", "recorded": "2026-10-02", "result": "loss", "how": "you forfeited at the start of turn 6",
  "mine": ["Incineroar", "Blastoise", "Indeedee-F", "Kingambit"],
+ "preview": ["Kommo-o", "Rillaboom", "Indeedee-F", "Metagross", "Incineroar", "Pelipper"],
  "my_overrides": {"Kingambit": {"nature": "Brave"}},
  "theirs": [
-  {"species": "Indeedee-F", "item": "Rocky Helmet", "moves": ["Follow Me"], "note": "Rocky Helmet: Incineroar lost a sixth after Throat Chop"},
-  {"species": "Kommo-o", "item": "Leftovers", "moves": ["Clangorous Soul", "Aura Sphere", "Clanging Scales"], "note": "Leftovers: it healed 6% a turn"},
+  {"species": "Indeedee-F", "item": "Rocky Helmet", "item_from": 2, "moves": ["Follow Me"], "note": "Rocky Helmet: Incineroar lost a sixth after Throat Chop"},
+  {"species": "Kommo-o", "item": "Leftovers", "item_from": 2, "moves": ["Clangorous Soul", "Aura Sphere", "Clanging Scales"], "note": "Leftovers: it healed 6% a turn"},
   {"species": "Metagross", "from": "Metagross-Mega", "ability": "Clear Body", "moves": ["Psychic Fangs", "Steel Roller", "Protect"]},
   {"species": "Incineroar"}
  ],

@@ -1,0 +1,3258 @@
+{
+"Abomasnow": {
+"ability": "Snow Warning",
+"brought": 2,
+"item": "Abomasite",
+"moves": [
+"Blizzard",
+"Earth Power",
+"Aurora Veil",
+"Protect"
+],
+"n": 11,
+"nature": "Quiet",
+"preview": 11
+},
+"Absol": {
+"ability": "Justified",
+"brought": 41,
+"item": "Absolite Z",
+"moves": [
+"Night Slash",
+"Close Combat",
+"Protect",
+"Shadow Claw"
+],
+"n": 62,
+"nature": "Adamant",
+"preview": 62
+},
+"Aegislash": {
+"ability": "Stance Change",
+"brought": 76,
+"item": "Life Orb",
+"moves": [
+"Kings Shield",
+"Shadow Sneak",
+"Poltergeist",
+"Iron Head"
+],
+"n": 133,
+"nature": "Adamant",
+"preview": 133
+},
+"Aerodactyl": {
+"ability": "Unnerve",
+"brought": 189,
+"item": "Aerodactylite",
+"moves": [
+"Rock Slide",
+"Tailwind",
+"Dual Wingbeat",
+"Protect"
+],
+"n": 296,
+"nature": "Jolly",
+"preview": 296
+},
+"Aggron": {
+"ability": "Sturdy",
+"brought": 4,
+"item": "Aggronite",
+"moves": [
+"Iron Defense",
+"Body Press",
+"Heavy Slam",
+"Protect"
+],
+"n": 11,
+"nature": "Careful",
+"preview": 11
+},
+"Alakazam": {
+"ability": "Synchronize",
+"brought": 19,
+"item": "Alakazite",
+"moves": [
+"Protect",
+"Expanding Force",
+"Dazzling Gleam",
+"Speed Swap"
+],
+"n": 28,
+"nature": "Timid",
+"preview": 28
+},
+"Alcremie": {
+"ability": "Aroma Veil",
+"brought": 2,
+"item": "Sitrus Berry",
+"moves": [
+"Decorate",
+"Dazzling Gleam",
+"Mystical Fire",
+"Psych Up"
+],
+"n": 4,
+"nature": "Bold",
+"preview": 4
+},
+"Altaria": {
+"ability": "Cloud Nine",
+"brought": 35,
+"item": "Altarianite",
+"moves": [
+"Protect",
+"Tailwind",
+"Hyper Voice",
+"Will OWisp"
+],
+"n": 67,
+"nature": "Modest",
+"preview": 67
+},
+"Ampharos": {
+"ability": "Static",
+"brought": 2,
+"item": "Ampharosite",
+"moves": [
+"Dragon Pulse",
+"Protect",
+"Thunderbolt",
+"Parabolic Charge"
+],
+"n": 7,
+"nature": "Quiet",
+"preview": 7
+},
+"Annihilape": {
+"ability": "Defiant",
+"brought": 175,
+"item": "Choice Scarf",
+"moves": [
+"Close Combat",
+"Ice Punch",
+"Shadow Claw",
+"Uturn"
+],
+"n": 276,
+"nature": "Jolly",
+"preview": 276
+},
+"Appletun": {
+"ability": "Ripen",
+"brought": 4,
+"item": "Lum Berry",
+"moves": [
+"Leech Seed",
+"Seed Bomb",
+"Apple Acid",
+"Outrage"
+],
+"n": 13,
+"nature": "Hardy",
+"preview": 13
+},
+"Araquanid": {
+"ability": "Water Bubble",
+"brought": 22,
+"item": "Mystic Water",
+"moves": [
+"Wide Guard",
+"Liquidation",
+"Leech Life",
+"Protect"
+],
+"n": 36,
+"nature": "Adamant",
+"preview": 36
+},
+"Arboliva": {
+"ability": "Seed Sower",
+"brought": 7,
+"item": "Leftovers",
+"moves": [
+"Protect",
+"Earth Power",
+"Hyper Voice",
+"Giga Drain"
+],
+"n": 8,
+"nature": "Quiet",
+"preview": 8
+},
+"Arcanine": {
+"ability": "Intimidate",
+"brought": 6,
+"item": "Sitrus Berry",
+"moves": [
+"Protect",
+"Flare Blitz",
+"Wild Charge",
+"Snarl"
+],
+"n": 11,
+"nature": "Jolly",
+"preview": 11
+},
+"Arcanine-Hisui": {
+"ability": "Rock Head",
+"brought": 904,
+"item": "Focus Sash",
+"moves": [
+"Flare Blitz",
+"Protect",
+"Head Smash",
+"Extreme Speed"
+],
+"n": 1342,
+"nature": "Jolly",
+"preview": 1342
+},
+"Archaludon": {
+"ability": "Stamina",
+"brought": 851,
+"item": "Leftovers",
+"moves": [
+"Electro Shot",
+"Protect",
+"Dragon Pulse",
+"Flash Cannon"
+],
+"n": 1186,
+"nature": "Modest",
+"preview": 1186
+},
+"Ariados": {
+"ability": "Insomnia",
+"brought": 0,
+"item": "Occa Berry",
+"moves": [
+"Knock Off",
+"Toxic Thread",
+"Rage Powder",
+"Protect"
+],
+"n": 1,
+"nature": "Impish",
+"preview": 1
+},
+"Armarouge": {
+"ability": "Flash Fire",
+"brought": 290,
+"item": "Life Orb",
+"moves": [
+"Expanding Force",
+"Armor Cannon",
+"Protect",
+"Wide Guard"
+],
+"n": 409,
+"nature": "Modest",
+"preview": 409
+},
+"Aromatisse": {
+"ability": "Aroma Veil",
+"brought": 2,
+"item": "Sitrus Berry",
+"moves": [
+"Trick Room",
+"After You",
+"Moonblast",
+"Helping Hand"
+],
+"n": 5,
+"nature": "Sassy",
+"preview": 5
+},
+"Audino": {
+"ability": "Regenerator",
+"brought": 8,
+"item": "Audinite",
+"moves": [
+"Protect",
+"Simple Beam",
+"Calm Mind",
+"Hyper Voice"
+],
+"n": 10,
+"nature": "Quiet",
+"preview": 10
+},
+"Azumarill": {
+"ability": "Huge Power",
+"brought": 23,
+"item": "Sitrus Berry",
+"moves": [
+"Play Rough",
+"Aqua Jet",
+"Protect",
+"Belly Drum"
+],
+"n": 33,
+"nature": "Adamant",
+"preview": 33
+},
+"Banette": {
+"ability": "Cursed Body",
+"brought": 4,
+"item": "Banettite",
+"moves": [
+"Phantom Force",
+"Skitter Smack",
+"Destiny Bond",
+"Taunt"
+],
+"n": 4,
+"nature": "Adamant",
+"preview": 4
+},
+"Basculegion": {
+"ability": "Adaptability",
+"brought": 776,
+"item": "Choice Scarf",
+"moves": [
+"Last Respects",
+"Wave Crash",
+"Aqua Jet",
+"Flip Turn"
+],
+"n": 1201,
+"nature": "Jolly",
+"preview": 1201
+},
+"Basculegion-F": {
+"ability": "Swift Swim",
+"brought": 33,
+"item": "Focus Sash",
+"moves": [
+"Muddy Water",
+"Shadow Ball",
+"Ice Beam",
+"Protect"
+],
+"n": 39,
+"nature": "Modest",
+"preview": 39
+},
+"Bastiodon": {
+"ability": "Soundproof",
+"brought": 13,
+"item": "Leftovers",
+"moves": [
+"Protect",
+"Iron Defense",
+"Body Press",
+"Metal Burst"
+],
+"n": 14,
+"nature": "Relaxed",
+"preview": 14
+},
+"Baxcalibur": {
+"ability": "Thermal Exchange",
+"brought": 87,
+"item": "Baxcalibrite",
+"moves": [
+"Protect",
+"Glaive Rush",
+"Ice Shard",
+"High Horsepower"
+],
+"n": 183,
+"nature": "Adamant",
+"preview": 183
+},
+"Beedrill": {
+"ability": "Swarm",
+"brought": 7,
+"item": "Beedrillite",
+"moves": [
+"Protect",
+"Poison Jab",
+"Uturn",
+"Drill Run"
+],
+"n": 7,
+"nature": "Jolly",
+"preview": 7
+},
+"Bellibolt": {
+"ability": "Electromorphosis",
+"brought": 18,
+"item": "Leftovers",
+"moves": [
+"Protect",
+"Thunderbolt",
+"Parabolic Charge",
+"Soak"
+],
+"n": 28,
+"nature": "Modest",
+"preview": 28
+},
+"Blastoise": {
+"ability": "Rain Dish",
+"brought": 65,
+"item": "Blastoisinite",
+"moves": [
+"Protect",
+"Shell Smash",
+"Water Spout",
+"Dark Pulse"
+],
+"n": 148,
+"nature": "Modest",
+"preview": 148
+},
+"Blaziken": {
+"ability": "Speed Boost",
+"brought": 139,
+"item": "Blazikenite",
+"moves": [
+"Close Combat",
+"Flare Blitz",
+"Rock Slide",
+"Protect"
+],
+"n": 209,
+"nature": "Adamant",
+"preview": 209
+},
+"Camerupt": {
+"ability": "Solid Rock",
+"brought": 134,
+"item": "Cameruptite",
+"moves": [
+"Earth Power",
+"Heat Wave",
+"Protect",
+"Ancient Power"
+],
+"n": 178,
+"nature": "Quiet",
+"preview": 178
+},
+"Ceruledge": {
+"ability": "Flash Fire",
+"brought": 103,
+"item": "Grassy Seed",
+"moves": [
+"Bitter Blade",
+"Shadow Sneak",
+"Protect",
+"Swords Dance"
+],
+"n": 172,
+"nature": "Adamant",
+"preview": 172
+},
+"Chandelure": {
+"ability": "Flash Fire",
+"brought": 7,
+"item": "Chandelurite",
+"moves": [
+"Heat Wave",
+"Shadow Ball",
+"Protect",
+"Trick Room"
+],
+"n": 11,
+"nature": "Modest",
+"preview": 11
+},
+"Charizard": {
+"ability": "Blaze",
+"brought": 588,
+"item": "Charizardite Y",
+"moves": [
+"Protect",
+"Heat Wave",
+"Weather Ball",
+"Ancient Power"
+],
+"n": 1075,
+"nature": "Modest",
+"preview": 1075
+},
+"Chesnaught": {
+"ability": "Bulletproof",
+"brought": 9,
+"item": "Chesnaughtite",
+"moves": [
+"Body Press",
+"Wood Hammer",
+"Thunder Punch",
+"Gyro Ball"
+],
+"n": 14,
+"nature": "Brave",
+"preview": 14
+},
+"Chimecho": {
+"ability": "Levitate",
+"brought": 3,
+"item": "Chimechite",
+"moves": [
+"Psychic",
+"Flash Cannon",
+"Recover",
+"Protect"
+],
+"n": 13,
+"nature": "Modest",
+"preview": 13
+},
+"Cinderace": {
+"ability": "Blaze",
+"brought": 18,
+"item": "Focus Sash",
+"moves": [
+"Protect",
+"Pyro Ball",
+"Coaching",
+"Super Fang"
+],
+"n": 33,
+"nature": "Jolly",
+"preview": 33
+},
+"Clawitzer": {
+"ability": "Mega Launcher",
+"brought": 2,
+"item": "Life Orb",
+"moves": [
+"Protect",
+"Water Pulse",
+"Dark Pulse",
+"Aura Sphere"
+],
+"n": 2,
+"nature": "Modest",
+"preview": 2
+},
+"Clefable": {
+"ability": "Unaware",
+"brought": 43,
+"item": "Sitrus Berry",
+"moves": [
+"Moonblast",
+"Protect",
+"Follow Me",
+"Encore"
+],
+"n": 75,
+"nature": "Bold",
+"preview": 75
+},
+"Cofagrigus": {
+"ability": "Mummy",
+"brought": 8,
+"item": "Sitrus Berry",
+"moves": [
+"Body Press",
+"Will OWisp",
+"Trick Room",
+"Poltergeist"
+],
+"n": 15,
+"nature": "Adamant",
+"preview": 15
+},
+"Conkeldurr": {
+"ability": "Guts",
+"brought": 2,
+"item": "Rocky Helmet",
+"moves": [
+"Close Combat",
+"Rock Slide",
+"Coaching",
+"Protect"
+],
+"n": 2,
+"nature": "Impish",
+"preview": 2
+},
+"Corviknight": {
+"ability": "Mirror Armor",
+"brought": 117,
+"item": "Psychic Seed",
+"moves": [
+"Roost",
+"Brave Bird",
+"Bulk Up",
+"Power Trip"
+],
+"n": 229,
+"nature": "Careful",
+"preview": 229
+},
+"Crabominable": {
+"ability": "Hyper Cutter",
+"brought": 2,
+"item": "Crabominite",
+"moves": [
+"Drain Punch",
+"Protect",
+"Ice Hammer",
+"Mach Punch"
+],
+"n": 9,
+"nature": "Brave",
+"preview": 9
+},
+"Decidueye-Hisui": {
+"ability": "Scrappy",
+"brought": 2,
+"item": "Focus Sash",
+"moves": [
+"Protect",
+"Triple Arrows",
+"Leaf Blade",
+"Tailwind"
+],
+"n": 6,
+"nature": "Adamant",
+"preview": 6
+},
+"Dedenne": {
+"ability": "Plus",
+"brought": 1,
+"item": "Choice Scarf",
+"moves": [
+"Electroweb",
+"Entrainment",
+"Dazzling Gleam",
+"Grass Knot"
+],
+"n": 2,
+"nature": "Timid",
+"preview": 2
+},
+"Delphox": {
+"ability": "Blaze",
+"brought": 282,
+"item": "Delphoxite",
+"moves": [
+"Heat Wave",
+"Protect",
+"Nasty Plot",
+"Psychic"
+],
+"n": 448,
+"nature": "Timid",
+"preview": 448
+},
+"Diggersby": {
+"ability": "Huge Power",
+"brought": 1,
+"item": "Choice Scarf",
+"moves": [
+"Earthquake",
+"Rock Slide",
+"Ice Punch",
+"Brick Break"
+],
+"n": 2,
+"nature": "Adamant",
+"preview": 2
+},
+"Ditto": {
+"ability": "Imposter",
+"brought": 16,
+"item": "Focus Sash",
+"moves": [
+"Transform"
+],
+"n": 21,
+"nature": "Timid",
+"preview": 21
+},
+"Dragalge": {
+"ability": "Adaptability",
+"brought": 3,
+"item": "Dragalgite",
+"moves": [
+"Protect",
+"Sludge Bomb",
+"Dragon Pulse",
+"Draco Meteor"
+],
+"n": 11,
+"nature": "Quiet",
+"preview": 11
+},
+"Dragapult": {
+"ability": "Infiltrator",
+"brought": 145,
+"item": "Life Orb",
+"moves": [
+"Protect",
+"Draco Meteor",
+"Shadow Ball",
+"Will OWisp"
+],
+"n": 249,
+"nature": "Timid",
+"preview": 249
+},
+"Dragonite": {
+"ability": "Inner Focus",
+"brought": 228,
+"item": "Dragoninite",
+"moves": [
+"Protect",
+"Dragon Pulse",
+"Tailwind",
+"Heat Wave"
+],
+"n": 400,
+"nature": "Modest",
+"preview": 400
+},
+"Drampa": {
+"ability": "Cloud Nine",
+"brought": 3,
+"item": "Drampanite",
+"moves": [
+"Hyper Voice",
+"Protect",
+"Earth Power",
+"Flamethrower"
+],
+"n": 8,
+"nature": "Modest",
+"preview": 8
+},
+"Eelektross": {
+"ability": "Levitate",
+"brought": 3,
+"item": "Eelektrossite",
+"moves": [
+"Protect",
+"Stomping Tantrum",
+"Thunder Punch",
+"Throat Chop"
+],
+"n": 6,
+"nature": "Adamant",
+"preview": 6
+},
+"Emboar": {
+"ability": "Reckless",
+"brought": 2,
+"item": "Emboarite",
+"moves": [
+"Flare Blitz",
+"Protect",
+"Close Combat",
+"Earthquake"
+],
+"n": 4,
+"nature": "Brave",
+"preview": 4
+},
+"Emolga": {
+"ability": "Motor Drive",
+"brought": 1,
+"item": "Focus Sash",
+"moves": [
+"Discharge",
+"Baton Pass",
+"Protect",
+"Speed Swap"
+],
+"n": 2,
+"nature": "Timid",
+"preview": 2
+},
+"Empoleon": {
+"ability": "Competitive",
+"brought": 34,
+"item": "Grassy Seed",
+"moves": [
+"Protect",
+"Hydro Pump",
+"Flash Cannon",
+"Icy Wind"
+],
+"n": 71,
+"nature": "Modest",
+"preview": 71
+},
+"Espathra": {
+"ability": "Speed Boost",
+"brought": 39,
+"item": "Grassy Seed",
+"moves": [
+"Lumina Crash",
+"Protect",
+"Calm Mind",
+"Baton Pass"
+],
+"n": 55,
+"nature": "Timid",
+"preview": 55
+},
+"Excadrill": {
+"ability": "Sand Rush",
+"brought": 387,
+"item": "Focus Sash",
+"moves": [
+"Iron Head",
+"Protect",
+"High Horsepower",
+"Rock Slide"
+],
+"n": 551,
+"nature": "Adamant",
+"preview": 551
+},
+"Falinks": {
+"ability": "Defiant",
+"brought": 1,
+"item": "Falinksite",
+"moves": [
+"Close Combat",
+"Knock Off",
+"No Retreat",
+"Rock Tomb"
+],
+"n": 1,
+"nature": "Careful",
+"preview": 1
+},
+"Farigiraf": {
+"ability": "Armor Tail",
+"brought": 909,
+"item": "Sitrus Berry",
+"moves": [
+"Trick Room",
+"Psychic",
+"Protect",
+"Helping Hand"
+],
+"n": 1297,
+"nature": "Bold",
+"preview": 1297
+},
+"Feraligatr": {
+"ability": "Sheer Force",
+"brought": 2,
+"item": "Feraligite",
+"moves": [
+"Liquidation",
+"Protect",
+"Dragon Dance",
+"Body Slam"
+],
+"n": 6,
+"nature": "Adamant",
+"preview": 6
+},
+"Flapple": {
+"ability": "Hustle",
+"brought": 2,
+"item": "Choice Scarf",
+"moves": [
+"Dragon Rush",
+"Grav Apple",
+"Uturn",
+"Sucker Punch"
+],
+"n": 3,
+"nature": "Jolly",
+"preview": 3
+},
+"Floette-Eternal": {
+"ability": "Flower Veil",
+"brought": 444,
+"item": "Floettite",
+"moves": [
+"Protect",
+"Dazzling Gleam",
+"Calm Mind",
+"Moonblast"
+],
+"n": 1055,
+"nature": "Modest",
+"preview": 1055
+},
+"Florges-Blue": {
+"ability": "Flower Veil",
+"brought": 4,
+"item": "Grassy Seed",
+"moves": [
+"Moonblast",
+"Pollen Puff",
+"Protect",
+"Giga Drain"
+],
+"n": 4,
+"nature": "Modest",
+"preview": 4
+},
+"Forretress": {
+"ability": "Sturdy",
+"brought": 3,
+"item": "Rocky Helmet",
+"moves": [
+"Iron Defense",
+"Spikes",
+"Gyro Ball",
+"Body Press"
+],
+"n": 4,
+"nature": "Sassy",
+"preview": 4
+},
+"Froslass": {
+"ability": "Cursed Body",
+"brought": 285,
+"item": "Froslassite",
+"moves": [
+"Blizzard",
+"Protect",
+"Shadow Ball",
+"Aurora Veil"
+],
+"n": 563,
+"nature": "Timid",
+"preview": 563
+},
+"Gallade": {
+"ability": "Sharpness",
+"brought": 35,
+"item": "White Herb",
+"moves": [
+"Psycho Cut",
+"Sacred Sword",
+"Protect",
+"Trick Room"
+],
+"n": 60,
+"nature": "Jolly",
+"preview": 60
+},
+"Garchomp": {
+"ability": "Rough Skin",
+"brought": 1599,
+"item": "Garchompite Z",
+"moves": [
+"Protect",
+"Power Gem",
+"Earth Power",
+"Dragon Pulse"
+],
+"n": 2530,
+"nature": "Modest",
+"preview": 2530
+},
+"Gardevoir": {
+"ability": "Trace",
+"brought": 332,
+"item": "Gardevoirite",
+"moves": [
+"Hyper Voice",
+"Protect",
+"Expanding Force",
+"Trick Room"
+],
+"n": 577,
+"nature": "Modest",
+"preview": 577
+},
+"Garganacl": {
+"ability": "Purifying Salt",
+"brought": 9,
+"item": "Leftovers",
+"moves": [
+"Protect",
+"Recover",
+"Stone Edge",
+"Fissure"
+],
+"n": 11,
+"nature": "Sassy",
+"preview": 11
+},
+"Gengar": {
+"ability": "Cursed Body",
+"brought": 358,
+"item": "Gengarite",
+"moves": [
+"Shadow Ball",
+"Protect",
+"Sludge Bomb",
+"Perish Song"
+],
+"n": 530,
+"nature": "Modest",
+"preview": 530
+},
+"Gholdengo": {
+"ability": "Goodas Gold",
+"brought": 1598,
+"item": "Life Orb",
+"moves": [
+"Make It Rain",
+"Shadow Ball",
+"Protect",
+"Nasty Plot"
+],
+"n": 2333,
+"nature": "Modest",
+"preview": 2333
+},
+"Glaceon": {
+"ability": "Snow Cloak",
+"brought": 0,
+"item": "Never Melt Ice",
+"moves": [
+"Blizzard",
+"Freeze Dry",
+"Weather Ball",
+"Protect"
+],
+"n": 2,
+"nature": "Modest",
+"preview": 2
+},
+"Glalie": {
+"ability": "Moody",
+"brought": 0,
+"item": "Quick Claw",
+"moves": [
+"Sheer Cold"
+],
+"n": 1,
+"nature": "Careful",
+"preview": 1
+},
+"Glimmora": {
+"ability": "Toxic Debris",
+"brought": 173,
+"item": "Glimmoranite",
+"moves": [
+"Power Gem",
+"Earth Power",
+"Sludge Bomb",
+"Spiky Shield"
+],
+"n": 338,
+"nature": "Modest",
+"preview": 338
+},
+"Gliscor": {
+"ability": "Hyper Cutter",
+"brought": 27,
+"item": "",
+"moves": [
+"Protect",
+"Tailwind",
+"High Horsepower",
+"Acrobatics"
+],
+"n": 41,
+"nature": "Jolly",
+"preview": 41
+},
+"Gogoat": {
+"ability": "Grass Pelt",
+"brought": 1,
+"item": "Psychic Seed",
+"moves": [
+"Protect",
+"Bulk Up",
+"Leech Seed",
+"Horn Leech"
+],
+"n": 2,
+"nature": "Impish",
+"preview": 2
+},
+"Golisopod": {
+"ability": "Emergency Exit",
+"brought": 404,
+"item": "Golisopite",
+"moves": [
+"Leech Life",
+"Iron Head",
+"Protect",
+"Swords Dance"
+],
+"n": 786,
+"nature": "Adamant",
+"preview": 786
+},
+"Golurk": {
+"ability": "Iron Fist",
+"brought": 6,
+"item": "Golurkite",
+"moves": [
+"Poltergeist",
+"Protect",
+"Headlong Rush",
+"Ice Punch"
+],
+"n": 9,
+"nature": "Adamant",
+"preview": 9
+},
+"Goodra-Hisui": {
+"ability": "Shell Armor",
+"brought": 22,
+"item": "Leftovers",
+"moves": [
+"Life Dew",
+"Thunder",
+"Ice Spinner",
+"Substitute"
+],
+"n": 29,
+"nature": "Bold",
+"preview": 29
+},
+"Gourgeist-Super": {
+"ability": "Pickup",
+"brought": 2,
+"item": "Sitrus Berry",
+"moves": [
+"Imprison",
+"Trick Room",
+"Leech Seed",
+"Ally Switch"
+],
+"n": 2,
+"nature": "Calm",
+"preview": 2
+},
+"Grapploct": {
+"ability": "Technician",
+"brought": 31,
+"item": "Life Orb",
+"moves": [
+"Storm Throw",
+"Mach Punch",
+"Detect",
+"Payback"
+],
+"n": 58,
+"nature": "Brave",
+"preview": 58
+},
+"Greninja": {
+"ability": "Protean",
+"brought": 13,
+"item": "Greninjite",
+"moves": [
+"Protect",
+"Water Shuriken",
+"Gunk Shot",
+"Rock Slide"
+],
+"n": 24,
+"nature": "Timid",
+"preview": 24
+},
+"Grimmsnarl": {
+"ability": "Prankster",
+"brought": 346,
+"item": "Light Clay",
+"moves": [
+"Light Screen",
+"Reflect",
+"Parting Shot",
+"Spirit Break"
+],
+"n": 633,
+"nature": "Sassy",
+"preview": 633
+},
+"Gyarados": {
+"ability": "Intimidate",
+"brought": 29,
+"item": "Gyaradosite",
+"moves": [
+"Waterfall",
+"Dragon Dance",
+"Protect",
+"Earthquake"
+],
+"n": 42,
+"nature": "Adamant",
+"preview": 42
+},
+"Hatterene": {
+"ability": "Magic Bounce",
+"brought": 98,
+"item": "Life Orb",
+"moves": [
+"Dazzling Gleam",
+"Trick Room",
+"Protect",
+"Expanding Force"
+],
+"n": 159,
+"nature": "Quiet",
+"preview": 159
+},
+"Hawlucha": {
+"ability": "Limber",
+"brought": 18,
+"item": "Hawluchanite",
+"moves": [
+"Entrainment",
+"Detect",
+"Close Combat",
+"Dual Wingbeat"
+],
+"n": 24,
+"nature": "Jolly",
+"preview": 24
+},
+"Heliolisk": {
+"ability": "Solar Power",
+"brought": 3,
+"item": "Choice Scarf",
+"moves": [
+"Thunderbolt",
+"Weather Ball",
+"Electroweb",
+"Hyper Beam"
+],
+"n": 10,
+"nature": "Modest",
+"preview": 10
+},
+"Heracross": {
+"ability": "Swarm",
+"brought": 15,
+"item": "Wide Lens",
+"moves": [
+"Close Combat",
+"Megahorn",
+"Low Kick",
+"Bug Bite"
+],
+"n": 21,
+"nature": "Adamant",
+"preview": 21
+},
+"Hippowdon": {
+"ability": "Sand Stream",
+"brought": 32,
+"item": "Leftovers",
+"moves": [
+"High Horsepower",
+"Protect",
+"Yawn",
+"Stone Edge"
+],
+"n": 39,
+"nature": "Careful",
+"preview": 39
+},
+"Houndoom": {
+"ability": "Flash Fire",
+"brought": 13,
+"item": "Houndoominite",
+"moves": [
+"Dark Pulse",
+"Heat Wave",
+"Protect",
+"Sludge Bomb"
+],
+"n": 23,
+"nature": "Timid",
+"preview": 23
+},
+"Houndstone": {
+"ability": "Sand Rush",
+"brought": 1,
+"item": "Spell Tag",
+"moves": [
+"Phantom Force",
+"Disable",
+"Last Respects",
+"Protect"
+],
+"n": 1,
+"nature": "Adamant",
+"preview": 1
+},
+"Hydrapple": {
+"ability": "Supersweet Syrup",
+"brought": 3,
+"item": "Life Orb",
+"moves": [
+"Fickle Beam",
+"Earth Power",
+"Protect",
+"Giga Drain"
+],
+"n": 5,
+"nature": "Quiet",
+"preview": 5
+},
+"Hydreigon": {
+"ability": "Levitate",
+"brought": 60,
+"item": "Choice Scarf",
+"moves": [
+"Draco Meteor",
+"Dark Pulse",
+"Snarl",
+"Earth Power"
+],
+"n": 107,
+"nature": "Modest",
+"preview": 107
+},
+"Incineroar": {
+"ability": "Intimidate",
+"brought": 2436,
+"item": "Sitrus Berry",
+"moves": [
+"Fake Out",
+"Parting Shot",
+"Flare Blitz",
+"Throat Chop"
+],
+"n": 3433,
+"nature": "Careful",
+"preview": 3433
+},
+"Indeedee": {
+"ability": "Psychic Surge",
+"brought": 348,
+"item": "Choice Scarf",
+"moves": [
+"Expanding Force",
+"Trick",
+"Protect",
+"Mystical Fire"
+],
+"n": 463,
+"nature": "Timid",
+"preview": 463
+},
+"Indeedee-F": {
+"ability": "Psychic Surge",
+"brought": 975,
+"item": "Rocky Helmet",
+"moves": [
+"Follow Me",
+"Helping Hand",
+"Trick Room",
+"Psychic"
+],
+"n": 1250,
+"nature": "Relaxed",
+"preview": 1250
+},
+"Infernape": {
+"ability": "Blaze",
+"brought": 7,
+"item": "Focus Sash",
+"moves": [
+"Fake Out",
+"Coaching",
+"Overheat",
+"Uturn"
+],
+"n": 8,
+"nature": "Timid",
+"preview": 8
+},
+"Inteleon": {
+"ability": "Sniper",
+"brought": 5,
+"item": "Scope Lens",
+"moves": [
+"Snipe Shot",
+"Protect",
+"Ice Beam",
+"Focus Energy"
+],
+"n": 8,
+"nature": "Timid",
+"preview": 8
+},
+"Jolteon": {
+"ability": "Volt Absorb",
+"brought": 2,
+"item": "Magnet",
+"moves": [
+"Electroweb",
+"Protect",
+"Sunny Day",
+"Helping Hand"
+],
+"n": 2,
+"nature": "Timid",
+"preview": 2
+},
+"Kangaskhan": {
+"ability": "Scrappy",
+"brought": 27,
+"item": "Kangaskhanite",
+"moves": [
+"Fake Out",
+"Double Edge",
+"Hammer Arm",
+"Ice Punch"
+],
+"n": 37,
+"nature": "Adamant",
+"preview": 37
+},
+"Kingambit": {
+"ability": "Defiant",
+"brought": 1500,
+"item": "Life Orb",
+"moves": [
+"Sucker Punch",
+"Kowtow Cleave",
+"Protect",
+"Iron Head"
+],
+"n": 2343,
+"nature": "Adamant",
+"preview": 2343
+},
+"Kleavor": {
+"ability": "Sharpness",
+"brought": 51,
+"item": "Focus Sash",
+"moves": [
+"Stone Axe",
+"Protect",
+"XScissor",
+"Close Combat"
+],
+"n": 57,
+"nature": "Jolly",
+"preview": 57
+},
+"Klefki": {
+"ability": "Prankster",
+"brought": 36,
+"item": "Light Clay",
+"moves": [
+"Light Screen",
+"Dazzling Gleam",
+"Reflect",
+"Rain Dance"
+],
+"n": 45,
+"nature": "Bold",
+"preview": 45
+},
+"Kommo-o": {
+"ability": "Soundproof",
+"brought": 515,
+"item": "Leftovers",
+"moves": [
+"Clanging Scales",
+"Protect",
+"Aura Sphere",
+"Clangorous Soul"
+],
+"n": 716,
+"nature": "Modest",
+"preview": 716
+},
+"Krookodile": {
+"ability": "Intimidate",
+"brought": 16,
+"item": "Chople Berry",
+"moves": [
+"Knock Off",
+"Protect",
+"High Horsepower",
+"Earthquake"
+],
+"n": 27,
+"nature": "Jolly",
+"preview": 27
+},
+"Leafeon": {
+"ability": "Chlorophyll",
+"brought": 1,
+"item": "Life Orb",
+"moves": [
+"Knock Off",
+"Solar Blade",
+"Detect",
+"Trailblaze"
+],
+"n": 5,
+"nature": "Adamant",
+"preview": 5
+},
+"Liepard": {
+"ability": "Prankster",
+"brought": 1,
+"item": "Focus Sash",
+"moves": [
+"Taunt",
+"Fake Out",
+"Knock Off",
+"Yawn"
+],
+"n": 5,
+"nature": "Jolly",
+"preview": 5
+},
+"Lopunny": {
+"ability": "Cute Charm",
+"brought": 39,
+"item": "Lopunnite",
+"moves": [
+"Fake Out",
+"Close Combat",
+"Triple Axel",
+"Protect"
+],
+"n": 55,
+"nature": "Jolly",
+"preview": 55
+},
+"Lucario": {
+"ability": "Inner Focus",
+"brought": 142,
+"item": "Lucarionite Z",
+"moves": [
+"Aura Sphere",
+"Flash Cannon",
+"Protect",
+"Detect"
+],
+"n": 250,
+"nature": "Timid",
+"preview": 250
+},
+"Luxray": {
+"ability": "Intimidate",
+"brought": 2,
+"item": "Sitrus Berry",
+"moves": [
+"Wild Charge",
+"Protect",
+"Volt Switch",
+"Ice Fang"
+],
+"n": 4,
+"nature": "Sassy",
+"preview": 4
+},
+"Lycanroc-Dusk": {
+"ability": "Tough Claws",
+"brought": 15,
+"item": "Focus Sash",
+"moves": [
+"Rock Slide",
+"Accelerock",
+"Protect",
+"Close Combat"
+],
+"n": 28,
+"nature": "Adamant",
+"preview": 28
+},
+"Mabosstiff": {
+"ability": "Intimidate",
+"brought": 1,
+"item": "Focus Sash",
+"moves": [
+"Jaw Lock",
+"Destiny Bond",
+"Play Rough",
+"Helping Hand"
+],
+"n": 2,
+"nature": "Adamant",
+"preview": 2
+},
+"Machamp": {
+"ability": "No Guard",
+"brought": 1,
+"item": "Choice Scarf",
+"moves": [
+"Dynamic Punch",
+"Close Combat",
+"Knock Off",
+"Ice Punch"
+],
+"n": 2,
+"nature": "Adamant",
+"preview": 2
+},
+"Malamar": {
+"ability": "Contrary",
+"brought": 11,
+"item": "Malamarite",
+"moves": [
+"Protect",
+"Superpower",
+"Trick Room",
+"Knock Off"
+],
+"n": 20,
+"nature": "Sassy",
+"preview": 20
+},
+"Mamoswine": {
+"ability": "Oblivious",
+"brought": 18,
+"item": "Focus Sash",
+"moves": [
+"Protect",
+"High Horsepower",
+"Ice Shard",
+"Icicle Crash"
+],
+"n": 33,
+"nature": "Adamant",
+"preview": 33
+},
+"Manectric": {
+"ability": "Lightning Rod",
+"brought": 7,
+"item": "Manectite",
+"moves": [
+"Thunderbolt",
+"Protect",
+"Volt Switch",
+"Snarl"
+],
+"n": 13,
+"nature": "Timid",
+"preview": 13
+},
+"Maushold": {
+"ability": "Friend Guard",
+"brought": 36,
+"item": "Chople Berry",
+"moves": [
+"Follow Me",
+"Protect",
+"Super Fang",
+"Feint"
+],
+"n": 61,
+"nature": "Jolly",
+"preview": 61
+},
+"Maushold-Four": {
+"ability": "Friend Guard",
+"brought": 46,
+"item": "Wide Lens",
+"moves": [
+"Follow Me",
+"Protect",
+"Super Fang",
+"Encore"
+],
+"n": 76,
+"nature": "Jolly",
+"preview": 76
+},
+"Mawile": {
+"ability": "Hyper Cutter",
+"brought": 40,
+"item": "Mawilite",
+"moves": [
+"Play Rough",
+"Protect",
+"Iron Head",
+"Sucker Punch"
+],
+"n": 90,
+"nature": "Brave",
+"preview": 90
+},
+"Medicham": {
+"ability": "Pure Power",
+"brought": 6,
+"item": "Choice Scarf",
+"moves": [
+"Skill Swap",
+"Close Combat",
+"Poison Jab",
+"Psycho Cut"
+],
+"n": 8,
+"nature": "Jolly",
+"preview": 8
+},
+"Meganium": {
+"ability": "Overgrow",
+"brought": 34,
+"item": "Meganiumite",
+"moves": [
+"Weather Ball",
+"Dazzling Gleam",
+"Solar Beam",
+"Protect"
+],
+"n": 58,
+"nature": "Modest",
+"preview": 58
+},
+"Meowscarada": {
+"ability": "Overgrow",
+"brought": 14,
+"item": "Focus Sash",
+"moves": [
+"Flower Trick",
+"Knock Off",
+"Triple Axel",
+"Petal Blizzard"
+],
+"n": 30,
+"nature": "Jolly",
+"preview": 30
+},
+"Meowstic": {
+"ability": "Prankster",
+"brought": 12,
+"item": "Sitrus Berry",
+"moves": [
+"Fake Out",
+"Light Screen",
+"Helping Hand",
+"Psychic"
+],
+"n": 33,
+"nature": "Calm",
+"preview": 33
+},
+"Meowstic-F": {
+"ability": "Competitive",
+"brought": 36,
+"item": "Meowsticite",
+"moves": [
+"Expanding Force",
+"Protect",
+"Thunderbolt",
+"Fake Out"
+],
+"n": 62,
+"nature": "Timid",
+"preview": 62
+},
+"Metagross": {
+"ability": "Clear Body",
+"brought": 240,
+"item": "Metagrossite",
+"moves": [
+"Psychic Fangs",
+"Protect",
+"Iron Head",
+"Rock Slide"
+],
+"n": 588,
+"nature": "Jolly",
+"preview": 588
+},
+"Milotic": {
+"ability": "Competitive",
+"brought": 448,
+"item": "Leftovers",
+"moves": [
+"Protect",
+"Scald",
+"Ice Beam",
+"Muddy Water"
+],
+"n": 839,
+"nature": "Calm",
+"preview": 839
+},
+"Mimikyu": {
+"ability": "Disguise",
+"brought": 14,
+"item": "Life Orb",
+"moves": [
+"Play Rough",
+"Trick Room",
+"Shadow Claw",
+"Shadow Sneak"
+],
+"n": 17,
+"nature": "Adamant",
+"preview": 17
+},
+"Morpeko": {
+"ability": "Hunger Switch",
+"brought": 1,
+"item": "Choice Scarf",
+"moves": [
+"Aura Wheel",
+"Volt Switch",
+"Electroweb",
+"Snarl"
+],
+"n": 2,
+"nature": "Hasty",
+"preview": 2
+},
+"Mr. Mime": {
+"ability": "Soundproof",
+"brought": 6,
+"item": "Rocky Helmet",
+"moves": [
+"Fake Out",
+"Wide Guard",
+"Helping Hand",
+"Reflect"
+],
+"n": 8,
+"nature": "Timid",
+"preview": 8
+},
+"Mr. Rime": {
+"ability": "Screen Cleaner",
+"brought": 7,
+"item": "Focus Sash",
+"moves": [
+"Protect",
+"Freeze Dry",
+"Ally Switch",
+"Fake Out"
+],
+"n": 9,
+"nature": "Calm",
+"preview": 9
+},
+"Mudsdale": {
+"ability": "Inner Focus",
+"brought": 9,
+"item": "Life Orb",
+"moves": [
+"High Horsepower",
+"Rock Slide",
+"Protect",
+"Heavy Slam"
+],
+"n": 12,
+"nature": "Brave",
+"preview": 12
+},
+"Musharna": {
+"ability": "Telepathy",
+"brought": 2,
+"item": "Kasib Berry",
+"moves": [
+"Trick Room",
+"Psychic",
+"Yawn",
+"Helping Hand"
+],
+"n": 3,
+"nature": "Sassy",
+"preview": 3
+},
+"Ninetales": {
+"ability": "Drought",
+"brought": 7,
+"item": "Choice Scarf",
+"moves": [
+"Heat Wave",
+"Solar Beam",
+"Overheat",
+"Fake Tears"
+],
+"n": 17,
+"nature": "Modest",
+"preview": 17
+},
+"Ninetales-Alola": {
+"ability": "Snow Warning",
+"brought": 90,
+"item": "Light Clay",
+"moves": [
+"Aurora Veil",
+"Protect",
+"Blizzard",
+"Icy Wind"
+],
+"n": 169,
+"nature": "Timid",
+"preview": 169
+},
+"Noivern": {
+"ability": "Infiltrator",
+"brought": 4,
+"item": "Mental Herb",
+"moves": [
+"Draco Meteor",
+"Tailwind",
+"Protect",
+"Uturn"
+],
+"n": 8,
+"nature": "Serious",
+"preview": 8
+},
+"Oranguru": {
+"ability": "Telepathy",
+"brought": 3,
+"item": "Sitrus Berry",
+"moves": [
+"Trick Room",
+"Instruct",
+"Protect",
+"Psychic Noise"
+],
+"n": 9,
+"nature": "Bold",
+"preview": 9
+},
+"Orthworm": {
+"ability": "Earth Eater",
+"brought": 1,
+"item": "Sitrus Berry",
+"moves": [
+"Body Press",
+"Protect",
+"Shed Tail",
+"Rock Slide"
+],
+"n": 3,
+"nature": "Careful",
+"preview": 3
+},
+"Overqwil": {
+"ability": "Intimidate",
+"brought": 23,
+"item": "Life Orb",
+"moves": [
+"Protect",
+"Throat Chop",
+"Aqua Jet",
+"Poison Jab"
+],
+"n": 34,
+"nature": "Jolly",
+"preview": 34
+},
+"Palafin": {
+"ability": "Zeroto Hero",
+"brought": 17,
+"item": "Life Orb",
+"moves": [
+"Wave Crash",
+"Flip Turn",
+"Close Combat",
+"Jet Punch"
+],
+"n": 53,
+"nature": "Jolly",
+"preview": 53
+},
+"Pangoro": {
+"ability": "Scrappy",
+"brought": 2,
+"item": "Focus Sash",
+"moves": [
+"Darkest Lariat",
+"Knock Off",
+"Close Combat",
+"Drain Punch"
+],
+"n": 3,
+"nature": "Brave",
+"preview": 3
+},
+"Pawmot": {
+"ability": "Iron Fist",
+"brought": 71,
+"item": "Focus Sash",
+"moves": [
+"Close Combat",
+"Double Shock",
+"Revival Blessing",
+"Fake Out"
+],
+"n": 99,
+"nature": "Jolly",
+"preview": 99
+},
+"Pelipper": {
+"ability": "Drizzle",
+"brought": 919,
+"item": "Focus Sash",
+"moves": [
+"Hurricane",
+"Weather Ball",
+"Tailwind",
+"Wide Guard"
+],
+"n": 1237,
+"nature": "Modest",
+"preview": 1237
+},
+"Perrserker": {
+"ability": "Steely Spirit",
+"brought": 3,
+"item": "Sitrus Berry",
+"moves": [
+"Fake Out",
+"Iron Head",
+"Close Combat",
+"Protect"
+],
+"n": 5,
+"nature": "Brave",
+"preview": 5
+},
+"Persian-Alola": {
+"ability": "Fur Coat",
+"brought": 1,
+"item": "Sitrus Berry",
+"moves": [
+"Knock Off",
+"Parting Shot",
+"Fake Out",
+"Snarl"
+],
+"n": 2,
+"nature": "Jolly",
+"preview": 2
+},
+"Pidgeot": {
+"ability": "Keen Eye",
+"brought": 20,
+"item": "Pidgeotite",
+"moves": [
+"Heat Wave",
+"Protect",
+"Hurricane",
+"Tailwind"
+],
+"n": 39,
+"nature": "Timid",
+"preview": 39
+},
+"Pikachu": {
+"ability": "Lightning Rod",
+"brought": 4,
+"item": "Light Ball",
+"moves": [
+"Fake Out",
+"Protect",
+"Thunderbolt",
+"Volt Tackle"
+],
+"n": 9,
+"nature": "Timid",
+"preview": 9
+},
+"Pincurchin": {
+"ability": "Electric Surge",
+"brought": 3,
+"item": "Electric Seed",
+"moves": [
+"Protect",
+"Rising Voltage",
+"Scald",
+"Discharge"
+],
+"n": 7,
+"nature": "Quiet",
+"preview": 7
+},
+"Politoed": {
+"ability": "Drizzle",
+"brought": 363,
+"item": "Sitrus Berry",
+"moves": [
+"Protect",
+"Weather Ball",
+"Perish Song",
+"Ice Beam"
+],
+"n": 504,
+"nature": "Calm",
+"preview": 504
+},
+"Polteageist": {
+"ability": "Cursed Body",
+"brought": 1,
+"item": "Focus Sash",
+"moves": [
+"Shell Smash",
+"Strength Sap",
+"Shadow Ball",
+"Giga Drain"
+],
+"n": 4,
+"nature": "Calm",
+"preview": 4
+},
+"Primarina": {
+"ability": "Liquid Voice",
+"brought": 339,
+"item": "Leftovers",
+"moves": [
+"Hyper Voice",
+"Moonblast",
+"Protect",
+"Calm Mind"
+],
+"n": 557,
+"nature": "Modest",
+"preview": 557
+},
+"Pyroar": {
+"ability": "Unnerve",
+"brought": 72,
+"item": "Pyroarite",
+"moves": [
+"Heat Wave",
+"Protect",
+"Overheat",
+"Scorching Sands"
+],
+"n": 112,
+"nature": "Timid",
+"preview": 112
+},
+"Quaquaval": {
+"ability": "Moxie",
+"brought": 1,
+"item": "White Herb",
+"moves": [
+"Aqua Step",
+"Close Combat",
+"Triple Axel",
+"Protect"
+],
+"n": 2,
+"nature": "Adamant",
+"preview": 2
+},
+"Raichu": {
+"ability": "Lightning Rod",
+"brought": 1492,
+"item": "Raichunite Y",
+"moves": [
+"Protect",
+"Zap Cannon",
+"Focus Blast",
+"Fake Out"
+],
+"n": 2697,
+"nature": "Timid",
+"preview": 2697
+},
+"Raichu-Alola": {
+"ability": "Surge Surfer",
+"brought": 2,
+"item": "Shuca Berry",
+"moves": [
+"Discharge",
+"Fake Out",
+"Draining Kiss",
+"Calm Mind"
+],
+"n": 3,
+"nature": "Hasty",
+"preview": 3
+},
+"Rampardos": {
+"ability": "Sheer Force",
+"brought": 3,
+"item": "Life Orb",
+"moves": [
+"Protect",
+"Rock Slide",
+"Fire Punch",
+"Thunder Punch"
+],
+"n": 7,
+"nature": "Adamant",
+"preview": 7
+},
+"Reuniclus": {
+"ability": "Magic Guard",
+"brought": 27,
+"item": "Life Orb",
+"moves": [
+"Trick Room",
+"Expanding Force",
+"Shadow Ball",
+"Energy Ball"
+],
+"n": 29,
+"nature": "Quiet",
+"preview": 29
+},
+"Rhyperior": {
+"ability": "Solid Rock",
+"brought": 1,
+"item": "Life Orb",
+"moves": [
+"High Horsepower",
+"Ice Punch",
+"Rock Slide",
+"Protect"
+],
+"n": 5,
+"nature": "Adamant",
+"preview": 5
+},
+"Rillaboom": {
+"ability": "Grassy Surge",
+"brought": 2858,
+"item": "Miracle Seed",
+"moves": [
+"Fake Out",
+"Grassy Glide",
+"Wood Hammer",
+"High Horsepower"
+],
+"n": 4638,
+"nature": "Adamant",
+"preview": 4638
+},
+"Roserade": {
+"ability": "Natural Cure",
+"brought": 2,
+"item": "Choice Scarf",
+"moves": [
+"Sludge Bomb",
+"Leaf Storm",
+"Shadow Ball",
+"Dazzling Gleam"
+],
+"n": 4,
+"nature": "Modest",
+"preview": 4
+},
+"Rotom": {
+"ability": "Levitate",
+"brought": 9,
+"item": "Choice Scarf",
+"moves": [
+"Electroweb",
+"Eerie Impulse",
+"Shadow Ball",
+"Thunderbolt"
+],
+"n": 10,
+"nature": "Timid",
+"preview": 10
+},
+"Rotom-Frost": {
+"ability": "Levitate",
+"brought": 1,
+"item": "Life Orb",
+"moves": [
+"Blizzard",
+"Thunderbolt",
+"Protect",
+"Volt Switch"
+],
+"n": 3,
+"nature": "Modest",
+"preview": 3
+},
+"Rotom-Heat": {
+"ability": "Levitate",
+"brought": 47,
+"item": "Choice Scarf",
+"moves": [
+"Volt Switch",
+"Thunderbolt",
+"Overheat",
+"Will OWisp"
+],
+"n": 78,
+"nature": "Timid",
+"preview": 78
+},
+"Rotom-Mow": {
+"ability": "Levitate",
+"brought": 0,
+"item": "Light Clay",
+"moves": [
+"Discharge",
+"Reflect",
+"Light Screen",
+"Leaf Storm"
+],
+"n": 2,
+"nature": "Modest",
+"preview": 2
+},
+"Rotom-Wash": {
+"ability": "Levitate",
+"brought": 29,
+"item": "Sitrus Berry",
+"moves": [
+"Hydro Pump",
+"Will OWisp",
+"Thunderbolt",
+"Protect"
+],
+"n": 52,
+"nature": "Modest",
+"preview": 52
+},
+"Runerigus": {
+"ability": "Wandering Spirit",
+"brought": 1,
+"item": "Rindo Berry",
+"moves": [
+"Trick Room",
+"Poltergeist",
+"Will OWisp",
+"Destiny Bond"
+],
+"n": 1,
+"nature": "Relaxed",
+"preview": 1
+},
+"Sableye": {
+"ability": "Prankster",
+"brought": 40,
+"item": "Light Clay",
+"moves": [
+"Light Screen",
+"Rain Dance",
+"Will OWisp",
+"Reflect"
+],
+"n": 61,
+"nature": "Relaxed",
+"preview": 61
+},
+"Salamence": {
+"ability": "Intimidate",
+"brought": 859,
+"item": "Salamencite",
+"moves": [
+"Protect",
+"Hyper Voice",
+"Tailwind",
+"Draco Meteor"
+],
+"n": 1623,
+"nature": "Timid",
+"preview": 1623
+},
+"Samurott-Hisui": {
+"ability": "Sharpness",
+"brought": 20,
+"item": "Choice Scarf",
+"moves": [
+"Sacred Sword",
+"Ceaseless Edge",
+"Aqua Cutter",
+"Flip Turn"
+],
+"n": 25,
+"nature": "Jolly",
+"preview": 25
+},
+"Sceptile": {
+"ability": "Overgrow",
+"brought": 11,
+"item": "Sceptilite",
+"moves": [
+"Dragon Pulse",
+"Protect",
+"Earth Power",
+"Leaf Storm"
+],
+"n": 21,
+"nature": "Modest",
+"preview": 21
+},
+"Scizor": {
+"ability": "Technician",
+"brought": 29,
+"item": "Scizorite",
+"moves": [
+"Bullet Punch",
+"Protect",
+"Swords Dance",
+"Knock Off"
+],
+"n": 48,
+"nature": "Adamant",
+"preview": 48
+},
+"Scolipede": {
+"ability": "Speed Boost",
+"brought": 1,
+"item": "Scolipite",
+"moves": [
+"Protect",
+"Leech Life",
+"Poison Jab",
+"Earthquake"
+],
+"n": 3,
+"nature": "Adamant",
+"preview": 3
+},
+"Scovillain": {
+"ability": "Moody",
+"brought": 46,
+"item": "Scovillainite",
+"moves": [
+"Protect",
+"Rage Powder",
+"Giga Drain",
+"Overheat"
+],
+"n": 100,
+"nature": "Bold",
+"preview": 100
+},
+"Scrafty": {
+"ability": "Intimidate",
+"brought": 20,
+"item": "Scraftinite",
+"moves": [
+"Fake Out",
+"Knock Off",
+"Protect",
+"Drain Punch"
+],
+"n": 31,
+"nature": "Adamant",
+"preview": 31
+},
+"Serperior": {
+"ability": "Contrary",
+"brought": 2,
+"item": "Focus Sash",
+"moves": [
+"Leaf Storm",
+"Protect",
+"Dragon Pulse",
+"Giga Drain"
+],
+"n": 6,
+"nature": "Timid",
+"preview": 6
+},
+"Sharpedo": {
+"ability": "Speed Boost",
+"brought": 3,
+"item": "Sharpedonite",
+"moves": [
+"Crunch",
+"Ice Fang",
+"Protect",
+"Liquidation"
+],
+"n": 3,
+"nature": "Adamant",
+"preview": 3
+},
+"Sinistcha": {
+"ability": "Hospitality",
+"brought": 410,
+"item": "Rocky Helmet",
+"moves": [
+"Matcha Gotcha",
+"Rage Powder",
+"Protect",
+"Life Dew"
+],
+"n": 661,
+"nature": "Calm",
+"preview": 661
+},
+"Sinistcha-Masterpiece": {
+"ability": "Hospitality",
+"brought": 62,
+"item": "Sitrus Berry",
+"moves": [
+"Matcha Gotcha",
+"Rage Powder",
+"Protect",
+"Life Dew"
+],
+"n": 97,
+"nature": "Bold",
+"preview": 97
+},
+"Sirfetch\u2019d": {
+"ability": "Scrappy",
+"brought": 7,
+"item": "Leek",
+"moves": [
+"Meteor Assault",
+"Leaf Blade",
+"First Impression",
+"Night Slash"
+],
+"n": 12,
+"nature": "Adamant",
+"preview": 12
+},
+"Skarmory": {
+"ability": "Sturdy",
+"brought": 6,
+"item": "Skarmorite",
+"moves": [
+"Tailwind",
+"Protect",
+"Iron Head",
+"Brave Bird"
+],
+"n": 8,
+"nature": "Adamant",
+"preview": 8
+},
+"Skeledirge": {
+"ability": "Unaware",
+"brought": 6,
+"item": "Sitrus Berry",
+"moves": [
+"Torch Song",
+"Protect",
+"Shadow Ball",
+"Slack Off"
+],
+"n": 8,
+"nature": "Modest",
+"preview": 8
+},
+"Slowbro": {
+"ability": "Regenerator",
+"brought": 3,
+"item": "Leftovers",
+"moves": [
+"Scald",
+"Trick Room",
+"Future Sight",
+"Protect"
+],
+"n": 3,
+"nature": "Relaxed",
+"preview": 3
+},
+"Slowbro-Galar": {
+"ability": "Quick Draw",
+"brought": 0,
+"item": "Quick Claw",
+"moves": [
+"Protect",
+"Shell Side Arm",
+"Smack Down",
+"Zen Headbutt"
+],
+"n": 12,
+"nature": "Sassy",
+"preview": 12
+},
+"Slowking": {
+"ability": "Regenerator",
+"brought": 1,
+"item": "Colbur Berry",
+"moves": [
+"Trick Room",
+"Psychic",
+"Scald",
+"Ice Beam"
+],
+"n": 5,
+"nature": "Quiet",
+"preview": 5
+},
+"Slowking-Galar": {
+"ability": "Regenerator",
+"brought": 20,
+"item": "Colbur Berry",
+"moves": [
+"Trick Room",
+"Expanding Force",
+"Imprison",
+"Snarl"
+],
+"n": 39,
+"nature": "Calm",
+"preview": 39
+},
+"Slurpuff": {
+"ability": "Unburden",
+"brought": 6,
+"item": "Psychic Seed",
+"moves": [
+"After You",
+"Draining Kiss",
+"Helping Hand",
+"Yawn"
+],
+"n": 18,
+"nature": "Timid",
+"preview": 18
+},
+"Sneasler": {
+"ability": "Unburden",
+"brought": 2038,
+"item": "White Herb",
+"moves": [
+"Close Combat",
+"Dire Claw",
+"Protect",
+"Fake Out"
+],
+"n": 3144,
+"nature": "Adamant",
+"preview": 3144
+},
+"Snorlax": {
+"ability": "Thick Fat",
+"brought": 9,
+"item": "Leftovers",
+"moves": [
+"Fissure",
+"Protect",
+"Stockpile",
+"Smack Down"
+],
+"n": 14,
+"nature": "Careful",
+"preview": 14
+},
+"Squawkabilly": {
+"ability": "Intimidate",
+"brought": 2,
+"item": "Focus Sash",
+"moves": [
+"Tailwind",
+"Taunt",
+"Brave Bird",
+"Parting Shot"
+],
+"n": 2,
+"nature": "Jolly",
+"preview": 2
+},
+"Squawkabilly-Blue": {
+"ability": "Intimidate",
+"brought": 1,
+"item": "Choice Scarf",
+"moves": [
+"Brave Bird",
+"Tailwind",
+"Parting Shot",
+"Foul Play"
+],
+"n": 2,
+"nature": "Adamant",
+"preview": 2
+},
+"Staraptor": {
+"ability": "Intimidate",
+"brought": 515,
+"item": "Staraptite",
+"moves": [
+"Close Combat",
+"Protect",
+"Brave Bird",
+"Tailwind"
+],
+"n": 954,
+"nature": "Jolly",
+"preview": 954
+},
+"Starmie": {
+"ability": "Natural Cure",
+"brought": 33,
+"item": "Starminite",
+"moves": [
+"Ice Spinner",
+"Liquidation",
+"Waterfall",
+"Flip Turn"
+],
+"n": 67,
+"nature": "Jolly",
+"preview": 67
+},
+"Steelix": {
+"ability": "Sturdy",
+"brought": 11,
+"item": "Steelixite",
+"moves": [
+"High Horsepower",
+"Heavy Slam",
+"Protect",
+"Curse"
+],
+"n": 23,
+"nature": "Brave",
+"preview": 23
+},
+"Swalot": {
+"ability": "Sticky Hold",
+"brought": 6,
+"item": "Leftovers",
+"moves": [
+"Stockpile",
+"Toxic",
+"Protect",
+"Body Press"
+],
+"n": 6,
+"nature": "Sassy",
+"preview": 6
+},
+"Swampert": {
+"ability": "Torrent",
+"brought": 242,
+"item": "Swampertite",
+"moves": [
+"Protect",
+"Wave Crash",
+"Ice Punch",
+"Earthquake"
+],
+"n": 427,
+"nature": "Adamant",
+"preview": 427
+},
+"Sylveon": {
+"ability": "Pixilate",
+"brought": 557,
+"item": "Fairy Feather",
+"moves": [
+"Hyper Voice",
+"Hyper Beam",
+"Quick Attack",
+"Detect"
+],
+"n": 1045,
+"nature": "Modest",
+"preview": 1045
+},
+"Talonflame": {
+"ability": "Gale Wings",
+"brought": 43,
+"item": "Sharp Beak",
+"moves": [
+"Tailwind",
+"Protect",
+"Flare Blitz",
+"Brave Bird"
+],
+"n": 69,
+"nature": "Jolly",
+"preview": 69
+},
+"Tauros-Paldea-Aqua": {
+"ability": "Intimidate",
+"brought": 6,
+"item": "Focus Sash",
+"moves": [
+"Close Combat",
+"Aqua Jet",
+"Protect",
+"Wave Crash"
+],
+"n": 7,
+"nature": "Adamant",
+"preview": 7
+},
+"Tauros-Paldea-Blaze": {
+"ability": "Intimidate",
+"brought": 1,
+"item": "Electric Seed",
+"moves": [
+"Body Press",
+"Rock Slide",
+"Raging Bull",
+"Protect"
+],
+"n": 1,
+"nature": "Impish",
+"preview": 1
+},
+"Thievul": {
+"ability": "Unburden",
+"brought": 1,
+"item": "Psychic Seed",
+"moves": [
+"Snarl",
+"Dark Pulse",
+"Taunt",
+"Parting Shot"
+],
+"n": 5,
+"nature": "Timid",
+"preview": 5
+},
+"Tinkaton": {
+"ability": "Mold Breaker",
+"brought": 37,
+"item": "Metal Coat",
+"moves": [
+"Encore",
+"Gigaton Hammer",
+"Fake Out",
+"Thunder Wave"
+],
+"n": 50,
+"nature": "Lonely",
+"preview": 50
+},
+"Torkoal": {
+"ability": "Drought",
+"brought": 244,
+"item": "Charcoal",
+"moves": [
+"Protect",
+"Eruption",
+"Weather Ball",
+"Earth Power"
+],
+"n": 424,
+"nature": "Quiet",
+"preview": 424
+},
+"Torterra": {
+"ability": "Shell Armor",
+"brought": 1,
+"item": "Leftovers",
+"moves": [
+"Wood Hammer",
+"Wide Guard",
+"Headlong Rush",
+"Protect"
+],
+"n": 1,
+"nature": "Brave",
+"preview": 1
+},
+"Toxapex": {
+"ability": "Regenerator",
+"brought": 41,
+"item": "Leftovers",
+"moves": [
+"Baneful Bunker",
+"Toxic",
+"Infestation",
+"Wide Guard"
+],
+"n": 82,
+"nature": "Bold",
+"preview": 82
+},
+"Toxicroak": {
+"ability": "Dry Skin",
+"brought": 2,
+"item": "Wide Lens",
+"moves": [
+"Fake Out",
+"Close Combat",
+"Gunk Shot",
+"Sucker Punch"
+],
+"n": 4,
+"nature": "Jolly",
+"preview": 4
+},
+"Toxtricity": {
+"ability": "Punk Rock",
+"brought": 12,
+"item": "Life Orb",
+"moves": [
+"Overdrive",
+"Sludge Bomb",
+"Boomburst",
+"Protect"
+],
+"n": 22,
+"nature": "Modest",
+"preview": 22
+},
+"Toxtricity-Low-Key": {
+"ability": "Punk Rock",
+"brought": 4,
+"item": "Silk Scarf",
+"moves": [
+"Boomburst",
+"Psychic Noise",
+"Toxic",
+"Volt Switch"
+],
+"n": 4,
+"nature": "Modest",
+"preview": 4
+},
+"Trevenant": {
+"ability": "Harvest",
+"brought": 4,
+"item": "Miracle Seed",
+"moves": [
+"Horn Leech",
+"Protect",
+"Sunny Day",
+"Ally Switch"
+],
+"n": 10,
+"nature": "Careful",
+"preview": 10
+},
+"Tsareena": {
+"ability": "Queenly Majesty",
+"brought": 21,
+"item": "Choice Scarf",
+"moves": [
+"Trop Kick",
+"Triple Axel",
+"Low Kick",
+"Uturn"
+],
+"n": 43,
+"nature": "Jolly",
+"preview": 43
+},
+"Typhlosion": {
+"ability": "Flash Fire",
+"brought": 10,
+"item": "Choice Scarf",
+"moves": [
+"Eruption",
+"Scorching Sands",
+"Shadow Ball",
+"Protect"
+],
+"n": 20,
+"nature": "Modest",
+"preview": 20
+},
+"Typhlosion-Hisui": {
+"ability": "Blaze",
+"brought": 27,
+"item": "Choice Scarf",
+"moves": [
+"Eruption",
+"Heat Wave",
+"Shadow Ball",
+"Overheat"
+],
+"n": 42,
+"nature": "Modest",
+"preview": 42
+},
+"Tyranitar": {
+"ability": "Sand Stream",
+"brought": 471,
+"item": "Tyranitarite",
+"moves": [
+"Knock Off",
+"Protect",
+"Rock Slide",
+"Low Kick"
+],
+"n": 658,
+"nature": "Jolly",
+"preview": 658
+},
+"Tyrantrum": {
+"ability": "Strong Jaw",
+"brought": 1,
+"item": "Life Orb",
+"moves": [
+"Rock Slide",
+"Crunch",
+"Dragon Claw",
+"Protect"
+],
+"n": 3,
+"nature": "Brave",
+"preview": 3
+},
+"Umbreon": {
+"ability": "Synchronize",
+"brought": 3,
+"item": "Sitrus Berry",
+"moves": [
+"Protect",
+"Foul Play",
+"Thunder Wave",
+"Yawn"
+],
+"n": 3,
+"nature": "Impish",
+"preview": 3
+},
+"Vanilluxe": {
+"ability": "Snow Warning",
+"brought": 28,
+"item": "Choice Scarf",
+"moves": [
+"Blizzard",
+"Freeze Dry",
+"Icy Wind",
+"Sheer Cold"
+],
+"n": 42,
+"nature": "Timid",
+"preview": 42
+},
+"Venusaur": {
+"ability": "Chlorophyll",
+"brought": 237,
+"item": "Focus Sash",
+"moves": [
+"Protect",
+"Sludge Bomb",
+"Sleep Powder",
+"Leaf Storm"
+],
+"n": 472,
+"nature": "Modest",
+"preview": 472
+},
+"Vileplume": {
+"ability": "Chlorophyll",
+"brought": 0,
+"item": "Focus Sash",
+"moves": [
+"Sleep Powder",
+"After You",
+"Protect",
+"Sludge Bomb"
+],
+"n": 5,
+"nature": "Timid",
+"preview": 5
+},
+"Vivillon": {
+"ability": "Compound Eyes",
+"brought": 32,
+"item": "Focus Sash",
+"moves": [
+"Sleep Powder",
+"Protect",
+"Rage Powder",
+"Hurricane"
+],
+"n": 74,
+"nature": "Timid",
+"preview": 74
+},
+"Vivillon-Archipelago": {
+"ability": "Compound Eyes",
+"brought": 1,
+"item": "Choice Scarf",
+"moves": [
+"Sleep Powder",
+"Hurricane",
+"Rage Powder",
+"Rain Dance"
+],
+"n": 6,
+"nature": "Timid",
+"preview": 6
+},
+"Vivillon-Fancy": {
+"ability": "Shield Dust",
+"brought": 7,
+"item": "Choice Scarf",
+"moves": [
+"Sleep Powder",
+"Tailwind",
+"Air Slash",
+"Pollen Puff"
+],
+"n": 9,
+"nature": "Timid",
+"preview": 9
+},
+"Vivillon-Jungle": {
+"ability": "Shield Dust",
+"brought": 2,
+"item": "Choice Scarf",
+"moves": [
+"Hurricane",
+"Sleep Powder",
+"Rage Powder",
+"Tailwind"
+],
+"n": 6,
+"nature": "Timid",
+"preview": 6
+},
+"Vivillon-Marine": {
+"ability": "Compound Eyes",
+"brought": 8,
+"item": "Focus Sash",
+"moves": [
+"Sleep Powder",
+"Hurricane",
+"Rage Powder",
+"Protect"
+],
+"n": 11,
+"nature": "Timid",
+"preview": 11
+},
+"Vivillon-Monsoon": {
+"ability": "Compound Eyes",
+"brought": 3,
+"item": "Focus Sash",
+"moves": [
+"Sleep Powder",
+"Hurricane",
+"Rage Powder",
+"Protect"
+],
+"n": 3,
+"nature": "Timid",
+"preview": 3
+},
+"Vivillon-Pokeball": {
+"ability": "Compound Eyes",
+"brought": 5,
+"item": "Focus Sash",
+"moves": [
+"Rage Powder",
+"Hurricane",
+"Sleep Powder",
+"Protect"
+],
+"n": 6,
+"nature": "Timid",
+"preview": 6
+},
+"Vivillon-Polar": {
+"ability": "Compound Eyes",
+"brought": 0,
+"item": "Focus Sash",
+"moves": [
+"Protect",
+"Rage Powder",
+"Sleep Powder",
+"Hurricane"
+],
+"n": 1,
+"nature": "Timid",
+"preview": 1
+},
+"Vivillon-River": {
+"ability": "Compound Eyes",
+"brought": 1,
+"item": "Focus Sash",
+"moves": [
+"Sleep Powder",
+"Hurricane",
+"Rage Powder",
+"Protect"
+],
+"n": 1,
+"nature": "Timid",
+"preview": 1
+},
+"Volcarona": {
+"ability": "Flame Body",
+"brought": 957,
+"item": "Rocky Helmet",
+"moves": [
+"Rage Powder",
+"Struggle Bug",
+"Protect",
+"Overheat"
+],
+"n": 1411,
+"nature": "Timid",
+"preview": 1411
+},
+"Weavile": {
+"ability": "Pickpocket",
+"brought": 9,
+"item": "Focus Sash",
+"moves": [
+"Knock Off",
+"Fake Out",
+"Protect",
+"Ice Spinner"
+],
+"n": 15,
+"nature": "Jolly",
+"preview": 15
+},
+"Whimsicott": {
+"ability": "Prankster",
+"brought": 281,
+"item": "Focus Sash",
+"moves": [
+"Tailwind",
+"Moonblast",
+"Protect",
+"Encore"
+],
+"n": 439,
+"nature": "Timid",
+"preview": 439
+},
+"Wigglytuff": {
+"ability": "Competitive",
+"brought": 2,
+"item": "Light Clay",
+"moves": [
+"Moonblast",
+"Protect",
+"Reflect",
+"Light Screen"
+],
+"n": 4,
+"nature": "Modest",
+"preview": 4
+},
+"Wyrdeer": {
+"ability": "Intimidate",
+"brought": 4,
+"item": "Sitrus Berry",
+"moves": [
+"Helping Hand",
+"Skill Swap",
+"Psychic",
+"Protect"
+],
+"n": 11,
+"nature": "Bold",
+"preview": 11
+},
+"Zoroark": {
+"ability": "Illusion",
+"brought": 0,
+"item": "Focus Sash",
+"moves": [
+"Protect",
+"Encore",
+"Focus Blast",
+"Night Daze"
+],
+"n": 8,
+"nature": "Timid",
+"preview": 8
+},
+"Zoroark-Hisui": {
+"ability": "Illusion",
+"brought": 0,
+"item": "Focus Sash",
+"moves": [
+"Bitter Malice",
+"Protect",
+"Hyper Voice",
+"Icy Wind"
+],
+"n": 40,
+"nature": "Timid",
+"preview": 40
+}
+}

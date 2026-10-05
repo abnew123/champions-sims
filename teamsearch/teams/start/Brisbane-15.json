@@ -1,0 +1,122 @@
+{
+ "Salamence": {
+  "species": "Salamence",
+  "item": "Salamencite",
+  "ability": "Intimidate",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Draco Meteor",
+   "Hyper Voice",
+   "Flamethrower",
+   "Protect"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "Psychic Seed",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Dire Claw",
+   "Close Combat",
+   "Rock Slide",
+   "Protect"
+  ]
+ },
+ "Arcanine-Hisui": {
+  "species": "Arcanine-Hisui",
+  "item": "Focus Sash",
+  "ability": "Rock Head",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Flare Blitz",
+   "Head Smash",
+   "Extreme Speed",
+   "Protect"
+  ]
+ },
+ "Milotic": {
+  "species": "Milotic",
+  "item": "Sitrus Berry",
+  "ability": "Competitive",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Scald",
+   "Ice Beam",
+   "Protect",
+   "Helping Hand"
+  ]
+ },
+ "Metagross": {
+  "species": "Metagross",
+  "item": "Metagrossite",
+  "ability": "Clear Body",
+  "nature": "Adamant",
+  "evs": [
+   24,
+   15,
+   0,
+   0,
+   0,
+   27
+  ],
+  "moves": [
+   "Steel Roller",
+   "Psychic Fangs",
+   "Stomping Tantrum",
+   "Protect"
+  ]
+ },
+ "Indeedee": {
+  "species": "Indeedee",
+  "item": "Choice Scarf",
+  "ability": "Psychic Surge",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Expanding Force",
+   "Mystical Fire",
+   "Protect",
+   "Trick"
+  ]
+ }
+}

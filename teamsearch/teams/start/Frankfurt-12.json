@@ -1,0 +1,122 @@
+{
+ "Tyranitar": {
+  "species": "Tyranitar",
+  "item": "Tyranitarite",
+  "ability": "Sand Stream",
+  "nature": "Jolly",
+  "evs": [
+   17,
+   17,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Rock Slide",
+   "Knock Off",
+   "Low Kick",
+   "Protect"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "White Herb",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Close Combat",
+   "Coaching",
+   "Dire Claw",
+   "Protect"
+  ]
+ },
+ "Indeedee": {
+  "species": "Indeedee",
+  "item": "Choice Scarf",
+  "ability": "Psychic Surge",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Expanding Force",
+   "Mystical Fire",
+   "Trick",
+   "Protect"
+  ]
+ },
+ "Excadrill": {
+  "species": "Excadrill",
+  "item": "Focus Sash",
+  "ability": "Sand Rush",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Iron Head",
+   "High Horsepower",
+   "Rock Slide",
+   "Protect"
+  ]
+ },
+ "Salamence": {
+  "species": "Salamence",
+  "item": "Salamencite",
+  "ability": "Intimidate",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Draco Meteor",
+   "Flamethrower",
+   "Hyper Voice",
+   "Protect"
+  ]
+ },
+ "Corviknight": {
+  "species": "Corviknight",
+  "item": "Occa Berry",
+  "ability": "Mirror Armor",
+  "nature": "Impish",
+  "evs": [
+   32,
+   0,
+   32,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Brave Bird",
+   "Taunt",
+   "Tailwind",
+   "Roost"
+  ]
+ }
+}

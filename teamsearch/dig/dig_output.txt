@@ -1,0 +1,60 @@
+
+===== perish_f10: Frankfurt-10 (Delphox, Garchomp, Incineroar, Kingambit, Raichu, Sneasler) vs Perish trap — Perish opponents: sim teams win 76%, real 48%
+brings: lead Raichu + Garchomp, back Incineroar + Kingambit; our win share 12.0/12
+--- vs Gengar + Incineroar (their four: Gengar, Incineroar, Rillaboom, Politoed) g777000: WIN in 9 turns
+--- vs Gengar + Incineroar (their four: Gengar, Incineroar, Rillaboom, Politoed) g777001: WIN in 14 turns
+--- vs Gengar + Rillaboom (their four: Gengar, Rillaboom, Incineroar, Politoed) g777000: WIN in 13 turns
+--- vs Gengar + Rillaboom (their four: Gengar, Rillaboom, Incineroar, Politoed) g777001: WIN in 11 turns
+--- vs Archaludon + Politoed (their four: Archaludon, Politoed, Rillaboom, Incineroar) g777000: WIN in 12 turns
+--- vs Archaludon + Politoed (their four: Archaludon, Politoed, Rillaboom, Incineroar) g777001: WIN in 11 turns
+--- vs Gengar + Vivillon (their four: Gengar, Vivillon, Incineroar, Rillaboom) g777000: WIN in 8 turns
+--- vs Gengar + Vivillon (their four: Gengar, Vivillon, Incineroar, Rillaboom) g777001: WIN in 8 turns
+--- vs Archaludon + Gengar (their four: Archaludon, Gengar, Politoed, Incineroar) g777000: WIN in 7 turns
+--- vs Archaludon + Gengar (their four: Archaludon, Gengar, Politoed, Incineroar) g777001: WIN in 8 turns
+--- vs Archaludon + Incineroar (their four: Archaludon, Incineroar, Politoed, Rillaboom) g777000: WIN in 14 turns
+--- vs Archaludon + Incineroar (their four: Archaludon, Incineroar, Politoed, Rillaboom) g777001: WIN in 17 turns
+
+===== perish_tr6: trick_room_six (Blastoise, Farigiraf, Incineroar, Indeedee-F, Kingambit, Torkoal) vs Perish trap — Perish opponents: sim teams win 76%, real 48%
+brings: lead Blastoise + Incineroar, back Farigiraf + Kingambit; our win share 10.0/12
+--- vs Gengar + Incineroar (their four: Gengar, Incineroar, Rillaboom, Politoed) g777000: WIN in 7 turns
+--- vs Gengar + Incineroar (their four: Gengar, Incineroar, Rillaboom, Politoed) g777001: WIN in 5 turns, TR 3 turns
+--- vs Gengar + Rillaboom (their four: Gengar, Rillaboom, Incineroar, Politoed) g777000: WIN in 11 turns, TR 6 turns
+--- vs Gengar + Rillaboom (their four: Gengar, Rillaboom, Incineroar, Politoed) g777001: WIN in 11 turns, TR 6 turns
+--- vs Archaludon + Politoed (their four: Archaludon, Politoed, Rillaboom, Incineroar) g777000: WIN in 10 turns, TR 7 turns
+--- vs Archaludon + Politoed (their four: Archaludon, Politoed, Rillaboom, Incineroar) g777001: LOSS in 12 turns, TR 4 turns
+--- vs Gengar + Vivillon (their four: Gengar, Vivillon, Incineroar, Rillaboom) g777000: WIN in 9 turns
+--- vs Gengar + Vivillon (their four: Gengar, Vivillon, Incineroar, Rillaboom) g777001: WIN in 9 turns, TR 5 turns
+--- vs Archaludon + Gengar (their four: Archaludon, Gengar, Politoed, Incineroar) g777000: WIN in 11 turns, TR 4 turns
+--- vs Archaludon + Gengar (their four: Archaludon, Gengar, Politoed, Incineroar) g777001: LOSS in 7 turns
+--- vs Archaludon + Incineroar (their four: Archaludon, Incineroar, Politoed, Rillaboom) g777000: WIN in 11 turns, TR 4 turns
+--- vs Archaludon + Incineroar (their four: Archaludon, Incineroar, Politoed, Rillaboom) g777001: WIN in 8 turns, TR 4 turns
+
+===== rain_vs_tr: Frankfurt-14 (Archaludon, Garchomp, Golisopod, Pelipper, Raichu, Swampert) vs Trick Room without Indeedee — Rain vs Trick Room: sim 71%, real 47%
+brings: lead Garchomp + Swampert, back Archaludon + Pelipper; our win share 8.0/12
+--- vs Farigiraf + Incineroar (their four: Farigiraf, Incineroar, Rillaboom, Golisopod) g777000: WIN in 12 turns, TR 9 turns
+--- vs Farigiraf + Incineroar (their four: Farigiraf, Incineroar, Rillaboom, Golisopod) g777001: WIN in 12 turns, TR 4 turns
+--- vs Farigiraf + Kingambit (their four: Farigiraf, Kingambit, Sylveon, Garchomp) g777000: LOSS in 9 turns, TR 7 turns
+--- vs Farigiraf + Kingambit (their four: Farigiraf, Kingambit, Sylveon, Garchomp) g777001: LOSS in 6 turns, TR 4 turns
+--- vs Farigiraf + Rillaboom (their four: Farigiraf, Rillaboom, Kingambit, Sylveon) g777000: LOSS in 6 turns, TR 4 turns
+--- vs Farigiraf + Rillaboom (their four: Farigiraf, Rillaboom, Kingambit, Sylveon) g777001: WIN in 8 turns, TR 4 turns
+--- vs Delphox + Incineroar (their four: Delphox, Incineroar, Sinistcha, Sneasler) g777000: WIN in 7 turns
+--- vs Delphox + Incineroar (their four: Delphox, Incineroar, Sinistcha, Sneasler) g777001: WIN in 7 turns
+--- vs Delphox + Sneasler (their four: Delphox, Sneasler, Sinistcha, Incineroar) g777000: WIN in 10 turns
+--- vs Delphox + Sneasler (their four: Delphox, Sneasler, Sinistcha, Incineroar) g777001: WIN in 6 turns
+--- vs Farigiraf + Raichu (their four: Farigiraf, Raichu, Rillaboom, Basculegion) g777000: LOSS in 7 turns
+--- vs Farigiraf + Raichu (their four: Farigiraf, Raichu, Rillaboom, Basculegion) g777001: WIN in 12 turns, TR 4 turns
+
+===== sand_vs_snow: Baltimore-01 (Excadrill, Indeedee, Rillaboom, Salamence, Sneasler, Tyranitar) vs Snow — Sand vs Snow: sim 36%, real 53%
+brings: lead Tyranitar + Rillaboom, back Indeedee + Sneasler; our win share 3.0/12
+--- vs Froslass + Sneasler (their four: Froslass, Sneasler, Kingambit, Rillaboom) g777000: LOSS in 7 turns
+--- vs Froslass + Sneasler (their four: Froslass, Sneasler, Kingambit, Rillaboom) g777001: LOSS in 4 turns
+--- vs Froslass + Kingambit (their four: Froslass, Kingambit, Rillaboom, Sneasler) g777000: WIN in 7 turns
+--- vs Froslass + Kingambit (their four: Froslass, Kingambit, Rillaboom, Sneasler) g777001: WIN in 4 turns
+--- vs Arcanine-Hisui + Raichu (their four: Arcanine-Hisui, Raichu, Rillaboom, Sneasler) g777000: LOSS in 5 turns
+--- vs Arcanine-Hisui + Raichu (their four: Arcanine-Hisui, Raichu, Rillaboom, Sneasler) g777001: LOSS in 6 turns
+--- vs Raichu + Sneasler (their four: Raichu, Sneasler, Arcanine-Hisui, Rillaboom) g777000: LOSS in 7 turns
+--- vs Raichu + Sneasler (their four: Raichu, Sneasler, Arcanine-Hisui, Rillaboom) g777001: LOSS in 7 turns
+--- vs Kingambit + Sneasler (their four: Kingambit, Sneasler, Froslass, Rillaboom) g777000: WIN in 7 turns
+--- vs Kingambit + Sneasler (their four: Kingambit, Sneasler, Froslass, Rillaboom) g777001: LOSS in 6 turns
+--- vs Arcanine-Hisui + Froslass (their four: Arcanine-Hisui, Froslass, Kingambit, Sneasler) g777000: LOSS in 5 turns
+--- vs Arcanine-Hisui + Froslass (their four: Arcanine-Hisui, Froslass, Kingambit, Sneasler) g777001: LOSS in 6 turns

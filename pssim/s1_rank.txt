@@ -1,0 +1,78 @@
+== Rain + sun
+0.684 0.594 Salamence+Incineroar     n=6 Chari+Venus:0.62/0.55  Archa+Grimm:0.66/0.57  Chari+Grimm:0.72/0.61  Farig+Golis:0.67/0.59  Grimm+Swamp:0.77/0.66  Golis+Grimm:0.74/0.66
+0.648 0.555 Salamence+Rillaboom      n=6 Chari+Venus:0.57/0.51  Archa+Grimm:0.62/0.54  Chari+Grimm:0.68/0.58  Farig+Golis:0.73/0.53  Grimm+Swamp:0.70/0.65  Golis+Grimm:0.65/0.60
+0.645 0.565 Gholdengo+Incineroar     n=6 Chari+Venus:0.57/0.54  Archa+Grimm:0.70/0.56  Chari+Grimm:0.60/0.55  Farig+Golis:0.62/0.54  Grimm+Swamp:0.74/0.62  Golis+Grimm:0.74/0.64
+0.645 0.544 Gholdengo+Salamence      n=6 Chari+Venus:0.62/0.52  Archa+Grimm:0.64/0.50  Chari+Grimm:0.68/0.58  Farig+Golis:0.59/0.50  Grimm+Swamp:0.70/0.62  Golis+Grimm:0.67/0.61
+0.626 0.512 Gholdengo+Rillaboom      n=6 Chari+Venus:0.61/0.46  Archa+Grimm:0.70/0.56  Chari+Grimm:0.55/0.52  Farig+Golis:0.62/0.46  Grimm+Swamp:0.69/0.61  Golis+Grimm:0.60/0.52
+0.613 0.553 Incineroar+Rillaboom     n=6 Chari+Venus:0.53/0.51  Archa+Grimm:0.66/0.60  Chari+Grimm:0.59/0.53  Farig+Golis:0.60/0.55  Grimm+Swamp:0.71/0.61  Golis+Grimm:0.70/0.59
+== Balance, no speed control
+0.645 0.558 Gholdengo+Incineroar     n=6 Ghold+Raich:0.68/0.56  Floet+Incin:0.62/0.54  Garch+Raich:0.63/0.57  Incin+Raich:0.59/0.53  Garch+Rilla:0.69/0.60  Arcan+Raich:0.63/0.57
+0.626 0.481 Salamence+Gholdengo      n=6 Ghold+Raich:0.61/0.37  Floet+Incin:0.67/0.56  Garch+Raich:0.62/0.50  Incin+Raich:0.56/0.50  Garch+Rilla:0.68/0.56  Arcan+Raich:0.62/0.50
+0.615 0.511 Gholdengo+Rillaboom      n=6 Ghold+Raich:0.65/0.54  Floet+Incin:0.61/0.48  Garch+Raich:0.61/0.53  Incin+Raich:0.54/0.43  Garch+Rilla:0.68/0.56  Arcan+Raich:0.56/0.50
+0.608 0.525 Incineroar+Rillaboom     n=6 Ghold+Raich:0.63/0.51  Floet+Incin:0.53/0.45  Garch+Raich:0.66/0.59  Incin+Raich:0.56/0.50  Garch+Rilla:0.60/0.53  Arcan+Raich:0.65/0.59
+0.604 0.507 Salamence+Incineroar     n=6 Ghold+Raich:0.55/0.41  Floet+Incin:0.59/0.49  Garch+Raich:0.65/0.60  Incin+Raich:0.59/0.51  Garch+Rilla:0.60/0.49  Arcan+Raich:0.69/0.65
+0.590 0.475 Sneasler+Gholdengo       n=6 Ghold+Raich:0.62/0.42  Floet+Incin:0.57/0.49  Garch+Raich:0.61/0.50  Incin+Raich:0.52/0.45  Garch+Rilla:0.64/0.54  Arcan+Raich:0.56/0.50
+0.573 0.480 Salamence+Rillaboom      n=6 Ghold+Raich:0.54/0.36  Floet+Incin:0.53/0.49  Garch+Raich:0.65/0.59  Incin+Raich:0.55/0.50  Garch+Rilla:0.61/0.53  Arcan+Raich:0.58/0.53
+0.572 0.504 Sneasler+Incineroar      n=6 Ghold+Raich:0.60/0.49  Floet+Incin:0.51/0.46  Garch+Raich:0.58/0.54  Incin+Raich:0.51/0.47  Garch+Rilla:0.60/0.52  Arcan+Raich:0.61/0.57
+0.553 0.456 Salamence+Sneasler       n=6 Ghold+Raich:0.50/0.38  Floet+Incin:0.58/0.46  Garch+Raich:0.62/0.51  Incin+Raich:0.53/0.45  Garch+Rilla:0.56/0.49  Arcan+Raich:0.57/0.52
+0.552 0.453 Sneasler+Rillaboom       n=6 Ghold+Raich:0.59/0.38  Floet+Incin:0.46/0.41  Garch+Raich:0.64/0.55  Incin+Raich:0.48/0.43  Garch+Rilla:0.53/0.48  Arcan+Raich:0.58/0.54
+== Rain
+0.647 0.558 Gholdengo+Rillaboom      n=6 Archa+Pelip:0.60/0.57  Pelip+Swamp:0.73/0.60  Pelip+Sneas:0.66/0.56  Archa+Grimm:0.67/0.56  Farig+Golis:0.58/0.42  Drago+Ghold:0.57/0.51
+0.636 0.552 Gholdengo+Salamence      n=6 Archa+Pelip:0.59/0.56  Pelip+Swamp:0.68/0.59  Pelip+Sneas:0.67/0.59  Archa+Grimm:0.62/0.50  Farig+Golis:0.61/0.49  Drago+Ghold:0.65/0.45
+0.623 0.541 Salamence+Rillaboom      n=6 Archa+Pelip:0.57/0.54  Pelip+Swamp:0.73/0.62  Pelip+Sneas:0.59/0.51  Archa+Grimm:0.60/0.54  Farig+Golis:0.65/0.50  Drago+Ghold:0.52/0.39
+0.611 0.525 Rillaboom+Incineroar     n=6 Archa+Pelip:0.57/0.54  Pelip+Swamp:0.72/0.56  Pelip+Sneas:0.50/0.44  Archa+Grimm:0.65/0.59  Farig+Golis:0.65/0.46  Drago+Ghold:0.56/0.51
+0.603 0.541 Salamence+Incineroar     n=6 Archa+Pelip:0.55/0.49  Pelip+Swamp:0.67/0.62  Pelip+Sneas:0.53/0.49  Archa+Grimm:0.64/0.58  Farig+Golis:0.67/0.55  Drago+Ghold:0.63/0.52
+0.602 0.536 Gholdengo+Incineroar     n=6 Archa+Pelip:0.55/0.49  Pelip+Swamp:0.61/0.56  Pelip+Sneas:0.63/0.57  Archa+Grimm:0.67/0.57  Farig+Golis:0.63/0.53  Drago+Ghold:0.58/0.52
+== Tailwind goodstuffs
+0.658 0.534 Gholdengo+Kingambit      n=6 Ghold+Raich:0.60/0.46  Arcan+Raich:0.55/0.47  Ghold+Rilla:0.75/0.59  Salam+Sneas:0.75/0.66  Ghold+Salam:0.76/0.63  Rilla+Sneas:0.73/0.64
+0.653 0.560 Gholdengo+Incineroar     n=6 Ghold+Raich:0.64/0.53  Arcan+Raich:0.60/0.56  Ghold+Rilla:0.69/0.57  Salam+Sneas:0.69/0.59  Ghold+Salam:0.60/0.47  Rilla+Sneas:0.77/0.73
+0.646 0.568 Kingambit+Incineroar     n=6 Ghold+Raich:0.61/0.54  Arcan+Raich:0.62/0.57  Ghold+Rilla:0.70/0.60  Salam+Sneas:0.61/0.57  Ghold+Salam:0.71/0.58  Rilla+Sneas:0.71/0.64
+0.643 0.502 Gholdengo+Salamence      n=6 Ghold+Raich:0.58/0.39  Arcan+Raich:0.59/0.50  Ghold+Rilla:0.72/0.61  Salam+Sneas:0.72/0.62  Ghold+Salam:0.69/0.46  Rilla+Sneas:0.78/0.73
+0.627 0.525 Gholdengo+Rillaboom      n=6 Ghold+Raich:0.63/0.53  Arcan+Raich:0.56/0.48  Ghold+Rilla:0.67/0.53  Salam+Sneas:0.65/0.54  Ghold+Salam:0.58/0.48  Rilla+Sneas:0.71/0.63
+0.615 0.508 Kingambit+Salamence      n=6 Ghold+Raich:0.50/0.40  Arcan+Raich:0.59/0.51  Ghold+Rilla:0.71/0.57  Salam+Sneas:0.72/0.58  Ghold+Salam:0.74/0.60  Rilla+Sneas:0.72/0.65
+0.605 0.510 Salamence+Incineroar     n=6 Ghold+Raich:0.53/0.42  Arcan+Raich:0.66/0.62  Ghold+Rilla:0.64/0.55  Salam+Sneas:0.62/0.51  Ghold+Salam:0.55/0.42  Rilla+Sneas:0.77/0.70
+0.595 0.514 Kingambit+Rillaboom      n=6 Ghold+Raich:0.58/0.51  Arcan+Raich:0.54/0.48  Ghold+Rilla:0.69/0.55  Salam+Sneas:0.56/0.46  Ghold+Salam:0.67/0.57  Rilla+Sneas:0.59/0.55
+0.576 0.499 Incineroar+Rillaboom     n=6 Ghold+Raich:0.61/0.52  Arcan+Raich:0.61/0.56  Ghold+Rilla:0.56/0.47  Salam+Sneas:0.48/0.43  Ghold+Salam:0.42/0.34  Rilla+Sneas:0.68/0.60
+0.576 0.439 Salamence+Rillaboom      n=6 Ghold+Raich:0.53/0.37  Arcan+Raich:0.61/0.52  Ghold+Rilla:0.60/0.46  Salam+Sneas:0.57/0.47  Ghold+Salam:0.49/0.34  Rilla+Sneas:0.75/0.60
+== Perish trap
+0.711 0.593 Salamence+Kingambit      n=6 Genga+Incin:0.76/0.62  Genga+Rilla:0.71/0.64  Archa+Polit:0.56/0.42  Genga+Vivil:0.69/0.61  Archa+Genga:0.64/0.48  Archa+Incin:0.70/0.59
+0.701 0.567 Kingambit+Gholdengo      n=6 Genga+Incin:0.74/0.61  Genga+Rilla:0.74/0.62  Archa+Polit:0.51/0.33  Genga+Vivil:0.69/0.59  Archa+Genga:0.62/0.48  Archa+Incin:0.66/0.56
+0.682 0.621 Incineroar+Kingambit     n=6 Genga+Incin:0.73/0.67  Genga+Rilla:0.69/0.61  Archa+Polit:0.54/0.49  Genga+Vivil:0.67/0.59  Archa+Genga:0.62/0.53  Archa+Incin:0.62/0.58
+0.661 0.565 Salamence+Gholdengo      n=6 Genga+Incin:0.68/0.59  Genga+Rilla:0.70/0.62  Archa+Polit:0.57/0.42  Genga+Vivil:0.66/0.63  Archa+Genga:0.63/0.47  Archa+Incin:0.58/0.48
+0.630 0.548 Incineroar+Gholdengo     n=6 Genga+Incin:0.65/0.56  Genga+Rilla:0.68/0.59  Archa+Polit:0.52/0.46  Genga+Vivil:0.63/0.53  Archa+Genga:0.57/0.52  Archa+Incin:0.56/0.49
+0.625 0.568 Salamence+Incineroar     n=6 Genga+Incin:0.64/0.58  Genga+Rilla:0.64/0.61  Archa+Polit:0.55/0.50  Genga+Vivil:0.62/0.54  Archa+Genga:0.60/0.56  Archa+Incin:0.56/0.53
+== Trick Room without Indeedee
+0.648 0.532 Kingambit+Gholdengo      n=6 Farig+Incin:0.67/0.55  Farig+Kinga:0.68/0.60  Delph+Incin:0.66/0.53  Farig+Rilla:0.67/0.54  Delph+Sneas:0.61/0.49  Farig+Raich:0.50/0.39
+0.629 0.512 Incineroar+Kingambit     n=6 Farig+Incin:0.66/0.53  Farig+Kinga:0.57/0.47  Delph+Incin:0.67/0.57  Farig+Rilla:0.61/0.48  Delph+Sneas:0.64/0.55  Farig+Raich:0.56/0.45
+0.603 0.481 Rillaboom+Kingambit      n=6 Farig+Incin:0.64/0.47  Farig+Kinga:0.60/0.53  Delph+Incin:0.63/0.54  Farig+Rilla:0.55/0.42  Delph+Sneas:0.55/0.47  Farig+Raich:0.57/0.43
+0.582 0.479 Rillaboom+Gholdengo      n=6 Farig+Incin:0.51/0.43  Farig+Kinga:0.66/0.50  Delph+Incin:0.55/0.46  Farig+Rilla:0.67/0.55  Delph+Sneas:0.60/0.51  Farig+Raich:0.62/0.50
+0.578 0.474 Incineroar+Gholdengo     n=6 Farig+Incin:0.51/0.43  Farig+Kinga:0.61/0.45  Delph+Incin:0.57/0.49  Farig+Rilla:0.66/0.58  Delph+Sneas:0.65/0.55  Farig+Raich:0.58/0.40
+0.522 0.431 Incineroar+Rillaboom     n=6 Farig+Incin:0.46/0.41  Farig+Kinga:0.53/0.35  Delph+Incin:0.51/0.47  Farig+Rilla:0.58/0.46  Delph+Sneas:0.59/0.50  Farig+Raich:0.59/0.47
+== Indeedee TR / Psychic Terrain
+0.695 0.549 Gholdengo+Kingambit      n=6 Garde+Indee:0.76/0.67  Armar+Indee:0.62/0.38  Farig+Incin:0.61/0.52  Indee+Sneas:0.71/0.52  Indee+Sneas:0.71/0.55  Hatte+Indee:0.73/0.60
+0.687 0.568 Gholdengo+Incineroar     n=6 Garde+Indee:0.78/0.65  Armar+Indee:0.67/0.54  Farig+Incin:0.43/0.39  Indee+Sneas:0.74/0.59  Indee+Sneas:0.72/0.61  Hatte+Indee:0.73/0.59
+0.642 0.500 Kingambit+Incineroar     n=6 Garde+Indee:0.63/0.53  Armar+Indee:0.59/0.35  Farig+Incin:0.57/0.47  Indee+Sneas:0.73/0.57  Indee+Sneas:0.78/0.59  Hatte+Indee:0.62/0.54
+0.619 0.497 Gholdengo+Rillaboom      n=6 Garde+Indee:0.68/0.52  Armar+Indee:0.54/0.35  Farig+Incin:0.45/0.41  Indee+Sneas:0.68/0.56  Indee+Sneas:0.69/0.66  Hatte+Indee:0.72/0.55
+0.577 0.438 Kingambit+Rillaboom      n=6 Garde+Indee:0.56/0.41  Armar+Indee:0.53/0.25  Farig+Incin:0.54/0.50  Indee+Sneas:0.59/0.44  Indee+Sneas:0.72/0.64  Hatte+Indee:0.58/0.52
+0.527 0.425 Rillaboom+Incineroar     n=6 Garde+Indee:0.50/0.42  Armar+Indee:0.51/0.32  Farig+Incin:0.35/0.33  Indee+Sneas:0.58/0.48  Indee+Sneas:0.75/0.60  Hatte+Indee:0.58/0.50
+== Sand
+0.662 0.525 Kingambit+Gholdengo      n=6 Excad+Tyran:0.61/0.54  Indee+Sneas:0.70/0.53  Sneas+Tyran:0.70/0.51  Salam+Sneas:0.73/0.51  Corvi+Sneas:0.68/0.49  Excad+Salam:0.71/0.54
+0.660 0.561 Sneasler+Rillaboom       n=6 Excad+Tyran:0.69/0.59  Indee+Sneas:0.76/0.74  Sneas+Tyran:0.73/0.51  Salam+Sneas:0.42/0.37  Corvi+Sneas:0.70/0.59  Excad+Salam:0.47/0.40
+0.640 0.539 Gholdengo+Rillaboom      n=6 Excad+Tyran:0.62/0.53  Indee+Sneas:0.74/0.66  Sneas+Tyran:0.69/0.54  Salam+Sneas:0.61/0.51  Corvi+Sneas:0.64/0.53  Excad+Salam:0.53/0.45
+0.632 0.506 Gholdengo+Sneasler       n=6 Excad+Tyran:0.60/0.49  Indee+Sneas:0.69/0.65  Sneas+Tyran:0.73/0.57  Salam+Sneas:0.60/0.40  Corvi+Sneas:0.69/0.54  Excad+Salam:0.52/0.37
+0.624 0.508 Kingambit+Sneasler       n=6 Excad+Tyran:0.63/0.53  Indee+Sneas:0.67/0.63  Sneas+Tyran:0.66/0.51  Salam+Sneas:0.52/0.36  Corvi+Sneas:0.63/0.48  Excad+Salam:0.60/0.45
+0.621 0.529 Kingambit+Rillaboom      n=6 Excad+Tyran:0.63/0.55  Indee+Sneas:0.70/0.60  Sneas+Tyran:0.64/0.48  Salam+Sneas:0.53/0.45  Corvi+Sneas:0.56/0.49  Excad+Salam:0.63/0.56
+== Sun
+0.630 0.519 Gholdengo+Salamence      n=6 Farig+Incin:0.54/0.51  Chari+Garch:0.73/0.62  Aerod+Kinga:0.53/0.39  Garde+Indee:0.72/0.61  Chari+Farig:0.66/0.49  Armar+Indee:0.62/0.50
+0.621 0.531 Gholdengo+Incineroar     n=6 Farig+Incin:0.52/0.46  Chari+Garch:0.60/0.53  Aerod+Kinga:0.63/0.59  Garde+Indee:0.78/0.61  Chari+Farig:0.60/0.44  Armar+Indee:0.65/0.57
+0.583 0.448 Salamence+Sneasler       n=6 Farig+Incin:0.55/0.46  Chari+Garch:0.63/0.56  Aerod+Kinga:0.62/0.39  Garde+Indee:0.53/0.37  Chari+Farig:0.59/0.47  Armar+Indee:0.57/0.40
+0.560 0.455 Gholdengo+Sneasler       n=6 Farig+Incin:0.48/0.45  Chari+Garch:0.49/0.46  Aerod+Kinga:0.62/0.40  Garde+Indee:0.69/0.59  Chari+Farig:0.52/0.35  Armar+Indee:0.60/0.50
+0.549 0.471 Salamence+Incineroar     n=6 Farig+Incin:0.52/0.48  Chari+Garch:0.65/0.56  Aerod+Kinga:0.49/0.46  Garde+Indee:0.47/0.35  Chari+Farig:0.57/0.49  Armar+Indee:0.61/0.47
+0.528 0.423 Incineroar+Sneasler      n=6 Farig+Incin:0.44/0.40  Chari+Garch:0.52/0.47  Aerod+Kinga:0.66/0.46  Garde+Indee:0.48/0.33  Chari+Farig:0.56/0.41  Armar+Indee:0.54/0.48
+== Snow
+0.636 0.504 Gholdengo+Sneasler       n=6 Frosl+Sneas:0.64/0.54  Frosl+Kinga:0.71/0.47  Arcan+Raich:0.53/0.50  Raich+Sneas:0.59/0.50  Kinga+Sneas:0.63/0.50  Arcan+Frosl:0.64/0.48
+0.625 0.522 Gholdengo+Incineroar     n=6 Frosl+Sneas:0.66/0.56  Frosl+Kinga:0.59/0.46  Arcan+Raich:0.62/0.57  Raich+Sneas:0.64/0.51  Kinga+Sneas:0.54/0.43  Arcan+Frosl:0.68/0.59
+0.614 0.492 Gholdengo+Kingambit      n=6 Frosl+Sneas:0.63/0.51  Frosl+Kinga:0.64/0.51  Arcan+Raich:0.53/0.45  Raich+Sneas:0.59/0.42  Kinga+Sneas:0.62/0.49  Arcan+Frosl:0.65/0.52
+0.543 0.445 Kingambit+Incineroar     n=6 Frosl+Sneas:0.49/0.41  Frosl+Kinga:0.58/0.44  Arcan+Raich:0.58/0.54  Raich+Sneas:0.56/0.41  Kinga+Sneas:0.51/0.36  Arcan+Frosl:0.62/0.56
+0.541 0.439 Sneasler+Kingambit       n=6 Frosl+Sneas:0.46/0.38  Frosl+Kinga:0.64/0.49  Arcan+Raich:0.54/0.45  Raich+Sneas:0.51/0.38  Kinga+Sneas:0.61/0.49  Arcan+Frosl:0.57/0.49
+0.533 0.427 Sneasler+Incineroar      n=6 Frosl+Sneas:0.45/0.39  Frosl+Kinga:0.61/0.40  Arcan+Raich:0.59/0.55  Raich+Sneas:0.53/0.40  Kinga+Sneas:0.48/0.38  Arcan+Frosl:0.63/0.53

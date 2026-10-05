@@ -1,0 +1,53 @@
+{
+ "b0": -0.7665270868350781,
+ "w": [
+  1.5817753692396066,
+  0.4379756603756525,
+  0.25765924641089993,
+  0.3572268584919788,
+  -0.9,
+  -0.1,
+  0.4546127712990528,
+  1.0026292347313248,
+  -0.9045199716990324,
+  -0.6132448017877354,
+  0.4781877910806884,
+  -0.06763950741273511,
+  -0.14894521422281373,
+  0.010672930210543365,
+  0.15,
+  0.1795119018206128,
+  -0.5,
+  -0.3
+ ],
+ "names": [
+  "HP share (Pokemon)",
+  "Pokemon alive",
+  "attack stages",
+  "TR turns x speed edge",
+  "locked into status",
+  "locked into attack",
+  "grid coverage",
+  "grid exposure",
+  "must recharge",
+  "Protected last turn",
+  "type edge",
+  "asleep/frozen",
+  "paralysed",
+  "burned/poisoned",
+  "Tailwind turns (no TR)",
+  "screen turns",
+  "Encored",
+  "holding a Tricked Choice item"
+ ],
+ "n": 56723,
+ "hand_set": {
+  "locked into status": -0.9,
+  "locked into attack": -0.1,
+  "Tailwind turns (no TR)": 0.15,
+  "Encored": -0.5,
+  "holding a Tricked Choice item": -0.3,
+  "must recharge": -0.9045199716990324
+ },
+ "note": "Fitted on 4v4 self-play (results/battle_train: 7,200 full battles of the six, all 15 lead pairs x 10 archetypes x 6 opposing leads, played with egvalue2). Thin or confounded features kept at the 2v2 values (hand_set), as in egvalue2."
+}

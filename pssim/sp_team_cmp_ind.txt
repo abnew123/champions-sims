@@ -1,0 +1,80 @@
+
+== Indeedee-F (now)  (SLOT = this Pokemon)
+  Tailwind goodstuffs          lead Incineroar+Farigiraf      63.2 | back Blastoise+Kingambit       72.9
+  Sun                          lead Incineroar+Blastoise      62.3 | back Torkoal+Kingambit         54.2
+  Indeedee TR / Psychic Terrai lead Incineroar+Blastoise      63.2 | back Torkoal+Kingambit         54.2
+  Rain                         lead Incineroar+Torkoal        60.6 | back Blastoise+Kingambit       67.7
+  Balance, no speed control    lead Incineroar+Farigiraf      67.9 | back Torkoal+SLOT              66.7
+  Sand                         lead Incineroar+Farigiraf      65.3 | back Blastoise+Kingambit       67.7
+  Snow                         lead Farigiraf+Blastoise       62.4 | back Torkoal+Incineroar        71.9
+  Trick Room without Indeedee  lead SLOT+Blastoise            62.1 | back Torkoal+Incineroar        84.4
+  Rain + sun                   lead Incineroar+Blastoise      59.7 | back Torkoal+Farigiraf         65.6
+  Perish trap                  lead Incineroar+Kingambit      61.3 | back Blastoise+Torkoal         94.8
+
+== Indeedee-F +Psychic  (SLOT = this Pokemon)
+  Tailwind goodstuffs          lead Incineroar+Farigiraf      63.2 | back Blastoise+Kingambit       72.9
+  Sun                          lead Incineroar+Blastoise      62.3 | back Torkoal+Kingambit         54.2
+  Indeedee TR / Psychic Terrai lead Incineroar+Blastoise      63.2 | back Torkoal+Kingambit         54.2
+  Rain                         lead Incineroar+Torkoal        60.6 | back Blastoise+Kingambit       67.7
+  Balance, no speed control    lead Incineroar+Farigiraf      67.9 | back Torkoal+SLOT              71.9
+  Sand                         lead Incineroar+Farigiraf      65.3 | back Blastoise+Kingambit       67.7
+  Snow                         lead Farigiraf+Blastoise       62.4 | back SLOT+Incineroar           75.0
+  Trick Room without Indeedee  lead SLOT+Blastoise            62.1 | back Torkoal+Incineroar        84.4
+  Rain + sun                   lead Incineroar+Blastoise      59.7 | back Torkoal+Farigiraf         65.6
+  Perish trap                  lead Incineroar+Kingambit      61.3 | back Torkoal+SLOT              95.8
+
+== Indeedee-F Own Tempo  (SLOT = this Pokemon)
+  Tailwind goodstuffs          lead Incineroar+Farigiraf      63.2 | back Blastoise+Kingambit       72.9
+  Sun                          lead Incineroar+Blastoise      62.3 | back Torkoal+Kingambit         54.2
+  Indeedee TR / Psychic Terrai lead Incineroar+Blastoise      63.2 | back Torkoal+Kingambit         54.2
+  Rain                         lead Incineroar+Torkoal        60.6 | back Blastoise+Kingambit       67.7
+  Balance, no speed control    lead Incineroar+Farigiraf      67.9 | back Torkoal+SLOT              61.5
+  Sand                         lead Incineroar+Farigiraf      65.3 | back Blastoise+SLOT            69.8
+  Snow                         lead Farigiraf+Blastoise       62.4 | back Torkoal+Incineroar        71.9
+  Trick Room without Indeedee  lead Kingambit+Blastoise       61.2 | back Torkoal+Incineroar        84.4
+  Rain + sun                   lead Incineroar+Blastoise      59.7 | back Torkoal+Farigiraf         65.6
+  Perish trap                  lead Incineroar+Kingambit      61.3 | back Blastoise+Torkoal         94.8
+
+== Sinistcha  (SLOT = this Pokemon)
+  Tailwind goodstuffs          lead Incineroar+Farigiraf      63.2 | back Blastoise+Kingambit       72.9
+  Sun                          lead Incineroar+Blastoise      62.5 | back Torkoal+Kingambit         54.2
+  Indeedee TR / Psychic Terrai lead Incineroar+Blastoise      63.2 | back Torkoal+Kingambit         54.2
+  Rain                         lead Incineroar+Torkoal        60.6 | back Blastoise+Kingambit       67.7
+  Balance, no speed control    lead Incineroar+Farigiraf      67.9 | back Blastoise+Torkoal         60.4
+  Sand                         lead Incineroar+Farigiraf      65.3 | back Blastoise+Kingambit       67.7
+  Snow                         lead Farigiraf+Blastoise       62.4 | back Torkoal+Incineroar        71.9
+  Trick Room without Indeedee  lead Farigiraf+Kingambit       61.7 | back Torkoal+Incineroar        84.4
+  Rain + sun                   lead Incineroar+Blastoise      59.8 | back Torkoal+Farigiraf         65.6
+  Perish trap                  lead Incineroar+Kingambit      61.3 | back Blastoise+Torkoal         94.8
+
+== Hatterene  (SLOT = this Pokemon)
+  Tailwind goodstuffs          lead Incineroar+Farigiraf      63.2 | back Blastoise+Kingambit       72.9
+  Sun                          lead Incineroar+Blastoise      62.7 | back Torkoal+Kingambit         54.2
+  Indeedee TR / Psychic Terrai lead Incineroar+Blastoise      63.2 | back SLOT+Kingambit            55.2
+  Rain                         lead Incineroar+Torkoal        60.6 | back Blastoise+Kingambit       67.7
+  Balance, no speed control    lead Incineroar+Farigiraf      67.9 | back Torkoal+SLOT              66.7
+  Sand                         lead Incineroar+Farigiraf      65.3 | back Blastoise+Kingambit       67.7
+  Snow                         lead Farigiraf+Blastoise       62.4 | back Torkoal+Incineroar        71.9
+  Trick Room without Indeedee  lead Farigiraf+Kingambit       62.4 | back Torkoal+Incineroar        84.4
+  Rain + sun                   lead Incineroar+Blastoise      59.8 | back Torkoal+Farigiraf         65.6
+  Perish trap                  lead Incineroar+Kingambit      61.3 | back Blastoise+Torkoal         94.8
+
+== Rillaboom  (SLOT = this Pokemon)
+  Tailwind goodstuffs          lead Incineroar+Farigiraf      63.2 | back SLOT+Kingambit            72.9
+  Sun                          lead SLOT+Blastoise            62.8 | back Farigiraf+Incineroar      68.8
+  Indeedee TR / Psychic Terrai lead SLOT+Blastoise            69.8 | back Torkoal+Incineroar        61.5
+  Rain                         lead SLOT+Torkoal              61.3 | back Blastoise+Kingambit       67.7
+  Balance, no speed control    lead Incineroar+Farigiraf      67.9 | back Blastoise+Torkoal         60.4
+  Sand                         lead SLOT+Farigiraf            65.5 | back Kingambit+Incineroar      80.2
+  Snow                         lead Farigiraf+Blastoise       62.4 | back SLOT+Incineroar           76.0
+  Trick Room without Indeedee  lead Kingambit+Blastoise       61.2 | back Torkoal+Incineroar        84.4
+  Rain + sun                   lead Incineroar+Blastoise      59.7 | back Torkoal+Farigiraf         65.6
+  Perish trap                  lead Incineroar+Kingambit      61.3 | back Blastoise+Torkoal         94.8
+
+archetype-weighted: best-lead score | best back pair 2v2 win share (Trick Room up/down averaged)
+  Indeedee-F (now)        63.14 |  68.01
+  Indeedee-F +Psychic     63.14 |  68.77
+  Indeedee-F Own Tempo    63.08 |  67.71
+  Sinistcha               63.13 |  67.42
+  Hatterene               63.20 |  68.13
+  Rillaboom               64.02 |  71.49

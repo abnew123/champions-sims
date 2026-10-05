@@ -1,0 +1,61 @@
+{
+ "Balance, no speed control": [
+  "Farigiraf+Blastoise",
+  "Indeedee-F+Blastoise",
+  "Indeedee-F+Torkoal",
+  "Kingambit+Blastoise"
+ ],
+ "Indeedee TR / Psychic Terrain": [
+  "Kingambit+Blastoise",
+  "Hatterene+Blastoise",
+  "Hatterene+Kingambit",
+  "Farigiraf+Blastoise"
+ ],
+ "Perish trap": [
+  "Indeedee-F+Kingambit",
+  "Farigiraf+Kingambit",
+  "Farigiraf+Blastoise",
+  "Kingambit+Blastoise"
+ ],
+ "Rain": [
+  "Torkoal+Blastoise",
+  "Indeedee-F+Torkoal",
+  "Farigiraf+Torkoal",
+  "Hatterene+Torkoal"
+ ],
+ "Rain + sun": [
+  "Torkoal+Blastoise",
+  "Farigiraf+Blastoise",
+  "Hatterene+Blastoise",
+  "Kingambit+Blastoise"
+ ],
+ "Sand": [
+  "Farigiraf+Blastoise",
+  "Kingambit+Blastoise",
+  "Torkoal+Blastoise"
+ ],
+ "Snow": [
+  "Farigiraf+Blastoise",
+  "Indeedee-F+Blastoise",
+  "Farigiraf+Torkoal",
+  "Torkoal+Blastoise"
+ ],
+ "Sun": [
+  "Hatterene+Blastoise",
+  "Farigiraf+Blastoise",
+  "Indeedee-F+Blastoise",
+  "Kingambit+Blastoise"
+ ],
+ "Tailwind goodstuffs": [
+  "Indeedee-F+Torkoal",
+  "Farigiraf+Blastoise",
+  "Farigiraf+Kingambit",
+  "Indeedee-F+Blastoise"
+ ],
+ "Trick Room without Indeedee": [
+  "Indeedee-F+Blastoise",
+  "Farigiraf+Kingambit",
+  "Kingambit+Blastoise",
+  "Indeedee-F+Kingambit"
+ ]
+}

@@ -1,0 +1,174 @@
+### What Trick Room is worth in the 2v2 (3 turns up vs none), my win share, weighted over their back pairs
+archetype                      mean dTR   pairs that gain most / least
+Balance, no speed control        +41.3   Torkoal+Blastoise +77, Farigiraf+Torkoal +72, Incineroar+Blastoise +55 | Incineroar+Torkoal +8, Indeedee-F+Farigiraf +7
+Sun                              +15.6   Indeedee-F+Torkoal +37, Torkoal+Blastoise +36, Incineroar+Kingambit +35 | Indeedee-F+Blastoise -14, Farigiraf+Blastoise -20
+Rain + sun                       +15.0   Farigiraf+Blastoise +57, Torkoal+Kingambit +40, Incineroar+Blastoise +34 | Kingambit+Blastoise -3, Indeedee-F+Kingambit -5
+Sand                             +38.8   Torkoal+Blastoise +84, Torkoal+Kingambit +64, Incineroar+Torkoal +63 | Indeedee-F+Torkoal +1, Indeedee-F+Farigiraf -14
+Tailwind goodstuffs              +40.9   Torkoal+Blastoise +85, Farigiraf+Torkoal +65, Torkoal+Kingambit +58 | Incineroar+Torkoal +12, Indeedee-F+Farigiraf -5
+Trick Room without Indeedee       -5.0   Indeedee-F+Torkoal +21, Incineroar+Indeedee-F +20, Farigiraf+Torkoal +10 | Incineroar+Blastoise -25, Farigiraf+Blastoise -25
+Rain                             +15.3   Torkoal+Blastoise +42, Torkoal+Kingambit +37, Incineroar+Torkoal +31 | Farigiraf+Kingambit -14, Incineroar+Indeedee-F -14
+Perish trap                      +12.7   Incineroar+Kingambit +33, Farigiraf+Blastoise +30, Torkoal+Kingambit +28 | Indeedee-F+Kingambit -2, Indeedee-F+Farigiraf -18
+Snow                             +27.5   Torkoal+Blastoise +52, Incineroar+Blastoise +50, Torkoal+Kingambit +49 | Incineroar+Indeedee-F +6, Incineroar+Farigiraf +5
+Indeedee TR / Psychic Terrain     +6.2   Torkoal+Kingambit +33, Indeedee-F+Torkoal +33, Farigiraf+Kingambit +31 | Farigiraf+Blastoise -14, Indeedee-F+Blastoise -27
+
+### Back pair for each sheet lead: win share in the 2v2 with Trick Room up (3 turns) [and with none]
+
+Tailwind  | Incineroar + Farigiraf (sets TR 100%)  now: Indeedee-F, Torkoal 93
+     Torkoal, Blastoise        100  (  +7)   TR 100 / none  15   +-0
+     Torkoal, Kingambit         97  (  +4)   TR  97 / none  39   +-2
+   * Indeedee-F, Torkoal        93  (  +0)   TR  93 / none  58   +-1
+     Kingambit, Blastoise       38  ( -55)   TR  38 / none   5   +-4
+     Indeedee-F, Blastoise      38  ( -55)   TR  38 / none   0   +-11
+     Indeedee-F, Kingambit      35  ( -58)   TR  35 / none   0   +-6
+
+Tailwind  | Indeedee-F + Torkoal (sets TR 40%)  now: Farigiraf, Kingambit 46
+     Incineroar, Kingambit      80  ( +34)   TR  97 / none  69   +-2
+     Incineroar, Farigiraf      49  (  +3)   TR  82 / none  27   +-3
+   * Farigiraf, Kingambit       46  (  +0)   TR  74 / none  28   +-10
+     Incineroar, Blastoise      43  (  -3)   TR  78 / none  21   +-8
+     Kingambit, Blastoise       18  ( -28)   TR  38 / none   5   +-4
+     Farigiraf, Blastoise       16  ( -30)   TR  39 / none   1   +-10
+
+Indeedee TR  | Kingambit + Blastoise (sets TR 0%)  now: Farigiraf, Indeedee-F 46
+     Incineroar, Indeedee-F     70  ( +24)   TR  58 / none  70   +-4
+     Incineroar, Torkoal        59  ( +14)   TR  70 / none  59   +-0
+     Incineroar, Farigiraf      53  (  +7)   TR  61 / none  53   +-5
+     Farigiraf, Torkoal         52  (  +6)   TR  67 / none  52   +-7
+   * Indeedee-F, Farigiraf      46  (  +0)   TR  45 / none  46   +-2
+     Indeedee-F, Torkoal        26  ( -20)   TR  58 / none  26   +-5
+
+Indeedee TR  | Incineroar + Blastoise (sets TR 0%)  now: Farigiraf, Indeedee-F 46
+     Farigiraf, Torkoal         52  (  +6)   TR  67 / none  52   +-7
+   * Indeedee-F, Farigiraf      46  (  +0)   TR  45 / none  46   +-2
+     Torkoal, Kingambit         38  (  -8)   TR  71 / none  38   +-6
+     Indeedee-F, Kingambit      34  ( -12)   TR  25 / none  34   +-5
+     Farigiraf, Kingambit       29  ( -17)   TR  60 / none  29   +-5
+     Indeedee-F, Torkoal        26  ( -20)   TR  58 / none  26   +-5
+
+Sun  | Farigiraf + Blastoise (sets TR 55%)  now: Indeedee-F, Torkoal 41
+     Torkoal, Kingambit         61  ( +21)   TR  75 / none  44   +-4
+   * Indeedee-F, Torkoal        41  (  +0)   TR  57 / none  21   +-9
+     Incineroar, Torkoal        38  (  -3)   TR  49 / none  25   +-9
+     Incineroar, Kingambit      34  (  -7)   TR  50 / none  15   +-8
+     Indeedee-F, Kingambit      22  ( -19)   TR  26 / none  18   +-7
+     Incineroar, Indeedee-F     10  ( -31)   TR  19 / none   0   +-6
+
+Sun  | Incineroar + Blastoise (sets TR 0%)  now: Farigiraf, Indeedee-F 10
+     Torkoal, Kingambit         44  ( +34)   TR  75 / none  44   +-4
+     Farigiraf, Kingambit       33  ( +23)   TR  57 / none  33   +-8
+     Farigiraf, Torkoal         27  ( +17)   TR  47 / none  27   +-8
+     Indeedee-F, Torkoal        21  ( +11)   TR  57 / none  21   +-9
+     Indeedee-F, Kingambit      18  (  +8)   TR  26 / none  18   +-7
+   * Indeedee-F, Farigiraf      10  (  +0)   TR   4 / none  10   +-4
+
+Rain  | Farigiraf + Blastoise (sets TR 35%)  now: Indeedee-F, Kingambit 31
+     Incineroar, Torkoal        61  ( +30)   TR  80 / none  50   +-6
+     Indeedee-F, Torkoal        42  ( +11)   TR  56 / none  35   +-5
+     Torkoal, Kingambit         41  ( +10)   TR  66 / none  28   +-4
+     Incineroar, Kingambit      38  (  +7)   TR  47 / none  33   +-9
+   * Indeedee-F, Kingambit      31  (  +0)   TR  27 / none  33   +-2
+     Incineroar, Indeedee-F     19  ( -11)   TR  10 / none  24   +-6
+
+Rain  | Incineroar + Torkoal (sets TR 0%)  now: Farigiraf, Indeedee-F 2
+     Indeedee-F, Blastoise      51  ( +49)   TR  55 / none  51   +-8
+     Kingambit, Blastoise       45  ( +42)   TR  68 / none  45   +-6
+     Farigiraf, Blastoise       43  ( +40)   TR  57 / none  43   +-8
+     Farigiraf, Kingambit       38  ( +36)   TR  24 / none  38   +-6
+     Indeedee-F, Kingambit      33  ( +31)   TR  27 / none  33   +-2
+   * Indeedee-F, Farigiraf       2  (  +0)   TR   7 / none   2   +-5
+
+Rain  | Indeedee-F + Torkoal (sets TR 92%)  now: Blastoise, Farigiraf 56
+     Incineroar, Blastoise      91  ( +36)   TR  94 / none  63   +-4
+     Kingambit, Blastoise       66  ( +10)   TR  68 / none  45   +-6
+   * Farigiraf, Blastoise       56  (  +0)   TR  57 / none  43   +-8
+     Incineroar, Kingambit      46  ( -10)   TR  47 / none  33   +-9
+     Incineroar, Farigiraf      41  ( -15)   TR  42 / none  19   +-8
+     Farigiraf, Kingambit       25  ( -30)   TR  24 / none  38   +-6
+
+Balance  | Incineroar + Farigiraf (sets TR 100%)  now: Indeedee-F, Torkoal 100
+   * Indeedee-F, Torkoal       100  (  +0)   TR 100 / none  65   +-0
+     Torkoal, Blastoise        100  (  +0)   TR 100 / none  23   +-0
+     Torkoal, Kingambit         97  (  -3)   TR  97 / none  58   +-3
+     Indeedee-F, Blastoise      48  ( -52)   TR  48 / none   8   +-10
+     Kingambit, Blastoise       47  ( -53)   TR  47 / none   6   +-6
+     Indeedee-F, Kingambit      36  ( -64)   TR  36 / none   8   +-7
+
+Sand  | Incineroar + Blastoise (sets TR 0%)  now: Farigiraf, Indeedee-F 46
+     Indeedee-F, Kingambit      88  ( +42)   TR  90 / none  88   +-6
+   * Indeedee-F, Farigiraf      46  (  +0)   TR  33 / none  46   +-7
+     Farigiraf, Kingambit       45  (  -1)   TR  97 / none  45   +-3
+     Indeedee-F, Torkoal        42  (  -4)   TR  44 / none  42   +-7
+     Torkoal, Kingambit         36  ( -10)   TR 100 / none  36   +-0
+     Farigiraf, Torkoal         24  ( -22)   TR  71 / none  24   +-3
+
+Sand  | Incineroar + Farigiraf (sets TR 90%)  now: Indeedee-F, Torkoal 44
+     Kingambit, Blastoise       97  ( +53)   TR 100 / none  67   +-0
+     Torkoal, Kingambit         94  ( +50)   TR 100 / none  36   +-0
+     Torkoal, Blastoise         92  ( +48)   TR 100 / none  16   +-0
+     Indeedee-F, Kingambit      90  ( +46)   TR  90 / none  88   +-6
+     Indeedee-F, Blastoise      79  ( +36)   TR  85 / none  29   +-7
+   * Indeedee-F, Torkoal        44  (  +0)   TR  44 / none  42   +-7
+
+Snow  | Farigiraf + Blastoise (sets TR 65%)  now: Indeedee-F, Torkoal 84
+     Incineroar, Torkoal        97  ( +12)   TR 100 / none  90   +-0
+     Incineroar, Kingambit      94  ( +10)   TR 100 / none  84   +-0
+   * Indeedee-F, Torkoal        84  (  +0)   TR  94 / none  66   +-4
+     Incineroar, Indeedee-F     81  (  -3)   TR  83 / none  77   +-0
+     Torkoal, Kingambit         80  (  -5)   TR  97 / none  48   +-3
+     Indeedee-F, Kingambit      40  ( -45)   TR  44 / none  32   +-8
+
+Snow  | Indeedee-F + Blastoise (sets TR 77%)  now: Farigiraf, Torkoal 87
+     Incineroar, Torkoal        98  ( +11)   TR 100 / none  90   +-0
+     Incineroar, Kingambit      96  ( +10)   TR 100 / none  84   +-0
+   * Farigiraf, Torkoal         87  (  +0)   TR  97 / none  51   +-3
+     Torkoal, Kingambit         86  (  -1)   TR  97 / none  48   +-3
+     Farigiraf, Kingambit       68  ( -18)   TR  77 / none  41   +-9
+     Incineroar, Farigiraf      60  ( -26)   TR  61 / none  57   +-6
+
+Trick Room  | Farigiraf + Kingambit (sets TR 83%)  now: Indeedee-F, Torkoal 72
+   * Indeedee-F, Torkoal        72  (  +0)   TR  75 / none  54   +-7
+     Incineroar, Indeedee-F     65  (  -7)   TR  68 / none  49   +-7
+     Torkoal, Blastoise         64  (  -7)   TR  63 / none  69   +-4
+     Incineroar, Torkoal        62  ( -10)   TR  59 / none  77   +-5
+     Incineroar, Blastoise      47  ( -25)   TR  43 / none  67   +-8
+     Indeedee-F, Blastoise      23  ( -48)   TR  21 / none  32   +-8
+
+Trick Room  | Indeedee-F + Blastoise (sets TR 70%)  now: Farigiraf, Kingambit 23
+     Incineroar, Torkoal        64  ( +41)   TR  59 / none  77   +-5
+     Farigiraf, Torkoal         60  ( +37)   TR  63 / none  53   +-6
+     Torkoal, Kingambit         55  ( +32)   TR  54 / none  56   +-0
+     Incineroar, Kingambit      54  ( +31)   TR  49 / none  66   +-5
+     Incineroar, Farigiraf      34  ( +11)   TR  34 / none  35   +-8
+   * Farigiraf, Kingambit       23  (  +0)   TR  22 / none  25   +-0
+
+Rain + Sun  | Incineroar + Farigiraf (sets TR 86%)  now: Indeedee-F, Kingambit 1
+     Torkoal, Blastoise         98  ( +98)   TR 100 / none  88   +-0
+     Torkoal, Kingambit         85  ( +84)   TR  90 / none  50   +-8
+     Indeedee-F, Torkoal        77  ( +76)   TR  77 / none  75   +-10
+     Indeedee-F, Blastoise      59  ( +59)   TR  63 / none  40   +-10
+     Kingambit, Blastoise       39  ( +39)   TR  39 / none  42   +-12
+   * Indeedee-F, Kingambit       1  (  +0)   TR   0 / none   5   +-0
+
+Rain + Sun  | Incineroar + Indeedee-F (sets TR 93%)  now: Farigiraf, Kingambit 14
+     Torkoal, Blastoise         99  ( +85)   TR 100 / none  88   +-0
+     Farigiraf, Torkoal         89  ( +75)   TR  89 / none  81   +-7
+     Torkoal, Kingambit         87  ( +74)   TR  90 / none  50   +-8
+     Farigiraf, Blastoise       82  ( +68)   TR  86 / none  29   +-5
+     Kingambit, Blastoise       39  ( +25)   TR  39 / none  42   +-12
+   * Farigiraf, Kingambit       14  (  +0)   TR  14 / none  12   +-0
+
+Perish  | Farigiraf + Blastoise (sets TR 88%)  now: Indeedee-F, Torkoal 95
+     Incineroar, Torkoal        99  (  +5)   TR 100 / none  94   +-0
+   * Indeedee-F, Torkoal        95  (  +0)   TR  96 / none  84   +-3
+     Torkoal, Kingambit         94  (  -0)   TR  97 / none  69   +-3
+     Incineroar, Kingambit      63  ( -31)   TR  67 / none  34   +-4
+     Incineroar, Indeedee-F     33  ( -62)   TR  34 / none  25   +-9
+     Indeedee-F, Kingambit      31  ( -64)   TR  31 / none  33   +-4
+
+Perish  | Farigiraf + Kingambit (sets TR 71%)  now: Indeedee-F, Torkoal 92
+     Torkoal, Blastoise         99  (  +7)   TR 100 / none  97   +-0
+     Incineroar, Torkoal        98  (  +6)   TR 100 / none  94   +-0
+   * Indeedee-F, Torkoal        92  (  +0)   TR  96 / none  84   +-3
+     Indeedee-F, Blastoise      76  ( -17)   TR  79 / none  68   +-10
+     Incineroar, Blastoise      57  ( -36)   TR  64 / none  38   +-7
+     Incineroar, Indeedee-F     31  ( -61)   TR  34 / none  25   +-9

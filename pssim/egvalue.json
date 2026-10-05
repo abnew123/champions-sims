@@ -1,0 +1,24 @@
+{
+ "b0": -0.18922742431170214,
+ "w": [
+  3.064244485288678,
+  1.4307525640571677,
+  0.21931355551022833,
+  0.1635448186851806,
+  -0.41207786237054533,
+  -0.10427124639979517,
+  2.3717692934673384,
+  0.31053190499324135
+ ],
+ "names": [
+  "HP share (Pokemon)",
+  "Pokemon alive",
+  "attack stages",
+  "TR turns x speed edge",
+  "locked into status",
+  "locked into attack",
+  "grid coverage",
+  "grid exposure"
+ ],
+ "n": 5905
+}

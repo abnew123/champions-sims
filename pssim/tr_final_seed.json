@@ -1,0 +1,3358 @@
+{
+ "leads": {
+  "Balance, no speed control": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Indeedee-F+Blastoise",
+      0.6767441135517277,
+      0.5016264489655727,
+      0.5891852812586502,
+      6
+     ],
+     [
+      "Indeedee-F+Torkoal",
+      0.6836555182165015,
+      0.4940316519100172,
+      0.5888435850632594,
+      6
+     ]
+    ]
+   },
+   "Raichu yes": {
+    "weights": {
+     "Gholdengo + Raichu": 13.1,
+     "Floette-Eternal + Incineroar": 2.4,
+     "Garchomp + Raichu": 7.1,
+     "Incineroar + Raichu": 5.9,
+     "Arcanine-Hisui + Raichu": 5.7,
+     "Garchomp + Rillaboom": 3.0
+    },
+    "vals": [
+     [
+      "Indeedee-F+Blastoise",
+      0.6697464405958925,
+      0.5103247363024443,
+      0.5900355884491684,
+      6
+     ],
+     [
+      "Indeedee-F+Torkoal",
+      0.6765216725070724,
+      0.4933824825193273,
+      0.5849520775131999,
+      6
+     ]
+    ]
+   },
+   "Raichu no": {
+    "weights": {
+     "Gholdengo + Raichu": 0.0,
+     "Floette-Eternal + Incineroar": 5.5,
+     "Garchomp + Raichu": 0.0,
+     "Incineroar + Raichu": 0.0,
+     "Arcanine-Hisui + Raichu": 0.0,
+     "Garchomp + Rillaboom": 2.3
+    },
+    "vals": [
+     [
+      "Indeedee-F+Torkoal",
+      0.7194355446108397,
+      0.4956164543185442,
+      0.607525999464692,
+      6
+     ],
+     [
+      "Indeedee-F+Blastoise",
+      0.7088881361108597,
+      0.4624060085901008,
+      0.5856470723504802,
+      6
+     ]
+    ]
+   }
+  },
+  "Indeedee TR / Psychic Terrain": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Indeedee-F+Blastoise",
+      0.6738244676158718,
+      0.533237208066022,
+      0.603530837840947,
+      6
+     ],
+     [
+      "Indeedee-F+Kingambit",
+      0.6648599151498492,
+      0.5293109262277713,
+      0.5970854206888103,
+      6
+     ]
+    ]
+   },
+   "Farigiraf yes": {
+    "weights": {
+     "Gardevoir + Indeedee-F": 0.0,
+     "Armarouge + Indeedee-F": 0.8,
+     "Farigiraf + Incineroar": 32.3,
+     "Indeedee + Sneasler": 0.0,
+     "Indeedee-F + Sneasler": 0.0,
+     "Hatterene + Indeedee-F": 14.8
+    },
+    "vals": [
+     [
+      "Indeedee-F+Blastoise",
+      0.7580170859011504,
+      0.6497195150588493,
+      0.7038683004799998,
+      6
+     ],
+     [
+      "Indeedee-F+Kingambit",
+      0.7387403249805893,
+      0.625241216356632,
+      0.6819907706686106,
+      6
+     ]
+    ]
+   },
+   "Farigiraf no": {
+    "weights": {
+     "Gardevoir + Indeedee-F": 7.5,
+     "Armarouge + Indeedee-F": 5.0,
+     "Farigiraf + Incineroar": 0.0,
+     "Indeedee + Sneasler": 3.3,
+     "Indeedee-F + Sneasler": 3.3,
+     "Hatterene + Indeedee-F": 1.0
+    },
+    "vals": [
+     [
+      "Indeedee-F+Blastoise",
+      0.6476366157821103,
+      0.49813097197800066,
+      0.5728837938800555,
+      6
+     ],
+     [
+      "Indeedee-F+Kingambit",
+      0.6411109833227373,
+      0.4978619682484023,
+      0.5694864757855698,
+      6
+     ]
+    ]
+   }
+  },
+  "Perish trap": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Indeedee-F+Kingambit",
+      0.7311159590013904,
+      0.5864493259634425,
+      0.6587826424824164,
+      6
+     ]
+    ]
+   },
+   "Archaludon yes": {
+    "weights": {
+     "Gengar + Incineroar": 31.7,
+     "Gengar + Rillaboom": 10.8,
+     "Archaludon + Politoed": 9.7,
+     "Gengar + Vivillon": 6.0,
+     "Archaludon + Gengar": 5.2,
+     "Archaludon + Incineroar": 4.5
+    },
+    "vals": [
+     [
+      "Indeedee-F+Kingambit",
+      0.720048711736338,
+      0.5743033955159567,
+      0.6471760536261473,
+      6
+     ]
+    ]
+   },
+   "Archaludon no": {
+    "weights": {
+     "Gengar + Incineroar": 24.9,
+     "Gengar + Rillaboom": 11.2,
+     "Archaludon + Politoed": 0.0,
+     "Gengar + Vivillon": 0.0,
+     "Archaludon + Gengar": 0.0,
+     "Archaludon + Incineroar": 0.0
+    },
+    "vals": [
+     [
+      "Indeedee-F+Kingambit",
+      0.772477363787374,
+      0.6328493804000569,
+      0.7026633720937154,
+      6
+     ]
+    ]
+   }
+  },
+  "Rain": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Indeedee-F+Torkoal",
+      0.6766155440612022,
+      0.5643290051655656,
+      0.620472274613384,
+      6
+     ]
+    ]
+   },
+   "Farigiraf yes": {
+    "weights": {
+     "Archaludon + Pelipper": 9.9,
+     "Pelipper + Swampert": 8.3,
+     "Pelipper + Sneasler": 11.2,
+     "Archaludon + Grimmsnarl": 0.3,
+     "Farigiraf + Golisopod": 7.3,
+     "Dragonite + Gholdengo": 0.0
+    },
+    "vals": [
+     [
+      "Indeedee-F+Torkoal",
+      0.7114081825388476,
+      0.5839362761770719,
+      0.6476722293579598,
+      6
+     ]
+    ]
+   },
+   "Farigiraf no": {
+    "weights": {
+     "Archaludon + Pelipper": 7.6,
+     "Pelipper + Swampert": 6.5,
+     "Pelipper + Sneasler": 1.6,
+     "Archaludon + Grimmsnarl": 4.1,
+     "Farigiraf + Golisopod": 0.0,
+     "Dragonite + Gholdengo": 2.9
+    },
+    "vals": [
+     [
+      "Indeedee-F+Torkoal",
+      0.6549396328623882,
+      0.5520082173206894,
+      0.6034739250915389,
+      6
+     ]
+    ]
+   }
+  },
+  "Sand": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Indeedee-F+Blastoise",
+      0.6726350499608107,
+      0.511491930473357,
+      0.5920634902170838,
+      6
+     ]
+    ]
+   },
+   "Salamence yes": {
+    "weights": {
+     "Excadrill + Tyranitar": 20.2,
+     "Indeedee + Sneasler": 5.4,
+     "Sneasler + Tyranitar": 5.9,
+     "Salamence + Sneasler": 5.9,
+     "Corviknight + Sneasler": 5.4,
+     "Excadrill + Salamence": 4.2
+    },
+    "vals": [
+     [
+      "Indeedee-F+Blastoise",
+      0.6743382316614535,
+      0.5139630121166703,
+      0.5941506218890619,
+      6
+     ]
+    ]
+   },
+   "Salamence no": {
+    "weights": {
+     "Excadrill + Tyranitar": 7.0,
+     "Indeedee + Sneasler": 3.4,
+     "Sneasler + Tyranitar": 2.2,
+     "Salamence + Sneasler": 0.0,
+     "Corviknight + Sneasler": 1.0,
+     "Excadrill + Salamence": 0.0
+    },
+    "vals": [
+     [
+      "Indeedee-F+Blastoise",
+      0.6636413540053165,
+      0.4959124207268417,
+      0.5797768873660791,
+      6
+     ]
+    ]
+   }
+  },
+  "Snow": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Indeedee-F+Blastoise",
+      0.6784128934177145,
+      0.5525701361758081,
+      0.6154915147967612,
+      6
+     ]
+    ]
+   },
+   "Froslass yes": {
+    "weights": {
+     "Froslass + Sneasler": 13.1,
+     "Froslass + Kingambit": 7.6,
+     "Arcanine-Hisui + Raichu": 3.9,
+     "Raichu + Sneasler": 4.1,
+     "Kingambit + Sneasler": 4.6,
+     "Arcanine-Hisui + Froslass": 4.5
+    },
+    "vals": [
+     [
+      "Indeedee-F+Blastoise",
+      0.6786495803241905,
+      0.5539805218435833,
+      0.6163150510838868,
+      6
+     ]
+    ]
+   },
+   "Froslass no": {
+    "weights": {
+     "Froslass + Sneasler": 0.0,
+     "Froslass + Kingambit": 0.0,
+     "Arcanine-Hisui + Raichu": 2.5,
+     "Raichu + Sneasler": 0.8,
+     "Kingambit + Sneasler": 0.3,
+     "Arcanine-Hisui + Froslass": 0.0
+    },
+    "vals": [
+     [
+      "Indeedee-F+Blastoise",
+      0.6774535030335642,
+      0.5186118284072747,
+      0.5980326657204195,
+      6
+     ]
+    ]
+   }
+  },
+  "Sun": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Indeedee-F+Blastoise",
+      0.7156575090687968,
+      0.5507292232174837,
+      0.6331933661431403,
+      6
+     ]
+    ]
+   },
+   "Farigiraf yes": {
+    "weights": {
+     "Farigiraf + Incineroar": 9.7,
+     "Charizard + Garchomp": 2.8,
+     "Aerodactyl + Kingambit": 7.7,
+     "Gardevoir + Indeedee-F": 0.1,
+     "Charizard + Farigiraf": 6.4,
+     "Armarouge + Indeedee-F": 1.2
+    },
+    "vals": [
+     [
+      "Indeedee-F+Blastoise",
+      0.7492464793429919,
+      0.5670476537543904,
+      0.6581470665486912,
+      6
+     ]
+    ]
+   },
+   "Farigiraf no": {
+    "weights": {
+     "Farigiraf + Incineroar": 0.0,
+     "Charizard + Garchomp": 3.8,
+     "Aerodactyl + Kingambit": 0.3,
+     "Gardevoir + Indeedee-F": 4.6,
+     "Charizard + Farigiraf": 0.0,
+     "Armarouge + Indeedee-F": 2.7
+    },
+    "vals": [
+     [
+      "Indeedee-F+Blastoise",
+      0.6625335911079714,
+      0.5238397543558272,
+      0.5931866727318993,
+      6
+     ]
+    ]
+   }
+  },
+  "Tailwind goodstuffs": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Indeedee-F+Torkoal",
+      0.7260161960186722,
+      0.5080504865894594,
+      0.6170333413040658,
+      6
+     ],
+     [
+      "Indeedee-F+Blastoise",
+      0.6631250364639695,
+      0.49397593576661264,
+      0.578550486115291,
+      6
+     ]
+    ]
+   },
+   "Raichu yes": {
+    "weights": {
+     "Gholdengo + Raichu": 17.7,
+     "Arcanine-Hisui + Raichu": 8.5,
+     "Gholdengo + Rillaboom": 2.8,
+     "Gholdengo + Salamence": 2.4,
+     "Salamence + Sneasler": 1.2,
+     "Rillaboom + Sneasler": 1.1
+    },
+    "vals": [
+     [
+      "Indeedee-F+Torkoal",
+      0.7157948023981219,
+      0.4946928864130237,
+      0.6052438444055728,
+      6
+     ],
+     [
+      "Indeedee-F+Blastoise",
+      0.6594826286380792,
+      0.49743051015022616,
+      0.5784565693941527,
+      6
+     ]
+    ]
+   },
+   "Raichu no": {
+    "weights": {
+     "Gholdengo + Raichu": 0.0,
+     "Arcanine-Hisui + Raichu": 0.0,
+     "Gholdengo + Rillaboom": 3.7,
+     "Gholdengo + Salamence": 2.9,
+     "Salamence + Sneasler": 4.2,
+     "Rillaboom + Sneasler": 4.5
+    },
+    "vals": [
+     [
+      "Indeedee-F+Torkoal",
+      0.7548989521927948,
+      0.5456374442935358,
+      0.6502681982431653,
+      6
+     ],
+     [
+      "Indeedee-F+Blastoise",
+      0.6727647356462507,
+      0.484187680043164,
+      0.5784762078447073,
+      6
+     ]
+    ]
+   }
+  },
+  "Trick Room without Indeedee": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Indeedee-F+Blastoise",
+      0.766371857769517,
+      0.549425885772487,
+      0.6578988717710019,
+      6
+     ],
+     [
+      "Indeedee-F+Kingambit",
+      0.7267248328908045,
+      0.5574150820687492,
+      0.6420699574797768,
+      6
+     ]
+    ]
+   },
+   "Farigiraf yes": {
+    "weights": {
+     "Farigiraf + Incineroar": 9.6,
+     "Farigiraf + Kingambit": 4.8,
+     "Farigiraf + Rillaboom": 4.0,
+     "Delphox + Incineroar": 0.0,
+     "Delphox + Sneasler": 0.1,
+     "Farigiraf + Raichu": 2.6
+    },
+    "vals": [
+     [
+      "Indeedee-F+Kingambit",
+      0.727908255265715,
+      0.5609370727594678,
+      0.6444226640125914,
+      6
+     ],
+     [
+      "Indeedee-F+Blastoise",
+      0.7518576554157274,
+      0.5134525098783544,
+      0.632655082647041,
+      6
+     ]
+    ]
+   },
+   "Farigiraf no": {
+    "weights": {
+     "Farigiraf + Incineroar": 0.0,
+     "Farigiraf + Kingambit": 0.0,
+     "Farigiraf + Rillaboom": 0.0,
+     "Delphox + Incineroar": 10.8,
+     "Delphox + Sneasler": 7.3,
+     "Farigiraf + Raichu": 0.0
+    },
+    "vals": [
+     [
+      "Indeedee-F+Blastoise",
+      0.812187102887937,
+      0.6627356819397984,
+      0.7374613924138678,
+      6
+     ],
+     [
+      "Indeedee-F+Kingambit",
+      0.7218198848442843,
+      0.5489362440560637,
+      0.635378064450174,
+      6
+     ]
+    ]
+   }
+  }
+ },
+ "plans": {
+  "Sun||Indeedee-F+Blastoise||Armarouge + Indeedee-F": {
+   "lines": null,
+   "pop": 0.8422507582354841,
+   "worst": 0.6987151016219721,
+   "full": [
+    0.8416179969194215,
+    0.7005099703040409
+   ],
+   "reader": [
+    [
+     0.6353368084814071,
+     "Armarouge: Protect | Indeedee-F: Helping Hand"
+    ],
+    [
+     0.3027956909228198,
+     "Armarouge: Protect | Indeedee-F: Trick Room"
+    ]
+   ],
+   "share": 0.022,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": true,
+   "trCredit": 0.9590019804360366,
+   "mix": [
+    [
+     55,
+     "Indeedee-F: Helping Hand | Blastoise: Water Spout"
+    ],
+    [
+     45,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Indeedee TR / Psychic Terrain||Indeedee-F+Blastoise||Indeedee-F + Sneasler": {
+   "lines": null,
+   "pop": 0.6399339704251288,
+   "worst": 0.564202203468036,
+   "full": [
+    0.637615133757834,
+    0.5711702086037301
+   ],
+   "reader": [
+    [
+     0.6789627957849061,
+     "Indeedee-F: Helping Hand | Sneasler: Close Combat -> Blastoise"
+    ],
+    [
+     0.32000400984515404,
+     "Indeedee-F: Helping Hand | Sneasler: Close Combat -> Indeedee-F"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": true,
+   "trCredit": 0.9999563892970994,
+   "mix": [
+    [
+     85,
+     "Indeedee-F: Follow Me | Blastoise: Water Spout"
+    ],
+    [
+     15,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Sand||Indeedee-F+Blastoise||Corviknight + Sneasler": {
+   "lines": null,
+   "pop": 0.7222816212526677,
+   "worst": 0.5525917227124565,
+   "full": [
+    0.7171975866265298,
+    0.5636568229967902
+   ],
+   "reader": [
+    [
+     0.5112028949798093,
+     "Corviknight: Brave Bird -> Indeedee-F | Sneasler: Close Combat -> Indeedee-F"
+    ],
+    [
+     0.48879710502019097,
+     "Corviknight: Bulk Up | Sneasler: Close Combat -> Blastoise"
+    ]
+   ],
+   "share": 0.036,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.999761300593164,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Perish trap||Indeedee-F+Kingambit||Gengar + Incineroar": {
+   "lines": null,
+   "pop": 0.7747970197044246,
+   "worst": 0.6315439468694188,
+   "full": [
+    0.774681822803106,
+    0.6324393790328566
+   ],
+   "reader": [
+    [
+     0.7138046376469218,
+     "Gengar: Perish Song | Incineroar: Flare Blitz -> Kingambit"
+    ],
+    [
+     0.28619536235307824,
+     "Gengar: Protect | Incineroar: Throat Chop -> Indeedee-F"
+    ]
+   ],
+   "share": 0.294,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9970959217799802,
+   "mix": [
+    [
+     80,
+     "Indeedee-F: Trick Room | Kingambit: Kowtow Cleave -> Gengar"
+    ],
+    [
+     20,
+     "Indeedee-F: Trick Room | Kingambit: Low Kick -> Incineroar"
+    ]
+   ]
+  },
+  "Indeedee TR / Psychic Terrain||Indeedee-F+Blastoise||Indeedee + Sneasler": {
+   "lines": null,
+   "pop": 0.642825988562981,
+   "worst": 0.4872655772351082,
+   "full": [
+    0.6442352693705314,
+    0.48984123960025006
+   ],
+   "reader": [
+    [
+     0.6986636459686548,
+     "Indeedee: Expanding Force -> Indeedee-F | Sneasler: Rock Slide"
+    ],
+    [
+     0.3013363540313452,
+     "Indeedee: Expanding Force -> Blastoise | Sneasler: Close Combat -> Blastoise"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999940978218893,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Trick Room | Blastoise: Dark Pulse -> Indeedee"
+    ]
+   ]
+  },
+  "Indeedee TR / Psychic Terrain||Indeedee-F+Blastoise||Armarouge + Indeedee-F": {
+   "lines": null,
+   "pop": 0.7464303014849198,
+   "worst": 0.5458511260257716,
+   "full": [
+    0.7464303014849198,
+    0.5458511260257716
+   ],
+   "reader": [
+    [
+     0.6198414586125227,
+     "Armarouge: Expanding Force -> Indeedee-F | Indeedee-F: Helping Hand"
+    ],
+    [
+     0.19362606008227373,
+     "Armarouge: switch | Indeedee-F: Trick Room"
+    ],
+    [
+     0.18653248130520356,
+     "Armarouge: Expanding Force -> Indeedee-F | Indeedee-F: Trick Room"
+    ]
+   ],
+   "share": 0.044,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": true,
+   "trCredit": 0.9998345655542966,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Trick Room without Indeedee||Indeedee-F+Blastoise||Farigiraf + Kingambit": {
+   "lines": null,
+   "pop": 0.7753006981183188,
+   "worst": 0.5650811676262308,
+   "full": [
+    0.7306414651858675,
+    0.6152040164456342
+   ],
+   "reader": [
+    [
+     0.5982648518477087,
+     "Farigiraf: Psychic -> Blastoise | Kingambit: Protect"
+    ],
+    [
+     0.2094425236656985,
+     "Farigiraf: switch | Kingambit: Kowtow Cleave -> Indeedee-F"
+    ],
+    [
+     0.1258282254199986,
+     "Farigiraf: switch | Kingambit: Protect"
+    ]
+   ],
+   "share": 0.035,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9191208703639935,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Helping Hand | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Perish trap||Indeedee-F+Kingambit||Gengar + Rillaboom": {
+   "lines": null,
+   "pop": 0.7673202716146449,
+   "worst": 0.6357516388744217,
+   "full": [
+    0.753027658983613,
+    0.6528119913574009
+   ],
+   "reader": [
+    [
+     0.7623772729359793,
+     "Gengar: Protect | Rillaboom: U-turn -> Indeedee-F"
+    ],
+    [
+     0.23762272706402066,
+     "Gengar: Perish Song | Rillaboom: U-turn -> Indeedee-F"
+    ]
+   ],
+   "share": 0.108,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9970959217799802,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Trick Room | Kingambit: Kowtow Cleave -> Gengar"
+    ]
+   ]
+  },
+  "Snow||Indeedee-F+Blastoise||Arcanine-Hisui + Froslass": {
+   "lines": null,
+   "pop": 0.6627124149025377,
+   "worst": 0.610806662007687,
+   "full": [
+    0.6628401217004343,
+    0.6111227804706884
+   ],
+   "reader": [
+    [
+     0.5064339675910092,
+     "Arcanine-Hisui: Head Smash -> Blastoise | Froslass: Aurora Veil"
+    ],
+    [
+     0.4935660324089908,
+     "Arcanine-Hisui: Head Smash -> Blastoise | Froslass: Blizzard"
+    ]
+   ],
+   "share": 0.031,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999605393223057,
+   "mix": [
+    [
+     65,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ],
+    [
+     35,
+     "Indeedee-F: Trick Room | Blastoise: Dark Pulse -> Froslass"
+    ]
+   ]
+  },
+  "Trick Room without Indeedee||Indeedee-F+Kingambit||Delphox + Incineroar": {
+   "lines": null,
+   "pop": 0.723952061071423,
+   "worst": 0.6113509106461417,
+   "full": [
+    0.7251154556451422,
+    0.6156411868345509
+   ],
+   "reader": [
+    [
+     0.4579848729212726,
+     "Delphox: Nasty Plot | Incineroar: Flare Blitz -> Kingambit"
+    ],
+    [
+     0.32347155949451173,
+     "Delphox: Heat Wave | Incineroar: Flare Blitz -> Kingambit"
+    ],
+    [
+     0.2185435675842157,
+     "Delphox: Protect | Incineroar: Flare Blitz -> Kingambit"
+    ]
+   ],
+   "share": 0.03,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999518028299674,
+   "mix": [
+    [
+     60,
+     "Indeedee-F: Trick Room | Kingambit: Sucker Punch -> Delphox"
+    ],
+    [
+     40,
+     "Indeedee-F: Trick Room | Kingambit: Kowtow Cleave -> Delphox"
+    ]
+   ]
+  },
+  "Trick Room without Indeedee||Indeedee-F+Kingambit||Farigiraf + Incineroar": {
+   "lines": null,
+   "pop": 0.8116896600015524,
+   "worst": 0.5922102920001941,
+   "full": [
+    0.8120954984097748,
+    0.5920176299590233
+   ],
+   "reader": [
+    [
+     0.4702380341999754,
+     "Farigiraf: Protect | Incineroar: Flare Blitz -> Kingambit"
+    ],
+    [
+     0.31210941533125997,
+     "Farigiraf: Trick Room | Incineroar: Flare Blitz -> Kingambit"
+    ],
+    [
+     0.19827739141262002,
+     "Farigiraf: Psychic -> Indeedee-F | Incineroar: Darkest Lariat -> Indeedee-F"
+    ]
+   ],
+   "share": 0.073,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.8482836399575129,
+   "mix": [
+    [
+     85,
+     "Indeedee-F: Trick Room | Kingambit: Kowtow Cleave -> Farigiraf"
+    ],
+    [
+     15,
+     "Indeedee-F: Helping Hand | Kingambit: Low Kick -> Incineroar"
+    ]
+   ]
+  },
+  "Tailwind goodstuffs||Indeedee-F+Torkoal||Gholdengo + Salamence": {
+   "lines": null,
+   "pop": 0.7204005952950295,
+   "worst": 0.4589731009980934,
+   "full": [
+    0.7159925709375013,
+    0.46606938548679555
+   ],
+   "reader": [
+    [
+     0.3993865764851887,
+     "Gholdengo: Shadow Ball -> Torkoal | Salamence: Hyper Voice"
+    ],
+    [
+     0.3013029814933968,
+     "Gholdengo: Nasty Plot | Salamence: Hyper Voice"
+    ],
+    [
+     0.29931044202141455,
+     "Gholdengo: Make It Rain | Salamence: Hyper Voice"
+    ]
+   ],
+   "share": 0.026,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.999992032901119,
+   "mix": [
+    [
+     60,
+     "Indeedee-F: Trick Room | Torkoal: Weather Ball -> Gholdengo"
+    ],
+    [
+     40,
+     "Indeedee-F: Follow Me | Torkoal: Eruption"
+    ]
+   ]
+  },
+  "Rain||Indeedee-F+Torkoal||Pelipper + Sneasler": {
+   "lines": null,
+   "pop": 0.78087187547996,
+   "worst": 0.6648378374356106,
+   "full": [
+    0.7810790680399162,
+    0.6646411583397158
+   ],
+   "reader": [
+    [
+     0.5052598429841708,
+     "Pelipper: Weather Ball -> Torkoal | Sneasler: Close Combat -> Torkoal"
+    ],
+    [
+     0.44080028244364755,
+     "Pelipper: Weather Ball -> Indeedee-F | Sneasler: Close Combat -> Indeedee-F"
+    ]
+   ],
+   "share": 0.042,
+   "back": [
+    "Hatterene",
+    "Blastoise"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9962101022255075,
+   "mix": [
+    [
+     90,
+     "Indeedee-F: Trick Room | Torkoal: Weather Ball -> Sneasler"
+    ],
+    [
+     10,
+     "Indeedee-F: Trick Room | Torkoal: Eruption"
+    ]
+   ]
+  },
+  "Sand||Indeedee-F+Blastoise||Sneasler + Tyranitar": {
+   "lines": null,
+   "pop": 0.6549342221429392,
+   "worst": 0.4545459746046278,
+   "full": [
+    0.6541475593540673,
+    0.4559788737412748
+   ],
+   "reader": [
+    [
+     0.895609628420246,
+     "Sneasler: Close Combat -> Indeedee-F | Tyranitar: Rock Slide"
+    ]
+   ],
+   "share": 0.045,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999744157154137,
+   "mix": [
+    [
+     60,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ],
+    [
+     40,
+     "Indeedee-F: Trick Room | Blastoise: Aura Sphere -> Tyranitar"
+    ]
+   ]
+  },
+  "Indeedee TR / Psychic Terrain||Indeedee-F+Kingambit||Hatterene + Indeedee-F": {
+   "lines": null,
+   "pop": 0.6817381622649905,
+   "worst": 0.5625972376281683,
+   "full": [
+    0.6826151569626181,
+    0.5653354544602329
+   ],
+   "reader": [
+    [
+     0.706040251953864,
+     "Hatterene: Dazzling Gleam | Indeedee-F: Follow Me"
+    ],
+    [
+     0.24812369878970242,
+     "Hatterene: Dazzling Gleam | Indeedee-F: Psychic -> Indeedee-F"
+    ]
+   ],
+   "share": 0.027,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": true,
+   "trCredit": 0.06656807650226257,
+   "mix": [
+    [
+     85,
+     "Indeedee-F: Helping Hand | Kingambit: Kowtow Cleave -> Indeedee-F"
+    ],
+    [
+     15,
+     "Indeedee-F: Helping Hand | Kingambit: Iron Head -> Hatterene"
+    ]
+   ]
+  },
+  "Balance, no speed control||Indeedee-F+Blastoise||Incineroar + Raichu": {
+   "lines": null,
+   "pop": 0.6664606583053908,
+   "worst": 0.537080794237151,
+   "full": [
+    0.6681570474021801,
+    0.540552173720969
+   ],
+   "reader": [
+    [
+     0.718007430219395,
+     "Incineroar: Fake Out -> Blastoise | Raichu: switch"
+    ],
+    [
+     0.14391003148250459,
+     "Incineroar: Throat Chop -> Indeedee-F | Raichu: Zap Cannon -> Blastoise"
+    ],
+    [
+     0.11457848569253737,
+     "Incineroar: Throat Chop -> Blastoise | Raichu: Zap Cannon -> Blastoise"
+    ]
+   ],
+   "share": 0.029,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9996668838704453,
+   "mix": [
+    [
+     70,
+     "Indeedee-F: Follow Me | Blastoise: Water Spout"
+    ],
+    [
+     30,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Balance, no speed control||Indeedee-F+Blastoise||Garchomp + Rillaboom": {
+   "lines": null,
+   "pop": 0.6127345118427124,
+   "worst": 0.47297823602612854,
+   "full": [
+    0.6123108763962045,
+    0.4755461887985782
+   ],
+   "reader": [
+    [
+     0.40893821696232263,
+     "Garchomp: Draco Meteor -> Indeedee-F | Rillaboom: Wood Hammer -> Blastoise"
+    ],
+    [
+     0.36277052022513534,
+     "Garchomp: Draco Meteor -> Blastoise | Rillaboom: Wood Hammer -> Blastoise"
+    ],
+    [
+     0.22829126281254208,
+     "Garchomp: switch | Rillaboom: Wood Hammer -> Blastoise"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9998231616599621,
+   "mix": [
+    [
+     90,
+     "Indeedee-F: Trick Room | Blastoise: Fake Out -> Garchomp"
+    ],
+    [
+     10,
+     "Indeedee-F: Follow Me | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Perish trap||Indeedee-F+Kingambit||Archaludon + Politoed": {
+   "lines": null,
+   "pop": 0.5699364023144349,
+   "worst": 0.3862058844673987,
+   "full": [
+    0.5699208438057333,
+    0.38862867540857093
+   ],
+   "reader": [
+    [
+     0.7884631201038784,
+     "Archaludon: Electro Shot -> Kingambit | Politoed: Perish Song"
+    ],
+    [
+     0.21153687989612155,
+     "Archaludon: Dragon Pulse -> Kingambit | Politoed: Perish Song"
+    ]
+   ],
+   "share": 0.064,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9628309507303566,
+   "mix": [
+    [
+     90,
+     "Indeedee-F: Trick Room | Kingambit: switch -> Torkoal"
+    ],
+    [
+     10,
+     "Indeedee-F: Trick Room | Kingambit: Kowtow Cleave -> Politoed"
+    ]
+   ]
+  },
+  "Sun||Indeedee-F+Blastoise||Gardevoir + Indeedee-F": {
+   "lines": null,
+   "pop": 0.5959366214866603,
+   "worst": 0.40828630539331473,
+   "full": [
+    0.5959366214866603,
+    0.40828630539331473
+   ],
+   "reader": [
+    [
+     0.5912276213182288,
+     "Gardevoir: Expanding Force -> Indeedee-F | Indeedee-F: Psychic -> Blastoise"
+    ],
+    [
+     0.24565143832027572,
+     "Gardevoir: Hyper Voice | Indeedee-F: Trick Room"
+    ],
+    [
+     0.16312094036149544,
+     "Gardevoir: Expanding Force -> Indeedee-F | Indeedee-F: Helping Hand"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": true,
+   "trCredit": 0.9986940693248946,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Trick Room | Blastoise: Dark Pulse -> Indeedee-F"
+    ]
+   ]
+  },
+  "Snow||Indeedee-F+Blastoise||Kingambit + Sneasler": {
+   "lines": null,
+   "pop": 0.7452422899091973,
+   "worst": 0.5543740241742454,
+   "full": [
+    0.7440252977345255,
+    0.5562135294300827
+   ],
+   "reader": [
+    [
+     0.8640193635055519,
+     "Kingambit: Protect | Sneasler: Close Combat -> Blastoise"
+    ],
+    [
+     0.13598063649444814,
+     "Kingambit: Kowtow Cleave -> Indeedee-F | Sneasler: Close Combat -> Blastoise"
+    ]
+   ],
+   "share": 0.031,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9997979416121845,
+   "mix": [
+    [
+     80,
+     "Indeedee-F: Trick Room | Blastoise: Aura Sphere -> Kingambit"
+    ],
+    [
+     20,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Perish trap||Indeedee-F+Kingambit||Archaludon + Gengar": {
+   "lines": null,
+   "pop": 0.7135894908429913,
+   "worst": 0.5370930757703711,
+   "full": [
+    0.7135894908429913,
+    0.5370930757703711
+   ],
+   "reader": [
+    [
+     0.9149457914522888,
+     "Archaludon: Electro Shot -> Kingambit | Gengar: switch"
+    ]
+   ],
+   "share": 0.036,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9978477959753848,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Trick Room | Kingambit: Kowtow Cleave -> Gengar"
+    ]
+   ]
+  },
+  "Tailwind goodstuffs||Indeedee-F+Blastoise||Arcanine-Hisui + Raichu": {
+   "lines": null,
+   "pop": 0.673086167722125,
+   "worst": 0.5120824095140591,
+   "full": [
+    0.6723253373163315,
+    0.5154744426037483
+   ],
+   "reader": [
+    [
+     0.5370129899112113,
+     "Arcanine-Hisui: Protect | Raichu: Zap Cannon -> Blastoise"
+    ],
+    [
+     0.46298701008878873,
+     "Arcanine-Hisui: switch | Raichu: Fake Out -> Blastoise"
+    ]
+   ],
+   "share": 0.046,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999828502688526,
+   "mix": [
+    [
+     90,
+     "Indeedee-F: Follow Me | Blastoise: Water Spout"
+    ],
+    [
+     10,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Tailwind goodstuffs||Indeedee-F+Blastoise||Salamence + Sneasler": {
+   "lines": null,
+   "pop": 0.6336509564783642,
+   "worst": 0.5233600932079959,
+   "full": [
+    0.6335173518731195,
+    0.5236187779742512
+   ],
+   "reader": [
+    [
+     0.4438431839316017,
+     "Salamence: Hyper Voice | Sneasler: Dire Claw -> Indeedee-F"
+    ],
+    [
+     0.43386692205806715,
+     "Salamence: Draco Meteor -> Blastoise | Sneasler: Dire Claw -> Indeedee-F"
+    ],
+    [
+     0.12228989401033115,
+     "Salamence: Draco Meteor -> Blastoise | Sneasler: Close Combat -> Blastoise"
+    ]
+   ],
+   "share": 0.026,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999854830468868,
+   "mix": [
+    [
+     75,
+     "Indeedee-F: Trick Room | Blastoise: Fake Out -> Salamence"
+    ],
+    [
+     25,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Balance, no speed control||Indeedee-F+Blastoise||Gholdengo + Raichu": {
+   "lines": null,
+   "pop": 0.639498297332647,
+   "worst": 0.4914693268100691,
+   "full": [
+    0.639498297332647,
+    0.4914693268100691
+   ],
+   "reader": [
+    [
+     1.0,
+     "Gholdengo: Make It Rain | Raichu: Zap Cannon -> Blastoise"
+    ]
+   ],
+   "share": 0.062,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999735485446526,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Follow Me | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Trick Room without Indeedee||Indeedee-F+Blastoise||Farigiraf + Raichu": {
+   "lines": null,
+   "pop": 0.640785444900757,
+   "worst": 0.5636301145949182,
+   "full": [
+    0.640785444900757,
+    0.5636301145949182
+   ],
+   "reader": [
+    [
+     0.666373746252565,
+     "Farigiraf: Thunderbolt -> Indeedee-F | Raichu: Zap Cannon -> Indeedee-F"
+    ],
+    [
+     0.333626253747435,
+     "Farigiraf: Thunderbolt -> Blastoise | Raichu: Zap Cannon -> Blastoise"
+    ]
+   ],
+   "share": 0.02,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9989306678260365,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Follow Me | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Rain||Indeedee-F+Torkoal||Dragonite + Gholdengo": {
+   "lines": null,
+   "pop": 0.6429159876980138,
+   "worst": 0.5221666769024036,
+   "full": [
+    0.6427157386810297,
+    0.5237728070090377
+   ],
+   "reader": [
+    [
+     0.6828013402054446,
+     "Dragonite: Heat Wave | Gholdengo: Make It Rain"
+    ],
+    [
+     0.3171986597945554,
+     "Dragonite: Heat Wave | Gholdengo: Power Gem -> Torkoal"
+    ]
+   ],
+   "share": 0.02,
+   "back": [
+    "Hatterene",
+    "Blastoise"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9992587877187472,
+   "mix": [
+    [
+     70,
+     "Indeedee-F: Trick Room | Torkoal: Protect"
+    ],
+    [
+     30,
+     "Indeedee-F: Trick Room | Torkoal: Weather Ball -> Gholdengo"
+    ]
+   ]
+  },
+  "Trick Room without Indeedee||Indeedee-F+Blastoise||Farigiraf + Incineroar": {
+   "lines": null,
+   "pop": 0.8004079780669018,
+   "worst": 0.49626882708485637,
+   "full": [
+    0.8004079780669018,
+    0.49626882708485637
+   ],
+   "reader": [
+    [
+     0.9625988922333442,
+     "Farigiraf: switch | Incineroar: Fake Out -> Blastoise"
+    ]
+   ],
+   "share": 0.073,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.365598772186825,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Helping Hand | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Rain||Indeedee-F+Torkoal||Pelipper + Swampert": {
+   "lines": null,
+   "pop": 0.6020210678664384,
+   "worst": 0.4897749908976744,
+   "full": [
+    0.6039741195281111,
+    0.4897824531351979
+   ],
+   "reader": [
+    [
+     0.6910136645825741,
+     "Pelipper: Weather Ball -> Indeedee-F | Swampert: Earthquake"
+    ],
+    [
+     0.30898633541742593,
+     "Pelipper: Weather Ball -> Indeedee-F | Swampert: High Horsepower -> Indeedee-F"
+    ]
+   ],
+   "share": 0.068,
+   "back": [
+    "Hatterene",
+    "Blastoise"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9800963962661914,
+   "mix": [
+    [
+     75,
+     "Indeedee-F: Trick Room | Torkoal: Protect"
+    ],
+    [
+     25,
+     "Indeedee-F: Trick Room | Torkoal: Eruption"
+    ]
+   ]
+  },
+  "Trick Room without Indeedee||Indeedee-F+Kingambit||Farigiraf + Raichu": {
+   "lines": null,
+   "pop": 0.5904131920051074,
+   "worst": 0.4913609742301084,
+   "full": [
+    0.5904131920051074,
+    0.4913609742301084
+   ],
+   "reader": [
+    [
+     0.5944932080774048,
+     "Farigiraf: Helping Hand | Raichu: Zap Cannon -> Kingambit"
+    ],
+    [
+     0.4055067919225954,
+     "Farigiraf: Helping Hand | Raichu: Zap Cannon -> Indeedee-F"
+    ]
+   ],
+   "share": 0.02,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9998109717351672,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Follow Me | Kingambit: Kowtow Cleave -> Raichu"
+    ]
+   ]
+  },
+  "Snow||Indeedee-F+Blastoise||Froslass + Sneasler": {
+   "lines": null,
+   "pop": 0.6682948400278785,
+   "worst": 0.5464567817939449,
+   "full": [
+    0.6689272663307243,
+    0.5499537129964069
+   ],
+   "reader": [
+    [
+     0.7146401836601164,
+     "Froslass: Aurora Veil | Sneasler: Close Combat -> Blastoise"
+    ],
+    [
+     0.2853598163398836,
+     "Froslass: Protect | Sneasler: Close Combat -> Indeedee-F"
+    ]
+   ],
+   "share": 0.088,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9997979416121845,
+   "mix": [
+    [
+     85,
+     "Indeedee-F: Trick Room | Blastoise: Dark Pulse -> Froslass"
+    ],
+    [
+     15,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Sun||Indeedee-F+Blastoise||Farigiraf + Incineroar": {
+   "lines": null,
+   "pop": 0.8596806778257055,
+   "worst": 0.6543651258206271,
+   "full": [
+    0.8596806778257055,
+    0.6543651258206271
+   ],
+   "reader": [
+    [
+     0.8013417413871065,
+     "Farigiraf: Protect | Incineroar: switch"
+    ],
+    [
+     0.19865825861289357,
+     "Farigiraf: Trick Room | Incineroar: switch"
+    ]
+   ],
+   "share": 0.038,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.5936821390883533,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Helping Hand | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Indeedee TR / Psychic Terrain||Indeedee-F+Kingambit||Gardevoir + Indeedee-F": {
+   "lines": null,
+   "pop": 0.6566314273930456,
+   "worst": 0.5697491577182163,
+   "full": [
+    0.6562972681070851,
+    0.5719355592064597
+   ],
+   "reader": [
+    [
+     0.4520233198234874,
+     "Gardevoir: Hyper Voice | Indeedee-F: Follow Me"
+    ],
+    [
+     0.4484060417553979,
+     "Gardevoir: Hyper Voice | Indeedee-F: Helping Hand"
+    ]
+   ],
+   "share": 0.067,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": true,
+   "trCredit": 0.9999592018254402,
+   "mix": [
+    [
+     75,
+     "Indeedee-F: Trick Room | Kingambit: Iron Head -> Gardevoir"
+    ],
+    [
+     25,
+     "Indeedee-F: Trick Room | Kingambit: Kowtow Cleave -> Indeedee-F"
+    ]
+   ]
+  },
+  "Tailwind goodstuffs||Indeedee-F+Blastoise||Gholdengo + Raichu": {
+   "lines": null,
+   "pop": 0.6386202493287316,
+   "worst": 0.4966213220124505,
+   "full": [
+    0.6381719095833142,
+    0.5015354886193616
+   ],
+   "reader": [
+    [
+     0.5253138729894273,
+     "Gholdengo: switch | Raichu: Fake Out -> Blastoise"
+    ],
+    [
+     0.47468612701057267,
+     "Gholdengo: Make It Rain | Raichu: Zap Cannon -> Blastoise"
+    ]
+   ],
+   "share": 0.096,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999828502688526,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Follow Me | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Balance, no speed control||Indeedee-F+Torkoal||Garchomp + Rillaboom": {
+   "lines": null,
+   "pop": 0.7186619346714804,
+   "worst": 0.5793637538620101,
+   "full": [
+    0.7186619346714804,
+    0.5793637538620101
+   ],
+   "reader": [
+    [
+     0.5807712667536011,
+     "Garchomp: Draco Meteor -> Torkoal | Rillaboom: switch"
+    ],
+    [
+     0.28416297651547884,
+     "Garchomp: Draco Meteor -> Indeedee-F | Rillaboom: switch"
+    ],
+    [
+     0.13506575673092003,
+     "Garchomp: Flamethrower -> Indeedee-F | Rillaboom: Wood Hammer -> Indeedee-F"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999029451894041,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Follow Me | Torkoal: Eruption"
+    ]
+   ]
+  },
+  "Indeedee TR / Psychic Terrain||Indeedee-F+Blastoise||Farigiraf + Incineroar": {
+   "lines": null,
+   "pop": 0.7550793213680721,
+   "worst": 0.7426905453026859,
+   "full": [
+    0.7550793213680721,
+    0.7426905453026859
+   ],
+   "reader": [
+    [
+     1.0,
+     "Farigiraf: Protect | Incineroar: Flare Blitz -> Indeedee-F"
+    ]
+   ],
+   "share": 0.037,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": -0.7080852971123909,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Helping Hand | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Trick Room without Indeedee||Indeedee-F+Kingambit||Farigiraf + Kingambit": {
+   "lines": null,
+   "pop": 0.676365014184306,
+   "worst": 0.5922232962991848,
+   "full": [
+    0.6759032165646209,
+    0.5941360966933966
+   ],
+   "reader": [
+    [
+     0.41041973768656903,
+     "Farigiraf: Psychic -> Indeedee-F | Kingambit: Protect"
+    ],
+    [
+     0.35514113131287417,
+     "Farigiraf: Helping Hand | Kingambit: Low Kick -> Kingambit"
+    ],
+    [
+     0.1717544413870167,
+     "Farigiraf: Trick Room | Kingambit: switch"
+    ]
+   ],
+   "share": 0.035,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.985216917311436,
+   "mix": [
+    [
+     55,
+     "Indeedee-F: Trick Room | Kingambit: Low Kick -> Kingambit"
+    ],
+    [
+     30,
+     "Indeedee-F: Follow Me | Kingambit: Low Kick -> Kingambit"
+    ],
+    [
+     15,
+     "Indeedee-F: Helping Hand | Kingambit: Kowtow Cleave -> Farigiraf"
+    ]
+   ]
+  },
+  "Perish trap||Indeedee-F+Kingambit||Gengar + Vivillon": {
+   "lines": null,
+   "pop": 0.5899479324919501,
+   "worst": 0.4613806024254299,
+   "full": [
+    0.5895666568581456,
+    0.4744825587958371
+   ],
+   "reader": [
+    [
+     0.5562126168527572,
+     "Gengar: Perish Song | Vivillon: Sleep Powder -> Kingambit"
+    ],
+    [
+     0.42756575676015585,
+     "Gengar: Protect | Vivillon: Sleep Powder -> Indeedee-F"
+    ]
+   ],
+   "share": 0.04,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9996668838704453,
+   "mix": [
+    [
+     50,
+     "Indeedee-F: Follow Me | Kingambit: Kowtow Cleave -> Gengar"
+    ],
+    [
+     50,
+     "Indeedee-F: Trick Room | Kingambit: Kowtow Cleave -> Vivillon"
+    ]
+   ]
+  },
+  "Rain||Indeedee-F+Torkoal||Archaludon + Pelipper": {
+   "lines": null,
+   "pop": 0.7324488242771573,
+   "worst": 0.6271207931014887,
+   "full": [
+    0.731597254281419,
+    0.6285813692641619
+   ],
+   "reader": [
+    [
+     0.5061668474265051,
+     "Archaludon: Dragon Pulse -> Torkoal | Pelipper: Hurricane -> Torkoal"
+    ],
+    [
+     0.3257376291647566,
+     "Archaludon: Protect | Pelipper: Weather Ball -> Indeedee-F"
+    ],
+    [
+     0.16809552340873823,
+     "Archaludon: Protect | Pelipper: Tailwind"
+    ]
+   ],
+   "share": 0.083,
+   "back": [
+    "Hatterene",
+    "Blastoise"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9615952936543816,
+   "mix": [
+    [
+     55,
+     "Indeedee-F: Trick Room | Torkoal: Eruption"
+    ],
+    [
+     45,
+     "Indeedee-F: Follow Me | Torkoal: Eruption"
+    ]
+   ]
+  },
+  "Sand||Indeedee-F+Blastoise||Salamence + Sneasler": {
+   "lines": null,
+   "pop": 0.6108248190862688,
+   "worst": 0.5261119504410429,
+   "full": [
+    0.6108669692922672,
+    0.5260934919386195
+   ],
+   "reader": [
+    [
+     0.45655900420310086,
+     "Salamence: Draco Meteor -> Blastoise | Sneasler: Dire Claw -> Indeedee-F"
+    ],
+    [
+     0.28554607586907244,
+     "Salamence: Hyper Voice | Sneasler: Close Combat -> Blastoise"
+    ],
+    [
+     0.2578949199278267,
+     "Salamence: Protect | Sneasler: Close Combat -> Indeedee-F"
+    ]
+   ],
+   "share": 0.038,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999936909322918,
+   "mix": [
+    [
+     80,
+     "Indeedee-F: Trick Room | Blastoise: Fake Out -> Salamence"
+    ],
+    [
+     20,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Sun||Indeedee-F+Blastoise||Charizard + Garchomp": {
+   "lines": null,
+   "pop": 0.6098539520340341,
+   "worst": 0.5420097091539618,
+   "full": [
+    0.6099310659680099,
+    0.5431966761436832
+   ],
+   "reader": [
+    [
+     0.6201877605876598,
+     "Charizard: Heat Wave | Garchomp: Earthquake"
+    ],
+    [
+     0.37981223941234005,
+     "Charizard: Protect | Garchomp: Earthquake"
+    ]
+   ],
+   "share": 0.035,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9977749279342794,
+   "mix": [
+    [
+     85,
+     "Indeedee-F: Trick Room | Blastoise: Fake Out -> Charizard"
+    ],
+    [
+     15,
+     "Indeedee-F: Trick Room | Blastoise: Aura Sphere -> Garchomp"
+    ]
+   ]
+  },
+  "Perish trap||Indeedee-F+Kingambit||Archaludon + Incineroar": {
+   "lines": null,
+   "pop": 0.7254326708985895,
+   "worst": 0.6226166782304117,
+   "full": [
+    0.7250918590149773,
+    0.6251120664902697
+   ],
+   "reader": [
+    [
+     0.6122970009270542,
+     "Archaludon: Electro Shot -> Kingambit | Incineroar: switch"
+    ],
+    [
+     0.3877029990729458,
+     "Archaludon: Flash Cannon -> Indeedee-F | Incineroar: Darkest Lariat -> Indeedee-F"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9628309507303566,
+   "mix": [
+    [
+     80,
+     "Indeedee-F: Trick Room | Kingambit: Low Kick -> Incineroar"
+    ],
+    [
+     20,
+     "Indeedee-F: Helping Hand | Kingambit: Kowtow Cleave -> Incineroar"
+    ]
+   ]
+  },
+  "Snow||Indeedee-F+Blastoise||Arcanine-Hisui + Raichu": {
+   "lines": null,
+   "pop": 0.6602451904213019,
+   "worst": 0.5122937221339561,
+   "full": [
+    0.6603040459137163,
+    0.5125925137399804
+   ],
+   "reader": [
+    [
+     0.5498496842805036,
+     "Arcanine-Hisui: Protect | Raichu: Zap Cannon -> Blastoise"
+    ],
+    [
+     0.4501503157194964,
+     "Arcanine-Hisui: switch | Raichu: Fake Out -> Blastoise"
+    ]
+   ],
+   "share": 0.034,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.999992032901119,
+   "mix": [
+    [
+     90,
+     "Indeedee-F: Follow Me | Blastoise: Water Spout"
+    ],
+    [
+     10,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Sand||Indeedee-F+Blastoise||Indeedee + Sneasler": {
+   "lines": null,
+   "pop": 0.5592776293246318,
+   "worst": 0.444906749434768,
+   "full": [
+    0.5468740789543439,
+    0.4664691662353509
+   ],
+   "reader": [
+    [
+     0.4988926822706857,
+     "Indeedee: Expanding Force -> Indeedee-F | Sneasler: Close Combat -> Blastoise"
+    ],
+    [
+     0.34575229267925617,
+     "Indeedee: Expanding Force -> Indeedee-F | Sneasler: Dire Claw -> Blastoise"
+    ],
+    [
+     0.11430339087085399,
+     "Indeedee: switch | Sneasler: Close Combat -> Indeedee-F"
+    ]
+   ],
+   "share": 0.048,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999744157154137,
+   "mix": [
+    [
+     60,
+     "Indeedee-F: Follow Me | Blastoise: Dark Pulse -> Indeedee"
+    ],
+    [
+     40,
+     "Indeedee-F: Trick Room | Blastoise: Dark Pulse -> Indeedee"
+    ]
+   ]
+  },
+  "Sand||Indeedee-F+Blastoise||Excadrill + Tyranitar": {
+   "lines": null,
+   "pop": 0.7086916521144888,
+   "worst": 0.5255904438520284,
+   "full": [
+    0.6719154613632934,
+    0.5644576848870058
+   ],
+   "reader": [
+    [
+     0.5791902401164941,
+     "Excadrill: High Horsepower -> Blastoise | Tyranitar: Rock Slide"
+    ],
+    [
+     0.29880443177086596,
+     "Excadrill: High Horsepower -> Indeedee-F | Tyranitar: Knock Off -> Indeedee-F"
+    ],
+    [
+     0.12200532811263987,
+     "Excadrill: Rock Slide | Tyranitar: Knock Off -> Indeedee-F"
+    ]
+   ],
+   "share": 0.157,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999630842134086,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Tailwind goodstuffs||Indeedee-F+Torkoal||Arcanine-Hisui + Raichu": {
+   "lines": null,
+   "pop": 0.5907157500794529,
+   "worst": 0.44929902945033584,
+   "full": [
+    0.5822551076235447,
+    0.46839279286733415
+   ],
+   "reader": [
+    [
+     0.45519056503902044,
+     "Arcanine-Hisui: Flare Blitz -> Indeedee-F | Raichu: Protect"
+    ],
+    [
+     0.41024971304521635,
+     "Arcanine-Hisui: Head Smash -> Torkoal | Raichu: Zap Cannon -> Indeedee-F"
+    ]
+   ],
+   "share": 0.046,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999905879915765,
+   "mix": [
+    [
+     75,
+     "Indeedee-F: Follow Me | Torkoal: Eruption"
+    ],
+    [
+     25,
+     "Indeedee-F: Trick Room | Torkoal: Earth Power -> Arcanine-Hisui"
+    ]
+   ]
+  },
+  "Balance, no speed control||Indeedee-F+Torkoal||Garchomp + Raichu": {
+   "lines": null,
+   "pop": 0.6099949464724365,
+   "worst": 0.4572013156100677,
+   "full": [
+    0.6115034986041742,
+    0.4569195203975306
+   ],
+   "reader": [
+    [
+     0.6172816716663667,
+     "Garchomp: Rock Slide | Raichu: Zap Cannon -> Indeedee-F"
+    ],
+    [
+     0.34646667640181567,
+     "Garchomp: Rock Slide | Raichu: Zap Cannon -> Torkoal"
+    ]
+   ],
+   "share": 0.035,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999983369439447,
+   "mix": [
+    [
+     45,
+     "Indeedee-F: Follow Me | Torkoal: Eruption"
+    ],
+    [
+     30,
+     "Indeedee-F: Trick Room | Torkoal: Weather Ball -> Raichu"
+    ],
+    [
+     25,
+     "Indeedee-F: Trick Room | Torkoal: Protect"
+    ]
+   ]
+  },
+  "Indeedee TR / Psychic Terrain||Indeedee-F+Kingambit||Farigiraf + Incineroar": {
+   "lines": null,
+   "pop": 0.7667723121977755,
+   "worst": 0.6596346270840256,
+   "full": [
+    0.7667749130302396,
+    0.6596690527791752
+   ],
+   "reader": [
+    [
+     0.6743682598099727,
+     "Farigiraf: Trick Room | Incineroar: Flare Blitz -> Kingambit"
+    ],
+    [
+     0.26483167378507866,
+     "Farigiraf: Protect | Incineroar: Throat Chop -> Indeedee-F"
+    ]
+   ],
+   "share": 0.037,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": -0.01666512362823861,
+   "mix": [
+    [
+     90,
+     "Indeedee-F: Helping Hand | Kingambit: Low Kick -> Incineroar"
+    ],
+    [
+     10,
+     "Indeedee-F: Follow Me | Kingambit: Kowtow Cleave -> Farigiraf"
+    ]
+   ]
+  },
+  "Tailwind goodstuffs||Indeedee-F+Torkoal||Gholdengo + Rillaboom": {
+   "lines": null,
+   "pop": 0.8021466960217976,
+   "worst": 0.5951634662540441,
+   "full": [
+    0.8020474289938923,
+    0.6020494848634732
+   ],
+   "reader": [
+    [
+     0.7388440302667979,
+     "Gholdengo: Protect | Rillaboom: U-turn -> Indeedee-F"
+    ],
+    [
+     0.2611559697332021,
+     "Gholdengo: Shadow Ball -> Torkoal | Rillaboom: High Horsepower -> Torkoal"
+    ]
+   ],
+   "share": 0.032,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999968670047202,
+   "mix": [
+    [
+     60,
+     "Indeedee-F: Trick Room | Torkoal: Eruption"
+    ],
+    [
+     40,
+     "Indeedee-F: Follow Me | Torkoal: Eruption"
+    ]
+   ]
+  },
+  "Balance, no speed control||Indeedee-F+Blastoise||Garchomp + Raichu": {
+   "lines": null,
+   "pop": 0.6701130783330553,
+   "worst": 0.478168972341829,
+   "full": [
+    0.6669801548245786,
+    0.4896261236332001
+   ],
+   "reader": [
+    [
+     0.5409705236536713,
+     "Garchomp: Rock Slide | Raichu: Zap Cannon -> Blastoise"
+    ],
+    [
+     0.45902947634632874,
+     "Garchomp: Earthquake | Raichu: Protect"
+    ]
+   ],
+   "share": 0.035,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.999996969716367,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Follow Me | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Trick Room without Indeedee||Indeedee-F+Kingambit||Farigiraf + Rillaboom": {
+   "lines": null,
+   "pop": 0.6782876348898382,
+   "worst": 0.49617085076413314,
+   "full": [
+    0.6714495001404291,
+    0.5078053967075522
+   ],
+   "reader": [
+    [
+     0.5321580253679804,
+     "Farigiraf: Thunderbolt -> Indeedee-F | Rillaboom: Wood Hammer -> Indeedee-F"
+    ],
+    [
+     0.2722093257153062,
+     "Farigiraf: Protect | Rillaboom: Wood Hammer -> Indeedee-F"
+    ],
+    [
+     0.1956326489167134,
+     "Farigiraf: Trick Room | Rillaboom: Wood Hammer -> Indeedee-F"
+    ]
+   ],
+   "share": 0.03,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.8889014796847765,
+   "mix": [
+    [
+     85,
+     "Indeedee-F: Helping Hand | Kingambit: Kowtow Cleave -> Rillaboom"
+    ],
+    [
+     15,
+     "Indeedee-F: Helping Hand | Kingambit: Kowtow Cleave -> Farigiraf"
+    ]
+   ]
+  },
+  "Balance, no speed control||Indeedee-F+Blastoise||Floette-Eternal + Incineroar": {
+   "lines": null,
+   "pop": 0.7490978335320849,
+   "worst": 0.457984895298671,
+   "full": [
+    0.7490978335320849,
+    0.457984895298671
+   ],
+   "reader": [
+    [
+     0.5327904407742733,
+     "Floette-Eternal: Moonblast -> Blastoise | Incineroar: Darkest Lariat -> Indeedee-F"
+    ],
+    [
+     0.22946830838490256,
+     "Floette-Eternal: switch | Incineroar: Fake Out -> Blastoise"
+    ],
+    [
+     0.1635801029100562,
+     "Floette-Eternal: Dazzling Gleam | Incineroar: Darkest Lariat -> Indeedee-F"
+    ]
+   ],
+   "share": 0.04,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9995351296220404,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Trick Room without Indeedee||Indeedee-F+Kingambit||Delphox + Sneasler": {
+   "lines": null,
+   "pop": 0.7186654323438599,
+   "worst": 0.4565967373200581,
+   "full": [
+    0.7223623654295143,
+    0.4565967373200581
+   ],
+   "reader": [
+    [
+     0.41513858320375585,
+     "Delphox: Nasty Plot | Sneasler: Close Combat -> Kingambit"
+    ],
+    [
+     0.3267364566521424,
+     "Delphox: Heat Wave | Sneasler: Close Combat -> Kingambit"
+    ],
+    [
+     0.15800029029051632,
+     "Delphox: Protect | Sneasler: Close Combat -> Kingambit"
+    ]
+   ],
+   "share": 0.022,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999518028299674,
+   "mix": [
+    [
+     65,
+     "Indeedee-F: Trick Room | Kingambit: Kowtow Cleave -> Delphox"
+    ],
+    [
+     35,
+     "Indeedee-F: Trick Room | Kingambit: Sucker Punch -> Delphox"
+    ]
+   ]
+  },
+  "Trick Room without Indeedee||Indeedee-F+Blastoise||Delphox + Sneasler": {
+   "lines": null,
+   "pop": 0.7983293005891645,
+   "worst": 0.6086018728217734,
+   "full": [
+    0.7992131246745825,
+    0.6104336545485505
+   ],
+   "reader": [
+    [
+     0.7497581333606242,
+     "Delphox: Protect | Sneasler: Close Combat -> Blastoise"
+    ],
+    [
+     0.2502418666393758,
+     "Delphox: Psychic -> Blastoise | Sneasler: Close Combat -> Blastoise"
+    ]
+   ],
+   "share": 0.022,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9997272593458411,
+   "mix": [
+    [
+     60,
+     "Indeedee-F: Follow Me | Blastoise: Water Spout"
+    ],
+    [
+     40,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Sand||Indeedee-F+Blastoise||Excadrill + Salamence": {
+   "lines": null,
+   "pop": 0.7118874330966419,
+   "worst": 0.5635621657876332,
+   "full": [
+    0.7067271506619773,
+    0.5785620714714735
+   ],
+   "reader": [
+    [
+     0.47548750845827625,
+     "Excadrill: Rock Slide | Salamence: Hyper Voice"
+    ],
+    [
+     0.38711406682664284,
+     "Excadrill: High Horsepower -> Blastoise | Salamence: Hyper Voice"
+    ],
+    [
+     0.13739842471508093,
+     "Excadrill: Protect | Salamence: Hyper Voice"
+    ]
+   ],
+   "share": 0.029,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999854830468868,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Indeedee TR / Psychic Terrain||Indeedee-F+Kingambit||Indeedee + Sneasler": {
+   "lines": null,
+   "pop": 0.6361204681146704,
+   "worst": 0.4917199343521972,
+   "full": [
+    0.63782033631222,
+    0.4918288241214008
+   ],
+   "reader": [
+    [
+     0.4726762887803695,
+     "Indeedee: switch | Sneasler: Close Combat -> Indeedee-F"
+    ],
+    [
+     0.3658548514142947,
+     "Indeedee: Mystical Fire -> Kingambit | Sneasler: Close Combat -> Kingambit"
+    ],
+    [
+     0.13297893450163406,
+     "Indeedee: switch | Sneasler: Close Combat -> Kingambit"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999989571153761,
+   "mix": [
+    [
+     55,
+     "Indeedee-F: Follow Me | Kingambit: Kowtow Cleave -> Indeedee"
+    ],
+    [
+     45,
+     "Indeedee-F: Trick Room | Kingambit: Kowtow Cleave -> Indeedee"
+    ]
+   ]
+  },
+  "Balance, no speed control||Indeedee-F+Torkoal||Gholdengo + Raichu": {
+   "lines": null,
+   "pop": 0.7555894605311002,
+   "worst": 0.5217719872902319,
+   "full": [
+    0.7539623936412271,
+    0.5249329082817588
+   ],
+   "reader": [
+    [
+     0.37261241354017094,
+     "Gholdengo: Protect | Raichu: Zap Cannon -> Indeedee-F"
+    ],
+    [
+     0.2989581548124247,
+     "Gholdengo: Make It Rain | Raichu: Zap Cannon -> Torkoal"
+    ],
+    [
+     0.2484387700530931,
+     "Gholdengo: switch | Raichu: Fake Out -> Torkoal"
+    ]
+   ],
+   "share": 0.062,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999854830468868,
+   "mix": [
+    [
+     85,
+     "Indeedee-F: Follow Me | Torkoal: Eruption"
+    ],
+    [
+     15,
+     "Indeedee-F: Trick Room | Torkoal: Eruption"
+    ]
+   ]
+  },
+  "Indeedee TR / Psychic Terrain||Indeedee-F+Kingambit||Armarouge + Indeedee-F": {
+   "lines": null,
+   "pop": 0.6614888513252645,
+   "worst": 0.39552086471468534,
+   "full": [
+    0.6616439229048136,
+    0.3985280187939046
+   ],
+   "reader": [
+    [
+     0.6011526602148545,
+     "Armarouge: Heat Wave | Indeedee-F: Helping Hand"
+    ],
+    [
+     0.2582613173180558,
+     "Armarouge: Heat Wave | Indeedee-F: Trick Room"
+    ],
+    [
+     0.14058602246708973,
+     "Armarouge: Armor Cannon -> Kingambit | Indeedee-F: Trick Room"
+    ]
+   ],
+   "share": 0.044,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": true,
+   "trCredit": 0.9999707666614718,
+   "mix": [
+    [
+     70,
+     "Indeedee-F: Trick Room | Kingambit: Kowtow Cleave -> Armarouge"
+    ],
+    [
+     30,
+     "Indeedee-F: Follow Me | Kingambit: Kowtow Cleave -> Armarouge"
+    ]
+   ]
+  },
+  "Tailwind goodstuffs||Indeedee-F+Blastoise||Gholdengo + Salamence": {
+   "lines": null,
+   "pop": 0.7443552713649187,
+   "worst": 0.5390044367169473,
+   "full": [
+    0.7443552713649187,
+    0.5390044367169473
+   ],
+   "reader": [
+    [
+     0.6264356775089721,
+     "Gholdengo: Make It Rain | Salamence: Hyper Voice"
+    ],
+    [
+     0.37356432249102806,
+     "Gholdengo: Protect | Salamence: Hyper Voice"
+    ]
+   ],
+   "share": 0.026,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999854830468868,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Trick Room | Blastoise: Dark Pulse -> Gholdengo"
+    ]
+   ]
+  },
+  "Snow||Indeedee-F+Blastoise||Froslass + Kingambit": {
+   "lines": null,
+   "pop": 0.6604209842949282,
+   "worst": 0.5701196079635814,
+   "full": [
+    0.6623379610282423,
+    0.5777645992159729
+   ],
+   "reader": [
+    [
+     0.746993498749893,
+     "Froslass: Aurora Veil | Kingambit: Protect"
+    ],
+    [
+     0.2530065012501071,
+     "Froslass: Aurora Veil | Kingambit: Kowtow Cleave -> Indeedee-F"
+    ]
+   ],
+   "share": 0.053,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9997979416121845,
+   "mix": [
+    [
+     60,
+     "Indeedee-F: Trick Room | Blastoise: Aura Sphere -> Kingambit"
+    ],
+    [
+     40,
+     "Indeedee-F: Trick Room | Blastoise: Dark Pulse -> Froslass"
+    ]
+   ]
+  },
+  "Sun||Indeedee-F+Blastoise||Aerodactyl + Kingambit": {
+   "lines": null,
+   "pop": 0.7335080494236659,
+   "worst": 0.4916284189426763,
+   "full": [
+    0.7335080494236659,
+    0.4916284189426763
+   ],
+   "reader": [
+    [
+     0.6734819323384865,
+     "Aerodactyl: Rock Slide | Kingambit: Kowtow Cleave -> Indeedee-F"
+    ],
+    [
+     0.2876148844094553,
+     "Aerodactyl: Dual Wingbeat -> Blastoise | Kingambit: Kowtow Cleave -> Indeedee-F"
+    ]
+   ],
+   "share": 0.033,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999946594868977,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Balance, no speed control||Indeedee-F+Torkoal||Arcanine-Hisui + Raichu": {
+   "lines": null,
+   "pop": 0.5903802887582664,
+   "worst": 0.4492988361215507,
+   "full": [
+    0.5769151363822381,
+    0.4693201126977143
+   ],
+   "reader": [
+    [
+     0.4935782878191115,
+     "Arcanine-Hisui: Flare Blitz -> Indeedee-F | Raichu: Protect"
+    ],
+    [
+     0.47844417817461193,
+     "Arcanine-Hisui: Head Smash -> Torkoal | Raichu: Zap Cannon -> Indeedee-F"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999854830468868,
+   "mix": [
+    [
+     75,
+     "Indeedee-F: Follow Me | Torkoal: Eruption"
+    ],
+    [
+     25,
+     "Indeedee-F: Trick Room | Torkoal: Earth Power -> Arcanine-Hisui"
+    ]
+   ]
+  },
+  "Indeedee TR / Psychic Terrain||Indeedee-F+Kingambit||Indeedee-F + Sneasler": {
+   "lines": null,
+   "pop": 0.5676409380816524,
+   "worst": 0.4760695558613391,
+   "full": [
+    0.5678884980877297,
+    0.47730873955131037
+   ],
+   "reader": [
+    [
+     0.5087074739041404,
+     "Indeedee-F: Helping Hand | Sneasler: Close Combat -> Indeedee-F"
+    ],
+    [
+     0.3336583435117259,
+     "Indeedee-F: Helping Hand | Sneasler: Close Combat -> Kingambit"
+    ],
+    [
+     0.1576341825841337,
+     "Indeedee-F: Mystical Fire -> Kingambit | Sneasler: Close Combat -> Kingambit"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": true,
+   "trCredit": 0.9999922940926819,
+   "mix": [
+    [
+     40,
+     "Indeedee-F: Follow Me | Kingambit: Kowtow Cleave -> Indeedee-F"
+    ],
+    [
+     35,
+     "Indeedee-F: Trick Room | Kingambit: Kowtow Cleave -> Indeedee-F"
+    ],
+    [
+     25,
+     "Indeedee-F: Trick Room | Kingambit: switch -> Hatterene"
+    ]
+   ]
+  },
+  "Sun||Indeedee-F+Blastoise||Charizard + Farigiraf": {
+   "lines": null,
+   "pop": 0.6467463406986501,
+   "worst": 0.5141929773925014,
+   "full": [
+    0.6303263329007895,
+    0.536049627633393
+   ],
+   "reader": [
+    [
+     0.6088814559835973,
+     "Charizard: Heat Wave | Farigiraf: Thunderbolt -> Blastoise"
+    ],
+    [
+     0.263481020291494,
+     "Charizard: Heat Wave | Farigiraf: switch"
+    ],
+    [
+     0.12763752372490864,
+     "Charizard: Heat Wave | Farigiraf: Helping Hand"
+    ]
+   ],
+   "share": 0.026,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9640275800758169,
+   "mix": [
+    [
+     60,
+     "Indeedee-F: Helping Hand | Blastoise: Water Spout"
+    ],
+    [
+     40,
+     "Indeedee-F: Helping Hand | Blastoise: Dark Pulse -> Farigiraf"
+    ]
+   ]
+  },
+  "Balance, no speed control||Indeedee-F+Torkoal||Incineroar + Raichu": {
+   "lines": null,
+   "pop": 0.625227963437694,
+   "worst": 0.48609554113902564,
+   "full": [
+    0.6281957489781456,
+    0.4953134394031692
+   ],
+   "reader": [
+    [
+     0.46068034377290495,
+     "Incineroar: Flare Blitz -> Indeedee-F | Raichu: Protect"
+    ],
+    [
+     0.277970113876234,
+     "Incineroar: Throat Chop -> Indeedee-F | Raichu: Zap Cannon -> Torkoal"
+    ],
+    [
+     0.19088573256310307,
+     "Incineroar: Throat Chop -> Indeedee-F | Raichu: Zap Cannon -> Indeedee-F"
+    ]
+   ],
+   "share": 0.029,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9998171682522957,
+   "mix": [
+    [
+     55,
+     "Indeedee-F: Follow Me | Torkoal: Eruption"
+    ],
+    [
+     25,
+     "Indeedee-F: Trick Room | Torkoal: Protect"
+    ],
+    [
+     20,
+     "Indeedee-F: Trick Room | Torkoal: Eruption"
+    ]
+   ]
+  },
+  "Indeedee TR / Psychic Terrain||Indeedee-F+Blastoise||Hatterene + Indeedee-F": {
+   "lines": null,
+   "pop": 0.7650548711681374,
+   "worst": 0.45243103089334474,
+   "full": [
+    0.7650548711681374,
+    0.45243103089334474
+   ],
+   "reader": [
+    [
+     0.8398734171580109,
+     "Hatterene: Expanding Force -> Indeedee-F | Indeedee-F: Psychic -> Blastoise"
+    ],
+    [
+     0.16012658284198916,
+     "Hatterene: Expanding Force -> Indeedee-F | Indeedee-F: Trick Room"
+    ]
+   ],
+   "share": 0.027,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": true,
+   "trCredit": -0.6640367702678491,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Helping Hand | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Rain||Indeedee-F+Torkoal||Archaludon + Grimmsnarl": {
+   "lines": null,
+   "pop": 0.5545195842062913,
+   "worst": 0.4885139419169532,
+   "full": [
+    0.5518050374369112,
+    0.49174005070721727
+   ],
+   "reader": [
+    [
+     0.6894725418838202,
+     "Archaludon: Dragon Pulse -> Torkoal | Grimmsnarl: Light Screen"
+    ],
+    [
+     0.23129312676224523,
+     "Archaludon: Snarl | Grimmsnarl: Light Screen"
+    ]
+   ],
+   "share": 0.032,
+   "back": [
+    "Hatterene",
+    "Blastoise"
+   ],
+   "itemMix": false,
+   "trCredit": 0.8528916461303621,
+   "mix": [
+    [
+     55,
+     "Indeedee-F: Trick Room | Torkoal: Protect"
+    ],
+    [
+     45,
+     "Indeedee-F: Trick Room | Torkoal: Eruption"
+    ]
+   ]
+  },
+  "Indeedee TR / Psychic Terrain||Indeedee-F+Blastoise||Gardevoir + Indeedee-F": {
+   "lines": null,
+   "pop": 0.5716242311955889,
+   "worst": 0.44812029325536484,
+   "full": [
+    0.5703010225981373,
+    0.4513086849765208
+   ],
+   "reader": [
+    [
+     0.46430652074153184,
+     "Gardevoir: Hyper Voice | Indeedee-F: Trick Room"
+    ],
+    [
+     0.43853726189978864,
+     "Gardevoir: Expanding Force -> Indeedee-F | Indeedee-F: Psychic -> Blastoise"
+    ]
+   ],
+   "share": 0.067,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": true,
+   "trCredit": 0.9997691251871776,
+   "mix": [
+    [
+     80,
+     "Indeedee-F: Trick Room | Blastoise: Dark Pulse -> Indeedee-F"
+    ],
+    [
+     20,
+     "Indeedee-F: Trick Room | Blastoise: switch -> Kingambit"
+    ]
+   ]
+  },
+  "Tailwind goodstuffs||Indeedee-F+Torkoal||Gholdengo + Raichu": {
+   "lines": null,
+   "pop": 0.7583731134827545,
+   "worst": 0.49860776989722844,
+   "full": [
+    0.7407288190261324,
+    0.5249330368214755
+   ],
+   "reader": [
+    [
+     0.35632463649616447,
+     "Gholdengo: Protect | Raichu: Zap Cannon -> Indeedee-F"
+    ],
+    [
+     0.31957841277886456,
+     "Gholdengo: Make It Rain | Raichu: Zap Cannon -> Torkoal"
+    ],
+    [
+     0.2808579319032782,
+     "Gholdengo: switch | Raichu: Fake Out -> Torkoal"
+    ]
+   ],
+   "share": 0.096,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999905879915765,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Follow Me | Torkoal: Eruption"
+    ]
+   ]
+  },
+  "Tailwind goodstuffs||Indeedee-F+Torkoal||Salamence + Sneasler": {
+   "lines": null,
+   "pop": 0.6685597968831848,
+   "worst": 0.47150208018303397,
+   "full": [
+    0.6692717645604493,
+    0.4751458182341598
+   ],
+   "reader": [
+    [
+     0.555427714416456,
+     "Salamence: Hyper Voice | Sneasler: Close Combat -> Torkoal"
+    ],
+    [
+     0.32755542773367746,
+     "Salamence: Draco Meteor -> Indeedee-F | Sneasler: Close Combat -> Indeedee-F"
+    ]
+   ],
+   "share": 0.026,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.999992032901119,
+   "mix": [
+    [
+     70,
+     "Indeedee-F: Trick Room | Torkoal: Weather Ball -> Sneasler"
+    ],
+    [
+     30,
+     "Indeedee-F: Trick Room | Torkoal: Protect"
+    ]
+   ]
+  },
+  "Rain||Indeedee-F+Torkoal||Farigiraf + Golisopod": {
+   "lines": null,
+   "pop": 0.7071183081732363,
+   "worst": 0.5122295863756574,
+   "full": [
+    0.7070801808984757,
+    0.5126020057761178
+   ],
+   "reader": [
+    [
+     0.514848023574837,
+     "Farigiraf: switch | Golisopod: Leech Life -> Indeedee-F"
+    ],
+    [
+     0.48515197642516295,
+     "Farigiraf: Psychic -> Torkoal | Golisopod: switch"
+    ]
+   ],
+   "share": 0.021,
+   "back": [
+    "Hatterene",
+    "Blastoise"
+   ],
+   "itemMix": false,
+   "trCredit": 0.8528916461303621,
+   "mix": [
+    [
+     70,
+     "Indeedee-F: Follow Me | Torkoal: Eruption"
+    ],
+    [
+     30,
+     "Indeedee-F: switch -> Blastoise | Torkoal: Eruption"
+    ]
+   ]
+  },
+  "Trick Room without Indeedee||Indeedee-F+Blastoise||Delphox + Incineroar": {
+   "lines": null,
+   "pop": 0.8215539507380334,
+   "worst": 0.6993261269917967,
+   "full": [
+    0.8148928653030183,
+    0.707307758132423
+   ],
+   "reader": [
+    [
+     0.5726174115045606,
+     "Delphox: Psyshock -> Blastoise | Incineroar: Parting Shot -> Indeedee-F"
+    ],
+    [
+     0.40532823367670207,
+     "Delphox: Protect | Incineroar: switch"
+    ]
+   ],
+   "share": 0.03,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9997272593458411,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Trick Room without Indeedee||Indeedee-F+Blastoise||Farigiraf + Rillaboom": {
+   "lines": null,
+   "pop": 0.6782403755151942,
+   "worst": 0.45774478214594644,
+   "full": [
+    0.6782403755151942,
+    0.45774478214594644
+   ],
+   "reader": [
+    [
+     0.4880406558514529,
+     "Farigiraf: Thunderbolt -> Blastoise | Rillaboom: Wood Hammer -> Indeedee-F"
+    ],
+    [
+     0.45547577777032333,
+     "Farigiraf: Thunderbolt -> Blastoise | Rillaboom: Wood Hammer -> Blastoise"
+    ]
+   ],
+   "share": 0.03,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.5005202111902353,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Follow Me | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Tailwind goodstuffs||Indeedee-F+Torkoal||Rillaboom + Sneasler": {
+   "lines": null,
+   "pop": 0.818866293334255,
+   "worst": 0.6299594095306487,
+   "full": [
+    0.8185279796177396,
+    0.6385740880356794
+   ],
+   "reader": [
+    [
+     0.7031457315199526,
+     "Rillaboom: Wood Hammer -> Indeedee-F | Sneasler: Protect"
+    ],
+    [
+     0.29685426848004737,
+     "Rillaboom: High Horsepower -> Torkoal | Sneasler: Close Combat -> Torkoal"
+    ]
+   ],
+   "share": 0.025,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.999992032901119,
+   "mix": [
+    [
+     65,
+     "Indeedee-F: Follow Me | Torkoal: Eruption"
+    ],
+    [
+     35,
+     "Indeedee-F: Trick Room | Torkoal: Eruption"
+    ]
+   ]
+  },
+  "Balance, no speed control||Indeedee-F+Torkoal||Floette-Eternal + Incineroar": {
+   "lines": null,
+   "pop": 0.7197590542218444,
+   "worst": 0.46059485632764025,
+   "full": [
+    0.7170256016928869,
+    0.463669811819674
+   ],
+   "reader": [
+    [
+     0.3781759913472547,
+     "Floette-Eternal: Moonblast -> Indeedee-F | Incineroar: Darkest Lariat -> Indeedee-F"
+    ],
+    [
+     0.33010760950011336,
+     "Floette-Eternal: Dazzling Gleam | Incineroar: Darkest Lariat -> Indeedee-F"
+    ],
+    [
+     0.29171639915263187,
+     "Floette-Eternal: Dazzling Gleam | Incineroar: Flare Blitz -> Indeedee-F"
+    ]
+   ],
+   "share": 0.04,
+   "back": [
+    "Hatterene",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9997448469688782,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Trick Room | Torkoal: Eruption"
+    ]
+   ]
+  },
+  "Balance, no speed control||Indeedee-F+Blastoise||Arcanine-Hisui + Raichu": {
+   "lines": null,
+   "pop": 0.7388036524452427,
+   "worst": 0.6077117829504655,
+   "full": [
+    0.7382624576788854,
+    0.6092558918043111
+   ],
+   "reader": [
+    [
+     0.7255763454719786,
+     "Arcanine-Hisui: Flare Blitz -> Indeedee-F | Raichu: Protect"
+    ],
+    [
+     0.2744236545280214,
+     "Arcanine-Hisui: Flare Blitz -> Blastoise | Raichu: Zap Cannon -> Blastoise"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999735485446526,
+   "mix": [
+    [
+     85,
+     "Indeedee-F: Follow Me | Blastoise: Water Spout"
+    ],
+    [
+     15,
+     "Indeedee-F: Trick Room | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Tailwind goodstuffs||Indeedee-F+Blastoise||Rillaboom + Sneasler": {
+   "lines": null,
+   "pop": 0.645901221385519,
+   "worst": 0.46018283116674513,
+   "full": [
+    0.6411878822927239,
+    0.4686446106447869
+   ],
+   "reader": [
+    [
+     0.4646997804223329,
+     "Rillaboom: Wood Hammer -> Blastoise | Sneasler: Swords Dance"
+    ],
+    [
+     0.38810992696468544,
+     "Rillaboom: Wood Hammer -> Indeedee-F | Sneasler: Protect"
+    ],
+    [
+     0.1471902926129817,
+     "Rillaboom: Wood Hammer -> Indeedee-F | Sneasler: Swords Dance"
+    ]
+   ],
+   "share": 0.025,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999854830468868,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Follow Me | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Snow||Indeedee-F+Blastoise||Raichu + Sneasler": {
+   "lines": null,
+   "pop": 0.7058086848685208,
+   "worst": 0.5249450870987812,
+   "full": [
+    0.7058086848685208,
+    0.5249450870987812
+   ],
+   "reader": [
+    [
+     1.0,
+     "Raichu: Zap Cannon -> Blastoise | Sneasler: Protect"
+    ]
+   ],
+   "share": 0.032,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.999992032901119,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Follow Me | Blastoise: Water Spout"
+    ]
+   ]
+  },
+  "Tailwind goodstuffs||Indeedee-F+Blastoise||Gholdengo + Rillaboom": {
+   "lines": null,
+   "pop": 0.6937245013474073,
+   "worst": 0.42595229904252063,
+   "full": [
+    0.6931473928399093,
+    0.4271360671856053
+   ],
+   "reader": [
+    [
+     0.5558514746649215,
+     "Gholdengo: Make It Rain | Rillaboom: Wood Hammer -> Blastoise"
+    ],
+    [
+     0.4441485253350786,
+     "Gholdengo: Protect | Rillaboom: Wood Hammer -> Blastoise"
+    ]
+   ],
+   "share": 0.032,
+   "back": [
+    "Hatterene",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999942913177511,
+   "mix": [
+    [
+     60,
+     "Indeedee-F: Trick Room | Blastoise: Dark Pulse -> Gholdengo"
+    ],
+    [
+     40,
+     "Indeedee-F: Follow Me | Blastoise: Dark Pulse -> Gholdengo"
+    ]
+   ]
+  }
+ }
+}

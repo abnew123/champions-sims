@@ -1,0 +1,122 @@
+{
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Focus Sash",
+  "ability": "Defiant",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Sucker Punch",
+   "Iron Head",
+   "Kowtow Cleave",
+   "Low Kick"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "White Herb",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Close Combat",
+   "Dire Claw",
+   "Rock Slide",
+   "Protect"
+  ]
+ },
+ "Garchomp": {
+  "species": "Garchomp",
+  "item": "Garchompite Z",
+  "ability": "Rough Skin",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Draco Meteor",
+   "Earth Power",
+   "Power Gem",
+   "Protect"
+  ]
+ },
+ "Floette-Eternal": {
+  "species": "Floette-Eternal",
+  "item": "Floettite",
+  "ability": "Flower Veil",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Moonblast",
+   "Dazzling Gleam",
+   "Calm Mind",
+   "Protect"
+  ]
+ },
+ "Rillaboom": {
+  "species": "Rillaboom",
+  "item": "Miracle Seed",
+  "ability": "Grassy Surge",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Grassy Glide",
+   "High Horsepower",
+   "Wood Hammer",
+   "Fake Out"
+  ]
+ },
+ "Volcarona": {
+  "species": "Volcarona",
+  "item": "Rocky Helmet",
+  "ability": "Flame Body",
+  "nature": "Bold",
+  "evs": [
+   32,
+   0,
+   32,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Overheat",
+   "Rage Powder",
+   "Tailwind",
+   "Protect"
+  ]
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "Basculegion": {
+  "species": "Basculegion",
+  "item": "Choice Scarf",
+  "ability": "Adaptability",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Last Respects",
+   "Wave Crash",
+   "Psychic Fangs",
+   "Flip Turn"
+  ]
+ },
+ "Charizard": {
+  "species": "Charizard",
+  "item": "Charizardite Y",
+  "ability": "Blaze",
+  "nature": "Modest",
+  "evs": [
+   28,
+   0,
+   13,
+   1,
+   0,
+   24
+  ],
+  "moves": [
+   "Protect",
+   "Heat Wave",
+   "Solar Beam",
+   "Weather Ball"
+  ]
+ },
+ "Kommo-o": {
+  "species": "Kommo-o",
+  "item": "Life Orb",
+  "ability": "Soundproof",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Aura Sphere",
+   "Protect",
+   "Clanging Scales",
+   "Flamethrower"
+  ]
+ },
+ "Glimmora": {
+  "species": "Glimmora",
+  "item": "Glimmoranite",
+  "ability": "Toxic Debris",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Power Gem",
+   "Earth Power",
+   "Spiky Shield",
+   "Sludge Bomb"
+  ]
+ },
+ "Whimsicott": {
+  "species": "Whimsicott",
+  "item": "Focus Sash",
+  "ability": "Prankster",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Moonblast",
+   "Tailwind",
+   "Protect",
+   "Encore"
+  ]
+ },
+ "Indeedee": {
+  "species": "Indeedee",
+  "item": "Twisted Spoon",
+  "ability": "Psychic Surge",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Expanding Force",
+   "Trick Room",
+   "Protect",
+   "Imprison"
+  ]
+ }
+}

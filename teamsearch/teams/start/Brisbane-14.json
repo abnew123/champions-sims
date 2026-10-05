@@ -1,0 +1,122 @@
+{
+ "Garchomp": {
+  "species": "Garchomp",
+  "item": "Lum Berry",
+  "ability": "Rough Skin",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Stomping Tantrum",
+   "Rock Slide",
+   "Dragon Claw",
+   "Protect"
+  ]
+ },
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Chople Berry",
+  "ability": "Defiant",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Kowtow Cleave",
+   "Iron Head",
+   "Low Kick",
+   "Sucker Punch"
+  ]
+ },
+ "Gengar": {
+  "species": "Gengar",
+  "item": "Gengarite",
+  "ability": "Cursed Body",
+  "nature": "Modest",
+  "evs": [
+   32,
+   0,
+   6,
+   0,
+   8,
+   20
+  ],
+  "moves": [
+   "Shadow Ball",
+   "Perish Song",
+   "Protect",
+   "Sludge Bomb"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Sitrus Berry",
+  "ability": "Intimidate",
+  "nature": "Careful",
+  "evs": [
+   32,
+   0,
+   14,
+   0,
+   20,
+   0
+  ],
+  "moves": [
+   "Protect",
+   "Parting Shot",
+   "Fake Out",
+   "Flare Blitz"
+  ]
+ },
+ "Milotic": {
+  "species": "Milotic",
+  "item": "Grassy Seed",
+  "ability": "Competitive",
+  "nature": "Modest",
+  "evs": [
+   32,
+   0,
+   11,
+   10,
+   0,
+   13
+  ],
+  "moves": [
+   "Icy Wind",
+   "Ice Beam",
+   "Protect",
+   "Scald"
+  ]
+ },
+ "Rillaboom": {
+  "species": "Rillaboom",
+  "item": "Miracle Seed",
+  "ability": "Grassy Surge",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Wood Hammer",
+   "Fake Out",
+   "U-turn",
+   "Grassy Glide"
+  ]
+ }
+}

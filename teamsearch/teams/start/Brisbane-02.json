@@ -1,0 +1,122 @@
+{
+ "Floette-Eternal": {
+  "species": "Floette-Eternal",
+  "item": "Floettite",
+  "ability": "Flower Veil",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Moonblast",
+   "Protect",
+   "Calm Mind",
+   "Dazzling Gleam"
+  ]
+ },
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Chople Berry",
+  "ability": "Defiant",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Sucker Punch",
+   "Protect",
+   "Kowtow Cleave",
+   "Iron Head"
+  ]
+ },
+ "Basculegion": {
+  "species": "Basculegion",
+  "item": "Colbur Berry",
+  "ability": "Adaptability",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Last Respects",
+   "Aqua Jet",
+   "Protect",
+   "Wave Crash"
+  ]
+ },
+ "Rillaboom": {
+  "species": "Rillaboom",
+  "item": "Miracle Seed",
+  "ability": "Grassy Surge",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Grassy Glide",
+   "Fake Out",
+   "Wood Hammer",
+   "High Horsepower"
+  ]
+ },
+ "Salamence": {
+  "species": "Salamence",
+  "item": "Salamencite",
+  "ability": "Intimidate",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Flamethrower",
+   "Protect",
+   "Tailwind",
+   "Hyper Voice"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "Focus Sash",
+  "ability": "Poison Touch",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Dire Claw",
+   "Fake Out",
+   "Close Combat"
+  ]
+ }
+}

@@ -1,0 +1,7102 @@
+{
+ "Rain + sun||Salamence+Incineroar||Charizard + Grimmsnarl": {
+  "share": 0.094,
+  "n": 49,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.6502979808587347,
+  "worst": 0.5904862340216323,
+  "vb": 0.7218916999999998,
+  "vc": 0.6087372918520295,
+  "blend": [
+   [
+    0.5883316945263847,
+    "Salamence: Tailwind | Incineroar: Flare Blitz -> Grimmsnarl"
+   ],
+   [
+    0.4116683054736153,
+    "Salamence: Double-Edge -> Charizard | Incineroar: Fake Out -> Grimmsnarl"
+   ]
+  ],
+  "exploit": "Salamence: Double-Edge -> Charizard | Incineroar: Fake Out -> Grimmsnarl",
+  "adapt": 0.495,
+  "reader": [
+   [
+    0.376948530164344,
+    "Charizard: Protect | Grimmsnarl: Reflect"
+   ],
+   [
+    0.354060655743168,
+    "Charizard: Heat Wave | Grimmsnarl: switch"
+   ],
+   [
+    0.2680522648431956,
+    "Charizard: Protect | Grimmsnarl: switch"
+   ]
+  ]
+ },
+ "Rain + sun||Salamence+Incineroar||Charizard + Venusaur": {
+  "share": 0.135,
+  "n": 71,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.5701379834185956,
+  "worst": 0.5630785276672869,
+  "vb": 0.6038717756448708,
+  "vc": 0.5646242560384656,
+  "blend": [
+   [
+    0.44181506742334575,
+    "Salamence: Double-Edge -> Charizard | Incineroar: Fake Out -> Venusaur"
+   ],
+   [
+    0.3887105954398399,
+    "Salamence: Tailwind | Incineroar: Fake Out -> Venusaur"
+   ],
+   [
+    0.09445573558205182,
+    "Salamence: Tailwind | Incineroar: Flare Blitz -> Venusaur"
+   ],
+   [
+    0.07501860155476256,
+    "Salamence: Tailwind | Incineroar: Fake Out -> Charizard"
+   ]
+  ],
+  "exploit": "Salamence: Hyper Voice | Incineroar: Fake Out -> Venusaur",
+  "adapt": 0.4283,
+  "reader": [
+   [
+    0.38657606816530204,
+    "Charizard: Protect | Venusaur: switch"
+   ],
+   [
+    0.2923705640058132,
+    "Charizard: Weather Ball -> Salamence | Venusaur: Protect"
+   ],
+   [
+    0.20633436408292308,
+    "Charizard: Protect | Venusaur: Sleep Powder -> Salamence"
+   ],
+   [
+    0.09838585266783889,
+    "Charizard: Heat Wave | Venusaur: Sleep Powder -> Salamence"
+   ]
+  ]
+ },
+ "Rain + sun||Salamence+Incineroar||Archaludon + Grimmsnarl": {
+  "share": 0.095,
+  "n": 50,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.6113978754956797,
+  "worst": 0.5554727502527805,
+  "vb": 0.6593513697260547,
+  "vc": 0.5706391829848279,
+  "blend": [
+   [
+    0.7275025278058643,
+    "Salamence: Tailwind | Incineroar: Fake Out -> Archaludon"
+   ],
+   [
+    0.27249747219413567,
+    "Salamence: Tailwind | Incineroar: Fake Out -> Grimmsnarl"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Incineroar: Fake Out -> Grimmsnarl",
+  "adapt": 0.4115,
+  "reader": [
+   [
+    0.44640053750563957,
+    "Archaludon: Dragon Pulse -> Salamence | Grimmsnarl: Parting Shot -> Salamence"
+   ],
+   [
+    0.22156925170781522,
+    "Archaludon: Protect | Grimmsnarl: Parting Shot -> Salamence"
+   ],
+   [
+    0.1502545108607368,
+    "Archaludon: Electro Shot -> Incineroar | Grimmsnarl: switch"
+   ],
+   [
+    0.08767176215902144,
+    "Archaludon: Electro Shot -> Salamence | Grimmsnarl: switch"
+   ]
+  ]
+ },
+ "Rain + sun||Salamence+Incineroar||Golisopod + Grimmsnarl": {
+  "share": 0.053,
+  "n": 28,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.7343377950405974,
+  "worst": 0.6399059447983014,
+  "vb": 0.7368418448930639,
+  "vc": 0.6574031395825082,
+  "blend": [
+   [
+    0.846072186836518,
+    "Salamence: Tailwind | Incineroar: Fake Out -> Grimmsnarl"
+   ],
+   [
+    0.15392781316348203,
+    "Salamence: Tailwind | Incineroar: Flare Blitz -> Golisopod"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Incineroar: Fake Out -> Grimmsnarl",
+  "adapt": 0.6142,
+  "reader": [
+   [
+    0.5056642844370609,
+    "Golisopod: switch | Grimmsnarl: switch"
+   ],
+   [
+    0.25329791713532746,
+    "Golisopod: Swords Dance | Grimmsnarl: switch"
+   ],
+   [
+    0.24103779842761808,
+    "Golisopod: switch | Grimmsnarl: Reflect"
+   ]
+  ]
+ },
+ "Rain + sun||Salamence+Incineroar||Grimmsnarl + Swampert": {
+  "share": 0.055,
+  "n": 29,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.7525087011298874,
+  "worst": 0.6301914285714285,
+  "vb": 0.766753484651535,
+  "vc": 0.6501264660639041,
+  "blend": [
+   [
+    0.8285714285714291,
+    "Salamence: Tailwind | Incineroar: Fake Out -> Grimmsnarl"
+   ],
+   [
+    0.17142857142857093,
+    "Salamence: Tailwind | Incineroar: Fake Out -> Swampert"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Incineroar: Fake Out -> Grimmsnarl",
+  "adapt": 0.6095,
+  "reader": [
+   [
+    0.5660691316295898,
+    "Grimmsnarl: switch | Swampert: switch"
+   ],
+   [
+    0.1949610616703766,
+    "Grimmsnarl: switch | Swampert: Ice Punch -> Salamence"
+   ],
+   [
+    0.11246214474052871,
+    "Grimmsnarl: Light Screen | Swampert: Ice Punch -> Salamence"
+   ]
+  ]
+ },
+ "Rain + sun||Salamence+Incineroar||Farigiraf + Golisopod": {
+  "share": 0.076,
+  "n": 40,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.5952062311706082,
+  "worst": 0.5542102487232501,
+  "vb": 0.6409757027108135,
+  "vc": 0.55421024872325,
+  "blend": [
+   [
+    0.565582347572278,
+    "Salamence: Double-Edge -> Golisopod | Incineroar: Throat Chop -> Farigiraf"
+   ],
+   [
+    0.2824235232734518,
+    "Salamence: Tailwind | Incineroar: Flare Blitz -> Golisopod"
+   ],
+   [
+    0.15199412915427019,
+    "Salamence: Tailwind | Incineroar: Throat Chop -> Farigiraf"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Incineroar: Flare Blitz -> Golisopod",
+  "adapt": 0.4768,
+  "reader": [
+   [
+    0.5078332142157714,
+    "Farigiraf: Trick Room | Golisopod: switch"
+   ],
+   [
+    0.4069293178791244,
+    "Farigiraf: Trick Room | Golisopod: Drill Run -> Incineroar"
+   ],
+   [
+    0.08523746790510409,
+    "Farigiraf: Trick Room | Golisopod: Protect"
+   ]
+  ]
+ },
+ "Rain + sun||Salamence+Rillaboom||Charizard + Grimmsnarl": {
+  "share": 0.094,
+  "n": 49,
+  "back": [
+   "Gholdengo",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.6770783899999998,
+  "worst": 0.4975,
+  "vb": 0.6770783899999998,
+  "vc": 0.5765939684008154,
+  "blend": [
+   [
+    1.0,
+    "Salamence: Double-Edge -> Charizard | Rillaboom: Fake Out -> Grimmsnarl"
+   ]
+  ],
+  "exploit": "Salamence: Double-Edge -> Charizard | Rillaboom: Fake Out -> Grimmsnarl",
+  "adapt": 0.4975,
+  "reader": [
+   [
+    0.5312045928601141,
+    "Charizard: Protect | Grimmsnarl: Reflect"
+   ],
+   [
+    0.23970315595825353,
+    "Charizard: Heat Wave | Grimmsnarl: switch"
+   ],
+   [
+    0.22909225118163237,
+    "Charizard: Protect | Grimmsnarl: switch"
+   ]
+  ]
+ },
+ "Rain + sun||Salamence+Rillaboom||Archaludon + Grimmsnarl": {
+  "share": 0.095,
+  "n": 50,
+  "back": [
+   "Gholdengo",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.6035022433319855,
+  "worst": 0.5031998922123416,
+  "vb": 0.6202087882423515,
+  "vc": 0.5382576315245284,
+  "blend": [
+   [
+    0.5591484774993263,
+    "Salamence: Tailwind | Rillaboom: Wood Hammer -> Grimmsnarl"
+   ],
+   [
+    0.44085152250067366,
+    "Salamence: switch -> Incineroar | Rillaboom: Fake Out -> Grimmsnarl"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Rillaboom: Wood Hammer -> Grimmsnarl",
+  "adapt": 0.4432,
+  "reader": [
+   [
+    0.4449114370159501,
+    "Archaludon: Electro Shot -> Salamence | Grimmsnarl: Reflect"
+   ],
+   [
+    0.42955192178870505,
+    "Archaludon: Dragon Pulse -> Salamence | Grimmsnarl: Light Screen"
+   ],
+   [
+    0.12553664119534477,
+    "Archaludon: Electro Shot -> Salamence | Grimmsnarl: switch"
+   ]
+  ]
+ },
+ "Rain + sun||Salamence+Rillaboom||Golisopod + Grimmsnarl": {
+  "share": 0.053,
+  "n": 28,
+  "back": [
+   "Gholdengo",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.6288987426893283,
+  "worst": 0.595140619181483,
+  "vb": 0.6473522486508094,
+  "vc": 0.5973702369522542,
+  "blend": [
+   [
+    0.4118506078638967,
+    "Salamence: Tailwind | Rillaboom: Fake Out -> Grimmsnarl"
+   ],
+   [
+    0.32090832755284604,
+    "Salamence: Tailwind | Rillaboom: switch -> Incineroar"
+   ],
+   [
+    0.26724106458325725,
+    "Salamence: Tailwind | Rillaboom: Fake Out -> Golisopod"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Rillaboom: Fake Out -> Grimmsnarl",
+  "adapt": 0.5011,
+  "reader": [
+   [
+    0.6575014900453336,
+    "Golisopod: Swords Dance | Grimmsnarl: Reflect"
+   ],
+   [
+    0.12940412527047745,
+    "Golisopod: Swords Dance | Grimmsnarl: switch"
+   ],
+   [
+    0.112179313965243,
+    "Golisopod: switch | Grimmsnarl: Light Screen"
+   ],
+   [
+    0.10091507071894476,
+    "Golisopod: Leech Life -> Rillaboom | Grimmsnarl: switch"
+   ]
+  ]
+ },
+ "Rain + sun||Salamence+Rillaboom||Charizard + Venusaur": {
+  "share": 0.135,
+  "n": 71,
+  "back": [
+   "Gholdengo",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.5549213617911067,
+  "worst": 0.5388455732961465,
+  "vb": 0.5754926914617078,
+  "vc": 0.5422429132459519,
+  "blend": [
+   [
+    0.44374629568573737,
+    "Salamence: Double-Edge -> Charizard | Rillaboom: Fake Out -> Venusaur"
+   ],
+   [
+    0.2719018384344131,
+    "Salamence: Tailwind | Rillaboom: Fake Out -> Charizard"
+   ],
+   [
+    0.24089084622940068,
+    "Salamence: Hyper Voice | Rillaboom: Fake Out -> Venusaur"
+   ],
+   [
+    0.043461019650448796,
+    "Salamence: Tailwind | Rillaboom: Fake Out -> Venusaur"
+   ]
+  ],
+  "exploit": "Salamence: Double-Edge -> Charizard | Rillaboom: Fake Out -> Venusaur",
+  "adapt": 0.4975,
+  "reader": [
+   [
+    0.3054611279458616,
+    "Charizard: Weather Ball -> Rillaboom | Venusaur: Protect"
+   ],
+   [
+    0.2825231107986613,
+    "Charizard: Protect | Venusaur: switch"
+   ],
+   [
+    0.2445481887460283,
+    "Charizard: Protect | Venusaur: Sludge Bomb -> Rillaboom"
+   ],
+   [
+    0.16746757250944871,
+    "Charizard: Protect | Venusaur: Sleep Powder -> Salamence"
+   ]
+  ]
+ },
+ "Rain + sun||Salamence+Rillaboom||Grimmsnarl + Swampert": {
+  "share": 0.055,
+  "n": 29,
+  "back": [
+   "Gholdengo",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.6843776431574784,
+  "worst": 0.6481885192680183,
+  "vb": 0.697653264673533,
+  "vc": 0.6481885192680186,
+  "blend": [
+   [
+    0.4051674414285243,
+    "Salamence: Tailwind | Rillaboom: Grassy Glide -> Swampert"
+   ],
+   [
+    0.37908244474682334,
+    "Salamence: Tailwind | Rillaboom: Fake Out -> Grimmsnarl"
+   ],
+   [
+    0.13743622745788484,
+    "Salamence: Hyper Voice | Rillaboom: Wood Hammer -> Grimmsnarl"
+   ],
+   [
+    0.0783138863667675,
+    "Salamence: Tailwind | Rillaboom: Wood Hammer -> Grimmsnarl"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Rillaboom: Fake Out -> Grimmsnarl",
+  "adapt": 0.5328,
+  "reader": [
+   [
+    0.38647419976178654,
+    "Grimmsnarl: Light Screen | Swampert: switch"
+   ],
+   [
+    0.3289018872869063,
+    "Grimmsnarl: switch | Swampert: switch"
+   ],
+   [
+    0.2279578757077029,
+    "Grimmsnarl: Reflect | Swampert: Ice Punch -> Salamence"
+   ]
+  ]
+ },
+ "Rain + sun||Salamence+Rillaboom||Farigiraf + Golisopod": {
+  "share": 0.076,
+  "n": 40,
+  "back": [
+   "Gholdengo",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.6262782692447543,
+  "worst": 0.5361581163612986,
+  "vb": 0.71377653597842,
+  "vc": 0.5361581163612986,
+  "blend": [
+   [
+    0.5258759241401479,
+    "Salamence: Tailwind | Rillaboom: switch -> Incineroar"
+   ],
+   [
+    0.47412407585985206,
+    "Salamence: Hyper Voice | Rillaboom: Wood Hammer -> Farigiraf"
+   ]
+  ],
+  "exploit": "Salamence: Hyper Voice | Rillaboom: Wood Hammer -> Farigiraf",
+  "adapt": 0.3917,
+  "reader": [
+   [
+    0.8829958212793315,
+    "Farigiraf: Trick Room | Golisopod: Leech Life -> Rillaboom"
+   ],
+   [
+    0.11700417872066848,
+    "Farigiraf: Protect | Golisopod: Leech Life -> Rillaboom"
+   ]
+  ]
+ },
+ "Rain + sun||Incineroar+Rillaboom||Archaludon + Grimmsnarl": {
+  "share": 0.095,
+  "n": 50,
+  "back": [
+   "Gholdengo",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.6458983061439243,
+  "worst": 0.5996702093397746,
+  "vb": 0.6661969706058789,
+  "vc": 0.6022090536385378,
+  "blend": [
+   [
+    0.7624798711755232,
+    "Incineroar: Fake Out -> Grimmsnarl | Rillaboom: Wood Hammer -> Grimmsnarl"
+   ],
+   [
+    0.2375201288244768,
+    "Incineroar: Fake Out -> Archaludon | Rillaboom: Wood Hammer -> Grimmsnarl"
+   ]
+  ],
+  "exploit": "Incineroar: Fake Out -> Grimmsnarl | Rillaboom: Wood Hammer -> Grimmsnarl",
+  "adapt": 0.5677,
+  "reader": [
+   [
+    0.5848992142125042,
+    "Archaludon: Electro Shot -> Incineroar | Grimmsnarl: Reflect"
+   ],
+   [
+    0.41510078578749576,
+    "Archaludon: Electro Shot -> Incineroar | Grimmsnarl: switch"
+   ]
+  ]
+ },
+ "Rain + sun||Incineroar+Rillaboom||Golisopod + Grimmsnarl": {
+  "share": 0.053,
+  "n": 28,
+  "back": [
+   "Gholdengo",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.6927458133684322,
+  "worst": 0.5563509650180941,
+  "vb": 0.6994360383769737,
+  "vc": 0.5913595398679734,
+  "blend": [
+   [
+    0.8763570566948132,
+    "Incineroar: Flare Blitz -> Golisopod | Rillaboom: Fake Out -> Grimmsnarl"
+   ],
+   [
+    0.12364294330518677,
+    "Incineroar: Flare Blitz -> Golisopod | Rillaboom: Wood Hammer -> Grimmsnarl"
+   ]
+  ],
+  "exploit": "Incineroar: Flare Blitz -> Golisopod | Rillaboom: Fake Out -> Grimmsnarl",
+  "adapt": 0.5348,
+  "reader": [
+   [
+    0.4763334454780712,
+    "Golisopod: Protect | Grimmsnarl: switch"
+   ],
+   [
+    0.16426437813867767,
+    "Golisopod: switch | Grimmsnarl: Reflect"
+   ],
+   [
+    0.15895958559291679,
+    "Golisopod: Swords Dance | Grimmsnarl: switch"
+   ],
+   [
+    0.12231575618280216,
+    "Golisopod: switch | Grimmsnarl: Parting Shot -> Rillaboom"
+   ]
+  ]
+ },
+ "Rain + sun||Incineroar+Rillaboom||Farigiraf + Golisopod": {
+  "share": 0.076,
+  "n": 40,
+  "back": [
+   "Gholdengo",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.6152976683926942,
+  "worst": 0.5414100037062354,
+  "vb": 0.638889746166189,
+  "vc": 0.5414100037062354,
+  "blend": [
+   [
+    0.5097411038977698,
+    "Incineroar: Throat Chop -> Farigiraf | Rillaboom: Wood Hammer -> Farigiraf"
+   ],
+   [
+    0.30422734634087883,
+    "Incineroar: Flare Blitz -> Golisopod | Rillaboom: Wood Hammer -> Farigiraf"
+   ],
+   [
+    0.18603154976135133,
+    "Incineroar: Flare Blitz -> Golisopod | Rillaboom: Wood Hammer -> Golisopod"
+   ]
+  ],
+  "exploit": "Incineroar: Throat Chop -> Farigiraf | Rillaboom: Wood Hammer -> Farigiraf",
+  "adapt": 0.3863,
+  "reader": [
+   [
+    0.5282958431030622,
+    "Farigiraf: Trick Room | Golisopod: Protect"
+   ],
+   [
+    0.27499739362676723,
+    "Farigiraf: Protect | Golisopod: Leech Life -> Rillaboom"
+   ],
+   [
+    0.19670676327016928,
+    "Farigiraf: Protect | Golisopod: switch"
+   ]
+  ]
+ },
+ "Rain + sun||Incineroar+Rillaboom||Charizard + Venusaur": {
+  "share": 0.135,
+  "n": 71,
+  "back": [
+   "Gholdengo",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.5272159228250682,
+  "worst": 0.4975,
+  "vb": 0.5332427114577085,
+  "vc": 0.5051403228325253,
+  "blend": [
+   [
+    0.8969988884772138,
+    "Incineroar: Fake Out -> Charizard | Rillaboom: Fake Out -> Venusaur"
+   ],
+   [
+    0.10300111152278624,
+    "Incineroar: Flare Blitz -> Venusaur | Rillaboom: Fake Out -> Venusaur"
+   ]
+  ],
+  "exploit": "Incineroar: Flare Blitz -> Venusaur | Rillaboom: Fake Out -> Venusaur",
+  "adapt": 0.2554,
+  "reader": [
+   [
+    0.4649900332102229,
+    "Charizard: switch | Venusaur: Protect"
+   ],
+   [
+    0.24529509337500593,
+    "Charizard: Protect | Venusaur: switch"
+   ],
+   [
+    0.14705348167065782,
+    "Charizard: Protect | Venusaur: Sludge Bomb -> Rillaboom"
+   ],
+   [
+    0.14266139174411327,
+    "Charizard: Weather Ball -> Rillaboom | Venusaur: Protect"
+   ]
+  ]
+ },
+ "Rain + sun||Incineroar+Rillaboom||Grimmsnarl + Swampert": {
+  "share": 0.055,
+  "n": 29,
+  "back": [
+   "Gholdengo",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.7045351803808502,
+  "worst": 0.6223164107993646,
+  "vb": 0.7064825417458256,
+  "vc": 0.6332500678058042,
+  "blend": [
+   [
+    0.623875066172578,
+    "Incineroar: Fake Out -> Grimmsnarl | Rillaboom: Wood Hammer -> Grimmsnarl"
+   ],
+   [
+    0.3761249338274219,
+    "Incineroar: Fake Out -> Grimmsnarl | Rillaboom: Grassy Glide -> Swampert"
+   ]
+  ],
+  "exploit": "Incineroar: Fake Out -> Grimmsnarl | Rillaboom: Wood Hammer -> Grimmsnarl",
+  "adapt": 0.5416,
+  "reader": [
+   [
+    0.6449688093300788,
+    "Grimmsnarl: switch | Swampert: switch"
+   ],
+   [
+    0.35503119066992134,
+    "Grimmsnarl: switch | Swampert: Wave Crash -> Incineroar"
+   ]
+  ]
+ },
+ "Rain + sun||Incineroar+Rillaboom||Charizard + Grimmsnarl": {
+  "share": 0.094,
+  "n": 49,
+  "back": [
+   "Gholdengo",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.5619791429364589,
+  "worst": 0.5223091918568785,
+  "vb": 0.5862622099999999,
+  "vc": 0.5302402171312098,
+  "blend": [
+   [
+    0.5144972239358419,
+    "Incineroar: Fake Out -> Charizard | Rillaboom: Fake Out -> Grimmsnarl"
+   ],
+   [
+    0.48550277606415815,
+    "Incineroar: Flare Blitz -> Grimmsnarl | Rillaboom: Fake Out -> Charizard"
+   ]
+  ],
+  "exploit": "Incineroar: Fake Out -> Charizard | Rillaboom: Fake Out -> Grimmsnarl",
+  "adapt": 0.4975,
+  "reader": [
+   [
+    0.4690874818975223,
+    "Charizard: Protect | Grimmsnarl: switch"
+   ],
+   [
+    0.23762377214609098,
+    "Charizard: switch | Grimmsnarl: Reflect"
+   ],
+   [
+    0.19363164975277763,
+    "Charizard: Heat Wave | Grimmsnarl: switch"
+   ],
+   [
+    0.0996570962036091,
+    "Charizard: switch | Grimmsnarl: Light Screen"
+   ]
+  ]
+ },
+ "Balance, no speed control||Gholdengo+Incineroar||Floette-Eternal + Incineroar": {
+  "share": 0.04,
+  "n": 54,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.5209012695676413,
+  "worst": 0.4706298037645174,
+  "vb": 0.54393519,
+  "vc": 0.47856505226354373,
+  "blend": [
+   [
+    0.47184621545855,
+    "Gholdengo: Power Gem -> Incineroar | Incineroar: Fake Out -> Floette-Eternal"
+   ],
+   [
+    0.4421786143372046,
+    "Gholdengo: Power Gem -> Incineroar | Incineroar: Parting Shot -> Incineroar"
+   ],
+   [
+    0.0859751702042454,
+    "Gholdengo: Power Gem -> Incineroar | Incineroar: Parting Shot -> Floette-Eternal"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Incineroar | Incineroar: switch -> Salamence",
+  "adapt": 0.309,
+  "reader": [
+   [
+    0.6735154286774109,
+    "Floette-Eternal: Dazzling Gleam | Incineroar: Parting Shot -> Incineroar"
+   ],
+   [
+    0.20544545483024976,
+    "Floette-Eternal: Dazzling Gleam | Incineroar: Flare Blitz -> Gholdengo"
+   ],
+   [
+    0.12103911649233949,
+    "Floette-Eternal: Protect | Incineroar: Flare Blitz -> Gholdengo"
+   ]
+  ]
+ },
+ "Balance, no speed control||Gholdengo+Incineroar||Incineroar + Raichu": {
+  "share": 0.029,
+  "n": 39,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.5569870333764555,
+  "worst": 0.5038606050643392,
+  "vb": 0.5659675467546753,
+  "vc": 0.5038606050643392,
+  "blend": [
+   [
+    0.38913483617005157,
+    "Gholdengo: Shadow Ball -> Raichu | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.2863986470883667,
+    "Gholdengo: Protect | Incineroar: switch -> Salamence"
+   ],
+   [
+    0.16344695573335002,
+    "Gholdengo: Shadow Ball -> Raichu | Incineroar: Parting Shot -> Incineroar"
+   ],
+   [
+    0.16101956100823173,
+    "Gholdengo: Shadow Ball -> Raichu | Incineroar: switch -> Salamence"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Raichu | Incineroar: Fake Out -> Raichu",
+  "adapt": 0.3942,
+  "reader": [
+   [
+    0.3806483284265171,
+    "Incineroar: Flare Blitz -> Gholdengo | Raichu: Protect"
+   ],
+   [
+    0.29540580726612337,
+    "Incineroar: Fake Out -> Incineroar | Raichu: Zap Cannon -> Incineroar"
+   ],
+   [
+    0.1961979960597925,
+    "Incineroar: Fake Out -> Incineroar | Raichu: Zap Cannon -> Gholdengo"
+   ],
+   [
+    0.12774786824756712,
+    "Incineroar: switch | Raichu: Zap Cannon -> Incineroar"
+   ]
+  ]
+ },
+ "Balance, no speed control||Gholdengo+Incineroar||Arcanine-Hisui + Raichu": {
+  "share": 0.028,
+  "n": 37,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.5741661972552802,
+  "worst": 0.5537982525202126,
+  "vb": 0.5870512600000001,
+  "vc": 0.5587788464024296,
+  "blend": [
+   [
+    0.4110051166655688,
+    "Gholdengo: switch -> Salamence | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.3891047775094086,
+    "Gholdengo: Power Gem -> Arcanine-Hisui | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.19989010582502256,
+    "Gholdengo: Power Gem -> Arcanine-Hisui | Incineroar: switch -> Salamence"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Arcanine-Hisui | Incineroar: Fake Out -> Raichu",
+  "adapt": 0.5199,
+  "reader": [
+   [
+    0.5592600727547736,
+    "Arcanine-Hisui: Flare Blitz -> Gholdengo | Raichu: Fake Out -> Incineroar"
+   ],
+   [
+    0.22694888438204738,
+    "Arcanine-Hisui: Flare Blitz -> Gholdengo | Raichu: Zap Cannon -> Incineroar"
+   ],
+   [
+    0.09074547133256544,
+    "Arcanine-Hisui: Head Smash -> Gholdengo | Raichu: switch"
+   ]
+  ]
+ },
+ "Balance, no speed control||Gholdengo+Incineroar||Gholdengo + Raichu": {
+  "share": 0.062,
+  "n": 83,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.6118038091856579,
+  "worst": 0.5449673469522712,
+  "vb": 0.6605352491028001,
+  "vc": 0.5449673469522713,
+  "blend": [
+   [
+    0.5947921226086893,
+    "Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.24730027214879588,
+    "Gholdengo: Shadow Ball -> Raichu | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.15790760524251482,
+    "Gholdengo: Shadow Ball -> Raichu | Incineroar: Flare Blitz -> Gholdengo"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Fake Out -> Raichu",
+  "adapt": 0.4851,
+  "reader": [
+   [
+    0.5161236588937352,
+    "Gholdengo: Protect | Raichu: Fake Out -> Incineroar"
+   ],
+   [
+    0.307867900865418,
+    "Gholdengo: Shadow Ball -> Gholdengo | Raichu: Protect"
+   ],
+   [
+    0.17600844024084739,
+    "Gholdengo: Protect | Raichu: Zap Cannon -> Gholdengo"
+   ]
+  ]
+ },
+ "Balance, no speed control||Gholdengo+Incineroar||Garchomp + Raichu": {
+  "share": 0.035,
+  "n": 47,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.5774468297532682,
+  "worst": 0.5474025378390375,
+  "vb": 0.60211937,
+  "vc": 0.5482681668471515,
+  "blend": [
+   [
+    0.33185039831350616,
+    "Gholdengo: switch -> Salamence | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.29853799274516857,
+    "Gholdengo: Shadow Ball -> Garchomp | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.18352290548139316,
+    "Gholdengo: Protect | Incineroar: Parting Shot -> Garchomp"
+   ],
+   [
+    0.16214800627908646,
+    "Gholdengo: Shadow Ball -> Garchomp | Incineroar: switch -> Salamence"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Raichu | Incineroar: Fake Out -> Raichu",
+  "adapt": 0.371,
+  "reader": [
+   [
+    0.37432072625612217,
+    "Garchomp: Earthquake | Raichu: Protect"
+   ],
+   [
+    0.29277152732012207,
+    "Garchomp: Rock Slide | Raichu: Fake Out -> Incineroar"
+   ],
+   [
+    0.17150831535988625,
+    "Garchomp: Rock Slide | Raichu: Zap Cannon -> Gholdengo"
+   ],
+   [
+    0.16139943106386942,
+    "Garchomp: Rock Slide | Raichu: Zap Cannon -> Incineroar"
+   ]
+  ]
+ },
+ "Balance, no speed control||Gholdengo+Incineroar||Garchomp + Rillaboom": {
+  "share": 0.028,
+  "n": 37,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.564695962020498,
+  "worst": 0.5383354702658718,
+  "vb": 0.5739531753175316,
+  "vc": 0.5408524963749294,
+  "blend": [
+   [
+    0.4003493631050783,
+    "Gholdengo: Shadow Ball -> Garchomp | Incineroar: Parting Shot -> Rillaboom"
+   ],
+   [
+    0.2725498992713481,
+    "Gholdengo: Protect | Incineroar: Parting Shot -> Rillaboom"
+   ],
+   [
+    0.19948472681904153,
+    "Gholdengo: switch -> Salamence | Incineroar: Flare Blitz -> Rillaboom"
+   ],
+   [
+    0.12761601080453208,
+    "Gholdengo: Shadow Ball -> Garchomp | Incineroar: switch -> Salamence"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Rillaboom | Incineroar: Parting Shot -> Rillaboom",
+  "adapt": 0.4911,
+  "reader": [
+   [
+    0.7615012768497915,
+    "Garchomp: Flamethrower -> Gholdengo | Rillaboom: Fake Out -> Incineroar"
+   ],
+   [
+    0.12453402290998114,
+    "Garchomp: Dragon Pulse -> Incineroar | Rillaboom: switch"
+   ]
+  ]
+ },
+ "Balance, no speed control||Incineroar+Rillaboom||Garchomp + Rillaboom": {
+  "share": 0.028,
+  "n": 37,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.5913780503292917,
+  "worst": 0.5320430771098112,
+  "vb": 0.6012033203320333,
+  "vc": 0.5320430771098114,
+  "blend": [
+   [
+    0.46029711069088286,
+    "Incineroar: switch -> Salamence | Rillaboom: Fake Out -> Garchomp"
+   ],
+   [
+    0.4503515545978277,
+    "Incineroar: Parting Shot -> Garchomp | Rillaboom: Fake Out -> Garchomp"
+   ],
+   [
+    0.08935133471128942,
+    "Incineroar: Parting Shot -> Rillaboom | Rillaboom: Fake Out -> Rillaboom"
+   ]
+  ],
+  "exploit": "Incineroar: switch -> Salamence | Rillaboom: Fake Out -> Garchomp",
+  "adapt": 0.5045,
+  "reader": [
+   [
+    0.395431637275166,
+    "Garchomp: Flamethrower -> Rillaboom | Rillaboom: switch"
+   ],
+   [
+    0.3428309072518585,
+    "Garchomp: switch | Rillaboom: switch"
+   ],
+   [
+    0.26173745547297544,
+    "Garchomp: switch | Rillaboom: Fake Out -> Incineroar"
+   ]
+  ]
+ },
+ "Balance, no speed control||Incineroar+Rillaboom||Gholdengo + Raichu": {
+  "share": 0.062,
+  "n": 83,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.6130953547884965,
+  "worst": 0.5379398382749325,
+  "vb": 0.6151047782449889,
+  "vc": 0.5379398382749326,
+  "blend": [
+   [
+    0.9525606469002694,
+    "Incineroar: Flare Blitz -> Gholdengo | Rillaboom: Grassy Glide -> Raichu"
+   ],
+   [
+    0.047439353099730575,
+    "Incineroar: Flare Blitz -> Raichu | Rillaboom: Grassy Glide -> Raichu"
+   ]
+  ],
+  "exploit": "Incineroar: Flare Blitz -> Gholdengo | Rillaboom: Grassy Glide -> Raichu",
+  "adapt": 0.5296,
+  "reader": [
+   [
+    0.9477088948787056,
+    "Gholdengo: Make It Rain | Raichu: Fake Out -> Incineroar"
+   ]
+  ]
+ },
+ "Balance, no speed control||Incineroar+Rillaboom||Garchomp + Raichu": {
+  "share": 0.035,
+  "n": 47,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.6254424660178665,
+  "worst": 0.5870944203177134,
+  "vb": 0.6386472138928979,
+  "vc": 0.5927783519828127,
+  "blend": [
+   [
+    0.49274630439741846,
+    "Incineroar: Flare Blitz -> Raichu | Rillaboom: Wood Hammer -> Garchomp"
+   ],
+   [
+    0.432468630465707,
+    "Incineroar: Parting Shot -> Garchomp | Rillaboom: Grassy Glide -> Raichu"
+   ],
+   [
+    0.07478506513687462,
+    "Incineroar: Parting Shot -> Garchomp | Rillaboom: Fake Out -> Garchomp"
+   ]
+  ],
+  "exploit": "Incineroar: Parting Shot -> Garchomp | Rillaboom: Grassy Glide -> Raichu",
+  "adapt": 0.5425129510064566,
+  "reader": [
+   [
+    0.49587854617120336,
+    "Garchomp: Rock Slide | Raichu: Fake Out -> Rillaboom"
+   ],
+   [
+    0.34191712341853897,
+    "Garchomp: Rock Slide | Raichu: Protect"
+   ],
+   [
+    0.1350732908759803,
+    "Garchomp: Rock Slide | Raichu: Zap Cannon -> Rillaboom"
+   ]
+  ]
+ },
+ "Balance, no speed control||Incineroar+Rillaboom||Floette-Eternal + Incineroar": {
+  "share": 0.04,
+  "n": 54,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.5123320131661137,
+  "worst": 0.4471150288124193,
+  "vb": 0.53443465,
+  "vc": 0.4557769572856815,
+  "blend": [
+   [
+    0.555238952209558,
+    "Incineroar: Parting Shot -> Incineroar | Rillaboom: Fake Out -> Incineroar"
+   ],
+   [
+    0.29532729817672826,
+    "Incineroar: Fake Out -> Floette-Eternal | Rillaboom: Wood Hammer -> Floette-Eternal"
+   ],
+   [
+    0.1494337496137137,
+    "Incineroar: Parting Shot -> Floette-Eternal | Rillaboom: Fake Out -> Floette-Eternal"
+   ]
+  ],
+  "exploit": "Incineroar: Parting Shot -> Incineroar | Rillaboom: Fake Out -> Incineroar",
+  "adapt": 0.3725,
+  "reader": [
+   [
+    0.7457625430418008,
+    "Floette-Eternal: Dazzling Gleam | Incineroar: Parting Shot -> Rillaboom"
+   ],
+   [
+    0.13746769519890903,
+    "Floette-Eternal: Protect | Incineroar: Parting Shot -> Rillaboom"
+   ],
+   [
+    0.0862790258752321,
+    "Floette-Eternal: Moonblast -> Rillaboom | Incineroar: Fake Out -> Incineroar"
+   ]
+  ]
+ },
+ "Balance, no speed control||Incineroar+Rillaboom||Arcanine-Hisui + Raichu": {
+  "share": 0.028,
+  "n": 37,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.5849179033236322,
+  "worst": 0.572572829149147,
+  "vb": 0.5894115205596736,
+  "vc": 0.5728117892497897,
+  "blend": [
+   [
+    0.5400508462644305,
+    "Incineroar: Fake Out -> Arcanine-Hisui | Rillaboom: Grassy Glide -> Raichu"
+   ],
+   [
+    0.14172245112179865,
+    "Incineroar: Flare Blitz -> Raichu | Rillaboom: Fake Out -> Arcanine-Hisui"
+   ],
+   [
+    0.11148548588876057,
+    "Incineroar: Flare Blitz -> Raichu | Rillaboom: Wood Hammer -> Arcanine-Hisui"
+   ],
+   [
+    0.11067882412718977,
+    "Incineroar: Fake Out -> Arcanine-Hisui | Rillaboom: Wood Hammer -> Arcanine-Hisui"
+   ],
+   [
+    0.09606239259782044,
+    "Incineroar: Flare Blitz -> Raichu | Rillaboom: switch -> Salamence"
+   ]
+  ],
+  "exploit": "Incineroar: Fake Out -> Arcanine-Hisui | Rillaboom: Grassy Glide -> Raichu",
+  "adapt": 0.5403040071256845,
+  "reader": [
+   [
+    0.3728304311375547,
+    "Arcanine-Hisui: Flare Blitz -> Rillaboom | Raichu: Fake Out -> Rillaboom"
+   ],
+   [
+    0.22342538545058555,
+    "Arcanine-Hisui: Head Smash -> Rillaboom | Raichu: Fake Out -> Rillaboom"
+   ],
+   [
+    0.21634321652395053,
+    "Arcanine-Hisui: Head Smash -> Incineroar | Raichu: Zap Cannon -> Rillaboom"
+   ],
+   [
+    0.0974520016667583,
+    "Arcanine-Hisui: Flare Blitz -> Rillaboom | Raichu: Protect"
+   ],
+   [
+    0.0899489652211537,
+    "Arcanine-Hisui: Head Smash -> Rillaboom | Raichu: Protect"
+   ]
+  ]
+ },
+ "Balance, no speed control||Incineroar+Rillaboom||Incineroar + Raichu": {
+  "share": 0.029,
+  "n": 39,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.5282321569020759,
+  "worst": 0.4974688364272199,
+  "vb": 0.5402748776258617,
+  "vc": 0.4978179458957638,
+  "blend": [
+   [
+    0.4127083491942502,
+    "Incineroar: Parting Shot -> Incineroar | Rillaboom: Fake Out -> Raichu"
+   ],
+   [
+    0.3196177997777669,
+    "Incineroar: switch -> Salamence | Rillaboom: Wood Hammer -> Raichu"
+   ],
+   [
+    0.1830000169592998,
+    "Incineroar: switch -> Salamence | Rillaboom: Fake Out -> Raichu"
+   ],
+   [
+    0.07052970538395632,
+    "Incineroar: Fake Out -> Raichu | Rillaboom: switch -> Salamence"
+   ]
+  ],
+  "exploit": "Incineroar: switch -> Salamence | Rillaboom: Fake Out -> Raichu",
+  "adapt": 0.4628,
+  "reader": [
+   [
+    0.4740484623133856,
+    "Incineroar: Throat Chop -> Incineroar | Raichu: Protect"
+   ],
+   [
+    0.2915408883301104,
+    "Incineroar: switch | Raichu: Zap Cannon -> Rillaboom"
+   ],
+   [
+    0.17529883656368261,
+    "Incineroar: switch | Raichu: Fake Out -> Incineroar"
+   ]
+  ]
+ },
+ "Balance, no speed control||Salamence+Incineroar||Garchomp + Raichu": {
+  "share": 0.035,
+  "n": 47,
+  "back": [
+   "Sneasler",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.6411271616879056,
+  "worst": 0.5948846155707569,
+  "vb": 0.6475943749262216,
+  "vc": 0.5962311250960947,
+  "blend": [
+   [
+    0.5715573108067452,
+    "Salamence: Tailwind | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.37783011800750077,
+    "Salamence: Tailwind | Incineroar: Flare Blitz -> Raichu"
+   ],
+   [
+    0.05061257118575402,
+    "Salamence: Protect | Incineroar: Flare Blitz -> Raichu"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Incineroar: Fake Out -> Raichu",
+  "adapt": 0.5773827560047907,
+  "reader": [
+   [
+    0.3072145808024254,
+    "Garchomp: switch | Raichu: Fake Out -> Salamence"
+   ],
+   [
+    0.2953910562045125,
+    "Garchomp: switch | Raichu: Zap Cannon -> Salamence"
+   ],
+   [
+    0.24307204108659167,
+    "Garchomp: switch | Raichu: Fake Out -> Incineroar"
+   ],
+   [
+    0.15432232190647005,
+    "Garchomp: switch | Raichu: Protect"
+   ]
+  ]
+ },
+ "Balance, no speed control||Salamence+Incineroar||Floette-Eternal + Incineroar": {
+  "share": 0.04,
+  "n": 54,
+  "back": [
+   "Sneasler",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.538654915210827,
+  "worst": 0.49504496912139484,
+  "vb": 0.5676083794312983,
+  "vc": 0.49507252252252265,
+  "blend": [
+   [
+    0.6332413713830023,
+    "Salamence: Protect | Incineroar: switch -> Gholdengo"
+   ],
+   [
+    0.36156668880078874,
+    "Salamence: Hyper Voice | Incineroar: Fake Out -> Floette-Eternal"
+   ]
+  ],
+  "exploit": "Salamence: Hyper Voice | Incineroar: Parting Shot -> Incineroar",
+  "adapt": 0.3287624436638165,
+  "reader": [
+   [
+    0.6671671671671672,
+    "Floette-Eternal: Dazzling Gleam | Incineroar: Fake Out -> Incineroar"
+   ],
+   [
+    0.33283283283283255,
+    "Floette-Eternal: Moonblast -> Incineroar | Incineroar: switch"
+   ]
+  ]
+ },
+ "Balance, no speed control||Salamence+Incineroar||Garchomp + Rillaboom": {
+  "share": 0.028,
+  "n": 37,
+  "back": [
+   "Sneasler",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.5946768914287895,
+  "worst": 0.5068454747543332,
+  "vb": 0.6107932613076579,
+  "vc": 0.5068454509799389,
+  "blend": [
+   [
+    0.6411439548261766,
+    "Salamence: Protect | Incineroar: Parting Shot -> Rillaboom"
+   ],
+   [
+    0.35885604517382336,
+    "Salamence: Hyper Voice | Incineroar: Fake Out -> Garchomp"
+   ]
+  ],
+  "exploit": "Salamence: Protect | Incineroar: Flare Blitz -> Rillaboom",
+  "adapt": 0.47137409661468244,
+  "reader": [
+   [
+    0.6115000052041369,
+    "Garchomp: Earth Power -> Incineroar | Rillaboom: switch"
+   ],
+   [
+    0.38849999479586306,
+    "Garchomp: Dragon Pulse -> Salamence | Rillaboom: Fake Out -> Incineroar"
+   ]
+  ]
+ },
+ "Balance, no speed control||Salamence+Incineroar||Arcanine-Hisui + Raichu": {
+  "share": 0.028,
+  "n": 37,
+  "back": [
+   "Sneasler",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.6444905181178664,
+  "worst": 0.6176359435753122,
+  "vb": 0.6546088697175574,
+  "vc": 0.6186698744315531,
+  "blend": [
+   [
+    0.4425366698780714,
+    "Salamence: Tailwind | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.2453443981057523,
+    "Salamence: Protect | Incineroar: Flare Blitz -> Raichu"
+   ],
+   [
+    0.18669866595909007,
+    "Salamence: Tailwind | Incineroar: Flare Blitz -> Raichu"
+   ],
+   [
+    0.1254202660570864,
+    "Salamence: Tailwind | Incineroar: Parting Shot -> Arcanine-Hisui"
+   ]
+  ],
+  "exploit": "Salamence: Double-Edge -> Raichu | Incineroar: Fake Out -> Raichu",
+  "adapt": 0.5504708043875945,
+  "reader": [
+   [
+    0.655171856422003,
+    "Arcanine-Hisui: Head Smash -> Salamence | Raichu: Fake Out -> Incineroar"
+   ],
+   [
+    0.2039386733941681,
+    "Arcanine-Hisui: Head Smash -> Salamence | Raichu: Protect"
+   ]
+  ]
+ },
+ "Balance, no speed control||Salamence+Incineroar||Gholdengo + Raichu": {
+  "share": 0.062,
+  "n": 83,
+  "back": [
+   "Sneasler",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.5367175593364468,
+  "worst": 0.4174831136206486,
+  "vb": 0.5434200571272157,
+  "vc": 0.41805905006418487,
+  "blend": [
+   [
+    0.6057451842438966,
+    "Salamence: Tailwind | Incineroar: Flare Blitz -> Gholdengo"
+   ],
+   [
+    0.2245405582877496,
+    "Salamence: Double-Edge -> Raichu | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.1697142574683539,
+    "Salamence: Protect | Incineroar: Flare Blitz -> Gholdengo"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Incineroar: Flare Blitz -> Gholdengo",
+  "adapt": 0.3319230668964673,
+  "reader": [
+   [
+    0.6996148908857497,
+    "Gholdengo: Make It Rain | Raichu: Fake Out -> Incineroar"
+   ],
+   [
+    0.30038510911425004,
+    "Gholdengo: Nasty Plot | Raichu: Fake Out -> Incineroar"
+   ]
+  ]
+ },
+ "Balance, no speed control||Salamence+Incineroar||Incineroar + Raichu": {
+  "share": 0.029,
+  "n": 39,
+  "back": [
+   "Sneasler",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.5591321541471588,
+  "worst": 0.46712189699888845,
+  "vb": 0.5724234423442341,
+  "vc": 0.4710681415929204,
+  "blend": [
+   [
+    0.645053723601334,
+    "Salamence: Hyper Voice | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.35494627639866605,
+    "Salamence: Protect | Incineroar: Flare Blitz -> Raichu"
+   ]
+  ],
+  "exploit": "Salamence: Hyper Voice | Incineroar: Fake Out -> Raichu",
+  "adapt": 0.4268,
+  "reader": [
+   [
+    0.6017699115044247,
+    "Incineroar: Fake Out -> Incineroar | Raichu: Zap Cannon -> Salamence"
+   ],
+   [
+    0.3982300884955753,
+    "Incineroar: Fake Out -> Incineroar | Raichu: Zap Cannon -> Incineroar"
+   ]
+  ]
+ },
+ "Rain||Salamence+Rillaboom||Farigiraf + Golisopod": {
+  "share": 0.021,
+  "n": 28,
+  "back": [
+   "Gholdengo",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.5623829512574716,
+  "worst": 0.4795395837945539,
+  "vb": 0.6353974400000002,
+  "vc": 0.47953958379455397,
+  "blend": [
+   [
+    0.8804516271861855,
+    "Salamence: Tailwind | Rillaboom: switch -> Incineroar"
+   ],
+   [
+    0.11954837281381445,
+    "Salamence: Hyper Voice | Rillaboom: Wood Hammer -> Farigiraf"
+   ]
+  ],
+  "exploit": "Salamence: Hyper Voice | Rillaboom: Wood Hammer -> Farigiraf",
+  "adapt": 0.2854,
+  "reader": [
+   [
+    0.5118441443435908,
+    "Farigiraf: Trick Room | Golisopod: First Impression -> Rillaboom"
+   ],
+   [
+    0.4881558556564091,
+    "Farigiraf: Trick Room | Golisopod: Swords Dance"
+   ]
+  ]
+ },
+ "Rain||Salamence+Rillaboom||Archaludon + Pelipper": {
+  "share": 0.083,
+  "n": 113,
+  "back": [
+   "Gholdengo",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.5435765332085561,
+  "worst": 0.5114978609625668,
+  "vb": 0.5465412900000001,
+  "vc": 0.5114978609625667,
+  "blend": [
+   [
+    0.9691027926322046,
+    "Salamence: Hyper Voice | Rillaboom: Wood Hammer -> Pelipper"
+   ],
+   [
+    0.030897207367795443,
+    "Salamence: Tailwind | Rillaboom: Fake Out -> Archaludon"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Rillaboom: Fake Out -> Archaludon",
+  "adapt": 0.4487,
+  "reader": [
+   [
+    0.6149732620320865,
+    "Archaludon: Electro Shot -> Salamence | Pelipper: Hurricane -> Rillaboom"
+   ],
+   [
+    0.38502673796791387,
+    "Archaludon: Electro Shot -> Salamence | Pelipper: switch"
+   ]
+  ]
+ },
+ "Rain||Salamence+Rillaboom||Pelipper + Sneasler": {
+  "share": 0.042,
+  "n": 57,
+  "back": [
+   "Gholdengo",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.5449108707070628,
+  "worst": 0.49925038506016284,
+  "vb": 0.5875975504899021,
+  "vc": 0.5058810001320023,
+  "blend": [
+   [
+    0.44044963809464804,
+    "Salamence: switch -> Incineroar | Rillaboom: Fake Out -> Pelipper"
+   ],
+   [
+    0.29401911587619184,
+    "Salamence: Hyper Voice | Rillaboom: Wood Hammer -> Pelipper"
+   ],
+   [
+    0.12893040464169958,
+    "Salamence: Hyper Voice | Rillaboom: Fake Out -> Pelipper"
+   ],
+   [
+    0.07649348518617016,
+    "Salamence: Double-Edge -> Sneasler | Rillaboom: Fake Out -> Pelipper"
+   ],
+   [
+    0.06010735620129031,
+    "Salamence: Hyper Voice | Rillaboom: switch -> Incineroar"
+   ]
+  ],
+  "exploit": "Salamence: Hyper Voice | Rillaboom: Wood Hammer -> Pelipper",
+  "adapt": 0.368,
+  "reader": [
+   [
+    0.6281946110299724,
+    "Pelipper: Hurricane -> Rillaboom | Sneasler: Fake Out -> Salamence"
+   ],
+   [
+    0.2022814450444693,
+    "Pelipper: Hurricane -> Rillaboom | Sneasler: switch"
+   ],
+   [
+    0.09718304294710865,
+    "Pelipper: Tailwind | Sneasler: switch"
+   ]
+  ]
+ },
+ "Rain||Salamence+Rillaboom||Archaludon + Grimmsnarl": {
+  "share": 0.032,
+  "n": 43,
+  "back": [
+   "Gholdengo",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.5535577290909376,
+  "worst": 0.5367395429811823,
+  "vb": 0.5933392100000001,
+  "vc": 0.5367395429811823,
+  "blend": [
+   [
+    0.6913452342801293,
+    "Salamence: Tailwind | Rillaboom: Fake Out -> Archaludon"
+   ],
+   [
+    0.24335013920298557,
+    "Salamence: switch -> Incineroar | Rillaboom: Fake Out -> Grimmsnarl"
+   ],
+   [
+    0.0653046265168852,
+    "Salamence: Double-Edge -> Grimmsnarl | Rillaboom: Fake Out -> Grimmsnarl"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Rillaboom: Fake Out -> Grimmsnarl",
+  "adapt": 0.3997,
+  "reader": [
+   [
+    0.5245108293017539,
+    "Archaludon: Electro Shot -> Salamence | Grimmsnarl: Reflect"
+   ],
+   [
+    0.36800352288394916,
+    "Archaludon: Dragon Pulse -> Salamence | Grimmsnarl: Light Screen"
+   ],
+   [
+    0.107485647814297,
+    "Archaludon: Electro Shot -> Salamence | Grimmsnarl: switch"
+   ]
+  ]
+ },
+ "Rain||Salamence+Rillaboom||Dragonite + Gholdengo": {
+  "share": 0.02,
+  "n": 27,
+  "back": [
+   "Gholdengo",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.5201890654867543,
+  "worst": 0.3614566198135536,
+  "vb": 0.523582098209821,
+  "vc": 0.3943776970822032,
+  "blend": [
+   [
+    0.9204946143071056,
+    "Salamence: Tailwind | Rillaboom: Fake Out -> Dragonite"
+   ],
+   [
+    0.05414674201806483,
+    "Salamence: Tailwind | Rillaboom: Wood Hammer -> Gholdengo"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Rillaboom: Fake Out -> Dragonite",
+  "adapt": 0.3541,
+  "reader": [
+   [
+    0.6569187259680762,
+    "Dragonite: Tailwind | Gholdengo: Make It Rain"
+   ],
+   [
+    0.18759866739906747,
+    "Dragonite: Protect | Gholdengo: Shadow Ball -> Rillaboom"
+   ],
+   [
+    0.15548260663285685,
+    "Dragonite: Protect | Gholdengo: Make It Rain"
+   ]
+  ]
+ },
+ "Rain||Salamence+Rillaboom||Pelipper + Swampert": {
+  "share": 0.068,
+  "n": 93,
+  "back": [
+   "Gholdengo",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.7136742325923295,
+  "worst": 0.6122702195201863,
+  "vb": 0.7328829000000001,
+  "vc": 0.6122702195201861,
+  "blend": [
+   [
+    0.559682937574899,
+    "Salamence: Hyper Voice | Rillaboom: Wood Hammer -> Pelipper"
+   ],
+   [
+    0.33875961101976915,
+    "Salamence: Tailwind | Rillaboom: Grassy Glide -> Swampert"
+   ],
+   [
+    0.10155745140533193,
+    "Salamence: Hyper Voice | Rillaboom: Wood Hammer -> Swampert"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Rillaboom: Grassy Glide -> Swampert",
+  "adapt": 0.4512,
+  "reader": [
+   [
+    0.46943099493975043,
+    "Pelipper: switch | Swampert: switch"
+   ],
+   [
+    0.30117951144926985,
+    "Pelipper: Hurricane -> Rillaboom | Swampert: switch"
+   ],
+   [
+    0.22938949361097966,
+    "Pelipper: switch | Swampert: Ice Punch -> Salamence"
+   ]
+  ]
+ },
+ "Rain||Salamence+Incineroar||Farigiraf + Golisopod": {
+  "share": 0.021,
+  "n": 28,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.6224057405859623,
+  "worst": 0.5387997276562138,
+  "vb": 0.6542739200000001,
+  "vc": 0.5388275384026381,
+  "blend": [
+   [
+    0.7747130831573075,
+    "Salamence: Hyper Voice | Incineroar: Parting Shot -> Farigiraf"
+   ],
+   [
+    0.20501626541139875,
+    "Salamence: Hyper Voice | Incineroar: Flare Blitz -> Golisopod"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Incineroar: Flare Blitz -> Golisopod",
+  "adapt": 0.4693,
+  "reader": [
+   [
+    0.730590515384984,
+    "Farigiraf: Trick Room | Golisopod: switch"
+   ],
+   [
+    0.26870124898310765,
+    "Farigiraf: Trick Room | Golisopod: Swords Dance"
+   ]
+  ]
+ },
+ "Rain||Salamence+Incineroar||Archaludon + Pelipper": {
+  "share": 0.083,
+  "n": 113,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.5454140198977506,
+  "worst": 0.48749775051124744,
+  "vb": 0.5471237100000002,
+  "vc": 0.48787577659385306,
+  "blend": [
+   [
+    0.9059304703476485,
+    "Salamence: Tailwind | Incineroar: Fake Out -> Archaludon"
+   ],
+   [
+    0.09406952965235149,
+    "Salamence: Hyper Voice | Incineroar: Fake Out -> Archaludon"
+   ]
+  ],
+  "exploit": "Salamence: Hyper Voice | Incineroar: Fake Out -> Archaludon",
+  "adapt": 0.4604,
+  "reader": [
+   [
+    0.4617876969884363,
+    "Archaludon: Electro Shot -> Salamence | Pelipper: Weather Ball -> Incineroar"
+   ],
+   [
+    0.42901171558587753,
+    "Archaludon: Protect | Pelipper: Tailwind"
+   ],
+   [
+    0.1092005874256862,
+    "Archaludon: Electro Shot -> Salamence | Pelipper: Tailwind"
+   ]
+  ]
+ },
+ "Rain||Salamence+Incineroar||Pelipper + Sneasler": {
+  "share": 0.042,
+  "n": 57,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.5011299850512811,
+  "worst": 0.4855913632878269,
+  "vb": 0.5220086782643473,
+  "vc": 0.4887901912679619,
+  "blend": [
+   [
+    0.7077436790812527,
+    "Salamence: Hyper Voice | Incineroar: Fake Out -> Pelipper"
+   ],
+   [
+    0.18578128789740012,
+    "Salamence: Double-Edge -> Sneasler | Incineroar: Fake Out -> Pelipper"
+   ],
+   [
+    0.08956907357978976,
+    "Salamence: switch -> Gholdengo | Incineroar: Parting Shot -> Pelipper"
+   ]
+  ],
+  "exploit": "Salamence: Hyper Voice | Incineroar: Fake Out -> Sneasler",
+  "adapt": 0.3867,
+  "reader": [
+   [
+    0.6187786806181764,
+    "Pelipper: Weather Ball -> Salamence | Sneasler: Fake Out -> Salamence"
+   ],
+   [
+    0.1826810453839719,
+    "Pelipper: switch | Sneasler: Fake Out -> Salamence"
+   ],
+   [
+    0.08761502089791837,
+    "Pelipper: switch | Sneasler: Close Combat -> Incineroar"
+   ]
+  ]
+ },
+ "Rain||Salamence+Incineroar||Dragonite + Gholdengo": {
+  "share": 0.02,
+  "n": 27,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.5653817132156193,
+  "worst": 0.5225008851014461,
+  "vb": 0.6255165916591658,
+  "vc": 0.5225008850942925,
+  "blend": [
+   [
+    0.4891330437076484,
+    "Salamence: Tailwind | Incineroar: Fake Out -> Dragonite"
+   ],
+   [
+    0.2596088686755527,
+    "Salamence: Tailwind | Incineroar: Flare Blitz -> Gholdengo"
+   ],
+   [
+    0.2512580876167989,
+    "Salamence: Protect | Incineroar: Flare Blitz -> Gholdengo"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Incineroar: Flare Blitz -> Gholdengo",
+  "adapt": 0.3486,
+  "reader": [
+   [
+    0.515349608630417,
+    "Dragonite: Dragon Pulse -> Salamence | Gholdengo: Make It Rain"
+   ],
+   [
+    0.4776006073053353,
+    "Dragonite: Tailwind | Gholdengo: Protect"
+   ]
+  ]
+ },
+ "Rain||Salamence+Incineroar||Pelipper + Swampert": {
+  "share": 0.068,
+  "n": 93,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.6537489980793856,
+  "worst": 0.609556338028169,
+  "vb": 0.6699743100000003,
+  "vc": 0.6114613743135839,
+  "blend": [
+   [
+    0.7375160051216392,
+    "Salamence: Hyper Voice | Incineroar: Fake Out -> Pelipper"
+   ],
+   [
+    0.2624839948783608,
+    "Salamence: Tailwind | Incineroar: Parting Shot -> Pelipper"
+   ]
+  ],
+  "exploit": "Salamence: Hyper Voice | Incineroar: Fake Out -> Swampert",
+  "adapt": 0.5047,
+  "reader": [
+   [
+    0.4511061513389004,
+    "Pelipper: Tailwind | Swampert: switch"
+   ],
+   [
+    0.4110036847815176,
+    "Pelipper: switch | Swampert: Ice Punch -> Salamence"
+   ],
+   [
+    0.1378901638795825,
+    "Pelipper: switch | Swampert: switch"
+   ]
+  ]
+ },
+ "Rain||Salamence+Incineroar||Archaludon + Grimmsnarl": {
+  "share": 0.032,
+  "n": 43,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.5886049550804158,
+  "worst": 0.5813884855846928,
+  "vb": 0.6321025899999999,
+  "vc": 0.5813884855846929,
+  "blend": [
+   [
+    0.8727946623442615,
+    "Salamence: Tailwind | Incineroar: Fake Out -> Archaludon"
+   ],
+   [
+    0.07939702784911662,
+    "Salamence: Protect | Incineroar: Fake Out -> Grimmsnarl"
+   ],
+   [
+    0.047808309806621894,
+    "Salamence: Tailwind | Incineroar: Fake Out -> Grimmsnarl"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Incineroar: Fake Out -> Grimmsnarl",
+  "adapt": 0.3971,
+  "reader": [
+   [
+    0.5241927575254894,
+    "Archaludon: Dragon Pulse -> Salamence | Grimmsnarl: Light Screen"
+   ],
+   [
+    0.43183162524949503,
+    "Archaludon: Electro Shot -> Salamence | Grimmsnarl: Reflect"
+   ]
+  ]
+ },
+ "Rain||Gholdengo+Salamence||Archaludon + Pelipper": {
+  "share": 0.083,
+  "n": 113,
+  "back": [
+   "Rillaboom",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.5150660456071203,
+  "worst": 0.4792821996185633,
+  "vb": 0.5150985191684901,
+  "vc": 0.4792821996185632,
+  "blend": [
+   [
+    0.9084551811824538,
+    "Gholdengo: Shadow Ball -> Pelipper | Salamence: Hyper Voice"
+   ],
+   [
+    0.09154481881754617,
+    "Gholdengo: Shadow Ball -> Pelipper | Salamence: Protect"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Pelipper | Salamence: Hyper Voice",
+  "adapt": 0.4764422319474836,
+  "reader": [
+   [
+    0.7234583598219958,
+    "Archaludon: Electro Shot -> Salamence | Pelipper: switch"
+   ],
+   [
+    0.2765416401780042,
+    "Archaludon: Electro Shot -> Gholdengo | Pelipper: switch"
+   ]
+  ]
+ },
+ "Rain||Gholdengo+Salamence||Pelipper + Sneasler": {
+  "share": 0.042,
+  "n": 57,
+  "back": [
+   "Rillaboom",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.5793547804704623,
+  "worst": 0.552466695833371,
+  "vb": 0.6101579284143173,
+  "vc": 0.5541316793613105,
+  "blend": [
+   [
+    0.6494946247641611,
+    "Gholdengo: Power Gem -> Pelipper | Salamence: switch -> Incineroar"
+   ],
+   [
+    0.306043729229738,
+    "Gholdengo: Power Gem -> Pelipper | Salamence: Hyper Voice"
+   ],
+   [
+    0.04446164600610092,
+    "Gholdengo: Power Gem -> Pelipper | Salamence: Double-Edge -> Sneasler"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Pelipper | Salamence: Hyper Voice",
+  "adapt": 0.4844,
+  "reader": [
+   [
+    0.6859572325428834,
+    "Pelipper: Tailwind | Sneasler: Fake Out -> Salamence"
+   ],
+   [
+    0.21464854618098783,
+    "Pelipper: switch | Sneasler: Throat Chop -> Gholdengo"
+   ]
+  ]
+ },
+ "Rain||Gholdengo+Salamence||Dragonite + Gholdengo": {
+  "share": 0.02,
+  "n": 27,
+  "back": [
+   "Rillaboom",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.6573568756875685,
+  "worst": 0.3532,
+  "vb": 0.6573568756875685,
+  "vc": 0.45561313110923896,
+  "blend": [
+   [
+    1.0,
+    "Gholdengo: Shadow Ball -> Gholdengo | Salamence: Tailwind"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Gholdengo | Salamence: Tailwind",
+  "adapt": 0.3532,
+  "reader": [
+   [
+    0.32893993592434095,
+    "Dragonite: Heat Wave | Gholdengo: Protect"
+   ],
+   [
+    0.31204284291714374,
+    "Dragonite: Dragon Pulse -> Salamence | Gholdengo: Protect"
+   ],
+   [
+    0.20052566657161328,
+    "Dragonite: Tailwind | Gholdengo: Protect"
+   ],
+   [
+    0.1584915545869024,
+    "Dragonite: Dragon Pulse -> Salamence | Gholdengo: Shadow Ball -> Gholdengo"
+   ]
+  ]
+ },
+ "Rain||Gholdengo+Salamence||Pelipper + Swampert": {
+  "share": 0.068,
+  "n": 93,
+  "back": [
+   "Rillaboom",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.6701169084633296,
+  "worst": 0.589695227008149,
+  "vb": 0.68183457,
+  "vc": 0.5959181310317032,
+  "blend": [
+   [
+    0.9068684516880092,
+    "Gholdengo: Shadow Ball -> Pelipper | Salamence: Hyper Voice"
+   ],
+   [
+    0.09313154831199077,
+    "Gholdengo: Protect | Salamence: Hyper Voice"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Pelipper | Salamence: Hyper Voice",
+  "adapt": 0.5154,
+  "reader": [
+   [
+    0.5756921343565795,
+    "Pelipper: switch | Swampert: High Horsepower -> Gholdengo"
+   ],
+   [
+    0.3259830467981433,
+    "Pelipper: switch | Swampert: Ice Punch -> Salamence"
+   ],
+   [
+    0.09832481884527687,
+    "Pelipper: Tailwind | Swampert: Ice Punch -> Salamence"
+   ]
+  ]
+ },
+ "Rain||Gholdengo+Salamence||Farigiraf + Golisopod": {
+  "share": 0.021,
+  "n": 28,
+  "back": [
+   "Rillaboom",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.5777182652542371,
+  "worst": 0.4647556900726392,
+  "vb": 0.5798468600000001,
+  "vc": 0.4647556900726393,
+  "blend": [
+   [
+    0.8087167070217913,
+    "Gholdengo: Shadow Ball -> Golisopod | Salamence: Hyper Voice"
+   ],
+   [
+    0.19128329297820865,
+    "Gholdengo: switch -> Incineroar | Salamence: Hyper Voice"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Golisopod | Salamence: Hyper Voice",
+  "adapt": 0.4572,
+  "reader": [
+   [
+    0.9564164648910386,
+    "Farigiraf: Trick Room | Golisopod: Swords Dance"
+   ]
+  ]
+ },
+ "Rain||Gholdengo+Salamence||Archaludon + Grimmsnarl": {
+  "share": 0.032,
+  "n": 43,
+  "back": [
+   "Rillaboom",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.4921333706572771,
+  "worst": 0.42103408450704227,
+  "vb": 0.51427862,
+  "vc": 0.42224384371076146,
+  "blend": [
+   [
+    0.5342723004694836,
+    "Gholdengo: Shadow Ball -> Archaludon | Salamence: switch -> Incineroar"
+   ],
+   [
+    0.4657276995305164,
+    "Gholdengo: Shadow Ball -> Archaludon | Salamence: Tailwind"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Grimmsnarl | Salamence: Tailwind",
+  "adapt": 0.3348,
+  "reader": [
+   [
+    0.5003646871999409,
+    "Archaludon: Dragon Pulse -> Salamence | Grimmsnarl: Light Screen"
+   ],
+   [
+    0.4154618140187606,
+    "Archaludon: Electro Shot -> Gholdengo | Grimmsnarl: switch"
+   ],
+   [
+    0.08417349878129854,
+    "Archaludon: Snarl | Grimmsnarl: Light Screen"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Kingambit+Incineroar||Rillaboom + Sneasler": {
+  "share": 0.025,
+  "n": 102,
+  "back": [
+   "Gholdengo",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.6997641547366417,
+  "worst": 0.6391974452554744,
+  "vb": 0.700720043945897,
+  "vc": 0.6395737608996475,
+  "blend": [
+   [
+    0.6459854014598541,
+    "Kingambit: Kowtow Cleave -> Rillaboom | Incineroar: switch -> Salamence"
+   ],
+   [
+    0.3540145985401459,
+    "Kingambit: switch -> Salamence | Incineroar: Flare Blitz -> Rillaboom"
+   ]
+  ],
+  "exploit": "Kingambit: switch -> Salamence | Incineroar: Flare Blitz -> Rillaboom",
+  "adapt": 0.6310373171961674,
+  "reader": [
+   [
+    0.6311691612413904,
+    "Rillaboom: Fake Out -> Incineroar | Sneasler: Swords Dance"
+   ],
+   [
+    0.35365347053460783,
+    "Rillaboom: Fake Out -> Kingambit | Sneasler: Swords Dance"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Kingambit+Incineroar||Salamence + Sneasler": {
+  "share": 0.026,
+  "n": 103,
+  "back": [
+   "Gholdengo",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.6078568486366293,
+  "worst": 0.573963263334512,
+  "vb": 0.6145021650641633,
+  "vc": 0.5742916077197842,
+  "blend": [
+   [
+    0.5989589850198198,
+    "Kingambit: Kowtow Cleave -> Sneasler | Incineroar: Fake Out -> Salamence"
+   ],
+   [
+    0.1326548860365154,
+    "Kingambit: Kowtow Cleave -> Salamence | Incineroar: Parting Shot -> Sneasler"
+   ],
+   [
+    0.1226978322840582,
+    "Kingambit: Kowtow Cleave -> Sneasler | Incineroar: Parting Shot -> Sneasler"
+   ],
+   [
+    0.10368150565656918,
+    "Kingambit: Kowtow Cleave -> Sneasler | Incineroar: switch -> Salamence"
+   ],
+   [
+    0.042006791003037364,
+    "Kingambit: Kowtow Cleave -> Salamence | Incineroar: switch -> Gholdengo"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Sneasler | Incineroar: switch -> Salamence",
+  "adapt": 0.4824223618090453,
+  "reader": [
+   [
+    0.41705834368844386,
+    "Salamence: Tailwind | Sneasler: Fake Out -> Incineroar"
+   ],
+   [
+    0.3451453329479527,
+    "Salamence: Tailwind | Sneasler: Fake Out -> Kingambit"
+   ],
+   [
+    0.2290531747435724,
+    "Salamence: Draco Meteor -> Incineroar | Sneasler: Fake Out -> Kingambit"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Kingambit+Incineroar||Gholdengo + Salamence": {
+  "share": 0.026,
+  "n": 105,
+  "back": [
+   "Gholdengo",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.718691958233415,
+  "worst": 0.5132,
+  "vb": 0.7186919544910705,
+  "vc": 0.5805348635348928,
+  "blend": [
+   [
+    1.0,
+    "Kingambit: Kowtow Cleave -> Gholdengo | Incineroar: Parting Shot -> Salamence"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Gholdengo | Incineroar: Parting Shot -> Salamence",
+  "adapt": 0.5132,
+  "reader": [
+   [
+    0.5724863162675045,
+    "Gholdengo: Protect | Salamence: Tailwind"
+   ],
+   [
+    0.25173260217954685,
+    "Gholdengo: Make It Rain | Salamence: Protect"
+   ],
+   [
+    0.1205103236758665,
+    "Gholdengo: Protect | Salamence: switch"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Kingambit+Incineroar||Arcanine-Hisui + Raichu": {
+  "share": 0.046,
+  "n": 186,
+  "back": [
+   "Gholdengo",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.5759976361601529,
+  "worst": 0.561667479744024,
+  "vb": 0.5993637542257537,
+  "vc": 0.5630393249472713,
+  "blend": [
+   [
+    0.3411582249128271,
+    "Kingambit: Kowtow Cleave -> Arcanine-Hisui | Incineroar: Flare Blitz -> Raichu"
+   ],
+   [
+    0.33438908151715696,
+    "Kingambit: switch -> Salamence | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.20420275940551538,
+    "Kingambit: Low Kick -> Arcanine-Hisui | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.04384760261818094,
+    "Kingambit: Kowtow Cleave -> Raichu | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.037953194797452364,
+    "Kingambit: Low Kick -> Arcanine-Hisui | Incineroar: Flare Blitz -> Arcanine-Hisui"
+   ],
+   [
+    0.03473712447873544,
+    "Kingambit: Kowtow Cleave -> Arcanine-Hisui | Incineroar: Fake Out -> Raichu"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Raichu | Incineroar: Fake Out -> Raichu",
+  "adapt": 0.4876582322976357,
+  "reader": [
+   [
+    0.27715805740733984,
+    "Arcanine-Hisui: Flare Blitz -> Kingambit | Raichu: Protect"
+   ],
+   [
+    0.22921056716757188,
+    "Arcanine-Hisui: switch | Raichu: Fake Out -> Incineroar"
+   ],
+   [
+    0.17525650808208681,
+    "Arcanine-Hisui: switch | Raichu: Protect"
+   ],
+   [
+    0.1320756999946741,
+    "Arcanine-Hisui: switch | Raichu: Zap Cannon -> Kingambit"
+   ],
+   [
+    0.11628513070023509,
+    "Arcanine-Hisui: Flare Blitz -> Kingambit | Raichu: Fake Out -> Kingambit"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Kingambit+Incineroar||Gholdengo + Raichu": {
+  "share": 0.096,
+  "n": 387,
+  "back": [
+   "Gholdengo",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.5756910945932933,
+  "worst": 0.5322616620415825,
+  "vb": 0.5901268362233069,
+  "vc": 0.5322745155604932,
+  "blend": [
+   [
+    0.3836105032793649,
+    "Kingambit: Kowtow Cleave -> Raichu | Incineroar: Flare Blitz -> Gholdengo"
+   ],
+   [
+    0.30946781176304405,
+    "Kingambit: Kowtow Cleave -> Raichu | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.1366111092093531,
+    "Kingambit: Sucker Punch -> Raichu | Incineroar: Flare Blitz -> Gholdengo"
+   ],
+   [
+    0.1310286860082302,
+    "Kingambit: Kowtow Cleave -> Gholdengo | Incineroar: Flare Blitz -> Raichu"
+   ],
+   [
+    0.03928188974000765,
+    "Kingambit: Kowtow Cleave -> Gholdengo | Incineroar: Fake Out -> Raichu"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Raichu | Incineroar: Flare Blitz -> Gholdengo",
+  "adapt": 0.4254507429280805,
+  "reader": [
+   [
+    0.40074373737416596,
+    "Gholdengo: Nasty Plot | Raichu: Fake Out -> Kingambit"
+   ],
+   [
+    0.2087600986243481,
+    "Gholdengo: Make It Rain | Raichu: Zap Cannon -> Kingambit"
+   ],
+   [
+    0.16227685035166314,
+    "Gholdengo: Protect | Raichu: Zap Cannon -> Kingambit"
+   ],
+   [
+    0.1374560273341415,
+    "Gholdengo: Nasty Plot | Raichu: Fake Out -> Incineroar"
+   ],
+   [
+    0.09076328631568135,
+    "Gholdengo: Protect | Raichu: Fake Out -> Kingambit"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Kingambit+Incineroar||Gholdengo + Rillaboom": {
+  "share": 0.032,
+  "n": 129,
+  "back": [
+   "Gholdengo",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.6780895398310733,
+  "worst": 0.586414337318206,
+  "vb": 0.695249090148368,
+  "vc": 0.5942827499918919,
+  "blend": [
+   [
+    0.48015750943642516,
+    "Kingambit: Kowtow Cleave -> Rillaboom | Incineroar: Flare Blitz -> Gholdengo"
+   ],
+   [
+    0.37354668175044337,
+    "Kingambit: Kowtow Cleave -> Gholdengo | Incineroar: Flare Blitz -> Rillaboom"
+   ],
+   [
+    0.14629580881313148,
+    "Kingambit: Kowtow Cleave -> Gholdengo | Incineroar: switch -> Salamence"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Gholdengo | Incineroar: Flare Blitz -> Gholdengo",
+  "adapt": 0.49084154302670624,
+  "reader": [
+   [
+    0.4240244424856163,
+    "Gholdengo: Protect | Rillaboom: Fake Out -> Incineroar"
+   ],
+   [
+    0.2842055476329129,
+    "Gholdengo: Protect | Rillaboom: High Horsepower -> Kingambit"
+   ],
+   [
+    0.1709314493575998,
+    "Gholdengo: Nasty Plot | Rillaboom: Fake Out -> Incineroar"
+   ],
+   [
+    0.12083856052387305,
+    "Gholdengo: Nasty Plot | Rillaboom: Fake Out -> Kingambit"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Gholdengo+Incineroar||Gholdengo + Rillaboom": {
+  "share": 0.032,
+  "n": 129,
+  "back": [
+   "Kingambit",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.6591200607583213,
+  "worst": 0.5231284509701972,
+  "vb": 0.69277689,
+  "vc": 0.5560813129675991,
+  "blend": [
+   [
+    0.6276599674123161,
+    "Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Parting Shot -> Rillaboom"
+   ],
+   [
+    0.24306496483557077,
+    "Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Fake Out -> Rillaboom"
+   ],
+   [
+    0.08602509072282023,
+    "Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Flare Blitz -> Rillaboom"
+   ],
+   [
+    0.04324997702929288,
+    "Gholdengo: Shadow Ball -> Gholdengo | Incineroar: switch -> Salamence"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Gholdengo | Incineroar: switch -> Kingambit",
+  "adapt": 0.4489,
+  "reader": [
+   [
+    0.3002230544782467,
+    "Gholdengo: Protect | Rillaboom: High Horsepower -> Gholdengo"
+   ],
+   [
+    0.21860194552774898,
+    "Gholdengo: Shadow Ball -> Gholdengo | Rillaboom: switch"
+   ],
+   [
+    0.16101838720920614,
+    "Gholdengo: Shadow Ball -> Gholdengo | Rillaboom: Fake Out -> Incineroar"
+   ],
+   [
+    0.09501454746200587,
+    "Gholdengo: Protect | Rillaboom: switch"
+   ],
+   [
+    0.09435226106478309,
+    "Gholdengo: switch | Rillaboom: U-turn -> Incineroar"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Gholdengo+Incineroar||Salamence + Sneasler": {
+  "share": 0.026,
+  "n": 103,
+  "back": [
+   "Kingambit",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.577940934490889,
+  "worst": 0.5470632098707373,
+  "vb": 0.5969704570457045,
+  "vc": 0.5472493556383482,
+  "blend": [
+   [
+    0.435819968430772,
+    "Gholdengo: Shadow Ball -> Sneasler | Incineroar: switch -> Kingambit"
+   ],
+   [
+    0.2745753699385948,
+    "Gholdengo: Power Gem -> Salamence | Incineroar: switch -> Salamence"
+   ],
+   [
+    0.23957498074045075,
+    "Gholdengo: Power Gem -> Salamence | Incineroar: Fake Out -> Salamence"
+   ],
+   [
+    0.050029680890182414,
+    "Gholdengo: Shadow Ball -> Sneasler | Incineroar: Fake Out -> Salamence"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Sneasler | Incineroar: switch -> Salamence",
+  "adapt": 0.3787,
+  "reader": [
+   [
+    0.45179980372588024,
+    "Salamence: Draco Meteor -> Incineroar | Sneasler: Protect"
+   ],
+   [
+    0.2225281794486573,
+    "Salamence: Protect | Sneasler: Close Combat -> Incineroar"
+   ],
+   [
+    0.17257064600089436,
+    "Salamence: Protect | Sneasler: switch"
+   ],
+   [
+    0.14445545279198463,
+    "Salamence: Tailwind | Sneasler: Close Combat -> Incineroar"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Gholdengo+Incineroar||Arcanine-Hisui + Raichu": {
+  "share": 0.046,
+  "n": 186,
+  "back": [
+   "Kingambit",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.5687233369530026,
+  "worst": 0.552450250742506,
+  "vb": 0.5853218951195478,
+  "vc": 0.5531318355092238,
+  "blend": [
+   [
+    0.45062055234448145,
+    "Gholdengo: switch -> Salamence | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.29749973170618477,
+    "Gholdengo: Power Gem -> Arcanine-Hisui | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.1754125295992367,
+    "Gholdengo: Power Gem -> Arcanine-Hisui | Incineroar: switch -> Salamence"
+   ],
+   [
+    0.07646718635009704,
+    "Gholdengo: Shadow Ball -> Raichu | Incineroar: Fake Out -> Raichu"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Raichu | Incineroar: Fake Out -> Raichu",
+  "adapt": 0.3774,
+  "reader": [
+   [
+    0.6365205485774436,
+    "Arcanine-Hisui: Flare Blitz -> Gholdengo | Raichu: Fake Out -> Incineroar"
+   ],
+   [
+    0.2510962657024517,
+    "Arcanine-Hisui: switch | Raichu: Zap Cannon -> Incineroar"
+   ],
+   [
+    0.10862493966580344,
+    "Arcanine-Hisui: Head Smash -> Gholdengo | Raichu: Protect"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Gholdengo+Incineroar||Gholdengo + Salamence": {
+  "share": 0.026,
+  "n": 105,
+  "back": [
+   "Kingambit",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.5603506434387999,
+  "worst": 0.47132973282283697,
+  "vb": 0.6071447774205382,
+  "vc": 0.47316301672060723,
+  "blend": [
+   [
+    0.7471914737482963,
+    "Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Fake Out -> Salamence"
+   ],
+   [
+    0.13178144873505793,
+    "Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Parting Shot -> Salamence"
+   ],
+   [
+    0.12102707751664576,
+    "Gholdengo: Power Gem -> Salamence | Incineroar: Fake Out -> Salamence"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Parting Shot -> Salamence",
+  "adapt": 0.2592,
+  "reader": [
+   [
+    0.42557359457959,
+    "Gholdengo: Protect | Salamence: Tailwind"
+   ],
+   [
+    0.32949082144686553,
+    "Gholdengo: Shadow Ball -> Gholdengo | Salamence: Protect"
+   ],
+   [
+    0.19922789417721778,
+    "Gholdengo: Protect | Salamence: switch"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Gholdengo+Incineroar||Gholdengo + Raichu": {
+  "share": 0.096,
+  "n": 387,
+  "back": [
+   "Kingambit",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.612297026880244,
+  "worst": 0.5220019113460757,
+  "vb": 0.6390810651051453,
+  "vc": 0.5223090033882818,
+  "blend": [
+   [
+    0.7466449776331842,
+    "Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.13191234864369028,
+    "Gholdengo: Shadow Ball -> Raichu | Incineroar: Flare Blitz -> Gholdengo"
+   ],
+   [
+    0.12144267372312556,
+    "Gholdengo: Shadow Ball -> Raichu | Incineroar: Fake Out -> Raichu"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Fake Out -> Raichu",
+  "adapt": 0.4841,
+  "reader": [
+   [
+    0.5504008135632709,
+    "Gholdengo: Shadow Ball -> Gholdengo | Raichu: Fake Out -> Incineroar"
+   ],
+   [
+    0.3915785743554399,
+    "Gholdengo: Protect | Raichu: Fake Out -> Incineroar"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Gholdengo+Incineroar||Rillaboom + Sneasler": {
+  "share": 0.025,
+  "n": 102,
+  "back": [
+   "Kingambit",
+   "Salamence"
+  ],
+  "itemMix": false,
+  "pop": 0.7196060848010265,
+  "worst": 0.6561843478260869,
+  "vb": 0.7343520552055206,
+  "vc": 0.665536629605143,
+  "blend": [
+   [
+    0.6664596273291925,
+    "Gholdengo: Shadow Ball -> Rillaboom | Incineroar: switch -> Salamence"
+   ],
+   [
+    0.33354037267080744,
+    "Gholdengo: switch -> Salamence | Incineroar: Flare Blitz -> Rillaboom"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Rillaboom | Incineroar: switch -> Salamence",
+  "adapt": 0.6277,
+  "reader": [
+   [
+    0.4436733101419293,
+    "Rillaboom: High Horsepower -> Gholdengo | Sneasler: Swords Dance"
+   ],
+   [
+    0.42228819895294395,
+    "Rillaboom: Fake Out -> Incineroar | Sneasler: Swords Dance"
+   ],
+   [
+    0.13403849090512673,
+    "Rillaboom: switch | Sneasler: Swords Dance"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Gholdengo+Kingambit||Salamence + Sneasler": {
+  "share": 0.026,
+  "n": 103,
+  "back": [
+   "Salamence",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.6128648207436711,
+  "worst": 0.5419181576302381,
+  "vb": 0.6444849804823024,
+  "vc": 0.5420860271707157,
+  "blend": [
+   [
+    0.646392535319738,
+    "Gholdengo: switch -> Incineroar | Kingambit: Kowtow Cleave -> Sneasler"
+   ],
+   [
+    0.211712566734398,
+    "Gholdengo: Shadow Ball -> Sneasler | Kingambit: Kowtow Cleave -> Salamence"
+   ],
+   [
+    0.14189489794586405,
+    "Gholdengo: Power Gem -> Salamence | Kingambit: Sucker Punch -> Salamence"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Sneasler | Kingambit: Kowtow Cleave -> Salamence",
+  "adapt": 0.4592,
+  "reader": [
+   [
+    0.38362235915919013,
+    "Salamence: Hyper Voice | Sneasler: Close Combat -> Kingambit"
+   ],
+   [
+    0.3002752734592395,
+    "Salamence: Tailwind | Sneasler: Fake Out -> Kingambit"
+   ],
+   [
+    0.2839908073092499,
+    "Salamence: Tailwind | Sneasler: Close Combat -> Kingambit"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Gholdengo+Kingambit||Gholdengo + Raichu": {
+  "share": 0.096,
+  "n": 387,
+  "back": [
+   "Salamence",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.5866303709621803,
+  "worst": 0.43699999999999994,
+  "vb": 0.5931531380870247,
+  "vc": 0.4514916818073914,
+  "blend": [
+   [
+    0.927319211102995,
+    "Gholdengo: Shadow Ball -> Gholdengo | Kingambit: Kowtow Cleave -> Raichu"
+   ],
+   [
+    0.07268078889700502,
+    "Gholdengo: Protect | Kingambit: Kowtow Cleave -> Raichu"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Gholdengo | Kingambit: Kowtow Cleave -> Raichu",
+  "adapt": 0.4171,
+  "reader": [
+   [
+    0.5185831337421527,
+    "Gholdengo: Protect | Raichu: Zap Cannon -> Kingambit"
+   ],
+   [
+    0.4184369366298978,
+    "Gholdengo: Shadow Ball -> Gholdengo | Raichu: Zap Cannon -> Kingambit"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Gholdengo+Kingambit||Gholdengo + Salamence": {
+  "share": 0.026,
+  "n": 105,
+  "back": [
+   "Salamence",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.7301880254231468,
+  "worst": 0.6182,
+  "vb": 0.7374436498255104,
+  "vc": 0.6336379299911865,
+  "blend": [
+   [
+    0.9014778325123152,
+    "Gholdengo: Power Gem -> Salamence | Kingambit: Kowtow Cleave -> Gholdengo"
+   ],
+   [
+    0.09852216748768483,
+    "Gholdengo: Power Gem -> Salamence | Kingambit: Sucker Punch -> Gholdengo"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Salamence | Kingambit: Kowtow Cleave -> Gholdengo",
+  "adapt": 0.5942,
+  "reader": [
+   [
+    0.7273050158513005,
+    "Gholdengo: Protect | Salamence: Tailwind"
+   ],
+   [
+    0.16587958273589487,
+    "Gholdengo: Shadow Ball -> Gholdengo | Salamence: Hyper Voice"
+   ],
+   [
+    0.10681540141280467,
+    "Gholdengo: Nasty Plot | Salamence: Protect"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Gholdengo+Kingambit||Gholdengo + Rillaboom": {
+  "share": 0.032,
+  "n": 129,
+  "back": [
+   "Salamence",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.7537737087680819,
+  "worst": 0.4232,
+  "vb": 0.753773679874014,
+  "vc": 0.5171270682730941,
+  "blend": [
+   [
+    1.0,
+    "Gholdengo: Shadow Ball -> Gholdengo | Kingambit: Kowtow Cleave -> Rillaboom"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Gholdengo | Kingambit: Kowtow Cleave -> Rillaboom",
+  "adapt": 0.4232,
+  "reader": [
+   [
+    0.6208835341365462,
+    "Gholdengo: Protect | Rillaboom: High Horsepower -> Gholdengo"
+   ],
+   [
+    0.3791164658634538,
+    "Gholdengo: Shadow Ball -> Gholdengo | Rillaboom: Fake Out -> Kingambit"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Gholdengo+Kingambit||Rillaboom + Sneasler": {
+  "share": 0.025,
+  "n": 102,
+  "back": [
+   "Salamence",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.6276252552232165,
+  "worst": 0.5570620920340402,
+  "vb": 0.6567522752275224,
+  "vc": 0.5570620920340401,
+  "blend": [
+   [
+    0.5599099149554625,
+    "Gholdengo: switch -> Salamence | Kingambit: switch -> Incineroar"
+   ],
+   [
+    0.18017635015753425,
+    "Gholdengo: Shadow Ball -> Rillaboom | Kingambit: switch -> Salamence"
+   ],
+   [
+    0.1582446273086035,
+    "Gholdengo: Shadow Ball -> Rillaboom | Kingambit: switch -> Incineroar"
+   ],
+   [
+    0.10166910757839978,
+    "Gholdengo: switch -> Incineroar | Kingambit: switch -> Salamence"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Rillaboom | Kingambit: switch -> Incineroar",
+  "adapt": 0.471,
+  "reader": [
+   [
+    0.6505613163561633,
+    "Rillaboom: Wood Hammer -> Gholdengo | Sneasler: Swords Dance"
+   ],
+   [
+    0.2582615294575572,
+    "Rillaboom: switch | Sneasler: Swords Dance"
+   ],
+   [
+    0.09117715418627947,
+    "Rillaboom: High Horsepower -> Gholdengo | Sneasler: Swords Dance"
+   ]
+  ]
+ },
+ "Tailwind goodstuffs||Gholdengo+Kingambit||Arcanine-Hisui + Raichu": {
+  "share": 0.046,
+  "n": 186,
+  "back": [
+   "Salamence",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.5159368984234621,
+  "worst": 0.41689529651139823,
+  "vb": 0.5239573154545454,
+  "vc": 0.4330584545390066,
+  "blend": [
+   [
+    0.5433575761965593,
+    "Gholdengo: switch -> Incineroar | Kingambit: Kowtow Cleave -> Raichu"
+   ],
+   [
+    0.3356873822975518,
+    "Gholdengo: Power Gem -> Arcanine-Hisui | Kingambit: switch -> Incineroar"
+   ],
+   [
+    0.12095504150588893,
+    "Gholdengo: switch -> Incineroar | Kingambit: Sucker Punch -> Raichu"
+   ]
+  ],
+  "exploit": "Gholdengo: switch -> Incineroar | Kingambit: Low Kick -> Arcanine-Hisui",
+  "adapt": 0.3918454545454546,
+  "reader": [
+   [
+    0.6702315724005989,
+    "Arcanine-Hisui: Flare Blitz -> Gholdengo | Raichu: Zap Cannon -> Kingambit"
+   ],
+   [
+    0.3205339246299608,
+    "Arcanine-Hisui: Head Smash -> Gholdengo | Raichu: Zap Cannon -> Kingambit"
+   ]
+  ]
+ },
+ "Perish trap||Salamence+Kingambit||Archaludon + Politoed": {
+  "share": 0.064,
+  "n": 43,
+  "back": [
+   "Incineroar",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.5243936299999999,
+  "worst": 0.31,
+  "vb": 0.54613867,
+  "vc": 0.31509433628318584,
+  "blend": [
+   [
+    1.0,
+    "Salamence: Tailwind | Kingambit: Kowtow Cleave -> Politoed"
+   ]
+  ],
+  "exploit": "Salamence: Double-Edge -> Politoed | Kingambit: Sucker Punch -> Politoed",
+  "adapt": 0.1751,
+  "reader": [
+   [
+    0.8106194690265484,
+    "Archaludon: Electro Shot -> Salamence | Politoed: Perish Song"
+   ],
+   [
+    0.1893805309734523,
+    "Archaludon: Electro Shot -> Kingambit | Politoed: Perish Song"
+   ]
+  ]
+ },
+ "Perish trap||Salamence+Kingambit||Gengar + Vivillon": {
+  "share": 0.04,
+  "n": 27,
+  "back": [
+   "Incineroar",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.6491146478472787,
+  "worst": 0.5487803611867681,
+  "vb": 0.6723524350952266,
+  "vc": 0.5826623301307462,
+  "blend": [
+   [
+    0.5319071279126519,
+    "Salamence: Hyper Voice | Kingambit: Sucker Punch -> Gengar"
+   ],
+   [
+    0.26097438811696017,
+    "Salamence: Hyper Voice | Kingambit: Kowtow Cleave -> Gengar"
+   ],
+   [
+    0.2071184839703879,
+    "Salamence: Double-Edge -> Gengar | Kingambit: Sucker Punch -> Gengar"
+   ]
+  ],
+  "exploit": "Salamence: Hyper Voice | Kingambit: Sucker Punch -> Gengar",
+  "adapt": 0.4143,
+  "reader": [
+   [
+    0.3608517444779365,
+    "Gengar: Protect | Vivillon: Sleep Powder -> Salamence"
+   ],
+   [
+    0.23923017148273582,
+    "Gengar: Protect | Vivillon: Sleep Powder -> Kingambit"
+   ],
+   [
+    0.2054058064926659,
+    "Gengar: Perish Song | Vivillon: Sleep Powder -> Kingambit"
+   ],
+   [
+    0.19451227754666175,
+    "Gengar: Perish Song | Vivillon: Protect"
+   ]
+  ]
+ },
+ "Perish trap||Salamence+Kingambit||Archaludon + Gengar": {
+  "share": 0.036,
+  "n": 24,
+  "back": [
+   "Incineroar",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.6133334946253858,
+  "worst": 0.4655793416572077,
+  "vb": 0.6395959,
+  "vc": 0.4699447182817864,
+  "blend": [
+   [
+    0.693151721528566,
+    "Salamence: Tailwind | Kingambit: Kowtow Cleave -> Gengar"
+   ],
+   [
+    0.30684827847143403,
+    "Salamence: Protect | Kingambit: Kowtow Cleave -> Archaludon"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Kingambit: Sucker Punch -> Gengar",
+  "adapt": 0.3972,
+  "reader": [
+   [
+    0.5133188510502945,
+    "Archaludon: Dragon Pulse -> Salamence | Gengar: Protect"
+   ],
+   [
+    0.4079433925200077,
+    "Archaludon: Electro Shot -> Kingambit | Gengar: switch"
+   ]
+  ]
+ },
+ "Perish trap||Salamence+Kingambit||Archaludon + Incineroar": {
+  "share": 0.028,
+  "n": 19,
+  "back": [
+   "Incineroar",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.6684374727550743,
+  "worst": 0.5681821806165426,
+  "vb": 0.68291497,
+  "vc": 0.5687684523134897,
+  "blend": [
+   [
+    0.6471055597729497,
+    "Salamence: Tailwind | Kingambit: Kowtow Cleave -> Incineroar"
+   ],
+   [
+    0.22945569510962122,
+    "Salamence: Protect | Kingambit: Low Kick -> Incineroar"
+   ],
+   [
+    0.12343874511742908,
+    "Salamence: Tailwind | Kingambit: Low Kick -> Incineroar"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Kingambit: Low Kick -> Incineroar",
+  "adapt": 0.5267,
+  "reader": [
+   [
+    0.5677298753439093,
+    "Archaludon: Electro Shot -> Kingambit | Incineroar: switch"
+   ],
+   [
+    0.3264176184435782,
+    "Archaludon: Dragon Pulse -> Salamence | Incineroar: Fake Out -> Salamence"
+   ],
+   [
+    0.1058525062125125,
+    "Archaludon: Electro Shot -> Salamence | Incineroar: switch"
+   ]
+  ]
+ },
+ "Perish trap||Salamence+Kingambit||Gengar + Rillaboom": {
+  "share": 0.108,
+  "n": 73,
+  "back": [
+   "Incineroar",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.6563943205658854,
+  "worst": 0.6104906227237555,
+  "vb": 0.6689720690004799,
+  "vc": 0.6107621667891305,
+  "blend": [
+   [
+    0.39729017527579924,
+    "Salamence: Double-Edge -> Gengar | Kingambit: Kowtow Cleave -> Rillaboom"
+   ],
+   [
+    0.39327571082707335,
+    "Salamence: Protect | Kingambit: Kowtow Cleave -> Gengar"
+   ],
+   [
+    0.13499845341368966,
+    "Salamence: Hyper Voice | Kingambit: Kowtow Cleave -> Gengar"
+   ],
+   [
+    0.07443566048343774,
+    "Salamence: Tailwind | Kingambit: Kowtow Cleave -> Gengar"
+   ]
+  ],
+  "exploit": "Salamence: Double-Edge -> Gengar | Kingambit: Kowtow Cleave -> Gengar",
+  "adapt": 0.5513447407265436,
+  "reader": [
+   [
+    0.39954424254093895,
+    "Gengar: Protect | Rillaboom: Fake Out -> Salamence"
+   ],
+   [
+    0.2578614667476534,
+    "Gengar: Perish Song | Rillaboom: Fake Out -> Salamence"
+   ],
+   [
+    0.2044964016924212,
+    "Gengar: Protect | Rillaboom: switch"
+   ],
+   [
+    0.08908540216645418,
+    "Gengar: Perish Song | Rillaboom: Fake Out -> Kingambit"
+   ]
+  ]
+ },
+ "Perish trap||Salamence+Kingambit||Gengar + Incineroar": {
+  "share": 0.294,
+  "n": 198,
+  "back": [
+   "Incineroar",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.7190772349449482,
+  "worst": 0.6034,
+  "vb": 0.7191257510329202,
+  "vc": 0.6045478513315892,
+  "blend": [
+   [
+    0.8696069031639497,
+    "Salamence: Hyper Voice | Kingambit: Low Kick -> Incineroar"
+   ],
+   [
+    0.13039309683605033,
+    "Salamence: Hyper Voice | Kingambit: Kowtow Cleave -> Gengar"
+   ]
+  ],
+  "exploit": "Salamence: Hyper Voice | Kingambit: Low Kick -> Incineroar",
+  "adapt": 0.5997827777777778,
+  "reader": [
+   [
+    0.9718539261235887,
+    "Gengar: Perish Song | Incineroar: Fake Out -> Kingambit"
+   ]
+  ]
+ },
+ "Perish trap||Incineroar+Kingambit||Gengar + Incineroar": {
+  "share": 0.294,
+  "n": 198,
+  "back": [
+   "Salamence",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.661469911493533,
+  "worst": 0.6295476639161643,
+  "vb": 0.6699653838464613,
+  "vc": 0.6295559093058551,
+  "blend": [
+   [
+    0.6371539856459796,
+    "Incineroar: Fake Out -> Incineroar | Kingambit: Kowtow Cleave -> Gengar"
+   ],
+   [
+    0.34396367409224426,
+    "Incineroar: Fake Out -> Incineroar | Kingambit: Low Kick -> Incineroar"
+   ]
+  ],
+  "exploit": "Incineroar: Fake Out -> Incineroar | Kingambit: Low Kick -> Incineroar",
+  "adapt": 0.5613,
+  "reader": [
+   [
+    0.5253201698719967,
+    "Gengar: Perish Song | Incineroar: Fake Out -> Kingambit"
+   ],
+   [
+    0.33791666400524595,
+    "Gengar: Protect | Incineroar: switch"
+   ],
+   [
+    0.13199600431707312,
+    "Gengar: Perish Song | Incineroar: switch"
+   ]
+  ]
+ },
+ "Perish trap||Incineroar+Kingambit||Gengar + Rillaboom": {
+  "share": 0.108,
+  "n": 73,
+  "back": [
+   "Salamence",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.6255788689049597,
+  "worst": 0.5638829242511927,
+  "vb": 0.6307853916502968,
+  "vc": 0.5655089975994771,
+  "blend": [
+   [
+    0.40678690373775445,
+    "Incineroar: Throat Chop -> Gengar | Kingambit: Kowtow Cleave -> Gengar"
+   ],
+   [
+    0.3221988224223192,
+    "Incineroar: Throat Chop -> Gengar | Kingambit: Kowtow Cleave -> Rillaboom"
+   ],
+   [
+    0.2710142738399265,
+    "Incineroar: Parting Shot -> Rillaboom | Kingambit: Kowtow Cleave -> Gengar"
+   ]
+  ],
+  "exploit": "Incineroar: Parting Shot -> Rillaboom | Kingambit: Kowtow Cleave -> Gengar",
+  "adapt": 0.4783,
+  "reader": [
+   [
+    0.5039051329321463,
+    "Gengar: Perish Song | Rillaboom: Fake Out -> Kingambit"
+   ],
+   [
+    0.4099685558297559,
+    "Gengar: Protect | Rillaboom: U-turn -> Incineroar"
+   ],
+   [
+    0.08612631123809754,
+    "Gengar: Perish Song | Rillaboom: Fake Out -> Incineroar"
+   ]
+  ]
+ },
+ "Perish trap||Incineroar+Kingambit||Archaludon + Gengar": {
+  "share": 0.036,
+  "n": 24,
+  "back": [
+   "Salamence",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.6202694849414878,
+  "worst": 0.4883694627709707,
+  "vb": 0.6233168004057067,
+  "vc": 0.526823359717887,
+  "blend": [
+   [
+    0.8840716305372291,
+    "Incineroar: Parting Shot -> Archaludon | Kingambit: Kowtow Cleave -> Gengar"
+   ],
+   [
+    0.1159283694627708,
+    "Incineroar: Fake Out -> Archaludon | Kingambit: Kowtow Cleave -> Gengar"
+   ]
+  ],
+  "exploit": "Incineroar: Parting Shot -> Archaludon | Kingambit: Kowtow Cleave -> Gengar",
+  "adapt": 0.4752,
+  "reader": [
+   [
+    0.6590781400508317,
+    "Archaludon: Electro Shot -> Incineroar | Gengar: Protect"
+   ],
+   [
+    0.3102214906901114,
+    "Archaludon: Protect | Gengar: switch"
+   ]
+  ]
+ },
+ "Perish trap||Incineroar+Kingambit||Archaludon + Politoed": {
+  "share": 0.064,
+  "n": 43,
+  "back": [
+   "Salamence",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.5148849742776928,
+  "worst": 0.40749382337927514,
+  "vb": 0.5149645900000002,
+  "vc": 0.40750423162583527,
+  "blend": [
+   [
+    0.9974476773864216,
+    "Incineroar: Fake Out -> Archaludon | Kingambit: Kowtow Cleave -> Politoed"
+   ]
+  ],
+  "exploit": "Incineroar: Fake Out -> Archaludon | Kingambit: Kowtow Cleave -> Politoed",
+  "adapt": 0.4071,
+  "reader": [
+   [
+    0.8084632516703795,
+    "Archaludon: Electro Shot -> Kingambit | Politoed: Perish Song"
+   ],
+   [
+    0.1915367483296215,
+    "Archaludon: Protect | Politoed: Perish Song"
+   ]
+  ]
+ },
+ "Perish trap||Incineroar+Kingambit||Gengar + Vivillon": {
+  "share": 0.04,
+  "n": 27,
+  "back": [
+   "Salamence",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.6193967693652204,
+  "worst": 0.5624751042824245,
+  "vb": 0.6539286624181598,
+  "vc": 0.5634323879313472,
+  "blend": [
+   [
+    0.699185347609118,
+    "Incineroar: Fake Out -> Vivillon | Kingambit: Kowtow Cleave -> Gengar"
+   ],
+   [
+    0.1935733938893214,
+    "Incineroar: Fake Out -> Vivillon | Kingambit: Kowtow Cleave -> Vivillon"
+   ],
+   [
+    0.1072412585015606,
+    "Incineroar: Parting Shot -> Vivillon | Kingambit: Kowtow Cleave -> Gengar"
+   ]
+  ],
+  "exploit": "Incineroar: Fake Out -> Vivillon | Kingambit: Kowtow Cleave -> Vivillon",
+  "adapt": 0.3907322212713469,
+  "reader": [
+   [
+    0.4100981015797899,
+    "Gengar: Perish Song | Vivillon: Protect"
+   ],
+   [
+    0.2722592776333898,
+    "Gengar: Protect | Vivillon: switch"
+   ],
+   [
+    0.1923832203903247,
+    "Gengar: Protect | Vivillon: Sleep Powder -> Kingambit"
+   ],
+   [
+    0.12525940039649547,
+    "Gengar: Protect | Vivillon: Sleep Powder -> Incineroar"
+   ]
+  ]
+ },
+ "Perish trap||Incineroar+Kingambit||Archaludon + Incineroar": {
+  "share": 0.028,
+  "n": 19,
+  "back": [
+   "Salamence",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.6019622937084323,
+  "worst": 0.5827005402115742,
+  "vb": 0.6255062858513188,
+  "vc": 0.582944409244523,
+  "blend": [
+   [
+    0.6604797307216468,
+    "Incineroar: Fake Out -> Archaludon | Kingambit: Kowtow Cleave -> Incineroar"
+   ],
+   [
+    0.16248728874160942,
+    "Incineroar: Parting Shot -> Archaludon | Kingambit: Kowtow Cleave -> Incineroar"
+   ],
+   [
+    0.12170614305828255,
+    "Incineroar: switch -> Gholdengo | Kingambit: Low Kick -> Incineroar"
+   ],
+   [
+    0.05532683747846126,
+    "Incineroar: Parting Shot -> Incineroar | Kingambit: Kowtow Cleave -> Incineroar"
+   ]
+  ],
+  "exploit": "Incineroar: switch -> Gholdengo | Kingambit: Low Kick -> Incineroar",
+  "adapt": 0.493746762589928,
+  "reader": [
+   [
+    0.34701226610857144,
+    "Archaludon: Electro Shot -> Kingambit | Incineroar: switch"
+   ],
+   [
+    0.2833951424230147,
+    "Archaludon: Aura Sphere -> Kingambit | Incineroar: Fake Out -> Kingambit"
+   ],
+   [
+    0.27714143280830933,
+    "Archaludon: Protect | Incineroar: Parting Shot -> Incineroar"
+   ],
+   [
+    0.09245115866010455,
+    "Archaludon: Aura Sphere -> Kingambit | Incineroar: Parting Shot -> Incineroar"
+   ]
+  ]
+ },
+ "Perish trap||Kingambit+Gholdengo||Archaludon + Incineroar": {
+  "share": 0.028,
+  "n": 19,
+  "back": [
+   "Salamence",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.6454424350420268,
+  "worst": 0.5542275530133581,
+  "vb": 0.6561682700000002,
+  "vc": 0.5542275530133581,
+  "blend": [
+   [
+    0.6468629046236433,
+    "Kingambit: Low Kick -> Incineroar | Gholdengo: Shadow Ball -> Archaludon"
+   ],
+   [
+    0.23167446382607326,
+    "Kingambit: Kowtow Cleave -> Incineroar | Gholdengo: Shadow Ball -> Incineroar"
+   ],
+   [
+    0.12146263155028347,
+    "Kingambit: Low Kick -> Incineroar | Gholdengo: Protect"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Incineroar | Gholdengo: Shadow Ball -> Incineroar",
+  "adapt": 0.4317,
+  "reader": [
+   [
+    0.49477143859457084,
+    "Archaludon: Electro Shot -> Gholdengo | Incineroar: switch"
+   ],
+   [
+    0.3086431118088606,
+    "Archaludon: Aura Sphere -> Kingambit | Incineroar: Fake Out -> Kingambit"
+   ],
+   [
+    0.19658544959656854,
+    "Archaludon: Aura Sphere -> Kingambit | Incineroar: Darkest Lariat -> Gholdengo"
+   ]
+  ]
+ },
+ "Perish trap||Kingambit+Gholdengo||Gengar + Incineroar": {
+  "share": 0.294,
+  "n": 198,
+  "back": [
+   "Salamence",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.6881159331249861,
+  "worst": 0.5972402195217561,
+  "vb": 0.6943027389044382,
+  "vc": 0.5991328803703887,
+  "blend": [
+   [
+    0.7753822030576244,
+    "Kingambit: Low Kick -> Incineroar | Gholdengo: Shadow Ball -> Gengar"
+   ],
+   [
+    0.2246177969423756,
+    "Kingambit: Low Kick -> Incineroar | Gholdengo: Power Gem -> Incineroar"
+   ]
+  ],
+  "exploit": "Kingambit: Low Kick -> Incineroar | Gholdengo: Shadow Ball -> Gengar",
+  "adapt": 0.5768,
+  "reader": [
+   [
+    0.6418161603641506,
+    "Gengar: Protect | Incineroar: Fake Out -> Kingambit"
+   ],
+   [
+    0.2672820125370144,
+    "Gengar: Shadow Ball -> Gholdengo | Incineroar: Fake Out -> Kingambit"
+   ],
+   [
+    0.09090182709883506,
+    "Gengar: Perish Song | Incineroar: Fake Out -> Kingambit"
+   ]
+  ]
+ },
+ "Perish trap||Kingambit+Gholdengo||Gengar + Rillaboom": {
+  "share": 0.108,
+  "n": 73,
+  "back": [
+   "Salamence",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.6792219736077837,
+  "worst": 0.6155819596939074,
+  "vb": 0.6876092258427547,
+  "vc": 0.6182965119314766,
+  "blend": [
+   [
+    0.636035116651027,
+    "Kingambit: Kowtow Cleave -> Rillaboom | Gholdengo: Shadow Ball -> Gengar"
+   ],
+   [
+    0.13788707764872013,
+    "Kingambit: Kowtow Cleave -> Gengar | Gholdengo: Shadow Ball -> Gengar"
+   ],
+   [
+    0.12578026977955398,
+    "Kingambit: Kowtow Cleave -> Gengar | Gholdengo: Shadow Ball -> Rillaboom"
+   ],
+   [
+    0.10029753592069893,
+    "Kingambit: Sucker Punch -> Rillaboom | Gholdengo: Shadow Ball -> Gengar"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Rillaboom | Gholdengo: Shadow Ball -> Gengar",
+  "adapt": 0.6045,
+  "reader": [
+   [
+    0.380782197114266,
+    "Gengar: switch | Rillaboom: Protect"
+   ],
+   [
+    0.2550438135238398,
+    "Gengar: Protect | Rillaboom: U-turn -> Kingambit"
+   ],
+   [
+    0.216268415750408,
+    "Gengar: Protect | Rillaboom: switch"
+   ],
+   [
+    0.13206189514246786,
+    "Gengar: Shadow Ball -> Gholdengo | Rillaboom: Fake Out -> Kingambit"
+   ]
+  ]
+ },
+ "Perish trap||Kingambit+Gholdengo||Archaludon + Politoed": {
+  "share": 0.064,
+  "n": 43,
+  "back": [
+   "Salamence",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.4761243153728489,
+  "worst": 0.30491175908221796,
+  "vb": 0.48187217,
+  "vc": 0.304911759082218,
+  "blend": [
+   [
+    0.8307839388145312,
+    "Kingambit: Kowtow Cleave -> Politoed | Gholdengo: Shadow Ball -> Archaludon"
+   ],
+   [
+    0.16921606118546884,
+    "Kingambit: Kowtow Cleave -> Politoed | Gholdengo: Protect"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Politoed | Gholdengo: Shadow Ball -> Archaludon",
+  "adapt": 0.2986,
+  "reader": [
+   [
+    0.6434034416825982,
+    "Archaludon: Electro Shot -> Gholdengo | Politoed: Perish Song"
+   ],
+   [
+    0.35659655831740183,
+    "Archaludon: Electro Shot -> Kingambit | Politoed: Perish Song"
+   ]
+  ]
+ },
+ "Perish trap||Kingambit+Gholdengo||Archaludon + Gengar": {
+  "share": 0.036,
+  "n": 24,
+  "back": [
+   "Salamence",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.5984191498572964,
+  "worst": 0.4741936102236422,
+  "vb": 0.6287327365248303,
+  "vc": 0.4741936102236422,
+  "blend": [
+   [
+    0.8338658146964857,
+    "Kingambit: Kowtow Cleave -> Gengar | Gholdengo: Shadow Ball -> Archaludon"
+   ],
+   [
+    0.16613418530351431,
+    "Kingambit: Kowtow Cleave -> Gengar | Gholdengo: Protect"
+   ]
+  ],
+  "exploit": "Kingambit: Sucker Punch -> Gengar | Gholdengo: Shadow Ball -> Archaludon",
+  "adapt": 0.378,
+  "reader": [
+   [
+    0.6541533546325882,
+    "Archaludon: Electro Shot -> Gholdengo | Gengar: switch"
+   ],
+   [
+    0.3458466453674118,
+    "Archaludon: Electro Shot -> Kingambit | Gengar: switch"
+   ]
+  ]
+ },
+ "Perish trap||Kingambit+Gholdengo||Gengar + Vivillon": {
+  "share": 0.04,
+  "n": 27,
+  "back": [
+   "Salamence",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.6296917364490823,
+  "worst": 0.4862000583941606,
+  "vb": 0.6595507115574898,
+  "vc": 0.4862000583941599,
+  "blend": [
+   [
+    0.522043795620438,
+    "Kingambit: Sucker Punch -> Gengar | Gholdengo: Shadow Ball -> Gengar"
+   ],
+   [
+    0.477956204379562,
+    "Kingambit: Sucker Punch -> Gengar | Gholdengo: Power Gem -> Vivillon"
+   ]
+  ],
+  "exploit": "Kingambit: Sucker Punch -> Gengar | Gholdengo: Power Gem -> Vivillon",
+  "adapt": 0.3129000583941599,
+  "reader": [
+   [
+    0.5827737226277374,
+    "Gengar: Perish Song | Vivillon: Sleep Powder -> Kingambit"
+   ],
+   [
+    0.4172262773722626,
+    "Gengar: Protect | Vivillon: Sleep Powder -> Kingambit"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Incineroar+Kingambit||Farigiraf + Rillaboom": {
+  "share": 0.03,
+  "n": 30,
+  "back": [
+   "Rillaboom",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.567411291397596,
+  "worst": 0.5008,
+  "vb": 0.6023806480648065,
+  "vc": 0.5012143205858421,
+  "blend": [
+   [
+    0.8201342281879199,
+    "Incineroar: Flare Blitz -> Rillaboom | Kingambit: Kowtow Cleave -> Farigiraf"
+   ],
+   [
+    0.17986577181208008,
+    "Incineroar: Flare Blitz -> Farigiraf | Kingambit: Kowtow Cleave -> Farigiraf"
+   ]
+  ],
+  "exploit": "Incineroar: Flare Blitz -> Farigiraf | Kingambit: Kowtow Cleave -> Farigiraf",
+  "adapt": 0.4397,
+  "reader": [
+   [
+    0.9690805532953619,
+    "Farigiraf: Trick Room | Rillaboom: Fake Out -> Incineroar"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Incineroar+Kingambit||Delphox + Sneasler": {
+  "share": 0.022,
+  "n": 22,
+  "back": [
+   "Rillaboom",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.6253003598450828,
+  "worst": 0.528038293340268,
+  "vb": 0.6494777699999997,
+  "vc": 0.5410167904142407,
+  "blend": [
+   [
+    0.45186672000473566,
+    "Incineroar: Throat Chop -> Delphox | Kingambit: Kowtow Cleave -> Sneasler"
+   ],
+   [
+    0.30189879470250935,
+    "Incineroar: Flare Blitz -> Sneasler | Kingambit: Kowtow Cleave -> Delphox"
+   ],
+   [
+    0.08818088578880376,
+    "Incineroar: Throat Chop -> Delphox | Kingambit: Sucker Punch -> Delphox"
+   ],
+   [
+    0.0873659779491098,
+    "Incineroar: Throat Chop -> Delphox | Kingambit: Kowtow Cleave -> Delphox"
+   ],
+   [
+    0.07068762155484139,
+    "Incineroar: Fake Out -> Delphox | Kingambit: Kowtow Cleave -> Delphox"
+   ]
+  ],
+  "exploit": "Incineroar: Throat Chop -> Delphox | Kingambit: Kowtow Cleave -> Delphox",
+  "adapt": 0.4321,
+  "reader": [
+   [
+    0.4860720554512236,
+    "Delphox: Heat Wave | Sneasler: Fake Out -> Kingambit"
+   ],
+   [
+    0.3366536251744638,
+    "Delphox: Protect | Sneasler: Close Combat -> Kingambit"
+   ],
+   [
+    0.11418250907647347,
+    "Delphox: Heat Wave | Sneasler: Fake Out -> Incineroar"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Incineroar+Kingambit||Farigiraf + Incineroar": {
+  "share": 0.073,
+  "n": 74,
+  "back": [
+   "Rillaboom",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.6618204159168166,
+  "worst": 0.528,
+  "vb": 0.6618204159168166,
+  "vc": 0.5279999999999998,
+  "blend": [
+   [
+    1.0,
+    "Incineroar: Parting Shot -> Incineroar | Kingambit: Kowtow Cleave -> Farigiraf"
+   ]
+  ],
+  "exploit": "Incineroar: Parting Shot -> Incineroar | Kingambit: Kowtow Cleave -> Farigiraf",
+  "adapt": 0.528,
+  "reader": [
+   [
+    1.0,
+    "Farigiraf: Trick Room | Incineroar: Fake Out -> Kingambit"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Incineroar+Kingambit||Farigiraf + Raichu": {
+  "share": 0.02,
+  "n": 20,
+  "back": [
+   "Rillaboom",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.50844449,
+  "worst": 0.3795,
+  "vb": 0.50844449,
+  "vc": 0.38608354806910705,
+  "blend": [
+   [
+    1.0,
+    "Incineroar: Flare Blitz -> Raichu | Kingambit: Kowtow Cleave -> Raichu"
+   ]
+  ],
+  "exploit": "Incineroar: Flare Blitz -> Raichu | Kingambit: Kowtow Cleave -> Raichu",
+  "adapt": 0.3795,
+  "reader": [
+   [
+    0.8211157311803713,
+    "Farigiraf: Trick Room | Raichu: Zap Cannon -> Kingambit"
+   ],
+   [
+    0.15352866542283494,
+    "Farigiraf: Thunderbolt -> Kingambit | Raichu: Focus Blast -> Kingambit"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Incineroar+Kingambit||Delphox + Incineroar": {
+  "share": 0.03,
+  "n": 30,
+  "back": [
+   "Rillaboom",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.6596447236269286,
+  "worst": 0.5594862288135592,
+  "vb": 0.6663306961392277,
+  "vc": 0.5848564782451813,
+  "blend": [
+   [
+    0.6588983050847457,
+    "Incineroar: Fake Out -> Incineroar | Kingambit: Kowtow Cleave -> Delphox"
+   ],
+   [
+    0.3411016949152543,
+    "Incineroar: Parting Shot -> Incineroar | Kingambit: Kowtow Cleave -> Delphox"
+   ]
+  ],
+  "exploit": "Incineroar: Parting Shot -> Incineroar | Kingambit: Kowtow Cleave -> Delphox",
+  "adapt": 0.4395,
+  "reader": [
+   [
+    0.5399040299865919,
+    "Delphox: Heat Wave | Incineroar: Fake Out -> Kingambit"
+   ],
+   [
+    0.3950469348297897,
+    "Delphox: Protect | Incineroar: Flare Blitz -> Kingambit"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Incineroar+Kingambit||Farigiraf + Kingambit": {
+  "share": 0.035,
+  "n": 35,
+  "back": [
+   "Rillaboom",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.5594620818316208,
+  "worst": 0.4666516784177097,
+  "vb": 0.5748674332566743,
+  "vc": 0.46665167841770977,
+  "blend": [
+   [
+    0.4472655830610986,
+    "Incineroar: Flare Blitz -> Farigiraf | Kingambit: Kowtow Cleave -> Farigiraf"
+   ],
+   [
+    0.2615923031099726,
+    "Incineroar: Throat Chop -> Farigiraf | Kingambit: Low Kick -> Kingambit"
+   ],
+   [
+    0.16881475524802586,
+    "Incineroar: Parting Shot -> Farigiraf | Kingambit: Low Kick -> Kingambit"
+   ],
+   [
+    0.12232735858090296,
+    "Incineroar: Fake Out -> Kingambit | Kingambit: Low Kick -> Kingambit"
+   ]
+  ],
+  "exploit": "Incineroar: Flare Blitz -> Farigiraf | Kingambit: Kowtow Cleave -> Farigiraf",
+  "adapt": 0.3092,
+  "reader": [
+   [
+    0.3566508129688413,
+    "Farigiraf: Trick Room | Kingambit: Protect"
+   ],
+   [
+    0.3234642800881331,
+    "Farigiraf: Trick Room | Kingambit: Low Kick -> Kingambit"
+   ],
+   [
+    0.2455947587108981,
+    "Farigiraf: switch | Kingambit: Low Kick -> Kingambit"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Rillaboom+Kingambit||Delphox + Incineroar": {
+  "share": 0.03,
+  "n": 30,
+  "back": [
+   "Incineroar",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.6022926227269902,
+  "worst": 0.5285941014987502,
+  "vb": 0.6322997899579916,
+  "vc": 0.5504379915760113,
+  "blend": [
+   [
+    0.7582216919980141,
+    "Rillaboom: Fake Out -> Incineroar | Kingambit: Kowtow Cleave -> Delphox"
+   ],
+   [
+    0.12600668383260039,
+    "Rillaboom: Fake Out -> Incineroar | Kingambit: Sucker Punch -> Delphox"
+   ],
+   [
+    0.06617121310341689,
+    "Rillaboom: Fake Out -> Delphox | Kingambit: Kowtow Cleave -> Delphox"
+   ],
+   [
+    0.04254068608112846,
+    "Rillaboom: switch -> Incineroar | Kingambit: Sucker Punch -> Delphox"
+   ]
+  ],
+  "exploit": "Rillaboom: switch -> Incineroar | Kingambit: Kowtow Cleave -> Delphox",
+  "adapt": 0.3278,
+  "reader": [
+   [
+    0.6101237675782716,
+    "Delphox: Protect | Incineroar: Parting Shot -> Rillaboom"
+   ],
+   [
+    0.1582147378587576,
+    "Delphox: Heat Wave | Incineroar: Flare Blitz -> Kingambit"
+   ],
+   [
+    0.1253015554715097,
+    "Delphox: Nasty Plot | Incineroar: Parting Shot -> Rillaboom"
+   ],
+   [
+    0.09915993604832644,
+    "Delphox: Protect | Incineroar: Flare Blitz -> Kingambit"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Rillaboom+Kingambit||Farigiraf + Rillaboom": {
+  "share": 0.03,
+  "n": 30,
+  "back": [
+   "Incineroar",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.5505474647464746,
+  "worst": 0.4176,
+  "vb": 0.5505474647464746,
+  "vc": 0.42971626267784335,
+  "blend": [
+   [
+    1.0,
+    "Rillaboom: Wood Hammer -> Farigiraf | Kingambit: Kowtow Cleave -> Farigiraf"
+   ]
+  ],
+  "exploit": "Rillaboom: Wood Hammer -> Farigiraf | Kingambit: Kowtow Cleave -> Farigiraf",
+  "adapt": 0.4176,
+  "reader": [
+   [
+    0.6589779513111458,
+    "Farigiraf: Trick Room | Rillaboom: Fake Out -> Kingambit"
+   ],
+   [
+    0.32177887414553596,
+    "Farigiraf: Trick Room | Rillaboom: Fake Out -> Rillaboom"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Rillaboom+Kingambit||Farigiraf + Raichu": {
+  "share": 0.02,
+  "n": 20,
+  "back": [
+   "Incineroar",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.5520358500000001,
+  "worst": 0.4204,
+  "vb": 0.5543906599999998,
+  "vc": 0.4209811080835604,
+  "blend": [
+   [
+    1.0,
+    "Rillaboom: Wood Hammer -> Raichu | Kingambit: Kowtow Cleave -> Farigiraf"
+   ]
+  ],
+  "exploit": "Rillaboom: Wood Hammer -> Raichu | Kingambit: Kowtow Cleave -> Raichu",
+  "adapt": 0.4062,
+  "reader": [
+   [
+    0.9936421435059036,
+    "Farigiraf: Trick Room | Raichu: Zap Cannon -> Kingambit"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Rillaboom+Kingambit||Farigiraf + Kingambit": {
+  "share": 0.035,
+  "n": 35,
+  "back": [
+   "Incineroar",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.5827620434069222,
+  "worst": 0.5361463332632906,
+  "vb": 0.6033651934806517,
+  "vc": 0.5361463332632905,
+  "blend": [
+   [
+    0.5805841563353646,
+    "Rillaboom: Wood Hammer -> Farigiraf | Kingambit: Low Kick -> Kingambit"
+   ],
+   [
+    0.4194158436646354,
+    "Rillaboom: Wood Hammer -> Farigiraf | Kingambit: Kowtow Cleave -> Farigiraf"
+   ]
+  ],
+  "exploit": "Rillaboom: Wood Hammer -> Farigiraf | Kingambit: Kowtow Cleave -> Farigiraf",
+  "adapt": 0.4245,
+  "reader": [
+   [
+    0.595923513343139,
+    "Farigiraf: Psychic -> Rillaboom | Kingambit: Kowtow Cleave -> Rillaboom"
+   ],
+   [
+    0.404076486656861,
+    "Farigiraf: Trick Room | Kingambit: Protect"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Rillaboom+Kingambit||Farigiraf + Incineroar": {
+  "share": 0.073,
+  "n": 74,
+  "back": [
+   "Incineroar",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.6333569886022794,
+  "worst": 0.475,
+  "vb": 0.6333569886022794,
+  "vc": 0.4750000000000001,
+  "blend": [
+   [
+    1.0,
+    "Rillaboom: switch -> Incineroar | Kingambit: Kowtow Cleave -> Farigiraf"
+   ]
+  ],
+  "exploit": "Rillaboom: switch -> Incineroar | Kingambit: Kowtow Cleave -> Farigiraf",
+  "adapt": 0.475,
+  "reader": [
+   [
+    1.0,
+    "Farigiraf: Trick Room | Incineroar: Fake Out -> Kingambit"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Rillaboom+Kingambit||Delphox + Sneasler": {
+  "share": 0.022,
+  "n": 22,
+  "back": [
+   "Incineroar",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.5282630469665466,
+  "worst": 0.46318260675051176,
+  "vb": 0.5545839999999999,
+  "vc": 0.47038911145151185,
+  "blend": [
+   [
+    0.4879668824800297,
+    "Rillaboom: Fake Out -> Delphox | Kingambit: switch -> Incineroar"
+   ],
+   [
+    0.32252177848956476,
+    "Rillaboom: switch -> Incineroar | Kingambit: Kowtow Cleave -> Delphox"
+   ],
+   [
+    0.10674422754746148,
+    "Rillaboom: Fake Out -> Sneasler | Kingambit: Sucker Punch -> Delphox"
+   ],
+   [
+    0.08276711148294409,
+    "Rillaboom: Wood Hammer -> Sneasler | Kingambit: Kowtow Cleave -> Delphox"
+   ]
+  ],
+  "exploit": "Rillaboom: Fake Out -> Delphox | Kingambit: Kowtow Cleave -> Delphox",
+  "adapt": 0.3368,
+  "reader": [
+   [
+    0.47844916634104767,
+    "Delphox: Protect | Sneasler: Close Combat -> Kingambit"
+   ],
+   [
+    0.30527943979796274,
+    "Delphox: Heat Wave | Sneasler: Fake Out -> Kingambit"
+   ],
+   [
+    0.14287421958058102,
+    "Delphox: Heat Wave | Sneasler: Fake Out -> Rillaboom"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Kingambit+Gholdengo||Delphox + Incineroar": {
+  "share": 0.03,
+  "n": 30,
+  "back": [
+   "Incineroar",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.6328207886263728,
+  "worst": 0.4466626776364996,
+  "vb": 0.6575680136027204,
+  "vc": 0.4540882026538003,
+  "blend": [
+   [
+    0.7701321366242831,
+    "Kingambit: Kowtow Cleave -> Delphox | Gholdengo: switch -> Incineroar"
+   ],
+   [
+    0.22986786337571685,
+    "Kingambit: Sucker Punch -> Delphox | Gholdengo: Shadow Ball -> Delphox"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Delphox | Gholdengo: Power Gem -> Incineroar",
+  "adapt": 0.2277,
+  "reader": [
+   [
+    0.9922798552472859,
+    "Delphox: Heat Wave | Incineroar: Fake Out -> Kingambit"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Kingambit+Gholdengo||Farigiraf + Rillaboom": {
+  "share": 0.03,
+  "n": 30,
+  "back": [
+   "Incineroar",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.47173781668074355,
+  "worst": 0.4451938612644147,
+  "vb": 0.4737317031703172,
+  "vc": 0.4451938612644147,
+  "blend": [
+   [
+    0.8669685614276202,
+    "Kingambit: Kowtow Cleave -> Farigiraf | Gholdengo: Shadow Ball -> Rillaboom"
+   ],
+   [
+    0.07655635965383245,
+    "Kingambit: Kowtow Cleave -> Rillaboom | Gholdengo: Shadow Ball -> Rillaboom"
+   ],
+   [
+    0.05647507891854734,
+    "Kingambit: switch -> Incineroar | Gholdengo: Shadow Ball -> Rillaboom"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Farigiraf | Gholdengo: Shadow Ball -> Rillaboom",
+  "adapt": 0.4417,
+  "reader": [
+   [
+    0.6117147067665946,
+    "Farigiraf: Trick Room | Rillaboom: Fake Out -> Kingambit"
+   ],
+   [
+    0.23015426697017172,
+    "Farigiraf: Trick Room | Rillaboom: Wood Hammer -> Gholdengo"
+   ],
+   [
+    0.15813102626323375,
+    "Farigiraf: Trick Room | Rillaboom: switch"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Kingambit+Gholdengo||Farigiraf + Kingambit": {
+  "share": 0.035,
+  "n": 35,
+  "back": [
+   "Incineroar",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.49086937975102796,
+  "worst": 0.41275526065815094,
+  "vb": 0.5338232819524684,
+  "vc": 0.4165337606837606,
+  "blend": [
+   [
+    0.5770676476605072,
+    "Kingambit: Kowtow Cleave -> Farigiraf | Gholdengo: Protect"
+   ],
+   [
+    0.23133813243989101,
+    "Kingambit: Low Kick -> Kingambit | Gholdengo: Shadow Ball -> Kingambit"
+   ],
+   [
+    0.1915942198996018,
+    "Kingambit: Low Kick -> Kingambit | Gholdengo: Protect"
+   ]
+  ],
+  "exploit": "Kingambit: Low Kick -> Kingambit | Gholdengo: Protect",
+  "adapt": 0.3457,
+  "reader": [
+   [
+    0.6452991452991452,
+    "Farigiraf: Trick Room | Kingambit: Protect"
+   ],
+   [
+    0.3547008547008547,
+    "Farigiraf: Trick Room | Kingambit: Low Kick -> Kingambit"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Kingambit+Gholdengo||Farigiraf + Incineroar": {
+  "share": 0.073,
+  "n": 74,
+  "back": [
+   "Incineroar",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.6498577094547495,
+  "worst": 0.5034138857782755,
+  "vb": 0.6537703559288139,
+  "vc": 0.5111000000000001,
+  "blend": [
+   [
+    0.812989921612542,
+    "Kingambit: Kowtow Cleave -> Farigiraf | Gholdengo: Power Gem -> Incineroar"
+   ],
+   [
+    0.18701007838745795,
+    "Kingambit: Kowtow Cleave -> Farigiraf | Gholdengo: switch -> Incineroar"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Farigiraf | Gholdengo: Power Gem -> Incineroar",
+  "adapt": 0.4777,
+  "reader": [
+   [
+    1.0,
+    "Farigiraf: Trick Room | Incineroar: Fake Out -> Kingambit"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Kingambit+Gholdengo||Delphox + Sneasler": {
+  "share": 0.022,
+  "n": 22,
+  "back": [
+   "Incineroar",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.5731444479232723,
+  "worst": 0.469551892684346,
+  "vb": 0.5838570212888806,
+  "vc": 0.4696529289798408,
+  "blend": [
+   [
+    0.6968127428702808,
+    "Kingambit: switch -> Incineroar | Gholdengo: Shadow Ball -> Delphox"
+   ],
+   [
+    0.18444750060479445,
+    "Kingambit: switch -> Incineroar | Gholdengo: Shadow Ball -> Sneasler"
+   ],
+   [
+    0.10018476848524759,
+    "Kingambit: Sucker Punch -> Delphox | Gholdengo: Shadow Ball -> Delphox"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Delphox | Gholdengo: Shadow Ball -> Delphox",
+  "adapt": 0.3218,
+  "reader": [
+   [
+    0.3698637544171548,
+    "Delphox: Nasty Plot | Sneasler: Close Combat -> Kingambit"
+   ],
+   [
+    0.2941172355454061,
+    "Delphox: Heat Wave | Sneasler: Close Combat -> Kingambit"
+   ],
+   [
+    0.24886920163681267,
+    "Delphox: Heat Wave | Sneasler: Fake Out -> Kingambit"
+   ],
+   [
+    0.08714980840062629,
+    "Delphox: Protect | Sneasler: Close Combat -> Kingambit"
+   ]
+  ]
+ },
+ "Trick Room without Indeedee||Kingambit+Gholdengo||Farigiraf + Raichu": {
+  "share": 0.02,
+  "n": 20,
+  "back": [
+   "Incineroar",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.472824297743133,
+  "worst": 0.3320207869339272,
+  "vb": 0.47435820000000006,
+  "vc": 0.3320207869339272,
+  "blend": [
+   [
+    0.9250185597624351,
+    "Kingambit: Kowtow Cleave -> Raichu | Gholdengo: Shadow Ball -> Raichu"
+   ],
+   [
+    0.07498144023756492,
+    "Kingambit: Kowtow Cleave -> Raichu | Gholdengo: Protect"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Raichu | Gholdengo: Shadow Ball -> Raichu",
+  "adapt": 0.315,
+  "reader": [
+   [
+    0.8426132145508538,
+    "Farigiraf: Trick Room | Raichu: Zap Cannon -> Kingambit"
+   ],
+   [
+    0.1573867854491462,
+    "Farigiraf: Trick Room | Raichu: Zap Cannon -> Gholdengo"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Kingambit+Incineroar||Armarouge + Indeedee-F": {
+  "share": 0.044,
+  "n": 97,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": true,
+  "pop": 0.6125433659183674,
+  "worst": 0.2888,
+  "vb": 0.6125433659183674,
+  "vc": 0.35191358631632086,
+  "blend": [
+   [
+    1.0,
+    "Kingambit: Kowtow Cleave -> Indeedee-F | Incineroar: Throat Chop -> Armarouge"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Indeedee-F | Incineroar: Throat Chop -> Armarouge",
+  "adapt": 0.2888,
+  "reader": [
+   [
+    0.627172632641777,
+    "Armarouge: Armor Cannon -> Kingambit | Indeedee-F: Trick Room"
+   ],
+   [
+    0.37282736735822297,
+    "Armarouge: Heat Wave | Indeedee-F: Trick Room"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Kingambit+Incineroar||Indeedee-F + Sneasler": {
+  "share": 0.028,
+  "n": 61,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": true,
+  "pop": 0.6554309165175843,
+  "worst": 0.5543636159599964,
+  "vb": 0.6825761045918366,
+  "vc": 0.5543636159599965,
+  "blend": [
+   [
+    0.44633969177343297,
+    "Kingambit: Kowtow Cleave -> Indeedee-F | Incineroar: Throat Chop -> Indeedee-F"
+   ],
+   [
+    0.4083848751351048,
+    "Kingambit: Kowtow Cleave -> Indeedee-F | Incineroar: switch -> Gholdengo"
+   ],
+   [
+    0.14527543309146224,
+    "Kingambit: Kowtow Cleave -> Indeedee-F | Incineroar: Flare Blitz -> Sneasler"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Indeedee-F | Incineroar: Flare Blitz -> Sneasler",
+  "adapt": 0.4543622448979592,
+  "reader": [
+   [
+    0.3664667716306382,
+    "Indeedee-F: Trick Room | Sneasler: Close Combat -> Kingambit"
+   ],
+   [
+    0.3199660669153617,
+    "Indeedee-F: Helping Hand | Sneasler: Close Combat -> Incineroar"
+   ],
+   [
+    0.3135671614540001,
+    "Indeedee-F: Helping Hand | Sneasler: Close Combat -> Kingambit"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Kingambit+Incineroar||Indeedee + Sneasler": {
+  "share": 0.028,
+  "n": 62,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.7195590868557368,
+  "worst": 0.5852753343111372,
+  "vb": 0.7587640207937622,
+  "vc": 0.5892369625180797,
+  "blend": [
+   [
+    0.7556096607020636,
+    "Kingambit: Kowtow Cleave -> Indeedee | Incineroar: Throat Chop -> Indeedee"
+   ],
+   [
+    0.17601642710472282,
+    "Kingambit: Sucker Punch -> Indeedee | Incineroar: switch -> Rillaboom"
+   ],
+   [
+    0.06837391219321369,
+    "Kingambit: switch -> Gholdengo | Incineroar: Throat Chop -> Indeedee"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Indeedee | Incineroar: Flare Blitz -> Sneasler",
+  "adapt": 0.4441,
+  "reader": [
+   [
+    0.5452971508148594,
+    "Indeedee: Mystical Fire -> Kingambit | Sneasler: Close Combat -> Kingambit"
+   ],
+   [
+    0.42661426044315837,
+    "Indeedee: switch | Sneasler: Close Combat -> Incineroar"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Kingambit+Incineroar||Farigiraf + Incineroar": {
+  "share": 0.037,
+  "n": 81,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.5635483448344835,
+  "worst": 0.4649,
+  "vb": 0.5635483448344835,
+  "vc": 0.4649,
+  "blend": [
+   [
+    1.0,
+    "Kingambit: Kowtow Cleave -> Farigiraf | Incineroar: Parting Shot -> Incineroar"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Farigiraf | Incineroar: Parting Shot -> Incineroar",
+  "adapt": 0.4649,
+  "reader": [
+   [
+    1.0,
+    "Farigiraf: Trick Room | Incineroar: Fake Out -> Kingambit"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Kingambit+Incineroar||Hatterene + Indeedee-F": {
+  "share": 0.027,
+  "n": 59,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": true,
+  "pop": 0.6346621592096501,
+  "worst": 0.5742076412761091,
+  "vb": 0.6384980484604602,
+  "vc": 0.5743165210033794,
+  "blend": [
+   [
+    0.8555385008350489,
+    "Kingambit: Kowtow Cleave -> Indeedee-F | Incineroar: Throat Chop -> Indeedee-F"
+   ],
+   [
+    0.06493963723669414,
+    "Kingambit: Kowtow Cleave -> Hatterene | Incineroar: Throat Chop -> Hatterene"
+   ],
+   [
+    0.061072696379065115,
+    "Kingambit: Kowtow Cleave -> Indeedee-F | Incineroar: Throat Chop -> Hatterene"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Indeedee-F | Incineroar: Throat Chop -> Indeedee-F",
+  "adapt": 0.5588,
+  "reader": [
+   [
+    0.831749002037373,
+    "Hatterene: Trick Room | Indeedee-F: Follow Me"
+   ],
+   [
+    0.10975003998055492,
+    "Hatterene: Trick Room | Indeedee-F: Psychic -> Kingambit"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Kingambit+Incineroar||Gardevoir + Indeedee-F": {
+  "share": 0.067,
+  "n": 147,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": true,
+  "pop": 0.6181615167549597,
+  "worst": 0.5490467698442504,
+  "vb": 0.6347572780477054,
+  "vc": 0.5496064376189951,
+  "blend": [
+   [
+    0.7649092174397211,
+    "Kingambit: Kowtow Cleave -> Indeedee-F | Incineroar: Flare Blitz -> Gardevoir"
+   ],
+   [
+    0.16840867980177765,
+    "Kingambit: Kowtow Cleave -> Indeedee-F | Incineroar: Throat Chop -> Indeedee-F"
+   ],
+   [
+    0.06668210275850128,
+    "Kingambit: Iron Head -> Gardevoir | Incineroar: Throat Chop -> Indeedee-F"
+   ]
+  ],
+  "exploit": "Kingambit: Iron Head -> Gardevoir | Incineroar: Throat Chop -> Indeedee-F",
+  "adapt": 0.4314744897959183,
+  "reader": [
+   [
+    0.7673708558211256,
+    "Gardevoir: Hyper Voice | Indeedee-F: Trick Room"
+   ],
+   [
+    0.23262914417887437,
+    "Gardevoir: Hyper Voice | Indeedee-F: Helping Hand"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Gholdengo+Kingambit||Armarouge + Indeedee-F": {
+  "share": 0.044,
+  "n": 97,
+  "back": [
+   "Rillaboom",
+   "Incineroar"
+  ],
+  "itemMix": true,
+  "pop": 0.5346876377306962,
+  "worst": 0.3629193808783308,
+  "vb": 0.5643044424489796,
+  "vc": 0.3674829005430209,
+  "blend": [
+   [
+    0.47460640096934775,
+    "Gholdengo: Power Gem -> Armarouge | Kingambit: Kowtow Cleave -> Indeedee-F"
+   ],
+   [
+    0.35694840823033364,
+    "Gholdengo: Power Gem -> Armarouge | Kingambit: switch -> Incineroar"
+   ],
+   [
+    0.1684451908003186,
+    "Gholdengo: Shadow Ball -> Armarouge | Kingambit: Kowtow Cleave -> Indeedee-F"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Armarouge | Kingambit: Kowtow Cleave -> Indeedee-F",
+  "adapt": 0.2936,
+  "reader": [
+   [
+    0.7186601956694881,
+    "Armarouge: Heat Wave | Indeedee-F: Trick Room"
+   ],
+   [
+    0.2757661628105471,
+    "Armarouge: Armor Cannon -> Kingambit | Indeedee-F: Follow Me"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Gholdengo+Kingambit||Farigiraf + Incineroar": {
+  "share": 0.037,
+  "n": 81,
+  "back": [
+   "Rillaboom",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.6042366636663666,
+  "worst": 0.5216,
+  "vb": 0.6042366636663666,
+  "vc": 0.5232935196950445,
+  "blend": [
+   [
+    1.0,
+    "Gholdengo: Power Gem -> Incineroar | Kingambit: Kowtow Cleave -> Farigiraf"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Incineroar | Kingambit: Kowtow Cleave -> Farigiraf",
+  "adapt": 0.5216,
+  "reader": [
+   [
+    0.9928843710292249,
+    "Farigiraf: Trick Room | Incineroar: Fake Out -> Kingambit"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Gholdengo+Kingambit||Hatterene + Indeedee-F": {
+  "share": 0.027,
+  "n": 59,
+  "back": [
+   "Rillaboom",
+   "Incineroar"
+  ],
+  "itemMix": true,
+  "pop": 0.6354954226005971,
+  "worst": 0.5052234693877551,
+  "vb": 0.6354954226005971,
+  "vc": 0.5052234693877551,
+  "blend": [
+   [
+    1.0,
+    "Gholdengo: Shadow Ball -> Hatterene | Kingambit: Kowtow Cleave -> Indeedee-F"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Hatterene | Kingambit: Kowtow Cleave -> Indeedee-F",
+  "adapt": 0.5052234693877551,
+  "reader": [
+   [
+    1.0,
+    "Hatterene: Trick Room | Indeedee-F: Follow Me"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Gholdengo+Kingambit||Gardevoir + Indeedee-F": {
+  "share": 0.067,
+  "n": 147,
+  "back": [
+   "Rillaboom",
+   "Incineroar"
+  ],
+  "itemMix": true,
+  "pop": 0.5696353044120156,
+  "worst": 0.5063744771411055,
+  "vb": 0.5722138708578123,
+  "vc": 0.5063744771411055,
+  "blend": [
+   [
+    0.6817660781659516,
+    "Gholdengo: Shadow Ball -> Gardevoir | Kingambit: Kowtow Cleave -> Indeedee-F"
+   ],
+   [
+    0.3182339218340484,
+    "Gholdengo: Protect | Kingambit: Kowtow Cleave -> Indeedee-F"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Gardevoir | Kingambit: Kowtow Cleave -> Indeedee-F",
+  "adapt": 0.4852051020408163,
+  "reader": [
+   [
+    0.6244866219290912,
+    "Gardevoir: Hyper Voice | Indeedee-F: Follow Me"
+   ],
+   [
+    0.37551337807090845,
+    "Gardevoir: Hyper Voice | Indeedee-F: Trick Room"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Gholdengo+Kingambit||Indeedee-F + Sneasler": {
+  "share": 0.028,
+  "n": 61,
+  "back": [
+   "Rillaboom",
+   "Incineroar"
+  ],
+  "itemMix": true,
+  "pop": 0.5987480124489798,
+  "worst": 0.453254081632653,
+  "vb": 0.5987480124489798,
+  "vc": 0.453254081632653,
+  "blend": [
+   [
+    1.0,
+    "Gholdengo: switch -> Incineroar | Kingambit: Kowtow Cleave -> Indeedee-F"
+   ]
+  ],
+  "exploit": "Gholdengo: switch -> Incineroar | Kingambit: Kowtow Cleave -> Indeedee-F",
+  "adapt": 0.453254081632653,
+  "reader": [
+   [
+    1.0000000000000004,
+    "Indeedee-F: Trick Room | Sneasler: Close Combat -> Kingambit"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Gholdengo+Kingambit||Indeedee + Sneasler": {
+  "share": 0.028,
+  "n": 62,
+  "back": [
+   "Rillaboom",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.5873279669896445,
+  "worst": 0.5042480514424312,
+  "vb": 0.6975363590922724,
+  "vc": 0.5042480514424313,
+  "blend": [
+   [
+    0.4295968240688175,
+    "Gholdengo: Shadow Ball -> Sneasler | Kingambit: switch -> Incineroar"
+   ],
+   [
+    0.35042737712816047,
+    "Gholdengo: switch -> Rillaboom | Kingambit: Sucker Punch -> Indeedee"
+   ],
+   [
+    0.21997579880302198,
+    "Gholdengo: switch -> Incineroar | Kingambit: Kowtow Cleave -> Indeedee"
+   ]
+  ],
+  "exploit": "Gholdengo: switch -> Incineroar | Kingambit: Kowtow Cleave -> Indeedee",
+  "adapt": 0.3009,
+  "reader": [
+   [
+    0.41601818555455045,
+    "Indeedee: Mystical Fire -> Kingambit | Sneasler: Close Combat -> Kingambit"
+   ],
+   [
+    0.32258194262685985,
+    "Indeedee: Trick -> Kingambit | Sneasler: Close Combat -> Kingambit"
+   ],
+   [
+    0.26139987181858965,
+    "Indeedee: Mystical Fire -> Gholdengo | Sneasler: Close Combat -> Kingambit"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Gholdengo+Incineroar||Hatterene + Indeedee-F": {
+  "share": 0.027,
+  "n": 59,
+  "back": [
+   "Kingambit",
+   "Rillaboom"
+  ],
+  "itemMix": true,
+  "pop": 0.5775960428446953,
+  "worst": 0.4412295918367347,
+  "vb": 0.5775960428446953,
+  "vc": 0.4412295918367347,
+  "blend": [
+   [
+    1.0,
+    "Gholdengo: Shadow Ball -> Hatterene | Incineroar: Throat Chop -> Indeedee-F"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Hatterene | Incineroar: Throat Chop -> Indeedee-F",
+  "adapt": 0.4412295918367347,
+  "reader": [
+   [
+    1.0,
+    "Hatterene: Trick Room | Indeedee-F: Follow Me"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Gholdengo+Incineroar||Indeedee-F + Sneasler": {
+  "share": 0.028,
+  "n": 61,
+  "back": [
+   "Kingambit",
+   "Rillaboom"
+  ],
+  "itemMix": true,
+  "pop": 0.5685840194989168,
+  "worst": 0.469371290916292,
+  "vb": 0.581723759387755,
+  "vc": 0.46937129091629193,
+  "blend": [
+   [
+    0.7219346271229878,
+    "Gholdengo: Shadow Ball -> Sneasler | Incineroar: Throat Chop -> Indeedee-F"
+   ],
+   [
+    0.27806537287701216,
+    "Gholdengo: switch -> Rillaboom | Incineroar: Fake Out -> Sneasler"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Sneasler | Incineroar: Throat Chop -> Indeedee-F",
+  "adapt": 0.42730000000000007,
+  "reader": [
+   [
+    0.690883675418773,
+    "Indeedee-F: Trick Room | Sneasler: Throat Chop -> Gholdengo"
+   ],
+   [
+    0.30911632458122695,
+    "Indeedee-F: Helping Hand | Sneasler: Close Combat -> Incineroar"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Gholdengo+Incineroar||Gardevoir + Indeedee-F": {
+  "share": 0.067,
+  "n": 147,
+  "back": [
+   "Kingambit",
+   "Rillaboom"
+  ],
+  "itemMix": true,
+  "pop": 0.5134300054688409,
+  "worst": 0.4034061224489796,
+  "vb": 0.5134300054688409,
+  "vc": 0.4203002876707569,
+  "blend": [
+   [
+    1.0,
+    "Gholdengo: Shadow Ball -> Gardevoir | Incineroar: Throat Chop -> Indeedee-F"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Gardevoir | Incineroar: Throat Chop -> Indeedee-F",
+  "adapt": 0.4034061224489796,
+  "reader": [
+   [
+    0.669826191345012,
+    "Gardevoir: Protect | Indeedee-F: Trick Room"
+   ],
+   [
+    0.2201545772264224,
+    "Gardevoir: Hyper Voice | Indeedee-F: Follow Me"
+   ],
+   [
+    0.11001923142856572,
+    "Gardevoir: Hyper Voice | Indeedee-F: Trick Room"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Gholdengo+Incineroar||Indeedee + Sneasler": {
+  "share": 0.028,
+  "n": 62,
+  "back": [
+   "Kingambit",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.6898069557547575,
+  "worst": 0.6011957166947723,
+  "vb": 0.6925296611016698,
+  "vc": 0.6011957166947723,
+  "blend": [
+   [
+    0.7949409780775718,
+    "Gholdengo: Shadow Ball -> Sneasler | Incineroar: Throat Chop -> Indeedee"
+   ],
+   [
+    0.20505902192242823,
+    "Gholdengo: switch -> Kingambit | Incineroar: Throat Chop -> Indeedee"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Sneasler | Incineroar: Throat Chop -> Indeedee",
+  "adapt": 0.5553,
+  "reader": [
+   [
+    0.5838111298482294,
+    "Indeedee: switch | Sneasler: switch"
+   ],
+   [
+    0.4161888701517706,
+    "Indeedee: Mystical Fire -> Gholdengo | Sneasler: Rock Slide"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Gholdengo+Incineroar||Farigiraf + Incineroar": {
+  "share": 0.037,
+  "n": 81,
+  "back": [
+   "Kingambit",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.3959660728288307,
+  "worst": 0.376298937784522,
+  "vb": 0.41310584058405836,
+  "vc": 0.376298937784522,
+  "blend": [
+   [
+    0.943854324734446,
+    "Gholdengo: Power Gem -> Incineroar | Incineroar: Parting Shot -> Incineroar"
+   ],
+   [
+    0.056145675265553995,
+    "Gholdengo: Power Gem -> Incineroar | Incineroar: switch -> Kingambit"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Incineroar | Incineroar: switch -> Kingambit",
+  "adapt": 0.3009,
+  "reader": [
+   [
+    0.513657056145675,
+    "Farigiraf: Trick Room | Incineroar: Fake Out -> Incineroar"
+   ],
+   [
+    0.48634294385432497,
+    "Farigiraf: Trick Room | Incineroar: Flare Blitz -> Gholdengo"
+   ]
+  ]
+ },
+ "Indeedee TR / Psychic Terrain||Gholdengo+Incineroar||Armarouge + Indeedee-F": {
+  "share": 0.044,
+  "n": 97,
+  "back": [
+   "Kingambit",
+   "Rillaboom"
+  ],
+  "itemMix": true,
+  "pop": 0.5506805824992407,
+  "worst": 0.44411643453146077,
+  "vb": 0.5588604959183677,
+  "vc": 0.4441164345314609,
+  "blend": [
+   [
+    0.6072280712267366,
+    "Gholdengo: Protect | Incineroar: Throat Chop -> Armarouge"
+   ],
+   [
+    0.289174479425654,
+    "Gholdengo: Shadow Ball -> Armarouge | Incineroar: Throat Chop -> Indeedee-F"
+   ],
+   [
+    0.10359744934760935,
+    "Gholdengo: Power Gem -> Armarouge | Incineroar: Throat Chop -> Indeedee-F"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Armarouge | Incineroar: Throat Chop -> Armarouge",
+  "adapt": 0.3994,
+  "reader": [
+   [
+    0.6720218961801311,
+    "Armarouge: Heat Wave | Indeedee-F: Trick Room"
+   ],
+   [
+    0.25607114903717115,
+    "Armarouge: Trick Room | Indeedee-F: Follow Me"
+   ]
+  ]
+ },
+ "Sand||Sneasler+Rillaboom||Corviknight + Sneasler": {
+  "share": 0.036,
+  "n": 55,
+  "back": [
+   "Kingambit",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.6833495181693291,
+  "worst": 0.5185745656706046,
+  "vb": 0.6968573057305733,
+  "vc": 0.5638598673679396,
+  "blend": [
+   [
+    0.9228630993745657,
+    "Sneasler: Acrobatics -> Sneasler | Rillaboom: Fake Out -> Corviknight"
+   ],
+   [
+    0.07713690062543431,
+    "Sneasler: Close Combat -> Corviknight | Rillaboom: Fake Out -> Corviknight"
+   ]
+  ],
+  "exploit": "Sneasler: Acrobatics -> Sneasler | Rillaboom: Wood Hammer -> Corviknight",
+  "adapt": 0.4329,
+  "reader": [
+   [
+    0.7784129887948764,
+    "Corviknight: Brave Bird -> Rillaboom | Sneasler: Protect"
+   ],
+   [
+    0.22158701120512245,
+    "Corviknight: Brave Bird -> Rillaboom | Sneasler: Dire Claw -> Rillaboom"
+   ]
+  ]
+ },
+ "Sand||Sneasler+Rillaboom||Sneasler + Tyranitar": {
+  "share": 0.045,
+  "n": 68,
+  "back": [
+   "Kingambit",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.7330139991997603,
+  "worst": 0.5074991245136187,
+  "vb": 0.7382632489746925,
+  "vc": 0.525733894987635,
+  "blend": [
+   [
+    0.6833657587548638,
+    "Sneasler: Acrobatics -> Sneasler | Rillaboom: Wood Hammer -> Tyranitar"
+   ],
+   [
+    0.3166342412451362,
+    "Sneasler: Acrobatics -> Sneasler | Rillaboom: Wood Hammer -> Sneasler"
+   ]
+  ],
+  "exploit": "Sneasler: Acrobatics -> Sneasler | Rillaboom: Wood Hammer -> Sneasler",
+  "adapt": 0.4557,
+  "reader": [
+   [
+    0.5430425651934256,
+    "Sneasler: Fake Out -> Sneasler | Tyranitar: Knock Off -> Rillaboom"
+   ],
+   [
+    0.32382653063296735,
+    "Sneasler: Fake Out -> Sneasler | Tyranitar: Protect"
+   ],
+   [
+    0.10235967464677768,
+    "Sneasler: Fake Out -> Rillaboom | Tyranitar: Knock Off -> Rillaboom"
+   ]
+  ]
+ },
+ "Sand||Sneasler+Rillaboom||Excadrill + Salamence": {
+  "share": 0.029,
+  "n": 44,
+  "back": [
+   "Kingambit",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.46932907423417974,
+  "worst": 0.3871927723840345,
+  "vb": 0.47048177759054755,
+  "vc": 0.39885324323533144,
+  "blend": [
+   [
+    0.9565803667745415,
+    "Sneasler: Close Combat -> Excadrill | Rillaboom: Fake Out -> Salamence"
+   ],
+   [
+    0.0434196332254585,
+    "Sneasler: Close Combat -> Excadrill | Rillaboom: Grassy Glide -> Excadrill"
+   ]
+  ],
+  "exploit": "Sneasler: Close Combat -> Excadrill | Rillaboom: Fake Out -> Salamence",
+  "adapt": 0.3754,
+  "reader": [
+   [
+    0.35160034056177525,
+    "Excadrill: Protect | Salamence: Tailwind"
+   ],
+   [
+    0.22873367484826493,
+    "Excadrill: High Horsepower -> Sneasler | Salamence: Protect"
+   ],
+   [
+    0.2198959841853509,
+    "Excadrill: High Horsepower -> Sneasler | Salamence: Hyper Voice"
+   ],
+   [
+    0.1493874772517441,
+    "Excadrill: Protect | Salamence: switch"
+   ]
+  ]
+ },
+ "Sand||Sneasler+Rillaboom||Indeedee + Sneasler": {
+  "share": 0.048,
+  "n": 72,
+  "back": [
+   "Kingambit",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.7637283671632837,
+  "worst": 0.7408,
+  "vb": 0.7637283671632837,
+  "vc": 0.7408,
+  "blend": [
+   [
+    1.0,
+    "Sneasler: Close Combat -> Indeedee | Rillaboom: Fake Out -> Sneasler"
+   ]
+  ],
+  "exploit": "Sneasler: Close Combat -> Indeedee | Rillaboom: Fake Out -> Sneasler",
+  "adapt": 0.7408,
+  "reader": [
+   [
+    1.0,
+    "Indeedee: switch | Sneasler: Protect"
+   ]
+  ]
+ },
+ "Sand||Sneasler+Rillaboom||Excadrill + Tyranitar": {
+  "share": 0.157,
+  "n": 237,
+  "back": [
+   "Kingambit",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.6401226019970797,
+  "worst": 0.5764989423180737,
+  "vb": 0.6777796124406402,
+  "vc": 0.5782451083720325,
+  "blend": [
+   [
+    0.3833982276281417,
+    "Sneasler: Close Combat -> Tyranitar | Rillaboom: Grassy Glide -> Excadrill"
+   ],
+   [
+    0.3813598792806876,
+    "Sneasler: Close Combat -> Excadrill | Rillaboom: Grassy Glide -> Excadrill"
+   ],
+   [
+    0.23524189309117072,
+    "Sneasler: Protect | Rillaboom: Wood Hammer -> Tyranitar"
+   ]
+  ],
+  "exploit": "Sneasler: Close Combat -> Tyranitar | Rillaboom: Grassy Glide -> Excadrill",
+  "adapt": 0.412,
+  "reader": [
+   [
+    0.31832491496964427,
+    "Excadrill: Protect | Tyranitar: Knock Off -> Rillaboom"
+   ],
+   [
+    0.29004050345170945,
+    "Excadrill: High Horsepower -> Sneasler | Tyranitar: Protect"
+   ],
+   [
+    0.22814665904682305,
+    "Excadrill: High Horsepower -> Sneasler | Tyranitar: switch"
+   ],
+   [
+    0.16348792253182345,
+    "Excadrill: Iron Head -> Rillaboom | Tyranitar: Protect"
+   ]
+  ]
+ },
+ "Sand||Sneasler+Rillaboom||Salamence + Sneasler": {
+  "share": 0.038,
+  "n": 57,
+  "back": [
+   "Kingambit",
+   "Gholdengo"
+  ],
+  "itemMix": false,
+  "pop": 0.4186153763219978,
+  "worst": 0.37448748305594615,
+  "vb": 0.4255434643464346,
+  "vc": 0.3749368476823012,
+  "blend": [
+   [
+    0.32677292741748615,
+    "Sneasler: switch -> Kingambit | Rillaboom: switch -> Gholdengo"
+   ],
+   [
+    0.2977143819339217,
+    "Sneasler: switch -> Gholdengo | Rillaboom: switch -> Kingambit"
+   ],
+   [
+    0.23194482478506587,
+    "Sneasler: Acrobatics -> Sneasler | Rillaboom: Fake Out -> Salamence"
+   ],
+   [
+    0.14356786586352624,
+    "Sneasler: Acrobatics -> Sneasler | Rillaboom: switch -> Gholdengo"
+   ]
+  ],
+  "exploit": "Sneasler: switch -> Kingambit | Rillaboom: switch -> Gholdengo",
+  "adapt": 0.31115,
+  "reader": [
+   [
+    0.3078645740698977,
+    "Salamence: Hyper Voice | Sneasler: Fake Out -> Rillaboom"
+   ],
+   [
+    0.303429560192396,
+    "Salamence: Tailwind | Sneasler: Fake Out -> Sneasler"
+   ],
+   [
+    0.15139640748648578,
+    "Salamence: Tailwind | Sneasler: Close Combat -> Sneasler"
+   ],
+   [
+    0.14415681523504909,
+    "Salamence: Hyper Voice | Sneasler: Close Combat -> Rillaboom"
+   ],
+   [
+    0.09315264301617165,
+    "Salamence: Tailwind | Sneasler: Throat Chop -> Rillaboom"
+   ]
+  ]
+ },
+ "Sand||Kingambit+Rillaboom||Excadrill + Tyranitar": {
+  "share": 0.157,
+  "n": 237,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.6129080490707869,
+  "worst": 0.5753636615343807,
+  "vb": 0.621165291377917,
+  "vc": 0.5753636615343808,
+  "blend": [
+   [
+    0.5209676827305334,
+    "Kingambit: Low Kick -> Tyranitar | Rillaboom: Wood Hammer -> Excadrill"
+   ],
+   [
+    0.300919350349568,
+    "Kingambit: Sucker Punch -> Excadrill | Rillaboom: Grassy Glide -> Excadrill"
+   ],
+   [
+    0.1781129669198985,
+    "Kingambit: Kowtow Cleave -> Excadrill | Rillaboom: Wood Hammer -> Tyranitar"
+   ]
+  ],
+  "exploit": "Kingambit: Low Kick -> Tyranitar | Rillaboom: Grassy Glide -> Excadrill",
+  "adapt": 0.491761171797418,
+  "reader": [
+   [
+    0.4559754959919675,
+    "Excadrill: High Horsepower -> Kingambit | Tyranitar: Protect"
+   ],
+   [
+    0.31190643719638467,
+    "Excadrill: Protect | Tyranitar: Knock Off -> Rillaboom"
+   ],
+   [
+    0.2321180668116478,
+    "Excadrill: High Horsepower -> Kingambit | Tyranitar: switch"
+   ]
+  ]
+ },
+ "Sand||Kingambit+Rillaboom||Excadrill + Salamence": {
+  "share": 0.029,
+  "n": 44,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.6074361503608949,
+  "worst": 0.549135671223776,
+  "vb": 0.6310175405235292,
+  "vc": 0.5518194799178866,
+  "blend": [
+   [
+    0.7353700283946328,
+    "Kingambit: Low Kick -> Excadrill | Rillaboom: Fake Out -> Salamence"
+   ],
+   [
+    0.15432627303316898,
+    "Kingambit: Kowtow Cleave -> Salamence | Rillaboom: Fake Out -> Salamence"
+   ],
+   [
+    0.05844084170358643,
+    "Kingambit: Sucker Punch -> Excadrill | Rillaboom: Wood Hammer -> Salamence"
+   ],
+   [
+    0.0518628568686118,
+    "Kingambit: Low Kick -> Excadrill | Rillaboom: switch -> Gholdengo"
+   ]
+  ],
+  "exploit": "Kingambit: Sucker Punch -> Excadrill | Rillaboom: Grassy Glide -> Excadrill",
+  "adapt": 0.3372,
+  "reader": [
+   [
+    0.3157224390059833,
+    "Excadrill: High Horsepower -> Kingambit | Salamence: Protect"
+   ],
+   [
+    0.29874571730346156,
+    "Excadrill: Protect | Salamence: switch"
+   ],
+   [
+    0.2671146259218345,
+    "Excadrill: Protect | Salamence: Flamethrower -> Rillaboom"
+   ],
+   [
+    0.11841721776872087,
+    "Excadrill: Protect | Salamence: Hyper Voice"
+   ]
+  ]
+ },
+ "Sand||Kingambit+Rillaboom||Sneasler + Tyranitar": {
+  "share": 0.045,
+  "n": 68,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.6066379817709637,
+  "worst": 0.468,
+  "vb": 0.6295690307092128,
+  "vc": 0.49029701303787343,
+  "blend": [
+   [
+    0.765139116202946,
+    "Kingambit: Low Kick -> Tyranitar | Rillaboom: Fake Out -> Sneasler"
+   ],
+   [
+    0.23486088379705405,
+    "Kingambit: Low Kick -> Tyranitar | Rillaboom: Wood Hammer -> Tyranitar"
+   ]
+  ],
+  "exploit": "Kingambit: Low Kick -> Tyranitar | Rillaboom: Fake Out -> Sneasler",
+  "adapt": 0.4393,
+  "reader": [
+   [
+    0.6377545907897642,
+    "Sneasler: Fake Out -> Kingambit | Tyranitar: Knock Off -> Rillaboom"
+   ],
+   [
+    0.25370455084655646,
+    "Sneasler: Dire Claw -> Rillaboom | Tyranitar: Protect"
+   ]
+  ]
+ },
+ "Sand||Kingambit+Rillaboom||Corviknight + Sneasler": {
+  "share": 0.036,
+  "n": 55,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.5460014201734762,
+  "worst": 0.4856283090809983,
+  "vb": 0.5601609460946095,
+  "vc": 0.4856283090809984,
+  "blend": [
+   [
+    0.799717620047377,
+    "Kingambit: Kowtow Cleave -> Corviknight | Rillaboom: Fake Out -> Sneasler"
+   ],
+   [
+    0.1706502972568832,
+    "Kingambit: Kowtow Cleave -> Corviknight | Rillaboom: Fake Out -> Corviknight"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Corviknight | Rillaboom: Wood Hammer -> Sneasler",
+  "adapt": 0.3643,
+  "reader": [
+   [
+    0.48108285150678687,
+    "Corviknight: Bulk Up | Sneasler: Dire Claw -> Rillaboom"
+   ],
+   [
+    0.4799506780226933,
+    "Corviknight: Bulk Up | Sneasler: Protect"
+   ]
+  ]
+ },
+ "Sand||Kingambit+Rillaboom||Salamence + Sneasler": {
+  "share": 0.038,
+  "n": 57,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.5171453715811883,
+  "worst": 0.44495877954192853,
+  "vb": 0.5353283728372836,
+  "vc": 0.4456754549596006,
+  "blend": [
+   [
+    0.5824497082839017,
+    "Kingambit: Kowtow Cleave -> Salamence | Rillaboom: Fake Out -> Salamence"
+   ],
+   [
+    0.24003009143737405,
+    "Kingambit: Kowtow Cleave -> Sneasler | Rillaboom: Fake Out -> Sneasler"
+   ],
+   [
+    0.1775202002787242,
+    "Kingambit: Sucker Punch -> Salamence | Rillaboom: switch -> Gholdengo"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Salamence | Rillaboom: switch -> Gholdengo",
+  "adapt": 0.2322,
+  "reader": [
+   [
+    0.5489006403364594,
+    "Salamence: Hyper Voice | Sneasler: Close Combat -> Kingambit"
+   ],
+   [
+    0.4407927489276096,
+    "Salamence: Hyper Voice | Sneasler: Fake Out -> Rillaboom"
+   ]
+  ]
+ },
+ "Sand||Kingambit+Rillaboom||Indeedee + Sneasler": {
+  "share": 0.048,
+  "n": 72,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.6873110814446597,
+  "worst": 0.556521085214858,
+  "vb": 0.6958165533655752,
+  "vc": 0.577318154063694,
+  "blend": [
+   [
+    0.8153678077203202,
+    "Kingambit: Kowtow Cleave -> Indeedee | Rillaboom: Fake Out -> Sneasler"
+   ],
+   [
+    0.18463219227967975,
+    "Kingambit: Sucker Punch -> Indeedee | Rillaboom: Wood Hammer -> Indeedee"
+   ]
+  ],
+  "exploit": "Kingambit: Sucker Punch -> Indeedee | Rillaboom: Fake Out -> Sneasler",
+  "adapt": 0.5,
+  "reader": [
+   [
+    0.6893491203380254,
+    "Indeedee: switch | Sneasler: Dire Claw -> Rillaboom"
+   ],
+   [
+    0.19560653721055402,
+    "Indeedee: switch | Sneasler: Protect"
+   ],
+   [
+    0.11504434245142056,
+    "Indeedee: Mystical Fire -> Rillaboom | Sneasler: Protect"
+   ]
+  ]
+ },
+ "Sand||Kingambit+Sneasler||Corviknight + Sneasler": {
+  "share": 0.036,
+  "n": 55,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.5663232290049501,
+  "worst": 0.47608349346336165,
+  "vb": 0.630378687868787,
+  "vc": 0.47608349346336165,
+  "blend": [
+   [
+    0.4086185005162991,
+    "Kingambit: switch -> Rillaboom | Sneasler: Acrobatics -> Sneasler"
+   ],
+   [
+    0.31677897531672344,
+    "Kingambit: Kowtow Cleave -> Corviknight | Sneasler: Close Combat -> Corviknight"
+   ],
+   [
+    0.27460252416697745,
+    "Kingambit: Kowtow Cleave -> Corviknight | Sneasler: Protect"
+   ]
+  ],
+  "exploit": "Kingambit: switch -> Rillaboom | Sneasler: Acrobatics -> Sneasler",
+  "adapt": 0.3951,
+  "reader": [
+   [
+    0.38065845742551474,
+    "Corviknight: Bulk Up | Sneasler: Protect"
+   ],
+   [
+    0.3325618914586437,
+    "Corviknight: Brave Bird -> Sneasler | Sneasler: Protect"
+   ],
+   [
+    0.2867796511158416,
+    "Corviknight: Brave Bird -> Sneasler | Sneasler: Close Combat -> Kingambit"
+   ]
+  ]
+ },
+ "Sand||Kingambit+Sneasler||Sneasler + Tyranitar": {
+  "share": 0.045,
+  "n": 68,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.6444929271686818,
+  "worst": 0.47084636556369114,
+  "vb": 0.6614394618385517,
+  "vc": 0.5071161335337007,
+  "blend": [
+   [
+    0.44599582165020574,
+    "Kingambit: Low Kick -> Tyranitar | Sneasler: Close Combat -> Tyranitar"
+   ],
+   [
+    0.3172628891894085,
+    "Kingambit: switch -> Rillaboom | Sneasler: Acrobatics -> Sneasler"
+   ],
+   [
+    0.23674128916038578,
+    "Kingambit: Kowtow Cleave -> Sneasler | Sneasler: Close Combat -> Tyranitar"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Sneasler | Sneasler: Close Combat -> Tyranitar",
+  "adapt": 0.3925,
+  "reader": [
+   [
+    0.621169599620128,
+    "Sneasler: Fake Out -> Sneasler | Tyranitar: Protect"
+   ],
+   [
+    0.16339355046847429,
+    "Sneasler: Fake Out -> Sneasler | Tyranitar: Knock Off -> Sneasler"
+   ],
+   [
+    0.11647529090321418,
+    "Sneasler: Close Combat -> Kingambit | Tyranitar: Protect"
+   ],
+   [
+    0.09896155900818362,
+    "Sneasler: Close Combat -> Kingambit | Tyranitar: Knock Off -> Kingambit"
+   ]
+  ]
+ },
+ "Sand||Kingambit+Sneasler||Indeedee + Sneasler": {
+  "share": 0.048,
+  "n": 72,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.6743996800319967,
+  "worst": 0.6245,
+  "vb": 0.6743996800319967,
+  "vc": 0.6298010305192232,
+  "blend": [
+   [
+    1.0,
+    "Kingambit: switch -> Rillaboom | Sneasler: Close Combat -> Indeedee"
+   ]
+  ],
+  "exploit": "Kingambit: switch -> Rillaboom | Sneasler: Close Combat -> Indeedee",
+  "adapt": 0.6245,
+  "reader": [
+   [
+    0.5390408244153786,
+    "Indeedee: switch | Sneasler: Close Combat -> Kingambit"
+   ],
+   [
+    0.46095917558462135,
+    "Indeedee: Expanding Force -> Sneasler | Sneasler: Close Combat -> Kingambit"
+   ]
+  ]
+ },
+ "Sand||Kingambit+Sneasler||Excadrill + Salamence": {
+  "share": 0.029,
+  "n": 44,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.5582824160419946,
+  "worst": 0.45440729659508794,
+  "vb": 0.6026919910618687,
+  "vc": 0.4558821906583102,
+  "blend": [
+   [
+    0.548851201459725,
+    "Kingambit: Sucker Punch -> Excadrill | Sneasler: switch -> Gholdengo"
+   ],
+   [
+    0.27804030613482633,
+    "Kingambit: Sucker Punch -> Excadrill | Sneasler: Close Combat -> Excadrill"
+   ],
+   [
+    0.14408600363031027,
+    "Kingambit: Kowtow Cleave -> Salamence | Sneasler: Protect"
+   ]
+  ],
+  "exploit": "Kingambit: Low Kick -> Excadrill | Sneasler: switch -> Gholdengo",
+  "adapt": 0.2465141494435612,
+  "reader": [
+   [
+    0.29685519482550177,
+    "Excadrill: High Horsepower -> Kingambit | Salamence: Flamethrower -> Kingambit"
+   ],
+   [
+    0.27482921710924874,
+    "Excadrill: Protect | Salamence: Flamethrower -> Kingambit"
+   ],
+   [
+    0.24536646028362857,
+    "Excadrill: Protect | Salamence: Hyper Voice"
+   ],
+   [
+    0.13914896683270064,
+    "Excadrill: High Horsepower -> Sneasler | Salamence: Tailwind"
+   ]
+  ]
+ },
+ "Sand||Kingambit+Sneasler||Salamence + Sneasler": {
+  "share": 0.038,
+  "n": 57,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.5125218321832182,
+  "worst": 0.298,
+  "vb": 0.5231164816481647,
+  "vc": 0.3554048770715586,
+  "blend": [
+   [
+    1.0,
+    "Kingambit: Sucker Punch -> Sneasler | Sneasler: switch -> Gholdengo"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Salamence | Sneasler: switch -> Gholdengo",
+  "adapt": 0.2234,
+  "reader": [
+   [
+    0.6100405798671448,
+    "Salamence: Tailwind | Sneasler: Close Combat -> Kingambit"
+   ],
+   [
+    0.36515069990214466,
+    "Salamence: Hyper Voice | Sneasler: Close Combat -> Kingambit"
+   ]
+  ]
+ },
+ "Sand||Kingambit+Sneasler||Excadrill + Tyranitar": {
+  "share": 0.157,
+  "n": 237,
+  "back": [
+   "Gholdengo",
+   "Rillaboom"
+  ],
+  "itemMix": false,
+  "pop": 0.5767986174561213,
+  "worst": 0.5135280414311311,
+  "vb": 0.5977598540145985,
+  "vc": 0.5145572507759336,
+  "blend": [
+   [
+    0.6312832889038977,
+    "Kingambit: Kowtow Cleave -> Excadrill | Sneasler: Protect"
+   ],
+   [
+    0.196532564377031,
+    "Kingambit: Low Kick -> Tyranitar | Sneasler: Close Combat -> Excadrill"
+   ],
+   [
+    0.11939235310903398,
+    "Kingambit: Sucker Punch -> Excadrill | Sneasler: Close Combat -> Excadrill"
+   ],
+   [
+    0.05279179361003725,
+    "Kingambit: Kowtow Cleave -> Excadrill | Sneasler: Close Combat -> Tyranitar"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Excadrill | Sneasler: Close Combat -> Tyranitar",
+  "adapt": 0.3416,
+  "reader": [
+   [
+    0.5371813854945241,
+    "Excadrill: High Horsepower -> Kingambit | Tyranitar: Protect"
+   ],
+   [
+    0.22464601042883497,
+    "Excadrill: Protect | Tyranitar: Rock Slide"
+   ],
+   [
+    0.14955017296536938,
+    "Excadrill: High Horsepower -> Sneasler | Tyranitar: switch"
+   ],
+   [
+    0.08862243111127144,
+    "Excadrill: High Horsepower -> Sneasler | Tyranitar: Protect"
+   ]
+  ]
+ },
+ "Sun||Gholdengo+Salamence||Farigiraf + Incineroar": {
+  "share": 0.038,
+  "n": 70,
+  "back": [
+   "Incineroar",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.5105051909882063,
+  "worst": 0.48363215102974827,
+  "vb": 0.5134324932493249,
+  "vc": 0.48363215102974827,
+  "blend": [
+   [
+    0.829519450800915,
+    "Gholdengo: Power Gem -> Incineroar | Salamence: Hyper Voice"
+   ],
+   [
+    0.17048054919908492,
+    "Gholdengo: Power Gem -> Incineroar | Salamence: switch -> Incineroar"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Incineroar | Salamence: Hyper Voice",
+  "adapt": 0.474,
+  "reader": [
+   [
+    0.6767734553775744,
+    "Farigiraf: Trick Room | Incineroar: Fake Out -> Salamence"
+   ],
+   [
+    0.32322654462242556,
+    "Farigiraf: Trick Room | Incineroar: switch"
+   ]
+  ]
+ },
+ "Sun||Gholdengo+Salamence||Charizard + Farigiraf": {
+  "share": 0.026,
+  "n": 48,
+  "back": [
+   "Incineroar",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.6526556944305569,
+  "worst": 0.4519,
+  "vb": 0.6526556944305569,
+  "vc": 0.45189999999999997,
+  "blend": [
+   [
+    1.0,
+    "Gholdengo: Power Gem -> Charizard | Salamence: Tailwind"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Charizard | Salamence: Tailwind",
+  "adapt": 0.4519,
+  "reader": [
+   [
+    1.0,
+    "Charizard: Protect | Farigiraf: Trick Room"
+   ]
+  ]
+ },
+ "Sun||Gholdengo+Salamence||Charizard + Garchomp": {
+  "share": 0.035,
+  "n": 65,
+  "back": [
+   "Incineroar",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.7304821553533943,
+  "worst": 0.5582,
+  "vb": 0.7304821553533943,
+  "vc": 0.614384575825739,
+  "blend": [
+   [
+    1.0,
+    "Gholdengo: Power Gem -> Charizard | Salamence: Tailwind"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Charizard | Salamence: Tailwind",
+  "adapt": 0.5582,
+  "reader": [
+   [
+    0.6173182491585852,
+    "Charizard: Protect | Garchomp: Earthquake"
+   ],
+   [
+    0.22142005256278469,
+    "Charizard: Heat Wave | Garchomp: Dragon Claw -> Salamence"
+   ],
+   [
+    0.16126169827863,
+    "Charizard: Protect | Garchomp: Dragon Claw -> Salamence"
+   ]
+  ]
+ },
+ "Sun||Gholdengo+Salamence||Aerodactyl + Kingambit": {
+  "share": 0.033,
+  "n": 61,
+  "back": [
+   "Incineroar",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.4538625294957491,
+  "worst": 0.39610838463793613,
+  "vb": 0.4690091031054978,
+  "vc": 0.3961083846379361,
+  "blend": [
+   [
+    0.5617121078862504,
+    "Gholdengo: Protect | Salamence: Tailwind"
+   ],
+   [
+    0.4382878921137497,
+    "Gholdengo: Power Gem -> Aerodactyl | Salamence: Tailwind"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Aerodactyl | Salamence: Tailwind",
+  "adapt": 0.34430079247152057,
+  "reader": [
+   [
+    0.7129873937261799,
+    "Aerodactyl: Rock Slide | Kingambit: Kowtow Cleave -> Salamence"
+   ],
+   [
+    0.2870126062738202,
+    "Aerodactyl: Rock Slide | Kingambit: Sucker Punch -> Gholdengo"
+   ]
+  ]
+ },
+ "Sun||Gholdengo+Salamence||Gardevoir + Indeedee-F": {
+  "share": 0.028,
+  "n": 53,
+  "back": [
+   "Incineroar",
+   "Sneasler"
+  ],
+  "itemMix": true,
+  "pop": 0.47677920550332253,
+  "worst": 0.36826831695691675,
+  "vb": 0.4926451269673262,
+  "vc": 0.37742338404126363,
+  "blend": [
+   [
+    0.482935991786846,
+    "Gholdengo: Shadow Ball -> Gardevoir | Salamence: Protect"
+   ],
+   [
+    0.279082808240981,
+    "Gholdengo: Protect | Salamence: Double-Edge -> Gardevoir"
+   ],
+   [
+    0.2379811999721731,
+    "Gholdengo: Shadow Ball -> Gardevoir | Salamence: Tailwind"
+   ]
+  ],
+  "exploit": "Gholdengo: Protect | Salamence: Double-Edge -> Gardevoir",
+  "adapt": 0.3419,
+  "reader": [
+   [
+    0.49228584773980344,
+    "Gardevoir: Protect | Indeedee-F: Trick Room"
+   ],
+   [
+    0.25956199375701905,
+    "Gardevoir: Expanding Force -> Gholdengo | Indeedee-F: Follow Me"
+   ],
+   [
+    0.24615922018268754,
+    "Gardevoir: Expanding Force -> Gholdengo | Indeedee-F: Trick Room"
+   ]
+  ]
+ },
+ "Sun||Gholdengo+Salamence||Armarouge + Indeedee-F": {
+  "share": 0.022,
+  "n": 41,
+  "back": [
+   "Incineroar",
+   "Sneasler"
+  ],
+  "itemMix": true,
+  "pop": 0.5722055920075522,
+  "worst": 0.3919921215696689,
+  "vb": 0.6023193284634586,
+  "vc": 0.4143192463058255,
+  "blend": [
+   [
+    0.5242456068446129,
+    "Gholdengo: Power Gem -> Armarouge | Salamence: Double-Edge -> Armarouge"
+   ],
+   [
+    0.47575439315538715,
+    "Gholdengo: Shadow Ball -> Armarouge | Salamence: Double-Edge -> Indeedee-F"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Armarouge | Salamence: Hyper Voice",
+  "adapt": 0.3468285714285715,
+  "reader": [
+   [
+    0.643331978856934,
+    "Armarouge: Expanding Force -> Gholdengo | Indeedee-F: Follow Me"
+   ],
+   [
+    0.24392629084382653,
+    "Armarouge: Protect | Indeedee-F: Trick Room"
+   ],
+   [
+    0.11274173029923942,
+    "Armarouge: Expanding Force -> Gholdengo | Indeedee-F: Trick Room"
+   ]
+  ]
+ },
+ "Sun||Salamence+Incineroar||Farigiraf + Incineroar": {
+  "share": 0.038,
+  "n": 70,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.5137561232170339,
+  "worst": 0.4763804361448583,
+  "vb": 0.5215953972392544,
+  "vc": 0.4776174897276719,
+  "blend": [
+   [
+    0.5168133025576221,
+    "Salamence: Hyper Voice | Incineroar: Parting Shot -> Farigiraf"
+   ],
+   [
+    0.18941790464357142,
+    "Salamence: Hyper Voice | Incineroar: Parting Shot -> Incineroar"
+   ],
+   [
+    0.17468710271419122,
+    "Salamence: Tailwind | Incineroar: Throat Chop -> Incineroar"
+   ],
+   [
+    0.11908169008461524,
+    "Salamence: switch -> Gholdengo | Incineroar: Parting Shot -> Incineroar"
+   ]
+  ],
+  "exploit": "Salamence: Hyper Voice | Incineroar: Parting Shot -> Incineroar",
+  "adapt": 0.44947464788732394,
+  "reader": [
+   [
+    0.5532932475204023,
+    "Farigiraf: Trick Room | Incineroar: Parting Shot -> Salamence"
+   ],
+   [
+    0.34361406963214874,
+    "Farigiraf: Trick Room | Incineroar: switch"
+   ],
+   [
+    0.10309268284744905,
+    "Farigiraf: Trick Room | Incineroar: Fake Out -> Incineroar"
+   ]
+  ]
+ },
+ "Sun||Salamence+Incineroar||Aerodactyl + Kingambit": {
+  "share": 0.033,
+  "n": 61,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.4842050308990825,
+  "worst": 0.4541421100917431,
+  "vb": 0.48434569,
+  "vc": 0.45414211009174316,
+  "blend": [
+   [
+    0.9972477064220181,
+    "Salamence: Tailwind | Incineroar: Fake Out -> Kingambit"
+   ]
+  ],
+  "exploit": "Salamence: Tailwind | Incineroar: Fake Out -> Kingambit",
+  "adapt": 0.4538,
+  "reader": [
+   [
+    0.5701834862385308,
+    "Aerodactyl: Rock Slide | Kingambit: Low Kick -> Incineroar"
+   ],
+   [
+    0.4298165137614686,
+    "Aerodactyl: Rock Slide | Kingambit: Sucker Punch -> Salamence"
+   ]
+  ]
+ },
+ "Sun||Salamence+Incineroar||Charizard + Farigiraf": {
+  "share": 0.026,
+  "n": 48,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.547121525350502,
+  "worst": 0.49693204615052244,
+  "vb": 0.5704080091990801,
+  "vc": 0.49693204615052256,
+  "blend": [
+   [
+    0.5357190500025972,
+    "Salamence: Double-Edge -> Charizard | Incineroar: Throat Chop -> Farigiraf"
+   ],
+   [
+    0.34583053940850605,
+    "Salamence: Double-Edge -> Farigiraf | Incineroar: Throat Chop -> Farigiraf"
+   ],
+   [
+    0.11845041058889672,
+    "Salamence: Double-Edge -> Farigiraf | Incineroar: Flare Blitz -> Farigiraf"
+   ]
+  ],
+  "exploit": "Salamence: Double-Edge -> Charizard | Incineroar: Throat Chop -> Farigiraf",
+  "adapt": 0.3987,
+  "reader": [
+   [
+    0.4218616452360827,
+    "Charizard: Ancient Power -> Salamence | Farigiraf: Trick Room"
+   ],
+   [
+    0.3419144209020206,
+    "Charizard: switch | Farigiraf: Trick Room"
+   ],
+   [
+    0.23622393386189666,
+    "Charizard: Protect | Farigiraf: Trick Room"
+   ]
+  ]
+ },
+ "Sun||Salamence+Incineroar||Gardevoir + Indeedee-F": {
+  "share": 0.028,
+  "n": 53,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": true,
+  "pop": 0.46480635950766874,
+  "worst": 0.3512084889643463,
+  "vb": 0.468847485251475,
+  "vc": 0.3512084889643463,
+  "blend": [
+   [
+    0.7300509337860781,
+    "Salamence: Protect | Incineroar: Parting Shot -> Indeedee-F"
+   ],
+   [
+    0.2699490662139219,
+    "Salamence: Tailwind | Incineroar: Throat Chop -> Gardevoir"
+   ]
+  ],
+  "exploit": "Salamence: Protect | Incineroar: Parting Shot -> Indeedee-F",
+  "adapt": 0.3061,
+  "reader": [
+   [
+    0.567402376910017,
+    "Gardevoir: Expanding Force -> Salamence | Indeedee-F: Trick Room"
+   ],
+   [
+    0.43259762308998295,
+    "Gardevoir: Hyper Voice | Indeedee-F: Trick Room"
+   ]
+  ]
+ },
+ "Sun||Salamence+Incineroar||Charizard + Garchomp": {
+  "share": 0.035,
+  "n": 65,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.633221686467033,
+  "worst": 0.5659366627497062,
+  "vb": 0.6488214235729284,
+  "vc": 0.5659366627497059,
+  "blend": [
+   [
+    0.7555816686251463,
+    "Salamence: Tailwind | Incineroar: Fake Out -> Charizard"
+   ],
+   [
+    0.24441833137485372,
+    "Salamence: Hyper Voice | Incineroar: Parting Shot -> Garchomp"
+   ]
+  ],
+  "exploit": "Salamence: Double-Edge -> Charizard | Incineroar: Parting Shot -> Garchomp",
+  "adapt": 0.4993,
+  "reader": [
+   [
+    0.5017626321974147,
+    "Charizard: Ancient Power -> Salamence | Garchomp: switch"
+   ],
+   [
+    0.49823736780258526,
+    "Charizard: Protect | Garchomp: switch"
+   ]
+  ]
+ },
+ "Sun||Salamence+Incineroar||Armarouge + Indeedee-F": {
+  "share": 0.022,
+  "n": 41,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": true,
+  "pop": 0.5536026889485178,
+  "worst": 0.4800086612119829,
+  "vb": 0.5736861172851979,
+  "vc": 0.48643823158418453,
+  "blend": [
+   [
+    0.7093914007236694,
+    "Salamence: Double-Edge -> Indeedee-F | Incineroar: Throat Chop -> Indeedee-F"
+   ],
+   [
+    0.29060859927633065,
+    "Salamence: Hyper Voice | Incineroar: Throat Chop -> Armarouge"
+   ]
+  ],
+  "exploit": "Salamence: Hyper Voice | Incineroar: Throat Chop -> Armarouge",
+  "adapt": 0.3940102040816327,
+  "reader": [
+   [
+    0.640035172136385,
+    "Armarouge: Expanding Force -> Salamence | Indeedee-F: Trick Room"
+   ],
+   [
+    0.22055496611222558,
+    "Armarouge: Expanding Force -> Salamence | Indeedee-F: switch"
+   ],
+   [
+    0.13940986175138936,
+    "Armarouge: Trick Room | Indeedee-F: switch"
+   ]
+  ]
+ },
+ "Sun||Gholdengo+Incineroar||Aerodactyl + Kingambit": {
+  "share": 0.033,
+  "n": 61,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.516793100406343,
+  "worst": 0.4980995044598613,
+  "vb": 0.52093919,
+  "vc": 0.4980995044598613,
+  "blend": [
+   [
+    0.5143706640237855,
+    "Gholdengo: Power Gem -> Aerodactyl | Incineroar: Fake Out -> Kingambit"
+   ],
+   [
+    0.48562933597621455,
+    "Gholdengo: Shadow Ball -> Aerodactyl | Incineroar: Fake Out -> Kingambit"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Aerodactyl | Incineroar: Fake Out -> Kingambit",
+  "adapt": 0.4626,
+  "reader": [
+   [
+    0.7244796828543111,
+    "Aerodactyl: Rock Slide | Kingambit: Kowtow Cleave -> Gholdengo"
+   ],
+   [
+    0.1611388673509765,
+    "Aerodactyl: switch | Kingambit: Iron Head -> Incineroar"
+   ],
+   [
+    0.11438144979471243,
+    "Aerodactyl: switch | Kingambit: Low Kick -> Incineroar"
+   ]
+  ]
+ },
+ "Sun||Gholdengo+Incineroar||Charizard + Farigiraf": {
+  "share": 0.026,
+  "n": 48,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.5208839816018397,
+  "worst": 0.4003,
+  "vb": 0.525643915608439,
+  "vc": 0.4016118148599269,
+  "blend": [
+   [
+    1.0,
+    "Gholdengo: Power Gem -> Charizard | Incineroar: Throat Chop -> Farigiraf"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Charizard | Incineroar: Flare Blitz -> Farigiraf",
+  "adapt": 0.3707,
+  "reader": [
+   [
+    0.9634591961023142,
+    "Charizard: Protect | Farigiraf: Trick Room"
+   ]
+  ]
+ },
+ "Sun||Gholdengo+Incineroar||Farigiraf + Incineroar": {
+  "share": 0.038,
+  "n": 70,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.47296022062880444,
+  "worst": 0.4289340823970037,
+  "vb": 0.4929205820582057,
+  "vc": 0.4289340823970037,
+  "blend": [
+   [
+    0.9063670411985021,
+    "Gholdengo: Power Gem -> Incineroar | Incineroar: Parting Shot -> Incineroar"
+   ],
+   [
+    0.09363295880149786,
+    "Gholdengo: Power Gem -> Incineroar | Incineroar: switch -> Salamence"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Incineroar | Incineroar: switch -> Salamence",
+  "adapt": 0.3828,
+  "reader": [
+   [
+    0.6822721598002495,
+    "Farigiraf: Trick Room | Incineroar: switch"
+   ],
+   [
+    0.31772784019975053,
+    "Farigiraf: Trick Room | Incineroar: Fake Out -> Incineroar"
+   ]
+  ]
+ },
+ "Sun||Gholdengo+Incineroar||Charizard + Garchomp": {
+  "share": 0.035,
+  "n": 65,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.5739508409698143,
+  "worst": 0.5369872094774892,
+  "vb": 0.610821563530941,
+  "vc": 0.5379949762023387,
+  "blend": [
+   [
+    0.6485572959421724,
+    "Gholdengo: Protect | Incineroar: Parting Shot -> Garchomp"
+   ],
+   [
+    0.20511844294702236,
+    "Gholdengo: Power Gem -> Charizard | Incineroar: Parting Shot -> Garchomp"
+   ],
+   [
+    0.09770322543771709,
+    "Gholdengo: Power Gem -> Charizard | Incineroar: Fake Out -> Charizard"
+   ],
+   [
+    0.048621035673088134,
+    "Gholdengo: Power Gem -> Charizard | Incineroar: Fake Out -> Garchomp"
+   ]
+  ],
+  "exploit": "Gholdengo: Power Gem -> Charizard | Incineroar: Parting Shot -> Garchomp",
+  "adapt": 0.4164,
+  "reader": [
+   [
+    0.5087182796559888,
+    "Charizard: Heat Wave | Garchomp: switch"
+   ],
+   [
+    0.47563919083728057,
+    "Charizard: Protect | Garchomp: Earthquake"
+   ]
+  ]
+ },
+ "Sun||Gholdengo+Incineroar||Armarouge + Indeedee-F": {
+  "share": 0.022,
+  "n": 41,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": true,
+  "pop": 0.5958597602259704,
+  "worst": 0.4378102040816326,
+  "vb": 0.6073145856422375,
+  "vc": 0.4378102040816326,
+  "blend": [
+   [
+    0.8821584832280022,
+    "Gholdengo: Shadow Ball -> Armarouge | Incineroar: Throat Chop -> Indeedee-F"
+   ],
+   [
+    0.11784151677199783,
+    "Gholdengo: Protect | Incineroar: Throat Chop -> Indeedee-F"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Armarouge | Incineroar: Throat Chop -> Indeedee-F",
+  "adapt": 0.4167857142857143,
+  "reader": [
+   [
+    1.0,
+    "Armarouge: Protect | Indeedee-F: Trick Room"
+   ]
+  ]
+ },
+ "Sun||Gholdengo+Incineroar||Gardevoir + Indeedee-F": {
+  "share": 0.028,
+  "n": 53,
+  "back": [
+   "Salamence",
+   "Sneasler"
+  ],
+  "itemMix": true,
+  "pop": 0.5237915816581609,
+  "worst": 0.4034061224489796,
+  "vb": 0.5237915816581609,
+  "vc": 0.4034061224489796,
+  "blend": [
+   [
+    1.0,
+    "Gholdengo: Shadow Ball -> Gardevoir | Incineroar: Throat Chop -> Indeedee-F"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Gardevoir | Incineroar: Throat Chop -> Indeedee-F",
+  "adapt": 0.4034061224489796,
+  "reader": [
+   [
+    0.9999999999999997,
+    "Gardevoir: Trick Room | Indeedee-F: Follow Me"
+   ]
+  ]
+ },
+ "Snow||Gholdengo+Incineroar||Froslass + Kingambit": {
+  "share": 0.053,
+  "n": 57,
+  "back": [
+   "Sneasler",
+   "Kingambit"
+  ],
+  "itemMix": false,
+  "pop": 0.50054525,
+  "worst": 0.4245,
+  "vb": 0.50054525,
+  "vc": 0.4262424737456243,
+  "blend": [
+   [
+    1.0,
+    "Gholdengo: Shadow Ball -> Froslass | Incineroar: Fake Out -> Kingambit"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Froslass | Incineroar: Fake Out -> Kingambit",
+  "adapt": 0.4245,
+  "reader": [
+   [
+    0.4592797650183066,
+    "Froslass: Protect | Kingambit: Swords Dance"
+   ],
+   [
+    0.41353237033758494,
+    "Froslass: Protect | Kingambit: Iron Head -> Gholdengo"
+   ],
+   [
+    0.1271878646441078,
+    "Froslass: Aurora Veil | Kingambit: Protect"
+   ]
+  ]
+ },
+ "Snow||Gholdengo+Incineroar||Raichu + Sneasler": {
+  "share": 0.032,
+  "n": 34,
+  "back": [
+   "Sneasler",
+   "Kingambit"
+  ],
+  "itemMix": false,
+  "pop": 0.5377246552548143,
+  "worst": 0.3285672045562411,
+  "vb": 0.5443458538176605,
+  "vc": 0.33730000000000004,
+  "blend": [
+   [
+    0.6203132415757,
+    "Gholdengo: Shadow Ball -> Raichu | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.3796867584243,
+    "Gholdengo: Shadow Ball -> Sneasler | Incineroar: Fake Out -> Raichu"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Sneasler | Incineroar: Fake Out -> Raichu",
+  "adapt": 0.3143,
+  "reader": [
+   [
+    1.0,
+    "Raichu: Zap Cannon -> Gholdengo | Sneasler: Fake Out -> Incineroar"
+   ]
+  ]
+ },
+ "Snow||Gholdengo+Incineroar||Arcanine-Hisui + Raichu": {
+  "share": 0.034,
+  "n": 36,
+  "back": [
+   "Sneasler",
+   "Kingambit"
+  ],
+  "itemMix": false,
+  "pop": 0.5706893581222309,
+  "worst": 0.5221736733287389,
+  "vb": 0.5903847269932726,
+  "vc": 0.5293581127733011,
+  "blend": [
+   [
+    0.8821502412129566,
+    "Gholdengo: Power Gem -> Arcanine-Hisui | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.11784975878704344,
+    "Gholdengo: Shadow Ball -> Raichu | Incineroar: Fake Out -> Raichu"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Raichu | Incineroar: Fake Out -> Raichu",
+  "adapt": 0.382,
+  "reader": [
+   [
+    0.8941311852704259,
+    "Arcanine-Hisui: Flare Blitz -> Gholdengo | Raichu: Fake Out -> Incineroar"
+   ],
+   [
+    0.10586881472957406,
+    "Arcanine-Hisui: Head Smash -> Incineroar | Raichu: Fake Out -> Incineroar"
+   ]
+  ]
+ },
+ "Snow||Gholdengo+Incineroar||Kingambit + Sneasler": {
+  "share": 0.031,
+  "n": 33,
+  "back": [
+   "Sneasler",
+   "Kingambit"
+  ],
+  "itemMix": false,
+  "pop": 0.4393470972987997,
+  "worst": 0.3492,
+  "vb": 0.4419280561220212,
+  "vc": 0.3582093432581846,
+  "blend": [
+   [
+    0.5401891252955084,
+    "Gholdengo: Shadow Ball -> Sneasler | Incineroar: Fake Out -> Kingambit"
+   ],
+   [
+    0.45981087470449156,
+    "Gholdengo: Shadow Ball -> Sneasler | Incineroar: Fake Out -> Sneasler"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Sneasler | Incineroar: Fake Out -> Sneasler",
+  "adapt": 0.2578,
+  "reader": [
+   [
+    0.7095726065325443,
+    "Kingambit: Kowtow Cleave -> Gholdengo | Sneasler: Fake Out -> Incineroar"
+   ],
+   [
+    0.14607528722682667,
+    "Kingambit: Swords Dance | Sneasler: Fake Out -> Incineroar"
+   ],
+   [
+    0.10844046299699256,
+    "Kingambit: Swords Dance | Sneasler: Close Combat -> Incineroar"
+   ]
+  ]
+ },
+ "Snow||Gholdengo+Incineroar||Arcanine-Hisui + Froslass": {
+  "share": 0.031,
+  "n": 33,
+  "back": [
+   "Sneasler",
+   "Kingambit"
+  ],
+  "itemMix": false,
+  "pop": 0.5930774315874855,
+  "worst": 0.5268704132869834,
+  "vb": 0.60767542,
+  "vc": 0.5331150015455144,
+  "blend": [
+   [
+    0.7651602935496329,
+    "Gholdengo: Shadow Ball -> Froslass | Incineroar: Fake Out -> Arcanine-Hisui"
+   ],
+   [
+    0.23483970645036711,
+    "Gholdengo: Shadow Ball -> Froslass | Incineroar: Flare Blitz -> Arcanine-Hisui"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Froslass | Incineroar: Fake Out -> Arcanine-Hisui",
+  "adapt": 0.5055,
+  "reader": [
+   [
+    0.39505037328094333,
+    "Arcanine-Hisui: switch | Froslass: Aurora Veil"
+   ],
+   [
+    0.30799947609692213,
+    "Arcanine-Hisui: Flare Blitz -> Gholdengo | Froslass: Protect"
+   ],
+   [
+    0.29695015062213453,
+    "Arcanine-Hisui: switch | Froslass: Protect"
+   ]
+  ]
+ },
+ "Snow||Gholdengo+Incineroar||Froslass + Sneasler": {
+  "share": 0.088,
+  "n": 94,
+  "back": [
+   "Sneasler",
+   "Kingambit"
+  ],
+  "itemMix": false,
+  "pop": 0.5450638825248988,
+  "worst": 0.48497414392059557,
+  "vb": 0.5540878712128787,
+  "vc": 0.48993777561894647,
+  "blend": [
+   [
+    0.8878411910669974,
+    "Gholdengo: Shadow Ball -> Froslass | Incineroar: Fake Out -> Sneasler"
+   ],
+   [
+    0.11215880893300256,
+    "Gholdengo: Shadow Ball -> Sneasler | Incineroar: Fake Out -> Sneasler"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Froslass | Incineroar: Fake Out -> Sneasler",
+  "adapt": 0.4699,
+  "reader": [
+   [
+    0.6110865789396213,
+    "Froslass: Aurora Veil | Sneasler: Fake Out -> Incineroar"
+   ],
+   [
+    0.31790750390061556,
+    "Froslass: Protect | Sneasler: Fake Out -> Incineroar"
+   ]
+  ]
+ },
+ "Snow||Kingambit+Incineroar||Raichu + Sneasler": {
+  "share": 0.032,
+  "n": 34,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.5191035909141408,
+  "worst": 0.40259093500570126,
+  "vb": 0.544088239317795,
+  "vc": 0.40394641472623644,
+  "blend": [
+   [
+    0.4737742303306727,
+    "Kingambit: Kowtow Cleave -> Raichu | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.4448271962222995,
+    "Kingambit: Kowtow Cleave -> Raichu | Incineroar: Fake Out -> Sneasler"
+   ],
+   [
+    0.08139857344702783,
+    "Kingambit: Sucker Punch -> Raichu | Incineroar: Fake Out -> Sneasler"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Raichu | Incineroar: Fake Out -> Raichu",
+  "adapt": 0.2573,
+  "reader": [
+   [
+    0.35812813354647727,
+    "Raichu: Zap Cannon -> Kingambit | Sneasler: Fake Out -> Kingambit"
+   ],
+   [
+    0.3244036443316695,
+    "Raichu: Protect | Sneasler: Close Combat -> Incineroar"
+   ],
+   [
+    0.3132126159271906,
+    "Raichu: Zap Cannon -> Kingambit | Sneasler: Fake Out -> Incineroar"
+   ]
+  ]
+ },
+ "Snow||Kingambit+Incineroar||Arcanine-Hisui + Froslass": {
+  "share": 0.031,
+  "n": 33,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.6132778137589928,
+  "worst": 0.5616051708633094,
+  "vb": 0.62339269,
+  "vc": 0.5664195124081295,
+  "blend": [
+   [
+    0.612859712230216,
+    "Kingambit: Low Kick -> Arcanine-Hisui | Incineroar: Flare Blitz -> Froslass"
+   ],
+   [
+    0.3871402877697841,
+    "Kingambit: Kowtow Cleave -> Froslass | Incineroar: Throat Chop -> Froslass"
+   ]
+  ],
+  "exploit": "Kingambit: Low Kick -> Arcanine-Hisui | Incineroar: Flare Blitz -> Froslass",
+  "adapt": 0.5129,
+  "reader": [
+   [
+    0.4041872785347485,
+    "Arcanine-Hisui: Flare Blitz -> Kingambit | Froslass: Protect"
+   ],
+   [
+    0.40385389406727484,
+    "Arcanine-Hisui: Protect | Froslass: Aurora Veil"
+   ],
+   [
+    0.19195882739797662,
+    "Arcanine-Hisui: Flare Blitz -> Kingambit | Froslass: Aurora Veil"
+   ]
+  ]
+ },
+ "Snow||Kingambit+Incineroar||Kingambit + Sneasler": {
+  "share": 0.031,
+  "n": 33,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.4944725662869486,
+  "worst": 0.3464770212765957,
+  "vb": 0.51034552662255,
+  "vc": 0.3698847319272818,
+  "blend": [
+   [
+    0.5702127659574467,
+    "Kingambit: Low Kick -> Kingambit | Incineroar: Fake Out -> Sneasler"
+   ],
+   [
+    0.4297872340425532,
+    "Kingambit: Low Kick -> Kingambit | Incineroar: Fake Out -> Kingambit"
+   ]
+  ],
+  "exploit": "Kingambit: Low Kick -> Kingambit | Incineroar: Fake Out -> Sneasler",
+  "adapt": 0.294,
+  "reader": [
+   [
+    0.6279732193782991,
+    "Kingambit: Swords Dance | Sneasler: Fake Out -> Kingambit"
+   ],
+   [
+    0.3121967837381528,
+    "Kingambit: Protect | Sneasler: Close Combat -> Incineroar"
+   ]
+  ]
+ },
+ "Snow||Kingambit+Incineroar||Froslass + Sneasler": {
+  "share": 0.088,
+  "n": 94,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.4940489031986703,
+  "worst": 0.4158302909298346,
+  "vb": 0.4984490850914909,
+  "vc": 0.41661339617252213,
+  "blend": [
+   [
+    0.5901312036508842,
+    "Kingambit: Kowtow Cleave -> Froslass | Incineroar: Fake Out -> Sneasler"
+   ],
+   [
+    0.40986879634911577,
+    "Kingambit: Kowtow Cleave -> Froslass | Incineroar: Flare Blitz -> Froslass"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Froslass | Incineroar: Fake Out -> Sneasler",
+  "adapt": 0.3855,
+  "reader": [
+   [
+    0.7886318194801485,
+    "Froslass: Aurora Veil | Sneasler: Fake Out -> Kingambit"
+   ],
+   [
+    0.2113681805198515,
+    "Froslass: Aurora Veil | Sneasler: Close Combat -> Incineroar"
+   ]
+  ]
+ },
+ "Snow||Kingambit+Incineroar||Froslass + Kingambit": {
+  "share": 0.053,
+  "n": 57,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.5343037170841068,
+  "worst": 0.4459531455605008,
+  "vb": 0.5736070600000001,
+  "vc": 0.445953145560501,
+  "blend": [
+   [
+    0.5947473175720212,
+    "Kingambit: Kowtow Cleave -> Froslass | Incineroar: Throat Chop -> Froslass"
+   ],
+   [
+    0.3248746813147495,
+    "Kingambit: Low Kick -> Kingambit | Incineroar: Flare Blitz -> Kingambit"
+   ],
+   [
+    0.08037800111322935,
+    "Kingambit: Low Kick -> Kingambit | Incineroar: Flare Blitz -> Froslass"
+   ]
+  ],
+  "exploit": "Kingambit: Low Kick -> Kingambit | Incineroar: Flare Blitz -> Froslass",
+  "adapt": 0.3717,
+  "reader": [
+   [
+    0.5396906686751684,
+    "Froslass: Aurora Veil | Kingambit: Protect"
+   ],
+   [
+    0.2736262766090255,
+    "Froslass: Aurora Veil | Kingambit: Swords Dance"
+   ],
+   [
+    0.18668305471580615,
+    "Froslass: Protect | Kingambit: Swords Dance"
+   ]
+  ]
+ },
+ "Snow||Kingambit+Incineroar||Arcanine-Hisui + Raichu": {
+  "share": 0.034,
+  "n": 36,
+  "back": [
+   "Gholdengo",
+   "Sneasler"
+  ],
+  "itemMix": false,
+  "pop": 0.5662936437402715,
+  "worst": 0.5502768590120218,
+  "vb": 0.5925839623522684,
+  "vc": 0.5510316014059942,
+  "blend": [
+   [
+    0.5385128983581924,
+    "Kingambit: Kowtow Cleave -> Arcanine-Hisui | Incineroar: Flare Blitz -> Raichu"
+   ],
+   [
+    0.2643454711698709,
+    "Kingambit: Low Kick -> Arcanine-Hisui | Incineroar: Fake Out -> Raichu"
+   ],
+   [
+    0.1881513346722038,
+    "Kingambit: Kowtow Cleave -> Raichu | Incineroar: Fake Out -> Raichu"
+   ]
+  ],
+  "exploit": "Kingambit: Kowtow Cleave -> Raichu | Incineroar: Fake Out -> Raichu",
+  "adapt": 0.4467,
+  "reader": [
+   [
+    0.41557964684317594,
+    "Arcanine-Hisui: Flare Blitz -> Kingambit | Raichu: Fake Out -> Kingambit"
+   ],
+   [
+    0.3444596783507108,
+    "Arcanine-Hisui: Flare Blitz -> Kingambit | Raichu: Focus Blast -> Kingambit"
+   ],
+   [
+    0.23996067480611327,
+    "Arcanine-Hisui: switch | Raichu: Protect"
+   ]
+  ]
+ },
+ "Snow||Gholdengo+Sneasler||Arcanine-Hisui + Raichu": {
+  "share": 0.034,
+  "n": 36,
+  "back": [
+   "Kingambit",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.5117835599922362,
+  "worst": 0.43975795501888076,
+  "vb": 0.5203429907277011,
+  "vc": 0.44527983083023065,
+  "blend": [
+   [
+    0.37037788727659804,
+    "Gholdengo: Shadow Ball -> Raichu | Sneasler: Protect"
+   ],
+   [
+    0.23332410373098839,
+    "Gholdengo: switch -> Incineroar | Sneasler: Close Combat -> Raichu"
+   ],
+   [
+    0.21453248336837552,
+    "Gholdengo: Protect | Sneasler: switch -> Incineroar"
+   ],
+   [
+    0.1229780286561683,
+    "Gholdengo: Protect | Sneasler: Close Combat -> Raichu"
+   ],
+   [
+    0.05878749696786975,
+    "Gholdengo: switch -> Incineroar | Sneasler: Protect"
+   ]
+  ],
+  "exploit": "Gholdengo: switch -> Incineroar | Sneasler: Close Combat -> Raichu",
+  "adapt": 0.42142055659494854,
+  "reader": [
+   [
+    0.5651055832823824,
+    "Arcanine-Hisui: Flare Blitz -> Sneasler | Raichu: Zap Cannon -> Gholdengo"
+   ],
+   [
+    0.26039659127257647,
+    "Arcanine-Hisui: Flare Blitz -> Gholdengo | Raichu: Zap Cannon -> Sneasler"
+   ],
+   [
+    0.16920681642094854,
+    "Arcanine-Hisui: Head Smash -> Sneasler | Raichu: Zap Cannon -> Sneasler"
+   ]
+  ]
+ },
+ "Snow||Gholdengo+Sneasler||Arcanine-Hisui + Froslass": {
+  "share": 0.031,
+  "n": 33,
+  "back": [
+   "Kingambit",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.5399683842748383,
+  "worst": 0.4378327369623144,
+  "vb": 0.5705722699999999,
+  "vc": 0.4591072359236853,
+  "blend": [
+   [
+    0.5314046440807004,
+    "Gholdengo: switch -> Incineroar | Sneasler: Close Combat -> Arcanine-Hisui"
+   ],
+   [
+    0.46859535591929957,
+    "Gholdengo: Shadow Ball -> Froslass | Sneasler: Close Combat -> Arcanine-Hisui"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Froslass | Sneasler: Close Combat -> Arcanine-Hisui",
+  "adapt": 0.3146,
+  "reader": [
+   [
+    0.6516984644020474,
+    "Arcanine-Hisui: Protect | Froslass: Aurora Veil"
+   ],
+   [
+    0.3483015355979526,
+    "Arcanine-Hisui: Flare Blitz -> Gholdengo | Froslass: Blizzard"
+   ]
+  ]
+ },
+ "Snow||Gholdengo+Sneasler||Froslass + Sneasler": {
+  "share": 0.088,
+  "n": 94,
+  "back": [
+   "Kingambit",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.5635889488080572,
+  "worst": 0.5056373958451515,
+  "vb": 0.5689522647735226,
+  "vc": 0.5056373958451515,
+  "blend": [
+   [
+    0.9243894886707392,
+    "Gholdengo: Shadow Ball -> Froslass | Sneasler: Protect"
+   ],
+   [
+    0.05369335874811787,
+    "Gholdengo: Shadow Ball -> Sneasler | Sneasler: Protect"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Froslass | Sneasler: Protect",
+  "adapt": 0.5,
+  "reader": [
+   [
+    0.4919291530090937,
+    "Froslass: Protect | Sneasler: Fake Out -> Sneasler"
+   ],
+   [
+    0.4145144003787973,
+    "Froslass: Aurora Veil | Sneasler: Protect"
+   ],
+   [
+    0.09355644661210927,
+    "Froslass: Protect | Sneasler: switch"
+   ]
+  ]
+ },
+ "Snow||Gholdengo+Sneasler||Froslass + Kingambit": {
+  "share": 0.053,
+  "n": 57,
+  "back": [
+   "Kingambit",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.6255811106111233,
+  "worst": 0.45883515058254565,
+  "vb": 0.6575065100000002,
+  "vc": 0.45883515058254565,
+  "blend": [
+   [
+    0.6073862387337876,
+    "Gholdengo: Shadow Ball -> Froslass | Sneasler: Close Combat -> Kingambit"
+   ],
+   [
+    0.3926137612662124,
+    "Gholdengo: Protect | Sneasler: Close Combat -> Kingambit"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Froslass | Sneasler: Close Combat -> Kingambit",
+  "adapt": 0.3427,
+  "reader": [
+   [
+    0.6502528028138053,
+    "Froslass: Aurora Veil | Kingambit: Protect"
+   ],
+   [
+    0.34974719718619474,
+    "Froslass: Blizzard | Kingambit: Sucker Punch -> Gholdengo"
+   ]
+  ]
+ },
+ "Snow||Gholdengo+Sneasler||Kingambit + Sneasler": {
+  "share": 0.031,
+  "n": 33,
+  "back": [
+   "Kingambit",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.532170740437727,
+  "worst": 0.44123132067420523,
+  "vb": 0.5696737565971165,
+  "vc": 0.4464308918114876,
+  "blend": [
+   [
+    0.7202901642841903,
+    "Gholdengo: Shadow Ball -> Sneasler | Sneasler: Protect"
+   ],
+   [
+    0.27970983571580965,
+    "Gholdengo: Shadow Ball -> Sneasler | Sneasler: Close Combat -> Kingambit"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Sneasler | Sneasler: Close Combat -> Kingambit",
+  "adapt": 0.3941,
+  "reader": [
+   [
+    0.6475792217814951,
+    "Kingambit: Kowtow Cleave -> Gholdengo | Sneasler: Fake Out -> Sneasler"
+   ],
+   [
+    0.23789686845188363,
+    "Kingambit: Swords Dance | Sneasler: Fake Out -> Sneasler"
+   ]
+  ]
+ },
+ "Snow||Gholdengo+Sneasler||Raichu + Sneasler": {
+  "share": 0.032,
+  "n": 34,
+  "back": [
+   "Kingambit",
+   "Incineroar"
+  ],
+  "itemMix": false,
+  "pop": 0.5246155512634216,
+  "worst": 0.4026609655172414,
+  "vb": 0.5454123070279956,
+  "vc": 0.4197130200317573,
+  "blend": [
+   [
+    0.5081034482758621,
+    "Gholdengo: Shadow Ball -> Raichu | Sneasler: Protect"
+   ],
+   [
+    0.49189655172413793,
+    "Gholdengo: Protect | Sneasler: Close Combat -> Raichu"
+   ]
+  ],
+  "exploit": "Gholdengo: Shadow Ball -> Sneasler | Sneasler: Close Combat -> Raichu",
+  "adapt": 0.30407862595419843,
+  "reader": [
+   [
+    0.6665680457742936,
+    "Raichu: Zap Cannon -> Gholdengo | Sneasler: Fake Out -> Sneasler"
+   ],
+   [
+    0.19720915444455603,
+    "Raichu: Zap Cannon -> Sneasler | Sneasler: Fake Out -> Sneasler"
+   ]
+  ]
+ }
+}

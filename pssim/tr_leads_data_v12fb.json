@@ -1,0 +1,1724 @@
+[
+ {
+  "k": "tw",
+  "tab": "Tailwind",
+  "picks": [
+   {
+    "lead": [
+     "Incineroar",
+     "Farigiraf"
+    ],
+    "back": "Torkoal, Kingambit",
+    "v": [
+     69,
+     61
+    ],
+    "top": null,
+    "tr": 100,
+    "rule": "",
+    "vs": [
+     [
+      "Gholdengo + Raichu",
+      9.6,
+      [
+       66,
+       59
+      ],
+      [
+       [
+        75,
+        "Fake Out Raichu",
+        "Trick Room"
+       ],
+       [
+        25,
+        "Flare Blitz Gholdengo",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Arcanine-H + Raichu",
+      4.6,
+      [
+       68,
+       59
+      ],
+      [
+       [
+        85,
+        "Fake Out Raichu",
+        "Trick Room"
+       ],
+       [
+        15,
+        "Flare Blitz Raichu",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Gholdengo + Rillaboom",
+      3.2,
+      [
+       73,
+       67
+      ],
+      [
+       [
+        60,
+        "Flare Blitz Gholdengo",
+        "Trick Room"
+       ],
+       [
+        40,
+        "Fake Out Rillaboom",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Salamence + Sneasler",
+      2.6,
+      [
+       69,
+       61
+      ],
+      [
+       [
+        70,
+        "Fake Out Sneasler",
+        "Trick Room"
+       ],
+       [
+        30,
+        "Fake Out Salamence",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Gholdengo + Salamence",
+      2.6,
+      [
+       69,
+       60
+      ],
+      [
+       [
+        55,
+        "Flare Blitz Gholdengo",
+        "Trick Room"
+       ],
+       [
+        45,
+        "Fake Out Salamence",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Rillaboom + Sneasler",
+      2.5,
+      [
+       74,
+       70
+      ],
+      [
+       [
+        85,
+        "Fake Out Sneasler",
+        "Trick Room"
+       ],
+       [
+        15,
+        "Fake Out Rillaboom",
+        "Trick Room"
+       ]
+      ]
+     ]
+    ],
+    "note": "Farigiraf&rsquo;s Armor Tail keeps their Fake Out off both of you."
+   }
+  ]
+ },
+ {
+  "k": "indeedee",
+  "tab": "Indeedee TR",
+  "picks": [
+   {
+    "lead": [
+     "Incineroar",
+     "Blastoise"
+    ],
+    "back": "Indeedee, Kingambit",
+    "v": [
+     69,
+     61
+    ],
+    "top": null,
+    "tr": 0,
+    "rule": "",
+    "vs": [
+     [
+      "Gardevoir + Indeedee F",
+      6.7,
+      [
+       58,
+       51
+      ],
+      [
+       [
+        100,
+        "Flare Blitz Gardevoir",
+        "Dark Pulse Indeedee F"
+       ]
+      ]
+     ],
+     [
+      "Armarouge + Indeedee F",
+      4.4,
+      [
+       72,
+       66
+      ],
+      [
+       [
+        75,
+        "Throat Chop Indeedee F",
+        "Dark Pulse Armarouge"
+       ],
+       [
+        25,
+        "Throat Chop Armarouge",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Incineroar",
+      3.7,
+      [
+       78,
+       74
+      ],
+      [
+       [
+        100,
+        "switch &rarr; Indeedee",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Indeedee M + Sneasler",
+      2.8,
+      [
+       73,
+       62
+      ],
+      [
+       [
+        100,
+        "Throat Chop Indeedee M",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Indeedee F + Sneasler",
+      2.8,
+      [
+       69,
+       61
+      ],
+      [
+       [
+        85,
+        "Throat Chop Indeedee F",
+        "Water Spout"
+       ],
+       [
+        15,
+        "switch &rarr; Farigiraf",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Hatterene + Indeedee F",
+      2.7,
+      [
+       79,
+       60
+      ],
+      [
+       [
+        75,
+        "Throat Chop Indeedee F",
+        "Water Spout"
+       ],
+       [
+        25,
+        "Flare Blitz Hatterene",
+        "Water Spout"
+       ]
+      ]
+     ]
+    ],
+    "note": "Their Indeedee&rsquo;s terrain blocks both of your Fake Outs, and their Farigiraf&rsquo;s Armor Tail does too, which is why Incineroar attacks instead."
+   }
+  ]
+ },
+ {
+  "k": "sun",
+  "tab": "Sun",
+  "picks": [
+   {
+    "lead": [
+     "Kingambit",
+     "Blastoise"
+    ],
+    "back": "Farigiraf, Incineroar",
+    "v": [
+     68,
+     57
+    ],
+    "top": null,
+    "tr": 0,
+    "rule": "",
+    "vs": [
+     [
+      "Farigiraf + Incineroar",
+      3.8,
+      [
+       77,
+       69
+      ],
+      [
+       [
+        90,
+        "Low Kick Incineroar",
+        "Water Spout"
+       ],
+       [
+        10,
+        "switch &rarr; Indeedee",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Charizard + Garchomp",
+      3.5,
+      [
+       56,
+       42
+      ],
+      [
+       [
+        70,
+        "Kowtow Charizard",
+        "Fake Out Charizard"
+       ],
+       [
+        30,
+        "Kowtow Garchomp",
+        "Aura Sphere Garchomp"
+       ]
+      ]
+     ],
+     [
+      "Aerodactyl + Kingambit",
+      3.3,
+      [
+       73,
+       66
+      ],
+      [
+       [
+        60,
+        "Iron Head Aerodactyl",
+        "Aura Sphere Kingambit"
+       ],
+       [
+        40,
+        "Low Kick Kingambit",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Gardevoir + Indeedee F",
+      2.8,
+      [
+       64,
+       54
+      ],
+      [
+       [
+        65,
+        "Iron Head Gardevoir",
+        "Dark Pulse Indeedee F"
+       ],
+       [
+        35,
+        "Kowtow Gardevoir",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Charizard + Farigiraf",
+      2.6,
+      [
+       57,
+       41
+      ],
+      [
+       [
+        95,
+        "switch &rarr; Farigiraf",
+        "Water Spout"
+       ],
+       [
+        5,
+        "Kowtow Farigiraf",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Armarouge + Indeedee F",
+      2.2,
+      [
+       80,
+       66
+      ],
+      [
+       [
+        40,
+        "switch &rarr; Indeedee",
+        "Water Spout"
+       ],
+       [
+        30,
+        "Kowtow Indeedee F",
+        "Water Spout"
+       ],
+       [
+        30,
+        "Kowtow Indeedee F",
+        "Dark Pulse Armarouge"
+       ]
+      ]
+     ]
+    ],
+    "fb": 1,
+    "note": "Full-battle pick: in whole-game sims (both sides switching, Trick Room and endgames played out) this lead and back row won 55&ndash;64%, against 36% for Incineroar + Blastoise with Torkoal + Kingambit."
+   }
+  ]
+ },
+ {
+  "k": "rain",
+  "tab": "Rain",
+  "picks": [
+   {
+    "lead": [
+     "Incineroar",
+     "Torkoal"
+    ],
+    "back": "Blastoise, Farigiraf",
+    "v": [
+     68,
+     58
+    ],
+    "top": null,
+    "tr": 0,
+    "rule": "",
+    "vs": [
+     [
+      "Archaludon + Pelipper",
+      8.3,
+      [
+       70,
+       58
+      ],
+      [
+       [
+        65,
+        "Fake Out Pelipper",
+        "Eruption"
+       ],
+       [
+        35,
+        "Fake Out Archaludon",
+        "Eruption"
+       ]
+      ]
+     ],
+     [
+      "Pelipper + Swampert",
+      6.8,
+      [
+       72,
+       65
+      ],
+      [
+       [
+        100,
+        "Fake Out Swampert",
+        "Eruption"
+       ]
+      ]
+     ],
+     [
+      "Pelipper + Sneasler",
+      4.2,
+      [
+       62,
+       57
+      ],
+      [
+       [
+        50,
+        "switch &rarr; Indeedee",
+        "Eruption"
+       ],
+       [
+        50,
+        "Fake Out Sneasler",
+        "Eruption"
+       ]
+      ]
+     ],
+     [
+      "Archaludon + Grimmsnarl",
+      3.2,
+      [
+       63,
+       54
+      ],
+      [
+       [
+        80,
+        "Fake Out Archaludon",
+        "Eruption"
+       ],
+       [
+        20,
+        "Fake Out Grimmsnarl",
+        "Weather Ball Grimmsnarl"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Golisopod",
+      2.1,
+      [
+       77,
+       54
+      ],
+      [
+       [
+        100,
+        "Throat Chop Farigiraf",
+        "Eruption"
+       ]
+      ]
+     ],
+     [
+      "Dragonite + Gholdengo",
+      2.0,
+      [
+       56,
+       48
+      ],
+      [
+       [
+        80,
+        "Fake Out Dragonite",
+        "Weather Ball Gholdengo"
+       ],
+       [
+        20,
+        "Throat Chop Gholdengo",
+        "Protect"
+       ]
+      ]
+     ]
+    ],
+    "note": "Torkoal&rsquo;s sun goes up last and replaces their rain. Their Farigiraf&rsquo;s Armor Tail blocks Fake Out, which is why Incineroar Throat Chops it. Full-battle pick: the same lead, with Blastoise + Farigiraf behind instead of Indeedee + Blastoise, won 51&ndash;54% of whole-game sims, against 41%.",
+    "fb": 1
+   }
+  ]
+ },
+ {
+  "k": "balance",
+  "tab": "Balance",
+  "picks": [
+   {
+    "lead": [
+     "Incineroar",
+     "Farigiraf"
+    ],
+    "back": "Torkoal, Blastoise",
+    "v": [
+     73,
+     66
+    ],
+    "top": null,
+    "tr": 100,
+    "rule": "",
+    "vs": [
+     [
+      "Gholdengo + Raichu",
+      6.2,
+      [
+       69,
+       61
+      ],
+      [
+       [
+        75,
+        "Fake Out Raichu",
+        "Trick Room"
+       ],
+       [
+        25,
+        "Throat Chop Gholdengo",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Floette + Incineroar",
+      4.0,
+      [
+       75,
+       68
+      ],
+      [
+       [
+        90,
+        "Fake Out Floette",
+        "Trick Room"
+       ],
+       [
+        10,
+        "Fake Out Incineroar",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Garchomp + Raichu",
+      3.5,
+      [
+       72,
+       65
+      ],
+      [
+       [
+        80,
+        "Fake Out Raichu",
+        "Trick Room"
+       ],
+       [
+        20,
+        "Fake Out Garchomp",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Incineroar + Raichu",
+      2.9,
+      [
+       76,
+       72
+      ],
+      [
+       [
+        85,
+        "Fake Out Raichu",
+        "Trick Room"
+       ],
+       [
+        15,
+        "Close Combat Incineroar",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Garchomp + Rillaboom",
+      2.8,
+      [
+       77,
+       73
+      ],
+      [
+       [
+        100,
+        "Fake Out Garchomp",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Arcanine-H + Raichu",
+      2.8,
+      [
+       70,
+       65
+      ],
+      [
+       [
+        95,
+        "Fake Out Raichu",
+        "Trick Room"
+       ],
+       [
+        5,
+        "Close Combat Arcanine-H",
+        "Trick Room"
+       ]
+      ]
+     ]
+    ],
+    "note": "Farigiraf&rsquo;s Armor Tail keeps their Fake Out off both of you."
+   }
+  ]
+ },
+ {
+  "k": "sand",
+  "tab": "Sand",
+  "picks": [
+   {
+    "lead": [
+     "Incineroar",
+     "Farigiraf"
+    ],
+    "back": "Blastoise, Kingambit",
+    "v": [
+     70,
+     64
+    ],
+    "top": null,
+    "tr": 90,
+    "rule": "",
+    "vs": [
+     [
+      "Excadrill + Tyranitar",
+      15.7,
+      [
+       74,
+       66
+      ],
+      [
+       [
+        65,
+        "Fake Out Excadrill",
+        "Trick Room"
+       ],
+       [
+        35,
+        "Close Combat Tyranitar",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Indeedee M + Sneasler",
+      4.8,
+      [
+       54,
+       50
+      ],
+      [
+       [
+        75,
+        "switch &rarr; Indeedee",
+        "Psychic Sneasler"
+       ],
+       [
+        25,
+        "Throat Chop Indeedee M",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Sneasler + Tyranitar",
+      4.5,
+      [
+       74,
+       66
+      ],
+      [
+       [
+        70,
+        "Fake Out Sneasler",
+        "Trick Room"
+       ],
+       [
+        30,
+        "Fake Out Tyranitar",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Salamence + Sneasler",
+      3.8,
+      [
+       71,
+       65
+      ],
+      [
+       [
+        80,
+        "Fake Out Sneasler",
+        "Trick Room"
+       ],
+       [
+        20,
+        "Fake Out Salamence",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Corviknight + Sneasler",
+      3.6,
+      [
+       68,
+       61
+      ],
+      [
+       [
+        65,
+        "switch &rarr; Torkoal",
+        "Trick Room"
+       ],
+       [
+        35,
+        "Fake Out Sneasler",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Excadrill + Salamence",
+      2.9,
+      [
+       73,
+       70
+      ],
+      [
+       [
+        75,
+        "Fake Out Salamence",
+        "Trick Room"
+       ],
+       [
+        25,
+        "Fake Out Excadrill",
+        "Trick Room"
+       ]
+      ]
+     ]
+    ],
+    "note": "Farigiraf&rsquo;s Armor Tail keeps their Fake Out off both of you. Indeedee M&rsquo;s terrain blocks your Fake Out, which is why Incineroar switches out there. Full-battle pick: won 81&ndash;87% of whole-game sims, against 71% for Farigiraf + Blastoise.",
+    "fb": 1
+   }
+  ]
+ },
+ {
+  "k": "snow",
+  "tab": "Snow",
+  "picks": [
+   {
+    "lead": [
+     "Farigiraf",
+     "Blastoise"
+    ],
+    "back": "Incineroar, Torkoal",
+    "v": [
+     68,
+     60
+    ],
+    "top": null,
+    "tr": 68,
+    "rule": "",
+    "vs": [
+     [
+      "Froslass + Sneasler",
+      8.8,
+      [
+       67,
+       60
+      ],
+      [
+       [
+        55,
+        "Psychic Sneasler",
+        "Dark Pulse Froslass"
+       ],
+       [
+        25,
+        "Trick Room",
+        "Dark Pulse Froslass"
+       ],
+       [
+        20,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Froslass + Kingambit",
+      5.3,
+      [
+       67,
+       58
+      ],
+      [
+       [
+        55,
+        "Trick Room",
+        "Aura Sphere Kingambit"
+       ],
+       [
+        35,
+        "Trick Room",
+        "Water Spout"
+       ],
+       [
+        10,
+        "Protect",
+        "Dark Pulse Froslass"
+       ]
+      ]
+     ],
+     [
+      "Arcanine-H + Raichu",
+      3.4,
+      [
+       66,
+       61
+      ],
+      [
+       [
+        90,
+        "Trick Room",
+        "Fake Out Raichu"
+       ],
+       [
+        10,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Raichu + Sneasler",
+      3.2,
+      [
+       66,
+       61
+      ],
+      [
+       [
+        45,
+        "Trick Room",
+        "Fake Out Raichu"
+       ],
+       [
+        45,
+        "Psychic Sneasler",
+        "Fake Out Raichu"
+       ],
+       [
+        10,
+        "Trick Room",
+        "Fake Out Sneasler"
+       ]
+      ]
+     ],
+     [
+      "Arcanine-H + Froslass",
+      3.1,
+      [
+       71,
+       64
+      ],
+      [
+       [
+        100,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Kingambit + Sneasler",
+      3.1,
+      [
+       77,
+       63
+      ],
+      [
+       [
+        60,
+        "Psychic Sneasler",
+        "Aura Sphere Kingambit"
+       ],
+       [
+        40,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ]
+    ]
+   },
+   {
+    "lead": [
+     "Indeedee",
+     "Blastoise"
+    ],
+    "back": "Farigiraf, Kingambit",
+    "v": [
+     69,
+     56
+    ],
+    "top": [
+     "Farigiraf + Blastoise",
+     3.0
+    ],
+    "tr": 77,
+    "rule": "",
+    "vs": [
+     [
+      "Froslass + Sneasler",
+      8.8,
+      [
+       68,
+       55
+      ],
+      [
+       [
+        75,
+        "Trick Room",
+        "Dark Pulse Froslass"
+       ],
+       [
+        25,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Froslass + Kingambit",
+      5.3,
+      [
+       68,
+       57
+      ],
+      [
+       [
+        65,
+        "Trick Room",
+        "Aura Sphere Kingambit"
+       ],
+       [
+        35,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Arcanine-H + Raichu",
+      3.4,
+      [
+       64,
+       51
+      ],
+      [
+       [
+        90,
+        "Follow Me",
+        "Water Spout"
+       ],
+       [
+        10,
+        "Trick Room",
+        "switch &rarr; Farigiraf"
+       ]
+      ]
+     ],
+     [
+      "Raichu + Sneasler",
+      3.2,
+      [
+       71,
+       52
+      ],
+      [
+       [
+        100,
+        "Follow Me",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Kingambit + Sneasler",
+      3.1,
+      [
+       74,
+       58
+      ],
+      [
+       [
+        60,
+        "Trick Room",
+        "Aura Sphere Kingambit"
+       ],
+       [
+        40,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Arcanine-H + Froslass",
+      3.1,
+      [
+       71,
+       66
+      ],
+      [
+       [
+        100,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "k": "tr",
+  "tab": "Trick Room",
+  "picks": [
+   {
+    "lead": [
+     "Incineroar",
+     "Farigiraf"
+    ],
+    "back": "Blastoise, Torkoal",
+    "v": [
+     66,
+     55
+    ],
+    "top": null,
+    "tr": 41,
+    "rule": "",
+    "vs": [
+     [
+      "Farigiraf + Incineroar",
+      7.3,
+      [
+       62,
+       54
+      ],
+      [
+       [
+        55,
+        "Throat Chop Farigiraf",
+        "Thunderbolt Incineroar"
+       ],
+       [
+        25,
+        "Flare Blitz Incineroar",
+        "switch &rarr; Kingambit"
+       ],
+       [
+        20,
+        "switch &rarr; Kingambit",
+        "Protect"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Kingambit",
+      3.5,
+      [
+       72,
+       52
+      ],
+      [
+       [
+        80,
+        "Close Combat Kingambit",
+        "Trick Room"
+       ],
+       [
+        20,
+        "Close Combat Kingambit",
+        "Protect"
+       ]
+      ]
+     ],
+     [
+      "Delphox + Incineroar",
+      3.0,
+      [
+       69,
+       61
+      ],
+      [
+       [
+        90,
+        "Throat Chop Delphox",
+        "Trick Room"
+       ],
+       [
+        10,
+        "Fake Out Incineroar",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Rillaboom",
+      3.0,
+      [
+       72,
+       61
+      ],
+      [
+       [
+        100,
+        "Flare Blitz Rillaboom",
+        "Thunderbolt Farigiraf"
+       ]
+      ]
+     ],
+     [
+      "Delphox + Sneasler",
+      2.2,
+      [
+       73,
+       60
+      ],
+      [
+       [
+        45,
+        "Fake Out Delphox",
+        "Psychic Sneasler"
+       ],
+       [
+        30,
+        "Throat Chop Delphox",
+        "Trick Room"
+       ],
+       [
+        25,
+        "Fake Out Sneasler",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Raichu",
+      2.0,
+      [
+       51,
+       41
+      ],
+      [
+       [
+        75,
+        "Flare Blitz Raichu",
+        "Trick Room"
+       ],
+       [
+        25,
+        "switch &rarr; Indeedee",
+        "Psychic Raichu"
+       ]
+      ]
+     ]
+    ],
+    "fb": 1,
+    "note": "Full-battle pick: won 68&ndash;74% of whole-game sims, against 61% for Farigiraf + Kingambit."
+   }
+  ]
+ },
+ {
+  "k": "rainsun",
+  "tab": "Rain + Sun",
+  "picks": [
+   {
+    "lead": [
+     "Incineroar",
+     "Blastoise"
+    ],
+    "back": "Farigiraf, Torkoal",
+    "v": [
+     64,
+     58
+    ],
+    "top": null,
+    "tr": 0,
+    "rule": "",
+    "vs": [
+     [
+      "Charizard + Venusaur",
+      13.5,
+      [
+       55,
+       53
+      ],
+      [
+       [
+        55,
+        "Fake Out Charizard",
+        "Water Spout"
+       ],
+       [
+        40,
+        "Flare Blitz Venusaur",
+        "Fake Out Venusaur"
+       ],
+       [
+        5,
+        "Flare Blitz Venusaur",
+        "Fake Out Charizard"
+       ]
+      ]
+     ],
+     [
+      "Archaludon + Grimmsnarl",
+      9.5,
+      [
+       62,
+       56
+      ],
+      [
+       [
+        65,
+        "Fake Out Archaludon",
+        "Water Spout"
+       ],
+       [
+        35,
+        "Fake Out Grimmsnarl",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Charizard + Grimmsnarl",
+      9.4,
+      [
+       60,
+       58
+      ],
+      [
+       [
+        35,
+        "Fake Out Grimmsnarl",
+        "Aura Sphere Grimmsnarl"
+       ],
+       [
+        35,
+        "Fake Out Grimmsnarl",
+        "Water Spout"
+       ],
+       [
+        30,
+        "Fake Out Charizard",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Golisopod",
+      7.6,
+      [
+       77,
+       62
+      ],
+      [
+       [
+        60,
+        "Flare Blitz Golisopod",
+        "Water Spout"
+       ],
+       [
+        40,
+        "Throat Chop Farigiraf",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Grimmsnarl + Swampert",
+      5.5,
+      [
+       70,
+       65
+      ],
+      [
+       [
+        65,
+        "Fake Out Grimmsnarl",
+        "Water Spout"
+       ],
+       [
+        35,
+        "Fake Out Swampert",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Golisopod + Grimmsnarl",
+      5.3,
+      [
+       69,
+       66
+      ],
+      [
+       [
+        65,
+        "Fake Out Grimmsnarl",
+        "Water Spout"
+       ],
+       [
+        35,
+        "Flare Blitz Golisopod",
+        "Aura Sphere Grimmsnarl"
+       ]
+      ]
+     ]
+    ]
+   },
+   {
+    "lead": [
+     "Incineroar",
+     "Farigiraf"
+    ],
+    "back": "Torkoal, Blastoise",
+    "v": [
+     61,
+     57
+    ],
+    "top": [
+     "Incineroar + Blastoise",
+     2.0
+    ],
+    "tr": 86,
+    "rule": "",
+    "vs": [
+     [
+      "Charizard + Venusaur",
+      13.5,
+      [
+       57,
+       52
+      ],
+      [
+       [
+        55,
+        "Fake Out Venusaur",
+        "Trick Room"
+       ],
+       [
+        30,
+        "Fake Out Charizard",
+        "Trick Room"
+       ],
+       [
+        15,
+        "Flare Blitz Venusaur",
+        "Protect"
+       ]
+      ]
+     ],
+     [
+      "Archaludon + Grimmsnarl",
+      9.5,
+      [
+       59,
+       55
+      ],
+      [
+       [
+        60,
+        "Fake Out Archaludon",
+        "Trick Room"
+       ],
+       [
+        40,
+        "Fake Out Grimmsnarl",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Charizard + Grimmsnarl",
+      9.4,
+      [
+       59,
+       58
+      ],
+      [
+       [
+        50,
+        "Fake Out Grimmsnarl",
+        "Trick Room"
+       ],
+       [
+        50,
+        "Fake Out Charizard",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Golisopod",
+      7.6,
+      [
+       66,
+       60
+      ],
+      [
+       [
+        45,
+        "Flare Blitz Golisopod",
+        "Thunderbolt Golisopod"
+       ],
+       [
+        35,
+        "Throat Chop Farigiraf",
+        "Trick Room"
+       ],
+       [
+        20,
+        "Flare Blitz Golisopod",
+        "Protect"
+       ]
+      ]
+     ],
+     [
+      "Grimmsnarl + Swampert",
+      5.5,
+      [
+       64,
+       60
+      ],
+      [
+       [
+        55,
+        "Fake Out Swampert",
+        "Trick Room"
+       ],
+       [
+        45,
+        "Fake Out Grimmsnarl",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Golisopod + Grimmsnarl",
+      5.3,
+      [
+       64,
+       61
+      ],
+      [
+       [
+        60,
+        "Fake Out Grimmsnarl",
+        "Trick Room"
+       ],
+       [
+        40,
+        "Flare Blitz Golisopod",
+        "Trick Room"
+       ]
+      ]
+     ]
+    ],
+    "note": "Farigiraf&rsquo;s Armor Tail keeps their Fake Out off both of you. Their own Farigiraf&rsquo;s Armor Tail blocks yours, which is why Incineroar attacks next to it."
+   }
+  ]
+ },
+ {
+  "k": "perish",
+  "tab": "Perish",
+  "picks": [
+   {
+    "lead": [
+     "Kingambit",
+     "Blastoise"
+    ],
+    "back": "Torkoal, Farigiraf",
+    "v": [
+     66,
+     59
+    ],
+    "top": null,
+    "tr": 0,
+    "rule": "",
+    "vs": [
+     [
+      "Gengar + Incineroar",
+      29.4,
+      [
+       69,
+       64
+      ],
+      [
+       [
+        70,
+        "Kowtow Gengar",
+        "Fake Out Incineroar"
+       ],
+       [
+        30,
+        "Low Kick Incineroar",
+        "Fake Out Incineroar"
+       ]
+      ]
+     ],
+     [
+      "Gengar + Rillaboom",
+      10.8,
+      [
+       64,
+       57
+      ],
+      [
+       [
+        50,
+        "Kowtow Gengar",
+        "switch &rarr; Farigiraf"
+       ],
+       [
+        35,
+        "Kowtow Rillaboom",
+        "Aura Sphere Rillaboom"
+       ],
+       [
+        15,
+        "Kowtow Rillaboom",
+        "Dark Pulse Gengar"
+       ]
+      ]
+     ],
+     [
+      "Archaludon + Politoed",
+      6.4,
+      [
+       51,
+       41
+      ],
+      [
+       [
+        60,
+        "Kowtow Politoed",
+        "Fake Out Archaludon"
+       ],
+       [
+        35,
+        "Kowtow Archaludon",
+        "Aura Sphere Archaludon"
+       ],
+       [
+        5,
+        "Kowtow Politoed",
+        "Fake Out Politoed"
+       ]
+      ]
+     ],
+     [
+      "Gengar + Vivillon",
+      4.0,
+      [
+       66,
+       60
+      ],
+      [
+       [
+        75,
+        "Kowtow Gengar",
+        "Fake Out Vivillon"
+       ],
+       [
+        25,
+        "Kowtow Vivillon",
+        "Fake Out Vivillon"
+       ]
+      ]
+     ],
+     [
+      "Archaludon + Gengar",
+      3.6,
+      [
+       68,
+       57
+      ],
+      [
+       [
+        100,
+        "Kowtow Gengar",
+        "Aura Sphere Archaludon"
+       ]
+      ]
+     ],
+     [
+      "Archaludon + Incineroar",
+      2.8,
+      [
+       69,
+       63
+      ],
+      [
+       [
+        40,
+        "Kowtow Incineroar",
+        "Aura Sphere Incineroar"
+       ],
+       [
+        35,
+        "Low Kick Incineroar",
+        "Fake Out Archaludon"
+       ],
+       [
+        25,
+        "Low Kick Incineroar",
+        "Aura Sphere Archaludon"
+       ]
+      ]
+     ]
+    ],
+    "fb": 1,
+    "note": "Full-battle pick: won 90&ndash;97% of whole-game sims, against 77% for Incineroar + Kingambit."
+   }
+  ]
+ }
+]

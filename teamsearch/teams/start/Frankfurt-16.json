@@ -1,0 +1,122 @@
+{
+ "Sylveon": {
+  "species": "Sylveon",
+  "item": "Fairy Feather",
+  "ability": "Pixilate",
+  "nature": "Modest",
+  "evs": [
+   9,
+   0,
+   22,
+   20,
+   0,
+   15
+  ],
+  "moves": [
+   "Hyper Voice",
+   "Hyper Beam",
+   "Quick Attack",
+   "Detect"
+  ]
+ },
+ "Arcanine-Hisui": {
+  "species": "Arcanine-Hisui",
+  "item": "Focus Sash",
+  "ability": "Rock Head",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Head Smash",
+   "Flare Blitz",
+   "Extreme Speed",
+   "Protect"
+  ]
+ },
+ "Gholdengo": {
+  "species": "Gholdengo",
+  "item": "Life Orb",
+  "ability": "Good as Gold",
+  "nature": "Timid",
+  "evs": [
+   7,
+   0,
+   0,
+   27,
+   0,
+   32
+  ],
+  "moves": [
+   "Make It Rain",
+   "Shadow Ball",
+   "Nasty Plot",
+   "Protect"
+  ]
+ },
+ "Raichu": {
+  "species": "Raichu",
+  "item": "Raichunite Y",
+  "ability": "Lightning Rod",
+  "nature": "Timid",
+  "evs": [
+   32,
+   0,
+   11,
+   0,
+   0,
+   23
+  ],
+  "moves": [
+   "Zap Cannon",
+   "Focus Blast",
+   "Fake Out",
+   "Protect"
+  ]
+ },
+ "Rillaboom": {
+  "species": "Rillaboom",
+  "item": "Miracle Seed",
+  "ability": "Grassy Surge",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Grassy Glide",
+   "Wood Hammer",
+   "Fake Out",
+   "High Horsepower"
+  ]
+ },
+ "Staraptor": {
+  "species": "Staraptor",
+  "item": "Staraptite",
+  "ability": "Intimidate",
+  "nature": "Jolly",
+  "evs": [
+   29,
+   1,
+   0,
+   0,
+   4,
+   32
+  ],
+  "moves": [
+   "Brave Bird",
+   "Close Combat",
+   "Tailwind",
+   "Protect"
+  ]
+ }
+}

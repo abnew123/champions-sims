@@ -1,0 +1,122 @@
+{
+ "Froslass": {
+  "species": "Froslass",
+  "item": "Froslassite",
+  "ability": "Cursed Body",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Blizzard",
+   "Shadow Ball",
+   "Aurora Veil"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Sitrus Berry",
+  "ability": "Intimidate",
+  "nature": "Impish",
+  "evs": [
+   32,
+   0,
+   20,
+   0,
+   14,
+   0
+  ],
+  "moves": [
+   "Flare Blitz",
+   "Darkest Lariat",
+   "Fake Out",
+   "Parting Shot"
+  ]
+ },
+ "Basculegion": {
+  "species": "Basculegion",
+  "item": "Choice Scarf",
+  "ability": "Adaptability",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Wave Crash",
+   "Last Respects",
+   "Flip Turn",
+   "Aqua Jet"
+  ]
+ },
+ "Glimmora": {
+  "species": "Glimmora",
+  "item": "Glimmoranite",
+  "ability": "Toxic Debris",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Spiky Shield",
+   "Sludge Bomb",
+   "Power Gem",
+   "Earth Power"
+  ]
+ },
+ "Rillaboom": {
+  "species": "Rillaboom",
+  "item": "Miracle Seed",
+  "ability": "Grassy Surge",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Wood Hammer",
+   "U-turn",
+   "Grassy Glide",
+   "Fake Out"
+  ]
+ },
+ "Volcarona": {
+  "species": "Volcarona",
+  "item": "Grassy Seed",
+  "ability": "Flame Body",
+  "nature": "Modest",
+  "evs": [
+   21,
+   0,
+   15,
+   5,
+   1,
+   24
+  ],
+  "moves": [
+   "Protect",
+   "Heat Wave",
+   "Giga Drain",
+   "Quiver Dance"
+  ]
+ }
+}

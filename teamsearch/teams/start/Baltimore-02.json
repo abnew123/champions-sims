@@ -1,0 +1,122 @@
+{
+ "Golisopod": {
+  "species": "Golisopod",
+  "item": "Golisopite",
+  "ability": "Emergency Exit",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Leech Life",
+   "Drill Run",
+   "Iron Head",
+   "Protect"
+  ]
+ },
+ "Charizard": {
+  "species": "Charizard",
+  "item": "Charizardite Y",
+  "ability": "Blaze",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Heat Wave",
+   "Hurricane",
+   "Weather Ball",
+   "Protect"
+  ]
+ },
+ "Politoed": {
+  "species": "Politoed",
+  "item": "Mystic Water",
+  "ability": "Drizzle",
+  "nature": "Modest",
+  "evs": [
+   32,
+   0,
+   0,
+   30,
+   0,
+   4
+  ],
+  "moves": [
+   "Muddy Water",
+   "Ice Beam",
+   "Weather Ball",
+   "Protect"
+  ]
+ },
+ "Archaludon": {
+  "species": "Archaludon",
+  "item": "Leftovers",
+  "ability": "Stamina",
+  "nature": "Bold",
+  "evs": [
+   32,
+   0,
+   1,
+   1,
+   32,
+   0
+  ],
+  "moves": [
+   "Dragon Pulse",
+   "Snarl",
+   "Electro Shot",
+   "Protect"
+  ]
+ },
+ "Grimmsnarl": {
+  "species": "Grimmsnarl",
+  "item": "Light Clay",
+  "ability": "Prankster",
+  "nature": "Sassy",
+  "evs": [
+   29,
+   0,
+   22,
+   0,
+   15,
+   0
+  ],
+  "moves": [
+   "Light Screen",
+   "Reflect",
+   "Parting Shot",
+   "Spirit Break"
+  ]
+ },
+ "Farigiraf": {
+  "species": "Farigiraf",
+  "item": "Sitrus Berry",
+  "ability": "Armor Tail",
+  "nature": "Bold",
+  "evs": [
+   27,
+   0,
+   20,
+   0,
+   19,
+   0
+  ],
+  "moves": [
+   "Psychic",
+   "Trick Room",
+   "Protect",
+   "Grass Knot"
+  ]
+ }
+}

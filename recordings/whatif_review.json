@@ -1,0 +1,170 @@
+[
+  {
+    "cells": [
+      14,
+      12
+    ],
+    "games_per_cell": 8,
+    "name": "G2 T1 (Zoroark as Excadrill)",
+    "note": "What-if: the lead shows Kleavor + Excadrill, but the 'Excadrill' is Zoroark-Hisui (so the real Excadrill is their last Pokemon). Zoroark and Excadrill use the sets revealed in the real game.",
+    "options": [
+      54,
+      61
+    ],
+    "rows": [
+      {
+        "actual": false,
+        "choice": "Farigiraf: Trick Room | Blastoise: Fake Out -> Kleavor (Mega)",
+        "eq_weight": 0.8748715746788857,
+        "one_turn": 0.5760318943388307,
+        "se": 0.12823626769482704,
+        "v": 0.6742352832539735,
+        "vs_their_actual": null,
+        "worst": 0.625
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Trick Room | Blastoise: Aura Sphere -> Kleavor (Mega)",
+        "eq_weight": 0.12388301545582832,
+        "one_turn": 0.5375238703127164,
+        "se": 0.04906630324792728,
+        "v": 0.6563686688481914,
+        "vs_their_actual": null,
+        "worst": 0.125
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Psychic -> Kleavor | Blastoise: Aura Sphere -> Kleavor (Mega)",
+        "eq_weight": 0.00048210870892536717,
+        "one_turn": 0.5516653855433576,
+        "se": 0.09030846798256241,
+        "v": 0.5800427834688846,
+        "vs_their_actual": null,
+        "worst": 0.125
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Protect | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.000035714285714285724,
+        "one_turn": 0.546260827272018,
+        "se": 0.11824152420379644,
+        "v": 0.5531675500319134,
+        "vs_their_actual": null,
+        "worst": 0.0
+      },
+      {
+        "actual": true,
+        "choice": "Farigiraf: Trick Room | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.0004061582992173182,
+        "one_turn": 0.5385506400085655,
+        "se": 0.07581636505727282,
+        "v": 0.5315085409384448,
+        "vs_their_actual": null,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Psychic -> Zoroark-Hisui | Blastoise: Aura Sphere -> Kleavor (Mega)",
+        "eq_weight": 0.000035714285714285724,
+        "one_turn": 0.5149903357256723,
+        "se": 0.12468382588044673,
+        "v": 0.35251480285144193,
+        "vs_their_actual": null,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Thunderbolt -> Zoroark-Hisui | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.000035714285714285724,
+        "one_turn": 0.5166801611949102,
+        "se": 0.11462354209127992,
+        "v": 0.30345690557719407,
+        "vs_their_actual": null,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Psychic -> Zoroark-Hisui | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.000035714285714285724,
+        "one_turn": 0.5258388916203027,
+        "se": 0.11462354232324892,
+        "v": 0.3034221389731841,
+        "vs_their_actual": null,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Psychic -> Zoroark-Hisui | Blastoise: Fake Out -> Kleavor (Mega)",
+        "eq_weight": 0.000035714285714285724,
+        "one_turn": 0.5805732879457529,
+        "se": 0.12134618803344638,
+        "v": 0.27674260003911144,
+        "vs_their_actual": null,
+        "worst": 0.125
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: switch to Incineroar | Blastoise: Aura Sphere -> Kleavor (Mega)",
+        "eq_weight": 0.000035714285714285724,
+        "one_turn": 0.549233822565495,
+        "se": 0.09937434805900942,
+        "v": 0.17415636403681697,
+        "vs_their_actual": null,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: switch to Incineroar | Blastoise: Dark Pulse -> Zoroark-Hisui (Mega)",
+        "eq_weight": 0.000035714285714285724,
+        "one_turn": 0.5621100483150963,
+        "se": 0.09937434813106485,
+        "v": 0.17411515303316974,
+        "vs_their_actual": null,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Thunderbolt -> Zoroark-Hisui | Blastoise: Fake Out -> Kleavor (Mega)",
+        "eq_weight": 0.000035714285714285724,
+        "one_turn": 0.5440709691507873,
+        "se": 0.07581634806482604,
+        "v": 0.07597933082555403,
+        "vs_their_actual": null,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Thunderbolt -> Kleavor | Blastoise: Aura Sphere -> Kleavor (Mega)",
+        "eq_weight": 0.000035714285714285724,
+        "one_turn": 0.5174000326739341,
+        "se": 0.0490662780242919,
+        "v": 0.049242172307493635,
+        "vs_their_actual": null,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: switch to Incineroar | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.000035714285714285724,
+        "one_turn": 0.5482948963779254,
+        "se": 0.00004815633673188104,
+        "v": 0.00025577846301385167,
+        "vs_their_actual": null,
+        "worst": 0.0
+      }
+    ],
+    "their_replies": [
+      {
+        "actual": false,
+        "choice": "Kleavor: switch to Tyranitar | Zoroark-Hisui: Hyper Voice",
+        "p": 0.6065307553307243
+      },
+      {
+        "actual": false,
+        "choice": "Kleavor: X-Scissor -> Farigiraf | Zoroark-Hisui: Grass Knot -> Blastoise",
+        "p": 0.3925301551652936
+      }
+    ],
+    "value": 0.6717585575087248
+  }
+]

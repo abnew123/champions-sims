@@ -1,0 +1,122 @@
+{
+ "Delphox": {
+  "species": "Delphox",
+  "item": "Delphoxite",
+  "ability": "Blaze",
+  "nature": "Timid",
+  "evs": [
+   9,
+   0,
+   14,
+   11,
+   0,
+   32
+  ],
+  "moves": [
+   "Heat Wave",
+   "Psychic",
+   "Nasty Plot",
+   "Protect"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "Focus Sash",
+  "ability": "Poison Touch",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Fake Out",
+   "Close Combat",
+   "Poison Jab",
+   "Quick Guard"
+  ]
+ },
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Life Orb",
+  "ability": "Defiant",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Kowtow Cleave",
+   "Sucker Punch",
+   "Swords Dance",
+   "Protect"
+  ]
+ },
+ "Floette-Eternal": {
+  "species": "Floette-Eternal",
+  "item": "Floettite",
+  "ability": "Flower Veil",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Moonblast",
+   "Dazzling Gleam",
+   "Calm Mind",
+   "Protect"
+  ]
+ },
+ "Sinistcha": {
+  "species": "Sinistcha",
+  "item": "Colbur Berry",
+  "ability": "Hospitality",
+  "nature": "Bold",
+  "evs": [
+   32,
+   0,
+   14,
+   0,
+   20,
+   0
+  ],
+  "moves": [
+   "Matcha Gotcha",
+   "Rage Powder",
+   "Trick Room",
+   "Protect"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Rocky Helmet",
+  "ability": "Intimidate",
+  "nature": "Careful",
+  "evs": [
+   32,
+   0,
+   14,
+   0,
+   20,
+   0
+  ],
+  "moves": [
+   "Fake Out",
+   "Flare Blitz",
+   "Parting Shot",
+   "Helping Hand"
+  ]
+ }
+}

@@ -1,0 +1,82 @@
+{
+ "Tailwind goodstuffs": {
+  "lead": "Incineroar+Farigiraf",
+  "back": [
+   "Torkoal",
+   "Kingambit"
+  ],
+  "fbw": 92
+ },
+ "Sun": {
+  "lead": "Kingambit+Blastoise",
+  "back": [
+   "Farigiraf",
+   "Incineroar"
+  ],
+  "fbw": 52
+ },
+ "Indeedee TR / Psychic Terrain": {
+  "lead": "Farigiraf+Kingambit",
+  "back": [
+   "Blastoise",
+   "Incineroar"
+  ],
+  "fbw": 68
+ },
+ "Rain": {
+  "lead": "Incineroar+Torkoal",
+  "back": [
+   "Blastoise",
+   "Farigiraf"
+  ],
+  "fbw": 58
+ },
+ "Balance, no speed control": {
+  "lead": "Farigiraf+Blastoise",
+  "back": [
+   "Kingambit",
+   "Incineroar"
+  ],
+  "fbw": 80
+ },
+ "Sand": {
+  "lead": "Incineroar+Farigiraf",
+  "back": [
+   "Blastoise",
+   "Kingambit"
+  ],
+  "fbw": 83
+ },
+ "Snow": {
+  "lead": "Farigiraf+Blastoise",
+  "back": [
+   "Torkoal",
+   "Incineroar"
+  ],
+  "fbw": 85
+ },
+ "Trick Room without Indeedee": {
+  "lead": "Incineroar+Farigiraf",
+  "back": [
+   "Blastoise",
+   "Torkoal"
+  ],
+  "fbw": 73
+ },
+ "Rain + sun": {
+  "lead": "Incineroar+Blastoise",
+  "back": [
+   "Torkoal",
+   "Farigiraf"
+  ],
+  "fbw": 48
+ },
+ "Perish trap": {
+  "lead": "Kingambit+Blastoise",
+  "back": [
+   "Torkoal",
+   "Farigiraf"
+  ],
+  "fbw": 95
+ }
+}

@@ -1,0 +1,170 @@
+{
+ "picks": [
+  {
+   "lead": "Farigiraf+Blastoise",
+   "v": [
+    0.6622235107337514,
+    0.5695059585088909
+   ],
+   "score": 0.592685346565106,
+   "tr": 0.6361448845524346,
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "general": {
+    "Farigiraf": [
+     [
+      64,
+      "Trick Room",
+      []
+     ],
+     [
+      16,
+      "Thunderbolt",
+      [
+       "Incineroar",
+       "Pelipper",
+       "Armarouge"
+      ]
+     ],
+     [
+      12,
+      "Psychic",
+      [
+       "Sneasler",
+       "Gengar",
+       "Rillaboom"
+      ]
+     ],
+     [
+      7,
+      "Protect",
+      []
+     ]
+    ],
+    "Blastoise": [
+     [
+      48,
+      "Fake Out",
+      [
+       "Raichu",
+       "Rillaboom",
+       "Salamence"
+      ]
+     ],
+     [
+      31,
+      "Water Spout",
+      []
+     ],
+     [
+      13,
+      "Dark Pulse",
+      [
+       "Indeedee F",
+       "Gholdengo",
+       "Farigiraf"
+      ]
+     ],
+     [
+      4,
+      "Aura Sphere",
+      [
+       "Kingambit",
+       "Incineroar",
+       "Archaludon"
+      ]
+     ]
+    ]
+   },
+   "refined": 7
+  },
+  {
+   "lead": "Incineroar+Farigiraf",
+   "v": [
+    0.6532287958465178,
+    0.5793645129393046
+   ],
+   "score": 0.5978305836661079,
+   "tr": 0.6818650514131174,
+   "back": [
+    "Torkoal",
+    "Blastoise"
+   ],
+   "general": {
+    "Incineroar": [
+     [
+      57,
+      "Fake Out",
+      [
+       "Raichu",
+       "Sneasler",
+       "Floette"
+      ]
+     ],
+     [
+      18,
+      "Throat Chop",
+      [
+       "Armarouge",
+       "Gardevoir",
+       "Gengar"
+      ]
+     ],
+     [
+      12,
+      "Flare Blitz",
+      [
+       "Gholdengo",
+       "Gardevoir",
+       "Incineroar"
+      ]
+     ],
+     [
+      9,
+      "Close Combat",
+      [
+       "Incineroar",
+       "Kingambit",
+       "Tyranitar"
+      ]
+     ]
+    ],
+    "Farigiraf": [
+     [
+      68,
+      "Trick Room",
+      []
+     ],
+     [
+      17,
+      "Thunderbolt",
+      [
+       "Incineroar",
+       "Pelipper",
+       "Armarouge"
+      ]
+     ],
+     [
+      9,
+      "Psychic",
+      [
+       "Sneasler",
+       "Gengar",
+       "Rillaboom"
+      ]
+     ],
+     [
+      5,
+      "Protect",
+      []
+     ]
+    ]
+   },
+   "refined": 5
+  }
+ ],
+ "top": "Incineroar+Farigiraf",
+ "gap": 0.5
+}

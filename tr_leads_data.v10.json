@@ -1,0 +1,2409 @@
+[
+ {
+  "k": "tw",
+  "tab": "Tailwind",
+  "picks": [
+   {
+    "lead": [
+     "Incineroar",
+     "Farigiraf"
+    ],
+    "back": "Torkoal, Blastoise",
+    "v": [
+     73,
+     66
+    ],
+    "top": null,
+    "tr": 100,
+    "rule": "Farigiraf <b>sets Trick Room</b> every time. Incineroar <b>Fakes Out the Raichu or Sneasler</b>: the Sneasler about two times in three next to Salamence. Next to Gholdengo without Raichu, <b>Flare Blitz the Gholdengo</b> a bit more than half the time, otherwise Fake Out the Rillaboom or Salamence. Farigiraf&rsquo;s Armor Tail keeps their Fake Out off both of you.",
+    "vs": [
+     [
+      "Gholdengo + Raichu",
+      9.6,
+      [
+       70,
+       63
+      ],
+      [
+       [
+        75,
+        "Fake Out Raichu",
+        "Trick Room"
+       ],
+       [
+        25,
+        "Flare Blitz Gholdengo",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Arcanine-H + Raichu",
+      4.6,
+      [
+       73,
+       64
+      ],
+      [
+       [
+        80,
+        "Fake Out Raichu",
+        "Trick Room"
+       ],
+       [
+        20,
+        "Flare Blitz Raichu",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Gholdengo + Rillaboom",
+      3.2,
+      [
+       78,
+       71
+      ],
+      [
+       [
+        65,
+        "Flare Blitz Gholdengo",
+        "Trick Room"
+       ],
+       [
+        35,
+        "Fake Out Rillaboom",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Gholdengo + Salamence",
+      2.6,
+      [
+       73,
+       65
+      ],
+      [
+       [
+        50,
+        "Flare Blitz Gholdengo",
+        "Trick Room"
+       ],
+       [
+        50,
+        "Fake Out Salamence",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Salamence + Sneasler",
+      2.6,
+      [
+       73,
+       66
+      ],
+      [
+       [
+        70,
+        "Fake Out Sneasler",
+        "Trick Room"
+       ],
+       [
+        30,
+        "Fake Out Salamence",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Rillaboom + Sneasler",
+      2.5,
+      [
+       79,
+       73
+      ],
+      [
+       [
+        95,
+        "Fake Out Sneasler",
+        "Trick Room"
+       ],
+       [
+        5,
+        "Flare Blitz Rillaboom",
+        "Trick Room"
+       ]
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "k": "indeedee",
+  "tab": "Indeedee TR",
+  "picks": [
+   {
+    "lead": [
+     "Incineroar",
+     "Blastoise"
+    ],
+    "back": "Farigiraf, Torkoal",
+    "v": [
+     69,
+     61
+    ],
+    "top": null,
+    "tr": 0,
+    "rule": "<b>No Trick Room on turn one.</b> Incineroar <b>Throat Chops their Indeedee</b> while Blastoise Water Spouts. Into Mega Gardevoir, Flare Blitz the Gardevoir and Dark Pulse the Indeedee; into Armarouge, mostly Throat Chop the Indeedee and Dark Pulse the Armarouge. Against Farigiraf + Incineroar, <b>switch Incineroar to Farigiraf</b> and Water Spout.",
+    "vs": [
+     [
+      "Gardevoir + Indeedee F",
+      6.7,
+      [
+       59,
+       51
+      ],
+      [
+       [
+        100,
+        "Flare Blitz Gardevoir",
+        "Dark Pulse Indeedee F"
+       ]
+      ]
+     ],
+     [
+      "Armarouge + Indeedee F",
+      4.4,
+      [
+       73,
+       66
+      ],
+      [
+       [
+        75,
+        "Throat Chop Indeedee F",
+        "Dark Pulse Armarouge"
+       ],
+       [
+        25,
+        "Throat Chop Armarouge",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Incineroar",
+      3.7,
+      [
+       73,
+       73
+      ],
+      [
+       [
+        100,
+        "switch &rarr; Farigiraf",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Indeedee M + Sneasler",
+      2.8,
+      [
+       73,
+       62
+      ],
+      [
+       [
+        100,
+        "Throat Chop Indeedee M",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Indeedee F + Sneasler",
+      2.8,
+      [
+       69,
+       61
+      ],
+      [
+       [
+        85,
+        "Throat Chop Indeedee F",
+        "Water Spout"
+       ],
+       [
+        15,
+        "switch &rarr; Farigiraf",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Hatterene + Indeedee F",
+      2.7,
+      [
+       77,
+       60
+      ],
+      [
+       [
+        75,
+        "Throat Chop Indeedee F",
+        "Water Spout"
+       ],
+       [
+        25,
+        "Flare Blitz Hatterene",
+        "Water Spout"
+       ]
+      ]
+     ]
+    ],
+    "note": "Their Indeedee&rsquo;s terrain blocks both of your Fake Outs, and their Farigiraf&rsquo;s Armor Tail does too, which is why Incineroar attacks instead."
+   }
+  ]
+ },
+ {
+  "k": "sun",
+  "tab": "Sun",
+  "picks": [
+   {
+    "lead": [
+     "Incineroar",
+     "Blastoise"
+    ],
+    "back": "Torkoal, Kingambit",
+    "v": [
+     69,
+     60
+    ],
+    "top": null,
+    "tr": 0,
+    "rule": "<b>No Trick Room on turn one.</b> Blastoise <b>Water Spouts</b> while Incineroar Fakes Out or attacks: <b>Fake Out the Garchomp</b> next to Charizard, and against Aerodactyl + Kingambit either Fake Out the Aerodactyl or <b>Close Combat the Kingambit</b> while Blastoise Fakes it Out. Close Combat their Incineroar next to Farigiraf, and Throat Chop the Charizard or Farigiraf when those two lead. Into Indeedee leads, Flare Blitz a Mega Gardevoir (Dark Pulse the Indeedee) or Throat Chop the Indeedee next to Armarouge.",
+    "vs": [
+     [
+      "Farigiraf + Incineroar",
+      3.8,
+      [
+       72,
+       64
+      ],
+      [
+       [
+        100,
+        "Close Combat Incineroar",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Charizard + Garchomp",
+      3.5,
+      [
+       65,
+       59
+      ],
+      [
+       [
+        75,
+        "Fake Out Garchomp",
+        "Water Spout"
+       ],
+       [
+        25,
+        "Fake Out Charizard",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Aerodactyl + Kingambit",
+      3.3,
+      [
+       68,
+       61
+      ],
+      [
+       [
+        45,
+        "Close Combat Kingambit",
+        "Fake Out Kingambit"
+       ],
+       [
+        45,
+        "Fake Out Aerodactyl",
+        "Water Spout"
+       ],
+       [
+        10,
+        "Close Combat Kingambit",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Gardevoir + Indeedee F",
+      2.8,
+      [
+       62,
+       51
+      ],
+      [
+       [
+        100,
+        "Flare Blitz Gardevoir",
+        "Dark Pulse Indeedee F"
+       ]
+      ]
+     ],
+     [
+      "Charizard + Farigiraf",
+      2.6,
+      [
+       64,
+       56
+      ],
+      [
+       [
+        55,
+        "Throat Chop Charizard",
+        "Water Spout"
+       ],
+       [
+        40,
+        "Throat Chop Farigiraf",
+        "Dark Pulse Farigiraf"
+       ],
+       [
+        5,
+        "Flare Blitz Farigiraf",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Armarouge + Indeedee F",
+      2.2,
+      [
+       85,
+       72
+      ],
+      [
+       [
+        100,
+        "Throat Chop Indeedee F",
+        "Water Spout"
+       ]
+      ]
+     ]
+    ]
+   },
+   {
+    "lead": [
+     "Farigiraf",
+     "Blastoise"
+    ],
+    "back": "Torkoal, Kingambit",
+    "v": [
+     68,
+     55
+    ],
+    "top": [
+     "Incineroar + Blastoise",
+     4.2
+    ],
+    "tr": 46,
+    "rule": "Farigiraf <b>sets Trick Room</b> about half the time. Against Charizard + Garchomp, set it while Blastoise <b>Fakes Out the Charizard</b> (one time in four, Protect and Aura Sphere the Garchomp). Into Mega Gardevoir, set it and Dark Pulse their Indeedee. Against Aerodactyl or Armarouge leads, split Trick Room and Protect while Blastoise Water Spouts. Against Farigiraf + Incineroar, <b>Thunderbolt the Incineroar</b>; against Charizard + Farigiraf, Thunderbolt the Charizard and Dark Pulse their Farigiraf, or Protect and Water Spout.",
+    "vs": [
+     [
+      "Farigiraf + Incineroar",
+      3.8,
+      [
+       82,
+       66
+      ],
+      [
+       [
+        100,
+        "Thunderbolt Incineroar",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Charizard + Garchomp",
+      3.5,
+      [
+       56,
+       50
+      ],
+      [
+       [
+        75,
+        "Trick Room",
+        "Fake Out Charizard"
+       ],
+       [
+        25,
+        "Protect",
+        "Aura Sphere Garchomp"
+       ]
+      ]
+     ],
+     [
+      "Aerodactyl + Kingambit",
+      3.3,
+      [
+       71,
+       61
+      ],
+      [
+       [
+        55,
+        "Trick Room",
+        "Water Spout"
+       ],
+       [
+        45,
+        "Protect",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Gardevoir + Indeedee F",
+      2.8,
+      [
+       55,
+       37
+      ],
+      [
+       [
+        100,
+        "Trick Room",
+        "Dark Pulse Indeedee F"
+       ]
+      ]
+     ],
+     [
+      "Charizard + Farigiraf",
+      2.6,
+      [
+       61,
+       50
+      ],
+      [
+       [
+        55,
+        "Thunderbolt Charizard",
+        "Dark Pulse Farigiraf"
+       ],
+       [
+        45,
+        "Protect",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Armarouge + Indeedee F",
+      2.2,
+      [
+       81,
+       66
+      ],
+      [
+       [
+        50,
+        "Trick Room",
+        "Water Spout"
+       ],
+       [
+        35,
+        "Protect",
+        "Water Spout"
+       ],
+       [
+        15,
+        "Thunderbolt Indeedee F",
+        "Water Spout"
+       ]
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "k": "rain",
+  "tab": "Rain",
+  "picks": [
+   {
+    "lead": [
+     "Incineroar",
+     "Torkoal"
+    ],
+    "back": "Indeedee, Blastoise",
+    "v": [
+     68,
+     58
+    ],
+    "top": null,
+    "tr": 0,
+    "rule": "<b>No Trick Room on turn one.</b> Torkoal&rsquo;s sun goes up last and replaces their rain, and Torkoal <b>Eruptions while Incineroar Fakes Out</b>: the Pelipper about two times in three next to Archaludon, the Swampert, the Archaludon next to Grimmsnarl, or the Dragonite while Torkoal Weather Balls the Gholdengo. Next to Sneasler, Fake Out the Sneasler or switch Incineroar to Indeedee, half each. Against Farigiraf + Golisopod, whose Armor Tail blocks Fake Out, Throat Chop the Farigiraf.",
+    "vs": [
+     [
+      "Archaludon + Pelipper",
+      8.3,
+      [
+       70,
+       58
+      ],
+      [
+       [
+        65,
+        "Fake Out Pelipper",
+        "Eruption"
+       ],
+       [
+        35,
+        "Fake Out Archaludon",
+        "Eruption"
+       ]
+      ]
+     ],
+     [
+      "Pelipper + Swampert",
+      6.8,
+      [
+       72,
+       65
+      ],
+      [
+       [
+        100,
+        "Fake Out Swampert",
+        "Eruption"
+       ]
+      ]
+     ],
+     [
+      "Pelipper + Sneasler",
+      4.2,
+      [
+       62,
+       57
+      ],
+      [
+       [
+        50,
+        "switch &rarr; Indeedee",
+        "Eruption"
+       ],
+       [
+        50,
+        "Fake Out Sneasler",
+        "Eruption"
+       ]
+      ]
+     ],
+     [
+      "Archaludon + Grimmsnarl",
+      3.2,
+      [
+       63,
+       54
+      ],
+      [
+       [
+        80,
+        "Fake Out Archaludon",
+        "Eruption"
+       ],
+       [
+        20,
+        "Fake Out Grimmsnarl",
+        "Weather Ball Grimmsnarl"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Golisopod",
+      2.1,
+      [
+       78,
+       54
+      ],
+      [
+       [
+        100,
+        "Throat Chop Farigiraf",
+        "Eruption"
+       ]
+      ]
+     ],
+     [
+      "Dragonite + Gholdengo",
+      2.0,
+      [
+       56,
+       48
+      ],
+      [
+       [
+        80,
+        "Fake Out Dragonite",
+        "Weather Ball Gholdengo"
+       ],
+       [
+        20,
+        "Throat Chop Gholdengo",
+        "Protect"
+       ]
+      ]
+     ]
+    ]
+   },
+   {
+    "lead": [
+     "Farigiraf",
+     "Blastoise"
+    ],
+    "back": "Incineroar, Torkoal",
+    "v": [
+     62,
+     55
+    ],
+    "top": [
+     "Incineroar + Torkoal",
+     3.9
+    ],
+    "tr": 25,
+    "rule": "Mostly no Trick Room: Farigiraf <b>Thunderbolts the Pelipper</b> while Blastoise Water Spouts, and next to Archaludon splits Thunderbolt and Trick Room while Blastoise <b>Fakes Out the Archaludon</b>. Next to Sneasler, Psychic the Sneasler and Dark Pulse the Pelipper about half the time. Against Archaludon + Grimmsnarl, Thunderbolt and Fake Out the Grimmsnarl. Against Dragonite + Gholdengo, set Trick Room and Dark Pulse the Gholdengo. Against Farigiraf + Golisopod, Thunderbolt the Golisopod or Protect while Blastoise Water Spouts.",
+    "vs": [
+     [
+      "Archaludon + Pelipper",
+      8.3,
+      [
+       56,
+       54
+      ],
+      [
+       [
+        55,
+        "Trick Room",
+        "Fake Out Archaludon"
+       ],
+       [
+        45,
+        "Thunderbolt Pelipper",
+        "Fake Out Archaludon"
+       ]
+      ]
+     ],
+     [
+      "Pelipper + Swampert",
+      6.8,
+      [
+       65,
+       58
+      ],
+      [
+       [
+        100,
+        "Thunderbolt Pelipper",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Pelipper + Sneasler",
+      4.2,
+      [
+       75,
+       63
+      ],
+      [
+       [
+        55,
+        "Psychic Sneasler",
+        "Dark Pulse Pelipper"
+       ],
+       [
+        45,
+        "Thunderbolt Pelipper",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Archaludon + Grimmsnarl",
+      3.2,
+      [
+       52,
+       45
+      ],
+      [
+       [
+        55,
+        "Thunderbolt Grimmsnarl",
+        "Fake Out Grimmsnarl"
+       ],
+       [
+        25,
+        "switch &rarr; Kingambit",
+        "Fake Out Grimmsnarl"
+       ],
+       [
+        20,
+        "Thunderbolt Grimmsnarl",
+        "Fake Out Archaludon"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Golisopod",
+      2.1,
+      [
+       65,
+       47
+      ],
+      [
+       [
+        60,
+        "Thunderbolt Golisopod",
+        "Water Spout"
+       ],
+       [
+        40,
+        "Protect",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Dragonite + Gholdengo",
+      2.0,
+      [
+       65,
+       54
+      ],
+      [
+       [
+        75,
+        "Trick Room",
+        "Dark Pulse Gholdengo"
+       ],
+       [
+        25,
+        "Trick Room",
+        "Fake Out Dragonite"
+       ]
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "k": "balance",
+  "tab": "Balance",
+  "picks": [
+   {
+    "lead": [
+     "Incineroar",
+     "Farigiraf"
+    ],
+    "back": "Indeedee, Torkoal",
+    "v": [
+     73,
+     67
+    ],
+    "top": null,
+    "tr": 100,
+    "rule": "Farigiraf <b>sets Trick Room</b> every time. Incineroar <b>Fakes Out the Raichu</b>, the Floette next to Incineroar, or the Garchomp next to Rillaboom. About one time in four next to Gholdengo + Raichu, Throat Chop the Gholdengo instead. Farigiraf&rsquo;s Armor Tail keeps their Fake Out off both of you.",
+    "vs": [
+     [
+      "Gholdengo + Raichu",
+      6.2,
+      [
+       69,
+       61
+      ],
+      [
+       [
+        75,
+        "Fake Out Raichu",
+        "Trick Room"
+       ],
+       [
+        25,
+        "Throat Chop Gholdengo",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Floette + Incineroar",
+      4.0,
+      [
+       75,
+       69
+      ],
+      [
+       [
+        90,
+        "Fake Out Floette",
+        "Trick Room"
+       ],
+       [
+        10,
+        "Fake Out Incineroar",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Garchomp + Raichu",
+      3.5,
+      [
+       73,
+       66
+      ],
+      [
+       [
+        85,
+        "Fake Out Raichu",
+        "Trick Room"
+       ],
+       [
+        15,
+        "Fake Out Garchomp",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Incineroar + Raichu",
+      2.9,
+      [
+       76,
+       72
+      ],
+      [
+       [
+        85,
+        "Fake Out Raichu",
+        "Trick Room"
+       ],
+       [
+        15,
+        "Close Combat Incineroar",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Arcanine-H + Raichu",
+      2.8,
+      [
+       71,
+       65
+      ],
+      [
+       [
+        95,
+        "Fake Out Raichu",
+        "Trick Room"
+       ],
+       [
+        5,
+        "Close Combat Arcanine-H",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Garchomp + Rillaboom",
+      2.8,
+      [
+       77,
+       73
+      ],
+      [
+       [
+        100,
+        "Fake Out Garchomp",
+        "Trick Room"
+       ]
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "k": "sand",
+  "tab": "Sand",
+  "picks": [
+   {
+    "lead": [
+     "Farigiraf",
+     "Blastoise"
+    ],
+    "back": "Indeedee, Kingambit",
+    "v": [
+     67,
+     59
+    ],
+    "top": [
+     "Incineroar + Blastoise",
+     0.8
+    ],
+    "tr": 71,
+    "rule": "Farigiraf <b>sets Trick Room</b> while Blastoise <b>Aura Spheres the Tyranitar</b> next to Excadrill (or Water Spouts; Protect one time in five). When Sneasler leads next to Tyranitar or Salamence, Farigiraf often <b>Psychics the Sneasler</b> while Blastoise Fakes Out the Tyranitar or Salamence. Against Indeedee M + Sneasler, switch Blastoise to Indeedee. Into Corviknight or Excadrill + Salamence, Trick Room and Water Spout.",
+    "vs": [
+     [
+      "Excadrill + Tyranitar",
+      15.7,
+      [
+       67,
+       59
+      ],
+      [
+       [
+        60,
+        "Trick Room",
+        "Aura Sphere Tyranitar"
+       ],
+       [
+        20,
+        "Protect",
+        "Water Spout"
+       ],
+       [
+        20,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Indeedee M + Sneasler",
+      4.8,
+      [
+       54,
+       50
+      ],
+      [
+       [
+        55,
+        "Trick Room",
+        "switch &rarr; Indeedee"
+       ],
+       [
+        45,
+        "Psychic Sneasler",
+        "switch &rarr; Indeedee"
+       ]
+      ]
+     ],
+     [
+      "Sneasler + Tyranitar",
+      4.5,
+      [
+       65,
+       58
+      ],
+      [
+       [
+        75,
+        "Psychic Sneasler",
+        "Fake Out Tyranitar"
+       ],
+       [
+        25,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Salamence + Sneasler",
+      3.8,
+      [
+       66,
+       62
+      ],
+      [
+       [
+        50,
+        "Trick Room",
+        "Fake Out Salamence"
+       ],
+       [
+        40,
+        "Psychic Sneasler",
+        "Fake Out Salamence"
+       ],
+       [
+        10,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Corviknight + Sneasler",
+      3.6,
+      [
+       78,
+       63
+      ],
+      [
+       [
+        100,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Excadrill + Salamence",
+      2.9,
+      [
+       75,
+       63
+      ],
+      [
+       [
+        100,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ]
+    ]
+   },
+   {
+    "lead": [
+     "Incineroar",
+     "Blastoise"
+    ],
+    "back": "Indeedee, Kingambit",
+    "v": [
+     68,
+     59
+    ],
+    "top": null,
+    "tr": 0,
+    "rule": "<b>No Trick Room on turn one.</b> Blastoise <b>Water Spouts</b> while Incineroar <b>Fakes Out the Tyranitar or Salamence</b> (their Excadrill about one time in three). Into Corviknight + Sneasler, Flare Blitz the Corviknight a bit more than half the time, otherwise Fake Out the Sneasler. Next to Sneasler + Tyranitar, switch Incineroar to Farigiraf about a third of the time.",
+    "vs": [
+     [
+      "Excadrill + Tyranitar",
+      15.7,
+      [
+       74,
+       68
+      ],
+      [
+       [
+        60,
+        "Fake Out Tyranitar",
+        "Water Spout"
+       ],
+       [
+        40,
+        "Fake Out Excadrill",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Indeedee M + Sneasler",
+      4.8,
+      [
+       52,
+       41
+      ],
+      [
+       [
+        70,
+        "Throat Chop Indeedee M",
+        "Dark Pulse Indeedee M"
+       ],
+       [
+        30,
+        "switch &rarr; Farigiraf",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Sneasler + Tyranitar",
+      4.5,
+      [
+       69,
+       57
+      ],
+      [
+       [
+        60,
+        "Fake Out Tyranitar",
+        "Water Spout"
+       ],
+       [
+        30,
+        "switch &rarr; Farigiraf",
+        "Water Spout"
+       ],
+       [
+        10,
+        "Fake Out Sneasler",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Salamence + Sneasler",
+      3.8,
+      [
+       58,
+       48
+      ],
+      [
+       [
+        90,
+        "Fake Out Salamence",
+        "Water Spout"
+       ],
+       [
+        10,
+        "Flare Blitz Sneasler",
+        "switch &rarr; Farigiraf"
+       ]
+      ]
+     ],
+     [
+      "Corviknight + Sneasler",
+      3.6,
+      [
+       72,
+       62
+      ],
+      [
+       [
+        60,
+        "Flare Blitz Corviknight",
+        "Water Spout"
+       ],
+       [
+        40,
+        "Fake Out Sneasler",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Excadrill + Salamence",
+      2.9,
+      [
+       71,
+       62
+      ],
+      [
+       [
+        80,
+        "Fake Out Salamence",
+        "Water Spout"
+       ],
+       [
+        20,
+        "Fake Out Excadrill",
+        "Water Spout"
+       ]
+      ]
+     ]
+    ],
+    "note": "Against Indeedee M + Sneasler, their terrain blocks Fake Out: Throat Chop the Indeedee while Blastoise Dark Pulses it, or switch Incineroar to Farigiraf about a third of the time."
+   }
+  ]
+ },
+ {
+  "k": "snow",
+  "tab": "Snow",
+  "picks": [
+   {
+    "lead": [
+     "Farigiraf",
+     "Blastoise"
+    ],
+    "back": "Incineroar, Torkoal",
+    "v": [
+     67,
+     59
+    ],
+    "top": null,
+    "tr": 65,
+    "rule": "Farigiraf <b>sets Trick Room</b> or <b>Psychics the Sneasler</b>, roughly half each when Sneasler leads. Blastoise Dark Pulses the Froslass, Aura Spheres a Kingambit, Fakes Out a Raichu, or Water Spouts.",
+    "vs": [
+     [
+      "Froslass + Sneasler",
+      8.8,
+      [
+       66,
+       58
+      ],
+      [
+       [
+        55,
+        "Psychic Sneasler",
+        "Dark Pulse Froslass"
+       ],
+       [
+        25,
+        "Trick Room",
+        "Dark Pulse Froslass"
+       ],
+       [
+        20,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Froslass + Kingambit",
+      5.3,
+      [
+       64,
+       56
+      ],
+      [
+       [
+        55,
+        "Trick Room",
+        "Aura Sphere Kingambit"
+       ],
+       [
+        30,
+        "Trick Room",
+        "Dark Pulse Froslass"
+       ],
+       [
+        15,
+        "Protect",
+        "Dark Pulse Froslass"
+       ]
+      ]
+     ],
+     [
+      "Arcanine-H + Raichu",
+      3.4,
+      [
+       64,
+       58
+      ],
+      [
+       [
+        90,
+        "Trick Room",
+        "Fake Out Raichu"
+       ],
+       [
+        10,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Raichu + Sneasler",
+      3.2,
+      [
+       66,
+       59
+      ],
+      [
+       [
+        55,
+        "Psychic Sneasler",
+        "Fake Out Raichu"
+       ],
+       [
+        40,
+        "Trick Room",
+        "Fake Out Raichu"
+       ],
+       [
+        5,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Kingambit + Sneasler",
+      3.1,
+      [
+       76,
+       62
+      ],
+      [
+       [
+        65,
+        "Psychic Sneasler",
+        "Aura Sphere Kingambit"
+       ],
+       [
+        35,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Arcanine-H + Froslass",
+      3.1,
+      [
+       69,
+       62
+      ],
+      [
+       [
+        100,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ]
+    ]
+   },
+   {
+    "lead": [
+     "Indeedee",
+     "Blastoise"
+    ],
+    "back": "Incineroar, Torkoal",
+    "v": [
+     67,
+     54
+    ],
+    "top": [
+     "Farigiraf + Blastoise",
+     3.1
+    ],
+    "tr": 77,
+    "rule": "Against Froslass or Kingambit leads, Indeedee <b>sets Trick Room</b> while Blastoise Dark Pulses the Froslass, Aura Spheres the Kingambit or Water Spouts. Against Raichu leads, <b>Follow Me and Water Spout</b>.",
+    "vs": [
+     [
+      "Froslass + Sneasler",
+      8.8,
+      [
+       65,
+       53
+      ],
+      [
+       [
+        75,
+        "Trick Room",
+        "Dark Pulse Froslass"
+       ],
+       [
+        25,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Froslass + Kingambit",
+      5.3,
+      [
+       65,
+       55
+      ],
+      [
+       [
+        60,
+        "Trick Room",
+        "Aura Sphere Kingambit"
+       ],
+       [
+        40,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Arcanine-H + Raichu",
+      3.4,
+      [
+       65,
+       51
+      ],
+      [
+       [
+        90,
+        "Follow Me",
+        "Water Spout"
+       ],
+       [
+        10,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Raichu + Sneasler",
+      3.2,
+      [
+       71,
+       52
+      ],
+      [
+       [
+        100,
+        "Follow Me",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Arcanine-H + Froslass",
+      3.1,
+      [
+       68,
+       63
+      ],
+      [
+       [
+        100,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Kingambit + Sneasler",
+      3.1,
+      [
+       72,
+       56
+      ],
+      [
+       [
+        60,
+        "Trick Room",
+        "Aura Sphere Kingambit"
+       ],
+       [
+        40,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "k": "tr",
+  "tab": "Trick Room",
+  "picks": [
+   {
+    "lead": [
+     "Kingambit",
+     "Blastoise"
+    ],
+    "back": "Incineroar, Torkoal",
+    "v": [
+     68,
+     59
+    ],
+    "top": null,
+    "tr": 0,
+    "rule": "<b>No Trick Room on turn one</b>: their own setter would cancel it. Blastoise <b>Water Spouts</b> while Kingambit goes for their setter. Against Farigiraf + Incineroar, switch Kingambit to Farigiraf about half the time, otherwise Low Kick the Incineroar (Blastoise Aura Spheres it) or Kowtow their Farigiraf. <b>Kowtow the Farigiraf</b> next to Kingambit, and the Raichu next to Farigiraf. Next to Delphox, switch Kingambit to Indeedee about half the time, otherwise Kowtow or Sucker Punch the Delphox.",
+    "vs": [
+     [
+      "Farigiraf + Incineroar",
+      7.3,
+      [
+       72,
+       66
+      ],
+      [
+       [
+        45,
+        "switch &rarr; Farigiraf",
+        "Water Spout"
+       ],
+       [
+        35,
+        "Low Kick Incineroar",
+        "Aura Sphere Incineroar"
+       ],
+       [
+        20,
+        "Kowtow Farigiraf",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Kingambit",
+      3.5,
+      [
+       74,
+       62
+      ],
+      [
+       [
+        75,
+        "Kowtow Farigiraf",
+        "Water Spout"
+       ],
+       [
+        25,
+        "Kowtow Farigiraf",
+        "Aura Sphere Kingambit"
+       ]
+      ]
+     ],
+     [
+      "Delphox + Incineroar",
+      3.0,
+      [
+       73,
+       64
+      ],
+      [
+       [
+        50,
+        "switch &rarr; Indeedee",
+        "Water Spout"
+       ],
+       [
+        30,
+        "Kowtow Incineroar",
+        "Water Spout"
+       ],
+       [
+        20,
+        "Sucker Punch Delphox",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Rillaboom",
+      3.0,
+      [
+       56,
+       49
+      ],
+      [
+       [
+        50,
+        "Kowtow Rillaboom",
+        "switch &rarr; Farigiraf"
+       ],
+       [
+        50,
+        "Kowtow Farigiraf",
+        "switch &rarr; Farigiraf"
+       ]
+      ]
+     ],
+     [
+      "Delphox + Sneasler",
+      2.2,
+      [
+       63,
+       52
+      ],
+      [
+       [
+        45,
+        "switch &rarr; Indeedee",
+        "Water Spout"
+       ],
+       [
+        35,
+        "Kowtow Delphox",
+        "Fake Out Sneasler"
+       ],
+       [
+        20,
+        "Sucker Punch Delphox",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Raichu",
+      2.0,
+      [
+       54,
+       44
+      ],
+      [
+       [
+        65,
+        "Kowtow Raichu",
+        "Water Spout"
+       ],
+       [
+        35,
+        "Kowtow Raichu",
+        "switch &rarr; Farigiraf"
+       ]
+      ]
+     ]
+    ],
+    "note": "Sucker Punch fails if the target doesn&rsquo;t attack that turn."
+   },
+   {
+    "lead": [
+     "Indeedee",
+     "Blastoise"
+    ],
+    "back": "Incineroar, Torkoal",
+    "v": [
+     72,
+     57
+    ],
+    "top": [
+     "Kingambit + Blastoise",
+     0.6
+    ],
+    "tr": 0,
+    "rule": "<b>No Trick Room on turn one.</b> Indeedee supports a Blastoise <b>Water Spout</b>: <b>Helping Hand</b> against Farigiraf + Incineroar, Farigiraf + Kingambit and Delphox + Incineroar, and <b>Follow Me</b> against Rillaboom, Sneasler or Raichu leads. Against Farigiraf + Incineroar, switch Indeedee to Farigiraf two times in five.",
+    "vs": [
+     [
+      "Farigiraf + Incineroar",
+      7.3,
+      [
+       75,
+       59
+      ],
+      [
+       [
+        60,
+        "Helping Hand",
+        "Water Spout"
+       ],
+       [
+        40,
+        "switch &rarr; Farigiraf",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Kingambit",
+      3.5,
+      [
+       67,
+       59
+      ],
+      [
+       [
+        80,
+        "Helping Hand",
+        "Water Spout"
+       ],
+       [
+        20,
+        "Helping Hand",
+        "Dark Pulse Farigiraf"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Rillaboom",
+      3.0,
+      [
+       62,
+       47
+      ],
+      [
+       [
+        60,
+        "Follow Me",
+        "Water Spout"
+       ],
+       [
+        40,
+        "Follow Me",
+        "Aura Sphere Rillaboom"
+       ]
+      ]
+     ],
+     [
+      "Delphox + Incineroar",
+      3.0,
+      [
+       79,
+       61
+      ],
+      [
+       [
+        100,
+        "Helping Hand",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Delphox + Sneasler",
+      2.2,
+      [
+       78,
+       57
+      ],
+      [
+       [
+        100,
+        "Follow Me",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Raichu",
+      2.0,
+      [
+       63,
+       54
+      ],
+      [
+       [
+        100,
+        "Follow Me",
+        "Water Spout"
+       ]
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "k": "rainsun",
+  "tab": "Rain + Sun",
+  "picks": [
+   {
+    "lead": [
+     "Incineroar",
+     "Blastoise"
+    ],
+    "back": "Farigiraf, Torkoal",
+    "v": [
+     63,
+     58
+    ],
+    "top": null,
+    "tr": 0,
+    "rule": "<b>No Trick Room on turn one.</b> Blastoise <b>Water Spouts</b> while Incineroar <b>Fakes Out</b>: the Charizard next to Venusaur about half the time (otherwise Flare Blitz the Venusaur while Blastoise Fakes it Out), the Archaludon or Grimmsnarl next to each other, and mostly the Grimmsnarl next to Charizard or Swampert. Against Farigiraf + Golisopod, <b>Flare Blitz the Golisopod</b> or Throat Chop their Farigiraf.",
+    "vs": [
+     [
+      "Charizard + Venusaur",
+      13.5,
+      [
+       55,
+       53
+      ],
+      [
+       [
+        55,
+        "Fake Out Charizard",
+        "Water Spout"
+       ],
+       [
+        40,
+        "Flare Blitz Venusaur",
+        "Fake Out Venusaur"
+       ],
+       [
+        5,
+        "Flare Blitz Venusaur",
+        "Fake Out Charizard"
+       ]
+      ]
+     ],
+     [
+      "Archaludon + Grimmsnarl",
+      9.5,
+      [
+       62,
+       56
+      ],
+      [
+       [
+        65,
+        "Fake Out Archaludon",
+        "Water Spout"
+       ],
+       [
+        35,
+        "Fake Out Grimmsnarl",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Charizard + Grimmsnarl",
+      9.4,
+      [
+       60,
+       58
+      ],
+      [
+       [
+        35,
+        "Fake Out Grimmsnarl",
+        "Aura Sphere Grimmsnarl"
+       ],
+       [
+        35,
+        "Fake Out Grimmsnarl",
+        "Water Spout"
+       ],
+       [
+        30,
+        "Fake Out Charizard",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Golisopod",
+      7.6,
+      [
+       76,
+       62
+      ],
+      [
+       [
+        60,
+        "Flare Blitz Golisopod",
+        "Water Spout"
+       ],
+       [
+        40,
+        "Throat Chop Farigiraf",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Grimmsnarl + Swampert",
+      5.5,
+      [
+       70,
+       65
+      ],
+      [
+       [
+        65,
+        "Fake Out Grimmsnarl",
+        "Water Spout"
+       ],
+       [
+        35,
+        "Fake Out Swampert",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Golisopod + Grimmsnarl",
+      5.3,
+      [
+       69,
+       66
+      ],
+      [
+       [
+        65,
+        "Fake Out Grimmsnarl",
+        "Water Spout"
+       ],
+       [
+        35,
+        "Flare Blitz Golisopod",
+        "Aura Sphere Grimmsnarl"
+       ]
+      ]
+     ]
+    ]
+   },
+   {
+    "lead": [
+     "Incineroar",
+     "Farigiraf"
+    ],
+    "back": "Torkoal, Blastoise",
+    "v": [
+     58,
+     55
+    ],
+    "top": [
+     "Incineroar + Blastoise",
+     4.2
+    ],
+    "tr": 65,
+    "rule": "Farigiraf <b>sets Trick Room</b> about two times in three while Incineroar <b>Fakes Out</b>: the Charizard next to Venusaur (or Fake Out the Venusaur and Psychic it), the Archaludon or Grimmsnarl, the Swampert or Grimmsnarl. Next to Charizard + Grimmsnarl, one time in three Fake Out the Grimmsnarl and Thunderbolt the Charizard. Against Farigiraf + Golisopod, <b>Thunderbolt the Golisopod</b> while Incineroar Throat Chops their Farigiraf or Flare Blitzes the Golisopod.",
+    "vs": [
+     [
+      "Charizard + Venusaur",
+      13.5,
+      [
+       54,
+       52
+      ],
+      [
+       [
+        45,
+        "Fake Out Charizard",
+        "Trick Room"
+       ],
+       [
+        35,
+        "Fake Out Venusaur",
+        "Psychic Venusaur"
+       ],
+       [
+        20,
+        "Throat Chop Charizard",
+        "Protect"
+       ]
+      ]
+     ],
+     [
+      "Archaludon + Grimmsnarl",
+      9.5,
+      [
+       57,
+       52
+      ],
+      [
+       [
+        60,
+        "Fake Out Archaludon",
+        "Trick Room"
+       ],
+       [
+        40,
+        "Fake Out Grimmsnarl",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Charizard + Grimmsnarl",
+      9.4,
+      [
+       56,
+       55
+      ],
+      [
+       [
+        50,
+        "Fake Out Charizard",
+        "Trick Room"
+       ],
+       [
+        35,
+        "Fake Out Grimmsnarl",
+        "Thunderbolt Charizard"
+       ],
+       [
+        15,
+        "Fake Out Grimmsnarl",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Farigiraf + Golisopod",
+      7.6,
+      [
+       66,
+       57
+      ],
+      [
+       [
+        45,
+        "Throat Chop Farigiraf",
+        "Thunderbolt Golisopod"
+       ],
+       [
+        45,
+        "Flare Blitz Golisopod",
+        "Thunderbolt Golisopod"
+       ],
+       [
+        10,
+        "Throat Chop Farigiraf",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Grimmsnarl + Swampert",
+      5.5,
+      [
+       61,
+       58
+      ],
+      [
+       [
+        55,
+        "Fake Out Swampert",
+        "Trick Room"
+       ],
+       [
+        45,
+        "Fake Out Grimmsnarl",
+        "Trick Room"
+       ]
+      ]
+     ],
+     [
+      "Golisopod + Grimmsnarl",
+      5.3,
+      [
+       62,
+       59
+      ],
+      [
+       [
+        60,
+        "Fake Out Grimmsnarl",
+        "Trick Room"
+       ],
+       [
+        40,
+        "Flare Blitz Golisopod",
+        "Trick Room"
+       ]
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "k": "perish",
+  "tab": "Perish",
+  "picks": [
+   {
+    "lead": [
+     "Incineroar",
+     "Kingambit"
+    ],
+    "back": "Farigiraf, Torkoal",
+    "v": [
+     66,
+     60
+    ],
+    "top": null,
+    "tr": 0,
+    "rule": "<b>No Trick Room on turn one.</b> Kingambit <b>Kowtows the Gengar</b> or Low Kicks an Incineroar or Archaludon. Against Gengar + Incineroar, switch Incineroar to Indeedee about two times in five, otherwise Close Combat or Throat Chop while Kingambit Low Kicks their Incineroar. Against Gengar + Rillaboom, Throat Chop the Gengar and Kowtow the Rillaboom, or the reverse. <b>Fake Out the Politoed</b> and Low Kick the Archaludon; Fake Out the Vivillon and Kowtow the Gengar.",
+    "vs": [
+     [
+      "Gengar + Incineroar",
+      29.4,
+      [
+       70,
+       65
+      ],
+      [
+       [
+        40,
+        "switch &rarr; Indeedee",
+        "Kowtow Gengar"
+       ],
+       [
+        35,
+        "Close Combat Incineroar",
+        "Low Kick Incineroar"
+       ],
+       [
+        25,
+        "Throat Chop Gengar",
+        "Low Kick Incineroar"
+       ]
+      ]
+     ],
+     [
+      "Gengar + Rillaboom",
+      10.8,
+      [
+       67,
+       59
+      ],
+      [
+       [
+        50,
+        "Throat Chop Gengar",
+        "Kowtow Rillaboom"
+       ],
+       [
+        40,
+        "Close Combat Rillaboom",
+        "Kowtow Gengar"
+       ],
+       [
+        10,
+        "switch &rarr; Farigiraf",
+        "Kowtow Gengar"
+       ]
+      ]
+     ],
+     [
+      "Archaludon + Politoed",
+      6.4,
+      [
+       49,
+       40
+      ],
+      [
+       [
+        100,
+        "Fake Out Politoed",
+        "Low Kick Archaludon"
+       ]
+      ]
+     ],
+     [
+      "Gengar + Vivillon",
+      4.0,
+      [
+       67,
+       60
+      ],
+      [
+       [
+        80,
+        "Fake Out Vivillon",
+        "Kowtow Gengar"
+       ],
+       [
+        20,
+        "Fake Out Vivillon",
+        "Kowtow Vivillon"
+       ]
+      ]
+     ],
+     [
+      "Archaludon + Gengar",
+      3.6,
+      [
+       59,
+       52
+      ],
+      [
+       [
+        55,
+        "Fake Out Archaludon",
+        "Kowtow Gengar"
+       ],
+       [
+        45,
+        "Close Combat Archaludon",
+        "Low Kick Archaludon"
+       ]
+      ]
+     ],
+     [
+      "Archaludon + Incineroar",
+      2.8,
+      [
+       68,
+       63
+      ],
+      [
+       [
+        40,
+        "Close Combat Incineroar",
+        "Kowtow Incineroar"
+       ],
+       [
+        35,
+        "Fake Out Archaludon",
+        "Kowtow Incineroar"
+       ],
+       [
+        25,
+        "Close Combat Incineroar",
+        "Low Kick Incineroar"
+       ]
+      ]
+     ]
+    ],
+    "note": "Throat Chop stops Perish Song for two turns."
+   },
+   {
+    "lead": [
+     "Farigiraf",
+     "Blastoise"
+    ],
+    "back": "Incineroar, Torkoal",
+    "v": [
+     61,
+     55
+    ],
+    "top": [
+     "Incineroar + Kingambit",
+     4.4
+    ],
+    "tr": 48,
+    "rule": "Next to Gengar, Farigiraf <b>sets Trick Room</b> about half the time while Blastoise Water Spouts; otherwise <b>Psychic the Gengar</b> while Blastoise Aura Spheres the partner. Against Gengar + Vivillon, Psychic the Gengar and <b>Fake Out the Vivillon</b>. Against Archaludon + Politoed, <b>switch Farigiraf to Torkoal</b> three times in four (its sun replaces their rain) while Blastoise Aura Spheres the Archaludon or Fakes Out the Politoed. Next to Gengar or Incineroar, Fake Out or Aura Sphere the Archaludon.",
+    "vs": [
+     [
+      "Gengar + Incineroar",
+      29.4,
+      [
+       64,
+       58
+      ],
+      [
+       [
+        50,
+        "Trick Room",
+        "Water Spout"
+       ],
+       [
+        50,
+        "Psychic Gengar",
+        "Aura Sphere Incineroar"
+       ]
+      ]
+     ],
+     [
+      "Gengar + Rillaboom",
+      10.8,
+      [
+       63,
+       57
+      ],
+      [
+       [
+        45,
+        "Trick Room",
+        "Water Spout"
+       ],
+       [
+        30,
+        "Psychic Gengar",
+        "Aura Sphere Rillaboom"
+       ],
+       [
+        25,
+        "Trick Room",
+        "Dark Pulse Gengar"
+       ]
+      ]
+     ],
+     [
+      "Archaludon + Politoed",
+      6.4,
+      [
+       51,
+       46
+      ],
+      [
+       [
+        40,
+        "switch &rarr; Torkoal",
+        "Aura Sphere Archaludon"
+       ],
+       [
+        35,
+        "switch &rarr; Torkoal",
+        "Fake Out Politoed"
+       ],
+       [
+        25,
+        "Thunderbolt Politoed",
+        "Fake Out Politoed"
+       ]
+      ]
+     ],
+     [
+      "Gengar + Vivillon",
+      4.0,
+      [
+       57,
+       52
+      ],
+      [
+       [
+        90,
+        "Psychic Gengar",
+        "Fake Out Vivillon"
+       ],
+       [
+        10,
+        "Trick Room",
+        "Water Spout"
+       ]
+      ]
+     ],
+     [
+      "Archaludon + Gengar",
+      3.6,
+      [
+       55,
+       53
+      ],
+      [
+       [
+        55,
+        "Psychic Gengar",
+        "Fake Out Archaludon"
+       ],
+       [
+        45,
+        "Trick Room",
+        "Fake Out Archaludon"
+       ]
+      ]
+     ],
+     [
+      "Archaludon + Incineroar",
+      2.8,
+      [
+       61,
+       53
+      ],
+      [
+       [
+        80,
+        "Trick Room",
+        "Aura Sphere Archaludon"
+       ],
+       [
+        20,
+        "Trick Room",
+        "Aura Sphere Incineroar"
+       ]
+      ]
+     ]
+    ]
+   }
+  ]
+ }
+]

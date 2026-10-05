@@ -1,0 +1,51 @@
+Mega Blastoise Water Spout, full HP, spread, no weather:
+  Water Spout                    -> Rillaboom        35- 41%  KO  0/45
+  Water Spout                    -> Sneasler         83- 98%  KO  0/44
+  Water Spout                    -> Mega Salamence   34- 41%  KO  0/45
+  Water Spout                    -> Incineroar       90-100%  KO 15/48
+  Water Spout                    -> Kingambit        58- 70%  KO  0/48
+  Water Spout                    -> Basculegion      35- 41%  KO  0/47
+  Water Spout                    -> Mega Floette     50- 60%  KO  0/44
+  Water Spout                    -> Farigiraf        53- 64%  KO  0/48
+  Water Spout                    -> Gholdengo        71- 84%  KO  0/47
+  Water Spout                    -> Garchomp (LO)    66- 78%  KO  0/44
+Same in Torkoal's sun:
+  Water Spout (sun)              -> Incineroar       45- 53%  KO  0/47
+  Water Spout (sun)              -> Kingambit        29- 35%  KO  0/47
+Mega Launcher pulses (single target):
+  Aura Sphere                    -> Kingambit        84-100%  KO  0/47
+  Aura Sphere                    -> Incineroar       64- 76%  KO  0/47
+  Aura Sphere                    -> Mega Tyranitar   90-100%  KO 15/48
+  Aura Sphere                    -> Rillaboom        50- 59%  KO  0/47
+  Dark Pulse                     -> Farigiraf        77- 91%  KO  0/45
+  Dark Pulse                     -> Gholdengo       100-100%  KO 44/44
+  Dark Pulse                     -> Mega Gengar     100-100%  KO 48/48
+  Dark Pulse                     -> Sneasler         30- 35%  KO  0/47
+Torkoal Eruption, full HP, spread, sun, Charcoal:
+  Eruption (sun)                 -> Rillaboom       100-100%  KO 47/47
+  Eruption (sun)                 -> Sneasler        100-100%  KO 44/44
+  Eruption (sun)                 -> Mega Salamence   45- 53%  KO  0/47
+  Eruption (sun)                 -> Incineroar       30- 36%  KO  0/44
+  Eruption (sun)                 -> Kingambit       100-100%  KO 47/47
+  Eruption (sun)                 -> Basculegion      46- 54%  KO  0/47
+  Eruption (sun)                 -> Mega Floette     68- 80%  KO  0/44
+  Eruption (sun)                 -> Farigiraf        70- 83%  KO  0/44
+  Eruption (sun)                 -> Gholdengo       100-100%  KO 47/47
+  Eruption (sun)                 -> Garchomp (LO)    44- 52%  KO  0/44
+Hatterene Expanding Force in Psychic Terrain (spread), Life Orb:
+  Expanding Force (terrain)      -> Rillaboom        95-100%  KO 34/46
+  Expanding Force (terrain)      -> Sneasler        100-100%  KO 46/46
+  Expanding Force (terrain)      -> Mega Salamence   93-100%  KO 30/46
+  Expanding Force (terrain)      -> Incineroar      no damage
+  Expanding Force (terrain)      -> Basculegion      94-100%  KO 21/45
+  Expanding Force (terrain)      -> Mega Floette     70- 83%  KO  0/45
+  Expanding Force (terrain)      -> Farigiraf        36- 43%  KO  0/46
+  Expanding Force (terrain)      -> Garchomp (LO)    91-100%  KO 23/46
+Kingambit (Brave 32 Atk) single target:
+  Kowtow Cleave                  -> Farigiraf        74- 87%  KO  0/46
+  Kowtow Cleave                  -> Mega Gengar     100-100%  KO 47/47
+  Kowtow Cleave                  -> Gholdengo       100-100%  KO 45/45
+  Iron Head                      -> Mega Floette    100-100%  KO 47/47
+  Low Kick                       -> Kingambit        54- 64%  KO  0/46
+  Low Kick                       -> Mega Tyranitar  100-100%  KO 45/45
+  Low Kick                       -> Incineroar       74- 88%  KO  0/47

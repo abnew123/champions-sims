@@ -1,0 +1,122 @@
+{
+ "Gholdengo": {
+  "species": "Gholdengo",
+  "item": "Life Orb",
+  "ability": "Good as Gold",
+  "nature": "Timid",
+  "evs": [
+   7,
+   0,
+   0,
+   27,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Shadow Ball",
+   "Make It Rain",
+   "Nasty Plot"
+  ]
+ },
+ "Gardevoir": {
+  "species": "Gardevoir",
+  "item": "Gardevoirite",
+  "ability": "Synchronize",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Expanding Force",
+   "Hyper Voice",
+   "Calm Mind"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "Psychic Seed",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Close Combat",
+   "Dire Claw",
+   "Throat Chop"
+  ]
+ },
+ "Salamence": {
+  "species": "Salamence",
+  "item": "Salamencite",
+  "ability": "Intimidate",
+  "nature": "Naive",
+  "evs": [
+   1,
+   21,
+   0,
+   15,
+   0,
+   29
+  ],
+  "moves": [
+   "Protect",
+   "Tailwind",
+   "Double-Edge",
+   "Draco Meteor"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Sitrus Berry",
+  "ability": "Intimidate",
+  "nature": "Careful",
+  "evs": [
+   32,
+   0,
+   14,
+   0,
+   20,
+   0
+  ],
+  "moves": [
+   "Fake Out",
+   "Parting Shot",
+   "Flare Blitz",
+   "Darkest Lariat"
+  ]
+ },
+ "Indeedee-F": {
+  "species": "Indeedee-F",
+  "item": "Colbur Berry",
+  "ability": "Psychic Surge",
+  "nature": "Calm",
+  "evs": [
+   32,
+   0,
+   25,
+   0,
+   9,
+   0
+  ],
+  "moves": [
+   "Follow Me",
+   "Psychic",
+   "Helping Hand",
+   "Protect"
+  ]
+ }
+}

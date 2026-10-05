@@ -1,0 +1,282 @@
+{
+ "Frankfurt-10": {
+  "v3": 0.7945164856377268,
+  "v8": 0.7324402729504791,
+  "v3_by_arch": {
+   "Tailwind goodstuffs": 0.9741035856573705,
+   "Sun": 0.8271938313771404,
+   "Indeedee TR / Psychic Terrain": 0.8712121212121212,
+   "Rain": 0.4525930024127961,
+   "Balance, no speed control": 0.7432432432432433,
+   "Sand": 0.5686968838526912,
+   "Snow": 0.7908921933085501,
+   "Trick Room without Indeedee": 0.8923676857767436,
+   "Rain + sun": 0.5600393700787402,
+   "Perish trap": 0.8659912832297549
+  },
+  "v8_by_arch": {
+   "Tailwind goodstuffs": 1.0,
+   "Sun": 0.5674721830847171,
+   "Indeedee TR / Psychic Terrain": 0.5595238095238095,
+   "Rain": 0.4671052631578947,
+   "Balance, no speed control": 0.7364864864864865,
+   "Sand": 0.7415014164305949,
+   "Snow": 0.562267657992565,
+   "Trick Room without Indeedee": 0.8785714285714286,
+   "Rain + sun": 0.6338582677165354,
+   "Perish trap": 0.843859649122807
+  }
+ },
+ "Frankfurt-05": {
+  "v3": 0.783969375339739,
+  "v8": 0.61125649304598,
+  "v3_by_arch": {
+   "Tailwind goodstuffs": 0.8276892430278884,
+   "Sun": 0.8042287153556961,
+   "Indeedee TR / Psychic Terrain": 0.7911255411255411,
+   "Rain": 0.8721804511278196,
+   "Balance, no speed control": 0.7752761885534037,
+   "Sand": 0.9259422690305025,
+   "Snow": 0.6096654275092936,
+   "Trick Room without Indeedee": 0.47153524135720437,
+   "Rain + sun": 0.5541338582677166,
+   "Perish trap": 0.9701754385964914
+  },
+  "v8_by_arch": {
+   "Tailwind goodstuffs": 0.5567729083665338,
+   "Sun": 0.40935200858811194,
+   "Indeedee TR / Psychic Terrain": 0.6393458417165669,
+   "Rain": 0.7453007518796992,
+   "Balance, no speed control": 0.6711711711711712,
+   "Sand": 0.7969246375559453,
+   "Snow": 0.5297397769516728,
+   "Trick Room without Indeedee": 0.5058883109924339,
+   "Rain + sun": 0.6683070866141733,
+   "Perish trap": 0.924561403508772
+  }
+ },
+ "Baltimore-12": {
+  "v3": 0.7742047233125504,
+  "v8": 0.7285847911564021,
+  "v3_by_arch": {
+   "Tailwind goodstuffs": 0.8974103585657371,
+   "Sun": 0.7659576794873456,
+   "Indeedee TR / Psychic Terrain": 0.7153679653679653,
+   "Rain": 0.7086466165413533,
+   "Balance, no speed control": 0.7623873873873874,
+   "Sand": 0.6487252124645893,
+   "Snow": 0.8373605947955391,
+   "Trick Room without Indeedee": 0.7006189624973205,
+   "Rain + sun": 0.5939960629921259,
+   "Perish trap": 0.8026315789473685
+  },
+  "v8_by_arch": {
+   "Tailwind goodstuffs": 0.8406374501992031,
+   "Sun": 0.625,
+   "Indeedee TR / Psychic Terrain": 0.6547619047619048,
+   "Rain": 0.5686090225563909,
+   "Balance, no speed control": 0.7376126126126127,
+   "Sand": 0.6218130311614731,
+   "Snow": 0.8615241635687731,
+   "Trick Room without Indeedee": 0.9153616194001422,
+   "Rain + sun": 0.4040354330708661,
+   "Perish trap": 0.8877192982456141
+  }
+ },
+ "trick_room_six": {
+  "v3": 0.7215548499036872,
+  "v8": 0.6568299894933396,
+  "v3_by_arch": {
+   "Tailwind goodstuffs": 1.0,
+   "Sun": 0.3241758241758242,
+   "Indeedee TR / Psychic Terrain": 0.7435064935064934,
+   "Rain": 0.606203007518797,
+   "Balance, no speed control": 0.7826576576576577,
+   "Sand": 0.6246458923512749,
+   "Snow": 0.9507434944237918,
+   "Trick Room without Indeedee": 0.42364445558964453,
+   "Rain + sun": 0.2170275590551181,
+   "Perish trap": 0.9035087719298247
+  },
+  "v8_by_arch": {
+   "Tailwind goodstuffs": 0.948207171314741,
+   "Sun": 0.3846153846153847,
+   "Indeedee TR / Psychic Terrain": 0.5476190476190477,
+   "Rain": 0.3392857142857143,
+   "Balance, no speed control": 0.8265765765765766,
+   "Sand": 0.6278282573027258,
+   "Snow": 0.6840148698884757,
+   "Trick Room without Indeedee": 0.6342239420225565,
+   "Rain + sun": 0.2618110236220472,
+   "Perish trap": 0.7149122807017544
+  }
+ },
+ "low_variance_six": {
+  "v3": 0.5236146748867213,
+  "v8": 0.6076390366296106,
+  "v3_by_arch": {
+   "Tailwind goodstuffs": 0.4093625498007968,
+   "Sun": 0.7596153846153847,
+   "Indeedee TR / Psychic Terrain": 0.6341991341991341,
+   "Rain": 0.2406015037593985,
+   "Balance, no speed control": 0.5146396396396397,
+   "Sand": 0.6351640101878018,
+   "Snow": 0.4879182156133829,
+   "Trick Room without Indeedee": 0.8352094176899513,
+   "Rain + sun": 0.27066929133858264,
+   "Perish trap": 0.5000000000000001
+  },
+  "v8_by_arch": {
+   "Tailwind goodstuffs": 0.5996015936254979,
+   "Sun": 0.7588375345182056,
+   "Indeedee TR / Psychic Terrain": 0.7965367965367967,
+   "Rain": 0.38627819548872183,
+   "Balance, no speed control": 0.6351351351351352,
+   "Sand": 0.7259206798866856,
+   "Snow": 0.3773234200743494,
+   "Trick Room without Indeedee": 0.525,
+   "Rain + sun": 0.4197834645669291,
+   "Perish trap": 0.6447368421052633
+  }
+ },
+ "Baltimore-14": {
+  "v3": 0.7177997307308865,
+  "v8": 0.6352178340824612,
+  "v3_by_arch": {
+   "Tailwind goodstuffs": 0.7878486055776892,
+   "Sun": 0.38772338553454677,
+   "Indeedee TR / Psychic Terrain": 0.6071428571428571,
+   "Rain": 0.9614661654135339,
+   "Balance, no speed control": 0.6396396396396395,
+   "Sand": 0.9341359773371105,
+   "Snow": 0.5687732342007434,
+   "Trick Room without Indeedee": 0.620966007994908,
+   "Rain + sun": 0.8948529195368718,
+   "Perish trap": 0.9877192982456141
+  },
+  "v8_by_arch": {
+   "Tailwind goodstuffs": 0.7499999999999999,
+   "Sun": 0.35927815102539395,
+   "Indeedee TR / Psychic Terrain": 0.3261163640523524,
+   "Rain": 0.8383458646616542,
+   "Balance, no speed control": 0.6689189189189189,
+   "Sand": 0.7107544156968961,
+   "Snow": 0.762081784386617,
+   "Trick Room without Indeedee": 0.5309523809523811,
+   "Rain + sun": 0.6706669826502838,
+   "Perish trap": 0.7710526315789473
+  }
+ },
+ "Frankfurt-09": {
+  "v3": 0.6845830759704298,
+  "v8": 0.5017622157853829,
+  "v3_by_arch": {
+   "Tailwind goodstuffs": 0.6484063745019919,
+   "Sun": 0.706826354407132,
+   "Indeedee TR / Psychic Terrain": 0.6179653679653679,
+   "Rain": 0.7105263157894737,
+   "Balance, no speed control": 0.8074324324324325,
+   "Sand": 0.5332861189801699,
+   "Snow": 0.7072490706319702,
+   "Trick Room without Indeedee": 0.7273809523809525,
+   "Rain + sun": 0.7170275590551181,
+   "Perish trap": 0.9421052631578949
+  },
+  "v8_by_arch": {
+   "Tailwind goodstuffs": 0.3655378486055776,
+   "Sun": 0.2938928602508365,
+   "Indeedee TR / Psychic Terrain": 0.5183982683982684,
+   "Rain": 0.674812030075188,
+   "Balance, no speed control": 0.643018018018018,
+   "Sand": 0.504957507082153,
+   "Snow": 0.6403345724907062,
+   "Trick Room without Indeedee": 0.4787189597355053,
+   "Rain + sun": 0.6112204724409449,
+   "Perish trap": 0.9315789473684212
+  }
+ },
+ "Frankfurt-15": {
+  "v3": 0.5866889310656899,
+  "v8": 0.6381691644918328,
+  "v3_by_arch": {
+   "Tailwind goodstuffs": 0.5378486055776892,
+   "Sun": 0.6593406593406593,
+   "Indeedee TR / Psychic Terrain": 0.5411255411255411,
+   "Rain": 0.41353383458646614,
+   "Balance, no speed control": 0.7578828828828829,
+   "Sand": 0.626770538243626,
+   "Snow": 0.4628252788104088,
+   "Trick Room without Indeedee": 0.5658440497439171,
+   "Rain + sun": 0.8169291338582677,
+   "Perish trap": 0.9385964912280704
+  },
+  "v8_by_arch": {
+   "Tailwind goodstuffs": 0.6025896414342629,
+   "Sun": 0.5889684250781408,
+   "Indeedee TR / Psychic Terrain": 0.6461038961038962,
+   "Rain": 0.7791353383458648,
+   "Balance, no speed control": 0.581081081081081,
+   "Sand": 0.698300283286119,
+   "Snow": 0.562267657992565,
+   "Trick Room without Indeedee": 0.6940476190476191,
+   "Rain + sun": 0.5541338582677166,
+   "Perish trap": 0.7692982456140353
+  }
+ },
+ "Frankfurt-06": {
+  "v3": 0.6816231896805643,
+  "v8": 0.6483700330311241,
+  "v3_by_arch": {
+   "Tailwind goodstuffs": 0.8525896414342629,
+   "Sun": 0.6315320202438927,
+   "Indeedee TR / Psychic Terrain": 0.7132034632034633,
+   "Rain": 0.7706766917293234,
+   "Balance, no speed control": 0.5518018018018017,
+   "Sand": 0.37495171281689577,
+   "Snow": 0.7788104089219331,
+   "Trick Room without Indeedee": 0.4167127802666356,
+   "Rain + sun": 0.5994094488188977,
+   "Perish trap": 0.7017543859649124
+  },
+  "v8_by_arch": {
+   "Tailwind goodstuffs": 0.7198869992279858,
+   "Sun": 0.5541138616409357,
+   "Indeedee TR / Psychic Terrain": 0.6301320713492798,
+   "Rain": 0.7716165413533834,
+   "Balance, no speed control": 0.5945945945945945,
+   "Sand": 0.6097733711048159,
+   "Snow": 0.5752788104089219,
+   "Trick Room without Indeedee": 0.5396517674671233,
+   "Rain + sun": 0.4798228346456693,
+   "Perish trap": 0.9157894736842107
+  }
+ },
+ "Brisbane-07": {
+  "v3": 0.6401638098388048,
+  "v8": 0.5948011925558442,
+  "v3_by_arch": {
+   "Tailwind goodstuffs": 0.7051792828685258,
+   "Sun": 0.8736263736263737,
+   "Indeedee TR / Psychic Terrain": 0.727794020307219,
+   "Rain": 0.28477443609022557,
+   "Balance, no speed control": 0.5202702702702703,
+   "Sand": 0.7294617563739376,
+   "Snow": 0.5195167286245354,
+   "Trick Room without Indeedee": 0.726044033038082,
+   "Rain + sun": 0.3631889763779528,
+   "Perish trap": 0.5719298245614036
+  },
+  "v8_by_arch": {
+   "Tailwind goodstuffs": 0.7181274900398406,
+   "Sun": 0.6455359892275836,
+   "Indeedee TR / Psychic Terrain": 0.4664502164502164,
+   "Rain": 0.6259398496240602,
+   "Balance, no speed control": 0.677927927927928,
+   "Sand": 0.603399433427762,
+   "Snow": 0.29646840148698883,
+   "Trick Room without Indeedee": 0.5550060850245123,
+   "Rain + sun": 0.483759842519685,
+   "Perish trap": 0.4342105263157895
+  }
+ }
+}

@@ -1,0 +1,53 @@
+{
+ "b0": -0.7255782514247854,
+ "w": [
+  1.5405288373680235,
+  0.44047039021252576,
+  0.3272285461131141,
+  0.32041468849950205,
+  -0.9,
+  -0.1,
+  0.7902937089884825,
+  0.9382614319678869,
+  -0.9045199716990324,
+  -0.7173155700332444,
+  0.46198052880349844,
+  -0.0949661230703794,
+  -0.1460349712608837,
+  -0.20335818920580578,
+  0.15,
+  0.1968144794259222,
+  -0.5,
+  -0.3
+ ],
+ "names": [
+  "HP share (Pokemon)",
+  "Pokemon alive",
+  "attack stages",
+  "TR turns x speed edge",
+  "locked into status",
+  "locked into attack",
+  "grid coverage",
+  "grid exposure",
+  "must recharge",
+  "Protected last turn",
+  "type edge",
+  "asleep/frozen",
+  "paralysed",
+  "burned/poisoned",
+  "Tailwind turns (no TR)",
+  "screen turns",
+  "Encored",
+  "holding a Tricked Choice item"
+ ],
+ "n": 54714,
+ "hand_set": {
+  "locked into status": -0.9,
+  "locked into attack": -0.1,
+  "Tailwind turns (no TR)": 0.15,
+  "Encored": -0.5,
+  "holding a Tricked Choice item": -0.3,
+  "must recharge": -0.9045199716990324
+ },
+ "note": "Second self-play round: fitted on results/battle_train2 (7,200 battles played with egvalue4 + anticipated switches); hand_set as egvalue4."
+}

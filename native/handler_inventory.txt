@@ -1,0 +1,359 @@
+== moves 180 entries, 235 hooks
+Protect: onPrepareHit onHit cond.onStart cond.onTryHit [vol:protect]
+Fake Out: onTry onDisableMove [secondary]
+Close Combat: [self]
+Tailwind: cond.onSideStart cond.onModifySpe cond.onSideEnd [side:tailwind]
+Hyper Voice: 
+Grassy Glide: 
+Flare Blitz: [secondary]
+Trick Room: cond.onFieldStart cond.onFieldRestart cond.onFieldEnd [pw:trickroom]
+Wood Hammer: 
+Shadow Ball: [secondary]
+Parting Shot: onHit
+Iron Head: [secondary]
+High Horsepower: 
+Rock Slide: [secondary]
+Dire Claw: [secondary]
+Heat Wave: [secondary]
+Weather Ball: onModifyType onModifyMove
+Helping Hand: onTryHit cond.onStart cond.onRestart cond.onBasePower [vol:helpinghand]
+Sucker Punch: onTry
+Psychic: [secondary]
+Nasty Plot: [boosts]
+Expanding Force: onBasePower onModifyMove
+Kowtow Cleave: 
+Draco Meteor: [self]
+U-turn: 
+Make It Rain: [self]
+Moonblast: [secondary]
+Follow Me: onTry cond.onStart cond.onFoeRedirectTarget [vol:followme]
+Wave Crash: 
+Throat Chop: cond.onStart cond.onDisableMove cond.onBeforeMove cond.onModifyMove cond.onEnd [secondary]
+Swords Dance: [boosts]
+Dragon Pulse: 
+Low Kick: onTryHit
+Dazzling Gleam: 
+Last Respects: 
+Aqua Jet: 
+Focus Blast: [secondary]
+Earth Power: [secondary]
+Zap Cannon: [secondary]
+Calm Mind: [boosts]
+Encore: cond.onStart cond.onOverrideAction cond.onResidual cond.onEnd cond.onDisableMove [vol:encore]
+Hurricane: onModifyMove [secondary]
+Rage Powder: onTry cond.onStart cond.onFoeRedirectTarget [vol:ragepowder]
+Extreme Speed: 
+Wide Guard: onTry onHitSide cond.onSideStart cond.onTryHit [side:wideguard]
+Head Smash: 
+Sludge Bomb: [secondary]
+Flash Cannon: [secondary]
+Leech Life: 
+Power Gem: 
+Flamethrower: [secondary]
+Brave Bird: 
+Electro Shot: onTryMove
+Detect: onPrepareHit onHit [vol:protect]
+Thunderbolt: [secondary]
+Ice Beam: [secondary]
+Hyper Beam: [self]
+Knock Off: onBasePower onAfterHit
+Darkest Lariat: 
+Earthquake: 
+Dragon Claw: 
+Stomping Tantrum: 
+Aura Sphere: 
+Flip Turn: 
+Quick Attack: 
+Blizzard: onModifyMove [secondary]
+Double-Edge: 
+Perish Song: onHitField cond.onEnd cond.onResidual
+Icy Wind: [secondary]
+Scald: [secondary]
+Rock Tomb: [secondary]
+Ice Punch: [secondary]
+Aurora Veil: onTry cond.onAnyModifyDamage cond.onSideStart cond.onSideEnd [side:auroraveil]
+Matcha Gotcha: [secondary]
+Overheat: [self]
+Muddy Water: [secondary]
+Light Screen: cond.onAnyModifyDamage cond.onSideStart cond.onSideEnd [side:lightscreen]
+Solar Beam: onTryMove onBasePower
+Coaching: [boosts]
+Ancient Power: [secondary]
+Reflect: cond.onAnyModifyDamage cond.onSideStart cond.onSideEnd [side:reflect]
+Eruption: 
+Psychic Fangs: onTryHit
+Coil: [boosts]
+Draining Kiss: 
+Hypnosis: [st:slp]
+Mystical Fire: [secondary]
+Roost: cond.onStart cond.onType [self]
+Quiver Dance: [boosts]
+Struggle Bug: [secondary]
+Trick: onTryImmunity onHit
+Sleep Powder: [st:slp]
+Dual Wingbeat: 
+Imprison: cond.onStart cond.onFoeDisableMove cond.onFoeBeforeMove [vol:imprison]
+Spirit Break: [secondary]
+Will-O-Wisp: [st:brn]
+Armor Cannon: [self]
+Giga Drain: 
+Spiky Shield: onPrepareHit onHit cond.onStart cond.onTryHit cond.onHit [vol:spikyshield]
+Bulk Up: [boosts]
+Body Press: 
+Snarl: [secondary]
+Clanging Scales: 
+Ice Shard: 
+Recover: 
+Dark Pulse: [secondary]
+Glaive Rush: cond.onStart cond.onAccuracy cond.onSourceModifyDamage cond.onBeforeMove [self]
+Terrain Pulse: onModifyType onModifyMove
+Dragon Dance: [boosts]
+Liquidation: [secondary]
+Poison Jab: [secondary]
+Shadow Sneak: 
+Light of Ruin: 
+Leaf Storm: [self]
+Yawn: onTryHit cond.onStart cond.onEnd [vol:yawn]
+Shadow Claw: 
+Clangorous Soul: onTry onTryHit onHit [boosts]
+Life Dew: 
+Double Shock: onTryMove [self]
+Bitter Blade: 
+Drill Run: 
+Twin Beam: 
+Water Spout: 
+Icicle Crash: [secondary]
+Steel Roller: onTry onHit onAfterSubDamage
+Shell Smash: [boosts]
+Volt Switch: 
+Drain Punch: 
+Freeze-Dry: onEffectiveness
+Play Rough: [secondary]
+Night Slash: 
+Revival Blessing: onTryHit
+Power Trip: 
+Hydro Pump: 
+First Impression: onTry onDisableMove
+Triple Axel: 
+Feint: 
+Super Fang: 
+Poltergeist: onTry onTryHit
+Sacred Sword: 
+Toxic: [st:tox]
+Taunt: cond.onStart cond.onEnd cond.onDisableMove cond.onBeforeMove [vol:taunt]
+Infestation: [vol:partiallytrapped]
+Bug Buzz: [secondary]
+Baneful Bunker: onPrepareHit onHit cond.onStart cond.onTryHit cond.onHit [vol:banefulbunker]
+Sunny Day: [w:sunnyday]
+Fiery Dance: [secondary]
+Psycho Cut: 
+King's Shield: onPrepareHit onHit cond.onStart cond.onTryHit cond.onHit [vol:kingsshield]
+Phantom Force: onTryMove
+Rain Dance: [w:RainDance]
+Foul Play: 
+Rage Fist: 
+Charm: [boosts]
+Bullet Punch: 
+Disable: onTryHit cond.onStart cond.onEnd cond.onBeforeMove cond.onDisableMove [vol:disable]
+Ice Fang: [secondary]
+Grass Knot: onTryHit
+Energy Ball: [secondary]
+Psyshock: 
+Accelerock: 
+Roar: 
+Heal Pulse: onHit
+Lumina Crash: [secondary]
+Population Bomb: 
+Rising Voltage: 
+Substitute: onTryHit onHit cond.onStart cond.onTryPrimaryHit cond.onEnd [vol:substitute]
+Heavy Slam: onTryHit
+Electroweb: [secondary]
+X-Scissor: 
+Crunch: [secondary]
+Baton Pass: onHit [self]
+Fake Tears: [boosts]
+Superpower: [self]
+Ice Spinner: onAfterHit onAfterSubDamage
+Volt Tackle: [secondary]
+Waterfall: [secondary]
+Iron Defense: [boosts]
+Leech Seed: onTryImmunity cond.onStart cond.onResidual [vol:leechseed]
+Stone Axe: onAfterHit onAfterSubDamage [secondary]
+== abilities 92 entries, 139 hooks
+Grassy Surge: onStart
+Intimidate: onStart
+Unburden: onAfterUseItem onTakeItem onEnd cond.onModifySpe
+Defiant: onAfterEachBoost
+Aerilate: onModifyType onBasePower
+Psychic Surge: onStart
+Good as Gold: onTryHit
+Tough Claws: onBasePower
+Adaptability: onModifySTAB
+Pixilate: onModifyType onBasePower
+No Guard: onAnyInvulnerability onAnyAccuracy
+Levitate: 
+Drizzle: onStart
+Drought: onStart
+Armor Tail: onFoeTryMove
+Prankster: 
+Rock Head: onDamage
+Fairy Aura: onStart onAnyBasePower
+Competitive: onAfterEachBoost
+Stamina: onDamagingHit
+Flame Body: onDamagingHit
+Snow Warning: onStart
+Contrary: onChangeBoost
+Rough Skin: onDamagingHit
+Sand Stream: onStart
+Hospitality: onStart
+Flash Fire: onTryHit onEnd cond.onStart cond.onModifyAtk cond.onModifySpA cond.onEnd
+Shadow Tag: onFoeTrapPokemon onFoeMaybeTrapPokemon
+Sand Rush: onModifySpe onImmunity
+Swift Swim: onModifySpe
+Poison Touch: onSourceDamagingHit
+MISSING Aura Guard
+Soundproof: onTryHit onAllyTryHitSide
+Multiscale: onSourceModifyDamage
+Thermal Exchange: onDamagingHit onUpdate onSetStatus
+Liquid Voice: onModifyType
+Chlorophyll: onModifySpe
+Sharpness: onBasePower
+Magic Bounce: onTryHit onAllyTryHitSide
+Mirror Armor: onTryBoost
+Iron Fist: onBasePower
+Speed Boost: onResidual
+Sheer Force: onModifyMove onBasePower
+Mega Launcher: onBasePower
+Friend Guard: onAnyModifyDamage
+Gale Wings: 
+Regenerator: onSwitchOut
+Scrappy: onModifyMove onTryBoost
+Huge Power: onModifyAtk
+Infiltrator: onModifyMove
+Technician: onBasePower
+Inner Focus: onTryAddVolatile onTryBoost
+Toxic Debris: onDamagingHit
+Stance Change: onModifyMove
+Compound Eyes: onSourceModifyAccuracy
+Trace: onStart onUpdate
+Electric Surge: onStart
+Clear Body: onTryBoost
+Unnerve: onStart onEnd onFoeTryEatItem
+Spicy Spray: onDamagingHit
+Blaze: onModifyAtk onModifySpA
+Thick Fat: onSourceModifyAtk onSourceModifySpA
+Mold Breaker: onStart onModifyMove
+Sand Force: onBasePower onImmunity
+Unaware: onAnyModifyBoost
+Fire Mane: onModifyAtk onModifySpA
+Oblivious: onUpdate onImmunity onTryHit onTryBoost
+Queenly Majesty: onFoeTryMove
+Protean: onPrepareHit
+Lightning Rod: onTryHit onAnyRedirectTarget
+Mega Sol: onWeatherModifyDamage
+Weak Armor: onDamagingHit
+Illusion: onBeforeSwitchIn onDamagingHit onEnd onFaint
+Pressure: onStart onDeductPP
+Punk Rock: onBasePower onSourceModifyDamage
+Shell Armor: 
+Zero to Hero: onSwitchOut onSwitchIn
+Volt Absorb: onTryHit
+Cloud Nine: onSwitchIn onStart onEnd
+Bulletproof: onTryHit
+Parental Bond: onPrepareHit onSourceModifySecondaries
+Water Bubble: onSourceModifyAtk onSourceModifySpA onModifyAtk onModifySpA onUpdate onSetStatus
+Sniper: onModifyDamage
+Torrent: onModifyAtk onModifySpA
+Overgrow: onModifyAtk onModifySpA
+Disguise: onDamage onCriticalHit onEffectiveness onUpdate
+Filter: onSourceModifyDamage
+Hyper Cutter: onTryBoost
+Stalwart: onModifyMove
+Pickpocket: onAfterMoveSecondary
+Magic Guard: onDamage
+Libero: onPrepareHit
+== items 82 entries, 104 hooks
+Focus Sash: onDamage
+Sitrus Berry: onUpdate onTryEatItem onEat
+Life Orb: onModifyDamage onAfterMoveSecondarySelf
+Miracle Seed: onBasePower
+Leftovers: onResidual
+Salamencite: onTakeItem
+Choice Scarf: onStart onModifyMove onModifySpe
+Grassy Seed: onStart onTerrainChange [boosts]
+Raichunite Y: onTakeItem
+Psychic Seed: onStart onTerrainChange [boosts]
+White Herb: onStart onAnySwitchIn onAnyAfterMega onAnyAfterMove onResidual onUse
+Chople Berry: onSourceModifyDamage onEat
+Rocky Helmet: onDamagingHit
+Floettite: onTakeItem
+Golisopite: onTakeItem
+Charizardite Y: onTakeItem
+Fairy Feather: onBasePower
+Colbur Berry: onSourceModifyDamage onEat
+Garchompite Z: onTakeItem
+Staraptite: onTakeItem
+Gardevoirite: onTakeItem
+Tyranitarite: onTakeItem
+Light Clay: 
+Gengarite: onTakeItem
+Froslassite: onTakeItem
+Metagrossite: onTakeItem
+Mystic Water: onBasePower
+Black Glasses: onBasePower
+Delphoxite: onTakeItem
+Occa Berry: onSourceModifyDamage onEat
+Charcoal: onBasePower
+Lucarionite Z: onTakeItem
+Passho Berry: onSourceModifyDamage onEat
+Swampertite: onTakeItem
+Dragoninite: onTakeItem
+Eject Button: onAfterMoveSecondary
+Baxcalibrite: onTakeItem
+Glimmoranite: onTakeItem
+Aerodactylite: onTakeItem
+Cameruptite: onTakeItem
+Blastoisinite: onTakeItem
+Absolite Z: onTakeItem
+Blazikenite: onTakeItem
+Wide Lens: onSourceModifyAccuracy
+Mawilite: onTakeItem
+Coba Berry: onSourceModifyDamage onEat
+Scovillainite: onTakeItem
+Kasib Berry: onSourceModifyDamage onEat
+Sharp Beak: onBasePower
+Raichunite X: onTakeItem
+Lopunnite: onTakeItem
+Pyroarite: onTakeItem
+Twisted Spoon: onBasePower
+Expert Belt: onModifyDamage
+Alakazite: onTakeItem
+Never-Melt Ice: onBasePower
+Meganiumite: onTakeItem
+Meowsticite: onTakeItem
+Roseli Berry: onSourceModifyDamage onEat
+Garchompite: onTakeItem
+Venusaurite: onTakeItem
+Haban Berry: onSourceModifyDamage onEat
+Leek: onModifyCritRatio
+Scraftinite: onTakeItem
+Damp Rock: 
+Mental Herb: onUpdate
+Kangaskhanite: onTakeItem
+Charizardite X: onTakeItem
+Crabominite: onTakeItem
+Starminite: onTakeItem
+Scope Lens: onModifyCritRatio
+Gyaradosite: onTakeItem
+Sceptilite: onTakeItem
+Magnet: onBasePower
+Black Belt: onBasePower
+Lucarionite: onTakeItem
+Electric Seed: onStart onTerrainChange [boosts]
+Manectite: onTakeItem
+Aggronite: onTakeItem
+Dragalgite: onTakeItem
+Scizorite: onTakeItem
+Steelixite: onTakeItem
+TOTAL hooks 478
+onTakeItem:47  [secondary]:46  onBasePower:23  onStart:20  onTryHit:19  cond.onStart:18  [boosts]:16  onHit:12  [self]:12  onModifyMove:12  onSourceModifyDamage:11  onTry:10  onDamagingHit:9  onEat:9  onPrepareHit:8  cond.onEnd:8  onUpdate:7  onTryBoost:6  onModifyAtk:6  cond.onTryHit:5  cond.onSideStart:5  onModifyType:5  onEnd:5  onModifySpA:5  cond.onSideEnd:4  cond.onDisableMove:4  cond.onBeforeMove:4  onTryMove:4  onDamage:4  onModifySpe:4  cond.onResidual:3  onAfterHit:3  cond.onAnyModifyDamage:3  cond.onHit:3  onAfterSubDamage:3  onImmunity:3  onResidual:3  onModifyDamage:3  onTerrainChange:3  [vol:protect]:2  onDisableMove:2  cond.onModifySpe:2  cond.onFoeRedirectTarget:2  [st:slp]:2  onTryImmunity:2  onEffectiveness:2  onAfterEachBoost:2  onFoeTryMove:2  onAllyTryHitSide:2  onSetStatus:2  onSwitchOut:2  onSourceModifyAccuracy:2  onSourceModifyAtk:2  onSourceModifySpA:2  onSwitchIn:2  onAfterMoveSecondary:2  onModifyCritRatio:2  [side:tailwind]:1  cond.onFieldStart:1  cond.onFieldRestart:1  cond.onFieldEnd:1  [pw:trickroom]:1  cond.onRestart:1  cond.onBasePower:1  [vol:helpinghand]:1  [vol:followme]:1  cond.onModifyMove:1  cond.onOverrideAction:1  [vol:encore]:1  [vol:ragepowder]:1  onHitSide:1  [side:wideguard]:1  onHitField:1  [side:auroraveil]:1  [side:lightscreen]:1  [side:reflect]:1  cond.onType:1  cond.onFoeDisableMove:1  cond.onFoeBeforeMove:1  [vol:imprison]:1  [st:brn]:1  [vol:spikyshield]:1  cond.onAccuracy:1  cond.onSourceModifyDamage:1  [vol:yawn]:1  [st:tox]:1  [vol:taunt]:1  [vol:partiallytrapped]:1  [vol:banefulbunker]:1  [w:sunnyday]:1  [vol:kingsshield]:1  [w:RainDance]:1  [vol:disable]:1  cond.onTryPrimaryHit:1  [vol:substitute]:1  [vol:leechseed]:1  onAfterUseItem:1  onModifySTAB:1  onAnyInvulnerability:1  onAnyAccuracy:1  onAnyBasePower:1  onChangeBoost:1  cond.onModifyAtk:1  cond.onModifySpA:1  onFoeTrapPokemon:1  onFoeMaybeTrapPokemon:1  onSourceDamagingHit:1  onAnyModifyDamage:1  onTryAddVolatile:1  onFoeTryEatItem:1  onAnyModifyBoost:1  onAnyRedirectTarget:1  onWeatherModifyDamage:1  onBeforeSwitchIn:1  onFaint:1  onDeductPP:1  onSourceModifySecondaries:1  onCriticalHit:1  onTryEatItem:1  onAfterMoveSecondarySelf:1  onAnySwitchIn:1  onAnyAfterMega:1  onAnyAfterMove:1  onUse:1

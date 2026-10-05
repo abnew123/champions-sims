@@ -1,0 +1,122 @@
+{
+ "Blastoise": {
+  "species": "Blastoise",
+  "item": "Blastoisinite",
+  "ability": "Torrent",
+  "moves": [
+   "Fake Out",
+   "Water Spout",
+   "Aura Sphere",
+   "Dark Pulse"
+  ],
+  "nature": "Quiet",
+  "evs": [
+   32,
+   0,
+   0,
+   32,
+   2,
+   0
+  ]
+ },
+ "Torkoal": {
+  "species": "Torkoal",
+  "item": "Charcoal",
+  "ability": "Drought",
+  "moves": [
+   "Eruption",
+   "Weather Ball",
+   "Earth Power",
+   "Protect"
+  ],
+  "nature": "Quiet",
+  "evs": [
+   32,
+   0,
+   0,
+   32,
+   2,
+   0
+  ]
+ },
+ "Indeedee-F": {
+  "species": "Indeedee-F",
+  "item": "Rocky Helmet",
+  "ability": "Psychic Surge",
+  "moves": [
+   "Follow Me",
+   "Helping Hand",
+   "Trick Room",
+   "Healing Wish"
+  ],
+  "nature": "Relaxed",
+  "evs": [
+   32,
+   0,
+   32,
+   0,
+   2,
+   0
+  ]
+ },
+ "Farigiraf": {
+  "species": "Farigiraf",
+  "item": "Sitrus Berry",
+  "ability": "Armor Tail",
+  "moves": [
+   "Trick Room",
+   "Protect",
+   "Psychic",
+   "Thunderbolt"
+  ],
+  "nature": "Relaxed",
+  "evs": [
+   30,
+   0,
+   21,
+   0,
+   15,
+   0
+  ]
+ },
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Chople Berry",
+  "ability": "Defiant",
+  "moves": [
+   "Iron Head",
+   "Kowtow Cleave",
+   "Low Kick",
+   "Sucker Punch"
+  ],
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ]
+ },
+ "Hatterene": {
+  "species": "Hatterene",
+  "item": "Life Orb",
+  "ability": "Magic Bounce",
+  "moves": [
+   "Trick Room",
+   "Protect",
+   "Expanding Force",
+   "Dazzling Gleam"
+  ],
+  "nature": "Quiet",
+  "evs": [
+   32,
+   0,
+   2,
+   32,
+   0,
+   0
+  ]
+ }
+}

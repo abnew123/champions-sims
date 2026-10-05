@@ -1,0 +1,22 @@
+Mega Lopunny attacking (no Intimidate on it):
+  Close Combat -> Kingambit                      162-192 of 207 (78-93%)  KO 0/57
+  Close Combat -> Incineroar                     198-202 of 202 (98-100%)  KO 49/57
+  Close Combat -> Gholdengo                      163-163 of 164 (99-99%)  KO 0/58  sash 58
+  Close Combat -> Rillaboom                      111-132 of 193 (58-68%)  KO 0/56
+  Triple Axel -> Rillaboom                        28-174 of 193 (15-90%)  KO 0/45
+  Triple Axel -> Salamence                        44-171 of 171 (26-100%)  KO 34/45
+  Close Combat -> Sneasler                        80- 94 of 169 (47-56%)  KO 0/60
+  Triple Axel -> Sneasler                         18-122 of 169 (11-72%)  KO 0/50
+Same, after Salamence/Incineroar lead Intimidate (-1, before it Mega Evolves):
+  Triple Axel -> Salamence (-1)                   28-171 of 171 (16-100%)  KO 28/45
+  Close Combat -> Kingambit (-1)                 108-128 of 207 (52-62%)  KO 0/56
+Your hits into Mega Lopunny (it Protects nothing; it uses Fake Out on the filler):
+  Salamence Double-Edge -> Mega Lopunny          142-142 of 142 (100-100%)  KO 57/57
+  Salamence Hyper Voice -> Mega Lopunny          122-142 of 142 (86-100%)  KO 12/57
+  Sneasler Close Combat -> Mega Lopunny          142-142 of 142 (100-100%)  KO 58/58
+  Sneasler Acrobatics -> Mega Lopunny             68- 82 of 142 (48-58%)  KO 0/58
+  Rillaboom Wood Hammer -> Mega Lopunny          142-142 of 142 (100-100%)  KO 57/57
+  Kingambit Iron Head -> Mega Lopunny             75- 88 of 142 (53-62%)  KO 0/60
+  Gholdengo Make It Rain -> Mega Lopunny          88-105 of 142 (62-74%)  KO 0/56
+  Incineroar Flare Blitz -> Mega Lopunny          81- 96 of 142 (57-68%)  KO 0/58
+speeds: Mega Lopunny 205 | Mega Salamence 370 | Sneasler 344 (x2 with Unburden) | HP 142

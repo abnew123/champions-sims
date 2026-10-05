@@ -1,0 +1,122 @@
+{
+ "Milotic": {
+  "species": "Milotic",
+  "item": "Sitrus Berry",
+  "ability": "Competitive",
+  "nature": "Calm",
+  "evs": [
+   32,
+   0,
+   29,
+   0,
+   5,
+   0
+  ],
+  "moves": [
+   "Coil",
+   "Hypnosis",
+   "Ice Beam",
+   "Muddy Water"
+  ]
+ },
+ "Raichu": {
+  "species": "Raichu",
+  "item": "Raichunite Y",
+  "ability": "Lightning Rod",
+  "nature": "Timid",
+  "evs": [
+   32,
+   0,
+   11,
+   0,
+   0,
+   23
+  ],
+  "moves": [
+   "Zap Cannon",
+   "Protect",
+   "Fake Out",
+   "Focus Blast"
+  ]
+ },
+ "Ceruledge": {
+  "species": "Ceruledge",
+  "item": "Grassy Seed",
+  "ability": "Flash Fire",
+  "nature": "Adamant",
+  "evs": [
+   31,
+   7,
+   24,
+   0,
+   3,
+   1
+  ],
+  "moves": [
+   "Protect",
+   "Bitter Blade",
+   "Swords Dance",
+   "Shadow Sneak"
+  ]
+ },
+ "Staraptor": {
+  "species": "Staraptor",
+  "item": "Staraptite",
+  "ability": "Intimidate",
+  "nature": "Jolly",
+  "evs": [
+   29,
+   1,
+   0,
+   0,
+   4,
+   32
+  ],
+  "moves": [
+   "Brave Bird",
+   "Tailwind",
+   "Protect",
+   "Close Combat"
+  ]
+ },
+ "Gholdengo": {
+  "species": "Gholdengo",
+  "item": "Life Orb",
+  "ability": "Good as Gold",
+  "nature": "Modest",
+  "evs": [
+   17,
+   0,
+   0,
+   17,
+   0,
+   32
+  ],
+  "moves": [
+   "Shadow Ball",
+   "Nasty Plot",
+   "Make It Rain",
+   "Protect"
+  ]
+ },
+ "Rillaboom": {
+  "species": "Rillaboom",
+  "item": "Miracle Seed",
+  "ability": "Grassy Surge",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Wood Hammer",
+   "Fake Out",
+   "High Horsepower",
+   "Grassy Glide"
+  ]
+ }
+}

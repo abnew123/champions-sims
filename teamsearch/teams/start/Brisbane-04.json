@@ -1,0 +1,122 @@
+{
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "White Herb",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Dire Claw",
+   "Close Combat",
+   "Fake Out",
+   "Protect"
+  ]
+ },
+ "Basculegion": {
+  "species": "Basculegion",
+  "item": "Choice Scarf",
+  "ability": "Adaptability",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Wave Crash",
+   "Last Respects",
+   "Flip Turn",
+   "Aqua Jet"
+  ]
+ },
+ "Floette-Eternal": {
+  "species": "Floette-Eternal",
+  "item": "Floettite",
+  "ability": "Flower Veil",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Moonblast",
+   "Dazzling Gleam",
+   "Calm Mind",
+   "Protect"
+  ]
+ },
+ "Archaludon": {
+  "species": "Archaludon",
+  "item": "Leftovers",
+  "ability": "Stamina",
+  "nature": "Modest",
+  "evs": [
+   32,
+   0,
+   1,
+   5,
+   25,
+   3
+  ],
+  "moves": [
+   "Flash Cannon",
+   "Dragon Pulse",
+   "Electro Shot",
+   "Protect"
+  ]
+ },
+ "Pelipper": {
+  "species": "Pelipper",
+  "item": "Focus Sash",
+  "ability": "Drizzle",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Weather Ball",
+   "Hurricane",
+   "Tailwind",
+   "Protect"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Sitrus Berry",
+  "ability": "Intimidate",
+  "nature": "Careful",
+  "evs": [
+   32,
+   0,
+   14,
+   0,
+   20,
+   0
+  ],
+  "moves": [
+   "Flare Blitz",
+   "Snarl",
+   "Fake Out",
+   "Parting Shot"
+  ]
+ }
+}

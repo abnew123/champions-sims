@@ -1,0 +1,122 @@
+{
+ "Sinistcha": {
+  "species": "Sinistcha",
+  "item": "Sitrus Berry",
+  "ability": "Hospitality",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Matcha Gotcha",
+   "Rage Powder",
+   "Shadow Ball",
+   "Trick Room"
+  ]
+ },
+ "Mawile": {
+  "species": "Mawile",
+  "item": "Mawilite",
+  "ability": "Intimidate",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Iron Head",
+   "Play Rough",
+   "Sucker Punch",
+   "Protect"
+  ]
+ },
+ "Sableye": {
+  "species": "Sableye",
+  "item": "Roseli Berry",
+  "ability": "Prankster",
+  "nature": "Sassy",
+  "evs": [
+   32,
+   0,
+   9,
+   0,
+   25,
+   0
+  ],
+  "moves": [
+   "Fake Out",
+   "Rain Dance",
+   "Will-O-Wisp",
+   "Light Screen"
+  ]
+ },
+ "Pelipper": {
+  "species": "Pelipper",
+  "item": "Focus Sash",
+  "ability": "Drizzle",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Hurricane",
+   "Wide Guard",
+   "Soak",
+   "Tailwind"
+  ]
+ },
+ "Swampert": {
+  "species": "Swampert",
+  "item": "Swampertite",
+  "ability": "Torrent",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Wave Crash",
+   "Earthquake",
+   "Ice Punch",
+   "Protect"
+  ]
+ },
+ "Archaludon": {
+  "species": "Archaludon",
+  "item": "Leftovers",
+  "ability": "Stamina",
+  "nature": "Modest",
+  "evs": [
+   32,
+   0,
+   1,
+   5,
+   25,
+   3
+  ],
+  "moves": [
+   "Electro Shot",
+   "Dragon Pulse",
+   "Flash Cannon",
+   "Protect"
+  ]
+ }
+}

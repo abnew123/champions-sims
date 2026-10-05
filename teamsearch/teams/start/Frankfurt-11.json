@@ -1,0 +1,122 @@
+{
+ "Raichu": {
+  "species": "Raichu",
+  "item": "Raichunite Y",
+  "ability": "Lightning Rod",
+  "nature": "Timid",
+  "evs": [
+   32,
+   0,
+   11,
+   0,
+   0,
+   23
+  ],
+  "moves": [
+   "Fake Out",
+   "Zap Cannon",
+   "Focus Blast",
+   "Protect"
+  ]
+ },
+ "Pelipper": {
+  "species": "Pelipper",
+  "item": "Life Orb",
+  "ability": "Drizzle",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Weather Ball",
+   "Hurricane",
+   "Tailwind",
+   "Protect"
+  ]
+ },
+ "Golisopod": {
+  "species": "Golisopod",
+  "item": "Golisopite",
+  "ability": "Emergency Exit",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Leech Life",
+   "Iron Head",
+   "Drill Run",
+   "Protect"
+  ]
+ },
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Focus Sash",
+  "ability": "Defiant",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Sucker Punch",
+   "Kowtow Cleave",
+   "Iron Head",
+   "Low Kick"
+  ]
+ },
+ "Archaludon": {
+  "species": "Archaludon",
+  "item": "Leftovers",
+  "ability": "Stamina",
+  "nature": "Modest",
+  "evs": [
+   32,
+   0,
+   1,
+   5,
+   25,
+   3
+  ],
+  "moves": [
+   "Electro Shot",
+   "Dragon Pulse",
+   "Snarl",
+   "Protect"
+  ]
+ },
+ "Farigiraf": {
+  "species": "Farigiraf",
+  "item": "Sitrus Berry",
+  "ability": "Armor Tail",
+  "nature": "Quiet",
+  "evs": [
+   32,
+   0,
+   0,
+   32,
+   2,
+   0
+  ],
+  "moves": [
+   "Twin Beam",
+   "Helping Hand",
+   "Trick Room",
+   "Protect"
+  ]
+ }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "pssim",
+  "private": true,
+  "description": "Turn-one lead sims for the Trick Room Six sheet (Showdown engine, Champions mod)",
+  "dependencies": {
+    "pokemon-showdown": "0.11.11"
+  }
+}

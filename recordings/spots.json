@@ -1,0 +1,436 @@
+[
+ {
+  "name": "G2 T1",
+  "note": "vs a Sand team. Zoroark-Hisui is disguised as Kleavor; Excadrill holds Focus Sash.",
+  "mine": [
+   {
+    "set": "Farigiraf"
+   },
+   {
+    "set": "Blastoise"
+   },
+   {
+    "set": "Incineroar"
+   },
+   {
+    "set": "Kingambit"
+   }
+  ],
+  "theirs": [
+   {
+    "species": "Zoroark-Hisui",
+    "item": "Life Orb",
+    "moves": [
+     "Hyper Voice",
+     "Grass Knot",
+     "Shadow Ball",
+     "Bitter Malice"
+    ]
+   },
+   {
+    "species": "Excadrill",
+    "moves": [
+     "Megahorn",
+     "High Horsepower",
+     "Protect",
+     "Rock Slide"
+    ]
+   },
+   {
+    "species": "Tyranitar",
+    "from": "Tyranitar-Mega"
+   },
+   {
+    "species": "Kleavor"
+   }
+  ],
+  "actual": [
+   {
+    "move": "Trick Room"
+   },
+   {
+    "move": "Water Spout",
+    "mega": true
+   }
+  ],
+  "their_actual": [
+   {
+    "move": "Hyper Voice"
+   },
+   {
+    "move": "Megahorn",
+    "target": "Farigiraf"
+   }
+  ]
+ },
+ {
+  "name": "G2 T1 (as seen)",
+  "note": "What the player saw: a real Kleavor + Excadrill lead, standard Smogon sets, Tyranitar + Garchomp behind.",
+  "mine": [
+   {
+    "set": "Farigiraf"
+   },
+   {
+    "set": "Blastoise"
+   },
+   {
+    "set": "Incineroar"
+   },
+   {
+    "set": "Kingambit"
+   }
+  ],
+  "theirs": [
+   {
+    "species": "Kleavor"
+   },
+   {
+    "species": "Excadrill"
+   },
+   {
+    "species": "Tyranitar",
+    "from": "Tyranitar-Mega"
+   },
+   {
+    "species": "Garchomp"
+   }
+  ],
+  "actual": [
+   {
+    "move": "Trick Room"
+   },
+   {
+    "move": "Water Spout",
+    "mega": true
+   }
+  ]
+ },
+ {
+  "name": "G2 T1 (Zoroark as Excadrill)",
+  "note": "What-if: the lead shows Kleavor + Excadrill, but the 'Excadrill' is Zoroark-Hisui (so the real Excadrill is their last Pokemon). Zoroark and Excadrill use the sets revealed in the real game.",
+  "mine": [
+   {
+    "set": "Farigiraf"
+   },
+   {
+    "set": "Blastoise"
+   },
+   {
+    "set": "Incineroar"
+   },
+   {
+    "set": "Kingambit"
+   }
+  ],
+  "theirs": [
+   {
+    "species": "Kleavor"
+   },
+   {
+    "species": "Zoroark-Hisui",
+    "item": "Life Orb",
+    "moves": [
+     "Hyper Voice",
+     "Grass Knot",
+     "Shadow Ball",
+     "Bitter Malice"
+    ]
+   },
+   {
+    "species": "Tyranitar",
+    "from": "Tyranitar-Mega"
+   },
+   {
+    "species": "Excadrill",
+    "moves": [
+     "Megahorn",
+     "High Horsepower",
+     "Protect",
+     "Rock Slide"
+    ]
+   }
+  ],
+  "actual": [
+   {
+    "move": "Trick Room"
+   },
+   {
+    "move": "Water Spout",
+    "mega": true
+   }
+  ]
+ },
+ {
+  "name": "G3 T1",
+  "note": "Their Psychic Terrain blocks Fake Out; Follow Me redirects single-target moves.",
+  "mine": [
+   {
+    "set": "Incineroar"
+   },
+   {
+    "set": "Blastoise"
+   },
+   {
+    "set": "Indeedee-F"
+   },
+   {
+    "set": "Kingambit"
+   }
+  ],
+  "theirs": [
+   {
+    "species": "Indeedee-F"
+   },
+   {
+    "species": "Kommo-o"
+   },
+   {
+    "species": "Metagross",
+    "from": "Metagross-Mega",
+    "moves": [
+     "Psychic Fangs",
+     "Steel Roller",
+     "Protect",
+     "Iron Head"
+    ]
+   },
+   {
+    "species": "Incineroar"
+   }
+  ],
+  "actual": [
+   {
+    "move": "Throat Chop",
+    "target": "Indeedee-F"
+   },
+   {
+    "move": "Aura Sphere",
+    "target": "Kommo-o",
+    "mega": true
+   }
+  ],
+  "their_actual": [
+   {
+    "move": "Follow Me"
+   },
+   {
+    "move": "Clangorous Soul"
+   }
+  ]
+ },
+ {
+  "name": "G3 T5",
+  "note": "Metagross Protected last turn; Kommo-o is +1 SpA/SpD/Spe (Attack and Defense back to 0).",
+  "mine": [
+   {
+    "set": "Blastoise",
+    "mega": true,
+    "hp": 59,
+    "moved": true
+   },
+   {
+    "set": "Kingambit",
+    "hp": 111,
+    "moved": true
+   },
+   {
+    "set": "Incineroar",
+    "fainted": true
+   },
+   {
+    "set": "Indeedee-F",
+    "fainted": true
+   }
+  ],
+  "theirs": [
+   {
+    "species": "Kommo-o",
+    "hpPct": 73,
+    "boosts": {
+     "spa": 1,
+     "spd": 1,
+     "spe": 1
+    },
+    "moved": true
+   },
+   {
+    "species": "Metagross",
+    "from": "Metagross-Mega",
+    "moves": [
+     "Psychic Fangs",
+     "Steel Roller",
+     "Protect",
+     "Iron Head"
+    ],
+    "mega": true,
+    "hpPct": 82,
+    "moved": true,
+    "volatiles": [
+     "stall"
+    ]
+   },
+   {
+    "species": "Incineroar"
+   },
+   {
+    "species": "Indeedee-F",
+    "fainted": true
+   }
+  ],
+  "field": {
+   "clearTerrain": true
+  },
+  "actual": [
+   {
+    "move": "Dark Pulse",
+    "target": "Metagross"
+   },
+   {
+    "move": "Sucker Punch",
+    "target": "Metagross"
+   }
+  ],
+  "their_actual": [
+   {
+    "move": "Aura Sphere",
+    "target": "Kingambit"
+   },
+   {
+    "move": "Protect"
+   }
+  ]
+ },
+ {
+  "name": "G5 T1",
+  "note": "Batch 2. Their Psychic Terrain blocks Fake Out; Follow Me redirects single-target moves. Their 4th Pokemon is unknown (Basculegion assumed).",
+  "mine": [
+   {
+    "set": "Incineroar"
+   },
+   {
+    "set": "Blastoise"
+   },
+   {
+    "set": "Torkoal"
+   },
+   {
+    "set": "Kingambit"
+   }
+  ],
+  "theirs": [
+   {
+    "species": "Gardevoir",
+    "from": "Gardevoir-Mega",
+    "ability": "Trace"
+   },
+   {
+    "species": "Indeedee-F"
+   },
+   {
+    "species": "Archaludon",
+    "moves": [
+     "Thunderbolt",
+     "Aura Sphere",
+     "Flash Cannon",
+     "Protect"
+    ]
+   },
+   {
+    "species": "Basculegion"
+   }
+  ],
+  "actual": [
+   {
+    "move": "Flare Blitz",
+    "target": "Gardevoir"
+   },
+   {
+    "move": "Dark Pulse",
+    "target": "Indeedee-F",
+    "mega": true
+   }
+  ],
+  "their_actual": [
+   {
+    "move": "Hyper Voice",
+    "mega": true
+   },
+   {
+    "move": "Follow Me"
+   }
+  ]
+ },
+ {
+  "name": "G5 T2",
+  "note": "Psychic Terrain has 4 turns left; Incineroar's White Herb is used; Blastoise is at -1 Attack.",
+  "mine": [
+   {
+    "set": "Incineroar",
+    "hp": 78,
+    "moved": true
+   },
+   {
+    "set": "Blastoise",
+    "mega": true,
+    "hp": 105,
+    "moved": true
+   },
+   {
+    "set": "Torkoal"
+   },
+   {
+    "set": "Kingambit"
+   }
+  ],
+  "theirs": [
+   {
+    "species": "Gardevoir",
+    "from": "Gardevoir-Mega",
+    "ability": "Trace",
+    "mega": true,
+    "moved": true
+   },
+   {
+    "species": "Archaludon",
+    "moves": [
+     "Thunderbolt",
+     "Aura Sphere",
+     "Flash Cannon",
+     "Protect"
+    ]
+   },
+   {
+    "species": "Indeedee-F",
+    "fainted": true
+   },
+   {
+    "species": "Basculegion"
+   }
+  ],
+  "field": {
+   "terrain": [
+    "psychicterrain",
+    4
+   ]
+  },
+  "actual": [
+   {
+    "move": "Throat Chop",
+    "target": "Gardevoir"
+   },
+   {
+    "move": "Aura Sphere",
+    "target": "Archaludon"
+   }
+  ],
+  "their_actual": [
+   {
+    "move": "Hyper Voice"
+   },
+   {
+    "move": "Thunderbolt",
+    "target": "Blastoise"
+   }
+  ]
+ }
+]

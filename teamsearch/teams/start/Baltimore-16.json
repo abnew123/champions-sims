@@ -1,0 +1,122 @@
+{
+ "Dragapult": {
+  "species": "Dragapult",
+  "item": "Life Orb",
+  "ability": "Infiltrator",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Draco Meteor",
+   "Shadow Ball",
+   "Will-O-Wisp",
+   "Protect"
+  ]
+ },
+ "Arcanine-Hisui": {
+  "species": "Arcanine-Hisui",
+  "item": "Focus Sash",
+  "ability": "Rock Head",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Rock Slide",
+   "Flare Blitz",
+   "Head Smash",
+   "Protect"
+  ]
+ },
+ "Altaria": {
+  "species": "Altaria",
+  "item": "Haban Berry",
+  "ability": "Cloud Nine",
+  "nature": "Timid",
+  "evs": [
+   32,
+   0,
+   5,
+   0,
+   0,
+   29
+  ],
+  "moves": [
+   "Ice Beam",
+   "Tailwind",
+   "Will-O-Wisp",
+   "Protect"
+  ]
+ },
+ "Metagross": {
+  "species": "Metagross",
+  "item": "Metagrossite",
+  "ability": "Clear Body",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Psychic Fangs",
+   "Body Press",
+   "Psych Up",
+   "Protect"
+  ]
+ },
+ "Indeedee-F": {
+  "species": "Indeedee-F",
+  "item": "Rocky Helmet",
+  "ability": "Psychic Surge",
+  "nature": "Bold",
+  "evs": [
+   32,
+   0,
+   32,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Psychic",
+   "Follow Me",
+   "Helping Hand",
+   "Protect"
+  ]
+ },
+ "Milotic": {
+  "species": "Milotic",
+  "item": "Psychic Seed",
+  "ability": "Competitive",
+  "nature": "Calm",
+  "evs": [
+   32,
+   0,
+   29,
+   0,
+   5,
+   0
+  ],
+  "moves": [
+   "Muddy Water",
+   "Coil",
+   "Hypnosis",
+   "Recover"
+  ]
+ }
+}

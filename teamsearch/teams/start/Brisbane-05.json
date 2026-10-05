@@ -1,0 +1,122 @@
+{
+ "Rillaboom": {
+  "species": "Rillaboom",
+  "item": "Miracle Seed",
+  "ability": "Grassy Surge",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Wood Hammer",
+   "Grassy Glide",
+   "High Horsepower",
+   "Fake Out"
+  ]
+ },
+ "Gengar": {
+  "species": "Gengar",
+  "item": "Gengarite",
+  "ability": "Cursed Body",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Sludge Bomb",
+   "Substitute",
+   "Shadow Ball"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Sitrus Berry",
+  "ability": "Intimidate",
+  "nature": "Sassy",
+  "evs": [
+   31,
+   0,
+   15,
+   0,
+   20,
+   0
+  ],
+  "moves": [
+   "Flare Blitz",
+   "Darkest Lariat",
+   "Parting Shot",
+   "Fake Out"
+  ]
+ },
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Life Orb",
+  "ability": "Defiant",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Kowtow Cleave",
+   "Sucker Punch",
+   "Swords Dance",
+   "Protect"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "Grassy Seed",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Dire Claw",
+   "Rock Slide",
+   "Protect",
+   "Close Combat"
+  ]
+ },
+ "Floette-Eternal": {
+  "species": "Floette-Eternal",
+  "item": "Floettite",
+  "ability": "Flower Veil",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Calm Mind",
+   "Draining Kiss",
+   "Dazzling Gleam",
+   "Protect"
+  ]
+ }
+}

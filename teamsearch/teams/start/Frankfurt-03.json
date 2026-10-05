@@ -1,0 +1,122 @@
+{
+ "Charizard": {
+  "species": "Charizard",
+  "item": "Charizardite Y",
+  "ability": "Blaze",
+  "nature": "Modest",
+  "evs": [
+   28,
+   0,
+   13,
+   1,
+   0,
+   24
+  ],
+  "moves": [
+   "Heat Wave",
+   "Weather Ball",
+   "Ancient Power",
+   "Protect"
+  ]
+ },
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Chople Berry",
+  "ability": "Defiant",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Kowtow Cleave",
+   "Sucker Punch",
+   "Iron Head",
+   "Protect"
+  ]
+ },
+ "Meowstic-F": {
+  "species": "Meowstic-F",
+  "item": "Meowsticite",
+  "ability": "Competitive",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Expanding Force",
+   "Thunderbolt",
+   "Fake Out",
+   "Protect"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "Psychic Seed",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Close Combat",
+   "Dire Claw",
+   "Rock Slide",
+   "Protect"
+  ]
+ },
+ "Indeedee": {
+  "species": "Indeedee",
+  "item": "Focus Sash",
+  "ability": "Psychic Surge",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Expanding Force",
+   "Energy Ball",
+   "Imprison",
+   "Trick Room"
+  ]
+ },
+ "Kommo-o": {
+  "species": "Kommo-o",
+  "item": "Leftovers",
+  "ability": "Soundproof",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Clanging Scales",
+   "Aura Sphere",
+   "Clangorous Soul",
+   "Protect"
+  ]
+ }
+}

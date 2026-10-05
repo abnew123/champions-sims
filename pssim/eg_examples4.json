@@ -1,0 +1,2835 @@
+[
+ {
+  "tab": "Tailwind",
+  "lead": "Incineroar + Farigiraf",
+  "tr": 100,
+  "mine": [
+   "Torkoal",
+   "Blastoise"
+  ],
+  "theirs": [
+   "Arcanine-Hisui",
+   "Staraptor"
+  ],
+  "w": 0.0411,
+  "K": 3,
+  "v": 1,
+  "turns": [
+   {
+    "turn": 1,
+    "my": [
+     [
+      "Torkoal: Eruption + Blastoise: Water Spout (mega)",
+      0.42
+     ],
+     [
+      "Torkoal: Eruption + Blastoise: Aura Sphere -> Arcanine (mega)",
+      0.42
+     ],
+     [
+      "Torkoal: Eruption + Blastoise: Fake Out -> Arcanine (mega)",
+      0.15
+     ]
+    ],
+    "th": [
+     [
+      "Arcanine: Protect + Staraptor: Protect (mega)",
+      0.97
+     ]
+    ],
+    "myPick": "Torkoal: Eruption + Blastoise: Water Spout (mega)",
+    "thPick": "Arcanine: Protect + Staraptor: Protect (mega)",
+    "value": 0.914,
+    "size": [
+     35,
+     42
+    ]
+   },
+   {
+    "turn": 2,
+    "my": [
+     [
+      "Torkoal: Eruption + Blastoise: Aura Sphere -> Arcanine",
+      0.89
+     ],
+     [
+      "Torkoal: Eruption + Blastoise: Water Spout",
+      0.09
+     ]
+    ],
+    "th": [
+     [
+      "Arcanine: Extreme Speed -> Torkoal + Staraptor: Close Combat -> Blastoise",
+      0.32
+     ],
+     [
+      "Arcanine: Extreme Speed -> Torkoal + Staraptor: Protect",
+      0.26
+     ],
+     [
+      "Arcanine: Protect + Staraptor: Protect",
+      0.14
+     ],
+     [
+      "Arcanine: Extreme Speed -> Torkoal + Staraptor: Close Combat -> Torkoal",
+      0.12
+     ]
+    ],
+    "myPick": "Torkoal: Eruption + Blastoise: Aura Sphere -> Arcanine",
+    "thPick": "Arcanine: Extreme Speed -> Torkoal + Staraptor: Close Combat -> Blastoise",
+    "value": 0.993,
+    "size": [
+     25,
+     42
+    ]
+   },
+   {
+    "turn": 3,
+    "my": [
+     [
+      "Torkoal: Eruption + Blastoise: Water Spout",
+      0.17
+     ],
+     [
+      "Torkoal: Eruption + Blastoise: Aura Sphere -> Staraptor",
+      0.17
+     ],
+     [
+      "Torkoal: Eruption + Blastoise: Dark Pulse -> Staraptor",
+      0.17
+     ],
+     [
+      "Torkoal: Weather Ball -> Staraptor + Blastoise: Water Spout",
+      0.17
+     ]
+    ],
+    "th": [
+     [
+      "- + Staraptor: Protect",
+      1
+     ]
+    ],
+    "myPick": "Torkoal: Eruption + Blastoise: Aura Sphere -> Staraptor",
+    "thPick": "- + Staraptor: Protect",
+    "value": 0.927,
+    "size": [
+     9,
+     6
+    ]
+   },
+   {
+    "turn": 4,
+    "my": [
+     [
+      "Torkoal: Eruption + Blastoise: Water Spout",
+      0.33
+     ],
+     [
+      "Torkoal: Weather Ball -> Staraptor + Blastoise: Aura Sphere -> Staraptor",
+      0.33
+     ],
+     [
+      "Torkoal: Weather Ball -> Staraptor + Blastoise: Dark Pulse -> Staraptor",
+      0.33
+     ]
+    ],
+    "th": [
+     [
+      "- + Staraptor: Protect",
+      0.46
+     ],
+     [
+      "- + Staraptor: Close Combat -> Blastoise",
+      0.3
+     ],
+     [
+      "- + Staraptor: Brave Bird -> Blastoise",
+      0.24
+     ]
+    ],
+    "myPick": "Torkoal: Weather Ball -> Staraptor + Blastoise: Aura Sphere -> Staraptor",
+    "thPick": "- + Staraptor: Protect",
+    "value": 1,
+    "size": [
+     9,
+     6
+    ]
+   }
+  ],
+  "events": [
+   [
+    "your Torkoal is out (Torkoal)",
+    "your Blastoise is out (Blastoise)",
+    "their Arcanine is out (Arcanine-Hisui)",
+    "their Staraptor is out (Staraptor)",
+    "&nbsp;&nbsp;your Torkoal atk &minus;1",
+    "&nbsp;&nbsp;your Blastoise atk &minus;1",
+    "sun starts (Drought)"
+   ],
+   [
+    "Trick Room is up",
+    "your Blastoise Mega Evolves",
+    "their Staraptor Mega Evolves",
+    "<b>their Arcanine</b> uses <b>Protect</b>",
+    "<b>their Staraptor</b> uses <b>Protect</b>",
+    "<b>your Torkoal</b> uses <b>Eruption</b>",
+    "&nbsp;&nbsp;their Arcanine protects itself",
+    "&nbsp;&nbsp;their Staraptor protects itself",
+    "<b>your Blastoise</b> uses <b>Water Spout</b>",
+    "&nbsp;&nbsp;their Arcanine protects itself",
+    "&nbsp;&nbsp;their Staraptor protects itself"
+   ],
+   [
+    "<b>their Arcanine</b> uses <b>Extreme Speed</b> on your Torkoal",
+    "&nbsp;&nbsp;your Torkoal &minus;18% &rarr; 82%",
+    "<b>your Torkoal</b> uses <b>Eruption</b>",
+    "&nbsp;&nbsp;resisted by their Arcanine",
+    "&nbsp;&nbsp;their Arcanine &minus;22% &rarr; 78%",
+    "&nbsp;&nbsp;their Staraptor &minus;88% &rarr; 12%",
+    "<b>your Blastoise</b> uses <b>Aura Sphere</b> on their Arcanine",
+    "&nbsp;&nbsp;super effective on their Arcanine",
+    "&nbsp;&nbsp;their Arcanine &minus;78% &rarr; 0%",
+    "&nbsp;&nbsp;<b>their Arcanine faints</b>",
+    "<b>their Staraptor</b> uses <b>Close Combat</b> on your Blastoise",
+    "&nbsp;&nbsp;critical hit on your Blastoise",
+    "&nbsp;&nbsp;your Blastoise &minus;82% &rarr; 18%",
+    "&nbsp;&nbsp;their Staraptor def +1",
+    "&nbsp;&nbsp;their Staraptor spd +1"
+   ],
+   [
+    "<b>their Staraptor</b> uses <b>Protect</b>",
+    "<b>your Torkoal</b> uses <b>Eruption</b> on their Staraptor",
+    "&nbsp;&nbsp;their Staraptor protects itself",
+    "<b>your Blastoise</b> uses <b>Aura Sphere</b> on their Staraptor",
+    "&nbsp;&nbsp;their Staraptor protects itself",
+    "<b>Trick Room ends</b>"
+   ],
+   [
+    "<b>their Staraptor</b> uses <b>Protect</b> (fails)",
+    "&nbsp;&nbsp;but it fails (their Staraptor)",
+    "<b>your Blastoise</b> uses <b>Aura Sphere</b> on their Staraptor",
+    "&nbsp;&nbsp;resisted by their Staraptor",
+    "&nbsp;&nbsp;their Staraptor &minus;12% &rarr; 0%",
+    "&nbsp;&nbsp;<b>their Staraptor faints</b>",
+    "<b>You win</b>"
+   ]
+  ],
+  "sets": [
+   "Torkoal @ Charcoal · Drought · Quiet · Eruption / Weather Ball / Earth Power / Protect",
+   "Blastoise @ Blastoisinite · Torrent · Quiet · Fake Out / Water Spout / Aura Sphere / Dark Pulse",
+   "Arcanine-Hisui @ focussash · rockhead · Jolly · extremespeed / flareblitz / headsmash / protect",
+   "Staraptor @ staraptite · intimidate · Jolly · closecombat / bravebird / tailwind / protect"
+  ]
+ },
+ {
+  "tab": "Indeedee TR",
+  "lead": "Incineroar + Blastoise",
+  "tr": 0,
+  "mine": [
+   "Farigiraf",
+   "Torkoal"
+  ],
+  "theirs": [
+   "Gardevoir",
+   "Indeedee-F"
+  ],
+  "w": 0.0826,
+  "K": 0,
+  "v": 0,
+  "turns": [
+   {
+    "turn": 1,
+    "my": [
+     [
+      "Farigiraf: Trick Room + Torkoal: Protect",
+      0.53
+     ],
+     [
+      "Farigiraf: Thunderbolt -> Gardevoir + Torkoal: Protect",
+      0.24
+     ],
+     [
+      "Farigiraf: Trick Room + Torkoal: Eruption",
+      0.07
+     ],
+     [
+      "Farigiraf: Psychic -> Gardevoir + Torkoal: Protect",
+      0.07
+     ]
+    ],
+    "th": [
+     [
+      "Gardevoir: Hyper Voice (mega) + Indeedee: Helping Hand -> ally",
+      0.31
+     ],
+     [
+      "Gardevoir: Expanding Force -> Farigiraf (mega) + Indeedee: Trick Room",
+      0.15
+     ],
+     [
+      "Gardevoir: Expanding Force -> Torkoal (mega) + Indeedee: Trick Room",
+      0.15
+     ],
+     [
+      "Gardevoir: Expanding Force -> Farigiraf (mega) + Indeedee: Follow Me",
+      0.12
+     ]
+    ],
+    "myPick": "Farigiraf: Trick Room + Torkoal: Protect",
+    "thPick": "Gardevoir: Expanding Force -> Torkoal (mega) + Indeedee: Trick Room",
+    "value": 0.226,
+    "size": [
+     36,
+     30
+    ]
+   },
+   {
+    "turn": 2,
+    "my": [
+     [
+      "Farigiraf: Thunderbolt -> Gardevoir + Torkoal: Eruption",
+      0.2
+     ],
+     [
+      "Farigiraf: Trick Room + Torkoal: Weather Ball -> Gardevoir",
+      0.2
+     ],
+     [
+      "Farigiraf: Trick Room + Torkoal: Weather Ball -> Indeedee",
+      0.19
+     ],
+     [
+      "Farigiraf: Thunderbolt -> Indeedee + Torkoal: Eruption",
+      0.16
+     ]
+    ],
+    "th": [
+     [
+      "Gardevoir: Expanding Force -> Farigiraf + Indeedee: Helping Hand -> ally",
+      0.37
+     ],
+     [
+      "Gardevoir: Expanding Force -> Torkoal + Indeedee: Helping Hand -> ally",
+      0.37
+     ],
+     [
+      "Gardevoir: Expanding Force -> Farigiraf + Indeedee: Psychic -> Torkoal",
+      0.12
+     ],
+     [
+      "Gardevoir: Expanding Force -> Torkoal + Indeedee: Psychic -> Torkoal",
+      0.12
+     ]
+    ],
+    "myPick": "Farigiraf: Thunderbolt -> Indeedee + Torkoal: Eruption",
+    "thPick": "Gardevoir: Expanding Force -> Farigiraf + Indeedee: Psychic -> Torkoal",
+    "value": 0.006,
+    "size": [
+     36,
+     30
+    ]
+   },
+   {
+    "turn": 3,
+    "my": [
+     [
+      "Farigiraf: Protect + -",
+      1
+     ]
+    ],
+    "th": [
+     [
+      "Gardevoir: Expanding Force -> Farigiraf + Indeedee: Follow Me",
+      0.11
+     ],
+     [
+      "Gardevoir: Expanding Force -> Farigiraf + Indeedee: Helping Hand -> ally",
+      0.11
+     ],
+     [
+      "Gardevoir: Expanding Force -> Farigiraf + Indeedee: Psychic -> Farigiraf",
+      0.11
+     ],
+     [
+      "Gardevoir: Hyper Voice + Indeedee: Follow Me",
+      0.11
+     ]
+    ],
+    "myPick": "Farigiraf: Protect + -",
+    "thPick": "Gardevoir: Expanding Force -> Farigiraf + Indeedee: Follow Me",
+    "value": 0.002,
+    "size": [
+     6,
+     16
+    ]
+   },
+   {
+    "turn": 4,
+    "my": [
+     [
+      "Farigiraf: Protect + -",
+      0.91
+     ],
+     [
+      "Farigiraf: Thunderbolt -> Indeedee + -",
+      0.08
+     ]
+    ],
+    "th": [
+     [
+      "Gardevoir: Expanding Force -> Farigiraf + Indeedee: Follow Me",
+      0.11
+     ],
+     [
+      "Gardevoir: Expanding Force -> Farigiraf + Indeedee: Helping Hand -> ally",
+      0.11
+     ],
+     [
+      "Gardevoir: Expanding Force -> Farigiraf + Indeedee: Psychic -> Farigiraf",
+      0.11
+     ],
+     [
+      "Gardevoir: Expanding Force -> Farigiraf + Indeedee: Trick Room",
+      0.11
+     ]
+    ],
+    "myPick": "Farigiraf: Protect + -",
+    "thPick": "Gardevoir: Thunderbolt -> Farigiraf + Indeedee: Trick Room",
+    "value": 0,
+    "size": [
+     6,
+     16
+    ]
+   }
+  ],
+  "events": [
+   [
+    "your Farigiraf is out (Farigiraf)",
+    "your Torkoal is out (Torkoal)",
+    "their Gardevoir is out (Gardevoir)",
+    "their Indeedee is out (Indeedee-F)",
+    "Trick Room is up",
+    "sun starts (Drought)"
+   ],
+   [
+    "their Gardevoir Mega Evolves",
+    "<b>your Torkoal</b> uses <b>Protect</b>",
+    "<b>their Gardevoir</b> uses <b>Expanding Force</b>",
+    "&nbsp;&nbsp;your Torkoal protects itself",
+    "&nbsp;&nbsp;resisted by your Farigiraf",
+    "&nbsp;&nbsp;your Farigiraf &minus;37% &rarr; 63%",
+    "<b>their Indeedee</b> uses <b>Trick Room</b>",
+    "Trick Room is up",
+    "<b>your Farigiraf</b> uses <b>Trick Room</b>",
+    "<b>Trick Room ends</b>"
+   ],
+   [
+    "<b>their Gardevoir</b> uses <b>Expanding Force</b>",
+    "&nbsp;&nbsp;resisted by your Farigiraf",
+    "&nbsp;&nbsp;your Farigiraf &minus;35% &rarr; 28%",
+    "&nbsp;&nbsp;your Torkoal &minus;100% &rarr; 0%",
+    "&nbsp;&nbsp;your Farigiraf uses up its Sitrus Berry",
+    "&nbsp;&nbsp;your Farigiraf +25% &rarr; 53% (Sitrus Berry)",
+    "&nbsp;&nbsp;<b>your Torkoal faints</b>",
+    "<b>their Indeedee</b> uses <b>Psychic</b> on your Farigiraf",
+    "&nbsp;&nbsp;resisted by your Farigiraf",
+    "&nbsp;&nbsp;your Farigiraf &minus;17% &rarr; 36%",
+    "&nbsp;&nbsp;your Farigiraf spd &minus;1",
+    "<b>your Farigiraf</b> uses <b>Thunderbolt</b> on their Indeedee",
+    "&nbsp;&nbsp;their Indeedee &minus;21% &rarr; 79%"
+   ],
+   [
+    "<b>your Farigiraf</b> uses <b>Protect</b>",
+    "<b>their Indeedee</b> uses <b>Follow Me</b>",
+    "<b>their Gardevoir</b> uses <b>Expanding Force</b> on your Farigiraf",
+    "&nbsp;&nbsp;your Farigiraf protects itself"
+   ],
+   [
+    "<b>your Farigiraf</b> uses <b>Protect</b> (fails)",
+    "&nbsp;&nbsp;but it fails (your Farigiraf)",
+    "<b>their Gardevoir</b> uses <b>Thunderbolt</b> on your Farigiraf",
+    "&nbsp;&nbsp;your Farigiraf &minus;36% &rarr; 0%",
+    "&nbsp;&nbsp;<b>your Farigiraf faints</b>",
+    "<b>They win</b>"
+   ]
+  ],
+  "sets": [
+   "Farigiraf @ Sitrus Berry · Armor Tail · Relaxed · Trick Room / Protect / Psychic / Thunderbolt",
+   "Torkoal @ Charcoal · Drought · Quiet · Eruption / Weather Ball / Earth Power / Protect",
+   "Gardevoir @ gardevoirite · trace · Modest · expandingforce / hypervoice / protect / thunderbolt",
+   "Indeedee-F @ rockyhelmet · psychicsurge · Bold · followme / helpinghand / psychic / trickroom"
+  ]
+ },
+ {
+  "tab": "Sun",
+  "lead": "Incineroar + Blastoise",
+  "tr": 0,
+  "mine": [
+   "Torkoal",
+   "Kingambit"
+  ],
+  "theirs": [
+   "Farigiraf",
+   "Sylveon"
+  ],
+  "w": 0.0631,
+  "K": 0,
+  "v": 0,
+  "turns": [
+   {
+    "turn": 1,
+    "my": [
+     [
+      "Torkoal: Eruption + Kingambit: Iron Head -> Sylveon",
+      0.3
+     ],
+     [
+      "Torkoal: Eruption + Kingambit: Kowtow Cleave -> Farigiraf",
+      0.24
+     ],
+     [
+      "Torkoal: Eruption + Kingambit: Iron Head -> Farigiraf",
+      0.13
+     ],
+     [
+      "Torkoal: Eruption + Kingambit: Kowtow Cleave -> Sylveon",
+      0.13
+     ]
+    ],
+    "th": [
+     [
+      "Farigiraf: Helping Hand -> ally + Sylveon: Hyper Beam -> Kingambit",
+      1
+     ]
+    ],
+    "myPick": "Torkoal: Eruption + Kingambit: Iron Head -> Sylveon",
+    "thPick": "Farigiraf: Helping Hand -> ally + Sylveon: Hyper Beam -> Kingambit",
+    "value": 0.598,
+    "size": [
+     48,
+     24
+    ]
+   },
+   {
+    "turn": 2,
+    "my": [
+     [
+      "Torkoal: Weather Ball -> Sylveon + -",
+      1
+     ]
+    ],
+    "th": [
+     [
+      "Farigiraf: Psychic -> Torkoal + Sylveon: Detect",
+      1
+     ]
+    ],
+    "myPick": "Torkoal: Weather Ball -> Sylveon + -",
+    "thPick": "Farigiraf: Psychic -> Torkoal + Sylveon: Detect",
+    "value": 0.601,
+    "size": [
+     6,
+     4
+    ]
+   },
+   {
+    "turn": 3,
+    "my": [
+     [
+      "Torkoal: Weather Ball -> Farigiraf + -",
+      1
+     ]
+    ],
+    "th": [
+     [
+      "Farigiraf: Psychic -> Torkoal + -",
+      1
+     ]
+    ],
+    "myPick": "Torkoal: Weather Ball -> Farigiraf + -",
+    "thPick": "Farigiraf: Psychic -> Torkoal + -",
+    "value": 0.5,
+    "size": [
+     4,
+     3
+    ]
+   }
+  ],
+  "events": [
+   [
+    "your Torkoal is out (Torkoal)",
+    "your Kingambit is out (Kingambit)",
+    "their Farigiraf is out (Farigiraf)",
+    "their Sylveon is out (Sylveon)",
+    "sun starts (Drought)"
+   ],
+   [
+    "<b>their Farigiraf</b> uses <b>Helping Hand</b> on their Sylveon",
+    "<b>their Sylveon</b> uses <b>Hyper Beam</b> on your Kingambit",
+    "&nbsp;&nbsp;your Kingambit &minus;100% &rarr; 0%",
+    "&nbsp;&nbsp;<b>your Kingambit faints</b>",
+    "<b>your Torkoal</b> uses <b>Eruption</b>",
+    "&nbsp;&nbsp;their Farigiraf &minus;74% &rarr; 26%",
+    "&nbsp;&nbsp;their Sylveon &minus;61% &rarr; 39%",
+    "&nbsp;&nbsp;their Farigiraf uses up its Sitrus Berry",
+    "&nbsp;&nbsp;their Farigiraf +25% &rarr; 50% (Sitrus Berry)"
+   ],
+   [
+    "<b>their Farigiraf</b> uses <b>Psychic</b> on your Torkoal",
+    "&nbsp;&nbsp;your Torkoal &minus;51% &rarr; 49%",
+    "&nbsp;&nbsp;their Sylveon can&rsquo;t move (recharge)",
+    "<b>your Torkoal</b> uses <b>Weather Ball</b> on their Sylveon",
+    "&nbsp;&nbsp;their Sylveon &minus;39% &rarr; 0%",
+    "&nbsp;&nbsp;<b>their Sylveon faints</b>"
+   ],
+   [
+    "<b>their Farigiraf</b> uses <b>Psychic</b> on your Torkoal",
+    "&nbsp;&nbsp;your Torkoal &minus;49% &rarr; 0%",
+    "&nbsp;&nbsp;<b>your Torkoal faints</b>",
+    "<b>They win</b>"
+   ]
+  ],
+  "sets": [
+   "Torkoal @ Charcoal · Drought · Quiet · Eruption / Weather Ball / Earth Power / Protect",
+   "Kingambit @ Chople Berry · Defiant · Adamant · Iron Head / Kowtow Cleave / Low Kick / Sucker Punch",
+   "Farigiraf @ sitrusberry · armortail · Modest · helpinghand / protect / psychic / trickroom",
+   "Sylveon @ fairyfeather · pixilate · Modest · detect / hyperbeam / hypervoice / quickattack"
+  ]
+ },
+ {
+  "tab": "Rain",
+  "lead": "Incineroar + Torkoal",
+  "tr": 0,
+  "mine": [
+   "Indeedee-F",
+   "Blastoise"
+  ],
+  "theirs": [
+   "Archaludon",
+   "Pelipper"
+  ],
+  "w": 0.0862,
+  "K": 0,
+  "v": 1,
+  "turns": [
+   {
+    "turn": 1,
+    "my": [
+     [
+      "Indeedee: Follow Me + Blastoise: Aura Sphere -> Archaludon (mega)",
+      0.45
+     ],
+     [
+      "Indeedee: Follow Me + Blastoise: Water Spout (mega)",
+      0.32
+     ],
+     [
+      "Indeedee: Follow Me + Blastoise: Dark Pulse -> Pelipper (mega)",
+      0.22
+     ]
+    ],
+    "th": [
+     [
+      "Archaludon: Protect + Pelipper: Hurricane -> Blastoise",
+      0.24
+     ],
+     [
+      "Archaludon: Protect + Pelipper: Hurricane -> Indeedee",
+      0.19
+     ],
+     [
+      "Archaludon: Electro Shot -> Blastoise + Pelipper: Wide Guard",
+      0.16
+     ],
+     [
+      "Archaludon: Electro Shot -> Blastoise + Pelipper: Weather Ball -> Blastoise",
+      0.07
+     ]
+    ],
+    "myPick": "Indeedee: Follow Me + Blastoise: Aura Sphere -> Archaludon (mega)",
+    "thPick": "Archaludon: Protect + Pelipper: Hurricane -> Indeedee",
+    "value": 0.754,
+    "size": [
+     21,
+     42
+    ]
+   },
+   {
+    "turn": 2,
+    "my": [
+     [
+      "Indeedee: Follow Me + Blastoise: Water Spout",
+      0.52
+     ],
+     [
+      "Indeedee: Follow Me + Blastoise: Aura Sphere -> Archaludon",
+      0.48
+     ]
+    ],
+    "th": [
+     [
+      "Archaludon: Electro Shot -> Blastoise + Pelipper: Weather Ball -> Blastoise",
+      0.43
+     ],
+     [
+      "Archaludon: Electro Shot -> Blastoise + Pelipper: Weather Ball -> Indeedee",
+      0.21
+     ],
+     [
+      "Archaludon: Electro Shot -> Indeedee + Pelipper: Weather Ball -> Indeedee",
+      0.12
+     ],
+     [
+      "Archaludon: Electro Shot -> Indeedee + Pelipper: Weather Ball -> Blastoise",
+      0.12
+     ]
+    ],
+    "myPick": "Indeedee: Follow Me + Blastoise: Aura Sphere -> Archaludon",
+    "thPick": "Archaludon: Electro Shot -> Blastoise + Pelipper: Weather Ball -> Indeedee",
+    "value": 0.581,
+    "size": [
+     15,
+     42
+    ]
+   },
+   {
+    "turn": 3,
+    "my": [
+     [
+      "Indeedee: Follow Me + Blastoise: Water Spout",
+      0.28
+     ],
+     [
+      "Indeedee: Follow Me + Blastoise: Aura Sphere -> Archaludon",
+      0.21
+     ],
+     [
+      "Indeedee: Follow Me + Blastoise: Dark Pulse -> Archaludon",
+      0.21
+     ],
+     [
+      "Indeedee: Follow Me + Blastoise: Dark Pulse -> Pelipper",
+      0.2
+     ]
+    ],
+    "th": [
+     [
+      "Archaludon: Electro Shot -> Blastoise + Pelipper: Wide Guard",
+      0.27
+     ],
+     [
+      "Archaludon: Protect + Pelipper: Hurricane -> Indeedee",
+      0.22
+     ],
+     [
+      "Archaludon: Protect + Pelipper: Weather Ball -> Indeedee",
+      0.22
+     ],
+     [
+      "Archaludon: Flash Cannon -> Indeedee + Pelipper: Hurricane -> Blastoise",
+      0.12
+     ]
+    ],
+    "myPick": "Indeedee: Follow Me + Blastoise: Aura Sphere -> Archaludon",
+    "thPick": "Archaludon: Electro Shot -> Blastoise + Pelipper: Hurricane -> Blastoise",
+    "value": 0.49,
+    "size": [
+     15,
+     42
+    ]
+   },
+   {
+    "turn": 4,
+    "my": [
+     [
+      "- + Blastoise: Dark Pulse -> Pelipper",
+      1
+     ]
+    ],
+    "th": [
+     [
+      "- + Pelipper: Hurricane -> Blastoise",
+      1
+     ]
+    ],
+    "myPick": "- + Blastoise: Dark Pulse -> Pelipper",
+    "thPick": "- + Pelipper: Hurricane -> Blastoise",
+    "value": 0.751,
+    "size": [
+     3,
+     4
+    ]
+   },
+   {
+    "turn": 5,
+    "my": [
+     [
+      "- + Blastoise: Dark Pulse -> Pelipper",
+      1
+     ]
+    ],
+    "th": [
+     [
+      "- + Pelipper: Hurricane -> Blastoise",
+      0.93
+     ],
+     [
+      "- + Pelipper: Tailwind",
+      0.07
+     ]
+    ],
+    "myPick": "- + Blastoise: Dark Pulse -> Pelipper",
+    "thPick": "- + Pelipper: Hurricane -> Blastoise",
+    "value": 0.999,
+    "size": [
+     3,
+     4
+    ]
+   }
+  ],
+  "events": [
+   [
+    "your Indeedee is out (Indeedee-F)",
+    "your Blastoise is out (Blastoise)",
+    "their Archaludon is out (Archaludon)",
+    "their Pelipper is out (Pelipper)",
+    "Trick Room is up",
+    "&nbsp;&nbsp;your Indeedee uses up its Psychic Seed",
+    "&nbsp;&nbsp;your Indeedee spd +1 (Psychic Seed)",
+    "rain starts (Drizzle)"
+   ],
+   [
+    "your Blastoise Mega Evolves",
+    "<b>their Archaludon</b> uses <b>Protect</b>",
+    "<b>your Indeedee</b> uses <b>Follow Me</b>",
+    "<b>their Pelipper</b> uses <b>Hurricane</b> on your Indeedee",
+    "&nbsp;&nbsp;your Indeedee &minus;22% &rarr; 78%",
+    "<b>your Blastoise</b> uses <b>Aura Sphere</b> on their Archaludon",
+    "&nbsp;&nbsp;their Archaludon protects itself"
+   ],
+   [
+    "<b>your Indeedee</b> uses <b>Follow Me</b>",
+    "<b>their Archaludon</b> uses <b>Electro Shot</b> (fails)",
+    "&nbsp;&nbsp;their Archaludon spa +1",
+    "&nbsp;&nbsp;your Indeedee &minus;38% &rarr; 40%",
+    "<b>their Pelipper</b> uses <b>Weather Ball</b> on your Indeedee",
+    "&nbsp;&nbsp;your Indeedee &minus;29% &rarr; 11%",
+    "<b>your Blastoise</b> uses <b>Aura Sphere</b> on their Archaludon",
+    "&nbsp;&nbsp;super effective on their Archaludon",
+    "&nbsp;&nbsp;their Archaludon &minus;99% &rarr; 1%",
+    "&nbsp;&nbsp;their Archaludon def +1",
+    "&nbsp;&nbsp;their Archaludon +6% &rarr; 7% (Leftovers)"
+   ],
+   [
+    "<b>your Indeedee</b> uses <b>Follow Me</b>",
+    "<b>their Archaludon</b> uses <b>Electro Shot</b> (fails)",
+    "&nbsp;&nbsp;their Archaludon spa +1",
+    "&nbsp;&nbsp;your Indeedee &minus;11% &rarr; 0%",
+    "&nbsp;&nbsp;<b>your Indeedee faints</b>",
+    "<b>their Pelipper</b> uses <b>Hurricane</b> on your Blastoise",
+    "&nbsp;&nbsp;your Blastoise &minus;33% &rarr; 67%",
+    "<b>your Blastoise</b> uses <b>Aura Sphere</b> on their Archaludon",
+    "&nbsp;&nbsp;super effective on their Archaludon",
+    "&nbsp;&nbsp;their Archaludon &minus;7% &rarr; 0%",
+    "&nbsp;&nbsp;<b>their Archaludon faints</b>"
+   ],
+   [
+    "<b>their Pelipper</b> uses <b>Hurricane</b> on your Blastoise",
+    "&nbsp;&nbsp;your Blastoise &minus;28% &rarr; 39%",
+    "<b>your Blastoise</b> uses <b>Dark Pulse</b> on their Pelipper",
+    "&nbsp;&nbsp;their Pelipper &minus;57% &rarr; 43%"
+   ],
+   [
+    "<b>their Pelipper</b> uses <b>Hurricane</b> on your Blastoise",
+    "&nbsp;&nbsp;your Blastoise &minus;33% &rarr; 6%",
+    "<b>your Blastoise</b> uses <b>Dark Pulse</b> on their Pelipper",
+    "&nbsp;&nbsp;their Pelipper &minus;43% &rarr; 0%",
+    "&nbsp;&nbsp;<b>their Pelipper faints</b>",
+    "<b>You win</b>"
+   ]
+  ],
+  "sets": [
+   "Indeedee-F @ Psychic Seed · Psychic Surge · Relaxed · Follow Me / Helping Hand / Trick Room / Healing Wish",
+   "Blastoise @ Blastoisinite · Torrent · Quiet · Fake Out / Water Spout / Aura Sphere / Dark Pulse",
+   "Archaludon @ leftovers · stamina · Modest · dragonpulse / electroshot / flashcannon / protect",
+   "Pelipper @ focussash · drizzle · Timid · hurricane / tailwind / weatherball / wideguard"
+  ]
+ },
+ {
+  "tab": "Balance",
+  "lead": "Incineroar + Farigiraf",
+  "tr": 100,
+  "mine": [
+   "Indeedee-F",
+   "Torkoal"
+  ],
+  "theirs": [
+   "Garchomp",
+   "Volcarona"
+  ],
+  "w": 0.0837,
+  "K": 3,
+  "v": 1,
+  "turns": [
+   {
+    "turn": 1,
+    "my": [
+     [
+      "Indeedee: Follow Me + Torkoal: Eruption",
+      0.76
+     ],
+     [
+      "Indeedee: Helping Hand -> ally + Torkoal: Eruption",
+      0.23
+     ]
+    ],
+    "th": [
+     [
+      "Garchomp: Power Gem -> Torkoal (mega) + Volcarona: Protect",
+      0.33
+     ],
+     [
+      "Garchomp: Flamethrower -> Torkoal (mega) + Volcarona: Protect",
+      0.26
+     ],
+     [
+      "Garchomp: Protect (mega) + Volcarona: Protect",
+      0.25
+     ],
+     [
+      "Garchomp: Flamethrower -> Indeedee (mega) + Volcarona: Protect",
+      0.15
+     ]
+    ],
+    "myPick": "Indeedee: Follow Me + Torkoal: Eruption",
+    "thPick": "Garchomp: Power Gem -> Torkoal (mega) + Volcarona: Protect",
+    "value": 0.547,
+    "size": [
+     12,
+     42
+    ]
+   },
+   {
+    "turn": 2,
+    "my": [
+     [
+      "Indeedee: Helping Hand -> ally + Torkoal: Eruption",
+      0.99
+     ]
+    ],
+    "th": [
+     [
+      "Garchomp: Protect + Volcarona: Flamethrower -> Indeedee",
+      0.37
+     ],
+     [
+      "Garchomp: Protect + Volcarona: Flamethrower -> Torkoal",
+      0.31
+     ],
+     [
+      "Garchomp: Protect + Volcarona: Quiver Dance",
+      0.09
+     ],
+     [
+      "Garchomp: Protect + Volcarona: Giga Drain -> Torkoal",
+      0.09
+     ]
+    ],
+    "myPick": "Indeedee: Helping Hand -> ally + Torkoal: Eruption",
+    "thPick": "Garchomp: Protect + Volcarona: Flamethrower -> Torkoal",
+    "value": 0.95,
+    "size": [
+     12,
+     42
+    ]
+   },
+   {
+    "turn": 3,
+    "my": [
+     [
+      "Indeedee: Helping Hand -> ally + Torkoal: Eruption",
+      0.5
+     ],
+     [
+      "Indeedee: Helping Hand -> ally + Torkoal: Weather Ball -> Garchomp",
+      0.5
+     ]
+    ],
+    "th": [
+     [
+      "Garchomp: Protect + -",
+      0.89
+     ],
+     [
+      "Garchomp: Flamethrower -> Indeedee + -",
+      0.1
+     ]
+    ],
+    "myPick": "Indeedee: Helping Hand -> ally + Torkoal: Eruption",
+    "thPick": "Garchomp: Flamethrower -> Indeedee + -",
+    "value": 1,
+    "size": [
+     8,
+     7
+    ]
+   }
+  ],
+  "events": [
+   [
+    "your Indeedee is out (Indeedee-F)",
+    "your Torkoal is out (Torkoal)",
+    "their Garchomp is out (Garchomp)",
+    "their Volcarona is out (Volcarona)",
+    "Trick Room is up",
+    "&nbsp;&nbsp;your Indeedee uses up its Psychic Seed",
+    "&nbsp;&nbsp;your Indeedee spd +1 (Psychic Seed)",
+    "sun starts (Drought)"
+   ],
+   [
+    "Trick Room is up",
+    "their Garchomp Mega Evolves",
+    "<b>their Volcarona</b> uses <b>Protect</b>",
+    "<b>your Indeedee</b> uses <b>Follow Me</b>",
+    "<b>your Torkoal</b> uses <b>Eruption</b>",
+    "&nbsp;&nbsp;their Volcarona protects itself",
+    "&nbsp;&nbsp;resisted by their Garchomp",
+    "&nbsp;&nbsp;their Garchomp &minus;51% &rarr; 49%",
+    "<b>their Garchomp</b> uses <b>Power Gem</b> on your Indeedee",
+    "&nbsp;&nbsp;your Indeedee &minus;17% &rarr; 83%"
+   ],
+   [
+    "<b>your Indeedee</b> uses <b>Helping Hand</b> on your Torkoal",
+    "<b>their Garchomp</b> uses <b>Protect</b>",
+    "<b>your Torkoal</b> uses <b>Eruption</b>",
+    "&nbsp;&nbsp;their Garchomp protects itself",
+    "&nbsp;&nbsp;their Volcarona &minus;100% &rarr; 0%",
+    "&nbsp;&nbsp;<b>their Volcarona faints</b>"
+   ],
+   [
+    "<b>your Indeedee</b> uses <b>Helping Hand</b> on your Torkoal",
+    "<b>your Torkoal</b> uses <b>Eruption</b> on their Garchomp",
+    "&nbsp;&nbsp;resisted by their Garchomp",
+    "&nbsp;&nbsp;their Garchomp &minus;49% &rarr; 0%",
+    "&nbsp;&nbsp;<b>their Garchomp faints</b>",
+    "<b>You win</b>"
+   ]
+  ],
+  "sets": [
+   "Indeedee-F @ Psychic Seed · Psychic Surge · Relaxed · Follow Me / Helping Hand / Trick Room / Healing Wish",
+   "Torkoal @ Charcoal · Drought · Quiet · Eruption / Weather Ball / Earth Power / Protect",
+   "Garchomp @ garchompitez · roughskin · Modest · dracometeor / flamethrower / powergem / protect",
+   "Volcarona @ grassyseed · flamebody · Modest · flamethrower / gigadrain / protect / quiverdance"
+  ]
+ },
+ {
+  "tab": "Sand",
+  "lead": "Farigiraf + Blastoise",
+  "tr": 71,
+  "mine": [
+   "Indeedee-F",
+   "Kingambit"
+  ],
+  "theirs": [
+   "Sneasler",
+   "Tyranitar"
+  ],
+  "w": 0.0618,
+  "K": 3,
+  "v": 1,
+  "turns": [
+   {
+    "turn": 1,
+    "my": [
+     [
+      "Indeedee: Helping Hand -> ally + Kingambit: Iron Head -> Sneasler",
+      0.48
+     ],
+     [
+      "Indeedee: Follow Me + Kingambit: Low Kick -> Tyranitar",
+      0.47
+     ],
+     [
+      "Indeedee: Helping Hand -> ally + Kingambit: Low Kick -> Tyranitar",
+      0.04
+     ]
+    ],
+    "th": [
+     [
+      "Sneasler: Protect + Tyranitar: Knock Off -> Indeedee (mega)",
+      0.43
+     ],
+     [
+      "Sneasler: Close Combat -> Kingambit + Tyranitar: Protect (mega)",
+      0.38
+     ],
+     [
+      "Sneasler: Close Combat -> Indeedee + Tyranitar: Protect (mega)",
+      0.09
+     ],
+     [
+      "Sneasler: Protect + Tyranitar: Low Kick -> Kingambit (mega)",
+      0.05
+     ]
+    ],
+    "myPick": "Indeedee: Follow Me + Kingambit: Low Kick -> Tyranitar",
+    "thPick": "Sneasler: Protect + Tyranitar: Knock Off -> Indeedee (mega)",
+    "value": 0.615,
+    "size": [
+     16,
+     30
+    ]
+   },
+   {
+    "turn": 2,
+    "my": [
+     [
+      "Indeedee: Helping Hand -> ally + Kingambit: Iron Head -> Sneasler",
+      0.99
+     ]
+    ],
+    "th": [
+     [
+      "Sneasler: Close Combat -> Kingambit + -",
+      0.97
+     ]
+    ],
+    "myPick": "Indeedee: Helping Hand -> ally + Kingambit: Iron Head -> Sneasler",
+    "thPick": "Sneasler: Close Combat -> Kingambit + -",
+    "value": 0.999,
+    "size": [
+     8,
+     4
+    ]
+   }
+  ],
+  "events": [
+   [
+    "your Indeedee is out (Indeedee-F)",
+    "your Kingambit is out (Kingambit)",
+    "their Sneasler is out (Sneasler)",
+    "their Tyranitar is out (Tyranitar)",
+    "sand starts (Sand Stream)",
+    "Trick Room is up",
+    "&nbsp;&nbsp;your Indeedee uses up its Psychic Seed",
+    "&nbsp;&nbsp;your Indeedee spd +1 (Psychic Seed)"
+   ],
+   [
+    "Trick Room is up",
+    "their Tyranitar Mega Evolves",
+    "<b>their Sneasler</b> uses <b>Protect</b>",
+    "<b>your Indeedee</b> uses <b>Follow Me</b>",
+    "<b>your Kingambit</b> uses <b>Low Kick</b> on their Tyranitar",
+    "&nbsp;&nbsp;super effective on their Tyranitar",
+    "&nbsp;&nbsp;their Tyranitar &minus;100% &rarr; 0%",
+    "&nbsp;&nbsp;<b>their Tyranitar faints</b>",
+    "&nbsp;&nbsp;your Indeedee &minus;6% &rarr; 94% (Sandstorm)",
+    "&nbsp;&nbsp;their Sneasler &minus;6% &rarr; 94% (Sandstorm)"
+   ],
+   [
+    "<b>your Indeedee</b> uses <b>Helping Hand</b> on your Kingambit",
+    "<b>your Kingambit</b> uses <b>Iron Head</b> on their Sneasler",
+    "&nbsp;&nbsp;their Sneasler &minus;94% &rarr; 0%",
+    "&nbsp;&nbsp;<b>their Sneasler faints</b>",
+    "<b>You win</b>"
+   ]
+  ],
+  "sets": [
+   "Indeedee-F @ Psychic Seed · Psychic Surge · Relaxed · Follow Me / Helping Hand / Trick Room / Healing Wish",
+   "Kingambit @ Chople Berry · Defiant · Adamant · Iron Head / Kowtow Cleave / Low Kick / Sucker Punch",
+   "Sneasler @ whiteherb · unburden · Adamant · closecombat / coaching / direclaw / protect",
+   "Tyranitar @ tyranitarite · sandstream · Jolly · knockoff / lowkick / protect / rockslide"
+  ]
+ },
+ {
+  "tab": "Snow",
+  "lead": "Farigiraf + Blastoise",
+  "tr": 65,
+  "mine": [
+   "Incineroar",
+   "Torkoal"
+  ],
+  "theirs": [
+   "Froslass",
+   "Kingambit"
+  ],
+  "w": 0.052,
+  "K": 3,
+  "v": 1,
+  "turns": [
+   {
+    "turn": 1,
+    "my": [
+     [
+      "Incineroar: Fake Out -> Kingambit + Torkoal: Eruption",
+      0.31
+     ],
+     [
+      "Incineroar: Close Combat -> Kingambit + Torkoal: Eruption",
+      0.28
+     ],
+     [
+      "Incineroar: Flare Blitz -> Kingambit + Torkoal: Eruption",
+      0.26
+     ]
+    ],
+    "th": [
+     [
+      "Froslass: Protect (mega) + Kingambit: Protect",
+      0.98
+     ]
+    ],
+    "myPick": "Incineroar: Flare Blitz -> Kingambit + Torkoal: Eruption",
+    "thPick": "Froslass: Protect (mega) + Kingambit: Protect",
+    "value": 0.954,
+    "size": [
+     36,
+     30
+    ]
+   },
+   {
+    "turn": 2,
+    "my": [
+     [
+      "Incineroar: Close Combat -> Kingambit + Torkoal: Eruption",
+      0.61
+     ],
+     [
+      "Incineroar: Close Combat -> Kingambit + Torkoal: Protect",
+      0.22
+     ],
+     [
+      "Incineroar: Throat Chop -> Froslass + Torkoal: Eruption",
+      0.1
+     ],
+     [
+      "Incineroar: Flare Blitz -> Kingambit + Torkoal: Eruption",
+      0.05
+     ]
+    ],
+    "th": [
+     [
+      "Froslass: Blizzard + Kingambit: Sucker Punch -> Torkoal",
+      0.77
+     ],
+     [
+      "Froslass: Protect + Kingambit: Sucker Punch -> Torkoal",
+      0.13
+     ],
+     [
+      "Froslass: Blizzard + Kingambit: Sucker Punch -> Incineroar",
+      0.08
+     ]
+    ],
+    "myPick": "Incineroar: Close Combat -> Kingambit + Torkoal: Protect",
+    "thPick": "Froslass: Blizzard + Kingambit: Sucker Punch -> Torkoal",
+    "value": 0.989,
+    "size": [
+     30,
+     30
+    ]
+   },
+   {
+    "turn": 3,
+    "my": [
+     [
+      "Incineroar: Flare Blitz -> Froslass + Torkoal: Eruption",
+      0.14
+     ],
+     [
+      "Incineroar: Flare Blitz -> Froslass + Torkoal: Weather Ball -> Froslass",
+      0.14
+     ],
+     [
+      "Incineroar: Flare Blitz -> Froslass + Torkoal: Earth Power -> Froslass",
+      0.14
+     ],
+     [
+      "Incineroar: Flare Blitz -> Froslass + Torkoal: Protect",
+      0.14
+     ]
+    ],
+    "th": [
+     [
+      "Froslass: Protect + -",
+      1
+     ]
+    ],
+    "myPick": "Incineroar: Flare Blitz -> Froslass + Torkoal: Earth Power -> Froslass",
+    "thPick": "Froslass: Protect + -",
+    "value": 0.997,
+    "size": [
+     8,
+     5
+    ]
+   },
+   {
+    "turn": 4,
+    "my": [
+     [
+      "Incineroar: Flare Blitz -> Froslass + Torkoal: Weather Ball -> Froslass",
+      0.5
+     ],
+     [
+      "Incineroar: Flare Blitz -> Froslass + Torkoal: Earth Power -> Froslass",
+      0.5
+     ]
+    ],
+    "th": [
+     [
+      "Froslass: Aurora Veil + -",
+      1
+     ]
+    ],
+    "myPick": "Incineroar: Flare Blitz -> Froslass + Torkoal: Weather Ball -> Froslass",
+    "thPick": "Froslass: Aurora Veil + -",
+    "value": 1,
+    "size": [
+     8,
+     5
+    ]
+   },
+   {
+    "turn": 5,
+    "my": [
+     [
+      "Incineroar: Flare Blitz -> Froslass + Torkoal: Eruption",
+      0.17
+     ],
+     [
+      "Incineroar: Flare Blitz -> Froslass + Torkoal: Weather Ball -> Froslass",
+      0.17
+     ],
+     [
+      "Incineroar: Flare Blitz -> Froslass + Torkoal: Earth Power -> Froslass",
+      0.17
+     ],
+     [
+      "Incineroar: Throat Chop -> Froslass + Torkoal: Eruption",
+      0.17
+     ]
+    ],
+    "th": [
+     [
+      "Froslass: Protect + -",
+      1
+     ]
+    ],
+    "myPick": "Incineroar: Throat Chop -> Froslass + Torkoal: Eruption",
+    "thPick": "Froslass: Protect + -",
+    "value": 0.999,
+    "size": [
+     8,
+     5
+    ]
+   },
+   {
+    "turn": 6,
+    "my": [
+     [
+      "Incineroar: Flare Blitz -> Froslass + Torkoal: Eruption",
+      0.17
+     ],
+     [
+      "Incineroar: Flare Blitz -> Froslass + Torkoal: Weather Ball -> Froslass",
+      0.17
+     ],
+     [
+      "Incineroar: Flare Blitz -> Froslass + Torkoal: Earth Power -> Froslass",
+      0.17
+     ],
+     [
+      "Incineroar: Throat Chop -> Froslass + Torkoal: Eruption",
+      0.17
+     ]
+    ],
+    "th": [
+     [
+      "Froslass: Protect + -",
+      1
+     ]
+    ],
+    "myPick": "Incineroar: Throat Chop -> Froslass + Torkoal: Eruption",
+    "thPick": "Froslass: Protect + -",
+    "value": 1,
+    "size": [
+     8,
+     5
+    ]
+   },
+   {
+    "turn": 7,
+    "my": [
+     [
+      "Incineroar: Flare Blitz -> Froslass + Torkoal: Eruption",
+      0.13
+     ],
+     [
+      "Incineroar: Flare Blitz -> Froslass + Torkoal: Weather Ball -> Froslass",
+      0.13
+     ],
+     [
+      "Incineroar: Flare Blitz -> Froslass + Torkoal: Earth Power -> Froslass",
+      0.13
+     ],
+     [
+      "Incineroar: Flare Blitz -> Froslass + Torkoal: Protect",
+      0.13
+     ]
+    ],
+    "th": [
+     [
+      "Froslass: Aurora Veil + -",
+      0.2
+     ],
+     [
+      "Froslass: Blizzard + -",
+      0.2
+     ],
+     [
+      "Froslass: Protect + -",
+      0.2
+     ],
+     [
+      "Froslass: Shadow Ball -> Incineroar + -",
+      0.2
+     ]
+    ],
+    "myPick": "Incineroar: Flare Blitz -> Froslass + Torkoal: Earth Power -> Froslass",
+    "thPick": "Froslass: Protect + -",
+    "value": 1,
+    "size": [
+     8,
+     5
+    ]
+   }
+  ],
+  "events": [
+   [
+    "your Incineroar is out (Incineroar)",
+    "your Torkoal is out (Torkoal)",
+    "their Froslass is out (Froslass)",
+    "their Kingambit is out (Kingambit)",
+    "&nbsp;&nbsp;their Froslass atk &minus;1",
+    "&nbsp;&nbsp;their Kingambit atk &minus;1",
+    "&nbsp;&nbsp;their Kingambit atk +2",
+    "sun starts (Drought)"
+   ],
+   [
+    "Trick Room is up",
+    "their Froslass Mega Evolves",
+    "snow starts (Snow Warning)",
+    "<b>their Kingambit</b> uses <b>Protect</b>",
+    "<b>their Froslass</b> uses <b>Protect</b>",
+    "<b>your Torkoal</b> uses <b>Eruption</b>",
+    "&nbsp;&nbsp;their Froslass protects itself",
+    "&nbsp;&nbsp;their Kingambit protects itself",
+    "<b>your Incineroar</b> uses <b>Flare Blitz</b> on their Kingambit",
+    "&nbsp;&nbsp;their Kingambit protects itself"
+   ],
+   [
+    "<b>your Torkoal</b> uses <b>Protect</b>",
+    "<b>their Kingambit</b> uses <b>Sucker Punch</b> (fails)",
+    "&nbsp;&nbsp;but it fails (their Kingambit)",
+    "<b>your Incineroar</b> uses <b>Close Combat</b> on their Kingambit",
+    "&nbsp;&nbsp;super effective on their Kingambit",
+    "&nbsp;&nbsp;their Kingambit &minus;100% &rarr; 0%",
+    "&nbsp;&nbsp;your Incineroar def &minus;1",
+    "&nbsp;&nbsp;your Incineroar spd &minus;1",
+    "&nbsp;&nbsp;<b>their Kingambit faints</b>",
+    "&nbsp;&nbsp;your Incineroar uses up its White Herb",
+    "<b>their Froslass</b> uses <b>Blizzard</b>",
+    "&nbsp;&nbsp;your Torkoal protects itself",
+    "&nbsp;&nbsp;resisted by your Incineroar",
+    "&nbsp;&nbsp;your Incineroar &minus;20% &rarr; 80%"
+   ],
+   [
+    "<b>their Froslass</b> uses <b>Protect</b>",
+    "<b>your Torkoal</b> uses <b>Earth Power</b> on their Froslass",
+    "&nbsp;&nbsp;their Froslass protects itself",
+    "<b>your Incineroar</b> uses <b>Flare Blitz</b> on their Froslass",
+    "&nbsp;&nbsp;their Froslass protects itself",
+    "<b>Trick Room ends</b>"
+   ],
+   [
+    "<b>their Froslass</b> uses <b>Aurora Veil</b>",
+    "<b>your Incineroar</b> uses <b>Flare Blitz</b> on their Froslass",
+    "&nbsp;&nbsp;super effective on their Froslass",
+    "&nbsp;&nbsp;their Froslass &minus;84% &rarr; 16%",
+    "&nbsp;&nbsp;your Incineroar &minus;20% &rarr; 60% (Recoil)",
+    "<b>your Torkoal</b> uses <b>Weather Ball</b> on their Froslass",
+    "&nbsp;&nbsp;resisted by their Froslass",
+    "&nbsp;&nbsp;their Froslass &minus;12% &rarr; 3%"
+   ],
+   [
+    "<b>their Froslass</b> uses <b>Protect</b>",
+    "<b>your Incineroar</b> uses <b>Throat Chop</b> on their Froslass",
+    "&nbsp;&nbsp;their Froslass protects itself",
+    "<b>your Torkoal</b> uses <b>Eruption</b> on their Froslass",
+    "&nbsp;&nbsp;their Froslass protects itself",
+    "the weather ends"
+   ],
+   [
+    "<b>their Froslass</b> uses <b>Protect</b>",
+    "<b>your Incineroar</b> uses <b>Throat Chop</b> on their Froslass",
+    "&nbsp;&nbsp;their Froslass protects itself",
+    "<b>your Torkoal</b> uses <b>Eruption</b> on their Froslass",
+    "&nbsp;&nbsp;their Froslass protects itself"
+   ],
+   [
+    "<b>their Froslass</b> uses <b>Protect</b> (fails)",
+    "&nbsp;&nbsp;but it fails (their Froslass)",
+    "<b>your Incineroar</b> uses <b>Flare Blitz</b> on their Froslass",
+    "&nbsp;&nbsp;super effective on their Froslass",
+    "&nbsp;&nbsp;their Froslass &minus;3% &rarr; 0%",
+    "&nbsp;&nbsp;<b>their Froslass faints</b>",
+    "&nbsp;&nbsp;your Incineroar &minus;1% &rarr; 59% (Recoil)",
+    "<b>You win</b>"
+   ]
+  ],
+  "sets": [
+   "Incineroar @ White Herb · Intimidate · Brave · Fake Out / Flare Blitz / Throat Chop / Close Combat",
+   "Torkoal @ Charcoal · Drought · Quiet · Eruption / Weather Ball / Earth Power / Protect",
+   "Froslass @ froslassite · cursedbody · Timid · auroraveil / blizzard / protect / shadowball",
+   "Kingambit @ lifeorb · defiant · Adamant · kowtowcleave / protect / suckerpunch / swordsdance"
+  ]
+ },
+ {
+  "tab": "Trick Room",
+  "lead": "Kingambit + Blastoise",
+  "tr": 0,
+  "mine": [
+   "Incineroar",
+   "Torkoal"
+  ],
+  "theirs": [
+   "Delphox",
+   "Sneasler"
+  ],
+  "w": 0.0716,
+  "K": 0,
+  "v": 0,
+  "turns": [
+   {
+    "turn": 1,
+    "my": [
+     [
+      "Incineroar: Fake Out -> Delphox + Torkoal: Weather Ball -> Sneasler",
+      0.71
+     ],
+     [
+      "Incineroar: Throat Chop -> Delphox + Torkoal: Eruption",
+      0.14
+     ],
+     [
+      "Incineroar: Throat Chop -> Delphox + Torkoal: Weather Ball -> Sneasler",
+      0.12
+     ]
+    ],
+    "th": [
+     [
+      "Delphox: Psychic -> Torkoal (mega) + Sneasler: Fake Out -> Incineroar",
+      0.37
+     ],
+     [
+      "Delphox: Heat Wave (mega) + Sneasler: Fake Out -> Incineroar",
+      0.28
+     ],
+     [
+      "Delphox: Heat Wave (mega) + Sneasler: Fake Out -> Torkoal",
+      0.28
+     ],
+     [
+      "Delphox: Heat Wave (mega) + Sneasler: Close Combat -> Incineroar",
+      0.06
+     ]
+    ],
+    "myPick": "Incineroar: Fake Out -> Delphox + Torkoal: Weather Ball -> Sneasler",
+    "thPick": "Delphox: Heat Wave (mega) + Sneasler: Fake Out -> Torkoal",
+    "value": 0.517,
+    "size": [
+     48,
+     28
+    ]
+   },
+   {
+    "turn": 2,
+    "my": [
+     [
+      "Incineroar: Close Combat -> Sneasler + Torkoal: Eruption",
+      0.3
+     ],
+     [
+      "Incineroar: Throat Chop -> Sneasler + Torkoal: Eruption",
+      0.3
+     ],
+     [
+      "Incineroar: Throat Chop -> Delphox + Torkoal: Protect",
+      0.17
+     ],
+     [
+      "Incineroar: Throat Chop -> Sneasler + Torkoal: Weather Ball -> Sneasler",
+      0.06
+     ]
+    ],
+    "th": [
+     [
+      "Delphox: Heat Wave + Sneasler: Close Combat -> Incineroar",
+      0.58
+     ],
+     [
+      "Delphox: Psychic -> Torkoal + Sneasler: Close Combat -> Incineroar",
+      0.26
+     ],
+     [
+      "Delphox: Psychic -> Torkoal + Sneasler: Poison Jab -> Torkoal",
+      0.12
+     ]
+    ],
+    "myPick": "Incineroar: Close Combat -> Sneasler + Torkoal: Weather Ball -> Sneasler",
+    "thPick": "Delphox: Heat Wave + Sneasler: Close Combat -> Incineroar",
+    "value": 0.2,
+    "size": [
+     36,
+     20
+    ]
+   },
+   {
+    "turn": 3,
+    "my": [
+     [
+      "Incineroar: Throat Chop -> Delphox + Torkoal: Protect",
+      0.58
+     ],
+     [
+      "Incineroar: Throat Chop -> Delphox + Torkoal: Eruption",
+      0.34
+     ],
+     [
+      "Incineroar: Flare Blitz -> Delphox + Torkoal: Eruption",
+      0.08
+     ]
+    ],
+    "th": [
+     [
+      "Delphox: Heat Wave + -",
+      1
+     ]
+    ],
+    "myPick": "Incineroar: Throat Chop -> Delphox + Torkoal: Eruption",
+    "thPick": "Delphox: Heat Wave + -",
+    "value": 0.507,
+    "size": [
+     12,
+     4
+    ]
+   },
+   {
+    "turn": 4,
+    "my": [
+     [
+      "- + Torkoal: Protect",
+      0.68
+     ],
+     [
+      "- + Torkoal: Weather Ball -> Delphox",
+      0.24
+     ],
+     [
+      "- + Torkoal: Eruption",
+      0.08
+     ]
+    ],
+    "th": [
+     [
+      "Delphox: Psychic -> Torkoal + -",
+      0.56
+     ],
+     [
+      "Delphox: Nasty Plot + -",
+      0.44
+     ]
+    ],
+    "myPick": "- + Torkoal: Protect",
+    "thPick": "Delphox: Psychic -> Torkoal + -",
+    "value": 0.021,
+    "size": [
+     4,
+     4
+    ]
+   },
+   {
+    "turn": 5,
+    "my": [
+     [
+      "- + Torkoal: Protect",
+      0.97
+     ]
+    ],
+    "th": [
+     [
+      "Delphox: Psychic -> Torkoal + -",
+      0.97
+     ]
+    ],
+    "myPick": "- + Torkoal: Protect",
+    "thPick": "Delphox: Psychic -> Torkoal + -",
+    "value": 0.023,
+    "size": [
+     4,
+     4
+    ]
+   },
+   {
+    "turn": 6,
+    "my": [
+     [
+      "- + Torkoal: Protect",
+      1
+     ]
+    ],
+    "th": [
+     [
+      "Delphox: Psychic -> Torkoal + -",
+      1
+     ]
+    ],
+    "myPick": "- + Torkoal: Protect",
+    "thPick": "Delphox: Psychic -> Torkoal + -",
+    "value": 0,
+    "size": [
+     4,
+     4
+    ]
+   }
+  ],
+  "events": [
+   [
+    "your Incineroar is out (Incineroar)",
+    "your Torkoal is out (Torkoal)",
+    "their Delphox is out (Delphox)",
+    "their Sneasler is out (Sneasler)",
+    "&nbsp;&nbsp;their Delphox atk &minus;1",
+    "&nbsp;&nbsp;their Sneasler atk &minus;1",
+    "sun starts (Drought)"
+   ],
+   [
+    "their Delphox Mega Evolves",
+    "<b>their Sneasler</b> uses <b>Fake Out</b> on your Torkoal",
+    "&nbsp;&nbsp;your Torkoal &minus;7% &rarr; 93%",
+    "<b>your Incineroar</b> uses <b>Fake Out</b> on their Delphox",
+    "&nbsp;&nbsp;their Delphox &minus;21% &rarr; 79%",
+    "&nbsp;&nbsp;their Delphox can&rsquo;t move (flinch)",
+    "&nbsp;&nbsp;your Torkoal can&rsquo;t move (flinch)",
+    "&nbsp;&nbsp;your Torkoal &minus;12% &rarr; 80% (psn)"
+   ],
+   [
+    "<b>their Delphox</b> uses <b>Heat Wave</b>",
+    "&nbsp;&nbsp;it misses your Incineroar",
+    "&nbsp;&nbsp;it misses your Torkoal",
+    "<b>their Sneasler</b> uses <b>Close Combat</b> on your Incineroar",
+    "&nbsp;&nbsp;super effective on your Incineroar",
+    "&nbsp;&nbsp;your Incineroar &minus;87% &rarr; 13%",
+    "&nbsp;&nbsp;their Sneasler def &minus;1",
+    "&nbsp;&nbsp;their Sneasler spd &minus;1",
+    "<b>your Incineroar</b> uses <b>Close Combat</b> on their Sneasler",
+    "&nbsp;&nbsp;resisted by their Sneasler",
+    "&nbsp;&nbsp;their Sneasler &minus;55% &rarr; 45%",
+    "&nbsp;&nbsp;your Incineroar def &minus;1",
+    "&nbsp;&nbsp;your Incineroar spd &minus;1",
+    "&nbsp;&nbsp;your Incineroar uses up its White Herb",
+    "<b>your Torkoal</b> uses <b>Weather Ball</b> on their Sneasler",
+    "&nbsp;&nbsp;their Sneasler &minus;45% &rarr; 0%",
+    "&nbsp;&nbsp;<b>their Sneasler faints</b>",
+    "&nbsp;&nbsp;your Torkoal &minus;12% &rarr; 68% (psn)"
+   ],
+   [
+    "<b>their Delphox</b> uses <b>Heat Wave</b>",
+    "&nbsp;&nbsp;it misses your Torkoal",
+    "&nbsp;&nbsp;resisted by your Incineroar",
+    "&nbsp;&nbsp;your Incineroar &minus;13% &rarr; 0%",
+    "&nbsp;&nbsp;<b>your Incineroar faints</b>",
+    "<b>your Torkoal</b> uses <b>Eruption</b> on their Delphox",
+    "&nbsp;&nbsp;resisted by their Delphox",
+    "&nbsp;&nbsp;their Delphox &minus;40% &rarr; 39%",
+    "&nbsp;&nbsp;your Torkoal &minus;12% &rarr; 55% (psn)"
+   ],
+   [
+    "<b>your Torkoal</b> uses <b>Protect</b>",
+    "<b>their Delphox</b> uses <b>Psychic</b> on your Torkoal",
+    "&nbsp;&nbsp;your Torkoal protects itself",
+    "&nbsp;&nbsp;your Torkoal &minus;12% &rarr; 43% (psn)"
+   ],
+   [
+    "<b>your Torkoal</b> uses <b>Protect</b>",
+    "<b>their Delphox</b> uses <b>Psychic</b> on your Torkoal",
+    "&nbsp;&nbsp;your Torkoal protects itself",
+    "the weather ends",
+    "&nbsp;&nbsp;your Torkoal &minus;12% &rarr; 31% (psn)"
+   ],
+   [
+    "<b>your Torkoal</b> uses <b>Protect</b> (fails)",
+    "&nbsp;&nbsp;but it fails (your Torkoal)",
+    "<b>their Delphox</b> uses <b>Psychic</b> on your Torkoal",
+    "&nbsp;&nbsp;your Torkoal &minus;31% &rarr; 0%",
+    "&nbsp;&nbsp;<b>your Torkoal faints</b>",
+    "<b>They win</b>"
+   ]
+  ],
+  "sets": [
+   "Incineroar @ White Herb · Intimidate · Brave · Fake Out / Flare Blitz / Throat Chop / Close Combat",
+   "Torkoal @ Charcoal · Drought · Quiet · Eruption / Weather Ball / Earth Power / Protect",
+   "Delphox @ delphoxite · blaze · Timid · heatwave / nastyplot / protect / psychic",
+   "Sneasler @ focussash · poisontouch · Jolly · closecombat / fakeout / poisonjab / quickguard"
+  ]
+ },
+ {
+  "tab": "Rain + Sun",
+  "lead": "Incineroar + Blastoise",
+  "tr": 0,
+  "mine": [
+   "Farigiraf",
+   "Torkoal"
+  ],
+  "theirs": [
+   "Charizard",
+   "Venusaur"
+  ],
+  "w": 0.1048,
+  "K": 0,
+  "v": 0,
+  "turns": [
+   {
+    "turn": 1,
+    "my": [
+     [
+      "Farigiraf: Psychic -> Venusaur + Torkoal: Protect",
+      0.39
+     ],
+     [
+      "Farigiraf: Protect + Torkoal: Eruption",
+      0.2
+     ],
+     [
+      "Farigiraf: Protect + Torkoal: Weather Ball -> Venusaur",
+      0.16
+     ],
+     [
+      "Farigiraf: Psychic -> Venusaur + Torkoal: Eruption",
+      0.12
+     ]
+    ],
+    "th": [
+     [
+      "Charizard: Heat Wave (mega) + Venusaur: Sludge Bomb -> Farigiraf",
+      0.25
+     ],
+     [
+      "Charizard: Weather Ball -> Farigiraf (mega) + Venusaur: Sleep Powder -> Torkoal",
+      0.22
+     ],
+     [
+      "Charizard: Hurricane -> Torkoal (mega) + Venusaur: Sleep Powder -> Farigiraf",
+      0.18
+     ],
+     [
+      "Charizard: Hurricane -> Torkoal (mega) + Venusaur: Protect",
+      0.14
+     ]
+    ],
+    "myPick": "Farigiraf: Protect + Torkoal: Weather Ball -> Venusaur",
+    "thPick": "Charizard: Hurricane -> Torkoal (mega) + Venusaur: Sleep Powder -> Farigiraf",
+    "value": 0.294,
+    "size": [
+     30,
+     42
+    ]
+   },
+   {
+    "turn": 2,
+    "my": [
+     [
+      "Farigiraf: Protect + Torkoal: Eruption",
+      0.59
+     ],
+     [
+      "Farigiraf: Protect + Torkoal: Protect",
+      0.25
+     ],
+     [
+      "Farigiraf: Thunderbolt -> Charizard + Torkoal: Protect",
+      0.08
+     ],
+     [
+      "Farigiraf: Psychic -> Charizard + Torkoal: Protect",
+      0.04
+     ]
+    ],
+    "th": [
+     [
+      "Charizard: Weather Ball -> Farigiraf + Venusaur: Sludge Bomb -> Farigiraf",
+      0.45
+     ],
+     [
+      "Charizard: Heat Wave + Venusaur: Sludge Bomb -> Torkoal",
+      0.38
+     ],
+     [
+      "Charizard: Heat Wave + Venusaur: Sludge Bomb -> Farigiraf",
+      0.15
+     ]
+    ],
+    "myPick": "Farigiraf: Psychic -> Charizard + Torkoal: Protect",
+    "thPick": "Charizard: Heat Wave + Venusaur: Sludge Bomb -> Torkoal",
+    "value": 0.381,
+    "size": [
+     30,
+     42
+    ]
+   },
+   {
+    "turn": 3,
+    "my": [
+     [
+      "Farigiraf: Thunderbolt -> Charizard + Torkoal: Protect",
+      0.37
+     ],
+     [
+      "Farigiraf: Protect + Torkoal: Weather Ball -> Charizard",
+      0.32
+     ],
+     [
+      "Farigiraf: Thunderbolt -> Charizard + Torkoal: Eruption",
+      0.16
+     ]
+    ],
+    "th": [
+     [
+      "Charizard: Weather Ball -> Torkoal + Venusaur: Sludge Bomb -> Torkoal",
+      0.53
+     ],
+     [
+      "Charizard: Weather Ball -> Farigiraf + Venusaur: Sleep Powder -> Torkoal",
+      0.34
+     ]
+    ],
+    "myPick": "Farigiraf: Protect + Torkoal: Weather Ball -> Charizard",
+    "thPick": "Charizard: Heat Wave + Venusaur: Sludge Bomb -> Torkoal",
+    "value": 0.37,
+    "size": [
+     30,
+     42
+    ]
+   },
+   {
+    "turn": 4,
+    "my": [
+     [
+      "Farigiraf: Protect + -",
+      0.79
+     ],
+     [
+      "Farigiraf: Thunderbolt -> Charizard + -",
+      0.14
+     ],
+     [
+      "Farigiraf: Trick Room + -",
+      0.07
+     ]
+    ],
+    "th": [
+     [
+      "Charizard: Heat Wave + Venusaur: Protect",
+      0.2
+     ],
+     [
+      "Charizard: Weather Ball -> Farigiraf + Venusaur: Leaf Storm -> Farigiraf",
+      0.2
+     ],
+     [
+      "Charizard: Weather Ball -> Farigiraf + Venusaur: Protect",
+      0.2
+     ],
+     [
+      "Charizard: Weather Ball -> Farigiraf + Venusaur: Sleep Powder -> Farigiraf",
+      0.2
+     ]
+    ],
+    "myPick": "Farigiraf: Protect + -",
+    "thPick": "Charizard: Weather Ball -> Farigiraf + Venusaur: Sludge Bomb -> Farigiraf",
+    "value": 0.001,
+    "size": [
+     6,
+     16
+    ]
+   },
+   {
+    "turn": 5,
+    "my": [
+     [
+      "Farigiraf: Protect + -",
+      0.48
+     ],
+     [
+      "Farigiraf: Trick Room + -",
+      0.13
+     ],
+     [
+      "Farigiraf: Thunderbolt -> Charizard + -",
+      0.13
+     ],
+     [
+      "Farigiraf: Psychic -> Charizard + -",
+      0.11
+     ]
+    ],
+    "th": [
+     [
+      "Charizard: Weather Ball -> Farigiraf + Venusaur: Leaf Storm -> Farigiraf",
+      0.25
+     ],
+     [
+      "Charizard: Weather Ball -> Farigiraf + Venusaur: Protect",
+      0.25
+     ],
+     [
+      "Charizard: Weather Ball -> Farigiraf + Venusaur: Sleep Powder -> Farigiraf",
+      0.25
+     ],
+     [
+      "Charizard: Weather Ball -> Farigiraf + Venusaur: Sludge Bomb -> Farigiraf",
+      0.25
+     ]
+    ],
+    "myPick": "Farigiraf: Psychic -> Charizard + -",
+    "thPick": "Charizard: Weather Ball -> Farigiraf + Venusaur: Sleep Powder -> Farigiraf",
+    "value": 0.001,
+    "size": [
+     6,
+     16
+    ]
+   }
+  ],
+  "events": [
+   [
+    "your Farigiraf is out (Farigiraf)",
+    "your Torkoal is out (Torkoal)",
+    "their Charizard is out (Charizard)",
+    "their Venusaur is out (Venusaur)",
+    "sun starts (Drought)"
+   ],
+   [
+    "their Charizard Mega Evolves",
+    "<b>your Farigiraf</b> uses <b>Protect</b>",
+    "<b>their Venusaur</b> uses <b>Sleep Powder</b> on your Farigiraf",
+    "&nbsp;&nbsp;your Farigiraf protects itself",
+    "<b>their Charizard</b> uses <b>Hurricane</b> on your Torkoal",
+    "&nbsp;&nbsp;it misses your Torkoal",
+    "<b>your Torkoal</b> uses <b>Weather Ball</b> on their Venusaur",
+    "&nbsp;&nbsp;super effective on their Venusaur",
+    "&nbsp;&nbsp;their Venusaur uses up its Focus Sash",
+    "&nbsp;&nbsp;their Venusaur &minus;99% &rarr; 1%"
+   ],
+   [
+    "<b>your Torkoal</b> uses <b>Protect</b>",
+    "<b>their Venusaur</b> uses <b>Sludge Bomb</b> on your Torkoal",
+    "&nbsp;&nbsp;your Torkoal protects itself",
+    "<b>their Charizard</b> uses <b>Heat Wave</b>",
+    "&nbsp;&nbsp;your Torkoal protects itself",
+    "&nbsp;&nbsp;your Farigiraf &minus;67% &rarr; 33%",
+    "&nbsp;&nbsp;your Farigiraf uses up its Sitrus Berry",
+    "&nbsp;&nbsp;your Farigiraf +25% &rarr; 58% (Sitrus Berry)",
+    "<b>your Farigiraf</b> uses <b>Psychic</b> on their Charizard",
+    "&nbsp;&nbsp;their Charizard &minus;37% &rarr; 63%"
+   ],
+   [
+    "<b>your Farigiraf</b> uses <b>Protect</b>",
+    "<b>their Venusaur</b> uses <b>Sludge Bomb</b> on your Torkoal",
+    "&nbsp;&nbsp;your Torkoal &minus;56% &rarr; 44%",
+    "<b>their Charizard</b> uses <b>Heat Wave</b>",
+    "&nbsp;&nbsp;your Farigiraf protects itself",
+    "&nbsp;&nbsp;resisted by your Torkoal",
+    "&nbsp;&nbsp;your Torkoal &minus;44% &rarr; 0%",
+    "&nbsp;&nbsp;<b>your Torkoal faints</b>"
+   ],
+   [
+    "<b>your Farigiraf</b> uses <b>Protect</b>",
+    "<b>their Venusaur</b> uses <b>Sludge Bomb</b> on your Farigiraf",
+    "&nbsp;&nbsp;your Farigiraf protects itself",
+    "<b>their Charizard</b> uses <b>Weather Ball</b> on your Farigiraf",
+    "&nbsp;&nbsp;your Farigiraf protects itself"
+   ],
+   [
+    "<b>their Venusaur</b> uses <b>Sleep Powder</b> on your Farigiraf",
+    "<b>their Charizard</b> uses <b>Weather Ball</b> on your Farigiraf",
+    "&nbsp;&nbsp;your Farigiraf &minus;58% &rarr; 0%",
+    "&nbsp;&nbsp;<b>your Farigiraf faints</b>",
+    "<b>They win</b>"
+   ]
+  ],
+  "sets": [
+   "Farigiraf @ Sitrus Berry · Armor Tail · Relaxed · Trick Room / Protect / Psychic / Thunderbolt",
+   "Torkoal @ Charcoal · Drought · Quiet · Eruption / Weather Ball / Earth Power / Protect",
+   "Charizard @ charizarditey · blaze · Modest · heatwave / hurricane / protect / weatherball",
+   "Venusaur @ focussash · chlorophyll · Modest · leafstorm / protect / sleeppowder / sludgebomb"
+  ]
+ },
+ {
+  "tab": "Perish",
+  "lead": "Incineroar + Kingambit",
+  "tr": 0,
+  "mine": [
+   "Farigiraf",
+   "Torkoal"
+  ],
+  "theirs": [
+   "Gengar",
+   "Incineroar"
+  ],
+  "w": 0.2081,
+  "K": 0,
+  "v": 0,
+  "turns": [
+   {
+    "turn": 1,
+    "my": [
+     [
+      "Farigiraf: Psychic -> Gengar + Torkoal: Protect",
+      0.59
+     ],
+     [
+      "Farigiraf: Trick Room + Torkoal: Eruption",
+      0.19
+     ],
+     [
+      "Farigiraf: Trick Room + Torkoal: Weather Ball -> Gengar",
+      0.09
+     ]
+    ],
+    "th": [
+     [
+      "Gengar: Sludge Bomb -> Farigiraf (mega) + Incineroar: Flare Blitz -> Farigiraf",
+      0.44
+     ],
+     [
+      "Gengar: Sludge Bomb -> Torkoal (mega) + Incineroar: Flare Blitz -> Torkoal",
+      0.4
+     ],
+     [
+      "Gengar: Protect (mega) + Incineroar: Parting Shot -> Farigiraf",
+      0.06
+     ],
+     [
+      "Gengar: Shadow Ball -> Torkoal (mega) + Incineroar: Flare Blitz -> Torkoal",
+      0.05
+     ]
+    ],
+    "myPick": "Farigiraf: Protect + Torkoal: Weather Ball -> Gengar",
+    "thPick": "Gengar: Sludge Bomb -> Torkoal (mega) + Incineroar: Flare Blitz -> Torkoal",
+    "value": 0.552,
+    "size": [
+     30,
+     35
+    ]
+   },
+   {
+    "turn": 2,
+    "my": [
+     [
+      "Farigiraf: Psychic -> Gengar + -",
+      1
+     ]
+    ],
+    "th": [
+     [
+      "Gengar: Perish Song + Incineroar: Parting Shot -> Farigiraf",
+      0.98
+     ]
+    ],
+    "myPick": "Farigiraf: Psychic -> Gengar + -",
+    "thPick": "Gengar: Perish Song + Incineroar: Parting Shot -> Farigiraf",
+    "value": 0.004,
+    "size": [
+     5,
+     9
+    ]
+   },
+   {
+    "turn": 3,
+    "my": [
+     [
+      "Farigiraf: Protect + -",
+      0.95
+     ]
+    ],
+    "th": [
+     [
+      "Gengar: Sludge Bomb -> Farigiraf + Incineroar: Flare Blitz -> Farigiraf",
+      0.99
+     ]
+    ],
+    "myPick": "Farigiraf: Protect + -",
+    "thPick": "Gengar: Sludge Bomb -> Farigiraf + Incineroar: Flare Blitz -> Farigiraf",
+    "value": 0.001,
+    "size": [
+     5,
+     9
+    ]
+   },
+   {
+    "turn": 4,
+    "my": [
+     [
+      "Farigiraf: Psychic -> Gengar + -",
+      0.99
+     ]
+    ],
+    "th": [
+     [
+      "Gengar: Sludge Bomb -> Farigiraf + Incineroar: Flare Blitz -> Farigiraf",
+      0.99
+     ]
+    ],
+    "myPick": "Farigiraf: Psychic -> Gengar + -",
+    "thPick": "Gengar: Sludge Bomb -> Farigiraf + Incineroar: Flare Blitz -> Farigiraf",
+    "value": 0.001,
+    "size": [
+     5,
+     9
+    ]
+   },
+   {
+    "turn": 5,
+    "my": [
+     [
+      "Farigiraf: Protect + -",
+      1
+     ]
+    ],
+    "th": [
+     [
+      "- + Incineroar: Flare Blitz -> Farigiraf",
+      1
+     ]
+    ],
+    "myPick": "Farigiraf: Protect + -",
+    "thPick": "- + Incineroar: Flare Blitz -> Farigiraf",
+    "value": 0.5,
+    "size": [
+     3,
+     3
+    ]
+   }
+  ],
+  "events": [
+   [
+    "your Farigiraf is out (Farigiraf)",
+    "your Torkoal is out (Torkoal)",
+    "their Gengar is out (Gengar)",
+    "their Incineroar is out (Incineroar)",
+    "&nbsp;&nbsp;your Farigiraf atk &minus;1",
+    "&nbsp;&nbsp;your Torkoal atk &minus;1",
+    "sun starts (Drought)"
+   ],
+   [
+    "their Gengar Mega Evolves",
+    "<b>your Farigiraf</b> uses <b>Protect</b>",
+    "<b>their Gengar</b> uses <b>Sludge Bomb</b> on your Torkoal",
+    "&nbsp;&nbsp;your Torkoal &minus;85% &rarr; 15%",
+    "<b>their Incineroar</b> uses <b>Flare Blitz</b> on your Torkoal",
+    "&nbsp;&nbsp;resisted by your Torkoal",
+    "&nbsp;&nbsp;your Torkoal &minus;15% &rarr; 0%",
+    "&nbsp;&nbsp;<b>your Torkoal faints</b>",
+    "&nbsp;&nbsp;their Incineroar &minus;4% &rarr; 96% (Recoil)"
+   ],
+   [
+    "<b>their Gengar</b> uses <b>Perish Song</b>",
+    "<b>their Incineroar</b> uses <b>Parting Shot</b> on your Farigiraf",
+    "&nbsp;&nbsp;your Farigiraf atk &minus;1",
+    "&nbsp;&nbsp;your Farigiraf spa &minus;1",
+    "<b>your Farigiraf</b> uses <b>Psychic</b> on their Gengar",
+    "&nbsp;&nbsp;super effective on their Gengar",
+    "&nbsp;&nbsp;their Gengar &minus;63% &rarr; 37%"
+   ],
+   [
+    "<b>your Farigiraf</b> uses <b>Protect</b>",
+    "<b>their Gengar</b> uses <b>Sludge Bomb</b> on your Farigiraf",
+    "&nbsp;&nbsp;your Farigiraf protects itself",
+    "<b>their Incineroar</b> uses <b>Flare Blitz</b> on your Farigiraf",
+    "&nbsp;&nbsp;your Farigiraf protects itself"
+   ],
+   [
+    "<b>their Gengar</b> uses <b>Sludge Bomb</b> on your Farigiraf",
+    "&nbsp;&nbsp;your Farigiraf &minus;55% &rarr; 45%",
+    "&nbsp;&nbsp;your Farigiraf uses up its Sitrus Berry",
+    "&nbsp;&nbsp;your Farigiraf +25% &rarr; 70% (Sitrus Berry)",
+    "<b>your Farigiraf</b> uses <b>Psychic</b> on their Gengar",
+    "&nbsp;&nbsp;super effective on their Gengar",
+    "&nbsp;&nbsp;their Gengar &minus;37% &rarr; 0%",
+    "&nbsp;&nbsp;<b>their Gengar faints</b>",
+    "<b>their Incineroar</b> uses <b>Flare Blitz</b> on your Farigiraf",
+    "&nbsp;&nbsp;your Farigiraf &minus;55% &rarr; 15%",
+    "&nbsp;&nbsp;their Incineroar &minus;20% &rarr; 75% (Recoil)"
+   ],
+   [
+    "<b>your Farigiraf</b> uses <b>Protect</b>",
+    "<b>their Incineroar</b> uses <b>Flare Blitz</b> on your Farigiraf",
+    "&nbsp;&nbsp;your Farigiraf protects itself",
+    "the weather ends",
+    "&nbsp;&nbsp;<b>your Farigiraf faints</b>",
+    "&nbsp;&nbsp;<b>their Incineroar faints</b>",
+    "<b>They win</b>"
+   ]
+  ],
+  "sets": [
+   "Farigiraf @ Sitrus Berry · Armor Tail · Relaxed · Trick Room / Protect / Psychic / Thunderbolt",
+   "Torkoal @ Charcoal · Drought · Quiet · Eruption / Weather Ball / Earth Power / Protect",
+   "Gengar @ gengarite · cursedbody · Modest · perishsong / protect / shadowball / sludgebomb",
+   "Incineroar @ passhoberry · intimidate · Sassy · fakeout / flareblitz / partingshot / protect"
+  ]
+ },
+ {
+  "tab": "Extra: Perish trap",
+  "lead": "(chosen example)",
+  "tr": 0,
+  "mine": [
+   "Kingambit",
+   "Blastoise"
+  ],
+  "theirs": [
+   "Gengar",
+   "Incineroar"
+  ],
+  "w": 0,
+  "K": 0,
+  "v": 1,
+  "turns": [
+   {
+    "turn": 1,
+    "my": [
+     [
+      "Kingambit: Sucker Punch -> Gengar + Blastoise: Fake Out -> Incineroar (mega)",
+      0.57
+     ],
+     [
+      "Kingambit: Low Kick -> Incineroar + Blastoise: Fake Out -> Incineroar (mega)",
+      0.14
+     ],
+     [
+      "Kingambit: Low Kick -> Incineroar + Blastoise: Dark Pulse -> Gengar (mega)",
+      0.09
+     ],
+     [
+      "Kingambit: Sucker Punch -> Gengar + Blastoise: Water Spout (mega)",
+      0.05
+     ]
+    ],
+    "th": [
+     [
+      "Gengar: Protect (mega) + Incineroar: Fake Out -> Blastoise",
+      0.37
+     ],
+     [
+      "Gengar: Protect (mega) + Incineroar: Fake Out -> Kingambit",
+      0.31
+     ],
+     [
+      "Gengar: Sludge Bomb -> Blastoise (mega) + Incineroar: Fake Out -> Blastoise",
+      0.09
+     ],
+     [
+      "Gengar: Sludge Bomb -> Blastoise (mega) + Incineroar: Protect",
+      0.08
+     ]
+    ],
+    "myPick": "Kingambit: Sucker Punch -> Gengar + Blastoise: Fake Out -> Incineroar (mega)",
+    "thPick": "Gengar: Protect (mega) + Incineroar: Fake Out -> Blastoise",
+    "value": 0.952,
+    "size": [
+     35,
+     35
+    ]
+   },
+   {
+    "turn": 2,
+    "my": [
+     [
+      "Kingambit: Kowtow Cleave -> Gengar + Blastoise: Aura Sphere -> Incineroar",
+      0.56
+     ],
+     [
+      "Kingambit: Low Kick -> Incineroar + Blastoise: Dark Pulse -> Gengar",
+      0.28
+     ],
+     [
+      "Kingambit: Sucker Punch -> Gengar + Blastoise: Water Spout",
+      0.13
+     ]
+    ],
+    "th": [
+     [
+      "Gengar: Sludge Bomb -> Blastoise + Incineroar: Flare Blitz -> Kingambit",
+      0.38
+     ],
+     [
+      "Gengar: Shadow Ball -> Kingambit + Incineroar: Flare Blitz -> Kingambit",
+      0.37
+     ],
+     [
+      "Gengar: Protect + Incineroar: Flare Blitz -> Kingambit",
+      0.14
+     ],
+     [
+      "Gengar: Sludge Bomb -> Blastoise + Incineroar: Protect",
+      0.11
+     ]
+    ],
+    "myPick": "Kingambit: Sucker Punch -> Gengar + Blastoise: Water Spout",
+    "thPick": "Gengar: Shadow Ball -> Kingambit + Incineroar: Flare Blitz -> Kingambit",
+    "value": 0.993,
+    "size": [
+     28,
+     25
+    ]
+   },
+   {
+    "turn": 3,
+    "my": [
+     [
+      "Kingambit: Iron Head -> Incineroar + Blastoise: Water Spout",
+      0.08
+     ],
+     [
+      "Kingambit: Iron Head -> Incineroar + Blastoise: Aura Sphere -> Incineroar",
+      0.08
+     ],
+     [
+      "Kingambit: Iron Head -> Incineroar + Blastoise: Dark Pulse -> Incineroar",
+      0.08
+     ],
+     [
+      "Kingambit: Kowtow Cleave -> Incineroar + Blastoise: Water Spout",
+      0.08
+     ]
+    ],
+    "th": [
+     [
+      "- + Incineroar: Protect",
+      1
+     ]
+    ],
+    "myPick": "Kingambit: Kowtow Cleave -> Incineroar + Blastoise: Water Spout",
+    "thPick": "- + Incineroar: Protect",
+    "value": 0.999,
+    "size": [
+     12,
+     5
+    ]
+   },
+   {
+    "turn": 4,
+    "my": [
+     [
+      "Kingambit: Iron Head -> Incineroar + Blastoise: Aura Sphere -> Incineroar",
+      0.12
+     ],
+     [
+      "Kingambit: Iron Head -> Incineroar + Blastoise: Dark Pulse -> Incineroar",
+      0.12
+     ],
+     [
+      "Kingambit: Kowtow Cleave -> Incineroar + Blastoise: Aura Sphere -> Incineroar",
+      0.12
+     ],
+     [
+      "Kingambit: Kowtow Cleave -> Incineroar + Blastoise: Dark Pulse -> Incineroar",
+      0.12
+     ]
+    ],
+    "th": [
+     [
+      "- + Incineroar: Protect",
+      1
+     ]
+    ],
+    "myPick": "Kingambit: Kowtow Cleave -> Incineroar + Blastoise: Dark Pulse -> Incineroar",
+    "thPick": "- + Incineroar: Protect",
+    "value": 1,
+    "size": [
+     12,
+     5
+    ]
+   }
+  ],
+  "events": [
+   [
+    "your Kingambit is out (Kingambit)",
+    "your Blastoise is out (Blastoise)",
+    "their Gengar is out (Gengar)",
+    "their Incineroar is out (Incineroar)",
+    "&nbsp;&nbsp;your Kingambit atk &minus;1",
+    "&nbsp;&nbsp;your Kingambit atk +2",
+    "&nbsp;&nbsp;your Blastoise atk &minus;1"
+   ],
+   [
+    "their Gengar Mega Evolves",
+    "your Blastoise Mega Evolves",
+    "<b>their Gengar</b> uses <b>Protect</b>",
+    "<b>your Blastoise</b> uses <b>Fake Out</b> on their Incineroar",
+    "&nbsp;&nbsp;their Incineroar &minus;6% &rarr; 94%",
+    "&nbsp;&nbsp;their Incineroar can&rsquo;t move (flinch)",
+    "<b>your Kingambit</b> uses <b>Sucker Punch</b> (fails)",
+    "&nbsp;&nbsp;but it fails (your Kingambit)"
+   ],
+   [
+    "<b>your Kingambit</b> uses <b>Sucker Punch</b> on their Gengar",
+    "&nbsp;&nbsp;super effective on their Gengar",
+    "&nbsp;&nbsp;their Gengar &minus;100% &rarr; 0%",
+    "&nbsp;&nbsp;<b>their Gengar faints</b>",
+    "<b>your Blastoise</b> uses <b>Water Spout</b> on their Incineroar",
+    "&nbsp;&nbsp;super effective on their Incineroar",
+    "&nbsp;&nbsp;their Incineroar uses up its Passho Berry",
+    "&nbsp;&nbsp;their Incineroar uses up its Passho Berry",
+    "&nbsp;&nbsp;their Incineroar &minus;70% &rarr; 24%",
+    "<b>their Incineroar</b> uses <b>Flare Blitz</b> on your Kingambit",
+    "&nbsp;&nbsp;super effective on your Kingambit",
+    "&nbsp;&nbsp;your Kingambit &minus;67% &rarr; 33%",
+    "&nbsp;&nbsp;their Incineroar &minus;23% &rarr; 1% (Recoil)"
+   ],
+   [
+    "<b>their Incineroar</b> uses <b>Protect</b>",
+    "<b>your Blastoise</b> uses <b>Water Spout</b> on their Incineroar",
+    "&nbsp;&nbsp;their Incineroar protects itself",
+    "<b>your Kingambit</b> uses <b>Kowtow Cleave</b> on their Incineroar",
+    "&nbsp;&nbsp;their Incineroar protects itself"
+   ],
+   [
+    "<b>their Incineroar</b> uses <b>Protect</b> (fails)",
+    "&nbsp;&nbsp;but it fails (their Incineroar)",
+    "<b>your Blastoise</b> uses <b>Dark Pulse</b> on their Incineroar",
+    "&nbsp;&nbsp;resisted by their Incineroar",
+    "&nbsp;&nbsp;their Incineroar &minus;1% &rarr; 0%",
+    "&nbsp;&nbsp;<b>their Incineroar faints</b>",
+    "<b>You win</b>"
+   ]
+  ],
+  "sets": [
+   "Kingambit @ Chople Berry · Defiant · Adamant · Iron Head / Kowtow Cleave / Low Kick / Sucker Punch",
+   "Blastoise @ Blastoisinite · Torrent · Quiet · Fake Out / Water Spout / Aura Sphere / Dark Pulse",
+   "Gengar @ gengarite · cursedbody · Modest · perishsong / protect / shadowball / sludgebomb",
+   "Incineroar @ passhoberry · intimidate · Sassy · fakeout / flareblitz / partingshot / protect"
+  ]
+ },
+ {
+  "tab": "Extra: Perish trap",
+  "lead": "(chosen example)",
+  "tr": 100,
+  "mine": [
+   "Torkoal",
+   "Farigiraf"
+  ],
+  "theirs": [
+   "Gengar",
+   "Incineroar"
+  ],
+  "w": 0,
+  "K": 2,
+  "v": 1,
+  "turns": [
+   {
+    "turn": 1,
+    "my": [
+     [
+      "Torkoal: Eruption + Farigiraf: Thunderbolt -> Incineroar",
+      0.92
+     ]
+    ],
+    "th": [
+     [
+      "Gengar: Protect (mega) + Incineroar: Protect",
+      0.74
+     ],
+     [
+      "Gengar: Protect (mega) + Incineroar: Parting Shot -> Torkoal",
+      0.12
+     ],
+     [
+      "Gengar: Protect (mega) + Incineroar: Parting Shot -> Farigiraf",
+      0.1
+     ]
+    ],
+    "myPick": "Torkoal: Eruption + Farigiraf: Thunderbolt -> Incineroar",
+    "thPick": "Gengar: Protect (mega) + Incineroar: Protect",
+    "value": 0.928,
+    "size": [
+     24,
+     35
+    ]
+   },
+   {
+    "turn": 2,
+    "my": [
+     [
+      "Torkoal: Weather Ball -> Gengar + Farigiraf: Thunderbolt -> Gengar",
+      0.45
+     ],
+     [
+      "Torkoal: Weather Ball -> Gengar + Farigiraf: Thunderbolt -> Incineroar",
+      0.3
+     ],
+     [
+      "Torkoal: Eruption + Farigiraf: Thunderbolt -> Incineroar",
+      0.22
+     ]
+    ],
+    "th": [
+     [
+      "Gengar: Protect + Incineroar: Protect",
+      0.26
+     ],
+     [
+      "Gengar: Protect + Incineroar: Parting Shot -> Farigiraf",
+      0.21
+     ],
+     [
+      "Gengar: Protect + Incineroar: Parting Shot -> Torkoal",
+      0.18
+     ],
+     [
+      "Gengar: Sludge Bomb -> Torkoal + Incineroar: Parting Shot -> Farigiraf",
+      0.08
+     ]
+    ],
+    "myPick": "Torkoal: Weather Ball -> Gengar + Farigiraf: Thunderbolt -> Incineroar",
+    "thPick": "Gengar: Protect + Incineroar: Parting Shot -> Farigiraf",
+    "value": 0.971,
+    "size": [
+     24,
+     25
+    ]
+   },
+   {
+    "turn": 3,
+    "my": [
+     [
+      "Torkoal: Protect + Farigiraf: Trick Room",
+      0.49
+     ],
+     [
+      "Torkoal: Protect + Farigiraf: Psychic -> Gengar",
+      0.15
+     ],
+     [
+      "Torkoal: Eruption + Farigiraf: Psychic -> Gengar",
+      0.13
+     ],
+     [
+      "Torkoal: Eruption + Farigiraf: Trick Room",
+      0.07
+     ]
+    ],
+    "th": [
+     [
+      "Gengar: Sludge Bomb -> Torkoal + Incineroar: Flare Blitz -> Torkoal",
+      0.49
+     ],
+     [
+      "Gengar: Sludge Bomb -> Farigiraf + Incineroar: Flare Blitz -> Farigiraf",
+      0.37
+     ]
+    ],
+    "myPick": "Torkoal: Weather Ball -> Gengar + Farigiraf: Psychic -> Gengar",
+    "thPick": "Gengar: Perish Song + Incineroar: Parting Shot -> Farigiraf",
+    "value": 0.5,
+    "size": [
+     30,
+     25
+    ]
+   },
+   {
+    "turn": 4,
+    "my": [
+     [
+      "Torkoal: Eruption + Farigiraf: Thunderbolt -> Incineroar",
+      0.55
+     ],
+     [
+      "Torkoal: Earth Power -> Incineroar + Farigiraf: Thunderbolt -> Incineroar",
+      0.36
+     ],
+     [
+      "Torkoal: Weather Ball -> Incineroar + Farigiraf: Thunderbolt -> Incineroar",
+      0.07
+     ]
+    ],
+    "th": [
+     [
+      "- + Incineroar: Parting Shot -> Torkoal",
+      0.99
+     ]
+    ],
+    "myPick": "Torkoal: Eruption + Farigiraf: Thunderbolt -> Incineroar",
+    "thPick": "- + Incineroar: Parting Shot -> Torkoal",
+    "value": 0.997,
+    "size": [
+     12,
+     5
+    ]
+   },
+   {
+    "turn": 5,
+    "my": [
+     [
+      "Torkoal: Eruption + Farigiraf: Thunderbolt -> Incineroar",
+      0.52
+     ],
+     [
+      "Torkoal: Earth Power -> Incineroar + Farigiraf: Thunderbolt -> Incineroar",
+      0.38
+     ],
+     [
+      "Torkoal: Weather Ball -> Incineroar + Farigiraf: Thunderbolt -> Incineroar",
+      0.08
+     ]
+    ],
+    "th": [
+     [
+      "- + Incineroar: Parting Shot -> Torkoal",
+      0.97
+     ]
+    ],
+    "myPick": "Torkoal: Earth Power -> Incineroar + Farigiraf: Thunderbolt -> Incineroar",
+    "thPick": "- + Incineroar: Parting Shot -> Torkoal",
+    "value": 0.998,
+    "size": [
+     12,
+     5
+    ]
+   },
+   {
+    "turn": 6,
+    "my": [
+     [
+      "Torkoal: Eruption + Farigiraf: Protect",
+      0.12
+     ],
+     [
+      "Torkoal: Eruption + Farigiraf: Thunderbolt -> Incineroar",
+      0.12
+     ],
+     [
+      "Torkoal: Weather Ball -> Incineroar + Farigiraf: Protect",
+      0.12
+     ],
+     [
+      "Torkoal: Weather Ball -> Incineroar + Farigiraf: Thunderbolt -> Incineroar",
+      0.12
+     ]
+    ],
+    "th": [
+     [
+      "- + Incineroar: Parting Shot -> Torkoal",
+      0.39
+     ],
+     [
+      "- + Incineroar: Parting Shot -> Farigiraf",
+      0.39
+     ],
+     [
+      "- + Incineroar: Protect",
+      0.22
+     ]
+    ],
+    "myPick": "Torkoal: Earth Power -> Incineroar + Farigiraf: Protect",
+    "thPick": "- + Incineroar: Parting Shot -> Torkoal",
+    "value": 1,
+    "size": [
+     12,
+     5
+    ]
+   }
+  ],
+  "events": [
+   [
+    "your Torkoal is out (Torkoal)",
+    "your Farigiraf is out (Farigiraf)",
+    "their Gengar is out (Gengar)",
+    "their Incineroar is out (Incineroar)",
+    "&nbsp;&nbsp;your Torkoal atk &minus;1",
+    "&nbsp;&nbsp;your Farigiraf atk &minus;1",
+    "sun starts (Drought)"
+   ],
+   [
+    "Trick Room is up",
+    "their Gengar Mega Evolves",
+    "<b>their Incineroar</b> uses <b>Protect</b>",
+    "<b>their Gengar</b> uses <b>Protect</b>",
+    "<b>your Torkoal</b> uses <b>Eruption</b>",
+    "&nbsp;&nbsp;their Gengar protects itself",
+    "&nbsp;&nbsp;their Incineroar protects itself",
+    "<b>your Farigiraf</b> uses <b>Thunderbolt</b> on their Incineroar",
+    "&nbsp;&nbsp;their Incineroar protects itself"
+   ],
+   [
+    "<b>their Gengar</b> uses <b>Protect</b>",
+    "<b>your Torkoal</b> uses <b>Weather Ball</b> on their Gengar",
+    "&nbsp;&nbsp;their Gengar protects itself",
+    "<b>your Farigiraf</b> uses <b>Thunderbolt</b> on their Incineroar",
+    "&nbsp;&nbsp;their Incineroar &minus;18% &rarr; 82%",
+    "<b>their Incineroar</b> uses <b>Parting Shot</b> on your Farigiraf",
+    "&nbsp;&nbsp;your Farigiraf atk &minus;1",
+    "&nbsp;&nbsp;your Farigiraf spa &minus;1",
+    "<b>Trick Room ends</b>"
+   ],
+   [
+    "<b>their Gengar</b> uses <b>Perish Song</b>",
+    "<b>your Farigiraf</b> uses <b>Psychic</b> on their Gengar",
+    "&nbsp;&nbsp;super effective on their Gengar",
+    "&nbsp;&nbsp;their Gengar &minus;58% &rarr; 42%",
+    "<b>their Incineroar</b> uses <b>Parting Shot</b> on your Farigiraf",
+    "&nbsp;&nbsp;your Farigiraf atk &minus;1",
+    "&nbsp;&nbsp;your Farigiraf spa &minus;1",
+    "<b>your Torkoal</b> uses <b>Weather Ball</b> on their Gengar",
+    "&nbsp;&nbsp;their Gengar &minus;42% &rarr; 0%",
+    "&nbsp;&nbsp;<b>their Gengar faints</b>"
+   ],
+   [
+    "<b>their Incineroar</b> uses <b>Parting Shot</b> on your Torkoal",
+    "&nbsp;&nbsp;your Torkoal atk &minus;1",
+    "&nbsp;&nbsp;your Torkoal spa &minus;1",
+    "<b>your Farigiraf</b> uses <b>Thunderbolt</b> on their Incineroar",
+    "&nbsp;&nbsp;their Incineroar &minus;8% &rarr; 74%",
+    "<b>your Torkoal</b> uses <b>Eruption</b> on their Incineroar",
+    "&nbsp;&nbsp;resisted by their Incineroar",
+    "&nbsp;&nbsp;their Incineroar &minus;31% &rarr; 43%"
+   ],
+   [
+    "<b>your Farigiraf</b> uses <b>Thunderbolt</b> on their Incineroar",
+    "&nbsp;&nbsp;their Incineroar &minus;9% &rarr; 34%",
+    "<b>their Incineroar</b> uses <b>Parting Shot</b> on your Torkoal",
+    "&nbsp;&nbsp;your Torkoal atk &minus;1",
+    "&nbsp;&nbsp;your Torkoal spa &minus;1",
+    "<b>your Torkoal</b> uses <b>Earth Power</b> on their Incineroar",
+    "&nbsp;&nbsp;super effective on their Incineroar",
+    "&nbsp;&nbsp;their Incineroar &minus;18% &rarr; 16%",
+    "the weather ends"
+   ],
+   [
+    "<b>your Farigiraf</b> uses <b>Protect</b>",
+    "<b>their Incineroar</b> uses <b>Parting Shot</b> on your Torkoal",
+    "&nbsp;&nbsp;your Torkoal atk &minus;1",
+    "&nbsp;&nbsp;your Torkoal spa &minus;1",
+    "<b>your Torkoal</b> uses <b>Earth Power</b> on their Incineroar",
+    "&nbsp;&nbsp;super effective on their Incineroar",
+    "&nbsp;&nbsp;their Incineroar &minus;16% &rarr; 0%",
+    "&nbsp;&nbsp;<b>their Incineroar faints</b>",
+    "<b>You win</b>"
+   ]
+  ],
+  "sets": [
+   "Torkoal @ Charcoal · Drought · Quiet · Eruption / Weather Ball / Earth Power / Protect",
+   "Farigiraf @ Sitrus Berry · Armor Tail · Relaxed · Trick Room / Protect / Psychic / Thunderbolt",
+   "Gengar @ gengarite · cursedbody · Modest · perishsong / protect / shadowball / sludgebomb",
+   "Incineroar @ passhoberry · intimidate · Sassy · fakeout / flareblitz / partingshot / protect"
+  ]
+ }
+]

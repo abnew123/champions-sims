@@ -1,0 +1,1498 @@
+[
+{
+"key": "Rillaboom",
+"i": 0,
+"species": "Rillaboom",
+"item": "Miracle Seed",
+"ability": "Grassy Surge",
+"mega": 0,
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+0,
+2
+]
+},
+{
+"key": "Rillaboom",
+"i": 1,
+"species": "Rillaboom",
+"item": "Miracle Seed",
+"ability": "Grassy Surge",
+"mega": 0,
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+]
+},
+{
+"key": "Rillaboom",
+"i": 2,
+"species": "Rillaboom",
+"item": "Miracle Seed",
+"ability": "Grassy Surge",
+"mega": 0,
+"nature": "Adamant",
+"evs": [
+18,
+25,
+5,
+0,
+10,
+8
+]
+},
+{
+"key": "Sneasler",
+"i": 0,
+"species": "Sneasler",
+"item": "Grassy Seed",
+"ability": "Unburden",
+"mega": 0,
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"key": "Sneasler",
+"i": 1,
+"species": "Sneasler",
+"item": "Grassy Seed",
+"ability": "Unburden",
+"mega": 0,
+"nature": "Adamant",
+"evs": [
+0,
+32,
+2,
+0,
+0,
+32
+]
+},
+{
+"key": "Sneasler",
+"i": 2,
+"species": "Sneasler",
+"item": "Grassy Seed",
+"ability": "Unburden",
+"mega": 0,
+"nature": "Adamant",
+"evs": [
+16,
+20,
+0,
+0,
+0,
+30
+]
+},
+{
+"key": "M-Salamence",
+"i": 0,
+"species": "Salamence",
+"item": "Salamencite",
+"ability": "Intimidate",
+"mega": 1,
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "M-Salamence",
+"i": 1,
+"species": "Salamence",
+"item": "Salamencite",
+"ability": "Intimidate",
+"mega": 1,
+"nature": "Timid",
+"evs": [
+1,
+0,
+0,
+32,
+1,
+32
+]
+},
+{
+"key": "M-Salamence",
+"i": 2,
+"species": "Salamence",
+"item": "Salamencite",
+"ability": "Intimidate",
+"mega": 1,
+"nature": "Naive",
+"evs": [
+1,
+21,
+0,
+15,
+0,
+29
+]
+},
+{
+"key": "Incineroar",
+"i": 0,
+"species": "Incineroar",
+"item": "Sitrus Berry",
+"ability": "Intimidate",
+"mega": 0,
+"nature": "Careful",
+"evs": [
+32,
+0,
+14,
+0,
+20,
+0
+]
+},
+{
+"key": "Incineroar",
+"i": 1,
+"species": "Incineroar",
+"item": "Sitrus Berry",
+"ability": "Intimidate",
+"mega": 0,
+"nature": "Careful",
+"evs": [
+32,
+0,
+20,
+0,
+14,
+0
+]
+},
+{
+"key": "Incineroar",
+"i": 2,
+"species": "Incineroar",
+"item": "Sitrus Berry",
+"ability": "Intimidate",
+"mega": 0,
+"nature": "Careful",
+"evs": [
+32,
+0,
+20,
+0,
+13,
+1
+]
+},
+{
+"key": "Kingambit",
+"i": 0,
+"species": "Kingambit",
+"item": "Chople Berry",
+"ability": "Defiant",
+"mega": 0,
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+]
+},
+{
+"key": "Kingambit",
+"i": 1,
+"species": "Kingambit",
+"item": "Chople Berry",
+"ability": "Defiant",
+"mega": 0,
+"nature": "Adamant",
+"evs": [
+32,
+32,
+2,
+0,
+0,
+0
+]
+},
+{
+"key": "Kingambit",
+"i": 2,
+"species": "Kingambit",
+"item": "Chople Berry",
+"ability": "Defiant",
+"mega": 0,
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"key": "Basculegion",
+"i": 0,
+"species": "Basculegion",
+"item": "Life Orb",
+"ability": "Adaptability",
+"mega": 0,
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"key": "Basculegion",
+"i": 1,
+"species": "Basculegion",
+"item": "Life Orb",
+"ability": "Adaptability",
+"mega": 0,
+"nature": "Adamant",
+"evs": [
+0,
+32,
+2,
+0,
+0,
+32
+]
+},
+{
+"key": "Basculegion",
+"i": 2,
+"species": "Basculegion",
+"item": "Life Orb",
+"ability": "Adaptability",
+"mega": 0,
+"nature": "Adamant",
+"evs": [
+4,
+23,
+13,
+0,
+0,
+26
+]
+},
+{
+"key": "M-Floette",
+"i": 0,
+"species": "Floette-Eternal",
+"item": "Floettite",
+"ability": "Flower Veil",
+"mega": 1,
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "Farigiraf",
+"i": 0,
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"mega": 0,
+"nature": "Bold",
+"evs": [
+27,
+0,
+20,
+0,
+19,
+0
+]
+},
+{
+"key": "Farigiraf",
+"i": 1,
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"mega": 0,
+"nature": "Bold",
+"evs": [
+32,
+0,
+20,
+0,
+14,
+0
+]
+},
+{
+"key": "Farigiraf",
+"i": 2,
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"mega": 0,
+"nature": "Bold",
+"evs": [
+29,
+0,
+21,
+0,
+16,
+0
+]
+},
+{
+"key": "M-Golisopod",
+"i": 0,
+"species": "Golisopod",
+"item": "Golisopite",
+"ability": "Emergency Exit",
+"mega": 1,
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+]
+},
+{
+"key": "M-Golisopod",
+"i": 1,
+"species": "Golisopod",
+"item": "Golisopite",
+"ability": "Emergency Exit",
+"mega": 1,
+"nature": "Adamant",
+"evs": [
+32,
+32,
+2,
+0,
+0,
+0
+]
+},
+{
+"key": "M-Golisopod",
+"i": 2,
+"species": "Golisopod",
+"item": "Golisopite",
+"ability": "Emergency Exit",
+"mega": 1,
+"nature": "Adamant",
+"evs": [
+32,
+25,
+0,
+0,
+9,
+0
+]
+},
+{
+"key": "Pelipper",
+"i": 0,
+"species": "Pelipper",
+"item": "Focus Sash",
+"ability": "Drizzle",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+32,
+0,
+20,
+0,
+14,
+0
+]
+},
+{
+"key": "Indeedee-F",
+"i": 0,
+"species": "Indeedee-F",
+"item": "Colbur Berry",
+"ability": "Psychic Surge",
+"mega": 0,
+"nature": "Bold",
+"evs": [
+32,
+0,
+20,
+0,
+14,
+0
+]
+},
+{
+"key": "Gholdengo",
+"i": 0,
+"species": "Gholdengo",
+"item": "Life Orb",
+"ability": "Good as Gold",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "Gholdengo",
+"i": 1,
+"species": "Gholdengo",
+"item": "Life Orb",
+"ability": "Good as Gold",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+17,
+0,
+0,
+17,
+0,
+32
+]
+},
+{
+"key": "Gholdengo",
+"i": 2,
+"species": "Gholdengo",
+"item": "Life Orb",
+"ability": "Good as Gold",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+7,
+0,
+0,
+27,
+0,
+32
+]
+},
+{
+"key": "Arcanine-H",
+"i": 0,
+"species": "Arcanine-Hisui",
+"item": "Focus Sash",
+"ability": "Rock Head",
+"mega": 0,
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"key": "Arcanine-H",
+"i": 1,
+"species": "Arcanine-Hisui",
+"item": "Focus Sash",
+"ability": "Rock Head",
+"mega": 0,
+"nature": "Jolly",
+"evs": [
+1,
+32,
+0,
+0,
+1,
+32
+]
+},
+{
+"key": "Arcanine-H",
+"i": 2,
+"species": "Arcanine-Hisui",
+"item": "Focus Sash",
+"ability": "Rock Head",
+"mega": 0,
+"nature": "Jolly",
+"evs": [
+0,
+32,
+1,
+0,
+1,
+32
+]
+},
+{
+"key": "Sylveon",
+"i": 0,
+"species": "Sylveon",
+"item": "Fairy Feather",
+"ability": "Pixilate",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+]
+},
+{
+"key": "Whimsicott",
+"i": 0,
+"species": "Whimsicott",
+"item": "Focus Sash",
+"ability": "Prankster",
+"mega": 0,
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "Archaludon",
+"i": 0,
+"species": "Archaludon",
+"item": "Leftovers",
+"ability": "Stamina",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+32,
+0,
+20,
+0,
+14,
+0
+]
+},
+{
+"key": "M-Tyranitar",
+"i": 0,
+"species": "Tyranitar",
+"item": "Tyranitarite",
+"ability": "Sand Stream",
+"mega": 1,
+"nature": "Adamant",
+"evs": [
+25,
+16,
+0,
+0,
+0,
+25
+]
+},
+{
+"key": "M-Tyranitar",
+"i": 1,
+"species": "Tyranitar",
+"item": "Tyranitarite",
+"ability": "Sand Stream",
+"mega": 1,
+"nature": "Adamant",
+"evs": [
+16,
+18,
+0,
+0,
+0,
+32
+]
+},
+{
+"key": "M-Baxcalibur",
+"i": 0,
+"species": "Baxcalibur",
+"item": "Baxcalibrite",
+"ability": "Thermal Exchange",
+"mega": 1,
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"key": "Garchomp",
+"i": 0,
+"species": "Garchomp",
+"item": "Life Orb",
+"ability": "Rough Skin",
+"mega": 0,
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"key": "Garchomp",
+"i": 1,
+"species": "Garchomp",
+"item": "Life Orb",
+"ability": "Rough Skin",
+"mega": 0,
+"nature": "Adamant",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "Garchomp",
+"i": 2,
+"species": "Garchomp",
+"item": "Life Orb",
+"ability": "Rough Skin",
+"mega": 0,
+"nature": "Adamant",
+"evs": [
+0,
+0,
+5,
+31,
+0,
+30
+]
+},
+{
+"key": "M-Garchomp Z",
+"i": 0,
+"species": "Garchomp",
+"item": "Garchompite Z",
+"ability": "Rough Skin",
+"mega": 1,
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "M-Garchomp Z",
+"i": 1,
+"species": "Garchomp",
+"item": "Garchompite Z",
+"ability": "Rough Skin",
+"mega": 1,
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "M-Garchomp Z",
+"i": 2,
+"species": "Garchomp",
+"item": "Garchompite Z",
+"ability": "Rough Skin",
+"mega": 1,
+"nature": "Modest",
+"evs": [
+0,
+0,
+5,
+31,
+0,
+30
+]
+},
+{
+"key": "Milotic",
+"i": 0,
+"species": "Milotic",
+"item": "Leftovers",
+"ability": "Competitive",
+"mega": 0,
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+]
+},
+{
+"key": "Milotic",
+"i": 1,
+"species": "Milotic",
+"item": "Leftovers",
+"ability": "Competitive",
+"mega": 0,
+"nature": "Calm",
+"evs": [
+20,
+0,
+20,
+4,
+8,
+14
+]
+},
+{
+"key": "Milotic",
+"i": 2,
+"species": "Milotic",
+"item": "Leftovers",
+"ability": "Competitive",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+32,
+0,
+2,
+32,
+0,
+0
+]
+},
+{
+"key": "M-Charizard Y",
+"i": 0,
+"species": "Charizard",
+"item": "Charizardite Y",
+"ability": "Blaze",
+"mega": 1,
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "M-Charizard Y",
+"i": 1,
+"species": "Charizard",
+"item": "Charizardite Y",
+"ability": "Blaze",
+"mega": 1,
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "M-Charizard Y",
+"i": 2,
+"species": "Charizard",
+"item": "Charizardite Y",
+"ability": "Blaze",
+"mega": 1,
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "M-Gardevoir",
+"i": 0,
+"species": "Gardevoir",
+"item": "Gardevoirite",
+"ability": "Trace",
+"mega": 1,
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "M-Gardevoir",
+"i": 1,
+"species": "Gardevoir",
+"item": "Gardevoirite",
+"ability": "Trace",
+"mega": 1,
+"nature": "Modest",
+"evs": [
+2,
+0,
+2,
+32,
+0,
+30
+]
+},
+{
+"key": "M-Gardevoir",
+"i": 2,
+"species": "Gardevoir",
+"item": "Gardevoirite",
+"ability": "Trace",
+"mega": 1,
+"nature": "Modest",
+"evs": [
+7,
+0,
+0,
+32,
+0,
+27
+]
+},
+{
+"key": "M-Raichu Y",
+"i": 0,
+"species": "Raichu",
+"item": "Raichunite Y",
+"ability": "Lightning Rod",
+"mega": 1,
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "M-Raichu Y",
+"i": 1,
+"species": "Raichu",
+"item": "Raichunite Y",
+"ability": "Lightning Rod",
+"mega": 1,
+"nature": "Timid",
+"evs": [
+26,
+0,
+17,
+0,
+0,
+23
+]
+},
+{
+"key": "M-Raichu Y",
+"i": 2,
+"species": "Raichu",
+"item": "Raichunite Y",
+"ability": "Lightning Rod",
+"mega": 1,
+"nature": "Timid",
+"evs": [
+32,
+0,
+11,
+0,
+0,
+23
+]
+},
+{
+"key": "M-Staraptor",
+"i": 0,
+"species": "Staraptor",
+"item": "Staraptite",
+"ability": "Intimidate",
+"mega": 1,
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"key": "M-Staraptor",
+"i": 1,
+"species": "Staraptor",
+"item": "Staraptite",
+"ability": "Intimidate",
+"mega": 1,
+"nature": "Jolly",
+"evs": [
+32,
+2,
+0,
+0,
+0,
+32
+]
+},
+{
+"key": "M-Staraptor",
+"i": 2,
+"species": "Staraptor",
+"item": "Staraptite",
+"ability": "Intimidate",
+"mega": 1,
+"nature": "Jolly",
+"evs": [
+32,
+17,
+0,
+0,
+0,
+17
+]
+},
+{
+"key": "M-Metagross",
+"i": 0,
+"species": "Metagross",
+"item": "Metagrossite",
+"ability": "Clear Body",
+"mega": 1,
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"key": "M-Metagross",
+"i": 1,
+"species": "Metagross",
+"item": "Metagrossite",
+"ability": "Clear Body",
+"mega": 1,
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+]
+},
+{
+"key": "M-Metagross",
+"i": 2,
+"species": "Metagross",
+"item": "Metagrossite",
+"ability": "Clear Body",
+"mega": 1,
+"nature": "Adamant",
+"evs": [
+16,
+32,
+0,
+0,
+0,
+18
+]
+},
+{
+"key": "Volcarona",
+"i": 0,
+"species": "Volcarona",
+"item": "Grassy Seed",
+"ability": "Flame Body",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "Volcarona",
+"i": 1,
+"species": "Volcarona",
+"item": "Grassy Seed",
+"ability": "Flame Body",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+2,
+0,
+2,
+32,
+0,
+30
+]
+},
+{
+"key": "Volcarona",
+"i": 2,
+"species": "Volcarona",
+"item": "Grassy Seed",
+"ability": "Flame Body",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+12,
+0,
+0,
+32,
+0,
+22
+]
+},
+{
+"key": "Corviknight",
+"i": 0,
+"species": "Corviknight",
+"item": "Leftovers",
+"ability": "Mirror Armor",
+"mega": 0,
+"nature": "Careful",
+"evs": [
+32,
+0,
+20,
+0,
+14,
+0
+]
+},
+{
+"key": "Dragapult",
+"i": 0,
+"species": "Dragapult",
+"item": "Life Orb",
+"ability": "Clear Body",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "Dragapult",
+"i": 1,
+"species": "Dragapult",
+"item": "Life Orb",
+"ability": "Clear Body",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "Dragapult",
+"i": 2,
+"species": "Dragapult",
+"item": "Life Orb",
+"ability": "Clear Body",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "Torkoal",
+"i": 0,
+"species": "Torkoal",
+"item": "Charcoal",
+"ability": "Drought",
+"mega": 0,
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+]
+},
+{
+"key": "Torkoal",
+"i": 1,
+"species": "Torkoal",
+"item": "Charcoal",
+"ability": "Drought",
+"mega": 0,
+"nature": "Quiet",
+"evs": [
+32,
+0,
+1,
+32,
+1,
+0
+]
+},
+{
+"key": "Torkoal",
+"i": 2,
+"species": "Torkoal",
+"item": "Charcoal",
+"ability": "Drought",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+]
+},
+{
+"key": "Hatterene",
+"i": 0,
+"species": "Hatterene",
+"item": "Life Orb",
+"ability": "Magic Bounce",
+"mega": 0,
+"nature": "Quiet",
+"evs": [
+32,
+0,
+2,
+32,
+0,
+0
+]
+},
+{
+"key": "Hatterene",
+"i": 1,
+"species": "Hatterene",
+"item": "Life Orb",
+"ability": "Magic Bounce",
+"mega": 0,
+"nature": "Quiet",
+"evs": [
+27,
+0,
+7,
+32,
+0,
+0
+]
+},
+{
+"key": "Hatterene",
+"i": 2,
+"species": "Hatterene",
+"item": "Life Orb",
+"ability": "Magic Bounce",
+"mega": 0,
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+]
+},
+{
+"key": "Indeedee",
+"i": 0,
+"species": "Indeedee",
+"item": "Choice Scarf",
+"ability": "Psychic Surge",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+]
+},
+{
+"key": "Indeedee",
+"i": 1,
+"species": "Indeedee",
+"item": "Choice Scarf",
+"ability": "Psychic Surge",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+32,
+0,
+2,
+32,
+0,
+0
+]
+},
+{
+"key": "Indeedee",
+"i": 2,
+"species": "Indeedee",
+"item": "Choice Scarf",
+"ability": "Psychic Surge",
+"mega": 0,
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "Armarouge",
+"i": 0,
+"species": "Armarouge",
+"item": "Life Orb",
+"ability": "Flash Fire",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+7,
+0,
+21,
+32,
+0,
+6
+]
+},
+{
+"key": "Armarouge",
+"i": 1,
+"species": "Armarouge",
+"item": "Life Orb",
+"ability": "Flash Fire",
+"mega": 0,
+"nature": "Quiet",
+"evs": [
+32,
+0,
+12,
+20,
+2,
+0
+]
+},
+{
+"key": "Armarouge",
+"i": 2,
+"species": "Armarouge",
+"item": "Life Orb",
+"ability": "Flash Fire",
+"mega": 0,
+"nature": "Modest",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+]
+},
+{
+"key": "M-Gengar",
+"i": 0,
+"species": "Gengar",
+"item": "Gengarite",
+"ability": "Cursed Body",
+"mega": 1,
+"nature": "Modest",
+"evs": [
+20,
+0,
+4,
+10,
+0,
+32
+]
+},
+{
+"key": "M-Gengar",
+"i": 1,
+"species": "Gengar",
+"item": "Gengarite",
+"ability": "Cursed Body",
+"mega": 1,
+"nature": "Modest",
+"evs": [
+30,
+0,
+1,
+1,
+28,
+6
+]
+},
+{
+"key": "M-Gengar",
+"i": 2,
+"species": "Gengar",
+"item": "Gengarite",
+"ability": "Cursed Body",
+"mega": 1,
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"key": "Sinistcha",
+"i": 0,
+"species": "Sinistcha",
+"item": "Kasib Berry",
+"ability": "Hospitality",
+"mega": 0,
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+]
+},
+{
+"key": "Sinistcha",
+"i": 1,
+"species": "Sinistcha",
+"item": "Kasib Berry",
+"ability": "Hospitality",
+"mega": 0,
+"nature": "Calm",
+"evs": [
+32,
+0,
+0,
+0,
+32,
+2
+]
+},
+{
+"key": "Sinistcha",
+"i": 2,
+"species": "Sinistcha",
+"item": "Kasib Berry",
+"ability": "Hospitality",
+"mega": 0,
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+]
+}
+]

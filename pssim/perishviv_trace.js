@@ -1,0 +1,14 @@
+const T = require('./t1sim.js'); const {Battle} = require('pokemon-showdown');
+const opp = ['Gengar', 'Vivillon', 'Incineroar', 'Rillaboom'].map(sp => T.toSet(T.oppSet('Perish trap', sp)));
+const mine = ['Salamence', 'Kingambit', 'Incineroar', 'Gholdengo'].map(n => T.toSet(T.MY[n]));
+const b = new Battle({formatid: 'gen9championsdoublescustomgame', seed: [3, 17, 29, 43]}); b.debugMode = false;
+b.setPlayer('p1', {name: 'Me', team: mine}); b.setPlayer('p2', {name: 'Them', team: opp}); b.choose('p1', 'team 1234'); b.choose('p2', 'team 1234');
+const turn = (c1, c2, forced2) => { console.log('> ', c1, '|', c2); if (!b.choose('p1', c1)) console.log('p1 err', b.sides[0].choice.error); if (!b.choose('p2', c2)) console.log('p2 err', b.sides[1].choice.error);
+  const f = [...(forced2 || [])];
+  for (let g = 0; g < 6 && !b.ended; g++) { let pend = false; for (const s of b.sides) if (s.requestState === 'switch' && !s.isChoiceDone()) { const x = s.id === 'p2' ? f.shift() : null; if (!(x && s.choose(x))) s.autoChoose(); pend = true; } if (b.allChoicesDone() && pend) b.commitChoices(); else break; } };
+turn('move hypervoice mega, move suckerpunch 1', 'move perishsong mega, move sleeppowder 2');
+turn('move tailwind, move kowtowcleave 1', 'move protect, move protect');
+turn('move doubleedge 1, move kowtowcleave 1', 'switch 3, move ragepowder', ['switch 3']);
+const L = b.log.filter(x => /^\|(turn|move|switch|drag|-damage|faint|-start|-activate|cant|-fail|-singleturn|-status|-curestatus|-mega|detailschange|-sidestart)\|/.test(x) && !/\|\d+\/100/.test(x));
+console.log(L.join('\n'));
+const req = b.sides[0].activeRequest; console.log('T4 trapped:', req.active.map(a => !!a.trapped), 'their active:', b.sides[1].active.map(p => p.name + ' ' + p.hp + '/' + p.maxhp));

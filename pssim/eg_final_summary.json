@@ -1,0 +1,1710 @@
+{
+ "tr": {
+  "Rain + sun": {
+   "mean": 0.183,
+   "pairs": {
+    "Farigiraf+Torkoal": [
+     0.792,
+     0.458
+    ],
+    "Incineroar+Blastoise": [
+     0.917,
+     0.583
+    ],
+    "Torkoal+Kingambit": [
+     0.75,
+     0.417
+    ],
+    "Farigiraf+Blastoise": [
+     1.0,
+     0.708
+    ],
+    "Incineroar+Kingambit": [
+     0.5,
+     0.208
+    ],
+    "Incineroar+Torkoal": [
+     0.833,
+     0.542
+    ],
+    "Kingambit+Blastoise": [
+     0.75,
+     0.5
+    ],
+    "Indeedee-F+Torkoal": [
+     0.625,
+     0.458
+    ],
+    "Farigiraf+Kingambit": [
+     0.333,
+     0.208
+    ],
+    "Indeedee-F+Kingambit": [
+     0.292,
+     0.167
+    ],
+    "Torkoal+Blastoise": [
+     0.75,
+     0.667
+    ],
+    "Incineroar+Farigiraf": [
+     0.458,
+     0.375
+    ],
+    "Indeedee-F+Farigiraf": [
+     0.125,
+     0.042
+    ],
+    "Indeedee-F+Blastoise": [
+     0.583,
+     0.583
+    ],
+    "Incineroar+Indeedee-F": [
+     0.417,
+     0.458
+    ]
+   }
+  },
+  "Trick Room without Indeedee": {
+   "mean": 0.194,
+   "pairs": {
+    "Torkoal+Blastoise": [
+     0.958,
+     0.458
+    ],
+    "Torkoal+Kingambit": [
+     0.958,
+     0.583
+    ],
+    "Farigiraf+Kingambit": [
+     0.542,
+     0.167
+    ],
+    "Farigiraf+Torkoal": [
+     0.875,
+     0.5
+    ],
+    "Incineroar+Torkoal": [
+     1.0,
+     0.667
+    ],
+    "Incineroar+Blastoise": [
+     0.75,
+     0.5
+    ],
+    "Kingambit+Blastoise": [
+     0.833,
+     0.583
+    ],
+    "Indeedee-F+Torkoal": [
+     0.792,
+     0.583
+    ],
+    "Indeedee-F+Kingambit": [
+     0.458,
+     0.292
+    ],
+    "Incineroar+Indeedee-F": [
+     0.667,
+     0.542
+    ],
+    "Indeedee-F+Farigiraf": [
+     0.167,
+     0.125
+    ],
+    "Incineroar+Kingambit": [
+     0.833,
+     0.792
+    ],
+    "Indeedee-F+Blastoise": [
+     0.5,
+     0.5
+    ],
+    "Farigiraf+Blastoise": [
+     0.5,
+     0.5
+    ],
+    "Incineroar+Farigiraf": [
+     0.5,
+     0.625
+    ]
+   }
+  },
+  "Balance, no speed control": {
+   "mean": 0.367,
+   "pairs": {
+    "Torkoal+Kingambit": [
+     0.875,
+     0.042
+    ],
+    "Torkoal+Blastoise": [
+     0.917,
+     0.25
+    ],
+    "Farigiraf+Torkoal": [
+     0.875,
+     0.25
+    ],
+    "Incineroar+Blastoise": [
+     0.917,
+     0.375
+    ],
+    "Incineroar+Kingambit": [
+     0.958,
+     0.5
+    ],
+    "Farigiraf+Kingambit": [
+     0.5,
+     0.083
+    ],
+    "Kingambit+Blastoise": [
+     0.75,
+     0.417
+    ],
+    "Indeedee-F+Torkoal": [
+     0.833,
+     0.5
+    ],
+    "Incineroar+Torkoal": [
+     0.917,
+     0.625
+    ],
+    "Farigiraf+Blastoise": [
+     0.875,
+     0.583
+    ],
+    "Indeedee-F+Kingambit": [
+     0.625,
+     0.375
+    ],
+    "Indeedee-F+Blastoise": [
+     0.708,
+     0.542
+    ],
+    "Indeedee-F+Farigiraf": [
+     0.25,
+     0.125
+    ],
+    "Incineroar+Indeedee-F": [
+     0.792,
+     0.708
+    ],
+    "Incineroar+Farigiraf": [
+     0.792,
+     0.708
+    ]
+   }
+  },
+  "Snow": {
+   "mean": 0.297,
+   "pairs": {
+    "Farigiraf+Torkoal": [
+     0.958,
+     0.375
+    ],
+    "Indeedee-F+Torkoal": [
+     0.958,
+     0.417
+    ],
+    "Torkoal+Kingambit": [
+     0.917,
+     0.458
+    ],
+    "Indeedee-F+Kingambit": [
+     0.75,
+     0.333
+    ],
+    "Incineroar+Blastoise": [
+     0.917,
+     0.5
+    ],
+    "Torkoal+Blastoise": [
+     1.0,
+     0.625
+    ],
+    "Incineroar+Torkoal": [
+     0.917,
+     0.542
+    ],
+    "Kingambit+Blastoise": [
+     0.875,
+     0.625
+    ],
+    "Farigiraf+Kingambit": [
+     0.958,
+     0.708
+    ],
+    "Indeedee-F+Blastoise": [
+     0.833,
+     0.625
+    ],
+    "Incineroar+Kingambit": [
+     0.792,
+     0.583
+    ],
+    "Incineroar+Indeedee-F": [
+     0.792,
+     0.583
+    ],
+    "Incineroar+Farigiraf": [
+     0.875,
+     0.708
+    ],
+    "Indeedee-F+Farigiraf": [
+     0.542,
+     0.458
+    ],
+    "Farigiraf+Blastoise": [
+     0.875,
+     0.958
+    ]
+   }
+  },
+  "Sun": {
+   "mean": 0.161,
+   "pairs": {
+    "Torkoal+Blastoise": [
+     0.792,
+     0.333
+    ],
+    "Incineroar+Torkoal": [
+     0.833,
+     0.375
+    ],
+    "Incineroar+Blastoise": [
+     0.917,
+     0.542
+    ],
+    "Incineroar+Kingambit": [
+     0.792,
+     0.458
+    ],
+    "Farigiraf+Torkoal": [
+     0.625,
+     0.333
+    ],
+    "Torkoal+Kingambit": [
+     0.708,
+     0.458
+    ],
+    "Kingambit+Blastoise": [
+     0.625,
+     0.458
+    ],
+    "Indeedee-F+Torkoal": [
+     0.417,
+     0.25
+    ],
+    "Indeedee-F+Kingambit": [
+     0.458,
+     0.292
+    ],
+    "Indeedee-F+Farigiraf": [
+     0.334,
+     0.208
+    ],
+    "Farigiraf+Kingambit": [
+     0.375,
+     0.25
+    ],
+    "Farigiraf+Blastoise": [
+     0.708,
+     0.667
+    ],
+    "Incineroar+Farigiraf": [
+     0.667,
+     0.708
+    ],
+    "Incineroar+Indeedee-F": [
+     0.458,
+     0.667
+    ],
+    "Indeedee-F+Blastoise": [
+     0.208,
+     0.5
+    ]
+   }
+  },
+  "Tailwind goodstuffs": {
+   "mean": 0.294,
+   "pairs": {
+    "Torkoal+Kingambit": [
+     1.0,
+     0.375
+    ],
+    "Torkoal+Blastoise": [
+     0.875,
+     0.375
+    ],
+    "Incineroar+Blastoise": [
+     0.75,
+     0.292
+    ],
+    "Incineroar+Torkoal": [
+     0.75,
+     0.292
+    ],
+    "Farigiraf+Blastoise": [
+     0.708,
+     0.333
+    ],
+    "Farigiraf+Kingambit": [
+     0.708,
+     0.375
+    ],
+    "Kingambit+Blastoise": [
+     0.875,
+     0.542
+    ],
+    "Indeedee-F+Torkoal": [
+     0.621,
+     0.292
+    ],
+    "Farigiraf+Torkoal": [
+     0.833,
+     0.542
+    ],
+    "Incineroar+Indeedee-F": [
+     0.292,
+     0.083
+    ],
+    "Indeedee-F+Farigiraf": [
+     0.417,
+     0.25
+    ],
+    "Indeedee-F+Blastoise": [
+     0.625,
+     0.5
+    ],
+    "Incineroar+Kingambit": [
+     0.417,
+     0.292
+    ],
+    "Indeedee-F+Kingambit": [
+     0.5,
+     0.417
+    ],
+    "Incineroar+Farigiraf": [
+     0.208,
+     0.208
+    ]
+   }
+  },
+  "Sand": {
+   "mean": 0.431,
+   "pairs": {
+    "Torkoal+Blastoise": [
+     0.875,
+     0.125
+    ],
+    "Incineroar+Blastoise": [
+     1.0,
+     0.25
+    ],
+    "Indeedee-F+Blastoise": [
+     0.917,
+     0.25
+    ],
+    "Torkoal+Kingambit": [
+     0.917,
+     0.375
+    ],
+    "Kingambit+Blastoise": [
+     0.875,
+     0.417
+    ],
+    "Indeedee-F+Kingambit": [
+     0.75,
+     0.292
+    ],
+    "Incineroar+Kingambit": [
+     1.0,
+     0.583
+    ],
+    "Farigiraf+Torkoal": [
+     0.792,
+     0.375
+    ],
+    "Farigiraf+Kingambit": [
+     0.708,
+     0.292
+    ],
+    "Farigiraf+Blastoise": [
+     0.958,
+     0.542
+    ],
+    "Incineroar+Torkoal": [
+     0.875,
+     0.5
+    ],
+    "Incineroar+Farigiraf": [
+     0.917,
+     0.583
+    ],
+    "Indeedee-F+Torkoal": [
+     0.667,
+     0.333
+    ],
+    "Incineroar+Indeedee-F": [
+     0.583,
+     0.333
+    ],
+    "Indeedee-F+Farigiraf": [
+     0.042,
+     0.167
+    ]
+   }
+  },
+  "Perish trap": {
+   "mean": 0.127,
+   "pairs": {
+    "Incineroar+Indeedee-F": [
+     0.917,
+     0.625
+    ],
+    "Farigiraf+Torkoal": [
+     0.958,
+     0.667
+    ],
+    "Indeedee-F+Farigiraf": [
+     0.583,
+     0.35
+    ],
+    "Torkoal+Kingambit": [
+     1.0,
+     0.792
+    ],
+    "Incineroar+Torkoal": [
+     1.0,
+     0.833
+    ],
+    "Incineroar+Farigiraf": [
+     0.625,
+     0.458
+    ],
+    "Indeedee-F+Kingambit": [
+     0.833,
+     0.667
+    ],
+    "Torkoal+Blastoise": [
+     1.0,
+     0.917
+    ],
+    "Incineroar+Kingambit": [
+     0.875,
+     0.792
+    ],
+    "Incineroar+Blastoise": [
+     0.958,
+     0.875
+    ],
+    "Kingambit+Blastoise": [
+     1.0,
+     0.958
+    ],
+    "Indeedee-F+Torkoal": [
+     0.958,
+     0.917
+    ],
+    "Indeedee-F+Blastoise": [
+     0.958,
+     0.917
+    ],
+    "Farigiraf+Kingambit": [
+     0.833,
+     0.833
+    ],
+    "Farigiraf+Blastoise": [
+     0.958,
+     0.958
+    ]
+   }
+  },
+  "Rain": {
+   "mean": 0.125,
+   "pairs": {
+    "Incineroar+Blastoise": [
+     0.833,
+     0.458
+    ],
+    "Torkoal+Blastoise": [
+     0.875,
+     0.583
+    ],
+    "Torkoal+Kingambit": [
+     0.708,
+     0.458
+    ],
+    "Kingambit+Blastoise": [
+     0.75,
+     0.5
+    ],
+    "Indeedee-F+Torkoal": [
+     0.792,
+     0.542
+    ],
+    "Incineroar+Kingambit": [
+     0.708,
+     0.5
+    ],
+    "Incineroar+Farigiraf": [
+     0.542,
+     0.333
+    ],
+    "Indeedee-F+Kingambit": [
+     0.625,
+     0.458
+    ],
+    "Incineroar+Torkoal": [
+     0.792,
+     0.625
+    ],
+    "Farigiraf+Torkoal": [
+     0.625,
+     0.5
+    ],
+    "Farigiraf+Blastoise": [
+     0.458,
+     0.458
+    ],
+    "Incineroar+Indeedee-F": [
+     0.417,
+     0.458
+    ],
+    "Indeedee-F+Farigiraf": [
+     0.208,
+     0.292
+    ],
+    "Farigiraf+Kingambit": [
+     0.167,
+     0.292
+    ],
+    "Indeedee-F+Blastoise": [
+     0.333,
+     0.5
+    ]
+   }
+  },
+  "Indeedee TR / Psychic Terrain": {
+   "mean": -0.028,
+   "pairs": {
+    "Indeedee-F+Torkoal": [
+     0.5,
+     0.083
+    ],
+    "Farigiraf+Torkoal": [
+     0.542,
+     0.292
+    ],
+    "Incineroar+Kingambit": [
+     0.667,
+     0.458
+    ],
+    "Kingambit+Blastoise": [
+     0.792,
+     0.667
+    ],
+    "Incineroar+Torkoal": [
+     0.625,
+     0.583
+    ],
+    "Indeedee-F+Farigiraf": [
+     0.083,
+     0.042
+    ],
+    "Torkoal+Kingambit": [
+     0.542,
+     0.5
+    ],
+    "Torkoal+Blastoise": [
+     0.667,
+     0.667
+    ],
+    "Indeedee-F+Kingambit": [
+     0.542,
+     0.542
+    ],
+    "Incineroar+Farigiraf": [
+     0.5,
+     0.542
+    ],
+    "Incineroar+Blastoise": [
+     0.667,
+     0.792
+    ],
+    "Farigiraf+Kingambit": [
+     0.417,
+     0.542
+    ],
+    "Indeedee-F+Blastoise": [
+     0.125,
+     0.458
+    ],
+    "Incineroar+Indeedee-F": [
+     0.292,
+     0.708
+    ],
+    "Farigiraf+Blastoise": [
+     0.292,
+     0.792
+    ]
+   }
+  }
+ },
+ "back": {
+  "Tailwind|Incineroar+Farigiraf": [
+   {
+    "back": [
+     "Torkoal",
+     "Kingambit"
+    ],
+    "v": 1.0,
+    "tr": 1.0,
+    "notr": 0.375,
+    "se": 0.0
+   },
+   {
+    "back": [
+     "Torkoal",
+     "Blastoise"
+    ],
+    "v": 0.875,
+    "tr": 0.875,
+    "notr": 0.375,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Kingambit",
+     "Blastoise"
+    ],
+    "v": 0.875,
+    "tr": 0.875,
+    "notr": 0.542,
+    "se": 0.072
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Blastoise"
+    ],
+    "v": 0.625,
+    "tr": 0.625,
+    "notr": 0.5,
+    "se": 0.072
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Torkoal"
+    ],
+    "v": 0.621,
+    "tr": 0.621,
+    "notr": 0.292,
+    "se": 0.104
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Kingambit"
+    ],
+    "v": 0.5,
+    "tr": 0.5,
+    "notr": 0.417,
+    "se": 0.096
+   }
+  ],
+  "Indeedee TR|Incineroar+Blastoise": [
+   {
+    "back": [
+     "Indeedee-F",
+     "Kingambit"
+    ],
+    "v": 0.542,
+    "tr": 0.542,
+    "notr": 0.542,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "v": 0.542,
+    "tr": 0.417,
+    "notr": 0.542,
+    "se": 0.048
+   },
+   {
+    "back": [
+     "Torkoal",
+     "Kingambit"
+    ],
+    "v": 0.5,
+    "tr": 0.542,
+    "notr": 0.5,
+    "se": 0.064
+   },
+   {
+    "back": [
+     "Farigiraf",
+     "Torkoal"
+    ],
+    "v": 0.292,
+    "tr": 0.542,
+    "notr": 0.292,
+    "se": 0.072
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Torkoal"
+    ],
+    "v": 0.083,
+    "tr": 0.5,
+    "notr": 0.083,
+    "se": 0.0
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Farigiraf"
+    ],
+    "v": 0.042,
+    "tr": 0.083,
+    "notr": 0.042,
+    "se": 0.048
+   }
+  ],
+  "Sun|Incineroar+Blastoise": [
+   {
+    "back": [
+     "Torkoal",
+     "Kingambit"
+    ],
+    "v": 0.458,
+    "tr": 0.708,
+    "notr": 0.458,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Farigiraf",
+     "Torkoal"
+    ],
+    "v": 0.333,
+    "tr": 0.625,
+    "notr": 0.333,
+    "se": 0.064
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Kingambit"
+    ],
+    "v": 0.292,
+    "tr": 0.458,
+    "notr": 0.292,
+    "se": 0.064
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Torkoal"
+    ],
+    "v": 0.25,
+    "tr": 0.417,
+    "notr": 0.25,
+    "se": 0.09
+   },
+   {
+    "back": [
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "v": 0.25,
+    "tr": 0.375,
+    "notr": 0.25,
+    "se": 0.087
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Farigiraf"
+    ],
+    "v": 0.208,
+    "tr": 0.334,
+    "notr": 0.208,
+    "se": 0.0
+   }
+  ],
+  "Sun|Farigiraf+Blastoise": [
+   {
+    "back": [
+     "Incineroar",
+     "Kingambit"
+    ],
+    "v": 0.612,
+    "tr": 0.792,
+    "notr": 0.458,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Torkoal"
+    ],
+    "v": 0.586,
+    "tr": 0.833,
+    "notr": 0.375,
+    "se": 0.059
+   },
+   {
+    "back": [
+     "Torkoal",
+     "Kingambit"
+    ],
+    "v": 0.573,
+    "tr": 0.708,
+    "notr": 0.458,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Indeedee-F"
+    ],
+    "v": 0.571,
+    "tr": 0.458,
+    "notr": 0.667,
+    "se": 0.064
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Kingambit"
+    ],
+    "v": 0.368,
+    "tr": 0.458,
+    "notr": 0.292,
+    "se": 0.064
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Torkoal"
+    ],
+    "v": 0.327,
+    "tr": 0.417,
+    "notr": 0.25,
+    "se": 0.09
+   }
+  ],
+  "Rain|Incineroar+Torkoal": [
+   {
+    "back": [
+     "Indeedee-F",
+     "Blastoise"
+    ],
+    "v": 0.5,
+    "tr": 0.333,
+    "notr": 0.5,
+    "se": 0.059
+   },
+   {
+    "back": [
+     "Kingambit",
+     "Blastoise"
+    ],
+    "v": 0.5,
+    "tr": 0.75,
+    "notr": 0.5,
+    "se": 0.076
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Kingambit"
+    ],
+    "v": 0.458,
+    "tr": 0.625,
+    "notr": 0.458,
+    "se": 0.087
+   },
+   {
+    "back": [
+     "Farigiraf",
+     "Blastoise"
+    ],
+    "v": 0.458,
+    "tr": 0.458,
+    "notr": 0.458,
+    "se": 0.064
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Farigiraf"
+    ],
+    "v": 0.292,
+    "tr": 0.208,
+    "notr": 0.292,
+    "se": 0.064
+   },
+   {
+    "back": [
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "v": 0.292,
+    "tr": 0.167,
+    "notr": 0.292,
+    "se": 0.0
+   }
+  ],
+  "Rain|Farigiraf+Blastoise": [
+   {
+    "back": [
+     "Incineroar",
+     "Torkoal"
+    ],
+    "v": 0.667,
+    "tr": 0.792,
+    "notr": 0.625,
+    "se": 0.08
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Torkoal"
+    ],
+    "v": 0.604,
+    "tr": 0.792,
+    "notr": 0.542,
+    "se": 0.087
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Kingambit"
+    ],
+    "v": 0.552,
+    "tr": 0.708,
+    "notr": 0.5,
+    "se": 0.064
+   },
+   {
+    "back": [
+     "Torkoal",
+     "Kingambit"
+    ],
+    "v": 0.521,
+    "tr": 0.708,
+    "notr": 0.458,
+    "se": 0.072
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Kingambit"
+    ],
+    "v": 0.5,
+    "tr": 0.625,
+    "notr": 0.458,
+    "se": 0.087
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Indeedee-F"
+    ],
+    "v": 0.448,
+    "tr": 0.417,
+    "notr": 0.458,
+    "se": 0.09
+   }
+  ],
+  "Balance|Incineroar+Farigiraf": [
+   {
+    "back": [
+     "Torkoal",
+     "Blastoise"
+    ],
+    "v": 0.917,
+    "tr": 0.917,
+    "notr": 0.25,
+    "se": 0.059
+   },
+   {
+    "back": [
+     "Torkoal",
+     "Kingambit"
+    ],
+    "v": 0.875,
+    "tr": 0.875,
+    "notr": 0.042,
+    "se": 0.064
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Torkoal"
+    ],
+    "v": 0.833,
+    "tr": 0.833,
+    "notr": 0.5,
+    "se": 0.0
+   },
+   {
+    "back": [
+     "Kingambit",
+     "Blastoise"
+    ],
+    "v": 0.75,
+    "tr": 0.75,
+    "notr": 0.417,
+    "se": 0.076
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Blastoise"
+    ],
+    "v": 0.708,
+    "tr": 0.708,
+    "notr": 0.542,
+    "se": 0.093
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Kingambit"
+    ],
+    "v": 0.625,
+    "tr": 0.625,
+    "notr": 0.375,
+    "se": 0.072
+   }
+  ],
+  "Sand|Farigiraf+Blastoise": [
+   {
+    "back": [
+     "Incineroar",
+     "Kingambit"
+    ],
+    "v": 0.879,
+    "tr": 1.0,
+    "notr": 0.583,
+    "se": 0.0
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Torkoal"
+    ],
+    "v": 0.766,
+    "tr": 0.875,
+    "notr": 0.5,
+    "se": 0.064
+   },
+   {
+    "back": [
+     "Torkoal",
+     "Kingambit"
+    ],
+    "v": 0.76,
+    "tr": 0.917,
+    "notr": 0.375,
+    "se": 0.048
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Kingambit"
+    ],
+    "v": 0.617,
+    "tr": 0.75,
+    "notr": 0.292,
+    "se": 0.048
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Torkoal"
+    ],
+    "v": 0.57,
+    "tr": 0.667,
+    "notr": 0.333,
+    "se": 0.059
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Indeedee-F"
+    ],
+    "v": 0.511,
+    "tr": 0.583,
+    "notr": 0.333,
+    "se": 0.083
+   }
+  ],
+  "Sand|Incineroar+Blastoise": [
+   {
+    "back": [
+     "Farigiraf",
+     "Torkoal"
+    ],
+    "v": 0.375,
+    "tr": 0.792,
+    "notr": 0.375,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Torkoal",
+     "Kingambit"
+    ],
+    "v": 0.375,
+    "tr": 0.917,
+    "notr": 0.375,
+    "se": 0.048
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Torkoal"
+    ],
+    "v": 0.333,
+    "tr": 0.667,
+    "notr": 0.333,
+    "se": 0.059
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Kingambit"
+    ],
+    "v": 0.292,
+    "tr": 0.75,
+    "notr": 0.292,
+    "se": 0.048
+   },
+   {
+    "back": [
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "v": 0.292,
+    "tr": 0.708,
+    "notr": 0.292,
+    "se": 0.072
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Farigiraf"
+    ],
+    "v": 0.167,
+    "tr": 0.042,
+    "notr": 0.167,
+    "se": 0.042
+   }
+  ],
+  "Snow|Farigiraf+Blastoise": [
+   {
+    "back": [
+     "Incineroar",
+     "Torkoal"
+    ],
+    "v": 0.785,
+    "tr": 0.917,
+    "notr": 0.542,
+    "se": 0.048
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Torkoal"
+    ],
+    "v": 0.769,
+    "tr": 0.958,
+    "notr": 0.417,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Torkoal",
+     "Kingambit"
+    ],
+    "v": 0.756,
+    "tr": 0.917,
+    "notr": 0.458,
+    "se": 0.048
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Indeedee-F"
+    ],
+    "v": 0.719,
+    "tr": 0.792,
+    "notr": 0.583,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Kingambit"
+    ],
+    "v": 0.719,
+    "tr": 0.792,
+    "notr": 0.583,
+    "se": 0.072
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Kingambit"
+    ],
+    "v": 0.604,
+    "tr": 0.75,
+    "notr": 0.333,
+    "se": 0.059
+   }
+  ],
+  "Snow|Indeedee-F+Blastoise": [
+   {
+    "back": [
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "v": 0.901,
+    "tr": 0.958,
+    "notr": 0.708,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Farigiraf"
+    ],
+    "v": 0.837,
+    "tr": 0.875,
+    "notr": 0.708,
+    "se": 0.064
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Torkoal"
+    ],
+    "v": 0.83,
+    "tr": 0.917,
+    "notr": 0.542,
+    "se": 0.048
+   },
+   {
+    "back": [
+     "Farigiraf",
+     "Torkoal"
+    ],
+    "v": 0.824,
+    "tr": 0.958,
+    "notr": 0.375,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Torkoal",
+     "Kingambit"
+    ],
+    "v": 0.811,
+    "tr": 0.917,
+    "notr": 0.458,
+    "se": 0.048
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Kingambit"
+    ],
+    "v": 0.744,
+    "tr": 0.792,
+    "notr": 0.583,
+    "se": 0.072
+   }
+  ],
+  "Trick Room|Kingambit+Blastoise": [
+   {
+    "back": [
+     "Incineroar",
+     "Torkoal"
+    ],
+    "v": 0.667,
+    "tr": 1.0,
+    "notr": 0.667,
+    "se": 0.0
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Farigiraf"
+    ],
+    "v": 0.625,
+    "tr": 0.5,
+    "notr": 0.625,
+    "se": 0.068
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Torkoal"
+    ],
+    "v": 0.583,
+    "tr": 0.792,
+    "notr": 0.583,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Indeedee-F"
+    ],
+    "v": 0.542,
+    "tr": 0.667,
+    "notr": 0.542,
+    "se": 0.0
+   },
+   {
+    "back": [
+     "Farigiraf",
+     "Torkoal"
+    ],
+    "v": 0.5,
+    "tr": 0.875,
+    "notr": 0.5,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Farigiraf"
+    ],
+    "v": 0.125,
+    "tr": 0.167,
+    "notr": 0.125,
+    "se": 0.0
+   }
+  ],
+  "Trick Room|Indeedee-F+Blastoise": [
+   {
+    "back": [
+     "Incineroar",
+     "Kingambit"
+    ],
+    "v": 0.792,
+    "tr": 0.833,
+    "notr": 0.792,
+    "se": 0.059
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Torkoal"
+    ],
+    "v": 0.667,
+    "tr": 1.0,
+    "notr": 0.667,
+    "se": 0.0
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Farigiraf"
+    ],
+    "v": 0.625,
+    "tr": 0.5,
+    "notr": 0.625,
+    "se": 0.068
+   },
+   {
+    "back": [
+     "Torkoal",
+     "Kingambit"
+    ],
+    "v": 0.583,
+    "tr": 0.958,
+    "notr": 0.583,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Farigiraf",
+     "Torkoal"
+    ],
+    "v": 0.5,
+    "tr": 0.875,
+    "notr": 0.5,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "v": 0.167,
+    "tr": 0.542,
+    "notr": 0.167,
+    "se": 0.08
+   }
+  ],
+  "Rain + Sun|Incineroar+Blastoise": [
+   {
+    "back": [
+     "Indeedee-F",
+     "Torkoal"
+    ],
+    "v": 0.458,
+    "tr": 0.625,
+    "notr": 0.458,
+    "se": 0.08
+   },
+   {
+    "back": [
+     "Farigiraf",
+     "Torkoal"
+    ],
+    "v": 0.458,
+    "tr": 0.792,
+    "notr": 0.458,
+    "se": 0.087
+   },
+   {
+    "back": [
+     "Torkoal",
+     "Kingambit"
+    ],
+    "v": 0.417,
+    "tr": 0.75,
+    "notr": 0.417,
+    "se": 0.059
+   },
+   {
+    "back": [
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "v": 0.208,
+    "tr": 0.333,
+    "notr": 0.208,
+    "se": 0.059
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Kingambit"
+    ],
+    "v": 0.167,
+    "tr": 0.292,
+    "notr": 0.167,
+    "se": 0.08
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Farigiraf"
+    ],
+    "v": 0.042,
+    "tr": 0.125,
+    "notr": 0.042,
+    "se": 0.072
+   }
+  ],
+  "Rain + Sun|Incineroar+Farigiraf": [
+   {
+    "back": [
+     "Torkoal",
+     "Blastoise"
+    ],
+    "v": 0.721,
+    "tr": 0.75,
+    "notr": 0.667,
+    "se": 0.076
+   },
+   {
+    "back": [
+     "Kingambit",
+     "Blastoise"
+    ],
+    "v": 0.662,
+    "tr": 0.75,
+    "notr": 0.5,
+    "se": 0.076
+   },
+   {
+    "back": [
+     "Torkoal",
+     "Kingambit"
+    ],
+    "v": 0.633,
+    "tr": 0.75,
+    "notr": 0.417,
+    "se": 0.059
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Blastoise"
+    ],
+    "v": 0.583,
+    "tr": 0.583,
+    "notr": 0.583,
+    "se": 0.048
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Torkoal"
+    ],
+    "v": 0.567,
+    "tr": 0.625,
+    "notr": 0.458,
+    "se": 0.08
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Kingambit"
+    ],
+    "v": 0.248,
+    "tr": 0.292,
+    "notr": 0.167,
+    "se": 0.08
+   }
+  ],
+  "Perish|Incineroar+Kingambit": [
+   {
+    "back": [
+     "Farigiraf",
+     "Blastoise"
+    ],
+    "v": 0.958,
+    "tr": 0.958,
+    "notr": 0.958,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Torkoal",
+     "Blastoise"
+    ],
+    "v": 0.917,
+    "tr": 1.0,
+    "notr": 0.917,
+    "se": 0.0
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Torkoal"
+    ],
+    "v": 0.917,
+    "tr": 0.958,
+    "notr": 0.917,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Blastoise"
+    ],
+    "v": 0.917,
+    "tr": 0.958,
+    "notr": 0.917,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Farigiraf",
+     "Torkoal"
+    ],
+    "v": 0.667,
+    "tr": 0.958,
+    "notr": 0.667,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Farigiraf"
+    ],
+    "v": 0.35,
+    "tr": 0.583,
+    "notr": 0.35,
+    "se": 0.048
+   }
+  ],
+  "Perish|Farigiraf+Blastoise": [
+   {
+    "back": [
+     "Indeedee-F",
+     "Torkoal"
+    ],
+    "v": 0.937,
+    "tr": 0.958,
+    "notr": 0.917,
+    "se": 0.042
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Torkoal"
+    ],
+    "v": 0.913,
+    "tr": 1.0,
+    "notr": 0.833,
+    "se": 0.0
+   },
+   {
+    "back": [
+     "Torkoal",
+     "Kingambit"
+    ],
+    "v": 0.892,
+    "tr": 1.0,
+    "notr": 0.792,
+    "se": 0.0
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Kingambit"
+    ],
+    "v": 0.832,
+    "tr": 0.875,
+    "notr": 0.792,
+    "se": 0.064
+   },
+   {
+    "back": [
+     "Incineroar",
+     "Indeedee-F"
+    ],
+    "v": 0.765,
+    "tr": 0.917,
+    "notr": 0.625,
+    "se": 0.059
+   },
+   {
+    "back": [
+     "Indeedee-F",
+     "Kingambit"
+    ],
+    "v": 0.747,
+    "tr": 0.833,
+    "notr": 0.667,
+    "se": 0.059
+   }
+  ]
+ }
+}

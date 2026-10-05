@@ -1,0 +1,671 @@
+######## Tailwind goodstuffs :: Gholdengo+Incineroar
+
+vs Gholdengo + Raichu (9.6%) back Kingambit+Salamence: blend 0.612/0.522; exploit 0.639 (adapted 0.484); nash 0.522
+    0.75 Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Fake Out -> Raichu
+    0.13 Gholdengo: Shadow Ball -> Raichu | Incineroar: Flare Blitz -> Gholdengo
+    0.12 Gholdengo: Shadow Ball -> Raichu | Incineroar: Fake Out -> Raichu
+    outcomes: their KOs 0.56, my KOs 0.02, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Fake Out -> Raichu
+    reader replies: 0.55 Gholdengo: Shadow Ball -> Gholdengo | Raichu: Fake Out -> Incineroar / 0.39 Gholdengo: Protect | Raichu: Fake Out -> Incineroar
+
+vs Arcanine-Hisui + Raichu (4.6%) back Kingambit+Salamence: blend 0.601/0.561; exploit 0.624 (adapted 0.503); nash 0.569
+    0.72 Gholdengo: Make It Rain | Incineroar: Fake Out -> Raichu
+    0.27 Gholdengo: Power Gem -> Arcanine-Hisui | Incineroar: Fake Out -> Arcanine-Hisui
+    outcomes: their KOs 0.01, my KOs 0.02, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Fake Out -> Raichu
+    reader replies: 0.49 Arcanine-Hisui: Flare Blitz -> Gholdengo | Raichu: Fake Out -> Incineroar / 0.25 Arcanine-Hisui: Flare Blitz -> Gholdengo | Raichu: Protect / 0.14 Arcanine-Hisui: Flare Blitz -> Gholdengo | Raichu: Zap Cannon -> Gholdengo / 0.08 Arcanine-Hisui: Head Smash -> Incineroar | Raichu: Protect
+
+vs Gholdengo + Rillaboom (3.2%) back Kingambit+Salamence: blend 0.632/0.563; exploit 0.693 (adapted 0.449); nash 0.564
+    0.46 Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Parting Shot -> Rillaboom
+    0.30 Gholdengo: Make It Rain | Incineroar: Fake Out -> Rillaboom
+    0.15 Gholdengo: Shadow Ball -> Gholdengo | Incineroar: switch -> Salamence
+    0.09 Gholdengo: Make It Rain | Incineroar: Parting Shot -> Rillaboom
+    outcomes: their KOs 0.44, my KOs 0.04, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Shadow Ball -> Gholdengo | Incineroar: switch -> Kingambit
+    reader replies: 0.32 Gholdengo: Protect | Rillaboom: High Horsepower -> Gholdengo / 0.24 Gholdengo: Shadow Ball -> Gholdengo | Rillaboom: switch / 0.23 Gholdengo: Shadow Ball -> Gholdengo | Rillaboom: Fake Out -> Incineroar / 0.13 Gholdengo: Shadow Ball -> Gholdengo | Rillaboom: U-turn -> Gholdengo / 0.09 Gholdengo: Protect | Rillaboom: switch
+
+vs Gholdengo + Salamence (2.6%) back Kingambit+Salamence: blend 0.562/0.472; exploit 0.607 (adapted 0.259); nash 0.473
+    0.70 Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Fake Out -> Salamence
+    0.18 Gholdengo: Make It Rain | Incineroar: Fake Out -> Salamence
+    0.13 Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Parting Shot -> Salamence
+    outcomes: their KOs 0.50, my KOs 0.01, TW net -0.03, their TR 0.00
+    exploit pure: Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Parting Shot -> Salamence
+    reader replies: 0.55 Gholdengo: Protect | Salamence: Hyper Voice / 0.36 Gholdengo: Shadow Ball -> Gholdengo | Salamence: Protect / 0.09 Gholdengo: Protect | Salamence: switch
+
+vs Salamence + Sneasler (2.6%) back Kingambit+Salamence: blend 0.659/0.585; exploit 0.674 (adapted 0.462); nash 0.585
+    0.44 Gholdengo: Make It Rain | Incineroar: Fake Out -> Salamence
+    0.37 Gholdengo: Make It Rain | Incineroar: switch -> Kingambit
+    0.19 Gholdengo: Make It Rain | Incineroar: switch -> Salamence
+    outcomes: their KOs 0.21, my KOs 0.03, TW net -0.14, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Incineroar: switch -> Salamence
+    reader replies: 0.46 Salamence: Protect | Sneasler: switch / 0.45 Salamence: Hyper Voice | Sneasler: Protect / 0.09 Salamence: Draco Meteor -> Incineroar | Sneasler: Protect
+
+vs Rillaboom + Sneasler (2.5%) back Kingambit+Salamence: blend 0.754/0.713; exploit 0.768 (adapted 0.644); nash 0.715
+    0.46 Gholdengo: Make It Rain | Incineroar: Flare Blitz -> Rillaboom
+    0.43 Gholdengo: Make It Rain | Incineroar: switch -> Salamence
+    0.11 Gholdengo: Shadow Ball -> Rillaboom | Incineroar: switch -> Salamence
+    outcomes: their KOs 0.49, my KOs 0.00, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Incineroar: switch -> Salamence
+    reader replies: 0.52 Rillaboom: High Horsepower -> Gholdengo | Sneasler: Swords Dance / 0.30 Rillaboom: switch | Sneasler: Protect / 0.17 Rillaboom: switch | Sneasler: Fake Out -> Incineroar
+######## Tailwind goodstuffs :: Gholdengo+Kingambit
+
+vs Gholdengo + Raichu (9.6%) back Salamence+Incineroar: blend 0.587/0.437; exploit 0.593 (adapted 0.417); nash 0.451
+    0.93 Gholdengo: Shadow Ball -> Gholdengo | Kingambit: Kowtow Cleave -> Raichu
+    0.07 Gholdengo: Protect | Kingambit: Kowtow Cleave -> Raichu
+    outcomes: their KOs 0.63, my KOs 0.05, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Shadow Ball -> Gholdengo | Kingambit: Kowtow Cleave -> Raichu
+    reader replies: 0.52 Gholdengo: Protect | Raichu: Zap Cannon -> Kingambit / 0.42 Gholdengo: Shadow Ball -> Gholdengo | Raichu: Zap Cannon -> Kingambit
+
+vs Arcanine-Hisui + Raichu (4.6%) back Salamence+Incineroar: blend 0.534/0.433; exploit 0.545 (adapted 0.395); nash 0.446
+    0.53 Gholdengo: switch -> Incineroar | Kingambit: Kowtow Cleave -> Raichu
+    0.25 Gholdengo: Make It Rain | Kingambit: switch -> Incineroar
+    0.22 Gholdengo: Make It Rain | Kingambit: Sucker Punch -> Raichu
+    outcomes: their KOs 0.09, my KOs 0.03, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Raichu
+    reader replies: 0.52 Arcanine-Hisui: Flare Blitz -> Kingambit | Raichu: Zap Cannon -> Gholdengo / 0.39 Arcanine-Hisui: Flare Blitz -> Gholdengo | Raichu: Zap Cannon -> Kingambit / 0.09 Arcanine-Hisui: Flare Blitz -> Kingambit | Raichu: Zap Cannon -> Kingambit
+
+vs Gholdengo + Rillaboom (3.2%) back Salamence+Incineroar: blend 0.679/0.550; exploit 0.754 (adapted 0.423); nash 0.552
+    0.61 Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Rillaboom
+    0.39 Gholdengo: Shadow Ball -> Gholdengo | Kingambit: Kowtow Cleave -> Rillaboom
+    outcomes: their KOs 0.55, my KOs 0.06, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Shadow Ball -> Gholdengo | Kingambit: Kowtow Cleave -> Rillaboom
+    reader replies: 0.54 Gholdengo: Shadow Ball -> Gholdengo | Rillaboom: Fake Out -> Kingambit / 0.46 Gholdengo: Protect | Rillaboom: High Horsepower -> Gholdengo
+
+vs Salamence + Sneasler (2.6%) back Salamence+Incineroar: blend 0.728/0.625; exploit 0.739 (adapted 0.610); nash 0.632
+    0.51 Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Sneasler
+    0.36 Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Salamence
+    0.13 Gholdengo: Make It Rain | Kingambit: Sucker Punch -> Salamence
+    outcomes: their KOs 0.51, my KOs 0.10, TW net -0.19, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Salamence
+    reader replies: 0.79 Salamence: Protect | Sneasler: Close Combat -> Kingambit / 0.14 Salamence: Tailwind | Sneasler: Protect
+
+vs Gholdengo + Salamence (2.6%) back Salamence+Incineroar: blend 0.731/0.618; exploit 0.749 (adapted 0.579); nash 0.634
+    0.90 Gholdengo: Power Gem -> Salamence | Kingambit: Kowtow Cleave -> Gholdengo
+    0.10 Gholdengo: Power Gem -> Salamence | Kingambit: Sucker Punch -> Gholdengo
+    outcomes: their KOs 0.62, my KOs 0.04, TW net -0.22, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Gholdengo
+    reader replies: 0.73 Gholdengo: Protect | Salamence: Tailwind / 0.17 Gholdengo: Shadow Ball -> Gholdengo | Salamence: Hyper Voice / 0.11 Gholdengo: Nasty Plot | Salamence: Protect
+
+vs Rillaboom + Sneasler (2.5%) back Salamence+Incineroar: blend 0.709/0.612; exploit 0.710 (adapted 0.592); nash 0.617
+    0.86 Gholdengo: Make It Rain | Kingambit: switch -> Incineroar
+    0.14 Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Rillaboom
+    outcomes: their KOs 0.33, my KOs 0.02, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Kingambit: switch -> Incineroar
+    reader replies: 0.42 Rillaboom: High Horsepower -> Gholdengo | Sneasler: Swords Dance / 0.35 Rillaboom: High Horsepower -> Gholdengo | Sneasler: Protect / 0.24 Rillaboom: switch | Sneasler: Swords Dance
+######## Indeedee TR / Psychic Terrain :: Gholdengo+Incineroar
+
+vs Gardevoir + Indeedee-F (6.7%) back Kingambit+Rillaboom: blend 0.719/0.619; exploit 0.720 (adapted 0.617); nash 0.619
+    0.97 Gholdengo: Make It Rain | Incineroar: Throat Chop -> Indeedee-F
+    outcomes: their KOs 1.10, my KOs 0.00, TW net +0.00, their TR 0.03
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Throat Chop -> Indeedee-F
+    reader replies: 0.52 Gardevoir: Protect | Indeedee-F: Psychic -> Gholdengo / 0.48 Gardevoir: Protect | Indeedee-F: switch
+
+vs Armarouge + Indeedee-F (4.4%) back Kingambit+Rillaboom: blend 0.653/0.561; exploit 0.656 (adapted 0.474); nash 0.561
+    0.74 Gholdengo: Make It Rain | Incineroar: Throat Chop -> Indeedee-F
+    0.26 Gholdengo: Make It Rain | Incineroar: Throat Chop -> Armarouge
+    outcomes: their KOs 0.86, my KOs 0.00, TW net +0.00, their TR 0.24
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Throat Chop -> Armarouge
+    reader replies: 0.50 Armarouge: Heat Wave | Indeedee-F: switch / 0.50 Armarouge: Armor Cannon -> Gholdengo | Indeedee-F: Trick Room
+
+vs Farigiraf + Incineroar (3.7%) back Kingambit+Rillaboom: blend 0.409/0.391; exploit 0.420 (adapted 0.317); nash 0.391
+    1.00 Gholdengo: Make It Rain | Incineroar: Parting Shot -> Incineroar
+    outcomes: their KOs 0.00, my KOs 0.00, TW net +0.00, their TR 0.92
+    exploit pure: Gholdengo: Make It Rain | Incineroar: switch -> Kingambit
+    reader replies: 1.00 Farigiraf: Trick Room | Incineroar: Flare Blitz -> Gholdengo
+
+vs Indeedee + Sneasler (2.8%) back Kingambit+Rillaboom: blend 0.712/0.646; exploit 0.731 (adapted 0.591); nash 0.646
+    0.63 Gholdengo: Make It Rain | Incineroar: Throat Chop -> Indeedee
+    0.37 Gholdengo: switch -> Kingambit | Incineroar: Throat Chop -> Indeedee
+    outcomes: their KOs 0.82, my KOs 0.01, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Throat Chop -> Indeedee
+    reader replies: 0.55 Indeedee: switch | Sneasler: Rock Slide / 0.45 Indeedee: Mystical Fire -> Gholdengo | Sneasler: Rock Slide
+
+vs Indeedee-F + Sneasler (2.8%) back Kingambit+Rillaboom: blend 0.676/0.563; exploit 0.713 (adapted 0.518); nash 0.570
+    0.60 Gholdengo: Make It Rain | Incineroar: switch -> Kingambit
+    0.40 Gholdengo: Make It Rain | Incineroar: Throat Chop -> Indeedee-F
+    outcomes: their KOs 0.45, my KOs 0.06, TW net +0.00, their TR 0.07
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Throat Chop -> Indeedee-F
+    reader replies: 0.71 Indeedee-F: Helping Hand | Sneasler: Close Combat -> Incineroar / 0.18 Indeedee-F: Trick Room | Sneasler: Throat Chop -> Gholdengo / 0.10 Indeedee-F: Trick Room | Sneasler: Dire Claw -> Incineroar
+
+vs Hatterene + Indeedee-F (2.7%) back Kingambit+Rillaboom: blend 0.791/0.631; exploit 0.795 (adapted 0.624); nash 0.636
+    0.87 Gholdengo: Make It Rain | Incineroar: Throat Chop -> Indeedee-F
+    0.13 Gholdengo: Make It Rain | Incineroar: Throat Chop -> Hatterene
+    outcomes: their KOs 1.44, my KOs 0.00, TW net +0.00, their TR 0.05
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Throat Chop -> Indeedee-F
+    reader replies: 0.67 Hatterene: Protect | Indeedee-F: switch / 0.33 Hatterene: switch | Indeedee-F: switch
+######## Indeedee TR / Psychic Terrain :: Gholdengo+Kingambit
+
+vs Gardevoir + Indeedee-F (6.7%) back Rillaboom+Incineroar: blend 0.732/0.662; exploit 0.732 (adapted 0.662); nash 0.662
+    1.00 Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Indeedee-F
+    outcomes: their KOs 1.38, my KOs 0.05, TW net +0.00, their TR 0.01
+    exploit pure: Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Indeedee-F
+    reader replies: 1.00 Gardevoir: Protect | Indeedee-F: switch
+
+vs Armarouge + Indeedee-F (4.4%) back Rillaboom+Incineroar: blend 0.578/0.387; exploit 0.624 (adapted 0.278); nash 0.406
+    0.57 Gholdengo: Make It Rain | Kingambit: switch -> Incineroar
+    0.23 Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Indeedee-F
+    0.20 Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Armarouge
+    outcomes: their KOs 0.37, my KOs 0.04, TW net +0.00, their TR 0.29
+    exploit pure: Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Armarouge
+    reader replies: 0.44 Armarouge: Armor Cannon -> Kingambit | Indeedee-F: Trick Room / 0.43 Armarouge: Heat Wave | Indeedee-F: Trick Room / 0.13 Armarouge: Heat Wave | Indeedee-F: Follow Me
+
+vs Farigiraf + Incineroar (3.7%) back Rillaboom+Incineroar: blend 0.599/0.533; exploit 0.609 (adapted 0.495); nash 0.545
+    0.53 Gholdengo: Power Gem -> Incineroar | Kingambit: Kowtow Cleave -> Farigiraf
+    0.24 Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Farigiraf
+    0.23 Gholdengo: Make It Rain | Kingambit: Low Kick -> Incineroar
+    outcomes: their KOs 0.29, my KOs 0.02, TW net +0.00, their TR 0.68
+    exploit pure: Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Farigiraf
+    reader replies: 1.00 Farigiraf: Trick Room | Incineroar: Fake Out -> Kingambit
+
+vs Indeedee-F + Sneasler (2.8%) back Rillaboom+Incineroar: blend 0.651/0.506; exploit 0.674 (adapted 0.462); nash 0.511
+    0.78 Gholdengo: Make It Rain | Kingambit: switch -> Incineroar
+    0.22 Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Indeedee-F
+    outcomes: their KOs 0.33, my KOs 0.17, TW net +0.00, their TR 0.09
+    exploit pure: Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Indeedee-F
+    reader replies: 0.73 Indeedee-F: Helping Hand | Sneasler: Close Combat -> Kingambit / 0.14 Indeedee-F: Trick Room | Sneasler: Close Combat -> Kingambit / 0.13 Indeedee-F: Trick Room | Sneasler: Throat Chop -> Gholdengo
+
+vs Indeedee + Sneasler (2.8%) back Rillaboom+Incineroar: blend 0.680/0.543; exploit 0.698 (adapted 0.301); nash 0.573
+    0.56 Gholdengo: Make It Rain | Kingambit: switch -> Incineroar
+    0.38 Gholdengo: switch -> Incineroar | Kingambit: Kowtow Cleave -> Indeedee
+    0.06 Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Indeedee
+    outcomes: their KOs 0.33, my KOs 0.02, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: switch -> Incineroar | Kingambit: Kowtow Cleave -> Indeedee
+    reader replies: 0.75 Indeedee: Mystical Fire -> Gholdengo | Sneasler: Close Combat -> Kingambit / 0.19 Indeedee: Mystical Fire -> Kingambit | Sneasler: Close Combat -> Kingambit
+
+vs Hatterene + Indeedee-F (2.7%) back Rillaboom+Incineroar: blend 0.795/0.646; exploit 0.799 (adapted 0.633); nash 0.646
+    0.84 Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Indeedee-F
+    0.16 Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Hatterene
+    outcomes: their KOs 1.45, my KOs 0.00, TW net +0.00, their TR 0.06
+    exploit pure: Gholdengo: Make It Rain | Kingambit: Kowtow Cleave -> Indeedee-F
+    reader replies: 0.60 Hatterene: switch | Indeedee-F: switch / 0.40 Hatterene: Protect | Indeedee-F: Psychic -> Gholdengo
+######## Sun :: Gholdengo+Incineroar
+
+vs Farigiraf + Incineroar (3.8%) back Salamence+Sneasler: blend 0.496/0.457; exploit 0.519 (adapted 0.407); nash 0.458
+    0.65 Gholdengo: Make It Rain | Incineroar: Parting Shot -> Farigiraf
+    0.24 Gholdengo: Make It Rain | Incineroar: switch -> Salamence
+    0.11 Gholdengo: Power Gem -> Incineroar | Incineroar: Parting Shot -> Incineroar
+    outcomes: their KOs 0.00, my KOs 0.00, TW net +0.00, their TR 0.86
+    exploit pure: Gholdengo: Make It Rain | Incineroar: switch -> Salamence
+    reader replies: 0.58 Farigiraf: Trick Room | Incineroar: Parting Shot -> Incineroar / 0.33 Farigiraf: Trick Room | Incineroar: Fake Out -> Incineroar / 0.09 Farigiraf: Protect | Incineroar: Parting Shot -> Incineroar
+
+vs Charizard + Garchomp (3.5%) back Salamence+Sneasler: blend 0.574/0.537; exploit 0.611 (adapted 0.416); nash 0.538
+    0.65 Gholdengo: Protect | Incineroar: Parting Shot -> Garchomp
+    0.21 Gholdengo: Power Gem -> Charizard | Incineroar: Parting Shot -> Garchomp
+    0.10 Gholdengo: Power Gem -> Charizard | Incineroar: Fake Out -> Charizard
+    0.05 Gholdengo: Power Gem -> Charizard | Incineroar: Fake Out -> Garchomp
+    outcomes: their KOs 0.18, my KOs 0.03, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Power Gem -> Charizard | Incineroar: Parting Shot -> Garchomp
+    reader replies: 0.51 Charizard: Heat Wave | Garchomp: switch / 0.48 Charizard: Protect | Garchomp: Earthquake
+
+vs Aerodactyl + Kingambit (3.3%) back Salamence+Sneasler: blend 0.609/0.574; exploit 0.609 (adapted 0.574); nash 0.574
+    1.00 Gholdengo: Make It Rain | Incineroar: Fake Out -> Kingambit
+    outcomes: their KOs 0.67, my KOs 0.00, TW net -0.44, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Fake Out -> Kingambit
+    reader replies: 0.58 Aerodactyl: Tailwind | Kingambit: Kowtow Cleave -> Gholdengo / 0.42 Aerodactyl: Tailwind | Kingambit: Iron Head -> Incineroar
+
+vs Gardevoir + Indeedee-F (2.8%) back Salamence+Sneasler: blend 0.714/0.588; exploit 0.714 (adapted 0.588); nash 0.593
+    1.00 Gholdengo: Make It Rain | Incineroar: Throat Chop -> Indeedee-F
+    outcomes: their KOs 1.08, my KOs 0.00, TW net +0.00, their TR 0.11
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Throat Chop -> Indeedee-F
+    reader replies: 0.89 Gardevoir: Protect | Indeedee-F: switch / 0.11 Gardevoir: Protect | Indeedee-F: Trick Room
+
+vs Charizard + Farigiraf (2.6%) back Salamence+Sneasler: blend 0.613/0.482; exploit 0.613 (adapted 0.482); nash 0.488
+    1.00 Gholdengo: Make It Rain | Incineroar: Flare Blitz -> Farigiraf
+    outcomes: their KOs 0.73, my KOs 0.06, TW net +0.00, their TR 0.14
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Flare Blitz -> Farigiraf
+    reader replies: 0.70 Charizard: Heat Wave | Farigiraf: Thunderbolt -> Gholdengo / 0.30 Charizard: Heat Wave | Farigiraf: Trick Room
+
+vs Armarouge + Indeedee-F (2.2%) back Salamence+Sneasler: blend 0.623/0.562; exploit 0.633 (adapted 0.484); nash 0.563
+    0.57 Gholdengo: Make It Rain | Incineroar: Throat Chop -> Indeedee-F
+    0.26 Gholdengo: Make It Rain | Incineroar: Throat Chop -> Armarouge
+    0.16 Gholdengo: Shadow Ball -> Armarouge | Incineroar: Throat Chop -> Indeedee-F
+    outcomes: their KOs 0.71, my KOs 0.00, TW net +0.00, their TR 0.38
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Throat Chop -> Indeedee-F
+    reader replies: 0.47 Armarouge: Armor Cannon -> Gholdengo | Indeedee-F: Follow Me / 0.25 Armarouge: Armor Cannon -> Gholdengo | Indeedee-F: switch / 0.23 Armarouge: Armor Cannon -> Gholdengo | Indeedee-F: Trick Room
+######## Sand :: Sneasler+Rillaboom
+
+vs Excadrill + Tyranitar (15.7%) back Kingambit+Gholdengo: blend 0.640/0.576; exploit 0.678 (adapted 0.412); nash 0.578
+    0.38 Sneasler: Close Combat -> Tyranitar | Rillaboom: Grassy Glide -> Excadrill
+    0.38 Sneasler: Close Combat -> Excadrill | Rillaboom: Grassy Glide -> Excadrill
+    0.24 Sneasler: Protect | Rillaboom: Wood Hammer -> Tyranitar
+    outcomes: their KOs 0.76, my KOs 0.17, TW net +0.00, their TR 0.00
+    exploit pure: Sneasler: Close Combat -> Tyranitar | Rillaboom: Grassy Glide -> Excadrill
+    reader replies: 0.32 Excadrill: Protect | Tyranitar: Knock Off -> Rillaboom / 0.29 Excadrill: High Horsepower -> Sneasler | Tyranitar: Protect / 0.23 Excadrill: High Horsepower -> Sneasler | Tyranitar: switch / 0.16 Excadrill: Iron Head -> Rillaboom | Tyranitar: Protect
+
+vs Indeedee + Sneasler (4.8%) back Kingambit+Gholdengo: blend 0.764/0.741; exploit 0.764 (adapted 0.741); nash 0.741
+    1.00 Sneasler: Close Combat -> Indeedee | Rillaboom: Fake Out -> Sneasler
+    outcomes: their KOs 1.00, my KOs 0.00, TW net +0.00, their TR 0.00
+    exploit pure: Sneasler: Close Combat -> Indeedee | Rillaboom: Fake Out -> Sneasler
+    reader replies: 1.00 Indeedee: switch | Sneasler: Protect
+
+vs Sneasler + Tyranitar (4.5%) back Kingambit+Gholdengo: blend 0.733/0.507; exploit 0.738 (adapted 0.456); nash 0.526
+    0.68 Sneasler: Acrobatics -> Sneasler | Rillaboom: Wood Hammer -> Tyranitar
+    0.32 Sneasler: Acrobatics -> Sneasler | Rillaboom: Wood Hammer -> Sneasler
+    outcomes: their KOs 1.17, my KOs 0.01, TW net +0.00, their TR 0.00
+    exploit pure: Sneasler: Acrobatics -> Sneasler | Rillaboom: Wood Hammer -> Sneasler
+    reader replies: 0.54 Sneasler: Fake Out -> Sneasler | Tyranitar: Knock Off -> Rillaboom / 0.32 Sneasler: Fake Out -> Sneasler | Tyranitar: Protect / 0.10 Sneasler: Fake Out -> Rillaboom | Tyranitar: Knock Off -> Rillaboom
+
+vs Salamence + Sneasler (3.8%) back Kingambit+Gholdengo: blend 0.419/0.374; exploit 0.426 (adapted 0.311); nash 0.375
+    0.33 Sneasler: switch -> Kingambit | Rillaboom: switch -> Gholdengo
+    0.30 Sneasler: switch -> Gholdengo | Rillaboom: switch -> Kingambit
+    0.23 Sneasler: Acrobatics -> Sneasler | Rillaboom: Fake Out -> Salamence
+    0.14 Sneasler: Acrobatics -> Sneasler | Rillaboom: switch -> Gholdengo
+    outcomes: their KOs 0.02, my KOs 0.11, TW net -0.12, their TR 0.00
+    exploit pure: Sneasler: switch -> Kingambit | Rillaboom: switch -> Gholdengo
+    reader replies: 0.31 Salamence: Hyper Voice | Sneasler: Fake Out -> Rillaboom / 0.30 Salamence: Tailwind | Sneasler: Fake Out -> Sneasler / 0.15 Salamence: Tailwind | Sneasler: Close Combat -> Sneasler / 0.14 Salamence: Hyper Voice | Sneasler: Close Combat -> Rillaboom / 0.09 Salamence: Tailwind | Sneasler: Throat Chop -> Rillaboom
+
+vs Corviknight + Sneasler (3.6%) back Kingambit+Gholdengo: blend 0.683/0.519; exploit 0.697 (adapted 0.433); nash 0.564
+    0.92 Sneasler: Acrobatics -> Sneasler | Rillaboom: Fake Out -> Corviknight
+    0.08 Sneasler: Close Combat -> Corviknight | Rillaboom: Fake Out -> Corviknight
+    outcomes: their KOs 0.68, my KOs 0.00, TW net +0.00, their TR 0.00
+    exploit pure: Sneasler: Acrobatics -> Sneasler | Rillaboom: Wood Hammer -> Corviknight
+    reader replies: 0.78 Corviknight: Brave Bird -> Rillaboom | Sneasler: Protect / 0.22 Corviknight: Brave Bird -> Rillaboom | Sneasler: Dire Claw -> Rillaboom
+
+vs Excadrill + Salamence (2.9%) back Kingambit+Gholdengo: blend 0.469/0.387; exploit 0.470 (adapted 0.375); nash 0.399
+    0.96 Sneasler: Close Combat -> Excadrill | Rillaboom: Fake Out -> Salamence
+    0.04 Sneasler: Close Combat -> Excadrill | Rillaboom: Grassy Glide -> Excadrill
+    outcomes: their KOs 0.18, my KOs 0.36, TW net -0.00, their TR 0.00
+    exploit pure: Sneasler: Close Combat -> Excadrill | Rillaboom: Fake Out -> Salamence
+    reader replies: 0.35 Excadrill: Protect | Salamence: Tailwind / 0.23 Excadrill: High Horsepower -> Sneasler | Salamence: Protect / 0.22 Excadrill: High Horsepower -> Sneasler | Salamence: Hyper Voice / 0.15 Excadrill: Protect | Salamence: switch
+######## Sand :: Kingambit+Gholdengo
+
+vs Excadrill + Tyranitar (15.7%) back Sneasler+Rillaboom: blend 0.609/0.511; exploit 0.610 (adapted 0.493); nash 0.513
+    0.70 Kingambit: Kowtow Cleave -> Excadrill | Gholdengo: Make It Rain
+    0.30 Kingambit: Low Kick -> Tyranitar | Gholdengo: Protect
+    outcomes: their KOs 0.38, my KOs 0.11, TW net +0.00, their TR 0.00
+    exploit pure: Kingambit: Kowtow Cleave -> Excadrill | Gholdengo: Make It Rain
+    reader replies: 0.57 Excadrill: High Horsepower -> Kingambit | Tyranitar: Protect / 0.37 Excadrill: Protect | Tyranitar: Knock Off -> Gholdengo
+
+vs Indeedee + Sneasler (4.8%) back Sneasler+Rillaboom: blend 0.665/0.522; exploit 0.672 (adapted 0.514); nash 0.523
+    0.92 Kingambit: Kowtow Cleave -> Indeedee | Gholdengo: Make It Rain
+    0.08 Kingambit: switch -> Rillaboom | Gholdengo: Make It Rain
+    outcomes: their KOs 0.80, my KOs 0.10, TW net +0.00, their TR 0.00
+    exploit pure: Kingambit: Kowtow Cleave -> Indeedee | Gholdengo: Make It Rain
+    reader replies: 0.58 Indeedee: Mystical Fire -> Gholdengo | Sneasler: Close Combat -> Kingambit / 0.42 Indeedee: Trick -> Kingambit | Sneasler: Close Combat -> Kingambit
+
+vs Sneasler + Tyranitar (4.5%) back Sneasler+Rillaboom: blend 0.663/0.493; exploit 0.666 (adapted 0.454); nash 0.494
+    0.55 Kingambit: Low Kick -> Tyranitar | Gholdengo: Make It Rain
+    0.45 Kingambit: Kowtow Cleave -> Sneasler | Gholdengo: Make It Rain
+    outcomes: their KOs 0.62, my KOs 0.01, TW net +0.00, their TR 0.00
+    exploit pure: Kingambit: Low Kick -> Tyranitar | Gholdengo: Make It Rain
+    reader replies: 0.63 Sneasler: Close Combat -> Kingambit | Tyranitar: Knock Off -> Gholdengo / 0.37 Sneasler: Close Combat -> Kingambit | Tyranitar: Protect
+
+vs Salamence + Sneasler (3.8%) back Sneasler+Rillaboom: blend 0.679/0.522; exploit 0.711 (adapted 0.442); nash 0.527
+    0.80 Kingambit: Sucker Punch -> Sneasler | Gholdengo: Make It Rain
+    0.20 Kingambit: Sucker Punch -> Sneasler | Gholdengo: Protect
+    outcomes: their KOs 0.40, my KOs 0.10, TW net -0.16, their TR 0.00
+    exploit pure: Kingambit: Kowtow Cleave -> Salamence | Gholdengo: Make It Rain
+    reader replies: 0.55 Salamence: Draco Meteor -> Gholdengo | Sneasler: Throat Chop -> Gholdengo / 0.35 Salamence: Hyper Voice | Sneasler: Close Combat -> Kingambit / 0.09 Salamence: Tailwind | Sneasler: Close Combat -> Kingambit
+
+vs Corviknight + Sneasler (3.6%) back Sneasler+Rillaboom: blend 0.642/0.463; exploit 0.647 (adapted 0.452); nash 0.483
+    0.76 Kingambit: Kowtow Cleave -> Sneasler | Gholdengo: Make It Rain
+    0.24 Kingambit: Kowtow Cleave -> Corviknight | Gholdengo: Make It Rain
+    outcomes: their KOs 0.69, my KOs 0.02, TW net +0.00, their TR 0.00
+    exploit pure: Kingambit: Kowtow Cleave -> Sneasler | Gholdengo: Make It Rain
+    reader replies: 0.57 Corviknight: Bulk Up | Sneasler: Protect / 0.43 Corviknight: Bulk Up | Sneasler: Close Combat -> Kingambit
+
+vs Excadrill + Salamence (2.9%) back Sneasler+Rillaboom: blend 0.678/0.534; exploit 0.691 (adapted 0.448); nash 0.540
+    0.50 Kingambit: Sucker Punch -> Excadrill | Gholdengo: Make It Rain
+    0.34 Kingambit: Sucker Punch -> Excadrill | Gholdengo: Protect
+    0.16 Kingambit: Kowtow Cleave -> Excadrill | Gholdengo: Make It Rain
+    outcomes: their KOs 0.29, my KOs 0.11, TW net -0.08, their TR 0.00
+    exploit pure: Kingambit: Low Kick -> Excadrill | Gholdengo: Make It Rain
+    reader replies: 0.37 Excadrill: High Horsepower -> Gholdengo | Salamence: Hyper Voice / 0.32 Excadrill: Protect | Salamence: Flamethrower -> Kingambit / 0.26 Excadrill: High Horsepower -> Kingambit | Salamence: Flamethrower -> Kingambit
+######## Rain :: Gholdengo+Rillaboom
+
+vs Archaludon + Pelipper (8.3%) back Salamence+Incineroar: blend 0.593/0.552; exploit 0.593 (adapted 0.552); nash 0.552
+    1.00 Gholdengo: Power Gem -> Pelipper | Rillaboom: Grassy Glide -> Pelipper
+    outcomes: their KOs 1.00, my KOs 0.00, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Power Gem -> Pelipper | Rillaboom: Grassy Glide -> Pelipper
+    reader replies: 0.62 Archaludon: Electro Shot -> Gholdengo | Pelipper: Hurricane -> Rillaboom / 0.38 Archaludon: Electro Shot -> Gholdengo | Pelipper: Hurricane -> Gholdengo
+
+vs Pelipper + Swampert (6.8%) back Salamence+Incineroar: blend 0.659/0.598; exploit 0.734 (adapted 0.508); nash 0.600
+    0.51 Gholdengo: Shadow Ball -> Pelipper | Rillaboom: Grassy Glide -> Swampert
+    0.49 Gholdengo: Make It Rain | Rillaboom: Wood Hammer -> Pelipper
+    outcomes: their KOs 0.74, my KOs 0.02, TW net -0.07, their TR 0.00
+    exploit pure: Gholdengo: Power Gem -> Pelipper | Rillaboom: Grassy Glide -> Swampert
+    reader replies: 0.54 Pelipper: switch | Swampert: switch / 0.24 Pelipper: Hurricane -> Rillaboom | Swampert: switch / 0.21 Pelipper: switch | Swampert: High Horsepower -> Gholdengo
+
+vs Pelipper + Sneasler (4.2%) back Salamence+Incineroar: blend 0.591/0.549; exploit 0.645 (adapted 0.476); nash 0.550
+    0.54 Gholdengo: Make It Rain | Rillaboom: switch -> Incineroar
+    0.46 Gholdengo: Make It Rain | Rillaboom: Wood Hammer -> Pelipper
+    outcomes: their KOs 0.30, my KOs 0.13, TW net -0.31, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Rillaboom: Wood Hammer -> Pelipper
+    reader replies: 0.67 Pelipper: Hurricane -> Rillaboom | Sneasler: Fake Out -> Rillaboom / 0.21 Pelipper: Weather Ball -> Rillaboom | Sneasler: Close Combat -> Rillaboom / 0.12 Pelipper: Tailwind | Sneasler: Throat Chop -> Gholdengo
+
+vs Archaludon + Grimmsnarl (3.2%) back Salamence+Incineroar: blend 0.594/0.532; exploit 0.660 (adapted 0.406); nash 0.537
+    0.93 Gholdengo: Make It Rain | Rillaboom: Wood Hammer -> Grimmsnarl
+    0.07 Gholdengo: Make It Rain | Rillaboom: Fake Out -> Grimmsnarl
+    outcomes: their KOs 0.96, my KOs 0.00, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Rillaboom: Fake Out -> Grimmsnarl
+    reader replies: 0.50 Archaludon: Electro Shot -> Gholdengo | Grimmsnarl: switch / 0.33 Archaludon: Snarl | Grimmsnarl: Light Screen / 0.17 Archaludon: Dragon Pulse -> Rillaboom | Grimmsnarl: Light Screen
+
+vs Farigiraf + Golisopod (2.1%) back Salamence+Incineroar: blend 0.473/0.390; exploit 0.554 (adapted 0.253); nash 0.390
+    0.85 Gholdengo: Make It Rain | Rillaboom: switch -> Salamence
+    0.15 Gholdengo: Make It Rain | Rillaboom: Wood Hammer -> Farigiraf
+    outcomes: their KOs 0.12, my KOs 0.07, TW net +0.00, their TR 0.47
+    exploit pure: Gholdengo: Make It Rain | Rillaboom: Wood Hammer -> Farigiraf
+    reader replies: 0.56 Farigiraf: Trick Room | Golisopod: First Impression -> Rillaboom / 0.44 Farigiraf: Trick Room | Golisopod: Swords Dance
+
+vs Dragonite + Gholdengo (2.0%) back Salamence+Incineroar: blend 0.562/0.520; exploit 0.576 (adapted 0.500); nash 0.520
+    0.79 Gholdengo: Shadow Ball -> Gholdengo | Rillaboom: Fake Out -> Dragonite
+    0.21 Gholdengo: Shadow Ball -> Dragonite | Rillaboom: Fake Out -> Dragonite
+    outcomes: their KOs 0.37, my KOs 0.00, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Shadow Ball -> Gholdengo | Rillaboom: Fake Out -> Dragonite
+    reader replies: 0.70 Dragonite: switch | Gholdengo: Protect / 0.28 Dragonite: Protect | Gholdengo: Shadow Ball -> Gholdengo
+######## Balance, no speed control :: Gholdengo+Incineroar
+
+vs Gholdengo + Raichu (6.2%) back Salamence+Sneasler: blend 0.612/0.545; exploit 0.661 (adapted 0.485); nash 0.545
+    0.59 Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Fake Out -> Raichu
+    0.25 Gholdengo: Shadow Ball -> Raichu | Incineroar: Fake Out -> Raichu
+    0.16 Gholdengo: Shadow Ball -> Raichu | Incineroar: Flare Blitz -> Gholdengo
+    outcomes: their KOs 0.45, my KOs 0.00, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Shadow Ball -> Gholdengo | Incineroar: Fake Out -> Raichu
+    reader replies: 0.52 Gholdengo: Protect | Raichu: Fake Out -> Incineroar / 0.31 Gholdengo: Shadow Ball -> Gholdengo | Raichu: Protect / 0.18 Gholdengo: Protect | Raichu: Zap Cannon -> Gholdengo
+
+vs Floette-Eternal + Incineroar (4.0%) back Salamence+Sneasler: blend 0.585/0.528; exploit 0.599 (adapted 0.456); nash 0.544
+    0.92 Gholdengo: Make It Rain | Incineroar: Parting Shot -> Incineroar
+    0.08 Gholdengo: Power Gem -> Incineroar | Incineroar: switch -> Salamence
+    outcomes: their KOs 0.01, my KOs 0.02, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Incineroar: switch -> Salamence
+    reader replies: 0.58 Floette-Eternal: Protect | Incineroar: Parting Shot -> Incineroar / 0.28 Floette-Eternal: Protect | Incineroar: Fake Out -> Incineroar / 0.14 Floette-Eternal: Dazzling Gleam | Incineroar: Flare Blitz -> Gholdengo
+
+vs Garchomp + Raichu (3.5%) back Salamence+Sneasler: blend 0.606/0.570; exploit 0.648 (adapted 0.471); nash 0.571
+    0.32 Gholdengo: Make It Rain | Incineroar: Fake Out -> Raichu
+    0.30 Gholdengo: Protect | Incineroar: Parting Shot -> Garchomp
+    0.23 Gholdengo: Make It Rain | Incineroar: Fake Out -> Garchomp
+    0.16 Gholdengo: Make It Rain | Incineroar: switch -> Salamence
+    outcomes: their KOs 0.07, my KOs 0.04, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Fake Out -> Raichu
+    reader replies: 0.55 Garchomp: Earthquake | Raichu: Protect / 0.23 Garchomp: Stomping Tantrum -> Incineroar | Raichu: Zap Cannon -> Gholdengo / 0.12 Garchomp: Stomping Tantrum -> Incineroar | Raichu: Zap Cannon -> Incineroar / 0.10 Garchomp: switch | Raichu: Zap Cannon -> Gholdengo
+
+vs Incineroar + Raichu (2.9%) back Salamence+Sneasler: blend 0.559/0.507; exploit 0.569 (adapted 0.423); nash 0.507
+    0.45 Gholdengo: Make It Rain | Incineroar: Fake Out -> Raichu
+    0.24 Gholdengo: Protect | Incineroar: switch -> Salamence
+    0.22 Gholdengo: Shadow Ball -> Raichu | Incineroar: Parting Shot -> Incineroar
+    0.09 Gholdengo: Shadow Ball -> Raichu | Incineroar: switch -> Salamence
+    outcomes: their KOs 0.02, my KOs 0.05, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Fake Out -> Raichu
+    reader replies: 0.39 Incineroar: Flare Blitz -> Gholdengo | Raichu: Protect / 0.28 Incineroar: Fake Out -> Incineroar | Raichu: Zap Cannon -> Incineroar / 0.16 Incineroar: Flare Blitz -> Gholdengo | Raichu: Zap Cannon -> Incineroar / 0.16 Incineroar: Fake Out -> Incineroar | Raichu: Zap Cannon -> Gholdengo
+
+vs Arcanine-Hisui + Raichu (2.8%) back Salamence+Sneasler: blend 0.576/0.560; exploit 0.587 (adapted 0.520); nash 0.562
+    0.40 Gholdengo: switch -> Salamence | Incineroar: Fake Out -> Raichu
+    0.38 Gholdengo: Power Gem -> Arcanine-Hisui | Incineroar: Fake Out -> Raichu
+    0.19 Gholdengo: Make It Rain | Incineroar: switch -> Salamence
+    outcomes: their KOs 0.00, my KOs 0.05, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Power Gem -> Arcanine-Hisui | Incineroar: Fake Out -> Raichu
+    reader replies: 0.50 Arcanine-Hisui: Flare Blitz -> Gholdengo | Raichu: Fake Out -> Incineroar / 0.28 Arcanine-Hisui: Head Smash -> Incineroar | Raichu: Protect / 0.14 Arcanine-Hisui: Flare Blitz -> Gholdengo | Raichu: Zap Cannon -> Gholdengo
+
+vs Garchomp + Rillaboom (2.8%) back Salamence+Sneasler: blend 0.666/0.587; exploit 0.666 (adapted 0.587); nash 0.595
+    1.00 Gholdengo: Make It Rain | Incineroar: Parting Shot -> Rillaboom
+    outcomes: their KOs 0.01, my KOs 0.13, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Parting Shot -> Rillaboom
+    reader replies: 0.84 Garchomp: Flamethrower -> Gholdengo | Rillaboom: switch / 0.09 Garchomp: switch | Rillaboom: Fake Out -> Incineroar
+######## Snow :: Gholdengo+Sneasler
+
+vs Froslass + Sneasler (8.8%) back Kingambit+Incineroar: blend 0.620/0.546; exploit 0.648 (adapted 0.510); nash 0.551
+    0.59 Gholdengo: Make It Rain | Sneasler: Protect
+    0.41 Gholdengo: Make It Rain | Sneasler: Dire Claw -> Froslass
+    outcomes: their KOs 0.44, my KOs 0.03, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Sneasler: Protect
+    reader replies: 0.66 Froslass: Shadow Ball -> Gholdengo | Sneasler: Protect / 0.24 Froslass: Aurora Veil | Sneasler: Protect
+
+vs Froslass + Kingambit (5.3%) back Kingambit+Incineroar: blend 0.655/0.458; exploit 0.696 (adapted 0.364); nash 0.460
+    0.66 Gholdengo: Make It Rain | Sneasler: Close Combat -> Kingambit
+    0.34 Gholdengo: Protect | Sneasler: Close Combat -> Kingambit
+    outcomes: their KOs 1.04, my KOs 0.03, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Sneasler: Close Combat -> Kingambit
+    reader replies: 0.59 Froslass: Aurora Veil | Kingambit: Protect / 0.35 Froslass: Blizzard | Kingambit: Sucker Punch -> Gholdengo
+
+vs Arcanine-Hisui + Raichu (3.4%) back Kingambit+Incineroar: blend 0.526/0.500; exploit 0.533 (adapted 0.423); nash 0.500
+    1.00 Gholdengo: Protect | Sneasler: Protect
+    outcomes: their KOs 0.00, my KOs 0.00, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: switch -> Incineroar | Sneasler: Close Combat -> Raichu
+    reader replies: 1.00 Arcanine-Hisui: Flare Blitz -> Sneasler | Raichu: Zap Cannon -> Gholdengo
+
+vs Raichu + Sneasler (3.2%) back Kingambit+Incineroar: blend 0.552/0.500; exploit 0.594 (adapted 0.382); nash 0.500
+    1.00 Gholdengo: Protect | Sneasler: Protect
+    outcomes: their KOs 0.00, my KOs 0.00, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Sneasler: Close Combat -> Raichu
+    reader replies: 0.55 Raichu: Zap Cannon -> Gholdengo | Sneasler: Dire Claw -> Sneasler / 0.32 Raichu: Zap Cannon -> Sneasler | Sneasler: Close Combat -> Sneasler / 0.13 Raichu: Zap Cannon -> Gholdengo | Sneasler: Fake Out -> Sneasler
+
+vs Kingambit + Sneasler (3.1%) back Kingambit+Incineroar: blend 0.632/0.458; exploit 0.635 (adapted 0.447); nash 0.483
+    0.95 Gholdengo: Make It Rain | Sneasler: Close Combat -> Kingambit
+    0.05 Gholdengo: Make It Rain | Sneasler: Protect
+    outcomes: their KOs 0.58, my KOs 0.05, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Sneasler: Close Combat -> Kingambit
+    reader replies: 0.90 Kingambit: Kowtow Cleave -> Gholdengo | Sneasler: Fake Out -> Sneasler / 0.10 Kingambit: Kowtow Cleave -> Gholdengo | Sneasler: Protect
+
+vs Arcanine-Hisui + Froslass (3.1%) back Kingambit+Incineroar: blend 0.553/0.454; exploit 0.615 (adapted 0.313); nash 0.459
+    0.60 Gholdengo: switch -> Incineroar | Sneasler: Close Combat -> Arcanine-Hisui
+    0.40 Gholdengo: Make It Rain | Sneasler: Close Combat -> Arcanine-Hisui
+    outcomes: their KOs 0.51, my KOs 0.16, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Sneasler: Close Combat -> Arcanine-Hisui
+    reader replies: 0.65 Arcanine-Hisui: Protect | Froslass: Aurora Veil / 0.35 Arcanine-Hisui: Flare Blitz -> Gholdengo | Froslass: Blizzard
+######## Snow :: Gholdengo+Incineroar
+
+vs Froslass + Sneasler (8.8%) back Sneasler+Kingambit: blend 0.614/0.546; exploit 0.630 (adapted 0.506); nash 0.546
+    0.59 Gholdengo: Make It Rain | Incineroar: Fake Out -> Sneasler
+    0.38 Gholdengo: Make It Rain | Incineroar: Throat Chop -> Froslass
+    outcomes: their KOs 0.50, my KOs 0.09, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Fake Out -> Sneasler
+    reader replies: 0.42 Froslass: Aurora Veil | Sneasler: Protect / 0.42 Froslass: Protect | Sneasler: switch / 0.16 Froslass: Aurora Veil | Sneasler: Close Combat -> Incineroar
+
+vs Froslass + Kingambit (5.3%) back Sneasler+Kingambit: blend 0.537/0.440; exploit 0.538 (adapted 0.426); nash 0.441
+    0.82 Gholdengo: Make It Rain | Incineroar: Fake Out -> Kingambit
+    0.15 Gholdengo: Make It Rain | Incineroar: Flare Blitz -> Froslass
+    0.04 Gholdengo: Make It Rain | Incineroar: Flare Blitz -> Kingambit
+    outcomes: their KOs 0.41, my KOs 0.02, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Fake Out -> Kingambit
+    reader replies: 0.61 Froslass: Aurora Veil | Kingambit: Protect / 0.19 Froslass: Protect | Kingambit: Kowtow Cleave -> Gholdengo / 0.19 Froslass: Protect | Kingambit: Swords Dance
+
+vs Arcanine-Hisui + Raichu (3.4%) back Sneasler+Kingambit: blend 0.591/0.567; exploit 0.623 (adapted 0.485); nash 0.567
+    0.42 Gholdengo: Make It Rain | Incineroar: Fake Out -> Raichu
+    0.34 Gholdengo: Make It Rain | Incineroar: Fake Out -> Arcanine-Hisui
+    0.24 Gholdengo: Protect | Incineroar: Flare Blitz -> Raichu
+    outcomes: their KOs 0.04, my KOs 0.02, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Fake Out -> Raichu
+    reader replies: 0.56 Arcanine-Hisui: Flare Blitz -> Gholdengo | Raichu: Protect / 0.41 Arcanine-Hisui: Protect | Raichu: Zap Cannon -> Incineroar
+
+vs Raichu + Sneasler (3.2%) back Sneasler+Kingambit: blend 0.608/0.368; exploit 0.608 (adapted 0.368); nash 0.406
+    1.00 Gholdengo: Make It Rain | Incineroar: Fake Out -> Raichu
+    outcomes: their KOs 0.18, my KOs 0.18, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Fake Out -> Raichu
+    reader replies: 0.85 Raichu: Zap Cannon -> Gholdengo | Sneasler: Fake Out -> Incineroar / 0.15 Raichu: Zap Cannon -> Gholdengo | Sneasler: Protect
+
+vs Arcanine-Hisui + Froslass (3.1%) back Sneasler+Kingambit: blend 0.636/0.563; exploit 0.649 (adapted 0.547); nash 0.573
+    0.81 Gholdengo: Make It Rain | Incineroar: Fake Out -> Arcanine-Hisui
+    0.19 Gholdengo: Make It Rain | Incineroar: Flare Blitz -> Arcanine-Hisui
+    outcomes: their KOs 0.32, my KOs 0.02, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Fake Out -> Arcanine-Hisui
+    reader replies: 0.52 Arcanine-Hisui: switch | Froslass: Protect / 0.37 Arcanine-Hisui: Protect | Froslass: Aurora Veil / 0.11 Arcanine-Hisui: Flare Blitz -> Gholdengo | Froslass: Blizzard
+
+vs Kingambit + Sneasler (3.1%) back Sneasler+Kingambit: blend 0.517/0.399; exploit 0.517 (adapted 0.399); nash 0.402
+    0.88 Gholdengo: Make It Rain | Incineroar: Fake Out -> Kingambit
+    0.12 Gholdengo: Make It Rain | Incineroar: Fake Out -> Sneasler
+    outcomes: their KOs 0.43, my KOs 0.23, TW net +0.00, their TR 0.00
+    exploit pure: Gholdengo: Make It Rain | Incineroar: Fake Out -> Kingambit
+    reader replies: 0.95 Kingambit: Kowtow Cleave -> Gholdengo | Sneasler: Fake Out -> Incineroar
+######## Trick Room without Indeedee :: Kingambit+Gholdengo
+
+vs Farigiraf + Incineroar (7.3%) back Incineroar+Rillaboom: blend 0.652/0.508; exploit 0.660 (adapted 0.461); nash 0.526
+    0.63 Kingambit: Kowtow Cleave -> Farigiraf | Gholdengo: Make It Rain
+    0.27 Kingambit: Kowtow Cleave -> Farigiraf | Gholdengo: switch -> Incineroar
+    0.10 Kingambit: Kowtow Cleave -> Farigiraf | Gholdengo: Power Gem -> Incineroar
+    outcomes: their KOs 0.39, my KOs 0.01, TW net +0.00, their TR 0.35
+    exploit pure: Kingambit: Kowtow Cleave -> Farigiraf | Gholdengo: Make It Rain
+    reader replies: 0.88 Farigiraf: Trick Room | Incineroar: Fake Out -> Kingambit / 0.08 Farigiraf: Protect | Incineroar: Darkest Lariat -> Gholdengo
+
+vs Farigiraf + Kingambit (3.5%) back Incineroar+Rillaboom: blend 0.618/0.568; exploit 0.634 (adapted 0.455); nash 0.568
+    0.48 Kingambit: Low Kick -> Kingambit | Gholdengo: Make It Rain
+    0.47 Kingambit: Kowtow Cleave -> Farigiraf | Gholdengo: Make It Rain
+    0.05 Kingambit: Low Kick -> Kingambit | Gholdengo: Shadow Ball -> Kingambit
+    outcomes: their KOs 0.69, my KOs 0.04, TW net +0.00, their TR 0.40
+    exploit pure: Kingambit: Kowtow Cleave -> Farigiraf | Gholdengo: Make It Rain
+    reader replies: 0.44 Farigiraf: Helping Hand | Kingambit: Low Kick -> Kingambit / 0.30 Farigiraf: Trick Room | Kingambit: Protect / 0.25 Farigiraf: Psychic -> Gholdengo | Kingambit: Kowtow Cleave -> Gholdengo
+
+vs Farigiraf + Rillaboom (3.0%) back Incineroar+Rillaboom: blend 0.628/0.510; exploit 0.628 (adapted 0.510); nash 0.521
+    1.00 Kingambit: Kowtow Cleave -> Farigiraf | Gholdengo: Make It Rain
+    outcomes: their KOs 0.42, my KOs 0.00, TW net +0.00, their TR 0.40
+    exploit pure: Kingambit: Kowtow Cleave -> Farigiraf | Gholdengo: Make It Rain
+    reader replies: 0.71 Farigiraf: Trick Room | Rillaboom: Fake Out -> Kingambit / 0.26 Farigiraf: Protect | Rillaboom: switch
+
+vs Delphox + Incineroar (3.0%) back Incineroar+Rillaboom: blend 0.633/0.447; exploit 0.658 (adapted 0.228); nash 0.454
+    0.77 Kingambit: Kowtow Cleave -> Delphox | Gholdengo: switch -> Incineroar
+    0.23 Kingambit: Sucker Punch -> Delphox | Gholdengo: Shadow Ball -> Delphox
+    outcomes: their KOs 0.37, my KOs 0.01, TW net +0.00, their TR 0.00
+    exploit pure: Kingambit: Kowtow Cleave -> Delphox | Gholdengo: Power Gem -> Incineroar
+    reader replies: 0.99 Delphox: Heat Wave | Incineroar: Fake Out -> Kingambit
+
+vs Delphox + Sneasler (2.2%) back Incineroar+Rillaboom: blend 0.580/0.481; exploit 0.600 (adapted 0.319); nash 0.482
+    0.51 Kingambit: switch -> Incineroar | Gholdengo: Shadow Ball -> Delphox
+    0.45 Kingambit: switch -> Incineroar | Gholdengo: Make It Rain
+    0.04 Kingambit: Sucker Punch -> Delphox | Gholdengo: Shadow Ball -> Delphox
+    outcomes: their KOs 0.06, my KOs 0.01, TW net +0.00, their TR 0.00
+    exploit pure: Kingambit: Kowtow Cleave -> Delphox | Gholdengo: Make It Rain
+    reader replies: 0.71 Delphox: Heat Wave | Sneasler: Fake Out -> Kingambit / 0.23 Delphox: Heat Wave | Sneasler: Close Combat -> Kingambit
+
+vs Farigiraf + Raichu (2.0%) back Incineroar+Rillaboom: blend 0.513/0.375; exploit 0.516 (adapted 0.362); nash 0.378
+    0.93 Kingambit: Kowtow Cleave -> Raichu | Gholdengo: Make It Rain
+    0.07 Kingambit: Kowtow Cleave -> Raichu | Gholdengo: Protect
+    outcomes: their KOs 0.47, my KOs 0.47, TW net +0.00, their TR 0.05
+    exploit pure: Kingambit: Kowtow Cleave -> Raichu | Gholdengo: Make It Rain
+    reader replies: 0.50 Farigiraf: Thunderbolt -> Kingambit | Raichu: Focus Blast -> Kingambit / 0.42 Farigiraf: Trick Room | Raichu: Zap Cannon -> Gholdengo
+######## Trick Room without Indeedee :: Incineroar+Kingambit
+
+vs Farigiraf + Incineroar (7.3%) back Rillaboom+Gholdengo: blend 0.662/0.528; exploit 0.662 (adapted 0.528); nash 0.528
+    1.00 Incineroar: Parting Shot -> Incineroar | Kingambit: Kowtow Cleave -> Farigiraf
+    outcomes: their KOs 0.34, my KOs 0.00, TW net +0.00, their TR 0.37
+    exploit pure: Incineroar: Parting Shot -> Incineroar | Kingambit: Kowtow Cleave -> Farigiraf
+    reader replies: 1.00 Farigiraf: Trick Room | Incineroar: Fake Out -> Kingambit
+
+vs Farigiraf + Kingambit (3.5%) back Rillaboom+Gholdengo: blend 0.559/0.467; exploit 0.575 (adapted 0.309); nash 0.467
+    0.45 Incineroar: Flare Blitz -> Farigiraf | Kingambit: Kowtow Cleave -> Farigiraf
+    0.26 Incineroar: Throat Chop -> Farigiraf | Kingambit: Low Kick -> Kingambit
+    0.17 Incineroar: Parting Shot -> Farigiraf | Kingambit: Low Kick -> Kingambit
+    0.12 Incineroar: Fake Out -> Kingambit | Kingambit: Low Kick -> Kingambit
+    outcomes: their KOs 0.72, my KOs 0.06, TW net +0.00, their TR 0.36
+    exploit pure: Incineroar: Flare Blitz -> Farigiraf | Kingambit: Kowtow Cleave -> Farigiraf
+    reader replies: 0.36 Farigiraf: Trick Room | Kingambit: Protect / 0.32 Farigiraf: Trick Room | Kingambit: Low Kick -> Kingambit / 0.25 Farigiraf: switch | Kingambit: Low Kick -> Kingambit
+
+vs Farigiraf + Rillaboom (3.0%) back Rillaboom+Gholdengo: blend 0.567/0.501; exploit 0.602 (adapted 0.440); nash 0.501
+    0.82 Incineroar: Flare Blitz -> Rillaboom | Kingambit: Kowtow Cleave -> Farigiraf
+    0.18 Incineroar: Flare Blitz -> Farigiraf | Kingambit: Kowtow Cleave -> Farigiraf
+    outcomes: their KOs 0.22, my KOs 0.00, TW net +0.00, their TR 0.65
+    exploit pure: Incineroar: Flare Blitz -> Farigiraf | Kingambit: Kowtow Cleave -> Farigiraf
+    reader replies: 0.97 Farigiraf: Trick Room | Rillaboom: Fake Out -> Incineroar
+
+vs Delphox + Incineroar (3.0%) back Rillaboom+Gholdengo: blend 0.660/0.559; exploit 0.666 (adapted 0.440); nash 0.585
+    0.66 Incineroar: Fake Out -> Incineroar | Kingambit: Kowtow Cleave -> Delphox
+    0.34 Incineroar: Parting Shot -> Incineroar | Kingambit: Kowtow Cleave -> Delphox
+    outcomes: their KOs 0.47, my KOs 0.01, TW net +0.00, their TR 0.00
+    exploit pure: Incineroar: Parting Shot -> Incineroar | Kingambit: Kowtow Cleave -> Delphox
+    reader replies: 0.54 Delphox: Heat Wave | Incineroar: Fake Out -> Kingambit / 0.40 Delphox: Protect | Incineroar: Flare Blitz -> Kingambit
+
+vs Delphox + Sneasler (2.2%) back Rillaboom+Gholdengo: blend 0.625/0.528; exploit 0.649 (adapted 0.432); nash 0.541
+    0.45 Incineroar: Throat Chop -> Delphox | Kingambit: Kowtow Cleave -> Sneasler
+    0.30 Incineroar: Flare Blitz -> Sneasler | Kingambit: Kowtow Cleave -> Delphox
+    0.09 Incineroar: Throat Chop -> Delphox | Kingambit: Sucker Punch -> Delphox
+    0.09 Incineroar: Throat Chop -> Delphox | Kingambit: Kowtow Cleave -> Delphox
+    0.07 Incineroar: Fake Out -> Delphox | Kingambit: Kowtow Cleave -> Delphox
+    outcomes: their KOs 0.42, my KOs 0.01, TW net +0.00, their TR 0.00
+    exploit pure: Incineroar: Throat Chop -> Delphox | Kingambit: Kowtow Cleave -> Delphox
+    reader replies: 0.49 Delphox: Heat Wave | Sneasler: Fake Out -> Kingambit / 0.34 Delphox: Protect | Sneasler: Close Combat -> Kingambit / 0.11 Delphox: Heat Wave | Sneasler: Fake Out -> Incineroar
+
+vs Farigiraf + Raichu (2.0%) back Rillaboom+Gholdengo: blend 0.508/0.380; exploit 0.508 (adapted 0.380); nash 0.386
+    1.00 Incineroar: Flare Blitz -> Raichu | Kingambit: Kowtow Cleave -> Raichu
+    outcomes: their KOs 0.81, my KOs 0.42, TW net +0.00, their TR 0.05
+    exploit pure: Incineroar: Flare Blitz -> Raichu | Kingambit: Kowtow Cleave -> Raichu
+    reader replies: 0.82 Farigiraf: Trick Room | Raichu: Zap Cannon -> Kingambit / 0.15 Farigiraf: Thunderbolt -> Kingambit | Raichu: Focus Blast -> Kingambit
+######## Rain + sun :: Salamence+Incineroar
+
+vs Charizard + Venusaur (13.5%) back Gholdengo+Rillaboom: blend 0.570/0.563; exploit 0.604 (adapted 0.428); nash 0.565
+    0.44 Salamence: Double-Edge -> Charizard | Incineroar: Fake Out -> Venusaur
+    0.39 Salamence: Tailwind | Incineroar: Fake Out -> Venusaur
+    0.09 Salamence: Tailwind | Incineroar: Flare Blitz -> Venusaur
+    0.08 Salamence: Tailwind | Incineroar: Fake Out -> Charizard
+    outcomes: their KOs 0.16, my KOs 0.00, TW net +0.49, their TR 0.00
+    exploit pure: Salamence: Hyper Voice | Incineroar: Fake Out -> Venusaur
+    reader replies: 0.39 Charizard: Protect | Venusaur: switch / 0.29 Charizard: Weather Ball -> Salamence | Venusaur: Protect / 0.21 Charizard: Protect | Venusaur: Sleep Powder -> Salamence / 0.10 Charizard: Heat Wave | Venusaur: Sleep Powder -> Salamence
+
+vs Archaludon + Grimmsnarl (9.5%) back Gholdengo+Rillaboom: blend 0.611/0.555; exploit 0.659 (adapted 0.411); nash 0.571
+    0.73 Salamence: Tailwind | Incineroar: Fake Out -> Archaludon
+    0.27 Salamence: Tailwind | Incineroar: Fake Out -> Grimmsnarl
+    outcomes: their KOs 0.00, my KOs 0.01, TW net +1.00, their TR 0.00
+    exploit pure: Salamence: Tailwind | Incineroar: Fake Out -> Grimmsnarl
+    reader replies: 0.45 Archaludon: Dragon Pulse -> Salamence | Grimmsnarl: Parting Shot -> Salamence / 0.22 Archaludon: Protect | Grimmsnarl: Parting Shot -> Salamence / 0.15 Archaludon: Electro Shot -> Incineroar | Grimmsnarl: switch / 0.09 Archaludon: Electro Shot -> Salamence | Grimmsnarl: switch
+
+vs Charizard + Grimmsnarl (9.4%) back Gholdengo+Rillaboom: blend 0.650/0.590; exploit 0.722 (adapted 0.495); nash 0.609
+    0.59 Salamence: Tailwind | Incineroar: Flare Blitz -> Grimmsnarl
+    0.41 Salamence: Double-Edge -> Charizard | Incineroar: Fake Out -> Grimmsnarl
+    outcomes: their KOs 0.29, my KOs 0.00, TW net +0.59, their TR 0.00
+    exploit pure: Salamence: Double-Edge -> Charizard | Incineroar: Fake Out -> Grimmsnarl
+    reader replies: 0.38 Charizard: Protect | Grimmsnarl: Reflect / 0.35 Charizard: Heat Wave | Grimmsnarl: switch / 0.27 Charizard: Protect | Grimmsnarl: switch
+
+vs Farigiraf + Golisopod (7.6%) back Gholdengo+Rillaboom: blend 0.595/0.554; exploit 0.641 (adapted 0.477); nash 0.554
+    0.57 Salamence: Double-Edge -> Golisopod | Incineroar: Throat Chop -> Farigiraf
+    0.28 Salamence: Tailwind | Incineroar: Flare Blitz -> Golisopod
+    0.15 Salamence: Tailwind | Incineroar: Throat Chop -> Farigiraf
+    outcomes: their KOs 0.22, my KOs 0.03, TW net +0.43, their TR 0.60
+    exploit pure: Salamence: Tailwind | Incineroar: Flare Blitz -> Golisopod
+    reader replies: 0.51 Farigiraf: Trick Room | Golisopod: switch / 0.41 Farigiraf: Trick Room | Golisopod: Drill Run -> Incineroar / 0.09 Farigiraf: Trick Room | Golisopod: Protect
+
+vs Grimmsnarl + Swampert (5.5%) back Gholdengo+Rillaboom: blend 0.753/0.630; exploit 0.767 (adapted 0.610); nash 0.650
+    0.83 Salamence: Tailwind | Incineroar: Fake Out -> Grimmsnarl
+    0.17 Salamence: Tailwind | Incineroar: Fake Out -> Swampert
+    outcomes: their KOs 0.00, my KOs 0.04, TW net +1.00, their TR 0.00
+    exploit pure: Salamence: Tailwind | Incineroar: Fake Out -> Grimmsnarl
+    reader replies: 0.57 Grimmsnarl: switch | Swampert: switch / 0.19 Grimmsnarl: switch | Swampert: Ice Punch -> Salamence / 0.11 Grimmsnarl: Light Screen | Swampert: Ice Punch -> Salamence
+
+vs Golisopod + Grimmsnarl (5.3%) back Gholdengo+Rillaboom: blend 0.734/0.640; exploit 0.737 (adapted 0.614); nash 0.657
+    0.85 Salamence: Tailwind | Incineroar: Fake Out -> Grimmsnarl
+    0.15 Salamence: Tailwind | Incineroar: Flare Blitz -> Golisopod
+    outcomes: their KOs 0.08, my KOs 0.03, TW net +1.00, their TR 0.00
+    exploit pure: Salamence: Tailwind | Incineroar: Fake Out -> Grimmsnarl
+    reader replies: 0.51 Golisopod: switch | Grimmsnarl: switch / 0.25 Golisopod: Swords Dance | Grimmsnarl: switch / 0.24 Golisopod: switch | Grimmsnarl: Reflect
+######## Perish trap :: Salamence+Kingambit
+
+vs Gengar + Incineroar (29.4%) back Incineroar+Gholdengo: blend 0.719/0.603; exploit 0.719 (adapted 0.600); nash 0.605
+    0.87 Salamence: Hyper Voice | Kingambit: Low Kick -> Incineroar
+    0.13 Salamence: Hyper Voice | Kingambit: Kowtow Cleave -> Gengar
+    outcomes: their KOs 0.25, my KOs 0.01, TW net +0.00, their TR 0.00
+    exploit pure: Salamence: Hyper Voice | Kingambit: Low Kick -> Incineroar
+    reader replies: 0.97 Gengar: Perish Song | Incineroar: Fake Out -> Kingambit
+
+vs Gengar + Rillaboom (10.8%) back Incineroar+Gholdengo: blend 0.656/0.610; exploit 0.669 (adapted 0.551); nash 0.611
+    0.40 Salamence: Double-Edge -> Gengar | Kingambit: Kowtow Cleave -> Rillaboom
+    0.39 Salamence: Protect | Kingambit: Kowtow Cleave -> Gengar
+    0.13 Salamence: Hyper Voice | Kingambit: Kowtow Cleave -> Gengar
+    0.07 Salamence: Tailwind | Kingambit: Kowtow Cleave -> Gengar
+    outcomes: their KOs 0.39, my KOs 0.03, TW net +0.04, their TR 0.00
+    exploit pure: Salamence: Double-Edge -> Gengar | Kingambit: Kowtow Cleave -> Gengar
+    reader replies: 0.40 Gengar: Protect | Rillaboom: Fake Out -> Salamence / 0.26 Gengar: Perish Song | Rillaboom: Fake Out -> Salamence / 0.20 Gengar: Protect | Rillaboom: switch / 0.09 Gengar: Perish Song | Rillaboom: Fake Out -> Kingambit
+
+vs Archaludon + Politoed (6.4%) back Incineroar+Gholdengo: blend 0.524/0.310; exploit 0.546 (adapted 0.175); nash 0.315
+    1.00 Salamence: Tailwind | Kingambit: Kowtow Cleave -> Politoed
+    outcomes: their KOs 0.00, my KOs 0.18, TW net +1.00, their TR 0.00
+    exploit pure: Salamence: Double-Edge -> Politoed | Kingambit: Sucker Punch -> Politoed
+    reader replies: 0.81 Archaludon: Electro Shot -> Salamence | Politoed: Perish Song / 0.19 Archaludon: Electro Shot -> Kingambit | Politoed: Perish Song
+
+vs Gengar + Vivillon (4.0%) back Incineroar+Gholdengo: blend 0.649/0.549; exploit 0.672 (adapted 0.414); nash 0.583
+    0.53 Salamence: Hyper Voice | Kingambit: Sucker Punch -> Gengar
+    0.26 Salamence: Hyper Voice | Kingambit: Kowtow Cleave -> Gengar
+    0.21 Salamence: Double-Edge -> Gengar | Kingambit: Sucker Punch -> Gengar
+    outcomes: their KOs 0.22, my KOs 0.00, TW net +0.00, their TR 0.00
+    exploit pure: Salamence: Hyper Voice | Kingambit: Sucker Punch -> Gengar
+    reader replies: 0.36 Gengar: Protect | Vivillon: Sleep Powder -> Salamence / 0.24 Gengar: Protect | Vivillon: Sleep Powder -> Kingambit / 0.21 Gengar: Perish Song | Vivillon: Sleep Powder -> Kingambit / 0.19 Gengar: Perish Song | Vivillon: Protect
+
+vs Archaludon + Gengar (3.6%) back Incineroar+Gholdengo: blend 0.613/0.466; exploit 0.640 (adapted 0.397); nash 0.470
+    0.69 Salamence: Tailwind | Kingambit: Kowtow Cleave -> Gengar
+    0.31 Salamence: Protect | Kingambit: Kowtow Cleave -> Archaludon
+    outcomes: their KOs 0.20, my KOs 0.04, TW net +0.69, their TR 0.00
+    exploit pure: Salamence: Tailwind | Kingambit: Sucker Punch -> Gengar
+    reader replies: 0.51 Archaludon: Dragon Pulse -> Salamence | Gengar: Protect / 0.41 Archaludon: Electro Shot -> Kingambit | Gengar: switch
+
+vs Archaludon + Incineroar (2.8%) back Incineroar+Gholdengo: blend 0.668/0.568; exploit 0.683 (adapted 0.527); nash 0.569
+    0.65 Salamence: Tailwind | Kingambit: Kowtow Cleave -> Incineroar
+    0.23 Salamence: Protect | Kingambit: Low Kick -> Incineroar
+    0.12 Salamence: Tailwind | Kingambit: Low Kick -> Incineroar
+    outcomes: their KOs 0.02, my KOs 0.00, TW net +0.64, their TR 0.00
+    exploit pure: Salamence: Tailwind | Kingambit: Low Kick -> Incineroar
+    reader replies: 0.57 Archaludon: Electro Shot -> Kingambit | Incineroar: switch / 0.33 Archaludon: Dragon Pulse -> Salamence | Incineroar: Fake Out -> Salamence / 0.11 Archaludon: Electro Shot -> Salamence | Incineroar: switch

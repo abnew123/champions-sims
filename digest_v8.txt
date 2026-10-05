@@ -1,0 +1,151 @@
+
+######## Tailwind (tw)
+==  Incineroar + Farigiraf | back Indeedee, Torkoal | v [67, 59] | top None | TR 100%
+   vs Gholdengo + Raichu               9.6%  64/57  75% Fake Out Raichu | Trick Room ;; 25% Flare Blitz Gholdengo | Trick Room
+   vs Arcanine-H + Raichu              4.6%  67/57  85% Fake Out Raichu | Trick Room ;; 15% Flare Blitz Raichu | Trick Room
+   vs Gholdengo + Rillaboom            3.2%  72/65  60% Flare Blitz Gholdengo | Trick Room ;; 40% Fake Out Rillaboom | Trick Room
+   vs Gholdengo + Salamence            2.6%  67/58  55% Flare Blitz Gholdengo | Trick Room ;; 45% Fake Out Salamence | Trick Room
+   vs Salamence + Sneasler             2.6%  67/59  70% Fake Out Sneasler | Trick Room ;; 30% Fake Out Salamence | Trick Room
+   vs Rillaboom + Sneasler             2.5%  74/67  90% Fake Out Sneasler | Trick Room ;; 10% Flare Blitz Rillaboom | Trick Room
+==  Indeedee + Torkoal | back Farigiraf, Kingambit | v [69, 54] | top ['Incineroar + Farigiraf', 3.7] | TR 51%
+   vs Gholdengo + Raichu               9.6%  70/55  65% Follow Me | Eruption ;; 20% Trick Room | Weather Ball Raichu ;; 15% Trick Room | Protect
+   vs Arcanine-H + Raichu              4.6%  58/46  65% Follow Me | Eruption ;; 25% Trick Room | Earth Power Arcanine-H ;; 10% Trick Room | Protect
+   vs Gholdengo + Rillaboom            3.2%  80/60  60% Trick Room | Eruption ;; 40% Follow Me | Eruption
+   vs Salamence + Sneasler             2.6%  67/47  70% Trick Room | Weather Ball Sneasler ;; 30% Trick Room | Protect
+   vs Gholdengo + Salamence            2.6%  63/53  65% Trick Room | Protect ;; 25% Trick Room | Weather Ball Gholdengo ;; 10% Follow Me | Weather Ball Gholdengo
+   vs Rillaboom + Sneasler             2.5%  82/63  65% Follow Me | Eruption ;; 35% Trick Room | Eruption
+
+######## Indeedee TR (indeedee)
+==  Incineroar + Blastoise | back Indeedee, Farigiraf | v [68, 60] | top None | TR 0%
+   vs Gardevoir + Indeedee F           6.7%  59/51  100% Flare Blitz Gardevoir | Dark Pulse Indeedee F
+   vs Armarouge + Indeedee F           4.4%  74/66  75% Throat Chop Indeedee F | Dark Pulse Armarouge ;; 25% Throat Chop Armarouge | Water Spout
+   vs Farigiraf + Incineroar           3.7%  67/67  100% switch -> Farigiraf | Water Spout
+   vs Indeedee M + Sneasler            2.8%  73/62  100% Throat Chop Indeedee M | Water Spout
+   vs Indeedee F + Sneasler            2.8%  70/61  85% Throat Chop Indeedee F | Water Spout ;; 15% switch -> Farigiraf | Water Spout
+   vs Hatterene + Indeedee F           2.7%  74/60  75% Throat Chop Indeedee F | Water Spout ;; 25% Flare Blitz Hatterene | Water Spout
+==  Farigiraf + Blastoise | back Indeedee, Kingambit | v [64, 55] | top ['Incineroar + Blastoise', 4.5] | TR 42%
+   vs Gardevoir + Indeedee F           6.7%  54/46  40% Trick Room | switch -> Kingambit ;; 35% Trick Room | Dark Pulse Indeedee F ;; 25% Protect | Dark Pulse Indeedee F
+   vs Armarouge + Indeedee F           4.4%  66/60  70% Trick Room | Dark Pulse Armarouge ;; 30% Thunderbolt Armarouge | Dark Pulse Armarouge
+   vs Farigiraf + Incineroar           3.7%  73/73  100% Thunderbolt Incineroar | Water Spout
+   vs Indeedee F + Sneasler            2.8%  65/60  55% Trick Room | Dark Pulse Indeedee F ;; 45% Psychic Sneasler | Dark Pulse Indeedee F
+   vs Indeedee M + Sneasler            2.8%  69/55  100% Psychic Sneasler | Dark Pulse Indeedee M
+   vs Hatterene + Indeedee F           2.7%  68/43  100% Thunderbolt Hatterene | Water Spout
+
+######## Sun (sun)
+==  Farigiraf + Blastoise | back Indeedee, Torkoal | v [70, 58] | top ['Incineroar + Blastoise', 1.5] | TR 58%
+   vs Farigiraf + Incineroar           3.8%  82/66  100% Thunderbolt Incineroar | Water Spout
+   vs Charizard + Garchomp             3.5%  61/56  85% Trick Room | Fake Out Charizard ;; 15% Trick Room | Fake Out Garchomp
+   vs Aerodactyl + Kingambit           3.3%  72/63  50% Protect | Water Spout ;; 50% Trick Room | Water Spout
+   vs Gardevoir + Indeedee F           2.8%  59/43  100% Trick Room | Dark Pulse Indeedee F
+   vs Charizard + Farigiraf            2.6%  62/51  45% Protect | Water Spout ;; 40% Trick Room | Dark Pulse Farigiraf ;; 15% Trick Room | Water Spout
+   vs Armarouge + Indeedee F           2.2%  82/67  50% Protect | Water Spout ;; 50% Trick Room | Water Spout
+==  Incineroar + Blastoise | back Indeedee, Farigiraf | v [69, 60] | top None | TR 0%
+   vs Farigiraf + Incineroar           3.8%  71/64  85% Close Combat Incineroar | Water Spout ;; 15% switch -> Farigiraf | Water Spout
+   vs Charizard + Garchomp             3.5%  65/59  75% Fake Out Garchomp | Water Spout ;; 25% Fake Out Charizard | Water Spout
+   vs Aerodactyl + Kingambit           3.3%  68/61  45% Close Combat Kingambit | Fake Out Kingambit ;; 45% Fake Out Aerodactyl | Water Spout ;; 10% Close Combat Kingambit | Water Spout
+   vs Gardevoir + Indeedee F           2.8%  63/51  100% Flare Blitz Gardevoir | Dark Pulse Indeedee F
+   vs Charizard + Farigiraf            2.6%  65/56  55% Throat Chop Charizard | Water Spout ;; 40% Throat Chop Farigiraf | Dark Pulse Farigiraf ;; 5% Flare Blitz Farigiraf | Water Spout
+   vs Armarouge + Indeedee F           2.2%  85/72  100% Throat Chop Indeedee F | Water Spout
+
+######## Rain (rain)
+==  Farigiraf + Blastoise | back Indeedee, Kingambit | v [62, 57] | top ['Incineroar + Torkoal', 2.7] | TR 35%
+   vs Archaludon + Pelipper            8.3%  58/56  55% Trick Room | Fake Out Archaludon ;; 45% Thunderbolt Pelipper | Fake Out Archaludon
+   vs Pelipper + Swampert              6.8%  63/60  45% Trick Room | Fake Out Swampert ;; 35% Thunderbolt Pelipper | Water Spout ;; 20% Thunderbolt Pelipper | Fake Out Swampert
+   vs Pelipper + Sneasler              4.2%  75/63  55% Psychic Sneasler | Dark Pulse Pelipper ;; 45% Thunderbolt Pelipper | Water Spout
+   vs Archaludon + Grimmsnarl          3.2%  52/45  55% Thunderbolt Grimmsnarl | Fake Out Grimmsnarl ;; 25% switch -> Kingambit | Fake Out Grimmsnarl ;; 20% Thunderbolt Grimmsnarl | Fake Out Archaludon
+   vs Farigiraf + Golisopod            2.1%  66/47  60% Thunderbolt Golisopod | Water Spout ;; 40% Protect | Water Spout
+   vs Dragonite + Gholdengo            2.0%  64/59  55% Trick Room | Fake Out Dragonite ;; 30% Trick Room | Dark Pulse Gholdengo ;; 15% Protect | Dark Pulse Gholdengo
+==  Incineroar + Torkoal | back Indeedee, Farigiraf | v [68, 58] | top None | TR 0%
+   vs Archaludon + Pelipper            8.3%  70/58  65% Fake Out Pelipper | Eruption ;; 35% Fake Out Archaludon | Eruption
+   vs Pelipper + Swampert              6.8%  72/65  100% Fake Out Swampert | Eruption
+   vs Pelipper + Sneasler              4.2%  62/57  50% switch -> Indeedee | Eruption ;; 50% Fake Out Sneasler | Eruption
+   vs Archaludon + Grimmsnarl          3.2%  63/54  80% Fake Out Archaludon | Eruption ;; 20% Fake Out Grimmsnarl | Weather Ball Grimmsnarl
+   vs Farigiraf + Golisopod            2.1%  78/54  100% Throat Chop Farigiraf | Eruption
+   vs Dragonite + Gholdengo            2.0%  56/48  80% Fake Out Dragonite | Weather Ball Gholdengo ;; 20% Throat Chop Gholdengo | Protect
+== If Trick Room counts double Farigiraf + Torkoal | back Indeedee, Blastoise | v [67, 54] | top None | TR 100%
+   vs Archaludon + Pelipper            8.3%  71/60  75% Trick Room | Weather Ball Archaludon ;; 25% Trick Room | Eruption
+   vs Pelipper + Swampert              6.8%  61/55  90% Trick Room | Protect ;; 10% Trick Room | Eruption
+   vs Pelipper + Sneasler              4.2%  79/64  100% Trick Room | Weather Ball Sneasler
+   vs Archaludon + Grimmsnarl          3.2%  55/42  70% Trick Room | Eruption ;; 30% Trick Room | Protect
+   vs Farigiraf + Golisopod            2.1%  63/41  75% Trick Room | Eruption ;; 25% Trick Room | Protect
+   vs Dragonite + Gholdengo            2.0%  65/41  80% Trick Room | Weather Ball Gholdengo ;; 20% Trick Room | Protect
+
+######## Balance (balance)
+==  Incineroar + Farigiraf | back Indeedee, Torkoal | v [67, 60] | top None | TR 100%
+   vs Gholdengo + Raichu               6.2%  64/54  75% Fake Out Raichu | Trick Room ;; 25% Flare Blitz Gholdengo | Trick Room
+   vs Floette + Incineroar             4.0%  69/62  90% Fake Out Floette | Trick Room ;; 10% Fake Out Incineroar | Trick Room
+   vs Garchomp + Raichu                3.5%  66/60  75% Fake Out Raichu | Trick Room ;; 25% Fake Out Garchomp | Trick Room
+   vs Incineroar + Raichu              2.9%  71/66  85% Fake Out Raichu | Trick Room ;; 15% Close Combat Incineroar | Trick Room
+   vs Arcanine-H + Raichu              2.8%  64/58  95% Fake Out Raichu | Trick Room ;; 5% Close Combat Arcanine-H | Trick Room
+   vs Garchomp + Rillaboom             2.8%  71/68  90% Fake Out Garchomp | Trick Room ;; 10% Close Combat Garchomp | Trick Room
+
+######## Sand (sand)
+==  Incineroar + Blastoise | back Indeedee, Farigiraf | v [68, 59] | top None | TR 0%
+   vs Excadrill + Tyranitar           15.7%  74/68  60% Fake Out Tyranitar | Water Spout ;; 40% Fake Out Excadrill | Water Spout
+   vs Indeedee M + Sneasler            4.8%  52/41  70% Throat Chop Indeedee M | Dark Pulse Indeedee M ;; 30% switch -> Farigiraf | Water Spout
+   vs Sneasler + Tyranitar             4.5%  69/57  60% Fake Out Tyranitar | Water Spout ;; 30% switch -> Farigiraf | Water Spout ;; 10% Fake Out Sneasler | Water Spout
+   vs Salamence + Sneasler             3.8%  58/48  90% Fake Out Salamence | Water Spout ;; 10% Flare Blitz Sneasler | switch -> Farigiraf
+   vs Corviknight + Sneasler           3.6%  72/62  60% Flare Blitz Corviknight | Water Spout ;; 40% Fake Out Sneasler | Water Spout
+   vs Excadrill + Salamence            2.9%  71/62  80% Fake Out Salamence | Water Spout ;; 20% Fake Out Excadrill | Water Spout
+== If Trick Room counts double Farigiraf + Blastoise | back Indeedee, Torkoal | v [62, 52] | top None | TR 100%
+   vs Excadrill + Tyranitar           15.7%  62/53  60% Trick Room | Fake Out Tyranitar ;; 40% Trick Room | Water Spout
+   vs Indeedee M + Sneasler            4.8%  48/41  100% Trick Room | switch -> Indeedee
+   vs Sneasler + Tyranitar             4.5%  61/50  70% Trick Room | Fake Out Tyranitar ;; 30% Trick Room | Water Spout
+   vs Salamence + Sneasler             3.8%  61/54  80% Trick Room | Fake Out Sneasler ;; 20% Trick Room | Fake Out Salamence
+   vs Corviknight + Sneasler           3.6%  74/58  100% Trick Room | Water Spout
+   vs Excadrill + Salamence            2.9%  71/57  100% Trick Room | Water Spout
+
+######## Snow (snow)
+==  Farigiraf + Blastoise | back Indeedee, Torkoal | v [67, 59] | top None | TR 65%
+   vs Froslass + Sneasler              8.8%  66/59  55% Psychic Sneasler | Dark Pulse Froslass ;; 25% Trick Room | Dark Pulse Froslass ;; 20% Trick Room | Water Spout
+   vs Froslass + Kingambit             5.3%  64/56  55% Trick Room | Aura Sphere Kingambit ;; 30% Trick Room | Dark Pulse Froslass ;; 15% Protect | Dark Pulse Froslass
+   vs Arcanine-H + Raichu              3.4%  64/58  90% Trick Room | Fake Out Raichu ;; 10% Trick Room | Water Spout
+   vs Raichu + Sneasler                3.2%  66/59  55% Psychic Sneasler | Fake Out Raichu ;; 40% Trick Room | Fake Out Raichu ;; 5% Trick Room | Water Spout
+   vs Arcanine-H + Froslass            3.1%  69/63  100% Trick Room | Water Spout
+   vs Kingambit + Sneasler             3.1%  77/62  65% Psychic Sneasler | Aura Sphere Kingambit ;; 35% Trick Room | Water Spout
+==  Indeedee + Blastoise | back Farigiraf, Torkoal | v [68, 55] | top ['Farigiraf + Blastoise', 2.6] | TR 77%
+   vs Froslass + Sneasler              8.8%  67/55  85% Trick Room | Dark Pulse Froslass ;; 15% Trick Room | Water Spout
+   vs Froslass + Kingambit             5.3%  66/57  60% Trick Room | Aura Sphere Kingambit ;; 40% Trick Room | Dark Pulse Froslass
+   vs Arcanine-H + Raichu              3.4%  66/51  90% Follow Me | Water Spout ;; 10% Trick Room | Water Spout
+   vs Raichu + Sneasler                3.2%  71/52  100% Follow Me | Water Spout
+   vs Arcanine-H + Froslass            3.1%  66/61  65% Trick Room | Water Spout ;; 35% Trick Room | Dark Pulse Froslass
+   vs Kingambit + Sneasler             3.1%  72/57  60% Trick Room | Aura Sphere Kingambit ;; 40% Trick Room | Water Spout
+
+######## Trick Room (tr)
+== Farigiraf in their six Farigiraf + Kingambit | back Indeedee, Torkoal | v [67, 61] | top None | TR 83%
+   vs Farigiraf + Incineroar           9.6%  73/68  70% Trick Room | Low Kick Incineroar ;; 30% Trick Room | Kowtow Farigiraf
+   vs Farigiraf + Kingambit            4.8%  68/59  60% Trick Room | Low Kick Kingambit ;; 30% Thunderbolt Farigiraf | Low Kick Kingambit ;; 10% Thunderbolt Farigiraf | Kowtow Farigiraf
+   vs Farigiraf + Rillaboom            4.0%  62/60  55% Trick Room | Kowtow Farigiraf ;; 25% Psychic Rillaboom | Kowtow Rillaboom ;; 20% Trick Room | Kowtow Rillaboom
+   vs Farigiraf + Raichu               2.6%  52/42  75% Trick Room | Kowtow Raichu ;; 25% Psychic Raichu | switch -> Indeedee
+   vs Delphox + Sneasler               0.1%  72/49  65% Psychic Sneasler | Kowtow Delphox ;; 35% Psychic Sneasler | Sucker Punch Delphox
+== No Farigiraf in their six Farigiraf + Blastoise | back Indeedee, Kingambit | v [78, 65] | top ['Indeedee + Blastoise', 1.5] | TR 60%
+   vs Delphox + Incineroar            10.8%  83/69  100% Trick Room | Water Spout
+   vs Delphox + Sneasler               7.3%  71/59  45% Psychic Sneasler | Fake Out Delphox ;; 35% Psychic Sneasler | Water Spout ;; 20% Psychic Sneasler | Fake Out Sneasler
+== No Farigiraf in their six Indeedee + Blastoise | back Farigiraf, Kingambit | v [81, 66] | top None | TR 76%
+   vs Delphox + Incineroar            10.8%  82/70  100% Trick Room | Water Spout
+   vs Delphox + Sneasler               7.3%  80/61  60% Follow Me | Water Spout ;; 40% Trick Room | Water Spout
+
+######## Rain + Sun (rainsun)
+==  Incineroar + Farigiraf | back Indeedee, Kingambit | v [63, 59] | top None | TR 86%
+   vs Charizard + Venusaur            13.5%  59/54  60% Fake Out Venusaur | Trick Room ;; 25% Fake Out Charizard | Trick Room ;; 15% Throat Chop Charizard | Protect
+   vs Archaludon + Grimmsnarl          9.5%  62/57  60% Fake Out Archaludon | Trick Room ;; 40% Fake Out Grimmsnarl | Trick Room
+   vs Charizard + Grimmsnarl           9.4%  62/61  50% Fake Out Grimmsnarl | Trick Room ;; 50% Fake Out Charizard | Trick Room
+   vs Farigiraf + Golisopod            7.6%  67/61  50% Flare Blitz Golisopod | Thunderbolt Golisopod ;; 35% Throat Chop Farigiraf | Trick Room ;; 15% Throat Chop Farigiraf | Thunderbolt Farigiraf
+   vs Grimmsnarl + Swampert            5.5%  66/63  55% Fake Out Swampert | Trick Room ;; 45% Fake Out Grimmsnarl | Trick Room
+   vs Golisopod + Grimmsnarl           5.3%  66/63  60% Fake Out Grimmsnarl | Trick Room ;; 40% Flare Blitz Golisopod | Trick Room
+
+######## Perish (perish)
+==  Farigiraf + Blastoise | back Indeedee, Torkoal | v [68, 61] | top ['Farigiraf + Kingambit', 1.4] | TR 88%
+   vs Gengar + Incineroar             29.4%  71/64  60% Trick Room | Water Spout ;; 40% Trick Room | Dark Pulse Gengar
+   vs Gengar + Rillaboom              10.8%  70/65  45% Trick Room | Dark Pulse Gengar ;; 35% Trick Room | Water Spout ;; 20% Trick Room | Aura Sphere Rillaboom
+   vs Archaludon + Politoed            6.4%  56/47  55% switch -> Torkoal | Aura Sphere Archaludon ;; 45% Trick Room | Fake Out Politoed
+   vs Gengar + Vivillon                4.0%  58/53  85% Psychic Gengar | Fake Out Vivillon ;; 10% Trick Room | Dark Pulse Gengar ;; 5% Trick Room | Fake Out Vivillon
+   vs Archaludon + Gengar              3.6%  68/56  65% Trick Room | Aura Sphere Archaludon ;; 35% Trick Room | Dark Pulse Gengar
+   vs Archaludon + Incineroar          2.8%  67/60  80% Trick Room | Aura Sphere Archaludon ;; 20% Trick Room | Aura Sphere Incineroar
+==  Farigiraf + Kingambit | back Indeedee, Torkoal | v [72, 61] | top None | TR 71%
+   vs Gengar + Incineroar             29.4%  77/67  40% Psychic Gengar | Low Kick Incineroar ;; 40% Trick Room | Kowtow Gengar ;; 20% Trick Room | Low Kick Incineroar
+   vs Gengar + Rillaboom              10.8%  76/68  70% Trick Room | Kowtow Gengar ;; 30% Trick Room | Kowtow Rillaboom
+   vs Archaludon + Politoed            6.4%  56/38  90% Trick Room | switch -> Torkoal ;; 10% Trick Room | Kowtow Politoed
+   vs Gengar + Vivillon                4.0%  54/43  50% Psychic Gengar | Kowtow Gengar ;; 30% Psychic Gengar | switch -> Indeedee ;; 20% Thunderbolt Vivillon | Kowtow Vivillon
+   vs Archaludon + Gengar              3.6%  70/55  100% Trick Room | Kowtow Gengar
+   vs Archaludon + Incineroar          2.8%  72/65  65% Trick Room | Low Kick Incineroar ;; 35% Thunderbolt Incineroar | Kowtow Incineroar

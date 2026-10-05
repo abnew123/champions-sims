@@ -1,0 +1,122 @@
+{
+ "Farigiraf": {
+  "species": "Farigiraf",
+  "item": "Sitrus Berry",
+  "ability": "Armor Tail",
+  "nature": "Sassy",
+  "evs": [
+   32,
+   0,
+   0,
+   2,
+   32,
+   0
+  ],
+  "moves": [
+   "Psychic",
+   "Trick Room",
+   "Helping Hand",
+   "Protect"
+  ]
+ },
+ "Garchomp": {
+  "species": "Garchomp",
+  "item": "Garchompite Z",
+  "ability": "Rough Skin",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Draco Meteor",
+   "Flamethrower",
+   "Power Gem",
+   "Protect"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "White Herb",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Close Combat",
+   "Gunk Shot",
+   "Fake Out",
+   "Protect"
+  ]
+ },
+ "Torkoal": {
+  "species": "Torkoal",
+  "item": "Charcoal",
+  "ability": "Drought",
+  "nature": "Quiet",
+  "evs": [
+   32,
+   0,
+   0,
+   32,
+   2,
+   0
+  ],
+  "moves": [
+   "Eruption",
+   "Earth Power",
+   "Weather Ball",
+   "Protect"
+  ]
+ },
+ "Sylveon": {
+  "species": "Sylveon",
+  "item": "Fairy Feather",
+  "ability": "Pixilate",
+  "nature": "Modest",
+  "evs": [
+   9,
+   0,
+   22,
+   20,
+   0,
+   15
+  ],
+  "moves": [
+   "Hyper Voice",
+   "Hyper Beam",
+   "Yawn",
+   "Detect"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Chople Berry",
+  "ability": "Intimidate",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Flare Blitz",
+   "Darkest Lariat",
+   "Parting Shot",
+   "Fake Out"
+  ]
+ }
+}

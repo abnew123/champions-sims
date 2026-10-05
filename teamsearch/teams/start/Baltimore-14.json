@@ -1,0 +1,122 @@
+{
+ "Klefki": {
+  "species": "Klefki",
+  "item": "Light Clay",
+  "ability": "Prankster",
+  "nature": "Bold",
+  "evs": [
+   32,
+   0,
+   19,
+   0,
+   15,
+   0
+  ],
+  "moves": [
+   "Light Screen",
+   "Rain Dance",
+   "Reflect",
+   "Dazzling Gleam"
+  ]
+ },
+ "Garchomp": {
+  "species": "Garchomp",
+  "item": "Life Orb",
+  "ability": "Rough Skin",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Earthquake",
+   "Stomping Tantrum",
+   "Dragon Claw",
+   "Protect"
+  ]
+ },
+ "Volcarona": {
+  "species": "Volcarona",
+  "item": "Sitrus Berry",
+  "ability": "Flame Body",
+  "nature": "Timid",
+  "evs": [
+   32,
+   0,
+   11,
+   0,
+   0,
+   23
+  ],
+  "moves": [
+   "Rage Powder",
+   "Overheat",
+   "Struggle Bug",
+   "Tailwind"
+  ]
+ },
+ "Archaludon": {
+  "species": "Archaludon",
+  "item": "Leftovers",
+  "ability": "Stamina",
+  "nature": "Calm",
+  "evs": [
+   32,
+   0,
+   1,
+   1,
+   21,
+   11
+  ],
+  "moves": [
+   "Protect",
+   "Dragon Pulse",
+   "Electro Shot",
+   "Flash Cannon"
+  ]
+ },
+ "Salamence": {
+  "species": "Salamence",
+  "item": "Salamencite",
+  "ability": "Intimidate",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Hyper Voice",
+   "Tailwind",
+   "Draco Meteor"
+  ]
+ },
+ "Glimmora": {
+  "species": "Glimmora",
+  "item": "Glimmoranite",
+  "ability": "Toxic Debris",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Sludge Bomb",
+   "Spiky Shield",
+   "Earth Power",
+   "Power Gem"
+  ]
+ }
+}

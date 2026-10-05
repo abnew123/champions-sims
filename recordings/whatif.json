@@ -1,0 +1,57 @@
+[
+ {
+  "name": "G2 T1 (Zoroark as Excadrill)",
+  "note": "What-if: the lead shows Kleavor + Excadrill, but the 'Excadrill' is Zoroark-Hisui (so the real Excadrill is their last Pokemon). Zoroark and Excadrill use the sets revealed in the real game.",
+  "mine": [
+   {
+    "set": "Farigiraf"
+   },
+   {
+    "set": "Blastoise"
+   },
+   {
+    "set": "Incineroar"
+   },
+   {
+    "set": "Kingambit"
+   }
+  ],
+  "theirs": [
+   {
+    "species": "Kleavor"
+   },
+   {
+    "species": "Zoroark-Hisui",
+    "item": "Life Orb",
+    "moves": [
+     "Hyper Voice",
+     "Grass Knot",
+     "Shadow Ball",
+     "Bitter Malice"
+    ]
+   },
+   {
+    "species": "Tyranitar",
+    "from": "Tyranitar-Mega"
+   },
+   {
+    "species": "Excadrill",
+    "moves": [
+     "Megahorn",
+     "High Horsepower",
+     "Protect",
+     "Rock Slide"
+    ]
+   }
+  ],
+  "actual": [
+   {
+    "move": "Trick Room"
+   },
+   {
+    "move": "Water Spout",
+    "mega": true
+   }
+  ]
+ }
+]

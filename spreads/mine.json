@@ -1,0 +1,146 @@
+[
+ {
+  "name": "Blastoise",
+  "species": "blastoisemega",
+  "item": "blastoisinite",
+  "ability": "megalauncher",
+  "moves": [
+   "fakeout",
+   "waterspout",
+   "aurasphere",
+   "darkpulse"
+  ],
+  "weather": "",
+  "current": {
+   "nature": "Quiet",
+   "evs": [
+    32,
+    0,
+    0,
+    32,
+    2,
+    0
+   ]
+  }
+ },
+ {
+  "name": "Torkoal",
+  "species": "torkoal",
+  "item": "charcoal",
+  "ability": "drought",
+  "moves": [
+   "eruption",
+   "weatherball",
+   "earthpower",
+   "protect"
+  ],
+  "weather": "sunnyday",
+  "current": {
+   "nature": "Quiet",
+   "evs": [
+    32,
+    0,
+    0,
+    32,
+    2,
+    0
+   ]
+  }
+ },
+ {
+  "name": "Indeedee-F",
+  "species": "indeedeef",
+  "item": "psychicseed",
+  "ability": "psychicsurge",
+  "moves": [
+   "followme",
+   "helpinghand",
+   "trickroom",
+   "healingwish"
+  ],
+  "weather": "",
+  "current": {
+   "nature": "Relaxed",
+   "evs": [
+    32,
+    0,
+    32,
+    0,
+    2,
+    0
+   ]
+  }
+ },
+ {
+  "name": "Farigiraf",
+  "species": "farigiraf",
+  "item": "sitrusberry",
+  "ability": "armortail",
+  "moves": [
+   "trickroom",
+   "protect",
+   "psychic",
+   "thunderbolt"
+  ],
+  "weather": "",
+  "current": {
+   "nature": "Relaxed",
+   "evs": [
+    30,
+    0,
+    21,
+    0,
+    15,
+    0
+   ]
+  }
+ },
+ {
+  "name": "Kingambit",
+  "species": "kingambit",
+  "item": "chopleberry",
+  "ability": "defiant",
+  "moves": [
+   "ironhead",
+   "kowtowcleave",
+   "lowkick",
+   "suckerpunch"
+  ],
+  "weather": "",
+  "current": {
+   "nature": "Adamant",
+   "evs": [
+    32,
+    32,
+    0,
+    0,
+    2,
+    0
+   ]
+  }
+ },
+ {
+  "name": "Incineroar",
+  "species": "incineroar",
+  "item": "whiteherb",
+  "ability": "intimidate",
+  "moves": [
+   "fakeout",
+   "flareblitz",
+   "throatchop",
+   "closecombat"
+  ],
+  "weather": "",
+  "current": {
+   "nature": "Brave",
+   "evs": [
+    32,
+    32,
+    0,
+    0,
+    2,
+    0
+   ]
+  }
+ }
+]

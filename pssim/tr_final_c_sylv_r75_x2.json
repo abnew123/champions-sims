@@ -1,0 +1,2813 @@
+{
+ "leads": {
+  "Balance, no speed control": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Sylveon+Farigiraf",
+      0.7509607868606193,
+      0.5695796641145464,
+      0.6149249448010646,
+      6
+     ],
+     [
+      "Sylveon+Indeedee-F",
+      0.7936100539421891,
+      0.5404507733418262,
+      0.6037405934919169,
+      6
+     ]
+    ]
+   },
+   "Raichu yes": {
+    "weights": {
+     "Gholdengo + Raichu": 13.1,
+     "Floette-Eternal + Incineroar": 2.4,
+     "Garchomp + Raichu": 7.1,
+     "Incineroar + Raichu": 5.9,
+     "Arcanine-Hisui + Raichu": 5.7,
+     "Garchomp + Rillaboom": 3.0
+    },
+    "vals": [
+     [
+      "Sylveon+Farigiraf",
+      0.7317629313414045,
+      0.5682632315399415,
+      0.6091381564903073,
+      6
+     ],
+     [
+      "Sylveon+Indeedee-F",
+      0.7863947604024121,
+      0.5383095411262404,
+      0.6003308459452833,
+      6
+     ]
+    ]
+   },
+   "Raichu no": {
+    "weights": {
+     "Gholdengo + Raichu": 0.0,
+     "Floette-Eternal + Incineroar": 5.5,
+     "Garchomp + Raichu": 0.0,
+     "Incineroar + Raichu": 0.0,
+     "Arcanine-Hisui + Raichu": 0.0,
+     "Garchomp + Rillaboom": 2.3
+    },
+    "vals": [
+     [
+      "Sylveon+Farigiraf",
+      0.8287016158625027,
+      0.5684717557457102,
+      0.6335292207749084,
+      6
+     ],
+     [
+      "Sylveon+Indeedee-F",
+      0.8249208829837689,
+      0.5424214216341452,
+      0.6130462869715512,
+      6
+     ]
+    ]
+   }
+  },
+  "Indeedee TR / Psychic Terrain": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Sylveon+Farigiraf",
+      0.6724638275775408,
+      0.6087401233628364,
+      0.6246710494165125,
+      6
+     ],
+     [
+      "Sylveon+Kingambit",
+      0.6434917391738062,
+      0.537982587613981,
+      0.5643598755039373,
+      6
+     ]
+    ]
+   },
+   "Farigiraf yes": {
+    "weights": {
+     "Gardevoir + Indeedee-F": 0.0,
+     "Armarouge + Indeedee-F": 0.8,
+     "Farigiraf + Incineroar": 32.3,
+     "Indeedee + Sneasler": 0.0,
+     "Indeedee-F + Sneasler": 0.0,
+     "Hatterene + Indeedee-F": 14.8
+    },
+    "vals": [
+     [
+      "Sylveon+Kingambit",
+      0.6440289575877441,
+      0.5924044545076136,
+      0.6053105802776463,
+      6
+     ],
+     [
+      "Sylveon+Farigiraf",
+      0.5581267071486642,
+      0.5046217537194443,
+      0.5179979920767492,
+      6
+     ]
+    ]
+   },
+   "Farigiraf no": {
+    "weights": {
+     "Gardevoir + Indeedee-F": 7.5,
+     "Armarouge + Indeedee-F": 5.0,
+     "Farigiraf + Incineroar": 0.0,
+     "Indeedee + Sneasler": 3.3,
+     "Indeedee-F + Sneasler": 3.3,
+     "Hatterene + Indeedee-F": 1.0
+    },
+    "vals": [
+     [
+      "Sylveon+Farigiraf",
+      0.709355126140595,
+      0.6423389170588032,
+      0.6590929693292511,
+      6
+     ],
+     [
+      "Sylveon+Kingambit",
+      0.6423464347534871,
+      0.5191072965281328,
+      0.5499170810844713,
+      6
+     ]
+    ]
+   }
+  },
+  "Rain": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Sylveon+Blastoise",
+      0.6500216023529117,
+      0.5922674671424383,
+      0.6067060009450567,
+      6
+     ],
+     [
+      "Sylveon+Torkoal",
+      0.7053462500290418,
+      0.5651607525104896,
+      0.6002071268901277,
+      6
+     ]
+    ]
+   },
+   "Farigiraf yes": {
+    "weights": {
+     "Archaludon + Pelipper": 9.9,
+     "Pelipper + Swampert": 8.3,
+     "Pelipper + Sneasler": 11.2,
+     "Archaludon + Grimmsnarl": 0.3,
+     "Farigiraf + Golisopod": 7.3,
+     "Dragonite + Gholdengo": 0.0
+    },
+    "vals": [
+     [
+      "Sylveon+Torkoal",
+      0.7201984681390882,
+      0.5958026012378592,
+      0.6269015679631664,
+      6
+     ],
+     [
+      "Sylveon+Blastoise",
+      0.6650604508725587,
+      0.5994440003142423,
+      0.6158481129538214,
+      6
+     ]
+    ]
+   },
+   "Farigiraf no": {
+    "weights": {
+     "Archaludon + Pelipper": 7.6,
+     "Pelipper + Swampert": 6.5,
+     "Pelipper + Sneasler": 1.6,
+     "Archaludon + Grimmsnarl": 4.1,
+     "Farigiraf + Golisopod": 0.0,
+     "Dragonite + Gholdengo": 2.9
+    },
+    "vals": [
+     [
+      "Sylveon+Blastoise",
+      0.6411203184908697,
+      0.5880967740510955,
+      0.601352660161039,
+      6
+     ],
+     [
+      "Sylveon+Torkoal",
+      0.6943671858322865,
+      0.5442575531062444,
+      0.5817849612877549,
+      6
+     ]
+    ]
+   }
+  },
+  "Rain + sun": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Sylveon+Blastoise",
+      0.6299435915481068,
+      0.5553157589944665,
+      0.5739727171328766,
+      6
+     ]
+    ]
+   },
+   "Farigiraf yes": {
+    "weights": {
+     "Charizard + Venusaur": 0.4,
+     "Archaludon + Grimmsnarl": 9.1,
+     "Charizard + Grimmsnarl": 10.9,
+     "Farigiraf + Golisopod": 15.5,
+     "Grimmsnarl + Swampert": 0.0,
+     "Golisopod + Grimmsnarl": 2.6
+    },
+    "vals": [
+     [
+      "Sylveon+Blastoise",
+      0.6935299232738275,
+      0.5622160076735588,
+      0.595044486573626,
+      6
+     ]
+    ]
+   },
+   "Farigiraf no": {
+    "weights": {
+     "Charizard + Venusaur": 26.8,
+     "Archaludon + Grimmsnarl": 9.6,
+     "Charizard + Grimmsnarl": 7.7,
+     "Farigiraf + Golisopod": 0.0,
+     "Grimmsnarl + Swampert": 10.7,
+     "Golisopod + Grimmsnarl": 7.7
+    },
+    "vals": [
+     [
+      "Sylveon+Blastoise",
+      0.5911154539310409,
+      0.5503219664266897,
+      0.5605203383027776,
+      6
+     ]
+    ]
+   }
+  },
+  "Sand": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Sylveon+Blastoise",
+      0.635582046059552,
+      0.5220955499472333,
+      0.550467173975313,
+      6
+     ]
+    ]
+   },
+   "Salamence yes": {
+    "weights": {
+     "Excadrill + Tyranitar": 20.2,
+     "Indeedee + Sneasler": 5.4,
+     "Sneasler + Tyranitar": 5.9,
+     "Salamence + Sneasler": 5.9,
+     "Corviknight + Sneasler": 5.4,
+     "Excadrill + Salamence": 4.2
+    },
+    "vals": [
+     [
+      "Sylveon+Blastoise",
+      0.6372980660410009,
+      0.5255851644048644,
+      0.5535133898138985,
+      6
+     ]
+    ]
+   },
+   "Salamence no": {
+    "weights": {
+     "Excadrill + Tyranitar": 7.0,
+     "Indeedee + Sneasler": 3.4,
+     "Sneasler + Tyranitar": 2.2,
+     "Salamence + Sneasler": 0.0,
+     "Corviknight + Sneasler": 1.0,
+     "Excadrill + Salamence": 0.0
+    },
+    "vals": [
+     [
+      "Sylveon+Blastoise",
+      0.6267142177057562,
+      0.49986617845170295,
+      0.5315781882652163,
+      6
+     ]
+    ]
+   }
+  },
+  "Sun": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Sylveon+Blastoise",
+      0.6999610264801941,
+      0.5918994461591792,
+      0.618914841239433,
+      6
+     ]
+    ]
+   },
+   "Farigiraf yes": {
+    "weights": {
+     "Farigiraf + Incineroar": 9.7,
+     "Charizard + Garchomp": 2.8,
+     "Aerodactyl + Kingambit": 7.7,
+     "Gardevoir + Indeedee-F": 0.1,
+     "Charizard + Farigiraf": 6.4,
+     "Armarouge + Indeedee-F": 1.2
+    },
+    "vals": [
+     [
+      "Sylveon+Blastoise",
+      0.7093096986765147,
+      0.599509245286506,
+      0.6269593586340081,
+      6
+     ]
+    ]
+   },
+   "Farigiraf no": {
+    "weights": {
+     "Farigiraf + Incineroar": 0.0,
+     "Charizard + Garchomp": 3.8,
+     "Aerodactyl + Kingambit": 0.3,
+     "Gardevoir + Indeedee-F": 4.6,
+     "Charizard + Farigiraf": 0.0,
+     "Armarouge + Indeedee-F": 2.7
+    },
+    "vals": [
+     [
+      "Sylveon+Blastoise",
+      0.6831104583475716,
+      0.5781460463462039,
+      0.6043871493465458,
+      6
+     ]
+    ]
+   }
+  },
+  "Trick Room without Indeedee": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Sylveon+Blastoise",
+      0.6789682727768134,
+      0.58093893349355,
+      0.6054462683143658,
+      6
+     ]
+    ]
+   },
+   "Farigiraf yes": {
+    "weights": {
+     "Farigiraf + Incineroar": 9.6,
+     "Farigiraf + Kingambit": 4.8,
+     "Farigiraf + Rillaboom": 4.0,
+     "Delphox + Incineroar": 0.0,
+     "Delphox + Sneasler": 0.1,
+     "Farigiraf + Raichu": 2.6
+    },
+    "vals": [
+     [
+      "Sylveon+Blastoise",
+      0.6834105667946127,
+      0.5861642568370611,
+      0.6104758343264489,
+      6
+     ]
+    ]
+   },
+   "Farigiraf no": {
+    "weights": {
+     "Farigiraf + Incineroar": 0.0,
+     "Farigiraf + Kingambit": 0.0,
+     "Farigiraf + Rillaboom": 0.0,
+     "Delphox + Incineroar": 10.8,
+     "Delphox + Sneasler": 7.3,
+     "Farigiraf + Raichu": 0.0
+    },
+    "vals": [
+     [
+      "Sylveon+Blastoise",
+      0.6693188583996836,
+      0.5673757599844498,
+      0.5928615345882582,
+      6
+     ]
+    ]
+   }
+  }
+ },
+ "plans": {
+  "Sun||Sylveon+Blastoise||Armarouge + Indeedee-F": {
+   "lines": null,
+   "pop": 0.8576063382002923,
+   "worst": 0.7163344416599108,
+   "full": [
+    0.8565663213867359,
+    0.7177959032668401
+   ],
+   "reader": [
+    [
+     0.8446633473050388,
+     "Armarouge: Protect | Indeedee-F: Helping Hand"
+    ],
+    [
+     0.11326151972135917,
+     "Armarouge: Expanding Force -> Sylveon | Indeedee-F: switch"
+    ]
+   ],
+   "share": 0.022,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": true,
+   "trCredit": 0.6996765874203053,
+   "mix": [
+    [
+     100,
+     "Sylveon: Hyper Voice | Blastoise: Water Spout"
+    ]
+   ],
+   "pop1": 0.8537254439957908,
+   "worst1": 0.7163344416599108
+  },
+  "Rain + sun||Sylveon+Blastoise||Charizard + Venusaur": {
+   "lines": null,
+   "pop": 0.5326830891755373,
+   "worst": 0.5058569880562781,
+   "full": [
+    0.5311715972969772,
+    0.5107719366944047
+   ],
+   "reader": [
+    [
+     0.3687454961281443,
+     "Charizard: Protect | Venusaur: Sludge Bomb -> Sylveon"
+    ],
+    [
+     0.273625382320234,
+     "Charizard: Weather Ball -> Blastoise | Venusaur: Protect"
+    ],
+    [
+     0.21300075093741855,
+     "Charizard: Heat Wave | Venusaur: Protect"
+    ]
+   ],
+   "share": 0.135,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9856980987213929,
+   "mix": [
+    [
+     45,
+     "Sylveon: Hyper Beam -> Venusaur | Blastoise: Fake Out -> Charizard"
+    ],
+    [
+     30,
+     "Sylveon: Hyper Beam -> Charizard | Blastoise: Fake Out -> Venusaur"
+    ],
+    [
+     25,
+     "Sylveon: Detect | Blastoise: Water Spout"
+    ]
+   ],
+   "pop1": 0.5326830891755373,
+   "worst1": 0.5058569880562781
+  },
+  "Trick Room without Indeedee||Sylveon+Blastoise||Farigiraf + Kingambit": {
+   "lines": null,
+   "pop": 0.7874879379250601,
+   "worst": 0.6795497258967069,
+   "full": [
+    0.7854176463793758,
+    0.6812625003153934
+   ],
+   "reader": [
+    [
+     0.7738038303171975,
+     "Farigiraf: Psychic -> Blastoise | Kingambit: Protect"
+    ],
+    [
+     0.22619616968280246,
+     "Farigiraf: Psychic -> Blastoise | Kingambit: Iron Head -> Sylveon"
+    ]
+   ],
+   "share": 0.035,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.7944319501654965,
+   "mix": [
+    [
+     60,
+     "Sylveon: Hyper Beam -> Farigiraf | Blastoise: Water Spout"
+    ],
+    [
+     40,
+     "Sylveon: Hyper Beam -> Farigiraf | Blastoise: Aura Sphere -> Kingambit"
+    ]
+   ],
+   "pop1": 0.7750968193880726,
+   "worst1": 0.6795497258967069
+  },
+  "Rain + sun||Sylveon+Blastoise||Archaludon + Grimmsnarl": {
+   "lines": null,
+   "pop": 0.6510177007702955,
+   "worst": 0.5791629075541602,
+   "full": [
+    0.6432313760016333,
+    0.5821362094768257
+   ],
+   "reader": [
+    [
+     0.8348715322341625,
+     "Archaludon: Snarl | Grimmsnarl: Parting Shot -> Sylveon"
+    ],
+    [
+     0.12005105211799139,
+     "Archaludon: Snarl | Grimmsnarl: Light Screen"
+    ]
+   ],
+   "share": 0.095,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.7472358212839743,
+   "mix": [
+    [
+     55,
+     "Sylveon: Hyper Beam -> Grimmsnarl | Blastoise: Fake Out -> Grimmsnarl"
+    ],
+    [
+     45,
+     "Sylveon: Hyper Beam -> Grimmsnarl | Blastoise: Fake Out -> Archaludon"
+    ]
+   ],
+   "pop1": 0.6510177007702955,
+   "worst1": 0.5791629075541602
+  },
+  "Balance, no speed control||Sylveon+Farigiraf||Garchomp + Rillaboom": {
+   "lines": null,
+   "pop": 0.7997381332997092,
+   "worst": 0.575821391980593,
+   "full": [
+    0.8012676821893115,
+    0.578910282868096
+   ],
+   "reader": [
+    [
+     0.6576357093518768,
+     "Garchomp: Dragon Pulse -> Farigiraf | Rillaboom: Wood Hammer -> Sylveon"
+    ],
+    [
+     0.34236429064812324,
+     "Garchomp: Dragon Pulse -> Farigiraf | Rillaboom: Wood Hammer -> Farigiraf"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Indeedee-F",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9997361996686558,
+   "mix": [
+    [
+     80,
+     "Sylveon: Hyper Voice | Farigiraf: Trick Room"
+    ],
+    [
+     20,
+     "Sylveon: Detect | Farigiraf: Trick Room"
+    ]
+   ],
+   "pop1": 0.703893810686457,
+   "worst1": 0.42644306572602003
+  },
+  "Sand||Sylveon+Blastoise||Salamence + Sneasler": {
+   "lines": null,
+   "pop": 0.6000180785138497,
+   "worst": 0.5461916787209445,
+   "full": [
+    0.6004497256173689,
+    0.5534260265249817
+   ],
+   "reader": [
+    [
+     0.4014619233446152,
+     "Salamence: Draco Meteor -> Blastoise | Sneasler: Dire Claw -> Sylveon"
+    ],
+    [
+     0.36468097661644167,
+     "Salamence: Draco Meteor -> Blastoise | Sneasler: Fake Out -> Sylveon"
+    ],
+    [
+     0.23385710003894308,
+     "Salamence: Hyper Voice | Sneasler: Fake Out -> Sylveon"
+    ]
+   ],
+   "share": 0.038,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999467340243475,
+   "mix": [
+    [
+     40,
+     "Sylveon: Hyper Voice | Blastoise: Fake Out -> Sneasler"
+    ],
+    [
+     30,
+     "Sylveon: Detect | Blastoise: Water Spout"
+    ],
+    [
+     30,
+     "Sylveon: Hyper Voice | Blastoise: switch -> Farigiraf"
+    ]
+   ],
+   "pop1": 0.6000180785138497,
+   "worst1": 0.5461916787209445
+  },
+  "Sand||Sylveon+Blastoise||Excadrill + Tyranitar": {
+   "lines": null,
+   "pop": 0.6570314270842543,
+   "worst": 0.540573716531902,
+   "full": [
+    0.6428812019195094,
+    0.554978795096146
+   ],
+   "reader": [
+    [
+     0.5043383763792095,
+     "Excadrill: Rock Slide | Tyranitar: Rock Slide"
+    ],
+    [
+     0.33344364823910927,
+     "Excadrill: High Horsepower -> Blastoise | Tyranitar: Rock Slide"
+    ],
+    [
+     0.16221797538168103,
+     "Excadrill: Iron Head -> Sylveon | Tyranitar: Protect"
+    ]
+   ],
+   "share": 0.157,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9996883641864355,
+   "mix": [
+    [
+     55,
+     "Sylveon: Hyper Voice | Blastoise: Water Spout"
+    ],
+    [
+     45,
+     "Sylveon: Detect | Blastoise: Water Spout"
+    ]
+   ],
+   "pop1": 0.6570314270842543,
+   "worst1": 0.540573716531902
+  },
+  "Indeedee TR / Psychic Terrain||Sylveon+Farigiraf||Indeedee + Sneasler": {
+   "lines": null,
+   "pop": 0.7180457371422081,
+   "worst": 0.6292516918530805,
+   "full": [
+    0.7180938600208637,
+    0.6301821802352409
+   ],
+   "reader": [
+    [
+     0.7660739711481124,
+     "Indeedee: Mystical Fire -> Farigiraf | Sneasler: Rock Slide"
+    ],
+    [
+     0.23392602885188765,
+     "Indeedee: Mystical Fire -> Farigiraf | Sneasler: Dire Claw -> Sylveon"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Indeedee-F",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999911949977043,
+   "mix": [
+    [
+     70,
+     "Sylveon: Detect | Farigiraf: Trick Room"
+    ],
+    [
+     30,
+     "Sylveon: Hyper Beam -> Indeedee | Farigiraf: Trick Room"
+    ]
+   ],
+   "pop1": 0.5925637186556844,
+   "worst1": 0.4858746206566356
+  },
+  "Rain||Sylveon+Torkoal||Pelipper + Sneasler": {
+   "lines": null,
+   "pop": 0.7112768260474928,
+   "worst": 0.651811631703772,
+   "full": [
+    0.7105356579693702,
+    0.6535960398545586
+   ],
+   "reader": [
+    [
+     0.7340876682771311,
+     "Pelipper: Tailwind | Sneasler: Fake Out -> Torkoal"
+    ],
+    [
+     0.26591233172286893,
+     "Pelipper: Hurricane -> Torkoal | Sneasler: Close Combat -> Torkoal"
+    ]
+   ],
+   "share": 0.042,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.994351401294543,
+   "mix": [
+    [
+     90,
+     "Sylveon: Hyper Voice | Torkoal: Eruption"
+    ],
+    [
+     10,
+     "Sylveon: switch -> Farigiraf | Torkoal: Eruption"
+    ]
+   ],
+   "pop1": 0.7112768260474928,
+   "worst1": 0.651811631703772
+  },
+  "Balance, no speed control||Sylveon+Indeedee-F||Incineroar + Raichu": {
+   "lines": null,
+   "pop": 0.7683239372794886,
+   "worst": 0.5404691837605554,
+   "full": [
+    0.7683239372794886,
+    0.5404691837605554
+   ],
+   "reader": [
+    [
+     0.9773284114765654,
+     "Incineroar: Throat Chop -> Indeedee-F | Raichu: Zap Cannon -> Indeedee-F"
+    ]
+   ],
+   "share": 0.029,
+   "back": [
+    "Farigiraf",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9995030898363213,
+   "mix": [
+    [
+     100,
+     "Sylveon: Hyper Beam -> Raichu | Indeedee-F: Trick Room"
+    ]
+   ],
+   "pop1": 0.6652945122090925,
+   "worst1": 0.4288256536207274
+  },
+  "Balance, no speed control||Sylveon+Indeedee-F||Garchomp + Rillaboom": {
+   "lines": null,
+   "pop": 0.7976853395219042,
+   "worst": 0.6547426276123389,
+   "full": [
+    0.7976439571016921,
+    0.6547880004715501
+   ],
+   "reader": [
+    [
+     0.7857055735135755,
+     "Garchomp: Draco Meteor -> Indeedee-F | Rillaboom: Wood Hammer -> Indeedee-F"
+    ],
+    [
+     0.10958557032210392,
+     "Garchomp: switch | Rillaboom: Wood Hammer -> Sylveon"
+    ],
+    [
+     0.10470885616432055,
+     "Garchomp: Earth Power -> Sylveon | Rillaboom: Wood Hammer -> Sylveon"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Farigiraf",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9997361996686558,
+   "mix": [
+    [
+     55,
+     "Sylveon: Hyper Voice | Indeedee-F: Trick Room"
+    ],
+    [
+     45,
+     "Sylveon: Hyper Voice | Indeedee-F: Follow Me"
+    ]
+   ],
+   "pop1": 0.754050652839893,
+   "worst1": 0.5680322621193393
+  },
+  "Rain + sun||Sylveon+Blastoise||Charizard + Grimmsnarl": {
+   "lines": null,
+   "pop": 0.6259782563616232,
+   "worst": 0.5764994769486287,
+   "full": [
+    0.6247589614572556,
+    0.5789386625551185
+   ],
+   "reader": [
+    [
+     0.6726626426790819,
+     "Charizard: Heat Wave | Grimmsnarl: Light Screen"
+    ],
+    [
+     0.32733735732091807,
+     "Charizard: Heat Wave | Grimmsnarl: switch"
+    ]
+   ],
+   "share": 0.094,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9694656922392512,
+   "mix": [
+    [
+     75,
+     "Sylveon: Hyper Beam -> Grimmsnarl | Blastoise: Fake Out -> Grimmsnarl"
+    ],
+    [
+     25,
+     "Sylveon: Hyper Beam -> Grimmsnarl | Blastoise: Water Spout"
+    ]
+   ],
+   "pop1": 0.6259782563616232,
+   "worst1": 0.5764994769486287
+  },
+  "Sun||Sylveon+Blastoise||Gardevoir + Indeedee-F": {
+   "lines": null,
+   "pop": 0.5980038234030047,
+   "worst": 0.46212588294554424,
+   "full": [
+    0.598615099189455,
+    0.46424784551484866
+   ],
+   "reader": [
+    [
+     0.7489115289993861,
+     "Gardevoir: Expanding Force -> Sylveon | Indeedee-F: Helping Hand"
+    ],
+    [
+     0.18927514379214683,
+     "Gardevoir: Protect | Indeedee-F: Psychic -> Sylveon"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": true,
+   "trCredit": 0.9890274022010992,
+   "mix": [
+    [
+     90,
+     "Sylveon: Hyper Beam -> Gardevoir | Blastoise: switch -> Indeedee-F"
+    ],
+    [
+     10,
+     "Sylveon: Hyper Voice | Blastoise: Dark Pulse -> Indeedee-F"
+    ]
+   ],
+   "pop1": 0.5750313792600041,
+   "worst1": 0.46212588294554424
+  },
+  "Balance, no speed control||Sylveon+Farigiraf||Arcanine-Hisui + Raichu": {
+   "lines": null,
+   "pop": 0.7738805102592928,
+   "worst": 0.6013505540652677,
+   "full": [
+    0.764407388310082,
+    0.6109763027119183
+   ],
+   "reader": [
+    [
+     0.5294997645747994,
+     "Arcanine-Hisui: Flare Blitz -> Sylveon | Raichu: Zap Cannon -> Farigiraf"
+    ],
+    [
+     0.3712195710882763,
+     "Arcanine-Hisui: Flare Blitz -> Sylveon | Raichu: Zap Cannon -> Sylveon"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Indeedee-F",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999605393223057,
+   "mix": [
+    [
+     80,
+     "Sylveon: Hyper Beam -> Raichu | Farigiraf: Trick Room"
+    ],
+    [
+     20,
+     "Sylveon: Detect | Farigiraf: Trick Room"
+    ]
+   ],
+   "pop1": 0.6571189795794725,
+   "worst1": 0.4496004019054642
+  },
+  "Rain + sun||Sylveon+Blastoise||Grimmsnarl + Swampert": {
+   "lines": null,
+   "pop": 0.6374515693031159,
+   "worst": 0.5887359942129639,
+   "full": [
+    0.6367781903549743,
+    0.595197254410827
+   ],
+   "reader": [
+    [
+     0.8112964791931481,
+     "Grimmsnarl: Light Screen | Swampert: Earthquake"
+    ],
+    [
+     0.18870352080685193,
+     "Grimmsnarl: switch | Swampert: Wave Crash -> Sylveon"
+    ]
+   ],
+   "share": 0.055,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.7472358212839743,
+   "mix": [
+    [
+     70,
+     "Sylveon: Hyper Beam -> Grimmsnarl | Blastoise: Fake Out -> Swampert"
+    ],
+    [
+     30,
+     "Sylveon: Hyper Voice | Blastoise: Fake Out -> Grimmsnarl"
+    ]
+   ],
+   "pop1": 0.6374515693031159,
+   "worst1": 0.5887359942129639
+  },
+  "Indeedee TR / Psychic Terrain||Sylveon+Kingambit||Armarouge + Indeedee-F": {
+   "lines": null,
+   "pop": 0.6813563558962827,
+   "worst": 0.5357226045084785,
+   "full": [
+    0.6778746849054843,
+    0.5412826943740473
+   ],
+   "reader": [
+    [
+     0.4693906019200788,
+     "Armarouge: Armor Cannon -> Kingambit | Indeedee-F: Helping Hand"
+    ],
+    [
+     0.34237229226593635,
+     "Armarouge: Expanding Force -> Sylveon | Indeedee-F: Helping Hand"
+    ],
+    [
+     0.18823710581398484,
+     "Armarouge: Heat Wave | Indeedee-F: Helping Hand"
+    ]
+   ],
+   "share": 0.044,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": true,
+   "trCredit": 0.9997532108480275,
+   "mix": [
+    [
+     85,
+     "Sylveon: Hyper Beam -> Indeedee-F | Kingambit: switch -> Indeedee-F"
+    ],
+    [
+     15,
+     "Sylveon: Hyper Voice | Kingambit: Kowtow Cleave -> Armarouge"
+    ]
+   ],
+   "pop1": 0.6582469647475028,
+   "worst1": 0.5357226045084785
+  },
+  "Indeedee TR / Psychic Terrain||Sylveon+Kingambit||Indeedee-F + Sneasler": {
+   "lines": null,
+   "pop": 0.5368584676280129,
+   "worst": 0.4342553011982422,
+   "full": [
+    0.5407057983657778,
+    0.4395390342675936
+   ],
+   "reader": [
+    [
+     0.5618097658993666,
+     "Indeedee-F: Mystical Fire -> Kingambit | Sneasler: Close Combat -> Kingambit"
+    ],
+    [
+     0.27556945081668427,
+     "Indeedee-F: Psychic -> Sylveon | Sneasler: Dire Claw -> Sylveon"
+    ],
+    [
+     0.16262078328395063,
+     "Indeedee-F: Mystical Fire -> Sylveon | Sneasler: Dire Claw -> Sylveon"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": true,
+   "trCredit": 0.9999349411740489,
+   "mix": [
+    [
+     50,
+     "Sylveon: Detect | Kingambit: Kowtow Cleave -> Indeedee-F"
+    ],
+    [
+     50,
+     "Sylveon: Hyper Beam -> Sneasler | Kingambit: switch -> Farigiraf"
+    ]
+   ],
+   "pop1": 0.5246890574133386,
+   "worst1": 0.4342553011982422
+  },
+  "Balance, no speed control||Sylveon+Indeedee-F||Gholdengo + Raichu": {
+   "lines": null,
+   "pop": 0.7708039627952704,
+   "worst": 0.48264688993581356,
+   "full": [
+    0.7676709609801777,
+    0.48405298624489285
+   ],
+   "reader": [
+    [
+     0.90392678722507,
+     "Gholdengo: Make It Rain | Raichu: Zap Cannon -> Indeedee-F"
+    ]
+   ],
+   "share": 0.062,
+   "back": [
+    "Farigiraf",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999605393223057,
+   "mix": [
+    [
+     100,
+     "Sylveon: Hyper Beam -> Raichu | Indeedee-F: Trick Room"
+    ]
+   ],
+   "pop1": 0.6597426103036422,
+   "worst1": 0.35010104914754786
+  },
+  "Trick Room without Indeedee||Sylveon+Blastoise||Farigiraf + Raichu": {
+   "lines": null,
+   "pop": 0.6112564193867931,
+   "worst": 0.4917666491703,
+   "full": [
+    0.6102684032089178,
+    0.49311602267654653
+   ],
+   "reader": [
+    [
+     0.7861924948805833,
+     "Farigiraf: Psychic -> Sylveon | Raichu: Zap Cannon -> Blastoise"
+    ],
+    [
+     0.21380750511941635,
+     "Farigiraf: Helping Hand | Raichu: Zap Cannon -> Sylveon"
+    ]
+   ],
+   "share": 0.02,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9970959217799802,
+   "mix": [
+    [
+     65,
+     "Sylveon: Hyper Beam -> Raichu | Blastoise: switch -> Farigiraf"
+    ],
+    [
+     35,
+     "Sylveon: Hyper Beam -> Raichu | Blastoise: Water Spout"
+    ]
+   ],
+   "pop1": 0.6064412307009153,
+   "worst1": 0.4917666491703
+  },
+  "Rain||Sylveon+Torkoal||Dragonite + Gholdengo": {
+   "lines": null,
+   "pop": 0.5634115452244226,
+   "worst": 0.4159752001384581,
+   "full": [
+    0.5644576780192184,
+    0.41838951087895726
+   ],
+   "reader": [
+    [
+     0.6427118560441452,
+     "Dragonite: Dragon Pulse -> Torkoal | Gholdengo: Make It Rain"
+    ],
+    [
+     0.35728814395585484,
+     "Dragonite: Heat Wave | Gholdengo: Make It Rain"
+    ]
+   ],
+   "share": 0.02,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9988944427261528,
+   "mix": [
+    [
+     65,
+     "Sylveon: Hyper Beam -> Dragonite | Torkoal: Protect"
+    ],
+    [
+     35,
+     "Sylveon: Detect | Torkoal: Weather Ball -> Gholdengo"
+    ]
+   ],
+   "pop1": 0.5634115452244226,
+   "worst1": 0.4159752001384581
+  },
+  "Trick Room without Indeedee||Sylveon+Blastoise||Farigiraf + Incineroar": {
+   "lines": null,
+   "pop": 0.6817957406779975,
+   "worst": 0.62584349151305,
+   "full": [
+    0.6811388073107535,
+    0.6300224983298235
+   ],
+   "reader": [
+    [
+     0.4578905445719345,
+     "Farigiraf: Hyper Voice | Incineroar: Fake Out -> Blastoise"
+    ],
+    [
+     0.36845945105614064,
+     "Farigiraf: Protect | Incineroar: switch"
+    ],
+    [
+     0.13189814872931363,
+     "Farigiraf: Hyper Voice | Incineroar: Throat Chop -> Sylveon"
+    ]
+   ],
+   "share": 0.073,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": -0.11614021174790659,
+   "mix": [
+    [
+     50,
+     "Sylveon: switch -> Indeedee-F | Blastoise: Water Spout"
+    ],
+    [
+     50,
+     "Sylveon: Hyper Voice | Blastoise: Water Spout"
+    ]
+   ],
+   "pop1": 0.6915970962403986,
+   "worst1": 0.62584349151305
+  },
+  "Rain||Sylveon+Torkoal||Pelipper + Swampert": {
+   "lines": null,
+   "pop": 0.6257989676256162,
+   "worst": 0.47129244962820593,
+   "full": [
+    0.6274044882488969,
+    0.4745897150064771
+   ],
+   "reader": [
+    [
+     0.5934703976068993,
+     "Pelipper: Tailwind | Swampert: Earthquake"
+    ],
+    [
+     0.40652960239310065,
+     "Pelipper: Weather Ball -> Sylveon | Swampert: High Horsepower -> Sylveon"
+    ]
+   ],
+   "share": 0.068,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9704519366134539,
+   "mix": [
+    [
+     80,
+     "Sylveon: Hyper Voice | Torkoal: Protect"
+    ],
+    [
+     20,
+     "Sylveon: Hyper Voice | Torkoal: Eruption"
+    ]
+   ],
+   "pop1": 0.6257989676256162,
+   "worst1": 0.47129244962820593
+  },
+  "Sand||Sylveon+Blastoise||Excadrill + Salamence": {
+   "lines": null,
+   "pop": 0.668021233551783,
+   "worst": 0.5966164947836364,
+   "full": [
+    0.6688817577774332,
+    0.5991812511124538
+   ],
+   "reader": [
+    [
+     0.3512816365202111,
+     "Excadrill: High Horsepower -> Blastoise | Salamence: Protect"
+    ],
+    [
+     0.3407194560024549,
+     "Excadrill: Protect | Salamence: Hyper Voice"
+    ],
+    [
+     0.30799890747733333,
+     "Excadrill: Iron Head -> Sylveon | Salamence: Protect"
+    ]
+   ],
+   "share": 0.029,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9998774405207668,
+   "mix": [
+    [
+     65,
+     "Sylveon: Hyper Voice | Blastoise: Fake Out -> Excadrill"
+    ],
+    [
+     25,
+     "Sylveon: Detect | Blastoise: Water Spout"
+    ],
+    [
+     10,
+     "Sylveon: Hyper Voice | Blastoise: Aura Sphere -> Excadrill"
+    ]
+   ],
+   "pop1": 0.668021233551783,
+   "worst1": 0.5966164947836364
+  },
+  "Balance, no speed control||Sylveon+Farigiraf||Gholdengo + Raichu": {
+   "lines": null,
+   "pop": 0.6152383942136141,
+   "worst": 0.459153717371654,
+   "full": [
+    0.6128896004337842,
+    0.46067709488100256
+   ],
+   "reader": [
+    [
+     0.7986405366804258,
+     "Gholdengo: Make It Rain | Raichu: Zap Cannon -> Farigiraf"
+    ],
+    [
+     0.20135946331957424,
+     "Gholdengo: Make It Rain | Raichu: Zap Cannon -> Sylveon"
+    ]
+   ],
+   "share": 0.062,
+   "back": [
+    "Indeedee-F",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999605393223057,
+   "mix": [
+    [
+     60,
+     "Sylveon: Hyper Voice | Farigiraf: Protect"
+    ],
+    [
+     40,
+     "Sylveon: Detect | Farigiraf: Trick Room"
+    ]
+   ],
+   "pop1": 0.5591169462034179,
+   "worst1": 0.4114580514316292
+  },
+  "Sun||Sylveon+Blastoise||Farigiraf + Incineroar": {
+   "lines": null,
+   "pop": 0.712753881487984,
+   "worst": 0.6356291353948612,
+   "full": [
+    0.7130422065835158,
+    0.636544677477696
+   ],
+   "reader": [
+    [
+     0.45924319585718654,
+     "Farigiraf: Trick Room | Incineroar: Fake Out -> Blastoise"
+    ],
+    [
+     0.36444322520921163,
+     "Farigiraf: Protect | Incineroar: switch"
+    ],
+    [
+     0.17631357893360255,
+     "Farigiraf: Trick Room | Incineroar: switch"
+    ]
+   ],
+   "share": 0.038,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": -0.365598772186825,
+   "mix": [
+    [
+     50,
+     "Sylveon: switch -> Indeedee-F | Blastoise: Water Spout"
+    ],
+    [
+     30,
+     "Sylveon: Hyper Beam -> Incineroar | Blastoise: Water Spout"
+    ],
+    [
+     20,
+     "Sylveon: Hyper Beam -> Farigiraf | Blastoise: Water Spout"
+    ]
+   ],
+   "pop1": 0.7432160599857917,
+   "worst1": 0.6375099332310296
+  },
+  "Indeedee TR / Psychic Terrain||Sylveon+Kingambit||Gardevoir + Indeedee-F": {
+   "lines": null,
+   "pop": 0.6740865980853527,
+   "worst": 0.5809937589234258,
+   "full": [
+    0.673849888415403,
+    0.5827839666976374
+   ],
+   "reader": [
+    [
+     0.6486942871207554,
+     "Gardevoir: Hyper Voice | Indeedee-F: Helping Hand"
+    ],
+    [
+     0.2995039469564006,
+     "Gardevoir: Hyper Voice | Indeedee-F: Follow Me"
+    ]
+   ],
+   "share": 0.067,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": true,
+   "trCredit": 0.9996555948057619,
+   "mix": [
+    [
+     60,
+     "Sylveon: Hyper Beam -> Indeedee-F | Kingambit: Iron Head -> Gardevoir"
+    ],
+    [
+     40,
+     "Sylveon: Hyper Voice | Kingambit: Kowtow Cleave -> Gardevoir"
+    ]
+   ],
+   "pop1": 0.6673436917604829,
+   "worst1": 0.5809937589234258
+  },
+  "Rain||Sylveon+Blastoise||Dragonite + Gholdengo": {
+   "lines": null,
+   "pop": 0.6247580225342041,
+   "worst": 0.5451209029079032,
+   "full": [
+    0.6226019125653475,
+    0.5500490146130014
+   ],
+   "reader": [
+    [
+     0.46259095173437226,
+     "Dragonite: Tailwind | Gholdengo: Protect"
+    ],
+    [
+     0.38289161825483814,
+     "Dragonite: Protect | Gholdengo: Make It Rain"
+    ],
+    [
+     0.15451743001078969,
+     "Dragonite: Heat Wave | Gholdengo: Make It Rain"
+    ]
+   ],
+   "share": 0.02,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9937591867175544,
+   "mix": [
+    [
+     35,
+     "Sylveon: Detect | Blastoise: Dark Pulse -> Gholdengo"
+    ],
+    [
+     35,
+     "Sylveon: Hyper Beam -> Dragonite | Blastoise: Dark Pulse -> Gholdengo"
+    ],
+    [
+     30,
+     "Sylveon: Hyper Voice | Blastoise: Fake Out -> Dragonite"
+    ]
+   ],
+   "pop1": 0.6247580225342041,
+   "worst1": 0.5451209029079032
+  },
+  "Sand||Sylveon+Blastoise||Indeedee + Sneasler": {
+   "lines": null,
+   "pop": 0.5486139070867699,
+   "worst": 0.4125025781119347,
+   "full": [
+    0.5481799462589386,
+    0.42572114945459194
+   ],
+   "reader": [
+    [
+     0.6071993425540098,
+     "Indeedee: Expanding Force -> Sylveon | Sneasler: Close Combat -> Blastoise"
+    ],
+    [
+     0.33947706741694733,
+     "Indeedee: Mystical Fire -> Blastoise | Sneasler: Dire Claw -> Sylveon"
+    ]
+   ],
+   "share": 0.048,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9997840133919367,
+   "mix": [
+    [
+     75,
+     "Sylveon: Hyper Voice | Blastoise: Dark Pulse -> Indeedee"
+    ],
+    [
+     25,
+     "Sylveon: Detect | Blastoise: Water Spout"
+    ]
+   ],
+   "pop1": 0.5486139070867699,
+   "worst1": 0.4125025781119347
+  },
+  "Rain + sun||Sylveon+Blastoise||Farigiraf + Golisopod": {
+   "lines": null,
+   "pop": 0.7823846002682535,
+   "worst": 0.5390884487849782,
+   "full": [
+    0.7810743903372142,
+    0.5429278048141537
+   ],
+   "reader": [
+    [
+     0.544639798976457,
+     "Farigiraf: Psychic -> Blastoise | Golisopod: Protect"
+    ],
+    [
+     0.34633351591350875,
+     "Farigiraf: Protect | Golisopod: Iron Head -> Sylveon"
+    ],
+    [
+     0.10902668511003429,
+     "Farigiraf: Protect | Golisopod: Leech Life -> Blastoise"
+    ]
+   ],
+   "share": 0.076,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.5936821390883533,
+   "mix": [
+    [
+     85,
+     "Sylveon: Hyper Beam -> Golisopod | Blastoise: Water Spout"
+    ],
+    [
+     15,
+     "Sylveon: Hyper Beam -> Farigiraf | Blastoise: Water Spout"
+    ]
+   ],
+   "pop1": 0.7527224544420879,
+   "worst1": 0.5390884487849782
+  },
+  "Rain||Sylveon+Torkoal||Archaludon + Pelipper": {
+   "lines": null,
+   "pop": 0.8236404566130255,
+   "worst": 0.6422170929574377,
+   "full": [
+    0.8236404566130255,
+    0.6422170929574377
+   ],
+   "reader": [
+    [
+     1.0,
+     "Archaludon: Protect | Pelipper: Tailwind"
+    ]
+   ],
+   "share": 0.083,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9432429351597283,
+   "mix": [
+    [
+     100,
+     "Sylveon: Hyper Voice | Torkoal: Eruption"
+    ]
+   ],
+   "pop1": 0.8236404566130255,
+   "worst1": 0.6422170929574377
+  },
+  "Sun||Sylveon+Blastoise||Charizard + Garchomp": {
+   "lines": null,
+   "pop": 0.6590874200314342,
+   "worst": 0.6199499535048827,
+   "full": [
+    0.6595436734429135,
+    0.6212770128751602
+   ],
+   "reader": [
+    [
+     0.4573666944971532,
+     "Charizard: Protect | Garchomp: switch"
+    ],
+    [
+     0.38945237579927494,
+     "Charizard: Heat Wave | Garchomp: Earthquake"
+    ],
+    [
+     0.11410165500356512,
+     "Charizard: Protect | Garchomp: Rock Slide"
+    ]
+   ],
+   "share": 0.035,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9813680813098666,
+   "mix": [
+    [
+     65,
+     "Sylveon: Hyper Beam -> Garchomp | Blastoise: Fake Out -> Charizard"
+    ],
+    [
+     25,
+     "Sylveon: Hyper Voice | Blastoise: Fake Out -> Charizard"
+    ],
+    [
+     10,
+     "Sylveon: Hyper Voice | Blastoise: Fake Out -> Garchomp"
+    ]
+   ],
+   "pop1": 0.6590874200314342,
+   "worst1": 0.6199499535048827
+  },
+  "Rain + sun||Sylveon+Blastoise||Golisopod + Grimmsnarl": {
+   "lines": null,
+   "pop": 0.6205551672549329,
+   "worst": 0.5895676102151647,
+   "full": [
+    0.6197338365143834,
+    0.5926324896645696
+   ],
+   "reader": [
+    [
+     0.6598691356142983,
+     "Golisopod: Swords Dance | Grimmsnarl: Parting Shot -> Sylveon"
+    ],
+    [
+     0.2564732043509906,
+     "Golisopod: Swords Dance | Grimmsnarl: Light Screen"
+    ]
+   ],
+   "share": 0.053,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.5005202111902353,
+   "mix": [
+    [
+     90,
+     "Sylveon: Hyper Beam -> Grimmsnarl | Blastoise: Fake Out -> Golisopod"
+    ],
+    [
+     10,
+     "Sylveon: Hyper Beam -> Grimmsnarl | Blastoise: Fake Out -> Grimmsnarl"
+    ]
+   ],
+   "pop1": 0.6205551672549329,
+   "worst1": 0.5895676102151647
+  },
+  "Balance, no speed control||Sylveon+Farigiraf||Garchomp + Raichu": {
+   "lines": null,
+   "pop": 0.8065495091016834,
+   "worst": 0.6929451857841068,
+   "full": [
+    0.8082659136294557,
+    0.6957896654534899
+   ],
+   "reader": [
+    [
+     0.6686197501132147,
+     "Garchomp: Stomping Tantrum -> Sylveon | Raichu: Zap Cannon -> Sylveon"
+    ],
+    [
+     0.33138024988678527,
+     "Garchomp: Rock Slide | Raichu: Zap Cannon -> Farigiraf"
+    ]
+   ],
+   "share": 0.035,
+   "back": [
+    "Indeedee-F",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999954793514042,
+   "mix": [
+    [
+     75,
+     "Sylveon: Hyper Voice | Farigiraf: Trick Room"
+    ],
+    [
+     25,
+     "Sylveon: Detect | Farigiraf: Trick Room"
+    ]
+   ],
+   "pop1": 0.7184108077811583,
+   "worst1": 0.5660676328516874
+  },
+  "Indeedee TR / Psychic Terrain||Sylveon+Farigiraf||Armarouge + Indeedee-F": {
+   "lines": null,
+   "pop": 0.7455251341073089,
+   "worst": 0.6916431459618656,
+   "full": [
+    0.7465185311669683,
+    0.6940820779374098
+   ],
+   "reader": [
+    [
+     0.4210366770892133,
+     "Armarouge: Expanding Force -> Sylveon | Indeedee-F: Helping Hand"
+    ],
+    [
+     0.42042545172669143,
+     "Armarouge: Expanding Force -> Sylveon | Indeedee-F: Trick Room"
+    ],
+    [
+     0.15853787118409524,
+     "Armarouge: Heat Wave | Indeedee-F: Trick Room"
+    ]
+   ],
+   "share": 0.044,
+   "back": [
+    "Indeedee-F",
+    "Kingambit"
+   ],
+   "itemMix": true,
+   "trCredit": 0.9997532108480275,
+   "mix": [
+    [
+     65,
+     "Sylveon: Hyper Beam -> Indeedee-F | Farigiraf: Trick Room"
+    ],
+    [
+     35,
+     "Sylveon: Hyper Beam -> Indeedee-F | Farigiraf: Protect"
+    ]
+   ],
+   "pop1": 0.6852610889589514,
+   "worst1": 0.6122682678081789
+  },
+  "Rain||Sylveon+Blastoise||Pelipper + Sneasler": {
+   "lines": null,
+   "pop": 0.7059545416088396,
+   "worst": 0.6253318849830091,
+   "full": [
+    0.7044298356065498,
+    0.626715039174461
+   ],
+   "reader": [
+    [
+     0.587503783325063,
+     "Pelipper: Tailwind | Sneasler: Fake Out -> Blastoise"
+    ],
+    [
+     0.34853555204723435,
+     "Pelipper: Hurricane -> Blastoise | Sneasler: Close Combat -> Blastoise"
+    ]
+   ],
+   "share": 0.042,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9684470564892362,
+   "mix": [
+    [
+     100,
+     "Sylveon: Hyper Voice | Blastoise: Water Spout"
+    ]
+   ],
+   "pop1": 0.7059545416088396,
+   "worst1": 0.6253318849830091
+  },
+  "Indeedee TR / Psychic Terrain||Sylveon+Farigiraf||Farigiraf + Incineroar": {
+   "lines": null,
+   "pop": 0.553183771696352,
+   "worst": 0.5065934022803951,
+   "full": [
+    0.5547194587960796,
+    0.5092715717719106
+   ],
+   "reader": [
+    [
+     0.511571483496612,
+     "Farigiraf: Trick Room | Incineroar: switch"
+    ],
+    [
+     0.44015835705752837,
+     "Farigiraf: Protect | Incineroar: Flare Blitz -> Sylveon"
+    ]
+   ],
+   "share": 0.037,
+   "back": [
+    "Indeedee-F",
+    "Kingambit"
+   ],
+   "itemMix": false,
+   "trCredit": -0.7944319501654965,
+   "mix": [
+    [
+     55,
+     "Sylveon: Hyper Beam -> Incineroar | Farigiraf: Thunderbolt -> Incineroar"
+    ],
+    [
+     45,
+     "Sylveon: Hyper Beam -> Incineroar | Farigiraf: Trick Room"
+    ]
+   ],
+   "pop1": 0.6201390445796865,
+   "worst1": 0.5651518482605042
+  },
+  "Balance, no speed control||Sylveon+Indeedee-F||Garchomp + Raichu": {
+   "lines": null,
+   "pop": 0.8480198552296228,
+   "worst": 0.6137014869686955,
+   "full": [
+    0.8480198552296228,
+    0.6137014869686955
+   ],
+   "reader": [
+    [
+     0.6083366235886376,
+     "Garchomp: Rock Slide | Raichu: Zap Cannon -> Sylveon"
+    ],
+    [
+     0.3916633764113624,
+     "Garchomp: Rock Slide | Raichu: Zap Cannon -> Indeedee-F"
+    ]
+   ],
+   "share": 0.035,
+   "back": [
+    "Farigiraf",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999954793514042,
+   "mix": [
+    [
+     100,
+     "Sylveon: Hyper Voice | Indeedee-F: Trick Room"
+    ]
+   ],
+   "pop1": 0.7687239796761335,
+   "worst1": 0.5421120031574654
+  },
+  "Sand||Sylveon+Blastoise||Sneasler + Tyranitar": {
+   "lines": null,
+   "pop": 0.6262357083621215,
+   "worst": 0.48091283908313387,
+   "full": [
+    0.6269192970321951,
+    0.49510767319382953
+   ],
+   "reader": [
+    [
+     0.3850711744146782,
+     "Sneasler: Close Combat -> Blastoise | Tyranitar: Rock Slide"
+    ],
+    [
+     0.2902919213385169,
+     "Sneasler: Fake Out -> Sylveon | Tyranitar: Rock Slide"
+    ],
+    [
+     0.22481510770059024,
+     "Sneasler: Fake Out -> Blastoise | Tyranitar: Rock Slide"
+    ]
+   ],
+   "share": 0.045,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9997840133919367,
+   "mix": [
+    [
+     50,
+     "Sylveon: Hyper Beam -> Sneasler | Blastoise: Aura Sphere -> Tyranitar"
+    ],
+    [
+     35,
+     "Sylveon: Hyper Beam -> Sneasler | Blastoise: Fake Out -> Sneasler"
+    ],
+    [
+     15,
+     "Sylveon: Detect | Blastoise: Water Spout"
+    ]
+   ],
+   "pop1": 0.6262357083621215,
+   "worst1": 0.48091283908313387
+  },
+  "Balance, no speed control||Sylveon+Indeedee-F||Floette-Eternal + Incineroar": {
+   "lines": null,
+   "pop": 0.8363102920678215,
+   "worst": 0.4954507354978097,
+   "full": [
+    0.7874497462424459,
+    0.5132125814683527
+   ],
+   "reader": [
+    [
+     0.7911034405473024,
+     "Floette-Eternal: Moonblast -> Indeedee-F | Incineroar: Darkest Lariat -> Indeedee-F"
+    ],
+    [
+     0.2088965594526976,
+     "Floette-Eternal: Moonblast -> Sylveon | Incineroar: Flare Blitz -> Sylveon"
+    ]
+   ],
+   "share": 0.04,
+   "back": [
+    "Farigiraf",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9993065741595739,
+   "mix": [
+    [
+     100,
+     "Sylveon: Hyper Beam -> Incineroar | Indeedee-F: Trick Room"
+    ]
+   ],
+   "pop1": 0.7455307993578619,
+   "worst1": 0.4224672478383648
+  },
+  "Sand||Sylveon+Blastoise||Corviknight + Sneasler": {
+   "lines": null,
+   "pop": 0.6810875287168198,
+   "worst": 0.5536469996563738,
+   "full": [
+    0.6820088951033876,
+    0.555774858929051
+   ],
+   "reader": [
+    [
+     0.424024566202714,
+     "Corviknight: Bulk Up | Sneasler: Protect"
+    ],
+    [
+     0.29691161974427005,
+     "Corviknight: Bulk Up | Sneasler: Dire Claw -> Sylveon"
+    ],
+    [
+     0.2591816512250845,
+     "Corviknight: Bulk Up | Sneasler: Close Combat -> Blastoise"
+    ]
+   ],
+   "share": 0.036,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9979864583598287,
+   "mix": [
+    [
+     60,
+     "Sylveon: Hyper Voice | Blastoise: Water Spout"
+    ],
+    [
+     40,
+     "Sylveon: Detect | Blastoise: Water Spout"
+    ]
+   ],
+   "pop1": 0.6810875287168198,
+   "worst1": 0.5536469996563738
+  },
+  "Trick Room without Indeedee||Sylveon+Blastoise||Delphox + Sneasler": {
+   "lines": null,
+   "pop": 0.5984375146372827,
+   "worst": 0.532916148325536,
+   "full": [
+    0.5936076728351903,
+    0.542669177879802
+   ],
+   "reader": [
+    [
+     0.38935399660781295,
+     "Delphox: Psychic -> Blastoise | Sneasler: Fake Out -> Sylveon"
+    ],
+    [
+     0.28399218780220264,
+     "Delphox: Psychic -> Blastoise | Sneasler: Close Combat -> Blastoise"
+    ],
+    [
+     0.2383599043385019,
+     "Delphox: Psychic -> Blastoise | Sneasler: Poison Jab -> Sylveon"
+    ]
+   ],
+   "share": 0.022,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9992587877187472,
+   "mix": [
+    [
+     55,
+     "Sylveon: Hyper Voice | Blastoise: Water Spout"
+    ],
+    [
+     30,
+     "Sylveon: Hyper Beam -> Sneasler | Blastoise: Fake Out -> Sneasler"
+    ],
+    [
+     15,
+     "Sylveon: switch -> Farigiraf | Blastoise: Water Spout"
+    ]
+   ],
+   "pop1": 0.5984375146372827,
+   "worst1": 0.532916148325536
+  },
+  "Rain||Sylveon+Blastoise||Archaludon + Pelipper": {
+   "lines": null,
+   "pop": 0.6119106718322282,
+   "worst": 0.567855441986948,
+   "full": [
+    0.6156506247087109,
+    0.5719146506766952
+   ],
+   "reader": [
+    [
+     0.5593000451933388,
+     "Archaludon: Electro Shot -> Blastoise | Pelipper: Tailwind"
+    ],
+    [
+     0.44069995480666124,
+     "Archaludon: Protect | Pelipper: Tailwind"
+    ]
+   ],
+   "share": 0.083,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.7162978701990245,
+   "mix": [
+    [
+     70,
+     "Sylveon: Hyper Voice | Blastoise: Fake Out -> Archaludon"
+    ],
+    [
+     30,
+     "Sylveon: Hyper Beam -> Pelipper | Blastoise: Fake Out -> Pelipper"
+    ]
+   ],
+   "pop1": 0.6119106718322282,
+   "worst1": 0.567855441986948
+  },
+  "Indeedee TR / Psychic Terrain||Sylveon+Kingambit||Indeedee + Sneasler": {
+   "lines": null,
+   "pop": 0.6088758528463258,
+   "worst": 0.41499073980420553,
+   "full": [
+    0.6080314535232259,
+    0.41889875270842203
+   ],
+   "reader": [
+    [
+     0.5665941139761046,
+     "Indeedee: Mystical Fire -> Kingambit | Sneasler: Close Combat -> Kingambit"
+    ],
+    [
+     0.43340588602389535,
+     "Indeedee: switch | Sneasler: Dire Claw -> Sylveon"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999911949977043,
+   "mix": [
+    [
+     80,
+     "Sylveon: Hyper Voice | Kingambit: Kowtow Cleave -> Indeedee"
+    ],
+    [
+     20,
+     "Sylveon: Detect | Kingambit: Kowtow Cleave -> Indeedee"
+    ]
+   ],
+   "pop1": 0.6088758528463258,
+   "worst1": 0.41499073980420553
+  },
+  "Balance, no speed control||Sylveon+Farigiraf||Floette-Eternal + Incineroar": {
+   "lines": null,
+   "pop": 0.8408136176614891,
+   "worst": 0.5653982715020319,
+   "full": [
+    0.831658641034801,
+    0.5707966745618156
+   ],
+   "reader": [
+    [
+     0.7046142385293995,
+     "Floette-Eternal: Dazzling Gleam | Incineroar: Darkest Lariat -> Farigiraf"
+    ],
+    [
+     0.26894339571928116,
+     "Floette-Eternal: Moonblast -> Sylveon | Incineroar: Flare Blitz -> Sylveon"
+    ]
+   ],
+   "share": 0.04,
+   "back": [
+    "Indeedee-F",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9993065741595739,
+   "mix": [
+    [
+     100,
+     "Sylveon: Hyper Beam -> Incineroar | Farigiraf: Trick Room"
+    ]
+   ],
+   "pop1": 0.7424559908486444,
+   "worst1": 0.4273687786976077
+  },
+  "Sun||Sylveon+Blastoise||Aerodactyl + Kingambit": {
+   "lines": null,
+   "pop": 0.721907760827517,
+   "worst": 0.5839101699896979,
+   "full": [
+    0.7156571182528902,
+    0.5901805838327069
+   ],
+   "reader": [
+    [
+     0.48899135302137414,
+     "Aerodactyl: Rock Slide | Kingambit: Sucker Punch -> Blastoise"
+    ],
+    [
+     0.33520632929895344,
+     "Aerodactyl: Tailwind | Kingambit: Iron Head -> Sylveon"
+    ],
+    [
+     0.15518205272178734,
+     "Aerodactyl: Dual Wingbeat -> Blastoise | Kingambit: Iron Head -> Sylveon"
+    ]
+   ],
+   "share": 0.033,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999549111406991,
+   "mix": [
+    [
+     75,
+     "Sylveon: Hyper Voice | Blastoise: Water Spout"
+    ],
+    [
+     25,
+     "Sylveon: Detect | Blastoise: Water Spout"
+    ]
+   ],
+   "pop1": 0.721907760827517,
+   "worst1": 0.5839101699896979
+  },
+  "Rain||Sylveon+Blastoise||Farigiraf + Golisopod": {
+   "lines": null,
+   "pop": 0.6696001760722377,
+   "worst": 0.5806443800532592,
+   "full": [
+    0.6739337262716483,
+    0.5802068347838468
+   ],
+   "reader": [
+    [
+     0.672149746742847,
+     "Farigiraf: Psychic -> Blastoise | Golisopod: First Impression -> Blastoise"
+    ],
+    [
+     0.22026880504209484,
+     "Farigiraf: Psychic -> Blastoise | Golisopod: Swords Dance"
+    ],
+    [
+     0.10758144821505806,
+     "Farigiraf: Twin Beam -> Blastoise | Golisopod: Leech Life -> Blastoise"
+    ]
+   ],
+   "share": 0.021,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.197375320224904,
+   "mix": [
+    [
+     100,
+     "Sylveon: Hyper Voice | Blastoise: Dark Pulse -> Farigiraf"
+    ]
+   ],
+   "pop1": 0.6641068993761079,
+   "worst1": 0.5806443800532592
+  },
+  "Sun||Sylveon+Blastoise||Charizard + Farigiraf": {
+   "lines": null,
+   "pop": 0.6848383468751201,
+   "worst": 0.5348317551785267,
+   "full": [
+    0.6843523592816642,
+    0.5383254976523224
+   ],
+   "reader": [
+    [
+     0.595783906445488,
+     "Charizard: Weather Ball -> Blastoise | Farigiraf: Thunderbolt -> Blastoise"
+    ],
+    [
+     0.40421609355451205,
+     "Charizard: Weather Ball -> Sylveon | Farigiraf: Helping Hand"
+    ]
+   ],
+   "share": 0.026,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.7321442233518527,
+   "mix": [
+    [
+     60,
+     "Sylveon: Hyper Beam -> Farigiraf | Blastoise: Water Spout"
+    ],
+    [
+     40,
+     "Sylveon: Detect | Blastoise: Water Spout"
+    ]
+   ],
+   "pop1": 0.6660962637258762,
+   "worst1": 0.5348317551785267
+  },
+  "Rain||Sylveon+Blastoise||Archaludon + Grimmsnarl": {
+   "lines": null,
+   "pop": 0.6351803115345652,
+   "worst": 0.5925335732368355,
+   "full": [
+    0.6364247816103047,
+    0.5982424650195104
+   ],
+   "reader": [
+    [
+     0.6188005856769081,
+     "Archaludon: Snarl | Grimmsnarl: Light Screen"
+    ],
+    [
+     0.2619243471726481,
+     "Archaludon: Electro Shot -> Blastoise | Grimmsnarl: switch"
+    ],
+    [
+     0.11927506715044377,
+     "Archaludon: Protect | Grimmsnarl: Light Screen"
+    ]
+   ],
+   "share": 0.032,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.197375320224904,
+   "mix": [
+    [
+     55,
+     "Sylveon: Hyper Voice | Blastoise: Fake Out -> Archaludon"
+    ],
+    [
+     45,
+     "Sylveon: Hyper Beam -> Grimmsnarl | Blastoise: Fake Out -> Grimmsnarl"
+    ]
+   ],
+   "pop1": 0.6351803115345652,
+   "worst1": 0.5925335732368355
+  },
+  "Rain||Sylveon+Torkoal||Archaludon + Grimmsnarl": {
+   "lines": null,
+   "pop": 0.6494726721318516,
+   "worst": 0.5271143744693461,
+   "full": [
+    0.6504257556416817,
+    0.5290823566181164
+   ],
+   "reader": [
+    [
+     0.603649120952288,
+     "Archaludon: Snarl | Grimmsnarl: Light Screen"
+    ],
+    [
+     0.39635087904771205,
+     "Archaludon: Electro Shot -> Torkoal | Grimmsnarl: switch"
+    ]
+   ],
+   "share": 0.032,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.7882020755281642,
+   "mix": [
+    [
+     90,
+     "Sylveon: Hyper Beam -> Grimmsnarl | Torkoal: Eruption"
+    ],
+    [
+     10,
+     "Sylveon: Hyper Voice | Torkoal: Earth Power -> Archaludon"
+    ]
+   ],
+   "pop1": 0.6494726721318516,
+   "worst1": 0.5271143744693461
+  },
+  "Indeedee TR / Psychic Terrain||Sylveon+Farigiraf||Gardevoir + Indeedee-F": {
+   "lines": null,
+   "pop": 0.7055763324239072,
+   "worst": 0.6424193082297246,
+   "full": [
+    0.7083287875890014,
+    0.6451186007932376
+   ],
+   "reader": [
+    [
+     0.5387400522987011,
+     "Gardevoir: Expanding Force -> Sylveon | Indeedee-F: Helping Hand"
+    ],
+    [
+     0.271489918614464,
+     "Gardevoir: Expanding Force -> Sylveon | Indeedee-F: Trick Room"
+    ],
+    [
+     0.11570893093095973,
+     "Gardevoir: Hyper Voice | Indeedee-F: Helping Hand"
+    ]
+   ],
+   "share": 0.067,
+   "back": [
+    "Indeedee-F",
+    "Kingambit"
+   ],
+   "itemMix": true,
+   "trCredit": 0.9996555948057619,
+   "mix": [
+    [
+     35,
+     "Sylveon: Hyper Voice | Farigiraf: Trick Room"
+    ],
+    [
+     35,
+     "Sylveon: Hyper Beam -> Gardevoir | Farigiraf: Protect"
+    ],
+    [
+     30,
+     "Sylveon: Hyper Beam -> Indeedee-F | Farigiraf: Trick Room"
+    ]
+   ],
+   "pop1": 0.6298972268867494,
+   "worst1": 0.5509031832996757
+  },
+  "Indeedee TR / Psychic Terrain||Sylveon+Farigiraf||Indeedee-F + Sneasler": {
+   "lines": null,
+   "pop": 0.7000770466818436,
+   "worst": 0.6266398814319359,
+   "full": [
+    0.7010743768187847,
+    0.6325434889680293
+   ],
+   "reader": [
+    [
+     0.4213744550693832,
+     "Indeedee-F: Follow Me | Sneasler: Dire Claw -> Farigiraf"
+    ],
+    [
+     0.28693635242298327,
+     "Indeedee-F: Mystical Fire -> Farigiraf | Sneasler: Dire Claw -> Sylveon"
+    ],
+    [
+     0.14979750776382145,
+     "Indeedee-F: Trick Room | Sneasler: Throat Chop -> Farigiraf"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Indeedee-F",
+    "Kingambit"
+   ],
+   "itemMix": true,
+   "trCredit": 0.9999349411740489,
+   "mix": [
+    [
+     40,
+     "Sylveon: Detect | Farigiraf: Trick Room"
+    ],
+    [
+     35,
+     "Sylveon: Detect | Farigiraf: Psychic -> Sneasler"
+    ],
+    [
+     25,
+     "Sylveon: Hyper Beam -> Indeedee-F | Farigiraf: Trick Room"
+    ]
+   ],
+   "pop1": 0.6230128488080509,
+   "worst1": 0.5393244053408471
+  },
+  "Rain||Sylveon+Torkoal||Farigiraf + Golisopod": {
+   "lines": null,
+   "pop": 0.7038396049333182,
+   "worst": 0.5913143981075347,
+   "full": [
+    0.7005246834271207,
+    0.5964129800290714
+   ],
+   "reader": [
+    [
+     0.4427472640496136,
+     "Farigiraf: Twin Beam -> Sylveon | Golisopod: First Impression -> Sylveon"
+    ],
+    [
+     0.356422527919778,
+     "Farigiraf: Twin Beam -> Torkoal | Golisopod: Drill Run -> Torkoal"
+    ],
+    [
+     0.20083020803060833,
+     "Farigiraf: Psychic -> Torkoal | Golisopod: Drill Run -> Torkoal"
+    ]
+   ],
+   "share": 0.021,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.7882020755281642,
+   "mix": [
+    [
+     65,
+     "Sylveon: Hyper Beam -> Farigiraf | Torkoal: Protect"
+    ],
+    [
+     35,
+     "Sylveon: Hyper Beam -> Farigiraf | Torkoal: Eruption"
+    ]
+   ],
+   "pop1": 0.6814177059192196,
+   "worst1": 0.5913143981075347
+  },
+  "Trick Room without Indeedee||Sylveon+Blastoise||Delphox + Incineroar": {
+   "lines": null,
+   "pop": 0.7172293963131584,
+   "worst": 0.5906679049020489,
+   "full": [
+    0.7173546695089199,
+    0.5930924580552865
+   ],
+   "reader": [
+    [
+     0.46132890043877656,
+     "Delphox: Psyshock -> Blastoise | Incineroar: Fake Out -> Blastoise"
+    ],
+    [
+     0.37304433924386887,
+     "Delphox: Psyshock -> Blastoise | Incineroar: Parting Shot -> Sylveon"
+    ],
+    [
+     0.1656267603173546,
+     "Delphox: Psyshock -> Blastoise | Incineroar: Fake Out -> Sylveon"
+    ]
+   ],
+   "share": 0.03,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9992587877187472,
+   "mix": [
+    [
+     65,
+     "Sylveon: switch -> Farigiraf | Blastoise: Water Spout"
+    ],
+    [
+     35,
+     "Sylveon: Hyper Beam -> Incineroar | Blastoise: Water Spout"
+    ]
+   ],
+   "pop1": 0.7172293963131584,
+   "worst1": 0.5906679049020489
+  },
+  "Trick Room without Indeedee||Sylveon+Blastoise||Farigiraf + Rillaboom": {
+   "lines": null,
+   "pop": 0.6114178262369682,
+   "worst": 0.4415611784392953,
+   "full": [
+    0.6107181276641171,
+    0.4430810537250432
+   ],
+   "reader": [
+    [
+     0.4855627826536495,
+     "Farigiraf: Thunderbolt -> Sylveon | Rillaboom: Wood Hammer -> Sylveon"
+    ],
+    [
+     0.27331757571669324,
+     "Farigiraf: Protect | Rillaboom: Wood Hammer -> Blastoise"
+    ],
+    [
+     0.2411196416296573,
+     "Farigiraf: Thunderbolt -> Sylveon | Rillaboom: Wood Hammer -> Blastoise"
+    ]
+   ],
+   "share": 0.03,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.04995837495787998,
+   "mix": [
+    [
+     45,
+     "Sylveon: Hyper Beam -> Rillaboom | Blastoise: switch -> Indeedee-F"
+    ],
+    [
+     40,
+     "Sylveon: Detect | Blastoise: Aura Sphere -> Rillaboom"
+    ],
+    [
+     15,
+     "Sylveon: Hyper Voice | Blastoise: switch -> Indeedee-F"
+    ]
+   ],
+   "pop1": 0.6061478810627005,
+   "worst1": 0.4415611784392953
+  },
+  "Indeedee TR / Psychic Terrain||Sylveon+Farigiraf||Hatterene + Indeedee-F": {
+   "lines": null,
+   "pop": 0.5587846850907426,
+   "worst": 0.49020949950912995,
+   "full": [
+    0.5589314587834159,
+    0.49745394102310864
+   ],
+   "reader": [
+    [
+     0.4641060292778835,
+     "Hatterene: Expanding Force -> Sylveon | Indeedee-F: Trick Room"
+    ],
+    [
+     0.46268163590379335,
+     "Hatterene: Expanding Force -> Sylveon | Indeedee-F: Follow Me"
+    ]
+   ],
+   "share": 0.027,
+   "back": [
+    "Indeedee-F",
+    "Kingambit"
+   ],
+   "itemMix": true,
+   "trCredit": -0.7615941559557649,
+   "mix": [
+    [
+     50,
+     "Sylveon: Hyper Beam -> Indeedee-F | Farigiraf: Thunderbolt -> Indeedee-F"
+    ],
+    [
+     35,
+     "Sylveon: Hyper Beam -> Hatterene | Farigiraf: Thunderbolt -> Indeedee-F"
+    ],
+    [
+     15,
+     "Sylveon: Hyper Beam -> Hatterene | Farigiraf: Trick Room"
+    ]
+   ],
+   "pop1": 0.6160680163783774,
+   "worst1": 0.506359175974503
+  },
+  "Rain||Sylveon+Blastoise||Pelipper + Swampert": {
+   "lines": null,
+   "pop": 0.6703608176311933,
+   "worst": 0.6189732503357389,
+   "full": [
+    0.6707131114743133,
+    0.623024402398401
+   ],
+   "reader": [
+    [
+     0.5457444503780711,
+     "Pelipper: Tailwind | Swampert: Wave Crash -> Sylveon"
+    ],
+    [
+     0.2550512320016864,
+     "Pelipper: Tailwind | Swampert: switch"
+    ],
+    [
+     0.19920431762024265,
+     "Pelipper: Tailwind | Swampert: High Horsepower -> Blastoise"
+    ]
+   ],
+   "share": 0.068,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": 0.8435434810964321,
+   "mix": [
+    [
+     100,
+     "Sylveon: Hyper Voice | Blastoise: Fake Out -> Swampert"
+    ]
+   ],
+   "pop1": 0.6703608176311933,
+   "worst1": 0.6189732503357389
+  },
+  "Balance, no speed control||Sylveon+Indeedee-F||Arcanine-Hisui + Raichu": {
+   "lines": null,
+   "pop": 0.7372105706568243,
+   "worst": 0.526856540708809,
+   "full": [
+    0.7299010191766295,
+    0.5326770731191521
+   ],
+   "reader": [
+    [
+     0.6663045734039632,
+     "Arcanine-Hisui: Head Smash -> Indeedee-F | Raichu: Zap Cannon -> Indeedee-F"
+    ],
+    [
+     0.1930164906528698,
+     "Arcanine-Hisui: Flare Blitz -> Sylveon | Raichu: Zap Cannon -> Sylveon"
+    ],
+    [
+     0.140678935943167,
+     "Arcanine-Hisui: Flare Blitz -> Indeedee-F | Raichu: Zap Cannon -> Indeedee-F"
+    ]
+   ],
+   "share": 0.028,
+   "back": [
+    "Farigiraf",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9999605393223057,
+   "mix": [
+    [
+     65,
+     "Sylveon: Hyper Voice | Indeedee-F: Trick Room"
+    ],
+    [
+     35,
+     "Sylveon: Hyper Beam -> Raichu | Indeedee-F: Trick Room"
+    ]
+   ],
+   "pop1": 0.6219839675309591,
+   "worst1": 0.39842662151640196
+  },
+  "Indeedee TR / Psychic Terrain||Sylveon+Kingambit||Hatterene + Indeedee-F": {
+   "lines": null,
+   "pop": 0.6678088158582147,
+   "worst": 0.5954785104393072,
+   "full": [
+    0.6672608115084045,
+    0.5986434304945893
+   ],
+   "reader": [
+    [
+     0.9615921063513764,
+     "Hatterene: Trick Room | Indeedee-F: Follow Me"
+    ]
+   ],
+   "share": 0.027,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": true,
+   "trCredit": -0.7615941559557649,
+   "mix": [
+    [
+     55,
+     "Sylveon: Hyper Voice | Kingambit: Kowtow Cleave -> Indeedee-F"
+    ],
+    [
+     45,
+     "Sylveon: Hyper Beam -> Indeedee-F | Kingambit: Iron Head -> Hatterene"
+    ]
+   ],
+   "pop1": 0.7174882322763246,
+   "worst1": 0.650293428018895
+  },
+  "Balance, no speed control||Sylveon+Farigiraf||Incineroar + Raichu": {
+   "lines": null,
+   "pop": 0.780876368866996,
+   "worst": 0.6258389001578497,
+   "full": [
+    0.776678307058715,
+    0.6314406060169192
+   ],
+   "reader": [
+    [
+     0.5109321311796958,
+     "Incineroar: Flare Blitz -> Sylveon | Raichu: Zap Cannon -> Sylveon"
+    ],
+    [
+     0.4181269944737429,
+     "Incineroar: Throat Chop -> Farigiraf | Raichu: Zap Cannon -> Farigiraf"
+    ]
+   ],
+   "share": 0.029,
+   "back": [
+    "Indeedee-F",
+    "Torkoal"
+   ],
+   "itemMix": false,
+   "trCredit": 0.9995030898363213,
+   "mix": [
+    [
+     80,
+     "Sylveon: Hyper Beam -> Raichu | Farigiraf: Trick Room"
+    ],
+    [
+     20,
+     "Sylveon: Detect | Farigiraf: Trick Room"
+    ]
+   ],
+   "pop1": 0.6786189040125385,
+   "worst1": 0.47760452213904026
+  },
+  "Indeedee TR / Psychic Terrain||Sylveon+Kingambit||Farigiraf + Incineroar": {
+   "lines": null,
+   "pop": 0.6322084058524563,
+   "worst": 0.59239979358533,
+   "full": [
+    0.6374458063620765,
+    0.6013350949919883
+   ],
+   "reader": [
+    [
+     0.5727888661784586,
+     "Farigiraf: Protect | Incineroar: Flare Blitz -> Kingambit"
+    ],
+    [
+     0.3658582176889468,
+     "Farigiraf: Trick Room | Incineroar: Fake Out -> Kingambit"
+    ]
+   ],
+   "share": 0.037,
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "itemMix": false,
+   "trCredit": -0.7944319501654965,
+   "mix": [
+    [
+     40,
+     "Sylveon: Hyper Beam -> Incineroar | Kingambit: Kowtow Cleave -> Farigiraf"
+    ],
+    [
+     35,
+     "Sylveon: switch -> Farigiraf | Kingambit: Kowtow Cleave -> Farigiraf"
+    ],
+    [
+     25,
+     "Sylveon: Hyper Voice | Kingambit: Low Kick -> Incineroar"
+    ]
+   ],
+   "pop1": 0.6917879215416826,
+   "worst1": 0.6030063482373307
+  }
+ }
+}

@@ -1,0 +1,594 @@
+//! Native port of pssim/endgame2.js: the 2v2 planner. Each turn both sides play the equilibrium mix of a one-turn matrix game
+//! (every joint action, each cell played out by the engine and scored by the position value), then the real turn is sampled.
+//! Starting positions and all seeds come from native/eg_starts.js, so a game can be compared move for move with the JS planner.
+//!   champ plan <engine_data.json> <starts.jsonl> <out.jsonl> [threads]
+//! env: EG_VALUE (value weights json, else the hand-set score), EG_AUTOPILOT, GRID_DIR (default ../../mxtr), EG_GAMES_LOG
+use crate::battle::*;
+use crate::dex::*;
+use crate::prng::{Mode, Prng};
+use crate::sim::PChoice;
+use crate::state::*;
+use serde_json::{json, Value};
+use std::collections::BTreeMap;
+
+const MAXTURN: usize = 15;
+const FOE_TARGETS: [&str; 3] = ["normal", "any", "adjacentFoe"];
+const CHOOSABLE: [&str; 5] = ["normal", "any", "adjacentAlly", "adjacentAllyOrSelf", "adjacentFoe"];
+
+pub struct Cfg {
+    /// matchup grid cells ("foe|mine" -> value), with and without Trick Room
+    pub grid_tr: FxMap<String, f64>, pub grid_notr: FxMap<String, f64>, pub gfoes: Vec<String>,
+    pub vw: Option<(f64, Vec<f64>)>, pub autopilot: bool,
+    /// RACE=1 + CALC_DATA=<champions_data.json>: the damage-race features (race_feats) are appended to the position features
+    pub cdata: Option<&'static crate::data::Data>,
+}
+
+pub fn load_cfg(grid_dir: &str) -> Cfg {
+    let gval = |v: &Value| -> f64 {
+        match v["v"].as_str().unwrap_or("") { "roll" => v["roll"].as_f64().unwrap_or(f64::NAN) / 100.0, "counter" => 1.0, "check" => 0.75, "wall" => 0.5, "guess" => 0.5, "lost" => 0.0, _ => 0.5 }
+    };
+    let mut grids = [FxMap::default(), FxMap::default()]; let mut gfoes: Vec<String> = vec![];
+    for (gi, f) in ["gx_cells_tr_inc", "gx_cells_notr_inc"].iter().enumerate() {
+        for suf in ["", "_ext"] {
+            let p = format!("{}/{}{}.json", grid_dir, f, suf);
+            let Ok(t) = std::fs::read_to_string(&p) else { continue };
+            let v: Value = serde_json::from_str(&t).unwrap();
+            for (k, c) in v.as_object().unwrap() {
+                grids[gi].insert(k.clone(), gval(c));
+                if gi == 0 { let foe = k.split('|').next().unwrap().to_string(); if !gfoes.contains(&foe) { gfoes.push(foe); } }
+            }
+        }
+    }
+    let vw = std::env::var("EG_VALUE").ok().map(|p| {
+        let v: Value = serde_json::from_str(&std::fs::read_to_string(&p).expect("EG_VALUE file")).unwrap();
+        (v["b0"].as_f64().unwrap(), v["w"].as_array().unwrap().iter().map(|x| x.as_f64().unwrap()).collect())
+    });
+    let [grid_tr, grid_notr] = grids;
+    let cdata: Option<&'static crate::data::Data> = std::env::var("RACE").ok().map(|_| {
+        let p = std::env::var("CALC_DATA").expect("RACE=1 needs CALC_DATA=<champions_data.json>");
+        &*Box::leak(Box::new(crate::data::Data::load(&p))) });
+    Cfg { grid_tr, grid_notr, gfoes, vw, autopilot: std::env::var("EG_AUTOPILOT").is_ok(), cdata }
+}
+
+fn sp_name(b: &Battle, m: MonRef) -> Id { b.dex.species.get(b.p(m).species).map(|s| s.name).unwrap_or("") }
+fn base_name(b: &Battle, m: MonRef) -> Id { b.dex.species.get(b.p(m).species).map(|s| s.base_name).unwrap_or("") }
+pub(crate) fn alive(b: &Battle, s: u8) -> Vec<MonRef> { (0..b.sides[s as usize].pokemon.len() as u8).map(|i| (s, i)).filter(|m| !b.p(*m).fainted).collect() }
+fn active_alive(b: &Battle, s: u8) -> Vec<(usize, MonRef)> {
+    (0..2).filter_map(|i| b.sides[s as usize].active[i].map(|x| (i, (s, x)))).filter(|(_, m)| !b.p(*m).fainted).collect()
+}
+/// dex.getImmunity(type, types) && getEffectiveness: multiplier of a move type on a pokemon (0 = immune)
+fn type_mult(b: &mut Battle, ty: &str, m: MonRef) -> f64 {
+    let types = b.get_types(m);
+    let mut x = 1.0;
+    for t in &types { if b.dex.immune_type(ty, &[*t]) { return 0.0; } x *= 2f64.powi(b.dex.effectiveness(ty, t) as i32); }
+    x
+}
+
+// ---------------- position value ----------------
+fn prim(b: &Battle, m: MonRef) -> usize {
+    let (mut ph, mut sp) = (0, 0);
+    for s in &b.p(m).move_slots { match b.dex.mv(s.id).tmpl.category { "Physical" => ph += 1, "Special" => sp += 1, _ => {} } }
+    if ph >= sp { 0 } else { 2 }
+}
+fn move_type(b: &Battle, m: MonRef, mid: Id) -> Id {
+    let mv = &b.dex.mv(mid).tmpl;
+    if mid == "weatherball" { return match b.field.weather { "sunnyday" | "desolateland" => "Fire", "raindance" | "primordialsea" => "Water", "sandstorm" => "Rock", "snowscape" | "hail" => "Ice", _ => "Normal" }; }
+    if mid == "terrainpulse" { return match b.field.terrain { "psychicterrain" => "Psychic", "grassyterrain" => "Grass", "electricterrain" => "Electric", "mistyterrain" => "Fairy", _ => "Normal" }; }
+    if mv.mtype == "Normal" { match b.p(m).ability { "pixilate" => return "Fairy", "aerilate" => return "Flying", "refrigerate" => return "Ice", "galvanize" => return "Electric", _ => {} } }
+    mv.mtype
+}
+fn type_edge(b: &mut Battle, att: u8, def: u8) -> f64 {
+    let (a, d) = (alive(b, att), alive(b, def));
+    if a.is_empty() || d.is_empty() { return 0.0; }
+    let mut t = 0.0;
+    for &dm in &d {
+        let dtypes = b.get_types(dm); let lev = b.has_ability(dm, "levitate");
+        let mut best = -2i64;
+        for &am in &a {
+            let slots: Vec<Id> = b.p(am).move_slots.iter().map(|s| s.id).collect();
+            for mid in slots {
+                let mv = &b.dex.mv(mid).tmpl; if mv.category == "Status" || mid == "fakeout" { continue; }
+                let ty = move_type(b, am, mid);
+                if dtypes.iter().any(|t| b.dex.immune_type(ty, &[*t])) || (ty == "Ground" && lev) { continue; }
+                let e: i64 = dtypes.iter().map(|t| b.dex.effectiveness(ty, t)).sum();
+                best = best.max(e.clamp(-2, 2));
+            }
+        }
+        t += best as f64;
+    }
+    t / d.len() as f64
+}
+fn gname(b: &Battle, cfg: &Cfg, m: MonRef) -> Option<String> {
+    let base = base_name(b, m);
+    let alias = match base { "Arcanine-Hisui" => Some("Arcanine-H"), "Floette-Eternal" | "Floette" => Some("M-Floette"), _ => None };
+    if let Some(a) = alias { return Some(a.to_string()); }
+    let has = |x: &str| cfg.gfoes.iter().any(|g| g == x);
+    let mega = cfg.gfoes.iter().find(|g| **g == format!("M-{}", base) || g.starts_with(&format!("M-{} ", base)));
+    if let Some(mg) = mega {
+        let is_mega = b.dex.species.get(b.p(m).species).map(|s| s.is_mega).unwrap_or(false);
+        let iname = b.dex.items.get(b.p(m).item).map(|e| e.name).unwrap_or("").to_lowercase();
+        let stone = iname.ends_with("ite") || iname.ends_with("ite x") || iname.ends_with("ite y") || iname.ends_with("ite z");
+        if is_mega || stone || !has(base) { return Some(mg.clone()); }
+    }
+    if has(base) { Some(base.to_string()) } else { None }
+}
+fn grid_feats(b: &Battle, cfg: &Cfg) -> [f64; 2] {
+    let tr = find(&b.field.pseudo, "trickroom").is_some();
+    let g = if tr { &cfg.grid_tr } else { &cfg.grid_notr };
+    let mine: Vec<String> = alive(b, 0).iter().map(|m| { let n = base_name(b, *m); n.split("-Mega").next().unwrap().to_string() }).collect();
+    let foes: Vec<String> = alive(b, 1).iter().filter_map(|m| gname(b, cfg, *m)).collect();
+    if mine.is_empty() || foes.is_empty() { return [0.0, 0.0]; }
+    let cell = |f: &str, mi: &str| g.get(&format!("{}|{}", f, mi)).copied();
+    let cov = foes.iter().map(|f| mine.iter().map(|mi| cell(f, mi).unwrap_or(0.0)).fold(0.0f64, f64::max)).sum::<f64>() / foes.len() as f64;
+    let exp = mine.iter().map(|mi| foes.iter().map(|f| cell(f, mi).unwrap_or(0.5)).fold(1.0f64, f64::min)).sum::<f64>() / mine.len() as f64;
+    [cov - 0.5, exp - 0.5]
+}
+pub fn feats(b: &mut Battle, cfg: &Cfg) -> Vec<f64> {
+    struct S { hp: f64, n: f64, bst: f64, lock_s: f64, lock_a: f64, spe: f64 }
+    let side = |b: &Battle, s: u8| -> S {
+        let al = alive(b, s);
+        let hp = al.iter().map(|m| b.p(*m).hp as f64 / b.p(*m).maxhp as f64).sum();
+        let mut bst = 0.0; let (mut ls, mut la) = (0.0, 0.0);
+        for (_, m) in active_alive(b, s) {
+            let p = b.p(m);
+            bst += (p.boosts[prim(b, m)].clamp(-3, 3)) as f64 + 0.3 * (p.boosts[4].clamp(-2, 2)) as f64;
+            if let Some(cl) = find(&p.volatiles, "choicelock") { if let Some(mv) = cl.get("move").and_then(|v| v.s()) {
+                if b.dex.moves.get(mv).map(|x| x.tmpl.category == "Status").unwrap_or(false) { ls += 1.0; } else { la += 1.0; } } }
+        }
+        let spe = al.iter().map(|m| b.p(*m).stored[5] as f64).sum::<f64>() / (al.len().max(1)) as f64;
+        S { hp, n: al.len() as f64, bst, lock_s: ls, lock_a: la, spe }
+    };
+    let (a, o) = (side(b, 0), side(b, 1));
+    let tr = find(&b.field.pseudo, "trickroom").and_then(|s| s.duration);
+    let cnt = |b: &Battle, s: u8, v: &str| active_alive(b, s).iter().filter(|(_, m)| find(&b.p(*m).volatiles, v).is_some()).count() as f64;
+    let st = |b: &Battle, s: u8, l: &[&str]| alive(b, s).iter().filter(|m| l.contains(&b.p(**m).status)).count() as f64;
+    let sc = |b: &Battle, s: u8, k: &str| find(&b.sides[s as usize].side_conditions, k).map(|x| x.duration.filter(|d| *d != 0).unwrap_or(1) as f64).unwrap_or(0.0);
+    let tricked = |b: &Battle, s: u8| active_alive(b, s).iter().filter(|(_, m)| b.p(*m).item.starts_with("choice") && !b.p(*m).set_item.starts_with("choice")).count() as f64;
+    let g = grid_feats(b, cfg);
+    let te = type_edge(b, 0, 1) - type_edge(b, 1, 0);
+    let d = |f: &dyn Fn(&Battle, u8) -> f64| f(b, 0) - f(b, 1);
+    let mut v = vec![a.hp - o.hp, a.n - o.n, a.bst - o.bst, tr.map(|t| t as f64 * ((o.spe - a.spe) / 15.0).tanh()).unwrap_or(0.0),
+         a.lock_s - o.lock_s, a.lock_a - o.lock_a, g[0], g[1],
+         d(&|b, s| cnt(b, s, "mustrecharge")), d(&|b, s| cnt(b, s, "stall")), te,
+         d(&|b, s| st(b, s, &["slp", "frz"])), d(&|b, s| st(b, s, &["par"])), d(&|b, s| st(b, s, &["brn", "psn", "tox"])),
+         if tr.is_some() { 0.0 } else { d(&|b, s| sc(b, s, "tailwind")) },
+         d(&|b, s| sc(b, s, "reflect") + sc(b, s, "lightscreen") + sc(b, s, "auroraveil")),
+         d(&|b, s| cnt(b, s, "encore")), d(&|b, s| tricked(b, s))];
+    if let Some(cd) = cfg.cdata { v.extend_from_slice(&race_feats(b, cd)); }
+    v
+}
+/// RACE=1 (champ-battle-v6, 2026-10-04): a short damage race between the Pokemon on the field, so a one-turn search sees what the next
+/// turns hold (a Protect that only delays a KO, a boost or Tailwind that wins the race). Each active Pokemon's options are its usable
+/// damaging moves (Choice lock respected; Fake Out left out) with expected damage from calc.rs at the mid roll x accuracy x expected hits,
+/// spread moves at 3/4 on both foes. For up to RACE_T turns everyone attacks in Speed order (Trick Room and each Tailwind only for the
+/// turns they have left; paralysis already halves Speed and costs 1/8 of the damage; sleep skips turns until it wears off, freeze two),
+/// each picking the option that removes the most foe HP share plus 1 per KO; then burn 1/16, poison 1/8, Leftovers +1/16.
+/// Returns [KO edge, HP edge] for side 0: foe actives KO'd minus mine (a KO on race turn k counts 1/k), and the share of foe active HP
+/// removed minus the share of mine. Bench Pokemon, switching, Protect and priority are left out.
+const RACE_T: usize = 3;
+/// race damage memo (per thread): everything calc.rs reads that can differ between calls in our battles; HP only where it matters
+/// (Eruption / Water Spout for the attacker; Super Fang family / Hard Press, else full-HP Multiscale, for the target). Exact, so games
+/// are identical with and without it (RACE_NOCACHE=1 turns it off for that check).
+#[derive(Hash, PartialEq, Eq)]
+struct DKey { mv: Id, a: (Id, Id, Id, Id), d: (Id, Id, Id, Id), ab: [i64; 5], db: [i64; 5], ast: [i64; 6], dst: [i64; 6], hp_a: (i64, i64), hp_d: (i64, i64),
+              wx: Id, ter: Id, scr: u8, spread: bool }
+fn nocache() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("RACE_NOCACHE").is_ok()) }
+thread_local! { static DCACHE: std::cell::RefCell<FxMap<DKey, Option<i64>>> = std::cell::RefCell::new(FxMap::default()); }
+fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 2] {
+    let act: [Vec<MonRef>; 2] = [active_alive(b, 0).into_iter().map(|x| x.1).collect(), active_alive(b, 1).into_iter().map(|x| x.1).collect()];
+    if act[0].is_empty() || act[1].is_empty() { return [0.0, 0.0]; }
+    let units: Vec<MonRef> = act[0].iter().chain(act[1].iter()).copied().collect();
+    let cmon = |b: &Battle, m: MonRef| { let p = b.p(m); crate::calc::Mon { species: p.species.to_string(), item: p.item.to_string(), ability: p.ability.to_string(),
+        nature: p.nature.to_string(), sp: [0; 6], boosts: [p.boosts[0], p.boosts[1], p.boosts[2], p.boosts[3], p.boosts[4]], hp: p.hp, maxhp: p.maxhp, status: p.status.to_string() } };
+    let screens = |b: &Battle, s: u8| -> Vec<String> { ["reflect", "lightscreen", "auroraveil"].iter().filter(|k| find(&b.sides[s as usize].side_conditions, k).is_some()).map(|k| k.to_string()).collect() };
+    let dur = |e: Option<&EState>| e.map(|x| x.duration.unwrap_or(5)).unwrap_or(0) as usize;
+    let tr_left = dur(find(&b.field.pseudo, "trickroom"));
+    let tw_left = [dur(find(&b.sides[0].side_conditions, "tailwind")), dur(find(&b.sides[1].side_conditions, "tailwind"))];
+    let n = units.len(); let sides: Vec<u8> = units.iter().map(|m| m.0).collect(); let side = |i: usize| sides[i];
+    // options: per unit, a list of expected damage to each unit index (0 for non-targets)
+    let mut opts: Vec<Vec<Vec<f64>>> = vec![vec![]; n];
+    for i in 0..n {
+        let m = units[i]; let s = b.p(m).side; let foes: Vec<usize> = (0..n).filter(|&j| side(j) != s).collect();
+        if !cd.species.contains_key(b.p(m).species) { continue; }
+        let lock = find(&b.p(m).volatiles, "choicelock").and_then(|cl| cl.get("move").and_then(|v| v.s()));
+        let slots: Vec<(Id, i64, bool)> = b.p(m).move_slots.iter().map(|x| (x.id, x.pp, x.disabled)).collect();
+        for (mid, pp, disabled) in slots {
+            if pp <= 0 || disabled || mid == "fakeout" || lock.map(|l| l != mid).unwrap_or(false) || !cd.moves.contains_key(mid) { continue; }
+            let tm = &b.dex.mv(mid).tmpl;
+            if tm.category == "Status" { continue; }
+            let spread = (tm.target == "allAdjacentFoes" || tm.target == "allAdjacent") && foes.len() == 2;
+            let acc = tm.accuracy.map(|a| (a / 100.0).min(1.0)).unwrap_or(1.0);
+            let hits = match tm.multihit { Some((lo, hi)) if lo == hi => lo as f64, Some((_, hi)) => if b.p(m).ability == "skilllink" { hi as f64 } else { 3.1 }, None => 1.0 };
+            let mut row = |tgts: &[usize]| -> Vec<f64> {
+                let mut out = vec![0.0; n];
+                for &j in tgts {
+                    if !cd.species.contains_key(b.p(units[j]).species) { continue; }
+                    let (pa, pd) = (b.p(units[i]), b.p(units[j]));
+                    let scr = screens(b, side(j));
+                    let hp_a = if mid == "eruption" || mid == "waterspout" { (pa.hp, pa.maxhp) } else { (0, 0) };
+                    let hp_d = if ["hardpress", "superfang", "ruination"].contains(&mid) { (pd.hp, pd.maxhp) } else { ((pd.hp >= pd.maxhp) as i64, 0) };
+                    let key = DKey { mv: mid, a: (pa.species, pa.item, pa.ability, pa.status), d: (pd.species, pd.item, pd.ability, pd.status),
+                        ab: [pa.boosts[0], pa.boosts[1], pa.boosts[2], pa.boosts[3], pa.boosts[4]], db: [pd.boosts[0], pd.boosts[1], pd.boosts[2], pd.boosts[3], pd.boosts[4]],
+                        ast: pa.stored, dst: pd.stored, hp_a, hp_d, wx: b.field.weather, ter: b.field.terrain,
+                        scr: scr.iter().fold(0u8, |m, x| m | match x.as_str() { "reflect" => 1, "lightscreen" => 2, _ => 4 }), spread };
+                    let dmg = DCACHE.with(|c| {
+                        if nocache() { c.borrow_mut().clear(); }
+                        if let Some(v) = c.borrow().get(&key) { return *v; }
+                        let f = crate::calc::Field { weather: b.field.weather.to_string(), terrain: b.field.terrain.to_string(), screens: scr.clone(), spread, helping: false };
+                        let v = crate::calc::damage(cd, &cmon(b, units[i]), &cmon(b, units[j]), mid, &f, 7, false, &pa.stored, &pd.stored);
+                        let mut m = c.borrow_mut(); if m.len() > 2_000_000 { m.clear(); } m.insert(key, v); v });
+                    if let Some(dmg) = dmg { out[j] = dmg as f64 * acc * hits; }
+                }
+                out };
+            if spread { let r = row(&foes); opts[i].push(r); } else { for &j in &foes { let r = row(&[j]); opts[i].push(r); } }
+        }
+    }
+    let spe: Vec<f64> = (0..n).map(|i| b.get_stat(units[i], 5, false, false) as f64).collect();
+    let mut hp: Vec<f64> = (0..n).map(|i| b.p(units[i]).hp as f64).collect(); let hp0 = hp.clone();
+    let maxhp: Vec<f64> = (0..n).map(|i| b.p(units[i]).maxhp.max(1) as f64).collect();
+    let status: Vec<Id> = (0..n).map(|i| b.p(units[i]).status).collect();
+    let wake: Vec<usize> = (0..n).map(|i| match status[i] { "slp" => b.p(units[i]).status_state.n("time").map(|t| t.max(1.0) as usize).unwrap_or(2), "frz" => 3, _ => 1 }).collect();
+    let lefties: Vec<bool> = (0..n).map(|i| b.p(units[i]).item == "leftovers").collect();
+    let mut ko = [0.0f64; 2];
+    for k in 1..=RACE_T {
+        let tr_on = k <= tr_left;
+        let eff_spe = |i: usize| { let s = side(i) as usize; let x = if tw_left[s] > 0 && k > tw_left[s] { spe[i] / 2.0 } else { spe[i] }; if tr_on { -x } else { x } };
+        let mut order: Vec<usize> = (0..n).filter(|&i| hp[i] > 0.0).collect();
+        order.sort_by(|&x, &y| eff_spe(y).partial_cmp(&eff_spe(x)).unwrap());
+        for &i in &order {
+            if hp[i] <= 0.0 || k < wake[i] || opts[i].is_empty() { continue; }
+            let pf = if status[i] == "par" { 0.875 } else { 1.0 };
+            let score = |o: &Vec<f64>| (0..n).filter(|&j| hp[j] > 0.0 && o[j] > 0.0).map(|j| (o[j] * pf).min(hp[j]) / maxhp[j] + if o[j] * pf >= hp[j] { 1.0 } else { 0.0 }).sum::<f64>();
+            let best = opts[i].iter().max_by(|x, y| score(x).partial_cmp(&score(y)).unwrap()).unwrap().clone();
+            for j in 0..n {
+                if hp[j] > 0.0 && best[j] > 0.0 { hp[j] -= best[j] * pf; if hp[j] <= 0.0 { ko[side(j) as usize] += 1.0 / k as f64; } }
+            }
+        }
+        for i in 0..n {
+            if hp[i] <= 0.0 { continue; }
+            let chip = match status[i] { "brn" => maxhp[i] / 16.0, "psn" | "tox" => maxhp[i] / 8.0, _ => 0.0 };
+            hp[i] = (hp[i] - chip + if lefties[i] { maxhp[i] / 16.0 } else { 0.0 }).min(maxhp[i]);
+            if hp[i] <= 0.0 { ko[side(i) as usize] += 1.0 / k as f64; }
+        }
+        if (0..n).filter(|&i| side(i) == 0).all(|i| hp[i] <= 0.0) || (0..n).filter(|&i| side(i) == 1).all(|i| hp[i] <= 0.0) { break; }
+    }
+    let lost = |s: u8| (0..n).filter(|&i| side(i) == s).map(|i| (hp0[i] - hp[i].max(0.0)) / maxhp[i]).sum::<f64>();
+    if std::env::var("RACE_DEBUG").is_ok() {                   // first few calls only: units, best hit % on each foe, Speed, outcome
+        static CNT: std::sync::atomic::AtomicUsize = std::sync::atomic::AtomicUsize::new(0);
+        if CNT.fetch_add(1, std::sync::atomic::Ordering::Relaxed) < 6 {
+            let mut lines = vec![format!("race: TR {} turns, Tailwind {:?}", tr_left, tw_left)];
+            for i in 0..n {
+                let best: Vec<String> = (0..n).filter(|&j| side(j) != side(i)).map(|j| format!("{} {:.0}%", b.p(units[j]).species,
+                    100.0 * opts[i].iter().map(|o| o[j]).fold(0.0, f64::max) / maxhp[j])).collect();
+                lines.push(format!("  s{} {} hp {:.0}% spe {} -> {} | end hp {:.0}%", side(i), b.p(units[i]).species, 100.0 * hp0[i] / maxhp[i], spe[i], best.join(", "), 100.0 * hp[i].max(0.0) / maxhp[i]));
+            }
+            lines.push(format!("  KO edge {:+.2}, HP edge {:+.2}", ko[1] - ko[0], lost(1) - lost(0)));
+            eprintln!("{}", lines.join("\n"));
+        }
+    }
+    [ko[1] - ko[0], lost(1) - lost(0)]
+}
+fn perish_adj(b: &Battle, w: &[f64]) -> f64 {
+    let al = [alive(b, 0), alive(b, 1)];
+    let t = |m: &MonRef| find(&b.p(*m).volatiles, "perishsong").and_then(|s| s.duration);
+    if al[0].is_empty() || al[1].is_empty() { return 0.0; }
+    if al.iter().all(|l| l.iter().all(|m| t(m).is_some())) {
+        let tmax: Vec<i64> = al.iter().map(|l| l.iter().map(|m| t(m).unwrap()).max().unwrap()).collect();
+        if tmax[0] != tmax[1] { return if tmax[0] > tmax[1] { 3.0 } else { -3.0 }; }
+        let tr_then = find(&b.field.pseudo, "trickroom").and_then(|s| s.duration).map(|d| d >= tmax[0]).unwrap_or(false);
+        let mut last: Vec<(u8, i64)> = vec![];
+        for k in 0..2 { for m in &al[k] { if t(m) == Some(tmax[k]) { last.push((k as u8, b.p(*m).stored[5])); } } }
+        last.sort_by(|a, c| if tr_then { a.1.cmp(&c.1) } else { c.1.cmp(&a.1) });   // stable, like JS sort
+        return if last.last().unwrap().0 == 0 { 3.0 } else { -3.0 };
+    }
+    let mut z = 0.0;
+    for (k, l) in al.iter().enumerate() { for m in l { if let Some(tt) = t(m) {
+        z += (if k == 0 { -1.0 } else { 1.0 }) * 0.8 * (w[0] * b.p(*m).hp as f64 / b.p(*m).maxhp as f64 + w[1]) / (tt.max(1) as f64);
+    } } }
+    z
+}
+pub fn value(b: &mut Battle, cfg: &Cfg) -> f64 {
+    if b.ended { return match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 }; }
+    let f = feats(b, cfg);
+    match &cfg.vw {
+        Some((b0, w)) => { let mut z = *b0; for k in 0..w.len().min(f.len()) { z += w[k] * f[k]; } z += perish_adj(b, w); 1.0 / (1.0 + (-z).exp()) }
+        None => { let x = f[0] + 0.3 * f[2] + 0.08 * f[3] - 0.5 * f[4] - 0.1 * f[5]; (0.5 + 0.25 * x).clamp(0.0, 1.0) }
+    }
+}
+
+// ---------------- options ----------------
+/// EG_NO_DOUBLE_PROTECT=0 | 1 | both (experiment, 2026-10-04): that side never clicks a Protect-family move while the stall counter from
+/// last turn's successful Protect is up (no second Protect in a row). Unset: no change.
+fn no_double_protect(s: u8) -> bool {
+    static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new();
+    F.get_or_init(|| match std::env::var("EG_NO_DOUBLE_PROTECT").as_deref() {
+        Ok("0") => [true, false], Ok("1") => [false, true], Ok("both") => [true, true], _ => [false, false] })[s as usize]
+}
+pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
+    let Some(pi) = b.sides[s as usize].active[i] else { return vec![PChoice::Pass] };
+    let m = (s, pi);
+    if b.p(m).fainted { return vec![PChoice::Pass]; }
+    let req = b.request_moves(m);
+    let locked = b.get_locked_move(m).is_some();
+    let mega = !locked && b.p(m).can_mega_evo.is_some();
+    let mut out = vec![];
+    let foes: Vec<Option<MonRef>> = (0..2).map(|t| b.sides[1 - s as usize].active[t].map(|x| (1 - s, x))).collect();
+    for (k, (mid, _, disabled)) in req.iter().enumerate() {
+        if *disabled || *mid == "healingwish" || *mid == "memento" { continue; }
+        if *mid == "fakeout" && b.p(m).active_move_actions > 0 { continue; }
+        if b.p(m).item.starts_with("choice") && (*mid == "protect" || *mid == "detect") { continue; }
+        if *mid == "trickroom" && find(&b.field.pseudo, "trickroom").is_some() && s == 0 { continue; }
+        let mv = b.dex.mv(mid).tmpl.clone();
+        if mv.stalling_move && no_double_protect(s) && find(&b.p(m).volatiles, "stall").is_some() { continue; }
+        if FOE_TARGETS.contains(&mv.target) {
+            for (t, f) in foes.iter().enumerate() {
+                let Some(f) = f else { continue }; if b.p(*f).fainted { continue; }
+                if mv.category != "Status" && type_mult(b, mv.mtype, *f) == 0.0 && *mid != "weatherball" && *mid != "terrainpulse" { continue; }
+                out.push(PChoice::Move(k, t as i64 + 1, mega));
+            }
+        } else if mv.target == "adjacentAlly" {
+            if let Some(a) = b.sides[s as usize].active[1 - i] { if !b.p((s, a)).fainted { out.push(PChoice::Move(k, if i == 0 { -2 } else { -1 }, mega)); } }
+        } else { out.push(PChoice::Move(k, 0, mega)); }
+    }
+    if out.is_empty() { vec![PChoice::Move(0, 0, false)] } else { out }
+}
+/// DP2 (champ-battle-v8): the small option set for the second turn of the two-turn Protect check: the Pokemon's Protect (if it has one)
+/// and its three strongest damaging options by base power x STAB x type effectiveness x accuracy (spread moves x 0.75 on each foe);
+/// Mega Evolution taken whenever it is available. No switches or status moves.
+pub(crate) fn reduced_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
+    let all = slot_options(b, s, i);
+    let Some(pi) = b.sides[s as usize].active[i] else { return all };
+    let m = (s, pi);
+    if b.p(m).fainted { return all; }
+    let has_mega = all.iter().any(|c| matches!(c, PChoice::Move(_, _, true)));
+    let foes: Vec<Option<MonRef>> = (0..2).map(|t| b.sides[1 - s as usize].active[t].map(|x| (1 - s, x))).collect();
+    let types = b.get_types(m);
+    let (mut prot, mut dmg): (Option<PChoice>, Vec<(f64, PChoice)>) = (None, vec![]);
+    for c in &all {
+        let PChoice::Move(k, t, mega) = *c else { continue };
+        if has_mega && !mega { continue; }
+        let mid = b.p(m).move_slots[k].id; let mv = b.dex.mv(mid).tmpl.clone();
+        if mv.stalling_move { if prot.is_none() { prot = Some(*c); } continue; }
+        if mv.category == "Status" || mv.base_power <= 0.0 { continue; }
+        let ty = move_type(b, m, mid); let stab = if types.contains(&ty) { 1.5 } else { 1.0 };
+        let acc = mv.accuracy.map(|a| (a / 100.0).min(1.0)).unwrap_or(1.0);
+        let eff = if t >= 1 { match foes[(t - 1) as usize] { Some(f) if !b.p(f).fainted => type_mult(b, ty, f), _ => 0.0 } }
+                  else { let fs: Vec<MonRef> = foes.iter().flatten().copied().filter(|f| !b.p(*f).fainted).collect(); fs.iter().map(|f| 0.75 * type_mult(b, ty, *f)).sum() };
+        dmg.push((mv.base_power * stab * eff * acc, *c));
+    }
+    dmg.sort_by(|a, c| c.0.partial_cmp(&a.0).unwrap());
+    let mut out: Vec<PChoice> = dmg.into_iter().take(3).map(|x| x.1).collect();
+    if let Some(p) = prot { out.push(p); }
+    if out.is_empty() { all } else { out }
+}
+fn joint_options(b: &mut Battle, s: u8) -> Vec<[PChoice; 2]> {
+    let (a, c) = (slot_options(b, s, 0), slot_options(b, s, 1));
+    let mut out = vec![];
+    for x in &a { for y in &c {
+        let y2 = match (x, y) { (PChoice::Move(_, _, true), PChoice::Move(k, t, true)) => PChoice::Move(*k, *t, false), _ => *y };
+        out.push([*x, y2]);
+    } }
+    out
+}
+/// would Showdown's side.choose accept this? (chooseMove's checks for the parts our options can get wrong)
+pub(crate) fn valid(b: &mut Battle, s: u8, ch: &[PChoice; 2]) -> bool {
+    for i in 0..2 {
+        let Some(pi) = b.sides[s as usize].active[i] else { continue };
+        let m = (s, pi);
+        match ch[i] {
+            PChoice::Pass => { if !b.p(m).fainted { return false; } }
+            // a voluntary switch (only spot.rs offers these): to a living Pokemon on the bench
+            PChoice::Switch(pos) => { if b.p(m).fainted || b.mon_at_position(s, pos).map(|t| b.p(t).fainted || b.p(t).position < 2).unwrap_or(true) { return false; } }
+            PChoice::Move(k, t, mega) => {
+                if b.p(m).fainted { continue; }
+                let req = b.request_moves(m);
+                if k >= req.len() { return false; }
+                let tt = req[k].1;
+                if CHOOSABLE.contains(&tt) { if t == 0 || !b.valid_target_loc(t, m, tt) { return false; } } else if t != 0 { return false; }
+                let locked = b.get_locked_move(m).is_some();
+                let any_valid = b.p(m).move_slots.iter().any(|s| !(s.disabled || s.pp <= 0));
+                if !locked && any_valid && b.p(m).move_slots.iter().find(|s| s.id == req[k].0).map(|s| s.disabled || s.pp <= 0).unwrap_or(true) { return false; }
+                if mega && (b.p(m).can_mega_evo.is_none() || locked) { return false; }
+            }
+        }
+    }
+    true
+}
+
+// ---------------- matrix game ----------------
+pub fn nash(a: &[Vec<f64>], iters: usize) -> (Vec<f64>, Vec<f64>) {
+    let (m, n) = (a.len(), a[0].len());
+    let (mut rr, mut rc, mut sr, mut sc) = (vec![0.0; m], vec![0.0; n], vec![0.0; m], vec![0.0; n]);
+    let norm = |r: &[f64]| -> Vec<f64> { let mut p: Vec<f64> = r.iter().map(|x| x.max(0.0)).collect(); let t: f64 = { let mut t = 0.0; for x in &p { t += x; } t };
+        if t <= 0.0 { p.iter_mut().for_each(|x| *x = 1.0 / r.len() as f64); } else { p.iter_mut().for_each(|x| *x /= t); } p };
+    for _ in 0..iters {
+        let (x, y) = (norm(&rr), norm(&rc));
+        let mut ur = vec![0.0; m]; let mut uc = vec![0.0; n]; let mut v = 0.0;
+        for i in 0..m { let mut s = 0.0; for j in 0..n { s += a[i][j] * y[j]; } ur[i] = s; v += x[i] * s; }
+        for j in 0..n { let mut s = 0.0; for i in 0..m { s += a[i][j] * x[i]; } uc[j] = -s; }
+        for i in 0..m { rr[i] = (rr[i] + ur[i] - v).max(0.0); sr[i] += x[i]; }
+        for j in 0..n { rc[j] = (rc[j] + uc[j] + v).max(0.0); sc[j] += y[j]; }
+    }
+    let ts: f64 = sr.iter().fold(0.0, |a, b| a + b); let tc: f64 = sc.iter().fold(0.0, |a, b| a + b);
+    (sr.iter().map(|v| v / ts).collect(), sc.iter().map(|v| v / tc).collect())
+}
+pub(crate) fn sample(p: &[f64], rng: &mut f64) -> usize {
+    *rng = (*rng * 1103515245.0 + 12345.0) % 2147483648.0;
+    let mut r = *rng / 2147483648.0; let mut k = 0;
+    while k < p.len() - 1 { r -= p[k]; if r <= 0.0 { break; } k += 1; }
+    k
+}
+
+// ---------------- autopilot (my side) ----------------
+fn auto_choice(b: &mut Battle, s: u8) -> [PChoice; 2] {
+    let mut parts = [PChoice::Pass; 2]; let mut mega_used = false;
+    for i in 0..2 {
+        let Some(pi) = b.sides[s as usize].active[i] else { continue };
+        let m = (s, pi); if b.p(m).fainted { continue; }
+        let locked = b.get_locked_move(m).is_some();
+        let mega = !locked && b.p(m).can_mega_evo.is_some() && !mega_used; if mega { mega_used = true; }
+        let moves: Vec<(usize, Id)> = b.request_moves(m).into_iter().enumerate().filter(|(_, x)| !x.2).map(|(k, x)| (k, x.0)).collect();
+        let foes: Vec<(i64, MonRef)> = (0..2).filter_map(|t| b.sides[1 - s as usize].active[t].map(|x| (t as i64 + 1, (1 - s, x)))).filter(|(_, f)| !b.p(*f).fainted).collect();
+        let ally = b.sides[s as usize].active[1 - i].map(|x| (s, x));
+        let ally_up = ally.map(|a| !b.p(a).fainted && b.p(a).move_slots.iter().any(|sl| b.dex.mv(sl.id).tmpl.category != "Status")).unwrap_or(false);
+        let has = |id_: &str| moves.iter().find(|x| x.1 == id_).map(|x| x.0);
+        let eff = |b: &mut Battle, ty: &str, f: MonRef| -> f64 { if ty == "Ground" && b.has_ability(f, "levitate") { return 0.0; } type_mult(b, ty, f) };
+        let tr_down = find(&b.field.pseudo, "trickroom").is_none();
+        let mut c: Option<PChoice> = None;
+        if tr_down && has("trickroom").is_some() { c = Some(PChoice::Move(has("trickroom").unwrap(), 0, mega)); }
+        else if has("fakeout").is_some() && b.p(m).active_move_actions == 0 && { let mut any = false; for (_, f) in &foes { if eff(b, "Normal", *f) > 0.0 { any = true; } } any } {
+            let mut cands: Vec<(i64, MonRef, i64)> = vec![];
+            for (t, f) in &foes { if eff(b, "Normal", *f) > 0.0 {
+                // getStat(stat, false, true): stages, no modifiers. EG_FAKEOUT_FULLSTAT=1 reproduces the old JS (full getStat; crashes vs Torrent/Blaze)
+                let st = if std::env::var("EG_FAKEOUT_FULLSTAT").is_ok() { b.get_stat(*f, 1, false, false).max(b.get_stat(*f, 3, false, false)) }
+                         else { b.get_stat_simple(*f, 1, false, true).max(b.get_stat_simple(*f, 3, false, true)) };
+                cands.push((*t, *f, st)); } }
+            cands.sort_by(|a, d| d.2.cmp(&a.2));   // stable
+            c = Some(PChoice::Move(has("fakeout").unwrap(), cands[0].0, mega));
+        } else if has("helpinghand").is_some() && ally_up { c = Some(PChoice::Move(has("helpinghand").unwrap(), if i == 0 { -2 } else { -1 }, mega)); }
+        else {
+            let mut best: Option<(f64, PChoice)> = None;
+            let wx_tbl = |w: &str, ty: &str| -> f64 { match (w, ty) { ("sunnyday", "Fire") | ("desolateland", "Fire") | ("raindance", "Water") | ("primordialsea", "Water") => 1.5,
+                ("sunnyday", "Water") | ("raindance", "Fire") => 0.5, ("desolateland", "Water") | ("primordialsea", "Fire") => 0.0, _ => 1.0 } };
+            for (k, mid) in moves.clone() {
+                let mv = b.dex.mv(mid).tmpl.clone();
+                if mv.category == "Status" || mid == "fakeout" || mid == "suckerpunch" { continue; }
+                let mut bp = if mv.base_power != 0.0 { mv.base_power } else { 60.0 };
+                let ty = move_type(b, m, mid);
+                let p = b.p(m); let frac = p.hp as f64 / p.maxhp as f64;
+                if mid == "eruption" || mid == "waterspout" { if frac < 0.5 { continue; } bp = 150.0 * p.hp as f64 / p.maxhp as f64; }
+                if mid == "weatherball" && ["sunnyday", "desolateland", "raindance", "primordialsea", "sandstorm", "snowscape", "hail"].contains(&b.field.weather) { bp = 100.0; }
+                let stab = if b.get_types(m).contains(&ty) { 1.5 } else { 1.0 };
+                let wx = wx_tbl(b.field.weather, ty);
+                if mv.target == "allAdjacentFoes" || mv.target == "allAdjacent" {
+                    let mut v = 0.0; let nf = foes.len();
+                    for (_, f) in &foes { v += bp * stab * wx * eff(b, ty, *f) * (if nf > 1 { 0.75 } else { 1.0 }); }
+                    if v > 0.0 && best.as_ref().map(|x| v > x.0).unwrap_or(true) { best = Some((v, PChoice::Move(k, 0, mega))); }
+                } else if FOE_TARGETS.contains(&mv.target) {
+                    for (t, f) in &foes {
+                        let fp = b.p(*f); let hpf = fp.hp as f64 / fp.maxhp as f64;
+                        let v = bp * stab * wx * eff(b, ty, *f) * (1.2 - 0.2 * hpf);
+                        if v > 0.0 && best.as_ref().map(|x| v > x.0).unwrap_or(true) { best = Some((v, PChoice::Move(k, *t, mega))); }
+                    }
+                }
+            }
+            c = Some(best.map(|x| x.1).unwrap_or(PChoice::Move(moves.first().map(|x| x.0).unwrap_or(0), 0, mega)));
+        }
+        parts[i] = c.unwrap();
+    }
+    parts
+}
+
+// ---------------- games ----------------
+pub struct GameOut { pub v: f64, pub turns: usize, pub auto_miss: usize, pub unsupported: Vec<String>, pub log: Vec<String> }
+
+fn solve_turn(b: &Battle, cfg: &Cfg, cseeds: &[[u16; 4]]) -> (Vec<[PChoice; 2]>, Vec<[PChoice; 2]>, Vec<Vec<f64>>, Vec<String>) {
+    let mut b0 = b.clone();
+    let mine: Vec<[PChoice; 2]> = joint_options(&mut b0, 0).into_iter().filter(|c| valid(&mut b0, 0, c)).collect();
+    let theirs: Vec<[PChoice; 2]> = joint_options(&mut b0, 1).into_iter().filter(|c| valid(&mut b0, 1, c)).collect();
+    let mut a = vec![vec![0.0; theirs.len()]; mine.len()]; let mut uns = vec![];
+    for i in 0..mine.len() { for j in 0..theirs.len() {
+        let mut s = 0.0;
+        for cs in cseeds {
+            let mut c = b.clone(); c.prng = Prng::gen5(*cs);
+            c.run_turn([mine[i], theirs[j]]);
+            for u in &c.unsupported { if !uns.contains(u) { uns.push(u.clone()); } }
+            s += value(&mut c, cfg);
+        }
+        a[i][j] = s / cseeds.len() as f64;
+    } }
+    (mine, theirs, a, uns)
+}
+pub fn play_game(start: &Battle, cfg: &Cfg, rng0: f64, cseeds: &[Vec<[u16; 4]>]) -> GameOut {
+    let mut b = start.clone();
+    let mut rng = rng0; let mut turn = 1; let mut auto_miss = 0; let mut uns: Vec<String> = vec![]; let mut log = vec![];
+    while !b.ended && turn <= MAXTURN {
+        let (r, c, m, u) = solve_turn(&b, cfg, &cseeds[turn - 1]);
+        for x in u { if !uns.contains(&x) { uns.push(x); } }
+        if r.is_empty() || c.is_empty() {
+            // nothing the engine accepts on one side: Showdown's autoChoose for both sides (first usable move, default target)
+            let auto = |b: &mut Battle, s: u8| -> [PChoice; 2] { std::array::from_fn(|i| {
+                let Some(pi) = b.sides[s as usize].active[i] else { return PChoice::Pass };
+                if b.p((s, pi)).fainted { return PChoice::Pass; }
+                let req = b.request_moves((s, pi));
+                PChoice::Move(req.iter().position(|x| !x.2).unwrap_or(0), 0, false) }) };
+            let ch = [auto(&mut b, 0), auto(&mut b, 1)];
+            log.push(format!("T{} (engine default choices)", turn));
+            b.run_turn(ch);
+            for x in &b.unsupported { if !uns.contains(x) { uns.push(x.clone()); } }
+            turn += 1; continue;
+        }
+        let (x, y) = nash(&m, 400);
+        let mut i = sample(&x, &mut rng); let j = sample(&y, &mut rng);
+        if cfg.autopilot { let ac = auto_choice(&mut b, 0); match r.iter().position(|o| *o == ac) { Some(a) => i = a, None => auto_miss += 1 } }
+        log.push(format!("T{} {:?} || {:?}  [{}x{}]", turn, r[i], c[j], r.len(), c.len()));
+        b.run_turn([r[i], c[j]]);
+        for x in &b.unsupported { if !uns.contains(x) { uns.push(x.clone()); } }
+        turn += 1;
+    }
+    GameOut { v: value(&mut b, cfg), turns: turn - 1, auto_miss, unsupported: uns, log }
+}
+
+/// one job's games -> the JS workers' result shape ({arch, mine, theirs, w, K, games, fails, v, vs, turns, autoMiss, ms, job})
+fn job_row(job: i64, mut gs: Vec<Value>) -> Value {
+    gs.sort_by_key(|g| g["g"].as_i64().unwrap());
+    let ok: Vec<&Value> = gs.iter().filter(|g| !g["v"].is_null()).collect();
+    let vs: Vec<f64> = ok.iter().map(|g| g["v"].as_f64().unwrap()).collect();
+    let mean = if vs.is_empty() { Value::Null } else { json!(vs.iter().sum::<f64>() / vs.len() as f64) };
+    let mut uns: Vec<String> = gs.iter().flat_map(|g| g["unsupported"].as_array().cloned().unwrap_or_default()).filter_map(|x| x.as_str().map(|s| s.to_string())).collect();
+    uns.sort(); uns.dedup();
+    let mut row = json!({"job": job, "K": gs[0]["K"], "games": vs.len(), "fails": gs.len() - vs.len(), "v": mean, "vs": vs,
+        "turns": ok.iter().map(|g| g["turns"].clone()).collect::<Vec<_>>(), "autoMiss": ok.iter().map(|g| g["autoMiss"].as_i64().unwrap_or(0)).sum::<i64>(),
+        "unsupported": uns, "ms": gs.iter().map(|g| g["ms"].as_i64().unwrap_or(0)).sum::<i64>(), "engine": "native"});
+    if let Some(m) = gs[0]["meta"].as_object() { for (k, v) in m { row[k] = v.clone(); } }
+    if gs.iter().any(|g| !g["log"].is_null()) { row["logs"] = json!(gs.iter().map(|g| g["log"].clone()).collect::<Vec<_>>()); }
+    let errs: Vec<Value> = gs.iter().filter_map(|g| g.get("error").cloned()).collect();
+    if !errs.is_empty() { row["errors"] = json!(errs); }
+    row
+}
+pub fn main(args: &[String]) {
+    let (dex, reg) = crate::turntest::load_all(&args[0]);
+    let cfg: &'static Cfg = Box::leak(Box::new(load_cfg(&std::env::var("GRID_DIR").unwrap_or("../../mxtr".into()))));
+    let threads: usize = args.get(3).and_then(|x| x.parse().ok()).unwrap_or(1);
+    let lines: Vec<String> = std::fs::read_to_string(&args[1]).unwrap().lines().map(|s| s.to_string()).collect();
+    let next = std::sync::atomic::AtomicUsize::new(0);
+    let results = std::sync::Mutex::new(vec![]);
+    let outdir = std::path::Path::new(&args[2]).is_dir().then(|| args[2].clone());
+    let mut expect: BTreeMap<i64, usize> = BTreeMap::new();
+    for l in &lines { let v: Value = serde_json::from_str(l).unwrap(); *expect.entry(v["job"].as_i64().unwrap()).or_default() += 1; }
+    let pending: std::sync::Mutex<BTreeMap<i64, Vec<Value>>> = std::sync::Mutex::new(BTreeMap::new());
+    let t0 = std::time::Instant::now();
+    std::thread::scope(|sc| {
+        for _ in 0..threads { sc.spawn(|| loop {
+            let k = next.fetch_add(1, std::sync::atomic::Ordering::SeqCst); if k >= lines.len() { break; }
+            let st: Value = serde_json::from_str(&lines[k]).unwrap();
+            let b = crate::turntest::new_battle(dex, reg, &st["state"], Mode::Real);
+            let cseeds: Vec<Vec<[u16; 4]>> = st["cseeds"].as_array().unwrap().iter().map(|t| t.as_array().unwrap().iter().map(|s| std::array::from_fn(|i| s[i].as_u64().unwrap() as u16)).collect()).collect();
+            let tg = std::time::Instant::now();
+            let r = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| play_game(&b, cfg, st["rng"].as_f64().unwrap(), &cseeds)));
+            let ms = tg.elapsed().as_millis();
+            let row = match r {
+                Ok(g) => json!({"job": st["job"], "g": st["g"], "K": st["K"], "meta": st["meta"], "v": g.v, "turns": g.turns, "autoMiss": g.auto_miss, "unsupported": g.unsupported, "ms": ms,
+                                "log": if std::env::var("EG_GAMES_LOG").is_ok() { json!(g.log) } else { Value::Null }}),
+                Err(e) => { let msg = e.downcast_ref::<String>().cloned().or(e.downcast_ref::<&str>().map(|s| s.to_string())).unwrap_or_default();
+                    json!({"job": st["job"], "g": st["g"], "K": st["K"], "meta": st["meta"], "v": Value::Null, "fail": true, "error": msg, "ms": ms}) }
+            };
+            eprintln!("job {} game {}: {} ({} ms)", st["job"], st["g"], row["v"], ms);
+            if let Some(dir) = &outdir {
+                let job = row["job"].as_i64().unwrap();
+                let done = { let mut pd = pending.lock().unwrap(); let e = pd.entry(job).or_default(); e.push(row.clone()); (e.len() == expect[&job]).then(|| pd.remove(&job).unwrap()) };
+                if let Some(gs) = done { std::fs::write(format!("{}/{}.json", dir, job), job_row(job, gs).to_string()).unwrap(); }
+            }
+            results.lock().unwrap().push(row);
+        }); }
+    });
+    // one row per job: a directory gets <job>.json files (written as each job completes, see below); otherwise one JSONL file
+    let rows = results.into_inner().unwrap();
+    if !std::path::Path::new(&args[2]).is_dir() {
+        let mut by: BTreeMap<i64, Vec<Value>> = BTreeMap::new();
+        for r in rows { by.entry(r["job"].as_i64().unwrap()).or_default().push(r); }
+        let out: String = by.into_iter().map(|(job, gs)| format!("{}\n", job_row(job, gs))).collect();
+        std::fs::write(&args[2], out).unwrap();
+    }
+    eprintln!("{} games in {:?}", lines.len(), t0.elapsed());
+}

@@ -1,0 +1,52 @@
+{
+ "b0": -0.16646656571224902,
+ "w": [
+  2.609969898812022,
+  1.1254020865539585,
+  0.5814165047601392,
+  0.16464839328156683,
+  -0.9,
+  -0.1,
+  1.8005815424620355,
+  0.7978099425702445,
+  -0.9045199716990324,
+  -0.5999062946979767,
+  0.755531374212953,
+  -1.2498648067624163,
+  -0.8925332218962506,
+  -0.7277694618806747,
+  0.15,
+  0.21129845219081023,
+  -0.5,
+  -0.3
+ ],
+ "names": [
+  "HP share (Pokemon)",
+  "Pokemon alive",
+  "attack stages",
+  "TR turns x speed edge",
+  "locked into status",
+  "locked into attack",
+  "grid coverage",
+  "grid exposure",
+  "must recharge",
+  "Protected last turn",
+  "type edge",
+  "asleep/frozen",
+  "paralysed",
+  "burned/poisoned",
+  "Tailwind turns (no TR)",
+  "screen turns",
+  "Encored",
+  "holding a Tricked Choice item"
+ ],
+ "n": 7347,
+ "hand_set": {
+  "locked into status": -0.9,
+  "locked into attack": -0.1,
+  "Tailwind turns (no TR)": 0.15,
+  "Encored": -0.5,
+  "holding a Tricked Choice item": -0.3
+ },
+ "note": "Fitted on results/eg_feat3 (7,347 positions). Hand-set where the data was thin or confounded: Encored and Choice-locked-into-attack came out backwards (Encore landed on good moves; Scarf users lock by attacking), Tailwind was too rarely used (replay model: ~0.47 per Tailwind), locked-into-status and Tricked-item never occurred. Perish Song terms are hand-set in endgame2.js (perishAdj)."
+}

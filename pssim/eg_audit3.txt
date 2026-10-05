@@ -1,0 +1,208 @@
+side  Pokemon          move                offered mix share  played
+you   Blastoise        Aura Sphere            2100     28.2%     575
+you   Blastoise        Dark Pulse             2124     31.4%     647
+you   Blastoise        Fake Out                544     32.4%     254
+you   Blastoise        Water Spout            2125     32.5%     650
+you   Farigiraf        Protect                3055     28.5%     856
+you   Farigiraf        Psychic                2929     33.9%    1017
+you   Farigiraf        Thunderbolt            2972     28.1%     800
+you   Farigiraf        Trick Room             1337     27.3%     387
+you   Incineroar       Close Combat           1702     28.3%     487
+you   Incineroar       Fake Out                528     42.2%     243
+you   Incineroar       Flare Blitz            1728     28.8%     501
+you   Incineroar       Throat Chop            1728     30.4%     497
+you   Indeedee-F       Follow Me              1592     39.1%     661
+you   Indeedee-F       Healing Wish              0      0.0%       0  <- never offered
+you   Indeedee-F       Helping Hand           1532     48.6%     716
+you   Indeedee-F       Trick Room              626     36.0%     215
+you   Kingambit        Iron Head              1892     21.8%     441
+you   Kingambit        Kowtow Cleave          1892     34.3%     625
+you   Kingambit        Low Kick               1858     26.9%     507
+you   Kingambit        Sucker Punch           1892     17.5%     319
+you   Torkoal          Earth Power            1983     11.5%     215
+you   Torkoal          Eruption               2096     35.0%     779
+you   Torkoal          Protect                2097     26.5%     525
+you   Torkoal          Weather Ball           2100     27.9%     583
+them  Arcanine-Hisui   extremespeed            262      4.2%      14
+them  Arcanine-Hisui   flareblitz              262     31.6%      76
+them  Arcanine-Hisui   headsmash               262     29.4%      72
+them  Arcanine-Hisui   protect                 262     34.8%     100
+them  Archaludon       dragonpulse             903     40.8%     379
+them  Archaludon       electroshot             903      9.1%      78
+them  Archaludon       flashcannon             903      8.4%      67
+them  Archaludon       protect                 900     41.9%     379
+them  Basculegion      aquajet                  64     27.0%      11
+them  Basculegion      flipturn                 61     10.1%       4
+them  Basculegion      lastrespects             62      8.6%       8
+them  Basculegion      wavecrash                81     73.2%      65
+them  Camerupt         ancientpower             60     10.1%       6
+them  Camerupt         earthpower               60     37.9%      22
+them  Camerupt         heatwave                 60     33.9%      21
+them  Camerupt         protect                  60     18.0%      11
+them  Charizard        heatwave                444     31.6%     151
+them  Charizard        hurricane               249      9.1%      25
+them  Charizard        protect                 444     30.6%     132
+them  Charizard        solarbeam               195     14.1%      26
+them  Charizard        weatherball             444     26.5%     110
+them  Corviknight      bravebird                93     29.3%      25
+them  Corviknight      bulkup                   93     13.4%      13
+them  Corviknight      powertrip                93      7.3%       6
+them  Corviknight      roost                    80     58.2%      49
+them  Delphox          heatwave                203     45.8%      89
+them  Delphox          nastyplot               203      9.6%      17
+them  Delphox          protect                 203     27.8%      59
+them  Delphox          psychic                 198     17.2%      38
+them  Dragonite        dragonpulse             114     38.3%      41
+them  Dragonite        heatwave                114     20.1%      21
+them  Dragonite        protect                 114     41.0%      51
+them  Dragonite        tailwind                114      0.7%       1
+them  Excadrill        highhorsepower          146     34.5%      47
+them  Excadrill        ironhead                146      8.0%      11
+them  Excadrill        protect                 146     39.7%      58
+them  Excadrill        rockslide               146     17.9%      30
+them  Farigiraf        expandingforce           77     21.9%      19
+them  Farigiraf        helpinghand             362     30.2%     113
+them  Farigiraf        protect                 811     37.7%     289
+them  Farigiraf        psychic                 864     28.5%     237
+them  Farigiraf        raindance               172     10.5%      24
+them  Farigiraf        thunderbolt             422     31.8%     139
+them  Farigiraf        trickroom               977     15.6%     162
+them  Floette-Eternal  calmmind                 43      4.3%       2
+them  Floette-Eternal  dazzlinggleam            43     24.5%      10
+them  Floette-Eternal  moonblast                43     31.4%      15
+them  Floette-Eternal  protect                  43     39.7%      16
+them  Froslass         auroraveil              115      5.8%       5
+them  Froslass         blizzard                115     35.7%      39
+them  Froslass         protect                 115     51.5%      64
+them  Froslass         shadowball              102      7.9%       7
+them  Garchomp         dracometeor             815     23.5%     175
+them  Garchomp         dragonclaw               68     15.9%      10
+them  Garchomp         earthpower              309     30.3%      99
+them  Garchomp         earthquake               68     24.8%      16
+them  Garchomp         flamethrower            506     14.9%      75
+them  Garchomp         powergem                815     13.4%     104
+them  Garchomp         protect                 882     41.7%     386
+them  Garchomp         rockslide                68     25.8%      18
+them  Gardevoir        expandingforce          184     23.7%      41
+them  Gardevoir        hypervoice              183     46.2%      91
+them  Gardevoir        protect                 189     21.5%      43
+them  Gardevoir        thunderbolt             189     10.8%      14
+them  Gengar           perishsong              170      2.8%       5
+them  Gengar           protect                 170     57.2%      93
+them  Gengar           shadowball              151      8.0%       9
+them  Gengar           sludgebomb              169     33.1%      63
+them  Gholdengo        makeitrain              128     17.6%      17
+them  Gholdengo        nastyplot               128      9.0%      16
+them  Gholdengo        protect                 128     57.9%      77
+them  Gholdengo        shadowball              125     15.9%      18
+them  Golisopod        drillrun                 83     15.4%      13
+them  Golisopod        ironhead                280      9.7%      21
+them  Golisopod        leechlife               280     54.4%     153
+them  Golisopod        protect                 280     23.5%      72
+them  Golisopod        swordsdance             197     11.2%      21
+them  Grimmsnarl       lightscreen              96     16.8%      18
+them  Grimmsnarl       partingshot              96     17.6%      13
+them  Grimmsnarl       reflect                  96     26.5%      27
+them  Grimmsnarl       spiritbreak              96     39.2%      38
+them  Hatterene        dazzlinggleam           148     38.7%      55
+them  Hatterene        expandingforce          130     21.5%      27
+them  Hatterene        protect                 148     38.1%      62
+them  Hatterene        trickroom               148      4.3%       4
+them  Incineroar       fakeout                 228     27.4%      61
+them  Incineroar       flareblitz              829     33.1%     282
+them  Incineroar       partingshot             826     11.3%      95
+them  Incineroar       protect                 248     50.1%     126
+them  Incineroar       snarl                    70     46.7%      31
+them  Incineroar       throatchop              508     47.7%     234
+them  Indeedee         expandingforce           43     93.6%      40
+them  Indeedee         mysticalfire             24     22.8%       7
+them  Indeedee         protect                   0      0.0%       0  <- never offered
+them  Indeedee         trick                    24      5.3%       0  <- never played
+them  Indeedee-F       followme                162     28.1%      41
+them  Indeedee-F       helpinghand             141     36.3%      55
+them  Indeedee-F       psychic                 158     30.5%      48
+them  Indeedee-F       trickroom               162     10.6%      18
+them  Kingambit        ironhead                350     11.7%      52
+them  Kingambit        kowtowcleave            476     39.1%     176
+them  Kingambit        lowkick                  47     25.4%      13
+them  Kingambit        protect                 429     42.9%     186
+them  Kingambit        suckerpunch             476      9.5%      41
+them  Kingambit        swordsdance             126      6.2%       8
+them  Metagross        bodypress                73     22.5%      19
+them  Metagross        protect                  73     44.0%      32
+them  Metagross        psychicfangs             60     30.0%      16
+them  Metagross        steelroller              73      8.9%       6
+them  Milotic          icebeam                 936      6.4%      62
+them  Milotic          icywind                 936      7.9%      83
+them  Milotic          protect                 929     47.0%     426
+them  Milotic          scald                   936     39.1%     365
+them  Pelipper         hurricane               206     25.4%      55
+them  Pelipper         tailwind                206      3.8%       5
+them  Pelipper         weatherball             206     51.4%     104
+them  Pelipper         wideguard               206     19.5%      42
+them  Politoed         encore                  113      9.1%      10
+them  Politoed         perishsong              112      5.1%      11
+them  Politoed         protect                 113     39.0%      42
+them  Politoed         weatherball             113     46.8%      50
+them  Raichu           fakeout                  64     10.2%       5
+them  Raichu           focusblast              191     17.2%      27
+them  Raichu           protect                 191     38.5%      74
+them  Raichu           zapcannon               191     40.8%      85
+them  Rillaboom        fakeout                 188     28.4%      48
+them  Rillaboom        grassyglide             443     13.2%      60
+them  Rillaboom        highhorsepower          310     29.4%      94
+them  Rillaboom        protect                 133     60.0%      84
+them  Rillaboom        uturn                   133     29.1%      35
+them  Rillaboom        woodhammer              310     39.2%     122
+them  Salamence        dracometeor             302     23.6%      72
+them  Salamence        flamethrower            209     11.0%      20
+them  Salamence        hypervoice              283     35.9%     106
+them  Salamence        protect                 302     33.6%     100
+them  Salamence        tailwind                 93      4.9%       4
+them  Sinistcha        matchagotcha             69     40.5%      25
+them  Sinistcha        protect                  69     30.2%      19
+them  Sinistcha        ragepowder               69     23.9%      21
+them  Sinistcha        trickroom                69      5.4%       4
+them  Sneasler         acrobatics               61      2.8%       3
+them  Sneasler         closecombat             607     43.4%     256
+them  Sneasler         coaching                 80      6.5%       5
+them  Sneasler         direclaw                390      7.9%      27
+them  Sneasler         fakeout                 100     22.0%      23
+them  Sneasler         poisonjab               145     13.3%      21
+them  Sneasler         protect                 461     49.0%     230
+them  Sneasler         quickguard              108     12.7%      15
+them  Sneasler         rockslide                88     15.5%      17
+them  Sneasler         rocktomb                123      2.4%       4
+them  Sneasler         swordsdance              61      2.7%       2
+them  Sneasler         throatchop               38     17.0%       4
+them  Staraptor        bravebird               143     10.7%      14
+them  Staraptor        closecombat             143     39.3%      58
+them  Staraptor        protect                 143     48.9%      70
+them  Staraptor        tailwind                143      1.1%       1
+them  Swampert         earthquake              243     37.1%      83
+them  Swampert         icepunch                243      5.8%      13
+them  Swampert         protect                 243     38.7%      95
+them  Swampert         wavecrash               243     18.4%      52
+them  Sylveon          detect                  222     31.3%      69
+them  Sylveon          hyperbeam               195     47.8%      88
+them  Sylveon          hypervoice              211     31.9%      72
+them  Sylveon          quickattack             195      4.0%       9
+them  Tyranitar        knockoff                227     21.1%      48
+them  Tyranitar        lowkick                 227     12.6%      24
+them  Tyranitar        protect                 227     36.3%      85
+them  Tyranitar        rockslide               227     30.1%      70
+them  Venusaur         leafstorm               176     13.1%      22
+them  Venusaur         protect                 176     51.8%      87
+them  Venusaur         sleeppowder             176     12.7%      24
+them  Venusaur         sludgebomb              149     26.5%      43
+them  Volcarona        flamethrower            573     31.3%     179
+them  Volcarona        gigadrain               573     14.9%      95
+them  Volcarona        protect                 573     48.4%     268
+them  Volcarona        quiverdance             573      5.4%      31
+
+Never offered:
+  you Indeedee-F Healing Wish: ?
+  them Indeedee protect: ?
+
+Offered but never played:
+  them Indeedee trick: offered 24 turns, avg share 5.3%

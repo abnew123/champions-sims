@@ -1,0 +1,67 @@
+Mega Garchomp Z (Modest, 32 SpA), partner idle, no weather:
+  Draco Meteor               -> Mega Salamence       100-100%  KO 57/57  (missed 7/64)
+  Dragon Pulse               -> Mega Salamence       100-100%  KO 64/64
+  Draco Meteor               -> Garchomp (Life Orb)  100-100%  KO 51/51  (missed 10/64)
+  Dragon Pulse               -> Garchomp (Life Orb)  100-100%  KO 59/59
+  Draco Meteor               -> Mega Garchomp Z      100-100%  KO 57/57  (missed 7/64)
+  Dragon Pulse               -> Mega Garchomp Z      100-100%  KO 64/64
+  Draco Meteor               -> Mega Baxcalibur      100-100%  KO 51/51  (missed 9/64)
+  Dragon Pulse               -> Mega Baxcalibur       88-100%  KO 21/59
+  Draco Meteor               -> Mega Dragonite        64- 76%  KO  0/51  (missed 9/64)
+  Dragon Pulse               -> Mega Dragonite        42- 50%  KO  0/59
+  Draco Meteor               -> Archaludon            80- 94%  KO  0/51  (missed 10/64)
+  Dragon Pulse               -> Archaludon            52- 62%  KO  0/59
+  Draco Meteor               -> Basculegion           83- 98%  KO  0/55  (missed 7/64)
+  Dragon Pulse               -> Basculegion           55- 64%  KO  0/62
+  Draco Meteor               -> Milotic               52- 62%  KO  0/51  (missed 10/64)
+  Dragon Pulse               -> Milotic               34- 41%  KO  0/59
+  Draco Meteor               -> Incineroar            54- 64%  KO  0/51  (missed 10/64)
+  Dragon Pulse               -> Incineroar            36- 42%  KO  0/59
+  Draco Meteor               -> Rillaboom             83- 99%  KO  0/51  (missed 9/64)
+  Dragon Pulse               -> Rillaboom             55- 65%  KO  0/59
+  Draco Meteor               -> Sneasler              99-100%  KO 49/51  (missed 10/64)
+  Dragon Pulse               -> Sneasler              65- 77%  KO  0/59
+  Draco Meteor               -> Farigiraf             65- 76%  KO  0/51  (missed 10/64)
+  Dragon Pulse               -> Farigiraf             42- 50%  KO  0/59
+Flamethrower with Torkoal's sun up (for scale on neutral targets):
+  Flamethrower (sun)         -> Incineroar            19- 22%  KO  0/61
+  Flamethrower (sun)         -> Rillaboom            100-100%  KO 61/61
+  Flamethrower (sun)         -> Sneasler              68- 81%  KO  0/61
+  Flamethrower (sun)         -> Farigiraf             45- 53%  KO  0/61
+  Flamethrower (sun)         -> Basculegion           29- 34%  KO  0/62
+  Mega Garchomp Z stats {"atk":135,"def":105,"spa":212,"spd":105,"spe":173} ability levitate
+Sylveon Quick Attack (Modest, 0 Atk, Fairy Feather, Pixilate):
+  Quick Attack               -> Mega Salamence        19- 24%  KO  0/59
+  Quick Attack               -> Garchomp (Life Orb)   24- 29%  KO  0/62
+  Quick Attack               -> Mega Garchomp Z       27- 32%  KO  0/59
+  Quick Attack               -> Mega Baxcalibur       20- 25%  KO  0/59
+  Quick Attack               -> Mega Dragonite        11- 14%  KO  0/59
+  Quick Attack               -> Mega Lopunny          34- 39%  KO  0/59
+  Quick Attack               -> Annihilape            27- 33%  KO  0/62
+  Quick Attack               -> Sirfetch’d            32- 39%  KO  0/62
+  Quick Attack               -> Sneasler              21- 25%  KO  0/62
+  Quick Attack               -> Kingambit              9- 11%  KO  0/62
+  Quick Attack               -> Mega Tyranitar        16- 19%  KO  0/59
+  Quick Attack               -> Rillaboom             12- 14%  KO  0/59
+  Quick Attack               -> Incineroar            10- 12%  KO  0/62
+  Quick Attack               -> Basculegion           15- 18%  KO  0/62
+  ...after an Intimidate (lead Salamence / Incineroar):
+  Quick Attack (-1)          -> Mega Salamence        14- 17%  KO  0/59
+  Quick Attack (-1)          -> Incineroar             7-  9%  KO  0/62
+  Hyper Voice for scale (spread, one target shown):
+  Hyper Voice                -> Mega Salamence        95-100%  KO 39/60
+  Hyper Voice                -> Garchomp (Life Orb)   92-100%  KO 36/62
+  Hyper Voice                -> Mega Lopunny         100-100%  KO 60/60
+  Hyper Voice                -> Rillaboom             48- 57%  KO  0/60
+  Hyper Voice                -> Incineroar            32- 38%  KO  0/63
+  Sylveon stats {"atk":76,"def":107,"spa":165,"spd":150,"spe":95}
+Sneasler (Adamant, 32 Atk) poison options into Fairies:
+  Gunk Shot                  -> Mega Floette         100-100%  KO 46/46  (missed 16/64)
+  Poison Jab                 -> Mega Floette         100-100%  KO 62/62
+  Dire Claw                  -> Mega Floette         100-100%  KO 62/62
+  Gunk Shot                  -> Sylveon              100-100%  KO 46/46  (missed 16/64)
+  Poison Jab                 -> Sylveon               77- 92%  KO  0/62
+  Dire Claw                  -> Sylveon               77- 92%  KO  0/62
+  Gunk Shot                  -> Whimsicott (no Sash) 100-100%  KO 48/48  (missed 13/64)
+  Poison Jab                 -> Whimsicott (no Sash) 100-100%  KO 59/59
+  Dire Claw                  -> Whimsicott (no Sash) 100-100%  KO 59/59

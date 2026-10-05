@@ -1,0 +1,122 @@
+{
+ "Garchomp": {
+  "species": "Garchomp",
+  "item": "Garchompite",
+  "ability": "Rough Skin",
+  "nature": "Adamant",
+  "evs": [
+   15,
+   21,
+   1,
+   0,
+   25,
+   4
+  ],
+  "moves": [
+   "Stomping Tantrum",
+   "Scale Shot",
+   "Protect",
+   "Rock Slide"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "Focus Sash",
+  "ability": "Poison Touch",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Dire Claw",
+   "Fake Out",
+   "Close Combat",
+   "Coaching"
+  ]
+ },
+ "Floette-Eternal": {
+  "species": "Floette-Eternal",
+  "item": "Floettite",
+  "ability": "Flower Veil",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Dazzling Gleam",
+   "Draining Kiss",
+   "Calm Mind",
+   "Protect"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Sitrus Berry",
+  "ability": "Intimidate",
+  "nature": "Sassy",
+  "evs": [
+   31,
+   0,
+   15,
+   0,
+   20,
+   0
+  ],
+  "moves": [
+   "Flare Blitz",
+   "Fake Out",
+   "Parting Shot",
+   "Helping Hand"
+  ]
+ },
+ "Rillaboom": {
+  "species": "Rillaboom",
+  "item": "Miracle Seed",
+  "ability": "Grassy Surge",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Wood Hammer",
+   "High Horsepower",
+   "Fake Out",
+   "Grassy Glide"
+  ]
+ },
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Life Orb",
+  "ability": "Defiant",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Kowtow Cleave",
+   "Swords Dance",
+   "Sucker Punch",
+   "Protect"
+  ]
+ }
+}

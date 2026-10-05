@@ -1,0 +1,42 @@
+{
+ "Sun": {
+  "lead": "Kingambit+Blastoise",
+  "back": [
+   "Farigiraf",
+   "Incineroar"
+  ],
+  "note": "Full-battle pick: in whole-game sims (both sides switching, Trick Room and endgames played out) this lead and back row won 55&ndash;64%, against 36% for Incineroar + Blastoise with Torkoal + Kingambit."
+ },
+ "Rain": {
+  "lead": "Incineroar+Torkoal",
+  "back": [
+   "Blastoise",
+   "Farigiraf"
+  ],
+  "note": "Full-battle pick: the same lead, with Blastoise + Farigiraf behind instead of Indeedee + Blastoise, won 51&ndash;54% of whole-game sims, against 41%."
+ },
+ "Sand": {
+  "lead": "Incineroar+Farigiraf",
+  "back": [
+   "Blastoise",
+   "Kingambit"
+  ],
+  "note": "Full-battle pick: won 81&ndash;87% of whole-game sims, against 71% for Farigiraf + Blastoise."
+ },
+ "Trick Room without Indeedee": {
+  "lead": "Incineroar+Farigiraf",
+  "back": [
+   "Blastoise",
+   "Torkoal"
+  ],
+  "note": "Full-battle pick: won 68&ndash;74% of whole-game sims, against 61% for Farigiraf + Kingambit."
+ },
+ "Perish trap": {
+  "lead": "Kingambit+Blastoise",
+  "back": [
+   "Torkoal",
+   "Farigiraf"
+  ],
+  "note": "Full-battle pick: won 90&ndash;97% of whole-game sims, against 77% for Incineroar + Kingambit."
+ }
+}

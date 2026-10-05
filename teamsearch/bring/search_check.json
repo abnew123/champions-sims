@@ -1,0 +1,129 @@
+{
+ "K": 4,
+ "per_job": 4,
+ "chosen": {
+  "Tailwind goodstuffs": {
+   "lead": [
+    "M-Blastoise#5",
+    "Farigiraf#67"
+   ],
+   "back": [
+    "Kingambit#12",
+    "Incineroar#16"
+   ],
+   "rank": 2
+  },
+  "Sun": {
+   "lead": [
+    "M-Blastoise#5",
+    "Kingambit#12"
+   ],
+   "back": [
+    "Farigiraf#67",
+    "Incineroar#16"
+   ],
+   "rank": 1
+  },
+  "Indeedee TR / Psychic Terrain": {
+   "lead": [
+    "M-Blastoise#5",
+    "Farigiraf#67"
+   ],
+   "back": [
+    "Indeedee-F#24",
+    "Kingambit#12"
+   ],
+   "rank": 3
+  },
+  "Rain": {
+   "lead": [
+    "M-Blastoise#5",
+    "Farigiraf#67"
+   ],
+   "back": [
+    "Torkoal#8",
+    "Kingambit#12"
+   ],
+   "rank": 3
+  },
+  "Balance, no speed control": {
+   "lead": [
+    "M-Blastoise#5",
+    "Farigiraf#67"
+   ],
+   "back": [
+    "Torkoal#8",
+    "Incineroar#16"
+   ],
+   "rank": 3
+  },
+  "Sand": {
+   "lead": [
+    "M-Blastoise#5",
+    "Farigiraf#67"
+   ],
+   "back": [
+    "Torkoal#8",
+    "Kingambit#12"
+   ],
+   "rank": 2
+  },
+  "Snow": {
+   "lead": [
+    "M-Blastoise#5",
+    "Farigiraf#67"
+   ],
+   "back": [
+    "Kingambit#12",
+    "Incineroar#16"
+   ],
+   "rank": 1
+  },
+  "Trick Room without Indeedee": {
+   "lead": [
+    "M-Blastoise#5",
+    "Farigiraf#67"
+   ],
+   "back": [
+    "Torkoal#8",
+    "Incineroar#16"
+   ],
+   "rank": 1
+  },
+  "Rain + sun": {
+   "lead": [
+    "M-Blastoise#5",
+    "Kingambit#12"
+   ],
+   "back": [
+    "Torkoal#8",
+    "Farigiraf#67"
+   ],
+   "rank": 4
+  },
+  "Perish trap": {
+   "lead": [
+    "M-Blastoise#5",
+    "Farigiraf#67"
+   ],
+   "back": [
+    "Kingambit#12",
+    "Incineroar#16"
+   ],
+   "rank": 1
+  }
+ },
+ "fresh_score": 0.7229533891661306,
+ "fresh_by_arch": {
+  "Tailwind goodstuffs": 1.0,
+  "Sun": 0.4700797186082496,
+  "Indeedee TR / Psychic Terrain": 0.45454545454545453,
+  "Rain": 0.6409774436090225,
+  "Balance, no speed control": 0.8198198198198199,
+  "Sand": 0.7754957507082154,
+  "Snow": 0.7499999999999999,
+  "Trick Room without Indeedee": 0.6277788562825485,
+  "Rain + sun": 0.2111220472440945,
+  "Perish trap": 0.8964912280701756
+ }
+}

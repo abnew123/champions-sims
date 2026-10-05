@@ -1,0 +1,41 @@
+# Dependencies and builds
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+native/champ/target*/
+
+# Stable sim binaries stay local (macOS builds); their sources are native/champ/src_battle_v*.tar.gz and the git history
+native/champ/bin/*
+!native/champ/bin/*.sha256
+
+# Generated, large and reproducible: sim results, starting positions, engine test cases, logs
+/results/
+pssim/results/
+teamsearch/runs/
+teamsearch/cloud_results/*
+!teamsearch/cloud_results/climb_state.json
+!teamsearch/cloud_results/climb_log.jsonl
+champions-sims-results.tar.xz
+*_starts*.jsonl
+pssim/*.jsonl
+native/*.jsonl
+spreads/tables.json
+*.log
+*.err
+*.out
+
+# Personal or third-party data, not for a public repo: game recordings (opponents' names), public replay logs (usernames),
+# scraped tournament pages and player lists. The scripts that fetch or process them are tracked.
+recordings/batch*/
+recordings/demo/
+pssim/replays_protect/
+regionals/standings_*.html
+teamsearch/regmatch/
+pssim/pro_games.json
+teamsearch/bring/previews.json
+
+# Compiled tools and upload bundles
+recordings/ocr
+teamsearch/cloud/bundle.tar.gz

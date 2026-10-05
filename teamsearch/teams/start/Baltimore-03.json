@@ -1,0 +1,122 @@
+{
+ "Archaludon": {
+  "species": "Archaludon",
+  "item": "Leftovers",
+  "ability": "Stamina",
+  "nature": "Bold",
+  "evs": [
+   32,
+   0,
+   1,
+   1,
+   32,
+   0
+  ],
+  "moves": [
+   "Dragon Pulse",
+   "Flash Cannon",
+   "Electro Shot",
+   "Protect"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Passho Berry",
+  "ability": "Intimidate",
+  "nature": "Sassy",
+  "evs": [
+   31,
+   0,
+   15,
+   0,
+   20,
+   0
+  ],
+  "moves": [
+   "Fake Out",
+   "Parting Shot",
+   "Darkest Lariat",
+   "Protect"
+  ]
+ },
+ "Politoed": {
+  "species": "Politoed",
+  "item": "Sitrus Berry",
+  "ability": "Drizzle",
+  "nature": "Calm",
+  "evs": [
+   32,
+   0,
+   24,
+   0,
+   7,
+   3
+  ],
+  "moves": [
+   "Perish Song",
+   "Weather Ball",
+   "Encore",
+   "Protect"
+  ]
+ },
+ "Vivillon": {
+  "species": "Vivillon",
+  "item": "Focus Sash",
+  "ability": "Compound Eyes",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Sleep Powder",
+   "Rage Powder",
+   "Hurricane",
+   "Protect"
+  ]
+ },
+ "Rillaboom": {
+  "species": "Rillaboom",
+  "item": "Eject Button",
+  "ability": "Grassy Surge",
+  "nature": "Careful",
+  "evs": [
+   32,
+   0,
+   2,
+   0,
+   32,
+   0
+  ],
+  "moves": [
+   "Fake Out",
+   "Grassy Glide",
+   "U-turn",
+   "Protect"
+  ]
+ },
+ "Gengar": {
+  "species": "Gengar",
+  "item": "Gengarite",
+  "ability": "Cursed Body",
+  "nature": "Modest",
+  "evs": [
+   32,
+   0,
+   6,
+   0,
+   8,
+   20
+  ],
+  "moves": [
+   "Shadow Ball",
+   "Sludge Bomb",
+   "Perish Song",
+   "Protect"
+  ]
+ }
+}

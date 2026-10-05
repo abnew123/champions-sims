@@ -1,0 +1,502 @@
+{
+ "Tailwind|Incineroar+Farigiraf": [
+  {
+   "back": [
+    "Indeedee-F",
+    "Kingambit"
+   ],
+   "score": 89.0,
+   "dTR": -0.0
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Torkoal"
+   ],
+   "score": 88.0,
+   "dTR": 0.0
+  },
+  {
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "score": 87.1,
+   "dTR": 0.0
+  },
+  {
+   "back": [
+    "Kingambit",
+    "Blastoise"
+   ],
+   "score": 85.2,
+   "dTR": -0.0
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Blastoise"
+   ],
+   "score": 81.2,
+   "dTR": -0.0
+  },
+  {
+   "back": [
+    "Torkoal",
+    "Blastoise"
+   ],
+   "score": 79.2,
+   "dTR": 0.0
+  }
+ ],
+ "Indeedee TR|Kingambit+Blastoise": [
+  {
+   "back": [
+    "Incineroar",
+    "Farigiraf"
+   ],
+   "score": 83.0,
+   "dTR": 0.0
+  },
+  {
+   "back": [
+    "Farigiraf",
+    "Torkoal"
+   ],
+   "score": 79.8,
+   "dTR": 0.0
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "score": 77.3,
+   "dTR": 0.0
+  },
+  {
+   "back": [
+    "Incineroar",
+    "Indeedee-F"
+   ],
+   "score": 75.5,
+   "dTR": 0.0
+  },
+  {
+   "back": [
+    "Incineroar",
+    "Torkoal"
+   ],
+   "score": 72.3,
+   "dTR": 0.0
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Torkoal"
+   ],
+   "score": 69.7,
+   "dTR": 0.0
+  }
+ ],
+ "Sun|Farigiraf+Blastoise": [
+  {
+   "back": [
+    "Incineroar",
+    "Kingambit"
+   ],
+   "score": 75.4,
+   "dTR": -0.05
+  },
+  {
+   "back": [
+    "Incineroar",
+    "Indeedee-F"
+   ],
+   "score": 71.4,
+   "dTR": -0.24
+  },
+  {
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "score": 69.7,
+   "dTR": 0.06
+  },
+  {
+   "back": [
+    "Incineroar",
+    "Torkoal"
+   ],
+   "score": 69.7,
+   "dTR": 0.06
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Kingambit"
+   ],
+   "score": 68.6,
+   "dTR": -0.22
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Torkoal"
+   ],
+   "score": 64.7,
+   "dTR": 0.0
+  }
+ ],
+ "Rain|Farigiraf+Blastoise": [
+  {
+   "back": [
+    "Incineroar",
+    "Torkoal"
+   ],
+   "score": 72.3,
+   "dTR": 0.67
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Torkoal"
+   ],
+   "score": 71.0,
+   "dTR": 0.53
+  },
+  {
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "score": 70.8,
+   "dTR": 0.68
+  },
+  {
+   "back": [
+    "Incineroar",
+    "Indeedee-F"
+   ],
+   "score": 70.1,
+   "dTR": -0.05
+  },
+  {
+   "back": [
+    "Incineroar",
+    "Kingambit"
+   ],
+   "score": 70.0,
+   "dTR": 0.4
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Kingambit"
+   ],
+   "score": 66.7,
+   "dTR": 0.0
+  }
+ ],
+ "Balance|Incineroar+Farigiraf": [
+  {
+   "back": [
+    "Indeedee-F",
+    "Kingambit"
+   ],
+   "score": 86.7,
+   "dTR": -0.0
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Torkoal"
+   ],
+   "score": 86.4,
+   "dTR": 0.0
+  },
+  {
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "score": 83.2,
+   "dTR": 0.0
+  },
+  {
+   "back": [
+    "Kingambit",
+    "Blastoise"
+   ],
+   "score": 82.2,
+   "dTR": -0.0
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Blastoise"
+   ],
+   "score": 79.6,
+   "dTR": -0.01
+  },
+  {
+   "back": [
+    "Torkoal",
+    "Blastoise"
+   ],
+   "score": 78.1,
+   "dTR": 0.0
+  }
+ ],
+ "Sand|Incineroar+Blastoise": [
+  {
+   "back": [
+    "Farigiraf",
+    "Kingambit"
+   ],
+   "score": 79.9,
+   "dTR": 0.0
+  },
+  {
+   "back": [
+    "Farigiraf",
+    "Torkoal"
+   ],
+   "score": 73.7,
+   "dTR": 0.0
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Kingambit"
+   ],
+   "score": 71.2,
+   "dTR": 0.0
+  },
+  {
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "score": 69.6,
+   "dTR": 0.0
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Farigiraf"
+   ],
+   "score": 68.0,
+   "dTR": 0.0
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Torkoal"
+   ],
+   "score": 63.0,
+   "dTR": 0.0
+  }
+ ],
+ "Snow|Farigiraf+Blastoise": [
+  {
+   "back": [
+    "Incineroar",
+    "Kingambit"
+   ],
+   "score": 82.2,
+   "dTR": -0.0
+  },
+  {
+   "back": [
+    "Incineroar",
+    "Torkoal"
+   ],
+   "score": 79.4,
+   "dTR": 0.0
+  },
+  {
+   "back": [
+    "Incineroar",
+    "Indeedee-F"
+   ],
+   "score": 79.0,
+   "dTR": -0.0
+  },
+  {
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "score": 77.5,
+   "dTR": 0.0
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Kingambit"
+   ],
+   "score": 77.1,
+   "dTR": -0.0
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Torkoal"
+   ],
+   "score": 75.8,
+   "dTR": 0.0
+  }
+ ],
+ "Trick Room|Farigiraf+Kingambit": [
+  {
+   "back": [
+    "Incineroar",
+    "Blastoise"
+   ],
+   "score": 83.5,
+   "dTR": -0.13
+  },
+  {
+   "back": [
+    "Incineroar",
+    "Torkoal"
+   ],
+   "score": 82.2,
+   "dTR": 0.04
+  },
+  {
+   "back": [
+    "Incineroar",
+    "Indeedee-F"
+   ],
+   "score": 80.0,
+   "dTR": -0.17
+  },
+  {
+   "back": [
+    "Torkoal",
+    "Blastoise"
+   ],
+   "score": 79.7,
+   "dTR": 0.01
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Torkoal"
+   ],
+   "score": 75.6,
+   "dTR": 0.0
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Blastoise"
+   ],
+   "score": 72.7,
+   "dTR": -0.34
+  }
+ ],
+ "Rain + Sun|Incineroar+Farigiraf": [
+  {
+   "back": [
+    "Torkoal",
+    "Blastoise"
+   ],
+   "score": 71.6,
+   "dTR": 0.8
+  },
+  {
+   "back": [
+    "Kingambit",
+    "Blastoise"
+   ],
+   "score": 71.2,
+   "dTR": 0.19
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Blastoise"
+   ],
+   "score": 64.1,
+   "dTR": -0.84
+  },
+  {
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "score": 62.8,
+   "dTR": 0.94
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Torkoal"
+   ],
+   "score": 60.6,
+   "dTR": 0.74
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Kingambit"
+   ],
+   "score": 51.6,
+   "dTR": 0.0
+  }
+ ],
+ "Perish|Farigiraf+Blastoise": [
+  {
+   "back": [
+    "Incineroar",
+    "Kingambit"
+   ],
+   "score": 81.2,
+   "dTR": -0.14
+  },
+  {
+   "back": [
+    "Incineroar",
+    "Torkoal"
+   ],
+   "score": 76.7,
+   "dTR": 0.15
+  },
+  {
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "score": 76.5,
+   "dTR": 0.16
+  },
+  {
+   "back": [
+    "Incineroar",
+    "Indeedee-F"
+   ],
+   "score": 74.3,
+   "dTR": -0.65
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Kingambit"
+   ],
+   "score": 72.5,
+   "dTR": -0.6
+  },
+  {
+   "back": [
+    "Indeedee-F",
+    "Torkoal"
+   ],
+   "score": 72.3,
+   "dTR": 0.0
+  }
+ ]
+}

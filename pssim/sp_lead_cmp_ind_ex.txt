@@ -1,0 +1,83 @@
+lead score (0.25 ladder + 0.75 reader), x100; Indeedee-F leads per variant; best = best lead overall in that archetype
+
+Tailwind goodstuffs  (share 26.2)
+  ibase    best Incineroar+Farigiraf      63.2 | Indeedee-F+Torkoal  58.2
+  indatk   best Incineroar+Farigiraf      63.2 | Indeedee-F+Torkoal  58.4
+  indot    best Incineroar+Farigiraf      63.2 | Indeedee-F+Torkoal  50.8
+  sinis    best Incineroar+Farigiraf      63.2 | Indeedee-F+Torkoal  44.6
+  hatt     best Incineroar+Farigiraf      63.2 | Indeedee-F+Torkoal  37.8
+  rilla    best Incineroar+Farigiraf      63.2 | Indeedee-F+Torkoal  33.3
+
+Sun  (share 12.0)
+  ibase    best Incineroar+Blastoise      62.3 | Indeedee-F+Blastoise  58.6
+  indatk   best Incineroar+Blastoise      62.3 | Indeedee-F+Blastoise  58.8
+  indot    best Incineroar+Blastoise      62.3 | Indeedee-F+Blastoise  56.1
+  sinis    best Incineroar+Blastoise      62.5 | Indeedee-F+Blastoise  57.1
+  hatt     best Incineroar+Blastoise      62.7 | Indeedee-F+Blastoise  59.0
+  rilla    best Indeedee-F+Blastoise      62.8 | Indeedee-F+Blastoise  62.8
+
+Indeedee TR / Psychic Terrain  (share 11.9)
+  ibase    best Incineroar+Blastoise      63.2 | Indeedee-F+Blastoise  61.1, Incineroar+Indeedee-F  56.5, Indeedee-F+Kingambit  50.4
+  indatk   best Incineroar+Blastoise      63.2 | Indeedee-F+Blastoise  61.1, Incineroar+Indeedee-F  57.7, Indeedee-F+Kingambit  50.4
+  indot    best Incineroar+Blastoise      63.2 | Indeedee-F+Blastoise  61.3, Incineroar+Indeedee-F  54.1, Indeedee-F+Kingambit  50.9
+  sinis    best Incineroar+Blastoise      63.1 | Indeedee-F+Blastoise  61.3, Incineroar+Indeedee-F  52.7, Indeedee-F+Kingambit  51.0
+  hatt     best Incineroar+Blastoise      63.1 | Indeedee-F+Blastoise  61.3, Incineroar+Indeedee-F  58.0, Indeedee-F+Kingambit  50.7
+  rilla    best Indeedee-F+Blastoise      69.8 | Indeedee-F+Blastoise  69.8, Incineroar+Indeedee-F  51.0, Indeedee-F+Kingambit  65.4
+
+Rain  (share 10.5)
+  ibase    best Incineroar+Torkoal        60.6 | Indeedee-F+Torkoal  55.2, Indeedee-F+Blastoise  44.4
+  indatk   best Incineroar+Torkoal        60.6 | Indeedee-F+Torkoal  55.0, Indeedee-F+Blastoise  44.4
+  indot    best Incineroar+Torkoal        60.6 | Indeedee-F+Torkoal  52.8, Indeedee-F+Blastoise  43.9
+  sinis    best Incineroar+Torkoal        60.7 | Indeedee-F+Torkoal  47.9, Indeedee-F+Blastoise  44.1
+  hatt     best Incineroar+Torkoal        60.7 | Indeedee-F+Torkoal  49.5, Indeedee-F+Blastoise  44.1
+  rilla    best Indeedee-F+Torkoal        61.3 | Indeedee-F+Torkoal  61.3, Indeedee-F+Blastoise  58.7
+
+Balance, no speed control  (share 9.3)
+  ibase    best Incineroar+Farigiraf      67.9 | 
+  indatk   best Incineroar+Farigiraf      67.9 | 
+  indot    best Incineroar+Farigiraf      67.9 | 
+  sinis    best Incineroar+Farigiraf      67.9 | 
+  hatt     best Incineroar+Farigiraf      67.9 | 
+  rilla    best Incineroar+Farigiraf      67.9 | 
+
+Sand  (share 9.0)
+  ibase    best Incineroar+Farigiraf      65.3 | Indeedee-F+Blastoise  62.4, Incineroar+Indeedee-F  60.7, Indeedee-F+Farigiraf  55.0
+  indatk   best Incineroar+Farigiraf      65.3 | Indeedee-F+Blastoise  62.4, Incineroar+Indeedee-F  60.6, Indeedee-F+Farigiraf  54.8
+  indot    best Incineroar+Farigiraf      65.3 | Indeedee-F+Blastoise  59.9, Incineroar+Indeedee-F  64.6, Indeedee-F+Farigiraf  54.6
+  sinis    best Incineroar+Farigiraf      64.8 | Indeedee-F+Blastoise  62.7, Incineroar+Indeedee-F  63.9, Indeedee-F+Farigiraf  62.6
+  hatt     best Incineroar+Farigiraf      64.8 | Indeedee-F+Blastoise  56.2, Incineroar+Indeedee-F  58.9, Indeedee-F+Farigiraf  55.7
+  rilla    best Indeedee-F+Farigiraf      65.5 | Indeedee-F+Blastoise  60.6, Incineroar+Indeedee-F  32.7, Indeedee-F+Farigiraf  65.5
+
+Snow  (share 7.8)
+  ibase    best Farigiraf+Blastoise       62.4 | Indeedee-F+Blastoise  59.4, Indeedee-F+Torkoal  55.3
+  indatk   best Farigiraf+Blastoise       62.4 | Indeedee-F+Blastoise  60.7, Indeedee-F+Torkoal  56.1
+  indot    best Farigiraf+Blastoise       62.4 | Indeedee-F+Blastoise  55.3, Indeedee-F+Torkoal  50.5
+  sinis    best Farigiraf+Blastoise       62.4 | Indeedee-F+Blastoise  51.4, Indeedee-F+Torkoal  45.4
+  hatt     best Farigiraf+Blastoise       62.4 | Indeedee-F+Blastoise  52.3, Indeedee-F+Torkoal  43.2
+  rilla    best Farigiraf+Blastoise       62.4 | Indeedee-F+Blastoise  44.6, Indeedee-F+Torkoal  34.4
+
+Trick Room without Indeedee  (share 6.7)
+  ibase    best Indeedee-F+Blastoise      62.1 | Indeedee-F+Blastoise  62.1, Indeedee-F+Kingambit  60.1
+  indatk   best Indeedee-F+Blastoise      62.1 | Indeedee-F+Blastoise  62.1, Indeedee-F+Kingambit  60.8
+  indot    best Kingambit+Blastoise       61.2 | Indeedee-F+Blastoise  57.8, Indeedee-F+Kingambit  57.8
+  sinis    best Farigiraf+Kingambit       61.5 | Indeedee-F+Blastoise  54.2, Indeedee-F+Kingambit  57.1
+  hatt     best Farigiraf+Kingambit       62.2 | Indeedee-F+Blastoise  54.6, Indeedee-F+Kingambit  56.7
+  rilla    best Kingambit+Blastoise       61.2 | Indeedee-F+Blastoise  50.0, Indeedee-F+Kingambit  49.0
+
+Rain + sun  (share 3.3)
+  ibase    best Incineroar+Blastoise      59.7 | Incineroar+Indeedee-F  55.0
+  indatk   best Incineroar+Blastoise      59.7 | Incineroar+Indeedee-F  54.8
+  indot    best Incineroar+Blastoise      59.7 | Incineroar+Indeedee-F  56.5
+  sinis    best Incineroar+Blastoise      59.8 | Incineroar+Indeedee-F  58.2
+  hatt     best Incineroar+Blastoise      59.8 | Incineroar+Indeedee-F  58.7
+  rilla    best Incineroar+Blastoise      59.7 | Incineroar+Indeedee-F  57.3
+
+Perish trap  (share 3.3)
+  ibase    best Incineroar+Kingambit      61.3 | Indeedee-F+Kingambit  57.0
+  indatk   best Incineroar+Kingambit      61.3 | Indeedee-F+Kingambit  59.8
+  indot    best Incineroar+Kingambit      61.3 | Indeedee-F+Kingambit  54.5
+  sinis    best Incineroar+Kingambit      61.2 | Indeedee-F+Kingambit  53.7
+  hatt     best Incineroar+Kingambit      61.2 | Indeedee-F+Kingambit  53.3
+  rilla    best Incineroar+Kingambit      61.2 | Indeedee-F+Kingambit  59.4
+
+archetype-weighted best-lead score: ibase 63.14, indatk 63.14, indot 63.08, sinis 63.05, hatt 63.13, rilla 64.01

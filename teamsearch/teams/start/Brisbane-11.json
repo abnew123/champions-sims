@@ -1,0 +1,122 @@
+{
+ "Indeedee": {
+  "species": "Indeedee",
+  "item": "Choice Scarf",
+  "ability": "Psychic Surge",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Expanding Force",
+   "Trick",
+   "Mystical Fire",
+   "Terrain Pulse"
+  ]
+ },
+ "Tyranitar": {
+  "species": "Tyranitar",
+  "item": "Tyranitarite",
+  "ability": "Sand Stream",
+  "nature": "Jolly",
+  "evs": [
+   17,
+   17,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Rock Slide",
+   "Knock Off",
+   "Low Kick",
+   "Protect"
+  ]
+ },
+ "Excadrill": {
+  "species": "Excadrill",
+  "item": "Focus Sash",
+  "ability": "Sand Rush",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Iron Head",
+   "High Horsepower",
+   "Rock Slide",
+   "Protect"
+  ]
+ },
+ "Salamence": {
+  "species": "Salamence",
+  "item": "Salamencite",
+  "ability": "Intimidate",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Hyper Voice",
+   "Flamethrower",
+   "Draco Meteor",
+   "Protect"
+  ]
+ },
+ "Corviknight": {
+  "species": "Corviknight",
+  "item": "Psychic Seed",
+  "ability": "Mirror Armor",
+  "nature": "Careful",
+  "evs": [
+   32,
+   2,
+   0,
+   0,
+   32,
+   0
+  ],
+  "moves": [
+   "Brave Bird",
+   "Power Trip",
+   "Bulk Up",
+   "Roost"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "White Herb",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Close Combat",
+   "Dire Claw",
+   "Coaching",
+   "Protect"
+  ]
+ }
+}

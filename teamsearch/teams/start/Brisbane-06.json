@@ -1,0 +1,122 @@
+{
+ "Salamence": {
+  "species": "Salamence",
+  "item": "Salamencite",
+  "ability": "Intimidate",
+  "nature": "Careful",
+  "evs": [
+   32,
+   0,
+   2,
+   0,
+   32,
+   0
+  ],
+  "moves": [
+   "Double-Edge",
+   "Tailwind",
+   "Roost",
+   "Rain Dance"
+  ]
+ },
+ "Armarouge": {
+  "species": "Armarouge",
+  "item": "Focus Sash",
+  "ability": "Weak Armor",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Armor Cannon",
+   "Expanding Force",
+   "Wide Guard",
+   "Sunny Day"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "White Herb",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Swords Dance",
+   "Close Combat",
+   "Throat Chop"
+  ]
+ },
+ "Indeedee-F": {
+  "species": "Indeedee-F",
+  "item": "Psychic Seed",
+  "ability": "Psychic Surge",
+  "nature": "Relaxed",
+  "evs": [
+   32,
+   0,
+   32,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Psyshock",
+   "Follow Me",
+   "Baton Pass",
+   "Trick Room"
+  ]
+ },
+ "Politoed": {
+  "species": "Politoed",
+  "item": "Choice Scarf",
+  "ability": "Drizzle",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Weather Ball",
+   "Muddy Water",
+   "Ice Beam",
+   "Icy Wind"
+  ]
+ },
+ "Archaludon": {
+  "species": "Archaludon",
+  "item": "Leftovers",
+  "ability": "Stamina",
+  "nature": "Bold",
+  "evs": [
+   32,
+   0,
+   1,
+   1,
+   32,
+   0
+  ],
+  "moves": [
+   "Protect",
+   "Electro Shot",
+   "Dragon Pulse",
+   "Snarl"
+  ]
+ }
+}

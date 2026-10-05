@@ -1,0 +1,122 @@
+{
+ "Armarouge": {
+  "species": "Armarouge",
+  "item": "Psychic Seed",
+  "ability": "Flash Fire",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Expanding Force",
+   "Flamethrower",
+   "Calm Mind",
+   "Trick Room"
+  ]
+ },
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Focus Sash",
+  "ability": "Defiant",
+  "nature": "Brave",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Kowtow Cleave",
+   "Iron Head",
+   "Low Kick",
+   "Sucker Punch"
+  ]
+ },
+ "Torkoal": {
+  "species": "Torkoal",
+  "item": "Life Orb",
+  "ability": "Drought",
+  "nature": "Quiet",
+  "evs": [
+   32,
+   0,
+   0,
+   32,
+   2,
+   0
+  ],
+  "moves": [
+   "Eruption",
+   "Flamethrower",
+   "Solar Beam",
+   "Earth Power"
+  ]
+ },
+ "Staraptor": {
+  "species": "Staraptor",
+  "item": "Staraptite",
+  "ability": "Intimidate",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   4,
+   0,
+   0,
+   0,
+   30
+  ],
+  "moves": [
+   "Close Combat",
+   "Brave Bird",
+   "Roost",
+   "Protect"
+  ]
+ },
+ "Indeedee-F": {
+  "species": "Indeedee-F",
+  "item": "Rocky Helmet",
+  "ability": "Psychic Surge",
+  "nature": "Relaxed",
+  "evs": [
+   32,
+   0,
+   32,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Follow Me",
+   "Heal Pulse",
+   "Skill Swap",
+   "Trick Room"
+  ]
+ },
+ "Glimmora": {
+  "species": "Glimmora",
+  "item": "Glimmoranite",
+  "ability": "Toxic Debris",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Sludge Bomb",
+   "Power Gem",
+   "Earth Power",
+   "Energy Ball"
+  ]
+ }
+}

@@ -1,0 +1,4 @@
+
+Sirfetch'd (Scrappy, Leek = 1 in 2 crits, Adamant 32 Atk) attacking:
+  Meteor Assault -> Rillaboom                  no crit 171-193 (89-100%)      crit 193-193 (100-100%)     KO 47/80
+  Close Combat -> Rillaboom                    no crit 121-144 (63-75%)       crit 183-193 (95-100%)      KO 29/80

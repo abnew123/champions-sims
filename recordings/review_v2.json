@@ -1,0 +1,1110 @@
+[
+  {
+    "cells": [
+      14,
+      6
+    ],
+    "games_per_cell": 8,
+    "name": "G2 T1",
+    "note": "vs a Sand team. Zoroark-Hisui is disguised as Kleavor; Excadrill holds Focus Sash.",
+    "options": [
+      47,
+      54
+    ],
+    "rows": [
+      {
+        "actual": false,
+        "choice": "Farigiraf: Trick Room | Blastoise: Fake Out -> Excadrill (Mega)",
+        "eq_weight": 0.9987371971642256,
+        "one_turn": 0.51482314778538,
+        "se": 0.0,
+        "v": 0.9999999999999999,
+        "vs_their_actual": 1.0,
+        "worst": 1.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Trick Room | Blastoise: switch to Incineroar",
+        "eq_weight": 0.00052926306770547,
+        "one_turn": 0.5236003437064978,
+        "se": 0.12574284688618842,
+        "v": 0.7143816685066784,
+        "vs_their_actual": 0.875,
+        "worst": 0.625
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Trick Room | Blastoise: Dark Pulse -> Zoroark-Hisui (Mega)",
+        "eq_weight": 0.00008273056057866183,
+        "one_turn": 0.5116838668144362,
+        "se": 0.10349701918669914,
+        "v": 0.6964170369317909,
+        "vs_their_actual": 0.375,
+        "worst": 0.375
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Trick Room | Blastoise: Aura Sphere -> Excadrill (Mega)",
+        "eq_weight": 0.00007640144665461122,
+        "one_turn": 0.512701800224682,
+        "se": 0.09929469043035781,
+        "v": 0.6518248775682898,
+        "vs_their_actual": 0.25,
+        "worst": 0.25
+      },
+      {
+        "actual": true,
+        "choice": "Farigiraf: Trick Room | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.00006374321880650995,
+        "one_turn": 0.5088845156056984,
+        "se": 0.13447599680972155,
+        "v": 0.5357653874004946,
+        "vs_their_actual": 0.375,
+        "worst": 0.375
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Thunderbolt -> Zoroark-Hisui | Blastoise: switch to Incineroar",
+        "eq_weight": 0.00016519623429357946,
+        "one_turn": 0.5035963187118222,
+        "se": 0.13888620358849937,
+        "v": 0.5002425635795351,
+        "vs_their_actual": 0.5,
+        "worst": 0.5
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Psychic -> Zoroark-Hisui | Blastoise: switch to Incineroar",
+        "eq_weight": 0.00009546830773542335,
+        "one_turn": 0.5270236686018595,
+        "se": 0.1378597569719713,
+        "v": 0.45560217838150546,
+        "vs_their_actual": 0.375,
+        "worst": 0.375
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Protect | Blastoise: Aura Sphere -> Excadrill (Mega)",
+        "eq_weight": 0.000035714285714285703,
+        "one_turn": 0.506563250285174,
+        "se": 0.12377087063706792,
+        "v": 0.3836446403454966,
+        "vs_their_actual": 0.625,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Psychic -> Zoroark-Hisui | Blastoise: Aura Sphere -> Excadrill (Mega)",
+        "eq_weight": 0.000035714285714285703,
+        "one_turn": 0.5242419813681729,
+        "se": 0.12574285130032276,
+        "v": 0.28571414953129626,
+        "vs_their_actual": 0.125,
+        "worst": 0.125
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Protect | Blastoise: Dark Pulse -> Zoroark-Hisui (Mega)",
+        "eq_weight": 0.000035714285714285703,
+        "one_turn": 0.5100870895045063,
+        "se": 0.10349699640210851,
+        "v": 0.21418516419113715,
+        "vs_their_actual": 0.375,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Psychic -> Zoroark-Hisui | Blastoise: Fake Out -> Excadrill (Mega)",
+        "eq_weight": 0.000035714285714285703,
+        "one_turn": 0.5305708040515167,
+        "se": 0.0992946781277911,
+        "v": 0.16966413203347266,
+        "vs_their_actual": 0.25,
+        "worst": 0.125
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Psychic -> Zoroark-Hisui | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.000035714285714285703,
+        "one_turn": 0.5067575707667327,
+        "se": 0.06527625899258824,
+        "v": 0.13392999463297808,
+        "vs_their_actual": 0.375,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Thunderbolt -> Zoroark-Hisui | Blastoise: Aura Sphere -> Excadrill (Mega)",
+        "eq_weight": 0.000035714285714285703,
+        "one_turn": 0.5006312630637135,
+        "se": 0.0803158854770796,
+        "v": 0.0804181587706056,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: switch to Incineroar | Blastoise: Aura Sphere -> Excadrill (Mega)",
+        "eq_weight": 0.000035714285714285703,
+        "one_turn": 0.48996351268115734,
+        "se": 0.044592203366245406,
+        "v": 0.0448346414310116,
+        "vs_their_actual": 0.125,
+        "worst": 0.0
+      }
+    ],
+    "their_replies": [
+      {
+        "actual": true,
+        "choice": "Zoroark-Hisui: Hyper Voice | Excadrill: Megahorn -> Farigiraf",
+        "p": 0.35673727490800844
+      },
+      {
+        "actual": false,
+        "choice": "Zoroark-Hisui: Hyper Voice | Excadrill: Rock Slide",
+        "p": 0.642527040778632
+      }
+    ],
+    "value": 0.9994298646030012
+  },
+  {
+    "cells": [
+      14,
+      11
+    ],
+    "games_per_cell": 8,
+    "name": "G2 T1 (as seen)",
+    "note": "What the player saw: a real Kleavor + Excadrill lead, standard Smogon sets, Tyranitar + Garchomp behind.",
+    "options": [
+      61,
+      70
+    ],
+    "rows": [
+      {
+        "actual": false,
+        "choice": "Farigiraf: Trick Room | Blastoise: Fake Out -> Kleavor (Mega)",
+        "eq_weight": 0.6211946933900575,
+        "one_turn": 0.5925281598813691,
+        "se": 0.08256314543758103,
+        "v": 0.6867594426354371,
+        "vs_their_actual": null,
+        "worst": 0.5
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Trick Room | Blastoise: Fake Out -> Excadrill (Mega)",
+        "eq_weight": 0.34232806275246613,
+        "one_turn": 0.5588950502958239,
+        "se": 0.04258163728619519,
+        "v": 0.6828503139859783,
+        "vs_their_actual": null,
+        "worst": 0.125
+      },
+      {
+        "actual": true,
+        "choice": "Farigiraf: Trick Room | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.03563573771819169,
+        "one_turn": 0.4865947982840873,
+        "se": 0.09571332321391679,
+        "v": 0.6472622747572856,
+        "vs_their_actual": null,
+        "worst": 0.25
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Psychic -> Kleavor | Blastoise: Fake Out -> Kleavor (Mega)",
+        "eq_weight": 0.00004658149014217645,
+        "one_turn": 0.5961918888098875,
+        "se": 0.10027520145815132,
+        "v": 0.5689791090445258,
+        "vs_their_actual": null,
+        "worst": 0.25
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Thunderbolt -> Kleavor | Blastoise: Fake Out -> Kleavor (Mega)",
+        "eq_weight": 0.00008025896804667562,
+        "one_turn": 0.5139178327734663,
+        "se": 0.098583429544846,
+        "v": 0.5369677970227384,
+        "vs_their_actual": null,
+        "worst": 0.125
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Protect | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.00006357084066190636,
+        "one_turn": 0.5329720202977158,
+        "se": 0.07400791141623929,
+        "v": 0.4964127049120496,
+        "vs_their_actual": null,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: switch to Incineroar | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.00030420473975190115,
+        "one_turn": 0.5968034856329794,
+        "se": 0.0694722516541721,
+        "v": 0.4336369750328265,
+        "vs_their_actual": null,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: switch to Incineroar | Blastoise: Aura Sphere -> Excadrill (Mega)",
+        "eq_weight": 0.00011654316635725264,
+        "one_turn": 0.5311861794642966,
+        "se": 0.07600483306428323,
+        "v": 0.42191743125289927,
+        "vs_their_actual": null,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: switch to Incineroar | Blastoise: Aura Sphere -> Kleavor (Mega)",
+        "eq_weight": 0.00005177550575328002,
+        "one_turn": 0.5111934102985456,
+        "se": 0.09157896677781147,
+        "v": 0.3952470974613505,
+        "vs_their_actual": null,
+        "worst": 0.125
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Psychic -> Kleavor | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.000035714285714285764,
+        "one_turn": 0.5207671736217594,
+        "se": 0.09881494117834352,
+        "v": 0.3762498456503167,
+        "vs_their_actual": null,
+        "worst": 0.125
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Psychic -> Kleavor | Blastoise: Fake Out -> Excadrill (Mega)",
+        "eq_weight": 0.000035714285714285764,
+        "one_turn": 0.5901889479809421,
+        "se": 0.08311191525258742,
+        "v": 0.3698598502025412,
+        "vs_their_actual": null,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: Thunderbolt -> Kleavor | Blastoise: Fake Out -> Excadrill (Mega)",
+        "eq_weight": 0.000035714285714285764,
+        "one_turn": 0.51248997091557,
+        "se": 0.08666575881085926,
+        "v": 0.2574213926201217,
+        "vs_their_actual": null,
+        "worst": 0.125
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: switch to Incineroar | Blastoise: Fake Out -> Kleavor (Mega)",
+        "eq_weight": 0.000035714285714285764,
+        "one_turn": 0.597455863892585,
+        "se": 0.07392255270870292,
+        "v": 0.21814447012006094,
+        "vs_their_actual": null,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Farigiraf: switch to Incineroar | Blastoise: Fake Out -> Excadrill (Mega)",
+        "eq_weight": 0.000035714285714285764,
+        "one_turn": 0.5963494738488642,
+        "se": 0.049672711236709605,
+        "v": 0.10361953990042864,
+        "vs_their_actual": null,
+        "worst": 0.0
+      }
+    ],
+    "their_replies": [
+      {
+        "actual": false,
+        "choice": "Kleavor: X-Scissor -> Farigiraf | Excadrill: Rock Slide",
+        "p": 0.03930099834150375
+      },
+      {
+        "actual": false,
+        "choice": "Kleavor: switch to Tyranitar | Excadrill: High Horsepower -> Blastoise",
+        "p": 0.3163694607596036
+      },
+      {
+        "actual": false,
+        "choice": "Kleavor: X-Scissor -> Farigiraf | Excadrill: switch to Garchomp",
+        "p": 0.33521719154269536
+      },
+      {
+        "actual": false,
+        "choice": "Kleavor: switch to Garchomp | Excadrill: High Horsepower -> Blastoise",
+        "p": 0.3001689911367357
+      }
+    ],
+    "value": 0.6837858550471881
+  },
+  {
+    "cells": [
+      15,
+      5
+    ],
+    "games_per_cell": 8,
+    "name": "G3 T1",
+    "note": "Their Psychic Terrain blocks Fake Out; Follow Me redirects single-target moves.",
+    "options": [
+      88,
+      40
+    ],
+    "rows": [
+      {
+        "actual": false,
+        "choice": "Incineroar: switch to Indeedee-F | Blastoise: Aura Sphere -> Kommo-o (Mega)",
+        "eq_weight": 0.9960414885160412,
+        "one_turn": 0.4892196086644226,
+        "se": 0.14147208073046275,
+        "v": 0.37506640625,
+        "vs_their_actual": 0.5,
+        "worst": 0.375
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: switch to Indeedee-F | Blastoise: Dark Pulse -> Indeedee-F (Mega)",
+        "eq_weight": 0.0012958007981129958,
+        "one_turn": 0.5757583798178093,
+        "se": 0.12924145146254182,
+        "v": 0.3197455888365184,
+        "vs_their_actual": 0.75,
+        "worst": 0.25
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Close Combat -> Kommo-o | Blastoise: Dark Pulse -> Indeedee-F (Mega)",
+        "eq_weight": 0.0011341149889209396,
+        "one_turn": 0.5001615387645275,
+        "se": 0.13649396782016016,
+        "v": 0.30536222366348154,
+        "vs_their_actual": 0.125,
+        "worst": 0.125
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: switch to Indeedee-F | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.0008789326543437188,
+        "one_turn": 0.5669592999781187,
+        "se": 0.12857054064851084,
+        "v": 0.28501185691825914,
+        "vs_their_actual": 0.75,
+        "worst": 0.25
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: switch to Indeedee-F | Blastoise: Aura Sphere -> Indeedee-F (Mega)",
+        "eq_weight": 0.0003163297092479101,
+        "one_turn": 0.4781566801173273,
+        "se": 0.10438747258106171,
+        "v": 0.22958791450477764,
+        "vs_their_actual": 0.5,
+        "worst": 0.125
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Close Combat -> Kommo-o | Blastoise: Aura Sphere -> Kommo-o (Mega)",
+        "eq_weight": 0.000033333333333333335,
+        "one_turn": 0.5681729837438723,
+        "se": 0.12307167890287303,
+        "v": 0.21517486183174073,
+        "vs_their_actual": 0.125,
+        "worst": 0.125
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Flare Blitz -> Kommo-o | Blastoise: Aura Sphere -> Kommo-o (Mega)",
+        "eq_weight": 0.000033333333333333335,
+        "one_turn": 0.5256611960030586,
+        "se": 0.11805024406199914,
+        "v": 0.18036222366348154,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Throat Chop -> Indeedee-F | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.000033333333333333335,
+        "one_turn": 0.4947293182989405,
+        "se": 0.10101916436359361,
+        "v": 0.15985404441825918,
+        "vs_their_actual": 0.375,
+        "worst": 0.125
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Close Combat -> Indeedee-F | Blastoise: Aura Sphere -> Indeedee-F (Mega)",
+        "eq_weight": 0.000033333333333333335,
+        "one_turn": 0.4183244382344296,
+        "se": 0.09664383090330365,
+        "v": 0.12502499999999997,
+        "vs_their_actual": 0.125,
+        "worst": 0.125
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Flare Blitz -> Kommo-o | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.000033333333333333335,
+        "one_turn": 0.42713108417704376,
+        "se": 0.0901623655452795,
+        "v": 0.09023736183174076,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": true,
+        "choice": "Incineroar: Throat Chop -> Indeedee-F | Blastoise: Aura Sphere -> Kommo-o (Mega)",
+        "eq_weight": 0.000033333333333333335,
+        "one_turn": 0.3710440093168925,
+        "se": 0.09016236356472554,
+        "v": 0.09018736183174077,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Close Combat -> Kommo-o | Blastoise: Aura Sphere -> Indeedee-F (Mega)",
+        "eq_weight": 0.000033333333333333335,
+        "one_turn": 0.42348254380605516,
+        "se": 0.03479624444610211,
+        "v": 0.034900138168259216,
+        "vs_their_actual": 0.125,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Flare Blitz -> Kommo-o | Blastoise: Dark Pulse -> Indeedee-F (Mega)",
+        "eq_weight": 0.000033333333333333335,
+        "one_turn": 0.42162640394673445,
+        "se": 0.03479624057837072,
+        "v": 0.034858731918259216,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Close Combat -> Kommo-o | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.000033333333333333335,
+        "one_turn": 0.5191177540253482,
+        "se": 0.000035304745909089336,
+        "v": 0.0001492187500000002,
+        "vs_their_actual": 0.375,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Close Combat -> Indeedee-F | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.000033333333333333335,
+        "one_turn": 0.49842143057224186,
+        "se": 0.00003267803015993974,
+        "v": 0.00009921875000000013,
+        "vs_their_actual": 0.375,
+        "worst": 0.0
+      }
+    ],
+    "their_replies": [
+      {
+        "actual": false,
+        "choice": "Indeedee-F: Helping Hand -> ally | Kommo-o: Clanging Scales",
+        "p": 0.7212988946539262
+      },
+      {
+        "actual": false,
+        "choice": "Indeedee-F: Psychic -> Blastoise | Kommo-o: Clanging Scales",
+        "p": 0.2783698553460737
+      },
+      {
+        "actual": true,
+        "choice": "Indeedee-F: Follow Me | Kommo-o: Clangorous Soul",
+        "p": 0.00013125000000000013
+      }
+    ],
+    "value": 0.3746965040159281
+  },
+  {
+    "cells": [
+      15,
+      12
+    ],
+    "games_per_cell": 8,
+    "name": "G3 T5",
+    "note": "Metagross Protected last turn; Kommo-o is +1 SpA/SpD/Spe (Attack and Defense back to 0).",
+    "options": [
+      40,
+      41
+    ],
+    "rows": [
+      {
+        "actual": false,
+        "choice": "Blastoise-Mega: Water Spout | Kingambit: Sucker Punch -> Metagross-Mega",
+        "eq_weight": 0.06666666666666665,
+        "one_turn": 0.001091538866867977,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Blastoise-Mega: Aura Sphere -> Kommo-o | Kingambit: Kowtow Cleave -> Metagross-Mega",
+        "eq_weight": 0.06666666666666665,
+        "one_turn": 0.001077526886022214,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Blastoise-Mega: Dark Pulse -> Metagross-Mega | Kingambit: Kowtow Cleave -> Metagross-Mega",
+        "eq_weight": 0.06666666666666665,
+        "one_turn": 0.0010205819375013081,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Blastoise-Mega: Aura Sphere -> Metagross-Mega | Kingambit: Sucker Punch -> Metagross-Mega",
+        "eq_weight": 0.06666666666666665,
+        "one_turn": 0.0010167395441535796,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Blastoise-Mega: Aura Sphere -> Metagross-Mega | Kingambit: Kowtow Cleave -> Metagross-Mega",
+        "eq_weight": 0.06666666666666665,
+        "one_turn": 0.001009859062456846,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Blastoise-Mega: Aura Sphere -> Kommo-o | Kingambit: Sucker Punch -> Metagross-Mega",
+        "eq_weight": 0.06666666666666665,
+        "one_turn": 0.0009633232544003422,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": true,
+        "choice": "Blastoise-Mega: Dark Pulse -> Metagross-Mega | Kingambit: Sucker Punch -> Metagross-Mega",
+        "eq_weight": 0.06666666666666665,
+        "one_turn": 0.0009184369889473261,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Blastoise-Mega: Water Spout | Kingambit: Kowtow Cleave -> Metagross-Mega",
+        "eq_weight": 0.06666666666666665,
+        "one_turn": 0.0009124648990273786,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Blastoise-Mega: Dark Pulse -> Kommo-o | Kingambit: Kowtow Cleave -> Metagross-Mega",
+        "eq_weight": 0.06666666666666665,
+        "one_turn": 0.0009077952359030099,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Blastoise-Mega: Dark Pulse -> Metagross-Mega | Kingambit: Iron Head -> Kommo-o",
+        "eq_weight": 0.06666666666666665,
+        "one_turn": 0.0008669914097744186,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Blastoise-Mega: Dark Pulse -> Kommo-o | Kingambit: Sucker Punch -> Metagross-Mega",
+        "eq_weight": 0.06666666666666665,
+        "one_turn": 0.0008383395708979026,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Blastoise-Mega: Water Spout | Kingambit: Iron Head -> Kommo-o",
+        "eq_weight": 0.06666666666666665,
+        "one_turn": 0.0008261755479558201,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Blastoise-Mega: Aura Sphere -> Kommo-o | Kingambit: Iron Head -> Kommo-o",
+        "eq_weight": 0.06666666666666665,
+        "one_turn": 0.0007568124542716366,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Blastoise-Mega: Aura Sphere -> Metagross-Mega | Kingambit: Iron Head -> Kommo-o",
+        "eq_weight": 0.06666666666666665,
+        "one_turn": 0.0007165307829957088,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Blastoise-Mega: Dark Pulse -> Metagross-Mega | Kingambit: Low Kick -> Kommo-o",
+        "eq_weight": 0.06666666666666665,
+        "one_turn": 0.0005590604614829159,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      }
+    ],
+    "their_replies": [
+      {
+        "actual": false,
+        "choice": "Kommo-o: Clanging Scales | Metagross-Mega: Steel Roller -> Kingambit",
+        "p": 0.08333333333333334
+      },
+      {
+        "actual": false,
+        "choice": "Kommo-o: Clanging Scales | Metagross-Mega: Iron Head -> Kingambit",
+        "p": 0.08333333333333334
+      },
+      {
+        "actual": false,
+        "choice": "Kommo-o: Aura Sphere -> Blastoise-Mega | Metagross-Mega: Psychic Fangs -> Blastoise-Mega",
+        "p": 0.08333333333333334
+      },
+      {
+        "actual": false,
+        "choice": "Kommo-o: Aura Sphere -> Blastoise-Mega | Metagross-Mega: Steel Roller -> Blastoise-Mega",
+        "p": 0.08333333333333334
+      },
+      {
+        "actual": false,
+        "choice": "Kommo-o: Aura Sphere -> Blastoise-Mega | Metagross-Mega: Steel Roller -> Kingambit",
+        "p": 0.08333333333333334
+      },
+      {
+        "actual": false,
+        "choice": "Kommo-o: Aura Sphere -> Blastoise-Mega | Metagross-Mega: Protect",
+        "p": 0.08333333333333334
+      },
+      {
+        "actual": false,
+        "choice": "Kommo-o: Aura Sphere -> Blastoise-Mega | Metagross-Mega: Iron Head -> Blastoise-Mega",
+        "p": 0.08333333333333334
+      },
+      {
+        "actual": false,
+        "choice": "Kommo-o: Aura Sphere -> Blastoise-Mega | Metagross-Mega: Iron Head -> Kingambit",
+        "p": 0.08333333333333334
+      },
+      {
+        "actual": false,
+        "choice": "Kommo-o: Aura Sphere -> Kingambit | Metagross-Mega: Psychic Fangs -> Blastoise-Mega",
+        "p": 0.08333333333333334
+      },
+      {
+        "actual": false,
+        "choice": "Kommo-o: Aura Sphere -> Kingambit | Metagross-Mega: switch to Incineroar",
+        "p": 0.08333333333333334
+      },
+      {
+        "actual": false,
+        "choice": "Kommo-o: Clanging Scales | Metagross-Mega: Protect",
+        "p": 0.08333333333333334
+      },
+      {
+        "actual": true,
+        "choice": "Kommo-o: Aura Sphere -> Kingambit | Metagross-Mega: Protect",
+        "p": 0.08333333333333334
+      }
+    ],
+    "value": 0.0
+  },
+  {
+    "cells": [
+      14,
+      7
+    ],
+    "games_per_cell": 8,
+    "name": "G5 T1",
+    "note": "Batch 2. Their Psychic Terrain blocks Fake Out; Follow Me redirects single-target moves. Their 4th Pokemon is unknown (Basculegion assumed).",
+    "options": [
+      88,
+      34
+    ],
+    "rows": [
+      {
+        "actual": false,
+        "choice": "Incineroar: Flare Blitz -> Gardevoir | Blastoise: Aura Sphere -> Indeedee-F (Mega)",
+        "eq_weight": 0.245723921815051,
+        "one_turn": 0.5252244888608573,
+        "se": 0.00003015116291509123,
+        "v": 0.00032679191468253945,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": true,
+        "choice": "Incineroar: Flare Blitz -> Gardevoir | Blastoise: Dark Pulse -> Indeedee-F (Mega)",
+        "eq_weight": 0.22327182257672162,
+        "one_turn": 0.5904173161730872,
+        "se": 0.00003238991228601551,
+        "v": 0.00031417410714285694,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Flare Blitz -> Gardevoir | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.19342248330728287,
+        "one_turn": 0.5739966637747747,
+        "se": 0.000032162482238909736,
+        "v": 0.00029740203373015853,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Flare Blitz -> Gardevoir | Blastoise: switch to Kingambit",
+        "eq_weight": 0.1028420422921247,
+        "one_turn": 0.5020211282300673,
+        "se": 0.000023102992725584466,
+        "v": 0.0002464967757936507,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Flare Blitz -> Gardevoir | Blastoise: Dark Pulse -> Gardevoir (Mega)",
+        "eq_weight": 0.08502220742525009,
+        "one_turn": 0.5287487165890673,
+        "se": 0.000029054665215061783,
+        "v": 0.0002364831349206348,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Throat Chop -> Gardevoir | Blastoise: Aura Sphere -> Indeedee-F (Mega)",
+        "eq_weight": 0.07524601376538358,
+        "one_turn": 0.4818191762979739,
+        "se": 0.0000269606543261127,
+        "v": 0.00023099578373015863,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Throat Chop -> Gardevoir | Blastoise: Dark Pulse -> Gardevoir (Mega)",
+        "eq_weight": 0.053242758001040766,
+        "one_turn": 0.5220824152539439,
+        "se": 0.000029828300431291413,
+        "v": 0.00021862599206349197,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Throat Chop -> Gardevoir | Blastoise: Dark Pulse -> Indeedee-F (Mega)",
+        "eq_weight": 0.02101446510285952,
+        "one_turn": 0.5382091952344481,
+        "se": 0.000027213012196910554,
+        "v": 0.00020052083333333329,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Throat Chop -> Gardevoir | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.00003571428571428583,
+        "one_turn": 0.5818818838342245,
+        "se": 0.000029424842505005236,
+        "v": 0.00015587797619047612,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Throat Chop -> Gardevoir | Blastoise: switch to Kingambit",
+        "eq_weight": 0.00003571428571428583,
+        "one_turn": 0.5144078587968234,
+        "se": 0.000024589814317252468,
+        "v": 0.00014502728174603172,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Throat Chop -> Indeedee-F | Blastoise: switch to Kingambit",
+        "eq_weight": 0.00003571428571428583,
+        "one_turn": 0.5012960379850904,
+        "se": 0.00002693293818386822,
+        "v": 0.00010863095238095236,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Throat Chop -> Indeedee-F | Blastoise: Dark Pulse -> Indeedee-F (Mega)",
+        "eq_weight": 0.00003571428571428583,
+        "one_turn": 0.48065966658225895,
+        "se": 0.000021205146706457052,
+        "v": 0.000048332093253968225,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Throat Chop -> Indeedee-F | Blastoise: Aura Sphere -> Indeedee-F (Mega)",
+        "eq_weight": 0.00003571428571428583,
+        "one_turn": 0.481308515589824,
+        "se": 0.00001611557566591829,
+        "v": 0.00002787078373015871,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Throat Chop -> Indeedee-F | Blastoise: Water Spout (Mega)",
+        "eq_weight": 0.00003571428571428583,
+        "one_turn": 0.55847081653217,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      }
+    ],
+    "their_replies": [
+      {
+        "actual": true,
+        "choice": "Gardevoir: Hyper Voice (Mega) | Indeedee-F: Follow Me",
+        "p": 0.9995419146825397
+      }
+    ],
+    "value": 0.0002866805548865103
+  },
+  {
+    "cells": [
+      15,
+      7
+    ],
+    "games_per_cell": 8,
+    "name": "G5 T2",
+    "note": "Psychic Terrain has 4 turns left; Incineroar's White Herb is used; Blastoise is at -1 Attack.",
+    "options": [
+      54,
+      39
+    ],
+    "rows": [
+      {
+        "actual": false,
+        "choice": "Incineroar: Flare Blitz -> Gardevoir-Mega | Blastoise-Mega: switch to Kingambit",
+        "eq_weight": 0.4094452386262911,
+        "one_turn": 0.0745622206735394,
+        "se": 0.00001349873117890097,
+        "v": 0.00010714285714285714,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: switch to Torkoal | Blastoise-Mega: Aura Sphere -> Archaludon",
+        "eq_weight": 0.16551104983387052,
+        "one_turn": 0.06819105346757096,
+        "se": 0.00004501844751881142,
+        "v": 0.00004501844751881142,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Throat Chop -> Gardevoir-Mega | Blastoise-Mega: switch to Kingambit",
+        "eq_weight": 0.10249539976661748,
+        "one_turn": 0.074197702428547,
+        "se": 0.000016184410128124387,
+        "v": 0.000044642857142857136,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Close Combat -> Archaludon | Blastoise-Mega: switch to Kingambit",
+        "eq_weight": 0.10249539976661748,
+        "one_turn": 0.0736566260999174,
+        "se": 0.000016184410128124387,
+        "v": 0.000044642857142857136,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Flare Blitz -> Archaludon | Blastoise-Mega: switch to Kingambit",
+        "eq_weight": 0.10249539976661748,
+        "one_turn": 0.07290213302978966,
+        "se": 0.000016184410128124387,
+        "v": 0.000044642857142857136,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Throat Chop -> Archaludon | Blastoise-Mega: switch to Kingambit",
+        "eq_weight": 0.05864542278665966,
+        "one_turn": 0.07289333055400163,
+        "se": 0.00001349873117890097,
+        "v": 0.00003571428571428571,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: Close Combat -> Gardevoir-Mega | Blastoise-Mega: switch to Kingambit",
+        "eq_weight": 0.05864542278665966,
+        "one_turn": 0.07265871978429705,
+        "se": 0.00001349873117890097,
+        "v": 0.00003571428571428571,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: switch to Kingambit | Blastoise-Mega: switch to Torkoal",
+        "eq_weight": 0.000033333333333333626,
+        "one_turn": 0.07612702604336888,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: switch to Torkoal | Blastoise-Mega: switch to Kingambit",
+        "eq_weight": 0.000033333333333333626,
+        "one_turn": 0.06729815903586474,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: switch to Kingambit | Blastoise-Mega: Aura Sphere -> Archaludon",
+        "eq_weight": 0.000033333333333333626,
+        "one_turn": 0.05316954690844666,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: switch to Torkoal | Blastoise-Mega: Dark Pulse -> Gardevoir-Mega",
+        "eq_weight": 0.000033333333333333626,
+        "one_turn": 0.051861748470149044,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: switch to Torkoal | Blastoise-Mega: Dark Pulse -> Archaludon",
+        "eq_weight": 0.000033333333333333626,
+        "one_turn": 0.04888337737466631,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: switch to Kingambit | Blastoise-Mega: Dark Pulse -> Gardevoir-Mega",
+        "eq_weight": 0.000033333333333333626,
+        "one_turn": 0.04111137931201513,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": false,
+        "choice": "Incineroar: switch to Kingambit | Blastoise-Mega: Dark Pulse -> Archaludon",
+        "eq_weight": 0.000033333333333333626,
+        "one_turn": 0.03930207800503756,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      },
+      {
+        "actual": true,
+        "choice": "Incineroar: Throat Chop -> Gardevoir-Mega | Blastoise-Mega: Aura Sphere -> Archaludon",
+        "eq_weight": 0.000033333333333333626,
+        "one_turn": 0.013607206558673438,
+        "se": 0.0,
+        "v": 0.0,
+        "vs_their_actual": 0.0,
+        "worst": 0.0
+      }
+    ],
+    "their_replies": [
+      {
+        "actual": true,
+        "choice": "Gardevoir-Mega: Hyper Voice | Archaludon: Thunderbolt -> Blastoise-Mega",
+        "p": 0.2498742488192481
+      },
+      {
+        "actual": false,
+        "choice": "Gardevoir-Mega: Hyper Voice | Archaludon: Aura Sphere -> Blastoise-Mega",
+        "p": 0.2498742488192481
+      },
+      {
+        "actual": false,
+        "choice": "Gardevoir-Mega: Expanding Force -> Blastoise-Mega | Archaludon: Aura Sphere -> Blastoise-Mega",
+        "p": 0.2498742488192481
+      },
+      {
+        "actual": false,
+        "choice": "Gardevoir-Mega: Hyper Voice | Archaludon: Thunderbolt -> Incineroar",
+        "p": 0.2498742488192481
+      }
+    ],
+    "value": 0.00006923620445990833
+  }
+]

@@ -1,0 +1,122 @@
+{
+ "Rillaboom": {
+  "species": "Rillaboom",
+  "item": "Miracle Seed",
+  "ability": "Grassy Surge",
+  "nature": "Adamant",
+  "evs": [
+   18,
+   25,
+   5,
+   0,
+   10,
+   8
+  ],
+  "moves": [
+   "Fake Out",
+   "Grassy Glide",
+   "Wood Hammer",
+   "U-turn"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Sitrus Berry",
+  "ability": "Intimidate",
+  "nature": "Careful",
+  "evs": [
+   32,
+   0,
+   20,
+   0,
+   14,
+   0
+  ],
+  "moves": [
+   "Fake Out",
+   "Throat Chop",
+   "Flare Blitz",
+   "Parting Shot"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "Grassy Seed",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   14,
+   20,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Close Combat",
+   "Dire Claw",
+   "Acrobatics",
+   "Protect"
+  ]
+ },
+ "Gholdengo": {
+  "species": "Gholdengo",
+  "item": "Focus Sash",
+  "ability": "Good as Gold",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Make It Rain",
+   "Shadow Ball",
+   "Power Gem",
+   "Protect"
+  ]
+ },
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Chople Berry",
+  "ability": "Defiant",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   14,
+   20,
+   0,
+   0,
+   0
+  ],
+  "moves": [
+   "Kowtow Cleave",
+   "Sucker Punch",
+   "Iron Head",
+   "Low Kick"
+  ]
+ },
+ "Salamence": {
+  "species": "Salamence",
+  "item": "Salamencite",
+  "ability": "Intimidate",
+  "nature": "Naive",
+  "evs": [
+   1,
+   21,
+   0,
+   15,
+   0,
+   29
+  ],
+  "moves": [
+   "Hyper Voice",
+   "Double-Edge",
+   "Tailwind",
+   "Protect"
+  ]
+ }
+}

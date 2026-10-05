@@ -1,0 +1,122 @@
+{
+ "Rillaboom": {
+  "species": "Rillaboom",
+  "item": "Miracle Seed",
+  "ability": "Grassy Surge",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Protect",
+   "Fake Out",
+   "Grassy Glide",
+   "U-turn"
+  ]
+ },
+ "Politoed": {
+  "species": "Politoed",
+  "item": "Sitrus Berry",
+  "ability": "Drizzle",
+  "nature": "Calm",
+  "evs": [
+   32,
+   0,
+   24,
+   0,
+   7,
+   3
+  ],
+  "moves": [
+   "Protect",
+   "Weather Ball",
+   "Perish Song",
+   "Encore"
+  ]
+ },
+ "Archaludon": {
+  "species": "Archaludon",
+  "item": "Leftovers",
+  "ability": "Stamina",
+  "nature": "Modest",
+  "evs": [
+   32,
+   0,
+   1,
+   5,
+   25,
+   3
+  ],
+  "moves": [
+   "Protect",
+   "Electro Shot",
+   "Dragon Pulse",
+   "Aura Sphere"
+  ]
+ },
+ "Gengar": {
+  "species": "Gengar",
+  "item": "Gengarite",
+  "ability": "Cursed Body",
+  "nature": "Modest",
+  "evs": [
+   32,
+   0,
+   6,
+   0,
+   8,
+   20
+  ],
+  "moves": [
+   "Protect",
+   "Perish Song",
+   "Sludge Bomb",
+   "Shadow Ball"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Passho Berry",
+  "ability": "Intimidate",
+  "nature": "Careful",
+  "evs": [
+   32,
+   0,
+   14,
+   0,
+   20,
+   0
+  ],
+  "moves": [
+   "Protect",
+   "Fake Out",
+   "Throat Chop",
+   "Parting Shot"
+  ]
+ },
+ "Golisopod": {
+  "species": "Golisopod",
+  "item": "Golisopite",
+  "ability": "Emergency Exit",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Protect",
+   "Leech Life",
+   "Sucker Punch",
+   "Swords Dance"
+  ]
+ }
+}

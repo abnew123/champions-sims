@@ -1,0 +1,122 @@
+{
+ "Ceruledge": {
+  "species": "Ceruledge",
+  "item": "Focus Sash",
+  "ability": "Flash Fire",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Poltergeist",
+   "Bitter Blade",
+   "Close Combat",
+   "Swords Dance"
+  ]
+ },
+ "Indeedee-F": {
+  "species": "Indeedee-F",
+  "item": "Colbur Berry",
+  "ability": "Psychic Surge",
+  "nature": "Relaxed",
+  "evs": [
+   32,
+   0,
+   32,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Mystical Fire",
+   "Follow Me",
+   "Helping Hand",
+   "Trick Room"
+  ]
+ },
+ "Dragonite": {
+  "species": "Dragonite",
+  "item": "Life Orb",
+  "ability": "Inner Focus",
+  "nature": "Adamant",
+  "evs": [
+   7,
+   32,
+   0,
+   0,
+   0,
+   27
+  ],
+  "moves": [
+   "Scale Shot",
+   "Stomping Tantrum",
+   "Rock Slide",
+   "Dragon Dance"
+  ]
+ },
+ "Lopunny": {
+  "species": "Lopunny",
+  "item": "Lopunnite",
+  "ability": "Limber",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Close Combat",
+   "Triple Axel",
+   "Thunder Punch",
+   "Fake Out"
+  ]
+ },
+ "Gardevoir": {
+  "species": "Gardevoir",
+  "item": "Gardevoirite",
+  "ability": "Trace",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Expanding Force",
+   "Hyper Voice",
+   "Calm Mind",
+   "Protect"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "Psychic Seed",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Close Combat",
+   "Dire Claw",
+   "Throat Chop",
+   "Fake Out"
+  ]
+ }
+}

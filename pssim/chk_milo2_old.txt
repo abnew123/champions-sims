@@ -1,0 +1,4 @@
+Into Milotic that already used Coil (+1 Def), Grassy Terrain:
+  Wood Hammer -> Calm +1                   202-202 of 202 (100-100%)  KO 57/57
+  Wood Hammer -> Bold +1                   186-202 of 202 (92-100%)  KO 28/57
+  Grassy Glide -> Calm +1                  120-144 of 202 (59-71%)  KO 0/57

@@ -1,0 +1,2520 @@
+[
+{
+"name": "Rillaboom",
+"species": "rillaboom",
+"item": "miracleseed",
+"ability": "grassysurge",
+"weight": 0.08481456708601355,
+"moves": [
+[
+"fakeout",
+0.9948699999999999
+],
+[
+"grassyglide",
+0.9921
+],
+[
+"woodhammer",
+0.88673
+],
+[
+"highhorsepower",
+0.52289
+],
+[
+"uturn",
+0.41822000000000004
+]
+],
+"weather": "",
+"terrain": "grassyterrain",
+"atk_nature": "Adamant",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Adamant",
+"bulk_sp": [
+32,
+32,
+0,
+0,
+2,
+0
+]
+},
+{
+"name": "Sneasler",
+"species": "sneasler",
+"item": "whiteherb",
+"ability": "unburden",
+"weight": 0.06817793693754302,
+"moves": [
+[
+"closecombat",
+0.99844
+],
+[
+"direclaw",
+0.86661
+],
+[
+"fakeout",
+0.49247
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Adamant",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Adamant",
+"bulk_sp": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"name": "Incineroar",
+"species": "incineroar",
+"item": "sitrusberry",
+"ability": "intimidate",
+"weight": 0.058305021812592825,
+"moves": [
+[
+"fakeout",
+0.99477
+],
+[
+"flareblitz",
+0.92226
+],
+[
+"throatchop",
+0.4618
+],
+[
+"darkestlariat",
+0.26524000000000003
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Careful",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Careful",
+"bulk_sp": [
+32,
+0,
+14,
+0,
+20,
+0
+]
+},
+{
+"name": "Salamence-Mega",
+"species": "salamencemega",
+"item": "salamencite",
+"ability": "aerilate",
+"weight": 0.04437103142772864,
+"moves": [
+[
+"hypervoice",
+0.9331499999999999
+],
+[
+"dracometeor",
+0.6206900000000001
+],
+[
+"doubleedge",
+0.29170999999999997
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Timid",
+"atk_sp": [
+0,
+32,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Timid",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Kingambit",
+"species": "kingambit",
+"item": "chopleberry",
+"ability": "defiant",
+"weight": 0.04187603823284361,
+"moves": [
+[
+"suckerpunch",
+0.9914400000000001
+],
+[
+"kowtowcleave",
+0.9882299999999999
+],
+[
+"ironhead",
+0.64949
+],
+[
+"lowkick",
+0.47920999999999997
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Adamant",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Adamant",
+"bulk_sp": [
+32,
+32,
+0,
+0,
+2,
+0
+]
+},
+{
+"name": "Gholdengo",
+"species": "gholdengo",
+"item": "lifeorb",
+"ability": "goodasgold",
+"weight": 0.03806886103592997,
+"moves": [
+[
+"shadowball",
+0.99761
+],
+[
+"makeitrain",
+0.99629
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Timid",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Timid",
+"bulk_sp": [
+7,
+0,
+0,
+27,
+0,
+32
+]
+},
+{
+"name": "Indeedee-F",
+"species": "indeedeef",
+"item": "rockyhelmet",
+"ability": "psychicsurge",
+"weight": 0.03151246914410801,
+"moves": [
+[
+"psychic",
+0.7204999999999999
+]
+],
+"weather": "",
+"terrain": "psychicterrain",
+"atk_nature": "Relaxed",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Relaxed",
+"bulk_sp": [
+32,
+0,
+32,
+0,
+2,
+0
+]
+},
+{
+"name": "Basculegion",
+"species": "basculegion",
+"item": "choicescarf",
+"ability": "adaptability",
+"weight": 0.03023909758483106,
+"moves": [
+[
+"lastrespects",
+0.99785
+],
+[
+"wavecrash",
+0.95831
+],
+[
+"aquajet",
+0.9444899999999999
+],
+[
+"flipturn",
+0.45502000000000004
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Jolly",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Jolly",
+"bulk_sp": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"name": "Raichu-Mega-Y",
+"species": "raichumegay",
+"item": "raichunitey",
+"ability": "noguard",
+"weight": 0.029271374012223333,
+"moves": [
+[
+"zapcannon",
+0.99849
+],
+[
+"focusblast",
+0.9908899999999999
+],
+[
+"fakeout",
+0.80963
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Timid",
+"atk_sp": [
+0,
+32,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Timid",
+"bulk_sp": [
+32,
+0,
+11,
+0,
+0,
+23
+]
+},
+{
+"name": "Farigiraf",
+"species": "farigiraf",
+"item": "sitrusberry",
+"ability": "armortail",
+"weight": 0.026114628668422714,
+"moves": [
+[
+"psychic",
+0.6276700000000001
+],
+[
+"thunderbolt",
+0.43687
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Bold",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Bold",
+"bulk_sp": [
+27,
+0,
+20,
+0,
+19,
+0
+]
+},
+{
+"name": "Arcanine-Hisui",
+"species": "arcaninehisui",
+"item": "focussash",
+"ability": "rockhead",
+"weight": 0.023823724235006755,
+"moves": [
+[
+"flareblitz",
+0.9986499999999999
+],
+[
+"headsmash",
+0.94903
+],
+[
+"extremespeed",
+0.9112699999999999
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Jolly",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Jolly",
+"bulk_sp": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"name": "Floette-Mega",
+"species": "floettemega",
+"item": "floettite",
+"ability": "fairyaura",
+"weight": 0.022467229360836692,
+"moves": [
+[
+"dazzlinggleam",
+0.96095
+],
+[
+"moonblast",
+0.66388
+],
+[
+"drainingkiss",
+0.36503
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Timid",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Timid",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Golisopod-Mega",
+"species": "golisopodmega",
+"item": "golisopite",
+"ability": "toughclaws",
+"weight": 0.02155481351915006,
+"moves": [
+[
+"leechlife",
+0.9492100000000001
+],
+[
+"ironhead",
+0.8536400000000001
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Adamant",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Adamant",
+"bulk_sp": [
+32,
+32,
+0,
+0,
+2,
+0
+]
+},
+{
+"name": "Milotic",
+"species": "milotic",
+"item": "leftovers",
+"ability": "competitive",
+"weight": 0.02025750762017626,
+"moves": [
+[
+"scald",
+0.57897
+],
+[
+"icebeam",
+0.55225
+],
+[
+"icywind",
+0.43611
+],
+[
+"muddywater",
+0.41386
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Calm",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Calm",
+"bulk_sp": [
+32,
+0,
+29,
+0,
+5,
+0
+]
+},
+{
+"name": "Charizard-Mega-Y",
+"species": "charizardmegay",
+"item": "charizarditey",
+"ability": "drought",
+"weight": 0.019591550789962584,
+"moves": [
+[
+"heatwave",
+0.9970600000000001
+],
+[
+"weatherball",
+0.9642499999999999
+],
+[
+"solarbeam",
+0.42749000000000004
+],
+[
+"ancientpower",
+0.34223
+]
+],
+"weather": "sunnyday",
+"terrain": "",
+"atk_nature": "Timid",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Timid",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Archaludon",
+"species": "archaludon",
+"item": "leftovers",
+"ability": "stamina",
+"weight": 0.018827915978823932,
+"moves": [
+[
+"electroshot",
+0.99212
+],
+[
+"dragonpulse",
+0.90265
+],
+[
+"flashcannon",
+0.7639400000000001
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Bold",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Bold",
+"bulk_sp": [
+32,
+0,
+1,
+1,
+32,
+0
+]
+},
+{
+"name": "Sylveon",
+"species": "sylveon",
+"item": "fairyfeather",
+"ability": "pixilate",
+"weight": 0.018567872612387896,
+"moves": [
+[
+"hypervoice",
+0.9989100000000001
+],
+[
+"hyperbeam",
+0.8985599999999999
+],
+[
+"quickattack",
+0.7998099999999999
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Modest",
+"atk_sp": [
+0,
+32,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Modest",
+"bulk_sp": [
+9,
+0,
+22,
+20,
+0,
+15
+]
+},
+{
+"name": "Pelipper",
+"species": "pelipper",
+"item": "focussash",
+"ability": "drizzle",
+"weight": 0.018293274579919996,
+"moves": [
+[
+"hurricane",
+0.98126
+],
+[
+"weatherball",
+0.94238
+]
+],
+"weather": "raindance",
+"terrain": "",
+"atk_nature": "Modest",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Modest",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Garchomp-Mega-Z",
+"species": "garchompmegaz",
+"item": "garchompitez",
+"ability": "levitate",
+"weight": 0.015175665115893954,
+"moves": [
+[
+"powergem",
+0.9031399999999999
+],
+[
+"earthpower",
+0.64561
+],
+[
+"dragonpulse",
+0.53844
+],
+[
+"dracometeor",
+0.47589
+],
+[
+"flamethrower",
+0.37949
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Modest",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Modest",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Volcarona",
+"species": "volcarona",
+"item": "grassyseed",
+"ability": "flamebody",
+"weight": 0.015157876079632782,
+"moves": [
+[
+"strugglebug",
+0.4796
+],
+[
+"overheat",
+0.39904000000000006
+],
+[
+"heatwave",
+0.3945
+],
+[
+"gigadrain",
+0.28332999999999997
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Modest",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Modest",
+"bulk_sp": [
+21,
+0,
+15,
+5,
+1,
+24
+]
+},
+{
+"name": "Garchomp",
+"species": "garchomp",
+"item": "lifeorb",
+"ability": "roughskin",
+"weight": 0.014314352323830323,
+"moves": [
+[
+"dragonclaw",
+0.93343
+],
+[
+"stompingtantrum",
+0.76798
+],
+[
+"rockslide",
+0.71905
+],
+[
+"earthquake",
+0.62621
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Jolly",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Jolly",
+"bulk_sp": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"name": "Staraptor-Mega",
+"species": "staraptormega",
+"item": "staraptite",
+"ability": "contrary",
+"weight": 0.014182390018474723,
+"moves": [
+[
+"closecombat",
+0.99994
+],
+[
+"bravebird",
+0.93452
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Jolly",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Jolly",
+"bulk_sp": [
+29,
+1,
+0,
+0,
+4,
+32
+]
+},
+{
+"name": "Whimsicott",
+"species": "whimsicott",
+"item": "focussash",
+"ability": "prankster",
+"weight": 0.013677181388657452,
+"moves": [
+[
+"moonblast",
+0.9720399999999999
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Timid",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Timid",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Gardevoir-Mega",
+"species": "gardevoirmega",
+"item": "gardevoirite",
+"ability": "pixilate",
+"weight": 0.013099199428680843,
+"moves": [
+[
+"hypervoice",
+0.9886
+],
+[
+"expandingforce",
+0.9538500000000001
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Timid",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Timid",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Sinistcha",
+"species": "sinistcha",
+"item": "colburberry",
+"ability": "hospitality",
+"weight": 0.011860759067880375,
+"moves": [
+[
+"matchagotcha",
+0.98521
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Bold",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Bold",
+"bulk_sp": [
+32,
+0,
+14,
+0,
+20,
+0
+]
+},
+{
+"name": "Tyranitar-Mega",
+"species": "tyranitarmega",
+"item": "tyranitarite",
+"ability": "sandstream",
+"weight": 0.01089756361359367,
+"moves": [
+[
+"rockslide",
+0.99665
+],
+[
+"knockoff",
+0.97619
+],
+[
+"lowkick",
+0.72816
+]
+],
+"weather": "sandstorm",
+"terrain": "",
+"atk_nature": "Jolly",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Jolly",
+"bulk_sp": [
+17,
+17,
+0,
+0,
+0,
+32
+]
+},
+{
+"name": "Indeedee",
+"species": "indeedee",
+"item": "choicescarf",
+"ability": "psychicsurge",
+"weight": 0.010506851689893758,
+"moves": [
+[
+"expandingforce",
+0.99714
+],
+[
+"mysticalfire",
+0.52786
+]
+],
+"weather": "",
+"terrain": "psychicterrain",
+"atk_nature": "Modest",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Modest",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Gengar-Mega",
+"species": "gengarmega",
+"item": "gengarite",
+"ability": "shadowtag",
+"weight": 0.009798524609676201,
+"moves": [
+[
+"shadowball",
+0.9873099999999999
+],
+[
+"sludgebomb",
+0.88618
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Modest",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Modest",
+"bulk_sp": [
+32,
+0,
+6,
+0,
+8,
+20
+]
+},
+{
+"name": "Excadrill",
+"species": "excadrill",
+"item": "focussash",
+"ability": "sandrush",
+"weight": 0.009635835787142213,
+"moves": [
+[
+"ironhead",
+0.9954999999999999
+],
+[
+"highhorsepower",
+0.93274
+],
+[
+"rockslide",
+0.82616
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Adamant",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Adamant",
+"bulk_sp": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"name": "Froslass-Mega",
+"species": "froslassmega",
+"item": "froslassite",
+"ability": "snowwarning",
+"weight": 0.009306576897799075,
+"moves": [
+[
+"blizzard",
+0.99899
+],
+[
+"shadowball",
+0.90937
+]
+],
+"weather": "snowscape",
+"terrain": "",
+"atk_nature": "Timid",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Timid",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Politoed",
+"species": "politoed",
+"item": "sitrusberry",
+"ability": "drizzle",
+"weight": 0.008906161863411251,
+"moves": [
+[
+"weatherball",
+0.9599500000000001
+],
+[
+"icebeam",
+0.36612
+],
+[
+"muddywater",
+0.31568
+]
+],
+"weather": "raindance",
+"terrain": "",
+"atk_nature": "Calm",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Calm",
+"bulk_sp": [
+32,
+0,
+24,
+0,
+7,
+3
+]
+},
+{
+"name": "Metagross-Mega",
+"species": "metagrossmega",
+"item": "metagrossite",
+"ability": "toughclaws",
+"weight": 0.008605688869108919,
+"moves": [
+[
+"psychicfangs",
+0.95608
+],
+[
+"ironhead",
+0.48054
+],
+[
+"bodypress",
+0.42363999999999996
+],
+[
+"steelroller",
+0.39432
+],
+[
+"stompingtantrum",
+0.34454999999999997
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Jolly",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Jolly",
+"bulk_sp": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"name": "Armarouge",
+"species": "armarouge",
+"item": "lifeorb",
+"ability": "flashfire",
+"weight": 0.008122150519827983,
+"moves": [
+[
+"expandingforce",
+0.97732
+],
+[
+"armorcannon",
+0.8238500000000001
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Modest",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Modest",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Grimmsnarl",
+"species": "grimmsnarl",
+"item": "lightclay",
+"ability": "prankster",
+"weight": 0.008059080300356557,
+"moves": [
+[
+"spiritbreak",
+0.86587
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Sassy",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Sassy",
+"bulk_sp": [
+29,
+0,
+22,
+0,
+15,
+0
+]
+},
+{
+"name": "Delphox-Mega",
+"species": "delphoxmega",
+"item": "delphoxite",
+"ability": "levitate",
+"weight": 0.007304825162882885,
+"moves": [
+[
+"heatwave",
+0.98548
+],
+[
+"psychic",
+0.7197100000000001
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Timid",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Timid",
+"bulk_sp": [
+9,
+0,
+14,
+11,
+0,
+32
+]
+},
+{
+"name": "Torkoal",
+"species": "torkoal",
+"item": "charcoal",
+"ability": "drought",
+"weight": 0.006795735288790449,
+"moves": [
+[
+"eruption",
+0.97682
+],
+[
+"weatherball",
+0.6819799999999999
+],
+[
+"earthpower",
+0.56199
+],
+[
+"heatwave",
+0.32186
+]
+],
+"weather": "sunnyday",
+"terrain": "",
+"atk_nature": "Quiet",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Quiet",
+"bulk_sp": [
+32,
+0,
+0,
+32,
+2,
+0
+]
+},
+{
+"name": "Lucario-Mega-Z",
+"species": "lucariomegaz",
+"item": "lucarionitez",
+"ability": "adaptability",
+"weight": 0.0064114921055491445,
+"moves": [
+[
+"aurasphere",
+0.9837699999999999
+],
+[
+"flashcannon",
+0.9244100000000001
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Timid",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Timid",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Kommo-o",
+"species": "kommoo",
+"item": "leftovers",
+"ability": "soundproof",
+"weight": 0.006406963987228119,
+"moves": [
+[
+"clangingscales",
+0.96934
+],
+[
+"aurasphere",
+0.91353
+],
+[
+"flamethrower",
+0.29889
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Modest",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Modest",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Swampert-Mega",
+"species": "swampertmega",
+"item": "swampertite",
+"ability": "swiftswim",
+"weight": 0.005867471032980226,
+"moves": [
+[
+"wavecrash",
+0.96599
+],
+[
+"icepunch",
+0.86687
+],
+[
+"earthquake",
+0.61792
+],
+[
+"highhorsepower",
+0.38256
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Adamant",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Adamant",
+"bulk_sp": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"name": "Dragonite-Mega",
+"species": "dragonitemega",
+"item": "dragoninite",
+"ability": "multiscale",
+"weight": 0.005775938355490925,
+"moves": [
+[
+"dragonpulse",
+0.93634
+],
+[
+"heatwave",
+0.82111
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Modest",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Modest",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Primarina",
+"species": "primarina",
+"item": "leftovers",
+"ability": "liquidvoice",
+"weight": 0.0056882869222767895,
+"moves": [
+[
+"hypervoice",
+0.99272
+],
+[
+"moonblast",
+0.9692400000000001
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Modest",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Modest",
+"bulk_sp": [
+32,
+0,
+0,
+32,
+2,
+0
+]
+},
+{
+"name": "Baxcalibur-Mega",
+"species": "baxcaliburmega",
+"item": "baxcalibrite",
+"ability": "thermalexchange",
+"weight": 0.005113215895506554,
+"moves": [
+[
+"glaiverush",
+0.9333899999999999
+],
+[
+"iceshard",
+0.80036
+],
+[
+"iciclecrash",
+0.42249000000000003
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Adamant",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Adamant",
+"bulk_sp": [
+21,
+16,
+3,
+0,
+0,
+26
+]
+},
+{
+"name": "Venusaur",
+"species": "venusaur",
+"item": "focussash",
+"ability": "chlorophyll",
+"weight": 0.005022976966108975,
+"moves": [
+[
+"sludgebomb",
+0.95782
+],
+[
+"leafstorm",
+0.72789
+],
+[
+"earthpower",
+0.37985
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Modest",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Modest",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Annihilape",
+"species": "annihilape",
+"item": "choicescarf",
+"ability": "defiant",
+"weight": 0.004923358363046414,
+"moves": [
+[
+"closecombat",
+0.74041
+],
+[
+"icepunch",
+0.49796
+],
+[
+"shadowclaw",
+0.39598999999999995
+],
+[
+"ragefist",
+0.35513
+],
+[
+"uturn",
+0.28446
+],
+[
+"phantomforce",
+0.26926
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Jolly",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Jolly",
+"bulk_sp": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"name": "Ninetales-Alola",
+"species": "ninetalesalola",
+"item": "lightclay",
+"ability": "snowwarning",
+"weight": 0.004790749183644954,
+"moves": [
+[
+"blizzard",
+0.92554
+],
+[
+"freezedry",
+0.48898
+],
+[
+"moonblast",
+0.40962000000000004
+],
+[
+"icywind",
+0.35351999999999995
+]
+],
+"weather": "snowscape",
+"terrain": "",
+"atk_nature": "Timid",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Timid",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Corviknight",
+"species": "corviknight",
+"item": "psychicseed",
+"ability": "mirrorarmor",
+"weight": 0.004644232212257487,
+"moves": [
+[
+"bravebird",
+0.91104
+],
+[
+"powertrip",
+0.60036
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Careful",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Careful",
+"bulk_sp": [
+32,
+2,
+0,
+0,
+32,
+0
+]
+},
+{
+"name": "Glimmora-Mega",
+"species": "glimmoramega",
+"item": "glimmoranite",
+"ability": "adaptability",
+"weight": 0.004362518565285117,
+"moves": [
+[
+"powergem",
+0.99717
+],
+[
+"earthpower",
+0.9806100000000001
+],
+[
+"sludgebomb",
+0.95569
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Timid",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Timid",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Hatterene",
+"species": "hatterene",
+"item": "lifeorb",
+"ability": "magicbounce",
+"weight": 0.004305917086272298,
+"moves": [
+[
+"dazzlinggleam",
+0.97494
+],
+[
+"expandingforce",
+0.93458
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Quiet",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Quiet",
+"bulk_sp": [
+32,
+0,
+2,
+32,
+0,
+0
+]
+},
+{
+"name": "Pawmot",
+"species": "pawmot",
+"item": "focussash",
+"ability": "ironfist",
+"weight": 0.004297184286653177,
+"moves": [
+[
+"closecombat",
+0.96989
+],
+[
+"doubleshock",
+0.93282
+],
+[
+"fakeout",
+0.7180599999999999
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Jolly",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Jolly",
+"bulk_sp": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"name": "Maushold",
+"species": "maushold",
+"item": "chopleberry",
+"ability": "friendguard",
+"weight": 0.004187215698856844,
+"moves": [
+[
+"superfang",
+0.54982
+],
+[
+"feint",
+0.32711
+],
+[
+"populationbomb",
+0.27978000000000003
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Impish",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Impish",
+"bulk_sp": [
+32,
+0,
+20,
+0,
+14,
+0
+]
+},
+{
+"name": "Aerodactyl-Mega",
+"species": "aerodactylmega",
+"item": "aerodactylite",
+"ability": "toughclaws",
+"weight": 0.004089861154954797,
+"moves": [
+[
+"rockslide",
+0.9979300000000001
+],
+[
+"dualwingbeat",
+0.96734
+],
+[
+"icefang",
+0.31296
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Jolly",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Jolly",
+"bulk_sp": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"name": "Ceruledge",
+"species": "ceruledge",
+"item": "grassyseed",
+"ability": "flashfire",
+"weight": 0.003966955086241248,
+"moves": [
+[
+"bitterblade",
+0.99866
+],
+[
+"shadowsneak",
+0.87003
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Adamant",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Adamant",
+"bulk_sp": [
+31,
+7,
+24,
+0,
+3,
+1
+]
+},
+{
+"name": "Camerupt-Mega",
+"species": "cameruptmega",
+"item": "cameruptite",
+"ability": "sheerforce",
+"weight": 0.003891594259898467,
+"moves": [
+[
+"earthpower",
+0.99575
+],
+[
+"heatwave",
+0.9443699999999999
+],
+[
+"ancientpower",
+0.90514
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Quiet",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Quiet",
+"bulk_sp": [
+32,
+0,
+2,
+32,
+0,
+0
+]
+},
+{
+"name": "Dragapult",
+"species": "dragapult",
+"item": "lifeorb",
+"ability": "infiltrator",
+"weight": 0.0038094412560741473,
+"moves": [
+[
+"shadowball",
+0.8580800000000001
+],
+[
+"dracometeor",
+0.83482
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Modest",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Modest",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Blastoise-Mega",
+"species": "blastoisemega",
+"item": "blastoisinite",
+"ability": "megalauncher",
+"weight": 0.003664541469801332,
+"moves": [
+[
+"waterspout",
+0.96447
+],
+[
+"darkpulse",
+0.5374300000000001
+],
+[
+"terrainpulse",
+0.3846
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Modest",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Modest",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Talonflame",
+"species": "talonflame",
+"item": "sharpbeak",
+"ability": "galewings",
+"weight": 0.003289677960225009,
+"moves": [
+[
+"flareblitz",
+0.6333
+],
+[
+"bravebird",
+0.44240999999999997
+],
+[
+"dualwingbeat",
+0.28488
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Jolly",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Jolly",
+"bulk_sp": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"name": "Absol-Mega-Z",
+"species": "absolmegaz",
+"item": "absolitez",
+"ability": "sharpness",
+"weight": 0.002659622639556607,
+"moves": [
+[
+"nightslash",
+0.84359
+],
+[
+"shadowclaw",
+0.7399
+],
+[
+"closecombat",
+0.61566
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Jolly",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Jolly",
+"bulk_sp": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"name": "Tyranitar",
+"species": "tyranitar",
+"item": "chopleberry",
+"ability": "sandstream",
+"weight": 0.002523455652902912,
+"moves": [
+[
+"rockslide",
+0.9832
+],
+[
+"knockoff",
+0.93396
+],
+[
+"lowkick",
+0.74434
+]
+],
+"weather": "sandstorm",
+"terrain": "",
+"atk_nature": "Jolly",
+"atk_sp": [
+0,
+32,
+0,
+0,
+0,
+0
+],
+"bulk_nature": "Jolly",
+"bulk_sp": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"name": "Glimmora",
+"species": "glimmora",
+"item": "focussash",
+"ability": "toxicdebris",
+"weight": 0.0023484762234975702,
+"moves": [
+[
+"powergem",
+0.9824200000000001
+],
+[
+"sludgebomb",
+0.978
+],
+[
+"earthpower",
+0.97347
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Modest",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Modest",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Vivillon",
+"species": "vivillon",
+"item": "focussash",
+"ability": "compoundeyes",
+"weight": 0.0022889638112783784,
+"moves": [
+[
+"hurricane",
+0.9478
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Timid",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Timid",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+},
+{
+"name": "Aegislash",
+"species": "aegislash",
+"item": "leftovers",
+"ability": "stancechange",
+"weight": 0.002262441975398086,
+"moves": [
+[
+"poltergeist",
+0.57294
+],
+[
+"ironhead",
+0.47977
+],
+[
+"shadowsneak",
+0.36776000000000003
+],
+[
+"shadowball",
+0.26878
+],
+[
+"flashcannon",
+0.26483
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Adamant",
+"atk_sp": [
+0,
+32,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Adamant",
+"bulk_sp": [
+2,
+32,
+0,
+0,
+0,
+32
+]
+},
+{
+"name": "Hydreigon",
+"species": "hydreigon",
+"item": "choicescarf",
+"ability": "levitate",
+"weight": 0.002196137385697356,
+"moves": [
+[
+"darkpulse",
+0.90143
+],
+[
+"dracometeor",
+0.88213
+],
+[
+"snarl",
+0.66348
+],
+[
+"earthpower",
+0.44880000000000003
+]
+],
+"weather": "",
+"terrain": "",
+"atk_nature": "Modest",
+"atk_sp": [
+0,
+0,
+0,
+32,
+0,
+0
+],
+"bulk_nature": "Modest",
+"bulk_sp": [
+2,
+0,
+0,
+32,
+0,
+32
+]
+}
+]

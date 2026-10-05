@@ -1,0 +1,122 @@
+{
+ "Vivillon": {
+  "species": "Vivillon",
+  "item": "Focus Sash",
+  "ability": "Compound Eyes",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Sleep Powder",
+   "Rage Powder",
+   "Hurricane",
+   "Protect"
+  ]
+ },
+ "Politoed": {
+  "species": "Politoed",
+  "item": "Sitrus Berry",
+  "ability": "Drizzle",
+  "nature": "Calm",
+  "evs": [
+   32,
+   0,
+   24,
+   0,
+   7,
+   3
+  ],
+  "moves": [
+   "Weather Ball",
+   "Perish Song",
+   "Encore",
+   "Protect"
+  ]
+ },
+ "Gengar": {
+  "species": "Gengar",
+  "item": "Gengarite",
+  "ability": "Cursed Body",
+  "nature": "Modest",
+  "evs": [
+   32,
+   0,
+   6,
+   0,
+   8,
+   20
+  ],
+  "moves": [
+   "Shadow Ball",
+   "Sludge Bomb",
+   "Perish Song",
+   "Protect"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Passho Berry",
+  "ability": "Intimidate",
+  "nature": "Relaxed",
+  "evs": [
+   32,
+   0,
+   32,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Protect",
+   "Fake Out",
+   "Flare Blitz",
+   "Parting Shot"
+  ]
+ },
+ "Rillaboom": {
+  "species": "Rillaboom",
+  "item": "Occa Berry",
+  "ability": "Grassy Surge",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Fake Out",
+   "Grassy Glide",
+   "U-turn",
+   "Protect"
+  ]
+ },
+ "Kommo-o": {
+  "species": "Kommo-o",
+  "item": "Leftovers",
+  "ability": "Soundproof",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Clanging Scales",
+   "Clangorous Soul",
+   "Aura Sphere",
+   "Protect"
+  ]
+ }
+}

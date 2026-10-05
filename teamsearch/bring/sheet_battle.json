@@ -1,0 +1,50 @@
+{
+ "sheet": {
+  "score": 0.7251967741212507,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.9741035856573705,
+   "Sun": 0.506690725843901,
+   "Indeedee TR / Psychic Terrain": 0.4761904761904762,
+   "Rain": 0.3007518796992481,
+   "Balance, no speed control": 0.8918918918918919,
+   "Sand": 0.8684489001680429,
+   "Snow": 0.970260223048327,
+   "Trick Room without Indeedee": 0.6739298693059902,
+   "Rain + sun": 0.38336614173228345,
+   "Perish trap": 0.7982456140350879
+  },
+  "games": 240
+ },
+ "human": {
+  "score": 0.4861485823654877,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.5398406374501992,
+   "Sun": 0.4011282038485693,
+   "Indeedee TR / Psychic Terrain": 0.39935064935064934,
+   "Rain": 0.19924812030075187,
+   "Balance, no speed control": 0.5315315315315315,
+   "Sand": 0.5864022662889519,
+   "Snow": 0.716542750929368,
+   "Trick Room without Indeedee": 0.7268356640321836,
+   "Rain + sun": 0.0,
+   "Perish trap": 0.6464912280701757
+  },
+  "games": 240
+ },
+ "fitted": {
+  "score": 0.6005300185943853,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7609561752988048,
+   "Sun": 0.4700797186082496,
+   "Indeedee TR / Psychic Terrain": 0.3116883116883117,
+   "Rain": 0.3298872180451128,
+   "Balance, no speed control": 0.6024774774774774,
+   "Sand": 0.7953257790368272,
+   "Snow": 0.7499999999999999,
+   "Trick Room without Indeedee": 0.6277788562825485,
+   "Rain + sun": 0.4625984251968504,
+   "Perish trap": 0.8964912280701756
+  },
+  "games": 240
+ }
+}

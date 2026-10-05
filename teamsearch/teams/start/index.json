@@ -1,0 +1,1102 @@
+{
+ "Baltimore-01": {
+  "event": "Baltimore",
+  "place": 1,
+  "arch": "Sand",
+  "pid": "0991",
+  "gids": [
+   "Excadrill#2",
+   "M-Salamence#2",
+   "M-Tyranitar#1",
+   "Indeedee#1",
+   "Corviknight#1",
+   "Sneasler#7"
+  ],
+  "spreads": [
+   "Smogon Excadrill Jolly 22.266%",
+   "Smogon Salamence-Mega Timid 26.644%",
+   "Smogon Tyranitar-Mega Jolly 8.443%",
+   "Smogon Indeedee Modest 33.551%",
+   "Smogon Corviknight Careful 7.084%",
+   "Smogon Sneasler Adamant 27.725%"
+  ]
+ },
+ "Baltimore-02": {
+  "event": "Baltimore",
+  "place": 2,
+  "arch": "Rain + Sun",
+  "pid": "0532",
+  "gids": [
+   "M-Golisopod#1",
+   "M-Charizard Y#2",
+   "Politoed#2",
+   "Archaludon#4",
+   "Grimmsnarl#1",
+   "Farigiraf#4"
+  ],
+  "spreads": [
+   "Smogon Golisopod-Mega Adamant 29.333%",
+   "Smogon Charizard-Mega-Y Timid 6.148%",
+   "Smogon Politoed Modest 5.867%",
+   "Smogon Archaludon Bold 6.346%",
+   "Smogon Grimmsnarl Sassy 16.699%",
+   "Smogon Farigiraf Bold 5.984%"
+  ]
+ },
+ "Baltimore-03": {
+  "event": "Baltimore",
+  "place": 3,
+  "arch": "Perish",
+  "pid": "1018",
+  "gids": [
+   "Archaludon#3",
+   "Incineroar#9",
+   "Politoed#1",
+   "Vivillon#1",
+   "Rillaboom#7",
+   "M-Gengar#1"
+  ],
+  "spreads": [
+   "Smogon Archaludon Bold 6.346%",
+   "Smogon Incineroar Sassy 2.635%",
+   "Smogon Politoed Calm 10.828%",
+   "Smogon Vivillon Timid 65.492%",
+   "default for Careful",
+   "Smogon Gengar-Mega Modest 6.996%"
+  ]
+ },
+ "Baltimore-04": {
+  "event": "Baltimore",
+  "place": 4,
+  "arch": "Indeedee TR",
+  "pid": "0062",
+  "gids": [
+   "M-Salamence#9",
+   "Arcanine-H#1",
+   "Indeedee#6",
+   "Milotic#5",
+   "M-Metagross#3",
+   "Sneasler#32"
+  ],
+  "spreads": [
+   "Smogon Salamence-Mega Timid 26.644%",
+   "Smogon Arcanine-Hisui Jolly 47.62%",
+   "Smogon Indeedee Modest 33.551%",
+   "Smogon Milotic Calm 6.205%",
+   "Smogon Metagross-Mega Adamant 9.727%",
+   "Smogon Sneasler Adamant 27.725%"
+  ]
+ },
+ "Baltimore-05": {
+  "event": "Baltimore",
+  "place": 5,
+  "arch": "Tailwind",
+  "pid": "0186",
+  "gids": [
+   "Milotic#2",
+   "M-Raichu Y#1",
+   "Ceruledge#1",
+   "M-Staraptor#1",
+   "Gholdengo#2",
+   "Rillaboom#1"
+  ],
+  "spreads": [
+   "Smogon Milotic Calm 6.205%",
+   "Smogon Raichu-Mega-Y Timid 13.964%",
+   "Smogon Ceruledge Adamant 22.544%",
+   "Smogon Staraptor-Mega Jolly 9.346%",
+   "Smogon Gholdengo Modest 3.886%",
+   "Smogon Rillaboom Adamant 2.47%"
+  ]
+ },
+ "Baltimore-06": {
+  "event": "Baltimore",
+  "place": 6,
+  "arch": "Snow",
+  "pid": "0930",
+  "gids": [
+   "M-Froslass#1",
+   "M-Raichu Y#2",
+   "Rillaboom#3",
+   "Kingambit#1",
+   "Sneasler#5",
+   "Arcanine-H#1"
+  ],
+  "spreads": [
+   "Smogon Froslass-Mega Timid 13.898%",
+   "Smogon Raichu-Mega-Y Timid 13.964%",
+   "Smogon Rillaboom Adamant 2.47%",
+   "Smogon Kingambit Adamant 10.886%",
+   "Smogon Sneasler Adamant 27.725%",
+   "Smogon Arcanine-Hisui Jolly 47.62%"
+  ]
+ },
+ "Baltimore-07": {
+  "event": "Baltimore",
+  "place": 7,
+  "arch": "Tailwind",
+  "pid": "0366",
+  "gids": [
+   "Arcanine-H#1",
+   "Rillaboom#1",
+   "Gholdengo#1",
+   "M-Staraptor#1",
+   "M-Raichu Y#1",
+   "Sylveon#2"
+  ],
+  "spreads": [
+   "Smogon Arcanine-Hisui Jolly 47.62%",
+   "Smogon Rillaboom Adamant 2.47%",
+   "Smogon Gholdengo Timid 9.901%",
+   "Smogon Staraptor-Mega Jolly 9.346%",
+   "Smogon Raichu-Mega-Y Timid 13.964%",
+   "Smogon Sylveon Modest 6.974%"
+  ]
+ },
+ "Baltimore-08": {
+  "event": "Baltimore",
+  "place": 8,
+  "arch": "Balance",
+  "pid": "0735",
+  "gids": [
+   "M-Floette#2",
+   "Kingambit#1",
+   "Rillaboom#1",
+   "Sneasler#3",
+   "Incineroar#17",
+   "M-Delphox#1"
+  ],
+  "spreads": [
+   "Smogon Floette-Mega Modest 4.424%",
+   "Smogon Kingambit Adamant 10.886%",
+   "Smogon Rillaboom Adamant 2.47%",
+   "Smogon Sneasler Jolly 14.711%",
+   "Smogon Incineroar Careful 5.344%",
+   "Smogon Delphox-Mega Timid 14.816%"
+  ]
+ },
+ "Baltimore-09": {
+  "event": "Baltimore",
+  "place": 9,
+  "arch": "Perish",
+  "pid": "0931",
+  "gids": [
+   "Armarouge#1",
+   "Dragapult#2",
+   "M-Gengar#2",
+   "Milotic#1",
+   "Indeedee-F#1",
+   "M-Staraptor#2"
+  ],
+  "spreads": [
+   "Smogon Armarouge Modest 11.849%",
+   "Smogon Dragapult Timid 28.812%",
+   "Smogon Gengar-Mega Modest 6.996%",
+   "Smogon Milotic Calm 6.205%",
+   "Smogon Indeedee-F Relaxed 29.903%",
+   "Smogon Staraptor Adamant 20.741%"
+  ]
+ },
+ "Baltimore-10": {
+  "event": "Baltimore",
+  "place": 10,
+  "arch": "Perish",
+  "pid": "0725",
+  "gids": [
+   "Rillaboom#38",
+   "Politoed#1",
+   "Archaludon#7",
+   "M-Gengar#1",
+   "Incineroar#53",
+   "M-Golisopod#3"
+  ],
+  "spreads": [
+   "Smogon Rillaboom Adamant 2.47%",
+   "Smogon Politoed Calm 10.828%",
+   "Smogon Archaludon Modest 2.737%",
+   "Smogon Gengar-Mega Modest 6.996%",
+   "Smogon Incineroar Careful 5.344%",
+   "Smogon Golisopod-Mega Adamant 29.333%"
+  ]
+ },
+ "Baltimore-11": {
+  "event": "Baltimore",
+  "place": 11,
+  "arch": "Sun",
+  "pid": "0778",
+  "gids": [
+   "Garchomp#4",
+   "Farigiraf#1",
+   "M-Aerodactyl#2",
+   "Sylveon#1",
+   "M-Charizard Y#5",
+   "Kingambit#3"
+  ],
+  "spreads": [
+   "Smogon Garchomp Adamant 12.458%",
+   "Smogon Farigiraf Bold 5.984%",
+   "Smogon Aerodactyl-Mega Jolly 22.363%",
+   "Smogon Sylveon Modest 6.974%",
+   "Smogon Charizard-Mega-Y Timid 6.148%",
+   "Smogon Kingambit Adamant 10.886%"
+  ]
+ },
+ "Baltimore-12": {
+  "event": "Baltimore",
+  "place": 12,
+  "arch": "Trick Room",
+  "pid": "1076",
+  "gids": [
+   "Sneasler#3",
+   "Sinistcha#1",
+   "Kingambit#1",
+   "M-Floette#1",
+   "M-Delphox#1",
+   "Incineroar#2"
+  ],
+  "spreads": [
+   "Smogon Sneasler Jolly 14.711%",
+   "Smogon Sinistcha Bold 16.012%",
+   "Smogon Kingambit Adamant 10.886%",
+   "Smogon Floette-Mega Modest 4.424%",
+   "Smogon Delphox-Mega Timid 14.816%",
+   "Smogon Incineroar Impish 2.831%"
+  ]
+ },
+ "Baltimore-13": {
+  "event": "Baltimore",
+  "place": 13,
+  "arch": "Indeedee TR",
+  "pid": "0439",
+  "gids": [
+   "Ceruledge#4",
+   "Indeedee-F#8",
+   "Dragonite#2",
+   "M-Lopunny#1",
+   "M-Gardevoir#8",
+   "Sneasler#67"
+  ],
+  "spreads": [
+   "Smogon Ceruledge Jolly 8.253%",
+   "Smogon Indeedee-F Relaxed 29.903%",
+   "Smogon Dragonite Adamant 13.56%",
+   "Smogon Lopunny-Mega Jolly 83.36%",
+   "Smogon Gardevoir-Mega Modest 7.341%",
+   "Smogon Sneasler Adamant 27.725%"
+  ]
+ },
+ "Baltimore-14": {
+  "event": "Baltimore",
+  "place": 14,
+  "arch": "Tailwind",
+  "pid": "0707",
+  "gids": [
+   "Klefki#2",
+   "Garchomp#2",
+   "Volcarona#2",
+   "Archaludon#1",
+   "M-Salamence#1",
+   "M-Glimmora#1"
+  ],
+  "spreads": [
+   "Smogon Klefki Bold 11.43%",
+   "Smogon Garchomp Jolly 28.259%",
+   "Smogon Volcarona Timid 3.38%",
+   "Smogon Archaludon Calm 5.032%",
+   "Smogon Salamence-Mega Timid 26.644%",
+   "Smogon Glimmora-Mega Timid 23.958%"
+  ]
+ },
+ "Baltimore-15": {
+  "event": "Baltimore",
+  "place": 15,
+  "arch": "Indeedee TR",
+  "pid": "0356",
+  "gids": [
+   "Gholdengo#1",
+   "M-Gardevoir#4",
+   "Sneasler#9",
+   "M-Salamence#13",
+   "Incineroar#6",
+   "Indeedee-F#7"
+  ],
+  "spreads": [
+   "Smogon Gholdengo Timid 9.901%",
+   "Smogon Gardevoir-Mega Timid 7.626%",
+   "Smogon Sneasler Adamant 27.725%",
+   "Smogon Salamence-Mega Naive 2.495%",
+   "Smogon Incineroar Careful 5.344%",
+   "Smogon Indeedee-F Calm 2.497%"
+  ]
+ },
+ "Baltimore-16": {
+  "event": "Baltimore",
+  "place": 16,
+  "arch": "Indeedee TR",
+  "pid": "0405",
+  "gids": [
+   "Dragapult#1",
+   "Arcanine-H#2",
+   "Altaria#1",
+   "M-Metagross#2",
+   "Indeedee-F#2",
+   "Milotic#1"
+  ],
+  "spreads": [
+   "Smogon Dragapult Modest 29.33%",
+   "Smogon Arcanine-Hisui Jolly 47.62%",
+   "Smogon Altaria Timid 47.643%",
+   "Smogon Metagross-Mega Jolly 22.609%",
+   "Smogon Indeedee-F Bold 24.615%",
+   "Smogon Milotic Calm 6.205%"
+  ]
+ },
+ "Brisbane-01": {
+  "event": "Brisbane",
+  "place": 1,
+  "arch": "Rain + Sun",
+  "pid": "0267",
+  "gids": [
+   "Archaludon#1",
+   "Pelipper#1",
+   "Grimmsnarl#1",
+   "M-Charizard Y#2",
+   "M-Garchomp Z#2",
+   "Venusaur#1"
+  ],
+  "spreads": [
+   "Smogon Archaludon Calm 5.032%",
+   "Smogon Pelipper Bold 6.787%",
+   "Smogon Grimmsnarl Sassy 16.699%",
+   "Smogon Charizard-Mega-Y Timid 6.148%",
+   "Smogon Garchomp-Mega-Z Modest 31.584%",
+   "Smogon Venusaur Modest 50.307%"
+  ]
+ },
+ "Brisbane-02": {
+  "event": "Brisbane",
+  "place": 2,
+  "arch": "Tailwind",
+  "pid": "0141",
+  "gids": [
+   "M-Floette#1",
+   "Kingambit#4",
+   "Basculegion#8",
+   "Rillaboom#1",
+   "M-Salamence#5",
+   "Sneasler#15"
+  ],
+  "spreads": [
+   "Smogon Floette-Mega Modest 4.424%",
+   "Smogon Kingambit Adamant 10.886%",
+   "Smogon Basculegion Adamant 10.278%",
+   "Smogon Rillaboom Adamant 2.47%",
+   "Smogon Salamence-Mega Modest 3.187%",
+   "Smogon Sneasler Jolly 14.711%"
+  ]
+ },
+ "Brisbane-03": {
+  "event": "Brisbane",
+  "place": 3,
+  "arch": "Balance",
+  "pid": "0040",
+  "gids": [
+   "M-Garchomp#2",
+   "Sneasler#22",
+   "M-Floette#4",
+   "Incineroar#33",
+   "Rillaboom#1",
+   "Kingambit#1"
+  ],
+  "spreads": [
+   "Smogon Garchomp-Mega Adamant 27.451%",
+   "Smogon Sneasler Jolly 14.711%",
+   "Smogon Floette-Mega Timid 5.332%",
+   "Smogon Incineroar Sassy 2.635%",
+   "Smogon Rillaboom Adamant 2.47%",
+   "Smogon Kingambit Adamant 10.886%"
+  ]
+ },
+ "Brisbane-04": {
+  "event": "Brisbane",
+  "place": 4,
+  "arch": "Rain",
+  "pid": "0302",
+  "gids": [
+   "Sneasler#5",
+   "Basculegion#1",
+   "M-Floette#1",
+   "Archaludon#2",
+   "Pelipper#2",
+   "Incineroar#10"
+  ],
+  "spreads": [
+   "Smogon Sneasler Adamant 27.725%",
+   "Smogon Basculegion Jolly 20.517%",
+   "Smogon Floette-Mega Modest 4.424%",
+   "Smogon Archaludon Modest 2.737%",
+   "Smogon Pelipper Modest 19.071%",
+   "Smogon Incineroar Careful 5.344%"
+  ]
+ },
+ "Brisbane-05": {
+  "event": "Brisbane",
+  "place": 5,
+  "arch": "Perish",
+  "pid": "0085",
+  "gids": [
+   "Rillaboom#1",
+   "M-Gengar#5",
+   "Incineroar#76",
+   "Kingambit#1",
+   "Sneasler#1",
+   "M-Floette#2"
+  ],
+  "spreads": [
+   "Smogon Rillaboom Adamant 2.47%",
+   "Smogon Gengar-Mega Timid 5.733%",
+   "Smogon Incineroar Sassy 2.635%",
+   "Smogon Kingambit Adamant 10.886%",
+   "Smogon Sneasler Adamant 27.725%",
+   "Smogon Floette-Mega Modest 4.424%"
+  ]
+ },
+ "Brisbane-06": {
+  "event": "Brisbane",
+  "place": 6,
+  "arch": "Rain",
+  "pid": "0315",
+  "gids": [
+   "M-Salamence#15",
+   "Armarouge#10",
+   "Sneasler#79",
+   "Indeedee-F#22",
+   "Politoed#4",
+   "Archaludon#4"
+  ],
+  "spreads": [
+   "default for Careful",
+   "Smogon Armarouge Timid 4.124%",
+   "Smogon Sneasler Adamant 27.725%",
+   "Smogon Indeedee-F Relaxed 29.903%",
+   "default for Timid",
+   "Smogon Archaludon Bold 6.346%"
+  ]
+ },
+ "Brisbane-07": {
+  "event": "Brisbane",
+  "place": 7,
+  "arch": "Balance",
+  "pid": "0175",
+  "gids": [
+   "Kingambit#3",
+   "Sneasler#14",
+   "M-Garchomp Z#2",
+   "M-Floette#5",
+   "Rillaboom#1",
+   "Volcarona#4"
+  ],
+  "spreads": [
+   "Smogon Kingambit Adamant 10.886%",
+   "Smogon Sneasler Adamant 27.725%",
+   "Smogon Garchomp-Mega-Z Modest 31.584%",
+   "Smogon Floette-Mega Timid 5.332%",
+   "Smogon Rillaboom Adamant 2.47%",
+   "Smogon Volcarona Bold 3.304%"
+  ]
+ },
+ "Brisbane-08": {
+  "event": "Brisbane",
+  "place": 8,
+  "arch": "Rain + Sun",
+  "pid": "0137",
+  "gids": [
+   "Archaludon#1",
+   "Grimmsnarl#2",
+   "Venusaur#1",
+   "Pelipper#3",
+   "M-Swampert#1",
+   "M-Charizard Y#6"
+  ],
+  "spreads": [
+   "Smogon Archaludon Calm 5.032%",
+   "Smogon Grimmsnarl Careful 7.464%",
+   "Smogon Venusaur Modest 50.307%",
+   "Smogon Pelipper Modest 19.071%",
+   "Smogon Swampert-Mega Adamant 17.178%",
+   "Smogon Charizard-Mega-Y Modest 3.789%"
+  ]
+ },
+ "Brisbane-09": {
+  "event": "Brisbane",
+  "place": 9,
+  "arch": "Rain",
+  "pid": "0289",
+  "gids": [
+   "Sinistcha#22",
+   "M-Mawile#4",
+   "Sableye#5",
+   "Pelipper#8",
+   "M-Swampert#1",
+   "Archaludon#2"
+  ],
+  "spreads": [
+   "default for Modest",
+   "Smogon Mawile-Mega Adamant 20.478%",
+   "Smogon Sableye Sassy 6.587%",
+   "Smogon Pelipper Timid 11.687%",
+   "Smogon Swampert-Mega Adamant 17.178%",
+   "Smogon Archaludon Modest 2.737%"
+  ]
+ },
+ "Brisbane-10": {
+  "event": "Brisbane",
+  "place": 10,
+  "arch": "Trick Room",
+  "pid": "0118",
+  "gids": [
+   "M-Delphox#1",
+   "Sneasler#3",
+   "Kingambit#1",
+   "M-Floette#1",
+   "Sinistcha#1",
+   "Incineroar#28"
+  ],
+  "spreads": [
+   "Smogon Delphox-Mega Timid 14.816%",
+   "Smogon Sneasler Jolly 14.711%",
+   "Smogon Kingambit Adamant 10.886%",
+   "Smogon Floette-Mega Modest 4.424%",
+   "Smogon Sinistcha Bold 16.012%",
+   "Smogon Incineroar Careful 5.344%"
+  ]
+ },
+ "Brisbane-11": {
+  "event": "Brisbane",
+  "place": 11,
+  "arch": "Sand",
+  "pid": "0026",
+  "gids": [
+   "Indeedee#3",
+   "M-Tyranitar#1",
+   "Excadrill#2",
+   "M-Salamence#2",
+   "Corviknight#1",
+   "Sneasler#7"
+  ],
+  "spreads": [
+   "Smogon Indeedee Modest 33.551%",
+   "Smogon Tyranitar-Mega Jolly 8.443%",
+   "Smogon Excadrill Jolly 22.266%",
+   "Smogon Salamence-Mega Timid 26.644%",
+   "Smogon Corviknight Careful 7.084%",
+   "Smogon Sneasler Adamant 27.725%"
+  ]
+ },
+ "Brisbane-12": {
+  "event": "Brisbane",
+  "place": 12,
+  "arch": "Sun",
+  "pid": "0061",
+  "gids": [
+   "Armarouge#17",
+   "Kingambit#13",
+   "Torkoal#6",
+   "M-Staraptor#2",
+   "Indeedee-F#33",
+   "M-Glimmora#3"
+  ],
+  "spreads": [
+   "Smogon Armarouge Modest 11.849%",
+   "Smogon Kingambit Brave 5.863%",
+   "Smogon Torkoal Quiet 50.799%",
+   "Smogon Staraptor Adamant 20.741%",
+   "Smogon Indeedee-F Relaxed 29.903%",
+   "Smogon Glimmora-Mega Modest 13.638%"
+  ]
+ },
+ "Brisbane-13": {
+  "event": "Brisbane",
+  "place": 13,
+  "arch": "Perish",
+  "pid": "0207",
+  "gids": [
+   "Basculegion#1",
+   "Rillaboom#49",
+   "Politoed#6",
+   "Incineroar#13",
+   "M-Gengar#4",
+   "Archaludon#16"
+  ],
+  "spreads": [
+   "Smogon Basculegion Jolly 20.517%",
+   "Smogon Rillaboom Sassy 1.951%",
+   "Smogon Politoed Calm 10.828%",
+   "Smogon Incineroar Sassy 2.635%",
+   "Smogon Gengar-Mega Timid 5.733%",
+   "Smogon Archaludon Bold 6.346%"
+  ]
+ },
+ "Brisbane-14": {
+  "event": "Brisbane",
+  "place": 14,
+  "arch": "Perish",
+  "pid": "0229",
+  "gids": [
+   "Garchomp#22",
+   "Kingambit#2",
+   "M-Gengar#1",
+   "Incineroar#63",
+   "Milotic#18",
+   "Rillaboom#2"
+  ],
+  "spreads": [
+   "Smogon Garchomp Jolly 28.259%",
+   "Smogon Kingambit Adamant 10.886%",
+   "Smogon Gengar-Mega Modest 6.996%",
+   "Smogon Incineroar Careful 5.344%",
+   "Smogon Milotic Modest 2.361%",
+   "Smogon Rillaboom Adamant 2.47%"
+  ]
+ },
+ "Brisbane-15": {
+  "event": "Brisbane",
+  "place": 15,
+  "arch": "Indeedee TR",
+  "pid": "0082",
+  "gids": [
+   "M-Salamence#2",
+   "Sneasler#4",
+   "Arcanine-H#1",
+   "Milotic#45",
+   "M-Metagross#1",
+   "Indeedee#4"
+  ],
+  "spreads": [
+   "Smogon Salamence-Mega Timid 26.644%",
+   "Smogon Sneasler Adamant 27.725%",
+   "Smogon Arcanine-Hisui Jolly 47.62%",
+   "default for Timid",
+   "Smogon Metagross-Mega Adamant 9.727%",
+   "Smogon Indeedee Timid 32.003%"
+  ]
+ },
+ "Brisbane-16": {
+  "event": "Brisbane",
+  "place": 16,
+  "arch": "Sun",
+  "pid": "0039",
+  "gids": [
+   "Basculegion#7",
+   "M-Charizard Y#1",
+   "Kommo-o#2",
+   "M-Glimmora#2",
+   "Whimsicott#1",
+   "Indeedee#25"
+  ],
+  "spreads": [
+   "Smogon Basculegion Jolly 20.517%",
+   "Smogon Charizard-Mega-Y Modest 3.789%",
+   "Smogon Kommo-o Modest 19.823%",
+   "Smogon Glimmora-Mega Modest 13.638%",
+   "Smogon Whimsicott Timid 53.633%",
+   "Smogon Indeedee Timid 32.003%"
+  ]
+ },
+ "Frankfurt-01": {
+  "event": "Frankfurt",
+  "place": 1,
+  "arch": "Balance",
+  "pid": "1025",
+  "gids": [
+   "Gholdengo#2",
+   "Volcarona#7",
+   "M-Garchomp Z#1",
+   "Incineroar#3",
+   "Rillaboom#2",
+   "M-Raichu Y#1"
+  ],
+  "spreads": [
+   "Smogon Gholdengo Modest 3.886%",
+   "Smogon Volcarona Timid 3.38%",
+   "Smogon Garchomp-Mega-Z Modest 31.584%",
+   "Smogon Incineroar Impish 2.831%",
+   "Smogon Rillaboom Adamant 2.47%",
+   "Smogon Raichu-Mega-Y Timid 13.964%"
+  ]
+ },
+ "Frankfurt-02": {
+  "event": "Frankfurt",
+  "place": 2,
+  "arch": "Sun",
+  "pid": "0519",
+  "gids": [
+   "Farigiraf#64",
+   "M-Garchomp Z#3",
+   "Sneasler#20",
+   "Torkoal#1",
+   "Sylveon#3",
+   "Incineroar#21"
+  ],
+  "spreads": [
+   "Smogon Farigiraf Sassy 1.726%",
+   "Smogon Garchomp-Mega-Z Modest 31.584%",
+   "Smogon Sneasler Adamant 27.725%",
+   "Smogon Torkoal Quiet 50.799%",
+   "Smogon Sylveon Modest 6.974%",
+   "Smogon Incineroar Adamant 1.662%"
+  ]
+ },
+ "Frankfurt-03": {
+  "event": "Frankfurt",
+  "place": 3,
+  "arch": "Sun",
+  "pid": "0892",
+  "gids": [
+   "M-Charizard Y#4",
+   "Kingambit#4",
+   "M-Meowstic-M#1",
+   "Sneasler#4",
+   "Indeedee#20",
+   "Kommo-o#1"
+  ],
+  "spreads": [
+   "Smogon Charizard-Mega-Y Modest 3.789%",
+   "Smogon Kingambit Adamant 10.886%",
+   "Smogon Meowstic-M-Mega Timid 27.32%",
+   "Smogon Sneasler Adamant 27.725%",
+   "Smogon Indeedee Timid 32.003%",
+   "Smogon Kommo-o Modest 19.823%"
+  ]
+ },
+ "Frankfurt-04": {
+  "event": "Frankfurt",
+  "place": 4,
+  "arch": "Balance",
+  "pid": "0423",
+  "gids": [
+   "Gholdengo#2",
+   "M-Dragonite#1",
+   "Incineroar#2",
+   "Rillaboom#1",
+   "Sneasler#8",
+   "M-Floette#9"
+  ],
+  "spreads": [
+   "Smogon Gholdengo Modest 3.886%",
+   "Smogon Dragonite-Mega Modest 42.676%",
+   "Smogon Incineroar Impish 2.831%",
+   "Smogon Rillaboom Adamant 2.47%",
+   "Smogon Sneasler Adamant 27.725%",
+   "Smogon Floette-Eternal Bold 3.504%"
+  ]
+ },
+ "Frankfurt-05": {
+  "event": "Frankfurt",
+  "place": 5,
+  "arch": "Perish",
+  "pid": "0219",
+  "gids": [
+   "Vivillon#1",
+   "Politoed#1",
+   "M-Gengar#1",
+   "Incineroar#18",
+   "Rillaboom#20",
+   "Kommo-o#1"
+  ],
+  "spreads": [
+   "Smogon Vivillon Timid 65.492%",
+   "Smogon Politoed Calm 10.828%",
+   "Smogon Gengar-Mega Modest 6.996%",
+   "default for Relaxed",
+   "Smogon Rillaboom Adamant 2.47%",
+   "Smogon Kommo-o Modest 19.823%"
+  ]
+ },
+ "Frankfurt-06": {
+  "event": "Frankfurt",
+  "place": 6,
+  "arch": "Sun",
+  "pid": "0114",
+  "gids": [
+   "Toxapex#1",
+   "Sylveon#5",
+   "Garchomp#1",
+   "Incineroar#2",
+   "Venusaur#2",
+   "M-Charizard Y#3"
+  ],
+  "spreads": [
+   "Smogon Toxapex Relaxed 13.486%",
+   "Smogon Sylveon Modest 6.974%",
+   "Smogon Garchomp Adamant 12.458%",
+   "Smogon Incineroar Impish 2.831%",
+   "Smogon Venusaur Modest 50.307%",
+   "Smogon Charizard-Mega-Y Timid 6.148%"
+  ]
+ },
+ "Frankfurt-07": {
+  "event": "Frankfurt",
+  "place": 7,
+  "arch": "Snow",
+  "pid": "0818",
+  "gids": [
+   "M-Froslass#1",
+   "Incineroar#3",
+   "Basculegion#1",
+   "M-Glimmora#1",
+   "Rillaboom#2",
+   "Volcarona#1"
+  ],
+  "spreads": [
+   "Smogon Froslass-Mega Timid 13.898%",
+   "Smogon Incineroar Impish 2.831%",
+   "Smogon Basculegion Jolly 20.517%",
+   "Smogon Glimmora-Mega Timid 23.958%",
+   "Smogon Rillaboom Adamant 2.47%",
+   "Smogon Volcarona Modest 4.542%"
+  ]
+ },
+ "Frankfurt-08": {
+  "event": "Frankfurt",
+  "place": 8,
+  "arch": "Balance",
+  "pid": "0703",
+  "gids": [
+   "M-Floette#2",
+   "Rillaboom#1",
+   "Incineroar#11",
+   "M-Dragonite#1",
+   "Gholdengo#2",
+   "Sneasler#8"
+  ],
+  "spreads": [
+   "Smogon Floette-Mega Modest 4.424%",
+   "Smogon Rillaboom Adamant 2.47%",
+   "Smogon Incineroar Impish 2.831%",
+   "Smogon Dragonite-Mega Modest 42.676%",
+   "Smogon Gholdengo Modest 3.886%",
+   "Smogon Sneasler Adamant 27.725%"
+  ]
+ },
+ "Frankfurt-09": {
+  "event": "Frankfurt",
+  "place": 9,
+  "arch": "Tailwind",
+  "pid": "0655",
+  "gids": [
+   "Sneasler#12",
+   "M-Salamence#1",
+   "M-Raichu Y#1",
+   "Rillaboom#1",
+   "Kingambit#1",
+   "Arcanine-H#1"
+  ],
+  "spreads": [
+   "Smogon Sneasler Adamant 27.725%",
+   "Smogon Salamence-Mega Timid 26.644%",
+   "Smogon Raichu-Mega-Y Timid 13.964%",
+   "Smogon Rillaboom Adamant 2.47%",
+   "Smogon Kingambit Adamant 10.886%",
+   "Smogon Arcanine-Hisui Jolly 47.62%"
+  ]
+ },
+ "Frankfurt-10": {
+  "event": "Frankfurt",
+  "place": 10,
+  "arch": "Trick Room",
+  "pid": "0115",
+  "gids": [
+   "M-Raichu Y#1",
+   "Incineroar#67",
+   "Sinistcha#12",
+   "Kommo-o#1",
+   "Kingambit#3",
+   "M-Delphox#1"
+  ],
+  "spreads": [
+   "Smogon Raichu-Mega-Y Timid 13.964%",
+   "Smogon Incineroar Impish 2.831%",
+   "Smogon Sinistcha Bold 16.012%",
+   "Smogon Kommo-o Modest 19.823%",
+   "Smogon Kingambit Adamant 10.886%",
+   "Smogon Delphox-Mega Timid 14.816%"
+  ]
+ },
+ "Frankfurt-11": {
+  "event": "Frankfurt",
+  "place": 11,
+  "arch": "Rain",
+  "pid": "0016",
+  "gids": [
+   "M-Raichu Y#1",
+   "Pelipper#9",
+   "M-Golisopod#1",
+   "Kingambit#3",
+   "Archaludon#6",
+   "Farigiraf#55"
+  ],
+  "spreads": [
+   "Smogon Raichu-Mega-Y Timid 13.964%",
+   "Smogon Pelipper Modest 19.071%",
+   "Smogon Golisopod-Mega Adamant 29.333%",
+   "Smogon Kingambit Adamant 10.886%",
+   "Smogon Archaludon Modest 2.737%",
+   "default for Quiet"
+  ]
+ },
+ "Frankfurt-12": {
+  "event": "Frankfurt",
+  "place": 12,
+  "arch": "Sand",
+  "pid": "1120",
+  "gids": [
+   "M-Tyranitar#1",
+   "Sneasler#7",
+   "Indeedee#1",
+   "Excadrill#1",
+   "M-Salamence#2",
+   "Corviknight#7"
+  ],
+  "spreads": [
+   "Smogon Tyranitar-Mega Jolly 8.443%",
+   "Smogon Sneasler Adamant 27.725%",
+   "Smogon Indeedee Modest 33.551%",
+   "Smogon Excadrill Adamant 49.258%",
+   "Smogon Salamence-Mega Timid 26.644%",
+   "default for Impish"
+  ]
+ },
+ "Frankfurt-13": {
+  "event": "Frankfurt",
+  "place": 13,
+  "arch": "Tailwind",
+  "pid": "0279",
+  "gids": [
+   "M-Staraptor#1",
+   "Rillaboom#1",
+   "Primarina#1",
+   "Gholdengo#2",
+   "M-Raichu Y#1",
+   "Arcanine-H#1"
+  ],
+  "spreads": [
+   "Smogon Staraptor-Mega Jolly 9.346%",
+   "Smogon Rillaboom Adamant 2.47%",
+   "Smogon Primarina Modest 4.916%",
+   "Smogon Gholdengo Modest 3.886%",
+   "Smogon Raichu-Mega-Y Timid 13.964%",
+   "Smogon Arcanine-Hisui Jolly 47.62%"
+  ]
+ },
+ "Frankfurt-14": {
+  "event": "Frankfurt",
+  "place": 14,
+  "arch": "Rain",
+  "pid": "0257",
+  "gids": [
+   "Archaludon#4",
+   "Pelipper#7",
+   "Garchomp#1",
+   "M-Golisopod#1",
+   "M-Raichu Y#1",
+   "Farigiraf#41"
+  ],
+  "spreads": [
+   "Smogon Archaludon Bold 6.346%",
+   "Smogon Pelipper Timid 11.687%",
+   "Smogon Garchomp Adamant 12.458%",
+   "Smogon Golisopod-Mega Adamant 29.333%",
+   "Smogon Raichu-Mega-Y Timid 13.964%",
+   "Smogon Farigiraf Bold 5.984%"
+  ]
+ },
+ "Frankfurt-15": {
+  "event": "Frankfurt",
+  "place": 15,
+  "arch": "Snow",
+  "pid": "0430",
+  "gids": [
+   "Rillaboom#3",
+   "Kingambit#1",
+   "Arcanine-H#1",
+   "M-Froslass#1",
+   "M-Raichu Y#1",
+   "Sneasler#5"
+  ],
+  "spreads": [
+   "Smogon Rillaboom Adamant 2.47%",
+   "Smogon Kingambit Adamant 10.886%",
+   "Smogon Arcanine-Hisui Jolly 47.62%",
+   "Smogon Froslass-Mega Timid 13.898%",
+   "Smogon Raichu-Mega-Y Timid 13.964%",
+   "Smogon Sneasler Adamant 27.725%"
+  ]
+ },
+ "Frankfurt-16": {
+  "event": "Frankfurt",
+  "place": 16,
+  "arch": "Tailwind",
+  "pid": "0135",
+  "gids": [
+   "Sylveon#1",
+   "Arcanine-H#1",
+   "Gholdengo#1",
+   "M-Raichu Y#1",
+   "Rillaboom#1",
+   "M-Staraptor#1"
+  ],
+  "spreads": [
+   "Smogon Sylveon Modest 6.974%",
+   "Smogon Arcanine-Hisui Jolly 47.62%",
+   "Smogon Gholdengo Timid 9.901%",
+   "Smogon Raichu-Mega-Y Timid 13.964%",
+   "Smogon Rillaboom Adamant 2.47%",
+   "Smogon Staraptor-Mega Jolly 9.346%"
+  ]
+ },
+ "trick_room_six": {
+  "event": "user",
+  "place": null,
+  "arch": "Indeedee TR",
+  "pid": null,
+  "gids": [
+   "M-Blastoise#5",
+   "Torkoal#8",
+   "Indeedee-F#24",
+   "Farigiraf#67",
+   "Kingambit#12",
+   "Incineroar#16"
+  ],
+  "spreads": [
+   "user",
+   "user",
+   "user",
+   "user",
+   "user",
+   "user"
+  ]
+ },
+ "low_variance_six": {
+  "event": "user",
+  "place": null,
+  "arch": "Tailwind",
+  "pid": null,
+  "gids": [
+   "Rillaboom#55",
+   "Incineroar#80",
+   "Sneasler#85",
+   "Gholdengo#17",
+   "Kingambit#29",
+   "M-Salamence#6"
+  ],
+  "spreads": [
+   "user",
+   "user",
+   "user",
+   "user",
+   "user",
+   "user"
+  ]
+ }
+}

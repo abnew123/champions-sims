@@ -1,0 +1,132 @@
+{
+ "Tailwind goodstuffs": {
+  "lead": [
+   "Farigiraf",
+   "Incineroar"
+  ],
+  "back": [
+   "Torkoal",
+   "Kingambit"
+  ],
+  "v": 0.935,
+  "n": 864,
+  "source": "combined unbiased"
+ },
+ "Sun": {
+  "lead": [
+   "Blastoise",
+   "Kingambit"
+  ],
+  "back": [
+   "Farigiraf",
+   "Incineroar"
+  ],
+  "v": 0.527,
+  "n": 192,
+  "source": "decider"
+ },
+ "Indeedee TR / Psychic Terrain": {
+  "lead": [
+   "Blastoise",
+   "Farigiraf"
+  ],
+  "back": [
+   "Torkoal",
+   "Incineroar"
+  ],
+  "v": 0.598,
+  "n": 192,
+  "source": "decider"
+ },
+ "Rain": {
+  "lead": [
+   "Torkoal",
+   "Incineroar"
+  ],
+  "back": [
+   "Blastoise",
+   "Farigiraf"
+  ],
+  "v": 0.537,
+  "n": 528,
+  "source": "pooled"
+ },
+ "Balance, no speed control": {
+  "lead": [
+   "Blastoise",
+   "Farigiraf"
+  ],
+  "back": [
+   "Kingambit",
+   "Incineroar"
+  ],
+  "v": 0.865,
+  "n": 288,
+  "source": "combined unbiased"
+ },
+ "Sand": {
+  "lead": [
+   "Farigiraf",
+   "Incineroar"
+  ],
+  "back": [
+   "Blastoise",
+   "Kingambit"
+  ],
+  "v": 0.828,
+  "n": 528,
+  "source": "pooled"
+ },
+ "Snow": {
+  "lead": [
+   "Blastoise",
+   "Farigiraf"
+  ],
+  "back": [
+   "Torkoal",
+   "Incineroar"
+  ],
+  "v": 0.877,
+  "n": 192,
+  "source": "decider"
+ },
+ "Trick Room without Indeedee": {
+  "lead": [
+   "Farigiraf",
+   "Incineroar"
+  ],
+  "back": [
+   "Blastoise",
+   "Torkoal"
+  ],
+  "v": 0.733,
+  "n": 528,
+  "source": "pooled"
+ },
+ "Rain + sun": {
+  "lead": [
+   "Blastoise",
+   "Incineroar"
+  ],
+  "back": [
+   "Torkoal",
+   "Farigiraf"
+  ],
+  "v": 0.536,
+  "n": 720,
+  "source": "pooled"
+ },
+ "Perish trap": {
+  "lead": [
+   "Blastoise",
+   "Kingambit"
+  ],
+  "back": [
+   "Torkoal",
+   "Farigiraf"
+  ],
+  "v": 0.94,
+  "n": 192,
+  "source": "decider"
+ }
+}

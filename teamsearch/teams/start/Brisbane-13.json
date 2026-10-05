@@ -1,0 +1,122 @@
+{
+ "Basculegion": {
+  "species": "Basculegion",
+  "item": "Choice Scarf",
+  "ability": "Adaptability",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Wave Crash",
+   "Last Respects",
+   "Aqua Jet",
+   "Flip Turn"
+  ]
+ },
+ "Rillaboom": {
+  "species": "Rillaboom",
+  "item": "Occa Berry",
+  "ability": "Grassy Surge",
+  "nature": "Sassy",
+  "evs": [
+   32,
+   0,
+   4,
+   0,
+   30,
+   0
+  ],
+  "moves": [
+   "Grassy Glide",
+   "U-turn",
+   "Fake Out",
+   "Protect"
+  ]
+ },
+ "Politoed": {
+  "species": "Politoed",
+  "item": "Sitrus Berry",
+  "ability": "Drizzle",
+  "nature": "Calm",
+  "evs": [
+   32,
+   0,
+   24,
+   0,
+   7,
+   3
+  ],
+  "moves": [
+   "Weather Ball",
+   "Hypnosis",
+   "Perish Song",
+   "Protect"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Chople Berry",
+  "ability": "Intimidate",
+  "nature": "Sassy",
+  "evs": [
+   31,
+   0,
+   15,
+   0,
+   20,
+   0
+  ],
+  "moves": [
+   "Throat Chop",
+   "Parting Shot",
+   "Fake Out",
+   "Protect"
+  ]
+ },
+ "Gengar": {
+  "species": "Gengar",
+  "item": "Gengarite",
+  "ability": "Cursed Body",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Shadow Ball",
+   "Sludge Bomb",
+   "Perish Song",
+   "Protect"
+  ]
+ },
+ "Archaludon": {
+  "species": "Archaludon",
+  "item": "Leftovers",
+  "ability": "Stamina",
+  "nature": "Bold",
+  "evs": [
+   32,
+   0,
+   1,
+   1,
+   32,
+   0
+  ],
+  "moves": [
+   "Electro Shot",
+   "Draco Meteor",
+   "Flash Cannon",
+   "Protect"
+  ]
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "Raichu": {
+  "species": "Raichu",
+  "item": "Raichunite Y",
+  "ability": "Lightning Rod",
+  "nature": "Timid",
+  "evs": [
+   32,
+   0,
+   11,
+   0,
+   0,
+   23
+  ],
+  "moves": [
+   "Zap Cannon",
+   "Focus Blast",
+   "Fake Out",
+   "Protect"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Sitrus Berry",
+  "ability": "Intimidate",
+  "nature": "Impish",
+  "evs": [
+   32,
+   0,
+   20,
+   0,
+   14,
+   0
+  ],
+  "moves": [
+   "Fake Out",
+   "Helping Hand",
+   "Flare Blitz",
+   "Parting Shot"
+  ]
+ },
+ "Sinistcha": {
+  "species": "Sinistcha",
+  "item": "Kasib Berry",
+  "ability": "Hospitality",
+  "nature": "Bold",
+  "evs": [
+   32,
+   0,
+   14,
+   0,
+   20,
+   0
+  ],
+  "moves": [
+   "Matcha Gotcha",
+   "Protect",
+   "Rage Powder",
+   "Trick Room"
+  ]
+ },
+ "Kommo-o": {
+  "species": "Kommo-o",
+  "item": "Leftovers",
+  "ability": "Soundproof",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Clanging Scales",
+   "Aura Sphere",
+   "Clangorous Soul",
+   "Protect"
+  ]
+ },
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Focus Sash",
+  "ability": "Defiant",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Kowtow Cleave",
+   "Sucker Punch",
+   "Low Kick",
+   "Iron Head"
+  ]
+ },
+ "Delphox": {
+  "species": "Delphox",
+  "item": "Delphoxite",
+  "ability": "Blaze",
+  "nature": "Timid",
+  "evs": [
+   9,
+   0,
+   14,
+   11,
+   0,
+   32
+  ],
+  "moves": [
+   "Heat Wave",
+   "Psychic",
+   "Nasty Plot",
+   "Protect"
+  ]
+ }
+}

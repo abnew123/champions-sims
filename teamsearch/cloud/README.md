@@ -116,6 +116,7 @@ Notes:
 - Linux `pgrep` has no `-E` flag.
 - Don't stop the watchdog with `pkill -f watchdog`: that also kills your own ssh command's shell. Kill it by PID.
 - `python3 report.py cloud_results/v12` prints the climb report from the pulled results.
+- Progress page from the pulled results: `TS_CLIMB_DIR=cloud_results/v12 python3 status_server.py` (port 8767).
 
 ## 6. Shut it down (billing stops only when it's terminated)
 

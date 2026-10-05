@@ -2,10 +2,13 @@
 port 8766, run read-only and embedded). Team-search cards, one per stage —
 one-on-one matrix cells, replay team previews, bring training battles, bring fit + check, hill-climb rounds — with job counts
 from the result folders and time left from the rate since the stage started. Refreshes in place every 10 s.
-usage: python3 status_server.py [port=8767]"""
+usage: python3 status_server.py [port=8767]
+  TS_CLIMB_DIR=cloud_results/v12: read the hill climb's state, log and battles from results pulled from AWS (pull_loop.sh)"""
 import http.server, json, os, re, glob, time, datetime, html, sys, subprocess, runpy
 TS = os.path.dirname(os.path.abspath(__file__))
 J = lambda *p: os.path.join(TS, *p)
+CD = os.environ.get('TS_CLIMB_DIR')                  # the climb's results folder, relative to teamsearch/ (default: local)
+C = (lambda *p: os.path.join(TS, CD, *p)) if CD else J
 
 def ampm(t, sec=False): return t.strftime('%-I:%M:%S %p' if sec else '%-I:%M %p').lower()
 def fmt(sec):
@@ -81,14 +84,15 @@ def page():
     cards.append(card('Bring fit + check vs the sheet', 'running' if live else 'finished' if (om and sb) else 'waiting',
                       len(chk) if live else (2 if om and sb else int(bool(om))), 180 if live else 2, 'jobs' if live else 'steps', lines=lines))
     # 5. hill climb
-    stt = load(J('climb_state.json')); pr = load(J('climb_progress.json'))
-    live = running('climb.py round')
+    stt = load(C('climb_state.json')); pr = load(C('climb_progress.json'))
+    live = running('climb.py round') if not CD else bool(pr) and pr.get('phase') != 'done' and \
+        time.time() - max([os.path.getmtime(f) for f in files(C('runs', '*', 'out_*', '*.json'))[-2000:]] + [0]) < 1800   # remote: recent results
     if not pr:
         cards.append(card('Hill climb', 'waiting', 0, 0, '', lines=['round 1 starts after the bring check']))
     else:
         phase = pr['phase']; rnd = pr['round']
         if phase in ('screen', 'confirm'):
-            outs = files(J('runs', '*', f"out_*{pr['seed']}_{pr['per_job']}", '*.json'))
+            outs = files(C('runs', '*', f"out_*{pr['seed']}_{pr['per_job']}", '*.json'))
             title = f"Hill climb round {rnd} ({pr['mode']}): {'screening swaps (bring search)' if phase == 'screen' else 'confirming the best swaps (fresh games)'}"
             cards.append(card(title, 'running' if live else 'stopped', len(outs), pr['teams'] * pr.get('jobs_per_team', 60), f"jobs ({pr['per_job']} games each)",
                               pr['at'], live, outs, [f"{pr['teams']} teams for {pr['starts']} start teams"]))
@@ -98,10 +102,10 @@ def page():
                               0, 0, '', lines=[f"{pr.get('moved', '?')} of {pr['starts']} start teams moved to a better team" if phase == 'done' else '']))
     if stt:
         act = sum(1 for t in stt['teams'].values() if not t['done'])
-        moves = [json.loads(l) for l in open(J('climb_log.jsonl'))] if os.path.exists(J('climb_log.jsonl')) else []
+        moves = [json.loads(l) for l in open(C('climb_log.jsonl'))] if os.path.exists(C('climb_log.jsonl')) else []
         last = [m for m in moves if m['round'] == stt['round']]
         rows = ''.join(f"<tr><td>{html.escape(m['start'])}</td><td>{html.escape(m['best']['out'])} → {html.escape(m['best']['into'])}</td>"
-                       f"<td>{100 * m['best']['diff']:+.1f} ± {100 * m['best']['se']:.1f}</td><td>{'moved' if m['best']['diff'] > m['best']['se'] else 'local max'}</td></tr>"
+                       f"<td>{100 * m['best']['diff']:+.1f} ± {100 * m['best']['se']:.1f}</td><td>{({'move': 'moved', 'stop': 'local max', 'undecided': 'local max (undecided)'}.get(m['verdict'], m['verdict']) if 'verdict' in m else ('moved' if m['best']['diff'] > m['best']['se'] else 'local max'))}</td></tr>"
                        for m in sorted(last, key=lambda m: -m['best']['diff']))
         cards.append(f'''<div class="card finished"><div class="top"><b>Climb state after round {stt['round']}</b><span class="st">{act} still climbing</span></div>
           {f'<table><tr><th>start</th><th>best swap</th><th>gain (win-share pts)</th><th></th></tr>{rows}</table>' if rows else ''}</div>''')

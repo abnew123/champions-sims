@@ -424,3 +424,16 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
 - Team search's check of v3 + egvalue5 vs v8 + DP2 + RACE + egvalue7 on 10 teams (teamsearch/simcmp.json): rank correlation ~0.55, the
   Delphox / Garchomp / Incineroar / Kingambit teams stay on top; against 10k real regional matches the matchup error is about the same
   (RMS 0.37 -> 0.36 log-odds); Perish still far too easy, Sun opponents now too hard (they set Trick Room more under RACE).
+- **Planner work after the split (2026-10-05, Battle sim thread).** The user settled Torkoal at 32 HP / 2 SpD (sets: `sheets/trick-room-six/team.json`
+  = `pssim/myteam_real_tork32.json`), and the TR six now reads the sheet kit's generic grid (`GRID_DIR=../sheets/trick-room-six/work/grid`).
+  - `champ-battle-v10` = v9 + `DP2_LOG=1` (logging only). `champ-battle-v11` = v10 + `PERISH2=1` (a Perish count dooms only a Pokemon that
+    cannot leave: trapped, or no bench; scaled by turns left and the trapper's HP) + `TRSYM=1` (the slower side, either one, refuses to
+    click Trick Room while it is up; before: side 0 only). Both off by default; unset, v11 plays v8's games.
+  - Perish: `perish_test_run.sh`, `perish_report.py` (results/perish_base vs perish_p2, 96 games): PERISH2 does not make the sim's Perish
+    teams trap and sing against the TR six (Perish Song in ~40% of games either way; our lead KOs Gengar early); our win share 95.8 -> 91.7
+    (-4.1 +- 3.7). The user's call: Perish is too long-horizon for this sim and small in the meta, so use a stock real-data rate for Perish
+    matchups (Team search: `TS_PERISH=real`). PERISH2 stays off.
+  - Refit in progress: `refit8_run.sh` -> results/refit8 (3,600 self-play games on the settled sets and generic grid, v8 DP2 RACE, played
+    with egvalue7), `build_egvalue8.py` (status / Tailwind tied to the HP weight at real-game ratios; calibration by bucket on held-out games).
+  - Bar for calling a setup final: Team search's 10-team comparison against real regional results, RMS matchup error over the nine
+    non-Perish archetypes (v3 + egvalue5: 0.26 log-odds; v8 + DP2 + RACE + egvalue7: 0.25; sim noise ~0.14).

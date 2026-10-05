@@ -281,11 +281,44 @@ fn perish_adj(b: &Battle, w: &[f64]) -> f64 {
         last.sort_by(|a, c| if tr_then { a.1.cmp(&c.1) } else { c.1.cmp(&a.1) });   // stable, like JS sort
         return if last.last().unwrap().0 == 0 { 3.0 } else { -3.0 };
     }
+    if perish2() {
+        // PERISH2=1 (champ-battle-v11): a Perish count only dooms a Pokemon that cannot leave. Per side, the counted Pokemon that are not
+        // trapped take the bench slots (healthiest first) and are charged a small tempo cost; the rest (trapped by Shadow Tag / Arena Trap /
+        // Magnet Pull / a trapping move, or no bench left) are charged most of their worth, more the fewer turns remain, and for trapped
+        // ones scaled by how healthy the foe's trapper is (KOing or forcing out the trapper is the way out).
+        let hpf = |m: &MonRef| b.p(*m).hp as f64 / b.p(*m).maxhp.max(1) as f64;
+        let mut z = 0.0;
+        for k in 0..2usize {
+            let mut counted: Vec<(MonRef, i64)> = al[k].iter().filter_map(|m| t(m).map(|tt| (*m, tt))).collect();
+            if counted.is_empty() { continue; }
+            let trap_hp = active_alive(b, 1 - k as u8).iter().filter(|(_, f)| ["shadowtag", "arenatrap", "magnetpull"].contains(&b.p(*f).ability))
+                .map(|(_, f)| hpf(f)).fold(f64::NAN, f64::max);
+            let hold = if trap_hp.is_nan() { 1.0 } else { 0.6 + 0.4 * trap_hp };
+            let mut free = crate::spot::bench(b, k as u8).len();
+            counted.sort_by(|a, c| hpf(&c.0).partial_cmp(&hpf(&a.0)).unwrap());
+            for (m, tt) in counted {
+                let worth = w[0] * hpf(&m) + w[1];
+                let f = if !b.p(m).trapped && free > 0 { free -= 1; 0.15 }
+                        else { (if tt <= 1 { 0.95 } else if tt == 2 { 0.8 } else { 0.65 }) * if b.p(m).trapped { hold } else { 1.0 } };
+                z += (if k == 0 { -1.0 } else { 1.0 }) * f * worth;
+            }
+        }
+        return z;
+    }
     let mut z = 0.0;
     for (k, l) in al.iter().enumerate() { for m in l { if let Some(tt) = t(m) {
         z += (if k == 0 { -1.0 } else { 1.0 }) * 0.8 * (w[0] * b.p(*m).hp as f64 / b.p(*m).maxhp as f64 + w[1]) / (tt.max(1) as f64);
     } } }
     z
+}
+fn perish2() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("PERISH2").is_ok()) }
+fn trsym() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("TRSYM").is_ok()) }
+/// who refuses to click Trick Room while it is up: side 0 only (the original rule, written for the slow Trick Room six), or with TRSYM=1
+/// (champ-battle-v11) whichever side is slower on average, so a faster side 0 with a Trick Room move can reverse the opponent's
+fn tr_keep(b: &Battle, s: u8) -> bool {
+    if !trsym() { return s == 0; }
+    let ms = |x: u8| { let a = alive(b, x); a.iter().map(|m| b.p(*m).stored[5] as f64).sum::<f64>() / a.len().max(1) as f64 };
+    ms(s) < ms(1 - s)
 }
 pub fn value(b: &mut Battle, cfg: &Cfg) -> f64 {
     if b.ended { return match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 }; }
@@ -317,7 +350,7 @@ pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
         if *disabled || *mid == "healingwish" || *mid == "memento" { continue; }
         if *mid == "fakeout" && b.p(m).active_move_actions > 0 { continue; }
         if b.p(m).item.starts_with("choice") && (*mid == "protect" || *mid == "detect") { continue; }
-        if *mid == "trickroom" && find(&b.field.pseudo, "trickroom").is_some() && s == 0 { continue; }
+        if *mid == "trickroom" && find(&b.field.pseudo, "trickroom").is_some() && tr_keep(b, s) { continue; }
         let mv = b.dex.mv(mid).tmpl.clone();
         if mv.stalling_move && no_double_protect(s) && find(&b.p(m).volatiles, "stall").is_some() { continue; }
         if FOE_TARGETS.contains(&mv.target) {

@@ -295,3 +295,6 @@ Usage:
   - The race helps the archetype opponents, above all Indeedee TR (TR up by turn 3: 30 → 36%).
   - Our side gains from it only when the opponent also has it. That may be anticipation predicting the opponent with our own value file; asked Battle sim.
 - **Features run for a multi-team value fit (`feats_run.py`, started 4:58 am):** the 10 teams × 60 jobs × 4 games under v12 with BATTLE_FEATS=1, seed 610000. Output folders are listed in `feats_run_dirs.txt`. Thread counts for both scripts come from `decomp_threads.txt`.
+  - **Done:** two passes, 2,400 games each, all with top-level 'feats'. The v8 pass (4:58 am, by mistake: simcmp sets TS_SIM=v8 on import) is in `feats_run_dirs_v8.txt`. The v12 pass (5:52 am) is in `feats_run_dirs_v12.txt`.
+  - Battle sim's finding from the v8 pass: egvalue8 rates our teams ~14 points too low. Slopes transfer across teams; the intercept doesn't. egvalue9 will have pooled slopes plus a general intercept and per-team intercept files.
+  - Next: `intercept_test.py` (general vs own intercept; its general arm is also the bar run, `simreal.py v8 v12g`).

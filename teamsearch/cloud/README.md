@@ -1,7 +1,7 @@
 # Running the hill climb on AWS
 
-**The setup** is the final one (Battle sim, 2026-10-05), in `cloud/run_env.sh`:
-- `TS_SIM=v12g`: champ-battle-v12, `pssim/egvalue9.json` (general intercept), damage race, two-turn Protect check, anticipation.
+**The setup** is the final one (Battle sim, 2026-10-05, amended the same day), in `cloud/run_env.sh`:
+- `TS_SIM=v13g`: champ-battle-v13, `pssim/egvalue9.json` (general intercept), damage race with Speed ties averaged (`RACE_TIES=avg`), two-turn Protect check, anticipation.
 - `TS_PERISH=real`: Perish trap is scored from real regional rates instead of battles (`perish_stock.py`).
 
 **Size:** a thorough round 1 over the 52 starts is about 155k 4v4 games. At about 11.5 s per game per core on c7a, that's roughly 2.5–3 h on a **c7a.48xlarge** (192 vCPUs; on c7a each vCPU is a full core). Later rounds only re-run the starts still climbing. The first climb took ~8 h for 4 rounds. Run it in the daytime, so the user can launch the box and answer questions while it runs.
@@ -46,7 +46,7 @@ scp -i ~/.ssh/KEY.pem teamsearch/cloud/bundle.tar.gz ubuntu@HOST:
 
 `pack.sh` collects what the climb needs (a few MB):
 - the teamsearch scripts, sets, matrix cells, bring model and the Perish table;
-- the battle-sim source snapshot (v12 by default) and its checksums;
+- the battle-sim source snapshot (v13 by default) and its checksums;
 - the Showdown data patch, t1sim, the archetype models, the archetype classifier and every value file;
 - the regional set data.
 
@@ -68,7 +68,7 @@ mkdir champions-sims && tar xzf bundle.tar.gz -C champions-sims && cd champions-
 1. Installs Node, Python and Rust.
 2. Runs the repo's `setup.sh`: Showdown 0.11.11 plus our Champions fixes, and a Python venv with numpy/scipy.
 3. Checks the battle source against the recorded checksum.
-4. Builds `native/champ/bin/champ-battle-v12` for Linux.
+4. Builds `native/champ/bin/champ-battle-v13` for Linux. To add another binary later without reinstalling anything, use `teamsearch/cloud/build_battle.sh src_battle_vN.tar.gz`.
 
 ## 4. Smoke test and timing
 
@@ -77,7 +77,7 @@ cd ~/champions-sims/teamsearch && . cloud/run_env.sh && TS_THREADS=$(nproc) ../.
 ```
 
 This plays 54 games, one per archetype × lead pair; Perish is scored from real data. It prints the score and the seconds taken.
-- **Check the score and per-job wins** against `cloud/reference_v12g.json` (the same games on the Mac: score 0.5667). They must match exactly. If not, the Linux build differs; stop and compare before running a round.
+- **Check the score and per-job wins** against `cloud/reference_v13g.json` (the same games on the Mac: score 0.5762). They must match exactly. If not, the Linux build differs; stop and compare before running a round.
 - **Speed:** seconds × threads ÷ 54 = seconds per game per core. The Mac was 6.1.
 
 ## 5. Run a round
@@ -92,7 +92,7 @@ Then, inside tmux:
 cd ~/champions-sims/teamsearch && . cloud/run_env.sh && TS_PARALLEL=60 TS_THREADS=3 TS_PREFILTER_PROCS=96 ../.venv/bin/python3 climb.py round thorough 2>&1 | tee -a round.log
 ```
 
-- **Check the first line:** it prints the sim setup and binary. It must say `v12g` and `champ-battle-v12`.
+- **Check the first line:** it prints the sim setup and binary. It must say `v13g` and `champ-battle-v13`.
 - **Detach** with Ctrl-b then d; reattach with `tmux attach -t climb`.
 - **Change the thread count or recover from a crash:** `cloud/relaunch.sh <P> <T>`. Finished battles are reused, and the round only commits to `climb_state.json` at the end.
 - **Further rounds automatically:** `setsid nohup cloud/auto_rounds.sh <power-off epoch> [seconds per climbing start] &`. It keeps starting thorough rounds while starts are still climbing and the next round fits before the power-off.

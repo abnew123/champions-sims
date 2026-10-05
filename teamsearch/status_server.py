@@ -102,9 +102,15 @@ def cards():
         cards.append(card('Hill climb', 'waiting', 0, 0, '', lines=['round 1 starts after the bring check']))
     else:
         phase = pr['phase']; rnd = pr['round']
-        if phase in ('screen', 'confirm'):
-            outs = files(C('runs', '*', f"out_*{pr['seed']}_{pr['per_job']}", '*.json'))
-            title = f"Hill climb round {rnd} ({pr['mode']}): {'screening swaps (bring search)' if phase == 'screen' else 'confirming the best swaps (fresh games)'}"
+        if phase in ('screen', 'confirm', 'sharpen'):
+            sfx = f"{pr['seed']}_{pr['per_job']}"; tag = pr.get('sim')
+            if tag is None:                             # (older climb.py: take the setup whose outputs for this seed are newest)
+                ds = files(C('runs', '*', f'out_*{sfx}'))
+                tag = max(ds, key=os.path.getmtime).rsplit('/out_', 1)[1][:-len(sfx)].rstrip('_') if ds else 'v3'
+                tag = tag or 'v3'
+            outs = files(C('runs', '*', f"out_{sfx}" if tag == 'v3' else f"out_{tag}_{sfx}", '*.json'))
+            title = f"Hill climb round {rnd} ({pr['mode']}): " + {'screen': 'screening swaps (bring search)', 'confirm': 'confirming the best swaps (fresh games)',
+                                                                  'sharpen': f"extra paired batch {pr.get('batch', '')} for undecided swaps"}[phase]
             cards.append(card(title, 'running' if live else 'stopped', len(outs), pr['teams'] * pr.get('jobs_per_team', 60), f"jobs ({pr['per_job']} games each)",
                               pr['at'], live, outs, [f"{pr['teams']} teams for {pr['starts']} start teams"]))
         else:

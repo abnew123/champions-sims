@@ -20,6 +20,7 @@ ARCHS = list(P.ARCH_SHARE)
 # Sim setups (TS_SIM). 'v3' = what rounds 1-4 on AWS used. 'v8' = the other thread's recommendation of 2026-10-04: two-turn
 # Protect check, damage-race value features, egvalue7 (status/Tailwind weights from real games). Outputs of non-default setups
 # go to out_<sim>_<seed>_<pj>, so caches of different setups never mix.
+V12_ENV = {'BATTLE_ANTICIPATE': '1', 'DP2': '1', 'RACE': '1', 'CALC_DATA': '../native/champions_data.json'}
 SIMS = {
     'v3': dict(bin='champ-battle-v3', eg='egvalue5.json', env={'BATTLE_ANTICIPATE': '1'}),
     'v8': dict(bin='champ-battle-v8', eg='egvalue7.json',
@@ -28,6 +29,12 @@ SIMS = {
     'v8b': dict(bin='champ-battle-v8', eg='egvalue6b.json', env={'BATTLE_ANTICIPATE': '1'}),
     'v8c': dict(bin='champ-battle-v8', eg='egvalue7.json',
                 env={'BATTLE_ANTICIPATE': '1', 'RACE': '1', 'CALC_DATA': '../native/champions_data.json'}),
+    # v12 (Battle sim, 2026-10-05): egvalue8 refit; eg_b = side 1's (the opponent's) value file when it differs from ours.
+    # 'v12' is the candidate (race on both sides); the others split the race by side (decomp.py).
+    'v12': dict(bin='champ-battle-v12', eg='egvalue8.json', env=V12_ENV),
+    'v12nr': dict(bin='champ-battle-v12', eg='egvalue8_norace.json', env=V12_ENV),
+    'v12ro': dict(bin='champ-battle-v12', eg='egvalue8.json', eg_b='egvalue8_norace.json', env=V12_ENV),
+    'v12rt': dict(bin='champ-battle-v12', eg='egvalue8_norace.json', eg_b='egvalue8.json', env=V12_ENV),
 }
 def sim(): return os.environ.get('TS_SIM', 'v3')
 def out_tag(seed0, per_job): return f'{seed0}_{per_job}' if sim() == 'v3' else f'{sim()}_{seed0}_{per_job}'
@@ -36,6 +43,7 @@ def bin_path():
     return os.environ.get('TS_BATTLE_BIN', os.path.join(ROOT, 'native', 'champ', 'bin', SIMS[sim()]['bin']))
 def sim_env():
     e = dict(SIMS[sim()]['env']); e['EG_VALUE'] = os.environ.get('TS_EG_VALUE', os.path.join(PS, SIMS[sim()]['eg']))
+    if SIMS[sim()].get('eg_b'): e['EG_VALUE_B'] = os.path.join(PS, SIMS[sim()]['eg_b'])
     if 'TS_ANTICIPATE' in os.environ: e['BATTLE_ANTICIPATE'] = os.environ['TS_ANTICIPATE']
     return e
 

@@ -290,3 +290,8 @@ Usage:
   - Win share A → B → C → D: Sun 67.4 → 61.6 → 52.2 → 51.9; Indeedee TR 69.6 → 68.0 → 56.2 → 57.8; Snow 67.1 → 65.4 → 58.2 → 58.5.
   - The race is the main step; DP2 does nothing. Opponents get Trick Room up more under the race (Sun 45 → 51%, Indeedee TR 29 → 38% by turn 3), but Snow never sets TR and still drops 7, so the effect is broader than TR.
   - A run of only these archetypes' jobs reproduces the full run's games exactly (seeds key on arch, k, g). Setups 'v8b' / 'v8c' are in evaluate.SIMS.
+- **Race by side, v12 (Oct 5, 4:58 am; `decomp.py v12ro v12rt v12 v12nr` → `decomp_v12ro_v12rt_v12_v12nr.json`):** same games as the decomposition; egvalue8 vs egvalue8_norace, set per side with EG_VALUE / EG_VALUE_B (setups in evaluate.SIMS).
+  - Win share, neither / ours / theirs / both: Sun 61.4 / 62.5 / 51.3 / 58.7; Indeedee TR 65.3 / 65.2 / 43.8 / 52.7; Snow 62.8 / 62.4 / 58.7 / 61.8.
+  - The race helps the archetype opponents, above all Indeedee TR (TR up by turn 3: 30 → 36%).
+  - Our side gains from it only when the opponent also has it. That may be anticipation predicting the opponent with our own value file; asked Battle sim.
+- **Features run for a multi-team value fit (`feats_run.py`, started 4:58 am):** the 10 teams × 60 jobs × 4 games under v12 with BATTLE_FEATS=1, seed 610000. Output folders are listed in `feats_run_dirs.txt`. Thread counts for both scripts come from `decomp_threads.txt`.

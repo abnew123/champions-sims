@@ -1,5 +1,6 @@
 """One live progress page for every thread's runs, and a viewer for built sheets. Refreshes in place every 10 s.
 
+  Running now  every active run at the top, each labelled with its thread (the same cards appear again in the sections below)
   Sheets       the sheet kit's runs (sheetkit/kit.py: bring matrix, confirmation, turn-one lines), on this Mac or pulled from a cloud box
   Battle sim   the simulator thread's batches
   Team search  that thread's stages and hill climb (its own cards, from teamsearch/status_server.py)
@@ -93,6 +94,20 @@ def eval_bar():
     try: return runpy.run_path(f)['cards']()
     except Exception as e: return f'<p class="idle">Couldn&rsquo;t read the Eval bar&rsquo;s cards ({html.escape(type(e).__name__)}).</p>'
 
+THREADS = {'kit': 'TR sheet', 'sim': 'Battle sim', 'ts': 'Team search', 'eb': 'Eval bar'}
+def running_cards(h):
+    """the running cards in a thread's cards HTML: each <div class="card running ..."> with everything up to its matching </div>"""
+    out = []
+    for m in re.finditer(r'<div class="card running[^"]*">', h):
+        depth = 0
+        for t in re.finditer(r'<div\b|</div>', h[m.start():]):
+            depth += 1 if t.group() != '</div>' else -1
+            if depth == 0: out.append(h[m.start():m.start() + t.end()]); break
+    return out
+def tagged(c, thread):
+    """a card with its thread's name above the title"""
+    return c.replace('<div class="top">', f'<div class="who">{html.escape(thread)}</div><div class="top">', 1)
+
 def page():
     now = datetime.datetime.now()
     ps = subprocess.run(['ps', '-axo', 'command'], capture_output=True, text=True).stdout   # a local run is live while its workers are
@@ -137,9 +152,14 @@ def page():
                ('<h3>Recent</h3>' + ''.join(card(r, False) for r in recent) if recent else '')
     # when Team search's page embeds this one (its own port), leave its section to it
     embedded = any(f.filename.endswith(os.path.join('teamsearch', 'status_server.py')) for f in inspect.stack())
-    body = f'''<h2>Sheets</h2>{section([r for r in R if r['kit']])}
-<h2>Battle sim</h2>{section([r for r in R if not r['kit']])}''' + ('' if embedded else f'<h2>Team search</h2>{team_search()}') + \
-           f'<h2>Eval bar</h2>{eval_bar()}'
+    ts = '' if embedded else team_search(); eb = eval_bar()
+    # every active run first, labelled with its thread (not on Team search's own page, which embeds this one)
+    now_running = [tagged(card(r, True), THREADS['kit' if r['kit'] else 'sim']) for r in R if live(r)] + \
+                  [tagged(c, THREADS['ts']) for c in running_cards(ts)] + [tagged(c, THREADS['eb']) for c in running_cards(eb)]
+    top = '' if embedded else f'<h2>Running now</h2>' + (''.join(now_running) or '<p class="idle">Nothing running right now.</p>')
+    body = top + f'''<h2>Sheets</h2>{section([r for r in R if r['kit']])}
+<h2>Battle sim</h2>{section([r for r in R if not r['kit']])}''' + ('' if embedded else f'<h2>Team search</h2>{ts}') + \
+           f'<h2>Eval bar</h2>{eb}'
     return f'''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sim progress</title><style>
 :root{{--bg:#f5f6f8;--panel:#fff;--ink:#15171a;--ink2:#666b73;--rule:#dfe2e7;--acc:#1f6feb;--ok:#00734f}}
@@ -150,6 +170,7 @@ h1{{font-size:22px;margin:0 0 4px}}h2{{font-size:17px;margin:24px 0 8px}}h3{{fon
 .st{{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--acc);font-weight:700;white-space:nowrap}}.finished .st{{color:var(--ok)}}
 .stopped .st,.waiting .st{{color:#c9822b}}.stopped .bar div{{background:#c9822b}}
 .bar{{height:10px;background:var(--rule);border-radius:5px;overflow:hidden;margin:9px 0 7px}}.bar div{{height:100%;background:var(--acc)}}.finished .bar div{{background:var(--ok)}}
+.who{{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);margin-bottom:3px}}
 .meta{{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13.5px}}.note{{font-size:13px;color:var(--ink2);margin-top:6px}}.idle{{color:var(--ink2)}}
 table{{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}}td,th{{text-align:left;padding:3px 6px;border-top:1px solid var(--rule)}}th{{color:var(--ink2);font-weight:600}}
 @media (max-width:520px){{table{{font-size:12px}}}}</style></head>

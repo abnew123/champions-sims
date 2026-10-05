@@ -115,6 +115,7 @@ section > h2{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:u
 .pick .pb{flex:1;height:5px;background:var(--rule);border-radius:3px;overflow:hidden}
 .pick .pb i{display:block;height:100%;background:var(--ink2);border-radius:3px}
 .orow .n{font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.orow .n.rough{color:var(--ink3)}
 .played-tag{font-family:var(--mono);font-size:10px;padding:1px 5px;border-radius:3px;background:var(--accent-soft);color:var(--ink);margin-left:6px;white-space:nowrap;font-weight:400}
 .omore{font-size:12.5px;color:var(--ink3);padding:4px 0 2px;border-top:1px solid var(--rule-2)}
 @media (max-width:560px){.opts{grid-template-columns:1fr}}
@@ -206,7 +207,7 @@ function head() {
   const turns = `${N} turns`, r = G.rating ? `players rated about ${Math.round(G.rating)}` : null;
   $('sub').textContent = G.engine ? 'One Reg M-C best-of-three ladder game from Showdown, turn by turn: who is winning at the start of each turn, the best options for each Pokémon on the field, and what happened next.'
     : 'One Reg M-C best-of-three ladder game from Showdown, turn by turn: who is winning at the start of each turn, and what happened next.';
-  if (G.engine) $('eyebrow').textContent = 'Prototype · bar version 0 · options from the engine';
+  if (G.engine) $('eyebrow').textContent = G.engine.bar ? 'Prototype · engine version' : 'Prototype · bar version 0 · options from the engine';
   $('meta').innerHTML = [turns, r, G.winner ? `${who(G.winner)} won${G.forfeit ? ' by forfeit' : ''}` : 'no result', 'replay ' + G.id.split('-').pop()]
     .filter(Boolean).map(x => `<span class="chip">${esc(x)}</span>`).join('');
 }
@@ -293,12 +294,14 @@ function options() {
   $('optSec').hidden = !o; if (!o) return;
   $('optTitle').textContent = `Best options at the start of turn ${G.steps[cur].turn}`;
   const pc = v => Math.round(100 * v) + '%', e1 = Math.max(1, Math.min(99, Math.round(100 * G.steps[cur].ev)));
-  $('optNote').textContent = `The engine's planner rates this position Player 1 ${e1}%, Player 2 ${100 - e1}%. Picks: how often it would choose the option. Wins: that player's win chance, on the engine's scale, if the option is chosen and the opponent answers with their best mix.`;
+  $('optNote').textContent = (G.engine.bar ? 'Picks: how often the planner would choose the option. Wins: that player\'s win chance if it is chosen and the opponent answers with their best mix.'
+    : `The engine's planner rates this position Player 1 ${e1}%, Player 2 ${100 - e1}%. Picks: how often it would choose the option. Wins: that player's win chance, on the engine's scale, if the option is chosen and the opponent answers with their best mix.`)
+    + (G.engine.staged ? ' A value marked ~ is rough: the option is clearly worse and was sampled less.' : '');
   $('opts').innerHTML = ['p1', 'p2'].map(sd => o[sd].map(slot => {
     const all = slot.options.slice().sort((a, b) => b.w - a.w || b.v - a.v), top = all.slice(0, 5);
     const pl = all.find(x => x.played); if (pl && !top.includes(pl)) top.push(pl);
     const rows = top.map(x => `<div class="orow${x.played ? ' played' : ''}"><div class="ol">${esc(x.l)}${x.played ? '<span class="played-tag">played</span>' : ''}</div>
-      <div class="pick"><span class="pb"><i style="width:${Math.round(100 * x.w)}%"></i></span><span class="n">${pc(x.w)}</span></div><div class="n r">${pc(x.v)}</div></div>`).join('');
+      <div class="pick"><span class="pb"><i style="width:${Math.round(100 * x.w)}%"></i></span><span class="n">${pc(x.w)}</span></div><div class="n r${x.rough ? ' rough' : ''}">${x.rough ? '~' : ''}${pc(x.v)}</div></div>`).join('');
     const more = all.length - top.length;
     return `<div class="ocard"><h3><i class="sw ${sd}"></i>${esc(slot.mon)}</h3>
       <div class="orow hd"><div>Option</div><div class="r">Picks</div><div class="r">Wins</div></div>${rows}
@@ -325,13 +328,23 @@ function events() {
 function notes() {
   const a = G.acc, f = v => (100 * v).toFixed(0) + '%';
   const cal = a && a.calibration.find(c => c.lo >= .7 && c.lo < .8);
-  $('notes').innerHTML = `
-    <p><b>How the bar is made (version 0).</b> A model fitted on ${a ? a.games.toLocaleString('en-US') : 'about 4,500'} real Reg M-C games reads eleven things at the start of the turn: share of HP left, Pokémon left, stat boosts on the field, Trick Room and who is slower, who used Protect last turn, type matchups, sleep, paralysis, burn or poison, Tailwind, and screens. It does not look ahead and knows nothing about the moves each Pokémon could click.</p>
+  const samples = G.engine ? (G.engine.staged ? `up to ${G.engine.seeds} samples of the turn's luck, most for the options that are close` : `${G.engine.seeds} samples of the turn's luck each`) : '';
+  const how0 = `A model fitted on ${a && !G.engine?.bar ? a.games.toLocaleString('en-US') : 'about 4,500'} real Reg M-C games reads eleven things at the start of the turn: share of HP left, Pokémon left, stat boosts on the field, Trick Room and who is slower, who used Protect last turn, type matchups, sleep, paralysis, burn or poison, Tailwind, and screens. It does not look ahead and knows nothing about the moves each Pokémon could click.`;
+  const solve = `For each turn the battle engine plays every pair of choices one turn ahead (${samples}), scores the positions that result, and solves the turn as a game between the two players.`;
+  let html;
+  if (G.engine && G.engine.bar) {
+    html = `<p><b>How the bar is made.</b> ${solve} The bar is the value of that game for Player 1, rescaled so that it matches how real games turned out: the engine alone is too sure of itself, so its odds are pulled towards even (log-odds times ${G.engine.cal.toFixed(2)}).</p>
+    <p><b>Best options.</b> Picks is each option's share of the solution, so a mixed answer means the planner would vary its play. Wins is on the same scale as the bar.</p>
+    ${a ? `<p><b>How good it is.</b> On ${a.games.toLocaleString('en-US')} real games it was not fitted on (${a.positions.toLocaleString('en-US')} turns), the side it favoured won ${f(a.favourite_won)} of the time. Log loss ${a.log_loss.toFixed(3)}; the earlier bar without the engine scores ${a.v0.log_loss.toFixed(3)} on the same turns, and a coin flip 0.693 (lower is better).${cal ? ` Positions it rated around ${f(cal.rated)} were won ${f(cal.won)} of the time.` : ''}</p>` : ''}
+    <p><b>Hindsight and guesses.</b> Each bench lists all the Pokémon that player brought, which the opponent only learned as they came in, and the engine knows them too. Items, abilities, natures and moves come from the open team sheets. Stat points are not on team sheets: the engine assumes each Pokémon's most common spread.</p>`;
+  } else {
+    html = `<p><b>How the bar is made (version 0).</b> ${how0}</p>
     ${a ? `<p><b>How good it is.</b> On games it was not fitted on, the side it favoured won ${f(a.favourite_won)} of the time, counting every turn of every game. Log loss ${a.log_loss.toFixed(3)} (a coin flip scores 0.693; lower is better).${cal ? ` It is well calibrated: positions it rated around ${f(cal.rated)} were won ${f(cal.won)} of the time.` : ''}</p>` : ''}
     <p><b>Hindsight.</b> Each bench lists all the Pokémon that player brought, which the opponent only learned as they came in. Items come from the open team sheets. The bar itself counts a Pokémon that has not come in yet as full HP.</p>
-    ${G.perish ? '<p><b>Perish Song was used in this game.</b> Treat the bar with care around it.</p>' : ''}
-    ${G.engine ? `<p><b>Best options.</b> For each turn the battle engine plays every pair of choices one turn ahead (${G.engine.seeds} samples of the turn's luck each), scores the positions that result, and solves the turn as a game between the two players. Picks is each option's share of that solution, so a mixed answer means the planner would vary its play. The engine's percentages come from its own self-play scale and are not yet matched to real results, so they can sit a few points away from the bar. Stat points are not on team sheets: the engine assumes each Pokémon's most common spread.</p>`
+    ${G.engine ? `<p><b>Best options.</b> ${solve} Picks is each option's share of that solution, so a mixed answer means the planner would vary its play. The engine's percentages come from its own self-play scale and are not yet matched to real results, so they can sit a few points away from the bar. Stat points are not on team sheets: the engine assumes each Pokémon's most common spread.</p>`
       : '<p><b>Not here yet.</b> The best options for each Pokémon on the field, with how often the planner would pick each and what each is worth. That needs the battle engine and is the next version.</p>'}`;
+  }
+  $('notes').innerHTML = html + (G.perish ? '<p><b>Perish Song was used in this game.</b> The planner cannot play the Perish trap, so treat the bar with care around it.</p>' : '');
 }
 
 function go(i) {

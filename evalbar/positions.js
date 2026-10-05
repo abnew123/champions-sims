@@ -6,13 +6,13 @@
 // play the trap). standIns: brought Pokemon that never appeared and were filled in from the team sheet. actual / their_actual: what each slot of side 0 / side 1 chose, as the
 // engine's choice ([move index, target, mega] or ['switch', team index]); null for a slot whose choice the log does not show (flinched,
 // fainted first). approx: state details that were left out.
-// usage (from the main folder's pssim/, where node_modules is): node <this file> <specs.json> <out.jsonl>
+// usage (from the main folder's pssim/, where node_modules is): node <this file> <specs.json> <out.jsonl> [both|p1]   (engine.py does this)
 const path = require('path'), fs = require('fs');
 const {Battle, Dex} = require(path.resolve('node_modules/pokemon-showdown')); const dex = Dex.mod('champions');
 const T = require(path.resolve('t1sim.js'));
 const {exportState} = require(path.resolve('../native/export_state.js'));
 const toID = s => (s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-const [specf, outf] = process.argv.slice(2);
+const [specf, outf, views = 'both'] = process.argv.slice(2);
 const WEATHER = {Rain: 'raindance', Sun: 'sunnyday', Sandstorm: 'sandstorm', Snow: 'snowscape', Hail: 'hail', 'Harsh sun': 'desolateland', 'Heavy rain': 'primordialsea', 'Strong winds': 'deltastream'};
 const VOL = {confusion: 'confusion', Taunt: 'taunt', 'Leech Seed': 'leechseed', 'Throat Chop': 'throatchop', Yawn: 'yawn', 'Heal Block': 'healblock', Substitute: 'substitute',
              Imprison: 'imprison', 'Flash Fire': 'flashfire'};
@@ -84,6 +84,7 @@ function build(spec, flip) {
     if (!a || !p || p.fainted) return null;
     if (a.switch) { const k = sides[si].mons.findIndex(x => x.species === a.switch); return k < 0 ? null : ['switch', k]; }
     const k = p.moveSlots.findIndex(m => m.id === toID(a.move)); if (k < 0) return null;
+    if (!a.target && ['normal', 'any', 'adjacentFoe', 'adjacentAlly', 'adjacentAllyOrSelf'].includes(dex.moves.get(a.move).target)) return null;   // it failed or only charged: the log shows no target
     let t = 0;
     if (a.target) { const ts = a.target.slice(0, 2), ti = a.target[2] === 'a' ? 0 : 1; t = ts === letter[si] ? (ti === i ? 0 : -(ti + 1)) : ti + 1; }
     return {c: [k, t, !!a.mega], unsure: !!a.unsure};
@@ -93,7 +94,7 @@ function build(spec, flip) {
           actual: pack(0), their_actual: pack(1), state: exportState(b)};
 }
 const out = fs.createWriteStream(outf); let n = 0, bad = 0;
-for (const spec of JSON.parse(fs.readFileSync(specf))) for (const flip of [false, true]) {
+for (const spec of JSON.parse(fs.readFileSync(specf))) for (const flip of views === 'p1' ? [false] : [false, true]) {
   try { out.write(JSON.stringify(build(spec, flip)) + '\n'); n++; }
   catch (e) { bad++; console.log(`${spec.name}: could not rebuild (${String(e.message).slice(0, 120)})`); }
 }

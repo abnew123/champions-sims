@@ -145,7 +145,7 @@ section > h2{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:u
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">Prototype · version 0</div>
+    <div class="eyebrow" id="eyebrow">Prototype · version 0</div>
     <h1>Eval bar</h1>
     <p class="sub" id="sub"></p>
     <div class="meta" id="meta"></div>
@@ -177,7 +177,7 @@ section > h2{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:u
 
   <section id="optSec" hidden>
     <h2 id="optTitle"></h2>
-    <p class="optnote">Picks: how often the planner would choose the option here. Wins: that player's win chance if it is chosen and the opponent answers with their best mix.</p>
+    <p class="optnote" id="optNote"></p>
     <div class="opts" id="opts"></div>
   </section>
 
@@ -204,7 +204,9 @@ let cur = 0;
 
 function head() {
   const turns = `${N} turns`, r = G.rating ? `players rated about ${Math.round(G.rating)}` : null;
-  $('sub').textContent = 'One Reg M-C best-of-three ladder game from Showdown, turn by turn: who is winning at the start of each turn, and what happened next.';
+  $('sub').textContent = G.engine ? 'One Reg M-C best-of-three ladder game from Showdown, turn by turn: who is winning at the start of each turn, the best options for each Pokémon on the field, and what happened next.'
+    : 'One Reg M-C best-of-three ladder game from Showdown, turn by turn: who is winning at the start of each turn, and what happened next.';
+  if (G.engine) $('eyebrow').textContent = 'Prototype · bar version 0 · options from the engine';
   $('meta').innerHTML = [turns, r, G.winner ? `${who(G.winner)} won${G.forfeit ? ' by forfeit' : ''}` : 'no result', 'replay ' + G.id.split('-').pop()]
     .filter(Boolean).map(x => `<span class="chip">${esc(x)}</span>`).join('');
 }
@@ -290,7 +292,8 @@ function options() {
   const o = cur < N ? G.steps[cur].opt : null;
   $('optSec').hidden = !o; if (!o) return;
   $('optTitle').textContent = `Best options at the start of turn ${G.steps[cur].turn}`;
-  const pc = v => Math.round(100 * v) + '%';
+  const pc = v => Math.round(100 * v) + '%', e1 = Math.max(1, Math.min(99, Math.round(100 * G.steps[cur].ev)));
+  $('optNote').textContent = `The engine's planner rates this position Player 1 ${e1}%, Player 2 ${100 - e1}%. Picks: how often it would choose the option. Wins: that player's win chance, on the engine's scale, if the option is chosen and the opponent answers with their best mix.`;
   $('opts').innerHTML = ['p1', 'p2'].map(sd => o[sd].map(slot => {
     const all = slot.options.slice().sort((a, b) => b.w - a.w || b.v - a.v), top = all.slice(0, 5);
     const pl = all.find(x => x.played); if (pl && !top.includes(pl)) top.push(pl);
@@ -327,7 +330,8 @@ function notes() {
     ${a ? `<p><b>How good it is.</b> On games it was not fitted on, the side it favoured won ${f(a.favourite_won)} of the time, counting every turn of every game. Log loss ${a.log_loss.toFixed(3)} (a coin flip scores 0.693; lower is better).${cal ? ` It is well calibrated: positions it rated around ${f(cal.rated)} were won ${f(cal.won)} of the time.` : ''}</p>` : ''}
     <p><b>Hindsight.</b> Each bench lists all the Pokémon that player brought, which the opponent only learned as they came in. Items come from the open team sheets. The bar itself counts a Pokémon that has not come in yet as full HP.</p>
     ${G.perish ? '<p><b>Perish Song was used in this game.</b> Treat the bar with care around it.</p>' : ''}
-    <p><b>Not here yet.</b> The best options for each Pokémon on the field, with how often the planner would pick each and what each is worth. That needs the battle engine and is the next version.</p>`;
+    ${G.engine ? `<p><b>Best options.</b> For each turn the battle engine plays every pair of choices one turn ahead (${G.engine.seeds} samples of the turn's luck each), scores the positions that result, and solves the turn as a game between the two players. Picks is each option's share of that solution, so a mixed answer means the planner would vary its play. The engine's percentages come from its own self-play scale and are not yet matched to real results, so they can sit a few points away from the bar. Stat points are not on team sheets: the engine assumes each Pokémon's most common spread.</p>`
+      : '<p><b>Not here yet.</b> The best options for each Pokémon on the field, with how often the planner would pick each and what each is worth. That needs the battle engine and is the next version.</p>'}`;
 }
 
 function go(i) {

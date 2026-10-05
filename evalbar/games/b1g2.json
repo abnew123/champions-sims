@@ -1,10 +1,11 @@
 {
  "id": "b1g2", "title": "Game 2", "recorded": "2026-10-02", "result": "loss", "how": "you lost in turn 5",
  "mine": ["Farigiraf", "Blastoise", "Incineroar", "Kingambit"],
+ "preview": ["Tyranitar", "Excadrill", "Garchomp", "Kleavor", "Houndstone", "Zoroark-Hisui"],
  "my_overrides": {"Kingambit": {"nature": "Brave"}},
  "theirs": [
-  {"species": "Zoroark-Hisui", "item": "Life Orb", "moves": ["Hyper Voice", "Grass Knot", "Shadow Ball", "Bitter Malice"], "note": "disguised as Kleavor (Illusion); the engine sees it as itself"},
-  {"species": "Excadrill", "item": "Focus Sash", "moves": ["Megahorn", "High Horsepower", "Protect", "Rock Slide"]},
+  {"species": "Zoroark-Hisui", "item": "Life Orb", "item_from": 3, "appears_as": {"species": "Kleavor", "until": 2}, "moves": ["Hyper Voice", "Grass Knot", "Shadow Ball", "Bitter Malice"], "note": "disguised as Kleavor (Illusion); the engine sees it as itself"},
+  {"species": "Excadrill", "item": "Focus Sash", "item_from": 2, "moves": ["Megahorn", "High Horsepower", "Protect", "Rock Slide"]},
   {"species": "Tyranitar", "from": "Tyranitar-Mega", "moves": ["Rock Slide"]},
   {"species": "Kleavor", "moves": ["Close Combat"]}
  ],

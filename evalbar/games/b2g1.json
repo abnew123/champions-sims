@@ -1,6 +1,7 @@
 {
  "id": "b2g1", "title": "Game 4", "recorded": "2026-10-02", "result": "win", "how": "the opponent forfeited during turn 4",
  "mine": ["Farigiraf", "Blastoise", "Torkoal", "Kingambit"],
+ "preview": ["Sceptile", "Rotom-Heat", "Milotic", "Altaria", "Kingambit", "Barbaracle"],
  "my_overrides": {"Kingambit": {"nature": "Brave"}},
  "theirs": [
   {"species": "Kingambit"},

@@ -500,3 +500,10 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     (-27%). Flags and the final setup are unchanged; only the binary name changes. What is left is the engine itself: simulating turns
     is now 69% of run time, nearly all of it in event dispatch (handler lookups by string key; `get_stat` alone triggers a fifth of all
     events). Speeding that up means restructuring handler lookup and would need the Showdown differential tests (`champ turn`) rerun.
+  - **champ-battle-v15 = v14 + staged luck sampling in `evalpos`** (`EVAL_ADAPT=1`; battles and the default evalpos mode are unchanged
+    and identical to v14). Every cell gets 2 seeds; options still in contention (in a side's mix, or within 0.15 of that side's best
+    option, plus the joint actions actually played) get their cells against the other side's contenders raised to 8 seeds, then those
+    within 0.06 to `EVAL_SEEDS`; the turn is re-solved after each stage (`EVAL_STAGES`, `EVAL_MARGINS` override). On 20 positions at
+    32 seeds, one thread: flat 216 s, staged 45 s (4.8x; flat 8 seeds took 55 s). Against flat 32: position value within 0.0003,
+    values of options in the mix within 0.002, the value of the move actually played within 0.0013, the same top option for every side
+    (flat 8 agreed on 30 of 40 and was off by up to 0.07). Options outside the contention band keep their 2-seed values (noisy, by design).

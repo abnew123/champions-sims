@@ -35,6 +35,10 @@ SIMS = {
     'v12nr': dict(bin='champ-battle-v12', eg='egvalue8_norace.json', env=V12_ENV),
     'v12ro': dict(bin='champ-battle-v12', eg='egvalue8.json', eg_b='egvalue8_norace.json', env=V12_ENV),
     'v12rt': dict(bin='champ-battle-v12', eg='egvalue8_norace.json', eg_b='egvalue8.json', env=V12_ENV),
+    # egvalue9 (shared slopes over eleven teams): 'v12g' = the general intercept; 'v12t' = the same, run with each team's own
+    # intercept file via TS_EG_VALUE (intercept_test.py), kept under its own output tag
+    'v12g': dict(bin='champ-battle-v12', eg='egvalue9.json', env=V12_ENV),
+    'v12t': dict(bin='champ-battle-v12', eg='egvalue9.json', env=V12_ENV),
 }
 def sim(): return os.environ.get('TS_SIM', 'v3')
 def out_tag(seed0, per_job): return f'{seed0}_{per_job}' if sim() == 'v3' else f'{sim()}_{seed0}_{per_job}'

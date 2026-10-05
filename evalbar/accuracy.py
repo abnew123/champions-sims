@@ -6,7 +6,8 @@ With engine results (lines from the engine's position evaluation, named "<replay
   engine value       the engine's one-turn equilibrium value, rescaled to real outcomes (one weight on its log-odds)
   engine static      the same for the value function at the position, no lookahead
   engine features    the planner's full feature vector, weights refitted on real games
-  v0 + engine        the eleven replay features plus the engine value's log-odds
+  v0 + engine        version 0's win chance and the engine value together (two weights on their log-odds); also with the static value
+  v0 + engine features
 Prints and writes: log loss and Brier score per position (a coin flip scores 0.693 and 0.25), how often the favourite won, the same by turn
 number, and calibration (of the positions rated 60-70%, how many were won).
 usage (needs numpy: the main folder's .venv): python3 evalbar/accuracy.py [engine results .jsonl ...]
@@ -41,6 +42,14 @@ def show(tag, s):
           f"Brier {s['brier']:.4f} | favourite won {100 * s['favourite_won']:.1f}%")
     print('   by turn: ' + '  '.join(f"t{b['turn']} {b['log_loss']:.3f}/{100 * b['favourite_won']:.0f}%" for b in s['by_turn']))
     print('   calibration (rated -> won): ' + '  '.join(f"{100 * c['rated']:.0f}->{100 * c['won']:.0f}" for c in s['calibration']))
+def paired(a, b, B=2000):
+    """log loss of predictions a minus b on the same positions, with a standard error from resampling games"""
+    ll = lambda r: -math.log(min(1 - 1e-6, max(1e-6, r[2] if r[3] else 1 - r[2])))
+    kb = {(r[0], r[1]): ll(r) for r in b}; d = {}
+    for r in a: d.setdefault(r[0], []).append(ll(r) - kb[(r[0], r[1])])
+    G = [np.array(v) for v in d.values()]; n = np.array([len(v) for v in G]); t = np.array([v.sum() for v in G]); rng = np.random.default_rng(1)
+    idx = rng.integers(0, len(G), (B, len(G)))
+    return float(t.sum() / n.sum()), float(np.std(t[idx].sum(1) / n[idx].sum(1)))
 def cv(rows, feats):
     """rows: dicts with g, t, y; feats(row) -> feature list. Out-of-sample predictions as (game, turn, p, won)."""
     scored = []
@@ -70,12 +79,22 @@ if __name__ == '__main__':
             for l in open(f):
                 d = json.loads(l)
                 if d.get('value') is not None and d['name'].endswith(' p1'): eng[d['name'][:-3]] = d
-        sub = [{**r, 'e': eng[f"{r['g']} t{r['t']}"]} for r in rows if f"{r['g']} t{r['t']}" in eng]
-        models = {'version 0 (same positions)': lambda r: r['f'], 'engine value': lambda r: [logit(r['e']['value'])],
-                  'v0 + engine': lambda r: r['f'] + [logit(r['e']['value'])]}
-        if sub and sub[0]['e'].get('static') is not None: models['engine static'] = lambda r: [logit(r['e']['static'])]
-        if sub and sub[0]['e'].get('feats'): models['engine features'] = lambda r: r['e']['feats']
+        # version 0 is fitted on all the real games outside the fold, not only those with engine results; its out-of-fold win chance is
+        # then one input of the combined model
+        v0p = {(g, t): p for g, t, p, _ in cv(rows, lambda r: r['f'])}
+        sub = [{**r, 'e': eng[f"{r['g']} t{r['t']}"], 'v0': v0p[(r['g'], r['t'])]} for r in rows if f"{r['g']} t{r['t']}" in eng]
+        base = [(r['g'], r['t'], r['v0'], r['y']) for r in sub]
+        s = score(base); show('version 0 (same positions)', s); out['version 0 (same positions)'] = s
+        models = {'engine value': lambda r: [logit(r['e']['value'])], 'engine static': lambda r: [logit(r['e']['static'])],
+                  'v0 + engine': lambda r: [logit(r['v0']), logit(r['e']['value'])], 'v0 + engine static': lambda r: [logit(r['v0']), logit(r['e']['static'])],
+                  'v0 + engine value + static': lambda r: [logit(r['v0']), logit(r['e']['value']), logit(r['e']['static'])],
+                  'engine features': lambda r: r['e']['feats'], 'v0 + engine features': lambda r: [logit(r['v0'])] + r['e']['feats']}
         for nm, fx in models.items():
-            s = score(cv(sub, fx)); show(nm, s); out[nm] = s
+            pr = cv(sub, fx); s = score(pr); s['vs_version_0'] = paired(pr, base); show(nm, s); out[nm] = s
+            print(f"   log loss against version 0 on the same positions: {s['vs_version_0'][0]:+.4f} ± {s['vs_version_0'][1]:.4f}")
+        X = np.array([models['v0 + engine'](r) for r in sub] + [[-v for v in models['v0 + engine'](r)] for r in sub]); y = np.array([r['y'] for r in sub] + [1 - r['y'] for r in sub], float)
+        out['weights'] = {'v0 + engine (all positions; intercept, v0 log-odds, engine log-odds)': fit(X, y).tolist(),
+                          'engine value (intercept, engine log-odds)': fit(X[:, 1:], y).tolist()}
+        print('weights:', json.dumps(out['weights']))
         outf = os.path.join(C.HERE, 'results', 'accuracy_engine.json')
     os.makedirs(os.path.dirname(outf), exist_ok=True); json.dump(out, open(outf, 'w'), indent=1)

@@ -5,8 +5,9 @@ file, damage race with Speed ties averaged, either side may reverse Trick Room, 
   python3 evalbar/engine.py run <positions.jsonl> <out.jsonl> [threads=1] [seeds=32] [staged=1]
 staged=1 (EVAL_ADAPT): every cell gets 2 samples of the turn's luck, options still in contention 8, the closest ones all `seeds`; options
 more than 0.15 below a side's best keep their rough 2-sample value. staged=0 gives every cell `seeds` samples.
-A run appends to <out.jsonl> and skips positions already in it, so it resumes. Agree cores with the other threads before threads > 1."""
-import os, sys, json, zlib, subprocess
+A run appends to <out.jsonl> and skips positions already in it, so it resumes. It writes <out.jsonl>.run.json for the progress page at
+localhost:8766 (status.py); EVAL_TITLE names its card. Agree cores with the other threads before threads > 1."""
+import os, sys, json, zlib, time, subprocess
 import common as C
 BIN = os.environ.get('CHAMP_BIN') or os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v15'); MP = os.path.join(C.MAIN, 'pssim')
 def positions(outf, views, ids):
@@ -23,8 +24,14 @@ def sample(n, skip=0):
     """cached games in a fixed pseudo-random order (by a hash of the replay id), so a larger sample extends a smaller one"""
     ids = sorted((rid for rid, _ in C.games()), key=lambda r: zlib.crc32(('s' + r).encode()))
     return ids[skip:skip + n]
+def count(f): return sum(1 for _ in open(f, 'rb')) if os.path.exists(f) else 0
+def stamp(posf, outf, threads, seeds, staged, title=None):
+    """<out>.run.json, read by status.py for the shared progress page"""
+    json.dump({'title': title or os.environ.get('EVAL_TITLE') or os.path.basename(outf), 'out': os.path.relpath(outf, os.path.dirname(os.path.abspath(outf))),
+               'total': count(posf), 'done0': count(outf), 'started': time.time(), 'threads': threads, 'seeds': seeds, 'staged': bool(staged)},
+              open(outf + '.run.json', 'w'))
 def run(posf, outf, threads=1, seeds=32, staged=1):
-    grid = os.path.join(C.HERE, 'out', 'emptygrid'); os.makedirs(grid, exist_ok=True)
+    grid = os.path.join(C.HERE, 'out', 'emptygrid'); os.makedirs(grid, exist_ok=True); stamp(posf, outf, threads, seeds, staged)
     env = dict(os.environ, RACE_TIES='avg', EVAL_SEEDS=str(seeds), **({'EVAL_ADAPT': '1'} if staged else {}), EG_VALUE='egvalue9_sym.json', RACE='1', TRSYM='1', CALC_DATA='../native/champions_data.json', GRID_DIR=grid)
     subprocess.run([BIN, 'evalpos', '../native/engine_data_spot.json', os.path.abspath(posf), os.path.abspath(outf), str(threads)], cwd=MP, env=env, check=True)
 if __name__ == '__main__':

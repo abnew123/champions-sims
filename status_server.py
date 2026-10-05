@@ -3,6 +3,7 @@
   Sheets       the sheet kit's runs (sheetkit/kit.py: bring matrix, confirmation, turn-one lines), on this Mac or pulled from a cloud box
   Battle sim   the simulator thread's batches
   Team search  that thread's stages and hill climb (its own cards, from teamsearch/status_server.py)
+  Eval bar     that thread's engine runs (its own cards, from evalbar/status.py; while the thread works in a git worktree, from there)
 
 Runs are found from the pssim/*.log start lines ("HH:MM:SS <jobs.json> -> <outdir>, ..."): result files are counted against the job
 count and the time left is estimated from the rate since the run started. A kit run's log is pssim/kit_<team>_<step>.log.
@@ -82,6 +83,16 @@ def team_search():
     try: return runpy.run_path(os.path.join(HERE, 'teamsearch', 'status_server.py'))['cards']()
     except Exception as e: return f'<p class="idle">Couldn&rsquo;t read Team search&rsquo;s cards ({html.escape(type(e).__name__)}).</p>'
 
+def eval_bar():
+    """the Eval bar thread's own cards (evalbar/status.py cards()); in this checkout, else in the newest git worktree that has it"""
+    f = os.path.join(HERE, 'evalbar', 'status.py')
+    if not os.path.exists(f):
+        wt = sorted(glob.glob(os.path.join(HERE, '.claude', 'worktrees', '*', 'evalbar', 'status.py')), key=os.path.getmtime)
+        if not wt: return '<p class="idle">Nothing running right now.</p>'
+        f = wt[-1]
+    try: return runpy.run_path(f)['cards']()
+    except Exception as e: return f'<p class="idle">Couldn&rsquo;t read the Eval bar&rsquo;s cards ({html.escape(type(e).__name__)}).</p>'
+
 def page():
     now = datetime.datetime.now()
     ps = subprocess.run(['ps', '-axo', 'command'], capture_output=True, text=True).stdout   # a local run is live while its workers are
@@ -127,7 +138,8 @@ def page():
     # when Team search's page embeds this one (its own port), leave its section to it
     embedded = any(f.filename.endswith(os.path.join('teamsearch', 'status_server.py')) for f in inspect.stack())
     body = f'''<h2>Sheets</h2>{section([r for r in R if r['kit']])}
-<h2>Battle sim</h2>{section([r for r in R if not r['kit']])}''' + ('' if embedded else f'<h2>Team search</h2>{team_search()}')
+<h2>Battle sim</h2>{section([r for r in R if not r['kit']])}''' + ('' if embedded else f'<h2>Team search</h2>{team_search()}') + \
+           f'<h2>Eval bar</h2>{eval_bar()}'
     return f'''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sim progress</title><style>
 :root{{--bg:#f5f6f8;--panel:#fff;--ink:#15171a;--ink2:#666b73;--rule:#dfe2e7;--acc:#1f6feb;--ok:#00734f}}

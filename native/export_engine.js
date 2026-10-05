@@ -23,7 +23,9 @@ const moves = {}, items = {}, abilities = {}, conditions = {};
 // plus moves the engine needs as effects even when nobody uses them (Stealth Rock damage on switch-in from Stone Axe)
 // EXTRA_MOVES=a,b: moves outside the scope file (e.g. ones seen in recorded games), exported into a separate data file
 for (const id of [...Object.keys(base.moves), 'stealthrock', 'struggle', 'recharge', ...(process.env.EXTRA_MOVES || '').split(',').filter(Boolean)]) { const m = dex.moves.get(id); moves[id] = {...plain(m), cbs: cbs(m), fns: fnKeys(m)}; }
-for (const id of Object.keys(base.items)) { const it = dex.items.get(id); items[id] = {...plain(it), cbs: cbs(it), fns: fnKeys(it)}; }
+// EXTRA_ITEMS=a,b / EXTRA_SPECIES=a,b: items and species outside the scope file (e.g. an opponent's Pokemon seen in a recorded game)
+const extra = k => (process.env[k] || '').split(',').map(toID).filter(Boolean);
+for (const id of [...Object.keys(base.items), ...extra('EXTRA_ITEMS')]) { const it = dex.items.get(id); items[id] = {...plain(it), cbs: cbs(it), fns: fnKeys(it)}; }
 for (const id of Object.keys(base.abilities)) { const a = dex.abilities.get(id); abilities[id] = {...plain(a), cbs: cbs(a), fns: fnKeys(a)}; }
 const cids = new Set(Object.keys(dex.data.Conditions));
 for (const id of Object.keys(base.moves)) if (dex.data.Moves[id] && dex.data.Moves[id].condition) cids.add(id);
@@ -43,7 +45,7 @@ const addSp = s => { if (!s.exists || species[s.id]) return;
                    requiredItem: s.requiredItem || null, otherFormes: s.otherFormes || [], id: s.id, num: s.num, baseSpeciesId: dex.species.get(s.baseSpecies).id,
                    weighthg: s.weighthg, cbs: cbs(s)}; };
 // every in-scope species plus all its formes (Megas, and battle formes like Aegislash-Blade, Mimikyu-Busted, Palafin-Hero)
-for (const id of Object.keys(base.species)) { const s = dex.species.get(id); addSp(s); for (const f of [...(s.otherFormes || []), ...(s.formeOrder || [])]) addSp(dex.species.get(f)); }
+for (const id of [...Object.keys(base.species), ...extra('EXTRA_SPECIES')]) { const s = dex.species.get(id); addSp(s); for (const f of [...(s.otherFormes || []), ...(s.formeOrder || [])]) addSp(dex.species.get(f)); }
 fs.writeFileSync(process.argv[3], JSON.stringify({species, moves, items, abilities, conditions, natures: base.natures, types: base.types}));
 const n = o => Object.values(o).reduce((a, e) => a + Object.keys(e.cbs).length, 0);
 console.log(`moves ${Object.keys(moves).length} (${n(moves)} cbs) | items ${Object.keys(items).length} (${n(items)}) | abilities ${Object.keys(abilities).length} (${n(abilities)}) | conditions ${Object.keys(conditions).length} (${n(conditions)})`);

@@ -25278,27 +25278,6 @@
 ],
 "regional_count": 0
 },
-"Torkoal#8": {
-"species": "Torkoal",
-"item": "Charcoal",
-"ability": "Drought",
-"nature": "Quiet",
-"evs": [
-12,
-0,
-0,
-32,
-22,
-0
-],
-"moves": [
-"Eruption",
-"Weather Ball",
-"Earth Power",
-"Protect"
-],
-"regional_count": 0
-},
 "Farigiraf#67": {
 "species": "Farigiraf",
 "item": "Sitrus Berry",
@@ -25422,6 +25401,27 @@
 "Sucker Punch",
 "Iron Head",
 "Low Kick"
+],
+"regional_count": 0
+},
+"Torkoal#8": {
+"species": "Torkoal",
+"item": "Charcoal",
+"ability": "Drought",
+"nature": "Quiet",
+"evs": [
+12,
+0,
+0,
+32,
+22,
+0
+],
+"moves": [
+"Eruption",
+"Weather Ball",
+"Earth Power",
+"Protect"
 ],
 "regional_count": 0
 }

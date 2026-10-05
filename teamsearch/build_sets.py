@@ -87,6 +87,8 @@ for k in sorted(sets, key=lambda k: (-seen[k], k)):
     fid = forme_id(L.battle_forme(sets[k]['species'], sets[k]['item']))
     per[fid] += 1; gid[k] = f"{fid}#{per[fid]}"
 grid = {gid[k]: dict(sets[k], regional_count=seen[k]) for k in sets}
+if os.path.exists(GPATH):                       # keep sets no longer used (e.g. a user team's old spread): old results name them
+    for g, s in json.load(open(GPATH)).items(): grid.setdefault(g, s)
 json.dump(grid, open(GPATH, 'w'), indent=0)
 for p in pool: p['gid'] = gid[p.pop('key')]
 json.dump(pool, open(os.path.join(HERE, 'swap_pool.json'), 'w'), indent=1)

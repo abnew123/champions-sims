@@ -1,6 +1,6 @@
 {
  "note": "Named full-battle sim setups. Every sheet thread runs 'current' unless it says otherwise; only the kit maintainer moves 'current', and only when the Battle sim thread says a setup is final. Paths are relative to the repo root. 'env' is passed to the binary as is; EG_VALUE and GRID_DIR are added by the kit (GRID_DIR is the team's own grid).",
- "current": "v12-dp2-race-eg9",
+ "current": "v13-dp2-race-eg9",
  "setups": {
   "v4-eg5": {
    "binary": "native/champ/bin/champ-battle-v4",
@@ -11,20 +11,21 @@
    },
    "status": "What the Trick Room Six picks on sheet Versions 13-17 were run with (hand-built grid, GRID_DIR=mxtr). Superseded; kept so those numbers can be reproduced. About 4.5 s per game per thread."
   },
-  "v12-dp2-race-eg9": {
-   "binary": "native/champ/bin/champ-battle-v12",
+  "v13-dp2-race-eg9": {
+   "binary": "native/champ/bin/champ-battle-v13",
    "value": "pssim/egvalue9.json",
    "engine_data": "native/engine_data_spot.json",
    "env": {
     "BATTLE_ANTICIPATE": "1",
     "DP2": "1",
     "RACE": "1",
+    "RACE_TIES": "avg",
     "CALC_DATA": "native/champions_data.json"
    },
    "env_paths": [
     "CALC_DATA"
    ],
-   "status": "FINAL (Battle sim, 2026-10-05): two-turn Protect check, damage race, one value file for every team (fitted on eleven teams' self-play). Use the team's own generic grid (the kit's grid step). About 5-5.5 s per game per thread on an idle Mac. Linux source: native/champ/src_battle_v12.tar.gz. Not comparable with v4-eg5 numbers."
+   "status": "FINAL (Battle sim, 2026-10-05, amended the same day): two-turn Protect check, damage race with Speed ties averaged over both sides (v12 gave our side every tie, which favoured it in mirrors), one value file for every team. Use the team's own generic grid (the kit's grid step). About 5-5.5 s per game per thread on an idle Mac. Linux source: native/champ/src_battle_v13.tar.gz. Not comparable with v4-eg5 numbers."
   }
  }
 }

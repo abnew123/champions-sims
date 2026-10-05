@@ -339,3 +339,6 @@ Usage:
   - v13 was built on the box with the new `cloud/build_battle.sh`: build only, no package reinstall.
   - New Mac reference `cloud/reference_v13g.json` (0.5762; 53 of 54 jobs identical to v12g). The box matches it 54/54.
   - The results folder on the Mac is still `cloud_results/v12` (now v13g outputs too).
+- **v14 (Oct 5, ~6 pm):** plays exactly v13's games, about 25–39% faster. Built on the box (mimalloc on); the smoke test against the v13 reference is 54/54 identical.
+  - Setup `v14g` in evaluate.SIMS. `cloud/run_env.sh` picks v13g while there's no climb_state.json (round 1) and v14g after, so the climb switches at the round boundary and a mid-round relaunch keeps its round's cache. Outputs are tagged by setup.
+  - TR sheet uses the same v14 build.

@@ -473,3 +473,10 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
   - **Final setup: champ-battle-v12 + egvalue9.json + RACE=1 + DP2=1 + anticipation** (see the top of this file). What it is: status and
     Tailwind weights from real games; a damage-race feature; a two-turn check on second Protects; slopes fitted on eleven teams. What it
     is not: it cannot play Perish trap, and absolute matchup win rates carry about 6 points of error per archetype.
+  - **For the Eval bar thread:** `pssim/egvalue9_sym.json` (`SYM=1 build_egvalue9.py ... egvalue9_sym.json`): the same model fitted on the
+    same eleven teams' games with every position also mirrored, so the intercept is 0, and without the two grid features; use with
+    `TRSYM=1` and an empty `GRID_DIR`. Held-out log loss 0.415 on the TR six's games and 0.447 on the ten teams' (the side-0 version:
+    0.386 / 0.438). Note: under this symmetric constraint the Trick Room weight falls to 0.07 (0.26 in egvalue9), so in the side-0 fits
+    the Trick Room weight and the team intercept are partly entangled.
+  - History was rewritten on 2026-10-05 to remove three opponents' in-game names from the recording spot notes (all commit hashes
+    changed; any hash quoted above from before that date is stale: find commits by message).

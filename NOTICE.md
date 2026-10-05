@@ -21,6 +21,8 @@ The JavaScript sims in `pssim/` run on the `pokemon-showdown` npm package, which
 - `regionals/smogon_mc_*_moveset.txt` and the sets derived from it come from Smogon's public usage statistics (https://www.smogon.com/stats/).
 - Regional team lists were read from the public standings at https://standings.limitlessvgc.com/. Only anonymised team data is kept here;
   the raw pages and player names are not.
+- Regional round pairings and results (`teamsearch/archmatch.py --regionals`) were read from the public standings at
+  https://www.pokedata.ovh/. Only per-archetype aggregates are kept here; the raw files with player names are not.
 - Replay statistics were computed from public replays at https://replay.pokemonshowdown.com/. The replay logs themselves are not part of
   this repository; the scripts that fetch them are.
 

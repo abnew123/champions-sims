@@ -136,6 +136,10 @@ thread maintains the kit and owns `sheets/trick-room-six/`.
 5. **Recordings.** The user sends ladder recordings; `recordings/process.sh <mov> <batch>` compresses, extracts frames, OCRs and parses a
    timeline; decision points go through `native/spot_starts.js` + `champ spot` (HANDOFF.md "Spread study, game reviews"). Two batches
    reviewed so far (`recordings/batch1`, `batch2`, `spots.json`).
+   Never write an opponent's ladder name into `recordings/spots.json`, a review file or anything else tracked (Battle sim removed
+   three on 2026-10-05, commit 380db1e); say "the opponent". The OCR timelines under `recordings/batch*/` stay git-ignored. A fourth
+   thread, "Eval bar" (`evalbar/`, see `evalbar/HANDOFF.md`), will later build on this pipeline for the user's recorded games and
+   will coordinate first; it may also want a card on the shared progress page (`status_server.py`).
 
 ## Running full battles (the sheet thread's main tool)
 

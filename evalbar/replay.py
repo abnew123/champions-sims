@@ -140,7 +140,7 @@ def parse(log):
                 if pos not in acts and active.get(pos) == start_active.get(pos):
                     tpos = p[4][:3] if tg is not None and 'spread' not in t else ''
                     acts[pos] = {'move': p[3], 'target': tpos, 'mega': id(m) in mega_now, 'unsure': bool(tpos) and tpos[:2] in redirect}
-                moved_yet[0] = True; m.moved = True; m.last = p[3]
+                moved_yet[0] = True; m.moved = True; m.last = p[3]; m.vol.discard('charging')
                 if toid(m.item) in ('choicescarf', 'choiceband', 'choicespecs') and not m.item_gone: m.lock = p[3]
             head = [m.ref(), ' used ', p[3]]
             if tg is not None and tg is not m and 'spread' not in t: head += [' on ', tg.ref()]
@@ -242,6 +242,13 @@ def parse(log):
                 if what == 'Disable' and len(p) > 4: m.volarg[what] = p[4]
                 m.vol.add(what); note([m.ref(), {'confusion': ' became confused', 'Substitute': ' put up a Substitute'}.get(what, f': {what} started')])
             else: m.vol.discard(what); note([m.ref(), {'confusion': ' snapped out of confusion', 'Substitute': "'s Substitute broke", 'Illusion': "'s Illusion ended"}.get(what, f': {what} ended')])
+        elif k == '-prepare':
+            m = mon(p[2])
+            if m: m.vol.add('charging')                                   # first turn of a two-turn move; '-anim' follows if it fires at once
+        elif k == '-anim':
+            m = mon(p[2]); pos = p[2][:3]
+            if m: m.vol.discard('charging')
+            if m and pos in acts and acts[pos].get('move') == p[3] and not acts[pos]['target'] and len(p) > 4 and p[4]: acts[pos]['target'] = p[4][:3]
         elif k == '-hitcount': note([f'Hit {p[3]} times'])
         elif k == '-ohko': note(['One-hit KO'])
         elif k == '-mustrecharge':

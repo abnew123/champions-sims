@@ -33,10 +33,17 @@ Built, all in `evalbar/` (run the Python from the repo root; `common.py` finds t
   Illusion or Transform, 34 have no turn; about 900 positions come after a Perish Song (flagged). Today's `champ spot` runs on
   these states (smoke test: turn 2 of the demo game, symmetric within seed jitter) but playouts cost about 1.5 s per game on one thread.
 
-Waiting on **Battle sim** for `champ evalpos` (asked 2026-10-05): one line per position with the one-turn equilibrium value averaged over
-seeds, the static value and feature vector, and for both sides every option per slot with its weight and value; optional playouts. It has
-already delivered `pssim/egvalue9_sym.json` (symmetric value: use with `RACE=1 TRSYM=1` and an empty `GRID_DIR`). Next: run it on all
-buildable positions (agree a core split first), `accuracy.py` on the output, fill the options panel, republish, show the user one game.
+- `engine.py`: `positions` builds engine positions for chosen games or a fixed shuffled sample; `run` calls Battle sim's
+  `champ-battle-v13 evalpos` with the bar's settings (`egvalue9_sym.json`, `RACE=1 RACE_TIES=avg TRSYM=1`, empty `GRID_DIR`, `EVAL_SEEDS`).
+  One line per position: the one-turn equilibrium value, the static value and feature vector, and for both sides every option per slot
+  with its weight and value. About 5 s per position at 8 seeds on one thread (turn 1 is the slowest), 21 s at 32 seeds.
+- `build.py <id> acc=... engine=<evalpos output> pos=<positions>` fills the page's options panel. The published page (version 2) shows the
+  demo game with the version 0 bar and the engine's options at 32 seeds.
+
+Running / next: the accuracy sample (`out/acc_p1.jsonl`, 3,968 positions from 560 of the first 600 sample games, 8 seeds, output
+`out/acc_eval.jsonl`, resumable with `engine.py run`). Then `accuracy.py out/acc_eval.jsonl` compares the engine value, static value,
+refitted features and version 0 plus engine against version 0 on the same positions; the bar switches to the engine only if it wins, with
+its values rescaled to real outcomes. Cores: TR sheet and Battle sim agreed to 3 threads for this run; ask the user before going above one.
 
 ## Scope the user approved: step 1 only
 

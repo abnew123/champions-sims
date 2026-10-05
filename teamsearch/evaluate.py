@@ -44,6 +44,8 @@ SIMS = {
     'v13g': dict(bin='champ-battle-v13', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg')),
     # v14: the same games as v13, ~25-39% faster (memoised features, mimalloc); taken at a round boundary (outputs tagged v14g)
     'v14g': dict(bin='champ-battle-v14', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg')),
+    # v16: the same games again, ~2.3x faster than v14 (string-free handler lookup, cached effect data)
+    'v16g': dict(bin='champ-battle-v16', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg')),
 }
 def sim(): return os.environ.get('TS_SIM', 'v3')
 def out_tag(seed0, per_job): return f'{seed0}_{per_job}' if sim() == 'v3' else f'{sim()}_{seed0}_{per_job}'

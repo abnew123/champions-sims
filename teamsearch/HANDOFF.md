@@ -324,3 +324,7 @@ Usage:
   - Round 1 thorough on 52 starts at 60×3 threads in tmux `climb`.
   - Watchdog: 12 h cap (start epoch in ~/start_epoch on the box). auto_rounds.sh runs later rounds up to the same cap.
   - The Mac pull loop copies to `cloud_results/v12`.
+- **Box lost (Oct 5, ~2:30 pm):** unreachable from 2:30 pm, most likely a spot reclaim; capacity had been scarce at launch.
+  - TR sheet was sharing it at 96 threads, from 2:17 pm, at the user's request.
+  - Saved on the Mac in `cloud_results/v12`: 19,629 screening games, up to round 1's 100/668 teams, plus the pre-filter cache.
+  - To resume on a new box (launch with 40 GB storage), after setup and the smoke test: `rsync -az cloud_results/v12/runs/ BOX:champions-sims/teamsearch/runs/` and `rsync cloud_results/v12/climb_prefilter_r1.json BOX:champions-sims/teamsearch/`, then start round 1 as before. Finished jobs are reused; start files are regenerated identically.

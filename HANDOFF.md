@@ -449,3 +449,14 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
   - Team search's decomposition on its 10 teams (teamsearch/decomp.py): the drop vs Sun / Indeedee TR / Snow arrives with the race
     (-9 / -12 / -7), not with the Protect check (0) or the status weights (Sun -6 only). Pending: its one-side-only arms with v12 and a
     multi-team self-play run with features, for a value fitted on more than the TR six.
+  - **The value is team-specific in its baseline** (`value_xcheck.py`): egvalue8 rates side 0 at 36.8% on the TR six's games (actual 36.8%)
+    but at 45.5% on Team search's ten teams' games (actual 59.8%). `build_egvalue9.py <TR six dir> <@list of other teams' dirs> [out]`
+    fits shared slopes with one intercept per team: held-out log loss matches each group's own fit (TR six 0.386; the ten teams 0.438 vs
+    0.522 for egvalue8). Intercepts: TR six self-play (all 15 leads, default backs) -0.41; the ten teams -0.04 to +0.90 (their best
+    fours), so the intercept is partly the quality of the four brought.
+  - `egvalue9.json` (general intercept +0.544 = the ten teams' mean), `egvalue9_tr6.json` (-0.41), `egvalue9_teams/<team key>.json`
+    (Team search's ten): the same slopes (HP 1.18, alive 0.89, boosts 0.25, Trick Room 0.26, grid 0.43 / 1.07, Protected -0.52, type edge
+    0.27, screens 0.13, race KO 0.49, race HP -0.01), fitted on results/refit8 + Team search's v12 features pass (played with egvalue8).
+  - Head-to-head on the TR six, egvalue9 vs egvalue8 (`ARMS=h2h_arms9.txt LOG=h2h9.log ./h2h_run.sh`, results/h2h9_report.txt; baseline
+    egvalue8 both sides 70.4): egvalue9 mine 72.9 (+2.5 +- 1.7); egvalue9 theirs 72.3 (+1.9 +- 1.9); both 72.9; general intercept on both
+    72.6 (-0.3 +- 2.5 vs the TR-six intercept). The pooled slopes play as well on the TR six, and the intercept does not matter there.

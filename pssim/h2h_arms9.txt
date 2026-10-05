@@ -1,0 +1,4 @@
+t9_t9 egvalue9_tr6.json egvalue9_tr6.json both
+t9_e8 egvalue9_tr6.json egvalue8.json both
+e8_t9 egvalue8.json egvalue9_tr6.json both
+g9_g9 egvalue9.json egvalue9.json both

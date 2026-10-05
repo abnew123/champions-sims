@@ -1,0 +1,283 @@
+# Team search: the "optimal" six under our models
+
+Handoff written 2026-10-03, 2:45 am, from the Trick Room Six thread. Start here. For the full tool history, also skim `../HANDOFF.md`, especially the last three sections.
+
+## The question
+
+The user wants to know which six our own machinery rates best. That machinery is three models:
+
+- the turn-one lead model and solver,
+- the 2v2 endgame planner,
+- the one-on-one threat matrix.
+
+The answer is "optimal under these models" only. Say so, and list the assumptions next to the result. This is an exploration, separate from the Trick Room Six:
+
+- The memory note `team-identity` (keep that team a distinct Trick Room team) applies to the Trick Room Six. It does **not** restrict this search.
+- Don't change the Trick Room Six's files or sheet based on findings here; report them to the user instead.
+
+## Ground rules for this thread
+
+1. **Everything outside `teamsearch/` is read-only.**
+   - Another thread's runs depend on `pssim/`, `mxtr/`, `native/`, `recordings/`, `trsheet/` and the root files.
+   - Put new team files, job files, results, scripts and logs under `teamsearch/`.
+   - To change a shared script, copy it into `teamsearch/` first. Mind its relative paths, listed below.
+   - Build Rust to its own target dir: `CARGO_TARGET_DIR=../teamsearch/target`, run from `native/champ`. `native/champ/target` is in use by the other thread.
+2. **CPU:** at most 3 workers while the user is at the computer (about 25% of 14 cores). Ask before going higher.
+   - The other thread's runs count toward this budget. Check `pgrep -fl "run_jobs|champ |cand_run|rilla2_run"` first. As of 2:45 am, `pssim/rilla2_run.sh` uses 3 workers until about 4:15 am.
+   - The user often says "I'm away, use more". Then 10–12 is fine.
+   - The Mac sleeps with the lid closed. `caffeinate -i -w <pid>` only stops idle sleep.
+3. **The user's standing preferences** are in memory (MEMORY.md):
+   - **Consistency** (100%-accurate moves) does **not** apply to this search; inaccurate moves are fine here (user, 2026-10-03; see the scope line in memory `consistency-preference`).
+   - **No misplay design:** assume competent opponents.
+   - **Times** in 12-hour am/pm.
+   - **Short status updates** during long runs.
+4. **Python:** use `.venv/bin/python3` for anything needing numpy/scipy (`tr_select.py`, `tr_final.py`, `tr_grid.py`). System python3 lacks numpy.
+
+## Starting point
+
+- `teams/trick_room_six.json` holds the user's real current six. The sim baseline `pssim/myteam_c_incin.json` still has the older Adamant Kingambit and Torkoal 32 HP.
+- The user's other team, which already has its own sheet and guide: Rillaboom, Incineroar, Mega Salamence, Gholdengo, Kingambit, Sneasler. It's a good second reference point.
+- Usage, for picking a pool (`../team-sheet.html.usage.json`, the M-C top list):
+  - Rillaboom, Sneasler, Mega Salamence, Incineroar, Kingambit, Basculegion, Mega Floette, Farigiraf, Mega Golisopod, Pelipper, Indeedee-F, Gholdengo.
+  - Arcanine-Hisui, Sylveon, Whimsicott, Archaludon, Mega Tyranitar, Mega Baxcalibur, Garchomp, Mega Garchomp Z.
+  - Then Milotic, Mega Charizard Y, Mega Gardevoir, Mega Raichu Y, …
+- Set sources:
+  - `../regionals/smogon_mc_sets.json` (259 species, keyed "Species" or "Species-Mega"),
+  - `../regionals/regional_sets.json`,
+  - `pssim/opp_model_{a,b}.json` (the ladder sets by archetype).
+  - Fix inaccurate moves before use. Example: Rillaboom's High Horsepower (95%) → Stomping Tantrum (100%).
+
+## The three models (what exists, how to run, what's hard-wired)
+
+### 1. Turn-one lead sims (Node + Showdown engine)
+
+**How it works:** `pssim/t1sim.js` builds my lead and back row against one opposing lead pair from an archetype. It plays every joint action × their joint action for N RNG samples. Each cell is scored by the W2 win model (`analyze.py`), fitted on 7,781 replay games.
+
+- **Paths:** t1sim reads `../foes.json` and the opponent models via `__dirname`, so it works from any cwd. `MYTEAM` is a path (`MYTEAM=../teamsearch/teams/x.json`).
+- **Job maker:** `pssim/jobs_team.js` (all 15 pairs × 10 archetypes × 6 opposing leads = 900 jobs) is **hard-wired to our members**:
+  - `CORE` order and `ATK0` attacker preferences decide lead naming and default back rows.
+  - Lead names must be ordered consistently: trlib keys, Speed files and `tr_final` all join names with "+".
+  - For general teams, write `teamsearch/jobs_any.js` with one fixed canonical order (e.g. pool order) and a generic back-row rule.
+- **Run:** `pssim/run_jobs.sh <jobs> <outdir> <samples> <workers>`.
+  - Stage one uses 1 sample per cell; refinement uses 12, on rows picked by `tr_select.py`.
+  - Workers skip finished jobs, so runs resume.
+  - Always set `TW_UNDER_TR=zero`.
+  - `ITEM_OVERRIDE=Indeedee-F=colburberry|psychicseed` gives the opposing Indeedee item variants that `tr_final.py` merges. Run them from the same jobs file.
+- **Speed:** about 15 CPU-seconds per stage-one job, so 900 jobs take about 10–15 minutes on 13 workers. Refining about 250 contender jobs is about 10 minutes on 13.
+- **Solve:**
+  - `tr_speeds.js <jobs> <out>` (needs `MYTEAM`) gives the Trick Room credit speeds.
+  - `TR_SPEEDS=… READER_W=0.75 TRMULT_FILE=trmult_final.json tr_final.py <resultsDir> <out.json>` gives `leads[arch]['all']['vals']` = `[lead, ladder, reader, score, n]`. **Use `score` (index 3)**, which is 0.25 × ladder + 0.75 × reader.
+  - `EXCLUDE_MOVES="switch -> X"` drops plan rows the team can't play. This matters when reusing results across teams.
+- **Trick Room credit:** recomputed at load time from the Speed file (`trlib.adjust`), so raw results can be reused across teams with different back rows. The back row also affects turn-one switch options. Exclude those, or regenerate per team.
+
+### 2. 2v2 endgame planner (native Rust, fast)
+
+**How it works:** for each pair of mine against each archetype's likely turn-3 pairs (`pssim/endpairs.json`), both sides play the one-turn Nash each turn, and the game is played to the end.
+
+- **Value function:** `pssim/egvalue2.json`, fitted on our team's 2v2 games. Its features are generic, including matchup-grid coverage.
+- **Jobs:** `pssim/eg_jobs_t3.js` (reads `endpairs.json` from the cwd, so run from `pssim/`). Pairs come from the `MYTEAM` keys.
+- **Run** (from `pssim/`):
+  ```
+  JOBS=<idx list> MYTEAM=… GRID_DIR=… EG_SEEDS=2 EG_VALUE=egvalue2.json EG_KMIX=1 ./eg_run_native.sh <jobs> <outdir> <games> <threads>
+  ```
+  - `eg_run_native.sh` runs `native/eg_starts.js` (needs cwd `pssim/`) and then `native/champ/target/release/champ plan`.
+  - About 2–3 thread-seconds per job of 8 games.
+- **Seeds:** they depend only on the game index, so two teams on the same job list are paired. That's why the deltas in `sp_compare.py` are tight.
+- **Engine scope:** only species, moves and items in `native/champions_data.json` are exported (`EXTRA_MOVES=a,b` adds moves, as in `native/engine_data_spot.json`). Moves or abilities with handlers not ported to Rust are flagged in each result's `"unsupported"`. Check it. Known gaps: Revival Blessing, Healing Wish, Baton Pass, Ally Switch, Beat Up, Magician, Wandering Spirit.
+- **The planner never clicks Healing Wish or Memento**, so it undervalues them.
+
+### 3. One-on-one matrix (pure Python, `mxtr/`)
+
+- `matchup.py` holds **hand-written** stat and move entries (`MINE`, `CANDS`; foes in `F`).
+- `tr_grid.py` with `GRID_MONS=<names> GRID_TAG=… TR=1|0 NPROC=…` builds `gx_cells_{tr|notr}{tag}.json`, keyed "foe|mine".
+- The planner's value function reads the cells from `GRID_DIR` (`gx_cells_{tr,notr}_inc.json` plus `_ext`). A Pokémon with no cells gets neutral values.
+- **For a pool search:** write a generator in `teamsearch/` that builds `MINE`-style entries from sets (Champions stats: stat = floor((base + 20 + SP) × nature), HP = base + 75 + SP). Inject them by importing `matchup` and updating `MINE` at runtime. Don't edit `mxtr/matchup.py`. It took about 20 seconds for one Pokémon.
+
+## Reusable comparison scripts (in `pssim/`, read them for the formats)
+
+- `sp_compare.py <tag>`: paired 2v2 deltas.
+- `sp_lead_cmp.py <MON> name:dir:speeds[:EXCLUDE] …`: merges refined leads with `results/v11` and runs `tr_final`.
+- `sp_team_cmp.py` (`SLOT` env): per team, best lead plus best back pair from the other four, weighted by archetype share.
+  - Shares: Tailwind 26.2, Sun 12.0, Indeedee TR 11.9, Rain 10.5, Balance 9.3, Sand 9.0, Snow 7.8, TR without Indeedee 6.7, Rain + sun 3.3, Perish 3.3.
+- **The "key trick"** (for one-slot swaps): keep the old member's key in the team JSON but put the candidate's set under it. Every job file, back row and Speed file then applies unchanged. For a full search, use real names instead.
+
+## Suggested approach (cache at the pair level, then enumerate teams)
+
+1. **Pool:** about 20–25 Pokémon, one set each (100%-accurate moves; explicit spreads; item clause in mind).
+2. **One-on-one cells** for the whole pool (minutes).
+3. **2v2 for every pool pair:** C(20,2) = 190 pairs × 120 jobs. Roughly 3 hours on 12 threads, 8 games each. Cached per pair, and independent of the rest of the team.
+4. **Stage-one lead sims for every pool pair** against each archetype's 6 opposing leads: 190 × 60 = 11,400 jobs, about 45 CPU-hours (about 4 hours on 12 cores). Use no back-row switch options, or a generic back row. Recompute the Trick Room credit per team from the Speed file.
+5. **Enumerate every legal six** (species clause, item clause, mega rules: check what Champions allows):
+   - team score = archetype-weighted best lead score + best back pair from the other four, like `sp_team_cmp.py`,
+   - report both parts, and add Trick Room-up share as a style indicator.
+6. **Refine the top ~10 teams properly** (refinement rows, item variants, real back rows) and compare them against the Trick Room Six and the user's other team on the same footing.
+
+**Pitfalls the previous thread hit:**
+- tr_select gaps longer than a minute meant the Mac was asleep.
+- `tr_final` crashes on results with zero rows (empty `F`): skip those files.
+- A reused `results/m_<name>` or `tr_final_m_<name>.json` name from another study overwrites it silently. Use unique names.
+
+## Assumptions to state with any answer
+
+- **The opponent model is fixed:** replay archetype shares, their lead and bring frequencies, and click rates from about 5,000 Showdown M-C Bo3 replays. Opponents don't adapt their bring to our team, except through the reader solve.
+- **The win model** scores turn one only, from replays. The 2v2 planner looks one turn ahead, and its value function was fitted on our team. The middle of the game (turns 2–3 with full back rows) isn't modelled. Trick Room is counted at 59% of its 2v2 value (anchored to the replay fit).
+- **One set per species**, standard Smogon spreads unless optimized. The sims can't value Healing Wish, Revival Blessing or similar.
+
+## Progress (2026-10-03, 3:05 am)
+
+**Scope changes from the user:** accuracy doesn't matter here ("strongest team period"; inaccurate moves are fine). New plan: **hill-climb** from each Reg M-C regional top-16 team, swapping one member at a time for a common Pokémon + set, keeping improvements until nothing improves. The evaluator will be the **full 4v4 sim the user is building in another thread**. Don't start team-level sims before it exists. The pool and pair plan above (steps 3–5) is superseded.
+
+**Built (all under `teamsearch/`):**
+- `build_sets.py` (helpers in `sets_lib.py`) writes:
+  - `teams/start/`: 48 top-16 teams (Baltimore/Brisbane/Frankfurt, MYTEAM format) + `trick_room_six.json`. `index.json` gives event, place, archetype, member grid ids and spread sources.
+  - `swap_pool.json`: 48 sets over 38 species (≥4% of the 768 regional teams). Per species: item clusters with ≥25% share, max 2, each with its modal nature/ability/moves.
+  - `field/regional_field.json`: all 768 regional teams, normalized (an opponent pool option).
+  - `grid_sets.json`: every distinct set, keyed by grid id (`M-Salamence#1`, …). 189 sets are in the start teams + swap pool.
+  - `support.json`: sets the Rust engine can't fully run. Among the starts, only Brisbane-06's Indeedee (Baton Pass) and the Trick Room six's Healing Wish.
+- **Spreads:** open team sheets have no stat points. `sets_lib.fill_spread` uses the top Smogon spread with the same nature (280 of 288 top-16 sets), else a nature-based default.
+- **One-on-one grid for any set:** `mx/` is a copy of the mxtr modules. `pool_mine.py` builds `MINE` entries from Showdown's Champions data:
+  - Mega forme stats and ability; base-forme `entry_st` and entry ability; -ate and Tough Claws; spread, drain, recoil and self-drops; 100% target drops.
+  - Multi-hit, Psyshock and Freeze-Dry, plus the existing special moves.
+  - In `matchup.py`: my setter's weather/terrain wins; White Herb, Choice Band/Specs, Assault Vest, Expert Belt, Psychic Seed; full nature table.
+  - **Validated:** the Trick Room six's Kingambit reproduces all 46 old mxtr cells exactly, with and without Trick Room.
+  - **Run:** `mx/grid_pool.py` (one job = one set vs 46 threats, about 15 s; output `mx/out/{tr,notr}/<gid>.json`; resumes). `mx/run_grid.sh` waits for the other thread's sims to be idle, then runs 3 workers (log `mx/run_grid.log`). `mx/merge.py <team>|--all` writes per-team planner `GRID_DIR`s to `mx/griddirs/<team>/`, with cells keyed by base species as plan.rs expects.
+- **Known gap:** a Grassy Seed holder of mine (Sneasler#1) only gets its seed when the threat brings grassy terrain. Partner terrain isn't assumed on my side.
+
+### Hill-climb driver (`climb.py`, 3:20 am)
+Rules agreed with the user:
+- **Megas:** no Mega cap in round 1. If no accepted round-1 swap has 3+ Mega Stones, cap at 2 from then on.
+- **Screening:** screen every neighbour with a few paired-seed games, then confirm the top few (`N_SCREEN` 16, `TOP_K` 5, `N_CONFIRM` 128, move if better by `MARGIN` 1 SE).
+- **Item clause:** a clashing candidate falls back to that species' next item-clause fallback set; it is skipped if the species clearly uses one item (top item ≥85% of its regional sets, and every Mega).
+
+Usage:
+- `python3 climb.py stats`: round 1 has about 11,100 neighbours over 49 starts (about 225 each; about 48 of a 2-Mega team's neighbours have 3+ Megas). That's about 215k games at the defaults, so the 4v4 sim's speed decides whether screening needs a cheaper pre-filter.
+- `evaluate()` is the hook for the 4v4 sim. Contract: `team_json` dicts, `n_games`, `seed0`; game k uses seed `seed0 + k` for every team; returns `(wins, games)` per team. Scores are memoized by team, n and seed. Log goes to `climb_log.jsonl`.
+
+### Evaluator, bring heuristic, cloud notes (3:50 am)
+- **Evaluator:** `evaluate.py` runs the other thread's 4v4 battle sim in archetype mode: 10 replay archetypes × their 6 modelled lead pairs = 60 jobs per team, in a fixed order, G0 = seed, so games pair across teams.
+  - Each team gets `runs/<key>/` with myteam.json, jobs.json and grid/.
+  - Score = archetype share × lead-pair-share-weighted win share. Games flagged unsupported are dropped.
+  - Env: `TS_EG_VALUE` (default pssim/egvalue5.json, the other thread's checked recommendation, with BATTLE_ANTICIPATE=1 via `TS_ANTICIPATE`), `TS_BATTLE_BIN` (default v2 since 3:55 am; v2 plays out no-damage stalls to 250 turns, so PP and Struggle decide them; v1 hands them to the value function at turn 25), `TS_PARALLEL`, `TS_THREADS`.
+- **Climb:** `climb.py round thorough|lean` plays one round; state in climb_state.json, log in climb_log.jsonl.
+  - Matrix pre-filter (`bring/policy.matrix_score`), plus random extras to check it.
+  - A thorough round is about 123k games, about 15.6 h on 13 local threads. A lean round is about 4.8 h.
+- **Brings** (user, 2026-10-03: "our own heuristic, matrix but not solely"):
+  - `bring/feats.py` features; weights fitted by `bring/fit.py` on team-preview choices in 3,060 public M-C Bo3 replays (`bring/fetch_preview.py` -> previews.json).
+  - `bring/policy.py` picks the four and leads per archetype.
+  - Refit after the grid finishes. Then `rm -rf runs` is unnecessary: runs re-prepare when bring_model.json changes.
+- **Cloud (user asked, undecided):**
+  - AWS c7a.48xlarge: 192 cores, spot about $2.5–3/h, a thorough round in about 1.5 h.
+  - Needs: Linux build from `native/champ/src_battle_v1.tar.gz` (checksums in `native/champ/bin/champ-battle-v1.sha256`); `native/engine_data_spot.json`, `native/battle_starts.js`, `native/export_state.js`; pssim/ (t1sim.js, seedmix.js, opp_model_{a,b}.json, node_modules via setup.sh's engine-patch step); foes.json; GRID_DIRs; EG_VALUE json.
+  - Node 18+ on the box, or generate starts.jsonl locally and upload.
+- **Cloud guide:** `cloud/README.md`, with `cloud/pack.sh` (Mac: ~1 MB bundle) and `cloud/remote_setup.sh` (Ubuntu 24.04: deps, setup.sh, checksum-verified Linux build of champ-battle-v2). The user chose the laptop for now. TODO: write `cloud/reference.json` = `evaluate.py trick_room_six 1 0` on the Mac with the final bring model, so the cloud build can be checked against it.
+
+### Bring weights from battle outcomes (11 am)
+- **Why:** a heuristic fitted to ladder players' brings (`bring/fit.py`, `bring_model.json`) agreed with the sheet's solver picks for the Trick Room six in 0/10 archetypes (2/10 without the species-popularity prior). The user chose to fit the weights to battle outcomes instead.
+- **Training:** `bring/train_battles.py`: 12 start teams × 10 archetypes × 8 choices (human top 3, features-only top 2, random) × 6 lead pairs × 2 games, about 11.5k games, written to `train_labels.json` (log `train_battles.log`, runs/train_*). The Trick Room six is held out.
+- **Fit:** `bring/fit_outcome.py` is within-group ridge on bring + lead features + human log-prob; it writes `outcome_model.json` and reports the held-out pick gain. `policy.chooser()` and `evaluate.prepare` switch to it automatically once that file exists (`TS_BRING=human` to override).
+- **Check after fitting:** `bring/compare_sheet.py` (same picks as the sheet?), then battle the Trick Room six with the sheet's picks vs the fitted picks via `evaluate.run_team(..., fixed=...)`.
+- **Defaults now:** champ-battle-v2 + egvalue5 + BATTLE_ANTICIPATE=1 (the other thread's checked recommendation; its runs are finished).
+
+### Brings: results, and bring search in the climb (2 pm)
+- **Outcome fit** (`bring/fit_outcome.py`, 960 labels): ridge chose the strongest setting (1e5), i.e. a correlation-weighted direction.
+  - Held-out picks beat a random choice by +8.8 win-share points; the human-imitation picks by +4.7.
+  - Top relative weights: human log-prob 1.0, two Megas -0.7, coverage 0.66, lead offense 0.55, defense 0.49, offense 0.48.
+- **Trick Room six check** (`bring/sheet_battle.py`, 240 paired games each): sheet picks 72.5%, fitted 60.1% (-12.5 ± 4.0), human 48.6% (-23.9 ± 4.8).
+  - Bring choice swings a team by 10–25 points.
+- **Shortlist check** (`bring/search_check.py`): battle the fitted model's top 4 per archetype, keep the best, re-test on fresh seeds: 72.3%, the same as the sheet.
+  - Kept ranks: #1 ×4, #2 ×2, #3 ×3, #4 ×1.
+- **So the climb now uses bring search** (`evaluate.search_team`, K = `bring_k` 3): screening = top-3 choices per archetype × 6 lead pairs × 1 game, best kept (selection-biased, used only to rank). Confirm = fresh paired games with the chosen brings (`evaluate.evaluate_fixed`), and only those decide a move.
+  - A thorough round is about 162k games, about 20 h on 12 threads; a lean round about 79k.
+- **Round 1 (thorough)** started at 2:05 pm: `round1.log`, progress at localhost:8767.
+  - Settings: TS_PARALLEL=5, TS_THREADS=2 while the other thread runs 3 workers; raise to 6×2 when it's idle (kill + relaunch: battles are cached).
+  - A plumbing test (`climb.py round test`, TS_STATE/TS_LOG/TS_PROGRESS/TS_STARTS for a sandbox) ran clean first.
+- **3:35 pm:** round 1 relaunched at 6×2 = 12 threads (the other thread is idle). Battles resume from cache.
+- **Noise note from the other thread:** in v2, turn and planning seeds come from (job index, g). The same matchup at a different job index gets independent planner RNG. Run-to-run differences of an identical combo reached 24 points on 96 games (per-archetype SE 3–6 points).
+  - The confirm stage keeps jobs in a fixed (arch, k) order, so it's paired.
+  - Bring-search candidates (job = arch, candidate, k) aren't paired with each other in v2.
+  - The other thread is building champ-battle-v3 with seeds keyed on (arch, k, g). Switch `TS_BATTLE_BIN` to it from round 2 (not mid-round).
+- **champ-battle-v3** (4:00 pm, from the other thread): turn and planning seeds key on the opponent instead of the job index, so candidates and teams meeting the same opponent in game g share RNG.
+  - The seed key comes from `seedKey` in starts lines, written by the updated native/battle_starts.js. Starts files without it run like v2.
+  - `climb.py` pins the binary per round: round 1 = v2 (it started on v2), round 2+ = v3, unless `TS_BATTLE_BIN` is set.
+  - cloud/pack.sh and remote_setup.sh now default to src_battle_v3.tar.gz.
+- **12:35 am Oct 4:** added the user's "Low-Variance Six" (Rillaboom, Incineroar, Sneasler, Gholdengo, Kingambit, Mega Salamence; sets from their team-sheet artifact) as start `low_variance_six` (teams/low_variance_six.json, via build_sets.py USER_TEAMS).
+  - New grid ids: Gholdengo#17, Incineroar#80, Kingambit#29, Rillaboom#55, Sneasler#85; Mega Salamence = M-Salamence#6. Cells computed.
+  - Round 1 relaunched at 3 cores (user back), now 642 teams to screen.
+  - `set_threads.sh P T` changes threads; `at_bedtime.sh` raises to 6×2 at 3:30 am unless HOLD_CPU exists.
+- **CPU rules (user, 2026-10-04):**
+  - At most **10 busy cores in total** across both threads, even when the user is away (the battery drains above that). Split evenly when both threads need compute.
+  - `at_bedtime.sh` goes to 5×2 = 10 alone, or 3×2 = 6 if the other thread's run is up. Use `set_threads.sh 5 2` after the other thread says it's done.
+  - Estimates assuming 12–13 threads are now about 20% longer.
+
+### Cloud round 1 (Oct 4, 4 am)
+- **Box:** AWS c7a.48xlarge spot, us-east-2, `ubuntu@HOST`, key `~/.ssh/KEY.pem` (box since terminated); repo subset at ~/champions-sims.
+  - champ-battle-v3 built there; it matched the Mac reference on 60/60 jobs (68.5% both).
+- **Round 1 restarted fresh** on v3: `tmux` session `climb`, 36×4 = 144 cores, log `round.log` on the box. The other thread may use the other 48.
+  - The laptop's partial v2 round 1 (440/642 teams screened) stays in `runs/` for comparison only.
+- **Results** are pulled every 15 min to `teamsearch/cloud_results/` by `cloud/pull_loop.sh` (log `cloud_results/pull.log`). They're kept apart from the local runs/: same folder names, different binary.
+- **Auto-off:** `~/watchdog.sh` on the box powers off after 45 idle min or 8 h. `~/KEEP_ALIVE` pauses the idle rule.
+  - After the user's night: check that the EC2 instance is terminated.
+- **Round 1 done on AWS (7:20 am, v3):** 29 of 50 starts moved; 21 are at a local max.
+  - Moves mostly bring in Garchomp (10), Basculegion (5), Kingambit (3).
+  - One accepted move made a 3-Mega team (Frankfurt-14: Farigiraf → M-Swampert), so per the user's rule the Mega cap stays off.
+  - 3 of the 29 moves came from random extras.
+- **Learned pre-filter** (`climb.learned_prefilter`, used from round 2): ridge on incoming/outgoing set effects + matrix score, fit on all earlier rounds' screened swaps in climb_log.jsonl.
+  - Held-out-start within-team correlation +0.30, vs +0.20 for the matrix score alone; predicted top 3 averaged +2.8 vs -2.8 for random swaps.
+- **Round 2** (thorough, 29 teams, about 96k games) started at 8:00 am on the box at 30×3 = 90 cores (the other thread had 96). Expand to about 60×3 when it's done. Expected end about 10 am, before the 12:03 pm watchdog cap.
+- **9:40 am:** the other thread finished on the box. Round 2 relaunched at 60×3 = 180 cores via `cloud/relaunch.sh P T`; it's a script because pkill patterns typed on an ssh command line can kill that command's own shell.
+- `cloud/auto_rounds.sh <cap epoch>` on the box starts further thorough rounds after the current one if they fit before the 12:03 pm power-off (about 3 min per climbing start at 180 cores, plus a 10 min margin).
+- **Rounds 3–4 done** (state round 4; pulled 11:51 am): 2 of 50 starts still climbing. Round 5 for those 2 was cut off by the 12:03 pm power-off and isn't committed.
+  - Leaders on confirm games: Frankfurt-10 → Delphox*, Garchomp, Incineroar, Kingambit, Raichu*, Sneasler (79.5, local max); Frankfurt-05 → Archaludon, Charizard*, Delphox*, Garchomp, Incineroar, Rillaboom (78.4); Baltimore-12 → Archaludon, Delphox*, Garchomp, Incineroar, Indeedee-F, Kingambit (77.4).
+  - The top 3 share Mega Delphox + Garchomp + Incineroar. trick_room_six is 72.2, unchanged (local max in round 1).
+  - `python3 report.py` prints the table from cloud_results/.
+  - The Indeedee-vs-Trick-Room-Rillaboom head-to-head on the box was offered but never run (no answer before the power-off).
+
+### Sequential testing + sharpening pass (built 4:20 pm Oct 4, NOT run yet: user said build, don't start)
+**The rule** (`climb.SEQ`, all future rounds), per candidate swap after the confirm batch:
+- **Move** if pooled gain - 2·SE > 0.
+- **Drop** if gain + 1·SE < +2 points.
+- **Otherwise** add a batch of 240 fresh paired games for it and the current team, up to 8 batches in all.
+- **Why:** the old rule (best of 3 at > 1 SE) accepted a no-effect swap ~40% of the time and couldn't see gains under ~4 points.
+- **Env:** `TS_SEQ_Z`, `TS_SEQ_ZDROP`, `TS_SEQ_DELTA`, `TS_SEQ_BATCH_PJ`, `TS_SEQ_MAX`.
+
+**`python3 climb.py sharpen`** is a one-off pass on the existing state:
+1. Re-test each start's latest move if it was marginal (gain - 2·SE ≤ 0; 20 of them). Revert it if it's clearly not worth 2 points, and let that start climb again.
+2. Re-test the confirmed near-misses of stopped starts (34), and move where one is now clearly better.
+- Batch 0 = the original confirm games, read from the runs/ cache. Extra batches use seeds from 900000. Log: `climb_sharpen.jsonl`.
+
+**Test:** `test_sharpen.py` uses a fake evaluator (no battles). A true +4-point swap is accepted after 2 batches; no-effect swaps are dropped after 2–3. A dry run over the real AWS state: about 60k extra games, about 1 h on a c7a.48xlarge.
+
+**Running it next AWS session** (after setup and smoke test):
+1. Upload the AWS results as the live state: `rsync -az cloud_results/{climb_state.json,climb_log.jsonl,climb_prefilter_r*.json} BOX:champions-sims/teamsearch/` and `rsync -az cloud_results/runs/ BOX:champions-sims/teamsearch/runs/`, so batch 0 and screening come from cache (about 1 GB of out_* files, a few minutes to upload; starts/grid get rebuilt).
+2. `TS_BATTLE_BIN=$PWD/../native/champ/bin/champ-battle-v3 TS_PARALLEL=60 TS_THREADS=3 ../.venv/bin/python3 climb.py sharpen` in tmux.
+3. Then `cloud/auto_rounds.sh <cap epoch>` (rounds now use the sequential rule), with the watchdog as before.
+
+### Sim vs real archetype matchups (Oct 4, 4:40 pm)
+- **Real data:** `regmatch/f19{2,3,4}.json` = pokedata.ovh standings JSON for Baltimore/Brisbane/Frankfurt (`https://www.pokedata.ovh/standingsVGC/00001NN/masters/00001NN_Masters.json`). It has every player's team sheet and every round's opponent and result: 2,531 sheets, 10,373 matches.
+- **`archmatch.py [--regionals]`:** real (ladder replays or regionals; Bo3 match rates converted to per-game) vs sim (all cloud_results battles) archetype × archetype. Log-odds gap = our-archetype offset + opponent-archetype offset + residual.
+  - Both sources agree that Perish opponents are far too easy in the sim (76% vs 48%) and Rain vs Trick Room is too kind to rain (71% vs 47%, about 4 SE). Snow and Rain opponents are too hard.
+- **`dig.py`:** 48 logged games (dig/*.json). Findings:
+  1. The Perish AI rarely sings, Gengar switches out (losing Shadow Tag), and it spams Protect.
+  2. Delphox-led "TR without Indeedee" pairs (about a quarter of that archetype) never set TR, because the setter Sinistcha is in back.
+  3. Frequent double Protects on both sides.
+  - Theme: the one-turn planner misses multi-turn plans, which flatters immediate-damage cores (the climb's Delphox + Scarf Garchomp + Incineroar leaders) and underplays setup archetypes (TR, Perish), likely including the user's Trick Room six. Sent to the other thread (planner owner).
+- **Turn-1 audit** (`t1check.py`, existing outputs only): sim opponents' turn-1 clicks vs replay t1 rates for the same lead pairs. Mean total-variation distance 0.53.
+  - Sim under-uses setup (Tailwind 4% vs 22%, Follow Me 18 vs 40, Aurora Veil 27 vs 41, Floette Calm Mind -44) and Sleep Powder (Venusaur -43). Fake Out and TR are confounded: our side was always the TR six (Armor Tail).
+  - Theories sent to the other thread: setup undervalued by the one-turn horizon; sleep undervalued by egvalue's weak status weights; weather offense overvalued and no weather wars.
+  - To unconfound: rerun with non-TR teams on our side.
+
+### New sim setup from the other thread, and the climb re-check (Oct 5, prepared, NOT run)
+- **Recommended setup:** `champ-battle-v8` + `DP2=1` (two-turn check of a second Protect) + `RACE=1 CALC_DATA=../native/champions_data.json` (damage-race value features) + `egvalue7.json` (sleep/paralysis/burn/Tailwind weights from 4,496 real Bo3 games) + anticipation. Details in ../HANDOFF.md, "Double Protect, real-game value weights".
+  - Sim double-Protect rate fell from ~35% to ~26% (real 5.5–10%); sleep/setup use barely moved.
+- **`evaluate.py`:** `TS_SIM=v3` (default; what AWS rounds 1–4 used) or `TS_SIM=v8`. Non-default setups write `out_<sim>_<seed>_<pj>`, so caches never mix. `climb.py` no longer pins the binary per round; it follows `TS_SIM`.
+- **`simcmp.py`:** replays 10 teams' cached confirm games (same six, brings, 240 seeds) under v8 and prints rank changes vs the v3 results in cloud_results. About 2,400 games, ~30 min at 10 cores. `--report` prints what exists without running.
+- **If v8 is adopted:** run the sharpening pass and later rounds with `TS_SIM=v8`, and build v8 on the box (`cloud/pack.sh src_battle_v8.tar.gz`, `remote_setup.sh src_battle_v8.tar.gz`). The v3 results then serve only as the pre-filter's training data; scores aren't comparable across setups.
+- **Ideas sent to the other thread:** classify remaining double Protects (doomed/slower/HP); continue the damage race past a KO with bench replacements (prices switching, sacks and sweeps); a margin in the DP2 check; split the boost feature; a two-turn "investment check" that promotes setup moves.
+- **Comparison run done (Oct 5, 2:17 am; `simcmp.json`, `simcmp.log`):** 10 teams × 240 games, same six/brings/seeds, v3 → v8.
+  - Ranks: Frankfurt-10 1 → 1 (79.5 → 73.2); Baltimore-12 3 → 2 (77.4 → 72.9); trick_room_six 4 → 3 (72.2 → 65.7); Frankfurt-05 2 → 7 (78.4 → 61.1); Frankfurt-09 6 → 10 (68.5 → 50.2); low_variance_six 10 → 8 (52.4 → 60.8); Frankfurt-15 9 → 5 (58.7 → 63.8). Rank correlation ~0.55.
+  - Opponents got harder mainly in Sun (-15.5), Indeedee TR (-11.8) and Snow (-8.6).
+  - Caveats: moved teams' v3 scores are selection-inflated; brings were chosen under v3.
+  - Conclusion: results depend on the sim version. Rerun the climb under the settled sim rather than sharpen the v3 results.
+- **Sessions (Oct 5):** this thread is "Team search"; "Battle sim" owns native/champ + egvalue + replay analysis; "TR sheet" owns the published sheet.
+- **Sim vs real regionals, v3 vs v8 (Oct 5; analysis only, the 10 simcmp teams):** per opponent archetype, the 10 teams' sim win rate vs the real regional per-game rate for teams of the same archetypes, after removing each sim's overall offset (v3 +0.75, v8 +0.53 log-odds; our teams are climbed). The RMS gap is about the same: 0.37 → 0.36 log-odds, about 9 win-rate points; the sim-side noise floor is about 0.14. Closer: Tailwind, Rain, TR w/o Indeedee, Rain+Sun. Further: Sun (0.00 → -0.43, now too hard), Indeedee TR, Snow, Balance, Sand. Perish is unchanged and still the biggest error (+0.82; raw 78% sim vs 48.5% real). The full archmatch (all cells, residuals) needs v8 battles from many teams, so it waits for the climb rerun.
+- **mx/ is a dependency of TR sheet's sheet kit (Oct 5):** sheetkit/ calls `pool_mine` + `grid_pool.cell()` read-only (cwd mx/, its own POOL_FILE, cells written under sheets/<team>/work/grid/). Before changing what a cell computes (matchup.py, pool_mine.py, grid_pool.cell, foes.json), message "TR sheet" first.

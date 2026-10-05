@@ -1,0 +1,1155 @@
+{
+ "round": 4,
+ "cap": null,
+ "teams": {
+  "Baltimore-01": {
+   "team": [
+    "Excadrill#2",
+    "M-Salamence#2",
+    "M-Tyranitar#1",
+    "Indeedee#1",
+    "Rillaboom#1",
+    "Sneasler#7"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 4,
+     "out": "Corviknight#1",
+     "into": "Rillaboom#1",
+     "note": "",
+     "diff": 0.09985371248589192,
+     "se": 0.04798283450979139,
+     "matrix": 0.4451896545986051,
+     "from_random": false
+    }
+   ]
+  },
+  "Baltimore-02": {
+   "team": [
+    "M-Golisopod#1",
+    "Basculegion#1",
+    "Politoed#2",
+    "Archaludon#4",
+    "Sneasler#5",
+    "Farigiraf#4"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 1,
+     "out": "M-Charizard Y#2",
+     "into": "Basculegion#1",
+     "note": "",
+     "diff": 0.05363787865155566,
+     "se": 0.021847173011160795,
+     "matrix": 0.4787730637297652,
+     "from_random": false
+    },
+    {
+     "slot": 4,
+     "out": "Grimmsnarl#1",
+     "into": "Sneasler#5",
+     "note": "",
+     "diff": 0.056688825714123654,
+     "se": 0.02877873833097187,
+     "matrix": 0.04071769445697108,
+     "from_random": false
+    }
+   ]
+  },
+  "Baltimore-03": {
+   "team": [
+    "Archaludon#3",
+    "Garchomp#1",
+    "Politoed#1",
+    "Vivillon#1",
+    "Rillaboom#7",
+    "M-Gengar#1"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 1,
+     "out": "Incineroar#9",
+     "into": "Garchomp#1",
+     "note": "",
+     "diff": 0.1485871056956334,
+     "se": 0.043527661619794544,
+     "matrix": 0.46359560673053957,
+     "from_random": false
+    }
+   ]
+  },
+  "Baltimore-04": {
+   "team": [
+    "M-Salamence#9",
+    "Arcanine-H#1",
+    "Kingambit#2",
+    "Milotic#5",
+    "M-Metagross#3",
+    "Sneasler#32"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 2,
+     "out": "Indeedee#6",
+     "into": "Kingambit#2",
+     "note": "",
+     "diff": 0.0849585644629526,
+     "se": 0.062330584315915386,
+     "matrix": 0.4361638397763944,
+     "from_random": false
+    }
+   ]
+  },
+  "Baltimore-05": {
+   "team": [
+    "Milotic#2",
+    "M-Raichu Y#1",
+    "Ceruledge#1",
+    "M-Staraptor#1",
+    "Gholdengo#2",
+    "Rillaboom#1"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Baltimore-06": {
+   "team": [
+    "M-Froslass#1",
+    "M-Raichu Y#2",
+    "Rillaboom#3",
+    "Kingambit#1",
+    "Sneasler#5",
+    "Arcanine-H#1"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Baltimore-07": {
+   "team": [
+    "Arcanine-H#1",
+    "Rillaboom#1",
+    "Gholdengo#1",
+    "M-Staraptor#1",
+    "M-Raichu Y#1",
+    "Sylveon#2"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Baltimore-08": {
+   "team": [
+    "M-Charizard Y#2",
+    "Kingambit#1",
+    "Rillaboom#1",
+    "Garchomp#1",
+    "Incineroar#17",
+    "M-Delphox#1"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 3,
+     "out": "Sneasler#3",
+     "into": "Garchomp#1",
+     "note": "",
+     "diff": 0.15398829796823169,
+     "se": 0.04612665576642385,
+     "matrix": 0.4806801102437605,
+     "from_random": false
+    },
+    {
+     "slot": 0,
+     "out": "M-Floette#2",
+     "into": "M-Charizard Y#2",
+     "note": "",
+     "diff": 0.041560319104848746,
+     "se": 0.030133650270842013,
+     "matrix": 0.0874441283482403,
+     "from_random": false
+    }
+   ]
+  },
+  "Baltimore-09": {
+   "team": [
+    "Armarouge#1",
+    "Dragapult#2",
+    "M-Gengar#2",
+    "Milotic#1",
+    "Indeedee-F#1",
+    "M-Staraptor#2"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Baltimore-10": {
+   "team": [
+    "Rillaboom#38",
+    "Politoed#1",
+    "Archaludon#7",
+    "Basculegion#1",
+    "Incineroar#53",
+    "M-Golisopod#3"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 3,
+     "out": "M-Gengar#1",
+     "into": "Basculegion#1",
+     "note": "",
+     "diff": 0.13273668238249087,
+     "se": 0.055628820749772316,
+     "matrix": 0.4789185659419987,
+     "from_random": false
+    }
+   ]
+  },
+  "Baltimore-11": {
+   "team": [
+    "Garchomp#4",
+    "Farigiraf#1",
+    "M-Aerodactyl#2",
+    "Sylveon#1",
+    "M-Charizard Y#5",
+    "Kingambit#3"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Baltimore-12": {
+   "team": [
+    "Indeedee-F#2",
+    "Garchomp#1",
+    "Kingambit#1",
+    "Archaludon#3",
+    "M-Delphox#1",
+    "Incineroar#2"
+   ],
+   "done": false,
+   "path": [
+    {
+     "slot": 1,
+     "out": "Sinistcha#1",
+     "into": "Garchomp#1",
+     "note": "",
+     "diff": 0.10230139529544667,
+     "se": 0.05546899099440095,
+     "matrix": 0.4750418358372083,
+     "from_random": false
+    },
+    {
+     "slot": 0,
+     "out": "Sneasler#3",
+     "into": "M-Staraptor#1",
+     "note": "",
+     "diff": 0.0973642901835181,
+     "se": 0.05516520445118366,
+     "matrix": 0.08203912954775021,
+     "from_random": false
+    },
+    {
+     "slot": 3,
+     "out": "M-Floette#1",
+     "into": "Archaludon#3",
+     "note": "",
+     "diff": 0.08225619531455719,
+     "se": 0.05478756146205271,
+     "matrix": 0.052790463609163604,
+     "from_random": false
+    },
+    {
+     "slot": 0,
+     "out": "M-Staraptor#1",
+     "into": "Indeedee-F#2",
+     "note": "",
+     "diff": 0.06624280663192492,
+     "se": 0.034966571279150746,
+     "matrix": 0.02596766011042592,
+     "from_random": false
+    }
+   ]
+  },
+  "Baltimore-13": {
+   "team": [
+    "Ceruledge#4",
+    "Indeedee-F#8",
+    "Dragonite#2",
+    "M-Lopunny#1",
+    "M-Gardevoir#8",
+    "Sneasler#67"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Baltimore-14": {
+   "team": [
+    "Klefki#2",
+    "Garchomp#1",
+    "Volcarona#2",
+    "Archaludon#1",
+    "M-Salamence#1",
+    "M-Staraptor#1"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 1,
+     "out": "Garchomp#2",
+     "into": "Garchomp#1",
+     "note": "",
+     "diff": 0.05057941037230497,
+     "se": 0.050508928704626456,
+     "matrix": 0.4575548651840666,
+     "from_random": false
+    },
+    {
+     "slot": 5,
+     "out": "M-Glimmora#1",
+     "into": "M-Staraptor#1",
+     "note": "",
+     "diff": 0.11162490277971247,
+     "se": 0.0491313294070934,
+     "matrix": 0.03999057976265787,
+     "from_random": false
+    }
+   ]
+  },
+  "Baltimore-15": {
+   "team": [
+    "Gholdengo#1",
+    "M-Gardevoir#4",
+    "Garchomp#1",
+    "M-Salamence#13",
+    "Incineroar#6",
+    "M-Charizard Y#2"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 2,
+     "out": "Sneasler#9",
+     "into": "Garchomp#1",
+     "note": "",
+     "diff": 0.23125453298876383,
+     "se": 0.09071074947323139,
+     "matrix": 0.44118914529836795,
+     "from_random": false
+    },
+    {
+     "slot": 5,
+     "out": "Indeedee-F#7",
+     "into": "M-Charizard Y#2",
+     "note": "",
+     "diff": 0.09151643114529363,
+     "se": 0.049991969894831026,
+     "matrix": 0.10919698191084107,
+     "from_random": false
+    }
+   ]
+  },
+  "Baltimore-16": {
+   "team": [
+    "Dragapult#1",
+    "Arcanine-H#2",
+    "Altaria#1",
+    "M-Metagross#2",
+    "Indeedee-F#2",
+    "Milotic#1"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Brisbane-01": {
+   "team": [
+    "Archaludon#1",
+    "Pelipper#1",
+    "M-Staraptor#1",
+    "M-Charizard Y#2",
+    "Garchomp#1",
+    "Venusaur#1"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 4,
+     "out": "M-Garchomp Z#2",
+     "into": "Garchomp#1",
+     "note": "",
+     "diff": 0.09353238828691132,
+     "se": 0.06309784910491295,
+     "matrix": 0.4602750296885478,
+     "from_random": false
+    },
+    {
+     "slot": 2,
+     "out": "Grimmsnarl#1",
+     "into": "M-Staraptor#1",
+     "note": "",
+     "diff": 0.1821977254580521,
+     "se": 0.05172872192062438,
+     "matrix": 0.05184507309293171,
+     "from_random": false
+    }
+   ]
+  },
+  "Brisbane-02": {
+   "team": [
+    "M-Floette#1",
+    "Kingambit#4",
+    "Basculegion#8",
+    "Rillaboom#1",
+    "M-Salamence#5",
+    "Sneasler#15"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Brisbane-03": {
+   "team": [
+    "M-Garchomp#2",
+    "Sneasler#22",
+    "M-Floette#4",
+    "Incineroar#33",
+    "Rillaboom#1",
+    "Kingambit#1"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Brisbane-04": {
+   "team": [
+    "M-Staraptor#1",
+    "Kingambit#3",
+    "M-Floette#1",
+    "Archaludon#2",
+    "Dragapult#1",
+    "Incineroar#10"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 0,
+     "out": "Sneasler#5",
+     "into": "M-Staraptor#1",
+     "note": "",
+     "diff": 0.2015974474203515,
+     "se": 0.05878806685486347,
+     "matrix": 0.4616905321121372,
+     "from_random": false
+    },
+    {
+     "slot": 4,
+     "out": "Pelipper#2",
+     "into": "Dragapult#1",
+     "note": "",
+     "diff": 0.07165335292722658,
+     "se": 0.03172589839188454,
+     "matrix": 0.12222025761879088,
+     "from_random": false
+    },
+    {
+     "slot": 1,
+     "out": "Basculegion#1",
+     "into": "Kingambit#3",
+     "note": "item clause: Life Orb -> Focus Sash",
+     "diff": 0.07118536704848258,
+     "se": 0.04808651850131862,
+     "matrix": 0.057220605174705855,
+     "from_random": false
+    }
+   ]
+  },
+  "Brisbane-05": {
+   "team": [
+    "Rillaboom#1",
+    "M-Gengar#5",
+    "Incineroar#76",
+    "Kingambit#1",
+    "Sneasler#1",
+    "M-Floette#2"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Brisbane-06": {
+   "team": [
+    "M-Golisopod#1",
+    "Dragapult#1",
+    "Sneasler#79",
+    "Indeedee-F#22",
+    "Politoed#4",
+    "Archaludon#4"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 0,
+     "out": "M-Salamence#15",
+     "into": "M-Golisopod#1",
+     "note": "",
+     "diff": 0.16798733865448018,
+     "se": 0.07106559793517173,
+     "matrix": 0.4600146684028739,
+     "from_random": false
+    },
+    {
+     "slot": 1,
+     "out": "Armarouge#10",
+     "into": "Dragapult#1",
+     "note": "",
+     "diff": 0.07270778480533473,
+     "se": 0.04061490217281159,
+     "matrix": 0.055922079886745066,
+     "from_random": false
+    }
+   ]
+  },
+  "Brisbane-07": {
+   "team": [
+    "Kingambit#3",
+    "Basculegion#2",
+    "M-Garchomp Z#2",
+    "M-Floette#5",
+    "Rillaboom#1",
+    "Volcarona#4"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 1,
+     "out": "Sneasler#14",
+     "into": "Basculegion#2",
+     "note": "",
+     "diff": 0.10871309579216715,
+     "se": 0.06378234023233105,
+     "matrix": 0.4803382691898652,
+     "from_random": false
+    }
+   ]
+  },
+  "Brisbane-08": {
+   "team": [
+    "Archaludon#1",
+    "Grimmsnarl#2",
+    "Venusaur#1",
+    "Pelipper#3",
+    "M-Swampert#1",
+    "M-Charizard Y#6"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Brisbane-09": {
+   "team": [
+    "Sinistcha#22",
+    "M-Mawile#4",
+    "Sableye#5",
+    "Pelipper#8",
+    "M-Swampert#1",
+    "Archaludon#2"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Brisbane-10": {
+   "team": [
+    "M-Delphox#1",
+    "Sneasler#3",
+    "Kingambit#1",
+    "M-Floette#1",
+    "Garchomp#1",
+    "Incineroar#28"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 4,
+     "out": "Sinistcha#1",
+     "into": "Garchomp#1",
+     "note": "",
+     "diff": 0.15825623711809958,
+     "se": 0.05098205456705021,
+     "matrix": 0.47289460039848896,
+     "from_random": false
+    }
+   ]
+  },
+  "Brisbane-11": {
+   "team": [
+    "Indeedee#3",
+    "M-Tyranitar#1",
+    "Excadrill#2",
+    "M-Salamence#2",
+    "Rillaboom#1",
+    "Dragapult#1"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 4,
+     "out": "Corviknight#1",
+     "into": "Rillaboom#1",
+     "note": "",
+     "diff": 0.1296416761407588,
+     "se": 0.044400271014437644,
+     "matrix": 0.4488454040280956,
+     "from_random": false
+    },
+    {
+     "slot": 5,
+     "out": "Sneasler#7",
+     "into": "Dragapult#1",
+     "note": "",
+     "diff": 0.1051116150264465,
+     "se": 0.07232709902918066,
+     "matrix": 0.03847903583767189,
+     "from_random": false
+    }
+   ]
+  },
+  "Brisbane-12": {
+   "team": [
+    "Armarouge#17",
+    "Kingambit#13",
+    "Torkoal#6",
+    "M-Staraptor#2",
+    "Indeedee-F#33",
+    "Garchomp#1"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 5,
+     "out": "M-Glimmora#3",
+     "into": "Milotic#2",
+     "note": "",
+     "diff": 0.10550962663417647,
+     "se": 0.07101368324277597,
+     "matrix": 0.4662509148522483,
+     "from_random": false
+    },
+    {
+     "slot": 5,
+     "out": "Milotic#2",
+     "into": "Garchomp#1",
+     "note": "",
+     "diff": 0.14003503780463614,
+     "se": 0.08333384285072475,
+     "matrix": 0.038978422731992916,
+     "from_random": false
+    }
+   ]
+  },
+  "Brisbane-13": {
+   "team": [
+    "Basculegion#1",
+    "Rillaboom#49",
+    "Politoed#6",
+    "Incineroar#13",
+    "M-Staraptor#1",
+    "Archaludon#16"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 4,
+     "out": "M-Gengar#4",
+     "into": "M-Staraptor#1",
+     "note": "",
+     "diff": 0.06603585897683145,
+     "se": 0.05428075557976228,
+     "matrix": 0.49821295406696775,
+     "from_random": false
+    }
+   ]
+  },
+  "Brisbane-14": {
+   "team": [
+    "Garchomp#22",
+    "Kingambit#2",
+    "M-Gengar#1",
+    "Incineroar#63",
+    "Archaludon#3",
+    "Rillaboom#2"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 4,
+     "out": "Milotic#18",
+     "into": "Archaludon#3",
+     "note": "",
+     "diff": 0.0642656413749855,
+     "se": 0.04328581034600731,
+     "matrix": 0.4673127842067191,
+     "from_random": false
+    }
+   ]
+  },
+  "Brisbane-15": {
+   "team": [
+    "M-Salamence#2",
+    "Sneasler#4",
+    "Arcanine-H#1",
+    "Archaludon#3",
+    "M-Metagross#1",
+    "Dragapult#1"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 3,
+     "out": "Milotic#45",
+     "into": "Archaludon#3",
+     "note": "",
+     "diff": 0.05023177071458302,
+     "se": 0.0403021264474754,
+     "matrix": 0.43495591128053185,
+     "from_random": true
+    },
+    {
+     "slot": 5,
+     "out": "Indeedee#4",
+     "into": "Dragapult#1",
+     "note": "",
+     "diff": 0.057414888812918397,
+     "se": 0.051328382339414176,
+     "matrix": 0.030255351498215708,
+     "from_random": false
+    }
+   ]
+  },
+  "Brisbane-16": {
+   "team": [
+    "Basculegion#7",
+    "M-Charizard Y#1",
+    "Kommo-o#2",
+    "M-Glimmora#2",
+    "Whimsicott#1",
+    "Kingambit#5"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 5,
+     "out": "Indeedee#25",
+     "into": "Kingambit#5",
+     "note": "item clause: Life Orb -> Black Glasses",
+     "diff": 0.10567105803281233,
+     "se": 0.0589320394186837,
+     "matrix": 0.46757258487996745,
+     "from_random": false
+    }
+   ]
+  },
+  "Frankfurt-01": {
+   "team": [
+    "Gholdengo#2",
+    "Volcarona#7",
+    "M-Garchomp Z#1",
+    "Incineroar#3",
+    "Rillaboom#2",
+    "M-Raichu Y#1"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Frankfurt-02": {
+   "team": [
+    "Farigiraf#64",
+    "M-Garchomp Z#3",
+    "Sneasler#20",
+    "Torkoal#1",
+    "Sylveon#3",
+    "Incineroar#21"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Frankfurt-03": {
+   "team": [
+    "M-Charizard Y#4",
+    "Kingambit#4",
+    "Garchomp#1",
+    "Sneasler#4",
+    "Basculegion#2",
+    "M-Staraptor#1"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 4,
+     "out": "Indeedee#20",
+     "into": "Basculegion#2",
+     "note": "",
+     "diff": 0.07973374938515629,
+     "se": 0.04431404654791078,
+     "matrix": 0.44768470544613115,
+     "from_random": false
+    },
+    {
+     "slot": 5,
+     "out": "Kommo-o#1",
+     "into": "M-Staraptor#1",
+     "note": "",
+     "diff": 0.15110081369721282,
+     "se": 0.07425211435308546,
+     "matrix": 0.09531380429871487,
+     "from_random": false
+    },
+    {
+     "slot": 2,
+     "out": "M-Meowstic-M#1",
+     "into": "Garchomp#1",
+     "note": "",
+     "diff": 0.11595855860790548,
+     "se": 0.08844974365046587,
+     "matrix": 0.0638495126858637,
+     "from_random": false
+    }
+   ]
+  },
+  "Frankfurt-04": {
+   "team": [
+    "Gholdengo#2",
+    "M-Dragonite#1",
+    "Incineroar#2",
+    "Rillaboom#1",
+    "Garchomp#1",
+    "Kingambit#2"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 5,
+     "out": "M-Floette#9",
+     "into": "Kingambit#2",
+     "note": "",
+     "diff": 0.0652886245846592,
+     "se": 0.038038055300545,
+     "matrix": 0.4935055992355046,
+     "from_random": false
+    },
+    {
+     "slot": 4,
+     "out": "Sneasler#8",
+     "into": "Garchomp#1",
+     "note": "",
+     "diff": 0.10216386092116092,
+     "se": 0.06445347699658871,
+     "matrix": 0.07245720230803117,
+     "from_random": false
+    }
+   ]
+  },
+  "Frankfurt-05": {
+   "team": [
+    "M-Delphox#1",
+    "M-Charizard Y#2",
+    "Garchomp#1",
+    "Incineroar#18",
+    "Rillaboom#20",
+    "Archaludon#3"
+   ],
+   "done": false,
+   "path": [
+    {
+     "slot": 1,
+     "out": "Politoed#1",
+     "into": "M-Charizard Y#2",
+     "note": "",
+     "diff": 0.1530927281128929,
+     "se": 0.07504483843625814,
+     "matrix": 0.36435404019069423,
+     "from_random": true
+    },
+    {
+     "slot": 5,
+     "out": "Kommo-o#1",
+     "into": "Archaludon#3",
+     "note": "",
+     "diff": 0.1067190500860101,
+     "se": 0.06881130594189301,
+     "matrix": 0.07697212452047196,
+     "from_random": false
+    },
+    {
+     "slot": 2,
+     "out": "M-Gengar#1",
+     "into": "Garchomp#1",
+     "note": "",
+     "diff": 0.19416355796202703,
+     "se": 0.05510969198862413,
+     "matrix": 0.08330741190443246,
+     "from_random": false
+    },
+    {
+     "slot": 0,
+     "out": "Vivillon#1",
+     "into": "M-Delphox#1",
+     "note": "",
+     "diff": 0.08227141764762423,
+     "se": 0.04636883095958793,
+     "matrix": 0.05263185111646823,
+     "from_random": false
+    }
+   ]
+  },
+  "Frankfurt-06": {
+   "team": [
+    "Farigiraf#27",
+    "Sylveon#5",
+    "Garchomp#1",
+    "Incineroar#2",
+    "Venusaur#2",
+    "M-Charizard Y#3"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 0,
+     "out": "Toxapex#1",
+     "into": "Farigiraf#27",
+     "note": "item clause: Sitrus Berry -> Grassy Seed",
+     "diff": 0.16235854970963465,
+     "se": 0.05901736802695966,
+     "matrix": 0.4402766720904145,
+     "from_random": true
+    }
+   ]
+  },
+  "Frankfurt-07": {
+   "team": [
+    "M-Froslass#1",
+    "Incineroar#3",
+    "Basculegion#1",
+    "M-Glimmora#1",
+    "Rillaboom#2",
+    "Volcarona#1"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Frankfurt-08": {
+   "team": [
+    "M-Floette#2",
+    "Rillaboom#1",
+    "Incineroar#11",
+    "M-Dragonite#1",
+    "Gholdengo#2",
+    "Sneasler#8"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Frankfurt-09": {
+   "team": [
+    "Sneasler#12",
+    "M-Salamence#1",
+    "M-Raichu Y#1",
+    "Rillaboom#1",
+    "Kingambit#1",
+    "Arcanine-H#1"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Frankfurt-10": {
+   "team": [
+    "M-Raichu Y#1",
+    "Incineroar#67",
+    "Garchomp#1",
+    "Sneasler#1",
+    "Kingambit#3",
+    "M-Delphox#1"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 2,
+     "out": "Sinistcha#12",
+     "into": "Garchomp#1",
+     "note": "",
+     "diff": 0.08858192385015357,
+     "se": 0.04753092778960924,
+     "matrix": 0.4633733685783671,
+     "from_random": false
+    },
+    {
+     "slot": 3,
+     "out": "Kommo-o#1",
+     "into": "Dragapult#1",
+     "note": "",
+     "diff": 0.047475711385614,
+     "se": 0.04053184986582491,
+     "matrix": 0.09049830740561653,
+     "from_random": false
+    },
+    {
+     "slot": 3,
+     "out": "Dragapult#1",
+     "into": "Sneasler#1",
+     "note": "",
+     "diff": 0.056402596544309055,
+     "se": 0.026023961451721533,
+     "matrix": 0.014518326906247044,
+     "from_random": true
+    }
+   ]
+  },
+  "Frankfurt-11": {
+   "team": [
+    "M-Raichu Y#1",
+    "Pelipper#9",
+    "M-Golisopod#1",
+    "Kingambit#3",
+    "Archaludon#6",
+    "Basculegion#3"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 5,
+     "out": "Farigiraf#55",
+     "into": "Basculegion#3",
+     "note": "item clause: Life Orb -> Mystic Water",
+     "diff": 0.13814765926450767,
+     "se": 0.051106977325318645,
+     "matrix": 0.4618421825583644,
+     "from_random": false
+    }
+   ]
+  },
+  "Frankfurt-12": {
+   "team": [
+    "M-Tyranitar#1",
+    "Garchomp#24",
+    "Indeedee#1",
+    "Excadrill#1",
+    "M-Salamence#2",
+    "Corviknight#7"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 1,
+     "out": "Sneasler#7",
+     "into": "Garchomp#24",
+     "note": "item clause: Choice Scarf -> Sitrus Berry",
+     "diff": 0.08445663345531097,
+     "se": 0.07117595910209285,
+     "matrix": 0.445181793078556,
+     "from_random": false
+    }
+   ]
+  },
+  "Frankfurt-13": {
+   "team": [
+    "M-Staraptor#1",
+    "Rillaboom#1",
+    "M-Charizard Y#2",
+    "Gholdengo#2",
+    "Garchomp#1",
+    "Arcanine-H#1"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 4,
+     "out": "M-Raichu Y#1",
+     "into": "Garchomp#1",
+     "note": "",
+     "diff": 0.09852819342334172,
+     "se": 0.06174869405467924,
+     "matrix": 0.5025480372890964,
+     "from_random": false
+    },
+    {
+     "slot": 2,
+     "out": "Primarina#1",
+     "into": "M-Charizard Y#2",
+     "note": "",
+     "diff": 0.09875535803907229,
+     "se": 0.0528995186303052,
+     "matrix": 0.06775005677162346,
+     "from_random": false
+    }
+   ]
+  },
+  "Frankfurt-14": {
+   "team": [
+    "Archaludon#4",
+    "Pelipper#7",
+    "Garchomp#1",
+    "M-Golisopod#1",
+    "M-Raichu Y#1",
+    "M-Swampert#1"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 5,
+     "out": "Farigiraf#41",
+     "into": "M-Swampert#1",
+     "note": "",
+     "diff": 0.06848748416824421,
+     "se": 0.0564525361705459,
+     "matrix": 0.47177185807632327,
+     "from_random": false
+    }
+   ]
+  },
+  "Frankfurt-15": {
+   "team": [
+    "Rillaboom#3",
+    "Kingambit#1",
+    "Arcanine-H#1",
+    "M-Froslass#1",
+    "M-Raichu Y#1",
+    "Sneasler#5"
+   ],
+   "done": true,
+   "path": []
+  },
+  "Frankfurt-16": {
+   "team": [
+    "Sylveon#1",
+    "Arcanine-H#1",
+    "Gholdengo#1",
+    "M-Raichu Y#1",
+    "Rillaboom#1",
+    "M-Staraptor#1"
+   ],
+   "done": true,
+   "path": []
+  },
+  "trick_room_six": {
+   "team": [
+    "M-Blastoise#5",
+    "Torkoal#8",
+    "Indeedee-F#24",
+    "Farigiraf#67",
+    "Kingambit#12",
+    "Incineroar#16"
+   ],
+   "done": true,
+   "path": []
+  },
+  "low_variance_six": {
+   "team": [
+    "Rillaboom#55",
+    "Incineroar#80",
+    "Sneasler#85",
+    "Gholdengo#17",
+    "Kingambit#29",
+    "M-Salamence#6"
+   ],
+   "done": true,
+   "path": []
+  }
+ }
+}

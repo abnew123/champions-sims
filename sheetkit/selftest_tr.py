@@ -3,8 +3,8 @@
 step, against the files the old hand-run pipeline left in pssim/ and the published page (kept in the fixture folder). No sims are run; the turn-one solve takes a minute or two.
 
   python3 sheetkit/selftest_tr.py            every check
-  python3 sheetkit/selftest_tr.py --link     also (re)create sheets/trick-room-six/work/{matrix,confirm} as links to the old results,
-                                             so the kit's matrix report and confirm decide run on the Trick Room Six
+  python3 sheetkit/selftest_tr.py --link     also (re)create sheets/trick-room-six/work/{matrix,confirm}_v4-eg5 as links to the old
+                                             planner's results (the kit's own runs live in work/matrix and work/confirm)
 
 The inputs are frozen in sheetkit/fixtures/tr-v16/ (the six, config, text and charts as published), so the test keeps its meaning
 while sheets/trick-room-six/ moves on.
@@ -39,7 +39,7 @@ def t1_results(jobs, dest, suffix=''):
     return n
 
 # 1. bring-matrix jobs
-same = all(P.matrix_jobs(sheet, a) == rj(f'{PSSIM}/bringmx_{i}.json') for i, a in enumerate(ARCHS))
+same = all(P.matrix_jobs(sheet, a) == rj(f'{PSSIM}/bringmx_{i}.json') for i, a in enumerate(ARCHS)) and len(P.all_matrix_jobs(sheet)) == 5400
 check('matrix jobs: the 5,400 jobs equal pssim/bringmx_0..9.json, in order', same)
 
 # 2. confirmation jobs (the old run was split in two; part a's job file survives)
@@ -92,14 +92,13 @@ try:
           [r[:2] for r in gen['matchups']] == [r[:2] for r in old['matchups']] and {c[1] for c in diff} <= {'Incineroar'} and len(diff) == 10 and len(verdicts) == 4,
           f'{len(diff)} differ, {len(verdicts)} of them in the verdict')
 
-    if '--link' in sys.argv:                                     # the live folder's matrix and confirmation results (the basis of its picks)
+    if '--link' in sys.argv:                                     # the old planner's matrix and confirmation results, for reference
         live = Sheet('trick-room-six')
         for i in range(len(ARCHS)):
             for suf in ('', 'r'):
-                if os.path.isdir(f'{R}/bringmx_{i}{suf}'): link(f'{R}/bringmx_{i}{suf}', live.w('matrix', f'res_{i}{suf}'))
-            wj(P.matrix_jobs(live, ARCHS[i]), live.w('matrix', f'jobs_{i}.json'))
-        for x in ('a', 'b'): link(f'{R}/bringcf_{x}', live.w('confirm', f'res_{x}'))
-        print('linked: sheets/trick-room-six/work/{matrix,confirm} now point at the old results')
+                if os.path.isdir(f'{R}/bringmx_{i}{suf}'): link(f'{R}/bringmx_{i}{suf}', live.w('matrix_v4-eg5', f'res_{i}{suf}'))
+        for x in ('a', 'b'): link(f'{R}/bringcf_{x}', live.w('confirm_v4-eg5', f'res_{x}'))
+        print('linked: sheets/trick-room-six/work/{matrix,confirm}_v4-eg5 point at the old results')
 finally:
     shutil.rmtree(tmp, ignore_errors=True)
 print('\nALL PASS' if ok else '\nFAILED')

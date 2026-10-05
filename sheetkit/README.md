@@ -42,6 +42,22 @@ current pick unless the fresh-game leader beats it by at least 1.5 paired standa
 is taken. Use fresh game indices for every confirmation (the defaults are 600 for the matrix and 1000 for the confirmation; pass
 `--g0` for a later round and note it in your handoff).
 
+## The matrix and the confirmation on a cloud box
+
+The box is set up once the way `teamsearch/cloud/README.md` describes (steps 0-3: the user launches it; the bundle gives it
+`~/champions-sims` with Showdown's engine and the battle binary built for the current setup's source tarball). Then, from the Mac:
+
+1. `python3 sheetkit/kit.py <team> grid` and `matrix jobs` here, so the grid and the job list exist.
+2. `sheetkit/cloud/push.sh <host> <key file> <team>` copies the kit and the team folder (and any shared simulator file the box lacks).
+3. On the box, in `~/champions-sims`: `python3 sheetkit/kit.py <team> smoke`, then start the run detached, for example
+   `setsid nohup python3 sheetkit/kit.py <team> matrix run --threads 180 > matrix.out 2>&1 &`. All jobs go through one work queue, so
+   every thread stays busy to the end; `--threads` is how many cores you take. If the box is shared, agree the split first.
+4. `sheetkit/cloud/pull.sh <host> <key file> <team>` copies results back (repeat as often as you like); `status` shows progress.
+5. `matrix report`, `confirm jobs`, push again, `confirm run` on the box, pull, `confirm decide --write`.
+
+A result folder holds one run: the kit refuses to add games to a folder whose results came from other sets, another sim setup or
+other game indices (`<folder>.run.json` records them). Move the old folder aside instead.
+
 ## Rules for every sheet thread
 
 - **Cores.** Never more than 10 busy cores on the Mac across all threads, at most 3 workers while the user may be on it. Ask the user
@@ -147,8 +163,6 @@ run (none of the Trick Room Six's 15,552 confirmation games were flagged). Ask B
 ## Not in the kit yet
 
 - **Effective Speed.** The Speed table lists raw Speed only: no Tailwind, Choice Scarf, Unburden or weather-speed rows.
-- **Cloud runs through the kit.** The commands are the same on a Linux box once the repo bundle, `sheetkit/` and the team folder
-  (with `work/grid` and the job files) are there, but that route has not been run yet.
 - **Species tells and per-archetype guides** exist as a report (`matrix report`), not as page content.
 
 ## The Trick Room Six folder

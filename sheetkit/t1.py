@@ -11,7 +11,7 @@ sheet.json "t1" options: reader_w (weight on the reader number, default 0.75), t
 counts for whichever side brought the slower four, the right model for a Trick Room team; "fitted": for whoever set it, as fitted on
 replays), tw_under_tr ("zero": a Tailwind set the same turn as Trick Room scores nothing), trmult_file (per-archetype multipliers on
 the Trick Room credit), exclude_moves (my turn-one actions never to click, as ": <text>" fragments)."""
-import os, shutil
+import os, shutil, hashlib
 from common import *
 
 ITEM_VARIANTS = ('colburberry', 'psychicseed')                   # tr_final.py's ITEMW: Rocky Helmet 47 / Colbur 31 / Psychic Seed 20
@@ -26,6 +26,24 @@ def make_jobs(sheet, picks):
         for k, pr in enumerate(opp[a]['pairs']):
             jobs.append({'arch': a, 'k': k, 'lead': sheet.lead(picks[a]['lead']), 'back': sheet.back(picks[a]['back']), 'pair': pr['pair']})
     return jobs, [j for j in jobs if 'Indeedee-F' in j['pair'].split(' + ')]
+
+def write_jobs(sheet, picks):
+    """Write work/t1/jobs.json. Results are named by job number, so when the jobs, the six or the scoring options have changed since the
+    results in work/t1/ were made, those results are moved to work/t1/archive_<n>/ instead of being taken for the new jobs'."""
+    jobs, items = make_jobs(sheet, picks); d = sheet.w('t1'); os.makedirs(d, exist_ok=True)
+    h = lambda o: hashlib.sha1(json.dumps(o, sort_keys=True).encode()).hexdigest()[:10]
+    st = {'team': h(sheet.team), 'jobs': h(jobs), 'env': h(sim_env(sheet) | {'MYTEAM': ''})}
+    old = rj(os.path.join(d, 'stamp.json')) if os.path.exists(os.path.join(d, 'stamp.json')) else None
+    res = [x for x in ['res'] + [f'res_{it}' for it in ITEM_VARIANTS] if os.path.isdir(os.path.join(d, x)) and os.listdir(os.path.join(d, x))]
+    if res and old != st:
+        k = 1
+        while os.path.exists(os.path.join(d, f'archive_{k}')): k += 1
+        os.makedirs(os.path.join(d, f'archive_{k}'))
+        for x in res + [f for f in ('jobs.json', 'jobs_items.json', 'speeds.json', 'stamp.json') if os.path.exists(os.path.join(d, f))]:
+            shutil.move(os.path.join(d, x), os.path.join(d, f'archive_{k}', x))
+        print(f"the jobs or the six changed: earlier turn-one results moved to work/t1/archive_{k}/")
+    wj(jobs, os.path.join(d, 'jobs.json')); wj(items, os.path.join(d, 'jobs_items.json')); wj(st, os.path.join(d, 'stamp.json'))
+    return jobs, items
 
 def sim_env(sheet):
     c = t1cfg(sheet); env = {'MYTEAM': sheet.team_path}

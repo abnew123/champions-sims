@@ -6,7 +6,7 @@
 
 Seeds depend on the opponent and the game index only, so every four meets the same games: all comparisons are paired, game by game.
 Result files are the battle binary's: {arch, pair, share, lead, back, theirs, rows: [{g, v, ms, ...}]}."""
-import glob, itertools, json, os, collections, datetime
+import glob, itertools, json, os, collections, datetime, hashlib, re, shutil
 from common import *
 
 MIN_SE = 1.5        # a pick changes when the fresh-game leader beats it by at least this many paired standard errors
@@ -19,27 +19,63 @@ def matrix_jobs(sheet, arch, npairs=6):
             for k in range(npairs): jobs.append({'arch': arch, 'k': k, 'lead': list(lead), 'back': list(back)})
     return jobs
 
-def write_matrix_jobs(sheet):
-    opp = opp_model()
-    for i, a in enumerate(ARCHS):
-        jobs = matrix_jobs(sheet, a, len(opp[a]['pairs'])); wj(jobs, sheet.w('matrix', f'jobs_{i}.json'))
-        print(f"{i} {a}: {len(jobs)} jobs")
+def all_matrix_jobs(sheet):
+    opp = opp_model(); return [j for a in ARCHS for j in matrix_jobs(sheet, a, len(opp[a]['pairs']))]
 
-def battle_run(sheet, step, jobs_path, outdir, games, g0, threads, setup, log):
-    """Play every job in jobs_path for games g0 .. g0+games-1 with the full-battle sim. Resumes: finished jobs are skipped."""
-    S = sim_setup(setup); starts = outdir + '.starts.jsonl'
-    log.start(jobs_path, outdir, f"{games} games, {threads} threads ({S['name']}, first game {g0})")
-    run(['node', '../native/battle_starts.js', jobs_path, starts, str(games), str(g0)], env={'MYTEAM': sheet.team_path}, cwd=PSSIM)
-    env = dict(S['env'], GRID_DIR=sheet.grid_dir())
-    with open(outdir + '.err', 'a') as err:
-        run(['nice', '-n', '10', S['binary'], 'battle', S['engine_data'], starts, outdir, str(threads)], env=env, cwd=PSSIM, stderr=err)
-    os.remove(starts); log.done(outdir)
-    wj({'setup': S['name'], 'games': games, 'g0': g0, 'date': datetime.date.today().isoformat()}, outdir + '.run.json')
+def write_matrix_jobs(sheet):
+    jobs = all_matrix_jobs(sheet); wj(jobs, sheet.w('matrix', 'jobs.json'))
+    print(f"{len(jobs)} jobs ({len(jobs) // len(ARCHS)} per archetype) -> work/matrix/jobs.json")
+
+def team_hash(sheet): return hashlib.sha1(json.dumps(sheet.team, sort_keys=True).encode()).hexdigest()[:10]
+
+def stamp(outdir, want):
+    """One result folder holds one kind of run: refuse to add games played with other sets, another sim setup or other game indices."""
+    p = outdir + '.run.json'; n = len(glob.glob(os.path.join(outdir, '*.json')))
+    have = rj(p) if os.path.exists(p) else None
+    if n and (have is None or any(have.get(k) != v for k, v in want.items())):
+        sys.exit(f"{os.path.relpath(outdir, ROOT)} already holds {n} results from a different run ({have or 'unrecorded'}); this run is {want}. "
+                 "Move that folder aside (do not mix runs) and start again.")
+    wj(dict(want, date=datetime.date.today().isoformat()), p)
+
+def make_starts(sheet, jobs, todo, starts, games, g0, procs):
+    """Starting positions for jobs[i], i in todo, written to `starts` with each line's job number = i. battle_starts.js numbers the jobs of
+    the file it is given from 0, so the list is cut into slices built in parallel and the numbers are put back while merging.
+    Seeds depend on the opponent and the game index, not on the job number, so this plays the same games as one job file would."""
+    k = max(1, min(procs, 16, math.ceil(len(todo) / 40))); parts = [todo[c::k] for c in range(k)]; d = starts + '.parts'; os.makedirs(d, exist_ok=True)
+    ps = []
+    for c, part in enumerate(parts):
+        wj([jobs[i] for i in part], f'{d}/{c}.json')
+        ps.append(subprocess.Popen(['node', '../native/battle_starts.js', f'{d}/{c}.json', f'{d}/{c}.jsonl', str(games), str(g0)],
+                                   env=dict(os.environ, MYTEAM=sheet.team_path), cwd=PSSIM, stdout=subprocess.DEVNULL))
+    if any(p.wait() for p in ps): sys.exit('building the starting positions failed (node ../native/battle_starts.js)')
+    n = 0
+    with open(starts, 'w') as out:
+        for c, part in enumerate(parts):
+            for line in open(f'{d}/{c}.jsonl'):
+                m = re.match(r'\{"job":(\d+),', line); assert m, 'unexpected line from battle_starts.js'
+                out.write('{"job":%d,' % part[int(m.group(1))] + line[m.end():]); n += 1
+    shutil.rmtree(d); assert n == len(todo) * games, (n, len(todo), games)
+    return n
+
+def battle_run(sheet, step, jobs_path, outdir, games, g0, threads, setup, log, only=None):
+    """Play jobs_path's jobs (all, or the job numbers in `only`) for games g0 .. g0+games-1 with the full-battle sim, one work queue for
+    all of them. Resumes: jobs with a result file are skipped."""
+    S = sim_setup(setup); jobs = rj(jobs_path); starts = outdir + '.starts.jsonl'; os.makedirs(outdir, exist_ok=True)
+    stamp(outdir, {'setup': S['name'], 'games': games, 'g0': g0, 'team': team_hash(sheet)})
+    todo = [i for i in (only if only is not None else range(len(jobs))) if not os.path.exists(os.path.join(outdir, f'{i}.json'))]
+    log.start(jobs_path, outdir, f"{games} games, {threads} threads ({S['name']}, first game {g0}; {len(todo)} of {len(jobs)} jobs to play)")
+    if todo:
+        n = make_starts(sheet, jobs, todo, starts, games, g0, threads); log.line(f"{now()} {n} starting positions")
+        env = dict(S['env'], GRID_DIR=sheet.grid_dir())
+        with open(outdir + '.err', 'a') as err:
+            run(['nice', '-n', '10', S['binary'], 'battle', S['engine_data'], starts, outdir, str(threads)], env=env, cwd=PSSIM, stderr=err)
+        os.remove(starts)
+    log.done(outdir)
 
 def run_matrix(sheet, games=16, g0=600, threads=None, setup=None, only=None, force=False):
-    threads = threads_arg(threads, force); log = RunLog(sheet, 'matrix')
-    for i in (only if only is not None else range(len(ARCHS))):
-        battle_run(sheet, 'matrix', sheet.w('matrix', f'jobs_{i}.json'), sheet.w('matrix', f'res_{i}'), games, g0, threads, setup, log)
+    threads = threads_arg(threads, force); log = RunLog(sheet, 'matrix'); jobs = rj(sheet.w('matrix', 'jobs.json'))
+    idx = [i for i, j in enumerate(jobs) if ARCHS.index(j['arch']) in only] if only is not None else None      # --only: archetype numbers
+    battle_run(sheet, 'matrix', sheet.w('matrix', 'jobs.json'), sheet.w('matrix', 'res'), games, g0, threads, setup, log, idx)
 
 def run_confirm(sheet, games=48, g0=1000, threads=None, setup=None, force=False):
     threads = threads_arg(threads, force); log = RunLog(sheet, 'confirm')
@@ -84,7 +120,7 @@ def matrix_report(sheet, pattern=None, picks_path=None, out=print):
     """A. per archetype: the best fours, where the current pick ranks and its paired gap to the best
     B. per archetype: what bringing / leading each of the six is worth
     C. species tells: how the worth of bringing each of mine changes when X is in their four, against the same archetype's average"""
-    V, share, names, theirs, _ = load(pattern or sheet.w('matrix', 'res_*', '*.json')); picks = read_picks(picks_path or sheet.p('picks.json'))
+    V, share, names, theirs, _ = load(pattern or sheet.w('matrix', 'res*', '*.json')); picks = read_picks(picks_path or sheet.p('picks.json'))
     short = lambda m: sheet.my_names.get(m, m); MINE = sheet.names
     out(f"{sum(len(d) for d in V.values())} (opposing team, four) jobs read, {sum(len(g) for d in V.values() for g in d.values())} games")
     pick_tot = best_tot = Wtot = 0.0
@@ -142,7 +178,7 @@ def matrix_report(sheet, pattern=None, picks_path=None, out=print):
 # ---------------------------------------------------------------- confirmation
 def confirm_jobs(sheet, N=5, pattern=None, picks_path=None, only=None, out=print):
     """Each archetype's top N fours in the matrix plus the current pick, against all its opposing leads; slow archetypes first."""
-    V, share, names, _, ms = load(pattern or sheet.w('matrix', 'res_*', '*.json')); picks = read_picks(picks_path or sheet.p('picks.json'))
+    V, share, names, _, ms = load(pattern or sheet.w('matrix', 'res*', '*.json')); picks = read_picks(picks_path or sheet.p('picks.json'))
     opp = opp_model(); jobs = []
     for a in sorted([ARCHS[i] for i in only] if only else ARCHS, key=lambda a: -mean(ms[a])):
         teams, rows, win = ranked(V, share, a)
@@ -157,7 +193,7 @@ def confirm_jobs(sheet, N=5, pattern=None, picks_path=None, only=None, out=print
 def decide(sheet, pattern=None, matrix_pattern=None, picks_path=None, out=print):
     """Paired on the fresh games only. Returns the new picks {archetype: {lead, back, v, n, ...}}."""
     V, share, names, _, _ = load(pattern or sheet.w('confirm', 'res*', '*.json'))
-    M, mshare, mnames, _, _ = load(matrix_pattern or sheet.w('matrix', 'res_*', '*.json')); names.update(mnames)
+    M, mshare, mnames, _, _ = load(matrix_pattern or sheet.w('matrix', 'res*', '*.json')); names.update(mnames)
     picks = read_picks(picks_path or sheet.p('picks.json')); final = {}; tot = tot_sheet = 0.0
     for a in ARCHS:
         teams, rows, win = ranked(V, share, a)

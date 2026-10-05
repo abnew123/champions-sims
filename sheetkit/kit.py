@@ -36,13 +36,11 @@ def status(sheet):
     print(f"  current sim setup: {S['current']}  ({S['setups'][S['current']]['status']})")
     g = os.path.normpath(sheet.p(sheet.cfg.get('grid_dir', 'work/grid')))
     print(f"  grid      {'ok' if os.path.exists(os.path.join(g, 'gx_cells_tr_inc.json')) else 'MISSING (run: grid)'}  {os.path.relpath(g, ROOT)}")
-    mj = mr = 0
-    for i in range(len(ARCHS)):                                  # res_<i>* : a second machine's share of the same jobs may sit beside res_<i>
-        nj = len(rj(sheet.w('matrix', f'jobs_{i}.json'))) if os.path.exists(sheet.w('matrix', f'jobs_{i}.json')) else 0
-        mj += nj; mr += min(nj, n('matrix', f'res_{i}*'))
-    print(f"  matrix    {mr} of {mj} jobs done" if mj else "  matrix    no jobs yet (run: matrix jobs)")
+    mj = len(rj(sheet.w('matrix', 'jobs.json'))) if os.path.exists(sheet.w('matrix', 'jobs.json')) else 0; mr = n('matrix', 'res')
+    ran = lambda d: (lambda r: f"  ({r['setup']}, {r['games']} games from index {r['g0']})")(rj(d + '.run.json')) if os.path.exists(d + '.run.json') else ''
+    print(f"  matrix    {mr} of {mj} jobs done{ran(sheet.w('matrix', 'res'))}" if mj else "  matrix    no jobs yet (run: matrix jobs)")
     cj_ = len(rj(sheet.w('confirm', 'jobs.json'))) if os.path.exists(sheet.w('confirm', 'jobs.json')) else 0
-    print(f"  confirm   {n('confirm', 'res*')} of {cj_} jobs done" if cj_ else "  confirm   no jobs yet")
+    print(f"  confirm   {n('confirm', 'res')} of {cj_} jobs done{ran(sheet.w('confirm', 'res'))}" if cj_ else "  confirm   no jobs yet")
     if ex('picks.json'):
         d = rj(sheet.p('picks.json')); print(f"  picks     {len(d['picks'])} archetypes, ladder-weighted {100 * P.weighted(d['picks']):.1f}%  ({d.get('setup', '?')}, {d.get('made', '?')})")
     else: print("  picks     none yet (run: confirm decide --write)")
@@ -121,8 +119,7 @@ def main():
             print('picks.json written; next: t1 jobs, t1 run, t1 solve, page')
         else: print('\n(not written: add --write to update picks.json)')
     elif step == ('t1', 'jobs'):
-        jobs, items = T1.make_jobs(sheet, rj(sheet.p('picks.json'))['picks'])
-        wj(jobs, sheet.w('t1', 'jobs.json')); wj(items, sheet.w('t1', 'jobs_items.json')); print(f"{len(jobs)} jobs, {len(items)} with item variants -> work/t1/")
+        jobs, items = T1.write_jobs(sheet, rj(sheet.p('picks.json'))['picks']); print(f"{len(jobs)} jobs, {len(items)} with item variants -> work/t1/")
     elif step == ('t1', 'run'): T1.run_all(sheet, a.samples, a.threads, a.force)
     elif step == ('t1', 'solve'): d = T1.solve(sheet); print(f"t1.json: {len(d['plans'])} plans")
     elif a.step == 'page':

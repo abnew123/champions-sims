@@ -83,7 +83,7 @@ This plays 54 games, one per archetype × lead pair; Perish is scored from real 
 ## 5. Run a round
 
 ```bash
-tmux new -s climb
+tmux -L climb new -s climb
 ```
 
 Then, inside tmux:
@@ -93,7 +93,7 @@ cd ~/champions-sims/teamsearch && . cloud/run_env.sh && TS_PARALLEL=60 TS_THREAD
 ```
 
 - **Check the first line:** it prints the sim setup and binary. It must say `v13g` and `champ-battle-v13`.
-- **Detach** with Ctrl-b then d; reattach with `tmux attach -t climb`.
+- **Detach** with Ctrl-b then d; reattach with `tmux -L climb attach -t climb`. The climb uses its own tmux server (`-L climb`), so other runs on the box can't take it down.
 - **Change the thread count or recover from a crash:** `cloud/relaunch.sh <P> <T>`. Finished battles are reused, and the round only commits to `climb_state.json` at the end.
 - **Further rounds automatically:** `setsid nohup cloud/auto_rounds.sh <power-off epoch> [seconds per climbing start] &`. It keeps starting thorough rounds while starts are still climbing and the next round fits before the power-off.
 - **Same machine type for the whole climb:** paired seeds assume the same binary.

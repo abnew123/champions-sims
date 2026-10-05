@@ -342,3 +342,6 @@ Usage:
 - **v14 (Oct 5, ~6 pm):** plays exactly v13's games, about 25–39% faster. Built on the box (mimalloc on); the smoke test against the v13 reference is 54/54 identical.
   - Setup `v14g` in evaluate.SIMS. `cloud/run_env.sh` picks v13g while there's no climb_state.json (round 1) and v14g after, so the climb switches at the round boundary and a mid-round relaunch keeps its round's cache. Outputs are tagged by setup.
   - TR sheet uses the same v14 build.
+- **Shared-box incident (Oct 5, 5:59 pm):** we shared one tmux server, whose process title is the command of whichever session created it. TR sheet's `pkill -f 'sheetkit/kit.py ...'` matched the server and killed the climb's session; later my `pkill -f "[c]limb.py round"` killed theirs the same way.
+  - The climb resumed from cache both times.
+  - Fixes: the climb now runs on its own tmux server (`tmux -L climb`, in relaunch.sh, auto_rounds.sh and the README), and auto_rounds takes P×T from `cloud/threads.txt` ("32 3" while sharing). TR sheet moved off tmux to setsid nohup.

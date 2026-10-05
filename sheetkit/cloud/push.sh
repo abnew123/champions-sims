@@ -6,7 +6,7 @@
 # run someone else has going there keeps the files it started with.
 set -e; cd "$(dirname "$0")/../.."
 HOST=${1:?host}; KEY=${2:?key file}; TEAM=${3:?team}
-SSH="ssh -i $KEY -o ConnectTimeout=20"
+SSH="ssh -i $KEY -o ConnectTimeout=20 -o StrictHostKeyChecking=accept-new"
 VALUES=$(python3 -c "import json; print(' '.join(sorted({s['value'] for s in json.load(open('sheetkit/sim.json'))['setups'].values()})))")
 # results already here go too (with the record of the run they belong to), so a run on a fresh box resumes instead of starting over
 DONE=$(ls -d sheets/$TEAM/work/matrix/res sheets/$TEAM/work/matrix/res.run.json sheets/$TEAM/work/confirm/jobs.json \

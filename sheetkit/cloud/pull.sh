@@ -4,7 +4,7 @@
 #   usage: sheetkit/cloud/pull.sh <host> <key file> <team>
 set -e; cd "$(dirname "$0")/../.."
 HOST=${1:?host}; KEY=${2:?key file}; TEAM=${3:?team}
-SSH="ssh -i $KEY -o ConnectTimeout=20"
+SSH="ssh -i $KEY -o ConnectTimeout=20 -o StrictHostKeyChecking=accept-new"
 rsync -az -e "$SSH" --exclude '*.starts.jsonl' --exclude '*.parts' --exclude 'grid/' --exclude 'smoke/' \
   ubuntu@$HOST:champions-sims/sheets/$TEAM/work/ sheets/$TEAM/work/
 rsync -az -e "$SSH" "ubuntu@$HOST:champions-sims/pssim/kit_${TEAM}_*.log" pssim/ 2>/dev/null || true

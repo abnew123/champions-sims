@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Proof that the kit reproduces the published Trick Room Six sheet (Version 16) from the raw sim results that built it, step by step,
-against the files the old hand-run pipeline left in pssim/ and trsheet/. No sims are run; the turn-one solve takes a minute or two.
+"""Proof that the kit reproduces the Trick Room Six sheet as published in Version 16 from the raw sim results that built it, step by
+step, against the files the old hand-run pipeline left in pssim/ and the published page (kept in the fixture folder). No sims are run; the turn-one solve takes a minute or two.
 
   python3 sheetkit/selftest_tr.py            every check
   python3 sheetkit/selftest_tr.py --link     also (re)create sheets/trick-room-six/work/{matrix,confirm} as links to the old results,
@@ -77,8 +77,8 @@ try:
 
     # 7. the page
     s, L = PG.render(sheet, PG.leads_data(sheet, final, t1, rj(sheet.p('notes.json')))); open(f'{tmp}/sheet.html', 'w').write(s)
-    d, notes = PG.compare(f'{tmp}/sheet.html', os.path.join(ROOT, 'trsheet', 'tr-sheet.html'))
-    check('page: equals trsheet/tr-sheet.html (six data blocks by value; markup, styles and scripts byte for byte)', not d, '; '.join(d + notes))
+    d, notes = PG.compare(f'{tmp}/sheet.html', sheet.p('published.html'))
+    check('page: equals the published Version 16 page (six data blocks by value; markup, styles and scripts byte for byte)', not d, '; '.join(d + notes))
     bad = PG.check_leads(sheet, L); check('page: every turn-one switch goes to the card\'s back row; lines sum to 100%', not bad, '; '.join(bad))
 
     # 8. Coverage and Matchups from the generic one-on-one grid (the first run builds the fixture's grid cells: about a CPU-minute)

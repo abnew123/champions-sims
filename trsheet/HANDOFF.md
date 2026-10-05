@@ -14,15 +14,16 @@ Talk to the other threads directly with SendMessage (names above); do not relay 
 
 ## The sheet now
 
-- Published: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6, **Version 16**. Source: `trsheet/tr-sheet.html`. Backups `tr-sheet.v11.html` ... `tr-sheet.v15.html`.
-- **Version 17 is built and waiting for the user's word to publish**: `sheets/trick-room-six/sheet.html` (kit build, 2026-10-05). Against
-  Version 16 it changes: Torkoal's card (back to 32 HP / 2 SpD) and its Matchups column; the whole-game % of the six tabs that bring
-  Torkoal (Rain 58 -> 54, Snow 85 -> 88, Rain + Sun 48 -> 50, Perish 95 -> 91, Tailwind and Trick Room unchanged after rounding); the Rain
-  tab's turn-one lines against four of its six opposing leads (the only tab that leads Torkoal; the 36 jobs of all six Torkoal tabs were
-  re-run, and the other five tabs' lines came out the same); and the order of equal-share opposing leads on three tabs. To publish:
-  Artifact `action: "read"` on the URL, publish `sheets/trick-room-six/sheet.html` with `url` set to it, copy it over
-  `trsheet/tr-sheet.html`, set `published` in the folder's `sheet.json`, commit.
-- To publish from a new conversation: Artifact `action: "read"` on that URL first, then publish `trsheet/tr-sheet.html` with `url` set to it. Never touch the older sheet "Low-Variance Six" (https://claude.ai/artifact/DEF8ycjXrKGXokgH26he9A).
+- Published: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6, **Version 17** (2026-10-05, the first built by the sheet kit). Source:
+  `sheets/trick-room-six/sheet.html` (`python3 sheetkit/kit.py trick-room-six page`); `trsheet/tr-sheet.html` is a copy of it. Older
+  pages: `trsheet/tr-sheet.v11.html` ... `tr-sheet.v15.html`, Version 16 in `sheetkit/fixtures/tr-v16/published.html`, and git from here on.
+- Version 17 against Version 16: Torkoal back to 32 HP / 2 SpD (card and Matchups column); Incineroar's Matchups column with White Herb
+  modelled (ten cells: Mega Salamence TR-up lost -> roll 55, Corviknight TR-up roll 65 -> check, Mega Gardevoir no-TR roll 15 -> check,
+  Kingambit no-TR roll 40 -> 35, six detail-text changes); the whole-game % of the six tabs that bring Torkoal (Rain 58 -> 54, Snow
+  85 -> 88, Rain + Sun 48 -> 50, Perish 95 -> 91, Tailwind and Trick Room unchanged after rounding); the Rain tab's turn-one lines against
+  four of its six opposing leads (the 36 jobs of all six Torkoal tabs were re-run; the other five tabs' lines came out the same); the
+  order of equal-share opposing leads on three tabs.
+- To publish from a new conversation: Artifact `action: "read"` on that URL first, then publish `sheets/trick-room-six/sheet.html` with `url` set to it, copy it over `trsheet/tr-sheet.html`, set `published` in the folder's `sheet.json`, commit. Never touch the older sheet "Low-Variance Six" (https://claude.ai/artifact/DEF8ycjXrKGXokgH26he9A).
 - The team (real sets: `sheets/trick-room-six/team.json`, same as `pssim/myteam_real.json`; SP order HP/Atk/Def/SpA/SpD/Spe):
 
 | Pokémon | Item | Ability | Nature, SP | Moves |
@@ -70,9 +71,8 @@ thread maintains the kit and owns `sheets/trick-room-six/`.
 - `sheets/trick-room-six/`: `team.json` (= `pssim/myteam_real.json`), `sheet.json`, `text.json`, `cards.json`, `notes.json`, `charts.json`
   and `speed.json` (imported from the Version 16 page), `picks.json` (= `bringcf_picks.json`), `t1.json` (the 60 plans of the picks),
   `sheet.html` (the kit's build). `work/` links to the old result folders (`selftest_tr.py --link`).
-- **The next published version is built with `kit.py trick-room-six page`**; then copy `sheets/trick-room-six/sheet.html` over
-  `trsheet/tr-sheet.html` (the published source) or switch the published source to the kit's file and say so here. The section below
-  ("How the current page was built") describes the old hand-run route, kept for history; the scripts it names still work.
+- Every version from 17 on is built with `kit.py trick-room-six page`. The section below ("How the current page was built") describes
+  the old hand-run route that built Versions 12-16, kept for history; the scripts it names still work.
 - The kit's `grid` step (Team search's generic one-on-one code, read-only) matches the hand-built `mxtr_t22/` grid in 456 of 460
   cells; the four that differ are Incineroar cells where the generic code models White Herb, and it adds cells for Indeedee-F. The
   Trick Room Six still points at `mxtr_t22/` (`grid_dir` in its `sheet.json`). Agreed with Battle sim (2026-10-05): the rerun on the
@@ -83,12 +83,9 @@ thread maintains the kit and owns `sheets/trick-room-six/`.
 - A second team was dry-run in a scratch folder (the user's Rillaboom / Incineroar / Sneasler / Gholdengo / Kingambit / Mega Salamence
   six, sets from `teamsearch/teams/low_variance_six.json`): `init`, `grid`, `smoke` and a page all work with nothing Trick Room-specific.
   No folder was created under `sheets/` for it: that team's thread does `init` itself.
-- Coverage, Matchups and Speed are generated since commit f19ce24 (`charts`, `speed`). For this six `charts` reproduces the published
-  Coverage exactly and Matchups in 340 of 350 cells; the ten that differ are Incineroar's (White Herb modelled: Mega Salamence TR-up
-  lost -> roll 55, Corviknight TR-up roll 65 -> check, Mega Gardevoir no-TR roll 15 -> check, Kingambit no-TR roll 40 -> 35, and six
-  detail-text changes). **Open decision for the user:** switch this sheet's Incineroar column to the generated cells
-  (`python3 sheetkit/kit.py trick-room-six charts`, recommended) or keep the published ones. `charts.json` still holds the hand-built
-  grid; `speed.json` is hand-written (`"hand": true`).
+- Coverage, Matchups and Speed are generated (`charts`, `speed`). This sheet's `charts.json` comes from `charts` since Version 17 (the
+  user chose to have White Herb modelled): Coverage is identical to the hand-built table and Matchups differ only in Incineroar's ten
+  cells. `speed.json` is still hand-written (`"hand": true`).
 - Not in the kit yet: effective-Speed rows (Tailwind, Scarf, Unburden, weather), cloud runs through the kit
   (same commands on the box, untested), species tells on the page.
 - A static preview of built pages: `sheets-preview` in `.claude/launch.json` (port 8768, serves `sheets/`). It sends no charset, so
@@ -114,7 +111,7 @@ thread maintains the kit and owns `sheets/trick-room-six/`.
    `results/tork_ab_report.txt`) had the 12 HP / 22 SpD spread about 1 point worse on the tabs that bring Torkoal (Snow -5.4 +- 2.2,
    Trick Room -5.9 +- 2.5, from physical leads). Done: `team.json`, `pssim/myteam_real.json`, the card, the Matchups column (the
    Version 15 page's), the six tabs' whole-game % and turn-one lines (36 jobs re-run through the kit), the generic grid's Torkoal cells;
-   Battle sim and Team search use the same sets. Left: publish Version 17 when the user says so.
+   Battle sim and Team search use the same sets. Published in Version 17.
 2. **Rerun the picks on the new planner.** The whole-game numbers above come from the old planner. Known biases: Perish far too high (the
    sim's Perish teams almost never trap and sing; real teams beat Perish 48%, the sim says 76%+), the Trick Room tab inflated (about a quarter
    of the modelled "TR" teams lead Delphox and never set Trick Room), status and setup undervalued, opponents double-Protect too much (worth

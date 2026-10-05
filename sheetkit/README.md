@@ -153,11 +153,12 @@ run (none of the Trick Room Six's 15,552 confirmation games were flagged). Ask B
 
 ## The Trick Room Six folder
 
-`sheets/trick-room-six/` was imported from the published Version 16 page and the results that built it. Its `work/` links to the old
+`sheets/trick-room-six/` was imported from the published Version 16 page and the results that built it; Version 17 was the first
+page published from it. Its `work/` links to the old
 result folders in `pssim/results/` (`python3 sheetkit/selftest_tr.py --link` recreates the links), and `grid_dir` points at the
 hand-built grid the published picks were run with. The kit's own `grid` step reproduces that grid in 456 of its 460 cells; the four
-that differ are Incineroar cells where the generic code models White Herb. Its `charts.json` is still the hand-built one from the
-published page (the kit's `charts` step reproduces it except in the Incineroar column), and its `speed.json` is hand-written.
+that differ are Incineroar cells where the generic code models White Herb. Since Version 17 its `charts.json` comes from the `charts`
+step; its `speed.json` is hand-written.
 
 The self-test checks, against the files the old pipeline left behind: the 5,400 matrix jobs, the confirmation jobs, the ten picks
 with their win shares, the 60 turn-one jobs, their Speeds, all 60 solved turn-one plans, the page (data by value; markup, styles

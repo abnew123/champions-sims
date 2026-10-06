@@ -1,7 +1,7 @@
 {
  "name": "Trick Room Six",
  "artifact": "https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6",
- "published": "Version 17 (2026-10-05)",
+ "published": "Version 18 (2026-10-05)",
  "team": "team.json",
  "lead_order": [
   "Incineroar",
@@ -106,6 +106,5 @@
   "Armarouge",
   "M-Gengar",
   "Sinistcha"
- ],
- "built": "Version 18 (2026-10-05): picks rerun on the final simulator; not published yet"
+ ]
 }

@@ -105,8 +105,8 @@ def theme_block(t):
     rows = [('ground', 'panel', 'panel-2'), ('ink', 'ink2', 'ink3'), ('rule', 'rule-2'), ('accent', 'accent-soft')]
     return ''.join('  ' + ' '.join(f'--{k}:{t[k]};' for k in r) + '\n' for r in rows)
 
-def render(sheet, L=None):
-    c = sheet.cfg; text = rj(sheet.p('text.json')); T = open(os.path.join(KIT, 'template.html')).read()
+def render(sheet, L=None, template=None):
+    c = sheet.cfg; text = rj(sheet.p('text.json')); T = open(template or os.path.join(KIT, 'template.html')).read()
     charts = rj(sheet.p('charts.json')) if os.path.exists(sheet.p('charts.json')) else {}
     speed = rj(sheet.p('speed.json')) if os.path.exists(sheet.p('speed.json')) else {}
     have = {'coverage': bool(charts.get('coverage')), 'matchups': bool(charts.get('matchups')), 'speed': bool(speed.get('rows'))}
@@ -148,7 +148,7 @@ def render(sheet, L=None):
                      N_DATA='const N=' + cj([mine(n) for n in N]) + ';', X_DATA='const X=' + cj(charts['matchups']) + ';')
     if have['charts']: slots['XROW_TABLES'] = cj([i for i, k in (('covbody', 'coverage'), ('mxbody', 'matchups')) if have[k]])
     if have['speed']:
-        foot = f'  <p class="body spdnote">{text["speed_foot"]}</p>' if text.get('speed_foot') else ''
+        foot = f'<p class="body spdnote">{text["speed_foot"]}</p>' if text.get('speed_foot') else ''      # indented by the template
         slots.update(SPEED_H2=h2, SPEED_INTRO=text['speed_intro'], SPEED_FOOT=foot, SPEED_COMMENT=h2[0].lower() + h2[1:],
                      R_DATA='const R=[' + ',\n '.join(cj(r) for r in speed['rows']) + '];')
     missing = set(re.findall(r'\{\{([A-Z0-9_]+)\}\}', T)) - set(slots)

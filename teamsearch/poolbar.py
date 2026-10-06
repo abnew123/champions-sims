@@ -6,7 +6,9 @@ Compared, on one footing, with the archetype models (the same 10 teams' archetyp
   sim: our teams' mean win share vs an opponent group     real: the field's per-game win rate vs that group (1 - its own rate)
 with each side's overall offset removed (our teams are climbed), gaps in log-odds, RMS over groups with enough data. Groups are the
 rule archetypes (pro_replays.arch, as in simreal.py) and Battle sim's core-rule groups (results/group_real.json; regional and ladder).
-  TS_SIM=v17g python3 poolbar.py run [entries=2500] [min rating=0]   battles: pool games, then the archetype baseline (2,400 games)
+  TS_SIM=v17g TS_PARALLEL=30 TS_THREADS=3 python3 poolbar.py run [entries=2500] [min rating=0]
+        battles: pool games (each team's entries in CHUNKS processes, identical chunks for every team), then the archetype baseline.
+        Many small processes, never one big one: one champ process with ~90 threads ran ~6x slower per game on the box.
   TS_SIM=v17g python3 poolbar.py report
 Threads: decomp_threads.txt if present (re-read per team), else TS_THREADS.
 """
@@ -20,7 +22,7 @@ _argv, sys.argv = sys.argv, sys.argv[:1]                                        
 import archmatch as AM
 sys.argv = _argv
 from opp_pool import spread
-SEED = 700000; FULL = os.path.join('..', 'native', 'engine_data_full.json')
+CHUNKS = 3; SEED = 700000; FULL = os.path.join('..', 'native', 'engine_data_full.json')
 INV = {short: full for full, short in AM.ARCH_MAP.items()}
 SHORT = {'Rain + Sun': 'Rain + Sun', 'Trick Room': 'Trick Room'}                   # pro_replays.arch already returns the short names
 
@@ -51,15 +53,15 @@ def run(n, min_rating):
     print(time.strftime('%I:%M %p'), f"{len(entries)} pool entries; groups: {len(set(e['group'] for e in entries))}; setup {E.sim()}", flush=True)
     os.environ['TS_ENGINE_DATA'] = FULL
     os.environ['SEED_PER_JOB'] = '1'          # battle_starts.js: independent battle/sampling seeds per one-game job, same across our teams
-    for name in S.DEFAULT:
-        team, fixed, label, seed = S.latest(name)
-        rows = E.run_jobs(team, jobs_for(team, fixed, entries), 1, SEED, thr(), 'poolbar')
-        print(time.strftime('%I:%M %p'), f"pool: {name} {100 * sum(x['v'] for r in rows for x in r['rows']) / max(1, sum(len(r['rows']) for r in rows)):.1f}", flush=True)
+    k = -(-len(entries) // CHUNKS)
+    work = [(name, c) for name in S.DEFAULT for c in range(CHUNKS)]
+    def one(item):
+        name, c = item; team, fixed, label, seed = S.latest(name)
+        return E.run_jobs(team, jobs_for(team, fixed, entries[c * k:(c + 1) * k]), 1, SEED, thr(), f'poolbar_c{c}')
+    E.parallel(one, work, 'pool games')
     os.environ.pop('TS_ENGINE_DATA'); os.environ.pop('SEED_PER_JOB')
-    for name in S.DEFAULT:                                            # the archetype baseline under the same setup (confirm seeds, 60 jobs x 4)
-        team, fixed, label, seed = S.latest(name)
-        r = E.run_team(team, 4, seed, thr(), fixed=fixed, label=label)
-        print(time.strftime('%I:%M %p'), f"archetype models: {name} {100 * r['score']:.1f}", flush=True)
+    base = [S.latest(name) for name in S.DEFAULT]                     # the archetype baseline under the same setup (confirm seeds, 60 jobs x 4)
+    E.parallel(lambda b: E.run_team(b[0], 4, b[3], thr(), fixed=b[1], label=b[2]), base, 'archetype baseline')
     json.dump([e['id'] + '|' + e['side'] for e in entries], open(os.path.join(HERE, f'poolbar_entries_{E.sim()}.json'), 'w'))
 
 lg = lambda p: math.log(max(1e-3, min(1 - 1e-3, p)) / (1 - max(1e-3, min(1 - 1e-3, p))))
@@ -81,14 +83,15 @@ def report():
     by_group = collections.defaultdict(lambda: [0.0, 0]); by_arch = collections.defaultdict(lambda: [0.0, 0]); arch_models = collections.defaultdict(list)
     for name in S.DEFAULT:
         team, fixed, label, seed = S.latest(name)
-        rd = os.path.join(HERE, 'runs', f'poolbar_{E.team_key(team)}'); d = os.path.join(rd, f'out_{E.out_tag(SEED, 1)}')
-        metas = [j['meta'] for j in json.load(open(os.path.join(rd, 'jobs.json')))]
-        for f in os.listdir(d):
-            r = json.load(open(os.path.join(d, f))); m = metas[r['job']]
-            for x in r['rows']:
-                if x.get('unsupported'): continue
-                by_group[m['group']][0] += x['v']; by_group[m['group']][1] += 1
-                by_arch[m['arch']][0] += x['v']; by_arch[m['arch']][1] += 1
+        for c in range(CHUNKS):
+            rd = os.path.join(HERE, 'runs', f'poolbar_c{c}_{E.team_key(team)}'); d = os.path.join(rd, f'out_{E.out_tag(SEED, 1)}')
+            metas = [j['meta'] for j in json.load(open(os.path.join(rd, 'jobs.json')))]
+            for f in os.listdir(d):
+                r = json.load(open(os.path.join(d, f))); m = metas[r['job']]
+                for x in r['rows']:
+                    if x.get('unsupported'): continue
+                    by_group[m['group']][0] += x['v']; by_group[m['group']][1] += 1
+                    by_arch[m['arch']][0] += x['v']; by_arch[m['arch']][1] += 1
         res = E.read(os.path.join(HERE, 'runs', f'{E.team_key(team)}_{label}'), E.out_tag(seed, 4))
         for a, v in res['by_arch'].items(): arch_models[AM.ARCH_MAP[a]].append(v)
     real_a, nreal = real_vs_arch()

@@ -9,6 +9,7 @@ root: op.gg doubles usage, or a ladder rank as "#13"). Runs the grid step first 
 import concurrent.futures
 from common import *
 import grid as G
+import procs
 
 USAGE = rj(os.path.join(ROOT, 'team-sheet.html.usage.json'))
 ITEMNOTE = {"Focus Sash": "Sash", "Chople": "Chople", "Colbur": "Colbur", "Sitrus": "Sitrus"}      # threat items a Coverage row names
@@ -16,12 +17,12 @@ ITEMNOTE = {"Focus Sash": "Sash", "Chople": "Chople", "Colbur": "Colbur", "Sitru
 def build(sheet, workers=1, out=None):
     G.build(sheet, workers, quiet=True)
     threats = sheet.cfg.get('threats') or list(USAGE); d = sheet.w('charts'); os.makedirs(d, exist_ok=True)
-    py = VENV_PY if os.path.exists(VENV_PY) else sys.executable
+    py, penv = procs.python(sheet, venv=True)
     def one(tr):
         tag = 'tr' if tr else 'notr'; job = os.path.join(d, f'job_{tag}.json'); res = os.path.join(d, f'res_{tag}.json')
         wj({'names': sheet.names, 'threats': threats, 'cells': {n: G.cell_path(sheet, n, tr) for n in sheet.names}}, job)
         r = subprocess.run(['nice', '-n', '10', py, os.path.join(KIT, 'charts_worker.py'), job, res], capture_output=True, text=True,
-                           env=dict(os.environ, TR='1' if tr else '0', POOL_FILE=sheet.w('grid', 'pool.json')))
+                           env=dict(os.environ, **penv, TR='1' if tr else '0', POOL_FILE=sheet.w('grid', 'pool.json')))
         if r.returncode: sys.exit(f"charts ({tag}) failed:\n{(r.stderr or r.stdout).strip()[-1500:]}")
         return tr, rj(res)
     with concurrent.futures.ThreadPoolExecutor(min(2, workers)) as ex: R = dict(ex.map(one, (1, 0)))

@@ -73,7 +73,9 @@ def smoke(sheet):
     picks = {a: {'lead': jobs[0]['lead'], 'back': jobs[0]['back'], 'v': 0.5, 'n': 1}}
     tj, _ = T1.make_jobs(sheet, picks); wj(tj[:1], os.path.join(d, 't1_jobs.json'))
     log.start(os.path.join(d, 't1_jobs.json'), os.path.join(d, 't1res'), '1 sample per cell, 1 worker')
-    run(['nice', '-n', '10', './run_jobs.sh', os.path.join(d, 't1_jobs.json'), os.path.join(d, 't1res'), '1', '1'], env=T1.sim_env(sheet), cwd=PSSIM,
+    import procs
+    run(['nice', '-n', '10', procs.exe(sheet, 'bash', name='sh'), './run_jobs.sh', os.path.join(d, 't1_jobs.json'), os.path.join(d, 't1res'), '1', '1'],
+        env={**T1.sim_env(sheet), 'NODE_BIN': procs.exe(sheet, 'node')}, cwd=PSSIM,
         stdout=subprocess.DEVNULL)
     log.done(os.path.join(d, 't1res'))
     T1.speeds(sheet, os.path.join(d, 't1_jobs.json'), os.path.join(d, 'speeds.json'))
@@ -95,6 +97,7 @@ def main():
     a = ap.parse_args()
     if a.step == 'init': return init(a.team)
     sheet = Sheet(a.team); step = (a.step, a.sub)
+    import procs; procs.own(sheet)                               # show as <prefix>-py in top
     if a.step == 'status': status(sheet)
     elif a.step == 'smoke': smoke(sheet)
     elif a.step == 'grid':

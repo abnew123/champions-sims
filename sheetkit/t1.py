@@ -13,6 +13,7 @@ replays), tw_under_tr ("zero": a Tailwind set the same turn as Trick Room scores
 the Trick Room credit), exclude_moves (my turn-one actions never to click, as ": <text>" fragments)."""
 import os, re, shutil, hashlib
 from common import *
+import procs
 
 ITEM_VARIANTS = ('colburberry', 'psychicseed')                   # tr_final.py's ITEMW: Rocky Helmet 47 / Colbur 31 / Psychic Seed 20
 
@@ -67,12 +68,13 @@ def run_all(sheet, samples=12, workers=None, force=False):
         os.makedirs(os.path.join(d, out), exist_ok=True)
         if not rj(os.path.join(d, jobs)): continue
         log.start(os.path.join(d, jobs), os.path.join(d, out), f"{samples} samples per cell, {workers} workers")
-        run(['nice', '-n', '10', './run_jobs.sh', os.path.join(d, jobs), os.path.join(d, out), str(samples), str(workers)], env={**env, **extra}, cwd=PSSIM)
+        run(['nice', '-n', '10', procs.exe(sheet, 'bash', name='sh'), './run_jobs.sh', os.path.join(d, jobs), os.path.join(d, out), str(samples), str(workers)],
+            env={**env, **extra, 'NODE_BIN': procs.exe(sheet, 'node')}, cwd=PSSIM)
         log.done(os.path.join(d, out))
     speeds(sheet)
 
 def speeds(sheet, jobs=None, out=None):
-    run(['node', 'tr_speeds.js', jobs or sheet.w('t1', 'jobs.json'), out or sheet.w('t1', 'speeds.json')], env={'MYTEAM': sheet.team_path}, cwd=PSSIM,
+    run([procs.exe(sheet, 'node'), 'tr_speeds.js', jobs or sheet.w('t1', 'jobs.json'), out or sheet.w('t1', 'speeds.json')], env={'MYTEAM': sheet.team_path}, cwd=PSSIM,
         stdout=subprocess.DEVNULL)
 
 def solve(sheet, res=None, speeds_path=None, out=None):
@@ -83,5 +85,6 @@ def solve(sheet, res=None, speeds_path=None, out=None):
     for it in ITEM_VARIANTS: os.makedirs(f'{res}_{it}', exist_ok=True)
     os.makedirs(sheet.w('t1'), exist_ok=True)
     with open(sheet.w('t1', 'solve.log'), 'w') as lg:
-        run([VENV_PY if os.path.exists(VENV_PY) else sys.executable, 'tr_final.py', res, out], env=env, cwd=PSSIM, stdout=lg)
+        py, penv = procs.python(sheet, venv=True)
+        run([py, 'tr_final.py', res, out], env={**env, **penv}, cwd=PSSIM, stdout=lg)
     return rj(out)

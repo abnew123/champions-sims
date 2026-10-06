@@ -564,6 +564,12 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     while most of the log-score gain went away (per slot: h1 -2.356, 2 samples -2.308, 4 samples -2.348), so the flattening was
     mostly sampling noise. Conclusion: a longer horizon explains part of the Protect gap, not the sharper-than-expert mixes; what is
     left points at what the planner knows that players do not (exact sets and spreads: hedging under uncertainty means more Protect
-    and switching and flatter mixes) rather than at depth. Not used for play; the one-turn solve stays the default. `EVAL_MATRIX=1|full`: the payoff matrix on each output line (rows / cols / labels / final mixes /
+    and switching and flatter mixes) rather than at depth. Not used for play; the one-turn solve stays the default. **Follow-up by the
+    Eval bar (2026-10-06, 1:30 am):** spread uncertainty does not explain it either: re-solving each player's mix on matrices averaged
+    over four draws of the opponent's spreads (444 regional decisions) left planned Protect at 8.8% vs 13.3% played, agreement and log
+    score unchanged, mixes no flatter (`evalbar/results/spread_uncertainty_day1.json`). So depth explains about half the Protect gap and
+    spread knowledge none; the user's read of the 39 costly broadcast plays (13 switches, 10 Protects, 5 setup moves) is that the engine
+    undervalues setup and switching, plus some real mistakes. Open lead for the value function: setup (boost) and switch (tempo)
+    features, to be tested on real-game outcomes before any change to play. `EVAL_MATRIX=1|full`: the payoff matrix on each output line (rows / cols / labels / final mixes /
     one-turn values and seed counts per cell, two-turn values under EVAL_HORIZON=2) for reading departures from the equilibrium against
     the opponent's actual move; "1" raises the rows and columns holding a slot's actual or most-weighted option to full seeds first.

@@ -85,6 +85,17 @@ the HP weight at the real-game ratio), rescale weight 0.7538. On the 560-game se
 0.5245) and better with Trick Room up (0.5141 against 0.5199, within noise): `results/compare_sym_sym2.json`; `results/accuracy_engine.json`
 now holds sym2's numbers. The recorded-games page (version 3) and the replay demo page (version 4) use it.
 
+**Champions broadcasts (the user asked, 2026-10-05; for watching on their own computer, no restreaming):** `broadcast.py` reads an
+official broadcast's video into the same battle log the live mode follows: the open team sheets the broadcast shows before the match
+(matched to the left / right player by the scoreboard names, kept in memory only), the four HP boxes (percentages), the battle text
+(Player 1 = left; "the opposing ..." = right) and the decision screen ("Trainers are choosing actions") as the turn boundary; one log per
+game of the set ("The Trainer lost!" ends a game; the winner is the side with Pokémon left). `watch <YouTube URL> [start]` follows a stream
+(or a recording from a time) in real time through yt-dlp, ffmpeg (2 frames a second) and Apple Vision (`recordings/ocr`), and serves the
+page with a game picker; `frames`, `ocr`, `read`, `replay` are the offline steps. Tested on the Frankfurt Regional VOD, match 1 (1:44:09):
+game 1 read in full (10 turns, Player 1 won; bar 37 61 67 30 52 72 73 65 92 95), game 2's first 5 turns; about 2-7 s a turn on 2 threads
+with the full engine data (`champ-battle-v17`, `engine_data_full.json`). It needs both team sheets: started after they were shown, it
+waits for the next game. Files stay in `out/` (frames and logs show the players' names).
+
 Possible next steps (not asked for yet): more demo games, flagging Perish Song positions on the page, Battle sim extending the engine data
 (210 games need a missing species or ability), step 2 (the user's recorded games, a belief over the opponent's hidden sets).
 

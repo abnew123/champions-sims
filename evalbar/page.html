@@ -241,7 +241,9 @@ function head() {
   $('graphTitle').textContent = NAMES ? 'Your win chance through the game' : "Player 1's win chance through the game";
   if (DATA.live) {
     $('eyebrow').textContent = 'Live · spectating';
-    $('sub').textContent = 'A Reg M-C battle going on now on Showdown, as a spectator sees it: who is winning at the start of each turn, the best options for each Pokémon on the field, and what happened. For watching other people\'s games only.';
+    const bc = (DATA.live.format || '').startsWith('Champions');
+    $('sub').textContent = bc ? 'A Pokémon Champions broadcast, read from the video as it plays: who is winning at the start of each turn, the best options for each Pokémon on the field, and what happened. Player 1 is the player on the left.'
+      : 'A Reg M-C battle going on now on Showdown, as a spectator sees it: who is winning at the start of each turn, the best options for each Pokémon on the field, and what happened. For watching other people\'s games only.';
     $('meta').innerHTML = [DATA.live.format, N ? `${N} turn${N === 1 ? '' : 's'} so far` : null, r, DATA.live.status, G.winner ? `${who(G.winner)} won${G.forfeit ? ' by forfeit' : ''}` : null]
       .filter(Boolean).map(x => `<span class="chip">${esc(x)}</span>`).join('');
   } else if (REC) {
@@ -394,7 +396,8 @@ function notes() {
   let html;
   if (DATA.live) {
     html = `<p><b>How the bar is made.</b> ${G.engine ? solve : 'For each turn the battle engine plays every pair of choices one turn ahead, scores the positions that result, and solves the turn as a game between the two players.'} The bar is the value of that game for Player 1, rescaled to match how real games turned out (log-odds times ${CALTXT}). It updates a few seconds after each turn starts.</p>
-    <p><b>What it knows.</b> What a spectator knows at the start of the turn: both team previews${DATA.live.format && DATA.live.format.startsWith('Bo3') ? ' and the open team sheets' : ''}, the Pokémon that have come in and what they have shown. ${DATA.live.format && DATA.live.format.startsWith('Bo3') ? '' : 'Sets are each species\' most common Reg M-C set until the game shows otherwise (moves used, items that activated, Mega Evolution), and stat points are guesses. '}For the Pokémon a player has not sent in yet, the three most likely combinations from their preview (given their leads) are evaluated for each player and averaged.</p>
+    ${(DATA.live.format || '').startsWith('Champions') ? `<p><b>What it reads.</b> Both open team sheets as the broadcast shows them, the HP percentages in the four HP boxes, and the battle text. The HP boxes at each decision screen set the HP and who is on the field, so a moment the broadcast cut away from is corrected at the next turn; a move or stat change shown only during a cutaway can be missed. Stat points are not on team sheets, so the engine assumes each Pokémon's most common spread. For the Pokémon a player has not sent in yet, the three most likely combinations from their sheet (given their leads) are evaluated for each player and averaged.</p>` : ''}
+    <p${(DATA.live.format || '').startsWith('Champions') ? ' hidden' : ''}><b>What it knows.</b> What a spectator knows at the start of the turn: both team previews${DATA.live.format && DATA.live.format.startsWith('Bo3') ? ' and the open team sheets' : ''}, the Pokémon that have come in and what they have shown. ${DATA.live.format && DATA.live.format.startsWith('Bo3') ? '' : 'Sets are each species\' most common Reg M-C set until the game shows otherwise (moves used, items that activated, Mega Evolution), and stat points are guesses. '}For the Pokémon a player has not sent in yet, the three most likely combinations from their preview (given their leads) are evaluated for each player and averaged.</p>
     <p><b>Fair play.</b> For watching other people's games. Do not use it on a game you are playing, and do not pass what it shows to a player while their game is going on.</p>`;
   } else if (G.engine && G.engine.bar) {
     html = `<p><b>How the bar is made.</b> ${solve} The bar is the value of that game for ${REC ? 'you' : 'Player 1'}, rescaled so that it matches how real games turned out: the engine alone is too sure of itself, so its odds are pulled towards even (log-odds times ${G.engine.cal.toFixed(2)}).</p>
@@ -429,7 +432,9 @@ async function poll() {
   try {
     const t = await (await fetch(DATA.live.url + '?t=' + Date.now(), {cache: 'no-store'})).text();
     if (t === lastLive) return; lastLive = t;
-    const follow = cur >= M; DATA = JSON.parse(t); GAMES = DATA.games; load(gi); head(); notes(); go(follow ? M : cur);
+    const follow = cur >= M, lastGame = gi >= GAMES.length - 1; DATA = JSON.parse(t); GAMES = DATA.games;
+    const moved = lastGame && GAMES.length - 1 > gi; if (lastGame) gi = Math.max(0, GAMES.length - 1);   // a new game of the set: follow it
+    load(gi); head(); notes(); go(follow || moved ? M : cur);
   } catch (e) {}
 }
 function start(saved) {

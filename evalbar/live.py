@@ -132,10 +132,13 @@ def positions(specs, outf):
     os.remove(tmp)
     return {x['name']: x for x in map(json.loads, open(outf))}
 class Live:
-    def __init__(s, room, threads, port):
-        s.room = room; s.tag = room.split('-')[-1] if not re.search(r'-\d+-[a-z0-9]+$', room) else room.split('-')[-2]
-        s.bo3 = 'bo3' in room; s.threads = threads; s.port = port; os.makedirs(OUT, exist_ok=True)
-        s.log = os.path.join(OUT, f'{s.tag}.log'); s.evf = os.path.join(OUT, f'{s.tag}_eval.jsonl'); s.data = None; s.status = 'connecting'
+    def __init__(s, room, threads, port, logfile=None, tag=None, fmt=None):
+        """room: a Showdown battle room (followed through live_feed.js); or logfile: a battle log another program writes (the broadcast
+        reader), with tag naming the outputs and fmt the format line on the page"""
+        s.room = room; s.logfile = logfile; s.fmt = fmt
+        s.tag = tag or (room.split('-')[-1] if not re.search(r'-\d+-[a-z0-9]+$', room) else room.split('-')[-2])
+        s.bo3 = logfile is not None or 'bo3' in room; s.threads = threads; s.port = port; os.makedirs(OUT, exist_ok=True)
+        s.log = logfile or os.path.join(OUT, f'{s.tag}.log'); s.evf = os.path.join(OUT, f'{s.tag}_eval.jsonl'); s.data = None; s.status = 'connecting'
         s.weights = {}; s.hyp = {}; s.poscache = {}; s.over = False; s.skip = {}
     def page(s):
         blob = {'games': [], 'live': {'url': 'data.json', 'status': 'connecting'}}
@@ -199,8 +202,8 @@ class Live:
         game = {'id': s.tag, 'title': 'Live', 'winner': g['winner'], 'forfeit': g['forfeit'], 'perish': g['perish'], 'rating': rating, 'live': True,
                 'steps': steps, 'final': {'wp': None if g['winner'] is None else 1.0 if g['winner'] == 'p1' else 0.0, 'state': g['final']}, 'acc': None,
                 'engine': {'turns': len(steps), 'seeds': 32, 'staged': True, 'bar': True, 'cal': CAL}}
-        d = {'games': [game], 'live': {'url': 'data.json', 'status': s.status, 'format': 'Bo3, open team sheets' if s.bo3 else 'Bo1, closed team sheets'}}
-        blob = json.dumps(d, ensure_ascii=False); B.leak_check(blob, g['_hidden'])
+        d = {'games': [game], 'live': {'url': 'data.json', 'status': s.status, 'format': s.fmt or ('Bo3, open team sheets' if s.bo3 else 'Bo1, closed team sheets')}}
+        blob = json.dumps(d, ensure_ascii=False); B.leak_check(blob, [h for h in g['_hidden'] if not re.fullmatch(r'Player [12]', h)])   # the broadcast reader's own labels
         s.data = d
     def leads(s, log):
         out = {'p1': [], 'p2': []}
@@ -219,14 +222,18 @@ class Live:
         s.weights[step['turn']] = {x['name']: w for w, x in sp}; s.hyp[step['turn']] = H
         return ''
     def run(s):
-        feed = subprocess.Popen(NODE + [FEED, 'watch', s.room, s.log], stderr=subprocess.PIPE, text=True)
-        s.serve(); print(f'watching {s.room}: http://localhost:{s.port}  (spectating only; never for a game you are playing)', flush=True)
+        class Done:                                                         # a log written by another program: over once it has a result
+            def __init__(d, f): d.f = f
+            def poll(d): return 0 if os.path.exists(d.f) and '|win|' in open(d.f).read() else None
+        feed = Done(s.log) if s.logfile else subprocess.Popen(NODE + [FEED, 'watch', s.room, s.log], stderr=subprocess.PIPE, text=True)
+        if s.port: s.serve()
+        if s.port: print(f'watching {s.room}: http://localhost:{s.port}  (spectating only; never for a game you are playing)', flush=True)
         seen_len = -1
         while True:
             log = open(s.log).read() if os.path.exists(s.log) else ''
             if '|turn|' not in log:
                 s.status = 'waiting for the battle to start' if log else 'connecting'
-                if feed.poll() is not None: print('the feed stopped:', feed.stderr.read().strip()); return
+                if feed.poll() is not None and not s.logfile: print('the feed stopped:', feed.stderr.read().strip()); return
                 time.sleep(1); continue
             try: g = R.parse(log)
             except Exception as e: s.status = f'could not read the log ({type(e).__name__})'; time.sleep(1); continue
@@ -243,7 +250,8 @@ class Live:
             if len(log) != seen_len or status != s.status:
                 s.status = status; s.build(log, g); seen_len = len(log)
             if feed.poll() is not None and not todo and not s.over:
-                s.over = True; print(f'battle over; the page stays up at http://localhost:{s.port} until you stop this (Ctrl-C)', flush=True)
+                s.over = True
+                if s.port: print(f'battle over; the page stays up at http://localhost:{s.port} until you stop this (Ctrl-C)', flush=True)
             time.sleep(1)
 if __name__ == '__main__':
     a = sys.argv[1:]

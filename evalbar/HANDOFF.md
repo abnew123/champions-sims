@@ -172,6 +172,17 @@ Fair play: this is for commentary on finished games and replays. Never frame it 
 The page: a self-contained HTML page published as a private artifact (load the artifact design skill first). Players are "Player 1"
 and "Player 2": no usernames on the page, in tracked files or in commit messages.
 
+## How closely top players follow the engine (study.py)
+
+`study.py <ocr .jsonl>` evaluates every turn of every broadcast game as the players knew it and compares each Pokemon's choice with the
+planner, by action (move or switch; the broadcast text shows no targets). Day 1 of the regional VOD (corrected reader, 2026-10-06): 461
+decisions; players took the planner's top pick 45% (17% by chance), the planner put 39% on what they played (56% if they had followed its
+mix), median regret 0.3 points. Summary and the costly plays (planner under 5%, over 5 points against its top action, with VOD times) are in
+`results/broadcast_study_day1.json`. Players Protect more than the planner (13% vs 9%), and the costly Protects mostly came from the
+side that won (5 of 7), the other costly plays mostly from the side that lost (12 of 18): the one-turn engine undervalues Protect. Battle sim
+is testing a two-turn horizon (EVAL_HORIZON=2) on these positions; when it messages, score its eval files the same way (decisions() with
+the evf pointed at them, `study.py replays` on its acc_eval_h1/h2) and report horizon 1 vs 2.
+
 ## Process names (the user asked, 2026-10-06)
 
 Every process this thread starts must show as `evalbar-<program>` in `top` and in Stats (which the user watches; it lists `ps -Aceo comm`), so

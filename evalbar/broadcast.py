@@ -7,7 +7,8 @@ screen ("Trainers are choosing actions"). For watching on your own computer.
   python3 evalbar/broadcast.py scan <YouTube URL> <out.ocr.jsonl> [workers=2] [fetchers=4] a whole recording, 20 minutes at a time: frames, text,
                                                                                          frames deleted; resumes where it stopped
   python3 evalbar/broadcast.py read <dir.ocr.jsonl> <out.log>                            the whole match -> battle log
-  python3 evalbar/broadcast.py replay <dir.ocr.jsonl> [speed=4] [threads=2] [port=8768]  a recorded match through the live page, as if live
+  python3 evalbar/broadcast.py replay <dir.ocr.jsonl> [speed=4] [threads=2] [port=8768] [YouTube id] [start]
+                                                                                         a recorded match through the live page, as if live
   python3 evalbar/broadcast.py watch <YouTube URL or id> [start] [threads=2] [port=8768] a broadcast in real time (live, or a recording from
                                                                                          start, e.g. 1:44:09): page at http://localhost:<port>
 Player 1 is the player on the left: the battle text speaks from their side (their Pokémon are named plainly, the other player's are
@@ -130,7 +131,7 @@ class Reader:
     """frames in time order -> battle log lines. feed() one frame's OCR at a time; lines() is the log so far."""
     def __init__(s):
         s.games = []; s.meta = []; s.sheets = {}; s.raw_sheets = []; s.frame = 0; s.names = collections.deque(maxlen=600); s.note = ''
-        s.board = None; s.match = 0; s.game_in_match = 0; s.prev_end = 0; s.owners = {}; s.new_game()
+        s.board = None; s.match = 0; s.game_in_match = 0; s.prev_end = 0; s.owners = {}; s.t0 = 0; s.new_game()
     def new_game(s):
         s.out = []; s.games.append(s.out); s.meta.append({}); s.started = False; s.turn = 0; s.in_decision = False; s.ended = False
         s.active = {}; s.hp = {}; s.last_text = None; s.slot_free = {'p1': [], 'p2': []}; s.megas = {'p1': False, 'p2': False}
@@ -186,7 +187,7 @@ class Reader:
                 left = {sd: 4 - len(s.fainted[sd]) for sd in ('p1', 'p2')}
                 win = 'p1' if left['p2'] == 0 or ('forfeit' not in text and left['p1'] > left['p2']) else 'p2' if left['p1'] == 0 or left['p2'] > left['p1'] else None
                 if win: s.emit('|', f"|win|Player {win[1]}")
-                s.ended = True; s.prev_end = s.frame
+                s.ended = True; s.prev_end = s.frame; s.meta[-1]['end'] = s.now()
             return
         # field-wide
         FIELD = [(r'twisted the dimensions', '|-fieldstart|move: Trick Room'), (r'dimensions returned to normal', '|-fieldend|move: Trick Room'),
@@ -267,6 +268,8 @@ class Reader:
                 s.emit(f"|{'-damage' if p < (s.hp.get((sd, sl)) or 100) else '-heal'}|{sd}{sl}: {s.nick(sp)}|{p}/100"); s.hp[(sd, sl)] = p
             s.hp[('mon', sd, sp)] = p
         for sd in ('p1', 'p2'): s.slot_free[sd] = []
+    def now(s): return s.t0 + (s.frame - 1) / 2                         # the video time of the current frame, in seconds
+    def mark(s): s.meta[-1].setdefault('times', {})[s.turn] = s.now()
     def feed(s, lines):
         L = [l for l in lines]; s.frame += 1
         NAT = sum(1 for l in L if l[0].strip().upper() in NATURES)
@@ -292,12 +295,12 @@ class Reader:
                 if len(s.sheets) < 2: s.owners = {}; s.assign_sheets(boxes, board)
                 if len(s.sheets) < 2: s.note = 'waiting for both team sheets: start before the broadcast shows them'; return
                 s.board = board or s.board; s.game_in_match += 1; s.meta[-1] = {'match': s.match, 'game': s.game_in_match, 'frame': s.frame}
-                s.note = ''; s.header(boxes); s.turn = turn or 1; s.emit(f'|turn|{s.turn}'); s.in_decision = True
+                s.note = ''; s.header(boxes); s.turn = turn or 1; s.emit(f'|turn|{s.turn}'); s.in_decision = True; s.mark()
             elif decision and len(boxes) >= 3 and not s.note: s.note = 'joined mid-game: the bar starts with the next game'
             return
         if s.ended: return
         if decision and not s.in_decision:
-            s.reconcile(boxes); s.turn = max(s.turn + 1, turn or 0); s.emit('|upkeep', '|', f'|turn|{s.turn}')     # upkeep: durations count down
+            s.reconcile(boxes); s.turn = max(s.turn + 1, turn or 0); s.emit('|upkeep', '|', f'|turn|{s.turn}'); s.mark()   # upkeep: durations count down
         s.in_decision = decision
         if text and not decision:
             if s.last_text and difflib.SequenceMatcher(None, text, s.last_text).ratio() > 0.85: return
@@ -346,9 +349,10 @@ class Reader:
     def logs_meta(s): return [(g, m) for g, m in zip(s.games, s.meta) if any(l.startswith('|turn|') for l in g)]
 class Runner:
     """the reader's games through the live mode, one live.Live per game, served together on one page"""
-    def __init__(s, tag, threads, port):
+    def __init__(s, tag, threads, port, video=None, t0=0):
+        """video: {'id': YouTube id, 'start': seconds, 'live': bool} to embed the player on the page; t0: the video time of the first frame"""
         import live as LV
-        s.LV = LV; s.tag = tag; s.threads = threads; s.port = port; s.reader = Reader(); s.lives = []; s.written = []
+        s.LV = LV; s.tag = tag; s.threads = threads; s.port = port; s.reader = Reader(); s.reader.t0 = t0; s.lives = []; s.written = []; s.video = video
         os.makedirs(LV.OUT, exist_ok=True); s.serve()
     def serve(s):
         import http.server
@@ -359,12 +363,16 @@ class Runner:
                 if p == '/data.json':
                     games = []
                     for i, lv in enumerate(run.lives):
-                        if lv.data and lv.data['games']: games.append({**lv.data['games'][0], 'title': f'Game {i + 1}'})
+                        if lv.data and lv.data['games']:
+                            lm = run.reader.logs_meta(); m = lm[i][1] if i < len(lm) else {}
+                            g = {**lv.data['games'][0], 'title': f'Game {i + 1}', 'end': m.get('end')}
+                            g['steps'] = [{**st, 'vt': (m.get('times') or {}).get(st['turn'])} for st in g['steps']]
+                            games.append(g)
                     st = run.reader.note or (run.lives[-1].status if run.lives else 'waiting for the first turn')
-                    b = json.dumps({'games': games, 'live': {'url': 'data.json', 'status': st, 'format': 'Champions broadcast, open team sheets'}}).encode(); ct = 'application/json'
+                    b = json.dumps({'games': games, 'video': run.video, 'live': {'url': 'data.json', 'status': st, 'format': 'Champions broadcast, open team sheets'}}).encode(); ct = 'application/json'
                 elif p in ('/', '/index.html'):
                     html = open(os.path.join(C.HERE, 'page.html')).read().replace('<title>Eval Bar</title>', '<title>Champions Eval Bar</title>', 1)
-                    html = html.replace('/*DATA*/null', json.dumps({'games': [], 'live': {'url': 'data.json', 'status': 'starting'}}))
+                    html = html.replace('/*DATA*/null', json.dumps({'games': [], 'video': run.video, 'live': {'url': 'data.json', 'status': 'starting'}}))
                     b = ('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
                          '<style>body{margin:0}</style></head><body>' + html + '</body></html>').encode(); ct = 'text/html; charset=utf-8'
                 else: self.send_error(404); return
@@ -382,9 +390,12 @@ class Runner:
             if i >= len(s.lives):
                 lv = s.LV.Live(None, s.threads, 0, logfile=f, tag=f'{s.tag}_g{i + 1}', fmt='Champions broadcast, open team sheets'); s.lives.append(lv)
                 threading.Thread(target=lv.run, daemon=True).start()
-def replay(ocrf, speed=4.0, threads=2, port=8768):
+def secs(x): return sum(int(v) * 60 ** i for i, v in enumerate(reversed(x.split(':')))) if x else 0
+def replay(ocrf, speed=4.0, threads=2, port=8768, vid=None, start=None):
+    """vid, start: the YouTube video and the time its first frame was taken from, to embed the player"""
     rows = sorted(map(json.loads, open(ocrf)), key=lambda x: x['file'])
-    run = Runner(os.path.basename(ocrf).split('.')[0], threads, port); t0 = time.time()
+    run = Runner(os.path.basename(ocrf).split('.')[0], threads, port, video={'id': vid, 'start': secs(start), 'live': False} if vid else None, t0=secs(start))
+    t0 = time.time()
     for k, row in enumerate(rows):
         wait = t0 + k / 2 / speed - time.time()
         if wait > 0: time.sleep(wait)
@@ -401,7 +412,8 @@ def watch(url, threads=2, port=8768, start=None):
     hdr = ''.join(f'{k}: {v}\r\n' for k, v in (info.get('http_headers') or {}).items())
     ff = subprocess.Popen(['nice', '-n', '10', 'ffmpeg', '-v', 'error', '-y', '-headers', hdr, '-re'] + (['-ss', start] if start else []) + ['-i', info['url'],
                            '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', os.path.join(d, 'f_%06d.jpg')])
-    run = Runner(tag, threads, port); done = 0
+    vid = re.search(r'(?:v=|youtu\.be/|/live/)([\w-]{11})', url)
+    run = Runner(tag, threads, port, video={'id': vid.group(1), 'start': secs(start), 'live': not start} if vid else None, t0=secs(start)); done = 0
     while True:
         files = sorted(f for f in os.listdir(d) if f.endswith('.jpg'))[:-1]          # the newest frame may still be being written
         new = [f for f in files if int(f[2:8]) > done]
@@ -432,7 +444,8 @@ if __name__ == '__main__':
     elif a[0] in ('replay', 'watch'):
         args = a[2:]
         try:
-            if a[0] == 'replay': replay(a[1], float(args[0]) if args else 4.0, int(args[1]) if len(args) > 1 else 2, int(args[2]) if len(args) > 2 else 8768)
+            if a[0] == 'replay': replay(a[1], float(args[0]) if args else 4.0, int(args[1]) if len(args) > 1 else 2, int(args[2]) if len(args) > 2 else 8768,
+                                        args[3] if len(args) > 3 else None, args[4] if len(args) > 4 else None)
             else:
                 st = next((x for x in args if ':' in x), None); nums = [x for x in args if ':' not in x]
                 watch(a[1], int(nums[0]) if nums else 2, int(nums[1]) if len(nums) > 1 else 8768, st)

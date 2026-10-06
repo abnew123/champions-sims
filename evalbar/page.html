@@ -71,6 +71,8 @@ header h1{font-size:clamp(28px,6vw,40px);font-weight:700;letter-spacing:-.02em;l
 .where small{display:block;font-family:var(--body);font-weight:400;font-size:12.5px;color:var(--ink2)}
 
 .picker{display:flex;flex-direction:column;gap:10px}
+.video{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:4px;overflow:hidden}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .views{display:inline-flex;border:1px solid var(--rule);border-radius:4px;overflow:hidden;align-self:flex-start;max-width:100%}
 .views button{font-family:var(--disp);font-size:13px;font-weight:600;color:var(--ink2);background:var(--panel);border:0;padding:8px 14px;cursor:pointer}
 .views button + button{border-left:1px solid var(--rule)}
@@ -173,6 +175,8 @@ section > h2{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:u
     <nav class="games" id="games" hidden aria-label="Games"></nav>
   </div>
 
+  <div class="video" id="video" hidden><div id="ytplayer"></div></div>
+
   <div class="live" id="live">
     <div class="sides">
       <div class="side"><span class="who"><i class="sw p1"></i><span id="n1">Player 1</span></span><span class="pc" id="pc1"></span></div>
@@ -244,7 +248,9 @@ function head() {
     const bc = (DATA.live.format || '').startsWith('Champions');
     $('sub').textContent = bc ? 'A Pokémon Champions broadcast, read from the video as it plays: who is winning at the start of each turn, the best options for each Pokémon on the field, and what happened. Player 1 is the player on the left.'
       : 'A Reg M-C battle going on now on Showdown, as a spectator sees it: who is winning at the start of each turn, the best options for each Pokémon on the field, and what happened. For watching other people\'s games only.';
-    $('meta').innerHTML = [DATA.live.format, N ? `${N} turn${N === 1 ? '' : 's'} so far` : null, r, DATA.live.status, G.winner ? `${who(G.winner)} won${G.forfeit ? ' by forfeit' : ''}` : null]
+    // with a video, the status follows the player, not the reader (which may be ahead of it)
+    const status = DATA.video && !DATA.video.live ? (N ? `turn ${G.steps[N - 1].turn}` : 'waiting for the first turn in the video') : DATA.live.status;
+    $('meta').innerHTML = [DATA.live.format, N ? `${N} turn${N === 1 ? '' : 's'} so far` : null, r, status, G.winner ? `${who(G.winner)} won${G.forfeit ? ' by forfeit' : ''}` : null]
       .filter(Boolean).map(x => `<span class="chip">${esc(x)}</span>`).join('');
   } else if (REC) {
     $('eyebrow').textContent = 'Your recorded ladder games';
@@ -428,14 +434,38 @@ function go(i) {
   cur = Math.max(0, Math.min(M, i)); bar(); graph(); board(); options(); events();
 }
 let lastLive = '';
+// with a video on the page, only what the player has reached is shown: turns after its time, and a result it has not got to, wait
+let RAW = null, VT = null, player = null, shownKey = '';
+function upToPlayer(d) {
+  if (VT === null || !d.video || d.video.live) return d;
+  const games = d.games.filter(g => g.steps.length && (g.steps[0].vt ?? 0) <= VT + 1).map(g => {
+    const steps = g.steps.filter(s => s.vt == null || s.vt <= VT + 1), over = g.end != null && VT >= g.end;
+    return {...g, steps, winner: over ? g.winner : null, final: over ? g.final : {...g.final, wp: null}, live: true};
+  });
+  return {...d, games};
+}
+function apply() {
+  if (!RAW) return;
+  const v = upToPlayer(RAW), key = v.games.map(g => g.steps.length + (g.winner || '')).join(',') + '|' + (RAW.live && RAW.live.status);
+  if (key === shownKey) return; shownKey = key;
+  const follow = cur >= M, lastGame = gi >= GAMES.length - 1; DATA = v; GAMES = DATA.games;
+  const moved = lastGame && GAMES.length - 1 > gi; if (lastGame) gi = Math.max(0, GAMES.length - 1);   // a new game of the set: follow it
+  load(gi); head(); notes(); go(follow || moved ? M : cur);
+}
 async function poll() {
   try {
     const t = await (await fetch(DATA.live.url + '?t=' + Date.now(), {cache: 'no-store'})).text();
-    if (t === lastLive) return; lastLive = t;
-    const follow = cur >= M, lastGame = gi >= GAMES.length - 1; DATA = JSON.parse(t); GAMES = DATA.games;
-    const moved = lastGame && GAMES.length - 1 > gi; if (lastGame) gi = Math.max(0, GAMES.length - 1);   // a new game of the set: follow it
-    load(gi); head(); notes(); go(follow || moved ? M : cur);
+    if (t === lastLive) return; lastLive = t; RAW = JSON.parse(t); apply();
   } catch (e) {}
+}
+function video() {
+  const v = DATA.video; if (!v || !v.id) return;
+  $('video').hidden = false;
+  window.onYouTubeIframeAPIReady = () => {
+    player = new YT.Player('ytplayer', {videoId: v.id, playerVars: {start: v.start || 0, autoplay: 1, playsinline: 1, rel: 0}});
+    setInterval(() => { try { const t = player.getCurrentTime(); if (typeof t === 'number' && t > 0) { VT = t; apply(); } } catch (e) {} }, 1000);
+  };
+  const sc = document.createElement('script'); sc.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(sc);
 }
 function start(saved) {
   if (VIEWS && saved && VIEWS[saved.view]) view = saved.view;
@@ -451,7 +481,7 @@ function start(saved) {
   });
   let rz; window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(graph, 120); });
   window.claude?.hot?.snapshot?.(() => ({cur, gi, view}));
-  if (DATA.live) { poll(); setInterval(poll, 2000); }
+  if (DATA.live) { video(); poll(); setInterval(poll, 2000); }
 }
 if (window.claude?.hot?.ready) window.claude.hot.ready(start); else start(window.claude?.hot?.data ?? {});
 </script>

@@ -1,7 +1,7 @@
 """Validate Battle sim's empirical opponent pool (pssim/opp_pool.json, 2026-10-06) with the sim-vs-real bar.
 The 10 simcmp teams (their latest six and their climb brings per rule archetype) play real pool entries (the entry's six with its sets,
 their four as actually brought, in lead order), one game per entry, the same entries in the same order for every team (common random
-numbers). Pool teams use moves and species outside the climb's spot data, so these battles run on native/engine_data_full.json.
+numbers; SEED_PER_JOB=1 gives each entry its own battle and sampling seeds). Pool teams use moves and species outside the climb's spot data, so these battles run on native/engine_data_full.json.
 Compared, on one footing, with the archetype models (the same 10 teams' archetype confirm games under the same setup):
   sim: our teams' mean win share vs an opponent group     real: the field's per-game win rate vs that group (1 - its own rate)
 with each side's overall offset removed (our teams are climbed), gaps in log-odds, RMS over groups with enough data. Groups are the
@@ -48,11 +48,12 @@ def run(n, min_rating):
     entries = sample(n, min_rating)
     print(time.strftime('%I:%M %p'), f"{len(entries)} pool entries; groups: {len(set(e['group'] for e in entries))}; setup {E.sim()}", flush=True)
     os.environ['TS_ENGINE_DATA'] = FULL
+    os.environ['SEED_PER_JOB'] = '1'          # battle_starts.js: independent battle/sampling seeds per one-game job, same across our teams
     for name in S.DEFAULT:
         team, fixed, label, seed = S.latest(name)
         rows = E.run_jobs(team, jobs_for(team, fixed, entries), 1, SEED, thr(), 'poolbar')
         print(time.strftime('%I:%M %p'), f"pool: {name} {100 * sum(x['v'] for r in rows for x in r['rows']) / max(1, sum(len(r['rows']) for r in rows)):.1f}", flush=True)
-    os.environ.pop('TS_ENGINE_DATA')
+    os.environ.pop('TS_ENGINE_DATA'); os.environ.pop('SEED_PER_JOB')
     for name in S.DEFAULT:                                            # the archetype baseline under the same setup (confirm seeds, 60 jobs x 4)
         team, fixed, label, seed = S.latest(name)
         r = E.run_team(team, 4, seed, thr(), fixed=fixed, label=label)

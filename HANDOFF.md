@@ -479,6 +479,17 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     matchup error against real regional results over the nine non-Perish archetypes is 0.26 log-odds (v3 0.26, v8 0.25): unchanged.
     The remaining error has the same shape in every setup (Rain, the Trick Room archetypes and Rain + Sun 0.3-0.4 too hard as opponents;
     Tailwind and Balance 0.25-0.33 too easy) and probably lives in the replay archetype models (leads, brings), not in the value.
+  - **Proposal, not started (Team search, 2026-10-06, 2:30 am): cluster the opponent pool instead of the name-based archetype rules.**
+    Evidence: mean Jaccard similarity of random pairs of sixes inside each rule archetype (regional sheets / ladder previews): Tailwind
+    0.36/0.34, Sun 0.20/0.23, Indeedee TR 0.19/0.18, Rain 0.24/0.24, Balance 0.30/0.51, Sand 0.40/0.36, Snow 0.29/0.33, TR without
+    Indeedee 0.22/0.26, Rain+Sun 0.51/0.63, Perish 0.37/0.37: Sun, Indeedee TR and TR are broad buckets that six lead pairs
+    under-represent; ladder "Balance" is mostly one copied six (Rillaboom 96%, Incineroar 84%, Garchomp 74%, Gholdengo 73%, Raichu 67%,
+    Volcarona 64%); 12-20% of "Balance" carries Dragonite or Aerodactyl with Tailwind, which the rules ignore. Sketch: k-medoids on
+    Jaccard over sixes from the replay corpus; each cluster with its own lead pairs and sets, weighted by its frequency in the target
+    meta; each cluster tagged with its nearest named archetype so the sheets keep nameable rules. This is the "archetype opponent
+    models" lever left after race / DP2 (the regional bar stayed at 0.26). Costs: a fresh Team search climb (its weights, results,
+    Perish stock rates and the sim-vs-real table are keyed by the 10 names), and the TR sheet's lead tabs depend on the names; so it
+    comes after the current climb, with both threads looped in. Awaiting the user's call on priority.
   - **Final setup: champ-battle-v12 + egvalue9.json + RACE=1 + DP2=1 + anticipation** (see the top of this file). What it is: status and
     Tailwind weights from real games; a damage-race feature; a two-turn check on second Protects; slopes fitted on eleven teams. What it
     is not: it cannot play Perish trap, and absolute matchup win rates carry about 6 points of error per archetype.

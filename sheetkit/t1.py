@@ -11,7 +11,7 @@ sheet.json "t1" options: reader_w (weight on the reader number, default 0.75), t
 counts for whichever side brought the slower four, the right model for a Trick Room team; "fitted": for whoever set it, as fitted on
 replays), tw_under_tr ("zero": a Tailwind set the same turn as Trick Room scores nothing), trmult_file (per-archetype multipliers on
 the Trick Room credit), exclude_moves (my turn-one actions never to click, as ": <text>" fragments)."""
-import os, shutil, hashlib
+import os, re, shutil, hashlib
 from common import *
 
 ITEM_VARIANTS = ('colburberry', 'psychicseed')                   # tr_final.py's ITEMW: Rocky Helmet 47 / Colbur 31 / Psychic Seed 20
@@ -28,20 +28,31 @@ def make_jobs(sheet, picks):
     return jobs, [j for j in jobs if 'Indeedee-F' in j['pair'].split(' + ')]
 
 def write_jobs(sheet, picks):
-    """Write work/t1/jobs.json. Results are named by job number, so when the jobs, the six or the scoring options have changed since the
-    results in work/t1/ were made, those results are moved to work/t1/archive_<n>/ instead of being taken for the new jobs'."""
+    """Write work/t1/jobs.json. Results are named by job number, so a result is kept only when the job with that number is the same
+    job as before (same archetype, opposing lead, lead and back row) and the six and the scoring options are unchanged; every other
+    result is moved to work/t1/archive_<n>/, so changed picks are re-run and unchanged ones are not."""
     jobs, items = make_jobs(sheet, picks); d = sheet.w('t1'); os.makedirs(d, exist_ok=True)
     h = lambda o: hashlib.sha1(json.dumps(o, sort_keys=True).encode()).hexdigest()[:10]
-    st = {'team': h(sheet.team), 'jobs': h(jobs), 'env': h(sim_env(sheet) | {'MYTEAM': ''})}
-    old = rj(os.path.join(d, 'stamp.json')) if os.path.exists(os.path.join(d, 'stamp.json')) else None
-    res = [x for x in ['res'] + [f'res_{it}' for it in ITEM_VARIANTS] if os.path.isdir(os.path.join(d, x)) and os.listdir(os.path.join(d, x))]
-    if res and old != st:
-        k = 1
-        while os.path.exists(os.path.join(d, f'archive_{k}')): k += 1
-        os.makedirs(os.path.join(d, f'archive_{k}'))
-        for x in res + [f for f in ('jobs.json', 'jobs_items.json', 'speeds.json', 'stamp.json') if os.path.exists(os.path.join(d, f))]:
-            shutil.move(os.path.join(d, x), os.path.join(d, f'archive_{k}', x))
-        print(f"the jobs or the six changed: earlier turn-one results moved to work/t1/archive_{k}/")
+    st = {'team': h(sheet.team), 'env': h(sim_env(sheet) | {'MYTEAM': ''})}
+    old = rj(os.path.join(d, 'stamp.json')) if os.path.exists(os.path.join(d, 'stamp.json')) else {}
+    same_six = {k: old.get(k) for k in st} == st
+    moved = 0; arch = None
+    for name, res, new_jobs in (('jobs.json', 'res', jobs), ('jobs_items.json', 'res_colburberry', items), ('jobs_items.json', 'res_psychicseed', items)):
+        prev = rj(os.path.join(d, name)) if os.path.exists(os.path.join(d, name)) else []
+        rd = os.path.join(d, res)
+        if not os.path.isdir(rd): continue
+        for f in os.listdir(rd):
+            m = re.match(r'^(\d+)\.json$', f)
+            if m and same_six and int(m.group(1)) < len(prev) and int(m.group(1)) < len(new_jobs) and prev[int(m.group(1))] == new_jobs[int(m.group(1))]: continue
+            if arch is None:
+                k = 1
+                while os.path.exists(os.path.join(d, f'archive_{k}')): k += 1
+                arch = os.path.join(d, f'archive_{k}')
+            os.makedirs(os.path.join(arch, res), exist_ok=True); shutil.move(os.path.join(rd, f), os.path.join(arch, res, f)); moved += 1
+    if arch:
+        for f in ('jobs.json', 'jobs_items.json', 'stamp.json'):
+            if os.path.exists(os.path.join(d, f)): shutil.copy(os.path.join(d, f), os.path.join(arch, f))
+        print(f"{moved} turn-one results no longer match their job (changed picks, or a changed six): moved to {os.path.relpath(arch, sheet.dir)}/")
     wj(jobs, os.path.join(d, 'jobs.json')); wj(items, os.path.join(d, 'jobs_items.json')); wj(st, os.path.join(d, 'stamp.json'))
     return jobs, items
 

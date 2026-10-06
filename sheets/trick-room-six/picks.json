@@ -1,6 +1,6 @@
 {
  "made": "2026-10-05",
- "setup": "v4-eg5",
+ "setup": "v13-dp2-race-eg9",
  "picks": {
   "Tailwind goodstuffs": {
    "lead": [
@@ -11,13 +11,13 @@
     "Torkoal",
     "Kingambit"
    ],
-   "v": 0.925,
-   "n": 384,
-   "source": "Torkoal spread A/B, 32 HP / 2 SpD arm (first game index 2000), the pick from the bring matrix + fresh confirmation",
+   "v": 0.963,
+   "n": 288,
+   "source": "bring matrix + fresh confirmation",
    "changed": false,
-   "best": "Farigiraf+Incineroar / Blastoise+Kingambit",
-   "best_v": null,
-   "sheet_v": null
+   "best": "Farigiraf+Incineroar / Torkoal+Kingambit",
+   "best_v": 0.963,
+   "sheet_v": 0.963
   },
   "Sun": {
    "lead": [
@@ -28,13 +28,13 @@
     "Farigiraf",
     "Incineroar"
    ],
-   "v": 0.515,
+   "v": 0.463,
    "n": 288,
    "source": "bring matrix + fresh confirmation",
    "changed": false,
-   "best": "Blastoise+Incineroar / Farigiraf+Kingambit",
-   "best_v": 0.519,
-   "sheet_v": 0.515
+   "best": "Farigiraf+Kingambit / Blastoise+Incineroar",
+   "best_v": 0.483,
+   "sheet_v": 0.463
   },
   "Indeedee TR / Psychic Terrain": {
    "lead": [
@@ -45,32 +45,49 @@
     "Blastoise",
     "Incineroar"
    ],
-   "v": 0.68,
+   "v": 0.604,
    "n": 288,
    "source": "bring matrix + fresh confirmation",
-   "changed": true,
+   "changed": false,
    "best": "Farigiraf+Kingambit / Blastoise+Incineroar",
-   "best_v": 0.68,
-   "sheet_v": 0.599
+   "best_v": 0.604,
+   "sheet_v": 0.604
   },
   "Rain": {
    "lead": [
+    "Blastoise",
+    "Farigiraf"
+   ],
+   "back": [
     "Torkoal",
+    "Incineroar"
+   ],
+   "v": 0.617,
+   "n": 288,
+   "source": "bring matrix + fresh confirmation",
+   "changed": true,
+   "best": "Blastoise+Farigiraf / Torkoal+Incineroar",
+   "best_v": 0.617,
+   "sheet_v": 0.506
+  },
+  "Balance, no speed control": {
+   "lead": [
+    "Farigiraf",
     "Incineroar"
    ],
    "back": [
     "Blastoise",
-    "Farigiraf"
+    "Torkoal"
    ],
-   "v": 0.544,
-   "n": 384,
-   "source": "Torkoal spread A/B, 32 HP / 2 SpD arm (first game index 2000), the pick from the bring matrix + fresh confirmation",
-   "changed": false,
-   "best": "Blastoise+Farigiraf / Torkoal+Incineroar",
-   "best_v": null,
-   "sheet_v": null
+   "v": 0.861,
+   "n": 288,
+   "source": "bring matrix + fresh confirmation",
+   "changed": true,
+   "best": "Farigiraf+Incineroar / Blastoise+Torkoal",
+   "best_v": 0.861,
+   "sheet_v": 0.729
   },
-  "Balance, no speed control": {
+  "Sand": {
    "lead": [
     "Blastoise",
     "Farigiraf"
@@ -79,30 +96,13 @@
     "Kingambit",
     "Incineroar"
    ],
-   "v": 0.8,
+   "v": 0.736,
    "n": 288,
    "source": "bring matrix + fresh confirmation",
-   "changed": false,
-   "best": "Farigiraf+Incineroar / Blastoise+Torkoal",
-   "best_v": 0.811,
-   "sheet_v": 0.8
-  },
-  "Sand": {
-   "lead": [
-    "Farigiraf",
-    "Incineroar"
-   ],
-   "back": [
-    "Blastoise",
-    "Kingambit"
-   ],
-   "v": 0.828,
-   "n": 288,
-   "source": "bring matrix + fresh confirmation",
-   "changed": false,
-   "best": "Farigiraf+Incineroar / Blastoise+Kingambit",
-   "best_v": 0.828,
-   "sheet_v": 0.828
+   "changed": true,
+   "best": "Blastoise+Farigiraf / Kingambit+Incineroar",
+   "best_v": 0.736,
+   "sheet_v": 0.661
   },
   "Snow": {
    "lead": [
@@ -113,13 +113,13 @@
     "Torkoal",
     "Incineroar"
    ],
-   "v": 0.878,
-   "n": 384,
-   "source": "Torkoal spread A/B, 32 HP / 2 SpD arm (first game index 2000), the pick from the bring matrix + fresh confirmation",
+   "v": 0.927,
+   "n": 288,
+   "source": "bring matrix + fresh confirmation",
    "changed": false,
-   "best": "Farigiraf+Incineroar / Torkoal+Kingambit",
-   "best_v": null,
-   "sheet_v": null
+   "best": "Blastoise+Farigiraf / Torkoal+Incineroar",
+   "best_v": 0.927,
+   "sheet_v": 0.927
   },
   "Trick Room without Indeedee": {
    "lead": [
@@ -130,13 +130,13 @@
     "Blastoise",
     "Torkoal"
    ],
-   "v": 0.728,
-   "n": 384,
-   "source": "Torkoal spread A/B, 32 HP / 2 SpD arm (first game index 2000), the pick from the bring matrix + fresh confirmation",
+   "v": 0.699,
+   "n": 288,
+   "source": "bring matrix + fresh confirmation",
    "changed": false,
-   "best": "Blastoise+Kingambit / Torkoal+Incineroar",
-   "best_v": null,
-   "sheet_v": null
+   "best": "Farigiraf+Incineroar / Blastoise+Torkoal",
+   "best_v": 0.699,
+   "sheet_v": 0.699
   },
   "Rain + sun": {
    "lead": [
@@ -147,13 +147,13 @@
     "Torkoal",
     "Farigiraf"
    ],
-   "v": 0.502,
-   "n": 384,
-   "source": "Torkoal spread A/B, 32 HP / 2 SpD arm (first game index 2000), the pick from the bring matrix + fresh confirmation",
+   "v": 0.561,
+   "n": 288,
+   "source": "bring matrix + fresh confirmation",
    "changed": false,
-   "best": "Blastoise+Farigiraf / Torkoal+Incineroar",
-   "best_v": null,
-   "sheet_v": null
+   "best": "Blastoise+Incineroar / Torkoal+Farigiraf",
+   "best_v": 0.561,
+   "sheet_v": 0.561
   },
   "Perish trap": {
    "lead": [
@@ -164,15 +164,14 @@
     "Torkoal",
     "Farigiraf"
    ],
-   "v": 0.914,
-   "n": 384,
-   "source": "Torkoal spread A/B, 32 HP / 2 SpD arm (first game index 2000), the pick from the bring matrix + fresh confirmation",
+   "v": 0.919,
+   "n": 288,
+   "source": "bring matrix + fresh confirmation",
    "changed": false,
    "best": "Blastoise+Kingambit / Torkoal+Farigiraf",
-   "best_v": null,
-   "sheet_v": null
+   "best_v": 0.919,
+   "sheet_v": 0.919
   }
  },
- "games": "48 fresh games per opposing lead (first game index 1000), 288 per four",
- "note": "Picks: bring matrix + fresh confirmation, run with Torkoal 12 HP / 22 SpD (2026-10-04). Torkoal went back to 32 HP / 2 SpD on 2026-10-05: the win share of the six tabs that bring it is the 32 HP arm of the spread A/B (384 games each, pssim/results/tork_ab_old); the other four tabs are unchanged. The picks themselves were not re-chosen; the rerun on the new planner does that."
+ "games": "bring matrix: 16 games per opposing lead from index 600; confirmation: 48 fresh games per opposing lead from index 1000 (288 per four)"
 }

@@ -18,6 +18,7 @@ import picks as P
 SCREEN_G0, MATRIX_G0, MATRIX_GAMES = 9000, 9100, 32
 
 SOURCE = os.environ.get('OPTIMAL_SIXES', 'model')                # model: sixes reconstructed from the archetype models; pool: real sixes
+                                                                 # (with cards the sixes are always the card's own real sixes: see sixes())
 OUT = 'optimal' if SOURCE == 'model' else 'optimal_' + SOURCE     # where a run's battles go (work/<OUT>) and its result (<OUT>.json)
 TOP_SIXES = 6                                                    # pool: the most common sixes per tab
 
@@ -48,11 +49,28 @@ def pool_sixes(sheet):
                    'six': [{**m, 'evs': spread(m['species'], m['nature'])} for m in x['six']]} for x in top]
     return out
 
+def card_sixes(sheet):
+    """per card, its group's TOP_SIXES most common real sixes (pssim/opp_pool.py sixes), weighted by how often each was seen"""
+    py = VENV_PY if os.path.exists(VENV_PY) else sys.executable; tmp = _w(sheet, 'pool_card.json'); out = {}
+    SM = rj(os.path.join(ROOT, 'regionals', 'smogon_mc_sets.json'))
+    def spread(species, nature):                                   # as opp_pool.spread (importing that module needs numpy)
+        x = SM.get(species) or SM.get(species.split('-')[0])
+        if x and x.get('evs'): return x['evs']
+        return [32, 32, 0, 0, 2, 0] if nature in ('Adamant', 'Jolly', 'Brave', 'Careful', 'Impish') else [32, 0, 0, 32, 2, 0]
+    for m, c in CARDS.items():
+        group = m if c['rule'] else 'other:' + m[len('Other '):]
+        subprocess.run([py, 'opp_pool.py', 'sixes', group, str(TOP_SIXES), tmp], cwd=PSSIM, stdout=subprocess.DEVNULL, check=True)
+        xs = [x for x in rj(tmp)['sixes'] if len(x['six']) == 6]; W = sum(x['count'] for x in xs)
+        out[m] = [{'label': ', '.join(s['species'] for s in x['six']), 'weight': x['count'] / W, 'count': x['count'],
+                   'six': [{**s, 'evs': spread(s['species'], s['nature'])} for s in x['six']]} for x in xs]
+    os.remove(tmp); return out
+
 def sixes(sheet):
     p = _w(sheet, 'sixes.json')
     if not os.path.exists(p):
         os.makedirs(os.path.dirname(p), exist_ok=True)
-        if SOURCE == 'pool': wj(pool_sixes(sheet), p)
+        if CARDS: wj(card_sixes(sheet), p)
+        elif SOURCE == 'pool': wj(pool_sixes(sheet), p)
         else:
             r = subprocess.run(['node', '../sheetkit/opp_sixes.js'], env=dict(os.environ, MYTEAM=sheet.team_path), cwd=PSSIM, capture_output=True, text=True, check=True)
             open(p, 'w').write(r.stdout)
@@ -113,6 +131,23 @@ def run(sheet, threads=None, force=False, stage='all'):
     threads = threads_arg(threads, force); log = RunLog(sheet, OUT)
     if stage in ('all', 'screen'): run_screen(sheet, threads, log)
     if stage in ('all', 'matrix'): run_matrix(sheet, threads, log)
+
+def adopt(sheet, out=print):
+    """picks.json from the report: each tab's (card's) pick becomes its best candidate when both sides pick, and its number that
+    candidate's win share against each opposing six's strongest answer (the user's choice, 2026-10-06: the sheet's percentages assume
+    both players pick their four well). The fresh-game number against the usual brings is kept as replay_v."""
+    R = rj(sheet.p(OUT + '.json')); d = rj(sheet.p('picks.json')); P_ = d['picks']; n = 0
+    V, share, names, _, _ = P.load(sheet.w('confirm', 'res*', '*.json'))
+    for a, r in R.items():
+        old = P_.get(a, {}); key = (frozenset(r['lead']), frozenset(r['back']))
+        teams = [t for t in V if t[0] == a and key in V[t]]
+        rv = sum(share[t] * mean(list(V[t][key].values())) for t in teams) / sum(share[t] for t in teams) if teams else None
+        changed = not old or key != (frozenset(old['lead']), frozenset(old['back']))
+        P_[a] = {'lead': r['lead'], 'back': r['back'], 'v': r['v'], 'basis': 'both sides pick', 'replay_v': round(rv, 3) if rv is not None else None,
+                 'answers': r['answers'], 'changed': changed}
+        n += changed; out(f"{a}: {'NEW ' if changed else ''}{'+'.join(r['lead'])} / {'+'.join(r['back'])}  {100*r['v']:.0f}% when they pick too")
+    d.update(picks=P_, basis='both sides pick their four (optimal step, ' + OUT + ')'); wj(d, sheet.p('picks.json'), indent=1)
+    out(f"picks.json: {n} fours changed")
 
 def report(sheet, out=print):
     S6 = sixes(sheet); picks = rj(sheet.p('picks.json'))['picks']; scr = screen_results(sheet)

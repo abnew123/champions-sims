@@ -34,7 +34,7 @@ def write_jobs(sheet, picks):
     result is moved to work/t1/archive_<n>/, so changed picks are re-run and unchanged ones are not."""
     jobs, items = make_jobs(sheet, picks); d = sheet.w('t1'); os.makedirs(d, exist_ok=True)
     h = lambda o: hashlib.sha1(json.dumps(o, sort_keys=True).encode()).hexdigest()[:10]
-    st = {'team': h(sheet.team), 'env': h(sim_env(sheet) | {'MYTEAM': ''})}
+    st = {'team': h(sheet.team), 'env': h(sim_env(sheet) | {'MYTEAM': ''}), 'opponents': OPPONENTS['kind']}
     old = rj(os.path.join(d, 'stamp.json')) if os.path.exists(os.path.join(d, 'stamp.json')) else {}
     same_six = {k: old.get(k) for k in st} == st
     moved = 0; arch = None
@@ -81,7 +81,13 @@ def solve(sheet, res=None, speeds_path=None, out=None):
     c = t1cfg(sheet); res = res or sheet.w('t1', 'res'); out = out or sheet.p('t1.json')
     env = {'READER_W': str(c['reader_w']), 'TR_SPEEDS': speeds_path or sheet.w('t1', 'speeds.json'), 'TR_CREDIT': c['tr_credit'],
            'EXCLUDE_MOVES': ','.join(c.get('exclude_moves', []))}
-    if c.get('trmult_file'): env['TRMULT_FILE'] = os.path.normpath(sheet.p(c['trmult_file']))
+    if c.get('trmult_file'):
+        tm = rj(os.path.normpath(sheet.p(c['trmult_file'])))
+        if CARDS:                                                 # keyed by archetype: each card takes its tab's archetype's multiplier
+            arch_of = {a['key']: a['model'] for a in rj(os.path.join(KIT, 'archetypes.json'))['archetypes']}
+            tm = {m: tm.get(arch_of[c_['tab']], 1.0) for m, c_ in CARDS.items()}
+            wj(tm, sheet.w('t1', 'trmult_cards.json')); env['TRMULT_FILE'] = sheet.w('t1', 'trmult_cards.json')
+        else: env['TRMULT_FILE'] = os.path.normpath(sheet.p(c['trmult_file']))
     for it in ITEM_VARIANTS: os.makedirs(f'{res}_{it}', exist_ok=True)
     os.makedirs(sheet.w('t1'), exist_ok=True)
     with open(sheet.w('t1', 'solve.log'), 'w') as lg:

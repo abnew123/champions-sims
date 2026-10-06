@@ -92,6 +92,18 @@ thread maintains the kit and owns `sheets/trick-room-six/`.
   port 8766, with sections Sheets (kit runs, also ones pulled from a cloud box), Battle sim and Team search (that thread's own cards).
   The same server shows built sheets at `/sheets/<team>/work/preview.html`; the separate `sheets-preview` entry is gone.
 
+## Cards: opponents by core group (started 2026-10-06; the user's choice)
+
+The user asked to move the sheet onto Battle sim's real-team classification and chose the layout: the ten archetype tabs stay, each
+holding one card per core group (in order of how common) plus an "other" card, and the "Which tab" guide becomes the ordered rule list,
+each rule jumping to its card. 32 cards (25 rules, two too thin for a card of their own; 8 "other" cards), built by
+`sheetkit/opponents.py`. `sheets/trick-room-six/sheet.json` has `"opponents": "cards"`; the archetype-era results are in
+`work/archetypes/` and `archive_v21/` (picks, turn-one plans, guide, notes of Versions 18-21; the published Version 21 is still
+archetype-based). The new matrix jobs (15,750) and each card's real sixes are written. The whole rerun is about 550,000 battles
+(`sheetkit/cloud/all.sh`), so it waits for a cloud box the user said they would start later on 2026-10-06. After it: write `notes.json`
+per card (old notes keyed by archetype are in `archive_v21/notes.json`), update `text.json` (the intro paragraphs talk about tabs and
+archetypes), build, check on phone, and show the user before publishing.
+
 ## Both sides pick their four (started 2026-10-06)
 
 The user asked that the sheet's whole-game percentages assume both players pick their four optimally (the sim's opponents always bring

@@ -58,6 +58,7 @@ def lead_card(sheet, arch, pick, plans, note):
     card = {'lead': [mine(x) for x in lead.split('+')], 'back': ', '.join(mine(x) for x in back), 'v': [pct(wavg(2)), pct(wavg(3))], 'top': None}
     if stat: card['tr'] = pct(wavg(5))
     card.update(rule='', vs=[[pair_name(r[1]), round(r[0], 1), [pct(r[2]), pct(r[3])], r[4]] for r in rows], note=note or '', fb=1, fbw=round(100 * pick['v']))
+    if pick.get('basis') == 'both sides pick': card['fbt'] = f"Wins {round(100 * pick['v'])}% of whole-game sims when they bring their best four"
     return card
 
 def leads_data(sheet, picks=None, t1=None, notes=None, guide=None):
@@ -66,13 +67,36 @@ def leads_data(sheet, picks=None, t1=None, notes=None, guide=None):
     notes = notes if notes is not None else (rj(sheet.p('notes.json')) if os.path.exists(sheet.p('notes.json')) else {})
     guide = guide if guide is not None else (rj(sheet.p('guide.json')) if os.path.exists(sheet.p('guide.json')) else {})
     out = []
-    for a in TABS:
-        if a['model'] not in picks: continue
-        card = lead_card(sheet, a['model'], picks[a['model']], plans, notes.get(a['model']))
-        gp = guide.get('plans', {}).get(a['model'])
-        if gp and gp.get('lines'): card['plan'] = gp['lines']               # the game plan, from the strategy-guide battles of this four
-        out.append({'k': a['key'], 'tab': a['tab'], 'picks': [card]})
+    for t in TABS:                                                # a tab: one archetype (or, with cards, every card under it)
+        cards = []
+        for m in t['models']:
+            if m not in picks: continue
+            card = lead_card(sheet, m, picks[m], plans, notes.get(m))
+            if CARDS: card = {'when': f"{CARDS[m]['label']} &middot; {CARDS[m]['share']:.1f}% of teams", **card}
+            gp = guide.get('plans', {}).get(m)
+            if gp and gp.get('lines'): card['plan'] = gp['lines']           # the game plan, from the strategy-guide battles of this four
+            cards.append(card)
+        if cards: out.append({'k': t['key'], 'tab': t['tab'], 'picks': cards})
     return out
+
+def guide_html(L):
+    """the "which tab" guide: archetypes, a first-match list of species; cards, the ordered core rules, each jumping to its card"""
+    if not CARDS:
+        return ('<p class="lguide" id="lguide"><b>Which tab:</b> take the first match in their six. ' + ' &middot; '.join(
+            f'{w}&nbsp;&rarr;&nbsp;<button type="button" class="lgk" data-k="{k}">{BY_KEY[k]["tab"]}</button>' for w, k in GUIDE) + '</p>')
+    C = rj(os.path.join(KIT, 'opponents', 'cards.json')); pos = {}
+    for t in L:
+        for i, c in enumerate(t['picks']): pos[t['k'], c['when'].split(' &middot; ')[0]] = i
+    def at(card):                                                 # (tab key, the card's place on its tab)
+        c = CARDS[card]; return c['tab'], pos.get((c['tab'], c['label']), 0)
+    def label(text): return re.sub(r' \(no ([^)]*)\)', r' <span class="lno">without \1</span>', text)
+    rules = ''.join(f'<li><button type="button" class="lgk" data-k="{at(r["card"])[0]}" data-c="{at(r["card"])[1]}">{label(r["label"])}</button>'
+                    f'<span class="lrt">{BY_KEY[r["tab"]]["tab"]}</span></li>' for r in C['guide_rules'] if r['card'] in CARDS)
+    other = lambda k: next((m for m in BY_KEY[k]['models'] if m.startswith('Other ')), BY_KEY[k]['models'][0])
+    fall = ' &middot; '.join(f'{w}&nbsp;&rarr;&nbsp;<button type="button" class="lgk" data-k="{k}" data-c="{at(other(k))[1]}">{BY_KEY[k]["tab"]}</button>'
+                             for w, k in GUIDE if k in BY_KEY)
+    return (f'<div class="lguide" id="lguide"><b>Which card:</b> take the first line their six matches.<ol class="lrules">{rules}</ol>'
+            f'<p class="lfall"><b>None matches:</b> the first match in their six. {fall}</p></div>')
 
 def tells_html(sheet):
     g = rj(sheet.p('guide.json')) if os.path.exists(sheet.p('guide.json')) else {}
@@ -148,8 +172,7 @@ def render(sheet, L=None, template=None):
         'NAV': '<!--JUMPLEADS--><a href="#leads">Leads</a><a href="#team">Team</a>' + ''.join(
             f'<a href="#{k}">{k.capitalize()}</a>' for k in ('coverage', 'matchups', 'speed') if have[k]),
         'LEADS_INTRO': paras(text['leads_intro'], '    '),
-        'LGUIDE': '<p class="lguide" id="lguide"><b>Which tab:</b> take the first match in their six. ' + ' &middot; '.join(
-            f'{w}&nbsp;&rarr;&nbsp;<button type="button" class="lgk" data-k="{k}">{BY_KEY[k]["tab"]}</button>' for w, k in GUIDE) + '</p>',
+        'LGUIDE': guide_html(L),
         'LEADS_METHOD': text['leads_method'], 'STORAGE_KEY': c.get('storage_key', sheet.slug + '-leads-tab'),
         'T1_STAT': f'<span class="lptr">Sets {stat} <b>${{p.tr}}%</b></span>' if stat else '',
         'L_DATA': 'const L=[\n' + ',\n'.join(js(t) for t in L) + '\n];',

@@ -5,7 +5,9 @@ const {Battle, Dex, Teams} = require('pokemon-showdown');
 const dex = Dex.mod('champions');
 const fs = require('fs');
 const foes = JSON.parse(fs.readFileSync(__dirname + '/../foes.json'));
-const OPP = Object.assign({}, JSON.parse(fs.readFileSync(__dirname + '/opp_model_a.json')), JSON.parse(fs.readFileSync(__dirname + '/opp_model_b.json')));
+// OPP_MODEL=<file>: another opponent model in the same shape (e.g. the sheet kit's per-group models built from real teams); default the archetypes
+const OPP = process.env.OPP_MODEL ? JSON.parse(fs.readFileSync(process.env.OPP_MODEL))
+  : Object.assign({}, JSON.parse(fs.readFileSync(__dirname + '/opp_model_a.json')), JSON.parse(fs.readFileSync(__dirname + '/opp_model_b.json')));
 // post-turn-1 win model (logistic, 7,781 Reg M-C Bo3 games): per unit of each "lead" feature
 const W = {hp: 0.808, ko: 0.259, rel: 0.239, spe: 0.056, tw: 0.436, tr: 0.598, scr: 0.531, stat: 0.441};
 // refit: [hp, ko, relPos, relNegOther, relNegSelf, irr, spe, tw, tr, scr, stat] (all 'my lead' differences)

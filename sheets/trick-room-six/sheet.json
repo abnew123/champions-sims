@@ -107,5 +107,6 @@
   "M-Gengar",
   "Sinistcha"
  ],
- "proc_prefix": "trsheet"
+ "proc_prefix": "trsheet",
+ "opponents": "cards"
 }

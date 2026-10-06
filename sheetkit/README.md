@@ -68,6 +68,26 @@ The box is set up once the way `teamsearch/cloud/README.md` describes (steps 0-3
 A result folder holds one run: the kit refuses to add games to a folder whose results came from other sets, another sim setup or
 other game indices (`<folder>.run.json` records them). Move the old folder aside instead.
 
+## Opponents: archetypes or cards
+
+`sheet.json` "opponents" picks what a sheet is built against:
+
+- `archetypes` (the default; the Trick Room Six through Version 21): ten archetype models mined from replays, one tab each.
+- `cards` (since 2026-10-06): real teams from Battle sim's pool (`pssim/opp_pool.py`, Showdown Bo3 sides with open team sheets),
+  grouped by its ordered core rules (`pssim/results/core_rules_both_100.json`). Each rule is a card under the tab of its nearest
+  archetype, and teams that match no rule get an "other" card per archetype: 32 cards in all. `python3 sheetkit/opponents.py` builds
+  `sheetkit/opponents/` (the cards, the guide, and one opponent model per card in the shape `pssim/t1sim.js` reads; every step passes it
+  on as `OPP_MODEL`). The page's guide becomes the ordered rule list, each rule jumping to its card. The both-sides-pick step plays
+  each card's most common real sixes, and `optimal adopt` makes its best candidate the card's pick, with the number "when they bring
+  their best four" (the user's choice for the sheet's percentages).
+
+A result folder records which opponents it was played against, and the kit refuses to mix them.
+
+On a cloud box: `sheetkit/cloud/push.sh <host> <key> <team>` (also the sheet thread's own simulator files and the current battle
+source), then on the box `sheetkit/cloud/build.sh` (the binary, if missing) and
+`(setsid nohup sheetkit/cloud/all.sh <team> <threads> > /dev/null 2>&1 < /dev/null &)`: matrix, confirmation, both-sides-pick, adopt,
+turn-one lines and game plans in order (log `work/all.log`). Pull with `pull.sh`, then `page` on the Mac.
+
 ## Rules for every sheet thread
 
 - **Cores.** Never more than 10 busy cores on the Mac across all threads, at most 3 workers while the user may be on it. Ask the user

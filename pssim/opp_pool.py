@@ -7,11 +7,11 @@ the lead pair and the four brought as actually played, the players' rating, the 
   ../.venv/bin/python3 opp_pool.py jobs <myteam.json> <lead a,b> <back c,d> <n> <out jobs.json> [min rating] [group filter]
         n explicit jobs for champ battle (battle_starts.js explicit mode): our four fixed, their four from n pool entries drawn without
         replacement, weighted by rating band (>= 1500: 3, >= 1300: 2, else 1; unrated 1); the job's meta carries the entry's group.
-  ../.venv/bin/python3 opp_pool.py model <group | arch:<name> | all> <out.json> [pairs=6] [min rating]
+  ../.venv/bin/python3 opp_pool.py model <group | arch:<name> | other:<name> | all> <out.json> [pairs=6] [min rating]
         the old opp_model shape for one group ({n, sets, pairs: [{pair, n, share, win, hiShare, t1, mega, back}]}: sets as
         "item|ability|Nature|moves (count/total)", t1 as "Move:rate, (switch):rate, ..." per lead, back as "Species:share, ..."), so
         t1sim.js runs on core-rule groups unchanged; hiShare = the pair's share among sides rated 1400 or more.
-  ../.venv/bin/python3 opp_pool.py sixes <group | all> <N> <out.json> [min rating]
+  ../.venv/bin/python3 opp_pool.py sixes <group | arch:<name> | other:<name> | all> <N> <out.json> [min rating]
         the N most common sixes of a group (species sets; a six's sets are the most common per species among its games), each with its
         weight (share of the group's sides), count, lead pairs and brought fours with counts: for the sheet kit's optimal-pick step.
 A game whose side showed fewer than four Pokemon (it ended early) gets the missing bring slots filled from the same six's other games
@@ -116,7 +116,7 @@ def jobs(myteam, lead, back, n, outf, min_rating=0, group=None):
     pool = json.load(open(os.path.join(HERE, 'opp_pool.json')))['entries']
     team = json.load(open(myteam)); team = team if isinstance(team, list) else list(team.values())
     mine = [next(s for s in team if s['species'] == x) for x in lead + back]
-    cand = [e for e in pool if (e['rating'] or 0) >= min_rating and (group is None or e['group'] == group)]
+    cand = [e for e in pool if (e['rating'] or 0) >= min_rating and (group is None or in_group(e, group))]
     w = [3 if (e['rating'] or 0) >= 1500 else 2 if (e['rating'] or 0) >= 1300 else 1 for e in cand]
     rng = random.Random(0); picked = []; idxs = list(range(len(cand)))
     while len(picked) < min(n, len(cand)):
@@ -129,7 +129,7 @@ def jobs(myteam, lead, back, n, outf, min_rating=0, group=None):
     json.dump(J, open(outf, 'w')); print(f"{len(J)} jobs -> {outf} (from {len(cand)} candidates)")
 def sixes(group, n, outf, min_rating=0):
     pool = json.load(open(os.path.join(HERE, 'opp_pool.json')))['entries']
-    ents = [e for e in pool if (group == 'all' or e['group'] == group) and (e['rating'] or 0) >= min_rating]
+    ents = [e for e in pool if in_group(e, group) and (e['rating'] or 0) >= min_rating]
     by = collections.defaultdict(list)
     for e in ents: by[frozenset(m['species'] for m in e['six'])].append(e)
     tot = len(ents); out = []
@@ -144,11 +144,18 @@ def sixes(group, n, outf, min_rating=0):
     json.dump({'group': group, 'sides': tot, 'distinct_sixes': len(by), 'covered': sum(x['count'] for x in out) / max(1, tot), 'sixes': out}, open(outf, 'w'), indent=1)
     print(f"{group}: {tot} sides, {len(by)} distinct sixes; top {len(out)} cover {100 * sum(x['count'] for x in out) / max(1, tot):.0f}% -> {outf}")
 def toid(x): return ''.join(c for c in x.lower() if c.isalnum())
+def in_group(e, group):
+    """group selectors: a core-rule group name; 'arch:<name>' = every entry of that pro_replays archetype; 'other:<name>' = entries no
+    core rule names whose archetype is <name> (the sheets' fallback cards); 'all'"""
+    if group == 'all': return True
+    if group.startswith('arch:'): return e['arch'] == group[5:]
+    if group.startswith('other:'): return e['group'] == 'other' and e['arch'] == group[6:]
+    return e['group'] == group
 def model(group, outf, pairs_n=6, min_rating=0):
     """the old opp_model shape for one group ({n, sets, pairs: [{pair, n, share, win, hiShare, t1, mega, back}]}), so t1sim.js runs on
     core-rule groups unchanged. group = a core-rule group name, 'arch:<name>' (pro_replays.arch) or 'all'."""
     pool = json.load(open(os.path.join(HERE, 'opp_pool.json')))['entries']
-    ents = [e for e in pool if (e['rating'] or 0) >= min_rating and (group == 'all' or (group.startswith('arch:') and e['arch'] == group[5:]) or e['group'] == group)]
+    ents = [e for e in pool if (e['rating'] or 0) >= min_rating and in_group(e, group)]
     N = len(ents)
     # sets: each species' most common set among the group's sheets, in the old string form
     cnt = collections.defaultdict(collections.Counter); tot = collections.Counter()

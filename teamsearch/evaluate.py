@@ -15,6 +15,7 @@ ROOT = os.path.join(HERE, '..'); PS = os.path.join(ROOT, 'pssim')
 sys.path.insert(0, os.path.join(HERE, 'bring')); sys.path.insert(0, os.path.join(HERE, 'mx'))
 import policy as P
 import merge as MG
+import procs                                          # programs run as teamsearch-<name> (user, 2026-10-06)
 G = P.Fx.G
 ARCHS = list(P.ARCH_SHARE)
 # Sim setups (TS_SIM). 'v3' = what rounds 1-4 on AWS used. 'v8' = the other thread's recommendation of 2026-10-04: two-turn
@@ -116,11 +117,11 @@ def run_team(gids, per_job, seed0, threads, fixed=None, label=''):
     starts, out = os.path.join(d, f'starts_{tag}{sfx}.jsonl'), os.path.join(d, f'out_{out_tag(seed0, per_job)}')
     env = dict(os.environ, MYTEAM=os.path.join(d, 'myteam.json'))
     if not os.path.exists(starts):
-        subprocess.run(['node', '../native/battle_starts.js', jobs_f, starts + '.tmp', str(per_job), str(seed0)],
+        subprocess.run([procs.node(), '../native/battle_starts.js', jobs_f, starts + '.tmp', str(per_job), str(seed0)],
                        cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL)
         os.replace(starts + '.tmp', starts)
     env.update(sim_env(), GRID_DIR=os.path.join(d, 'grid'))
-    subprocess.run(['nice', '-n', '10', bin_path(), 'battle', '../native/engine_data_spot.json', starts, out, str(threads)],
+    subprocess.run(['nice', '-n', '10', procs.battle(bin_path()), 'battle', '../native/engine_data_spot.json', starts, out, str(threads)],
                    cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return read(d, out_tag(seed0, per_job))
 
@@ -133,11 +134,11 @@ def run_jobs(gids, jobs, per_job, seed0, threads, label):
     starts, out = os.path.join(d, f'starts_{seed0}_{per_job}.jsonl'), os.path.join(d, f'out_{out_tag(seed0, per_job)}')
     env = dict(os.environ, MYTEAM=os.path.join(d, 'myteam.json'))
     if not os.path.exists(starts):
-        subprocess.run(['node', '../native/battle_starts.js', os.path.join(d, 'jobs.json'), starts + '.tmp', str(per_job), str(seed0)],
+        subprocess.run([procs.node(), '../native/battle_starts.js', os.path.join(d, 'jobs.json'), starts + '.tmp', str(per_job), str(seed0)],
                        cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL)
         os.replace(starts + '.tmp', starts)
     env.update(sim_env(), GRID_DIR=os.path.join(d, 'grid'))
-    subprocess.run(['nice', '-n', '10', bin_path(), 'battle', '../native/engine_data_spot.json', starts, out, str(threads)],
+    subprocess.run(['nice', '-n', '10', procs.battle(bin_path()), 'battle', '../native/engine_data_spot.json', starts, out, str(threads)],
                    cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return [json.load(open(os.path.join(out, f'{j}.json'))) for j in range(len(jobs))]
 

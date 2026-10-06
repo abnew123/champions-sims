@@ -3,7 +3,7 @@
 # (epoch, first argument; MAX_H = second argument, default 8) regardless. Touch ~/KEEP_ALIVE to suspend the idle rule; the hard cap still applies.
 # Busy = the climb, any champ battle/plan/spot binary (champ-battle-vN or a cargo-built champ), position builders, lead-sim workers.
 IDLE_MIN=45; MAX_H=${2:-8}; start=${1:-$(date +%s)}; idle=0
-BUSY='climb.py round|champ(-battle-v[0-9]+)? (battle|plan|spot)|battle_starts|run_jobs|node .*worker'
+BUSY='climb.py round|champ(-battle-v[0-9]+)? (battle|plan|spot)|teamsearch-battle-v[0-9]+ battle|battle_starts|run_jobs|node .*worker'
 while true; do
   sleep 300
   if pgrep -f "$BUSY" >/dev/null; then idle=0; else idle=$((idle + 5)); fi

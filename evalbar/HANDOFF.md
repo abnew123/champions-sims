@@ -194,6 +194,15 @@ players. Planned Protect 8.7% -> 8.8% (players 13.3%), top pick 45.3% -> 43.7%, 
 flatter. So what remains after the two-turn horizon is not spread knowledge. Of the 39 costly plays, 13 are switches, 10 Protects and 5
 setup moves: the user's reading (2026-10-06) is that many are the engine undervaluing setup and switches, some real mistakes.
 
+## Does the engine undervalue setup and switches? (aftermath.py)
+
+Battle sim asked for a real-outcome test (2026-10-06): in the cached Showdown Bo3 games, positions right after a setup move, a chosen
+switch, or with boosts held, the side's actual win rate against the engine's rescaled rating (`aftermath.py`; per-position rows with
+markers in out/aftermath_rows.jsonl for Battle sim to fit). 3,408 positions: after setup -3.2 points (SE 2.7, n 397), holding boosts about
+0, after a switch +0.7 (SE 0.9) with the lookahead and +1.9 (SE 0.9) for the static value. So the resulting positions are rated right:
+the engine's reluctance to set up is not a misrating of the boosted position, and switches are underrated by at most ~2 points by the
+value function alone. Summary in `results/aftermath_setup_switch.json`.
+
 ## Were the costly plays reads? (reads.py)
 
 `reads.py run` evaluates the costly plays' turns with the full payoff matrix (champ-battle-v18, EVAL_MATRIX=full); `reads.py report` scores

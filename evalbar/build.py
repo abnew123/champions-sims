@@ -38,6 +38,21 @@ def options(e, pos, scale):
                      'rough': 'stages' in e and o['v'] < best - 0.15} for o in sl['options']]
             out[sd].append({'mon': R.disp(sl['mon']), 'played': True if any(o['played'] for o in opts) else None, 'options': opts})
     return out
+def merge(ws, opts):
+    """options() of several hypotheses with weights ws (summing to 1) -> one: each option's picks and value weighted over the hypotheses
+    (a value averages over the hypotheses where the option exists). The Pokemon on the field must be the same in every hypothesis."""
+    out = {}
+    for sd in ('p1', 'p2'):
+        out[sd] = []
+        for i, sl in enumerate(opts[0][sd]):
+            acc = {}
+            for w, o in zip(ws, opts):
+                for x in o[sd][i]['options']:
+                    a = acc.setdefault(x['l'], {'l': x['l'], 'w': 0, 'vw': 0, 'n': 0, 'played': x['played'], 'rough': x['rough']})
+                    a['w'] += w * x['w']; a['vw'] += w * x['v']; a['n'] += w; a['rough'] = a['rough'] and x['rough']
+            out[sd].append({'mon': sl['mon'], 'played': sl['played'],
+                            'options': [{'l': a['l'], 'w': round(a['w'], 3), 'v': round(a['vw'] / a['n'], 3), 'played': a['played'], 'rough': a['rough']} for a in acc.values()]})
+    return out
 def leak_check(text, hidden):
     low = text.lower()
     bad = [h for h in hidden if re.search(r'(?<![a-z0-9])' + re.escape(h.lower()) + r'(?![a-z0-9])', low)]

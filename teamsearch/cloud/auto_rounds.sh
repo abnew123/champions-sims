@@ -10,7 +10,7 @@ cd "$(dirname "$0")/.."
 CAP=${1:?cap epoch}; PER_START=${2:-210}
 RUN_ENV=${RUN_ENV:-cloud/run_env.sh}; . $RUN_ENV              # e.g. cloud/run_env_pool.sh / run_env_poolmiss.sh
 S=${CLIMB_SESSION:-climb}; LOGF=${CLIMB_LOG:-round.log}; TF=cloud/threads_$S.txt; [ -f $TF ] || TF=cloud/threads.txt
-while tmux -L climb has-session -t $S 2>/dev/null; do sleep 60; done
+while tmux -L climb has-session -t "=$S" 2>/dev/null; do sleep 60; done
 while true; do
   active=$(../.venv/bin/python3 -c "import json; s=json.load(open('${TS_STATE:-climb_state.json}')); print(sum(1 for t in s['teams'].values() if not t['done']))" 2>/dev/null || echo 52)
   if [ "$active" -eq 0 ]; then echo "$(date -u +%H:%M) UTC: every start is at a local max; no more rounds" >> $LOGF; break; fi
@@ -19,5 +19,5 @@ while true; do
   echo "--- auto round, $(date -u +%H:%M) UTC, $active starts" >> $LOGF
   read P T PF < $TF 2>/dev/null || { P=60; T=3; }; PF=${PF:-96}
   tmux -L climb new -d -s $S ". $RUN_ENV && TS_PARALLEL=$P TS_THREADS=$T TS_PREFILTER_PROCS=$PF ../.venv/bin/python3 climb.py round thorough $S 2>&1 | tee -a $LOGF"
-  sleep 30; while tmux -L climb has-session -t $S 2>/dev/null; do sleep 60; done
+  sleep 30; while tmux -L climb has-session -t "=$S" 2>/dev/null; do sleep 60; done
 done

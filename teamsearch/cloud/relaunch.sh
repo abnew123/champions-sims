@@ -4,11 +4,12 @@
 # (Run it as a script: pkill -f patterns typed on an ssh command line can match that command's own shell.)
 # The climb has its own tmux server (-L climb): on a shared server, any side's pkill -f can match the server's title (the
 # command of whichever session created it) and take every session down (Oct 5: TR sheet's stop killed the climb that way).
+# Session targets are exact (-t =name): a plain -t climb_pool prefix-matches climb_poolmiss when climb_pool is gone (Oct 6).
 cd "$(dirname "$0")/.."
 RUN_ENV=${RUN_ENV:-cloud/run_env.sh}; . $RUN_ENV              # cloud/run_env_miss.sh for the miss-doubling climb
 P=${1:?parallel}; T=${2:?threads}; MODE=${3:-thorough}
 S=${CLIMB_SESSION:-climb}; LOGF=${CLIMB_LOG:-round.log}
-tmux -L climb kill-session -t $S 2>/dev/null; sleep 1
+tmux -L climb kill-session -t "=$S" 2>/dev/null; sleep 1
 if [ -n "$CLIMB_SESSION" ]; then                        # one of several climbs on the box: touch only this one
   pkill -f "[c]limb.py round [a-z]* $S\$"; pkill -f "[t]eamsearch-battle-v[0-9]* battle .*teamsearch/runs/p[a-z0-9]*_${TS_SIM}_"
   pkill -f "[b]attle_starts.js .*teamsearch/runs/p[a-z0-9]*_${TS_SIM}_"; GLOB="runs/p*_${TS_SIM}_*"

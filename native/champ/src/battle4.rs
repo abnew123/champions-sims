@@ -71,7 +71,24 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool) -> Ou
     while !b.ended && (turn <= MAXTURN || (turn <= STALL_MAXTURN && !can_damage(&b, 0) && !can_damage(&b, 1))) {
         let sw = std::env::var("BATTLE_NOSWITCH").is_err();   // BATTLE_NOSWITCH=1: control run, Pokemon only come in when something faints
         let msw = joint(&mut b, 0, sw); let tsw = joint(&mut b, 1, sw);
-        if msw.is_empty() || tsw.is_empty() { break; }
+        if msw.is_empty() || tsw.is_empty() {
+            // BATTLE_BREAK_DEBUG=1: say why a game is handed to the value function before it ended (which side, its active Pokemon,
+            // their locked moves and request moves, and each slot's raw options)
+            if std::env::var("BATTLE_BREAK_DEBUG").is_ok() {
+                for s in 0..2u8 {
+                    let n = if s == 0 { msw.len() } else { tsw.len() };
+                    eprintln!("turn {}: side {} has {} joint actions; bench {:?}", turn, s, n, crate::spot::bench(&b, s));
+                    for i in 0..2 {
+                        let Some(pi) = b.sides[s as usize].active[i] else { eprintln!("   slot {}: empty", i); continue };
+                        let m = (s, pi); let lk = b.get_locked_move(m); let req = b.request_moves(m);
+                        let p = b.p(m); let vol: Vec<&str> = p.volatiles.iter().map(|v| v.0).collect();
+                        eprintln!("   slot {}: {} hp {} fainted {} trapped {} locked {:?} volatiles {:?} request {:?}", i, p.species, p.hp, p.fainted, p.trapped, lk, vol, req);
+                        eprintln!("      options {:?}", crate::plan::slot_options(&mut b, s, i));
+                    }
+                }
+            }
+            break;
+        }
         if want_feats { fx.push(feats(&mut b, cfg)); }   // position at the start of the turn, for refitting the value on 4v4 games
         let no_sw = |c: &[PChoice; 2]| !c.iter().any(|x| matches!(x, PChoice::Switch(_)));
         let mns: Vec<usize> = (0..msw.len()).filter(|i| no_sw(&msw[*i])).collect();

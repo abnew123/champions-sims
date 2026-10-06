@@ -643,3 +643,11 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     only for new strings, and `single_event` no longer formats a string per call (`cbp`). Team search found one 90-thread process ran six
     times slower per game than 30 processes of 3 on the box; the intern mutex (taken on every `id()` call: `$move` relays, volatiles,
     statuses, part callbacks) is the prime suspect; to be measured at high thread counts when the Mac is free.
+  - **champ-battle-v20 = v19 + the recharge-turn fix** (2026-10-06, 5:10 am). TR sheet found about 6% of pool games ending early with a
+    fractional result (10% of games against Sylveon). Cause: Showdown's `recharge` is a pseudo-move, not a dex entry, so the data stub
+    has no target; `slot_options` read it as "normal" and offered the recharging Pokemon a foe target, which `valid` rejected (the
+    request says `self`), so that side had no legal joint action and battle4 handed the game to the value function. Fix: the option
+    builder branches on the request's target class (as Showdown's chooseMove does), and labels show "Recharge" / the locked move on
+    locked turns. Games without a recharge turn are unchanged (18 of 20 check battles identical to v16; the two with a Hyper Beam user
+    now play on); 300 pool games: early fractional ends 1 -> 0 (the turn-25 stall cutoff remains by design). `champ turn` exact.
+    `BATTLE_BREAK_DEBUG=1` prints why a game is handed to the value function before it ended.

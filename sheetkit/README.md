@@ -83,7 +83,8 @@ other game indices (`<folder>.run.json` records them). Move the old folder aside
 
 A result folder records which opponents it was played against, and the kit refuses to mix them.
 
-On a cloud box: `sheetkit/cloud/push.sh <host> <key> <team>` (also the sheet thread's own simulator files and the current battle
+On a fresh box of its own: `sheetkit/cloud/bundle.sh <team>` on the Mac, copy `sheetkit/cloud/bundle.tar.gz` there, unpack it into
+`~/champions-sims` and run `sheetkit/cloud/setup_box.sh` (about 10 minutes). On a box another thread already set up: `sheetkit/cloud/push.sh <host> <key> <team>` (also the sheet thread's own simulator files and the current battle
 source), then on the box `sheetkit/cloud/build.sh` (the binary, if missing) and
 `(setsid nohup sheetkit/cloud/all.sh <team> <threads> > /dev/null 2>&1 < /dev/null &)`: matrix, confirmation, both-sides-pick, adopt,
 turn-one lines and game plans in order (log `work/all.log`). Pull with `pull.sh`, then `page` on the Mac.

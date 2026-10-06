@@ -83,7 +83,7 @@ to a player during their game (the page says so).
 **Value file (2026-10-05):** the bar now uses `pssim/egvalue9_sym2.json` (Battle sim: the symmetric value with Trick Room turns tied to
 the HP weight at the real-game ratio), rescale weight 0.7538. On the 560-game set it is no worse overall (log loss 0.5240 against sym's
 0.5245) and better with Trick Room up (0.5141 against 0.5199, within noise): `results/compare_sym_sym2.json`; `results/accuracy_engine.json`
-now holds sym2's numbers. The recorded-games page (version 3) uses it; the replay demo page (version 3) still shows sym.
+now holds sym2's numbers. The recorded-games page (version 3) and the replay demo page (version 4) use it.
 
 Possible next steps (not asked for yet): more demo games, flagging Perish Song positions on the page, Battle sim extending the engine data
 (210 games need a missing species or ability), step 2 (the user's recorded games, a belief over the opponent's hidden sets).

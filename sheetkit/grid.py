@@ -7,6 +7,7 @@ work/grid/cells/ to rebuild after changing a set)."""
 import concurrent.futures, hashlib
 from common import *
 from page import dex, idf
+import procs
 
 def pool_of(sheet): return {n: {k: s[k] for k in ('species', 'item', 'ability', 'nature', 'evs', 'moves')} for n, s in sheet.team.items()}
 def cell_path(sheet, n, tr):
@@ -18,12 +19,12 @@ def build(sheet, workers=1, quiet=False):
     d = sheet.w('grid'); os.makedirs(os.path.join(d, 'cells'), exist_ok=True)
     pool = pool_of(sheet)
     wj(pool, os.path.join(d, 'pool.json'), indent=1)
-    py = VENV_PY if os.path.exists(VENV_PY) else sys.executable
+    py, penv = procs.python(sheet, venv=True)
     def one(job):
         n, tr = job; out = cell_path(sheet, n, tr)
         if not os.path.exists(out):
             r = subprocess.run(['nice', '-n', '10', py, os.path.join(KIT, 'grid_worker.py'), n, out + '.tmp'], capture_output=True, text=True,
-                               env=dict(os.environ, TR='1' if tr else '0', POOL_FILE=os.path.join(d, 'pool.json')))
+                               env=dict(os.environ, **penv, TR='1' if tr else '0', POOL_FILE=os.path.join(d, 'pool.json')))
             if r.returncode: return n, tr, None, (r.stderr or r.stdout).strip().split('\n')[-1]
             os.replace(out + '.tmp', out)
         return n, tr, rj(out), None

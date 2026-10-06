@@ -10,6 +10,6 @@ nw=${4:-$(( $(getconf _NPROCESSORS_ONLN) - 1 ))}
 [ -z "$jobs" ] || [ -z "$out" ] && { echo "usage: $0 <jobs.json> <outdir> <samples> [workers]"; exit 1; }
 mkdir -p "$out"
 echo "$(date +%H:%M:%S) $jobs -> $out, $ns sample(s) per cell, $nw workers"
-for ((w=0; w<nw; w++)); do node worker.js "$jobs" $w $nw "$out" 1 $ns >> "$out.w$w.log" 2>&1 & done
+for ((w=0; w<nw; w++)); do "${NODE_BIN:-node}" worker.js "$jobs" $w $nw "$out" 1 $ns >> "$out.w$w.log" 2>&1 & done     # NODE_BIN: a named link to node
 wait
 echo "$(date +%H:%M:%S) done: $(ls "$out" | wc -l | tr -d ' ') result files in $out"

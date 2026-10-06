@@ -8,6 +8,7 @@ Seeds depend on the opponent and the game index only, so every four meets the sa
 Result files are the battle binary's: {arch, pair, share, lead, back, theirs, rows: [{g, v, ms, ...}]}."""
 import glob, itertools, json, os, collections, datetime, hashlib, re, shutil, concurrent.futures
 from common import *
+import procs
 
 MIN_SE = 1.5        # a pick changes when the fresh-game leader beats it by at least this many paired standard errors
 
@@ -44,7 +45,7 @@ def make_starts(sheet, jobs, part, path, games, g0):
     of the file it is given from 0; the numbers are put back here. Seeds depend on the opponent and the game index, not on the job
     number, so every slicing of a job list plays the same games."""
     wj([jobs[i] for i in part], path + '.jobs.json')
-    r = subprocess.run(['node', '../native/battle_starts.js', path + '.jobs.json', path + '.raw', str(games), str(g0)],
+    r = subprocess.run([procs.exe(sheet, 'node'), '../native/battle_starts.js', path + '.jobs.json', path + '.raw', str(games), str(g0)],
                        env=dict(os.environ, MYTEAM=sheet.team_path), cwd=PSSIM, stdout=subprocess.DEVNULL)
     if r.returncode: raise RuntimeError('building the starting positions failed (node ../native/battle_starts.js)')
     n = 0
@@ -73,7 +74,8 @@ def battle_run(sheet, step, jobs_path, outdir, games, g0, threads, setup, log, o
         log.line(f"{now()} {n} starting positions")
         env = dict(os.environ, **S['env'], GRID_DIR=sheet.grid_dir())
         with open(outdir + '.err', 'a') as err:
-            ps = [subprocess.Popen(['nice', '-n', '10', S['binary'], 'battle', S['engine_data'], f'{sd}/{c}.jsonl', outdir, str(min(per, threads))],
+            binary = procs.exe(sheet, S['binary'], S['binary'])
+            ps = [subprocess.Popen(['nice', '-n', '10', binary, 'battle', S['engine_data'], f'{sd}/{c}.jsonl', outdir, str(min(per, threads))],
                                    env=env, cwd=PSSIM, stderr=err) for c in range(nproc)]
             bad = [c for c, p in enumerate(ps) if p.wait()]
         if bad: sys.exit(f"{len(bad)} of {nproc} battle processes failed; see {outdir}.err (finished jobs are kept: run the same command again)")

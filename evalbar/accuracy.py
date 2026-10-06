@@ -16,7 +16,7 @@ usage (needs numpy: the main folder's .venv): python3 evalbar/accuracy.py [engin
        the engine value from each run, rescaled the same way, on the positions all runs share: overall and with Trick Room up"""
 import os, sys, json, math, zlib
 import numpy as np
-import common as C
+import common as C, procs as P
 RF = C.replay_feats(); sys.path.insert(0, C.PSSIM)
 from fit_real_value import fit
 EDGES = [0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1.0000001]
@@ -99,6 +99,7 @@ def compare(args, rows):
         print(f"{a} minus {names[0]}: log loss {d_all[0]:+.4f} ± {d_all[1]:.4f} overall, {d_tr[0]:+.4f} ± {d_tr[1]:.4f} with Trick Room up")
     if outf: json.dump(out, open(outf, 'w'), indent=1)
 if __name__ == '__main__':
+    P.own()
     rows = real_rows(); out = {}
     if len(sys.argv) > 1 and sys.argv[1] == 'compare': compare(sys.argv[2:], rows); sys.exit()
     if len(sys.argv) < 2:

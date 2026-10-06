@@ -12,7 +12,7 @@ minus the value of what they did, in win-chance points).
                                                                      the same measures on the Showdown Bo3 accuracy set (560 cached games,
                                                                      every turn already evaluated; full information), for comparison"""
 import os, re, sys, json, math, collections
-import common as C, replay as R, broadcast as BC, live as LV
+import common as C, procs as P, replay as R, broadcast as BC, live as LV
 OUT = os.path.join(C.HERE, 'out', 'champions', 'study')
 logit = lambda v: math.log(min(1 - 1e-4, max(1e-4, v)) / (1 - min(1 - 1e-4, max(1e-4, v))))
 scale = lambda v: C.sig(LV.CAL * logit(v))
@@ -129,6 +129,7 @@ def replay_study(evf):
     summary(D, 'Showdown Bo3 (cached games): '); kinds(D, '   ')
     for lo, hi in ((1, 3), (4, 6), (7, 99)): summary([d for d in D if lo <= d['turn'] <= hi], f'   turns {lo}-{hi if hi < 99 else "on"}: ')
 if __name__ == '__main__':
+    P.own()
     a = sys.argv[1:]
     if a and a[0] == 'replays': replay_study(a[1] if len(a) > 1 else os.path.join(C.HERE, 'out', 'acc_eval_sym2.jsonl'))
     elif a: broadcast_study(a[0], int(a[1]) if len(a) > 1 else 2)

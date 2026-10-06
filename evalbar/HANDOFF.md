@@ -174,11 +174,11 @@ and "Player 2": no usernames on the page, in tracked files or in commit messages
 
 ## Process names (the user asked, 2026-10-06)
 
-Every process this thread starts must show as `evalbar-<program>` in `top`, so the user knows whom to ask to stop it. `procs.py` makes
-the links in `out/bin` (`exe('ffmpeg')` etc.; the engine is `evalbar-champ`, node `evalbar-node`, OCR `evalbar-ocr`), and every
-subprocess call goes through them. Start the thread's own scripts with the named interpreter: `$(python3 evalbar/procs.py) evalbar/<script>.py`
-(plain `python3` shows as "Python"). Scripts that need the main folder's `.venv` (numpy: `accuracy.py`) run as
-`PYTHONPATH=<.venv site-packages> $(python3 evalbar/procs.py) evalbar/accuracy.py`.
+Every process this thread starts must show as `evalbar-<program>` in `top` and in Stats (which the user watches; it lists `ps -Aceo comm`), so
+they know whom to ask to stop it. `procs.py` makes the links in `out/bin` (`exe('ffmpeg')` etc.: the engine is `evalbar-champ`, node
+`evalbar-node`, OCR `evalbar-ocr`), and every subprocess call goes through them. Each script's main starts with `P.own()`, which re-starts it
+under `evalbar-py` (plain `python3` would show as "Python"), carrying a venv's packages along, so `python3 evalbar/<script>.py` is enough,
+for the user's own runs too. The other threads use battlesim-, trsheet- and teamsearch- (shared memory process-names.md).
 
 ## Rules that apply (also in memory)
 

@@ -4,7 +4,8 @@ evalbar/out/bin (made on first use; git-ignored, since the links hold this machi
 Homebrew's python3 hands over to Python.app, which would show as plain "Python".
   python3 evalbar/procs.py               prints the evalbar-py interpreter path, for starting the thread's own scripts
   exe('ffmpeg')                          the evalbar-ffmpeg link, for subprocess calls
-Start this thread's scripts with that interpreter: $(python3 evalbar/procs.py) evalbar/<script>.py ..."""
+  own()                                  first thing in each script's main: re-starts it under evalbar-py, so a plain
+                                         `python3 evalbar/<script>.py` (the user's own runs too) shows as evalbar-py"""
 import os, sys, shutil
 import common as C
 BIN = os.path.join(C.HERE, 'out', 'bin')
@@ -20,4 +21,13 @@ def python():
     """the evalbar-py link to the running interpreter's real binary (inside Python.app for a framework build)"""
     app = os.path.join(sys.base_prefix, 'Resources', 'Python.app', 'Contents', 'MacOS', 'Python')
     return exe('python', app if os.path.exists(app) else sys.executable, name='py')
+def own():
+    """re-start the running script under the evalbar-py name (once); a venv's packages, which the base interpreter would not find,
+    come along on PYTHONPATH"""
+    if os.environ.get('EVALBAR_PY'): return
+    py = python(); env = dict(os.environ, EVALBAR_PY='1')
+    site = [p for p in sys.path if p.endswith('site-packages')] + [x for x in [env.get('PYTHONPATH')] if x]
+    if site: env['PYTHONPATH'] = os.pathsep.join(site)
+    sys.stdout.flush(); sys.stderr.flush()
+    os.execve(py, [py] + sys.argv, env)
 if __name__ == '__main__': print(python())

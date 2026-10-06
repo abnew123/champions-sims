@@ -258,6 +258,7 @@ class Live:
                 if s.port: print(f'battle over; the page stays up at http://localhost:{s.port} until you stop this (Ctrl-C)', flush=True)
             time.sleep(1)
 if __name__ == '__main__':
+    P.own()
     a = sys.argv[1:]
     if not a: sys.exit(__doc__)
     if a[0] == 'list':

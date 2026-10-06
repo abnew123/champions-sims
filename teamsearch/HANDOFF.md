@@ -349,3 +349,9 @@ Usage:
   - Round 1 finishes on the v16 binary under its v13g tag: `TS_BATTLE_BIN` overrides only the binary, so the round's cache stays valid.
   - From round 2 the setup is v16g (`cloud/run_env.sh` keys on climb_state.json). v14g is no longer used.
   - Relaunched at 32×3 with round 1 screening at 210/668.
+- **Third box (Oct 5, 10:06 pm):** the second Spain box (c7a.48xlarge) went unreachable after 8:59 pm in round 1's batch 6, again presumably reclaimed. The new box is a Spain c7a.24xlarge (96 cores), Ubuntu 26.04, root grown to 40 GB, v16 built. Smoke 54/54.
+  - Round 1 resumed from the pulled outputs (all 108,216 screening games plus confirm and batches 1–5) at 30×3, with `cloud/threads.txt` "30 3".
+  - New watchdog 12 h cap from 10:05 pm. auto_rounds uses 420 s per climbing start for the smaller box.
+  - Provisional round 1, replayed from saved games with the scratch replay (run_team/run_jobs read-only, max 6 batches): 32 moves, 6 stops, 14 undecided.
+    - Scarf Garchomp is the most common swap-in (9), then Kingambit (6).
+    - trick_room_six scores 66.2, #2 of 52 starts; its best swap is Indeedee-F → Gholdengo (+3.3 ± 1.4).

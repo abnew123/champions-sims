@@ -213,7 +213,9 @@ gain over equilibrium play? On the day-1 turns' full matrices (`influence.py`, e
 win chance per turn at 20% (2 at 10%, 6 at 30%, 11 at 50%), about 31 points summed over a game (an upper estimate: gains saturate). Equilibrium
 play gains almost nothing from the lean (0.1 points), and the exploiting move costs almost nothing if the read is wrong (0.1 points): in 93%
 of turns it is one of the reader's equally good options (4 per turn, median), so a read mostly decides between options the equilibrium is
-indifferent between. Summary in `results/read_value_day1.json`.
+indifferent between. Timing (the user's follow-up): a 10% lean every turn (15.3 points a game) and a 20% lean on the best third of turns (16.0)
+are about even, because gains are close to linear in the lean and the best third holds 53% of a game's read value; a 20% lean on a random
+third gives 10.2. Turn 1 reads are worth the most (5.1 points at 20%), later turns 3.5 to 4.6. Summary in `results/read_value_day1.json`.
 
 ## Were the costly plays reads? (reads.py)
 

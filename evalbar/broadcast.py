@@ -89,7 +89,8 @@ def ocr(d):
 def sheet(lines):
     """one team-sheet screen -> [set, ...]: each panel starts with the species name in capitals"""
     L = [(t.strip(), x, y) for t, x, y, w, h in lines]
-    anchors = [(fuzzy(t, 'species', cut=0.85), x, y) for t, x, y in L if t.isupper() and len(t) > 3]
+    other = lambda t: any(t.upper().replace('0', 'O') in NAMES[k] for k in ('abilities', 'moves', 'items'))   # DRIZZLE is not Drizzile
+    anchors = [(fuzzy(t, 'species', cut=0.85), x, y) for t, x, y in L if t.isupper() and len(t) > 3 and not other(t)]
     anchors = [a for a in anchors if a[0]]
     out = []
     for sp, x0, y0 in anchors:
@@ -98,6 +99,7 @@ def sheet(lines):
         nature = next((t.title() for t, x, y in near if t.upper() in NATURES), '')
         moves = [fuzzy(t, 'moves') for t, x, y in sorted(near, key=lambda r: r[2]) if 0 <= x - x0 < 0.03 and y - y0 > 0.07 and fuzzy(t, 'moves')]
         item = next((fuzzy(t, 'items') for t, x, y in near if x - x0 > 0.1 and y - y0 > 0.15 and fuzzy(t, 'items')), '')
+        if sp == 'Indeedee' and ('Follow Me' in moves or 'Trick Room' in moves): sp = 'Indeedee-F'   # the sheet shows only the name
         if item and E['items'].get(toid(item), {}).get('megaStone'):            # the species that holds this stone (Floette -> Floette-Eternal)
             sp = next(iter(E['items'][toid(item)]['megaStone']), sp)
         out.append({'species': sp, 'item': item, 'ability': ability, 'nature': nature, 'moves': moves[:4]})
@@ -135,7 +137,7 @@ class Reader:
     def new_game(s):
         s.out = []; s.games.append(s.out); s.meta.append({}); s.started = False; s.turn = 0; s.in_decision = False; s.ended = False
         s.active = {}; s.hp = {}; s.last_text = None; s.slot_free = {'p1': [], 'p2': []}; s.megas = {'p1': False, 'p2': False}
-        s.fainted = {'p1': set(), 'p2': set()}; s.lead_seen = False; s.game_names = collections.Counter(); s.sides_checked = False
+        s.fainted = {'p1': set(), 'p2': set()}; s.lead_seen = False; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False
     def team(s, sd): return s.sheets.get(sd, [])
     def species(s, sd, name):
         """an OCR'd Pokémon name on side sd -> the species on that side's sheet (Mega names map back to the base)"""
@@ -182,7 +184,7 @@ class Reader:
         sl = s.slot_of(sd, sp) or 'a'; return f"{sd}{sl}: {s.nick(sp)}"
     def message(s, text):
         text = re.sub(r'!+[^!]*$', '!', text.strip())
-        if re.search(r'won the battle|forfeit|Trainer lost|You lost|You won', text, re.I):
+        if re.search(r"won the battle|forfeit|\blost!$|You won", text, re.I) and 'lost some' not in text:
             if not s.ended:
                 left = {sd: 4 - len(s.fainted[sd]) for sd in ('p1', 'p2')}
                 win = 'p1' if left['p2'] == 0 or ('forfeit' not in text and left['p1'] > left['p2']) else 'p2' if left['p1'] == 0 or left['p2'] > left['p1'] else None
@@ -208,7 +210,8 @@ class Reader:
         if m: s.emit(f"|-sidestart|{'p1' if m.group(2) == 'your' else 'p2'}: Player|{'move: ' if m.group(1) != 'Reflect' else ''}{m.group(1)}"); return
         m = re.search(r'Go! (.+?)!$', text) or re.search(r'sent out (.+?)!$', text)
         if m:
-            if s.started and ' and ' not in m.group(1): s.send('p1' if text.startswith('Go!') else 'p2', m.group(1))
+            if ' and ' in m.group(1): s.pairs['p1' if text.startswith('Go!') else 'p2'] = s.frame
+            elif s.started: s.send('p1' if text.startswith('Go!') else 'p2', m.group(1))
             return
         # about one Pokémon (or two: "A and the opposing B's Attack fell!")
         m = re.match(r"(.+?) and ((?:the opposing )?[^,']+?)'s (.+?) (fell|rose|harshly fell|severely fell|rose sharply|rose drastically)!", text)
@@ -253,7 +256,7 @@ class Reader:
             item = fuzzy(re.sub(r'^ate its ', '', im.group(1)), 'items')
             if item and item not in ('Leftovers', 'Shell Bell') and 'Mega' not in rest: s.emit(f'|-enditem|{me}|{item}')
     def send(s, sd, name):
-        sp = s.species(sd, name)
+        sp = s.species(sd, re.sub(r' the [A-Z][\w-]*(?: [A-Z][\w-]*)*$', '', name.strip()))     # "Primarina the Rank Master": a title
         if not sp: return
         free = s.slot_free[sd]; sl = free.pop(0) if free else next((x for x in 'ab' if (sd, x) not in s.active), 'a')
         s.active[(sd, sl)] = sp
@@ -280,7 +283,7 @@ class Reader:
             return
         sb = scoreboard(L)
         if sb:
-            s.names.append(sb)
+            s.names.append((s.frame, sb))
             if s.started and not s.ended:
                 s.game_names[sb] += 1
                 if not s.sides_checked and sum(s.game_names.values()) >= 10:  # the players' names during this game: sheets on the right sides?
@@ -292,7 +295,7 @@ class Reader:
             if text and re.search(r'^Go! .+ and .+!$|sent out .+ and .+!$', text): s.lead_seen = True
             fresh = s.lead_seen or turn == 1 or (len(boxes) == 4 and all(p == 100 for n, p in boxes.values()))
             if decision and len(boxes) >= 3 and fresh:
-                recent = list(s.names)[-240:]                                       # the last two minutes of scoreboard reads
+                recent = [n for fr, n in s.names if fr > s.frame - 240]              # scoreboard reads in the last two minutes
                 board = collections.Counter(recent).most_common(1)[0][0] if recent else None
                 fresh_sheets = sum(1 for fr, o, st in s.raw_sheets if fr > s.prev_end) >= 2
                 if board and s.board: other = not all(difflib.SequenceMatcher(None, a, b).ratio() > 0.7 for a, b in zip(board, s.board))
@@ -305,6 +308,14 @@ class Reader:
             elif decision and len(boxes) >= 3 and not s.note: s.note = 'joined mid-game: the bar starts with the next game'
             return
         if s.ended: return
+        if decision and not s.in_decision and s.turn >= 2 and len(boxes) == 4 and all(p == 100 for n, p in boxes.values()) \
+                and min(s.pairs.values()) > s.frame - 120:                       # leads for both sides in the last minute, everyone at full HP
+            left = {sd: 4 - len(s.fainted[sd]) for sd in ('p1', 'p2')}
+            win = 'p1' if left['p2'] <= 0 < left['p1'] else 'p2' if left['p1'] <= 0 < left['p2'] else None
+            if win: s.emit('|', f'|win|Player {win[1]}')
+            s.ended = True; s.prev_end = s.frame - 120; s.meta[-1]['end'] = s.now()
+            if s.game_names: s.board = s.game_names.most_common(1)[0][0]
+            s.new_game(); s.lead_seen = True; s.frame -= 1; return s.feed(lines)   # this frame again, as the new game's first decision
         if decision and not s.in_decision:
             s.reconcile(boxes); s.turn = max(s.turn + 1, turn or 0); s.emit('|upkeep', '|', f'|turn|{s.turn}'); s.mark()   # upkeep: durations count down
         s.in_decision = decision

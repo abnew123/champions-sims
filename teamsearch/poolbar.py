@@ -9,7 +9,7 @@ rule archetypes (pro_replays.arch, as in simreal.py) and Battle sim's core-rule 
   TS_SIM=v17g TS_PARALLEL=30 TS_THREADS=3 python3 poolbar.py run [entries=2500] [min rating=0]
         battles: pool games (each team's entries in CHUNKS processes, identical chunks for every team), then the archetype baseline.
         Many small processes, never one big one: one champ process with ~90 threads ran ~6x slower per game on the box.
-  TS_SIM=v17g python3 poolbar.py report
+  TS_SIM=v17g python3 poolbar.py report [runs dir = runs]     on the Mac (needs regmatch/), e.g. cloud_results/v12/runs
 Threads: decomp_threads.txt if present (re-read per team), else TS_THREADS.
 """
 import json, os, sys, math, random, collections, time
@@ -78,13 +78,14 @@ def real_vs_arch():
     for (a, b), k in rn.items(): n[b] += k; w[b] += rw[(a, b)]                    # matches vs b, won by the side facing b
     return {b: AM.game_rate(w[b] / n[b]) for b in n if n[b] >= 50}, n
 
-def report():
-    entries = set(json.load(open(os.path.join(HERE, f'poolbar_entries_{E.sim()}.json'))))
+def report(runs=os.path.join(HERE, 'runs')):
+    ef = os.path.join(runs, f'poolbar_entries_{E.sim()}.json')
+    entries = set(json.load(open(ef if os.path.exists(ef) else os.path.join(HERE, f'poolbar_entries_{E.sim()}.json'))))
     by_group = collections.defaultdict(lambda: [0.0, 0]); by_arch = collections.defaultdict(lambda: [0.0, 0]); arch_models = collections.defaultdict(list)
     for name in S.DEFAULT:
         team, fixed, label, seed = S.latest(name)
         for c in range(CHUNKS):
-            rd = os.path.join(HERE, 'runs', f'poolbar_c{c}_{E.team_key(team)}'); d = os.path.join(rd, f'out_{E.out_tag(SEED, 1)}')
+            rd = os.path.join(runs, f'poolbar_c{c}_{E.team_key(team)}'); d = os.path.join(rd, f'out_{E.out_tag(SEED, 1)}')
             metas = [j['meta'] for j in json.load(open(os.path.join(rd, 'jobs.json')))]
             for f in os.listdir(d):
                 r = json.load(open(os.path.join(d, f))); m = metas[r['job']]
@@ -92,7 +93,7 @@ def report():
                     if x.get('unsupported'): continue
                     by_group[m['group']][0] += x['v']; by_group[m['group']][1] += 1
                     by_arch[m['arch']][0] += x['v']; by_arch[m['arch']][1] += 1
-        res = E.read(os.path.join(HERE, 'runs', f'{E.team_key(team)}_{label}'), E.out_tag(seed, 4))
+        res = E.read(os.path.join(runs, f'{E.team_key(team)}_{label}'), E.out_tag(seed, 4))
         for a, v in res['by_arch'].items(): arch_models[AM.ARCH_MAP[a]].append(v)
     real_a, nreal = real_vs_arch()
     pool_a = {a: s / k for a, (s, k) in by_arch.items() if k >= 100}
@@ -112,7 +113,9 @@ def report():
     for src in ('regional', 'ladder'):
         tot = collections.Counter(); won = collections.Counter()
         for c in R['cells']:
-            if c.get(src) and c['vs'] in pool_g: tot[c['vs']] += c[src][1]; won[c['vs']] += c[src][1] * c[src][2]   # [wins, n, per-game rate of 'group' vs 'vs']
+            if c.get(src) and c['vs'] in pool_g and c[src][1]:          # [wins, n, per-game rate of 'group' vs 'vs'] (rate None if thin)
+                rate = c[src][2] if c[src][2] is not None else c[src][0] / c[src][1]
+                tot[c['vs']] += c[src][1]; won[c['vs']] += c[src][1] * rate
         real_g = {g: won[g] / tot[g] for g in tot if tot[g] >= 100}
         g, rms = gaps(pool_g, real_g, {k: tot[k] for k in real_g})
         print(f"\nby core-rule group vs {src} reality (groups with >= 200 sim games and >= 100 real games: {len(g)}): RMS {rms:.2f}")
@@ -121,4 +124,4 @@ def report():
 
 if __name__ == '__main__':
     if sys.argv[1] == 'run': run(int(sys.argv[2]) if len(sys.argv) > 2 else 2500, int(sys.argv[3]) if len(sys.argv) > 3 else 0)
-    else: report()
+    else: report(os.path.join(HERE, sys.argv[2]) if len(sys.argv) > 2 else os.path.join(HERE, 'runs'))

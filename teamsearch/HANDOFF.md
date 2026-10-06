@@ -371,3 +371,11 @@ Usage:
   - Most added: Scarf Garchomp (always the Adamant Choice Scarf set, Garchomp#1), Kingambit, Mega Charizard Y. Most removed: Sneasler.
   - trick_room_six 58.3 after Indeedee-F → Gholdengo and Kingambit → M-Froslass; low_variance_six 50.3, no swaps.
   - `report.py` was fixed on Oct 6 to use the sequential verdicts and the state; earlier printouts showed undecided swaps as moves.
+- **Opponent-pool validation: PASS (Oct 6, report run on the Mac at 4 am; `poolbar_report_v17g.txt`).** Same 10 teams, brings and setup (v17g); only the opponents differ.
+  - By rule archetype, against the field's real regional rate: RMS gap **0.29 → 0.18** without Perish, and 0.41 → 0.20 with it. Perish +1.21 → +0.37, Rain −0.51 → −0.33, Sun −0.35 → −0.22, Indeedee TR −0.33 → +0.09, Balance +0.32 → +0.13.
+  - By core-rule group: RMS 0.23 vs regionals (19 groups), 0.15 vs ladder (12 groups).
+  - The box run used 30 processes × 3 threads: one 90-thread process ran ~6x slower per game. Battle sim's v19 should remove that lock contention; not yet measured.
+  - The report needs `regmatch/`, which isn't bundled, so `poolbar.py report cloud_results/v12/runs` runs on the Mac.
+- **Sixth slot for the converged core (Oct 6, 3:10 am; `sixth.py`, `sixth_result.json`):** core Delphox, Scarf Garchomp, Charizard Y, Sitrus Incineroar, Sash Kingambit; 8 batches × 216 paired games each.
+  - Archaludon 69.1, Gholdengo 67.0, Rillaboom 64.0. Gholdengo − Archaludon −2.1 ± 1.6; Rillaboom − Archaludon −5.1 ± 1.7; Rillaboom − Gholdengo −3.0 ± 1.1.
+  - Archaludon's edge is Rain (72.9 vs 28.8 / 11.6) and Rain+Sun. Gholdengo is better vs Indeedee TR (60.7 vs 43.8) and TR (74.2 vs 61.7); Rillaboom vs Snow.

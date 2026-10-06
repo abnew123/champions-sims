@@ -1,0 +1,39 @@
+games: pool 23907 over 2500 entries x 10 teams
+
+by rule archetype (real = the field's per-game win rate vs it at the regionals; gap after offset, log-odds):
+  archetype models  RMS all archetypes: 0.41
+  archetype models  RMS without Perish: 0.29
+   Tailwind +0.23  Sun -0.35  Indeedee TR -0.33  Balance +0.32  Rain -0.51  Sand +0.06  Snow -0.16  Trick Room -0.15  Perish +1.21  Rain + Sun -0.41
+  real-game pool    RMS all archetypes: 0.20
+  real-game pool    RMS without Perish: 0.18
+   Tailwind +0.13  Sun -0.22  Indeedee TR +0.09  Balance +0.13  Rain -0.33  Sand +0.02  Snow +0.08  Trick Room -0.24  Perish +0.37  Rain + Sun -0.25
+
+by core-rule group vs regional reality (groups with >= 200 sim games and >= 100 real games: 19): RMS 0.23
+  other                                                      sim  61.9  real  51.7  gap -0.06
+  Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)   sim  67.7  real  48.3  gap +0.33
+  Rain: Archaludon + Pelipper (no Grimmsnarl)                sim  54.1  real  50.3  gap -0.32
+  Indeedee TR: Armarouge + Indeedee-F                        sim  57.6  real  51.2  gap -0.22
+  Sand: Excadrill + Salamence + Sneasler + Tyranitar         sim  60.7  real  49.9  gap -0.04
+  Balance: Gholdengo + Incineroar + Raichu + Rillaboom       sim  63.6  real  46.2  gap +0.23
+  Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingamb sim  68.1  real  53.7  gap +0.14
+  Rain + Sun: Archaludon + Golisopod + Politoed              sim  51.3  real  48.9  gap -0.38
+  Rain + Sun: Archaludon + Grimmsnarl + Pelipper             sim  53.6  real  46.6  gap -0.20
+  Snow: Froslass + Kingambit + Rillaboom                     sim  66.1  real  47.5  gap +0.29
+  Perish: Archaludon + Politoed (no Golisopod)               sim  70.4  real  47.0  gap +0.51
+  Sand: Excadrill + Salamence + Tyranitar (no Sneasler)      sim  59.7  real  50.1  gap -0.09
+  Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)        sim  52.5  real  46.5  gap -0.24
+  Sun: Charizard + Whimsicott                                sim  58.8  real  48.2  gap -0.05
+
+by core-rule group vs ladder reality (groups with >= 200 sim games and >= 100 real games: 12): RMS 0.15
+  other                                                      sim  61.9  real  52.1  gap -0.07
+  Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)   sim  67.7  real  51.6  gap +0.20
+  Balance: Gholdengo + Incineroar + Raichu + Rillaboom       sim  63.6  real  47.8  gap +0.17
+  Rain: Archaludon + Pelipper (no Grimmsnarl)                sim  54.1  real  45.9  gap -0.14
+  Rain + Sun: Archaludon + Grimmsnarl + Pelipper             sim  53.6  real  41.8  gap +0.00
+  Snow: Froslass + Kingambit + Rillaboom                     sim  66.1  real  46.6  gap +0.33
+  Indeedee TR: Armarouge + Indeedee-F                        sim  57.6  real  50.2  gap -0.17
+  Sand: Excadrill + Salamence + Sneasler + Tyranitar         sim  60.7  real  53.8  gap -0.19
+  Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingamb sim  68.1  real  48.1  gap +0.36
+  Rain + Sun: Archaludon + Golisopod + Politoed              sim  51.3  real  47.0  gap -0.30
+  Sand: Excadrill + Tyranitar                                sim  67.0  real  51.8  gap +0.16
+  Perish: Archaludon + Politoed (no Golisopod)               sim  70.4  real  49.5  gap +0.41

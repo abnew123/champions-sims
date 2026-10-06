@@ -16,7 +16,9 @@ sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, 'bring')); sys.p
 sim_setup = os.environ.get('TS_SIM', 'v17g'); os.environ.pop('TS_PERISH', None)      # the bar plays every archetype, Perish included
 import evaluate as E, simcmp as S
 os.environ['TS_SIM'] = sim_setup                                                   # (simcmp sets TS_SIM=v8 on import)
+_argv, sys.argv = sys.argv, sys.argv[:1]                                          # archmatch parses the command line on import
 import archmatch as AM
+sys.argv = _argv
 from opp_pool import spread
 SEED = 700000; FULL = os.path.join('..', 'native', 'engine_data_full.json')
 INV = {short: full for full, short in AM.ARCH_MAP.items()}

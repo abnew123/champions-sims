@@ -7,6 +7,10 @@ the lead pair and the four brought as actually played, the players' rating, the 
   ../.venv/bin/python3 opp_pool.py jobs <myteam.json> <lead a,b> <back c,d> <n> <out jobs.json> [min rating] [group filter]
         n explicit jobs for champ battle (battle_starts.js explicit mode): our four fixed, their four from n pool entries drawn without
         replacement, weighted by rating band (>= 1500: 3, >= 1300: 2, else 1; unrated 1); the job's meta carries the entry's group.
+  ../.venv/bin/python3 opp_pool.py model <group | arch:<name> | all> <out.json> [pairs=6] [min rating]
+        the old opp_model shape for one group ({n, sets, pairs: [{pair, n, share, win, hiShare, t1, mega, back}]}: sets as
+        "item|ability|Nature|moves (count/total)", t1 as "Move:rate, (switch):rate, ..." per lead, back as "Species:share, ..."), so
+        t1sim.js runs on core-rule groups unchanged; hiShare = the pair's share among sides rated 1400 or more.
   ../.venv/bin/python3 opp_pool.py sixes <group | all> <N> <out.json> [min rating]
         the N most common sixes of a group (species sets; a six's sets are the most common per species among its games), each with its
         weight (share of the group's sides), count, lead pairs and brought fours with counts: for the sheet kit's optimal-pick step.
@@ -34,18 +38,40 @@ def sheet(line):
         out.append({'species': species, 'item': name_of(f[2]), 'ability': name_of(f[3]), 'moves': [name_of(m) for m in f[4].split(',') if m], 'nature': f[5] or 'Serious'})
     return out
 def parse(log):
-    sides = {'p1': {'six': None, 'lead': {}, 'seen': []}, 'p2': {'six': None, 'lead': {}, 'seen': []}}; turn = 0; win = None; names = {}
+    """per side: team sheet, lead per slot, species seen, turn-one action per lead species ("Move Name", "(switch)", "(flinched)",
+    "(none)") with the foe species targeted when there is one, and the species that Mega Evolved"""
+    sides = {s: {'six': None, 'lead': {}, 'seen': [], 't1': {}, 't1t': {}, 'mega': []} for s in ('p1', 'p2')}; turn = 0; win = None; names = {}
+    nick = {}   # "p1a: Nick" -> species currently in that slot
+    fainted = set()
     for l in log.split('\n'):
         p = l.split('|')
         if len(p) < 3: continue
         if p[1] == 'player' and len(p) > 3: names[p[2]] = p[3]
         elif p[1] == 'showteam' and p[2] in sides: sides[p[2]]['six'] = sheet('|'.join(p[3:]))
         elif p[1] in ('switch', 'drag') and p[2][:2] in sides:
-            sd = sides[p[2][:2]]; sp = base(p[3])
+            sd = sides[p[2][:2]]; sp = base(p[3]); slot = p[2][:3]
+            if turn == 1 and p[1] == 'switch' and slot in sd['lead'] and sd['lead'][slot] not in sd['t1']:
+                sd['t1'][sd['lead'][slot]] = '(none)' if slot in fainted else '(switch)'   # a replacement for a fainted lead is not a choice
+            nick[p[2].split('|')[0]] = sp
             if sp not in sd['seen']: sd['seen'].append(sp)
-            if turn == 0: sd['lead'][p[2][:3]] = sp
+            if turn == 0: sd['lead'][slot] = sp
+        elif p[1] == 'move' and turn == 1 and p[2][:2] in sides:
+            sd = sides[p[2][:2]]; sp = nick.get(p[2]); tgt = nick.get(p[4]) if len(p) > 4 else None
+            if sp and sp not in sd['t1']:
+                sd['t1'][sp] = p[3]
+                if tgt and len(p) > 4 and p[4][:2] != p[2][:2]: sd['t1t'][sp] = tgt
+        elif p[1] == 'faint' and p[2][:2] in sides: fainted.add(p[2][:3])
+        elif p[1] == 'cant' and turn == 1 and p[2][:2] in sides:
+            sd = sides[p[2][:2]]; sp = nick.get(p[2])
+            if sp and sp not in sd['t1']: sd['t1'][sp] = '(flinched)' if 'flinch' in l else '(none)'
+        elif p[1] == '-mega' and p[2][:2] in sides:
+            sp = nick.get(p[2]); sd = sides[p[2][:2]]
+            if sp and sp not in sd['mega']: sd['mega'].append(sp)
         elif p[1] == 'turn': turn = int(p[2])
         elif p[1] == 'win': win = p[2]
+    for sd in sides.values():
+        for sp in sd['lead'].values():
+            if sp not in sd['t1']: sd['t1'][sp] = '(none)'
     winner = next((s for s, nm in names.items() if nm == win), None)
     return sides, winner, turn
 def build(rules_path):
@@ -64,7 +90,8 @@ def build(rules_path):
             lead = [sd['lead'].get(s + 'a'), sd['lead'].get(s + 'b')]
             if any(x is None or x not in species for x in lead): continue
             seen = [x for x in sd['seen'] if x in species]
-            e = {'id': gid, 'side': s, 'six': sd['six'], 'lead': lead, 'seen': seen, 'rating': rating, 'won': None if winner is None else winner == s, 'turns': turns}
+            e = {'id': gid, 'side': s, 'six': sd['six'], 'lead': lead, 'seen': seen, 'rating': rating, 'won': None if winner is None else winner == s, 'turns': turns,
+                 't1': {sp: sd['t1'].get(sp, '(none)') for sp in lead}, 't1t': {sp: sd['t1t'][sp] for sp in lead if sp in sd['t1t']}, 'mega': sd['mega']}
             entries.append(e); by_six[frozenset(species)].append(e)
     # fill brings to four
     rng = random.Random(0)
@@ -116,7 +143,40 @@ def sixes(group, n, outf, min_rating=0):
                     'won': sum(1 for e in es if e['won']) / max(1, sum(1 for e in es if e['won'] is not None))})
     json.dump({'group': group, 'sides': tot, 'distinct_sixes': len(by), 'covered': sum(x['count'] for x in out) / max(1, tot), 'sixes': out}, open(outf, 'w'), indent=1)
     print(f"{group}: {tot} sides, {len(by)} distinct sixes; top {len(out)} cover {100 * sum(x['count'] for x in out) / max(1, tot):.0f}% -> {outf}")
+def toid(x): return ''.join(c for c in x.lower() if c.isalnum())
+def model(group, outf, pairs_n=6, min_rating=0):
+    """the old opp_model shape for one group ({n, sets, pairs: [{pair, n, share, win, hiShare, t1, mega, back}]}), so t1sim.js runs on
+    core-rule groups unchanged. group = a core-rule group name, 'arch:<name>' (pro_replays.arch) or 'all'."""
+    pool = json.load(open(os.path.join(HERE, 'opp_pool.json')))['entries']
+    ents = [e for e in pool if (e['rating'] or 0) >= min_rating and (group == 'all' or (group.startswith('arch:') and e['arch'] == group[5:]) or e['group'] == group)]
+    N = len(ents)
+    # sets: each species' most common set among the group's sheets, in the old string form
+    cnt = collections.defaultdict(collections.Counter); tot = collections.Counter()
+    for e in ents:
+        for m in e['six']:
+            key = f"{toid(m['item'])}|{toid(m['ability'])}|{m['nature']}|{'/'.join(sorted(toid(x) for x in m['moves']))}"
+            cnt[m['species']][key] += 1; tot[m['species']] += 1
+    sets = {sp: f"{c.most_common(1)[0][0]} ({c.most_common(1)[0][1]}/{tot[sp]})" for sp, c in cnt.items()}
+    by_pair = collections.defaultdict(list)
+    for e in ents: by_pair[' + '.join(sorted(e['lead']))].append(e)
+    hi = [e for e in ents if (e['rating'] or 0) >= 1400]
+    pairs = []
+    for pair, es in sorted(by_pair.items(), key=lambda kv: -len(kv[1]))[:pairs_n]:
+        n = len(es); leads = pair.split(' + ')
+        t1 = {}
+        for sp in leads:
+            c = collections.Counter(e['t1'].get(sp, '(none)') for e in es)
+            t1[sp] = ', '.join(f"{a}:{v / n:.2f}" for a, v in c.most_common())
+        mega = collections.Counter(sp for e in es for sp in e['mega'] if sp in leads)
+        back = collections.Counter(x for e in es for x in e['bring'] if x not in leads)
+        won = [e['won'] for e in es if e['won'] is not None]
+        pairs.append({'pair': pair, 'n': n, 'share': round(n / N, 4), 'win': round(sum(won) / len(won), 3) if won else None,
+                      'hiShare': round(sum(1 for e in hi if ' + '.join(sorted(e['lead'])) == pair) / len(hi), 4) if hi else None,
+                      't1': t1, 'mega': dict(mega), 'back': ', '.join(f"{x}:{v / n:.2f}" for x, v in back.most_common(6))})
+    out = {'n': N, 'group': group, 'sets': sets, 'pairs': pairs}
+    json.dump(out, open(outf, 'w'), indent=1); print(f"{group}: {N} sides, {len(by_pair)} lead pairs; top {len(pairs)} cover {100 * sum(p['n'] for p in pairs) / max(1, N):.0f}% -> {outf}")
 if __name__ == '__main__':
-    if sys.argv[1] == 'sixes': sixes(sys.argv[2], int(sys.argv[3]), sys.argv[4], int(sys.argv[5]) if len(sys.argv) > 5 else 0)
+    if sys.argv[1] == 'model': model(sys.argv[2], sys.argv[3], int(sys.argv[4]) if len(sys.argv) > 4 else 6, int(sys.argv[5]) if len(sys.argv) > 5 else 0)
+    elif sys.argv[1] == 'sixes': sixes(sys.argv[2], int(sys.argv[3]), sys.argv[4], int(sys.argv[5]) if len(sys.argv) > 5 else 0)
     elif sys.argv[1] == 'build': build(sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, 'results', 'core_rules_both_100.json'))
     elif sys.argv[1] == 'jobs': jobs(sys.argv[2], sys.argv[3].split(','), sys.argv[4].split(','), int(sys.argv[5]), sys.argv[6], int(sys.argv[7]) if len(sys.argv) > 7 else 0, sys.argv[8] if len(sys.argv) > 8 else None)

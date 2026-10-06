@@ -569,7 +569,12 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     over four draws of the opponent's spreads (444 regional decisions) left planned Protect at 8.8% vs 13.3% played, agreement and log
     score unchanged, mixes no flatter (`evalbar/results/spread_uncertainty_day1.json`). So depth explains about half the Protect gap and
     spread knowledge none; the user's read of the 39 costly broadcast plays (13 switches, 10 Protects, 5 setup moves) is that the engine
-    undervalues setup and switching, plus some real mistakes. Open lead for the value function: setup (boost) and switch (tempo)
-    features, to be tested on real-game outcomes before any change to play. `EVAL_MATRIX=1|full`: the payoff matrix on each output line (rows / cols / labels / final mixes /
+    undervalues setup and switching, plus some real mistakes. **Tested on real outcomes by the Eval bar (2:00 am;
+    `evalbar/results/aftermath_setup_switch.json`):** 3,408 Showdown Bo3 positions from turn 2 on, egvalue9_sym2, actual win rate minus
+    the rescaled rating with each side's overall bias removed: after a setup move -3.2 points (SE 2.7) with the lookahead value, holding
+    +1/+2 boosts -0.2 (1.9), +3 or more -0.9 (3.1); after a chosen switch +0.7 (0.9) with the lookahead, +1.9 (0.9) for the static
+    value. So the boost feature is calibrated and a switch tempo term would be worth at most about 2 points on the static value,
+    mostly covered by the one-turn lookahead: no value change warranted. The remaining Protect gap and the sharper-than-expert mixes
+    are unexplained by depth to two turns, spread knowledge, or the value of boosts and switches. `EVAL_MATRIX=1|full`: the payoff matrix on each output line (rows / cols / labels / final mixes /
     one-turn values and seed counts per cell, two-turn values under EVAL_HORIZON=2) for reading departures from the equilibrium against
     the opponent's actual move; "1" raises the rows and columns holding a slot's actual or most-weighted option to full seeds first.

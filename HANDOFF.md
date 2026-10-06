@@ -513,8 +513,15 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
       TR six ran cleanly under v16 + engine_data_full with no unsupported hits.
     - The real reference for the bar: `pssim/group_real.py` -> results/group_real.{txt,json}: per group, team share and win rate in
       the regionals (per-game rates from Bo3 results) and on the ladder (both sides of the pool's games), and per group pair with at
-      least 15 matches. Next: Team search runs its ten teams against the pool (jobs per team with its bring policy), compares sim win
-      rate by opponent group with these real rates, and the regional bar decides whether the pool replaces the archetype models.
+      least 15 matches.
+    - **Validated (Team search, 2026-10-06, 4:10 am; `teamsearch/poolbar_report_v17g.txt`):** the same ten teams with their climb
+      brings, 23,907 pool games over 2,500 entries vs the archetype-model baseline, both scored against the field's real regional rate
+      by opponent group with the offset removed. By rule archetype the RMS error falls 0.29 -> 0.18 without Perish and 0.41 -> 0.20
+      with it (Tailwind +0.23 -> +0.13, Sun -0.35 -> -0.22, Indeedee TR -0.33 -> +0.09, Balance +0.32 -> +0.13, Rain -0.51 -> -0.33,
+      Perish +1.21 -> +0.37); by core-rule group 0.23 vs the regionals (19 groups), 0.15 vs the ladder (12). What remains: Rain and
+      Rain + Sun still too hard, Tailwind / Snow / Perish too easy. **The pool replaces the archetype models as the opponent source**;
+      the sheets key by core group (nearest archetype name kept), Team search runs a fresh pool-based climb in the daytime (brings per
+      opponent team or group, scores weighted by real group shares), the TR sheet's optimal-pick step takes the pool's sixes.
   - **Final setup: champ-battle-v12 + egvalue9.json + RACE=1 + DP2=1 + anticipation** (see the top of this file). What it is: status and
     Tailwind weights from real games; a damage-race feature; a two-turn check on second Protects; slopes fitted on eleven teams. What it
     is not: it cannot play Perish trap, and absolute matchup win rates carry about 6 points of error per archetype.

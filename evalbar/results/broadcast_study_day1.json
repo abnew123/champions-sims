@@ -3,65 +3,65 @@
  "games": 19,
  "matches": 8,
  "summary": {
-  "decisions": 461,
-  "top_pick": 0.4490238611713666,
-  "best_value": 0.3644251626898048,
-  "p_played": 0.3905199781636924,
-  "p_if_following_mix": 0.5627721170625539,
-  "chance": 0.17215421960541266,
-  "regret_mean": 0.019677751657626124,
-  "regret_median": 0.0032220289432444427,
-  "within_2pts": 0.7071583514099783,
-  "within_5pts": 0.8676789587852495
+  "decisions": 469,
+  "top_pick": 0.44776119402985076,
+  "best_value": 0.3646055437100213,
+  "p_played": 0.38943483110143595,
+  "p_if_following_mix": 0.5704081274386086,
+  "chance": 0.17454563915118285,
+  "regret_mean": 0.01907247074344605,
+  "regret_median": 0.0031703010429325884,
+  "within_2pts": 0.7121535181236673,
+  "within_5pts": 0.8720682302771855
  },
  "by_kind": {
   "attack": {
-   "players": 0.5032537960954447,
-   "planner": 0.5849238344308842
+   "players": 0.4968017057569296,
+   "planner": 0.5793438516700116
   },
   "switch": {
-   "players": 0.1561822125813449,
-   "planner": 0.1349777264973471
+   "players": 0.16417910447761194,
+   "planner": 0.13776849465881
   },
   "Protect": {
-   "players": 0.13232104121475055,
-   "planner": 0.08609829615509956
+   "players": 0.1300639658848614,
+   "planner": 0.0848873334212011
   },
   "Fake Out": {
-   "players": 0.0650759219088937,
-   "planner": 0.07242778938337191
+   "players": 0.06823027718550106,
+   "planner": 0.07513565442120113
   },
   "other status move": {
-   "players": 0.06941431670281996,
-   "planner": 0.04958108373940952
+   "players": 0.06823027718550106,
+   "planner": 0.049866567255039455
   },
   "Tailwind": {
-   "players": 0.01735357917570499,
-   "planner": 0.02644435024729037
+   "players": 0.017057569296375266,
+   "planner": 0.02687697188565401
   },
   "Parting Shot": {
-   "players": 0.028199566160520606,
-   "planner": 0.020045299266276736
+   "players": 0.02771855010660981,
+   "planner": 0.019989768021534838
   },
   "Trick Room": {
-   "players": 0.006507592190889371,
-   "planner": 0.01154922974172614
+   "players": 0.006396588486140725,
+   "planner": 0.012235659425191956
   },
   "Helping Hand": {
-   "players": 0.013015184381778741,
-   "planner": 0.005162703358946834
+   "players": 0.01279317697228145,
+   "planner": 0.004583750936494578
   },
   "Wide Guard": {
-   "players": 0.0021691973969631237,
-   "planner": 0.0033719814579424375
+   "players": 0.0021321961620469083,
+   "planner": 0.0033144636505574917
   },
   "Follow Me": {
-   "players": 0.004338394793926247,
-   "planner": 0.003169682642532271
+   "players": 0.0042643923240938165,
+   "planner": 0.003115505933666981
   },
   "Rage Powder": {
-   "players": 0.0021691973969631237,
-   "planner": 0.002248023079172506
+   "players": 0.0021321961620469083,
+   "planner": 0.0028819787206365117
   }
  },
  "per_game": [
@@ -70,7 +70,7 @@
    "turns": 10,
    "decisions": 29,
    "top_pick": 0.5172413793103449,
-   "regret_mean": 0.012685628615451042,
+   "regret_mean": 0.012696641402744685,
    "regret_median": 0.0007404033727309578
   },
   {
@@ -78,8 +78,8 @@
    "turns": 7,
    "decisions": 28,
    "top_pick": 0.42857142857142855,
-   "regret_mean": 0.023072347535726363,
-   "regret_median": 0.007850036333290289
+   "regret_mean": 0.020935870268265714,
+   "regret_median": 0.007863833599143721
   },
   {
    "game": "m2g1",
@@ -94,7 +94,7 @@
    "turns": 7,
    "decisions": 27,
    "top_pick": 0.3333333333333333,
-   "regret_mean": 0.03415855256541211,
+   "regret_mean": 0.03394142004851267,
    "regret_median": 0.03171463277483729
   },
   {
@@ -102,15 +102,15 @@
    "turns": 9,
    "decisions": 30,
    "top_pick": 0.5333333333333333,
-   "regret_mean": 0.021621437561913617,
+   "regret_mean": 0.021528138769384027,
    "regret_median": 0.002273038442659636
   },
   {
    "game": "m3g1",
    "turns": 7,
-   "decisions": 21,
-   "top_pick": 0.6190476190476191,
-   "regret_mean": 0.01434065525453548,
+   "decisions": 24,
+   "top_pick": 0.625,
+   "regret_mean": 0.01050572801920898,
    "regret_median": 0.0
   },
   {
@@ -118,15 +118,15 @@
    "turns": 3,
    "decisions": 10,
    "top_pick": 0.6,
-   "regret_mean": 0.018918976299343998,
+   "regret_mean": 0.018919049423031704,
    "regret_median": 4.305549571959055e-05
   },
   {
    "game": "m3g3",
    "turns": 6,
-   "decisions": 20,
-   "top_pick": 0.5,
-   "regret_mean": 0.011949676679436968,
+   "decisions": 21,
+   "top_pick": 0.47619047619047616,
+   "regret_mean": 0.009637415073473007,
    "regret_median": 0.0031703010429325884
   },
   {
@@ -134,7 +134,7 @@
    "turns": 9,
    "decisions": 29,
    "top_pick": 0.41379310344827586,
-   "regret_mean": 0.01821122914137952,
+   "regret_mean": 0.018057712663901267,
    "regret_median": 0.0005461858573119205
   },
   {
@@ -142,7 +142,7 @@
    "turns": 10,
    "decisions": 32,
    "top_pick": 0.375,
-   "regret_mean": 0.010536070921347649,
+   "regret_mean": 0.010537328062435004,
    "regret_median": 0.003927424987595574
   },
   {
@@ -150,7 +150,7 @@
    "turns": 5,
    "decisions": 17,
    "top_pick": 0.17647058823529413,
-   "regret_mean": 0.03747686074123505,
+   "regret_mean": 0.037688607221493454,
    "regret_median": 0.0222026471020719
   },
   {
@@ -158,31 +158,31 @@
    "turns": 6,
    "decisions": 21,
    "top_pick": 0.2857142857142857,
-   "regret_mean": 0.021767469366842807,
+   "regret_mean": 0.02176855590493703,
    "regret_median": 0.005834511077617011
   },
   {
    "game": "m5g2",
    "turns": 8,
-   "decisions": 22,
-   "top_pick": 0.4090909090909091,
-   "regret_mean": 0.014772899227882628,
-   "regret_median": 0.00344413568763019
+   "decisions": 24,
+   "top_pick": 0.375,
+   "regret_mean": 0.017796473814753803,
+   "regret_median": 0.0071117222135149705
   },
   {
    "game": "m6g1",
    "turns": 5,
    "decisions": 17,
    "top_pick": 0.35294117647058826,
-   "regret_mean": 0.023004017818257255,
-   "regret_median": 0.020311424488700158
+   "regret_mean": 0.02300313393285428,
+   "regret_median": 0.020302982311363627
   },
   {
    "game": "m6g2",
    "turns": 11,
    "decisions": 26,
    "top_pick": 0.4230769230769231,
-   "regret_mean": 0.027332828872338795,
+   "regret_mean": 0.027649383689294173,
    "regret_median": 0.010564421426418114
   },
   {
@@ -190,24 +190,24 @@
    "turns": 10,
    "decisions": 33,
    "top_pick": 0.5757575757575758,
-   "regret_mean": 0.024722741710744938,
-   "regret_median": 0.002030891469499918
+   "regret_mean": 0.024624426968829008,
+   "regret_median": 0.001972889511858811
   },
   {
    "game": "m7g2",
    "turns": 9,
-   "decisions": 28,
-   "top_pick": 0.42857142857142855,
-   "regret_mean": 0.015059865748260012,
-   "regret_median": 0.0032940597967013874
+   "decisions": 29,
+   "top_pick": 0.41379310344827586,
+   "regret_mean": 0.014571300338576938,
+   "regret_median": 0.00297744339898344
   },
   {
    "game": "m8g1",
    "turns": 11,
-   "decisions": 35,
-   "top_pick": 0.4857142857142857,
-   "regret_mean": 0.010898691811141562,
-   "regret_median": 0.002285834794079289
+   "decisions": 36,
+   "top_pick": 0.5,
+   "regret_mean": 0.008377821048251062,
+   "regret_median": 0.002229921773500121
   },
   {
    "game": "m8g2",
@@ -228,21 +228,9 @@
    "played": "switch to Incineroar",
    "planner_top": "Hyper Voice",
    "p_played": 0.0009,
-   "cost": 0.171,
+   "cost": 0.172,
    "video_s": 29782.5,
    "side_won": false
-  },
-  {
-   "game": "m3g1",
-   "turn": 5,
-   "side": "p1",
-   "mon": "Rillaboom",
-   "played": "switch to Gholdengo",
-   "planner_top": "Grassy Glide",
-   "p_played": 0.0004,
-   "cost": 0.166,
-   "video_s": 14499.0,
-   "side_won": null
   },
   {
    "game": "m4g1",
@@ -266,18 +254,6 @@
    "p_played": 0.0005,
    "cost": 0.153,
    "video_s": 21737.0,
-   "side_won": false
-  },
-  {
-   "game": "m1g2",
-   "turn": 5,
-   "side": "p2",
-   "mon": "Rillaboom",
-   "played": "Grassy Glide",
-   "planner_top": "Fake Out",
-   "p_played": 0.0006,
-   "cost": 0.147,
-   "video_s": 7740.5,
    "side_won": false
   },
   {
@@ -365,14 +341,26 @@
    "side_won": true
   },
   {
+   "game": "m3g1",
+   "turn": 5,
+   "side": "p1",
+   "mon": "Rillaboom",
+   "played": "switch to Gholdengo",
+   "planner_top": "Grassy Glide",
+   "p_played": 0.0097,
+   "cost": 0.098,
+   "video_s": 14499.0,
+   "side_won": null
+  },
+  {
    "game": "m4g3",
    "turn": 5,
    "side": "p2",
    "mon": "Staraptor",
    "played": "Close Combat",
    "planner_top": "Tailwind",
-   "p_played": 0.0023,
-   "cost": 0.092,
+   "p_played": 0.0022,
+   "cost": 0.096,
    "video_s": 19852.0,
    "side_won": false
   },
@@ -401,16 +389,16 @@
    "side_won": false
   },
   {
-   "game": "m2g3",
-   "turn": 1,
-   "side": "p1",
-   "mon": "Volcarona",
-   "played": "Protect",
-   "planner_top": "Quiver Dance",
-   "p_played": 0.0416,
-   "cost": 0.088,
-   "video_s": 11725.5,
-   "side_won": true
+   "game": "m1g2",
+   "turn": 5,
+   "side": "p2",
+   "mon": "Rillaboom",
+   "played": "Grassy Glide",
+   "planner_top": "Fake Out",
+   "p_played": 0.0006,
+   "cost": 0.087,
+   "video_s": 7740.5,
+   "side_won": false
   },
   {
    "game": "m2g1",
@@ -423,6 +411,18 @@
    "cost": 0.087,
    "video_s": 10730.0,
    "side_won": null
+  },
+  {
+   "game": "m2g3",
+   "turn": 1,
+   "side": "p1",
+   "mon": "Volcarona",
+   "played": "Protect",
+   "planner_top": "Quiver Dance",
+   "p_played": 0.0417,
+   "cost": 0.085,
+   "video_s": 11725.5,
+   "side_won": true
   },
   {
    "game": "m7g2",
@@ -473,18 +473,6 @@
    "side_won": null
   },
   {
-   "game": "m8g1",
-   "turn": 11,
-   "side": "p2",
-   "mon": "Incineroar",
-   "played": "switch to Rillaboom",
-   "planner_top": "Darkest Lariat",
-   "p_played": 0.0003,
-   "cost": 0.08,
-   "video_s": 34046.5,
-   "side_won": null
-  },
-  {
    "game": "m1g1",
    "turn": 3,
    "side": "p2",
@@ -492,8 +480,20 @@
    "played": "switch to Incineroar",
    "planner_top": "Dragon Pulse",
    "p_played": 0.0006,
-   "cost": 0.077,
+   "cost": 0.078,
    "video_s": 6719.5,
+   "side_won": false
+  },
+  {
+   "game": "m5g2",
+   "turn": 6,
+   "side": "p2",
+   "mon": "Sneasler",
+   "played": "switch to Incineroar",
+   "planner_top": "Poison Jab",
+   "p_played": 0.0023,
+   "cost": 0.076,
+   "video_s": 22553.5,
    "side_won": false
   },
   {
@@ -552,7 +552,7 @@
    "played": "U-turn",
    "planner_top": "Fake Out",
    "p_played": 0.0022,
-   "cost": 0.068,
+   "cost": 0.069,
    "video_s": 29560.5,
    "side_won": false
   },
@@ -594,18 +594,6 @@
   },
   {
    "game": "m7g1",
-   "turn": 3,
-   "side": "p1",
-   "mon": "Raichu",
-   "played": "switch to Ninetales",
-   "planner_top": "switch to Rillaboom",
-   "p_played": 0.001,
-   "cost": 0.065,
-   "video_s": 29699.0,
-   "side_won": true
-  },
-  {
-   "game": "m7g1",
    "turn": 8,
    "side": "p2",
    "mon": "Rillaboom",
@@ -627,6 +615,18 @@
    "cost": 0.063,
    "video_s": 18253.5,
    "side_won": false
+  },
+  {
+   "game": "m7g1",
+   "turn": 3,
+   "side": "p1",
+   "mon": "Raichu",
+   "played": "switch to Ninetales",
+   "planner_top": "switch to Rillaboom",
+   "p_played": 0.0011,
+   "cost": 0.062,
+   "video_s": 29699.0,
+   "side_won": true
   },
   {
    "game": "m2g2",

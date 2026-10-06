@@ -8,6 +8,9 @@ Per decision: did the player take the planner's most likely action (top pick), t
 planner's probability on what they did, the most likely action's share by chance (1 / number of actions), and the regret (best value
 minus the value of what they did, in win-chance points).
   python3 evalbar/study.py <broadcast ocr .jsonl> [threads=2]        -> evalbar/out/champions/study/<name>.json and a summary
+  python3 evalbar/study.py publish <broadcast ocr .jsonl>          the committed summary, results/broadcast_study_<name>.json: the measures,
+                                                                     per game, and the costly plays (the planner gave them under 5% and they
+                                                                     cost over 5 points against its top action) with the turn's VOD time
   python3 evalbar/study.py replays [evalpos output=evalbar/out/acc_eval_sym2.jsonl]
                                                                      the same measures on the Showdown Bo3 accuracy set (560 cached games,
                                                                      every turn already evaluated; full information), for comparison"""
@@ -105,10 +108,31 @@ def broadcast_study(ocrf, threads=2):
             if st['turn'] >= 1:
                 try: L.evaluate(log, gp, st)
                 except Exception as e: print(tag, 'turn', st['turn'], 'not evaluated:', type(e).__name__)
-        D = decisions(L, log, gp); allD += [{**d, 'game': tag} for d in D]
+        D = decisions(L, log, gp); allD += [{**d, 'game': tag, 'vt': (m.get('times') or {}).get(d['turn'])} for d in D]
         games.append({'game': tag, 'turns': sum(st['turn'] >= 1 for st in gp['steps']), 'winner': gp['winner'], **summary(D, f'{tag}: ')})
     print(); s = summary(allD, 'ALL: '); kinds(allD, '   ')
     json.dump({'summary': s, 'games': games, 'decisions': allD}, open(os.path.join(OUT, name + '.json'), 'w'), indent=1)
+def publish(ocrf):
+    name = os.path.basename(ocrf).split('.')[0]; d = json.load(open(os.path.join(OUT, name + '.json'))); D = d['decisions']; n = len(D)
+    if any('vt' not in x for x in D):                                    # a study run before the VOD times were kept
+        T = {f"{name}_m{m['match']}g{m['game']}": m.get('times') or {} for _, m in BC.read(ocrf).logs_meta()}
+        for x in D: x['vt'] = T.get(x['game'], {}).get(x['turn'])
+    res = os.path.join(C.HERE, 'results', f'broadcast_study_{name}.json'); old = json.load(open(res)) if os.path.exists(res) else {}
+    played = collections.Counter(kind(x['played']) for x in D); planned = collections.Counter()
+    for x in D:
+        for k, p in x['mix'].items(): planned[kind(k)] += p
+    win = {g['game']: g['winner'] for g in d['games']}; short = lambda g: g.replace(name + '_', '')
+    costly = sorted([x for x in D if x['p_played'] < 0.05 and x['v_top'] - x['v_played'] > 0.05], key=lambda x: x['v_played'] - x['v_top'])
+    out = {'source': old.get('source', name), 'games': len(d['games']), 'matches': len({short(g['game']).split('g')[0] for g in d['games']}), 'summary': d['summary'],
+           'by_kind': {k: {'players': played[k] / n, 'planner': planned[k] / n} for k in sorted(set(played) | set(planned), key=lambda k: -planned[k])},
+           'per_game': [{'game': short(g['game']), 'turns': g['turns'], 'decisions': g['decisions'], 'top_pick': g['top_pick'], 'regret_mean': g['regret_mean'],
+                         'regret_median': g['regret_median']} for g in d['games']],
+           'costly_plays_note': "plays the planner gave under 5% that cost over 5 win-chance points against its most likely action (cost = its value "
+                                "minus the played action's); video_s is the VOD time of the turn",
+           'costly_plays': [{'game': short(x['game']), 'turn': x['turn'], 'side': x['side'], 'mon': x['mon'], 'played': x['played'], 'planner_top': x['top'],
+                             'p_played': round(x['p_played'], 4), 'cost': round(x['v_top'] - x['v_played'], 3), 'video_s': x['vt'],
+                             'side_won': (win[x['game']] == x['side']) if win.get(x['game']) else None} for x in costly]}
+    json.dump(out, open(res, 'w'), indent=1); print(f"{res}: {n} decisions, {len(costly)} costly plays")
 def replay_study(evf):
     """the measures on already-evaluated Showdown positions: the played option is the one evalpos marked actual (targets known), compared
     by action like the broadcast"""
@@ -132,5 +156,6 @@ if __name__ == '__main__':
     P.own()
     a = sys.argv[1:]
     if a and a[0] == 'replays': replay_study(a[1] if len(a) > 1 else os.path.join(C.HERE, 'out', 'acc_eval_sym2.jsonl'))
+    elif a and a[0] == 'publish': publish(a[1])
     elif a: broadcast_study(a[0], int(a[1]) if len(a) > 1 else 2)
     else: sys.exit(__doc__)

@@ -272,12 +272,20 @@ class Reader:
                 s.emit(f"|{'-damage' if p < (s.hp.get((sd, sl)) or 100) else '-heal'}|{sd}{sl}: {s.nick(sp)}|{p}/100"); s.hp[(sd, sl)] = p
             s.hp[('mon', sd, sp)] = p
         for sd in ('p1', 'p2'): s.slot_free[sd] = []
+    def close(s):
+        """end the current game without having seen its last message: the result from who has Pokémon left, when that is clear"""
+        left = {sd: 4 - len(s.fainted[sd]) for sd in ('p1', 'p2')}
+        win = 'p1' if left['p2'] <= 0 < left['p1'] else 'p2' if left['p1'] <= 0 < left['p2'] else None
+        if win: s.emit('|', f'|win|Player {win[1]}')
+        s.ended = True; s.prev_end = s.frame - 1; s.meta[-1]['end'] = s.now()
+        if s.game_names: s.board = s.game_names.most_common(1)[0][0]
     def now(s): return s.t0 + (s.frame - 1) / 2                         # the video time of the current frame, in seconds
     def mark(s): s.meta[-1].setdefault('times', {})[s.turn] = s.now()
     def feed(s, lines):
         L = [l for l in lines]; s.frame += 1
         NAT = sum(1 for l in L if l[0].strip().upper() in NATURES)
         if NAT >= 3:
+            if s.started and not s.ended: s.close()
             sets = sheet(L)
             if len(sets) >= 4: s.raw_sheets.append((s.frame, sheet_owner(L), sets))
             return
@@ -300,21 +308,19 @@ class Reader:
                 fresh_sheets = sum(1 for fr, o, st in s.raw_sheets if fr > s.prev_end) >= 2
                 if board and s.board: other = not all(difflib.SequenceMatcher(None, a, b).ratio() > 0.7 for a, b in zip(board, s.board))
                 else: other = fresh_sheets                                        # no names to go by: new sheets mean a new match
-                if not s.match or other: s.sheets = {}; s.match += 1; s.game_in_match = 0   # new players: a new match, new sheets
+                new_match = not s.match or other
+                if new_match: s.sheets = {}                                       # new players: a new match, new sheets
                 if len(s.sheets) < 2: s.owners = {}; s.assign_sheets(boxes, board)
                 if len(s.sheets) < 2: s.note = 'waiting for both team sheets: start before the broadcast shows them'; return
+                if new_match: s.match += 1; s.game_in_match = 0
                 s.board = s.board if s.board and not other else None; s.game_in_match += 1; s.meta[-1] = {'match': s.match, 'game': s.game_in_match, 'frame': s.frame}
                 s.note = ''; s.header(boxes); s.turn = turn or 1; s.emit(f'|turn|{s.turn}'); s.in_decision = True; s.mark()
             elif decision and len(boxes) >= 3 and not s.note: s.note = 'joined mid-game: the bar starts with the next game'
             return
         if s.ended: return
         if decision and not s.in_decision and s.turn >= 2 and len(boxes) == 4 and all(p == 100 for n, p in boxes.values()) \
-                and min(s.pairs.values()) > s.frame - 120:                       # leads for both sides in the last minute, everyone at full HP
-            left = {sd: 4 - len(s.fainted[sd]) for sd in ('p1', 'p2')}
-            win = 'p1' if left['p2'] <= 0 < left['p1'] else 'p2' if left['p1'] <= 0 < left['p2'] else None
-            if win: s.emit('|', f'|win|Player {win[1]}')
-            s.ended = True; s.prev_end = s.frame - 120; s.meta[-1]['end'] = s.now()
-            if s.game_names: s.board = s.game_names.most_common(1)[0][0]
+                and max(s.pairs.values()) > s.frame - 120:                       # new leads sent out in the last minute, everyone at full HP
+            s.close(); s.prev_end = s.frame - 120
             s.new_game(); s.lead_seen = True; s.frame -= 1; return s.feed(lines)   # this frame again, as the new game's first decision
         if decision and not s.in_decision:
             s.reconcile(boxes); s.turn = max(s.turn + 1, turn or 0); s.emit('|upkeep', '|', f'|turn|{s.turn}'); s.mark()   # upkeep: durations count down

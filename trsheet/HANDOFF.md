@@ -100,7 +100,11 @@ each rule jumping to its card. 32 cards (25 rules, two too thin for a card of th
 `sheetkit/opponents.py`. `sheets/trick-room-six/sheet.json` has `"opponents": "cards"`; the archetype-era results are in
 `work/archetypes/` and `archive_v21/` (picks, turn-one plans, guide, notes of Versions 18-21; the published Version 21 is still
 archetype-based). The new matrix jobs (15,750) and each card's real sixes are written. The whole rerun is about 550,000 battles
-(`sheetkit/cloud/all.sh`), so it waits for a cloud box the user said they would start later on 2026-10-06. After it: write `notes.json`
+(`sheetkit/cloud/all.sh`), so it waited for a cloud box. None could be had on 2026-10-06, so the run was trimmed to about 167,000
+battles (sheet.json `matrix_fours`, `games`, `optimal`; see `trim_note`) and scheduled on the Mac by `work/rerun_at_330.sh` for 3:30 am
+on 2026-10-07, 10 threads, dropping to 3 if the Mac is in use after 7 am (the user's OK; log `work/rerun.log`; about 7.5 hours). If a box
+turns up first: kill that script, push the bundle (`sheetkit/cloud/bundle.sh`), `setup_box.sh`, then `all.sh` there (about 1.3 hours on
+96 threads). After it: write `notes.json`
 per card (old notes keyed by archetype are in `archive_v21/notes.json`), update `text.json` (the intro paragraphs talk about tabs and
 archetypes), build, check on phone, and show the user before publishing.
 

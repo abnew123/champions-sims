@@ -11,17 +11,18 @@ G = json.load(open(os.path.join(HERE, 'grid_sets.json')))
 log = [json.loads(l) for l in open(os.path.join(D, 'climb_log.jsonl'))]
 st = json.load(open(os.path.join(D, 'climb_state.json')))
 sp = lambda g: G[g]['species'] + ('*' if (L.DEX['items'].get(L.idf(G[g]['item'] or ''), {}) or {}).get('megaStone') else '')
-latest = {}                                   # start -> (round, final team, its confirm score)
-for r in log:
-    moved = r['best']['diff'] > r['best']['se']
-    team = [g for g in r['team'] if g != r['best']['out']] + [r['best']['into']] if moved else r['team']
+latest = {}                                   # start -> (round, final team, its confirm score, moved in that round)
+for r in log:                                 # a move = the sequential test's verdict (older logs: the old gain > 1 SE rule)
+    moved = r['verdict'] == 'move' if 'verdict' in r else r['best']['diff'] > r['best']['se']
+    team = st['teams'][r['start']]['team']    # the state is authoritative (undecided swaps are not moves)
     latest[r['start']] = (r['round'], team, r['score_best'] if moved else r['score'], moved, r['score'] if r['round'] == 1 else None)
 first = {r['start']: r['score'] for r in log if r['round'] == 1}
 print(f"after round {st['round']}: {sum(1 for t in st['teams'].values() if not t['done'])} of {len(st['teams'])} starts still climbing\n")
-print('best teams so far (confirm win share vs the ladder field; * = Mega Stone; start score in round 1 for reference):')
+print('best teams so far (latest confirm win share vs the archetype field; * = Mega Stone; ^ = just moved: that score is its first\n'
+      'batch as the winning candidate, so it runs high; start score in round 1 for reference):')
 for n, (rnd, team, sc, moved, _) in sorted(latest.items(), key=lambda kv: -kv[1][2])[:15]:
     path = ' → '.join(f"{p['out'].split('#')[0]}→{p['into'].split('#')[0]}" for p in st['teams'][n]['path']) or 'no swaps'
-    print(f"  {100 * sc:5.1f}  (start {100 * first[n]:5.1f})  {n:16s} {', '.join(sorted(sp(g) for g in team))}")
+    print(f"  {100 * sc:5.1f}{'^' if moved else ' '} (start {100 * first[n]:5.1f})  {n:16s} {', '.join(sorted(sp(g) for g in team))}")
     print(f"         path: {path}{'' if st['teams'][n]['done'] else '  [still climbing]'}")
 for n in ('trick_room_six', 'low_variance_six'):
     if n in latest:

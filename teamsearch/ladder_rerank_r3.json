@@ -1,0 +1,1354 @@
+[
+ {
+  "start": "Baltimore-01",
+  "regional": 0.6432842962436414,
+  "ladder": 0.6199853456340745,
+  "batches": 1,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7838645418326691,
+   "Sun": 0.7019230769230769,
+   "Indeedee TR / Psychic Terrain": 0.5833333333333333,
+   "Rain": 0.6569548872180451,
+   "Balance, no speed control": 0.563063063063063,
+   "Sand": 0.4759206798866855,
+   "Snow": 0.6728624535315986,
+   "Trick Room without Indeedee": 0.5536087089374273,
+   "Rain + sun": 0.3946850393700787,
+   "Perish trap": 0.5299
+  },
+  "team": [
+   "Excadrill#2",
+   "M-Tyranitar#1",
+   "Garchomp#1",
+   "Corviknight#1",
+   "Indeedee-F#2",
+   "M-Charizard Y#2"
+  ]
+ },
+ {
+  "start": "Baltimore-02",
+  "regional": 0.6645626812517382,
+  "ladder": 0.6668014287263824,
+  "batches": 1,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7051792828685257,
+   "Sun": 0.7112452700137883,
+   "Indeedee TR / Psychic Terrain": 0.7478354978354979,
+   "Rain": 0.5300751879699248,
+   "Balance, no speed control": 0.6981981981981982,
+   "Sand": 0.7434360569082732,
+   "Snow": 0.5353159851301115,
+   "Trick Room without Indeedee": 0.8469808129447757,
+   "Rain + sun": 0.12155511811023621,
+   "Perish trap": 0.4682
+  },
+  "team": [
+   "M-Golisopod#1",
+   "Basculegion#1",
+   "Politoed#2",
+   "Archaludon#4",
+   "Grimmsnarl#1",
+   "Farigiraf#4"
+  ]
+ },
+ {
+  "start": "Baltimore-03",
+  "regional": 0.5180285337746866,
+  "ladder": 0.5355867164455091,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.3773655378486056,
+   "Sun": 0.6255962818099694,
+   "Indeedee TR / Psychic Terrain": 0.5888977372472651,
+   "Rain": 0.34398330710976127,
+   "Balance, no speed control": 0.44481981981981983,
+   "Sand": 0.7662004249291786,
+   "Snow": 0.3966886723283708,
+   "Trick Room without Indeedee": 0.8538902818172442,
+   "Rain + sun": 0.7007874015748032,
+   "Perish trap": 0.4935
+  },
+  "team": [
+   "Archaludon#3",
+   "Incineroar#9",
+   "Politoed#1",
+   "Vivillon#1",
+   "M-Golisopod#1",
+   "M-Gengar#1"
+  ]
+ },
+ {
+  "start": "Baltimore-04",
+  "regional": 0.45336447865727875,
+  "ladder": 0.5211518926980899,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.31399402390438247,
+   "Sun": 0.7039219561021959,
+   "Indeedee TR / Psychic Terrain": 0.5772456709956709,
+   "Rain": 0.1456766917293233,
+   "Balance, no speed control": 0.6875252275148076,
+   "Sand": 0.5136491214870099,
+   "Snow": 0.5175144370999692,
+   "Trick Room without Indeedee": 0.36703645011250235,
+   "Rain + sun": 0.38373596478666705,
+   "Perish trap": 0.45000000000000007
+  },
+  "team": [
+   "M-Salamence#9",
+   "Arcanine-H#1",
+   "Indeedee#6",
+   "Milotic#5",
+   "M-Metagross#3",
+   "Sneasler#32"
+  ]
+ },
+ {
+  "start": "Baltimore-05",
+  "regional": 0.5904603086557834,
+  "ladder": 0.639001202094794,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.49501992031872505,
+   "Sun": 0.7018060944905946,
+   "Indeedee TR / Psychic Terrain": 0.28814935064935066,
+   "Rain": 0.7554041353383459,
+   "Balance, no speed control": 0.7881475225225226,
+   "Sand": 0.7366324362606234,
+   "Snow": 0.4528345724907063,
+   "Trick Room without Indeedee": 0.7715225819011282,
+   "Rain + sun": 0.5711122047244096,
+   "Perish trap": 0.5299
+  },
+  "team": [
+   "M-Charizard Y#2",
+   "Arcanine-H#1",
+   "Ceruledge#1",
+   "M-Staraptor#1",
+   "Gholdengo#2",
+   "Rillaboom#1"
+  ]
+ },
+ {
+  "start": "Baltimore-06",
+  "regional": 0.5965022715698054,
+  "ladder": 0.6057364009395723,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.6871264940239044,
+   "Sun": 0.49370412524800406,
+   "Indeedee TR / Psychic Terrain": 0.5246212121212122,
+   "Rain": 0.571546052631579,
+   "Balance, no speed control": 0.7402871621621622,
+   "Sand": 0.5083215297450426,
+   "Snow": 0.5992100371747212,
+   "Trick Room without Indeedee": 0.5728704806403107,
+   "Rain + sun": 0.6139886811023623,
+   "Perish trap": 0.4487999999999999
+  },
+  "team": [
+   "M-Froslass#1",
+   "M-Raichu Y#2",
+   "Rillaboom#3",
+   "Kingambit#1",
+   "Sneasler#5",
+   "Arcanine-H#1"
+  ]
+ },
+ {
+  "start": "Baltimore-07",
+  "regional": 0.5715602485013317,
+  "ladder": 0.6111363434288457,
+  "batches": 2,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.4810756972111553,
+   "Sun": 0.6869108729435761,
+   "Indeedee TR / Psychic Terrain": 0.5643939393939394,
+   "Rain": 0.44971804511278196,
+   "Balance, no speed control": 0.6996004144923109,
+   "Sand": 0.7503541076487252,
+   "Snow": 0.41403345724907065,
+   "Trick Room without Indeedee": 0.8209831291412135,
+   "Rain + sun": 0.40625,
+   "Perish trap": 0.4668
+  },
+  "team": [
+   "Arcanine-H#1",
+   "Rillaboom#1",
+   "Gholdengo#1",
+   "M-Staraptor#1",
+   "Milotic#2",
+   "Sylveon#2"
+  ]
+ },
+ {
+  "start": "Baltimore-08",
+  "regional": 0.6775768733917577,
+  "ladder": 0.6672948244035269,
+  "batches": 2,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7928286852589641,
+   "Sun": 0.6743253257426962,
+   "Indeedee TR / Psychic Terrain": 0.6282467532467533,
+   "Rain": 0.6419172932330827,
+   "Balance, no speed control": 0.759572072072072,
+   "Sand": 0.7455614541080267,
+   "Snow": 0.6361524163568774,
+   "Trick Room without Indeedee": 0.43270793817337017,
+   "Rain + sun": 0.39197834645669294,
+   "Perish trap": 0.5299
+  },
+  "team": [
+   "Garchomp#1",
+   "Kingambit#1",
+   "Rillaboom#1",
+   "M-Charizard Y#2",
+   "Incineroar#17",
+   "M-Delphox#1"
+  ]
+ },
+ {
+  "start": "Baltimore-09",
+  "regional": 0.623912295119581,
+  "ladder": 0.6260731873967604,
+  "batches": 5,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.8535856573705178,
+   "Sun": 0.6044483341719008,
+   "Indeedee TR / Psychic Terrain": 0.5450659478059323,
+   "Rain": 0.3454887218045113,
+   "Balance, no speed control": 0.7585585585585586,
+   "Sand": 0.561756373937677,
+   "Snow": 0.5979553903345725,
+   "Trick Room without Indeedee": 0.4604613464986211,
+   "Rain + sun": 0.3551193620501959,
+   "Perish trap": 0.49349999999999994
+  },
+  "team": [
+   "Armarouge#1",
+   "Dragapult#2",
+   "M-Gengar#2",
+   "Milotic#1",
+   "Indeedee-F#1",
+   "M-Staraptor#2"
+  ]
+ },
+ {
+  "start": "Baltimore-10",
+  "regional": 0.5437567923672354,
+  "ladder": 0.5366893413991752,
+  "batches": 5,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.599601593625498,
+   "Sun": 0.4844888001564639,
+   "Indeedee TR / Psychic Terrain": 0.4196250628444185,
+   "Rain": 0.6112781954887219,
+   "Balance, no speed control": 0.5421171171171171,
+   "Sand": 0.680546559970266,
+   "Snow": 0.27323420074349436,
+   "Trick Room without Indeedee": 0.7481716208170838,
+   "Rain + sun": 0.4548962809643816,
+   "Perish trap": 0.49349999999999994
+  },
+  "team": [
+   "Rillaboom#38",
+   "Politoed#1",
+   "Archaludon#7",
+   "M-Gengar#1",
+   "Incineroar#53",
+   "M-Golisopod#3"
+  ]
+ },
+ {
+  "start": "Baltimore-11",
+  "regional": 0.6837599949778579,
+  "ladder": 0.6458620519442786,
+  "batches": 2,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.843625498007968,
+   "Sun": 0.5340011080172601,
+   "Indeedee TR / Psychic Terrain": 0.6569264069264069,
+   "Rain": 0.8275720834877782,
+   "Balance, no speed control": 0.6632626468434523,
+   "Sand": 0.5194759206798867,
+   "Snow": 0.7653345724907064,
+   "Trick Room without Indeedee": 0.5256593112745112,
+   "Rain + sun": 0.3861345703012624,
+   "Perish trap": 0.5299
+  },
+  "team": [
+   "Garchomp#4",
+   "Farigiraf#1",
+   "M-Aerodactyl#2",
+   "Sylveon#1",
+   "M-Charizard Y#5",
+   "Kingambit#3"
+  ]
+ },
+ {
+  "start": "Baltimore-12",
+  "regional": 0.657557724071845,
+  "ladder": 0.6398393850781801,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.8388944223107568,
+   "Sun": 0.6214785627493576,
+   "Indeedee TR / Psychic Terrain": 0.6288226411094278,
+   "Rain": 0.5497311897523518,
+   "Balance, no speed control": 0.6789132882882883,
+   "Sand": 0.4970854687487233,
+   "Snow": 0.7646375464684014,
+   "Trick Room without Indeedee": 0.4783891390098389,
+   "Rain + sun": 0.46795029527559057,
+   "Perish trap": 0.4735
+  },
+  "team": [
+   "Sneasler#3",
+   "Garchomp#1",
+   "Kingambit#1",
+   "M-Floette#1",
+   "M-Delphox#1",
+   "Incineroar#2"
+  ]
+ },
+ {
+  "start": "Baltimore-13",
+  "regional": 0.39329839161097135,
+  "ladder": 0.4209016688182008,
+  "batches": 2,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.44223107569721115,
+   "Sun": 0.4467884387758133,
+   "Indeedee TR / Psychic Terrain": 0.27164502164502163,
+   "Rain": 0.2885338345864662,
+   "Balance, no speed control": 0.5444819819819819,
+   "Sand": 0.35211063693844424,
+   "Snow": 0.43912639405204457,
+   "Trick Room without Indeedee": 0.32238787045411466,
+   "Rain + sun": 0.2475393700787402,
+   "Perish trap": 0.45
+  },
+  "team": [
+   "Ceruledge#4",
+   "Indeedee-F#8",
+   "Dragonite#2",
+   "M-Lopunny#1",
+   "M-Gardevoir#8",
+   "Sneasler#67"
+  ]
+ },
+ {
+  "start": "Baltimore-14",
+  "regional": 0.6357788044040554,
+  "ladder": 0.617191953227098,
+  "batches": 1,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.6872509960159363,
+   "Sun": 0.5274725274725275,
+   "Indeedee TR / Psychic Terrain": 0.2976190476190476,
+   "Rain": 0.8392857142857143,
+   "Balance, no speed control": 0.6407657657657658,
+   "Sand": 0.9093484419263457,
+   "Snow": 0.54182156133829,
+   "Trick Room without Indeedee": 0.6095238095238096,
+   "Rain + sun": 0.8139763779527558,
+   "Perish trap": 0.5299
+  },
+  "team": [
+   "Klefki#2",
+   "Garchomp#1",
+   "Volcarona#2",
+   "Archaludon#1",
+   "M-Salamence#1",
+   "M-Charizard Y#2"
+  ]
+ },
+ {
+  "start": "Baltimore-15",
+  "regional": 0.5976053730089332,
+  "ladder": 0.6226943502042264,
+  "batches": 2,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7370517928286852,
+   "Sun": 0.7252930636798602,
+   "Indeedee TR / Psychic Terrain": 0.5284849334792343,
+   "Rain": 0.18843984962406016,
+   "Balance, no speed control": 0.75,
+   "Sand": 0.6726232964983628,
+   "Snow": 0.5794609665427509,
+   "Trick Room without Indeedee": 0.4666867163138426,
+   "Rain + sun": 0.3196358267716536,
+   "Perish trap": 0.5299
+  },
+  "team": [
+   "M-Charizard Y#2",
+   "M-Gardevoir#4",
+   "Garchomp#1",
+   "M-Salamence#13",
+   "Incineroar#6",
+   "Indeedee-F#7"
+  ]
+ },
+ {
+  "start": "Baltimore-16",
+  "regional": 0.5382309832303398,
+  "ladder": 0.5504344728058499,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.6769173306772908,
+   "Sun": 0.4864275339394241,
+   "Indeedee TR / Psychic Terrain": 0.6490800865800865,
+   "Rain": 0.06817006819125719,
+   "Balance, no speed control": 0.6206362612612613,
+   "Sand": 0.4238668555240793,
+   "Snow": 0.6971421933085502,
+   "Trick Room without Indeedee": 0.6069561334391134,
+   "Rain + sun": 0.3742002952755905,
+   "Perish trap": 0.45000000000000007
+  },
+  "team": [
+   "Dragapult#1",
+   "Arcanine-H#2",
+   "Altaria#1",
+   "M-Metagross#2",
+   "Indeedee-F#2",
+   "Milotic#1"
+  ]
+ },
+ {
+  "start": "Brisbane-01",
+  "regional": 0.6504057750429153,
+  "ladder": 0.677099620506358,
+  "batches": 1,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.5737051792828685,
+   "Sun": 0.5810536359142789,
+   "Indeedee TR / Psychic Terrain": 0.6017316017316018,
+   "Rain": 0.9219924812030076,
+   "Balance, no speed control": 0.8772522522522523,
+   "Sand": 0.7301699716713881,
+   "Snow": 0.40055762081784385,
+   "Trick Room without Indeedee": 0.746029008164271,
+   "Rain + sun": 0.5492125984251968,
+   "Perish trap": 0.4637
+  },
+  "team": [
+   "Archaludon#1",
+   "Pelipper#1",
+   "Grimmsnarl#1",
+   "M-Charizard Y#2",
+   "Garchomp#1",
+   "Venusaur#1"
+  ]
+ },
+ {
+  "start": "Brisbane-02",
+  "regional": 0.593613468682872,
+  "ladder": 0.6129092723686033,
+  "batches": 3,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.6789508632138114,
+   "Sun": 0.6166386736435283,
+   "Indeedee TR / Psychic Terrain": 0.4549062049062049,
+   "Rain": 0.5119047619047619,
+   "Balance, no speed control": 0.759009009009009,
+   "Sand": 0.6165334018279874,
+   "Snow": 0.5672242874845105,
+   "Trick Room without Indeedee": 0.5824510940125371,
+   "Rain + sun": 0.27575459317585305,
+   "Perish trap": 0.46679999999999994
+  },
+  "team": [
+   "M-Floette#1",
+   "Kingambit#4",
+   "Basculegion#8",
+   "Rillaboom#1",
+   "M-Salamence#5",
+   "Sneasler#15"
+  ]
+ },
+ {
+  "start": "Brisbane-03",
+  "regional": 0.5931450438035196,
+  "ladder": 0.5873731666047994,
+  "batches": 5,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.8471911343762418,
+   "Sun": 0.4760136552214275,
+   "Indeedee TR / Psychic Terrain": 0.34665297561374536,
+   "Rain": 0.3304511278195489,
+   "Balance, no speed control": 0.7171171171171171,
+   "Sand": 0.7420207569206593,
+   "Snow": 0.487360594795539,
+   "Trick Room without Indeedee": 0.5413938263480003,
+   "Rain + sun": 0.4708661417322835,
+   "Perish trap": 0.4488
+  },
+  "team": [
+   "M-Froslass#1",
+   "Basculegion#3",
+   "M-Floette#4",
+   "Incineroar#33",
+   "Kingambit#1",
+   "Garchomp#1"
+  ]
+ },
+ {
+  "start": "Brisbane-04",
+  "regional": 0.6271437082847722,
+  "ladder": 0.6298452141311937,
+  "batches": 3,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.6520584329349269,
+   "Sun": 0.6607323696624259,
+   "Indeedee TR / Psychic Terrain": 0.3953823953823954,
+   "Rain": 0.5927318295739349,
+   "Balance, no speed control": 0.6133633633633634,
+   "Sand": 0.8042128763239177,
+   "Snow": 0.6242255266418835,
+   "Trick Room without Indeedee": 0.8992419349241766,
+   "Rain + sun": 0.42175196850393704,
+   "Perish trap": 0.4682
+  },
+  "team": [
+   "M-Froslass#1",
+   "Basculegion#1",
+   "M-Floette#1",
+   "Archaludon#2",
+   "Pelipper#2",
+   "M-Golisopod#1"
+  ]
+ },
+ {
+  "start": "Brisbane-05",
+  "regional": 0.5976714040192016,
+  "ladder": 0.6132341735361606,
+  "batches": 7,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7527034718269777,
+   "Sun": 0.561698584420568,
+   "Indeedee TR / Psychic Terrain": 0.40739022881880027,
+   "Rain": 0.4846938775510204,
+   "Balance, no speed control": 0.778153153153153,
+   "Sand": 0.46294049186059205,
+   "Snow": 0.7462825278810409,
+   "Trick Room without Indeedee": 0.45128597776777457,
+   "Rain + sun": 0.4521934758155231,
+   "Perish trap": 0.4935
+  },
+  "team": [
+   "Rillaboom#1",
+   "M-Gengar#5",
+   "Incineroar#76",
+   "Kingambit#1",
+   "Sneasler#1",
+   "M-Floette#2"
+  ]
+ },
+ {
+  "start": "Brisbane-06",
+  "regional": 0.626624658480711,
+  "ladder": 0.6211330011287344,
+  "batches": 1,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7025232403718459,
+   "Sun": 0.6240195380390331,
+   "Indeedee TR / Psychic Terrain": 0.6486291486291487,
+   "Rain": 0.5729949874686717,
+   "Balance, no speed control": 0.5833333333333334,
+   "Sand": 0.5063739376770539,
+   "Snow": 0.5594795539033457,
+   "Trick Room without Indeedee": 0.9650793650793651,
+   "Rain + sun": 0.20472440944881892,
+   "Perish trap": 0.4682
+  },
+  "team": [
+   "M-Salamence#15",
+   "M-Golisopod#1",
+   "Sneasler#79",
+   "Indeedee-F#22",
+   "Politoed#4",
+   "Archaludon#4"
+  ]
+ },
+ {
+  "start": "Brisbane-07",
+  "regional": 0.6052684551707381,
+  "ladder": 0.6110601508946906,
+  "batches": 1,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7101593625498007,
+   "Sun": 0.5686813186813187,
+   "Indeedee TR / Psychic Terrain": 0.47186147186147187,
+   "Rain": 0.74906015037594,
+   "Balance, no speed control": 0.6756756756756757,
+   "Sand": 0.3208215297450425,
+   "Snow": 0.5762081784386617,
+   "Trick Room without Indeedee": 0.7806174221398716,
+   "Rain + sun": 0.35088582677165353,
+   "Perish trap": 0.4735
+  },
+  "team": [
+   "Kingambit#3",
+   "Gholdengo#1",
+   "M-Garchomp Z#2",
+   "M-Floette#5",
+   "Rillaboom#1",
+   "Volcarona#4"
+  ]
+ },
+ {
+  "start": "Brisbane-08",
+  "regional": 0.5899861769509754,
+  "ladder": 0.5882235084913864,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.41745517928286846,
+   "Sun": 0.6949167885879182,
+   "Indeedee TR / Psychic Terrain": 0.6209415584415585,
+   "Rain": 0.7442466183871066,
+   "Balance, no speed control": 0.5135135135135135,
+   "Sand": 0.8557153758039509,
+   "Snow": 0.49546933085501854,
+   "Trick Room without Indeedee": 0.7014061399275278,
+   "Rain + sun": 0.5900274303689063,
+   "Perish trap": 0.4637000000000001
+  },
+  "team": [
+   "Archaludon#1",
+   "Grimmsnarl#2",
+   "Venusaur#1",
+   "Pelipper#3",
+   "M-Swampert#1",
+   "M-Charizard Y#6"
+  ]
+ },
+ {
+  "start": "Brisbane-09",
+  "regional": 0.6831838306117315,
+  "ladder": 0.6452967832714581,
+  "batches": 2,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7888446215139442,
+   "Sun": 0.7093010355179258,
+   "Indeedee TR / Psychic Terrain": 0.45562770562770566,
+   "Rain": 0.7631578947368423,
+   "Balance, no speed control": 0.5123873873873873,
+   "Sand": 0.8980169971671388,
+   "Snow": 0.4879182156133829,
+   "Trick Room without Indeedee": 0.8417525531502448,
+   "Rain + sun": 0.5654527559055118,
+   "Perish trap": 0.4682
+  },
+  "team": [
+   "Sinistcha#22",
+   "M-Mawile#4",
+   "Garchomp#1",
+   "Politoed#2",
+   "Archaludon#2",
+   "Incineroar#8"
+  ]
+ },
+ {
+  "start": "Brisbane-10",
+  "regional": 0.6341277227216038,
+  "ladder": 0.619933834262137,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.8737549800796813,
+   "Sun": 0.6131891112877266,
+   "Indeedee TR / Psychic Terrain": 0.4007034632034632,
+   "Rain": 0.514229646313247,
+   "Balance, no speed control": 0.668355855855856,
+   "Sand": 0.5854672632757527,
+   "Snow": 0.6026951672862454,
+   "Trick Room without Indeedee": 0.5283618373650615,
+   "Rain + sun": 0.5169177321484393,
+   "Perish trap": 0.4735
+  },
+  "team": [
+   "M-Delphox#1",
+   "Sneasler#3",
+   "Kingambit#1",
+   "M-Floette#1",
+   "Garchomp#1",
+   "Incineroar#28"
+  ]
+ },
+ {
+  "start": "Brisbane-11",
+  "regional": 0.6567064346624378,
+  "ladder": 0.6779754477287743,
+  "batches": 1,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7814300407927135,
+   "Sun": 0.6622593642809836,
+   "Indeedee TR / Psychic Terrain": 0.6915584415584416,
+   "Rain": 0.19548872180451127,
+   "Balance, no speed control": 0.8536036036036035,
+   "Sand": 0.8463172804532578,
+   "Snow": 0.5938661710037175,
+   "Trick Room without Indeedee": 0.5615064887659023,
+   "Rain + sun": 0.44832677165354334,
+   "Perish trap": 0.4663
+  },
+  "team": [
+   "Garchomp#1",
+   "M-Tyranitar#1",
+   "Excadrill#2",
+   "M-Salamence#2",
+   "Indeedee-F#2",
+   "Armarouge#2"
+  ]
+ },
+ {
+  "start": "Brisbane-12",
+  "regional": 0.6047437651347344,
+  "ladder": 0.5746163055363046,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.8086404382470119,
+   "Sun": 0.49460624748410387,
+   "Indeedee TR / Psychic Terrain": 0.5980521798644638,
+   "Rain": 0.579072609204619,
+   "Balance, no speed control": 0.5344876126126127,
+   "Sand": 0.23006635449182525,
+   "Snow": 0.7845027881040891,
+   "Trick Room without Indeedee": 0.5338239995086351,
+   "Rain + sun": 0.5060285433070866,
+   "Perish trap": 0.5299
+  },
+  "team": [
+   "Armarouge#17",
+   "Kingambit#13",
+   "Torkoal#6",
+   "M-Staraptor#2",
+   "Farigiraf#1",
+   "M-Froslass#1"
+  ]
+ },
+ {
+  "start": "Brisbane-13",
+  "regional": 0.6184193958077204,
+  "ladder": 0.624606102294832,
+  "batches": 4,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.5246513944223107,
+   "Sun": 0.7296680319077542,
+   "Indeedee TR / Psychic Terrain": 0.5936147186147186,
+   "Rain": 0.7080914269513743,
+   "Balance, no speed control": 0.5563063063063063,
+   "Sand": 0.6747521246458923,
+   "Snow": 0.5592472118959106,
+   "Trick Room without Indeedee": 0.8580764975683762,
+   "Rain + sun": 0.5873827189551406,
+   "Perish trap": 0.4682
+  },
+  "team": [
+   "Basculegion#1",
+   "Rillaboom#49",
+   "Politoed#6",
+   "Kingambit#2",
+   "M-Staraptor#1",
+   "Archaludon#16"
+  ]
+ },
+ {
+  "start": "Brisbane-14",
+  "regional": 0.5786294714414332,
+  "ladder": 0.6073482667976152,
+  "batches": 4,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.8331673306772909,
+   "Sun": 0.556293683352087,
+   "Indeedee TR / Psychic Terrain": 0.4289394808282796,
+   "Rain": 0.53125,
+   "Balance, no speed control": 0.838963963963964,
+   "Sand": 0.08901571436252219,
+   "Snow": 0.49907063197026014,
+   "Trick Room without Indeedee": 0.4633634040689665,
+   "Rain + sun": 0.43836122047244097,
+   "Perish trap": 0.4935
+  },
+  "team": [
+   "Garchomp#1",
+   "Kingambit#2",
+   "M-Gengar#1",
+   "Incineroar#63",
+   "Archaludon#3",
+   "Rillaboom#2"
+  ]
+ },
+ {
+  "start": "Brisbane-15",
+  "regional": 0.5600829305282372,
+  "ladder": 0.6135459484185488,
+  "batches": 1,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.5896414342629481,
+   "Sun": 0.5999268969991393,
+   "Indeedee TR / Psychic Terrain": 0.7229437229437229,
+   "Rain": 0.08270676691729323,
+   "Balance, no speed control": 0.9358108108108109,
+   "Sand": 0.7521246458923514,
+   "Snow": 0.5102230483271375,
+   "Trick Room without Indeedee": 0.3036779593017534,
+   "Rain + sun": 0.2780511811023622,
+   "Perish trap": 0.45
+  },
+  "team": [
+   "M-Salamence#2",
+   "Sneasler#4",
+   "Arcanine-H#1",
+   "Milotic#45",
+   "M-Metagross#1",
+   "Indeedee#4"
+  ]
+ },
+ {
+  "start": "Brisbane-16",
+  "regional": 0.5660954507226298,
+  "ladder": 0.5510689996037182,
+  "batches": 2,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.6538844621513944,
+   "Sun": 0.5735128120941778,
+   "Indeedee TR / Psychic Terrain": 0.3051948051948052,
+   "Rain": 0.7092859800639808,
+   "Balance, no speed control": 0.4729729729729729,
+   "Sand": 0.5240937345032124,
+   "Snow": 0.508364312267658,
+   "Trick Room without Indeedee": 0.7678941192022593,
+   "Rain + sun": 0.4672736220472441,
+   "Perish trap": 0.5299
+  },
+  "team": [
+   "Basculegion#7",
+   "M-Charizard Y#1",
+   "Kommo-o#2",
+   "M-Glimmora#2",
+   "M-Staraptor#1",
+   "Kingambit#2"
+  ]
+ },
+ {
+  "start": "Frankfurt-01",
+  "regional": 0.5833666607566217,
+  "ladder": 0.572418081023025,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.624875498007968,
+   "Sun": 0.5887786190678747,
+   "Indeedee TR / Psychic Terrain": 0.4123376623376623,
+   "Rain": 0.6691729323308271,
+   "Balance, no speed control": 0.5458220604736724,
+   "Sand": 0.62092776203966,
+   "Snow": 0.6160548327137545,
+   "Trick Room without Indeedee": 0.6125848011527123,
+   "Rain + sun": 0.5545029527559056,
+   "Perish trap": 0.4735
+  },
+  "team": [
+   "Gholdengo#2",
+   "Volcarona#7",
+   "M-Garchomp Z#1",
+   "Incineroar#3",
+   "Rillaboom#2",
+   "M-Raichu Y#1"
+  ]
+ },
+ {
+  "start": "Frankfurt-02",
+  "regional": 0.5902113351777184,
+  "ladder": 0.588826392029817,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7328187250996016,
+   "Sun": 0.5617050165799687,
+   "Indeedee TR / Psychic Terrain": 0.49618792283074026,
+   "Rain": 0.5400610902255639,
+   "Balance, no speed control": 0.6238738738738739,
+   "Sand": 0.3997746370884303,
+   "Snow": 0.6010687732342007,
+   "Trick Room without Indeedee": 0.6536230295716801,
+   "Rain + sun": 0.3906865157480315,
+   "Perish trap": 0.5299
+  },
+  "team": [
+   "Farigiraf#64",
+   "M-Garchomp Z#3",
+   "Kingambit#3",
+   "Torkoal#1",
+   "Sylveon#3",
+   "Incineroar#21"
+  ]
+ },
+ {
+  "start": "Frankfurt-03",
+  "regional": 0.47882298215994923,
+  "ladder": 0.47282424620103525,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.5740786852589641,
+   "Sun": 0.4356171247508959,
+   "Indeedee TR / Psychic Terrain": 0.44683441558441556,
+   "Rain": 0.19302161654135339,
+   "Balance, no speed control": 0.4173704954954955,
+   "Sand": 0.5412535410764873,
+   "Snow": 0.48675650557620814,
+   "Trick Room without Indeedee": 0.6373756607071851,
+   "Rain + sun": 0.5155634842519685,
+   "Perish trap": 0.5299
+  },
+  "team": [
+   "M-Charizard Y#4",
+   "Kingambit#4",
+   "M-Meowstic-M#1",
+   "Sneasler#4",
+   "Indeedee#20",
+   "Kommo-o#1"
+  ]
+ },
+ {
+  "start": "Frankfurt-04",
+  "regional": 0.6653275857927358,
+  "ladder": 0.6829234575570711,
+  "batches": 2,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7631073025315271,
+   "Sun": 0.706043956043956,
+   "Indeedee TR / Psychic Terrain": 0.5407511462481455,
+   "Rain": 0.5089285714285714,
+   "Balance, no speed control": 0.7364864864864864,
+   "Sand": 0.5725920679886685,
+   "Snow": 0.658457249070632,
+   "Trick Room without Indeedee": 0.8651215077669816,
+   "Rain + sun": 0.4862204724409449,
+   "Perish trap": 0.5299
+  },
+  "team": [
+   "Gholdengo#2",
+   "M-Dragonite#1",
+   "Incineroar#2",
+   "M-Charizard Y#2",
+   "Kingambit#3",
+   "Garchomp#1"
+  ]
+ },
+ {
+  "start": "Frankfurt-05",
+  "regional": 0.4856016507723534,
+  "ladder": 0.4730737769847923,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7243525896414342,
+   "Sun": 0.4862339273526107,
+   "Indeedee TR / Psychic Terrain": 0.4089365041776575,
+   "Rain": 0.368656015037594,
+   "Balance, no speed control": 0.45777027027027023,
+   "Sand": 0.2469900849858357,
+   "Snow": 0.24070631970260217,
+   "Trick Room without Indeedee": 0.4487497626417344,
+   "Rain + sun": 0.6112819881889764,
+   "Perish trap": 0.4935
+  },
+  "team": [
+   "Vivillon#1",
+   "Politoed#1",
+   "M-Gengar#1",
+   "Kingambit#1",
+   "Rillaboom#20",
+   "Kommo-o#1"
+  ]
+ },
+ {
+  "start": "Frankfurt-06",
+  "regional": 0.6355333423619076,
+  "ladder": 0.6111534703402883,
+  "batches": 6,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.8516232559484848,
+   "Sun": 0.5123867351619854,
+   "Indeedee TR / Psychic Terrain": 0.44137806637806637,
+   "Rain": 0.7351190476190476,
+   "Balance, no speed control": 0.628566066066066,
+   "Sand": 0.4431892455959335,
+   "Snow": 0.5672242874845105,
+   "Trick Room without Indeedee": 0.6590437051518988,
+   "Rain + sun": 0.5145561293402788,
+   "Perish trap": 0.5299
+  },
+  "team": [
+   "Farigiraf#27",
+   "Sylveon#5",
+   "Garchomp#1",
+   "Incineroar#2",
+   "Venusaur#2",
+   "M-Charizard Y#3"
+  ]
+ },
+ {
+  "start": "Frankfurt-07",
+  "regional": 0.601953018419091,
+  "ladder": 0.5927554062591114,
+  "batches": 1,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7868525896414341,
+   "Sun": 0.5701782570272318,
+   "Indeedee TR / Psychic Terrain": 0.6233766233766234,
+   "Rain": 0.3082706766917293,
+   "Balance, no speed control": 0.6047297297297297,
+   "Sand": 0.48725212464589235,
+   "Snow": 0.6412639405204461,
+   "Trick Room without Indeedee": 0.6555108983769443,
+   "Rain + sun": 0.36318897637795283,
+   "Perish trap": 0.4488
+  },
+  "team": [
+   "M-Froslass#1",
+   "Incineroar#3",
+   "Basculegion#1",
+   "M-Glimmora#1",
+   "Rillaboom#2",
+   "Volcarona#4"
+  ]
+ },
+ {
+  "start": "Frankfurt-08",
+  "regional": 0.5175629564256004,
+  "ladder": 0.5075770195663333,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.5793077689243027,
+   "Sun": 0.5124334208487532,
+   "Indeedee TR / Psychic Terrain": 0.4902597402597403,
+   "Rain": 0.5943374060150376,
+   "Balance, no speed control": 0.5325168918918919,
+   "Sand": 0.6118980169971672,
+   "Snow": 0.19481877323420074,
+   "Trick Room without Indeedee": 0.44230160604092916,
+   "Rain + sun": 0.5604699803149605,
+   "Perish trap": 0.4735
+  },
+  "team": [
+   "M-Floette#2",
+   "Rillaboom#1",
+   "Incineroar#11",
+   "M-Dragonite#1",
+   "Gholdengo#2",
+   "Sneasler#8"
+  ]
+ },
+ {
+  "start": "Frankfurt-09",
+  "regional": 0.5812762503385192,
+  "ladder": 0.6111206234895801,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.5758217131474104,
+   "Sun": 0.7184132913890142,
+   "Indeedee TR / Psychic Terrain": 0.45806277056277056,
+   "Rain": 0.5932800751879699,
+   "Balance, no speed control": 0.7231137387387389,
+   "Sand": 0.5527861393770026,
+   "Snow": 0.54182156133829,
+   "Trick Room without Indeedee": 0.47782576147258354,
+   "Rain + sun": 0.6277682086614172,
+   "Perish trap": 0.46680000000000005
+  },
+  "team": [
+   "Sneasler#12",
+   "M-Salamence#1",
+   "M-Raichu Y#1",
+   "Rillaboom#1",
+   "Kingambit#1",
+   "Arcanine-H#1"
+  ]
+ },
+ {
+  "start": "Frankfurt-10",
+  "regional": 0.6602804467035495,
+  "ladder": 0.6265024395554591,
+  "batches": 2,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.8560756972111554,
+   "Sun": 0.46749308497352543,
+   "Indeedee TR / Psychic Terrain": 0.32954545454545453,
+   "Rain": 0.731203007518797,
+   "Balance, no speed control": 0.6559684684684685,
+   "Sand": 0.7850331192937858,
+   "Snow": 0.6919144981412639,
+   "Trick Room without Indeedee": 0.6102017578221096,
+   "Rain + sun": 0.6030188492094752,
+   "Perish trap": 0.5299
+  },
+  "team": [
+   "Incineroar#67",
+   "M-Charizard Y#2",
+   "Archaludon#3",
+   "Kingambit#3",
+   "M-Delphox#1",
+   "Garchomp#1"
+  ]
+ },
+ {
+  "start": "Frankfurt-11",
+  "regional": 0.5768551285401938,
+  "ladder": 0.57626242491073,
+  "batches": 2,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.5916334661354581,
+   "Sun": 0.6021351041132603,
+   "Indeedee TR / Psychic Terrain": 0.48917748917748916,
+   "Rain": 0.5286654135338347,
+   "Balance, no speed control": 0.48254504504504503,
+   "Sand": 0.43094900849858364,
+   "Snow": 0.7509293680297398,
+   "Trick Room without Indeedee": 0.8286660874892198,
+   "Rain + sun": 0.686761811023622,
+   "Perish trap": 0.4682
+  },
+  "team": [
+   "M-Raichu Y#1",
+   "Pelipper#9",
+   "M-Golisopod#1",
+   "Kingambit#3",
+   "Archaludon#6",
+   "M-Swampert#1"
+  ]
+ },
+ {
+  "start": "Frankfurt-12",
+  "regional": 0.677220700612812,
+  "ladder": 0.6474645348550969,
+  "batches": 1,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.9492031872509961,
+   "Sun": 0.6770849555846731,
+   "Indeedee TR / Psychic Terrain": 0.5024615514365542,
+   "Rain": 0.3383458646616541,
+   "Balance, no speed control": 0.6193693693693694,
+   "Sand": 0.839943342776204,
+   "Snow": 0.6384758364312267,
+   "Trick Room without Indeedee": 0.7404761904761904,
+   "Rain + sun": 0.11958661417322834,
+   "Perish trap": 0.4668
+  },
+  "team": [
+   "Garchomp#1",
+   "Kingambit#2",
+   "Excadrill#1",
+   "M-Salamence#2",
+   "Corviknight#7",
+   "Dragapult#1"
+  ]
+ },
+ {
+  "start": "Frankfurt-13",
+  "regional": 0.5787534502521566,
+  "ladder": 0.5993354076113762,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7417828685258963,
+   "Sun": 0.5544217582876235,
+   "Indeedee TR / Psychic Terrain": 0.4276138275770616,
+   "Rain": 0.41271146616541354,
+   "Balance, no speed control": 0.8018018018018018,
+   "Sand": 0.6298689801699717,
+   "Snow": 0.39045074349442377,
+   "Trick Room without Indeedee": 0.49786114424988814,
+   "Rain + sun": 0.39948326771653553,
+   "Perish trap": 0.46680000000000005
+  },
+  "team": [
+   "M-Staraptor#1",
+   "Rillaboom#1",
+   "Primarina#1",
+   "Gholdengo#2",
+   "Garchomp#1",
+   "Arcanine-H#1"
+  ]
+ },
+ {
+  "start": "Frankfurt-14",
+  "regional": 0.6164294083747417,
+  "ladder": 0.5888192645332844,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7067897614612382,
+   "Sun": 0.47779082268354883,
+   "Indeedee TR / Psychic Terrain": 0.4586038961038961,
+   "Rain": 0.6072603383458646,
+   "Balance, no speed control": 0.5436373873873874,
+   "Sand": 0.7501758399841443,
+   "Snow": 0.6552044609665426,
+   "Trick Room without Indeedee": 0.7001986467960515,
+   "Rain + sun": 0.7283464566929134,
+   "Perish trap": 0.4682
+  },
+  "team": [
+   "Archaludon#4",
+   "Pelipper#7",
+   "Garchomp#1",
+   "M-Golisopod#1",
+   "M-Raichu Y#1",
+   "Kingambit#1"
+  ]
+ },
+ {
+  "start": "Frankfurt-15",
+  "regional": 0.6506336787830622,
+  "ladder": 0.6247887148989966,
+  "batches": 1,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.9173306772908367,
+   "Sun": 0.5343406593406593,
+   "Indeedee TR / Psychic Terrain": 0.2669658531439564,
+   "Rain": 0.5263157894736842,
+   "Balance, no speed control": 0.6587837837837838,
+   "Sand": 0.8480889997315183,
+   "Snow": 0.5492565055762081,
+   "Trick Room without Indeedee": 0.7050373520139065,
+   "Rain + sun": 0.4872047244094488,
+   "Perish trap": 0.4663
+  },
+  "team": [
+   "Rillaboom#3",
+   "Kingambit#1",
+   "M-Tyranitar#1",
+   "M-Raichu Y#1",
+   "Garchomp#1",
+   "Incineroar#8"
+  ]
+ },
+ {
+  "start": "Frankfurt-16",
+  "regional": 0.6393947361070365,
+  "ladder": 0.6261462403964346,
+  "batches": 6,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7768093053797179,
+   "Sun": 0.6788124013987954,
+   "Indeedee TR / Psychic Terrain": 0.5655614455268043,
+   "Rain": 0.3107563438212208,
+   "Balance, no speed control": 0.59786559319974,
+   "Sand": 0.829589411956996,
+   "Snow": 0.6501342749282268,
+   "Trick Room without Indeedee": 0.6807963677675634,
+   "Rain + sun": 0.3784607418861565,
+   "Perish trap": 0.46680000000000005
+  },
+  "team": [
+   "Sylveon#1",
+   "Garchomp#1",
+   "Gholdengo#1",
+   "Rillaboom#1",
+   "M-Staraptor#1",
+   "Kingambit#3"
+  ]
+ },
+ {
+  "start": "trick_room_six",
+  "regional": 0.6195500291488798,
+  "ladder": 0.6168558154128799,
+  "batches": 6,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.7609561752988049,
+   "Sun": 0.5061377993890177,
+   "Indeedee TR / Psychic Terrain": 0.5748556998556998,
+   "Rain": 0.5781641604010025,
+   "Balance, no speed control": 0.7118993993993995,
+   "Sand": 0.39400377714825313,
+   "Snow": 0.7775712515489467,
+   "Trick Room without Indeedee": 0.5900670930197921,
+   "Rain + sun": 0.333005249343832,
+   "Perish trap": 0.5299
+  },
+  "team": [
+   "M-Blastoise#5",
+   "Torkoal#1",
+   "Gholdengo#1",
+   "Farigiraf#67",
+   "M-Froslass#1",
+   "Incineroar#16"
+  ]
+ },
+ {
+  "start": "low_variance_six",
+  "regional": 0.540743614638713,
+  "ladder": 0.5658899418555986,
+  "batches": 8,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.5239043824701195,
+   "Sun": 0.5967343921556209,
+   "Indeedee TR / Psychic Terrain": 0.6056547619047619,
+   "Rain": 0.36078477443609025,
+   "Balance, no speed control": 0.710304054054054,
+   "Sand": 0.69564447592068,
+   "Snow": 0.49395910780669144,
+   "Trick Room without Indeedee": 0.4219265391283533,
+   "Rain + sun": 0.33480766666670614,
+   "Perish trap": 0.46680000000000005
+  },
+  "team": [
+   "Rillaboom#55",
+   "Incineroar#80",
+   "Sneasler#85",
+   "Gholdengo#17",
+   "Kingambit#29",
+   "M-Salamence#6"
+  ]
+ },
+ {
+  "start": "Baltimore-12-final",
+  "regional": 0.6816275379609583,
+  "ladder": 0.6648432856233321,
+  "batches": 1,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.8147410358565736,
+   "Sun": 0.668956043956044,
+   "Indeedee TR / Psychic Terrain": 0.5162337662337663,
+   "Rain": 0.793233082706767,
+   "Balance, no speed control": 0.722972972972973,
+   "Sand": 0.7464589235127479,
+   "Snow": 0.5092936802973977,
+   "Trick Room without Indeedee": 0.5595856199922186,
+   "Rain + sun": 0.4256889763779528,
+   "Perish trap": 0.5299
+  },
+  "team": [
+   "Garchomp#1",
+   "Kingambit#1",
+   "Archaludon#3",
+   "M-Delphox#1",
+   "Incineroar#2",
+   "M-Charizard Y#2"
+  ]
+ },
+ {
+  "start": "Frankfurt-10-final",
+  "regional": 0.7035807790601909,
+  "ladder": 0.6911940613322429,
+  "batches": 1,
+  "by_arch": {
+   "Tailwind goodstuffs": 0.8805645525111785,
+   "Sun": 0.6868131868131868,
+   "Indeedee TR / Psychic Terrain": 0.5820830896561541,
+   "Rain": 0.5357142857142857,
+   "Balance, no speed control": 0.6993243243243243,
+   "Sand": 0.6791784702549577,
+   "Snow": 0.7091078066914499,
+   "Trick Room without Indeedee": 0.8143371239799561,
+   "Rain + sun": 0.4023538030878465,
+   "Perish trap": 0.4735
+  },
+  "team": [
+   "M-Raichu Y#1",
+   "Incineroar#67",
+   "Garchomp#1",
+   "Basculegion#3",
+   "Kingambit#3",
+   "M-Delphox#1"
+  ]
+ }
+]

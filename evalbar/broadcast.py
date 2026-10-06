@@ -1,0 +1,369 @@
+"""Official Pokémon Champions broadcasts -> the battle log the eval bar's live mode reads (Showdown's protocol), from the video alone:
+the open team sheets the broadcast shows, the HP boxes of the four Pokémon on the field (percentages), the battle text and the decision
+screen ("Trainers are choosing actions"). For watching on your own computer.
+  python3 evalbar/broadcast.py frames <video file or YouTube URL> <dir> [start] [end]   frames at 2 per second (yt-dlp for a URL;
+                                                                                         start / end like 1:44:09)
+  python3 evalbar/broadcast.py ocr <dir>                                                 Apple Vision text of every frame -> <dir>.ocr.jsonl
+  python3 evalbar/broadcast.py read <dir.ocr.jsonl> <out.log>                            the whole match -> battle log
+  python3 evalbar/broadcast.py replay <dir.ocr.jsonl> [speed=4] [threads=2] [port=8768]  a recorded match through the live page, as if live
+  python3 evalbar/broadcast.py watch <YouTube URL> [start] [threads=2] [port=8768]       a broadcast in real time (live, or a recording from
+                                                                                         start, e.g. 1:44:09): page at http://localhost:<port>
+Player 1 is the player on the left: the battle text speaks from their side (their Pokémon are named plainly, the other player's are
+"the opposing ..."). No names are kept: the log calls the players Player 1 and Player 2, and sheets are matched to sides by species."""
+import os, re, sys, json, time, difflib, subprocess, threading, collections
+import common as C, replay as R
+toid = R.toid
+E = json.load(open(os.path.join(C.MAIN, 'native', 'engine_data_full.json')))
+OCR = os.path.join(C.MAIN, 'recordings', 'ocr')
+NAMES = {k: {E[k][i]['name'].upper(): E[k][i]['name'] for i in E[k] if E[k][i].get('name')} for k in ('species', 'moves', 'items', 'abilities')}
+NATURES = {'ADAMANT', 'MODEST', 'TIMID', 'JOLLY', 'BOLD', 'CALM', 'IMPISH', 'CAREFUL', 'BRAVE', 'QUIET', 'RELAXED', 'SASSY', 'HASTY', 'NAIVE',
+           'LONELY', 'MILD', 'RASH', 'GENTLE', 'LAX', 'NAUGHTY', 'HARDY', 'DOCILE', 'SERIOUS', 'BASHFUL', 'QUIRKY'}
+STAT = {'Attack': 'atk', 'Defense': 'def', 'Sp. Atk': 'spa', 'Sp. Def': 'spd', 'Speed': 'spe', 'accuracy': 'accuracy', 'evasiveness': 'evasion'}
+def fuzzy(text, kind, pool=None, cut=0.8):
+    """the closest dex name to an OCR'd string (pool: names to prefer)"""
+    t = text.upper().replace('0', 'O').strip(' .,!*~•')
+    for names in ([{n.upper(): n for n in pool}] if pool else []) + [NAMES[kind]]:
+        if t in names: return names[t]
+        m = difflib.get_close_matches(t, list(names), 1, cut)
+        if m: return names[m[0]]
+    return None
+def frames(src, out, start=None, end=None):
+    os.makedirs(out, exist_ok=True)
+    if src.startswith('http'):
+        url = subprocess.run(['yt-dlp', '-g', '-f', 'bv*[height<=720]', src], capture_output=True, text=True, check=True).stdout.split()[0]
+    else: url = src
+    cmd = ['ffmpeg', '-v', 'error', '-y'] + (['-ss', start] if start else []) + (['-to', end] if end else []) + ['-i', url, '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', os.path.join(out, 'f_%05d.jpg')]
+    subprocess.run(['nice', '-n', '10'] + cmd, check=True)
+def ocr(d):
+    with open(d.rstrip('/') + '.ocr.jsonl', 'w') as f: subprocess.run(['nice', '-n', '10', OCR, d], stdout=f, check=True)
+# --------------------------------------------------------------------------------------------------------------------------- sheets
+def sheet(lines):
+    """one team-sheet screen -> [set, ...]: each panel starts with the species name in capitals"""
+    L = [(t.strip(), x, y) for t, x, y, w, h in lines]
+    anchors = [(fuzzy(t, 'species', cut=0.85), x, y) for t, x, y in L if t.isupper() and len(t) > 3]
+    anchors = [a for a in anchors if a[0]]
+    out = []
+    for sp, x0, y0 in anchors:
+        near = [(t, x, y) for t, x, y in L if -0.02 < x - x0 < 0.2 and 0.02 < y - y0 < 0.26]
+        ability = next((fuzzy(t, 'abilities') for t, x, y in sorted(near, key=lambda r: r[2]) if abs(x - x0) < 0.02 and y - y0 < 0.08 and fuzzy(t, 'abilities')), '')
+        nature = next((t.title() for t, x, y in near if t.upper() in NATURES), '')
+        moves = [fuzzy(t, 'moves') for t, x, y in sorted(near, key=lambda r: r[2]) if 0 <= x - x0 < 0.03 and y - y0 > 0.07 and fuzzy(t, 'moves')]
+        item = next((fuzzy(t, 'items') for t, x, y in near if x - x0 > 0.1 and y - y0 > 0.15 and fuzzy(t, 'items')), '')
+        if item and E['items'].get(toid(item), {}).get('megaStone'):            # the species that holds this stone (Floette -> Floette-Eternal)
+            sp = next(iter(E['items'][toid(item)]['megaStone']), sp)
+        out.append({'species': sp, 'item': item, 'ability': ability, 'nature': nature, 'moves': moves[:4]})
+    return out
+# --------------------------------------------------------------------------------------------------------------------------- battle
+BOXES = (('p1', 'a', 0.0, 0.16), ('p1', 'b', 0.16, 0.42), ('p2', 'a', 0.58, 0.81), ('p2', 'b', 0.81, 1.0))
+def battle(lines):
+    """one battle frame -> (HP boxes {(side, slot): (name, pct)}, decision screen?, turn number or None, battle text or None)"""
+    names = [(t.strip(), x) for t, x, y, w, h in lines if 0.86 < y < 0.91]
+    pcts = [(int(re.sub(r'\D', '', t)), x) for t, x, y, w, h in lines if 0.91 < y < 0.96 and re.fullmatch(r'\d{1,3} ?%', t.strip())]
+    boxes = {}
+    for sd, sl, lo, hi in BOXES:
+        n = next((t for t, x in names if lo <= x < hi), None); p = next((v for v, x in pcts if lo <= x < hi), None)
+        if n and p is not None: boxes[(sd, sl)] = (n, min(100, p))
+    mid = [t.strip() for t, x, y, w, h in lines if 0.70 < y < 0.86 and 0.2 < x + w / 2 < 0.8]   # the text box sits at two heights
+    decision = any('choosing actions' in t for t in mid)
+    text = next((t for t in mid if len(t) > 8 and (t.endswith('!') or t.endswith('!l') or t.endswith('...')) and 'Trainer' != t), None)
+    turn = next((int(m.group(1)) for t, x, y, w, h in lines for m in [re.fullmatch(r'Turn (\d+)', t.strip())] if m and x > 0.8 and y < 0.12), None)
+    return boxes, decision, turn, text
+def letters(t): return re.sub(r'[^A-Z]', '', t.upper())
+def scoreboard(lines):
+    """the players' names on the scoreboard (left, right), as letters only: used in memory to match the team sheets to sides"""
+    top = [(t, x) for t, x, y, w, h in lines if 0.08 < y < 0.13 and sum(c.isalpha() for c in t) >= 6 and t.upper() == t]
+    left = max((letters(t) for t, x in top if x < 0.45), key=len, default=''); right = max((letters(t) for t, x in top if x > 0.55), key=len, default='')
+    return (left, right) if left and right else None
+def sheet_owner(lines):
+    """the name in a team sheet's header (letters only)"""
+    top = [t for t, x, y, w, h in lines if y < 0.09 and t.upper() == t and sum(c.isalpha() for c in t) >= 6 and not fuzzy(t, 'species', cut=0.85)]
+    return max((letters(t) for t in top), key=len, default='')
+class Reader:
+    """frames in time order -> battle log lines. feed() one frame's OCR at a time; lines() is the log so far."""
+    def __init__(s):
+        s.games = []; s.sheets = {}; s.raw_sheets = []; s.frame = 0; s.names = collections.Counter(); s.note = ''; s.new_game()
+    def new_game(s):
+        s.out = []; s.games.append(s.out); s.started = False; s.turn = 0; s.in_decision = False; s.ended = False
+        s.active = {}; s.hp = {}; s.last_text = None; s.slot_free = {'p1': [], 'p2': []}; s.megas = {'p1': False, 'p2': False}
+        s.fainted = {'p1': set(), 'p2': set()}; s.lead_seen = False
+    def team(s, sd): return s.sheets.get(sd, [])
+    def species(s, sd, name):
+        """an OCR'd Pokémon name on side sd -> the species on that side's sheet (Mega names map back to the base)"""
+        name = re.sub(r'^Mega ', '', name.strip()); pool = {}
+        for st in s.team(sd):
+            disp = st['species'].split('-')[0]; pool[disp.upper()] = st['species']; pool[st['species'].upper()] = st['species']
+        t = name.upper()
+        if t in pool: return pool[t]
+        m = difflib.get_close_matches(t, list(pool), 1, 0.7)
+        return pool[m[0]] if m else fuzzy(name, 'species', cut=0.75)
+    def ident(s, sd, sp):
+        sl = next((sl for (x, sl), v in s.active.items() if x == sd and v == sp), None)
+        return f"{sd}{sl or 'a'}: {sp.split('-')[0] if sp != 'Floette-Eternal' else 'Floette'}"
+    def emit(s, *lines): s.out.extend(lines)
+    def header(s, boxes):
+        s.emit('|gametype|doubles', '|player|p1|Player 1|', '|player|p2|Player 2|', '|tier|[Gen 9 Champions] VGC Reg M-C (broadcast)')
+        for sd in ('p1', 'p2'):
+            for st in s.team(sd): s.emit(f"|poke|{sd}|{st['species']}, L50|")
+        for sd in ('p1', 'p2'):
+            blob = ']'.join(f"{st['species']}||{st['item'].replace(' ', '')}|{st['ability'].replace(' ', '')}|{','.join(m.replace(' ', '') for m in st['moves'])}|{st['nature']}||||||50|" for st in s.team(sd))
+            if blob: s.emit(f'|showteam|{sd}|{blob}')
+        s.emit('|teampreview|4', '|start')
+        for (sd, sl), (n, p) in sorted(boxes.items()):
+            sp = s.species(sd, n); s.active[(sd, sl)] = sp; s.hp[(sd, sl)] = p
+            s.emit(f"|switch|{sd}{sl}: {s.nick(sp)}|{sp}, L50|{p}/100")
+        s.started = True
+    def nick(s, sp): return 'Floette' if sp == 'Floette-Eternal' else sp.split('-Mega')[0]
+    def who(s, text):
+        """'The opposing X ...' -> ('p2', species, rest); 'X ...' -> ('p1', ...)"""
+        sd = 'p2' if text.startswith('The opposing ') else 'p1'
+        body = text[len('The opposing '):] if sd == 'p2' else text
+        best = None
+        for st in s.team(sd):
+            for nm in {s.nick(st['species']), 'Mega ' + s.nick(st['species'])}:
+                if body.startswith(nm) and (not best or len(nm) > len(best[1])): best = (st['species'], nm)
+        if not best:
+            m = re.match(r"([A-Z][\w.'-]*(?: [A-Z][\w.'-]*)?)", body)
+            if not m: return sd, None, body
+            sp = s.species(sd, m.group(1)); return sd, sp, body[len(m.group(1)):]
+        return sd, best[0], body[len(best[1]):]
+    def slot_of(s, sd, sp):
+        return next((sl for (x, sl), v in s.active.items() if x == sd and v == sp), None)
+    def mon(s, sd, sp):
+        sl = s.slot_of(sd, sp) or 'a'; return f"{sd}{sl}: {s.nick(sp)}"
+    def message(s, text):
+        text = re.sub(r'!+[^!]*$', '!', text.strip())
+        if re.search(r'won the battle|forfeit|Trainer lost|You lost|You won', text, re.I):
+            if not s.ended:
+                left = {sd: 4 - len(s.fainted[sd]) for sd in ('p1', 'p2')}
+                win = 'p1' if left['p2'] == 0 or ('forfeit' not in text and left['p1'] > left['p2']) else 'p2' if left['p1'] == 0 or left['p2'] > left['p1'] else None
+                if win: s.emit('|', f"|win|Player {win[1]}")
+                s.ended = True
+            return
+        # field-wide
+        FIELD = [(r'twisted the dimensions', '|-fieldstart|move: Trick Room'), (r'dimensions returned to normal', '|-fieldend|move: Trick Room'),
+                 (r'sunlight turned harsh', '|-weather|SunnyDay'), (r'started to rain', '|-weather|RainDance'), (r'sandstorm kicked up', '|-weather|Sandstorm'),
+                 (r'started to snow', '|-weather|Snowscape'), (r'(sunlight faded|rain stopped|sandstorm subsided|snow stopped)', '|-weather|none'),
+                 (r'battlefield got weird', '|-fieldstart|move: Psychic Terrain'), (r'Grass grew to cover', '|-fieldstart|move: Grassy Terrain'),
+                 (r'electric current ran', '|-fieldstart|move: Electric Terrain'), (r'Mist swirled', '|-fieldstart|move: Misty Terrain'),
+                 (r'weirdness disappeared', '|-fieldend|move: Psychic Terrain'), (r'grass disappeared', '|-fieldend|move: Grassy Terrain'),
+                 (r'electricity disappeared', '|-fieldend|move: Electric Terrain'), (r'mist disappeared', '|-fieldend|move: Misty Terrain')]
+        for pat, line in FIELD:
+            if re.search(pat, text, re.I): s.emit(line); return
+        m = re.search(r'tailwind (started blowing|blew).* (your|the opposing) (side|team)', text, re.I)
+        if m: s.emit(f"|-sidestart|{'p1' if m.group(2).lower() == 'your' else 'p2'}: Player|move: Tailwind"); return
+        m = re.search(r"(your|the opposing) (team|side)'s tailwind petered out", text, re.I)
+        if m: s.emit(f"|-sideend|{'p1' if m.group(1).lower() == 'your' else 'p2'}: Player|move: Tailwind"); return
+        m = re.search(r'(Reflect|Light Screen|Aurora Veil) made (your|the opposing) (team|side)', text)
+        if m: s.emit(f"|-sidestart|{'p1' if m.group(2) == 'your' else 'p2'}: Player|{'move: ' if m.group(1) != 'Reflect' else ''}{m.group(1)}"); return
+        m = re.search(r'Go! (.+?)!$', text) or re.search(r'sent out (.+?)!$', text)
+        if m:
+            if s.started and ' and ' not in m.group(1): s.send('p1' if text.startswith('Go!') else 'p2', m.group(1))
+            return
+        # about one Pokémon (or two: "A and the opposing B's Attack fell!")
+        m = re.match(r"(.+?) and ((?:the opposing )?[^,']+?)'s (.+?) (fell|rose|harshly fell|severely fell|rose sharply|rose drastically)!", text)
+        if m:                                                               # Intimidate on two: "A and the opposing B's Attack fell!"
+            for who in (m.group(1), m.group(2)): s.about(re.sub(r'^the opposing ', 'The opposing ', who) + "'s " + m.group(3) + ' ' + m.group(4) + '!')
+            return
+        s.about(text)
+    def about(s, text):
+        sd, sp, rest = s.who(text)
+        if not sp: return
+        me = s.mon(sd, sp); rest = rest.strip()
+        mv = re.match(r'used (.+?)!$', rest)
+        if mv:
+            st = next((x for x in s.team(sd) if x['species'] == sp), None)
+            move = fuzzy(mv.group(1), 'moves', st['moves'] if st else None) or mv.group(1)
+            s.emit(f'|move|{me}|{move}|'); return
+        if re.match(r'protected itself', rest): s.emit(f'|-singleturn|{me}|Protect'); return
+        if re.match(r'fainted', rest):
+            s.emit(f'|faint|{me}'); sl = s.slot_of(sd, sp); s.fainted[sd].add(sp)
+            if sl: s.slot_free[sd].append(sl); s.hp[(sd, sl)] = 0
+            return
+        if re.match(r'has Mega Evolved', rest):
+            mg = next(iter(E['species'].get(toid(sp), {}).get('otherFormes') or []), None)
+            st = next((x for x in s.team(sd) if x['species'] == sp), {})
+            mega = (E['items'].get(toid(st.get('item', '')), {}).get('megaStone') or {}).get(sp) or (sp + '-Mega')
+            s.emit(f'|detailschange|{me}|{mega}, L50', f"|-mega|{me}|{sp}|{st.get('item', '')}"); s.megas[sd] = True; return
+        if re.match(r'(went back to|, come back)', rest) or rest.startswith(', come back'):
+            sl = s.slot_of(sd, sp)
+            if sl: s.slot_free[sd].append(sl); s.active.pop((sd, sl), None)
+            return
+        bm = re.match(r"'s (.+?) (fell|rose|harshly fell|severely fell|rose sharply|rose drastically)", rest)
+        if bm:
+            n = 2 if ('harshly' in bm.group(2) or 'sharply' in bm.group(2)) else 3 if ('severely' in bm.group(2) or 'drastically' in bm.group(2)) else 1
+            for stat in re.split(r', and |, | and ', bm.group(1)):
+                if stat.strip() in STAT: s.emit(f"|{'-boost' if 'rose' in bm.group(2) else '-unboost'}|{me}|{STAT[stat.strip()]}|{n}")
+            return
+        for pat, st in ((r'was burned', 'brn'), (r'is paralyzed', 'par'), (r'fell asleep', 'slp'), (r'was badly poisoned', 'tox'), (r'was poisoned', 'psn'), (r'was frozen', 'frz')):
+            if re.match(pat, rest): s.emit(f'|-status|{me}|{st}'); return
+        if re.match(r'woke up', rest): s.emit(f'|-curestatus|{me}|slp'); return
+        im = re.search(r'using its (.+?)!$', rest) or re.search(r'(ate its .+?)!$', rest)
+        if im:
+            item = fuzzy(re.sub(r'^ate its ', '', im.group(1)), 'items')
+            if item and item not in ('Leftovers', 'Shell Bell') and 'Mega' not in rest: s.emit(f'|-enditem|{me}|{item}')
+    def send(s, sd, name):
+        sp = s.species(sd, name)
+        if not sp: return
+        free = s.slot_free[sd]; sl = free.pop(0) if free else next((x for x in 'ab' if (sd, x) not in s.active), 'a')
+        s.active[(sd, sl)] = sp
+        s.emit(f"|switch|{sd}{sl}: {s.nick(sp)}|{sp}, L50|{s.hp.get(('mon', sd, sp), 100)}/100")
+    def reconcile(s, boxes):
+        """at a decision screen: the Pokémon on the field and their HP as the HP boxes show them"""
+        for (sd, sl), (n, p) in sorted(boxes.items()):
+            sp = s.species(sd, n)
+            if not sp: continue
+            if s.active.get((sd, sl)) != sp:                                  # a switch the battle text did not show
+                s.active[(sd, sl)] = sp; s.emit(f"|switch|{sd}{sl}: {s.nick(sp)}|{sp}, L50|{p}/100"); s.hp[(sd, sl)] = p; continue
+            if s.hp.get((sd, sl)) != p:
+                s.emit(f"|{'-damage' if p < (s.hp.get((sd, sl)) or 100) else '-heal'}|{sd}{sl}: {s.nick(sp)}|{p}/100"); s.hp[(sd, sl)] = p
+            s.hp[('mon', sd, sp)] = p
+        for sd in ('p1', 'p2'): s.slot_free[sd] = []
+    def feed(s, lines):
+        L = [l for l in lines]; s.frame += 1
+        NAT = sum(1 for l in L if l[0].strip().upper() in NATURES)
+        if NAT >= 3:
+            sets = sheet(L)
+            if len(sets) >= 4: s.raw_sheets.append((s.frame, sheet_owner(L), sets))
+            return
+        sb = scoreboard(L)
+        if sb: s.names[sb] += 1
+        boxes, decision, turn, text = battle(L)
+        if s.ended and decision and len(boxes) >= 3: s.new_game()                       # the next game of the set
+        if len(boxes) < 2 and not text: s.in_decision = False if not decision else s.in_decision; return
+        if not s.started:
+            if text and re.search(r'^Go! .+ and .+!$|sent out .+ and .+!$', text): s.lead_seen = True
+            fresh = s.lead_seen or turn == 1 or (len(boxes) == 4 and all(p == 100 for n, p in boxes.values()))
+            if decision and len(boxes) >= 3 and fresh:
+                if len(s.sheets) < 2: s.assign_sheets(boxes)
+                if len(s.sheets) < 2: s.note = 'waiting for both team sheets: start before the broadcast shows them'; return
+                s.note = ''; s.header(boxes); s.turn = turn or 1; s.emit(f'|turn|{s.turn}'); s.in_decision = True
+            elif decision and len(boxes) >= 3 and not s.note: s.note = 'joined mid-game: the bar starts with the next game'
+            return
+        if s.ended: return
+        if decision and not s.in_decision:
+            s.reconcile(boxes); s.turn = max(s.turn + 1, turn or 0); s.emit('|upkeep', '|', f'|turn|{s.turn}')     # upkeep: durations count down
+        s.in_decision = decision
+        if text and not decision:
+            if s.last_text and difflib.SequenceMatcher(None, text, s.last_text).ratio() > 0.85: return
+            s.last_text = text; s.message(text)
+    def assign_sheets(s, boxes):
+        """the team sheets shown before the battle -> sides. Sheet screens come in runs, one player's sheet per run; each run's reads are
+        merged (the fullest read of each Pokémon). A run goes to the side whose scoreboard name matches its header; failing that, to the
+        side whose Pokémon on the field it has."""
+        runs = []
+        for fr, owner, sets in s.raw_sheets:
+            if runs and fr - runs[-1]['end'] <= 6: runs[-1]['reads'].append(sets); runs[-1]['owners'][owner] += 1; runs[-1]['end'] = fr
+            else: runs.append({'end': fr, 'reads': [sets], 'owners': collections.Counter([owner])})
+        full = lambda st: len(st['moves']) + bool(st['item']) + bool(st['ability']) + bool(st['nature'])
+        teams = []
+        for run in runs:
+            by = {}
+            for sets in run['reads']:
+                for st in sets:
+                    key = st['species'].split('-')[0]                            # Floette and Floette-Eternal are one entry
+                    if key not in by or full(st) > full(by[key]): by[key] = st
+            teams.append((run['owners'].most_common(1)[0][0], [st for st in by.values() if full(st) >= 3]))
+        board = s.names.most_common(1)[0][0] if s.names else None
+        sim = lambda a, b: difflib.SequenceMatcher(None, a, b).ratio() if a and b else 0
+        on = {sd: {s.species_any(n) for (x, sl), (n, p) in boxes.items() if x == sd} for sd in ('p1', 'p2')}
+        for owner, team in sorted(teams, key=lambda x: len(x[1]), reverse=True):
+            if len(team) < 4 or len(s.sheets) == 2: continue
+            if board and max(sim(owner, board[0]), sim(owner, board[1])) > 0.6: sd = 'p1' if sim(owner, board[0]) >= sim(owner, board[1]) else 'p2'
+            else:
+                names = {st['species'].split('-')[0] for st in team}
+                sd = max(('p1', 'p2'), key=lambda k: sum(1 for n in on[k] if n and n.split('-')[0] in names))
+            if sd in s.sheets: sd = 'p1' if sd == 'p2' else 'p2'
+            s.sheets[sd] = team
+    def species_any(s, n): return fuzzy(re.sub(r'^Mega ', '', n), 'species', cut=0.75)
+    def lines(s): return s.out
+    def logs(s): return [g for g in s.games if any(l.startswith('|turn|') for l in g)]
+class Runner:
+    """the reader's games through the live mode, one live.Live per game, served together on one page"""
+    def __init__(s, tag, threads, port):
+        import live as LV
+        s.LV = LV; s.tag = tag; s.threads = threads; s.port = port; s.reader = Reader(); s.lives = []; s.written = []
+        os.makedirs(LV.OUT, exist_ok=True); s.serve()
+    def serve(s):
+        import http.server
+        run = s
+        class H(http.server.BaseHTTPRequestHandler):
+            def do_GET(self):
+                p = self.path.split('?')[0]
+                if p == '/data.json':
+                    games = []
+                    for i, lv in enumerate(run.lives):
+                        if lv.data and lv.data['games']: games.append({**lv.data['games'][0], 'title': f'Game {i + 1}'})
+                    st = run.reader.note or (run.lives[-1].status if run.lives else 'waiting for the first turn')
+                    b = json.dumps({'games': games, 'live': {'url': 'data.json', 'status': st, 'format': 'Champions broadcast, open team sheets'}}).encode(); ct = 'application/json'
+                elif p in ('/', '/index.html'):
+                    html = open(os.path.join(C.HERE, 'page.html')).read().replace('<title>Eval Bar</title>', '<title>Champions Eval Bar</title>', 1)
+                    html = html.replace('/*DATA*/null', json.dumps({'games': [], 'live': {'url': 'data.json', 'status': 'starting'}}))
+                    b = ('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+                         '<style>body{margin:0}</style></head><body>' + html + '</body></html>').encode(); ct = 'text/html; charset=utf-8'
+                else: self.send_error(404); return
+                self.send_response(200); self.send_header('Content-Type', ct); self.send_header('Cache-Control', 'no-store'); self.end_headers(); self.wfile.write(b)
+            def log_message(self, *a): pass
+        threading.Thread(target=http.server.ThreadingHTTPServer(('127.0.0.1', s.port), H).serve_forever, daemon=True).start()
+        print(f'eval bar at http://localhost:{s.port}  (for watching on your own computer)', flush=True)
+    def feed(s, lines):
+        s.reader.feed(lines)
+        for i, g in enumerate(s.reader.logs()):
+            f = os.path.join(s.LV.OUT, f'{s.tag}_g{i + 1}.log')
+            if i >= len(s.written): s.written.append(0)
+            if len(g) != s.written[i]:
+                open(f, 'w').write('\n'.join(g) + '\n'); s.written[i] = len(g)
+            if i >= len(s.lives):
+                lv = s.LV.Live(None, s.threads, 0, logfile=f, tag=f'{s.tag}_g{i + 1}', fmt='Champions broadcast, open team sheets'); s.lives.append(lv)
+                threading.Thread(target=lv.run, daemon=True).start()
+def replay(ocrf, speed=4.0, threads=2, port=8768):
+    rows = sorted(map(json.loads, open(ocrf)), key=lambda x: x['file'])
+    run = Runner(os.path.basename(ocrf).split('.')[0], threads, port); t0 = time.time()
+    for k, row in enumerate(rows):
+        wait = t0 + k / 2 / speed - time.time()
+        if wait > 0: time.sleep(wait)
+        run.feed(row['lines'])
+    print('end of the recording; the page stays up until you stop this (Ctrl-C)', flush=True)
+    while True: time.sleep(60)
+def watch(url, threads=2, port=8768, start=None):
+    """a YouTube broadcast in real time (live, or a recording from `start`, e.g. 1:44:09): ffmpeg writes 2 frames a second, Apple
+    Vision reads them in small batches, the reader follows"""
+    tag = 'live_' + re.sub(r'\W', '', url.split('v=')[-1])[:16]; d = os.path.join(C.HERE, 'out', 'live', tag + '_frames'); os.makedirs(d, exist_ok=True)
+    src = subprocess.run(['yt-dlp', '-g', '-f', 'bv*[height<=720]/b[height<=720]', url], capture_output=True, text=True, check=True).stdout.split()[0]
+    ff = subprocess.Popen(['nice', '-n', '10', 'ffmpeg', '-v', 'error', '-y', '-re'] + (['-ss', start] if start else []) + ['-i', src, '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', os.path.join(d, 'f_%06d.jpg')])
+    run = Runner(tag, threads, port); done = 0
+    while True:
+        files = sorted(f for f in os.listdir(d) if f.endswith('.jpg'))[:-1]          # the newest frame may still be being written
+        new = [f for f in files if int(f[2:8]) > done]
+        if new:
+            b = os.path.join(d, 'batch'); os.makedirs(b, exist_ok=True)
+            for f in new: os.replace(os.path.join(d, f), os.path.join(b, f))
+            out = subprocess.run([OCR, b], capture_output=True, text=True).stdout
+            for row in sorted(map(json.loads, out.splitlines()), key=lambda x: x['file']): run.feed(row['lines'])
+            for f in new: os.remove(os.path.join(b, f))
+            done = int(new[-1][2:8])
+        elif ff.poll() is not None: print('the stream ended', flush=True); break
+        time.sleep(1)
+    while True: time.sleep(60)
+def read(ocrf):
+    r = Reader()
+    for row in sorted(map(json.loads, open(ocrf)), key=lambda x: x['file']): r.feed(row['lines'])
+    return r
+if __name__ == '__main__':
+    a = sys.argv[1:]
+    if not a: sys.exit(__doc__)
+    if a[0] == 'frames': frames(a[1], a[2], *(a[3:5]))
+    elif a[0] == 'ocr': ocr(a[1])
+    elif a[0] in ('replay', 'watch'):
+        args = a[2:]
+        try:
+            if a[0] == 'replay': replay(a[1], float(args[0]) if args else 4.0, int(args[1]) if len(args) > 1 else 2, int(args[2]) if len(args) > 2 else 8768)
+            else:
+                st = next((x for x in args if ':' in x), None); nums = [x for x in args if ':' not in x]
+                watch(a[1], int(nums[0]) if nums else 2, int(nums[1]) if len(nums) > 1 else 8768, st)
+        except KeyboardInterrupt: pass
+    elif a[0] == 'read':
+        r = read(a[1]); base = a[2][:-4] if a[2].endswith('.log') else a[2]
+        for i, g in enumerate(r.logs()):
+            f = f'{base}_g{i + 1}.log'; open(f, 'w').write('\n'.join(g) + '\n')
+            print(f"game {i + 1}: {sum(l.startswith('|turn|') for l in g)} turns, {next((l for l in g if l.startswith('|win|')), 'no result')} -> {f}")
+        print('sheets: ' + '; '.join(f"{sd}: {', '.join(st['species'] for st in r.sheets.get(sd, []))}" for sd in ('p1', 'p2')))

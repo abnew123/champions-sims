@@ -205,7 +205,8 @@ Mid-turn the broadcast pops up the HP box of the Pokemon being hit, alone, in th
 avoided, It doesn't affect, a faint, and for a status move the first thing said about another Pokemon), or the only possible target.
 Day 1: 232 of 262 single-target moves (89%), 163 of them from the popup box. The popups also place send-outs whose slot the text did not
 give; "<trainer> withdrew X!" frees X's slot; a game closes when Pokemon on neither sheet start acting (the broadcast cut to other footage).
-Each target's evidence and VOD time is kept in meta['aims'] for spot checks.
+Each target's evidence and VOD time is kept in meta['aims'] for spot checks. The popup-to-slot mapping was checked against the video by the user
+(M4 G1 turn 1: Night Slash on the right-side Tyranitar, Wood Hammer on the left-side Milotic, both as read).
 
 ## Process names (the user asked, 2026-10-06)
 

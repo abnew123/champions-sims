@@ -211,11 +211,15 @@ class Live:
             p = l.split('|')
             if len(p) > 3 and p[1] == 'switch' and len(out[p[2][:2]]) < 2: out[p[2][:2]].append(p[3].split(',')[0])
         return out
+    def why(s, names):
+        """a team sheet that does not list a Pokémon on the field (a misread, or the sheet of another match), or a species the engine lacks"""
+        if s.bo3 and any(R.toid(n) not in S.E['species'] for n in names): return 'is not in the engine yet'
+        return 'is not on the team sheets as read' if s.bo3 else 'is not in the engine yet'
     def evaluate(s, log, g, step):
         sp, H = s.at(log, step['turn'])
         if not sp:
             s.weights[step['turn']] = {}; s.hyp[step['turn']] = H; s.skip[step['turn']] = H.get('missing', [])
-            return 'not in the engine yet: ' + ', '.join(s.skip[step['turn']])
+            return s.why(s.skip[step['turn']]) + ': ' + ', '.join(s.skip[step['turn']])
         posf = os.path.join(OUT, f"{s.tag}_t{step['turn']}_pos.jsonl"); positions(sp, posf)
         os.environ['EVAL_TITLE'] = f"Live spectator: turn {step['turn']} ({len(sp)} positions)"
         EN.run(posf, s.evf, s.threads, 32, 1)
@@ -246,7 +250,7 @@ class Live:
                 continue
             last = g['steps'][-1]['turn']
             status = 'finished' if g['winner'] or feed.poll() is not None else f"turn {last}"
-            if s.skip.get(last): status += f" · not evaluated: {', '.join(s.skip[last])} is not in the engine yet"
+            if s.skip.get(last): status += f" · not evaluated: {', '.join(s.skip[last])} {s.why(s.skip[last])}"
             if len(log) != seen_len or status != s.status:
                 s.status = status; s.build(log, g); seen_len = len(log)
             if feed.poll() is not None and not todo and not s.over:

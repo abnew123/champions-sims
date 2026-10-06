@@ -1,0 +1,221 @@
+{
+ "source": "Frankfurt Regional 2027, VGC day 1 broadcast (YouTube VOD), read from the video",
+ "games": 19,
+ "matches": 8,
+ "summary": {
+  "decisions": 445,
+  "top_pick": 0.41797752808988764,
+  "best_value": 0.350561797752809,
+  "p_played": 0.38067160886404283,
+  "p_if_following_mix": 0.5780912242531809,
+  "chance": 0.1756875334403424,
+  "regret_mean": 0.021224939522992887,
+  "regret_median": 0.003864575673464543,
+  "within_2pts": 0.701123595505618,
+  "within_5pts": 0.8539325842696629
+ },
+ "by_kind": {
+  "other status move": {
+   "players": 0.06292134831460675,
+   "planner": 0.049762507122462975
+  },
+  "Wide Guard": {
+   "players": 0.0022471910112359553,
+   "planner": 0.002392916699244272
+  },
+  "Follow Me": {
+   "players": 0.0044943820224719105,
+   "planner": 0.00135482288537168
+  },
+  "attack": {
+   "players": 0.48764044943820223,
+   "planner": 0.5903574716412838
+  },
+  "Helping Hand": {
+   "players": 0.01348314606741573,
+   "planner": 0.0027953850816146847
+  },
+  "Parting Shot": {
+   "players": 0.029213483146067417,
+   "planner": 0.02112748867902985
+  },
+  "Trick Room": {
+   "players": 0.006741573033707865,
+   "planner": 0.012261539053589378
+  },
+  "Protect": {
+   "players": 0.1303370786516854,
+   "planner": 0.08404943841292524
+  },
+  "Tailwind": {
+   "players": 0.017977528089887642,
+   "planner": 0.026778993059820153
+  },
+  "Fake Out": {
+   "players": 0.07191011235955057,
+   "planner": 0.0759526466016095
+  },
+  "Rage Powder": {
+   "players": 0.0022471910112359553,
+   "planner": 0.0023288928046514847
+  },
+  "switch": {
+   "players": 0.1707865168539326,
+   "planner": 0.13083789795839706
+  }
+ },
+ "per_game": [
+  {
+   "game": "m1g1",
+   "turns": 10,
+   "decisions": 29,
+   "top_pick": 0.5172413793103449,
+   "regret_mean": 0.012685628615451042,
+   "regret_median": 0.0007404033727309578
+  },
+  {
+   "game": "m1g2",
+   "turns": 7,
+   "decisions": 27,
+   "top_pick": 0.4074074074074074,
+   "regret_mean": 0.022864158875208568,
+   "regret_median": 0.006185208401960018
+  },
+  {
+   "game": "m2g1",
+   "turns": 7,
+   "decisions": 22,
+   "top_pick": 0.36363636363636365,
+   "regret_mean": 0.02865617561088489,
+   "regret_median": 0.0032220289432444427
+  },
+  {
+   "game": "m2g2",
+   "turns": 7,
+   "decisions": 24,
+   "top_pick": 0.20833333333333334,
+   "regret_mean": 0.042971678775314735,
+   "regret_median": 0.032418059759732165
+  },
+  {
+   "game": "m2g3",
+   "turns": 9,
+   "decisions": 29,
+   "top_pick": 0.4827586206896552,
+   "regret_mean": 0.028779380620395457,
+   "regret_median": 0.0016810357954114563
+  },
+  {
+   "game": "m3g1",
+   "turns": 7,
+   "decisions": 23,
+   "top_pick": 0.4782608695652174,
+   "regret_mean": 0.012518898361559104,
+   "regret_median": 0.0
+  },
+  {
+   "game": "m3g2",
+   "turns": 3,
+   "decisions": 9,
+   "top_pick": 0.5555555555555556,
+   "regret_mean": 0.022602043064187588,
+   "regret_median": 4.305549571959055e-05
+  },
+  {
+   "game": "m3g3",
+   "turns": 6,
+   "decisions": 20,
+   "top_pick": 0.5,
+   "regret_mean": 0.01247348199019257,
+   "regret_median": 0.005036325038573444
+  },
+  {
+   "game": "m4g1",
+   "turns": 9,
+   "decisions": 28,
+   "top_pick": 0.39285714285714285,
+   "regret_mean": 0.01662204469578938,
+   "regret_median": 0.0013732032477156153
+  },
+  {
+   "game": "m4g2",
+   "turns": 10,
+   "decisions": 29,
+   "top_pick": 0.3448275862068966,
+   "regret_mean": 0.013033594848484297,
+   "regret_median": 0.004276307154421843
+  },
+  {
+   "game": "m4g3",
+   "turns": 5,
+   "decisions": 15,
+   "top_pick": 0.13333333333333333,
+   "regret_mean": 0.03505718664016297,
+   "regret_median": 0.02205488202840533
+  },
+  {
+   "game": "m5g1",
+   "turns": 6,
+   "decisions": 21,
+   "top_pick": 0.2857142857142857,
+   "regret_mean": 0.021767469366842807,
+   "regret_median": 0.005834511077617011
+  },
+  {
+   "game": "m5g2",
+   "turns": 8,
+   "decisions": 22,
+   "top_pick": 0.5,
+   "regret_mean": 0.014037572196457338,
+   "regret_median": 0.00344413568763019
+  },
+  {
+   "game": "m6g1",
+   "turns": 5,
+   "decisions": 17,
+   "top_pick": 0.35294117647058826,
+   "regret_mean": 0.023004017818257255,
+   "regret_median": 0.020311424488700158
+  },
+  {
+   "game": "m6g2",
+   "turns": 11,
+   "decisions": 25,
+   "top_pick": 0.4,
+   "regret_mean": 0.028713048359864574,
+   "regret_median": 0.010564421426418114
+  },
+  {
+   "game": "m7g1",
+   "turns": 10,
+   "decisions": 33,
+   "top_pick": 0.5757575757575758,
+   "regret_mean": 0.024722741710744938,
+   "regret_median": 0.002030891469499918
+  },
+  {
+   "game": "m7g2",
+   "turns": 9,
+   "decisions": 28,
+   "top_pick": 0.39285714285714285,
+   "regret_mean": 0.014743892383079684,
+   "regret_median": 0.0032940597967013874
+  },
+  {
+   "game": "m8g1",
+   "turns": 11,
+   "decisions": 34,
+   "top_pick": 0.4411764705882353,
+   "regret_mean": 0.018109647508910726,
+   "regret_median": 0.006169933552583107
+  },
+  {
+   "game": "m8g2",
+   "turns": 3,
+   "decisions": 10,
+   "top_pick": 0.6,
+   "regret_mean": 0.013420694941011443,
+   "regret_median": 0.00498697474951508
+  }
+ ]
+}

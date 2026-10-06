@@ -23,6 +23,14 @@
 
 ## 1. Launch the instance
 
+**Fastest: a launch template (create once per region; templates, key pairs and security groups are all per region).**
+EC2 → Launch Templates → Create launch template: name `champions-climb`; AMI Ubuntu Server 24.04 LTS (x86); instance type
+`c7a.48xlarge`; that region's key pair; no subnet (choose the zone at launch); the existing security group that allows SSH from
+your IP; root volume 40 GiB gp3; Advanced details → Purchasing option → Spot (one-time, terminate on interruption). Then each
+launch is Launch Templates → `champions-climb` → Actions → Launch instance from template. If your IP changes, add it to the
+security group. Without a template, set these by hand:
+
+
 EC2 console (the region with the quota) → **Launch instance**:
 - **Name:** `champions-climb`.
 - **AMI:** Ubuntu Server 26.04 or 24.04 LTS, 64-bit (x86).

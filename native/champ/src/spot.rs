@@ -98,8 +98,11 @@ pub(crate) fn label(b: &Battle, s: u8, c: &[PChoice; 2]) -> String {
         let pi = b.sides[s as usize].active[i]?; let m = (s, pi); if b.p(m).fainted { return None; }
         let what = match c[i] {
             PChoice::Move(k, t, mega) => {
-                let mid = b.p(m).move_slots.get(k).map(|x| x.id).unwrap_or("?");
-                let mv = b.dex.mv(mid).tmpl.name;
+                // a locked turn's request has one entry (the locked move, or the recharge pseudo-move), so k does not index the move slots
+                let p = b.p(m);
+                let locked: Option<&str> = if crate::state::find(&p.volatiles, "mustrecharge").is_some() { Some("Recharge") }
+                    else { ["twoturnmove", "lockedmove"].iter().find_map(|v| crate::state::find(&p.volatiles, v).and_then(|st| st.get("move").and_then(|x| x.s()))).map(|mid| b.dex.mv(mid).tmpl.name) };
+                let mv = match locked { Some(n) => n, None => { let mid = p.move_slots.get(k).map(|x| x.id).unwrap_or("?"); if mid == "?" { "?" } else { b.dex.mv(mid).tmpl.name } } };
                 let tgt = if t > 0 { b.sides[1 - s as usize].active[t as usize - 1].map(|x| format!(" -> {}", name((1 - s, x)))).unwrap_or_default() }
                           else if t < 0 { " -> ally".to_string() } else { String::new() };
                 format!("{}{}{}", mv, tgt, if mega { " (Mega)" } else { "" })

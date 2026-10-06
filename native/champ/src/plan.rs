@@ -409,20 +409,24 @@ pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
     let mega = !locked && b.p(m).can_mega_evo.is_some();
     let mut out = vec![];
     let foes: Vec<Option<MonRef>> = (0..2).map(|t| b.sides[1 - s as usize].active[t].map(|x| (1 - s, x))).collect();
-    for (k, (mid, _, disabled)) in req.iter().enumerate() {
+    for (k, (mid, rtarget, disabled)) in req.iter().enumerate() {
         if *disabled || *mid == "healingwish" || *mid == "memento" { continue; }
         if *mid == "fakeout" && b.p(m).active_move_actions > 0 { continue; }
         if b.p(m).item.starts_with("choice") && (*mid == "protect" || *mid == "detect") { continue; }
         if *mid == "trickroom" && find(&b.field.pseudo, "trickroom").is_some() && tr_keep(b, s) { continue; }
         let mv = b.dex.mv(mid).tmpl.clone();
         if mv.stalling_move && no_double_protect(s) && find(&b.p(m).volatiles, "stall").is_some() { continue; }
-        if FOE_TARGETS.contains(&mv.target) {
+        // the request's target class, as Showdown's chooseMove checks it: for a real move it is the move's own; for the recharge
+        // pseudo-move (a stub with no target in the data, which used to read as "normal" and left a recharging Pokemon with no legal
+        // option, ending the game early) it is "self"
+        let target: Id = *rtarget;
+        if FOE_TARGETS.contains(&target) {
             for (t, f) in foes.iter().enumerate() {
                 let Some(f) = f else { continue }; if b.p(*f).fainted { continue; }
                 if mv.category != "Status" && type_mult(b, mv.mtype, *f) == 0.0 && *mid != "weatherball" && *mid != "terrainpulse" { continue; }
                 out.push(PChoice::Move(k, t as i64 + 1, mega));
             }
-        } else if mv.target == "adjacentAlly" {
+        } else if target == "adjacentAlly" {
             if let Some(a) = b.sides[s as usize].active[1 - i] { if !b.p((s, a)).fainted { out.push(PChoice::Move(k, if i == 0 { -2 } else { -1 }, mega)); } }
         } else { out.push(PChoice::Move(k, 0, mega)); }
     }

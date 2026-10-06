@@ -104,6 +104,10 @@ candidate fours against each six's three strongest answers. First full run sched
 user first (picks may change, which means new turn-one lines and game plans for those tabs). Battle sim is reworking the opponent model
 into a pool of real Bo3 sides grouped by core rules; if that lands, real sixes would replace the reconstructed ones and the tabs may be
 re-keyed (Battle sim will say first).
+**Standing instruction from the user (2026-10-06, about 2 am): if the pool passes Team search's validation, do not ask: run the optimal
+step on real sixes** (`OPTIMAL_SIXES=pool python3 sheetkit/kit.py trick-room-six optimal run --threads N`, then `report`; battles in
+`work/optimal_pool`, result `optimal_pool.json`; the most common six real sixes per tab from `pssim/opp_pool.py`, about 72,000 games;
+cores coordinated with the other threads as usual). Going over the result with the user before the sheet changes still applies.
 
 ## How the current page was built
 

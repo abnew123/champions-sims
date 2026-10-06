@@ -379,3 +379,4 @@ Usage:
 - **Sixth slot for the converged core (Oct 6, 3:10 am; `sixth.py`, `sixth_result.json`):** core Delphox, Scarf Garchomp, Charizard Y, Sitrus Incineroar, Sash Kingambit; 8 batches × 216 paired games each.
   - Archaludon 69.1, Gholdengo 67.0, Rillaboom 64.0. Gholdengo − Archaludon −2.1 ± 1.6; Rillaboom − Archaludon −5.1 ± 1.7; Rillaboom − Gholdengo −3.0 ± 1.1.
   - Archaludon's edge is Rain (72.9 vs 28.8 / 11.6) and Rain+Sun. Gholdengo is better vs Indeedee TR (60.7 vs 43.8) and TR (74.2 vs 61.7); Rillaboom vs Snow.
+- **Perish source decision (Oct 6):** archetype-model climbs keep `TS_PERISH=real` (models' Perish gap +1.21). A pool-based climb scores Perish from the pool's sim games (gap +0.37, in line with Rain −0.33 and Snow's under-rating), so team-specific Perish answers count.

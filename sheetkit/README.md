@@ -119,6 +119,7 @@ other game indices (`<folder>.run.json` records them). Move the old folder aside
 | `matchups_default` | `tr` or `notr`: which Matchups grid shows first |
 | `speed.order`, `speed.top`, `speed.tiers`, `speed.range` | The Speed table: `fastest-first` or `slowest-first`; how many of the most-used Pokémon to list (30); how many Speeds per Pokémon (2); `[low, high]` outside which everything folds into one row |
 | `theme` | The page's ten colour tokens, light and dark |
+| `proc_prefix` | The name every process of this sheet's runs starts with in `top` (`trsheet` gives trsheet-py, trsheet-node, trsheet-champ-battle-v16); default the folder name. Each thread uses its own, so the user can see whose a process is |
 
 ### What the page is built from
 

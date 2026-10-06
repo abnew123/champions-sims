@@ -14,7 +14,7 @@ Talk to the other threads directly with SendMessage (names above); do not relay 
 
 ## The sheet now
 
-- Published: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6, **Version 17** (2026-10-05, the first built by the sheet kit). Source:
+- Published: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6, **Version 18** (2026-10-05: the picks rerun on the final simulator; open item 2). Version 17 (same day) was the first built by the sheet kit. Source:
   `sheets/trick-room-six/sheet.html` (`python3 sheetkit/kit.py trick-room-six page`); `trsheet/tr-sheet.html` is a copy of it. Older
   pages: `trsheet/tr-sheet.v11.html` ... `tr-sheet.v15.html`, Version 16 in `sheetkit/fixtures/tr-v16/published.html`, and git from here on.
 - Version 17 against Version 16: Torkoal back to 32 HP / 2 SpD (card and Matchups column); Incineroar's Matchups column with White Herb
@@ -113,7 +113,7 @@ thread maintains the kit and owns `sheets/trick-room-six/`.
    Trick Room -5.9 +- 2.5, from physical leads). Done: `team.json`, `pssim/myteam_real.json`, the card, the Matchups column (the
    Version 15 page's), the six tabs' whole-game % and turn-one lines (36 jobs re-run through the kit), the generic grid's Torkoal cells;
    Battle sim and Team search use the same sets. Published in Version 17.
-2. **Picks rerun on the final simulator: DONE 2026-10-05 (8:12 pm); Version 18 built, waiting for the user's word to publish.**
+2. **Picks rerun on the final simulator: DONE 2026-10-05 (8:12 pm); published as Version 18 the same evening.**
    Setup v13-v16 (all the same games: champ-battle with `DP2=1 RACE=1 RACE_TIES=avg`, `egvalue9.json`, the team's generic grid,
    32 HP Torkoal). Bring matrix 86,400 games (index 600-615) on a shared cloud box, confirmation 312 jobs x 48 fresh games (index
    1000-1047). Report `sheets/trick-room-six/work/matrix/report.txt` and `work/confirm/report.txt` (ignored by git; rerun `matrix
@@ -124,8 +124,8 @@ thread maintains the kit and owns `sheets/trick-room-six/`.
    the three new leads rewritten; two stale sentences dropped from the method note (Adamant Kingambit, default back row). Version 18
    is `sheets/trick-room-six/sheet.html`; publish it as described under "The sheet now". The sim's matchup error against real
    regional results is about 6 win-rate points per archetype, so whole-game % ranks fours within a tab better than it predicts real
-   win rates. **Perish is still the user's call:** the tab shows the sim's 92%, and the sim cannot play Perish trap properly (Team
-   search uses a real-data rate, 45-53% by archetype). Shared-box lessons are in `sheetkit/README.md`.
+   win rates. **Perish:** the tab shows the sim's 92% although the sim cannot play Perish trap properly (Team search uses a real-data
+   rate, 45-53% by archetype); the user chose on 2026-10-05 to keep the sim's number on the sheet. Shared-box lessons are in `sheetkit/README.md`.
 3. **Rain near miss:** resolved by the rerun (see item 2).
 4. **Species tells and per-archetype strategy guides** were delivered in chat only (`pssim/results/bringmx_report.txt`,
    `pssim/battle_guide_report.py`). The user has not asked for them on the sheet. Keep the sheet lean.

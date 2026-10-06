@@ -62,10 +62,18 @@ section{margin-top:44px;scroll-margin-top:calc(env(safe-area-inset-top,0px) + 56
 .shead{border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:18px}
 .shead h2{font-size:22px;font-weight:700;letter-spacing:-.01em}
 .snote{color:var(--ink2);font-size:14px;margin:6px 0 0;max-width:70ch}
-.snotes{margin-top:16px;padding-top:4px}
-.snotes .snote{font-size:13px;color:var(--ink3);line-height:1.55;margin-top:8px}
-.snotes .snote b{color:var(--ink2)}
-.snotes .spdnote{font-size:13px;color:var(--ink3);margin-top:8px}
+/* explanations: collapsed under each section's working content */
+.snotes{margin-top:14px}
+.snotes>summary,.msrc>summary{display:inline-flex;align-items:center;gap:7px;cursor:pointer;list-style:none;user-select:none}
+.snotes>summary::-webkit-details-marker,.msrc>summary::-webkit-details-marker{display:none}
+.snotes>summary::before,.msrc>summary::before{content:"";flex:none;border-left:5px solid currentColor;border-top:4px solid transparent;border-bottom:4px solid transparent}
+.snotes[open]>summary::before,.msrc[open]>summary::before{transform:rotate(90deg)}
+.snotes>summary{font-family:var(--disp);font-size:11.5px;font-weight:600;letter-spacing:.04em;color:var(--ink3);padding:7px 11px;border:1px solid var(--rule);border-radius:3px;background:var(--panel)}
+.snotes>summary:hover,.msrc>summary:hover{color:var(--ink)}
+.snotes>summary:focus-visible,.msrc>summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.snotes[open]>summary{margin-bottom:4px}
+.snotes .snote{font-size:13px;color:var(--ink2);line-height:1.55;margin-top:8px}
+.snotes .spdnote{font-size:13px;margin-top:8px}
 p.body{max-width:70ch;margin:0 0 12px;color:var(--ink2)}
 h3{font-size:15.5px;font-weight:700;margin:26px 0 10px}
 
@@ -93,6 +101,8 @@ h3{font-size:15.5px;font-weight:700;margin:26px 0 10px}
 .stats .spe{background:var(--accent-soft)}
 .mnote{font-size:13.5px;color:var(--ink2);line-height:1.5}
 .msrc{font-size:12px;color:var(--ink3);line-height:1.5;border-top:1px solid var(--rule-2);padding-top:8px;margin-top:auto}
+.msrc>summary{font-family:var(--disp);font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--ink3)}
+.msrc[open]>summary{margin-bottom:5px}
 .bring{margin-top:14px;background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:12px 16px;font-size:14px;color:var(--ink2);max-width:80ch}
 
 /* tables */
@@ -227,12 +237,12 @@ footer a{color:var(--ink2)}
   <p class="lguide" id="lguide"><b>Which tab:</b> take the first match in their six. Gengar&nbsp;&rarr;&nbsp;<button type="button" class="lgk" data-k="perish">Perish</button> &middot; Charizard + Pelipper or Politoed&nbsp;&rarr;&nbsp;<button type="button" class="lgk" data-k="rainsun">Rain + Sun</button> &middot; Charizard or Torkoal&nbsp;&rarr;&nbsp;<button type="button" class="lgk" data-k="sun">Sun</button> &middot; Pelipper or Politoed&nbsp;&rarr;&nbsp;<button type="button" class="lgk" data-k="rain">Rain</button> &middot; Tyranitar&nbsp;&rarr;&nbsp;<button type="button" class="lgk" data-k="sand">Sand</button> &middot; Froslass, Alolan Ninetales or Vanilluxe&nbsp;&rarr;&nbsp;<button type="button" class="lgk" data-k="snow">Snow</button> &middot; Indeedee&nbsp;&rarr;&nbsp;<button type="button" class="lgk" data-k="indeedee">Indeedee TR</button> &middot; Farigiraf or Sinistcha&nbsp;&rarr;&nbsp;<button type="button" class="lgk" data-k="tr">Trick Room</button> &middot; Salamence, Whimsicott, Talonflame or Staraptor&nbsp;&rarr;&nbsp;<button type="button" class="lgk" data-k="tw">Tailwind</button> &middot; none of these&nbsp;&rarr;&nbsp;<button type="button" class="lgk" data-k="balance">Balance</button></p>
   <div class="lsegbar" role="tablist" aria-label="Their archetype" id="lseg"></div>
   <div id="lpanel"></div>
-  <div class="snotes">
+  <details class="snotes"><summary>How to read a lead card, and how the picks were made</summary>
     <p class="snote">Pick the lead at team preview, then the turn-one line for what they send out. Percentages are how often to click each line; use any randomizer. The two numbers are your win chance after turn one against how the Showdown ladder clicks, then against a player who reads your mix; red means the lead loses turn one. &ldquo;Sets Trick Room&rdquo; is how often the plan clicks it on turn one.</p>
     <p class="snote">Each tab shows the four to bring: the lead and back row that won the most whole-game sims against that archetype (both sides switching, every turn played out, Trick Room and endgames included). Its lines are the turn-one plan for that lead.</p>
     <p class="snote">How much Trick Room is worth depends on the archetype. In the 2v2 endgame sim (your back two against the pairs their archetype has on the field at turn 3, Trick Room up for 2&ndash;4 turns or not at all), it changes your win share by: Sand +43; Balance +37; Snow +30; Tailwind +29; Trick Room teams +19; Rain + Sun +18; Sun +16; Perish +13; Rain +12; Indeedee TR -3 points. The lead scores use those ratios, so Trick Room counts more against fast teams and less against slow ones.</p>
     <p class="snote">All 15 lead pairs were screened against each archetype&rsquo;s six most common opposing leads in 5,000 Showdown M-C Bo3 replays; the leads near the top were re-run with 12 RNG samples per cell in Showdown&rsquo;s engine with Champions mechanics and scored with a win model fit on 7,781 games. Two changes for a Trick Room team: Trick Room up after turn one counts for whichever side brought the slower four, scaled by how much slower and by how much Trick Room decided those 2v2 endgames against that archetype (its overall size still comes from the replay fit), not for whoever clicked it, and a Tailwind set in the same turn as Trick Room scores nothing, since it runs out inside Trick Room. Your Indeedee holds Psychic Seed. Their Indeedee F&rsquo;s item is mixed at replay rates: Rocky Helmet 48%, Colbur Berry 32%, Psychic Seed 20%. Iron Head replaces Kowtow Cleave into Sneasler, because Fighting resists Dark. The lead and back row shown won the most whole-game sims: full 4v4 battles in a native port of Showdown&rsquo;s engine, both sides playing each turn&rsquo;s best mix (switches included) to the end, against the archetype&rsquo;s six most common leads with the back rows they bring in replays; close calls were settled head to head on the same seeds. The turn-one lines were simulated with the card&rsquo;s own back row. Their other leads are not simulated.</p>
-  </div>
+  </details>
 </section>
 <!--/LEADS-->
 
@@ -241,7 +251,7 @@ footer a{color:var(--ink2)}
     <h2>The six</h2>
   </div>
   <div class="team" id="teamgrid"></div>
-  <div class="snotes"><p class="snote">Each set uses the most common spread for that Pokémon running these moves; Incineroar&rsquo;s card says where its set comes from. Stat points (SP) are what you assign in the game; the stat row is the result at level 50, after Mega Evolution for Blastoise.</p></div>
+  <details class="snotes"><summary>About stat points and the stat row</summary><p class="snote">Each set uses the most common spread for that Pokémon running these moves; Incineroar&rsquo;s card says where its set comes from. Stat points (SP) are what you assign in the game; the stat row is the result at level 50, after Mega Evolution for Blastoise.</p></details>
 </section>
 
 <section id="coverage">
@@ -254,10 +264,10 @@ footer a{color:var(--ink2)}
       <tbody id="covbody"></tbody>
     </table>
   </div>
-  <div class="snotes">
+  <details class="snotes"><summary>How the hits were worked out</summary>
     <p class="snote">Your hardest hit on each threat, worst gaps first. <b>Pessimistic throughout:</b> each threat is at the bulkiest of its most common spreads for the side you hit, with the items that stop a knockout: Focus Sash (Arcanine-H, Pelipper, Whimsicott), Chople on Kingambit, Colbur on Indeedee F. Sitrus is never counted as extra HP, and Sneasler has already used its Grassy Seed (+1 Defense). Your Torkoal is in its own sun; otherwise the threat&rsquo;s own weather and terrain are up. Water Spout and Eruption are from full HP, spread moves take their 25% cut, and Fake Out is left out. Tap a row for all five attackers.</p>
     <p class="snote">Your Indeedee&rsquo;s Psychic Terrain is not assumed. In it, Farigiraf&rsquo;s Psychic does about 1.3 times the damage shown. One-hit KOs only, so &ldquo;none&rdquo; can still be a clean two-hit win; the Matchups grid counts those.</p>
-  </div>
+  </details>
 </section>
 
 <section id="matchups">
@@ -281,10 +291,10 @@ footer a{color:var(--ink2)}
     <thead><tr><th scope="col">Threat</th><th scope="col"><span class="lg">Blastoise</span><span class="sm">Blast</span></th><th scope="col"><span class="lg">Torkoal</span><span class="sm">Tork</span></th><th scope="col"><span class="lg">Farigiraf</span><span class="sm">Fari</span></th><th scope="col"><span class="lg">Kingambit</span><span class="sm">Gambit</span></th><th scope="col"><span class="lg">Incineroar</span><span class="sm">Incin</span></th></tr></thead>
     <tbody id="mxbody"></tbody>
   </table></div>
-  <div class="snotes">
+  <details class="snotes"><summary>How the one-on-ones were worked out</summary>
     <p class="snote">Who wins the one-on-one with both sides picking their best move each turn: your minimum rolls against their maximum, across their most-used spreads, up to three. Switch between Trick Room up for the whole fight and no Trick Room. Tap a row for the numbers. Under each name: its op.gg doubles usage or ladder rank; the six Trick Room threats added for this team have none. Indeedee has no attacks, so it has no column.</p>
     <p class="snote">One-on-one only, Protect left out. Fake Out is in, on each side&rsquo;s first turn out; it can&rsquo;t touch Ghost types, and Armor Tail or their Psychic Terrain blocks it and every other priority move. &ldquo;Trick Room up&rdquo; keeps it up for the whole fight. Spread damage is in, partner chip is not; in doubles, chip is what breaks the <b>*</b> wins. Rolls count accuracy as 100%. Your Torkoal is always in its own sun, and their Pelipper, Charizard Y, Torkoal and Tyranitar bring their weather. Grassy Terrain is up against Rillaboom and a seeded Sneasler, and their Psychic Terrain against Indeedee; yours is not assumed. Mega Raichu Y&rsquo;s Zap Cannon always paralyses: your worst luck counts every turn as fully paralysed, and real rolls use Champions&rsquo; 1-in-8 chance. Blastoise takes its switch-in hit before it Mega Evolves.</p>
-  </div>
+  </details>
 </section>
 
 <section id="speed">
@@ -292,10 +302,10 @@ footer a{color:var(--ink2)}
     <h2>Speed under Trick Room</h2>
   </div>
   <div class="tscroll"><table class="spd" id="spdt"></table></div>
-  <div class="snotes">
+  <details class="snotes"><summary>Where these spreads come from</summary>
     <p class="snote">Lowest moves first. Your six are shaded; the others are the most common opposing spreads on the Showdown ladder (Smogon&rsquo;s August stats, the latest published) and in tournament sets, with the Speed points each spread uses. Equal numbers are a coin flip.</p>
     <p class="body spdnote"><b>Nothing common sits at 89, or between 64 and 69.</b> One Speed point on Blastoise (89) only changes the two 88s, Quiet Mega Blastoise and Sylveon&rsquo;s most common spread: you move before them without Trick Room and after them under it, instead of a coin flip; the usual Mega Blastoise is at 130 either way. Your Brave Kingambit (63) only changes the mirror: under Trick Room it moves before every Adamant Kingambit instead of tying the 70s, and without Trick Room it moves after the 70s instead of tying them. Sylveon&rsquo;s spreads are scattered from 80 to 103.</p>
-  </div>
+  </details>
 </section>
 
 <footer>
@@ -360,7 +370,7 @@ document.getElementById("teamgrid").innerHTML=T.map(m=>`<article class="mon">
   <div class="moves">${m.mv.map(x=>`<span class="mv">${x}</span>`).join("")}</div>
   <div class="stats">${m.st.map((v,i)=>`<div${i===5?' class="spe"':''}><span>${ST[i]}</span><b>${v}</b></div>`).join("")}</div>
   <div class="mnote">${m.note}</div>
-  <div class="msrc">${m.src}</div></article>`).join("");
+  ${m.src?`<details class="msrc"><summary>Why this set</summary>${m.src}</details>`:""}</article>`).join("");
 })();
 
 /* coverage: best hit on each threat; rows are [threat, usage, Focus Sash, [[attacker, move, effectiveness, max %, KO rolls of 16], ...]] */

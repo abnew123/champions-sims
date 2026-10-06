@@ -175,6 +175,13 @@ footer a{color:var(--ink2)}
 .lguide b{color:var(--ink);font-weight:600}
 .lgk{font:inherit;font-weight:600;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
 .lgk:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lrules{margin:6px 0 8px;padding-left:22px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:3px 22px;font-size:12.5px}
+.lrules li{padding-left:2px}
+.lrules li::marker{color:var(--ink3);font-family:var(--mono);font-size:11px}
+.lrules .lgk{text-align:left}
+.lrt{margin-left:6px;font-size:11px;color:var(--ink3)}
+.lno{font-weight:400;color:var(--ink2)}
+.lfall{margin:4px 0 0}
 .lpick{background:var(--panel);border:1px solid var(--rule);border-radius:4px;overflow:hidden;margin-bottom:14px}
 .lphead{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;padding:13px 16px;border-bottom:1px solid var(--rule-2);background:var(--panel-2)}
 .lpwhen{flex-basis:100%;font-family:var(--disp);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
@@ -326,7 +333,7 @@ function draw(k){
   panel.innerHTML=a.picks.map(p=>`<div class="lpick">
     <div class="lphead">${p.when?`<span class="lpwhen">${p.when}</span>`:""}<span class="lplead">${p.lead.join(" + ")}</span>
       <span class="lpback">back: ${p.back}</span><span class="lpv"><b>${p.v[0]}%</b> / ${p.v[1]}%</span>
-      <span class="lptop"><span class="${p.top?"":"is-top"}">${p.top?`Top lead: ${p.top[0]}, ${p.top[1].toFixed(1)} points ahead`:(p.fbw!=null?`Wins ${p.fbw}% of whole-game sims`:(p.fb?"Full-battle pick":(p.x2!=null?"Top lead with Trick Room doubled":"Top lead")))}</span>{{T1_STAT}}${p.x2!=null?`<span>${p.x2>0.05?`Scored as fitted: ${p.x2.toFixed(1)} points behind the top lead`:"Scored as fitted, it matches the top lead"}</span>`:""}</span></div>
+      <span class="lptop"><span class="${p.top?"":"is-top"}">${p.top?`Top lead: ${p.top[0]}, ${p.top[1].toFixed(1)} points ahead`:(p.fbw!=null?(p.fbt||`Wins ${p.fbw}% of whole-game sims`):(p.fb?"Full-battle pick":(p.x2!=null?"Top lead with Trick Room doubled":"Top lead")))}</span>{{T1_STAT}}${p.x2!=null?`<span>${p.x2>0.05?`Scored as fitted: ${p.x2.toFixed(1)} points behind the top lead`:"Scored as fitted, it matches the top lead"}</span>`:""}</span></div>
     ${p.rule?`<div class="lrule">${p.rule}</div>`:""}
     ${p.plan&&p.plan.length?`<div class="lplan"><span class="lplanh">Game plan</span><ul>${p.plan.map(x=>`<li>${x}</li>`).join("")}</ul></div>`:""}
     ${p.vs.map(([n,sh,v,ls])=>`<div class="lvs"><div class="lvshead"><span class="lvsname">vs ${n}</span><span class="lvsshare">${sh.toFixed(1)}% of their leads</span>
@@ -337,7 +344,8 @@ function draw(k){
 }
 bar.innerHTML=L.map(a=>`<button class="lseg" role="tab" aria-selected="false" data-k="${a.k}">${a.tab}</button>`).join("");
 bar.addEventListener("click",e=>{const b=e.target.closest(".lseg"); if(b) draw(b.dataset.k);});
-document.getElementById("lguide").addEventListener("click",e=>{const b=e.target.closest(".lgk"); if(b) draw(b.dataset.k);});
+document.getElementById("lguide").addEventListener("click",e=>{const b=e.target.closest(".lgk"); if(!b) return; draw(b.dataset.k);
+  const c=panel.children[+(b.dataset.c||0)]; if(b.dataset.c&&c) c.scrollIntoView({block:"start",behavior:"smooth"});});
 let start="tw"; try{start=localStorage.getItem(KEY)||"tw";}catch(e){}
 draw(start);
 })();

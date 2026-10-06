@@ -130,6 +130,8 @@ def main():
     elif step == ('t1', 'solve'): d = T1.solve(sheet); print(f"t1.json: {len(d['plans'])} plans")
     elif step == ('optimal', 'run'):
         import optimal; optimal.run(sheet, a.threads, a.force, a.only or 'all')
+    elif step == ('optimal', 'adopt'):
+        import optimal; optimal.adopt(sheet)
     elif step == ('optimal', 'report'):
         import optimal; lines = []; optimal.report(sheet, out=lambda s: (print(s), lines.append(s)))
         open(sheet.w('optimal', 'report.txt'), 'w').write('\n'.join(lines) + '\n')

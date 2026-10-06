@@ -1,0 +1,937 @@
+{
+ "source": "pssim/opp_pool.json (Showdown Reg M-C Bo3 sides with open team sheets) grouped by pssim/results/core_rules_both_100.json",
+ "teams": 8992,
+ "in_a_core_group": 0.567,
+ "cards": [
+  {
+   "model": "Balance: Gholdengo + Incineroar + Raichu + Rillaboom",
+   "key": "balance-gholdengo-incineroar-raichu-rillaboom",
+   "tab": "balance",
+   "label": "Gholdengo + Incineroar + Raichu + Rillaboom",
+   "rule": {
+    "all": [
+     "Gholdengo",
+     "Incineroar",
+     "Raichu",
+     "Rillaboom"
+    ],
+    "none": []
+   },
+   "share": 6.73,
+   "sides": 605,
+   "pairs_cover": 0.527
+  },
+  {
+   "model": "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)",
+   "key": "tailwind-gholdengo-raichu-rillaboom-no-incineroar",
+   "tab": "tw",
+   "label": "Gholdengo + Raichu + Rillaboom (no Incineroar)",
+   "rule": {
+    "all": [
+     "Gholdengo",
+     "Raichu",
+     "Rillaboom"
+    ],
+    "none": [
+     "Incineroar"
+    ]
+   },
+   "share": 8.46,
+   "sides": 761,
+   "pairs_cover": 0.472
+  },
+  {
+   "model": "Rain + Sun: Archaludon + Grimmsnarl + Pelipper",
+   "key": "rain-sun-archaludon-grimmsnarl-pelipper",
+   "tab": "rainsun",
+   "label": "Archaludon + Grimmsnarl + Pelipper",
+   "rule": {
+    "all": [
+     "Archaludon",
+     "Grimmsnarl",
+     "Pelipper"
+    ],
+    "none": []
+   },
+   "share": 4.31,
+   "sides": 388,
+   "pairs_cover": 0.693
+  },
+  {
+   "model": "Rain: Archaludon + Pelipper (no Grimmsnarl)",
+   "key": "rain-archaludon-pelipper-no-grimmsnarl",
+   "tab": "rain",
+   "label": "Archaludon + Pelipper (no Grimmsnarl)",
+   "rule": {
+    "all": [
+     "Archaludon",
+     "Pelipper"
+    ],
+    "none": [
+     "Grimmsnarl"
+    ]
+   },
+   "share": 4.6,
+   "sides": 414,
+   "pairs_cover": 0.312
+  },
+  {
+   "model": "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler",
+   "key": "sun-gardevoir-indeedee-f-kingambit-sneasler",
+   "tab": "sun",
+   "label": "Gardevoir + Indeedee-F + Kingambit + Sneasler",
+   "rule": {
+    "all": [
+     "Gardevoir",
+     "Indeedee-F",
+     "Kingambit",
+     "Sneasler"
+    ],
+    "none": []
+   },
+   "share": 0.99,
+   "sides": 89,
+   "pairs_cover": 0.629
+  },
+  {
+   "model": "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)",
+   "key": "indeedee-tr-gardevoir-indeedee-f-sneasler-no-kingambit",
+   "tab": "indeedee",
+   "label": "Gardevoir + Indeedee-F + Sneasler (no Kingambit)",
+   "rule": {
+    "all": [
+     "Gardevoir",
+     "Indeedee-F",
+     "Sneasler"
+    ],
+    "none": [
+     "Kingambit"
+    ]
+   },
+   "share": 2.06,
+   "sides": 185,
+   "pairs_cover": 0.481
+  },
+  {
+   "model": "Sun: Farigiraf + Garchomp + Incineroar + Sylveon",
+   "key": "sun-farigiraf-garchomp-incineroar-sylveon",
+   "tab": "sun",
+   "label": "Farigiraf + Garchomp + Incineroar + Sylveon",
+   "rule": {
+    "all": [
+     "Farigiraf",
+     "Garchomp",
+     "Incineroar",
+     "Sylveon"
+    ],
+    "none": []
+   },
+   "share": 2.06,
+   "sides": 185,
+   "pairs_cover": 0.632
+  },
+  {
+   "model": "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)",
+   "key": "sun-farigiraf-garchomp-sylveon-no-incineroar",
+   "tab": "sun",
+   "label": "Farigiraf + Garchomp + Sylveon (no Incineroar)",
+   "rule": {
+    "all": [
+     "Farigiraf",
+     "Garchomp",
+     "Sylveon"
+    ],
+    "none": [
+     "Incineroar"
+    ]
+   },
+   "share": 1.63,
+   "sides": 147,
+   "pairs_cover": 0.68
+  },
+  {
+   "model": "Sand: Excadrill + Salamence + Sneasler + Tyranitar",
+   "key": "sand-excadrill-salamence-sneasler-tyranitar",
+   "tab": "sand",
+   "label": "Excadrill + Salamence + Sneasler + Tyranitar",
+   "rule": {
+    "all": [
+     "Excadrill",
+     "Salamence",
+     "Sneasler",
+     "Tyranitar"
+    ],
+    "none": []
+   },
+   "share": 2.28,
+   "sides": 205,
+   "pairs_cover": 0.571
+  },
+  {
+   "model": "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)",
+   "key": "sand-excadrill-salamence-tyranitar-no-sneasler",
+   "tab": "sand",
+   "label": "Excadrill + Salamence + Tyranitar (no Sneasler)",
+   "rule": {
+    "all": [
+     "Excadrill",
+     "Salamence",
+     "Tyranitar"
+    ],
+    "none": [
+     "Sneasler"
+    ]
+   },
+   "share": 1.12,
+   "sides": 101,
+   "pairs_cover": 0.436
+  },
+  {
+   "model": "Trick Room: Delphox + Floette + Incineroar + Sinistcha",
+   "key": "trick-room-delphox-floette-incineroar-sinistcha",
+   "tab": "tr",
+   "label": "Delphox + Floette + Incineroar + Sinistcha",
+   "rule": {
+    "all": [
+     "Delphox",
+     "Floette",
+     "Incineroar",
+     "Sinistcha"
+    ],
+    "none": []
+   },
+   "share": 0.95,
+   "sides": 85,
+   "pairs_cover": 0.812
+  },
+  {
+   "model": "Trick Room: Delphox + Incineroar + Sinistcha (no Floette)",
+   "key": "trick-room-delphox-incineroar-sinistcha-no-floette",
+   "tab": "tr",
+   "label": "Delphox + Incineroar + Sinistcha (no Floette)",
+   "rule": {
+    "all": [
+     "Delphox",
+     "Incineroar",
+     "Sinistcha"
+    ],
+    "none": [
+     "Floette"
+    ]
+   },
+   "share": 0.99,
+   "sides": 89,
+   "pairs_cover": 0.618
+  },
+  {
+   "model": "Rain + Sun: Archaludon + Golisopod + Politoed",
+   "key": "rain-sun-archaludon-golisopod-politoed",
+   "tab": "rainsun",
+   "label": "Archaludon + Golisopod + Politoed",
+   "rule": {
+    "all": [
+     "Archaludon",
+     "Golisopod",
+     "Politoed"
+    ],
+    "none": []
+   },
+   "share": 1.78,
+   "sides": 160,
+   "pairs_cover": 0.456
+  },
+  {
+   "model": "Perish: Archaludon + Politoed (no Golisopod)",
+   "key": "perish-archaludon-politoed-no-golisopod",
+   "tab": "perish",
+   "label": "Archaludon + Politoed (no Golisopod)",
+   "rule": {
+    "all": [
+     "Archaludon",
+     "Politoed"
+    ],
+    "none": [
+     "Golisopod"
+    ]
+   },
+   "share": 1.96,
+   "sides": 176,
+   "pairs_cover": 0.562
+  },
+  {
+   "model": "Snow: Froslass + Kingambit + Rillaboom",
+   "key": "snow-froslass-kingambit-rillaboom",
+   "tab": "snow",
+   "label": "Froslass + Kingambit + Rillaboom",
+   "rule": {
+    "all": [
+     "Froslass",
+     "Kingambit",
+     "Rillaboom"
+    ],
+    "none": []
+   },
+   "share": 3.21,
+   "sides": 289,
+   "pairs_cover": 0.436
+  },
+  {
+   "model": "Tailwind: Glimmora + Rillaboom + Volcarona (no Basculegion)",
+   "key": "tailwind-glimmora-rillaboom-volcarona-no-basculegion",
+   "tab": "tw",
+   "label": "Glimmora + Rillaboom + Volcarona (no Basculegion)",
+   "rule": {
+    "all": [
+     "Glimmora",
+     "Rillaboom",
+     "Volcarona"
+    ],
+    "none": [
+     "Basculegion"
+    ]
+   },
+   "share": 0.8,
+   "sides": 72,
+   "pairs_cover": 0.278
+  },
+  {
+   "model": "Indeedee TR: Armarouge + Indeedee-F",
+   "key": "indeedee-tr-armarouge-indeedee-f",
+   "tab": "indeedee",
+   "label": "Armarouge + Indeedee-F",
+   "rule": {
+    "all": [
+     "Armarouge",
+     "Indeedee-F"
+    ],
+    "none": []
+   },
+   "share": 3.15,
+   "sides": 283,
+   "pairs_cover": 0.431
+  },
+  {
+   "model": "Sun: Charizard + Whimsicott",
+   "key": "sun-charizard-whimsicott",
+   "tab": "sun",
+   "label": "Charizard + Whimsicott",
+   "rule": {
+    "all": [
+     "Charizard",
+     "Whimsicott"
+    ],
+    "none": []
+   },
+   "share": 1.29,
+   "sides": 116,
+   "pairs_cover": 0.328
+  },
+  {
+   "model": "Balance: Dragonite + Floette + Incineroar",
+   "key": "balance-dragonite-floette-incineroar",
+   "tab": "balance",
+   "label": "Dragonite + Floette + Incineroar",
+   "rule": {
+    "all": [
+     "Dragonite",
+     "Floette",
+     "Incineroar"
+    ],
+    "none": []
+   },
+   "share": 1.61,
+   "sides": 145,
+   "pairs_cover": 0.628
+  },
+  {
+   "model": "Indeedee TR: Metagross + Milotic + Sneasler",
+   "key": "indeedee-tr-metagross-milotic-sneasler",
+   "tab": "indeedee",
+   "label": "Metagross + Milotic + Sneasler",
+   "rule": {
+    "all": [
+     "Metagross",
+     "Milotic",
+     "Sneasler"
+    ],
+    "none": []
+   },
+   "share": 0.46,
+   "sides": 41,
+   "pairs_cover": 0.171
+  },
+  {
+   "model": "Indeedee TR: Camerupt + Farigiraf",
+   "key": "indeedee-tr-camerupt-farigiraf",
+   "tab": "indeedee",
+   "label": "Camerupt + Farigiraf",
+   "rule": {
+    "all": [
+     "Camerupt",
+     "Farigiraf"
+    ],
+    "none": []
+   },
+   "share": 1.42,
+   "sides": 128,
+   "pairs_cover": 0.641
+  },
+  {
+   "model": "Sand: Excadrill + Tyranitar",
+   "key": "sand-excadrill-tyranitar",
+   "tab": "sand",
+   "label": "Excadrill + Tyranitar",
+   "rule": {
+    "all": [
+     "Excadrill",
+     "Tyranitar"
+    ],
+    "none": []
+   },
+   "share": 2.12,
+   "sides": 191,
+   "pairs_cover": 0.393
+  },
+  {
+   "model": "Perish: Gengar + Kommo-o + Rillaboom",
+   "key": "perish-gengar-kommo-o-rillaboom",
+   "tab": "perish",
+   "label": "Gengar + Kommo-o + Rillaboom",
+   "rule": {
+    "all": [
+     "Gengar",
+     "Kommo-o",
+     "Rillaboom"
+    ],
+    "none": []
+   },
+   "share": 1.25,
+   "sides": 112,
+   "pairs_cover": 0.661
+  },
+  {
+   "model": "Indeedee TR: Basculegion + Whimsicott",
+   "key": "indeedee-tr-basculegion-whimsicott",
+   "tab": "indeedee",
+   "label": "Basculegion + Whimsicott",
+   "rule": {
+    "all": [
+     "Basculegion",
+     "Whimsicott"
+    ],
+    "none": []
+   },
+   "share": 1.02,
+   "sides": 92,
+   "pairs_cover": 0.326
+  },
+  {
+   "model": "Other Tailwind",
+   "key": "other-tailwind",
+   "tab": "tw",
+   "label": "anything else",
+   "rule": null,
+   "share": 8.22,
+   "sides": 739,
+   "pairs_cover": 0.256
+  },
+  {
+   "model": "Other Sun",
+   "key": "other-sun",
+   "tab": "sun",
+   "label": "anything else",
+   "rule": null,
+   "share": 6.56,
+   "sides": 590,
+   "pairs_cover": 0.158
+  },
+  {
+   "model": "Other Indeedee TR",
+   "key": "other-indeedee-tr",
+   "tab": "indeedee",
+   "label": "anything else",
+   "rule": null,
+   "share": 2.88,
+   "sides": 259,
+   "pairs_cover": 0.154
+  },
+  {
+   "model": "Other Rain",
+   "key": "other-rain",
+   "tab": "rain",
+   "label": "anything else",
+   "rule": null,
+   "share": 4.97,
+   "sides": 447,
+   "pairs_cover": 0.492
+  },
+  {
+   "model": "Other Balance",
+   "key": "other-balance",
+   "tab": "balance",
+   "label": "anything else",
+   "rule": null,
+   "share": 10.03,
+   "sides": 902,
+   "pairs_cover": 0.214
+  },
+  {
+   "model": "Other Snow",
+   "key": "other-snow",
+   "tab": "snow",
+   "label": "anything else",
+   "rule": null,
+   "share": 3.75,
+   "sides": 337,
+   "pairs_cover": 0.181
+  },
+  {
+   "model": "Other Trick Room",
+   "key": "other-trick-room",
+   "tab": "tr",
+   "label": "anything else",
+   "rule": null,
+   "share": 3.6,
+   "sides": 324,
+   "pairs_cover": 0.164
+  },
+  {
+   "model": "Other Perish",
+   "key": "other-perish",
+   "tab": "perish",
+   "label": "anything else",
+   "rule": null,
+   "share": 2.18,
+   "sides": 196,
+   "pairs_cover": 0.301
+  }
+ ],
+ "tabs": [
+  {
+   "key": "tw",
+   "tab": "Tailwind",
+   "cards": [
+    "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)",
+    "Tailwind: Glimmora + Rillaboom + Volcarona (no Basculegion)",
+    "Other Tailwind"
+   ]
+  },
+  {
+   "key": "indeedee",
+   "tab": "Indeedee TR",
+   "cards": [
+    "Indeedee TR: Armarouge + Indeedee-F",
+    "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)",
+    "Indeedee TR: Camerupt + Farigiraf",
+    "Indeedee TR: Basculegion + Whimsicott",
+    "Indeedee TR: Metagross + Milotic + Sneasler",
+    "Other Indeedee TR"
+   ]
+  },
+  {
+   "key": "sun",
+   "tab": "Sun",
+   "cards": [
+    "Sun: Farigiraf + Garchomp + Incineroar + Sylveon",
+    "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)",
+    "Sun: Charizard + Whimsicott",
+    "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler",
+    "Other Sun"
+   ]
+  },
+  {
+   "key": "rain",
+   "tab": "Rain",
+   "cards": [
+    "Rain: Archaludon + Pelipper (no Grimmsnarl)",
+    "Other Rain"
+   ]
+  },
+  {
+   "key": "balance",
+   "tab": "Balance",
+   "cards": [
+    "Balance: Gholdengo + Incineroar + Raichu + Rillaboom",
+    "Balance: Dragonite + Floette + Incineroar",
+    "Other Balance"
+   ]
+  },
+  {
+   "key": "sand",
+   "tab": "Sand",
+   "cards": [
+    "Sand: Excadrill + Salamence + Sneasler + Tyranitar",
+    "Sand: Excadrill + Tyranitar",
+    "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)"
+   ]
+  },
+  {
+   "key": "snow",
+   "tab": "Snow",
+   "cards": [
+    "Snow: Froslass + Kingambit + Rillaboom",
+    "Other Snow"
+   ]
+  },
+  {
+   "key": "tr",
+   "tab": "Trick Room",
+   "cards": [
+    "Trick Room: Delphox + Incineroar + Sinistcha (no Floette)",
+    "Trick Room: Delphox + Floette + Incineroar + Sinistcha",
+    "Other Trick Room"
+   ]
+  },
+  {
+   "key": "rainsun",
+   "tab": "Rain + Sun",
+   "cards": [
+    "Rain + Sun: Archaludon + Grimmsnarl + Pelipper",
+    "Rain + Sun: Archaludon + Golisopod + Politoed"
+   ]
+  },
+  {
+   "key": "perish",
+   "tab": "Perish",
+   "cards": [
+    "Perish: Archaludon + Politoed (no Golisopod)",
+    "Perish: Gengar + Kommo-o + Rillaboom",
+    "Other Perish"
+   ]
+  }
+ ],
+ "guide_rules": [
+  {
+   "label": "Gholdengo + Incineroar + Raichu + Rillaboom",
+   "tab": "balance",
+   "card": "Balance: Gholdengo + Incineroar + Raichu + Rillaboom",
+   "all": [
+    "Gholdengo",
+    "Incineroar",
+    "Raichu",
+    "Rillaboom"
+   ],
+   "none": []
+  },
+  {
+   "label": "Gholdengo + Raichu + Rillaboom (no Incineroar)",
+   "tab": "tw",
+   "card": "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)",
+   "all": [
+    "Gholdengo",
+    "Raichu",
+    "Rillaboom"
+   ],
+   "none": [
+    "Incineroar"
+   ]
+  },
+  {
+   "label": "Archaludon + Grimmsnarl + Pelipper",
+   "tab": "rainsun",
+   "card": "Rain + Sun: Archaludon + Grimmsnarl + Pelipper",
+   "all": [
+    "Archaludon",
+    "Grimmsnarl",
+    "Pelipper"
+   ],
+   "none": []
+  },
+  {
+   "label": "Archaludon + Pelipper (no Grimmsnarl)",
+   "tab": "rain",
+   "card": "Rain: Archaludon + Pelipper (no Grimmsnarl)",
+   "all": [
+    "Archaludon",
+    "Pelipper"
+   ],
+   "none": [
+    "Grimmsnarl"
+   ]
+  },
+  {
+   "label": "Gardevoir + Indeedee-F + Kingambit + Sneasler",
+   "tab": "sun",
+   "card": "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler",
+   "all": [
+    "Gardevoir",
+    "Indeedee-F",
+    "Kingambit",
+    "Sneasler"
+   ],
+   "none": []
+  },
+  {
+   "label": "Gardevoir + Indeedee-F + Sneasler (no Kingambit)",
+   "tab": "indeedee",
+   "card": "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)",
+   "all": [
+    "Gardevoir",
+    "Indeedee-F",
+    "Sneasler"
+   ],
+   "none": [
+    "Kingambit"
+   ]
+  },
+  {
+   "label": "Farigiraf + Garchomp + Incineroar + Sylveon",
+   "tab": "sun",
+   "card": "Sun: Farigiraf + Garchomp + Incineroar + Sylveon",
+   "all": [
+    "Farigiraf",
+    "Garchomp",
+    "Incineroar",
+    "Sylveon"
+   ],
+   "none": []
+  },
+  {
+   "label": "Farigiraf + Garchomp + Sylveon (no Incineroar)",
+   "tab": "sun",
+   "card": "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)",
+   "all": [
+    "Farigiraf",
+    "Garchomp",
+    "Sylveon"
+   ],
+   "none": [
+    "Incineroar"
+   ]
+  },
+  {
+   "label": "Excadrill + Salamence + Sneasler + Tyranitar",
+   "tab": "sand",
+   "card": "Sand: Excadrill + Salamence + Sneasler + Tyranitar",
+   "all": [
+    "Excadrill",
+    "Salamence",
+    "Sneasler",
+    "Tyranitar"
+   ],
+   "none": []
+  },
+  {
+   "label": "Excadrill + Salamence + Tyranitar (no Sneasler)",
+   "tab": "sand",
+   "card": "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)",
+   "all": [
+    "Excadrill",
+    "Salamence",
+    "Tyranitar"
+   ],
+   "none": [
+    "Sneasler"
+   ]
+  },
+  {
+   "label": "Delphox + Floette + Incineroar + Sinistcha",
+   "tab": "tr",
+   "card": "Trick Room: Delphox + Floette + Incineroar + Sinistcha",
+   "all": [
+    "Delphox",
+    "Floette",
+    "Incineroar",
+    "Sinistcha"
+   ],
+   "none": []
+  },
+  {
+   "label": "Delphox + Incineroar + Sinistcha (no Floette)",
+   "tab": "tr",
+   "card": "Trick Room: Delphox + Incineroar + Sinistcha (no Floette)",
+   "all": [
+    "Delphox",
+    "Incineroar",
+    "Sinistcha"
+   ],
+   "none": [
+    "Floette"
+   ]
+  },
+  {
+   "label": "Archaludon + Golisopod + Politoed",
+   "tab": "rainsun",
+   "card": "Rain + Sun: Archaludon + Golisopod + Politoed",
+   "all": [
+    "Archaludon",
+    "Golisopod",
+    "Politoed"
+   ],
+   "none": []
+  },
+  {
+   "label": "Archaludon + Politoed (no Golisopod)",
+   "tab": "perish",
+   "card": "Perish: Archaludon + Politoed (no Golisopod)",
+   "all": [
+    "Archaludon",
+    "Politoed"
+   ],
+   "none": [
+    "Golisopod"
+   ]
+  },
+  {
+   "label": "Froslass + Kingambit + Rillaboom",
+   "tab": "snow",
+   "card": "Snow: Froslass + Kingambit + Rillaboom",
+   "all": [
+    "Froslass",
+    "Kingambit",
+    "Rillaboom"
+   ],
+   "none": []
+  },
+  {
+   "label": "Basculegion + Glimmora + Rillaboom + Volcarona",
+   "tab": "snow",
+   "card": "Other Snow",
+   "all": [
+    "Basculegion",
+    "Glimmora",
+    "Rillaboom",
+    "Volcarona"
+   ],
+   "none": []
+  },
+  {
+   "label": "Glimmora + Rillaboom + Volcarona (no Basculegion)",
+   "tab": "tw",
+   "card": "Tailwind: Glimmora + Rillaboom + Volcarona (no Basculegion)",
+   "all": [
+    "Glimmora",
+    "Rillaboom",
+    "Volcarona"
+   ],
+   "none": [
+    "Basculegion"
+   ]
+  },
+  {
+   "label": "Armarouge + Indeedee-F",
+   "tab": "indeedee",
+   "card": "Indeedee TR: Armarouge + Indeedee-F",
+   "all": [
+    "Armarouge",
+    "Indeedee-F"
+   ],
+   "none": []
+  },
+  {
+   "label": "Charizard + Whimsicott",
+   "tab": "sun",
+   "card": "Sun: Charizard + Whimsicott",
+   "all": [
+    "Charizard",
+    "Whimsicott"
+   ],
+   "none": []
+  },
+  {
+   "label": "Dragonite + Floette + Incineroar",
+   "tab": "balance",
+   "card": "Balance: Dragonite + Floette + Incineroar",
+   "all": [
+    "Dragonite",
+    "Floette",
+    "Incineroar"
+   ],
+   "none": []
+  },
+  {
+   "label": "Metagross + Milotic + Sneasler",
+   "tab": "indeedee",
+   "card": "Indeedee TR: Metagross + Milotic + Sneasler",
+   "all": [
+    "Metagross",
+    "Milotic",
+    "Sneasler"
+   ],
+   "none": []
+  },
+  {
+   "label": "Camerupt + Farigiraf",
+   "tab": "indeedee",
+   "card": "Indeedee TR: Camerupt + Farigiraf",
+   "all": [
+    "Camerupt",
+    "Farigiraf"
+   ],
+   "none": []
+  },
+  {
+   "label": "Excadrill + Tyranitar",
+   "tab": "sand",
+   "card": "Sand: Excadrill + Tyranitar",
+   "all": [
+    "Excadrill",
+    "Tyranitar"
+   ],
+   "none": []
+  },
+  {
+   "label": "Gengar + Kommo-o + Rillaboom",
+   "tab": "perish",
+   "card": "Perish: Gengar + Kommo-o + Rillaboom",
+   "all": [
+    "Gengar",
+    "Kommo-o",
+    "Rillaboom"
+   ],
+   "none": []
+  },
+  {
+   "label": "Basculegion + Whimsicott",
+   "tab": "indeedee",
+   "card": "Indeedee TR: Basculegion + Whimsicott",
+   "all": [
+    "Basculegion",
+    "Whimsicott"
+   ],
+   "none": []
+  }
+ ],
+ "guide_fallback": [
+  [
+   "Gengar",
+   "perish"
+  ],
+  [
+   "Charizard + Pelipper or Politoed",
+   "rainsun"
+  ],
+  [
+   "Charizard or Torkoal",
+   "sun"
+  ],
+  [
+   "Pelipper or Politoed",
+   "rain"
+  ],
+  [
+   "Tyranitar",
+   "sand"
+  ],
+  [
+   "Froslass, Alolan Ninetales or Vanilluxe",
+   "snow"
+  ],
+  [
+   "Indeedee",
+   "indeedee"
+  ],
+  [
+   "Farigiraf or Sinistcha",
+   "tr"
+  ],
+  [
+   "Salamence, Whimsicott, Talonflame or Staraptor",
+   "tw"
+  ],
+  [
+   "none of these",
+   "balance"
+  ]
+ ]
+}

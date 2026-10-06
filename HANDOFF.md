@@ -555,6 +555,15 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     (about 5x the one-turn cost). Built to test the Eval bar's broadcast finding (players Protect and switch more than the planner's
     mix: regional attack 49% played vs 59% planned, Protect 13% vs 8%, switch 17% vs 13%; the same on 560 Showdown games) against a
     one-turn-horizon explanation; the test run (all 19 regional games, 629 positions; 662 Showdown positions at both horizons) is
-    scored by the Eval bar's `study.py`. `EVAL_MATRIX=1|full`: the payoff matrix on each output line (rows / cols / labels / final mixes /
+    scored by the Eval bar's `study.py`. **Result (1:00 am):** the two-turn horizon raises the planner's Protect share toward the
+    players' (regional per action: planned 8.6% -> 11.0% vs 13.2% played; Showdown 8.6% -> 11.3% vs 12.7%), about half the gap, and
+    switching slightly (13.5% flat regional; 14.1% -> 15.3% vs 12.6% Showdown, now overshooting); the Protects players did play cost
+    less under it (regret median 1.5 -> 0.8 points). It does not raise top-pick agreement (45% -> 42% regional, 47% -> 45% Showdown) or
+    lower regret. The planner's mixes came out flatter and its log score on players' choices better (regional -1.89 -> -1.73, Showdown
+    -2.05 -> -1.97), but a rerun of 200 Showdown positions with 4 luck samples instead of 2 kept the shares (Protect 11.8% either way)
+    while most of the log-score gain went away (per slot: h1 -2.356, 2 samples -2.308, 4 samples -2.348), so the flattening was
+    mostly sampling noise. Conclusion: a longer horizon explains part of the Protect gap, not the sharper-than-expert mixes; what is
+    left points at what the planner knows that players do not (exact sets and spreads: hedging under uncertainty means more Protect
+    and switching and flatter mixes) rather than at depth. Not used for play; the one-turn solve stays the default. `EVAL_MATRIX=1|full`: the payoff matrix on each output line (rows / cols / labels / final mixes /
     one-turn values and seed counts per cell, two-turn values under EVAL_HORIZON=2) for reading departures from the equilibrium against
     the opponent's actual move; "1" raises the rows and columns holding a slot's actual or most-weighted option to full seeds first.

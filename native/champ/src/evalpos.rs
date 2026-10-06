@@ -18,6 +18,13 @@
 //!   champ evalpos <engine_data.json> <positions.jsonl> <out.jsonl> [threads=1]
 //! env: EG_VALUE (and RACE / CALC_DATA, TRSYM, GRID_DIR as for battles), EVAL_SEEDS, EVAL_TOP (joint actions listed, default 8),
 //!      EVAL_ADAPT=1 (staged seeds: see eval_one; adds stages, sims, cells_full to the output), EVAL_STAGES, EVAL_MARGINS
+//!      EVAL_HORIZON=2 (two-turn values for the options in contention: see eval_one; adds horizon, cells_h2, sims_h2), EVAL_H2_SEEDS,
+//!      EVAL_H2_MARGIN, EVAL_H2_HITS
+//!      EVAL_MATRIX=1 | full: adds "matrix" to each line: rows / cols (both sides' joint actions as [slot 0 c, slot 1 c]), rl / cl (their
+//!      labels), x / y (the final mixes), v1 (rows x cols one-turn values, side 0's win chance, at each cell's precision) with n1 (seeds per
+//!      cell), and under EVAL_HORIZON=2 v2 / n2 (two-turn values where computed, else null / 0). With "1", the rows and columns holding a
+//!      slot's actual or most-weighted option are first raised to EVAL_SEEDS seeds and the turn solved again (so x, y and the report agree
+//!      with the matrix); with "full", every cell is.
 use crate::battle::*;
 use crate::plan::*;
 use crate::prng::{Mode, Prng};
@@ -30,8 +37,23 @@ use std::io::Write;
 fn env_usize(name: &str, default: usize) -> usize { std::env::var(name).ok().and_then(|x| x.parse().ok()).unwrap_or(default) }
 
 struct Cells<'a> { b: &'a Battle, cfg: &'a Cfg, msw: &'a [[PChoice; 2]], tsw: &'a [[PChoice; 2]], cs: Vec<[u16; 4]>, base: usize,
-                   acc: HashMap<(usize, usize), (f64, usize)>, sims: usize, uns: Vec<String> }
+                   acc: HashMap<(usize, usize), (f64, usize)>, sims: usize, uns: Vec<String>,
+                   /// EVAL_HORIZON=2: two-turn values (the next turn solved as a small matrix game after this one) and their seeds; a cell
+                   /// that has one is read from here by get()
+                   cs2: Vec<[u16; 4]>, acc2: HashMap<(usize, usize), (f64, usize)>, sims2: usize }
 impl<'a> Cells<'a> {
+    /// side 0's value after the turn (i, j) and one more turn (battle4::next_value: both sides' reduced options, one seed), averaged over n seeds
+    fn ensure2(&mut self, i: usize, j: usize, n: usize) -> f64 {
+        let (mut s, mut c) = self.acc2.get(&(i, j)).copied().unwrap_or((0.0, 0));
+        if c >= n { return s / c as f64; }
+        while c < n {
+            let mut x = self.b.clone(); x.prng = Prng::gen5(self.cs[c]); x.run_turn([self.msw[i], self.tsw[j]]); resolve_switches(&mut x, self.cfg, None);
+            s += crate::battle4::next_value(&x, self.cfg, self.cs2[c], 0);
+            for u in &x.unsupported { if !self.uns.contains(u) { self.uns.push(u.clone()); } }
+            c += 1; self.sims2 += 1;
+        }
+        self.acc2.insert((i, j), (s, c)); s / c as f64
+    }
     /// side 0's value after the turn (i, j), averaged over at least n seeds (always the first seeds of the list, so more seeds only add)
     fn ensure(&mut self, i: usize, j: usize, n: usize) -> f64 {
         let (mut s, mut c) = self.acc.get(&(i, j)).copied().unwrap_or((0.0, 0));
@@ -44,8 +66,11 @@ impl<'a> Cells<'a> {
         }
         self.acc.insert((i, j), (s, c)); s / c as f64
     }
-    /// the cell at its current precision (at least the base number of seeds)
-    fn get(&mut self, i: usize, j: usize) -> f64 { let n = self.base; self.ensure(i, j, n) }
+    /// the cell at its current precision (at least the base number of seeds); its two-turn value once that has been computed
+    fn get(&mut self, i: usize, j: usize) -> f64 {
+        if let Some(&(s, c)) = self.acc2.get(&(i, j)) { if c > 0 { return s / c as f64; } }
+        let n = self.base; self.ensure(i, j, n)
+    }
 }
 fn choice_json(b: &Battle, s: u8, c: &PChoice) -> Value {
     match c { PChoice::Move(k, t, mega) => json!([k, t, mega]), PChoice::Switch(p) => json!(["switch", b.mon_at_position(s, *p).map(|m| m.1)]), PChoice::Pass => Value::Null }
@@ -117,7 +142,8 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
     let mut stages: Vec<usize> = if adapt { list("EVAL_STAGES").map(|v| v.iter().map(|x| *x as usize).collect()).unwrap_or(vec![2, 8, nseeds]) } else { vec![nseeds] };
     stages.retain(|n| *n >= 1 && *n <= nseeds); stages.sort(); stages.dedup(); if stages.last() != Some(&nseeds) { stages.push(nseeds); }
     let margins: Vec<f64> = list("EVAL_MARGINS").unwrap_or(vec![0.15, 0.06]);
-    let mut cells = Cells { b: &b, cfg, msw: &msw, tsw: &tsw, cs, base: stages[0], acc: HashMap::new(), sims: 0, uns: vec![] };
+    let cs2: Vec<[u16; 4]> = (0..nseeds).map(|k| seed4(key ^ ((k as u64) << 52) ^ (0xD3u64 << 44))).collect();
+    let mut cells = Cells { b: &b, cfg, msw: &msw, tsw: &tsw, cs, base: stages[0], acc: HashMap::new(), sims: 0, uns: vec![], cs2, acc2: HashMap::new(), sims2: 0 };
     // one solve at the cells' current precision: each side's own matrix (all its options against the other side staying in, as
     // battle4.rs), the anticipation pass, then every option's value against the other side's mix (its support above 0.01%)
     let solve = |cells: &mut Cells| -> (Vec<f64>, Vec<f64>, Vec<f64>, Vec<f64>) {
@@ -165,6 +191,50 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
             (x, y, rv, cv) = solve(&mut cells);
         }
     }
+    // EVAL_HORIZON=2: a two-turn horizon for the options that matter. Every option in contention by the one-turn solve (in a side's mix,
+    // within EVAL_H2_MARGIN (default 0.15) of that side's best, or actually played) gets its cells against the other side's contenders
+    // valued after one more turn (battle4::next_value: each side's Protect and strongest hits, no switches, one seed per sample;
+    // EVAL_H2_SEEDS samples, default 2), the turn is solved again, and the contention set is widened to what the new solve brings in
+    // (up to 3 rounds). Cells outside the set keep their one-turn values. Tests whether the one-turn horizon is what makes the planner
+    // Protect and switch less than players do.
+    let h2 = env_usize("EVAL_HORIZON", 1) >= 2;
+    if h2 {
+        let n2 = env_usize("EVAL_H2_SEEDS", 2).clamp(1, nseeds);
+        let margin = std::env::var("EVAL_H2_MARGIN").ok().and_then(|x| x.parse().ok()).unwrap_or(0.15);
+        for _ in 0..3 {
+            let best_r = rv.iter().cloned().fold(f64::MIN, f64::max); let best_c = cv.iter().cloned().fold(f64::MAX, f64::min);
+            let mut rows: Vec<usize> = (0..msw.len()).filter(|&i| x[i] > 1e-3 || rv[i] >= best_r - margin).collect();
+            let mut cols: Vec<usize> = (0..tsw.len()).filter(|&j| y[j] > 1e-3 || cv[j] <= best_c + margin).collect();
+            if let Some(a) = act_i { if !rows.contains(&a) { rows.push(a); } }
+            if let Some(a) = act_j { if !cols.contains(&a) { cols.push(a); } }
+            let before = cells.sims2;
+            for &i in &rows { for &j in &cols { cells.ensure2(i, j, n2); } }
+            if cells.sims2 == before { break; }
+            (x, y, rv, cv) = solve(&mut cells);
+        }
+    }
+    // EVAL_MATRIX: the payoff matrix for reading departures from the equilibrium (what a play earns against the opponent's actual move)
+    let matrix_mode = std::env::var("EVAL_MATRIX").ok().filter(|m| !m.is_empty() && m != "0");
+    if let Some(mode) = &matrix_mode {
+        let (rows, cols): (Vec<usize>, Vec<usize>) = if mode == "full" { ((0..msw.len()).collect(), (0..tsw.len()).collect()) } else {
+            // rows / cols holding a living slot's actual choice or its most-weighted option
+            let pick = |s: u8, opts: &[[PChoice; 2]], w: &[f64], actual: &Value| -> Vec<usize> {
+                let mut keep: Vec<usize> = vec![];
+                for i in 0..2 {
+                    let alive = b.sides[s as usize].active[i].map(|p| !b.p((s, p)).fainted).unwrap_or(false); if !alive { continue; }
+                    let mut agg: Vec<(PChoice, f64)> = vec![];
+                    for k in 0..opts.len() { if let Some(e) = agg.iter_mut().find(|e| e.0 == opts[k][i]) { e.1 += w[k]; } else { agg.push((opts[k][i], w[k])); } }
+                    let mut want: Vec<PChoice> = vec![];
+                    if let Some(t) = agg.iter().max_by(|a, c| a.1.partial_cmp(&c.1).unwrap()) { want.push(t.0); }
+                    if let Some(a) = parse_actual(&b, s, &actual[i]) { want.push(a); }
+                    for k in 0..opts.len() { if want.iter().any(|c| same(&opts[k][i], c)) && !keep.contains(&k) { keep.push(k); } }
+                }
+                keep };
+            (pick(0, &msw, &x, &sp["actual"]), pick(1, &tsw, &y, &sp["their_actual"])) };
+        for &i in &rows { for j in 0..tsw.len() { cells.ensure(i, j, nseeds); } }
+        for &j in &cols { for i in 0..msw.len() { cells.ensure(i, j, nseeds); } }
+        (x, y, rv, cv) = solve(&mut cells);
+    }
     let xsup: Vec<usize> = (0..msw.len()).filter(|i| x[*i] > 1e-4).collect(); let xtot: f64 = xsup.iter().map(|&i| x[i]).sum();
     let v = xsup.iter().map(|&i| x[i] * rv[i]).sum::<f64>() / xtot;
     let own1: Vec<f64> = cv.iter().map(|z| 1.0 - z).collect();
@@ -173,6 +243,23 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
     let mut out = json!({"value": v, "static": stat, "feats": f, "seeds": nseeds, "options": [msw.len(), tsw.len()], "cells": cells.acc.len(),
            "ms": t0.elapsed().as_millis() as u64, "unsupported": cells.uns, "sides": [s0, s1]});
     if adapt { let o = out.as_object_mut().unwrap(); o.insert("stages".into(), json!(stages)); o.insert("sims".into(), json!(cells.sims)); o.insert("cells_full".into(), json!(full)); }
+    if h2 { let o = out.as_object_mut().unwrap(); o.insert("horizon".into(), json!(2)); o.insert("cells_h2".into(), json!(cells.acc2.len())); o.insert("sims_h2".into(), json!(cells.sims2)); }
+    if matrix_mode.is_some() {
+        let jc = |s: u8, c: &[PChoice; 2]| json!([choice_json(&b, s, &c[0]), choice_json(&b, s, &c[1])]);
+        let cell1 = |i: usize, j: usize| cells.acc.get(&(i, j)).copied().map(|(sum, c)| (if c > 0 { json!(sum / c as f64) } else { Value::Null }, c)).unwrap_or((Value::Null, 0));
+        let v1: Vec<Vec<Value>> = (0..msw.len()).map(|i| (0..tsw.len()).map(|j| cell1(i, j).0).collect()).collect();
+        let n1: Vec<Vec<usize>> = (0..msw.len()).map(|i| (0..tsw.len()).map(|j| cell1(i, j).1).collect()).collect();
+        let mut m = json!({"rows": msw.iter().map(|c| jc(0, c)).collect::<Vec<Value>>(), "rl": msw.iter().map(|c| label(&b, 0, c)).collect::<Vec<String>>(),
+                           "cols": tsw.iter().map(|c| jc(1, c)).collect::<Vec<Value>>(), "cl": tsw.iter().map(|c| label(&b, 1, c)).collect::<Vec<String>>(),
+                           "x": x, "y": y, "v1": v1, "n1": n1});
+        if h2 {
+            let cell2 = |i: usize, j: usize| cells.acc2.get(&(i, j)).copied().map(|(sum, c)| (if c > 0 { json!(sum / c as f64) } else { Value::Null }, c)).unwrap_or((Value::Null, 0));
+            let v2: Vec<Vec<Value>> = (0..msw.len()).map(|i| (0..tsw.len()).map(|j| cell2(i, j).0).collect()).collect();
+            let n2: Vec<Vec<usize>> = (0..msw.len()).map(|i| (0..tsw.len()).map(|j| cell2(i, j).1).collect()).collect();
+            let o = m.as_object_mut().unwrap(); o.insert("v2".into(), json!(v2)); o.insert("n2".into(), json!(n2));
+        }
+        out.as_object_mut().unwrap().insert("matrix".into(), m);
+    }
     out
 }
 

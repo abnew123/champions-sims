@@ -547,3 +547,14 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     data files; 120 battles under the full setup identical to v15 with v16 and with v17 + full data (v15 331 s, v16 166 s, v17 127 s on
     three threads; the two earlier 120-battle comparisons in the v16 note had passed only the first flag through a zsh variable, so they
     compared reduced-planner games; the single-thread 20-battle checks and this rerun used the full flags). Speed equal to v16.
+  - **champ-battle-v18 = v17 + two evalpos modes, battles unchanged** (2026-10-06, 12:50 am; 20 check battles identical to v16).
+    `EVAL_HORIZON=2`: after the one-turn staged solve, every option in contention (in a side's mix, within `EVAL_H2_MARGIN` 0.06 of
+    its best, or actually played) gets its cells against the other side's contenders re-valued after one more turn, solved as a small
+    matrix game (`battle4::next_value`: each Pokemon's Protect plus its `EVAL_H2_HITS` 2 strongest hits, no switches, one luck seed per
+    sample, `EVAL_H2_SEEDS` 2 samples), then the turn is solved again, up to 3 rounds; cells outside the set keep one-turn values
+    (about 5x the one-turn cost). Built to test the Eval bar's broadcast finding (players Protect and switch more than the planner's
+    mix: regional attack 49% played vs 59% planned, Protect 13% vs 8%, switch 17% vs 13%; the same on 560 Showdown games) against a
+    one-turn-horizon explanation; the test run (all 19 regional games, 629 positions; 662 Showdown positions at both horizons) is
+    scored by the Eval bar's `study.py`. `EVAL_MATRIX=1|full`: the payoff matrix on each output line (rows / cols / labels / final mixes /
+    one-turn values and seed counts per cell, two-turn values under EVAL_HORIZON=2) for reading departures from the equilibrium against
+    the opponent's actual move; "1" raises the rows and columns holding a slot's actual or most-weighted option to full seeds first.

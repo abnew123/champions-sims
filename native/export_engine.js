@@ -4,6 +4,16 @@
 const {Dex} = require(require('path').resolve('node_modules/pokemon-showdown')); const dex = Dex.mod('champions'); const fs = require('fs');
 const toID = s => (s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
 const base = JSON.parse(fs.readFileSync(process.argv[2]));
+// ALL=1: everything Showdown's data knows instead of the scope file's lists (every real species, move, item and ability; the installed
+// package predates Reg M-C, so its legality tags cannot pick the roster), so a live position can always be built; effects whose code has
+// no Rust port are reported as unsupported by the engine when they fire
+if (process.env.ALL) {
+  const real = x => x.exists && !['CAP', 'Custom'].includes(x.isNonstandard);
+  base.species = Object.fromEntries(dex.species.all().filter(s => real(s) && s.num > 0).map(s => [s.id, 1]));
+  base.moves = Object.fromEntries(dex.moves.all().filter(m => real(m) && m.num > 0).map(m => [m.id, 1]));
+  base.items = Object.fromEntries(dex.items.all().filter(real).map(i => [i.id, 1]));
+  base.abilities = Object.fromEntries(dex.abilities.all().filter(real).map(a => [a.id, 1]));
+}
 const cbs = o => { const r = {};
   // every on<Event> name that has a callback or an Order/Priority/SubOrder (residual handlers can exist with only an order, via getKey "duration")
   // (a numeric onXPriority / onXOrder / onXSubOrder is a sort key for onX; anything else named on* is a callback, e.g. onModifyPriority)

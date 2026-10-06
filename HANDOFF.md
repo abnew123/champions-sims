@@ -534,3 +534,11 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     29.6 s (-54%); the 120-battle set on three threads 145 s -> 59 s (-60%); evalpos -61%. What is left: the remaining event overhead
     (`run_event` bookkeeping, `evn` lookups, the Boosts/Types vectors in `get_stat`/`get_types`) is about a quarter of run time, the
     value function (race, type edge, grid) about a fifth, allocation about 7%.
+  - **champ-battle-v17 = v16 with a 256-bit callback mask, same games** (2026-10-05, 8:20 pm), needed for
+    `native/engine_data_full.json`: everything Showdown's data knows (1,469 species incl. formes, 936 moves, 581 items, 317 abilities,
+    162 callback names; `ALL=1 node ../native/export_engine.js ../native/champions_data.json ../native/engine_data_full.json`), so the
+    Eval bar's live spectator mode can build any position; effects whose code has no Rust port are reported as `unsupported` when they
+    fire, as before. v16 cannot load it (its mask holds 128 names); the spot file works on both. Checked: `champ turn` exact on both
+    data files; 120 battles under the full setup identical to v15 with v16 and with v17 + full data (v15 331 s, v16 166 s, v17 127 s on
+    three threads; the two earlier 120-battle comparisons in the v16 note had passed only the first flag through a zsh variable, so they
+    compared reduced-planner games; the single-thread 20-battle checks and this rerun used the full flags). Speed equal to v16.

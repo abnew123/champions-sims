@@ -85,13 +85,14 @@ def job(team, lead, back, e):
     return dict(mine=mine, theirs=theirs, meta=dict(pool_id=e['id'], pool_side=e['side'], group=e['group'], arch=e['arch'], rating=e['rating']))
 
 def _run(gids, jobs, seed0, threads, label):
-    old = {k: os.environ.get(k) for k in ('TS_ENGINE_DATA', 'SEED_PER_JOB')}
-    os.environ.update(TS_ENGINE_DATA=FULL, SEED_PER_JOB='1')
-    try: return E.run_jobs(gids, jobs, 1, seed0, threads, label)
-    finally:
-        for k, v in old.items():
-            if v is None: os.environ.pop(k, None)
-            else: os.environ[k] = v
+    return E.run_jobs(gids, jobs, 1, seed0, threads, label, extra=dict(TS_ENGINE_DATA=FULL, SEED_PER_JOB='1'))   # per run, not os.environ (threads)
+
+def _wins(r):
+    """(wins, games) of one job's output; unsupported games and games the engine errored on are left out (an error is reported)"""
+    vs = [x['v'] for x in r['rows'] if not x.get('unsupported') and x.get('v') is not None]
+    if any(x.get('v') is None and not x.get('unsupported') for x in r['rows']):
+        print(f"warning: engine error in job {r.get('job')} ({', '.join(str(x.get('error')) for x in r['rows'] if x.get('v') is None)}), game left out", file=sys.stderr, flush=True)
+    return sum(vs), len(vs)
 
 def _result(slots, val, games, extra=None):
     """slots: [(group, entry index)] in job order; val: {slot: (wins, n)} -> evaluate-style result with per-job weights"""
@@ -113,8 +114,7 @@ def search_team(gids, seed0, threads, K=None, sp=1):
             for ei, e in enumerate(ents[k]): jobs.append(job(gids, lead, back, e)); meta.append((k, c, ei))
     rows = _run(gids, jobs, seed0, threads, f'psearch{K}_{E.sim()}')
     val = {}
-    for (k, c, ei), r in zip(meta, rows):
-        vs = [x['v'] for x in r['rows'] if not x.get('unsupported')]; val[(k, c, ei)] = (sum(vs), len(vs))
+    for (k, c, ei), r in zip(meta, rows): val[(k, c, ei)] = _wins(r)
     mean = lambda k, c: (lambda xs: sum(s / n for s, n in xs) / len(xs) if xs else 0.0)([val[(k, c, ei)] for ei in range(len(ents[k])) if val[(k, c, ei)][1]])
     best = {k: max(range(len(R[k])), key=lambda c: mean(k, c)) for k in G_}
     slots = [(k, ei) for k in G_ for ei in range(len(ents[k]))]
@@ -130,8 +130,7 @@ def evaluate_team(gids, brings, seed0, threads):
     h = hashlib.md5(json.dumps({k: (list(v[0]), list(v[1])) for k, v in brings.items()}, sort_keys=True).encode()).hexdigest()[:8]
     rows = _run(gids, jobs, seed0, threads, f'pool_{E.sim()}_{h}_{seed0}')
     val = {}
-    for s, r in zip(slots, rows):
-        vs = [x['v'] for x in r['rows'] if not x.get('unsupported')]; val[s] = (sum(vs), len(vs))
+    for s, r in zip(slots, rows): val[s] = _wins(r)
     return _result(slots, val, sum(n for _, n in val.values()))
 
 def jobs_per_team(phase):

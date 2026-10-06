@@ -135,20 +135,22 @@ def run_team(gids, per_job, seed0, threads, fixed=None, label=''):
                    cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return read(d, out_tag(seed0, per_job))
 
-def run_jobs(gids, jobs, per_job, seed0, threads, label):
-    """battles for an explicit job list (archetype mode: {arch, k, lead, back} with my species names) -> list of per-job rows"""
+def run_jobs(gids, jobs, per_job, seed0, threads, label, extra=None):
+    """battles for an explicit job list (archetype mode: {arch, k, lead, back} with my species names) -> list of per-job rows.
+    extra: environment for this run only (e.g. TS_ENGINE_DATA, SEED_PER_JOB), never written to os.environ: teams run in threads of one
+    process, and a shared os.environ let one team unset another's engine data mid-launch (2026-10-06)"""
     d = os.path.join(HERE, 'runs', f'{label}_{team_key(gids)}'); os.makedirs(d, exist_ok=True)
     team = {G[g]['species']: {k: G[g][k] for k in ('species', 'item', 'ability', 'nature', 'evs', 'moves')} for g in gids}
     json.dump(team, open(os.path.join(d, 'myteam.json'), 'w'), indent=1); json.dump(jobs, open(os.path.join(d, 'jobs.json'), 'w'))
     if MG.merge_gids(os.path.join(d, 'grid'), gids): raise RuntimeError('missing one-on-one cells')
     starts, out = os.path.join(d, f'starts_{seed0}_{per_job}.jsonl'), os.path.join(d, f'out_{out_tag(seed0, per_job)}')
-    env = dict(os.environ, MYTEAM=os.path.join(d, 'myteam.json'))
+    env = dict(os.environ, MYTEAM=os.path.join(d, 'myteam.json'), **(extra or {}))
     if not os.path.exists(starts):
         subprocess.run([procs.node(), '../native/battle_starts.js', os.path.join(d, 'jobs.json'), starts + '.tmp', str(per_job), str(seed0)],
                        cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL)
         os.replace(starts + '.tmp', starts)
     env.update(sim_env(), GRID_DIR=os.path.join(d, 'grid'))
-    subprocess.run(['nice', '-n', '10', procs.battle(bin_path()), 'battle', os.environ.get('TS_ENGINE_DATA', '../native/engine_data_spot.json'), starts, out, str(threads)],
+    subprocess.run(['nice', '-n', '10', procs.battle(bin_path()), 'battle', env.get('TS_ENGINE_DATA', '../native/engine_data_spot.json'), starts, out, str(threads)],
                    cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return [json.load(open(os.path.join(out, f'{j}.json'))) for j in range(len(jobs))]
 

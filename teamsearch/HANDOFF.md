@@ -362,3 +362,12 @@ Usage:
   - Setup v17g: v16 games with the 256-bit callback mask, needed for engine_data_full.json; v16 panics on it.
   - On the box, `~/run_poolbar.sh` waits for the climb to end, runs it at 90 threads, writes `poolbar_report.txt`; `~/copy_poolbar_report.sh` then copies the report into runs/, so it arrives at `cloud_results/v12/runs/poolbar_report.txt`.
   - The box watchdog was restarted with the renamed-battle pattern.
+- **Climb rerun finished (Oct 6, 2:20 am): 5 rounds; every start is at a local max** (`python3 report.py cloud_results/v12`). Scores are each team's latest confirm win share.
+  - Top: Frankfurt-10-final 70.4 (Basculegion, Delphox*, Garchomp, Incineroar, Kingambit, Raichu*).
+  - Then Frankfurt-04 69.5 (Charizard*, Delphox*, Garchomp, Gholdengo, Incineroar, Kingambit).
+  - Then Baltimore-11 69.3 (no swaps: Aerodactyl*, Charizard*, Farigiraf, Garchomp, Kingambit, Sylveon).
+  - Then Baltimore-12-final 68.2 and Frankfurt-10 67.5 (both Archaludon + the core).
+  - Convergence: 4 starts sit within one species of Charizard-Y + Delphox + Garchomp + Incineroar + Kingambit.
+  - Most added: Scarf Garchomp (always the Adamant Choice Scarf set, Garchomp#1), Kingambit, Mega Charizard Y. Most removed: Sneasler.
+  - trick_room_six 58.3 after Indeedee-F → Gholdengo and Kingambit → M-Froslass; low_variance_six 50.3, no swaps.
+  - `report.py` was fixed on Oct 6 to use the sequential verdicts and the state; earlier printouts showed undecided swaps as moves.

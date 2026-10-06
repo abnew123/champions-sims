@@ -62,6 +62,9 @@ def battle_run(sheet, step, jobs_path, outdir, games, g0, threads, setup, log, o
     Resumes: jobs with a result file are skipped."""
     S = sim_setup(setup); jobs = rj(jobs_path); sd = outdir + '.starts'; os.makedirs(outdir, exist_ok=True)
     stamp(outdir, {'setup': S.get('games', S['name']), 'games': games, 'g0': g0, 'team': team_hash(sheet)})      # 'games': a faster build of the same games
+    for f in glob.glob(os.path.join(outdir, '*.json')):           # a result cut off by a stopped run would count as done: drop it
+        try: json.load(open(f))
+        except Exception: os.remove(f)
     todo = [i for i in (only if only is not None else range(len(jobs))) if not os.path.exists(os.path.join(outdir, f'{i}.json'))]
     per = PER_PROC if platform.system() == 'Linux' else threads
     nproc = max(1, min(threads // per, len(todo))); parts = [todo[c::nproc] for c in range(nproc)]

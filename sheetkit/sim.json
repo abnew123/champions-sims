@@ -1,6 +1,6 @@
 {
  "note": "Named full-battle sim setups. Every sheet thread runs 'current' unless it says otherwise; only the kit maintainer moves 'current', and only when the Battle sim thread says a setup is final. Paths are relative to the repo root. 'env' is passed to the binary as is; EG_VALUE and GRID_DIR are added by the kit (GRID_DIR is the team's own grid). A setup with a 'games' field plays exactly the games of the setup it names; result folders are stamped with that name.",
- "current": "v16-dp2-race-eg9",
+ "current": "v19-dp2-race-eg9-full",
  "setups": {
   "v4-eg5": {
    "binary": "native/champ/bin/champ-battle-v4",
@@ -75,7 +75,24 @@
    "env_paths": [
     "CALC_DATA"
    ],
-   "status": "FINAL (Battle sim, 2026-10-05): the build to use for new runs; plays exactly v13-dp2-race-eg9's games about 2.3x faster than v13 (results may share a folder with v13-v15's). Two-turn Protect check, damage race with Speed ties averaged over both sides, one value file for every team; use the team's own generic grid. Linux source: native/champ/src_battle_v16.tar.gz (cargo build --release). Not comparable with v4-eg5 numbers.",
+   "status": "Same games as v19-dp2-race-eg9-full, but only the spot engine data (no real-team opponents) and slower in big processes. plays exactly v13-dp2-race-eg9's games about 2.3x faster than v13 (results may share a folder with v13-v15's). Two-turn Protect check, damage race with Speed ties averaged over both sides, one value file for every team; use the team's own generic grid. Linux source: native/champ/src_battle_v16.tar.gz (cargo build --release). Not comparable with v4-eg5 numbers.",
+   "games": "v13-dp2-race-eg9"
+  },
+  "v19-dp2-race-eg9-full": {
+   "binary": "native/champ/bin/champ-battle-v19",
+   "value": "pssim/egvalue9.json",
+   "engine_data": "native/engine_data_full.json",
+   "env": {
+    "BATTLE_ANTICIPATE": "1",
+    "DP2": "1",
+    "RACE": "1",
+    "RACE_TIES": "avg",
+    "CALC_DATA": "native/champions_data.json"
+   },
+   "env_paths": [
+    "CALC_DATA"
+   ],
+   "status": "FINAL (Battle sim, 2026-10-06): the build for new runs; plays exactly v13-dp2-race-eg9's games, with the full engine data (every species, move and item Showdown knows, needed for real-team opponents from pssim/opp_pool.py) and without the process-wide lock that slowed big multi-threaded processes. Linux source: native/champ/src_battle_v19.tar.gz.",
    "games": "v13-dp2-race-eg9"
   }
  }

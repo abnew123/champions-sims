@@ -1,0 +1,36 @@
+{
+ "what": "day-1 broadcast turns (most likely position as known at the turn's start), the planner's mixes with its usual spreads (known) vs solved on payoff matrices averaged over 4 draws of the opponent's spreads (uncertain); compared with players' choices by action",
+ "decisions": 444,
+ "turns": 139,
+ "known": {
+  "top_pick": 0.453,
+  "p_played": 0.409,
+  "log_score": -2.091,
+  "top_option_p": 0.715,
+  "protect": 0.087,
+  "switch": 0.146,
+  "attack": 0.572
+ },
+ "uncertain": {
+  "top_pick": 0.437,
+  "p_played": 0.406,
+  "log_score": -2.053,
+  "top_option_p": 0.706,
+  "protect": 0.088,
+  "switch": 0.135,
+  "attack": 0.58
+ },
+ "played": {
+  "protect": 0.133,
+  "switch": 0.146,
+  "attack": 0.511
+ },
+ "paired": {
+  "log_score_change": 0.038,
+  "log_score_se": 0.067,
+  "top_pick_change": -0.016,
+  "top_pick_se": 0.019,
+  "mix_total_variation_mean": 0.212
+ },
+ "conclusion": "not knowing the opponent's spreads moves individual mixes (part of that is sampling noise) but not toward what players do: no Protect shift, no flattening, no better prediction"
+}

@@ -184,6 +184,16 @@ to 11% on these games and on a Showdown subset, so about half the gap is depth; 
 seen with 2 samples was mostly sampling noise (Battle sim's 4-sample check). Battle sim's reading of the rest: the planner knows exact sets
 and spreads that players do not (testable here by evaluating with a few spread/item variants per Pokemon).
 
+## Does spread uncertainty explain the gap? (uncertain.py)
+
+Battle sim's idea: players do not know the opponent's stat points (the sheet shows item, ability, nature, moves), the planner is handed one
+spread. `uncertain.py build / run / report` re-solves every day-1 turn with each player's mix taken from the payoff matrix averaged over 4
+draws of the opponent's spreads (Smogon spreads with the sheet's nature, plus an offensive and a bulky one; same 32 samples per cell as the
+known version; the solve reproduces evalpos's exactly). Result (444 decisions, `results/spread_uncertainty_day1.json`): no change toward
+players. Planned Protect 8.7% -> 8.8% (players 13.3%), top pick 45.3% -> 43.7%, log score -2.091 -> -2.053 (+0.04, SE 0.07), mixes no
+flatter. So what remains after the two-turn horizon is not spread knowledge. Of the 39 costly plays, 13 are switches, 10 Protects and 5
+setup moves: the user's reading (2026-10-06) is that many are the engine undervaluing setup and switches, some real mistakes.
+
 ## Were the costly plays reads? (reads.py)
 
 `reads.py run` evaluates the costly plays' turns with the full payoff matrix (champ-battle-v18, EVAL_MATRIX=full); `reads.py report` scores

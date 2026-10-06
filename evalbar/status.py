@@ -17,18 +17,18 @@ def fmt(sec):
 def cards():
     ps = subprocess.run(['ps', '-axo', 'command'], capture_output=True, text=True).stdout.splitlines()
     out = []
-    for st in sorted(glob.glob(os.path.join(OUT, '*.run.json')), key=os.path.getmtime, reverse=True):
+    for st in sorted(glob.glob(os.path.join(OUT, '**', '*.run.json'), recursive=True), key=os.path.getmtime, reverse=True):
         try: r = json.load(open(st))
         except Exception: continue
         outf = os.path.join(OUT, r['out']); done = lines(outf); tot = r['total']; now = time.time()
-        live = any('evalpos' in l and outf in l for l in ps)
+        live = any(r.get('proc', 'evalpos') in l and (outf in l or os.path.basename(outf) in l) for l in ps)
         if not live and now - os.path.getmtime(st) > 2 * 86400: continue
         last = os.path.getmtime(outf) if os.path.exists(outf) else r['started']
         el = (now if live else last) - r['started']; rate = (done - r['done0']) / el if el > 0 else 0
         frac = min(1.0, done / tot) if tot else 0
         state, label = ('running', 'Running') if live else ('finished', 'Complete') if done >= tot else ('stopped', 'Incomplete')
-        meta = [f'{done:,} of {tot:,} positions ({100 * frac:.0f}%)', f"{r['threads']} thread{'s' if r['threads'] != 1 else ''}, "
-                f"{r['seeds']} luck samples{' (staged)' if r.get('staged') else ''}"]
+        meta = [f"{done:,} of {tot:,} {r.get('unit', 'positions')} ({100 * frac:.0f}%)",
+                f"{r['threads']} thread{'s' if r['threads'] != 1 else ''}" + (f", {r['seeds']} luck samples{' (staged)' if r.get('staged') else ''}" if r.get('seeds') else '')]
         if live:
             meta.append(f"started {ampm(r['started'])}, running {fmt(el)}")
             left = (tot - done) / rate if rate > 0 else None

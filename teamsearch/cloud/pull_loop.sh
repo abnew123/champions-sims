@@ -9,12 +9,13 @@ caffeinate -i -w $$ &
 SSH="ssh -n -i $KEY -o ConnectTimeout=20 -o ServerAliveInterval=30"
 mkdir -p "$DEST"; fails=0; start=$(date +%s)
 while [ $(( $(date +%s) - start )) -lt 36000 ]; do
-  if rsync -az -e "ssh -i $KEY -o ConnectTimeout=20" --exclude 'starts_*.jsonl' --exclude 'grid/' \
+  rsync -az -e "ssh -i $KEY -o ConnectTimeout=20" --exclude 'starts_*.jsonl' --exclude 'grid/' \
        "ubuntu@$HOST:champions-sims/teamsearch/climb_*" "ubuntu@$HOST:champions-sims/teamsearch/round*.log" \
-       "ubuntu@$HOST:champions-sims/teamsearch/runs" "$DEST/" 2>/dev/null; then
+       "ubuntu@$HOST:champions-sims/teamsearch/runs" "$DEST/" 2>/dev/null; rc=$?
+  if [ $rc -eq 0 ] || [ $rc -eq 23 ] || [ $rc -eq 24 ]; then          # 23/24: some files vanished or changed mid-copy (battles finishing): fine
     fails=0; echo "$(date '+%-I:%M %p') pulled: $(tail -1 "$DEST/round.log" 2>/dev/null)" >> "$DEST/pull.log"
   else
-    fails=$((fails + 1)); echo "$(date '+%-I:%M %p') unreachable ($fails)" >> "$DEST/pull.log"
+    fails=$((fails + 1)); echo "$(date '+%-I:%M %p') unreachable ($fails, rsync $rc)" >> "$DEST/pull.log"
     [ $fails -ge 2 ] && { echo "$(date '+%-I:%M %p') instance gone: stopping" >> "$DEST/pull.log"; exit 0; }
   fi
   sleep 900

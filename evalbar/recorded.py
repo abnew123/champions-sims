@@ -253,6 +253,7 @@ def page(evf, posf, cal, accf):
         for g in games: print(f"{mode} {g['id']} ({g['result']}): you " + ' '.join(f"{100 * s['wp']:.0f}" for s in g['steps']))
     print(os.path.relpath(outf, C.REPO))
 if __name__ == '__main__':
+    P.own()
     a = sys.argv[1:]
     if a[0] == 'commonsets': build_common()
     elif a[0] == 'positions':

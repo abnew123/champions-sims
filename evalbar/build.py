@@ -7,7 +7,7 @@ With cal (the weight accuracy.py fits on the engine value's log-odds) the bar it
 the options' values are on the same scale; acc is then accuracy.py's engine results file.
 The page shows no usernames or nicknames (players are Player 1 / Player 2); build fails if one would get through."""
 import os, re, sys, json, math
-import common as C, replay as R
+import common as C, procs as P, replay as R
 RF = C.replay_feats()
 def game_data(rid, log, w):
     g = R.parse(log); rows, winner, _ = RF.game(log)
@@ -58,6 +58,7 @@ def leak_check(text, hidden):
     bad = [h for h in hidden if re.search(r'(?<![a-z0-9])' + re.escape(h.lower()) + r'(?![a-z0-9])', low)]
     if bad: sys.exit(f'refusing to write the page: {len(bad)} username(s) or nickname(s) would appear on it')
 if __name__ == '__main__':
+    P.own()
     w = C.v0_weights()
     if sys.argv[1] == 'pick':
         idx = json.load(open(os.path.join(C.LOGS, 'index.json'))); cands = []

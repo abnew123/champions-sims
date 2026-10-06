@@ -36,6 +36,7 @@ def run(posf, outf, threads=1, seeds=32, staged=1):
     env = dict(os.environ, RACE_TIES='avg', EVAL_SEEDS=str(seeds), **({'EVAL_ADAPT': '1'} if staged else {}), EG_VALUE=os.environ.get('EG_VALUE', 'egvalue9_sym2.json'), RACE='1', TRSYM='1', CALC_DATA='../native/champions_data.json', GRID_DIR=grid)
     subprocess.run([P.exe('champ', os.environ.get('CHAMP_BIN') or BIN), 'evalpos', '../native/' + os.environ.get('CHAMP_DATA', 'engine_data_spot.json'), os.path.abspath(posf), os.path.abspath(outf), str(threads)], cwd=MP, env=env, check=True)
 if __name__ == '__main__':
+    P.own()
     a = sys.argv[1:]
     if a[0] == 'positions':
         views = a[2] if a[2] in ('both', 'p1') else 'p1'; rest = a[3:] if a[2] in ('both', 'p1') else a[2:]

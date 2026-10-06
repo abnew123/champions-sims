@@ -406,12 +406,14 @@ def watch(url, threads=2, port=8768, start=None):
     """a YouTube broadcast in real time (live, or a recording from `start`, e.g. 1:44:09): ffmpeg writes 2 frames a second, Apple
     Vision reads them in small batches, the reader follows"""
     tag = 'live_' + re.sub(r'\W', '', url.split('v=')[-1])[:16]; d = os.path.join(C.HERE, 'out', 'live', tag + '_frames'); os.makedirs(d, exist_ok=True)
-    # the media URL from yt-dlp, opened by ffmpeg with the same request headers (YouTube refuses it otherwise), in real time (-re)
-    info = json.loads(subprocess.run(['yt-dlp', '-j', '--no-warnings', '-f', 'bv*[height<=720][protocol^=http]/bv*[height<=720]/b[height<=720]', url],
-                                     capture_output=True, text=True, check=True).stdout)
-    hdr = ''.join(f'{k}: {v}\r\n' for k, v in (info.get('http_headers') or {}).items())
-    ff = subprocess.Popen(['nice', '-n', '10', 'ffmpeg', '-v', 'error', '-y', '-headers', hdr, '-re'] + (['-ss', start] if start else []) + ['-i', info['url'],
-                           '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', os.path.join(d, 'f_%06d.jpg')])
+    # the media URL from yt-dlp, opened by ffmpeg with the same request headers, in real time (-re). YouTube sometimes refuses a media
+    # URL (403): then fetch a new one and carry on from where the frames got to
+    def open_stream(at):
+        src, hdr, _ = media(url)
+        return subprocess.Popen(['nice', '-n', '10', 'ffmpeg', '-v', 'error', '-y', '-headers', hdr, '-re'] + (['-ss', str(at)] if at else []) + ['-i', src,
+                                 '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', '-start_number', str(int((at - secs(start)) * 2) + 1), os.path.join(d, 'f_%06d.jpg')],
+                                stderr=subprocess.PIPE, text=True)
+    ff = open_stream(secs(start)); retries = 0
     vid = re.search(r'(?:v=|youtu\.be/|/live/)([\w-]{11})', url)
     run = Runner(tag, threads, port, video={'id': vid.group(1), 'start': secs(start), 'live': not start} if vid else None, t0=secs(start)); done = 0
     while True:
@@ -424,7 +426,11 @@ def watch(url, threads=2, port=8768, start=None):
             for row in sorted(map(json.loads, out.splitlines()), key=lambda x: x['file']): run.feed(row['lines'])
             for f in new: os.remove(os.path.join(b, f))
             done = int(new[-1][2:8])
-        elif ff.poll() is not None: print('the stream ended', flush=True); break
+        elif ff.poll() is not None:
+            err = ff.stderr.read()
+            if ('403' in err or 'Forbidden' in err or ff.returncode) and retries < 8:
+                retries += 1; time.sleep(3); ff = open_stream(secs(start) + done / 2); continue
+            print('the stream ended', flush=True); break
         time.sleep(1)
     while True: time.sleep(60)
 def read(ocrf):

@@ -21,7 +21,10 @@ def matrix_jobs(sheet, arch, npairs=6):
     return jobs
 
 def all_matrix_jobs(sheet):
-    opp = opp_model(); return [j for a in ARCHS for j in matrix_jobs(sheet, a, len(opp[a]['pairs']))]
+    """every four against every opposing lead; sheet.json "matrix_fours" ([[lead, back], ...]) keeps only those fours (a cheaper run)"""
+    opp = opp_model(); keep = sheet.cfg.get('matrix_fours')
+    ok = lambda j: keep is None or any(set(j['lead']) == set(l) and set(j['back']) == set(b) for l, b in keep)
+    return [j for a in ARCHS for j in matrix_jobs(sheet, a, len(opp[a]['pairs'])) if ok(j)]
 
 def write_matrix_jobs(sheet):
     jobs = all_matrix_jobs(sheet); wj(jobs, sheet.w('matrix', 'jobs.json'))

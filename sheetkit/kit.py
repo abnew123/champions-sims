@@ -98,7 +98,7 @@ def main():
     ap.add_argument('--write', action='store_true'); ap.add_argument('--force', action='store_true'); ap.add_argument('--compare'); ap.add_argument('--out')
     a = ap.parse_args()
     if a.step == 'init': return init(a.team)
-    sheet = Sheet(a.team); step = (a.step, a.sub)
+    sheet = Sheet(a.team); step = (a.step, a.sub); G = sheet.cfg.get('games', {})      # sheet.json "games": default game counts per step
     import procs; procs.own(sheet)                               # show as <prefix>-py in top
     if a.step == 'status': status(sheet)
     elif a.step == 'smoke': smoke(sheet)
@@ -109,13 +109,13 @@ def main():
     elif a.step == 'speed':
         import speed; speed.build(sheet, a.out, a.force)
     elif step == ('matrix', 'jobs'): P.write_matrix_jobs(sheet)
-    elif step == ('matrix', 'run'): P.run_matrix(sheet, a.games or 16, 600 if a.g0 is None else a.g0, a.threads, a.setup, ints(a.only), a.force)
+    elif step == ('matrix', 'run'): P.run_matrix(sheet, a.games or G.get('matrix', 16), 600 if a.g0 is None else a.g0, a.threads, a.setup, ints(a.only), a.force)
     elif step == ('matrix', 'report'):
         lines = []; P.matrix_report(sheet, out=lambda s: (print(s), lines.append(s)))
         open(sheet.w('matrix', 'report.txt'), 'w').write('\n'.join(lines) + '\n')
     elif step == ('confirm', 'jobs'):
         jobs = P.confirm_jobs(sheet, a.top, only=ints(a.only)); wj(jobs, sheet.w('confirm', 'jobs.json')); print(f"{len(jobs)} jobs -> work/confirm/jobs.json")
-    elif step == ('confirm', 'run'): P.run_confirm(sheet, a.games or 48, 1000 if a.g0 is None else a.g0, a.threads, a.setup, a.force)
+    elif step == ('confirm', 'run'): P.run_confirm(sheet, a.games or G.get('confirm', 48), 1000 if a.g0 is None else a.g0, a.threads, a.setup, a.force)
     elif step == ('confirm', 'decide'):
         lines = []; final = P.decide(sheet, out=lambda s: (print(s), lines.append(s)))
         open(sheet.w('confirm', 'report.txt'), 'w').write('\n'.join(lines) + '\n')
@@ -136,7 +136,7 @@ def main():
         import optimal; lines = []; optimal.report(sheet, out=lambda s: (print(s), lines.append(s)))
         open(sheet.w('optimal', 'report.txt'), 'w').write('\n'.join(lines) + '\n')
     elif step == ('guide', 'run'):
-        import guide; guide.run(sheet, a.games or guide.GAMES, guide.G0 if a.g0 is None else a.g0, a.threads, a.setup, a.force)
+        import guide; guide.run(sheet, a.games or G.get('guide', guide.GAMES), guide.G0 if a.g0 is None else a.g0, a.threads, a.setup, a.force)
     elif step == ('guide', 'report'):
         import guide; lines = []; guide.report(sheet, out=lambda s: (print(s), lines.append(s)))
         open(sheet.w('guide', 'report.txt'), 'w').write('\n'.join(lines) + '\n')

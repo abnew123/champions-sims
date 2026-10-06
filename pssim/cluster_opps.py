@@ -198,3 +198,59 @@ def cores(min_support):
     txt = '\n'.join(out) + '\n'; print(txt)
     os.makedirs('results', exist_ok=True); open(f'results/cores_{which}_{min_support}.txt', 'w').write(txt)
 if __name__ == '__main__' and sys.argv[1] == 'cores': cores(int(sys.argv[2]) if len(sys.argv) > 2 else 100)
+
+def mine_rules(rows, min_support, lift_min):
+    """an ordered list of human-checkable rules {name, all: [species], none: [species]} from frequent, above-chance species cores:
+    greedy by coverage of unassigned teams; a core pair grows to a triple when one species rides along with >= 60% of its teams; a group
+    is split in two when some other species is on 30-70% of its teams with both halves >= min_support ("also has X" / "without X")."""
+    from itertools import combinations
+    sixes = [set(s) for s, _ in rows]; n = len(sixes); df = collections.Counter(x for s in sixes for x in s)
+    left = set(range(n)); groups = []
+    while True:
+        pc = collections.Counter()
+        for i in left:
+            for p in combinations(sorted(sixes[i]), 2): pc[p] += 1
+        cand = [(sup, p) for p, sup in pc.items() if sup >= min_support and sup * n / (df[p[0]] * df[p[1]]) >= lift_min]
+        if not cand: break
+        sup, pair = max(cand); core = set(pair); members = [i for i in left if core <= sixes[i]]
+        tc = collections.Counter(x for i in members for x in sixes[i] if x not in core)
+        if tc and tc.most_common(1)[0][1] >= 0.6 * len(members):
+            third = tc.most_common(1)[0][0]; core.add(third); members = [i for i in members if third in sixes[i]]
+        # split on a species that divides the group
+        tc = collections.Counter(x for i in members for x in sixes[i] if x not in core)
+        split = None
+        for x, c in tc.most_common():
+            if min_support <= c <= len(members) - min_support and 0.3 <= c / len(members) <= 0.7: split = x; break
+        if split:
+            a = [i for i in members if split in sixes[i]]; b = [i for i in members if split not in sixes[i]]
+            groups.append((core | {split}, set(), a)); groups.append((core, {split}, b))
+        else: groups.append((core, set(), members))
+        for i in members: left.discard(i)
+    return groups, left, sixes
+def rules(min_support=100):
+    which = os.environ.get('CORPUS', 'both'); rows = load()
+    if which != 'both': rows = [r for r in rows if r[1] == which]
+    lift_min = float(os.environ.get('LIFT', '2.0')); groups, left, sixes = mine_rules(rows, min_support, lift_min)
+    src = [c for _, c in rows]; n = len(rows); out = []; js = []
+    out.append(f"{which}: {n} teams; min support {min_support}, lift >= {lift_min}: {len(groups)} rules cover {100 * (1 - len(left) / n):.0f}%, other {len(left)}")
+    out.append("apply in order; the first rule whose species are all present (and none of the excluded ones) names the team")
+    for k, (core, none, members) in enumerate(groups):
+        tot = len(members); reg = sum(1 for i in members if src[i] == 'regional'); lad = tot - reg
+        comp = collections.Counter(arch(sorted(sixes[i])) for i in members); near = comp.most_common(1)[0][0]
+        others = collections.Counter(x for i in members for x in sixes[i] if x not in core)
+        rule = ' + '.join(sorted(core)) + (f"  (without {', '.join(sorted(none))})" if none else '')
+        name = f"{near}: {' + '.join(sorted(core))}" + (f" (no {', '.join(sorted(none))})" if none else '')
+        out.append(f"{k + 1:2d}. {rule:55s} {tot:5d} teams (reg {reg:4d}, lad {lad:4d}) | usually with {', '.join(f'{x} {100 * v / tot:.0f}%' for x, v in others.most_common(4))} | rules now: {', '.join(f'{a} {100 * v / tot:.0f}%' for a, v in comp.most_common(3))}")
+        js.append({'name': name, 'all': sorted(core), 'none': sorted(none), 'teams': tot, 'regional': reg, 'ladder': lad, 'nearest': near,
+                   'with': [(x, round(v / tot, 3)) for x, v in others.most_common(8)], 'rules_now': {a: round(v / tot, 3) for a, v in comp.items()}})
+    rest = collections.Counter(arch(sorted(sixes[i])) for i in left)
+    out.append(f"other ({len(left)}): by the current rules {', '.join(f'{a} {v}' for a, v in rest.most_common(8))}")
+    txt = '\n'.join(out) + '\n'; print(txt); os.makedirs('results', exist_ok=True)
+    open(f'results/core_rules_{which}_{min_support}.txt', 'w').write(txt); json.dump(js, open(f'results/core_rules_{which}_{min_support}.json', 'w'), indent=1)
+def tag(six, rules_list):
+    """the first rule a six satisfies, else 'other'"""
+    s = set(norm(x) for x in six)
+    for r in rules_list:
+        if set(r['all']) <= s and not (set(r['none']) & s): return r['name']
+    return 'other'
+if __name__ == '__main__' and sys.argv[1] == 'rules': rules(int(sys.argv[2]) if len(sys.argv) > 2 else 100)

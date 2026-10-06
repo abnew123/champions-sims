@@ -15,8 +15,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, 'pssim')
 START = re.compile(r'^(\d\d:\d\d:\d\d) (\S+\.json) -> (\S+?),')
 DONE = re.compile(r'^(\d\d:\d\d:\d\d) done:')
-KIT = re.compile(r'^kit_(.+)_(matrix|confirm|t1|guide|smoke)\.log$')
-STEP = {'matrix': 'bring matrix', 'confirm': 'confirmation', 't1': 'turn-one lines', 'guide': 'strategy-guide battles', 'smoke': 'dry run'}
+KIT = re.compile(r'^kit_(.+)_(matrix|confirm|t1|guide|oppbr|optimal|smoke)\.log$')
+STEP = {'matrix': 'bring matrix', 'confirm': 'confirmation', 't1': 'turn-one lines', 'guide': 'strategy-guide battles', 'oppbr': 'their best four', 'optimal': 'both sides pick their four', 'smoke': 'dry run'}
 CLOUD_FRESH = 25 * 60          # a pulled run counts as still running while its newest result is younger than this (pulls come every 10 min)
 
 def runs():

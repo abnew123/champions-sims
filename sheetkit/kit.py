@@ -14,6 +14,7 @@
   python3 sheetkit/kit.py <team> confirm run [--games 48] [--g0 1000] [--threads N] [--setup NAME]
   python3 sheetkit/kit.py <team> confirm decide [--write]  paired on fresh games; --write updates picks.json
   python3 sheetkit/kit.py <team> t1 jobs | run [--samples 12] [--workers N] | solve
+  python3 sheetkit/kit.py <team> optimal run [--threads N] [--only screen|matrix] | report   both sides pick their four -> optimal.json
   python3 sheetkit/kit.py <team> guide run [--games 64] [--g0 7000] [--threads N] | report   game plans and team-preview tells -> guide.json
   python3 sheetkit/kit.py <team> page [--compare other.html]   -> sheets/<team>/sheet.html
 
@@ -126,6 +127,11 @@ def main():
         jobs, items = T1.write_jobs(sheet, rj(sheet.p('picks.json'))['picks']); print(f"{len(jobs)} jobs, {len(items)} with item variants -> work/t1/")
     elif step == ('t1', 'run'): T1.run_all(sheet, a.samples, a.threads, a.force)
     elif step == ('t1', 'solve'): d = T1.solve(sheet); print(f"t1.json: {len(d['plans'])} plans")
+    elif step == ('optimal', 'run'):
+        import optimal; optimal.run(sheet, a.threads, a.force, a.only or 'all')
+    elif step == ('optimal', 'report'):
+        import optimal; lines = []; optimal.report(sheet, out=lambda s: (print(s), lines.append(s)))
+        open(sheet.w('optimal', 'report.txt'), 'w').write('\n'.join(lines) + '\n')
     elif step == ('guide', 'run'):
         import guide; guide.run(sheet, a.games or guide.GAMES, guide.G0 if a.g0 is None else a.g0, a.threads, a.setup, a.force)
     elif step == ('guide', 'report'):

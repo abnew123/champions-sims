@@ -60,12 +60,28 @@ def lead_card(sheet, arch, pick, plans, note):
     card.update(rule='', vs=[[pair_name(r[1]), round(r[0], 1), [pct(r[2]), pct(r[3])], r[4]] for r in rows], note=note or '', fb=1, fbw=round(100 * pick['v']))
     return card
 
-def leads_data(sheet, picks=None, t1=None, notes=None):
+def leads_data(sheet, picks=None, t1=None, notes=None, guide=None):
     picks = picks if picks is not None else rj(sheet.p('picks.json'))['picks']
     plans = (t1 if t1 is not None else rj(sheet.p('t1.json')))['plans']
     notes = notes if notes is not None else (rj(sheet.p('notes.json')) if os.path.exists(sheet.p('notes.json')) else {})
-    return [{'k': a['key'], 'tab': a['tab'], 'picks': [lead_card(sheet, a['model'], picks[a['model']], plans, notes.get(a['model']))]}
-            for a in TABS if a['model'] in picks]
+    guide = guide if guide is not None else (rj(sheet.p('guide.json')) if os.path.exists(sheet.p('guide.json')) else {})
+    out = []
+    for a in TABS:
+        if a['model'] not in picks: continue
+        card = lead_card(sheet, a['model'], picks[a['model']], plans, notes.get(a['model']))
+        gp = guide.get('plans', {}).get(a['model'])
+        if gp and gp.get('lines'): card['plan'] = gp['lines']               # the game plan, from the strategy-guide battles of this four
+        out.append({'k': a['key'], 'tab': a['tab'], 'picks': [card]})
+    return out
+
+def tells_html(sheet):
+    g = rj(sheet.p('guide.json')) if os.path.exists(sheet.p('guide.json')) else {}
+    rows = []
+    for t in g.get('tells', []):
+        up = [f'{m} <span class="up">+{d}</span>' for m, d in t['mine'] if d > 0]; dn = [f'{m} <span class="dn">&minus;{-d}</span>' for m, d in t['mine'] if d < 0]
+        rows.append(f'<li><span class="tx">{t["them"]}</span><span>' + ('bring ' + ', '.join(up) if up else '') + ('; ' if up and dn else '') +
+                    ('leave ' + ', '.join(dn) if dn else '') + '</span></li>')
+    return ''.join(rows)
 
 def check_leads(sheet, L):
     """problems a reader would hit: a turn-one switch to a Pokemon that is not in the card's back row, line weights not summing to 100"""
@@ -109,7 +125,8 @@ def render(sheet, L=None, template=None):
     c = sheet.cfg; text = rj(sheet.p('text.json')); T = open(template or os.path.join(KIT, 'template.html')).read()
     charts = rj(sheet.p('charts.json')) if os.path.exists(sheet.p('charts.json')) else {}
     speed = rj(sheet.p('speed.json')) if os.path.exists(sheet.p('speed.json')) else {}
-    have = {'coverage': bool(charts.get('coverage')), 'matchups': bool(charts.get('matchups')), 'speed': bool(speed.get('rows'))}
+    tells = tells_html(sheet) if template is None else ''      # a frozen old template has no slot for them
+    have = {'coverage': bool(charts.get('coverage')), 'matchups': bool(charts.get('matchups')), 'speed': bool(speed.get('rows')), 'tells': bool(tells)}
     have['charts'] = have['coverage'] or have['matchups']
     # optional sections
     out, keep = [], True
@@ -138,7 +155,7 @@ def render(sheet, L=None, template=None):
         'L_DATA': 'const L=[\n' + ',\n'.join(js(t) for t in L) + '\n];',
         'TEAM_H2': text.get('team_h2', 'The six'), 'TEAM_INTRO': text['team_intro'],
         'T_DATA': 'const T=[\n' + ',\n'.join(' ' + js(m) for m in team_cards(sheet)) + '\n];',
-        'FOOTER': paras(text['footer'], '  ', '<p>'),
+        'FOOTER': paras(text['footer'], '  ', '<p>'), 'TELLS': tells,
     }
     if have['coverage']: slots.update(COV_INTRO=paras(text['cov_intro'], '    '), C_DATA='const C=' + cj(charts['coverage']) + ';', N_ATTACKERS=WORDS[len(N)])
     if have['matchups']:

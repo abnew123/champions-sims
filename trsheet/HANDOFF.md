@@ -14,7 +14,7 @@ Talk to the other threads directly with SendMessage (names above); do not relay 
 
 ## The sheet now
 
-- Published: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6, **Version 20** (2026-10-05). The user found the page hard to scroll: Version 19 moved each section's explanations below its working content, Version 20 collapses them (and each team card's "Why this set") into closed `<details>` blocks; the kit's template does this for every sheet. Data is Version 18's (the picks rerun on the final simulator; open item 2).
+- Published: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6, **Version 21** (2026-10-05): each lead card has a short game plan and the Leads section an "Adjust the four at team preview" list (the user asked for a strategy guide: overall game plans, not just turn one, and "if you see X, bring Y"). Built by the kit's new `guide` step (`sheetkit/guide.py`: `guide run`, 64 games per opposing lead from index 7000 with per-turn logs on the final simulator, run on the shared box; `guide report` -> `guide.json`; the tells come from the bring matrix). Version 20 collapsed each section's notes and Version 19 moved them below the working content (the user found the page hard to scroll). Data otherwise Version 18's (the picks rerun; open item 2).
   `sheets/trick-room-six/sheet.html` (`python3 sheetkit/kit.py trick-room-six page`); `trsheet/tr-sheet.html` is a copy of it. Older
   pages: `trsheet/tr-sheet.v11.html` ... `tr-sheet.v15.html`, Version 16 in `sheetkit/fixtures/tr-v16/published.html`, and git from here on.
 - Version 17 against Version 16: Torkoal back to 32 HP / 2 SpD (card and Matchups column); Incineroar's Matchups column with White Herb
@@ -127,8 +127,7 @@ thread maintains the kit and owns `sheets/trick-room-six/`.
    win rates. **Perish:** the tab shows the sim's 92% although the sim cannot play Perish trap properly (Team search uses a real-data
    rate, 45-53% by archetype); the user chose on 2026-10-05 to keep the sim's number on the sheet. Shared-box lessons are in `sheetkit/README.md`.
 3. **Rain near miss:** resolved by the rerun (see item 2).
-4. **Species tells and per-archetype strategy guides** were delivered in chat only (`pssim/results/bringmx_report.txt`,
-   `pssim/battle_guide_report.py`). The user has not asked for them on the sheet. Keep the sheet lean.
+4. **Species tells and per-archetype strategy guides:** on the sheet since Version 21 (game plan per lead card; "Adjust the four at team preview"). The tells are small (about 4-9 points); the user's own reads (e.g. double switches against rain) are not what the planner does, so the plans describe the sim's usual game.
 5. **Recordings.** The user sends ladder recordings; `recordings/process.sh <mov> <batch>` compresses, extracts frames, OCRs and parses a
    timeline; decision points go through `native/spot_starts.js` + `champ spot` (HANDOFF.md "Spread study, game reviews"). Two batches
    reviewed so far (`recordings/batch1`, `batch2`, `spots.json`).

@@ -31,7 +31,8 @@ python3 sheetkit/kit.py <team> status
 | 4 | `confirm jobs`, `confirm run`, `confirm decide --write` | Each archetype's top 5 fours plus the current pick on 48 fresh games per opposing lead; writes `picks.json` | about 17,000 games, 22-26 core-hours |
 | 5 | `t1 jobs`, `t1 run`, `t1 solve` | Turn-one lines for each pick with its real back row (12 samples per cell, opposing Indeedee-F item variants); writes `t1.json` | about 25 minutes on 3 workers |
 | 6 | `charts [--workers N]`, `speed` | Coverage and Matchups from the grid (`charts.json`); the Speed table from ladder spread stats (`speed.json`) | seconds |
-| 7 | `page [--compare other.html]` | Builds `sheet.html` from the template, `picks.json`, `t1.json`, the charts and the team's text | seconds |
+| 7 | `guide run`, `guide report` | Game plans: each pick vs its six opposing leads, 64 games each with per-turn logs (3,840 games: a few minutes on a box, about half an hour on 3 Mac workers); plus team-preview tells from the matrix; writes `guide.json` | minutes |
+| 8 | `page [--compare other.html]` | Builds `sheet.html` from the template, `picks.json`, `t1.json`, `guide.json`, the charts and the team's text | seconds |
 
 Every run resumes where it stopped (finished jobs are skipped), writes its log to `pssim/kit_<team>_<step>.log`, and shows under
 "Sheets" on the one progress page all threads share (`status_server.py`, `sim-progress` in `.claude/launch.json`, port 8766), also
@@ -51,7 +52,8 @@ The box is set up once the way `teamsearch/cloud/README.md` describes (steps 0-3
 1. `python3 sheetkit/kit.py <team> grid` and `matrix jobs` here, so the grid and the job list exist.
 2. `sheetkit/cloud/push.sh <host> <key file> <team>` copies the kit and the team folder (and any shared simulator file the box lacks).
 3. On the box, in `~/champions-sims`: `python3 sheetkit/kit.py <team> smoke`, then start the run detached, for example
-   `setsid nohup python3 sheetkit/kit.py <team> matrix run --threads 180 > matrix.out 2>&1 &`. `--threads` is how many cores you
+   `(setsid nohup python3 sheetkit/kit.py <team> matrix run --threads 180 > matrix.out 2>&1 < /dev/null &)` (the parentheses let the
+   ssh command return at once). `--threads` is how many cores you
    take; on Linux the kit spreads them over battle processes of 3 threads each (one process with many threads runs about ten times
    slower there), dealing the jobs round-robin so the processes finish together. If the box is shared, agree the split first, and
    do not start your run inside a tmux server another thread uses: a tmux server's process title is the command line of the session

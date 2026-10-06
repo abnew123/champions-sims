@@ -16,7 +16,11 @@ toid = R.toid
 OUT = os.path.join(C.HERE, 'out', 'live'); FEED = os.path.join(C.HERE, 'live_feed.js')
 NODE = ['node', '--experimental-websocket', '--no-warnings']
 FORMATS = {'bo1': 'gen9championsvgc2026regmc', 'bo3': 'gen9championsvgc2026regmcbo3'}
-TOPK = 3; CAL = 0.7438
+TOPK = 3; CAL = 0.7538                           # the rescale fitted for egvalue9_sym2 (accuracy.py compare)
+# the full engine data (every species, move, item and ability Showdown knows; needs champ-battle-v17): spectated teams can be anything
+os.environ.setdefault('CHAMP_BIN', os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v17'))
+os.environ.setdefault('CHAMP_DATA', 'engine_data_full.json')
+S.E = RC.E = json.load(open(os.path.join(C.MAIN, 'native', os.environ['CHAMP_DATA'])))
 def room_of(x):
     m = re.search(r'(battle-[a-z0-9]+-\d+(?:-[a-z0-9]+)?)', x)
     if not m: sys.exit(f'not a battle room or URL: {x}')

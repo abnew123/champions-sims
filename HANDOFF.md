@@ -643,7 +643,7 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     only for new strings, and `single_event` no longer formats a string per call (`cbp`). Team search found one 90-thread process ran six
     times slower per game than 30 processes of 3 on the box; the intern mutex (taken on every `id()` call: `$move` relays, volatiles,
     statuses, part callbacks) is the prime suspect; to be measured at high thread counts when the Mac is free.
-  - **champ-battle-v20 = v19 + the recharge-turn fix** (2026-10-06, 5:10 am). TR sheet found about 6% of pool games ending early with a
+  - **champ-battle-v20 = v19 + the recharge-turn fix** (2026-10-06, 4:20 am). TR sheet found about 6% of pool games ending early with a
     fractional result (10% of games against Sylveon). Cause: Showdown's `recharge` is a pseudo-move, not a dex entry, so the data stub
     has no target; `slot_options` read it as "normal" and offered the recharging Pokemon a foe target, which `valid` rejected (the
     request says `self`), so that side had no legal joint action and battle4 handed the game to the value function. Fix: the option

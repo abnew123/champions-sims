@@ -4,9 +4,11 @@ screen ("Trainers are choosing actions"). For watching on your own computer.
   python3 evalbar/broadcast.py frames <video file or YouTube URL> <dir> [start] [end]   frames at 2 per second (yt-dlp for a URL;
                                                                                          start / end like 1:44:09)
   python3 evalbar/broadcast.py ocr <dir>                                                 Apple Vision text of every frame -> <dir>.ocr.jsonl
+  python3 evalbar/broadcast.py scan <YouTube URL> <out.ocr.jsonl> [workers=2] [fetchers=4] a whole recording, 20 minutes at a time: frames, text,
+                                                                                         frames deleted; resumes where it stopped
   python3 evalbar/broadcast.py read <dir.ocr.jsonl> <out.log>                            the whole match -> battle log
   python3 evalbar/broadcast.py replay <dir.ocr.jsonl> [speed=4] [threads=2] [port=8768]  a recorded match through the live page, as if live
-  python3 evalbar/broadcast.py watch <YouTube URL> [start] [threads=2] [port=8768]       a broadcast in real time (live, or a recording from
+  python3 evalbar/broadcast.py watch <YouTube URL or id> [start] [threads=2] [port=8768] a broadcast in real time (live, or a recording from
                                                                                          start, e.g. 1:44:09): page at http://localhost:<port>
 Player 1 is the player on the left: the battle text speaks from their side (their Pokémon are named plainly, the other player's are
 "the opposing ..."). No names are kept: the log calls the players Player 1 and Player 2, and sheets are matched to sides by species."""
@@ -34,6 +36,52 @@ def frames(src, out, start=None, end=None):
     else: url = src
     cmd = ['ffmpeg', '-v', 'error', '-y'] + (['-ss', start] if start else []) + (['-to', end] if end else []) + ['-i', url, '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', os.path.join(out, 'f_%05d.jpg')]
     subprocess.run(['nice', '-n', '10'] + cmd, check=True)
+def media(url):
+    """yt-dlp's media URL for the 720p video, with the request headers YouTube wants and the duration"""
+    info = json.loads(subprocess.run(['yt-dlp', '-j', '--no-warnings', '-f', 'bv*[height<=720][protocol^=http]/bv*[height<=720]/b[height<=720]', url],
+                                     capture_output=True, text=True, check=True).stdout)
+    return info['url'], ''.join(f'{k}: {v}\r\n' for k, v in (info.get('http_headers') or {}).items()), info.get('duration')
+def scan(url, outf, workers=2, chunk=1200, fetchers=4):
+    """a whole recording through Apple Vision without keeping the video. YouTube serves one connection at about twice real time, so
+    `fetchers` ffmpeg processes each cut a different 20-minute piece to 2 frames a second while `workers` OCR processes read the finished
+    pieces in order; each piece's text is appended to outf (frames numbered from the start of the video) and its frames deleted.
+    Resumes after the last piece read."""
+    import concurrent.futures as cf
+    src, hdr, dur = media(url); tmp = outf + '.frames'; os.makedirs(tmp, exist_ok=True); lock = threading.Lock(); cur = {'src': src, 'hdr': hdr}
+    done = 0
+    if os.path.exists(outf):
+        for l in open(outf): done = max(done, int(json.loads(l)['file'][2:8]))
+    json.dump({'title': 'Reading the regional broadcast (OCR)', 'out': os.path.relpath(outf, os.path.join(C.HERE, 'out')), 'total': int(dur * 2),
+               'done0': done, 'started': time.time(), 'threads': workers + 1, 'seeds': 0, 'staged': False, 'unit': 'frames', 'proc': 'broadcast.py scan'},
+              open(outf + '.run.json', 'w'))
+    def fetch(t0):
+        d = os.path.join(tmp, f'c{t0:06d}'); os.makedirs(d, exist_ok=True)
+        for f in os.listdir(d): os.remove(os.path.join(d, f))
+        for attempt in range(4):
+            r = subprocess.run(['nice', '-n', '10', 'ffmpeg', '-v', 'error', '-y', '-threads', '1', '-headers', cur['hdr'], '-ss', str(t0), '-t', str(chunk), '-i', cur['src'],
+                                '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', '-start_number', str(t0 * 2 + 1), os.path.join(d, 'f_%06d.jpg')], capture_output=True, text=True)
+            if r.returncode == 0: return d
+            with lock: cur['src'], cur['hdr'], _ = media(url)                  # the media URL expired: fetch a new one
+        return d
+    starts = list(range(done // 2 // chunk * chunk, int(dur), chunk))
+    with cf.ThreadPoolExecutor(fetchers) as ex:
+        futs = [ex.submit(fetch, t0) for t0 in starts[:fetchers]]; nxt = fetchers
+        for i, t0 in enumerate(starts):
+            d = futs[i].result()
+            if nxt < len(starts): futs.append(ex.submit(fetch, starts[nxt])); nxt += 1
+            frames_ = sorted(f for f in os.listdir(d) if f.endswith('.jpg') and int(f[2:8]) > done)
+            parts = [os.path.join(d, f'w{k}') for k in range(workers)]
+            for k, p in enumerate(parts):
+                os.makedirs(p, exist_ok=True)
+                for f in frames_[k::workers]: os.replace(os.path.join(d, f), os.path.join(p, f))
+            procs = [subprocess.Popen(['nice', '-n', '10', OCR, p], stdout=subprocess.PIPE, text=True) for p in parts]
+            rows = [json.loads(l) for pr in procs for l in pr.communicate()[0].splitlines()]
+            with open(outf, 'a') as f:
+                for row in sorted(rows, key=lambda x: x['file']): f.write(json.dumps(row) + '\n')
+            subprocess.run(['rm', '-rf', d])
+            if frames_: done = int(frames_[-1][2:8])
+            print(f'{time.strftime("%H:%M")} read {t0 // 60}-{(t0 + chunk) // 60} min of {int(dur) // 60}', flush=True)
+    subprocess.run(['rm', '-rf', tmp])
 def ocr(d):
     with open(d.rstrip('/') + '.ocr.jsonl', 'w') as f: subprocess.run(['nice', '-n', '10', OCR, d], stdout=f, check=True)
 # --------------------------------------------------------------------------------------------------------------------------- sheets
@@ -81,9 +129,10 @@ def sheet_owner(lines):
 class Reader:
     """frames in time order -> battle log lines. feed() one frame's OCR at a time; lines() is the log so far."""
     def __init__(s):
-        s.games = []; s.sheets = {}; s.raw_sheets = []; s.frame = 0; s.names = collections.Counter(); s.note = ''; s.new_game()
+        s.games = []; s.meta = []; s.sheets = {}; s.raw_sheets = []; s.frame = 0; s.names = collections.deque(maxlen=600); s.note = ''
+        s.board = None; s.match = 0; s.game_in_match = 0; s.prev_end = 0; s.owners = {}; s.new_game()
     def new_game(s):
-        s.out = []; s.games.append(s.out); s.started = False; s.turn = 0; s.in_decision = False; s.ended = False
+        s.out = []; s.games.append(s.out); s.meta.append({}); s.started = False; s.turn = 0; s.in_decision = False; s.ended = False
         s.active = {}; s.hp = {}; s.last_text = None; s.slot_free = {'p1': [], 'p2': []}; s.megas = {'p1': False, 'p2': False}
         s.fainted = {'p1': set(), 'p2': set()}; s.lead_seen = False
     def team(s, sd): return s.sheets.get(sd, [])
@@ -137,7 +186,7 @@ class Reader:
                 left = {sd: 4 - len(s.fainted[sd]) for sd in ('p1', 'p2')}
                 win = 'p1' if left['p2'] == 0 or ('forfeit' not in text and left['p1'] > left['p2']) else 'p2' if left['p1'] == 0 or left['p2'] > left['p1'] else None
                 if win: s.emit('|', f"|win|Player {win[1]}")
-                s.ended = True
+                s.ended = True; s.prev_end = s.frame
             return
         # field-wide
         FIELD = [(r'twisted the dimensions', '|-fieldstart|move: Trick Room'), (r'dimensions returned to normal', '|-fieldend|move: Trick Room'),
@@ -226,7 +275,10 @@ class Reader:
             if len(sets) >= 4: s.raw_sheets.append((s.frame, sheet_owner(L), sets))
             return
         sb = scoreboard(L)
-        if sb: s.names[sb] += 1
+        if sb:
+            s.names.append(sb)
+            if s.started and s.board is None and len(s.names) >= 5:            # the scoreboard came up after the game started
+                s.board = collections.Counter(s.names).most_common(1)[0][0]; s.check_sides()
         boxes, decision, turn, text = battle(L)
         if s.ended and decision and len(boxes) >= 3: s.new_game()                       # the next game of the set
         if len(boxes) < 2 and not text: s.in_decision = False if not decision else s.in_decision; return
@@ -234,8 +286,12 @@ class Reader:
             if text and re.search(r'^Go! .+ and .+!$|sent out .+ and .+!$', text): s.lead_seen = True
             fresh = s.lead_seen or turn == 1 or (len(boxes) == 4 and all(p == 100 for n, p in boxes.values()))
             if decision and len(boxes) >= 3 and fresh:
-                if len(s.sheets) < 2: s.assign_sheets(boxes)
+                board = collections.Counter(s.names).most_common(1)[0][0] if s.names else None
+                other = s.match and board and s.board and not all(difflib.SequenceMatcher(None, a, b).ratio() > 0.7 for a, b in zip(board, s.board))
+                if not s.match or other: s.sheets = {}; s.match += 1; s.game_in_match = 0   # new players: a new match, new sheets
+                if len(s.sheets) < 2: s.owners = {}; s.assign_sheets(boxes, board)
                 if len(s.sheets) < 2: s.note = 'waiting for both team sheets: start before the broadcast shows them'; return
+                s.board = board or s.board; s.game_in_match += 1; s.meta[-1] = {'match': s.match, 'game': s.game_in_match, 'frame': s.frame}
                 s.note = ''; s.header(boxes); s.turn = turn or 1; s.emit(f'|turn|{s.turn}'); s.in_decision = True
             elif decision and len(boxes) >= 3 and not s.note: s.note = 'joined mid-game: the bar starts with the next game'
             return
@@ -246,12 +302,13 @@ class Reader:
         if text and not decision:
             if s.last_text and difflib.SequenceMatcher(None, text, s.last_text).ratio() > 0.85: return
             s.last_text = text; s.message(text)
-    def assign_sheets(s, boxes):
+    def assign_sheets(s, boxes, board=None):
         """the team sheets shown before the battle -> sides. Sheet screens come in runs, one player's sheet per run; each run's reads are
         merged (the fullest read of each Pokémon). A run goes to the side whose scoreboard name matches its header; failing that, to the
         side whose Pokémon on the field it has."""
         runs = []
         for fr, owner, sets in s.raw_sheets:
+            if fr <= s.prev_end: continue                                     # sheets shown before the last game ended belong to it
             if runs and fr - runs[-1]['end'] <= 6: runs[-1]['reads'].append(sets); runs[-1]['owners'][owner] += 1; runs[-1]['end'] = fr
             else: runs.append({'end': fr, 'reads': [sets], 'owners': collections.Counter([owner])})
         full = lambda st: len(st['moves']) + bool(st['item']) + bool(st['ability']) + bool(st['nature'])
@@ -263,7 +320,6 @@ class Reader:
                     key = st['species'].split('-')[0]                            # Floette and Floette-Eternal are one entry
                     if key not in by or full(st) > full(by[key]): by[key] = st
             teams.append((run['owners'].most_common(1)[0][0], [st for st in by.values() if full(st) >= 3]))
-        board = s.names.most_common(1)[0][0] if s.names else None
         sim = lambda a, b: difflib.SequenceMatcher(None, a, b).ratio() if a and b else 0
         on = {sd: {s.species_any(n) for (x, sl), (n, p) in boxes.items() if x == sd} for sd in ('p1', 'p2')}
         for owner, team in sorted(teams, key=lambda x: len(x[1]), reverse=True):
@@ -273,10 +329,21 @@ class Reader:
                 names = {st['species'].split('-')[0] for st in team}
                 sd = max(('p1', 'p2'), key=lambda k: sum(1 for n in on[k] if n and n.split('-')[0] in names))
             if sd in s.sheets: sd = 'p1' if sd == 'p2' else 'p2'
-            s.sheets[sd] = team
+            s.sheets[sd] = team; s.owners[sd] = owner
+    def check_sides(s):
+        """once the scoreboard names are known: if the sheets were given to the wrong sides (by species, before the names showed), swap
+        them and rewrite the log's team lines"""
+        sim = lambda a, b: difflib.SequenceMatcher(None, a or '', b or '').ratio()
+        o = s.owners
+        if not s.board or 'p1' not in o or 'p2' not in o: return
+        if sim(o['p1'], s.board[1]) + sim(o['p2'], s.board[0]) > sim(o['p1'], s.board[0]) + sim(o['p2'], s.board[1]) + 0.3:
+            s.sheets = {'p1': s.sheets['p2'], 'p2': s.sheets['p1']}; s.owners = {'p1': o['p2'], 'p2': o['p1']}
+            sw = lambda l: l.replace('|p1|', '|P1|').replace('|p2|', '|p1|').replace('|P1|', '|p2|')
+            s.out[:] = [sw(l) if l.startswith(('|poke|', '|showteam|')) else l for l in s.out]
     def species_any(s, n): return fuzzy(re.sub(r'^Mega ', '', n), 'species', cut=0.75)
     def lines(s): return s.out
     def logs(s): return [g for g in s.games if any(l.startswith('|turn|') for l in g)]
+    def logs_meta(s): return [(g, m) for g, m in zip(s.games, s.meta) if any(l.startswith('|turn|') for l in g)]
 class Runner:
     """the reader's games through the live mode, one live.Live per game, served together on one page"""
     def __init__(s, tag, threads, port):
@@ -352,11 +419,16 @@ def read(ocrf):
     r = Reader()
     for row in sorted(map(json.loads, open(ocrf)), key=lambda x: x['file']): r.feed(row['lines'])
     return r
+def youtube(x):
+    """a YouTube link, or just its video id (no quotes needed in zsh, which reads the '?' of a link as a wildcard)"""
+    return x if x.startswith('http') or os.path.exists(x) else f'https://www.youtube.com/watch?v={x}'
 if __name__ == '__main__':
     a = sys.argv[1:]
     if not a: sys.exit(__doc__)
+    if a[0] in ('watch', 'scan', 'frames') and len(a) > 1: a[1] = youtube(a[1])
     if a[0] == 'frames': frames(a[1], a[2], *(a[3:5]))
     elif a[0] == 'ocr': ocr(a[1])
+    elif a[0] == 'scan': scan(a[1], a[2], int(a[3]) if len(a) > 3 else 2, fetchers=int(a[4]) if len(a) > 4 else 4)
     elif a[0] in ('replay', 'watch'):
         args = a[2:]
         try:
@@ -367,7 +439,7 @@ if __name__ == '__main__':
         except KeyboardInterrupt: pass
     elif a[0] == 'read':
         r = read(a[1]); base = a[2][:-4] if a[2].endswith('.log') else a[2]
-        for i, g in enumerate(r.logs()):
-            f = f'{base}_g{i + 1}.log'; open(f, 'w').write('\n'.join(g) + '\n')
-            print(f"game {i + 1}: {sum(l.startswith('|turn|') for l in g)} turns, {next((l for l in g if l.startswith('|win|')), 'no result')} -> {f}")
+        for i, (g, m) in enumerate(r.logs_meta()):
+            f = f"{base}_m{m['match']}g{m['game']}.log"; open(f, 'w').write('\n'.join(g) + '\n')
+            print(f"match {m['match']} game {m['game']} (at {m['frame'] / 120:.0f} min): {sum(l.startswith('|turn|') for l in g)} turns, {next((l for l in g if l.startswith('|win|')), 'no result')} -> {f}")
         print('sheets: ' + '; '.join(f"{sd}: {', '.join(st['species'] for st in r.sheets.get(sd, []))}" for sd in ('p1', 'p2')))

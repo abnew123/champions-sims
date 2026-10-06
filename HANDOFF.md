@@ -614,3 +614,17 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     are unexplained by depth to two turns, spread knowledge, or the value of boosts and switches. `EVAL_MATRIX=1|full`: the payoff matrix on each output line (rows / cols / labels / final mixes /
     one-turn values and seed counts per cell, two-turn values under EVAL_HORIZON=2) for reading departures from the equilibrium against
     the opponent's actual move; "1" raises the rows and columns holding a slot's actual or most-weighted option to full seeds first.
+  - **champ-battle-v19 = v18 + `MISS_DOUBLE=<side>` + lock-free interning** (2026-10-06, 3:35 am; flag off: 20 check battles identical
+    to v16, `champ turn` exact). `MISS_DOUBLE=0` (side 0 = MYTEAM): on every accuracy roll by that side, the final hit chance p (base
+    accuracy, stages, ModifyAccuracy and Accuracy events applied) is replaced by max(0, 2p - 100) just before the roll (sim.rs
+    `roll_accuracy`, both the first-hit and the per-hit multiaccuracy sites); rolls the game already made certain (accuracy `true`: No
+    Guard, Lock-On, rain Hurricane, Poison-type Toxic, always-hit moves) are untouched; secondary chances unchanged; a rule miss is an
+    ordinary miss (Blunder Policy, crash damage); the planner's analytic accuracy in the race and the reduced option ranking use the same
+    transform for that side. Requested by the user through Team search for a climb where the user's side misses twice as often ("I
+    dislike missing"). Check (`MISS_STATS=1` prints rolls and misses per side and move after a battle run, planner rolls included): 100
+    pool games with a Hurricane / Rock Slide / Sleep Powder team: Hurricane 68.6% -> 36.3%, Rock Slide 89.9 -> 79.5, Sleep Powder 73.1
+    -> 49.1, Draco Meteor 89.7 -> 80.1, 100%-accuracy moves unchanged, side 1 unchanged; side 0's win share 24.2% -> 16.7% over 300
+    games. Also: `dex::id()` keeps a per-thread copy of the strings a thread has seen, so the shared intern table and its mutex are hit
+    only for new strings, and `single_event` no longer formats a string per call (`cbp`). Team search found one 90-thread process ran six
+    times slower per game than 30 processes of 3 on the box; the intern mutex (taken on every `id()` call: `$move` relays, volatiles,
+    statuses, part callbacks) is the prime suspect; to be measured at high thread counts when the Mac is free.

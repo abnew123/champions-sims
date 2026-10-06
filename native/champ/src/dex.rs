@@ -34,12 +34,23 @@ impl Eq for PId {}
 impl std::hash::Hash for PId { #[inline] fn hash<H: Hasher>(&self, h: &mut H) { h.write_usize(self.0.as_ptr() as usize); h.write_usize(self.0.len()); } }
 
 static INTERN: OnceLock<Mutex<HashSet<&'static str, FxBuild>>> = OnceLock::new();
-/// Interned string (lives for the program; compare with == on &str)
+thread_local! { static IDTL: std::cell::RefCell<HashSet<&'static str, FxBuild>> = std::cell::RefCell::new(HashSet::default()); }
+/// Interned string (lives for the program; compare with == on &str). Each thread keeps its own copy of the strings it has seen, so
+/// the shared table and its lock are touched only for a string new to the thread: with many threads in one process the lock was the
+/// bottleneck (champ-battle-v19; one 90-thread process ran six times slower per game than 30 processes of 3).
 pub fn id(s: &str) -> Id {
+    if let Some(x) = IDTL.with(|c| c.borrow().get(s).copied()) { return x; }
     let m = INTERN.get_or_init(|| Mutex::new(HashSet::default()));
-    let mut g = m.lock().unwrap();
-    if let Some(x) = g.get(s) { return x; }
-    let x: &'static str = Box::leak(s.to_string().into_boxed_str()); g.insert(x); x
+    let x = { let mut g = m.lock().unwrap(); match g.get(s) { Some(x) => *x, None => { let x: &'static str = Box::leak(s.to_string().into_boxed_str()); g.insert(x); x } } };
+    IDTL.with(|c| c.borrow_mut().insert(x)); x
+}
+thread_local! { static CBP: std::cell::RefCell<FxMap<(usize, usize, usize, usize), Id>> = std::cell::RefCell::new(FxMap::default()); }
+/// "<part>.on<Event>" for a move part's callback (secondaries.0.onHit), cached by the strings' addresses: no format! on the hot path
+#[inline]
+pub fn cbp(part: Id, ev: &str) -> Id {
+    let key = (part.as_ptr() as usize, part.len(), ev.as_ptr() as usize, ev.len());
+    CBP.with(|c| { if let Some(x) = c.borrow().get(&key) { return *x; }
+        let v = id(&format!("{}.on{}", part, ev)); c.borrow_mut().insert(key, v); v })
 }
 /// an event's callback names and properties, computed once per event name
 #[derive(Debug)]

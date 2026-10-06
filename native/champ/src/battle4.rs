@@ -261,4 +261,9 @@ pub fn main(args: &[String]) {
         }
     }); } });
     eprintln!("{} games in {:?}", lines.len(), t0.elapsed());
+    if std::env::var("MISS_STATS").is_ok() {
+        let g = crate::sim::MISS_STATS.lock().unwrap(); let mut v: Vec<_> = g.iter().cloned().collect(); v.sort_by(|a, b| b.1.0.cmp(&a.1.0));
+        eprintln!("accuracy rolls (side, move: rolls, misses, hit rate):");
+        for ((s, mid), (r, mi)) in v.iter().take(30) { eprintln!("   {} {:16} {:6} {:6} {:5.1}%", s, mid, r, mi, 100.0 * (1.0 - *mi as f64 / *r as f64)); }
+    }
 }

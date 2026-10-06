@@ -238,6 +238,7 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 2] {
             if tm.category == "Status" { continue; }
             let spread = (tm.target == "allAdjacentFoes" || tm.target == "allAdjacent") && foes.len() == 2;
             let acc = tm.accuracy.map(|a| (a / 100.0).min(1.0)).unwrap_or(1.0);
+            let acc = if crate::battle::Battle::miss_double() == Some(s) { (2.0 * acc - 1.0).max(0.0) } else { acc };   // MISS_DOUBLE: that side's analytic accuracy too
             let hits = match tm.multihit { Some((lo, hi)) if lo == hi => lo as f64, Some((_, hi)) => if b.p(m).ability == "skilllink" { hi as f64 } else { 3.1 }, None => 1.0 };
             let mut row = |tgts: &[usize]| -> Vec<f64> {
                 let mut out = vec![0.0; n];
@@ -448,6 +449,7 @@ pub(crate) fn reduced_options_n(b: &mut Battle, s: u8, i: usize, nhits: usize) -
         if mv.category == "Status" || mv.base_power <= 0.0 { continue; }
         let ty = move_type(b, m, mid); let stab = if types.contains(&ty) { 1.5 } else { 1.0 };
         let acc = mv.accuracy.map(|a| (a / 100.0).min(1.0)).unwrap_or(1.0);
+        let acc = if crate::battle::Battle::miss_double() == Some(s) { (2.0 * acc - 1.0).max(0.0) } else { acc };
         let eff = if t >= 1 { match foes[(t - 1) as usize] { Some(f) if !b.p(f).fainted => type_mult(b, ty, f), _ => 0.0 } }
                   else { let fs: Vec<MonRef> = foes.iter().flatten().copied().filter(|f| !b.p(*f).fainted).collect(); fs.iter().map(|f| 0.75 * type_mult(b, ty, *f)).sum() };
         dmg.push((mv.base_power * stab * eff * acc, *c));

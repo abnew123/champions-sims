@@ -135,3 +135,14 @@ Notes:
 ## Letting Claude drive it
 
 Steps 0, 1 and 6 need the AWS console. Once the box is up, give Claude the `HOST` and the key's path, and it can run steps 2–5 over SSH.
+
+## The miss-doubling climb (user, 2026-10-06)
+
+The user's side misses twice as often (champ-battle-v20 with MISS_DOUBLE=0; setup `v20m`). Same steps as above, except:
+- `remote_setup.sh` builds v20 by default.
+- Smoke test: `. cloud/run_env_miss.sh && TS_THREADS=$(nproc) ../.venv/bin/python3 evaluate.py trick_room_six 1 0` must match `cloud/reference_v20m.json` (0.5788).
+- Run: `tmux -L climb new -s climb` then `. cloud/run_env_miss.sh && TS_PARALLEL=30 TS_THREADS=3 TS_PREFILTER_PROCS=48 ../.venv/bin/python3 climb.py round thorough 2>&1 | tee -a round_miss.log`.
+- Relaunch: `RUN_ENV=cloud/run_env_miss.sh cloud/relaunch.sh <P> <T>`; more rounds: `RUN_ENV=cloud/run_env_miss.sh setsid nohup cloud/auto_rounds.sh <cap> [secs per start] &`.
+  These log to round.log; the climb's own files are `climb_miss_state.json`, `climb_miss_log.jsonl` and `climb_miss_progress.json`.
+- Report: `python3 report.py cloud_results/<dir> climb_miss`.
+- After round 1, check for degenerate miss-reward strategies (Blunder Policy, Stomping Tantrum or Temper Flare stacking, crash moves) before letting it continue.

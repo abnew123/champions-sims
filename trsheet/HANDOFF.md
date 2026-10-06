@@ -92,6 +92,19 @@ thread maintains the kit and owns `sheets/trick-room-six/`.
   port 8766, with sections Sheets (kit runs, also ones pulled from a cloud box), Battle sim and Team search (that thread's own cards).
   The same server shows built sheets at `/sheets/<team>/work/preview.html`; the separate `sheets-preview` entry is gone.
 
+## Both sides pick their four (started 2026-10-06)
+
+The user asked that the sheet's whole-game percentages assume both players pick their four optimally (the sim's opponents always bring
+the replay-average four, which is a large part of why Snow and Tailwind read 93-96%). A first test (`work/oppbr*.py`, Snow and Tailwind):
+with the opponent bringing its best four against our pick, Snow drops to 75% +- 6 and Tailwind to 77% +- 6 (their best answers lead
+Kingambit + Raichu or Froslass + Sneasler vs Snow, Salamence first vs Tailwind). The kit's `optimal` step does it for every tab
+(`sheetkit/optimal.py`, sixes from `sheetkit/opp_sixes.js`): screen the pick against every four each opposing six allows, then our
+candidate fours against each six's three strongest answers. First full run scheduled by `work/optimal_at_3am.sh` (10 Mac threads from
+3 am, the user's request; log `work/optimal_at_3am.log`, result `optimal.json`). Not on the sheet yet: go through the result with the
+user first (picks may change, which means new turn-one lines and game plans for those tabs). Battle sim is reworking the opponent model
+into a pool of real Bo3 sides grouped by core rules; if that lands, real sixes would replace the reconstructed ones and the tabs may be
+re-keyed (Battle sim will say first).
+
 ## How the current page was built
 
 1. Picks: bring matrix (all 90 fours x 6 opposing leads x 16 games per archetype, `pssim/bringmx_report.py`) and a fresh-game

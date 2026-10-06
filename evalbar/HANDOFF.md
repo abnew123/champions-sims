@@ -202,6 +202,9 @@ markers in out/aftermath_rows.jsonl for Battle sim to fit). 3,408 positions: aft
 0, after a switch +0.7 (SE 0.9) with the lookahead and +1.9 (SE 0.9) for the static value. So the resulting positions are rated right:
 the engine's reluctance to set up is not a misrating of the boosted position, and switches are underrated by at most ~2 points by the
 value function alone. Summary in `results/aftermath_setup_switch.json`.
+Players set up about twice as often as the planner (regional day 1: 4.7% of decisions vs 2.7% planned; Showdown Bo3: 3.3% vs 1.4%), and
+their setup moves carry about twice the regret of their other plays (3.6 and 4.3 points vs 1.8 and 2.1). With the boosted positions rated
+right, that reads as players overvaluing setup (the user's guess: habits from single-player games, where setup sweeps).
 
 ## Were the costly plays reads? (reads.py)
 

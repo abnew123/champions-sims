@@ -47,6 +47,8 @@ SIMS = {
     'v14g': dict(bin='champ-battle-v14', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg')),
     # v16: the same games again, ~2.3x faster than v14 (string-free handler lookup, cached effect data)
     'v16g': dict(bin='champ-battle-v16', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg')),
+    # v17: v16 with a 256-bit callback mask (same games); needed for engine_data_full.json (the real-game opponent pool, poolbar.py)
+    'v17g': dict(bin='champ-battle-v17', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg')),
 }
 def sim(): return os.environ.get('TS_SIM', 'v3')
 def out_tag(seed0, per_job): return f'{seed0}_{per_job}' if sim() == 'v3' else f'{sim()}_{seed0}_{per_job}'
@@ -121,7 +123,7 @@ def run_team(gids, per_job, seed0, threads, fixed=None, label=''):
                        cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL)
         os.replace(starts + '.tmp', starts)
     env.update(sim_env(), GRID_DIR=os.path.join(d, 'grid'))
-    subprocess.run(['nice', '-n', '10', procs.battle(bin_path()), 'battle', '../native/engine_data_spot.json', starts, out, str(threads)],
+    subprocess.run(['nice', '-n', '10', procs.battle(bin_path()), 'battle', os.environ.get('TS_ENGINE_DATA', '../native/engine_data_spot.json'), starts, out, str(threads)],
                    cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return read(d, out_tag(seed0, per_job))
 
@@ -138,7 +140,7 @@ def run_jobs(gids, jobs, per_job, seed0, threads, label):
                        cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL)
         os.replace(starts + '.tmp', starts)
     env.update(sim_env(), GRID_DIR=os.path.join(d, 'grid'))
-    subprocess.run(['nice', '-n', '10', procs.battle(bin_path()), 'battle', '../native/engine_data_spot.json', starts, out, str(threads)],
+    subprocess.run(['nice', '-n', '10', procs.battle(bin_path()), 'battle', os.environ.get('TS_ENGINE_DATA', '../native/engine_data_spot.json'), starts, out, str(threads)],
                    cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return [json.load(open(os.path.join(out, f'{j}.json'))) for j in range(len(jobs))]
 

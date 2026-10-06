@@ -14,7 +14,7 @@ Talk to the other threads directly with SendMessage (names above); do not relay 
 
 ## The sheet now
 
-- Published: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6, **Version 19** (2026-10-05: Version 18's data with each section's explanations moved below its working content, which the user asked for; the kit's template does this for every sheet). Version 18 (same day) was the picks rerun on the final simulator (open item 2). Version 17 (same day) was the first built by the sheet kit. Source:
+- Published: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6, **Version 20** (2026-10-05). The user found the page hard to scroll: Version 19 moved each section's explanations below its working content, Version 20 collapses them (and each team card's "Why this set") into closed `<details>` blocks; the kit's template does this for every sheet. Data is Version 18's (the picks rerun on the final simulator; open item 2).
   `sheets/trick-room-six/sheet.html` (`python3 sheetkit/kit.py trick-room-six page`); `trsheet/tr-sheet.html` is a copy of it. Older
   pages: `trsheet/tr-sheet.v11.html` ... `tr-sheet.v15.html`, Version 16 in `sheetkit/fixtures/tr-v16/published.html`, and git from here on.
 - Version 17 against Version 16: Torkoal back to 32 HP / 2 SpD (card and Matchups column); Incineroar's Matchups column with White Herb

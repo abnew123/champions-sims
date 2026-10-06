@@ -146,3 +146,17 @@ The user's side misses twice as often (champ-battle-v20 with MISS_DOUBLE=0; setu
   These log to round.log; the climb's own files are `climb_miss_state.json`, `climb_miss_log.jsonl` and `climb_miss_progress.json`.
 - Report: `python3 report.py cloud_results/<dir> climb_miss`.
 - After round 1, check for degenerate miss-reward strategies (Blunder Policy, Stomping Tantrum or Temper Flare stacking, crash moves) before letting it continue.
+
+## The two pool-based climbs (user, 2026-10-06): with and without the miss rule, side by side
+
+Opponents are real pool entries; brings are chosen per core group (`poolmode.py`). The two climbs are `cloud/run_env_pool.sh`
+(v20g, no rule: the control) and `cloud/run_env_poolmiss.sh` (v20m, the user's misses doubled). Each has its own state, log, progress,
+cache, round log (`round_pool.log` / `round_poolmiss.log`) and tmux session, and its relaunch only touches its own processes.
+On a c7a.48xlarge give each 30 x 3; on a 96-core box, 15 x 3 each (`cloud/threads_climb_pool.txt` / `threads_climb_poolmiss.txt`).
+1. Setup as above (the bundle carries the pool, its rules and the full engine data; v20 is built by default).
+2. Smoke: `. cloud/run_env.sh && TS_SIM=v20m ... evaluate.py trick_room_six 1 0` against `cloud/reference_v20m.json`, and the pool path:
+   `TS_SIM=v20g TS_OPP=pool TS_POOL_ES=1 TS_BRING_K=1` poolmode.search_team(trick_room_six, 123, 3, K=1) against `cloud/reference_pool.json`.
+3. Start each: `tmux -L climb new -d -s climb_pool ". cloud/run_env_pool.sh && TS_PARALLEL=30 TS_THREADS=3 TS_PREFILTER_PROCS=48 ../.venv/bin/python3 climb.py round thorough climb_pool 2>&1 | tee -a round_pool.log"`
+   (and the same with poolmiss), then `RUN_ENV=cloud/run_env_pool.sh setsid nohup cloud/auto_rounds.sh <cap> &` for each.
+4. Reports: `python3 report.py cloud_results/<dir> climb_pool` and `... climb_poolmiss`. After round 1, check the miss climb for
+   degenerate miss-reward strategies (Blunder Policy, Stomping Tantrum / Temper Flare, crash moves) before letting it continue.

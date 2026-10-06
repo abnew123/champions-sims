@@ -380,3 +380,10 @@ Usage:
   - Archaludon 69.1, Gholdengo 67.0, Rillaboom 64.0. Gholdengo − Archaludon −2.1 ± 1.6; Rillaboom − Archaludon −5.1 ± 1.7; Rillaboom − Gholdengo −3.0 ± 1.1.
   - Archaludon's edge is Rain (72.9 vs 28.8 / 11.6) and Rain+Sun. Gholdengo is better vs Indeedee TR (60.7 vs 43.8) and TR (74.2 vs 61.7); Rillaboom vs Snow.
 - **Perish source decision (Oct 6):** archetype-model climbs keep `TS_PERISH=real` (models' Perish gap +1.21). A pool-based climb scores Perish from the pool's sim games (gap +0.37, in line with Rain −0.33 and Snow's under-rating), so team-specific Perish answers count.
+- **Pool-based climbs built (Oct 6, 11:30 am; `poolmode.py`, `TS_OPP=pool`):**
+  - The user chose two pool-based climbs, with the miss rule (v20m) and without it (v20g, the control), and brings per core group.
+  - Bring groups: the 28 core groups with ≥1% of regional sheets and ≥8 pool entries ('other' split by rule archetype), 96% of the meta, weighted by regional share (`pool_keys.json`, aggregate counts only).
+  - Screening: per group, the outcome model's top 3 brings (against the group's species profile from its entries) × 2 entries; the best bring is kept. Confirm: 8 entries per group per batch, one game each.
+  - Entries are drawn per (group, seed): the same for every team in a batch, new each batch. Full engine data, SEED_PER_JOB=1. Perish is played.
+  - `climb.paired` weights jobs by `w_job`. Env files `cloud/run_env_pool.sh` and `cloud/run_env_poolmiss.sh`; relaunch and auto_rounds take RUN_ENV, CLIMB_SESSION and CLIMB_LOG, and kill only their own climb's processes.
+  - Plumbing test passed: one start, test mode, v20m. References: `cloud/reference_v20m.json`, `cloud/reference_pool.json`.

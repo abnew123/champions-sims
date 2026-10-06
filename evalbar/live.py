@@ -1,6 +1,7 @@
 """Live spectator mode: the eval bar on a Showdown battle that is going on now, for watching other people's games. Never use it on a game
 you are playing, and never pass what it shows to a player during their game.
-  python3 evalbar/live.py list [bo1|bo3]                      ongoing Reg M-C battles: rating and link, highest rated first (Bo3: newest first)
+  python3 evalbar/live.py list [bo1|bo3] [all]                ongoing Reg M-C battles, 8 of each (all: every one): the highest rated
+                                                              Bo1 games, the newest Bo3 games (Bo3 rooms show no rating)
   python3 evalbar/live.py watch <room or battle URL> [threads=2] [port=8768]
                                                               follows the battle and serves the page at http://localhost:<port>
 It knows what a spectator knows at the start of each turn: both team previews, the Bo3 open team sheets (Bo1: each species' most common
@@ -20,13 +21,17 @@ def room_of(x):
     m = re.search(r'(battle-[a-z0-9]+-\d+(?:-[a-z0-9]+)?)', x)
     if not m: sys.exit(f'not a battle room or URL: {x}')
     return m.group(1)
-def listing(kind):
+def listing(kind, n=8):
     out = []
     for fmt in ([FORMATS[kind]] if kind else FORMATS.values()):
         r = subprocess.run(NODE + [FEED, 'list', fmt], capture_output=True, text=True, timeout=30)
         out += [{**json.loads(l), 'format': 'Bo3' if fmt.endswith('bo3') else 'Bo1'} for l in r.stdout.splitlines() if l.strip()]
     out.sort(key=lambda x: (-(x['elo'] or 0), -int(re.search(r'-(\d+)(?:-[a-z0-9]+)?$', x['room']).group(1))))   # Bo3 rooms show no rating: newest first
-    for x in out: print(f"{x['format']}  rating {x['elo'] or '-':>5}  https://play.pokemonshowdown.com/{x['room']}")
+    for fmt in ('Bo1', 'Bo3'):
+        rows = [x for x in out if x['format'] == fmt]
+        if not rows: continue
+        print(f"{fmt}: {len(rows)} battles going on" + (f", the {min(n, len(rows))} {'highest rated' if fmt == 'Bo1' else 'newest (Bo3 shows no rating)'}" if len(rows) > n else ''))
+        for x in rows[:n]: print(f"  {'rating ' + str(x['elo']) if x['elo'] else 'no rating  ' if fmt == 'Bo1' else ''}  https://play.pokemonshowdown.com/{x['room']}".replace('    https', '  https'))
 def reveals(log):
     """what each Pokemon has shown so far: {(side, species): {'moves': [...], 'item': str, 'ability': str}}"""
     who = {}; out = collections.defaultdict(lambda: {'moves': [], 'item': '', 'ability': ''})
@@ -239,7 +244,9 @@ class Live:
 if __name__ == '__main__':
     a = sys.argv[1:]
     if not a: sys.exit(__doc__)
-    if a[0] == 'list': listing(a[1] if len(a) > 1 else None)
+    if a[0] == 'list':
+        k = [x for x in a[1:] if x in FORMATS]; n = 1000 if 'all' in a[1:] else 8
+        listing(k[0] if k else None, n)
     elif a[0] == 'watch':
         try: Live(room_of(a[1]), int(a[2]) if len(a) > 2 else 2, int(a[3]) if len(a) > 3 else 8768).run()
         except KeyboardInterrupt: pass

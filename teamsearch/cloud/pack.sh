@@ -3,10 +3,10 @@
 # Leaves out node_modules (setup.sh reinstalls Showdown), old results, the Mac binaries, teamsearch/runs (battle outputs),
 # the first AWS climb's results and any local climb state or pre-filter caches (so a new climb on the box starts fresh), and
 # regmatch/ and bring/previews.json (names; the climb needs neither: perish_stock.json and the fitted bring models cover them).
-# usage: teamsearch/cloud/pack.sh [battle source tarball, default src_battle_v13.tar.gz]
+# usage: teamsearch/cloud/pack.sh [battle source tarball, default src_battle_v16.tar.gz]
 set -e
 cd "$(dirname "$0")/../.."                      # project root
-SRC=${1:-src_battle_v13.tar.gz}
+SRC=${1:-src_battle_v16.tar.gz}
 OUT=teamsearch/cloud/bundle.tar.gz
 EGV=$(ls pssim/egvalue*.json 2>/dev/null || true)            # all value files (small); TS_SIM picks one
 COPYFILE_DISABLE=1 tar --no-xattrs -czf "$OUT" \

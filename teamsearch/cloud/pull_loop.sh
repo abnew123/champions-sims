@@ -16,7 +16,7 @@ while [ $(( $(date +%s) - start )) -lt 36000 ]; do
        "ubuntu@$HOST:champions-sims/teamsearch/climb_*" "ubuntu@$HOST:champions-sims/teamsearch/round*.log" \
        "ubuntu@$HOST:champions-sims/teamsearch/runs" "$DEST/" 2>/dev/null; rc=$?
   if [ $rc -eq 0 ] || [ $rc -eq 23 ] || [ $rc -eq 24 ]; then          # 23/24: some files vanished or changed mid-copy (battles finishing): fine
-    fails=0; echo "$(date '+%-I:%M %p') pulled: $(tail -1 "$DEST/round.log" 2>/dev/null)" >> "$DEST/pull.log"
+    fails=0; echo "$(date '+%-I:%M %p') pulled: $(tail -qn1 "$DEST"/round*.log 2>/dev/null | tr '\n' '|')" >> "$DEST/pull.log"
   else
     fails=$((fails + 1)); echo "$(date '+%-I:%M %p') unreachable ($fails, rsync $rc)" >> "$DEST/pull.log"
     [ $fails -ge 2 ] && { echo "$(date '+%-I:%M %p') instance gone: stopping" >> "$DEST/pull.log"; exit 0; }

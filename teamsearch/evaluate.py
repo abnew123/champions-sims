@@ -53,6 +53,10 @@ SIMS = {
     # accuracy roll's final hit chance p becomes max(0, 2p - 100), accuracy-true cases untouched, a rule miss is an ordinary miss
     'v19g': dict(bin='champ-battle-v19', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg')),
     'v19m': dict(bin='champ-battle-v19', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg', MISS_DOUBLE='0')),
+    # v20 = v19 + a recharge fix (after Hyper Beam a Pokemon had no legal option and ~6% of pool games ended early); games without a
+    # recharge turn are identical. The miss-doubling climb runs as v20m.
+    'v20g': dict(bin='champ-battle-v20', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg')),
+    'v20m': dict(bin='champ-battle-v20', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg', MISS_DOUBLE='0')),
 }
 def sim(): return os.environ.get('TS_SIM', 'v3')
 def out_tag(seed0, per_job): return f'{seed0}_{per_job}' if sim() == 'v3' else f'{sim()}_{seed0}_{per_job}'

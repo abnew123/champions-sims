@@ -28,5 +28,21 @@
  },
  "exploit_move_among_equally_good_options_at_0.2": 0.93,
  "equally_good_options_per_turn_median": 4,
- "note": "the per-game figure sums per-turn gains along the observed games; real gains saturate as a game gets decided and shorten when ahead, so read it as an upper estimate"
+ "note": "the per-game figure sums per-turn gains along the observed games; real gains saturate as a game gets decided and shorten when ahead, so read it as an upper estimate",
+ "timing": {
+  "10pct_every_turn_per_game": 0.153,
+  "20pct_best_third_per_game": 0.16,
+  "20pct_random_third_per_game": 0.102,
+  "best_third_beats_every_turn_share_of_games": 0.66,
+  "top_third_share_of_read_value": 0.53,
+  "value_of_20pct_read_by_turn": {
+   "1": 0.051,
+   "2": 0.038,
+   "3": 0.045,
+   "4": 0.046,
+   "5": 0.038,
+   "6": 0.041,
+   "7+": 0.035
+  }
+ }
 }

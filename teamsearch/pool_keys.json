@@ -1,0 +1,181 @@
+{
+ "source": "regional team sheets tagged with pssim core rules (results/core_rules_both_100.json); other split by pro_replays.arch",
+ "regional_teams": 2531,
+ "keys": {
+  "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)": {
+   "regional": 346,
+   "share": 0.1367048597392335,
+   "pool": 761
+  },
+  "other/Tailwind": {
+   "regional": 259,
+   "share": 0.10233109442907941,
+   "pool": 739
+  },
+  "other/Balance": {
+   "regional": 163,
+   "share": 0.06440142236270249,
+   "pool": 902
+  },
+  "Rain: Archaludon + Pelipper (no Grimmsnarl)": {
+   "regional": 139,
+   "share": 0.05491900434610826,
+   "pool": 414
+  },
+  "other/Sun": {
+   "regional": 136,
+   "share": 0.053733702094033976,
+   "pool": 590
+  },
+  "Indeedee TR: Armarouge + Indeedee-F": {
+   "regional": 110,
+   "share": 0.043461082576056895,
+   "pool": 283
+  },
+  "other/Trick Room": {
+   "regional": 102,
+   "share": 0.040300276570525484,
+   "pool": 324
+  },
+  "Sand: Excadrill + Salamence + Sneasler + Tyranitar": {
+   "regional": 90,
+   "share": 0.03555906756222837,
+   "pool": 205
+  },
+  "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)": {
+   "regional": 88,
+   "share": 0.03476886606084552,
+   "pool": 185
+  },
+  "other/Snow": {
+   "regional": 86,
+   "share": 0.03397866455946266,
+   "pool": 337
+  },
+  "other/Indeedee TR": {
+   "regional": 85,
+   "share": 0.033583563808771234,
+   "pool": 259
+  },
+  "Balance: Gholdengo + Incineroar + Raichu + Rillaboom": {
+   "regional": 82,
+   "share": 0.03239826155669696,
+   "pool": 605
+  },
+  "Rain + Sun: Archaludon + Grimmsnarl + Pelipper": {
+   "regional": 75,
+   "share": 0.029632556301856974,
+   "pool": 388
+  },
+  "Snow: Froslass + Kingambit + Rillaboom": {
+   "regional": 74,
+   "share": 0.029237455551165546,
+   "pool": 289
+  },
+  "Rain + Sun: Archaludon + Golisopod + Politoed": {
+   "regional": 71,
+   "share": 0.02805215329909127,
+   "pool": 160
+  },
+  "Perish: Archaludon + Politoed (no Golisopod)": {
+   "regional": 64,
+   "share": 0.025286448044251283,
+   "pool": 176
+  },
+  "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)": {
+   "regional": 58,
+   "share": 0.022915843540102725,
+   "pool": 101
+  },
+  "other/Rain": {
+   "regional": 45,
+   "share": 0.017779533781114184,
+   "pool": 447
+  },
+  "Indeedee TR: Camerupt + Farigiraf": {
+   "regional": 44,
+   "share": 0.01738443303042276,
+   "pool": 128
+  },
+  "Sun: Charizard + Whimsicott": {
+   "regional": 43,
+   "share": 0.01698933227973133,
+   "pool": 116
+  },
+  "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)": {
+   "regional": 42,
+   "share": 0.016594231529039907,
+   "pool": 147
+  },
+  "Indeedee TR: Basculegion + Whimsicott": {
+   "regional": 41,
+   "share": 0.01619913077834848,
+   "pool": 92
+  },
+  "other/Sand": {
+   "regional": 38,
+   "share": 0.0150138285262742,
+   "pool": 97
+  },
+  "Indeedee TR: Metagross + Milotic + Sneasler": {
+   "regional": 34,
+   "share": 0.013433425523508494,
+   "pool": 41
+  },
+  "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler": {
+   "regional": 33,
+   "share": 0.013038324772817068,
+   "pool": 89
+  },
+  "other/Perish": {
+   "regional": 32,
+   "share": 0.012643224022125641,
+   "pool": 196
+  },
+  "Trick Room: Delphox + Floette + Incineroar + Sinistcha": {
+   "regional": 31,
+   "share": 0.012248123271434215,
+   "pool": 85
+  },
+  "Sand: Excadrill + Tyranitar": {
+   "regional": 29,
+   "share": 0.011457921770051362,
+   "pool": 191
+  },
+  "Perish: Gengar + Kommo-o + Rillaboom": {
+   "regional": 25,
+   "share": 0.009877518767285659,
+   "pool": 112
+  },
+  "Balance: Dragonite + Floette + Incineroar": {
+   "regional": 19,
+   "share": 0.0075069142631371,
+   "pool": 145
+  },
+  "Tailwind: Glimmora + Rillaboom + Volcarona (no Basculegion)": {
+   "regional": 15,
+   "share": 0.005926511260371394,
+   "pool": 72
+  },
+  "Trick Room: Delphox + Incineroar + Sinistcha (no Floette)": {
+   "regional": 12,
+   "share": 0.004741209008297116,
+   "pool": 89
+  },
+  "Snow: Basculegion + Glimmora + Rillaboom + Volcarona": {
+   "regional": 11,
+   "share": 0.00434610825760569,
+   "pool": 39
+  },
+  "Sun: Farigiraf + Garchomp + Incineroar + Sylveon": {
+   "regional": 6,
+   "share": 0.002370604504148558,
+   "pool": 185
+  },
+  "other/Rain + Sun": {
+   "regional": 3,
+   "share": 0.001185302252074279,
+   "pool": 3
+  }
+ }
+}

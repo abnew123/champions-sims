@@ -209,13 +209,21 @@ def parallel(fn, items, label):
         return r
     with ThreadPoolExecutor(par) as ex: return list(ex.map(one, items))
 
+def pool_mode(): return os.environ.get('TS_OPP') == 'pool'        # real-game opponent pool (poolmode.py) instead of archetype models
+
 def search_many(teams, seed0):
     thr = int(os.environ.get('TS_THREADS', 3))
+    if pool_mode():
+        import poolmode
+        return parallel(lambda t: poolmode.search_team(t, seed0, thr), teams, f'bring search (seed {seed0})')
     return parallel(lambda t: search_team(t, seed0, thr), teams, f'bring search (seed {seed0})')
 
 def evaluate_fixed(teams, brings, per_job, seed0):
     """fresh paired games with given brings per team (brings[i] = {arch: (lead gids, back gids)})"""
     thr = int(os.environ.get('TS_THREADS', 3))
+    if pool_mode():                                                    # (pool entries are one game each; per_job is not used)
+        import poolmode
+        return parallel(lambda tb: poolmode.evaluate_team(tb[0], tb[1], seed0, thr), list(zip(teams, brings)), f'confirm games (seed {seed0})')
     return parallel(lambda tb: run_team(tb[0], per_job, seed0, thr, fixed=tb[1], label=f'fx{hashlib.md5(json.dumps(tb[1], sort_keys=True).encode()).hexdigest()[:8]}'),
                     list(zip(teams, brings)), f'confirm games (seed {seed0})')
 

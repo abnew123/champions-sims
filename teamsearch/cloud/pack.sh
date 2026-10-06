@@ -11,9 +11,10 @@ OUT=teamsearch/cloud/bundle.tar.gz
 EGV=$(ls pssim/egvalue*.json 2>/dev/null || true)            # all value files (small); TS_SIM picks one
 COPYFILE_DISABLE=1 tar --no-xattrs -czf "$OUT" \
   --exclude 'teamsearch/runs' --exclude 'teamsearch/cloud/bundle.tar.gz' --exclude 'teamsearch/cloud_results' \
-  --exclude 'teamsearch/regmatch' --exclude 'teamsearch/bring/previews.json' --exclude 'teamsearch/climb_*' --exclude 'teamsearch/decomp_threads.txt' --exclude '__pycache__' --exclude '*.log' \
+  --exclude 'teamsearch/regmatch' --exclude 'teamsearch/bring/previews.json' --exclude 'teamsearch/climb_*' --exclude 'teamsearch/cache_*' --exclude 'teamsearch/decomp_threads.txt' --exclude '__pycache__' --exclude '*.log' \
   setup.sh foes.json \
-  pssim/package.json pssim/package-lock.json pssim/engine_patch pssim/t1sim.js pssim/seedmix.js pssim/pro_replays.py \
+  pssim/package.json pssim/package-lock.json pssim/engine_patch pssim/t1sim.js pssim/seedmix.js pssim/pro_replays.py pssim/cluster_opps.py pssim/opp_pool.py pssim/opp_pool.json \
+  pssim/results/core_rules_both_100.json native/engine_data_full.json \
   pssim/opp_model_a.json pssim/opp_model_b.json pssim/myteam_c_incin.json $EGV \
   native/battle_starts.js native/export_state.js native/engine_data_spot.json native/champions_data.json \
   "native/champ/$SRC" native/champ/bin/*.sha256 \

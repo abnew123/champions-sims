@@ -1,0 +1,1602 @@
+{
+ "Frankfurt-04": {
+  "hurricane": 0.6661760454795717,
+  "solar_beam": 0.6591581750677664,
+  "diff": -0.00701787041180519,
+  "se": 0.006274376592628256,
+  "by_arch": {
+   "Tailwind goodstuffs": [
+    0.6853343420062127,
+    0.6853343420062127
+   ],
+   "Sun": [
+    0.7178490794277064,
+    0.7178490794277064
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    0.5703463203463204,
+    0.5703463203463204
+   ],
+   "Rain": [
+    0.6961152882205514,
+    0.6480263157894738
+   ],
+   "Balance, no speed control": [
+    0.6405780780780781,
+    0.6405780780780781
+   ],
+   "Sand": [
+    0.7972870795846543,
+    0.7972870795846543
+   ],
+   "Snow": [
+    0.7092627013630731,
+    0.7092627013630731
+   ],
+   "Trick Room without Indeedee": [
+    0.5911226238029933,
+    0.6056067507871202
+   ],
+   "Rain + sun": [
+    0.47785563737117237,
+    0.38879609753848937
+   ]
+  },
+  "brings_hurricane": {
+   "Tailwind goodstuffs": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Gholdengo#2",
+     "Kingambit#3"
+    ]
+   ],
+   "Sun": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Gholdengo#2",
+     "Incineroar#2"
+    ]
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Gholdengo#2",
+     "Kingambit#3"
+    ]
+   ],
+   "Rain": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#2"
+    ],
+    [
+     "Gholdengo#2",
+     "Kingambit#3"
+    ]
+   ],
+   "Balance, no speed control": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Gholdengo#2",
+     "Incineroar#2"
+    ]
+   ],
+   "Sand": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Gholdengo#2",
+     "Incineroar#2"
+    ]
+   ],
+   "Snow": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Incineroar#2",
+     "Kingambit#3"
+    ]
+   ],
+   "Trick Room without Indeedee": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Gholdengo#2",
+     "Incineroar#2"
+    ]
+   ],
+   "Rain + sun": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#2"
+    ],
+    [
+     "Gholdengo#2",
+     "Incineroar#2"
+    ]
+   ]
+  },
+  "brings_solar_beam": {
+   "Tailwind goodstuffs": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Gholdengo#2",
+     "Kingambit#3"
+    ]
+   ],
+   "Sun": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Gholdengo#2",
+     "Incineroar#2"
+    ]
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Gholdengo#2",
+     "Kingambit#3"
+    ]
+   ],
+   "Rain": [
+    [
+     "M-Charizard Y#5",
+     "Kingambit#3"
+    ],
+    [
+     "Gholdengo#2",
+     "Garchomp#1"
+    ]
+   ],
+   "Balance, no speed control": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Gholdengo#2",
+     "Incineroar#2"
+    ]
+   ],
+   "Sand": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Gholdengo#2",
+     "Incineroar#2"
+    ]
+   ],
+   "Snow": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Incineroar#2",
+     "Kingambit#3"
+    ]
+   ],
+   "Trick Room without Indeedee": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Gholdengo#2",
+     "Incineroar#2"
+    ]
+   ],
+   "Rain + sun": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#5"
+    ],
+    [
+     "Gholdengo#2",
+     "Kingambit#3"
+    ]
+   ]
+  }
+ },
+ "Baltimore-12-final": {
+  "hurricane": 0.6873657788641366,
+  "solar_beam": 0.7149824554284603,
+  "diff": 0.027616676564323487,
+  "se": 0.009872814190528186,
+  "by_arch": {
+   "Tailwind goodstuffs": [
+    0.8746679946879151,
+    0.8746679946879151
+   ],
+   "Sun": [
+    0.6556628574309681,
+    0.6556628574309681
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    0.5988455988455988,
+    0.5988455988455988
+   ],
+   "Rain": [
+    0.43327067669172936,
+    0.7425586124569694
+   ],
+   "Balance, no speed control": [
+    0.6713588588588588,
+    0.6713588588588588
+   ],
+   "Sand": [
+    0.8504509398946359,
+    0.8504509398946359
+   ],
+   "Snow": [
+    0.554368029739777,
+    0.554368029739777
+   ],
+   "Trick Room without Indeedee": [
+    0.6530337615035932,
+    0.6482199290003912
+   ],
+   "Rain + sun": [
+    0.5851377952755906,
+    0.4476823433570393
+   ]
+  },
+  "brings_hurricane": {
+   "Tailwind goodstuffs": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Kingambit#1",
+     "Incineroar#2"
+    ]
+   ],
+   "Sun": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Archaludon#3",
+     "Incineroar#2"
+    ]
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Archaludon#3",
+     "Incineroar#2"
+    ]
+   ],
+   "Rain": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Kingambit#1",
+     "Archaludon#3"
+    ]
+   ],
+   "Balance, no speed control": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Kingambit#1",
+     "Archaludon#3"
+    ]
+   ],
+   "Sand": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Archaludon#3",
+     "Incineroar#2"
+    ]
+   ],
+   "Snow": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Archaludon#3",
+     "Incineroar#2"
+    ]
+   ],
+   "Trick Room without Indeedee": [
+    [
+     "Garchomp#1",
+     "Incineroar#2"
+    ],
+    [
+     "Archaludon#3",
+     "M-Charizard Y#2"
+    ]
+   ],
+   "Rain + sun": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Kingambit#1",
+     "Archaludon#3"
+    ]
+   ]
+  },
+  "brings_solar_beam": {
+   "Tailwind goodstuffs": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Kingambit#1",
+     "Incineroar#2"
+    ]
+   ],
+   "Sun": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Archaludon#3",
+     "Incineroar#2"
+    ]
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Archaludon#3",
+     "Incineroar#2"
+    ]
+   ],
+   "Rain": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#5"
+    ],
+    [
+     "Kingambit#1",
+     "Archaludon#3"
+    ]
+   ],
+   "Balance, no speed control": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Kingambit#1",
+     "Archaludon#3"
+    ]
+   ],
+   "Sand": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Archaludon#3",
+     "Incineroar#2"
+    ]
+   ],
+   "Snow": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Archaludon#3",
+     "Incineroar#2"
+    ]
+   ],
+   "Trick Room without Indeedee": [
+    [
+     "Garchomp#1",
+     "Incineroar#2"
+    ],
+    [
+     "Archaludon#3",
+     "M-Charizard Y#5"
+    ]
+   ],
+   "Rain + sun": [
+    [
+     "Archaludon#3",
+     "M-Charizard Y#5"
+    ],
+    [
+     "Garchomp#1",
+     "Kingambit#1"
+    ]
+   ]
+  }
+ },
+ "Frankfurt-10": {
+  "hurricane": 0.6736261922480574,
+  "solar_beam": 0.6823097765783098,
+  "diff": 0.008683584330252571,
+  "se": 0.0055462471384066,
+  "by_arch": {
+   "Tailwind goodstuffs": [
+    0.7488379814077025,
+    0.7488379814077025
+   ],
+   "Sun": [
+    0.6498019558153704,
+    0.6422470107604252
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    0.5718249162913293,
+    0.5718249162913293
+   ],
+   "Rain": [
+    0.6940789473684211,
+    0.7367225671436842
+   ],
+   "Balance, no speed control": [
+    0.6507132132132132,
+    0.6507132132132132
+   ],
+   "Sand": [
+    0.6704700796140605,
+    0.6704700796140605
+   ],
+   "Snow": [
+    0.8272924411400248,
+    0.8272924411400248
+   ],
+   "Trick Room without Indeedee": [
+    0.5734925137225684,
+    0.5734925137225684
+   ],
+   "Rain + sun": [
+    0.5221456692913385,
+    0.6770728711229553
+   ]
+  },
+  "brings_hurricane": {
+   "Tailwind goodstuffs": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Incineroar#67",
+     "Archaludon#3"
+    ]
+   ],
+   "Sun": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Incineroar#67",
+     "Archaludon#3"
+    ]
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Archaludon#3",
+     "Kingambit#3"
+    ]
+   ],
+   "Rain": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#2"
+    ],
+    [
+     "Archaludon#3",
+     "Kingambit#3"
+    ]
+   ],
+   "Balance, no speed control": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Incineroar#67",
+     "Archaludon#3"
+    ]
+   ],
+   "Sand": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Incineroar#67",
+     "Kingambit#3"
+    ]
+   ],
+   "Snow": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Incineroar#67",
+     "Kingambit#3"
+    ]
+   ],
+   "Trick Room without Indeedee": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Archaludon#3",
+     "Kingambit#3"
+    ]
+   ],
+   "Rain + sun": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Archaludon#3",
+     "Kingambit#3"
+    ]
+   ]
+  },
+  "brings_solar_beam": {
+   "Tailwind goodstuffs": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Incineroar#67",
+     "Archaludon#3"
+    ]
+   ],
+   "Sun": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Incineroar#67",
+     "Archaludon#3"
+    ]
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Archaludon#3",
+     "Kingambit#3"
+    ]
+   ],
+   "Rain": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#5"
+    ],
+    [
+     "Archaludon#3",
+     "Kingambit#3"
+    ]
+   ],
+   "Balance, no speed control": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Incineroar#67",
+     "Archaludon#3"
+    ]
+   ],
+   "Sand": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Incineroar#67",
+     "Kingambit#3"
+    ]
+   ],
+   "Snow": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Incineroar#67",
+     "Kingambit#3"
+    ]
+   ],
+   "Trick Room without Indeedee": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Archaludon#3",
+     "Kingambit#3"
+    ]
+   ],
+   "Rain + sun": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#5"
+    ],
+    [
+     "Incineroar#67",
+     "Archaludon#3"
+    ]
+   ]
+  }
+ },
+ "Baltimore-08": {
+  "hurricane": 0.6575177607167005,
+  "solar_beam": 0.6668082346929908,
+  "diff": 0.009290473976290075,
+  "se": 0.006049996974500854,
+  "by_arch": {
+   "Tailwind goodstuffs": [
+    0.8059428950863213,
+    0.8059428950863213
+   ],
+   "Sun": [
+    0.5614863170410539,
+    0.5609429818069064
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    0.644524144312599,
+    0.644524144312599
+   ],
+   "Rain": [
+    0.6716791979949873,
+    0.6881598364043398
+   ],
+   "Balance, no speed control": [
+    0.6465840840840841,
+    0.6465840840840841
+   ],
+   "Sand": [
+    0.7648297171553718,
+    0.7648297171553718
+   ],
+   "Snow": [
+    0.5614931846344485,
+    0.5614931846344485
+   ],
+   "Trick Room without Indeedee": [
+    0.4559475085456181,
+    0.5017201362710377
+   ],
+   "Rain + sun": [
+    0.33209179874661415,
+    0.47022637795275596
+   ]
+  },
+  "brings_hurricane": {
+   "Tailwind goodstuffs": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Kingambit#1",
+     "Incineroar#17"
+    ]
+   ],
+   "Sun": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Kingambit#1",
+     "Rillaboom#1"
+    ]
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Rillaboom#1",
+     "Incineroar#17"
+    ]
+   ],
+   "Rain": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#2"
+    ],
+    [
+     "Kingambit#1",
+     "Rillaboom#1"
+    ]
+   ],
+   "Balance, no speed control": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Rillaboom#1",
+     "Incineroar#17"
+    ]
+   ],
+   "Sand": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Rillaboom#1",
+     "Incineroar#17"
+    ]
+   ],
+   "Snow": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Kingambit#1",
+     "Rillaboom#1"
+    ]
+   ],
+   "Trick Room without Indeedee": [
+    [
+     "Garchomp#1",
+     "Incineroar#17"
+    ],
+    [
+     "Rillaboom#1",
+     "M-Charizard Y#2"
+    ]
+   ],
+   "Rain + sun": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Kingambit#1",
+     "Rillaboom#1"
+    ]
+   ]
+  },
+  "brings_solar_beam": {
+   "Tailwind goodstuffs": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Kingambit#1",
+     "Incineroar#17"
+    ]
+   ],
+   "Sun": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Kingambit#1",
+     "Rillaboom#1"
+    ]
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Rillaboom#1",
+     "Incineroar#17"
+    ]
+   ],
+   "Rain": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#5"
+    ],
+    [
+     "Kingambit#1",
+     "Rillaboom#1"
+    ]
+   ],
+   "Balance, no speed control": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Rillaboom#1",
+     "Incineroar#17"
+    ]
+   ],
+   "Sand": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Rillaboom#1",
+     "Incineroar#17"
+    ]
+   ],
+   "Snow": [
+    [
+     "Garchomp#1",
+     "M-Delphox#1"
+    ],
+    [
+     "Kingambit#1",
+     "Rillaboom#1"
+    ]
+   ],
+   "Trick Room without Indeedee": [
+    [
+     "Garchomp#1",
+     "Incineroar#17"
+    ],
+    [
+     "Rillaboom#1",
+     "M-Charizard Y#5"
+    ]
+   ],
+   "Rain + sun": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#5"
+    ],
+    [
+     "Rillaboom#1",
+     "Incineroar#17"
+    ]
+   ]
+  }
+ },
+ "Brisbane-01": {
+  "hurricane": 0.6370210338951455,
+  "solar_beam": 0.6265442766677612,
+  "diff": -0.010476757227384156,
+  "se": 0.01816143616910969,
+  "by_arch": {
+   "Tailwind goodstuffs": [
+    0.6638446215139441,
+    0.6241699867197874
+   ],
+   "Sun": [
+    0.6433423379492016,
+    0.6504173996884374
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    0.6062000712482932,
+    0.6125132025614245
+   ],
+   "Rain": [
+    0.8056994042410796,
+    0.7286967418546366
+   ],
+   "Balance, no speed control": [
+    0.6371224130059535,
+    0.7028903903903904
+   ],
+   "Sand": [
+    0.6457265520812224,
+    0.5476864966949954
+   ],
+   "Snow": [
+    0.5241635687732341,
+    0.4848203221809169
+   ],
+   "Trick Room without Indeedee": [
+    0.6135439338562775,
+    0.6836792378055838
+   ],
+   "Rain + sun": [
+    0.4392224409448819,
+    0.6658860034265649
+   ]
+  },
+  "brings_hurricane": {
+   "Tailwind goodstuffs": [
+    [
+     "M-Charizard Y#2",
+     "Garchomp#1"
+    ],
+    [
+     "Archaludon#1",
+     "Pelipper#1"
+    ]
+   ],
+   "Sun": [
+    [
+     "M-Charizard Y#2",
+     "Garchomp#1"
+    ],
+    [
+     "Archaludon#1",
+     "Pelipper#1"
+    ]
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    [
+     "M-Charizard Y#2",
+     "Garchomp#1"
+    ],
+    [
+     "Archaludon#1",
+     "Pelipper#1"
+    ]
+   ],
+   "Rain": [
+    [
+     "Garchomp#1",
+     "Venusaur#1"
+    ],
+    [
+     "Archaludon#1",
+     "M-Charizard Y#2"
+    ]
+   ],
+   "Balance, no speed control": [
+    [
+     "Garchomp#1",
+     "Venusaur#1"
+    ],
+    [
+     "Archaludon#1",
+     "M-Charizard Y#2"
+    ]
+   ],
+   "Sand": [
+    [
+     "M-Charizard Y#2",
+     "Garchomp#1"
+    ],
+    [
+     "Archaludon#1",
+     "Pelipper#1"
+    ]
+   ],
+   "Snow": [
+    [
+     "M-Charizard Y#2",
+     "Garchomp#1"
+    ],
+    [
+     "Archaludon#1",
+     "Pelipper#1"
+    ]
+   ],
+   "Trick Room without Indeedee": [
+    [
+     "Grimmsnarl#1",
+     "Garchomp#1"
+    ],
+    [
+     "Archaludon#1",
+     "M-Charizard Y#2"
+    ]
+   ],
+   "Rain + sun": [
+    [
+     "Archaludon#1",
+     "Garchomp#1"
+    ],
+    [
+     "Pelipper#1",
+     "M-Charizard Y#2"
+    ]
+   ]
+  },
+  "brings_solar_beam": {
+   "Tailwind goodstuffs": [
+    [
+     "Garchomp#1",
+     "Venusaur#1"
+    ],
+    [
+     "Archaludon#1",
+     "M-Charizard Y#5"
+    ]
+   ],
+   "Sun": [
+    [
+     "M-Charizard Y#5",
+     "Garchomp#1"
+    ],
+    [
+     "Archaludon#1",
+     "Pelipper#1"
+    ]
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    [
+     "M-Charizard Y#5",
+     "Garchomp#1"
+    ],
+    [
+     "Archaludon#1",
+     "Pelipper#1"
+    ]
+   ],
+   "Rain": [
+    [
+     "Archaludon#1",
+     "M-Charizard Y#5"
+    ],
+    [
+     "Pelipper#1",
+     "Garchomp#1"
+    ]
+   ],
+   "Balance, no speed control": [
+    [
+     "Garchomp#1",
+     "Venusaur#1"
+    ],
+    [
+     "Archaludon#1",
+     "M-Charizard Y#5"
+    ]
+   ],
+   "Sand": [
+    [
+     "M-Charizard Y#5",
+     "Garchomp#1"
+    ],
+    [
+     "Archaludon#1",
+     "Pelipper#1"
+    ]
+   ],
+   "Snow": [
+    [
+     "M-Charizard Y#5",
+     "Garchomp#1"
+    ],
+    [
+     "Archaludon#1",
+     "Grimmsnarl#1"
+    ]
+   ],
+   "Trick Room without Indeedee": [
+    [
+     "M-Charizard Y#5",
+     "Garchomp#1"
+    ],
+    [
+     "Archaludon#1",
+     "Pelipper#1"
+    ]
+   ],
+   "Rain + sun": [
+    [
+     "M-Charizard Y#5",
+     "Garchomp#1"
+    ],
+    [
+     "Archaludon#1",
+     "Venusaur#1"
+    ]
+   ]
+  }
+ },
+ "Baltimore-14": {
+  "hurricane": 0.6216210227117462,
+  "solar_beam": 0.6365419733618582,
+  "diff": 0.014920950650112045,
+  "se": 0.008674774439649756,
+  "by_arch": {
+   "Tailwind goodstuffs": [
+    0.7657702523240371,
+    0.7657702523240371
+   ],
+   "Sun": [
+    0.3468390958153185,
+    0.3468390958153185
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    0.45815295815295815,
+    0.45815295815295815
+   ],
+   "Rain": [
+    0.6550921618896358,
+    0.7525605247525021
+   ],
+   "Balance, no speed control": [
+    0.6366366366366366,
+    0.6593147613827849
+   ],
+   "Sand": [
+    0.8167810601213022,
+    0.8167810601213022
+   ],
+   "Snow": [
+    0.5594795539033457,
+    0.534541511771995
+   ],
+   "Trick Room without Indeedee": [
+    0.5718586037729482,
+    0.6354556157257562
+   ],
+   "Rain + sun": [
+    0.7244094488188977,
+    0.7323450377136402
+   ]
+  },
+  "brings_hurricane": {
+   "Tailwind goodstuffs": [
+    [
+     "Garchomp#1",
+     "Volcarona#2"
+    ],
+    [
+     "Archaludon#1",
+     "M-Salamence#1"
+    ]
+   ],
+   "Sun": [
+    [
+     "Garchomp#1",
+     "Volcarona#2"
+    ],
+    [
+     "Archaludon#1",
+     "M-Salamence#1"
+    ]
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    [
+     "Garchomp#1",
+     "Volcarona#2"
+    ],
+    [
+     "Archaludon#1",
+     "M-Salamence#1"
+    ]
+   ],
+   "Rain": [
+    [
+     "Garchomp#1",
+     "Archaludon#1"
+    ],
+    [
+     "Volcarona#2",
+     "M-Charizard Y#2"
+    ]
+   ],
+   "Balance, no speed control": [
+    [
+     "Garchomp#1",
+     "Volcarona#2"
+    ],
+    [
+     "Archaludon#1",
+     "M-Charizard Y#2"
+    ]
+   ],
+   "Sand": [
+    [
+     "Klefki#2",
+     "Garchomp#1"
+    ],
+    [
+     "Archaludon#1",
+     "M-Salamence#1"
+    ]
+   ],
+   "Snow": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#2"
+    ],
+    [
+     "Klefki#2",
+     "Archaludon#1"
+    ]
+   ],
+   "Trick Room without Indeedee": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#2"
+    ],
+    [
+     "Volcarona#2",
+     "Archaludon#1"
+    ]
+   ],
+   "Rain + sun": [
+    [
+     "Garchomp#1",
+     "Volcarona#2"
+    ],
+    [
+     "Archaludon#1",
+     "M-Charizard Y#2"
+    ]
+   ]
+  },
+  "brings_solar_beam": {
+   "Tailwind goodstuffs": [
+    [
+     "Garchomp#1",
+     "Volcarona#2"
+    ],
+    [
+     "Archaludon#1",
+     "M-Salamence#1"
+    ]
+   ],
+   "Sun": [
+    [
+     "Garchomp#1",
+     "Volcarona#2"
+    ],
+    [
+     "Archaludon#1",
+     "M-Salamence#1"
+    ]
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    [
+     "Garchomp#1",
+     "Volcarona#2"
+    ],
+    [
+     "Archaludon#1",
+     "M-Salamence#1"
+    ]
+   ],
+   "Rain": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#5"
+    ],
+    [
+     "Volcarona#2",
+     "Archaludon#1"
+    ]
+   ],
+   "Balance, no speed control": [
+    [
+     "Garchomp#1",
+     "Volcarona#2"
+    ],
+    [
+     "Archaludon#1",
+     "M-Charizard Y#5"
+    ]
+   ],
+   "Sand": [
+    [
+     "Klefki#2",
+     "Garchomp#1"
+    ],
+    [
+     "Archaludon#1",
+     "M-Salamence#1"
+    ]
+   ],
+   "Snow": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#5"
+    ],
+    [
+     "Klefki#2",
+     "Archaludon#1"
+    ]
+   ],
+   "Trick Room without Indeedee": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#5"
+    ],
+    [
+     "Volcarona#2",
+     "Archaludon#1"
+    ]
+   ],
+   "Rain + sun": [
+    [
+     "Garchomp#1",
+     "Volcarona#2"
+    ],
+    [
+     "Archaludon#1",
+     "M-Charizard Y#5"
+    ]
+   ]
+  }
+ },
+ "sixth: core + Archaludon": {
+  "hurricane": 0.6553006479677195,
+  "solar_beam": 0.6679001726116313,
+  "diff": 0.012599524643911793,
+  "se": 0.007848201163216996,
+  "by_arch": {
+   "Tailwind goodstuffs": [
+    0.8035505751068225,
+    0.8035505751068225
+   ],
+   "Sun": [
+    0.6172022462822808,
+    0.6172022462822808
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    0.4814091276493801,
+    0.4814091276493801
+   ],
+   "Rain": [
+    0.6787280701754387,
+    0.7567726924569674
+   ],
+   "Balance, no speed control": [
+    0.6396396396396397,
+    0.6396396396396397
+   ],
+   "Sand": [
+    0.5542145915976624,
+    0.5542145915976624
+   ],
+   "Snow": [
+    0.7092627013630731,
+    0.7092627013630731
+   ],
+   "Trick Room without Indeedee": [
+    0.6393145952701956,
+    0.6707589746037222
+   ],
+   "Rain + sun": [
+    0.5194826017412727,
+    0.589120962014151
+   ]
+  },
+  "brings_hurricane": {
+   "Tailwind goodstuffs": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Incineroar#2",
+     "Archaludon#3"
+    ]
+   ],
+   "Sun": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Kingambit#3",
+     "Archaludon#3"
+    ]
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    [
+     "M-Delphox#1",
+     "Kingambit#3"
+    ],
+    [
+     "Garchomp#1",
+     "Archaludon#3"
+    ]
+   ],
+   "Rain": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#2"
+    ],
+    [
+     "Kingambit#3",
+     "Archaludon#3"
+    ]
+   ],
+   "Balance, no speed control": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Incineroar#2",
+     "Archaludon#3"
+    ]
+   ],
+   "Sand": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Kingambit#3",
+     "Archaludon#3"
+    ]
+   ],
+   "Snow": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Incineroar#2",
+     "Kingambit#3"
+    ]
+   ],
+   "Trick Room without Indeedee": [
+    [
+     "Garchomp#1",
+     "Incineroar#2"
+    ],
+    [
+     "M-Charizard Y#2",
+     "Archaludon#3"
+    ]
+   ],
+   "Rain + sun": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Incineroar#2",
+     "Archaludon#3"
+    ]
+   ]
+  },
+  "brings_solar_beam": {
+   "Tailwind goodstuffs": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Incineroar#2",
+     "Archaludon#3"
+    ]
+   ],
+   "Sun": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Kingambit#3",
+     "Archaludon#3"
+    ]
+   ],
+   "Indeedee TR / Psychic Terrain": [
+    [
+     "M-Delphox#1",
+     "Kingambit#3"
+    ],
+    [
+     "Garchomp#1",
+     "Archaludon#3"
+    ]
+   ],
+   "Rain": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#5"
+    ],
+    [
+     "Kingambit#3",
+     "Archaludon#3"
+    ]
+   ],
+   "Balance, no speed control": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Incineroar#2",
+     "Archaludon#3"
+    ]
+   ],
+   "Sand": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Kingambit#3",
+     "Archaludon#3"
+    ]
+   ],
+   "Snow": [
+    [
+     "M-Delphox#1",
+     "Garchomp#1"
+    ],
+    [
+     "Incineroar#2",
+     "Kingambit#3"
+    ]
+   ],
+   "Trick Room without Indeedee": [
+    [
+     "Garchomp#1",
+     "Incineroar#2"
+    ],
+    [
+     "M-Charizard Y#5",
+     "Archaludon#3"
+    ]
+   ],
+   "Rain + sun": [
+    [
+     "Garchomp#1",
+     "M-Charizard Y#5"
+    ],
+    [
+     "Kingambit#3",
+     "Archaludon#3"
+    ]
+   ]
+  }
+ },
+ "all teams": {
+  "diff": 0.007945226075100089,
+  "se": 0.00370021322932285
+ }
+}

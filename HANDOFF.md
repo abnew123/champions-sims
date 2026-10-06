@@ -519,7 +519,15 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
       by opponent group with the offset removed. By rule archetype the RMS error falls 0.29 -> 0.18 without Perish and 0.41 -> 0.20
       with it (Tailwind +0.23 -> +0.13, Sun -0.35 -> -0.22, Indeedee TR -0.33 -> +0.09, Balance +0.32 -> +0.13, Rain -0.51 -> -0.33,
       Perish +1.21 -> +0.37); by core-rule group 0.23 vs the regionals (19 groups), 0.15 vs the ladder (12). What remains: Rain and
-      Rain + Sun still too hard, Tailwind / Snow / Perish too easy. **The pool replaces the archetype models as the opponent source**;
+      Rain + Sun still too hard, Tailwind / Snow / Perish too easy. Team search's follow-up on the pool games: each archetype's real
+      ladder win rate vs its sim win rate against our ten (Rain 46.0 / 44.1, Rain + Sun 56.1 / 47.0, Sun 49.6 / 45.3, Tailwind 49.7 /
+      36.3, Balance 53.1 / 36.1, Snow 56.9 / 35.8, Indeedee TR 50.3 / 35.4, Perish 47.8 / 33.4): relative to their real strength, Rain
+      and Sun sixes play 8-10 points stronger under the planner than Tailwind / Balance / Snow / Indeedee sixes; Snow is the strongest
+      archetype in reality and among the weakest in the sim. Reading: the planner pilots "click the boosted move" teams near-perfectly
+      and under-plays teams whose strength is multi-turn sequencing (Tailwind timing, Fake Out + setup, pivoting), the same weakness as
+      the Protect / switch gap in the broadcast study. Cheap check for the Eval bar: regret by the player's archetype on the 560 real
+      games (do Tailwind / Snow / Balance players make choices the planner rates worse yet win more). **The pool replaces the archetype
+      models as the opponent source**;
       the sheets key by core group (nearest archetype name kept), Team search runs a fresh pool-based climb in the daytime (brings per
       opponent team or group, scores weighted by real group shares), the TR sheet's optimal-pick step takes the pool's sixes.
   - **Final setup: champ-battle-v12 + egvalue9.json + RACE=1 + DP2=1 + anticipation** (see the top of this file). What it is: status and

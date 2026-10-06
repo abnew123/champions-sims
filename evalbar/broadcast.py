@@ -135,7 +135,7 @@ class Reader:
     def new_game(s):
         s.out = []; s.games.append(s.out); s.meta.append({}); s.started = False; s.turn = 0; s.in_decision = False; s.ended = False
         s.active = {}; s.hp = {}; s.last_text = None; s.slot_free = {'p1': [], 'p2': []}; s.megas = {'p1': False, 'p2': False}
-        s.fainted = {'p1': set(), 'p2': set()}; s.lead_seen = False
+        s.fainted = {'p1': set(), 'p2': set()}; s.lead_seen = False; s.game_names = collections.Counter(); s.sides_checked = False
     def team(s, sd): return s.sheets.get(sd, [])
     def species(s, sd, name):
         """an OCR'd Pokémon name on side sd -> the species on that side's sheet (Mega names map back to the base)"""
@@ -188,6 +188,7 @@ class Reader:
                 win = 'p1' if left['p2'] == 0 or ('forfeit' not in text and left['p1'] > left['p2']) else 'p2' if left['p1'] == 0 or left['p2'] > left['p1'] else None
                 if win: s.emit('|', f"|win|Player {win[1]}")
                 s.ended = True; s.prev_end = s.frame; s.meta[-1]['end'] = s.now()
+                if s.game_names: s.board = s.game_names.most_common(1)[0][0]      # who played this game, for telling the next one apart
             return
         # field-wide
         FIELD = [(r'twisted the dimensions', '|-fieldstart|move: Trick Room'), (r'dimensions returned to normal', '|-fieldend|move: Trick Room'),
@@ -280,8 +281,10 @@ class Reader:
         sb = scoreboard(L)
         if sb:
             s.names.append(sb)
-            if s.started and s.board is None and len(s.names) >= 5:            # the scoreboard came up after the game started
-                s.board = collections.Counter(s.names).most_common(1)[0][0]; s.check_sides()
+            if s.started and not s.ended:
+                s.game_names[sb] += 1
+                if not s.sides_checked and sum(s.game_names.values()) >= 10:  # the players' names during this game: sheets on the right sides?
+                    s.board = s.game_names.most_common(1)[0][0]; s.check_sides(); s.sides_checked = True
         boxes, decision, turn, text = battle(L)
         if s.ended and decision and len(boxes) >= 3: s.new_game()                       # the next game of the set
         if len(boxes) < 2 and not text: s.in_decision = False if not decision else s.in_decision; return
@@ -289,12 +292,15 @@ class Reader:
             if text and re.search(r'^Go! .+ and .+!$|sent out .+ and .+!$', text): s.lead_seen = True
             fresh = s.lead_seen or turn == 1 or (len(boxes) == 4 and all(p == 100 for n, p in boxes.values()))
             if decision and len(boxes) >= 3 and fresh:
-                board = collections.Counter(s.names).most_common(1)[0][0] if s.names else None
-                other = s.match and board and s.board and not all(difflib.SequenceMatcher(None, a, b).ratio() > 0.7 for a, b in zip(board, s.board))
+                recent = list(s.names)[-240:]                                       # the last two minutes of scoreboard reads
+                board = collections.Counter(recent).most_common(1)[0][0] if recent else None
+                fresh_sheets = sum(1 for fr, o, st in s.raw_sheets if fr > s.prev_end) >= 2
+                if board and s.board: other = not all(difflib.SequenceMatcher(None, a, b).ratio() > 0.7 for a, b in zip(board, s.board))
+                else: other = fresh_sheets                                        # no names to go by: new sheets mean a new match
                 if not s.match or other: s.sheets = {}; s.match += 1; s.game_in_match = 0   # new players: a new match, new sheets
                 if len(s.sheets) < 2: s.owners = {}; s.assign_sheets(boxes, board)
                 if len(s.sheets) < 2: s.note = 'waiting for both team sheets: start before the broadcast shows them'; return
-                s.board = board or s.board; s.game_in_match += 1; s.meta[-1] = {'match': s.match, 'game': s.game_in_match, 'frame': s.frame}
+                s.board = s.board if s.board and not other else None; s.game_in_match += 1; s.meta[-1] = {'match': s.match, 'game': s.game_in_match, 'frame': s.frame}
                 s.note = ''; s.header(boxes); s.turn = turn or 1; s.emit(f'|turn|{s.turn}'); s.in_decision = True; s.mark()
             elif decision and len(boxes) >= 3 and not s.note: s.note = 'joined mid-game: the bar starts with the next game'
             return
@@ -310,10 +316,14 @@ class Reader:
         merged (the fullest read of each Pokémon). A run goes to the side whose scoreboard name matches its header; failing that, to the
         side whose Pokémon on the field it has."""
         runs = []
+        sim = lambda a, b: difflib.SequenceMatcher(None, a, b).ratio() if a and b else 0
         for fr, owner, sets in s.raw_sheets:
-            if fr <= s.prev_end: continue                                     # sheets shown before the last game ended belong to it
-            if runs and fr - runs[-1]['end'] <= 6: runs[-1]['reads'].append(sets); runs[-1]['owners'][owner] += 1; runs[-1]['end'] = fr
-            else: runs.append({'end': fr, 'reads': [sets], 'owners': collections.Counter([owner])})
+            # only sheets shown since the last game ended and in the 20 minutes before this game: others belong to other matches
+            if fr <= s.prev_end or fr < s.frame - 20 * 120: continue
+            sig = frozenset(x['species'].split('-')[0] for x in sets)
+            same = runs and fr - runs[-1]['end'] <= 6 and (sim(owner, runs[-1]['owners'].most_common(1)[0][0]) > 0.6 or len(sig & runs[-1]['sig']) >= 4)
+            if same: runs[-1]['reads'].append(sets); runs[-1]['owners'][owner] += 1; runs[-1]['end'] = fr; runs[-1]['sig'] |= sig
+            else: runs.append({'end': fr, 'reads': [sets], 'owners': collections.Counter([owner]), 'sig': set(sig)})
         full = lambda st: len(st['moves']) + bool(st['item']) + bool(st['ability']) + bool(st['nature'])
         teams = []
         for run in runs:
@@ -322,11 +332,16 @@ class Reader:
                 for st in sets:
                     key = st['species'].split('-')[0]                            # Floette and Floette-Eternal are one entry
                     if key not in by or full(st) > full(by[key]): by[key] = st
-            teams.append((run['owners'].most_common(1)[0][0], [st for st in by.values() if full(st) >= 3]))
-        sim = lambda a, b: difflib.SequenceMatcher(None, a, b).ratio() if a and b else 0
+            teams.append((run['owners'].most_common(1)[0][0], [st for st in by.values() if full(st) >= 3][:6], run['end']))
         on = {sd: {s.species_any(n) for (x, sl), (n, p) in boxes.items() if x == sd} for sd in ('p1', 'p2')}
-        for owner, team in sorted(teams, key=lambda x: len(x[1]), reverse=True):
-            if len(team) < 4 or len(s.sheets) == 2: continue
+        # one sheet per player: the latest read of each owner (or of each team, when the header was not read)
+        latest = {}
+        for owner, team, end in teams:
+            if len(team) < 4: continue
+            k = next((o for o in latest if sim(o, owner) > 0.6), None) or owner or frozenset(st['species'] for st in team)
+            latest[k] = (owner, team, end)
+        for owner, team, end in sorted(latest.values(), key=lambda x: -x[2])[:2]:
+            if len(s.sheets) == 2: continue
             if board and max(sim(owner, board[0]), sim(owner, board[1])) > 0.6: sd = 'p1' if sim(owner, board[0]) >= sim(owner, board[1]) else 'p2'
             else:
                 names = {st['species'].split('-')[0] for st in team}

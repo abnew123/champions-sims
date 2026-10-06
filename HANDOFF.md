@@ -493,7 +493,28 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     pairings, git-ignored, also gives real matchup outcomes per cluster pair) and `regionals/regional_teams.json` (anonymised sheets);
     `pssim/endpair_scan.py` is Battle sim's replay scan, not Team search's. Validation: Team search's `simreal.py` scores its ten teams'
     confirm games per opponent group given the model files and a setup name; it needs one edit (archmatch's classifier hook reading real
-    rates by cluster instead of by name). Awaiting the user's call on priority.
+    rates by cluster instead of by name). **Done so far (2026-10-06, 3:45 am; the user said go, with the condition that a human must
+    still be able to place an opponent's team in seconds, so no clustering a human cannot apply):**
+    - No natural number of clusters exists (`pssim/cluster_opps.py scan`, results/cluster_scan_*.txt): weighted k-medoids on Jaccard
+      over 8,651 real sixes (2,531 regional sheets + 6,120 ladder previews), k 4..40, plain or IDF-weighted: within-cluster similarity
+      rises smoothly 0.21 -> 0.40 with no elbow, silhouette 0.06-0.14 at every k, two random halves agree poorly (adjusted Rand 0.2-0.5).
+      The six-space is a continuum around about ten tight cores.
+    - So the grouping is an ordered list of human-checkable rules, learned from the data and frozen: `cluster_opps.py rules 100`
+      (results/core_rules_both_100.{txt,json}): species pairs / triples that co-occur at least twice as often as chance and cover at
+      least 100 teams, greedy by coverage, grown to triples that ride along with 60% of the group and split on a species that divides it
+      ("also has X" / "without X"); 25 rules cover 64% of real teams, the rest is "other" (today's if/else tree as the fallback name).
+      `cluster_opps.tag(six, rules)` applies them: first rule whose species are all present (and excluded ones absent) names the team.
+    - The sim's opponents are real games, not groups: `pssim/opp_pool.py build` -> `pssim/opp_pool.json` (git-ignored, 12 MB; rebuilt
+      from pssim/replays_protect): one entry per side of each cached Reg M-C Bo3 game with an open team sheet (8,992 entries, 4,496
+      games): the six with its sets from |showteam| (spreads by species from regionals/smogon_mc_sets.json, stat points are never shown),
+      the lead pair and the four brought as played (81% fully seen; otherwise filled from the same six's other games, then at random;
+      `bring_seen`), rating, result, and the core-rule group. `opp_pool.py jobs <myteam> <lead a,b> <back c,d> <n> <out> [min rating]
+      [group]` writes explicit battle_starts.js jobs (our four fixed, their four as played, rating-weighted draw); 12 pool games with the
+      TR six ran cleanly under v16 + engine_data_full with no unsupported hits.
+    - The real reference for the bar: `pssim/group_real.py` -> results/group_real.{txt,json}: per group, team share and win rate in
+      the regionals (per-game rates from Bo3 results) and on the ladder (both sides of the pool's games), and per group pair with at
+      least 15 matches. Next: Team search runs its ten teams against the pool (jobs per team with its bring policy), compares sim win
+      rate by opponent group with these real rates, and the regional bar decides whether the pool replaces the archetype models.
   - **Final setup: champ-battle-v12 + egvalue9.json + RACE=1 + DP2=1 + anticipation** (see the top of this file). What it is: status and
     Tailwind weights from real games; a damage-race feature; a two-turn check on second Protects; slopes fitted on eleven teams. What it
     is not: it cannot play Perish trap, and absolute matchup win rates carry about 6 points of error per archetype.

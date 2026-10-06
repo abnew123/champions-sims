@@ -3,65 +3,65 @@
  "games": 19,
  "matches": 8,
  "summary": {
-  "decisions": 445,
-  "top_pick": 0.41797752808988764,
-  "best_value": 0.350561797752809,
-  "p_played": 0.38067160886404283,
-  "p_if_following_mix": 0.5780912242531809,
-  "chance": 0.1756875334403424,
-  "regret_mean": 0.021224939522992887,
-  "regret_median": 0.003864575673464543,
-  "within_2pts": 0.701123595505618,
-  "within_5pts": 0.8539325842696629
+  "decisions": 461,
+  "top_pick": 0.4490238611713666,
+  "best_value": 0.3644251626898048,
+  "p_played": 0.3905199781636924,
+  "p_if_following_mix": 0.5627721170625539,
+  "chance": 0.17215421960541266,
+  "regret_mean": 0.019677751657626124,
+  "regret_median": 0.0032220289432444427,
+  "within_2pts": 0.7071583514099783,
+  "within_5pts": 0.8676789587852495
  },
  "by_kind": {
-  "other status move": {
-   "players": 0.06292134831460675,
-   "planner": 0.049762507122462975
-  },
-  "Wide Guard": {
-   "players": 0.0022471910112359553,
-   "planner": 0.002392916699244272
-  },
-  "Follow Me": {
-   "players": 0.0044943820224719105,
-   "planner": 0.00135482288537168
-  },
   "attack": {
-   "players": 0.48764044943820223,
-   "planner": 0.5903574716412838
-  },
-  "Helping Hand": {
-   "players": 0.01348314606741573,
-   "planner": 0.0027953850816146847
-  },
-  "Parting Shot": {
-   "players": 0.029213483146067417,
-   "planner": 0.02112748867902985
-  },
-  "Trick Room": {
-   "players": 0.006741573033707865,
-   "planner": 0.012261539053589378
-  },
-  "Protect": {
-   "players": 0.1303370786516854,
-   "planner": 0.08404943841292524
-  },
-  "Tailwind": {
-   "players": 0.017977528089887642,
-   "planner": 0.026778993059820153
-  },
-  "Fake Out": {
-   "players": 0.07191011235955057,
-   "planner": 0.0759526466016095
-  },
-  "Rage Powder": {
-   "players": 0.0022471910112359553,
-   "planner": 0.0023288928046514847
+   "players": 0.5032537960954447,
+   "planner": 0.5849238344308842
   },
   "switch": {
-   "players": 0.1707865168539326,
-   "planner": 0.13083789795839706
+   "players": 0.1561822125813449,
+   "planner": 0.1349777264973471
+  },
+  "Protect": {
+   "players": 0.13232104121475055,
+   "planner": 0.08609829615509956
+  },
+  "Fake Out": {
+   "players": 0.0650759219088937,
+   "planner": 0.07242778938337191
+  },
+  "other status move": {
+   "players": 0.06941431670281996,
+   "planner": 0.04958108373940952
+  },
+  "Tailwind": {
+   "players": 0.01735357917570499,
+   "planner": 0.02644435024729037
+  },
+  "Parting Shot": {
+   "players": 0.028199566160520606,
+   "planner": 0.020045299266276736
+  },
+  "Trick Room": {
+   "players": 0.006507592190889371,
+   "planner": 0.01154922974172614
+  },
+  "Helping Hand": {
+   "players": 0.013015184381778741,
+   "planner": 0.005162703358946834
+  },
+  "Wide Guard": {
+   "players": 0.0021691973969631237,
+   "planner": 0.0033719814579424375
+  },
+  "Follow Me": {
+   "players": 0.004338394793926247,
+   "planner": 0.003169682642532271
+  },
+  "Rage Powder": {
+   "players": 0.0021691973969631237,
+   "planner": 0.002248023079172506
   }
  },
  "per_game": [
@@ -76,49 +76,49 @@
   {
    "game": "m1g2",
    "turns": 7,
-   "decisions": 27,
-   "top_pick": 0.4074074074074074,
-   "regret_mean": 0.022864158875208568,
-   "regret_median": 0.006185208401960018
+   "decisions": 28,
+   "top_pick": 0.42857142857142855,
+   "regret_mean": 0.023072347535726363,
+   "regret_median": 0.007850036333290289
   },
   {
    "game": "m2g1",
    "turns": 7,
-   "decisions": 22,
-   "top_pick": 0.36363636363636365,
-   "regret_mean": 0.02865617561088489,
-   "regret_median": 0.0032220289432444427
+   "decisions": 26,
+   "top_pick": 0.5,
+   "regret_mean": 0.023763712675688723,
+   "regret_median": 0.0
   },
   {
    "game": "m2g2",
    "turns": 7,
-   "decisions": 24,
-   "top_pick": 0.20833333333333334,
-   "regret_mean": 0.042971678775314735,
-   "regret_median": 0.032418059759732165
+   "decisions": 27,
+   "top_pick": 0.3333333333333333,
+   "regret_mean": 0.03415855256541211,
+   "regret_median": 0.03171463277483729
   },
   {
    "game": "m2g3",
    "turns": 9,
-   "decisions": 29,
-   "top_pick": 0.4827586206896552,
-   "regret_mean": 0.028779380620395457,
-   "regret_median": 0.0016810357954114563
+   "decisions": 30,
+   "top_pick": 0.5333333333333333,
+   "regret_mean": 0.021621437561913617,
+   "regret_median": 0.002273038442659636
   },
   {
    "game": "m3g1",
    "turns": 7,
-   "decisions": 23,
-   "top_pick": 0.4782608695652174,
-   "regret_mean": 0.012518898361559104,
+   "decisions": 21,
+   "top_pick": 0.6190476190476191,
+   "regret_mean": 0.01434065525453548,
    "regret_median": 0.0
   },
   {
    "game": "m3g2",
    "turns": 3,
-   "decisions": 9,
-   "top_pick": 0.5555555555555556,
-   "regret_mean": 0.022602043064187588,
+   "decisions": 10,
+   "top_pick": 0.6,
+   "regret_mean": 0.018918976299343998,
    "regret_median": 4.305549571959055e-05
   },
   {
@@ -126,32 +126,32 @@
    "turns": 6,
    "decisions": 20,
    "top_pick": 0.5,
-   "regret_mean": 0.01247348199019257,
-   "regret_median": 0.005036325038573444
+   "regret_mean": 0.011949676679436968,
+   "regret_median": 0.0031703010429325884
   },
   {
    "game": "m4g1",
    "turns": 9,
-   "decisions": 28,
-   "top_pick": 0.39285714285714285,
-   "regret_mean": 0.01662204469578938,
-   "regret_median": 0.0013732032477156153
+   "decisions": 29,
+   "top_pick": 0.41379310344827586,
+   "regret_mean": 0.01821122914137952,
+   "regret_median": 0.0005461858573119205
   },
   {
    "game": "m4g2",
    "turns": 10,
-   "decisions": 29,
-   "top_pick": 0.3448275862068966,
-   "regret_mean": 0.013033594848484297,
-   "regret_median": 0.004276307154421843
+   "decisions": 32,
+   "top_pick": 0.375,
+   "regret_mean": 0.010536070921347649,
+   "regret_median": 0.003927424987595574
   },
   {
    "game": "m4g3",
    "turns": 5,
-   "decisions": 15,
-   "top_pick": 0.13333333333333333,
-   "regret_mean": 0.03505718664016297,
-   "regret_median": 0.02205488202840533
+   "decisions": 17,
+   "top_pick": 0.17647058823529413,
+   "regret_mean": 0.03747686074123505,
+   "regret_median": 0.0222026471020719
   },
   {
    "game": "m5g1",
@@ -165,8 +165,8 @@
    "game": "m5g2",
    "turns": 8,
    "decisions": 22,
-   "top_pick": 0.5,
-   "regret_mean": 0.014037572196457338,
+   "top_pick": 0.4090909090909091,
+   "regret_mean": 0.014772899227882628,
    "regret_median": 0.00344413568763019
   },
   {
@@ -180,9 +180,9 @@
   {
    "game": "m6g2",
    "turns": 11,
-   "decisions": 25,
-   "top_pick": 0.4,
-   "regret_mean": 0.028713048359864574,
+   "decisions": 26,
+   "top_pick": 0.4230769230769231,
+   "regret_mean": 0.027332828872338795,
    "regret_median": 0.010564421426418114
   },
   {
@@ -197,17 +197,17 @@
    "game": "m7g2",
    "turns": 9,
    "decisions": 28,
-   "top_pick": 0.39285714285714285,
-   "regret_mean": 0.014743892383079684,
+   "top_pick": 0.42857142857142855,
+   "regret_mean": 0.015059865748260012,
    "regret_median": 0.0032940597967013874
   },
   {
    "game": "m8g1",
    "turns": 11,
-   "decisions": 34,
-   "top_pick": 0.4411764705882353,
-   "regret_mean": 0.018109647508910726,
-   "regret_median": 0.006169933552583107
+   "decisions": 35,
+   "top_pick": 0.4857142857142857,
+   "regret_mean": 0.010898691811141562,
+   "regret_median": 0.002285834794079289
   },
   {
    "game": "m8g2",
@@ -216,6 +216,477 @@
    "top_pick": 0.6,
    "regret_mean": 0.013420694941011443,
    "regret_median": 0.00498697474951508
+  }
+ ],
+ "costly_plays_note": "plays the planner gave under 5% that cost over 5 win-chance points against its most likely action (cost = its value minus the played action's); video_s is the VOD time of the turn",
+ "costly_plays": [
+  {
+   "game": "m7g1",
+   "turn": 4,
+   "side": "p2",
+   "mon": "Salamence",
+   "played": "switch to Incineroar",
+   "planner_top": "Hyper Voice",
+   "p_played": 0.0009,
+   "cost": 0.171,
+   "video_s": 29782.5,
+   "side_won": false
+  },
+  {
+   "game": "m3g1",
+   "turn": 5,
+   "side": "p1",
+   "mon": "Rillaboom",
+   "played": "switch to Gholdengo",
+   "planner_top": "Grassy Glide",
+   "p_played": 0.0004,
+   "cost": 0.166,
+   "video_s": 14499.0,
+   "side_won": null
+  },
+  {
+   "game": "m4g1",
+   "turn": 6,
+   "side": "p1",
+   "mon": "Espathra",
+   "played": "Lumina Crash",
+   "planner_top": "Protect",
+   "p_played": 0.0039,
+   "cost": 0.158,
+   "video_s": 18316.0,
+   "side_won": false
+  },
+  {
+   "game": "m5g1",
+   "turn": 1,
+   "side": "p2",
+   "mon": "Sinistcha",
+   "played": "Protect",
+   "planner_top": "switch to Incineroar",
+   "p_played": 0.0005,
+   "cost": 0.153,
+   "video_s": 21737.0,
+   "side_won": false
+  },
+  {
+   "game": "m1g2",
+   "turn": 5,
+   "side": "p2",
+   "mon": "Rillaboom",
+   "played": "Grassy Glide",
+   "planner_top": "Fake Out",
+   "p_played": 0.0006,
+   "cost": 0.147,
+   "video_s": 7740.5,
+   "side_won": false
+  },
+  {
+   "game": "m6g2",
+   "turn": 3,
+   "side": "p2",
+   "mon": "Charizard",
+   "played": "Protect",
+   "planner_top": "switch to Sneasler",
+   "p_played": 0.0008,
+   "cost": 0.143,
+   "video_s": 25964.5,
+   "side_won": null
+  },
+  {
+   "game": "m2g1",
+   "turn": 3,
+   "side": "p2",
+   "mon": "Milotic",
+   "played": "Coil",
+   "planner_top": "Hypnosis",
+   "p_played": 0.0004,
+   "cost": 0.139,
+   "video_s": 10776.0,
+   "side_won": null
+  },
+  {
+   "game": "m4g3",
+   "turn": 1,
+   "side": "p1",
+   "mon": "Espathra",
+   "played": "Calm Mind",
+   "planner_top": "switch to Goodra",
+   "p_played": 0.0026,
+   "cost": 0.135,
+   "video_s": 19511.5,
+   "side_won": true
+  },
+  {
+   "game": "m6g2",
+   "turn": 3,
+   "side": "p2",
+   "mon": "Kommo-o",
+   "played": "Protect",
+   "planner_top": "Clanging Scales",
+   "p_played": 0.0004,
+   "cost": 0.127,
+   "video_s": 25964.5,
+   "side_won": null
+  },
+  {
+   "game": "m7g2",
+   "turn": 4,
+   "side": "p1",
+   "mon": "Raichu",
+   "played": "Protect",
+   "planner_top": "Focus Blast",
+   "p_played": 0.0004,
+   "cost": 0.103,
+   "video_s": 30535.5,
+   "side_won": true
+  },
+  {
+   "game": "m5g1",
+   "turn": 3,
+   "side": "p1",
+   "mon": "Arcanine",
+   "played": "switch to Sneasler",
+   "planner_top": "Protect",
+   "p_played": 0.0002,
+   "cost": 0.099,
+   "video_s": 21891.5,
+   "side_won": true
+  },
+  {
+   "game": "m1g1",
+   "turn": 9,
+   "side": "p1",
+   "mon": "Dragonite",
+   "played": "Protect",
+   "planner_top": "Tailwind",
+   "p_played": 0.0005,
+   "cost": 0.098,
+   "video_s": 7158.0,
+   "side_won": true
+  },
+  {
+   "game": "m4g3",
+   "turn": 5,
+   "side": "p2",
+   "mon": "Staraptor",
+   "played": "Close Combat",
+   "planner_top": "Tailwind",
+   "p_played": 0.0023,
+   "cost": 0.092,
+   "video_s": 19852.0,
+   "side_won": false
+  },
+  {
+   "game": "m2g1",
+   "turn": 2,
+   "side": "p2",
+   "mon": "Milotic",
+   "played": "Coil",
+   "planner_top": "Hypnosis",
+   "p_played": 0.0005,
+   "cost": 0.089,
+   "video_s": 10730.0,
+   "side_won": null
+  },
+  {
+   "game": "m1g2",
+   "turn": 1,
+   "side": "p2",
+   "mon": "Gholdengo",
+   "played": "Protect",
+   "planner_top": "Shadow Ball",
+   "p_played": 0.002,
+   "cost": 0.088,
+   "video_s": 7366.0,
+   "side_won": false
+  },
+  {
+   "game": "m2g3",
+   "turn": 1,
+   "side": "p1",
+   "mon": "Volcarona",
+   "played": "Protect",
+   "planner_top": "Quiver Dance",
+   "p_played": 0.0416,
+   "cost": 0.088,
+   "video_s": 11725.5,
+   "side_won": true
+  },
+  {
+   "game": "m2g1",
+   "turn": 2,
+   "side": "p1",
+   "mon": "Staraptor",
+   "played": "switch to Gholdengo",
+   "planner_top": "Tailwind",
+   "p_played": 0.0005,
+   "cost": 0.087,
+   "video_s": 10730.0,
+   "side_won": null
+  },
+  {
+   "game": "m7g2",
+   "turn": 4,
+   "side": "p1",
+   "mon": "Volcarona",
+   "played": "Protect",
+   "planner_top": "Fiery Dance",
+   "p_played": 0.0006,
+   "cost": 0.084,
+   "video_s": 30535.5,
+   "side_won": true
+  },
+  {
+   "game": "m6g2",
+   "turn": 4,
+   "side": "p1",
+   "mon": "Arcanine",
+   "played": "Flare Blitz",
+   "planner_top": "Head Smash",
+   "p_played": 0.0384,
+   "cost": 0.083,
+   "video_s": 26003.0,
+   "side_won": null
+  },
+  {
+   "game": "m4g3",
+   "turn": 3,
+   "side": "p1",
+   "mon": "Floette-Eternal",
+   "played": "Calm Mind",
+   "planner_top": "Dazzling Gleam",
+   "p_played": 0.0004,
+   "cost": 0.083,
+   "video_s": 19711.0,
+   "side_won": true
+  },
+  {
+   "game": "m2g1",
+   "turn": 1,
+   "side": "p2",
+   "mon": "Dragapult",
+   "played": "switch to Staraptor",
+   "planner_top": "Shadow Ball",
+   "p_played": 0.0004,
+   "cost": 0.082,
+   "video_s": 10677.0,
+   "side_won": null
+  },
+  {
+   "game": "m8g1",
+   "turn": 11,
+   "side": "p2",
+   "mon": "Incineroar",
+   "played": "switch to Rillaboom",
+   "planner_top": "Darkest Lariat",
+   "p_played": 0.0003,
+   "cost": 0.08,
+   "video_s": 34046.5,
+   "side_won": null
+  },
+  {
+   "game": "m1g1",
+   "turn": 3,
+   "side": "p2",
+   "mon": "Dragonite",
+   "played": "switch to Incineroar",
+   "planner_top": "Dragon Pulse",
+   "p_played": 0.0006,
+   "cost": 0.077,
+   "video_s": 6719.5,
+   "side_won": false
+  },
+  {
+   "game": "m3g2",
+   "turn": 1,
+   "side": "p2",
+   "mon": "Farigiraf",
+   "played": "Helping Hand",
+   "planner_top": "Trick Room",
+   "p_played": 0.0017,
+   "cost": 0.075,
+   "video_s": 14805.0,
+   "side_won": null
+  },
+  {
+   "game": "m2g2",
+   "turn": 4,
+   "side": "p1",
+   "mon": "Primarina",
+   "played": "Protect",
+   "planner_top": "Moonblast",
+   "p_played": 0.0004,
+   "cost": 0.074,
+   "video_s": 11372.5,
+   "side_won": null
+  },
+  {
+   "game": "m5g1",
+   "turn": 5,
+   "side": "p2",
+   "mon": "Sneasler",
+   "played": "switch to Kingambit",
+   "planner_top": "Poison Jab",
+   "p_played": 0.0004,
+   "cost": 0.073,
+   "video_s": 21999.0,
+   "side_won": false
+  },
+  {
+   "game": "m3g2",
+   "turn": 2,
+   "side": "p1",
+   "mon": "Floette-Eternal",
+   "played": "Calm Mind",
+   "planner_top": "Dazzling Gleam",
+   "p_played": 0.0023,
+   "cost": 0.07,
+   "video_s": 14898.0,
+   "side_won": null
+  },
+  {
+   "game": "m7g1",
+   "turn": 1,
+   "side": "p2",
+   "mon": "Rillaboom",
+   "played": "U-turn",
+   "planner_top": "Fake Out",
+   "p_played": 0.0022,
+   "cost": 0.068,
+   "video_s": 29560.5,
+   "side_won": false
+  },
+  {
+   "game": "m1g2",
+   "turn": 2,
+   "side": "p2",
+   "mon": "Rillaboom",
+   "played": "switch to Incineroar",
+   "planner_top": "U-turn",
+   "p_played": 0.0027,
+   "cost": 0.066,
+   "video_s": 7421.0,
+   "side_won": false
+  },
+  {
+   "game": "m6g2",
+   "turn": 7,
+   "side": "p2",
+   "mon": "Sneasler",
+   "played": "Rock Slide",
+   "planner_top": "Close Combat",
+   "p_played": 0.0162,
+   "cost": 0.066,
+   "video_s": 26281.5,
+   "side_won": null
+  },
+  {
+   "game": "m4g1",
+   "turn": 4,
+   "side": "p2",
+   "mon": "Excadrill",
+   "played": "Protect",
+   "planner_top": "Rock Slide",
+   "p_played": 0.002,
+   "cost": 0.066,
+   "video_s": 18201.0,
+   "side_won": true
+  },
+  {
+   "game": "m7g1",
+   "turn": 3,
+   "side": "p1",
+   "mon": "Raichu",
+   "played": "switch to Ninetales",
+   "planner_top": "switch to Rillaboom",
+   "p_played": 0.001,
+   "cost": 0.065,
+   "video_s": 29699.0,
+   "side_won": true
+  },
+  {
+   "game": "m7g1",
+   "turn": 8,
+   "side": "p2",
+   "mon": "Rillaboom",
+   "played": "Grassy Glide",
+   "planner_top": "Wood Hammer",
+   "p_played": 0.0017,
+   "cost": 0.065,
+   "video_s": 30076.0,
+   "side_won": false
+  },
+  {
+   "game": "m4g1",
+   "turn": 5,
+   "side": "p1",
+   "mon": "Rillaboom",
+   "played": "switch to Espathra",
+   "planner_top": "High Horsepower",
+   "p_played": 0.0002,
+   "cost": 0.063,
+   "video_s": 18253.5,
+   "side_won": false
+  },
+  {
+   "game": "m2g2",
+   "turn": 2,
+   "side": "p2",
+   "mon": "Armarouge",
+   "played": "Armor Cannon",
+   "planner_top": "Expanding Force",
+   "p_played": 0.0396,
+   "cost": 0.058,
+   "video_s": 11240.0,
+   "side_won": null
+  },
+  {
+   "game": "m5g2",
+   "turn": 5,
+   "side": "p1",
+   "mon": "Rillaboom",
+   "played": "Wood Hammer",
+   "planner_top": "Grassy Glide",
+   "p_played": 0.004,
+   "cost": 0.052,
+   "video_s": 22469.5,
+   "side_won": true
+  },
+  {
+   "game": "m4g3",
+   "turn": 2,
+   "side": "p2",
+   "mon": "Gholdengo",
+   "played": "switch to Staraptor",
+   "planner_top": "Make It Rain",
+   "p_played": 0.0006,
+   "cost": 0.051,
+   "video_s": 19593.0,
+   "side_won": false
+  },
+  {
+   "game": "m1g2",
+   "turn": 4,
+   "side": "p1",
+   "mon": "Incineroar",
+   "played": "Taunt",
+   "planner_top": "Parting Shot",
+   "p_played": 0.0195,
+   "cost": 0.051,
+   "video_s": 7638.0,
+   "side_won": true
+  },
+  {
+   "game": "m1g2",
+   "turn": 1,
+   "side": "p2",
+   "mon": "Incineroar",
+   "played": "switch to Rillaboom",
+   "planner_top": "Fake Out",
+   "p_played": 0.0009,
+   "cost": 0.05,
+   "video_s": 7366.0,
+   "side_won": false
   }
  ]
 }

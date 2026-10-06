@@ -76,7 +76,8 @@ try:
           all(old.get(k) == v for k, v in t1['plans'].items()) and len(t1['plans']) == len(jobs))
 
     # 7. the page
-    s, L = PG.render(sheet, PG.leads_data(sheet, final, t1, rj(sheet.p('notes.json')))); open(f'{tmp}/sheet.html', 'w').write(s)
+    # rendered with the template as it was then (fixtures/tr-v16/template.html), so markup changes made since do not count as differences
+    s, L = PG.render(sheet, PG.leads_data(sheet, final, t1, rj(sheet.p('notes.json'))), sheet.p('template.html')); open(f'{tmp}/sheet.html', 'w').write(s)
     d, notes = PG.compare(f'{tmp}/sheet.html', sheet.p('published.html'))
     check('page: equals the published Version 16 page (six data blocks by value; markup, styles and scripts byte for byte)', not d, '; '.join(d + notes))
     bad = PG.check_leads(sheet, L); check('page: every turn-one switch goes to the card\'s back row; lines sum to 100%', not bad, '; '.join(bad))

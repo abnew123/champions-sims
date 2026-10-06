@@ -50,6 +50,10 @@ section{margin-top:44px;scroll-margin-top:calc(env(safe-area-inset-top,0px) + 56
 .shead{border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:18px}
 .shead h2{font-size:22px;font-weight:700;letter-spacing:-.01em}
 .snote{color:var(--ink2);font-size:14px;margin:6px 0 0;max-width:70ch}
+.snotes{margin-top:16px;padding-top:4px}
+.snotes .snote{font-size:13px;color:var(--ink3);line-height:1.55;margin-top:8px}
+.snotes .snote b{color:var(--ink2)}
+.snotes .spdnote{font-size:13px;color:var(--ink3);margin-top:8px}
 p.body{max-width:70ch;margin:0 0 12px;color:var(--ink2)}
 h3{font-size:15.5px;font-weight:700;margin:26px 0 10px}
 
@@ -207,33 +211,37 @@ footer a{color:var(--ink2)}
 <section id="leads">
   <div class="shead">
     <h2>Leads</h2>
-{{LEADS_INTRO}}  </div>
+  </div>
   {{LGUIDE}}
   <div class="lsegbar" role="tablist" aria-label="Their archetype" id="lseg"></div>
   <div id="lpanel"></div>
-  <p class="snote" style="margin-top:4px">{{LEADS_METHOD}}</p>
+  <div class="snotes">
+{{LEADS_INTRO}}    <p class="snote">{{LEADS_METHOD}}</p>
+  </div>
 </section>
 <!--/LEADS-->
 
 <section id="team">
   <div class="shead">
     <h2>{{TEAM_H2}}</h2>
-    <p class="snote">{{TEAM_INTRO}}</p>
   </div>
   <div class="team" id="teamgrid"></div>
+  <div class="snotes"><p class="snote">{{TEAM_INTRO}}</p></div>
 </section>
 
 @@if coverage
 <section id="coverage">
   <div class="shead">
     <h2>Coverage gaps</h2>
-{{COV_INTRO}}  </div>
+  </div>
   <div class="tscroll">
     <table class="cov">
       <thead><tr><th scope="col">Threat</th><th scope="col">Best hit</th><th scope="col"><span class="lg">Max roll</span><span class="sm">Max</span></th><th scope="col">Guaranteed KO</th></tr></thead>
       <tbody id="covbody"></tbody>
     </table>
   </div>
+  <div class="snotes">
+{{COV_INTRO}}  </div>
 </section>
 
 @@end
@@ -241,7 +249,6 @@ footer a{color:var(--ink2)}
 <section id="matchups">
   <div class="shead">
     <h2>Matchups</h2>
-    <p class="snote">{{MX_INTRO}}</p>
   </div>
   <div class="mxmode" role="tablist" aria-label="Trick Room" id="mxmode">
     {{MX_BAR}}
@@ -260,7 +267,10 @@ footer a{color:var(--ink2)}
     <thead><tr><th scope="col">Threat</th>{{MX_HEAD}}</tr></thead>
     <tbody id="mxbody"></tbody>
   </table></div>
-  <p class="snote" style="margin-top:11px">{{MX_FOOT}}</p>
+  <div class="snotes">
+    <p class="snote">{{MX_INTRO}}</p>
+    <p class="snote">{{MX_FOOT}}</p>
+  </div>
 </section>
 
 @@end
@@ -268,10 +278,12 @@ footer a{color:var(--ink2)}
 <section id="speed">
   <div class="shead">
     <h2>{{SPEED_H2}}</h2>
-    <p class="snote">{{SPEED_INTRO}}</p>
   </div>
   <div class="tscroll"><table class="spd" id="spdt"></table></div>
-{{SPEED_FOOT}}
+  <div class="snotes">
+    <p class="snote">{{SPEED_INTRO}}</p>
+    {{SPEED_FOOT}}
+  </div>
 </section>
 
 @@end

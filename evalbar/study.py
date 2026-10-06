@@ -58,7 +58,8 @@ def decisions(L, log, g):
                 top = max(T, key=lambda k: T[k][0]); bestv = max(T, key=lambda k: T[k][1])
                 out.append({'turn': t, 'side': sd, 'mon': m['sp'], 'played': pk, 'top': top, 'best': bestv, 'p_played': T[pk][0], 'mix': {k: p for k, (p, _) in T.items()},
                             'p_top': T[top][0], 'p_sq': sum(p * p for p, _ in T.values()), 'n': len(T), 'regret': T[bestv][1] - T[pk][1],
-                            'v_played': T[pk][1], 'v_best': T[bestv][1]})
+                            'v_played': T[pk][1], 'v_best': T[bestv][1], 'v_top': T[top][1],
+                            'table': {k: [round(p, 3), round(v, 3)] for k, (p, v) in T.items()}})
     return out
 E = json.load(open(os.path.join(C.MAIN, 'native', 'engine_data_full.json')))
 PROTECT = {'protect', 'detect', 'spikyshield', 'kingsshield', 'banefulbunker', 'silktrap', 'burningbulwark', 'obstruct'}

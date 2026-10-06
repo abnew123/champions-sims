@@ -137,7 +137,7 @@ class Reader:
     def new_game(s):
         s.out = []; s.games.append(s.out); s.meta.append({}); s.started = False; s.turn = 0; s.in_decision = False; s.ended = False
         s.active = {}; s.hp = {}; s.last_text = None; s.slot_free = {'p1': [], 'p2': []}; s.megas = {'p1': False, 'p2': False}
-        s.fainted = {'p1': set(), 'p2': set()}; s.lead_seen = False; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False
+        s.fainted = {'p1': set(), 'p2': set()}; s.lead_seen = False; s.pending = []; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False
     def team(s, sd): return s.sheets.get(sd, [])
     def species(s, sd, name):
         """an OCR'd Pokémon name on side sd -> the species on that side's sheet (Mega names map back to the base)"""
@@ -258,11 +258,24 @@ class Reader:
     def send(s, sd, name):
         sp = s.species(sd, re.sub(r' the [A-Z][\w-]*(?: [A-Z][\w-]*)*$', '', name.strip()))     # "Primarina the Rank Master": a title
         if not sp: return
-        free = s.slot_free[sd]; sl = free.pop(0) if free else next((x for x in 'ab' if (sd, x) not in s.active), 'a')
+        free = s.slot_free[sd]; sl = free.pop(0) if free else next((x for x in 'ab' if (sd, x) not in s.active), None)
+        if sl is None:                                                      # who went back was not shown: the HP boxes will tell which slot
+            s.pending.append((sd, sp, len(s.out))); return
         s.active[(sd, sl)] = sp
         s.emit(f"|switch|{sd}{sl}: {s.nick(sp)}|{sp}, L50|{s.hp.get(('mon', sd, sp), 100)}/100")
+    def place(s, boxes):
+        """a send-out whose slot was unknown: put the switch where the battle text had it, in the slot the HP boxes now show it in"""
+        keep = []
+        for i, (sd, sp, at) in enumerate(s.pending):
+            sl = next((x for (y, x), (n, p) in boxes.items() if y == sd and s.species(sd, n) == sp and s.active.get((sd, x)) != sp), None)
+            if not sl: keep.append((sd, sp, at)); continue
+            s.active[(sd, sl)] = sp
+            s.out.insert(at, f"|switch|{sd}{sl}: {s.nick(sp)}|{sp}, L50|{s.hp.get(('mon', sd, sp), 100)}/100")
+            s.pending[i + 1:] = [(a, b, c + 1 if c >= at else c) for a, b, c in s.pending[i + 1:]]; keep = [(a, b, c + 1 if c >= at else c) for a, b, c in keep]
+        s.pending = keep
     def reconcile(s, boxes):
         """at a decision screen: the Pokémon on the field and their HP as the HP boxes show them"""
+        s.pending = []
         for (sd, sl), (n, p) in sorted(boxes.items()):
             sp = s.species(sd, n)
             if not sp: continue
@@ -318,6 +331,7 @@ class Reader:
             elif decision and len(boxes) >= 3 and not s.note: s.note = 'joined mid-game: the bar starts with the next game'
             return
         if s.ended: return
+        if s.pending and len(boxes) >= 2: s.place(boxes)
         if decision and not s.in_decision and s.turn >= 2 and len(boxes) == 4 and all(p == 100 for n, p in boxes.values()) \
                 and max(s.pairs.values()) > s.frame - 120:                       # new leads sent out in the last minute, everyone at full HP
             s.close(); s.prev_end = s.frame - 120

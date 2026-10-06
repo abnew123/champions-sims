@@ -6,6 +6,8 @@
 //         sets in MYTEAM format {species, item, ability, nature, evs: [6], moves: [4]}
 //   game g (G0 .. G0+games-1) uses battle seed seedmix(1e6 + g) and sampling seed seedmix(7e6 + g); champ battle derives the planning
 //   seeds from (job index, g), so two runs with the same job order and G0 play paired games (same RNG streams).
+//   SEED_PER_JOB=1: the battle and sampling seeds also depend on the job index (seedmix(1e6 + g + 7919 * job)), for explicit-mode runs
+//   with one game per job (an opponent pool), where every job would otherwise share one battle seed and so one stream of luck.
 const path = require('path'), fs = require('fs');
 const {Battle} = require(path.resolve('node_modules/pokemon-showdown'));
 const T = require(path.resolve('t1sim.js')); const seedmix = require(path.resolve('seedmix.js'));
@@ -17,10 +19,11 @@ jobs.forEach((j, i) => {
   const B = j.mine ? {myTeam: j.mine.map(mk), oppTeam: j.theirs.map(mk), P: {pair: j.theirs.slice(0, 2).map(s => s.species).join(' + '), share: 1}}
                    : T.build(j.arch, j.k, j.lead, j.back);
   for (let g = +g0; g < +g0 + +games; g++) {
-    const b = new Battle({formatid: 'gen9championsdoublescustomgame', seed: seedmix(1e6 + g)}); b.debugMode = false;
+    const gs = process.env.SEED_PER_JOB ? g + 7919 * i : g;
+    const b = new Battle({formatid: 'gen9championsdoublescustomgame', seed: seedmix(1e6 + gs)}); b.debugMode = false;
     b.setPlayer('p1', {name: 'Me', team: B.myTeam}); b.setPlayer('p2', {name: 'Them', team: B.oppTeam});
     b.choose('p1', 'team 1234'); b.choose('p2', 'team 1234');
-    const r = seedmix(7e6 + g);
+    const r = seedmix(7e6 + gs);
     const meta = j.mine ? {...(j.meta || {}), lead: j.mine.slice(0, 2).map(s => s.species), back: j.mine.slice(2).map(s => s.species), pair: B.P.pair, share: 1,
                            theirs: j.theirs.map(s => s.species)}
                         : {arch: j.arch, lead: j.lead, back: j.back, pair: B.P.pair, share: B.P.share, theirs: B.oppTeam.map(s => s.species)};

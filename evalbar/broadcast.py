@@ -328,8 +328,12 @@ def watch(url, threads=2, port=8768, start=None):
     """a YouTube broadcast in real time (live, or a recording from `start`, e.g. 1:44:09): ffmpeg writes 2 frames a second, Apple
     Vision reads them in small batches, the reader follows"""
     tag = 'live_' + re.sub(r'\W', '', url.split('v=')[-1])[:16]; d = os.path.join(C.HERE, 'out', 'live', tag + '_frames'); os.makedirs(d, exist_ok=True)
-    src = subprocess.run(['yt-dlp', '-g', '-f', 'bv*[height<=720]/b[height<=720]', url], capture_output=True, text=True, check=True).stdout.split()[0]
-    ff = subprocess.Popen(['nice', '-n', '10', 'ffmpeg', '-v', 'error', '-y', '-re'] + (['-ss', start] if start else []) + ['-i', src, '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', os.path.join(d, 'f_%06d.jpg')])
+    # the media URL from yt-dlp, opened by ffmpeg with the same request headers (YouTube refuses it otherwise), in real time (-re)
+    info = json.loads(subprocess.run(['yt-dlp', '-j', '--no-warnings', '-f', 'bv*[height<=720][protocol^=http]/bv*[height<=720]/b[height<=720]', url],
+                                     capture_output=True, text=True, check=True).stdout)
+    hdr = ''.join(f'{k}: {v}\r\n' for k, v in (info.get('http_headers') or {}).items())
+    ff = subprocess.Popen(['nice', '-n', '10', 'ffmpeg', '-v', 'error', '-y', '-headers', hdr, '-re'] + (['-ss', start] if start else []) + ['-i', info['url'],
+                           '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', os.path.join(d, 'f_%06d.jpg')])
     run = Runner(tag, threads, port); done = 0
     while True:
         files = sorted(f for f in os.listdir(d) if f.endswith('.jpg'))[:-1]          # the newest frame may still be being written

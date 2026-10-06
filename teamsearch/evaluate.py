@@ -49,6 +49,10 @@ SIMS = {
     'v16g': dict(bin='champ-battle-v16', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg')),
     # v17: v16 with a 256-bit callback mask (same games); needed for engine_data_full.json (the real-game opponent pool, poolbar.py)
     'v17g': dict(bin='champ-battle-v17', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg')),
+    # v19: the same battles as v16/v17 (no per-call global lock); MISS_DOUBLE=0 doubles our side's misses (user, 2026-10-06): every
+    # accuracy roll's final hit chance p becomes max(0, 2p - 100), accuracy-true cases untouched, a rule miss is an ordinary miss
+    'v19g': dict(bin='champ-battle-v19', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg')),
+    'v19m': dict(bin='champ-battle-v19', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg', MISS_DOUBLE='0')),
 }
 def sim(): return os.environ.get('TS_SIM', 'v3')
 def out_tag(seed0, per_job): return f'{seed0}_{per_job}' if sim() == 'v3' else f'{sim()}_{seed0}_{per_job}'

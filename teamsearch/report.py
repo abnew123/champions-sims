@@ -1,6 +1,6 @@
 """Climb report from climb_log.jsonl (+ climb_state.json): each start's path, the best teams by their latest confirm score
 (fresh paired games: unbiased, but round-to-round seeds differ, so compare loosely), and which starts converge on similar sixes.
-  python3 report.py [results dir = cloud_results]
+  python3 report.py [results dir = cloud_results] [file prefix = climb; climb_miss for the miss-doubling climb]
 """
 import json, os, sys, collections
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -8,8 +8,9 @@ D = os.path.join(HERE, sys.argv[1] if len(sys.argv) > 1 else 'cloud_results')
 sys.path.insert(0, HERE)
 import sets_lib as L
 G = json.load(open(os.path.join(HERE, 'grid_sets.json')))
-log = [json.loads(l) for l in open(os.path.join(D, 'climb_log.jsonl'))]
-st = json.load(open(os.path.join(D, 'climb_state.json')))
+PRE = sys.argv[2] if len(sys.argv) > 2 else 'climb'
+log = [json.loads(l) for l in open(os.path.join(D, f'{PRE}_log.jsonl'))]
+st = json.load(open(os.path.join(D, f'{PRE}_state.json')))
 sp = lambda g: G[g]['species'] + ('*' if (L.DEX['items'].get(L.idf(G[g]['item'] or ''), {}) or {}).get('megaStone') else '')
 latest = {}                                   # start -> (round, final team, its confirm score, moved in that round)
 for r in log:                                 # a move = the sequential test's verdict (older logs: the old gain > 1 SE rule)

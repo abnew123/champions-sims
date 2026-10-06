@@ -486,7 +486,12 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     same eleven teams' games with every position also mirrored, so the intercept is 0, and without the two grid features; use with
     `TRSYM=1` and an empty `GRID_DIR`. Held-out log loss 0.415 on the TR six's games and 0.447 on the ten teams' (the side-0 version:
     0.386 / 0.438). Note: under this symmetric constraint the Trick Room weight falls to 0.07 (0.26 in egvalue9), so in the side-0 fits
-    the Trick Room weight and the team intercept are partly entangled.
+    the Trick Room weight and the team intercept are partly entangled. **Since 2026-10-05, 8:45 pm the bar's value is
+    `pssim/egvalue9_sym2.json`** (`SYM=1 TIE_TR=1 build_egvalue9.py ...`): the same fit with Trick Room turns x speed edge tied to
+    the HP weight at the real-game ratio (0.201 instead of 0.073; the real-game model gives 0.183, egvalue9 0.258). Self-play held-out
+    log loss is slightly worse (TR six 0.4154 -> 0.4198) but the Eval bar's 560 real held-out games decide: overall 0.5245 -> 0.5240
+    (no worse), with Trick Room up (321 positions) 0.5199 -> 0.5141 (better, within noise); on the user's recorded Trick Room games the
+    turn-1 values rose 3-8 points. Numbers: `evalbar/results/compare_sym_sym2.json` on the Eval bar's branch.
   - History was rewritten on 2026-10-05 to remove three opponents' in-game names from the recording spot notes (all commit hashes
     changed; any hash quoted above from before that date is stale: find commits by message).
   - **champ-battle-v13** = v12 + `champ evalpos` (evalpos.rs: per position, the turn solved as in battles with every cell averaged over

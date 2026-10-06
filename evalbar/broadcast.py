@@ -105,6 +105,7 @@ def sheet(lines):
         out.append({'species': sp, 'item': item, 'ability': ability, 'nature': nature, 'moves': moves[:4]})
     return out
 # --------------------------------------------------------------------------------------------------------------------------- battle
+SINGLE = {'normal', 'any', 'adjacentFoe', 'adjacentAlly', 'adjacentAllyOrSelf'}   # move targets the player picks
 BOXES = (('p1', 'a', 0.0, 0.16), ('p1', 'b', 0.16, 0.42), ('p2', 'a', 0.58, 0.81), ('p2', 'b', 0.81, 1.0))
 def battle(lines):
     """one battle frame -> (HP boxes {(side, slot): (name, pct)}, decision screen?, turn number or None, battle text or None)"""
@@ -137,7 +138,7 @@ class Reader:
     def new_game(s):
         s.out = []; s.games.append(s.out); s.meta.append({}); s.started = False; s.turn = 0; s.in_decision = False; s.ended = False
         s.active = {}; s.hp = {}; s.last_text = None; s.slot_free = {'p1': [], 'p2': []}; s.megas = {'p1': False, 'p2': False}
-        s.fainted = {'p1': set(), 'p2': set()}; s.lead_seen = False; s.pending = []; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False
+        s.fainted = {'p1': set(), 'p2': set()}; s.open = None; s.cur = {}; s.changed = {}; s.foreign = 0; s.lead_seen = False; s.pending = []; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False
     def team(s, sd): return s.sheets.get(sd, [])
     def species(s, sd, name):
         """an OCR'd Pokémon name on side sd -> the species on that side's sheet (Mega names map back to the base)"""
@@ -184,6 +185,7 @@ class Reader:
         sl = s.slot_of(sd, sp) or 'a'; return f"{sd}{sl}: {s.nick(sp)}"
     def message(s, text):
         text = re.sub(r'!+[^!]*$', '!', text.strip())
+        if s.open and re.search(r'(hurt by|buffeted by|pelted by|restored (a little )?HP|regained health|is hurt|was hurt)', text): s.shut()   # end-of-turn damage and healing
         if re.search(r"won the battle|forfeit|\blost!$|You won", text, re.I) and 'lost some' not in text:
             if not s.ended:
                 left = {sd: 4 - len(s.fainted[sd]) for sd in ('p1', 'p2')}
@@ -208,10 +210,21 @@ class Reader:
         if m: s.emit(f"|-sideend|{'p1' if m.group(1).lower() == 'your' else 'p2'}: Player|move: Tailwind"); return
         m = re.search(r'(Reflect|Light Screen|Aurora Veil) made (your|the opposing) (team|side)', text)
         if m: s.emit(f"|-sidestart|{'p1' if m.group(2) == 'your' else 'p2'}: Player|{'move: ' if m.group(1) != 'Reflect' else ''}{m.group(1)}"); return
+        m = re.match(r'.+? withdrew (.+?)!$', text)                         # "<trainer> withdrew X!": the slot it leaves is the next send-out's
+        if m:
+            for sd in ('p2', 'p1'):
+                sp = s.species(sd, m.group(1)); sl = s.slot_of(sd, sp) if sp else None
+                if sl: s.shut(); s.slot_free[sd].append(sl); s.active.pop((sd, sl), None); break
+            return
         m = re.search(r'Go! (.+?)!$', text) or re.search(r'sent out (.+?)!$', text)
         if m:
             if ' and ' in m.group(1): s.pairs['p1' if text.startswith('Go!') else 'p2'] = s.frame
             elif s.started: s.send('p1' if text.startswith('Go!') else 'p2', m.group(1))
+            return
+        m = re.match(r"It doesn't affect (.+?)(?:\.\.\.|!)$", text)
+        if m:
+            sd, sp, _ = s.who(m.group(1)[0].upper() + m.group(1)[1:])
+            if sp and s.open: s.hit((sd, s.slot_of(sd, sp)), "text: it doesn't affect")
             return
         # about one Pokémon (or two: "A and the opposing B's Attack fell!")
         m = re.match(r"(.+?) and ((?:the opposing )?[^,']+?)'s (.+?) (fell|rose|harshly fell|severely fell|rose sharply|rose drastically)!", text)
@@ -222,14 +235,22 @@ class Reader:
     def about(s, text):
         sd, sp, rest = s.who(text)
         if not sp: return
+        if s.team(sd) and sp not in {x['species'] for x in s.team(sd)}:   # a Pokemon on neither sheet: the broadcast cut to other footage
+            s.foreign += 1
+            if s.foreign >= 2: s.close()
+            return
         me = s.mon(sd, sp); rest = rest.strip()
+        k = (sd, s.slot_of(sd, sp))
+        if s.open and k[1] and k != s.open['user'] and not rest.startswith('used ') and (
+                s.open['status'] or re.match(r'(protected itself|avoided the attack|fainted)', rest)): s.hit(k, 'text: ' + rest)
         mv = re.match(r'used (.+?)!$', rest)
         if mv:
             st = next((x for x in s.team(sd) if x['species'] == sp), None)
             move = fuzzy(mv.group(1), 'moves', st['moves'] if st else None) or mv.group(1)
-            s.emit(f'|move|{me}|{move}|'); return
+            s.emit(f'|move|{me}|{move}|'); s.aim(sd, sp, move); return
         if re.match(r'protected itself', rest): s.emit(f'|-singleturn|{me}|Protect'); return
         if re.match(r'fainted', rest):
+            if s.open and k == s.open['user']: s.shut()
             s.emit(f'|faint|{me}'); sl = s.slot_of(sd, sp); s.fainted[sd].add(sp)
             if sl: s.slot_free[sd].append(sl); s.hp[(sd, sl)] = 0
             return
@@ -239,6 +260,7 @@ class Reader:
             mega = (E['items'].get(toid(st.get('item', '')), {}).get('megaStone') or {}).get(sp) or (sp + '-Mega')
             s.emit(f'|detailschange|{me}|{mega}, L50', f"|-mega|{me}|{sp}|{st.get('item', '')}"); s.megas[sd] = True; return
         if re.match(r'(went back to|, come back)', rest) or rest.startswith(', come back'):
+            s.shut()
             sl = s.slot_of(sd, sp)
             if sl: s.slot_free[sd].append(sl); s.active.pop((sd, sl), None)
             return
@@ -255,10 +277,46 @@ class Reader:
         if im:
             item = fuzzy(re.sub(r'^ate its ', '', im.group(1)), 'items')
             if item and item not in ('Leftovers', 'Shell Bell') and 'Mega' not in rest: s.emit(f'|-enditem|{me}|{item}')
+    # A move's target is not in the battle text, but the HP boxes show it: mid-turn the broadcast pops up the box of the Pokemon that is
+    # hit, alone, so the box that drops after "X used Y!" and before the next Pokemon acts is the target. Text that names the target counts too ("protected itself", "avoided the attack", "It doesn't affect", a faint, and for
+    # a status move the first thing said about another Pokemon). With one possible target, that one. Spread moves need no target.
+    def aim(s, sd, sp, move):
+        s.shut(); sl = s.slot_of(sd, sp); mv = E['moves'].get(toid(move), {})
+        if not sl or mv.get('target') not in SINGLE: return
+        foes = [k for k in s.active if k[0] != sd and s.active[k] not in s.fainted[k[0]]]
+        ally = [k for k in s.active if k[0] == sd and k[1] != sl and s.active[k] not in s.fainted[sd]]
+        only = ally if mv['target'] in ('adjacentAlly', 'adjacentAllyOrSelf') else foes if mv['target'] == 'adjacentFoe' or not ally else None
+        s.open = {'at': len(s.out) - 1, 'user': (sd, sl), 'status': mv.get('category') == 'Status', 'start': dict(s.cur), 'seen': collections.Counter(),
+                  'draining': {k for k, fr in s.changed.items() if fr >= s.frame - 1}}
+        s.meta[-1].setdefault('targets', [0, 0])[1] += 1
+        if only is not None and len(only) == 1: s.hit(only[0], 'only target')
+    def hit(s, k, how):
+        """the open move's target is the Pokemon in slot k; how: what showed it (kept in meta['aims'] with the VOD time, for spot checks)"""
+        o = s.open
+        if not o or k == o['user'] or k not in s.active: return
+        s.out[o['at']] = s.out[o['at']].rstrip('|') + f"|{k[0]}{k[1]}: {s.nick(s.active[k])}"; s.meta[-1]['targets'][0] += 1; s.open = None
+        s.meta[-1].setdefault('aims', []).append({'turn': s.turn, 'line': s.out[o['at']], 'how': how, 'vt': s.now()})
+    def shut(s): s.open = None
+    def watch_hp(s, boxes):
+        """one frame's HP boxes: track drops while a move is open"""
+        for (sd, sl), (n, p) in boxes.items():
+            if s.active.get((sd, sl)) != s.species(sd, n): continue
+            if s.cur.get((sd, sl)) != p: s.changed[(sd, sl)] = s.frame
+            s.cur[(sd, sl)] = p
+        o = s.open
+        if not o: return
+        for k, p in s.cur.items():
+            if k != o['user'] and k in o['start'] and p < o['start'][k] - 1: o['seen'][k] += 1
+        sure = [k for k, c in o['seen'].items() if c >= 2]
+        if len(sure) == 1 and not [k for k in o['seen'] if k != sure[0] and k not in o['draining']]: s.hit(sure[0], 'HP box')
+        elif len(sure) > 1:                                                  # two boxes fell: the one not still draining from the last move
+            fresh = [k for k in sure if k not in o['draining']]
+            if len(fresh) == 1: s.hit(fresh[0], 'HP box, another still draining')
+            else: s.shut()
     def send(s, sd, name):
         sp = s.species(sd, re.sub(r' the [A-Z][\w-]*(?: [A-Z][\w-]*)*$', '', name.strip()))     # "Primarina the Rank Master": a title
         if not sp: return
-        free = s.slot_free[sd]; sl = free.pop(0) if free else next((x for x in 'ab' if (sd, x) not in s.active), None)
+        s.shut(); free = s.slot_free[sd]; sl = free.pop(0) if free else next((x for x in 'ab' if (sd, x) not in s.active), None)
         if sl is None:                                                      # who went back was not shown: the HP boxes will tell which slot
             s.pending.append((sd, sp, len(s.out))); return
         s.active[(sd, sl)] = sp
@@ -271,6 +329,7 @@ class Reader:
             if not sl: keep.append((sd, sp, at)); continue
             s.active[(sd, sl)] = sp
             s.out.insert(at, f"|switch|{sd}{sl}: {s.nick(sp)}|{sp}, L50|{s.hp.get(('mon', sd, sp), 100)}/100")
+            if s.open and s.open['at'] >= at: s.open['at'] += 1
             s.pending[i + 1:] = [(a, b, c + 1 if c >= at else c) for a, b, c in s.pending[i + 1:]]; keep = [(a, b, c + 1 if c >= at else c) for a, b, c in keep]
         s.pending = keep
     def reconcile(s, boxes):
@@ -311,6 +370,9 @@ class Reader:
                     s.board = s.game_names.most_common(1)[0][0]; s.check_sides(); s.sides_checked = True
         boxes, decision, turn, text = battle(L)
         if s.ended and decision and len(boxes) >= 3: s.new_game()                       # the next game of the set
+        if s.started and not s.ended and boxes:                                         # mid-turn, the box of the Pokemon hit pops up alone
+            if s.pending: s.place(boxes)
+            s.watch_hp(boxes)
         if len(boxes) < 2 and not text: s.in_decision = False if not decision else s.in_decision; return
         if not s.started:
             if text and re.search(r'^Go! .+ and .+!$|sent out .+ and .+!$', text): s.lead_seen = True
@@ -331,13 +393,12 @@ class Reader:
             elif decision and len(boxes) >= 3 and not s.note: s.note = 'joined mid-game: the bar starts with the next game'
             return
         if s.ended: return
-        if s.pending and len(boxes) >= 2: s.place(boxes)
         if decision and not s.in_decision and s.turn >= 2 and len(boxes) == 4 and all(p == 100 for n, p in boxes.values()) \
                 and max(s.pairs.values()) > s.frame - 120:                       # new leads sent out in the last minute, everyone at full HP
             s.close(); s.prev_end = s.frame - 120
             s.new_game(); s.lead_seen = True; s.frame -= 1; return s.feed(lines)   # this frame again, as the new game's first decision
         if decision and not s.in_decision:
-            s.reconcile(boxes); s.turn = max(s.turn + 1, turn or 0); s.emit('|upkeep', '|', f'|turn|{s.turn}'); s.mark()   # upkeep: durations count down
+            s.shut(); s.reconcile(boxes); s.turn = max(s.turn + 1, turn or 0); s.emit('|upkeep', '|', f'|turn|{s.turn}'); s.mark()   # upkeep: durations count down
         s.in_decision = decision
         if text and not decision:
             if s.last_text and difflib.SequenceMatcher(None, text, s.last_text).ratio() > 0.85: return

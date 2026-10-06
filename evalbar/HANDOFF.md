@@ -175,13 +175,37 @@ and "Player 2": no usernames on the page, in tracked files or in commit messages
 ## How closely top players follow the engine (study.py)
 
 `study.py <ocr .jsonl>` evaluates every turn of every broadcast game as the players knew it and compares each Pokemon's choice with the
-planner, by action (move or switch; the broadcast text shows no targets). Day 1 of the regional VOD (corrected reader, 2026-10-06): 461
-decisions; players took the planner's top pick 45% (17% by chance), the planner put 39% on what they played (56% if they had followed its
-mix), median regret 0.3 points. Summary and the costly plays (planner under 5%, over 5 points against its top action, with VOD times) are in
-`results/broadcast_study_day1.json`. Players Protect more than the planner (13% vs 9%), and the costly Protects mostly came from the
-side that won (5 of 7), the other costly plays mostly from the side that lost (12 of 18): the one-turn engine undervalues Protect. Battle sim
-is testing a two-turn horizon (EVAL_HORIZON=2) on these positions; when it messages, score its eval files the same way (decisions() with
-the evf pointed at them, `study.py replays` on its acc_eval_h1/h2) and report horizon 1 vs 2.
+planner, by action (the move, compared with its best target, or the switch). Day 1 of the regional VOD (reader with targets and popup slots,
+2026-10-06): 469 decisions; players took the planner's top pick 45% (17% by chance), the planner put 39% on what they played (57% if they had
+followed its mix), median regret 0.3 points. `study.py publish <ocr .jsonl>` writes `results/broadcast_study_day1.json` (measures, per game,
+the costly plays: planner under 5%, over 5 points against its top action, with VOD times).
+Players Protect more than the planner (13% vs 8.5%). Battle sim's two-turn horizon (EVAL_HORIZON=2, champ-battle-v18) raises planned Protect
+to 11% on these games and on a Showdown subset, so about half the gap is depth; top-pick agreement does not improve, and the log-score gain
+seen with 2 samples was mostly sampling noise (Battle sim's 4-sample check). Battle sim's reading of the rest: the planner knows exact sets
+and spreads that players do not (testable here by evaluating with a few spread/item variants per Pokemon).
+
+## Were the costly plays reads? (reads.py)
+
+`reads.py run` evaluates the costly plays' turns with the full payoff matrix (champ-battle-v18, EVAL_MATRIX=full); `reads.py report` scores
+each play against what the opponent actually did (exact where the reader found targets) and lists the opponent lines that would have made it
+better than the planner's pick, with how far the opponent's mix would have to lean to break even. Day 1: 11 of the 39 did at least as well
+as the pick against the actual play (6 of those needed a lean under 20%: plausible reads of a habit); the rest did not, most clearly the
+Protects the one-turn engine undervalues. Summary in `results/broadcast_reads_day1.json`.
+
+## The costly plays page (costly.py)
+
+`costly.py <out.html>` builds the page published as the "Day 1 Costly Plays" artifact (template `costly.tpl`: index of plays; per play the
+board as known at the turn's start, field, sets, every active's options, what happened, win chance by turn, the read panel). Publish the
+same scratchpad file to keep the artifact's URL. The template is .tpl so writing it does not open it in the user's browser pane.
+
+## The broadcast reader: targets
+
+Mid-turn the broadcast pops up the HP box of the Pokemon being hit, alone, in that Pokemon's slot. The reader (broadcast.py `aim`/`hit`/
+`watch_hp`) takes a single-target move's target from the box that drops after "X used Y!", or from text naming it (protected itself,
+avoided, It doesn't affect, a faint, and for a status move the first thing said about another Pokemon), or the only possible target.
+Day 1: 232 of 262 single-target moves (89%), 163 of them from the popup box. The popups also place send-outs whose slot the text did not
+give; "<trainer> withdrew X!" frees X's slot; a game closes when Pokemon on neither sheet start acting (the broadcast cut to other footage).
+Each target's evidence and VOD time is kept in meta['aims'] for spot checks.
 
 ## Process names (the user asked, 2026-10-06)
 

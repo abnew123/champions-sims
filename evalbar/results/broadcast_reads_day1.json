@@ -1,0 +1,2266 @@
+[
+ {
+  "game": "m7g1",
+  "turn": 4,
+  "side": "p2",
+  "mon": "Salamence",
+  "played": "switch to Incineroar",
+  "planner_top": "Hyper Voice",
+  "p_played": 0.0009,
+  "cost": 0.172,
+  "video_s": 29782.5,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Milotic",
+   "Scald"
+  ],
+  "opp": [
+   [
+    "Ninetales",
+    "Aurora Veil"
+   ],
+   [
+    "Volcarona",
+    "Quiver Dance"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.5875005428335457,
+  "ante_top": 0.882576906528411,
+  "post_played": 0.5195926894062675,
+  "post_top": 0.8237549943341135,
+  "post_best": 0.8237549943341135,
+  "mass_better": 0.0679357797925958,
+  "post_best_action": "Hyper Voice",
+  "shift": 0.686260356625043,
+  "lines": [
+   {
+    "line": "Ninetales: Blizzard + Volcarona: Protect",
+    "gain": 0.08942845199315293,
+    "mix": 0.0016142096249763917
+   },
+   {
+    "line": "Ninetales: Blizzard + Volcarona: Bug Buzz -> Salamence-Mega",
+    "gain": 0.058103237929221375,
+    "mix": 0.005038325028329498
+   },
+   {
+    "line": "Ninetales: Blizzard + Volcarona: Fiery Dance -> Salamence-Mega",
+    "gain": 0.057966402486926354,
+    "mix": 0.01488969462293168
+   },
+   {
+    "line": "Ninetales: Icy Wind + Volcarona: Bug Buzz -> Salamence-Mega",
+    "gain": 0.04996469284554994,
+    "mix": 0.00011596520810606865
+   },
+   {
+    "line": "Ninetales: Blizzard + Volcarona: Fiery Dance -> Milotic",
+    "gain": 0.035944275656139654,
+    "mix": 0.0026987128194145113
+   }
+  ]
+ },
+ {
+  "game": "m4g1",
+  "turn": 6,
+  "side": "p1",
+  "mon": "Espathra",
+  "played": "Lumina Crash",
+  "planner_top": "Protect",
+  "p_played": 0.0039,
+  "cost": 0.158,
+  "video_s": 18316.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   "Absol",
+   "Detect"
+  ],
+  "opp": [
+   [
+    "Excadrill",
+    "Iron Head"
+   ],
+   [
+    "Tyranitar",
+    "Knock Off"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.5958371822180609,
+  "ante_top": 0.7459459075373917,
+  "post_played": 0.593514604913188,
+  "post_top": 0.7454490097764995,
+  "post_best": 0.7454490097764995,
+  "mass_better": 0.056915339395205884,
+  "post_best_action": "Protect",
+  "shift": 0.5859403088568597,
+  "lines": [
+   {
+    "line": "Excadrill: Protect + Tyranitar-Mega: Protect",
+    "gain": 0.0884081596800923,
+    "mix": 8.333333333333303e-05
+   },
+   {
+    "line": "Excadrill: Iron Head -> Absol-Mega-Z + Tyranitar-Mega: Knock Off -> Absol-Mega-Z",
+    "gain": 0.0883081427170086,
+    "mix": 0.00027940294907185745
+   },
+   {
+    "line": "Excadrill: High Horsepower -> Absol-Mega-Z + Tyranitar-Mega: Knock Off -> Absol-Mega-Z",
+    "gain": 0.0883081427170086,
+    "mix": 0.0001936408477397422
+   },
+   {
+    "line": "Excadrill: Iron Head -> Absol-Mega-Z + Tyranitar-Mega: Low Kick -> Espathra",
+    "gain": 0.0717729631001568,
+    "mix": 0.00011602246901845005
+   },
+   {
+    "line": "Excadrill: High Horsepower -> Absol-Mega-Z + Tyranitar-Mega: Low Kick -> Espathra",
+    "gain": 0.0717729631001568,
+    "mix": 0.00010460941018323728
+   }
+  ]
+ },
+ {
+  "game": "m5g1",
+  "turn": 1,
+  "side": "p2",
+  "mon": "Sinistcha",
+  "played": "Protect",
+  "planner_top": "switch to Incineroar",
+  "p_played": 0.0005,
+  "cost": 0.153,
+  "video_s": 21737.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 6,
+  "partner": [
+   "Delphox",
+   "Protect"
+  ],
+  "opp": [
+   [
+    "Raichu",
+    "Fake Out"
+   ],
+   [
+    "Arcanine",
+    "Head Smash"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.19763180208310438,
+  "ante_top": 0.36874488736374406,
+  "post_played": 0.1973849050123994,
+  "post_top": 0.3400640086303314,
+  "post_best": 0.4760357570948735,
+  "mass_better": 0.00020090656758980915,
+  "post_best_action": "Matcha Gotcha",
+  "shift": 0.5772688164839238,
+  "lines": [
+   {
+    "line": "Raichu: Zap Cannon -> Sinistcha (Mega) + Arcanine: switch to Kingambit",
+    "gain": 0.10918346598075628,
+    "mix": 4.62962962962963e-05
+   },
+   {
+    "line": "Raichu: Zap Cannon -> Sinistcha (Mega) + Arcanine: switch to Rillaboom",
+    "gain": 0.10385072357245169,
+    "mix": 4.629629629629628e-05
+   },
+   {
+    "line": "Raichu: Protect (Mega) + Arcanine: switch to Kingambit",
+    "gain": 0.0656321894793644,
+    "mix": 4.62962962962963e-05
+   },
+   {
+    "line": "Raichu: Protect (Mega) + Arcanine: switch to Sneasler",
+    "gain": 0.04409879120350779,
+    "mix": 4.629629629629628e-05
+   },
+   {
+    "line": "Raichu: Zap Cannon -> Sinistcha (Mega) + Arcanine: switch to Sneasler",
+    "gain": 0.02007773217683242,
+    "mix": 4.629629629629628e-05
+   }
+  ]
+ },
+ {
+  "game": "m6g2",
+  "turn": 3,
+  "side": "p2",
+  "mon": "Charizard",
+  "played": "Protect",
+  "planner_top": "switch to Sneasler",
+  "p_played": 0.0008,
+  "cost": 0.143,
+  "video_s": 25964.5,
+  "side_won": null,
+  "measured": true,
+  "hypotheses": 4,
+  "partner": [
+   "Kommo-o",
+   "Protect"
+  ],
+  "opp": [
+   [
+    "Arcanine",
+    "Head Smash"
+   ],
+   [
+    "Rillaboom",
+    "switch to Gholdengo"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.22382095230759141,
+  "ante_top": 0.3017046306543379,
+  "post_played": 0.1897078003867685,
+  "post_top": 0.29755238806457146,
+  "post_best": 0.29755238806457146,
+  "mass_better": 0.11594421895105991,
+  "post_best_action": "switch to Sneasler",
+  "shift": 0.17746957706581898,
+  "lines": [
+   {
+    "line": "Arcanine: switch to Gholdengo + Rillaboom: Wood Hammer -> Charizard",
+    "gain": 0.29637714943426186,
+    "mix": 0.0004716586452501414
+   },
+   {
+    "line": "Arcanine: switch to Gholdengo + Rillaboom: Grassy Glide -> Charizard",
+    "gain": 0.26777864434881804,
+    "mix": 5.1985413266635334e-05
+   },
+   {
+    "line": "Arcanine: switch to Gholdengo + Rillaboom: Fake Out -> Charizard",
+    "gain": 0.2589935952693368,
+    "mix": 3.1645569620253167e-05
+   },
+   {
+    "line": "Arcanine: switch to Gholdengo + Rillaboom: High Horsepower -> Kommo-o",
+    "gain": 0.17328959098653096,
+    "mix": 5.910519139437147e-05
+   },
+   {
+    "line": "Arcanine: switch to Gholdengo + Rillaboom: Wood Hammer -> Kommo-o",
+    "gain": 0.17328959098653096,
+    "mix": 4.4980430997458093e-05
+   }
+  ]
+ },
+ {
+  "game": "m2g1",
+  "turn": 3,
+  "side": "p2",
+  "mon": "Milotic",
+  "played": "Coil",
+  "planner_top": "Hypnosis",
+  "p_played": 0.0004,
+  "cost": 0.139,
+  "video_s": 10776.0,
+  "side_won": null,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Indeedee-F",
+   "Follow Me"
+  ],
+  "opp": [
+   [
+    "Primarina",
+    "Dazzling Gleam"
+   ],
+   [
+    "Gholdengo",
+    "Trick"
+   ]
+  ],
+  "exact": false,
+  "ante_played": 0.1990843659694942,
+  "ante_top": 0.3601636013669466,
+  "post_played": 0.1795026652077285,
+  "post_top": 0.37277704431537945,
+  "post_best": 0.37277704431537945,
+  "mass_better": 0.0,
+  "post_best_action": "Hypnosis",
+  "shift": null,
+  "lines": []
+ },
+ {
+  "game": "m4g3",
+  "turn": 1,
+  "side": "p1",
+  "mon": "Espathra",
+  "played": "Calm Mind",
+  "planner_top": "switch to Goodra",
+  "p_played": 0.0026,
+  "cost": 0.135,
+  "video_s": 19511.5,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 4,
+  "partner": [
+   "Incineroar",
+   "Fake Out"
+  ],
+  "opp": [
+   [
+    "Staraptor",
+    "switch to Tyranitar"
+   ],
+   [
+    "Gholdengo",
+    "Shadow Ball"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.20932307130942757,
+  "ante_top": 0.35415221702901567,
+  "post_played": 0.23696410478112506,
+  "post_top": 0.3957385948453949,
+  "post_best": 0.3957385948453949,
+  "mass_better": 0.15447414354916775,
+  "post_best_action": "Baton Pass",
+  "shift": 0.2509506217777501,
+  "lines": [
+   {
+    "line": "Staraptor: Close Combat -> Incineroar (Mega) + Gholdengo: switch to Excadrill",
+    "gain": 0.35801140938540993,
+    "mix": 0.00011377370918039534
+   },
+   {
+    "line": "Staraptor: Tailwind (Mega) + Gholdengo: switch to Excadrill",
+    "gain": 0.35801140938540993,
+    "mix": 4.6296296296296294e-05
+   },
+   {
+    "line": "Staraptor: Close Combat -> Espathra (Mega) + Gholdengo: switch to Excadrill",
+    "gain": 0.35801140938540993,
+    "mix": 4.6296296296296294e-05
+   },
+   {
+    "line": "Staraptor: Brave Bird -> Incineroar (Mega) + Gholdengo: switch to Excadrill",
+    "gain": 0.35801140938540993,
+    "mix": 4.6296296296296294e-05
+   },
+   {
+    "line": "Staraptor: Brave Bird -> Espathra (Mega) + Gholdengo: switch to Excadrill",
+    "gain": 0.35801140938540993,
+    "mix": 4.6296296296296294e-05
+   }
+  ]
+ },
+ {
+  "game": "m6g2",
+  "turn": 3,
+  "side": "p2",
+  "mon": "Kommo-o",
+  "played": "Protect",
+  "planner_top": "Clanging Scales",
+  "p_played": 0.0004,
+  "cost": 0.127,
+  "video_s": 25964.5,
+  "side_won": null,
+  "measured": true,
+  "hypotheses": 6,
+  "partner": [
+   "Charizard",
+   "Protect"
+  ],
+  "opp": [
+   [
+    "Arcanine",
+    "Head Smash"
+   ],
+   [
+    "Rillaboom",
+    "switch to Gholdengo"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.21892016166869033,
+  "ante_top": 0.3868513395011171,
+  "post_played": 0.18981713343753157,
+  "post_top": 0.4466365142730011,
+  "post_best": 0.4466365142730011,
+  "mass_better": 0.00034433891476088593,
+  "post_best_action": "Clanging Scales",
+  "shift": 0.5848715933440619,
+  "lines": [
+   {
+    "line": "Arcanine: Flare Blitz -> Kommo-o + Rillaboom: Fake Out -> Kommo-o",
+    "gain": 0.058090888816616185,
+    "mix": 0.00014800939201282712
+   },
+   {
+    "line": "Arcanine: Extreme Speed -> Kommo-o + Rillaboom: Fake Out -> Kommo-o",
+    "gain": 0.03507092583908421,
+    "mix": 8.803100920300672e-05
+   },
+   {
+    "line": "Arcanine: Head Smash -> Kommo-o + Rillaboom: Fake Out -> Kommo-o",
+    "gain": 0.016085986702360795,
+    "mix": 6.868253202922782e-05
+   },
+   {
+    "line": "Arcanine: Protect + Rillaboom: High Horsepower -> Kommo-o",
+    "gain": 0.008360148098840966,
+    "mix": 3.961598151582422e-05
+   }
+  ]
+ },
+ {
+  "game": "m7g2",
+  "turn": 4,
+  "side": "p1",
+  "mon": "Raichu",
+  "played": "Protect",
+  "planner_top": "Focus Blast",
+  "p_played": 0.0004,
+  "cost": 0.103,
+  "video_s": 30535.5,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Volcarona",
+   "Protect"
+  ],
+  "opp": [
+   [
+    "Incineroar",
+    "Fake Out"
+   ],
+   [
+    "Sylveon",
+    "Hyper Voice"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.5864543107297623,
+  "ante_top": 0.6244779643342773,
+  "post_played": 0.5729301965826099,
+  "post_top": 0.6582900289425889,
+  "post_best": 0.7434342524864767,
+  "mass_better": 0.46323803242518286,
+  "post_best_action": "Zap Cannon",
+  "shift": 0.22102691301913402,
+  "lines": [
+   {
+    "line": "Incineroar: Fake Out -> Raichu-Mega-Y + Sylveon: Hyper Voice",
+    "gain": 0.03975264002425333,
+    "mix": 0.46323803242518286
+   }
+  ]
+ },
+ {
+  "game": "m5g1",
+  "turn": 3,
+  "side": "p1",
+  "mon": "Arcanine",
+  "played": "switch to Sneasler",
+  "planner_top": "Protect",
+  "p_played": 0.0002,
+  "cost": 0.099,
+  "video_s": 21891.5,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Raichu",
+   "switch to Rillaboom"
+  ],
+  "opp": [
+   [
+    "Sneasler",
+    "Fake Out"
+   ],
+   [
+    "Delphox",
+    "Nasty Plot"
+   ]
+  ],
+  "exact": false,
+  "ante_played": 0.22502990209200585,
+  "ante_top": 0.24046434814938616,
+  "post_played": 0.3393129570816876,
+  "post_top": 0.25822771031994857,
+  "post_best": 0.770036942730452,
+  "mass_better": 0.20119572253498408,
+  "post_best_action": "Head Smash",
+  "shift": 0.0497758159590024,
+  "lines": [
+   {
+    "line": "Sneasler: Quick Guard + Delphox-Mega: switch to Floette-Eternal",
+    "gain": 0.2796507778630619,
+    "mix": 5.319148936170213e-05
+   },
+   {
+    "line": "Sneasler: Fake Out -> Raichu-Mega-Y + Delphox-Mega: switch to Floette-Eternal",
+    "gain": 0.2662972290656306,
+    "mix": 5.319148936170213e-05
+   },
+   {
+    "line": "Sneasler: Fake Out -> Arcanine + Delphox-Mega: switch to Floette-Eternal",
+    "gain": 0.2622671428838431,
+    "mix": 5.319148936170213e-05
+   },
+   {
+    "line": "Sneasler: Poison Jab -> Raichu-Mega-Y + Delphox-Mega: switch to Kingambit",
+    "gain": 0.2619932324578479,
+    "mix": 5.319148936170217e-05
+   },
+   {
+    "line": "Sneasler: Quick Guard + Delphox-Mega: switch to Kingambit",
+    "gain": 0.26159541837816347,
+    "mix": 5.319148936170217e-05
+   }
+  ]
+ },
+ {
+  "game": "m1g1",
+  "turn": 9,
+  "side": "p1",
+  "mon": "Dragonite",
+  "played": "Protect",
+  "planner_top": "Tailwind",
+  "p_played": 0.0005,
+  "cost": 0.098,
+  "video_s": 7158.0,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   "Sneasler",
+   "Rock Tomb"
+  ],
+  "opp": [
+   [
+    "Dragonite",
+    "Dragon Pulse"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.8160772871003198,
+  "ante_top": 0.9210363548461742,
+  "post_played": 0.8838783237237092,
+  "post_top": 0.9146038031321616,
+  "post_best": 0.978124268491276,
+  "mass_better": 0.0,
+  "post_best_action": "Dragon Pulse",
+  "shift": null,
+  "lines": []
+ },
+ {
+  "game": "m3g1",
+  "turn": 5,
+  "side": "p1",
+  "mon": "Rillaboom",
+  "played": "switch to Gholdengo",
+  "planner_top": "Grassy Glide",
+  "p_played": 0.0097,
+  "cost": 0.098,
+  "video_s": 14499.0,
+  "side_won": null,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   "Incineroar",
+   "Fake Out"
+  ],
+  "opp": [
+   [
+    "Kangaskhan",
+    "Fake Out"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.2948982041252318,
+  "ante_top": 0.41491282302451565,
+  "post_played": 0.6389494102639182,
+  "post_top": 0.4338099707509028,
+  "post_best": 0.6389494102639182,
+  "mass_better": 0.2625157166641053,
+  "post_best_action": "switch to Gholdengo",
+  "shift": 0.27129321196028955,
+  "lines": [
+   {
+    "line": "Kangaskhan-Mega: Fake Out -> Rillaboom + Archaludon: Electro Shot -> Incineroar",
+    "gain": 0.20514121988414913,
+    "mix": 0.22627705460986094
+   },
+   {
+    "line": "Kangaskhan-Mega: Fake Out -> Rillaboom + Archaludon: Dragon Pulse -> Incineroar",
+    "gain": 0.20514121988414913,
+    "mix": 0.014511656113346675
+   },
+   {
+    "line": "Kangaskhan-Mega: Fake Out -> Rillaboom + Archaludon: Electro Shot -> Rillaboom",
+    "gain": 0.20514121988414913,
+    "mix": 0.011541129224802505
+   },
+   {
+    "line": "Kangaskhan-Mega: Fake Out -> Rillaboom + Archaludon: Flash Cannon -> Rillaboom",
+    "gain": 0.20514121988414913,
+    "mix": 0.005011653478577708
+   },
+   {
+    "line": "Kangaskhan-Mega: Fake Out -> Rillaboom + Archaludon: Dragon Pulse -> Rillaboom",
+    "gain": 0.20514121988414913,
+    "mix": 0.004846671518548466
+   }
+  ]
+ },
+ {
+  "game": "m4g3",
+  "turn": 5,
+  "side": "p2",
+  "mon": "Staraptor",
+  "played": "Close Combat",
+  "planner_top": "Tailwind",
+  "p_played": 0.0022,
+  "cost": 0.096,
+  "video_s": 19852.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Gholdengo",
+   "Nasty Plot"
+  ],
+  "opp": [],
+  "exact": true,
+  "ante_played": 0.6193177399387723,
+  "ante_top": 0.7385867720331531,
+  "post_played": 0.6193177399387723,
+  "post_top": 0.7385867720331531,
+  "post_best": 0.7385867720331531,
+  "mass_better": 0.00043430764096531423,
+  "post_best_action": "Tailwind",
+  "shift": 0.5034154980130628,
+  "lines": [
+   {
+    "line": "Incineroar: Flare Blitz -> Gholdengo + Floette-Mega: switch to Rillaboom",
+    "gain": 0.07447834656133327,
+    "mix": 6.097560975609756e-05
+   },
+   {
+    "line": "Incineroar: Throat Chop -> Gholdengo + Floette-Mega: switch to Rillaboom",
+    "gain": 0.009550130145022604,
+    "mix": 0.00040480734063589994
+   },
+   {
+    "line": "Incineroar: Parting Shot -> Gholdengo + Floette-Mega: switch to Rillaboom",
+    "gain": 0.001427970215537235,
+    "mix": 6.097560975609756e-05
+   }
+  ]
+ },
+ {
+  "game": "m2g1",
+  "turn": 2,
+  "side": "p2",
+  "mon": "Milotic",
+  "played": "Coil",
+  "planner_top": "Hypnosis",
+  "p_played": 0.0005,
+  "cost": 0.089,
+  "video_s": 10730.0,
+  "side_won": null,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Staraptor",
+   "switch to Indeedee-F"
+  ],
+  "opp": [
+   [
+    "Primarina",
+    "Protect"
+   ],
+   [
+    "Staraptor",
+    "switch to Gholdengo"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.12425645786952949,
+  "ante_top": 0.2199830032846819,
+  "post_played": 0.3067551733042836,
+  "post_top": 0.3067551733042836,
+  "post_best": 0.36994441006850776,
+  "mass_better": 4.629629629629628e-05,
+  "post_best_action": "Recover",
+  "shift": 0.9622999917292816,
+  "lines": [
+   {
+    "line": "Primarina: Protect + Staraptor: Protect (Mega)",
+    "gain": 0.0035770167884365354,
+    "mix": 4.629629629629629e-05
+   }
+  ]
+ },
+ {
+  "game": "m1g2",
+  "turn": 1,
+  "side": "p2",
+  "mon": "Gholdengo",
+  "played": "Protect",
+  "planner_top": "Shadow Ball",
+  "p_played": 0.002,
+  "cost": 0.088,
+  "video_s": 7366.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 6,
+  "partner": [
+   "Incineroar",
+   "switch to Rillaboom"
+  ],
+  "opp": [
+   [
+    "Gholdengo",
+    "Shadow Ball"
+   ],
+   [
+    "Incineroar",
+    "Fake Out"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.3613622900519703,
+  "ante_top": 0.5190003315564786,
+  "post_played": 0.3679707031958822,
+  "post_top": 0.7084260195996223,
+  "post_best": 0.7084260195996223,
+  "mass_better": 0.09760966188127548,
+  "post_best_action": "Shadow Ball",
+  "shift": 0.5017880297783107,
+  "lines": [
+   {
+    "line": "Gholdengo: Protect + Incineroar: Flare Blitz -> Gholdengo",
+    "gain": 0.0925205224705578,
+    "mix": 0.09283349261161125
+   },
+   {
+    "line": "Gholdengo: switch to Sneasler + Incineroar: Flare Blitz -> Gholdengo",
+    "gain": 0.01028847395951643,
+    "mix": 0.015173614570164268
+   }
+  ]
+ },
+ {
+  "game": "m1g2",
+  "turn": 5,
+  "side": "p2",
+  "mon": "Rillaboom",
+  "played": "Grassy Glide",
+  "planner_top": "Fake Out",
+  "p_played": 0.0006,
+  "cost": 0.087,
+  "video_s": 7740.5,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   "Incineroar",
+   "Snarl"
+  ],
+  "opp": [
+   [
+    "Dragonite",
+    "Tailwind"
+   ],
+   [
+    "Incineroar",
+    "Flare Blitz"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.46426086140610323,
+  "ante_top": 0.5544923894161486,
+  "post_played": 0.3876991423623978,
+  "post_top": 0.5161113412078915,
+  "post_best": 0.5161113412078915,
+  "mass_better": 0.0,
+  "post_best_action": "Fake Out",
+  "shift": null,
+  "lines": []
+ },
+ {
+  "game": "m2g1",
+  "turn": 2,
+  "side": "p1",
+  "mon": "Staraptor",
+  "played": "switch to Gholdengo",
+  "planner_top": "Tailwind",
+  "p_played": 0.0005,
+  "cost": 0.087,
+  "video_s": 10730.0,
+  "side_won": null,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Primarina",
+   "Protect"
+  ],
+  "opp": [
+   [
+    "Milotic",
+    "Coil"
+   ],
+   [
+    "Staraptor",
+    "switch to Indeedee-F"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.7002627398986635,
+  "ante_top": 0.774829367040766,
+  "post_played": 0.6932448266957165,
+  "post_top": 0.7704541376882855,
+  "post_best": 0.7704541376882855,
+  "mass_better": 0.007940821228120863,
+  "post_best_action": "Tailwind",
+  "shift": 0.3344129889928986,
+  "lines": [
+   {
+    "line": "Milotic: Recover + Staraptor: Brave Bird -> Staraptor (Mega)",
+    "gain": 0.1527753063245054,
+    "mix": 0.00014152466904783522
+   },
+   {
+    "line": "Milotic: Coil + Staraptor: Brave Bird -> Staraptor (Mega)",
+    "gain": 0.13945439620029587,
+    "mix": 4.6296296296296294e-05
+   },
+   {
+    "line": "Milotic: switch to Indeedee-F + Staraptor: Brave Bird -> Staraptor (Mega)",
+    "gain": 0.13091535340114013,
+    "mix": 4.62962962962963e-05
+   },
+   {
+    "line": "Milotic: switch to Indeedee-F + Staraptor: Close Combat -> Staraptor (Mega)",
+    "gain": 0.11882066144113534,
+    "mix": 4.62962962962963e-05
+   },
+   {
+    "line": "Milotic: Hypnosis -> Primarina + Staraptor: Brave Bird -> Staraptor (Mega)",
+    "gain": 0.11827956790372762,
+    "mix": 0.0014420223524941713
+   }
+  ]
+ },
+ {
+  "game": "m2g3",
+  "turn": 1,
+  "side": "p1",
+  "mon": "Volcarona",
+  "played": "Protect",
+  "planner_top": "Quiver Dance",
+  "p_played": 0.0417,
+  "cost": 0.085,
+  "video_s": 11725.5,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 9,
+  "partner": [
+   "Raichu",
+   "Zap Cannon"
+  ],
+  "opp": [
+   [
+    "Dragapult",
+    "Draco Meteor"
+   ],
+   [
+    "Golisopod",
+    "switch to Armarouge"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.4064282075133832,
+  "ante_top": 0.5059430128403767,
+  "post_played": 0.6753142307594042,
+  "post_top": 0.6745820101976618,
+  "post_best": 0.7653110851050189,
+  "mass_better": 0.09747123983375475,
+  "post_best_action": "Bug Buzz",
+  "shift": 0.25248032522077674,
+  "lines": [
+   {
+    "line": "Dragapult: Shadow Ball -> Volcarona + Golisopod: Leech Life -> Volcarona (Mega)",
+    "gain": 0.21616508853553984,
+    "mix": 0.04361487097040686
+   },
+   {
+    "line": "Dragapult: Shadow Ball -> Volcarona + Golisopod: Iron Head -> Volcarona (Mega)",
+    "gain": 0.21462079820058613,
+    "mix": 0.03546355678486776
+   },
+   {
+    "line": "Dragapult: Draco Meteor -> Volcarona + Golisopod: Leech Life -> Volcarona (Mega)",
+    "gain": 0.14305839578138252,
+    "mix": 0.0009910546093006142
+   },
+   {
+    "line": "Dragapult: Draco Meteor -> Volcarona + Golisopod: Iron Head -> Volcarona (Mega)",
+    "gain": 0.1390500992630957,
+    "mix": 0.0006425762489542675
+   },
+   {
+    "line": "Dragapult: Draco Meteor -> Volcarona + Golisopod: switch to Armarouge",
+    "gain": 0.026012831022630967,
+    "mix": 0.028797519995375106
+   }
+  ]
+ },
+ {
+  "game": "m7g2",
+  "turn": 4,
+  "side": "p1",
+  "mon": "Volcarona",
+  "played": "Protect",
+  "planner_top": "Fiery Dance",
+  "p_played": 0.0006,
+  "cost": 0.084,
+  "video_s": 30535.5,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Raichu",
+   "Protect"
+  ],
+  "opp": [
+   [
+    "Incineroar",
+    "Fake Out"
+   ],
+   [
+    "Sylveon",
+    "Hyper Voice"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.5864543107297623,
+  "ante_top": 0.6366499131517693,
+  "post_played": 0.5729301965826099,
+  "post_top": 0.5298701702923171,
+  "post_best": 0.5729301965826099,
+  "mass_better": 0.5234908762349874,
+  "post_best_action": "Protect",
+  "shift": 0.2699582463102244,
+  "lines": [
+   {
+    "line": "Incineroar: Flare Blitz -> Volcarona + Sylveon: Detect",
+    "gain": 0.04469598637235393,
+    "mix": 0.00022119491774339194
+   },
+   {
+    "line": "Incineroar: Fake Out -> Volcarona + Sylveon: Hyper Voice",
+    "gain": 0.04306002629029291,
+    "mix": 0.31954473109969495
+   },
+   {
+    "line": "Incineroar: Flare Blitz -> Volcarona + Sylveon: Hyper Voice",
+    "gain": 0.01948090220493837,
+    "mix": 0.0928795540806068
+   },
+   {
+    "line": "Incineroar: Throat Chop -> Volcarona + Sylveon: Hyper Voice",
+    "gain": 0.010331900870975352,
+    "mix": 0.004008302306335096
+   },
+   {
+    "line": "Incineroar: Throat Chop -> Volcarona + Sylveon: Detect",
+    "gain": 0.009288545305332631,
+    "mix": 0.1593224324284513
+   }
+  ]
+ },
+ {
+  "game": "m6g2",
+  "turn": 4,
+  "side": "p1",
+  "mon": "Arcanine",
+  "played": "Flare Blitz",
+  "planner_top": "Head Smash",
+  "p_played": 0.0384,
+  "cost": 0.083,
+  "video_s": 26003.0,
+  "side_won": null,
+  "measured": true,
+  "hypotheses": 6,
+  "partner": [
+   "Gholdengo",
+   "Nasty Plot"
+  ],
+  "opp": [
+   [
+    "Kommo-o",
+    "Aura Sphere"
+   ],
+   [
+    "Charizard",
+    "switch to Kingambit"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.6102568395636337,
+  "ante_top": 0.7069237887132913,
+  "post_played": 0.830600825718104,
+  "post_top": 0.7351404107186885,
+  "post_best": 0.830600825718104,
+  "mass_better": 0.5470948218944829,
+  "post_best_action": "Flare Blitz",
+  "shift": 0.18862104701696614,
+  "lines": [
+   {
+    "line": "Kommo-o: switch to Sneasler + Charizard: switch to Kingambit",
+    "gain": 0.10970664291317261,
+    "mix": 0.00014250703336420007
+   },
+   {
+    "line": "Kommo-o: Clanging Scales + Charizard: switch to Sneasler",
+    "gain": 0.10774399719372547,
+    "mix": 0.0005504894512509285
+   },
+   {
+    "line": "Kommo-o: Clanging Scales + Charizard: switch to Kingambit",
+    "gain": 0.10684180792924021,
+    "mix": 0.6000892173201986
+   },
+   {
+    "line": "Kommo-o: Protect + Charizard: switch to Sneasler",
+    "gain": 0.10421376079170701,
+    "mix": 5.555683475399166e-05
+   },
+   {
+    "line": "Kommo-o: Aura Sphere -> Arcanine + Charizard: switch to Sneasler",
+    "gain": 0.10406113945525239,
+    "mix": 7.048080733983805e-05
+   }
+  ]
+ },
+ {
+  "game": "m4g3",
+  "turn": 3,
+  "side": "p1",
+  "mon": "Floette-Eternal",
+  "played": "Calm Mind",
+  "planner_top": "Dazzling Gleam",
+  "p_played": 0.0004,
+  "cost": 0.083,
+  "video_s": 19711.0,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Rillaboom",
+   "switch to Incineroar"
+  ],
+  "opp": [
+   [
+    "Tyranitar",
+    "Knock Off"
+   ],
+   [
+    "Staraptor",
+    "switch to Gholdengo"
+   ]
+  ],
+  "exact": false,
+  "ante_played": 0.18624818283501615,
+  "ante_top": 0.25155901696242183,
+  "post_played": 0.2742581329100504,
+  "post_top": 0.35023060021674296,
+  "post_best": 0.4090513201966826,
+  "mass_better": 0.08935874250551423,
+  "post_best_action": "Draining Kiss",
+  "shift": 0.1956550635479443,
+  "lines": [
+   {
+    "line": "Tyranitar-Mega: Protect + Staraptor: switch to Gholdengo",
+    "gain": 0.17540617845932513,
+    "mix": 0.045357254862876076
+   },
+   {
+    "line": "Tyranitar-Mega: Protect + Staraptor: Protect",
+    "gain": 0.1428508791884413,
+    "mix": 0.0003208699909426429
+   },
+   {
+    "line": "Tyranitar-Mega: Protect + Staraptor: Tailwind",
+    "gain": 0.07059089347265049,
+    "mix": 0.034028920775906815
+   },
+   {
+    "line": "Tyranitar-Mega: Protect + Staraptor: Close Combat -> Rillaboom",
+    "gain": 0.04489055422833843,
+    "mix": 4.032258064516129e-05
+   },
+   {
+    "line": "Tyranitar-Mega: switch to Gholdengo + Staraptor: Brave Bird -> Rillaboom",
+    "gain": 0.027920308280455775,
+    "mix": 0.00948633331137688
+   }
+  ]
+ },
+ {
+  "game": "m2g1",
+  "turn": 1,
+  "side": "p2",
+  "mon": "Dragapult",
+  "played": "switch to Staraptor",
+  "planner_top": "Shadow Ball",
+  "p_played": 0.0004,
+  "cost": 0.082,
+  "video_s": 10677.0,
+  "side_won": null,
+  "measured": true,
+  "hypotheses": 4,
+  "partner": [
+   null,
+   null
+  ],
+  "opp": [
+   [
+    "Primarina",
+    "Dazzling Gleam"
+   ],
+   [
+    "Gholdengo",
+    "switch to Staraptor"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.2273581672753547,
+  "ante_top": 0.40351396030601666,
+  "post_played": 0.20423535711051222,
+  "post_top": 0.3752176354192462,
+  "post_best": 0.43745980193827916,
+  "mass_better": 0.00842893613776559,
+  "post_best_action": "Draco Meteor",
+  "shift": 0.31746427520777465,
+  "lines": [
+   {
+    "line": "Primarina: Dazzling Gleam + Gholdengo: Trick -> Dragapult",
+    "gain": 0.29185765171263667,
+    "mix": 0.003046609114863392
+   },
+   {
+    "line": "Primarina: Moonblast -> Indeedee-F + Gholdengo: Trick -> Dragapult",
+    "gain": 0.18092439810994465,
+    "mix": 0.00013531026542003047
+   },
+   {
+    "line": "Primarina: Moonblast -> Dragapult + Gholdengo: Trick -> Dragapult",
+    "gain": 0.1359883036941784,
+    "mix": 0.00011639159623874143
+   },
+   {
+    "line": "Primarina: Dazzling Gleam + Gholdengo: Shadow Ball -> Dragapult",
+    "gain": 0.1085818854150971,
+    "mix": 0.0004130051339480769
+   },
+   {
+    "line": "Primarina: Hyper Voice + Gholdengo: Trick -> Dragapult",
+    "gain": 0.10795719002562465,
+    "mix": 0.00011155961169297461
+   }
+  ]
+ },
+ {
+  "game": "m1g1",
+  "turn": 3,
+  "side": "p2",
+  "mon": "Dragonite",
+  "played": "switch to Incineroar",
+  "planner_top": "Dragon Pulse",
+  "p_played": 0.0006,
+  "cost": 0.078,
+  "video_s": 6719.5,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 6,
+  "partner": [
+   "Gholdengo",
+   "Shadow Ball"
+  ],
+  "opp": [
+   [
+    "Dragonite",
+    "Dragon Pulse"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.2395873258703817,
+  "ante_top": 0.32446702862377097,
+  "post_played": 0.2811287101230692,
+  "post_top": 0.3717747652592485,
+  "post_best": 0.38768352284963575,
+  "mass_better": 6.141807462581371e-05,
+  "post_best_action": "Protect",
+  "shift": 0.7017359509514627,
+  "lines": [
+   {
+    "line": "Dragonite-Mega: switch to Floette-Eternal + Gholdengo: Protect",
+    "gain": 0.16291045674413876,
+    "mix": 5.319148936170215e-05
+   },
+   {
+    "line": "Dragonite-Mega: Protect + Gholdengo: Protect",
+    "gain": 0.02105004608429918,
+    "mix": 5.3191489361702134e-05
+   }
+  ]
+ },
+ {
+  "game": "m5g2",
+  "turn": 6,
+  "side": "p2",
+  "mon": "Sneasler",
+  "played": "switch to Incineroar",
+  "planner_top": "Poison Jab",
+  "p_played": 0.0023,
+  "cost": 0.076,
+  "video_s": 22553.5,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   "Delphox",
+   "Protect"
+  ],
+  "opp": [
+   [
+    "Rillaboom",
+    "High Horsepower"
+   ],
+   [
+    "Sneasler",
+    "Rock Slide"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.6727413970285013,
+  "ante_top": 0.736280746140042,
+  "post_played": 0.7055318717180583,
+  "post_top": 0.8028700418786323,
+  "post_best": 0.8028700418786323,
+  "mass_better": 0.0007768382505936895,
+  "post_best_action": "Poison Jab",
+  "shift": 0.7543787919860501,
+  "lines": [
+   {
+    "line": "Rillaboom: Grassy Glide -> Sneasler + Sneasler: Close Combat -> Sneasler",
+    "gain": 0.00641009502710399,
+    "mix": 0.0001703552303288865
+   },
+   {
+    "line": "Rillaboom: Grassy Glide -> Sneasler + Sneasler: Dire Claw -> Sneasler",
+    "gain": 0.0029027470969296143,
+    "mix": 0.0001214391204104707
+   },
+   {
+    "line": "Rillaboom: Wood Hammer -> Sneasler + Sneasler: Dire Claw -> Delphox-Mega",
+    "gain": 0.0012884807326871694,
+    "mix": 0.00034504320408236967
+   },
+   {
+    "line": "Rillaboom: Wood Hammer -> Sneasler + Sneasler: Close Combat -> Delphox-Mega",
+    "gain": 0.0012884807326871694,
+    "mix": 6.924681846757984e-05
+   },
+   {
+    "line": "Rillaboom: Wood Hammer -> Sneasler + Sneasler: Protect",
+    "gain": 0.0010062571705524714,
+    "mix": 7.075387730438289e-05
+   }
+  ]
+ },
+ {
+  "game": "m3g2",
+  "turn": 1,
+  "side": "p2",
+  "mon": "Farigiraf",
+  "played": "Helping Hand",
+  "planner_top": "Trick Room",
+  "p_played": 0.0017,
+  "cost": 0.075,
+  "video_s": 14805.0,
+  "side_won": null,
+  "measured": true,
+  "hypotheses": 9,
+  "partner": [
+   null,
+   null
+  ],
+  "opp": [
+   [
+    "Floette-Eternal",
+    "Dazzling Gleam"
+   ],
+   [
+    "Incineroar",
+    "Flare Blitz"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.3666977007879741,
+  "ante_top": 0.5727359834178297,
+  "post_played": 0.2007459829852191,
+  "post_top": 0.5041743716556134,
+  "post_best": 0.5046912067750648,
+  "mass_better": 0.2044356795379042,
+  "post_best_action": "Trick Room",
+  "shift": 0.4899724336931642,
+  "lines": [
+   {
+    "line": "Floette-Eternal: Protect (Mega) + Incineroar: Taunt -> Farigiraf",
+    "gain": 0.12632430285424104,
+    "mix": 0.000521294701756999
+   },
+   {
+    "line": "Floette-Eternal: switch to Rillaboom + Incineroar: Taunt -> Farigiraf",
+    "gain": 0.10611669165457283,
+    "mix": 0.00011415342057289569
+   },
+   {
+    "line": "Floette-Eternal: Draining Kiss -> Farigiraf (Mega) + Incineroar: Taunt -> Farigiraf",
+    "gain": 0.0915744459559689,
+    "mix": 0.0033132364899068505
+   },
+   {
+    "line": "Floette-Eternal: Draining Kiss -> Mawile (Mega) + Incineroar: Taunt -> Farigiraf",
+    "gain": 0.07083751593741854,
+    "mix": 0.0001510031844285976
+   },
+   {
+    "line": "Floette-Eternal: Dazzling Gleam (Mega) + Incineroar: Taunt -> Farigiraf",
+    "gain": 0.01646923080758362,
+    "mix": 0.2507754288666017
+   }
+  ]
+ },
+ {
+  "game": "m2g2",
+  "turn": 4,
+  "side": "p1",
+  "mon": "Primarina",
+  "played": "Protect",
+  "planner_top": "Moonblast",
+  "p_played": 0.0004,
+  "cost": 0.074,
+  "video_s": 11372.5,
+  "side_won": null,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   "Staraptor",
+   "Close Combat"
+  ],
+  "opp": [
+   [
+    "Golisopod",
+    "Leech Life"
+   ],
+   [
+    "Indeedee-F",
+    "Trick Room"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.20315720695009937,
+  "ante_top": 0.31476504028493735,
+  "post_played": 0.08250331977458945,
+  "post_top": 0.5290179369611816,
+  "post_best": 0.6038401871309305,
+  "mass_better": 0.004615986878614045,
+  "post_best_action": "Hyper Voice",
+  "shift": 0.8375443092990515,
+  "lines": [
+   {
+    "line": "Golisopod: Iron Head -> Primarina (Mega) + Indeedee-F: switch to Armarouge",
+    "gain": 0.007829754267519695,
+    "mix": 0.004615986878614045
+   }
+  ]
+ },
+ {
+  "game": "m5g1",
+  "turn": 5,
+  "side": "p2",
+  "mon": "Sneasler",
+  "played": "switch to Kingambit",
+  "planner_top": "Poison Jab",
+  "p_played": 0.0004,
+  "cost": 0.073,
+  "video_s": 21999.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   "Delphox",
+   "Protect"
+  ],
+  "opp": [
+   [
+    "Raichu",
+    "Zap Cannon"
+   ],
+   [
+    "Sneasler",
+    "Rock Slide"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.21480627419919698,
+  "ante_top": 0.3246482491968635,
+  "post_played": 0.14800057349356543,
+  "post_top": 0.07621045758935951,
+  "post_best": 0.14800057349356543,
+  "mass_better": 0.22111018968435986,
+  "post_best_action": "switch to Kingambit",
+  "shift": 0.3960376938492114,
+  "lines": [
+   {
+    "line": "Raichu-Mega-Y: Zap Cannon -> Sneasler + Sneasler: Dire Claw -> Sneasler",
+    "gain": 0.08643375044331691,
+    "mix": 0.010407320783935026
+   },
+   {
+    "line": "Raichu-Mega-Y: Zap Cannon -> Sneasler + Sneasler: Protect",
+    "gain": 0.07520414990167235,
+    "mix": 0.1619220615726385
+   },
+   {
+    "line": "Raichu-Mega-Y: Zap Cannon -> Sneasler + Sneasler: Rock Slide",
+    "gain": 0.07179011590420592,
+    "mix": 0.011230287318491626
+   },
+   {
+    "line": "Raichu-Mega-Y: Zap Cannon -> Sneasler + Sneasler: Dire Claw -> Delphox-Mega",
+    "gain": 0.05779096571980025,
+    "mix": 0.009629467959420029
+   },
+   {
+    "line": "Raichu-Mega-Y: Zap Cannon -> Sneasler + Sneasler: Close Combat -> Delphox-Mega",
+    "gain": 0.05779096571980025,
+    "mix": 0.007424304955558072
+   }
+  ]
+ },
+ {
+  "game": "m3g2",
+  "turn": 2,
+  "side": "p1",
+  "mon": "Floette-Eternal",
+  "played": "Calm Mind",
+  "planner_top": "Dazzling Gleam",
+  "p_played": 0.0023,
+  "cost": 0.07,
+  "video_s": 14898.0,
+  "side_won": null,
+  "measured": true,
+  "hypotheses": 9,
+  "partner": [
+   "Incineroar",
+   "Taunt"
+  ],
+  "opp": [
+   [
+    "Pelipper",
+    "Weather Ball"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.7973139813342549,
+  "ante_top": 0.8762010084703573,
+  "post_played": 0.7431550750876409,
+  "post_top": 0.8317520335547425,
+  "post_best": 0.8317520335547425,
+  "mass_better": 0.0003506480977360134,
+  "post_best_action": "Dazzling Gleam",
+  "shift": 0.5841372565985703,
+  "lines": [
+   {
+    "line": "Pelipper: Protect + Farigiraf: Psychic -> Floette-Mega",
+    "gain": 0.04113739286068237,
+    "mix": 7.352941176470586e-05
+   },
+   {
+    "line": "Pelipper: Protect + Farigiraf: Helping Hand -> ally",
+    "gain": 0.03224803616786053,
+    "mix": 7.352941176470586e-05
+   },
+   {
+    "line": "Pelipper: Protect + Farigiraf: Trick Room",
+    "gain": 0.03196797371999517,
+    "mix": 7.915374039026126e-05
+   },
+   {
+    "line": "Pelipper: Protect + Farigiraf: Rain Dance",
+    "gain": 0.03196797371999517,
+    "mix": 7.352941176470586e-05
+   },
+   {
+    "line": "Pelipper: Protect + Farigiraf: switch to Kangaskhan",
+    "gain": 0.01825222753951879,
+    "mix": 7.352941176470588e-05
+   }
+  ]
+ },
+ {
+  "game": "m7g1",
+  "turn": 1,
+  "side": "p2",
+  "mon": "Rillaboom",
+  "played": "U-turn",
+  "planner_top": "Fake Out",
+  "p_played": 0.0022,
+  "cost": 0.069,
+  "video_s": 29560.5,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 9,
+  "partner": [
+   "Salamence",
+   "Protect"
+  ],
+  "opp": [
+   [
+    "Raichu",
+    "Fake Out"
+   ],
+   [
+    "Volcarona",
+    "Quiver Dance"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.3426215361716547,
+  "ante_top": 0.4143084548943108,
+  "post_played": 0.5623274236244309,
+  "post_top": 0.42066861176169174,
+  "post_best": 0.6359510968631858,
+  "mass_better": 0.11458943276644831,
+  "post_best_action": "Wood Hammer",
+  "shift": 0.17450767741184323,
+  "lines": [
+   {
+    "line": "Raichu: switch to Rillaboom + Volcarona: Fiery Dance -> Salamence",
+    "gain": 0.28679116025289825,
+    "mix": 3.5714285714285724e-05
+   },
+   {
+    "line": "Raichu: switch to Rillaboom + Volcarona: Bug Buzz -> Salamence",
+    "gain": 0.28679116025289825,
+    "mix": 3.5714285714285724e-05
+   },
+   {
+    "line": "Raichu: switch to Rillaboom + Volcarona: Protect",
+    "gain": 0.2593985938496791,
+    "mix": 3.5714285714285724e-05
+   },
+   {
+    "line": "Raichu: Fake Out -> Salamence (Mega) + Volcarona: Fiery Dance -> Salamence",
+    "gain": 0.22618741050578584,
+    "mix": 0.00905636547881781
+   },
+   {
+    "line": "Raichu: Fake Out -> Salamence (Mega) + Volcarona: Bug Buzz -> Salamence",
+    "gain": 0.22618741050578584,
+    "mix": 0.00219909923046251
+   }
+  ]
+ },
+ {
+  "game": "m1g2",
+  "turn": 2,
+  "side": "p2",
+  "mon": "Rillaboom",
+  "played": "switch to Incineroar",
+  "planner_top": "U-turn",
+  "p_played": 0.0027,
+  "cost": 0.066,
+  "video_s": 7421.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 9,
+  "partner": [
+   "Gholdengo",
+   "Nasty Plot"
+  ],
+  "opp": [
+   [
+    "Gholdengo",
+    "Shadow Ball"
+   ],
+   [
+    "Incineroar",
+    "Flare Blitz"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.44643917157123675,
+  "ante_top": 0.5388732865395771,
+  "post_played": 0.2794646590479735,
+  "post_top": 0.3195697581587277,
+  "post_best": 0.3195697581587277,
+  "mass_better": 0.010899525729431397,
+  "post_best_action": "U-turn",
+  "shift": null,
+  "lines": [
+   {
+    "line": "Gholdengo: switch to Dragonite + Incineroar: Parting Shot -> Rillaboom",
+    "gain": 0.12369136670022686,
+    "mix": 0.04028950742336058
+   },
+   {
+    "line": "Gholdengo: switch to Sneasler + Incineroar: Parting Shot -> Rillaboom",
+    "gain": 0.10819690715781206,
+    "mix": 5.557955834936821e-05
+   }
+  ]
+ },
+ {
+  "game": "m6g2",
+  "turn": 7,
+  "side": "p2",
+  "mon": "Sneasler",
+  "played": "Rock Slide",
+  "planner_top": "Close Combat",
+  "p_played": 0.0162,
+  "cost": 0.066,
+  "video_s": 26281.5,
+  "side_won": null,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   "Charizard",
+   "Heat Wave"
+  ],
+  "opp": [
+   [
+    "Raichu",
+    "Protect"
+   ],
+   [
+    "Gholdengo",
+    "switch to Rillaboom"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.26087839603186014,
+  "ante_top": 0.23739853091210972,
+  "post_played": 0.784858048743788,
+  "post_top": 0.759443851018725,
+  "post_best": 0.784858048743788,
+  "mass_better": 0.6564169372524123,
+  "post_best_action": "Rock Slide",
+  "shift": 0.0,
+  "lines": [
+   {
+    "line": "Raichu: Zap Cannon -> Charizard-Mega-Y (Mega) + Gholdengo: Make It Rain",
+    "gain": 0.05619436258300414,
+    "mix": 0.04251779000427581
+   },
+   {
+    "line": "Raichu: Zap Cannon -> Charizard-Mega-Y (Mega) + Gholdengo: Shadow Ball -> Sneasler",
+    "gain": 0.04324951255269305,
+    "mix": 0.5681735389741941
+   },
+   {
+    "line": "Raichu: Protect (Mega) + Gholdengo: Shadow Ball -> Sneasler",
+    "gain": 0.031086261426825912,
+    "mix": 0.0057290332802292
+   },
+   {
+    "line": "Raichu: Protect (Mega) + Gholdengo: switch to Rillaboom",
+    "gain": 0.025414197725062926,
+    "mix": 6.897647924799703e-05
+   },
+   {
+    "line": "Raichu: Protect (Mega) + Gholdengo: Shadow Ball -> Charizard-Mega-Y",
+    "gain": 0.02346293582505754,
+    "mix": 5.31914893617021e-05
+   }
+  ]
+ },
+ {
+  "game": "m4g1",
+  "turn": 4,
+  "side": "p2",
+  "mon": "Excadrill",
+  "played": "Protect",
+  "planner_top": "Rock Slide",
+  "p_played": 0.002,
+  "cost": 0.066,
+  "video_s": 18201.0,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Gholdengo",
+   "Protect"
+  ],
+  "opp": [
+   [
+    "Absol",
+    "Shadow Claw"
+   ],
+   [
+    "Rillaboom",
+    "Grassy Glide"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.29877378347148287,
+  "ante_top": 0.28913156206310864,
+  "post_played": 0.3070631570307612,
+  "post_top": 0.32409908333145315,
+  "post_best": 0.43698653883066396,
+  "mass_better": 0.8560977687850236,
+  "post_best_action": "Iron Head",
+  "shift": 0.030589358350687712,
+  "lines": [
+   {
+    "line": "Absol-Mega-Z: Night Slash -> Excadrill + Rillaboom: Wood Hammer -> Excadrill",
+    "gain": 0.14443833819508337,
+    "mix": 0.005052546513918147
+   },
+   {
+    "line": "Absol-Mega-Z: Close Combat -> Excadrill + Rillaboom: Wood Hammer -> Excadrill",
+    "gain": 0.14419182270070208,
+    "mix": 0.0025889943250482243
+   },
+   {
+    "line": "Absol-Mega-Z: Shadow Claw -> Excadrill + Rillaboom: High Horsepower -> Excadrill",
+    "gain": 0.13640286464998902,
+    "mix": 0.0019341659126819438
+   },
+   {
+    "line": "Absol-Mega-Z: Night Slash -> Excadrill + Rillaboom: High Horsepower -> Excadrill",
+    "gain": 0.13640286464998902,
+    "mix": 0.0019341659126819438
+   },
+   {
+    "line": "Absol-Mega-Z: Shadow Claw -> Excadrill + Rillaboom: Wood Hammer -> Excadrill",
+    "gain": 0.1344382679596271,
+    "mix": 0.003015247377112318
+   }
+  ]
+ },
+ {
+  "game": "m7g1",
+  "turn": 8,
+  "side": "p2",
+  "mon": "Rillaboom",
+  "played": "Grassy Glide",
+  "planner_top": "Wood Hammer",
+  "p_played": 0.0017,
+  "cost": 0.065,
+  "video_s": 30076.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   null,
+   null
+  ],
+  "opp": [
+   [
+    "Rillaboom",
+    "switch to Ninetales"
+   ],
+   [
+    "Raichu",
+    "Fake Out"
+   ]
+  ],
+  "exact": false,
+  "ante_played": 0.5138053863907251,
+  "ante_top": 0.6605015763650519,
+  "post_played": 0.47485215579793083,
+  "post_top": 0.7408827933999188,
+  "post_best": 0.7408827933999188,
+  "mass_better": 0.0021343372974295003,
+  "post_best_action": "Wood Hammer",
+  "shift": 0.5186673825008082,
+  "lines": [
+   {
+    "line": "Rillaboom: Grassy Glide -> Rillaboom + Raichu-Mega-Y: Zap Cannon -> Rillaboom",
+    "gain": 0.07281928330630871,
+    "mix": 0.00047566352168811537
+   },
+   {
+    "line": "Rillaboom: switch to Ninetales + Raichu-Mega-Y: Zap Cannon -> Rillaboom",
+    "gain": 0.0629618287086322,
+    "mix": 0.00014953549132873777
+   },
+   {
+    "line": "Rillaboom: Wood Hammer -> Rillaboom + Raichu-Mega-Y: Zap Cannon -> Rillaboom",
+    "gain": 0.0480327281352283,
+    "mix": 0.00022160684628635952
+   },
+   {
+    "line": "Rillaboom: High Horsepower -> Rillaboom + Raichu-Mega-Y: Zap Cannon -> Rillaboom",
+    "gain": 0.0480327281352283,
+    "mix": 0.00014151297595091491
+   },
+   {
+    "line": "Rillaboom: Wood Hammer -> Salamence-Mega + Raichu-Mega-Y: Zap Cannon -> Rillaboom",
+    "gain": 0.0480327281352283,
+    "mix": 0.00011001231065728816
+   }
+  ]
+ },
+ {
+  "game": "m4g1",
+  "turn": 5,
+  "side": "p1",
+  "mon": "Rillaboom",
+  "played": "switch to Espathra",
+  "planner_top": "High Horsepower",
+  "p_played": 0.0002,
+  "cost": 0.063,
+  "video_s": 18253.5,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   "Absol",
+   "Night Slash"
+  ],
+  "opp": [
+   [
+    "Excadrill",
+    "Rock Slide"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.6998141919772644,
+  "ante_top": 0.7776332831223743,
+  "post_played": 0.6647663676522474,
+  "post_top": 0.7536671107158812,
+  "post_best": 0.7536671107158812,
+  "mass_better": 0.001412067969711561,
+  "post_best_action": "High Horsepower",
+  "shift": 0.8741038704575054,
+  "lines": [
+   {
+    "line": "Excadrill: Iron Head -> Rillaboom + Gholdengo: Nasty Plot",
+    "gain": 0.004927245071333797,
+    "mix": 0.0010287947740637224
+   },
+   {
+    "line": "Excadrill: Iron Head -> Rillaboom + Gholdengo: Shadow Ball -> Absol-Mega-Z",
+    "gain": 0.004927245071333797,
+    "mix": 0.00020597311199283197
+   },
+   {
+    "line": "Excadrill: Iron Head -> Rillaboom + Gholdengo: Shadow Ball -> Rillaboom",
+    "gain": 0.004927245071333797,
+    "mix": 0.00011632447389890903
+   },
+   {
+    "line": "Excadrill: Rock Slide + Gholdengo: Protect",
+    "gain": 0.003088729881674413,
+    "mix": 6.097560975609755e-05
+   }
+  ]
+ },
+ {
+  "game": "m7g1",
+  "turn": 3,
+  "side": "p1",
+  "mon": "Raichu",
+  "played": "switch to Ninetales",
+  "planner_top": "switch to Rillaboom",
+  "p_played": 0.0011,
+  "cost": 0.062,
+  "video_s": 29699.0,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Volcarona",
+   "Bug Buzz"
+  ],
+  "opp": [
+   [
+    "Salamence",
+    "Hyper Voice"
+   ],
+   [
+    "Incineroar",
+    "Parting Shot"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.2591365449128809,
+  "ante_top": 0.2777259014798977,
+  "post_played": 0.23378773475468767,
+  "post_top": 0.18667674731417447,
+  "post_best": 0.6258549021425298,
+  "mass_better": 0.2423319183753434,
+  "post_best_action": "Zap Cannon",
+  "shift": 0.09244666998205067,
+  "lines": [
+   {
+    "line": "Salamence-Mega: Hyper Voice + Incineroar: switch to Sylveon",
+    "gain": 0.1761144002573044,
+    "mix": 0.0004946846605551808
+   },
+   {
+    "line": "Salamence-Mega: Draco Meteor -> Volcarona + Incineroar: switch to Sylveon",
+    "gain": 0.16849170954279857,
+    "mix": 4.629629629629632e-05
+   },
+   {
+    "line": "Salamence-Mega: Tailwind + Incineroar: switch to Sylveon",
+    "gain": 0.15373449504159747,
+    "mix": 4.629629629629632e-05
+   },
+   {
+    "line": "Salamence-Mega: switch to Rillaboom + Incineroar: Flare Blitz -> Raichu-Mega-Y",
+    "gain": 0.14899459452561245,
+    "mix": 4.629629629629631e-05
+   },
+   {
+    "line": "Salamence-Mega: Hyper Voice + Incineroar: switch to Milotic",
+    "gain": 0.1475881443265326,
+    "mix": 0.00024182262200047257
+   }
+  ]
+ },
+ {
+  "game": "m2g2",
+  "turn": 2,
+  "side": "p2",
+  "mon": "Armarouge",
+  "played": "Armor Cannon",
+  "planner_top": "Expanding Force",
+  "p_played": 0.0396,
+  "cost": 0.058,
+  "video_s": 11240.0,
+  "side_won": null,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Dragapult",
+   "Will-O-Wisp"
+  ],
+  "opp": [
+   [
+    "Volcarona",
+    "switch to Primarina"
+   ],
+   [
+    "Staraptor",
+    "Protect"
+   ]
+  ],
+  "exact": false,
+  "ante_played": 0.5952305781595396,
+  "ante_top": 0.6234982287339139,
+  "post_played": 0.599716155257993,
+  "post_top": 0.6347232575245105,
+  "post_best": 0.6387260445871197,
+  "mass_better": 0.09036392910673081,
+  "post_best_action": "Expanding Force",
+  "shift": 0.11911899215548624,
+  "lines": [
+   {
+    "line": "Volcarona: switch to Rillaboom + Staraptor: switch to Primarina",
+    "gain": 0.1642856432415479,
+    "mix": 0.0865884095853371
+   },
+   {
+    "line": "Volcarona: switch to Primarina + Staraptor: switch to Rillaboom",
+    "gain": 0.13032424955406896,
+    "mix": 0.0032268847345582703
+   },
+   {
+    "line": "Volcarona: switch to Rillaboom + Staraptor: Tailwind (Mega)",
+    "gain": 0.10208904387149607,
+    "mix": 4.70655800287755e-05
+   },
+   {
+    "line": "Volcarona: switch to Rillaboom + Staraptor: Brave Bird -> Dragapult (Mega)",
+    "gain": 0.06508742357566753,
+    "mix": 4.6296296296296314e-05
+   },
+   {
+    "line": "Volcarona: switch to Rillaboom + Staraptor: Brave Bird -> Armarouge (Mega)",
+    "gain": 0.05116045761069032,
+    "mix": 4.672749319448601e-05
+   }
+  ]
+ },
+ {
+  "game": "m5g2",
+  "turn": 5,
+  "side": "p1",
+  "mon": "Rillaboom",
+  "played": "Wood Hammer",
+  "planner_top": "Grassy Glide",
+  "p_played": 0.004,
+  "cost": 0.052,
+  "video_s": 22469.5,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   null,
+   null
+  ],
+  "opp": [
+   [
+    "Delphox",
+    "Heat Wave"
+   ],
+   [
+    "Sneasler",
+    "Close Combat"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.29428649045348604,
+  "ante_top": 0.3520129886936048,
+  "post_played": 0.3734275827614022,
+  "post_top": 0.3586397589644937,
+  "post_best": 0.4904488100034803,
+  "mass_better": 0.3493643504338394,
+  "post_best_action": "High Horsepower",
+  "shift": 0.1236378014511241,
+  "lines": [
+   {
+    "line": "Delphox-Mega: Nasty Plot + Sneasler: Quick Guard",
+    "gain": 0.32456353232890467,
+    "mix": 7.142857142857141e-05
+   },
+   {
+    "line": "Delphox-Mega: Nasty Plot + Sneasler: Close Combat -> Arcanine",
+    "gain": 0.2891584761174751,
+    "mix": 0.015354977219363932
+   },
+   {
+    "line": "Delphox-Mega: Psychic -> Arcanine + Sneasler: Quick Guard",
+    "gain": 0.26007838853898047,
+    "mix": 7.142857142857141e-05
+   },
+   {
+    "line": "Delphox-Mega: Psychic -> Rillaboom + Sneasler: Quick Guard",
+    "gain": 0.2302959628704054,
+    "mix": 7.142857142857141e-05
+   },
+   {
+    "line": "Delphox-Mega: Psychic -> Rillaboom + Sneasler: Close Combat -> Arcanine",
+    "gain": 0.16937131568168068,
+    "mix": 0.026726068106010633
+   }
+  ]
+ },
+ {
+  "game": "m4g3",
+  "turn": 2,
+  "side": "p2",
+  "mon": "Gholdengo",
+  "played": "switch to Staraptor",
+  "planner_top": "Make It Rain",
+  "p_played": 0.0006,
+  "cost": 0.051,
+  "video_s": 19593.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Tyranitar",
+   "Rock Slide"
+  ],
+  "opp": [
+   [
+    "Floette-Eternal",
+    "Calm Mind"
+   ],
+   [
+    "Incineroar",
+    "switch to Rillaboom"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.7924519677323039,
+  "ante_top": 0.843643604747094,
+  "post_played": 0.8559265161298193,
+  "post_top": 0.9660983682420518,
+  "post_best": 0.9664761769455336,
+  "mass_better": 0.3657623196199297,
+  "post_best_action": "Make It Rain",
+  "shift": 0.19765260461423684,
+  "lines": [
+   {
+    "line": "Floette-Eternal: Protect (Mega) + Incineroar: Parting Shot -> Tyranitar",
+    "gain": 0.09861737922363939,
+    "mix": 0.2210781583972245
+   },
+   {
+    "line": "Floette-Eternal: Protect (Mega) + Incineroar: Throat Chop -> Gholdengo",
+    "gain": 0.07554201676586435,
+    "mix": 0.14440162415439967
+   },
+   {
+    "line": "Floette-Eternal: Protect (Mega) + Incineroar: Throat Chop -> Tyranitar",
+    "gain": 0.026436000497713077,
+    "mix": 6.097560975609757e-05
+   },
+   {
+    "line": "Floette-Eternal: Protect (Mega) + Incineroar: switch to Rillaboom",
+    "gain": 0.017951298562356832,
+    "mix": 6.097560975609757e-05
+   },
+   {
+    "line": "Floette-Eternal: Protect (Mega) + Incineroar: Flare Blitz -> Tyranitar",
+    "gain": 0.016082004987067036,
+    "mix": 6.097560975609757e-05
+   }
+  ]
+ },
+ {
+  "game": "m1g2",
+  "turn": 4,
+  "side": "p1",
+  "mon": "Incineroar",
+  "played": "Taunt",
+  "planner_top": "Parting Shot",
+  "p_played": 0.0195,
+  "cost": 0.051,
+  "video_s": 7638.0,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Sneasler",
+   "Dire Claw"
+  ],
+  "opp": [
+   [
+    "Incineroar",
+    "Flare Blitz"
+   ],
+   [
+    "Floette-Eternal",
+    "switch to Rillaboom"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.7206931233181932,
+  "ante_top": 0.7779991100739492,
+  "post_played": 0.7200259459965085,
+  "post_top": 0.8096094047661591,
+  "post_best": 0.8223830417287213,
+  "mass_better": 0.0014035959319301892,
+  "post_best_action": "Flare Blitz",
+  "shift": 0.6216316355558302,
+  "lines": [
+   {
+    "line": "Incineroar: Parting Shot -> Sneasler + Floette-Mega: switch to Rillaboom",
+    "gain": 0.028265250105766082,
+    "mix": 7.142857142857145e-05
+   },
+   {
+    "line": "Incineroar: Parting Shot -> Incineroar + Floette-Mega: switch to Rillaboom",
+    "gain": 0.02663089233715832,
+    "mix": 0.0001580299670218235
+   },
+   {
+    "line": "Incineroar: Flare Blitz -> Incineroar + Floette-Mega: switch to Rillaboom",
+    "gain": 0.01915159084919804,
+    "mix": 7.142857142857145e-05
+   },
+   {
+    "line": "Incineroar: Flare Blitz -> Incineroar + Floette-Mega: Dazzling Gleam",
+    "gain": 0.011042480921451048,
+    "mix": 0.0001220201037338575
+   },
+   {
+    "line": "Incineroar: Flare Blitz -> Incineroar + Floette-Mega: Moonblast -> Incineroar",
+    "gain": 0.008693947607025186,
+    "mix": 0.00039621003638006923
+   }
+  ]
+ },
+ {
+  "game": "m1g2",
+  "turn": 1,
+  "side": "p2",
+  "mon": "Incineroar",
+  "played": "switch to Rillaboom",
+  "planner_top": "Fake Out",
+  "p_played": 0.0009,
+  "cost": 0.05,
+  "video_s": 7366.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 6,
+  "partner": [
+   "Gholdengo",
+   "Protect"
+  ],
+  "opp": [
+   [
+    "Gholdengo",
+    "Shadow Ball"
+   ],
+   [
+    "Incineroar",
+    "Fake Out"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.3613622900519703,
+  "ante_top": 0.3618950263363777,
+  "post_played": 0.3679707031958822,
+  "post_top": 0.4297582843937504,
+  "post_best": 0.4414519658740586,
+  "mass_better": 0.5124212541916473,
+  "post_best_action": "switch to Sneasler",
+  "shift": 0.09832474098733726,
+  "lines": [
+   {
+    "line": "Gholdengo: switch to Sneasler + Incineroar: switch to Rillaboom",
+    "gain": 0.1280923477357245,
+    "mix": 4.098360655737706e-05
+   },
+   {
+    "line": "Gholdengo: switch to Dragonite + Incineroar: switch to Rillaboom",
+    "gain": 0.11552782942996581,
+    "mix": 4.098360655737705e-05
+   },
+   {
+    "line": "Gholdengo: switch to Rillaboom + Incineroar: switch to Sneasler",
+    "gain": 0.11129977936932169,
+    "mix": 4.098360655737706e-05
+   },
+   {
+    "line": "Gholdengo: switch to Rillaboom + Incineroar: switch to Dragonite",
+    "gain": 0.09927949426096264,
+    "mix": 4.098360655737705e-05
+   },
+   {
+    "line": "Gholdengo: switch to Sneasler + Incineroar: Fake Out -> Incineroar",
+    "gain": 0.07347287304568062,
+    "mix": 0.9614010388809803
+   }
+  ]
+ }
+]

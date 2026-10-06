@@ -614,7 +614,7 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     are unexplained by depth to two turns, spread knowledge, or the value of boosts and switches. `EVAL_MATRIX=1|full`: the payoff matrix on each output line (rows / cols / labels / final mixes /
     one-turn values and seed counts per cell, two-turn values under EVAL_HORIZON=2) for reading departures from the equilibrium against
     the opponent's actual move; "1" raises the rows and columns holding a slot's actual or most-weighted option to full seeds first.
-  - **champ-battle-v19 = v18 + `MISS_DOUBLE=<side>` + lock-free interning** (2026-10-06, 3:35 am; flag off: 20 check battles identical
+  - **champ-battle-v19 = v18 + `MISS_DOUBLE=<side>` + lock-free interning** (2026-10-06, 3:00 am; flag off: 20 check battles identical
     to v16, `champ turn` exact). `MISS_DOUBLE=0` (side 0 = MYTEAM): on every accuracy roll by that side, the final hit chance p (base
     accuracy, stages, ModifyAccuracy and Accuracy events applied) is replaced by max(0, 2p - 100) just before the roll (sim.rs
     `roll_accuracy`, both the first-hit and the per-hit multiaccuracy sites); rolls the game already made certain (accuracy `true`: No

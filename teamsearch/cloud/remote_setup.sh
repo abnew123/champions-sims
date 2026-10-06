@@ -17,12 +17,14 @@ echo "== engine (setup.sh)"
 ./setup.sh
 
 echo "== battle binary from $SRC"
+if [ -x native/champ/bin/$NAME ]; then                 # another thread on a shared box may have built it already (and be running it)
+  echo "native/champ/bin/$NAME already exists: not rebuilding (the smoke test checks it)"; exit 0; fi
 want=$(grep " $SRC\$" native/champ/bin/${NAME}.sha256 | cut -d' ' -f1)
 have=$(sha256sum native/champ/$SRC | cut -d' ' -f1)
 [ "$want" = "$have" ] || { echo "source checksum mismatch: $have vs $want"; exit 1; }
 rm -rf build_battle && mkdir build_battle && tar xzf native/champ/$SRC -C build_battle
 (cd build_battle && cargo build --release -q)
 bin=$(find build_battle/target/release -maxdepth 1 -type f -perm -u+x -name 'champ*' | head -1)
-mkdir -p native/champ/bin && cp "$bin" native/champ/bin/$NAME
+mkdir -p native/champ/bin && cp "$bin" native/champ/bin/$NAME.tmp && mv native/champ/bin/$NAME.tmp native/champ/bin/$NAME   # never write over a running binary
 echo "built native/champ/bin/$NAME ($(nproc) cores here)"
 echo "next: teamsearch/cloud/README.md step 5 (smoke test)"

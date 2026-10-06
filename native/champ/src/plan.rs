@@ -430,7 +430,8 @@ pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
 /// DP2 (champ-battle-v8): the small option set for the second turn of the two-turn Protect check: the Pokemon's Protect (if it has one)
 /// and its three strongest damaging options by base power x STAB x type effectiveness x accuracy (spread moves x 0.75 on each foe);
 /// Mega Evolution taken whenever it is available. No switches or status moves.
-pub(crate) fn reduced_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
+pub(crate) fn reduced_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> { reduced_options_n(b, s, i, 3) }
+pub(crate) fn reduced_options_n(b: &mut Battle, s: u8, i: usize, nhits: usize) -> Vec<PChoice> {
     let all = slot_options(b, s, i);
     let Some(pi) = b.sides[s as usize].active[i] else { return all };
     let m = (s, pi);
@@ -452,7 +453,7 @@ pub(crate) fn reduced_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
         dmg.push((mv.base_power * stab * eff * acc, *c));
     }
     dmg.sort_by(|a, c| c.0.partial_cmp(&a.0).unwrap());
-    let mut out: Vec<PChoice> = dmg.into_iter().take(3).map(|x| x.1).collect();
+    let mut out: Vec<PChoice> = dmg.into_iter().take(nhits).map(|x| x.1).collect();
     if let Some(p) = prot { out.push(p); }
     if out.is_empty() { all } else { out }
 }

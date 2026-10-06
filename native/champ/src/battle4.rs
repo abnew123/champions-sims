@@ -27,7 +27,7 @@ fn dp2_log() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock
 fn dp2_side() -> Option<u8> { static F: std::sync::OnceLock<Option<u8>> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("DP2_SIDE").ok().and_then(|x| x.parse().ok())) }
 fn dp2() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("DP2").is_ok()) }
 /// DP2: side 0's value of a position after one more turn played as a small matrix game (reduced_options for both sides, one seed)
-fn next_value(b: &Battle, cfg: &Cfg, seed: [u16; 4], s: u8) -> f64 {
+pub(crate) fn next_value(b: &Battle, cfg: &Cfg, seed: [u16; 4], s: u8) -> f64 {
     let value = |x: &mut Battle, cfg: &Cfg| { let v = value2(x, cfg); if s == 0 { v.0 } else { v.1 } };
     let mut z = b.clone();
     if z.ended { return value(&mut z, cfg); }
@@ -38,12 +38,14 @@ fn next_value(b: &Battle, cfg: &Cfg, seed: [u16; 4], s: u8) -> f64 {
     let (p, q) = nash(&a, 200);
     let mut v = 0.0; for i in 0..a.len() { for j in 0..a[0].len() { v += p[i] * q[j] * a[i][j]; } } v
 }
+/// EVAL_H2_HITS (evalpos horizon 2): damaging options per Pokemon in the second turn's reduced set (default 3, as DP2 uses)
+fn h2_hits() -> usize { static F: std::sync::OnceLock<usize> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("EVAL_H2_HITS").ok().and_then(|x| x.parse().ok()).unwrap_or(3)) }
 fn dp2_sw() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("DP2_SW").is_ok()) }
 /// the second turn's options per side: reduced_options for each active Pokemon, plus (DP2_SW=1, champ-battle-v9) its switches to the bench
-fn rjoint(b: &mut Battle, s: u8) -> Vec<[PChoice; 2]> {
+pub(crate) fn rjoint(b: &mut Battle, s: u8) -> Vec<[PChoice; 2]> {
     let bn = crate::spot::bench(b, s);
     let o: Vec<Vec<PChoice>> = (0..2).map(|i| {
-        let mut v = reduced_options(b, s, i);
+        let mut v = reduced_options_n(b, s, i, h2_hits());
         if dp2_sw() { if let Some(pi) = b.sides[s as usize].active[i] { let p = b.p((s, pi)); if !p.fainted && !p.trapped { for &pos in &bn { v.push(PChoice::Switch(pos)); } } } }
         v }).collect();
     let mut out = vec![];

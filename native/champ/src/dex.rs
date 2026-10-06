@@ -96,8 +96,8 @@ pub struct CbInfo { pub absent: bool, pub cval: Option<CVal>, pub order: Option<
 pub struct EffData {
     pub id: Id, pub name: Id, pub etype: EType, pub cbs: FxMap<Id, CbInfo>, pub fns: Vec<Id>, pub duration: Option<i64>, pub raw: Value,
     /// the callbacks again, indexed: `slots[cb index]` is the position in `cbl` or NO_CB (built by Dex::index_callbacks); `cbmask`
-    /// has bit i set when callback index i is defined (there are fewer than 128 callback names)
-    pub slots: Box<[u16]>, pub cbl: Vec<(Id, CbInfo)>, pub cbmask: u128,
+    /// has bit i set when callback index i is defined (256 bits: the full Showdown data has 162 callback names)
+    pub slots: Box<[u16]>, pub cbl: Vec<(Id, CbInfo)>, pub cbmask: [u64; 4],
     /// flags read on hot paths, precomputed from `raw`
     pub breakable: bool, pub notransform: bool, pub cantsuppress: bool, pub ignore_klutz: bool, pub suppress_weather: bool,
 }
@@ -109,7 +109,7 @@ impl EffData {
         match self.slots.get(i as usize) { Some(&p) if p != NO_CB => Some(&self.cbl[p as usize].1), _ => None }
     }
     /// does this effect define the callback with index i? (one bit test)
-    #[inline] pub fn has(&self, i: u16) -> bool { i < 128 && (self.cbmask >> i) & 1 == 1 }
+    #[inline] pub fn has(&self, i: u16) -> bool { i < 256 && (self.cbmask[(i >> 6) as usize] >> (i & 63)) & 1 == 1 }
     pub fn has_fn(&self, name: &str) -> bool { self.fns.iter().any(|f| *f == name) }
     pub fn flag(&self, f: &str) -> bool { self.raw.get("flags").and_then(|x| x.get(f)).map(|v| !v.is_null() && v != &Value::Bool(false) && v != &Value::from(0)).unwrap_or(false) }
     pub fn s(&self, k: &str) -> Option<Id> { self.raw.get(k).and_then(|v| v.as_str()).map(id) }
@@ -262,7 +262,7 @@ fn parse_eff(v: &Value, default_type: EType) -> EffData {
         etype: v.get("effectType").and_then(|x| x.as_str()).map(etype).unwrap_or(default_type), cbs: parse_cbs(&v["cbs"]),
         fns: v.get("fns").and_then(|x| x.as_array()).map(|a| a.iter().map(|x| id(x.as_str().unwrap())).collect()).unwrap_or_default(),
         duration: v.get("duration").and_then(|x| x.as_i64()), raw: v.clone(),
-        slots: Box::new([]), cbl: vec![], cbmask: 0,
+        slots: Box::new([]), cbl: vec![], cbmask: [0; 4],
         breakable: flag_of(v, "breakable"), notransform: flag_of(v, "notransform"), cantsuppress: flag_of(v, "cantsuppress"),
         ignore_klutz: v.get("ignoreKlutz").map(truthy_json).unwrap_or(false), suppress_weather: v.get("suppressWeather").map(truthy_json).unwrap_or(false),
     }
@@ -295,13 +295,13 @@ impl Dex {
         let types = v["types"].as_object().unwrap().iter().map(|(t, m)| (id(t), m.as_object().unwrap().iter().map(|(a, x)| (id(a), x.as_i64().unwrap_or(0))).collect())).collect();
         let natures = v["natures"].as_object().unwrap().iter().map(|(n, x)| (id(n), (x["plus"].as_str().map(id), x["minus"].as_str().map(id)))).collect();
         let empty = EffData { id: "", name: "", etype: EType::Condition, cbs: FxMap::default(), fns: vec![], duration: None, raw: Value::Null,
-                              slots: Box::new([]), cbl: vec![], cbmask: 0, breakable: false, notransform: false, cantsuppress: false, ignore_klutz: false, suppress_weather: false };
+                              slots: Box::new([]), cbl: vec![], cbmask: [0; 4], breakable: false, notransform: false, cantsuppress: false, ignore_klutz: false, suppress_weather: false };
         let mut cb_names = std::collections::HashSet::default();
         for m in moves.values() { for k in m.eff.cbs.keys() { cb_names.insert(*k); } }
         for e in items.values().chain(abilities.values()).chain(conds.values()) { for k in e.cbs.keys() { cb_names.insert(*k); } }
         cb_names.insert(id("onStart"));
         let mut names: Vec<Id> = cb_names.iter().copied().collect(); names.sort();
-        assert!(names.len() < 128, "too many callback names for the 128-bit callback mask");
+        assert!(names.len() < 256, "too many callback names for the 256-bit callback mask");
         let cb_index: FxMap<Id, u16> = names.iter().enumerate().map(|(i, n)| (*n, i as u16)).collect();
         let (i_on_start, i_on_any_switch_in) = (cb_index[&id("onStart")], cb_index.get(&id("onAnySwitchIn")).copied().unwrap_or(NO_CB));
         let mut d = Dex { moves, items, abilities, conds, species, species_by_name, types, natures, empty, cb_names, cb_index, i_on_start, i_on_any_switch_in, on_start: id("onStart") };
@@ -313,8 +313,8 @@ impl Dex {
         let build = |e: &mut EffData| {
             let mut slots = vec![NO_CB; n]; let mut cbl: Vec<(Id, CbInfo)> = e.cbs.iter().map(|(k, c)| (*k, c.clone())).collect();
             cbl.sort_by_key(|(k, _)| idx[k]);
-            let mut mask = 0u128;
-            for (p, (k, _)) in cbl.iter().enumerate() { slots[idx[k] as usize] = p as u16; mask |= 1u128 << idx[k]; }
+            let mut mask = [0u64; 4];
+            for (p, (k, _)) in cbl.iter().enumerate() { let i = idx[k]; slots[i as usize] = p as u16; mask[(i >> 6) as usize] |= 1u64 << (i & 63); }
             e.slots = slots.into_boxed_slice(); e.cbl = cbl; e.cbmask = mask;
         };
         for m in self.moves.values_mut() { build(&mut m.eff); }

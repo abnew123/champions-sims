@@ -5,11 +5,14 @@
 # usage: teamsearch/cloud/pull_loop.sh <host> <key file> [dest = cloud_results]
 cd "$(dirname "$0")/.."
 HOST=${1:?host}; KEY=${2:?key file}; DEST=${3:-cloud_results}
-caffeinate -i -w $$ &
+mkdir -p bin                                          # run as teamsearch-<program> so top shows whose these are (user, 2026-10-06)
+for p in bash rsync ssh caffeinate; do [ -e bin/teamsearch-$p ] || ln -sf "$(command -v $p)" bin/teamsearch-$p; done
+[ "$(basename "$BASH")" = teamsearch-bash ] || exec bin/teamsearch-bash cloud/pull_loop.sh "$@"
+bin/teamsearch-caffeinate -i -w $$ &
 SSH="ssh -n -i $KEY -o ConnectTimeout=20 -o ServerAliveInterval=30"
 mkdir -p "$DEST"; fails=0; start=$(date +%s)
 while [ $(( $(date +%s) - start )) -lt 36000 ]; do
-  rsync -az -e "ssh -i $KEY -o ConnectTimeout=20" --exclude 'starts_*.jsonl' --exclude 'grid/' \
+  bin/teamsearch-rsync -az -e "$PWD/bin/teamsearch-ssh -i $KEY -o ConnectTimeout=20" --exclude 'starts_*.jsonl' --exclude 'grid/' \
        "ubuntu@$HOST:champions-sims/teamsearch/climb_*" "ubuntu@$HOST:champions-sims/teamsearch/round*.log" \
        "ubuntu@$HOST:champions-sims/teamsearch/runs" "$DEST/" 2>/dev/null; rc=$?
   if [ $rc -eq 0 ] || [ $rc -eq 23 ] || [ $rc -eq 24 ]; then          # 23/24: some files vanished or changed mid-copy (battles finishing): fine

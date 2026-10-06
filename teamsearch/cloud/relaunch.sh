@@ -8,7 +8,7 @@ cd "$(dirname "$0")/.."
 . cloud/run_env.sh
 P=${1:?parallel}; T=${2:?threads}; MODE=${3:-thorough}
 tmux -L climb kill-session -t climb 2>/dev/null; sleep 1
-pkill -f "[c]limb.py round"; pkill -f "[c]hamp-battle-v[0-9]* battle .*teamsearch/runs"; pkill -f "[b]attle_starts.js .*teamsearch/runs"; sleep 3
+pkill -f "[c]limb.py round"; pkill -f "[c]hamp-battle-v[0-9]* battle .*teamsearch/runs"; pkill -f "[t]eamsearch-battle-v[0-9]* battle .*teamsearch/runs"; pkill -f "[b]attle_starts.js .*teamsearch/runs"; sleep 3
 ../.venv/bin/python3 - <<'PY'
 import glob, json, os
 bad = []

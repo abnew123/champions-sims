@@ -1,0 +1,51 @@
+{
+ "what": "cached Showdown Bo3 games (evalpos full information, egvalue9_sym2), turn 2 on: that side's actual win rate minus the engine's rescaled win chance, each side's overall residual taken out; SE from resampling games",
+ "positions": 3408,
+ "games": 555,
+ "value_one_turn_lookahead": {
+  "set_up_last_turn": [
+   -0.032,
+   0.027,
+   397
+  ],
+  "switched_last_turn": [
+   0.007,
+   0.009,
+   1489
+  ],
+  "boosts_1_2": [
+   -0.002,
+   0.019,
+   1241
+  ],
+  "boosts_3_plus": [
+   -0.009,
+   0.031,
+   723
+  ]
+ },
+ "static_value_function": {
+  "set_up_last_turn": [
+   -0.019,
+   0.028,
+   397
+  ],
+  "switched_last_turn": [
+   0.019,
+   0.009,
+   1489
+  ],
+  "boosts_1_2": [
+   0.004,
+   0.019,
+   1241
+  ],
+  "boosts_3_plus": [
+   0.006,
+   0.033,
+   723
+  ]
+ },
+ "format": "[mean residual, standard error, n]",
+ "conclusion": "positions after a setup move and with boosts are rated right (no underrating; after setup, if anything, rated 2-3 points high, within noise); after a switch the value function alone underrates the switching side by about 2 points, the one-turn lookahead by under 1 (not significant)"
+}

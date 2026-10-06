@@ -553,7 +553,7 @@ impl Battle {
         let n = self.dex.evn(ev);
         let d = self.effdata(&eff);
         // no callback: nothing to check or run
-        let cbname = if eff.part.is_empty() { n.on } else { id(&format!("{}.on{}", eff.part, ev)) };
+        let cbname = if eff.part.is_empty() { n.on } else { cbp(eff.part, ev) };
         let (cval, f) = if eff.part.is_empty() {
             match d.cbi(n.on_c.i) { Some(i) if !i.absent || i.cval.is_some() => (i.cval.clone(), i.f), _ => return relay }
         } else { (None, None) };

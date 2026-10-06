@@ -23,6 +23,10 @@ pub fn combine(left: &RV, right: &RV) -> RV {
     right.clone()
 }
 
+pub static MISS_STATS: std::sync::Mutex<Vec<((u8, Id), (u64, u64))>> = std::sync::Mutex::new(Vec::new());
+fn miss_stats() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("MISS_STATS").is_ok()) }
+trait Entry { fn entry(&mut self, k: (u8, Id)) -> &mut (u64, u64); }
+impl Entry for Vec<((u8, Id), (u64, u64))> { fn entry(&mut self, k: (u8, Id)) -> &mut (u64, u64) { if let Some(i) = self.iter().position(|e| e.0 == k) { &mut self[i].1 } else { self.push((k, (0, 0))); &mut self.last_mut().unwrap().1 } } }
 impl Battle {
     // ======================= choices and the queue =======================
     /// pokemon.getMoves(lockedMove) as the request lists them: (move id, target, disabled)
@@ -779,6 +783,21 @@ impl Battle {
         }
         out
     }
+    /// MISS_DOUBLE=<side> (champ-battle-v19, 2026-10-06): that side's accuracy rolls use p' = max(0, 2p - 100) in place of the final hit
+    /// chance p (base accuracy, stages, ModifyAccuracy and Accuracy events applied), so its misses are twice as likely: Hurricane 70 ->
+    /// 40, Sleep Powder 75 -> 50, OHKO moves 30 -> 0. Rolls that the game has already made certain (accuracy `true`) are untouched, and
+    /// a miss caused by the rule is an ordinary miss (Blunder Policy, crash damage). Secondary chances are not affected.
+    pub fn miss_double() -> Option<u8> { static F: std::sync::OnceLock<Option<u8>> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("MISS_DOUBLE").ok().and_then(|x| x.parse().ok())) }
+    /// the accuracy roll: does the move by m hit, given its final hit chance acc (true = certain)? MISS_STATS=1 counts rolls and misses
+    /// per side and move (printed by `champ battle` at the end) to check the rule.
+    fn roll_accuracy(&mut self, m: MonRef, am: usize, acc: &RV) -> bool {
+        if *acc == RV::B(true) { return true; }
+        let mut p = acc.num();
+        if Self::miss_double() == Some(m.0) { p = (2.0 * p - 100.0).max(0.0); }
+        let hit = self.prng.chance(p as i64, 100);
+        if miss_stats() { let mid = self.am(am).id; let mut g = MISS_STATS.lock().unwrap(); let e = g.entry((m.0, mid)); e.0 += 1; if !hit { e.1 += 1; } }
+        hit
+    }
     fn hit_step_accuracy(&mut self, targets: &[MonRef], m: MonRef, am: usize) -> Vec<RV> {
         let e = Eff::mv(self.am(am).id, am);
         let mut out = vec![];
@@ -814,7 +833,7 @@ impl Battle {
             } else {
                 acc = self.run_event("Accuracy", Tgt::Mon(t), Some(m), Some(e), acc, false, false);
             }
-            if acc != RV::B(true) && !self.prng.chance(acc.num() as i64, 100) {
+            if !self.roll_accuracy(m, am, &acc) {
                 if self.am(am).smart_target.unwrap_or(false) { self.amm(am).smart_target = Some(false); }
                 else { let (a, b) = (self.mon_name(m), self.mon_name(t)); self.add(&["-miss", &a, &b]); }
                 out.push(RV::B(false)); continue;
@@ -879,7 +898,7 @@ impl Battle {
                 acc = self.run_event("ModifyAccuracy", Tgt::Mon(t), Some(m), Some(e), acc, false, false);
                 if !self.am(am).always_hit {
                     acc = self.run_event("Accuracy", Tgt::Mon(t), Some(m), Some(e), acc, false, false);
-                    if acc != RV::B(true) && !self.prng.chance(acc.num() as i64, 100) { break; }
+                    if !self.roll_accuracy(m, am, &acc) { break; }
                 }
             }
             let (mdh, tc) = self.spread_move_hit(targets_copy.clone(), m, am, None, false, false);

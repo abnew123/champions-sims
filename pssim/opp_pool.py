@@ -7,6 +7,9 @@ the lead pair and the four brought as actually played, the players' rating, the 
   ../.venv/bin/python3 opp_pool.py jobs <myteam.json> <lead a,b> <back c,d> <n> <out jobs.json> [min rating] [group filter]
         n explicit jobs for champ battle (battle_starts.js explicit mode): our four fixed, their four from n pool entries drawn without
         replacement, weighted by rating band (>= 1500: 3, >= 1300: 2, else 1; unrated 1); the job's meta carries the entry's group.
+  ../.venv/bin/python3 opp_pool.py sixes <group | all> <N> <out.json> [min rating]
+        the N most common sixes of a group (species sets; a six's sets are the most common per species among its games), each with its
+        weight (share of the group's sides), count, lead pairs and brought fours with counts: for the sheet kit's optimal-pick step.
 A game whose side showed fewer than four Pokemon (it ended early) gets the missing bring slots filled from the same six's other games
 when there are any, else from the unseen Pokemon at random (bring_seen says how many were real)."""
 import json, os, sys, re, glob, random, collections
@@ -97,6 +100,23 @@ def jobs(myteam, lead, back, n, outf, min_rating=0, group=None):
         theirs = [{**sets[x], 'evs': spread(x, sets[x]['nature'])} for x in e['bring']]   # lead a, lead b, back, back as played
         J.append({'mine': mine, 'theirs': theirs, 'meta': {'pool_id': e['id'], 'pool_side': e['side'], 'group': e['group'], 'arch': e['arch'], 'rating': e['rating'], 'bring_seen': e['bring_seen']}})
     json.dump(J, open(outf, 'w')); print(f"{len(J)} jobs -> {outf} (from {len(cand)} candidates)")
+def sixes(group, n, outf, min_rating=0):
+    pool = json.load(open(os.path.join(HERE, 'opp_pool.json')))['entries']
+    ents = [e for e in pool if (group == 'all' or e['group'] == group) and (e['rating'] or 0) >= min_rating]
+    by = collections.defaultdict(list)
+    for e in ents: by[frozenset(m['species'] for m in e['six'])].append(e)
+    tot = len(ents); out = []
+    for six, es in sorted(by.items(), key=lambda kv: -len(kv[1]))[:n]:
+        sets = []
+        for sp in sorted(six):
+            c = collections.Counter(json.dumps(m, sort_keys=True) for e in es for m in e['six'] if m['species'] == sp)
+            sets.append(json.loads(c.most_common(1)[0][0]))
+        leads = collections.Counter(' + '.join(sorted(e['lead'])) for e in es); brings = collections.Counter(' + '.join(sorted(e['bring'])) for e in es if e['bring_seen'] == 4)
+        out.append({'six': sets, 'count': len(es), 'weight': len(es) / tot, 'group': group, 'leads': dict(leads.most_common()), 'brings': dict(brings.most_common(8)),
+                    'won': sum(1 for e in es if e['won']) / max(1, sum(1 for e in es if e['won'] is not None))})
+    json.dump({'group': group, 'sides': tot, 'distinct_sixes': len(by), 'covered': sum(x['count'] for x in out) / max(1, tot), 'sixes': out}, open(outf, 'w'), indent=1)
+    print(f"{group}: {tot} sides, {len(by)} distinct sixes; top {len(out)} cover {100 * sum(x['count'] for x in out) / max(1, tot):.0f}% -> {outf}")
 if __name__ == '__main__':
-    if sys.argv[1] == 'build': build(sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, 'results', 'core_rules_both_100.json'))
+    if sys.argv[1] == 'sixes': sixes(sys.argv[2], int(sys.argv[3]), sys.argv[4], int(sys.argv[5]) if len(sys.argv) > 5 else 0)
+    elif sys.argv[1] == 'build': build(sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, 'results', 'core_rules_both_100.json'))
     elif sys.argv[1] == 'jobs': jobs(sys.argv[2], sys.argv[3].split(','), sys.argv[4].split(','), int(sys.argv[5]), sys.argv[6], int(sys.argv[7]) if len(sys.argv) > 7 else 0, sys.argv[8] if len(sys.argv) > 8 else None)

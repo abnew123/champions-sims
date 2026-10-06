@@ -1,6 +1,10 @@
 {
 "Abomasnow": {
 "ability": "Snow Warning",
+"back": [
+7,
+2
+],
 "brought": 2,
 "item": "Abomasite",
 "moves": [
@@ -15,6 +19,10 @@
 },
 "Absol": {
 "ability": "Justified",
+"back": [
+37,
+19
+],
 "brought": 41,
 "item": "Absolite Z",
 "moves": [
@@ -29,6 +37,10 @@
 },
 "Aegislash": {
 "ability": "Stance Change",
+"back": [
+84,
+44
+],
 "brought": 76,
 "item": "Life Orb",
 "moves": [
@@ -43,6 +55,10 @@
 },
 "Aerodactyl": {
 "ability": "Unnerve",
+"back": [
+119,
+30
+],
 "brought": 189,
 "item": "Aerodactylite",
 "moves": [
@@ -57,6 +73,10 @@
 },
 "Aggron": {
 "ability": "Sturdy",
+"back": [
+8,
+2
+],
 "brought": 4,
 "item": "Aggronite",
 "moves": [
@@ -71,6 +91,10 @@
 },
 "Alakazam": {
 "ability": "Synchronize",
+"back": [
+10,
+3
+],
 "brought": 19,
 "item": "Alakazite",
 "moves": [
@@ -85,6 +109,10 @@
 },
 "Alcremie": {
 "ability": "Aroma Veil",
+"back": [
+4,
+2
+],
 "brought": 2,
 "item": "Sitrus Berry",
 "moves": [
@@ -99,6 +127,10 @@
 },
 "Altaria": {
 "ability": "Cloud Nine",
+"back": [
+40,
+16
+],
 "brought": 35,
 "item": "Altarianite",
 "moves": [
@@ -113,6 +145,10 @@
 },
 "Ampharos": {
 "ability": "Static",
+"back": [
+5,
+1
+],
 "brought": 2,
 "item": "Ampharosite",
 "moves": [
@@ -127,6 +163,10 @@
 },
 "Annihilape": {
 "ability": "Defiant",
+"back": [
+111,
+43
+],
 "brought": 175,
 "item": "Choice Scarf",
 "moves": [
@@ -141,6 +181,10 @@
 },
 "Appletun": {
 "ability": "Ripen",
+"back": [
+10,
+2
+],
 "brought": 4,
 "item": "Lum Berry",
 "moves": [
@@ -155,6 +199,10 @@
 },
 "Araquanid": {
 "ability": "Water Bubble",
+"back": [
+25,
+12
+],
 "brought": 22,
 "item": "Mystic Water",
 "moves": [
@@ -169,6 +217,10 @@
 },
 "Arboliva": {
 "ability": "Seed Sower",
+"back": [
+3,
+2
+],
 "brought": 7,
 "item": "Leftovers",
 "moves": [
@@ -183,6 +235,10 @@
 },
 "Arcanine": {
 "ability": "Intimidate",
+"back": [
+4,
+1
+],
 "brought": 6,
 "item": "Sitrus Berry",
 "moves": [
@@ -197,6 +253,10 @@
 },
 "Arcanine-Hisui": {
 "ability": "Rock Head",
+"back": [
+718,
+461
+],
 "brought": 904,
 "item": "Focus Sash",
 "moves": [
@@ -211,6 +271,10 @@
 },
 "Archaludon": {
 "ability": "Stamina",
+"back": [
+759,
+539
+],
 "brought": 851,
 "item": "Leftovers",
 "moves": [
@@ -225,6 +289,10 @@
 },
 "Ariados": {
 "ability": "Insomnia",
+"back": [
+1,
+0
+],
 "brought": 0,
 "item": "Occa Berry",
 "moves": [
@@ -239,6 +307,10 @@
 },
 "Armarouge": {
 "ability": "Flash Fire",
+"back": [
+192,
+114
+],
 "brought": 290,
 "item": "Life Orb",
 "moves": [
@@ -253,6 +325,10 @@
 },
 "Aromatisse": {
 "ability": "Aroma Veil",
+"back": [
+4,
+1
+],
 "brought": 2,
 "item": "Sitrus Berry",
 "moves": [
@@ -267,6 +343,10 @@
 },
 "Audino": {
 "ability": "Regenerator",
+"back": [
+2,
+0
+],
 "brought": 8,
 "item": "Audinite",
 "moves": [
@@ -281,6 +361,10 @@
 },
 "Azumarill": {
 "ability": "Huge Power",
+"back": [
+19,
+13
+],
 "brought": 23,
 "item": "Sitrus Berry",
 "moves": [
@@ -295,6 +379,10 @@
 },
 "Banette": {
 "ability": "Cursed Body",
+"back": [
+0,
+0
+],
 "brought": 4,
 "item": "Banettite",
 "moves": [
@@ -309,6 +397,10 @@
 },
 "Basculegion": {
 "ability": "Adaptability",
+"back": [
+663,
+401
+],
 "brought": 776,
 "item": "Choice Scarf",
 "moves": [
@@ -323,6 +415,10 @@
 },
 "Basculegion-F": {
 "ability": "Swift Swim",
+"back": [
+16,
+12
+],
 "brought": 33,
 "item": "Focus Sash",
 "moves": [
@@ -337,6 +433,10 @@
 },
 "Bastiodon": {
 "ability": "Soundproof",
+"back": [
+4,
+4
+],
 "brought": 13,
 "item": "Leftovers",
 "moves": [
@@ -351,6 +451,10 @@
 },
 "Baxcalibur": {
 "ability": "Thermal Exchange",
+"back": [
+114,
+49
+],
 "brought": 87,
 "item": "Baxcalibrite",
 "moves": [
@@ -365,6 +469,10 @@
 },
 "Beedrill": {
 "ability": "Swarm",
+"back": [
+2,
+2
+],
 "brought": 7,
 "item": "Beedrillite",
 "moves": [
@@ -379,6 +487,10 @@
 },
 "Bellibolt": {
 "ability": "Electromorphosis",
+"back": [
+13,
+6
+],
 "brought": 18,
 "item": "Leftovers",
 "moves": [
@@ -393,6 +505,10 @@
 },
 "Blastoise": {
 "ability": "Rain Dish",
+"back": [
+68,
+5
+],
 "brought": 65,
 "item": "Blastoisinite",
 "moves": [
@@ -407,6 +523,10 @@
 },
 "Blaziken": {
 "ability": "Speed Boost",
+"back": [
+98,
+47
+],
 "brought": 139,
 "item": "Blazikenite",
 "moves": [
@@ -421,6 +541,10 @@
 },
 "Camerupt": {
 "ability": "Solid Rock",
+"back": [
+130,
+102
+],
 "brought": 134,
 "item": "Cameruptite",
 "moves": [
@@ -435,6 +559,10 @@
 },
 "Ceruledge": {
 "ability": "Flash Fire",
+"back": [
+102,
+52
+],
 "brought": 103,
 "item": "Grassy Seed",
 "moves": [
@@ -449,6 +577,10 @@
 },
 "Chandelure": {
 "ability": "Flash Fire",
+"back": [
+6,
+3
+],
 "brought": 7,
 "item": "Chandelurite",
 "moves": [
@@ -463,6 +595,10 @@
 },
 "Charizard": {
 "ability": "Blaze",
+"back": [
+554,
+186
+],
 "brought": 588,
 "item": "Charizardite Y",
 "moves": [
@@ -477,6 +613,10 @@
 },
 "Chesnaught": {
 "ability": "Bulletproof",
+"back": [
+11,
+6
+],
 "brought": 9,
 "item": "Chesnaughtite",
 "moves": [
@@ -491,6 +631,10 @@
 },
 "Chimecho": {
 "ability": "Levitate",
+"back": [
+9,
+2
+],
 "brought": 3,
 "item": "Chimechite",
 "moves": [
@@ -505,6 +649,10 @@
 },
 "Cinderace": {
 "ability": "Blaze",
+"back": [
+12,
+3
+],
 "brought": 18,
 "item": "Focus Sash",
 "moves": [
@@ -519,6 +667,10 @@
 },
 "Clawitzer": {
 "ability": "Mega Launcher",
+"back": [
+2,
+2
+],
 "brought": 2,
 "item": "Life Orb",
 "moves": [
@@ -533,6 +685,10 @@
 },
 "Clefable": {
 "ability": "Unaware",
+"back": [
+41,
+18
+],
 "brought": 43,
 "item": "Sitrus Berry",
 "moves": [
@@ -547,6 +703,10 @@
 },
 "Cofagrigus": {
 "ability": "Mummy",
+"back": [
+10,
+6
+],
 "brought": 8,
 "item": "Sitrus Berry",
 "moves": [
@@ -561,6 +721,10 @@
 },
 "Conkeldurr": {
 "ability": "Guts",
+"back": [
+2,
+2
+],
 "brought": 2,
 "item": "Rocky Helmet",
 "moves": [
@@ -575,6 +739,10 @@
 },
 "Corviknight": {
 "ability": "Mirror Armor",
+"back": [
+143,
+54
+],
 "brought": 117,
 "item": "Psychic Seed",
 "moves": [
@@ -589,6 +757,10 @@
 },
 "Crabominable": {
 "ability": "Hyper Cutter",
+"back": [
+6,
+1
+],
 "brought": 2,
 "item": "Crabominite",
 "moves": [
@@ -603,6 +775,10 @@
 },
 "Decidueye-Hisui": {
 "ability": "Scrappy",
+"back": [
+4,
+1
+],
 "brought": 2,
 "item": "Focus Sash",
 "moves": [
@@ -617,6 +793,10 @@
 },
 "Dedenne": {
 "ability": "Plus",
+"back": [
+1,
+1
+],
 "brought": 1,
 "item": "Choice Scarf",
 "moves": [
@@ -631,6 +811,10 @@
 },
 "Delphox": {
 "ability": "Blaze",
+"back": [
+184,
+65
+],
 "brought": 282,
 "item": "Delphoxite",
 "moves": [
@@ -645,6 +829,10 @@
 },
 "Diggersby": {
 "ability": "Huge Power",
+"back": [
+1,
+0
+],
 "brought": 1,
 "item": "Choice Scarf",
 "moves": [
@@ -659,6 +847,10 @@
 },
 "Ditto": {
 "ability": "Imposter",
+"back": [
+16,
+11
+],
 "brought": 16,
 "item": "Focus Sash",
 "moves": [
@@ -670,6 +862,10 @@
 },
 "Dragalge": {
 "ability": "Adaptability",
+"back": [
+6,
+3
+],
 "brought": 3,
 "item": "Dragalgite",
 "moves": [
@@ -684,6 +880,10 @@
 },
 "Dragapult": {
 "ability": "Infiltrator",
+"back": [
+118,
+49
+],
 "brought": 145,
 "item": "Life Orb",
 "moves": [
@@ -698,6 +898,10 @@
 },
 "Dragonite": {
 "ability": "Inner Focus",
+"back": [
+169,
+57
+],
 "brought": 228,
 "item": "Dragoninite",
 "moves": [
@@ -712,6 +916,10 @@
 },
 "Drampa": {
 "ability": "Cloud Nine",
+"back": [
+5,
+2
+],
 "brought": 3,
 "item": "Drampanite",
 "moves": [
@@ -726,6 +934,10 @@
 },
 "Eelektross": {
 "ability": "Levitate",
+"back": [
+3,
+0
+],
 "brought": 3,
 "item": "Eelektrossite",
 "moves": [
@@ -740,6 +952,10 @@
 },
 "Emboar": {
 "ability": "Reckless",
+"back": [
+2,
+1
+],
 "brought": 2,
 "item": "Emboarite",
 "moves": [
@@ -754,6 +970,10 @@
 },
 "Emolga": {
 "ability": "Motor Drive",
+"back": [
+1,
+0
+],
 "brought": 1,
 "item": "Focus Sash",
 "moves": [
@@ -768,6 +988,10 @@
 },
 "Empoleon": {
 "ability": "Competitive",
+"back": [
+37,
+9
+],
 "brought": 34,
 "item": "Grassy Seed",
 "moves": [
@@ -782,6 +1006,10 @@
 },
 "Espathra": {
 "ability": "Speed Boost",
+"back": [
+18,
+5
+],
 "brought": 39,
 "item": "Grassy Seed",
 "moves": [
@@ -796,6 +1024,10 @@
 },
 "Excadrill": {
 "ability": "Sand Rush",
+"back": [
+288,
+177
+],
 "brought": 387,
 "item": "Focus Sash",
 "moves": [
@@ -810,6 +1042,10 @@
 },
 "Falinks": {
 "ability": "Defiant",
+"back": [
+1,
+1
+],
 "brought": 1,
 "item": "Falinksite",
 "moves": [
@@ -824,6 +1060,10 @@
 },
 "Farigiraf": {
 "ability": "Armor Tail",
+"back": [
+576,
+296
+],
 "brought": 909,
 "item": "Sitrus Berry",
 "moves": [
@@ -838,6 +1078,10 @@
 },
 "Feraligatr": {
 "ability": "Sheer Force",
+"back": [
+4,
+2
+],
 "brought": 2,
 "item": "Feraligite",
 "moves": [
@@ -852,6 +1096,10 @@
 },
 "Flapple": {
 "ability": "Hustle",
+"back": [
+1,
+1
+],
 "brought": 2,
 "item": "Choice Scarf",
 "moves": [
@@ -866,6 +1114,10 @@
 },
 "Floette-Eternal": {
 "ability": "Flower Veil",
+"back": [
+575,
+109
+],
 "brought": 444,
 "item": "Floettite",
 "moves": [
@@ -880,6 +1132,10 @@
 },
 "Florges-Blue": {
 "ability": "Flower Veil",
+"back": [
+4,
+4
+],
 "brought": 4,
 "item": "Grassy Seed",
 "moves": [
@@ -894,6 +1150,10 @@
 },
 "Forretress": {
 "ability": "Sturdy",
+"back": [
+4,
+3
+],
 "brought": 3,
 "item": "Rocky Helmet",
 "moves": [
@@ -908,6 +1168,10 @@
 },
 "Froslass": {
 "ability": "Cursed Body",
+"back": [
+269,
+71
+],
 "brought": 285,
 "item": "Froslassite",
 "moves": [
@@ -922,6 +1186,10 @@
 },
 "Gallade": {
 "ability": "Sharpness",
+"back": [
+30,
+14
+],
 "brought": 35,
 "item": "White Herb",
 "moves": [
@@ -936,6 +1204,10 @@
 },
 "Garchomp": {
 "ability": "Rough Skin",
+"back": [
+1251,
+597
+],
 "brought": 1599,
 "item": "Garchompite Z",
 "moves": [
@@ -950,6 +1222,10 @@
 },
 "Gardevoir": {
 "ability": "Trace",
+"back": [
+281,
+91
+],
 "brought": 332,
 "item": "Gardevoirite",
 "moves": [
@@ -964,6 +1240,10 @@
 },
 "Garganacl": {
 "ability": "Purifying Salt",
+"back": [
+2,
+1
+],
 "brought": 9,
 "item": "Leftovers",
 "moves": [
@@ -978,6 +1258,10 @@
 },
 "Gengar": {
 "ability": "Cursed Body",
+"back": [
+189,
+55
+],
 "brought": 358,
 "item": "Gengarite",
 "moves": [
@@ -992,6 +1276,10 @@
 },
 "Gholdengo": {
 "ability": "Goodas Gold",
+"back": [
+1204,
+718
+],
 "brought": 1598,
 "item": "Life Orb",
 "moves": [
@@ -1006,6 +1294,10 @@
 },
 "Glaceon": {
 "ability": "Snow Cloak",
+"back": [
+2,
+0
+],
 "brought": 0,
 "item": "Never Melt Ice",
 "moves": [
@@ -1020,6 +1312,10 @@
 },
 "Glalie": {
 "ability": "Moody",
+"back": [
+0,
+0
+],
 "brought": 0,
 "item": "Quick Claw",
 "moves": [
@@ -1031,6 +1327,10 @@
 },
 "Glimmora": {
 "ability": "Toxic Debris",
+"back": [
+185,
+55
+],
 "brought": 173,
 "item": "Glimmoranite",
 "moves": [
@@ -1045,6 +1345,10 @@
 },
 "Gliscor": {
 "ability": "Hyper Cutter",
+"back": [
+22,
+13
+],
 "brought": 27,
 "item": "",
 "moves": [
@@ -1059,6 +1363,10 @@
 },
 "Gogoat": {
 "ability": "Grass Pelt",
+"back": [
+0,
+0
+],
 "brought": 1,
 "item": "Psychic Seed",
 "moves": [
@@ -1073,6 +1381,10 @@
 },
 "Golisopod": {
 "ability": "Emergency Exit",
+"back": [
+458,
+174
+],
 "brought": 404,
 "item": "Golisopite",
 "moves": [
@@ -1087,6 +1399,10 @@
 },
 "Golurk": {
 "ability": "Iron Fist",
+"back": [
+3,
+2
+],
 "brought": 6,
 "item": "Golurkite",
 "moves": [
@@ -1101,6 +1417,10 @@
 },
 "Goodra-Hisui": {
 "ability": "Shell Armor",
+"back": [
+9,
+7
+],
 "brought": 22,
 "item": "Leftovers",
 "moves": [
@@ -1115,6 +1435,10 @@
 },
 "Gourgeist-Super": {
 "ability": "Pickup",
+"back": [
+2,
+2
+],
 "brought": 2,
 "item": "Sitrus Berry",
 "moves": [
@@ -1129,6 +1453,10 @@
 },
 "Grapploct": {
 "ability": "Technician",
+"back": [
+42,
+21
+],
 "brought": 31,
 "item": "Life Orb",
 "moves": [
@@ -1143,6 +1471,10 @@
 },
 "Greninja": {
 "ability": "Protean",
+"back": [
+7,
+3
+],
 "brought": 13,
 "item": "Greninjite",
 "moves": [
@@ -1157,6 +1489,10 @@
 },
 "Grimmsnarl": {
 "ability": "Prankster",
+"back": [
+247,
+53
+],
 "brought": 346,
 "item": "Light Clay",
 "moves": [
@@ -1171,6 +1507,10 @@
 },
 "Gyarados": {
 "ability": "Intimidate",
+"back": [
+18,
+9
+],
 "brought": 29,
 "item": "Gyaradosite",
 "moves": [
@@ -1185,6 +1525,10 @@
 },
 "Hatterene": {
 "ability": "Magic Bounce",
+"back": [
+78,
+37
+],
 "brought": 98,
 "item": "Life Orb",
 "moves": [
@@ -1199,6 +1543,10 @@
 },
 "Hawlucha": {
 "ability": "Limber",
+"back": [
+9,
+4
+],
 "brought": 18,
 "item": "Hawluchanite",
 "moves": [
@@ -1213,6 +1561,10 @@
 },
 "Heliolisk": {
 "ability": "Solar Power",
+"back": [
+6,
+2
+],
 "brought": 3,
 "item": "Choice Scarf",
 "moves": [
@@ -1227,6 +1579,10 @@
 },
 "Heracross": {
 "ability": "Swarm",
+"back": [
+11,
+6
+],
 "brought": 15,
 "item": "Wide Lens",
 "moves": [
@@ -1241,6 +1597,10 @@
 },
 "Hippowdon": {
 "ability": "Sand Stream",
+"back": [
+19,
+16
+],
 "brought": 32,
 "item": "Leftovers",
 "moves": [
@@ -1255,6 +1615,10 @@
 },
 "Houndoom": {
 "ability": "Flash Fire",
+"back": [
+15,
+9
+],
 "brought": 13,
 "item": "Houndoominite",
 "moves": [
@@ -1269,6 +1633,10 @@
 },
 "Houndstone": {
 "ability": "Sand Rush",
+"back": [
+0,
+0
+],
 "brought": 1,
 "item": "Spell Tag",
 "moves": [
@@ -1283,6 +1651,10 @@
 },
 "Hydrapple": {
 "ability": "Supersweet Syrup",
+"back": [
+1,
+1
+],
 "brought": 3,
 "item": "Life Orb",
 "moves": [
@@ -1297,6 +1669,10 @@
 },
 "Hydreigon": {
 "ability": "Levitate",
+"back": [
+54,
+18
+],
 "brought": 60,
 "item": "Choice Scarf",
 "moves": [
@@ -1311,6 +1687,10 @@
 },
 "Incineroar": {
 "ability": "Intimidate",
+"back": [
+1719,
+1047
+],
 "brought": 2436,
 "item": "Sitrus Berry",
 "moves": [
@@ -1325,6 +1705,10 @@
 },
 "Indeedee": {
 "ability": "Psychic Surge",
+"back": [
+274,
+198
+],
 "brought": 348,
 "item": "Choice Scarf",
 "moves": [
@@ -1339,6 +1723,10 @@
 },
 "Indeedee-F": {
 "ability": "Psychic Surge",
+"back": [
+565,
+379
+],
 "brought": 975,
 "item": "Rocky Helmet",
 "moves": [
@@ -1353,6 +1741,10 @@
 },
 "Infernape": {
 "ability": "Blaze",
+"back": [
+3,
+2
+],
 "brought": 7,
 "item": "Focus Sash",
 "moves": [
@@ -1367,6 +1759,10 @@
 },
 "Inteleon": {
 "ability": "Sniper",
+"back": [
+6,
+4
+],
 "brought": 5,
 "item": "Scope Lens",
 "moves": [
@@ -1381,6 +1777,10 @@
 },
 "Jolteon": {
 "ability": "Volt Absorb",
+"back": [
+0,
+0
+],
 "brought": 2,
 "item": "Magnet",
 "moves": [
@@ -1395,6 +1795,10 @@
 },
 "Kangaskhan": {
 "ability": "Scrappy",
+"back": [
+11,
+5
+],
 "brought": 27,
 "item": "Kangaskhanite",
 "moves": [
@@ -1409,6 +1813,10 @@
 },
 "Kingambit": {
 "ability": "Defiant",
+"back": [
+1285,
+741
+],
 "brought": 1500,
 "item": "Life Orb",
 "moves": [
@@ -1423,6 +1831,10 @@
 },
 "Kleavor": {
 "ability": "Sharpness",
+"back": [
+11,
+7
+],
 "brought": 51,
 "item": "Focus Sash",
 "moves": [
@@ -1437,6 +1849,10 @@
 },
 "Klefki": {
 "ability": "Prankster",
+"back": [
+23,
+17
+],
 "brought": 36,
 "item": "Light Clay",
 "moves": [
@@ -1451,6 +1867,10 @@
 },
 "Kommo-o": {
 "ability": "Soundproof",
+"back": [
+340,
+197
+],
 "brought": 515,
 "item": "Leftovers",
 "moves": [
@@ -1465,6 +1885,10 @@
 },
 "Krookodile": {
 "ability": "Intimidate",
+"back": [
+6,
+0
+],
 "brought": 16,
 "item": "Chople Berry",
 "moves": [
@@ -1479,6 +1903,10 @@
 },
 "Leafeon": {
 "ability": "Chlorophyll",
+"back": [
+3,
+0
+],
 "brought": 1,
 "item": "Life Orb",
 "moves": [
@@ -1493,6 +1921,10 @@
 },
 "Liepard": {
 "ability": "Prankster",
+"back": [
+4,
+0
+],
 "brought": 1,
 "item": "Focus Sash",
 "moves": [
@@ -1507,6 +1939,10 @@
 },
 "Lopunny": {
 "ability": "Cute Charm",
+"back": [
+16,
+7
+],
 "brought": 39,
 "item": "Lopunnite",
 "moves": [
@@ -1521,6 +1957,10 @@
 },
 "Lucario": {
 "ability": "Inner Focus",
+"back": [
+120,
+36
+],
 "brought": 142,
 "item": "Lucarionite Z",
 "moves": [
@@ -1535,6 +1975,10 @@
 },
 "Luxray": {
 "ability": "Intimidate",
+"back": [
+2,
+0
+],
 "brought": 2,
 "item": "Sitrus Berry",
 "moves": [
@@ -1549,6 +1993,10 @@
 },
 "Lycanroc-Dusk": {
 "ability": "Tough Claws",
+"back": [
+16,
+6
+],
 "brought": 15,
 "item": "Focus Sash",
 "moves": [
@@ -1563,6 +2011,10 @@
 },
 "Mabosstiff": {
 "ability": "Intimidate",
+"back": [
+1,
+0
+],
 "brought": 1,
 "item": "Focus Sash",
 "moves": [
@@ -1577,6 +2029,10 @@
 },
 "Machamp": {
 "ability": "No Guard",
+"back": [
+1,
+1
+],
 "brought": 1,
 "item": "Choice Scarf",
 "moves": [
@@ -1591,6 +2047,10 @@
 },
 "Malamar": {
 "ability": "Contrary",
+"back": [
+7,
+1
+],
 "brought": 11,
 "item": "Malamarite",
 "moves": [
@@ -1605,6 +2065,10 @@
 },
 "Mamoswine": {
 "ability": "Oblivious",
+"back": [
+20,
+8
+],
 "brought": 18,
 "item": "Focus Sash",
 "moves": [
@@ -1619,6 +2083,10 @@
 },
 "Manectric": {
 "ability": "Lightning Rod",
+"back": [
+6,
+1
+],
 "brought": 7,
 "item": "Manectite",
 "moves": [
@@ -1633,6 +2101,10 @@
 },
 "Maushold": {
 "ability": "Friend Guard",
+"back": [
+32,
+12
+],
 "brought": 36,
 "item": "Chople Berry",
 "moves": [
@@ -1647,6 +2119,10 @@
 },
 "Maushold-Four": {
 "ability": "Friend Guard",
+"back": [
+49,
+23
+],
 "brought": 46,
 "item": "Wide Lens",
 "moves": [
@@ -1661,6 +2137,10 @@
 },
 "Mawile": {
 "ability": "Hyper Cutter",
+"back": [
+71,
+29
+],
 "brought": 40,
 "item": "Mawilite",
 "moves": [
@@ -1675,6 +2155,10 @@
 },
 "Medicham": {
 "ability": "Pure Power",
+"back": [
+2,
+1
+],
 "brought": 6,
 "item": "Choice Scarf",
 "moves": [
@@ -1689,6 +2173,10 @@
 },
 "Meganium": {
 "ability": "Overgrow",
+"back": [
+27,
+9
+],
 "brought": 34,
 "item": "Meganiumite",
 "moves": [
@@ -1703,6 +2191,10 @@
 },
 "Meowscarada": {
 "ability": "Overgrow",
+"back": [
+17,
+5
+],
 "brought": 14,
 "item": "Focus Sash",
 "moves": [
@@ -1717,6 +2209,10 @@
 },
 "Meowstic": {
 "ability": "Prankster",
+"back": [
+14,
+0
+],
 "brought": 12,
 "item": "Sitrus Berry",
 "moves": [
@@ -1731,6 +2227,10 @@
 },
 "Meowstic-F": {
 "ability": "Competitive",
+"back": [
+31,
+10
+],
 "brought": 36,
 "item": "Meowsticite",
 "moves": [
@@ -1745,6 +2245,10 @@
 },
 "Metagross": {
 "ability": "Clear Body",
+"back": [
+367,
+96
+],
 "brought": 240,
 "item": "Metagrossite",
 "moves": [
@@ -1759,6 +2263,10 @@
 },
 "Milotic": {
 "ability": "Competitive",
+"back": [
+419,
+146
+],
 "brought": 448,
 "item": "Leftovers",
 "moves": [
@@ -1773,6 +2281,10 @@
 },
 "Mimikyu": {
 "ability": "Disguise",
+"back": [
+9,
+8
+],
 "brought": 14,
 "item": "Life Orb",
 "moves": [
@@ -1787,6 +2299,10 @@
 },
 "Morpeko": {
 "ability": "Hunger Switch",
+"back": [
+2,
+1
+],
 "brought": 1,
 "item": "Choice Scarf",
 "moves": [
@@ -1801,6 +2317,10 @@
 },
 "Mr. Mime": {
 "ability": "Soundproof",
+"back": [
+1,
+1
+],
 "brought": 6,
 "item": "Rocky Helmet",
 "moves": [
@@ -1815,6 +2335,10 @@
 },
 "Mr. Rime": {
 "ability": "Screen Cleaner",
+"back": [
+1,
+1
+],
 "brought": 7,
 "item": "Focus Sash",
 "moves": [
@@ -1829,6 +2353,10 @@
 },
 "Mudsdale": {
 "ability": "Inner Focus",
+"back": [
+8,
+6
+],
 "brought": 9,
 "item": "Life Orb",
 "moves": [
@@ -1843,6 +2371,10 @@
 },
 "Musharna": {
 "ability": "Telepathy",
+"back": [
+1,
+1
+],
 "brought": 2,
 "item": "Kasib Berry",
 "moves": [
@@ -1857,6 +2389,10 @@
 },
 "Ninetales": {
 "ability": "Drought",
+"back": [
+13,
+5
+],
 "brought": 7,
 "item": "Choice Scarf",
 "moves": [
@@ -1871,6 +2407,10 @@
 },
 "Ninetales-Alola": {
 "ability": "Snow Warning",
+"back": [
+107,
+52
+],
 "brought": 90,
 "item": "Light Clay",
 "moves": [
@@ -1885,6 +2425,10 @@
 },
 "Noivern": {
 "ability": "Infiltrator",
+"back": [
+3,
+1
+],
 "brought": 4,
 "item": "Mental Herb",
 "moves": [
@@ -1899,6 +2443,10 @@
 },
 "Oranguru": {
 "ability": "Telepathy",
+"back": [
+5,
+0
+],
 "brought": 3,
 "item": "Sitrus Berry",
 "moves": [
@@ -1913,6 +2461,10 @@
 },
 "Orthworm": {
 "ability": "Earth Eater",
+"back": [
+1,
+0
+],
 "brought": 1,
 "item": "Sitrus Berry",
 "moves": [
@@ -1927,6 +2479,10 @@
 },
 "Overqwil": {
 "ability": "Intimidate",
+"back": [
+15,
+8
+],
 "brought": 23,
 "item": "Life Orb",
 "moves": [
@@ -1941,6 +2497,10 @@
 },
 "Palafin": {
 "ability": "Zeroto Hero",
+"back": [
+28,
+0
+],
 "brought": 17,
 "item": "Life Orb",
 "moves": [
@@ -1955,6 +2515,10 @@
 },
 "Pangoro": {
 "ability": "Scrappy",
+"back": [
+0,
+0
+],
 "brought": 2,
 "item": "Focus Sash",
 "moves": [
@@ -1969,6 +2533,10 @@
 },
 "Pawmot": {
 "ability": "Iron Fist",
+"back": [
+62,
+44
+],
 "brought": 71,
 "item": "Focus Sash",
 "moves": [
@@ -1983,6 +2551,10 @@
 },
 "Pelipper": {
 "ability": "Drizzle",
+"back": [
+704,
+473
+],
 "brought": 919,
 "item": "Focus Sash",
 "moves": [
@@ -1997,6 +2569,10 @@
 },
 "Perrserker": {
 "ability": "Steely Spirit",
+"back": [
+4,
+2
+],
 "brought": 3,
 "item": "Sitrus Berry",
 "moves": [
@@ -2011,6 +2587,10 @@
 },
 "Persian-Alola": {
 "ability": "Fur Coat",
+"back": [
+1,
+0
+],
 "brought": 1,
 "item": "Sitrus Berry",
 "moves": [
@@ -2025,6 +2605,10 @@
 },
 "Pidgeot": {
 "ability": "Keen Eye",
+"back": [
+16,
+2
+],
 "brought": 20,
 "item": "Pidgeotite",
 "moves": [
@@ -2039,6 +2623,10 @@
 },
 "Pikachu": {
 "ability": "Lightning Rod",
+"back": [
+4,
+0
+],
 "brought": 4,
 "item": "Light Ball",
 "moves": [
@@ -2053,6 +2641,10 @@
 },
 "Pincurchin": {
 "ability": "Electric Surge",
+"back": [
+4,
+2
+],
 "brought": 3,
 "item": "Electric Seed",
 "moves": [
@@ -2067,6 +2659,10 @@
 },
 "Politoed": {
 "ability": "Drizzle",
+"back": [
+347,
+263
+],
 "brought": 363,
 "item": "Sitrus Berry",
 "moves": [
@@ -2081,6 +2677,10 @@
 },
 "Polteageist": {
 "ability": "Cursed Body",
+"back": [
+4,
+1
+],
 "brought": 1,
 "item": "Focus Sash",
 "moves": [
@@ -2095,6 +2695,10 @@
 },
 "Primarina": {
 "ability": "Liquid Voice",
+"back": [
+322,
+177
+],
 "brought": 339,
 "item": "Leftovers",
 "moves": [
@@ -2109,6 +2713,10 @@
 },
 "Pyroar": {
 "ability": "Unnerve",
+"back": [
+48,
+15
+],
 "brought": 72,
 "item": "Pyroarite",
 "moves": [
@@ -2123,6 +2731,10 @@
 },
 "Quaquaval": {
 "ability": "Moxie",
+"back": [
+1,
+0
+],
 "brought": 1,
 "item": "White Herb",
 "moves": [
@@ -2137,6 +2749,10 @@
 },
 "Raichu": {
 "ability": "Lightning Rod",
+"back": [
+1370,
+454
+],
 "brought": 1492,
 "item": "Raichunite Y",
 "moves": [
@@ -2151,6 +2767,10 @@
 },
 "Raichu-Alola": {
 "ability": "Surge Surfer",
+"back": [
+1,
+0
+],
 "brought": 2,
 "item": "Shuca Berry",
 "moves": [
@@ -2165,6 +2785,10 @@
 },
 "Rampardos": {
 "ability": "Sheer Force",
+"back": [
+6,
+3
+],
 "brought": 3,
 "item": "Life Orb",
 "moves": [
@@ -2179,6 +2803,10 @@
 },
 "Reuniclus": {
 "ability": "Magic Guard",
+"back": [
+8,
+8
+],
 "brought": 27,
 "item": "Life Orb",
 "moves": [
@@ -2193,6 +2821,10 @@
 },
 "Rhyperior": {
 "ability": "Solid Rock",
+"back": [
+4,
+1
+],
 "brought": 1,
 "item": "Life Orb",
 "moves": [
@@ -2207,6 +2839,10 @@
 },
 "Rillaboom": {
 "ability": "Grassy Surge",
+"back": [
+2770,
+1572
+],
 "brought": 2858,
 "item": "Miracle Seed",
 "moves": [
@@ -2221,6 +2857,10 @@
 },
 "Roserade": {
 "ability": "Natural Cure",
+"back": [
+3,
+1
+],
 "brought": 2,
 "item": "Choice Scarf",
 "moves": [
@@ -2235,6 +2875,10 @@
 },
 "Rotom": {
 "ability": "Levitate",
+"back": [
+1,
+0
+],
 "brought": 9,
 "item": "Choice Scarf",
 "moves": [
@@ -2249,6 +2893,10 @@
 },
 "Rotom-Frost": {
 "ability": "Levitate",
+"back": [
+1,
+1
+],
 "brought": 1,
 "item": "Life Orb",
 "moves": [
@@ -2263,6 +2911,10 @@
 },
 "Rotom-Heat": {
 "ability": "Levitate",
+"back": [
+48,
+22
+],
 "brought": 47,
 "item": "Choice Scarf",
 "moves": [
@@ -2277,6 +2929,10 @@
 },
 "Rotom-Mow": {
 "ability": "Levitate",
+"back": [
+2,
+0
+],
 "brought": 0,
 "item": "Light Clay",
 "moves": [
@@ -2291,6 +2947,10 @@
 },
 "Rotom-Wash": {
 "ability": "Levitate",
+"back": [
+33,
+14
+],
 "brought": 29,
 "item": "Sitrus Berry",
 "moves": [
@@ -2305,6 +2965,10 @@
 },
 "Runerigus": {
 "ability": "Wandering Spirit",
+"back": [
+0,
+0
+],
 "brought": 1,
 "item": "Rindo Berry",
 "moves": [
@@ -2319,6 +2983,10 @@
 },
 "Sableye": {
 "ability": "Prankster",
+"back": [
+32,
+15
+],
 "brought": 40,
 "item": "Light Clay",
 "moves": [
@@ -2333,6 +3001,10 @@
 },
 "Salamence": {
 "ability": "Intimidate",
+"back": [
+889,
+312
+],
 "brought": 859,
 "item": "Salamencite",
 "moves": [
@@ -2347,6 +3019,10 @@
 },
 "Samurott-Hisui": {
 "ability": "Sharpness",
+"back": [
+11,
+6
+],
 "brought": 20,
 "item": "Choice Scarf",
 "moves": [
@@ -2361,6 +3037,10 @@
 },
 "Sceptile": {
 "ability": "Overgrow",
+"back": [
+10,
+2
+],
 "brought": 11,
 "item": "Sceptilite",
 "moves": [
@@ -2375,6 +3055,10 @@
 },
 "Scizor": {
 "ability": "Technician",
+"back": [
+28,
+12
+],
 "brought": 29,
 "item": "Scizorite",
 "moves": [
@@ -2389,6 +3073,10 @@
 },
 "Scolipede": {
 "ability": "Speed Boost",
+"back": [
+1,
+0
+],
 "brought": 1,
 "item": "Scolipite",
 "moves": [
@@ -2403,6 +3091,10 @@
 },
 "Scovillain": {
 "ability": "Moody",
+"back": [
+58,
+18
+],
 "brought": 46,
 "item": "Scovillainite",
 "moves": [
@@ -2417,6 +3109,10 @@
 },
 "Scrafty": {
 "ability": "Intimidate",
+"back": [
+14,
+7
+],
 "brought": 20,
 "item": "Scraftinite",
 "moves": [
@@ -2431,6 +3127,10 @@
 },
 "Serperior": {
 "ability": "Contrary",
+"back": [
+4,
+1
+],
 "brought": 2,
 "item": "Focus Sash",
 "moves": [
@@ -2445,6 +3145,10 @@
 },
 "Sharpedo": {
 "ability": "Speed Boost",
+"back": [
+1,
+1
+],
 "brought": 3,
 "item": "Sharpedonite",
 "moves": [
@@ -2459,6 +3163,10 @@
 },
 "Sinistcha": {
 "ability": "Hospitality",
+"back": [
+494,
+313
+],
 "brought": 410,
 "item": "Rocky Helmet",
 "moves": [
@@ -2473,6 +3181,10 @@
 },
 "Sinistcha-Masterpiece": {
 "ability": "Hospitality",
+"back": [
+65,
+42
+],
 "brought": 62,
 "item": "Sitrus Berry",
 "moves": [
@@ -2487,6 +3199,10 @@
 },
 "Sirfetch\u2019d": {
 "ability": "Scrappy",
+"back": [
+8,
+3
+],
 "brought": 7,
 "item": "Leek",
 "moves": [
@@ -2501,6 +3217,10 @@
 },
 "Skarmory": {
 "ability": "Sturdy",
+"back": [
+5,
+3
+],
 "brought": 6,
 "item": "Skarmorite",
 "moves": [
@@ -2515,6 +3235,10 @@
 },
 "Skeledirge": {
 "ability": "Unaware",
+"back": [
+1,
+0
+],
 "brought": 6,
 "item": "Sitrus Berry",
 "moves": [
@@ -2529,6 +3253,10 @@
 },
 "Slowbro": {
 "ability": "Regenerator",
+"back": [
+1,
+1
+],
 "brought": 3,
 "item": "Leftovers",
 "moves": [
@@ -2543,6 +3271,10 @@
 },
 "Slowbro-Galar": {
 "ability": "Quick Draw",
+"back": [
+12,
+0
+],
 "brought": 0,
 "item": "Quick Claw",
 "moves": [
@@ -2557,6 +3289,10 @@
 },
 "Slowking": {
 "ability": "Regenerator",
+"back": [
+3,
+1
+],
 "brought": 1,
 "item": "Colbur Berry",
 "moves": [
@@ -2571,6 +3307,10 @@
 },
 "Slowking-Galar": {
 "ability": "Regenerator",
+"back": [
+20,
+5
+],
 "brought": 20,
 "item": "Colbur Berry",
 "moves": [
@@ -2585,6 +3325,10 @@
 },
 "Slurpuff": {
 "ability": "Unburden",
+"back": [
+9,
+0
+],
 "brought": 6,
 "item": "Psychic Seed",
 "moves": [
@@ -2599,6 +3343,10 @@
 },
 "Sneasler": {
 "ability": "Unburden",
+"back": [
+1579,
+847
+],
 "brought": 2038,
 "item": "White Herb",
 "moves": [
@@ -2613,6 +3361,10 @@
 },
 "Snorlax": {
 "ability": "Thick Fat",
+"back": [
+6,
+2
+],
 "brought": 9,
 "item": "Leftovers",
 "moves": [
@@ -2627,6 +3379,10 @@
 },
 "Squawkabilly": {
 "ability": "Intimidate",
+"back": [
+1,
+1
+],
 "brought": 2,
 "item": "Focus Sash",
 "moves": [
@@ -2641,6 +3397,10 @@
 },
 "Squawkabilly-Blue": {
 "ability": "Intimidate",
+"back": [
+0,
+0
+],
 "brought": 1,
 "item": "Choice Scarf",
 "moves": [
@@ -2655,6 +3415,10 @@
 },
 "Staraptor": {
 "ability": "Intimidate",
+"back": [
+468,
+151
+],
 "brought": 515,
 "item": "Staraptite",
 "moves": [
@@ -2669,6 +3433,10 @@
 },
 "Starmie": {
 "ability": "Natural Cure",
+"back": [
+39,
+11
+],
 "brought": 33,
 "item": "Starminite",
 "moves": [
@@ -2683,6 +3451,10 @@
 },
 "Steelix": {
 "ability": "Sturdy",
+"back": [
+17,
+9
+],
 "brought": 11,
 "item": "Steelixite",
 "moves": [
@@ -2697,6 +3469,10 @@
 },
 "Swalot": {
 "ability": "Sticky Hold",
+"back": [
+2,
+2
+],
 "brought": 6,
 "item": "Leftovers",
 "moves": [
@@ -2711,6 +3487,10 @@
 },
 "Swampert": {
 "ability": "Torrent",
+"back": [
+210,
+77
+],
 "brought": 242,
 "item": "Swampertite",
 "moves": [
@@ -2725,6 +3505,10 @@
 },
 "Sylveon": {
 "ability": "Pixilate",
+"back": [
+662,
+306
+],
 "brought": 557,
 "item": "Fairy Feather",
 "moves": [
@@ -2739,6 +3523,10 @@
 },
 "Talonflame": {
 "ability": "Gale Wings",
+"back": [
+31,
+11
+],
 "brought": 43,
 "item": "Sharp Beak",
 "moves": [
@@ -2753,6 +3541,10 @@
 },
 "Tauros-Paldea-Aqua": {
 "ability": "Intimidate",
+"back": [
+4,
+3
+],
 "brought": 6,
 "item": "Focus Sash",
 "moves": [
@@ -2767,6 +3559,10 @@
 },
 "Tauros-Paldea-Blaze": {
 "ability": "Intimidate",
+"back": [
+1,
+1
+],
 "brought": 1,
 "item": "Electric Seed",
 "moves": [
@@ -2781,6 +3577,10 @@
 },
 "Thievul": {
 "ability": "Unburden",
+"back": [
+4,
+0
+],
 "brought": 1,
 "item": "Psychic Seed",
 "moves": [
@@ -2795,6 +3595,10 @@
 },
 "Tinkaton": {
 "ability": "Mold Breaker",
+"back": [
+23,
+12
+],
 "brought": 37,
 "item": "Metal Coat",
 "moves": [
@@ -2809,6 +3613,10 @@
 },
 "Torkoal": {
 "ability": "Drought",
+"back": [
+305,
+187
+],
 "brought": 244,
 "item": "Charcoal",
 "moves": [
@@ -2823,6 +3631,10 @@
 },
 "Torterra": {
 "ability": "Shell Armor",
+"back": [
+1,
+1
+],
 "brought": 1,
 "item": "Leftovers",
 "moves": [
@@ -2837,6 +3649,10 @@
 },
 "Toxapex": {
 "ability": "Regenerator",
+"back": [
+44,
+16
+],
 "brought": 41,
 "item": "Leftovers",
 "moves": [
@@ -2851,6 +3667,10 @@
 },
 "Toxicroak": {
 "ability": "Dry Skin",
+"back": [
+4,
+2
+],
 "brought": 2,
 "item": "Wide Lens",
 "moves": [
@@ -2865,6 +3685,10 @@
 },
 "Toxtricity": {
 "ability": "Punk Rock",
+"back": [
+11,
+4
+],
 "brought": 12,
 "item": "Life Orb",
 "moves": [
@@ -2879,6 +3703,10 @@
 },
 "Toxtricity-Low-Key": {
 "ability": "Punk Rock",
+"back": [
+0,
+0
+],
 "brought": 4,
 "item": "Silk Scarf",
 "moves": [
@@ -2893,6 +3721,10 @@
 },
 "Trevenant": {
 "ability": "Harvest",
+"back": [
+6,
+1
+],
 "brought": 4,
 "item": "Miracle Seed",
 "moves": [
@@ -2907,6 +3739,10 @@
 },
 "Tsareena": {
 "ability": "Queenly Majesty",
+"back": [
+25,
+10
+],
 "brought": 21,
 "item": "Choice Scarf",
 "moves": [
@@ -2921,6 +3757,10 @@
 },
 "Typhlosion": {
 "ability": "Flash Fire",
+"back": [
+12,
+3
+],
 "brought": 10,
 "item": "Choice Scarf",
 "moves": [
@@ -2935,6 +3775,10 @@
 },
 "Typhlosion-Hisui": {
 "ability": "Blaze",
+"back": [
+17,
+10
+],
 "brought": 27,
 "item": "Choice Scarf",
 "moves": [
@@ -2949,6 +3793,10 @@
 },
 "Tyranitar": {
 "ability": "Sand Stream",
+"back": [
+376,
+257
+],
 "brought": 471,
 "item": "Tyranitarite",
 "moves": [
@@ -2963,6 +3811,10 @@
 },
 "Tyrantrum": {
 "ability": "Strong Jaw",
+"back": [
+0,
+0
+],
 "brought": 1,
 "item": "Life Orb",
 "moves": [
@@ -2977,6 +3829,10 @@
 },
 "Umbreon": {
 "ability": "Synchronize",
+"back": [
+2,
+2
+],
 "brought": 3,
 "item": "Sitrus Berry",
 "moves": [
@@ -2991,6 +3847,10 @@
 },
 "Vanilluxe": {
 "ability": "Snow Warning",
+"back": [
+29,
+20
+],
 "brought": 28,
 "item": "Choice Scarf",
 "moves": [
@@ -3005,6 +3865,10 @@
 },
 "Venusaur": {
 "ability": "Chlorophyll",
+"back": [
+273,
+81
+],
 "brought": 237,
 "item": "Focus Sash",
 "moves": [
@@ -3019,6 +3883,10 @@
 },
 "Vileplume": {
 "ability": "Chlorophyll",
+"back": [
+4,
+0
+],
 "brought": 0,
 "item": "Focus Sash",
 "moves": [
@@ -3033,6 +3901,10 @@
 },
 "Vivillon": {
 "ability": "Compound Eyes",
+"back": [
+43,
+8
+],
 "brought": 32,
 "item": "Focus Sash",
 "moves": [
@@ -3047,6 +3919,10 @@
 },
 "Vivillon-Archipelago": {
 "ability": "Compound Eyes",
+"back": [
+3,
+0
+],
 "brought": 1,
 "item": "Choice Scarf",
 "moves": [
@@ -3061,6 +3937,10 @@
 },
 "Vivillon-Fancy": {
 "ability": "Shield Dust",
+"back": [
+2,
+0
+],
 "brought": 7,
 "item": "Choice Scarf",
 "moves": [
@@ -3075,6 +3955,10 @@
 },
 "Vivillon-Jungle": {
 "ability": "Shield Dust",
+"back": [
+4,
+0
+],
 "brought": 2,
 "item": "Choice Scarf",
 "moves": [
@@ -3089,6 +3973,10 @@
 },
 "Vivillon-Marine": {
 "ability": "Compound Eyes",
+"back": [
+3,
+1
+],
 "brought": 8,
 "item": "Focus Sash",
 "moves": [
@@ -3103,6 +3991,10 @@
 },
 "Vivillon-Monsoon": {
 "ability": "Compound Eyes",
+"back": [
+1,
+1
+],
 "brought": 3,
 "item": "Focus Sash",
 "moves": [
@@ -3117,6 +4009,10 @@
 },
 "Vivillon-Pokeball": {
 "ability": "Compound Eyes",
+"back": [
+1,
+0
+],
 "brought": 5,
 "item": "Focus Sash",
 "moves": [
@@ -3131,6 +4027,10 @@
 },
 "Vivillon-Polar": {
 "ability": "Compound Eyes",
+"back": [
+1,
+0
+],
 "brought": 0,
 "item": "Focus Sash",
 "moves": [
@@ -3145,6 +4045,10 @@
 },
 "Vivillon-River": {
 "ability": "Compound Eyes",
+"back": [
+0,
+0
+],
 "brought": 1,
 "item": "Focus Sash",
 "moves": [
@@ -3159,6 +4063,10 @@
 },
 "Volcarona": {
 "ability": "Flame Body",
+"back": [
+727,
+389
+],
 "brought": 957,
 "item": "Rocky Helmet",
 "moves": [
@@ -3173,6 +4081,10 @@
 },
 "Weavile": {
 "ability": "Pickpocket",
+"back": [
+6,
+1
+],
 "brought": 9,
 "item": "Focus Sash",
 "moves": [
@@ -3187,6 +4099,10 @@
 },
 "Whimsicott": {
 "ability": "Prankster",
+"back": [
+193,
+76
+],
 "brought": 281,
 "item": "Focus Sash",
 "moves": [
@@ -3201,6 +4117,10 @@
 },
 "Wigglytuff": {
 "ability": "Competitive",
+"back": [
+2,
+1
+],
 "brought": 2,
 "item": "Light Clay",
 "moves": [
@@ -3215,6 +4135,10 @@
 },
 "Wyrdeer": {
 "ability": "Intimidate",
+"back": [
+10,
+3
+],
 "brought": 4,
 "item": "Sitrus Berry",
 "moves": [
@@ -3229,6 +4153,10 @@
 },
 "Zoroark": {
 "ability": "Illusion",
+"back": [
+0,
+0
+],
 "brought": 0,
 "item": "Focus Sash",
 "moves": [
@@ -3243,6 +4171,10 @@
 },
 "Zoroark-Hisui": {
 "ability": "Illusion",
+"back": [
+0,
+0
+],
 "brought": 0,
 "item": "Focus Sash",
 "moves": [

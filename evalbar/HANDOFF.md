@@ -69,6 +69,17 @@ stat points from the Smogon M-C set of the form played). Positions: `recorded.py
 seen<k>` / `hind<k>`). The as-seen view uses the same rescale as the hindsight bar and is not separately calibrated; it could be,
 on the replay cache (open sheets, only the brought four hidden). Kept for review of finished games, not for use during a game.
 
+**Live spectator mode (the user asked, 2026-10-05):** `live.py list [bo1|bo3]` lists ongoing Reg M-C battles (rating and link; Bo3
+rooms carry no rating, so newest first); `live.py watch <room or URL> [threads=2] [port=8768]` joins the room as a guest through
+`live_feed.js` (Node with `--experimental-websocket`; no account), evaluates each turn as it starts, and serves the page at
+http://localhost:8768 (it polls `data.json` and follows the latest turn). It knows what a spectator knows: team previews, Bo3 open team
+sheets (Bo1: the common set per species plus reveals: moves used, items that activated, Mega stones, abilities the species can have),
+the Pokémon that came in and their state. For each player the three most likely unseen combinations (`recorded.py back_weight`, given
+the leads) are paired, so up to 9 positions a turn (turn 1: about 9 s on one thread). Each turn is built from the log as it was when the
+turn started (`Live.upto`), so nothing later leaks back; the choices made fill in the "played" tags once the turn is over. Files stay in
+`out/live/` (the log has usernames). For watching other people's games only: never on a game the user is playing, and nothing passed
+to a player during their game (the page says so).
+
 Possible next steps (not asked for yet): more demo games, flagging Perish Song positions on the page, Battle sim extending the engine data
 (210 games need a missing species or ability), step 2 (the user's recorded games, a belief over the opponent's hidden sets).
 

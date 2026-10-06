@@ -206,6 +206,15 @@ Players set up about twice as often as the planner (regional day 1: 4.7% of deci
 their setup moves carry about twice the regret of their other plays (3.6 and 4.3 points vs 1.8 and 2.1). With the boosted positions rated
 right, that reads as players overvaluing setup (the user's guess: habits from single-player games, where setup sweeps).
 
+## What is a read worth? (influence.py)
+
+The user's question (2026-10-06): if a player could make the opponent put an extra 20% on one option, how much does playing to exploit it
+gain over equilibrium play? On the day-1 turns' full matrices (`influence.py`, exact equilibria by linear programming): about 4 points of
+win chance per turn at 20% (2 at 10%, 6 at 30%, 11 at 50%), about 31 points summed over a game (an upper estimate: gains saturate). Equilibrium
+play gains almost nothing from the lean (0.1 points), and the exploiting move costs almost nothing if the read is wrong (0.1 points): in 93%
+of turns it is one of the reader's equally good options (4 per turn, median), so a read mostly decides between options the equilibrium is
+indifferent between. Summary in `results/read_value_day1.json`.
+
 ## Were the costly plays reads? (reads.py)
 
 `reads.py run` evaluates the costly plays' turns with the full payoff matrix (champ-battle-v18, EVAL_MATRIX=full); `reads.py report` scores

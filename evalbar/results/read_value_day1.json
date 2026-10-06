@@ -1,0 +1,32 @@
+{
+ "what": "day-1 broadcast turns (uncertain.py known runs, full matrices, rescaled), each side as reader: opponent plays its equilibrium mix but a share eps of the time picks one reasonable option the reader steered it to; gain = reader's best answer minus keeping the equilibrium mix, win-chance points",
+ "turns": 143,
+ "games": 19,
+ "per_turn_gain": {
+  "0.1": 0.0203,
+  "0.2": 0.0412,
+  "0.3": 0.0627,
+  "0.5": 0.1079
+ },
+ "per_game_sum": {
+  "0.1": 0.153,
+  "0.2": 0.31,
+  "0.3": 0.472,
+  "0.5": 0.812
+ },
+ "cost_if_read_wrong_per_turn": {
+  "0.1": 0.0004,
+  "0.2": 0.0012,
+  "0.3": 0.0032,
+  "0.5": 0.0089
+ },
+ "equilibrium_player_gain_per_turn": {
+  "0.1": 0.0005,
+  "0.2": 0.001,
+  "0.3": 0.0015,
+  "0.5": 0.0026
+ },
+ "exploit_move_among_equally_good_options_at_0.2": 0.93,
+ "equally_good_options_per_turn_median": 4,
+ "note": "the per-game figure sums per-turn gains along the observed games; real gains saturate as a game gets decided and shorten when ahead, so read it as an upper estimate"
+}

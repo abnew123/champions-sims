@@ -172,6 +172,14 @@ Fair play: this is for commentary on finished games and replays. Never frame it 
 The page: a self-contained HTML page published as a private artifact (load the artifact design skill first). Players are "Player 1"
 and "Player 2": no usernames on the page, in tracked files or in commit messages.
 
+## Process names (the user asked, 2026-10-06)
+
+Every process this thread starts must show as `evalbar-<program>` in `top`, so the user knows whom to ask to stop it. `procs.py` makes
+the links in `out/bin` (`exe('ffmpeg')` etc.; the engine is `evalbar-champ`, node `evalbar-node`, OCR `evalbar-ocr`), and every
+subprocess call goes through them. Start the thread's own scripts with the named interpreter: `$(python3 evalbar/procs.py) evalbar/<script>.py`
+(plain `python3` shows as "Python"). Scripts that need the main folder's `.venv` (numpy: `accuracy.py`) run as
+`PYTHONPATH=<.venv site-packages> $(python3 evalbar/procs.py) evalbar/accuracy.py`.
+
 ## Rules that apply (also in memory)
 
 - No names in the repo: write "the user" or "the player"; never a real name, the Mac username, absolute `/Users/` paths, an email, or

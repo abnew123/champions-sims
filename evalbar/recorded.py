@@ -11,7 +11,7 @@
 Sets: yours from pssim/myteam_c_incin.json (with each game's overrides); the opponent's from the common set of each species (or the
 Smogon M-C set of `from`) with what the game revealed laid on top."""
 import os, sys, json, math, glob, itertools, subprocess, collections
-import common as C, replay as R
+import common as C, replay as R, procs as P
 from build import options
 toid = R.toid
 MY = json.load(open(os.path.join(C.PSSIM, 'myteam_c_incin.json')))
@@ -258,7 +258,7 @@ if __name__ == '__main__':
     elif a[0] == 'positions':
         allspecs = [s for f in GAMES for mode in ('hind', 'seen') for s in specs(json.load(open(f)), mode)]
         tmp = a[1] + '.specs.json'; json.dump(allspecs, open(tmp, 'w'))
-        subprocess.run(['node', os.path.join(C.HERE, 'positions.js'), os.path.abspath(tmp), os.path.abspath(a[1]), 'p1'], cwd=os.path.join(C.MAIN, 'pssim'), check=True)
+        subprocess.run([P.exe('node'), os.path.join(C.HERE, 'positions.js'), os.path.abspath(tmp), os.path.abspath(a[1]), 'p1'], cwd=os.path.join(C.MAIN, 'pssim'), check=True)
         os.remove(tmp)
     elif a[0] == 'page':
         kw = dict(x.split('=', 1) for x in a[3:])

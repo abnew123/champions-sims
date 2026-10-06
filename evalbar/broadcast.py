@@ -14,7 +14,7 @@ screen ("Trainers are choosing actions"). For watching on your own computer.
 Player 1 is the player on the left: the battle text speaks from their side (their Pokémon are named plainly, the other player's are
 "the opposing ..."). No names are kept: the log calls the players Player 1 and Player 2, and sheets are matched to sides by species."""
 import os, re, sys, json, time, difflib, subprocess, threading, collections
-import common as C, replay as R
+import common as C, replay as R, procs as P
 toid = R.toid
 E = json.load(open(os.path.join(C.MAIN, 'native', 'engine_data_full.json')))
 OCR = os.path.join(C.MAIN, 'recordings', 'ocr')
@@ -35,7 +35,7 @@ def frames(src, out, start=None, end=None):
     if src.startswith('http'):
         url = subprocess.run(['yt-dlp', '-g', '-f', 'bv*[height<=720]', src], capture_output=True, text=True, check=True).stdout.split()[0]
     else: url = src
-    cmd = ['ffmpeg', '-v', 'error', '-y'] + (['-ss', start] if start else []) + (['-to', end] if end else []) + ['-i', url, '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', os.path.join(out, 'f_%05d.jpg')]
+    cmd = [P.exe('ffmpeg'), '-v', 'error', '-y'] + (['-ss', start] if start else []) + (['-to', end] if end else []) + ['-i', url, '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', os.path.join(out, 'f_%05d.jpg')]
     subprocess.run(['nice', '-n', '10'] + cmd, check=True)
 def media(url):
     """yt-dlp's media URL for the 720p video, with the request headers YouTube wants and the duration"""
@@ -59,7 +59,7 @@ def scan(url, outf, workers=2, chunk=1200, fetchers=4):
         d = os.path.join(tmp, f'c{t0:06d}'); os.makedirs(d, exist_ok=True)
         for f in os.listdir(d): os.remove(os.path.join(d, f))
         for attempt in range(4):
-            r = subprocess.run(['nice', '-n', '10', 'ffmpeg', '-v', 'error', '-y', '-threads', '1', '-headers', cur['hdr'], '-ss', str(t0), '-t', str(chunk), '-i', cur['src'],
+            r = subprocess.run(['nice', '-n', '10', P.exe('ffmpeg'), '-v', 'error', '-y', '-threads', '1', '-headers', cur['hdr'], '-ss', str(t0), '-t', str(chunk), '-i', cur['src'],
                                 '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', '-start_number', str(t0 * 2 + 1), os.path.join(d, 'f_%06d.jpg')], capture_output=True, text=True)
             if r.returncode == 0: return d
             with lock: cur['src'], cur['hdr'], _ = media(url)                  # the media URL expired: fetch a new one
@@ -75,7 +75,7 @@ def scan(url, outf, workers=2, chunk=1200, fetchers=4):
             for k, p in enumerate(parts):
                 os.makedirs(p, exist_ok=True)
                 for f in frames_[k::workers]: os.replace(os.path.join(d, f), os.path.join(p, f))
-            procs = [subprocess.Popen(['nice', '-n', '10', OCR, p], stdout=subprocess.PIPE, text=True) for p in parts]
+            procs = [subprocess.Popen(['nice', '-n', '10', P.exe('ocr', OCR), p], stdout=subprocess.PIPE, text=True) for p in parts]
             rows = [json.loads(l) for pr in procs for l in pr.communicate()[0].splitlines()]
             with open(outf, 'a') as f:
                 for row in sorted(rows, key=lambda x: x['file']): f.write(json.dumps(row) + '\n')
@@ -84,7 +84,7 @@ def scan(url, outf, workers=2, chunk=1200, fetchers=4):
             print(f'{time.strftime("%H:%M")} read {t0 // 60}-{(t0 + chunk) // 60} min of {int(dur) // 60}', flush=True)
     subprocess.run(['rm', '-rf', tmp])
 def ocr(d):
-    with open(d.rstrip('/') + '.ocr.jsonl', 'w') as f: subprocess.run(['nice', '-n', '10', OCR, d], stdout=f, check=True)
+    with open(d.rstrip('/') + '.ocr.jsonl', 'w') as f: subprocess.run(['nice', '-n', '10', P.exe('ocr', OCR), d], stdout=f, check=True)
 # --------------------------------------------------------------------------------------------------------------------------- sheets
 def sheet(lines):
     """one team-sheet screen -> [set, ...]: each panel starts with the species name in capitals"""
@@ -456,7 +456,7 @@ def watch(url, threads=2, port=8768, start=None):
     # URL (403): then fetch a new one and carry on from where the frames got to
     def open_stream(at):
         src, hdr, _ = media(url)
-        return subprocess.Popen(['nice', '-n', '10', 'ffmpeg', '-v', 'error', '-y', '-headers', hdr, '-re'] + (['-ss', str(at)] if at else []) + ['-i', src,
+        return subprocess.Popen(['nice', '-n', '10', P.exe('ffmpeg'), '-v', 'error', '-y', '-headers', hdr, '-re'] + (['-ss', str(at)] if at else []) + ['-i', src,
                                  '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', '-start_number', str(int((at - secs(start)) * 2) + 1), os.path.join(d, 'f_%06d.jpg')],
                                 stderr=subprocess.PIPE, text=True)
     ff = open_stream(secs(start)); retries = 0
@@ -468,7 +468,7 @@ def watch(url, threads=2, port=8768, start=None):
         if new:
             b = os.path.join(d, 'batch'); os.makedirs(b, exist_ok=True)
             for f in new: os.replace(os.path.join(d, f), os.path.join(b, f))
-            out = subprocess.run([OCR, b], capture_output=True, text=True).stdout
+            out = subprocess.run([P.exe('ocr', OCR), b], capture_output=True, text=True).stdout
             for row in sorted(map(json.loads, out.splitlines()), key=lambda x: x['file']): run.feed(row['lines'])
             for f in new: os.remove(os.path.join(b, f))
             done = int(new[-1][2:8])

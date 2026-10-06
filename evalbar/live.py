@@ -11,10 +11,10 @@ recorded.py back_weight), every pairing of the two players' combinations evaluat
 values rescaled to real outcomes. The battle log, positions and results stay in evalbar/out/live/ (git-ignored: the log has usernames).
 Needs Node with --experimental-websocket (Node 20.10+)."""
 import os, sys, json, math, time, re, itertools, subprocess, threading, collections, http.server
-import common as C, replay as R, spots as S, recorded as RC, build as B, engine as EN
+import common as C, replay as R, spots as S, recorded as RC, build as B, engine as EN, procs as P
 toid = R.toid
 OUT = os.path.join(C.HERE, 'out', 'live'); FEED = os.path.join(C.HERE, 'live_feed.js')
-NODE = ['node', '--experimental-websocket', '--no-warnings']
+NODE = [P.exe('node'), '--experimental-websocket', '--no-warnings']
 FORMATS = {'bo1': 'gen9championsvgc2026regmc', 'bo3': 'gen9championsvgc2026regmcbo3'}
 TOPK = 3; CAL = 0.7538                           # the rescale fitted for egvalue9_sym2 (accuracy.py compare)
 # the full engine data (every species, move, item and ability Showdown knows; needs champ-battle-v17): spectated teams can be anything
@@ -127,7 +127,7 @@ def specs_for(tag, g, step, six, sets, leads):
     return out, H
 def positions(specs, outf):
     tmp = outf + '.specs.json'; json.dump([s for _, s in specs], open(tmp, 'w'))
-    subprocess.run(['node', os.path.join(C.HERE, 'positions.js'), os.path.abspath(tmp), os.path.abspath(outf), 'p1'], cwd=os.path.join(C.MAIN, 'pssim'),
+    subprocess.run([P.exe('node'), os.path.join(C.HERE, 'positions.js'), os.path.abspath(tmp), os.path.abspath(outf), 'p1'], cwd=os.path.join(C.MAIN, 'pssim'),
                    check=True, capture_output=True)
     os.remove(tmp)
     return {x['name']: x for x in map(json.loads, open(outf))}

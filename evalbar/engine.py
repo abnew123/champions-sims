@@ -9,7 +9,7 @@ A run appends to <out.jsonl> and skips positions already in it, so it resumes. I
 localhost:8766 (status.py); EVAL_TITLE names its card. EG_VALUE picks another value file (in the main folder's pssim/);
 CHAMP_BIN and CHAMP_DATA (a file in native/) another engine and data (the live mode: champ-battle-v17 with engine_data_full.json). Agree cores with the other threads before threads > 1."""
 import os, sys, json, zlib, time, subprocess
-import common as C
+import common as C, procs as P
 BIN = os.environ.get('CHAMP_BIN') or os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v16'); MP = os.path.join(C.MAIN, 'pssim')
 def positions(outf, views, ids):
     import spots as S
@@ -19,7 +19,7 @@ def positions(outf, views, ids):
         if why: skipped[why.split(':')[0]] = skipped.get(why.split(':')[0], 0) + 1
         specs += sp
     tmp = outf + '.specs.json'; json.dump(specs, open(tmp, 'w'))
-    subprocess.run(['node', os.path.join(C.HERE, 'positions.js'), os.path.abspath(tmp), os.path.abspath(outf), views], cwd=MP, check=True)
+    subprocess.run([P.exe('node'), os.path.join(C.HERE, 'positions.js'), os.path.abspath(tmp), os.path.abspath(outf), views], cwd=MP, check=True)
     os.remove(tmp); print(f"{len(ids)} games, {len(specs)} turns; skipped games: {skipped or 'none'}")
 def sample(n, skip=0):
     """cached games in a fixed pseudo-random order (by a hash of the replay id), so a larger sample extends a smaller one"""
@@ -34,7 +34,7 @@ def stamp(posf, outf, threads, seeds, staged, title=None):
 def run(posf, outf, threads=1, seeds=32, staged=1):
     grid = os.path.join(C.HERE, 'out', 'emptygrid'); os.makedirs(grid, exist_ok=True); stamp(posf, outf, threads, seeds, staged)
     env = dict(os.environ, RACE_TIES='avg', EVAL_SEEDS=str(seeds), **({'EVAL_ADAPT': '1'} if staged else {}), EG_VALUE=os.environ.get('EG_VALUE', 'egvalue9_sym2.json'), RACE='1', TRSYM='1', CALC_DATA='../native/champions_data.json', GRID_DIR=grid)
-    subprocess.run([os.environ.get('CHAMP_BIN') or BIN, 'evalpos', '../native/' + os.environ.get('CHAMP_DATA', 'engine_data_spot.json'), os.path.abspath(posf), os.path.abspath(outf), str(threads)], cwd=MP, env=env, check=True)
+    subprocess.run([P.exe('champ', os.environ.get('CHAMP_BIN') or BIN), 'evalpos', '../native/' + os.environ.get('CHAMP_DATA', 'engine_data_spot.json'), os.path.abspath(posf), os.path.abspath(outf), str(threads)], cwd=MP, env=env, check=True)
 if __name__ == '__main__':
     a = sys.argv[1:]
     if a[0] == 'positions':

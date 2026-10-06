@@ -355,3 +355,10 @@ Usage:
   - Provisional round 1, replayed from saved games with the scratch replay (run_team/run_jobs read-only, max 6 batches): 32 moves, 6 stops, 14 undecided.
     - Scarf Garchomp is the most common swap-in (9), then Kingambit (6).
     - trick_room_six scores 66.2, #2 of 52 starts; its best swap is Indeedee-F → Gholdengo (+3.3 ± 1.4).
+- **Opponent-pool validation (Oct 6, queued 2 am; Battle sim's real-game pool, the user approved the work):** `poolbar.py`.
+  - The 10 simcmp teams with their climb brings per rule archetype play 2,500 rating-weighted pool entries, one game each, with the same entries for every team.
+  - Plus the archetype-model baseline under the same setup.
+  - Scored as our sim win share vs each group against the field's real per-game rate vs it, with the offset removed: by rule archetype (regionals) and by core-rule group (group_real regional and ladder).
+  - Setup v17g: v16 games with the 256-bit callback mask, needed for engine_data_full.json; v16 panics on it.
+  - On the box, `~/run_poolbar.sh` waits for the climb to end, runs it at 90 threads, writes `poolbar_report.txt`; `~/copy_poolbar_report.sh` then copies the report into runs/, so it arrives at `cloud_results/v12/runs/poolbar_report.txt`.
+  - The box watchdog was restarted with the renamed-battle pattern.

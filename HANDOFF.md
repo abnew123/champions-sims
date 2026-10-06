@@ -489,7 +489,11 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     meta; each cluster tagged with its nearest named archetype so the sheets keep nameable rules. This is the "archetype opponent
     models" lever left after race / DP2 (the regional bar stayed at 0.26). Costs: a fresh Team search climb (its weights, results,
     Perish stock rates and the sim-vs-real table are keyed by the 10 names), and the TR sheet's lead tabs depend on the names; so it
-    comes after the current climb, with both threads looped in. Awaiting the user's call on priority.
+    comes after the current climb, with both threads looped in. Sources for the sixes: `teamsearch/regmatch/` (standings with round
+    pairings, git-ignored, also gives real matchup outcomes per cluster pair) and `regionals/regional_teams.json` (anonymised sheets);
+    `pssim/endpair_scan.py` is Battle sim's replay scan, not Team search's. Validation: Team search's `simreal.py` scores its ten teams'
+    confirm games per opponent group given the model files and a setup name; it needs one edit (archmatch's classifier hook reading real
+    rates by cluster instead of by name). Awaiting the user's call on priority.
   - **Final setup: champ-battle-v12 + egvalue9.json + RACE=1 + DP2=1 + anticipation** (see the top of this file). What it is: status and
     Tailwind weights from real games; a damage-race feature; a two-turn check on second Protects; slopes fitted on eleven teams. What it
     is not: it cannot play Perish trap, and absolute matchup win rates carry about 6 points of error per archetype.

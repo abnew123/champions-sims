@@ -4,7 +4,7 @@ Core five, fixed: Mega Delphox (M-Delphox#1), Scarf Garchomp (Garchomp#1), Mega 
 (Leftovers), Gholdengo#2 (Life Orb) or Rillaboom#1 (Miracle Seed), the sets the climb chose. Each team gets the climb's bring search,
 then BATCHES batches of fresh paired confirm games (54 jobs x 4 per batch; the same seeds for all three teams). Setup: cloud/run_env.sh's
 (v16g + TS_PERISH=real when run after a climb); this script pins TS_SIM / TS_PERISH itself.
-  TS_THREADS=90 python3 sixth.py [batches=8]
+  TS_PARALLEL=24 TS_THREADS=4 python3 sixth.py [batches=8]
 """
 import json, os, sys, time
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
@@ -18,7 +18,13 @@ if __name__ == '__main__':
     os.environ['TS_BRING_K'] = '3'
     scr = E.search_many(teams, 9000)                                           # the climb's bring search (seed 9000)
     brings = [r['chosen'] for r in scr]
-    res = [E.evaluate_fixed(teams, brings, 4, 950000 + 50 * b) for b in range(BATCHES)]
+    fixed = [{a: tuple(v) for a, v in brings[i].items()} for i in range(3)]
+    for i in range(3): E.prepare(teams[i], fixed[i], 'sixth' + str(i))  # set up each folder once, before the parallel runs share it
+    runs = [(i, b) for b in range(BATCHES) for i in range(3)]            # one small process per (team, batch): never one big process
+    flat = dict(zip(runs, E.parallel(lambda ib: E.run_team(teams[ib[0]], 4, 950000 + 50 * ib[1], int(os.environ.get('TS_THREADS', 3)),
+                                                             fixed=fixed[ib[0]],
+                                                             label='sixth' + str(ib[0])), runs, 'sixth confirm')))
+    res = [[flat[(i, b)] for i in range(3)] for b in range(BATCHES)]
     out = {}
     print(time.strftime('%I:%M %p'), f"{E.sim()}, {BATCHES} batches x {len(E.live_archs()) * E.P.K * 4} games per team")
     for i, s in enumerate(SIXTH):

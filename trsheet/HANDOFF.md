@@ -108,6 +108,12 @@ re-keyed (Battle sim will say first).
 step on real sixes** (`OPTIMAL_SIXES=pool python3 sheetkit/kit.py trick-room-six optimal run --threads N`, then `report`; battles in
 `work/optimal_pool`, result `optimal_pool.json`; the most common six real sixes per tab from `pssim/opp_pool.py`, about 72,000 games;
 cores coordinated with the other threads as usual). Going over the result with the user before the sheet changes still applies.
+**Done so far:** the pool passed (Team search, 4:10 am, 2026-10-06: RMS sim-vs-real 0.29 -> 0.18 by archetype). The model-sixes run was
+stopped at 4:05 am (a quarter done; superseded) and the real-sixes run started at 4:06 am on 10 Mac threads on v19 + engine_data_full
+(`work/optimal_pool.sh`: drops to 3 threads if someone uses the Mac after 7 am; log `work/optimal_pool.log`; about 72,000 games, done
+around 7-8 am). About 6% of real-team games end early with a fractional score (likely the forced recharge turn after Hyper Beam,
+which battle4.rs cannot plan); reported to Battle sim; rerun the affected jobs once it is fixed. Battle sim also decided the sheets key
+their tabs by core group with the archetype name kept (root HANDOFF); not started, waits for the user.
 
 ## How the current page was built
 

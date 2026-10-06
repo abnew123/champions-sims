@@ -6,7 +6,7 @@
   python3 evalbar/recorded.py commonsets                       the most common Reg M-C set and bring rate per species, from the Bo3 team
                                                                sheets in the replay cache (results/common_sets.json)
   python3 evalbar/recorded.py positions <out.jsonl>            engine positions for every turn, hypothesis and view (you are side 0)
-  python3 evalbar/recorded.py page <evalpos output .jsonl> <positions .jsonl> [cal=0.7438] [acc=evalbar/results/accuracy_engine.json]
+  python3 evalbar/recorded.py page <evalpos output .jsonl> <positions .jsonl> [cal=0.7538] [acc=evalbar/results/accuracy_engine.json]
                                                                writes evalbar/out/recorded.html, all games and both views on one page
 Sets: yours from pssim/myteam_c_incin.json (with each game's overrides); the opponent's from the common set of each species (or the
 Smogon M-C set of `from`) with what the game revealed laid on top."""
@@ -262,4 +262,4 @@ if __name__ == '__main__':
         os.remove(tmp)
     elif a[0] == 'page':
         kw = dict(x.split('=', 1) for x in a[3:])
-        page(a[1], a[2], float(kw.get('cal', 0.7438)), kw.get('acc', os.path.join(C.HERE, 'results', 'accuracy_engine.json')))
+        page(a[1], a[2], float(kw.get('cal', 0.7538)), kw.get('acc', os.path.join(C.HERE, 'results', 'accuracy_engine.json')))

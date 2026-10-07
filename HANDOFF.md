@@ -653,3 +653,39 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     locked turns. Games without a recharge turn are unchanged (18 of 20 check battles identical to v16; the two with a Hyper Beam user
     now play on); 300 pool games: early fractional ends 1 -> 0 (the turn-25 stall cutoff remains by design). `champ turn` exact.
     `BATTLE_BREAK_DEBUG=1` prints why a game is handed to the value function before it ended.
+  - **Which human lines does the sim misjudge? (`pssim/human_lines.py`, 2026-10-07, 2:45 am; the user asked for specific lines, not
+    "multi-turn plays" in general.)** Data: Eval bar's accuracy set (560 cached ladder Bo3 games, 3,968 positions, one-turn planner at
+    32 seeds with sym2, `evalbar/out/acc_eval_sym2.jsonl` + `acc_p1.jsonl` on its branch), 12,272 slot decisions where the human's play is
+    known, outcomes from the logs. Each human play is classed by kind of line and situation; the test is the side's actual win rate
+    against the planner's own rescaled rating of the chosen line (log-odds x 0.7538, the bar's weight), with the kind's agreed plays
+    (weight >= 30%) as the baseline (a play is only known when the Pokemon got to act, so known-play sides win ~2 points more than rated).
+    Results (results/human_lines.txt, `_r1250` for games rated 1250+):
+    - *Protect is the one large, solid misjudgment.* Humans Protect 14.7% of decisions, the planner 10.7%; 47% of human Protects get under
+      5% from it. Those 846 plays were rated 46.0 as a line (54.0 for the planner's pick) and won 53.7%: +7.7 ± 1.6 over the rating, +4.9
+      net of the baseline (+7.1 net among 1250+ players). The planner says these Protects cost 8 points; they cost about 3. Where:
+      turn-1 Protect (269 plays, planner weight 0.12, top pick 10%; disliked ones +9.9 ± 3.6; of 151 with the foe's play known, 101 were
+      attacked that turn and 20 blocked a Fake Out: real turn-1 opponents are predictable, the equilibrium one is not), Protect under the
+      foe's Trick Room (+14.2 ± 7.7, n 40) or Tailwind (+7.9 ± 7.9), Protect while the partner sets up (+14.9 ± 12, n 13). Not double
+      Protect: the planner gives it 0.50 and rates it right (+0.5 ± 4.9) since DP2.
+    - *Switches: the sim is right.* Disliked switches cost what it says (net -2.5 ± 2.5; into Intimidate, at low HP, giving up boosts all
+      about 0). *Setup:* roughly neutral (net +3.5 ± 4): humans set up twice as often (3.3% vs 1.5%) and the disliked ones recover about
+      half of the 6.5 points the planner charges, consistent with Eval bar's aftermath result (boosted positions rated right).
+    - *Support lines the planner dislikes work:* Helping Hand under 5% won 55.6% vs 39.2 rated (+16.4 ± 6.3, n 45; net +20.7); Follow Me /
+      Rage Powder among 1250+ players +18.7 ± 8.6 (n 22); Taunt / Encore / Haze / Perish +17.7 ± 8.7 (n 37); Tailwind the planner dislikes
+      +9.6 ± 6.9 (n 47). Small samples, all the same direction: a turn spent enabling the partner is undercharged by the one-turn search.
+    - *Value-function biases, independent of the line (agreed and disliked plays show the same edge, so the rating of the resulting
+      position is off):* after a priority attack **+10** (n 205, 3 SE: Sucker Punch / Bullet Punch / Grassy Glide users are underrated;
+      the race ignores priority); after speed control (Icy Wind / Snarl / Electroweb / Bulldoze) **+12** (n 97); after a pivot (U-turn /
+      Parting Shot / Volt Switch) **-7** (n 251; -15 among 1250+: pivoting Incineroar overrated, the foe's -1/-1 is charged in full and
+      switched off for free); screens **-13 ± 8** (n 62: 0.158 per turn plus the race already halving damage double-counts).
+    - *Planner rating bias by the side's team style* (same positions, root value vs outcome, both sides; the regret-by-archetype check
+      Eval bar was going to run): Sun **-6.8 ± 3.2**, Rain + Sun -11.5 ± 5.8 (Charizard + Whimsicott Sun -24 ± 8; Archaludon + Grimmsnarl +
+      Pelipper -13 ± 6), Rain -1.6 ± 3.7, Balance -1.5, Tailwind -0.6, Sand +3, Indeedee TR +3 to +5, Snow **+5.9 ± 4.0** (Froslass +
+      Kingambit + Rillaboom +14.5 ± 6.4), Trick Room +7.7 ± 5.7, Perish +15 (the planner cannot play the trap). So the Rain/Sun-vs-Snow/TR
+      gap Team search sees in self-play is already there in how the planner rates real positions: it is partly the value (priority,
+      speed control, screens, pivots), not only play.
+    - Horizon 2 on the 602-decision subset moves the planner toward humans on setup (weight 0.16 -> 0.30, top pick 13% -> 30%),
+      Protect (regret 5.4 -> 4.4) and redirection (4.4 -> 3.0); switches and attacks unchanged.
+    Next (not started): refit the value on real positions with features for own priority damage, foe speed stages, and refitted screen /
+    pivot weights (Eval bar's 3,968 positions carry the feature vectors); let the race order priority moves first; then re-run the pool
+    bar by group. Turn-1 Protect is mostly a read on predictable human turn-1 play and does not matter for self-play.

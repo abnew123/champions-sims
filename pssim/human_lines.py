@@ -203,6 +203,30 @@ def main(evalf, posf, min_rating, cal):
         if not ex: continue
         lines.append(f"  {k['class']}:")
         for r in ex: lines.append(f"    {r['game']:42s} t{r['turn']:<3d}{r['side']} {r['mon']:14s} {r['label']:36s} w {100 * r['w']:4.1f}% regret {100 * (r['vtop'] - r['v']):5.1f}  (planner: {r['top_label']})")
+    # by the deciding side's archetype (opp_pool.json): how its players' lines split by kind against the planner's weight on them, and
+    # whether the plays the planner dislikes work (the regret-by-archetype question: does the planner misjudge sequencing teams' lines?)
+    pp = os.path.join(HERE, 'opp_pool.json')
+    if os.path.exists(pp):
+        ent = {(e['id'], e['side']): e.get('arch') for e in json.load(open(pp))['entries']}
+        for r in rows: r['arch'] = ent.get((r['game'], r['side']))
+        archs = ['Rain', 'Sun', 'Trick Room', 'Indeedee TR', 'Tailwind', 'Snow', 'Balance', 'Sand', 'Perish', 'Rain + Sun']
+        kinds_show = ['attack', 'spread attack', 'Protect', 'switch', 'Fake Out', 'setup', 'pivot', 'redirection', 'Helping Hand', 'Tailwind', 'Trick Room']
+        lines += ["", "by the deciding side's archetype: share of its players' plays per kind (planner's weight on them in brackets)",
+                  f"{'archetype':12s}" + ''.join(f"{k[:11]:>14s}" for k in kinds_show)]
+        for a in archs:
+            rr = [r for r in rows if r.get('arch') == a]
+            if len(rr) < 200: continue
+            line = f"{a:12s}"
+            for k in kinds_show:
+                kk = [r for r in rr if r['kind'] == k]
+                line += f"{100 * len(kk) / len(rr):6.1f}% ({(sum(r['w'] for r in kk) / len(kk) if kk else 0):.2f})"
+            lines.append(line)
+        lines += ["", "disliked plays (weight < 5%) by the deciding side's archetype: what the planner says the line costs vs the outcome edge (actual - rated line)"]
+        for a in archs:
+            o = summarize([r for r in rows if r.get('arch') == a], cal, lambda r: ['x'], None)
+            if not o or not o[0]['disliked_outcome']: continue
+            d = o[0]['disliked_outcome']
+            lines.append(f"  {a:12s} n {d['n']:4d}  planner: costs {100 * (d['sim_top'] - d['sim_line']):4.1f}  edge {100 * d['edge']:+5.1f} ± {100 * d['se']:4.1f}")
     # rating bias by the side's team archetype / core group (opp_pool.json carries both per replay side): actual outcome of the position
     # against the planner's rescaled root value, from each side's view, so a team style the planner rates too high reads negative
     arch = {}

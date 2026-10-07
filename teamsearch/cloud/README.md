@@ -163,3 +163,13 @@ big process ran 24.2 s/game (a global lock, fixed in v19), so with v19+ big proc
    (and the same with poolmiss), then `RUN_ENV=cloud/run_env_pool.sh setsid nohup cloud/auto_rounds.sh <cap> &` for each.
 4. Reports: `python3 report.py cloud_results/<dir> climb_pool` and `... climb_poolmiss`. After round 1, check the miss climb for
    degenerate miss-reward strategies (Blunder Policy, Stomping Tantrum / Temper Flare, crash moves) before letting it continue.
+
+## Synergy sanity check (user, 2026-10-07; `synergycheck.py`)
+
+Does the sim value a team's game plan? 30 real top-16 teams with a single plan enabler (Trick Room / Psychic Terrain / Tailwind /
+Rain / Sun / Sand) plus the user's Trick Room six: the enabler swapped for 3 strong generalists, vs a control swap of a random
+non-enabler member; v20g pool opponents, 4 paired batches, bring luck held out. About 155,000 games: ~40 min on a c7a.48xlarge.
+1. Setup and smoke as in "The two pool-based climbs" (v20 build; the bundle carries every needed set's matrix cells).
+2. `cd ~/champions-sims/teamsearch && ../.venv/bin/python3 synergycheck.py plan` (all sets must have cells; else `NPROC=48 ... cells`).
+3. `TS_SIM=v20g TS_PARALLEL=60 TS_THREADS=3 setsid nohup ../.venv/bin/python3 synergycheck.py run 4 > round_synergy.log 2>&1 &`
+4. Results: the log's per-team table and summary, and `runs/synergy_v20g.json` (pull_loop copies round*.log and runs/).

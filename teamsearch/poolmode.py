@@ -61,9 +61,8 @@ def opp_six(key, min_w=0.05):
     out = [(Fx.canon(sp), round(x, 3)) for sp, x in sorted(w.items(), key=lambda t: -t[1]) if x >= min_w]
     return tuple((g, x) for g, x in out if g)
 
-def ranked(team, key):
-    """all (lead, back) choices against a group, best first, under the outcome-fitted bring model (as policy.ranked_outcome)"""
-    import fit_outcome as FO
+def _human(team, key):
+    """(matchup, {(lead idx, back idx): human log-prob of that bring and lead}) under the ladder-fitted imitation model"""
     wB, wL, pb, pl = P.model()
     m = Fx.Matchup(list(team), list(opp_six(key))); sp = [Fx.G[g]['species'] for g in team]
     lsm = lambda u: np.asarray(u) - (max(u) + math.log(sum(math.exp(x - max(u)) for x in u)))
@@ -73,6 +72,17 @@ def ranked(team, key):
         Ls = Fx.leads(S)
         uL = lsm([float(np.dot(wL, m.lead_feats(Lp, S) + [sum(pl.get(sp[i], 0.0) for i in Lp)])) for Lp in Ls])
         for l, Lp in enumerate(Ls): hl[(Lp, tuple(i for i in S if i not in Lp))] = uB[b] + uL[l]
+    return m, hl
+
+def human_ranked(team, key):
+    """all (lead, back) choices against a group, most human-like first (the imitation model alone: no outcome model, no battles)"""
+    m, hl = _human(team, key)
+    return [([team[i] for i in Lp], [team[i] for i in B]) for (Lp, B) in sorted(hl, key=lambda x: -hl[x])]
+
+def ranked(team, key):
+    """all (lead, back) choices against a group, best first, under the outcome-fitted bring model (as policy.ranked_outcome)"""
+    import fit_outcome as FO
+    m, hl = _human(team, key)
     w = np.array(json.load(open(P.OUTCOME))['w'])
     r = sorted(((float(np.dot(w, FO.feats(m, hl, Lp, B))), Lp, B) for (Lp, B) in hl), key=lambda t: -t[0])
     return [([team[i] for i in Lp], [team[i] for i in B]) for _, Lp, B in r]

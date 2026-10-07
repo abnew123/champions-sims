@@ -178,6 +178,7 @@ non-enabler member; v20g pool opponents, 4 paired batches, bring luck held out. 
 
 1. Pack (carries v20 and v21 sources, `pssim/h2test.py`), upload, `remote_setup.sh` (builds v20), then
    `teamsearch/cloud/build_battle.sh src_battle_v21.tar.gz`. Smoke: the pool path against `cloud/reference_pool.json` (v20g).
-2. Synergy check first (above): `TS_SYN_TEST=1 ... synergycheck.py run` (its summary step is untested), then the full run.
+2. Synergy check first (above): `TS_SYN_TEST=1 ... synergycheck.py run` (its summary step is untested), then the full run twice:
+   with the climb's bring search, and with `TS_SYN_BRINGS=human` (human-typical brings and leads; cheaper: no screening). Send Battle sim both.
 3. (Battle sim's horizon head-to-head ran on the Mac instead, 4,800 games: the two-turn horizon gained +0.2 +- 0.9, so it stays out of
    the climb setup and `cloud/h2big.sh` is not needed. Keep v20g / egvalue9.)

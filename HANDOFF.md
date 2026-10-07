@@ -773,3 +773,20 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     (2) the planner's remaining play bias is Tailwind / Rain + Sun over (set Tailwind, attack) and Indeedee TR / Balance under (Follow Me,
     Fake Out, pivots: the support and positioning lines human_lines.py found undercharged). Symmetric value variants are being scored on
     this set by the by-style bias rather than by head-to-head strength (results below when in).
+    **Symmetric value variants scored on the real pairings (2:40 pm):** sym2 as is: agreement with the real winner 54.4%, bias RMS over
+    the nine non-Perish styles 5.6 points. The 28-feature real-position refit (egvalue10b, with RACE_PRIO): agreement **56.5%**, Balance
+    -5.0 -> +1.1, Tailwind +8.3 -> +6.4, Rain + Sun +10.9 -> +7.4, but Trick Room -3.2 -> -7.2, Snow +3.5 -> +7.3; RMS 5.5. sym2 with
+    Tailwind turns 0.11 and stat drops discounted by 0.12 (`sym2_tw_drops`): agreement **57.0%**, Balance -3.5, Tailwind +7.8, Sand -5.5;
+    RMS 5.6. So the values move the bias around without shrinking it, while tracking the real games slightly better (agreement SE ~1.1).
+    Bench edge alone as a side-0 value: +0.1 ± 0.8 (flat). Nothing adopted; the planner is at a local optimum for every knob tried today.
+    **Team search's answer on the climb's bring step (2:45 pm): it leaks.** The climb's bring model (bring/fit_outcome.py: a ridge fit on
+    Oct 3 to 11.5k champ-battle-v2 games vs the old archetype models; features: human log-prob, coverage, lead offense / defense / offense,
+    a two-Mega penalty, nothing for enabling a plan) ranks (lead pair, back pair) per opponent core group, the top 3 are screened with 2
+    games each, the best is fixed for the confirm games. For Brisbane-12's start vs real Torkoal + Trick Room sides: setter leads 29% (real
+    players 65%), Torkoal brought 39% (63%), setter + Torkoal 39% (61%); the model's top choice leads a setter against 14% of the meta, its
+    top 3 against 54%, and the 2-game screen keeps setter + Torkoal against 39% though it is in the top 3 against 100%. Team search added
+    `TS_SYN_BRINGS=human` (the imitation model's most human-like bring and leads, no screen) and runs the synergy check both ways on the
+    next box. Reading: the Trick Room package loses its value at team preview, not on the field; the engine plays it about right once the
+    right four lead. Open design point for the user: the planner's opponent is the equilibrium mix, so read-based lines (Follow Me, Fake
+    Out into the obvious target, pivots) are worth less in self-play than against humans, and unexploitable styles (Tailwind-and-attack)
+    more; that is the shape of the remaining Tailwind +8 / Indeedee TR -7 / Balance -5 bias, and no value or depth change fixes it.

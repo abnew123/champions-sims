@@ -720,3 +720,30 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     follow the hypothesis (Trick Room +20 ± 12, Tailwind +13 ± 12, Sun -13 ± 10) but at n 30 per style nothing is significant. The
     2,400-game version (`h2test.py jobs`, 30 teams per style x 10 opponents) is handed to Team search for the cloud box, three runs (A, B,
     C) of the same starts; `h2test.py report <A> <B> <C>` reads them.
+    **Protect-tax head-to-head (same 2,400 starts, 7 threads, 1:00 pm):** sym2's "Protected last turn" weight is -0.477 (a ~12-point charge
+    on every successful Protect, fitted on self-play endgames; the real-position refit gives -0.03). A side planning with -0.10 instead
+    (EG_VALUE_B) changed a third of the games and gained +0.2 ± 1.1 as side 0, +0.9 ± 1.1 as side 1, pooled **+0.6 ± 0.8**: flat. The
+    planner's reluctance to Protect is not a value-weight problem in self-play.
+    **Self-play by team style vs rating-matched real rates (the baseline run A of the 2,400 starts, side 0 = a pool team of that style vs a
+    random pool side, sym2):** sim win rate vs the field and the real ladder rate of the style in the 1200-1350 band: Rain **57.2 vs 48.0
+    (+9)**, Tailwind 50.6 vs 45.6 (+5), Sun 52.0 vs 50.0 (+2), Snow 51.5 vs 49.6 (+2), Sand 49.4 vs 51.0 (-2), Indeedee TR 50.8 vs 53.8
+    (-3), Balance 49.0 vs 52.9 (-4), Trick Room **47.3 vs 52.9 (-6)**; SE about 3 on the sim side. So after matching ratings only Rain
+    stands out as overrated in self-play (2 SE) and Trick Room as underrated (1.5 SE); Sun is fine. Note for Team search's comparison: real
+    archetype rates carry who plays them: Rain sides average rating 1183 against ~1240 for the rest (Rain wins 34% below 1200, 48% in
+    1200-1350), Snow wins 68% below 1200 and 50% in 1200-1350, so overall real rates understate Rain and overstate Snow by 3-4 points.
+    Matchup cells (n 15-60) are too noisy to localise Rain's +9; the 36 Rain / Trick Room vs "Snow" games show the Snow tag is the six's
+    core, the fours brought are mostly Kingambit / Rillaboom / Sneasler / Basculegion. Unsupported mechanics are hit in 62 of 2,400 games
+    (Air Balloon, Static, Metal Burst, Quick Claw...), not a factor.
+    **Horizon head-to-head, 2,400 games (done locally 12:00-1:30 pm, 3-9 threads; Team search's box run is not needed):** the side with
+    the two-turn horizon gained **+0.2 ± 1.2 as side 0 and +0.3 ± 1.2 as side 1, pooled +0.2 ± 0.9 over 4,800 games**; 1,524 / 1,519 of
+    2,400 results unchanged; no style gains (Rain +5 ± 3.5 both times, Trick Room -0.7 / +0.7, Indeedee TR -5 / -2, Tailwind -0.3 / -3).
+    So BATTLE_HORIZON=2 as built (reduced second turn, one seed, 6x6 cells, 1.4-1.7x cost) does not play stronger and does not go into
+    the climb setup. Three evaluator changes aimed at the "sequencing" reading are now flat in self-play (value refit, Protect tax,
+    two-turn horizon); what remains measurable is Rain +9 / Trick Room -6 vs rating-matched ladder rates (vs regional top-cut rates:
+    Rain 49.6%, Trick Room 58-60%, so about +7 / -10 against competent play), and the by-archetype human-lines split says where: Trick
+    Room players' disliked plays work when Trick Room is DOWN (+6.6, n 170; +2.5 with it up), above all switches (+17.6 ± 9.3, n 27),
+    setup (+21 ± 12, n 15: Milotic Coil, whose Def / accuracy boosts the value does not see) and priority (+15 ± 9); Rain players'
+    disliked plays lose as the planner says (status -23, setup -18, pivots -32, Fake Out -36), i.e. the planner plays Rain better than
+    its players do. Next lead (not started): a "plan potential" term for the Trick Room-down phase (a living Trick Room user on the slower
+    side, Tailwind likewise) fitted on the real positions and tested with the same 2,400 starts (Trick Room teams as side 0), and the
+    one-layer switch model (each side assumes the other stays in), since switching is where Trick Room players gain most.

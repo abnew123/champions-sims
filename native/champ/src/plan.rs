@@ -219,12 +219,36 @@ pub fn feats(b: &mut Battle, cfg: &Cfg) -> Vec<f64> {
                 t };
             let wb = (wben(b, 0) - wben(b, 1)) * wleft / 5.0;
             v.extend_from_slice(&[r[2], spe_st(b, 0) - spe_st(b, 1), drops(b, 0) - drops(b, 1), wb, taunt]);
+            if feats22() {
+                // FEATS22 (champ-battle-v21): plan potential and the bench. 25 Trick Room potential: with Trick Room down (or on its last
+                // turn), a side with a living Trick Room user (not Taunted if active) gets tanh(speed edge in its favour) x the user's HP
+                // share, so the slower side's unset Trick Room is worth something before it is clicked; 26 Tailwind potential: a side
+                // without its own Tailwind up and a living Tailwind user gets tanh((2 x its mean Speed - the foe's) / 15) x HP share;
+                // 27 bench edge (bench_edge): the best hit each side's bench has on the other's actives, HP share, side 0 minus side 1.
+                let has_move = |b: &Battle, s: u8, mv: &str| -> f64 {
+                    let mut best = 0.0f64;
+                    for m in alive(b, s) {
+                        let p = b.p(m);
+                        if p.is_active && find(&p.volatiles, "taunt").is_some() { continue; }
+                        if p.move_slots.iter().any(|x| x.id == mv && x.pp > 0 && !x.disabled) { best = best.max(p.hp as f64 / p.maxhp.max(1) as f64); }
+                    }
+                    best };
+                let tr_phase = tr.map(|t| t <= 1).unwrap_or(true);
+                let trp = |b: &Battle, s: u8, edge: f64| if tr_phase { has_move(b, s, "trickroom") * (edge / 15.0).tanh().max(0.0) } else { 0.0 };
+                let tr_pot = trp(b, 0, o.spe - a.spe) - trp(b, 1, a.spe - o.spe);
+                let twp = |b: &Battle, s: u8, mine: f64, theirs: f64| if find(&b.sides[s as usize].side_conditions, "tailwind").is_some() { 0.0 } else { has_move(b, s, "tailwind") * ((2.0 * mine - theirs) / 15.0).tanh().max(0.0) };
+                let tw_pot = twp(b, 0, a.spe, o.spe) - twp(b, 1, o.spe, a.spe);
+                let be = bench_edge(b, cd);
+                v.extend_from_slice(&[tr_pot, tw_pot, be]);
+            }
         }
     }
     v
 }
+/// FEATS22=1 (champ-battle-v21, implies FEATS21): three more features, 28 in all
+fn feats22() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("FEATS22").is_ok()) }
 /// FEATS21=1 (champ-battle-v21): the five extra features above are appended to the feature vector (needs RACE=1)
-fn feats21() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("FEATS21").is_ok()) }
+fn feats21() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("FEATS21").is_ok() || std::env::var("FEATS22").is_ok()) }
 /// RACE=1 (champ-battle-v6, 2026-10-04): a short damage race between the Pokemon on the field, so a one-turn search sees what the next
 /// turns hold (a Protect that only delays a KO, a boost or Tailwind that wins the race). Each active Pokemon's options are its usable
 /// damaging moves (Choice lock respected; Fake Out left out) with expected damage from calc.rs at the mid roll x accuracy x expected hits,
@@ -242,13 +266,60 @@ struct DKey { mv: PId, a: (PId, PId, PId, PId), d: (PId, PId, PId, PId), ab: [i6
               wx: PId, ter: PId, scr: u8, spread: bool, fallen: i64 }
 fn nocache() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("RACE_NOCACHE").is_ok()) }
 thread_local! { static DCACHE: std::cell::RefCell<FxMap<DKey, Option<i64>>> = std::cell::RefCell::new(FxMap::default()); }
+fn cmon(b: &Battle, m: MonRef) -> crate::calc::Mon {
+    let p = b.p(m);
+    crate::calc::Mon { species: p.species.to_string(), item: p.item.to_string(), ability: p.ability.to_string(), nature: p.nature.to_string(), sp: [0; 6],
+        boosts: [p.boosts[0], p.boosts[1], p.boosts[2], p.boosts[3], p.boosts[4]], hp: p.hp, maxhp: p.maxhp, status: p.status.to_string(),
+        fallen: if race_prio() && p.ability == "supremeoverlord" { p.ability_state.n("fallen").unwrap_or(0.0) as i64 } else { 0 } }
+}
+fn screens_of(b: &Battle, s: u8) -> Vec<String> { ["reflect", "lightscreen", "auroraveil"].iter().filter(|k| find(&b.sides[s as usize].side_conditions, k).is_some()).map(|k| k.to_string()).collect() }
+/// calc.rs mid-roll damage of `mid` by `a` on `d` in the current field, memoised per thread (DKey); None = immune / no damage
+fn race_damage(b: &Battle, cd: &crate::data::Data, a: MonRef, d: MonRef, mid: Id, spread: bool, scr: u8) -> Option<i64> {
+    let (pa, pd) = (b.p(a), b.p(d));
+    if !cd.species.contains_key(pa.species) || !cd.species.contains_key(pd.species) || !cd.moves.contains_key(mid) { return None; }
+    let hp_a = if mid == "eruption" || mid == "waterspout" { (pa.hp, pa.maxhp) } else { (0, 0) };
+    let hp_d = if ["hardpress", "superfang", "ruination"].contains(&mid) { (pd.hp, pd.maxhp) } else { ((pd.hp >= pd.maxhp) as i64, 0) };
+    let key = DKey { mv: PId(mid), a: (PId(pa.species), PId(pa.item), PId(pa.ability), PId(pa.status)), d: (PId(pd.species), PId(pd.item), PId(pd.ability), PId(pd.status)),
+        ab: [pa.boosts[0], pa.boosts[1], pa.boosts[2], pa.boosts[3], pa.boosts[4]], db: [pd.boosts[0], pd.boosts[1], pd.boosts[2], pd.boosts[3], pd.boosts[4]],
+        ast: pa.stored, dst: pd.stored, hp_a, hp_d, wx: PId(b.field.weather), ter: PId(b.field.terrain),
+        scr, spread, fallen: if race_prio() && pa.ability == "supremeoverlord" { pa.ability_state.n("fallen").unwrap_or(0.0) as i64 } else { 0 } };
+    DCACHE.with(|c| {
+        if nocache() { c.borrow_mut().clear(); }
+        if let Some(v) = c.borrow().get(&key) { return *v; }
+        let f = crate::calc::Field { weather: b.field.weather.to_string(), terrain: b.field.terrain.to_string(), screens: screens_of(b, d.0), spread, helping: false };
+        let v = crate::calc::damage(cd, &cmon(b, a), &cmon(b, d), mid, &f, 7, false, &pa.stored, &pd.stored);
+        let mut m = c.borrow_mut(); if m.len() > 2_000_000 { m.clear(); } m.insert(key, v); v })
+}
+/// FEATS22 bench edge: what each side has in the back against the other side's actives: for each living bench Pokemon its best damaging
+/// move's mid-roll hit on each foe active as a share of that foe's HP (accuracy x expected hits), the best over bench and foes, capped at 1;
+/// side 0's minus side 1's. A position where the answer is on the bench reads better than one where it is not.
+fn bench_edge(b: &mut Battle, cd: &crate::data::Data) -> f64 {
+    let mut out = [0.0f64; 2];
+    for s in 0..2u8 {
+        let foes: Vec<MonRef> = active_alive(b, 1 - s).into_iter().map(|x| x.1).collect(); if foes.is_empty() { continue; }
+        let scr = ["reflect", "lightscreen", "auroraveil"].iter().enumerate().fold(0u8, |m, (k, x)| if find(&b.sides[1 - s as usize].side_conditions, x).is_some() { m | (1 << k) } else { m });
+        let mut best = 0.0f64;
+        for pos in crate::spot::bench(b, s) {
+            let m = (s, pos);
+            let slots: Vec<Id> = b.p(m).move_slots.iter().filter(|x| x.pp > 0 && !x.disabled).map(|x| x.id).collect();
+            for mid in slots {
+                let tm = &b.dex.mv(mid).tmpl; if tm.category == "Status" || mid == "fakeout" { continue; }
+                let acc = tm.accuracy.map(|a| (a / 100.0).min(1.0)).unwrap_or(1.0);
+                let hits = match tm.multihit { Some((lo, hi)) if lo == hi => lo as f64, Some(_) => 3.1, None => 1.0 };
+                let spread = (tm.target == "allAdjacentFoes" || tm.target == "allAdjacent") && foes.len() == 2;
+                for &f in &foes {
+                    if let Some(d) = race_damage(b, cd, m, f, mid, spread, scr) { best = best.max((d as f64 * acc * hits / b.p(f).maxhp.max(1) as f64).min(1.0)); }
+                }
+            }
+        }
+        out[s as usize] = best;
+    }
+    out[0] - out[1]
+}
 fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 3] {
     let act: [Vec<MonRef>; 2] = [active_alive(b, 0).into_iter().map(|x| x.1).collect(), active_alive(b, 1).into_iter().map(|x| x.1).collect()];
     if act[0].is_empty() || act[1].is_empty() { return [0.0, 0.0, 0.0]; }
     let units: Vec<MonRef> = act[0].iter().chain(act[1].iter()).copied().collect();
-    let cmon = |b: &Battle, m: MonRef| { let p = b.p(m); crate::calc::Mon { species: p.species.to_string(), item: p.item.to_string(), ability: p.ability.to_string(),
-        nature: p.nature.to_string(), sp: [0; 6], boosts: [p.boosts[0], p.boosts[1], p.boosts[2], p.boosts[3], p.boosts[4]], hp: p.hp, maxhp: p.maxhp, status: p.status.to_string(),
-        fallen: if race_prio() && p.ability == "supremeoverlord" { p.ability_state.n("fallen").unwrap_or(0.0) as i64 } else { 0 } } };
     let screens = |b: &Battle, s: u8| -> Vec<String> { ["reflect", "lightscreen", "auroraveil"].iter().filter(|k| find(&b.sides[s as usize].side_conditions, k).is_some()).map(|k| k.to_string()).collect() };
     // each side's screens once, as the memo's bitmask (the string list is only built on a memo miss)
     let scr_bits: [u8; 2] = std::array::from_fn(|s| screens(b, s as u8).iter().fold(0u8, |m, x| m | match x.as_str() { "reflect" => 1, "lightscreen" => 2, _ => 4 }));
@@ -284,21 +355,7 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 3] {
             let mut row = |tgts: &[usize]| -> Vec<f64> {
                 let mut out = vec![0.0; n];
                 for &j in tgts {
-                    if !cd.species.contains_key(b.p(units[j]).species) { continue; }
-                    let (pa, pd) = (b.p(units[i]), b.p(units[j]));
-                    let hp_a = if mid == "eruption" || mid == "waterspout" { (pa.hp, pa.maxhp) } else { (0, 0) };
-                    let hp_d = if ["hardpress", "superfang", "ruination"].contains(&mid) { (pd.hp, pd.maxhp) } else { ((pd.hp >= pd.maxhp) as i64, 0) };
-                    let key = DKey { mv: PId(mid), a: (PId(pa.species), PId(pa.item), PId(pa.ability), PId(pa.status)), d: (PId(pd.species), PId(pd.item), PId(pd.ability), PId(pd.status)),
-                        ab: [pa.boosts[0], pa.boosts[1], pa.boosts[2], pa.boosts[3], pa.boosts[4]], db: [pd.boosts[0], pd.boosts[1], pd.boosts[2], pd.boosts[3], pd.boosts[4]],
-                        ast: pa.stored, dst: pd.stored, hp_a, hp_d, wx: PId(b.field.weather), ter: PId(b.field.terrain),
-                        scr: scr_bits[side(j) as usize], spread, fallen: if race_prio() && pa.ability == "supremeoverlord" { pa.ability_state.n("fallen").unwrap_or(0.0) as i64 } else { 0 } };
-                    let dmg = DCACHE.with(|c| {
-                        if nocache() { c.borrow_mut().clear(); }
-                        if let Some(v) = c.borrow().get(&key) { return *v; }
-                        let f = crate::calc::Field { weather: b.field.weather.to_string(), terrain: b.field.terrain.to_string(), screens: screens(b, side(j)), spread, helping: false };
-                        let v = crate::calc::damage(cd, &cmon(b, units[i]), &cmon(b, units[j]), mid, &f, 7, false, &pa.stored, &pd.stored);
-                        let mut m = c.borrow_mut(); if m.len() > 2_000_000 { m.clear(); } m.insert(key, v); v });
-                    if let Some(dmg) = dmg { out[j] = dmg as f64 * acc * hits; }
+                    if let Some(dmg) = race_damage(b, cd, units[i], units[j], mid, spread, scr_bits[side(j) as usize]) { out[j] = dmg as f64 * acc * hits; }
                 }
                 out };
             if spread { if foes.iter().all(|&j| prio_ok(j)) { let r = row(&foes); opts[i].push(r); oprio[i].push(prio); } }

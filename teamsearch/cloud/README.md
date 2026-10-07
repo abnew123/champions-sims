@@ -178,7 +178,7 @@ non-enabler member; v20g pool opponents, 4 paired batches, bring luck held out. 
 
 1. Pack (carries v20 and v21 sources, `pssim/h2test.py`), upload, `remote_setup.sh` (builds v20), then
    `teamsearch/cloud/build_battle.sh src_battle_v21.tar.gz`. Smoke: the pool path against `cloud/reference_pool.json` (v20g).
-2. Battle sim's horizon head-to-head (~10 min on a c7a.48xlarge): `teamsearch/cloud/h2big.sh 180` from ~/champions-sims, then send
-   `pssim/h2big_report.txt` and `h2big_times.txt` to Battle sim. It decides whether BATTLE_HORIZON=2 goes into the climb setup.
-3. Synergy check (above): `TS_SYN_TEST=1 ... synergycheck.py run` first (its summary step is untested), then the full run.
+2. Synergy check first (above): `TS_SYN_TEST=1 ... synergycheck.py run` (its summary step is untested), then the full run.
+3. Battle sim's horizon head-to-head only if its own Mac run (started Oct 7, 11:56 am, ~2.5 h) hasn't reported yet: then run
+   `teamsearch/cloud/h2big.sh 180` (~10 min) and send `pssim/h2big_report.txt` and `h2big_times.txt` so the two can be compared.
 4. If the horizon helps: rerun the synergy check with it (needs a v21 horizon entry in evaluate.SIMS; ~2.6x the cost).

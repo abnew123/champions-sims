@@ -11,7 +11,7 @@ const SPREAD: [&str; 2] = ["allAdjacentFoes", "allAdjacent"];
 
 fn mon(species: &str, item: &str, ability: &str, nature: &str, sp: [i64; 6], d: &Data) -> (Mon, [i64; 6]) {
     let st: [i64; 6] = std::array::from_fn(|i| stat(d, species, &sp, nature, i));
-    (Mon { species: species.into(), item: item.into(), ability: ability.into(), nature: nature.into(), sp, boosts: [0; 5], hp: st[0], maxhp: st[0], status: String::new() }, st)
+    (Mon { species: species.into(), item: item.into(), ability: ability.into(), nature: nature.into(), sp, boosts: [0; 5], hp: st[0], maxhp: st[0], status: String::new(), fallen: 0 }, st)
 }
 fn rolls(d: &Data, a: &Mon, ast: &[i64; 6], t: &Mon, tst: &[i64; 6], mv: &str, f: &Field) -> Vec<i64> {
     (0..16).map(|r| damage(d, a, t, mv, f, r, false, ast, tst).unwrap_or(0)).collect()

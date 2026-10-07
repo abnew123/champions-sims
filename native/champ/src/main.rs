@@ -16,11 +16,11 @@ fn mon(v: &Value) -> Mon {
     Mon { species: v["species"].as_str().unwrap().into(), item: v["item"].as_str().unwrap_or("").into(), ability: v["ability"].as_str().unwrap_or("").into(),
           nature: v["nature"].as_str().unwrap().into(), sp: std::array::from_fn(|i| sp[STATS[i]].as_i64().unwrap_or(0)),
           boosts: std::array::from_fn(|i| b[["atk", "def", "spa", "spd", "spe"][i]].as_i64().unwrap_or(0)),
-          hp: v["hp"].as_i64().unwrap(), maxhp: v["maxhp"].as_i64().unwrap(), status: v["status"].as_str().unwrap_or("").into() }
+          hp: v["hp"].as_i64().unwrap(), maxhp: v["maxhp"].as_i64().unwrap(), status: v["status"].as_str().unwrap_or("").into(), fallen: 0 }
 }
 fn main() {
     let a: Vec<String> = std::env::args().collect();
-    match a.get(1).map(|s| s.as_str()) { Some("turn") => turntest::main(&a[2..]), Some("bench") => turntest::bench(&a[2..]), Some("plan") => plan::main(&a[2..]), Some("spot") => spot::main(&a[2..]), Some("battle") => battle4::main(&a[2..]), Some("evalpos") => evalpos::main(&a[2..]), Some("spreads") => spreads::main(&a[2..]), Some("damage") => damage_main(&a[1..]), _ => damage_main(&a) }
+    match a.get(1).map(|s| s.as_str()) { Some("turn") => turntest::main(&a[2..]), Some("bench") => turntest::bench(&a[2..]), Some("plan") => plan::main(&a[2..]), Some("spot") => spot::main(&a[2..]), Some("battle") => battle4::main(&a[2..]), Some("evalpos") => evalpos::main(&a[2..]), Some("feats") => evalpos::feats_main(&a[2..]), Some("spreads") => spreads::main(&a[2..]), Some("damage") => damage_main(&a[1..]), _ => damage_main(&a) }
 }
 fn damage_main(args: &[String]) {
     let d = data::Data::load(&args[1]);

@@ -653,7 +653,7 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     locked turns. Games without a recharge turn are unchanged (18 of 20 check battles identical to v16; the two with a Hyper Beam user
     now play on); 300 pool games: early fractional ends 1 -> 0 (the turn-25 stall cutoff remains by design). `champ turn` exact.
     `BATTLE_BREAK_DEBUG=1` prints why a game is handed to the value function before it ended.
-  - **Which human lines does the sim misjudge? (`pssim/human_lines.py`, 2026-10-07, 2:45 am; the user asked for specific lines, not
+  - **Which human lines does the sim misjudge? (`pssim/human_lines.py`, 2026-10-07, 11:15 am; the user asked for specific lines, not
     "multi-turn plays" in general.)** Data: Eval bar's accuracy set (560 cached ladder Bo3 games, 3,968 positions, one-turn planner at
     32 seeds with sym2, `evalbar/out/acc_eval_sym2.jsonl` + `acc_p1.jsonl` on its branch), 12,272 slot decisions where the human's play is
     known, outcomes from the logs. Each human play is classed by kind of line and situation; the test is the side's actual win rate
@@ -689,3 +689,34 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     Next (not started): refit the value on real positions with features for own priority damage, foe speed stages, and refitted screen /
     pivot weights (Eval bar's 3,968 positions carry the feature vectors); let the race order priority moves first; then re-run the pool
     bar by group. Turn-1 Protect is mostly a read on predictable human turn-1 play and does not matter for self-play.
+  - **champ-battle-v21 (2026-10-07, built 12:30 pm; all new behaviour behind flags; flags off: `champ turn` exact on the 6,900 positions,
+    the 20 check battles identical to v20 with the full setup).** From the human-lines study above:
+    - `RACE_PRIO=1`: the damage race orders priority moves first (Grassy Glide only in Grassy Terrain; a priority move is dropped against a
+      grounded target under Psychic Terrain and against a side with Armor Tail / Dazzling / Queenly Majesty), each unit's turn order
+      coming from its best option's priority at the start of the race turn; and the race calc knows Supreme Overlord (the ability
+      state's fallen count; calc.rs `Mon.fallen`; the 20,000 Showdown damage cases stay 99.9% exact, they have no fallen allies).
+    - `FEATS21=1` (needs RACE=1): five features after the two race edges, so the vector has 25: priority edge (RACE_PRIO; the best
+      priority hit each side has on the field as an HP share, summed over its actives), Speed stages of the actives, stat drops of the
+      actives (the negative part of the boost feature), weather turns left x who benefits (per active +1 / -1 / sand chip -0.5), Taunted
+      actives. A 20-weight value file ignores them (`value()` uses `w.len().min(f.len())`).
+    - `champ feats <engine_data> <positions.jsonl> <out.jsonl> [threads]`: the feature vector and static value per position, no lookahead
+      (27,000 positions in about a second); `pssim/build_egvalue10.py` fits a symmetric value on them.
+    - `BATTLE_HORIZON=2` (+ `BATTLE_HORIZON_SIDE=0|1`, `BATTLE_H2_SEEDS` 1, `BATTLE_H2_MARGIN` 0.05, `BATTLE_H2_TOP` 6): the evalpos two-turn
+      horizon in real games: after the one-turn solve, the heaviest / closest options of each side (at most 6 x 6 cells per round, two
+      rounds) are valued after one more turn (battle4 `next_value`) and the flagged sides re-solve their mixes on those values. Costs
+      about 2.6x per game (2.1 -> 5.6 s per pool game on one thread with sym2); without the cap (every option within 0.15) it was 30x.
+    **Refit on real positions (`build_egvalue10.py`, results/egvalue10_fit.json; the file egvalue10 is NOT adopted):** every turn of
+    the 3,970 cached Bo3 games outside Eval bar's 560 held-out games (26,876 positions, built with Eval bar's position builder, hindsight
+    sets) with the 25 features. Held-out static log loss (560 games, rescaled): sym2 as is 0.5551, the 20 features refitted 0.5537, the 25
+    refitted 0.5567 (SE 0.017): no gain. The new features take sensible weights (priority +0.15, speed stages +0.14, drops -0.25, Taunt
+    -0.20, weather +0.03) but the refit also moves old ones a lot (Protected last turn -0.48 -> -0.03, Trick Room turns 0.20 -> 0.08, type
+    edge 0.08 -> 0.44, race KO 0.47 -> 0.26) and the held-out team-style bias does not move (Sun -7, Trick Room +7, Snow +5). On the
+    27,000 fit positions the style bias of the static value is small: Rain -4.2 ± 1.4, Sun -2.0 (none / sun up) but -12 / -17 when a Sun
+    side sits under sand / snow, Trick Room sides +4.3 ± 2.9 with Trick Room up and -1.4 with it down, Snow +0.5, faster sides +1.3 /
+    slower -1.3 (SE 0.5). Reading: the value's style bias on real positions is a few points, mostly weather-war and speed; the 8-10 point
+    self-play gap Team search measured must come mostly from play (Protect, support lines), which the horizon test below addresses.
+    **Horizon head-to-head, local (240 mixed-style pool-vs-pool games, `pssim/h2test.py`, sym2, 3 threads):** the side with the horizon
+    gained +2.3 ± 4.0 points as side 0 and +0.8 ± 4.0 as side 1 (146 of 240 results unchanged each time); by side 0's style the signs
+    follow the hypothesis (Trick Room +20 ± 12, Tailwind +13 ± 12, Sun -13 ± 10) but at n 30 per style nothing is significant. The
+    2,400-game version (`h2test.py jobs`, 30 teams per style x 10 opponents) is handed to Team search for the cloud box, three runs (A, B,
+    C) of the same starts; `h2test.py report <A> <B> <C>` reads them.

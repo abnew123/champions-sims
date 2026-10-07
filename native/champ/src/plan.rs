@@ -192,9 +192,39 @@ pub fn feats(b: &mut Battle, cfg: &Cfg) -> Vec<f64> {
          if tr.is_some() { 0.0 } else { d(&|b, s| sc(b, s, "tailwind")) },
          d(&|b, s| sc(b, s, "reflect") + sc(b, s, "lightscreen") + sc(b, s, "auroraveil")),
          d(&|b, s| cnt(b, s, "encore")), d(&|b, s| tricked(b, s))];
-    if let Some(cd) = cfg.cdata { v.extend_from_slice(&race_feats(b, cd)); }
+    let taunt = d(&|b, s| cnt(b, s, "taunt"));
+    if let Some(cd) = cfg.cdata {
+        let r = race_feats(b, cd); v.extend_from_slice(&r[..2]);
+        if feats21() {
+            // champ-battle-v21 features (after the two race edges; a value file with 20 weights ignores them):
+            // 20 priority edge (RACE_PRIO; the best priority hit each side has on the field, HP share, summed over its actives)
+            // 21 Speed stages of the actives, 22 stat drops of the actives (the part of the boost feature that is negative: a drop
+            // is switched off for free, so the fit can charge it less), 23 weather turns left x who benefits (per active: +1 with a
+            // damaging move of the boosted type or a weather Speed / power ability, -1 with a move of the weakened type and no benefit;
+            // sand: +1 Rock type or sand ability, -0.5 taking the chip; snow: +1 Ice type or snow ability), 24 Taunted actives
+            let spe_st = |b: &Battle, s: u8| active_alive(b, s).iter().map(|(_, m)| b.p(*m).boosts[4].clamp(-3, 3) as f64).sum::<f64>();
+            let drops = |b: &Battle, s: u8| active_alive(b, s).iter().map(|(_, m)| { let p = b.p(*m); (p.boosts[prim(b, *m)].clamp(-3, 0)) as f64 + 0.3 * (p.boosts[4].clamp(-2, 0)) as f64 }).sum::<f64>();
+            let wx = b.field.weather; let wleft = if wx.is_empty() { 0.0 } else { b.field.weather_state.duration.filter(|d| *d > 0).unwrap_or(5) as f64 };
+            let wben = |b: &mut Battle, s: u8| -> f64 { if wleft == 0.0 { return 0.0; } let mut t = 0.0;
+                for (_, m) in active_alive(b, s) {
+                    let ab = b.p(m).ability; let types = b.get_types(m);
+                    let has_ty = |b: &Battle, ty: &str| b.p(m).move_slots.iter().any(|sl| { let mv = &b.dex.mv(sl.id).tmpl; mv.category != "Status" && move_type(b, m, sl.id) == ty });
+                    t += match wx {
+                        "raindance" | "primordialsea" => if has_ty(b, "Water") || ["swiftswim", "raindish", "drydish", "hydration"].contains(&ab) { 1.0 } else if has_ty(b, "Fire") { -1.0 } else { 0.0 },
+                        "sunnyday" | "desolateland" => if has_ty(b, "Fire") || ["chlorophyll", "protosynthesis", "solarpower", "orichalcumpulse", "flowergift", "harvest", "leafguard"].contains(&ab) || b.p(m).move_slots.iter().any(|sl| sl.id == "solarbeam" || sl.id == "solarblade") { 1.0 } else if has_ty(b, "Water") { -1.0 } else { 0.0 },
+                        "sandstorm" => if types.contains(&"Rock") || ["sandrush", "sandforce", "sandveil"].contains(&ab) { 1.0 } else if !(types.contains(&"Ground") || types.contains(&"Steel") || ["overcoat", "magicguard"].contains(&ab)) { -0.5 } else { 0.0 },
+                        "snowscape" | "hail" => if types.contains(&"Ice") || ["slushrush", "iceface", "snowcloak", "icebody"].contains(&ab) { 1.0 } else { 0.0 },
+                        _ => 0.0 };
+                }
+                t };
+            let wb = (wben(b, 0) - wben(b, 1)) * wleft / 5.0;
+            v.extend_from_slice(&[r[2], spe_st(b, 0) - spe_st(b, 1), drops(b, 0) - drops(b, 1), wb, taunt]);
+        }
+    }
     v
 }
+/// FEATS21=1 (champ-battle-v21): the five extra features above are appended to the feature vector (needs RACE=1)
+fn feats21() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("FEATS21").is_ok()) }
 /// RACE=1 (champ-battle-v6, 2026-10-04): a short damage race between the Pokemon on the field, so a one-turn search sees what the next
 /// turns hold (a Protect that only delays a KO, a boost or Tailwind that wins the race). Each active Pokemon's options are its usable
 /// damaging moves (Choice lock respected; Fake Out left out) with expected damage from calc.rs at the mid roll x accuracy x expected hits,
@@ -209,15 +239,16 @@ const RACE_T: usize = 3;
 /// are identical with and without it (RACE_NOCACHE=1 turns it off for that check).
 #[derive(Hash, PartialEq, Eq)]
 struct DKey { mv: PId, a: (PId, PId, PId, PId), d: (PId, PId, PId, PId), ab: [i64; 5], db: [i64; 5], ast: [i64; 6], dst: [i64; 6], hp_a: (i64, i64), hp_d: (i64, i64),
-              wx: PId, ter: PId, scr: u8, spread: bool }
+              wx: PId, ter: PId, scr: u8, spread: bool, fallen: i64 }
 fn nocache() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("RACE_NOCACHE").is_ok()) }
 thread_local! { static DCACHE: std::cell::RefCell<FxMap<DKey, Option<i64>>> = std::cell::RefCell::new(FxMap::default()); }
-fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 2] {
+fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 3] {
     let act: [Vec<MonRef>; 2] = [active_alive(b, 0).into_iter().map(|x| x.1).collect(), active_alive(b, 1).into_iter().map(|x| x.1).collect()];
-    if act[0].is_empty() || act[1].is_empty() { return [0.0, 0.0]; }
+    if act[0].is_empty() || act[1].is_empty() { return [0.0, 0.0, 0.0]; }
     let units: Vec<MonRef> = act[0].iter().chain(act[1].iter()).copied().collect();
     let cmon = |b: &Battle, m: MonRef| { let p = b.p(m); crate::calc::Mon { species: p.species.to_string(), item: p.item.to_string(), ability: p.ability.to_string(),
-        nature: p.nature.to_string(), sp: [0; 6], boosts: [p.boosts[0], p.boosts[1], p.boosts[2], p.boosts[3], p.boosts[4]], hp: p.hp, maxhp: p.maxhp, status: p.status.to_string() } };
+        nature: p.nature.to_string(), sp: [0; 6], boosts: [p.boosts[0], p.boosts[1], p.boosts[2], p.boosts[3], p.boosts[4]], hp: p.hp, maxhp: p.maxhp, status: p.status.to_string(),
+        fallen: if race_prio() && p.ability == "supremeoverlord" { p.ability_state.n("fallen").unwrap_or(0.0) as i64 } else { 0 } } };
     let screens = |b: &Battle, s: u8| -> Vec<String> { ["reflect", "lightscreen", "auroraveil"].iter().filter(|k| find(&b.sides[s as usize].side_conditions, k).is_some()).map(|k| k.to_string()).collect() };
     // each side's screens once, as the memo's bitmask (the string list is only built on a memo miss)
     let scr_bits: [u8; 2] = std::array::from_fn(|s| screens(b, s as u8).iter().fold(0u8, |m, x| m | match x.as_str() { "reflect" => 1, "lightscreen" => 2, _ => 4 }));
@@ -225,8 +256,16 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 2] {
     let tr_left = dur(find(&b.field.pseudo, "trickroom"));
     let tw_left = [dur(find(&b.sides[0].side_conditions, "tailwind")), dur(find(&b.sides[1].side_conditions, "tailwind"))];
     let n = units.len(); let sides: Vec<u8> = units.iter().map(|m| m.0).collect(); let side = |i: usize| sides[i];
-    // options: per unit, a list of expected damage to each unit index (0 for non-targets)
-    let mut opts: Vec<Vec<Vec<f64>>> = vec![vec![]; n];
+    // RACE_PRIO (champ-battle-v21): priority moves act first in each race turn. A move with priority > 0 (Grassy Glide only in Grassy
+    // Terrain) is left out against a grounded target under Psychic Terrain and against a side with Armor Tail / Dazzling / Queenly
+    // Majesty on the field (it would fail); each option carries its priority, and the units act in order of their best option's
+    // priority at the start of the race turn, then Speed. Without the flag the race is the old one (no priority anywhere).
+    let prio_on = race_prio();
+    let psy = b.field.terrain == "psychicterrain"; let grassy = b.field.terrain == "grassyterrain";
+    let grounded: Vec<bool> = (0..n).map(|i| b.is_grounded(units[i], false) == Some(true)).collect();
+    let blocks: [bool; 2] = std::array::from_fn(|s| (0..n).any(|i| side(i) == s as u8 && ["armortail", "dazzling", "queenlymajesty"].contains(&b.p(units[i]).ability)));
+    // options: per unit, a list of expected damage to each unit index (0 for non-targets), with each option's priority
+    let mut opts: Vec<Vec<Vec<f64>>> = vec![vec![]; n]; let mut oprio: Vec<Vec<i64>> = vec![vec![]; n];
     for i in 0..n {
         let m = units[i]; let s = b.p(m).side; let foes: Vec<usize> = (0..n).filter(|&j| side(j) != s).collect();
         if !cd.species.contains_key(b.p(m).species) { continue; }
@@ -236,6 +275,8 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 2] {
             if pp <= 0 || disabled || mid == "fakeout" || lock.map(|l| l != mid).unwrap_or(false) || !cd.moves.contains_key(mid) { continue; }
             let tm = &b.dex.mv(mid).tmpl;
             if tm.category == "Status" { continue; }
+            let prio = if !prio_on { 0 } else if mid == "grassyglide" { if grassy { 1 } else { 0 } } else { tm.priority as i64 };
+            let prio_ok = |j: usize| prio <= 0 || (!(psy && grounded[j]) && !blocks[side(j) as usize]);
             let spread = (tm.target == "allAdjacentFoes" || tm.target == "allAdjacent") && foes.len() == 2;
             let acc = tm.accuracy.map(|a| (a / 100.0).min(1.0)).unwrap_or(1.0);
             let acc = if crate::battle::Battle::miss_double() == Some(s) { (2.0 * acc - 1.0).max(0.0) } else { acc };   // MISS_DOUBLE: that side's analytic accuracy too
@@ -250,7 +291,7 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 2] {
                     let key = DKey { mv: PId(mid), a: (PId(pa.species), PId(pa.item), PId(pa.ability), PId(pa.status)), d: (PId(pd.species), PId(pd.item), PId(pd.ability), PId(pd.status)),
                         ab: [pa.boosts[0], pa.boosts[1], pa.boosts[2], pa.boosts[3], pa.boosts[4]], db: [pd.boosts[0], pd.boosts[1], pd.boosts[2], pd.boosts[3], pd.boosts[4]],
                         ast: pa.stored, dst: pd.stored, hp_a, hp_d, wx: PId(b.field.weather), ter: PId(b.field.terrain),
-                        scr: scr_bits[side(j) as usize], spread };
+                        scr: scr_bits[side(j) as usize], spread, fallen: if race_prio() && pa.ability == "supremeoverlord" { pa.ability_state.n("fallen").unwrap_or(0.0) as i64 } else { 0 } };
                     let dmg = DCACHE.with(|c| {
                         if nocache() { c.borrow_mut().clear(); }
                         if let Some(v) = c.borrow().get(&key) { return *v; }
@@ -260,9 +301,14 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 2] {
                     if let Some(dmg) = dmg { out[j] = dmg as f64 * acc * hits; }
                 }
                 out };
-            if spread { let r = row(&foes); opts[i].push(r); } else { for &j in &foes { let r = row(&[j]); opts[i].push(r); } }
+            if spread { if foes.iter().all(|&j| prio_ok(j)) { let r = row(&foes); opts[i].push(r); oprio[i].push(prio); } }
+            else { for &j in &foes { if prio_ok(j) { let r = row(&[j]); opts[i].push(r); oprio[i].push(prio); } } }
         }
     }
+    // priority edge (feature): per side, the sum over its units of the best priority-move hit on any foe as a share of that foe's HP (capped at 1)
+    let prio_edge: f64 = if !prio_on { 0.0 } else { (0..n).map(|i| {
+        let best = (0..opts[i].len()).filter(|&k| oprio[i][k] > 0).map(|k| (0..n).map(|j| if b.p(units[j]).maxhp > 0 { opts[i][k][j] / b.p(units[j]).maxhp as f64 } else { 0.0 }).fold(0.0, f64::max)).fold(0.0, f64::max).min(1.0);
+        if side(i) == 0 { best } else { -best } }).sum() };
     let spe: Vec<f64> = (0..n).map(|i| b.get_stat(units[i], 5, false, false) as f64).collect();
     let hp0: Vec<f64> = (0..n).map(|i| b.p(units[i]).hp as f64).collect();
     let maxhp: Vec<f64> = (0..n).map(|i| b.p(units[i]).maxhp.max(1) as f64).collect();
@@ -275,8 +321,13 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 2] {
         for k in 1..=RACE_T {
             let tr_on = k <= tr_left;
             let eff_spe = |i: usize| { let s = side(i) as usize; let x = if tw_left[s] > 0 && k > tw_left[s] { spe[i] / 2.0 } else { spe[i] }; if tr_on { -x } else { x } };
+            // each unit's priority this turn: that of its best option against the HP at the start of the turn (0 without RACE_PRIO)
+            let pr: Vec<i64> = (0..n).map(|i| { if !prio_on || hp[i] <= 0.0 || opts[i].is_empty() { return 0; }
+                let pf = if status[i] == "par" { 0.875 } else { 1.0 };
+                let score = |o: &Vec<f64>| (0..n).filter(|&j| hp[j] > 0.0 && o[j] > 0.0).map(|j| (o[j] * pf).min(hp[j]) / maxhp[j] + if o[j] * pf >= hp[j] { 1.0 } else { 0.0 }).sum::<f64>();
+                let kb = (0..opts[i].len()).max_by(|&x, &y| score(&opts[i][x]).partial_cmp(&score(&opts[i][y])).unwrap()).unwrap(); oprio[i][kb] }).collect();
             let mut order: Vec<usize> = (0..n).filter(|&i| hp[i] > 0.0).collect();
-            order.sort_by(|&x, &y| eff_spe(y).partial_cmp(&eff_spe(x)).unwrap().then_with(|| if side(x) == side(y) { std::cmp::Ordering::Equal }
+            order.sort_by(|&x, &y| pr[y].cmp(&pr[x]).then_with(|| eff_spe(y).partial_cmp(&eff_spe(x)).unwrap()).then_with(|| if side(x) == side(y) { std::cmp::Ordering::Equal }
                 else if side(x) == first { std::cmp::Ordering::Less } else { std::cmp::Ordering::Greater }));
             for &i in &order {
                 if hp[i] <= 0.0 || k < wake[i] || opts[i].is_empty() { continue; }
@@ -315,12 +366,13 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 2] {
                     100.0 * opts[i].iter().map(|o| o[j]).fold(0.0, f64::max) / maxhp[j])).collect();
                 lines.push(format!("  s{} {} hp {:.0}% spe {} -> {} | end hp {:.0}% (side 0 first on ties)", side(i), b.p(units[i]).species, 100.0 * hp0[i] / maxhp[i], spe[i], best.join(", "), 100.0 * hp[i].max(0.0) / maxhp[i]));
             }
-            lines.push(format!("  KO edge {:+.2}, HP edge {:+.2}", out[0], out[1]));
+            lines.push(format!("  KO edge {:+.2}, HP edge {:+.2}, priority edge {:+.2}", out[0], out[1], prio_edge));
             eprintln!("{}", lines.join("\n"));
         }
     }
-    out
+    [out[0], out[1], prio_edge]
 }
+fn race_prio() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("RACE_PRIO").is_ok()) }
 fn race_ties_avg() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("RACE_TIES").map(|v| v == "avg").unwrap_or(false)) }
 fn perish_adj(b: &Battle, w: &[f64]) -> f64 {
     let al = [alive(b, 0), alive(b, 1)];

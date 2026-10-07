@@ -16,6 +16,8 @@ fn apply_chain(value: i64, m4096: i64) -> i64 { if m4096 == 4096 { value } else 
 pub struct Mon {
     pub species: String, pub item: String, pub ability: String, pub nature: String,
     pub sp: [i64; 6], pub boosts: [i64; 5], pub hp: i64, pub maxhp: i64, pub status: String,
+    /// Supreme Overlord's count of fallen allies when it came in (0-5; the race fills it from the ability state, the differential test leaves 0)
+    pub fallen: i64,
 }
 pub const STATS: [&str; 6] = ["hp", "atk", "def", "spa", "spd", "spe"];
 
@@ -124,6 +126,7 @@ pub fn damage(d: &Data, a: &Mon, def: &Mon, id: &str, f: &Field, roll: i64, crit
         "reckless" => if mv.recoil.is_some() || mv.has_crash { hs.push(H { prio: 23.0, sub: 1, num: 4915, den: 4096, direct: false }) },
         "sandforce" => if f.weather == "sandstorm" && ["Rock", "Ground", "Steel"].contains(&act.mtype.as_str()) { hs.push(H { prio: 21.0, sub: 1, num: 5325, den: 4096, direct: false }) },
         "punkrock" => if mv.flags.contains_key("sound") { hs.push(H { prio: 7.0, sub: 1, num: 5325, den: 4096, direct: false }) },
+        "supremeoverlord" => if a.fallen > 0 { hs.push(H { prio: ap("onBasePower"), sub: 1, num: [4096, 4506, 4915, 5325, 5734, 6144][a.fallen.clamp(0, 5) as usize], den: 4096, direct: false }) },
         _ => {}
     }
     if act.mtype == "Fairy" && (a.ability == "fairyaura" || def.ability == "fairyaura") { hs.push(H { prio: 20.0, sub: 1, num: 5448, den: 4096, direct: false }); }

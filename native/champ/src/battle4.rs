@@ -57,15 +57,22 @@ pub(crate) fn rjoint(b: &mut Battle, s: u8) -> Vec<[PChoice; 2]> {
     out
 }
 fn ns() -> usize { std::env::var("BATTLE_NS").ok().and_then(|x| x.parse().ok()).unwrap_or(2) }
+/// BATTLE_HORIZON=2 with BATTLE_HORIZON_SIDE=0|1 (default both): which sides re-solve on the two-turn values
+fn horizon_sides() -> [bool; 2] {
+    static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new();
+    *F.get_or_init(|| { let on = std::env::var("BATTLE_HORIZON").ok().and_then(|x| x.parse::<usize>().ok()).unwrap_or(1) >= 2;
+        if !on { return [false, false]; }
+        match std::env::var("BATTLE_HORIZON_SIDE").as_deref() { Ok("0") => [true, false], Ok("1") => [false, true], _ => [true, true] } })
+}
 
 /// switch_slots / slot_decisions: active Pokemon that switched voluntarily / active Pokemon that could have (bench available, not trapped)
-struct Out { v: f64, unsupported: Vec<String>, feats: Vec<Vec<f64>>, turns: usize, tr_turns: usize, tr_by: [bool; 3], switches: [usize; 2], slot_decisions: [usize; 2], switch_slots: [usize; 2], log: Vec<String>, states: Vec<Value>, dp2: [usize; 4], dplog: Vec<Value> }
+struct Out { v: f64, unsupported: Vec<String>, feats: Vec<Vec<f64>>, turns: usize, tr_turns: usize, tr_by: [bool; 3], switches: [usize; 2], slot_decisions: [usize; 2], switch_slots: [usize; 2], log: Vec<String>, states: Vec<Value>, dp2: [usize; 4], dplog: Vec<Value>, h2: usize }
 
 fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool) -> Out {
     let mut b = start.clone(); let mut turn = 1;
     let (mut tr_turns, mut tr_by, mut switches, mut log) = (0, [false; 3], [0usize; 2], vec![]);
     let (mut slot_decisions, mut switch_slots) = ([0usize; 2], [0usize; 2]);
-    let mut uns: Vec<String> = vec![]; let mut dp2s = [0usize; 4]; let mut dplog: Vec<Value> = vec![];
+    let mut uns: Vec<String> = vec![]; let mut dp2s = [0usize; 4]; let mut dplog: Vec<Value> = vec![]; let mut h2cells = 0usize;
     let want_states = std::env::var("BATTLE_TURNS").is_ok(); let mut states: Vec<Value> = vec![];
     let want_feats = std::env::var("BATTLE_FEATS").is_ok(); let mut fx: Vec<Vec<f64>> = vec![];
     while !b.ended && (turn <= MAXTURN || (turn <= STALL_MAXTURN && !can_damage(&b, 0) && !can_damage(&b, 1))) {
@@ -123,6 +130,50 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool) -> Ou
                 let rows: Vec<usize> = mns.iter().copied().chain(isw.iter().copied()).collect();
                 let at2: Vec<Vec<f64>> = rows.iter().map(|&i| (0..tsw.len()).map(|j| cell2(i, j, &b).1).collect()).collect();
                 y = nash(&at2, 400).1; yrows = rows;
+            }
+        }
+        // BATTLE_HORIZON=2 (champ-battle-v21): the evalpos two-turn horizon in real games. Every option in contention after the one-turn
+        // solve (in a side's mix, or within BATTLE_H2_MARGIN (0.15) of that side's best option) gets its cells against the other side's
+        // contenders valued after one more turn (next_value: both sides' Protect and strongest hits, no switches, one seed per sample,
+        // BATTLE_H2_SEEDS samples, default 1), and the sides that use the horizon (BATTLE_HORIZON_SIDE=0|1, default both) re-solve their
+        // mixes on those values; up to 2 rounds, widening to what the new solve brings in. Cells outside the set keep one-turn values.
+        let hz = horizon_sides();
+        let mut cache2: HashMap<(usize, usize), f64> = HashMap::new();
+        if (hz[0] || hz[1]) && !xcols.is_empty() && !yrows.is_empty() {
+            let n2 = std::env::var("BATTLE_H2_SEEDS").ok().and_then(|x| x.parse().ok()).unwrap_or(1usize).max(1);
+            let margin: f64 = std::env::var("BATTLE_H2_MARGIN").ok().and_then(|x| x.parse().ok()).unwrap_or(0.05);
+            // BATTLE_H2_TOP (default 6): at most this many rows and columns per round (the mix's heaviest first, then the closest
+            // values), so a turn costs about 2-3x the one-turn solve instead of 30x
+            let top_n = std::env::var("BATTLE_H2_TOP").ok().and_then(|x| x.parse().ok()).unwrap_or(6usize).max(1);
+            for _ in 0..2 {
+                let v0 = |c2: &HashMap<(usize, usize), f64>, cache: &mut dyn FnMut(usize, usize) -> (f64, f64), i: usize, j: usize, s: u8| -> f64 {
+                    if hz[s as usize] { if let Some(v) = c2.get(&(i, j)) { return if s == 0 { *v } else { *v }; } }
+                    let c = cache(i, j); if s == 0 { c.0 } else { c.1 } };
+                let ysup: Vec<usize> = (0..tsw.len()).filter(|j| y[*j] > 1e-4).collect(); let ytot: f64 = ysup.iter().map(|&j| y[j]).sum();
+                let xsup: Vec<usize> = (0..msw.len()).filter(|i| x[*i] > 1e-4).collect(); let xtot: f64 = xsup.iter().map(|&i| x[i]).sum();
+                let mut cb = |i: usize, j: usize| cell2(i, j, &b);
+                let rv: Vec<f64> = (0..msw.len()).map(|i| ysup.iter().map(|&j| y[j] * v0(&cache2, &mut cb, i, j, 0)).sum::<f64>() / ytot).collect();
+                let cv: Vec<f64> = (0..tsw.len()).map(|j| xsup.iter().map(|&i| x[i] * v0(&cache2, &mut cb, i, j, 1)).sum::<f64>() / xtot).collect();
+                let best_r = rv.iter().cloned().fold(f64::MIN, f64::max); let best_c = cv.iter().cloned().fold(f64::MAX, f64::min);
+                let mut rows: Vec<usize> = (0..msw.len()).filter(|&i| x[i] > 1e-3 || rv[i] >= best_r - margin).collect();
+                let mut cols: Vec<usize> = (0..tsw.len()).filter(|&j| y[j] > 1e-3 || cv[j] <= best_c + margin).collect();
+                rows.sort_by(|&a, &c| x[c].partial_cmp(&x[a]).unwrap().then(rv[c].partial_cmp(&rv[a]).unwrap())); rows.truncate(top_n);
+                cols.sort_by(|&a, &c| y[c].partial_cmp(&y[a]).unwrap().then(cv[a].partial_cmp(&cv[c]).unwrap())); cols.truncate(top_n);
+                let before = cache2.len();
+                for &i in &rows { for &j in &cols {
+                    if cache2.contains_key(&(i, j)) { continue; }
+                    let mut v = 0.0;
+                    for k in 0..n2 {
+                        let sa = seed4(key ^ ((turn as u64) << 40) ^ (0xA2u64 << 52) ^ ((k as u64) << 48)); let sb = seed4(key ^ ((turn as u64) << 40) ^ (0xA3u64 << 52) ^ ((k as u64) << 48));
+                        let mut z = b.clone(); z.prng = Prng::gen5(sa); z.run_turn([msw[i], tsw[j]]); resolve_switches(&mut z, cfg, None);
+                        for u in &z.unsupported { if !uns.contains(u) { uns.push(u.clone()); } }
+                        v += next_value(&z, cfg, sb, 0);
+                    }
+                    cache2.insert((i, j), v / n2 as f64); h2cells += 1;
+                } }
+                if cache2.len() == before { break; }
+                if hz[0] { let am2: Vec<Vec<f64>> = (0..msw.len()).map(|i| xcols.iter().map(|&j| v0(&cache2, &mut cb, i, j, 0)).collect()).collect(); x = nash(&am2, 400).0; }
+                if hz[1] { let at2: Vec<Vec<f64>> = yrows.iter().map(|&i| (0..tsw.len()).map(|j| v0(&cache2, &mut cb, i, j, 1)).collect()).collect(); y = nash(&at2, 400).1; }
             }
         }
         // DP2=1 (champ-battle-v8, 2026-10-04): two-turn check of a second Protect in a row. For each active Pokemon that Protected
@@ -228,7 +279,7 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool) -> Ou
         if find(&b.field.pseudo, "trickroom").is_some() { tr_turns += 1; if turn <= 3 { for k in (turn - 1)..3 { tr_by[k] = true; } } }
         turn += 1;
     }
-    Out { v: value(&mut b, cfg), unsupported: uns, feats: fx, turns: turn - 1, tr_turns, tr_by, switches, slot_decisions, switch_slots, log, states, dp2: dp2s, dplog }
+    Out { v: value(&mut b, cfg), unsupported: uns, feats: fx, turns: turn - 1, tr_turns, tr_by, switches, slot_decisions, switch_slots, log, states, dp2: dp2s, dplog, h2: h2cells }
 }
 
 pub fn main(args: &[String]) {
@@ -260,7 +311,7 @@ pub fn main(args: &[String]) {
         let tg = std::time::Instant::now();
         let r = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| play(&b, cfg, st["rng"].as_f64().unwrap(), key, keep_log)));
         let row = match r {
-            Ok(o) => json!({"g": g, "v": o.v, "turns": o.turns, "trTurns": o.tr_turns, "trBy": o.tr_by, "switches": o.switches, "slotDecisions": o.slot_decisions, "switchSlots": o.switch_slots, "dp2": o.dp2, "dp2log": if o.dplog.is_empty() { Value::Null } else { json!(o.dplog) }, "unsupported": o.unsupported, "F": if o.feats.is_empty() { Value::Null } else { json!(o.feats) }, "ms": tg.elapsed().as_millis() as u64,
+            Ok(o) => json!({"g": g, "v": o.v, "turns": o.turns, "trTurns": o.tr_turns, "trBy": o.tr_by, "switches": o.switches, "slotDecisions": o.slot_decisions, "switchSlots": o.switch_slots, "dp2": o.dp2, "h2": o.h2, "dp2log": if o.dplog.is_empty() { Value::Null } else { json!(o.dplog) }, "unsupported": o.unsupported, "F": if o.feats.is_empty() { Value::Null } else { json!(o.feats) }, "ms": tg.elapsed().as_millis() as u64,
                             "log": if keep_log { json!(o.log) } else { Value::Null }, "states": if o.states.is_empty() { Value::Null } else { json!(o.states) }}),
             Err(e) => json!({"g": g, "v": Value::Null, "error": e.downcast_ref::<String>().cloned().or(e.downcast_ref::<&str>().map(|s| s.to_string())).unwrap_or_default()}),
         };

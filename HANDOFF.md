@@ -752,3 +752,24 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     work: Pelipper Protect (+26) and Tailwind when the planner wants to attack (+27), Archaludon Protect (+16), Golisopod Protect (+20). Next lead (not started): a "plan potential" term for the Trick Room-down phase (a living Trick Room user on the slower
     side, Tailwind likewise) fitted on the real positions and tested with the same 2,400 starts (Trick Room teams as side 0), and the
     one-layer switch model (each side assumes the other stays in), since switching is where Trick Room players gain most.
+  - **Plan potential, bench edge, full switch matrix: all flat or worse in self-play; and the style bias moves to brings and leads
+    (2026-10-07, 1:30-2:20 pm).** `FEATS22=1` adds Trick Room potential (a living Trick Room user on the slower side while Trick Room is
+    down or on its last turn, x tanh(speed edge) x its HP share), Tailwind potential and a bench edge (the best hit each side's bench has
+    on the other's actives; `bench_edge`, sharing the race's memoised calc through `race_damage`). The real-position fit gives Trick Room
+    potential **-0.20** (negative), Tailwind potential 0, bench edge +0.24. Head-to-heads on the 2,400 starts (side 0 with the variant
+    value, side 1 sym2): Trick Room potential +0.3: **-1.1 ± 0.5** overall, Trick Room teams -0.3 ± 2.0, Indeedee TR -2.5 ± 1.9 (the fit
+    was right: valuing an unset Trick Room hurts); with bench edge +0.24 as well -0.5 ± 0.9; bench alone: see results below.
+    `BATTLE_FULLSW=0|1|both` (one full matrix game, both sides' switches in both matrices; costs only the switch x switch cells more)
+    and `BATTLE_ANTICIPATE=2|3` (more anticipation passes): full matrix for one side +0.3 ± 0.9 / -0.0 ± 0.9 (450 of 2,400 games change,
+    no gain); the one-layer model with one anticipation pass is as good.
+    **Real pairings (`pssim/replay_report`-style, 2,094 cached games with both brings seen and both players rated 1150+, the sim playing
+    each game from its actual leads and brings on both sides, sym2):** sim winner = real winner 54.4% (52.9% at 1150-1250, 59.6% at
+    1350+). Sim minus real win rate by style, both sides pooled: Rain **-0.3 ± 4.1**, Sun -0.1 ± 2.9, Trick Room **-3.2 ± 4.2**, Indeedee TR
+    **-6.6 ± 3.5**, Tailwind **+8.3 ± 2.5**, Snow +3.5 ± 4.0, Balance **-5.0 ± 2.7**, Sand -1.3 ± 3.9, Perish -8.1 ± 4.4 (the trap), Rain +
+    Sun **+10.9 ± 5.2**. So with the humans' own leads and brings the planner plays Rain and Trick Room about right; the Rain +9 / Trick
+    Room -6 of the pool-vs-pool test came from pairing a team's bring (tailored to the opponent it really faced) with a random opponent,
+    which costs bring-sensitive styles (Trick Room) and spares Rain. Two consequences: (1) the climb's own lead / bring choice is where
+    Trick Room packages most likely lose their value (ask Team search how the climb picks the four and leads for a Trick Room six), and
+    (2) the planner's remaining play bias is Tailwind / Rain + Sun over (set Tailwind, attack) and Indeedee TR / Balance under (Follow Me,
+    Fake Out, pivots: the support and positioning lines human_lines.py found undercharged). Symmetric value variants are being scored on
+    this set by the by-style bias rather than by head-to-head strength (results below when in).

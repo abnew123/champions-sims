@@ -15,6 +15,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from human_lines import winner
 HERE = os.path.dirname(os.path.abspath(__file__))
 NAMES21 = ['priority edge', 'speed stages', 'stat drops', 'weather turns x benefit', 'Taunted']
+NAMES22 = ['Trick Room potential', 'Tailwind potential', 'bench edge']
 def load(f):
     rows = []; wins = {}
     for l in open(f):
@@ -70,12 +71,12 @@ def team_bias(z, y, games, pool_groups):
     return out
 def main(fitf, holdf, outf, ridge):
     sym2 = json.load(open(os.path.join(HERE, 'egvalue9_sym2.json')))
-    names = sym2['names'][:20] + NAMES21
+    names = sym2['names'][:20] + NAMES21 + NAMES22
     fit_rows = load(fitf); hold_rows = load(holdf)
     print(f"fit: {len(fit_rows)} positions, {len(set(r[0] for r in fit_rows))} games; held out: {len(hold_rows)} positions, {len(set(r[0] for r in hold_rows))} games")
     X = np.array([r[2] for r in fit_rows]); y = np.array([r[3] for r in fit_rows]); G = [r[0] for r in fit_rows]
     Xh = np.array([r[2] for r in hold_rows]); yh = np.array([r[3] for r in hold_rows]); Gh = [r[0] for r in hold_rows]
-    nf = X.shape[1]; assert nf == 25, nf
+    nf = X.shape[1]; assert nf in (25, 28), nf; names = names[:nf]
     w0 = np.zeros(nf); w0[:20] = sym2['w']
     fixed = set() if os.environ.get('FREE_ALL') else {sym2['names'].index(k) for k in sym2['hand_set']}
     fixed |= {6, 7}   # grid features: always 0 here
@@ -85,6 +86,8 @@ def main(fitf, holdf, outf, ridge):
     pg = {k: v for k, v in pg.items() if 'p1' in v and 'p2' in v}
     report = {}
     models = {'sym2 static (as is)': (w0.copy(), slice(0, 20)), '20 features refit': (None, slice(0, 20)), '25 features refit': (None, slice(0, 25))}
+    if nf == 28: models['28 features refit'] = (None, slice(0, 28))
+    last = f'{nf} features refit'
     out_w = None
     for label, (w, sl) in models.items():
         cols = list(range(nf))[sl]
@@ -100,10 +103,10 @@ def main(fitf, holdf, outf, ridge):
         for i in cols:
             if w[i] != 0 or i >= 20: print(f"   {w[i]:+.3f}  {names[i]}" + ("  (fixed)" if i in fixed else "") + (f"  (sym2 {w0[i]:+.3f})" if i < 20 and abs(w[i] - w0[i]) > 1e-9 else ""))
         print("   bias by archetype (actual - rated, points):", ", ".join(f"{t['team']} {100 * t['bias']:+.1f}±{100 * t['se']:.1f}" for t in tb['arch']))
-        if label == '25 features refit': out_w = w
+        if label == last: out_w = w
     json.dump({'b0': 0.0, 'w': [float(x) for x in out_w], 'names': names, 'hand_set': {} if os.environ.get('FREE_ALL') else sym2['hand_set'],
-               'rescale': report['25 features refit']['rescale'], 'ridge': ridge,
-               'note': 'egvalue10: symmetric value refitted on real ladder positions (every turn of the cached Bo3 games outside the eval bar\'s 560 held-out games) with champ-battle-v21\'s 25 features. Use with RACE=1 RACE_PRIO=1 FEATS21=1 CALC_DATA=... TRSYM=1 and an empty GRID_DIR. The eval bar rescales its one-turn value separately.'},
+               'rescale': report[last]['rescale'], 'ridge': ridge,
+               'note': 'egvalue10: symmetric value refitted on real ladder positions (every turn of the cached Bo3 games outside the eval bar\'s 560 held-out games) with champ-battle-v21\'s features (25: FEATS21; 28: FEATS22). Use with RACE=1 RACE_PRIO=1 FEATS21=1 (or FEATS22=1) CALC_DATA=... TRSYM=1 and an empty GRID_DIR. The eval bar rescales its one-turn value separately.'},
               open(outf, 'w'), indent=1)
     os.makedirs(os.path.join(HERE, 'results'), exist_ok=True)
     json.dump(report, open(os.path.join(HERE, 'results', 'egvalue10_fit.json'), 'w'), indent=1)

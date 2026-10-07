@@ -57,6 +57,8 @@ pub(crate) fn rjoint(b: &mut Battle, s: u8) -> Vec<[PChoice; 2]> {
     out
 }
 fn ns() -> usize { std::env::var("BATTLE_NS").ok().and_then(|x| x.parse().ok()).unwrap_or(2) }
+/// BATTLE_FULLSW=0|1|both: which sides solve the full matrix game (the other side's switches included) instead of the one-layer one
+fn fullsw() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new(); *F.get_or_init(|| match std::env::var("BATTLE_FULLSW").as_deref() { Ok("0") => [true, false], Ok("1") => [false, true], Ok(_) => [true, true], Err(_) => [false, false] }) }
 /// BATTLE_HORIZON=2 with BATTLE_HORIZON_SIDE=0|1 (default both): which sides re-solve on the two-turn values
 fn horizon_sides() -> [bool; 2] {
     static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new();
@@ -109,29 +111,39 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool) -> Ou
                 for c in &cs { let mut x = b.clone(); x.prng = Prng::gen5(*c); x.run_turn([msw[i], tsw[j]]); resolve_switches(&mut x, cfg, None); let v = value2(&mut x, cfg); s.0 += v.0; s.1 += v.1; }
                 (s.0 / cs.len() as f64, s.1 / cs.len() as f64) })
         };
+        // BATTLE_FULLSW=1 (champ-battle-v21): one full matrix game, both sides' switches in both sides' matrices (the one-layer model
+        // below assumes the opponent stays in; the shared no-switch block means the full game costs only the switch x switch cells more)
+        let fsw = fullsw();
+        let tns0: Vec<usize> = if fsw[0] { (0..tsw.len()).collect() } else { tns.clone() };   // side 0's matrix sees all of side 1's options
+        let mns0: Vec<usize> = if fsw[1] { (0..msw.len()).collect() } else { mns.clone() };   // side 1's matrix sees all of side 0's
         // my matrix: all my options (moves + switches) vs their non-switch options
-        let am: Vec<Vec<f64>> = (0..msw.len()).map(|i| tns.iter().map(|&j| cell2(i, j, &b).0).collect()).collect();
+        let am: Vec<Vec<f64>> = (0..msw.len()).map(|i| tns0.iter().map(|&j| cell2(i, j, &b).0).collect()).collect();
         // their matrix: my non-switch options vs all their options
-        let at: Vec<Vec<f64>> = mns.iter().map(|&i| (0..tsw.len()).map(|j| cell2(i, j, &b).1).collect()).collect();
-        let (mut x, _) = if tns.is_empty() { (vec![1.0 / msw.len() as f64; msw.len()], vec![]) } else { nash(&am, 400) };
-        let (_, mut y) = if mns.is_empty() { (vec![], vec![1.0 / tsw.len() as f64; tsw.len()]) } else { nash(&at, 400) };
-        let (mut xcols, mut yrows) = (tns.clone(), mns.clone());
+        let at: Vec<Vec<f64>> = mns0.iter().map(|&i| (0..tsw.len()).map(|j| cell2(i, j, &b).1).collect()).collect();
+        let (mut x, _) = if tns0.is_empty() { (vec![1.0 / msw.len() as f64; msw.len()], vec![]) } else { nash(&am, 400) };
+        let (_, mut y) = if mns0.is_empty() { (vec![], vec![1.0 / tsw.len() as f64; tsw.len()]) } else { nash(&at, 400) };
+        let (mut xcols, mut yrows) = (tns0.clone(), mns0.clone());
         // BATTLE_ANTICIPATE=1 (second pass): each side's matrix also gets the switches the other side actually plays (weight > 2% in its
-        // one-layer mix), so a side plans against the opponent's real switches without searching every switch pair
-        if std::env::var("BATTLE_ANTICIPATE").is_ok() {
-            let isw: Vec<usize> = (0..msw.len()).filter(|i| !no_sw(&msw[*i]) && x[*i] > 0.02).collect();
-            let jsw: Vec<usize> = (0..tsw.len()).filter(|j| !no_sw(&tsw[*j]) && y[*j] > 0.02).collect();
-            if !jsw.is_empty() {
-                let cols: Vec<usize> = tns.iter().copied().chain(jsw.iter().copied()).collect();
-                let am2: Vec<Vec<f64>> = (0..msw.len()).map(|i| cols.iter().map(|&j| cell2(i, j, &b).0).collect()).collect();
-                x = nash(&am2, 400).0; xcols = cols;
+        // one-layer mix), so a side plans against the opponent's real switches without searching every switch pair.
+        // BATTLE_ANTICIPATE=2|3 (champ-battle-v21): that many passes, each adding the switches the other side's latest mix plays.
+        if !(fsw[0] && fsw[1]) { if let Ok(ap) = std::env::var("BATTLE_ANTICIPATE") {
+            let passes: usize = ap.parse().unwrap_or(1).max(1);
+            for _ in 0..passes {
+                let isw: Vec<usize> = if fsw[1] { vec![] } else { (0..msw.len()).filter(|i| !no_sw(&msw[*i]) && x[*i] > 0.02 && !yrows.contains(i)).collect() };
+                let jsw: Vec<usize> = if fsw[0] { vec![] } else { (0..tsw.len()).filter(|j| !no_sw(&tsw[*j]) && y[*j] > 0.02 && !xcols.contains(j)).collect() };
+                if isw.is_empty() && jsw.is_empty() { break; }
+                if !jsw.is_empty() {
+                    let cols: Vec<usize> = xcols.iter().copied().chain(jsw.iter().copied()).collect();
+                    let am2: Vec<Vec<f64>> = (0..msw.len()).map(|i| cols.iter().map(|&j| cell2(i, j, &b).0).collect()).collect();
+                    x = nash(&am2, 400).0; xcols = cols;
+                }
+                if !isw.is_empty() {
+                    let rows: Vec<usize> = yrows.iter().copied().chain(isw.iter().copied()).collect();
+                    let at2: Vec<Vec<f64>> = rows.iter().map(|&i| (0..tsw.len()).map(|j| cell2(i, j, &b).1).collect()).collect();
+                    y = nash(&at2, 400).1; yrows = rows;
+                }
             }
-            if !isw.is_empty() {
-                let rows: Vec<usize> = mns.iter().copied().chain(isw.iter().copied()).collect();
-                let at2: Vec<Vec<f64>> = rows.iter().map(|&i| (0..tsw.len()).map(|j| cell2(i, j, &b).1).collect()).collect();
-                y = nash(&at2, 400).1; yrows = rows;
-            }
-        }
+        } }
         // BATTLE_HORIZON=2 (champ-battle-v21): the evalpos two-turn horizon in real games. Every option in contention after the one-turn
         // solve (in a side's mix, or within BATTLE_H2_MARGIN (0.15) of that side's best option) gets its cells against the other side's
         // contenders valued after one more turn (next_value: both sides' Protect and strongest hits, no switches, one seed per sample,

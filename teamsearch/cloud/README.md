@@ -173,3 +173,12 @@ non-enabler member; v20g pool opponents, 4 paired batches, bring luck held out. 
 2. `cd ~/champions-sims/teamsearch && ../.venv/bin/python3 synergycheck.py plan` (all sets must have cells; else `NPROC=48 ... cells`).
 3. `TS_SIM=v20g TS_PARALLEL=60 TS_THREADS=3 setsid nohup ../.venv/bin/python3 synergycheck.py run 4 > round_synergy.log 2>&1 &`
 4. Results: the log's per-team table and summary, and `runs/synergy_v20g.json` (pull_loop copies round*.log and runs/).
+
+## Next daytime box (2026-10-07): checklist
+
+1. Pack (carries v20 and v21 sources, `pssim/h2test.py`), upload, `remote_setup.sh` (builds v20), then
+   `teamsearch/cloud/build_battle.sh src_battle_v21.tar.gz`. Smoke: the pool path against `cloud/reference_pool.json` (v20g).
+2. Battle sim's horizon head-to-head (~10 min on a c7a.48xlarge): `teamsearch/cloud/h2big.sh 180` from ~/champions-sims, then send
+   `pssim/h2big_report.txt` and `h2big_times.txt` to Battle sim. It decides whether BATTLE_HORIZON=2 goes into the climb setup.
+3. Synergy check (above): `TS_SYN_TEST=1 ... synergycheck.py run` first (its summary step is untested), then the full run.
+4. If the horizon helps: rerun the synergy check with it (needs a v21 horizon entry in evaluate.SIMS; ~2.6x the cost).

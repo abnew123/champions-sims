@@ -25445,5 +25445,26 @@
 "Protect"
 ],
 "regional_count": 0
+},
+"Incineroar#u2": {
+"species": "Incineroar",
+"item": "White Herb",
+"ability": "Intimidate",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Fake Out",
+"Flare Blitz",
+"Close Combat",
+"Protect"
+],
+"regional_count": 0
 }
 }

@@ -3,26 +3,34 @@ neighbour for that swap (item clause handled as the climb does), each version's 
 neither member is involved (refine.merge_brings), then BATCHES paired confirm batches on fresh pool entries. Pool opponents; the
 setup comes from TS_SIM (v20m: misses doubled, v20g: normal).
   TS_SIM=v20m TS_PARALLEL=12 TS_THREADS=3 python3 swaptest.py <start> <gid out> <species in, or an exact grid id> [batches=6]
+  ... swaptest.py <start> <gid out> <gid in> <gid out> <gid in> ... [batches]      several changes at once (exact sets)
 """
 import json, os, sys, time
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 os.environ['TS_OPP'] = 'pool'
 import climb as C, evaluate as E, poolmode as PM
-from refine import merge_brings, show
+from refine import show
 if __name__ == '__main__':
-    start, out_g, into_sp = sys.argv[1:4]; B = int(sys.argv[4]) if len(sys.argv) > 4 else 6
+    start, rest = sys.argv[1], sys.argv[2:]; B = int(rest.pop()) if rest and rest[-1].isdigit() else 6
     team = C.INDEX[start]['gids']
-    if into_sp in C.GRID:                                              # an exact set (e.g. one the user specified), not a swap candidate
-        into_g = into_sp; i = team.index(out_g); var = team[:i] + [into_g] + team[i + 1:]; note = '(exact set)'; into_sp = C.GRID[into_g]['species']
+    if len(rest) > 2:                                                  # several changes at once: exact grid ids, out in out in ...
+        olds, news = rest[0::2], rest[1::2]; var = [news[olds.index(g)] if g in olds else g for g in team]
+        items = [C.item(g) for g in var if C.item(g)]; assert len(items) == len(set(items)), 'item clause'
+        out_g, into_g, into_sp, note = '+'.join(olds), '+'.join(news), '+'.join(C.GRID[g]['species'] for g in news), '(exact sets)'
+    elif rest[1] in C.GRID:                                            # an exact set (e.g. one the user specified), not a swap candidate
+        out_g, into_g = rest; i = team.index(out_g); var = team[:i] + [into_g] + team[i + 1:]; note = '(exact set)'
         assert C.item(into_g) not in {C.item(g) for g in team if g != out_g} - {None}, 'item clause'
     else:
+        out_g, into_sp = rest
         nb = [x for x in C.neighbours(team) if x[1] == out_g and C.GRID[x[2]]['species'] == into_sp]
         assert len(nb) == 1, nb
         _, _, into_g, var, note = nb[0]
-    print(time.strftime('%I:%M %p'), f"{E.sim()}: {start}, {show(out_g)} -> {show(into_g)} {note}", flush=True)
+    print(time.strftime('%I:%M %p'), f"{E.sim()}: {start}, " + '; '.join(f'{show(a)} -> {show(b)}' for a, b in zip(out_g.split('+'), into_g.split('+'))) + f' {note}', flush=True)
     os.environ['TS_BRING_K'] = '3'
     scr = E.search_many([team, var], 90000)
-    bb = scr[0]['chosen']; vb = merge_brings(bb, scr[1]['chosen'], out_g, into_g)
+    bb = scr[0]['chosen']; olds, news = out_g.split('+'), into_g.split('+')
+    uses = lambda br, gs: any(g in list(br[0]) + list(br[1]) for g in gs)
+    vb = {k: (v if uses(v, news) or uses(bb[k], olds) else bb[k]) for k, v in scr[1]['chosen'].items()}   # refine.merge_brings, any number of changes
     thr = int(os.environ.get('TS_THREADS', 3))
     items = [(t, b, 990000 + 50 * k) for k in range(B) for t, b in ((team, bb), (var, vb))]
     res = E.parallel(lambda x: PM.evaluate_team(x[0], x[1], x[2], thr), items, 'confirm')

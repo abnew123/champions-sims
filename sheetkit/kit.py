@@ -14,7 +14,7 @@
   python3 sheetkit/kit.py <team> confirm run [--games 48] [--g0 1000] [--threads N] [--setup NAME]
   python3 sheetkit/kit.py <team> confirm decide [--write]  paired on fresh games; --write updates picks.json
   python3 sheetkit/kit.py <team> t1 jobs | run [--samples 12] [--workers N] | solve
-  python3 sheetkit/kit.py <team> optimal run [--threads N] [--only screen|matrix] | report   both sides pick their four -> optimal.json
+  python3 sheetkit/kit.py <team> optimal run [--threads N] [--only screen|matrix|more] | report  both sides pick their four -> optimal.json
                                                            (OPTIMAL_SIXES=pool: against real sixes -> optimal_pool.json)
   python3 sheetkit/kit.py <team> guide run [--games 64] [--g0 7000] [--threads N] | report   game plans and team-preview tells -> guide.json
   python3 sheetkit/kit.py <team> page [--compare other.html]   -> sheets/<team>/sheet.html

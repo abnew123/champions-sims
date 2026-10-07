@@ -1,4 +1,1287 @@
 {
- "note": "Cards (real teams by core group) since 2026-10-06; the archetype picks of Versions 13-21 are in archive_v21/picks.json",
- "picks": {}
+ "made": "2026-10-07",
+ "setup": "v13-dp2-race-eg9",
+ "picks": {
+  "Balance: Gholdengo + Incineroar + Raichu + Rillaboom": {
+   "lead": [
+    "Blastoise",
+    "Kingambit"
+   ],
+   "back": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "v": 0.616,
+   "basis": "both sides pick",
+   "replay_v": 0.812,
+   "answers": [
+    {
+     "six": "Garchomp, Gholdengo, Incineroar, Raichu, Rillaboom, Volcarona",
+     "weight": 0.789,
+     "their_four": "Garchomp+Rillaboom+Incineroar+Volcarona",
+     "v": 0.656
+    },
+    {
+     "six": "Gholdengo, Incineroar, Raichu, Rillaboom, Salamence, Sneasler",
+     "weight": 0.08,
+     "their_four": "Incineroar+Rillaboom+Salamence+Sneasler",
+     "v": 0.688
+    },
+    {
+     "six": "Floette-Eternal, Gholdengo, Incineroar, Raichu, Rillaboom, Sneasler",
+     "weight": 0.072,
+     "their_four": "Floette-Eternal+Rillaboom+Incineroar+Sneasler",
+     "v": 0.469
+    },
+    {
+     "six": "Garchomp, Gholdengo, Incineroar, Primarina, Raichu, Rillaboom",
+     "weight": 0.059,
+     "their_four": "Primarina+Raichu+Gholdengo+Rillaboom",
+     "v": 0.156
+    }
+   ],
+   "changed": false
+  },
+  "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)": {
+   "lead": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "v": 0.614,
+   "basis": "both sides pick",
+   "replay_v": 0.921,
+   "answers": [
+    {
+     "six": "Arcanine-Hisui, Gholdengo, Raichu, Rillaboom, Staraptor, Sylveon",
+     "weight": 0.417,
+     "their_four": "Arcanine-Hisui+Sylveon+Rillaboom+Staraptor",
+     "v": 0.719
+    },
+    {
+     "six": "Arcanine-Hisui, Gholdengo, Primarina, Raichu, Rillaboom, Staraptor",
+     "weight": 0.306,
+     "their_four": "Arcanine-Hisui+Gholdengo+Primarina+Raichu",
+     "v": 0.5
+    },
+    {
+     "six": "Arcanine-Hisui, Gholdengo, Raichu, Rillaboom, Salamence, Sneasler",
+     "weight": 0.164,
+     "their_four": "Arcanine-Hisui+Salamence+Raichu+Rillaboom",
+     "v": 0.875
+    },
+    {
+     "six": "Arcanine-Hisui, Gholdengo, Milotic, Raichu, Rillaboom, Salamence",
+     "weight": 0.113,
+     "their_four": "Milotic+Salamence+Arcanine-Hisui+Gholdengo",
+     "v": 0.156
+    }
+   ],
+   "changed": false
+  },
+  "Rain + Sun: Archaludon + Grimmsnarl + Pelipper": {
+   "lead": [
+    "Blastoise",
+    "Farigiraf"
+   ],
+   "back": [
+    "Torkoal",
+    "Incineroar"
+   ],
+   "v": 0.38,
+   "basis": "both sides pick",
+   "replay_v": 0.471,
+   "answers": [
+    {
+     "six": "Archaludon, Charizard, Garchomp, Grimmsnarl, Pelipper, Venusaur",
+     "weight": 0.581,
+     "their_four": "Grimmsnarl+Pelipper+Archaludon+Charizard",
+     "v": 0.438
+    },
+    {
+     "six": "Archaludon, Golisopod, Grimmsnarl, Pelipper, Sinistcha, Swampert",
+     "weight": 0.167,
+     "their_four": "Pelipper+Sinistcha+Grimmsnarl+Swampert",
+     "v": 0.312
+    },
+    {
+     "six": "Archaludon, Charizard, Grimmsnarl, Pelipper, Swampert, Venusaur",
+     "weight": 0.163,
+     "their_four": "Charizard+Grimmsnarl+Archaludon+Swampert",
+     "v": 0.281
+    },
+    {
+     "six": "Archaludon, Grimmsnarl, Indeedee-F, Metagross, Pelipper, Swampert",
+     "weight": 0.089,
+     "their_four": "Archaludon+Pelipper+Indeedee-F+Metagross",
+     "v": 0.312
+    }
+   ],
+   "changed": false
+  },
+  "Rain: Archaludon + Pelipper (no Grimmsnarl)": {
+   "lead": [
+    "Blastoise",
+    "Torkoal"
+   ],
+   "back": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "v": 0.456,
+   "basis": "both sides pick",
+   "replay_v": 0.663,
+   "answers": [
+    {
+     "six": "Archaludon, Farigiraf, Pelipper, Sneasler, Swampert, Venusaur",
+     "weight": 0.292,
+     "their_four": "Pelipper+Venusaur+Archaludon+Farigiraf",
+     "v": 0.594
+    },
+    {
+     "six": "Archaludon, Farigiraf, Golisopod, Kingambit, Pelipper, Raichu",
+     "weight": 0.283,
+     "their_four": "Golisopod+Kingambit+Archaludon+Pelipper",
+     "v": 0.438
+    },
+    {
+     "six": "Archaludon, Blastoise, Golisopod, Kingambit, Pelipper, Rillaboom",
+     "weight": 0.226,
+     "their_four": "Archaludon+Kingambit+Blastoise+Pelipper",
+     "v": 0.125
+    },
+    {
+     "six": "Archaludon, Meganium, Palafin, Pelipper, Primarina, Swampert",
+     "weight": 0.198,
+     "their_four": "Pelipper+Swampert+Meganium+Primarina",
+     "v": 0.656
+    }
+   ],
+   "changed": false
+  },
+  "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler": {
+   "lead": [
+    "Farigiraf",
+    "Kingambit"
+   ],
+   "back": [
+    "Torkoal",
+    "Incineroar"
+   ],
+   "v": 0.238,
+   "basis": "both sides pick",
+   "replay_v": 0.482,
+   "answers": [
+    {
+     "six": "Armarouge, Gardevoir, Indeedee-F, Kingambit, Sneasler, Torkoal",
+     "weight": 0.302,
+     "their_four": "Gardevoir+Torkoal+Armarouge+Kingambit",
+     "v": 0.406
+    },
+    {
+     "six": "Garchomp, Gardevoir, Indeedee-F, Kingambit, Sneasler, Typhlosion-Hisui",
+     "weight": 0.279,
+     "their_four": "Indeedee-F+Kingambit+Gardevoir+Sneasler",
+     "v": 0.156
+    },
+    {
+     "six": "Gardevoir, Indeedee-F, Kingambit, Pyroar, Sneasler, Torkoal",
+     "weight": 0.233,
+     "their_four": "Pyroar+Torkoal+Kingambit+Sneasler",
+     "v": 0.031
+    },
+    {
+     "six": "Dragapult, Gardevoir, Indeedee-F, Kingambit, Salamence, Sneasler",
+     "weight": 0.186,
+     "their_four": "Indeedee-F+Kingambit+Dragapult+Gardevoir",
+     "v": 0.344
+    }
+   ],
+   "changed": false
+  },
+  "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)": {
+   "lead": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "v": 0.431,
+   "basis": "both sides pick",
+   "replay_v": 0.717,
+   "answers": [
+    {
+     "six": "Gardevoir, Gholdengo, Incineroar, Indeedee-F, Salamence, Sneasler",
+     "weight": 0.364,
+     "their_four": "Gardevoir+Indeedee-F+Incineroar+Sneasler",
+     "v": 0.5
+    },
+    {
+     "six": "Basculegion, Gardevoir, Golisopod, Indeedee-F, Pelipper, Sneasler",
+     "weight": 0.273,
+     "their_four": "Gardevoir+Indeedee-F+Golisopod+Sneasler",
+     "v": 0.438
+    },
+    {
+     "six": "Annihilape, Armarouge, Gardevoir, Indeedee-F, Lucario, Sneasler",
+     "weight": 0.25,
+     "their_four": "Annihilape+Armarouge+Gardevoir+Indeedee-F",
+     "v": 0.25
+    },
+    {
+     "six": "Arcanine-Hisui, Basculegion, Gardevoir, Indeedee-F, Raichu, Sneasler",
+     "weight": 0.114,
+     "their_four": "Indeedee-F+Raichu+Arcanine-Hisui+Gardevoir",
+     "v": 0.594
+    }
+   ],
+   "changed": false
+  },
+  "Sun: Farigiraf + Garchomp + Incineroar + Sylveon": {
+   "lead": [
+    "Blastoise",
+    "Kingambit"
+   ],
+   "back": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "v": 0.266,
+   "basis": "both sides pick",
+   "replay_v": 0.547,
+   "answers": [
+    {
+     "six": "Charizard, Farigiraf, Garchomp, Incineroar, Rillaboom, Sylveon",
+     "weight": 0.434,
+     "their_four": "Charizard+Garchomp+Farigiraf+Rillaboom",
+     "v": 0.312
+    },
+    {
+     "six": "Farigiraf, Garchomp, Incineroar, Sneasler, Sylveon, Torkoal",
+     "weight": 0.393,
+     "their_four": "Garchomp+Sneasler+Incineroar+Sylveon",
+     "v": 0.188
+    },
+    {
+     "six": "Basculegion, Farigiraf, Garchomp, Incineroar, Sylveon, Torkoal",
+     "weight": 0.116,
+     "their_four": "Garchomp+Sylveon+Basculegion+Incineroar",
+     "v": 0.38
+    },
+    {
+     "six": "Charizard, Farigiraf, Garchomp, Incineroar, Sylveon, Venusaur",
+     "weight": 0.058,
+     "their_four": "Charizard+Sylveon+Farigiraf+Incineroar",
+     "v": 0.219
+    }
+   ],
+   "changed": false
+  },
+  "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)": {
+   "lead": [
+    "Blastoise",
+    "Farigiraf"
+   ],
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "v": 0.08,
+   "basis": "both sides pick",
+   "replay_v": 0.589,
+   "answers": [
+    {
+     "six": "Aerodactyl, Charizard, Farigiraf, Garchomp, Kingambit, Sylveon",
+     "weight": 0.928,
+     "their_four": "Charizard+Garchomp+Farigiraf+Sylveon",
+     "v": 0.062
+    },
+    {
+     "six": "Farigiraf, Garchomp, Ninetales-Alola, Overqwil, Staraptor, Sylveon",
+     "weight": 0.029,
+     "their_four": "Farigiraf+Sylveon+Ninetales-Alola+Staraptor",
+     "v": 0.125
+    },
+    {
+     "six": "Farigiraf, Garchomp, Kingambit, Raichu, Staraptor, Sylveon",
+     "weight": 0.022,
+     "their_four": "Staraptor+Sylveon+Farigiraf+Kingambit",
+     "v": 0.406
+    },
+    {
+     "six": "Arcanine-Hisui, Farigiraf, Garchomp, Kingambit, Staraptor, Sylveon",
+     "weight": 0.022,
+     "their_four": "Farigiraf+Staraptor+Garchomp+Sylveon",
+     "v": 0.438
+    }
+   ],
+   "changed": false
+  },
+  "Sand: Excadrill + Salamence + Sneasler + Tyranitar": {
+   "lead": [
+    "Blastoise",
+    "Farigiraf"
+   ],
+   "back": [
+    "Kingambit",
+    "Incineroar"
+   ],
+   "v": 0.647,
+   "basis": "both sides pick",
+   "replay_v": 0.734,
+   "answers": [
+    {
+     "six": "Corviknight, Excadrill, Indeedee, Salamence, Sneasler, Tyranitar",
+     "weight": 0.642,
+     "their_four": "Salamence+Sneasler+Excadrill+Indeedee",
+     "v": 0.747
+    },
+    {
+     "six": "Excadrill, Indeedee, Milotic, Salamence, Sneasler, Tyranitar",
+     "weight": 0.194,
+     "their_four": "Milotic+Salamence+Excadrill+Sneasler",
+     "v": 0.531
+    },
+    {
+     "six": "Excadrill, Gholdengo, Indeedee, Salamence, Sneasler, Tyranitar",
+     "weight": 0.085,
+     "their_four": "Indeedee+Tyranitar+Excadrill+Sneasler",
+     "v": 0.469
+    },
+    {
+     "six": "Excadrill, Milotic, Rillaboom, Salamence, Sneasler, Tyranitar",
+     "weight": 0.079,
+     "their_four": "Milotic+Rillaboom+Excadrill+Salamence",
+     "v": 0.312
+    }
+   ],
+   "changed": false
+  },
+  "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)": {
+   "lead": [
+    "Blastoise",
+    "Kingambit"
+   ],
+   "back": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "v": 0.331,
+   "basis": "both sides pick",
+   "replay_v": 0.685,
+   "answers": [
+    {
+     "six": "Excadrill, Gholdengo, Milotic, Rillaboom, Salamence, Tyranitar",
+     "weight": 0.571,
+     "their_four": "Milotic+Rillaboom+Gholdengo+Salamence",
+     "v": 0.406
+    },
+    {
+     "six": "Excadrill, Gholdengo, Primarina, Salamence, Sinistcha, Tyranitar",
+     "weight": 0.204,
+     "their_four": "Excadrill+Primarina+Salamence+Tyranitar",
+     "v": 0.344
+    },
+    {
+     "six": "Armarouge, Excadrill, Indeedee-F, Milotic, Salamence, Tyranitar",
+     "weight": 0.122,
+     "their_four": "Indeedee-F+Milotic+Armarouge+Tyranitar",
+     "v": 0.156
+    },
+    {
+     "six": "Blaziken, Excadrill, Gardevoir, Indeedee-F, Salamence, Tyranitar",
+     "weight": 0.102,
+     "their_four": "Gardevoir+Indeedee-F+Blaziken+Tyranitar",
+     "v": 0.094
+    }
+   ],
+   "changed": true
+  },
+  "Trick Room: Delphox + Floette + Incineroar + Sinistcha": {
+   "lead": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "back": [
+    "Blastoise",
+    "Torkoal"
+   ],
+   "v": 0.456,
+   "basis": "both sides pick",
+   "replay_v": 0.784,
+   "answers": [
+    {
+     "six": "Delphox, Floette-Eternal, Incineroar, Kingambit, Sinistcha, Sneasler",
+     "weight": 0.914,
+     "their_four": "Kingambit+Sneasler+Floette-Eternal+Incineroar",
+     "v": 0.469
+    },
+    {
+     "six": "Delphox, Floette-Eternal, Garchomp, Incineroar, Kingambit, Sinistcha",
+     "weight": 0.037,
+     "their_four": "Floette-Eternal+Incineroar+Garchomp+Kingambit",
+     "v": 0.375
+    },
+    {
+     "six": "Delphox, Floette-Eternal, Incineroar, Milotic, Sinistcha, Vanilluxe",
+     "weight": 0.025,
+     "their_four": "Milotic+Sinistcha+Delphox+Incineroar",
+     "v": 0.125
+    },
+    {
+     "six": "Delphox, Floette-Eternal, Incineroar, Maushold, Sinistcha, Sneasler",
+     "weight": 0.025,
+     "their_four": "Floette-Eternal+Maushold+Delphox+Incineroar",
+     "v": 0.438
+    }
+   ],
+   "changed": false
+  },
+  "Trick Room: Delphox + Incineroar + Sinistcha (no Floette)": {
+   "lead": [
+    "Blastoise",
+    "Farigiraf"
+   ],
+   "back": [
+    "Kingambit",
+    "Incineroar"
+   ],
+   "v": 0.391,
+   "basis": "both sides pick",
+   "replay_v": 0.706,
+   "answers": [
+    {
+     "six": "Delphox, Incineroar, Kingambit, Kommo-o, Raichu, Sinistcha",
+     "weight": 0.391,
+     "their_four": "Kommo-o+Raichu+Kingambit+Sinistcha",
+     "v": 0.406
+    },
+    {
+     "six": "Blastoise, Delphox, Incineroar, Maushold, Sinistcha, Sneasler",
+     "weight": 0.275,
+     "their_four": "Blastoise+Incineroar+Sinistcha+Sneasler",
+     "v": 0.375
+    },
+    {
+     "six": "Blastoise, Delphox, Incineroar, Maushold-Four, Sinistcha, Sneasler",
+     "weight": 0.188,
+     "their_four": "Incineroar+Maushold-Four+Blastoise+Sinistcha",
+     "v": 0.469
+    },
+    {
+     "six": "Blastoise, Delphox, Incineroar, Kingambit, Sinistcha, Sneasler",
+     "weight": 0.145,
+     "their_four": "Kingambit+Sinistcha+Blastoise+Sneasler",
+     "v": 0.281
+    }
+   ],
+   "changed": false
+  },
+  "Rain + Sun: Archaludon + Golisopod + Politoed": {
+   "lead": [
+    "Blastoise",
+    "Incineroar"
+   ],
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "v": 0.469,
+   "basis": "both sides pick",
+   "replay_v": 0.648,
+   "answers": [
+    {
+     "six": "Archaludon, Charizard, Farigiraf, Golisopod, Grimmsnarl, Politoed",
+     "weight": 0.523,
+     "their_four": "Charizard+Grimmsnarl+Archaludon+Politoed",
+     "v": 0.5
+    },
+    {
+     "six": "Archaludon, Gengar, Golisopod, Incineroar, Politoed, Rillaboom",
+     "weight": 0.271,
+     "their_four": "Politoed+Rillaboom+Archaludon+Gengar",
+     "v": 0.562
+    },
+    {
+     "six": "Archaludon, Golisopod, Grimmsnarl, Politoed, Salamence, Sneasler",
+     "weight": 0.121,
+     "their_four": "Politoed+Salamence+Archaludon+Grimmsnarl",
+     "v": 0.281
+    },
+    {
+     "six": "Archaludon, Farigiraf, Garchomp, Golisopod, Politoed, Rillaboom",
+     "weight": 0.084,
+     "their_four": "Archaludon+Politoed+Garchomp+Rillaboom",
+     "v": 0.25
+    }
+   ],
+   "changed": false
+  },
+  "Perish: Archaludon + Politoed (no Golisopod)": {
+   "lead": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "back": [
+    "Blastoise",
+    "Torkoal"
+   ],
+   "v": 0.51,
+   "basis": "both sides pick",
+   "replay_v": 0.812,
+   "answers": [
+    {
+     "six": "Archaludon, Gengar, Incineroar, Politoed, Rillaboom, Vivillon",
+     "weight": 0.513,
+     "their_four": "Archaludon+Politoed+Gengar+Incineroar",
+     "v": 0.469
+    },
+    {
+     "six": "Archaludon, Froslass, Gengar, Incineroar, Politoed, Rillaboom",
+     "weight": 0.179,
+     "their_four": "Froslass+Politoed+Archaludon+Incineroar",
+     "v": 0.562
+    },
+    {
+     "six": "Archaludon, Gengar, Incineroar, Politoed, Raichu, Rillaboom",
+     "weight": 0.179,
+     "their_four": "Archaludon+Raichu+Incineroar+Politoed",
+     "v": 0.469
+    },
+    {
+     "six": "Archaludon, Gengar, Incineroar, Maushold-Four, Politoed, Rillaboom",
+     "weight": 0.128,
+     "their_four": "Incineroar+Politoed+Archaludon+Maushold-Four",
+     "v": 0.656
+    }
+   ],
+   "changed": false
+  },
+  "Snow: Froslass + Kingambit + Rillaboom": {
+   "lead": [
+    "Blastoise",
+    "Farigiraf"
+   ],
+   "back": [
+    "Torkoal",
+    "Incineroar"
+   ],
+   "v": 0.636,
+   "basis": "both sides pick",
+   "replay_v": 0.855,
+   "answers": [
+    {
+     "six": "Arcanine-Hisui, Froslass, Kingambit, Raichu, Rillaboom, Sneasler",
+     "weight": 0.587,
+     "their_four": "Kingambit+Raichu+Arcanine-Hisui+Rillaboom",
+     "v": 0.594
+    },
+    {
+     "six": "Basculegion, Blaziken, Froslass, Kingambit, Rillaboom, Sneasler",
+     "weight": 0.159,
+     "their_four": "Froslass+Rillaboom+Basculegion+Sneasler",
+     "v": 0.811
+    },
+    {
+     "six": "Arcanine-Hisui, Froslass, Kingambit, Rillaboom, Salamence, Sneasler",
+     "weight": 0.127,
+     "their_four": "Kingambit+Salamence+Arcanine-Hisui+Rillaboom",
+     "v": 0.594
+    },
+    {
+     "six": "Froslass, Garchomp, Kingambit, Rillaboom, Sneasler, Volcarona",
+     "weight": 0.127,
+     "their_four": "Froslass+Rillaboom+Garchomp+Volcarona",
+     "v": 0.656
+    }
+   ],
+   "changed": false
+  },
+  "Tailwind: Glimmora + Rillaboom + Volcarona (no Basculegion)": {
+   "lead": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "back": [
+    "Blastoise",
+    "Torkoal"
+   ],
+   "v": 0.604,
+   "basis": "both sides pick",
+   "replay_v": 0.645,
+   "answers": [
+    {
+     "six": "Garchomp, Glimmora, Kingambit, Rillaboom, Salamence, Volcarona",
+     "weight": 0.535,
+     "their_four": "Glimmora+Volcarona+Kingambit+Rillaboom",
+     "v": 0.719
+    },
+    {
+     "six": "Glimmora, Milotic, Raichu, Rillaboom, Sneasler, Volcarona",
+     "weight": 0.186,
+     "their_four": "Milotic+Raichu+Glimmora+Rillaboom",
+     "v": 0.406
+    },
+    {
+     "six": "Gholdengo, Glimmora, Kingambit, Rillaboom, Salamence, Volcarona",
+     "weight": 0.14,
+     "their_four": "Kingambit+Volcarona+Glimmora+Salamence",
+     "v": 0.375
+    },
+    {
+     "six": "Annihilape, Garchomp, Glimmora, Incineroar, Rillaboom, Volcarona",
+     "weight": 0.14,
+     "their_four": "Annihilape+Incineroar+Garchomp+Volcarona",
+     "v": 0.656
+    }
+   ],
+   "changed": false
+  },
+  "Indeedee TR: Armarouge + Indeedee-F": {
+   "lead": [
+    "Blastoise",
+    "Farigiraf"
+   ],
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "v": 0.224,
+   "basis": "both sides pick",
+   "replay_v": 0.488,
+   "answers": [
+    {
+     "six": "Annihilape, Armarouge, Indeedee-F, Kingambit, Staraptor, Torkoal",
+     "weight": 0.301,
+     "their_four": "Armarouge+Staraptor+Indeedee-F+Torkoal",
+     "v": 0.156
+    },
+    {
+     "six": "Armarouge, Dragapult, Golisopod, Indeedee-F, Milotic, Staraptor",
+     "weight": 0.253,
+     "their_four": "Golisopod+Milotic+Armarouge+Indeedee-F",
+     "v": 0.125
+    },
+    {
+     "six": "Armarouge, Dragapult, Gengar, Indeedee-F, Milotic, Staraptor",
+     "weight": 0.229,
+     "their_four": "Indeedee-F+Milotic+Armarouge+Staraptor",
+     "v": 0.219
+    },
+    {
+     "six": "Armarouge, Basculegion, Gardevoir, Hydreigon, Indeedee-F, Raichu",
+     "weight": 0.217,
+     "their_four": "Gardevoir+Indeedee-F+Armarouge+Hydreigon",
+     "v": 0.438
+    }
+   ],
+   "changed": false
+  },
+  "Sun: Charizard + Whimsicott": {
+   "lead": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "v": 0.433,
+   "basis": "both sides pick",
+   "replay_v": 0.728,
+   "answers": [
+    {
+     "six": "Basculegion, Charizard, Floette-Eternal, Garchomp, Kingambit, Whimsicott",
+     "weight": 0.31,
+     "their_four": "Floette-Eternal+Kingambit+Charizard+Garchomp",
+     "v": 0.25
+    },
+    {
+     "six": "Basculegion, Charizard, Garchomp, Kingambit, Sneasler, Whimsicott",
+     "weight": 0.276,
+     "their_four": "Charizard+Kingambit+Basculegion+Sneasler",
+     "v": 0.375
+    },
+    {
+     "six": "Charizard, Kingambit, Rillaboom, Salamence, Sylveon, Whimsicott",
+     "weight": 0.207,
+     "their_four": "Salamence+Sylveon+Charizard+Rillaboom",
+     "v": 0.562
+    },
+    {
+     "six": "Aegislash, Charizard, Floette-Eternal, Garchomp, Meowstic, Whimsicott",
+     "weight": 0.207,
+     "their_four": "Charizard+Meowstic+Aegislash+Garchomp",
+     "v": 0.656
+    }
+   ],
+   "changed": false
+  },
+  "Balance: Dragonite + Floette + Incineroar": {
+   "lead": [
+    "Blastoise",
+    "Farigiraf"
+   ],
+   "back": [
+    "Kingambit",
+    "Incineroar"
+   ],
+   "v": 0.64,
+   "basis": "both sides pick",
+   "replay_v": 0.609,
+   "answers": [
+    {
+     "six": "Dragonite, Floette-Eternal, Gholdengo, Incineroar, Rillaboom, Sneasler",
+     "weight": 0.928,
+     "their_four": "Dragonite+Floette-Eternal+Incineroar+Sneasler",
+     "v": 0.656
+    },
+    {
+     "six": "Dragonite, Floette-Eternal, Garchomp, Incineroar, Rillaboom, Sneasler",
+     "weight": 0.029,
+     "their_four": "Dragonite+Garchomp+Floette-Eternal+Sneasler",
+     "v": 0.562
+    },
+    {
+     "six": "Dragonite, Espathra, Floette-Eternal, Incineroar, Rillaboom, Sneasler",
+     "weight": 0.022,
+     "their_four": "Floette-Eternal+Rillaboom+Incineroar+Sneasler",
+     "v": 0.344
+    },
+    {
+     "six": "Aegislash, Dragonite, Floette-Eternal, Incineroar, Rillaboom, Volcarona",
+     "weight": 0.022,
+     "their_four": "Floette-Eternal+Volcarona+Dragonite+Incineroar",
+     "v": 0.344
+    }
+   ],
+   "changed": false
+  },
+  "Indeedee TR: Metagross + Milotic + Sneasler": {
+   "lead": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "v": 0.126,
+   "basis": "both sides pick",
+   "replay_v": 0.781,
+   "answers": [
+    {
+     "six": "Arcanine-Hisui, Indeedee, Metagross, Milotic, Salamence, Sneasler",
+     "weight": 0.8,
+     "their_four": "Milotic+Salamence+Indeedee+Metagross",
+     "v": 0.127
+    },
+    {
+     "six": "Arcanine-Hisui, Garchomp, Indeedee, Metagross, Milotic, Sneasler",
+     "weight": 0.114,
+     "their_four": "Indeedee+Milotic+Garchomp+Metagross",
+     "v": 0.062
+    },
+    {
+     "six": "Annihilape, Gengar, Indeedee-F, Metagross, Milotic, Sneasler",
+     "weight": 0.057,
+     "their_four": "Indeedee-F+Milotic+Metagross+Sneasler",
+     "v": 0.25
+    },
+    {
+     "six": "Arcanine-Hisui, Indeedee-F, Metagross, Milotic, Salamence, Sneasler",
+     "weight": 0.029,
+     "their_four": "Milotic+Salamence+Arcanine-Hisui+Metagross",
+     "v": 0.094
+    }
+   ],
+   "changed": true
+  },
+  "Indeedee TR: Camerupt + Farigiraf": {
+   "lead": [
+    "Blastoise",
+    "Kingambit"
+   ],
+   "back": [
+    "Torkoal",
+    "Incineroar"
+   ],
+   "v": 0.462,
+   "basis": "both sides pick",
+   "replay_v": 0.726,
+   "answers": [
+    {
+     "six": "Camerupt, Farigiraf, Hatterene, Incineroar, Indeedee-F, Kingambit",
+     "weight": 0.532,
+     "their_four": "Farigiraf+Indeedee-F+Camerupt+Hatterene",
+     "v": 0.688
+    },
+    {
+     "six": "Azumarill, Camerupt, Dragapult, Farigiraf, Rillaboom, Sneasler",
+     "weight": 0.255,
+     "their_four": "Camerupt+Sneasler+Azumarill+Rillaboom",
+     "v": 0.156
+    },
+    {
+     "six": "Camerupt, Farigiraf, Incineroar, Indeedee-F, Mimikyu, Torkoal",
+     "weight": 0.106,
+     "their_four": "Mimikyu+Torkoal+Camerupt+Farigiraf",
+     "v": 0.5
+    },
+    {
+     "six": "Camerupt, Farigiraf, Garchomp, Kingambit, Rillaboom, Tyranitar",
+     "weight": 0.106,
+     "their_four": "Camerupt+Rillaboom+Garchomp+Tyranitar",
+     "v": 0.031
+    }
+   ],
+   "changed": false
+  },
+  "Sand: Excadrill + Tyranitar": {
+   "lead": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "back": [
+    "Blastoise",
+    "Kingambit"
+   ],
+   "v": 0.48,
+   "basis": "both sides pick",
+   "replay_v": 0.614,
+   "answers": [
+    {
+     "six": "Excadrill, Gardevoir, Indeedee-F, Kommo-o, Pidgeot, Tyranitar",
+     "weight": 0.472,
+     "their_four": "Kommo-o+Tyranitar+Gardevoir+Indeedee-F",
+     "v": 0.406
+    },
+    {
+     "six": "Excadrill, Glimmora, Klefki, Rotom-Heat, Sinistcha, Tyranitar",
+     "weight": 0.208,
+     "their_four": "Excadrill+Rotom-Heat+Glimmora+Tyranitar",
+     "v": 0.594
+    },
+    {
+     "six": "Aegislash, Excadrill, Rotom-Heat, Staraptor, Tsareena, Tyranitar",
+     "weight": 0.167,
+     "their_four": "Staraptor+Tsareena+Excadrill+Rotom-Heat",
+     "v": 0.5
+    },
+    {
+     "six": "Clefable, Corviknight, Excadrill, Garchomp, Indeedee-F, Tyranitar",
+     "weight": 0.153,
+     "their_four": "Garchomp+Tyranitar+Corviknight+Excadrill",
+     "v": 0.531
+    }
+   ],
+   "changed": false
+  },
+  "Perish: Gengar + Kommo-o + Rillaboom": {
+   "lead": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "back": [
+    "Blastoise",
+    "Kingambit"
+   ],
+   "v": 0.508,
+   "basis": "both sides pick",
+   "replay_v": 0.884,
+   "answers": [
+    {
+     "six": "Gengar, Incineroar, Kommo-o, Politoed, Rillaboom, Swampert",
+     "weight": 0.596,
+     "their_four": "Kommo-o+Politoed+Incineroar+Swampert",
+     "v": 0.406
+    },
+    {
+     "six": "Gengar, Incineroar, Kingambit, Kommo-o, Rillaboom, Sneasler",
+     "weight": 0.154,
+     "their_four": "Incineroar+Kingambit+Gengar+Kommo-o",
+     "v": 0.656
+    },
+    {
+     "six": "Gengar, Incineroar, Kommo-o, Politoed, Rillaboom, Vivillon",
+     "weight": 0.154,
+     "their_four": "Gengar+Politoed+Kommo-o+Vivillon",
+     "v": 0.719
+    },
+    {
+     "six": "Gengar, Incineroar, Kingambit, Kommo-o, Rillaboom, Volcarona",
+     "weight": 0.096,
+     "their_four": "Gengar+Kommo-o+Kingambit+Volcarona",
+     "v": 0.562
+    }
+   ],
+   "changed": false
+  },
+  "Indeedee TR: Basculegion + Whimsicott": {
+   "lead": [
+    "Blastoise",
+    "Farigiraf"
+   ],
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "v": 0.451,
+   "basis": "both sides pick",
+   "replay_v": 0.63,
+   "answers": [
+    {
+     "six": "Basculegion, Gardevoir, Indeedee-F, Kommo-o, Pyroar, Whimsicott",
+     "weight": 0.392,
+     "their_four": "Basculegion+Indeedee-F+Kommo-o+Pyroar",
+     "v": 0.438
+    },
+    {
+     "six": "Arcanine-Hisui, Basculegion, Gardevoir, Indeedee-F, Kommo-o, Whimsicott",
+     "weight": 0.216,
+     "their_four": "Gardevoir+Indeedee-F+Arcanine-Hisui+Basculegion",
+     "v": 0.156
+    },
+    {
+     "six": "Basculegion, Farigiraf, Garchomp, Kingambit, Pyroar, Whimsicott",
+     "weight": 0.216,
+     "their_four": "Kingambit+Pyroar+Farigiraf+Garchomp",
+     "v": 0.5
+    },
+    {
+     "six": "Basculegion, Garchomp, Glimmora, Incineroar, Kingambit, Whimsicott",
+     "weight": 0.176,
+     "their_four": "Basculegion+Whimsicott+Garchomp+Kingambit",
+     "v": 0.781
+    }
+   ],
+   "changed": false
+  },
+  "Other Tailwind": {
+   "lead": [
+    "Blastoise",
+    "Farigiraf"
+   ],
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "v": 0.549,
+   "basis": "both sides pick",
+   "replay_v": 0.758,
+   "answers": [
+    {
+     "six": "Floette-Eternal, Gholdengo, Incineroar, Rillaboom, Salamence, Sneasler",
+     "weight": 0.462,
+     "their_four": "Floette-Eternal+Sneasler+Rillaboom+Salamence",
+     "v": 0.594
+    },
+    {
+     "six": "Arcanine-Hisui, Basculegion, Kingambit, Rillaboom, Salamence, Sneasler",
+     "weight": 0.25,
+     "their_four": "Kingambit+Sneasler+Arcanine-Hisui+Salamence",
+     "v": 0.625
+    },
+    {
+     "six": "Basculegion, Floette-Eternal, Kingambit, Rillaboom, Salamence, Sneasler",
+     "weight": 0.158,
+     "their_four": "Floette-Eternal+Kingambit+Basculegion+Sneasler",
+     "v": 0.312
+    },
+    {
+     "six": "Arcanine-Hisui, Floette-Eternal, Gholdengo, Rillaboom, Salamence, Sneasler",
+     "weight": 0.13,
+     "their_four": "Floette-Eternal+Sneasler+Arcanine-Hisui+Salamence",
+     "v": 0.531
+    }
+   ],
+   "changed": false
+  },
+  "Other Sun": {
+   "lead": [
+    "Blastoise",
+    "Farigiraf"
+   ],
+   "back": [
+    "Torkoal",
+    "Incineroar"
+   ],
+   "v": 0.313,
+   "basis": "both sides pick",
+   "replay_v": 0.615,
+   "answers": [
+    {
+     "six": "Charizard, Indeedee, Kingambit, Kommo-o, Meowstic-F, Sneasler",
+     "weight": 0.325,
+     "their_four": "Charizard+Kingambit+Indeedee+Kommo-o",
+     "v": 0.25
+    },
+    {
+     "six": "Garchomp, Milotic, Pyroar, Rillaboom, Staraptor, Torkoal",
+     "weight": 0.298,
+     "their_four": "Pyroar+Rillaboom+Garchomp+Torkoal",
+     "v": 0.406
+    },
+    {
+     "six": "Bellibolt, Charizard, Floette-Eternal, Garchomp, Incineroar, Rillaboom",
+     "weight": 0.211,
+     "their_four": "Bellibolt+Rillaboom+Floette-Eternal+Incineroar",
+     "v": 0.156
+    },
+    {
+     "six": "Basculegion, Farigiraf, Scizor, Sneasler, Staraptor, Torkoal",
+     "weight": 0.167,
+     "their_four": "Sneasler+Staraptor+Farigiraf+Torkoal",
+     "v": 0.469
+    }
+   ],
+   "changed": false
+  },
+  "Other Indeedee TR": {
+   "lead": [
+    "Farigiraf",
+    "Kingambit"
+   ],
+   "back": [
+    "Blastoise",
+    "Incineroar"
+   ],
+   "v": 0.523,
+   "basis": "both sides pick",
+   "replay_v": 0.664,
+   "answers": [
+    {
+     "six": "Altaria, Arcanine-Hisui, Dragapult, Indeedee-F, Metagross, Milotic",
+     "weight": 0.375,
+     "their_four": "Arcanine-Hisui+Milotic+Indeedee-F+Metagross",
+     "v": 0.281
+    },
+    {
+     "six": "Clefable, Delphox, Garchomp, Gyarados, Indeedee-F, Kingambit",
+     "weight": 0.25,
+     "their_four": "Garchomp+Gyarados+Indeedee-F+Kingambit",
+     "v": 0.562
+    },
+    {
+     "six": "Garganacl, Golisopod, Hawlucha, Indeedee-F, Reuniclus, Sinistcha-Masterpiece",
+     "weight": 0.2,
+     "their_four": "Garganacl+Reuniclus+Golisopod+Indeedee-F",
+     "v": 0.812
+    },
+    {
+     "six": "Arcanine-Hisui, Basculegion, Incineroar, Indeedee-F, Lucario, Rillaboom",
+     "weight": 0.175,
+     "their_four": "Lucario+Rillaboom+Arcanine-Hisui+Indeedee-F",
+     "v": 0.656
+    }
+   ],
+   "changed": false
+  },
+  "Other Rain": {
+   "lead": [
+    "Blastoise",
+    "Kingambit"
+   ],
+   "back": [
+    "Torkoal",
+    "Farigiraf"
+   ],
+   "v": 0.527,
+   "basis": "both sides pick",
+   "replay_v": 0.701,
+   "answers": [
+    {
+     "six": "Incineroar, Kommo-o, Metagross, Pelipper, Raichu, Sinistcha",
+     "weight": 0.857,
+     "their_four": "Metagross+Pelipper+Incineroar+Kommo-o",
+     "v": 0.531
+    },
+    {
+     "six": "Delphox, Farigiraf, Golisopod, Incineroar, Politoed, Rillaboom",
+     "weight": 0.056,
+     "their_four": "Golisopod+Rillaboom+Delphox+Politoed",
+     "v": 0.188
+    },
+    {
+     "six": "Goodra-Hisui, Gyarados, Milotic, Pelipper, Swampert, Zoroark-Hisui",
+     "weight": 0.047,
+     "their_four": "Gyarados+Swampert+Goodra-Hisui+Pelipper",
+     "v": 0.812
+    },
+    {
+     "six": "Chesnaught, Glimmora, Kingambit, Pelipper, Slowking-Galar, Toxapex",
+     "weight": 0.04,
+     "their_four": "Chesnaught+Pelipper+Glimmora+Kingambit",
+     "v": 0.594
+    }
+   ],
+   "changed": false
+  },
+  "Other Balance": {
+   "lead": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "back": [
+    "Blastoise",
+    "Torkoal"
+   ],
+   "v": 0.526,
+   "basis": "both sides pick",
+   "replay_v": 0.644,
+   "answers": [
+    {
+     "six": "Basculegion, Garchomp, Incineroar, Raichu, Rillaboom, Volcarona",
+     "weight": 0.346,
+     "their_four": "Garchomp+Incineroar+Rillaboom+Volcarona",
+     "v": 0.656
+    },
+    {
+     "six": "Basculegion, Floette-Eternal, Garchomp, Incineroar, Rillaboom, Volcarona",
+     "weight": 0.251,
+     "their_four": "Floette-Eternal+Incineroar+Garchomp+Volcarona",
+     "v": 0.438
+    },
+    {
+     "six": "Floette-Eternal, Garchomp, Incineroar, Kingambit, Rillaboom, Sneasler",
+     "weight": 0.209,
+     "their_four": "Incineroar+Kingambit+Floette-Eternal+Rillaboom",
+     "v": 0.469
+    },
+    {
+     "six": "Delphox, Floette-Eternal, Incineroar, Kingambit, Rillaboom, Sneasler",
+     "weight": 0.194,
+     "their_four": "Incineroar+Kingambit+Floette-Eternal+Rillaboom",
+     "v": 0.469
+    }
+   ],
+   "changed": false
+  },
+  "Other Snow": {
+   "lead": [
+    "Farigiraf",
+    "Incineroar"
+   ],
+   "back": [
+    "Blastoise",
+    "Torkoal"
+   ],
+   "v": 0.78,
+   "basis": "both sides pick",
+   "replay_v": 0.853,
+   "answers": [
+    {
+     "six": "Baxcalibur, Garchomp, Gholdengo, Kingambit, Ninetales-Alola, Rillaboom",
+     "weight": 0.35,
+     "their_four": "Baxcalibur+Kingambit+Ninetales-Alola+Rillaboom",
+     "v": 0.844
+    },
+    {
+     "six": "Basculegion, Froslass, Garchomp, Incineroar, Rillaboom, Volcarona",
+     "weight": 0.288,
+     "their_four": "Froslass+Garchomp+Incineroar+Rillaboom",
+     "v": 0.719
+    },
+    {
+     "six": "Froslass, Kingambit, Kleavor, Rotom-Heat, Sneasler, Whimsicott",
+     "weight": 0.188,
+     "their_four": "Froslass+Kleavor+Kingambit+Sneasler",
+     "v": 0.781
+    },
+    {
+     "six": "Baxcalibur, Blaziken, Empoleon, Ninetales-Alola, Overqwil, Rillaboom",
+     "weight": 0.175,
+     "their_four": "Blaziken+Empoleon+Baxcalibur+Rillaboom",
+     "v": 0.75
+    }
+   ],
+   "changed": false
+  },
+  "Other Trick Room": {
+   "lead": [
+    "Blastoise",
+    "Farigiraf"
+   ],
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "v": 0.447,
+   "basis": "both sides pick",
+   "replay_v": 0.601,
+   "answers": [
+    {
+     "six": "Farigiraf, Golisopod, Incineroar, Milotic, Pawmot, Rillaboom",
+     "weight": 0.341,
+     "their_four": "Golisopod+Milotic+Farigiraf+Rillaboom",
+     "v": 0.25
+    },
+    {
+     "six": "Altaria, Milotic, Rotom, Sinistcha, Slowbro-Galar, Volcarona",
+     "weight": 0.244,
+     "their_four": "Milotic+Rotom+Altaria+Volcarona",
+     "v": 0.719
+    },
+    {
+     "six": "Farigiraf, Garchomp, Kingambit, Meganium, Milotic, Staraptor",
+     "weight": 0.22,
+     "their_four": "Farigiraf+Milotic+Garchomp+Meganium",
+     "v": 0.406
+    },
+    {
+     "six": "Farigiraf, Incineroar, Lucario, Rillaboom, Salamence, Sylveon",
+     "weight": 0.195,
+     "their_four": "Farigiraf+Rillaboom+Lucario+Sylveon",
+     "v": 0.5
+    }
+   ],
+   "changed": false
+  },
+  "Other Perish": {
+   "lead": [
+    "Blastoise",
+    "Farigiraf"
+   ],
+   "back": [
+    "Torkoal",
+    "Kingambit"
+   ],
+   "v": 0.493,
+   "basis": "both sides pick",
+   "replay_v": 0.846,
+   "answers": [
+    {
+     "six": "Gengar, Hippowdon, Incineroar, Kingambit, Rillaboom, Sneasler",
+     "weight": 0.262,
+     "their_four": "Kingambit+Rillaboom+Hippowdon+Incineroar",
+     "v": 0.375
+    },
+    {
+     "six": "Armarouge, Dragonite, Gengar, Indeedee, Sneasler, Sylveon",
+     "weight": 0.262,
+     "their_four": "Indeedee+Sylveon+Armarouge+Gengar",
+     "v": 0.219
+    },
+    {
+     "six": "Appletun, Armarouge, Gallade, Gengar, Heracross, Tinkaton",
+     "weight": 0.262,
+     "their_four": "Gallade+Heracross+Appletun+Armarouge",
+     "v": 0.75
+    },
+    {
+     "six": "Gengar, Incineroar, Kingambit, Raichu, Rillaboom, Volcarona",
+     "weight": 0.214,
+     "their_four": "Kingambit+Volcarona+Raichu+Rillaboom",
+     "v": 0.656
+    }
+   ],
+   "changed": true
+  }
+ },
+ "basis": "both sides pick their four (optimal step, optimal)"
 }

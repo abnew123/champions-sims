@@ -60,15 +60,26 @@ def make_starts(sheet, jobs, part, path, games, g0):
     os.remove(path + '.raw'); os.remove(path + '.jobs.json'); assert n == len(part) * games, (n, len(part), games)
     return n
 
+def same_job(r, j):
+    """does result r belong to job j? (results are found by job number, and a rewritten job list can put another four at that number)"""
+    if j is None: return False
+    m = j.get('meta', j); mine = (m.get('our_lead', m.get('lead')), m.get('our_back', m.get('back')))
+    if (r.get('arch'), r.get('lead'), r.get('back')) != (m.get('arch'), *mine): return False
+    return 'their_lead' not in m or (r.get('their_lead'), r.get('their_back')) == (m['their_lead'], m['their_back'])
+
 def battle_run(sheet, step, jobs_path, outdir, games, g0, threads, setup, log, only=None):
     """Play jobs_path's jobs (all, or the job numbers in `only`) for games g0 .. g0+games-1 with the full-battle sim. The jobs are dealt
     round-robin to battle processes of a few threads each, so every process gets the same mix and they finish together.
     Resumes: jobs with a result file are skipped."""
     S = sim_setup(setup); jobs = rj(jobs_path); sd = outdir + '.starts'; os.makedirs(outdir, exist_ok=True)
     stamp(outdir, {'setup': S.get('games', S['name']), 'games': games, 'g0': g0, 'team': team_hash(sheet), 'opponents': OPPONENTS['kind']})      # 'games': a faster build of the same games
+    stale = 0
     for f in glob.glob(os.path.join(outdir, '*.json')):           # a result cut off by a stopped run would count as done: drop it
-        try: json.load(open(f))
-        except Exception: os.remove(f)
+        try: r = json.load(open(f))
+        except Exception: os.remove(f); continue
+        if not same_job(r, jobs[r['job']] if isinstance(r.get('job'), int) and r['job'] < len(jobs) else None):    # its job changed since
+            os.makedirs(outdir + '.stale', exist_ok=True); os.replace(f, os.path.join(outdir + '.stale', os.path.basename(f))); stale += 1
+    if stale: log.line(f"{now()} {stale} results no longer match their job (a changed pick): moved to {os.path.basename(outdir)}.stale/")
     todo = [i for i in (only if only is not None else range(len(jobs))) if not os.path.exists(os.path.join(outdir, f'{i}.json'))]
     per = PER_PROC if platform.system() == 'Linux' else threads
     nproc = max(1, min(threads // per, len(todo))); parts = [todo[c::nproc] for c in range(nproc)]

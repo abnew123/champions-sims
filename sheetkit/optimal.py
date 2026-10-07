@@ -11,7 +11,7 @@ up best when it does.
 
 The opposing sixes come from opp_sixes.js (OPTIMAL_SIXES=model, the default) or, with OPTIMAL_SIXES=pool, from the most common real sixes
 in Battle sim's pool of Showdown Bo3 sides (pssim/opp_pool.py); a pool run keeps its battles in work/optimal_pool and writes optimal_pool.json. Games are explicit-team battles, seeded by their four, so our candidates meet the same games."""
-import collections, glob, itertools, json
+import collections, glob, itertools, json, re
 from common import *
 import picks as P
 
@@ -117,32 +117,106 @@ def run_screen(sheet, threads, log):
         wj(jobs, f'{d}/screen_{games}.json')
         P.battle_run(sheet, 'optimal', f'{d}/screen_{games}.json', f'{d}/screen_{games}', games, SCREEN_G0, threads, None, log)
 
+def queues(sheet, kind):
+    """the job files of every round so far: round 1 is screen_<games>.json / matrix.json, later rounds screen_r<n>_<games>.json / matrix_r<n>.json;
+    each one's results are in the folder of the same name"""
+    pat = re.compile(r'screen(_r\d+)?_\d+\.json$' if kind == 'screen' else r'matrix(_r\d+)?\.json$')
+    return sorted(p for p in glob.glob(_w(sheet, '*.json')) if pat.search(os.path.basename(p)))
+
+def four_key(lead, back): return (frozenset(lead), frozenset(back))
+
 def screen_results(sheet):
-    """(arch, six) -> [(our win share, their four as species names, their four's sets)], lowest first"""
+    """(arch, six, our four) -> [(our win share, their four as species names, their four's sets)], lowest first"""
     out = collections.defaultdict(list); S6 = sixes(sheet)
-    for games in (16, opt(sheet, 'screen_games', 8)):
-        p = _w(sheet, f'screen_{games}.json')
-        if not os.path.exists(p): continue
+    for p in queues(sheet, 'screen'):
         jobs = rj(p)
-        for f in glob.glob(_w(sheet, f'screen_{games}', '*.json')):
+        for f in glob.glob(os.path.join(p[:-5], '*.json')):
             r = rj(f); vs = [g['v'] for g in r['rows'] if g.get('v') is not None]
-            if vs and r['six'] < len(S6.get(r['arch'], [])): out[(r['arch'], r['six'])].append((mean(vs), r['their_lead'] + r['their_back'], jobs[r['job']]['theirs']))
+            if vs and r['six'] < len(S6.get(r['arch'], [])):
+                out[(r['arch'], r['six'], four_key(r['our_lead'], r['our_back']))].append((mean(vs), r['their_lead'] + r['their_back'], jobs[r['job']]['theirs']))
     for k in out: out[k].sort(key=lambda x: x[0])
     return out
 
-def run_matrix(sheet, threads, log, top=None):
-    scr = screen_results(sheet); d = _w(sheet); jobs = []; top = top or opt(sheet, 'answers', 3)
+def screened(sheet):
+    """arch -> the fours of ours whose strongest answers have been searched (a screen played them against every opposing four)"""
+    out = collections.defaultdict(set)
+    for a, _, k in screen_results(sheet): out[a].add(k)
+    return out
+
+def matrix_cells(sheet):
+    """(arch, our four as 'lead', 'back' strings) -> (six, their four) -> (win share, games), over every round's matrix"""
+    M = collections.defaultdict(dict)
+    for p in queues(sheet, 'matrix'):
+        for f in glob.glob(os.path.join(p[:-5], '*.json')):
+            r = rj(f); vs = [g['v'] for g in r['rows'] if g.get('v') is not None]
+            if vs: M[(r['arch'], ('+'.join(r['our_lead']), '+'.join(r['our_back'])))][(r['six'], '+'.join(r['their_lead'] + r['their_back']))] = (mean(vs), len(vs))
+    return M
+
+def matrix_jobs(sheet, scr, archs, top, have=None):
+    """every candidate of each tab in archs against the top strongest answers per six in scr (one screen's results), skipping cells in have"""
+    jobs = []; have = have or {}
     for a in ARCHS:
-        cands = candidates(sheet, a)[:opt(sheet, 'candidates', 99)] if any(k[0] == a for k in scr) else []
+        if a not in archs: continue
+        cands = candidates(sheet, a)[:opt(sheet, 'candidates', 99)]
         for (arch, si), rows in sorted(scr.items()):
             if arch != a: continue
-            for _, _, theirs in rows[:top]:
-                for lead, back in cands: jobs.append(job(sheet, a, si, lead, back, theirs))
+            for _, names, theirs in rows[:top]:
+                for lead, back in cands:
+                    if (si, '+'.join(names)) not in have.get((a, ('+'.join(lead), '+'.join(back))), {}): jobs.append(job(sheet, a, si, lead, back, theirs))
+    return jobs
+
+def run_matrix(sheet, threads, log, top=None):
+    scr = {(a, si): rows for (a, si, _), rows in screen_results(sheet).items()}; d = _w(sheet)
+    jobs = matrix_jobs(sheet, scr, {a for a, _ in scr}, top or opt(sheet, 'answers', 3))
     wj(jobs, f'{d}/matrix.json')
     P.battle_run(sheet, 'optimal', f'{d}/matrix.json', f'{d}/matrix', MATRIX_GAMES, MATRIX_G0, threads, None, log)
 
+def ranking(sheet, a, S6=None, M=None):
+    """[(win share when each opposing six brings its strongest four we have met, our four as ('lead', 'back') strings, per six
+    [(weight, (win share, games, their four))])] for tab a, best first"""
+    S6 = S6 or sixes(sheet); M = M if M is not None else matrix_cells(sheet); ts = S6[a]; W = sum(t['weight'] for t in ts); rows = []
+    for (arch, ours), cells in M.items():
+        if arch != a: continue
+        per = []
+        for si, t in enumerate(ts):
+            c = [(v, n, k[1]) for k, (v, n) in cells.items() if k[0] == si]
+            if c: per.append((t['weight'] / W, min(c)))
+        if len(per) == len(ts): rows.append((sum(w * m[0] for w, m in per), ours, per))
+    return sorted(rows, key=lambda x: -x[0])
+
+def run_more(sheet, threads, log):
+    """one more round: for each tab whose best four on the numbers so far is one nobody searched answers for (after a first round, every
+    candidate but the screened pick), screen it against every opposing four, then play every candidate against its new strongest
+    answers. An unsearched four only met answers found against another four, which flatters it; repeat until the best four of every
+    tab has been searched."""
+    picks = rj(sheet.p('picks.json'))['picks']; S6 = sixes(sheet); done = screened(sheet); d = _w(sheet); M = matrix_cells(sheet)
+    target = {}
+    for a in ARCHS:
+        if a not in picks: continue
+        rows = ranking(sheet, a, S6, M)
+        top = rows[0][1] if rows else ('+'.join(picks[a]['lead']), '+'.join(picks[a]['back']))
+        lead, back = top[0].split('+'), top[1].split('+')
+        if four_key(lead, back) not in done[a]: target[a] = (lead, back)
+    todo = list(target)
+    if not todo: print("every tab's best four has been searched; nothing to do"); return
+    print(f"{len(todo)} tabs: their best four's answers not searched yet")
+    n = 1 + max([int(m.group(1)) for p in queues(sheet, 'screen') for m in [re.search(r'_r(\d+)_', p)] if m] + [1])    # round 2, 3, ...
+                                                                  # (the first extra round of the Trick Room Six run of 2026-10-06 is named r1)
+    g8 = opt(sheet, 'screen_games', 8)
+    for games in (16, g8):
+        jobs = [job(sheet, a, si, *target[a], f)
+                for a in todo for si, t in enumerate(S6[a]) if (len(S6[a]) == 1) == (games == 16) for f in fours_of(t['six'])]
+        if not jobs: continue
+        wj(jobs, f'{d}/screen_r{n}_{games}.json')
+        P.battle_run(sheet, 'optimal', f'{d}/screen_r{n}_{games}.json', f'{d}/screen_r{n}_{games}', games, SCREEN_G0, threads, None, log)
+    scr = {(a, si): rows for (a, si, k), rows in screen_results(sheet).items() if a in todo and k == four_key(*target[a])}
+    jobs = matrix_jobs(sheet, scr, set(todo), opt(sheet, 'answers', 3), matrix_cells(sheet))
+    wj(jobs, f'{d}/matrix_r{n}.json')
+    P.battle_run(sheet, 'optimal', f'{d}/matrix_r{n}.json', f'{d}/matrix_r{n}', MATRIX_GAMES, MATRIX_G0, threads, None, log)
+
 def run(sheet, threads=None, force=False, stage='all'):
     threads = threads_arg(threads, force); log = RunLog(sheet, OUT)
+    if stage == 'more': return run_more(sheet, threads, log)
     if stage in ('all', 'screen'): run_screen(sheet, threads, log)
     if stage in ('all', 'matrix'): run_matrix(sheet, threads, log)
 
@@ -164,27 +238,19 @@ def adopt(sheet, out=print):
     out(f"picks.json: {n} fours changed")
 
 def report(sheet, out=print):
-    S6 = sixes(sheet); picks = rj(sheet.p('picks.json'))['picks']; scr = screen_results(sheet)
-    M = collections.defaultdict(dict)                             # (arch, our four) -> (six, their four) -> win share
-    for f in glob.glob(_w(sheet, 'matrix', '*.json')):
-        r = rj(f); vs = [g['v'] for g in r['rows'] if g.get('v') is not None]
-        if vs: M[(r['arch'], ('+'.join(r['our_lead']), '+'.join(r['our_back'])))][(r['six'], '+'.join(r['their_lead'] + r['their_back']))] = (mean(vs), len(vs))
+    """only a four whose own strongest answers were searched can be the pick (the others met answers found against another four, so
+    their numbers are flattering); they are listed, marked, so a later round ("optimal run --only more") can search theirs"""
+    S6 = sixes(sheet); picks = rj(sheet.p('picks.json'))['picks']; M = matrix_cells(sheet); done = screened(sheet)
     res = {}; mine = lambda n: sheet.my_names.get(n, n); four = lambda l, b: f"{'+'.join(map(mine, l))} / {'+'.join(map(mine, b))}"
     for a in ARCHS:
         if a not in picks: continue
-        ts = S6[a]; W = sum(t['weight'] for t in ts); rows = []
-        for (arch, ours), cells in M.items():
-            if arch != a: continue
-            per = []
-            for si, t in enumerate(ts):
-                c = [(v, n, k[1]) for k, (v, n) in cells.items() if k[0] == si]
-                if c: per.append((t['weight'] / W, min(c)))
-            if len(per) == len(ts): rows.append((sum(w * m[0] for w, m in per), ours, per))
-        rows.sort(key=lambda x: -x[0])
-        pk = ('+'.join(picks[a]['lead']), '+'.join(picks[a]['back']))
-        out(f"\n=== {a}: sheet {100*picks[a]['v']:.0f}% against the replay-average fours")
+        ts = S6[a]; rows = ranking(sheet, a, S6, M)
+        pk = four_key(picks[a]['lead'], picks[a]['back']); ok = lambda ours: four_key(ours[0].split('+'), ours[1].split('+')) in done[a]
+        out(f"\n=== {a}: sheet {100*picks[a].get('replay_v', picks[a]['v']):.0f}% against the replay-average fours")
         for v, ours, per in rows:
-            out(f"   {four(ours[0].split('+'), ours[1].split('+')):42s} {100*v:5.1f}% when each opposing six brings its best four" + ('   <- sheet pick' if set(ours[0].split('+')) == set(pk[0].split('+')) and set(ours[1].split('+')) == set(pk[1].split('+')) else ''))
+            out(f"   {four(ours[0].split('+'), ours[1].split('+')):42s} {100*v:5.1f}% when each opposing six brings its best four"
+                + ('' if ok(ours) else '   (its own answers not searched)') + ('   <- sheet pick' if four_key(ours[0].split('+'), ours[1].split('+')) == pk else ''))
+        rows = [r for r in rows if ok(r[1])]
         if rows:
             v, ours, per = rows[0]
             res[a] = {'lead': ours[0].split('+'), 'back': ours[1].split('+'), 'v': round(v, 3), 'replay_v': picks[a]['v'],

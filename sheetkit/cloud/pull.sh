@@ -7,6 +7,8 @@ HOST=${1:?host}; KEY=${2:?key file}; TEAM=${3:?team}
 SSH="ssh -i $KEY -o ConnectTimeout=20 -o StrictHostKeyChecking=accept-new"
 rsync -az -e "$SSH" --exclude '*.starts.jsonl' --exclude '*.starts' --exclude '*.parts' --exclude 'grid/' --exclude 'smoke/' --exclude 'bin/' \
   ubuntu@$HOST:champions-sims/sheets/$TEAM/work/ sheets/$TEAM/work/
-rsync -az -e "$SSH" --include '*.json' --exclude '*' ubuntu@$HOST:champions-sims/sheets/$TEAM/ sheets/$TEAM/      # picks, t1, guide, optimal made there
+for f in picks t1 guide optimal optimal_pool; do                  # only what the steps make there (text, notes and config stay the Mac's)
+  rsync -az -e "$SSH" ubuntu@$HOST:champions-sims/sheets/$TEAM/$f.json sheets/$TEAM/ 2>/dev/null || true
+done
 rsync -az -e "$SSH" "ubuntu@$HOST:champions-sims/pssim/kit_${TEAM}_*.log" pssim/ 2>/dev/null || true
 echo "$(date '+%-I:%M %p') pulled: matrix $(ls sheets/$TEAM/work/matrix/res 2>/dev/null | wc -l | tr -d ' ') results, confirm $(ls sheets/$TEAM/work/confirm/res 2>/dev/null | wc -l | tr -d ' ')"

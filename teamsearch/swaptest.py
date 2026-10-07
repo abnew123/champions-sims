@@ -39,7 +39,7 @@ if __name__ == '__main__':
     s0 = sum(p[0]['score'] for p in pairs) / B; s1 = sum(p[1]['score'] for p in pairs) / B
     _, SH = PM.keys()
     by = {g: sum(p[1]['by_arch'][g] - p[0]['by_arch'][g] for p in pairs) / B for g in SH}
-    print(f"  {start}: {100 * s0:.1f}   with {C.GRID[into_g]['species']}: {100 * s1:.1f}   swap {100 * m:+.1f} ± {100 * se:.1f} ({B} batches x {len(pairs[0][0]['per_job'])} games)")
+    print(f"  {start}: {100 * s0:.1f}   with {' + '.join(C.GRID[g]['species'] for g in into_g.split('+'))}: {100 * s1:.1f}   swap {100 * m:+.1f} ± {100 * se:.1f} ({B} batches x {len(pairs[0][0]['per_job'])} games)")
     print('  biggest swings by opponent group (share of meta): ' + '; '.join(f"{g[:40]} ({100 * SH[g]:.0f}%) {100 * by[g]:+.0f}"
                                                                          for g in sorted(by, key=lambda g: -abs(by[g]) * SH[g])[:5]))
     json.dump(dict(start=start, out=out_g, into=into_g, sim=E.sim(), base=s0, swapped=s1, diff=m, se=se, by_group=by),

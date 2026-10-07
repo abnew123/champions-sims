@@ -122,7 +122,7 @@ def search_team(gids, seed0, threads, K=None, sp=1):
     for k in G_:
         for c, (lead, back) in enumerate(R[k]):
             for ei, e in enumerate(ents[k]): jobs.append(job(gids, lead, back, e)); meta.append((k, c, ei))
-    rows = _run(gids, jobs, seed0, threads, f'psearch{K}_{E.sim()}')
+    rows = _run(gids, jobs, seed0, threads, f'psearch{K}_{E.sim()}' + (f'_es{E_S}' if E_S != 2 else ''))   # outputs are cached by job index: never share a dir across sample sizes
     val = {}
     for (k, c, ei), r in zip(meta, rows): val[(k, c, ei)] = _wins(r)
     mean = lambda k, c: (lambda xs: sum(s / n for s, n in xs) / len(xs) if xs else 0.0)([val[(k, c, ei)] for ei in range(len(ents[k])) if val[(k, c, ei)][1]])
@@ -138,7 +138,7 @@ def evaluate_team(gids, brings, seed0, threads):
         lead, back = brings[k]
         for ei, e in enumerate(ents[k]): jobs.append(job(gids, lead, back, e)); slots.append((k, ei))
     h = hashlib.md5(json.dumps({k: (list(v[0]), list(v[1])) for k, v in brings.items()}, sort_keys=True).encode()).hexdigest()[:8]
-    rows = _run(gids, jobs, seed0, threads, f'pool_{E.sim()}_{h}_{seed0}')
+    rows = _run(gids, jobs, seed0, threads, f'pool_{E.sim()}_{h}_{seed0}' + (f'_ec{E_C}' if E_C != 8 else ''))
     val = {}
     for s, r in zip(slots, rows): val[s] = _wins(r)
     return _result(slots, val, sum(n for _, n in val.values()))

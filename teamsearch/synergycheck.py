@@ -9,12 +9,16 @@ area); if breaks clearly hurt, the climb's one-swap search is the bigger problem
   TS_SIM=v20g TS_PARALLEL=60 TS_THREADS=3 python3 synergycheck.py plan        teams, enablers and variants; missing matrix cells
   NPROC=48 python3 synergycheck.py cells                                       compute the missing cells
   TS_SIM=v20g TS_PARALLEL=60 TS_THREADS=3 python3 synergycheck.py run [batches=4]
+  TS_SYN_BRINGS=human: human-typical brings and leads (imitation model) instead of the climb's bring search
   TS_SYN_TEST=1: plumbing check (2 teams, 1 break + control, one entry per group)
 """
 import json, os, sys, time, random, subprocess
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 os.environ['TS_OPP'] = 'pool'; os.environ.setdefault('TS_SIM', 'v20g')
 TEST = os.environ.get('TS_SYN_TEST') == '1'
+BRINGS = os.environ.get('TS_SYN_BRINGS', 'search')     # search: the climb's bring search; human: the most human-like bring and leads
+                                                        # per group from the ladder-fitted imitation model, no battles (Battle sim's
+                                                        # test of whether the climb's bring step is where plans lose their value)
 if TEST: os.environ.update(TS_POOL_ES='1', TS_POOL_EC='1')
 import climb as C, evaluate as E, poolmode as PM, sets_lib as L
 from refine import has_cells, show
@@ -84,9 +88,12 @@ def run(B):
     teams = list({C.key_s(t): t for n, p, e, vs in P for t in [C.INDEX[n]['gids']] + [v[3] for v in vs]}.values())
     miss = sorted({g for t in teams for g in t if not has_cells(g)})
     if miss: sys.exit(f"missing matrix cells: {miss}: run 'synergycheck.py cells' first")
-    print(time.strftime('%I:%M %p'), f"{E.sim()}: {len(P)} teams, {sum(len(vs) for *_, vs in P)} variants, {len(teams)} teams to play, {B} batches", flush=True)
+    print(time.strftime('%I:%M %p'), f"{E.sim()}, brings: {BRINGS}: {len(P)} teams, {sum(len(vs) for *_, vs in P)} variants, {len(teams)} teams to play, {B} batches", flush=True)
     os.environ['TS_BRING_K'] = '1' if TEST else '3'
-    scr = dict(zip(map(C.key_s, teams), E.search_many(teams, 95000)))
+    if BRINGS == 'human':
+        K, _ = PM.keys()
+        scr = {C.key_s(t): dict(chosen={k: tuple(PM.human_ranked(t, k)[0]) for k in K}) for t in teams}
+    else: scr = dict(zip(map(C.key_s, teams), E.search_many(teams, 95000)))
     uses = lambda br, g: g in list(br[0]) + list(br[1])
     runs = {}
     for n, p, e, vs in P:
@@ -120,7 +127,7 @@ def run(B):
     if len(tr) > 3:                                                    # Battle sim's check: does removing the setter cost less on fast teams?
         import numpy as np
         print(f"  Trick Room breaks: gain vs the team's own average base Speed, correlation {np.corrcoef([r['avg_spe'][0] for r in tr], [r['diff'] for r in tr])[0, 1]:+.2f} (n {len(tr)})")
-    json.dump(out, open(os.path.join(HERE, 'runs', f'synergy_{E.sim()}.json'), 'w'), indent=1)
+    json.dump(out, open(os.path.join(HERE, 'runs', f'synergy_{E.sim()}_{BRINGS}.json'), 'w'), indent=1)
 
 if __name__ == '__main__':
     cmd = sys.argv[1] if len(sys.argv) > 1 else 'plan'

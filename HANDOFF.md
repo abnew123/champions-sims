@@ -743,7 +743,12 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     Rain 49.6%, Trick Room 58-60%, so about +7 / -10 against competent play), and the by-archetype human-lines split says where: Trick
     Room players' disliked plays work when Trick Room is DOWN (+6.6, n 170; +2.5 with it up), above all switches (+17.6 ± 9.3, n 27),
     setup (+21 ± 12, n 15: Milotic Coil, whose Def / accuracy boosts the value does not see) and priority (+15 ± 9); Rain players'
-    disliked plays lose as the planner says (status -23, setup -18, pivots -32, Fake Out -36), i.e. the planner plays Rain better than
-    its players do. Next lead (not started): a "plan potential" term for the Trick Room-down phase (a living Trick Room user on the slower
+    disliked plays lose as the planner says (status -23, setup -18, pivots -32, Fake Out -36) - but only below rating 1200 (-12 ± 6, n
+    141); at 1200-1350 Rain players' disliked plays beat the planner's rating by +13 ± 8 (n 100), more than other players' (+4), and the
+    sim's Rain +9 holds against the 1200-1350 band (48%), 1350+ (46%) and regional (49.6%) rates alike, so it is not Rain pilots being
+    bad (the user pushed back on that reading, rightly). Low-rated Rain mistakes the data flags (n 9-29 each): Pelipper Hurricane / Weather
+    Ball when Tailwind is the move, Incineroar Will-O-Wisp or Throat Chop instead of Fake Out / pivoting, Kommo-o Protect instead of
+    Clanging Scales, Raichu-Mega Focus Blast over Zap Cannon, Grimmsnarl Foul Play instead of screens. Rain lines the planner dislikes that
+    work: Pelipper Protect (+26) and Tailwind when the planner wants to attack (+27), Archaludon Protect (+16), Golisopod Protect (+20). Next lead (not started): a "plan potential" term for the Trick Room-down phase (a living Trick Room user on the slower
     side, Tailwind likewise) fitted on the real positions and tested with the same 2,400 starts (Trick Room teams as side 0), and the
     one-layer switch model (each side assumes the other stays in), since switching is where Trick Room players gain most.

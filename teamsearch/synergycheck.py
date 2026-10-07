@@ -45,6 +45,15 @@ def enabler(team, arch):
             return (plan, x[0]) if x else None
     return None
 
+def spe(g):
+    """base Speed of the set's battle forme (a Mega Stone holder's Mega)"""
+    return (L.DEX['species'].get(L.idf(C.forme(g)), {}) or L.DEX['species'][L.idf(G[g]['species'])])['stats']['spe']
+
+def speed_note(team):
+    """(average base Speed, members with base Speed <= 60): Battle sim's Trick Room credit is turns left x tanh(speed edge / 15) with
+    the edge from the average Speed of each side's living Pokemon, so a half-slow team gets about half the credit"""
+    v = [spe(g) for g in team]; return sum(v) / len(v), sum(1 for x in v if x <= 60)
+
 def swap_to(team, out, into_sp):
     if G[out]['species'] == into_sp: return None                          # a different species, never another set of the same one
     nb = [x for x in C.neighbours(team) if x[1] == out and G[x[2]]['species'] == into_sp]
@@ -97,14 +106,20 @@ def run(B):
             vb = {k: (x if uses(x, i) or uses(bb[k], o) else bb[k]) for k, x in scr[C.key_s(t)]['chosen'].items()}
             kv = (C.key_s(t), json.dumps(vb, sort_keys=True))
             m, se = C.pooled([(res[(kb, b)], res[(kv, b)]) for b in range(B)])
-            agg[kind].append(m); out.append(dict(start=n, plan=p, kind=kind, out=o, into=i, diff=m, se=se))
-            print(f"  {kind:7s} {o.split('#')[0]:12s} -> {i:14s} {100 * m:+5.1f} ± {100 * se:.1f}{'   sim prefers the break' if kind == 'break' and m - 2 * se > 0 else ''}")
+            (a0, s0n), (a1, s1n) = speed_note(base), speed_note(t)
+            agg[kind].append(m); out.append(dict(start=n, plan=p, kind=kind, out=o, into=i, diff=m, se=se, avg_spe=(a0, a1), slow=(s0n, s1n)))
+            print(f"  {kind:7s} {o.split('#')[0]:12s} -> {i:14s} {100 * m:+5.1f} ± {100 * se:.1f}   avg base Speed {a0:.0f} -> {a1:.0f}, slow members {s0n} -> {s1n}"
+                  f"{'   sim prefers the break' if kind == 'break' and m - 2 * se > 0 else ''}")
     mb = sum(agg['break']) / len(agg['break']); mc = sum(agg['control']) / max(1, len(agg['control']))
     nb = len(agg['break']); pos = sum(1 for r in out if r['kind'] == 'break' and r['diff'] > 0); sig = sum(1 for r in out if r['kind'] == 'break' and r['diff'] - 2 * r['se'] > 0)
     print(f"\nbreaking the plan: mean {100 * mb:+.1f} over {nb} swaps ({pos} positive, {sig} significantly); control swaps: mean {100 * mc:+.1f}")
     for p in sorted({r['plan'] for r in out}):
         xs = [r['diff'] for r in out if r['plan'] == p and r['kind'] == 'break']; cs = [r['diff'] for r in out if r['plan'] == p and r['kind'] == 'control']
         print(f"  {p:16s} breaks {100 * sum(xs) / len(xs):+5.1f} (n {len(xs)})   controls {100 * sum(cs) / max(1, len(cs)):+5.1f} (n {len(cs)})")
+    tr = [r for r in out if r['plan'] == 'Trick Room' and r['kind'] == 'break']
+    if len(tr) > 3:                                                    # Battle sim's check: does removing the setter cost less on fast teams?
+        import numpy as np
+        print(f"  Trick Room breaks: gain vs the team's own average base Speed, correlation {np.corrcoef([r['avg_spe'][0] for r in tr], [r['diff'] for r in tr])[0, 1]:+.2f} (n {len(tr)})")
     json.dump(out, open(os.path.join(HERE, 'runs', f'synergy_{E.sim()}.json'), 'w'), indent=1)
 
 if __name__ == '__main__':

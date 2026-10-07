@@ -14,7 +14,7 @@ Talk to the other threads directly with SendMessage (names above); do not relay 
 
 ## The sheet now
 
-- Published: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6, **Version 21** (2026-10-05): each lead card has a short game plan and the Leads section an "Adjust the four at team preview" list (the user asked for a strategy guide: overall game plans, not just turn one, and "if you see X, bring Y"). Built by the kit's new `guide` step (`sheetkit/guide.py`: `guide run`, 64 games per opposing lead from index 7000 with per-turn logs on the final simulator, run on the shared box; `guide report` -> `guide.json`; the tells come from the bring matrix). Version 20 collapsed each section's notes and Version 19 moved them below the working content (the user found the page hard to scroll). Data otherwise Version 18's (the picks rerun; open item 2).
+- Published: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6, **Version 22** (2026-10-07, the user's go-ahead): opponents are the 32 real-team cards (Battle sim's core groups; see "Opponent cards" below), each card's four picked with both sides picking their four (ladder-weighted 49%), per-card notes and game plans, the rule list as the guide. Version 21 (2026-10-05, archetype tabs, game plans and "Adjust the four at team preview") is kept in `archive_v21/`; Version 20 collapsed each section's notes and Version 19 moved them below the working content (the user found the page hard to scroll).
   `sheets/trick-room-six/sheet.html` (`python3 sheetkit/kit.py trick-room-six page`); `trsheet/tr-sheet.html` is a copy of it. Older
   pages: `trsheet/tr-sheet.v11.html` ... `tr-sheet.v15.html`, Version 16 in `sheetkit/fixtures/tr-v16/published.html`, and git from here on.
 - Version 17 against Version 16: Torkoal back to 32 HP / 2 SpD (card and Matchups column); Incineroar's Matchups column with White Herb
@@ -98,7 +98,7 @@ The user asked to move the sheet onto Battle sim's real-team classification and 
 holding one card per core group (in order of how common) plus an "other" card, and the "Which tab" guide becomes the ordered rule list,
 each rule jumping to its card. 32 cards (25 rules, two too thin for a card of their own; 8 "other" cards), built by
 `sheetkit/opponents.py`. `sheets/trick-room-six/sheet.json` has `"opponents": "cards"`; the archetype-era results are in
-`work/archetypes/` and `archive_v21/` (picks, turn-one plans, guide, notes of Versions 18-21; the published Version 21 is still
+`work/archetypes/` and `archive_v21/` (picks, turn-one plans, guide, notes of Versions 18-21; Version 21 was still
 archetype-based). The new matrix jobs (15,750) and each card's real sixes are written. The whole rerun is about 550,000 battles
 (`sheetkit/cloud/all.sh`), so it waited for a cloud box. None could be had on 2026-10-06, so the run was trimmed to about 167,000
 battles (sheet.json `matrix_fours`, `games`, `optimal`; see `trim_note`). Team search freed its Spain box (c7a.24xlarge, 96 threads)
@@ -112,7 +112,7 @@ sides pick their four, 71% against the usual fours (real ladder Trick Room teams
 reused results by job number even when the job had changed (the game plans of the 5 changed cards were for their old fours);
 `battle_run` now moves such results to `<folder>.stale/`, and `pull.sh` no longer copies the box's text.json and notes.json over the
 Mac's. Notes per card come from `card_notes.py` (Armor Tail and Psychic Terrain against Fake Out and Sucker Punch); `text.json` now
-describes the cards. The new page is built (`sheet.html`, not yet published or committed); show it to the user before publishing.
+describes the cards. Published as Version 22 on 2026-10-07 after the user saw the draft.
 
 ## Both sides pick their four (started 2026-10-06)
 

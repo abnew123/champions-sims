@@ -77,8 +77,13 @@ ROUND_CFG = {   # round 1 "thorough" (user, 2026-10-03); later rounds may switch
 #   undecided otherwise                       -> another batch of batch_pj games per job (x 60 jobs) for it and the current team,
 #                                                fresh paired seeds, up to max_batches batches in all (the confirm batch is batch 0)
 # Replaces the old rule (best of top_k accepted at gain > 1 SE), which accepted a no-effect swap about 40% of the time.
+# Hold batch (user, 2026-10-06, after a Farigiraf set swap passed at +14.4 +- 5.2 on one batch): a candidate that clears the bar is
+# not accepted yet: it gets one more fresh batch, and moves only if that batch's gain is positive AND all its batches pooled still clear
+# gain - z*SE > 0. If not, it stays undecided (a later clear needs another positive batch). A clear in the last allowed batch gets its
+# hold batch past max_batches. Without it, a fluke passed ~2.3% per look; with it, about 1%. TS_SEQ_HOLD=0 restores the old rule.
 SEQ = dict(z=float(os.environ.get('TS_SEQ_Z', 2.0)), z_drop=float(os.environ.get('TS_SEQ_ZDROP', 1.0)), delta=float(os.environ.get('TS_SEQ_DELTA', 0.02)),
-           batch_pj=int(os.environ.get('TS_SEQ_BATCH_PJ', 4)), max_batches=int(os.environ.get('TS_SEQ_MAX', 8)))
+           batch_pj=int(os.environ.get('TS_SEQ_BATCH_PJ', 4)), max_batches=int(os.environ.get('TS_SEQ_MAX', 8)),
+           hold=os.environ.get('TS_SEQ_HOLD', '1') == '1')
 STATE = os.environ.get('TS_STATE', os.path.join(HERE, 'climb_state.json'))
 LOG = os.environ.get('TS_LOG', os.path.join(HERE, 'climb_log.jsonl'))
 
@@ -109,23 +114,38 @@ def pooled(batches):
     return m, se
 
 def verdict(cands):
-    """('move', best clearly-better cand) | ('stop', None) | ('more', undecided cands); cands carry 'batches'"""
-    st = [(pooled(c['batches']), c) for c in cands]
-    better = [(m, c) for (m, se), c in st if m - SEQ['z'] * se > 0]
+    """('move', best clearly-better cand) | ('stop', None) | ('more', undecided cands); cands carry 'batches'.
+    With SEQ['hold'], a candidate that clears the bar is marked c['hold_at'] (the index of its hold batch) and counts as undecided
+    until that batch is in; it is better only if the hold batch's gain is positive and the pooled gain still clears."""
+    st = [(pooled(c['batches']), c) for c in cands]; better, und = [], []
+    for (m, se), c in st:
+        if m - SEQ['z'] * se > 0:
+            if not SEQ.get('hold'): better.append((m, c)); continue
+            h = c.get('hold_at')
+            if h is not None and len(c['batches']) > h:
+                if pooled(c['batches'][h:])[0] > 0: better.append((m, c)); continue
+                c['holds_failed'] = c.get('holds_failed', 0) + 1
+                c['hold_at'] = len(c['batches'])                           # did not hold: any later move needs another positive batch
+            elif h is None: c['hold_at'] = len(c['batches'])
+            und.append(c)
+        else:
+            c.pop('hold_at', None)
+            if m + SEQ['z_drop'] * se >= SEQ['delta']: und.append(c)
     if better: return 'move', max(better, key=lambda t: t[0])[1]
-    und = [c for (m, se), c in st if m + SEQ['z_drop'] * se >= SEQ['delta']]
     return ('more', und) if und else ('stop', None)
 
 def sharpen(items, seed_base, label, rnd=None):
     """items: [{start, cur, cur_brings, cur_batches: [result], cands: [{x, team, brings, batches: [(cur res, cand res)]}]}].
     Adds batches for undecided candidates until each item is decided or has max_batches. Sets item['verdict'], item['pick']."""
     import evaluate as E
-    for b in range(1, SEQ['max_batches'] + 1):
+    for b in range(1, SEQ['max_batches'] + 2):
         need = []
         for it in items:
             if it.get('verdict') in ('move', 'stop'): continue
             v, c = verdict(it['cands'])
-            if v != 'more' or b == SEQ['max_batches']:
+            if v == 'more' and b >= SEQ['max_batches']:                     # at the limit, only a pending hold batch still runs
+                c = [x for x in c if b == SEQ['max_batches'] and x.get('hold_at') == len(x['batches'])]
+            if v != 'more' or not c:
                 it['verdict'], it['pick'] = ('undecided', None) if v == 'more' else (v, c); continue
             it['pending'] = c; need.append(it)
         if not need: break
@@ -220,7 +240,7 @@ def run_round(mode):
                              from_random=x in p['rand']),
                    screened=[dict(out=y[1], into=y[2], diff=paired(scr[key_s(p['cur'])], scr[key_s(y[3])])[0], matrix=p['mscore'][key_s(y[3])],
                                   random=y in p['rand']) for y in p['top'] + p['rand']], cap=st['cap'],
-                   verdict=it['verdict'], seq=SEQ, confirmed=[dict(out=cc['x'][1], into=cc['x'][2], diff=mm, se=ss, batches=len(cc['batches']))
+                   verdict=it['verdict'], seq=SEQ, confirmed=[dict(out=cc['x'][1], into=cc['x'][2], diff=mm, se=ss, batches=len(cc['batches']), holds_failed=cc.get('holds_failed', 0))
                                                               for (mm, ss), cc in stats])
         if it['verdict'] == 'move':
             t['team'] = x[3]; t['path'].append(rec['best']); accepted_megas.append(megas(x[3]))

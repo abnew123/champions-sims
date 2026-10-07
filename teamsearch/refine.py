@@ -5,7 +5,8 @@ dual-weather Hurricane Charizard Y). One member's set changes at a time, judged 
                 ability / nature / moves, engine-supported, no item clash; the TS_REFINE_ALT (4) most common
   screening     the climb's bring search for the team and every variant
   confirm       the TS_REFINE_TOPK (6) variants with the best screening gain, paired games, then climb.sharpen's sequential rule
-                (change if gain - 2 SE > 0, drop if gain + 1 SE < 2 points, up to 8 batches). Bring luck is held out: where a
+                (change if gain - 2 SE > 0 and a fresh hold batch's gain is positive, drop if gain + 1 SE < 2 points, up to 8
+                batches). Bring luck is held out: where a
                 variant's bring for an opponent group uses neither the old nor the new set, it plays the team's own bring there
 Runs under whatever setup the environment gives (e.g. cloud/run_env_poolmiss.sh: pool opponents, misses doubled). Teams: the best
 N teams of a climb (latest confirm score per start, as report.py) plus the user's current core (sixth.py's core + Archaludon).

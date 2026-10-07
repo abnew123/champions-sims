@@ -79,7 +79,12 @@ other game indices (`<folder>.run.json` records them). Move the old folder aside
   `sheetkit/opponents/` (the cards, the guide, and one opponent model per card in the shape `pssim/t1sim.js` reads; every step passes it
   on as `OPP_MODEL`). The page's guide becomes the ordered rule list, each rule jumping to its card. The both-sides-pick step plays
   each card's most common real sixes, and `optimal adopt` makes its best candidate the card's pick, with the number "when they bring
-  their best four" (the user's choice for the sheet's percentages).
+  their best four" (the user's choice for the sheet's percentages). A four can only become the pick once its own strongest answers
+  have been searched: the screen looks for answers to the current pick only, so a candidate that beats the pick there has only met
+  answers found against another four. `optimal run --only more` (`sheetkit/cloud/more.sh` on a box, which also redoes adopt, turn one and
+  game plans) screens, for each card whose best four so far has not been searched, that four, and plays every candidate against its
+  answers; repeat until it says there is nothing to do. A result is only reused while its job still holds the same fours (a changed pick
+  moves the old results to `<folder>.stale/`).
 
 A result folder records which opponents it was played against, and the kit refuses to mix them.
 
@@ -87,7 +92,8 @@ On a fresh box of its own: `sheetkit/cloud/bundle.sh <team>` on the Mac, copy `s
 `~/champions-sims` and run `sheetkit/cloud/setup_box.sh` (about 10 minutes). On a box another thread already set up: `sheetkit/cloud/push.sh <host> <key> <team>` (also the sheet thread's own simulator files and the current battle
 source), then on the box `sheetkit/cloud/build.sh` (the binary, if missing) and
 `(setsid nohup sheetkit/cloud/all.sh <team> <threads> > /dev/null 2>&1 < /dev/null &)`: matrix, confirmation, both-sides-pick, adopt,
-turn-one lines and game plans in order (log `work/all.log`). Pull with `pull.sh`, then `page` on the Mac.
+turn-one lines and game plans in order (log `work/all.log`), then `more.sh` the same way for the second both-sides-pick round
+(log `work/more.log`). Pull with `pull.sh`, then `page` on the Mac.
 
 ## Rules for every sheet thread
 

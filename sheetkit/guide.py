@@ -165,7 +165,7 @@ def tells(sheet, min_teams=3, min_points=4.0):
         cs = list(V[t]); gs = set.intersection(*(set(V[t][c]) for c in cs))
         d = [mean([V[t][c][g] for c in cs if m in c[0] | c[1]]) - mean([V[t][c][g] for c in cs if m not in c[0] | c[1]]) for g in gs]
         mu = mean(d); return mu, math.sqrt(sum((x - mu) ** 2 for x in d) / max(1, len(d) - 1) / max(1, len(d)))
-    teams = [t for t in V if len(V[t]) >= 80]
+    full = max(len(v) for v in V.values()); teams = [t for t in V if len(V[t]) >= 0.85 * full]     # leads with (nearly) every four run
     BV = {(t, m): bring_value(t, m) for t in teams for m in sheet.names}
     arch_bv = {(a, m): sum(share[t] * BV[(t, m)][0] for t in teams if t[0] == a) / sum(share[t] for t in teams if t[0] == a)
                for a in {t[0] for t in teams} for m in sheet.names}

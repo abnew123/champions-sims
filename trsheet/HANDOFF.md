@@ -101,12 +101,18 @@ each rule jumping to its card. 32 cards (25 rules, two too thin for a card of th
 `work/archetypes/` and `archive_v21/` (picks, turn-one plans, guide, notes of Versions 18-21; the published Version 21 is still
 archetype-based). The new matrix jobs (15,750) and each card's real sixes are written. The whole rerun is about 550,000 battles
 (`sheetkit/cloud/all.sh`), so it waited for a cloud box. None could be had on 2026-10-06, so the run was trimmed to about 167,000
-battles (sheet.json `matrix_fours`, `games`, `optimal`; see `trim_note`) and scheduled on the Mac by `work/rerun_at_330.sh` for 3:30 am
-on 2026-10-07, 10 threads, dropping to 3 if the Mac is in use after 7 am (the user's OK; log `work/rerun.log`; about 7.5 hours). If a box
-turns up first: kill that script, push the bundle (`sheetkit/cloud/bundle.sh`), `setup_box.sh`, then `all.sh` there (about 1.3 hours on
-96 threads). After it: write `notes.json`
-per card (old notes keyed by archetype are in `archive_v21/notes.json`), update `text.json` (the intro paragraphs talk about tabs and
-archetypes), build, check on phone, and show the user before publishing.
+battles (sheet.json `matrix_fours`, `games`, `optimal`; see `trim_note`). Team search freed its Spain box (c7a.24xlarge, 96 threads)
+that evening, so the Mac run at 3:30 am was cancelled and `all.sh` ran there from 9:40 to 11:39 pm (log `work/all.log`). The first
+both-sides-pick round changed 27 of 32 picks, but each opposing six's strongest answers had only been searched against the old pick, so
+the new picks' numbers were flattering (Sand read 72%). Two more rounds (`optimal run --only more`, `sheetkit/cloud/more.sh`; logs
+`work/more_r1.log`, `more_r2.log`, `more.log`) searched the answers to each card's best four; only a searched four can be the pick now.
+Round two kept 22 of the 27 changes and sent 5 back; round three (7 cards) changed 3 more. One card's untested best four is still 0.7
+points ahead of its pick, which is noise, so the rounds stopped there (box done 12:54 am on 2026-10-07). Ladder-weighted: 49% when both
+sides pick their four, 71% against the usual fours (real ladder Trick Room teams win about 54%). Round two also found that a re-run
+reused results by job number even when the job had changed (the game plans of the 5 changed cards were for their old fours);
+`battle_run` now moves such results to `<folder>.stale/`, and `pull.sh` no longer copies the box's text.json and notes.json over the
+Mac's. Notes per card come from `card_notes.py` (Armor Tail and Psychic Terrain against Fake Out and Sucker Punch); `text.json` now
+describes the cards. The new page is built (`sheet.html`, not yet published or committed); show it to the user before publishing.
 
 ## Both sides pick their four (started 2026-10-06)
 

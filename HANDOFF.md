@@ -7,8 +7,9 @@ This folder is the machinery behind the **Trick Room Six** sheet (Pokémon Champ
   sections "Full 4v4 battle sim" and "Double Protect, real-game value weights" below), "Team search" owns `teamsearch/`, and "Eval bar"
   owns `evalbar/` (a chess-style evaluation bar for games; start at `evalbar/HANDOFF.md`). They coordinate by SendMessage.
 - **Git (since 2026-10-05):** the folder is a git repo (branch `main`) with a private GitHub remote, `abnew123/champions-sims`; the user
-  reviews it before it goes public. Each thread commits its own area with explicit paths (no `git add -A`) and pushes only when the user
-  asks. Keep names out of everything tracked: write "the user" or "the player", never a real name, the Mac username, absolute `/Users/`
+  reviews it before it goes public. Each thread commits its own area with explicit paths (no `git add -A`) and **pushes `main` after
+  each commit without asking** (the user, 2026-10-07, 11:40 pm: "let's just push continuously, don't ask me"; a push carries every
+  thread's commits, the pre-commit privacy hooks are the gate). Keep names out of everything tracked: write "the user" or "the player", never a real name, the Mac username, absolute `/Users/`
   paths or an email, and no other people's names either (opponents, Showdown usernames, tournament players). `.gitignore` keeps out
   dependencies, build output, results and other large generated files, local binaries, and data with names (game recordings, replay logs,
   scraped tournament pages). Commits use the no-reply email in the repo's git config. License: MIT (`LICENSE`); Showdown's notice, data

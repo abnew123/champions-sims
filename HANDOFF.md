@@ -831,3 +831,11 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     65% (50%); Brisbane-12 gets a setter-lead candidate against 100% (54%). Validation (cloud/bring_validate.sh: bringcheck.py old vs
     plan-aware brings, paired, on the synergy teams and the Trick Room six against its sheet plans, then the synergy check with plan-aware
     brings) goes on the next box, about 3 h. Nothing is owed from the engine for it.
+  - **Plan-aware bring step, validation part 1 (Team search, 2026-10-08; teamsearch/bringcheck_v20g.json):** plan-aware minus old brings on
+    the synergy check's 30 teams, 4 paired batches x 224 pool games: mean +1.0 (17 better, 3 significantly, none significantly worse); by
+    plan Rain +4.0 (Brisbane-09 +10.8 ± 2.8, Frankfurt-14 +7.6, Frankfurt-11 +6.3; Brisbane-06 -5.6), Sun +1.4, Sand +1.2, Tailwind 0.0,
+    Trick Room 0.0, Psychic Terrain -0.6. Chosen brings came from the outcome model 54%, imitation 12%, similar real sixes 12%, plan
+    candidates 22%. The Trick Room six against its sheet's plans on the same entries (sheet 68.5): old brings -10.2 ± 2.7, plan-aware
+    -6.8 ± 2.1, so the step recovers a third of that team's bring gap; the rest needs the sheet's plan in the shortlist more often (42% of
+    the meta now) or a less noisy screen than 8 games. Part 2 (the synergy check with plan-aware brings) runs on the next box. Longer term
+    the shortlist's ranking model wants a refit with plan features on pool-mode games (Team search's area).

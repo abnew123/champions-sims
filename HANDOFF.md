@@ -790,3 +790,13 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     right four lead. Open design point for the user: the planner's opponent is the equilibrium mix, so read-based lines (Follow Me, Fake
     Out into the obvious target, pivots) are worth less in self-play than against humans, and unexploitable styles (Tailwind-and-attack)
     more; that is the shape of the remaining Tailwind +8 / Indeedee TR -7 / Balance -5 bias, and no value or depth change fixes it.
+  - **Synergy check, human-brings way (Team search, 2026-10-07, 8:50 pm; its log and JSON in teamsearch/cloud_results/synergy/):** 87
+    plan breaks (the plan's enabler swapped for a generalist) cost -1.7 on average vs -0.0 for control swaps; by plan, breaks vs controls:
+    Sun -5.6 (n 18) vs -0.1, Tailwind -4.1 (20) vs -0.7, Rain -3.5 (15) vs +2.6, Psychic Terrain -0.6 (9) vs -0.9, Sand +2.6 (9) vs -0.1,
+    Trick Room +4.4 (16) vs -0.7. So with human-typical brings the engine values Sun / Tailwind / Rain plans at 4-6 points over an
+    ordinary swap and does not value Sand or Psychic Terrain setters. The Trick Room line is not evidence: the user's six gives +24 ± 2.6
+    for removing Indeedee-F because the imitation model's brings leave Torkoal home with Indeedee-F and bring it without (the Oct 3
+    finding again: imitation picks -24 vs the sheet's for this team); the three Sinistcha teams are goodstuff with a back-line Trick
+    Room; the two fast Indeedee Trick Room teams do value their setter (Baltimore-04 -5.3 / -3.8 / -8.6). Significant pro-break cases are
+    all "into Scarf Garchomp". The climb-brings way runs next (due about 10:20 pm); the comparison says whether the plans' value survives
+    the climb's bring search.

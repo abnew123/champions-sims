@@ -190,5 +190,6 @@ widens the shortlist (outcome model top 2, the most human-like bring, what real 
 per plan the team has) and screens it in two stages (7 x 2 games, then the best 2 x 6 more): about 4.3x the old bring search's games.
 Validate before a climb uses it: `cloud/bring_validate.sh 30 3` on a 96-core box (~3 h; `60 3` on a 192-core box ~1.5 h). It runs
 `bringcheck.py` (old vs plan-aware brings, paired, on the synergy check's teams; the TR six against its sheet's plans) and the synergy
-check with plan-aware brings (do plan breaks now cost more than ordinary swaps?). If it holds up, the next climb adds
-`export TS_BRING_MODE=plan` to its run_env file.
+check with plan-aware brings (do plan breaks now cost more than ordinary swaps?). It held up in part 1 (Oct 8: +1.0 on average, +4.0 on Rain teams, none significantly worse), so `cloud/run_env_pool.sh` and
+`run_env_poolmiss.sh` now export `TS_BRING_MODE=plan` (user, 2026-10-08). Cost: round 1's bring search goes from ~112k to ~490k games
+(668 teams x 728), about 2 h on 60 x 3 threads, so give auto_rounds a larger seconds-per-start estimate (~900 for a climb at 60 x 3).

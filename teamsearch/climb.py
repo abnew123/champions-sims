@@ -236,6 +236,7 @@ def run_round(mode):
         t = st['teams'][n]
         rec = dict(round=rnd, mode=mode, start=n, team=p['cur'], score=con[key_s(p['cur'])]['score'], n_neighbours=p['n_nb'],
                    brings_current=scr[key_s(p['cur'])]['chosen'], brings_best=scr[key_s(x[3])]['chosen'], score_best=con[key_s(x[3])]['score'],
+                   bring_tags=scr[key_s(x[3])].get('tag'),                         # plan-aware bring search: where each chosen bring came from
                    best=dict(slot=x[0], out=x[1], into=x[2], note=x[4], diff=m, se=se, matrix=p['mscore'][key_s(x[3])],
                              from_random=x in p['rand']),
                    screened=[dict(out=y[1], into=y[2], diff=paired(scr[key_s(p['cur'])], scr[key_s(y[3])])[0], matrix=p['mscore'][key_s(y[3])],

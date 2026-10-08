@@ -10,7 +10,8 @@ Entries are drawn per (group, seed): the same for every team in a round's batch 
 native/engine_data_full.json and SEED_PER_JOB=1 (independent luck per one-game job). Run dirs carry the sim setup's name, so two pool
 climbs (e.g. with and without MISS_DOUBLE) can share one box. Results look like evaluate's (score, by_arch = per group, per_job), plus
 w_job, the weight of every job in the score, which climb.paired uses.
-  env: TS_POOL_ES (2), TS_POOL_EC (8), TS_BRING_K (3)
+  env: TS_POOL_ES (2), TS_POOL_EC (8), TS_BRING_K (3); TS_BRING_MODE=plan: the plan-aware bring search (bringplan.py; TS_PLAN_K 7,
+       TS_PLAN_S1 2, TS_PLAN_S2 6, TS_PLAN_KEEP 2)
 """
 import json, os, sys, random, hashlib, functools, math
 import numpy as np
@@ -115,7 +116,39 @@ def _result(slots, val, games, extra=None):
         by[k] = sum(s / n for s, n in xs) / len(xs) if xs else 0.0
     return dict(score=sum(SH[k] * by[k] for k in K), by_arch=by, per_job=per, w_job=w_job, games=games, **(extra or {}))
 
+PLAN_S1, PLAN_S2, PLAN_KEEP = (int(os.environ.get(k, d)) for k, d in (('TS_PLAN_S1', 2), ('TS_PLAN_S2', 6), ('TS_PLAN_KEEP', 2)))
+
+def plan_mode(): return os.environ.get('TS_BRING_MODE') == 'plan'
+
+def _jobhash(jobs): return hashlib.md5(json.dumps(jobs, sort_keys=True).encode()).hexdigest()[:8]
+
+def search_team_plan(gids, seed0, threads):
+    """plan-aware bring search (bringplan.py): per group, the plan-aware shortlist x PLAN_S1 entries, the best PLAN_KEEP x PLAN_S2 more
+    entries (the next ones in the same rating-weighted order, so never the same games), the best over all its games kept. Run dirs are
+    named by a hash of their jobs, so a changed shortlist never reuses another one's cached games."""
+    import bringplan as BP
+    G_, _ = keys()
+    R = {k: BP.shortlist(gids, k) for k in G_}; ents = {k: sample(k, PLAN_S1 + PLAN_S2, seed0) for k in G_}
+    def play(stage, cands, which):
+        jobs, meta = [], []
+        for k in G_:
+            for c in cands[k]:
+                for ei in which:
+                    jobs.append(job(gids, R[k][c][0], R[k][c][1], ents[k][ei])); meta.append((k, c, ei))
+        rows = _run(gids, jobs, seed0 + stage, threads, f'pplan{stage}_{E.sim()}_{_jobhash(jobs)}')
+        return {m: _wins(r) for m, r in zip(meta, rows)}
+    s1 = list(range(PLAN_S1)); s2 = list(range(PLAN_S1, PLAN_S1 + PLAN_S2))
+    val = play(1, {k: range(len(R[k])) for k in G_}, s1)
+    mean = lambda k, c, eis: (lambda xs: sum(s / n for s, n in xs) / len(xs) if xs else 0.0)([val[(k, c, ei)] for ei in eis if val[(k, c, ei)][1]])
+    keep = {k: sorted(range(len(R[k])), key=lambda c: (-mean(k, c, s1), c))[:PLAN_KEEP] for k in G_}
+    val.update(play(2, keep, s2))
+    best = {k: max(keep[k], key=lambda c: (mean(k, c, s1 + s2), -c)) for k in G_}
+    slots = [(k, ei) for k in G_ for ei in s1 + s2]
+    return _result(slots, {(k, ei): val[(k, best[k], ei)] for k, ei in slots}, sum(n for _, n in val.values()),
+                   dict(chosen={k: R[k][best[k]][:2] for k in G_}, rank={k: best[k] + 1 for k in G_}, tag={k: R[k][best[k]][2] for k in G_}))
+
 def search_team(gids, seed0, threads, K=None, sp=1):
+    if plan_mode() and K is None: return search_team_plan(gids, seed0, threads)
     K = K or int(os.environ.get('TS_BRING_K', 3)); G_, _ = keys()
     R = {k: ranked(gids, k)[:K] for k in G_}; ents = {k: sample(k, E_S, seed0) for k in G_}
     jobs, meta = [], []
@@ -145,4 +178,7 @@ def evaluate_team(gids, brings, seed0, threads):
 
 def jobs_per_team(phase):
     G_, _ = keys()
+    if phase == 'screen' and plan_mode():
+        import bringplan as BP
+        return len(G_) * (BP.K_PLAN * PLAN_S1 + PLAN_KEEP * PLAN_S2)        # at most: short shortlists play fewer
     return len(G_) * (E_S * int(os.environ.get('TS_BRING_K', 3)) if phase == 'screen' else E_C)

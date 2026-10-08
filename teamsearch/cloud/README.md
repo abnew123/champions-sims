@@ -182,3 +182,13 @@ non-enabler member; v20g pool opponents, 4 paired batches, bring luck held out. 
    with the climb's bring search, and with `TS_SYN_BRINGS=human` (human-typical brings and leads; cheaper: no screening). Send Battle sim both.
 3. (Battle sim's horizon head-to-head ran on the Mac instead, 4,800 games: the two-turn horizon gained +0.2 +- 0.9, so it stays out of
    the climb setup and `cloud/h2big.sh` is not needed. Keep v20g / egvalue9.)
+
+## Plan-aware bring step (user, 2026-10-07; `bringplan.py`, `TS_BRING_MODE=plan`)
+
+The synergy check and the Trick Room six test showed the climb's bring step is where team plans lose their value. The plan-aware step
+widens the shortlist (outcome model top 2, the most human-like bring, what real players with similar teams brought, and one candidate
+per plan the team has) and screens it in two stages (7 x 2 games, then the best 2 x 6 more): about 4.3x the old bring search's games.
+Validate before a climb uses it: `cloud/bring_validate.sh 30 3` on a 96-core box (~3 h; `60 3` on a 192-core box ~1.5 h). It runs
+`bringcheck.py` (old vs plan-aware brings, paired, on the synergy check's teams; the TR six against its sheet's plans) and the synergy
+check with plan-aware brings (do plan breaks now cost more than ordinary swaps?). If it holds up, the next climb adds
+`export TS_BRING_MODE=plan` to its run_env file.

@@ -810,3 +810,15 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     only ~2 points over an ordinary swap and a Trick Room setter nothing, so the climb treats enabler -> generalist swaps as nearly free
     and selection on noise does the rest. The clean Trick Room test still owed: the user's six with the sheet's own lead / bring plans
     (72.5% vs the fitted model's 60.1% in the sim on Oct 3), with and without Indeedee-F; Team search is setting it up on the box.
+  - **The Trick Room six with the sheet's own plans (Team search, 2026-10-07, ~11:30 pm; teamsearch/trsix_sheet.py, trsix_sheet_v20g.json):
+    the whole Trick Room story is brings.** v20g, pool opponents, 4 x 224 games per version, plans from sheets/trick-room-six/picks.json
+    (all 28 groups). The sheet's plans never bring Indeedee-F; Farigiraf is the setter (led vs 82% of the meta, brought vs 95%), Torkoal
+    brought vs 84%. The team as is: 70.3 with the sheet's plans, 61.9 with the climb's bring search, 42.9 with human-typical brings (±3).
+    Plan fixed, Pokemon swapped into the outgoing one's slot: Farigiraf -> Gholdengo -28.5 ± 2.8, -> Garchomp -25.1 ± 2.7, -> Rillaboom
+    -30.3 ± 2.7 (an upper bound: the generalist plays the setter's slot); Torkoal -> Gholdengo -6.8, -> Garchomp -7.4; Incineroar ->
+    Gholdengo -8.8 (a plan piece too, led vs 39%). The setter's loss is largest against Indeedee TR (-40 to -57), Snow (-44 to -56),
+    Tailwind goodstuff (-45 to -66) and Sun (-54). With the climb's re-planned brings the same swaps were -5.9 / +2.9 / -1.4. So from good
+    leads the engine values Trick Room hugely and plays it fine; the climb's bring step loses about 8 points of this team against the
+    sheet's plans, enough to make the setter look nearly free to the climb. **No engine-side Trick Room work is needed**; the fix is the
+    climb's bring step (plan-aware shortlist candidates, a bigger screen, or the sheet's both-sides solver where affordable: Team search
+    and TR sheet).

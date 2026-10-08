@@ -253,7 +253,10 @@ for the user's own runs too. The other threads use battlesim-, trsheet- and team
 
 - No names in the repo: write "the user" or "the player"; never a real name, the Mac username, absolute `/Users/` paths, an email, or
   other people's names (replay usernames, opponents, tournament players). Replay logs and anything derived from them that keeps usernames
-  stay git-ignored. Commit only your own area with explicit paths; push only when the user asks.
+  stay git-ignored. Commit only your own area with explicit paths.
+- Push continuously without asking (the user, 2026-10-07, confirmed in this thread): after each commit, rebase this worktree's branch onto
+  `main` (only `evalbar/` changes here, so it is clean), fast-forward `main` in the main checkout (`git -C <main checkout> merge --ff-only
+  <branch>`, which touches only `evalbar/`), and `git push origin main`. Never bypass the privacy hooks.
 - CPU: never more than 10 busy cores on the Mac across all threads; at most 3 workers while the user may be playing (ask first);
   coordinate core splits with the other threads by message before any multi-core run.
 - Times in 12-hour am/pm. Keep what you build lean; add features when asked.

@@ -800,3 +800,13 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     Room; the two fast Indeedee Trick Room teams do value their setter (Baltimore-04 -5.3 / -3.8 / -8.6). Significant pro-break cases are
     all "into Scarf Garchomp". The climb-brings way runs next (due about 10:20 pm); the comparison says whether the plans' value survives
     the climb's bring search.
+  - **Synergy check, both ways (Team search, 2026-10-07, 10:30 pm; teamsearch/synergy_v20g_{human,search}.json):** leaving out the user's
+    six (imitation artifact), plan breaks cost -2.6 with human brings and -2.3 with the climb's bring search (n 84); controls -0.2 / -0.9
+    (n 29). Breaks minus controls, human / climb: Sun -5.5 / -5.7 (valued both ways), Rain -6.1 / -1.2 and Tailwind -3.4 / +0.1 (valued
+    only with human brings: the climb's bring step loses those plans), Psychic Terrain +0.3 / -3.0, Sand +2.7 / +0.4, Trick Room +2.0 /
+    +1.3 (13 teams, mostly Delphox goodstuff with a never-led Sinistcha plus two fast Indeedee teams: a weak test). The user's six with the
+    climb's brings: Indeedee-F -> Garchomp -5.9 ± 2.6, -> Gholdengo +2.9 ± 1.1, -> Rillaboom -1.4 ± 2.1; control Incineroar -> Gholdengo
+    -4.2. Reading (both threads): the bring step explains the Rain / Tailwind gap, but under either bring method a plan enabler is worth
+    only ~2 points over an ordinary swap and a Trick Room setter nothing, so the climb treats enabler -> generalist swaps as nearly free
+    and selection on noise does the rest. The clean Trick Room test still owed: the user's six with the sheet's own lead / bring plans
+    (72.5% vs the fitted model's 60.1% in the sim on Oct 3), with and without Indeedee-F; Team search is setting it up on the box.

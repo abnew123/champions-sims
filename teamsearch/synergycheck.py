@@ -9,7 +9,8 @@ area); if breaks clearly hurt, the climb's one-swap search is the bigger problem
   TS_SIM=v20g TS_PARALLEL=60 TS_THREADS=3 python3 synergycheck.py plan        teams, enablers and variants; missing matrix cells
   NPROC=48 python3 synergycheck.py cells                                       compute the missing cells
   TS_SIM=v20g TS_PARALLEL=60 TS_THREADS=3 python3 synergycheck.py run [batches=4]
-  TS_SYN_BRINGS=human: human-typical brings and leads (imitation model) instead of the climb's bring search
+  TS_SYN_BRINGS=human: human-typical brings and leads (imitation model) instead of the climb's bring search; =plan: the plan-aware
+  bring search (bringplan.py, TS_BRING_MODE=plan)
   TS_SYN_TEST=1: plumbing check (2 teams, 1 break + control, one entry per group)
 """
 import json, os, sys, time, random, subprocess
@@ -93,7 +94,9 @@ def run(B):
     if BRINGS == 'human':
         K, _ = PM.keys()
         scr = {C.key_s(t): dict(chosen={k: tuple(PM.human_ranked(t, k)[0]) for k in K}) for t in teams}
-    else: scr = dict(zip(map(C.key_s, teams), E.search_many(teams, 95000)))
+    else:
+        if BRINGS == 'plan': os.environ['TS_BRING_MODE'] = 'plan'     # the plan-aware bring search (bringplan.py)
+        scr = dict(zip(map(C.key_s, teams), E.search_many(teams, 95000)))
     uses = lambda br, g: g in list(br[0]) + list(br[1])
     runs = {}
     for n, p, e, vs in P:

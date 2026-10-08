@@ -823,3 +823,11 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     sheet's plans, enough to make the setter look nearly free to the climb. **No engine-side Trick Room work is needed**; the fix is the
     climb's bring step (plan-aware shortlist candidates, a bigger screen, or the sheet's both-sides solver where affordable: Team search
     and TR sheet).
+  - **Team search's plan-aware bring step (2026-10-08, ~12:10 am; teamsearch/bringplan.py, `TS_BRING_MODE=plan`), built, not yet validated
+    in battles:** per group a shortlist of up to 7 brings (the outcome model's top 2, the imitation model's top 1, the most common bring of
+    real players with similar sixes, and one candidate per plan the six has: one per Trick Room setter plus setter + Fake Out / redirection
+    guard, weather, terrain, Tailwind, support + setup), screened 7 x 2 games then the best 2 x 6 more (728 games per team, old 168); run
+    dirs hashed by their jobs. Offline: the sheet's exact plan is in the shortlist against 42% of the meta (old 30%), its four against
+    65% (50%); Brisbane-12 gets a setter-lead candidate against 100% (54%). Validation (cloud/bring_validate.sh: bringcheck.py old vs
+    plan-aware brings, paired, on the synergy teams and the Trick Room six against its sheet plans, then the synergy check with plan-aware
+    brings) goes on the next box, about 3 h. Nothing is owed from the engine for it.

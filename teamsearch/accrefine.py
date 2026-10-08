@@ -1,6 +1,7 @@
 """Accuracy refinement (user, 2026-10-08): for the per-archetype climb's best teams, swap sets only (same species and battle forme, so
 never another Pokemon or a Mega-forme change) toward more 100%-accurate moves, accepting any swap that doesn't make the team worse.
-  accurate moves  moves with accuracy True or 100; Hurricane counts as accurate on a team with a rain setter (Drizzle)
+  accurate moves  moves that effectively always hit in the team's own conditions (sure_hit: No Guard, Hurricane / Thunder with a rain
+                  setter, Blizzard with a snow setter, Toxic from Poison types, Compound Eyes, Wide Lens, Hustle)
   candidates      per member, the TS_ACC_ALT (3) most common regional sets (seen >= 2 times, engine-supported, no item clash) that raise
                   the team's accurate-move count
   test            the configured bring search for the team and each candidate (plan-aware in cloud/run_env_arch.sh), brings held equal
@@ -21,13 +22,26 @@ mid = lambda n: ''.join(c for c in n.lower() if c.isalnum())
 ALT = int(os.environ.get('TS_ACC_ALT', 3)); Z = float(os.environ.get('TS_ACC_Z', 1.0)); TOP = int(os.environ.get('TS_ACC_TOP', 2))
 OUT = os.path.join(HERE, 'runs', 'accrefine.json')
 
+def sure_hit(team, g, m, rain=None, snow=None):
+    """does move m of member g effectively always hit, in this team's own conditions? (user, 2026-10-08: "anything else that can be
+    100% should also be considered"): accuracy True or 100; No Guard (Mega Raichu Y); Hurricane / Thunder with a rain setter on the
+    team (Drizzle, or a Rain Dance user), Blizzard with a snow setter (Snow Warning incl. Mega Froslass, or Snowscape / Chilly
+    Reception); Toxic from a Poison type; Compound Eyes x1.3, Wide Lens x1.1; Hustle x0.8 on physical moves"""
+    if rain is None: rain = any(BP.ability(x) == 'Drizzle' or 'Rain Dance' in G[x]['moves'] for x in team)
+    if snow is None: snow = any(BP.ability(x) == 'Snow Warning' or {'Snowscape', 'Chilly Reception'} & set(G[x]['moves']) for x in team)
+    mv = MOVES.get(mid(m)) or {}; a = mv.get('accuracy', True); ab = BP.ability(g)
+    if a is True or ab == 'No Guard': return True
+    if (m in ('Hurricane', 'Thunder') and rain) or (m == 'Blizzard' and snow): return True
+    if m == 'Toxic' and 'Poison' in ((C.L.DEX['species'].get(C.L.idf(C.forme(g))) or {}).get('types') or []): return True
+    a *= 1.3 if ab == 'Compound Eyes' else 1.0
+    a *= 1.1 if G[g]['item'] == 'Wide Lens' else 1.0
+    a *= 0.8 if ab == 'Hustle' and mv.get('category') == 'Physical' else 1.0
+    return a >= 100
+
 def accurate(team):
-    rain = any(BP.ability(g) == 'Drizzle' for g in team); n = 0
-    for g in team:
-        for m in G[g]['moves']:
-            a = (MOVES.get(mid(m)) or {}).get('accuracy', True)
-            n += a is True or a >= 100 or (m == 'Hurricane' and rain)
-    return n
+    rain = any(BP.ability(x) == 'Drizzle' or 'Rain Dance' in G[x]['moves'] for x in team)
+    snow = any(BP.ability(x) == 'Snow Warning' or {'Snowscape', 'Chilly Reception'} & set(G[x]['moves']) for x in team)
+    return sum(sure_hit(team, g, m, rain, snow) for g in team for m in G[g]['moves'])
 
 def has_cells(g): return all(os.path.exists(os.path.join(HERE, 'mx', 'out', t, g.replace('/', '_') + '.json')) for t in ('tr', 'notr'))
 

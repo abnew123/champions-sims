@@ -1,0 +1,458 @@
+{
+ "Brisbane-4": {
+  "event": "Brisbane",
+  "place": 4,
+  "arch": "Rain",
+  "pid": "0302",
+  "gids": [
+   "Sneasler#5",
+   "Basculegion#1",
+   "M-Floette#1",
+   "Archaludon#2",
+   "Pelipper#2",
+   "Incineroar#10"
+  ]
+ },
+ "Brisbane-9": {
+  "event": "Brisbane",
+  "place": 9,
+  "arch": "Rain",
+  "pid": "0289",
+  "gids": [
+   "Sinistcha#22",
+   "M-Mawile#4",
+   "Sableye#5",
+   "Pelipper#8",
+   "M-Swampert#1",
+   "Archaludon#2"
+  ]
+ },
+ "Frankfurt-11": {
+  "event": "Frankfurt",
+  "place": 11,
+  "arch": "Rain",
+  "pid": "0016",
+  "gids": [
+   "M-Raichu Y#1",
+   "Pelipper#9",
+   "M-Golisopod#1",
+   "Kingambit#3",
+   "Archaludon#6",
+   "Farigiraf#55"
+  ]
+ },
+ "Frankfurt-14": {
+  "event": "Frankfurt",
+  "place": 14,
+  "arch": "Rain",
+  "pid": "0257",
+  "gids": [
+   "Archaludon#4",
+   "Pelipper#7",
+   "Garchomp#1",
+   "M-Golisopod#1",
+   "M-Raichu Y#1",
+   "Farigiraf#41"
+  ]
+ },
+ "Brisbane-19": {
+  "event": "Brisbane",
+  "place": 19,
+  "arch": "Rain",
+  "pid": "0117",
+  "gids": [
+   "Pelipper#8",
+   "Archaludon#14",
+   "M-Staraptor#1",
+   "Gholdengo#2",
+   "M-Raichu Y#1",
+   "Rillaboom#1"
+  ]
+ },
+ "Baltimore-21": {
+  "event": "Baltimore",
+  "place": 21,
+  "arch": "Rain",
+  "pid": "0950",
+  "gids": [
+   "Rillaboom#28",
+   "M-Salamence#1",
+   "Pelipper#2",
+   "M-Golisopod#13",
+   "Archaludon#6",
+   "Basculegion#1"
+  ]
+ },
+ "Brisbane-1": {
+  "event": "Brisbane",
+  "place": 1,
+  "arch": "Rain + Sun",
+  "pid": "0267",
+  "gids": [
+   "Archaludon#1",
+   "Pelipper#1",
+   "Grimmsnarl#1",
+   "M-Charizard Y#2",
+   "M-Garchomp Z#2",
+   "Venusaur#1"
+  ]
+ },
+ "Baltimore-2": {
+  "event": "Baltimore",
+  "place": 2,
+  "arch": "Rain + Sun",
+  "pid": "0532",
+  "gids": [
+   "M-Golisopod#1",
+   "M-Charizard Y#2",
+   "Politoed#2",
+   "Archaludon#4",
+   "Grimmsnarl#1",
+   "Farigiraf#4"
+  ]
+ },
+ "Brisbane-8": {
+  "event": "Brisbane",
+  "place": 8,
+  "arch": "Rain + Sun",
+  "pid": "0137",
+  "gids": [
+   "Archaludon#1",
+   "Grimmsnarl#2",
+   "Venusaur#1",
+   "Pelipper#3",
+   "M-Swampert#1",
+   "M-Charizard Y#6"
+  ]
+ },
+ "Frankfurt-23": {
+  "event": "Frankfurt",
+  "place": 23,
+  "arch": "Rain + Sun",
+  "pid": "0393",
+  "gids": [
+   "M-Charizard Y#2",
+   "Venusaur#1",
+   "Archaludon#1",
+   "M-Garchomp Z#2",
+   "Grimmsnarl#1",
+   "Pelipper#1"
+  ]
+ },
+ "Brisbane-25": {
+  "event": "Brisbane",
+  "place": 25,
+  "arch": "Rain + Sun",
+  "pid": "0101",
+  "gids": [
+   "Pelipper#1",
+   "M-Garchomp Z#2",
+   "M-Charizard Y#2",
+   "Archaludon#1",
+   "Venusaur#1",
+   "Grimmsnarl#1"
+  ]
+ },
+ "Frankfurt-32": {
+  "event": "Frankfurt",
+  "place": 32,
+  "arch": "Rain + Sun",
+  "pid": "0083",
+  "gids": [
+   "Pelipper#1",
+   "Garchomp#27",
+   "Grimmsnarl#1",
+   "Venusaur#3",
+   "M-Charizard Y#10",
+   "Archaludon#1"
+  ]
+ },
+ "Frankfurt-1": {
+  "event": "Frankfurt",
+  "place": 1,
+  "arch": "Balance",
+  "pid": "1025",
+  "gids": [
+   "Gholdengo#2",
+   "Volcarona#7",
+   "M-Garchomp Z#1",
+   "Incineroar#3",
+   "Rillaboom#2",
+   "M-Raichu Y#1"
+  ]
+ },
+ "Brisbane-3": {
+  "event": "Brisbane",
+  "place": 3,
+  "arch": "Balance",
+  "pid": "0040",
+  "gids": [
+   "M-Garchomp#2",
+   "Sneasler#22",
+   "M-Floette#4",
+   "Incineroar#33",
+   "Rillaboom#1",
+   "Kingambit#1"
+  ]
+ },
+ "Frankfurt-4": {
+  "event": "Frankfurt",
+  "place": 4,
+  "arch": "Balance",
+  "pid": "0423",
+  "gids": [
+   "Gholdengo#2",
+   "M-Dragonite#1",
+   "Incineroar#2",
+   "Rillaboom#1",
+   "Sneasler#8",
+   "M-Floette#9"
+  ]
+ },
+ "Brisbane-7": {
+  "event": "Brisbane",
+  "place": 7,
+  "arch": "Balance",
+  "pid": "0175",
+  "gids": [
+   "Kingambit#3",
+   "Sneasler#14",
+   "M-Garchomp Z#2",
+   "M-Floette#5",
+   "Rillaboom#1",
+   "Volcarona#4"
+  ]
+ },
+ "Baltimore-8": {
+  "event": "Baltimore",
+  "place": 8,
+  "arch": "Balance",
+  "pid": "0735",
+  "gids": [
+   "M-Floette#2",
+   "Kingambit#1",
+   "Rillaboom#1",
+   "Sneasler#3",
+   "Incineroar#17",
+   "M-Delphox#1"
+  ]
+ },
+ "Frankfurt-8": {
+  "event": "Frankfurt",
+  "place": 8,
+  "arch": "Balance",
+  "pid": "0703",
+  "gids": [
+   "M-Floette#2",
+   "Rillaboom#1",
+   "Incineroar#11",
+   "M-Dragonite#1",
+   "Gholdengo#2",
+   "Sneasler#8"
+  ]
+ },
+ "Baltimore-1": {
+  "event": "Baltimore",
+  "place": 1,
+  "arch": "Sand",
+  "pid": "0991",
+  "gids": [
+   "Excadrill#2",
+   "M-Salamence#2",
+   "M-Tyranitar#1",
+   "Indeedee#1",
+   "Corviknight#1",
+   "Sneasler#7"
+  ]
+ },
+ "Brisbane-11": {
+  "event": "Brisbane",
+  "place": 11,
+  "arch": "Sand",
+  "pid": "0026",
+  "gids": [
+   "Indeedee#3",
+   "M-Tyranitar#1",
+   "Excadrill#2",
+   "M-Salamence#2",
+   "Corviknight#1",
+   "Sneasler#7"
+  ]
+ },
+ "Frankfurt-12": {
+  "event": "Frankfurt",
+  "place": 12,
+  "arch": "Sand",
+  "pid": "1120",
+  "gids": [
+   "M-Tyranitar#1",
+   "Sneasler#7",
+   "Indeedee#1",
+   "Excadrill#1",
+   "M-Salamence#2",
+   "Corviknight#7"
+  ]
+ },
+ "Baltimore-17": {
+  "event": "Baltimore",
+  "place": 17,
+  "arch": "Sand",
+  "pid": "0299",
+  "gids": [
+   "M-Salamence#3",
+   "Primarina#4",
+   "M-Tyranitar#2",
+   "Sinistcha#21",
+   "Gholdengo#5",
+   "Excadrill#4"
+  ]
+ },
+ "Frankfurt-47": {
+  "event": "Frankfurt",
+  "place": 47,
+  "arch": "Sand",
+  "pid": "0266",
+  "gids": [
+   "Milotic#4",
+   "M-Staraptor#1",
+   "Gholdengo#2",
+   "Sinistcha#1",
+   "Excadrill#1",
+   "M-Tyranitar#1"
+  ]
+ },
+ "Brisbane-54": {
+  "event": "Brisbane",
+  "place": 54,
+  "arch": "Sand",
+  "pid": "0269",
+  "gids": [
+   "M-Salamence#2",
+   "Sneasler#7",
+   "M-Tyranitar#1",
+   "Indeedee#1",
+   "Excadrill#2",
+   "Corviknight#1"
+  ]
+ },
+ "Brisbane-2": {
+  "event": "Brisbane",
+  "place": 2,
+  "arch": "Tailwind",
+  "pid": "0141",
+  "gids": [
+   "M-Floette#1",
+   "Kingambit#4",
+   "Basculegion#8",
+   "Rillaboom#1",
+   "M-Salamence#5",
+   "Sneasler#15"
+  ]
+ },
+ "Baltimore-5": {
+  "event": "Baltimore",
+  "place": 5,
+  "arch": "Tailwind",
+  "pid": "0186",
+  "gids": [
+   "Milotic#2",
+   "M-Raichu Y#1",
+   "Ceruledge#1",
+   "M-Staraptor#1",
+   "Gholdengo#2",
+   "Rillaboom#1"
+  ]
+ },
+ "Baltimore-7": {
+  "event": "Baltimore",
+  "place": 7,
+  "arch": "Tailwind",
+  "pid": "0366",
+  "gids": [
+   "Arcanine-H#1",
+   "Rillaboom#1",
+   "Gholdengo#1",
+   "M-Staraptor#1",
+   "M-Raichu Y#1",
+   "Sylveon#2"
+  ]
+ },
+ "Frankfurt-9": {
+  "event": "Frankfurt",
+  "place": 9,
+  "arch": "Tailwind",
+  "pid": "0655",
+  "gids": [
+   "Sneasler#12",
+   "M-Salamence#1",
+   "M-Raichu Y#1",
+   "Rillaboom#1",
+   "Kingambit#1",
+   "Arcanine-H#1"
+  ]
+ },
+ "Frankfurt-13": {
+  "event": "Frankfurt",
+  "place": 13,
+  "arch": "Tailwind",
+  "pid": "0279",
+  "gids": [
+   "M-Staraptor#1",
+   "Rillaboom#1",
+   "Primarina#1",
+   "Gholdengo#2",
+   "M-Raichu Y#1",
+   "Arcanine-H#1"
+  ]
+ },
+ "Baltimore-14": {
+  "event": "Baltimore",
+  "place": 14,
+  "arch": "Tailwind",
+  "pid": "0707",
+  "gids": [
+   "Klefki#2",
+   "Garchomp#2",
+   "Volcarona#2",
+   "Archaludon#1",
+   "M-Salamence#1",
+   "M-Glimmora#1"
+  ]
+ },
+ "Frankfurt-16": {
+  "event": "Frankfurt",
+  "place": 16,
+  "arch": "Tailwind",
+  "pid": "0135",
+  "gids": [
+   "Sylveon#1",
+   "Arcanine-H#1",
+   "Gholdengo#1",
+   "M-Raichu Y#1",
+   "Rillaboom#1",
+   "M-Staraptor#1"
+  ]
+ },
+ "low_variance_six": {
+  "event": "user",
+  "place": null,
+  "arch": "Tailwind",
+  "pid": null,
+  "gids": [
+   "Rillaboom#55",
+   "Incineroar#80",
+   "Sneasler#85",
+   "Gholdengo#17",
+   "Kingambit#29",
+   "M-Salamence#6"
+  ],
+  "spreads": [
+   "user",
+   "user",
+   "user",
+   "user",
+   "user",
+   "user"
+  ]
+ }
+}

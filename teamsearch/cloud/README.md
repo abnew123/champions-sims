@@ -193,3 +193,17 @@ Validate before a climb uses it: `cloud/bring_validate.sh 30 3` on a 96-core box
 check with plan-aware brings (do plan breaks now cost more than ordinary swaps?). It held up in part 1 (Oct 8: +1.0 on average, +4.0 on Rain teams, none significantly worse), so `cloud/run_env_pool.sh` and
 `run_env_poolmiss.sh` now export `TS_BRING_MODE=plan` (user, 2026-10-08). Cost: round 1's bring search goes from ~112k to ~490k games
 (668 teams x 728), about 2 h on 60 x 3 threads, so give auto_rounds a larger seconds-per-start estimate (~900 for a climb at 60 x 3).
+
+## Per-archetype climb (user, 2026-10-08; `cloud/run_env_arch.sh`)
+
+A strong team per style instead of one global best: Rain, Rain + Sun, Balance, Sand and Tailwind (the user's picks). 32 starts in
+`teams/arch_start/index.json` (`build_arch_starts.py`: each archetype's regional top-16 teams, then its next best placements up to 6,
+plus the user's low-variance six). Every accepted swap keeps the start's archetype (`TS_ARCH_LOCK=1`, the rule tree in
+`pssim/pro_replays.arch`); the lock still leaves 120–200 neighbours per start. Opponents are weighted half by regional and half by
+ladder share (`TS_POOL_WEIGHT=blend`, 30 groups). Normal accuracy (v20g), plan-aware brings, hold batch.
+1. Setup and smoke as for the pool climbs (the bundle carries the start index and every needed cell).
+2. `tmux -L climb new -d -s climb_arch ". cloud/run_env_arch.sh && TS_PARALLEL=60 TS_THREADS=3 TS_PREFILTER_PROCS=90 ../.venv/bin/python3 climb.py round thorough climb_arch 2>&1 | tee -a round_arch.log"`
+   then `echo "60 3 90" > cloud/threads_climb_arch.txt; RUN_ENV=cloud/run_env_arch.sh setsid nohup cloud/auto_rounds.sh <cap epoch> 900 &`.
+3. Estimate on a c7a.48xlarge: round 1 ~1.5 h (~420 teams x 728 screening games + confirm), the whole climb ~3–4 h.
+4. Report: `python3 report.py cloud_results/<dir> climb_arch`; then replay each archetype's best teams against their starts on fresh
+   batches before trusting the gains.

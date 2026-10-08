@@ -1,0 +1,231 @@
+{
+ "Brisbane-4": {
+  "team": [
+   "M-Staraptor#1",
+   "Basculegion#1",
+   "M-Floette#1",
+   "Archaludon#2",
+   "Pelipper#2",
+   "Kommo-o#4"
+  ],
+  "path": [],
+  "done": true,
+  "accurate0": 24
+ },
+ "Brisbane-9": {
+  "team": [
+   "Sinistcha#22",
+   "M-Mawile#4",
+   "Sableye#5",
+   "Pelipper#8",
+   "M-Swampert#1",
+   "Archaludon#2"
+  ],
+  "path": [],
+  "done": true,
+  "accurate0": 21
+ },
+ "Baltimore-2": {
+  "team": [
+   "M-Golisopod#2",
+   "M-Charizard Y#2",
+   "Politoed#2",
+   "Archaludon#1",
+   "Grimmsnarl#1",
+   "Farigiraf#4"
+  ],
+  "path": [
+   {
+    "out": "M-Golisopod#1",
+    "into": "M-Golisopod#2",
+    "accurate_gain": 1,
+    "diff": 0.01712713012074598,
+    "se": 0.025141050690140613
+   },
+   {
+    "out": "Archaludon#4",
+    "into": "Archaludon#1",
+    "accurate_gain": 1,
+    "diff": 0.029227960895750683,
+    "se": 0.02258478415976666
+   }
+  ],
+  "done": true,
+  "accurate0": 20
+ },
+ "Frankfurt-32": {
+  "team": [
+   "Pelipper#1",
+   "Garchomp#2",
+   "Grimmsnarl#1",
+   "Venusaur#3",
+   "M-Charizard Y#10",
+   "Archaludon#1"
+  ],
+  "path": [
+   {
+    "out": "Garchomp#27",
+    "into": "Garchomp#2",
+    "accurate_gain": 1,
+    "diff": 0.00020414318295996353,
+    "se": 0.025088475860313684
+   }
+  ],
+  "done": true,
+  "accurate0": 21
+ },
+ "Frankfurt-4": {
+  "team": [
+   "Gholdengo#2",
+   "M-Dragonite#1",
+   "Incineroar#2",
+   "Rillaboom#1",
+   "Sneasler#3",
+   "Basculegion#1"
+  ],
+  "path": [
+   {
+    "out": "Sneasler#8",
+    "into": "Sneasler#3",
+    "accurate_gain": 1,
+    "diff": 0.051878767177806276,
+    "se": 0.02096476218364637
+   }
+  ],
+  "done": true,
+  "accurate0": 20
+ },
+ "Frankfurt-1": {
+  "team": [
+   "Gholdengo#2",
+   "Volcarona#9",
+   "M-Garchomp Z#1",
+   "Incineroar#3",
+   "Rillaboom#2",
+   "M-Raichu Y#1"
+  ],
+  "path": [
+   {
+    "out": "Volcarona#7",
+    "into": "Volcarona#9",
+    "accurate_gain": 1,
+    "diff": -0.014118440258244644,
+    "se": 0.02860654470841783
+   }
+  ],
+  "done": true,
+  "accurate0": 22
+ },
+ "Frankfurt-47": {
+  "team": [
+   "Milotic#8",
+   "M-Staraptor#1",
+   "Gholdengo#2",
+   "Sinistcha#1",
+   "Excadrill#3",
+   "M-Tyranitar#1"
+  ],
+  "path": [
+   {
+    "out": "Excadrill#1",
+    "into": "Excadrill#3",
+    "accurate_gain": 1,
+    "diff": 0.005772816066046908,
+    "se": 0.026804356018077142
+   },
+   {
+    "out": "Milotic#4",
+    "into": "Milotic#8",
+    "accurate_gain": 1,
+    "diff": -0.0053864041907679934,
+    "se": 0.025213536183160662
+   }
+  ],
+  "done": true,
+  "accurate0": 18
+ },
+ "Baltimore-17": {
+  "team": [
+   "M-Salamence#3",
+   "Volcarona#8",
+   "M-Tyranitar#2",
+   "Sinistcha#21",
+   "Gholdengo#5",
+   "Garchomp#2"
+  ],
+  "path": [
+   {
+    "out": "Volcarona#4",
+    "into": "Volcarona#8",
+    "accurate_gain": 1,
+    "diff": -0.020433957421208845,
+    "se": 0.02216281981998884
+   },
+   {
+    "out": "Garchomp#1",
+    "into": "Garchomp#2",
+    "accurate_gain": 1,
+    "diff": 0.012715406988404758,
+    "se": 0.02674966964463429
+   }
+  ],
+  "done": true,
+  "accurate0": 19
+ },
+ "Brisbane-2": {
+  "team": [
+   "M-Floette#1",
+   "Kingambit#4",
+   "Basculegion#8",
+   "Rillaboom#2",
+   "M-Salamence#5",
+   "Sneasler#15"
+  ],
+  "path": [
+   {
+    "out": "Rillaboom#1",
+    "into": "Rillaboom#2",
+    "accurate_gain": 1,
+    "diff": 0.003292721109978282,
+    "se": 0.021859296396110273
+   }
+  ],
+  "done": true,
+  "accurate0": 23
+ },
+ "Baltimore-5": {
+  "team": [
+   "Milotic#8",
+   "Kingambit#2",
+   "Ceruledge#1",
+   "M-Staraptor#1",
+   "Gholdengo#2",
+   "Rillaboom#2"
+  ],
+  "path": [
+   {
+    "out": "Milotic#2",
+    "into": "Milotic#5",
+    "accurate_gain": 1,
+    "diff": 0.046927142441996736,
+    "se": 0.026199782224556694
+   },
+   {
+    "out": "Rillaboom#1",
+    "into": "Rillaboom#2",
+    "accurate_gain": 1,
+    "diff": 0.02100766040102556,
+    "se": 0.020751653454337427
+   },
+   {
+    "out": "Milotic#5",
+    "into": "Milotic#8",
+    "accurate_gain": 1,
+    "diff": 0.012659773127960265,
+    "se": 0.021571454295779568
+   }
+  ],
+  "done": false,
+  "accurate0": 20
+ }
+}

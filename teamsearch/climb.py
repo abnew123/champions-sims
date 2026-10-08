@@ -21,7 +21,7 @@ import sets_lib as L
 HERE = L.HERE
 GRID = json.load(open(os.path.join(HERE, 'grid_sets.json')))
 POOL = json.load(open(os.path.join(HERE, 'swap_pool.json')))
-INDEX = json.load(open(os.path.join(HERE, 'teams', 'start', 'index.json')))
+INDEX = json.load(open(os.environ.get('TS_INDEX') or os.path.join(HERE, 'teams', 'start', 'index.json')))   # TS_INDEX: e.g. teams/arch_start/index.json
 CANDS = [p['gid'] for p in POOL if not p['fallback']]
 FALLBACKS = collections.defaultdict(list)                      # forme -> fallback gids, most common item first
 for p in sorted((p for p in POOL if p['fallback']), key=lambda p: -p['cluster_share']): FALLBACKS[p['forme']].append(p['gid'])
@@ -34,6 +34,12 @@ def forme(g): return L.battle_forme(GRID[g]['species'], GRID[g]['item'])
 def is_mega(g): return bool((L.DEX['items'].get(L.idf(GRID[g]['item'] or ''), {}) or {}).get('megaStone'))
 def megas(team): return sum(map(is_mega, team))
 def key(team): return tuple(sorted(team))
+def arch_of(team):
+    """the rule archetype (pssim/pro_replays.arch, as the opponent groups use it)"""
+    sys.path.insert(0, os.path.join(HERE, '..', 'pssim'))
+    from pro_replays import arch
+    from cluster_opps import norm
+    return arch([norm(GRID[g]['species']) for g in team])
 def team_json(team):
     """MYTEAM format (keys = species), for the sims"""
     return {GRID[g]['species']: {k: GRID[g][k] for k in ('species', 'item', 'ability', 'nature', 'evs', 'moves')} for g in team}
@@ -182,14 +188,16 @@ def run_round(mode):
     import random, evaluate as E, policy as P
     cfg = ROUND_CFG[mode]
     only = os.environ.get('TS_STARTS')                                 # e.g. a plumbing test on two starts
-    st = json.load(open(STATE)) if os.path.exists(STATE) else dict(round=0, cap=None, teams={n: dict(team=v['gids'], done=False, path=[])
+    st = json.load(open(STATE)) if os.path.exists(STATE) else dict(round=0, cap=None, teams={n: dict(team=v['gids'], done=False, path=[], arch=arch_of(v['gids']))
                                                                        for n, v in INDEX.items() if not only or n in only.split(',')})
     rnd = st['round'] + 1; seed_s, seed_c = 1000 * rnd, 500000 + 1000 * rnd
     print(f"round {rnd}: sim setup {E.sim()}, battle binary {os.path.basename(E.bin_path())}", flush=True)   # TS_SIM (default v3)
     active = [n for n, t in st['teams'].items() if not t['done']]
     plan = {}
     progress(round=rnd, mode=mode, phase='prefilter', starts=len(active))
-    nbs = {n: neighbours(st['teams'][n]['team'], st['cap']) for n in active}
+    lock = os.environ.get('TS_ARCH_LOCK') == '1'                       # per-archetype climbs: only swaps that keep the start's archetype
+    nbs = {n: [x for x in neighbours(st['teams'][n]['team'], st['cap']) if not lock or arch_of(x[3]) == st['teams'][n].get('arch', arch_of(INDEX[n]['gids']))]
+           for n in active}
     flat = list({key_s(x[3]): x[3] for n in active for x in nbs[n]}.values())
     t0 = time.time()
     cache = os.path.join(os.environ.get('TS_CACHE_DIR', HERE), f'climb_prefilter_r{rnd}.json')   # so a relaunch skips this step

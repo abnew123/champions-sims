@@ -24,11 +24,16 @@ E_S = int(os.environ.get('TS_POOL_ES', 2)); E_C = int(os.environ.get('TS_POOL_EC
 
 @functools.lru_cache(maxsize=None)
 def keys():
-    """(bring groups, their normalised regional shares)"""
+    """(bring groups, their normalised weights): regional shares, or with TS_POOL_WEIGHT=blend (user, 2026-10-08) half the regional
+    share and half the ladder share (the pool's entry counts); groups at >= 1% and with >= 8 pool entries"""
     K = json.load(open(os.path.join(HERE, 'pool_keys.json')))['keys']
-    use = [k for k, v in K.items() if v['share'] >= 0.01 and v['pool'] >= 8]
-    tot = sum(K[k]['share'] for k in use)
-    return tuple(use), {k: K[k]['share'] / tot for k in use}
+    if os.environ.get('TS_POOL_WEIGHT') == 'blend':
+        tr, tp = sum(v['share'] for v in K.values()), sum(v['pool'] for v in K.values())
+        w = {k: 0.5 * v['share'] / tr + 0.5 * v['pool'] / tp for k, v in K.items()}
+    else: w = {k: v['share'] for k, v in K.items()}
+    use = [k for k, v in K.items() if w[k] >= 0.01 and v['pool'] >= 8]
+    tot = sum(w[k] for k in use)
+    return tuple(use), {k: w[k] / tot for k in use}
 
 def group_of(six):
     from cluster_opps import tag, norm

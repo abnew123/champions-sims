@@ -839,3 +839,11 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     -6.8 ± 2.1, so the step recovers a third of that team's bring gap; the rest needs the sheet's plan in the shortlist more often (42% of
     the meta now) or a less noisy screen than 8 games. Part 2 (the synergy check with plan-aware brings) runs on the next box. Longer term
     the shortlist's ranking model wants a refit with plan features on pool-mode games (Team search's area).
+  - **Plan-aware bring step, validation part 2 (Team search, 2026-10-08; teamsearch/synergy_v20g_plan.json):** the synergy check rerun with
+    plan-aware brings. Breaks minus controls without the Trick Room six, human-typical / old search / plan-aware: overall -2.4 / -1.4 /
+    -2.3; Rain -6.1 / -1.1 / -4.6; Sun -5.5 / -5.6 / -6.3; Sand +2.7 / +0.3 / -2.2; Tailwind -3.4 / 0.0 / -1.4; Psychic Terrain +0.3 /
+    -3.0 / -0.7; Trick Room +2.0 / +1.4 / +2.6 (still a weak test: Sinistcha goodstuff, and the six's enabler as picked is Indeedee-F,
+    which its sheet never brings; trsix_sheet.py is the Trick Room result). So the plan-aware step restores most of the Rain plan value the
+    old step lost and adds some for Sand and Tailwind. A per-archetype climb (Rain, Rain + Sun, Balance, Sand, Tailwind; 32 regional
+    starts; swaps keep the start's archetype; opponents half regional / half ladder; plan-aware brings; hold batch; archverify.py at the
+    end) is running on the Spain box at the user's request (cloud/run_env_arch.sh).

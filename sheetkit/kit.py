@@ -20,6 +20,7 @@
   python3 sheetkit/kit.py <team> page [--compare other.html]   -> sheets/<team>/sheet.html
   python3 sheetkit/kit.py <team> flagged [--write]         battle results with a game flagged unsupported; --write moves them out to replay
                                                            (--moves healingwish,memento: also results where either four carries one)
+                                                           (--stones 2: also results where either four holds two Mega Stones)
 
 Long runs: start them in the background (nohup ... &); every run resumes where it stopped and shows on the progress page (port 8766).
 On the Mac the default is 3 workers and more than 10 is refused (--force); ask before any multi-core run. See sheetkit/README.md."""
@@ -92,6 +93,20 @@ def glob_json(d, pat='*.json'):
     import glob
     return glob.glob(os.path.join(d, pat))
 
+def stone_holders(sheet, d, r, cache={}):
+    """(ours, theirs): how many Pokemon in each four of result r (in folder d) hold their Mega Stone"""
+    import page as PG
+    D = cache.get('dex') or cache.setdefault('dex', PG.dex()); idf = PG.idf
+    stone = lambda item, sp: bool((D['items'].get(idf(item), {}).get('megaStone') or {}))
+    ours = sum(stone(sheet.team.get(n, {}).get('item', ''), n) for n in r.get('lead', []) + r.get('back', []))
+    if os.path.exists(d + '.json'):
+        if d not in cache: cache[d] = rj(d + '.json')
+        theirs = sum(stone(x.get('item', ''), x.get('species')) for x in cache[d][r['job']]['theirs'])
+    else:
+        sets = opp_model().get(r.get('arch'), {}).get('sets', {})
+        theirs = sum(stone(sets.get(sp, '').split('|')[0], sp) for sp in r.get('theirs', []))
+    return ours, theirs
+
 def has_moves(sheet, d, r, moves, cache={}):
     """does result r (in folder d) have a Pokemon with one of `moves` (ids) on either side of its four?"""
     idm = lambda m: m.lower().replace(' ', '').replace('-', '')
@@ -103,7 +118,7 @@ def has_moves(sheet, d, r, moves, cache={}):
     sets = opp_model().get(r.get('arch'), {}).get('sets', {})        # the card model's set for each of their four
     return any(any(m in sets.get(sp, '').split('|')[-1].split(' (')[0].split('/') for m in moves) for sp in r.get('theirs', []))
 
-def flagged(sheet, move=False, moves=()):
+def flagged(sheet, move=False, moves=(), stones=0):
     """Battle results with a game the simulator flagged unsupported (a mechanic it had not ported), per result folder; with --write
     they move to <folder>.flagged/, so the next run of that step plays just those jobs again (on a setup that ports the mechanic and
     shares the folders, e.g. SHEET_SETUP=v22-dp2-race-eg9-full)"""
@@ -118,6 +133,7 @@ def flagged(sheet, move=False, moves=()):
             except Exception: continue
             u = [m for g in rows for m in (g.get('unsupported') or [])]
             if not u and moves and has_moves(sheet, d, json.load(open(f)), moves): u = ['move ' + '/'.join(sorted(moves))]
+            if not u and stones and max(stone_holders(sheet, d, json.load(open(f)))) >= stones: u = [f'{stones}+ stone holders in a four']
             if u: bad.append(f); mech.update(set(u))
         if not bad: continue
         total += len(bad); print(f"{os.path.relpath(d, sheet.w())}: {len(bad)} results with a flagged game")
@@ -133,14 +149,14 @@ def main():
     ap.add_argument('team'); ap.add_argument('step'); ap.add_argument('sub', nargs='?')
     ap.add_argument('--games', type=int); ap.add_argument('--g0', type=int); ap.add_argument('--threads', '--workers', type=int, dest='threads')
     ap.add_argument('--only'); ap.add_argument('--setup'); ap.add_argument('--top', type=int, default=5); ap.add_argument('--samples', type=int, default=12)
-    ap.add_argument('--write', action='store_true'); ap.add_argument('--force', action='store_true'); ap.add_argument('--compare'); ap.add_argument('--out'); ap.add_argument('--moves')
+    ap.add_argument('--write', action='store_true'); ap.add_argument('--force', action='store_true'); ap.add_argument('--compare'); ap.add_argument('--out'); ap.add_argument('--moves'); ap.add_argument('--stones', type=int)
     a = ap.parse_args()
     if a.step == 'init': return init(a.team)
     sheet = Sheet(a.team); step = (a.step, a.sub); G = sheet.cfg.get('games', {})      # sheet.json "games": default game counts per step
     import procs; procs.own(sheet)                               # show as <prefix>-py in top
     if a.step == 'status': status(sheet)
     elif a.step == 'smoke': smoke(sheet)
-    elif a.step == 'flagged': flagged(sheet, a.write, tuple(x.strip() for x in (a.moves or '').split(',') if x.strip()))
+    elif a.step == 'flagged': flagged(sheet, a.write, tuple(x.strip() for x in (a.moves or '').split(',') if x.strip()), a.stones or 0)
     elif a.step == 'grid':
         import grid; grid.build(sheet, threads_arg(a.threads, a.force))
     elif a.step == 'charts':

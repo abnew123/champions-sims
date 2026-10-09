@@ -960,7 +960,7 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     decisions: in 400 logged games, of 52 turns with a foe at 20% HP or less on the field the old race left and the new one attacked
     in 2 (a 10% Gholdengo about to Nasty Plot: reasonable; a 10% Incineroar instead of a healthy Floette: the user's point exactly,
     the support's Fake Out / Parting Shot are not in the race, so the new race finishes it; pssim/results/finish_cases.json). Removed on
-    2026-10-09 (6:20 pm) at the user's word, with the support credits of the next entry; the default race is unchanged. The user's reading stands: the race overestimates the effect in some cases, but
+    2026-10-09 (6:08 pm) at the user's word, with the support credits of the next entry; the default race is unchanged. The user's reading stands: the race overestimates the effect in some cases, but
     neither "finish" nor "leave" is right in general, and a support's last non-damaging action is priced by neither race.
   - **Pricing a support's remaining non-damaging actions (`RACE_SUPPORT`, 2026-10-09, 6:05 pm; TR sheet relaying the user: "have the battle sim
     look into it", then "can the credits be fitted directly?").** The one thing neither race priced was a support's next Fake Out / Follow
@@ -1006,7 +1006,7 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
       (39% vs 40%) under every setting, p(human) 64.5% in all four; the credits do not change the planner's choices there. Baseline:
       p(human) 62-76%, match 64-79%; the planner sets Tailwind more than players (36% vs 26%) and redirects less (16% vs 28%), both
       unchanged by any credit; 1250+ players (1,627 decisions) the same picture. results/support_decisions.txt and _r1250.txt.
-    - Verdict: **none adopted, and scrapped** (the user, via TR sheet, 6:15 pm: "Ok yeah let's scrap the whole thing"). The flags
+    - Verdict: **none adopted, and scrapped** (the user, via TR sheet, 6:05 pm: "Ok yeah let's scrap the whole thing"). The flags
       (`RACE_SUPPORT=1|classes`, `RACE_SUPPORT_CREDITS`, `RACE_BENCH`) are removed from the source: plan.rs is back to its state before
       the bench race (commit ac43e91) and build_egvalue10.py to 25 / 28 features; the flags-off games are unchanged (400 of the pool
       starts replayed identically to the always-Mega baseline run after the revert). `pssim/support_decisions.py` stays as a general

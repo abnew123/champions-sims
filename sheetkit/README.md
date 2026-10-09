@@ -128,7 +128,9 @@ turn-one lines and game plans in order (log `work/all.log`), then `more.sh` the 
    line says which), and the game plan says how often each one does.
 2. Edit `sheet.json` (options below) and `text.json` (the page's prose; the starter has the parts that are true of every sheet).
 3. `grid`, then `smoke`. If either fails, the set uses something a simulator does not know (see the two lists below): fix that before
-   spending compute.
+   spending compute. Then ask Battle sim for a focused case batch with your six (`FOCUS_POOL=<its sets> FOCUS=<its species>` with
+   `native/gen_turn_cases.js`, checked against Showdown): a mechanic nobody ported and no test set carries is otherwise invisible
+   (Healing Wish did nothing until v22).
 4. `charts` and `speed` (cheap, and they tell you early what the six cannot hit), then `matrix`, `confirm`, `t1`. Write `notes.json` (one short mechanics note per archetype card, keyed by the archetype's model
    name: why a line looks odd, what blocks what) and `cards.json` (per Pokémon: `role`, `note`, `src`).
 5. `page`, look at `work/preview.html` in the browser at phone and desktop width, and publish `sheet.html` as an Artifact only when the user asks. Record the

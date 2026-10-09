@@ -107,7 +107,7 @@ turn-one lines and game plans in order (log `work/all.log`), then `more.sh` the 
   setup instead of `current`.
 - **Flagged games.** A game that hits a mechanic the simulator has not ported is flagged `unsupported` in its result.
   `kit.py <team> flagged` counts the results with one per folder; `--write` moves them to `<folder>.flagged/`. Then run the steps again
-  on a setup that ports them and shares the folders (for v20's results: `SHEET_SETUP=v22-dp2-race-eg9-full`, `all.sh` then `more.sh`
+  on a setup that ports them and shares the folders (for v20's results: `SHEET_SETUP=v23-dp2-race-eg9-full`, `all.sh` then `more.sh`
   until it has nothing to do). Only the moved jobs are played, and the picks follow. On a shared box only one thread runs `build.sh`.
 - **Competent opponents.** The sims assume them; do not tune a sheet around ladder misplays.
 - **Lean page.** Add a section or a paragraph only when the user asks for it.

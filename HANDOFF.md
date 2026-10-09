@@ -912,3 +912,16 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     Pecks, Wandering Spirit and Future Sight (one case each). Recipe for a new sheet: write its six as `focus_sets_<slug>.json`
     (species, item, ability, moves, nature), then from pssim/ `FOCUS_POOL=<that file> FOCUS=<its species ids> TEAM=4 node
     ../native/gen_turn_cases.js 1500 <out.jsonl> <seed>` and `champ turn ../engine_data_full.json <out.jsonl> lo,hi,mid,real`.
+  - **champ-battle-v24 = v23 + Mega choice (the user, 2026-10-10, through TR sheet: "always mega evolving feels wrong in general";
+    cut 10:20 am).** plan.rs `slot_options` offers every move of a stone holder with and without the Mega Evolution (joint options
+    deduplicated; one Mega per side per turn as before; DP2 / horizon reduced sets still take the Mega); `EG_MEGA_ALWAYS=1` restores the
+    old rule for both sides (then v24 = v23 exactly: the 20 check battles identical), `s0` / `s1` for one side. The value does not see an
+    unused stone (an un-evolved holder is valued as its base forme), so the planner holds the Mega only when the one-turn playout makes
+    the base form better now, or gives it to the partner because this turn's cells say so. Measured on the 2,400 pool-vs-pool starts
+    (sym2): strength flat, the choosing side +0.3 ± 0.6 / +0.1 ± 0.6; of 2,168 stone holders on the choosing side 35% delayed the Mega
+    (median 2 turns) and 24% never evolved, of which 446 were two-stone teams whose other holder took it, 54 left the field first and
+    only 24 (1%) stayed active to the end un-evolved; so no "Mega later" feature for now. Cost: about +20% per game while a stone is
+    unused (the Trick Room six's 20 check battles 1.5 -> 2.6 s per game with opposing stones in play). Effects: two-stone teams
+    (Frankfurt-239's Swampert / Metagross, Frankfurt-156's Garchomp / Golisopod) now pick which holder evolves per game; base Raichu can
+    keep Lightning Rod; the Trick Room six changes little (Blastoise delayed its Mega in 6 of 20 check games). TR sheet makes t1sim.js
+    consistent (no-Mega options in the turn-one step).

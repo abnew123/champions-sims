@@ -551,8 +551,14 @@ pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
             if let Some(a) = b.sides[s as usize].active[1 - i] { if !b.p((s, a)).fainted { out.push(PChoice::Move(k, if i == 0 { -2 } else { -1 }, mega)); } }
         } else { out.push(PChoice::Move(k, 0, mega)); }
     }
+    // Mega choice (the user, 2026-10-10, through TR sheet: "always mega evolving feels wrong in general"): a stone holder's moves are
+    // offered with and without the Mega Evolution, so it can keep its base ability or typing (Lightning Rod Raichu, Intimidate
+    // Staraptor) or leave the Mega to its partner. EG_MEGA_ALWAYS=1 restores the old rule (the first move always Mega Evolves).
+    if mega && !mega_always()[s as usize] { let n = out.len(); for j in 0..n { if let PChoice::Move(k, t, true) = out[j] { out.push(PChoice::Move(k, t, false)); } } }
     if out.is_empty() { vec![PChoice::Move(0, 0, false)] } else { out }
 }
+/// EG_MEGA_ALWAYS=1 (or both): both sides keep the old rule; =0 / =1 as a side number: only that side does (head-to-head tests)
+fn mega_always() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new(); *F.get_or_init(|| match std::env::var("EG_MEGA_ALWAYS").as_deref() { Ok("s0") => [true, false], Ok("s1") => [false, true], Ok(_) => [true, true], Err(_) => [false, false] }) }
 /// DP2 (champ-battle-v8): the small option set for the second turn of the two-turn Protect check: the Pokemon's Protect (if it has one)
 /// and its three strongest damaging options by base power x STAB x type effectiveness x accuracy (spread moves x 0.75 on each foe);
 /// Mega Evolution taken whenever it is available. No switches or status moves.
@@ -589,7 +595,7 @@ fn joint_options(b: &mut Battle, s: u8) -> Vec<[PChoice; 2]> {
     let mut out = vec![];
     for x in &a { for y in &c {
         let y2 = match (x, y) { (PChoice::Move(_, _, true), PChoice::Move(k, t, true)) => PChoice::Move(*k, *t, false), _ => *y };
-        out.push([*x, y2]);
+        let j = [*x, y2]; if !out.contains(&j) { out.push(j); }
     } }
     out
 }

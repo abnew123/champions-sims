@@ -182,6 +182,12 @@ their tabs by core group with the archetype name kept (root HANDOFF); not starte
    three on 2026-10-05); say "the opponent". The OCR timelines under `recordings/batch*/` stay git-ignored. A fourth
    thread, "Eval bar" (`evalbar/`, see `evalbar/HANDOFF.md`), will later build on this pipeline for the user's recorded games and
    will coordinate first; it may also want a card on the shared progress page (`status_server.py`).
+6. **Replay on v23 (open, needs a box).** Our Indeedee-F's Healing Wish was a silent no-op until champ-battle-v22 (the planner never
+   offered it); with it, fours with Indeedee won 46.6% instead of 43.1% in Battle sim's 320-game check, and the user wants it left
+   unrestricted (2026-10-09), so v23 is the version. Version 22's picks never bring Indeedee, which may change. Replay:
+   `kit.py trick-room-six flagged --moves healingwish,memento --write` (5,784 result files, most of them fours with Indeedee; also the
+   mechanics v20 flagged), then `SHEET_SETUP=v23-dp2-race-eg9-full` all.sh and more.sh until nothing to do. Move sim.json's `current` to
+   v23 once the Frankfurt sheets have replayed (they run on v20 until then).
 
 ## Running full battles (the sheet thread's main tool)
 

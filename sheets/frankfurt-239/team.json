@@ -1,0 +1,8 @@
+{
+ "Pelipper": {"species": "Pelipper", "item": "Focus Sash", "ability": "Drizzle", "nature": "Timid", "evs": [2, 0, 0, 32, 0, 32], "moves": ["Weather Ball", "Hurricane", "Tailwind", "Wide Guard"]},
+ "Swampert": {"species": "Swampert", "item": "Swampertite", "ability": "Damp", "nature": "Adamant", "evs": [2, 32, 0, 0, 0, 32], "moves": ["Wave Crash", "Flip Turn", "Earthquake", "Protect"]},
+ "Archaludon": {"species": "Archaludon", "item": "Leftovers", "ability": "Stamina", "nature": "Modest", "evs": [32, 0, 1, 5, 25, 3], "moves": ["Electro Shot", "Dragon Pulse", "Flash Cannon", "Protect"]},
+ "Indeedee-F": {"species": "Indeedee-F", "item": "Rocky Helmet", "ability": "Psychic Surge", "nature": "Bold", "evs": [32, 0, 32, 0, 2, 0], "moves": ["Psychic", "Follow Me", "Helping Hand", "Protect"]},
+ "Metagross": {"species": "Metagross", "item": "Metagrossite", "ability": "Clear Body", "nature": "Jolly", "evs": [2, 32, 0, 0, 0, 32], "moves": ["Steel Roller", "Psychic Fangs", "Stomping Tantrum", "Protect"]},
+ "Grimmsnarl": {"species": "Grimmsnarl", "item": "Light Clay", "ability": "Prankster", "nature": "Careful", "evs": [32, 0, 19, 0, 15, 0], "moves": ["Spirit Break", "Parting Shot", "Reflect", "Light Screen"]}
+}

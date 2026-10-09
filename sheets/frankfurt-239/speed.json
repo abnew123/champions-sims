@@ -1,0 +1,264 @@
+{
+ "made": "kit speed step from smogon_mc_2026-09_moveset.txt",
+ "order": "fastest-first",
+ "rows": [
+  [
+   "200+",
+   "",
+   "Everything faster, including Mega Raichu Y, Mega Garchomp Z, Mega Gengar",
+   ""
+  ],
+  [
+   190,
+   "",
+   "Mega Raichu Y (Timid, 23 Speed points)",
+   ""
+  ],
+  [
+   189,
+   "",
+   "Sneasler (Jolly), Mega Salamence (Timid), Mega Froslass (Timid, max Speed)",
+   ""
+  ],
+  [
+   184,
+   "",
+   "Whimsicott (Timid)",
+   ""
+  ],
+  [
+   183,
+   "",
+   "Mega Froslass (Timid, 27 Speed points)",
+   ""
+  ],
+  [
+   178,
+   "Mega Metagross",
+   "Mega Staraptor",
+   "Tie"
+  ],
+  [
+   172,
+   "",
+   "Sneasler (Adamant), Mega Salamence (Modest)",
+   ""
+  ],
+  [
+   170,
+   "",
+   "Mega Gengar (Modest)",
+   ""
+  ],
+  [
+   169,
+   "",
+   "Mega Floette (Timid), Garchomp (Jolly)",
+   ""
+  ],
+  [
+   168,
+   "",
+   "Whimsicott (Modest)",
+   ""
+  ],
+  [
+   167,
+   "",
+   "Mega Charizard Y (Timid), Mega Gardevoir (Timid)",
+   ""
+  ],
+  [
+   161,
+   "",
+   "Indeedee M (Timid)",
+   ""
+  ],
+  [
+   157,
+   "",
+   "Volcarona (Timid)",
+   ""
+  ],
+  [
+   156,
+   "",
+   "Arcanine-H (Jolly)",
+   ""
+  ],
+  [
+   154,
+   "",
+   "Mega Floette (Modest), Garchomp (Adamant), Excadrill (Jolly)",
+   ""
+  ],
+  [
+   152,
+   "",
+   "Mega Gardevoir (Modest)",
+   ""
+  ],
+  [
+   149,
+   "",
+   "Gholdengo (Timid)",
+   ""
+  ],
+  [
+   147,
+   "",
+   "Indeedee M (Modest)",
+   ""
+  ],
+  [
+   144,
+   "",
+   "Mega Charizard Y (Modest), Volcarona (Modest)",
+   ""
+  ],
+  [
+   143,
+   "",
+   "Basculegion (Jolly)",
+   ""
+  ],
+  [
+   142,
+   "",
+   "Arcanine-H (Adamant)",
+   ""
+  ],
+  [
+   140,
+   "",
+   "Excadrill (Adamant)",
+   ""
+  ],
+  [
+   136,
+   "",
+   "Gholdengo (Modest)",
+   ""
+  ],
+  [
+   135,
+   "",
+   "Mega Tyranitar (Jolly)",
+   ""
+  ],
+  [
+   130,
+   "",
+   "Basculegion (Adamant)",
+   ""
+  ],
+  [
+   128,
+   "Pelipper",
+   "Pelipper (Timid)",
+   "Tie"
+  ],
+  [
+   122,
+   "Mega Swampert",
+   "",
+   ""
+  ],
+  [
+   117,
+   "",
+   "Pelipper (Modest)",
+   ""
+  ],
+  [
+   114,
+   "",
+   "Milotic (Modest)",
+   ""
+  ],
+  [
+   108,
+   "Archaludon",
+   "Archaludon (Modest)",
+   "Tie"
+  ],
+  [
+   107,
+   "",
+   "Rillaboom (Adamant, 2 Speed points)",
+   ""
+  ],
+  [
+   105,
+   "Indeedee",
+   "Rillaboom (Adamant, no Speed points), Indeedee F (Bold, Calm), Archaludon (Bold)",
+   "Tie"
+  ],
+  [
+   102,
+   "",
+   "Kingambit (Adamant, max Speed)",
+   ""
+  ],
+  [
+   101,
+   "",
+   "Milotic (Calm, Bold)",
+   ""
+  ],
+  [
+   95,
+   "",
+   "Sylveon (Modest, 15 Speed points)",
+   ""
+  ],
+  [
+   94,
+   "",
+   "Indeedee F (Relaxed, Sassy)",
+   ""
+  ],
+  [
+   91,
+   "",
+   "Sinistcha (Bold, 1 Speed point), Mega Tyranitar (Adamant)",
+   ""
+  ],
+  [
+   90,
+   "",
+   "Sinistcha (Bold, no Speed points)",
+   ""
+  ],
+  [
+   81,
+   "",
+   "Sylveon (Modest, 1 Speed point)",
+   ""
+  ],
+  [
+   80,
+   "Grimmsnarl",
+   "Incineroar (Careful, Impish, Adamant), Farigiraf (Bold, Calm)",
+   "Tie"
+  ],
+  [
+   72,
+   "",
+   "Incineroar (Sassy), Farigiraf (Sassy)",
+   ""
+  ],
+  [
+   70,
+   "",
+   "Kingambit (Adamant, no Speed points)",
+   ""
+  ],
+  [
+   "60 or less",
+   "",
+   "Everything slower, including Mega Golisopod",
+   ""
+  ]
+ ]
+}

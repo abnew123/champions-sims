@@ -126,7 +126,24 @@
    "env_paths": [
     "CALC_DATA"
    ],
-   "status": "Battle sim, 2026-10-09: v21 plus mechanics the card opponents hit (Purifying Salt, Mummy, Wish / Healing Wish slot conditions and more; see HANDOFF.md). With v20's flags it plays v20's games except where those mechanics come up (there v20 flagged the game unsupported), so it shares v20's result folders: `kit.py <team> flagged --move` takes out the results with a flagged game and a run with SHEET_SETUP=v22-dp2-race-eg9-full replays just those. Linux source: native/champ/src_battle_v22.tar.gz.",
+   "status": "Battle sim, 2026-10-09: v21 plus mechanics the card opponents hit (Purifying Salt, Mummy, Wish / Healing Wish slot conditions and more; see HANDOFF.md). With v20's flags it plays v20's games except where those mechanics come up (there v20 flagged the game unsupported), so it shares v20's result folders: `kit.py <team> flagged --move` takes out the results with a flagged game and a run with SHEET_SETUP=v22-dp2-race-eg9-full replays just those. Linux source: native/champ/src_battle_v22.tar.gz. Checked by TR sheet on 2026-10-09: about 2.5% of the games v20 did not flag still come out differently (6 of 240; sheets/trick-room-six/work/v23diff/cases.json), being looked at by Battle sim; replay only after that.",
+   "games": "v13-dp2-race-eg9"
+  },
+  "v23-dp2-race-eg9-full": {
+   "binary": "native/champ/bin/champ-battle-v23",
+   "value": "pssim/egvalue9.json",
+   "engine_data": "native/engine_data_full.json",
+   "env": {
+    "BATTLE_ANTICIPATE": "1",
+    "DP2": "1",
+    "RACE": "1",
+    "RACE_TIES": "avg",
+    "CALC_DATA": "native/champions_data.json"
+   },
+   "env_paths": [
+    "CALC_DATA"
+   ],
+   "status": "Battle sim, 2026-10-09: v22 plus Ripen, Swarm, Electromorphosis (Charge), Gooey, Shell Side Arm, Baton Pass, Encore's override, Ally Switch, Gravity, Champions' Curse, Entrainment, Temper Flare, Vital Spirit / Insomnia, Healer, Curious Medicine, Seed Sower (see HANDOFF.md; still flagged: Unseen Fist, Cute Charm). With v20's flags it plays v20's games except where those mechanics come up, so it shares v20's result folders: `kit.py <team> flagged --write`, then a run with SHEET_SETUP=v23-dp2-race-eg9-full replays just those. Linux source: native/champ/src_battle_v23.tar.gz. Checked by TR sheet on 2026-10-09: about 2.5% of the games v20 did not flag still come out differently (6 of 240; sheets/trick-room-six/work/v23diff/cases.json), being looked at by Battle sim; replay only after that.",
    "games": "v13-dp2-race-eg9"
   }
  }

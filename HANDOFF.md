@@ -903,3 +903,12 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     v20 43.1%). So v23 is the version for the kit; no v24. TR sheet replays the results whose fours carry Healing Wish / Memento
     (`kit.py <team> flagged --moves healingwish,memento --write`), on both sides: the Camerupt + Farigiraf card's Indeedee-F and
     Sinistcha carry them.
+  - **Focused case batches for the other sheets' sixes (2026-10-09, 7:00 pm, asked by TR sheet's rule):** Frankfurt-239 (Pelipper,
+    M-Swampert, Archaludon, Indeedee-F, M-Metagross, Grimmsnarl): 1,500 + 800 cases (`native/turn_cases_f239{,b}.jsonl` from
+    `focus_sets_frankfurt-239.json`), **100% exact**; Electro Shot 231 uses, Hurricane 138, Weather Ball 149, Steel Roller 115, Stomping
+    Tantrum 91, Wave Crash 234, Parting Shot 110, Wide Guard 50, both Megas hundreds of times. Frankfurt-156 (Basculegion, Pelipper,
+    Garchomp Z, Archaludon, Farigiraf, Golisopod): 1,500 + 800 (`turn_cases_f156{,b}.jsonl`), **100% exact**; Last Respects 220, Aqua
+    Jet 240, Emergency Exit 31, Scarf Flip Turn 53, Twin Beam 22, both Megas hundreds. The only unsupported hits were opponents' Big
+    Pecks, Wandering Spirit and Future Sight (one case each). Recipe for a new sheet: write its six as `focus_sets_<slug>.json`
+    (species, item, ability, moves, nature), then from pssim/ `FOCUS_POOL=<that file> FOCUS=<its species ids> TEAM=4 node
+    ../native/gen_turn_cases.js 1500 <out.jsonl> <seed>` and `champ turn ../engine_data_full.json <out.jsonl> lo,hi,mid,real`.

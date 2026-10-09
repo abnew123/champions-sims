@@ -72,7 +72,7 @@ fn horizon_sides() -> [bool; 2] {
 /// switch_slots / slot_decisions: active Pokemon that switched voluntarily / active Pokemon that could have (bench available, not trapped)
 struct Out { v: f64, unsupported: Vec<String>, feats: Vec<Vec<f64>>, turns: usize, tr_turns: usize, tr_by: [bool; 3], switches: [usize; 2], slot_decisions: [usize; 2], switch_slots: [usize; 2], log: Vec<String>, states: Vec<Value>, dp2: [usize; 4], dplog: Vec<Value>, h2: usize }
 
-fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool) -> Out {
+fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_job: i64, st_g: u64) -> Out {
     let mut b = start.clone(); let mut turn = 1;
     let (mut tr_turns, mut tr_by, mut switches, mut log) = (0, [false; 3], [0usize; 2], vec![]);
     let (mut slot_decisions, mut switch_slots) = ([0usize; 2], [0usize; 2]);
@@ -287,6 +287,55 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool) -> Ou
                 if xtot > 0.0 && vj / xtot <= vi / xtot + tie { y[j] += y[i]; y[i] = 0.0; } } } }
         }
         let i = sample(&x, &mut rng); let j = sample(&y, &mut rng);
+        // BATTLE_MEGA_AUDIT=<jsonl> (2026-10-10, for TR sheet's audit of un-evolved attacking turns): whenever a side's sampled action
+        // uses a move without the Mega although the Mega twin was on offer, record the turn with both outcomes against the other
+        // side's sampled action (8 seeds: damage range and KOs per target, who moved first), the ability / type the Mega would have had,
+        // and the two options' values against the other side's mix
+        if let Ok(path) = std::env::var("BATTLE_MEGA_AUDIT") {
+            for s in 0..2u8 {
+                let (own, their, mine_i, their_j) = if s == 0 { (&msw, &tsw, i, j) } else { (&tsw, &msw, j, i) };
+                let ch = own[mine_i];
+                for k in 0..2usize {
+                    let PChoice::Move(sl, t, false) = ch[k] else { continue };
+                    let mut twin = ch; twin[k] = PChoice::Move(sl, t, true);
+                    let Some(ti) = own.iter().position(|o| *o == twin) else { continue };
+                    let Some(pi) = b.sides[s as usize].active[k] else { continue }; let m = (s, pi);
+                    if b.p(m).can_mega_evo.is_none() { continue; }
+                    let mid = b.p(m).move_slots[sl].id; let cat = b.dex.mv(mid).tmpl.category;
+                    if cat == "Status" { continue; }
+                    let mega_sp = b.p(m).can_mega_evo.unwrap(); let msd = b.dex.species.get(mega_sp);
+                    let mega_ab = msd.and_then(|x| x.abilities.iter().find(|(kk, _)| *kk == "0").map(|x| x.1)).unwrap_or("");
+                    let mega_types: Vec<&str> = msd.map(|x| x.types.clone()).unwrap_or_default();
+                    // values against the other side's mix
+                    let (mix, tot): (Vec<f64>, f64) = if s == 0 { (y.clone(), y.iter().sum()) } else { (x.clone(), x.iter().sum()) };
+                    let mut val = |row: usize| -> f64 { let mut v = 0.0; for (c, w) in mix.iter().enumerate() { if *w > 1e-4 { v += w * if s == 0 { cell2(row, c, &b).0 } else { 1.0 - cell2(c, row, &b).1 }; } } v / tot.max(1e-9) };
+                    let (v_no, v_mega) = (val(mine_i), val(ti));
+                    // outcomes against the sampled reply, 8 seeds, both ways
+                    let mut actives: Vec<MonRef> = vec![]; for sd in 0..2u8 { for kk in 0..2 { if let Some(q) = b.sides[sd as usize].active[kk] { actives.push((sd, q)); } } }
+                    let names: Vec<String> = actives.iter().map(|q| b.dex.species.get(b.p(*q).species).map(|x| x.name.to_string()).unwrap_or_default()).collect();
+                    let hp0: Vec<i64> = actives.iter().map(|q| b.p(*q).hp).collect();
+                    let run = |choice: [PChoice; 2]| -> Value {
+                        let mut dmg_min = vec![i64::MAX; actives.len()]; let mut dmg_max = vec![0i64; actives.len()]; let mut ko = vec![0; actives.len()]; let mut first = std::collections::HashMap::new();
+                        let mut f0: Vec<f64> = vec![]; let mut v0 = 0.0; let mut end_species: Vec<String> = vec![];
+                        for sd in 0..8u64 {
+                            let mut z = b.clone(); z.prng = Prng::gen5(seed4(key ^ ((turn as u64) << 40) ^ (0xAAu64 << 52) ^ (sd << 44))); z.logging = true;
+                            let jc = if s == 0 { [choice, their[their_j]] } else { [their[their_j], choice] };
+                            z.run_turn(jc);
+                            if sd == 0 { resolve_switches(&mut z, cfg, None); f0 = feats(&mut z, cfg); v0 = value(&mut z, cfg); end_species = actives.iter().map(|q| format!("{} {}/{} spe {}", z.p(*q).species, z.p(*q).hp, z.p(*q).maxhp, z.p(*q).stored[5])).collect(); }
+                            for (qi, q) in actives.iter().enumerate() { let d = (hp0[qi] - z.p(*q).hp).max(0); dmg_min[qi] = dmg_min[qi].min(d); dmg_max[qi] = dmg_max[qi].max(d); if z.p(*q).hp == 0 { ko[qi] += 1; } }
+                            if let Some(l) = z.log.iter().find(|l| l.starts_with("|move|")) { *first.entry(l.split('|').nth(2).unwrap_or("").to_string()).or_insert(0) += 1; }
+                        }
+                        json!({"dmg": actives.iter().enumerate().map(|(qi, _)| json!([names[qi].clone(), dmg_min[qi], dmg_max[qi], ko[qi]])).collect::<Vec<_>>(), "first_mover": first, "feats_seed0": f0, "value_seed0": v0, "end_seed0": end_species})
+                    };
+                    let rec = json!({"job": st_job, "g": st_g, "turn": turn, "side": s, "species": names[(s as usize) * 2 + k], "move": b.dex.mv(mid).tmpl.name, "label": label(&b, s, &ch),
+                        "reply": label(&b, 1 - s, &their[their_j]), "tr": find(&b.field.pseudo, "trickroom").and_then(|x| x.duration).unwrap_or(0),
+                        "ability_now": b.p(m).ability, "mega_ability": mega_ab, "types_now": b.p(m).types.clone(), "mega_types": mega_types,
+                        "v_no_mega": v_no, "v_mega": v_mega, "gap": v_mega - v_no, "weight_no_mega": if s == 0 { x[mine_i] } else { y[mine_i] }, "weight_mega": if s == 0 { x[ti] } else { y[ti] },
+                        "outcome_no_mega": run(ch), "outcome_mega": run(twin)});
+                    if let Ok(mut f) = std::fs::OpenOptions::new().create(true).append(true).open(&path) { use std::io::Write; let _ = writeln!(f, "{}", rec); }
+                }
+            }
+        }
         if !no_sw(&msw[i]) { switches[0] += 1; } if !no_sw(&tsw[j]) { switches[1] += 1; }
         for (s, ch) in [(0u8, &msw[i]), (1u8, &tsw[j])] {
             let can = !crate::spot::bench(&b, s).is_empty();
@@ -341,7 +390,7 @@ pub fn main(args: &[String]) {
             None => ((job as u64) << 24) ^ (g << 4) ^ 0xBA77,
         };
         let tg = std::time::Instant::now();
-        let r = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| play(&b, cfg, st["rng"].as_f64().unwrap(), key, keep_log)));
+        let r = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| play(&b, cfg, st["rng"].as_f64().unwrap(), key, keep_log, job, g)));
         let row = match r {
             Ok(o) => json!({"g": g, "v": o.v, "turns": o.turns, "trTurns": o.tr_turns, "trBy": o.tr_by, "switches": o.switches, "slotDecisions": o.slot_decisions, "switchSlots": o.switch_slots, "dp2": o.dp2, "h2": o.h2, "dp2log": if o.dplog.is_empty() { Value::Null } else { json!(o.dplog) }, "unsupported": o.unsupported, "F": if o.feats.is_empty() { Value::Null } else { json!(o.feats) }, "ms": tg.elapsed().as_millis() as u64,
                             "log": if keep_log { json!(o.log) } else { Value::Null }, "states": if o.states.is_empty() { Value::Null } else { json!(o.states) }}),

@@ -951,3 +951,14 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     both formes, the twin options' values; pssim/results/mega_audit.jsonl, 60 records from 800 starts) shows every one with the no-Mega
     option valued 0.5-45 points higher: base-form reasons such as Golisopod keeping Bug / Water against Flamethrower (14-23 damage
     base, 111-135 as the Steel Mega) and Garchomp keeping Rough Skin + Ground; TR sheet sorts them for the user.
+  - **Bench-aware race (`RACE_BENCH=1|s0|s1`, in the source after v25, 2026-10-10, 3:30 pm): built, measured, not adopted.** The race's
+    bench blind spot (a foe about to die on the field read better than that foe dead and replaced; the Greninja case in TR sheet's Mega
+    audit) is real, so plan.rs `race_feats` gained a variant where each side's living bench Pokemon (healthiest first) are units that
+    enter when one of their side's units falls, and `value2` can give each side its own variant. Head-to-head on the 2,400 pool starts
+    (sym2): the bench-aware side **-0.9 ± 1.2 as side 0, +0.7 ± 1.2 as side 1** (flat; a third of the games change); the Mega audit with it
+    on: 71 un-evolved attacking turns instead of 92, "the Mega KOs more yet base preferred" 8 cases. And it hardly changes finishing
+    decisions: in 400 logged games, of 52 turns with a foe at 20% HP or less on the field the old race left and the new one attacked
+    in 2 (a 10% Gholdengo about to Nasty Plot: reasonable; a 10% Incineroar instead of a healthy Floette: the user's point exactly,
+    the support's Fake Out / Parting Shot are not in the race, so the new race finishes it; pssim/results/finish_cases.json). The flag
+    stays available; the default race is unchanged. The user's reading stands: the race overestimates the effect in some cases, but
+    neither "finish" nor "leave" is right in general, and a support's last non-damaging action is priced by neither race.

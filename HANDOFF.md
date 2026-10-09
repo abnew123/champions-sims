@@ -928,3 +928,14 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     (Frankfurt-239's Swampert / Metagross, Frankfurt-156's Garchomp / Golisopod) now pick which holder evolves per game; base Raichu can
     keep Lightning Rod; the Trick Room six changes little (Blastoise delayed its Mega in 6 of 20 check games). TR sheet makes t1sim.js
     consistent (no-Mega options in the turn-one step).
+  - **champ-battle-v25 = v24 + the Mega tie-break and the grid-name fix (2026-10-10, 1:10 pm; TR sheet's read of the delays).** The user
+    expected at most ~10% of holders to delay; the honest count (switch turns are not delays, a Pokemon cannot switch and evolve) was
+    12.8% of holders using a move without the Mega first, and most of those turns were near-ties (Protect, Fake Out, field moves: the
+    turn's result does not depend on the Mega's stats, the race after it differs by thousandths, and the fictitious-play mix splits).
+    battle4 now moves a no-Mega option's weight to its Mega twin when the twin is worth at least as much against the other side's mix
+    minus `EG_MEGA_TIE` (default 0.002; 0 turns it off): on 800 starts with side 0 choosing, delays 13.8% -> 8.3% of holders, results
+    unchanged in strength (+0.8 over 800 games vs always-Mega), and the remaining un-evolved attack turns are mostly real base-form
+    reasons (Golisopod keeping Emergency Exit 15 of ~40, Garchomp keeping Rough Skin against contact, Charizard). plan.rs `gname` maps an
+    un-evolved holder to the grid's base entry when the grid has one (it read as the M- entry before, right under the always-Mega rule;
+    `EG_MEGA_ALWAYS` for that side keeps the old mapping). With `EG_MEGA_ALWAYS=1 EG_MEGA_TIE=0` the 20 check battles are identical to
+    v20. `native/champ/bin/champ-battle-v25` (two-line sha file).

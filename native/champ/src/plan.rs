@@ -135,7 +135,9 @@ fn gname(b: &Battle, cfg: &Cfg, m: MonRef) -> Option<String> {
         let is_mega = b.dex.species.get(b.p(m).species).map(|s| s.is_mega).unwrap_or(false);
         let iname = b.dex.items.get(b.p(m).item).map(|e| e.name).unwrap_or("").to_lowercase();
         let stone = iname.ends_with("ite") || iname.ends_with("ite x") || iname.ends_with("ite y") || iname.ends_with("ite z");
-        if is_mega || stone || !has(base) { return Some(mg.clone()); }
+        // an un-evolved holder reads as its base entry when the grid has one, now that the planner may keep it un-evolved; with
+        // EG_MEGA_ALWAYS for its side it still reads as the Mega it will become on its first move (v23 behaviour)
+        if is_mega || (stone && mega_always()[m.0 as usize]) || !has(base) { return Some(mg.clone()); }
     }
     if has(base) { Some(base.to_string()) } else { None }
 }

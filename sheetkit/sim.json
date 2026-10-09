@@ -160,8 +160,26 @@
    "env_paths": [
     "CALC_DATA"
    ],
-   "status": "Battle sim, 2026-10-09: v23 plus the Mega choice (every move of a stone holder is offered with and without the Mega; EG_MEGA_ALWAYS=1 gives v23's rule and games). Strength flat on 2,400 pool games; stone holders delay the Mega in about a third of games and two-stone teams pick which one. Its games differ from v23's wherever a stone is unused, so it has its own folders (the kit refuses to mix). Use it for new sheets and full reruns (with sheet.json t1.mega_choice: true); the Trick Room Six stays on v23 (the user: the choice hardly matters for it). Linux source: native/champ/src_battle_v24.tar.gz.",
+   "status": "Battle sim, 2026-10-09: v23 plus the Mega choice (every move of a stone holder is offered with and without the Mega; EG_MEGA_ALWAYS=1 gives v23's rule and games). Strength flat on 2,400 pool games; stone holders delay the Mega in about a third of games and two-stone teams pick which one. Its games differ from v23's wherever a stone is unused, so it has its own folders (the kit refuses to mix). Use it for new sheets and full reruns (with sheet.json t1.mega_choice: true); the Trick Room Six stays on v23 (the user: the choice hardly matters for it). Linux source: native/champ/src_battle_v24.tar.gz. Superseded by v25 (grid names by current forme) for new runs.",
    "games": "v24-dp2-race-eg9"
+  },
+  "v25-dp2-race-eg9-full": {
+   "binary": "native/champ/bin/champ-battle-v25",
+   "value": "pssim/egvalue9.json",
+   "engine_data": "native/engine_data_full.json",
+   "env": {
+    "BATTLE_ANTICIPATE": "1",
+    "DP2": "1",
+    "RACE": "1",
+    "RACE_TIES": "avg",
+    "CALC_DATA": "native/champions_data.json",
+    "EG_MEGA_TIE": "0"
+   },
+   "env_paths": [
+    "CALC_DATA"
+   ],
+   "status": "Battle sim, 2026-10-09: v24 plus matchup-grid names by the current forme (an un-evolved stone holder no longer counts as its Mega in the grid features) and an optional tie-break toward Mega Evolving, off here (EG_MEGA_TIE=0): players hold the Mega on 21% of holders in the replays (15.6% delay, mostly on Protect turns), the planner 12.8% without the tie-break and 8.3% with it. Own folders (the grid fix changes the kit's games). Use it instead of v24 for new sheets and full reruns, with t1.mega_choice: true. Linux source: native/champ/src_battle_v25.tar.gz.",
+   "games": "v25-dp2-race-eg9"
   }
  }
 }

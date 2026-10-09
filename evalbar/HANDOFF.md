@@ -243,11 +243,11 @@ Each target's evidence and VOD time is kept in meta['aims'] for spot checks. The
 
 ## Engine version
 
-The live and broadcast modes use champ-battle-v22 (Battle sim, 2026-10-09) with engine_data_full: on 16 regional positions it gives v17's
-values and mixes exactly, and it handles mechanics v17 skipped (Static, Snow Cloak, Own Tempo, slot conditions such as Wish and Healing
-Wish, more berries, Rest, Salt Cure, ...). Still unsupported and seen in the bar's positions: Baton Pass (7% of day-1 regional positions),
-Encore's override, Ally Switch, Gravity, Curse, Unseen Fist, Entrainment; reported to Battle sim. reads.py and uncertain.py stay on v18 so
-their committed results reproduce.
+The live and broadcast modes use champ-battle-v23 (Battle sim, 2026-10-09) with engine_data_full: on 16 regional positions it gives v17's
+(and v22's) values and mixes exactly, and it handles mechanics v17 skipped: Static, Snow Cloak, Own Tempo, slot conditions (Wish, Healing
+Wish), more berries, Rest, Salt Cure, and in v23 Baton Pass (the day-1 Espathra positions now evaluate with nothing unsupported), Encore's
+override, Ally Switch, Gravity, Curse, Entrainment and others. Still unsupported: Unseen Fist (a Protect bypass) and Cute Charm (the engine
+has no genders). reads.py and uncertain.py stay on v18 so their committed results reproduce.
 
 ## Process names (the user asked, 2026-10-06)
 

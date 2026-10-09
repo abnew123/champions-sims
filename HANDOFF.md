@@ -847,3 +847,20 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     old step lost and adds some for Sand and Tailwind. A per-archetype climb (Rain, Rain + Sun, Balance, Sand, Tailwind; 32 regional
     starts; swaps keep the start's archetype; opponents half regional / half ladder; plan-aware brings; hold batch; archverify.py at the
     end) is running on the Spain box at the user's request (cloud/run_env_arch.sh).
+  - **champ-battle-v22 = v21 + ported mechanics the card opponents hit (2026-10-09, 1:30 pm; flags off = v20's games on the 20 check battles,
+    `champ turn` exact on all 6,900 base cases).** Frankfurt-156 sheet found 1.1% of its 42,000 card games flagged unsupported (Purifying
+    Salt in every game of the Garganacl + Hawlucha card, Mummy in 217 games of a Cofagrigus back row, slotCondition). Ported, each checked
+    Showdown-exact on new focused cases: abilities Purifying Salt, Mummy, Static, Snow Cloak, Own Tempo, Quick Draw, Surge Surfer, Dry
+    Skin, Zero to Hero (Palafin-Hero on switch-out); items Air Balloon (the pop), Quick Claw, Chesto and Rawst Berry, the five missing
+    resist berries (Rindo, Wacan, Yache, Shuca, Payapa), Metal Coat / Hard Stone / Poison Barb / Silver Powder, Light Ball; moves Metal Burst
+    (last foe that hit the user this turn), Mortal Spin, Hex, Rest, Salt Cure's residual (Champions halves it: 1/8 Water / Steel, 1/16
+    otherwise), and slot conditions (sim.rs `add_slot_condition` / `remove_slot_condition`, handlers run for whoever is in the slot): Wish
+    and Healing Wish. Two engine bugs found on the way: (1) the ifHit self-destruct compared against "ifHit" while the data holds "ifhit",
+    so Healing Wish and Memento users never fainted (both were kept out of the planner's options for that; now in); (2) an old stub
+    `h!(..., "zerotohero", "onSwitchOut", Undef)` later in register() shadowed the port (check for stubs before adding a handler: `grep
+    '"<id>", "on' handlers/*.rs`). Test cases: `gen_turn_cases.js` gained `FOCUS_POOL=<sets.json>` (extra sets) and `FOCUS=<ids>` (every
+    team gets one matching set); `native/focus_sets_f{1,2}.json` are the ladder sets from opp_pool.json with the mechanics above and
+    `native/turn_cases_f{1,2}.jsonl` (1,200 + 800 four-member cases, git-ignored like the other case files; `champ turn
+    ../engine_data_full.json ../turn_cases_f1.jsonl lo,hi,mid,real`) are 100% exact with 32 / 43 cases still unsupported: Shell Side Arm
+    (14), Sleep Talk (22), Smack Down (7), Counter, Beat Up, Ally Switch, Baton Pass, Spikes, Alluring Voice's secondary, Wandering Spirit.
+    `native/champ/bin/champ-battle-v22` (sha 3ba3ee45..., source `src_battle_v22.tar.gz`); the full-data file is unchanged.

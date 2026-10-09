@@ -47,14 +47,21 @@ fn seed(b: &mut Battle, a: &mut HArgs, terrain: &str, start: bool) -> RV {
     if (!start || !b.ignoring_item(m)) && b.is_terrain(terrain) { b.use_item(m, None, None); }
     RV::Undef
 }
+fn air_balloon_pop(b: &mut Battle, m: MonRef) {
+    let n = b.mon_name(m); b.add(&["-enditem", &n, "airballoon"]);
+    let p = b.pm(m); p.item = ""; p.item_state = EState::default();
+    b.run_event("AfterUseItem", Tgt::Mon(m), None, None, RV::S(id("airballoon")), false, false);
+}
 fn white_herb(b: &mut Battle, m: MonRef) { if b.p(m).boosts.iter().any(|x| *x < 0) { b.use_item(m, None, None); } }
 
 pub fn register(r: &mut Reg) {
     for (i, _) in [("miracleseed", 0), ("mysticwater", 0), ("blackglasses", 0), ("charcoal", 0), ("fairyfeather", 0), ("sharpbeak", 0), ("twistedspoon", 0),
-                   ("nevermeltice", 0), ("magnet", 0), ("blackbelt", 0), ("dragonfang", 0), ("spelltag", 0), ("silkscarf", 0), ("softsand", 0)] {
+                   ("nevermeltice", 0), ("magnet", 0), ("blackbelt", 0), ("dragonfang", 0), ("spelltag", 0), ("silkscarf", 0), ("softsand", 0),
+                   ("hardstone", 0), ("metalcoat", 0), ("poisonbarb", 0), ("silverpowder", 0)] {
         r.insert((Kind::Item, id(i), id("onBasePower")), type_boost as HFn);
     }
-    for i in ["chopleberry", "colburberry", "occaberry", "passhoberry", "cobaberry", "kasibberry", "roseliberry", "habanberry", "kebiaberry", "tangaberry", "babiriberry", "chartiberry"] {
+    for i in ["chopleberry", "colburberry", "occaberry", "passhoberry", "cobaberry", "kasibberry", "roseliberry", "habanberry", "kebiaberry", "tangaberry", "babiriberry", "chartiberry",
+              "rindoberry", "wacanberry", "yacheberry", "shucaberry", "payapaberry"] {
         r.insert((Kind::Item, id(i), id("onSourceModifyDamage")), resist_berry as HFn);
         r.insert((Kind::Item, id(i), id("onEat")), noop as HFn);
     }
@@ -78,6 +85,19 @@ pub fn register(r: &mut Reg) {
         let t = a.t(); let p = b.p(t);
         if p.hp == p.maxhp && a.n() >= p.hp as f64 && b.eff_is(a.src_eff, EType::Move) { if b.use_item(t, None, None) { return RV::N((b.p(t).hp - 1) as f64); } }
         RV::Undef });
+    // 2026-10-09: Air Balloon (the Ground immunity is in is_grounded; here the pop), Quick Claw, Chesto Berry
+    h!(r, Item, "airballoon", "onStart", |b, a| { let m = a.t(); if !b.ignoring_item(m) && find(&b.field.pseudo, "gravity").is_none() { let n = b.mon_name(m); b.add(&["-item", &n, "airballoon"]); } RV::Undef });
+    h!(r, Item, "airballoon", "onDamagingHit", |b, a| { let m = a.t(); air_balloon_pop(b, m); RV::Undef });
+    h!(r, Item, "airballoon", "onAfterSubDamage", |b, a| { let m = a.t(); if a.src_eff.map(|e| e.kind == Kind::Move).unwrap_or(false) { air_balloon_pop(b, m); } RV::Undef });
+    h!(r, Item, "quickclaw", "onFractionalPriority", |b, a| { let m = a.t();
+        if b.am(a.am()).category == "Status" && b.has_ability(m, "myceliummight") { return RV::Undef; }
+        if a.relay.num() <= 0.0 && b.rchance(1, 5) { let n = b.mon_name(m); b.add(&["-activate", &n, "item: Quick Claw"]); return RV::N(0.1); } RV::Undef });
+    h!(r, Item, "rawstberry", "onUpdate", |b, a| { let m = a.t(); if b.p(m).status == "brn" { b.eat_item(m, false, None, None); } RV::Undef });
+    h!(r, Item, "rawstberry", "onEat", |b, a| { let m = a.t(); if b.p(m).status == "brn" { b.cure_status(m); } RV::Undef });
+    h!(r, Item, "chestoberry", "onUpdate", |b, a| { let m = a.t(); if b.p(m).status == "slp" { b.eat_item(m, false, None, None); } RV::Undef });
+    h!(r, Item, "chestoberry", "onEat", |b, a| { let m = a.t(); if b.p(m).status == "slp" { b.cure_status(m); } RV::Undef });
+    h!(r, Item, "lightball", "onModifyAtk", |b, a| { let m = a.t(); let bs = b.p(m).base_species; if to_id(b.dex.species.get(bs).map(|x| x.base_species).unwrap_or(bs)) == "pikachu" { return b.cm(2.0, 1.0); } RV::Undef });
+    h!(r, Item, "lightball", "onModifySpA", |b, a| { let m = a.t(); let bs = b.p(m).base_species; if to_id(b.dex.species.get(bs).map(|x| x.base_species).unwrap_or(bs)) == "pikachu" { return b.cm(2.0, 1.0); } RV::Undef });
     h!(r, Item, "sitrusberry", "onUpdate", |b, a| { let m = a.t(); if b.p(m).hp as f64 <= b.p(m).maxhp as f64 / 2.0 { b.eat_item(m, false, None, None); } RV::Undef });
     h!(r, Item, "sitrusberry", "onTryEatItem", |b, a| {
         let m = a.t(); let e = b.effect; let d = b.p(m).base_maxhp as f64 / 4.0;

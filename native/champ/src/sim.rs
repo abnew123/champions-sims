@@ -1071,7 +1071,7 @@ impl Battle {
                 }
                 if let Some(v) = md.volatile_status { let r = self.add_volatile(t, v, Some(m), Some(e)); did = combine(&did, &r); }
                 if let Some(c) = md.side_condition { let r = self.add_side_condition(t.0, c, Some(m), Some(e)); did = combine(&did, &r); }
-                if md.slot_condition.is_some() { self.unsupported("slotCondition".into()); }
+                if let Some(sc) = md.slot_condition { let r = self.add_slot_condition(t, sc, Some(m), Some(e)); did = combine(&did, &r); }
                 if let Some(w) = md.weather { let r = self.set_weather(w, Some(m), Some(e)); did = combine(&did, &r); }
                 if let Some(tr) = md.terrain { let r = self.set_terrain(tr, Some(m), Some(e)); did = combine(&did, &r); }
                 if let Some(pw) = md.pseudo_weather { let r = self.add_pseudo_weather(pw, Some(m), Some(e)); did = combine(&did, &r); }
@@ -1086,7 +1086,9 @@ impl Battle {
                     if !is_self && !is_secondary { self.run_event("Hit", Tgt::Mon(t), Some(m), Some(e), RV::Undef, false, false); }
                 }
             }
-            if md.selfdestruct == Some("ifHit") && damage[i] != RV::B(false) { self.faint(m, Some(m), Some(e)); }
+            // the data holds "ifhit" (ids are lower-cased); the old "ifHit" comparison never matched, so Healing Wish and Memento users
+            // never fainted (both were kept out of the planner's options for that reason until 2026-10-09)
+            if md.selfdestruct == Some("ifhit") && damage[i] != RV::B(false) { self.faint(m, Some(m), Some(e)); }
             if md.self_switch.is_some() {
                 if self.can_switch(m.0) > 0 && find(&self.p(m).volatiles, "commanded").is_none() { did = RV::B(true); } else { did = combine(&did, &RV::B(false)); }
             }
@@ -1516,6 +1518,37 @@ impl Battle {
         self.run_event("SideConditionStart", Tgt::Side(s), source, Some(Eff::cond(c)), RV::Undef, false, false);
         RV::B(true)
     }
+    /// side.addSlotCondition (2026-10-09): a condition on the target's slot (Wish, Healing Wish); handlers run for whoever is in the slot
+    pub fn add_slot_condition(&mut self, t: MonRef, c: Id, source: Option<MonRef>, src_eff: Option<Eff>) -> RV {
+        let c = id(&to_id(c)); let (s, pos) = (t.0, self.p(t).position);
+        if pos > 1 { return RV::B(false); }
+        let source = source.or_else(|| self.event.as_ref().and_then(|e| e.target.mon())).or_else(|| self.side_active(s).first().copied());
+        let cd = self.dex.conds.get(c);
+        if find(&self.sides[s as usize].slot_conditions[pos as usize], c).is_some() {
+            if !cd.map(|x| x.cbs.contains_key("onRestart")).unwrap_or(false) { return RV::B(false); }
+            return self.single_event("Restart", Eff::cond(c), Some(SLoc::Slot(s, pos, c)), Tgt::Mon(t), source, src_eff, RV::Undef);
+        }
+        let mut st = self.init_state(c, Some(true));
+        st.source = source; st.source_slot = source.map(|x| self.slot_name(x)); st.duration = cd.and_then(|x| x.duration); st.is_slot_condition = true;
+        self.sides[s as usize].slot_conditions[pos as usize].push((c, st));
+        if cd.map(|x| x.has_fn("durationCallback")).unwrap_or(false) {
+            let a0 = self.sides[s as usize].active[0].map(|i| (s, i));
+            let d = self.call_fn(Kind::Cond, c, "durationCallback", a0.map(Tgt::Mon).unwrap_or(Tgt::None), source, src_eff);
+            if let Some(x) = find_mut(&mut self.sides[s as usize].slot_conditions[pos as usize], c) { x.duration = Some(d.num() as i64); }
+        }
+        let at = self.sides[s as usize].active[pos as usize].map(|i| (s, i));
+        if !self.single_event("Start", Eff::cond(c), Some(SLoc::Slot(s, pos, c)), at.map(Tgt::Mon).unwrap_or(Tgt::None), source, src_eff, RV::Undef).truthy() {
+            self.sides[s as usize].slot_conditions[pos as usize].retain(|(k, _)| *k != c); return RV::B(false);
+        }
+        RV::B(true)
+    }
+    pub fn remove_slot_condition(&mut self, s: u8, pos: u8, c: Id) -> bool {
+        if find(&self.sides[s as usize].slot_conditions[pos as usize], c).is_none() { return false; }
+        let a = self.sides[s as usize].active[pos as usize].map(|i| (s, i));
+        self.single_event("End", Eff::cond(c), Some(SLoc::Slot(s, pos, c)), a.map(Tgt::Mon).unwrap_or(Tgt::None), None, None, RV::Undef);
+        self.sides[s as usize].slot_conditions[pos as usize].retain(|(k, _)| *k != c);
+        true
+    }
     pub fn remove_side_condition(&mut self, s: u8, c: &str) -> bool {
         let c = id(c);
         if find(&self.sides[s as usize].side_conditions, c).is_none() { return false; }
@@ -1735,10 +1768,7 @@ impl Battle {
             SLoc::Pseudo(c) => { self.remove_pseudo_weather(c); }
             SLoc::Weather => { self.clear_weather(); }
             SLoc::Terrain => { self.clear_terrain(); }
-            SLoc::Slot(s, pos, c) => { if find(&self.sides[s as usize].slot_conditions[pos as usize], c).is_some() {
-                let a = self.sides[s as usize].active[pos as usize].map(|i| (s, i));
-                self.single_event("End", Eff::cond(c), Some(h.state), a.map(Tgt::Mon).unwrap_or(Tgt::None), None, None, RV::Undef);
-                self.sides[s as usize].slot_conditions[pos as usize].retain(|(k, _)| *k != c); } }
+            SLoc::Slot(s, pos, c) => { self.remove_slot_condition(s, pos, c); }
             SLoc::Ability(_) | SLoc::Item(_) => { self.unsupported("ability/item duration end".into()); }
             _ => {}
         }

@@ -280,6 +280,33 @@ pub fn register(r: &mut Reg) {
     h!(r, Ability, "pressure", "onDeductPP", |b, a| { let (t, s) = (a.t(), a.s()); if b.is_ally(t, s) { return RV::Undef; } RV::N(1.0) });
     // ---------- contact / after-hit ----------
     h!(r, Ability, "roughskin", "onDamagingHit", |b, a| { let (t, s) = (a.t(), a.s()); if b.makes_contact(a.am(), s) { let d = b.p(s).base_maxhp as f64 / 8.0; b.damage(d, Some(s), Some(t), None, false); } RV::Undef });
+    // 2026-10-09: ported for the sheet threads' card opponents (Garganacl, Cofagrigus, Pincurchin / Raichu Static, Froslass Snow Cloak)
+    h!(r, Ability, "purifyingsalt", "onSetStatus", |b, a| { RV::B(false) });
+    h!(r, Ability, "purifyingsalt", "onTryAddVolatile", |b, a| { if a.relay == RV::S(id("yawn")) { return RV::Null; } RV::Undef });
+    h!(r, Ability, "purifyingsalt", "onSourceModifyAtk", |b, a| { if b.am(a.am()).mtype == "Ghost" { return b.cm(0.5, 1.0); } RV::Undef });
+    h!(r, Ability, "purifyingsalt", "onSourceModifySpA", |b, a| { if b.am(a.am()).mtype == "Ghost" { return b.cm(0.5, 1.0); } RV::Undef });
+    h!(r, Ability, "mummy", "onDamagingHit", |b, a| { let (t, s) = (a.t(), a.s()); let sab = b.p(s).ability;
+        if b.dex.eff(Kind::Ability, sab).cantsuppress || sab == "mummy" { return RV::Undef; }
+        if b.makes_contact(a.am(), s) { b.set_ability(s, "mummy", Some(t), None, false); } RV::Undef });
+    h!(r, Ability, "static", "onDamagingHit", |b, a| { let (t, s) = (a.t(), a.s()); if b.makes_contact(a.am(), s) && b.rchance(3, 10) { b.try_set_status(s, "par", Some(t), None); } RV::Undef });
+    h!(r, Ability, "snowcloak", "onImmunity", |b, a| { if a.relay == RV::S(id("hail")) { return RV::B(false); } RV::Undef });
+    h!(r, Ability, "snowcloak", "onModifyAccuracy", |b, a| { if let RV::N(_) = a.relay { let w = b.effective_weather(); if w == "hail" || w == "snowscape" { return b.cm(3277.0, 4096.0); } } RV::Undef });
+    h!(r, Ability, "owntempo", "onUpdate", |b, a| { let m = a.t(); if b.has_vol(m, "confusion") { b.remove_volatile(m, "confusion"); } RV::Undef });
+    h!(r, Ability, "owntempo", "onTryAddVolatile", |b, a| { if a.relay == RV::S(id("confusion")) { return RV::Null; } RV::Undef });
+    h!(r, Ability, "owntempo", "onHit", |b, a| { RV::Undef });
+    h!(r, Ability, "owntempo", "onTryBoost", |b, a| { block_intimidate(a) });
+    h!(r, Ability, "quickdraw", "onFractionalPriority", |b, a| { let m = a.t(); if b.am(a.am()).category != "Status" && b.rchance(3, 10) { let n = b.mon_name(m); b.add(&["-activate", &n, "ability: Quick Draw"]); return RV::N(0.1); } RV::Undef });
+    h!(r, Ability, "surgesurfer", "onModifySpe", |b, a| { if b.is_terrain("electricterrain") { return b.cm(2.0, 1.0); } RV::Undef });
+    h!(r, Ability, "dryskin", "onTryHit", |b, a| { let t = a.t(); if a.source != Some(t) && b.am(a.am()).mtype == "Water" { let d = b.p(t).base_maxhp as f64 / 4.0; b.heal(d, None, None, None); return RV::Null; } RV::Undef });
+    h!(r, Ability, "dryskin", "onSourceBasePower", |b, a| { if b.am(a.am()).mtype == "Fire" { return b.cm(1.25, 1.0); } RV::Undef });
+    h!(r, Ability, "dryskin", "onWeather", |b, a| { let t = a.t(); let w = a.src_eff.map(|e| e.id).unwrap_or("");
+        if b.pokemon_effective_weather(t, None) != w { return RV::Undef; }
+        if w == "raindance" || w == "primordialsea" { let d = b.p(t).base_maxhp as f64 / 8.0; b.heal(d, None, None, None); }
+        else if w == "sunnyday" || w == "desolateland" { let d = b.p(t).base_maxhp as f64 / 8.0; b.damage(d, Some(t), Some(t), None, false); } RV::Undef });
+    h!(r, Ability, "zerotohero", "onSwitchOut", |b, a| { let m = a.t(); let bs = b.p(m).base_species; let base = b.dex.species.get(bs).map(|x| x.base_species).unwrap_or(bs);
+        if to_id(base) != "palafin" || b.p(m).transformed { return RV::Undef; }
+        if b.p(m).species != "palafinhero" { b.forme_change_permanent(m, "palafinhero", Some(Eff::new(Kind::Ability, id("zerotohero")))); } RV::Undef });
+    h!(r, Ability, "zerotohero", "onSwitchIn", |b, a| { RV::Undef });
     h!(r, Ability, "flamebody", "onDamagingHit", |b, a| { let (t, s) = (a.t(), a.s()); if b.makes_contact(a.am(), s) && b.rchance(3, 10) { b.try_set_status(s, "brn", Some(t), None); } RV::Undef });
     h!(r, Ability, "poisontouch", "onSourceDamagingHit", |b, a| {
         let (t, s) = (a.t(), a.s());
@@ -347,8 +374,6 @@ pub fn register(r: &mut Reg) {
     h!(r, Ability, "superluck", "onModifyCritRatio", |b, a| { RV::N(a.n() + 1.0) });
     h!(r, Ability, "naturalcure", "onSwitchOut", |b, a| { let m = a.t(); let st = b.p(m).status; if st.is_empty() || st == "fnt" { return RV::Undef; } if b.p(m).hp > 0 { b.set_status(m, "", None, None, false); } RV::Undef });
     h!(r, Ability, "regenerator", "onSwitchOut", |b, a| { let m = a.t(); let d = b.p(m).base_maxhp as f64 / 3.0; b.pokemon_heal(m, d); RV::Undef });
-    h!(r, Ability, "zerotohero", "onSwitchOut", |b, a| { RV::Undef });
-    h!(r, Ability, "zerotohero", "onSwitchIn", |b, a| { RV::Undef });
     // ---------- speed ----------
     h!(r, Ability, "swiftswim", "onModifySpe", |b, a| { weather_spe(b, a, &["raindance", "primordialsea"]) });
     h!(r, Ability, "chlorophyll", "onModifySpe", |b, a| { weather_spe(b, a, &["sunnyday", "desolateland"]) });

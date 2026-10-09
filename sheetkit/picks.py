@@ -67,6 +67,22 @@ def same_job(r, j):
     if (r.get('arch'), r.get('lead'), r.get('back')) != (m.get('arch'), *mine): return False
     return 'their_lead' not in m or (r.get('their_lead'), r.get('their_back')) == (m['their_lead'], m['their_back'])
 
+def job_key(j):
+    """what a job plays, in the form its result records it (see result_key)"""
+    if 'meta' in j:
+        m = j['meta']; return (m['arch'], tuple(m['our_lead']), tuple(m['our_back']), m.get('six'), tuple(m['their_lead']), tuple(m['their_back']))
+    return (j['arch'], tuple(j['lead']), tuple(j['back']), opp_model()[j['arch']]['pairs'][j['k']]['pair'])
+
+def result_key(r):
+    if 'their_lead' in r: return (r.get('arch'), tuple(r.get('lead') or ()), tuple(r.get('back') or ()), r.get('six'), tuple(r['their_lead']), tuple(r.get('their_back') or ()))
+    return (r.get('arch'), tuple(r.get('lead') or ()), tuple(r.get('back') or ()), r.get('pair'))
+
+def set_aside(f, d):
+    """move result file f into folder d without overwriting one already there"""
+    os.makedirs(d, exist_ok=True); b = os.path.basename(f)[:-5]; n = 0
+    while os.path.exists(os.path.join(d, f'{b}{"_" + str(n) if n else ""}.json')): n += 1
+    os.replace(f, os.path.join(d, f'{b}{"_" + str(n) if n else ""}.json'))
+
 def battle_run(sheet, step, jobs_path, outdir, games, g0, threads, setup, log, only=None):
     """Play jobs_path's jobs (all, or the job numbers in `only`) for games g0 .. g0+games-1 with the full-battle sim. The jobs are dealt
     round-robin to battle processes of a few threads each, so every process gets the same mix and they finish together.
@@ -78,8 +94,18 @@ def battle_run(sheet, step, jobs_path, outdir, games, g0, threads, setup, log, o
         try: r = json.load(open(f))
         except Exception: os.remove(f); continue
         if not same_job(r, jobs[r['job']] if isinstance(r.get('job'), int) and r['job'] < len(jobs) else None):    # its job changed since
-            os.makedirs(outdir + '.stale', exist_ok=True); os.replace(f, os.path.join(outdir + '.stale', os.path.basename(f))); stale += 1
-    if stale: log.line(f"{now()} {stale} results no longer match their job (a changed pick): moved to {os.path.basename(outdir)}.stale/")
+            set_aside(f, outdir + '.stale'); stale += 1
+    if stale: log.line(f"{now()} {stale} results no longer match their job number (a changed pick, or the list reordered): moved to {os.path.basename(outdir)}.stale/")
+    pool = {}                                                     # set-aside results by what they played: a job now at another number gets its result back
+    for f in glob.glob(os.path.join(outdir + '.stale', '*.json')):
+        try: pool.setdefault(result_key(json.load(open(f))), f)
+        except Exception: pass
+    back = 0
+    for i, j in enumerate(jobs):
+        if pool and not os.path.exists(os.path.join(outdir, f'{i}.json')):
+            f = pool.pop(job_key(j), None)
+            if f: r = json.load(open(f)); r['job'] = i; wj(r, os.path.join(outdir, f'{i}.json')); os.remove(f); back += 1
+    if back: log.line(f"{now()} {back} set-aside results match a job at another number: reused")
     todo = [i for i in (only if only is not None else range(len(jobs))) if not os.path.exists(os.path.join(outdir, f'{i}.json'))]
     per = PER_PROC if platform.system() == 'Linux' else threads
     nproc = max(1, min(threads // per, len(todo))); parts = [todo[c::nproc] for c in range(nproc)]
@@ -127,7 +153,7 @@ def ranked(V, share, a):
     if not teams: return [], [], {}
     fours = set.intersection(*(set(V[t]) for t in teams)); W = sum(share[t] for t in teams)
     win = {c: sum(share[t] * mean(list(V[t][c].values())) for t in teams) / W for c in fours}
-    return teams, sorted(fours, key=lambda c: -win[c]), win
+    return teams, sorted(fours, key=lambda c: (-win[c], sorted(c[0]), sorted(c[1]))), win      # ties in a fixed order (sets of names hash differently per process)
 
 def gap(V, share, teams, c, best):
     """paired difference c - best over the games both played, opposing teams weighted by replay share"""

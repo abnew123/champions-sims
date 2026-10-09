@@ -163,7 +163,10 @@ fn grid_feats(b: &Battle, cfg: &Cfg) -> [f64; 2] {
     let exp = mine.iter().map(|mi| foes.iter().map(|f| cell(f, mi).unwrap_or(0.5)).fold(1.0f64, f64::min)).sum::<f64>() / mine.len() as f64;
     [cov - 0.5, exp - 0.5]
 }
-pub fn feats(b: &mut Battle, cfg: &Cfg) -> Vec<f64> {
+/// RACE_BENCH=1 (both sides) | s0 | s1: the bench-aware race (see race_feats) in the value each side plans with
+fn race_bench() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new(); *F.get_or_init(|| match std::env::var("RACE_BENCH").as_deref() { Ok("s0") => [true, false], Ok("s1") => [false, true], Ok(_) => [true, true], Err(_) => [false, false] }) }
+pub fn feats(b: &mut Battle, cfg: &Cfg) -> Vec<f64> { feats_x(b, cfg, race_bench()[0]) }
+pub fn feats_x(b: &mut Battle, cfg: &Cfg, bench: bool) -> Vec<f64> {
     struct S { hp: f64, n: f64, bst: f64, lock_s: f64, lock_a: f64, spe: f64 }
     let side = |b: &Battle, s: u8| -> S {
         let al = alive(b, s);
@@ -196,7 +199,7 @@ pub fn feats(b: &mut Battle, cfg: &Cfg) -> Vec<f64> {
          d(&|b, s| cnt(b, s, "encore")), d(&|b, s| tricked(b, s))];
     let taunt = d(&|b, s| cnt(b, s, "taunt"));
     if let Some(cd) = cfg.cdata {
-        let r = race_feats(b, cd); v.extend_from_slice(&r[..2]);
+        let r = race_feats(b, cd, bench); v.extend_from_slice(&r[..2]);
         if feats21() {
             // champ-battle-v21 features (after the two race edges; a value file with 20 weights ignores them):
             // 20 priority edge (RACE_PRIO; the best priority hit each side has on the field, HP share, summed over its actives)
@@ -318,10 +321,19 @@ fn bench_edge(b: &mut Battle, cd: &crate::data::Data) -> f64 {
     }
     out[0] - out[1]
 }
-fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 3] {
+fn race_feats(b: &mut Battle, cd: &crate::data::Data, bench: bool) -> [f64; 3] {
     let act: [Vec<MonRef>; 2] = [active_alive(b, 0).into_iter().map(|x| x.1).collect(), active_alive(b, 1).into_iter().map(|x| x.1).collect()];
     if act[0].is_empty() || act[1].is_empty() { return [0.0, 0.0, 0.0]; }
-    let units: Vec<MonRef> = act[0].iter().chain(act[1].iter()).copied().collect();
+    let mut units: Vec<MonRef> = act[0].iter().chain(act[1].iter()).copied().collect();
+    let n_act = units.len();
+    // RACE_BENCH (champ-battle-v26): the bench joins the race. Each side's living bench Pokemon are units too, healthiest first; they
+    // start out of play and enter when one of their side's units falls, so a foe about to die on the field and that foe already dead
+    // and replaced read alike (the race used to credit the first with a free KO and then keep racing against a corpse).
+    if bench { for s in 0..2u8 {
+        let mut bn: Vec<MonRef> = alive(b, s).into_iter().filter(|m| !b.p(*m).is_active).collect();
+        bn.sort_by(|x, y| (b.p(*y).hp as f64 / b.p(*y).maxhp.max(1) as f64).partial_cmp(&(b.p(*x).hp as f64 / b.p(*x).maxhp.max(1) as f64)).unwrap());
+        units.extend(bn);
+    } }
     let screens = |b: &Battle, s: u8| -> Vec<String> { ["reflect", "lightscreen", "auroraveil"].iter().filter(|k| find(&b.sides[s as usize].side_conditions, k).is_some()).map(|k| k.to_string()).collect() };
     // each side's screens once, as the memo's bitmask (the string list is only built on a memo miss)
     let scr_bits: [u8; 2] = std::array::from_fn(|s| screens(b, s as u8).iter().fold(0u8, |m, x| m | match x.as_str() { "reflect" => 1, "lightscreen" => 2, _ => 4 }));
@@ -350,7 +362,7 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 3] {
             if tm.category == "Status" { continue; }
             let prio = if !prio_on { 0 } else if mid == "grassyglide" { if grassy { 1 } else { 0 } } else { tm.priority as i64 };
             let prio_ok = |j: usize| prio <= 0 || (!(psy && grounded[j]) && !blocks[side(j) as usize]);
-            let spread = (tm.target == "allAdjacentFoes" || tm.target == "allAdjacent") && foes.len() == 2;
+            let spread = (tm.target == "allAdjacentFoes" || tm.target == "allAdjacent") && (if bench { act[1 - s as usize].len() } else { foes.len() }) == 2;
             let acc = tm.accuracy.map(|a| (a / 100.0).min(1.0)).unwrap_or(1.0);
             let acc = if crate::battle::Battle::miss_double() == Some(s) { (2.0 * acc - 1.0).max(0.0) } else { acc };   // MISS_DOUBLE: that side's analytic accuracy too
             let hits = match tm.multihit { Some((lo, hi)) if lo == hi => lo as f64, Some((_, hi)) => if b.p(m).ability == "skilllink" { hi as f64 } else { 3.1 }, None => 1.0 };
@@ -377,33 +389,39 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 3] {
     // one race; `first` = the side that moves first when opposing Pokemon tie on Speed (0 reproduces the original order)
     let run = |first: u8| -> ([f64; 2], Vec<f64>) {
         let mut hp = hp0.clone(); let mut ko = [0.0f64; 2];
+        let mut inplay: Vec<bool> = (0..n).map(|i| i < n_act).collect();
         for k in 1..=RACE_T {
             let tr_on = k <= tr_left;
             let eff_spe = |i: usize| { let s = side(i) as usize; let x = if tw_left[s] > 0 && k > tw_left[s] { spe[i] / 2.0 } else { spe[i] }; if tr_on { -x } else { x } };
             // each unit's priority this turn: that of its best option against the HP at the start of the turn (0 without RACE_PRIO)
-            let pr: Vec<i64> = (0..n).map(|i| { if !prio_on || hp[i] <= 0.0 || opts[i].is_empty() { return 0; }
+            let pr: Vec<i64> = (0..n).map(|i| { if !prio_on || !inplay[i] || hp[i] <= 0.0 || opts[i].is_empty() { return 0; }
                 let pf = if status[i] == "par" { 0.875 } else { 1.0 };
-                let score = |o: &Vec<f64>| (0..n).filter(|&j| hp[j] > 0.0 && o[j] > 0.0).map(|j| (o[j] * pf).min(hp[j]) / maxhp[j] + if o[j] * pf >= hp[j] { 1.0 } else { 0.0 }).sum::<f64>();
+                let score = |o: &Vec<f64>| (0..n).filter(|&j| inplay[j] && hp[j] > 0.0 && o[j] > 0.0).map(|j| (o[j] * pf).min(hp[j]) / maxhp[j] + if o[j] * pf >= hp[j] { 1.0 } else { 0.0 }).sum::<f64>();
                 let kb = (0..opts[i].len()).max_by(|&x, &y| score(&opts[i][x]).partial_cmp(&score(&opts[i][y])).unwrap()).unwrap(); oprio[i][kb] }).collect();
-            let mut order: Vec<usize> = (0..n).filter(|&i| hp[i] > 0.0).collect();
+            let mut order: Vec<usize> = (0..n).filter(|&i| inplay[i] && hp[i] > 0.0).collect();
             order.sort_by(|&x, &y| pr[y].cmp(&pr[x]).then_with(|| eff_spe(y).partial_cmp(&eff_spe(x)).unwrap()).then_with(|| if side(x) == side(y) { std::cmp::Ordering::Equal }
                 else if side(x) == first { std::cmp::Ordering::Less } else { std::cmp::Ordering::Greater }));
             for &i in &order {
                 if hp[i] <= 0.0 || k < wake[i] || opts[i].is_empty() { continue; }
                 let pf = if status[i] == "par" { 0.875 } else { 1.0 };
-                let score = |o: &Vec<f64>| (0..n).filter(|&j| hp[j] > 0.0 && o[j] > 0.0).map(|j| (o[j] * pf).min(hp[j]) / maxhp[j] + if o[j] * pf >= hp[j] { 1.0 } else { 0.0 }).sum::<f64>();
+                let score = |o: &Vec<f64>| (0..n).filter(|&j| inplay[j] && hp[j] > 0.0 && o[j] > 0.0).map(|j| (o[j] * pf).min(hp[j]) / maxhp[j] + if o[j] * pf >= hp[j] { 1.0 } else { 0.0 }).sum::<f64>();
                 let best = opts[i].iter().max_by(|x, y| score(x).partial_cmp(&score(y)).unwrap()).unwrap().clone();
                 for j in 0..n {
-                    if hp[j] > 0.0 && best[j] > 0.0 { hp[j] -= best[j] * pf; if hp[j] <= 0.0 { ko[side(j) as usize] += 1.0 / k as f64; } }
+                    if inplay[j] && hp[j] > 0.0 && best[j] > 0.0 { hp[j] -= best[j] * pf; if hp[j] <= 0.0 { ko[side(j) as usize] += 1.0 / k as f64; } }
                 }
             }
             for i in 0..n {
-                if hp[i] <= 0.0 { continue; }
+                if !inplay[i] || hp[i] <= 0.0 { continue; }
                 let chip = match status[i] { "brn" => maxhp[i] / 16.0, "psn" | "tox" => maxhp[i] / 8.0, _ => 0.0 };
                 hp[i] = (hp[i] - chip + if lefties[i] { maxhp[i] / 16.0 } else { 0.0 }).min(maxhp[i]);
                 if hp[i] <= 0.0 { ko[side(i) as usize] += 1.0 / k as f64; }
             }
-            if (0..n).filter(|&i| side(i) == 0).all(|i| hp[i] <= 0.0) || (0..n).filter(|&i| side(i) == 1).all(|i| hp[i] <= 0.0) { break; }
+            // replacements: a fallen unit's side brings in its next bench unit (end of the race turn, as the game does)
+            if bench { for i in 0..n { if inplay[i] && hp[i] <= 0.0 {
+                inplay[i] = false;
+                if let Some(r) = (n_act..n).find(|&j| side(j) == side(i) && !inplay[j] && hp[j] > 0.0) { inplay[r] = true; }
+            } } }
+            if (0..n).filter(|&i| side(i) == 0 && inplay[i]).all(|i| hp[i] <= 0.0) || (0..n).filter(|&i| side(i) == 1 && inplay[i]).all(|i| hp[i] <= 0.0) { break; }
         }
         (ko, hp)
     };
@@ -487,12 +505,15 @@ fn tr_keep(b: &Battle, s: u8) -> bool {
 }
 /// side 0's win chance as each side sees it: (with side 0's weights, with side 1's weights); equal unless EG_VALUE_B is set
 pub fn value2(b: &mut Battle, cfg: &Cfg) -> (f64, f64) {
-    let Some((b1, w1)) = &cfg.vw_b else { let v = value(b, cfg); return (v, v); };
+    let rb = race_bench();
+    if cfg.vw_b.is_none() && rb[0] == rb[1] { let v = value(b, cfg); return (v, v); }
     if b.ended { let v = match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 }; return (v, v); }
-    let f = feats(b, cfg);
-    let ev = |b0: f64, w: &Vec<f64>| { let mut z = b0; for k in 0..w.len().min(f.len()) { z += w[k] * f[k]; } z += perish_adj(b, w); 1.0 / (1.0 + (-z).exp()) };
-    let va = match &cfg.vw { Some((b0, w)) => ev(*b0, w), None => ev(*b1, w1) };
-    (va, ev(*b1, w1))
+    let (b0, w0) = cfg.vw.clone().expect("value weights");
+    let (b1, w1) = cfg.vw_b.clone().unwrap_or((b0, w0.clone()));
+    let f0 = feats_x(b, cfg, rb[0]); let f1 = if rb[0] == rb[1] { f0.clone() } else { feats_x(b, cfg, rb[1]) };
+    let ev = |b: &mut Battle, bb: f64, w: &Vec<f64>, f: &Vec<f64>| { let mut z = bb; for k in 0..w.len().min(f.len()) { z += w[k] * f[k]; } z += perish_adj(b, w); 1.0 / (1.0 + (-z).exp()) };
+    let va = ev(b, b0, &w0, &f0); let vb = ev(b, b1, &w1, &f1);
+    (va, vb)
 }
 pub fn value(b: &mut Battle, cfg: &Cfg) -> f64 {
     if b.ended { return match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 }; }

@@ -111,6 +111,23 @@
    ],
    "status": "FINAL (Battle sim, 2026-10-06): the build for new runs. v19 plus a fix for locked turns (the recharge turn after Hyper Beam used to leave a side with no legal action, so the game was handed to the value function); every game without such a turn is identical to v13-v19, which is why its results share folders with theirs. Full engine data (real-team opponents). Linux source: native/champ/src_battle_v20.tar.gz.",
    "games": "v13-dp2-race-eg9"
+  },
+  "v22-dp2-race-eg9-full": {
+   "binary": "native/champ/bin/champ-battle-v22",
+   "value": "pssim/egvalue9.json",
+   "engine_data": "native/engine_data_full.json",
+   "env": {
+    "BATTLE_ANTICIPATE": "1",
+    "DP2": "1",
+    "RACE": "1",
+    "RACE_TIES": "avg",
+    "CALC_DATA": "native/champions_data.json"
+   },
+   "env_paths": [
+    "CALC_DATA"
+   ],
+   "status": "Battle sim, 2026-10-09: v21 plus mechanics the card opponents hit (Purifying Salt, Mummy, Wish / Healing Wish slot conditions and more; see HANDOFF.md). With v20's flags it plays v20's games except where those mechanics come up (there v20 flagged the game unsupported), so it shares v20's result folders: `kit.py <team> flagged --move` takes out the results with a flagged game and a run with SHEET_SETUP=v22-dp2-race-eg9-full replays just those. Linux source: native/champ/src_battle_v22.tar.gz.",
+   "games": "v13-dp2-race-eg9"
   }
  }
 }

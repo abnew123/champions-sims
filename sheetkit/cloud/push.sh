@@ -8,7 +8,7 @@
 set -e; cd "$(dirname "$0")/../.."
 HOST=${1:?host}; KEY=${2:?key file}; TEAM=${3:?team}
 SSH="ssh -i $KEY -o ConnectTimeout=20 -o StrictHostKeyChecking=accept-new"
-SETUP=$(python3 -c "import json; d=json.load(open('sheetkit/sim.json')); s=d['setups'][d['current']]; print(s['binary'], s['value'], s['engine_data'])")
+SETUP=$(python3 -c "import json, os; d=json.load(open('sheetkit/sim.json')); s=d['setups'][os.environ.get('SHEET_SETUP') or d['current']]; print(s['binary'], s['value'], s['engine_data'])")
 read BIN VALUE DATA <<< "$SETUP"; V=$(basename $BIN); SRC=native/champ/src_${V#champ-}.tar.gz; SRC=${SRC//-/_}
 DONE=$(ls -d sheets/$TEAM/work/*/res sheets/$TEAM/work/*/res.run.json sheets/$TEAM/work/*/jobs*.json sheets/$TEAM/work/*/sixes.json \
              sheets/$TEAM/work/optimal*/screen_* sheets/$TEAM/work/optimal*/matrix* 2>/dev/null || true)

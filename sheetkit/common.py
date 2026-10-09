@@ -71,7 +71,7 @@ class Sheet:
         return g
 
 def sim_setup(name=None):
-    S = rj(os.path.join(KIT, 'sim.json')); name = name or S['current']
+    S = rj(os.path.join(KIT, 'sim.json')); name = name or os.environ.get('SHEET_SETUP') or S['current']      # SHEET_SETUP: a whole chain on another setup
     if name not in S['setups']: sys.exit(f"no sim setup '{name}' in sheetkit/sim.json (have: {', '.join(S['setups'])})")
     s = dict(S['setups'][name], name=name)
     env = dict(s.get('env', {}))

@@ -102,7 +102,13 @@ turn-one lines and game plans in order (log `work/all.log`), then `more.sh` the 
   refuses more than 10. The matrix and the confirmation belong on a cloud box (`teamsearch/cloud/README.md`; the user starts the box).
 - **Sim setup.** `sheetkit/sim.json` names the full-battle setups (binary, value file, flags). Run `current` unless you are told
   otherwise, and never compare numbers across setups. Only the kit maintainer moves `current`, when the Battle sim thread says a setup
-  is final. Tell Battle sim if results look wrong.
+  is final. Tell Battle sim if results look wrong. A setup with the same `games` as another plays the same games and shares its result
+  folders; `SHEET_SETUP=<name>` in front of any kit command or cloud script (`push.sh`, `build.sh`, `all.sh`, `more.sh`) runs that
+  setup instead of `current`.
+- **Flagged games.** A game that hits a mechanic the simulator has not ported is flagged `unsupported` in its result.
+  `kit.py <team> flagged` counts the results with one per folder; `--write` moves them to `<folder>.flagged/`. Then run the steps again
+  on a setup that ports them and shares the folders (for v20's results: `SHEET_SETUP=v22-dp2-race-eg9-full`, `all.sh` then `more.sh`
+  until it has nothing to do). Only the moved jobs are played, and the picks follow. On a shared box only one thread runs `build.sh`.
 - **Competent opponents.** The sims assume them; do not tune a sheet around ladder misplays.
 - **Lean page.** Add a section or a paragraph only when the user asks for it.
 - **No names.** Nothing in a tracked file names the user, an opponent or a player, and no absolute paths. Write "the user".

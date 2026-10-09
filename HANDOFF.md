@@ -939,3 +939,15 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     un-evolved holder to the grid's base entry when the grid has one (it read as the M- entry before, right under the always-Mega rule;
     `EG_MEGA_ALWAYS` for that side keeps the old mapping). With `EG_MEGA_ALWAYS=1 EG_MEGA_TIE=0` the 20 check battles are identical to
     v20. `native/champ/bin/champ-battle-v25` (two-line sha file).
+    **Human baseline and the tie-break's default (TR sheet, 2026-10-10, 1:40 pm; sheets/trick-room-six/work/human_mega.py on the 4,555
+    sheeted replays, same counting: move turns only, while the side's Mega was unused):** of 8,218 stone holders, 78.6% evolved on
+    their first move turn, 15.6% delayed, 2.6% never because the partner took it, 3.2% never with the Mega unused: players hold the Mega
+    on about 21% of holders, the same above and below the median rating; the un-evolved human turns were Protect 1,297, attacks 842,
+    Fake Out 195, field moves 117, flinch / sleep 99; by species Raichu 23%, Tyranitar 24% (+15% partner), Metagross 22%, Garchomp 21%,
+    Charizard 18%, Salamence 16%, Staraptor 14%, Golisopod 9%, Swampert 10%, Blastoise 5%. The planner holds it less (12.8%) and the
+    tie-break pushes it further from play (8.3%), mostly on the Protect turns where players hold it most, so **the recommended setting
+    is EG_MEGA_TIE=0** (the kit's v25 setup sets it; strength is flat either way). The audit of the remaining un-evolved attacking turns
+    (`BATTLE_MEGA_AUDIT=<jsonl>` on any battle run: per turn both outcomes against the sampled reply over 8 seeds, abilities / types of
+    both formes, the twin options' values; pssim/results/mega_audit.jsonl, 60 records from 800 starts) shows every one with the no-Mega
+    option valued 0.5-45 points higher: base-form reasons such as Golisopod keeping Bug / Water against Flamethrower (14-23 damage
+    base, 111-135 as the Steel Mega) and Garchomp keeping Rough Skin + Ground; TR sheet sorts them for the user.

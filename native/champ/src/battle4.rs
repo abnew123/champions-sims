@@ -57,6 +57,8 @@ pub(crate) fn rjoint(b: &mut Battle, s: u8) -> Vec<[PChoice; 2]> {
     out
 }
 fn ns() -> usize { std::env::var("BATTLE_NS").ok().and_then(|x| x.parse().ok()).unwrap_or(2) }
+/// EG_MEGA_TIE (default 0.002): margin of the Mega tie-break in play(); 0 keeps every mix as solved
+fn mega_tie() -> f64 { static F: std::sync::OnceLock<f64> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("EG_MEGA_TIE").ok().and_then(|x| x.parse().ok()).unwrap_or(0.002)) }
 /// BATTLE_FULLSW=0|1|both: which sides solve the full matrix game (the other side's switches included) instead of the one-layer one
 fn fullsw() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new(); *F.get_or_init(|| match std::env::var("BATTLE_FULLSW").as_deref() { Ok("0") => [true, false], Ok("1") => [false, true], Ok(_) => [true, true], Err(_) => [false, false] }) }
 /// BATTLE_HORIZON=2 with BATTLE_HORIZON_SIDE=0|1 (default both): which sides re-solve on the two-turn values
@@ -265,6 +267,24 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool) -> Ou
                     let (_, yc) = nash(&a, 400); let mut yn = vec![0.0; tsw.len()]; for (c, &j) in cols.iter().enumerate() { yn[j] = yc[c]; } y = yn;
                 }
             } }
+        }
+        // Mega tie-break (2026-10-10, TR sheet's read of the 17% delays): where a move is offered with and without the Mega and the Mega
+        // version is worth at least as much against the other side's mix minus EG_MEGA_TIE (default 0.002), the no-Mega version's
+        // weight moves to it, so a coin flip between equal options never reads as "held the Mega". EG_MEGA_TIE=0 turns it off.
+        let tie = mega_tie();
+        if tie >= 0.0 {
+            let twin = |opts: &[[PChoice; 2]], i: usize| -> Option<usize> {
+                let c = opts[i]; let mut want = c; let mut changed = false;
+                for k in 0..2 { if let PChoice::Move(sl, t, false) = c[k] { if opts.iter().any(|o| o[k] == PChoice::Move(sl, t, true)) && !changed { want[k] = PChoice::Move(sl, t, true); changed = true; } } }
+                if !changed { return None; } opts.iter().position(|o| *o == want) };
+            let ysup: Vec<usize> = (0..tsw.len()).filter(|j| y[*j] > 1e-4).collect(); let ytot: f64 = ysup.iter().map(|&j| y[j]).sum();
+            let xsup: Vec<usize> = (0..msw.len()).filter(|i| x[*i] > 1e-4).collect(); let xtot: f64 = xsup.iter().map(|&i| x[i]).sum();
+            for i in 0..msw.len() { if x[i] > 1e-6 { if let Some(j) = twin(&msw, i) {
+                let (mut vi, mut vj) = (0.0, 0.0); for &c in &ysup { vi += y[c] * cell2(i, c, &b).0; vj += y[c] * cell2(j, c, &b).0; }
+                if ytot > 0.0 && vj / ytot >= vi / ytot - tie { x[j] += x[i]; x[i] = 0.0; } } } }
+            for i in 0..tsw.len() { if y[i] > 1e-6 { if let Some(j) = twin(&tsw, i) {
+                let (mut vi, mut vj) = (0.0, 0.0); for &r in &xsup { vi += x[r] * cell2(r, i, &b).1; vj += x[r] * cell2(r, j, &b).1; }
+                if xtot > 0.0 && vj / xtot <= vi / xtot + tie { y[j] += y[i]; y[i] = 0.0; } } } }
         }
         let i = sample(&x, &mut rng); let j = sample(&y, &mut rng);
         if !no_sw(&msw[i]) { switches[0] += 1; } if !no_sw(&tsw[j]) { switches[1] += 1; }

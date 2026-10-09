@@ -14,7 +14,7 @@ Talk to the other threads directly with SendMessage (names above); do not relay 
 
 ## The sheet now
 
-- Published: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6, **Version 22** (2026-10-07, the user's go-ahead): opponents are the 32 real-team cards (Battle sim's core groups; see "Opponent cards" below), each card's four picked with both sides picking their four (ladder-weighted 49%), per-card notes and game plans, the rule list as the guide. Version 21 (2026-10-05, archetype tabs, game plans and "Adjust the four at team preview") is kept in `archive_v21/`; Version 20 collapsed each section's notes and Version 19 moved them below the working content (the user found the page hard to scroll).
+- Published: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6, **Version 23** (2026-10-09, the user's go-ahead): Version 22's cards replayed on champ-battle-v23 (Healing Wish and newly ported mechanics; open item 6); ladder-weighted 48.1% when both sides pick, one four changed (Other Sun). Version 22 (2026-10-07) moved the sheet to the 32 real-team cards with both-sides-pick picks; Version 21 (archetype tabs) is in `archive_v21/`.
   `sheets/trick-room-six/sheet.html` (`python3 sheetkit/kit.py trick-room-six page`); `trsheet/tr-sheet.html` is a copy of it. Older
   pages: `trsheet/tr-sheet.v11.html` ... `tr-sheet.v15.html`, Version 16 in `sheetkit/fixtures/tr-v16/published.html`, and git from here on.
 - Version 17 against Version 16: Torkoal back to 32 HP / 2 SpD (card and Matchups column); Incineroar's Matchups column with White Herb
@@ -187,7 +187,7 @@ their tabs by core group with the archetype name kept (root HANDOFF); not starte
    tied fours sorted in a hash order (reordered job lists threw results away), and set-aside matrix cells were not counted (a pick lost
    its strongest answer: one card read 43% instead of 8%). Result: ladder-weighted 48.1% when both sides pick (Version 22: 49.4%),
    70.4% against the usual fours; only Other Sun changes its four (back Torkoal + Kingambit); Indeedee is still never brought, Healing
-   Wish or not. Page built (`sheet.html`); show the user before publishing as Version 23. Then move sim.json `current` to v23.
+   Wish or not. Published as Version 23 on 2026-10-09 (the user's go-ahead); sim.json `current` is now v23.
 
 ## Running full battles (the sheet thread's main tool)
 

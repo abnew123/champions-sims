@@ -1,6 +1,6 @@
 {
  "note": "Named full-battle sim setups. Every sheet thread runs 'current' unless it says otherwise; only the kit maintainer moves 'current', and only when the Battle sim thread says a setup is final. Paths are relative to the repo root. 'env' is passed to the binary as is; EG_VALUE and GRID_DIR are added by the kit (GRID_DIR is the team's own grid). A setup with a 'games' field plays exactly the games of the setup it names; result folders are stamped with that name.",
- "current": "v20-dp2-race-eg9-full",
+ "current": "v23-dp2-race-eg9-full",
  "setups": {
   "v4-eg5": {
    "binary": "native/champ/bin/champ-battle-v4",
@@ -143,7 +143,7 @@
    "env_paths": [
     "CALC_DATA"
    ],
-   "status": "Battle sim, 2026-10-09: v22 plus Ripen, Swarm, Electromorphosis (Charge), Gooey, Shell Side Arm, Baton Pass, Encore's override, Ally Switch, Gravity, Champions' Curse, Entrainment, Temper Flare, Vital Spirit / Insomnia, Healer, Curious Medicine, Seed Sower (see HANDOFF.md; still flagged: Unseen Fist, Cute Charm). With v20's flags it plays v20's games except where those mechanics come up, so it shares v20's result folders: `kit.py <team> flagged --write`, then a run with SHEET_SETUP=v23-dp2-race-eg9-full replays just those. Linux source: native/champ/src_battle_v23.tar.gz. The differences (TR sheet's check, 2026-10-09) are Healing Wish and Memento, which the planner never offered before v22; replays of v20 results need `flagged --moves healingwish,memento`. Healing Wish stays free in the planner (the user's call, 2026-10-09; EG_SELFKO_RULE=1 is an opt-in restriction, in no setup). The version for replays and the next current (there is no v24); current stays v20 until the sheets running on v20 have replayed.",
+   "status": "Battle sim, 2026-10-09: v22 plus Ripen, Swarm, Electromorphosis (Charge), Gooey, Shell Side Arm, Baton Pass, Encore's override, Ally Switch, Gravity, Champions' Curse, Entrainment, Temper Flare, Vital Spirit / Insomnia, Healer, Curious Medicine, Seed Sower (see HANDOFF.md; still flagged: Unseen Fist, Cute Charm). With v20's flags it plays v20's games except where those mechanics come up, so it shares v20's result folders: `kit.py <team> flagged --write`, then a run with SHEET_SETUP=v23-dp2-race-eg9-full replays just those. Linux source: native/champ/src_battle_v23.tar.gz. The differences (TR sheet's check, 2026-10-09) are Healing Wish and Memento, which the planner never offered before v22; replays of v20 results need `flagged --moves healingwish,memento`. Healing Wish stays free in the planner (the user's call, 2026-10-09; EG_SELFKO_RULE=1 is an opt-in restriction, in no setup). Current since 2026-10-09 (the Trick Room Six and both Frankfurt sheets replayed on it; there is no v24).",
    "games": "v13-dp2-race-eg9"
   }
  }

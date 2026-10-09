@@ -118,7 +118,8 @@ turn-one lines and game plans in order (log `work/all.log`), then `more.sh` the 
                   "evs": [32, 32, 0, 0, 2, 0], "moves": ["Iron Head", "Kowtow Cleave", "Low Kick", "Sucker Punch"]}}
    ```
    `evs` are Champions stat points in the order HP, Atk, Def, SpA, SpD, Spe. A Mega is its base species holding the stone, with the
-   base forme's ability.
+   base forme's ability. Two stones in one six are fine: a lead holding both offers one or the other Mega Evolving on turn one (the
+   line says which), and the game plan says how often each one does.
 2. Edit `sheet.json` (options below) and `text.json` (the page's prose; the starter has the parts that are true of every sheet).
 3. `grid`, then `smoke`. If either fails, the set uses something a simulator does not know (see the two lists below): fix that before
    spending compute.

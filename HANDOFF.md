@@ -880,3 +880,26 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     Beat Up, Future Sight (2-7 cases each). Caution learned: `register()` already held stubs for some abilities (zerotohero's
     `onSwitchOut` returned Undef) and a second registration later in the function silently replaces an earlier one, so grep for an id
     before adding a handler. `native/champ/bin/champ-battle-v23` (two-line sha file, as v20's: binary and `src_battle_v23.tar.gz`).
+  - **Sweep after the Healing Wish bug (the user asked, 2026-10-09, 5:30 pm): is there anything else like it?** The bug had three parts:
+    the move was excluded from the planner by name, the engine's self-KO was a silent no-op (a typo, not an "unsupported" flag), and the
+    turn tests never used the move because their case generator draws sets from the regional / model pools, not from the user's team.
+    Checks run, all in one afternoon: (1) **the Trick Room six, exhaustively**: 2,700 Showdown-exact cases with one of the six in every
+    battle (`gen_turn_cases.js` FOCUS mode from `native/focus_sets_team.json`; `turn_cases_t1.jsonl` all six, `t2` Blastoise / Torkoal /
+    Indeedee-F; git-ignored like the other case files), every one of the 24 moves used at least 15 times in the logs (Healing Wish 15,
+    Aura Sphere 18, Water Spout 33, Eruption 50, the rest hundreds), the Mega, Psychic Seed, Drought, Psychic Surge, Armor Tail, Defiant,
+    Sitrus, Chople and White Herb all seen: **100% exact**; every callback the data lists for the six's moves, abilities and items has a
+    handler. (2) **stub handlers repo-wide**: 91 registrations whose body is `RV::Undef`, each compared with Showdown's callback: all
+    message-only or Champions-irrelevant (Dynamax / Z / Terastal / Persistent / gen <= 5 / Illusion); Perish Song's faint lives in onEnd.
+    (3) **literal comparisons against data fields** (selfdestruct, selfSwitch, target, category, status, type, terrain): the "ifHit" case
+    was the only one. (4) **the planner's name-based rules**: Fake Out after turn 1, Protect with a Choice item, re-clicking Trick Room,
+    and the feature lookups: all intended. (5) **export completeness**: every callback on Showdown's move / ability / item objects
+    (nested self / secondary ones included, which the export marks `__fn`) is in the engine data. Nothing else of the Healing Wish kind
+    was found. Standing gap, now documented: a mechanic that is neither ported nor on a set the case generator draws is invisible to
+    the tests; the FOCUS generator closes it per team (`FOCUS_POOL=<the team's sets> FOCUS=<its species>`), so a new sheet's team should
+    get a focused batch before its matrix run.
+    **Healing Wish stays free in the planner.** The restriction tried for v24 (only a hurt user or hurt bench) is now opt-in
+    (`EG_SELFKO_RULE=1`): the user's read is that a full-HP Healing Wish is often a real line (the setter leaves for free once Trick Room
+    is up, the replacement comes in without taking a hit), and the free version scored higher in the 320 matrix games (46.6% vs 45.3%,
+    v20 43.1%). So v23 is the version for the kit; no v24. TR sheet replays the results whose fours carry Healing Wish / Memento
+    (`kit.py <team> flagged --moves healingwish,memento --write`), on both sides: the Camerupt + Farigiraf card's Indeedee-F and
+    Sinistcha carry them.

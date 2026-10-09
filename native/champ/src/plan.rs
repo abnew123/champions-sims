@@ -509,6 +509,7 @@ fn no_double_protect(s: u8) -> bool {
     F.get_or_init(|| match std::env::var("EG_NO_DOUBLE_PROTECT").as_deref() {
         Ok("0") => [true, false], Ok("1") => [false, true], Ok("both") => [true, true], _ => [false, false] })[s as usize]
 }
+fn selfko_rule() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("EG_SELFKO_RULE").is_ok()) }
 pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
     let Some(pi) = b.sides[s as usize].active[i] else { return vec![PChoice::Pass] };
     let m = (s, pi);
@@ -519,7 +520,18 @@ pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
     let mut out = vec![];
     let foes: Vec<Option<MonRef>> = (0..2).map(|t| b.sides[1 - s as usize].active[t].map(|x| (1 - s, x))).collect();
     for (k, (mid, rtarget, disabled)) in req.iter().enumerate() {
-        if *disabled { continue; }   // Healing Wish and Memento were kept out until 2026-10-09 (their ifHit self-destruct never fired; fixed with the slot conditions)
+        if *disabled { continue; }
+        // Healing Wish / Memento are offered since 2026-10-09 (their self-KO and the slot condition started working then). The planner
+        // clicks Healing Wish at full HP in about a fifth of its uses (320 matrix games with the Trick Room six: 65 games with a use,
+        // v20 43.1% -> 46.6% with the move free); the user's read is that this is often a real line (the setter leaves for free once
+        // Trick Room is up, the replacement comes in without taking a hit), and the free version also scores higher than a restricted
+        // one (45.3%), so it stays free. EG_SELFKO_RULE=1 restricts it to a hurt user / hurt bench (Memento: hurt user) for comparisons.
+        if (*mid == "healingwish" || *mid == "memento") && selfko_rule() {
+            let p = b.p(m); let hurt = |q: &Pokemon| q.hp * 2 <= q.maxhp || !q.status.is_empty();
+            let bench_hurt = b.sides[s as usize].pokemon.iter().any(|q| !q.fainted && !q.is_active && (q.hp * 5 <= q.maxhp * 3 || !q.status.is_empty()));
+            if *mid == "healingwish" && !(hurt(p) || bench_hurt) { continue; }
+            if *mid == "memento" && !hurt(p) { continue; }
+        }
         if *mid == "fakeout" && b.p(m).active_move_actions > 0 { continue; }
         if b.p(m).item.starts_with("choice") && (*mid == "protect" || *mid == "detect") { continue; }
         if *mid == "trickroom" && find(&b.field.pseudo, "trickroom").is_some() && tr_keep(b, s) { continue; }

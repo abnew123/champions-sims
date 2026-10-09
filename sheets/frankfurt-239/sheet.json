@@ -27,30 +27,30 @@
  "opponents": "cards",
  "proc_prefix": "f239sheet",
  "theme": {
-  "note": "Layout: one reading column, sticky section bar; teal for rain",
+  "note": "Layout: one reading column, sticky section bar; the Trick Room Six sheet's colours",
   "light": {
-   "ground": "#f2f5f6",
+   "ground": "#f4f3f7",
    "panel": "#ffffff",
-   "panel-2": "#f8fafb",
-   "ink": "#131719",
-   "ink2": "#4f585c",
-   "ink3": "#7e888c",
-   "rule": "#d9e0e3",
-   "rule-2": "#e8edef",
-   "accent": "#0b7285",
-   "accent-soft": "#dff1f4"
+   "panel-2": "#faf9fc",
+   "ink": "#16141b",
+   "ink2": "#55525f",
+   "ink3": "#858292",
+   "rule": "#dfdce6",
+   "rule-2": "#ecebf1",
+   "accent": "#6a43c7",
+   "accent-soft": "#ece6fb"
   },
   "dark": {
-   "ground": "#121618",
-   "panel": "#1a1f21",
-   "panel-2": "#202628",
-   "ink": "#eff3f4",
-   "ink2": "#a6b0b4",
-   "ink3": "#768185",
-   "rule": "#2a3134",
-   "rule-2": "#232a2c",
-   "accent": "#66c7d6",
-   "accent-soft": "#15313a"
+   "ground": "#141318",
+   "panel": "#1c1b21",
+   "panel-2": "#222128",
+   "ink": "#f2f1f6",
+   "ink2": "#aca9b7",
+   "ink3": "#7b7886",
+   "rule": "#2e2c36",
+   "rule-2": "#27252e",
+   "accent": "#a68cf3",
+   "accent-soft": "#2a2342"
   }
  },
  "matrix_fours": [

@@ -1,0 +1,158 @@
+[
+ {
+  "team": "Baltimore-17",
+  "out": [
+   "Gholdengo#5",
+   "Garchomp#1"
+  ],
+  "into": [
+   "Excadrill#1",
+   "Dragapult#1"
+  ],
+  "diff": -0.05501361770158668,
+  "se": 0.02756863719137794
+ },
+ {
+  "team": "Baltimore-21",
+  "out": [
+   "Rillaboom#28",
+   "Basculegion#1"
+  ],
+  "into": [
+   "Milotic#2",
+   "Sinistcha#1"
+  ],
+  "diff": -0.08254714259264592,
+  "se": 0.027518326495659894
+ },
+ {
+  "team": "Baltimore-21",
+  "out": [
+   "Rillaboom#28",
+   "Basculegion#1"
+  ],
+  "into": [
+   "Politoed#1",
+   "Sinistcha#1"
+  ],
+  "diff": -0.11655209168669262,
+  "se": 0.028617482832905754
+ },
+ {
+  "team": "Baltimore-21",
+  "out": [
+   "Rillaboom#28",
+   "Basculegion#1"
+  ],
+  "into": [
+   "Politoed#2",
+   "Sinistcha#1"
+  ],
+  "diff": -0.056349232475386396,
+  "se": 0.02707651308784657
+ },
+ {
+  "team": "Baltimore-8",
+  "out": [
+   "M-Floette#2",
+   "M-Delphox#1"
+  ],
+  "into": [
+   "Sylveon#1",
+   "Armarouge#1"
+  ],
+  "diff": -0.13412243323967385,
+  "se": 0.025647377900377938
+ },
+ {
+  "team": "Baltimore-8",
+  "out": [
+   "M-Floette#2",
+   "M-Delphox#1"
+  ],
+  "into": [
+   "M-Gardevoir#1",
+   "Armarouge#1"
+  ],
+  "diff": -0.10481617692920624,
+  "se": 0.02818345283921899
+ },
+ {
+  "team": "Brisbane-7",
+  "out": [
+   "M-Garchomp Z#2",
+   "Basculegion#2"
+  ],
+  "into": [
+   "Milotic#5",
+   "Dragapult#1"
+  ],
+  "diff": -0.001726651285640102,
+  "se": 0.02843445562404705
+ },
+ {
+  "team": "Brisbane-7",
+  "out": [
+   "M-Garchomp Z#2",
+   "Basculegion#2"
+  ],
+  "into": [
+   "Milotic#2",
+   "Dragapult#1"
+  ],
+  "diff": -0.038023016942324454,
+  "se": 0.028344988460897388
+ },
+ {
+  "team": "Brisbane-9",
+  "out": [
+   "M-Mawile#4",
+   "Sableye#5"
+  ],
+  "into": [
+   "Gholdengo#1",
+   "Grimmsnarl#1"
+  ],
+  "diff": -0.050283675916644704,
+  "se": 0.02663972732918239
+ },
+ {
+  "team": "Brisbane-9",
+  "out": [
+   "Sableye#5",
+   "Archaludon#2"
+  ],
+  "into": [
+   "Kingambit#2",
+   "Dragapult#1"
+  ],
+  "diff": -0.050208732195727745,
+  "se": 0.027523743830873314
+ },
+ {
+  "team": "Frankfurt-1",
+  "out": [
+   "Gholdengo#2",
+   "M-Garchomp Z#1"
+  ],
+  "into": [
+   "Archaludon#3",
+   "Dragapult#1"
+  ],
+  "diff": -0.02014025254707675,
+  "se": 0.028554006824619383
+ },
+ {
+  "team": "Frankfurt-47",
+  "out": [
+   "Milotic#4",
+   "Sinistcha#1"
+  ],
+  "into": [
+   "Rillaboom#1",
+   "Basculegion#1"
+  ],
+  "diff": -0.015932418003849327,
+  "se": 0.026979999617339646
+ }
+]

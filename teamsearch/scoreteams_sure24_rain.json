@@ -1,0 +1,2530 @@
+[
+ {
+  "name": "Baltimore-203",
+  "score": 0.5926819091068137,
+  "se": 0.01668163669083285,
+  "sure_hits": 24,
+  "team": [
+   "Grimmsnarl#1",
+   "Pelipper#1",
+   "Farigiraf#14",
+   "M-Golisopod#12",
+   "M-Garchomp Z#1",
+   "Archaludon#1"
+  ],
+  "brings": {
+   "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)": [
+    [
+     "Pelipper#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Farigiraf#14",
+     "Archaludon#1"
+    ]
+   ],
+   "other/Tailwind": [
+    [
+     "M-Garchomp Z#1",
+     "Archaludon#1"
+    ],
+    [
+     "Pelipper#1",
+     "Farigiraf#14"
+    ]
+   ],
+   "other/Balance": [
+    [
+     "M-Garchomp Z#1",
+     "Archaludon#1"
+    ],
+    [
+     "Pelipper#1",
+     "Farigiraf#14"
+    ]
+   ],
+   "Rain: Archaludon + Pelipper (no Grimmsnarl)": [
+    [
+     "Farigiraf#14",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Pelipper#1",
+     "Archaludon#1"
+    ]
+   ],
+   "other/Sun": [
+    [
+     "Grimmsnarl#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Farigiraf#14",
+     "Archaludon#1"
+    ]
+   ],
+   "Indeedee TR: Armarouge + Indeedee-F": [
+    [
+     "M-Golisopod#12",
+     "Archaludon#1"
+    ],
+    [
+     "Pelipper#1",
+     "Farigiraf#14"
+    ]
+   ],
+   "other/Trick Room": [
+    [
+     "M-Golisopod#12",
+     "Archaludon#1"
+    ],
+    [
+     "Pelipper#1",
+     "Farigiraf#14"
+    ]
+   ],
+   "Sand: Excadrill + Salamence + Sneasler + Tyranitar": [
+    [
+     "M-Golisopod#12",
+     "Archaludon#1"
+    ],
+    [
+     "Pelipper#1",
+     "Farigiraf#14"
+    ]
+   ],
+   "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)": [
+    [
+     "M-Golisopod#12",
+     "Archaludon#1"
+    ],
+    [
+     "Pelipper#1",
+     "Farigiraf#14"
+    ]
+   ],
+   "other/Snow": [
+    [
+     "M-Garchomp Z#1",
+     "Archaludon#1"
+    ],
+    [
+     "Pelipper#1",
+     "Farigiraf#14"
+    ]
+   ],
+   "other/Indeedee TR": [
+    [
+     "M-Golisopod#12",
+     "Archaludon#1"
+    ],
+    [
+     "Pelipper#1",
+     "Farigiraf#14"
+    ]
+   ],
+   "Balance: Gholdengo + Incineroar + Raichu + Rillaboom": [
+    [
+     "Pelipper#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Farigiraf#14",
+     "Archaludon#1"
+    ]
+   ],
+   "Rain + Sun: Archaludon + Grimmsnarl + Pelipper": [
+    [
+     "Grimmsnarl#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Pelipper#1",
+     "Archaludon#1"
+    ]
+   ],
+   "Snow: Froslass + Kingambit + Rillaboom": [
+    [
+     "Pelipper#1",
+     "Archaludon#1"
+    ],
+    [
+     "Farigiraf#14",
+     "M-Garchomp Z#1"
+    ]
+   ],
+   "Rain + Sun: Archaludon + Golisopod + Politoed": [
+    [
+     "M-Garchomp Z#1",
+     "Archaludon#1"
+    ],
+    [
+     "Pelipper#1",
+     "Farigiraf#14"
+    ]
+   ],
+   "Perish: Archaludon + Politoed (no Golisopod)": [
+    [
+     "M-Garchomp Z#1",
+     "Archaludon#1"
+    ],
+    [
+     "Pelipper#1",
+     "Farigiraf#14"
+    ]
+   ],
+   "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)": [
+    [
+     "M-Golisopod#12",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Pelipper#1",
+     "Archaludon#1"
+    ]
+   ],
+   "other/Rain": [
+    [
+     "Pelipper#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Farigiraf#14",
+     "Archaludon#1"
+    ]
+   ],
+   "Indeedee TR: Camerupt + Farigiraf": [
+    [
+     "Pelipper#1",
+     "Archaludon#1"
+    ],
+    [
+     "Grimmsnarl#1",
+     "M-Golisopod#12"
+    ]
+   ],
+   "Sun: Charizard + Whimsicott": [
+    [
+     "Grimmsnarl#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Pelipper#1",
+     "Archaludon#1"
+    ]
+   ],
+   "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)": [
+    [
+     "Grimmsnarl#1",
+     "M-Golisopod#12"
+    ],
+    [
+     "Farigiraf#14",
+     "Archaludon#1"
+    ]
+   ],
+   "Indeedee TR: Basculegion + Whimsicott": [
+    [
+     "M-Golisopod#12",
+     "Archaludon#1"
+    ],
+    [
+     "Pelipper#1",
+     "Farigiraf#14"
+    ]
+   ],
+   "other/Sand": [
+    [
+     "Grimmsnarl#1",
+     "Pelipper#1"
+    ],
+    [
+     "M-Golisopod#12",
+     "Archaludon#1"
+    ]
+   ],
+   "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler": [
+    [
+     "Farigiraf#14",
+     "Archaludon#1"
+    ],
+    [
+     "Pelipper#1",
+     "M-Golisopod#12"
+    ]
+   ],
+   "other/Perish": [
+    [
+     "M-Garchomp Z#1",
+     "Archaludon#1"
+    ],
+    [
+     "Pelipper#1",
+     "Farigiraf#14"
+    ]
+   ],
+   "Trick Room: Delphox + Floette + Incineroar + Sinistcha": [
+    [
+     "Pelipper#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Farigiraf#14",
+     "Archaludon#1"
+    ]
+   ],
+   "Sand: Excadrill + Tyranitar": [
+    [
+     "Grimmsnarl#1",
+     "M-Golisopod#12"
+    ],
+    [
+     "Farigiraf#14",
+     "Archaludon#1"
+    ]
+   ],
+   "Perish: Gengar + Kommo-o + Rillaboom": [
+    [
+     "M-Garchomp Z#1",
+     "Archaludon#1"
+    ],
+    [
+     "Pelipper#1",
+     "Farigiraf#14"
+    ]
+   ],
+   "Balance: Dragonite + Floette + Incineroar": [
+    [
+     "Grimmsnarl#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Pelipper#1",
+     "Archaludon#1"
+    ]
+   ],
+   "Sun: Farigiraf + Garchomp + Incineroar + Sylveon": [
+    [
+     "M-Golisopod#12",
+     "Archaludon#1"
+    ],
+    [
+     "Pelipper#1",
+     "Farigiraf#14"
+    ]
+   ]
+  }
+ },
+ {
+  "name": "Brisbane-137",
+  "score": 0.6076166470458068,
+  "se": 0.016396390496689322,
+  "sure_hits": 24,
+  "team": [
+   "Farigiraf#8",
+   "Pelipper#19",
+   "Incineroar#37",
+   "M-Raichu Y#1",
+   "M-Golisopod#23",
+   "Kingambit#3"
+  ],
+  "brings": {
+   "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)": [
+    [
+     "M-Raichu Y#1",
+     "M-Golisopod#23"
+    ],
+    [
+     "Farigiraf#8",
+     "Kingambit#3"
+    ]
+   ],
+   "other/Tailwind": [
+    [
+     "Farigiraf#8",
+     "M-Raichu Y#1"
+    ],
+    [
+     "Pelipper#19",
+     "Kingambit#3"
+    ]
+   ],
+   "other/Balance": [
+    [
+     "Farigiraf#8",
+     "Incineroar#37"
+    ],
+    [
+     "Pelipper#19",
+     "M-Golisopod#23"
+    ]
+   ],
+   "Rain: Archaludon + Pelipper (no Grimmsnarl)": [
+    [
+     "M-Raichu Y#1",
+     "Kingambit#3"
+    ],
+    [
+     "Farigiraf#8",
+     "Incineroar#37"
+    ]
+   ],
+   "other/Sun": [
+    [
+     "Farigiraf#8",
+     "Incineroar#37"
+    ],
+    [
+     "Pelipper#19",
+     "M-Golisopod#23"
+    ]
+   ],
+   "Indeedee TR: Armarouge + Indeedee-F": [
+    [
+     "Farigiraf#8",
+     "M-Raichu Y#1"
+    ],
+    [
+     "Pelipper#19",
+     "Incineroar#37"
+    ]
+   ],
+   "other/Trick Room": [
+    [
+     "M-Raichu Y#1",
+     "Kingambit#3"
+    ],
+    [
+     "Farigiraf#8",
+     "Pelipper#19"
+    ]
+   ],
+   "Sand: Excadrill + Salamence + Sneasler + Tyranitar": [
+    [
+     "M-Raichu Y#1",
+     "Kingambit#3"
+    ],
+    [
+     "Farigiraf#8",
+     "Pelipper#19"
+    ]
+   ],
+   "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)": [
+    [
+     "Farigiraf#8",
+     "M-Golisopod#23"
+    ],
+    [
+     "Pelipper#19",
+     "Kingambit#3"
+    ]
+   ],
+   "other/Snow": [
+    [
+     "M-Golisopod#23",
+     "Kingambit#3"
+    ],
+    [
+     "Farigiraf#8",
+     "Pelipper#19"
+    ]
+   ],
+   "other/Indeedee TR": [
+    [
+     "M-Golisopod#23",
+     "Kingambit#3"
+    ],
+    [
+     "Farigiraf#8",
+     "Pelipper#19"
+    ]
+   ],
+   "Balance: Gholdengo + Incineroar + Raichu + Rillaboom": [
+    [
+     "Pelipper#19",
+     "Kingambit#3"
+    ],
+    [
+     "Farigiraf#8",
+     "M-Golisopod#23"
+    ]
+   ],
+   "Rain + Sun: Archaludon + Grimmsnarl + Pelipper": [
+    [
+     "M-Raichu Y#1",
+     "Kingambit#3"
+    ],
+    [
+     "Farigiraf#8",
+     "Pelipper#19"
+    ]
+   ],
+   "Snow: Froslass + Kingambit + Rillaboom": [
+    [
+     "M-Golisopod#23",
+     "Kingambit#3"
+    ],
+    [
+     "Farigiraf#8",
+     "Incineroar#37"
+    ]
+   ],
+   "Rain + Sun: Archaludon + Golisopod + Politoed": [
+    [
+     "Incineroar#37",
+     "M-Raichu Y#1"
+    ],
+    [
+     "Farigiraf#8",
+     "Kingambit#3"
+    ]
+   ],
+   "Perish: Archaludon + Politoed (no Golisopod)": [
+    [
+     "M-Raichu Y#1",
+     "Kingambit#3"
+    ],
+    [
+     "Farigiraf#8",
+     "Pelipper#19"
+    ]
+   ],
+   "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)": [
+    [
+     "M-Golisopod#23",
+     "Kingambit#3"
+    ],
+    [
+     "Farigiraf#8",
+     "Pelipper#19"
+    ]
+   ],
+   "other/Rain": [
+    [
+     "Pelipper#19",
+     "M-Raichu Y#1"
+    ],
+    [
+     "Farigiraf#8",
+     "Incineroar#37"
+    ]
+   ],
+   "Indeedee TR: Camerupt + Farigiraf": [
+    [
+     "M-Golisopod#23",
+     "Kingambit#3"
+    ],
+    [
+     "Farigiraf#8",
+     "Pelipper#19"
+    ]
+   ],
+   "Sun: Charizard + Whimsicott": [
+    [
+     "M-Golisopod#23",
+     "Kingambit#3"
+    ],
+    [
+     "Farigiraf#8",
+     "Pelipper#19"
+    ]
+   ],
+   "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)": [
+    [
+     "M-Raichu Y#1",
+     "Kingambit#3"
+    ],
+    [
+     "Farigiraf#8",
+     "Pelipper#19"
+    ]
+   ],
+   "Indeedee TR: Basculegion + Whimsicott": [
+    [
+     "Farigiraf#8",
+     "M-Golisopod#23"
+    ],
+    [
+     "Pelipper#19",
+     "Kingambit#3"
+    ]
+   ],
+   "other/Sand": [
+    [
+     "Farigiraf#8",
+     "Kingambit#3"
+    ],
+    [
+     "Pelipper#19",
+     "M-Golisopod#23"
+    ]
+   ],
+   "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler": [
+    [
+     "Farigiraf#8",
+     "M-Golisopod#23"
+    ],
+    [
+     "Pelipper#19",
+     "Kingambit#3"
+    ]
+   ],
+   "other/Perish": [
+    [
+     "M-Golisopod#23",
+     "Kingambit#3"
+    ],
+    [
+     "Farigiraf#8",
+     "Pelipper#19"
+    ]
+   ],
+   "Trick Room: Delphox + Floette + Incineroar + Sinistcha": [
+    [
+     "Farigiraf#8",
+     "M-Raichu Y#1"
+    ],
+    [
+     "Incineroar#37",
+     "Kingambit#3"
+    ]
+   ],
+   "Sand: Excadrill + Tyranitar": [
+    [
+     "Farigiraf#8",
+     "M-Golisopod#23"
+    ],
+    [
+     "Pelipper#19",
+     "Kingambit#3"
+    ]
+   ],
+   "Perish: Gengar + Kommo-o + Rillaboom": [
+    [
+     "M-Golisopod#23",
+     "Kingambit#3"
+    ],
+    [
+     "Farigiraf#8",
+     "Pelipper#19"
+    ]
+   ],
+   "Balance: Dragonite + Floette + Incineroar": [
+    [
+     "Farigiraf#8",
+     "Incineroar#37"
+    ],
+    [
+     "Pelipper#19",
+     "M-Golisopod#23"
+    ]
+   ],
+   "Sun: Farigiraf + Garchomp + Incineroar + Sylveon": [
+    [
+     "Pelipper#19",
+     "M-Golisopod#23"
+    ],
+    [
+     "Farigiraf#8",
+     "Incineroar#37"
+    ]
+   ]
+  }
+ },
+ {
+  "name": "Frankfurt-156",
+  "score": 0.672705405856865,
+  "se": 0.015875112870548286,
+  "sure_hits": 24,
+  "team": [
+   "Basculegion#1",
+   "Pelipper#5",
+   "Farigiraf#39",
+   "Archaludon#2",
+   "M-Garchomp Z#1",
+   "M-Golisopod#3"
+  ],
+  "brings": {
+   "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)": [
+    [
+     "Basculegion#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Pelipper#5",
+     "Archaludon#2"
+    ]
+   ],
+   "other/Tailwind": [
+    [
+     "Basculegion#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Pelipper#5",
+     "Archaludon#2"
+    ]
+   ],
+   "other/Balance": [
+    [
+     "Basculegion#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Pelipper#5",
+     "Farigiraf#39"
+    ]
+   ],
+   "Rain: Archaludon + Pelipper (no Grimmsnarl)": [
+    [
+     "Basculegion#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Pelipper#5",
+     "Archaludon#2"
+    ]
+   ],
+   "other/Sun": [
+    [
+     "Pelipper#5",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Farigiraf#39",
+     "Archaludon#2"
+    ]
+   ],
+   "Indeedee TR: Armarouge + Indeedee-F": [
+    [
+     "Basculegion#1",
+     "M-Golisopod#3"
+    ],
+    [
+     "Pelipper#5",
+     "Archaludon#2"
+    ]
+   ],
+   "other/Trick Room": [
+    [
+     "Basculegion#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Pelipper#5",
+     "Archaludon#2"
+    ]
+   ],
+   "Sand: Excadrill + Salamence + Sneasler + Tyranitar": [
+    [
+     "Basculegion#1",
+     "Archaludon#2"
+    ],
+    [
+     "Farigiraf#39",
+     "M-Golisopod#3"
+    ]
+   ],
+   "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)": [
+    [
+     "Basculegion#1",
+     "M-Golisopod#3"
+    ],
+    [
+     "Farigiraf#39",
+     "Archaludon#2"
+    ]
+   ],
+   "other/Snow": [
+    [
+     "Basculegion#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Pelipper#5",
+     "Archaludon#2"
+    ]
+   ],
+   "other/Indeedee TR": [
+    [
+     "Pelipper#5",
+     "M-Golisopod#3"
+    ],
+    [
+     "Farigiraf#39",
+     "Archaludon#2"
+    ]
+   ],
+   "Balance: Gholdengo + Incineroar + Raichu + Rillaboom": [
+    [
+     "Archaludon#2",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Pelipper#5",
+     "Farigiraf#39"
+    ]
+   ],
+   "Rain + Sun: Archaludon + Grimmsnarl + Pelipper": [
+    [
+     "Basculegion#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Pelipper#5",
+     "Archaludon#2"
+    ]
+   ],
+   "Snow: Froslass + Kingambit + Rillaboom": [
+    [
+     "Basculegion#1",
+     "M-Golisopod#3"
+    ],
+    [
+     "Pelipper#5",
+     "Archaludon#2"
+    ]
+   ],
+   "Rain + Sun: Archaludon + Golisopod + Politoed": [
+    [
+     "Archaludon#2",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Basculegion#1",
+     "Pelipper#5"
+    ]
+   ],
+   "Perish: Archaludon + Politoed (no Golisopod)": [
+    [
+     "Archaludon#2",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Basculegion#1",
+     "Pelipper#5"
+    ]
+   ],
+   "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)": [
+    [
+     "Basculegion#1",
+     "M-Golisopod#3"
+    ],
+    [
+     "Pelipper#5",
+     "Archaludon#2"
+    ]
+   ],
+   "other/Rain": [
+    [
+     "Farigiraf#39",
+     "Archaludon#2"
+    ],
+    [
+     "Pelipper#5",
+     "M-Golisopod#3"
+    ]
+   ],
+   "Indeedee TR: Camerupt + Farigiraf": [
+    [
+     "Basculegion#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Pelipper#5",
+     "Archaludon#2"
+    ]
+   ],
+   "Sun: Charizard + Whimsicott": [
+    [
+     "Basculegion#1",
+     "Farigiraf#39"
+    ],
+    [
+     "Archaludon#2",
+     "M-Golisopod#3"
+    ]
+   ],
+   "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)": [
+    [
+     "Farigiraf#39",
+     "M-Golisopod#3"
+    ],
+    [
+     "Pelipper#5",
+     "Archaludon#2"
+    ]
+   ],
+   "Indeedee TR: Basculegion + Whimsicott": [
+    [
+     "Basculegion#1",
+     "M-Golisopod#3"
+    ],
+    [
+     "Pelipper#5",
+     "Farigiraf#39"
+    ]
+   ],
+   "other/Sand": [
+    [
+     "Basculegion#1",
+     "M-Golisopod#3"
+    ],
+    [
+     "Farigiraf#39",
+     "Archaludon#2"
+    ]
+   ],
+   "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler": [
+    [
+     "Basculegion#1",
+     "M-Golisopod#3"
+    ],
+    [
+     "Farigiraf#39",
+     "Archaludon#2"
+    ]
+   ],
+   "other/Perish": [
+    [
+     "Pelipper#5",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Farigiraf#39",
+     "Archaludon#2"
+    ]
+   ],
+   "Trick Room: Delphox + Floette + Incineroar + Sinistcha": [
+    [
+     "Basculegion#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Pelipper#5",
+     "Archaludon#2"
+    ]
+   ],
+   "Sand: Excadrill + Tyranitar": [
+    [
+     "Basculegion#1",
+     "M-Golisopod#3"
+    ],
+    [
+     "Pelipper#5",
+     "Farigiraf#39"
+    ]
+   ],
+   "Perish: Gengar + Kommo-o + Rillaboom": [
+    [
+     "Archaludon#2",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Basculegion#1",
+     "Pelipper#5"
+    ]
+   ],
+   "Balance: Dragonite + Floette + Incineroar": [
+    [
+     "Basculegion#1",
+     "M-Garchomp Z#1"
+    ],
+    [
+     "Pelipper#5",
+     "Farigiraf#39"
+    ]
+   ],
+   "Sun: Farigiraf + Garchomp + Incineroar + Sylveon": [
+    [
+     "Pelipper#5",
+     "Archaludon#2"
+    ],
+    [
+     "Basculegion#1",
+     "M-Golisopod#3"
+    ]
+   ]
+  }
+ },
+ {
+  "name": "Frankfurt-163",
+  "score": 0.5661845333718569,
+  "se": 0.016576992511396858,
+  "sure_hits": 24,
+  "team": [
+   "Archaludon#2",
+   "M-Salamence#10",
+   "Annihilape#7",
+   "Pelipper#6",
+   "Rillaboom#2",
+   "M-Golisopod#4"
+  ],
+  "brings": {
+   "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)": [
+    [
+     "M-Salamence#10",
+     "Annihilape#7"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "other/Tailwind": [
+    [
+     "Archaludon#2",
+     "M-Golisopod#4"
+    ],
+    [
+     "Pelipper#6",
+     "Rillaboom#2"
+    ]
+   ],
+   "other/Balance": [
+    [
+     "M-Salamence#10",
+     "Annihilape#7"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Rain: Archaludon + Pelipper (no Grimmsnarl)": [
+    [
+     "Archaludon#2",
+     "Annihilape#7"
+    ],
+    [
+     "Pelipper#6",
+     "M-Golisopod#4"
+    ]
+   ],
+   "other/Sun": [
+    [
+     "Annihilape#7",
+     "M-Golisopod#4"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Indeedee TR: Armarouge + Indeedee-F": [
+    [
+     "M-Salamence#10",
+     "Annihilape#7"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "other/Trick Room": [
+    [
+     "Annihilape#7",
+     "M-Golisopod#4"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Sand: Excadrill + Salamence + Sneasler + Tyranitar": [
+    [
+     "Annihilape#7",
+     "M-Golisopod#4"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)": [
+    [
+     "Archaludon#2",
+     "M-Golisopod#4"
+    ],
+    [
+     "Pelipper#6",
+     "Rillaboom#2"
+    ]
+   ],
+   "other/Snow": [
+    [
+     "Archaludon#2",
+     "Annihilape#7"
+    ],
+    [
+     "Pelipper#6",
+     "M-Golisopod#4"
+    ]
+   ],
+   "other/Indeedee TR": [
+    [
+     "Pelipper#6",
+     "M-Golisopod#4"
+    ],
+    [
+     "Archaludon#2",
+     "Annihilape#7"
+    ]
+   ],
+   "Balance: Gholdengo + Incineroar + Raichu + Rillaboom": [
+    [
+     "Annihilape#7",
+     "M-Golisopod#4"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Rain + Sun: Archaludon + Grimmsnarl + Pelipper": [
+    [
+     "Rillaboom#2",
+     "M-Golisopod#4"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Snow: Froslass + Kingambit + Rillaboom": [
+    [
+     "Annihilape#7",
+     "M-Golisopod#4"
+    ],
+    [
+     "Pelipper#6",
+     "Rillaboom#2"
+    ]
+   ],
+   "Rain + Sun: Archaludon + Golisopod + Politoed": [
+    [
+     "Annihilape#7",
+     "Rillaboom#2"
+    ],
+    [
+     "Archaludon#2",
+     "M-Salamence#10"
+    ]
+   ],
+   "Perish: Archaludon + Politoed (no Golisopod)": [
+    [
+     "Archaludon#2",
+     "M-Golisopod#4"
+    ],
+    [
+     "Pelipper#6",
+     "Rillaboom#2"
+    ]
+   ],
+   "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)": [
+    [
+     "Archaludon#2",
+     "M-Golisopod#4"
+    ],
+    [
+     "Pelipper#6",
+     "Rillaboom#2"
+    ]
+   ],
+   "other/Rain": [
+    [
+     "Archaludon#2",
+     "M-Golisopod#4"
+    ],
+    [
+     "Pelipper#6",
+     "Rillaboom#2"
+    ]
+   ],
+   "Indeedee TR: Camerupt + Farigiraf": [
+    [
+     "Pelipper#6",
+     "M-Golisopod#4"
+    ],
+    [
+     "Archaludon#2",
+     "Annihilape#7"
+    ]
+   ],
+   "Sun: Charizard + Whimsicott": [
+    [
+     "Rillaboom#2",
+     "M-Golisopod#4"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)": [
+    [
+     "Annihilape#7",
+     "M-Golisopod#4"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Indeedee TR: Basculegion + Whimsicott": [
+    [
+     "Rillaboom#2",
+     "M-Golisopod#4"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "other/Sand": [
+    [
+     "Annihilape#7",
+     "Pelipper#6"
+    ],
+    [
+     "Archaludon#2",
+     "M-Salamence#10"
+    ]
+   ],
+   "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler": [
+    [
+     "Annihilape#7",
+     "M-Golisopod#4"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "other/Perish": [
+    [
+     "Annihilape#7",
+     "Pelipper#6"
+    ],
+    [
+     "Archaludon#2",
+     "M-Salamence#10"
+    ]
+   ],
+   "Trick Room: Delphox + Floette + Incineroar + Sinistcha": [
+    [
+     "Annihilape#7",
+     "M-Golisopod#4"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Sand: Excadrill + Tyranitar": [
+    [
+     "Annihilape#7",
+     "M-Golisopod#4"
+    ],
+    [
+     "Archaludon#2",
+     "Rillaboom#2"
+    ]
+   ],
+   "Perish: Gengar + Kommo-o + Rillaboom": [
+    [
+     "Annihilape#7",
+     "Pelipper#6"
+    ],
+    [
+     "Archaludon#2",
+     "M-Golisopod#4"
+    ]
+   ],
+   "Balance: Dragonite + Floette + Incineroar": [
+    [
+     "Annihilape#7",
+     "M-Golisopod#4"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Sun: Farigiraf + Garchomp + Incineroar + Sylveon": [
+    [
+     "Archaludon#2",
+     "Annihilape#7"
+    ],
+    [
+     "Pelipper#6",
+     "M-Golisopod#4"
+    ]
+   ]
+  }
+ },
+ {
+  "name": "Frankfurt-193",
+  "score": 0.6701407203141435,
+  "se": 0.015552188921020943,
+  "sure_hits": 24,
+  "team": [
+   "Grimmsnarl#2",
+   "M-Swampert#3",
+   "Farigiraf#17",
+   "Archaludon#2",
+   "Pelipper#3",
+   "M-Golisopod#22"
+  ],
+  "brings": {
+   "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)": [
+    [
+     "M-Swampert#3",
+     "Pelipper#3"
+    ],
+    [
+     "Farigiraf#17",
+     "Archaludon#2"
+    ]
+   ],
+   "other/Tailwind": [
+    [
+     "M-Swampert#3",
+     "Archaludon#2"
+    ],
+    [
+     "Farigiraf#17",
+     "Pelipper#3"
+    ]
+   ],
+   "other/Balance": [
+    [
+     "M-Swampert#3",
+     "Pelipper#3"
+    ],
+    [
+     "Farigiraf#17",
+     "Archaludon#2"
+    ]
+   ],
+   "Rain: Archaludon + Pelipper (no Grimmsnarl)": [
+    [
+     "Grimmsnarl#2",
+     "Archaludon#2"
+    ],
+    [
+     "M-Swampert#3",
+     "Pelipper#3"
+    ]
+   ],
+   "other/Sun": [
+    [
+     "Farigiraf#17",
+     "M-Golisopod#22"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#3"
+    ]
+   ],
+   "Indeedee TR: Armarouge + Indeedee-F": [
+    [
+     "M-Swampert#3",
+     "Archaludon#2"
+    ],
+    [
+     "Farigiraf#17",
+     "Pelipper#3"
+    ]
+   ],
+   "other/Trick Room": [
+    [
+     "M-Swampert#3",
+     "Archaludon#2"
+    ],
+    [
+     "Farigiraf#17",
+     "Pelipper#3"
+    ]
+   ],
+   "Sand: Excadrill + Salamence + Sneasler + Tyranitar": [
+    [
+     "M-Swampert#3",
+     "Archaludon#2"
+    ],
+    [
+     "Farigiraf#17",
+     "Pelipper#3"
+    ]
+   ],
+   "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)": [
+    [
+     "M-Swampert#3",
+     "Pelipper#3"
+    ],
+    [
+     "Grimmsnarl#2",
+     "Archaludon#2"
+    ]
+   ],
+   "other/Snow": [
+    [
+     "Archaludon#2",
+     "M-Golisopod#22"
+    ],
+    [
+     "Farigiraf#17",
+     "Pelipper#3"
+    ]
+   ],
+   "other/Indeedee TR": [
+    [
+     "Pelipper#3",
+     "M-Golisopod#22"
+    ],
+    [
+     "Farigiraf#17",
+     "Archaludon#2"
+    ]
+   ],
+   "Balance: Gholdengo + Incineroar + Raichu + Rillaboom": [
+    [
+     "Grimmsnarl#2",
+     "M-Swampert#3"
+    ],
+    [
+     "Farigiraf#17",
+     "Pelipper#3"
+    ]
+   ],
+   "Rain + Sun: Archaludon + Grimmsnarl + Pelipper": [
+    [
+     "Grimmsnarl#2",
+     "M-Swampert#3"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#3"
+    ]
+   ],
+   "Snow: Froslass + Kingambit + Rillaboom": [
+    [
+     "Grimmsnarl#2",
+     "M-Swampert#3"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#3"
+    ]
+   ],
+   "Rain + Sun: Archaludon + Golisopod + Politoed": [
+    [
+     "M-Swampert#3",
+     "Archaludon#2"
+    ],
+    [
+     "Farigiraf#17",
+     "Pelipper#3"
+    ]
+   ],
+   "Perish: Archaludon + Politoed (no Golisopod)": [
+    [
+     "M-Swampert#3",
+     "Pelipper#3"
+    ],
+    [
+     "Grimmsnarl#2",
+     "Archaludon#2"
+    ]
+   ],
+   "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)": [
+    [
+     "M-Swampert#3",
+     "Archaludon#2"
+    ],
+    [
+     "Farigiraf#17",
+     "Pelipper#3"
+    ]
+   ],
+   "other/Rain": [
+    [
+     "Grimmsnarl#2",
+     "M-Swampert#3"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#3"
+    ]
+   ],
+   "Indeedee TR: Camerupt + Farigiraf": [
+    [
+     "Archaludon#2",
+     "Pelipper#3"
+    ],
+    [
+     "Grimmsnarl#2",
+     "M-Golisopod#22"
+    ]
+   ],
+   "Sun: Charizard + Whimsicott": [
+    [
+     "M-Swampert#3",
+     "Archaludon#2"
+    ],
+    [
+     "Farigiraf#17",
+     "Pelipper#3"
+    ]
+   ],
+   "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)": [
+    [
+     "Farigiraf#17",
+     "M-Golisopod#22"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#3"
+    ]
+   ],
+   "Indeedee TR: Basculegion + Whimsicott": [
+    [
+     "Grimmsnarl#2",
+     "M-Golisopod#22"
+    ],
+    [
+     "Farigiraf#17",
+     "Archaludon#2"
+    ]
+   ],
+   "other/Sand": [
+    [
+     "Grimmsnarl#2",
+     "M-Swampert#3"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#3"
+    ]
+   ],
+   "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler": [
+    [
+     "Grimmsnarl#2",
+     "M-Swampert#3"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#3"
+    ]
+   ],
+   "other/Perish": [
+    [
+     "M-Swampert#3",
+     "Archaludon#2"
+    ],
+    [
+     "Farigiraf#17",
+     "Pelipper#3"
+    ]
+   ],
+   "Trick Room: Delphox + Floette + Incineroar + Sinistcha": [
+    [
+     "M-Swampert#3",
+     "Farigiraf#17"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#3"
+    ]
+   ],
+   "Sand: Excadrill + Tyranitar": [
+    [
+     "M-Swampert#3",
+     "Archaludon#2"
+    ],
+    [
+     "Farigiraf#17",
+     "Pelipper#3"
+    ]
+   ],
+   "Perish: Gengar + Kommo-o + Rillaboom": [
+    [
+     "Grimmsnarl#2",
+     "M-Swampert#3"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#3"
+    ]
+   ],
+   "Balance: Dragonite + Floette + Incineroar": [
+    [
+     "M-Swampert#3",
+     "Pelipper#3"
+    ],
+    [
+     "Farigiraf#17",
+     "Archaludon#2"
+    ]
+   ],
+   "Sun: Farigiraf + Garchomp + Incineroar + Sylveon": [
+    [
+     "Grimmsnarl#2",
+     "M-Swampert#3"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#3"
+    ]
+   ]
+  }
+ },
+ {
+  "name": "Frankfurt-239",
+  "score": 0.683053318626173,
+  "se": 0.015374050276454372,
+  "sure_hits": 24,
+  "team": [
+   "Grimmsnarl#2",
+   "M-Swampert#4",
+   "Archaludon#2",
+   "Pelipper#6",
+   "M-Metagross#18",
+   "Indeedee-F#2"
+  ],
+  "brings": {
+   "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)": [
+    [
+     "M-Swampert#4",
+     "Pelipper#6"
+    ],
+    [
+     "Archaludon#2",
+     "Indeedee-F#2"
+    ]
+   ],
+   "other/Tailwind": [
+    [
+     "Archaludon#2",
+     "M-Metagross#18"
+    ],
+    [
+     "Pelipper#6",
+     "Indeedee-F#2"
+    ]
+   ],
+   "other/Balance": [
+    [
+     "M-Swampert#4",
+     "Archaludon#2"
+    ],
+    [
+     "Pelipper#6",
+     "Indeedee-F#2"
+    ]
+   ],
+   "Rain: Archaludon + Pelipper (no Grimmsnarl)": [
+    [
+     "M-Metagross#18",
+     "Indeedee-F#2"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "other/Sun": [
+    [
+     "M-Swampert#4",
+     "Archaludon#2"
+    ],
+    [
+     "Pelipper#6",
+     "Indeedee-F#2"
+    ]
+   ],
+   "Indeedee TR: Armarouge + Indeedee-F": [
+    [
+     "M-Swampert#4",
+     "Pelipper#6"
+    ],
+    [
+     "Archaludon#2",
+     "M-Metagross#18"
+    ]
+   ],
+   "other/Trick Room": [
+    [
+     "M-Metagross#18",
+     "Indeedee-F#2"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Sand: Excadrill + Salamence + Sneasler + Tyranitar": [
+    [
+     "M-Metagross#18",
+     "Indeedee-F#2"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)": [
+    [
+     "M-Metagross#18",
+     "Indeedee-F#2"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "other/Snow": [
+    [
+     "M-Swampert#4",
+     "Archaludon#2"
+    ],
+    [
+     "Pelipper#6",
+     "Indeedee-F#2"
+    ]
+   ],
+   "other/Indeedee TR": [
+    [
+     "M-Metagross#18",
+     "Indeedee-F#2"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Balance: Gholdengo + Incineroar + Raichu + Rillaboom": [
+    [
+     "M-Swampert#4",
+     "Pelipper#6"
+    ],
+    [
+     "Archaludon#2",
+     "Indeedee-F#2"
+    ]
+   ],
+   "Rain + Sun: Archaludon + Grimmsnarl + Pelipper": [
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ],
+    [
+     "M-Metagross#18",
+     "Indeedee-F#2"
+    ]
+   ],
+   "Snow: Froslass + Kingambit + Rillaboom": [
+    [
+     "Pelipper#6",
+     "M-Metagross#18"
+    ],
+    [
+     "Archaludon#2",
+     "Indeedee-F#2"
+    ]
+   ],
+   "Rain + Sun: Archaludon + Golisopod + Politoed": [
+    [
+     "M-Swampert#4",
+     "Archaludon#2"
+    ],
+    [
+     "Pelipper#6",
+     "Indeedee-F#2"
+    ]
+   ],
+   "Perish: Archaludon + Politoed (no Golisopod)": [
+    [
+     "M-Metagross#18",
+     "Indeedee-F#2"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)": [
+    [
+     "M-Swampert#4",
+     "Archaludon#2"
+    ],
+    [
+     "Pelipper#6",
+     "Indeedee-F#2"
+    ]
+   ],
+   "other/Rain": [
+    [
+     "Grimmsnarl#2",
+     "M-Swampert#4"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Indeedee TR: Camerupt + Farigiraf": [
+    [
+     "Grimmsnarl#2",
+     "M-Swampert#4"
+    ],
+    [
+     "Archaludon#2",
+     "Indeedee-F#2"
+    ]
+   ],
+   "Sun: Charizard + Whimsicott": [
+    [
+     "M-Metagross#18",
+     "Indeedee-F#2"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)": [
+    [
+     "M-Swampert#4",
+     "Pelipper#6"
+    ],
+    [
+     "Archaludon#2",
+     "Indeedee-F#2"
+    ]
+   ],
+   "Indeedee TR: Basculegion + Whimsicott": [
+    [
+     "Grimmsnarl#2",
+     "M-Swampert#4"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "other/Sand": [
+    [
+     "Grimmsnarl#2",
+     "M-Swampert#4"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler": [
+    [
+     "Archaludon#2",
+     "M-Metagross#18"
+    ],
+    [
+     "Pelipper#6",
+     "Indeedee-F#2"
+    ]
+   ],
+   "other/Perish": [
+    [
+     "M-Swampert#4",
+     "Indeedee-F#2"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Trick Room: Delphox + Floette + Incineroar + Sinistcha": [
+    [
+     "M-Swampert#4",
+     "Indeedee-F#2"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Sand: Excadrill + Tyranitar": [
+    [
+     "M-Swampert#4",
+     "Pelipper#6"
+    ],
+    [
+     "Archaludon#2",
+     "Indeedee-F#2"
+    ]
+   ],
+   "Perish: Gengar + Kommo-o + Rillaboom": [
+    [
+     "Grimmsnarl#2",
+     "M-Swampert#4"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Balance: Dragonite + Floette + Incineroar": [
+    [
+     "M-Swampert#4",
+     "Indeedee-F#2"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#6"
+    ]
+   ],
+   "Sun: Farigiraf + Garchomp + Incineroar + Sylveon": [
+    [
+     "Archaludon#2",
+     "M-Metagross#18"
+    ],
+    [
+     "Pelipper#6",
+     "Indeedee-F#2"
+    ]
+   ]
+  }
+ },
+ {
+  "name": "Brisbane-4 (ref, Floette)",
+  "score": 0.6824215539118147,
+  "se": 0.015603584572011235,
+  "sure_hits": 24,
+  "team": [
+   "M-Staraptor#1",
+   "Basculegion#1",
+   "M-Floette#1",
+   "Archaludon#2",
+   "Pelipper#2",
+   "Kommo-o#4"
+  ],
+  "brings": {
+   "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)": [
+    [
+     "M-Staraptor#1",
+     "Basculegion#1"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ]
+   ],
+   "other/Tailwind": [
+    [
+     "M-Staraptor#1",
+     "Basculegion#1"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ]
+   ],
+   "other/Balance": [
+    [
+     "M-Staraptor#1",
+     "Basculegion#1"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ]
+   ],
+   "Rain: Archaludon + Pelipper (no Grimmsnarl)": [
+    [
+     "Basculegion#1",
+     "Archaludon#2"
+    ],
+    [
+     "M-Staraptor#1",
+     "Pelipper#2"
+    ]
+   ],
+   "other/Sun": [
+    [
+     "M-Staraptor#1",
+     "Basculegion#1"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ]
+   ],
+   "Indeedee TR: Armarouge + Indeedee-F": [
+    [
+     "M-Staraptor#1",
+     "Basculegion#1"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ]
+   ],
+   "other/Trick Room": [
+    [
+     "Basculegion#1",
+     "Archaludon#2"
+    ],
+    [
+     "M-Staraptor#1",
+     "Pelipper#2"
+    ]
+   ],
+   "Sand: Excadrill + Salamence + Sneasler + Tyranitar": [
+    [
+     "M-Staraptor#1",
+     "Basculegion#1"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ]
+   ],
+   "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)": [
+    [
+     "Basculegion#1",
+     "M-Floette#1"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ]
+   ],
+   "other/Snow": [
+    [
+     "M-Staraptor#1",
+     "Basculegion#1"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ]
+   ],
+   "other/Indeedee TR": [
+    [
+     "Basculegion#1",
+     "M-Floette#1"
+    ],
+    [
+     "Archaludon#2",
+     "Kommo-o#4"
+    ]
+   ],
+   "Balance: Gholdengo + Incineroar + Raichu + Rillaboom": [
+    [
+     "Basculegion#1",
+     "M-Floette#1"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ]
+   ],
+   "Rain + Sun: Archaludon + Grimmsnarl + Pelipper": [
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ],
+    [
+     "Basculegion#1",
+     "M-Floette#1"
+    ]
+   ],
+   "Snow: Froslass + Kingambit + Rillaboom": [
+    [
+     "M-Staraptor#1",
+     "Basculegion#1"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ]
+   ],
+   "Rain + Sun: Archaludon + Golisopod + Politoed": [
+    [
+     "M-Staraptor#1",
+     "Basculegion#1"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ]
+   ],
+   "Perish: Archaludon + Politoed (no Golisopod)": [
+    [
+     "M-Staraptor#1",
+     "Basculegion#1"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ]
+   ],
+   "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)": [
+    [
+     "Basculegion#1",
+     "M-Floette#1"
+    ],
+    [
+     "Archaludon#2",
+     "Kommo-o#4"
+    ]
+   ],
+   "other/Rain": [
+    [
+     "Basculegion#1",
+     "Pelipper#2"
+    ],
+    [
+     "M-Floette#1",
+     "Archaludon#2"
+    ]
+   ],
+   "Indeedee TR: Camerupt + Farigiraf": [
+    [
+     "M-Staraptor#1",
+     "Basculegion#1"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ]
+   ],
+   "Sun: Charizard + Whimsicott": [
+    [
+     "M-Floette#1",
+     "Archaludon#2"
+    ],
+    [
+     "Basculegion#1",
+     "Pelipper#2"
+    ]
+   ],
+   "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)": [
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ],
+    [
+     "M-Staraptor#1",
+     "Basculegion#1"
+    ]
+   ],
+   "Indeedee TR: Basculegion + Whimsicott": [
+    [
+     "Basculegion#1",
+     "Pelipper#2"
+    ],
+    [
+     "M-Staraptor#1",
+     "Archaludon#2"
+    ]
+   ],
+   "other/Sand": [
+    [
+     "Basculegion#1",
+     "M-Floette#1"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ]
+   ],
+   "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler": [
+    [
+     "M-Staraptor#1",
+     "Basculegion#1"
+    ],
+    [
+     "Archaludon#2",
+     "Kommo-o#4"
+    ]
+   ],
+   "other/Perish": [
+    [
+     "M-Staraptor#1",
+     "Basculegion#1"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ]
+   ],
+   "Trick Room: Delphox + Floette + Incineroar + Sinistcha": [
+    [
+     "M-Staraptor#1",
+     "Basculegion#1"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ]
+   ],
+   "Sand: Excadrill + Tyranitar": [
+    [
+     "Basculegion#1",
+     "Pelipper#2"
+    ],
+    [
+     "M-Staraptor#1",
+     "Archaludon#2"
+    ]
+   ],
+   "Perish: Gengar + Kommo-o + Rillaboom": [
+    [
+     "Basculegion#1",
+     "M-Floette#1"
+    ],
+    [
+     "Pelipper#2",
+     "Kommo-o#4"
+    ]
+   ],
+   "Balance: Dragonite + Floette + Incineroar": [
+    [
+     "Basculegion#1",
+     "M-Floette#1"
+    ],
+    [
+     "Archaludon#2",
+     "Pelipper#2"
+    ]
+   ],
+   "Sun: Farigiraf + Garchomp + Incineroar + Sylveon": [
+    [
+     "Basculegion#1",
+     "Archaludon#2"
+    ],
+    [
+     "M-Floette#1",
+     "Pelipper#2"
+    ]
+   ]
+  }
+ },
+ {
+  "name": "Baltimore-2 refined (ref)",
+  "score": 0.6807393203750389,
+  "se": 0.015874265586602963,
+  "sure_hits": 22,
+  "team": [
+   "M-Golisopod#2",
+   "M-Charizard Y#2",
+   "Politoed#2",
+   "Archaludon#1",
+   "Grimmsnarl#1",
+   "Farigiraf#4"
+  ],
+  "brings": {
+   "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)": [
+    [
+     "M-Golisopod#2",
+     "Archaludon#1"
+    ],
+    [
+     "Politoed#2",
+     "Farigiraf#4"
+    ]
+   ],
+   "other/Tailwind": [
+    [
+     "M-Golisopod#2",
+     "Politoed#2"
+    ],
+    [
+     "Archaludon#1",
+     "Farigiraf#4"
+    ]
+   ],
+   "other/Balance": [
+    [
+     "M-Charizard Y#2",
+     "Archaludon#1"
+    ],
+    [
+     "Politoed#2",
+     "Farigiraf#4"
+    ]
+   ],
+   "Rain: Archaludon + Pelipper (no Grimmsnarl)": [
+    [
+     "M-Charizard Y#2",
+     "Farigiraf#4"
+    ],
+    [
+     "Politoed#2",
+     "Archaludon#1"
+    ]
+   ],
+   "other/Sun": [
+    [
+     "M-Golisopod#2",
+     "Politoed#2"
+    ],
+    [
+     "Archaludon#1",
+     "Farigiraf#4"
+    ]
+   ],
+   "Indeedee TR: Armarouge + Indeedee-F": [
+    [
+     "M-Golisopod#2",
+     "Politoed#2"
+    ],
+    [
+     "Archaludon#1",
+     "Farigiraf#4"
+    ]
+   ],
+   "other/Trick Room": [
+    [
+     "M-Charizard Y#2",
+     "Archaludon#1"
+    ],
+    [
+     "Politoed#2",
+     "Farigiraf#4"
+    ]
+   ],
+   "Sand: Excadrill + Salamence + Sneasler + Tyranitar": [
+    [
+     "M-Golisopod#2",
+     "Farigiraf#4"
+    ],
+    [
+     "Politoed#2",
+     "Archaludon#1"
+    ]
+   ],
+   "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)": [
+    [
+     "M-Golisopod#2",
+     "Farigiraf#4"
+    ],
+    [
+     "Politoed#2",
+     "Archaludon#1"
+    ]
+   ],
+   "other/Snow": [
+    [
+     "M-Golisopod#2",
+     "Politoed#2"
+    ],
+    [
+     "Archaludon#1",
+     "Farigiraf#4"
+    ]
+   ],
+   "other/Indeedee TR": [
+    [
+     "M-Golisopod#2",
+     "Politoed#2"
+    ],
+    [
+     "Archaludon#1",
+     "Farigiraf#4"
+    ]
+   ],
+   "Balance: Gholdengo + Incineroar + Raichu + Rillaboom": [
+    [
+     "Politoed#2",
+     "Farigiraf#4"
+    ],
+    [
+     "M-Golisopod#2",
+     "Archaludon#1"
+    ]
+   ],
+   "Rain + Sun: Archaludon + Grimmsnarl + Pelipper": [
+    [
+     "M-Charizard Y#2",
+     "Grimmsnarl#1"
+    ],
+    [
+     "Politoed#2",
+     "Archaludon#1"
+    ]
+   ],
+   "Snow: Froslass + Kingambit + Rillaboom": [
+    [
+     "M-Golisopod#2",
+     "Politoed#2"
+    ],
+    [
+     "Archaludon#1",
+     "Farigiraf#4"
+    ]
+   ],
+   "Rain + Sun: Archaludon + Golisopod + Politoed": [
+    [
+     "M-Charizard Y#2",
+     "Farigiraf#4"
+    ],
+    [
+     "Archaludon#1",
+     "Grimmsnarl#1"
+    ]
+   ],
+   "Perish: Archaludon + Politoed (no Golisopod)": [
+    [
+     "M-Charizard Y#2",
+     "Grimmsnarl#1"
+    ],
+    [
+     "Politoed#2",
+     "Archaludon#1"
+    ]
+   ],
+   "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)": [
+    [
+     "Grimmsnarl#1",
+     "Farigiraf#4"
+    ],
+    [
+     "M-Golisopod#2",
+     "Politoed#2"
+    ]
+   ],
+   "other/Rain": [
+    [
+     "Politoed#2",
+     "Archaludon#1"
+    ],
+    [
+     "M-Golisopod#2",
+     "Farigiraf#4"
+    ]
+   ],
+   "Indeedee TR: Camerupt + Farigiraf": [
+    [
+     "M-Golisopod#2",
+     "Grimmsnarl#1"
+    ],
+    [
+     "Politoed#2",
+     "Archaludon#1"
+    ]
+   ],
+   "Sun: Charizard + Whimsicott": [
+    [
+     "M-Golisopod#2",
+     "Farigiraf#4"
+    ],
+    [
+     "Politoed#2",
+     "Archaludon#1"
+    ]
+   ],
+   "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)": [
+    [
+     "Archaludon#1",
+     "Farigiraf#4"
+    ],
+    [
+     "M-Golisopod#2",
+     "Politoed#2"
+    ]
+   ],
+   "Indeedee TR: Basculegion + Whimsicott": [
+    [
+     "M-Golisopod#2",
+     "Grimmsnarl#1"
+    ],
+    [
+     "Politoed#2",
+     "Farigiraf#4"
+    ]
+   ],
+   "other/Sand": [
+    [
+     "M-Golisopod#2",
+     "Politoed#2"
+    ],
+    [
+     "Archaludon#1",
+     "Farigiraf#4"
+    ]
+   ],
+   "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler": [
+    [
+     "M-Golisopod#2",
+     "Farigiraf#4"
+    ],
+    [
+     "Politoed#2",
+     "Archaludon#1"
+    ]
+   ],
+   "other/Perish": [
+    [
+     "M-Charizard Y#2",
+     "Politoed#2"
+    ],
+    [
+     "Archaludon#1",
+     "Farigiraf#4"
+    ]
+   ],
+   "Trick Room: Delphox + Floette + Incineroar + Sinistcha": [
+    [
+     "M-Golisopod#2",
+     "Politoed#2"
+    ],
+    [
+     "Archaludon#1",
+     "Farigiraf#4"
+    ]
+   ],
+   "Sand: Excadrill + Tyranitar": [
+    [
+     "Grimmsnarl#1",
+     "Farigiraf#4"
+    ],
+    [
+     "M-Golisopod#2",
+     "Politoed#2"
+    ]
+   ],
+   "Perish: Gengar + Kommo-o + Rillaboom": [
+    [
+     "M-Golisopod#2",
+     "Grimmsnarl#1"
+    ],
+    [
+     "Politoed#2",
+     "Farigiraf#4"
+    ]
+   ],
+   "Balance: Dragonite + Floette + Incineroar": [
+    [
+     "M-Charizard Y#2",
+     "Farigiraf#4"
+    ],
+    [
+     "Politoed#2",
+     "Archaludon#1"
+    ]
+   ],
+   "Sun: Farigiraf + Garchomp + Incineroar + Sylveon": [
+    [
+     "M-Golisopod#2",
+     "Politoed#2"
+    ],
+    [
+     "Archaludon#1",
+     "Farigiraf#4"
+    ]
+   ]
+  }
+ }
+]

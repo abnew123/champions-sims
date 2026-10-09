@@ -962,3 +962,52 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     the support's Fake Out / Parting Shot are not in the race, so the new race finishes it; pssim/results/finish_cases.json). The flag
     stays available; the default race is unchanged. The user's reading stands: the race overestimates the effect in some cases, but
     neither "finish" nor "leave" is right in general, and a support's last non-damaging action is priced by neither race.
+  - **Pricing a support's remaining non-damaging actions (`RACE_SUPPORT`, 2026-10-09, 6:10 pm; TR sheet relaying the user: "have the battle sim
+    look into it", then "can the credits be fitted directly?").** The one thing neither race priced was a support's next Fake Out / Follow
+    Me / Tailwind / Trick Room / screen / Parting Shot / Helping Hand / Wide Guard, which is what makes "finish the 10% Incineroar or hit
+    the healthy Floette" a real question. Three versions were built and measured; **none is adopted** (strength flat, players' decisions
+    matched no better); the flags stay available.
+    - *Hand credits* (`RACE_SUPPORT=1`): in plan.rs `race_feats` each unit's usable support moves carry a credit in KO units (Fake Out
+      0.35 if fresh, Follow Me / Rage Powder 0.4, Tailwind 0.5 when down and the side is slower, Trick Room 0.6 when down and the side is
+      slower, screens 0.3 when down, Aurora Veil 0.5 in snow, Parting Shot 0.3, Helping Hand 0.2, Wide Guard 0.15, sleep moves 0.4,
+      Will-O-Wisp / Thunder Wave 0.25, Taunt / Encore 0.25); in the race a unit supports instead of attacking when its best credit beats
+      its best hit's score (one-shot moves once), the credits count 1/k like KOs, and the support edge (side 0 - side 1) is appended to
+      the features after FEATS22's (29th); `RACE_SUPPORT_CREDITS=fakeout:0.32,screens:0.67,...` overrides a class's credit (0 drops it).
+      Head-to-head on the 2,400 pool starts vs the always-Mega sym2 baseline (side 0 with the credits, weight 0.19 / 0.474 on the edge):
+      **-0.2 ± 0.9 / -0.1 ± 0.9**, with the bench race as well +0.7 ± 1.2; by style nothing beyond ±3. The real-position refit priced the
+      edge at +0.115 (held-out log loss 0.5583 vs 0.5572 without it: no gain). Finish cases (400 logged games, hand credits + bench race
+      vs the old race, 43 low-HP-foe turns with the same history): it now finishes 5 the old race left (a 10% Gholdengo about to Nasty
+      Plot, a 3% Mega Floette, a 20% Kingambit, a 19% Mega Charizard-Y, a 20% Indeedee) and leaves 2 it finished (a 15% Mega Gengar and a
+      12% Mega Raichu-Y, both while the partner screens): the credits move the decision in the intended direction, but these are
+      single-seed planner picks either way. Mega audit with it: 63 un-evolved attacking turns (old race 92, bench race 71), "the Mega KOs
+      more yet base preferred" 9 (11 / 8).
+    - *Fitted per class* (`RACE_SUPPORT=classes`, TR sheet's route 1): one feature per class (11, `SUPPORT_CLASSES`), the side
+      difference of the race units with the class usable under the same availability conditions, no credits anywhere; dumped with
+      `champ feats` on the egvalue10 real-position sets (fit 26,876 positions / 3,732 games, held out 3,968 / 560) and fitted
+      symmetrically with the other 28 features (`build_egvalue10.py`, 39 features, bootstrap SEs by game; `CLASS_SHRINK` shrinks the
+      classes toward a shared weight, 0 used). Positions per class 1,500-7,400, games behind the rare classes a few hundred. Credits in
+      KO-edge units (weight / KO-edge weight 0.276): Fake Out +0.32 ± 0.12, Tailwind +0.30 ± 0.21, screens +0.67 ± 0.27, Taunt / Encore
+      +0.73 ± 0.33, Helping Hand +0.24 ± 0.25, sleep +0.35 ± 0.48; Trick Room -0.16 ± 0.32, Follow Me -0.36 ± 0.30, Parting Shot -0.59 ±
+      0.23, Wide Guard -0.88 ± 0.45, Will-O-Wisp / Thunder Wave -0.83 ± 0.53. Identifiable at 2 SE: Fake Out (on the hand value),
+      screens, Taunt / Encore, and Parting Shot negative. The negative ones are not credits: the race counts those units as attacking
+      every turn, so a unit that will spend turns on Parting Shot / Wide Guard / status is overrated by the race and the fit corrects it.
+      Held-out log loss 0.5542 ± 0.017 (28 features 0.5572; a hair, not significant). Head-to-head vs the baseline, side 0 with: the
+      fitted class weights as a linear add-on to sym2 (scaled to sym2's KO weight) **-0.5 ± 1.0** (Indeedee TR -3.6 ± 3.0, the rest
+      within ±1.5); positive classes only **+0.1 ± 0.9**; the fitted positive credits in the race (KO-edge weight) **-0.5 ± 0.8**
+      (Trick Room -2.3, Indeedee TR -2.9, Sand +2.3, all within 1.2 SE). Six support variants, none moves self-play strength.
+    - *Players' decisions* (route 2, `pssim/support_decisions.py`): on Eval bar's accuracy set (the 2,729 of its 3,968 positions with a
+      decision the credits touch, one-turn planner at 32 seeds, same seeds in every setting), the planner's weight on what the player did
+      and its majority's match rate for: Fake Out on a fresh Pokemon (1,262 decisions, players 47%), finishing a foe at <= 25% HP that
+      still has a support move (945, players 40%) or has none (1,054, 42%), Tailwind when down (834, 26%), redirection (605, 28%),
+      Trick Room when down (496, 21%). Under the four settings (none, hand credits,
+      fitted credits, fitted linear weights) the planner's weight on what the player did moves by at most ±0.7 points on every decision
+      but one: the fitted linear weights make it set Tailwind less often (31% of the decisions vs 36%, players 26%; p(human) +1.9 ± 0.6,
+      match +0.8 ± 1.1). Finishing a foe at <= 25% that still has a support move: the planner and the players finish at the same rate
+      (39% vs 40%) under every setting, p(human) 64.5% in all four; the credits do not change the planner's choices there. Baseline:
+      p(human) 62-76%, match 64-79%; the planner sets Tailwind more than players (36% vs 26%) and redirects less (16% vs 28%), both
+      unchanged by any credit; 1250+ players (1,627 decisions) the same picture. results/support_decisions.txt and _r1250.txt.
+    - Verdict: **none adopted.** The flags (`RACE_SUPPORT=1|classes`, `RACE_SUPPORT_CREDITS`, `RACE_BENCH`) stay in the source, all off
+      by default, so the current build plays v25's games and no new version is cut. What the data says: the one-turn matrix already
+      plays out this turn's Fake Out / Tailwind / Follow Me, and a static credit for the turns after that is within noise of zero on real
+      outcomes except Fake Out (+0.32 KO), too small to move self-play or the planner's choices; the race's blind spots in the Mega audit
+      are a horizon question, not a credit question. The kit stays on v25 / `EG_MEGA_TIE=0`.

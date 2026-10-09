@@ -1,4 +1,4 @@
-"""Do the support credits make the planner agree with players? (2026-10-10, TR sheet relaying the user: fit the credits to human decisions
+"""Do the support credits make the planner agree with players? (2026-10-09, TR sheet relaying the user: fit the credits to human decisions
 as a check.) On Eval bar's accuracy set (560 cached ladder Bo3 games, 3,968 positions, both sides' plays known where the Pokemon acted),
 the one-turn planner's slot policies under several support settings (evalpos output files, one per setting, same positions and seeds) are
 compared with the players' choices on the decisions the credits touch:

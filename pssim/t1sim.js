@@ -191,6 +191,10 @@ function build(arch, pairIdx, myLead, myBack) {
   const myActs = [], thActs = [];
   for (const a of mine[0]) for (const b of mine[1]) { if (a.choice.startsWith('switch') && a.choice === b.choice) continue;
     if (a.label.endsWith(': Trick Room') && b.label.endsWith(': Trick Room')) continue;  // the second one would undo the first
+    if (a.choice.endsWith(' mega') && b.choice.endsWith(' mega')) {        // both leads hold a stone: one Mega per battle, so one or the other
+      const no = (o) => o.choice.slice(0, -5), mg = (o) => o.label + ' (Mega)';   // (not Mega Evolving at all on turn one is left out)
+      myActs.push({label: mg(a) + ' | ' + b.label, choice: a.choice + ', ' + no(b)}, {label: a.label + ' | ' + mg(b), choice: no(a) + ', ' + b.choice});
+      continue; }
     myActs.push({label: a.label + ' | ' + b.label, choice: a.choice + ', ' + b.choice}); }
   for (const a of theirs[0]) for (const b of theirs[1]) thActs.push({label: a.label + ' | ' + b.label, choice: a.choice + ', ' + (a.choice.startsWith('switch') && b.choice.startsWith('switch') ? 'switch 4' : b.choice), group: a.group + ' | ' + b.group, p: a.p * b.p});
   return {arch, P, myLead, myBack, myActs, thActs, myTeam, oppTeam, prim, megaOK, sets, bsets};

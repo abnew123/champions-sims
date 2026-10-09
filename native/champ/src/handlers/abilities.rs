@@ -307,6 +307,29 @@ pub fn register(r: &mut Reg) {
         if to_id(base) != "palafin" || b.p(m).transformed { return RV::Undef; }
         if b.p(m).species != "palafinhero" { b.forme_change_permanent(m, "palafinhero", Some(Eff::new(Kind::Ability, id("zerotohero")))); } RV::Undef });
     h!(r, Ability, "zerotohero", "onSwitchIn", |b, a| { RV::Undef });
+    // 2026-10-09, batch 3 (Eval bar's and TR sheet's lists)
+    for ab in ["insomnia", "vitalspirit"] {
+        h!(r, Ability, ab, "onUpdate", |b, a| { let m = a.t(); if b.p(m).status == "slp" { b.cure_status(m); } RV::Undef });
+        h!(r, Ability, ab, "onSetStatus", |b, a| { if a.relay != RV::S(id("slp")) { return RV::Undef; } RV::B(false) });
+        h!(r, Ability, ab, "onTryAddVolatile", |b, a| { if a.relay == RV::S(id("yawn")) { return RV::Null; } RV::Undef });
+    }
+    h!(r, Ability, "healer", "onResidual", |b, a| { let m = a.t(); let allies: Vec<MonRef> = b.adjacent_allies(m).into_iter().collect();
+        for al in allies { if !b.p(al).status.is_empty() && b.rchance(3, 10) { b.cure_status(al); } } RV::Undef });
+    h!(r, Ability, "gooey", "onDamagingHit", |b, a| { let (t, s) = (a.t(), a.s()); if b.makes_contact(a.am(), s) { b.boost(vec![(4, -1)], Some(s), Some(t), None, true, false); } RV::Undef });
+    h!(r, Ability, "curiousmedicine", "onStart", |b, a| { let m = a.t(); let allies: Vec<MonRef> = b.adjacent_allies(m).into_iter().collect(); for al in allies { b.pm(al).boosts = [0; 7]; } RV::Undef });
+    h!(r, Ability, "seedsower", "onDamagingHit", |b, a| { b.set_terrain("grassyterrain", None, None); RV::Undef });
+    h!(r, Ability, "swarm", "onModifyAtk", |b, a| { pinch(b, a, "Bug") });
+    h!(r, Ability, "swarm", "onModifySpA", |b, a| { pinch(b, a, "Bug") });
+    h!(r, Ability, "electromorphosis", "onDamagingHit", |b, a| { let t = a.t(); b.add_volatile(t, "charge", None, None); RV::Undef });
+    h!(r, Ability, "ripen", "onTryHeal", |b, a| { let Some(e) = a.src_eff else { return RV::Undef }; if e.kind == Kind::Item && b.dex.items.get(e.id).map(|i| i.raw.get("isBerry").and_then(|x| x.as_bool()).unwrap_or(false)).unwrap_or(false) { return b.cm(2.0, 1.0); } RV::Undef });
+    h!(r, Ability, "ripen", "onChangeBoost", |b, a| { let Some(e) = a.src_eff else { return RV::Undef };
+        if e.kind == Kind::Item && b.dex.items.get(e.id).map(|i| i.raw.get("isBerry").and_then(|x| x.as_bool()).unwrap_or(false)).unwrap_or(false) {
+            if let RV::Boosts(bs) = &a.relay { return RV::Boosts(bs.iter().map(|(k, v)| (*k, v * 2)).collect()); } } RV::Undef });
+    h!(r, Ability, "ripen", "onSourceModifyDamage", |b, a| { let t = a.s(); if b.p(t).ability_state.has("berryWeaken") { b.pm(t).ability_state.set("berryWeaken", SV::B(false)); return b.cm(0.5, 1.0); } RV::Undef });
+    h!(r, Ability, "ripen", "onTryEatItem", |b, a| { RV::Undef });
+    h!(r, Ability, "ripen", "onEatItem", |b, a| { let m = a.t(); let item = match &a.relay { RV::S(i) => *i, _ => "" };
+        let weaken = ["babiriberry", "chartiberry", "chilanberry", "chopleberry", "cobaberry", "colburberry", "habanberry", "kasibberry", "kebiaberry", "occaberry", "passhoberry", "payapaberry", "rindoberry", "roseliberry", "shucaberry", "tangaberry", "wacanberry", "yacheberry"].contains(&item);
+        b.pm(m).ability_state.set("berryWeaken", SV::B(weaken)); RV::Undef });
     h!(r, Ability, "flamebody", "onDamagingHit", |b, a| { let (t, s) = (a.t(), a.s()); if b.makes_contact(a.am(), s) && b.rchance(3, 10) { b.try_set_status(s, "brn", Some(t), None); } RV::Undef });
     h!(r, Ability, "poisontouch", "onSourceDamagingHit", |b, a| {
         let (t, s) = (a.t(), a.s());

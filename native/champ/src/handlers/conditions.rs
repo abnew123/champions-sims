@@ -230,7 +230,7 @@ pub fn register(r: &mut Reg) {
             }
         }
         RV::Undef });
-    h!(r, Cond, "encore", "onOverrideAction", |b, a| { let mv = b.es().get("move").and_then(|v| v.s()); if mv.is_some() && mv != Some(b.am(a.am()).id) { b.unsupported("encore override".into()); } RV::Undef });
+    h!(r, Cond, "encore", "onOverrideAction", |b, a| { let mv = b.es().get("move").and_then(|v| v.s()); if let Some(mv) = mv { if mv != b.am(a.am()).id { return RV::S(mv); } } RV::Undef });
     h!(r, Cond, "encore", "onResidual", |b, a| {
         let m = a.t(); let mv = b.es().get("move").and_then(|v| v.s());
         if !mv.map(|x| b.p(m).move_slots.iter().any(|s| s.id == x && s.pp > 0)).unwrap_or(false) { b.remove_volatile(m, "encore"); }
@@ -280,6 +280,33 @@ pub fn register(r: &mut Reg) {
     // Champions halves Salt Cure's residual: 1/8 for Water / Steel types, 1/16 otherwise (the base game's 1/4 and 1/8)
     h!(r, Cond, "saltcure", "onResidual", |b, a| { let m = a.t(); let div = if b.has_type(m, "Water") || b.has_type(m, "Steel") { 8.0 } else { 16.0 }; let d = b.p(m).base_maxhp as f64 / div; b.damage(d, None, None, None, false); RV::Undef });
     h!(r, Cond, "saltcure", "onEnd", |b, a| { RV::Undef });
+    // 2026-10-09, batch 3: Gravity, Charge, Curse, Ally Switch's counter
+    h!(r, Cond, "gravity", "durationCallback", |b, a| { RV::N(5.0) });
+    h!(r, Cond, "gravity", "onFieldStart", |b, a| {
+        let all: Vec<MonRef> = (0..2u8).flat_map(|s| b.side_active(s)).collect();
+        for p in all {
+            let fly = b.remove_volatile(p, "bounce") | b.remove_volatile(p, "fly");
+            if fly { b.queue.retain(|q| !(q.pokemon == Some(p) && q.choice == Choice::Move)); b.remove_volatile(p, "twoturnmove"); }
+            if b.has_vol(p, "skydrop") { b.queue.retain(|q| !(q.pokemon == Some(p) && q.choice == Choice::Move)); b.remove_volatile(p, "skydrop"); b.remove_volatile(p, "twoturnmove"); }
+            b.pm(p).volatiles.retain(|(k, _)| *k != "magnetrise" && *k != "telekinesis");
+        } RV::Undef });
+    h!(r, Cond, "gravity", "onModifyAccuracy", |b, a| { if let RV::N(_) = a.relay { return b.cm(6840.0, 4096.0); } RV::Undef });
+    h!(r, Cond, "gravity", "onDisableMove", |b, a| { let m = a.t(); let ids: Vec<Id> = b.p(m).move_slots.iter().map(|s| s.id).collect(); for mid in ids { if b.dex.mv(mid).tmpl.flag("gravity") { b.disable_move(m, mid, false, ""); } } RV::Undef });
+    h!(r, Cond, "gravity", "onBeforeMove", |b, a| { let m = a.t(); if b.am(a.am()).flag("gravity") { let n = b.mon_name(m); b.add(&["cant", &n, "move: Gravity"]); return RV::B(false); } RV::Undef });
+    h!(r, Cond, "gravity", "onModifyMove", |b, a| { let m = a.t(); if b.am(a.am()).flag("gravity") { let n = b.mon_name(m); b.add(&["cant", &n, "move: Gravity"]); return RV::B(false); } RV::Undef });
+    h!(r, Cond, "gravity", "onFieldEnd", |b, a| { RV::Undef });
+    h!(r, Cond, "charge", "onStart", |b, a| { RV::Undef });
+    h!(r, Cond, "charge", "onRestart", |b, a| { RV::Undef });
+    h!(r, Cond, "charge", "onBasePower", |b, a| { if b.am(a.am()).mtype == "Electric" { return b.cm(2.0, 1.0); } RV::Undef });
+    h!(r, Cond, "charge", "onMoveAborted", |b, a| { let m = a.t(); let am = a.am(); if b.am(am).mtype == "Electric" && b.am(am).id != "charge" { b.remove_volatile(m, "charge"); } RV::Undef });
+    h!(r, Cond, "charge", "onAfterMove", |b, a| { let m = a.t(); let am = a.am(); if b.am(am).mtype == "Electric" && b.am(am).id != "charge" { b.remove_volatile(m, "charge"); } RV::Undef });
+    h!(r, Cond, "charge", "onEnd", |b, a| { RV::Undef });
+    h!(r, Cond, "curse", "onStart", |b, a| { RV::Undef });
+    h!(r, Cond, "curse", "onResidual", |b, a| { let m = a.t(); let d = b.p(m).base_maxhp as f64 / 4.0; b.damage(d, None, None, None, false); RV::Undef });
+    h!(r, Cond, "allyswitch", "onStart", |b, a| { b.es().set("counter", SV::N(3.0)); RV::Undef });
+    h!(r, Cond, "allyswitch", "onRestart", |b, a| { let m = a.t(); let c = b.es().n("counter").filter(|x| *x != 0.0).unwrap_or(1.0);
+        if !b.rchance(1, c as i64) { b.pm(m).volatiles.retain(|(k, _)| *k != "allyswitch"); return RV::B(false); }
+        if c < 729.0 { b.es().set("counter", SV::N(c * 3.0)); } b.es().duration = Some(2); RV::Undef });
     h!(r, Cond, "yawn", "onStart", |b, a| { RV::Undef });
     h!(r, Cond, "yawn", "onEnd", |b, a| { let m = a.t(); let src = b.es().source; b.try_set_status(m, "slp", src, Some(Eff::cond(id("yawn")))); RV::Undef });
     h!(r, Cond, "perishsong", "onResidual", |b, a| { RV::Undef });

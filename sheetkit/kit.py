@@ -18,6 +18,7 @@
                                                            (OPTIMAL_SIXES=pool: against real sixes -> optimal_pool.json)
   python3 sheetkit/kit.py <team> guide run [--games 64] [--g0 7000] [--threads N] | report   game plans and team-preview tells -> guide.json
   python3 sheetkit/kit.py <team> page [--compare other.html]   -> sheets/<team>/sheet.html
+  python3 sheetkit/kit.py <team> flagged [--write]         battle results with a game flagged unsupported; --write moves them out to replay
 
 Long runs: start them in the background (nohup ... &); every run resumes where it stopped and shows on the progress page (port 8766).
 On the Mac the default is 3 workers and more than 10 is refused (--force); ask before any multi-core run. See sheetkit/README.md."""
@@ -90,6 +91,30 @@ def glob_json(d, pat='*.json'):
     import glob
     return glob.glob(os.path.join(d, pat))
 
+def flagged(sheet, move=False):
+    """Battle results with a game the simulator flagged unsupported (a mechanic it had not ported), per result folder; with --write
+    they move to <folder>.flagged/, so the next run of that step plays just those jobs again (on a setup that ports the mechanic and
+    shares the folders, e.g. SHEET_SETUP=v22-dp2-race-eg9-full)"""
+    import collections, glob
+    dirs = sorted(d for d in glob.glob(sheet.w('*', 'res*')) + glob.glob(sheet.w('optimal*', 'screen_*')) + glob.glob(sheet.w('optimal*', 'matrix*'))
+                  if os.path.isdir(d) and '.' not in os.path.basename(d) and os.path.basename(os.path.dirname(d)) != 't1')
+    mech = collections.Counter(); total = 0
+    for d in dirs:
+        bad = []
+        for f in glob.glob(os.path.join(d, '*.json')):
+            try: rows = json.load(open(f)).get('rows', [])
+            except Exception: continue
+            u = [m for g in rows for m in (g.get('unsupported') or [])]
+            if u: bad.append(f); mech.update(set(u))
+        if not bad: continue
+        total += len(bad); print(f"{os.path.relpath(d, sheet.w())}: {len(bad)} results with a flagged game")
+        if move:
+            os.makedirs(d + '.flagged', exist_ok=True)
+            for f in bad: os.replace(f, os.path.join(d + '.flagged', os.path.basename(f)))
+    print(f"{total} results" + (f"; mechanics (results they appear in): {', '.join(f'{m} {n}' for m, n in mech.most_common(12))}" if total else ''))
+    if total: print('moved to <folder>.flagged/: run the same steps again (e.g. SHEET_SETUP=... sheetkit/cloud/all.sh, then more.sh) to replay them'
+                    if move else '(nothing moved: add --write to move them out for a replay)')
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('team'); ap.add_argument('step'); ap.add_argument('sub', nargs='?')
@@ -102,6 +127,7 @@ def main():
     import procs; procs.own(sheet)                               # show as <prefix>-py in top
     if a.step == 'status': status(sheet)
     elif a.step == 'smoke': smoke(sheet)
+    elif a.step == 'flagged': flagged(sheet, a.write)
     elif a.step == 'grid':
         import grid; grid.build(sheet, threads_arg(a.threads, a.force))
     elif a.step == 'charts':

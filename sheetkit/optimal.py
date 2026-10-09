@@ -146,8 +146,8 @@ def screened(sheet):
 def matrix_cells(sheet):
     """(arch, our four as 'lead', 'back' strings) -> (six, their four) -> (win share, games), over every round's matrix"""
     M = collections.defaultdict(dict)
-    for p in queues(sheet, 'matrix'):
-        for f in glob.glob(os.path.join(p[:-5], '*.json')):
+    for p in queues(sheet, 'matrix'):                             # (.stale: cells no longer in a queue are still games played on this setup)
+        for f in glob.glob(os.path.join(p[:-5], '*.json')) + glob.glob(os.path.join(p[:-5] + '.stale', '*.json')):
             r = rj(f); vs = [g['v'] for g in r['rows'] if g.get('v') is not None]
             if vs: M[(r['arch'], ('+'.join(r['our_lead']), '+'.join(r['our_back'])))][(r['six'], '+'.join(r['their_lead'] + r['their_back']))] = (mean(vs), len(vs))
     return M

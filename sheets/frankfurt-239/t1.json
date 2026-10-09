@@ -1,0 +1,7174 @@
+{
+ "leads": {
+  "Balance: Dragonite + Floette + Incineroar": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Pelipper+Archaludon",
+      0.5658805558995614,
+      0.47841009938588486,
+      0.500277713514304,
+      6
+     ]
+    ]
+   }
+  },
+  "Balance: Gholdengo + Incineroar + Raichu + Rillaboom": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Pelipper+Swampert",
+      0.6205688748482977,
+      0.5310562458818969,
+      0.5534344031234971,
+      6
+     ]
+    ]
+   }
+  },
+  "Indeedee TR: Armarouge + Indeedee-F": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Pelipper+Swampert",
+      0.6964137997766442,
+      0.6347403578608789,
+      0.6501587183398202,
+      6
+     ]
+    ]
+   }
+  },
+  "Indeedee TR: Basculegion + Whimsicott": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Swampert+Grimmsnarl",
+      0.6158797431626182,
+      0.56160854982013,
+      0.575176348155752,
+      4
+     ]
+    ]
+   }
+  },
+  "Indeedee TR: Camerupt + Farigiraf": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Swampert+Grimmsnarl",
+      0.49386954671628774,
+      0.4238407242272769,
+      0.4413479298495296,
+      6
+     ]
+    ]
+   }
+  },
+  "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Pelipper+Swampert",
+      0.6818298237558849,
+      0.6241019997499081,
+      0.6385339557514023,
+      6
+     ]
+    ]
+   }
+  },
+  "Indeedee TR: Metagross + Milotic + Sneasler": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Archaludon+Metagross",
+      0.696041753212646,
+      0.6410653148986986,
+      0.6548094244771855,
+      1
+     ]
+    ]
+   }
+  },
+  "Other Balance": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Swampert+Indeedee-F",
+      0.5602268098583533,
+      0.4667081104967078,
+      0.49008778533711916,
+      6
+     ]
+    ]
+   }
+  },
+  "Other Indeedee TR": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Pelipper+Swampert",
+      0.7107597512575131,
+      0.6518107867876626,
+      0.6665480279051252,
+      6
+     ]
+    ]
+   }
+  },
+  "Other Perish": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Swampert+Indeedee-F",
+      0.5735506573892429,
+      0.4862383950330729,
+      0.5080664606221155,
+      3
+     ]
+    ]
+   }
+  },
+  "Other Rain": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Swampert+Grimmsnarl",
+      0.5904178506933487,
+      0.48868702081372084,
+      0.5141197282836278,
+      6
+     ]
+    ]
+   }
+  },
+  "Other Snow": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Swampert+Archaludon",
+      0.5486422131394723,
+      0.49660613976017565,
+      0.5096151581049998,
+      6
+     ]
+    ]
+   }
+  },
+  "Other Sun": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Metagross+Grimmsnarl",
+      0.5611679963738522,
+      0.4906264186500818,
+      0.5082618130810244,
+      6
+     ]
+    ]
+   }
+  },
+  "Other Tailwind": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Pelipper+Metagross",
+      0.5544623416051133,
+      0.4780254430762652,
+      0.49713466770847725,
+      6
+     ]
+    ]
+   }
+  },
+  "Other Trick Room": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Pelipper+Swampert",
+      0.5411004543664464,
+      0.49490328460689875,
+      0.5064525770467856,
+      6
+     ]
+    ]
+   }
+  },
+  "Perish: Archaludon + Politoed (no Golisopod)": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Archaludon+Metagross",
+      0.5402923699666298,
+      0.47093805610039996,
+      0.4882766345669574,
+      6
+     ]
+    ]
+   }
+  },
+  "Perish: Gengar + Kommo-o + Rillaboom": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Pelipper+Swampert",
+      0.6027081614390508,
+      0.5365041123019778,
+      0.5530551245862461,
+      6
+     ]
+    ]
+   }
+  },
+  "Rain + Sun: Archaludon + Golisopod + Politoed": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Archaludon+Grimmsnarl",
+      0.6147298195975637,
+      0.5086432947194813,
+      0.5351649259390019,
+      6
+     ]
+    ]
+   }
+  },
+  "Rain + Sun: Archaludon + Grimmsnarl + Pelipper": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Archaludon+Grimmsnarl",
+      0.6231769490959405,
+      0.5584499167828558,
+      0.574631674861127,
+      6
+     ]
+    ]
+   }
+  },
+  "Rain: Archaludon + Pelipper (no Grimmsnarl)": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Archaludon+Grimmsnarl",
+      0.6597416536758444,
+      0.5775081824910007,
+      0.5980665502872116,
+      6
+     ]
+    ]
+   }
+  },
+  "Sand: Excadrill + Salamence + Sneasler + Tyranitar": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Swampert+Grimmsnarl",
+      0.6454630187157117,
+      0.5378978542753385,
+      0.5647891453854318,
+      6
+     ]
+    ]
+   }
+  },
+  "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Metagross+Grimmsnarl",
+      0.5719840021986238,
+      0.5200798098534017,
+      0.5330558579397073,
+      5
+     ]
+    ]
+   }
+  },
+  "Sand: Excadrill + Tyranitar": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Archaludon+Grimmsnarl",
+      0.6073797615742829,
+      0.522220710838606,
+      0.5435104735225251,
+      6
+     ]
+    ]
+   }
+  },
+  "Snow: Froslass + Kingambit + Rillaboom": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Indeedee-F+Metagross",
+      0.5312957885018553,
+      0.4521972455060094,
+      0.4719718812549709,
+      6
+     ]
+    ]
+   }
+  },
+  "Sun: Charizard + Whimsicott": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Swampert+Grimmsnarl",
+      0.6122266237053834,
+      0.5546682394825132,
+      0.5690578355382307,
+      4
+     ]
+    ]
+   }
+  },
+  "Sun: Farigiraf + Garchomp + Incineroar + Sylveon": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Indeedee-F+Metagross",
+      0.6158152393034478,
+      0.5266260148977271,
+      0.5489233209991573,
+      6
+     ]
+    ]
+   }
+  },
+  "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Swampert+Grimmsnarl",
+      0.6146472087876,
+      0.5409537078240177,
+      0.5593770830649134,
+      6
+     ]
+    ]
+   }
+  },
+  "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Pelipper+Swampert",
+      0.6758264469279035,
+      0.6398724725649733,
+      0.6488609661557058,
+      6
+     ]
+    ]
+   }
+  },
+  "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Pelipper+Swampert",
+      0.6553412172509938,
+      0.5784868610711448,
+      0.597700450116107,
+      6
+     ]
+    ]
+   }
+  },
+  "Tailwind: Glimmora + Rillaboom + Volcarona (no Basculegion)": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Swampert+Archaludon",
+      0.6343854801630726,
+      0.5607249437491487,
+      0.5791400778526297,
+      3
+     ]
+    ]
+   }
+  },
+  "Trick Room: Delphox + Floette + Incineroar + Sinistcha": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Pelipper+Swampert",
+      0.5872273085092491,
+      0.5318205427259124,
+      0.5456722341717466,
+      6
+     ]
+    ]
+   }
+  },
+  "Trick Room: Delphox + Incineroar + Sinistcha (no Floette)": {
+   "all": {
+    "weights": null,
+    "vals": [
+     [
+      "Pelipper+Archaludon",
+      0.6201695319422522,
+      0.553796713226216,
+      0.5703899179052251,
+      5
+     ]
+    ]
+   }
+  }
+ },
+ "plans": {
+  "Sun: Farigiraf + Garchomp + Incineroar + Sylveon||Indeedee-F+Metagross||Farigiraf + Incineroar": {
+   "lines": null,
+   "pop": 0.5965689305775395,
+   "worst": 0.5303234295270399,
+   "full": [
+    0.5982154049494036,
+    0.5327986465611921
+   ],
+   "reader": [
+    [
+     0.6003020305480025,
+     "Farigiraf: Trick Room | Incineroar: Darkest Lariat -> Metagross"
+    ],
+    [
+     0.3996979694519975,
+     "Farigiraf: Protect | Incineroar: Darkest Lariat -> Metagross"
+    ]
+   ],
+   "share": 0.2216,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     65,
+     "Indeedee-F: Helping Hand | Metagross: Stomping Tantrum -> Incineroar"
+    ],
+    [
+     35,
+     "Indeedee-F: Helping Hand | Metagross: Steel Roller -> Farigiraf"
+    ]
+   ]
+  },
+  "Sun: Farigiraf + Garchomp + Incineroar + Sylveon||Indeedee-F+Metagross||Garchomp + Incineroar": {
+   "lines": null,
+   "pop": 0.5792748527938594,
+   "worst": 0.48819361443567044,
+   "full": [
+    0.5718948292918399,
+    0.5010949309427707
+   ],
+   "reader": [
+    [
+     0.4534957131279,
+     "Garchomp: Flamethrower -> Metagross | Incineroar: Darkest Lariat -> Metagross"
+    ],
+    [
+     0.2773570259143973,
+     "Garchomp: Protect | Incineroar: Darkest Lariat -> Indeedee-F"
+    ],
+    [
+     0.23444347916629613,
+     "Garchomp: Flamethrower -> Metagross | Incineroar: Darkest Lariat -> Indeedee-F"
+    ]
+   ],
+   "share": 0.1297,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Indeedee-F: Follow Me | Metagross: Steel Roller -> Garchomp"
+    ],
+    [
+     45,
+     "Indeedee-F: Helping Hand | Metagross: Stomping Tantrum -> Incineroar"
+    ]
+   ]
+  },
+  "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler||Pelipper+Swampert||Gardevoir + Kingambit": {
+   "lines": null,
+   "pop": 0.7142859458197713,
+   "worst": 0.6557093397675129,
+   "full": [
+    0.7147314549244792,
+    0.6569146479611973
+   ],
+   "reader": [
+    [
+     0.8044783155818139,
+     "Gardevoir: Hyper Voice | Kingambit: Kowtow Cleave -> Pelipper"
+    ],
+    [
+     0.19552168441818604,
+     "Gardevoir: Protect | Kingambit: Kowtow Cleave -> Pelipper"
+    ]
+   ],
+   "share": 0.0674,
+   "back": [
+    "Indeedee-F",
+    "Metagross"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     65,
+     "Pelipper: Weather Ball -> Kingambit | Swampert: Earthquake"
+    ],
+    [
+     35,
+     "Pelipper: Weather Ball -> Kingambit | Swampert: Wave Crash -> Gardevoir"
+    ]
+   ]
+  },
+  "Sun: Charizard + Whimsicott||Swampert+Grimmsnarl||Kingambit + Sneasler": {
+   "lines": null,
+   "pop": 0.7848878106381778,
+   "worst": 0.7776101261693192,
+   "full": [
+    0.786292882889557,
+    0.778724596085585
+   ],
+   "reader": [
+    [
+     0.7737844404040303,
+     "Kingambit: Sucker Punch -> Swampert | Sneasler: Close Combat -> Swampert"
+    ],
+    [
+     0.2262155595959723,
+     "Kingambit: Kowtow Cleave -> Grimmsnarl | Sneasler: Close Combat -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.0431,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Swampert: Earthquake | Grimmsnarl: switch -> Pelipper"
+    ],
+    [
+     45,
+     "Swampert: Earthquake | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Trick Room: Delphox + Floette + Incineroar + Sinistcha||Pelipper+Swampert||Delphox + Sneasler": {
+   "lines": null,
+   "pop": 0.5976421247434166,
+   "worst": 0.5653062208303018,
+   "full": [
+    0.6027898577999438,
+    0.5875246907880509
+   ],
+   "reader": [
+    [
+     0.3491003780540495,
+     "Delphox: Protect | Sneasler: Poison Jab -> Pelipper"
+    ],
+    [
+     0.2541893733413279,
+     "Delphox: Nasty Plot | Sneasler: Fake Out -> Swampert"
+    ],
+    [
+     0.1832058369369111,
+     "Delphox: Protect | Sneasler: switch"
+    ]
+   ],
+   "share": 0.1412,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Pelipper: switch -> Indeedee-F | Swampert: Flip Turn -> Sneasler"
+    ],
+    [
+     25,
+     "Pelipper: Hurricane -> Sneasler | Swampert: Flip Turn -> Delphox"
+    ],
+    [
+     25,
+     "Pelipper: Weather Ball -> Delphox | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Other Sun||Metagross+Grimmsnarl||Farigiraf + Incineroar": {
+   "lines": null,
+   "pop": 0.4406927815015557,
+   "worst": 0.3658998262433262,
+   "full": [
+    0.44025470932996963,
+    0.3671452277141682
+   ],
+   "reader": [
+    [
+     0.5883189051652077,
+     "Farigiraf: Trick Room | Incineroar: Fake Out -> Grimmsnarl"
+    ],
+    [
+     0.29271183322443584,
+     "Farigiraf: Trick Room | Incineroar: Flare Blitz -> Metagross"
+    ],
+    [
+     0.11896926161035648,
+     "Farigiraf: Trick Room | Incineroar: Fake Out -> Metagross"
+    ]
+   ],
+   "share": 0.0254,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     65,
+     "Metagross: Stomping Tantrum -> Incineroar | Grimmsnarl: Reflect"
+    ],
+    [
+     35,
+     "Metagross: Stomping Tantrum -> Incineroar | Grimmsnarl: switch -> Archaludon"
+    ]
+   ]
+  },
+  "Rain + Sun: Archaludon + Grimmsnarl + Pelipper||Archaludon+Grimmsnarl||Pelipper + Swampert": {
+   "lines": null,
+   "pop": 0.7821858357365453,
+   "worst": 0.6161415285544475,
+   "full": [
+    0.7821858357365453,
+    0.6161415285544475
+   ],
+   "reader": [
+    [
+     0.8546984591120732,
+     "Pelipper: switch | Swampert: High Horsepower -> Archaludon"
+    ],
+    [
+     0.14530154088792635,
+     "Pelipper: switch | Swampert: Wave Crash -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.0722,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Archaludon: Electro Shot -> Pelipper | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Rain: Archaludon + Pelipper (no Grimmsnarl)||Archaludon+Grimmsnarl||Pelipper + Swampert": {
+   "lines": null,
+   "pop": 0.7198787792134809,
+   "worst": 0.642120528692986,
+   "full": [
+    0.7198787792134809,
+    0.642120528692986
+   ],
+   "reader": [
+    [
+     0.7397980254578388,
+     "Pelipper: Weather Ball -> Grimmsnarl | Swampert: Earthquake"
+    ],
+    [
+     0.2602019745421608,
+     "Pelipper: Tailwind | Swampert: Earthquake"
+    ]
+   ],
+   "share": 0.0845,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Archaludon: Electro Shot -> Pelipper | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Sand: Excadrill + Tyranitar||Archaludon+Grimmsnarl||Indeedee + Sneasler": {
+   "lines": null,
+   "pop": 0.643499592376544,
+   "worst": 0.5386491146848266,
+   "full": [
+    0.643499592376544,
+    0.5386491146848266
+   ],
+   "reader": [
+    [
+     0.9702512902073289,
+     "Indeedee: Terrain Pulse -> Archaludon | Sneasler: Dire Claw -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.0314,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Archaludon: Dragon Pulse -> Indeedee | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Other Sun||Metagross+Grimmsnarl||Charizard + Venusaur": {
+   "lines": null,
+   "pop": 0.5624915752112676,
+   "worst": 0.5139382255979086,
+   "full": [
+    0.5622197484300433,
+    0.517005093355921
+   ],
+   "reader": [
+    [
+     0.4089181793383342,
+     "Charizard: Protect | Venusaur: Sludge Bomb -> Grimmsnarl"
+    ],
+    [
+     0.39325303678785484,
+     "Charizard: Heat Wave | Venusaur: Protect"
+    ],
+    [
+     0.15074454708757049,
+     "Charizard: Heat Wave | Venusaur: Sludge Bomb -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.0356,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     40,
+     "Metagross: Psychic Fangs -> Venusaur | Grimmsnarl: Parting Shot -> Charizard"
+    ],
+    [
+     35,
+     "Metagross: Protect | Grimmsnarl: Light Screen"
+    ],
+    [
+     25,
+     "Metagross: Psychic Fangs -> Charizard | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Rain + Sun: Archaludon + Golisopod + Politoed||Archaludon+Grimmsnarl||Archaludon + Golisopod": {
+   "lines": null,
+   "pop": 0.6912319025115391,
+   "worst": 0.4348514571919044,
+   "full": [
+    0.680138357469841,
+    0.44494062409808416
+   ],
+   "reader": [
+    [
+     0.7638836294309655,
+     "Archaludon: Electro Shot -> Grimmsnarl | Golisopod: Iron Head -> Grimmsnarl"
+    ],
+    [
+     0.23611637056903442,
+     "Archaludon: Electro Shot -> Archaludon | Golisopod: Iron Head -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.05,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Archaludon: Electro Shot -> Golisopod | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Rain + Sun: Archaludon + Grimmsnarl + Pelipper||Archaludon+Grimmsnarl||Archaludon + Pelipper": {
+   "lines": null,
+   "pop": 0.814491561721494,
+   "worst": 0.7911836173602329,
+   "full": [
+    0.814491561721494,
+    0.7911836173602329
+   ],
+   "reader": [
+    [
+     1.0000000000000056,
+     "Archaludon: Electro Shot -> Grimmsnarl | Pelipper: Tailwind"
+    ]
+   ],
+   "share": 0.0928,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Archaludon: Electro Shot -> Pelipper | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Other Tailwind||Pelipper+Metagross||Rillaboom + Sneasler": {
+   "lines": null,
+   "pop": 0.5867742358272393,
+   "worst": 0.46187923225188215,
+   "full": [
+    0.5786236427615998,
+    0.5251426688378336
+   ],
+   "reader": [
+    [
+     0.3575124660059184,
+     "Rillaboom: Wood Hammer -> Pelipper | Sneasler: Rock Tomb -> Pelipper"
+    ],
+    [
+     0.28152135494378505,
+     "Rillaboom: Grassy Glide -> Pelipper | Sneasler: Close Combat -> Pelipper"
+    ],
+    [
+     0.24109015785731527,
+     "Rillaboom: Fake Out -> Metagross | Sneasler: Close Combat -> Pelipper"
+    ]
+   ],
+   "share": 0.0514,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     60,
+     "Pelipper: switch -> Indeedee-F | Metagross: Steel Roller -> Rillaboom"
+    ],
+    [
+     40,
+     "Pelipper: switch -> Indeedee-F | Metagross: Steel Roller -> Sneasler"
+    ]
+   ]
+  },
+  "Rain: Archaludon + Pelipper (no Grimmsnarl)||Archaludon+Grimmsnarl||Pelipper + Raichu": {
+   "lines": null,
+   "pop": 0.6124333320398967,
+   "worst": 0.5412683361171967,
+   "full": [
+    0.6121506657222426,
+    0.5419195332042102
+   ],
+   "reader": [
+    [
+     0.37990661559578104,
+     "Pelipper: Tailwind | Raichu: Fake Out -> Archaludon"
+    ],
+    [
+     0.3139456120597483,
+     "Pelipper: Protect | Raichu: Zap Cannon -> Grimmsnarl"
+    ],
+    [
+     0.3061477723444706,
+     "Pelipper: Tailwind | Raichu: Zap Cannon -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.0242,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     40,
+     "Archaludon: Electro Shot -> Raichu | Grimmsnarl: Light Screen"
+    ],
+    [
+     35,
+     "Archaludon: Electro Shot -> Pelipper | Grimmsnarl: Spirit Break -> Raichu"
+    ],
+    [
+     25,
+     "Archaludon: Electro Shot -> Pelipper | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)||Pelipper+Swampert||Raichu + Rillaboom": {
+   "lines": null,
+   "pop": 0.5328605766703604,
+   "worst": 0.4736062900467851,
+   "full": [
+    0.5231462862720333,
+    0.49472920163716483
+   ],
+   "reader": [
+    [
+     0.4416554798678878,
+     "Raichu: Protect | Rillaboom: Fake Out -> Pelipper"
+    ],
+    [
+     0.26991293594002025,
+     "Raichu: Protect | Rillaboom: Grassy Glide -> Swampert"
+    ],
+    [
+     0.15084046659469816,
+     "Raichu: Zap Cannon -> Pelipper | Rillaboom: Wood Hammer -> Pelipper"
+    ]
+   ],
+   "share": 0.046,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Pelipper: switch -> Indeedee-F | Swampert: Flip Turn -> Raichu"
+    ],
+    [
+     45,
+     "Pelipper: Hurricane -> Rillaboom | Swampert: switch -> Archaludon"
+    ]
+   ]
+  },
+  "Other Snow||Swampert+Archaludon||Froslass + Sneasler": {
+   "lines": null,
+   "pop": 0.5222562874194959,
+   "worst": 0.4379423596124401,
+   "full": [
+    0.5224479138672738,
+    0.4478045242205448
+   ],
+   "reader": [
+    [
+     0.4362659883966034,
+     "Froslass: Aurora Veil | Sneasler: Fake Out -> Swampert"
+    ],
+    [
+     0.328766257129605,
+     "Froslass: Aurora Veil | Sneasler: Close Combat -> Archaludon"
+    ],
+    [
+     0.23496775447379165,
+     "Froslass: Blizzard | Sneasler: Close Combat -> Swampert"
+    ]
+   ],
+   "share": 0.0356,
+   "back": [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     45,
+     "Swampert: Protect | Archaludon: Flash Cannon -> Froslass"
+    ],
+    [
+     40,
+     "Swampert: Earthquake | Archaludon: Protect"
+    ],
+    [
+     15,
+     "Swampert: Earthquake | Archaludon: switch -> Indeedee-F"
+    ]
+   ]
+  },
+  "Indeedee TR: Armarouge + Indeedee-F||Pelipper+Swampert||Armarouge + Raichu": {
+   "lines": null,
+   "pop": 0.7581517054618532,
+   "worst": 0.5442677289852366,
+   "full": [
+    0.7584052147439179,
+    0.5469238798256861
+   ],
+   "reader": [
+    [
+     0.887393121960117,
+     "Armarouge: Expanding Force -> Pelipper | Raichu: Fake Out -> Swampert"
+    ]
+   ],
+   "share": 0.0459,
+   "back": [
+    "Archaludon",
+    "Metagross"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Pelipper: Weather Ball -> Raichu | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Rain + Sun: Archaludon + Golisopod + Politoed||Archaludon+Grimmsnarl||Farigiraf + Golisopod": {
+   "lines": null,
+   "pop": 0.5182205637577268,
+   "worst": 0.42060622659710883,
+   "full": [
+    0.5197296260453877,
+    0.42193924007960587
+   ],
+   "reader": [
+    [
+     0.5112695162335923,
+     "Farigiraf: Trick Room | Golisopod: Leech Life -> Grimmsnarl"
+    ],
+    [
+     0.4887304837664077,
+     "Farigiraf: Trick Room | Golisopod: Iron Head -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.1187,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     75,
+     "Archaludon: Electro Shot -> Golisopod | Grimmsnarl: switch -> Pelipper"
+    ],
+    [
+     25,
+     "Archaludon: Electro Shot -> Golisopod | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)||Metagross+Grimmsnarl||Excadrill + Salamence": {
+   "lines": null,
+   "pop": 0.5767321298361054,
+   "worst": 0.4978357330332822,
+   "full": [
+    0.5777544822721797,
+    0.5000061411247266
+   ],
+   "reader": [
+    [
+     0.5582432268060998,
+     "Excadrill: High Horsepower -> Metagross | Salamence: Tailwind"
+    ],
+    [
+     0.44175677319390017,
+     "Excadrill: Protect | Salamence: Tailwind"
+    ]
+   ],
+   "share": 0.0594,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     70,
+     "Metagross: Stomping Tantrum -> Excadrill | Grimmsnarl: Reflect"
+    ],
+    [
+     30,
+     "Metagross: Psychic Fangs -> Salamence | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Balance: Gholdengo + Incineroar + Raichu + Rillaboom||Pelipper+Swampert||Garchomp + Incineroar": {
+   "lines": null,
+   "pop": 0.5673256612574236,
+   "worst": 0.5193329569714185,
+   "full": [
+    0.5679893849697487,
+    0.5228977513976538
+   ],
+   "reader": [
+    [
+     0.4216639073390399,
+     "Garchomp: Dragon Pulse -> Pelipper | Incineroar: Fake Out -> Pelipper"
+    ],
+    [
+     0.25407029983157836,
+     "Garchomp: Dragon Pulse -> Pelipper | Incineroar: switch"
+    ],
+    [
+     0.23627758979172642,
+     "Garchomp: Dragon Pulse -> Pelipper | Incineroar: Darkest Lariat -> Pelipper"
+    ]
+   ],
+   "share": 0.1256,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     70,
+     "Pelipper: switch -> Indeedee-F | Swampert: Wave Crash -> Incineroar"
+    ],
+    [
+     20,
+     "Pelipper: switch -> Indeedee-F | Swampert: Flip Turn -> Incineroar"
+    ],
+    [
+     10,
+     "Pelipper: Weather Ball -> Incineroar | Swampert: Flip Turn -> Incineroar"
+    ]
+   ]
+  },
+  "Other Snow||Swampert+Archaludon||Kleavor + Whimsicott": {
+   "lines": null,
+   "pop": 0.6645994575271875,
+   "worst": 0.611588662585795,
+   "full": [
+    0.6623759950608367,
+    0.614694999295079
+   ],
+   "reader": [
+    [
+     0.49695937562441556,
+     "Kleavor: Stone Axe -> Swampert | Whimsicott: Protect"
+    ],
+    [
+     0.4235843361275706,
+     "Kleavor: Protect | Whimsicott: Tailwind"
+    ]
+   ],
+   "share": 0.0297,
+   "back": [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     85,
+     "Swampert: Wave Crash -> Kleavor | Archaludon: Flash Cannon -> Whimsicott"
+    ],
+    [
+     15,
+     "Swampert: Flip Turn -> Kleavor | Archaludon: Electro Shot -> Kleavor"
+    ]
+   ]
+  },
+  "Sun: Charizard + Whimsicott||Swampert+Grimmsnarl||Charizard + Whimsicott": {
+   "lines": null,
+   "pop": 0.5592605827772509,
+   "worst": 0.4766007016776982,
+   "full": [
+    0.5490665570407728,
+    0.4983294449213554
+   ],
+   "reader": [
+    [
+     0.5110848132199123,
+     "Charizard: Protect | Whimsicott: Tailwind"
+    ],
+    [
+     0.2826624625936473,
+     "Charizard: Weather Ball -> Grimmsnarl | Whimsicott: Tailwind"
+    ],
+    [
+     0.11234357609635079,
+     "Charizard: Solar Beam -> Swampert | Whimsicott: Protect"
+    ]
+   ],
+   "share": 0.1379,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     40,
+     "Swampert: Wave Crash -> Charizard | Grimmsnarl: Light Screen"
+    ],
+    [
+     35,
+     "Swampert: Flip Turn -> Charizard | Grimmsnarl: Parting Shot -> Charizard"
+    ],
+    [
+     25,
+     "Swampert: Wave Crash -> Whimsicott | Grimmsnarl: Parting Shot -> Whimsicott"
+    ]
+   ]
+  },
+  "Rain + Sun: Archaludon + Golisopod + Politoed||Archaludon+Grimmsnarl||Golisopod + Politoed": {
+   "lines": null,
+   "pop": 0.6529941935343357,
+   "worst": 0.5844583041703931,
+   "full": [
+    0.6503344796877351,
+    0.5866265157472945
+   ],
+   "reader": [
+    [
+     0.5045121268348781,
+     "Golisopod: Iron Head -> Grimmsnarl | Politoed: Protect"
+    ],
+    [
+     0.41914093812760467,
+     "Golisopod: Swords Dance | Politoed: Weather Ball -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.075,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Archaludon: Electro Shot -> Golisopod | Grimmsnarl: Reflect"
+    ],
+    [
+     50,
+     "Archaludon: Electro Shot -> Politoed | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)||Pelipper+Swampert||Arcanine-Hisui + Staraptor": {
+   "lines": null,
+   "pop": 0.5874194768671965,
+   "worst": 0.48593344376278796,
+   "full": [
+    0.5856535528961154,
+    0.48934014138234533
+   ],
+   "reader": [
+    [
+     0.4837219593378604,
+     "Arcanine-Hisui: Protect | Staraptor: Close Combat -> Swampert"
+    ],
+    [
+     0.40457426904891985,
+     "Arcanine-Hisui: Head Smash -> Pelipper | Staraptor: Close Combat -> Pelipper"
+    ],
+    [
+     0.11170377161321991,
+     "Arcanine-Hisui: Head Smash -> Pelipper | Staraptor: Protect"
+    ]
+   ],
+   "share": 0.0526,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     90,
+     "Pelipper: Hurricane -> Staraptor | Swampert: Earthquake"
+    ],
+    [
+     10,
+     "Pelipper: Hurricane -> Staraptor | Swampert: Flip Turn -> Arcanine-Hisui"
+    ]
+   ]
+  },
+  "Other Sun||Metagross+Grimmsnarl||Indeedee-F + Reuniclus": {
+   "lines": null,
+   "pop": 0.6492141952957433,
+   "worst": 0.6492141952957433,
+   "full": [
+    0.6492141952957433,
+    0.6492141952957433
+   ],
+   "reader": [
+    [
+     1.0,
+     "Indeedee-F: Follow Me | Reuniclus: Trick Room"
+    ]
+   ],
+   "share": 0.0271,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": true,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Metagross: Steel Roller -> Reuniclus | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)||Pelipper+Swampert||Indeedee-F + Sneasler": {
+   "lines": null,
+   "pop": 0.740039452882328,
+   "worst": 0.6231602855641216,
+   "full": [
+    0.727353901055408,
+    0.632321830388605
+   ],
+   "reader": [
+    [
+     0.4049387544242785,
+     "Indeedee-F: Helping Hand | Sneasler: Close Combat -> Swampert"
+    ],
+    [
+     0.2923488064298187,
+     "Indeedee-F: Helping Hand | Sneasler: Rock Slide"
+    ],
+    [
+     0.2556709346824912,
+     "Indeedee-F: Psychic -> Pelipper | Sneasler: Rock Tomb -> Pelipper"
+    ]
+   ],
+   "share": 0.1135,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": true,
+   "trCredit": null,
+   "mix": [
+    [
+     90,
+     "Pelipper: Weather Ball -> Indeedee-F | Swampert: Earthquake"
+    ],
+    [
+     10,
+     "Pelipper: Hurricane -> Sneasler | Swampert: Wave Crash -> Indeedee-F"
+    ]
+   ]
+  },
+  "Snow: Froslass + Kingambit + Rillaboom||Indeedee-F+Metagross||Kingambit + Raichu": {
+   "lines": null,
+   "pop": 0.4776343550430394,
+   "worst": 0.35479696126099436,
+   "full": [
+    0.47306600823655254,
+    0.36155854057205467
+   ],
+   "reader": [
+    [
+     0.3725461916233699,
+     "Kingambit: Swords Dance | Raichu: Zap Cannon -> Metagross"
+    ],
+    [
+     0.2462744613216983,
+     "Kingambit: Kowtow Cleave -> Metagross | Raichu: Protect"
+    ],
+    [
+     0.21115609243257982,
+     "Kingambit: Swords Dance | Raichu: Zap Cannon -> Indeedee-F"
+    ]
+   ],
+   "share": 0.0588,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     45,
+     "Indeedee-F: Psychic -> Raichu | Metagross: Protect"
+    ],
+    [
+     35,
+     "Indeedee-F: Protect | Metagross: Psychic Fangs -> Raichu"
+    ],
+    [
+     20,
+     "Indeedee-F: Helping Hand | Metagross: Stomping Tantrum -> Kingambit"
+    ]
+   ]
+  },
+  "Trick Room: Delphox + Floette + Incineroar + Sinistcha||Pelipper+Swampert||Delphox + Sinistcha": {
+   "lines": null,
+   "pop": 0.6543996290034271,
+   "worst": 0.571920757662209,
+   "full": [
+    0.6552872593868204,
+    0.5719856633732837
+   ],
+   "reader": [
+    [
+     1.0,
+     "Delphox: Psychic -> Pelipper | Sinistcha: Rage Powder"
+    ]
+   ],
+   "share": 0.0941,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     80,
+     "Pelipper: Hurricane -> Sinistcha | Swampert: Flip Turn -> Delphox"
+    ],
+    [
+     20,
+     "Pelipper: Hurricane -> Sinistcha | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Perish: Archaludon + Politoed (no Golisopod)||Archaludon+Metagross||Archaludon + Rillaboom": {
+   "lines": null,
+   "pop": 0.7906478233169676,
+   "worst": 0.755835589522984,
+   "full": [
+    0.7853906500402736,
+    0.7585351052211663
+   ],
+   "reader": [
+    [
+     0.7653976214183362,
+     "Archaludon: Dragon Pulse -> Archaludon | Rillaboom: switch"
+    ],
+    [
+     0.234602378581664,
+     "Archaludon: Dragon Pulse -> Archaludon | Rillaboom: Grassy Glide -> Metagross"
+    ]
+   ],
+   "share": 0.0341,
+   "back": [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Archaludon: Electro Shot -> Rillaboom | Metagross: Steel Roller -> Rillaboom"
+    ]
+   ]
+  },
+  "Indeedee TR: Camerupt + Farigiraf||Swampert+Grimmsnarl||Farigiraf + Rillaboom": {
+   "lines": null,
+   "pop": 0.434238249787363,
+   "worst": 0.38421715258717976,
+   "full": [
+    0.43364896363813665,
+    0.3863509733427916
+   ],
+   "reader": [
+    [
+     0.6175724683168378,
+     "Farigiraf: Trick Room | Rillaboom: Fake Out -> Grimmsnarl"
+    ],
+    [
+     0.38242753168316224,
+     "Farigiraf: Trick Room | Rillaboom: Grassy Glide -> Swampert"
+    ]
+   ],
+   "share": 0.1016,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     70,
+     "Swampert: Protect | Grimmsnarl: Reflect"
+    ],
+    [
+     30,
+     "Swampert: Wave Crash -> Farigiraf | Grimmsnarl: switch -> Pelipper"
+    ]
+   ]
+  },
+  "Rain + Sun: Archaludon + Golisopod + Politoed||Archaludon+Grimmsnarl||Archaludon + Grimmsnarl": {
+   "lines": null,
+   "pop": 0.6312751390302571,
+   "worst": 0.5400135029194962,
+   "full": [
+    0.6317631299900285,
+    0.5415010040300002
+   ],
+   "reader": [
+    [
+     0.5616114066684216,
+     "Archaludon: Electro Shot -> Grimmsnarl | Grimmsnarl: Light Screen"
+    ],
+    [
+     0.2958633908279705,
+     "Archaludon: Electro Shot -> Grimmsnarl | Grimmsnarl: Reflect"
+    ],
+    [
+     0.142525202503608,
+     "Archaludon: Electro Shot -> Grimmsnarl | Grimmsnarl: switch"
+    ]
+   ],
+   "share": 0.0688,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     85,
+     "Archaludon: Flash Cannon -> Grimmsnarl | Grimmsnarl: Spirit Break -> Grimmsnarl"
+    ],
+    [
+     15,
+     "Archaludon: Electro Shot -> Grimmsnarl | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Other Tailwind||Pelipper+Metagross||Kingambit + Salamence": {
+   "lines": null,
+   "pop": 0.5083126482826328,
+   "worst": 0.4305974789190406,
+   "full": [
+    0.509197708370987,
+    0.4531761763057363
+   ],
+   "reader": [
+    [
+     0.3747322430305952,
+     "Kingambit: Kowtow Cleave -> Metagross | Salamence: Tailwind"
+    ],
+    [
+     0.19940035014437255,
+     "Kingambit: Swords Dance | Salamence: Hyper Voice"
+    ],
+    [
+     0.1577661257523908,
+     "Kingambit: Sucker Punch -> Metagross | Salamence: Hyper Voice"
+    ]
+   ],
+   "share": 0.0447,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     35,
+     "Pelipper: Weather Ball -> Kingambit | Metagross: Stomping Tantrum -> Kingambit"
+    ],
+    [
+     35,
+     "Pelipper: Tailwind | Metagross: Protect"
+    ],
+    [
+     30,
+     "Pelipper: Tailwind | Metagross: Psychic Fangs -> Salamence"
+    ]
+   ]
+  },
+  "Other Indeedee TR||Pelipper+Swampert||Garganacl + Hawlucha": {
+   "lines": null,
+   "pop": 0.747420564639107,
+   "worst": 0.7166631579559155,
+   "full": [
+    0.7477182180270167,
+    0.7179452421987002
+   ],
+   "reader": [
+    [
+     0.46145812953374055,
+     "Garganacl: Protect | Hawlucha: switch"
+    ],
+    [
+     0.39568506308436835,
+     "Garganacl: Fissure -> Swampert | Hawlucha: switch"
+    ],
+    [
+     0.1428568073818911,
+     "Garganacl: Fissure -> Swampert | Hawlucha: Entrainment -> Swampert"
+    ]
+   ],
+   "share": 0.027,
+   "back": [
+    "Archaludon",
+    "Grimmsnarl"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     65,
+     "Pelipper: Tailwind | Swampert: Wave Crash -> Hawlucha"
+    ],
+    [
+     35,
+     "Pelipper: Weather Ball -> Hawlucha | Swampert: Wave Crash -> Hawlucha"
+    ]
+   ]
+  },
+  "Other Trick Room||Pelipper+Swampert||Farigiraf + Rillaboom": {
+   "lines": null,
+   "pop": 0.44661829303580025,
+   "worst": 0.4140398863822141,
+   "full": [
+    0.447977812582174,
+    0.4139088415162505
+   ],
+   "reader": [
+    [
+     0.8431177872263454,
+     "Farigiraf: Trick Room | Rillaboom: Fake Out -> Pelipper"
+    ],
+    [
+     0.14666981186372072,
+     "Farigiraf: Trick Room | Rillaboom: High Horsepower -> Swampert"
+    ]
+   ],
+   "share": 0.0247,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     80,
+     "Pelipper: switch -> Indeedee-F | Swampert: Wave Crash -> Farigiraf"
+    ],
+    [
+     20,
+     "Pelipper: Hurricane -> Rillaboom | Swampert: Flip Turn -> Farigiraf"
+    ]
+   ]
+  },
+  "Snow: Froslass + Kingambit + Rillaboom||Indeedee-F+Metagross||Basculegion + Froslass": {
+   "lines": null,
+   "pop": 0.5148666080566533,
+   "worst": 0.4812720966888621,
+   "full": [
+    0.5130466683796309,
+    0.5043552779592224
+   ],
+   "reader": [
+    [
+     0.36556060220099557,
+     "Basculegion: Wave Crash -> Metagross | Froslass: Blizzard"
+    ],
+    [
+     0.2775618499751849,
+     "Basculegion: Flip Turn -> Metagross | Froslass: Protect"
+    ],
+    [
+     0.1963179447800623,
+     "Basculegion: Flip Turn -> Indeedee-F | Froslass: Protect"
+    ]
+   ],
+   "share": 0.0484,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     60,
+     "Indeedee-F: Protect | Metagross: Steel Roller -> Froslass"
+    ],
+    [
+     40,
+     "Indeedee-F: Psychic -> Basculegion | Metagross: Protect"
+    ]
+   ]
+  },
+  "Sand: Excadrill + Tyranitar||Archaludon+Grimmsnarl||Excadrill + Pidgeot": {
+   "lines": null,
+   "pop": 0.5667181498179327,
+   "worst": 0.5352314557841051,
+   "full": [
+    0.5706553506159175,
+    0.5420439770079031
+   ],
+   "reader": [
+    [
+     0.34233868450698085,
+     "Excadrill: Earthquake | Pidgeot: Protect"
+    ],
+    [
+     0.33372255431944753,
+     "Excadrill: Earthquake | Pidgeot: Hurricane -> Grimmsnarl"
+    ],
+    [
+     0.32393876117357173,
+     "Excadrill: Protect | Pidgeot: Hurricane -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.0419,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Archaludon: Electro Shot -> Pidgeot | Grimmsnarl: Reflect"
+    ],
+    [
+     50,
+     "Archaludon: Electro Shot -> Pidgeot | Grimmsnarl: Parting Shot -> Excadrill"
+    ]
+   ]
+  },
+  "Other Trick Room||Pelipper+Swampert||Incineroar + Raichu": {
+   "lines": null,
+   "pop": 0.5613710397860776,
+   "worst": 0.5409658739434363,
+   "full": [
+    0.563048423748213,
+    0.5438137698151158
+   ],
+   "reader": [
+    [
+     0.4779808714641681,
+     "Incineroar: Fake Out -> Pelipper | Raichu: Protect"
+    ],
+    [
+     0.2533988844904398,
+     "Incineroar: Fake Out -> Swampert | Raichu: Zap Cannon -> Pelipper"
+    ],
+    [
+     0.18496926788173818,
+     "Incineroar: Throat Chop -> Pelipper | Raichu: Protect"
+    ]
+   ],
+   "share": 0.0247,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Pelipper: switch -> Indeedee-F | Swampert: Earthquake"
+    ],
+    [
+     40,
+     "Pelipper: Weather Ball -> Incineroar | Swampert: Flip Turn -> Incineroar"
+    ],
+    [
+     10,
+     "Pelipper: Weather Ball -> Incineroar | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Sand: Excadrill + Tyranitar||Archaludon+Grimmsnarl||Excadrill + Tyranitar": {
+   "lines": null,
+   "pop": 0.593176615730775,
+   "worst": 0.5173628999514656,
+   "full": [
+    0.5930181791738338,
+    0.5205239035923838
+   ],
+   "reader": [
+    [
+     0.4377426352233101,
+     "Excadrill: Iron Head -> Grimmsnarl | Tyranitar: Rock Slide"
+    ],
+    [
+     0.3970123065772215,
+     "Excadrill: High Horsepower -> Archaludon | Tyranitar: Dragon Dance"
+    ],
+    [
+     0.14996070961726649,
+     "Excadrill: High Horsepower -> Archaludon | Tyranitar: Protect"
+    ]
+   ],
+   "share": 0.1937,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Archaludon: Electro Shot -> Tyranitar | Grimmsnarl: Parting Shot -> Excadrill"
+    ],
+    [
+     40,
+     "Archaludon: Flash Cannon -> Tyranitar | Grimmsnarl: Reflect"
+    ],
+    [
+     5,
+     "Archaludon: Protect | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Sand: Excadrill + Salamence + Sneasler + Tyranitar||Swampert+Grimmsnarl||Sneasler + Tyranitar": {
+   "lines": null,
+   "pop": 0.7318522994802406,
+   "worst": 0.5194582330265418,
+   "full": [
+    0.7318522994802406,
+    0.5194582330265418
+   ],
+   "reader": [
+    [
+     0.898264174221706,
+     "Sneasler: Fake Out -> Swampert | Tyranitar: Dragon Dance"
+    ],
+    [
+     0.1017358257782943,
+     "Sneasler: Fake Out -> Grimmsnarl | Tyranitar: Dragon Dance"
+    ]
+   ],
+   "share": 0.0634,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Swampert: Earthquake | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Perish: Archaludon + Politoed (no Golisopod)||Archaludon+Metagross||Archaludon + Politoed": {
+   "lines": null,
+   "pop": 0.5905637458836037,
+   "worst": 0.5271422971494586,
+   "full": [
+    0.5837261133886753,
+    0.5353155105689212
+   ],
+   "reader": [
+    [
+     0.5216812748272375,
+     "Archaludon: Electro Shot -> Archaludon | Politoed: Protect"
+    ],
+    [
+     0.4066108126620731,
+     "Archaludon: Electro Shot -> Metagross | Politoed: Weather Ball -> Metagross"
+    ]
+   ],
+   "share": 0.0682,
+   "back": [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Archaludon: Electro Shot -> Archaludon | Metagross: Stomping Tantrum -> Archaludon"
+    ],
+    [
+     50,
+     "Archaludon: Electro Shot -> Politoed | Metagross: Protect"
+    ]
+   ]
+  },
+  "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)||Swampert+Grimmsnarl||Aerodactyl + Kingambit": {
+   "lines": null,
+   "pop": 0.6346785967423421,
+   "worst": 0.5324259820272463,
+   "full": [
+    0.6319892405185098,
+    0.5341524246804406
+   ],
+   "reader": [
+    [
+     0.6695322175893492,
+     "Aerodactyl: Protect | Kingambit: Iron Head -> Grimmsnarl"
+    ],
+    [
+     0.2594201309189132,
+     "Aerodactyl: Tailwind | Kingambit: Iron Head -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.2789,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Swampert: Flip Turn -> Aerodactyl | Grimmsnarl: Reflect"
+    ],
+    [
+     45,
+     "Swampert: Wave Crash -> Kingambit | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)||Swampert+Grimmsnarl||Charizard + Farigiraf": {
+   "lines": null,
+   "pop": 0.5775086007414617,
+   "worst": 0.4789221237260046,
+   "full": [
+    0.5746140169602021,
+    0.4852692893986364
+   ],
+   "reader": [
+    [
+     0.6603633336847725,
+     "Charizard: Protect | Farigiraf: Trick Room"
+    ],
+    [
+     0.1962404262527739,
+     "Charizard: Heat Wave | Farigiraf: Trick Room"
+    ],
+    [
+     0.1433962400624536,
+     "Charizard: Protect | Farigiraf: Psychic Fangs -> Swampert"
+    ]
+   ],
+   "share": 0.068,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     85,
+     "Swampert: Wave Crash -> Charizard | Grimmsnarl: Light Screen"
+    ],
+    [
+     15,
+     "Swampert: Protect | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)||Swampert+Grimmsnarl||Charizard + Garchomp": {
+   "lines": null,
+   "pop": 0.5921606395879397,
+   "worst": 0.528190612710429,
+   "full": [
+    0.5939837178794097,
+    0.5324189075522257
+   ],
+   "reader": [
+    [
+     0.44421715484929536,
+     "Charizard: Protect | Garchomp: Earthquake"
+    ],
+    [
+     0.30771725871952027,
+     "Charizard: Overheat -> Grimmsnarl | Garchomp: switch"
+    ],
+    [
+     0.24806558643118368,
+     "Charizard: Heat Wave | Garchomp: Earthquake"
+    ]
+   ],
+   "share": 0.0544,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     80,
+     "Swampert: Wave Crash -> Charizard | Grimmsnarl: Reflect"
+    ],
+    [
+     15,
+     "Swampert: Wave Crash -> Garchomp | Grimmsnarl: Parting Shot -> Garchomp"
+    ],
+    [
+     5,
+     "Swampert: Wave Crash -> Charizard | Grimmsnarl: Parting Shot -> Garchomp"
+    ]
+   ]
+  },
+  "Balance: Dragonite + Floette + Incineroar||Pelipper+Archaludon||Floette-Eternal + Incineroar": {
+   "lines": null,
+   "pop": 0.5345695294126726,
+   "worst": 0.4759035168265938,
+   "full": [
+    0.5504273058418099,
+    0.49050592704795226
+   ],
+   "reader": [
+    [
+     0.6501572469074073,
+     "Floette-Eternal: Dazzling Gleam | Incineroar: Fake Out -> Archaludon"
+    ],
+    [
+     0.2794630650353268,
+     "Floette-Eternal: Draining Kiss -> Pelipper | Incineroar: Throat Chop -> Pelipper"
+    ]
+   ],
+   "share": 0.1172,
+   "back": [
+    "Indeedee-F",
+    "Metagross"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Pelipper: switch -> Indeedee-F | Archaludon: Electro Shot -> Floette-Eternal"
+    ],
+    [
+     40,
+     "Pelipper: Wide Guard | Archaludon: Electro Shot -> Floette-Eternal"
+    ],
+    [
+     10,
+     "Pelipper: Weather Ball -> Incineroar | Archaludon: Protect"
+    ]
+   ]
+  },
+  "Other Perish||Swampert+Indeedee-F||Gengar + Hippowdon": {
+   "lines": null,
+   "pop": 0.63985778612789,
+   "worst": 0.5666067523399451,
+   "full": [
+    0.6397199307903954,
+    0.5685361149845783
+   ],
+   "reader": [
+    [
+     0.7237821856793886,
+     "Gengar: Protect | Hippowdon: switch"
+    ],
+    [
+     0.16888090780757958,
+     "Gengar: Shadow Ball -> Swampert | Hippowdon: switch"
+    ],
+    [
+     0.10733690651303186,
+     "Gengar: Protect | Hippowdon: High Horsepower -> Swampert"
+    ]
+   ],
+   "share": 0.051,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     65,
+     "Swampert: Wave Crash -> Hippowdon | Indeedee-F: Psychic -> Gengar"
+    ],
+    [
+     35,
+     "Swampert: Wave Crash -> Hippowdon | Indeedee-F: Psychic -> Hippowdon"
+    ]
+   ]
+  },
+  "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)||Pelipper+Swampert||Gardevoir + Indeedee-F": {
+   "lines": null,
+   "pop": 0.6705588915957852,
+   "worst": 0.640678612558387,
+   "full": [
+    0.6670115519568166,
+    0.6446150351615547
+   ],
+   "reader": [
+    [
+     0.5624983079003472,
+     "Gardevoir: Calm Mind | Indeedee-F: Trick Room"
+    ],
+    [
+     0.380953324527652,
+     "Gardevoir: Expanding Force -> Pelipper | Indeedee-F: Trick Room"
+    ]
+   ],
+   "share": 0.2162,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": true,
+   "trCredit": null,
+   "mix": [
+    [
+     80,
+     "Pelipper: Wide Guard | Swampert: Wave Crash -> Indeedee-F"
+    ],
+    [
+     20,
+     "Pelipper: Weather Ball -> Indeedee-F | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Sand: Excadrill + Tyranitar||Archaludon+Grimmsnarl||Gardevoir + Indeedee-F": {
+   "lines": null,
+   "pop": 0.6178007139254209,
+   "worst": 0.42012629652208244,
+   "full": [
+    0.6178007139254209,
+    0.42012629652208244
+   ],
+   "reader": [
+    [
+     1.0,
+     "Gardevoir: Hyper Voice | Indeedee-F: Trick Room"
+    ]
+   ],
+   "share": 0.0471,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": true,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Archaludon: Flash Cannon -> Gardevoir | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Tailwind: Glimmora + Rillaboom + Volcarona (no Basculegion)||Swampert+Archaludon||Rillaboom + Volcarona": {
+   "lines": null,
+   "pop": 0.5340364938950113,
+   "worst": 0.5265164559788644,
+   "full": [
+    0.5361909377211982,
+    0.5312821399012999
+   ],
+   "reader": [
+    [
+     0.48994842783137504,
+     "Rillaboom: High Horsepower -> Archaludon | Volcarona: Protect"
+    ],
+    [
+     0.1811712460270291,
+     "Rillaboom: Wood Hammer -> Swampert | Volcarona: switch"
+    ],
+    [
+     0.17549309602268776,
+     "Rillaboom: Fake Out -> Archaludon | Volcarona: Protect"
+    ]
+   ],
+   "share": 0.0833,
+   "back": [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     40,
+     "Swampert: switch -> Pelipper | Archaludon: Electro Shot -> Rillaboom"
+    ],
+    [
+     30,
+     "Swampert: Protect | Archaludon: Dragon Pulse -> Rillaboom"
+    ],
+    [
+     30,
+     "Swampert: switch -> Indeedee-F | Archaludon: Dragon Pulse -> Rillaboom"
+    ]
+   ]
+  },
+  "Other Balance||Swampert+Indeedee-F||Garchomp + Incineroar": {
+   "lines": null,
+   "pop": 0.5831352512675105,
+   "worst": 0.4807534670566694,
+   "full": [
+    0.5821888661109856,
+    0.4847075366831126
+   ],
+   "reader": [
+    [
+     0.6427653072936468,
+     "Garchomp: Draco Meteor -> Swampert | Incineroar: switch"
+    ],
+    [
+     0.35723469270635316,
+     "Garchomp: Draco Meteor -> Indeedee-F | Incineroar: Helping Hand"
+    ]
+   ],
+   "share": 0.0322,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Swampert: Flip Turn -> Incineroar | Indeedee-F: Psychic -> Garchomp"
+    ]
+   ]
+  },
+  "Indeedee TR: Armarouge + Indeedee-F||Pelipper+Swampert||Annihilape + Armarouge": {
+   "lines": null,
+   "pop": 0.7199711423886811,
+   "worst": 0.7006622596099592,
+   "full": [
+    0.7193564973456171,
+    0.7018166921532739
+   ],
+   "reader": [
+    [
+     0.5575025388623117,
+     "Annihilape: Close Combat -> Swampert | Armarouge: Expanding Force -> Pelipper"
+    ],
+    [
+     0.4424974611376883,
+     "Annihilape: Close Combat -> Swampert | Armarouge: Protect"
+    ]
+   ],
+   "share": 0.0565,
+   "back": [
+    "Archaludon",
+    "Metagross"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     80,
+     "Pelipper: Weather Ball -> Armarouge | Swampert: Wave Crash -> Annihilape"
+    ],
+    [
+     20,
+     "Pelipper: Tailwind | Swampert: Wave Crash -> Annihilape"
+    ]
+   ]
+  },
+  "Sun: Charizard + Whimsicott||Swampert+Grimmsnarl||Glimmora + Whimsicott": {
+   "lines": null,
+   "pop": 0.5890401886100353,
+   "worst": 0.5432183189831885,
+   "full": [
+    0.5899158179457407,
+    0.5474783447575204
+   ],
+   "reader": [
+    [
+     0.4711819634708487,
+     "Glimmora: Spiky Shield | Whimsicott: Moonblast -> Grimmsnarl"
+    ],
+    [
+     0.3642240146020231,
+     "Glimmora: Sludge Bomb -> Grimmsnarl | Whimsicott: Tailwind"
+    ],
+    [
+     0.1315154686246229,
+     "Glimmora: switch | Whimsicott: Tailwind"
+    ]
+   ],
+   "share": 0.0776,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     70,
+     "Swampert: Earthquake | Grimmsnarl: Reflect"
+    ],
+    [
+     30,
+     "Swampert: Wave Crash -> Whimsicott | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Balance: Gholdengo + Incineroar + Raichu + Rillaboom||Pelipper+Swampert||Garchomp + Volcarona": {
+   "lines": null,
+   "pop": 0.6978994013627304,
+   "worst": 0.625289831770701,
+   "full": [
+    0.6976552145536086,
+    0.6258443694016319
+   ],
+   "reader": [
+    [
+     0.3252270133675609,
+     "Garchomp: Dragon Pulse -> Pelipper | Volcarona: switch"
+    ],
+    [
+     0.2787730471608005,
+     "Garchomp: Dragon Pulse -> Pelipper | Volcarona: Struggle Bug"
+    ],
+    [
+     0.23099847163952408,
+     "Garchomp: Power Gem -> Pelipper | Volcarona: switch"
+    ]
+   ],
+   "share": 0.0975,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     65,
+     "Pelipper: Tailwind | Swampert: Wave Crash -> Volcarona"
+    ],
+    [
+     35,
+     "Pelipper: switch -> Archaludon | Swampert: Flip Turn -> Volcarona"
+    ]
+   ]
+  },
+  "Sand: Excadrill + Salamence + Sneasler + Tyranitar||Swampert+Grimmsnarl||Indeedee + Sneasler": {
+   "lines": null,
+   "pop": 0.7652514380502129,
+   "worst": 0.6494836602269014,
+   "full": [
+    0.7597259810605986,
+    0.6597946880081451
+   ],
+   "reader": [
+    [
+     0.6164364118733985,
+     "Indeedee: Dazzling Gleam | Sneasler: Protect"
+    ],
+    [
+     0.2566027582451332,
+     "Indeedee: Protect | Sneasler: Dire Claw -> Grimmsnarl"
+    ],
+    [
+     0.12696082988146845,
+     "Indeedee: Expanding Force -> Swampert | Sneasler: Protect"
+    ]
+   ],
+   "share": 0.0878,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     90,
+     "Swampert: Earthquake | Grimmsnarl: Reflect"
+    ],
+    [
+     10,
+     "Swampert: Wave Crash -> Indeedee | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Balance: Dragonite + Floette + Incineroar||Pelipper+Archaludon||Floette-Eternal + Rillaboom": {
+   "lines": null,
+   "pop": 0.576911989354587,
+   "worst": 0.5059918222631046,
+   "full": [
+    0.5763080987362117,
+    0.5110345312231122
+   ],
+   "reader": [
+    [
+     0.7113172102737041,
+     "Floette-Eternal: Dazzling Gleam | Rillaboom: Fake Out -> Archaludon"
+    ],
+    [
+     0.22737067941279784,
+     "Floette-Eternal: Calm Mind | Rillaboom: Fake Out -> Pelipper"
+    ]
+   ],
+   "share": 0.0897,
+   "back": [
+    "Indeedee-F",
+    "Metagross"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Pelipper: Wide Guard | Archaludon: Electro Shot -> Rillaboom"
+    ],
+    [
+     30,
+     "Pelipper: switch -> Indeedee-F | Archaludon: Electro Shot -> Floette-Eternal"
+    ],
+    [
+     15,
+     "Pelipper: Hurricane -> Rillaboom | Archaludon: Protect"
+    ]
+   ]
+  },
+  "Sand: Excadrill + Salamence + Sneasler + Tyranitar||Swampert+Grimmsnarl||Excadrill + Tyranitar": {
+   "lines": null,
+   "pop": 0.6854586508242827,
+   "worst": 0.5836775688102904,
+   "full": [
+    0.6792322050690057,
+    0.5917888964658318
+   ],
+   "reader": [
+    [
+     0.40529121889626524,
+     "Excadrill: Iron Head -> Grimmsnarl | Tyranitar: Rock Slide"
+    ],
+    [
+     0.392880965808782,
+     "Excadrill: Protect | Tyranitar: Rock Slide"
+    ],
+    [
+     0.2018278152949523,
+     "Excadrill: Iron Head -> Grimmsnarl | Tyranitar: Protect"
+    ]
+   ],
+   "share": 0.1902,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     75,
+     "Swampert: Earthquake | Grimmsnarl: Reflect"
+    ],
+    [
+     25,
+     "Swampert: Wave Crash -> Tyranitar | Grimmsnarl: Parting Shot -> Excadrill"
+    ]
+   ]
+  },
+  "Other Indeedee TR||Pelipper+Swampert||Arcanine-Hisui + Indeedee-F": {
+   "lines": null,
+   "pop": 0.7344051722289804,
+   "worst": 0.6422633283755975,
+   "full": [
+    0.7344051722289804,
+    0.6422633283755975
+   ],
+   "reader": [
+    [
+     0.8304629814462297,
+     "Arcanine-Hisui: Head Smash -> Pelipper | Indeedee-F: Protect"
+    ]
+   ],
+   "share": 0.0193,
+   "back": [
+    "Archaludon",
+    "Grimmsnarl"
+   ],
+   "itemMix": true,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Pelipper: Tailwind | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)||Pelipper+Swampert||Gholdengo + Staraptor": {
+   "lines": null,
+   "pop": 0.4987526565669841,
+   "worst": 0.42935866758142816,
+   "full": [
+    0.49878112060045593,
+    0.43018014349225775
+   ],
+   "reader": [
+    [
+     0.4958718614283546,
+     "Gholdengo: Shadow Ball -> Pelipper | Staraptor: Close Combat -> Pelipper"
+    ],
+    [
+     0.30078304956624324,
+     "Gholdengo: Make It Rain | Staraptor: Close Combat -> Pelipper"
+    ],
+    [
+     0.1544382424550511,
+     "Gholdengo: Nasty Plot | Staraptor: Close Combat -> Swampert"
+    ]
+   ],
+   "share": 0.0473,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     75,
+     "Pelipper: Hurricane -> Staraptor | Swampert: Wave Crash -> Gholdengo"
+    ],
+    [
+     25,
+     "Pelipper: switch -> Indeedee-F | Swampert: Flip Turn -> Gholdengo"
+    ]
+   ]
+  },
+  "Indeedee TR: Basculegion + Whimsicott||Swampert+Grimmsnarl||Gardevoir + Indeedee-F": {
+   "lines": null,
+   "pop": 0.611965447367017,
+   "worst": 0.5653991076526588,
+   "full": [
+    0.612624168727068,
+    0.5667359361091437
+   ],
+   "reader": [
+    [
+     0.5628793902389613,
+     "Gardevoir: Hyper Voice | Indeedee-F: Helping Hand"
+    ],
+    [
+     0.43712060976103867,
+     "Gardevoir: Hyper Voice | Indeedee-F: Follow Me"
+    ]
+   ],
+   "share": 0.1087,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": true,
+   "trCredit": null,
+   "mix": [
+    [
+     90,
+     "Swampert: Earthquake | Grimmsnarl: Light Screen"
+    ],
+    [
+     10,
+     "Swampert: Wave Crash -> Gardevoir | Grimmsnarl: switch -> Pelipper"
+    ]
+   ]
+  },
+  "Snow: Froslass + Kingambit + Rillaboom||Indeedee-F+Metagross||Froslass + Kingambit": {
+   "lines": null,
+   "pop": 0.47323996467357754,
+   "worst": 0.37169807210602096,
+   "full": [
+    0.463503568105362,
+    0.393611495421058
+   ],
+   "reader": [
+    [
+     0.24877354644034338,
+     "Froslass: Protect | Kingambit: Kowtow Cleave -> Metagross"
+    ],
+    [
+     0.23125407597177144,
+     "Froslass: Protect | Kingambit: Swords Dance"
+    ],
+    [
+     0.15081261629396256,
+     "Froslass: Shadow Ball -> Metagross | Kingambit: Swords Dance"
+    ]
+   ],
+   "share": 0.0934,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     45,
+     "Indeedee-F: Protect | Metagross: Steel Roller -> Froslass"
+    ],
+    [
+     35,
+     "Indeedee-F: Psychic -> Froslass | Metagross: Protect"
+    ],
+    [
+     20,
+     "Indeedee-F: Helping Hand | Metagross: Stomping Tantrum -> Kingambit"
+    ]
+   ]
+  },
+  "Perish: Archaludon + Politoed (no Golisopod)||Archaludon+Metagross||Gengar + Rillaboom": {
+   "lines": null,
+   "pop": 0.5170574792592338,
+   "worst": 0.4468294660516955,
+   "full": [
+    0.5284926421570421,
+    0.46332020117508416
+   ],
+   "reader": [
+    [
+     0.3657774672978935,
+     "Gengar: Perish Song | Rillaboom: Fake Out -> Metagross"
+    ],
+    [
+     0.30153521037594605,
+     "Gengar: Shadow Ball -> Metagross | Rillaboom: U-turn -> Metagross"
+    ],
+    [
+     0.15578826778830304,
+     "Gengar: Perish Song | Rillaboom: Fake Out -> Archaludon"
+    ]
+   ],
+   "share": 0.0966,
+   "back": [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     35,
+     "Archaludon: Dragon Pulse -> Rillaboom | Metagross: switch -> Indeedee-F"
+    ],
+    [
+     35,
+     "Archaludon: switch -> Indeedee-F | Metagross: Steel Roller -> Gengar"
+    ],
+    [
+     30,
+     "Archaludon: Dragon Pulse -> Gengar | Metagross: switch -> Indeedee-F"
+    ]
+   ]
+  },
+  "Trick Room: Delphox + Floette + Incineroar + Sinistcha||Pelipper+Swampert||Floette-Eternal + Sneasler": {
+   "lines": null,
+   "pop": 0.585996120155133,
+   "worst": 0.492989332174942,
+   "full": [
+    0.5990574924027334,
+    0.5335254582635741
+   ],
+   "reader": [
+    [
+     0.4446699911673567,
+     "Floette-Eternal: Protect | Sneasler: Close Combat -> Swampert"
+    ],
+    [
+     0.26766412743283824,
+     "Floette-Eternal: Dazzling Gleam | Sneasler: Fake Out -> Swampert"
+    ],
+    [
+     0.19963626342691956,
+     "Floette-Eternal: Dazzling Gleam | Sneasler: Fake Out -> Pelipper"
+    ]
+   ],
+   "share": 0.0941,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Pelipper: switch -> Indeedee-F | Swampert: Wave Crash -> Floette-Eternal"
+    ],
+    [
+     35,
+     "Pelipper: Hurricane -> Sneasler | Swampert: Earthquake"
+    ],
+    [
+     10,
+     "Pelipper: Hurricane -> Sneasler | Swampert: Protect"
+    ]
+   ]
+  },
+  "Indeedee TR: Camerupt + Farigiraf||Swampert+Grimmsnarl||Farigiraf + Kingambit": {
+   "lines": null,
+   "pop": 0.5532452071604175,
+   "worst": 0.5088219451057879,
+   "full": [
+    0.5532658099256565,
+    0.5100485900314342
+   ],
+   "reader": [
+    [
+     0.515954551926829,
+     "Farigiraf: Trick Room | Kingambit: Kowtow Cleave -> Swampert"
+    ],
+    [
+     0.48404544807317096,
+     "Farigiraf: Trick Room | Kingambit: Iron Head -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.0547,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Swampert: Wave Crash -> Farigiraf | Grimmsnarl: switch -> Pelipper"
+    ],
+    [
+     45,
+     "Swampert: Earthquake | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Balance: Gholdengo + Incineroar + Raichu + Rillaboom||Pelipper+Swampert||Gholdengo + Incineroar": {
+   "lines": null,
+   "pop": 0.5049820188544955,
+   "worst": 0.45764164225910564,
+   "full": [
+    0.5058271532807023,
+    0.4654680723691842
+   ],
+   "reader": [
+    [
+     0.36684597124658436,
+     "Gholdengo: Nasty Plot | Incineroar: Fake Out -> Swampert"
+    ],
+    [
+     0.2936334278022372,
+     "Gholdengo: Nasty Plot | Incineroar: switch"
+    ],
+    [
+     0.2918712188972537,
+     "Gholdengo: Nasty Plot | Incineroar: Fake Out -> Pelipper"
+    ]
+   ],
+   "share": 0.0545,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     45,
+     "Pelipper: Weather Ball -> Incineroar | Swampert: Earthquake"
+    ],
+    [
+     30,
+     "Pelipper: Weather Ball -> Incineroar | Swampert: Flip Turn -> Gholdengo"
+    ],
+    [
+     25,
+     "Pelipper: switch -> Indeedee-F | Swampert: Flip Turn -> Gholdengo"
+    ]
+   ]
+  },
+  "Sun: Farigiraf + Garchomp + Incineroar + Sylveon||Indeedee-F+Metagross||Charizard + Incineroar": {
+   "lines": null,
+   "pop": 0.7058857078984246,
+   "worst": 0.6538486962853111,
+   "full": [
+    0.7058857078984246,
+    0.6538486962853111
+   ],
+   "reader": [
+    [
+     0.9999999999999888,
+     "Charizard: Heat Wave | Incineroar: Parting Shot -> Metagross"
+    ]
+   ],
+   "share": 0.0595,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Indeedee-F: Follow Me | Metagross: Psychic Fangs -> Charizard"
+    ]
+   ]
+  },
+  "Tailwind: Glimmora + Rillaboom + Volcarona (no Basculegion)||Swampert+Archaludon||Glimmora + Volcarona": {
+   "lines": null,
+   "pop": 0.710785214415797,
+   "worst": 0.5820934866081301,
+   "full": [
+    0.711035319876245,
+    0.5901889207263507
+   ],
+   "reader": [
+    [
+     0.5876215605157482,
+     "Glimmora: Spiky Shield | Volcarona: switch"
+    ],
+    [
+     0.3354125332022223,
+     "Glimmora: Earth Power -> Archaludon | Volcarona: Protect"
+    ]
+   ],
+   "share": 0.125,
+   "back": [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Swampert: Earthquake | Archaludon: switch -> Pelipper"
+    ],
+    [
+     50,
+     "Swampert: Flip Turn -> Volcarona | Archaludon: Electro Shot -> Volcarona"
+    ]
+   ]
+  },
+  "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler||Pelipper+Swampert||Gardevoir + Indeedee-F": {
+   "lines": null,
+   "pop": 0.6358211558874669,
+   "worst": 0.6054796254999303,
+   "full": [
+    0.6441720866883878,
+    0.618570607557215
+   ],
+   "reader": [
+    [
+     0.35077378741597276,
+     "Gardevoir: Expanding Force -> Swampert | Indeedee-F: Trick Room"
+    ],
+    [
+     0.2861431334913963,
+     "Gardevoir: Trick Room | Indeedee-F: switch"
+    ],
+    [
+     0.20321588439305371,
+     "Gardevoir: Protect | Indeedee-F: Trick Room"
+    ]
+   ],
+   "share": 0.3034,
+   "back": [
+    "Indeedee-F",
+    "Metagross"
+   ],
+   "itemMix": true,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Pelipper: Wide Guard | Swampert: Wave Crash -> Indeedee-F"
+    ],
+    [
+     35,
+     "Pelipper: Weather Ball -> Indeedee-F | Swampert: Earthquake"
+    ],
+    [
+     15,
+     "Pelipper: Weather Ball -> Indeedee-F | Swampert: Wave Crash -> Gardevoir"
+    ]
+   ]
+  },
+  "Other Trick Room||Pelipper+Swampert||Incineroar + Lucario": {
+   "lines": null,
+   "pop": 0.6708234706124427,
+   "worst": 0.5375564675598191,
+   "full": [
+    0.6777759771565083,
+    0.5459396933808933
+   ],
+   "reader": [
+    [
+     0.4337715308030549,
+     "Incineroar: Fake Out -> Swampert | Lucario: Nasty Plot"
+    ],
+    [
+     0.2942554907446478,
+     "Incineroar: Fake Out -> Pelipper | Lucario: Protect"
+    ],
+    [
+     0.1085786174313663,
+     "Incineroar: Fake Out -> Swampert | Lucario: Protect"
+    ]
+   ],
+   "share": 0.0278,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     40,
+     "Pelipper: Weather Ball -> Incineroar | Swampert: Earthquake"
+    ],
+    [
+     35,
+     "Pelipper: Weather Ball -> Lucario | Swampert: Wave Crash -> Incineroar"
+    ],
+    [
+     25,
+     "Pelipper: switch -> Indeedee-F | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Snow: Froslass + Kingambit + Rillaboom||Indeedee-F+Metagross||Kingambit + Sneasler": {
+   "lines": null,
+   "pop": 0.5372049895912901,
+   "worst": 0.4463568810529601,
+   "full": [
+    0.5372698671496685,
+    0.4505477328691032
+   ],
+   "reader": [
+    [
+     0.6575471949053594,
+     "Kingambit: Kowtow Cleave -> Metagross | Sneasler: Protect"
+    ],
+    [
+     0.3161463209884909,
+     "Kingambit: Swords Dance | Sneasler: Close Combat -> Indeedee-F"
+    ]
+   ],
+   "share": 0.0484,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     65,
+     "Indeedee-F: Helping Hand | Metagross: Stomping Tantrum -> Kingambit"
+    ],
+    [
+     25,
+     "Indeedee-F: Psychic -> Sneasler | Metagross: Protect"
+    ],
+    [
+     10,
+     "Indeedee-F: Psychic -> Sneasler | Metagross: Stomping Tantrum -> Kingambit"
+    ]
+   ]
+  },
+  "Balance: Gholdengo + Incineroar + Raichu + Rillaboom||Pelipper+Swampert||Garchomp + Gholdengo": {
+   "lines": null,
+   "pop": 0.5848756752623822,
+   "worst": 0.4760403335138671,
+   "full": [
+    0.5512472546494445,
+    0.49397805205922163
+   ],
+   "reader": [
+    [
+     0.5914828702408317,
+     "Garchomp: Dragon Pulse -> Pelipper | Gholdengo: Protect"
+    ],
+    [
+     0.1891217226539992,
+     "Garchomp: Power Gem -> Pelipper | Gholdengo: Nasty Plot"
+    ],
+    [
+     0.16637020914551315,
+     "Garchomp: Power Gem -> Pelipper | Gholdengo: switch"
+    ]
+   ],
+   "share": 0.0678,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     65,
+     "Pelipper: Tailwind | Swampert: Earthquake"
+    ],
+    [
+     35,
+     "Pelipper: switch -> Archaludon | Swampert: Wave Crash -> Garchomp"
+    ]
+   ]
+  },
+  "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler||Pelipper+Swampert||Basculegion + Gardevoir": {
+   "lines": null,
+   "pop": 0.6812546661838916,
+   "worst": 0.6553567681145995,
+   "full": [
+    0.6812546661838916,
+    0.6553567681145995
+   ],
+   "reader": [
+    [
+     0.9999999999999988,
+     "Basculegion: Wave Crash -> Swampert | Gardevoir: Hyper Voice"
+    ]
+   ],
+   "share": 0.0562,
+   "back": [
+    "Indeedee-F",
+    "Metagross"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Pelipper: Tailwind | Swampert: Wave Crash -> Gardevoir"
+    ]
+   ]
+  },
+  "Other Balance||Swampert+Indeedee-F||Garchomp + Volcarona": {
+   "lines": null,
+   "pop": 0.626501211073334,
+   "worst": 0.48609797049113457,
+   "full": [
+    0.6020827351565622,
+    0.4993197676019902
+   ],
+   "reader": [
+    [
+     0.45434510300024666,
+     "Garchomp: Draco Meteor -> Swampert | Volcarona: Protect"
+    ],
+    [
+     0.2854986239175049,
+     "Garchomp: Draco Meteor -> Indeedee-F | Volcarona: Protect"
+    ],
+    [
+     0.23369860071435106,
+     "Garchomp: Draco Meteor -> Indeedee-F | Volcarona: Heat Wave"
+    ]
+   ],
+   "share": 0.0322,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Swampert: Flip Turn -> Volcarona | Indeedee-F: Psychic -> Garchomp"
+    ]
+   ]
+  },
+  "Trick Room: Delphox + Floette + Incineroar + Sinistcha||Pelipper+Swampert||Kingambit + Sneasler": {
+   "lines": null,
+   "pop": 0.5756433012476007,
+   "worst": 0.5397283553420849,
+   "full": [
+    0.5733744019587296,
+    0.5467917186284187
+   ],
+   "reader": [
+    [
+     0.6647021384083667,
+     "Kingambit: Swords Dance | Sneasler: Fake Out -> Swampert"
+    ],
+    [
+     0.33529786159163283,
+     "Kingambit: Swords Dance | Sneasler: Close Combat -> Pelipper"
+    ]
+   ],
+   "share": 0.0824,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     75,
+     "Pelipper: switch -> Indeedee-F | Swampert: Earthquake"
+    ],
+    [
+     25,
+     "Pelipper: Weather Ball -> Kingambit | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)||Swampert+Grimmsnarl||Aerodactyl + Charizard": {
+   "lines": null,
+   "pop": 0.6389105193813759,
+   "worst": 0.6288987041501781,
+   "full": [
+    0.638232697242131,
+    0.6316017902806829
+   ],
+   "reader": [
+    [
+     0.42108925951990595,
+     "Aerodactyl: Tailwind | Charizard: switch"
+    ],
+    [
+     0.317244684421156,
+     "Aerodactyl: switch | Charizard: Weather Ball -> Grimmsnarl"
+    ],
+    [
+     0.2300944008773495,
+     "Aerodactyl: Tailwind | Charizard: Weather Ball -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.0612,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Swampert: Wave Crash -> Charizard | Grimmsnarl: Light Screen"
+    ],
+    [
+     30,
+     "Swampert: Flip Turn -> Aerodactyl | Grimmsnarl: Parting Shot -> Charizard"
+    ],
+    [
+     15,
+     "Swampert: Wave Crash -> Aerodactyl | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Indeedee TR: Camerupt + Farigiraf||Swampert+Grimmsnarl||Farigiraf + Sneasler": {
+   "lines": null,
+   "pop": 0.6115530787437209,
+   "worst": 0.4468203210134179,
+   "full": [
+    0.6115530787437209,
+    0.4468203210134179
+   ],
+   "reader": [
+    [
+     0.8703113464016197,
+     "Farigiraf: Trick Room | Sneasler: Fake Out -> Swampert"
+    ],
+    [
+     0.12968865359838033,
+     "Farigiraf: Trick Room | Sneasler: Fake Out -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.0625,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Swampert: Earthquake | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Other Trick Room||Pelipper+Swampert||Farigiraf + Grimmsnarl": {
+   "lines": null,
+   "pop": 0.4419381702187142,
+   "worst": 0.4419381702187142,
+   "full": [
+    0.4419381702187142,
+    0.4419381702187142
+   ],
+   "reader": [
+    [
+     1.0,
+     "Farigiraf: Trick Room | Grimmsnarl: Reflect"
+    ]
+   ],
+   "share": 0.0185,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Pelipper: Weather Ball -> Farigiraf | Swampert: Wave Crash -> Farigiraf"
+    ]
+   ]
+  },
+  "Rain + Sun: Archaludon + Grimmsnarl + Pelipper||Archaludon+Grimmsnarl||Charizard + Venusaur": {
+   "lines": null,
+   "pop": 0.560759072671699,
+   "worst": 0.4983102537426439,
+   "full": [
+    0.5593583911262486,
+    0.5007453415553278
+   ],
+   "reader": [
+    [
+     0.672839556310651,
+     "Charizard: Heat Wave | Venusaur: Sleep Powder -> Archaludon"
+    ],
+    [
+     0.31466113299896364,
+     "Charizard: Weather Ball -> Grimmsnarl | Venusaur: Sludge Bomb -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.2165,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Archaludon: Protect | Grimmsnarl: Light Screen"
+    ],
+    [
+     30,
+     "Archaludon: Electro Shot -> Charizard | Grimmsnarl: Parting Shot -> Venusaur"
+    ],
+    [
+     20,
+     "Archaludon: Electro Shot -> Charizard | Grimmsnarl: Parting Shot -> Charizard"
+    ]
+   ]
+  },
+  "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)||Metagross+Grimmsnarl||Excadrill + Tyranitar": {
+   "lines": null,
+   "pop": 0.5880090325623145,
+   "worst": 0.5339121585662188,
+   "full": [
+    0.5888537796585892,
+    0.5372822704813184
+   ],
+   "reader": [
+    [
+     0.51856320538522,
+     "Excadrill: Iron Head -> Grimmsnarl | Tyranitar: Knock Off -> Metagross"
+    ],
+    [
+     0.3066672619797492,
+     "Excadrill: switch | Tyranitar: Knock Off -> Metagross"
+    ],
+    [
+     0.16102144067298324,
+     "Excadrill: Protect | Tyranitar: Knock Off -> Metagross"
+    ]
+   ],
+   "share": 0.1782,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Metagross: Stomping Tantrum -> Excadrill | Grimmsnarl: Reflect"
+    ],
+    [
+     25,
+     "Metagross: Protect | Grimmsnarl: Reflect"
+    ],
+    [
+     25,
+     "Metagross: Psychic Fangs -> Excadrill | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Trick Room: Delphox + Incineroar + Sinistcha (no Floette)||Pelipper+Archaludon||Delphox + Incineroar": {
+   "lines": null,
+   "pop": 0.6076896552691188,
+   "worst": 0.5196790076755288,
+   "full": [
+    0.6047373831493944,
+    0.5278449210474263
+   ],
+   "reader": [
+    [
+     0.6857943905150237,
+     "Delphox: Nasty Plot | Incineroar: Fake Out -> Pelipper"
+    ],
+    [
+     0.13872273570305782,
+     "Delphox: Nasty Plot | Incineroar: Snarl"
+    ],
+    [
+     0.10731973356707425,
+     "Delphox: Psychic -> Pelipper | Incineroar: Fake Out -> Pelipper"
+    ]
+   ],
+   "share": 0.236,
+   "back": [
+    "Swampert",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     40,
+     "Pelipper: switch -> Indeedee-F | Archaludon: Electro Shot -> Delphox"
+    ],
+    [
+     30,
+     "Pelipper: Weather Ball -> Incineroar | Archaludon: Electro Shot -> Delphox"
+    ],
+    [
+     30,
+     "Pelipper: Weather Ball -> Incineroar | Archaludon: Electro Shot -> Incineroar"
+    ]
+   ]
+  },
+  "Perish: Gengar + Kommo-o + Rillaboom||Pelipper+Swampert||Kommo-o + Rillaboom": {
+   "lines": null,
+   "pop": 0.6214687370678755,
+   "worst": 0.48950006510627686,
+   "full": [
+    0.6174465627038166,
+    0.49538450246394666
+   ],
+   "reader": [
+    [
+     0.3117554045978814,
+     "Kommo-o: Clanging Scales | Rillaboom: Fake Out -> Pelipper"
+    ],
+    [
+     0.2323357534862129,
+     "Kommo-o: Clangorous Soul | Rillaboom: Fake Out -> Pelipper"
+    ],
+    [
+     0.21263751232047812,
+     "Kommo-o: Clangorous Soul | Rillaboom: Fake Out -> Swampert"
+    ]
+   ],
+   "share": 0.0536,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     75,
+     "Pelipper: Wide Guard | Swampert: Wave Crash -> Rillaboom"
+    ],
+    [
+     20,
+     "Pelipper: Hurricane -> Kommo-o | Swampert: Wave Crash -> Rillaboom"
+    ],
+    [
+     5,
+     "Pelipper: Hurricane -> Rillaboom | Swampert: Wave Crash -> Rillaboom"
+    ]
+   ]
+  },
+  "Other Rain||Swampert+Grimmsnarl||Kommo-o + Pelipper": {
+   "lines": null,
+   "pop": 0.622117116523386,
+   "worst": 0.5687004604864835,
+   "full": [
+    0.6221449120968409,
+    0.5688129950916719
+   ],
+   "reader": [
+    [
+     0.6039072509883132,
+     "Kommo-o: Clanging Scales | Pelipper: Tailwind"
+    ],
+    [
+     0.39609274901168673,
+     "Kommo-o: Protect | Pelipper: Tailwind"
+    ]
+   ],
+   "share": 0.1521,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     75,
+     "Swampert: Wave Crash -> Pelipper | Grimmsnarl: Light Screen"
+    ],
+    [
+     25,
+     "Swampert: Wave Crash -> Pelipper | Grimmsnarl: Spirit Break -> Kommo-o"
+    ]
+   ]
+  },
+  "Other Tailwind||Pelipper+Metagross||Rillaboom + Salamence": {
+   "lines": null,
+   "pop": 0.602496463582649,
+   "worst": 0.5336873767006239,
+   "full": [
+    0.6009311196792998,
+    0.5402555206454361
+   ],
+   "reader": [
+    [
+     0.38326784675848485,
+     "Rillaboom: Fake Out -> Pelipper | Salamence: Hyper Voice"
+    ],
+    [
+     0.2883808693519199,
+     "Rillaboom: Wood Hammer -> Pelipper | Salamence: Tailwind"
+    ],
+    [
+     0.2814508873246484,
+     "Rillaboom: Fake Out -> Metagross | Salamence: Hyper Voice"
+    ]
+   ],
+   "share": 0.0392,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     40,
+     "Pelipper: Hurricane -> Rillaboom | Metagross: Steel Roller -> Salamence"
+    ],
+    [
+     35,
+     "Pelipper: switch -> Indeedee-F | Metagross: Steel Roller -> Rillaboom"
+    ],
+    [
+     25,
+     "Pelipper: switch -> Archaludon | Metagross: Steel Roller -> Rillaboom"
+    ]
+   ]
+  },
+  "Indeedee TR: Armarouge + Indeedee-F||Pelipper+Swampert||Armarouge + Indeedee-F": {
+   "lines": null,
+   "pop": 0.6758783519111662,
+   "worst": 0.6302539219979901,
+   "full": [
+    0.6753587261138271,
+    0.6324061562965743
+   ],
+   "reader": [
+    [
+     0.37233665774769553,
+     "Armarouge: Expanding Force -> Pelipper | Indeedee-F: Follow Me"
+    ],
+    [
+     0.26120288018388077,
+     "Armarouge: Trick Room | Indeedee-F: Psychic -> Pelipper"
+    ],
+    [
+     0.2383373370207439,
+     "Armarouge: Expanding Force -> Swampert | Indeedee-F: Trick Room"
+    ]
+   ],
+   "share": 0.2226,
+   "back": [
+    "Archaludon",
+    "Metagross"
+   ],
+   "itemMix": true,
+   "trCredit": null,
+   "mix": [
+    [
+     40,
+     "Pelipper: Wide Guard | Swampert: Wave Crash -> Indeedee-F"
+    ],
+    [
+     40,
+     "Pelipper: Weather Ball -> Indeedee-F | Swampert: Earthquake"
+    ],
+    [
+     20,
+     "Pelipper: Weather Ball -> Armarouge | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Rain + Sun: Archaludon + Grimmsnarl + Pelipper||Archaludon+Grimmsnarl||Archaludon + Grimmsnarl": {
+   "lines": null,
+   "pop": 0.5931613959975475,
+   "worst": 0.5170220189603394,
+   "full": [
+    0.5933110845664199,
+    0.5221736776399867
+   ],
+   "reader": [
+    [
+     0.7900841772857435,
+     "Archaludon: Flash Cannon -> Grimmsnarl | Grimmsnarl: Light Screen"
+    ],
+    [
+     0.1520771429280773,
+     "Archaludon: Electro Shot -> Grimmsnarl | Grimmsnarl: Parting Shot -> Archaludon"
+    ]
+   ],
+   "share": 0.1134,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     85,
+     "Archaludon: Flash Cannon -> Grimmsnarl | Grimmsnarl: Light Screen"
+    ],
+    [
+     15,
+     "Archaludon: Electro Shot -> Grimmsnarl | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Indeedee TR: Camerupt + Farigiraf||Swampert+Grimmsnarl||Farigiraf + Incineroar": {
+   "lines": null,
+   "pop": 0.41296791708384684,
+   "worst": 0.352417516162529,
+   "full": [
+    0.4133736805325901,
+    0.3581569301795589
+   ],
+   "reader": [
+    [
+     0.5653027115838762,
+     "Farigiraf: Trick Room | Incineroar: Fake Out -> Swampert"
+    ],
+    [
+     0.43469728841612376,
+     "Farigiraf: Trick Room | Incineroar: Fake Out -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.2578,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Swampert: Flip Turn -> Incineroar | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Other Trick Room||Pelipper+Swampert||Farigiraf + Incineroar": {
+   "lines": null,
+   "pop": 0.5093184346813515,
+   "worst": 0.4578135754274604,
+   "full": [
+    0.5031244867676014,
+    0.4649903682083376
+   ],
+   "reader": [
+    [
+     0.5725952792047522,
+     "Farigiraf: Trick Room | Incineroar: Fake Out -> Pelipper"
+    ],
+    [
+     0.30874968869077707,
+     "Farigiraf: Trick Room | Incineroar: switch"
+    ],
+    [
+     0.11865503210447076,
+     "Farigiraf: Trick Room | Incineroar: Fake Out -> Swampert"
+    ]
+   ],
+   "share": 0.0494,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Pelipper: Weather Ball -> Incineroar | Swampert: Flip Turn -> Incineroar"
+    ]
+   ]
+  },
+  "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)||Pelipper+Swampert||Raichu + Staraptor": {
+   "lines": null,
+   "pop": 0.5983025713904616,
+   "worst": 0.5803659025149706,
+   "full": [
+    0.5956989509834424,
+    0.5862667760533526
+   ],
+   "reader": [
+    [
+     0.3642231294729772,
+     "Raichu: Fake Out -> Swampert | Staraptor: Brave Bird -> Pelipper"
+    ],
+    [
+     0.3045244599611038,
+     "Raichu: Fake Out -> Swampert | Staraptor: switch"
+    ],
+    [
+     0.19421687466116785,
+     "Raichu: Protect | Staraptor: Brave Bird -> Pelipper"
+    ]
+   ],
+   "share": 0.0434,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Pelipper: Weather Ball -> Staraptor | Swampert: Earthquake"
+    ],
+    [
+     45,
+     "Pelipper: switch -> Indeedee-F | Swampert: Wave Crash -> Staraptor"
+    ]
+   ]
+  },
+  "Trick Room: Delphox + Floette + Incineroar + Sinistcha||Pelipper+Swampert||Delphox + Kingambit": {
+   "lines": null,
+   "pop": 0.6326469405298784,
+   "worst": 0.5699180624087233,
+   "full": [
+    0.6339262525748263,
+    0.5738245809347796
+   ],
+   "reader": [
+    [
+     0.6739176486448221,
+     "Delphox: Protect | Kingambit: Swords Dance"
+    ],
+    [
+     0.326082351355178,
+     "Delphox: Psychic -> Pelipper | Kingambit: Protect"
+    ]
+   ],
+   "share": 0.0824,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Pelipper: Tailwind | Swampert: Flip Turn -> Delphox"
+    ],
+    [
+     50,
+     "Pelipper: Weather Ball -> Kingambit | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Other Sun||Metagross+Grimmsnarl||Charizard + Garchomp": {
+   "lines": null,
+   "pop": 0.5164140752031635,
+   "worst": 0.4641969602993219,
+   "full": [
+    0.5149699127354079,
+    0.4664147621923207
+   ],
+   "reader": [
+    [
+     0.5308661000632822,
+     "Charizard: Weather Ball -> Grimmsnarl | Garchomp: Earthquake"
+    ],
+    [
+     0.3061560256571927,
+     "Charizard: Protect | Garchomp: Earthquake"
+    ],
+    [
+     0.1629778742795251,
+     "Charizard: Heat Wave | Garchomp: switch"
+    ]
+   ],
+   "share": 0.0254,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Metagross: Protect | Grimmsnarl: Light Screen"
+    ],
+    [
+     30,
+     "Metagross: Psychic Fangs -> Charizard | Grimmsnarl: Parting Shot -> Garchomp"
+    ],
+    [
+     20,
+     "Metagross: Psychic Fangs -> Charizard | Grimmsnarl: Parting Shot -> Charizard"
+    ]
+   ]
+  },
+  "Snow: Froslass + Kingambit + Rillaboom||Indeedee-F+Metagross||Froslass + Rillaboom": {
+   "lines": null,
+   "pop": 0.6198663959365964,
+   "worst": 0.5281381569370837,
+   "full": [
+    0.6251718728028104,
+    0.5362519622648292
+   ],
+   "reader": [
+    [
+     0.4043525546034407,
+     "Froslass: Blizzard | Rillaboom: High Horsepower -> Metagross"
+    ],
+    [
+     0.2935012740933844,
+     "Froslass: Shadow Ball -> Metagross | Rillaboom: Wood Hammer -> Metagross"
+    ],
+    [
+     0.16169660561714705,
+     "Froslass: Blizzard | Rillaboom: Wood Hammer -> Indeedee-F"
+    ]
+   ],
+   "share": 0.0623,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     35,
+     "Indeedee-F: Helping Hand | Metagross: Psychic Fangs -> Rillaboom"
+    ],
+    [
+     35,
+     "Indeedee-F: Protect | Metagross: Steel Roller -> Froslass"
+    ],
+    [
+     30,
+     "Indeedee-F: Follow Me | Metagross: Steel Roller -> Froslass"
+    ]
+   ]
+  },
+  "Sun: Charizard + Whimsicott||Swampert+Grimmsnarl||Charizard + Garchomp": {
+   "lines": null,
+   "pop": 0.6363075983515434,
+   "worst": 0.5843092826394731,
+   "full": [
+    0.6283073692028003,
+    0.5884447634604967
+   ],
+   "reader": [
+    [
+     0.5332923206900217,
+     "Charizard: Protect | Garchomp: Rock Slide"
+    ],
+    [
+     0.20281728839485771,
+     "Charizard: Weather Ball -> Swampert | Garchomp: Earthquake"
+    ],
+    [
+     0.19826344529174894,
+     "Charizard: Weather Ball -> Swampert | Garchomp: Rock Slide"
+    ]
+   ],
+   "share": 0.069,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     60,
+     "Swampert: Wave Crash -> Garchomp | Grimmsnarl: Parting Shot -> Garchomp"
+    ],
+    [
+     40,
+     "Swampert: Flip Turn -> Charizard | Grimmsnarl: Parting Shot -> Garchomp"
+    ]
+   ]
+  },
+  "Rain + Sun: Archaludon + Golisopod + Politoed||Archaludon+Grimmsnarl||Golisopod + Grimmsnarl": {
+   "lines": null,
+   "pop": 0.5341099601225285,
+   "worst": 0.45900591065277857,
+   "full": [
+    0.5345050950801178,
+    0.45941308557221505
+   ],
+   "reader": [
+    [
+     0.7289345395758234,
+     "Golisopod: Swords Dance | Grimmsnarl: Light Screen"
+    ],
+    [
+     0.2710654604241768,
+     "Golisopod: Swords Dance | Grimmsnarl: Reflect"
+    ]
+   ],
+   "share": 0.05,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Archaludon: Flash Cannon -> Grimmsnarl | Grimmsnarl: Spirit Break -> Grimmsnarl"
+    ]
+   ]
+  },
+  "Other Balance||Swampert+Indeedee-F||Rillaboom + Volcarona": {
+   "lines": null,
+   "pop": 0.5482277684176903,
+   "worst": 0.49533590830858326,
+   "full": [
+    0.5494905960742882,
+    0.4981542131222827
+   ],
+   "reader": [
+    [
+     0.44563439389155457,
+     "Rillaboom: Wood Hammer -> Swampert | Volcarona: Protect"
+    ],
+    [
+     0.40552341674685444,
+     "Rillaboom: Wood Hammer -> Indeedee-F | Volcarona: Quiver Dance"
+    ],
+    [
+     0.148842189361591,
+     "Rillaboom: switch | Volcarona: Protect"
+    ]
+   ],
+   "share": 0.0355,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Swampert: switch -> Archaludon | Indeedee-F: Psychic -> Rillaboom"
+    ],
+    [
+     35,
+     "Swampert: Wave Crash -> Volcarona | Indeedee-F: Psychic -> Rillaboom"
+    ],
+    [
+     15,
+     "Swampert: Flip Turn -> Rillaboom | Indeedee-F: Psychic -> Rillaboom"
+    ]
+   ]
+  },
+  "Trick Room: Delphox + Incineroar + Sinistcha (no Floette)||Pelipper+Archaludon||Blastoise + Maushold": {
+   "lines": null,
+   "pop": 0.6980964018990411,
+   "worst": 0.6619508479065779,
+   "full": [
+    0.6980964018990411,
+    0.6619508479065779
+   ],
+   "reader": [
+    [
+     1.0,
+     "Blastoise: Shell Smash | Maushold: Follow Me"
+    ]
+   ],
+   "share": 0.0674,
+   "back": [
+    "Swampert",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Pelipper: Hurricane -> Maushold | Archaludon: Electro Shot -> Blastoise"
+    ]
+   ]
+  },
+  "Rain: Archaludon + Pelipper (no Grimmsnarl)||Archaludon+Grimmsnarl||Archaludon + Pelipper": {
+   "lines": null,
+   "pop": 0.633596546484022,
+   "worst": 0.5839638400656781,
+   "full": [
+    0.6352251259985255,
+    0.5871711088820408
+   ],
+   "reader": [
+    [
+     0.6970193388576792,
+     "Archaludon: Electro Shot -> Grimmsnarl | Pelipper: Protect"
+    ],
+    [
+     0.3029806611423208,
+     "Archaludon: Electro Shot -> Grimmsnarl | Pelipper: Tailwind"
+    ]
+   ],
+   "share": 0.1184,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Archaludon: Electro Shot -> Pelipper | Grimmsnarl: Light Screen"
+    ],
+    [
+     45,
+     "Archaludon: Electro Shot -> Archaludon | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Other Balance||Swampert+Indeedee-F||Floette-Eternal + Incineroar": {
+   "lines": null,
+   "pop": 0.5032348666014316,
+   "worst": 0.43349677885012816,
+   "full": [
+    0.4994136829522526,
+    0.43668778920230633
+   ],
+   "reader": [
+    [
+     0.33294410576540023,
+     "Floette-Eternal: Dazzling Gleam | Incineroar: switch"
+    ],
+    [
+     0.24978162036944296,
+     "Floette-Eternal: switch | Incineroar: Fake Out -> Swampert"
+    ],
+    [
+     0.21555795132979336,
+     "Floette-Eternal: Dazzling Gleam | Incineroar: Throat Chop -> Swampert"
+    ]
+   ],
+   "share": 0.0443,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     65,
+     "Swampert: Flip Turn -> Incineroar | Indeedee-F: Protect"
+    ],
+    [
+     35,
+     "Swampert: Wave Crash -> Floette-Eternal | Indeedee-F: switch -> Pelipper"
+    ]
+   ]
+  },
+  "Indeedee TR: Camerupt + Farigiraf||Swampert+Grimmsnarl||Hatterene + Indeedee-F": {
+   "lines": null,
+   "pop": 0.5907297989775132,
+   "worst": 0.5030538618279534,
+   "full": [
+    0.5913428587681501,
+    0.5052166784833432
+   ],
+   "reader": [
+    [
+     0.6727352928734728,
+     "Hatterene: Dazzling Gleam | Indeedee-F: Trick Room"
+    ],
+    [
+     0.16824631366498435,
+     "Hatterene: Dazzling Gleam | Indeedee-F: Follow Me"
+    ],
+    [
+     0.15901839346154287,
+     "Hatterene: Protect | Indeedee-F: Trick Room"
+    ]
+   ],
+   "share": 0.1094,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": true,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Swampert: Wave Crash -> Hatterene | Grimmsnarl: Spirit Break -> Hatterene"
+    ],
+    [
+     30,
+     "Swampert: Wave Crash -> Indeedee-F | Grimmsnarl: Spirit Break -> Indeedee-F"
+    ],
+    [
+     20,
+     "Swampert: Wave Crash -> Indeedee-F | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Perish: Gengar + Kommo-o + Rillaboom||Pelipper+Swampert||Incineroar + Kommo-o": {
+   "lines": null,
+   "pop": 0.6040211475908761,
+   "worst": 0.4800855036773021,
+   "full": [
+    0.6032711120947244,
+    0.4810961287139421
+   ],
+   "reader": [
+    [
+     0.6768061774579465,
+     "Incineroar: Fake Out -> Swampert | Kommo-o: Clanging Scales"
+    ],
+    [
+     0.1747330466666417,
+     "Incineroar: Fake Out -> Pelipper | Kommo-o: Clanging Scales"
+    ],
+    [
+     0.11755673187334051,
+     "Incineroar: Throat Chop -> Pelipper | Kommo-o: Clanging Scales"
+    ]
+   ],
+   "share": 0.1071,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     70,
+     "Pelipper: switch -> Indeedee-F | Swampert: Flip Turn -> Incineroar"
+    ],
+    [
+     20,
+     "Pelipper: Hurricane -> Kommo-o | Swampert: Wave Crash -> Incineroar"
+    ],
+    [
+     10,
+     "Pelipper: Wide Guard | Swampert: Wave Crash -> Incineroar"
+    ]
+   ]
+  },
+  "Sand: Excadrill + Salamence + Sneasler + Tyranitar||Swampert+Grimmsnarl||Corviknight + Sneasler": {
+   "lines": null,
+   "pop": 0.6292100000376382,
+   "worst": 0.5850021419318482,
+   "full": [
+    0.6276424617059848,
+    0.5863481407084824
+   ],
+   "reader": [
+    [
+     0.6153937091633754,
+     "Corviknight: Bulk Up | Sneasler: Protect"
+    ],
+    [
+     0.38460629083662456,
+     "Corviknight: Bulk Up | Sneasler: Close Combat -> Swampert"
+    ]
+   ],
+   "share": 0.078,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     65,
+     "Swampert: Wave Crash -> Sneasler | Grimmsnarl: Reflect"
+    ],
+    [
+     35,
+     "Swampert: Wave Crash -> Corviknight | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Perish: Gengar + Kommo-o + Rillaboom||Pelipper+Swampert||Gengar + Kommo-o": {
+   "lines": null,
+   "pop": 0.7098284483268881,
+   "worst": 0.6562436449238511,
+   "full": [
+    0.7083528676683798,
+    0.6612915013251486
+   ],
+   "reader": [
+    [
+     0.2661340044309449,
+     "Gengar: switch | Kommo-o: Protect"
+    ],
+    [
+     0.26535669869323975,
+     "Gengar: switch | Kommo-o: switch"
+    ],
+    [
+     0.25509298747428294,
+     "Gengar: Protect | Kommo-o: switch"
+    ]
+   ],
+   "share": 0.1161,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     80,
+     "Pelipper: Tailwind | Swampert: Earthquake"
+    ],
+    [
+     10,
+     "Pelipper: Hurricane -> Kommo-o | Swampert: Wave Crash -> Gengar"
+    ],
+    [
+     10,
+     "Pelipper: Weather Ball -> Kommo-o | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Other Perish||Swampert+Indeedee-F||Gengar + Rillaboom": {
+   "lines": null,
+   "pop": 0.48651717151204366,
+   "worst": 0.4134398112728289,
+   "full": [
+    0.48598789533536,
+    0.41974331290563593
+   ],
+   "reader": [
+    [
+     0.3907444093812592,
+     "Gengar: Perish Song | Rillaboom: Fake Out -> Indeedee-F"
+    ],
+    [
+     0.3391207063051791,
+     "Gengar: Perish Song | Rillaboom: Fake Out -> Swampert"
+    ],
+    [
+     0.24339043777877603,
+     "Gengar: Perish Song | Rillaboom: Grassy Glide -> Swampert"
+    ]
+   ],
+   "share": 0.1071,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     45,
+     "Swampert: switch -> Archaludon | Indeedee-F: Psychic -> Gengar"
+    ],
+    [
+     30,
+     "Swampert: Wave Crash -> Gengar | Indeedee-F: Follow Me"
+    ],
+    [
+     25,
+     "Swampert: Wave Crash -> Gengar | Indeedee-F: Psychic -> Gengar"
+    ]
+   ]
+  },
+  "Rain + Sun: Archaludon + Grimmsnarl + Pelipper||Archaludon+Grimmsnarl||Garchomp + Grimmsnarl": {
+   "lines": null,
+   "pop": 0.564980334025513,
+   "worst": 0.5147161262729689,
+   "full": [
+    0.5649778741562068,
+    0.5150579808604465
+   ],
+   "reader": [
+    [
+     0.785769100787857,
+     "Garchomp: Draco Meteor -> Archaludon | Grimmsnarl: Light Screen"
+    ],
+    [
+     0.21423089921214278,
+     "Garchomp: Protect | Grimmsnarl: Light Screen"
+    ]
+   ],
+   "share": 0.1314,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     85,
+     "Archaludon: Dragon Pulse -> Garchomp | Grimmsnarl: Light Screen"
+    ],
+    [
+     15,
+     "Archaludon: Flash Cannon -> Grimmsnarl | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler||Pelipper+Swampert||Gardevoir + Sneasler": {
+   "lines": null,
+   "pop": 0.7253357451388226,
+   "worst": 0.7055074257110594,
+   "full": [
+    0.7310846950430435,
+    0.7067718295916819
+   ],
+   "reader": [
+    [
+     0.5221757319139709,
+     "Gardevoir: switch | Sneasler: Rock Slide"
+    ],
+    [
+     0.4344084418503824,
+     "Gardevoir: Calm Mind | Sneasler: Protect"
+    ]
+   ],
+   "share": 0.0562,
+   "back": [
+    "Indeedee-F",
+    "Metagross"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     60,
+     "Pelipper: Tailwind | Swampert: Wave Crash -> Gardevoir"
+    ],
+    [
+     40,
+     "Pelipper: Wide Guard | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Perish: Archaludon + Politoed (no Golisopod)||Archaludon+Metagross||Gengar + Vivillon": {
+   "lines": null,
+   "pop": 0.45079984268915657,
+   "worst": 0.3815464980942932,
+   "full": [
+    0.4545673520227217,
+    0.38703861241997495
+   ],
+   "reader": [
+    [
+     0.5011168483428351,
+     "Gengar: Shadow Ball -> Metagross | Vivillon: Sleep Powder -> Archaludon"
+    ],
+    [
+     0.2968740520467563,
+     "Gengar: Perish Song | Vivillon: Sleep Powder -> Metagross"
+    ],
+    [
+     0.14270009833583547,
+     "Gengar: Perish Song | Vivillon: Sleep Powder -> Archaludon"
+    ]
+   ],
+   "share": 0.0625,
+   "back": [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     40,
+     "Archaludon: Protect | Metagross: switch -> Indeedee-F"
+    ],
+    [
+     35,
+     "Archaludon: Protect | Metagross: Psychic Fangs -> Gengar"
+    ],
+    [
+     25,
+     "Archaludon: Dragon Pulse -> Vivillon | Metagross: Protect"
+    ]
+   ]
+  },
+  "Rain + Sun: Archaludon + Grimmsnarl + Pelipper||Archaludon+Grimmsnarl||Charizard + Grimmsnarl": {
+   "lines": null,
+   "pop": 0.5534729419370926,
+   "worst": 0.5241478115707501,
+   "full": [
+    0.5535632004932362,
+    0.5243024524251354
+   ],
+   "reader": [
+    [
+     0.5800276042987791,
+     "Charizard: Weather Ball -> Grimmsnarl | Grimmsnarl: Light Screen"
+    ],
+    [
+     0.4199723957012212,
+     "Charizard: Protect | Grimmsnarl: Light Screen"
+    ]
+   ],
+   "share": 0.067,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Archaludon: Electro Shot -> Charizard | Grimmsnarl: Parting Shot -> Charizard"
+    ],
+    [
+     50,
+     "Archaludon: Flash Cannon -> Grimmsnarl | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Other Snow||Swampert+Archaludon||Froslass + Kingambit": {
+   "lines": null,
+   "pop": 0.5390843783816552,
+   "worst": 0.47276974917764936,
+   "full": [
+    0.5231044482327446,
+    0.4817875773038424
+   ],
+   "reader": [
+    [
+     0.7841932923165167,
+     "Froslass: Aurora Veil | Kingambit: Kowtow Cleave -> Swampert"
+    ],
+    [
+     0.13414205857977046,
+     "Froslass: Protect | Kingambit: Kowtow Cleave -> Archaludon"
+    ]
+   ],
+   "share": 0.0237,
+   "back": [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Swampert: Flip Turn -> Froslass | Archaludon: Electro Shot -> Froslass"
+    ],
+    [
+     50,
+     "Swampert: Protect | Archaludon: Flash Cannon -> Froslass"
+    ]
+   ]
+  },
+  "Trick Room: Delphox + Incineroar + Sinistcha (no Floette)||Pelipper+Archaludon||Blastoise + Sneasler": {
+   "lines": null,
+   "pop": 0.596550320026782,
+   "worst": 0.48431758893354726,
+   "full": [
+    0.5980835401578695,
+    0.48683884437138336
+   ],
+   "reader": [
+    [
+     0.4055176396238789,
+     "Blastoise: Dark Pulse -> Pelipper | Sneasler: Fake Out -> Archaludon"
+    ],
+    [
+     0.34886294899252546,
+     "Blastoise: Dark Pulse -> Archaludon | Sneasler: Close Combat -> Archaludon"
+    ],
+    [
+     0.24561941138359578,
+     "Blastoise: Dark Pulse -> Pelipper | Sneasler: Close Combat -> Pelipper"
+    ]
+   ],
+   "share": 0.0899,
+   "back": [
+    "Swampert",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     70,
+     "Pelipper: Hurricane -> Sneasler | Archaludon: Electro Shot -> Blastoise"
+    ],
+    [
+     30,
+     "Pelipper: Hurricane -> Sneasler | Archaludon: Protect"
+    ]
+   ]
+  },
+  "Balance: Gholdengo + Incineroar + Raichu + Rillaboom||Pelipper+Swampert||Raichu + Rillaboom": {
+   "lines": null,
+   "pop": 0.6569869438158168,
+   "worst": 0.48010095856512375,
+   "full": [
+    0.6573027873119789,
+    0.48041786210426973
+   ],
+   "reader": [
+    [
+     0.6841245041970279,
+     "Raichu: Protect | Rillaboom: Fake Out -> Pelipper"
+    ],
+    [
+     0.13879695069142983,
+     "Raichu: Protect | Rillaboom: Wood Hammer -> Swampert"
+    ],
+    [
+     0.10398449036275925,
+     "Raichu: Zap Cannon -> Pelipper | Rillaboom: Fake Out -> Swampert"
+    ]
+   ],
+   "share": 0.0628,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Pelipper: switch -> Indeedee-F | Swampert: Flip Turn -> Raichu"
+    ],
+    [
+     45,
+     "Pelipper: Hurricane -> Rillaboom | Swampert: Flip Turn -> Raichu"
+    ]
+   ]
+  },
+  "Other Rain||Swampert+Grimmsnarl||Incineroar + Pelipper": {
+   "lines": null,
+   "pop": 0.6303148086773254,
+   "worst": 0.4380820960760221,
+   "full": [
+    0.612874536668895,
+    0.44677078518806784
+   ],
+   "reader": [
+    [
+     0.49584768750592767,
+     "Incineroar: Fake Out -> Swampert | Pelipper: Weather Ball -> Swampert"
+    ],
+    [
+     0.38692655389018066,
+     "Incineroar: Fake Out -> Grimmsnarl | Pelipper: Weather Ball -> Grimmsnarl"
+    ],
+    [
+     0.11722575860389169,
+     "Incineroar: Fake Out -> Grimmsnarl | Pelipper: Hurricane -> Swampert"
+    ]
+   ],
+   "share": 0.0403,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Swampert: Wave Crash -> Incineroar | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Other Tailwind||Pelipper+Metagross||Salamence + Sneasler": {
+   "lines": null,
+   "pop": 0.5398272057289603,
+   "worst": 0.48923161741113386,
+   "full": [
+    0.5407606210933817,
+    0.49474781290034286
+   ],
+   "reader": [
+    [
+     0.3538033568161406,
+     "Salamence: Tailwind | Sneasler: Dire Claw -> Pelipper"
+    ],
+    [
+     0.3424396308714488,
+     "Salamence: Draco Meteor -> Pelipper | Sneasler: Protect"
+    ],
+    [
+     0.2187891958403033,
+     "Salamence: Draco Meteor -> Pelipper | Sneasler: Fake Out -> Metagross"
+    ]
+   ],
+   "share": 0.0541,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     65,
+     "Pelipper: switch -> Indeedee-F | Metagross: Steel Roller -> Salamence"
+    ],
+    [
+     35,
+     "Pelipper: Tailwind | Metagross: Psychic Fangs -> Sneasler"
+    ]
+   ]
+  },
+  "Other Tailwind||Pelipper+Metagross||Kingambit + Sneasler": {
+   "lines": null,
+   "pop": 0.584362005994342,
+   "worst": 0.4837257208233468,
+   "full": [
+    0.5850766483669567,
+    0.4857948250027663
+   ],
+   "reader": [
+    [
+     0.6570495063682487,
+     "Kingambit: Kowtow Cleave -> Metagross | Sneasler: Fake Out -> Pelipper"
+    ],
+    [
+     0.1896497217111923,
+     "Kingambit: Swords Dance | Sneasler: Protect"
+    ]
+   ],
+   "share": 0.0271,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     40,
+     "Pelipper: switch -> Indeedee-F | Metagross: Steel Roller -> Sneasler"
+    ],
+    [
+     30,
+     "Pelipper: Weather Ball -> Kingambit | Metagross: Stomping Tantrum -> Kingambit"
+    ],
+    [
+     30,
+     "Pelipper: Weather Ball -> Kingambit | Metagross: Psychic Fangs -> Sneasler"
+    ]
+   ]
+  },
+  "Indeedee TR: Camerupt + Farigiraf||Swampert+Grimmsnarl||Farigiraf + Indeedee-F": {
+   "lines": null,
+   "pop": 0.5983558156712323,
+   "worst": 0.5643899579205772,
+   "full": [
+    0.5984763384159107,
+    0.5645358693069108
+   ],
+   "reader": [
+    [
+     0.7126083599360851,
+     "Farigiraf: Trick Room | Indeedee-F: Follow Me"
+    ],
+    [
+     0.28739164006391493,
+     "Farigiraf: Nasty Plot | Indeedee-F: Trick Room"
+    ]
+   ],
+   "share": 0.0547,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": true,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Swampert: Wave Crash -> Indeedee-F | Grimmsnarl: Spirit Break -> Indeedee-F"
+    ]
+   ]
+  },
+  "Other Indeedee TR||Pelipper+Swampert||Blastoise + Indeedee-F": {
+   "lines": null,
+   "pop": 0.6607942318038166,
+   "worst": 0.5915699073071291,
+   "full": [
+    0.6560885268504759,
+    0.5962321396739025
+   ],
+   "reader": [
+    [
+     0.5496310042703503,
+     "Blastoise: Water Spout | Indeedee-F: Psychic -> Pelipper"
+    ],
+    [
+     0.45036899572965,
+     "Blastoise: Shell Smash | Indeedee-F: Trick Room"
+    ]
+   ],
+   "share": 0.0347,
+   "back": [
+    "Archaludon",
+    "Grimmsnarl"
+   ],
+   "itemMix": true,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Pelipper: Weather Ball -> Indeedee-F | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Perish: Gengar + Kommo-o + Rillaboom||Pelipper+Swampert||Kommo-o + Swampert": {
+   "lines": null,
+   "pop": 0.6863633124573073,
+   "worst": 0.6432034866012768,
+   "full": [
+    0.6861309468621298,
+    0.646361772437021
+   ],
+   "reader": [
+    [
+     0.3419182189649793,
+     "Kommo-o: Protect | Swampert: High Horsepower -> Swampert"
+    ],
+    [
+     0.3380097135026971,
+     "Kommo-o: switch | Swampert: Protect"
+    ],
+    [
+     0.31137179054481834,
+     "Kommo-o: Clangorous Soul | Swampert: Protect"
+    ]
+   ],
+   "share": 0.0536,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Pelipper: Tailwind | Swampert: Earthquake"
+    ],
+    [
+     40,
+     "Pelipper: Tailwind | Swampert: Wave Crash -> Swampert"
+    ],
+    [
+     10,
+     "Pelipper: Hurricane -> Kommo-o | Swampert: Wave Crash -> Swampert"
+    ]
+   ]
+  },
+  "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)||Metagross+Grimmsnarl||Gholdengo + Milotic": {
+   "lines": null,
+   "pop": 0.613215902451835,
+   "worst": 0.5941182785073081,
+   "full": [
+    0.6122410277022341,
+    0.59681140141212
+   ],
+   "reader": [
+    [
+     0.5563273252238138,
+     "Gholdengo: Protect | Milotic: Ice Beam -> Grimmsnarl"
+    ],
+    [
+     0.4436726747761862,
+     "Gholdengo: Make It Rain | Milotic: Ice Beam -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.0594,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Metagross: Stomping Tantrum -> Gholdengo | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)||Pelipper+Swampert||Basculegion + Gardevoir": {
+   "lines": null,
+   "pop": 0.6954210551190447,
+   "worst": 0.6393314103770766,
+   "full": [
+    0.6893992280536472,
+    0.645127606893143
+   ],
+   "reader": [
+    [
+     0.590457277651416,
+     "Basculegion: Last Respects -> Pelipper | Gardevoir: switch"
+    ],
+    [
+     0.2514960581719076,
+     "Basculegion: Wave Crash -> Swampert | Gardevoir: Thunderbolt -> Pelipper"
+    ],
+    [
+     0.11231853327281638,
+     "Basculegion: Last Respects -> Pelipper | Gardevoir: Hyper Voice"
+    ]
+   ],
+   "share": 0.0324,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Pelipper: Tailwind | Swampert: Wave Crash -> Gardevoir"
+    ]
+   ]
+  },
+  "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)||Swampert+Grimmsnarl||Aerodactyl + Sylveon": {
+   "lines": null,
+   "pop": 0.592883415182165,
+   "worst": 0.5350121440980857,
+   "full": [
+    0.5944921927181368,
+    0.5360449155219043
+   ],
+   "reader": [
+    [
+     0.5878656881092819,
+     "Aerodactyl: Rock Slide | Sylveon: Hyper Voice"
+    ],
+    [
+     0.3974174627116084,
+     "Aerodactyl: Protect | Sylveon: Hyper Voice"
+    ]
+   ],
+   "share": 0.1224,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     70,
+     "Swampert: Flip Turn -> Aerodactyl | Grimmsnarl: Light Screen"
+    ],
+    [
+     30,
+     "Swampert: Wave Crash -> Sylveon | Grimmsnarl: Parting Shot -> Sylveon"
+    ]
+   ]
+  },
+  "Balance: Dragonite + Floette + Incineroar||Pelipper+Archaludon||Gholdengo + Incineroar": {
+   "lines": null,
+   "pop": 0.6122622418595511,
+   "worst": 0.551500120844871,
+   "full": [
+    0.6139684426426242,
+    0.5557457701874041
+   ],
+   "reader": [
+    [
+     0.5897069829528429,
+     "Gholdengo: Make It Rain | Incineroar: Fake Out -> Archaludon"
+    ],
+    [
+     0.1554485368068653,
+     "Gholdengo: Make It Rain | Incineroar: Fake Out -> Pelipper"
+    ],
+    [
+     0.14744088589281426,
+     "Gholdengo: Make It Rain | Incineroar: Parting Shot -> Archaludon"
+    ]
+   ],
+   "share": 0.0897,
+   "back": [
+    "Indeedee-F",
+    "Metagross"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     75,
+     "Pelipper: switch -> Indeedee-F | Archaludon: Electro Shot -> Gholdengo"
+    ],
+    [
+     25,
+     "Pelipper: Weather Ball -> Incineroar | Archaludon: Electro Shot -> Incineroar"
+    ]
+   ]
+  },
+  "Rain: Archaludon + Pelipper (no Grimmsnarl)||Archaludon+Grimmsnarl||Archaludon + Farigiraf": {
+   "lines": null,
+   "pop": 0.723195080353164,
+   "worst": 0.482007771971035,
+   "full": [
+    0.723195080353164,
+    0.482007771971035
+   ],
+   "reader": [
+    [
+     1.0,
+     "Archaludon: Electro Shot -> Grimmsnarl | Farigiraf: Trick Room"
+    ]
+   ],
+   "share": 0.0242,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Archaludon: Electro Shot -> Farigiraf | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Indeedee TR: Armarouge + Indeedee-F||Pelipper+Swampert||Gardevoir + Indeedee-F": {
+   "lines": null,
+   "pop": 0.6901701413883868,
+   "worst": 0.6575364866730032,
+   "full": [
+    0.6758533129135262,
+    0.666054229546174
+   ],
+   "reader": [
+    [
+     0.5457315432681425,
+     "Gardevoir: Protect | Indeedee-F: Imprison"
+    ],
+    [
+     0.29428762545458914,
+     "Gardevoir: Expanding Force -> Pelipper | Indeedee-F: Follow Me"
+    ],
+    [
+     0.1050654003593023,
+     "Gardevoir: Expanding Force -> Pelipper | Indeedee-F: Imprison"
+    ]
+   ],
+   "share": 0.0353,
+   "back": [
+    "Archaludon",
+    "Metagross"
+   ],
+   "itemMix": true,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Pelipper: Wide Guard | Swampert: Earthquake"
+    ],
+    [
+     45,
+     "Pelipper: Weather Ball -> Indeedee-F | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Balance: Dragonite + Floette + Incineroar||Pelipper+Archaludon||Dragonite + Gholdengo": {
+   "lines": null,
+   "pop": 0.55511333793836,
+   "worst": 0.42184293492901304,
+   "full": [
+    0.5558530030015298,
+    0.4227205435690208
+   ],
+   "reader": [
+    [
+     0.4351078388457357,
+     "Dragonite: Dragon Pulse -> Archaludon | Gholdengo: Shadow Ball -> Archaludon"
+    ],
+    [
+     0.41986616063424914,
+     "Dragonite: Dragon Pulse -> Pelipper | Gholdengo: Make It Rain"
+    ],
+    [
+     0.10006467859992131,
+     "Dragonite: Heat Wave | Gholdengo: Shadow Ball -> Pelipper"
+    ]
+   ],
+   "share": 0.1241,
+   "back": [
+    "Indeedee-F",
+    "Metagross"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     80,
+     "Pelipper: Tailwind | Archaludon: Electro Shot -> Gholdengo"
+    ],
+    [
+     20,
+     "Pelipper: Tailwind | Archaludon: Protect"
+    ]
+   ]
+  },
+  "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)||Pelipper+Swampert||Arcanine-Hisui + Raichu": {
+   "lines": null,
+   "pop": 0.7076798731708758,
+   "worst": 0.5878646201064345,
+   "full": [
+    0.7074055056003932,
+    0.5883685688933098
+   ],
+   "reader": [
+    [
+     0.6148773507939037,
+     "Arcanine-Hisui: Head Smash -> Pelipper | Raichu: Protect"
+    ],
+    [
+     0.1871393687593485,
+     "Arcanine-Hisui: Head Smash -> Pelipper | Raichu: Fake Out -> Swampert"
+    ],
+    [
+     0.17616266834976577,
+     "Arcanine-Hisui: Protect | Raichu: Fake Out -> Swampert"
+    ]
+   ],
+   "share": 0.0959,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Pelipper: Tailwind | Swampert: Earthquake"
+    ],
+    [
+     50,
+     "Pelipper: switch -> Indeedee-F | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Balance: Dragonite + Floette + Incineroar||Pelipper+Archaludon||Dragonite + Incineroar": {
+   "lines": null,
+   "pop": 0.5650584460320905,
+   "worst": 0.4951176939315264,
+   "full": [
+    0.5647386787790707,
+    0.4984687333234924
+   ],
+   "reader": [
+    [
+     0.3697312529674949,
+     "Dragonite: Dragon Pulse -> Pelipper | Incineroar: Fake Out -> Pelipper"
+    ],
+    [
+     0.29707362993332703,
+     "Dragonite: Tailwind | Incineroar: Parting Shot -> Archaludon"
+    ],
+    [
+     0.17237323708293129,
+     "Dragonite: Dragon Pulse -> Pelipper | Incineroar: Fake Out -> Archaludon"
+    ]
+   ],
+   "share": 0.1241,
+   "back": [
+    "Indeedee-F",
+    "Metagross"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Pelipper: switch -> Indeedee-F | Archaludon: Electro Shot -> Incineroar"
+    ],
+    [
+     35,
+     "Pelipper: Weather Ball -> Incineroar | Archaludon: Electro Shot -> Incineroar"
+    ],
+    [
+     15,
+     "Pelipper: Hurricane -> Incineroar | Archaludon: Electro Shot -> Incineroar"
+    ]
+   ]
+  },
+  "Rain: Archaludon + Pelipper (no Grimmsnarl)||Archaludon+Grimmsnarl||Farigiraf + Golisopod": {
+   "lines": null,
+   "pop": 0.5544502265202396,
+   "worst": 0.40179295608060067,
+   "full": [
+    0.5544502265202396,
+    0.40179295608060067
+   ],
+   "reader": [
+    [
+     1.0,
+     "Farigiraf: Trick Room | Golisopod: Swords Dance"
+    ]
+   ],
+   "share": 0.0193,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Archaludon: Electro Shot -> Golisopod | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Other Sun||Metagross+Grimmsnarl||Charizard + Sneasler": {
+   "lines": null,
+   "pop": 0.632119556623642,
+   "worst": 0.4140606928664812,
+   "full": [
+    0.6316055573175177,
+    0.4150082623377461
+   ],
+   "reader": [
+    [
+     1.0,
+     "Charizard: Heat Wave | Sneasler: Fake Out -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.0237,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     70,
+     "Metagross: Stomping Tantrum -> Sneasler | Grimmsnarl: Parting Shot -> Charizard"
+    ],
+    [
+     30,
+     "Metagross: Stomping Tantrum -> Sneasler | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Rain + Sun: Archaludon + Golisopod + Politoed||Archaludon+Grimmsnarl||Archaludon + Politoed": {
+   "lines": null,
+   "pop": 0.6963224792352433,
+   "worst": 0.602215416604984,
+   "full": [
+    0.6973258410783307,
+    0.6038052714143418
+   ],
+   "reader": [
+    [
+     0.760175925028295,
+     "Archaludon: Electro Shot -> Grimmsnarl | Politoed: Protect"
+    ],
+    [
+     0.2398240749717046,
+     "Archaludon: Electro Shot -> Grimmsnarl | Politoed: Weather Ball -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.0938,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     60,
+     "Archaludon: Electro Shot -> Archaludon | Grimmsnarl: Light Screen"
+    ],
+    [
+     40,
+     "Archaludon: Electro Shot -> Politoed | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Indeedee TR: Armarouge + Indeedee-F||Pelipper+Swampert||Indeedee-F + Milotic": {
+   "lines": null,
+   "pop": 0.7382528147290861,
+   "worst": 0.6823255838936331,
+   "full": [
+    0.7382528147290861,
+    0.6823255838936331
+   ],
+   "reader": [
+    [
+     0.9151327572389802,
+     "Indeedee-F: Trick Room | Milotic: Muddy Water"
+    ]
+   ],
+   "share": 0.0353,
+   "back": [
+    "Archaludon",
+    "Metagross"
+   ],
+   "itemMix": true,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Pelipper: Tailwind | Swampert: Wave Crash -> Indeedee-F"
+    ]
+   ]
+  },
+  "Sun: Farigiraf + Garchomp + Incineroar + Sylveon||Indeedee-F+Metagross||Garchomp + Sylveon": {
+   "lines": null,
+   "pop": 0.5836772492165418,
+   "worst": 0.5197870027750557,
+   "full": [
+    0.582273843268949,
+    0.5281205627943479
+   ],
+   "reader": [
+    [
+     0.6125814214925308,
+     "Garchomp: Flamethrower -> Metagross | Sylveon: Detect"
+    ],
+    [
+     0.27701371913110323,
+     "Garchomp: Protect | Sylveon: Hyper Beam -> Indeedee-F"
+    ],
+    [
+     0.11040485937636797,
+     "Garchomp: Flamethrower -> Metagross | Sylveon: Hyper Beam -> Indeedee-F"
+    ]
+   ],
+   "share": 0.0432,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     60,
+     "Indeedee-F: Psychic -> Garchomp | Metagross: Steel Roller -> Sylveon"
+    ],
+    [
+     40,
+     "Indeedee-F: Follow Me | Metagross: Steel Roller -> Garchomp"
+    ]
+   ]
+  },
+  "Other Snow||Swampert+Archaludon||Garchomp + Rillaboom": {
+   "lines": null,
+   "pop": 0.49477374636543897,
+   "worst": 0.45598746470655505,
+   "full": [
+    0.4959996772056627,
+    0.46287993919393206
+   ],
+   "reader": [
+    [
+     0.4436916250696851,
+     "Garchomp: Draco Meteor -> Archaludon | Rillaboom: High Horsepower -> Archaludon"
+    ],
+    [
+     0.273216291472671,
+     "Garchomp: Protect | Rillaboom: Wood Hammer -> Swampert"
+    ],
+    [
+     0.13963682351662654,
+     "Garchomp: Earth Power -> Archaludon | Rillaboom: Fake Out -> Archaludon"
+    ]
+   ],
+   "share": 0.0356,
+   "back": [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     45,
+     "Swampert: switch -> Indeedee-F | Archaludon: Dragon Pulse -> Garchomp"
+    ],
+    [
+     30,
+     "Swampert: switch -> Indeedee-F | Archaludon: Protect"
+    ],
+    [
+     25,
+     "Swampert: Protect | Archaludon: Flash Cannon -> Rillaboom"
+    ]
+   ]
+  },
+  "Perish: Archaludon + Politoed (no Golisopod)||Archaludon+Metagross||Archaludon + Gengar": {
+   "lines": null,
+   "pop": 0.657628893830188,
+   "worst": 0.5719441358357682,
+   "full": [
+    0.6578800285240718,
+    0.5740087862240779
+   ],
+   "reader": [
+    [
+     0.3981360473158322,
+     "Archaludon: Draco Meteor -> Archaludon | Gengar: Protect"
+    ],
+    [
+     0.317018840209349,
+     "Archaludon: Draco Meteor -> Metagross | Gengar: Protect"
+    ],
+    [
+     0.28484511247481886,
+     "Archaludon: Protect | Gengar: Icy Wind"
+    ]
+   ],
+   "share": 0.0284,
+   "back": [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Archaludon: Dragon Pulse -> Archaludon | Metagross: Stomping Tantrum -> Archaludon"
+    ],
+    [
+     25,
+     "Archaludon: Electro Shot -> Archaludon | Metagross: Psychic Fangs -> Gengar"
+    ],
+    [
+     20,
+     "Archaludon: Protect | Metagross: Psychic Fangs -> Gengar"
+    ]
+   ]
+  },
+  "Perish: Gengar + Kommo-o + Rillaboom||Pelipper+Swampert||Gengar + Incineroar": {
+   "lines": null,
+   "pop": 0.5555489371195199,
+   "worst": 0.5261056140083283,
+   "full": [
+    0.5597328480627533,
+    0.537790799404373
+   ],
+   "reader": [
+    [
+     0.4044153842837503,
+     "Gengar: Perish Song | Incineroar: Fake Out -> Swampert"
+    ],
+    [
+     0.26736345835200787,
+     "Gengar: Protect | Incineroar: Fake Out -> Pelipper"
+    ],
+    [
+     0.1939453446127411,
+     "Gengar: Protect | Incineroar: Throat Chop -> Pelipper"
+    ]
+   ],
+   "share": 0.1786,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     45,
+     "Pelipper: switch -> Indeedee-F | Swampert: Wave Crash -> Gengar"
+    ],
+    [
+     35,
+     "Pelipper: Weather Ball -> Incineroar | Swampert: Flip Turn -> Incineroar"
+    ],
+    [
+     20,
+     "Pelipper: switch -> Indeedee-F | Swampert: Flip Turn -> Incineroar"
+    ]
+   ]
+  },
+  "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)||Metagross+Grimmsnarl||Primarina + Salamence": {
+   "lines": null,
+   "pop": 0.5281986803313654,
+   "worst": 0.49865740560679395,
+   "full": [
+    0.5281502976464554,
+    0.4991942122483736
+   ],
+   "reader": [
+    [
+     0.5486014907857341,
+     "Primarina: Moonblast -> Grimmsnarl | Salamence: Flamethrower -> Metagross"
+    ],
+    [
+     0.3809520493602618,
+     "Primarina: switch | Salamence: Tailwind"
+    ]
+   ],
+   "share": 0.0495,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     75,
+     "Metagross: Psychic Fangs -> Primarina | Grimmsnarl: Light Screen"
+    ],
+    [
+     25,
+     "Metagross: Psychic Fangs -> Salamence | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Sun: Farigiraf + Garchomp + Incineroar + Sylveon||Indeedee-F+Metagross||Garchomp + Sneasler": {
+   "lines": null,
+   "pop": 0.7140626034084085,
+   "worst": 0.5397937861581595,
+   "full": [
+    0.6780782025233554,
+    0.5595145455377301
+   ],
+   "reader": [
+    [
+     0.40024579143155964,
+     "Garchomp: Protect | Sneasler: switch"
+    ],
+    [
+     0.35807072454550803,
+     "Garchomp: Flamethrower -> Metagross | Sneasler: Protect"
+    ],
+    [
+     0.1264467720497054,
+     "Garchomp: Protect | Sneasler: Gunk Shot -> Indeedee-F"
+    ]
+   ],
+   "share": 0.0865,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     85,
+     "Indeedee-F: Psychic -> Sneasler | Metagross: Steel Roller -> Garchomp"
+    ],
+    [
+     15,
+     "Indeedee-F: Psychic -> Garchomp | Metagross: Steel Roller -> Sneasler"
+    ]
+   ]
+  },
+  "Sun: Farigiraf + Garchomp + Incineroar + Sylveon||Indeedee-F+Metagross||Farigiraf + Garchomp": {
+   "lines": null,
+   "pop": 0.5781116641046344,
+   "worst": 0.48040206304988997,
+   "full": [
+    0.5782667167310132,
+    0.48403039396545605
+   ],
+   "reader": [
+    [
+     0.5547699245470136,
+     "Farigiraf: Trick Room | Garchomp: Flamethrower -> Metagross"
+    ],
+    [
+     0.22850266682310463,
+     "Farigiraf: Trick Room | Garchomp: Draco Meteor -> Indeedee-F"
+    ],
+    [
+     0.2167274086298818,
+     "Farigiraf: Protect | Garchomp: Draco Meteor -> Indeedee-F"
+    ]
+   ],
+   "share": 0.0919,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Indeedee-F: Follow Me | Metagross: Steel Roller -> Garchomp"
+    ],
+    [
+     45,
+     "Indeedee-F: Helping Hand | Metagross: Steel Roller -> Farigiraf"
+    ]
+   ]
+  },
+  "Balance: Dragonite + Floette + Incineroar||Pelipper+Archaludon||Dragonite + Sneasler": {
+   "lines": null,
+   "pop": 0.5653724771106092,
+   "worst": 0.43263822299669275,
+   "full": [
+    0.5643630433633472,
+    0.4381957514231628
+   ],
+   "reader": [
+    [
+     0.3763442298987487,
+     "Dragonite: Dragon Pulse -> Pelipper | Sneasler: Protect"
+    ],
+    [
+     0.32005773459375936,
+     "Dragonite: Dragon Pulse -> Archaludon | Sneasler: Close Combat -> Archaludon"
+    ],
+    [
+     0.28898882958503974,
+     "Dragonite: Dragon Pulse -> Pelipper | Sneasler: Close Combat -> Pelipper"
+    ]
+   ],
+   "share": 0.0828,
+   "back": [
+    "Indeedee-F",
+    "Metagross"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Pelipper: Tailwind | Archaludon: Electro Shot -> Sneasler"
+    ],
+    [
+     25,
+     "Pelipper: Hurricane -> Sneasler | Archaludon: Electro Shot -> Sneasler"
+    ],
+    [
+     25,
+     "Pelipper: Hurricane -> Sneasler | Archaludon: Protect"
+    ]
+   ]
+  },
+  "Indeedee TR: Basculegion + Whimsicott||Swampert+Grimmsnarl||Garchomp + Whimsicott": {
+   "lines": null,
+   "pop": 0.6139219624192004,
+   "worst": 0.5547115234300481,
+   "full": [
+    0.6025721841471865,
+    0.5606013832186405
+   ],
+   "reader": [
+    [
+     0.6093894712000427,
+     "Garchomp: Dragon Claw -> Swampert | Whimsicott: Moonblast -> Grimmsnarl"
+    ],
+    [
+     0.2527066647446513,
+     "Garchomp: Protect | Whimsicott: Moonblast -> Grimmsnarl"
+    ],
+    [
+     0.13790386405530597,
+     "Garchomp: Dragon Claw -> Swampert | Whimsicott: Protect"
+    ]
+   ],
+   "share": 0.0543,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     65,
+     "Swampert: Earthquake | Grimmsnarl: Reflect"
+    ],
+    [
+     35,
+     "Swampert: Wave Crash -> Whimsicott | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)||Pelipper+Swampert||Gholdengo + Raichu": {
+   "lines": null,
+   "pop": 0.730741174694086,
+   "worst": 0.662976154101463,
+   "full": [
+    0.7286400103213093,
+    0.6662648294834729
+   ],
+   "reader": [
+    [
+     0.544664996969683,
+     "Gholdengo: switch | Raichu: Protect"
+    ],
+    [
+     0.265171809515548,
+     "Gholdengo: Protect | Raichu: Fake Out -> Swampert"
+    ],
+    [
+     0.18684242800009232,
+     "Gholdengo: Shadow Ball -> Pelipper | Raichu: Fake Out -> Swampert"
+    ]
+   ],
+   "share": 0.1866,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Pelipper: switch -> Indeedee-F | Swampert: Earthquake"
+    ],
+    [
+     35,
+     "Pelipper: Weather Ball -> Raichu | Swampert: Earthquake"
+    ],
+    [
+     15,
+     "Pelipper: Tailwind | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Indeedee TR: Armarouge + Indeedee-F||Pelipper+Swampert||Armarouge + Kingambit": {
+   "lines": null,
+   "pop": 0.6723320683207958,
+   "worst": 0.604777893657586,
+   "full": [
+    0.6680784319520036,
+    0.6131442553024256
+   ],
+   "reader": [
+    [
+     0.3769810511374805,
+     "Armarouge: Protect | Kingambit: Sucker Punch -> Pelipper"
+    ],
+    [
+     0.31457470511226515,
+     "Armarouge: Wide Guard | Kingambit: Kowtow Cleave -> Pelipper"
+    ],
+    [
+     0.25335019375701395,
+     "Armarouge: Expanding Force -> Pelipper | Kingambit: switch"
+    ]
+   ],
+   "share": 0.0353,
+   "back": [
+    "Archaludon",
+    "Metagross"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     45,
+     "Pelipper: Weather Ball -> Kingambit | Swampert: Flip Turn -> Kingambit"
+    ],
+    [
+     40,
+     "Pelipper: Weather Ball -> Armarouge | Swampert: Earthquake"
+    ],
+    [
+     15,
+     "Pelipper: Tailwind | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Other Balance||Swampert+Indeedee-F||Garchomp + Sneasler": {
+   "lines": null,
+   "pop": 0.5672919037113817,
+   "worst": 0.4552335143953695,
+   "full": [
+    0.5925016490013424,
+    0.46781371183432174
+   ],
+   "reader": [
+    [
+     0.3954443879773217,
+     "Garchomp: Draco Meteor -> Indeedee-F | Sneasler: Protect"
+    ],
+    [
+     0.3313586543863693,
+     "Garchomp: Draco Meteor -> Swampert | Sneasler: Close Combat -> Swampert"
+    ],
+    [
+     0.26889297552402985,
+     "Garchomp: Dragon Pulse -> Indeedee-F | Sneasler: Close Combat -> Indeedee-F"
+    ]
+   ],
+   "share": 0.0399,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     60,
+     "Swampert: Protect | Indeedee-F: Psychic -> Garchomp"
+    ],
+    [
+     40,
+     "Swampert: Earthquake | Indeedee-F: Protect"
+    ]
+   ]
+  },
+  "Snow: Froslass + Kingambit + Rillaboom||Indeedee-F+Metagross||Froslass + Sneasler": {
+   "lines": null,
+   "pop": 0.5599388413957098,
+   "worst": 0.5115077717442711,
+   "full": [
+    0.5755375821772396,
+    0.5362836911313529
+   ],
+   "reader": [
+    [
+     0.3365970975293323,
+     "Froslass: Blizzard | Sneasler: Protect"
+    ],
+    [
+     0.3009166939288854,
+     "Froslass: Protect | Sneasler: switch"
+    ],
+    [
+     0.18201922996905479,
+     "Froslass: Protect | Sneasler: Close Combat -> Metagross"
+    ]
+   ],
+   "share": 0.1246,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Indeedee-F: Follow Me | Metagross: Steel Roller -> Froslass"
+    ],
+    [
+     35,
+     "Indeedee-F: Psychic -> Froslass | Metagross: Stomping Tantrum -> Sneasler"
+    ],
+    [
+     10,
+     "Indeedee-F: Protect | Metagross: Steel Roller -> Froslass"
+    ]
+   ]
+  },
+  "Other Trick Room||Pelipper+Swampert||Incineroar + Milotic": {
+   "lines": null,
+   "pop": 0.6292766761253702,
+   "worst": 0.6292766761253702,
+   "full": [
+    0.6380175944550754,
+    0.6267982454647485
+   ],
+   "reader": [
+    [
+     0.8320767235429212,
+     "Incineroar: Fake Out -> Pelipper | Milotic: Coil"
+    ],
+    [
+     0.1640220615887041,
+     "Incineroar: Darkest Lariat -> Pelipper | Milotic: Coil"
+    ]
+   ],
+   "share": 0.0185,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Pelipper: switch -> Indeedee-F | Swampert: Wave Crash -> Incineroar"
+    ]
+   ]
+  },
+  "Indeedee TR: Basculegion + Whimsicott||Swampert+Grimmsnarl||Pyroar + Whimsicott": {
+   "lines": null,
+   "pop": 0.6229332089801743,
+   "worst": 0.5601688379293404,
+   "full": [
+    0.6210788448745919,
+    0.5636807751082662
+   ],
+   "reader": [
+    [
+     0.6005555976099617,
+     "Pyroar: Protect | Whimsicott: Tailwind"
+    ],
+    [
+     0.3102753891968879,
+     "Pyroar: Overheat -> Grimmsnarl | Whimsicott: Tailwind"
+    ]
+   ],
+   "share": 0.1087,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     60,
+     "Swampert: Earthquake | Grimmsnarl: Reflect"
+    ],
+    [
+     40,
+     "Swampert: Wave Crash -> Whimsicott | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Other Snow||Swampert+Archaludon||Kingambit + Rillaboom": {
+   "lines": null,
+   "pop": 0.462030939911786,
+   "worst": 0.40926973607428274,
+   "full": [
+    0.46139561994485234,
+    0.4106790246972157
+   ],
+   "reader": [
+    [
+     0.6550585873667933,
+     "Kingambit: Swords Dance | Rillaboom: Fake Out -> Archaludon"
+    ],
+    [
+     0.34494141263320666,
+     "Kingambit: Swords Dance | Rillaboom: Wood Hammer -> Swampert"
+    ]
+   ],
+   "share": 0.0297,
+   "back": [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Swampert: Flip Turn -> Kingambit | Archaludon: Electro Shot -> Kingambit"
+    ],
+    [
+     50,
+     "Swampert: switch -> Indeedee-F | Archaludon: Dragon Pulse -> Rillaboom"
+    ]
+   ]
+  },
+  "Other Indeedee TR||Pelipper+Swampert||Gardevoir + Indeedee-F": {
+   "lines": null,
+   "pop": 0.6653273709261973,
+   "worst": 0.6380672389547569,
+   "full": [
+    0.6641847899842178,
+    0.6452506019766258
+   ],
+   "reader": [
+    [
+     0.5693819333509766,
+     "Gardevoir: Hyper Voice | Indeedee-F: Trick Room"
+    ],
+    [
+     0.35661170987795787,
+     "Gardevoir: Calm Mind | Indeedee-F: Trick Room"
+    ]
+   ],
+   "share": 0.0309,
+   "back": [
+    "Archaludon",
+    "Grimmsnarl"
+   ],
+   "itemMix": true,
+   "trCredit": null,
+   "mix": [
+    [
+     75,
+     "Pelipper: Wide Guard | Swampert: Wave Crash -> Indeedee-F"
+    ],
+    [
+     25,
+     "Pelipper: Weather Ball -> Indeedee-F | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Indeedee TR: Basculegion + Whimsicott||Swampert+Grimmsnarl||Basculegion + Pyroar": {
+   "lines": null,
+   "pop": 0.6115534027018648,
+   "worst": 0.5637995549603578,
+   "full": [
+    0.6059438096513405,
+    0.5756880825816418
+   ],
+   "reader": [
+    [
+     0.47492258360283873,
+     "Basculegion: Wave Crash -> Grimmsnarl | Pyroar: Protect"
+    ],
+    [
+     0.35262636410040055,
+     "Basculegion: Wave Crash -> Swampert | Pyroar: Protect"
+    ]
+   ],
+   "share": 0.0543,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Swampert: Earthquake | Grimmsnarl: Reflect"
+    ],
+    [
+     35,
+     "Swampert: Earthquake | Grimmsnarl: Parting Shot -> Basculegion"
+    ],
+    [
+     10,
+     "Swampert: Protect | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Sand: Excadrill + Salamence + Sneasler + Tyranitar||Swampert+Grimmsnarl||Salamence + Tyranitar": {
+   "lines": null,
+   "pop": 0.4993362126216656,
+   "worst": 0.44700153489853334,
+   "full": [
+    0.49922229730824996,
+    0.45187514139076396
+   ],
+   "reader": [
+    [
+     0.5659408148088663,
+     "Salamence: Tailwind | Tyranitar: Protect"
+    ],
+    [
+     0.22018847749194737,
+     "Salamence: Hyper Voice | Tyranitar: Rock Slide"
+    ],
+    [
+     0.2138707076991863,
+     "Salamence: Tailwind | Tyranitar: Knock Off -> Swampert"
+    ]
+   ],
+   "share": 0.0488,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     80,
+     "Swampert: switch -> Archaludon | Grimmsnarl: Reflect"
+    ],
+    [
+     20,
+     "Swampert: Wave Crash -> Tyranitar | Grimmsnarl: Parting Shot -> Salamence"
+    ]
+   ]
+  },
+  "Other Rain||Swampert+Grimmsnarl||Metagross + Sinistcha": {
+   "lines": null,
+   "pop": 0.5082693950867793,
+   "worst": 0.4473882107087136,
+   "full": [
+    0.5088643586375353,
+    0.44952748224808586
+   ],
+   "reader": [
+    [
+     0.7178300993606407,
+     "Metagross: Iron Head -> Grimmsnarl | Sinistcha: Matcha Gotcha"
+    ],
+    [
+     0.15468981004966545,
+     "Metagross: Protect | Sinistcha: switch"
+    ]
+   ],
+   "share": 0.0425,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     35,
+     "Swampert: Protect | Grimmsnarl: switch -> Archaludon"
+    ],
+    [
+     35,
+     "Swampert: Flip Turn -> Metagross | Grimmsnarl: Parting Shot -> Metagross"
+    ],
+    [
+     30,
+     "Swampert: Protect | Grimmsnarl: Reflect"
+    ]
+   ]
+  },
+  "Sand: Excadrill + Tyranitar||Archaludon+Grimmsnarl||Kommo-o + Pidgeot": {
+   "lines": null,
+   "pop": 0.6826622446092787,
+   "worst": 0.6074430846301356,
+   "full": [
+    0.6822846554312422,
+    0.6083644793206892
+   ],
+   "reader": [
+    [
+     0.6411653644636534,
+     "Kommo-o: Aura Sphere -> Archaludon | Pidgeot: Tailwind"
+    ],
+    [
+     0.35883463553634665,
+     "Kommo-o: Aura Sphere -> Grimmsnarl | Pidgeot: Tailwind"
+    ]
+   ],
+   "share": 0.0419,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Archaludon: Protect | Grimmsnarl: Spirit Break -> Kommo-o"
+    ],
+    [
+     50,
+     "Archaludon: Dragon Pulse -> Kommo-o | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Rain: Archaludon + Pelipper (no Grimmsnarl)||Archaludon+Grimmsnarl||Golisopod + Pelipper": {
+   "lines": null,
+   "pop": 0.6513573856876076,
+   "worst": 0.5861535590272633,
+   "full": [
+    0.6523176013740206,
+    0.5882665978880586
+   ],
+   "reader": [
+    [
+     0.5354209474497071,
+     "Golisopod: Iron Head -> Grimmsnarl | Pelipper: Tailwind"
+    ],
+    [
+     0.3914092326921784,
+     "Golisopod: Swords Dance | Pelipper: Protect"
+    ]
+   ],
+   "share": 0.0411,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     45,
+     "Archaludon: Electro Shot -> Golisopod | Grimmsnarl: Reflect"
+    ],
+    [
+     30,
+     "Archaludon: Electro Shot -> Pelipper | Grimmsnarl: Reflect"
+    ],
+    [
+     25,
+     "Archaludon: Electro Shot -> Pelipper | Grimmsnarl: Parting Shot -> Golisopod"
+    ]
+   ]
+  },
+  "Other Rain||Swampert+Grimmsnarl||Kommo-o + Metagross": {
+   "lines": null,
+   "pop": 0.5673114194421188,
+   "worst": 0.5071378807175978,
+   "full": [
+    0.5652598188699517,
+    0.514003377671655
+   ],
+   "reader": [
+    [
+     0.7577297082588026,
+     "Kommo-o: Clanging Scales | Metagross: Iron Head -> Grimmsnarl"
+    ],
+    [
+     0.23024213308299715,
+     "Kommo-o: Clanging Scales | Metagross: Psychic Fangs -> Swampert"
+    ]
+   ],
+   "share": 0.0425,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Swampert: Protect | Grimmsnarl: Reflect"
+    ],
+    [
+     35,
+     "Swampert: Earthquake | Grimmsnarl: Reflect"
+    ],
+    [
+     15,
+     "Swampert: Earthquake | Grimmsnarl: Parting Shot -> Metagross"
+    ]
+   ]
+  },
+  "Other Perish||Swampert+Indeedee-F||Gengar + Incineroar": {
+   "lines": null,
+   "pop": 0.6151155473247016,
+   "worst": 0.5121162263701735,
+   "full": [
+    0.6080830783933403,
+    0.5172092305139995
+   ],
+   "reader": [
+    [
+     0.4545606914247936,
+     "Gengar: switch | Incineroar: Fake Out -> Swampert"
+    ],
+    [
+     0.3790293401088893,
+     "Gengar: Perish Song | Incineroar: switch"
+    ],
+    [
+     0.16640996846631725,
+     "Gengar: Protect | Incineroar: Parting Shot -> Indeedee-F"
+    ]
+   ],
+   "share": 0.1429,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     85,
+     "Swampert: Flip Turn -> Incineroar | Indeedee-F: Psychic -> Gengar"
+    ],
+    [
+     15,
+     "Swampert: switch -> Archaludon | Indeedee-F: Psychic -> Gengar"
+    ]
+   ]
+  },
+  "Perish: Archaludon + Politoed (no Golisopod)||Archaludon+Metagross||Gengar + Incineroar": {
+   "lines": null,
+   "pop": 0.5129355211315265,
+   "worst": 0.4397651715398799,
+   "full": [
+    0.5144554614969434,
+    0.4465891491642382
+   ],
+   "reader": [
+    [
+     0.3319755206988683,
+     "Gengar: Perish Song | Incineroar: Darkest Lariat -> Metagross"
+    ],
+    [
+     0.23063401794364555,
+     "Gengar: Shadow Ball -> Metagross | Incineroar: Fake Out -> Archaludon"
+    ],
+    [
+     0.1888741185504742,
+     "Gengar: Perish Song | Incineroar: Fake Out -> Metagross"
+    ]
+   ],
+   "share": 0.2727,
+   "back": [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     45,
+     "Archaludon: Dragon Pulse -> Gengar | Metagross: switch -> Indeedee-F"
+    ],
+    [
+     30,
+     "Archaludon: Electro Shot -> Gengar | Metagross: switch -> Pelipper"
+    ],
+    [
+     25,
+     "Archaludon: Electro Shot -> Incineroar | Metagross: Psychic Fangs -> Gengar"
+    ]
+   ]
+  },
+  "Other Sun||Metagross+Grimmsnarl||Charizard + Kingambit": {
+   "lines": null,
+   "pop": 0.5652121678111217,
+   "worst": 0.5165546115501891,
+   "full": [
+    0.5655690769367511,
+    0.5178584407398918
+   ],
+   "reader": [
+    [
+     0.43633494919414517,
+     "Charizard: Heat Wave | Kingambit: Low Kick -> Grimmsnarl"
+    ],
+    [
+     0.3634426207532582,
+     "Charizard: Weather Ball -> Grimmsnarl | Kingambit: Kowtow Cleave -> Metagross"
+    ],
+    [
+     0.20022243005259738,
+     "Charizard: Protect | Kingambit: Kowtow Cleave -> Metagross"
+    ]
+   ],
+   "share": 0.0203,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     45,
+     "Metagross: Protect | Grimmsnarl: Light Screen"
+    ],
+    [
+     35,
+     "Metagross: Psychic Fangs -> Charizard | Grimmsnarl: Light Screen"
+    ],
+    [
+     20,
+     "Metagross: Psychic Fangs -> Charizard | Grimmsnarl: Parting Shot -> Charizard"
+    ]
+   ]
+  },
+  "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)||Pelipper+Swampert||Basculegion + Pelipper": {
+   "lines": null,
+   "pop": 0.5575963027420391,
+   "worst": 0.5064431411559166,
+   "full": [
+    0.5662959331598334,
+    0.5141317736081258
+   ],
+   "reader": [
+    [
+     0.43931144372764114,
+     "Basculegion: Flip Turn -> Pelipper | Pelipper: Hurricane -> Pelipper"
+    ],
+    [
+     0.210431010617231,
+     "Basculegion: Wave Crash -> Pelipper | Pelipper: Protect"
+    ],
+    [
+     0.1932466750869205,
+     "Basculegion: Wave Crash -> Swampert | Pelipper: Protect"
+    ]
+   ],
+   "share": 0.0432,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Pelipper: Hurricane -> Basculegion | Swampert: Flip Turn -> Basculegion"
+    ],
+    [
+     45,
+     "Pelipper: Hurricane -> Pelipper | Swampert: Wave Crash -> Pelipper"
+    ]
+   ]
+  },
+  "Trick Room: Delphox + Incineroar + Sinistcha (no Floette)||Pelipper+Archaludon||Delphox + Sneasler": {
+   "lines": null,
+   "pop": 0.5881617201353379,
+   "worst": 0.558922476700082,
+   "full": [
+    0.5885276680523672,
+    0.5602106504777944
+   ],
+   "reader": [
+    [
+     0.41448461436769907,
+     "Delphox: Psychic -> Pelipper | Sneasler: Close Combat -> Archaludon"
+    ],
+    [
+     0.3810047746063197,
+     "Delphox: Protect | Sneasler: Close Combat -> Archaludon"
+    ],
+    [
+     0.20451061102598095,
+     "Delphox: Psychic -> Pelipper | Sneasler: Poison Jab -> Pelipper"
+    ]
+   ],
+   "share": 0.1573,
+   "back": [
+    "Swampert",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     45,
+     "Pelipper: Weather Ball -> Delphox | Archaludon: Electro Shot -> Sneasler"
+    ],
+    [
+     45,
+     "Pelipper: switch -> Indeedee-F | Archaludon: Electro Shot -> Sneasler"
+    ],
+    [
+     10,
+     "Pelipper: Tailwind | Archaludon: Electro Shot -> Sneasler"
+    ]
+   ]
+  },
+  "Tailwind: Glimmora + Rillaboom + Volcarona (no Basculegion)||Swampert+Archaludon||Kingambit + Volcarona": {
+   "lines": null,
+   "pop": 0.6172255921881298,
+   "worst": 0.5632969779550853,
+   "full": [
+    0.6154826662389433,
+    0.5650358664187001
+   ],
+   "reader": [
+    [
+     0.535298516710929,
+     "Kingambit: Kowtow Cleave -> Swampert | Volcarona: Protect"
+    ],
+    [
+     0.402657407563783,
+     "Kingambit: Protect | Volcarona: Struggle Bug"
+    ]
+   ],
+   "share": 0.0694,
+   "back": [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     40,
+     "Swampert: Flip Turn -> Kingambit | Archaludon: Electro Shot -> Kingambit"
+    ],
+    [
+     35,
+     "Swampert: Earthquake | Archaludon: Protect"
+    ],
+    [
+     25,
+     "Swampert: Flip Turn -> Volcarona | Archaludon: Electro Shot -> Volcarona"
+    ]
+   ]
+  },
+  "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler||Pelipper+Swampert||Armarouge + Indeedee-F": {
+   "lines": null,
+   "pop": 0.7173039804927784,
+   "worst": 0.6291440893903619,
+   "full": [
+    0.701820947622578,
+    0.6405120577428354
+   ],
+   "reader": [
+    [
+     0.6785881604666876,
+     "Armarouge: Expanding Force -> Pelipper | Indeedee-F: Trick Room"
+    ],
+    [
+     0.2971162338505849,
+     "Armarouge: Trick Room | Indeedee-F: Helping Hand"
+    ]
+   ],
+   "share": 0.0674,
+   "back": [
+    "Indeedee-F",
+    "Metagross"
+   ],
+   "itemMix": true,
+   "trCredit": null,
+   "mix": [
+    [
+     80,
+     "Pelipper: Wide Guard | Swampert: Earthquake"
+    ],
+    [
+     20,
+     "Pelipper: Weather Ball -> Indeedee-F | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Trick Room: Delphox + Incineroar + Sinistcha (no Floette)||Pelipper+Archaludon||Delphox + Sinistcha": {
+   "lines": null,
+   "pop": 0.6921454341410705,
+   "worst": 0.6458157119202456,
+   "full": [
+    0.6924184412784163,
+    0.6474840787127414
+   ],
+   "reader": [
+    [
+     0.59806811647935,
+     "Delphox: Protect | Sinistcha: Matcha Gotcha"
+    ],
+    [
+     0.40193188352065007,
+     "Delphox: Nasty Plot | Sinistcha: Protect"
+    ]
+   ],
+   "share": 0.0674,
+   "back": [
+    "Swampert",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     60,
+     "Pelipper: Hurricane -> Sinistcha | Archaludon: Electro Shot -> Delphox"
+    ],
+    [
+     40,
+     "Pelipper: Weather Ball -> Delphox | Archaludon: Electro Shot -> Sinistcha"
+    ]
+   ]
+  },
+  "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)||Swampert+Grimmsnarl||Aerodactyl + Garchomp": {
+   "lines": null,
+   "pop": 0.6077240400899896,
+   "worst": 0.5686412754968823,
+   "full": [
+    0.6077931995097904,
+    0.5704250527826246
+   ],
+   "reader": [
+    [
+     0.6086185428528609,
+     "Aerodactyl: Protect | Garchomp: Earthquake"
+    ],
+    [
+     0.188382356808381,
+     "Aerodactyl: Rock Slide | Garchomp: Earthquake"
+    ],
+    [
+     0.11697133895589047,
+     "Aerodactyl: Tailwind | Garchomp: Protect"
+    ]
+   ],
+   "share": 0.0952,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     40,
+     "Swampert: Wave Crash -> Garchomp | Grimmsnarl: Parting Shot -> Garchomp"
+    ],
+    [
+     35,
+     "Swampert: Flip Turn -> Aerodactyl | Grimmsnarl: Reflect"
+    ],
+    [
+     25,
+     "Swampert: Flip Turn -> Aerodactyl | Grimmsnarl: Parting Shot -> Garchomp"
+    ]
+   ]
+  },
+  "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)||Pelipper+Swampert||Gardevoir + Sneasler": {
+   "lines": null,
+   "pop": 0.7137433150003503,
+   "worst": 0.6485365447158009,
+   "full": [
+    0.7123290899625396,
+    0.6524598834348552
+   ],
+   "reader": [
+    [
+     0.37124309611642037,
+     "Gardevoir: Hyper Voice | Sneasler: Protect"
+    ],
+    [
+     0.3435479105728049,
+     "Gardevoir: Protect | Sneasler: switch"
+    ],
+    [
+     0.12973350992698396,
+     "Gardevoir: Protect | Sneasler: Swords Dance"
+    ]
+   ],
+   "share": 0.0432,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     40,
+     "Pelipper: Tailwind | Swampert: Wave Crash -> Gardevoir"
+    ],
+    [
+     40,
+     "Pelipper: Tailwind | Swampert: Earthquake"
+    ],
+    [
+     20,
+     "Pelipper: Wide Guard | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler||Pelipper+Swampert||Indeedee-F + Kingambit": {
+   "lines": null,
+   "pop": 0.7223621627149915,
+   "worst": 0.7101593365974075,
+   "full": [
+    0.7218654558775314,
+    0.710497883571289
+   ],
+   "reader": [
+    [
+     0.8733890913239346,
+     "Indeedee-F: Trick Room | Kingambit: Kowtow Cleave -> Pelipper"
+    ],
+    [
+     0.1266109086760648,
+     "Indeedee-F: Helping Hand | Kingambit: Kowtow Cleave -> Pelipper"
+    ]
+   ],
+   "share": 0.0787,
+   "back": [
+    "Indeedee-F",
+    "Metagross"
+   ],
+   "itemMix": true,
+   "trCredit": null,
+   "mix": [
+    [
+     75,
+     "Pelipper: Weather Ball -> Indeedee-F | Swampert: Earthquake"
+    ],
+    [
+     25,
+     "Pelipper: Weather Ball -> Kingambit | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Other Tailwind||Pelipper+Metagross||Incineroar + Salamence": {
+   "lines": null,
+   "pop": 0.5162124000982252,
+   "worst": 0.4782107970983075,
+   "full": [
+    0.5174590904209188,
+    0.4859482446458264
+   ],
+   "reader": [
+    [
+     0.3102882535252294,
+     "Incineroar: Fake Out -> Pelipper | Salamence: Hyper Voice"
+    ],
+    [
+     0.29688899294345567,
+     "Incineroar: Darkest Lariat -> Metagross | Salamence: Tailwind"
+    ],
+    [
+     0.2523666420549267,
+     "Incineroar: Parting Shot -> Pelipper | Salamence: Tailwind"
+    ]
+   ],
+   "share": 0.0392,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     45,
+     "Pelipper: Weather Ball -> Incineroar | Metagross: Psychic Fangs -> Salamence"
+    ],
+    [
+     30,
+     "Pelipper: Wide Guard | Metagross: Psychic Fangs -> Salamence"
+    ],
+    [
+     25,
+     "Pelipper: switch -> Indeedee-F | Metagross: Steel Roller -> Salamence"
+    ]
+   ]
+  },
+  "Sand: Excadrill + Tyranitar||Archaludon+Grimmsnarl||Aegislash + Rotom-Heat": {
+   "lines": null,
+   "pop": 0.5985148790710763,
+   "worst": 0.5527612935515713,
+   "full": [
+    0.5986348188067361,
+    0.5551038516337364
+   ],
+   "reader": [
+    [
+     0.45126582553684313,
+     "Aegislash: Flash Cannon -> Grimmsnarl | Rotom-Heat: Volt Switch -> Grimmsnarl"
+    ],
+    [
+     0.3054761038183385,
+     "Aegislash: Shadow Ball -> Archaludon | Rotom-Heat: Volt Switch -> Grimmsnarl"
+    ],
+    [
+     0.24325807064481844,
+     "Aegislash: Flash Cannon -> Grimmsnarl | Rotom-Heat: Thunderbolt -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.0366,
+   "back": [
+    "Pelipper",
+    "Swampert"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Archaludon: Electro Shot -> Aegislash | Grimmsnarl: Parting Shot -> Aegislash"
+    ],
+    [
+     45,
+     "Archaludon: Dragon Pulse -> Aegislash | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Other Snow||Swampert+Archaludon||Sneasler + Volcarona": {
+   "lines": null,
+   "pop": 0.6314887192478665,
+   "worst": 0.6193884664839311,
+   "full": [
+    0.6319096186156216,
+    0.6240823851257661
+   ],
+   "reader": [
+    [
+     0.5005834919080504,
+     "Sneasler: Fake Out -> Swampert | Volcarona: Tailwind"
+    ],
+    [
+     0.4994165080919496,
+     "Sneasler: Throat Chop -> Archaludon | Volcarona: Tailwind"
+    ]
+   ],
+   "share": 0.0267,
+   "back": [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     75,
+     "Swampert: Earthquake | Archaludon: switch -> Indeedee-F"
+    ],
+    [
+     25,
+     "Swampert: Flip Turn -> Volcarona | Archaludon: Electro Shot -> Volcarona"
+    ]
+   ]
+  },
+  "Other Rain||Swampert+Grimmsnarl||Incineroar + Raichu": {
+   "lines": null,
+   "pop": 0.5693465732616206,
+   "worst": 0.46681015017134875,
+   "full": [
+    0.5700069322305142,
+    0.46791765763937787
+   ],
+   "reader": [
+    [
+     0.5642817419284822,
+     "Incineroar: Parting Shot -> Swampert | Raichu: Fake Out -> Swampert"
+    ],
+    [
+     0.1288340623361454,
+     "Incineroar: Parting Shot -> Swampert | Raichu: Fake Out -> Grimmsnarl"
+    ],
+    [
+     0.11415343958588495,
+     "Incineroar: Parting Shot -> Swampert | Raichu: Zap Cannon -> Grimmsnarl"
+    ]
+   ],
+   "share": 0.0403,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     60,
+     "Swampert: Earthquake | Grimmsnarl: Reflect"
+    ],
+    [
+     20,
+     "Swampert: switch -> Archaludon | Grimmsnarl: Light Screen"
+    ],
+    [
+     20,
+     "Swampert: Earthquake | Grimmsnarl: Parting Shot -> Raichu"
+    ]
+   ]
+  },
+  "Other Indeedee TR||Pelipper+Swampert||Indeedee + Sneasler": {
+   "lines": null,
+   "pop": 0.7199448664168359,
+   "worst": 0.6741351716111537,
+   "full": [
+    0.7208235658432489,
+    0.6752351076907249
+   ],
+   "reader": [
+    [
+     0.7092272709325967,
+     "Indeedee: Dazzling Gleam | Sneasler: Dire Claw -> Swampert"
+    ],
+    [
+     0.29077272906740326,
+     "Indeedee: Expanding Force -> Swampert | Sneasler: Dire Claw -> Pelipper"
+    ]
+   ],
+   "share": 0.0232,
+   "back": [
+    "Archaludon",
+    "Grimmsnarl"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     75,
+     "Pelipper: Wide Guard | Swampert: Earthquake"
+    ],
+    [
+     25,
+     "Pelipper: Tailwind | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)||Pelipper+Swampert||Salamence + Sneasler": {
+   "lines": null,
+   "pop": 0.6626277255161657,
+   "worst": 0.6258575033087724,
+   "full": [
+    0.6614726299820882,
+    0.6272291719309532
+   ],
+   "reader": [
+    [
+     0.5938481292857127,
+     "Salamence: Hyper Voice | Sneasler: Gunk Shot -> Pelipper"
+    ],
+    [
+     0.4061518707142873,
+     "Salamence: Tailwind | Sneasler: Gunk Shot -> Pelipper"
+    ]
+   ],
+   "share": 0.0324,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     65,
+     "Pelipper: Wide Guard | Swampert: Earthquake"
+    ],
+    [
+     35,
+     "Pelipper: Tailwind | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Indeedee TR: Metagross + Milotic + Sneasler||Archaludon+Metagross||Indeedee + Sneasler": {
+   "lines": null,
+   "pop": 0.696041753212646,
+   "worst": 0.6410653148986986,
+   "full": [
+    0.6960912685050348,
+    0.6415058867759169
+   ],
+   "reader": [
+    [
+     0.943397452088034,
+     "Indeedee: Expanding Force -> Archaludon | Sneasler: Rock Slide"
+    ]
+   ],
+   "share": 0.1707,
+   "back": [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Archaludon: Dragon Pulse -> Indeedee | Metagross: Steel Roller -> Sneasler"
+    ],
+    [
+     50,
+     "Archaludon: Electro Shot -> Indeedee | Metagross: Steel Roller -> Indeedee"
+    ]
+   ]
+  },
+  "Other Balance||Swampert+Indeedee-F||Incineroar + Volcarona": {
+   "lines": null,
+   "pop": 0.5534416687276542,
+   "worst": 0.4612297687246007,
+   "full": [
+    0.5755800605120511,
+    0.4621837335509254
+   ],
+   "reader": [
+    [
+     0.48377813352131077,
+     "Incineroar: Fake Out -> Swampert | Volcarona: switch"
+    ],
+    [
+     0.1909990729414903,
+     "Incineroar: switch | Volcarona: Struggle Bug"
+    ],
+    [
+     0.1346535259552469,
+     "Incineroar: Darkest Lariat -> Swampert | Volcarona: Protect"
+    ]
+   ],
+   "share": 0.0299,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     60,
+     "Swampert: Flip Turn -> Incineroar | Indeedee-F: Protect"
+    ],
+    [
+     40,
+     "Swampert: Flip Turn -> Volcarona | Indeedee-F: Psychic -> Volcarona"
+    ]
+   ]
+  },
+  "Balance: Gholdengo + Incineroar + Raichu + Rillaboom||Pelipper+Swampert||Gholdengo + Raichu": {
+   "lines": null,
+   "pop": 0.6674600441279926,
+   "worst": 0.5580800884237931,
+   "full": [
+    0.6624182372334305,
+    0.5722574196635992
+   ],
+   "reader": [
+    [
+     0.4654445586504335,
+     "Gholdengo: switch | Raichu: Protect"
+    ],
+    [
+     0.3099807110287126,
+     "Gholdengo: Shadow Ball -> Pelipper | Raichu: Fake Out -> Swampert"
+    ],
+    [
+     0.10091101295563357,
+     "Gholdengo: Make It Rain | Raichu: switch"
+    ]
+   ],
+   "share": 0.119,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     65,
+     "Pelipper: Tailwind | Swampert: Earthquake"
+    ],
+    [
+     35,
+     "Pelipper: switch -> Indeedee-F | Swampert: Earthquake"
+    ]
+   ]
+  },
+  "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)||Metagross+Grimmsnarl||Gholdengo + Salamence": {
+   "lines": null,
+   "pop": 0.5336057683592571,
+   "worst": 0.46978685356446986,
+   "full": [
+    0.5307316230447118,
+    0.47502313300654614
+   ],
+   "reader": [
+    [
+     0.6367936708874804,
+     "Gholdengo: Shadow Ball -> Metagross | Salamence: Tailwind"
+    ],
+    [
+     0.3632063291125196,
+     "Gholdengo: Protect | Salamence: Tailwind"
+    ]
+   ],
+   "share": 0.0891,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Metagross: Stomping Tantrum -> Gholdengo | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Perish: Gengar + Kommo-o + Rillaboom||Pelipper+Swampert||Gengar + Rillaboom": {
+   "lines": null,
+   "pop": 0.5391763326554295,
+   "worst": 0.475886032649779,
+   "full": [
+    0.5382131665829882,
+    0.48518191220598816
+   ],
+   "reader": [
+    [
+     0.38203608652903176,
+     "Gengar: Protect | Rillaboom: Fake Out -> Pelipper"
+    ],
+    [
+     0.23314601643987481,
+     "Gengar: Protect | Rillaboom: Grassy Glide -> Swampert"
+    ],
+    [
+     0.19134751683168394,
+     "Gengar: Perish Song | Rillaboom: Protect"
+    ]
+   ],
+   "share": 0.1518,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Pelipper: switch -> Indeedee-F | Swampert: Flip Turn -> Rillaboom"
+    ],
+    [
+     40,
+     "Pelipper: switch -> Indeedee-F | Swampert: Earthquake"
+    ],
+    [
+     10,
+     "Pelipper: Hurricane -> Rillaboom | Swampert: Wave Crash -> Gengar"
+    ]
+   ]
+  },
+  "Sand: Excadrill + Salamence + Sneasler + Tyranitar||Swampert+Grimmsnarl||Salamence + Sneasler": {
+   "lines": null,
+   "pop": 0.49699671743825696,
+   "worst": 0.3760437768188832,
+   "full": [
+    0.4742854124553965,
+    0.3929358853800451
+   ],
+   "reader": [
+    [
+     0.3975192243997233,
+     "Salamence: Hyper Voice | Sneasler: Fake Out -> Grimmsnarl"
+    ],
+    [
+     0.2963077570159049,
+     "Salamence: Tailwind | Sneasler: Protect"
+    ],
+    [
+     0.20762440112908256,
+     "Salamence: Tailwind | Sneasler: Fake Out -> Swampert"
+    ]
+   ],
+   "share": 0.1024,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     75,
+     "Swampert: Earthquake | Grimmsnarl: Reflect"
+    ],
+    [
+     25,
+     "Swampert: switch -> Archaludon | Grimmsnarl: Light Screen"
+    ]
+   ]
+  },
+  "Other Indeedee TR||Pelipper+Swampert||Delphox + Indeedee-F": {
+   "lines": null,
+   "pop": 0.7873592755856113,
+   "worst": 0.6741092502030164,
+   "full": [
+    0.7874005128726769,
+    0.6741569532158328
+   ],
+   "reader": [
+    [
+     0.9709899320756347,
+     "Delphox: switch | Indeedee-F: Reflect"
+    ]
+   ],
+   "share": 0.0193,
+   "back": [
+    "Archaludon",
+    "Grimmsnarl"
+   ],
+   "itemMix": true,
+   "trCredit": null,
+   "mix": [
+    [
+     55,
+     "Pelipper: Weather Ball -> Indeedee-F | Swampert: Wave Crash -> Delphox"
+    ],
+    [
+     45,
+     "Pelipper: Weather Ball -> Indeedee-F | Swampert: Wave Crash -> Indeedee-F"
+    ]
+   ]
+  },
+  "Trick Room: Delphox + Floette + Incineroar + Sinistcha||Pelipper+Swampert||Delphox + Incineroar": {
+   "lines": null,
+   "pop": 0.5542811873921701,
+   "worst": 0.5046214544310911,
+   "full": [
+    0.5694855575121213,
+    0.5403122657874188
+   ],
+   "reader": [
+    [
+     0.276136920248112,
+     "Delphox: Protect | Incineroar: switch"
+    ],
+    [
+     0.26761296901540405,
+     "Delphox: Protect | Incineroar: Fake Out -> Pelipper"
+    ],
+    [
+     0.1527238769278881,
+     "Delphox: Nasty Plot | Incineroar: Fake Out -> Pelipper"
+    ]
+   ],
+   "share": 0.3176,
+   "back": [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     50,
+     "Pelipper: switch -> Indeedee-F | Swampert: Wave Crash -> Incineroar"
+    ],
+    [
+     35,
+     "Pelipper: switch -> Indeedee-F | Swampert: Flip Turn -> Delphox"
+    ],
+    [
+     15,
+     "Pelipper: Hurricane -> Incineroar | Swampert: Flip Turn -> Incineroar"
+    ]
+   ]
+  },
+  "Other Rain||Swampert+Grimmsnarl||Incineroar + Kommo-o": {
+   "lines": null,
+   "pop": 0.5840751540311838,
+   "worst": 0.4412486830666589,
+   "full": [
+    0.5813352648601039,
+    0.4429730866634632
+   ],
+   "reader": [
+    [
+     0.7864635421163302,
+     "Incineroar: Fake Out -> Grimmsnarl | Kommo-o: Clanging Scales"
+    ],
+    [
+     0.18585019168549646,
+     "Incineroar: Fake Out -> Swampert | Kommo-o: Aura Sphere -> Swampert"
+    ]
+   ],
+   "share": 0.1745,
+   "back": [
+    "Pelipper",
+    "Archaludon"
+   ],
+   "itemMix": false,
+   "trCredit": null,
+   "mix": [
+    [
+     100,
+     "Swampert: Flip Turn -> Incineroar | Grimmsnarl: Light Screen"
+    ]
+   ]
+  }
+ }
+}

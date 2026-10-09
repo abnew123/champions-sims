@@ -207,3 +207,7 @@ ladder share (`TS_POOL_WEIGHT=blend`, 30 groups). Normal accuracy (v20g), plan-a
 3. Estimate on a c7a.48xlarge: round 1 ~1.5 h (~420 teams x 728 screening games + confirm), the whole climb ~3–4 h.
 4. Report: `python3 report.py cloud_results/<dir> climb_arch`; then replay each archetype's best teams against their starts on fresh
    batches before trusting the gains.
+5. Chained after the climb: `archverify.py` (verified gains), `accrefine.py run` (set swaps toward more sure-hit moves), then
+   `pairprobe.py` (exact type-preserving pair swaps). On a later box, `cloud/accfinal_probe.sh` runs only the refinement's final check
+   (`accrefine.py final`, fresh seeds 85000 / 885000) and the pair probe: first copy `runs/accrefine.json`, `runs/archverify.json`
+   and `climb_arch_state.json` from `cloud_results/arch` to the box.

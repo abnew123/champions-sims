@@ -8,10 +8,12 @@ never another Pokemon or a Mega-forme change) toward more 100%-accurate moves, a
                   where neither the old nor the new set is involved, then BATCHES (4) paired confirm batches
   accept          gain + TS_ACC_Z (1.0) x SE >= 0 ("doesn't actively worsen": -0.1 +- 1.5 passes, -2.0 +- 1.5 doesn't); among accepted
                   candidates the largest accuracy gain, then the largest score gain. Rounds repeat until no candidate is accepted.
-  final check     each changed team against its original on fresh games (seed 79000 / 879000), since small accepted losses can add up
+  final check     each changed team against its original on fresh games (seed 85000 / 885000; 79000 / 879000 before 2026-10-08,
+                  which round 3 had used too), since small accepted losses can add up
 Teams: the best TS_ACC_TOP (2) distinct final teams per archetype from runs/archverify.json (archverify.py), or named starts.
   . cloud/run_env_arch.sh && python3 accrefine.py cells            matrix cells the candidates still need (NPROC processes)
   . cloud/run_env_arch.sh && TS_PARALLEL=30 TS_THREADS=3 python3 accrefine.py run [batches=4] [start names, comma-separated]
+  . cloud/run_env_arch.sh && TS_PARALLEL=30 TS_THREADS=3 python3 accrefine.py final [batches=4]   only the final check, from runs/accrefine.json
 """
 import json, os, sys, time, subprocess
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
@@ -74,6 +76,32 @@ def teams_to_refine(names=None):
 
 def show(g): s = G[g]; return f"{s['species']} @ {s['item'] or '-'} ({s['nature']}): {' / '.join(s['moves'])}"
 
+def cells_for(gids):
+    miss = sorted({g for g in gids if not has_cells(g)})
+    print(f"{len(miss)} sets need cells", flush=True)
+    for tr in ('0', '1'):
+        if miss: subprocess.run([sys.executable, 'grid_pool.py'] + miss, cwd=os.path.join(HERE, 'mx'), check=True, env=dict(os.environ, TR=tr))
+
+def final_check(state, T, B):
+    """the safeguard: each changed team against its original on fresh games, since small accepted losses can add up"""
+    changed = {n: (T[n], st_['team']) for n, st_ in state.items() if st_['path']}
+    if changed:
+        both = list({C.key_s(t): t for a, b in changed.values() for t in (a, b)}.values())
+        print(time.strftime('%I:%M %p'), f"final check: {len(changed)} changed teams against their originals, {B} batches", flush=True)
+        scr = dict(zip(map(C.key_s, both), E.search_many(both, 85000))); thr = int(os.environ.get('TS_THREADS', 3))
+        items = [(C.key_s(t), b) for t in both for b in range(B)]; by = {C.key_s(t): t for t in both}
+        res = dict(zip(items, E.parallel(lambda kb: PM.evaluate_team(by[kb[0]], scr[kb[0]]['chosen'], 885000 + 50 * kb[1], thr), items, 'final check')))
+        sc = lambda t: sum(res[(C.key_s(t), i)]['score'] for i in range(B)) / B
+        for n, (a, b) in changed.items():
+            m, se = C.pooled([(res[(C.key_s(a), i)], res[(C.key_s(b), i)]) for i in range(B)])
+            state[n]['total'] = dict(diff=m, se=se, before=sc(a), after=sc(b))
+            print(f"  {n}: refined vs original on fresh games {100 * m:+.1f} ± {100 * se:.1f} ({100 * sc(a):.1f} -> {100 * sc(b):.1f})", flush=True)
+    print('\nrefined teams (accurate moves before -> after):')
+    for n, s in state.items():
+        tot = f" (overall {100 * s['total']['diff']:+.1f} ± {100 * s['total']['se']:.1f})" if s.get('total') else ''
+        print(f"  {n}: {s['accurate0']} -> {accurate(s['team'])} of 24{tot}; " + (', '.join(f"{p['out']} -> {p['into']} ({100 * p['diff']:+.1f} ± {100 * p['se']:.1f})" for p in s['path']) or 'no change'))
+        for g in s['team']: print(f"      {show(g)}")
+
 def run(B, names):
     T = teams_to_refine(names); state = {n: dict(team=t, path=[], done=False, accurate0=accurate(t)) for n, t in T.items()}
     print(time.strftime('%I:%M %p'), f"{E.sim()}: {len(T)} teams, accept if gain + {Z} SE >= 0, {B} batches", flush=True)
@@ -112,28 +140,18 @@ def run(B, names):
                 print(f"  {n}: CHANGE {x[1]} -> {x[2]} (+{d} accurate, {100 * m:+.1f} ± {100 * se:.1f})", flush=True)
             else: state[n]['done'] = True; print(f"  {n}: no change", flush=True)
         json.dump(state, open(OUT, 'w'), indent=1)
-    changed = {n: (T[n], st_['team']) for n, st_ in state.items() if st_['path']}   # the safeguard: small accepted losses can add up
-    if changed:
-        both = list({C.key_s(t): t for a, b in changed.values() for t in (a, b)}.values())
-        scr = dict(zip(map(C.key_s, both), E.search_many(both, 79000))); thr = int(os.environ.get('TS_THREADS', 3))
-        items = [(C.key_s(t), b) for t in both for b in range(B)]; by = {C.key_s(t): t for t in both}
-        res = dict(zip(items, E.parallel(lambda kb: PM.evaluate_team(by[kb[0]], scr[kb[0]]['chosen'], 879000 + 50 * kb[1], thr), items, 'final check')))
-        for n, (a, b) in changed.items():
-            m, se = C.pooled([(res[(C.key_s(a), i)], res[(C.key_s(b), i)]) for i in range(B)])
-            state[n]['total'] = dict(diff=m, se=se); print(f"  {n}: refined vs original on fresh games {100 * m:+.1f} ± {100 * se:.1f}", flush=True)
-    print('\nrefined teams (accurate moves before -> after):')
-    for n, s in state.items():
-        tot = f" (overall {100 * s['total']['diff']:+.1f} ± {100 * s['total']['se']:.1f})" if s.get('total') else ''
-        print(f"  {n}: {s['accurate0']} -> {accurate(s['team'])} of 24{tot}; " + (', '.join(f"{p['out']} -> {p['into']} ({100 * p['diff']:+.1f} ± {100 * p['se']:.1f})" for p in s['path']) or 'no change'))
-        for g in s['team']: print(f"      {show(g)}")
+    final_check(state, T, B)
     json.dump(state, open(OUT, 'w'), indent=1)
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
-    if cmd == 'cells':
-        names = sys.argv[2].split(',') if len(sys.argv) > 2 else None
-        miss = sorted({x[2] for t in teams_to_refine(names).values() for x in candidates(t) if not has_cells(x[2])})
-        print(f"{len(miss)} sets need cells", flush=True)
-        for tr in ('0', '1'):
-            if miss: subprocess.run([sys.executable, 'grid_pool.py'] + miss, cwd=os.path.join(HERE, 'mx'), check=True, env=dict(os.environ, TR=tr))
+    if cmd == 'cells': cells_for({x[2] for t in teams_to_refine(sys.argv[2].split(',') if len(sys.argv) > 2 else None).values() for x in candidates(t)})
     elif cmd == 'run': run(int(sys.argv[2]) if len(sys.argv) > 2 else 4, sys.argv[3].split(',') if len(sys.argv) > 3 else None)
+    elif cmd == 'final':                                               # only the final check, on a finished refinement's state
+        state = json.load(open(OUT)); T = teams_to_refine(); T.update(teams_to_refine([n for n in state if n not in T]) if set(state) - set(T) else {})
+        for n, s in state.items():                                     # the original, replayed through the accepted swaps, is the refined team
+            t = list(T[n])
+            for p in s['path']: t[t.index(p['out'])] = p['into']
+            assert t == s['team'] and accurate(T[n]) == s['accurate0'], n
+        cells_for({g for n, s in state.items() if s['path'] for g in T[n] + s['team']})
+        final_check(state, T, int(sys.argv[2]) if len(sys.argv) > 2 else 4); json.dump(state, open(OUT, 'w'), indent=1)

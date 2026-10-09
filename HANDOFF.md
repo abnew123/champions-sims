@@ -918,9 +918,12 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     old rule for both sides (then v24 = v23 exactly: the 20 check battles identical), `s0` / `s1` for one side. The value does not see an
     unused stone (an un-evolved holder is valued as its base forme), so the planner holds the Mega only when the one-turn playout makes
     the base form better now, or gives it to the partner because this turn's cells say so. Measured on the 2,400 pool-vs-pool starts
-    (sym2): strength flat, the choosing side +0.3 ± 0.6 / +0.1 ± 0.6; of 2,168 stone holders on the choosing side 35% delayed the Mega
-    (median 2 turns) and 24% never evolved, of which 446 were two-stone teams whose other holder took it, 54 left the field first and
-    only 24 (1%) stayed active to the end un-evolved; so no "Mega later" feature for now. Cost: about +20% per game while a stone is
+    (sym2): strength flat, the choosing side +0.3 ± 0.6 / +0.1 ± 0.6; of 4,323 stone holders on the choosing side (both runs) 17%
+    delayed the Mega (median 2 turns) and 5% never evolved (the partner took it 1%, left the field first 3%, stayed in un-evolved
+    0.9%); about the same for every Mega (Raichu 20% / 5%, Garchomp 22% / 5%, Salamence 12% / 5%, Staraptor 18% / 6%, Swampert 12% /
+    2%, Metagross 16% / 2%, Blastoise 6% / 6%; a first tally that also counted Mega targets read 35% / 24% and was corrected); so no
+    "Mega later" feature for now. Results differ from the always-Mega run in 9% of games with one side choosing (0.4% of games with no
+    stone on that side, 8.8% with one holder, 39% with two), noise around an unchanged mean except on two-stone fours. Cost: about +20% per game while a stone is
     unused (the Trick Room six's 20 check battles 1.5 -> 2.6 s per game with opposing stones in play). Effects: two-stone teams
     (Frankfurt-239's Swampert / Metagross, Frankfurt-156's Garchomp / Golisopod) now pick which holder evolves per game; base Raichu can
     keep Lightning Rod; the Trick Room six changes little (Blastoise delayed its Mega in 6 of 20 check games). TR sheet makes t1sim.js

@@ -252,7 +252,7 @@ pub fn feats_x(b: &mut Battle, cfg: &Cfg, bench: bool) -> Vec<f64> {
     }
     v
 }
-/// RACE_SUPPORT=classes (2026-10-10, TR sheet relaying the user: fit the support credits instead of picking them): one feature per
+/// RACE_SUPPORT=classes (2026-10-09, TR sheet relaying the user: fit the support credits instead of picking them): one feature per
 /// support class, the side difference of the number of race units (actives, or actives + bench under RACE_BENCH) with that class
 /// usable now, under the same availability conditions the race uses (Tailwind not up and the side slower, Trick Room would help,
 /// screens not up, Aurora Veil in snow, Fake Out on a fresh unit). Linear in the position, so a fit on real outcomes gives each class
@@ -420,7 +420,7 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data, bench: bool) -> [f64; 4] {
     let prio_edge: f64 = if !prio_on { 0.0 } else { (0..n).map(|i| {
         let best = (0..opts[i].len()).filter(|&k| oprio[i][k] > 0).map(|k| (0..n).map(|j| if b.p(units[j]).maxhp > 0 { opts[i][k][j] / b.p(units[j]).maxhp as f64 } else { 0.0 }).fold(0.0, f64::max)).fold(0.0, f64::max).min(1.0);
         if side(i) == 0 { best } else { -best } }).sum() };
-    // RACE_SUPPORT (2026-10-10, the user: price a support's remaining non-damaging actions): per unit, its usable support moves with a
+    // RACE_SUPPORT (2026-10-09, the user: price a support's remaining non-damaging actions): per unit, its usable support moves with a
     // credit in KO units; in the race a unit supports instead of attacking when its best support credit beats its best hit's score,
     // one-shot moves (Fake Out, Tailwind, Trick Room, screens, Parting Shot) once, the rest each turn; credits count 1/k like KOs
     let sup_on = race_support();

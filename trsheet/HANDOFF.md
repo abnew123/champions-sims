@@ -188,6 +188,10 @@ their tabs by core group with the archetype name kept (root HANDOFF); not starte
    its strongest answer: one card read 43% instead of 8%). Result: ladder-weighted 48.1% when both sides pick (Version 22: 49.4%),
    70.4% against the usual fours; only Other Sun changes its four (back Torkoal + Kingambit); Indeedee is still never brought, Healing
    Wish or not. Published as Version 23 on 2026-10-09 (the user's go-ahead); sim.json `current` is now v23.
+7. **Optional Mega Evolution (asked of Battle sim, 2026-10-09).** The full-battle planner (plan.rs) and the turn-one step (t1sim.js)
+   always Mega Evolve a stone holder the first time it moves. The user finds that wrong: base Raichu (Lightning Rod, Fake Out) and base
+   Staraptor (cycling Intimidate) are real ladder lines, and with two stones the lead's Mega locks the other out. Waiting on Battle sim
+   for no-Mega options and a value feature for an unused Mega; then add the same to t1sim (its scorer folds Megas into the base species).
 
 ## Running full battles (the sheet thread's main tool)
 

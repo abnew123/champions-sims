@@ -730,13 +730,13 @@
    "Pelipper",
    "Indeedee-F"
   ],
-  "v": 0.72,
+  "v": 0.719,
   "replay_v": 0.72,
   "answers": [
    {
     "six": "Arcanine-Hisui, Indeedee, Metagross, Milotic, Salamence, Sneasler",
     "weight": 0.8,
-    "their_four": "Milotic+Salamence+Indeedee+Sneasler",
+    "their_four": "Indeedee+Salamence+Milotic+Sneasler",
     "v": 0.75
    },
    {
@@ -754,8 +754,8 @@
    {
     "six": "Arcanine-Hisui, Indeedee-F, Metagross, Milotic, Salamence, Sneasler",
     "weight": 0.029,
-    "their_four": "Arcanine-Hisui+Metagross+Salamence+Sneasler",
-    "v": 0.75
+    "their_four": "Metagross+Milotic+Arcanine-Hisui+Sneasler",
+    "v": 0.719
    }
   ]
  },

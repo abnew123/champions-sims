@@ -241,6 +241,14 @@ give; "<trainer> withdrew X!" frees X's slot; a game closes when Pokemon on neit
 Each target's evidence and VOD time is kept in meta['aims'] for spot checks. The popup-to-slot mapping was checked against the video by the user
 (M4 G1 turn 1: Night Slash on the right-side Tyranitar, Wood Hammer on the left-side Milotic, both as read).
 
+## Engine version
+
+The live and broadcast modes use champ-battle-v22 (Battle sim, 2026-10-09) with engine_data_full: on 16 regional positions it gives v17's
+values and mixes exactly, and it handles mechanics v17 skipped (Static, Snow Cloak, Own Tempo, slot conditions such as Wish and Healing
+Wish, more berries, Rest, Salt Cure, ...). Still unsupported and seen in the bar's positions: Baton Pass (7% of day-1 regional positions),
+Encore's override, Ally Switch, Gravity, Curse, Unseen Fist, Entrainment; reported to Battle sim. reads.py and uncertain.py stay on v18 so
+their committed results reproduce.
+
 ## Process names (the user asked, 2026-10-06)
 
 Every process this thread starts must show as `evalbar-<program>` in `top` and in Stats (which the user watches; it lists `ps -Aceo comm`), so

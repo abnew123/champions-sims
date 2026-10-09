@@ -116,9 +116,14 @@ def plan(sheet, arch, L):
         if inn: parts.append((share, f"{mine(m)} comes in around turn {round(wmean(inn))}" + ('' if share >= 0.9 else f" ({pct(share)} of games)")))
     if parts: lines.append('; '.join(p for _, p in sorted(parts, key=lambda x: -x[0])) + '.')
     # Mega timing (whichever of mine carries a stone)
-    mega = [(w, s['t']) for w, g, _ in L for s in g['states'] for x in acts(s['a']) if x[4]]
-    if mega:
-        who_m = next((x[0] for w, g, _ in L for s in g['states'] for x in acts(s['a']) if x[4]), None)
+    megas = [(w, s['t'], x[0]) for w, g, _ in L for s in g['states'] for x in acts(s['a']) if x[4]]
+    holders = collections.Counter()
+    for w, _, m in megas: holders[m] += w
+    if len(holders) > 1:                                          # two stone holders in the four: who Mega Evolves, how often
+        lines.append('Mega Evolves: ' + ', '.join(f"{mine(m)} {pct(min(1.0, v / W))} of games" for m, v in holders.most_common()) + '.')
+    mega = [(w, t) for w, t, _ in megas]
+    if mega and len(holders) == 1:
+        who_m = megas[0][2]
         share = min(1.0, sum(w for w, _ in mega) / W); tt = sorted(t for _, t in mega); med = tt[len(tt) // 2]
         lines.append(f"{mine(who_m)} Mega Evolves on turn {med}" + ('' if share >= 0.9 else f" or later ({pct(share)} of games)") + '.' if med == 1 else
                      f"{mine(who_m)} Mega Evolves around turn {med}" + ('' if share >= 0.9 else f" ({pct(share)} of games)") + '.')

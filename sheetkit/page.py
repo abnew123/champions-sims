@@ -32,8 +32,10 @@ def their(n): return THEIR_NAMES.get(n, n)
 def pair_name(p): return ' + '.join(their(x) for x in p.split(' + '))
 
 def act(sheet, s):
-    """'Mon: Move -> Target' (a turn-one action from the sim) -> how the page writes it"""
+    """'Mon: Move -> Target' (a turn-one action from the sim) -> how the page writes it. ' (Mega)' at the end marks which of two
+    stone holders in the lead Mega Evolves (with one stone in the lead it always does, unmarked)"""
     L = sheet.cfg.get('lines', {}); mine = lambda n: sheet.my_names.get(n, n)
+    if s.endswith(' (Mega)'): return 'Mega Evolve + ' + act(sheet, s[:-7])
     mon, a = s.split(': ', 1); mv, _, tgt = a.partition(' -> ')
     if mv == 'switch': return 'switch &rarr; ' + mine(tgt)
     for r in L.get('rewrites', []):                              # e.g. the sim never offers Iron Head where it is not super effective

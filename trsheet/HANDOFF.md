@@ -192,6 +192,9 @@ their tabs by core group with the archetype name kept (root HANDOFF); not starte
    always Mega Evolve a stone holder the first time it moves. The user finds that wrong: base Raichu (Lightning Rod, Fake Out) and base
    Staraptor (cycling Intimidate) are real ladder lines, and with two stones the lead's Mega locks the other out. Waiting on Battle sim
    for no-Mega options and a value feature for an unused Mega; then add the same to t1sim (its scorer folds Megas into the base species).
+   No Trick Room Six rerun for it (the user, 2026-10-09: Blastoise's base ability does little and nothing else holds a stone; cycling
+   Intimidate is bad against this team, so the opponents' Salamence / Staraptor would not stay base). It matters for the two-stone
+   Frankfurt sheets and teams like them.
 
 ## Running full battles (the sheet thread's main tool)
 

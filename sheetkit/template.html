@@ -330,6 +330,7 @@ const bar=document.getElementById("lseg"), panel=document.getElementById("lpanel
 const line=(p,l)=>`<div class="lline"><span class="lpct">${l[0]}%</span><span class="la1"><span class="lmon">${p.lead[0]}</span>${l[1]}</span><span class="la2"><span class="lmon">${p.lead[1]}</span>${l[2]}</span></div>`;
 function draw(k){
   const a=L.find(x=>x.k===k)||L[0];
+  if(!a){panel.innerHTML=`<p class="lempty">The lead cards appear here once the sims have run.</p>`; return;}   // a sheet built before its runs
   panel.innerHTML=a.picks.map(p=>`<div class="lpick">
     <div class="lphead">${p.when?`<span class="lpwhen">${p.when}</span>`:""}<span class="lplead">${p.lead.join(" + ")}</span>
       <span class="lpback">back: ${p.back}</span><span class="lpv"><b>${p.v[0]}%</b> / ${p.v[1]}%</span>

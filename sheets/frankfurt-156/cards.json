@@ -1,0 +1,32 @@
+{
+ "Basculegion": {
+  "role": "Attacker",
+  "note": "Choice Scarf: 214 Speed, locked into its move until it switches out. Adaptability doubles its Water and Ghost moves; Last Respects gains 50 power for each of your fainted Pokémon, so it hits hardest late. Flip Turn brings Pelipper and its rain back in.",
+  "src": "Most common Jolly spread on the Showdown ladder (21%)."
+ },
+ "Pelipper": {
+  "role": "Setter",
+  "note": "Sets rain when it comes in: Water moves do half again as much, and Hurricane never misses (in sun it hits half the time). Weather Ball is a 100-power Water move in rain. Wide Guard blocks spread moves on both of you; Focus Sash keeps it alive through one hit from full HP.",
+  "src": "Most common Modest spread on the Showdown ladder (19%)."
+ },
+ "Garchomp": {
+  "role": "Attacker",
+  "note": "The special Mega: Levitate after Mega Evolution, so Ground moves miss it. Only one Pokémon can Mega Evolve per battle; in a four with Golisopod, whichever does it first is the Mega.",
+  "src": "Most common Modest Mega Garchomp Z spread on the Showdown ladder (32%)."
+ },
+ "Archaludon": {
+  "role": "Attacker",
+  "note": "Stamina raises its Defense each time it is hit. In rain, Electro Shot fires at once and raises its Special Attack; outside rain it charges a turn first.",
+  "src": "The most common Modest spread on the Showdown ladder, though Modest spreads are scattered (3%)."
+ },
+ "Farigiraf": {
+  "role": "Setter",
+  "note": "Trick Room for the slow mode with Golisopod. Armor Tail blocks their priority moves, Fake Out included, on it and its partner.",
+  "src": "Most common Bold spread on the Showdown ladder (6%)."
+ },
+ "Golisopod": {
+  "role": "Attacker",
+  "note": "Mega Golisopod has Tough Claws, which powers up its contact moves; before it Mega Evolves, Emergency Exit switches it out below half HP. Sucker Punch only works if the target attacks. Only one Pokémon can Mega Evolve per battle; in a four with Garchomp, whichever does it first is the Mega.",
+  "src": "Most common Adamant Mega Golisopod spread on the Showdown ladder (29%)."
+ }
+}

@@ -64,8 +64,9 @@ def lead_card(sheet, arch, pick, plans, note):
     return card
 
 def leads_data(sheet, picks=None, t1=None, notes=None, guide=None):
-    picks = picks if picks is not None else rj(sheet.p('picks.json'))['picks']
-    plans = (t1 if t1 is not None else rj(sheet.p('t1.json')))['plans']
+    have = lambda f: os.path.exists(sheet.p(f))                    # before the runs: no picks or plans yet, so the Leads tabs are empty
+    picks = picks if picks is not None else (rj(sheet.p('picks.json'))['picks'] if have('picks.json') else {})
+    plans = (t1 if t1 is not None else (rj(sheet.p('t1.json')) if have('t1.json') else {'plans': {}}))['plans']
     notes = notes if notes is not None else (rj(sheet.p('notes.json')) if os.path.exists(sheet.p('notes.json')) else {})
     guide = guide if guide is not None else (rj(sheet.p('guide.json')) if os.path.exists(sheet.p('guide.json')) else {})
     out = []

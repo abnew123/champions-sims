@@ -1,0 +1,900 @@
+{
+ "plans": {
+  "Balance: Gholdengo + Incineroar + Raichu + Rillaboom": {
+   "lines": [
+    "Turn two: attack with both 52%, one switch 37%.",
+    "Indeedee comes in around turn 3; Archaludon comes in around turn 3.",
+    "Swampert Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.365,
+     "attack with both": 0.517,
+     "a Protect": 0.096,
+     "double switch": 0.022
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.672,
+    "games": 192
+   }
+  },
+  "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)": {
+   "lines": [
+    "Turn two: attack with both 55%, one switch 36% (mostly Pelipper out for Indeedee).",
+    "Indeedee comes in around turn 3; Archaludon comes in around turn 4 (89% of games).",
+    "Swampert Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.554,
+     "one switch": 0.36,
+     "a Protect": 0.056,
+     "double switch": 0.031
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.742,
+    "games": 192
+   }
+  },
+  "Rain + Sun: Archaludon + Grimmsnarl + Pelipper": {
+   "lines": [
+    "Turn two: attack with both 73%, one switch 22%.",
+    "Swampert comes in around turn 4; Pelipper comes in around turn 5.",
+    "Swampert Mega Evolves around turn 3.",
+    "Hardest when they bring Charizard (48% won)."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.727,
+     "a Protect": 0.054,
+     "one switch": 0.218
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.18,
+    "win": 0.61,
+    "games": 192
+   }
+  },
+  "Rain: Archaludon + Pelipper (no Grimmsnarl)": {
+   "lines": [
+    "Turn two: attack with both 69%, one switch 28% (mostly Grimmsnarl out for Swampert).",
+    "Swampert comes in around turn 4; Pelipper comes in around turn 5 (89% of games).",
+    "Swampert Mega Evolves around turn 3.",
+    "With Trick Room up on turn two you win 73%; without it 89%."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.686,
+     "one switch": 0.276,
+     "a Protect": 0.035,
+     "double switch": 0.002
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.127,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.48,
+    "win": 0.873,
+    "games": 192
+   }
+  },
+  "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler": {
+   "lines": [
+    "Turn two: attack with both 79%, one switch 14%.",
+    "Metagross comes in around turn 4 (70% of games); Indeedee comes in around turn 4 (70% of games).",
+    "Swampert Mega Evolves on turn 1.",
+    "Hardest when they bring Armarouge (70% won)."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.138,
+     "attack with both": 0.79,
+     "double switch": 0.015,
+     "a Protect": 0.057
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.137,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.55,
+    "win": 0.874,
+    "games": 192
+   }
+  },
+  "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)": {
+   "lines": [
+    "Turn two: attack with both 78%, one switch 18%.",
+    "Archaludon comes in around turn 3 (63% of games); Indeedee comes in around turn 4 (61% of games).",
+    "Swampert Mega Evolves on turn 1.",
+    "Losing Swampert by turn three (21% of games) drops you to 61%: keep it safe early."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.182,
+     "attack with both": 0.777,
+     "a Protect": 0.039,
+     "double switch": 0.002
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.084,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.25,
+    "win": 0.868,
+    "games": 192
+   }
+  },
+  "Sun: Farigiraf + Garchomp + Incineroar + Sylveon": {
+   "lines": [
+    "Turn two: attack with both 49%, one switch 47% (mostly Indeedee out for Pelipper).",
+    "Archaludon comes in around turn 4; Pelipper comes in around turn 4.",
+    "Metagross Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "double switch": 0.04,
+     "one switch": 0.466,
+     "attack with both": 0.49,
+     "a Protect": 0.004
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.106,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 1.38,
+    "win": 0.745,
+    "games": 192
+   }
+  },
+  "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)": {
+   "lines": [
+    "Turn two: attack with both 53%, one switch 44%.",
+    "Pelipper comes in around turn 3; Archaludon comes in around turn 3.",
+    "Swampert Mega Evolves on turn 1.",
+    "Losing Swampert by turn three (13% of games) drops you to 64%: keep it safe early.",
+    "Hardest when they bring Charizard (65% won), then Sylveon (74%)."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.437,
+     "a Protect": 0.029,
+     "attack with both": 0.534
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.031,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.61,
+    "win": 0.858,
+    "games": 192
+   }
+  },
+  "Sand: Excadrill + Salamence + Sneasler + Tyranitar": {
+   "lines": [
+    "Turn two: one switch 50% (mostly Grimmsnarl out for Pelipper), attack with both 44%.",
+    "Pelipper comes in around turn 3; Archaludon comes in around turn 3 (80% of games).",
+    "Swampert Mega Evolves on turn 1.",
+    "Hardest when they bring Salamence (65% won)."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.438,
+     "one switch": 0.496,
+     "a Protect": 0.058,
+     "double switch": 0.007
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.827,
+    "games": 192
+   }
+  },
+  "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)": {
+   "lines": [
+    "Turn two: one switch 51%, attack with both 46%.",
+    "Archaludon comes in around turn 3; Pelipper comes in around turn 4.",
+    "Metagross Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.508,
+     "attack with both": 0.458,
+     "a Protect": 0.034
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.686,
+    "games": 160
+   }
+  },
+  "Trick Room: Delphox + Floette + Incineroar + Sinistcha": {
+   "lines": [
+    "Turn two: attack with both 73%, one switch 25%.",
+    "Archaludon comes in around turn 4; Indeedee comes in around turn 3.",
+    "Swampert Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.729,
+     "one switch": 0.25,
+     "a Protect": 0.021
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.24,
+    "win": 0.84,
+    "games": 192
+   }
+  },
+  "Trick Room: Delphox + Incineroar + Sinistcha (no Floette)": {
+   "lines": [
+    "Turn two: attack with both 67%, one switch 26% (mostly Indeedee out for Swampert).",
+    "Indeedee comes in around turn 3; Swampert comes in around turn 4.",
+    "Swampert Mega Evolves around turn 4 (89% of games).",
+    "Hardest when they bring Blastoise (54% won)."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.666,
+     "one switch": 0.255,
+     "a Protect": 0.079
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.44,
+    "win": 0.791,
+    "games": 160
+   }
+  },
+  "Rain + Sun: Archaludon + Golisopod + Politoed": {
+   "lines": [
+    "Turn two: attack with both 72%, one switch 22%.",
+    "Pelipper comes in around turn 4; Swampert comes in around turn 4.",
+    "Swampert Mega Evolves around turn 4."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.216,
+     "attack with both": 0.721,
+     "a Protect": 0.064
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.26,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.63,
+    "win": 0.758,
+    "games": 192
+   }
+  },
+  "Perish: Archaludon + Politoed (no Golisopod)": {
+   "lines": [
+    "Turn two: attack with both 75%, a Protect 20%.",
+    "Indeedee comes in around turn 3; Pelipper comes in around turn 5 (87% of games).",
+    "Metagross Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.751,
+     "one switch": 0.052,
+     "a Protect": 0.197
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.662,
+    "games": 192
+   }
+  },
+  "Snow: Froslass + Kingambit + Rillaboom": {
+   "lines": [
+    "Turn two: one switch 47%, attack with both 36%, a Protect 15%.",
+    "Archaludon comes in around turn 3; Pelipper comes in around turn 3.",
+    "Metagross Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.473,
+     "attack with both": 0.356,
+     "a Protect": 0.147,
+     "double switch": 0.025
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.547,
+    "games": 192
+   }
+  },
+  "Tailwind: Glimmora + Rillaboom + Volcarona (no Basculegion)": {
+   "lines": [
+    "Turn two: one switch 59%, attack with both 37%.",
+    "Pelipper comes in around turn 3; Indeedee comes in around turn 3 (90% of games).",
+    "Swampert Mega Evolves on turn 1.",
+    "Hardest when they bring Salamence (43% won)."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.592,
+     "attack with both": 0.369,
+     "a Protect": 0.031,
+     "double switch": 0.008
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.591,
+    "games": 96
+   }
+  },
+  "Indeedee TR: Armarouge + Indeedee-F": {
+   "lines": [
+    "Turn two: attack with both 81%, one switch 16%.",
+    "Archaludon comes in around turn 4 (70% of games); Metagross comes in around turn 4 (68% of games).",
+    "Swampert Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.813,
+     "one switch": 0.155,
+     "double switch": 0.019,
+     "a Protect": 0.013
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.208,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.66,
+    "win": 0.855,
+    "games": 192
+   }
+  },
+  "Sun: Charizard + Whimsicott": {
+   "lines": [
+    "Turn two: attack with both 53%, one switch 45%.",
+    "Archaludon comes in around turn 3; Pelipper comes in around turn 3.",
+    "Swampert Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.533,
+     "one switch": 0.452,
+     "a Protect": 0.015
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.699,
+    "games": 128
+   }
+  },
+  "Balance: Dragonite + Floette + Incineroar": {
+   "lines": [
+    "Turn two: attack with both 60%, one switch 32% (mostly Pelipper out for Metagross).",
+    "Metagross comes in around turn 4; Indeedee comes in around turn 4.",
+    "Metagross Mega Evolves around turn 3."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.597,
+     "one switch": 0.322,
+     "a Protect": 0.08
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.545,
+    "games": 192
+   }
+  },
+  "Indeedee TR: Metagross + Milotic + Sneasler": {
+   "lines": [
+    "Turn two: one switch 50%, attack with both 44%.",
+    "Pelipper comes in around turn 3; Indeedee comes in around turn 4 (78% of games).",
+    "Metagross Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.5,
+     "attack with both": 0.438,
+     "a Protect": 0.062
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.906,
+    "games": 32
+   }
+  },
+  "Indeedee TR: Camerupt + Farigiraf": {
+   "lines": [
+    "Turn two: attack with both 62%, one switch 22% (mostly Swampert out for Archaludon).",
+    "Archaludon comes in around turn 3; Pelipper comes in around turn 4.",
+    "Swampert Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.617,
+     "a Protect": 0.066,
+     "one switch": 0.221,
+     "double switch": 0.096
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.896,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 1.46,
+    "win": 0.619,
+    "games": 192
+   }
+  },
+  "Sand: Excadrill + Tyranitar": {
+   "lines": [
+    "Turn two: attack with both 59%, one switch 35%.",
+    "Swampert comes in around turn 3; Pelipper comes in around turn 3.",
+    "Swampert Mega Evolves around turn 3."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.347,
+     "attack with both": 0.593,
+     "a Protect": 0.06
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.04,
+    "win": 0.829,
+    "games": 192
+   }
+  },
+  "Perish: Gengar + Kommo-o + Rillaboom": {
+   "lines": [
+    "Turn two: attack with both 48%, one switch 42% (mostly Pelipper out for Indeedee).",
+    "Indeedee comes in around turn 3; Archaludon comes in around turn 4.",
+    "Swampert Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.423,
+     "attack with both": 0.479,
+     "a Protect": 0.031,
+     "double switch": 0.067
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.636,
+    "games": 192
+   }
+  },
+  "Indeedee TR: Basculegion + Whimsicott": {
+   "lines": [
+    "Turn two: attack with both 66%, one switch 30%.",
+    "Pelipper comes in around turn 3; Archaludon comes in around turn 3.",
+    "Swampert Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.302,
+     "attack with both": 0.656,
+     "a Protect": 0.042
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.69,
+    "games": 128
+   }
+  },
+  "Other Tailwind": {
+   "lines": [
+    "Turn two: one switch 51% (mostly Pelipper out for Archaludon), attack with both 42%.",
+    "Archaludon comes in around turn 3; Indeedee comes in around turn 3 (90% of games).",
+    "Metagross Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.508,
+     "attack with both": 0.418,
+     "a Protect": 0.052,
+     "double switch": 0.022
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.697,
+    "games": 192
+   }
+  },
+  "Other Sun": {
+   "lines": [
+    "Turn two: one switch 56%, attack with both 34%.",
+    "Pelipper comes in around turn 3; Archaludon comes in around turn 4.",
+    "Metagross Mega Evolves on turn 1.",
+    "Losing Metagross by turn three (25% of games) drops you to 38%: keep it safe early.",
+    "Hardest when they bring Incineroar (47% won)."
+   ],
+   "facts": {
+    "turn2": {
+     "double switch": 0.062,
+     "one switch": 0.557,
+     "attack with both": 0.342,
+     "a Protect": 0.039
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.296,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.69,
+    "win": 0.597,
+    "games": 192
+   }
+  },
+  "Other Indeedee TR": {
+   "lines": [
+    "Turn two: attack with both 61%, one switch 35% (mostly Pelipper out for Grimmsnarl).",
+    "Archaludon comes in around turn 4 (83% of games); Grimmsnarl comes in around turn 4 (79% of games).",
+    "Swampert Mega Evolves on turn 1.",
+    "Losing Swampert by turn three (18% of games) drops you to 59%: keep it safe early.",
+    "Hardest when they bring Sneasler (66% won)."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.354,
+     "attack with both": 0.605,
+     "a Protect": 0.034,
+     "double switch": 0.007
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.031,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.25,
+    "win": 0.789,
+    "games": 192
+   }
+  },
+  "Other Rain": {
+   "lines": [
+    "Turn two: attack with both 78%, one switch 17%.",
+    "Archaludon comes in around turn 3; Pelipper comes in around turn 4.",
+    "Swampert Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.778,
+     "one switch": 0.174,
+     "a Protect": 0.048
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.764,
+    "games": 192
+   }
+  },
+  "Other Balance": {
+   "lines": [
+    "Turn two: one switch 48%, attack with both 37%, a Protect 12%.",
+    "Archaludon comes in around turn 3; Pelipper comes in around turn 3.",
+    "Swampert Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.476,
+     "double switch": 0.036,
+     "attack with both": 0.37,
+     "a Protect": 0.118
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.62,
+    "games": 192
+   }
+  },
+  "Other Snow": {
+   "lines": [
+    "Turn two: attack with both 47%, one switch 44% (mostly Archaludon out for Pelipper).",
+    "Pelipper comes in around turn 3; Indeedee comes in around turn 3.",
+    "Swampert Mega Evolves on turn 1.",
+    "Losing Swampert by turn three (22% of games) drops you to 23%: keep it safe early."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.441,
+     "attack with both": 0.472,
+     "a Protect": 0.086
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.567,
+    "games": 192
+   }
+  },
+  "Other Trick Room": {
+   "lines": [
+    "Turn two: attack with both 49%, one switch 41%.",
+    "Archaludon comes in around turn 3; Indeedee comes in around turn 3.",
+    "Swampert Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.409,
+     "attack with both": 0.493,
+     "double switch": 0.081,
+     "a Protect": 0.018
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.55,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 1.22,
+    "win": 0.849,
+    "games": 192
+   }
+  },
+  "Other Perish": {
+   "lines": [
+    "Turn two: attack with both 48%, one switch 46%.",
+    "Archaludon comes in around turn 3; Pelipper comes in around turn 3.",
+    "Swampert Mega Evolves on turn 1.",
+    "Hardest when they bring Kingambit (72% won)."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.482,
+     "one switch": 0.459,
+     "a Protect": 0.048,
+     "double switch": 0.011
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.823,
+    "games": 96
+   }
+  }
+ },
+ "tells": [
+  {
+   "them": "Sneasler",
+   "mine": [
+    [
+     "Archaludon",
+     -4
+    ]
+   ],
+   "teams": 51
+  },
+  {
+   "them": "Garchomp",
+   "mine": [
+    [
+     "Archaludon",
+     8
+    ],
+    [
+     "Grimmsnarl",
+     4
+    ]
+   ],
+   "teams": 27
+  },
+  {
+   "them": "Volcarona",
+   "mine": [
+    [
+     "Pelipper",
+     13
+    ],
+    [
+     "Indeedee",
+     -7
+    ]
+   ],
+   "teams": 12
+  },
+  {
+   "them": "Charizard",
+   "mine": [
+    [
+     "Metagross",
+     5
+    ],
+    [
+     "Archaludon",
+     -7
+    ]
+   ],
+   "teams": 15
+  },
+  {
+   "them": "Golisopod",
+   "mine": [
+    [
+     "Pelipper",
+     11
+    ]
+   ],
+   "teams": 13
+  },
+  {
+   "them": "Grimmsnarl",
+   "mine": [
+    [
+     "Grimmsnarl",
+     7
+    ]
+   ],
+   "teams": 6
+  },
+  {
+   "them": "Venusaur",
+   "mine": [
+    [
+     "Metagross",
+     12
+    ]
+   ],
+   "teams": 3
+  },
+  {
+   "them": "Staraptor",
+   "mine": [
+    [
+     "Pelipper",
+     11
+    ],
+    [
+     "Metagross",
+     10
+    ],
+    [
+     "Swampert",
+     -11
+    ]
+   ],
+   "teams": 4
+  },
+  {
+   "them": "Swampert",
+   "mine": [
+    [
+     "Grimmsnarl",
+     9
+    ],
+    [
+     "Pelipper",
+     -18
+    ]
+   ],
+   "teams": 4
+  },
+  {
+   "them": "Floette",
+   "mine": [
+    [
+     "Metagross",
+     12
+    ],
+    [
+     "Indeedee",
+     9
+    ],
+    [
+     "Grimmsnarl",
+     -7
+    ],
+    [
+     "Pelipper",
+     -12
+    ],
+    [
+     "Archaludon",
+     -26
+    ]
+   ],
+   "teams": 4
+  },
+  {
+   "them": "Torkoal",
+   "mine": [
+    [
+     "Swampert",
+     8
+    ]
+   ],
+   "teams": 3
+  },
+  {
+   "them": "Whimsicott",
+   "mine": [
+    [
+     "Metagross",
+     -6
+    ]
+   ],
+   "teams": 7
+  },
+  {
+   "them": "Metagross",
+   "mine": [
+    [
+     "Pelipper",
+     20
+    ],
+    [
+     "Metagross",
+     8
+    ],
+    [
+     "Grimmsnarl",
+     -14
+    ]
+   ],
+   "teams": 4
+  },
+  {
+   "them": "Primarina",
+   "mine": [
+    [
+     "Archaludon",
+     17
+    ],
+    [
+     "Indeedee",
+     -8
+    ]
+   ],
+   "teams": 3
+  },
+  {
+   "them": "Blastoise",
+   "mine": [
+    [
+     "Swampert",
+     -11
+    ],
+    [
+     "Pelipper",
+     -16
+    ]
+   ],
+   "teams": 3
+  },
+  {
+   "them": "Milotic",
+   "mine": [
+    [
+     "Pelipper",
+     13
+    ]
+   ],
+   "teams": 3
+  }
+ ],
+ "made": {
+  "setup": "v13-dp2-race-eg9",
+  "games": 32,
+  "g0": 7000
+ }
+}

@@ -60,6 +60,7 @@ def write_jobs(sheet, picks):
 def sim_env(sheet):
     c = t1cfg(sheet); env = {'MYTEAM': sheet.team_path}
     if c.get('tw_under_tr'): env['TW_UNDER_TR'] = c['tw_under_tr']
+    if c.get('mega_choice'): env['MEGA_CHOICE'] = '1'                 # a stone holder may also attack without Mega Evolving (as champ-battle-v24)
     return env
 
 def run_all(sheet, samples=12, workers=None, force=False):

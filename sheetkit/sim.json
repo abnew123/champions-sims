@@ -145,6 +145,23 @@
    ],
    "status": "Battle sim, 2026-10-09: v22 plus Ripen, Swarm, Electromorphosis (Charge), Gooey, Shell Side Arm, Baton Pass, Encore's override, Ally Switch, Gravity, Champions' Curse, Entrainment, Temper Flare, Vital Spirit / Insomnia, Healer, Curious Medicine, Seed Sower (see HANDOFF.md; still flagged: Unseen Fist, Cute Charm). With v20's flags it plays v20's games except where those mechanics come up, so it shares v20's result folders: `kit.py <team> flagged --write`, then a run with SHEET_SETUP=v23-dp2-race-eg9-full replays just those. Linux source: native/champ/src_battle_v23.tar.gz. The differences (TR sheet's check, 2026-10-09) are Healing Wish and Memento, which the planner never offered before v22; replays of v20 results need `flagged --moves healingwish,memento`. Healing Wish stays free in the planner (the user's call, 2026-10-09; EG_SELFKO_RULE=1 is an opt-in restriction, in no setup). Current since 2026-10-09 (the Trick Room Six and both Frankfurt sheets replayed on it; there is no v24).",
    "games": "v13-dp2-race-eg9"
+  },
+  "v24-dp2-race-eg9-full": {
+   "binary": "native/champ/bin/champ-battle-v24",
+   "value": "pssim/egvalue9.json",
+   "engine_data": "native/engine_data_full.json",
+   "env": {
+    "BATTLE_ANTICIPATE": "1",
+    "DP2": "1",
+    "RACE": "1",
+    "RACE_TIES": "avg",
+    "CALC_DATA": "native/champions_data.json"
+   },
+   "env_paths": [
+    "CALC_DATA"
+   ],
+   "status": "Battle sim, 2026-10-09: v23 plus the Mega choice (every move of a stone holder is offered with and without the Mega; EG_MEGA_ALWAYS=1 gives v23's rule and games). Strength flat on 2,400 pool games; stone holders delay the Mega in about a third of games and two-stone teams pick which one. Its games differ from v23's wherever a stone is unused, so it has its own folders (the kit refuses to mix). Use it for new sheets and full reruns (with sheet.json t1.mega_choice: true); the Trick Room Six stays on v23 (the user: the choice hardly matters for it). Linux source: native/champ/src_battle_v24.tar.gz.",
+   "games": "v24-dp2-race-eg9"
   }
  }
 }

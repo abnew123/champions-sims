@@ -86,8 +86,10 @@ function primary(set) { let p = 0, s = 0; for (const m of set.moves) { const mv 
 // ---- action generation ----
 const FOE_TARGETS = new Set(['normal', 'any', 'adjacentFoe']);
 function typeMult(moveType, species) { const t = dex.species.get(species).types; return dex.getEffectiveness ? t.reduce((m, x) => m * (dex.getImmunity(moveType, x) ? Math.pow(2, dex.getEffectiveness(moveType, x)) : 0), 1) : 1; }
+const MEGA_CHOICE = process.env.MEGA_CHOICE === '1';                  // a stone holder's moves both with and without the Mega (else always with)
 function myOptions(name, pos, foeSpecies, allySpecies, backs) {
-  const set = MY[name]; const out = [];
+  const set = MY[name]; const out0 = [];
+  const out = {push: (o) => { if (MEGA_CHOICE && o.choice.endsWith(' mega')) out0.push({label: o.label + ' (Mega)', choice: o.choice}, {label: o.label, choice: o.choice.slice(0, -5)}); else out0.push(o); }};
   if (backs) backs.forEach((bn, k) => out.push({label: `${name}: switch -> ${bn}`, choice: `switch ${3 + k}`}));
   set.moves.forEach((m, i) => { const mv = dex.moves.get(m); const slot = i + 1; const it = dex.items.get(set.item); const mega = it.megaStone && Object.keys(it.megaStone).some(k => set.species.startsWith(k)) ? ' mega' : '';
     if (mv.id === 'uturn' || mv.id === 'healingwish' || mv.id === 'memento') return;
@@ -103,7 +105,7 @@ function myOptions(name, pos, foeSpecies, allySpecies, backs) {
         out.push({label: `${name}: ${mv.name} -> ${fs}`, choice: `move ${slot} ${t}${mega}`}); }
     } else out.push({label: `${name}: ${mv.name}`, choice: `move ${slot}${mega}`});
   });
-  return out;
+  return out0;
 }
 function theirOptions(arch, sp, dist, foeSpecies, pos, set, megaOK) {
   // dist: [[moveName|(switch), p]] ; returns [{label, choice, group, p}] (targets are the free part of each group)
@@ -191,6 +193,7 @@ function build(arch, pairIdx, myLead, myBack) {
   const myActs = [], thActs = [];
   for (const a of mine[0]) for (const b of mine[1]) { if (a.choice.startsWith('switch') && a.choice === b.choice) continue;
     if (a.label.endsWith(': Trick Room') && b.label.endsWith(': Trick Room')) continue;  // the second one would undo the first
+    if (MEGA_CHOICE && a.choice.endsWith(' mega') && b.choice.endsWith(' mega')) continue;     // one Mega per battle
     if (a.choice.endsWith(' mega') && b.choice.endsWith(' mega')) {        // both leads hold a stone: one Mega per battle, so one or the other
       const no = (o) => o.choice.slice(0, -5), mg = (o) => o.label + ' (Mega)';   // (not Mega Evolving at all on turn one is left out)
       myActs.push({label: mg(a) + ' | ' + b.label, choice: a.choice + ', ' + no(b)}, {label: a.label + ' | ' + mg(b), choice: no(a) + ', ' + b.choice});

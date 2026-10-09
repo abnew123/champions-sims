@@ -150,6 +150,7 @@ turn-one lines and game plans in order (log `work/all.log`), then `more.sh` the 
 | `t1.tw_under_tr` | `zero`: a Tailwind set in the same turn as Trick Room scores nothing (Trick Room teams) |
 | `t1.trmult_file` | Per-archetype multipliers on the Trick Room credit (Trick Room Six only, from its 2v2 study) |
 | `t1.stat_move` | A move whose turn-one click rate is shown on each card ("Sets Trick Room 100%"). Leave out for none |
+| `t1.mega_choice` | `true`: a stone holder's turn-one options include each move without Mega Evolving (lines that Mega Evolve say so). Set it with the v24 setup, whose battles make the same choice |
 | `t1.exclude_moves` | Turn-one actions never to click, as `": <text>"` fragments of the action label |
 | `lines.short_moves`, `lines.rewrites` | How turn-one lines are written: shorter move names, and one move shown in place of another against one target |
 | `threats` | The rows of Coverage and Matchups: names from the grid's 46 threats. Default: the 29 with usage numbers (`team-sheet.html.usage.json`) |

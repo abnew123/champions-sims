@@ -1,0 +1,917 @@
+{
+ "plans": {
+  "Balance: Gholdengo + Incineroar + Raichu + Rillaboom": {
+   "lines": [
+    "Turn two: one switch 40%, attack with both 31%, click Trick Room 20%.",
+    "No Trick Room on turn one; Farigiraf sets it later in 61% of games, around turn 4.",
+    "Farigiraf comes in around turn 3; Archaludon comes in around turn 4.",
+    "Garchomp Mega Evolves on turn 1.",
+    "Losing Garchomp by turn three (26% of games) drops you to 62%: keep it safe early."
+   ],
+   "facts": {
+    "turn2": {
+     "click Trick Room": 0.204,
+     "attack with both": 0.313,
+     "one switch": 0.403,
+     "double switch": 0.036,
+     "a Protect": 0.044
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.606,
+    "their_tr_per_game": 0.0,
+    "win": 0.776,
+    "games": 192
+   }
+  },
+  "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)": {
+   "lines": [
+    "Turn two: attack with both 49%, a Protect 26%, one switch 23%.",
+    "Archaludon comes in around turn 3; Golisopod comes in around turn 4 (88% of games).",
+    "Golisopod Mega Evolves around turn 4 (88% of games)."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.486,
+     "a Protect": 0.26,
+     "one switch": 0.229,
+     "double switch": 0.025
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.719,
+    "games": 192
+   }
+  },
+  "Rain + Sun: Archaludon + Grimmsnarl + Pelipper": {
+   "lines": [
+    "Turn two: attack with both 65%, one switch 23% (mostly Archaludon out for Pelipper), a Protect 12%.",
+    "Pelipper comes in around turn 4 (89% of games); Basculegion comes in around turn 5 (85% of games).",
+    "Garchomp Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.226,
+     "attack with both": 0.649,
+     "a Protect": 0.116,
+     "double switch": 0.01
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.12,
+    "win": 0.686,
+    "games": 192
+   }
+  },
+  "Rain: Archaludon + Pelipper (no Grimmsnarl)": {
+   "lines": [
+    "Turn two: attack with both 71%, one switch 15% (mostly Pelipper out for Garchomp), a Protect 13%.",
+    "Garchomp comes in around turn 4; Basculegion comes in around turn 4 (79% of games).",
+    "Garchomp Mega Evolves around turn 4.",
+    "Hardest when they bring Swampert (43% won)."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.714,
+     "one switch": 0.154,
+     "a Protect": 0.128,
+     "double switch": 0.004
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.083,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.55,
+    "win": 0.696,
+    "games": 192
+   }
+  },
+  "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler": {
+   "lines": [
+    "Turn two: attack with both 38%, one switch 35% (mostly Farigiraf out for Archaludon), a Protect 18%.",
+    "Trick Room is up on turn two in 53% of games; when it runs out, Farigiraf sets it again in 31% (around turn 5).",
+    "Archaludon comes in around turn 4 (78% of games); Pelipper comes in around turn 4 (69% of games).",
+    "Golisopod Mega Evolves on turn 1.",
+    "Hardest when they bring Armarouge (82% won)."
+   ],
+   "facts": {
+    "turn2": {
+     "double switch": 0.003,
+     "one switch": 0.345,
+     "attack with both": 0.375,
+     "click Trick Room": 0.099,
+     "a Protect": 0.177
+    },
+    "tr_turn1": 0.638,
+    "tr_up_turn2": 0.529,
+    "tr_set_later": 0.313,
+    "their_tr_per_game": 0.52,
+    "win": 0.919,
+    "games": 192
+   }
+  },
+  "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)": {
+   "lines": [
+    "Turn two: attack with both 60%, click Trick Room 19%, one switch 13% (mostly Farigiraf out for Archaludon).",
+    "Trick Room is up on turn two in 58% of games; when it runs out, Farigiraf sets it again in 52% (around turn 4).",
+    "Pelipper comes in around turn 5 (63% of games); Archaludon comes in around turn 4 (56% of games).",
+    "Golisopod Mega Evolves on turn 1.",
+    "With Trick Room up on turn two you win 92%; without it 78%."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.599,
+     "click Trick Room": 0.191,
+     "one switch": 0.132,
+     "a Protect": 0.079
+    },
+    "tr_turn1": 0.642,
+    "tr_up_turn2": 0.581,
+    "tr_set_later": 0.52,
+    "their_tr_per_game": 0.77,
+    "win": 0.863,
+    "games": 192
+   }
+  },
+  "Sun: Farigiraf + Garchomp + Incineroar + Sylveon": {
+   "lines": [
+    "Turn two: one switch 47%, attack with both 32%, double switch 16%.",
+    "Pelipper comes in around turn 3; Archaludon comes in around turn 3.",
+    "Golisopod Mega Evolves around turn 3."
+   ],
+   "facts": {
+    "turn2": {
+     "double switch": 0.158,
+     "attack with both": 0.318,
+     "one switch": 0.467,
+     "a Protect": 0.058
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.298,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.87,
+    "win": 0.626,
+    "games": 192
+   }
+  },
+  "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)": {
+   "lines": [
+    "Turn two: one switch 42% (mostly Basculegion out for Golisopod), attack with both 41%.",
+    "Archaludon comes in around turn 3; Golisopod comes in around turn 3.",
+    "Golisopod Mega Evolves around turn 3.",
+    "With Trick Room up on turn two you win 61%; without it 88%.",
+    "Hardest when they bring Charizard (66% won)."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.417,
+     "attack with both": 0.414,
+     "double switch": 0.089,
+     "a Protect": 0.079
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.097,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.38,
+    "win": 0.858,
+    "games": 192
+   }
+  },
+  "Sand: Excadrill + Salamence + Sneasler + Tyranitar": {
+   "lines": [
+    "Turn two: one switch 43% (mostly Farigiraf out for Archaludon), attack with both 33%, click Trick Room 15%.",
+    "Trick Room is up on turn two in 36% of games; when it runs out, Farigiraf sets it again in 50% (around turn 5).",
+    "Archaludon comes in around turn 4; Pelipper comes in around turn 4 (87% of games).",
+    "Golisopod Mega Evolves on turn 1.",
+    "With Trick Room up on turn two you win 86%; without it 68%."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.334,
+     "one switch": 0.426,
+     "click Trick Room": 0.148,
+     "a Protect": 0.084,
+     "double switch": 0.007
+    },
+    "tr_turn1": 0.494,
+    "tr_up_turn2": 0.359,
+    "tr_set_later": 0.502,
+    "their_tr_per_game": 0.0,
+    "win": 0.743,
+    "games": 192
+   }
+  },
+  "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)": {
+   "lines": [
+    "Turn two: attack with both 45%, one switch 33% (mostly Pelipper out for Archaludon), a Protect 13%.",
+    "No Trick Room on turn one; Farigiraf sets it later in 75% of games, around turn 5.",
+    "Archaludon comes in around turn 3; Farigiraf comes in around turn 4 (90% of games).",
+    "Golisopod Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.326,
+     "click Trick Room": 0.079,
+     "attack with both": 0.445,
+     "double switch": 0.015,
+     "a Protect": 0.135
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.754,
+    "their_tr_per_game": 0.0,
+    "win": 0.583,
+    "games": 160
+   }
+  },
+  "Trick Room: Delphox + Floette + Incineroar + Sinistcha": {
+   "lines": [
+    "Turn two: attack with both 40%, one switch 33%, click Trick Room 22%.",
+    "No Trick Room on turn one; Farigiraf sets it later in 55% of games, around turn 3.",
+    "Archaludon comes in around turn 3; Farigiraf comes in around turn 3.",
+    "Hardest when they bring Kingambit (68% won)."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.403,
+     "click Trick Room": 0.221,
+     "one switch": 0.33,
+     "a Protect": 0.04,
+     "double switch": 0.007
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.554,
+    "their_tr_per_game": 0.44,
+    "win": 0.84,
+    "games": 192
+   }
+  },
+  "Trick Room: Delphox + Incineroar + Sinistcha (no Floette)": {
+   "lines": [
+    "Turn two: attack with both 71%, one switch 19%.",
+    "Garchomp comes in around turn 4 (88% of games); Basculegion comes in around turn 3 (83% of games).",
+    "Garchomp Mega Evolves around turn 4 (84% of games).",
+    "Hardest when they bring Blastoise (62% won)."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.711,
+     "a Protect": 0.087,
+     "one switch": 0.191,
+     "double switch": 0.011
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.007,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.54,
+    "win": 0.824,
+    "games": 160
+   }
+  },
+  "Rain + Sun: Archaludon + Golisopod + Politoed": {
+   "lines": [
+    "Turn two: attack with both 57%, one switch 27%, a Protect 15%.",
+    "Pelipper comes in around turn 4; Basculegion comes in around turn 4 (90% of games).",
+    "Garchomp Mega Evolves on turn 1.",
+    "With Trick Room up on turn two you win 32%; without it 78%.",
+    "Hardest when they bring Farigiraf (55% won)."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.574,
+     "one switch": 0.275,
+     "a Protect": 0.152
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.252,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.64,
+    "win": 0.662,
+    "games": 192
+   }
+  },
+  "Perish: Archaludon + Politoed (no Golisopod)": {
+   "lines": [
+    "Turn two: attack with both 61%, one switch 30%.",
+    "Archaludon comes in around turn 3; Pelipper comes in around turn 4 (88% of games).",
+    "Garchomp Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.605,
+     "a Protect": 0.059,
+     "double switch": 0.033,
+     "one switch": 0.303
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.918,
+    "games": 192
+   }
+  },
+  "Snow: Froslass + Kingambit + Rillaboom": {
+   "lines": [
+    "Turn two: one switch 44% (mostly Farigiraf out for Archaludon), attack with both 41%, a Protect 12%.",
+    "Trick Room is up on turn two in 41% of games; when it runs out, Farigiraf sets it again in 30% (around turn 6).",
+    "Archaludon comes in around turn 3; Pelipper comes in around turn 4 (86% of games).",
+    "Golisopod Mega Evolves on turn 1.",
+    "With Trick Room up on turn two you win 81%; without it 55%."
+   ],
+   "facts": {
+    "turn2": {
+     "click Trick Room": 0.023,
+     "one switch": 0.443,
+     "attack with both": 0.408,
+     "a Protect": 0.122,
+     "double switch": 0.004
+    },
+    "tr_turn1": 0.515,
+    "tr_up_turn2": 0.406,
+    "tr_set_later": 0.302,
+    "their_tr_per_game": 0.0,
+    "win": 0.652,
+    "games": 192
+   }
+  },
+  "Tailwind: Glimmora + Rillaboom + Volcarona (no Basculegion)": {
+   "lines": [
+    "Turn two: one switch 48% (mostly Garchomp out for Archaludon), attack with both 29%, click Trick Room 12%.",
+    "No Trick Room on turn one; Farigiraf sets it later in 66% of games, around turn 4.",
+    "Archaludon comes in around turn 3; Farigiraf comes in around turn 4 (88% of games).",
+    "Garchomp Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.481,
+     "attack with both": 0.287,
+     "click Trick Room": 0.122,
+     "a Protect": 0.023,
+     "double switch": 0.086
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.658,
+    "their_tr_per_game": 0.0,
+    "win": 0.817,
+    "games": 96
+   }
+  },
+  "Indeedee TR: Armarouge + Indeedee-F": {
+   "lines": [
+    "Turn two: attack with both 60%, one switch 35%.",
+    "Archaludon comes in around turn 3; Garchomp comes in around turn 3.",
+    "Garchomp Mega Evolves around turn 3."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.353,
+     "attack with both": 0.6,
+     "a Protect": 0.036,
+     "double switch": 0.011
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.28,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.82,
+    "win": 0.69,
+    "games": 192
+   }
+  },
+  "Sun: Charizard + Whimsicott": {
+   "lines": [
+    "Turn two: one switch 43%, click Trick Room 25%, attack with both 22%.",
+    "No Trick Room on turn one; Farigiraf sets it later in 89% of games, around turn 3.",
+    "Farigiraf comes in around turn 3; Pelipper comes in around turn 3 (89% of games).",
+    "Golisopod Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "a Protect": 0.067,
+     "attack with both": 0.223,
+     "one switch": 0.432,
+     "double switch": 0.031,
+     "click Trick Room": 0.247
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.889,
+    "their_tr_per_game": 0.0,
+    "win": 0.624,
+    "games": 128
+   }
+  },
+  "Balance: Dragonite + Floette + Incineroar": {
+   "lines": [
+    "Turn two: one switch 46% (mostly Pelipper out for Archaludon), attack with both 44%.",
+    "Trick Room is up on turn two in 88% of games; when it runs out, Farigiraf sets it again in 32% (around turn 6).",
+    "Archaludon comes in around turn 3; Golisopod comes in around turn 4.",
+    "Golisopod Mega Evolves around turn 4."
+   ],
+   "facts": {
+    "turn2": {
+     "a Protect": 0.044,
+     "attack with both": 0.44,
+     "one switch": 0.46,
+     "double switch": 0.027,
+     "click Trick Room": 0.029
+    },
+    "tr_turn1": 0.94,
+    "tr_up_turn2": 0.882,
+    "tr_set_later": 0.324,
+    "their_tr_per_game": 0.0,
+    "win": 0.545,
+    "games": 192
+   }
+  },
+  "Indeedee TR: Metagross + Milotic + Sneasler": {
+   "lines": [
+    "Turn two: attack with both 41%, one switch 28% (mostly Farigiraf out for Archaludon), double switch 16%.",
+    "Trick Room is up on turn two in 62% of games; when it runs out, Farigiraf sets it again in 53% (around turn 5).",
+    "Pelipper comes in around turn 3 (87% of games); Archaludon comes in around turn 4 (87% of games).",
+    "Golisopod Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.281,
+     "attack with both": 0.406,
+     "double switch": 0.156,
+     "a Protect": 0.031,
+     "click Trick Room": 0.125
+    },
+    "tr_turn1": 0.688,
+    "tr_up_turn2": 0.625,
+    "tr_set_later": 0.531,
+    "their_tr_per_game": 0.0,
+    "win": 0.938,
+    "games": 32
+   }
+  },
+  "Indeedee TR: Camerupt + Farigiraf": {
+   "lines": [
+    "Turn two: attack with both 63%, one switch 25%, a Protect 11%.",
+    "Golisopod comes in around turn 3; Garchomp comes in around turn 3.",
+    "Mega Evolves: Golisopod 76% of games, Garchomp 24% of games.",
+    "With Trick Room up on turn two you win 63%; without it 74%.",
+    "Losing Pelipper by turn three (20% of games) drops you to 51%: keep it safe early."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.631,
+     "one switch": 0.246,
+     "double switch": 0.016,
+     "a Protect": 0.106
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.569,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 1.1,
+    "win": 0.675,
+    "games": 192
+   }
+  },
+  "Sand: Excadrill + Tyranitar": {
+   "lines": [
+    "Turn two: one switch 47%, attack with both 43%.",
+    "Archaludon comes in around turn 3; Pelipper comes in around turn 3.",
+    "Golisopod Mega Evolves on turn 1.",
+    "Hardest when they bring Kommo-o (61% won), then Pidgeot (61%)."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.465,
+     "attack with both": 0.43,
+     "a Protect": 0.095,
+     "double switch": 0.01
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.86,
+    "games": 192
+   }
+  },
+  "Perish: Gengar + Kommo-o + Rillaboom": {
+   "lines": [
+    "Turn two: attack with both 53%, one switch 28%, a Protect 17%.",
+    "No Trick Room on turn one; Farigiraf sets it later in 30% of games, around turn 5.",
+    "Farigiraf comes in around turn 3; Archaludon comes in around turn 4 (82% of games).",
+    "Garchomp Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.279,
+     "attack with both": 0.534,
+     "click Trick Room": 0.015,
+     "a Protect": 0.17,
+     "double switch": 0.003
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.304,
+    "their_tr_per_game": 0.0,
+    "win": 0.876,
+    "games": 192
+   }
+  },
+  "Indeedee TR: Basculegion + Whimsicott": {
+   "lines": [
+    "Turn two: one switch 48%, attack with both 40%.",
+    "Pelipper comes in around turn 3; Archaludon comes in around turn 3.",
+    "Golisopod Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.484,
+     "attack with both": 0.396,
+     "a Protect": 0.094,
+     "double switch": 0.026
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.672,
+    "games": 128
+   }
+  },
+  "Other Tailwind": {
+   "lines": [
+    "Turn two: attack with both 48%, one switch 41%.",
+    "Trick Room is up on turn two in 71% of games; when it runs out, Farigiraf sets it again in 40% (around turn 5).",
+    "Golisopod comes in around turn 4; Archaludon comes in around turn 3 (89% of games).",
+    "Golisopod Mega Evolves around turn 4."
+   ],
+   "facts": {
+    "turn2": {
+     "a Protect": 0.049,
+     "attack with both": 0.483,
+     "double switch": 0.012,
+     "one switch": 0.412,
+     "click Trick Room": 0.045
+    },
+    "tr_turn1": 0.768,
+    "tr_up_turn2": 0.708,
+    "tr_set_later": 0.395,
+    "their_tr_per_game": 0.0,
+    "win": 0.836,
+    "games": 192
+   }
+  },
+  "Other Sun": {
+   "lines": [
+    "Turn two: one switch 45% (mostly Pelipper out for Archaludon), attack with both 45%.",
+    "Archaludon comes in around turn 4; Basculegion comes in around turn 4.",
+    "Garchomp Mega Evolves on turn 1.",
+    "Losing Garchomp by turn three (20% of games) drops you to 22%: keep it safe early.",
+    "Hardest when they bring Incineroar (30% won), then Garchomp (33%)."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.452,
+     "one switch": 0.452,
+     "a Protect": 0.08,
+     "double switch": 0.016
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.221,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.53,
+    "win": 0.443,
+    "games": 192
+   }
+  },
+  "Other Indeedee TR": {
+   "lines": [
+    "Turn two: attack with both 70%, one switch 19%.",
+    "Basculegion comes in around turn 3 (87% of games); Golisopod comes in around turn 4 (81% of games).",
+    "Golisopod Mega Evolves around turn 4 (78% of games).",
+    "Losing Archaludon by turn three (17% of games) drops you to 44%: keep it safe early.",
+    "Hardest when they bring Sneasler (60% won)."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.701,
+     "a Protect": 0.088,
+     "one switch": 0.185,
+     "double switch": 0.027
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.11,
+    "win": 0.734,
+    "games": 192
+   }
+  },
+  "Other Rain": {
+   "lines": [
+    "Turn two: attack with both 35%, one switch 33%, click Trick Room 28%.",
+    "No Trick Room on turn one; Farigiraf sets it later in 75% of games, around turn 4.",
+    "Farigiraf comes in around turn 4; Archaludon comes in around turn 4.",
+    "Golisopod Mega Evolves on turn 1."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.332,
+     "click Trick Room": 0.284,
+     "attack with both": 0.349,
+     "a Protect": 0.01,
+     "double switch": 0.025
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.755,
+    "their_tr_per_game": 0.0,
+    "win": 0.817,
+    "games": 192
+   }
+  },
+  "Other Balance": {
+   "lines": [
+    "Turn two: one switch 43% (mostly Basculegion out for Farigiraf), attack with both 27%, click Trick Room 17%.",
+    "No Trick Room on turn one; Farigiraf sets it later in 65% of games, around turn 4.",
+    "Farigiraf comes in around turn 3; Archaludon comes in around turn 3.",
+    "Hardest when they bring Sneasler (58% won)."
+   ],
+   "facts": {
+    "turn2": {
+     "click Trick Room": 0.175,
+     "a Protect": 0.086,
+     "one switch": 0.427,
+     "attack with both": 0.271,
+     "double switch": 0.041
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.649,
+    "their_tr_per_game": 0.0,
+    "win": 0.701,
+    "games": 192
+   }
+  },
+  "Other Snow": {
+   "lines": [
+    "Turn two: attack with both 47%, one switch 40%, a Protect 10%.",
+    "Archaludon comes in around turn 3; Pelipper comes in around turn 4 (87% of games).",
+    "Golisopod Mega Evolves on turn 1.",
+    "Losing Basculegion by turn three (22% of games) drops you to 44%: keep it safe early.",
+    "Hardest when they bring Kingambit (55% won)."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.405,
+     "attack with both": 0.467,
+     "a Protect": 0.103,
+     "double switch": 0.026
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.664,
+    "games": 192
+   }
+  },
+  "Other Trick Room": {
+   "lines": [
+    "Turn two: attack with both 63%, one switch 25% (mostly Pelipper out for Golisopod), a Protect 13%.",
+    "Golisopod comes in around turn 4; Basculegion comes in around turn 3 (57% of games).",
+    "Golisopod Mega Evolves around turn 3.",
+    "With Trick Room up on turn two you win 94%; without it 80%."
+   ],
+   "facts": {
+    "turn2": {
+     "attack with both": 0.626,
+     "one switch": 0.247,
+     "a Protect": 0.127
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.402,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.9,
+    "win": 0.856,
+    "games": 192
+   }
+  },
+  "Other Perish": {
+   "lines": [
+    "Turn two: attack with both 44%, one switch 36% (mostly Basculegion out for Archaludon), a Protect 11%.",
+    "Archaludon comes in around turn 3; Garchomp comes in around turn 3.",
+    "Garchomp Mega Evolves around turn 3."
+   ],
+   "facts": {
+    "turn2": {
+     "one switch": 0.355,
+     "attack with both": 0.438,
+     "double switch": 0.099,
+     "a Protect": 0.108
+    },
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.0,
+    "their_tr_per_game": 0.0,
+    "win": 0.915,
+    "games": 96
+   }
+  }
+ },
+ "tells": [
+  {
+   "them": "Volcarona",
+   "mine": [
+    [
+     "Pelipper",
+     8
+    ],
+    [
+     "Garchomp",
+     7
+    ],
+    [
+     "Golisopod",
+     -7
+    ]
+   ],
+   "teams": 12
+  },
+  {
+   "them": "Charizard",
+   "mine": [
+    [
+     "Archaludon",
+     -7
+    ]
+   ],
+   "teams": 15
+  },
+  {
+   "them": "Golisopod",
+   "mine": [
+    [
+     "Golisopod",
+     -5
+    ]
+   ],
+   "teams": 13
+  },
+  {
+   "them": "Froslass",
+   "mine": [
+    [
+     "Golisopod",
+     6
+    ]
+   ],
+   "teams": 8
+  },
+  {
+   "them": "Venusaur",
+   "mine": [
+    [
+     "Archaludon",
+     -11
+    ]
+   ],
+   "teams": 3
+  },
+  {
+   "them": "Staraptor",
+   "mine": [
+    [
+     "Basculegion",
+     9
+    ],
+    [
+     "Archaludon",
+     -8
+    ]
+   ],
+   "teams": 4
+  },
+  {
+   "them": "Swampert",
+   "mine": [
+    [
+     "Garchomp",
+     -6
+    ]
+   ],
+   "teams": 4
+  },
+  {
+   "them": "Floette",
+   "mine": [
+    [
+     "Basculegion",
+     19
+    ],
+    [
+     "Golisopod",
+     14
+    ],
+    [
+     "Garchomp",
+     -14
+    ],
+    [
+     "Pelipper",
+     -19
+    ]
+   ],
+   "teams": 4
+  },
+  {
+   "them": "Whimsicott",
+   "mine": [
+    [
+     "Farigiraf",
+     6
+    ],
+    [
+     "Garchomp",
+     -5
+    ],
+    [
+     "Pelipper",
+     -6
+    ]
+   ],
+   "teams": 7
+  },
+  {
+   "them": "Metagross",
+   "mine": [
+    [
+     "Farigiraf",
+     5
+    ]
+   ],
+   "teams": 4
+  },
+  {
+   "them": "Primarina",
+   "mine": [
+    [
+     "Archaludon",
+     8
+    ],
+    [
+     "Golisopod",
+     8
+    ],
+    [
+     "Garchomp",
+     -10
+    ]
+   ],
+   "teams": 3
+  },
+  {
+   "them": "Blastoise",
+   "mine": [
+    [
+     "Farigiraf",
+     12
+    ],
+    [
+     "Golisopod",
+     11
+    ],
+    [
+     "Basculegion",
+     -8
+    ],
+    [
+     "Pelipper",
+     -14
+    ]
+   ],
+   "teams": 3
+  },
+  {
+   "them": "Milotic",
+   "mine": [
+    [
+     "Garchomp",
+     14
+    ],
+    [
+     "Golisopod",
+     -20
+    ]
+   ],
+   "teams": 3
+  }
+ ],
+ "made": {
+  "setup": "v13-dp2-race-eg9",
+  "games": 32,
+  "g0": 7000
+ }
+}

@@ -1,0 +1,368 @@
+{
+ "name": "Frankfurt-156 Rain",
+ "artifact": "",
+ "published": "never",
+ "team": "team.json",
+ "my_names": {},
+ "short_names": {
+  "Basculegion": "Bascu",
+  "Pelipper": "Peli",
+  "Garchomp": "Chomp",
+  "Archaludon": "Arch",
+  "Farigiraf": "Fari",
+  "Golisopod": "Goli"
+ },
+ "storage_key": "f156-leads-tab",
+ "t1": {
+  "reader_w": 0.75,
+  "tr_credit": "fitted"
+ },
+ "lines": {
+  "short_moves": {},
+  "rewrites": []
+ },
+ "matchups_default": "notr",
+ "theme": {
+  "note": "Layout: one reading column, sticky section bar; same type system as the Low-Variance Six sheet, violet for Trick Room",
+  "light": {
+   "ground": "#f4f3f7",
+   "panel": "#ffffff",
+   "panel-2": "#faf9fc",
+   "ink": "#16141b",
+   "ink2": "#55525f",
+   "ink3": "#858292",
+   "rule": "#dfdce6",
+   "rule-2": "#ecebf1",
+   "accent": "#6a43c7",
+   "accent-soft": "#ece6fb"
+  },
+  "dark": {
+   "ground": "#141318",
+   "panel": "#1c1b21",
+   "panel-2": "#222128",
+   "ink": "#f2f1f6",
+   "ink2": "#aca9b7",
+   "ink3": "#7b7886",
+   "rule": "#2e2c36",
+   "rule-2": "#27252e",
+   "accent": "#a68cf3",
+   "accent-soft": "#2a2342"
+  }
+ },
+ "proc_prefix": "f156sheet",
+ "opponents": "cards",
+ "games": {
+  "matrix": 8,
+  "confirm": 32,
+  "guide": 32
+ },
+ "optimal": {
+  "sixes": 4,
+  "screen_games": 4,
+  "answers": 2,
+  "candidates": 4
+ },
+ "matrix_fours": [
+  [
+   [
+    "Basculegion",
+    "Garchomp"
+   ],
+   [
+    "Pelipper",
+    "Archaludon"
+   ]
+  ],
+  [
+   [
+    "Basculegion",
+    "Garchomp"
+   ],
+   [
+    "Pelipper",
+    "Farigiraf"
+   ]
+  ],
+  [
+   [
+    "Basculegion",
+    "Golisopod"
+   ],
+   [
+    "Pelipper",
+    "Archaludon"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Garchomp"
+   ],
+   [
+    "Archaludon",
+    "Farigiraf"
+   ]
+  ],
+  [
+   [
+    "Garchomp",
+    "Archaludon"
+   ],
+   [
+    "Basculegion",
+    "Pelipper"
+   ]
+  ],
+  [
+   [
+    "Basculegion",
+    "Golisopod"
+   ],
+   [
+    "Archaludon",
+    "Farigiraf"
+   ]
+  ],
+  [
+   [
+    "Garchomp",
+    "Archaludon"
+   ],
+   [
+    "Pelipper",
+    "Farigiraf"
+   ]
+  ],
+  [
+   [
+    "Archaludon",
+    "Farigiraf"
+   ],
+   [
+    "Pelipper",
+    "Golisopod"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Golisopod"
+   ],
+   [
+    "Archaludon",
+    "Farigiraf"
+   ]
+  ],
+  [
+   [
+    "Basculegion",
+    "Golisopod"
+   ],
+   [
+    "Pelipper",
+    "Farigiraf"
+   ]
+  ],
+  [
+   [
+    "Basculegion",
+    "Archaludon"
+   ],
+   [
+    "Farigiraf",
+    "Golisopod"
+   ]
+  ],
+  [
+   [
+    "Farigiraf",
+    "Golisopod"
+   ],
+   [
+    "Pelipper",
+    "Archaludon"
+   ]
+  ],
+  [
+   [
+    "Basculegion",
+    "Farigiraf"
+   ],
+   [
+    "Archaludon",
+    "Golisopod"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Archaludon"
+   ],
+   [
+    "Basculegion",
+    "Golisopod"
+   ]
+  ],
+  [
+   [
+    "Farigiraf",
+    "Golisopod"
+   ],
+   [
+    "Basculegion",
+    "Pelipper"
+   ]
+  ],
+  [
+   [
+    "Garchomp",
+    "Farigiraf"
+   ],
+   [
+    "Basculegion",
+    "Pelipper"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Farigiraf"
+   ],
+   [
+    "Basculegion",
+    "Golisopod"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Archaludon"
+   ],
+   [
+    "Basculegion",
+    "Farigiraf"
+   ]
+  ],
+  [
+   [
+    "Basculegion",
+    "Farigiraf"
+   ],
+   [
+    "Pelipper",
+    "Golisopod"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Garchomp"
+   ],
+   [
+    "Basculegion",
+    "Archaludon"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Farigiraf"
+   ],
+   [
+    "Archaludon",
+    "Golisopod"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Garchomp"
+   ],
+   [
+    "Basculegion",
+    "Farigiraf"
+   ]
+  ],
+  [
+   [
+    "Basculegion",
+    "Pelipper"
+   ],
+   [
+    "Garchomp",
+    "Golisopod"
+   ]
+  ],
+  [
+   [
+    "Basculegion",
+    "Pelipper"
+   ],
+   [
+    "Archaludon",
+    "Golisopod"
+   ]
+  ],
+  [
+   [
+    "Garchomp",
+    "Golisopod"
+   ],
+   [
+    "Pelipper",
+    "Farigiraf"
+   ]
+  ],
+  [
+   [
+    "Basculegion",
+    "Pelipper"
+   ],
+   [
+    "Garchomp",
+    "Archaludon"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Archaludon"
+   ],
+   [
+    "Basculegion",
+    "Garchomp"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Archaludon"
+   ],
+   [
+    "Garchomp",
+    "Farigiraf"
+   ]
+  ],
+  [
+   [
+    "Farigiraf",
+    "Golisopod"
+   ],
+   [
+    "Basculegion",
+    "Archaludon"
+   ]
+  ],
+  [
+   [
+    "Basculegion",
+    "Pelipper"
+   ],
+   [
+    "Archaludon",
+    "Farigiraf"
+   ]
+  ]
+ ],
+ "trim_note": "A cheaper run than the kit's defaults (45 threads on a shared box for one night): the bring matrix plays 30 fours, the 14 Team search's bring step chose against its 30 opponent groups, the 11 more that real players brought (22 pool games with 5+ of these six), and 5 added by hand (the rain core split other ways, a Trick Room four without Pelipper), 8 games per opposing lead; the confirmation 32; both-sides-pick uses each card's 4 most common real sixes, 4 games per four in the screen, our 4 best candidates against the 2 strongest answers per six; game plans 32 games."
+}

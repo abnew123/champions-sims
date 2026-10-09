@@ -1,0 +1,8 @@
+{
+ "Basculegion": {"species": "Basculegion", "item": "Choice Scarf", "ability": "Adaptability", "nature": "Jolly", "evs": [2, 32, 0, 0, 0, 32], "moves": ["Flip Turn", "Last Respects", "Aqua Jet", "Wave Crash"]},
+ "Pelipper": {"species": "Pelipper", "item": "Focus Sash", "ability": "Drizzle", "nature": "Modest", "evs": [2, 0, 0, 32, 0, 32], "moves": ["Weather Ball", "Hurricane", "Wide Guard", "Protect"]},
+ "Garchomp": {"species": "Garchomp", "item": "Garchompite Z", "ability": "Rough Skin", "nature": "Modest", "evs": [2, 0, 0, 32, 0, 32], "moves": ["Dragon Pulse", "Earth Power", "Power Gem", "Protect"]},
+ "Archaludon": {"species": "Archaludon", "item": "Leftovers", "ability": "Stamina", "nature": "Modest", "evs": [32, 0, 1, 5, 25, 3], "moves": ["Electro Shot", "Dragon Pulse", "Flash Cannon", "Protect"]},
+ "Farigiraf": {"species": "Farigiraf", "item": "Sitrus Berry", "ability": "Armor Tail", "nature": "Bold", "evs": [27, 0, 20, 0, 19, 0], "moves": ["Twin Beam", "Shadow Ball", "Trick Room", "Protect"]},
+ "Golisopod": {"species": "Golisopod", "item": "Golisopite", "ability": "Emergency Exit", "nature": "Adamant", "evs": [32, 32, 0, 0, 2, 0], "moves": ["Leech Life", "Sucker Punch", "Protect", "Swords Dance"]}
+}

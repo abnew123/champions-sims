@@ -1,0 +1,3106 @@
+{
+ "attackers": [
+  "Pelipper",
+  "Swampert",
+  "Archaludon",
+  "Indeedee-F",
+  "Metagross",
+  "Grimmsnarl"
+ ],
+ "coverage": [
+  [
+   "M-Golisopod",
+   16.2,
+   0,
+   [
+    [
+     "Pelipper",
+     "Weather Ball",
+     1.0,
+     54.9,
+     0
+    ],
+    [
+     "Swampert",
+     "Wave Crash",
+     1.0,
+     50.0,
+     0
+    ],
+    [
+     "Archaludon",
+     "Electro Shot",
+     1.0,
+     35.7,
+     0
+    ],
+    [
+     "Metagross",
+     "Steel Roller",
+     0.5,
+     31.3,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     0.5,
+     16.5,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     0.5,
+     9.9,
+     0
+    ]
+   ]
+  ],
+  [
+   "Milotic",
+   "#13",
+   0,
+   [
+    [
+     "Archaludon",
+     "Electro Shot",
+     2.0,
+     61.1,
+     0
+    ],
+    [
+     "Metagross",
+     "Psychic Fangs",
+     1.0,
+     50.5,
+     0
+    ],
+    [
+     "Swampert",
+     "Earthquake",
+     1.0,
+     38.6,
+     0
+    ],
+    [
+     "Pelipper",
+     "Hurricane",
+     1.0,
+     34.7,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     1.0,
+     28.9,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     1.0,
+     25.2,
+     0
+    ]
+   ]
+  ],
+  [
+   "Archaludon",
+   8.1,
+   0,
+   [
+    [
+     "Swampert",
+     "Earthquake",
+     2.0,
+     67.0,
+     0
+    ],
+    [
+     "Metagross",
+     "Stomping Tantrum",
+     2.0,
+     51.8,
+     0
+    ],
+    [
+     "Archaludon",
+     "Dragon Pulse",
+     1.0,
+     48.7,
+     0
+    ],
+    [
+     "Pelipper",
+     "Weather Ball",
+     0.5,
+     38.1,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     0.5,
+     22.8,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     1.0,
+     21.8,
+     0
+    ]
+   ]
+  ],
+  [
+   "M-Metagross",
+   "#27",
+   0,
+   [
+    [
+     "Swampert",
+     "Earthquake",
+     2.0,
+     70.6,
+     0
+    ],
+    [
+     "Pelipper",
+     "Weather Ball",
+     1.0,
+     61.0,
+     0
+    ],
+    [
+     "Metagross",
+     "Stomping Tantrum",
+     2.0,
+     54.5,
+     0
+    ],
+    [
+     "Archaludon",
+     "Electro Shot",
+     1.0,
+     39.0,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     0.5,
+     11.2,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     0.25,
+     9.1,
+     0
+    ]
+   ]
+  ],
+  [
+   "Corviknight",
+   "#53",
+   0,
+   [
+    [
+     "Archaludon",
+     "Electro Shot",
+     2.0,
+     72.2,
+     0
+    ],
+    [
+     "Swampert",
+     "Wave Crash",
+     1.0,
+     60.0,
+     0
+    ],
+    [
+     "Pelipper",
+     "Weather Ball",
+     1.0,
+     55.6,
+     0
+    ],
+    [
+     "Metagross",
+     "Steel Roller",
+     0.5,
+     37.6,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     0.5,
+     17.1,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     0.5,
+     11.7,
+     0
+    ]
+   ]
+  ],
+  [
+   "Kingambit (Chople)",
+   31.9,
+   0,
+   [
+    [
+     "Swampert",
+     "Earthquake",
+     2.0,
+     75.4,
+     0
+    ],
+    [
+     "Pelipper",
+     "Weather Ball",
+     1.0,
+     67.1,
+     0
+    ],
+    [
+     "Metagross",
+     "Stomping Tantrum",
+     2.0,
+     58.9,
+     0
+    ],
+    [
+     "Archaludon",
+     "Electro Shot",
+     1.0,
+     43.5,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     1.0,
+     24.6,
+     0
+    ]
+   ]
+  ],
+  [
+   "Farigiraf (Sitrus)",
+   17.4,
+   0,
+   [
+    [
+     "Metagross",
+     "Steel Roller",
+     1.0,
+     81.1,
+     0
+    ],
+    [
+     "Swampert",
+     "Wave Crash",
+     1.0,
+     64.8,
+     0
+    ],
+    [
+     "Pelipper",
+     "Weather Ball",
+     1.0,
+     61.3,
+     0
+    ],
+    [
+     "Archaludon",
+     "Electro Shot",
+     1.0,
+     39.6,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     1.0,
+     26.4,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     0.5,
+     18.9,
+     0
+    ]
+   ]
+  ],
+  [
+   "M-Salamence",
+   34.9,
+   0,
+   [
+    [
+     "Archaludon",
+     "Dragon Pulse",
+     2.0,
+     99.4,
+     0
+    ],
+    [
+     "Metagross",
+     "Steel Roller",
+     1.0,
+     86.0,
+     0
+    ],
+    [
+     "Pelipper",
+     "Hurricane",
+     1.0,
+     57.9,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     2.0,
+     55.8,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     1.0,
+     48.0,
+     0
+    ],
+    [
+     "Swampert",
+     "Wave Crash",
+     0.5,
+     34.9,
+     0
+    ]
+   ]
+  ],
+  [
+   "Basculegion",
+   26.8,
+   0,
+   [
+    [
+     "Archaludon",
+     "Electro Shot",
+     2.0,
+     101.5,
+     1
+    ],
+    [
+     "Metagross",
+     "Psychic Fangs",
+     1.0,
+     75.4,
+     0
+    ],
+    [
+     "Pelipper",
+     "Hurricane",
+     1.0,
+     57.3,
+     0
+    ],
+    [
+     "Swampert",
+     "Earthquake",
+     1.0,
+     57.3,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     1.0,
+     48.2,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     1.0,
+     36.7,
+     0
+    ]
+   ]
+  ],
+  [
+   "Garchomp",
+   5.6,
+   0,
+   [
+    [
+     "Metagross",
+     "Steel Roller",
+     1.0,
+     101.6,
+     2
+    ],
+    [
+     "Archaludon",
+     "Dragon Pulse",
+     2.0,
+     97.3,
+     0
+    ],
+    [
+     "Swampert",
+     "Wave Crash",
+     1.0,
+     80.9,
+     0
+    ],
+    [
+     "Pelipper",
+     "Weather Ball",
+     1.0,
+     76.2,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     2.0,
+     65.6,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     1.0,
+     47.0,
+     0
+    ]
+   ]
+  ],
+  [
+   "Gholdengo",
+   10.7,
+   0,
+   [
+    [
+     "Swampert",
+     "Earthquake",
+     2.0,
+     107.3,
+     7
+    ],
+    [
+     "Metagross",
+     "Stomping Tantrum",
+     2.0,
+     83.8,
+     0
+    ],
+    [
+     "Pelipper",
+     "Weather Ball",
+     1.0,
+     75.4,
+     0
+    ],
+    [
+     "Archaludon",
+     "Electro Shot",
+     1.0,
+     48.6,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     0.5,
+     22.9,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     0.5,
+     17.3,
+     0
+    ]
+   ]
+  ],
+  [
+   "Indeedee F (Colbur)",
+   11.0,
+   0,
+   [
+    [
+     "Metagross",
+     "Steel Roller",
+     1.0,
+     109.0,
+     9
+    ],
+    [
+     "Swampert",
+     "Wave Crash",
+     1.0,
+     87.0,
+     0
+    ],
+    [
+     "Pelipper",
+     "Weather Ball",
+     1.0,
+     61.0,
+     0
+    ],
+    [
+     "Archaludon",
+     "Electro Shot",
+     1.0,
+     39.0,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     1.0,
+     35.6,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     0.5,
+     18.6,
+     0
+    ]
+   ]
+  ],
+  [
+   "M-Garchomp Z",
+   4.6,
+   0,
+   [
+    [
+     "Metagross",
+     "Steel Roller",
+     1.0,
+     110.4,
+     10
+    ],
+    [
+     "Archaludon",
+     "Dragon Pulse",
+     2.0,
+     97.3,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     2.0,
+     72.1,
+     0
+    ],
+    [
+     "Pelipper",
+     "Hurricane",
+     1.0,
+     55.7,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     1.0,
+     47.0,
+     0
+    ],
+    [
+     "Swampert",
+     "Wave Crash",
+     0.5,
+     44.3,
+     0
+    ]
+   ]
+  ],
+  [
+   "Rillaboom",
+   48.9,
+   0,
+   [
+    [
+     "Pelipper",
+     "Hurricane",
+     2.0,
+     113.0,
+     11
+    ],
+    [
+     "Metagross",
+     "Steel Roller",
+     1.0,
+     97.6,
+     0
+    ],
+    [
+     "Archaludon",
+     "Dragon Pulse",
+     1.0,
+     48.7,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     1.0,
+     47.2,
+     0
+    ],
+    [
+     "Swampert",
+     "Wave Crash",
+     0.5,
+     39.1,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     1.0,
+     31.9,
+     0
+    ]
+   ]
+  ],
+  [
+   "Pelipper (Sash)",
+   13.3,
+   1,
+   [
+    [
+     "Archaludon",
+     "Electro Shot",
+     4.0,
+     220.4,
+     0
+    ],
+    [
+     "Pelipper",
+     "Hurricane",
+     1.0,
+     62.9,
+     0
+    ],
+    [
+     "Metagross",
+     "Psychic Fangs",
+     1.0,
+     62.9,
+     0
+    ],
+    [
+     "Swampert",
+     "Wave Crash",
+     0.5,
+     56.9,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     1.0,
+     52.1,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     1.0,
+     31.1,
+     0
+    ]
+   ]
+  ],
+  [
+   "Whimsicott (Sash)",
+   8.4,
+   1,
+   [
+    [
+     "Metagross",
+     "Steel Roller",
+     2.0,
+     308.0,
+     0
+    ],
+    [
+     "Pelipper",
+     "Hurricane",
+     2.0,
+     166.4,
+     0
+    ],
+    [
+     "Archaludon",
+     "Flash Cannon",
+     2.0,
+     137.2,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     1.0,
+     70.1,
+     0
+    ],
+    [
+     "Swampert",
+     "Wave Crash",
+     0.5,
+     61.3,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     1.0,
+     50.4,
+     0
+    ]
+   ]
+  ],
+  [
+   "Arcanine-H (Sash)",
+   9.8,
+   1,
+   [
+    [
+     "Swampert",
+     "Wave Crash",
+     4.0,
+     414.0,
+     0
+    ],
+    [
+     "Pelipper",
+     "Weather Ball",
+     4.0,
+     346.2,
+     0
+    ],
+    [
+     "Metagross",
+     "Stomping Tantrum",
+     4.0,
+     200.0,
+     0
+    ],
+    [
+     "Archaludon",
+     "Electro Shot",
+     1.0,
+     55.6,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     1.0,
+     52.6,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     0.5,
+     20.9,
+     0
+    ]
+   ]
+  ],
+  [
+   "M-Staraptor",
+   "#23",
+   0,
+   [
+    [
+     "Metagross",
+     "Psychic Fangs",
+     2.0,
+     128.1,
+     16
+    ],
+    [
+     "Pelipper",
+     "Hurricane",
+     2.0,
+     103.1,
+     4
+    ],
+    [
+     "Archaludon",
+     "Electro Shot",
+     2.0,
+     90.6,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     2.0,
+     85.4,
+     0
+    ],
+    [
+     "Swampert",
+     "Wave Crash",
+     1.0,
+     77.1,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     2.0,
+     62.5,
+     0
+    ]
+   ]
+  ],
+  [
+   "M-Tyranitar",
+   6.6,
+   0,
+   [
+    [
+     "Metagross",
+     "Steel Roller",
+     2.0,
+     132.0,
+     16
+    ],
+    [
+     "Pelipper",
+     "Weather Ball",
+     2.0,
+     108.0,
+     7
+    ],
+    [
+     "Swampert",
+     "Wave Crash",
+     2.0,
+     105.0,
+     5
+    ],
+    [
+     "Archaludon",
+     "Flash Cannon",
+     2.0,
+     43.0,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     2.0,
+     43.0,
+     0
+    ]
+   ]
+  ],
+  [
+   "Incineroar (Sitrus)",
+   34.0,
+   0,
+   [
+    [
+     "Swampert",
+     "Wave Crash",
+     2.0,
+     136.6,
+     16
+    ],
+    [
+     "Pelipper",
+     "Weather Ball",
+     2.0,
+     104.0,
+     3
+    ],
+    [
+     "Metagross",
+     "Stomping Tantrum",
+     2.0,
+     66.3,
+     0
+    ],
+    [
+     "Archaludon",
+     "Electro Shot",
+     1.0,
+     33.7,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     1.0,
+     27.2,
+     0
+    ]
+   ]
+  ],
+  [
+   "M-Charizard Y",
+   "#15",
+   0,
+   [
+    [
+     "Pelipper",
+     "Weather Ball",
+     2.0,
+     140.6,
+     16
+    ],
+    [
+     "Swampert",
+     "Wave Crash",
+     2.0,
+     116.1,
+     14
+    ],
+    [
+     "Metagross",
+     "Psychic Fangs",
+     1.0,
+     96.8,
+     0
+    ],
+    [
+     "Archaludon",
+     "Electro Shot",
+     2.0,
+     91.6,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     1.0,
+     43.2,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     0.5,
+     23.2,
+     0
+    ]
+   ]
+  ],
+  [
+   "M-Raichu Y",
+   "#17",
+   0,
+   [
+    [
+     "Swampert",
+     "Earthquake",
+     2.0,
+     150.3,
+     16
+    ],
+    [
+     "Metagross",
+     "Stomping Tantrum",
+     2.0,
+     116.8,
+     14
+    ],
+    [
+     "Pelipper",
+     "Weather Ball",
+     1.0,
+     88.6,
+     0
+    ],
+    [
+     "Archaludon",
+     "Dragon Pulse",
+     1.0,
+     56.3,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     1.0,
+     54.5,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     1.0,
+     48.4,
+     0
+    ]
+   ]
+  ],
+  [
+   "M-Baxcalibur",
+   6.0,
+   0,
+   [
+    [
+     "Metagross",
+     "Steel Roller",
+     2.0,
+     168.8,
+     16
+    ],
+    [
+     "Archaludon",
+     "Dragon Pulse",
+     2.0,
+     82.3,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     2.0,
+     54.2,
+     0
+    ],
+    [
+     "Pelipper",
+     "Hurricane",
+     1.0,
+     46.9,
+     0
+    ],
+    [
+     "Swampert",
+     "Earthquake",
+     1.0,
+     42.7,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     1.0,
+     39.1,
+     0
+    ]
+   ]
+  ],
+  [
+   "Sylveon",
+   9.8,
+   0,
+   [
+    [
+     "Metagross",
+     "Steel Roller",
+     2.0,
+     188.1,
+     16
+    ],
+    [
+     "Swampert",
+     "Wave Crash",
+     1.0,
+     75.7,
+     0
+    ],
+    [
+     "Archaludon",
+     "Flash Cannon",
+     2.0,
+     59.4,
+     0
+    ],
+    [
+     "Pelipper",
+     "Weather Ball",
+     1.0,
+     49.0,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     1.0,
+     30.2,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     1.0,
+     29.7,
+     0
+    ]
+   ]
+  ],
+  [
+   "M-Floette",
+   18.8,
+   0,
+   [
+    [
+     "Metagross",
+     "Steel Roller",
+     2.0,
+     274.2,
+     16
+    ],
+    [
+     "Swampert",
+     "Wave Crash",
+     1.0,
+     109.9,
+     10
+    ],
+    [
+     "Archaludon",
+     "Flash Cannon",
+     2.0,
+     71.5,
+     0
+    ],
+    [
+     "Pelipper",
+     "Weather Ball",
+     1.0,
+     59.6,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     1.0,
+     58.3,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     1.0,
+     36.4,
+     0
+    ]
+   ]
+  ],
+  [
+   "Dragapult",
+   "#57",
+   0,
+   [
+    [
+     "Metagross",
+     "Steel Roller",
+     1.0,
+     141.8,
+     16
+    ],
+    [
+     "Archaludon",
+     "Dragon Pulse",
+     2.0,
+     120.0,
+     16
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     2.0,
+     90.9,
+     0
+    ],
+    [
+     "Swampert",
+     "Earthquake",
+     1.0,
+     70.9,
+     0
+    ],
+    [
+     "Pelipper",
+     "Hurricane",
+     1.0,
+     69.1,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     1.0,
+     58.2,
+     0
+    ]
+   ]
+  ],
+  [
+   "Volcarona",
+   "#30",
+   0,
+   [
+    [
+     "Swampert",
+     "Wave Crash",
+     2.0,
+     241.9,
+     16
+    ],
+    [
+     "Pelipper",
+     "Weather Ball",
+     2.0,
+     137.2,
+     16
+    ],
+    [
+     "Metagross",
+     "Psychic Fangs",
+     1.0,
+     100.0,
+     1
+    ],
+    [
+     "Archaludon",
+     "Electro Shot",
+     1.0,
+     44.8,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     1.0,
+     42.4,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     0.5,
+     24.4,
+     0
+    ]
+   ]
+  ],
+  [
+   "M-Gardevoir",
+   "#16",
+   0,
+   [
+    [
+     "Metagross",
+     "Steel Roller",
+     2.0,
+     348.0,
+     16
+    ],
+    [
+     "Swampert",
+     "Wave Crash",
+     1.0,
+     138.7,
+     16
+    ],
+    [
+     "Archaludon",
+     "Flash Cannon",
+     2.0,
+     77.3,
+     0
+    ],
+    [
+     "Pelipper",
+     "Weather Ball",
+     1.0,
+     64.0,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     1.0,
+     56.0,
+     0
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     0.5,
+     20.0,
+     0
+    ]
+   ]
+  ],
+  [
+   "Sneasler",
+   48.4,
+   0,
+   [
+    [
+     "Metagross",
+     "Psychic Fangs",
+     4.0,
+     287.7,
+     16
+    ],
+    [
+     "Indeedee",
+     "Psychic",
+     4.0,
+     212.9,
+     16
+    ],
+    [
+     "Pelipper",
+     "Hurricane",
+     2.0,
+     127.5,
+     16
+    ],
+    [
+     "Swampert",
+     "Wave Crash",
+     1.0,
+     86.5,
+     0
+    ],
+    [
+     "Archaludon",
+     "Electro Shot",
+     1.0,
+     56.1,
+     0
+    ],
+    [
+     "Grimmsnarl",
+     "Spirit Break",
+     1.0,
+     35.1,
+     0
+    ]
+   ]
+  ]
+ ],
+ "matchups": [
+  [
+   "Rillaboom",
+   48.9,
+   [
+    {
+     "v": "lost",
+     "t": "takes 147% (Wood Hammer) · deals 96–112% (Hurricane) · moves second · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 497% (Wood Hammer) · deals 32–39% (Wave Crash) · moves second · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "check",
+     "t": "takes 56% (High Horsepower) · deals 40–48% (Dragon Pulse) · moves second · switching in loses T3, already out wins T6"
+    },
+    {
+     "v": "roll",
+     "t": "takes 83% (Wood Hammer) · deals 39–47% (Psychic) · speed tie · switching in loses T1, already out loses T2",
+     "p": 30
+    },
+    {
+     "v": "lost",
+     "t": "takes 71% (High Horsepower) · deals 82–97% (Steel Roller) · moves second · switching in loses T1, already out loses T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 115% (Wood Hammer) · deals 26–31% (Spirit Break) · moves first · switching in loses on entry, already out loses T2"
+    }
+   ],
+   [
+    {
+     "v": "roll",
+     "t": "takes 147% (Wood Hammer) · deals 96–112% (Hurricane) · faster · switching in loses T1, already out loses T3",
+     "p": 70
+    },
+    {
+     "v": "lost",
+     "t": "takes 497% (Wood Hammer) · deals 32–39% (Wave Crash) · faster · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "check",
+     "t": "takes 56% (High Horsepower) · deals 40–48% (Dragon Pulse) · slower · switching in loses T3, already out wins T6"
+    },
+    {
+     "v": "lost",
+     "t": "takes 83% (Wood Hammer) · deals 39–47% (Psychic) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 71% (High Horsepower) · deals 82–97% (Steel Roller) · faster · switching in loses T1, already out wins T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 115% (Wood Hammer) · deals 26–31% (Spirit Break) · slower · switching in loses on entry, already out loses T1"
+    }
+   ]
+  ],
+  [
+   "Sneasler",
+   48.4,
+   [
+    {
+     "v": "counter",
+     "t": "takes 66% (Dire Claw) · deals 108–127% (Hurricane) · moves first · switching in wins T1, already out wins T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 83% (Close Combat) · deals 73–86% (Wave Crash) · moves first · switching in trades T1, already out wins T3"
+    },
+    {
+     "v": "roll",
+     "t": "takes 108% (Close Combat) · deals 47–56% (Electro Shot) · moves first · switching in loses on entry, already out loses",
+     "p": 99
+    },
+    {
+     "v": "counter",
+     "t": "takes 71% (Close Combat) · deals 177–212% (Psychic) · moves first · switching in wins T1, already out wins T1"
+    },
+    {
+     "v": "counter",
+     "t": "takes 69% (Close Combat) · deals 240–287% (Psychic Fangs) · moves first · switching in wins T1, already out wins T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 102% (Dire Claw) · deals 29–35% (Spirit Break) · moves first · switching in loses on entry, already out loses T2"
+    }
+   ],
+   [
+    {
+     "v": "check",
+     "t": "takes 66% (Dire Claw) · deals 108–127% (Hurricane) · slower · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "guess",
+     "t": "takes 83% (Close Combat) · deals 73–86% (Wave Crash) · slower · switching in loses T1, already out is a coin flip",
+     "p": 50
+    },
+    {
+     "v": "lost",
+     "t": "takes 108% (Close Combat) · deals 47–56% (Electro Shot) · slower · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "check",
+     "t": "takes 71% (Close Combat) · deals 177–212% (Psychic) · slower · switching in loses T1, already out wins T1"
+    },
+    {
+     "v": "check",
+     "t": "takes 69% (Close Combat) · deals 240–287% (Psychic Fangs) · slower · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 102% (Dire Claw) · deals 29–35% (Spirit Break) · slower · switching in loses on entry, already out loses T1"
+    }
+   ]
+  ],
+  [
+   "M-Salamence",
+   34.9,
+   [
+    {
+     "v": "roll",
+     "t": "takes 121% (Draco Meteor) · deals 48–57% (Hurricane) · moves first · switching in loses T1, already out loses T2",
+     "p": 95
+    },
+    {
+     "v": "lost",
+     "t": "takes 92% (Double-Edge) · deals 29–34% (Wave Crash) · moves first · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "counter",
+     "t": "takes 69% (Draco Meteor) · deals 84–99% (Dragon Pulse) · moves first · switching in wins, already out wins T3",
+     "n": "line: Electro Shot ×2 → Dragon Pulse"
+    },
+    {
+     "v": "roll",
+     "t": "takes 80% (Double-Edge) · deals 40–47% (Psychic) · moves first · switching in loses T1, already out loses T2",
+     "p": 55
+    },
+    {
+     "v": "counter",
+     "t": "takes 43% (Draco Meteor) · deals 73–86% (Steel Roller) · moves first · switching in wins T3, already out wins T3"
+    },
+    {
+     "v": "roll",
+     "t": "takes 85% (Double-Edge) · deals 46–55% (Spirit Break) · moves first · switching in loses T1, already out loses",
+     "p": 80
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 121% (Draco Meteor) · deals 48–57% (Hurricane) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 92% (Double-Edge) · deals 29–34% (Wave Crash) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 69% (Draco Meteor) · deals 84–99% (Dragon Pulse) · slower · switching in loses T2, already out wins",
+     "n": "line: Electro Shot → Dragon Pulse"
+    },
+    {
+     "v": "lost",
+     "t": "takes 80% (Double-Edge) · deals 40–47% (Psychic) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 43% (Draco Meteor) · deals 73–86% (Steel Roller) · slower · switching in loses T2, already out wins T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 85% (Double-Edge) · deals 46–55% (Spirit Break) · slower · switching in loses T1, already out loses T2"
+    }
+   ]
+  ],
+  [
+   "Incineroar",
+   34.0,
+   [
+    {
+     "v": "roll",
+     "t": "takes 48% (Darkest Lariat) · deals 87–103% (Weather Ball) · moves second · switching in loses T2, already out loses T3",
+     "p": 40
+    },
+    {
+     "v": "check",
+     "t": "takes 40% (Darkest Lariat) · deals 115–136% (Wave Crash) · moves second · switching in trades T1, already out trades"
+    },
+    {
+     "v": "check",
+     "t": "takes 37% (Flare Blitz) · deals 28–33% (Electro Shot) · moves second · switching in loses T4, already out wins",
+     "n": "line: Electro Shot ×2 → Dragon Pulse ×2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 69% (Darkest Lariat) · deals 0–0% (Psychic) · moves second · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 93% (Flare Blitz) · deals 55–66% (Stomping Tantrum) · moves second · switching in loses T1, already out loses T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 52% (Flare Blitz) · deals 22–27% (Spirit Break) · speed tie · switching in loses T1, already out loses T3"
+    }
+   ],
+   [
+    {
+     "v": "counter",
+     "t": "takes 48% (Darkest Lariat) · deals 87–103% (Weather Ball) · faster · switching in wins T2, already out wins T3"
+    },
+    {
+     "v": "counter",
+     "t": "takes 40% (Darkest Lariat) · deals 115–136% (Wave Crash) · faster · switching in wins T1, already out wins T3"
+    },
+    {
+     "v": "counter",
+     "t": "takes 37% (Flare Blitz) · deals 28–33% (Electro Shot) · faster · switching in wins, already out wins T6",
+     "n": "line: Electro Shot ×2 → Dragon Pulse → Electro Shot ×2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 69% (Darkest Lariat) · deals 0–0% (Psychic) · faster · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 93% (Flare Blitz) · deals 55–66% (Stomping Tantrum) · faster · switching in loses T1, already out loses T3",
+     "p": 30
+    },
+    {
+     "v": "lost",
+     "t": "takes 52% (Flare Blitz) · deals 22–27% (Spirit Break) · slower · switching in loses T1, already out loses T3"
+    }
+   ]
+  ],
+  [
+   "Kingambit",
+   31.9,
+   [
+    {
+     "v": "lost",
+     "t": "takes 71% (Kowtow Cleave) · deals 57–67% (Weather Ball) · moves second · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 60% (Kowtow Cleave) · deals 63–75% (Earthquake) · moves second · switching in loses T1, already out loses T2",
+     "p": 95
+    },
+    {
+     "v": "lost",
+     "t": "takes 50% (Low Kick) · deals 36–43% (Electro Shot) · moves second · switching in loses T2, already out loses T4"
+    },
+    {
+     "v": "lost",
+     "t": "takes 103% (Kowtow Cleave) · deals 0–0% (Psychic) · moves second · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 101% (Kowtow Cleave) · deals 49–58% (Stomping Tantrum) · moves second · switching in loses on entry, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 105% (Iron Head) · deals 20–24% (Spirit Break) · moves second · switching in loses on entry, already out loses T1"
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 71% (Kowtow Cleave) · deals 57–67% (Weather Ball) · faster · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 60% (Kowtow Cleave) · deals 63–75% (Earthquake) · faster · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 50% (Low Kick) · deals 36–43% (Electro Shot) · faster · switching in loses T2, already out loses T4"
+    },
+    {
+     "v": "lost",
+     "t": "takes 103% (Kowtow Cleave) · deals 0–0% (Psychic) · faster · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 101% (Kowtow Cleave) · deals 49–58% (Stomping Tantrum) · faster · switching in loses on entry, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 105% (Iron Head) · deals 20–24% (Spirit Break) · slower · switching in loses on entry, already out loses T1"
+    }
+   ]
+  ],
+  [
+   "Basculegion",
+   26.8,
+   [
+    {
+     "v": "lost",
+     "t": "takes 129% (Last Respects) · deals 48–57% (Hurricane) · moves second · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 129% (Wave Crash) · deals 48–57% (Earthquake) · moves first · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "check",
+     "t": "takes 71% (Last Respects) · deals 85–101% (Electro Shot) · moves first · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 112% (Wave Crash) · deals 40–48% (Psychic) · moves first · switching in loses on entry, already out loses T1",
+     "p": 30
+    },
+    {
+     "v": "lost",
+     "t": "takes 179% (Last Respects) · deals 63–75% (Psychic Fangs) · moves second · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 120% (Wave Crash) · deals 30–36% (Spirit Break) · moves first · switching in loses on entry, already out loses T1"
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 129% (Last Respects) · deals 48–57% (Hurricane) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 129% (Wave Crash) · deals 48–57% (Earthquake) · slower · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "roll",
+     "t": "takes 71% (Last Respects) · deals 85–101% (Electro Shot) · slower · switching in loses T1, already out loses T2",
+     "p": 20
+    },
+    {
+     "v": "lost",
+     "t": "takes 112% (Wave Crash) · deals 40–48% (Psychic) · slower · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 179% (Last Respects) · deals 63–75% (Psychic Fangs) · faster · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 120% (Wave Crash) · deals 30–36% (Spirit Break) · slower · switching in loses on entry, already out loses T1"
+    }
+   ]
+  ],
+  [
+   "M-Floette",
+   18.8,
+   [
+    {
+     "v": "check",
+     "t": "takes 228% (Light of Ruin) · deals 50–59% (Weather Ball) · moves first · switching in loses T1, already out wins T2",
+     "d": "Focus Sash"
+    },
+    {
+     "v": "check",
+     "t": "takes 144% (Light of Ruin) · deals 93–109% (Wave Crash) · moves first · switching in loses on entry, already out trades T1"
+    },
+    {
+     "v": "check",
+     "t": "takes 129% (Light of Ruin) · deals 59–71% (Flash Cannon) · moves first · switching in loses on entry, already out trades",
+     "n": "line: Flash Cannon"
+    },
+    {
+     "v": "lost",
+     "t": "takes 125% (Light of Ruin) · deals 30–36% (Psychic) · moves first · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "check",
+     "t": "takes 81% (Light of Ruin) · deals 231–274% (Steel Roller) · moves second · switching in loses T1, already out trades T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 230% (Light of Ruin) · deals 49–58% (Spirit Break) · moves first · switching in loses on entry, already out loses T1",
+     "p": 70
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 228% (Light of Ruin) · deals 50–59% (Weather Ball) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 144% (Light of Ruin) · deals 93–109% (Wave Crash) · slower · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 129% (Light of Ruin) · deals 59–71% (Flash Cannon) · slower · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 125% (Light of Ruin) · deals 30–36% (Psychic) · slower · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "check",
+     "t": "takes 81% (Light of Ruin) · deals 231–274% (Steel Roller) · faster · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 230% (Light of Ruin) · deals 49–58% (Spirit Break) · slower · switching in loses on entry, already out loses T1"
+    }
+   ]
+  ],
+  [
+   "Farigiraf",
+   17.4,
+   [
+    {
+     "v": "lost",
+     "t": "takes 172% (Thunderbolt) · deals 51–61% (Weather Ball) · moves second · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 41% (Psychic) · deals 54–64% (Wave Crash) · moves second · switching in loses T2, already out loses T3",
+     "p": 85
+    },
+    {
+     "v": "counter",
+     "t": "takes 18% (Psychic) · deals 33–39% (Electro Shot) · moves second · switching in wins T5, already out wins T5"
+    },
+    {
+     "v": "lost",
+     "t": "takes 26% (Hyper Voice) · deals 16–18% (Psychic) · moves second · switching in loses T3, already out loses T4"
+    },
+    {
+     "v": "lost",
+     "t": "takes 31% (Thunderbolt) · deals 68–81% (Steel Roller) · moves second · switching in loses T3, already out loses T4"
+    },
+    {
+     "v": "check",
+     "t": "takes 24% (Hyper Voice) · deals 21–25% (Spirit Break) · speed tie · switching in loses T6, already out wins T6"
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 172% (Thunderbolt) · deals 51–61% (Weather Ball) · faster · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 41% (Psychic) · deals 54–64% (Wave Crash) · faster · switching in loses T2, already out trades",
+     "n": "line: Wave Crash → Earthquake → Wave Crash"
+    },
+    {
+     "v": "counter",
+     "t": "takes 18% (Psychic) · deals 33–39% (Electro Shot) · faster · switching in wins T5, already out wins T5"
+    },
+    {
+     "v": "lost",
+     "t": "takes 26% (Hyper Voice) · deals 16–18% (Psychic) · faster · switching in loses T3, already out loses T4"
+    },
+    {
+     "v": "roll",
+     "t": "takes 31% (Thunderbolt) · deals 68–81% (Steel Roller) · faster · switching in loses T3, already out loses T4",
+     "p": 95
+    },
+    {
+     "v": "check",
+     "t": "takes 24% (Hyper Voice) · deals 21–25% (Spirit Break) · speed tie · switching in loses T6, already out wins T6"
+    }
+   ]
+  ],
+  [
+   "M-Golisopod",
+   16.2,
+   [
+    {
+     "v": "lost",
+     "t": "takes 50% (Liquidation) · deals 46–54% (Weather Ball) · moves second · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 80% (Leech Life) · deals 41–50% (Wave Crash) · moves second · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 26% (Leech Life) · deals 30–35% (Electro Shot) · moves second · switching in loses T3, already out loses T4"
+    },
+    {
+     "v": "lost",
+     "t": "takes 137% (Leech Life) · deals 13–16% (Psychic) · moves second · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 66% (Leech Life) · deals 26–31% (Steel Roller) · moves second · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 147% (Iron Head) · deals 8–9% (Spirit Break) · moves second · switching in loses on entry, already out loses T1"
+    }
+   ],
+   [
+    {
+     "v": "roll",
+     "t": "takes 50% (Liquidation) · deals 46–54% (Weather Ball) · faster · switching in loses T1, already out loses T2",
+     "p": 90
+    },
+    {
+     "v": "lost",
+     "t": "takes 80% (Leech Life) · deals 41–50% (Wave Crash) · faster · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 26% (Leech Life) · deals 30–35% (Electro Shot) · faster · switching in loses T3, already out loses T4"
+    },
+    {
+     "v": "lost",
+     "t": "takes 137% (Leech Life) · deals 13–16% (Psychic) · faster · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 66% (Leech Life) · deals 26–31% (Steel Roller) · faster · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 147% (Iron Head) · deals 8–9% (Spirit Break) · faster · switching in loses on entry, already out loses T1"
+    }
+   ]
+  ],
+  [
+   "Pelipper",
+   13.3,
+   [
+    {
+     "v": "lost",
+     "t": "takes 75% (Hurricane) · deals 52–62% (Hurricane) · moves second · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 66% (Weather Ball) · deals 47–56% (Wave Crash) · moves second · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "counter",
+     "t": "takes 29% (Weather Ball) · deals 186–220% (Electro Shot) · moves second · switching in wins T3, already out wins T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 56% (Weather Ball) · deals 43–52% (Psychic) · moves second · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 75% (Weather Ball) · deals 52–62% (Psychic Fangs) · moves second · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 52% (Weather Ball) · deals 25–31% (Spirit Break) · moves first · switching in loses T2, already out wins T4"
+    }
+   ],
+   [
+    {
+     "v": "check",
+     "t": "takes 75% (Hurricane) · deals 52–62% (Hurricane) · faster · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 66% (Weather Ball) · deals 47–56% (Wave Crash) · faster · switching in loses T1, already out loses T2",
+     "p": 85
+    },
+    {
+     "v": "counter",
+     "t": "takes 29% (Weather Ball) · deals 186–220% (Electro Shot) · faster · switching in wins T3, already out wins T3"
+    },
+    {
+     "v": "roll",
+     "t": "takes 56% (Weather Ball) · deals 43–52% (Psychic) · faster · switching in loses T1, already out loses T2",
+     "p": 25
+    },
+    {
+     "v": "check",
+     "t": "takes 75% (Weather Ball) · deals 52–62% (Psychic Fangs) · faster · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 52% (Weather Ball) · deals 25–31% (Spirit Break) · slower · switching in loses T1, already out loses T3"
+    }
+   ]
+  ],
+  [
+   "Indeedee F",
+   11.0,
+   [
+    {
+     "v": "lost",
+     "t": "takes 82% (Terrain Pulse) · deals 51–61% (Weather Ball) · moves second · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 51% (Terrain Pulse) · deals 73–87% (Wave Crash) · moves second · switching in loses T2, already out trades",
+     "n": "line: Earthquake → Wave Crash"
+    },
+    {
+     "v": "counter",
+     "t": "takes 23% (Terrain Pulse) · deals 32–38% (Electro Shot) · moves second · switching in wins T4, already out wins T4"
+    },
+    {
+     "v": "roll",
+     "t": "takes 22% (Terrain Pulse) · deals 15–18% (Psychic) · speed tie · switching in loses T4, already out loses T5",
+     "p": 10
+    },
+    {
+     "v": "counter",
+     "t": "takes 14% (Terrain Pulse) · deals 92–109% (Steel Roller) · moves second · switching in wins T2, already out wins T2"
+    },
+    {
+     "v": "counter",
+     "t": "takes 0% () · deals 29–35% (Spirit Break) · moves first · switching in wins T4, already out wins T4"
+    }
+   ],
+   [
+    {
+     "v": "check",
+     "t": "takes 82% (Terrain Pulse) · deals 51–61% (Weather Ball) · faster · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 51% (Terrain Pulse) · deals 73–87% (Wave Crash) · faster · switching in trades, already out wins T2"
+    },
+    {
+     "v": "counter",
+     "t": "takes 23% (Terrain Pulse) · deals 32–38% (Electro Shot) · faster · switching in wins T4, already out wins T4"
+    },
+    {
+     "v": "roll",
+     "t": "takes 22% (Terrain Pulse) · deals 15–18% (Psychic) · speed tie · switching in loses T4, already out loses T5",
+     "p": 10
+    },
+    {
+     "v": "counter",
+     "t": "takes 14% (Terrain Pulse) · deals 92–109% (Steel Roller) · faster · switching in wins T2, already out wins T2"
+    },
+    {
+     "v": "counter",
+     "t": "takes 0% () · deals 29–35% (Spirit Break) · slower · switching in wins T4, already out wins T4"
+    }
+   ]
+  ],
+  [
+   "Gholdengo",
+   10.7,
+   [
+    {
+     "v": "check",
+     "t": "takes 115% (Shadow Ball) · deals 63–75% (Weather Ball) · moves first · switching in loses T1, already out wins T2",
+     "d": "Focus Sash"
+    },
+    {
+     "v": "check",
+     "t": "takes 73% (Shadow Ball) · deals 90–107% (Earthquake) · moves first · switching in trades T1, already out wins T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 65% (Shadow Ball) · deals 40–48% (Electro Shot) · moves first · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 71% (Make It Rain) · deals 18–22% (Psychic) · moves first · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 164% (Shadow Ball) · deals 70–83% (Stomping Tantrum) · moves second · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 129% (Make It Rain) · deals 14–17% (Spirit Break) · moves first · switching in loses on entry, already out loses T2"
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 115% (Shadow Ball) · deals 63–75% (Weather Ball) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 73% (Shadow Ball) · deals 90–107% (Earthquake) · slower · switching in loses T1, already out trades T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 65% (Shadow Ball) · deals 40–48% (Electro Shot) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 71% (Make It Rain) · deals 18–22% (Psychic) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 164% (Shadow Ball) · deals 70–83% (Stomping Tantrum) · faster · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 129% (Make It Rain) · deals 14–17% (Spirit Break) · slower · switching in loses on entry, already out loses T1"
+    }
+   ]
+  ],
+  [
+   "Arcanine-H",
+   9.8,
+   [
+    {
+     "v": "lost",
+     "t": "takes 203% (Head Smash) · deals 293–344% (Weather Ball) · moves first · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 43% (Head Smash) · deals 351–413% (Wave Crash) · moves first · switching in loses T2, already out wins T2"
+    },
+    {
+     "v": "counter",
+     "t": "takes 46% (Flare Blitz) · deals 46–55% (Electro Shot) · moves first · switching in wins T3, already out wins T3"
+    },
+    {
+     "v": "roll",
+     "t": "takes 75% (Head Smash) · deals 44–52% (Psychic) · moves first · switching in loses T1, already out loses T2",
+     "p": 20
+    },
+    {
+     "v": "lost",
+     "t": "takes 115% (Flare Blitz) · deals 169–200% (Stomping Tantrum) · moves second · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 79% (Head Smash) · deals 17–20% (Spirit Break) · moves first · switching in loses T1, already out loses T2"
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 203% (Head Smash) · deals 293–344% (Weather Ball) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 43% (Head Smash) · deals 351–413% (Wave Crash) · slower · switching in loses T2, already out wins T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 46% (Flare Blitz) · deals 46–55% (Electro Shot) · slower · switching in loses T3, already out wins T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 75% (Head Smash) · deals 44–52% (Psychic) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 115% (Flare Blitz) · deals 169–200% (Stomping Tantrum) · faster · switching in loses on entry, already out loses T1",
+     "p": 35
+    },
+    {
+     "v": "lost",
+     "t": "takes 79% (Head Smash) · deals 17–20% (Spirit Break) · slower · switching in loses T1, already out loses T2"
+    }
+   ]
+  ],
+  [
+   "Sylveon",
+   9.8,
+   [
+    {
+     "v": "lost",
+     "t": "takes 167% (Hyper Beam) · deals 41–49% (Weather Ball) · moves second · switching in loses T3, already out loses T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 106% (Hyper Beam) · deals 63–75% (Wave Crash) · moves second · switching in loses on entry, already out loses T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 95% (Hyper Beam) · deals 50–59% (Flash Cannon) · moves second · switching in loses T3, already out loses T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 92% (Hyper Beam) · deals 25–29% (Psychic) · moves second · switching in loses T3, already out loses T3"
+    },
+    {
+     "v": "check",
+     "t": "takes 59% (Hyper Beam) · deals 158–188% (Steel Roller) · moves second · switching in loses, already out wins T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 169% (Hyper Beam) · deals 25–30% (Spirit Break) · speed tie · switching in loses on entry, already out loses T1"
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 167% (Hyper Beam) · deals 41–49% (Weather Ball) · faster · switching in loses T3, already out loses T3"
+    },
+    {
+     "v": "check",
+     "t": "takes 106% (Hyper Beam) · deals 63–75% (Wave Crash) · faster · switching in loses on entry, already out trades",
+     "n": "line: Earthquake → Wave Crash"
+    },
+    {
+     "v": "check",
+     "t": "takes 95% (Hyper Beam) · deals 50–59% (Flash Cannon) · faster · switching in loses, already out wins T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 92% (Hyper Beam) · deals 25–29% (Psychic) · faster · switching in loses T3, already out loses T3"
+    },
+    {
+     "v": "counter",
+     "t": "takes 59% (Hyper Beam) · deals 158–188% (Steel Roller) · faster · switching in wins T2, already out wins T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 169% (Hyper Beam) · deals 25–30% (Spirit Break) · speed tie · switching in loses on entry, already out loses T1"
+    }
+   ]
+  ],
+  [
+   "Whimsicott",
+   8.4,
+   [
+    {
+     "v": "check",
+     "t": "takes 66% (Moonblast) · deals 140–166% (Hurricane) · moves first · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 43% (Moonblast) · deals 52–61% (Wave Crash) · moves first · switching in trades T2, already out wins T2"
+    },
+    {
+     "v": "counter",
+     "t": "takes 39% (Moonblast) · deals 115–137% (Flash Cannon) · moves first · switching in wins T2, already out wins T2"
+    },
+    {
+     "v": "counter",
+     "t": "takes 37% (Moonblast) · deals 59–70% (Psychic) · moves first · switching in wins T2, already out wins T2"
+    },
+    {
+     "v": "counter",
+     "t": "takes 24% (Moonblast) · deals 259–308% (Steel Roller) · moves first · switching in wins T2, already out wins T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 68% (Moonblast) · deals 42–50% (Spirit Break) · moves first · switching in loses T1, already out wins T3"
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 66% (Moonblast) · deals 140–166% (Hurricane) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 43% (Moonblast) · deals 52–61% (Wave Crash) · slower · switching in loses T2, already out wins T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 39% (Moonblast) · deals 115–137% (Flash Cannon) · slower · switching in loses T2, already out wins T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 37% (Moonblast) · deals 59–70% (Psychic) · slower · switching in loses T2, already out wins T2"
+    },
+    {
+     "v": "counter",
+     "t": "takes 24% (Moonblast) · deals 259–308% (Steel Roller) · slower · switching in wins T2, already out wins T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 68% (Moonblast) · deals 42–50% (Spirit Break) · slower · switching in loses T1, already out loses T2"
+    }
+   ]
+  ],
+  [
+   "Archaludon",
+   8.1,
+   [
+    {
+     "v": "lost",
+     "t": "takes 447% (Electro Shot) · deals 31–38% (Weather Ball) · moves second · switching in loses T2, already out loses T3"
+    },
+    {
+     "v": "roll",
+     "t": "takes 47% (Dragon Pulse) · deals 55–67% (Earthquake) · moves second · switching in loses, already out loses",
+     "p": 25
+    },
+    {
+     "v": "lost",
+     "t": "takes 43% (Dragon Pulse) · deals 41–48% (Dragon Pulse) · moves second · switching in loses T4, already out loses T5"
+    },
+    {
+     "v": "lost",
+     "t": "takes 62% (Electro Shot) · deals 19–22% (Psychic) · speed tie · switching in loses T2, already out loses T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 80% (Electro Shot) · deals 43–51% (Stomping Tantrum) · moves second · switching in loses T2, already out loses T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 71% (Flash Cannon) · deals 18–21% (Spirit Break) · moves first · switching in loses T3, already out loses"
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 447% (Electro Shot) · deals 31–38% (Weather Ball) · faster · switching in loses T2, already out loses T3"
+    },
+    {
+     "v": "check",
+     "t": "takes 47% (Dragon Pulse) · deals 55–67% (Earthquake) · faster · switching in loses, already out wins T3"
+    },
+    {
+     "v": "check",
+     "t": "takes 43% (Dragon Pulse) · deals 41–48% (Dragon Pulse) · faster · switching in loses T4, already out wins T5"
+    },
+    {
+     "v": "lost",
+     "t": "takes 62% (Electro Shot) · deals 19–22% (Psychic) · speed tie · switching in loses T2, already out loses T3"
+    },
+    {
+     "v": "roll",
+     "t": "takes 80% (Electro Shot) · deals 43–51% (Stomping Tantrum) · faster · switching in loses T2, already out loses T3",
+     "p": 90
+    },
+    {
+     "v": "lost",
+     "t": "takes 71% (Flash Cannon) · deals 18–21% (Spirit Break) · slower · switching in loses T2, already out loses T7"
+    }
+   ]
+  ],
+  [
+   "M-Tyranitar",
+   6.6,
+   [
+    {
+     "v": "check",
+     "t": "takes 102% (Rock Slide) · deals 91–108% (Weather Ball) · moves second · switching in loses T1, already out wins T2",
+     "d": "Focus Sash"
+    },
+    {
+     "v": "counter",
+     "t": "takes 51% (Low Kick) · deals 88–105% (Wave Crash) · moves second · switching in wins T2, already out wins T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 54% (Low Kick) · deals 36–43% (Flash Cannon) · moves first · switching in loses T2, already out wins",
+     "n": "line: Electro Shot → Flash Cannon → Electro Shot → Flash Cannon"
+    },
+    {
+     "v": "lost",
+     "t": "takes 129% (Knock Off) · deals 0–0% (Psychic) · moves first · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 84% (Knock Off) · deals 111–132% (Steel Roller) · moves second · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 40% (Rock Slide) · deals 36–43% (Spirit Break) · moves first · switching in loses T2, already out wins T3"
+    }
+   ],
+   [
+    {
+     "v": "roll",
+     "t": "takes 102% (Rock Slide) · deals 91–108% (Weather Ball) · slower · switching in loses T1, already out loses T2",
+     "p": 40
+    },
+    {
+     "v": "check",
+     "t": "takes 51% (Low Kick) · deals 88–105% (Wave Crash) · slower · switching in loses T2, already out wins T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 54% (Low Kick) · deals 36–43% (Flash Cannon) · slower · switching in loses T2, already out loses T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 129% (Knock Off) · deals 0–0% (Psychic) · slower · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 84% (Knock Off) · deals 111–132% (Steel Roller) · faster · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 40% (Rock Slide) · deals 36–43% (Spirit Break) · slower · switching in loses T2, already out loses T3"
+    }
+   ]
+  ],
+  [
+   "M-Baxcalibur",
+   6.0,
+   [
+    {
+     "v": "lost",
+     "t": "takes 121% (Glaive Rush) · deals 39–46% (Hurricane) · moves first · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 102% (Glaive Rush) · deals 35–42% (Earthquake) · moves first · switching in loses on entry, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 68% (Glaive Rush) · deals 69–82% (Dragon Pulse) · moves first · switching in loses T1, already out wins",
+     "n": "line: Electro Shot → Dragon Pulse"
+    },
+    {
+     "v": "lost",
+     "t": "takes 88% (Glaive Rush) · deals 32–39% (Psychic) · moves first · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 42% (Glaive Rush) · deals 141–168% (Steel Roller) · moves second · switching in loses T2, already out loses",
+     "p": 99
+    },
+    {
+     "v": "roll",
+     "t": "takes 67% (Icicle Crash) · deals 44–54% (Spirit Break) · moves first · switching in loses T1, already out loses T2",
+     "p": 45
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 121% (Glaive Rush) · deals 39–46% (Hurricane) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 102% (Glaive Rush) · deals 35–42% (Earthquake) · slower · switching in loses on entry, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 68% (Glaive Rush) · deals 69–82% (Dragon Pulse) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 88% (Glaive Rush) · deals 32–39% (Psychic) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 42% (Glaive Rush) · deals 141–168% (Steel Roller) · faster · switching in loses T2, already out wins T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 67% (Icicle Crash) · deals 44–54% (Spirit Break) · slower · switching in loses T1, already out loses T2"
+    }
+   ]
+  ],
+  [
+   "Garchomp",
+   5.6,
+   [
+    {
+     "v": "check",
+     "t": "takes 85% (Dragon Claw) · deals 63–76% (Weather Ball) · moves first · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 73% (Dragon Claw) · deals 68–80% (Wave Crash) · moves first · switching in loses T1, already out wins"
+    },
+    {
+     "v": "check",
+     "t": "takes 88% (Earthquake) · deals 82–97% (Dragon Pulse) · moves first · switching in trades, already out wins",
+     "n": "line: Electro Shot → Dragon Pulse"
+    },
+    {
+     "v": "roll",
+     "t": "takes 62% (Dragon Claw) · deals 39–47% (Psychic) · moves first · switching in loses T1, already out loses T2",
+     "p": 95
+    },
+    {
+     "v": "lost",
+     "t": "takes 114% (Stomping Tantrum) · deals 85–101% (Steel Roller) · moves second · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "check",
+     "t": "takes 62% (Stomping Tantrum) · deals 55–65% (Spirit Break) · moves first · switching in loses T1, already out wins T2"
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 85% (Dragon Claw) · deals 63–76% (Weather Ball) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 73% (Dragon Claw) · deals 68–80% (Wave Crash) · slower · switching in loses T1, already out loses T2",
+     "p": 15
+    },
+    {
+     "v": "check",
+     "t": "takes 88% (Earthquake) · deals 82–97% (Dragon Pulse) · slower · switching in loses T1, already out trades",
+     "n": "line: Dragon Pulse → Electro Shot"
+    },
+    {
+     "v": "lost",
+     "t": "takes 62% (Dragon Claw) · deals 39–47% (Psychic) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 114% (Stomping Tantrum) · deals 85–101% (Steel Roller) · faster · switching in loses on entry, already out loses T1",
+     "p": 30
+    },
+    {
+     "v": "lost",
+     "t": "takes 62% (Stomping Tantrum) · deals 55–65% (Spirit Break) · slower · switching in loses T1, already out loses T2"
+    }
+   ]
+  ],
+  [
+   "M-Garchomp Z",
+   4.6,
+   [
+    {
+     "v": "roll",
+     "t": "takes 149% (Draco Meteor) · deals 47–55% (Hurricane) · moves first · switching in loses T1, already out loses T2",
+     "p": 75
+    },
+    {
+     "v": "lost",
+     "t": "takes 95% (Draco Meteor) · deals 37–44% (Wave Crash) · moves first · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 85% (Draco Meteor) · deals 82–97% (Dragon Pulse) · moves first · switching in loses T1, already out wins",
+     "n": "line: Electro Shot → Dragon Pulse"
+    },
+    {
+     "v": "lost",
+     "t": "takes 82% (Draco Meteor) · deals 39–47% (Psychic) · moves first · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 99% (Flamethrower) · deals 93–110% (Steel Roller) · moves first · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "counter",
+     "t": "takes 35% (Flamethrower) · deals 60–72% (Spirit Break) · moves first · switching in wins T2, already out wins T2"
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 149% (Draco Meteor) · deals 47–55% (Hurricane) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 95% (Draco Meteor) · deals 37–44% (Wave Crash) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 85% (Draco Meteor) · deals 82–97% (Dragon Pulse) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 82% (Draco Meteor) · deals 39–47% (Psychic) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 99% (Flamethrower) · deals 93–110% (Steel Roller) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "counter",
+     "t": "takes 35% (Flamethrower) · deals 60–72% (Spirit Break) · slower · switching in wins T2, already out wins T2"
+    }
+   ]
+  ],
+  [
+   "Milotic",
+   "#13",
+   [
+    {
+     "v": "lost",
+     "t": "takes 55% (Scald) · deals 28–34% (Hurricane) · moves second · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 46% (Scald) · deals 32–38% (Earthquake) · moves second · switching in loses T2, already out loses T3"
+    },
+    {
+     "v": "check",
+     "t": "takes 31% (Ice Beam) · deals 51–61% (Electro Shot) · moves second · switching in loses T3, already out wins T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 41% (Scald) · deals 24–28% (Psychic) · moves second · switching in loses T2, already out loses T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 52% (Scald) · deals 42–50% (Psychic Fangs) · moves second · switching in loses T2, already out loses"
+    },
+    {
+     "v": "lost",
+     "t": "takes 37% (Scald) · deals 20–25% (Spirit Break) · moves first · switching in loses T2, already out loses T2"
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 55% (Scald) · deals 28–34% (Hurricane) · faster · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 46% (Scald) · deals 32–38% (Earthquake) · faster · switching in loses T2, already out loses"
+    },
+    {
+     "v": "counter",
+     "t": "takes 31% (Ice Beam) · deals 51–61% (Electro Shot) · slower · switching in wins T3, already out wins T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 41% (Scald) · deals 24–28% (Psychic) · slower · switching in loses T2, already out loses T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 52% (Scald) · deals 42–50% (Psychic Fangs) · faster · switching in loses T2, already out loses"
+    },
+    {
+     "v": "lost",
+     "t": "takes 37% (Scald) · deals 20–25% (Spirit Break) · slower · switching in loses T2, already out loses T3"
+    }
+   ]
+  ],
+  [
+   "M-Charizard Y",
+   "#15",
+   [
+    {
+     "v": "counter",
+     "t": "takes 102% (Ancient Power) · deals 120–140% (Weather Ball) · moves first · switching in wins T1, already out wins T1",
+     "d": "Focus Sash"
+    },
+    {
+     "v": "roll",
+     "t": "takes 255% (Solar Beam) · deals 98–116% (Wave Crash) · moves first · switching in loses on entry, already out loses T1",
+     "p": 85
+    },
+    {
+     "v": "roll",
+     "t": "takes 107% (Weather Ball) · deals 77–91% (Electro Shot) · moves first · switching in loses on entry, already out loses T1",
+     "p": 55
+    },
+    {
+     "v": "lost",
+     "t": "takes 104% (Weather Ball) · deals 36–43% (Psychic) · moves first · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 269% (Weather Ball) · deals 81–96% (Psychic Fangs) · moves second · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 96% (Weather Ball) · deals 19–23% (Spirit Break) · moves first · switching in loses T1, already out loses T2"
+    }
+   ],
+   [
+    {
+     "v": "check",
+     "t": "takes 102% (Ancient Power) · deals 120–140% (Weather Ball) · slower · switching in loses T1, already out wins T1",
+     "d": "Focus Sash"
+    },
+    {
+     "v": "lost",
+     "t": "takes 255% (Solar Beam) · deals 98–116% (Wave Crash) · slower · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 107% (Weather Ball) · deals 77–91% (Electro Shot) · slower · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 104% (Weather Ball) · deals 36–43% (Psychic) · slower · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 269% (Weather Ball) · deals 81–96% (Psychic Fangs) · faster · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 96% (Weather Ball) · deals 19–23% (Spirit Break) · slower · switching in loses T1, already out loses T2"
+    }
+   ]
+  ],
+  [
+   "M-Gardevoir",
+   "#16",
+   [
+    {
+     "v": "check",
+     "t": "takes 104% (Hyper Voice) · deals 54–64% (Weather Ball) · moves first · switching in loses T1, already out wins T2",
+     "d": "Focus Sash"
+    },
+    {
+     "v": "counter",
+     "t": "takes 66% (Hyper Voice) · deals 118–138% (Wave Crash) · moves first · switching in wins T1, already out wins T1"
+    },
+    {
+     "v": "check",
+     "t": "takes 59% (Hyper Voice) · deals 65–77% (Flash Cannon) · moves first · switching in loses T1, already out wins",
+     "n": "line: Electro Shot → Flash Cannon"
+    },
+    {
+     "v": "lost",
+     "t": "takes 58% (Hyper Voice) · deals 16–20% (Psychic) · moves first · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "counter",
+     "t": "takes 37% (Hyper Voice) · deals 293–348% (Steel Roller) · moves second · switching in wins T2, already out wins T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 105% (Hyper Voice) · deals 46–56% (Spirit Break) · moves first · switching in loses on entry, already out loses T2",
+     "p": 75
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 104% (Hyper Voice) · deals 54–64% (Weather Ball) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 66% (Hyper Voice) · deals 118–138% (Wave Crash) · slower · switching in loses T1, already out wins T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 59% (Hyper Voice) · deals 65–77% (Flash Cannon) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 58% (Hyper Voice) · deals 16–20% (Psychic) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "counter",
+     "t": "takes 37% (Hyper Voice) · deals 293–348% (Steel Roller) · faster · switching in wins T2, already out wins T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 105% (Hyper Voice) · deals 46–56% (Spirit Break) · slower · switching in loses on entry, already out loses T1"
+    }
+   ]
+  ],
+  [
+   "M-Raichu Y",
+   "#17",
+   [
+    {
+     "v": "lost",
+     "t": "takes 552% (Zap Cannon) · deals 75–88% (Weather Ball) · moves first · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "counter",
+     "t": "takes 58% (Focus Blast) · deals 126–150% (Earthquake) · moves first · switching in wins T1, already out wins T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 105% (Focus Blast) · deals 47–56% (Dragon Pulse) · moves first · switching in loses on entry, already out loses T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 76% (Zap Cannon) · deals 45–54% (Psychic) · moves first · switching in loses T1, already out loses T2",
+     "p": 45
+    },
+    {
+     "v": "roll",
+     "t": "takes 98% (Zap Cannon) · deals 98–116% (Stomping Tantrum) · moves first · switching in loses T1, already out loses T3",
+     "p": 99
+    },
+    {
+     "v": "roll",
+     "t": "takes 70% (Zap Cannon) · deals 40–48% (Spirit Break) · moves first · switching in loses T1, already out loses T3",
+     "p": 80
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 552% (Zap Cannon) · deals 75–88% (Weather Ball) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 58% (Focus Blast) · deals 126–150% (Earthquake) · slower · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 105% (Focus Blast) · deals 47–56% (Dragon Pulse) · slower · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 76% (Zap Cannon) · deals 45–54% (Psychic) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 98% (Zap Cannon) · deals 98–116% (Stomping Tantrum) · slower · switching in loses T1, already out loses T3",
+     "p": 75
+    },
+    {
+     "v": "lost",
+     "t": "takes 70% (Zap Cannon) · deals 40–48% (Spirit Break) · slower · switching in loses T1, already out loses T3"
+    }
+   ]
+  ],
+  [
+   "M-Staraptor",
+   "#23",
+   [
+    {
+     "v": "check",
+     "t": "takes 94% (Brave Bird) · deals 87–103% (Hurricane) · moves first · switching in loses, already out wins T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 80% (Close Combat) · deals 65–77% (Wave Crash) · moves first · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 105% (Close Combat) · deals 76–90% (Electro Shot) · moves first · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "check",
+     "t": "takes 68% (Close Combat) · deals 71–85% (Psychic) · moves first · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 66% (Close Combat) · deals 107–128% (Psychic Fangs) · moves second · switching in loses T1, already out loses T2",
+     "p": 70
+    },
+    {
+     "v": "lost",
+     "t": "takes 73% (Close Combat) · deals 53–62% (Spirit Break) · moves first · switching in loses T1, already out loses T2"
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 94% (Brave Bird) · deals 87–103% (Hurricane) · slower · switching in loses T1, already out loses"
+    },
+    {
+     "v": "lost",
+     "t": "takes 80% (Close Combat) · deals 65–77% (Wave Crash) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 105% (Close Combat) · deals 76–90% (Electro Shot) · slower · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 68% (Close Combat) · deals 71–85% (Psychic) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 66% (Close Combat) · deals 107–128% (Psychic Fangs) · speed tie · switching in loses T1, already out loses T2",
+     "p": 80
+    },
+    {
+     "v": "lost",
+     "t": "takes 73% (Close Combat) · deals 53–62% (Spirit Break) · slower · switching in loses T1, already out loses T2"
+    }
+   ]
+  ],
+  [
+   "M-Metagross",
+   "#27",
+   [
+    {
+     "v": "check",
+     "t": "takes 97% (Psychic Fangs) · deals 51–60% (Weather Ball) · moves first · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 82% (Psychic Fangs) · deals 58–70% (Earthquake) · moves first · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 54% (Body Press) · deals 33–39% (Electro Shot) · moves first · switching in loses T2, already out loses T3",
+     "p": 90
+    },
+    {
+     "v": "lost",
+     "t": "takes 107% (Steel Roller) · deals 7–9% (Psychic) · moves first · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "check",
+     "t": "takes 34% (Body Press) · deals 45–54% (Stomping Tantrum) · moves second · switching in loses T3, already out wins T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 144% (Iron Head) · deals 9–11% (Spirit Break) · moves first · switching in loses on entry, already out loses T1"
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 97% (Psychic Fangs) · deals 51–60% (Weather Ball) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 82% (Psychic Fangs) · deals 58–70% (Earthquake) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 54% (Body Press) · deals 33–39% (Electro Shot) · slower · switching in loses T2, already out loses T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 107% (Steel Roller) · deals 7–9% (Psychic) · slower · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "check",
+     "t": "takes 34% (Body Press) · deals 45–54% (Stomping Tantrum) · speed tie · switching in loses T3, already out wins T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 144% (Iron Head) · deals 9–11% (Spirit Break) · slower · switching in loses on entry, already out loses T1"
+    }
+   ]
+  ],
+  [
+   "Volcarona",
+   "#30",
+   [
+    {
+     "v": "counter",
+     "t": "takes 56% (Giga Drain) · deals 116–137% (Weather Ball) · moves first · switching in wins T2, already out wins T1"
+    },
+    {
+     "v": "check",
+     "t": "takes 142% (Giga Drain) · deals 205–241% (Wave Crash) · moves first · switching in loses on entry, already out wins T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 51% (Fiery Dance) · deals 37–44% (Electro Shot) · moves first · switching in loses T2, already out loses T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 110% (Bug Buzz) · deals 35–42% (Psychic) · moves first · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "roll",
+     "t": "takes 127% (Fiery Dance) · deals 84–100% (Psychic Fangs) · moves second · switching in loses on entry, already out loses T1",
+     "p": 5
+    },
+    {
+     "v": "roll",
+     "t": "takes 51% (Bug Buzz) · deals 20–24% (Spirit Break) · moves first · switching in loses T2, already out loses",
+     "p": 99
+    }
+   ],
+   [
+    {
+     "v": "check",
+     "t": "takes 56% (Giga Drain) · deals 116–137% (Weather Ball) · slower · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 142% (Giga Drain) · deals 205–241% (Wave Crash) · slower · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 51% (Fiery Dance) · deals 37–44% (Electro Shot) · slower · switching in loses T2, already out loses T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 110% (Bug Buzz) · deals 35–42% (Psychic) · slower · switching in loses on entry, already out loses T1"
+    },
+    {
+     "v": "roll",
+     "t": "takes 127% (Fiery Dance) · deals 84–100% (Psychic Fangs) · faster · switching in loses on entry, already out loses T1",
+     "p": 10
+    },
+    {
+     "v": "lost",
+     "t": "takes 51% (Bug Buzz) · deals 20–24% (Spirit Break) · slower · switching in loses T1, already out loses T3"
+    }
+   ]
+  ],
+  [
+   "Corviknight",
+   "#53",
+   [
+    {
+     "v": "lost",
+     "t": "takes 53% (Brave Bird) · deals 46–55% (Weather Ball) · moves second · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 45% (Brave Bird) · deals 50–60% (Wave Crash) · moves second · switching in loses T2, already out loses T3"
+    },
+    {
+     "v": "guess",
+     "t": "takes 36% (Body Press) · deals 60–72% (Electro Shot) · moves second · switching in loses T3, already out is a coin flip",
+     "p": 50
+    },
+    {
+     "v": "lost",
+     "t": "takes 39% (Brave Bird) · deals 14–17% (Psychic) · moves second · switching in loses T2, already out loses T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 23% (Body Press) · deals 31–37% (Steel Roller) · moves second · switching in loses T4, already out loses T5"
+    },
+    {
+     "v": "lost",
+     "t": "takes 56% (Iron Head) · deals 10–11% (Spirit Break) · moves first · switching in loses T1, already out loses T2"
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 53% (Brave Bird) · deals 46–55% (Weather Ball) · faster · switching in loses T1, already out loses"
+    },
+    {
+     "v": "lost",
+     "t": "takes 45% (Brave Bird) · deals 50–60% (Wave Crash) · faster · switching in loses T2, already out loses"
+    },
+    {
+     "v": "counter",
+     "t": "takes 36% (Body Press) · deals 60–72% (Electro Shot) · faster · switching in wins T3, already out wins T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 39% (Brave Bird) · deals 14–17% (Psychic) · faster · switching in loses T2, already out loses T3"
+    },
+    {
+     "v": "lost",
+     "t": "takes 23% (Body Press) · deals 31–37% (Steel Roller) · faster · switching in loses T4, already out loses T5"
+    },
+    {
+     "v": "lost",
+     "t": "takes 56% (Iron Head) · deals 10–11% (Spirit Break) · slower · switching in loses T1, already out loses T2"
+    }
+   ]
+  ],
+  [
+   "Dragapult",
+   "#57",
+   [
+    {
+     "v": "check",
+     "t": "takes 154% (Draco Meteor) · deals 58–69% (Hurricane) · moves first · switching in loses T1, already out wins T2",
+     "d": "Focus Sash"
+    },
+    {
+     "v": "check",
+     "t": "takes 97% (Draco Meteor) · deals 60–70% (Earthquake) · moves first · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "counter",
+     "t": "takes 87% (Draco Meteor) · deals 101–120% (Dragon Pulse) · moves first · switching in wins T1, already out wins T1"
+    },
+    {
+     "v": "check",
+     "t": "takes 84% (Draco Meteor) · deals 49–58% (Psychic) · moves first · switching in loses T1, already out wins T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 136% (Shadow Ball) · deals 120–141% (Steel Roller) · moves first · switching in loses on entry, already out loses T1",
+     "p": 35
+    },
+    {
+     "v": "counter",
+     "t": "takes 36% (Flamethrower) · deals 76–90% (Spirit Break) · moves first · switching in wins T2, already out wins T2"
+    }
+   ],
+   [
+    {
+     "v": "lost",
+     "t": "takes 154% (Draco Meteor) · deals 58–69% (Hurricane) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "lost",
+     "t": "takes 97% (Draco Meteor) · deals 60–70% (Earthquake) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "check",
+     "t": "takes 87% (Draco Meteor) · deals 101–120% (Dragon Pulse) · slower · switching in loses T1, already out wins T1"
+    },
+    {
+     "v": "lost",
+     "t": "takes 84% (Draco Meteor) · deals 49–58% (Psychic) · slower · switching in loses T1, already out loses T2"
+    },
+    {
+     "v": "roll",
+     "t": "takes 136% (Shadow Ball) · deals 120–141% (Steel Roller) · slower · switching in loses on entry, already out loses T1",
+     "p": 15
+    },
+    {
+     "v": "counter",
+     "t": "takes 36% (Flamethrower) · deals 76–90% (Spirit Break) · slower · switching in wins T2, already out wins T2"
+    }
+   ]
+  ]
+ ]
+}

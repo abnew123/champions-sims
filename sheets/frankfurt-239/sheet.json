@@ -1,0 +1,370 @@
+{
+ "name": "Frankfurt-239 Rain",
+ "artifact": "",
+ "published": "never",
+ "team": "team.json",
+ "my_names": {
+  "Indeedee-F": "Indeedee"
+ },
+ "short_names": {
+  "Pelipper": "Peli",
+  "Swampert": "Pert",
+  "Archaludon": "Arch",
+  "Indeedee-F": "Indee",
+  "Metagross": "Gross",
+  "Grimmsnarl": "Grimm"
+ },
+ "storage_key": "f239-leads-tab",
+ "t1": {
+  "reader_w": 0.75,
+  "tr_credit": "fitted"
+ },
+ "lines": {
+  "short_moves": {},
+  "rewrites": []
+ },
+ "matchups_default": "notr",
+ "opponents": "cards",
+ "proc_prefix": "f239sheet",
+ "theme": {
+  "note": "Layout: one reading column, sticky section bar; teal for rain",
+  "light": {
+   "ground": "#f2f5f6",
+   "panel": "#ffffff",
+   "panel-2": "#f8fafb",
+   "ink": "#131719",
+   "ink2": "#4f585c",
+   "ink3": "#7e888c",
+   "rule": "#d9e0e3",
+   "rule-2": "#e8edef",
+   "accent": "#0b7285",
+   "accent-soft": "#dff1f4"
+  },
+  "dark": {
+   "ground": "#121618",
+   "panel": "#1a1f21",
+   "panel-2": "#202628",
+   "ink": "#eff3f4",
+   "ink2": "#a6b0b4",
+   "ink3": "#768185",
+   "rule": "#2a3134",
+   "rule-2": "#232a2c",
+   "accent": "#66c7d6",
+   "accent-soft": "#15313a"
+  }
+ },
+ "matrix_fours": [
+  [
+   [
+    "Swampert",
+    "Archaludon"
+   ],
+   [
+    "Pelipper",
+    "Indeedee-F"
+   ]
+  ],
+  [
+   [
+    "Indeedee-F",
+    "Metagross"
+   ],
+   [
+    "Pelipper",
+    "Archaludon"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Swampert"
+   ],
+   [
+    "Archaludon",
+    "Indeedee-F"
+   ]
+  ],
+  [
+   [
+    "Archaludon",
+    "Metagross"
+   ],
+   [
+    "Pelipper",
+    "Indeedee-F"
+   ]
+  ],
+  [
+   [
+    "Swampert",
+    "Grimmsnarl"
+   ],
+   [
+    "Pelipper",
+    "Archaludon"
+   ]
+  ],
+  [
+   [
+    "Swampert",
+    "Indeedee-F"
+   ],
+   [
+    "Pelipper",
+    "Archaludon"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Swampert"
+   ],
+   [
+    "Archaludon",
+    "Metagross"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Archaludon"
+   ],
+   [
+    "Indeedee-F",
+    "Metagross"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Metagross"
+   ],
+   [
+    "Archaludon",
+    "Indeedee-F"
+   ]
+  ],
+  [
+   [
+    "Swampert",
+    "Grimmsnarl"
+   ],
+   [
+    "Archaludon",
+    "Indeedee-F"
+   ]
+  ],
+  [
+   [
+    "Archaludon",
+    "Grimmsnarl"
+   ],
+   [
+    "Pelipper",
+    "Swampert"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Swampert"
+   ],
+   [
+    "Archaludon",
+    "Grimmsnarl"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   [
+    "Archaludon",
+    "Metagross"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Archaludon"
+   ],
+   [
+    "Swampert",
+    "Grimmsnarl"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Metagross"
+   ],
+   [
+    "Swampert",
+    "Indeedee-F"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Archaludon"
+   ],
+   [
+    "Swampert",
+    "Metagross"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Swampert"
+   ],
+   [
+    "Indeedee-F",
+    "Metagross"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Grimmsnarl"
+   ],
+   [
+    "Swampert",
+    "Archaludon"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Grimmsnarl"
+   ],
+   [
+    "Archaludon",
+    "Metagross"
+   ]
+  ],
+  [
+   [
+    "Archaludon",
+    "Grimmsnarl"
+   ],
+   [
+    "Pelipper",
+    "Indeedee-F"
+   ]
+  ],
+  [
+   [
+    "Archaludon",
+    "Indeedee-F"
+   ],
+   [
+    "Pelipper",
+    "Swampert"
+   ]
+  ],
+  [
+   [
+    "Indeedee-F",
+    "Metagross"
+   ],
+   [
+    "Pelipper",
+    "Swampert"
+   ]
+  ],
+  [
+   [
+    "Indeedee-F",
+    "Metagross"
+   ],
+   [
+    "Archaludon",
+    "Grimmsnarl"
+   ]
+  ],
+  [
+   [
+    "Swampert",
+    "Archaludon"
+   ],
+   [
+    "Pelipper",
+    "Metagross"
+   ]
+  ],
+  [
+   [
+    "Swampert",
+    "Archaludon"
+   ],
+   [
+    "Pelipper",
+    "Grimmsnarl"
+   ]
+  ],
+  [
+   [
+    "Archaludon",
+    "Metagross"
+   ],
+   [
+    "Pelipper",
+    "Swampert"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Metagross"
+   ],
+   [
+    "Swampert",
+    "Archaludon"
+   ]
+  ],
+  [
+   [
+    "Metagross",
+    "Grimmsnarl"
+   ],
+   [
+    "Pelipper",
+    "Archaludon"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Indeedee-F"
+   ],
+   [
+    "Swampert",
+    "Archaludon"
+   ]
+  ],
+  [
+   [
+    "Pelipper",
+    "Archaludon"
+   ],
+   [
+    "Swampert",
+    "Indeedee-F"
+   ]
+  ]
+ ],
+ "games": {
+  "matrix": 8,
+  "confirm": 32,
+  "guide": 32
+ },
+ "optimal": {
+  "sixes": 4,
+  "screen_games": 4,
+  "answers": 2,
+  "candidates": 4
+ },
+ "trim_note": "A cheaper run than the kit's defaults (half a shared cloud box, 2026-10-08): the bring matrix plays 30 fours, the 16 that Team search's bring step or real players' games chose for this six plus 14 rain-core variants, 8 games per opposing lead; the confirmation 32; both-sides-pick uses each card's 4 most common real sixes, 4 games per four in the screen, our 4 best candidates against the 2 strongest answers per six; game plans 32 games."
+}

@@ -1,0 +1,32 @@
+{
+ "Pelipper": {
+  "role": "Setter",
+  "note": "Sets rain when it comes in. In rain Hurricane never misses (in sun it hits half the time) and Weather Ball is a 100-power Water move. Tailwind doubles your side&rsquo;s Speed for four turns; Wide Guard blocks spread moves on both of you. Focus Sash keeps it in from full HP.",
+  "src": "The regional team&rsquo;s set."
+ },
+ "Swampert": {
+  "role": "Attacker",
+  "note": "Mega Evolves into Water/Ground with Swift Swim: double Speed in rain. Wave Crash takes a third of the damage back as recoil; Flip Turn pivots to the back row. Earthquake hits your partner too, except Pelipper.",
+  "src": "The regional team&rsquo;s set."
+ },
+ "Archaludon": {
+  "role": "Attacker",
+  "note": "In rain Electro Shot fires at once and raises its Special Attack; out of rain it charges for a turn. Stamina raises its Defense each time an attack hits it.",
+  "src": "The regional team&rsquo;s set."
+ },
+ "Indeedee-F": {
+  "role": "Support",
+  "note": "Psychic Terrain on entry blocks their priority moves (Fake Out, Sucker Punch, Prankster) into anything on the ground and powers up Psychic moves. Follow Me draws their single-target moves; Rocky Helmet hurts whoever hits it with contact. Its terrain is what lets Metagross&rsquo;s Steel Roller work.",
+  "src": "The regional team&rsquo;s set. Female Indeedee: it has Follow Me."
+ },
+ "Metagross": {
+  "role": "Attacker",
+  "note": "Mega Evolves into Steel/Psychic with Tough Claws, which powers up all three of its attacks. Steel Roller fails with no terrain up and ends the terrain, yours included. Psychic Fangs breaks screens; Stomping Tantrum doubles after one of its moves fails.",
+  "src": "The regional team&rsquo;s set. Only one of Swampert and Metagross Mega Evolves in a battle."
+ },
+ "Grimmsnarl": {
+  "role": "Support",
+  "note": "Prankster gives its status moves priority. Light Clay makes Reflect and Light Screen last eight turns; in doubles each cuts the damage it covers by a third. Parting Shot lowers both their attacking stats and brings in your back row; it fails into Dark types, and into anything on the ground while Psychic Terrain is up.",
+  "src": "The regional team&rsquo;s set."
+ }
+}

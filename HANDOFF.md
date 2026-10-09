@@ -864,3 +864,19 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     ../engine_data_full.json ../turn_cases_f1.jsonl lo,hi,mid,real`) are 100% exact with 32 / 43 cases still unsupported: Shell Side Arm
     (14), Sleep Talk (22), Smack Down (7), Counter, Beat Up, Ally Switch, Baton Pass, Spikes, Alluring Voice's secondary, Wandering Spirit.
     `native/champ/bin/champ-battle-v22` (sha 3ba3ee45..., source `src_battle_v22.tar.gz`); the full-data file is unchanged.
+  - **champ-battle-v23 = v22 + Eval bar's and TR sheet's unsupported lists (2026-10-09, 3:30 pm; flags off = v20's games on the 20 check
+    battles; all 6,900 base cases and the 3,200 focused cases f1-f3 exact).** Ported, each Showdown-exact on new focused cases
+    (`native/turn_cases_f3.jsonl`, 1,200 cases from `focus_sets_f3.json`): **Baton Pass** (sim.rs `copy_volatile_from`: boosts and the
+    volatiles without noCopy move to the switch-in; it was 7% of Eval bar's day-1 broadcast positions, Espathra), **Encore's override**
+    (run_move now swaps in the move the OverrideAction event names, as Showdown's runMove does), **Ally Switch** (sim.rs `swap_position`,
+    the allyswitch counter condition), **Gravity** (accuracy x 6840/4096, grounded moves disabled, flying moves cancelled), **Curse** as
+    Champions rewrites it (mods/champions/moves.js: no volatileStatus on the move; the Ghost version pays half HP and applies the curse in
+    onHit, a random foe when it targeted an ally; the non-Ghost version boosts in onHit), Entrainment, Temper Flare, Shell Side Arm
+    (category by the unboosted-stat comparison, contact added when physical), Vital Spirit and Insomnia, Healer, Gooey, Curious Medicine,
+    Seed Sower, Swarm, Electromorphosis with the Charge condition, Ripen. Not ported: Unseen Fist (Champions uses an onHitProtect hook
+    with a 0.25x damage path in the mod's getDamage: needs the Protect condition and the damage path changed; 8 of Eval bar's positions),
+    Cute Charm (needs genders, which the engine state does not carry). Still unsupported in the f3 cases: Opportunist, Motor Drive,
+    Pickup, Iron Ball, Harvest, Zoom Lens, Flying Press, Skill Link's onModifyMove, Speed Swap, Plus, Gyro Ball, Instruct, Sleep Talk,
+    Beat Up, Future Sight (2-7 cases each). Caution learned: `register()` already held stubs for some abilities (zerotohero's
+    `onSwitchOut` returned Undef) and a second registration later in the function silently replaces an earlier one, so grep for an id
+    before adding a handler. `native/champ/bin/champ-battle-v23` (two-line sha file, as v20's: binary and `src_battle_v23.tar.gz`).

@@ -283,7 +283,7 @@ impl Battle {
         let old = self.sides[s as usize].active[pos as usize].map(|i| (s, i));
         if let Some(o) = old { if self.p(o).hp > 0 {
             self.pm(o).being_called_back = true;
-            if let Some(se) = source_effect { if se.kind == Kind::Move && self.dex.mv(se.id).tmpl.base.self_switch == Some("copyvolatile") { self.unsupported("baton pass".into()); } }
+            let copy = source_effect.map(|se| se.kind == Kind::Move && self.dex.mv(se.id).tmpl.base.self_switch == Some("copyvolatile")).unwrap_or(false);
             if !self.p(o).skip_before_switch_out && !is_drag {
                 self.run_event("BeforeSwitchOut", Tgt::Mon(o), None, None, RV::Undef, false, false);
                 self.each_event("Update", None);
@@ -295,6 +295,7 @@ impl Battle {
             self.single_event("End", Eff::new(Kind::Ability, ab), Some(SLoc::Ability(o)), Tgt::Mon(o), None, None, RV::Undef);
             self.single_event("End", Eff::new(Kind::Item, it), Some(SLoc::Item(o)), Tgt::Mon(o), None, None, RV::Undef);
             self.queue.retain(|q| q.pokemon != Some(o));
+            if copy { self.copy_volatile_from(m, o); }   // Baton Pass (2026-10-09)
             self.clear_volatile(o, true);
         } }
         if let Some(o) = old {
@@ -320,6 +321,33 @@ impl Battle {
             self.insert_actions(r);
         }
         SwitchResult::Ok
+    }
+    /// pokemon.copyVolatileFrom(old, 'batonpass'): boosts and the volatiles without noCopy move to the switch-in (Baton Pass)
+    pub fn copy_volatile_from(&mut self, m: MonRef, o: MonRef) {
+        const NOCOPY: [&str; 30] = ["attract", "choicelock", "commanded", "commanding", "counter", "defensecurl", "destinybond", "disable", "dynamax", "encore", "flashfire",
+            "foresight", "glaiverush", "gmaxchistrike", "imprison", "lockon", "minimize", "miracleeye", "mirrorcoat", "nightmare", "protosynthesis", "quarkdrive", "saltcure",
+            "smackdown", "spotlight", "stockpile", "syrupbomb", "torment", "trapped", "trapper"];
+        self.clear_volatile(m, true);
+        self.pm(m).boosts = self.p(o).boosts;
+        let vols: Vec<(Id, EState)> = self.p(o).volatiles.iter().filter(|(k, _)| !NOCOPY.contains(k) && *k != "yawn").cloned().collect();
+        let ids: Vec<Id> = vols.iter().map(|(k, _)| *k).collect();
+        self.pm(m).volatiles = vols;
+        self.pm(o).volatiles.clear();
+        for v in ids { self.single_event("Copy", Eff::cond(v), Some(SLoc::Vol(m, v)), Tgt::Mon(m), None, None, RV::Undef); }
+    }
+    /// battle.swapPosition (Ally Switch): the two actives of a side trade slots; Swap runs for both
+    pub fn swap_position(&mut self, m: MonRef, new_pos: u8) -> bool {
+        let s = m.0; let target = self.sides[s as usize].active[new_pos as usize].map(|i| (s, i));
+        if new_pos != 1 && target.map(|t| self.p(t).fainted).unwrap_or(true) { return false; }
+        if self.logging { let n = self.mon_name(m); let np = new_pos.to_string(); self.add(&["swap", &n, &np]); }
+        let old_pos = self.p(m).position;
+        self.sides[s as usize].active[old_pos as usize] = target.map(|t| t.1);
+        self.sides[s as usize].active[new_pos as usize] = Some(m.1);
+        if let Some(t) = target { self.pm(t).position = old_pos; }
+        self.pm(m).position = new_pos;
+        if let Some(t) = target { self.run_event("Swap", Tgt::Mon(t), Some(m), None, RV::Undef, false, false); }
+        self.run_event("Swap", Tgt::Mon(m), target, None, RV::Undef, false, false);
+        true
     }
     pub fn update_speed_of(&mut self, m: MonRef) { let s = self.action_speed_of(m); self.pm(m).speed = s; }
     /// runSwitch: switch-in effects for this and any immediately following runSwitch actions
@@ -557,12 +585,20 @@ impl Battle {
     pub fn run_move(&mut self, am: usize, m: MonRef, target_loc: i64, source_effect: Option<Eff>, original: Option<MonRef>, external: bool) {
         self.pm(m).active_move_actions += 1;
         let mut source_effect = source_effect;
-        let target = self.get_target(m, am, target_loc, original);
-        let mid = self.am(am).id;
-        if mid != "struggle" && !external {
-            let r = self.run_event("OverrideAction", Tgt::Mon(m), target, Some(Eff::mv(mid, am)), RV::Undef, false, false);
-            if let RV::S(_) = r { self.unsupported("OverrideAction".into()); }
+        let mut target = self.get_target(m, am, target_loc, original);
+        let mut am = am;
+        let mid0 = self.am(am).id;
+        if mid0 != "struggle" && !external {
+            // Encore: the OverrideAction event answers with the move to use instead (2026-10-09; it used to be reported unsupported)
+            let r = self.run_event("OverrideAction", Tgt::Mon(m), target, Some(Eff::mv(mid0, am)), RV::Undef, false, false);
+            if let RV::S(changed) = r { if changed != mid0 {
+                let (pr, pb) = (self.am(am).priority, self.am(am).prankster_boosted);
+                let new = self.new_am(self.dex.active_move(changed));
+                self.amm(new).priority = pr; if pb { self.amm(new).prankster_boosted = true; }
+                am = new; target = self.get_random_target(m, am);
+            } }
         }
+        let mid = self.am(am).id;
         self.amm(am).is_external = external;
         self.set_active_move(Some(am), Some(m), target);
         let e = Eff::mv(mid, am);

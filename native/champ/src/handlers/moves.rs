@@ -238,10 +238,101 @@ pub fn register(r: &mut Reg) {
     h!(r, Move, "doubleshock", "self.onHit", |b, a| { let m = a.t(); let ty: Vec<Id> = b.p(m).types.iter().map(|t| if *t == "Electric" { "???" } else { *t }).collect(); let p = b.pm(m); p.types = ty; p.added_type = ""; RV::Undef });
     h!(r, Move, "direclaw", "secondaries.0.onHit", |b, a| { let (t, s) = (a.t(), a.s()); let st = ["psn", "par", "slp"][b.prng.sample_idx(3)]; b.try_set_status(t, st, Some(s), None); RV::Undef });
     h!(r, Move, "throatchop", "secondaries.0.onHit", |b, a| { let t = a.t(); b.add_volatile(t, "throatchop", None, None); RV::Undef });
-    h!(r, Move, "curse", "onModifyMove", |b, a| {
-        let s = a.t(); let am = a.am();
-        if !b.has_type(s, "Ghost") { b.amm(am).target = "self"; } else if let Some(t) = a.source { if t != s && b.is_ally(s, t) { b.amm(am).target = "randomNormal"; } }
+    // Curse as Champions rewrites it (mods/champions/moves.js): no volatileStatus on the move; a non-Ghost user boosts in onHit, a Ghost
+    // user pays half its HP and applies the curse volatile in onHit (a random foe when it targeted an ally)
+    h!(r, Move, "curse", "onModifyMove", |b, a| { let m = a.t(); let am = a.am();
+        if !b.has_type(m, "Ghost") { b.amm(am).target = "self"; } else if let Some(t) = a.source { if t != m && b.is_ally(m, t) { b.amm(am).target = "randomNormal"; } } RV::Undef });
+    h!(r, Move, "curse", "onTryHit", |b, a| { let t = a.t(); let Some(s) = a.source else { return RV::Undef }; if b.has_type(s, "Ghost") && b.has_vol(t, "curse") { return RV::B(false); } RV::Undef });
+    h!(r, Move, "curse", "onHit", |b, a| { let t = a.t(); let s = a.s();
+        if !b.has_type(s, "Ghost") { let r = b.boost(vec![(4, -1), (0, 1), (1, 1)], Some(s), Some(s), None, false, false); return RV::B(r.truthy()); }
+        let d = b.p(s).maxhp / 2; b.direct_damage(d, s, Some(s), None);
+        let mut t = t;
+        if b.is_ally(s, t) { let am = b.new_am(b.dex.active_move("curse")); match b.get_random_target(s, am) { Some(r) => t = r, None => return RV::B(false) } }
+        b.pm(t).volatiles.retain(|(k, _)| *k != "curse");
+        b.add_volatile(t, "curse", Some(s), None); RV::Undef });
+    h!(r, Move, "batonpass", "onHit", |b, a| { let t = a.t(); if b.can_switch(t.0) == 0 || b.has_vol(t, "commanded") { return RV::NotFail; } RV::Undef });
+    h!(r, Move, "batonpass", "self.onHit", |b, a| { let s = a.t(); b.pm(s).skip_before_switch_out = true; RV::Undef });
+    h!(r, Move, "healingwish", "onTryHit", |b, a| { if b.can_switch(a.t().0) == 0 { return RV::NotFail; } RV::Undef });
+    h!(r, Move, "revivalblessing", "onTryHit", |b, a| { let s = a.t(); if !b.sides[s.0 as usize].pokemon.iter().any(|p| p.fainted) { return RV::B(false); } RV::Undef });
+    h!(r, Move, "soak", "onHit", |b, a| { let t = a.t(); let ty = b.get_types(t); if ty == vec!["Water"] { return RV::Null; } let p = b.pm(t); p.types = vec![id("Water")]; p.added_type = ""; RV::Undef });
+    h!(r, Move, "steelbeam", "onMoveFail", |b, a| { let am = a.am(); if b.am(am).multihit.is_some() { return RV::Undef; } let s = a.s(); let d = crate::sim::js_round(b.p(s).maxhp as f64 / 2.0); b.damage(d as f64, Some(s), Some(s), Some(Eff::cond(id("steelbeam"))), false); RV::Undef });
+    h!(r, Move, "skillswap", "onHit", |b, a| {
+        let (t, s) = (a.t(), a.s());
+        if b.p(s).fainted || b.p(t).fainted { return RV::B(false); }
+        let (sa, ta) = (b.p(s).ability, b.p(t).ability);
+        if b.dex.eff(Kind::Ability, sa).flag("failskillswap") || b.dex.eff(Kind::Ability, ta).flag("failskillswap") { return RV::B(false); }
+        let se = Some(Eff::cond(id("skillswap")));
+        let r1 = b.run_event("SetAbility", Tgt::Mon(t), Some(s), se, RV::S(sa), false, false); if !r1.truthy() { return r1; }
+        let r2 = b.run_event("SetAbility", Tgt::Mon(s), Some(s), se, RV::S(ta), false, false); if !r2.truthy() { return r2; }
+        b.single_event("End", Eff::new(Kind::Ability, sa), Some(SLoc::Ability(s)), Tgt::Mon(s), None, None, RV::Undef);
+        b.single_event("End", Eff::new(Kind::Ability, ta), Some(SLoc::Ability(t)), Tgt::Mon(t), None, None, RV::Undef);
+        b.pm(s).ability = ta; b.pm(t).ability = sa;
+        let st1 = b.init_state(ta, Some(true)); b.pm(s).ability_state = st1;
+        let st2 = b.init_state(sa, Some(true)); b.pm(t).ability_state = st2;
+        b.single_event("Start", Eff::new(Kind::Ability, sa), Some(SLoc::Ability(t)), Tgt::Mon(t), None, None, RV::Undef);
+        b.single_event("Start", Eff::new(Kind::Ability, ta), Some(SLoc::Ability(s)), Tgt::Mon(s), None, None, RV::Undef);
         RV::Undef });
+    h!(r, Move, "round", "onTry", |b, a| {
+        let e = a.src_eff;
+        let qi = b.queue.iter().position(|q| q.choice == Choice::Move && q.am.map(|x| b.am(x).id == "round").unwrap_or(false));
+        if let Some(qi) = qi { b.prioritize_action(qi, e); }
+        RV::Undef });
+    h!(r, Move, "stoneaxe", "onAfterHit", |b, a| { let s = a.s(); let am = a.am(); if !b.am(am).has_sheer_force && b.p(s).hp > 0 { b.add_side_condition(1 - s.0, "stealthrock", None, None); } RV::Undef });
+    h!(r, Move, "stoneaxe", "onAfterSubDamage", |b, a| { let s = a.s(); let am = a.am(); if !b.am(am).has_sheer_force && b.p(s).hp > 0 { b.add_side_condition(1 - s.0, "stealthrock", None, None); } RV::Undef });
+    h!(r, Move, "struggle", "onModifyMove", |b, a| { let am = a.am(); b.amm(am).mtype = "???"; RV::Undef });
+    h!(r, Move, "lastresort", "onTry", |b, a| {
+        let s = a.t(); let p = b.p(s); if p.move_slots.len() < 2 { return RV::B(false); }
+        let mut has = false; for sl in &p.move_slots { if sl.id == "lastresort" { has = true; continue; } if !sl.used { return RV::B(false); } }
+        RV::B(has) });
+    // ---------- type / power / targeting changes ----------
+    h!(r, Move, "weatherball", "onModifyType", |b, a| {
+        let m = a.t(); let am = a.am(); let w = b.pokemon_effective_weather(m, None);
+        let t = match w { "sunnyday" | "desolateland" => "Fire", "raindance" | "primordialsea" => "Water", "sandstorm" => "Rock", "hail" | "snowscape" => "Ice", _ => "" };
+        if !t.is_empty() { b.amm(am).mtype = t; } RV::Undef });
+    h!(r, Move, "weatherball", "onModifyMove", |b, a| {
+        let m = a.t(); let am = a.am(); let w = b.pokemon_effective_weather(m, None);
+        if ["sunnyday", "desolateland", "raindance", "primordialsea", "sandstorm", "hail", "snowscape"].contains(&w) { b.amm(am).base_power *= 2.0; } RV::Undef });
+    h!(r, Move, "terrainpulse", "onModifyType", |b, a| {
+        let m = a.t(); let am = a.am(); if b.is_grounded(m, false) != Some(true) { return RV::Undef; }
+        let t = match b.field.terrain { "electricterrain" => "Electric", "grassyterrain" => "Grass", "mistyterrain" => "Fairy", "psychicterrain" => "Psychic", _ => "" };
+        if !t.is_empty() { b.amm(am).mtype = t; } RV::Undef });
+    h!(r, Move, "terrainpulse", "onModifyMove", |b, a| { let m = a.t(); let am = a.am(); if !b.field.terrain.is_empty() && b.is_grounded(m, false) == Some(true) { b.amm(am).base_power *= 2.0; } RV::Undef });
+    h!(r, Move, "expandingforce", "onBasePower", |b, a| { let m = a.t(); if b.is_terrain("psychicterrain") && b.is_grounded(m, false) == Some(true) { return b.cm(1.5, 1.0); } RV::Undef });
+    h!(r, Move, "expandingforce", "onModifyMove", |b, a| { let m = a.t(); let am = a.am(); if b.is_terrain("psychicterrain") && b.is_grounded(m, false) == Some(true) { b.amm(am).target = "allAdjacentFoes"; } RV::Undef });
+    h!(r, Move, "hurricane", "onModifyMove", |b, a| {
+        let am = a.am(); let w = a.source.map(|t| b.pokemon_effective_weather(t, None)).unwrap_or("");
+        match w { "raindance" | "primordialsea" => b.amm(am).accuracy = None, "sunnyday" | "desolateland" => b.amm(am).accuracy = Some(50.0), _ => {} } RV::Undef });
+    h!(r, Move, "thunder", "onModifyMove", |b, a| {
+        let am = a.am(); let w = a.source.map(|t| b.pokemon_effective_weather(t, None)).unwrap_or("");
+        match w { "raindance" | "primordialsea" => b.amm(am).accuracy = None, "sunnyday" | "desolateland" => b.amm(am).accuracy = Some(50.0), _ => {} } RV::Undef });
+    h!(r, Move, "blizzard", "onModifyMove", |b, a| { let w = b.effective_weather(); if w == "hail" || w == "snowscape" { let am = a.am(); b.amm(am).accuracy = None; } RV::Undef });
+    h!(r, Move, "freezedry", "onEffectiveness", |b, a| { if b.eff_type == "Water" { return RV::N(1.0); } RV::Undef });
+    h!(r, Move, "facade", "onBasePower", |b, a| { let m = a.t(); let st = b.p(m).status; if !st.is_empty() && st != "slp" { return b.cm(2.0, 1.0); } RV::Undef });
+    h!(r, Move, "barbbarrage", "onBasePower", |b, a| { let t = a.s(); let st = b.p(t).status; if st == "psn" || st == "tox" { return b.cm(2.0, 1.0); } RV::Undef });
+    h!(r, Move, "ficklebeam", "onBasePower", |b, a| { if b.rchance(3, 10) { return b.cm(2.0, 1.0); } RV::Undef });
+    h!(r, Move, "solarbeam", "onBasePower", |b, a| { let m = a.t(); let w = b.pokemon_effective_weather(m, None); if ["raindance", "primordialsea", "sandstorm", "hail", "snowscape"].contains(&w) { return b.cm(0.5, 1.0); } RV::Undef });
+    h!(r, Move, "knockoff", "onBasePower", |b, a| {
+        let t = a.s(); let item = b.p(t).item; let e = a.src_eff;
+        if !b.single_event("TakeItem", Eff::new(Kind::Item, item), Some(SLoc::Item(t)), Tgt::Mon(t), Some(t), e, RV::S(if item.is_empty() { "$none" } else { item })).truthy() { return RV::Undef; }
+        if !item.is_empty() { return b.cm(1.5, 1.0); } RV::Undef });
+    h!(r, Move, "knockoff", "onAfterHit", |b, a| { let t = a.t(); b.take_item(t, None); RV::Undef });
+    h!(r, Move, "psychicfangs", "onTryHit", |b, a| { let t = a.t(); remove_screens(b, t); RV::Undef });
+    h!(r, Move, "brickbreak", "onTryHit", |b, a| { let t = a.t(); remove_screens(b, t); RV::Undef });
+    h!(r, Move, "ragingbull", "onTryHit", |b, a| { let t = a.t(); remove_screens(b, t); RV::Undef });
+    h!(r, Move, "lowkick", "onTryHit", |b, a| { RV::Undef });
+    h!(r, Move, "grassknot", "onTryHit", |b, a| { RV::Undef });
+    h!(r, Move, "heavyslam", "onTryHit", |b, a| { RV::Undef });
+    h!(r, Move, "poltergeist", "onTry", |b, a| { RV::B(a.source.map(|t| !b.p(t).item.is_empty()).unwrap_or(false)) });
+    h!(r, Move, "poltergeist", "onTryHit", |b, a| { RV::Undef });
+    h!(r, Move, "steelroller", "onTry", |b, a| { RV::B(!b.field.terrain.is_empty()) });
+    h!(r, Move, "steelroller", "onHit", |b, a| { b.clear_terrain(); RV::Undef });
+    h!(r, Move, "steelroller", "onAfterSubDamage", |b, a| { b.clear_terrain(); RV::Undef });
+    h!(r, Move, "icespinner", "onAfterHit", |b, a| { b.clear_terrain(); RV::Undef });
+    h!(r, Move, "icespinner", "onAfterSubDamage", |b, a| { if a.source.map(|s| b.p(s).hp > 0).unwrap_or(false) { b.clear_terrain(); } RV::Undef });
+    h!(r, Move, "doubleshock", "onTryMove", |b, a| { let m = a.t(); if b.has_type(m, "Electric") { return RV::Undef; } RV::Null });
+    h!(r, Move, "doubleshock", "self.onHit", |b, a| { let m = a.t(); let ty: Vec<Id> = b.p(m).types.iter().map(|t| if *t == "Electric" { "???" } else { *t }).collect(); let p = b.pm(m); p.types = ty; p.added_type = ""; RV::Undef });
+    h!(r, Move, "direclaw", "secondaries.0.onHit", |b, a| { let (t, s) = (a.t(), a.s()); let st = ["psn", "par", "slp"][b.prng.sample_idx(3)]; b.try_set_status(t, st, Some(s), None); RV::Undef });
+    h!(r, Move, "throatchop", "secondaries.0.onHit", |b, a| { let t = a.t(); b.add_volatile(t, "throatchop", None, None); RV::Undef });
     // ---------- two-turn moves ----------
     h!(r, Move, "electroshot", "onTryMove", |b, a| {
         let att = a.t(); let def = a.source; let e = a.src_eff.unwrap();
@@ -301,6 +392,26 @@ pub fn register(r: &mut Reg) {
         let r = b.set_status(t, "slp", s, e, false); if !r.truthy() { return r; }
         b.pm(t).status_state.set("time", SV::N(3.0)); b.pm(t).status_state.set("startTime", SV::N(3.0));
         let mx = b.p(t).maxhp as f64; b.heal(mx, None, None, None); RV::Undef });
+    // 2026-10-09, batch 3
+    h!(r, Move, "entrainment", "onTryHit", |b, a| { let t = a.t(); let Some(s) = a.source else { return RV::Undef }; if t == s { return RV::B(false); }
+        let (ta, sa) = (b.p(t).ability, b.p(s).ability);
+        if ta == sa || b.dex.eff(Kind::Ability, ta).cantsuppress || ta == "truant" || b.dex.eff(Kind::Ability, sa).flag("noentrain") { return RV::B(false); } RV::Undef });
+    h!(r, Move, "entrainment", "onHit", |b, a| { let t = a.t(); let Some(s) = a.source else { return RV::Undef }; let sa = b.p(s).ability; if !b.set_ability(t, sa, Some(s), None, false) { return RV::B(false); } RV::Undef });
+    h!(r, Move, "temperflare", "basePowerCallback", |b, a| { let s = a.s(); let bp = b.am(a.am()).base_power; if b.p(s).move_last_turn_result == Tri::B(false) { return RV::N(bp * 2.0); } RV::N(bp) });
+    h!(r, Move, "shellsidearm", "onPrepareHit", |b, a| { RV::Undef });
+    h!(r, Move, "shellsidearm", "onModifyMove", |b, a| { let m = a.t(); let Some(t) = a.source else { return RV::Undef }; let am = a.am();
+        let (atk, spa) = (b.get_stat_simple(m, 1, false, true), b.get_stat_simple(m, 3, false, true)); let (def, spd) = (b.get_stat_simple(t, 2, false, true), b.get_stat_simple(t, 4, false, true));
+        let lv = b.p(m).level; let base = 2 * lv / 5 + 2;
+        let physical = ((base * 90 * atk) / def) / 50; let special = ((base * 90 * spa) / spd) / 50;
+        if physical > special || (physical == special && b.rchance(1, 2)) { b.amm(am).category = "Physical"; if !b.am(am).flags.contains(&"contact") { b.amm(am).flags.push("contact"); } } RV::Undef });
+    h!(r, Move, "shellsidearm", "onHit", |b, a| { RV::Undef });
+    h!(r, Move, "shellsidearm", "onAfterSubDamage", |b, a| { RV::Undef });
+    h!(r, Move, "batonpass", "onHit", |b, a| { let t = a.t(); if b.can_switch(t.0) == 0 || b.has_vol(t, "commanded") { let n = b.mon_name(t); b.add(&["-fail", &n]); return RV::NotFail; } RV::Undef });
+    h!(r, Move, "allyswitch", "onPrepareHit", |b, a| { let m = a.t(); b.add_volatile(m, "allyswitch", None, None) });
+    h!(r, Move, "allyswitch", "onHit", |b, a| { let m = a.t(); let pos = b.p(m).position; let np = if pos == 0 { 1 } else { 0 };
+        let ok = b.sides[m.0 as usize].active[np as usize].map(|i| !b.p((m.0, i)).fainted).unwrap_or(false);
+        if !ok { let n = b.mon_name(m); b.add(&["-fail", &n, "move: Ally Switch"]); return RV::NotFail; }
+        b.swap_position(m, np); RV::Undef });
     h!(r, Move, "superfang", "damageCallback", |b, a| { let t = a.t(); RV::N((b.p(t).hp as f64 / 2.0).floor().max(1.0)) });
     h!(r, Move, "finalgambit", "damageCallback", |b, a| { let s = a.s(); let d = b.p(s).hp; b.faint(s, None, None); RV::N(d as f64) });
 }

@@ -163,10 +163,7 @@ fn grid_feats(b: &Battle, cfg: &Cfg) -> [f64; 2] {
     let exp = mine.iter().map(|mi| foes.iter().map(|f| cell(f, mi).unwrap_or(0.5)).fold(1.0f64, f64::min)).sum::<f64>() / mine.len() as f64;
     [cov - 0.5, exp - 0.5]
 }
-/// RACE_BENCH=1 (both sides) | s0 | s1: the bench-aware race (see race_feats) in the value each side plans with
-fn race_bench() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new(); *F.get_or_init(|| match std::env::var("RACE_BENCH").as_deref() { Ok("s0") => [true, false], Ok("s1") => [false, true], Ok(_) => [true, true], Err(_) => [false, false] }) }
-pub fn feats(b: &mut Battle, cfg: &Cfg) -> Vec<f64> { feats_x(b, cfg, race_bench()[0]) }
-pub fn feats_x(b: &mut Battle, cfg: &Cfg, bench: bool) -> Vec<f64> {
+pub fn feats(b: &mut Battle, cfg: &Cfg) -> Vec<f64> {
     struct S { hp: f64, n: f64, bst: f64, lock_s: f64, lock_a: f64, spe: f64 }
     let side = |b: &Battle, s: u8| -> S {
         let al = alive(b, s);
@@ -199,7 +196,7 @@ pub fn feats_x(b: &mut Battle, cfg: &Cfg, bench: bool) -> Vec<f64> {
          d(&|b, s| cnt(b, s, "encore")), d(&|b, s| tricked(b, s))];
     let taunt = d(&|b, s| cnt(b, s, "taunt"));
     if let Some(cd) = cfg.cdata {
-        let r = race_feats(b, cd, bench); v.extend_from_slice(&r[..2]);
+        let r = race_feats(b, cd); v.extend_from_slice(&r[..2]);
         if feats21() {
             // champ-battle-v21 features (after the two race edges; a value file with 20 weights ignores them):
             // 20 priority edge (RACE_PRIO; the best priority hit each side has on the field, HP share, summed over its actives)
@@ -247,48 +244,8 @@ pub fn feats_x(b: &mut Battle, cfg: &Cfg, bench: bool) -> Vec<f64> {
                 v.extend_from_slice(&[tr_pot, tw_pot, be]);
             }
         }
-        if race_support() { v.push(r[3]); }
-        if support_classes_on() { v.extend_from_slice(&support_classes(b, race_bench()[0])); }
     }
     v
-}
-/// RACE_SUPPORT=classes (2026-10-09, TR sheet relaying the user: fit the support credits instead of picking them): one feature per
-/// support class, the side difference of the number of race units (actives, or actives + bench under RACE_BENCH) with that class
-/// usable now, under the same availability conditions the race uses (Tailwind not up and the side slower, Trick Room would help,
-/// screens not up, Aurora Veil in snow, Fake Out on a fresh unit). Linear in the position, so a fit on real outcomes gives each class
-/// a weight that, divided by the KO-edge weight, is its credit in KO units. The single support edge is not appended in this mode.
-pub const SUPPORT_CLASSES: [&str; 11] = ["fakeout", "followme", "tailwind", "trickroom", "screens", "partingshot", "helpinghand", "wideguard", "sleep", "status", "taunt"];
-fn support_classes_on() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("RACE_SUPPORT").map(|v| v == "classes").unwrap_or(false)) }
-pub fn support_classes(b: &Battle, bench: bool) -> [f64; 11] {
-    let mut out = [0.0f64; 11];
-    let mean_spe: [f64; 2] = std::array::from_fn(|s| { let a = alive(b, s as u8); a.iter().map(|m| b.p(*m).stored[5] as f64).sum::<f64>() / a.len().max(1) as f64 });
-    let tr_up = find(&b.field.pseudo, "trickroom").is_some();
-    for s in 0..2usize {
-        let sign = if s == 0 { 1.0 } else { -1.0 };
-        let tw_up = find(&b.sides[s].side_conditions, "tailwind").is_some();
-        let scr_up = |k: &str| find(&b.sides[s].side_conditions, k).is_some();
-        for m in alive(b, s as u8) {
-            let p = b.p(m);
-            if !p.is_active && !bench { continue; }
-            let fresh = p.active_move_actions == 0;
-            let lock = find(&p.volatiles, "choicelock").and_then(|cl| cl.get("move").and_then(|v| v.s()));
-            for sl in p.move_slots.iter().filter(|sl| sl.pp > 0 && !sl.disabled && lock.map(|l| l == sl.id).unwrap_or(true)) {
-                let c = match sl.id {
-                    "fakeout" => if fresh { 0 } else { continue },
-                    "followme" | "ragepowder" => 1,
-                    "tailwind" => if tw_up || mean_spe[s] >= mean_spe[1 - s] * 1.3 { continue } else { 2 },
-                    "trickroom" => if tr_up || mean_spe[s] >= mean_spe[1 - s] { continue } else { 3 },
-                    "reflect" => if scr_up("reflect") || scr_up("auroraveil") { continue } else { 4 },
-                    "lightscreen" => if scr_up("lightscreen") || scr_up("auroraveil") { continue } else { 4 },
-                    "auroraveil" => if scr_up("auroraveil") || !matches!(b.field.weather, "snowscape" | "hail") { continue } else { 4 },
-                    "partingshot" => 5, "helpinghand" => 6, "wideguard" => 7,
-                    "spore" | "sleeppowder" | "hypnosis" | "darkvoid" => 8, "willowisp" | "thunderwave" => 9, "taunt" | "encore" => 10,
-                    _ => continue };
-                out[c] += sign;
-            }
-        }
-    }
-    out
 }
 /// FEATS22=1 (champ-battle-v21, implies FEATS21): three more features, 28 in all
 fn feats22() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("FEATS22").is_ok()) }
@@ -361,19 +318,10 @@ fn bench_edge(b: &mut Battle, cd: &crate::data::Data) -> f64 {
     }
     out[0] - out[1]
 }
-fn race_feats(b: &mut Battle, cd: &crate::data::Data, bench: bool) -> [f64; 4] {
+fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 3] {
     let act: [Vec<MonRef>; 2] = [active_alive(b, 0).into_iter().map(|x| x.1).collect(), active_alive(b, 1).into_iter().map(|x| x.1).collect()];
-    if act[0].is_empty() || act[1].is_empty() { return [0.0, 0.0, 0.0, 0.0]; }
-    let mut units: Vec<MonRef> = act[0].iter().chain(act[1].iter()).copied().collect();
-    let n_act = units.len();
-    // RACE_BENCH (champ-battle-v26): the bench joins the race. Each side's living bench Pokemon are units too, healthiest first; they
-    // start out of play and enter when one of their side's units falls, so a foe about to die on the field and that foe already dead
-    // and replaced read alike (the race used to credit the first with a free KO and then keep racing against a corpse).
-    if bench { for s in 0..2u8 {
-        let mut bn: Vec<MonRef> = alive(b, s).into_iter().filter(|m| !b.p(*m).is_active).collect();
-        bn.sort_by(|x, y| (b.p(*y).hp as f64 / b.p(*y).maxhp.max(1) as f64).partial_cmp(&(b.p(*x).hp as f64 / b.p(*x).maxhp.max(1) as f64)).unwrap());
-        units.extend(bn);
-    } }
+    if act[0].is_empty() || act[1].is_empty() { return [0.0, 0.0, 0.0]; }
+    let units: Vec<MonRef> = act[0].iter().chain(act[1].iter()).copied().collect();
     let screens = |b: &Battle, s: u8| -> Vec<String> { ["reflect", "lightscreen", "auroraveil"].iter().filter(|k| find(&b.sides[s as usize].side_conditions, k).is_some()).map(|k| k.to_string()).collect() };
     // each side's screens once, as the memo's bitmask (the string list is only built on a memo miss)
     let scr_bits: [u8; 2] = std::array::from_fn(|s| screens(b, s as u8).iter().fold(0u8, |m, x| m | match x.as_str() { "reflect" => 1, "lightscreen" => 2, _ => 4 }));
@@ -402,7 +350,7 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data, bench: bool) -> [f64; 4] {
             if tm.category == "Status" { continue; }
             let prio = if !prio_on { 0 } else if mid == "grassyglide" { if grassy { 1 } else { 0 } } else { tm.priority as i64 };
             let prio_ok = |j: usize| prio <= 0 || (!(psy && grounded[j]) && !blocks[side(j) as usize]);
-            let spread = (tm.target == "allAdjacentFoes" || tm.target == "allAdjacent") && (if bench { act[1 - s as usize].len() } else { foes.len() }) == 2;
+            let spread = (tm.target == "allAdjacentFoes" || tm.target == "allAdjacent") && foes.len() == 2;
             let acc = tm.accuracy.map(|a| (a / 100.0).min(1.0)).unwrap_or(1.0);
             let acc = if crate::battle::Battle::miss_double() == Some(s) { (2.0 * acc - 1.0).max(0.0) } else { acc };   // MISS_DOUBLE: that side's analytic accuracy too
             let hits = match tm.multihit { Some((lo, hi)) if lo == hi => lo as f64, Some((_, hi)) => if b.p(m).ability == "skilllink" { hi as f64 } else { 3.1 }, None => 1.0 };
@@ -420,34 +368,6 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data, bench: bool) -> [f64; 4] {
     let prio_edge: f64 = if !prio_on { 0.0 } else { (0..n).map(|i| {
         let best = (0..opts[i].len()).filter(|&k| oprio[i][k] > 0).map(|k| (0..n).map(|j| if b.p(units[j]).maxhp > 0 { opts[i][k][j] / b.p(units[j]).maxhp as f64 } else { 0.0 }).fold(0.0, f64::max)).fold(0.0, f64::max).min(1.0);
         if side(i) == 0 { best } else { -best } }).sum() };
-    // RACE_SUPPORT (2026-10-09, the user: price a support's remaining non-damaging actions): per unit, its usable support moves with a
-    // credit in KO units; in the race a unit supports instead of attacking when its best support credit beats its best hit's score,
-    // one-shot moves (Fake Out, Tailwind, Trick Room, screens, Parting Shot) once, the rest each turn; credits count 1/k like KOs
-    let sup_on = race_support();
-    let mean_spe: [f64; 2] = std::array::from_fn(|s| { let a = alive(b, s as u8); a.iter().map(|m| b.p(*m).stored[5] as f64).sum::<f64>() / a.len().max(1) as f64 });
-    let supports: Vec<Vec<(Id, f64, bool)>> = (0..n).map(|i| {
-        if !sup_on { return vec![]; }
-        let m = units[i]; let s = m.0 as usize; let p = b.p(m); let fresh = p.active_move_actions == 0;
-        let lock = find(&p.volatiles, "choicelock").and_then(|cl| cl.get("move").and_then(|v| v.s()));
-        let tw_up = find(&b.sides[s].side_conditions, "tailwind").is_some(); let tr_up = find(&b.field.pseudo, "trickroom").is_some();
-        let scr_up = |k: &str| find(&b.sides[s].side_conditions, k).is_some();
-        p.move_slots.iter().filter(|sl| sl.pp > 0 && !sl.disabled && lock.map(|l| l == sl.id).unwrap_or(true)).filter_map(|sl| {
-            let (credit, once) = match sl.id {
-                "fakeout" => (if fresh { 0.35 } else { 0.0 }, true),
-                "followme" | "ragepowder" => (0.4, false),
-                "tailwind" => (if tw_up || mean_spe[s] >= mean_spe[1 - s] * 1.3 { 0.0 } else { 0.5 }, true),
-                "trickroom" => (if tr_up || mean_spe[s] >= mean_spe[1 - s] { 0.0 } else { 0.6 }, true),
-                "reflect" => (if scr_up("reflect") || scr_up("auroraveil") { 0.0 } else { 0.3 }, true),
-                "lightscreen" => (if scr_up("lightscreen") || scr_up("auroraveil") { 0.0 } else { 0.3 }, true),
-                "auroraveil" => (if scr_up("auroraveil") || !matches!(b.field.weather, "snowscape" | "hail") { 0.0 } else { 0.5 }, true),
-                "partingshot" => (0.3, true), "helpinghand" => (0.2, false), "wideguard" => (0.15, false),
-                "spore" | "sleeppowder" | "hypnosis" | "darkvoid" => (0.4, true), "willowisp" | "thunderwave" => (0.25, true), "taunt" | "encore" => (0.25, true),
-                _ => (0.0, false) };
-            // RACE_SUPPORT_CREDITS=fakeout:0.32,screens:0.67,... overrides a usable class's credit (0 drops the class); the availability
-            // conditions above stay (classes as in SUPPORT_CLASSES; screens covers Reflect / Light Screen / Aurora Veil)
-            let credit = if credit > 0.0 { support_credit_override(sl.id).unwrap_or(credit) } else { credit };
-            if credit > 0.0 { Some((sl.id, credit, once)) } else { None } }).collect()
-    }).collect();
     let spe: Vec<f64> = (0..n).map(|i| b.get_stat(units[i], 5, false, false) as f64).collect();
     let hp0: Vec<f64> = (0..n).map(|i| b.p(units[i]).hp as f64).collect();
     let maxhp: Vec<f64> = (0..n).map(|i| b.p(units[i]).maxhp.max(1) as f64).collect();
@@ -455,59 +375,46 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data, bench: bool) -> [f64; 4] {
     let wake: Vec<usize> = (0..n).map(|i| match status[i] { "slp" => b.p(units[i]).status_state.n("time").map(|t| t.max(1.0) as usize).unwrap_or(2), "frz" => 3, _ => 1 }).collect();
     let lefties: Vec<bool> = (0..n).map(|i| b.p(units[i]).item == "leftovers").collect();
     // one race; `first` = the side that moves first when opposing Pokemon tie on Speed (0 reproduces the original order)
-    let run = |first: u8| -> ([f64; 2], Vec<f64>, [f64; 2]) {
-        let mut hp = hp0.clone(); let mut ko = [0.0f64; 2]; let mut sup = [0.0f64; 2];
-        let mut used: Vec<Vec<Id>> = vec![vec![]; n];
-        let mut inplay: Vec<bool> = (0..n).map(|i| i < n_act).collect();
+    let run = |first: u8| -> ([f64; 2], Vec<f64>) {
+        let mut hp = hp0.clone(); let mut ko = [0.0f64; 2];
         for k in 1..=RACE_T {
             let tr_on = k <= tr_left;
             let eff_spe = |i: usize| { let s = side(i) as usize; let x = if tw_left[s] > 0 && k > tw_left[s] { spe[i] / 2.0 } else { spe[i] }; if tr_on { -x } else { x } };
             // each unit's priority this turn: that of its best option against the HP at the start of the turn (0 without RACE_PRIO)
-            let pr: Vec<i64> = (0..n).map(|i| { if !prio_on || !inplay[i] || hp[i] <= 0.0 || opts[i].is_empty() { return 0; }
+            let pr: Vec<i64> = (0..n).map(|i| { if !prio_on || hp[i] <= 0.0 || opts[i].is_empty() { return 0; }
                 let pf = if status[i] == "par" { 0.875 } else { 1.0 };
-                let score = |o: &Vec<f64>| (0..n).filter(|&j| inplay[j] && hp[j] > 0.0 && o[j] > 0.0).map(|j| (o[j] * pf).min(hp[j]) / maxhp[j] + if o[j] * pf >= hp[j] { 1.0 } else { 0.0 }).sum::<f64>();
+                let score = |o: &Vec<f64>| (0..n).filter(|&j| hp[j] > 0.0 && o[j] > 0.0).map(|j| (o[j] * pf).min(hp[j]) / maxhp[j] + if o[j] * pf >= hp[j] { 1.0 } else { 0.0 }).sum::<f64>();
                 let kb = (0..opts[i].len()).max_by(|&x, &y| score(&opts[i][x]).partial_cmp(&score(&opts[i][y])).unwrap()).unwrap(); oprio[i][kb] }).collect();
-            let mut order: Vec<usize> = (0..n).filter(|&i| inplay[i] && hp[i] > 0.0).collect();
+            let mut order: Vec<usize> = (0..n).filter(|&i| hp[i] > 0.0).collect();
             order.sort_by(|&x, &y| pr[y].cmp(&pr[x]).then_with(|| eff_spe(y).partial_cmp(&eff_spe(x)).unwrap()).then_with(|| if side(x) == side(y) { std::cmp::Ordering::Equal }
                 else if side(x) == first { std::cmp::Ordering::Less } else { std::cmp::Ordering::Greater }));
             for &i in &order {
-                if hp[i] <= 0.0 || k < wake[i] { continue; }
+                if hp[i] <= 0.0 || k < wake[i] || opts[i].is_empty() { continue; }
                 let pf = if status[i] == "par" { 0.875 } else { 1.0 };
-                let score = |o: &Vec<f64>| (0..n).filter(|&j| inplay[j] && hp[j] > 0.0 && o[j] > 0.0).map(|j| (o[j] * pf).min(hp[j]) / maxhp[j] + if o[j] * pf >= hp[j] { 1.0 } else { 0.0 }).sum::<f64>();
-                let best_hit = opts[i].iter().map(|o| score(o)).fold(0.0, f64::max);
-                let best_sup = supports[i].iter().filter(|(id, _, _)| !used[i].contains(id)).max_by(|a, c| a.1.partial_cmp(&c.1).unwrap()).cloned();
-                if let Some((sid, credit, once)) = best_sup { if credit > best_hit {
-                    sup[side(i) as usize] += credit / k as f64; if once { used[i].push(sid); } continue;
-                } }
-                if opts[i].is_empty() { continue; }
+                let score = |o: &Vec<f64>| (0..n).filter(|&j| hp[j] > 0.0 && o[j] > 0.0).map(|j| (o[j] * pf).min(hp[j]) / maxhp[j] + if o[j] * pf >= hp[j] { 1.0 } else { 0.0 }).sum::<f64>();
                 let best = opts[i].iter().max_by(|x, y| score(x).partial_cmp(&score(y)).unwrap()).unwrap().clone();
                 for j in 0..n {
-                    if inplay[j] && hp[j] > 0.0 && best[j] > 0.0 { hp[j] -= best[j] * pf; if hp[j] <= 0.0 { ko[side(j) as usize] += 1.0 / k as f64; } }
+                    if hp[j] > 0.0 && best[j] > 0.0 { hp[j] -= best[j] * pf; if hp[j] <= 0.0 { ko[side(j) as usize] += 1.0 / k as f64; } }
                 }
             }
             for i in 0..n {
-                if !inplay[i] || hp[i] <= 0.0 { continue; }
+                if hp[i] <= 0.0 { continue; }
                 let chip = match status[i] { "brn" => maxhp[i] / 16.0, "psn" | "tox" => maxhp[i] / 8.0, _ => 0.0 };
                 hp[i] = (hp[i] - chip + if lefties[i] { maxhp[i] / 16.0 } else { 0.0 }).min(maxhp[i]);
                 if hp[i] <= 0.0 { ko[side(i) as usize] += 1.0 / k as f64; }
             }
-            // replacements: a fallen unit's side brings in its next bench unit (end of the race turn, as the game does)
-            if bench { for i in 0..n { if inplay[i] && hp[i] <= 0.0 {
-                inplay[i] = false;
-                if let Some(r) = (n_act..n).find(|&j| side(j) == side(i) && !inplay[j] && hp[j] > 0.0) { inplay[r] = true; }
-            } } }
-            if (0..n).filter(|&i| side(i) == 0 && inplay[i]).all(|i| hp[i] <= 0.0) || (0..n).filter(|&i| side(i) == 1 && inplay[i]).all(|i| hp[i] <= 0.0) { break; }
+            if (0..n).filter(|&i| side(i) == 0).all(|i| hp[i] <= 0.0) || (0..n).filter(|&i| side(i) == 1).all(|i| hp[i] <= 0.0) { break; }
         }
-        (ko, hp, sup)
+        (ko, hp)
     };
     let edges = |ko: &[f64; 2], hp: &Vec<f64>| -> [f64; 2] {
         let lost = |s: u8| (0..n).filter(|&i| side(i) == s).map(|i| (hp0[i] - hp[i].max(0.0)) / maxhp[i]).sum::<f64>();
         [ko[1] - ko[0], lost(1) - lost(0)] };
-    let (ko, hp, sup) = run(0); let mut out = edges(&ko, &hp); let mut sup_edge = sup[0] - sup[1];
+    let (ko, hp) = run(0); let mut out = edges(&ko, &hp);
     // RACE_TIES=avg (champ-battle-v13): a Speed tie between opposing Pokemon is a coin flip in the game, so the race is run with each
     // side winning the ties and the two results are averaged. Without it side 0 always moves first on a tie (the original behaviour).
     if race_ties_avg() && (0..n).any(|i| (0..n).any(|j| side(i) != side(j) && spe[i] == spe[j])) {
-        let (ko1, hp1, sup1) = run(1); let o1 = edges(&ko1, &hp1); out = [(out[0] + o1[0]) / 2.0, (out[1] + o1[1]) / 2.0]; sup_edge = (sup_edge + sup1[0] - sup1[1]) / 2.0;
+        let (ko1, hp1) = run(1); let o1 = edges(&ko1, &hp1); out = [(out[0] + o1[0]) / 2.0, (out[1] + o1[1]) / 2.0];
     }
     if std::env::var("RACE_DEBUG").is_ok() {                   // first few calls only: units, best hit % on each foe, Speed, outcome
         static CNT: std::sync::atomic::AtomicUsize = std::sync::atomic::AtomicUsize::new(0);
@@ -522,18 +429,8 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data, bench: bool) -> [f64; 4] {
             eprintln!("{}", lines.join("\n"));
         }
     }
-    [out[0], out[1], prio_edge, sup_edge]
+    [out[0], out[1], prio_edge]
 }
-fn support_credit_override(id: &str) -> Option<f64> {
-    static M: std::sync::OnceLock<std::collections::HashMap<String, f64>> = std::sync::OnceLock::new();
-    let m = M.get_or_init(|| std::env::var("RACE_SUPPORT_CREDITS").ok().map(|v| v.split(',').filter_map(|kv| { let (k, x) = kv.split_once(':')?; Some((k.trim().to_string(), x.trim().parse().ok()?)) }).collect()).unwrap_or_default());
-    if m.is_empty() { return None; }
-    let class = match id { "followme" | "ragepowder" => "followme", "reflect" | "lightscreen" | "auroraveil" => "screens", "spore" | "sleeppowder" | "hypnosis" | "darkvoid" => "sleep",
-        "willowisp" | "thunderwave" => "status", "taunt" | "encore" => "taunt", x => x };
-    m.get(class).copied()
-}
-/// RACE_SUPPORT=1: the race prices support moves (see race_feats); the support edge is appended to the features (after FEATS22's)
-fn race_support() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("RACE_SUPPORT").map(|v| v != "classes").unwrap_or(false)) }
 fn race_prio() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("RACE_PRIO").is_ok()) }
 fn race_ties_avg() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("RACE_TIES").map(|v| v == "avg").unwrap_or(false)) }
 fn perish_adj(b: &Battle, w: &[f64]) -> f64 {
@@ -590,15 +487,12 @@ fn tr_keep(b: &Battle, s: u8) -> bool {
 }
 /// side 0's win chance as each side sees it: (with side 0's weights, with side 1's weights); equal unless EG_VALUE_B is set
 pub fn value2(b: &mut Battle, cfg: &Cfg) -> (f64, f64) {
-    let rb = race_bench();
-    if cfg.vw_b.is_none() && rb[0] == rb[1] { let v = value(b, cfg); return (v, v); }
+    let Some((b1, w1)) = &cfg.vw_b else { let v = value(b, cfg); return (v, v); };
     if b.ended { let v = match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 }; return (v, v); }
-    let (b0, w0) = cfg.vw.clone().expect("value weights");
-    let (b1, w1) = cfg.vw_b.clone().unwrap_or((b0, w0.clone()));
-    let f0 = feats_x(b, cfg, rb[0]); let f1 = if rb[0] == rb[1] { f0.clone() } else { feats_x(b, cfg, rb[1]) };
-    let ev = |b: &mut Battle, bb: f64, w: &Vec<f64>, f: &Vec<f64>| { let mut z = bb; for k in 0..w.len().min(f.len()) { z += w[k] * f[k]; } z += perish_adj(b, w); 1.0 / (1.0 + (-z).exp()) };
-    let va = ev(b, b0, &w0, &f0); let vb = ev(b, b1, &w1, &f1);
-    (va, vb)
+    let f = feats(b, cfg);
+    let ev = |b0: f64, w: &Vec<f64>| { let mut z = b0; for k in 0..w.len().min(f.len()) { z += w[k] * f[k]; } z += perish_adj(b, w); 1.0 / (1.0 + (-z).exp()) };
+    let va = match &cfg.vw { Some((b0, w)) => ev(*b0, w), None => ev(*b1, w1) };
+    (va, ev(*b1, w1))
 }
 pub fn value(b: &mut Battle, cfg: &Cfg) -> f64 {
     if b.ended { return match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 }; }

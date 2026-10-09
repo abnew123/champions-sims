@@ -959,8 +959,8 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     on: 71 un-evolved attacking turns instead of 92, "the Mega KOs more yet base preferred" 8 cases. And it hardly changes finishing
     decisions: in 400 logged games, of 52 turns with a foe at 20% HP or less on the field the old race left and the new one attacked
     in 2 (a 10% Gholdengo about to Nasty Plot: reasonable; a 10% Incineroar instead of a healthy Floette: the user's point exactly,
-    the support's Fake Out / Parting Shot are not in the race, so the new race finishes it; pssim/results/finish_cases.json). The flag
-    stays available; the default race is unchanged. The user's reading stands: the race overestimates the effect in some cases, but
+    the support's Fake Out / Parting Shot are not in the race, so the new race finishes it; pssim/results/finish_cases.json). Removed on
+    2026-10-09 (6:20 pm) at the user's word, with the support credits of the next entry; the default race is unchanged. The user's reading stands: the race overestimates the effect in some cases, but
     neither "finish" nor "leave" is right in general, and a support's last non-damaging action is priced by neither race.
   - **Pricing a support's remaining non-damaging actions (`RACE_SUPPORT`, 2026-10-09, 6:05 pm; TR sheet relaying the user: "have the battle sim
     look into it", then "can the credits be fitted directly?").** The one thing neither race priced was a support's next Fake Out / Follow
@@ -1006,8 +1006,12 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
       (39% vs 40%) under every setting, p(human) 64.5% in all four; the credits do not change the planner's choices there. Baseline:
       p(human) 62-76%, match 64-79%; the planner sets Tailwind more than players (36% vs 26%) and redirects less (16% vs 28%), both
       unchanged by any credit; 1250+ players (1,627 decisions) the same picture. results/support_decisions.txt and _r1250.txt.
-    - Verdict: **none adopted.** The flags (`RACE_SUPPORT=1|classes`, `RACE_SUPPORT_CREDITS`, `RACE_BENCH`) stay in the source, all off
-      by default, so the current build plays v25's games and no new version is cut. What the data says: the one-turn matrix already
+    - Verdict: **none adopted, and scrapped** (the user, via TR sheet, 6:15 pm: "Ok yeah let's scrap the whole thing"). The flags
+      (`RACE_SUPPORT=1|classes`, `RACE_SUPPORT_CREDITS`, `RACE_BENCH`) are removed from the source: plan.rs is back to its state before
+      the bench race (commit ac43e91) and build_egvalue10.py to 25 / 28 features; the flags-off games are unchanged (400 of the pool
+      starts replayed identically to the always-Mega baseline run after the revert). `pssim/support_decisions.py` stays as a general
+      tool (planner vs players on a class of decisions, any evalpos output), as do the results files. Do not redo this: the support
+      credits, the bench race and the Tailwind / redirection gaps above are closed unless the user asks again. What the data says: the one-turn matrix already
       plays out this turn's Fake Out / Tailwind / Follow Me, and a static credit for the turns after that is within noise of zero on real
       outcomes except Fake Out (+0.32 KO), too small to move self-play or the planner's choices; the race's blind spots in the Mega audit
       are a horizon question, not a credit question. The kit stays on v25 / `EG_MEGA_TIE=0`.

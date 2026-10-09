@@ -174,9 +174,9 @@
     "vals": [
      [
       "Farigiraf+Blastoise",
-      0.6450105552204961,
-      0.5945789103408691,
-      0.6071868215607759,
+      0.648151851394405,
+      0.5965158359830619,
+      0.6094248398358977,
       6
      ]
     ]
@@ -656,29 +656,33 @@
   },
   "Other Sun||Farigiraf+Blastoise||Farigiraf + Incineroar": {
    "lines": null,
-   "pop": 0.7912002347190364,
+   "pop": 0.7986681802188231,
    "worst": 0.7298843600680857,
    "full": [
-    0.7911965245174307,
-    0.7306086019472745
+    0.7974919429527679,
+    0.731245497901533
    ],
    "reader": [
     [
-     0.5898822005631097,
+     0.4588923719364253,
      "Farigiraf: switch | Incineroar: Parting Shot -> Farigiraf"
     ],
     [
-     0.4101177994368979,
+     0.29597972888642626,
      "Farigiraf: Protect | Incineroar: switch"
+    ],
+    [
+     0.2451278991771394,
+     "Farigiraf: Protect | Incineroar: Fake Out -> Blastoise"
     ]
    ],
    "share": 0.0254,
    "back": [
     "Torkoal",
-    "Incineroar"
+    "Kingambit"
    ],
    "itemMix": false,
-   "trCredit": 0.0,
+   "trCredit": 0.10615502897342571,
    "mix": [
     [
      70,
@@ -804,33 +808,33 @@
   },
   "Other Sun||Farigiraf+Blastoise||Charizard + Venusaur": {
    "lines": null,
-   "pop": 0.5677989101406027,
-   "worst": 0.5272874643442806,
+   "pop": 0.5677992887210663,
+   "worst": 0.5272879402243948,
    "full": [
-    0.5659797242901616,
-    0.5293466975587068
+    0.5659800095182708,
+    0.5293469932002144
    ],
    "reader": [
     [
-     0.3854349761309866,
+     0.38543833380343,
      "Charizard: Weather Ball -> Farigiraf | Venusaur: Sleep Powder -> Farigiraf"
     ],
     [
-     0.230570543214513,
+     0.23057868023233627,
      "Charizard: Weather Ball -> Farigiraf | Venusaur: Giga Drain -> Blastoise"
     ],
     [
-     0.225394614813051,
+     0.2253895397985255,
      "Charizard: Heat Wave | Venusaur: Protect"
     ]
    ],
    "share": 0.0356,
    "back": [
     "Torkoal",
-    "Incineroar"
+    "Kingambit"
    ],
    "itemMix": false,
-   "trCredit": 0.7129769645486429,
+   "trCredit": 0.7129829348464647,
    "mix": [
     [
      50,
@@ -1384,11 +1388,11 @@
   },
   "Other Sun||Farigiraf+Blastoise||Indeedee-F + Reuniclus": {
    "lines": null,
-   "pop": 0.722589662349608,
-   "worst": 0.722589662349608,
+   "pop": 0.7338210784301353,
+   "worst": 0.7338210784301353,
    "full": [
-    0.722589662349608,
-    0.722589662349608
+    0.7338210784301353,
+    0.7338210784301353
    ],
    "reader": [
     [
@@ -1399,10 +1403,10 @@
    "share": 0.0271,
    "back": [
     "Torkoal",
-    "Incineroar"
+    "Kingambit"
    ],
    "itemMix": true,
-   "trCredit": -0.3294895331263869,
+   "trCredit": -0.23983576311180485,
    "mix": [
     [
      100,
@@ -3704,29 +3708,29 @@
   },
   "Other Sun||Farigiraf+Blastoise||Charizard + Garchomp": {
    "lines": null,
-   "pop": 0.5674992470632035,
-   "worst": 0.4926946402479704,
+   "pop": 0.5675127700518879,
+   "worst": 0.4927086649299341,
    "full": [
-    0.5669569774787201,
-    0.494202376865324
+    0.5669701869703259,
+    0.4942161628376592
    ],
    "reader": [
     [
-     0.7478496958599155,
+     0.7479843271734415,
      "Charizard: Heat Wave | Garchomp: Earthquake"
     ],
     [
-     0.22529528526950413,
+     0.2253814814728737,
      "Charizard: Protect | Garchomp: Earthquake"
     ]
    ],
    "share": 0.0254,
    "back": [
     "Torkoal",
-    "Incineroar"
+    "Kingambit"
    ],
    "itemMix": false,
-   "trCredit": 0.7126573154975202,
+   "trCredit": 0.7127461172636794,
    "mix": [
     [
      85,
@@ -5028,29 +5032,29 @@
   },
   "Other Sun||Farigiraf+Blastoise||Charizard + Sneasler": {
    "lines": null,
-   "pop": 0.6621461283397755,
-   "worst": 0.5502586588666835,
+   "pop": 0.6621485013996452,
+   "worst": 0.5502604620227249,
    "full": [
-    0.6545312416119314,
-    0.5560498439213535
+    0.6545342854245131,
+    0.5560521708566772
    ],
    "reader": [
     [
-     0.5856651741834893,
+     0.5857001556463497,
      "Charizard: Heat Wave | Sneasler: Rock Slide"
     ],
     [
-     0.38041239780861974,
+     0.3803778514074239,
      "Charizard: Protect | Sneasler: switch"
     ]
    ],
    "share": 0.0237,
    "back": [
     "Torkoal",
-    "Incineroar"
+    "Kingambit"
    ],
    "itemMix": false,
-   "trCredit": 0.7127778036649285,
+   "trCredit": 0.7128353862584577,
    "mix": [
     [
      65,
@@ -6072,33 +6076,33 @@
   },
   "Other Sun||Farigiraf+Blastoise||Charizard + Kingambit": {
    "lines": null,
-   "pop": 0.5709118875678197,
-   "worst": 0.5516220677432466,
+   "pop": 0.5709258655489902,
+   "worst": 0.5516357874383664,
    "full": [
-    0.5694979004798352,
-    0.5574908449140866
+    0.5695116913126057,
+    0.5575046346629212
    ],
    "reader": [
     [
-     0.33957569715831665,
+     0.33947467084009436,
      "Charizard: Heat Wave | Kingambit: Protect"
     ],
     [
-     0.336799112461861,
+     0.3370172298223675,
      "Charizard: Heat Wave | Kingambit: Kowtow Cleave -> Farigiraf"
     ],
     [
-     0.19549246245299481,
+     0.19539176187726248,
      "Charizard: Protect | Kingambit: Kowtow Cleave -> Farigiraf"
     ]
    ],
    "share": 0.0203,
    "back": [
     "Torkoal",
-    "Incineroar"
+    "Kingambit"
    ],
    "itemMix": false,
-   "trCredit": 0.7123961694090704,
+   "trCredit": 0.7125526221968265,
    "mix": [
     [
      60,

@@ -59,6 +59,20 @@ impl Battle {
     }
 }
 
+/// Showdown's pokemon.getLastDamagedBy(true): the last foe hit on the user's attackedBy list
+fn last_damaged_by(b: &Battle, m: MonRef) -> Option<Attack> { b.p(m).attacked_by.iter().filter(|x| !b.is_ally(m, x.source)).last().cloned() }
+/// the Pokemon now in a slot ("p1a" .. "p2b")
+fn at_slot(b: &Battle, slot: Id) -> Option<MonRef> {
+    let bs = slot.as_bytes(); if bs.len() < 3 { return None; }
+    let s = (bs[1] - b'1') as u8; let pos = (bs[2] - b'a') as usize;
+    if s > 1 || pos > 1 { return None; }
+    b.sides[s as usize].active[pos].map(|i| (s, i))
+}
+fn mortal_spin_clear(b: &mut Battle, m: MonRef) {
+    b.remove_volatile(m, "leechseed");
+    for c in ["spikes", "toxicspikes", "stealthrock", "stickyweb", "gmaxsteelsurge"] { b.remove_side_condition(m.0, c); }
+    b.remove_volatile(m, "partiallytrapped");
+}
 pub fn register(r: &mut Reg) {
     // ---------- protection ----------
     for _ in 0..1 {}
@@ -272,6 +286,21 @@ pub fn register(r: &mut Reg) {
         let x = ((p.hp * 4096) as f64 / p.maxhp as f64).floor();
         let bp = (((100.0 * (100.0 * x) + 2048.0 - 1.0) / 4096.0).floor() / 100.0).floor();
         RV::N(if bp == 0.0 { 1.0 } else { bp }) });
+    // 2026-10-09: Metal Burst (the last foe that damaged the user this turn), Mortal Spin
+    h!(r, Move, "metalburst", "damageCallback", |b, a| { let s = a.s(); match last_damaged_by(b, s) { Some(x) => RV::N((x.damage as f64 * 1.5).max(1.0)), None => RV::N(0.0) } });
+    h!(r, Move, "metalburst", "onTry", |b, a| { let s = a.t(); RV::B(last_damaged_by(b, s).map(|x| x.this_turn).unwrap_or(false)) });
+    h!(r, Move, "metalburst", "onModifyTarget", |b, a| { let s = a.t(); if let Some(x) = last_damaged_by(b, s) { if let Some(t) = at_slot(b, x.slot) { return RV::Target(Some(t)); } } RV::Undef });
+    h!(r, Move, "mortalspin", "onAfterHit", |b, a| { let s = a.s(); let am = a.am(); if !b.am(am).has_sheer_force { mortal_spin_clear(b, s); } RV::Undef });
+    h!(r, Move, "mortalspin", "onAfterSubDamage", |b, a| { let s = a.s(); let am = a.am(); if !b.am(am).has_sheer_force && b.p(s).hp > 0 { mortal_spin_clear(b, s); } RV::Undef });
+    h!(r, Move, "hex", "basePowerCallback", |b, a| { let t = a.t(); let bp = b.am(a.am()).base_power; if !b.p(t).status.is_empty() || b.has_ability(t, "comatose") { return RV::N(bp * 2.0); } RV::N(bp) });
+    h!(r, Move, "rest", "onTry", |b, a| { let m = a.t();
+        if b.p(m).status == "slp" || b.has_ability(m, "comatose") { return RV::B(false); }
+        if b.p(m).hp == b.p(m).maxhp { let n = b.mon_name(m); b.add(&["-fail", &n, "heal"]); return RV::Null; }
+        if b.has_ability(m, "insomnia") || b.has_ability(m, "vitalspirit") { let n = b.mon_name(m); b.add(&["-fail", &n]); return RV::Null; } RV::Undef });
+    h!(r, Move, "rest", "onHit", |b, a| { let t = a.t(); let s = a.source; let e = a.src_eff;
+        let r = b.set_status(t, "slp", s, e, false); if !r.truthy() { return r; }
+        b.pm(t).status_state.set("time", SV::N(3.0)); b.pm(t).status_state.set("startTime", SV::N(3.0));
+        let mx = b.p(t).maxhp as f64; b.heal(mx, None, None, None); RV::Undef });
     h!(r, Move, "superfang", "damageCallback", |b, a| { let t = a.t(); RV::N((b.p(t).hp as f64 / 2.0).floor().max(1.0)) });
     h!(r, Move, "finalgambit", "damageCallback", |b, a| { let s = a.s(); let d = b.p(s).hp; b.faint(s, None, None); RV::N(d as f64) });
 }

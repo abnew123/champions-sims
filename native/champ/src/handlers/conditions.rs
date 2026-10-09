@@ -260,6 +260,26 @@ pub fn register(r: &mut Reg) {
     h!(r, Cond, "imprison", "onFoeBeforeMove", |b, a| {
         let mv = b.am(a.am()).id; let Some(src) = b.es().source else { return RV::Undef };
         if mv != "struggle" && b.p(src).move_slots.iter().any(|s| s.id == mv) { return RV::B(false); } RV::Undef });
+    // 2026-10-09: slot conditions (sim.rs add_slot_condition): Wish heals whoever is in the user's slot at the end of the next turn,
+    // Healing Wish the next Pokemon to come into the slot
+    h!(r, Cond, "wish", "onStart", |b, a| { let Some(src) = a.source else { return RV::Undef }; let hp = b.p(src).maxhp as f64 / 2.0; let t0 = b.turn - 1; b.es().set("hp", SV::N(hp)); b.es().set("startingTurn", SV::N(t0.min(255) as f64)); RV::Undef });
+    h!(r, Cond, "wish", "onResidual", |b, a| {
+        let t0 = b.es().n("startingTurn").unwrap_or(0.0); if ((b.turn - 1).min(255) as f64) <= t0 { return RV::Undef; }
+        let Some(slot) = b.es().source_slot else { return RV::Undef };
+        let bs = slot.as_bytes(); let s = (bs[1] - b'1') as u8; let pos = (bs[2] - b'a') as u8;
+        b.remove_slot_condition(s, pos, "wish"); RV::Undef });
+    h!(r, Cond, "wish", "onEnd", |b, a| { let Some(t) = a.target.mon() else { return RV::Undef }; if !b.p(t).fainted { let hp = b.es().n("hp").unwrap_or(0.0); b.heal(hp, Some(t), Some(t), None); } RV::Undef });
+    h!(r, Cond, "healingwish", "onSwitchIn", |b, a| { let t = a.t(); let pos = b.p(t).position; b.single_event("Swap", Eff::cond("healingwish"), Some(SLoc::Slot(t.0, pos, "healingwish")), Tgt::Mon(t), None, None, RV::Undef); RV::Undef });
+    h!(r, Cond, "healingwish", "onSwap", |b, a| { let t = a.t();
+        if !b.p(t).fainted && (b.p(t).hp < b.p(t).maxhp || !b.p(t).status.is_empty()) {
+            let mx = b.p(t).maxhp as f64; b.pokemon_heal(t, mx); let p = b.pm(t); p.status = ""; p.status_state = EState::default();
+            if b.logging { let n = b.mon_name(t); let p = b.p(t); let hp = format!("{}/{}", p.hp, p.maxhp); b.add(&["-heal", &n, &hp, "[from] move: Healing Wish"]); }
+            let pos = b.p(t).position; b.remove_slot_condition(t.0, pos, "healingwish");
+        } RV::Undef });
+    h!(r, Cond, "saltcure", "onStart", |b, a| { RV::Undef });
+    // Champions halves Salt Cure's residual: 1/8 for Water / Steel types, 1/16 otherwise (the base game's 1/4 and 1/8)
+    h!(r, Cond, "saltcure", "onResidual", |b, a| { let m = a.t(); let div = if b.has_type(m, "Water") || b.has_type(m, "Steel") { 8.0 } else { 16.0 }; let d = b.p(m).base_maxhp as f64 / div; b.damage(d, None, None, None, false); RV::Undef });
+    h!(r, Cond, "saltcure", "onEnd", |b, a| { RV::Undef });
     h!(r, Cond, "yawn", "onStart", |b, a| { RV::Undef });
     h!(r, Cond, "yawn", "onEnd", |b, a| { let m = a.t(); let src = b.es().source; b.try_set_status(m, "slp", src, Some(Eff::cond(id("yawn")))); RV::Undef });
     h!(r, Cond, "perishsong", "onResidual", |b, a| { RV::Undef });

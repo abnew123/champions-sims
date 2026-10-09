@@ -519,7 +519,7 @@ pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
     let mut out = vec![];
     let foes: Vec<Option<MonRef>> = (0..2).map(|t| b.sides[1 - s as usize].active[t].map(|x| (1 - s, x))).collect();
     for (k, (mid, rtarget, disabled)) in req.iter().enumerate() {
-        if *disabled || *mid == "healingwish" || *mid == "memento" { continue; }
+        if *disabled { continue; }   // Healing Wish and Memento were kept out until 2026-10-09 (their ifHit self-destruct never fired; fixed with the slot conditions)
         if *mid == "fakeout" && b.p(m).active_move_actions > 0 { continue; }
         if b.p(m).item.starts_with("choice") && (*mid == "protect" || *mid == "detect") { continue; }
         if *mid == "trickroom" && find(&b.field.pseudo, "trickroom").is_some() && tr_keep(b, s) { continue; }

@@ -22,7 +22,14 @@ for (const S of Object.values(JSON.parse(fs.readFileSync('../regionals/regional_
 for (const f of ['opp_model_a.json', 'opp_model_b.json']) for (const d of Object.values(JSON.parse(fs.readFileSync(f)))) for (const [sp, v] of Object.entries(d.sets)) {
   const [item, ability, nature, mv] = v.replace(/ \(.*\)$/, '').split('|'); pool.push({species: sp, item, ability, nature, moves: mv.split('/')}); }
 for (const s of Object.values(JSON.parse(fs.readFileSync('myteam_7.json')))) pool.push(s);
+// FOCUS_POOL=<json: [sets]> adds sets to the pool (e.g. ladder sets with a mechanic under test); FOCUS=<comma list of species / ability / item /
+// move ids> makes every team include at least one set matching one of them (2026-10-09, for porting checks of rarer mechanics)
+if (process.env.FOCUS_POOL) for (const s of JSON.parse(fs.readFileSync(process.env.FOCUS_POOL))) pool.push(s);
 const P = pool.filter(s => dex.species.get(s.species).exists && s.moves.every(m => dex.moves.get(m).exists) && dex.natures.get(s.nature).exists).filter(supported);
+const FOCUS = process.env.FOCUS ? process.env.FOCUS.split(',').map(toID) : null;
+const isFocus = s => FOCUS && (FOCUS.includes(toID(s.species)) || FOCUS.includes(toID(s.ability || dex.species.get(s.species).abilities['0'])) || FOCUS.includes(toID(s.item)) || s.moves.some(m => FOCUS.includes(toID(m))));
+const PF = FOCUS ? P.filter(isFocus) : [];
+if (FOCUS) console.log(`${PF.length} focus sets of ${P.length}`);
 const dEV = n => ['Adamant', 'Jolly', 'Naughty', 'Lonely'].includes(n) ? [2, 32, 0, 0, 0, 32] : ['Modest', 'Timid', 'Mild', 'Rash', 'Hasty', 'Naive'].includes(n) ? [2, 0, 0, 32, 0, 32]
   : n === 'Brave' ? [32, 32, 2, 0, 0, 0] : n === 'Quiet' ? [32, 0, 2, 32, 0, 0] : ['Calm', 'Careful', 'Sassy'].includes(n) ? [32, 0, 14, 0, 20, 0] : [32, 0, 20, 0, 14, 0];
 const mk = s => T.toSet({species: s.species, item: s.item, ability: s.ability || dex.species.get(s.species).abilities['0'], moves: s.moves, nature: s.nature, evs: s.evs || dEV(s.nature)});
@@ -60,7 +67,7 @@ while (n < +N && tries < +N * 30) {
   tries++;
   const NT = +(process.env.TEAM || 2);  // 2 = no bench (the 2v2 endgame setting; no switch requests)
   const team = side => { const t = []; let g = 0;   // species clause, as in real teams
-    while (t.length < NT && g++ < 100) { const x = pick(P); const bs = dex.species.get(x.species).baseSpecies; if (!t.some(y => dex.species.get(y.species).baseSpecies === bs)) t.push(x); }
+    while (t.length < NT && g++ < 100) { const x = (FOCUS && t.length === 0 && PF.length) ? pick(PF) : pick(P); const bs = dex.species.get(x.species).baseSpecies; if (!t.some(y => dex.species.get(y.species).baseSpecies === bs)) t.push(x); }
     return t.map(mk); };
   const t1 = team(), t2 = team();
   const modes = ['lo', 'hi', 'mid', 'real'];

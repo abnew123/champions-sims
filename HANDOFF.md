@@ -962,7 +962,7 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     the support's Fake Out / Parting Shot are not in the race, so the new race finishes it; pssim/results/finish_cases.json). The flag
     stays available; the default race is unchanged. The user's reading stands: the race overestimates the effect in some cases, but
     neither "finish" nor "leave" is right in general, and a support's last non-damaging action is priced by neither race.
-  - **Pricing a support's remaining non-damaging actions (`RACE_SUPPORT`, 2026-10-09, 6:10 pm; TR sheet relaying the user: "have the battle sim
+  - **Pricing a support's remaining non-damaging actions (`RACE_SUPPORT`, 2026-10-09, 6:05 pm; TR sheet relaying the user: "have the battle sim
     look into it", then "can the credits be fitted directly?").** The one thing neither race priced was a support's next Fake Out / Follow
     Me / Tailwind / Trick Room / screen / Parting Shot / Helping Hand / Wide Guard, which is what makes "finish the 10% Incineroar or hit
     the healthy Floette" a real question. Three versions were built and measured; **none is adopted** (strength flat, players' decisions

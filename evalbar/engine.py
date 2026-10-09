@@ -7,7 +7,7 @@ staged=1 (EVAL_ADAPT): every cell gets 2 samples of the turn's luck, options sti
 more than 0.15 below a side's best keep their rough 2-sample value. staged=0 gives every cell `seeds` samples.
 A run appends to <out.jsonl> and skips positions already in it, so it resumes. It writes <out.jsonl>.run.json for the progress page at
 localhost:8766 (status.py); EVAL_TITLE names its card. EG_VALUE picks another value file (in the main folder's pssim/);
-CHAMP_BIN and CHAMP_DATA (a file in native/) another engine and data (the live mode: champ-battle-v17 with engine_data_full.json). Agree cores with the other threads before threads > 1."""
+CHAMP_BIN and CHAMP_DATA (a file in native/) another engine and data (the live mode: champ-battle-v22 with engine_data_full.json). Agree cores with the other threads before threads > 1."""
 import os, sys, json, zlib, time, subprocess
 import common as C, procs as P
 BIN = os.environ.get('CHAMP_BIN') or os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v16'); MP = os.path.join(C.MAIN, 'pssim')

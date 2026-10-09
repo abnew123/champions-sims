@@ -17,8 +17,9 @@ OUT = os.path.join(C.HERE, 'out', 'live'); FEED = os.path.join(C.HERE, 'live_fee
 NODE = [P.exe('node'), '--experimental-websocket', '--no-warnings']
 FORMATS = {'bo1': 'gen9championsvgc2026regmc', 'bo3': 'gen9championsvgc2026regmcbo3'}
 TOPK = 3; CAL = 0.7538                           # the rescale fitted for egvalue9_sym2 (accuracy.py compare)
-# the full engine data (every species, move, item and ability Showdown knows; needs champ-battle-v17): spectated teams can be anything
-os.environ.setdefault('CHAMP_BIN', os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v17'))
+# the full engine data (every species, move, item and ability Showdown knows; needs champ-battle-v17 or later): spectated teams can be
+# anything. v22 (2026-10-09) gives v17's values wherever v17 handled the turn, and handles more abilities, items and moves
+os.environ.setdefault('CHAMP_BIN', os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v22'))
 os.environ.setdefault('CHAMP_DATA', 'engine_data_full.json')
 S.E = RC.E = json.load(open(os.path.join(C.MAIN, 'native', os.environ['CHAMP_DATA'])))
 def room_of(x):

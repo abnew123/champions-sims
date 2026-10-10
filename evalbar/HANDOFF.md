@@ -255,6 +255,21 @@ Text is not enough on its own, so the reader also keeps track of state:
 A further step would be to replay each turn with the engine (its turntest loads the state before a turn and plays both sides' choices)
 and keep the outcome that matches the HP boxes: abilities like Stamina, item use and durations would then come from the simulation.
 
+## Battle text vs rules: the reconciler (rules.py, 2026-10-10)
+
+The user asked for two versions of the state with a flag where they disagree. `rules.py` keeps the log's facts (switches, moves and
+targets, Protect, misses, immunities, super-effective and critical hits, hit counts, faints, HP; the reader now logs -supereffective,
+-crit, -miss, -immune, -hitcount and -fail) and replaces its stat and field messages with what the rules say: entry abilities (Intimidate
+and the abilities that block or answer it, weather and terrain setters, Mega abilities, which stay after switching out), on-hit abilities
+(Stamina, Weakness Policy, Justified, ...), each move's stat changes from the engine data (plus Parting Shot and Electro Shot's charge),
+White Herb, Speed Boost, and weather / terrain / Trick Room / Tailwind / screens with their durations. `compare(log)` lists, per turn,
+the stat stages of the Pokemon on the field and the field conditions where the two differ, each shown where its gap first appears.
+On Frankfurt day 1: 45 flags in 19 games, most of them real misses by the reader (lead Intimidates, Snarl drops on a second target, Nasty
+Plot read as +1); Louisville: 5 in two games. The live page lists the turns with open checks and shows each with Text is right / Rules are
+right; a verdict is saved beside the game's log (out/live/<tag>_g<n>_fixes.json), a "rules" verdict is put into the log as a -fix line
+(replay.py sets the stat or field as given) and that turn and the later ones are evaluated again; pressing a chosen button again takes the
+verdict back. `?novideo` on the page leaves out the YouTube player.
+
 ## The broadcast reader: targets
 
 Mid-turn the broadcast pops up the HP box of the Pokemon being hit, alone, in that Pokemon's slot. The reader (broadcast.py `aim`/`hit`/

@@ -245,6 +245,24 @@ class Reader:
         if m:
             sd, sp, _ = s.who(m.group(1)[0].upper() + m.group(1)[1:])
             if sp and s.open: s.hit((sd, s.slot_of(sd, sp)), "text: it doesn't affect")
+            if sp: s.emit(f'|-immune|{s.mon(sd, sp)}')
+            return
+        # facts about the last move, for the rules' version of the state (evalbar/rules.py)
+        m = re.match(r"(?:It's super effective|A critical hit) on (.+?)!$", text)
+        if m:
+            sd, sp, _ = s.who(m.group(1)[0].upper() + m.group(1)[1:])
+            if sp: s.emit(f"|{'-supereffective' if text.startswith('It') else '-crit'}|{s.mon(sd, sp)}")
+            return
+        user, target = s.last_move()
+        if text.startswith(("It's super effective", 'A critical hit')):
+            if target: s.emit(f"|{'-supereffective' if text.startswith('It') else '-crit'}|{target}")
+            return
+        m = re.match(r'The Pok.mon was hit (\d+) times?!', text)
+        if m:
+            if target: s.emit(f'|-hitcount|{target}|{m.group(1)}')
+            return
+        if text.startswith('But it failed'):
+            if user: s.emit(f'|-fail|{user}')
             return
         # about one Pokémon (or two: "A and the opposing B's Attack fell!")
         m = re.match(r"(.+?) and ((?:the opposing )?[^,']+?)'s (.+?) (fell|rose|harshly fell|severely fell|rose sharply|rose drastically)!", text)
@@ -261,6 +279,9 @@ class Reader:
             return
         me = s.mon(sd, sp); rest = rest.strip()
         k = (sd, s.slot_of(sd, sp))
+        if re.match(r'avoided the attack', rest):
+            u, _ = s.last_move()
+            if u: s.emit(f'|-miss|{u}|{me}')
         if s.open and k[1] and k != s.open['user'] and not rest.startswith('used ') and (
                 s.open['status'] or re.match(r'(protected itself|avoided the attack|fainted)', rest)): s.hit(k, 'text: ' + rest)
         mv = re.match(r'used (.+?)!$', rest)
@@ -321,6 +342,13 @@ class Reader:
         s.out[o['at']] = s.out[o['at']].rstrip('|') + f"|{k[0]}{k[1]}: {s.nick(s.active[k])}"; s.meta[-1]['targets'][0] += 1; s.open = None
         s.meta[-1].setdefault('aims', []).append({'turn': s.turn, 'line': s.out[o['at']], 'how': how, 'vt': s.now()})
     def shut(s): s.open = None
+    def last_move(s):
+        """the user and target (as the log names them, '' if not known) of the last move this turn"""
+        for l in reversed(s.out):
+            if l.startswith('|turn|'): break
+            if l.startswith('|move|'):
+                p = l.split('|'); return p[2], (p[4] if len(p) > 4 else '')
+        return '', ''
     def watch_hp(s, boxes):
         """one frame's HP boxes: track drops while a move is open"""
         for (sd, sl), (n, p) in boxes.items():
@@ -546,7 +574,7 @@ class Runner:
                     for i, lv in enumerate(run.lives):
                         if lv.data and lv.data['games']:
                             lm = run.reader.logs_meta(); m = lm[i][1] if i < len(lm) else {}
-                            g = {**lv.data['games'][0], 'title': f'Game {i + 1}', 'end': m.get('end')}
+                            g = {**lv.data['games'][0], 'title': f'Game {i + 1}', 'end': m.get('end'), 'idx': i}
                             g['steps'] = [{**st, 'vt': (m.get('times') or {}).get(st['turn'])} for st in g['steps']]
                             games.append(g)
                     st = run.reader.note or (run.lives[-1].status if run.lives else 'waiting for the first turn')
@@ -558,6 +586,16 @@ class Runner:
                          '<style>body{margin:0}</style></head><body>' + html + '</body></html>').encode(); ct = 'text/html; charset=utf-8'
                 else: self.send_error(404); return
                 self.send_response(200); self.send_header('Content-Type', ct); self.send_header('Cache-Control', 'no-store'); self.end_headers(); self.wfile.write(b)
+            def do_POST(self):
+                """the user's verdict on a check: {game, turn, key, choice: 'messages' or 'rules'}"""
+                try:
+                    q = json.loads(self.rfile.read(int(self.headers.get('Content-Length', 0))) or b'{}'); lv = run.lives[int(q['game'])]
+                    st = next(x for x in lv.data['games'][0]['steps'] if x['turn'] == int(q['turn']))
+                    c = next(x for x in st['checks'] if x['key'] == q['key'])
+                    if q['choice'] not in ('messages', 'rules', 'none'): raise ValueError(q['choice'])
+                    lv.add_fix(int(q['turn']), q['key'], q['choice'], c); code, b = 200, b'{}'
+                except Exception as e: code, b = 400, json.dumps({'error': type(e).__name__}).encode()
+                self.send_response(code); self.send_header('Content-Type', 'application/json'); self.end_headers(); self.wfile.write(b)
             def log_message(self, *a): pass
         threading.Thread(target=http.server.ThreadingHTTPServer(('127.0.0.1', s.port), H).serve_forever, daemon=True).start()
         print(f'eval bar at http://localhost:{s.port}  (for watching on your own computer)', flush=True)

@@ -227,6 +227,8 @@ def parse(log):
             if m:
                 if k == '-enditem':
                     m.item_gone = True
+                    if toid(p[3]) == 'whiteherb' and 'eat' not in t and clean(t.get('from', '')) != 'Knock Off':   # it put lowered stats back to 0
+                        m.boosts = {b: v for b, v in m.boosts.items() if v > 0}
                     note([m.ref(), f" ate its {p[3]}" if 'eat' in t else f"'s {p[3]} was knocked off" if clean(t.get('from', '')) == 'Knock Off' else f"'s {p[3]} was used up"])
                 else: m.item = p[3]; m.item_gone = False; note([m.ref(), f' now holds {p[3]}' + why(t)])
         elif k in ('-start', '-end'):
@@ -270,6 +272,16 @@ def parse(log):
             if what == 'Trick Room': field['tr'] = 5
             elif 'Terrain' in what: field['terrain'] = what; field['tturns'] = 8 if src and toid(src.item) == 'terrainextender' and not src.item_gone else 5
             note([f'{what} started' + why(t)])
+        elif k == '-fix' and len(p) > 3:                                     # a correction the user chose (evalbar/rules.py): set it as given
+            w = p[2]
+            if w == 'boost':
+                m = mon(p[3])
+                if m: m.boosts[p[4]] = int(p[5])
+            elif w == 'weather': field['weather'] = '' if p[3] == 'none' else p[3]; field['wturns'] = int(p[4])
+            elif w == 'terrain': field['terrain'] = '' if p[3] == 'none' else p[3] + ' Terrain'; field['tturns'] = int(p[4])
+            elif w == 'tr': field['tr'] = int(p[3])
+            elif w == 'tailwind': sidec[p[3]]['tailwind'] = int(p[4])
+            elif w == 'screen': sidec[p[3]]['screens'][p[4]] = int(p[5])
         elif k == '-fieldend':
             what = clean(p[2])
             if what == 'Trick Room': field['tr'] = 0

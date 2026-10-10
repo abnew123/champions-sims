@@ -44,6 +44,19 @@ h1,h2,h3{font-family:var(--disp);text-wrap:balance;margin:0}
 header h1{font-size:clamp(28px,6vw,40px);font-weight:700;letter-spacing:-.02em;line-height:1.05;margin-top:6px}
 .sub{color:var(--ink2);margin:8px 0 0;max-width:66ch}
 .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.checklist{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:-4px 0 12px;font-size:14px;color:var(--warn)}
+.checklist button,.checks button{font:inherit;font-size:13px;padding:3px 10px;border:1px solid var(--rule);border-radius:4px;background:var(--panel-2);color:var(--ink);cursor:pointer}
+.checks{border:1px solid var(--warn);border-radius:6px;background:var(--panel);padding:10px 14px 12px;margin:0 0 16px}
+.checks h3{font-family:var(--disp);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--warn);margin:0 0 4px}
+.checks p{margin:0 0 8px;color:var(--ink2);font-size:14px;max-width:70ch}
+.checks .tbl{overflow-x:auto}
+.checks table{border-collapse:collapse;width:100%;font-size:14px}
+.checks td{padding:6px 8px 6px 0;border-top:1px solid var(--rule-2);vertical-align:middle;white-space:nowrap}
+.checks td:first-child{white-space:normal}
+.checks .v{font-family:var(--mono);color:var(--ink)}
+.checks .k{color:var(--ink3);font-size:12px;margin-right:4px}
+.checks button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:600}
+.checks tr.done td{color:var(--ink3)}
 .chip{font-family:var(--mono);font-size:11px;padding:4px 9px;border:1px solid var(--rule);border-radius:3px;color:var(--ink2);background:var(--panel)}
 .sw{display:inline-block;width:9px;height:9px;border-radius:2px;flex:none}
 .sw.p1{background:var(--p1)} .sw.p2{background:var(--p2)} .sw.none{background:var(--ink3)}
@@ -197,6 +210,8 @@ section > h2{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:u
 
   <section>
     <h2 id="boardTitle"></h2>
+    <div class="checklist" id="checklist" hidden></div>
+    <div class="checks" id="checks" hidden></div>
     <div class="field" id="field"></div>
     <div class="board" id="board"></div>
   </section>
@@ -431,8 +446,32 @@ function go(i) {
     $('field').hidden = true; $('optSec').hidden = true; $('boardTitle').textContent = 'The position'; $('evTitle').textContent = 'What happened';
     return;
   }
-  cur = Math.max(0, Math.min(M, i)); bar(); graph(); board(); options(); events();
+  cur = Math.max(0, Math.min(M, i)); bar(); graph(); board(); checks(); options(); events();
 }
+// where the battle text and the rules disagree about the state (broadcasts): the user says which is right, and the bar uses that
+function checks() {
+  const steps = G.steps || [], open = steps.filter(s => (s.checks || []).some(c => !c.choice)), canSave = DATA.live && G.idx !== undefined;
+  $('checklist').hidden = !open.length;
+  $('checklist').innerHTML = open.length ? '<span>Battle text and rules disagree at</span>' + open.map(s => `<button type="button" data-go="${steps.indexOf(s)}">turn ${s.turn}</button>`).join('') : '';
+  const cs = cur < N ? (G.steps[cur].checks || []) : [];
+  $('checks').hidden = !cs.length; if (!cs.length) { $('checks').innerHTML = ''; return; }
+  const btn = (c, k, label) => `<button type="button" class="${c.choice === k ? 'on' : ''}" data-key="${esc(c.key)}" data-choice="${k}" aria-pressed="${c.choice === k}">${label}</button>`;
+  $('checks').innerHTML = `<h3>Check the state at the start of turn ${G.steps[cur].turn}</h3>
+    <p>The battle text and the rules (what this team's abilities, items and moves must have done) disagree. The bar uses the battle text unless you pick the rules.</p>
+    <div class="tbl"><table>${cs.map(c => `<tr class="${c.choice ? 'done' : ''}"><td>${esc(c.what)}</td>
+      <td><span class="k">text</span><span class="v">${esc(c.messages)}</span></td><td><span class="k">rules</span><span class="v">${esc(c.rules)}</span></td>
+      <td>${canSave ? btn(c, 'messages', 'Text is right') + ' ' + btn(c, 'rules', 'Rules are right') : (c.choice ? 'settled: ' + esc(c.choice) : '')}</td></tr>`).join('')}</table></div>`;
+}
+document.addEventListener('click', async e => {
+  const g = e.target.closest('#checklist [data-go]'); if (g) { go(+g.dataset.go); return; }
+  const b = e.target.closest('#checks [data-choice]'); if (!b) return;
+  b.disabled = true;
+  try {
+    await fetch('fix', {method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({game: G.idx, turn: G.steps[cur].turn, key: b.dataset.key, choice: b.classList.contains('on') ? 'none' : b.dataset.choice})});   // pressed again: take it back
+  } catch (err) {}
+  poll();
+});
 let lastLive = '';
 // with a video on the page, only what the player has reached is shown: turns after its time, and a result it has not got to, wait
 let RAW = null, VT = null, player = null, shownKey = '';
@@ -446,7 +485,7 @@ function upToPlayer(d) {
 }
 function apply() {
   if (!RAW) return;
-  const v = upToPlayer(RAW), key = v.games.map(g => g.steps.length + (g.winner || '')).join(',') + '|' + (RAW.live && RAW.live.status);
+  const v = upToPlayer(RAW), key = v.games.map(g => g.steps.length + (g.winner || '') + g.steps.map(s => (s.checks || []).map(c => c.key + (c.choice || '')).join()).join()).join(',') + '|' + (RAW.live && RAW.live.status);
   if (key === shownKey) return; shownKey = key;
   const follow = cur >= M, lastGame = gi >= GAMES.length - 1; DATA = v; GAMES = DATA.games;
   const moved = lastGame && GAMES.length - 1 > gi; if (lastGame) gi = Math.max(0, GAMES.length - 1);   // a new game of the set: follow it
@@ -459,7 +498,7 @@ async function poll() {
   } catch (e) {}
 }
 function video() {
-  const v = DATA.video; if (!v || !v.id) return;
+  const v = DATA.video; if (!v || !v.id || /[?&]novideo\b/.test(location.search)) return;          // ?novideo: the bar without the player
   $('video').hidden = false;
   window.onYouTubeIframeAPIReady = () => {
     player = new YT.Player('ytplayer', {videoId: v.id, playerVars: {start: v.start || 0, autoplay: 1, playsinline: 1, rel: 0}});

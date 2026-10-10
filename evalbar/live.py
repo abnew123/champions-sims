@@ -141,6 +141,8 @@ class Live:
         s.bo3 = logfile is not None or 'bo3' in room; s.threads = threads; s.port = port; os.makedirs(OUT, exist_ok=True)
         s.log = logfile or os.path.join(OUT, f'{s.tag}.log'); s.evf = os.path.join(OUT, f'{s.tag}_eval.jsonl'); s.data = None; s.status = 'connecting'
         s.weights = {}; s.hyp = {}; s.poscache = {}; s.over = False; s.skip = {}
+        # the user's verdicts where the battle text and the rules disagree (broadcasts: evalbar/rules.py), kept beside the log
+        s.fixf = os.path.join(OUT, f'{s.tag}_fixes.json'); s.fixes = json.load(open(s.fixf)) if logfile and os.path.exists(s.fixf) else {}; s.redo = None
     def page(s):
         blob = {'games': [], 'live': {'url': 'data.json', 'status': 'connecting'}}
         html = open(os.path.join(C.HERE, 'page.html')).read().replace('<title>Eval Bar</title>', '<title>Live Eval Bar</title>', 1).replace('/*DATA*/null', json.dumps(blob))
@@ -157,6 +159,44 @@ class Live:
                 self.send_response(200); self.send_header('Content-Type', ct); self.send_header('Cache-Control', 'no-store'); self.end_headers(); self.wfile.write(b)
             def log_message(self, *a): pass
         threading.Thread(target=http.server.ThreadingHTTPServer(('127.0.0.1', s.port), H).serve_forever, daemon=True).start()
+    def with_fixes(s, log):
+        """the log with the corrections the user chose (the rules' version) put in just before the turns they belong to"""
+        if not s.fixes: return log
+        out = []
+        for l in log.split('\n'):
+            if l.startswith('|turn|'):
+                for f in s.fixes.get(l.split('|')[2], {}).values():
+                    if f['choice'] == 'rules': out.extend(f['lines'])
+            out.append(l)
+        return '\n'.join(out)
+    def add_fix(s, turn, key, choice, check):
+        """the user's verdict on a check: 'messages', 'rules', or 'none' to take it back"""
+        if choice == 'none':
+            s.fixes.get(str(turn), {}).pop(key, None)
+            if not s.fixes.get(str(turn)): s.fixes.pop(str(turn), None)
+        else: s.fixes.setdefault(str(turn), {})[key] = {'choice': choice, 'lines': check.get('fix', []), 'what': check['what'], 'messages': check['messages'], 'rules': check['rules']}
+        json.dump(s.fixes, open(s.fixf, 'w'), indent=1); s.redo = min(s.redo or 10 ** 6, int(turn))
+    def checks(s, log):
+        """{turn: [check]}: where the battle text and the rules disagree (log: with the user's corrections), with the user's verdicts"""
+        if not s.logfile: return {}
+        import rules as RU
+        try: found = RU.compare(log)
+        except Exception: return {}
+        out = {}
+        for t, cs in found.items():
+            for c in cs: out.setdefault(t, []).append({**c, 'choice': (s.fixes.get(str(t), {}).get(c['key']) or {}).get('choice')})
+        for t, fx in s.fixes.items():                                      # settled ones that no longer show as disagreements
+            for key, f in fx.items():
+                if not any(c['key'] == key for c in out.get(int(t), [])):
+                    out.setdefault(int(t), []).append({'key': key, 'what': f['what'], 'messages': f['messages'], 'rules': f['rules'], 'fix': f['lines'], 'choice': f['choice']})
+        return out
+    def redo_from(s, t0):
+        """a correction at turn t0: that turn and the later ones are evaluated again"""
+        for t in [t for t in s.weights if t >= t0]: s.weights.pop(t, None); s.hyp.pop(t, None)
+        s.poscache = {k: v for k, v in s.poscache.items() if k[0] < t0}
+        if os.path.exists(s.evf):
+            keep = [l for l in open(s.evf) if int((re.search(r' t(\d+) ', json.loads(l).get('name', '')) or [0, 0])[1]) < t0]
+            open(s.evf, 'w').writelines(keep)
     @staticmethod
     def upto(log, t):
         """the log as a spectator had it when turn t started"""
@@ -172,7 +212,7 @@ class Live:
         ev = {x['name']: x for x in map(json.loads, open(s.evf)) if 'error' not in x} if os.path.exists(s.evf) else {}
         logit = lambda v: math.log(min(1 - 1e-4, max(1e-4, v)) / (1 - min(1 - 1e-4, max(1e-4, v))))
         scale = lambda v: C.sig(CAL * logit(v))
-        steps = []; ps = {}
+        steps = []; ps = {}; CH = s.checks(log)
         for step in g['steps']:
             t = step['turn']
             if t < 1 or not s.weights.get(t): continue
@@ -198,7 +238,7 @@ class Live:
                 if not s.bo3:
                     for m in state[sd]['mons']:
                         if not m.get('pool'): m['item'] = ''                 # Bo1: items are unknown unless one activated (shown in the events)
-            steps.append({'turn': t, 'wp': wp, 'ev': wp, 'state': state, 'events': step['events'], 'opt': opt, 'hyp': len(names)})
+            steps.append({'turn': t, 'wp': wp, 'ev': wp, 'state': state, 'events': step['events'], 'opt': opt, 'hyp': len(names), 'checks': CH.get(t, [])})
         rating = g['rating']
         game = {'id': s.tag, 'title': 'Live', 'winner': g['winner'], 'forfeit': g['forfeit'], 'perish': g['perish'], 'rating': rating, 'live': True,
                 'steps': steps, 'final': {'wp': None if g['winner'] is None else 1.0 if g['winner'] == 'p1' else 0.0, 'state': g['final']}, 'acc': None,
@@ -235,7 +275,8 @@ class Live:
         if s.port: print(f'watching {s.room}: http://localhost:{s.port}  (spectating only; never for a game you are playing)', flush=True)
         seen_len = -1
         while True:
-            log = open(s.log).read() if os.path.exists(s.log) else ''
+            if s.redo is not None: t0, s.redo = s.redo, None; s.redo_from(t0)
+            log = s.with_fixes(open(s.log).read()) if os.path.exists(s.log) else ''
             if '|turn|' not in log:
                 s.status = 'waiting for the battle to start' if log else 'connecting'
                 if feed.poll() is not None and not s.logfile: print('the feed stopped:', feed.stderr.read().strip()); return

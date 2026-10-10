@@ -49,9 +49,10 @@ for card, s in S.items():
         out.append('Your Indeedee&rsquo;s Psychic Terrain keeps their Fake Out off ' +
                    ('Indeedee, but not off Pelipper, which flies.' if 'Pelipper' in our else 'both of you.'))
     if 'Grimmsnarl' in our:
-        why = [x for x, k in ((f'their Indeedee&rsquo;s terrain (into anything on the ground)', 'psy'), (names(card, "block"), 'block'),
-                              (f'Dark types ({names(card, "dark")})', 'dark')) if f.get(k, 0) >= 0.25]
-        if why: out.append('Grimmsnarl&rsquo;s Parting Shot fails into ' + ' and '.join(why) + '; screens still go up.')
+        why = [x for x, k in ((f'Dark types ({names(card, "dark")})', 'dark'), ('anything on the ground while their Indeedee&rsquo;s terrain is up', 'psy'),
+                              (f'their side while {names(card, "block")} is in', 'block')) if f.get(k, 0) >= 0.25]
+        if why: out.append('Grimmsnarl&rsquo;s Parting Shot fails into ' + (why[0] if len(why) == 1 else ', into '.join(why[:-1]) + ' and into ' + why[-1])
+                           + '; screens still go up.')
     if 'Metagross' in four[card] and f.get('terrain', 0) >= 0.25:
         out.append(f'Their {names(card, "terrain")} also lets Metagross&rsquo;s Steel Roller work, and Steel Roller ends it.')
     if out: notes[card] = ' '.join(out[:2])

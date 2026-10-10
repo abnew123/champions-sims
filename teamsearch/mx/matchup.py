@@ -551,7 +551,9 @@ def first_hits(mine, foe):
             if p > worst_in[0]: worst_in = (p, mv["n"], eff(mv["t"], me["types"]))
         me["st"] = list(md["st"]); best = None
         for mv in me["moves"]:
+            if mv["charge"]: me["stg"]["spa"] += 1            # show what it does when it fires, as for theirs above
             lo = damage(me, them, mv, field, "min"); hi = damage(me, them, mv, field, "max")
+            if mv["charge"]: me["stg"]["spa"] -= 1
             if best is None or hi > best[2]: best = (mv["n"], lo, hi, them["maxhp"])
         if worst_out is None or best[2] / best[3] < worst_out[2] / worst_out[3]: worst_out = best
     return worst_in, worst_out

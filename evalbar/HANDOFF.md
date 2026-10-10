@@ -255,6 +255,18 @@ Text is not enough on its own, so the reader also keeps track of state:
 A further step would be to replay each turn with the engine (its turntest loads the state before a turn and plays both sides' choices)
 and keep the outcome that matches the HP boxes: abilities like Stamina, item use and durations would then come from the simulation.
 
+## Options across hypotheses; names on the live page (2026-10-10)
+
+Options are merged over the hypotheses about unseen back Pokemon (build.py merge). An option's win chance is now the side's overall win
+chance plus what the option gains or loses against the best play within each hypothesis where it exists; before, a switch to a Pokemon
+that exists only in some hypotheses averaged only over those, so it carried how good those hypotheses were (the user saw "Switch to
+Pelipper" at 80% next to the best move at 67%, really equal). Such options carry cond (the share of hypotheses where they exist), shown as
+"if X was brought · 48%". Small mismatches between picks and wins remain where the planner's design shows: each side's mix is solved
+against the other side staying in, while wins are scored against the other side's whole mix.
+The user asked (2026-10-10) for the players' real names on the live broadcast page: the reader takes them from the scoreboard
+(scoreboard_names, without country and record), keeps them in memory per game (meta['who']) and serves them in data.json only; logs,
+results and everything tracked still say Player 1 and Player 2.
+
 ## Battle text vs rules: the reconciler (rules.py, 2026-10-10)
 
 The user asked for two versions of the state with a flag where they disagree. `rules.py` keeps the log's facts (switches, moves and

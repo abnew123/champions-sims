@@ -53,6 +53,33 @@ pub fn load_cfg(grid_dir: &str) -> Cfg {
     Cfg { grid_tr, grid_notr, gfoes, vw, autopilot: std::env::var("EG_AUTOPILOT").is_ok(), vw_b, cdata }
 }
 
+/// BATTLE_POLICY_n=greedy (2026-10-10, the user: an opponent who always clicks the highest damage): a joint option's expected damage this
+/// turn, both slots' moves on their targets (calc damage x accuracy x hits, capped at the target's HP, as a share of its max HP;
+/// spread moves on both foes); status moves, Fake Out, switches and locked turns score 0
+pub fn greedy_damage(b: &Battle, cfg: &Cfg, s: u8, c: &[PChoice; 2]) -> f64 {
+    let Some(cd) = cfg.cdata else { return 0.0 };
+    let foes: Vec<MonRef> = active_alive(b, 1 - s).into_iter().map(|x| x.1).collect();
+    let scr: u8 = screens_of(b, 1 - s).iter().fold(0u8, |m, x| m | match x.as_str() { "reflect" => 1, "lightscreen" => 2, _ => 4 });
+    let mut tot = 0.0;
+    for k in 0..2usize {
+        let PChoice::Move(sl, t, _) = c[k] else { continue };
+        let Some(pi) = b.sides[s as usize].active[k] else { continue }; let m = (s, pi); let p = b.p(m);
+        if p.fainted || find(&p.volatiles, "mustrecharge").is_some() || find(&p.volatiles, "twoturnmove").is_some() { continue; }
+        let Some(slot) = p.move_slots.get(sl) else { continue }; let mid = slot.id;
+        if !cd.moves.contains_key(mid) || !cd.species.contains_key(p.species) { continue; }
+        let tm = &b.dex.mv(mid).tmpl;
+        if tm.category == "Status" { continue; }
+        let spread = (tm.target == "allAdjacentFoes" || tm.target == "allAdjacent") && foes.len() == 2;
+        let acc = tm.accuracy.map(|a| (a / 100.0).min(1.0)).unwrap_or(1.0);
+        let hits = match tm.multihit { Some((lo, hi)) if lo == hi => lo as f64, Some((_, hi)) => if p.ability == "skilllink" { hi as f64 } else { 3.1 }, None => 1.0 };
+        let tgts: Vec<MonRef> = if spread { foes.clone() } else if t > 0 { b.sides[1 - s as usize].active[t as usize - 1].map(|x| (1 - s, x)).into_iter().filter(|f| !b.p(*f).fainted).collect() } else { vec![] };
+        for f in tgts {
+            if !cd.species.contains_key(b.p(f).species) { continue; }
+            if let Some(d) = race_damage(b, cd, m, f, mid, spread, scr) { tot += (d as f64 * acc * hits).min(b.p(f).hp as f64) / b.p(f).maxhp.max(1) as f64; }
+        }
+    }
+    tot
+}
 fn sp_name(b: &Battle, m: MonRef) -> Id { b.dex.species.get(b.p(m).species).map(|s| s.name).unwrap_or("") }
 fn base_name(b: &Battle, m: MonRef) -> Id { b.dex.species.get(b.p(m).species).map(|s| s.base_name).unwrap_or("") }
 pub(crate) fn alive(b: &Battle, s: u8) -> Vec<MonRef> { (0..b.sides[s as usize].pokemon.len() as u8).map(|i| (s, i)).filter(|m| !b.p(*m).fainted).collect() }

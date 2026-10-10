@@ -25,6 +25,17 @@ fn can_damage(b: &Battle, s: u8) -> bool {
 fn dp2_log() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("DP2_LOG").is_ok()) }
 /// DP2_SIDE=0|1 (champ-battle-v12): run the two-turn Protect check for that side only
 fn dp2_side() -> Option<u8> { static F: std::sync::OnceLock<Option<u8>> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("DP2_SIDE").ok().and_then(|x| x.parse().ok())) }
+#[derive(Clone, Copy)]
+enum Policy { Eq, Random, Pure, Greedy, Exploit(f64), Noise(f64) }
+/// BATTLE_POLICY_0 / BATTLE_POLICY_1 = eq | random | pure | greedy | exploit:<e> | noise:<e> (see the turn loop)
+fn policy() -> [Policy; 2] {
+    static F: std::sync::OnceLock<[Policy; 2]> = std::sync::OnceLock::new();
+    *F.get_or_init(|| std::array::from_fn(|s| match std::env::var(format!("BATTLE_POLICY_{}", s)).as_deref() {
+        Ok("random") => Policy::Random, Ok("pure") => Policy::Pure, Ok("greedy") => Policy::Greedy,
+        Ok(v) if v.starts_with("exploit:") => Policy::Exploit(v[8..].parse().unwrap_or(0.1)),
+        Ok(v) if v.starts_with("noise:") => Policy::Noise(v[6..].parse().unwrap_or(0.1)),
+        _ => Policy::Eq }))
+}
 fn dp2() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("DP2").is_ok()) }
 /// DP2: side 0's value of a position after one more turn played as a small matrix game (reduced_options for both sides, one seed)
 pub(crate) fn next_value(b: &Battle, cfg: &Cfg, seed: [u16; 4], s: u8) -> f64 {
@@ -285,6 +296,40 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
             for i in 0..tsw.len() { if y[i] > 1e-6 { if let Some(j) = twin(&tsw, i) {
                 let (mut vi, mut vj) = (0.0, 0.0); for &r in &xsup { vi += x[r] * cell2(r, i, &b).1; vj += x[r] * cell2(r, j, &b).1; }
                 if xtot > 0.0 && vj / xtot <= vi / xtot + tie { y[j] += y[i]; y[i] = 0.0; } } } }
+        }
+        // BATTLE_POLICY_0 / BATTLE_POLICY_1 (2026-10-10, the user: how strong is the equilibrium?): how a side acts on the solved turn.
+        //   eq (default) samples its mix; random picks uniformly among all its options; greedy plays the joint option with the highest
+        //   expected damage this turn (plan.rs greedy_damage: no Protect, no switches); pure plays its mix's heaviest option with
+        //   probability 1; exploit:<e> plays the best response to a model of the other side that plays its mix 1-e of the time and a
+        //   uniform non-switch option e of the time; noise:<e> plays its own mix 1-e of the time and a uniform non-switch option e of
+        //   the time (the opponent the exploiter imagines). Side 0's policy is applied first, so an exploiter on side 0 models side 1's
+        //   solved mix before side 1's own noise is added.
+        let pol = policy();
+        for s in 0..2usize {
+            let (n_own, own_ns, opp_ns) = if s == 0 { (msw.len(), &mns, &tns) } else { (tsw.len(), &tns, &mns) };
+            let new_mix: Option<Vec<f64>> = match pol[s] {
+                Policy::Eq => None,
+                Policy::Random => Some(vec![1.0 / n_own as f64; n_own]),
+                Policy::Greedy => { let own: &Vec<[PChoice; 2]> = if s == 0 { &msw } else { &tsw };   // highest expected damage, first on ties
+                    let vals: Vec<f64> = own.iter().map(|c| greedy_damage(&b, cfg, s as u8, c)).collect();
+                    let k = (0..n_own).max_by(|&a, &c| vals[a].partial_cmp(&vals[c]).unwrap().then(c.cmp(&a))).unwrap();
+                    let mut u = vec![0.0; n_own]; u[k] = 1.0; Some(u) }
+                Policy::Pure => { let mix = if s == 0 { &x } else { &y };
+                    let k = (0..mix.len()).max_by(|&a, &c| mix[a].partial_cmp(&mix[c]).unwrap()).unwrap();
+                    let mut u = vec![0.0; mix.len()]; u[k] = 1.0; Some(u) }
+                Policy::Noise(e) => { let mix = if s == 0 { &x } else { &y };
+                    let mut u: Vec<f64> = mix.iter().map(|v| v * (1.0 - e)).collect();
+                    if !own_ns.is_empty() { for &k in own_ns.iter() { u[k] += e / own_ns.len() as f64; } }
+                    Some(u) }
+                Policy::Exploit(e) => { let opp = if s == 0 { &y } else { &x };
+                    let mut model: Vec<f64> = opp.iter().map(|v| v * (1.0 - e)).collect();
+                    if !opp_ns.is_empty() { for &k in opp_ns.iter() { model[k] += e / opp_ns.len() as f64; } }
+                    let vals: Vec<f64> = (0..n_own).map(|i| (0..model.len()).filter(|&j| model[j] > 1e-6)
+                        .map(|j| model[j] * if s == 0 { cell2(i, j, &b).0 } else { 1.0 - cell2(j, i, &b).1 }).sum()).collect();
+                    let k = (0..n_own).max_by(|&a, &c| vals[a].partial_cmp(&vals[c]).unwrap()).unwrap();
+                    let mut u = vec![0.0; n_own]; u[k] = 1.0; Some(u) }
+            };
+            if let Some(u) = new_mix { if s == 0 { x = u; } else { y = u; } }
         }
         let i = sample(&x, &mut rng); let j = sample(&y, &mut rng);
         // BATTLE_MEGA_AUDIT=<jsonl> (2026-10-10, for TR sheet's audit of un-evolved attacking turns): whenever a side's sampled action

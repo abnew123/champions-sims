@@ -1015,3 +1015,21 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
       plays out this turn's Fake Out / Tailwind / Follow Me, and a static credit for the turns after that is within noise of zero on real
       outcomes except Fake Out (+0.32 KO), too small to move self-play or the planner's choices; the race's blind spots in the Mega audit
       are a horizon question, not a credit question. The kit stays on v25 / `EG_MEGA_TIE=0`.
+  - **How strong is the equilibrium? (`BATTLE_POLICY_0|1`, 2026-10-10, 4:20 pm; the user's question.)** battle4.rs gained per-side
+    policies for how a side acts on the solved turn: `eq` (default, samples its mix), `random` (uniform over all its options), `pure`
+    (its mix's heaviest option, no mixing), `greedy` (the joint option with the highest expected calc damage this turn, plan.rs
+    `greedy_damage`: never Protects, switches or clicks status), `exploit:<e>` (the best response to a model of the other side that plays
+    its mix 1-e of the time and a uniform non-switch option e of the time; `exploit:0` = the opponent knows the line / mix exactly, since
+    side 0's policy is applied first), `noise:<e>` (plays its own mix 1-e of the time and a uniform non-switch option e of the time).
+    Measured on the first 800 of the 2,400 pool starts (side 0 with the policy, the usual sym2 always-Mega setup, gain = side 0's win
+    rate minus the baseline's 53.8% on the same games; pssim/results/policy_study.txt):
+    random moves and targets **-47.6 ± 1.9** (6% wins), random leads as well -48.7; greedy highest-damage every turn **-26.2 ± 2.2** (28%);
+    pure no-mixing **+0.2 ± 2.1** against the normal planner but **-37.6 ± 2.0** (16%) once the opponent knows the line; greedy once the
+    opponent knows it **-46.4 ± 1.9** (7.5%); the current mixed play once the opponent knows the mix **-8.4 ± 2.1** (45%: the planner's
+    mix is 400 fictitious-play iterations on a one-layer switch model with seeded values, not an exact equilibrium, so a reader with the
+    exact mix still finds 8 points); a 10% exploiter (best response to "they err 10% of the time") against an optimal opponent **+2.1 ±
+    2.2** (a wrong read costs nothing); optimal play against a 10%-random opponent **+4.1 ± 1.6**, exploiting that opponent **+6.0 ±
+    2.2** (the exploit itself is worth about 2 of the 6). Lock-in is free until someone looks and costs about 30 points against a reader;
+    greedy loses 26 to the normal planner and 46 to a reader. Eval bar's per-turn read study (evalbar/HANDOFF.md "What is a read worth?",
+    2026-10-06: a 20% lean worth ~4 points a turn, a 10% lean every turn 15.3 a game vs 16.0 for 20% on the best third of turns, a
+    wrong read 0.1 a turn) is the static counterpart; these are the full-game numbers.

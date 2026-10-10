@@ -150,9 +150,16 @@ def scoreboard(lines):
 def scoreboard_names(lines):
     """the players' names as the scoreboard shows them (left, right), without country and record ("CARSON CONFER (US 5/0/0"): for the live
     page only. They are kept in memory, never written to a file"""
-    top = [(t.strip(), x) for t, x, y, w, h in lines if 0.08 < y < 0.13 and sum(c.isalpha() for c in t) >= 6 and t.upper() == t]
+    top = [(t.strip(), x, y) for t, x, y, w, h in lines if 0.08 < y < 0.13 and sum(c.isalpha() for c in t) >= 4 and t.upper() == t]
     clean = lambda t: re.sub(r'^[\d/ ]+[A-Z]{2}\s+', '', re.sub(r'\s*\(?\s*\b[A-Z]{2}\b[\s\d/()-]*$', '', t)).strip().title()   # "4/0/0 CA DORIAN KANG" too
-    return {sd: max((clean(t) for t, x in top if (x < 0.45 if sd == 'p1' else x > 0.55)), key=len, default='') for sd in ('p1', 'p2')}
+    out = {}
+    for sd in ('p1', 'p2'):
+        mine = [(t, x, y) for t, x, y in top if (x < 0.45 if sd == 'p1' else x > 0.55)]
+        if not mine: out[sd] = ''; continue
+        main = max(mine, key=lambda r: len(r[0]))
+        parts = sorted((r for r in mine if abs(r[1] - main[1]) < 0.04), key=lambda r: r[2])   # a name on two stacked lines: MATTHEW / WOODRUFF
+        out[sd] = ' '.join(clean(t) for t, x, y in parts) if sum(c.isalpha() for c in main[0]) >= 6 or len(parts) > 1 else ''
+    return out
 def sheet_owner(lines):
     """the name in a team sheet's header (letters only)"""
     top = [t for t, x, y, w, h in lines if y < 0.09 and t.upper() == t and sum(c.isalpha() for c in t) >= 6 and not fuzzy(t, 'species', cut=0.85)]

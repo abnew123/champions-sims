@@ -92,12 +92,14 @@ def ocr(d):
 # --------------------------------------------------------------------------------------------------------------------------- sheets
 REGION = {'HISUIAN': 'Hisui', 'ALOLAN': 'Alola', 'GALARIAN': 'Galar', 'PALDEAN': 'Paldea'}
 def sheet_species(t):
-    """a species name as a team sheet prints it -> the species: 'INDEEDEE (FEMALE)' -> Indeedee-F, 'HISUIAN ARCANINE' -> Arcanine-Hisui"""
-    m = re.match(r'^(.*?)\s*\((FEMALE|MALE)\)$', t.strip(), re.I); g = m.group(2).upper() if m else None; t = m.group(1) if m else t
+    """a species name as a team sheet prints it -> the species: 'INDEEDEE (FEMALE)' -> Indeedee-F, 'HISUIAN ARCANINE' -> Arcanine-Hisui,
+    'FLOETTE (ETERNAL FLOWER)' -> Floette-Eternal (a form in brackets: its first word)"""
+    m = re.match(r'^(.*?)\s*\(\s*([A-Za-z ]+?)\s*\)?\s*$', t.strip()); paren = m.group(2).upper() if m else ''; t = m.group(1) if m else t
+    g = paren if paren in ('FEMALE', 'MALE') else None; shape = paren.split()[0].title() if paren and not g else None
     w = t.split(None, 1); reg = REGION.get(w[0].upper().replace('0', 'O')) if len(w) == 2 else None
     base = fuzzy(w[1] if reg else t, 'species', cut=0.85)
     if not base: return None
-    form = base + '-' + reg if reg else base + '-F' if g == 'FEMALE' else None
+    form = base + '-' + reg if reg else base + '-F' if g == 'FEMALE' else base + '-' + shape if shape else None
     return E['species'][toid(form)].get('name', form) if form and toid(form) in E['species'] else base
 def sheet(lines):
     """one team-sheet screen -> [set, ...]: each panel starts with the species name in capitals"""
@@ -189,24 +191,35 @@ class Reader:
     def emit(s, *lines): s.out.extend(lines)
     def header(s, boxes):
         s.emit('|gametype|doubles', '|player|p1|Player 1|', '|player|p2|Player 2|', '|tier|[Gen 9 Champions] VGC Reg M-C (broadcast)')
+        if not s.closed:                                                         # a lead the sheet as read lacks joins it first
+            for (sd, sl), (n, p) in sorted(boxes.items()): s.note_seen(sd, s.species(sd, n))
         for sd in ('p1', 'p2'):
             for st in s.team(sd): s.emit(f"|poke|{sd}|{st['species']}, L50|")
             if s.closed:                                                         # no sheets: the Pokemon this match has shown so far, and the leads
                 for sp in s.seen[sd] + [s.species(x, n) for (x, sl), (n, p) in sorted(boxes.items()) if x == sd]:
                     if sp and sp not in s.poked[sd]: s.poked[sd].add(sp); s.emit(f'|poke|{sd}|{sp}, L50|')
         for sd in ('p1', 'p2'):
-            blob = ']'.join(f"{st['species']}||{st['item'].replace(' ', '')}|{st['ability'].replace(' ', '')}|{','.join(m.replace(' ', '') for m in st['moves'])}|{st['nature']}||||||50|" for st in s.team(sd))
-            if blob: s.emit(f'|showteam|{sd}|{blob}')
+            if s.team(sd): s.emit(s.sheet_line(sd))
         s.emit('|teampreview|4', '|start')
         for (sd, sl), (n, p) in sorted(boxes.items()):
             sp = s.species(sd, n); s.active[(sd, sl)] = sp; s.hp[(sd, sl)] = p; s.note_seen(sd, sp)
             s.emit(f"|switch|{sd}{sl}: {s.nick(sp)}|{sp}, L50|{p}/100")
         s.started = True
     def note_seen(s, sd, sp):
-        """a Pokemon this match has shown; without sheets, one not in this game's preview yet is added to it (returned as a log line)"""
+        """a Pokemon this match has shown; without sheets, one not in this game's preview yet is added to it (returned as log lines); with
+        sheets, one the sheet as read lacks (a panel misread) is added to the sheet with its most common set"""
         if sp and sp not in s.seen[sd]: s.seen[sd].append(sp)
         if s.closed and sp and sp not in s.poked[sd]: s.poked[sd].add(sp); return [f'|poke|{sd}|{sp}, L50|']
+        if not s.closed and sp and s.team(sd) and sp not in {x['species'] for x in s.team(sd)} and len(s.team(sd)) < 6:
+            import recorded as RC
+            try: cs = RC.common_set(sp)
+            except Exception: cs = None
+            if cs:
+                s.sheets[sd].append({k: cs[k] for k in ('species', 'item', 'ability', 'nature', 'moves')})
+                if s.started: return [f'|poke|{sd}|{sp}, L50|', s.sheet_line(sd)]
         return []
+    def sheet_line(s, sd):
+        return f"|showteam|{sd}|" + ']'.join(f"{st['species']}||{st['item'].replace(' ', '')}|{st['ability'].replace(' ', '')}|{','.join(m.replace(' ', '') for m in st['moves'])}|{st['nature']}||||||50|" for st in s.team(sd))
     def nick(s, sp): return 'Floette' if sp == 'Floette-Eternal' else sp.split('-Mega')[0]
     def who(s, text):
         """'The opposing X ...' -> ('p2', species, rest); 'X ...' -> ('p1', ...)"""
@@ -302,7 +315,7 @@ class Reader:
     def about(s, text):
         sd, sp, rest = s.who(text)
         if not sp: return
-        if s.team(sd) and sp not in {x['species'] for x in s.team(sd)}:   # a Pokemon on neither sheet: the broadcast cut to other footage
+        if s.team(sd) and sp not in {x['species'] for x in s.team(sd)} and sp not in [v for (x, sl), v in s.active.items() if x == sd]:   # on no sheet and not on the field: other footage
             s.foreign += 1
             if s.foreign >= 2: s.close()
             return
@@ -620,11 +633,13 @@ class Runner:
                     for i, lv in enumerate(run.lives):
                         if lv.data and lv.data['games']:
                             lm = run.reader.logs_meta(); m = lm[i][1] if i < len(lm) else {}
-                            g = {**lv.data['games'][0], 'title': f'Game {i + 1}', 'end': m.get('end'), 'idx': i,
-                                 'players': {sd: c.most_common(1)[0][0] for sd, c in m.get('who', {}).items() if c} or None}
+                            pl = {sd: c.most_common(1)[0][0] for sd, c in m.get('who', {}).items() if c} or None
+                            g = {**lv.data['games'][0], 'title': f"M{m.get('match', '?')} G{m.get('game', '?')}", 'end': m.get('end'), 'idx': i, 'players': pl,
+                                 'versus': f"{pl.get('p1', 'Player 1')} vs {pl.get('p2', 'Player 2')}" if pl else None, 'sheets': not m.get('closed')}
                             g['steps'] = [{**st, 'vt': (m.get('times') or {}).get(st['turn'])} for st in g['steps']]
                             games.append(g)
-                    st = run.reader.note or (run.lives[-1].status if run.lives else 'waiting for the first turn')
+                    rd = run.reader                                                  # a game being read: its status; between games: the reader's note
+                    st = (run.lives[-1].status if run.lives else 'waiting for the first turn') if rd.started and not rd.ended else (rd.note or 'between games')
                     b = json.dumps({'games': games, 'video': run.video, 'live': {'url': 'data.json', 'status': st, 'format': 'Champions broadcast, open team sheets'}}).encode(); ct = 'application/json'
                 elif p in ('/', '/index.html'):
                     html = open(os.path.join(C.HERE, 'page.html')).read().replace('<title>Eval Bar</title>', '<title>Champions Eval Bar</title>', 1)

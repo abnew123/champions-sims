@@ -41,9 +41,9 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
 h1,h2,h3{font-family:var(--disp);text-wrap:balance;margin:0}
 .num{font-family:var(--mono);font-variant-numeric:tabular-nums}
 .eyebrow{font-family:var(--disp);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
-header h1{font-size:clamp(28px,6vw,40px);font-weight:700;letter-spacing:-.02em;line-height:1.05;margin-top:6px}
-.sub{color:var(--ink2);margin:8px 0 0;max-width:66ch}
-.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+header h1{font-size:clamp(22px,4.5vw,28px);font-weight:700;letter-spacing:-.02em;line-height:1.1;margin-top:4px}
+.sub{color:var(--ink2);margin:4px 0 0;max-width:70ch;font-size:14px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .ol .cond{display:block;font-size:12px;color:var(--ink3);margin-top:1px}
 .checklist{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:-4px 0 12px;font-size:14px;color:var(--warn)}
 .checklist button,.checks button{font:inherit;font-size:13px;padding:3px 10px;border:1px solid var(--rule);border-radius:4px;background:var(--panel-2);color:var(--ink);cursor:pointer}
@@ -106,7 +106,7 @@ header h1{font-size:clamp(28px,6vw,40px);font-weight:700;letter-spacing:-.02em;l
 .views button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .vnote{font-size:13.5px;color:var(--ink2);margin:0;max-width:70ch}
 .games{display:flex;flex-wrap:wrap;gap:6px}
-.games button{font-family:var(--disp);font-size:13px;font-weight:600;color:var(--ink2);background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:7px 12px;cursor:pointer;display:flex;gap:7px;align-items:baseline}
+.games button{font-family:var(--disp);font-size:12px;font-weight:600;color:var(--ink2);background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:5px 10px;cursor:pointer;display:flex;gap:7px;align-items:baseline}
 .games button small{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--ink3)}
 .games button.on{background:var(--accent-soft);color:var(--ink);border-color:var(--accent)}
 .games button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -284,13 +284,15 @@ function head() {
   $('n1').textContent = who('p1'); $('n2').textContent = who('p2');
   $('graphTitle').textContent = NAMES ? 'Your win chance through the game' : `${who('p1')}'s win chance through the game`;
   if (DATA.live) {
-    $('eyebrow').textContent = 'Live · spectating';
     const bc = (DATA.live.format || '').startsWith('Champions');
-    $('sub').textContent = bc ? 'A Pokémon Champions broadcast, read from the video as it plays: who is winning at the start of each turn, the best options for each Pokémon on the field, and what happened. Player 1 is the player on the left.'
+    $('eyebrow').textContent = bc ? 'Pokémon Champions broadcast' : 'Live · spectating';
+    $('sub').textContent = bc ? `Read from the video: who is winning at the start of each turn, the best options for each Pokémon on the field, and what happened.${G.players ? '' : ' Player 1 is the player on the left.'}`
       : 'A Reg M-C battle going on now on Showdown, as a spectator sees it: who is winning at the start of each turn, the best options for each Pokémon on the field, and what happened. For watching other people\'s games only.';
-    // with a video, the status follows the player, not the reader (which may be ahead of it)
-    const status = DATA.video && !DATA.video.live ? (N ? `turn ${G.steps[N - 1].turn}` : 'waiting for the first turn in the video') : DATA.live.status;
-    $('meta').innerHTML = [DATA.live.format, N ? `${N} turn${N === 1 ? '' : 's'} so far` : null, r, status, G.winner ? `${who(G.winner)} won${G.forfeit ? ' by forfeit' : ''}` : null]
+    // a game still being played: "so far", and the reader's status (with a video, the player's place: the reader may be ahead of it)
+    const going = !G.winner && G.end == null && gi === GAMES.length - 1 && !/^finished/.test(DATA.live.status || '');
+    const status = !going ? null : DATA.video && (!DATA.video.live || followVideo) ? (N ? `turn ${G.steps[N - 1].turn}` : 'waiting for the first turn in the video') : DATA.live.status;
+    const sheets = bc ? (G.sheets === false ? 'no team sheets on stream' : 'team sheets from the stream') : DATA.live.format;
+    $('meta').innerHTML = [sheets, N ? `${N} turn${N === 1 ? '' : 's'}${going ? ' so far' : ''}` : null, r, status, G.winner ? `${who(G.winner)} won${G.forfeit ? ' by forfeit' : ''}` : null]
       .filter(Boolean).map(x => `<span class="chip">${esc(x)}</span>`).join('');
   } else if (REC) {
     $('eyebrow').textContent = 'Your recorded ladder games';
@@ -309,7 +311,7 @@ function head() {
     $('views').querySelectorAll('button').forEach(b => { b.classList.toggle('on', b.dataset.v === view); b.setAttribute('aria-pressed', b.dataset.v === view); });
   }
   const nav = $('games'); nav.hidden = GAMES.length < 2;
-  nav.innerHTML = GAMES.map((g, k) => `<button type="button" data-k="${k}" class="${k === gi ? 'on' : ''}" aria-pressed="${k === gi}">${esc(g.title || 'Game ' + (k + 1))}<small>${g.result === 'win' ? 'won' : g.result === 'loss' ? 'lost' : ''}</small></button>`).join('');
+  nav.innerHTML = GAMES.map((g, k) => `<button type="button" data-k="${k}" class="${k === gi ? 'on' : ''}" aria-pressed="${k === gi}"${g.versus ? ` title="${esc(g.versus)}"` : ''}>${esc(g.title || 'Game ' + (k + 1))}<small>${g.result === 'win' ? 'won' : g.result === 'loss' ? 'lost' : ''}</small></button>`).join('');
   nav.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { load(+b.dataset.k); head(); notes(); go(0); }));
 }
 

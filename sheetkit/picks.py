@@ -37,6 +37,7 @@ def stamp(outdir, want):
     p = outdir + '.run.json'; n = len(glob.glob(os.path.join(outdir, '*.json')))
     have = rj(p) if os.path.exists(p) else None
     if have is not None and 'opponents' not in have: have['opponents'] = 'archetypes'          # folders from before the cards existed
+    if have is not None and 'grid' not in have and 'grid' in want: have['grid'] = want['grid']   # folders from before the grid was recorded
     if n and (have is None or any(have.get(k) != v for k, v in want.items())):
         sys.exit(f"{os.path.relpath(outdir, ROOT)} already holds {n} results from a different run ({have or 'unrecorded'}); this run is {want}. "
                  "Move that folder aside (do not mix runs) and start again.")
@@ -67,6 +68,13 @@ def same_job(r, j):
     if (r.get('arch'), r.get('lead'), r.get('back')) != (m.get('arch'), *mine): return False
     return 'their_lead' not in m or (r.get('their_lead'), r.get('their_back')) == (m['their_lead'], m['their_back'])
 
+def grid_hash(sheet):
+    """the one-on-one grid the battles read (GRID_DIR): a rebuilt grid can change the games, so a result folder records it"""
+    h = hashlib.sha1()                                            # the fields the planner reads; the detail text ('det') is display only
+    for f in sorted(glob.glob(os.path.join(sheet.grid_dir(), 'gx_cells_*.json'))):
+        cells = rj(f); h.update(json.dumps({k: [c.get('v'), c.get('roll')] for k, c in sorted(cells.items())}).encode())   # plan.rs reads v and roll
+    return h.hexdigest()[:10]
+
 def job_key(j):
     """what a job plays, in the form its result records it (see result_key)"""
     if 'meta' in j:
@@ -88,7 +96,8 @@ def battle_run(sheet, step, jobs_path, outdir, games, g0, threads, setup, log, o
     round-robin to battle processes of a few threads each, so every process gets the same mix and they finish together.
     Resumes: jobs with a result file are skipped."""
     S = sim_setup(setup); jobs = rj(jobs_path); sd = outdir + '.starts'; os.makedirs(outdir, exist_ok=True)
-    stamp(outdir, {'setup': S.get('games', S['name']), 'games': games, 'g0': g0, 'team': team_hash(sheet), 'opponents': OPPONENTS['kind']})      # 'games': a faster build of the same games
+    stamp(outdir, {'setup': S.get('games', S['name']), 'games': games, 'g0': g0, 'team': team_hash(sheet), 'opponents': OPPONENTS['kind'],
+                   'grid': grid_hash(sheet)})      # 'games': a faster build of the same games; 'grid': the planner's one-on-one grid, which its value reads
     stale = 0
     for f in glob.glob(os.path.join(outdir, '*.json')):           # a result cut off by a stopped run would count as done: drop it
         try: r = json.load(open(f))

@@ -178,7 +178,7 @@ class Live:
         json.dump(s.fixes, open(s.fixf, 'w'), indent=1); s.redo = min(s.redo or 10 ** 6, int(turn))
     def checks(s, log):
         """{turn: [check]}: where the battle text and the rules disagree (log: with the user's corrections), with the user's verdicts"""
-        if not s.logfile: return {}
+        if not s.logfile or not s.bo3: return {}                           # the rules need the team sheets' abilities and items
         import rules as RU
         try: found = RU.compare(log)
         except Exception: return {}

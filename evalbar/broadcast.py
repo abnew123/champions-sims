@@ -161,11 +161,11 @@ class Reader:
     """frames in time order -> battle log lines. feed() one frame's OCR at a time; lines() is the log so far."""
     def __init__(s):
         s.games = []; s.meta = []; s.sheets = {}; s.raw_sheets = []; s.frame = 0; s.names = collections.deque(maxlen=600); s.note = ''
-        s.board = None; s.match = 0; s.game_in_match = 0; s.prev_end = 0; s.owners = {}; s.t0 = 0; s.pre = []; s.pre_on = False; s.pre_frame = 0; s.p2_label = ''; s.new_game()
+        s.board = None; s.match = 0; s.game_in_match = 0; s.prev_end = 0; s.owners = {}; s.t0 = 0; s.pre = []; s.pre_on = False; s.pre_frame = 0; s.p2_label = ''; s.seen = {'p1': [], 'p2': []}; s.new_game()
     def new_game(s):
         s.out = []; s.games.append(s.out); s.meta.append({}); s.started = False; s.turn = 0; s.in_decision = False; s.ended = False
         s.active = {}; s.hp = {}; s.last_text = None; s.slot_free = {'p1': [], 'p2': []}; s.megas = {'p1': False, 'p2': False}
-        s.fainted = {'p1': set(), 'p2': set()}; s.open = None; s.cur = {}; s.changed = {}; s.foreign = 0; s.run = []; s.gap = 0; s.at_msg = None; s.timed = {}; s.sent = []; s.forfeit = False; s.lead_seen = False; s.pending = []; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False
+        s.fainted = {'p1': set(), 'p2': set()}; s.open = None; s.cur = {}; s.changed = {}; s.foreign = 0; s.run = []; s.gap = 0; s.at_msg = None; s.timed = {}; s.sent = []; s.forfeit = False; s.closed = False; s.poked = {'p1': set(), 'p2': set()}; s.lead_seen = False; s.pending = []; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False
     def team(s, sd): return s.sheets.get(sd, [])
     def species(s, sd, name):
         """an OCR'd Pokémon name on side sd -> the species on that side's sheet (Mega names map back to the base)"""
@@ -184,14 +184,22 @@ class Reader:
         s.emit('|gametype|doubles', '|player|p1|Player 1|', '|player|p2|Player 2|', '|tier|[Gen 9 Champions] VGC Reg M-C (broadcast)')
         for sd in ('p1', 'p2'):
             for st in s.team(sd): s.emit(f"|poke|{sd}|{st['species']}, L50|")
+            if s.closed:                                                         # no sheets: the Pokemon this match has shown so far, and the leads
+                for sp in s.seen[sd] + [s.species(x, n) for (x, sl), (n, p) in sorted(boxes.items()) if x == sd]:
+                    if sp and sp not in s.poked[sd]: s.poked[sd].add(sp); s.emit(f'|poke|{sd}|{sp}, L50|')
         for sd in ('p1', 'p2'):
             blob = ']'.join(f"{st['species']}||{st['item'].replace(' ', '')}|{st['ability'].replace(' ', '')}|{','.join(m.replace(' ', '') for m in st['moves'])}|{st['nature']}||||||50|" for st in s.team(sd))
             if blob: s.emit(f'|showteam|{sd}|{blob}')
         s.emit('|teampreview|4', '|start')
         for (sd, sl), (n, p) in sorted(boxes.items()):
-            sp = s.species(sd, n); s.active[(sd, sl)] = sp; s.hp[(sd, sl)] = p
+            sp = s.species(sd, n); s.active[(sd, sl)] = sp; s.hp[(sd, sl)] = p; s.note_seen(sd, sp)
             s.emit(f"|switch|{sd}{sl}: {s.nick(sp)}|{sp}, L50|{p}/100")
         s.started = True
+    def note_seen(s, sd, sp):
+        """a Pokemon this match has shown; without sheets, one not in this game's preview yet is added to it (returned as a log line)"""
+        if sp and sp not in s.seen[sd]: s.seen[sd].append(sp)
+        if s.closed and sp and sp not in s.poked[sd]: s.poked[sd].add(sp); return [f'|poke|{sd}|{sp}, L50|']
+        return []
     def nick(s, sp): return 'Floette' if sp == 'Floette-Eternal' else sp.split('-Mega')[0]
     def who(s, text):
         """'The opposing X ...' -> ('p2', species, rest); 'X ...' -> ('p1', ...)"""
@@ -424,7 +432,7 @@ class Reader:
         s.shut(); free = s.slot_free[sd]; sl = free.pop(0) if free else next((x for x in 'ab' if (sd, x) not in s.active), None)
         if sl is None:                                                      # who went back was not shown: the HP boxes will tell which slot
             s.pending.append((sd, sp, len(s.out))); return
-        s.active[(sd, sl)] = sp; s.sent.append((sd, sp))
+        s.active[(sd, sl)] = sp; s.sent.append((sd, sp)); s.emit(*s.note_seen(sd, sp))
         s.emit(f"|switch|{sd}{sl}: {s.nick(sp)}|{sp}, L50|{s.hp.get(('mon', sd, sp), 100)}/100")
     def place(s, boxes):
         """a send-out whose slot was unknown: put the switch where the battle text had it, in the slot the HP boxes now show it in"""
@@ -439,7 +447,7 @@ class Reader:
             if old and old != sp and old not in s.fainted[sd] and any(l.startswith('|move|') for l in seg) and not pivot_in:
                 # sent in after this turn's moves, into a slot whose Pokemon did not go back: only a faint frees a slot then
                 new.insert(0, f'|faint|{sd}{sl}: {s.nick(old)}'); s.fainted[sd].add(old); s.hp[('mon', sd, old)] = 0
-            s.active[(sd, sl)] = sp; s.sent.append((sd, sp))
+            s.active[(sd, sl)] = sp; s.sent.append((sd, sp)); new = s.note_seen(sd, sp) + new
             for k, line in enumerate(new): s.out.insert(at + k, line)
             d = len(new)
             if s.open and s.open['at'] >= at: s.open['at'] += d
@@ -452,7 +460,7 @@ class Reader:
             sp = s.species(sd, n)
             if not sp: continue
             if s.active.get((sd, sl)) != sp:                                  # a switch the battle text did not show
-                s.active[(sd, sl)] = sp; s.emit(f"|switch|{sd}{sl}: {s.nick(sp)}|{sp}, L50|{p}/100"); s.hp[(sd, sl)] = p; continue
+                s.active[(sd, sl)] = sp; s.emit(*s.note_seen(sd, sp)); s.emit(f"|switch|{sd}{sl}: {s.nick(sp)}|{sp}, L50|{p}/100"); s.hp[(sd, sl)] = p; continue
             if s.hp.get((sd, sl)) != p:
                 s.emit(f"|{'-damage' if p < (s.hp.get((sd, sl)) or 100) else '-heal'}|{sd}{sl}: {s.nick(sp)}|{p}/100"); s.hp[(sd, sl)] = p
             s.hp[('mon', sd, sp)] = p
@@ -515,11 +523,12 @@ class Reader:
                 if board and s.board: other = not all(difflib.SequenceMatcher(None, a, b).ratio() > 0.7 for a, b in zip(board, s.board))
                 else: other = fresh_sheets                                        # no names to go by: new sheets mean a new match
                 new_match = not s.match or other
-                if new_match: s.sheets = {}                                       # new players: a new match, new sheets
+                if new_match: s.sheets = {}; s.seen = {'p1': [], 'p2': []}         # new players: a new match, new sheets
                 if len(s.sheets) < 2: s.owners = {}; s.assign_sheets(boxes, board)
-                if len(s.sheets) < 2: s.note = 'waiting for both team sheets: start before the broadcast shows them'; return
+                if len(s.sheets) < 2:                                             # the broadcast showed no sheets for this match: go on without them
+                    s.sheets = {}; s.closed = True
                 if new_match: s.match += 1; s.game_in_match = 0
-                s.board = s.board if s.board and not other else None; s.game_in_match += 1; s.meta[-1] = {'match': s.match, 'game': s.game_in_match, 'frame': s.frame}
+                s.board = s.board if s.board and not other else None; s.game_in_match += 1; s.meta[-1] = {'match': s.match, 'game': s.game_in_match, 'frame': s.frame, 'closed': s.closed}
                 s.note = ''; s.header(boxes)
                 for t in s.pre:                                                   # what happened as the leads came in: abilities
                     if PRE.search(t): s.message(t)
@@ -638,7 +647,10 @@ class Runner:
             if len(g) != s.written[i]:
                 open(f, 'w').write('\n'.join(g) + '\n'); s.written[i] = len(g)
             if i >= len(s.lives):
-                lv = s.LV.Live(None, s.threads, 0, logfile=f, tag=f'{s.tag}_g{i + 1}', fmt='Champions broadcast, open team sheets'); s.lives.append(lv)
+                closed = (s.reader.logs_meta()[i][1] if i < len(s.reader.logs_meta()) else {}).get('closed')
+                lv = s.LV.Live(None, s.threads, 0, logfile=f, tag=f'{s.tag}_g{i + 1}', fmt='Champions broadcast, ' + ('no team sheets shown' if closed else 'open team sheets'))
+                if closed: lv.bo3 = False                                          # each species' most common set, what the game shows laid on top
+                s.lives.append(lv)
                 threading.Thread(target=lv.run, daemon=True).start()
 def secs(x): return sum(int(v) * 60 ** i for i, v in enumerate(reversed(x.split(':')))) if x else 0
 def replay(ocrf, speed=4.0, threads=2, port=8768, vid=None, start=None):

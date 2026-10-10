@@ -10,9 +10,16 @@ from page import dex, idf
 import procs
 
 def pool_of(sheet): return {n: {k: s[k] for k in ('species', 'item', 'ability', 'nature', 'evs', 'moves')} for n, s in sheet.team.items()}
+CODE = [os.path.join(ROOT, 'teamsearch', 'mx', 'matchup.py'), os.path.join(KIT, 'grid_worker.py')]
+def code_tag():
+    h = hashlib.sha1()
+    for f in CODE: h.update(open(f, 'rb').read())
+    return h.hexdigest()[:6]
+
 def cell_path(sheet, n, tr):
-    """where one set's cells for one mode are kept; the name carries a hash of the set, so a changed set gets new cells"""
-    tag = hashlib.sha1(json.dumps(pool_of(sheet)[n], sort_keys=True).encode()).hexdigest()[:8]
+    """where one set's cells for one mode are kept; the name carries a hash of the set and of the code that computes the cells
+    (teamsearch/mx/matchup.py, grid_worker.py), so a changed set or a fix to that code gets new cells"""
+    tag = hashlib.sha1(json.dumps(pool_of(sheet)[n], sort_keys=True).encode()).hexdigest()[:8] + code_tag()
     return sheet.w('grid', 'cells', f"{'tr' if tr else 'notr'}_{idf(n)}_{tag}.json")
 
 def build(sheet, workers=1, quiet=False):

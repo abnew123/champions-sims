@@ -260,8 +260,8 @@ and keep the outcome that matches the HP boxes: abilities like Stamina, item use
 The user asked for a chess-style number beside the win chance. It is the win chance's log-odds divided by what one Pokemon of advantage is
 worth: in the 2,789 cached Showdown games, the side one Pokemon up (of the four brought) won 75%, two up 92% (`unit.py`, a symmetric
 logistic fit, 1.115 log-odds per Pokemon; `results/eval_unit.json`). So +1.0 is as far ahead as being a Pokemon up, and equal steps are
-equal changes in the odds (40% to 20% is -0.9, 40% to 60% is +0.7). The bar shows it at the leading player's end with their win chance ("72% · +0.9"), and the
-graph switches between win chance and eval (-4 to +4).
+equal changes in the odds (40% to 20% is -0.9, 40% to 60% is +0.7). The page shows it centred between the two win chances, above the turn counter, from Player 1's
+side (+ ahead, - behind, colored for the leader), and the graph switches between win chance and eval (-4 to +4).
 
 ## A match the broadcast shows no team sheets for (2026-10-10)
 

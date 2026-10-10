@@ -49,6 +49,11 @@ impl Human {
     /// one slot's part of a joint choice, as the player reads it
     pub fn slot_label(b: &Battle, s: u8, k: usize, c: &PChoice) -> String {
         let name = |m: crate::state::MonRef| b.dex.species.get(b.p(m).species).map(|x| x.name).unwrap_or("?").to_string();
+        match *c {
+            PChoice::Switch(pos) => return format!("switch to {}", name((s, pos))),   // also a replacement for a fainted or empty slot
+            PChoice::Pass => return "pass".into(),
+            _ => {}
+        }
         let Some(pi) = b.sides[s as usize].active[k] else { return "-".into() }; let m = (s, pi);
         if b.p(m).fainted { return "-".into(); }
         match *c {

@@ -48,7 +48,9 @@ select{font:inherit;padding:5px;border-radius:6px;border:1px solid var(--line);b
 let T=null, order=[], my=null, opp=null, lastGame=0, lastKey='', sel=[null,null], busy=false;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-const pretty=id=>id?id.replace(/([a-z])([A-Z])/g,'$1 $2'):'';
+const NAMES={sunnyday:'Sun',raindance:'Rain',sandstorm:'Sand',snowscape:'Snow',hail:'Hail',trickroom:'Trick Room',grassyterrain:'Grassy Terrain',electricterrain:'Electric Terrain',psychicterrain:'Psychic Terrain',mistyterrain:'Misty Terrain',tailwind:'Tailwind',reflect:'Reflect',lightscreen:'Light Screen',auroraveil:'Aurora Veil',gravity:'Gravity',safeguard:'Safeguard',mist:'Mist',none:'cleared',brn:'burned',par:'paralysed',psn:'poisoned',tox:'badly poisoned',slp:'asleep',frz:'frozen',stall:'Protect streak',flinch:'flinch',substitute:'Substitute',taunt:'Taunt',encore:'Encore',yawn:'Yawn',confusion:'confused',leechseed:'Leech Seed',protect:'Protect',choicelock:'Choice-locked',mustrecharge:'recharging',twoturnmove:'charging',perishsong:'Perish Song',saltcure:'Salt Cure'};
+const pretty=id=>{if(!id)return ''; const k=String(id).replace(/^move: /,''); return NAMES[k]||k.replace(/([a-z])([A-Z])/g,'$1 $2');};
+const sideName=p=>p.startsWith('p1')?'your':'their';
 async function load(){T=await (await fetch('/teams')).json();
   const m=$('mine'); T.mine.forEach((t,i)=>m.add(new Option(t.name,'m'+i))); T.pool.forEach((t,i)=>m.add(new Option(`${t.arch||'?'} ${t.rating}: ${t.sets.map(s=>s.species).join(' / ')}`,'p'+i)));
   const o=$('theirs'); T.pool.forEach((t,i)=>o.add(new Option(`${t.arch||'?'} ${t.rating}: ${t.sets.map(s=>s.species).join(' / ')}`,i)));
@@ -70,7 +72,7 @@ function hpbar(m){const f=m.maxhp?m.hp/m.maxhp:0; return `<div class="bar ${f<.2
 const BOOST=['Atk','Def','SpA','SpD','Spe','Acc','Eva'];
 function monHtml(m,mine){if(!m)return '<div class="mon"><span class="sub">(empty)</span></div>';
   const b=m.boosts.map((v,i)=>v?`<span class="tag b">${v>0?'+':''}${v} ${BOOST[i]}</span>`:'').join('');
-  const vol=(m.volatiles||[]).filter(v=>!['dynamax'].includes(v.id)).map(v=>`<span class="tag">${esc(v.id)}${v.turns!=null?' '+v.turns:''}</span>`).join('');
+  const vol=(m.volatiles||[]).filter(v=>!['dynamax'].includes(v.id)).map(v=>`<span class="tag">${esc(pretty(v.id))}${v.turns!=null?' '+v.turns:''}</span>`).join('');
   const mv=m.moves.map(x=>`<span class="tag ${x.disabled?'':'b'}">${esc(x.name)} ${x.pp}/${x.maxpp}${effTxt(x.eff)}</span>`).join('');
   return `<div class="mon"><div class="nm">${esc(m.name)}${m.mega?' (Mega)':''} <span class="sub">${esc(m.types.join('/'))}</span> ${m.status?`<span class="tag st">${esc(m.status)}</span>`:''}</div>${hpbar(m)}<div class="sub">${m.hp}/${m.maxhp} (${Math.round(100*m.hp/Math.max(1,m.maxhp))}%) · ${esc(m.item||'no item')} · ${esc(m.ability)}</div><div>${b}${vol}</div><div>${mv}</div></div>`;}
 const X=v=>v===0?'0×':v===0.25?'¼×':v===0.5?'½×':v===1?'1×':v+'×';
@@ -79,8 +81,8 @@ function optTxt(st,k,l){const m=st.sides[0].active[k]; if(!m)return esc(l); cons
   if(tgt){const t=tgt.replace(' (ally)',''); return esc(l)+(mv.eff[t]!=null?` <b>${X(mv.eff[t])}</b>`:'');} const k2=Object.keys(mv.eff); return esc(l)+(k2.length?' <b>'+k2.map(n=>`${X(mv.eff[n])} ${esc(n)}`).join(', ')+'</b>':'');}
 function sideHtml(s,mine){return s.active.map(m=>monHtml(m,mine)).join('');}
 function benchHtml(s){return 'bench: '+(s.bench.map(m=>`${esc(m.name)} ${Math.round(100*m.hp/Math.max(1,m.maxhp))}%${m.status?' '+m.status:''}`).join(', ')||'none')+(s.fainted.length?' · fainted: '+s.fainted.map(m=>esc(m.name)).join(', '):'');}
-function fieldHtml(st){const f=st.field; const t=[]; if(f.weather)t.push(`<span class="tag b">${pretty(f.weather)}${f.weather_turns!=null?' '+f.weather_turns:''}</span>`); if(f.terrain)t.push(`<span class="tag b">${pretty(f.terrain)}${f.terrain_turns!=null?' '+f.terrain_turns:''}</span>`);
-  f.pseudo.forEach(p=>t.push(`<span class="tag b">${esc(p.id)}${p.turns!=null?' '+p.turns:''}</span>`)); st.sides.forEach((s,i)=>s.conditions.forEach(c=>t.push(`<span class="tag b">${i?'their':'your'} ${esc(c.id)}${c.turns!=null?' '+c.turns:''}</span>`)));
+function fieldHtml(st){const f=st.field; const t=[]; if(f.weather)t.push(`<span class="tag b">${esc(pretty(f.weather))}${f.weather_turns!=null?' '+f.weather_turns:''}</span>`); if(f.terrain)t.push(`<span class="tag b">${esc(pretty(f.terrain))}${f.terrain_turns!=null?' '+f.terrain_turns:''}</span>`);
+  f.pseudo.forEach(p=>t.push(`<span class="tag b">${esc(pretty(p.id))}${p.turns!=null?' '+p.turns:''}</span>`)); st.sides.forEach((s,i)=>s.conditions.forEach(c=>t.push(`<span class="tag b">${i?'their':'your'} ${esc(pretty(c.id))}${c.turns!=null?' '+c.turns:''}</span>`)));
   return t.length?t.join(''):'<span class="sub">no field effects</span>';}
 function render(m){const st=m.state; $('field').innerHTML=fieldHtml(st); $('them').innerHTML=sideHtml(st.sides[1]); $('themb').innerHTML=benchHtml(st.sides[1]); $('me').innerHTML=sideHtml(st.sides[0]); $('meb').innerHTML=benchHtml(st.sides[0]);
   renderLog(m.log_all||[]); sel=[null,null];
@@ -99,10 +101,10 @@ function who(s){const m=/^p([12])([ab]?): (.*)$/.exec(s||''); if(!m)return esc(s
 function tr(line){const p=line.split('|').slice(1); const c=p[0]; const a=p.slice(1);
   switch(c){case 'move':{const spread=a.slice(3).find(x=>x.startsWith('[spread]')); return `${who(a[0])} used ${esc(a[1])}${spread?' on '+spread.replace('[spread] ','').split(',').map(x=>x.trim()).map(x=>who(x.includes(': ')?x:x+': ')).join(' and '):a[2]?' on '+who(a[2]):''}`;} case '-damage':return `${who(a[0])} → ${esc(a[1])}${a[2]?' ('+esc(a[2].replace('[from] ',''))+')':''}`; case '-heal':return `${who(a[0])} healed to ${esc(a[1])}`;
     case 'faint':return `${who(a[0])} fainted`; case 'switch':case 'drag':return `${who(a[0])} switched in`; case '-boost':return `${who(a[0])}: ${esc(a[1])} +${esc(a[2])}`; case '-unboost':return `${who(a[0])}: ${esc(a[1])} -${esc(a[2])}`;
-    case '-status':return `${who(a[0])} is now ${esc(a[1])}`; case '-curestatus':return `${who(a[0])} cured of ${esc(a[1])}`; case '-weather':return `weather: ${esc(a[0])}`; case '-fieldstart':return `field: ${esc(a[0])} starts`; case '-fieldend':return `field: ${esc(a[0])} ends`;
-    case '-sidestart':return `${esc(a[0])}: ${esc(a[1])} starts`; case '-sideend':return `${esc(a[0])}: ${esc(a[1])} ends`; case '-crit':return 'critical hit'; case '-supereffective':return 'super effective'; case '-resisted':return 'not very effective'; case '-immune':return `${who(a[0])} is immune`;
+    case '-status':return `${who(a[0])} is now ${esc(pretty(a[1]))}`; case '-curestatus':return `${who(a[0])} is no longer ${esc(pretty(a[1]))}`; case '-weather':return a[0]==='none'?'weather cleared':`weather: ${esc(pretty(a[0]))}`; case '-fieldstart':return `${esc(pretty(a[0]))} starts`; case '-fieldend':return `${esc(pretty(a[0]))} ends`;
+    case '-sidestart':return `${sideName(a[0])} ${esc(pretty(a[1]))} starts`; case '-sideend':return `${sideName(a[0])} ${esc(pretty(a[1]))} ends`; case '-crit':return `critical hit on ${who(a[0])}`; case '-supereffective':return `super effective on ${who(a[0])}`; case '-resisted':return `not very effective on ${who(a[0])}`; case '-immune':return `${who(a[0])} is immune`;
     case '-miss':return a[1]?`${who(a[0])}'s attack missed ${who(a[1])}`:`${who(a[0])} missed`; case '-fail':return `${who(a[0])}: failed`; case 'cant':return `${who(a[0])} can't move (${esc(a[1])})`; case '-activate':return `${who(a[0])}: ${esc(a[1])}`; case '-mega':return `${who(a[0])} Mega Evolved`; case '-ability':return `${who(a[0])}: ${esc(a[1])}`;
-    case '-item':return `${who(a[0])}: ${esc(a[1])}`; case '-enditem':return `${who(a[0])} used up ${esc(a[1])}`; case '-start':return `${who(a[0])}: ${esc(a[1])}`; case '-end':return `${who(a[0])}: ${esc(a[1])} ended`; case 'turn':return null; case 'upkeep':case '':return null;
+    case '-item':return `${who(a[0])}: ${esc(a[1])}`; case '-enditem':return `${who(a[0])} used up ${esc(a[1])}`; case '-start':return `${who(a[0])}: ${esc(pretty(a[1]))}`; case '-end':return `${who(a[0])}: ${esc(pretty(a[1]))} ended`; case 'turn':return null; case 'upkeep':case '':return null;
     case 'win':return `winner: ${esc(a[0])}`; case '-terastallize':return null; default:return `${esc(c)} ${a.map(x=>/^p[12][ab]?: /.test(x)?who(x):esc(x)).join(' ')}`;}}
 function renderLog(all){let out='',cur=null; for(const [t,l] of all){const s=tr(l); if(s===null)continue; if(t!==cur){cur=t; out+=`<div class="t">turn ${t}</div>`;} out+=`<div>${s}</div>`;} $('log').innerHTML=out||'<span class="sub">nothing yet</span>'; $('log').scrollTop=$('log').scrollHeight;}
 load();

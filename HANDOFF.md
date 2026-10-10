@@ -1041,3 +1041,13 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     wins in 5 turns. The pure player itself plays almost the same lines as the mixer (Protect +1.1, focus fire -4) until it is read,
     then its attacks land into switches: attack 41.7% vs 48.2%, Protect 14.9% vs 9.9%. Greedy is 96% attacks, no Protect, no switch,
     no Trick Room, games 2.4 turns shorter.
+  - **Play the planner yourself (`champ play`, `pssim/play_server.py`, `pssim/play_ui.html`; 2026-10-10, 6:55 pm; the user: "set up a
+    simple ui so that you could play me directly", instead of piloting the sim's clicks on the ladder, which could count as outside
+    help).** `champ play <engine_data> <start.jsonl>` runs one game with a human on side 0 and the planner on side 1 over JSON lines
+    (native/champ/src/human.rs; battle4.rs `play` took an optional human, spot.rs `resolve_switches_h` lets the human pick replacements
+    and the planner answer them). The server builds the start with battle_starts.js (explicit job, your four in lead order, the pool
+    team's recorded bring) and runs the planner with the v25 kit setup (sym2, DP2, anticipation, free Mega choice, EG_MEGA_TIE=0). Both
+    sides see everything, as in self-play. Run from the repo root: `pssim/battlesim-play pssim/play_server.py` (or the `play` entry in
+    .claude/launch.json), then http://localhost:8765. The page: your six (the Trick Room six or any 1250+ pool team), the opponent's six
+    from the pool (or random), bring four by clicking in lead order, then per turn one option per slot (illegal pairs grey out), forced
+    replacements as buttons, and the engine's protocol log in plain words. No sim evaluation is shown during a game.

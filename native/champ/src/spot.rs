@@ -41,7 +41,9 @@ pub(crate) fn joint(b: &mut Battle, s: u8, sw: bool) -> Vec<[PChoice; 2]> {
 }
 /// answer pending switch requests (faint replacements, U-turn): both sides' assignments of bench Pokemon to the open slots form a
 /// small matrix game on the position value; `rng` None takes each side's most likely equilibrium choice, else samples it
-pub(crate) fn resolve_switches(b: &mut Battle, cfg: &Cfg, mut rng: Option<&mut f64>) {
+pub(crate) fn resolve_switches(b: &mut Battle, cfg: &Cfg, rng: Option<&mut f64>) { resolve_switches_h(b, cfg, rng, None, 0) }
+/// with a human on side 0 (champ play): the human picks side 0's replacements, the planner answers with its best replacement against them
+pub(crate) fn resolve_switches_h(b: &mut Battle, cfg: &Cfg, mut rng: Option<&mut f64>, mut human: Option<&mut crate::human::Human>, turn: usize) {
     let mut guard = 0;
     while b.request_switch && !b.ended && guard < 8 {
         guard += 1;
@@ -57,7 +59,13 @@ pub(crate) fn resolve_switches(b: &mut Battle, cfg: &Cfg, mut rng: Option<&mut f
             }
             if o.is_empty() { o.push([PChoice::Pass; 2]); }
             o }).collect();
-        let (i, j) = if opts[0].len() * opts[1].len() == 1 { (0, 0) } else {
+        let (i, j) = if let Some(h) = human.as_deref_mut() {
+            let i = h.choose_switch(b, turn, &opts[0]);
+            let j = if opts[1].len() <= 1 { 0 } else {
+                let vals: Vec<f64> = opts[1].iter().map(|y| { let mut c = b.clone(); c.choose_switches([opts[0][i], *y]); let v = value2(&mut c, cfg); if cfg.vw_b.is_some() { v.1 } else { v.0 } }).collect();
+                (0..vals.len()).min_by(|&a, &c| vals[a].partial_cmp(&vals[c]).unwrap()).unwrap() };
+            (i, j)
+        } else if opts[0].len() * opts[1].len() == 1 { (0, 0) } else {
             let a2: Vec<Vec<(f64, f64)>> = opts[0].iter().map(|x| opts[1].iter().map(|y| { let mut c = b.clone(); c.choose_switches([*x, *y]); value2(&mut c, cfg) }).collect()).collect();
             let a: Vec<Vec<f64>> = a2.iter().map(|r| r.iter().map(|v| v.0).collect()).collect();
             let (x, mut y) = nash(&a, 200);

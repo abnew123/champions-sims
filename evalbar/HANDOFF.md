@@ -353,6 +353,19 @@ right; a verdict is saved beside the game's log (out/live/<tag>_g<n>_fixes.json)
 (replay.py sets the stat or field as given) and that turn and the later ones are evaluated again; pressing a chosen button again takes the
 verdict back. `?novideo` on the page leaves out the YouTube player.
 
+## Hands-free: auto.py (the user asked, 2026-10-10)
+
+The Play Pokémon channel names its streams consistently ("VGC Day 2 | 2027 Pokémon Louisville Regional Championships"; side streams are
+"VGC Feature Station ..."). `auto.py` reads the channel's streams page every 5 minutes (the public feed was returning errors) and runs one
+program: `broadcast.py follow` while a main VGC stream is live (from the stream's start when there is no record of it yet, again after 5
+minutes without a new fragment since the fragment URL lasts about 6 hours, the Mac kept awake on mains power), else `broadcast.py serve`
+for the newest VGC stream (a record shown without fetching; `scan` of the recording first when it was never read). It pauses its program's
+process group while other programs keep 8 or more cores busy and carries on below 6 (the user chose start-on-its-own, 2 workers).
+The user's LaunchAgent (`auto.py install`, label local.evalbar.auto) runs it from the main checkout, so the records it keeps are in the main
+checkout's evalbar/out/live; it owns port 8768. One game's evaluation at a time now (`live.WORK`): a page rebuilt from a record used to
+start an engine for every game at once. yt-dlp answered again on 2026-10-10 (no bot check); the watch page alone no longer has the
+stream's manifest.
+
 ## The broadcast reader: targets
 
 Mid-turn the broadcast pops up the HP box of the Pokemon being hit, alone, in that Pokemon's slot. The reader (broadcast.py `aim`/`hit`/

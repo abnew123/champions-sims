@@ -132,6 +132,9 @@ def positions(specs, outf):
                    check=True, capture_output=True)
     os.remove(tmp)
     return {x['name']: x for x in map(json.loads, open(outf))}
+# A broadcast's games each have a Live in one process (broadcast.py's Runner): one of them builds or evaluates at a time, so a page
+# rebuilt from a record (a restart, serve) runs one engine with `threads` workers, not one per game
+WORK = threading.Lock()
 class Live:
     def __init__(s, room, threads, port, logfile=None, tag=None, fmt=None):
         """room: a Showdown battle room (followed through live_feed.js); or logfile: a battle log another program writes (the broadcast
@@ -286,15 +289,18 @@ class Live:
             todo = [st for st in g['steps'] if st['turn'] >= 1 and st['turn'] not in s.weights]
             if todo:
                 step = todo[-1]                                              # the newest turn first; older ones fill in when there is time
-                s.status = f"evaluating turn {step['turn']}"; s.build(log, g)
-                t0 = time.time(); why = s.evaluate(log, g, step); seen_len = -1
+                s.status = f"evaluating turn {step['turn']}"
+                with WORK: s.build(log, g); t0 = time.time(); why = s.evaluate(log, g, step)
+                seen_len = -1
                 print(f"turn {step['turn']}: {len(s.weights[step['turn']])} positions in {time.time() - t0:.0f}s" + (f' (skipped: {why})' if why else ''), flush=True)
                 continue
             last = g['steps'][-1]['turn']
             status = 'finished' if g['winner'] or feed.poll() is not None else f"turn {last}"
             if s.skip.get(last): status += f" · not evaluated: {', '.join(s.skip[last])} {s.why(s.skip[last])}"
             if len(log) != seen_len or status != s.status:
-                s.status = status; s.build(log, g); seen_len = len(log)
+                s.status = status
+                with WORK: s.build(log, g)
+                seen_len = len(log)
             if feed.poll() is not None and not todo and not s.over:
                 s.over = True
                 if s.port: print(f'battle over; the page stays up at http://localhost:{s.port} until you stop this (Ctrl-C)', flush=True)

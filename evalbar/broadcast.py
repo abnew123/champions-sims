@@ -120,6 +120,9 @@ def sheet(lines):
 # --------------------------------------------------------------------------------------------------------------------------- battle
 SINGLE = {'normal', 'any', 'adjacentFoe', 'adjacentAlly', 'adjacentAllyOrSelf'}   # move targets the player picks
 BOXES = (('p1', 'a', 0.0, 0.16), ('p1', 'b', 0.16, 0.42), ('p2', 'a', 0.58, 0.81), ('p2', 'b', 0.81, 1.0))
+# the battle messages that end with a full stop (the others end with "!" or "..."); other text in that part of the screen is the overlay's
+PERIOD = re.compile(r"(rain stopped|sunlight faded|sandstorm subsided|snow stopped|disappeared from the battlefield|weirdness disappeared|"
+                    r"electricity disappeared|mist disappeared|returned to normal|ended due to a forfeit)\.$")
 def battle(lines):
     """one battle frame -> (HP boxes {(side, slot): (name, pct)}, decision screen?, turn number or None, battle text or None)"""
     names = [(t.strip(), x) for t, x, y, w, h in lines if 0.86 < y < 0.91]
@@ -130,7 +133,7 @@ def battle(lines):
         if n and p is not None: boxes[(sd, sl)] = (n, min(100, p))
     mid = [t.strip() for t, x, y, w, h in lines if 0.70 < y < 0.86 and 0.2 < x + w / 2 < 0.8]   # the text box sits at two heights
     decision = any('choosing actions' in t for t in mid)
-    text = next((t for t in mid if len(t) > 8 and (t.endswith('!') or t.endswith('!l') or t.endswith('...')) and 'Trainer' != t), None)
+    text = next((t for t in mid if len(t) > 8 and (t.endswith('!') or t.endswith('!l') or t.endswith('...') or PERIOD.search(t)) and 'Trainer' != t), None)
     turn = next((int(m.group(1)) for t, x, y, w, h in lines for m in [re.fullmatch(r'Turn (\d+)', t.strip())] if m and x > 0.8 and y < 0.12), None)
     return boxes, decision, turn, text
 def letters(t): return re.sub(r'[^A-Z]', '', t.upper())
@@ -151,7 +154,7 @@ class Reader:
     def new_game(s):
         s.out = []; s.games.append(s.out); s.meta.append({}); s.started = False; s.turn = 0; s.in_decision = False; s.ended = False
         s.active = {}; s.hp = {}; s.last_text = None; s.slot_free = {'p1': [], 'p2': []}; s.megas = {'p1': False, 'p2': False}
-        s.fainted = {'p1': set(), 'p2': set()}; s.open = None; s.cur = {}; s.changed = {}; s.foreign = 0; s.lead_seen = False; s.pending = []; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False
+        s.fainted = {'p1': set(), 'p2': set()}; s.open = None; s.cur = {}; s.changed = {}; s.foreign = 0; s.run = []; s.gap = 0; s.at_msg = None; s.lead_seen = False; s.pending = []; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False
     def team(s, sd): return s.sheets.get(sd, [])
     def species(s, sd, name):
         """an OCR'd Pokémon name on side sd -> the species on that side's sheet (Mega names map back to the base)"""
@@ -202,7 +205,8 @@ class Reader:
         if re.search(r"won the battle|forfeit|\blost!$|You won", text, re.I) and 'lost some' not in text:
             if not s.ended:
                 left = {sd: 4 - len(s.fainted[sd]) for sd in ('p1', 'p2')}
-                win = 'p1' if left['p2'] == 0 or ('forfeit' not in text and left['p1'] > left['p2']) else 'p2' if left['p1'] == 0 or left['p2'] > left['p1'] else None
+                win = 'p1' if left['p1'] > left['p2'] else 'p2' if left['p2'] > left['p1'] else None
+                if 'forfeit' in text and win is None: return                     # who forfeited: the "... lost!" message that follows
                 if win: s.emit('|', f"|win|Player {win[1]}")
                 s.ended = True; s.prev_end = s.frame; s.meta[-1]['end'] = s.now()
                 if s.game_names: s.board = s.game_names.most_common(1)[0][0]      # who played this game, for telling the next one apart
@@ -277,6 +281,9 @@ class Reader:
             sl = s.slot_of(sd, sp)
             if sl: s.slot_free[sd].append(sl); s.active.pop((sd, sl), None)
             return
+        cap = re.match(r"'s (.+?) won't go any (higher|lower)", rest)
+        if cap and cap.group(1).strip() in STAT:                                # the stat is at +6 or -6
+            s.emit(f"|-setboost|{me}|{STAT[cap.group(1).strip()]}|{6 if cap.group(2) == 'higher' else -6}"); return
         bm = re.match(r"'s (.+?) (fell|rose|harshly fell|severely fell|rose sharply|rose drastically)", rest)
         if bm:
             n = 2 if ('harshly' in bm.group(2) or 'sharply' in bm.group(2)) else 3 if ('severely' in bm.group(2) or 'drastically' in bm.group(2)) else 1
@@ -299,8 +306,9 @@ class Reader:
         foes = [k for k in s.active if k[0] != sd and s.active[k] not in s.fainted[k[0]]]
         ally = [k for k in s.active if k[0] == sd and k[1] != sl and s.active[k] not in s.fainted[sd]]
         only = ally if mv['target'] in ('adjacentAlly', 'adjacentAllyOrSelf') else foes if mv['target'] == 'adjacentFoe' or not ally else None
-        s.open = {'at': len(s.out) - 1, 'user': (sd, sl), 'status': mv.get('category') == 'Status', 'start': dict(s.cur), 'seen': collections.Counter(),
-                  'draining': {k for k, fr in s.changed.items() if fr >= s.frame - 1}}
+        cur, fr0 = s.at_msg or (dict(s.cur), s.frame)                            # as when "X used Y!" came up
+        s.open = {'at': len(s.out) - 1, 'user': (sd, sl), 'status': mv.get('category') == 'Status', 'start': cur, 'seen': collections.Counter(),
+                  'draining': {k for k, fr in s.changed.items() if fr0 - 1 <= fr <= fr0}}
         s.meta[-1].setdefault('targets', [0, 0])[1] += 1
         if only is not None and len(only) == 1: s.hit(only[0], 'only target')
     def hit(s, k, how):
@@ -383,6 +391,13 @@ class Reader:
                     s.board = s.game_names.most_common(1)[0][0]; s.check_sides(); s.sides_checked = True
         boxes, decision, turn, text = battle(L)
         if s.ended and decision and len(boxes) >= 3: s.new_game()                       # the next game of the set
+        # a message stays on screen for a few frames: read it once, when it leaves, in its most common reading (the first frame of a
+        # message is sometimes misread: "Archaludop's Defensé rose!")
+        s.gap = 0 if text else s.gap + 1                                       # one empty frame inside a message is a misread
+        if s.run and (decision or s.gap >= 2 or (text and difflib.SequenceMatcher(None, text, s.run[-1]).ratio() <= 0.85)):
+            best = collections.Counter(s.run).most_common(1)[0][0]; s.run = []
+            if s.started and not s.ended: s.message(best)
+            s.at_msg = None
         if s.started and not s.ended and boxes:                                         # mid-turn, the box of the Pokemon hit pops up alone
             if s.pending: s.place(boxes)
             s.watch_hp(boxes)
@@ -414,8 +429,8 @@ class Reader:
             s.shut(); s.reconcile(boxes); s.turn = max(s.turn + 1, turn or 0); s.emit('|upkeep', '|', f'|turn|{s.turn}'); s.mark()   # upkeep: durations count down
         s.in_decision = decision
         if text and not decision:
-            if s.last_text and difflib.SequenceMatcher(None, text, s.last_text).ratio() > 0.85: return
-            s.last_text = text; s.message(text)
+            if not s.run: s.at_msg = (dict(s.cur), s.frame)                     # the HP boxes and the frame when the message came up
+            s.run.append(text)
     def assign_sheets(s, boxes, board=None):
         """the team sheets shown before the battle -> sides. Sheet screens come in runs, one player's sheet per run; each run's reads are
         merged (the fullest read of each Pokémon). A run goes to the side whose scoreboard name matches its header; failing that, to the
@@ -589,15 +604,20 @@ def fragment(src, sq, out):
     head = re.search(r'X-Head-Seqnum: (\d+)', r.stdout, re.I); ok = r.stdout.split('\n', 1)[0].split()[1:2] == ['200']
     return (out if ok and os.path.exists(out) and os.path.getsize(out) > 1000 else None), (int(head.group(1)) if head else None)
 def follow(url, threads=2, port=8768, at=None, srcf=None):
-    """a live YouTube stream through its fragments, from `at` (h:mm:ss into the stream; default: the live edge, after catching up on what
-    an earlier watch of the same stream read) on, as they appear. srcf: a JSON file with the fragment URL and headers saved earlier,
+    """a live YouTube stream through its fragments, from `at` (h:mm:ss into the stream; an earlier record of the stream is set aside) or,
+    by default, from where an earlier follow of the same stream stopped (catching up on what it read), else the live edge, as they appear. srcf: a JSON file with the fragment URL and headers saved earlier,
     for when yt-dlp is refused"""
     vid = youtube(url).split('v=')[-1]; tag = 'live_' + re.sub(r'\W', '', vid)[:16]
     d = os.path.join(C.HERE, 'out', 'live', tag + '_frames'); os.makedirs(d, exist_ok=True); keep = os.path.join(C.HERE, 'out', 'live', tag + '.ocr.jsonl')
     src = json.load(open(srcf)) if srcf else dash_source(youtube(url)); tmp = os.path.join(d, 'frag.mp4')
     _, head = fragment(src, 0, tmp)
     if head is None: sys.exit('the stream did not answer: the fragment URL may have expired (about 6 hours)')
-    sq = max(0, head - 1) if at is None else secs(at) // 5
+    pos = os.path.join(C.HERE, 'out', 'live', tag + '_sq.txt')               # the next fragment to fetch, so a restart carries on without a gap
+    if at is not None:
+        sq = secs(at) // 5
+        for f in (keep, pos):
+            if os.path.exists(f): os.replace(f, f + '.old')
+    else: sq = int(open(pos).read()) if os.path.exists(pos) and os.path.exists(keep) else max(0, head - 1)
     run = Runner(tag, threads, port, video={'id': vid, 'start': 0, 'live': True}, t0=sq * 5)   # a live stream: the page shows the newest turn
     done = catch_up(run, d, keep) if at is None else 0
     if done: run.reader.t0 = sq * 5 - done / 2
@@ -610,7 +630,7 @@ def follow(url, threads=2, port=8768, at=None, srcf=None):
             subprocess.run([P.exe('ffmpeg'), '-v', 'error', '-y', '-i', fr, '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', '-start_number', str(n + 1),
                             os.path.join(part, 'f_%06d.jpg')])
             for f in sorted(os.listdir(part)): os.replace(os.path.join(part, f), os.path.join(d, f)); n += 1
-            sq += 1
+            sq += 1; open(pos, 'w').write(str(sq))
     threading.Thread(target=fetch, daemon=True).start()
     while True:
         done = max(done, pump(run, d, keep, done)); time.sleep(1)

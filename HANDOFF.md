@@ -1033,3 +1033,11 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     greedy loses 26 to the normal planner and 46 to a reader. Eval bar's per-turn read study (evalbar/HANDOFF.md "What is a read worth?",
     2026-10-06: a 20% lean worth ~4 points a turn, a 10% lean every turn 15.3 a game vs 16.0 for 20% on the best third of turns, a
     wrong read 0.1 a turn) is the static counterpart; these are the full-game numbers.
+    What rises and falls (`pssim/policy_lines.py` on the same games replayed with BATTLE_LOG=1 BATTLE_TURNS=1; results/policy_lines.txt):
+    a reader facing the pure line switches 20.6% of its decisions instead of 11.3% (3.2 switches a game vs 1.8), focus-fires 62% of its
+    double attacks instead of 51%, Protects a little less (9.9% vs 11.7%), sets up more (3.1% vs 2.0%), and ends games half a turn
+    sooner; Trick Room and Tailwind rates do not move. Facing the known mix it switches 15.3% (+4.1) with everything else flat. Facing
+    greedy it Protects half as often (5.5% vs 11.7%: the greedy side never Protects, so there is nothing to block), attacks more and
+    wins in 5 turns. The pure player itself plays almost the same lines as the mixer (Protect +1.1, focus fire -4) until it is read,
+    then its attacks land into switches: attack 41.7% vs 48.2%, Protect 14.9% vs 9.9%. Greedy is 96% attacks, no Protect, no switch,
+    no Trick Room, games 2.4 turns shorter.

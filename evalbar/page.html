@@ -68,6 +68,13 @@ header h1{font-size:clamp(28px,6vw,40px);font-weight:700;letter-spacing:-.02em;l
 .sides{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .side{display:flex;align-items:baseline;gap:8px;min-width:0}
 .side .who{font-family:var(--disp);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);display:flex;align-items:center;gap:6px}
+.evn{font-family:var(--mono);font-size:18px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums;align-self:center;text-align:center}
+.evn small{display:block;font-family:var(--body);font-size:11px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin-top:3px}
+.evn.p1{color:var(--p1)} .evn.p2{color:var(--p2)}
+.ghead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px}
+.gmode{display:flex;gap:4px}
+.gmode button{font:inherit;font-size:13px;padding:3px 10px;border:1px solid var(--rule);border-radius:4px;background:var(--panel-2);color:var(--ink2);cursor:pointer}
+.gmode button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:600}
 .side .pc{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
 .bar{position:relative;display:flex;gap:2px;height:16px}
 .bar i{display:block;height:100%;min-width:0;transition:flex-basis .35s ease}
@@ -194,6 +201,7 @@ section > h2{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:u
   <div class="live" id="live">
     <div class="sides">
       <div class="side"><span class="who"><i class="sw p1"></i><span id="n1">Player 1</span></span><span class="pc" id="pc1"></span></div>
+      <div class="evn" id="evn" title="The win chance on a chess-style scale: +1.0 is as far ahead as being one Pokémon up"></div>
       <div class="side"><span class="pc" id="pc2"></span><span class="who"><span id="n2">Player 2</span><i class="sw p2"></i></span></div>
     </div>
     <div class="bar" id="bar" role="img"><i class="a" id="barA"></i><i class="b"></i></div>
@@ -205,7 +213,8 @@ section > h2{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:u
   </div>
 
   <section>
-    <h2 id="graphTitle">Player 1's win chance through the game</h2>
+    <div class="ghead"><h2 id="graphTitle">Player 1's win chance through the game</h2>
+      <div class="gmode" role="group" aria-label="Graph scale"><button type="button" data-g="wp">Win chance</button><button type="button" data-g="ev">Eval</button></div></div>
     <div class="graph" id="graph"></div>
   </section>
 
@@ -248,6 +257,12 @@ function load(k) {
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 const $ = id => document.getElementById(id);
 const pct = (x, live) => { const v = Math.round(100 * x); return live ? Math.max(1, Math.min(99, v)) : v; };
+// the eval: the win chance's log-odds per Pokemon of advantage (one Pokemon up wins 75% of real games; evalbar/unit.py), like a chess eval
+const UNIT = 1.115;
+const evOf = p => { const q = Math.max(0.002, Math.min(0.998, p)); return Math.log(q / (1 - q)) / UNIT; };
+const evTxt = p => { const v = evOf(p); return (Math.abs(v) < 0.05 ? '0.0' : (v > 0 ? '+' : '−') + Math.abs(v).toFixed(1)); };
+let gmode = 'wp';
+try { gmode = localStorage.getItem('evalbar-graph') || 'wp'; } catch (e) {}
 const who = s => NAMES ? NAMES[s] : (G && G.players && G.players[s]) || 'Player ' + s[1];   // a broadcast: the names on its scoreboard (live page only)
 const towards = s => NAMES ? {p1: 'you', p2: 'the opponent'}[s] : who(s);
 const seg = segs => segs.map(x => typeof x === 'string' ? esc(x) : `<span class="m"><i class="sw ${x[0]}"></i>${esc(x[1])}</span>`).join('');
@@ -292,6 +307,8 @@ function head() {
 function bar() {
   const live = cur < N || G.final.wp === null, a = pct(WP[cur], live), b = 100 - a;
   $('pc1').textContent = a + '%'; $('pc2').textContent = b + '%';
+  const e = cur < N || G.final.wp === null ? evTxt(WP[cur]) : '';
+  $('evn').innerHTML = e ? `${e}<small>eval</small>` : ''; $('evn').className = 'evn ' + (WP[cur] > 0.5 ? 'p1' : WP[cur] < 0.5 ? 'p2' : '');
   $('barA').style.flexBasis = `calc(${a}% - 1px)`;
   $('bar').setAttribute('aria-label', `${who('p1')} ${a}%, ${who('p2')} ${b}%`);
   $('where').innerHTML = cur < N ? `Turn ${G.steps[cur].turn}${G.live && G.winner == null ? '' : ' of ' + N}<small>${G.live && cur === M ? 'the latest turn' : 'at the start of the turn'}</small>`
@@ -303,14 +320,17 @@ function bar() {
 function graph() {
   const box = $('graph'), W = Math.max(280, box.clientWidth - 12), H = 170, L = 36, R = 14, T = 16, B = 24;
   const x = i => L + (W - L - R) * i / Math.max(1, M), y = v => T + (H - T - B) * (1 - v);
-  const pts = WP.slice(0, M + 1).map((v, i) => [x(i), y(v)]);
+  const EV = gmode === 'ev', sc = p => EV ? (Math.max(-4, Math.min(4, evOf(p))) + 4) / 8 : p;      // the eval scale: -4 to +4
+  document.querySelectorAll('.gmode button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.g === gmode)));
+  $('graphTitle').textContent = (NAMES ? 'Your ' : `${who('p1')}'s `) + (EV ? 'eval through the game' : 'win chance through the game');
+  const pts = WP.slice(0, M + 1).map((v, i) => [x(i), y(sc(v))]);
   const line = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
   const area = `${line} L${x(M)} ${y(.5)} L${x(0)} ${y(.5)} Z`;
   const step = (W - L - R) / Math.max(1, M);
   let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${who('p1')}'s win chance at the start of each turn">
     <defs><clipPath id="up"><rect x="0" y="0" width="${W}" height="${y(.5)}"/></clipPath><clipPath id="dn"><rect x="0" y="${y(.5)}" width="${W}" height="${H}"/></clipPath></defs>`;
   for (const v of [0, .25, .5, .75, 1]) s += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--rule${v === .5 ? '' : '-2'})" stroke-width="1" fill="none"/>
-    <text x="${L - 6}" y="${y(v) + 3.5}" text-anchor="end">${100 * v}%</text>`;
+    <text x="${L - 6}" y="${y(v) + 3.5}" text-anchor="end">${EV ? ['−4', '−2', '0', '+2', '+4'][4 * v] : 100 * v + '%'}</text>`;
   s += `<path d="${area}" fill="var(--p1)" opacity=".28" clip-path="url(#up)"/><path d="${area}" fill="var(--p2)" opacity=".28" clip-path="url(#dn)"/>`;
   s += `<text class="lab" x="${L + 6}" y="${T + 11}">${esc(who('p1'))} ahead</text><text class="lab" x="${L + 6}" y="${H - B - 6}">${esc(who('p2'))} ahead</text>`;
   s += `<line x1="${x(cur)}" x2="${x(cur)}" y1="${T}" y2="${H - B}" stroke="var(--ink)" stroke-width="1" fill="none" opacity=".5"/>`;
@@ -323,7 +343,7 @@ function graph() {
   const tip = $('tip');
   box.querySelectorAll('.hit').forEach(r => {
     const i = +r.dataset.i;
-    const show = () => { const a = pct(WP[i], i < N); tip.textContent = `${i === N ? 'Result' : 'Turn ' + G.steps[i].turn}: ${who('p1')} ${a}%, ${who('p2')} ${100 - a}%`;
+    const show = () => { const a = pct(WP[i], i < N); tip.textContent = `${i === N ? 'Result' : 'Turn ' + G.steps[i].turn}: ${who('p1')} ${a}%, ${who('p2')} ${100 - a}%` + (i < N ? ` · eval ${evTxt(WP[i])}` : '');
       const left = Math.max(110, Math.min(box.clientWidth - 110, 6 + pts[i][0] * (box.clientWidth - 12) / W)); tip.style.left = left + 'px'; tip.style.top = (10 + pts[i][1] - 10) + 'px'; tip.hidden = false; };
     r.addEventListener('mouseenter', show); r.addEventListener('focus', show);
     r.addEventListener('mouseleave', () => { tip.hidden = true; }); r.addEventListener('blur', () => { tip.hidden = true; });
@@ -437,6 +457,7 @@ function notes() {
     ${G.engine ? `<p><b>Best options.</b> ${solve} Picks is each option's share of that solution, so a mixed answer means the planner would vary its play. The engine's percentages come from its own self-play scale and are not yet matched to real results, so they can sit a few points away from the bar. Stat points are not on team sheets: the engine assumes each Pokémon's most common spread.</p>`
       : '<p><b>Not here yet.</b> The best options for each Pokémon on the field, with how often the planner would pick each and what each is worth. That needs the battle engine and is the next version.</p>'}`;
   }
+  html += `<p><b>The eval.</b> The number between the two percentages is the same win chance on a chess-style scale: its log-odds divided by what one Pokémon of advantage is worth (in 2,789 Showdown games, the side a Pokémon up won 75%). So +1.0 means ${esc(who('p1'))} is as far ahead as being a whole Pokémon up, −1.0 the same for ${esc(who('p2'))}, and equal steps are equal changes in the odds: 40% to 20% is −0.9, 40% to 60% is +0.7.</p>`;
   $('notes').innerHTML = html + (G.perish ? '<p><b>Perish Song was used in this game.</b> The planner cannot play the Perish trap, so treat the bar with care around it.</p>' : '');
 }
 
@@ -464,6 +485,11 @@ function checks() {
       <td><span class="k">text</span><span class="v">${esc(c.messages)}</span></td><td><span class="k">rules</span><span class="v">${esc(c.rules)}</span></td>
       <td>${canSave ? btn(c, 'messages', 'Text is right') + ' ' + btn(c, 'rules', 'Rules are right') : (c.choice ? 'settled: ' + esc(c.choice) : '')}</td></tr>`).join('')}</table></div>`;
 }
+document.addEventListener('click', e => {
+  const b = e.target.closest('.gmode [data-g]'); if (!b) return;
+  gmode = b.dataset.g; try { localStorage.setItem('evalbar-graph', gmode); } catch (err) {}
+  if (N) graph();
+});
 document.addEventListener('click', async e => {
   const g = e.target.closest('#checklist [data-go]'); if (g) { go(+g.dataset.go); return; }
   const b = e.target.closest('#checks [data-choice]'); if (!b) return;

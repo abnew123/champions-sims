@@ -255,6 +255,14 @@ Text is not enough on its own, so the reader also keeps track of state:
 A further step would be to replay each turn with the engine (its turntest loads the state before a turn and plays both sides' choices)
 and keep the outcome that matches the HP boxes: abilities like Stamina, item use and durations would then come from the simulation.
 
+## The eval number (2026-10-10)
+
+The user asked for a chess-style number beside the win chance. It is the win chance's log-odds divided by what one Pokemon of advantage is
+worth: in the 2,789 cached Showdown games, the side one Pokemon up (of the four brought) won 75%, two up 92% (`unit.py`, a symmetric
+logistic fit, 1.115 log-odds per Pokemon; `results/eval_unit.json`). So +1.0 is as far ahead as being a Pokemon up, and equal steps are
+equal changes in the odds (40% to 20% is -0.9, 40% to 60% is +0.7). The page shows it between the two percentages, and the graph switches
+between win chance and eval (-4 to +4).
+
 ## A match the broadcast shows no team sheets for (2026-10-10)
 
 The Louisville stream skipped the sheets for one feature match, and the reader used to wait for them ("waiting for both team sheets").

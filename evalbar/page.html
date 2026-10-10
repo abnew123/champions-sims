@@ -84,6 +84,10 @@ header h1{font-size:clamp(28px,6vw,40px);font-weight:700;letter-spacing:-.02em;l
 .bar::after{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--ink);opacity:.55}
 @media (prefers-reduced-motion:reduce){.bar i{transition:none}}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.watch{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:10px}
+.watch button{font-family:var(--disp);font-size:13px;font-weight:600;color:var(--ink);background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:6px 12px;cursor:pointer}
+.watch button:hover{border-color:var(--ink3)}
+.watch .on{border-color:var(--accent);color:var(--accent)}
 .nav button{font-family:var(--disp);font-size:13px;font-weight:600;color:var(--ink);background:var(--panel);border:1px solid var(--rule);border-radius:4px;
   padding:8px 14px;min-width:84px;cursor:pointer}
 .nav button:hover:not(:disabled){border-color:var(--ink3)}
@@ -211,6 +215,10 @@ section > h2{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:u
       <div class="where" id="where"></div>
       <button id="next" type="button">Next ›</button>
     </div>
+    <div class="watch" id="watch" hidden>
+      <button type="button" id="wGame">▶ Watch this game</button><button type="button" id="wTurn">▶ Watch from this turn</button>
+      <button type="button" id="wStop" class="on" hidden>Stop following the video</button>
+    </div>
   </div>
 
   <section>
@@ -317,7 +325,27 @@ function bar() {
     : `Result<small>${G.winner ? who(G.winner) + ' won' + (G.forfeit ? ' by forfeit' : '') : 'no winner recorded'}</small>`;
   if (NAMES && cur === N) $('where').innerHTML = `Result<small>${G.result === 'win' ? 'You won' : 'You lost'}</small>`;
   $('prev').disabled = cur === 0; $('next').disabled = cur >= M;
+  watchButtons();
 }
+// watch a game, or from a turn, "live" again: the video goes there and the page shows only what the video has reached
+function watchButtons() {
+  const has = !!(player && DATA.video && DATA.video.id && G.steps && G.steps.length && G.steps[0].vt != null);
+  $('watch').hidden = !has; if (!has) return;
+  const t = cur < N ? G.steps[cur].vt : null;
+  $('wTurn').hidden = t == null; if (t != null) $('wTurn').textContent = `▶ Watch from turn ${G.steps[cur].turn}`;
+  $('wStop').hidden = !followVideo;
+}
+function watchAt(t) {
+  if (!player || t == null) return;
+  followVideo = true; VT = Math.max(0, t); try { player.seekTo(VT, true); player.playVideo(); } catch (e) {}
+  shownKey = ''; apply(); watchButtons();
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('#watch button'); if (!b) return;
+  if (b.id === 'wGame') watchAt(G.steps[0].vt - 20);                  // the leads come out a little before the first turn
+  else if (b.id === 'wTurn' && cur < N) watchAt(G.steps[cur].vt - 1);
+  else if (b.id === 'wStop') { followVideo = false; shownKey = ''; apply(); watchButtons(); }
+});
 
 function graph() {
   const box = $('graph'), W = Math.max(280, box.clientWidth - 12), H = 170, L = 36, R = 14, T = 16, B = 24;
@@ -504,9 +532,9 @@ document.addEventListener('click', async e => {
 });
 let lastLive = '';
 // with a video on the page, only what the player has reached is shown: turns after its time, and a result it has not got to, wait
-let RAW = null, VT = null, player = null, shownKey = '';
+let RAW = null, VT = null, player = null, shownKey = '', followVideo = false;   // followVideo: the user sent the video to a game or turn
 function upToPlayer(d) {
-  if (VT === null || !d.video || d.video.live) return d;
+  if (VT === null || !d.video || (d.video.live && !followVideo)) return d;
   const games = d.games.filter(g => g.steps.length && (g.steps[0].vt ?? 0) <= VT + 1).map(g => {
     const steps = g.steps.filter(s => s.vt == null || s.vt <= VT + 1), over = g.end != null && VT >= g.end;
     return {...g, steps, winner: over ? g.winner : null, final: over ? g.final : {...g.final, wp: null}, live: true};
@@ -531,7 +559,8 @@ function video() {
   const v = DATA.video; if (!v || !v.id || /[?&]novideo\b/.test(location.search)) return;          // ?novideo: the bar without the player
   $('video').hidden = false;
   window.onYouTubeIframeAPIReady = () => {
-    player = new YT.Player('ytplayer', {videoId: v.id, playerVars: {start: v.start || 0, autoplay: 1, playsinline: 1, rel: 0}});
+    player = new YT.Player('ytplayer', {videoId: v.id, playerVars: {start: v.start || 0, autoplay: 1, playsinline: 1, rel: 0},
+      events: {onReady: () => { try { watchButtons(); } catch (e) {} }}});
     setInterval(() => { try { const t = player.getCurrentTime(); if (typeof t === 'number' && t > 0) { VT = t; apply(); } } catch (e) {} }, 1000);
   };
   const sc = document.createElement('script'); sc.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(sc);

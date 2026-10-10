@@ -747,14 +747,16 @@ def follow(url, threads=2, port=8768, at=None, srcf=None):
     _, head = fragment(src, 0, tmp)
     if head is None: sys.exit('the stream did not answer: the fragment URL may have expired (about 6 hours)')
     pos = os.path.join(C.HERE, 'out', 'live', tag + '_sq.txt')               # the next fragment to fetch, so a restart carries on without a gap
+    t0f = os.path.join(C.HERE, 'out', 'live', tag + '_t0.txt')               # the stream time of frame 1, so the video times survive a restart
     if at is not None:
         sq = secs(at) // 5
-        for f in (keep, pos):
+        for f in (keep, pos, t0f):
             if os.path.exists(f): os.replace(f, f + '.old')
     else: sq = int(open(pos).read()) if os.path.exists(pos) and os.path.exists(keep) else max(0, head - 1)
-    run = Runner(tag, threads, port, video={'id': vid, 'start': 0, 'live': True}, t0=sq * 5)   # a live stream: the page shows the newest turn
+    if not (os.path.exists(t0f) and os.path.exists(keep)): open(t0f, 'w').write(str(sq * 5))
+    t0 = float(open(t0f).read())
+    run = Runner(tag, threads, port, video={'id': vid, 'start': 0, 'live': True}, t0=t0)   # a live stream: the page shows the newest turn
     done = catch_up(run, d, keep) if at is None else 0
-    if done: run.reader.t0 = sq * 5 - done / 2
     def fetch():
         nonlocal sq
         n = done; part = os.path.join(d, 'part'); os.makedirs(part, exist_ok=True)

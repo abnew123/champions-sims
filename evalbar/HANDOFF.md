@@ -255,6 +255,14 @@ Text is not enough on its own, so the reader also keeps track of state:
 A further step would be to replay each turn with the engine (its turntest loads the state before a turn and plays both sides' choices)
 and keep the outcome that matches the HP boxes: abilities like Stamina, item use and durations would then come from the simulation.
 
+## Watching a game again (2026-10-10)
+
+With the video embedded, the page has "Watch this game" (the video goes 20 s before its first turn), "Watch from turn N" and "Stop
+following the video": while following, the page shows only what the video has reached (upToPlayer), as with a recording, so a finished
+game plays out live again; this works on the live stream (its DVR) and on the recording once it ends. The step times (vt) are the stream
+time: `follow` keeps the stream time of its first frame in out/live/live_<id>_t0.txt so a restart, which catches up on the kept frames,
+gives them the same times.
+
 ## The eval number (2026-10-10)
 
 The user asked for a chess-style number beside the win chance. It is the win chance's log-odds divided by what one Pokemon of advantage is

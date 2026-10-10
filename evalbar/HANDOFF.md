@@ -242,6 +242,19 @@ about 3x real time. After many requests YouTube's bot check refused yt-dlp ("Sig
 earlier kept working (it lasts about 6 hours), so `follow` takes a saved one (`src=<json with url and headers>`). Do not pass the user's
 browser cookies to yt-dlp without asking them.
 
+## The broadcast reader: state it works out itself (2026-10-10)
+
+Text is not enough on its own, so the reader also keeps track of state:
+- Messages are read once, when they leave the screen, in their most common reading (a misread first frame used to lose the message);
+  "won't go any higher / lower" sets the stat to +6 / -6; the full-stop messages that matter are read (weather and terrain ending, forfeits).
+- Weather and terrain end on their own after 5 turns, 8 with the setter's Damp Rock / Heat Rock / Smooth Rock / Icy Rock / Terrain
+  Extender (from its team sheet); the setter (the move just used, else the Pokemon on the field with the ability, latest sent out first) is
+  named in the log line so the parser agrees.
+- What happens as the leads come in (Intimidate, weather, terrain) is held and applied before turn 1, also for the second and third games
+  of a set, when the reader is still between games.
+A further step would be to replay each turn with the engine (its turntest loads the state before a turn and plays both sides' choices)
+and keep the outcome that matches the HP boxes: abilities like Stamina, item use and durations would then come from the simulation.
+
 ## The broadcast reader: targets
 
 Mid-turn the broadcast pops up the HP box of the Pokemon being hit, alone, in that Pokemon's slot. The reader (broadcast.py `aim`/`hit`/

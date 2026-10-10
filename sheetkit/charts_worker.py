@@ -87,6 +87,7 @@ def best_hits(foe):
             them = M.make(foe, t, best[1], item, M.TABIL.get(foe, set()), M.TM[foe], M.WEIGHT.get(foe, 50))
             field = M.init_field(mine, foe, "field")
             M.entry(them, me, field); me["stg"] = {k: 0 for k in me["stg"]}
+            if mv.get("charge"): me["stg"]["spa"] = 1                  # Electro Shot, Meteor Beam: +1 Sp. Atk before the hit
             dm = [M.damage(me, them, mv, field, r / 100) for r in range(85, 101)]
             if max(dm) == 0: continue
             hp = them["maxhp"]; ko = 0 if item == "Focus Sash" else sum(1 for d in dm if d >= hp); p = 100 * dm[-1] / hp

@@ -21,17 +21,17 @@
      0
     ],
     [
+     "Archaludon",
+     "Electro Shot",
+     1.0,
+     52.7,
+     0
+    ],
+    [
      "Basculegion",
      "Wave Crash",
      1.0,
      49.5,
-     0
-    ],
-    [
-     "Archaludon",
-     "Electro Shot",
-     1.0,
-     35.7,
      0
     ],
     [
@@ -53,104 +53,6 @@
      "Shadow Ball",
      1.0,
      17.6,
-     0
-    ]
-   ]
-  ],
-  [
-   "Milotic",
-   "#13",
-   0,
-   [
-    [
-     "Archaludon",
-     "Electro Shot",
-     2.0,
-     61.1,
-     0
-    ],
-    [
-     "Golisopod",
-     "Leech Life",
-     1.0,
-     53.5,
-     0
-    ],
-    [
-     "Basculegion",
-     "Last Respects",
-     1.0,
-     51.5,
-     0
-    ],
-    [
-     "Garchomp",
-     "Dragon Pulse",
-     1.0,
-     38.4,
-     0
-    ],
-    [
-     "Pelipper",
-     "Hurricane",
-     1.0,
-     37.9,
-     0
-    ],
-    [
-     "Farigiraf",
-     "Twin Beam",
-     1.0,
-     23.2,
-     0
-    ]
-   ]
-  ],
-  [
-   "Corviknight",
-   "#53",
-   0,
-   [
-    [
-     "Archaludon",
-     "Electro Shot",
-     2.0,
-     72.2,
-     0
-    ],
-    [
-     "Pelipper",
-     "Weather Ball",
-     1.0,
-     61.5,
-     0
-    ],
-    [
-     "Basculegion",
-     "Wave Crash",
-     1.0,
-     59.5,
-     0
-    ],
-    [
-     "Golisopod",
-     "Sucker Punch",
-     1.0,
-     30.7,
-     0
-    ],
-    [
-     "Garchomp",
-     "Power Gem",
-     1.0,
-     28.8,
-     0
-    ],
-    [
-     "Farigiraf",
-     "Shadow Ball",
-     1.0,
-     18.0,
      0
     ]
    ]
@@ -224,6 +126,13 @@
      0
     ],
     [
+     "Archaludon",
+     "Electro Shot",
+     1.0,
+     64.7,
+     0
+    ],
+    [
      "Basculegion",
      "Wave Crash",
      1.0,
@@ -235,13 +144,6 @@
      "Leech Life",
      1.0,
      52.7,
-     0
-    ],
-    [
-     "Archaludon",
-     "Electro Shot",
-     1.0,
-     43.5,
      0
     ],
     [
@@ -303,6 +205,55 @@
    ]
   ],
   [
+   "Milotic",
+   "#13",
+   0,
+   [
+    [
+     "Archaludon",
+     "Electro Shot",
+     2.0,
+     90.5,
+     0
+    ],
+    [
+     "Golisopod",
+     "Leech Life",
+     1.0,
+     53.5,
+     0
+    ],
+    [
+     "Basculegion",
+     "Last Respects",
+     1.0,
+     51.5,
+     0
+    ],
+    [
+     "Garchomp",
+     "Dragon Pulse",
+     1.0,
+     38.4,
+     0
+    ],
+    [
+     "Pelipper",
+     "Hurricane",
+     1.0,
+     37.9,
+     0
+    ],
+    [
+     "Farigiraf",
+     "Twin Beam",
+     1.0,
+     23.2,
+     0
+    ]
+   ]
+  ],
+  [
    "M-Metagross",
    "#27",
    0,
@@ -329,17 +280,17 @@
      0
     ],
     [
+     "Archaludon",
+     "Electro Shot",
+     1.0,
+     58.3,
+     0
+    ],
+    [
      "Golisopod",
      "Sucker Punch",
      2.0,
      57.8,
-     0
-    ],
-    [
-     "Archaludon",
-     "Electro Shot",
-     1.0,
-     39.0,
      0
     ],
     [
@@ -396,6 +347,55 @@
      "Twin Beam",
      1.0,
      31.2,
+     0
+    ]
+   ]
+  ],
+  [
+   "Corviknight",
+   "#53",
+   0,
+   [
+    [
+     "Archaludon",
+     "Electro Shot",
+     2.0,
+     107.3,
+     7
+    ],
+    [
+     "Pelipper",
+     "Weather Ball",
+     1.0,
+     61.5,
+     0
+    ],
+    [
+     "Basculegion",
+     "Wave Crash",
+     1.0,
+     59.5,
+     0
+    ],
+    [
+     "Golisopod",
+     "Sucker Punch",
+     1.0,
+     30.7,
+     0
+    ],
+    [
+     "Garchomp",
+     "Power Gem",
+     1.0,
+     28.8,
+     0
+    ],
+    [
+     "Farigiraf",
+     "Shadow Ball",
+     1.0,
+     18.0,
      0
     ]
    ]
@@ -476,6 +476,13 @@
      0
     ],
     [
+     "Archaludon",
+     "Electro Shot",
+     1.0,
+     59.0,
+     0
+    ],
+    [
      "Garchomp",
      "Dragon Pulse",
      1.0,
@@ -483,66 +490,10 @@
      0
     ],
     [
-     "Archaludon",
-     "Electro Shot",
-     1.0,
-     39.6,
-     0
-    ],
-    [
      "Farigiraf",
      "Twin Beam",
      0.5,
      14.4,
-     0
-    ]
-   ]
-  ],
-  [
-   "M-Staraptor",
-   "#23",
-   0,
-   [
-    [
-     "Pelipper",
-     "Hurricane",
-     2.0,
-     112.5,
-     12
-    ],
-    [
-     "Archaludon",
-     "Electro Shot",
-     2.0,
-     90.6,
-     0
-    ],
-    [
-     "Basculegion",
-     "Wave Crash",
-     1.0,
-     77.1,
-     0
-    ],
-    [
-     "Farigiraf",
-     "Twin Beam",
-     2.0,
-     68.8,
-     0
-    ],
-    [
-     "Garchomp",
-     "Dragon Pulse",
-     1.0,
-     57.8,
-     0
-    ],
-    [
-     "Golisopod",
-     "Sucker Punch",
-     0.5,
-     19.8,
      0
     ]
    ]
@@ -654,7 +605,7 @@
      "Archaludon",
      "Electro Shot",
      4.0,
-     220.4,
+     328.1,
      0
     ],
     [
@@ -724,7 +675,7 @@
      "Archaludon",
      "Electro Shot",
      1.0,
-     55.6,
+     82.5,
      0
     ],
     [
@@ -976,7 +927,7 @@
      "Archaludon",
      "Electro Shot",
      1.0,
-     33.7,
+     49.5,
      0
     ],
     [
@@ -984,6 +935,55 @@
      "Shadow Ball",
      0.5,
      8.4,
+     0
+    ]
+   ]
+  ],
+  [
+   "M-Staraptor",
+   "#23",
+   0,
+   [
+    [
+     "Archaludon",
+     "Electro Shot",
+     2.0,
+     135.4,
+     16
+    ],
+    [
+     "Pelipper",
+     "Hurricane",
+     2.0,
+     112.5,
+     12
+    ],
+    [
+     "Basculegion",
+     "Wave Crash",
+     1.0,
+     77.1,
+     0
+    ],
+    [
+     "Farigiraf",
+     "Twin Beam",
+     2.0,
+     68.8,
+     0
+    ],
+    [
+     "Garchomp",
+     "Dragon Pulse",
+     1.0,
+     57.8,
+     0
+    ],
+    [
+     "Golisopod",
+     "Sucker Punch",
+     0.5,
+     19.8,
      0
     ]
    ]
@@ -1025,7 +1025,7 @@
      "Archaludon",
      "Electro Shot",
      1.0,
-     48.6,
+     72.1,
      0
     ],
     [
@@ -1033,55 +1033,6 @@
      "Shadow Ball",
      2.0,
      48.0,
-     0
-    ]
-   ]
-  ],
-  [
-   "Basculegion",
-   26.8,
-   0,
-   [
-    [
-     "Basculegion",
-     "Last Respects",
-     2.0,
-     150.8,
-     16
-    ],
-    [
-     "Archaludon",
-     "Electro Shot",
-     2.0,
-     101.5,
-     1
-    ],
-    [
-     "Golisopod",
-     "Sucker Punch",
-     2.0,
-     92.5,
-     0
-    ],
-    [
-     "Garchomp",
-     "Dragon Pulse",
-     1.0,
-     63.8,
-     0
-    ],
-    [
-     "Pelipper",
-     "Hurricane",
-     1.0,
-     63.3,
-     0
-    ],
-    [
-     "Farigiraf",
-     "Shadow Ball",
-     2.0,
-     50.3,
      0
     ]
    ]
@@ -1113,17 +1064,17 @@
      0
     ],
     [
+     "Archaludon",
+     "Electro Shot",
+     1.0,
+     58.2,
+     0
+    ],
+    [
      "Garchomp",
      "Dragon Pulse",
      1.0,
      49.7,
-     0
-    ],
-    [
-     "Archaludon",
-     "Electro Shot",
-     1.0,
-     39.0,
      0
     ],
     [
@@ -1185,50 +1136,50 @@
    ]
   ],
   [
-   "M-Charizard Y",
-   "#15",
+   "Basculegion",
+   26.8,
    0,
    [
     [
-     "Pelipper",
-     "Weather Ball",
-     2.0,
-     156.1,
-     16
-    ],
-    [
-     "Garchomp",
-     "Power Gem",
-     4.0,
-     147.1,
-     16
-    ],
-    [
      "Basculegion",
-     "Wave Crash",
+     "Last Respects",
      2.0,
-     116.1,
-     14
+     150.8,
+     16
     ],
     [
      "Archaludon",
      "Electro Shot",
      2.0,
-     91.6,
-     0
+     150.8,
+     16
     ],
     [
      "Golisopod",
      "Sucker Punch",
+     2.0,
+     92.5,
+     0
+    ],
+    [
+     "Garchomp",
+     "Dragon Pulse",
      1.0,
-     59.4,
+     63.8,
+     0
+    ],
+    [
+     "Pelipper",
+     "Hurricane",
+     1.0,
+     63.3,
      0
     ],
     [
      "Farigiraf",
-     "Twin Beam",
-     1.0,
-     34.8,
+     "Shadow Ball",
+     2.0,
+     50.3,
      0
     ]
    ]
@@ -1270,7 +1221,7 @@
      "Archaludon",
      "Electro Shot",
      1.0,
-     56.1,
+     83.6,
      0
     ],
     [
@@ -1327,6 +1278,55 @@
      "Earth Power",
      1.0,
      37.3,
+     0
+    ]
+   ]
+  ],
+  [
+   "M-Charizard Y",
+   "#15",
+   0,
+   [
+    [
+     "Pelipper",
+     "Weather Ball",
+     2.0,
+     156.1,
+     16
+    ],
+    [
+     "Garchomp",
+     "Power Gem",
+     4.0,
+     147.1,
+     16
+    ],
+    [
+     "Archaludon",
+     "Electro Shot",
+     2.0,
+     136.8,
+     16
+    ],
+    [
+     "Basculegion",
+     "Wave Crash",
+     2.0,
+     116.1,
+     14
+    ],
+    [
+     "Golisopod",
+     "Sucker Punch",
+     1.0,
+     59.4,
+     0
+    ],
+    [
+     "Farigiraf",
+     "Twin Beam",
+     1.0,
+     34.8,
      0
     ]
    ]
@@ -1407,17 +1407,17 @@
      16
     ],
     [
+     "Archaludon",
+     "Electro Shot",
+     1.0,
+     66.9,
+     0
+    ],
+    [
      "Golisopod",
      "Sucker Punch",
      1.0,
      61.6,
-     0
-    ],
-    [
-     "Archaludon",
-     "Electro Shot",
-     1.0,
-     44.8,
      0
     ],
     [
@@ -1507,7 +1507,7 @@
     },
     {
      "v": "roll",
-     "t": "takes 108% (Close Combat) · deals 47–56% (Electro Shot) · moves first · switching in loses on entry, already out loses",
+     "t": "takes 108% (Close Combat) · deals 70–83% (Electro Shot) · moves first · switching in loses on entry, already out loses",
      "p": 99
     },
     {
@@ -1534,7 +1534,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 108% (Close Combat) · deals 47–56% (Electro Shot) · slower · switching in loses on entry, already out loses T1"
+     "t": "takes 108% (Close Combat) · deals 70–83% (Electro Shot) · slower · switching in loses on entry, already out loses T1"
     },
     {
      "v": "counter",
@@ -1626,7 +1626,7 @@
     },
     {
      "v": "check",
-     "t": "takes 37% (Flare Blitz) · deals 28–33% (Electro Shot) · moves second · switching in loses T4, already out wins",
+     "t": "takes 37% (Flare Blitz) · deals 42–49% (Electro Shot) · moves second · switching in loses T4, already out wins",
      "n": "line: Electro Shot ×2 → Dragon Pulse ×2"
     },
     {
@@ -1653,7 +1653,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 37% (Flare Blitz) · deals 28–33% (Electro Shot) · faster · switching in wins, already out wins T6",
+     "t": "takes 37% (Flare Blitz) · deals 42–49% (Electro Shot) · faster · switching in wins, already out wins T6",
      "n": "line: Electro Shot ×2 → Dragon Pulse → Electro Shot ×2"
     },
     {
@@ -1684,7 +1684,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 50% (Low Kick) · deals 36–43% (Electro Shot) · moves second · switching in loses T2, already out loses T4"
+     "t": "takes 50% (Low Kick) · deals 54–64% (Electro Shot) · moves second · switching in loses T2, already out loses T4"
     },
     {
      "v": "lost",
@@ -1712,7 +1712,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 50% (Low Kick) · deals 36–43% (Electro Shot) · faster · switching in loses T2, already out loses T4"
+     "t": "takes 50% (Low Kick) · deals 54–64% (Electro Shot) · faster · switching in loses T2, already out loses T4"
     },
     {
      "v": "lost",
@@ -1743,7 +1743,7 @@
     },
     {
      "v": "check",
-     "t": "takes 71% (Last Respects) · deals 85–101% (Electro Shot) · moves first · switching in loses T1, already out wins T2"
+     "t": "takes 71% (Last Respects) · deals 127–150% (Electro Shot) · moves first · switching in loses T1, already out wins T2"
     },
     {
      "v": "check",
@@ -1769,7 +1769,7 @@
     },
     {
      "v": "roll",
-     "t": "takes 71% (Last Respects) · deals 85–101% (Electro Shot) · slower · switching in loses T1, already out loses T2",
+     "t": "takes 71% (Last Respects) · deals 127–150% (Electro Shot) · slower · switching in loses T1, already out loses T2",
      "p": 20
     },
     {
@@ -1860,7 +1860,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 18% (Psychic) · deals 33–39% (Electro Shot) · moves second · switching in wins T5, already out wins T5"
+     "t": "takes 18% (Psychic) · deals 50–59% (Electro Shot) · moves second · switching in wins T5, already out wins T5"
     },
     {
      "v": "lost",
@@ -1888,7 +1888,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 18% (Psychic) · deals 33–39% (Electro Shot) · faster · switching in wins T5, already out wins T5"
+     "t": "takes 18% (Psychic) · deals 50–59% (Electro Shot) · faster · switching in wins T5, already out wins T5"
     },
     {
      "v": "lost",
@@ -1918,7 +1918,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 26% (Leech Life) · deals 30–35% (Electro Shot) · moves second · switching in loses T3, already out loses T4"
+     "t": "takes 26% (Leech Life) · deals 44–52% (Electro Shot) · moves second · switching in loses T3, already out loses T4"
     },
     {
      "v": "lost",
@@ -1944,7 +1944,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 26% (Leech Life) · deals 30–35% (Electro Shot) · faster · switching in loses T3, already out loses T4"
+     "t": "takes 26% (Leech Life) · deals 44–52% (Electro Shot) · faster · switching in loses T3, already out loses T4"
     },
     {
      "v": "lost",
@@ -1975,7 +1975,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 29% (Weather Ball) · deals 186–220% (Electro Shot) · moves second · switching in wins T3, already out wins T3"
+     "t": "takes 29% (Weather Ball) · deals 277–328% (Electro Shot) · moves second · switching in wins T3, already out wins T3"
     },
     {
      "v": "check",
@@ -2003,7 +2003,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 29% (Weather Ball) · deals 186–220% (Electro Shot) · faster · switching in wins T3, already out wins T3"
+     "t": "takes 29% (Weather Ball) · deals 277–328% (Electro Shot) · faster · switching in wins T3, already out wins T3"
     },
     {
      "v": "lost",
@@ -2035,7 +2035,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 23% (Terrain Pulse) · deals 32–38% (Electro Shot) · moves second · switching in wins T4, already out wins T4"
+     "t": "takes 23% (Terrain Pulse) · deals 49–58% (Electro Shot) · moves second · switching in wins T4, already out wins T4"
     },
     {
      "v": "check",
@@ -2063,7 +2063,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 23% (Terrain Pulse) · deals 32–38% (Electro Shot) · faster · switching in wins T4, already out wins T4"
+     "t": "takes 23% (Terrain Pulse) · deals 49–58% (Electro Shot) · faster · switching in wins T4, already out wins T4"
     },
     {
      "v": "roll",
@@ -2095,7 +2095,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 65% (Shadow Ball) · deals 40–48% (Electro Shot) · moves first · switching in loses T1, already out loses T2"
+     "t": "takes 65% (Shadow Ball) · deals 60–72% (Electro Shot) · moves first · switching in loses T1, already out loses T2"
     },
     {
      "v": "roll",
@@ -2124,7 +2124,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 65% (Shadow Ball) · deals 40–48% (Electro Shot) · slower · switching in loses T1, already out loses T2"
+     "t": "takes 65% (Shadow Ball) · deals 60–72% (Electro Shot) · slower · switching in loses T1, already out loses T2"
     },
     {
      "v": "lost",
@@ -2155,7 +2155,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 46% (Flare Blitz) · deals 46–55% (Electro Shot) · moves first · switching in wins T3, already out wins T3"
+     "t": "takes 46% (Flare Blitz) · deals 69–82% (Electro Shot) · moves first · switching in wins T3, already out wins T3"
     },
     {
      "v": "roll",
@@ -2182,7 +2182,7 @@
     },
     {
      "v": "check",
-     "t": "takes 46% (Flare Blitz) · deals 46–55% (Electro Shot) · slower · switching in loses T3, already out wins T3"
+     "t": "takes 46% (Flare Blitz) · deals 69–82% (Electro Shot) · slower · switching in loses T3, already out wins T3"
     },
     {
      "v": "lost",
@@ -2626,7 +2626,7 @@
     },
     {
      "v": "check",
-     "t": "takes 31% (Ice Beam) · deals 51–61% (Electro Shot) · moves second · switching in loses T3, already out wins T3"
+     "t": "takes 31% (Ice Beam) · deals 76–90% (Electro Shot) · moves second · switching in loses T3, already out wins T3"
     },
     {
      "v": "lost",
@@ -2652,7 +2652,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 31% (Ice Beam) · deals 51–61% (Electro Shot) · slower · switching in wins T3, already out wins T3"
+     "t": "takes 31% (Ice Beam) · deals 76–90% (Electro Shot) · slower · switching in wins T3, already out wins T3"
     },
     {
      "v": "lost",
@@ -2683,7 +2683,7 @@
     },
     {
      "v": "roll",
-     "t": "takes 107% (Weather Ball) · deals 77–91% (Electro Shot) · moves first · switching in loses on entry, already out loses T1",
+     "t": "takes 107% (Weather Ball) · deals 116–136% (Electro Shot) · moves first · switching in loses on entry, already out loses T1",
      "p": 55
     },
     {
@@ -2712,7 +2712,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 107% (Weather Ball) · deals 77–91% (Electro Shot) · slower · switching in loses on entry, already out loses T1"
+     "t": "takes 107% (Weather Ball) · deals 116–136% (Electro Shot) · slower · switching in loses on entry, already out loses T1"
     },
     {
      "v": "lost",
@@ -2861,7 +2861,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 105% (Close Combat) · deals 76–90% (Electro Shot) · moves first · switching in loses on entry, already out loses T1"
+     "t": "takes 105% (Close Combat) · deals 114–135% (Electro Shot) · moves first · switching in loses on entry, already out loses T1"
     },
     {
      "v": "roll",
@@ -2888,7 +2888,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 105% (Close Combat) · deals 76–90% (Electro Shot) · slower · switching in loses on entry, already out loses T1"
+     "t": "takes 105% (Close Combat) · deals 114–135% (Electro Shot) · slower · switching in loses on entry, already out loses T1"
     },
     {
      "v": "lost",
@@ -2919,7 +2919,7 @@
     },
     {
      "v": "roll",
-     "t": "takes 54% (Body Press) · deals 33–39% (Electro Shot) · moves first · switching in loses T2, already out loses T3",
+     "t": "takes 54% (Body Press) · deals 49–58% (Electro Shot) · moves first · switching in loses T2, already out loses T3",
      "p": 90
     },
     {
@@ -2947,7 +2947,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 54% (Body Press) · deals 33–39% (Electro Shot) · slower · switching in loses T2, already out loses T3"
+     "t": "takes 54% (Body Press) · deals 49–58% (Electro Shot) · slower · switching in loses T2, already out loses T3"
     },
     {
      "v": "lost",
@@ -2977,7 +2977,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 51% (Fiery Dance) · deals 37–44% (Electro Shot) · moves first · switching in loses T2, already out loses T3"
+     "t": "takes 51% (Fiery Dance) · deals 56–66% (Electro Shot) · moves first · switching in loses T2, already out loses T3"
     },
     {
      "v": "lost",
@@ -3003,7 +3003,7 @@
     },
     {
      "v": "lost",
-     "t": "takes 51% (Fiery Dance) · deals 37–44% (Electro Shot) · slower · switching in loses T2, already out loses T3"
+     "t": "takes 51% (Fiery Dance) · deals 56–66% (Electro Shot) · slower · switching in loses T2, already out loses T3"
     },
     {
      "v": "lost",
@@ -3033,7 +3033,7 @@
     },
     {
      "v": "guess",
-     "t": "takes 36% (Body Press) · deals 60–72% (Electro Shot) · moves second · switching in loses T3, already out is a coin flip",
+     "t": "takes 36% (Body Press) · deals 90–107% (Electro Shot) · moves second · switching in loses T3, already out is a coin flip",
      "p": 50
     },
     {
@@ -3060,7 +3060,7 @@
     },
     {
      "v": "counter",
-     "t": "takes 36% (Body Press) · deals 60–72% (Electro Shot) · faster · switching in wins T3, already out wins T3"
+     "t": "takes 36% (Body Press) · deals 90–107% (Electro Shot) · faster · switching in wins T3, already out wins T3"
     },
     {
      "v": "lost",

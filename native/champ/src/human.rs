@@ -13,14 +13,27 @@ use std::io::{BufRead, Write};
 pub struct Human { log_pos: usize }
 impl Human {
     pub fn new() -> Human { Human { log_pos: 0 } }
+    /// type-chart effectiveness of a move type on a Pokemon (its current types; abilities not counted), as Champions shows it
+    fn eff(b: &Battle, ty: &str, q: &Pokemon) -> f64 {
+        let mut types: Vec<Id> = q.types.clone(); if !q.added_type.is_empty() { types.push(q.added_type); }
+        let mut x = 1.0;
+        for t in &types { if b.dex.immune_type(ty, &[*t]) { return 0.0; } x *= 2f64.powi(b.dex.effectiveness(ty, t) as i32); }
+        x
+    }
     fn mon_json(b: &Battle, p: &Pokemon, slot: Option<usize>) -> Value {
         let name = b.dex.species.get(p.species).map(|x| x.name).unwrap_or(p.species);
+        let foes: Vec<&Pokemon> = (0..2).filter_map(|k| b.sides[1 - p.side as usize].active[k]).map(|pi| &b.sides[1 - p.side as usize].pokemon[pi as usize]).filter(|q| !q.fainted).collect();
+        let eff_of = |mid: Id| -> Value {
+            let tm = &b.dex.mv(mid).tmpl; if tm.category == "Status" { return Value::Null; }
+            let mut m = serde_json::Map::new();
+            for q in &foes { m.insert(b.dex.species.get(q.species).map(|x| x.name).unwrap_or(q.species).to_string(), json!(Self::eff(b, tm.mtype, q))); }
+            Value::Object(m) };
         let base = b.dex.species.get(p.base_species).map(|x| x.name).unwrap_or(p.base_species);
         let eff = |v: &[(Id, EState)]| v.iter().map(|(id, st)| json!({"id": id, "turns": st.duration})).collect::<Vec<Value>>();
         json!({"name": name, "base": base, "slot": slot, "hp": p.hp, "maxhp": p.maxhp, "status": p.status, "boosts": p.boosts, "item": p.item,
                "ability": p.ability, "types": p.types, "fainted": p.fainted, "active": p.is_active, "mega": p.species != p.base_species,
                "volatiles": eff(&p.volatiles),
-               "moves": p.move_slots.iter().map(|m| json!({"id": m.id, "name": b.dex.mv(m.id).tmpl.name, "pp": m.pp, "maxpp": m.maxpp, "disabled": m.disabled})).collect::<Vec<Value>>()})
+               "moves": p.move_slots.iter().map(|m| json!({"id": m.id, "name": b.dex.mv(m.id).tmpl.name, "pp": m.pp, "maxpp": m.maxpp, "disabled": m.disabled, "eff": eff_of(m.id)})).collect::<Vec<Value>>()})
     }
     pub fn state_json(b: &Battle) -> Value {
         let eff = |v: &[(Id, EState)]| v.iter().map(|(id, st)| json!({"id": id, "turns": st.duration})).collect::<Vec<Value>>();

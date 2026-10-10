@@ -8,6 +8,7 @@ Per decision: did the player take the planner's most likely action (top pick), t
 planner's probability on what they did, the most likely action's share by chance (1 / number of actions), and the regret (best value
 minus the value of what they did, in win-chance points).
   python3 evalbar/study.py <broadcast ocr .jsonl> [threads=2]        -> evalbar/out/champions/study/<name>.json and a summary
+  python3 evalbar/study.py <broadcast ocr .jsonl> [threads=2] [t0]  t0: the video time of the file's first frame (a followed stream)
   python3 evalbar/study.py publish <broadcast ocr .jsonl>          the committed summary, results/broadcast_study_<name>.json: the measures,
                                                                      per game, and the costly plays (the planner gave them under 5% and they
                                                                      cost over 5 points against its top action) with the turn's VOD time
@@ -97,12 +98,14 @@ def summary(D, tag=''):
           f"{100 * s['p_if_following_mix']:.0f}%) | regret mean {100 * s['regret_mean']:.1f} pts, median {100 * s['regret_median']:.1f}, "
           f"within 2 pts {100 * s['within_2pts']:.0f}%, within 5 pts {100 * s['within_5pts']:.0f}%")
     return s
-def broadcast_study(ocrf, threads=2):
+def broadcast_study(ocrf, threads=2, t0=0):
+    """t0: the video time of the first frame (the turns' video times are kept for the costly plays)"""
     os.makedirs(OUT, exist_ok=True); name = os.path.basename(ocrf).split('.')[0]
-    r = BC.read(ocrf); allD = []; games = []
+    r = BC.read(ocrf, t0); allD = []; games = []
     for g, m in r.logs_meta():
         tag = f"{name}_m{m['match']}g{m['game']}"; f = os.path.join(OUT, tag + '.log'); open(f, 'w').write('\n'.join(g) + '\n')
         L = LV.Live(None, threads, 0, logfile=f, tag=tag, fmt='Champions broadcast')
+        if m.get('closed'): L.bo3 = False                                    # no sheets on stream: each species' most common set, as the live page
         log = open(f).read(); gp = R.parse(log)
         for st in gp['steps']:
             if st['turn'] >= 1:
@@ -157,5 +160,5 @@ if __name__ == '__main__':
     a = sys.argv[1:]
     if a and a[0] == 'replays': replay_study(a[1] if len(a) > 1 else os.path.join(C.HERE, 'out', 'acc_eval_sym2.jsonl'))
     elif a and a[0] == 'publish': publish(a[1])
-    elif a: broadcast_study(a[0], int(a[1]) if len(a) > 1 else 2)
+    elif a: broadcast_study(a[0], int(a[1]) if len(a) > 1 else 2, float(a[2]) if len(a) > 2 else 0)
     else: sys.exit(__doc__)

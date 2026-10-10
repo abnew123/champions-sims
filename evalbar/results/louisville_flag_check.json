@@ -1,0 +1,175 @@
+{
+ "what": "Louisville day 1 (games with team sheets): every disagreement between the battle-text state and the rules state, checked by re-reading the stream at 6 frames a second and the on-screen field labels",
+ "flags": [
+  {
+   "game": "M1 G1",
+   "turn": 3,
+   "what": "Arcanine-Hisui's Sp. Atk",
+   "text": "0",
+   "rules": "-1",
+   "right": "rules",
+   "why": "message missed at 2 frames a second (Sp. Atk fell, seen at 6)"
+  },
+  {
+   "game": "M1 G1",
+   "turn": 5,
+   "what": "Indeedee-F's Sp. Atk",
+   "text": "0",
+   "rules": "-2",
+   "right": "rules",
+   "why": "two Sp. Atk drops missed"
+  },
+  {
+   "game": "M1 G2",
+   "turn": 3,
+   "what": "Sneasler's Sp. Def",
+   "text": "0",
+   "rules": "-1",
+   "right": "text",
+   "why": "Psychic Seed +1 Sp. Def the rules did not know (now a rule)"
+  },
+  {
+   "game": "M1 G2",
+   "turn": 7,
+   "what": "Arcanine-Hisui's Attack",
+   "text": "0",
+   "rules": "-1",
+   "right": "text",
+   "why": "Parting Shot blocked by Psychic Terrain (now a rule)"
+  },
+  {
+   "game": "M1 G2",
+   "turn": 7,
+   "what": "Arcanine-Hisui's Sp. Atk",
+   "text": "0",
+   "rules": "-1",
+   "right": "text",
+   "why": "Parting Shot blocked by Psychic Terrain (now a rule)"
+  },
+  {
+   "game": "M2 G1",
+   "turn": 6,
+   "what": "Rotom-Heat's Sp. Atk",
+   "text": "0",
+   "rules": "-2",
+   "right": "rules",
+   "why": "Overheat drop missed"
+  },
+  {
+   "game": "M2 G2",
+   "turn": 1,
+   "what": "Weather",
+   "text": "none",
+   "rules": "Sandstorm",
+   "right": "rules",
+   "why": "lead Sandstorm message lost at the switch to the new game (fixed)"
+  },
+  {
+   "game": "M4 G1",
+   "turn": 1,
+   "what": "Terrain",
+   "text": "none",
+   "rules": "Psychic Terrain",
+   "right": "rules",
+   "why": "lead Psychic Terrain lost at the game switch (fixed)"
+  },
+  {
+   "game": "M4 G1",
+   "turn": 2,
+   "what": "Delphox's Sp. Atk",
+   "text": "+1",
+   "rules": "+2",
+   "right": "rules",
+   "why": "\"rose sharply\" read as +1 (fixed)"
+  },
+  {
+   "game": "M4 G2",
+   "turn": 1,
+   "what": "Terrain",
+   "text": "none",
+   "rules": "Psychic Terrain",
+   "right": "rules",
+   "why": "lead Psychic Terrain lost at the game switch (fixed)"
+  },
+  {
+   "game": "M4 G2",
+   "turn": 2,
+   "what": "Farigiraf's Attack",
+   "text": "+1",
+   "rules": "+2",
+   "right": "rules",
+   "why": "\"rose sharply\" read as +1 (fixed)"
+  },
+  {
+   "game": "M4 G2",
+   "turn": 2,
+   "what": "Farigiraf's Sp. Atk",
+   "text": "+1",
+   "rules": "+2",
+   "right": "rules",
+   "why": "\"rose sharply\" read as +1 (fixed)"
+  },
+  {
+   "game": "M4 G3",
+   "turn": 1,
+   "what": "Terrain",
+   "text": "none",
+   "rules": "Psychic Terrain",
+   "right": "rules",
+   "why": "lead Psychic Terrain lost at the game switch (fixed)"
+  },
+  {
+   "game": "M4 G3",
+   "turn": 4,
+   "what": "Delphox's Sp. Atk",
+   "text": "+1",
+   "rules": "+2",
+   "right": "rules",
+   "why": "\"rose sharply\" read as +1 (fixed; no message in the re-read window)"
+  },
+  {
+   "game": "M4 G3",
+   "turn": 5,
+   "what": "Mega Delphox's Sp. Atk",
+   "text": "+1",
+   "rules": "+2",
+   "right": "rules",
+   "why": "\"rose sharply\" read as +1 (fixed)"
+  },
+  {
+   "game": "M5 G1",
+   "turn": 1,
+   "what": "Kingambit's Attack",
+   "text": "-1",
+   "rules": "+1",
+   "right": "rules",
+   "why": "Intimidate then Defiant \"rose sharply\": lead message lost and +2 read as +1 (fixed)"
+  },
+  {
+   "game": "M5 G2",
+   "turn": 1,
+   "what": "Basculegion's Attack",
+   "text": "0",
+   "rules": "-1",
+   "right": "rules",
+   "why": "lead Intimidate lost at the game switch (fixed)"
+  },
+  {
+   "game": "M5 G2",
+   "turn": 1,
+   "what": "Raichu's Attack",
+   "text": "0",
+   "rules": "-1",
+   "right": "rules",
+   "why": "lead Intimidate lost at the game switch (fixed)"
+  }
+ ],
+ "tally": {
+  "rules": 15,
+  "text": 3
+ },
+ "after_fixes": {
+  "louisville_flags": 3,
+  "frankfurt_flags": 29
+ }
+}

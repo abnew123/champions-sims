@@ -170,11 +170,12 @@ class Reader:
     """frames in time order -> battle log lines. feed() one frame's OCR at a time; lines() is the log so far."""
     def __init__(s):
         s.games = []; s.meta = []; s.sheets = {}; s.raw_sheets = []; s.frame = 0; s.names = collections.deque(maxlen=600); s.note = ''
-        s.board = None; s.match = 0; s.game_in_match = 0; s.prev_end = 0; s.owners = {}; s.t0 = 0; s.pre = []; s.pre_on = False; s.pre_frame = 0; s.p2_label = ''; s.seen = {'p1': [], 'p2': []}; s.new_game()
+        s.board = None; s.match = 0; s.game_in_match = 0; s.prev_end = 0; s.owners = {}; s.t0 = 0; s.pre = []; s.pre_on = False; s.pre_frame = 0; s.p2_label = ''
+        s.run = []; s.gap = 0; s.at_msg = None; s.seen = {'p1': [], 'p2': []}; s.new_game()   # run: the message on screen, kept across games
     def new_game(s):
         s.out = []; s.games.append(s.out); s.meta.append({}); s.started = False; s.turn = 0; s.in_decision = False; s.ended = False
         s.active = {}; s.hp = {}; s.last_text = None; s.slot_free = {'p1': [], 'p2': []}; s.megas = {'p1': False, 'p2': False}
-        s.fainted = {'p1': set(), 'p2': set()}; s.open = None; s.cur = {}; s.changed = {}; s.foreign = 0; s.run = []; s.gap = 0; s.at_msg = None; s.timed = {}; s.sent = []; s.forfeit = False; s.closed = False; s.poked = {'p1': set(), 'p2': set()}; s.lead_seen = False; s.pending = []; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False
+        s.fainted = {'p1': set(), 'p2': set()}; s.open = None; s.cur = {}; s.changed = {}; s.foreign = 0; s.timed = {}; s.sent = []; s.forfeit = False; s.closed = False; s.poked = {'p1': set(), 'p2': set()}; s.lead_seen = False; s.pending = []; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False
     def team(s, sd): return s.sheets.get(sd, [])
     def species(s, sd, name):
         """an OCR'd Pokémon name on side sd -> the species on that side's sheet (Mega names map back to the base)"""
@@ -307,7 +308,7 @@ class Reader:
             if user: s.emit(f'|-fail|{user}')
             return
         # about one Pokémon (or two: "A and the opposing B's Attack fell!")
-        m = re.match(r"(.+?) and ((?:the opposing )?[^,']+?)'s (.+?) (fell|rose|harshly fell|severely fell|rose sharply|rose drastically)!", text)
+        m = re.match(r"(.+?) and ((?:the opposing )?[^,']+?)'s (.+?) (harshly fell|severely fell|rose sharply|rose drastically|fell|rose)!", text)
         if m:                                                               # Intimidate on two: "A and the opposing B's Attack fell!"
             for who in (m.group(1), m.group(2)): s.about(re.sub(r'^the opposing ', 'The opposing ', who) + "'s " + m.group(3) + ' ' + m.group(4) + '!')
             return
@@ -321,6 +322,8 @@ class Reader:
             return
         me = s.mon(sd, sp); rest = rest.strip()
         k = (sd, s.slot_of(sd, sp))
+        if re.match(r'is protected by the Psychic Terrain', rest):                # a priority move it blocked: a fact for the rules
+            s.emit(f'|-activate|{me}|move: Psychic Terrain'); return
         if re.match(r'avoided the attack', rest):
             u, _ = s.last_move()
             if u: s.emit(f'|-miss|{u}|{me}')
@@ -354,7 +357,7 @@ class Reader:
         cap = re.match(r"'s (.+?) won't go any (higher|lower)", rest)
         if cap and cap.group(1).strip() in STAT:                                # the stat is at +6 or -6
             s.emit(f"|-setboost|{me}|{STAT[cap.group(1).strip()]}|{6 if cap.group(2) == 'higher' else -6}"); return
-        bm = re.match(r"'s (.+?) (fell|rose|harshly fell|severely fell|rose sharply|rose drastically)", rest)
+        bm = re.match(r"'s (.+?) (harshly fell|severely fell|rose sharply|rose drastically|fell|rose)", rest)
         if bm:
             n = 2 if ('harshly' in bm.group(2) or 'sharply' in bm.group(2)) else 3 if ('severely' in bm.group(2) or 'drastically' in bm.group(2)) else 1
             for stat in re.split(r', and |, | and ', bm.group(1)):
@@ -785,8 +788,9 @@ def follow(url, threads=2, port=8768, at=None, srcf=None):
     threading.Thread(target=fetch, daemon=True).start()
     while True:
         done = max(done, pump(run, d, keep, done)); time.sleep(1)
-def read(ocrf):
-    r = Reader()
+def read(ocrf, t0=0):
+    """t0: the video time of the file's first frame (a live stream read with follow: its out/live/live_<id>_t0.txt)"""
+    r = Reader(); r.t0 = t0
     for row in sorted(map(json.loads, open(ocrf)), key=lambda x: x['file']): r.feed(row['lines'])
     return r
 def youtube(x):

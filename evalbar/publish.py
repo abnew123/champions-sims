@@ -52,6 +52,7 @@ def page(out, base='/api/evalbar'):
     html = open(os.path.join(C.HERE, 'page.html')).read().replace('<title>Eval Bar</title>', '<title>Champions Eval Bar</title>', 1)
     html = html.replace('/*DATA*/null', json.dumps({'games': [], 'video': None, 'live': {'url': None, 'status': 'starting', 'format': 'Champions broadcast',
                                                                                          'public': {'base': base}}}))
+    os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
     open(out, 'w').write('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
                          '<style>body{margin:0}</style></head><body>' + html + '</body></html>')
     print(f'{out}: the public page, reading {base}')

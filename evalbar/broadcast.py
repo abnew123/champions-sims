@@ -12,6 +12,9 @@ screen ("Trainers are choosing actions"). For watching on your own computer.
   python3 evalbar/broadcast.py watch <YouTube URL or id> [start] [threads=2] [port=8768] a broadcast in real time (live, or a recording from
                                                                                          start, e.g. 1:44:09): page at http://localhost:<port>; every
                                                                                          frame's text is kept in out/live/live_<id>.ocr.jsonl
+  python3 evalbar/broadcast.py follow <YouTube URL or id> [at=h:mm:ss] [threads=2] [port=8768] [src=<saved fragment URL .json>]
+                                                                                         a live stream through its 5-second fragments, from the
+                                                                                         live edge or from `at` into the stream
 Player 1 is the player on the left: the battle text speaks from their side (their Pokémon are named plainly, the other player's are
 "the opposing ..."). No names are kept: the log calls the players Player 1 and Player 2, and sheets are matched to sides by species."""
 import os, re, sys, json, time, difflib, subprocess, threading, collections
@@ -87,17 +90,26 @@ def scan(url, outf, workers=2, chunk=1200, fetchers=4):
 def ocr(d):
     with open(d.rstrip('/') + '.ocr.jsonl', 'w') as f: subprocess.run(['nice', '-n', '10', P.exe('ocr', OCR), d], stdout=f, check=True)
 # --------------------------------------------------------------------------------------------------------------------------- sheets
+REGION = {'HISUIAN': 'Hisui', 'ALOLAN': 'Alola', 'GALARIAN': 'Galar', 'PALDEAN': 'Paldea'}
+def sheet_species(t):
+    """a species name as a team sheet prints it -> the species: 'INDEEDEE (FEMALE)' -> Indeedee-F, 'HISUIAN ARCANINE' -> Arcanine-Hisui"""
+    m = re.match(r'^(.*?)\s*\((FEMALE|MALE)\)$', t.strip(), re.I); g = m.group(2).upper() if m else None; t = m.group(1) if m else t
+    w = t.split(None, 1); reg = REGION.get(w[0].upper().replace('0', 'O')) if len(w) == 2 else None
+    base = fuzzy(w[1] if reg else t, 'species', cut=0.85)
+    if not base: return None
+    form = base + '-' + reg if reg else base + '-F' if g == 'FEMALE' else None
+    return E['species'][toid(form)].get('name', form) if form and toid(form) in E['species'] else base
 def sheet(lines):
     """one team-sheet screen -> [set, ...]: each panel starts with the species name in capitals"""
     L = [(t.strip(), x, y) for t, x, y, w, h in lines]
     other = lambda t: any(t.upper().replace('0', 'O') in NAMES[k] for k in ('abilities', 'moves', 'items'))   # DRIZZLE is not Drizzile
-    anchors = [(fuzzy(t, 'species', cut=0.85), x, y) for t, x, y in L if t.isupper() and len(t) > 3 and not other(t)]
+    anchors = [(sheet_species(t), x, y) for t, x, y in L if t.isupper() and len(t) > 3 and not other(t)]
     anchors = [a for a in anchors if a[0]]
     out = []
     for sp, x0, y0 in anchors:
         near = [(t, x, y) for t, x, y in L if -0.02 < x - x0 < 0.2 and 0.02 < y - y0 < 0.26]
         ability = next((fuzzy(t, 'abilities') for t, x, y in sorted(near, key=lambda r: r[2]) if abs(x - x0) < 0.02 and y - y0 < 0.08 and fuzzy(t, 'abilities')), '')
-        nature = next((t.title() for t, x, y in near if t.upper() in NATURES), '')
+        nature = next((n.title() for t, x, y in near for n in NATURES if t.upper().startswith(n)), '')   # "JollyAspeed": text run together
         moves = [fuzzy(t, 'moves') for t, x, y in sorted(near, key=lambda r: r[2]) if 0 <= x - x0 < 0.03 and y - y0 > 0.07 and fuzzy(t, 'moves')]
         item = next((fuzzy(t, 'items') for t, x, y in near if x - x0 > 0.1 and y - y0 > 0.15 and fuzzy(t, 'items')), '')
         if sp == 'Indeedee' and ('Follow Me' in moves or 'Trick Room' in moves): sp = 'Indeedee-F'   # the sheet shows only the name
@@ -516,32 +528,92 @@ def watch(url, threads=2, port=8768, start=None):
     tag = 'live_' + re.sub(r'\W', '', url.split('v=')[-1])[:16]; d = os.path.join(C.HERE, 'out', 'live', tag + '_frames'); os.makedirs(d, exist_ok=True)
     # the media URL from yt-dlp, opened by ffmpeg with the same request headers, in real time (-re). YouTube sometimes refuses a media
     # URL (403): then fetch a new one and carry on from where the frames got to
-    def open_stream(at):
+    def open_stream(n):
+        """frames from number n + 1 on: a recording from n / 2 seconds after `start`, a live stream from where it is now"""
         src, hdr, _ = media(url)
-        return subprocess.Popen(['nice', '-n', '10', P.exe('ffmpeg'), '-v', 'error', '-y', '-headers', hdr, '-re'] + (['-ss', str(at)] if at else []) + ['-i', src,
-                                 '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', '-start_number', str(int((at - secs(start)) * 2) + 1), os.path.join(d, 'f_%06d.jpg')],
+        return subprocess.Popen(['nice', '-n', '10', P.exe('ffmpeg'), '-v', 'error', '-y', '-headers', hdr, '-re'] + (['-ss', str(secs(start) + n / 2)] if start else []) +
+                                ['-i', src, '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', '-start_number', str(n + 1), os.path.join(d, 'f_%06d.jpg')],
                                 stderr=subprocess.PIPE, text=True)
-    ff = open_stream(secs(start)); retries = 0; keep = os.path.join(C.HERE, 'out', 'live', tag + '.ocr.jsonl')
+    keep = os.path.join(C.HERE, 'out', 'live', tag + '.ocr.jsonl'); retries = 0; done = 0
     vid = re.search(r'(?:v=|youtu\.be/|/live/)([\w-]{11})', url)
-    run = Runner(tag, threads, port, video={'id': vid.group(1), 'start': secs(start), 'live': not start} if vid else None, t0=secs(start)); done = 0
+    run = Runner(tag, threads, port, video={'id': vid.group(1), 'start': secs(start), 'live': not start} if vid else None, t0=secs(start))
+    if not start and os.path.exists(keep):                                    # a live watch restarted: catch up on what it read before
+        rows = sorted(map(json.loads, open(keep)), key=lambda x: x['file'])
+        for row in rows: run.feed(row['lines'])
+        done = int(rows[-1]['file'][2:8]) if rows else 0
+        for f in os.listdir(d):
+            if f.endswith('.jpg'): os.remove(os.path.join(d, f))
+    ff = open_stream(done)
     while True:
-        files = sorted(f for f in os.listdir(d) if f.endswith('.jpg'))[:-1]          # the newest frame may still be being written
-        new = [f for f in files if int(f[2:8]) > done]
-        if new:
-            b = os.path.join(d, 'batch'); os.makedirs(b, exist_ok=True)
-            for f in new: os.replace(os.path.join(d, f), os.path.join(b, f))
-            out = subprocess.run([P.exe('ocr', OCR), b], capture_output=True, text=True).stdout
-            with open(keep, 'a') as k: k.write(out)                              # the text of every frame, for replaying or checking later
-            for row in sorted(map(json.loads, out.splitlines()), key=lambda x: x['file']): run.feed(row['lines'])
-            for f in new: os.remove(os.path.join(b, f))
-            done = int(new[-1][2:8])
+        n = pump(run, d, keep, done)
+        if n > done: done = n
         elif ff.poll() is not None:
             err = ff.stderr.read()
             if ('403' in err or 'Forbidden' in err or ff.returncode) and retries < 8:
-                retries += 1; time.sleep(3); ff = open_stream(secs(start) + done / 2); continue
+                retries += 1; time.sleep(3); ff = open_stream(done); continue
             print('the stream ended', flush=True); break
         time.sleep(1)
     while True: time.sleep(60)
+def pump(run, d, keep, done):
+    """the frames in d numbered after `done`: Apple Vision reads them, the text is kept, the reader follows -> the last frame number"""
+    files = sorted(f for f in os.listdir(d) if f.endswith('.jpg'))[:-1]              # the newest frame may still be being written
+    new = [f for f in files if int(f[2:8]) > done]
+    if not new: return done
+    b = os.path.join(d, 'batch'); os.makedirs(b, exist_ok=True)
+    for f in new: os.replace(os.path.join(d, f), os.path.join(b, f))
+    out = subprocess.run([P.exe('ocr', OCR), b], capture_output=True, text=True).stdout
+    with open(keep, 'a') as k: k.write(out)                                      # the text of every frame, for replaying or checking later
+    for row in sorted(map(json.loads, out.splitlines()), key=lambda x: x['file']): run.feed(row['lines'])
+    for f in new: os.remove(os.path.join(b, f))
+    return int(new[-1][2:8])
+def catch_up(run, d, keep):
+    """a watch restarted: feed what it read before (kept text), clear old frames -> the last frame number"""
+    if not os.path.exists(keep): return 0
+    rows = sorted(map(json.loads, open(keep)), key=lambda x: x['file'])
+    for row in rows: run.feed(row['lines'])
+    for f in os.listdir(d):
+        if f.endswith('.jpg'): os.remove(os.path.join(d, f))
+    return int(rows[-1]['file'][2:8]) if rows else 0
+# A live YouTube stream is also served as numbered 5-second fragments from its start (the DASH format yt-dlp lists with --live-from-start).
+# Fetching them one by one follows the live edge without yt-dlp after the first call (YouTube's bot check can refuse yt-dlp after many
+# requests), and can start anywhere in the stream so far.
+def dash_source(url):
+    """the stream's 720p fragment URL and request headers (they last about 6 hours)"""
+    info = json.loads(subprocess.run(['yt-dlp', '-j', '--no-warnings', '--live-from-start', url], capture_output=True, text=True, check=True).stdout)
+    f = next(x for x in info['formats'] if x.get('height') == 720 and (x.get('vcodec') or '').startswith('avc1') and 'dash' in (x.get('protocol') or ''))
+    return {'url': f['url'], 'headers': f.get('http_headers') or info.get('http_headers') or {}}
+def fragment(src, sq, out):
+    """fragment sq -> (the file, or None if it is not there yet or failed; the stream's newest fragment number)"""
+    r = subprocess.run(['curl', '-s', '--max-time', '60', '-D', '-', '-o', out] + sum((['-H', f'{k}: {v}'] for k, v in src['headers'].items()), [])
+                       + [src['url'] + f'&sq={sq}'], capture_output=True, text=True)
+    head = re.search(r'X-Head-Seqnum: (\d+)', r.stdout, re.I); ok = r.stdout.split('\n', 1)[0].split()[1:2] == ['200']
+    return (out if ok and os.path.exists(out) and os.path.getsize(out) > 1000 else None), (int(head.group(1)) if head else None)
+def follow(url, threads=2, port=8768, at=None, srcf=None):
+    """a live YouTube stream through its fragments, from `at` (h:mm:ss into the stream; default: the live edge, after catching up on what
+    an earlier watch of the same stream read) on, as they appear. srcf: a JSON file with the fragment URL and headers saved earlier,
+    for when yt-dlp is refused"""
+    vid = youtube(url).split('v=')[-1]; tag = 'live_' + re.sub(r'\W', '', vid)[:16]
+    d = os.path.join(C.HERE, 'out', 'live', tag + '_frames'); os.makedirs(d, exist_ok=True); keep = os.path.join(C.HERE, 'out', 'live', tag + '.ocr.jsonl')
+    src = json.load(open(srcf)) if srcf else dash_source(youtube(url)); tmp = os.path.join(d, 'frag.mp4')
+    _, head = fragment(src, 0, tmp)
+    if head is None: sys.exit('the stream did not answer: the fragment URL may have expired (about 6 hours)')
+    sq = max(0, head - 1) if at is None else secs(at) // 5
+    run = Runner(tag, threads, port, video={'id': vid, 'start': 0, 'live': True}, t0=sq * 5)   # a live stream: the page shows the newest turn
+    done = catch_up(run, d, keep) if at is None else 0
+    if done: run.reader.t0 = sq * 5 - done / 2
+    def fetch():
+        nonlocal sq
+        n = done; part = os.path.join(d, 'part'); os.makedirs(part, exist_ok=True)
+        while True:
+            fr, top = fragment(src, sq, tmp)
+            if not fr: time.sleep(2 if top is None or sq > top else 5); continue
+            subprocess.run([P.exe('ffmpeg'), '-v', 'error', '-y', '-i', fr, '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', '-start_number', str(n + 1),
+                            os.path.join(part, 'f_%06d.jpg')])
+            for f in sorted(os.listdir(part)): os.replace(os.path.join(part, f), os.path.join(d, f)); n += 1
+            sq += 1
+    threading.Thread(target=fetch, daemon=True).start()
+    while True:
+        done = max(done, pump(run, d, keep, done)); time.sleep(1)
 def read(ocrf):
     r = Reader()
     for row in sorted(map(json.loads, open(ocrf)), key=lambda x: x['file']): r.feed(row['lines'])
@@ -557,6 +629,9 @@ if __name__ == '__main__':
     if a[0] == 'frames': frames(a[1], a[2], *(a[3:5]))
     elif a[0] == 'ocr': ocr(a[1])
     elif a[0] == 'scan': scan(a[1], a[2], int(a[3]) if len(a) > 3 else 2, fetchers=int(a[4]) if len(a) > 4 else 4)
+    elif a[0] == 'follow':
+        kw = dict(x.split('=', 1) for x in a[2:] if '=' in x)
+        follow(a[1], int(kw.get('threads', 2)), int(kw.get('port', 8768)), kw.get('at'), kw.get('src'))
     elif a[0] in ('replay', 'watch'):
         args = a[2:]
         try:

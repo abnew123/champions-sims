@@ -231,6 +231,17 @@ Protects the one-turn engine undervalues. Summary in `results/broadcast_reads_da
 board as known at the turn's start, field, sets, every active's options, what happened, win chance by turn, the read panel). Publish the
 same scratchpad file to keep the artifact's URL. The template is .tpl so writing it does not open it in the user's browser pane.
 
+## Louisville (2026-10-10): what changed for a second event
+
+The Louisville Regional stream uses the same overlay as Frankfurt (HP boxes, popups, battle text, decision screen all read), but its team
+sheets print "INDEEDEE (FEMALE)" and "HISUIAN ARCANINE": `sheet_species` maps gender and regional names to the species (Indeedee-F,
+Arcanine-Hisui, Meowstic-F, Ninetales-Alola), and natures are matched by prefix ("JollyAspeed" when the text runs together). A live watch
+keeps every frame's text and catches up from it when restarted. `follow` reads a live stream through its numbered 5-second DASH fragments
+(the format yt-dlp lists with --live-from-start): from the live edge or from any point so far (`at=h:mm:ss` into the stream), catching up at
+about 3x real time. After many requests YouTube's bot check refused yt-dlp ("Sign in to confirm you're not a bot"); the fragment URL fetched
+earlier kept working (it lasts about 6 hours), so `follow` takes a saved one (`src=<json with url and headers>`). Do not pass the user's
+browser cookies to yt-dlp without asking them.
+
 ## The broadcast reader: targets
 
 Mid-turn the broadcast pops up the HP box of the Pokemon being hit, alone, in that Pokemon's slot. The reader (broadcast.py `aim`/`hit`/

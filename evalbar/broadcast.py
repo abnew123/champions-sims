@@ -10,7 +10,8 @@ screen ("Trainers are choosing actions"). For watching on your own computer.
   python3 evalbar/broadcast.py replay <dir.ocr.jsonl> [speed=4] [threads=2] [port=8768] [YouTube id] [start]
                                                                                          a recorded match through the live page, as if live
   python3 evalbar/broadcast.py watch <YouTube URL or id> [start] [threads=2] [port=8768] a broadcast in real time (live, or a recording from
-                                                                                         start, e.g. 1:44:09): page at http://localhost:<port>
+                                                                                         start, e.g. 1:44:09): page at http://localhost:<port>; every
+                                                                                         frame's text is kept in out/live/live_<id>.ocr.jsonl
 Player 1 is the player on the left: the battle text speaks from their side (their Pokémon are named plainly, the other player's are
 "the opposing ..."). No names are kept: the log calls the players Player 1 and Player 2, and sheets are matched to sides by species."""
 import os, re, sys, json, time, difflib, subprocess, threading, collections
@@ -520,7 +521,7 @@ def watch(url, threads=2, port=8768, start=None):
         return subprocess.Popen(['nice', '-n', '10', P.exe('ffmpeg'), '-v', 'error', '-y', '-headers', hdr, '-re'] + (['-ss', str(at)] if at else []) + ['-i', src,
                                  '-vf', 'fps=2,scale=1280:-2', '-q:v', '3', '-start_number', str(int((at - secs(start)) * 2) + 1), os.path.join(d, 'f_%06d.jpg')],
                                 stderr=subprocess.PIPE, text=True)
-    ff = open_stream(secs(start)); retries = 0
+    ff = open_stream(secs(start)); retries = 0; keep = os.path.join(C.HERE, 'out', 'live', tag + '.ocr.jsonl')
     vid = re.search(r'(?:v=|youtu\.be/|/live/)([\w-]{11})', url)
     run = Runner(tag, threads, port, video={'id': vid.group(1), 'start': secs(start), 'live': not start} if vid else None, t0=secs(start)); done = 0
     while True:
@@ -530,6 +531,7 @@ def watch(url, threads=2, port=8768, start=None):
             b = os.path.join(d, 'batch'); os.makedirs(b, exist_ok=True)
             for f in new: os.replace(os.path.join(d, f), os.path.join(b, f))
             out = subprocess.run([P.exe('ocr', OCR), b], capture_output=True, text=True).stdout
+            with open(keep, 'a') as k: k.write(out)                              # the text of every frame, for replaying or checking later
             for row in sorted(map(json.loads, out.splitlines()), key=lambda x: x['file']): run.feed(row['lines'])
             for f in new: os.remove(os.path.join(b, f))
             done = int(new[-1][2:8])

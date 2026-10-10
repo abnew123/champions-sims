@@ -145,6 +145,12 @@ def scoreboard(lines):
     top = [(t, x) for t, x, y, w, h in lines if 0.08 < y < 0.13 and sum(c.isalpha() for c in t) >= 6 and t.upper() == t]
     left = max((letters(t) for t, x in top if x < 0.45), key=len, default=''); right = max((letters(t) for t, x in top if x > 0.55), key=len, default='')
     return (left, right) if left and right else None
+def scoreboard_names(lines):
+    """the players' names as the scoreboard shows them (left, right), without country and record ("CARSON CONFER (US 5/0/0"): for the live
+    page only. They are kept in memory, never written to a file"""
+    top = [(t.strip(), x) for t, x, y, w, h in lines if 0.08 < y < 0.13 and sum(c.isalpha() for c in t) >= 6 and t.upper() == t]
+    clean = lambda t: re.sub(r'^[\d/ ]+[A-Z]{2}\s+', '', re.sub(r'\s*\(?\s*\b[A-Z]{2}\b[\s\d/()-]*$', '', t)).strip().title()   # "4/0/0 CA DORIAN KANG" too
+    return {sd: max((clean(t) for t, x in top if (x < 0.45 if sd == 'p1' else x > 0.55)), key=len, default='') for sd in ('p1', 'p2')}
 def sheet_owner(lines):
     """the name in a team sheet's header (letters only)"""
     top = [t for t, x, y, w, h in lines if y < 0.09 and t.upper() == t and sum(c.isalpha() for c in t) >= 6 and not fuzzy(t, 'species', cut=0.85)]
@@ -448,6 +454,9 @@ class Reader:
             sets = sheet(L)
             if len(sets) >= 4: s.raw_sheets.append((s.frame, sheet_owner(L), sets))
             return
+        if s.started and not s.ended:                                          # the players' names for the live page (memory only)
+            for sd, nm in scoreboard_names(L).items():
+                if nm: s.meta[-1].setdefault('who', {'p1': collections.Counter(), 'p2': collections.Counter()})[sd][nm] += 1
         sb = scoreboard(L)
         if sb:
             s.names.append((s.frame, sb))
@@ -574,7 +583,8 @@ class Runner:
                     for i, lv in enumerate(run.lives):
                         if lv.data and lv.data['games']:
                             lm = run.reader.logs_meta(); m = lm[i][1] if i < len(lm) else {}
-                            g = {**lv.data['games'][0], 'title': f'Game {i + 1}', 'end': m.get('end'), 'idx': i}
+                            g = {**lv.data['games'][0], 'title': f'Game {i + 1}', 'end': m.get('end'), 'idx': i,
+                                 'players': {sd: c.most_common(1)[0][0] for sd, c in m.get('who', {}).items() if c} or None}
                             g['steps'] = [{**st, 'vt': (m.get('times') or {}).get(st['turn'])} for st in g['steps']]
                             games.append(g)
                     st = run.reader.note or (run.lives[-1].status if run.lives else 'waiting for the first turn')

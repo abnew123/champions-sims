@@ -44,6 +44,7 @@ h1,h2,h3{font-family:var(--disp);text-wrap:balance;margin:0}
 header h1{font-size:clamp(28px,6vw,40px);font-weight:700;letter-spacing:-.02em;line-height:1.05;margin-top:6px}
 .sub{color:var(--ink2);margin:8px 0 0;max-width:66ch}
 .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.ol .cond{display:block;font-size:12px;color:var(--ink3);margin-top:1px}
 .checklist{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:-4px 0 12px;font-size:14px;color:var(--warn)}
 .checklist button,.checks button{font:inherit;font-size:13px;padding:3px 10px;border:1px solid var(--rule);border-radius:4px;background:var(--panel-2);color:var(--ink);cursor:pointer}
 .checks{border:1px solid var(--warn);border-radius:6px;background:var(--panel);padding:10px 14px 12px;margin:0 0 16px}
@@ -247,7 +248,7 @@ function load(k) {
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 const $ = id => document.getElementById(id);
 const pct = (x, live) => { const v = Math.round(100 * x); return live ? Math.max(1, Math.min(99, v)) : v; };
-const who = s => NAMES ? NAMES[s] : 'Player ' + s[1];
+const who = s => NAMES ? NAMES[s] : (G && G.players && G.players[s]) || 'Player ' + s[1];   // a broadcast: the names on its scoreboard (live page only)
 const towards = s => NAMES ? {p1: 'you', p2: 'the opponent'}[s] : who(s);
 const seg = segs => segs.map(x => typeof x === 'string' ? esc(x) : `<span class="m"><i class="sw ${x[0]}"></i>${esc(x[1])}</span>`).join('');
 const STAT = {atk: 'Atk', def: 'Def', spa: 'SpA', spd: 'SpD', spe: 'Spe', accuracy: 'Acc', evasion: 'Eva'};
@@ -257,7 +258,7 @@ let cur = 0;
 function head() {
   const r = G.rating ? `players rated about ${Math.round(G.rating)}` : null;
   $('n1').textContent = who('p1'); $('n2').textContent = who('p2');
-  $('graphTitle').textContent = NAMES ? 'Your win chance through the game' : "Player 1's win chance through the game";
+  $('graphTitle').textContent = NAMES ? 'Your win chance through the game' : `${who('p1')}'s win chance through the game`;
   if (DATA.live) {
     $('eyebrow').textContent = 'Live · spectating';
     const bc = (DATA.live.format || '').startsWith('Champions');
@@ -378,7 +379,8 @@ function options() {
   $('opts').innerHTML = ['p1', 'p2'].map(sd => o[sd].map(slot => {
     const all = slot.options.slice().sort((a, b) => b.w - a.w || b.v - a.v), top = all.slice(0, 5);
     const pl = all.find(x => x.played); if (pl && !top.includes(pl)) top.push(pl);
-    const rows = top.map(x => `<div class="orow${x.played ? ' played' : ''}"><div class="ol">${esc(x.l)}${x.played ? '<span class="played-tag">played</span>' : ''}</div>
+    const cond = x => x.cond ? `<small class="cond">${/^Switch to /.test(x.l) ? `if ${esc(x.l.slice(10))} was brought` : 'in some guesses'} · ${pc(x.cond)}</small>` : '';
+    const rows = top.map(x => `<div class="orow${x.played ? ' played' : ''}"><div class="ol">${esc(x.l)}${x.played ? '<span class="played-tag">played</span>' : ''}${cond(x)}</div>
       <div class="pick"><span class="pb"><i style="width:${Math.round(100 * x.w)}%"></i></span><span class="n">${pc(x.w)}</span></div><div class="n r${x.rough ? ' rough' : ''}">${x.rough ? '~' : ''}${pc(x.v)}</div></div>`).join('');
     const more = all.length - top.length;
     return `<div class="ocard"><h3><i class="sw ${sd}"></i>${esc(slot.mon)}</h3>

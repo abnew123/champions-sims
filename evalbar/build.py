@@ -37,21 +37,26 @@ def options(e, pos, scale):
             opts = [{'l': label(o['label']), 'w': round(o['w'], 3), 'v': round(scale(o['v']), 3), 'played': bool(a) and same(o['c'], a),
                      'rough': 'stages' in e and o['v'] < best - 0.15} for o in sl['options']]
             out[sd].append({'mon': R.disp(sl['mon']), 'played': True if any(o['played'] for o in opts) else None, 'options': opts})
+    out['value'] = {'p1': scale(e['value']), 'p2': 1 - scale(e['value'])}               # each side's win chance in this hypothesis
     return out
 def merge(ws, opts):
-    """options() of several hypotheses with weights ws (summing to 1) -> one: each option's picks and value weighted over the hypotheses
-    (a value averages over the hypotheses where the option exists). The Pokemon on the field must be the same in every hypothesis."""
+    """options() of several hypotheses with weights ws (summing to 1) -> one: each option's picks weighted over the hypotheses, and its value
+    as the side's overall win chance plus what the option gains or loses against the best play within each hypothesis where it exists. An
+    option that exists only in some hypotheses (a switch to a Pokemon that may not have been brought) is then compared fairly: its raw
+    value would carry how good those hypotheses are for the side. cond: the share of the hypotheses where it exists, when not all.
+    The Pokemon on the field must be the same in every hypothesis."""
     out = {}
     for sd in ('p1', 'p2'):
-        out[sd] = []
+        out[sd] = []; V = sum(w * o['value'][sd] for w, o in zip(ws, opts)) if all('value' in o for o in opts) else None
         for i, sl in enumerate(opts[0][sd]):
             acc = {}
             for w, o in zip(ws, opts):
                 for x in o[sd][i]['options']:
                     a = acc.setdefault(x['l'], {'l': x['l'], 'w': 0, 'vw': 0, 'n': 0, 'played': x['played'], 'rough': x['rough']})
-                    a['w'] += w * x['w']; a['vw'] += w * x['v']; a['n'] += w; a['rough'] = a['rough'] and x['rough']
+                    a['w'] += w * x['w']; a['vw'] += w * (x['v'] - o['value'][sd] if V is not None else x['v']); a['n'] += w; a['rough'] = a['rough'] and x['rough']
             out[sd].append({'mon': sl['mon'], 'played': sl['played'],
-                            'options': [{'l': a['l'], 'w': round(a['w'], 3), 'v': round(a['vw'] / a['n'], 3), 'played': a['played'], 'rough': a['rough']} for a in acc.values()]})
+                            'options': [{'l': a['l'], 'w': round(a['w'], 3), 'v': round(min(1, max(0, (V or 0) + a['vw'] / a['n'])), 3), 'played': a['played'], 'rough': a['rough'],
+                                         **({'cond': round(a['n'], 2)} if a['n'] < 0.99 else {})} for a in acc.values()]})
     return out
 def leak_check(text, hidden):
     low = text.lower()

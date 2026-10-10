@@ -105,6 +105,8 @@ header h1{font-size:clamp(22px,4.5vw,28px);font-weight:700;letter-spacing:-.02em
 .views button.on{background:var(--ink);color:var(--ground)}
 .views button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .vnote{font-size:13.5px;color:var(--ink2);margin:0;max-width:70ch}
+.sleep{font-size:13.5px;color:var(--ink2);margin:0 0 12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.sleep button{font:inherit;padding:6px 12px;border:1px solid var(--rule);border-radius:3px;background:var(--panel);color:var(--ink);cursor:pointer}
 .games{display:flex;flex-wrap:wrap;gap:6px}
 .games button{font-family:var(--disp);font-size:12px;font-weight:600;color:var(--ink2);background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:5px 10px;cursor:pointer;display:flex;gap:7px;align-items:baseline}
 .games button small{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--ink3)}
@@ -202,6 +204,7 @@ section > h2{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:u
   </div>
 
   <div class="video" id="video" hidden><div id="ytplayer"></div></div>
+  <p class="sleep" id="sleep" hidden>Stopped updating after 30 minutes without activity.<button type="button" id="wake">Carry on</button></p>
 
   <div class="live" id="live">
     <div class="sides">
@@ -473,7 +476,8 @@ function notes() {
     html = `<p><b>How the bar is made.</b> ${G.engine ? solve : 'For each turn the battle engine plays every pair of choices one turn ahead, scores the positions that result, and solves the turn as a game between the two players.'} The bar is the value of that game for Player 1, rescaled to match how real games turned out (log-odds times ${CALTXT}). It updates a few seconds after each turn starts.</p>
     ${(DATA.live.format || '').startsWith('Champions') ? `<p><b>What it reads.</b> Both open team sheets as the broadcast shows them, the HP percentages in the four HP boxes, and the battle text. The HP boxes at each decision screen set the HP and who is on the field, so a moment the broadcast cut away from is corrected at the next turn; a move or stat change shown only during a cutaway can be missed. Stat points are not on team sheets, so the engine assumes each Pokémon's most common spread. For the Pokémon a player has not sent in yet, the three most likely combinations from their sheet (given their leads) are evaluated for each player and averaged.</p>` : ''}
     <p${(DATA.live.format || '').startsWith('Champions') ? ' hidden' : ''}><b>What it knows.</b> What a spectator knows at the start of the turn: both team previews${DATA.live.format && DATA.live.format.startsWith('Bo3') ? ' and the open team sheets' : ''}, the Pokémon that have come in and what they have shown. ${DATA.live.format && DATA.live.format.startsWith('Bo3') ? '' : 'Sets are each species\' most common Reg M-C set until the game shows otherwise (moves used, items that activated, Mega Evolution), and stat points are guesses. '}For the Pokémon a player has not sent in yet, the three most likely combinations from their preview (given their leads) are evaluated for each player and averaged.</p>
-    <p><b>Fair play.</b> For watching other people's games. Do not use it on a game you are playing, and do not pass what it shows to a player while their game is going on.</p>`;
+    <p><b>Fair play.</b> For watching other people's games. Do not use it on a game you are playing, and do not pass what it shows to a player while their game is going on.</p>
+    ${DATA.live.public ? '<p><b>Unofficial.</b> Not affiliated with The Pokémon Company, Nintendo or Play! Pokémon. The video is the official Play! Pokémon stream, embedded from YouTube; the bar is read from it by an amateur program and can be wrong.</p>' : ''}`;
   } else if (G.engine && G.engine.bar) {
     html = `<p><b>How the bar is made.</b> ${solve} The bar is the value of that game for ${REC ? 'you' : 'Player 1'}, rescaled so that it matches how real games turned out: the engine alone is too sure of itself, so its odds are pulled towards even (log-odds times ${G.engine.cal.toFixed(2)}).</p>
     <p><b>Best options.</b> Picks is each option's share of the solution, so a mixed answer means the planner would vary its play. Wins is on the same scale as the bar.</p>
@@ -561,11 +565,34 @@ function video() {
   const v = DATA.video; if (!v || !v.id || /[?&]novideo\b/.test(location.search)) return;          // ?novideo: the bar without the player
   $('video').hidden = false;
   window.onYouTubeIframeAPIReady = () => {
-    player = new YT.Player('ytplayer', {videoId: v.id, playerVars: {start: v.start || 0, autoplay: 1, playsinline: 1, rel: 0},
+    player = new YT.Player('ytplayer', {videoId: v.id, playerVars: {start: v.start || 0, autoplay: DATA.live && DATA.live.public ? 0 : 1, playsinline: 1, rel: 0},
       events: {onReady: () => { try { watchButtons(); } catch (e) {} }}});
     setInterval(() => { try { const t = player.getCurrentTime(); if (typeof t === 'number' && t > 0) { VT = t; apply(); } } catch (e) {} }, 1000);
   };
   const sc = document.createElement('script'); sc.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(sc);
+}
+// the public page on the user's site: the uploader's small head.json every 10 seconds while the tab is visible, and a game's file when
+// its version changes (both from the site's CDN); after 30 minutes without the visitor doing anything it stops until they carry on
+function pub() {
+  const base = DATA.live.public.base, ver = {}, file = {}; let at = null, idle = Date.now(), asleep = false, vid = null;
+  async function tick() {
+    if (asleep || document.visibilityState !== 'visible') return;
+    if (Date.now() - idle > 30 * 60e3) { asleep = true; $('sleep').hidden = false; return; }
+    try {
+      const h = await (await fetch(base + '/head.json', {cache: 'no-cache'})).json();
+      if (h.updated === at) return;
+      for (const g of h.games) if (ver[g.key] !== g.v) { file[g.key] = await (await fetch(`${base}/${g.key}?v=${g.v}`)).json(); ver[g.key] = g.v; }
+      at = h.updated; const id = h.stream && h.stream.id !== 'none' ? h.stream.id : null;
+      RAW = {games: h.games.map(g => file[g.key]).filter(Boolean), video: id ? {id, start: 0, live: !!h.stream.live} : null, live: {...DATA.live, status: h.status}};
+      apply();
+      if (id && id !== vid) { if (!vid) { DATA.video = RAW.video; video(); } else if (player && player.cueVideoById) player.cueVideoById(id); vid = id; }
+    } catch (e) {}
+  }
+  const wake = () => { idle = Date.now(); if (asleep) { asleep = false; $('sleep').hidden = true; tick(); } };
+  ['pointerdown', 'keydown', 'scroll'].forEach(t => document.addEventListener(t, wake, {passive: true}));
+  $('wake').addEventListener('click', wake);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') tick(); });
+  tick(); setInterval(tick, 10e3);
 }
 function start(saved) {
   if (VIEWS && saved && VIEWS[saved.view]) view = saved.view;
@@ -581,7 +608,8 @@ function start(saved) {
   });
   let rz; window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(graph, 120); });
   window.claude?.hot?.snapshot?.(() => ({cur, gi, view}));
-  if (DATA.live) { video(); poll(); setInterval(poll, 2000); }
+  if (DATA.live && DATA.live.public) pub();
+  else if (DATA.live) { video(); poll(); setInterval(poll, 2000); }
 }
 if (window.claude?.hot?.ready) window.claude.hot.ready(start); else start(window.claude?.hot?.data ?? {});
 </script>

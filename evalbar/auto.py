@@ -13,9 +13,10 @@ Every 30 seconds (the channel page every 5 minutes):
     and 2 fetchers), then served
   - CPU: a follow or scan pauses (its whole process group, the page too) while other programs keep 8 or more cores busy, and carries
     on below 6
+  - the public page on the user's site: every 10 seconds what changed goes up (publish.py), once ~/.config/evalbar/site.json exists
 The supervisor's log is evalbar/out/live/auto.log, its programs' output evalbar/out/live/auto_child.log."""
-import os, re, sys, json, time, signal, plistlib, subprocess
-import common as C, procs as P
+import os, re, sys, json, time, signal, plistlib, threading, subprocess
+import common as C, procs as P, publish as PB
 CHANNEL = 'https://www.youtube.com/@PlayPokemon/streams'
 VGC = re.compile(r'^VGC Day \d+ \| \d{4} Pokémon .+ Championships$')
 LIVE = os.path.join(C.HERE, 'out', 'live')
@@ -101,7 +102,11 @@ class Child:
         pos = os.path.join(LIVE, tag(s.vid) + '_sq.txt')
         return not os.path.exists(pos) or time.time() - os.path.getmtime(pos) > 300
 def main(threads=2, port=8768):
-    os.makedirs(LIVE, exist_ok=True); child = Child(threads, port); seen = []; checked = 0
+    os.makedirs(LIVE, exist_ok=True); child = Child(threads, port); seen = []; checked = 0; pub = PB.Publisher(port)
+    def publish():
+        while True:
+            pub.tick(log); time.sleep(10)
+    threading.Thread(target=publish, daemon=True).start()
     def bye(*a): child.stop(); sys.exit(0)
     signal.signal(signal.SIGTERM, bye); signal.signal(signal.SIGINT, bye)
     log(f'watching {CHANNEL} (page at http://localhost:{port})')
@@ -124,6 +129,7 @@ def main(threads=2, port=8768):
             if time.time() - child.since >= min(1800, 120 * 2 ** child.fails):
                 log(f'{child.mode} {child.vid} stopped (exit {code}); starting it again'); child.fails += 1; child.start(child.mode, child.vid)
         elif child.stalled(): log('no new fragment for 5 minutes: starting the follow again'); child.start('follow', child.vid)
+        pub.title = next((x['title'] for x in seen if x['id'] == child.vid), None)
         child.guard()
         time.sleep(30)
 def install():

@@ -671,6 +671,10 @@ impl Battle {
         }
         let Some(t0) = target else { let n = self.mon_name(m); self.add(&["-fail", &n]); return RV::B(false); };
         let (targets, pressure) = self.get_move_targets(m, am, t0);
+        if self.logging && targets.len() > 1 {   // as Showdown's attrLastMove: the move line gets every target of a spread move
+            let names: Vec<String> = targets.iter().map(|t| self.mon_name(*t)).collect();
+            if let Some(l) = self.log.iter_mut().rev().find(|l| l.starts_with("|move|")) { l.push_str(&format!("|[spread] {}", names.join(","))); }
+        }
         if let Some(l) = targets.last() { target = Some(*l); }
         let caller_pp = source_effect.map(|s| s.kind == Kind::Move).unwrap_or(false);
         if source_effect.is_none() || caller_pp {

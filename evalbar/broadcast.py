@@ -305,9 +305,13 @@ class Reader:
             s.emit(f'|move|{me}|{move}|'); s.aim(sd, sp, move); return
         if re.match(r'protected itself', rest): s.emit(f'|-singleturn|{me}|Protect'); return
         if re.match(r'fainted', rest):
+            if sp in s.fainted[sd]: return                                     # already down: a replay of an earlier moment
             if s.open and k == s.open['user']: s.shut()
             s.emit(f'|faint|{me}'); sl = s.slot_of(sd, sp); s.fainted[sd].add(sp)
             if sl: s.slot_free[sd].append(sl); s.hp[(sd, sl)] = 0
+            if len(s.fainted[sd]) >= 4:                                        # all four brought are down: the game is over
+                s.emit('|', f"|win|Player {'2' if sd == 'p1' else '1'}"); s.ended = True; s.prev_end = s.frame; s.meta[-1]['end'] = s.now()
+                if s.game_names: s.board = s.game_names.most_common(1)[0][0]
             return
         if re.match(r'has Mega Evolved', rest):
             mg = next(iter(E['species'].get(toid(sp), {}).get('otherFormes') or []), None)

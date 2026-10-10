@@ -15,6 +15,8 @@ screen ("Trainers are choosing actions"). For watching on your own computer.
   python3 evalbar/broadcast.py follow <YouTube URL or id> [at=h:mm:ss] [threads=2] [port=8768] [src=<saved fragment URL .json>]
                                                                                          a live stream through its 5-second fragments, from the
                                                                                          live edge or from `at` into the stream
+  python3 evalbar/broadcast.py serve <YouTube URL or id> [threads=2] [port=8768]         a stream read earlier, on the page, fetching nothing
+  (evalbar/auto.py runs follow / serve / scan by itself for the Play Pokémon channel's VGC streams)
 Player 1 is the player on the left: the battle text speaks from their side (their Pokémon are named plainly, the other player's are
 "the opposing ..."). No names are kept: the log calls the players Player 1 and Player 2, and sheets are matched to sides by species."""
 import os, re, sys, json, time, difflib, subprocess, threading, collections
@@ -793,6 +795,15 @@ def follow(url, threads=2, port=8768, at=None, srcf=None):
     threading.Thread(target=fetch, daemon=True).start()
     while True:
         done = max(done, pump(run, d, keep, done)); time.sleep(1)
+def serve(url, threads=2, port=8768):
+    """a stream read earlier (by follow or scan), on the page without fetching anything: what auto shows between streams"""
+    vid = youtube(url).split('v=')[-1]; tag = 'live_' + re.sub(r'\W', '', vid)[:16]
+    d = os.path.join(C.HERE, 'out', 'live', tag + '_frames'); os.makedirs(d, exist_ok=True); keep = os.path.join(C.HERE, 'out', 'live', tag + '.ocr.jsonl')
+    if not os.path.exists(keep): sys.exit(f'no record of {vid} in out/live')
+    t0f = os.path.join(C.HERE, 'out', 'live', tag + '_t0.txt'); t0 = float(open(t0f).read()) if os.path.exists(t0f) else 0
+    run = Runner(tag, threads, port, video={'id': vid, 'start': 0, 'live': False}, t0=t0); catch_up(run, d, keep)
+    print('the record is read; the page stays up until this is stopped', flush=True)
+    while True: time.sleep(60)
 def read(ocrf, t0=0):
     """t0: the video time of the file's first frame (a live stream read with follow: its out/live/live_<id>_t0.txt)"""
     r = Reader(); r.t0 = t0
@@ -812,6 +823,9 @@ if __name__ == '__main__':
     elif a[0] == 'follow':
         kw = dict(x.split('=', 1) for x in a[2:] if '=' in x)
         follow(a[1], int(kw.get('threads', 2)), int(kw.get('port', 8768)), kw.get('at'), kw.get('src'))
+    elif a[0] == 'serve':
+        kw = dict(x.split('=', 1) for x in a[2:] if '=' in x)
+        serve(a[1], int(kw.get('threads', 2)), int(kw.get('port', 8768)))
     elif a[0] in ('replay', 'watch'):
         args = a[2:]
         try:

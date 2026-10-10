@@ -1355,7 +1355,9 @@ impl Battle {
             if dealt != 0 { let hp = self.p(t).hp; self.pm(t).hurt_this_turn = Some(hp); }
             if let (Some(s), Some(EType::Move)) = (source, eff_type) { self.pm(s).last_damage = dealt; }
             if self.logging { let n = self.mon_name(t); let p = self.p(t); let hp = format!("{}/{}", p.hp, p.maxhp);
-                              let from = effect.filter(|_| eff_type != Some(EType::Move)).map(|e| format!("[from] {}", e.id)).unwrap_or_default(); self.add(&["-damage", &n, &hp, &from]); }
+                              let from = effect.filter(|_| eff_type != Some(EType::Move)).map(|e| format!("[from] {}", e.id)).unwrap_or_default(); self.add(&["-damage", &n, &hp, &from]);
+                              if eff_type == Some(EType::Move) { if let Some(am) = effect.and_then(|e| e.am) { let slot = self.slot_name(t); let (crit, tm) = { let hd = self.amm(am).hd(slot); (hd.crit, hd.type_mod) };
+                                  if crit { self.add(&["-crit", &n]); } if tm > 0 { self.add(&["-supereffective", &n]); } else if tm < 0 { self.add(&["-resisted", &n]); } } } }
             if dealt != 0 && eff_type == Some(EType::Move) {
                 if let (Some(s), Some(e)) = (source, effect) { if let Some(am) = e.am { if let Some((a, b)) = self.am(am).drain {
                     let amount = js_round(dealt as f64 * a as f64 / b as f64);
@@ -1556,6 +1558,7 @@ impl Battle {
             self.sides[s as usize].side_conditions.retain(|(k, _)| *k != c); return RV::B(false);
         }
         self.run_event("SideConditionStart", Tgt::Side(s), source, Some(Eff::cond(c)), RV::Undef, false, false);
+        if self.logging { let sd = format!("p{}", s + 1); let x = format!("move: {}", c); self.add(&["-sidestart", &sd, &x]); }
         RV::B(true)
     }
     /// side.addSlotCondition (2026-10-09): a condition on the target's slot (Wish, Healing Wish); handlers run for whoever is in the slot
@@ -1592,6 +1595,7 @@ impl Battle {
     pub fn remove_side_condition(&mut self, s: u8, c: &str) -> bool {
         let c = id(c);
         if find(&self.sides[s as usize].side_conditions, c).is_none() { return false; }
+        if self.logging { let sd = format!("p{}", s + 1); let x = format!("move: {}", c); self.add(&["-sideend", &sd, &x]); }
         self.single_event("SideEnd", Eff::cond(c), Some(SLoc::SideC(s, c)), Tgt::Side(s), None, None, RV::Undef);
         self.sides[s as usize].side_conditions.retain(|(k, _)| *k != c);
         true
@@ -1620,11 +1624,13 @@ impl Battle {
             self.field.weather = pw; self.field.weather_state = ps; return RV::B(false);
         }
         self.each_event("WeatherChange", src_eff);
+        if self.logging { self.add(&["-weather", w]); }
         RV::B(true)
     }
     pub fn clear_weather(&mut self) -> bool {
         if self.field.weather.is_empty() { return false; }
         let w = self.field.weather;
+        if self.logging { self.add(&["-weather", "none"]); }
         self.single_event("FieldEnd", Eff::cond(w), Some(SLoc::Weather), Tgt::Field, None, None, RV::Undef);
         self.field.weather = ""; self.field.weather_state = EState::default();
         self.each_event("WeatherChange", None);
@@ -1647,11 +1653,13 @@ impl Battle {
             self.field.terrain = pt; self.field.terrain_state = ps; return RV::B(false);
         }
         self.each_event("TerrainChange", src_eff);
+        if self.logging { let x = format!("move: {}", t); self.add(&["-fieldstart", &x]); }
         RV::B(true)
     }
     pub fn clear_terrain(&mut self) -> bool {
         if self.field.terrain.is_empty() { return false; }
         let t = self.field.terrain;
+        if self.logging { let x = format!("move: {}", t); self.add(&["-fieldend", &x]); }
         self.single_event("FieldEnd", Eff::cond(t), Some(SLoc::Terrain), Tgt::Field, None, None, RV::Undef);
         self.field.terrain = ""; self.field.terrain_state = EState::default();
         self.each_event("TerrainChange", None);
@@ -1675,11 +1683,13 @@ impl Battle {
             self.field.pseudo.retain(|(k, _)| *k != c); return RV::B(false);
         }
         self.run_event("PseudoWeatherChange", source.map(Tgt::Mon).unwrap_or(Tgt::None), source, Some(Eff::cond(c)), RV::Undef, false, false);
+        if self.logging { let x = format!("move: {}", c); self.add(&["-fieldstart", &x]); }
         RV::B(true)
     }
     pub fn remove_pseudo_weather(&mut self, c: &str) -> bool {
         let c = id(c);
         if find(&self.field.pseudo, c).is_none() { return false; }
+        if self.logging { let x = format!("move: {}", c); self.add(&["-fieldend", &x]); }
         self.single_event("FieldEnd", Eff::cond(c), Some(SLoc::Pseudo(c)), Tgt::Field, None, None, RV::Undef);
         self.field.pseudo.retain(|(k, _)| *k != c);
         true

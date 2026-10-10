@@ -255,6 +255,14 @@ Text is not enough on its own, so the reader also keeps track of state:
 A further step would be to replay each turn with the engine (its turntest loads the state before a turn and plays both sides' choices)
 and keep the outcome that matches the HP boxes: abilities like Stamina, item use and durations would then come from the simulation.
 
+## A match the broadcast shows no team sheets for (2026-10-10)
+
+The Louisville stream skipped the sheets for one feature match, and the reader used to wait for them ("waiting for both team sheets").
+Now such a game starts anyway (meta 'closed'): its preview is the Pokemon this match has shown so far plus the leads, a Pokemon nobody has
+seen yet is added when it comes in, and the live mode treats it like a Bo1 closed-sheet game (each species' most common set, what the game
+shows laid on top; items hidden). The battle-text vs rules checks are off for it: the rules need the sheets' abilities and items. A form
+the text does not name (Basculegion-F) falls back to the base species.
+
 ## Missed faints and who won (2026-10-10)
 
 A faint whose message was not read left a fainted Pokemon "in the back" (Louisville: Player 2's Sneasler, 21%, knocked out by Muddy Water,

@@ -366,6 +366,17 @@ checkout's evalbar/out/live; it owns port 8768. One game's evaluation at a time 
 start an engine for every game at once. yt-dlp answered again on 2026-10-10 (no bot check); the watch page alone no longer has the
 stream's manifest.
 
+## The public page on the user's site (2026-10-10)
+
+The user chose live via Netlify (estimate: about 6 credits per streamed weekend plus about 2 per viewer-weekend; a spike of 1,000
+viewers for an hour is about 90, and running out on Netlify's Free plan pauses the whole site). The site side (a Netlify function with
+Blobs at the site's /api/evalbar, the /evalbar/ page, the account) belongs to the personal-website thread. This side has:
+`publish.py`, which uploads head.json plus one file per game (the reconciler's checks left out) every 10 seconds from auto.py, once
+~/.config/evalbar/site.json exists; and page.html's public mode (`publish.py page <out.html>`), which polls head.json every 10 seconds
+while the tab is visible, fetches a game's file when its version changes, starts the video paused, says it is unofficial, and stops after
+30 minutes without activity. Scoreboard names stay on the public bar and game list (the user's choice); analysis pages stay anonymous.
+`publish.py sample <dir>` writes the files with Player 1 / Player 2 for the site's tests.
+
 ## The broadcast reader: targets
 
 Mid-turn the broadcast pops up the HP box of the Pokemon being hit, alone, in that Pokemon's slot. The reader (broadcast.py `aim`/`hit`/

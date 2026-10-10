@@ -9,7 +9,7 @@ use crate::battle::*;
 use crate::plan::*;
 use crate::prng::{Mode, Prng};
 use crate::sim::PChoice;
-use crate::spot::{joint, label, resolve_switches, seed4};
+use crate::spot::{joint, label, resolve_switches, seed4, resolve_switches_h};
 use crate::state::*;
 use serde_json::{json, Value};
 use std::collections::{BTreeMap, HashMap};
@@ -83,8 +83,9 @@ fn horizon_sides() -> [bool; 2] {
 /// switch_slots / slot_decisions: active Pokemon that switched voluntarily / active Pokemon that could have (bench available, not trapped)
 struct Out { v: f64, unsupported: Vec<String>, feats: Vec<Vec<f64>>, turns: usize, tr_turns: usize, tr_by: [bool; 3], switches: [usize; 2], slot_decisions: [usize; 2], switch_slots: [usize; 2], log: Vec<String>, states: Vec<Value>, dp2: [usize; 4], dplog: Vec<Value>, h2: usize }
 
-fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_job: i64, st_g: u64) -> Out {
+fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_job: i64, st_g: u64, mut human: Option<&mut crate::human::Human>) -> Out {
     let mut b = start.clone(); let mut turn = 1;
+    if human.is_some() { b.logging = false; }   // the planner's sims must not log; the real turn is logged below
     let (mut tr_turns, mut tr_by, mut switches, mut log) = (0, [false; 3], [0usize; 2], vec![]);
     let (mut slot_decisions, mut switch_slots) = ([0usize; 2], [0usize; 2]);
     let mut uns: Vec<String> = vec![]; let mut dp2s = [0usize; 4]; let mut dplog: Vec<Value> = vec![]; let mut h2cells = 0usize;
@@ -331,7 +332,7 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
             };
             if let Some(u) = new_mix { if s == 0 { x = u; } else { y = u; } }
         }
-        let i = sample(&x, &mut rng); let j = sample(&y, &mut rng);
+        let i = match human.as_deref_mut() { Some(h) => h.choose_turn(&b, turn, &msw), None => sample(&x, &mut rng) }; let j = sample(&y, &mut rng);
         // BATTLE_MEGA_AUDIT=<jsonl> (2026-10-10, for TR sheet's audit of un-evolved attacking turns): whenever a side's sampled action
         // uses a move without the Mega although the Mega twin was on offer, record the turn with both outcomes against the other
         // side's sampled action (8 seeds: damage range and KOs per target, who moved first), the ability / type the Mega would have had,
@@ -399,13 +400,29 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
         }
         if keep_log { log.push(format!("T{} {} || {}  [{}+{} x {}+{}]", turn, label(&b, 0, &msw[i]), label(&b, 1, &tsw[j]), mns.len(), msw.len() - mns.len(), tns.len(), tsw.len() - tns.len())); }
         b.prng = Prng::gen5(seed4(key.wrapping_mul(31) ^ turn as u64));
+        if human.is_some() { b.logging = true; }
         b.run_turn([msw[i], tsw[j]]);
-        resolve_switches(&mut b, cfg, Some(&mut rng));
+        resolve_switches_h(&mut b, cfg, Some(&mut rng), human.as_deref_mut(), turn);
+        if human.is_some() { b.logging = false; }
         for u in &b.unsupported { if !uns.contains(u) { uns.push(u.clone()); } }
         if find(&b.field.pseudo, "trickroom").is_some() { tr_turns += 1; if turn <= 3 { for k in (turn - 1)..3 { tr_by[k] = true; } } }
         turn += 1;
     }
-    Out { v: value(&mut b, cfg), unsupported: uns, feats: fx, turns: turn - 1, tr_turns, tr_by, switches, slot_decisions, switch_slots, log, states, dp2: dp2s, dplog, h2: h2cells }
+    let v = value(&mut b, cfg);
+    if let Some(h) = human.as_deref_mut() { h.end(&b, turn - 1, v); }
+    Out { v, unsupported: uns, feats: fx, turns: turn - 1, tr_turns, tr_by, switches, slot_decisions, switch_slots, log, states, dp2: dp2s, dplog, h2: h2cells }
+}
+/// champ play <engine_data.json> <start.jsonl> : the first start line, a human on side 0 (see human.rs)
+pub fn play_main(args: &[String]) {
+    let (dex, reg) = crate::turntest::load_all(&args[0]);
+    let cfg: &'static Cfg = Box::leak(Box::new(load_cfg(&std::env::var("GRID_DIR").unwrap_or("../../mxtr".into()))));
+    let line = std::fs::read_to_string(&args[1]).unwrap().lines().find(|l| !l.trim().is_empty()).map(|s| s.to_string()).expect("no start");
+    let st: Value = serde_json::from_str(&line).unwrap();
+    let b = crate::turntest::new_battle(dex, reg, &st["state"], Mode::Real);
+    let t = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map(|d| d.as_nanos() as u64).unwrap_or(7);
+    let key = t ^ 0x9E3779B97F4A7C15; let rng = st["rng"].as_f64().unwrap_or((t % 1_000_003) as f64);
+    let mut h = crate::human::Human::new();
+    let _ = play(&b, cfg, rng, key, false, 0, 0, Some(&mut h));
 }
 
 pub fn main(args: &[String]) {
@@ -435,7 +452,7 @@ pub fn main(args: &[String]) {
             None => ((job as u64) << 24) ^ (g << 4) ^ 0xBA77,
         };
         let tg = std::time::Instant::now();
-        let r = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| play(&b, cfg, st["rng"].as_f64().unwrap(), key, keep_log, job, g)));
+        let r = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| play(&b, cfg, st["rng"].as_f64().unwrap(), key, keep_log, job, g, None)));
         let row = match r {
             Ok(o) => json!({"g": g, "v": o.v, "turns": o.turns, "trTurns": o.tr_turns, "trBy": o.tr_by, "switches": o.switches, "slotDecisions": o.slot_decisions, "switchSlots": o.switch_slots, "dp2": o.dp2, "h2": o.h2, "dp2log": if o.dplog.is_empty() { Value::Null } else { json!(o.dplog) }, "unsupported": o.unsupported, "F": if o.feats.is_empty() { Value::Null } else { json!(o.feats) }, "ms": tg.elapsed().as_millis() as u64,
                             "log": if keep_log { json!(o.log) } else { Value::Null }, "states": if o.states.is_empty() { Value::Null } else { json!(o.states) }}),

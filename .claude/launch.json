@@ -9,6 +9,14 @@
         "8766"
       ],
       "port": 8766
+    },
+    {
+      "name": "play",
+      "runtimeExecutable": "pssim/battlesim-play",
+      "runtimeArgs": [
+        "pssim/play_server.py"
+      ],
+      "port": 8765
     }
   ]
 }

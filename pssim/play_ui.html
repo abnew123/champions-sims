@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Play the planner</title>
+<style>
+:root{--bg:#f6f7f9;--fg:#1a1d21;--muted:#6b7280;--card:#fff;--line:#d9dde3;--me:#2563eb;--them:#dc2626;--hp:#22c55e;--hpmid:#eab308;--hplow:#ef4444;--sel:#dbeafe}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#111418;--fg:#e5e7eb;--muted:#9ca3af;--card:#1b1f25;--line:#30363d;--sel:#1e3a5f}}
+:root[data-theme=dark]{--bg:#111418;--fg:#e5e7eb;--muted:#9ca3af;--card:#1b1f25;--line:#30363d;--sel:#1e3a5f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.4 -apple-system,system-ui,sans-serif;padding:16px}
+h1{font-size:18px;margin:0 0 12px}h2{font-size:14px;margin:0 0 6px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.row{display:flex;gap:12px;flex-wrap:wrap}.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px;min-width:0}
+.mon{border:1px solid var(--line);border-radius:6px;padding:6px 8px;margin:4px 0;flex:1 1 240px}
+.mon .nm{font-weight:600}.mon .sub{color:var(--muted);font-size:12px}.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin:4px 0}
+.bar i{display:block;height:100%;background:var(--hp)}.bar.mid i{background:var(--hpmid)}.bar.low i{background:var(--hplow)}
+.tag{display:inline-block;border:1px solid var(--line);border-radius:4px;padding:0 5px;font-size:11px;margin-right:4px;color:var(--muted)}
+.tag.st{color:#fff;background:#7c3aed;border-color:#7c3aed}.tag.b{color:var(--fg)}
+button{font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--fg);cursor:pointer;margin:2px}
+button.on{background:var(--sel);border-color:var(--me)}button.go{background:var(--me);color:#fff;border-color:var(--me)}button:disabled{opacity:.5;cursor:default}
+select{font:inherit;padding:5px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--fg);max-width:100%}
+.log{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;max-height:70vh;overflow:auto;white-space:pre-wrap}
+.log .t{color:var(--muted);margin-top:6px;font-weight:600}.side0 .nm{color:var(--me)}.side1 .nm{color:var(--them)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:700px){.opts{grid-template-columns:1fr}}
+.opts .col button{display:block;width:100%;text-align:left}.field{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.pick button{min-width:120px}.hidden{display:none}#status{color:var(--muted);margin:6px 0}
+</style></head><body>
+<h1>Play the planner</h1>
+<div id="setup" class="card">
+  <div class="row">
+    <div><h2>Your six</h2><select id="mine"></select></div>
+    <div><h2>Opponent (ladder pool, 1250+)</h2><select id="theirs"></select> <button onclick="randomOpp()">random</button></div>
+  </div>
+  <div style="margin-top:10px"><h2>Bring four, in lead order (click 1, 2 = leads, 3, 4 = back)</h2><div id="pick" class="pick"></div><div id="picked" class="sub"></div></div>
+  <div style="margin-top:10px"><h2>The planner's four (its recorded bring: leads first)</h2><div id="theirfour" class="sub"></div></div>
+  <div style="margin-top:10px"><button class="go" id="startbtn" onclick="startGame()" disabled>Start</button></div>
+</div>
+<div id="game" class="hidden">
+  <div id="status"></div>
+  <div class="row">
+    <div class="card" style="flex:2 1 520px">
+      <div id="field" class="field"></div>
+      <div class="side1"><h2>Planner (side 1)</h2><div id="them" class="row"></div><div id="themb" class="sub"></div></div>
+      <div class="side0" style="margin-top:8px"><h2>You (side 0)</h2><div id="me" class="row"></div><div id="meb" class="sub"></div></div>
+      <div id="choice" style="margin-top:10px"></div>
+    </div>
+    <div class="card" style="flex:1 1 300px"><h2>What happened</h2><div id="log" class="log"></div></div>
+  </div>
+  <div style="margin-top:8px"><button onclick="location.reload()">New game</button></div>
+</div>
+<script>
+let T=null, order=[], my=null, opp=null, lastGame=0, lastKey='', sel=[null,null], busy=false;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const pretty=id=>id?id.replace(/([a-z])([A-Z])/g,'$1 $2'):'';
+async function load(){T=await (await fetch('/teams')).json();
+  const m=$('mine'); T.mine.forEach((t,i)=>m.add(new Option(t.name,'m'+i))); T.pool.forEach((t,i)=>m.add(new Option(`${t.arch||'?'} ${t.rating}: ${t.sets.map(s=>s.species).join(' / ')}`,'p'+i)));
+  const o=$('theirs'); T.pool.forEach((t,i)=>o.add(new Option(`${t.arch||'?'} ${t.rating}: ${t.sets.map(s=>s.species).join(' / ')}`,i)));
+  m.onchange=pickTeam; o.onchange=showOpp; pickTeam(); randomOpp();}
+function team(v){return v[0]==='m'?T.mine[+v.slice(1)]:T.pool[+v.slice(1)]}
+function pickTeam(){my=team($('mine').value); order=[]; const p=$('pick'); p.innerHTML='';
+  my.sets.forEach((s,i)=>{const b=document.createElement('button'); b.textContent=s.species; b.title=`${s.item} / ${s.ability} / ${s.nature}\n${s.moves.join(', ')}`; b.onclick=()=>{const k=order.indexOf(i); if(k>=0)order.splice(k,1); else if(order.length<4)order.push(i); draw();}; p.appendChild(b);}); draw();}
+function draw(){[...$('pick').children].forEach((b,i)=>{const k=order.indexOf(i); b.className=k>=0?'on':''; b.textContent=(k>=0?`${k+1}. `:'')+my.sets[i].species;});
+  $('picked').textContent=order.length?`lead ${order.slice(0,2).map(i=>my.sets[i].species).join(' + ')}${order.length>2?', back '+order.slice(2).map(i=>my.sets[i].species).join(' + '):''}`:''; $('startbtn').disabled=order.length!==4;}
+function randomOpp(){$('theirs').value=Math.floor(Math.random()*T.pool.length); showOpp();}
+function showOpp(){opp=T.pool[+$('theirs').value]; $('theirfour').innerHTML=opp.bring.map((sp,i)=>{const s=opp.sets.find(x=>x.species===sp)||{}; return `<div><b>${i+1}. ${esc(sp)}</b> <span class="sub">${esc(s.item||'')} / ${esc(s.ability||'')} / ${esc(s.nature||'')}: ${esc((s.moves||[]).join(', '))}</span></div>`;}).join('');}
+async function startGame(){const mine=order.map(i=>my.sets[i]); const theirs=opp.bring.map(sp=>opp.sets.find(x=>x.species===sp));
+  $('status').textContent='building the start position...'; $('setup').classList.add('hidden'); $('game').classList.remove('hidden');
+  const r=await (await fetch('/start',{method:'POST',body:JSON.stringify({mine,theirs})})).json(); if(!r.ok){$('status').textContent='error: '+r.error; return;} poll();}
+async function poll(){const r=await (await fetch('/state')).json(); if(r.error){$('status').textContent='error: '+r.error;}
+  const key=r.game+':'+(r.msg?r.msg.type+r.msg.turn+(r.msg.log_all||[]).length:'');
+  if(r.msg&&key!==lastKey){lastKey=key; render(r.msg);} if(r.waiting){$('status').textContent='the planner is thinking...'; setTimeout(poll,300);} else if(r.msg&&r.msg.type!=='end'){$('status').textContent=`turn ${r.msg.turn}: your move`;} }
+function hpbar(m){const f=m.maxhp?m.hp/m.maxhp:0; return `<div class="bar ${f<.25?'low':f<.5?'mid':''}"><i style="width:${Math.round(100*f)}%"></i></div>`;}
+const BOOST=['Atk','Def','SpA','SpD','Spe','Acc','Eva'];
+function monHtml(m,mine){if(!m)return '<div class="mon"><span class="sub">(empty)</span></div>';
+  const b=m.boosts.map((v,i)=>v?`<span class="tag b">${v>0?'+':''}${v} ${BOOST[i]}</span>`:'').join('');
+  const vol=(m.volatiles||[]).filter(v=>!['dynamax'].includes(v.id)).map(v=>`<span class="tag">${esc(v.id)}${v.turns!=null?' '+v.turns:''}</span>`).join('');
+  const mv=m.moves.map(x=>`<span class="tag ${x.disabled?'':'b'}">${esc(x.name)} ${x.pp}/${x.maxpp}</span>`).join('');
+  return `<div class="mon"><div class="nm">${esc(m.name)}${m.mega?' (Mega)':''} <span class="sub">${esc(m.types.join('/'))}</span> ${m.status?`<span class="tag st">${esc(m.status)}</span>`:''}</div>${hpbar(m)}<div class="sub">${m.hp}/${m.maxhp} (${Math.round(100*m.hp/Math.max(1,m.maxhp))}%) · ${esc(m.item||'no item')} · ${esc(m.ability)}</div><div>${b}${vol}</div><div>${mv}</div></div>`;}
+function sideHtml(s,mine){return s.active.map(m=>monHtml(m,mine)).join('');}
+function benchHtml(s){return 'bench: '+(s.bench.map(m=>`${esc(m.name)} ${Math.round(100*m.hp/Math.max(1,m.maxhp))}%${m.status?' '+m.status:''}`).join(', ')||'none')+(s.fainted.length?' · fainted: '+s.fainted.map(m=>esc(m.name)).join(', '):'');}
+function fieldHtml(st){const f=st.field; const t=[]; if(f.weather)t.push(`<span class="tag b">${pretty(f.weather)}${f.weather_turns!=null?' '+f.weather_turns:''}</span>`); if(f.terrain)t.push(`<span class="tag b">${pretty(f.terrain)}${f.terrain_turns!=null?' '+f.terrain_turns:''}</span>`);
+  f.pseudo.forEach(p=>t.push(`<span class="tag b">${esc(p.id)}${p.turns!=null?' '+p.turns:''}</span>`)); st.sides.forEach((s,i)=>s.conditions.forEach(c=>t.push(`<span class="tag b">${i?'their':'your'} ${esc(c.id)}${c.turns!=null?' '+c.turns:''}</span>`)));
+  return t.length?t.join(''):'<span class="sub">no field effects</span>';}
+function render(m){const st=m.state; $('field').innerHTML=fieldHtml(st); $('them').innerHTML=sideHtml(st.sides[1]); $('themb').innerHTML=benchHtml(st.sides[1]); $('me').innerHTML=sideHtml(st.sides[0]); $('meb').innerHTML=benchHtml(st.sides[0]);
+  renderLog(m.log_all||[]); sel=[null,null];
+  if(m.type==='end'){$('status').textContent=`game over after ${m.turn} turns: ${m.winner==='you'?'you win':m.winner==='the planner'?'the planner wins':m.winner}`; $('choice').innerHTML=''; return;}
+  const opts=m.options; if(m.type==='switch'){$('choice').innerHTML='<h2>Replacement</h2>'+opts.map(o=>`<button onclick="send(${o.i})">${esc(o.slots.filter(x=>x!=='pass').join(' | ')||'pass')}</button>`).join(''); return;}
+  const per=[0,1].map(k=>[...new Set(opts.map(o=>o.slots[k]))]);
+  $('choice').innerHTML='<h2>Your turn</h2><div class="opts">'+[0,1].map(k=>`<div class="col"><div class="sub">${esc(st.sides[0].active[k]?st.sides[0].active[k].name:'slot '+(k+1))}</div>${per[k].map(l=>`<button data-k="${k}" data-l="${esc(l)}" onclick="pick(${k},this)">${esc(l)}</button>`).join('')}</div>`).join('')+`</div><div style="margin-top:8px"><button class="go" id="go" onclick="submit()" disabled>Submit</button> <span id="why" class="sub"></span></div>`;
+  window._opts=opts; if(per[0].length===1)pick(0,$('choice').querySelector('button[data-k="0"]')); if(per[1].length===1)pick(1,$('choice').querySelector('button[data-k="1"]'));}
+function pick(k,btn){sel[k]=btn.dataset.l; [...$('choice').querySelectorAll(`button[data-k="${k}"]`)].forEach(b=>b.className=b===btn?'on':'');
+  const ok=[0,1].map(j=>[...$('choice').querySelectorAll(`button[data-k="${j}"]`)]); ok[1-k].forEach(b=>{b.disabled=!window._opts.some(o=>o.slots[k]===sel[k]&&o.slots[1-k]===b.dataset.l);});
+  const j=joint(); $('go').disabled=!j; $('why').textContent=sel[0]&&sel[1]&&!j?'that combination is not legal':'';}
+function joint(){if(sel[0]==null||sel[1]==null)return null; return window._opts.find(o=>o.slots[0]===sel[0]&&o.slots[1]===sel[1]);}
+async function submit(){const j=joint(); if(!j)return; send(j.i);}
+async function send(i){if(busy)return; busy=true; $('choice').innerHTML=''; await fetch('/choose',{method:'POST',body:JSON.stringify({i})}); busy=false; poll();}
+function who(s){const m=/^p([12])([ab]?): (.*)$/.exec(s||''); if(!m)return esc(s||''); return `<span class="${m[1]==='1'?'side0':'side1'}"><span class="nm">${esc(m[3])}</span></span>`;}
+function tr(line){const p=line.split('|').slice(1); const c=p[0]; const a=p.slice(1);
+  switch(c){case 'move':return `${who(a[0])} used ${esc(a[1])}${a[2]?' on '+who(a[2]):''}`; case '-damage':return `${who(a[0])} → ${esc(a[1])}${a[2]?' ('+esc(a[2].replace('[from] ',''))+')':''}`; case '-heal':return `${who(a[0])} healed to ${esc(a[1])}`;
+    case 'faint':return `${who(a[0])} fainted`; case 'switch':case 'drag':return `${who(a[0])} switched in`; case '-boost':return `${who(a[0])}: ${esc(a[1])} +${esc(a[2])}`; case '-unboost':return `${who(a[0])}: ${esc(a[1])} -${esc(a[2])}`;
+    case '-status':return `${who(a[0])} is now ${esc(a[1])}`; case '-curestatus':return `${who(a[0])} cured of ${esc(a[1])}`; case '-weather':return `weather: ${esc(a[0])}`; case '-fieldstart':return `field: ${esc(a[0])} starts`; case '-fieldend':return `field: ${esc(a[0])} ends`;
+    case '-sidestart':return `${esc(a[0])}: ${esc(a[1])} starts`; case '-sideend':return `${esc(a[0])}: ${esc(a[1])} ends`; case '-crit':return 'critical hit'; case '-supereffective':return 'super effective'; case '-resisted':return 'not very effective'; case '-immune':return `${who(a[0])} is immune`;
+    case '-miss':return `${who(a[0])} missed`; case '-fail':return `${who(a[0])}: failed`; case 'cant':return `${who(a[0])} can't move (${esc(a[1])})`; case '-activate':return `${who(a[0])}: ${esc(a[1])}`; case '-mega':return `${who(a[0])} Mega Evolved`; case '-ability':return `${who(a[0])}: ${esc(a[1])}`;
+    case '-item':return `${who(a[0])}: ${esc(a[1])}`; case '-enditem':return `${who(a[0])} used up ${esc(a[1])}`; case '-start':return `${who(a[0])}: ${esc(a[1])}`; case '-end':return `${who(a[0])}: ${esc(a[1])} ended`; case 'turn':return null; case 'upkeep':case '':return null;
+    case 'win':return `winner: ${esc(a[0])}`; case '-terastallize':return null; default:return `${esc(c)} ${a.map(x=>/^p[12][ab]?: /.test(x)?who(x):esc(x)).join(' ')}`;}}
+function renderLog(all){let out='',cur=null; for(const [t,l] of all){const s=tr(l); if(s===null)continue; if(t!==cur){cur=t; out+=`<div class="t">turn ${t}</div>`;} out+=`<div>${s}</div>`;} $('log').innerHTML=out||'<span class="sub">nothing yet</span>'; $('log').scrollTop=$('log').scrollHeight;}
+load();
+</script></body></html>

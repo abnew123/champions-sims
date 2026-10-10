@@ -271,6 +271,15 @@ logistic fit, 1.115 log-odds per Pokemon; `results/eval_unit.json`). So +1.0 is 
 equal changes in the odds (40% to 20% is -0.9, 40% to 60% is +0.7). The page shows it centred between the two win chances, above the turn counter, from Player 1's
 side (+ ahead, - behind, colored for the leader), and the graph switches between win chance and eval (-4 to +4).
 
+## Sheet names in brackets; a sheet entry the reader missed (2026-10-10)
+
+Sheets print forms in brackets: "FLOETTE (ETERNAL FLOWER)" (the first word gives Floette-Eternal), "ROTOM (HEAT)", besides "(FEMALE)" /
+"(MALE)". A Pokemon on the field that the sheet as read lacks (a misread panel) is added to the sheet with its most common set, and the
+"footage from elsewhere" rule (Pokemon on neither sheet) never counts a Pokemon on the field: a missed Floette used to close each game of
+a match after its first turn. The page's header is compact: games are labelled M<match> G<game> with the players on hover, a finished
+game says "N turns" (not "so far"), the sheets chip says whether the sheets were on stream, and the reader's status shows only for a game
+still being played.
+
 ## A match the broadcast shows no team sheets for (2026-10-10)
 
 The Louisville stream skipped the sheets for one feature match, and the reader used to wait for them ("waiting for both team sheets").

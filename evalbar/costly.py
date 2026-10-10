@@ -30,7 +30,8 @@ def build(name='day1', video='05UxX2Rd9u8'):
             steps.append({'turn': t, 'wp': round(s['wp'], 4), 'state': s['state'], 'events': s['events'], 'opt': s['opt'], 'hyp': s['hyp'], 'tables': tables,
                           'vt': next((d['vt'] for d in X[(gid, t)].values() if d.get('vt') is not None), None)})
         games[gid] = {'winner': win.get(gid), 'sheets': g['sheets'], 'steps': steps}
-    scen = [{**c, 'protect': ST.kind(c['played']) == 'Protect'} for c in costly]
+    scen = [{**c, 'protect': ST.kind(c['played']) == 'Protect', **{k: round(X[(c['game'], c['turn'])][c['side'] + '|' + c['mon']][k], 4) for k in ('v_top', 'v_played')}}
+            for c in costly]
     rf = os.path.join(C.HERE, 'out', 'reads', 'reads.json' if name == 'day1' else f'{name}_reads.json'); reads = {}
     if os.path.exists(rf):
         for r in json.load(open(rf)):

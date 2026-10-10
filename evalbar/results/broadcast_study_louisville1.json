@@ -1,0 +1,536 @@
+{
+ "source": "Louisville Regional 2027, VGC day 1 broadcast (YouTube live stream), read from the video, games from 1:15 pm on",
+ "games": 12,
+ "matches": 5,
+ "summary": {
+  "decisions": 282,
+  "top_pick": 0.49645390070921985,
+  "best_value": 0.42907801418439717,
+  "p_played": 0.4404134703131823,
+  "p_if_following_mix": 0.6084972901176136,
+  "chance": 0.1864530563998649,
+  "regret_mean": 0.022962785241543666,
+  "regret_median": 0.0006386663505245638,
+  "within_2pts": 0.7127659574468085,
+  "within_5pts": 0.8475177304964538
+ },
+ "by_kind": {
+  "attack": {
+   "players": 0.5851063829787234,
+   "planner": 0.6242639530906189
+  },
+  "Protect": {
+   "players": 0.14893617021276595,
+   "planner": 0.1171438298028035
+  },
+  "switch": {
+   "players": 0.09929078014184398,
+   "planner": 0.11104619229589106
+  },
+  "other status move": {
+   "players": 0.03900709219858156,
+   "planner": 0.043017870924045014
+  },
+  "Helping Hand": {
+   "players": 0.02127659574468085,
+   "planner": 0.029176935041420573
+  },
+  "Trick Room": {
+   "players": 0.01773049645390071,
+   "planner": 0.025672073602501105
+  },
+  "Rage Powder": {
+   "players": 0.02127659574468085,
+   "planner": 0.014044896212751951
+  },
+  "Follow Me": {
+   "players": 0.03546099290780142,
+   "planner": 0.01287132686270663
+  },
+  "Parting Shot": {
+   "players": 0.01773049645390071,
+   "planner": 0.0118461652885953
+  },
+  "Fake Out": {
+   "players": 0.014184397163120567,
+   "planner": 0.010554919070384727
+  },
+  "Wide Guard": {
+   "players": 0.0,
+   "planner": 0.00036183780828180797
+  }
+ },
+ "per_game": [
+  {
+   "game": "m1g1",
+   "turns": 8,
+   "decisions": 28,
+   "top_pick": 0.6071428571428571,
+   "regret_mean": 0.01338043869451871,
+   "regret_median": 0.0
+  },
+  {
+   "game": "m1g2",
+   "turns": 16,
+   "decisions": 43,
+   "top_pick": 0.4883720930232558,
+   "regret_mean": 0.025723985946839105,
+   "regret_median": 0.0008166584438525359
+  },
+  {
+   "game": "m2g1",
+   "turns": 11,
+   "decisions": 30,
+   "top_pick": 0.5,
+   "regret_mean": 0.023699111040646273,
+   "regret_median": 0.0003913741225264611
+  },
+  {
+   "game": "m2g2",
+   "turns": 5,
+   "decisions": 18,
+   "top_pick": 0.4444444444444444,
+   "regret_mean": 0.022955043514624008,
+   "regret_median": 0.00541539717633327
+  },
+  {
+   "game": "m3g1",
+   "turns": 6,
+   "decisions": 13,
+   "top_pick": 0.46153846153846156,
+   "regret_mean": 0.0011960410187926626,
+   "regret_median": 0.0
+  },
+  {
+   "game": "m3g2",
+   "turns": 7,
+   "decisions": 11,
+   "top_pick": 0.45454545454545453,
+   "regret_mean": 0.018800538259041013,
+   "regret_median": 0.0014505483117105422
+  },
+  {
+   "game": "m3g3",
+   "turns": 10,
+   "decisions": 25,
+   "top_pick": 0.52,
+   "regret_mean": 0.040806254371661674,
+   "regret_median": 0.0
+  },
+  {
+   "game": "m4g1",
+   "turns": 5,
+   "decisions": 17,
+   "top_pick": 0.6470588235294118,
+   "regret_mean": 0.016013078295207542,
+   "regret_median": 0.0
+  },
+  {
+   "game": "m4g2",
+   "turns": 6,
+   "decisions": 18,
+   "top_pick": 0.3888888888888889,
+   "regret_mean": 0.05124755957425282,
+   "regret_median": 0.023278755190495937
+  },
+  {
+   "game": "m4g3",
+   "turns": 8,
+   "decisions": 25,
+   "top_pick": 0.52,
+   "regret_mean": 0.021362613657118397,
+   "regret_median": 0.003042497170704317
+  },
+  {
+   "game": "m5g1",
+   "turns": 8,
+   "decisions": 29,
+   "top_pick": 0.41379310344827586,
+   "regret_mean": 0.01674750138189746,
+   "regret_median": 0.000587349384439901
+  },
+  {
+   "game": "m5g2",
+   "turns": 8,
+   "decisions": 25,
+   "top_pick": 0.48,
+   "regret_mean": 0.016545021849149,
+   "regret_median": 0.0007676846997438092
+  }
+ ],
+ "costly_plays_note": "plays the planner gave under 5% that cost over 5 win-chance points against its most likely action (cost = its value minus the played action's); video_s is the VOD time of the turn",
+ "costly_plays": [
+  {
+   "game": "m3g3",
+   "turn": 10,
+   "side": "p2",
+   "mon": "Garchomp",
+   "played": "Draco Meteor",
+   "planner_top": "Protect",
+   "p_played": 0.0013,
+   "cost": 0.242,
+   "video_s": 21159.0,
+   "side_won": false
+  },
+  {
+   "game": "m3g3",
+   "turn": 9,
+   "side": "p2",
+   "mon": "Garchomp",
+   "played": "Draco Meteor",
+   "planner_top": "Protect",
+   "p_played": 0.0017,
+   "cost": 0.235,
+   "video_s": 21131.0,
+   "side_won": false
+  },
+  {
+   "game": "m4g2",
+   "turn": 1,
+   "side": "p1",
+   "mon": "Blastoise",
+   "played": "Protect",
+   "planner_top": "Water Spout",
+   "p_played": 0.0004,
+   "cost": 0.205,
+   "video_s": 22833.5,
+   "side_won": false
+  },
+  {
+   "game": "m1g2",
+   "turn": 4,
+   "side": "p2",
+   "mon": "Grimmsnarl",
+   "played": "Parting Shot",
+   "planner_top": "Light Screen",
+   "p_played": 0.0007,
+   "cost": 0.197,
+   "video_s": 15407.5,
+   "side_won": true
+  },
+  {
+   "game": "m3g3",
+   "turn": 1,
+   "side": "p2",
+   "mon": "Sylveon",
+   "played": "Detect",
+   "planner_top": "Hyper Voice",
+   "p_played": 0.0012,
+   "cost": 0.186,
+   "video_s": 20707.0,
+   "side_won": false
+  },
+  {
+   "game": "m1g2",
+   "turn": 13,
+   "side": "p2",
+   "mon": "Archaludon",
+   "played": "Electro Shot",
+   "planner_top": "Dragon Pulse",
+   "p_played": 0.0006,
+   "cost": 0.172,
+   "video_s": 15996.5,
+   "side_won": true
+  },
+  {
+   "game": "m4g2",
+   "turn": 1,
+   "side": "p2",
+   "mon": "Alcremie",
+   "played": "Decorate",
+   "planner_top": "Dazzling Gleam",
+   "p_played": 0.0007,
+   "cost": 0.155,
+   "video_s": 22833.5,
+   "side_won": true
+  },
+  {
+   "game": "m2g1",
+   "turn": 7,
+   "side": "p2",
+   "mon": "Tyranitar",
+   "played": "Rock Slide",
+   "planner_top": "Protect",
+   "p_played": 0.0034,
+   "cost": 0.151,
+   "video_s": 18726.0,
+   "side_won": false
+  },
+  {
+   "game": "m5g1",
+   "turn": 2,
+   "side": "p2",
+   "mon": "Raichu",
+   "played": "Protect",
+   "planner_top": "Zap Cannon",
+   "p_played": 0.0004,
+   "cost": 0.148,
+   "video_s": 26192.0,
+   "side_won": false
+  },
+  {
+   "game": "m3g3",
+   "turn": 6,
+   "side": "p2",
+   "mon": "Garchomp",
+   "played": "Protect",
+   "planner_top": "Power Gem",
+   "p_played": 0.0005,
+   "cost": 0.128,
+   "video_s": 21024.0,
+   "side_won": false
+  },
+  {
+   "game": "m4g2",
+   "turn": 2,
+   "side": "p2",
+   "mon": "Farigiraf",
+   "played": "Protect",
+   "planner_top": "Hyper Voice",
+   "p_played": 0.0005,
+   "cost": 0.125,
+   "video_s": 22909.0,
+   "side_won": true
+  },
+  {
+   "game": "m1g1",
+   "turn": 6,
+   "side": "p2",
+   "mon": "Archaludon",
+   "played": "Protect",
+   "planner_top": "Snarl",
+   "p_played": 0.0005,
+   "cost": 0.124,
+   "video_s": 14927.5,
+   "side_won": true
+  },
+  {
+   "game": "m2g1",
+   "turn": 9,
+   "side": "p1",
+   "mon": "Golisopod",
+   "played": "Protect",
+   "planner_top": "Leech Life",
+   "p_played": 0.0006,
+   "cost": 0.123,
+   "video_s": 18777.5,
+   "side_won": true
+  },
+  {
+   "game": "m2g1",
+   "turn": 10,
+   "side": "p1",
+   "mon": "Golisopod",
+   "played": "Protect",
+   "planner_top": "Leech Life",
+   "p_played": 0.0006,
+   "cost": 0.123,
+   "video_s": 18810.0,
+   "side_won": true
+  },
+  {
+   "game": "m4g3",
+   "turn": 6,
+   "side": "p1",
+   "mon": "Maushold",
+   "played": "Feint",
+   "planner_top": "Protect",
+   "p_played": 0.0011,
+   "cost": 0.1,
+   "video_s": 23792.5,
+   "side_won": false
+  },
+  {
+   "game": "m1g2",
+   "turn": 14,
+   "side": "p2",
+   "mon": "Archaludon",
+   "played": "Protect",
+   "planner_top": "Dragon Pulse",
+   "p_played": 0.0006,
+   "cost": 0.099,
+   "video_s": 16053.0,
+   "side_won": true
+  },
+  {
+   "game": "m3g3",
+   "turn": 10,
+   "side": "p1",
+   "mon": "Basculegion",
+   "played": "Aqua Jet",
+   "planner_top": "Last Respects",
+   "p_played": 0.0008,
+   "cost": 0.099,
+   "video_s": 21159.0,
+   "side_won": true
+  },
+  {
+   "game": "m2g1",
+   "turn": 2,
+   "side": "p1",
+   "mon": "Golisopod",
+   "played": "Protect",
+   "planner_top": "Leech Life",
+   "p_played": 0.0158,
+   "cost": 0.097,
+   "video_s": 18293.0,
+   "side_won": true
+  },
+  {
+   "game": "m3g2",
+   "turn": 4,
+   "side": "p2",
+   "mon": "Garchomp",
+   "played": "Earth Power",
+   "planner_top": "Power Gem",
+   "p_played": 0.0035,
+   "cost": 0.095,
+   "video_s": 20520.0,
+   "side_won": true
+  },
+  {
+   "game": "m4g2",
+   "turn": 5,
+   "side": "p1",
+   "mon": "Maushold",
+   "played": "Follow Me",
+   "planner_top": "Population Bomb",
+   "p_played": 0.0004,
+   "cost": 0.078,
+   "video_s": 23155.5,
+   "side_won": false
+  },
+  {
+   "game": "m4g3",
+   "turn": 3,
+   "side": "p1",
+   "mon": "Indeedee-F",
+   "played": "Follow Me",
+   "planner_top": "switch to Talonflame",
+   "p_played": 0.0011,
+   "cost": 0.077,
+   "video_s": 23550.0,
+   "side_won": false
+  },
+  {
+   "game": "m5g2",
+   "turn": 1,
+   "side": "p1",
+   "mon": "Floette-Eternal",
+   "played": "Protect",
+   "planner_top": "Dazzling Gleam",
+   "p_played": 0.0011,
+   "cost": 0.075,
+   "video_s": 26797.5,
+   "side_won": true
+  },
+  {
+   "game": "m1g2",
+   "turn": 3,
+   "side": "p2",
+   "mon": "Grimmsnarl",
+   "played": "Spirit Break",
+   "planner_top": "Light Screen",
+   "p_played": 0.0464,
+   "cost": 0.073,
+   "video_s": 15333.0,
+   "side_won": true
+  },
+  {
+   "game": "m1g2",
+   "turn": 16,
+   "side": "p1",
+   "mon": "Arcanine-Hisui",
+   "played": "Flare Blitz",
+   "planner_top": "Protect",
+   "p_played": 0.0026,
+   "cost": 0.07,
+   "video_s": 16132.5,
+   "side_won": false
+  },
+  {
+   "game": "m2g2",
+   "turn": 1,
+   "side": "p1",
+   "mon": "Basculegion-F",
+   "played": "Protect",
+   "planner_top": "Muddy Water",
+   "p_played": 0.0079,
+   "cost": 0.068,
+   "video_s": 18963.0,
+   "side_won": true
+  },
+  {
+   "game": "m2g2",
+   "turn": 5,
+   "side": "p2",
+   "mon": "Indeedee-F",
+   "played": "Psychic",
+   "planner_top": "Protect",
+   "p_played": 0.0058,
+   "cost": 0.068,
+   "video_s": 19258.5,
+   "side_won": false
+  },
+  {
+   "game": "m5g2",
+   "turn": 5,
+   "side": "p2",
+   "mon": "Volcarona",
+   "played": "Rage Powder",
+   "planner_top": "Struggle Bug",
+   "p_played": 0.0114,
+   "cost": 0.064,
+   "video_s": 27076.0,
+   "side_won": false
+  },
+  {
+   "game": "m4g1",
+   "turn": 2,
+   "side": "p2",
+   "mon": "Kingambit",
+   "played": "Protect",
+   "planner_top": "Kowtow Cleave",
+   "p_played": 0.0021,
+   "cost": 0.063,
+   "video_s": 22350.0,
+   "side_won": false
+  },
+  {
+   "game": "m2g2",
+   "turn": 4,
+   "side": "p1",
+   "mon": "Golisopod",
+   "played": "Sucker Punch",
+   "planner_top": "Leech Life",
+   "p_played": 0.001,
+   "cost": 0.062,
+   "video_s": 19182.5,
+   "side_won": true
+  },
+  {
+   "game": "m1g2",
+   "turn": 14,
+   "side": "p1",
+   "mon": "Arcanine-Hisui",
+   "played": "Flare Blitz",
+   "planner_top": "Protect",
+   "p_played": 0.0014,
+   "cost": 0.058,
+   "video_s": 16053.0,
+   "side_won": false
+  },
+  {
+   "game": "m3g3",
+   "turn": 6,
+   "side": "p1",
+   "mon": "Charizard",
+   "played": "Weather Ball",
+   "planner_top": "Protect",
+   "p_played": 0.0015,
+   "cost": 0.058,
+   "video_s": 21024.0,
+   "side_won": true
+  }
+ ]
+}

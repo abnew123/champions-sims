@@ -175,7 +175,7 @@ class Reader:
     def new_game(s):
         s.out = []; s.games.append(s.out); s.meta.append({}); s.started = False; s.turn = 0; s.in_decision = False; s.ended = False
         s.active = {}; s.hp = {}; s.last_text = None; s.slot_free = {'p1': [], 'p2': []}; s.megas = {'p1': False, 'p2': False}
-        s.fainted = {'p1': set(), 'p2': set()}; s.open = None; s.cur = {}; s.changed = {}; s.foreign = 0; s.timed = {}; s.sent = []; s.forfeit = False; s.closed = False; s.poked = {'p1': set(), 'p2': set()}; s.lead_seen = False; s.pending = []; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False
+        s.fainted = {'p1': set(), 'p2': set()}; s.open = None; s.cur = {}; s.changed = {}; s.foreign = 0; s.timed = {}; s.sent = []; s.forfeit = False; s.closed = False; s.poked = {'p1': set(), 'p2': set()}; s.lead_seen = False; s.pending = []; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False; s.settle = []
     def team(s, sd): return s.sheets.get(sd, [])
     def species(s, sd, name):
         """an OCR'd Pokémon name on side sd -> the species on that side's sheet (Mega names map back to the base)"""
@@ -564,7 +564,12 @@ class Reader:
             s.close(); s.prev_end = s.frame - 120
             s.new_game(); s.lead_seen = True; s.frame -= 1; return s.feed(lines)   # this frame again, as the new game's first decision
         if decision and not s.in_decision:
+            # the HP bar slides in with the decision screen: its first frame can show a name over the next slot ("arizard 35%",
+            # "Basculegion" at the left box). Its boxes count once two frames in a row agree (or after four frames)
+            seen = {k: (s.species(k[0], n), p) for k, (n, p) in boxes.items()}; s.settle.append(seen)
+            if len(s.settle) < 4 and (len(s.settle) < 2 or s.settle[-2] != seen): return
             s.shut(); s.reconcile(boxes); s.expire(); s.turn = max(s.turn + 1, turn or 0); s.emit('|upkeep', '|', f'|turn|{s.turn}'); s.mark()   # upkeep: durations count down
+        if not decision: s.settle = []
         s.in_decision = decision
 
     def assign_sheets(s, boxes, board=None):

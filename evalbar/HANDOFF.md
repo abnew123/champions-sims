@@ -225,6 +225,19 @@ better than the planner's pick, with how far the opponent's mix would have to le
 as the pick against the actual play (6 of those needed a lean under 20%: plausible reads of a habit); the rest did not, most clearly the
 Protects the one-turn engine undervalues. Summary in `results/broadcast_reads_day1.json`.
 
+## Louisville day 1 (2026-10-10)
+
+The same study on the Louisville day 1 stream (12 games from 1:15 pm, read live; `study.py out/champions/louisville1.ocr.jsonl 3 14340`,
+`reads.py run 3 name=louisville1`): 282 decisions, players took the planner's top pick 50% (19% by chance; Frankfurt 45%), the planner put
+44% on what they played (61% if they had followed its mix), mean regret 2.3 points, median 0.1. Protect 14.9% played vs 11.7% planned; Follow
+Me 3.5% vs 1.3%. 31 costly plays (`results/broadcast_study_louisville1.json`); 4 did at least as well as the pick against the actual play
+(Frankfurt 11 of 39). Each costly turn was also evaluated at horizon 2 (EVAL_HORIZON=2, champ-battle-v23; `h2_cost` in
+`results/broadcast_reads_louisville1.json`): 16 of the 26 it could evaluate fall under 5 points there, 8 of them Protects, among them the top
+two (a lone Mega Garchomp's Draco Meteor instead of Protect: at horizon 2 the game was already lost whatever it did); 10 stay over 5. Horizon 2
+cannot evaluate a position with Decorate (it panics in dex.rs), and some of its values for unplayed options look wrong (Basculegion's Aqua
+Jet 48 points under Last Respects in a position Player 1 wins 99%), so it is a cross-check, not the score. Match 3 had no team sheets on
+stream: its sets are the common ones.
+
 ## The costly plays page (costly.py)
 
 `costly.py <out.html>` builds the page published as the "Day 1 Costly Plays" artifact (template `costly.tpl`: index of plays; per play the
@@ -279,7 +292,10 @@ misses: a lead's ability message still on screen at the first decision screen wa
 buffer is now kept across games), "rose sharply" / "harshly fell" were read as one stage (the pattern now tries the longer wording first),
 and three messages fell between the 2-a-second frames. The rules' misses: Psychic Terrain blocking a Prankster Parting Shot (the reader logs
 "is protected by the Psychic Terrain" as -activate) and terrain seeds (Psychic Seed +1 Sp. Def), both now rules. After the fixes: 3 flags
-left on Louisville (all frame misses), 29 on Frankfurt (was 45). The study (study.py), the costly plays page (costly.py) and the read
+left on Louisville (all frame misses), 20 on Frankfurt (was 45). The last 9 of those went with a fix to the decision screen: its HP bar
+slides in, so the first frame can show a name over the next slot (a Basculegion read into Charizard's slot with Charizard's 35%, which
+benched Charizard on the board). Its boxes now count once two frames in a row agree (or after four frames); that also drops the empty
+turns a one-frame flicker of "Trainers are choosing actions" used to add. The study (study.py), the costly plays page (costly.py) and the read
 analysis (reads.py) take the event's name now (name=louisville1; study.py <ocr> [threads] [t0] with the stream time of the first frame).
 
 ## Sheet names in brackets; a sheet entry the reader missed (2026-10-10)

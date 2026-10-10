@@ -1,0 +1,1491 @@
+[
+ {
+  "game": "m3g3",
+  "turn": 10,
+  "side": "p2",
+  "mon": "Garchomp",
+  "played": "Draco Meteor",
+  "planner_top": "Protect",
+  "p_played": 0.0013,
+  "cost": 0.242,
+  "video_s": 21159.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   null,
+   null
+  ],
+  "opp": [
+   [
+    "Charizard",
+    "Weather Ball"
+   ],
+   [
+    "Basculegion",
+    "Aqua Jet"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.0013560158410506195,
+  "ante_top": 0.24541083435608765,
+  "post_played": 0.0009647472562507309,
+  "post_top": 0.3432121580614079,
+  "post_best": 0.5609860533522146,
+  "mass_better": 0.0006250000000000026,
+  "post_best_action": "Power Gem",
+  "shift": 0.5930672450271598,
+  "lines": [
+   {
+    "line": "Charizard-Mega-Y: Protect + Basculegion: Aqua Jet -> Garchomp-Mega-Z",
+    "gain": 0.16706393908691275,
+    "mix": 0.00020833333333333421
+   },
+   {
+    "line": "Charizard-Mega-Y: Protect + Basculegion: Wave Crash -> Garchomp-Mega-Z",
+    "gain": 0.1641958000559176,
+    "mix": 0.00020833333333333421
+   },
+   {
+    "line": "Charizard-Mega-Y: Ancient Power -> Garchomp-Mega-Z + Basculegion: Aqua Jet -> Garchomp-Mega-Z",
+    "gain": 0.056053580362176336,
+    "mix": 0.00020833333333333421
+   }
+  ],
+  "h2_cost": 0.003,
+  "h2_top": "Power Gem"
+ },
+ {
+  "game": "m3g3",
+  "turn": 9,
+  "side": "p2",
+  "mon": "Garchomp",
+  "played": "Draco Meteor",
+  "planner_top": "Protect",
+  "p_played": 0.0017,
+  "cost": 0.235,
+  "video_s": 21131.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   null,
+   null
+  ],
+  "opp": [
+   [
+    "Charizard",
+    "Weather Ball"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.006249636430435884,
+  "ante_top": 0.27874618080279673,
+  "post_played": 0.0014953353505262673,
+  "post_top": 0.27849144657682434,
+  "post_best": 0.27849144657682434,
+  "mass_better": 0.001718750000000003,
+  "post_best_action": "Protect",
+  "shift": 0.5960361650263994,
+  "lines": [
+   {
+    "line": "Charizard-Mega-Y: Protect + Basculegion: Wave Crash -> Garchomp-Mega-Z",
+    "gain": 0.1797640073048763,
+    "mix": 0.00015625000000000027
+   },
+   {
+    "line": "Charizard-Mega-Y: Protect + Basculegion: Aqua Jet -> Garchomp-Mega-Z",
+    "gain": 0.15799477961444053,
+    "mix": 0.00015625000000000027
+   },
+   {
+    "line": "Charizard-Mega-Y: Protect + Basculegion: Flip Turn -> Garchomp-Mega-Z",
+    "gain": 0.15179349601312586,
+    "mix": 0.00015625000000000027
+   },
+   {
+    "line": "Charizard-Mega-Y: Ancient Power -> Garchomp-Mega-Z + Basculegion: Wave Crash -> Garchomp-Mega-Z",
+    "gain": 0.10622517831401912,
+    "mix": 0.00015625000000000027
+   },
+   {
+    "line": "Charizard-Mega-Y: Ancient Power -> Garchomp-Mega-Z + Basculegion: Aqua Jet -> Garchomp-Mega-Z",
+    "gain": 0.08640862748967393,
+    "mix": 0.00015625000000000027
+   }
+  ],
+  "h2_cost": 0.006,
+  "h2_top": "Protect"
+ },
+ {
+  "game": "m4g2",
+  "turn": 1,
+  "side": "p1",
+  "mon": "Blastoise",
+  "played": "Protect",
+  "planner_top": "Water Spout",
+  "p_played": 0.0004,
+  "cost": 0.205,
+  "video_s": 22833.5,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 9,
+  "partner": [
+   "Indeedee-F",
+   "Imprison"
+  ],
+  "opp": [
+   [
+    "Farigiraf",
+    "Hyper Voice"
+   ],
+   [
+    "Alcremie",
+    "Decorate"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.32790854678274156,
+  "ante_top": 0.5229750992896587,
+  "post_played": 0.48369746718188744,
+  "post_top": 0.742375748335697,
+  "post_best": 0.742375748335697,
+  "mass_better": 0.0,
+  "post_best_action": "Water Spout",
+  "shift": null,
+  "lines": [],
+  "h2_cost": null,
+  "h2_top": null
+ },
+ {
+  "game": "m1g2",
+  "turn": 4,
+  "side": "p2",
+  "mon": "Grimmsnarl",
+  "played": "Parting Shot",
+  "planner_top": "Light Screen",
+  "p_played": 0.0007,
+  "cost": 0.197,
+  "video_s": 15407.5,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   null,
+   null
+  ],
+  "opp": [
+   [
+    "Gardevoir",
+    "Hyper Voice"
+   ],
+   [
+    "Arcanine-Hisui",
+    "Head Smash"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.3595128362420131,
+  "ante_top": 0.6281317724802917,
+  "post_played": 0.38087751113048673,
+  "post_top": 0.5902191258483679,
+  "post_best": 0.5902191258483679,
+  "mass_better": 0.0,
+  "post_best_action": "Light Screen",
+  "shift": null,
+  "lines": [],
+  "h2_cost": 0.185,
+  "h2_top": "Light Screen"
+ },
+ {
+  "game": "m3g3",
+  "turn": 1,
+  "side": "p2",
+  "mon": "Sylveon",
+  "played": "Detect",
+  "planner_top": "Hyper Voice",
+  "p_played": 0.0012,
+  "cost": 0.186,
+  "video_s": 20707.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Farigiraf",
+   "Trick Room"
+  ],
+  "opp": [
+   [
+    "Charizard",
+    "Weather Ball"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.3278474454007851,
+  "ante_top": 0.4992326165622853,
+  "post_played": 0.45270340736742676,
+  "post_top": 0.545873302608598,
+  "post_best": 0.5466243904542092,
+  "mass_better": 0.0,
+  "post_best_action": "Hyper Voice",
+  "shift": null,
+  "lines": [],
+  "h2_cost": 0.333,
+  "h2_top": "Hyper Voice"
+ },
+ {
+  "game": "m1g2",
+  "turn": 13,
+  "side": "p2",
+  "mon": "Archaludon",
+  "played": "Electro Shot",
+  "planner_top": "Dragon Pulse",
+  "p_played": 0.0006,
+  "cost": 0.172,
+  "video_s": 15996.5,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   null,
+   null
+  ],
+  "opp": [
+   [
+    "Arcanine-Hisui",
+    "Protect"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.3639781514771388,
+  "ante_top": 0.5355148126118439,
+  "post_played": 0.5707663263135525,
+  "post_top": 0.5707663263135525,
+  "post_best": 0.5707663263135525,
+  "mass_better": 0.0,
+  "post_best_action": "Dragon Pulse",
+  "shift": null,
+  "lines": [],
+  "h2_cost": 0.122,
+  "h2_top": "Protect"
+ },
+ {
+  "game": "m4g2",
+  "turn": 1,
+  "side": "p2",
+  "mon": "Alcremie",
+  "played": "Decorate",
+  "planner_top": "Dazzling Gleam",
+  "p_played": 0.0007,
+  "cost": 0.155,
+  "video_s": 22833.5,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 9,
+  "partner": [
+   "Farigiraf",
+   "Hyper Voice"
+  ],
+  "opp": [
+   [
+    "Indeedee-F",
+    "Imprison"
+   ],
+   [
+    "Blastoise",
+    "Protect"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.2506128521755969,
+  "ante_top": 0.41822571536799497,
+  "post_played": 0.5313934569991017,
+  "post_top": 0.655975101417369,
+  "post_best": 0.7272150561397909,
+  "mass_better": 0.0,
+  "post_best_action": "switch to Venusaur",
+  "shift": null,
+  "lines": [],
+  "h2_cost": null,
+  "h2_top": null
+ },
+ {
+  "game": "m2g1",
+  "turn": 7,
+  "side": "p2",
+  "mon": "Tyranitar",
+  "played": "Rock Slide",
+  "planner_top": "Protect",
+  "p_played": 0.0034,
+  "cost": 0.151,
+  "video_s": 18726.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   null,
+   null
+  ],
+  "opp": [
+   [
+    "Golisopod",
+    "Leech Life"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.3837156340341734,
+  "ante_top": 0.5343168145251889,
+  "post_played": 0.3831782746554927,
+  "post_top": 0.5343168145251889,
+  "post_best": 0.5343168145251889,
+  "mass_better": 0.001966662799998422,
+  "post_best_action": "Protect",
+  "shift": 0.4646747587381181,
+  "lines": [
+   {
+    "line": "Golisopod-Mega: Sucker Punch -> Tyranitar-Mega",
+    "gain": 0.172961656362162,
+    "mix": 0.000625
+   },
+   {
+    "line": "Golisopod-Mega: Protect",
+    "gain": 0.16754892161576362,
+    "mix": 0.000625
+   },
+   {
+    "line": "Golisopod-Mega: Iron Head -> Tyranitar-Mega",
+    "gain": 0.03809563359056356,
+    "mix": 0.0007166627999984222
+   }
+  ],
+  "h2_cost": 0.0,
+  "h2_top": "Rock Slide"
+ },
+ {
+  "game": "m5g1",
+  "turn": 2,
+  "side": "p2",
+  "mon": "Raichu",
+  "played": "Protect",
+  "planner_top": "Zap Cannon",
+  "p_played": 0.0004,
+  "cost": 0.148,
+  "video_s": 26192.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 9,
+  "partner": [
+   "Volcarona",
+   "Struggle Bug"
+  ],
+  "opp": [
+   [
+    "Floette-Eternal",
+    "Protect"
+   ],
+   [
+    "Incineroar",
+    "Parting Shot"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.3023319077691575,
+  "ante_top": 0.47515971920744493,
+  "post_played": 0.32766319122630955,
+  "post_top": 0.5781858081464233,
+  "post_best": 0.5986320829046256,
+  "mass_better": 5.691585429144364e-06,
+  "post_best_action": "Zap Cannon",
+  "shift": null,
+  "lines": [
+   {
+    "line": "Floette-Mega: switch to Sinistcha + Incineroar: Parting Shot -> Raichu-Mega-Y",
+    "gain": 0.010687171577266397,
+    "mix": 4.629629629629633e-05
+   }
+  ],
+  "h2_cost": -0.001,
+  "h2_top": "Zap Cannon"
+ },
+ {
+  "game": "m3g3",
+  "turn": 6,
+  "side": "p2",
+  "mon": "Garchomp",
+  "played": "Protect",
+  "planner_top": "Power Gem",
+  "p_played": 0.0005,
+  "cost": 0.128,
+  "video_s": 21024.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 2,
+  "partner": [
+   "Sylveon",
+   "Hyper Voice"
+  ],
+  "opp": [
+   [
+    "Garchomp",
+    "Protect"
+   ],
+   [
+    "Charizard",
+    "Weather Ball"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.3746364171290746,
+  "ante_top": 0.5215241354944931,
+  "post_played": 0.3621066235771384,
+  "post_top": 0.6631494263607628,
+  "post_best": 0.6631494263607628,
+  "mass_better": 0.05093456511672622,
+  "post_best_action": "Power Gem",
+  "shift": 0.6852172521912118,
+  "lines": [
+   {
+    "line": "Garchomp: Power Gem -> Garchomp + Charizard-Mega-Y: Protect",
+    "gain": 0.04113881272337139,
+    "mix": 0.05093456511672622
+   }
+  ],
+  "h2_cost": 0.031,
+  "h2_top": "Power Gem"
+ },
+ {
+  "game": "m4g2",
+  "turn": 2,
+  "side": "p2",
+  "mon": "Farigiraf",
+  "played": "Protect",
+  "planner_top": "Hyper Voice",
+  "p_played": 0.0005,
+  "cost": 0.125,
+  "video_s": 22909.0,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 9,
+  "partner": [
+   "Alcremie",
+   "Mystical Fire"
+  ],
+  "opp": [
+   [
+    "Indeedee-F",
+    "Helping Hand"
+   ],
+   [
+    "Blastoise",
+    "Water Spout"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.6584545221691167,
+  "ante_top": 0.807132290763061,
+  "post_played": 0.6656430511517497,
+  "post_top": 0.8163848626861069,
+  "post_best": 0.817548701908233,
+  "mass_better": 0.0,
+  "post_best_action": "Hyper Voice",
+  "shift": null,
+  "lines": [],
+  "h2_cost": null,
+  "h2_top": null
+ },
+ {
+  "game": "m1g1",
+  "turn": 6,
+  "side": "p2",
+  "mon": "Archaludon",
+  "played": "Protect",
+  "planner_top": "Snarl",
+  "p_played": 0.0005,
+  "cost": 0.124,
+  "video_s": 14927.5,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   null,
+   null
+  ],
+  "opp": [
+   [
+    "Gardevoir",
+    "Hyper Voice"
+   ],
+   [
+    "Indeedee-F",
+    "Follow Me"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.601718563303209,
+  "ante_top": 0.7259310978703086,
+  "post_played": 0.6010592873390329,
+  "post_top": 0.7585073364662499,
+  "post_best": 0.7898841459493469,
+  "mass_better": 0.0,
+  "post_best_action": "Electro Shot",
+  "shift": null,
+  "lines": [],
+  "h2_cost": 0.0,
+  "h2_top": "Protect"
+ },
+ {
+  "game": "m2g1",
+  "turn": 9,
+  "side": "p1",
+  "mon": "Golisopod",
+  "played": "Protect",
+  "planner_top": "Leech Life",
+  "p_played": 0.0006,
+  "cost": 0.123,
+  "video_s": 18777.5,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   null,
+   null
+  ],
+  "opp": [
+   [
+    "Tyranitar",
+    "Protect"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.7771536843100542,
+  "ante_top": 0.9002226295165506,
+  "post_played": 0.7896071448938077,
+  "post_top": 0.9135358689736228,
+  "post_best": 0.9135358689736228,
+  "mass_better": 0.0,
+  "post_best_action": "Iron Head",
+  "shift": null,
+  "lines": [],
+  "h2_cost": 0.104,
+  "h2_top": "Leech Life"
+ },
+ {
+  "game": "m2g1",
+  "turn": 10,
+  "side": "p1",
+  "mon": "Golisopod",
+  "played": "Protect",
+  "planner_top": "Leech Life",
+  "p_played": 0.0006,
+  "cost": 0.123,
+  "video_s": 18810.0,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   null,
+   null
+  ],
+  "opp": [
+   [
+    "Tyranitar",
+    "Protect"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.7771878975956581,
+  "ante_top": 0.9001541843146053,
+  "post_played": 0.7896071448938077,
+  "post_top": 0.9135358689736228,
+  "post_best": 0.9135358689736228,
+  "mass_better": 0.0,
+  "post_best_action": "Iron Head",
+  "shift": null,
+  "lines": [],
+  "h2_cost": 0.104,
+  "h2_top": "Leech Life"
+ },
+ {
+  "game": "m4g3",
+  "turn": 6,
+  "side": "p1",
+  "mon": "Maushold",
+  "played": "Feint",
+  "planner_top": "Protect",
+  "p_played": 0.0011,
+  "cost": 0.1,
+  "video_s": 23792.5,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   "Delphox",
+   "Heat Wave"
+  ],
+  "opp": [
+   [
+    "Garchomp",
+    "Protect"
+   ],
+   [
+    "Farigiraf",
+    "Hyper Voice"
+   ]
+  ],
+  "exact": false,
+  "ante_played": 0.32371069971799077,
+  "ante_top": 0.4034250745533494,
+  "post_played": 0.3062864212575759,
+  "post_top": 0.3714429669003227,
+  "post_best": 0.783444729926735,
+  "mass_better": 0.3424239647396485,
+  "post_best_action": "Population Bomb",
+  "shift": 0.08137171033773574,
+  "lines": [
+   {
+    "line": "Garchomp-Mega-Z: Power Gem -> Delphox-Mega + Farigiraf: switch to Alcremie",
+    "gain": 0.6777118992110382,
+    "mix": 0.0455711490995232
+   },
+   {
+    "line": "Garchomp-Mega-Z: Draco Meteor -> Delphox-Mega + Farigiraf: switch to Alcremie",
+    "gain": 0.442830580087022,
+    "mix": 0.00012828062306961477
+   },
+   {
+    "line": "Garchomp-Mega-Z: Protect + Farigiraf: switch to Alcremie",
+    "gain": 0.19585786976211972,
+    "mix": 5.319148936170214e-05
+   },
+   {
+    "line": "Garchomp-Mega-Z: Draco Meteor -> Maushold + Farigiraf: switch to Alcremie",
+    "gain": 0.09318939400659931,
+    "mix": 0.00014313717062108122
+   },
+   {
+    "line": "Garchomp-Mega-Z: Power Gem -> Maushold + Farigiraf: switch to Alcremie",
+    "gain": 0.09318939400659931,
+    "mix": 5.319148936170214e-05
+   }
+  ],
+  "h2_cost": null,
+  "h2_top": null
+ },
+ {
+  "game": "m1g2",
+  "turn": 14,
+  "side": "p2",
+  "mon": "Archaludon",
+  "played": "Protect",
+  "planner_top": "Dragon Pulse",
+  "p_played": 0.0006,
+  "cost": 0.099,
+  "video_s": 16053.0,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   null,
+   null
+  ],
+  "opp": [
+   [
+    "Arcanine-Hisui",
+    "Flare Blitz"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.6133317497657953,
+  "ante_top": 0.7124799990535161,
+  "post_played": 0.5825128376017301,
+  "post_top": 0.7705634710652558,
+  "post_best": 0.7705634710652558,
+  "mass_better": 0.0,
+  "post_best_action": "Dragon Pulse",
+  "shift": null,
+  "lines": [],
+  "h2_cost": 0.0,
+  "h2_top": "Protect"
+ },
+ {
+  "game": "m3g3",
+  "turn": 10,
+  "side": "p1",
+  "mon": "Basculegion",
+  "played": "Aqua Jet",
+  "planner_top": "Last Respects",
+  "p_played": 0.0008,
+  "cost": 0.099,
+  "video_s": 21159.0,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   "Charizard",
+   "Weather Ball"
+  ],
+  "opp": [
+   [
+    "Garchomp",
+    "Draco Meteor"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.656588460266831,
+  "ante_top": 0.756018947273636,
+  "post_played": 0.9990352527437493,
+  "post_top": 0.9990352527437493,
+  "post_best": 0.9990352527437493,
+  "mass_better": 0.0,
+  "post_best_action": "Aqua Jet",
+  "shift": null,
+  "lines": [],
+  "h2_cost": 0.484,
+  "h2_top": "Last Respects"
+ },
+ {
+  "game": "m2g1",
+  "turn": 2,
+  "side": "p1",
+  "mon": "Golisopod",
+  "played": "Protect",
+  "planner_top": "Leech Life",
+  "p_played": 0.0158,
+  "cost": 0.097,
+  "video_s": 18293.0,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 9,
+  "partner": [
+   "Sneasler",
+   "Close Combat"
+  ],
+  "opp": [
+   [
+    "Sneasler",
+    "Close Combat"
+   ],
+   [
+    "Indeedee-F",
+    "Helping Hand"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.3382308771259518,
+  "ante_top": 0.4819266190199459,
+  "post_played": 0.46728941593613393,
+  "post_top": 0.5122663306009698,
+  "post_best": 0.5173416697052422,
+  "mass_better": 0.08021773392255366,
+  "post_best_action": "Leech Life",
+  "shift": null,
+  "lines": [
+   {
+    "line": "Sneasler: Close Combat -> Golisopod + Indeedee-F: Follow Me",
+    "gain": 0.08553252087193171,
+    "mix": 0.000555336038396608
+   },
+   {
+    "line": "Sneasler: Close Combat -> Golisopod + Indeedee-F: Helping Hand -> ally",
+    "gain": 0.029671435965056312,
+    "mix": 0.4668728937876843
+   },
+   {
+    "line": "Sneasler: Throat Chop -> Golisopod + Indeedee-F: Follow Me",
+    "gain": 0.001057901990156096,
+    "mix": 4.098360655737706e-05
+   }
+  ],
+  "h2_cost": 0.028,
+  "h2_top": "Leech Life"
+ },
+ {
+  "game": "m3g2",
+  "turn": 4,
+  "side": "p2",
+  "mon": "Garchomp",
+  "played": "Earth Power",
+  "planner_top": "Power Gem",
+  "p_played": 0.0035,
+  "cost": 0.095,
+  "video_s": 20520.0,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   null,
+   null
+  ],
+  "opp": [
+   [
+    "Basculegion",
+    "Last Respects"
+   ],
+   [
+    "Charizard",
+    "switch to Kingambit"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.44694737032065285,
+  "ante_top": 0.5951964517579524,
+  "post_played": 0.5408129142656999,
+  "post_top": 0.5594694789805397,
+  "post_best": 0.5667082032925026,
+  "mass_better": 0.16614058287256997,
+  "post_best_action": "Dragon Pulse",
+  "shift": 0.20110245223088186,
+  "lines": [
+   {
+    "line": "Basculegion: Flip Turn -> Garchomp + Charizard-Mega-Y: Protect",
+    "gain": 0.12244716718651438,
+    "mix": 4.032258064516126e-05
+   },
+   {
+    "line": "Basculegion: switch to Kingambit + Charizard-Mega-Y: Protect",
+    "gain": 0.11380812978208865,
+    "mix": 4.032258064516126e-05
+   },
+   {
+    "line": "Basculegion: Last Respects -> Garchomp + Charizard-Mega-Y: Protect",
+    "gain": 0.09139896714499673,
+    "mix": 0.1376326136719907
+   },
+   {
+    "line": "Basculegion: Flip Turn -> Sylveon + Charizard-Mega-Y: Protect",
+    "gain": 0.06168894914020496,
+    "mix": 4.032258064516126e-05
+   },
+   {
+    "line": "Basculegion: Last Respects -> Garchomp + Charizard-Mega-Y: switch to Kingambit",
+    "gain": 0.04840716142209134,
+    "mix": 0.027381690821602588
+   }
+  ],
+  "h2_cost": 0.094,
+  "h2_top": "Power Gem"
+ },
+ {
+  "game": "m4g2",
+  "turn": 5,
+  "side": "p1",
+  "mon": "Maushold",
+  "played": "Follow Me",
+  "planner_top": "Population Bomb",
+  "p_played": 0.0004,
+  "cost": 0.078,
+  "video_s": 23155.5,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Kommo-o",
+   "Clangorous Soul"
+  ],
+  "opp": [
+   [
+    "Farigiraf",
+    "Trick Room"
+   ],
+   [
+    "Garchomp",
+    "Draco Meteor"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.04484848732126461,
+  "ante_top": 0.16023780848531222,
+  "post_played": 0.025770257504388893,
+  "post_top": 0.16168703836233234,
+  "post_best": 0.16168703836233234,
+  "mass_better": 0.0,
+  "post_best_action": "Population Bomb",
+  "shift": null,
+  "lines": [],
+  "h2_cost": 0.07,
+  "h2_top": "Protect"
+ },
+ {
+  "game": "m4g3",
+  "turn": 3,
+  "side": "p1",
+  "mon": "Indeedee-F",
+  "played": "Follow Me",
+  "planner_top": "switch to Talonflame",
+  "p_played": 0.0011,
+  "cost": 0.077,
+  "video_s": 23550.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Delphox",
+   "Nasty Plot"
+  ],
+  "opp": [
+   [
+    "Alcremie",
+    "switch to Kingambit"
+   ],
+   [
+    "Farigiraf",
+    "Hyper Voice"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.2572716095050508,
+  "ante_top": 0.3404620071908649,
+  "post_played": 0.24662089710599894,
+  "post_top": 0.4251052513957527,
+  "post_best": 0.4578710530870494,
+  "mass_better": 0.11703514306123593,
+  "post_best_action": "switch to Kommo-o",
+  "shift": 0.5045977723757629,
+  "lines": [
+   {
+    "line": "Alcremie: Helping Hand -> ally + Farigiraf: switch to Garchomp",
+    "gain": 0.10797631635820272,
+    "mix": 4.629629629629629e-05
+   },
+   {
+    "line": "Alcremie: Decorate -> Indeedee-F + Farigiraf: switch to Garchomp",
+    "gain": 0.10795410856950305,
+    "mix": 4.629629629629629e-05
+   },
+   {
+    "line": "Alcremie: switch to Garchomp + Farigiraf: Psychic -> Indeedee-F",
+    "gain": 0.07519917412122468,
+    "mix": 0.00021459673487278356
+   },
+   {
+    "line": "Alcremie: switch to Kingambit + Farigiraf: switch to Garchomp",
+    "gain": 0.04870330635936204,
+    "mix": 7.691676579557954e-05
+   },
+   {
+    "line": "Alcremie: switch to Garchomp + Farigiraf: switch to Kingambit",
+    "gain": 0.04870330635936204,
+    "mix": 7.350040561556876e-05
+   }
+  ],
+  "h2_cost": null,
+  "h2_top": null
+ },
+ {
+  "game": "m5g2",
+  "turn": 1,
+  "side": "p1",
+  "mon": "Floette-Eternal",
+  "played": "Protect",
+  "planner_top": "Dazzling Gleam",
+  "p_played": 0.0011,
+  "cost": 0.075,
+  "video_s": 26797.5,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 9,
+  "partner": [
+   "Incineroar",
+   "switch to Sinistcha"
+  ],
+  "opp": [
+   [
+    "Basculegion",
+    "Flip Turn"
+   ],
+   [
+    "Raichu",
+    "Fake Out"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.437543752118508,
+  "ante_top": 0.526467768786157,
+  "post_played": 0.3655170070314854,
+  "post_top": 0.43867955858410246,
+  "post_best": 0.44027271550208485,
+  "mass_better": 0.198928174477605,
+  "post_best_action": "Calm Mind",
+  "shift": 0.13685158840931005,
+  "lines": [
+   {
+    "line": "Basculegion: Flip Turn -> Floette-Eternal + Raichu: Zap Cannon -> Floette-Eternal (Mega)",
+    "gain": 0.2982166653396912,
+    "mix": 0.02070232962082797
+   },
+   {
+    "line": "Basculegion: Flip Turn -> Floette-Eternal + Raichu: Fake Out -> Floette-Eternal (Mega)",
+    "gain": 0.20390011235767558,
+    "mix": 0.033661589202778286
+   },
+   {
+    "line": "Basculegion: Wave Crash -> Floette-Eternal + Raichu: Fake Out -> Floette-Eternal (Mega)",
+    "gain": 0.155156046221084,
+    "mix": 0.11445376982641121
+   },
+   {
+    "line": "Basculegion: Wave Crash -> Floette-Eternal + Raichu: Zap Cannon -> Floette-Eternal (Mega)",
+    "gain": 0.13216771379220416,
+    "mix": 0.02839881689844021
+   },
+   {
+    "line": "Basculegion: switch to Volcarona + Raichu: Zap Cannon -> Floette-Eternal (Mega)",
+    "gain": 0.09912640223129107,
+    "mix": 9.42775573412279e-05
+   }
+  ],
+  "h2_cost": 0.012,
+  "h2_top": "Moonblast"
+ },
+ {
+  "game": "m1g2",
+  "turn": 3,
+  "side": "p2",
+  "mon": "Grimmsnarl",
+  "played": "Spirit Break",
+  "planner_top": "Light Screen",
+  "p_played": 0.0464,
+  "cost": 0.073,
+  "video_s": 15333.0,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Politoed",
+   "Protect"
+  ],
+  "opp": [
+   [
+    "Indeedee-F",
+    "switch to Gardevoir"
+   ],
+   [
+    "Sneasler",
+    "Close Combat"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.5840830203077771,
+  "ante_top": 0.6806737392117702,
+  "post_played": 0.5889956338248712,
+  "post_top": 0.7354543342539863,
+  "post_best": 0.7354543342539863,
+  "mass_better": 0.0,
+  "post_best_action": "Light Screen",
+  "shift": null,
+  "lines": [],
+  "h2_cost": 0.035,
+  "h2_top": "Light Screen"
+ },
+ {
+  "game": "m1g2",
+  "turn": 16,
+  "side": "p1",
+  "mon": "Arcanine-Hisui",
+  "played": "Flare Blitz",
+  "planner_top": "Protect",
+  "p_played": 0.0026,
+  "cost": 0.07,
+  "video_s": 16132.5,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   null,
+   null
+  ],
+  "opp": [
+   [
+    "Archaludon",
+    "Dragon Pulse"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.12330052889727522,
+  "ante_top": 0.1937832444009746,
+  "post_played": 0.11493155114937632,
+  "post_top": 0.1937832444009746,
+  "post_best": 0.1937832444009746,
+  "mass_better": 0.001250000000000003,
+  "post_best_action": "Protect",
+  "shift": 0.3272889683797658,
+  "lines": [
+   {
+    "line": "Archaludon: Protect",
+    "gain": 0.1365014726452602,
+    "mix": 0.0006250000000000015
+   },
+   {
+    "line": "Archaludon: Electro Shot -> Arcanine-Hisui",
+    "gain": 0.1250059789827208,
+    "mix": 0.0006250000000000015
+   }
+  ],
+  "h2_cost": 0.113,
+  "h2_top": "Rock Slide"
+ },
+ {
+  "game": "m2g2",
+  "turn": 1,
+  "side": "p1",
+  "mon": "Basculegion-F",
+  "played": "Protect",
+  "planner_top": "Muddy Water",
+  "p_played": 0.0079,
+  "cost": 0.068,
+  "video_s": 18963.0,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 9,
+  "partner": [
+   "Golisopod",
+   "Leech Life"
+  ],
+  "opp": [
+   [
+    "Tyranitar",
+    "Protect"
+   ],
+   [
+    "Excadrill",
+    "Earthquake"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.54240257896709,
+  "ante_top": 0.613476553819046,
+  "post_played": 0.6482099522159401,
+  "post_top": 0.7821267916252478,
+  "post_best": 0.7821267916252478,
+  "mass_better": 0.1215910546627189,
+  "post_best_action": "Muddy Water",
+  "shift": 0.4017276751926253,
+  "lines": [
+   {
+    "line": "Tyranitar: Knock Off -> Basculegion-F (Mega) + Excadrill: Protect",
+    "gain": 0.09612374058783037,
+    "mix": 0.23266305442033686
+   },
+   {
+    "line": "Tyranitar: Knock Off -> Basculegion-F (Mega) + Excadrill: switch to Indeedee-F",
+    "gain": 0.09453126566692345,
+    "mix": 0.015878014069747867
+   },
+   {
+    "line": "Tyranitar: Knock Off -> Basculegion-F (Mega) + Excadrill: switch to Sneasler",
+    "gain": 0.06692264594551585,
+    "mix": 0.030575677387194654
+   },
+   {
+    "line": "Tyranitar: Knock Off -> Basculegion-F (Mega) + Excadrill: switch to Sceptile",
+    "gain": 0.06264611634032523,
+    "mix": 0.03026479148035868
+   },
+   {
+    "line": "Tyranitar: Knock Off -> Basculegion-F (Mega) + Excadrill: Earthquake",
+    "gain": 0.034209530610831165,
+    "mix": 4.910248738014358e-05
+   }
+  ],
+  "h2_cost": 0.0,
+  "h2_top": "Protect"
+ },
+ {
+  "game": "m2g2",
+  "turn": 5,
+  "side": "p2",
+  "mon": "Indeedee-F",
+  "played": "Psychic",
+  "planner_top": "Protect",
+  "p_played": 0.0058,
+  "cost": 0.068,
+  "video_s": 19258.5,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   null,
+   null
+  ],
+  "opp": [
+   [
+    "Golisopod",
+    "Leech Life"
+   ],
+   [
+    "Pelipper",
+    "Weather Ball"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.009353043068252615,
+  "ante_top": 0.08555480666140078,
+  "post_played": 0.0009647472562507309,
+  "post_top": 0.08548700597363834,
+  "post_best": 0.08548700597363834,
+  "mass_better": 0.02311510909915206,
+  "post_best_action": "Protect",
+  "shift": 0.21814487038593783,
+  "lines": [
+   {
+    "line": "Golisopod-Mega: Protect + Pelipper: Wide Guard",
+    "gain": 0.2646009256532613,
+    "mix": 0.00015624999999999984
+   },
+   {
+    "line": "Golisopod-Mega: Protect + Pelipper: Helping Hand -> ally",
+    "gain": 0.2165823083460816,
+    "mix": 0.005579852613966357
+   },
+   {
+    "line": "Golisopod-Mega: Sucker Punch -> Indeedee-F + Pelipper: Wide Guard",
+    "gain": 0.18398211906560935,
+    "mix": 0.00015624999999999984
+   },
+   {
+    "line": "Golisopod-Mega: Sucker Punch -> Indeedee-F + Pelipper: Helping Hand -> ally",
+    "gain": 0.14656104913579027,
+    "mix": 0.005579852613966357
+   },
+   {
+    "line": "Golisopod-Mega: Protect + Pelipper: Hurricane -> Indeedee-F",
+    "gain": 0.13321915390794392,
+    "mix": 0.00015624999999999984
+   }
+  ],
+  "h2_cost": 0.021,
+  "h2_top": "Protect"
+ },
+ {
+  "game": "m5g2",
+  "turn": 5,
+  "side": "p2",
+  "mon": "Volcarona",
+  "played": "Rage Powder",
+  "planner_top": "Struggle Bug",
+  "p_played": 0.0114,
+  "cost": 0.064,
+  "video_s": 27076.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Kingambit",
+   "Kowtow Cleave"
+  ],
+  "opp": [
+   [
+    "Sinistcha",
+    "Protect"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.1804952339132748,
+  "ante_top": 0.2141954781296253,
+  "post_played": 0.24385166413566078,
+  "post_top": 0.2921369562273766,
+  "post_best": 0.32838731712149244,
+  "mass_better": 3.865185839865013e-05,
+  "post_best_action": "switch to Basculegion",
+  "shift": null,
+  "lines": [
+   {
+    "line": "Floette-Mega: Protect + Sinistcha: Protect",
+    "gain": 0.017901955327563973,
+    "mix": 6.250000000000003e-05
+   }
+  ],
+  "h2_cost": 0.066,
+  "h2_top": "Overheat"
+ },
+ {
+  "game": "m4g1",
+  "turn": 2,
+  "side": "p2",
+  "mon": "Kingambit",
+  "played": "Protect",
+  "planner_top": "Kowtow Cleave",
+  "p_played": 0.0021,
+  "cost": 0.063,
+  "video_s": 22350.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 9,
+  "partner": [
+   "Garchomp",
+   "Draco Meteor"
+  ],
+  "opp": [
+   [
+    "Maushold",
+    "Follow Me"
+   ],
+   [
+    "Delphox",
+    "Expanding Force"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.731762882687182,
+  "ante_top": 0.8173245502573245,
+  "post_played": 0.5800769056905135,
+  "post_top": 0.901299237794157,
+  "post_best": 0.901299237794157,
+  "mass_better": 0.15182462799419538,
+  "post_best_action": "Kowtow Cleave",
+  "shift": null,
+  "lines": [
+   {
+    "line": "Maushold: Population Bomb -> Kingambit + Delphox: Heat Wave (Mega)",
+    "gain": 0.05901233540704018,
+    "mix": 0.3811747307396622
+   }
+  ],
+  "h2_cost": -0.0,
+  "h2_top": "Sucker Punch"
+ },
+ {
+  "game": "m2g2",
+  "turn": 4,
+  "side": "p1",
+  "mon": "Golisopod",
+  "played": "Sucker Punch",
+  "planner_top": "Leech Life",
+  "p_played": 0.001,
+  "cost": 0.062,
+  "video_s": 19182.5,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 3,
+  "partner": [
+   "Sneasler",
+   "Close Combat"
+  ],
+  "opp": [
+   [
+    "Indeedee-F",
+    "Psychic"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.8608659120514389,
+  "ante_top": 0.9256602806529652,
+  "post_played": 0.8020904746773071,
+  "post_top": 0.9527446313287408,
+  "post_best": 0.9527446313287408,
+  "mass_better": 0.0,
+  "post_best_action": "Leech Life",
+  "shift": null,
+  "lines": [],
+  "h2_cost": 0.024,
+  "h2_top": "Leech Life"
+ },
+ {
+  "game": "m1g2",
+  "turn": 14,
+  "side": "p1",
+  "mon": "Arcanine-Hisui",
+  "played": "Flare Blitz",
+  "planner_top": "Protect",
+  "p_played": 0.0014,
+  "cost": 0.058,
+  "video_s": 16053.0,
+  "side_won": false,
+  "measured": true,
+  "hypotheses": 1,
+  "partner": [
+   null,
+   null
+  ],
+  "opp": [
+   [
+    "Archaludon",
+    "Protect"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.22972852288017864,
+  "ante_top": 0.2878242717089204,
+  "post_played": 0.41748716239826994,
+  "post_top": 0.3866072745978361,
+  "post_best": 0.41748716239826994,
+  "mass_better": 0.000625,
+  "post_best_action": "Flare Blitz",
+  "shift": 0.652277159175776,
+  "lines": [
+   {
+    "line": "Archaludon: Protect",
+    "gain": 0.030879887800433825,
+    "mix": 0.000625
+   }
+  ],
+  "h2_cost": 0.0,
+  "h2_top": "Flare Blitz"
+ },
+ {
+  "game": "m3g3",
+  "turn": 6,
+  "side": "p1",
+  "mon": "Charizard",
+  "played": "Weather Ball",
+  "planner_top": "Protect",
+  "p_played": 0.0015,
+  "cost": 0.058,
+  "video_s": 21024.0,
+  "side_won": true,
+  "measured": true,
+  "hypotheses": 2,
+  "partner": [
+   "Garchomp",
+   "Protect"
+  ],
+  "opp": [
+   [
+    "Garchomp",
+    "Protect"
+   ],
+   [
+    "Sylveon",
+    "Hyper Voice"
+   ]
+  ],
+  "exact": true,
+  "ante_played": 0.4221996671892859,
+  "ante_top": 0.4939480914026304,
+  "post_played": 0.6378933764228616,
+  "post_top": 0.582876676465766,
+  "post_best": 0.7514584623146511,
+  "mass_better": 0.3063184530400168,
+  "post_best_action": "Heat Wave",
+  "shift": 0.21251900517305178,
+  "lines": [
+   {
+    "line": "Garchomp: Dragon Pulse -> Garchomp (Mega) + Sylveon: Hyper Beam -> Charizard-Mega-Y",
+    "gain": 0.17074821400390247,
+    "mix": 0.026335760064037834
+   },
+   {
+    "line": "Garchomp: Power Gem -> Garchomp (Mega) + Sylveon: Hyper Beam -> Charizard-Mega-Y",
+    "gain": 0.17074821400390247,
+    "mix": 6.944444444444457e-05
+   },
+   {
+    "line": "Garchomp: Earth Power -> Garchomp (Mega) + Sylveon: Hyper Beam -> Charizard-Mega-Y",
+    "gain": 0.17074821400390247,
+    "mix": 6.944444444444457e-05
+   },
+   {
+    "line": "Garchomp: Protect (Mega) + Sylveon: Detect",
+    "gain": 0.15852576784188352,
+    "mix": 6.944444444444457e-05
+   },
+   {
+    "line": "Garchomp: Protect (Mega) + Sylveon: Hyper Beam -> Charizard-Mega-Y",
+    "gain": 0.15764009043468113,
+    "mix": 6.944444444444457e-05
+   }
+  ],
+  "h2_cost": 0.044,
+  "h2_top": "Protect"
+ }
+]

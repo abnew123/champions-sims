@@ -255,6 +255,16 @@ Text is not enough on its own, so the reader also keeps track of state:
 A further step would be to replay each turn with the engine (its turntest loads the state before a turn and plays both sides' choices)
 and keep the outcome that matches the HP boxes: abilities like Stamina, item use and durations would then come from the simulation.
 
+## Missed faints and who won (2026-10-10)
+
+A faint whose message was not read left a fainted Pokemon "in the back" (Louisville: Player 2's Sneasler, 21%, knocked out by Muddy Water,
+replaced at the end of the turn by Rotom). The reader now infers it: a Pokemon sent in after the turn's moves, into a slot whose Pokemon
+did not go back, replaces a fainted one, unless it is the replacement of a switching move (Baton Pass, U-turn, Volt Switch, ... in PIVOT)
+that has not had one yet. The game's result comes from "<name> lost!" / "<name> won!": the name Player 2's own messages use ("The Trainer"
+on the Louisville stream, the player's name at Frankfurt) means Player 2, any other name Player 1. "The battle has ended due to a forfeit."
+waits for that message (a game that closes without it goes to the side with more Pokemon left). After a game the broadcast replays
+highlights (earlier faints and moves again); the reader ignores them because the game has ended.
+
 ## Options across hypotheses; names on the live page (2026-10-10)
 
 Options are merged over the hypotheses about unseen back Pokemon (build.py merge). An option's win chance is now the side's overall win

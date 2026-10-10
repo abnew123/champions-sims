@@ -123,6 +123,9 @@ BOXES = (('p1', 'a', 0.0, 0.16), ('p1', 'b', 0.16, 0.42), ('p2', 'a', 0.58, 0.81
 # the battle messages that end with a full stop (the others end with "!" or "..."); other text in that part of the screen is the overlay's
 PERIOD = re.compile(r"(rain stopped|sunlight faded|sandstorm subsided|snow stopped|disappeared from the battlefield|weirdness disappeared|"
                     r"electricity disappeared|mist disappeared|returned to normal|ended due to a forfeit)\.$")
+# what can happen as the leads come in, before turn 1: Intimidate and other stat changes, weather and terrain starting
+PRE = re.compile(r"('s .+ (fell|rose)|started to rain|sunlight turned harsh|sandstorm kicked up|started to snow|battlefield got weird|Grass grew|"
+                 r"electric current ran|Mist swirled)", re.I)
 def battle(lines):
     """one battle frame -> (HP boxes {(side, slot): (name, pct)}, decision screen?, turn number or None, battle text or None)"""
     names = [(t.strip(), x) for t, x, y, w, h in lines if 0.86 < y < 0.91]
@@ -150,11 +153,11 @@ class Reader:
     """frames in time order -> battle log lines. feed() one frame's OCR at a time; lines() is the log so far."""
     def __init__(s):
         s.games = []; s.meta = []; s.sheets = {}; s.raw_sheets = []; s.frame = 0; s.names = collections.deque(maxlen=600); s.note = ''
-        s.board = None; s.match = 0; s.game_in_match = 0; s.prev_end = 0; s.owners = {}; s.t0 = 0; s.new_game()
+        s.board = None; s.match = 0; s.game_in_match = 0; s.prev_end = 0; s.owners = {}; s.t0 = 0; s.pre = []; s.pre_on = False; s.pre_frame = 0; s.new_game()
     def new_game(s):
         s.out = []; s.games.append(s.out); s.meta.append({}); s.started = False; s.turn = 0; s.in_decision = False; s.ended = False
         s.active = {}; s.hp = {}; s.last_text = None; s.slot_free = {'p1': [], 'p2': []}; s.megas = {'p1': False, 'p2': False}
-        s.fainted = {'p1': set(), 'p2': set()}; s.open = None; s.cur = {}; s.changed = {}; s.foreign = 0; s.run = []; s.gap = 0; s.at_msg = None; s.lead_seen = False; s.pending = []; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False
+        s.fainted = {'p1': set(), 'p2': set()}; s.open = None; s.cur = {}; s.changed = {}; s.foreign = 0; s.run = []; s.gap = 0; s.at_msg = None; s.timed = {}; s.sent = []; s.lead_seen = False; s.pending = []; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False
     def team(s, sd): return s.sheets.get(sd, [])
     def species(s, sd, name):
         """an OCR'd Pokémon name on side sd -> the species on that side's sheet (Mega names map back to the base)"""
@@ -220,7 +223,7 @@ class Reader:
                  (r'weirdness disappeared', '|-fieldend|move: Psychic Terrain'), (r'grass disappeared', '|-fieldend|move: Grassy Terrain'),
                  (r'electricity disappeared', '|-fieldend|move: Electric Terrain'), (r'mist disappeared', '|-fieldend|move: Misty Terrain')]
         for pat, line in FIELD:
-            if re.search(pat, text, re.I): s.emit(line); return
+            if re.search(pat, text, re.I): s.field(line); return
         m = re.search(r'tailwind (started blowing|blew).* (your|the opposing) (side|team)', text, re.I)
         if m: s.emit(f"|-sidestart|{'p1' if m.group(2).lower() == 'your' else 'p2'}: Player|move: Tailwind"); return
         m = re.search(r"(your|the opposing) (team|side)'s tailwind petered out", text, re.I)
@@ -334,13 +337,48 @@ class Reader:
             fresh = [k for k in sure if k not in o['draining']]
             if len(fresh) == 1: s.hit(fresh[0], 'HP box, another still draining')
             else: s.shut()
+    # Weather and terrain last 5 turns, 8 with the setter's rock or Terrain Extender (on its team sheet); the reader ends them itself when
+    # the turns run out, so a missed "The rain stopped." does not leave rain up. The setter is the Pokemon whose move just set it, else the
+    # Pokemon on the field (the latest sent out first) whose sheet ability sets it; the log line names it, so the parser's own duration
+    # agrees.
+    WX = {'RainDance': (('Drizzle',), ('Rain Dance',), 'Damp Rock'), 'SunnyDay': (('Drought', 'Orichalcum Pulse'), ('Sunny Day',), 'Heat Rock'),
+          'Sandstorm': (('Sand Stream',), ('Sandstorm',), 'Smooth Rock'), 'Snowscape': (('Snow Warning',), ('Snowscape', 'Chilly Reception'), 'Icy Rock'),
+          'Electric Terrain': (('Electric Surge', 'Hadron Engine'), ('Electric Terrain',), 'Terrain Extender'),
+          'Grassy Terrain': (('Grassy Surge', 'Seed Sower'), ('Grassy Terrain',), 'Terrain Extender'),
+          'Misty Terrain': (('Misty Surge',), ('Misty Terrain',), 'Terrain Extender'), 'Psychic Terrain': (('Psychic Surge',), ('Psychic Terrain',), 'Terrain Extender')}
+    def field(s, line):
+        p = line.split('|'); kind = 'weather' if p[1] == '-weather' else 'terrain'
+        what = p[2].replace('move: ', '')
+        if what == 'none' or p[1] == '-fieldend': s.timed.pop(kind, None); s.emit(line); return
+        if what not in s.WX: s.emit(line); return
+        abil, moves, rock = s.WX[what]
+        mv = next((l for l in reversed(s.out[-12:]) if l.startswith('|move|')), None)
+        setter = None; via = ''
+        if mv and mv.split('|')[3] in moves: setter = mv.split('|')[2]
+        else:
+            for sd, sp in list(reversed(s.sent)) + [(k[0], v) for k, v in s.active.items()]:
+                st = next((x for x in s.team(sd) if x['species'] == sp), None)
+                if st and st['ability'] in abil and s.slot_of(sd, sp):
+                    setter = s.mon(sd, sp); via = f"|[from] ability: {st['ability']}|[of] {setter}"; break
+        item = ''
+        if setter:
+            sd, nick = setter[:2], setter.split(': ', 1)[1]
+            item = next((x['item'] for x in s.team(sd) if s.nick(x['species']) == nick), '')
+        s.timed[kind] = [line.split('|')[1], what, 8 if item == rock else 5]
+        s.emit(line + via)
+    def expire(s):
+        """the end of a turn: weather and terrain count down, and end when their turns run out"""
+        for kind, t in list(s.timed.items()):
+            t[2] -= 1
+            if t[2] <= 0:
+                s.emit('|-weather|none' if kind == 'weather' else f'|-fieldend|move: {t[1]}'); del s.timed[kind]
     def send(s, sd, name):
         sp = s.species(sd, re.sub(r' the [A-Z][\w-]*(?: [A-Z][\w-]*)*$', '', name.strip()))     # "Primarina the Rank Master": a title
         if not sp: return
         s.shut(); free = s.slot_free[sd]; sl = free.pop(0) if free else next((x for x in 'ab' if (sd, x) not in s.active), None)
         if sl is None:                                                      # who went back was not shown: the HP boxes will tell which slot
             s.pending.append((sd, sp, len(s.out))); return
-        s.active[(sd, sl)] = sp
+        s.active[(sd, sl)] = sp; s.sent.append((sd, sp))
         s.emit(f"|switch|{sd}{sl}: {s.nick(sp)}|{sp}, L50|{s.hp.get(('mon', sd, sp), 100)}/100")
     def place(s, boxes):
         """a send-out whose slot was unknown: put the switch where the battle text had it, in the slot the HP boxes now show it in"""
@@ -348,7 +386,7 @@ class Reader:
         for i, (sd, sp, at) in enumerate(s.pending):
             sl = next((x for (y, x), (n, p) in boxes.items() if y == sd and s.species(sd, n) == sp and s.active.get((sd, x)) != sp), None)
             if not sl: keep.append((sd, sp, at)); continue
-            s.active[(sd, sl)] = sp
+            s.active[(sd, sl)] = sp; s.sent.append((sd, sp))
             s.out.insert(at, f"|switch|{sd}{sl}: {s.nick(sp)}|{sp}, L50|{s.hp.get(('mon', sd, sp), 100)}/100")
             if s.open and s.open['at'] >= at: s.open['at'] += 1
             s.pending[i + 1:] = [(a, b, c + 1 if c >= at else c) for a, b, c in s.pending[i + 1:]]; keep = [(a, b, c + 1 if c >= at else c) for a, b, c in keep]
@@ -397,7 +435,14 @@ class Reader:
         if s.run and (decision or s.gap >= 2 or (text and difflib.SequenceMatcher(None, text, s.run[-1]).ratio() <= 0.85)):
             best = collections.Counter(s.run).most_common(1)[0][0]; s.run = []
             if s.started and not s.ended: s.message(best)
+            elif s.pre_on: s.pre.append(best)                                  # before turn 1 (Intimidate, weather, terrain): applied at the start
             s.at_msg = None
+        if text and not (s.started and not s.ended) and re.search(r'^Go! .+ and .+!$|sent out .+ and .+!$', text):
+            if not s.pre_on or s.frame - s.pre_frame > 60: s.pre = []          # leads coming in with no game running: a game is about to start
+            s.pre_on = True; s.pre_frame = s.frame
+        if text and not decision:
+            if not s.run: s.at_msg = (dict(s.cur), s.frame)                     # the HP boxes and the frame when the message came up
+            s.run.append(text)
         if s.started and not s.ended and boxes:                                         # mid-turn, the box of the Pokemon hit pops up alone
             if s.pending: s.place(boxes)
             s.watch_hp(boxes)
@@ -417,7 +462,10 @@ class Reader:
                 if len(s.sheets) < 2: s.note = 'waiting for both team sheets: start before the broadcast shows them'; return
                 if new_match: s.match += 1; s.game_in_match = 0
                 s.board = s.board if s.board and not other else None; s.game_in_match += 1; s.meta[-1] = {'match': s.match, 'game': s.game_in_match, 'frame': s.frame}
-                s.note = ''; s.header(boxes); s.turn = turn or 1; s.emit(f'|turn|{s.turn}'); s.in_decision = True; s.mark()
+                s.note = ''; s.header(boxes)
+                for t in s.pre:                                                   # what happened as the leads came in: abilities
+                    if PRE.search(t): s.message(t)
+                s.pre = []; s.pre_on = False; s.turn = turn or 1; s.emit(f'|turn|{s.turn}'); s.in_decision = True; s.mark()
             elif decision and len(boxes) >= 3 and not s.note: s.note = 'joined mid-game: the bar starts with the next game'
             return
         if s.ended: return
@@ -426,11 +474,9 @@ class Reader:
             s.close(); s.prev_end = s.frame - 120
             s.new_game(); s.lead_seen = True; s.frame -= 1; return s.feed(lines)   # this frame again, as the new game's first decision
         if decision and not s.in_decision:
-            s.shut(); s.reconcile(boxes); s.turn = max(s.turn + 1, turn or 0); s.emit('|upkeep', '|', f'|turn|{s.turn}'); s.mark()   # upkeep: durations count down
+            s.shut(); s.reconcile(boxes); s.expire(); s.turn = max(s.turn + 1, turn or 0); s.emit('|upkeep', '|', f'|turn|{s.turn}'); s.mark()   # upkeep: durations count down
         s.in_decision = decision
-        if text and not decision:
-            if not s.run: s.at_msg = (dict(s.cur), s.frame)                     # the HP boxes and the frame when the message came up
-            s.run.append(text)
+
     def assign_sheets(s, boxes, board=None):
         """the team sheets shown before the battle -> sides. Sheet screens come in runs, one player's sheet per run; each run's reads are
         merged (the fullest read of each Pokémon). A run goes to the side whose scoreboard name matches its header; failing that, to the

@@ -119,6 +119,8 @@ def sheet(lines):
     return out
 # --------------------------------------------------------------------------------------------------------------------------- battle
 SINGLE = {'normal', 'any', 'adjacentFoe', 'adjacentAlly', 'adjacentAllyOrSelf'}   # move targets the player picks
+PIVOT = {'Baton Pass', 'U-turn', 'Volt Switch', 'Flip Turn', 'Parting Shot', 'Teleport', 'Chilly Reception', 'Shed Tail', 'Roar', 'Whirlwind',
+         'Dragon Tail', 'Circle Throw'}                                     # moves after which a Pokemon comes in without a faint
 BOXES = (('p1', 'a', 0.0, 0.16), ('p1', 'b', 0.16, 0.42), ('p2', 'a', 0.58, 0.81), ('p2', 'b', 0.81, 1.0))
 # the battle messages that end with a full stop (the others end with "!" or "..."); other text in that part of the screen is the overlay's
 PERIOD = re.compile(r"(rain stopped|sunlight faded|sandstorm subsided|snow stopped|disappeared from the battlefield|weirdness disappeared|"
@@ -159,11 +161,11 @@ class Reader:
     """frames in time order -> battle log lines. feed() one frame's OCR at a time; lines() is the log so far."""
     def __init__(s):
         s.games = []; s.meta = []; s.sheets = {}; s.raw_sheets = []; s.frame = 0; s.names = collections.deque(maxlen=600); s.note = ''
-        s.board = None; s.match = 0; s.game_in_match = 0; s.prev_end = 0; s.owners = {}; s.t0 = 0; s.pre = []; s.pre_on = False; s.pre_frame = 0; s.new_game()
+        s.board = None; s.match = 0; s.game_in_match = 0; s.prev_end = 0; s.owners = {}; s.t0 = 0; s.pre = []; s.pre_on = False; s.pre_frame = 0; s.p2_label = ''; s.new_game()
     def new_game(s):
         s.out = []; s.games.append(s.out); s.meta.append({}); s.started = False; s.turn = 0; s.in_decision = False; s.ended = False
         s.active = {}; s.hp = {}; s.last_text = None; s.slot_free = {'p1': [], 'p2': []}; s.megas = {'p1': False, 'p2': False}
-        s.fainted = {'p1': set(), 'p2': set()}; s.open = None; s.cur = {}; s.changed = {}; s.foreign = 0; s.run = []; s.gap = 0; s.at_msg = None; s.timed = {}; s.sent = []; s.lead_seen = False; s.pending = []; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False
+        s.fainted = {'p1': set(), 'p2': set()}; s.open = None; s.cur = {}; s.changed = {}; s.foreign = 0; s.run = []; s.gap = 0; s.at_msg = None; s.timed = {}; s.sent = []; s.forfeit = False; s.lead_seen = False; s.pending = []; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False
     def team(s, sd): return s.sheets.get(sd, [])
     def species(s, sd, name):
         """an OCR'd Pokémon name on side sd -> the species on that side's sheet (Mega names map back to the base)"""
@@ -211,11 +213,15 @@ class Reader:
     def message(s, text):
         text = re.sub(r'!+[^!]*$', '!', text.strip())
         if s.open and re.search(r'(hurt by|buffeted by|pelted by|restored (a little )?HP|regained health|is hurt|was hurt)', text): s.shut()   # end-of-turn damage and healing
-        if re.search(r"won the battle|forfeit|\blost!$|You won", text, re.I) and 'lost some' not in text:
+        if re.search(r"won the battle|forfeit|\b(lost|won)!$|You won", text, re.I) and 'lost some' not in text:
             if not s.ended:
+                if 'forfeit' in text: s.forfeit = True; return                  # who forfeited: the "... lost!" message that follows says
                 left = {sd: 4 - len(s.fainted[sd]) for sd in ('p1', 'p2')}
                 win = 'p1' if left['p1'] > left['p2'] else 'p2' if left['p2'] > left['p1'] else None
-                if 'forfeit' in text and win is None: return                     # who forfeited: the "... lost!" message that follows
+                m = re.match(r"'?(.+?) (lost|won)!$", text)
+                if m and s.p2_label:                                             # "<Player 2's name> lost!": Player 2 lost; any other name: Player 1
+                    side = 'p2' if difflib.SequenceMatcher(None, m.group(1).lower(), s.p2_label.lower()).ratio() > 0.75 else 'p1'
+                    win = side if m.group(2) == 'won' else ('p1' if side == 'p2' else 'p2')
                 if win: s.emit('|', f"|win|Player {win[1]}")
                 s.ended = True; s.prev_end = s.frame; s.meta[-1]['end'] = s.now()
                 if s.game_names: s.board = s.game_names.most_common(1)[0][0]      # who played this game, for telling the next one apart
@@ -242,6 +248,8 @@ class Reader:
                 sp = s.species(sd, m.group(1)); sl = s.slot_of(sd, sp) if sp else None
                 if sl: s.shut(); s.slot_free[sd].append(sl); s.active.pop((sd, sl), None); break
             return
+        lab = re.match(r'(.+?) (?:sent out|withdrew) ', text)
+        if lab and not text.startswith('Go!'): s.p2_label = lab.group(1).strip()          # "The Trainer", or the player's name: Player 2's messages
         m = re.search(r'Go! (.+?)!$', text) or re.search(r'sent out (.+?)!$', text)
         if m:
             if ' and ' in m.group(1): s.pairs['p1' if text.startswith('Go!') else 'p2'] = s.frame
@@ -420,10 +428,18 @@ class Reader:
         for i, (sd, sp, at) in enumerate(s.pending):
             sl = next((x for (y, x), (n, p) in boxes.items() if y == sd and s.species(sd, n) == sp and s.active.get((sd, x)) != sp), None)
             if not sl: keep.append((sd, sp, at)); continue
+            new = [f"|switch|{sd}{sl}: {s.nick(sp)}|{sp}, L50|{s.hp.get(('mon', sd, sp), 100)}/100"]
+            old = s.active.get((sd, sl)); turn_start = max((j for j, l in enumerate(s.out[:at]) if l.startswith('|turn|')), default=0)
+            seg = s.out[turn_start:at]; piv = max((j for j, l in enumerate(seg) if l.startswith('|move|') and l.split('|')[3] in PIVOT), default=None)
+            pivot_in = piv is not None and not any(l.startswith('|switch|') for l in seg[piv + 1:])   # the switching move's own replacement
+            if old and old != sp and old not in s.fainted[sd] and any(l.startswith('|move|') for l in seg) and not pivot_in:
+                # sent in after this turn's moves, into a slot whose Pokemon did not go back: only a faint frees a slot then
+                new.insert(0, f'|faint|{sd}{sl}: {s.nick(old)}'); s.fainted[sd].add(old); s.hp[('mon', sd, old)] = 0
             s.active[(sd, sl)] = sp; s.sent.append((sd, sp))
-            s.out.insert(at, f"|switch|{sd}{sl}: {s.nick(sp)}|{sp}, L50|{s.hp.get(('mon', sd, sp), 100)}/100")
-            if s.open and s.open['at'] >= at: s.open['at'] += 1
-            s.pending[i + 1:] = [(a, b, c + 1 if c >= at else c) for a, b, c in s.pending[i + 1:]]; keep = [(a, b, c + 1 if c >= at else c) for a, b, c in keep]
+            for k, line in enumerate(new): s.out.insert(at + k, line)
+            d = len(new)
+            if s.open and s.open['at'] >= at: s.open['at'] += d
+            s.pending[i + 1:] = [(a, b, c + d if c >= at else c) for a, b, c in s.pending[i + 1:]]; keep = [(a, b, c + d if c >= at else c) for a, b, c in keep]
         s.pending = keep
     def reconcile(s, boxes):
         """at a decision screen: the Pokémon on the field and their HP as the HP boxes show them"""
@@ -441,6 +457,7 @@ class Reader:
         """end the current game without having seen its last message: the result from who has Pokémon left, when that is clear"""
         left = {sd: 4 - len(s.fainted[sd]) for sd in ('p1', 'p2')}
         win = 'p1' if left['p2'] <= 0 < left['p1'] else 'p2' if left['p1'] <= 0 < left['p2'] else None
+        if win is None and s.forfeit and left['p1'] != left['p2']: win = 'p1' if left['p1'] > left['p2'] else 'p2'   # a forfeit: the side behind
         if win: s.emit('|', f'|win|Player {win[1]}')
         s.ended = True; s.prev_end = s.frame - 1; s.meta[-1]['end'] = s.now()
         if s.game_names: s.board = s.game_names.most_common(1)[0][0]

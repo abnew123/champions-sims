@@ -271,6 +271,17 @@ logistic fit, 1.115 log-odds per Pokemon; `results/eval_unit.json`). So +1.0 is 
 equal changes in the odds (40% to 20% is -0.9, 40% to 60% is +0.7). The page shows it centred between the two win chances, above the turn counter, from Player 1's
 side (+ ahead, - behind, colored for the leader), and the graph switches between win chance and eval (-4 to +4).
 
+## How often the rules and the battle text are right (2026-10-10)
+
+The 18 Louisville flags (games with sheets), checked against the stream re-read at 6 frames a second and the field label at the top of
+the screen ("Psychic Terrain", "Sandstorm"): the rules were right 15 times, the text 3 (`results/louisville_flag_check.json`). The reader's
+misses: a lead's ability message still on screen at the first decision screen was dropped when the reader switched games (the message
+buffer is now kept across games), "rose sharply" / "harshly fell" were read as one stage (the pattern now tries the longer wording first),
+and three messages fell between the 2-a-second frames. The rules' misses: Psychic Terrain blocking a Prankster Parting Shot (the reader logs
+"is protected by the Psychic Terrain" as -activate) and terrain seeds (Psychic Seed +1 Sp. Def), both now rules. After the fixes: 3 flags
+left on Louisville (all frame misses), 29 on Frankfurt (was 45). The study (study.py), the costly plays page (costly.py) and the read
+analysis (reads.py) take the event's name now (name=louisville1; study.py <ocr> [threads] [t0] with the stream time of the first frame).
+
 ## Sheet names in brackets; a sheet entry the reader missed (2026-10-10)
 
 Sheets print forms in brackets: "FLOETTE (ETERNAL FLOWER)" (the first word gives Floette-Eternal), "ROTOM (HEAT)", besides "(FEMALE)" /

@@ -10,21 +10,21 @@ What was played is matched exactly where the broadcast reader found the target (
 any target where it did not: the play itself and the planner's top action then take their best target, an opponent's move counts every
 target weighted by the planner's mix. The partner is held to what it actually did (any action if the broadcast did not show it). Values
 are the acting player's win chance, rescaled as on the page; hypotheses about unseen back Pokemon are averaged with the live mode's weights.
-  python3 evalbar/reads.py run [threads=3]      the costly plays' turns through evalpos with the matrix (evalbar/out/reads/)
-  python3 evalbar/reads.py report               the two measures per play -> evalbar/out/reads/reads.json and a table"""
+  python3 evalbar/reads.py run [threads=3] [name=day1]      the costly plays' turns through evalpos with the matrix (evalbar/out/reads/)
+  python3 evalbar/reads.py report [name=day1]               the two measures per play -> evalbar/out/reads/<name>_reads.json and a table"""
 import os, sys, json, collections
 import common as C, procs as P, replay as R, live as LV, engine as EN, study as ST
-OUT = os.path.join(C.HERE, 'out', 'reads')
+OUT = os.path.join(C.HERE, 'out', 'reads'); NAME = 'day1'                    # the study (study.py) whose costly plays are checked
 STUDY = os.path.join(C.HERE, 'out', 'champions', 'study')
 def plays():
-    return json.load(open(os.path.join(C.HERE, 'results', 'broadcast_study_day1.json')))['costly_plays']
+    return json.load(open(os.path.join(C.HERE, 'results', f'broadcast_study_{NAME}.json')))['costly_plays']
 def decisions():
     """(game, turn, side, mon) -> the study's decision (what was played, the planner's table)"""
-    return {(d['game'].replace('day1_', ''), d['turn'], d['side'], d['mon']): d for d in json.load(open(os.path.join(STUDY, 'day1.json')))['decisions']}
+    return {(d['game'].replace(NAME + '_', ''), d['turn'], d['side'], d['mon']): d for d in json.load(open(os.path.join(STUDY, f'{NAME}.json')))['decisions']}
 def turns():
     return sorted({(p['game'], p['turn']) for p in plays()})
-def posfile(g, t): return os.path.join(LV.OUT, f'day1_{g}_t{t}_pos.jsonl')
-def evfile(g, t): return os.path.join(OUT, f'day1_{g}_t{t}_eval.jsonl')
+def posfile(g, t): return os.path.join(LV.OUT, f'{NAME}_{g}_t{t}_pos.jsonl')
+def evfile(g, t): return os.path.join(OUT, f'{NAME}_{g}_t{t}_eval.jsonl')
 def run(threads=3):
     # champ-battle-v18: v17 plus EVAL_MATRIX; 'full' gives every cell all 32 seeds (the break-even reads every opponent line)
     os.makedirs(OUT, exist_ok=True); os.environ['EVAL_MATRIX'] = 'full'
@@ -33,7 +33,8 @@ def run(threads=3):
         os.environ['EVAL_TITLE'] = f'Reads: {g} turn {t} ({i + 1} of {len(turns())})'
         EN.run(posfile(g, t), evfile(g, t), threads, 32, 1)
 def weights(g, t):
-    f = os.path.join(STUDY, f'day1_{g}.log'); L = LV.Live(None, 1, 0, logfile=f, tag='day1_' + g, fmt='Champions broadcast')
+    f = os.path.join(STUDY, f'{NAME}_{g}.log'); L = LV.Live(None, 1, 0, logfile=f, tag=f'{NAME}_{g}', fmt='Champions broadcast')
+    if '|showteam|' not in open(f).read(): L.bo3 = False
     sp, _ = L.at(open(f).read(), t); return {x['name']: w for w, x in sp}
 def keys(side):
     """one side of an evalpos line -> {slot: (mon, {choice: action key})}"""
@@ -110,7 +111,7 @@ def report():
                     'post_best_action': collections.Counter(m['post_best_action'] for _, m in res).most_common(1)[0][0],
                     'shift': None if any(s is None for _, s in shifts) else sum(w * s for w, s in shifts) / tot,
                     'lines': sorted(({'line': l, 'gain': a / n, 'mix': b / n} for l, (a, b, n) in lines.items()), key=lambda x: -x['gain'])[:5]})
-    json.dump(out, open(os.path.join(OUT, 'reads.json'), 'w'), indent=1)
+    json.dump(out, open(os.path.join(OUT, 'reads.json' if NAME == 'day1' else f'{NAME}_reads.json'), 'w'), indent=1)
     print(f"{'play':58s} {'cost':>5s} {'vs actual':>9s} {'to best':>7s} {'better on':>9s} {'lean':>6s}")
     for x in out:
         if not x.get('measured'): print(f"{x['game']} t{x['turn']} {x['side']} {x['mon']}: not measured"); continue
@@ -120,7 +121,7 @@ def report():
               f"{100 * x['mass_better']:8.0f}% {lean:>6s}")
 if __name__ == '__main__':
     P.own()
-    a = sys.argv[1:]
+    a = [x for x in sys.argv[1:] if not x.startswith('name=')]; NAME = next((x[5:] for x in sys.argv[1:] if x.startswith('name=')), 'day1')
     if a and a[0] == 'run': run(int(a[1]) if len(a) > 1 else 3)
     elif a and a[0] == 'report': report()
     else: sys.exit(__doc__)

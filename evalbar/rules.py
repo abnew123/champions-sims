@@ -79,6 +79,14 @@ def derive(log):
             if field.get('terrain', [None])[0] == what: return
             field['terrain'] = [what, 8 if item.get(setter) == 'Terrain Extender' else 5]
             emit(f"|-fieldstart|move: {what} Terrain|[of] {ident(setter)}" if setter in active else f'|-fieldstart|move: {what} Terrain')
+            for p_ in list(active): seed(p_)
+    SEED = {'Electric Seed': ('Electric', {'def': 1}), 'Grassy Seed': ('Grassy', {'def': 1}), 'Misty Seed': ('Misty', {'spd': 1}),
+            'Psychic Seed': ('Psychic', {'spd': 1})}
+    def seed(pos):
+        """a terrain seed: its boost once its terrain is up, then it is used"""
+        sd_ = SEED.get(item.get(pos, ''))
+        if sd_ and field.get('terrain', [None])[0] == sd_[0]:
+            boost(pos, sd_[1], cause=f'item: {item[pos]}'); emit(f'|-enditem|{ident(pos)}|{item[pos]}'); used.add((pos, toid(active[pos]))); item[pos] = ''
     def entry(pos):
         """abilities that act when a Pokemon comes in (or Mega Evolves)"""
         a = ab(pos)
@@ -92,6 +100,7 @@ def derive(log):
                 if fa == 'Rattled': boost(f, {'spe': 1})
         if a in WEATHER_AB: set_field('weather', WEATHER_AB[a], pos)
         if a in TERRAIN_AB: set_field('terrain', TERRAIN_AB[a], pos)
+        seed(pos)
     def flush_batch():
         for pos in batch: entry(pos)
         batch.clear()
@@ -138,6 +147,7 @@ def derive(log):
             if pos not in active: continue
             facts = collections.defaultdict(set); hits = {}
             for q in fx:
+                if len(q) > 3 and q[1] == '-activate' and 'Psychic Terrain' in q[3]: facts['-immune'].add(q[2][:3])   # blocked by the terrain
                 if len(q) > 2 and q[1] in ('-immune', '-miss', '-supereffective', '-crit', '-singleturn', '-fail'):
                     facts[q[1]].add((q[3] if q[1] == '-miss' and len(q) > 3 else q[2])[:3])
                 if len(q) > 3 and q[1] == '-hitcount': hits[q[2][:3]] = int(q[3])

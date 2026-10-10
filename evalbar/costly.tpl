@@ -1,4 +1,4 @@
-<title>Day 1 Costly Plays</title>
+<title>__TITLE__</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
@@ -156,8 +156,8 @@ details.turn .events { margin: 6px 0 4px }
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">Regional broadcast · Day 1 · Engine review</div>
-    <h1>Day 1 Costly Plays</h1>
+    <div class="eyebrow">__EVENT__ · Engine review</div>
+    <h1>__TITLE__</h1>
     <p class="intro" id="intro"></p>
   </header>
   <div class="layout">
@@ -192,7 +192,7 @@ let filter = 'all', current = null, viewTurn = null;
 try { filter = localStorage.getItem('costly-filter') || 'all' } catch (e) {}
 
 document.getElementById('intro').innerHTML =
-  `<b>${D.scenarios.length} plays</b> from day 1 of the regional broadcast. The engine gave each one under a 5% chance and rated it more than 5 win-chance points worse than its own top pick. ` +
+  `<b>${D.scenarios.length} plays</b> from the __WHERE__. The engine gave each one under a 5% chance and rated it more than 5 win-chance points worse than its own top pick. ` +
   `Each board shows the position as the players knew it when the turn started. Back Pokémon not yet seen are averaged over. ` +
   `Targets come from the HP box that pops up on the broadcast when a Pokémon is hit. The costs compare moves by move, each with its best target. <b>Protect plays are probably engine errors</b>: the one-turn engine undervalues Protect, and those plays mostly came from the side that won. ` +
   `${D.reads ? `<b>${D.scenarios.filter(paid).length} of them paid off</b> against what the opponent actually did that turn. Each play shows how far the opponent would have had to lean for it to break even.` : ''}`;

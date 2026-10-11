@@ -1078,3 +1078,16 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     spread move's targets, Armor Tail / Queenly Majesty / Dazzling blocks. **Record so far: you 2 – 3 planner (5 games, two from before
     the log, one of those reconstructed).** The user stopped there ("I apparently can't multi table pokemon like I can poker") and will
     think about a better way to get the games in; nothing is pending on this side.
+  - **Showdown bot (`bot/`, 2026-10-11, 12:30 am; the user: "let's make the bot and just make sure the play nice").** The planner on its
+    own bot account on the Reg M-C Bo3 ladder, to measure it against real players (the user cannot get enough local games in; a ladder
+    rating is on the pool players' own scale). Rules from the user: human pace, never the timer, a name that says bot, one canned PM
+    reply, modest volume, and **stop laddering once we would meet players near the top** (bot/limits.json: hourly / daily caps, a rating
+    stop, "opponent in the ladder's top N" from the public ladder JSON; the user does not want to warp the top of the standings); a ban
+    of the bot account is acceptable. Pieces: `bot/client.js` (Node, `--experimental-websocket`: login, /search and challenges in the
+    format, room logs, |request| handling, a think delay, limits, bot/out/games.jsonl with ratings and results only); `bot/brain.py`
+    (one process: team preview by the bring heuristic against the |showteam| sheet; turns via `bot/position.py`: the Eval bar's
+    `evalbar/botpos.py` builds the position (opponent as a spectator knows it, our side from the request, topk back rows), live.positions
+    + engine.run evaluate it with the current build and EG_MEGA_TIE=0, a joint action is sampled from side 0's mix; replacements after a
+    faint by a type-chart rule for now, a proper mid-turn position is asked of the Eval bar). Not yet run live: the user creates the
+    account (git-ignored bot/account.json {"name", "password"}); start with `node --experimental-websocket --no-warnings bot/client.js
+    --dry` to check the login, then without --dry. Teams in bot/teams.json (the Trick Room six; add pool sixes for variety).

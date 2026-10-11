@@ -225,6 +225,15 @@ better than the planner's pick, with how far the opponent's mix would have to le
 as the pick against the actual play (6 of those needed a lean under 20%: plausible reads of a habit); the rest did not, most clearly the
 Protects the one-turn engine undervalues. Summary in `results/broadcast_reads_day1.json`.
 
+## Positions for the Showdown bot (botpos.py, 2026-10-10)
+
+Battle sim's ladder bot (bot/, the planner on its own account) asked for its decision positions. `botpos.bot_position(log, request, side,
+topk=1, team=None)` builds the turn's specs with the bot as side 0: the opponent as a spectator knows it (live.py's sets, reveals and back-row
+hypotheses, topk of them), the bot's own side from its |request| (the four it brought, exact HP, status, fainting, held item) over what the
+log tracks (boosts, volatiles, the lock), exact spreads from a Showdown export if given. `live.positions(specs, outf)` then writes them (line
+'<name> p1' is the bot's view). Team preview and replacements after a faint are not turn starts: it returns no specs and says why. PP is not
+modelled. Checked on three cached Bo3 games from both sides (the two views mirror each other) and with an exact-HP request.
+
 ## Louisville day 1 (2026-10-10)
 
 The same study on the Louisville day 1 stream (12 games from 1:15 pm, read live; `study.py out/champions/louisville1.ocr.jsonl 3 14340`,

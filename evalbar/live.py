@@ -91,13 +91,13 @@ def spec_mon(m, st):
     return {**st, 'forme': m['forme'], 'mega': m['mega'], 'hpPct': m['hp'], 'fainted': m['f'], 'status': m['st'], 'slept': m['slept'], 'boosts': m['b'],
             'itemNow': '' if m['gone'] or toid(st['item']) not in S.E['items'] else st['item'], 'moved': m['moved'], 'stall': m['stall'], 'lock': m['lock'],
             'vol': m['vol'], 'onField': bool(m['pos']), 'last': m['last'], 'volarg': m['volarg']}
-def hyps(sd, state, six, sets, leads):
+def hyps(sd, state, six, sets, leads, topk=TOPK):
     """the TOPK most likely sets of Pokemon this player has not sent in yet: [(weight, [species])]"""
     known = {m['sp'] for m in state[sd]['mons']}
     pool = [sp for sp in six[sd] if sp not in known and sets[sd].get(sp)]
     need = max(0, 4 - len(known))
     hy = [(math.prod(RC.back_weight(sp, leads[sd]) for sp in c), list(c)) for c in itertools.combinations(pool, min(need, len(pool)))]
-    hy.sort(key=lambda x: -x[0]); hy = hy[:TOPK]; tot = sum(w for w, _ in hy) or 1
+    hy.sort(key=lambda x: -x[0]); hy = hy[:topk]; tot = sum(w for w, _ in hy) or 1
     return [(w / tot, c) for w, c in hy], pool, need
 def specs_for(tag, g, step, six, sets, leads):
     """engine position specs for one turn, one per pairing of the two players' hypotheses: [(weight, spec)]"""

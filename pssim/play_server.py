@@ -5,6 +5,7 @@ both sides see everything, as in self-play). The planner runs with the v25 kit s
 Needs node + the Showdown engine in pssim/node_modules (battle_starts.js builds the start position) and the champ binary."""
 import json, os, sys, subprocess, threading, tempfile, random, shutil
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import urlparse, parse_qs
 HERE = os.path.dirname(os.path.abspath(__file__)); os.chdir(HERE); sys.path.insert(0, HERE)
 SM = json.load(open(os.path.join('..', 'regionals', 'smogon_mc_sets.json')))
 def spread(species, nature):   # as opp_pool.spread, without that module's imports
@@ -37,11 +38,14 @@ def planner_bring(their_sets, my_sets, rnd):
         return [their_sets[i] for i in list(Lp) + list(back)]
     except Exception as e:
         print('planner_bring:', repr(e), flush=True); return None
+LOGLOCK = threading.Lock()
 class Game:
-    def __init__(self):
+    """one game slot; several run side by side (the page's ?g=N), each with its own engine process and match"""
+    def __init__(self, slot=1):
+        self.slot = slot
         self.proc = None; self.msg = None; self.waiting = False; self.id = 0; self.log = []; self.tmp = None; self.lock = threading.Lock(); self.err = None
         self.match = None; self.rnd = random.Random(); self.cur = None; self.value = None; self.verdict = None; self.pending_concede = False
-        self.store = os.path.join('results', 'play_match.json')   # the match record survives a server restart
+        self.store = os.path.join('results', 'play_match.json' if slot == 1 else f'play_match_{slot}.json')   # the match record survives a server restart
         try: self.match = json.load(open(self.store))
         except Exception: self.match = None
     def save(self):
@@ -51,7 +55,7 @@ class Game:
     def log_game(self, g):
         try:
             import datetime; os.makedirs('results', exist_ok=True)
-            with open(self.LOG, 'a') as f: f.write(json.dumps({'when': datetime.datetime.now().isoformat(timespec='minutes'), 'match': self.match and self.match['key'], **g}) + '\n')
+            with LOGLOCK, open(self.LOG, 'a') as f: f.write(json.dumps({'when': datetime.datetime.now().isoformat(timespec='minutes'), 'slot': self.slot, 'match': self.match and self.match['key'], **g}) + '\n')
         except Exception as e: print('log:', repr(e), flush=True)
     def record(self):
         """the all-time record from the games log"""
@@ -128,7 +132,21 @@ class Game:
             except Exception: pass
         self.proc = None
         if self.tmp: shutil.rmtree(self.tmp, ignore_errors=True); self.tmp = None
-G = Game()
+GAMES = {}; GLOCK = threading.Lock()
+def game(g):
+    with GLOCK:
+        if g not in GAMES: GAMES[g] = Game(g)
+        return GAMES[g]
+def lobby():
+    """every slot's state in one line, for the page's slot bar"""
+    out = {}
+    for g in sorted(set(GAMES) | {1, 2, 3, 4, 5}):
+        G = GAMES.get(g)
+        if not G or not G.msg: out[g] = 'not started'
+        elif G.waiting: out[g] = 'thinking'
+        elif G.msg.get('type') == 'end': out[g] = 'ended'
+        else: out[g] = f"your move (turn {G.msg.get('turn')})"
+    return out
 def teams():
     mine = json.load(open(os.path.join('..', 'native', 'focus_sets_team.json')))
     out = {'mine': [{'name': 'Trick Room six', 'sets': mine}], 'pool': []}
@@ -148,25 +166,30 @@ class H(BaseHTTPRequestHandler):
         self.send_response(code); self.send_header('Content-Type', ctype); self.send_header('Content-Length', str(len(data))); self.end_headers(); self.wfile.write(data)
     def do_GET(self):
         global TEAMS
-        if self.path == '/' or self.path.startswith('/?'): self.send(200, open('play_ui.html', 'rb').read(), 'text/html; charset=utf-8')
-        elif self.path == '/teams':
+        u = urlparse(self.path); q = parse_qs(u.query); path = u.path
+        if path == '/': self.send(200, open('play_ui.html', 'rb').read(), 'text/html; charset=utf-8')
+        elif path == '/teams':
             if TEAMS is None: TEAMS = teams()
             self.send(200, TEAMS)
-        elif self.path == '/state':
-            with G.lock: self.send(200, {'game': G.id, 'waiting': G.waiting, 'msg': G.msg, 'error': G.err, 'match': G.match, 'verdict': getattr(G, 'verdict', None), 'record': G.record()})
+        elif path == '/state':
+            G = game(int(q.get('g', ['1'])[0]))
+            with G.lock: self.send(200, {'game': G.id, 'slot': G.slot, 'waiting': G.waiting, 'msg': G.msg, 'error': G.err, 'match': G.match, 'verdict': getattr(G, 'verdict', None), 'record': G.record(), 'lobby': lobby()})
+        elif path == '/lobby': self.send(200, lobby())
         else: self.send(404, {'error': 'no'})
     def do_POST(self):
         n = int(self.headers.get('Content-Length') or 0); body = json.loads(self.rfile.read(n) or b'{}')
-        if self.path == '/start':
+        G = game(int(body.get('g') or 1)); path = urlparse(self.path).path
+        if path == '/start':
             G.start(body['mine'], body.get('theirs'), body.get('match_key'), body.get('their_six'), body.get('my_six'))
             self.send(200, {'ok': G.err is None, 'error': G.err})
-        elif self.path == '/choose': self.send(200, {'ok': G.choose(body.get('i', 0))})
-        elif self.path == '/forfeit': self.send(200, {'ok': G.finish('the planner', 'you forfeited')})
-        elif self.path == '/concede': self.send(200, G.concede_check())
-        elif self.path == '/stop': G.stop(); self.send(200, {'ok': True})
+        elif path == '/choose': self.send(200, {'ok': G.choose(body.get('i', 0))})
+        elif path == '/forfeit': self.send(200, {'ok': G.finish('the planner', 'you forfeited')})
+        elif path == '/concede': self.send(200, G.concede_check())
+        elif path == '/stop': G.stop(); self.send(200, {'ok': True})
         else: self.send(404, {'error': 'no'})
 if __name__ == '__main__':
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8765
     print(f'play: http://localhost:{port}', flush=True)
     try: ThreadingHTTPServer(('127.0.0.1', port), H).serve_forever()
-    finally: G.stop()
+    finally:
+        for G in list(GAMES.values()): G.stop()

@@ -91,8 +91,9 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
     let mut uns: Vec<String> = vec![]; let mut dp2s = [0usize; 4]; let mut dplog: Vec<Value> = vec![]; let mut h2cells = 0usize;
     let want_states = std::env::var("BATTLE_TURNS").is_ok(); let mut states: Vec<Value> = vec![];
     let want_feats = std::env::var("BATTLE_FEATS").is_ok(); let mut fx: Vec<Vec<f64>> = vec![];
-    let human_game = human.is_some();   // a human's game runs to its end (PP exhaustion at the latest), not to the self-play cap
-    while !b.ended && (turn <= MAXTURN || human_game && turn <= STALL_MAXTURN || (turn <= STALL_MAXTURN && !can_damage(&b, 0) && !can_damage(&b, 1))) {
+    let human_game = human.is_some();   // a human's game runs until the clock (PLAY_CLOCK_TURNS, default 100), not to the self-play cap
+    let clock = crate::spot::clock_turns();
+    while !b.ended && (if human_game { turn <= clock } else { turn <= MAXTURN || (turn <= STALL_MAXTURN && !can_damage(&b, 0) && !can_damage(&b, 1)) }) {
         let sw = std::env::var("BATTLE_NOSWITCH").is_err();   // BATTLE_NOSWITCH=1: control run, Pokemon only come in when something faints
         let msw = joint(&mut b, 0, sw); let tsw = joint(&mut b, 1, sw);
         if msw.is_empty() || tsw.is_empty() {
@@ -341,7 +342,7 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
                 let gv = if wt > 0.0 { gv / wt } else { 0.5 };
                 // "ask the planner to concede": 8 playouts of the planner against itself from here (up to 250 turns each)
                 let mut check = || { let n = 8usize; let bb = &b;
-                    let rs: Vec<f64> = std::thread::scope(|sc| { let hs: Vec<_> = (0..n).map(|k| sc.spawn(move || crate::spot::playout_long(bb, cfg, (k as f64 + 1.0) * 7919.0, key ^ ((turn as u64) << 40) ^ ((k as u64 + 11) << 48), 250))).collect();
+                    let rs: Vec<f64> = std::thread::scope(|sc| { let hs: Vec<_> = (0..n).map(|k| sc.spawn(move || crate::spot::playout_long(bb, cfg, (k as f64 + 1.0) * 7919.0, key ^ ((turn as u64) << 40) ^ ((k as u64 + 11) << 48), clock.saturating_sub(turn - 1).max(1)))).collect();
                         hs.into_iter().map(|h| h.join().unwrap_or(0.5)).collect() });
                     let wins = rs.iter().filter(|&&r| r < 0.25).count(); let draws = rs.iter().filter(|&&r| (0.25..0.75).contains(&r)).count();
                     json!({"type": "verdict", "n": n, "planner_wins": wins, "draws": draws, "value": gv}) };
@@ -424,7 +425,11 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
         turn += 1;
     }
     let v = value(&mut b, cfg);
-    if let Some(h) = human.as_deref_mut() { h.end(&b, turn - 1, v); }
+    if let Some(h) = human.as_deref_mut() {
+        let (winner, how) = if b.ended { (match b.winner { Some(Some(0)) => "you", Some(Some(1)) => "the planner", Some(_) => "draw", None => "unfinished" }, None) }
+            else { let w = crate::spot::clock_winner(&b); (match w { Some(0) => "you", Some(_) => "the planner", None => "draw" }, Some(format!("the clock ran out after {} turns: {}", turn - 1,
+                   match w { Some(_) => "more Pokemon left, or more HP", None => "dead even" }))) };
+        h.end(&b, turn - 1, v, winner, how); }
     Out { v, unsupported: uns, feats: fx, turns: turn - 1, tr_turns, tr_by, switches, slot_decisions, switch_slots, log, states, dp2: dp2s, dplog, h2: h2cells }
 }
 /// champ play <engine_data.json> <start.jsonl> : the first start line, a human on side 0 (see human.rs)

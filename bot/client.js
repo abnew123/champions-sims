@@ -130,6 +130,10 @@ async function handleRequest(room, R) {
   if (R.oppRating != null && R.oppRating >= topBand.elo && !stoppedForTop) { stoppedForTop = true; log(`opponent rated ${R.oppRating} is in the ladder's top band: this is the last game`); }
   const think = req.teamPreview ? rnd(8e3, 20e3) : rnd(L.think_seconds[0] * 1e3, L.think_seconds[1] * 1e3);
   const t0 = Date.now();
+  if (req.teamPreview) {   // the open sheets (|showteam|) follow the preview request by a moment: wait for the opponent's, up to 8 s
+    const opp = R.side === 'p1' ? 'p2' : 'p1';
+    for (let i = 0; i < 40 && !R.lines.some(l => l.startsWith('|showteam|' + opp + '|')); i++) await sleep(200);
+  }
   const ans = await ask({type: req.teamPreview ? 'preview' : 'turn', room, side: R.side, log: R.lines, request: req, team: currentTeam});
   if (ans.error) { log('brain error', room, ans.error); return; }
   const wait = Math.max(0, think - (Date.now() - t0)); await sleep(wait);

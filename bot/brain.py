@@ -28,9 +28,31 @@ def unpack(packed):
     except Exception: return None
     return [{'species': t['species'] or t['name'], 'item': t.get('item', ''), 'ability': t.get('ability', ''), 'moves': t.get('moves', []), 'nature': t.get('nature', 'Serious'),
              'evs': [t.get('evs', {}).get(k, 0) for k in ('hp', 'atk', 'def', 'spa', 'spd', 'spe')]} for t in team]
+def sheet_pick(sheet, team, theirs):
+    """the team sheet's bring for this opponent (sheets/<team>/picks.json: lead + back per opposing group, the sheet kit's both-sides
+    pick): the opponent's six classified as the pool does (cluster_opps rules, pssim/opp_pool.json), then 'Other <archetype>', then the
+    group whose likely sixes share the most species with it; None when the sheet has nothing usable"""
+    from cluster_opps import tag, norm
+    from pro_replays import arch
+    picks = json.load(open(os.path.join(ROOT, sheet)))['picks']
+    rules = json.load(open(os.path.join(PS, 'opp_pool.json')))['rules']
+    six = [x['species'] for x in theirs]; g = tag(six, rules); how = 'group'
+    if g not in picks: g = 'Other ' + arch([norm(x) for x in six]); how = 'archetype'
+    if g not in picks:
+        S = set(norm(x) for x in six)
+        def overlap(k): return max((len(S & set(norm(y) for y in a['six'].split(', '))) for a in picks[k].get('answers', [])), default=0)
+        g = max(picks, key=overlap); how = 'nearest group'
+    pk = picks[g]; names = [x['species'] for x in team]
+    try: four = [team[names.index(sp)] for sp in pk['lead'] + pk['back']]
+    except ValueError: return None, None
+    return four, f'sheet pick for {g} ({how})'
 def preview(msg):
     team = msg['team']['sets']; opp_side = 'p2' if msg['side'] == 'p1' else 'p1'
     theirs = showteam(msg['log'], opp_side)
+    four = None
+    if theirs and msg['team'].get('sheet'):
+        four, why = sheet_pick(msg['team']['sheet'], team, theirs)
+        if four: return {'order': [team.index(x) + 1 for x in four], 'note': 'bring ' + '/'.join(x['species'] for x in four) + f' ({why})'}
     import play_server as P
     rnd = random.Random()
     four = P.planner_bring(team, theirs, rnd) if theirs else None

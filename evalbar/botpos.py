@@ -174,7 +174,9 @@ def decisions(log, side):
     for i, l in enumerate(L):
         upto = '\n'.join(L[:i]) + '\n'
         if l.startswith('|teampreview'):
-            out.append({'kind': 'preview', 'log': upto + l + '\n', 'request': {'teamPreview': True, 'maxChosenTeamSize': 4, 'side': {'id': side, 'pokemon': [
+            j = i + 1
+            while j < len(L) and (L[j].startswith('|showteam|') or L[j].startswith('|t:|')): j += 1   # the open sheets come during preview
+            out.append({'kind': 'preview', 'log': '\n'.join(L[:j]) + '\n', 'request': {'teamPreview': True, 'maxChosenTeamSize': 4, 'side': {'id': side, 'pokemon': [
                 {'ident': f'{side}: {sp}', 'details': f'{sp}, L50', 'condition': '100/100', 'active': False, 'item': toid((sheets.get(toid(sp)) or {}).get('item', '')),
                  'moves': [toid(m) for m in (sheets.get(toid(sp)) or {}).get('moves', [])]} for sp in six]}}, 'actual': {'brought': brought, 'leads': leads}})
         elif l.startswith('|turn|'):

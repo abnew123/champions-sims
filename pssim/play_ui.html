@@ -48,7 +48,9 @@ select{font:inherit;padding:5px;border-radius:6px;border:1px solid var(--line);b
 <script>
 let T=null, order=[], my=null, opp=null, lastGame=0, lastKey='', sel=[null,null], busy=false, match=null;
 function matchKey(){return $('mine').value+'|'+$('theirs').value;}
-function scoreTxt(){if(!match||!match.games||!match.games.length)return ''; const w=match.games.filter(g=>g.winner==='you').length, l=match.games.filter(g=>g.winner==='the planner').length; return `match: you ${w} – ${l} planner (${match.games.length} game${match.games.length>1?'s':''} played)`;}
+let record=null;
+function scoreTxt(){const parts=[]; if(match&&match.games&&match.games.length){const w=match.games.filter(g=>g.winner==='you').length, l=match.games.filter(g=>g.winner==='the planner').length; parts.push(`this match: you ${w} – ${l} planner`);}
+  if(record&&record.games){parts.push(`all games: you ${record.you} – ${record.planner} planner (${record.games} played)`);} return parts.join(' · ');}
 function showScore(){const el=$('score'); el.textContent=scoreTxt(); el.className=scoreTxt()?'':'hidden';}
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
@@ -59,9 +61,10 @@ async function load(){T=await (await fetch('/teams')).json(); let st=null; try{s
   const m=$('mine'); T.mine.forEach((t,i)=>m.add(new Option(t.name,'m'+i))); T.pool.forEach((t,i)=>m.add(new Option(`${t.arch||'?'} ${t.rating}: ${t.sets.map(s=>s.species).join(' / ')}`,'p'+i)));
   const o=$('theirs'); T.pool.forEach((t,i)=>o.add(new Option(`${t.arch||'?'} ${t.rating}: ${t.sets.map(s=>s.species).join(' / ')}`,i)));
   m.onchange=pickTeam; o.onchange=showOpp;
+  if(st&&st.record){record=st.record;}
   if(st&&st.match&&st.match.key&&st.match.games&&st.match.games.length){const [a,b]=st.match.key.split('|'); m.value=a; o.value=b; match=st.match; pickTeam(); showOpp(); showScore();
     if(st.msg&&st.msg.type!=='end'){$('setup').classList.add('hidden'); $('game').classList.remove('hidden'); poll(); return;} }
-  else{pickTeam(); randomOpp();}
+  else{pickTeam(); randomOpp(); showScore();}
   if(st&&st.msg&&st.msg.type!=='end'&&!(st.match&&st.match.games&&st.match.games.length)){$('setup').classList.add('hidden'); $('game').classList.remove('hidden'); poll();}}
 function team(v){return v[0]==='m'?T.mine[+v.slice(1)]:T.pool[+v.slice(1)]}
 function pickTeam(){my=team($('mine').value); order=[]; const p=$('pick'); p.innerHTML='';
@@ -76,7 +79,7 @@ async function startGame(){const mine=order.map(i=>my.sets[i]); const theirs=opp
   if(!r.ok){$('status').textContent='error: '+r.error; return;} poll();}
 async function poll(){let r; try{r=await (await fetch('/state')).json();}catch(e){$('status').textContent='lost the play server (start it with: pssim/battlesim-play pssim/play_server.py, then reload)'; return;} if(r.error){$('status').textContent='error: '+r.error;}
   const key=r.game+':'+(r.msg?r.msg.type+r.msg.turn+(r.msg.log_all||[]).length:'');
-  match=r.match||match; showScore(); if(r.msg&&key!==lastKey){lastKey=key; render(r.msg);} if(r.waiting){$('status').textContent=askedConcede?'the planner is playing it out in its head...':'the planner is thinking...'; setTimeout(poll,300);}
+  match=r.match||match; record=r.record||record; showScore(); if(r.msg&&key!==lastKey){lastKey=key; render(r.msg);} if(r.waiting){$('status').textContent=askedConcede?'the planner is playing it out in its head...':'the planner is thinking...'; setTimeout(poll,300);}
   else if(r.msg&&r.msg.type!=='end'){$('status').textContent=`turn ${r.msg.turn}: your move`; if(askedConcede){askedConcede=false; if(r.verdict&&!r.verdict.conceded){const e=$('endnote'); if(e)e.textContent='the planner does not consider itself lost';}}}
   else if(r.msg&&r.msg.type==='end'){askedConcede=false;} }
 function hpbar(m){const f=m.maxhp?m.hp/m.maxhp:0; const w=m.hp>0?Math.max(1.5,100*f):0; return `<div class="bar ${f<.25?'low':f<.5?'mid':''}"><i style="width:${w}%"></i></div>`;}

@@ -40,7 +40,22 @@
      "v": 0.156
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Kingambit",
+      "Blastoise"
+     ],
+     "back": [
+      "Farigiraf",
+      "Incineroar"
+     ],
+     "p": 1.0
+    }
+   ],
+   "mix_v": 0.616,
+   "mix_pure_v": 0.616
   },
   "Tailwind: Gholdengo + Raichu + Rillaboom (no Incineroar)": {
    "lead": [
@@ -80,7 +95,22 @@
      "v": 0.156
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Torkoal",
+      "Kingambit"
+     ],
+     "p": 1.0
+    }
+   ],
+   "mix_v": 0.614,
+   "mix_pure_v": 0.614
   },
   "Rain + Sun: Archaludon + Grimmsnarl + Pelipper": {
    "lead": [
@@ -120,7 +150,33 @@
      "v": 0.312
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Incineroar"
+     ],
+     "p": 0.625
+    },
+    {
+     "lead": [
+      "Incineroar",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Farigiraf"
+     ],
+     "p": 0.375
+    }
+   ],
+   "mix_v": 0.442,
+   "mix_pure_v": 0.38
   },
   "Rain: Archaludon + Pelipper (no Grimmsnarl)": {
    "lead": [
@@ -160,7 +216,22 @@
      "v": 0.656
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Torkoal",
+      "Blastoise"
+     ],
+     "back": [
+      "Farigiraf",
+      "Incineroar"
+     ],
+     "p": 1.0
+    }
+   ],
+   "mix_v": 0.456,
+   "mix_pure_v": 0.456
   },
   "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler": {
    "lead": [
@@ -200,7 +271,22 @@
      "v": 0.344
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Farigiraf",
+      "Kingambit"
+     ],
+     "back": [
+      "Torkoal",
+      "Incineroar"
+     ],
+     "p": 1.0
+    }
+   ],
+   "mix_v": 0.238,
+   "mix_pure_v": 0.238
   },
   "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)": {
    "lead": [
@@ -240,7 +326,55 @@
      "v": 0.594
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Torkoal",
+      "Kingambit"
+     ],
+     "p": 0.496
+    },
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Blastoise",
+      "Kingambit"
+     ],
+     "p": 0.364
+    },
+    {
+     "lead": [
+      "Farigiraf",
+      "Kingambit"
+     ],
+     "back": [
+      "Torkoal",
+      "Incineroar"
+     ],
+     "p": 0.11
+    },
+    {
+     "lead": [
+      "Farigiraf",
+      "Kingambit"
+     ],
+     "back": [
+      "Blastoise",
+      "Incineroar"
+     ],
+     "p": 0.031
+    }
+   ],
+   "mix_v": 0.478,
+   "mix_pure_v": 0.431
   },
   "Sun: Farigiraf + Garchomp + Incineroar + Sylveon": {
    "lead": [
@@ -280,7 +414,33 @@
      "v": 0.219
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Kingambit",
+      "Blastoise"
+     ],
+     "back": [
+      "Farigiraf",
+      "Incineroar"
+     ],
+     "p": 0.545
+    },
+    {
+     "lead": [
+      "Incineroar",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Farigiraf"
+     ],
+     "p": 0.455
+    }
+   ],
+   "mix_v": 0.216,
+   "mix_pure_v": 0.163
   },
   "Sun: Farigiraf + Garchomp + Sylveon (no Incineroar)": {
    "lead": [
@@ -320,7 +480,22 @@
      "v": 0.438
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Kingambit"
+     ],
+     "p": 1.0
+    }
+   ],
+   "mix_v": 0.08,
+   "mix_pure_v": 0.08
   },
   "Sand: Excadrill + Salamence + Sneasler + Tyranitar": {
    "lead": [
@@ -360,7 +535,33 @@
      "v": 0.312
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Kingambit",
+      "Incineroar"
+     ],
+     "p": 0.731
+    },
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Blastoise",
+      "Kingambit"
+     ],
+     "p": 0.269
+    }
+   ],
+   "mix_v": 0.595,
+   "mix_pure_v": 0.569
   },
   "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)": {
    "lead": [
@@ -400,7 +601,44 @@
      "v": 0.094
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Kingambit",
+      "Blastoise"
+     ],
+     "back": [
+      "Farigiraf",
+      "Incineroar"
+     ],
+     "p": 0.467
+    },
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Kingambit",
+      "Incineroar"
+     ],
+     "p": 0.4
+    },
+    {
+     "lead": [
+      "Incineroar",
+      "Kingambit"
+     ],
+     "back": [
+      "Blastoise",
+      "Farigiraf"
+     ],
+     "p": 0.133
+    }
+   ],
+   "mix_v": 0.373,
+   "mix_pure_v": 0.299
   },
   "Trick Room: Delphox + Floette + Incineroar + Sinistcha": {
    "lead": [
@@ -440,7 +678,33 @@
      "v": 0.438
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Blastoise",
+      "Torkoal"
+     ],
+     "p": 0.833
+    },
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Incineroar"
+     ],
+     "p": 0.167
+    }
+   ],
+   "mix_v": 0.473,
+   "mix_pure_v": 0.455
   },
   "Trick Room: Delphox + Incineroar + Sinistcha (no Floette)": {
    "lead": [
@@ -480,7 +744,33 @@
      "v": 0.281
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Kingambit",
+      "Incineroar"
+     ],
+     "p": 0.917
+    },
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Blastoise",
+      "Kingambit"
+     ],
+     "p": 0.083
+    }
+   ],
+   "mix_v": 0.514,
+   "mix_pure_v": 0.514
   },
   "Rain + Sun: Archaludon + Golisopod + Politoed": {
    "lead": [
@@ -520,7 +810,22 @@
      "v": 0.25
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Incineroar",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Kingambit"
+     ],
+     "p": 1.0
+    }
+   ],
+   "mix_v": 0.469,
+   "mix_pure_v": 0.469
   },
   "Perish: Archaludon + Politoed (no Golisopod)": {
    "lead": [
@@ -560,7 +865,33 @@
      "v": 0.656
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Farigiraf",
+      "Kingambit"
+     ],
+     "back": [
+      "Blastoise",
+      "Torkoal"
+     ],
+     "p": 0.562
+    },
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Blastoise",
+      "Torkoal"
+     ],
+     "p": 0.438
+    }
+   ],
+   "mix_v": 0.56,
+   "mix_pure_v": 0.51
   },
   "Snow: Froslass + Kingambit + Rillaboom": {
    "lead": [
@@ -600,7 +931,33 @@
      "v": 0.656
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Incineroar"
+     ],
+     "p": 0.667
+    },
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Torkoal",
+      "Kingambit"
+     ],
+     "p": 0.333
+    }
+   ],
+   "mix_v": 0.624,
+   "mix_pure_v": 0.599
   },
   "Tailwind: Glimmora + Rillaboom + Volcarona (no Basculegion)": {
    "lead": [
@@ -640,7 +997,33 @@
      "v": 0.656
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Blastoise",
+      "Torkoal"
+     ],
+     "p": 0.917
+    },
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Kingambit"
+     ],
+     "p": 0.083
+    }
+   ],
+   "mix_v": 0.62,
+   "mix_pure_v": 0.604
   },
   "Indeedee TR: Armarouge + Indeedee-F": {
    "lead": [
@@ -680,7 +1063,33 @@
      "v": 0.438
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Blastoise",
+      "Kingambit"
+     ],
+     "p": 0.5
+    },
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Kingambit"
+     ],
+     "p": 0.5
+    }
+   ],
+   "mix_v": 0.235,
+   "mix_pure_v": 0.2
   },
   "Sun: Charizard + Whimsicott": {
    "lead": [
@@ -720,7 +1129,33 @@
      "v": 0.656
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Kingambit",
+      "Incineroar"
+     ],
+     "p": 0.538
+    },
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Torkoal",
+      "Kingambit"
+     ],
+     "p": 0.462
+    }
+   ],
+   "mix_v": 0.47,
+   "mix_pure_v": 0.433
   },
   "Balance: Dragonite + Floette + Incineroar": {
    "lead": [
@@ -760,7 +1195,22 @@
      "v": 0.344
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Kingambit",
+      "Incineroar"
+     ],
+     "p": 1.0
+    }
+   ],
+   "mix_v": 0.64,
+   "mix_pure_v": 0.64
   },
   "Indeedee TR: Metagross + Milotic + Sneasler": {
    "lead": [
@@ -800,7 +1250,33 @@
      "v": 0.094
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Torkoal",
+      "Kingambit"
+     ],
+     "p": 0.865
+    },
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Blastoise",
+      "Indeedee-F"
+     ],
+     "p": 0.135
+    }
+   ],
+   "mix_v": 0.23,
+   "mix_pure_v": 0.228
   },
   "Indeedee TR: Camerupt + Farigiraf": {
    "lead": [
@@ -840,7 +1316,33 @@
      "v": 0.031
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Incineroar",
+      "Kingambit"
+     ],
+     "back": [
+      "Blastoise",
+      "Torkoal"
+     ],
+     "p": 0.5
+    },
+    {
+     "lead": [
+      "Kingambit",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Incineroar"
+     ],
+     "p": 0.5
+    }
+   ],
+   "mix_v": 0.459,
+   "mix_pure_v": 0.445
   },
   "Sand: Excadrill + Tyranitar": {
    "lead": [
@@ -880,7 +1382,22 @@
      "v": 0.531
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Blastoise",
+      "Kingambit"
+     ],
+     "p": 1.0
+    }
+   ],
+   "mix_v": 0.48,
+   "mix_pure_v": 0.48
   },
   "Perish: Gengar + Kommo-o + Rillaboom": {
    "lead": [
@@ -920,7 +1437,22 @@
      "v": 0.562
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Blastoise",
+      "Kingambit"
+     ],
+     "p": 1.0
+    }
+   ],
+   "mix_v": 0.508,
+   "mix_pure_v": 0.508
   },
   "Indeedee TR: Basculegion + Whimsicott": {
    "lead": [
@@ -960,7 +1492,33 @@
      "v": 0.781
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Kingambit"
+     ],
+     "p": 0.7
+    },
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Kingambit",
+      "Incineroar"
+     ],
+     "p": 0.3
+    }
+   ],
+   "mix_v": 0.473,
+   "mix_pure_v": 0.451
   },
   "Other Tailwind": {
    "lead": [
@@ -1000,7 +1558,33 @@
      "v": 0.531
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Kingambit"
+     ],
+     "p": 0.667
+    },
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Torkoal",
+      "Kingambit"
+     ],
+     "p": 0.333
+    }
+   ],
+   "mix_v": 0.543,
+   "mix_pure_v": 0.518
   },
   "Other Sun": {
    "lead": [
@@ -1040,7 +1624,33 @@
      "v": 0.219
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Incineroar"
+     ],
+     "p": 0.7
+    },
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Kingambit"
+     ],
+     "p": 0.3
+    }
+   ],
+   "mix_v": 0.289,
+   "mix_pure_v": 0.28
   },
   "Other Indeedee TR": {
    "lead": [
@@ -1080,7 +1690,22 @@
      "v": 0.656
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Farigiraf",
+      "Kingambit"
+     ],
+     "back": [
+      "Blastoise",
+      "Incineroar"
+     ],
+     "p": 1.0
+    }
+   ],
+   "mix_v": 0.511,
+   "mix_pure_v": 0.511
   },
   "Other Rain": {
    "lead": [
@@ -1120,7 +1745,33 @@
      "v": 0.594
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Kingambit",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Farigiraf"
+     ],
+     "p": 0.8
+    },
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Kingambit",
+      "Incineroar"
+     ],
+     "p": 0.2
+    }
+   ],
+   "mix_v": 0.574,
+   "mix_pure_v": 0.527
   },
   "Other Balance": {
    "lead": [
@@ -1160,7 +1811,44 @@
      "v": 0.469
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Blastoise",
+      "Torkoal"
+     ],
+     "p": 0.777
+    },
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Incineroar"
+     ],
+     "p": 0.188
+    },
+    {
+     "lead": [
+      "Kingambit",
+      "Blastoise"
+     ],
+     "back": [
+      "Farigiraf",
+      "Incineroar"
+     ],
+     "p": 0.035
+    }
+   ],
+   "mix_v": 0.534,
+   "mix_pure_v": 0.526
   },
   "Other Snow": {
    "lead": [
@@ -1200,7 +1888,22 @@
      "v": 0.75
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Incineroar",
+      "Farigiraf"
+     ],
+     "back": [
+      "Blastoise",
+      "Torkoal"
+     ],
+     "p": 1.0
+    }
+   ],
+   "mix_v": 0.768,
+   "mix_pure_v": 0.768
   },
   "Other Trick Room": {
    "lead": [
@@ -1240,7 +1943,22 @@
      "v": 0.5
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Kingambit"
+     ],
+     "p": 1.0
+    }
+   ],
+   "mix_v": 0.447,
+   "mix_pure_v": 0.447
   },
   "Other Perish": {
    "lead": [
@@ -1280,8 +1998,35 @@
      "v": 0.656
     }
    ],
-   "changed": false
+   "changed": false,
+   "mix": [
+    {
+     "lead": [
+      "Farigiraf",
+      "Blastoise"
+     ],
+     "back": [
+      "Torkoal",
+      "Kingambit"
+     ],
+     "p": 0.7
+    },
+    {
+     "lead": [
+      "Incineroar",
+      "Kingambit"
+     ],
+     "back": [
+      "Blastoise",
+      "Farigiraf"
+     ],
+     "p": 0.3
+    }
+   ],
+   "mix_v": 0.591,
+   "mix_pure_v": 0.591
   }
  },
- "basis": "both sides pick their four (optimal step, optimal)"
+ "basis": "both sides pick their four (optimal step, optimal)",
+ "mix_note": "per card a probability over screened fours (sheetkit/mix.py): the LP optimum when each opposing six best-responds with the answers known; sample one per game"
 }

@@ -1069,3 +1069,12 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     The server runs in the user's Terminal panel (`pssim/battlesim-play pssim/play_server.py`); a preview-started copy was stopped by
     the app after an hour. The user's read after a few games: the planner "does feel decently strong", "it'd win a bo100 vs me", with
     the caveat that the unfamiliar presentation makes them play worse for now.
+  - **Play page, later on 2026-10-10 (to 11:30 pm):** Forfeit; "Ask the planner to concede" (8 planner-vs-planner playouts from the
+    position, switches on, in parallel, judged by the clock rule when they run long; it concedes when its turn value is under 2% or it
+    wins and draws none; the value stays on the server); the clock (`PLAY_CLOCK_TURNS`, default 100: Pokemon left, then HP share, then
+    HP, as the game's timer); a human game runs to that clock, not the 25-turn self-play cap; game slots (`?g=1..5`, each its own engine
+    and match, a slot bar shows which is waiting); the match record in results/play_match[_N].json and every finished game in
+    results/play_games.jsonl (the strength record, shown on the page as the all-time score). Engine log additions for the page: a
+    spread move's targets, Armor Tail / Queenly Majesty / Dazzling blocks. **Record so far: you 2 – 2 planner (4 games, two from before
+    the log, one of those reconstructed).** The user stopped there ("I apparently can't multi table pokemon like I can poker") and will
+    think about a better way to get the games in; nothing is pending on this side.

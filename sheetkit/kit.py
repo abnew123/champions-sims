@@ -18,6 +18,7 @@
                                                            (OPTIMAL_SIXES=pool: against real sixes -> optimal_pool.json)
   python3 sheetkit/kit.py <team> guide run [--games 64] [--g0 7000] [--threads N] | report   game plans and team-preview tells -> guide.json
   python3 sheetkit/kit.py <team> page [--compare other.html]   -> sheets/<team>/sheet.html
+  python3 sheetkit/kit.py <team> mix [write|check] [--threads N]   mixed brings per card -> picks.json "mix" (check: play the mixes' answers first)
   python3 sheetkit/kit.py <team> flagged [--write]         battle results with a game flagged unsupported; --write moves them out to replay
                                                            (--moves healingwish,memento: also results where either four carries one)
                                                            (--stones 2: also results where either four holds two Mega Stones)
@@ -185,6 +186,9 @@ def main():
     elif step == ('t1', 'solve'): d = T1.solve(sheet); print(f"t1.json: {len(d['plans'])} plans")
     elif step == ('optimal', 'run'):
         import optimal; optimal.run(sheet, a.threads, a.force, a.only or 'all')
+    elif a.step == 'mix':                                          # mixed brings (needs scipy: the venv python)
+        sys.exit(subprocess.run([VENV_PY, os.path.join(KIT, 'mix.py'), a.team, a.sub or 'write'] + (['--threads', str(a.threads)] if a.threads else [])
+                                + (['--force'] if a.force else [])).returncode)
     elif step == ('optimal', 'adopt'):
         import optimal; optimal.adopt(sheet)
     elif step == ('optimal', 'report'):

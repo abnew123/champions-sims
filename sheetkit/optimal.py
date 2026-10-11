@@ -120,7 +120,7 @@ def run_screen(sheet, threads, log):
 def queues(sheet, kind):
     """the job files of every round so far: round 1 is screen_<games>.json / matrix.json, later rounds screen_r<n>_<games>.json / matrix_r<n>.json;
     each one's results are in the folder of the same name"""
-    pat = re.compile(r'screen(_r\d+)?_\d+\.json$' if kind == 'screen' else r'matrix(_r\d+)?\.json$')
+    pat = re.compile(r'screen(_r\d+)?_\d+\.json$' if kind == 'screen' else r'matrix(_r\d+|_mix\d+)?\.json$')      # _mix<n>: mix.py check
     return sorted(p for p in glob.glob(_w(sheet, '*.json')) if pat.search(os.path.basename(p)))
 
 def four_key(lead, back): return (frozenset(lead), frozenset(back))
@@ -221,9 +221,9 @@ def run(sheet, threads=None, force=False, stage='all'):
     if stage in ('all', 'matrix'): run_matrix(sheet, threads, log)
     if stage == 'all':                                            # later rounds' queues: play whatever is missing (e.g. moved out by
         for p in queues(sheet, 'screen') + queues(sheet, 'matrix'):  # `kit.py <team> flagged --write` for a replay)
-            m = re.search(r'screen_r\d+_(\d+)\.json$', p) or re.search(r'matrix_r\d+\.json$', p)
+            m = re.search(r'screen_r\d+_(\d+)\.json$', p) or re.search(r'matrix_(r|mix)\d+\.json$', p)
             if not m: continue
-            games = int(m.group(1)) if m.lastindex else MATRIX_GAMES; g0 = SCREEN_G0 if 'screen' in os.path.basename(p) else MATRIX_G0
+            games = int(m.group(1)) if 'screen' in os.path.basename(p) else MATRIX_GAMES; g0 = SCREEN_G0 if 'screen' in os.path.basename(p) else MATRIX_G0
             if len(glob.glob(os.path.join(p[:-5], '*.json'))) < len(rj(p)): P.battle_run(sheet, 'optimal', p, p[:-5], games, g0, threads, None, log)
 
 def adopt(sheet, out=print):

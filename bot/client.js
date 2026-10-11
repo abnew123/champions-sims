@@ -107,6 +107,8 @@ async function onMessage(m) {
         continue;
       }
       if (p[1] === 'request' && p[2]) { try { R.req = JSON.parse(p[2]); } catch (e) { R.req = null; } if (R.req && !R.req.wait) handleRequest(room, R).catch(e => log('request error', room, String(e))); }
+      if ((p[1] === 'request' || p[1] === 'turn') && room.startsWith('battle-')) {   // the room log as the game goes (the Eval bar follows it live)
+        try { fs.writeFileSync(path.join(OUT, room + '.log'), R.lines.join('\n') + '\n'); } catch (e) {} }
       if (p[1] === 'raw' && me && line.includes(me) && line.includes('rating:')) { const mm = /rating: (\d+)[^0-9]+(\d+)/.exec(line); if (mm) myRating = +mm[2]; }
       if (p[1] === 'win' || p[1] === 'tie') { onEnd(room, R, p[1] === 'win' ? p[2] : null); }
     }

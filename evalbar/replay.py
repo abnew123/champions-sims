@@ -58,7 +58,7 @@ def parse(log):
     field = {'weather': '', 'wturns': 0, 'terrain': '', 'tturns': 0, 'tr': 0}
     sidec = {s: {'tailwind': 0, 'screens': {}, 'hazards': []} for s in ('p1', 'p2')}
     steps = []; events = []; cur = [None]; pend = {}; turn = 0; phase = 'lead'; winner = None; forfeit = False; perish = False; last_user = [None]
-    acts = {}; start_active = {}; moved_yet = [False]; mega_now = set(); redirect = set(); odd = set()
+    acts = {}; start_active = {}; moved_yet = [False]; mega_now = set(); redirect = set(); odd = set(); last_move = [None]
     def mon(ident):
         nick = ident.split(': ', 1)[1] if ': ' in ident else ident
         return mons[ident[:2]].get(nick)
@@ -133,7 +133,7 @@ def parse(log):
                 if k == 'detailschange' and 'Mega' in m.forme: m.mega = True; mega_now.add(id(m)); ev(m.side, [[m.side, disp(m.species)], ' Mega Evolved'])
                 elif k == '-formechange': m.temp = m.forme != m.species
         elif k == 'move':
-            m = mon(p[2]); tg = mon(p[4]) if len(p) > 4 and p[4] else None; last_user[0] = m
+            m = mon(p[2]); tg = mon(p[4]) if len(p) > 4 and p[4] else None; last_user[0] = m; last_move[0] = p[3]
             if not m: continue
             pos = p[2][:3]; own = 'from' not in t or clean(t['from']) == 'lockedmove'
             if own and 'from' in t and steps and tg is not None:                  # a charging move fires (Electro Shot, Solar Beam): its target
@@ -165,6 +165,7 @@ def parse(log):
                 note([u.ref(), f": stopped by {clean(p[3])}"]); moved_yet[0] = True; u.moved = True; u.last = p[4]
         elif k == 'cant':
             m = mon(p[2])
+            if m and p[2][:3] not in acts and active.get(p[2][:3]) == start_active.get(p[2][:3]): acts[p[2][:3]] = {'none': 'cant'}   # it did not switch
             if m:
                 ev(m.side, [m.ref(), ' ' + CANT.get(p[3], f"can't move ({clean(p[3])})")]); moved_yet[0] = True; m.moved = True
                 if p[3] == 'slp': m.slept += 1
@@ -182,6 +183,9 @@ def parse(log):
         elif k == 'faint':
             m = mon(p[2])
             if m:
+                pos = p[2][:3]                                                   # it fainted before acting: what it chose is not shown, but it
+                if phase != 'residual' and pos not in acts and active.get(pos) == start_active.get(pos):   # did not switch, nor
+                    acts[pos] = {'none': 'fainted', 'by': last_move[0]}          # use a move that goes before the one that knocked it out
                 m.fainted = True; m.hp = 0; m.status = ''; m.boosts = {}
                 last = cur[0]['notes'][-1] if cur[0] and cur[0]['notes'] else None
                 if last and last[0] == m.ref() and '→' in str(last[1]): last.append(', fainted')

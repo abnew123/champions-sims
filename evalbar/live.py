@@ -324,8 +324,8 @@ class Live:
         """after the game, for reviews: each turn again with the payoff table (evalpos EVAL_MATRIX), one engine thread at the lowest priority
         and one game at a time, apart from the live evaluation's lock, so a game going on is not slowed"""
         for t in turns:
-            posf = os.path.join(OUT, f'{s.tag}_t{t}_pos.jsonl')
-            if not os.path.exists(posf): positions(s.at(log, t)[0], posf)
+            posf = os.path.join(OUT, f'{s.tag}_t{t}_luckpos.jsonl')         # with the choices made: their cells get every sample, and each
+            positions(s.at(log, t)[0], posf)                                 # side's actual_v (what its choice cost) comes out
             with LUCK: EN.run(posf, s.lf, 1, 32, 1, extra={'EVAL_MATRIX': '1'}, nice=19)
             s.dirty = True
         s.luck_state = 'done'; s.dirty = True

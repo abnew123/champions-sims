@@ -41,18 +41,33 @@ def options(e, pos, scale):
             out[sd].append({'mon': R.disp(sl['mon']), 'played': True if any(o['played'] for o in opts) else None, 'options': opts})
     out['value'] = {'p1': scale(e['value']), 'p2': 1 - scale(e['value'])}               # each side's win chance in this hypothesis
     return out
+MOVES = {}                                                                # move id -> engine data, for priorities (loaded on first use)
+def load_moves():
+    if not MOVES: MOVES.update(json.load(open(os.path.join(C.MAIN, 'native', 'engine_data_full.json')))['moves'])
 def expected(e, pos):
     """what the turn was expected to give from the choices both sides made (side 0's raw win chance), from the payoff table (evalpos
     EVAL_MATRIX): the cell of the actual joint actions, averaged over the turn's luck. A living slot whose choice the log does not show
-    (it fainted before moving, a failed move with no target shown) counts as that side's mix. None without a table."""
+    counts as that side's mix, less what the log rules out: one that fainted before acting did not switch or use a move of higher priority
+    than the one that knocked it out, one that could not move did not switch; a move shown without its target (it failed) counts as that
+    move's targets in the mix. None without a table."""
     m = e.get('matrix')
     if not m: return None
+    load_moves()
+    def prio(s, i, c):                                                      # the priority of option c of side s's slot i (a switch: 7)
+        if c[0] == 'switch': return 7
+        sd = pos['state']['sides'][s]; mon = sd['pokemon'][sd['active'][i]] if sd['active'][i] is not None else None
+        mv = mon and (mon.get('moveSlots') or [])[c[0]:c[0] + 1]
+        return (MOVES.get(re.sub(r'[^a-z0-9]', '', (mv[0].get('id') or mv[0].get('move', '')).lower()), {}).get('priority', 0)) if mv else 0
     def pick(lines, mix, acts, s):
         alive = {sl['slot'] for sl in e['sides'][s]['slots']}
         def ok(row, exact):
             for i in range(2):
                 c = acts[i]['choice'] if acts[i] else None
                 if i in alive and c is not None and not same(row[i], c, exact): return False
+                k = acts[i].get('move') if acts[i] and c is None else None      # the move is known, its target is not: any of its targets
+                if i in alive and k is not None and row[i][0] != k: return False
+                no = acts[i].get('none') if acts[i] and c is None else None     # not shown, but not a switch, nor a move that would have
+                if i in alive and no and (row[i][0] == 'switch' or (no == 'fainted' and acts[i].get('by') is not None and prio(s, i, row[i]) > acts[i]['by'])): return False
             return True
         idx = [k for k, r in enumerate(lines) if ok(r, True)] or [k for k, r in enumerate(lines) if ok(r, False)]
         tot = sum(mix[k] for k in idx)

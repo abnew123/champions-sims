@@ -55,6 +55,24 @@ def condition(c):
     if 'fnt' in c: return 0, '', True
     hp, mx = map(int, c.split()[0].split('/')); st = c.split()[1] if len(c.split()) > 1 else ''
     return 100 * hp / mx, st, False
+def spread(p, st):
+    """the bot's exact stat points from its request (its stats, and its max HP from the condition), with the set's nature: [hp, atk, def,
+    spa, spd, spe], or the set's own where a stat cannot be matched (Champions: stat = (2 base + 31 + 2 points) / 2 + 5, times the nature)"""
+    E = S.E; sp = E['species'].get(toid(p['details'].split(',')[0])) or E['species'].get(toid(st['species']))
+    nat = E['natures'].get(toid(st.get('nature', '')), {}); stats = p.get('stats') or {}
+    if not sp or not stats: return st['evs']
+    out = list(st['evs'])
+    for i, k in enumerate(S.ORDER):
+        B = sp['stats'][k]
+        if k == 'hp':
+            if 'fnt' in p['condition']: continue
+            want = int(p['condition'].split()[0].split('/')[1]); calc = lambda x: (2 * B + 31 + 2 * x) * 50 // 100 + 60
+        else:
+            want = stats.get(k); m = 1.1 if nat.get('plus') == k else 0.9 if nat.get('minus') == k else 1.0
+            calc = lambda x: int(((2 * B + 31 + 2 * x) * 50 // 100 + 5) * m)
+        hit = next((x for x in range(33) if calc(x) == want), None)
+        if hit is not None: out[i] = hit
+    return out
 def fresh(st):
     return {**st, 'mega': False, 'hpPct': 100, 'fainted': False, 'status': '', 'slept': 0, 'boosts': {}, 'itemNow': st['item'], 'moved': False,
             'stall': False, 'lock': '', 'vol': [], 'onField': False, 'last': '', 'volarg': {}}
@@ -70,6 +88,7 @@ def own_side(state, sets, req, mine, dropped):
             if st: st = {**st, 'evs': list(mine[base]['evs'])}
         else: st = next((v for key, v in sets.items() if toid(key.split('-')[0]) == base), None)
         if not st: return None, f'no set for {sp}'
+        st = {**st, 'evs': spread(p, st)}                                    # the exact spread, from the stats the request shows
         hp, status, fnt = condition(p['condition']); item = (S.E['items'].get(p.get('item') or '') or {}).get('name', '')
         d = LV.spec_mon(m, st) if m else fresh(st)
         d.update(hpPct=hp, status=status, fainted=fnt, itemNow=item, onField=bool(p.get('active')) and not fnt)

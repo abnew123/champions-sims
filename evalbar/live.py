@@ -383,7 +383,7 @@ class Live:
                 if s.port: print(f'battle over; the page stays up at http://localhost:{s.port} until you stop this (Ctrl-C)', flush=True)
             time.sleep(1)
 class BotRunner:
-    """the Showdown bot's games (bot/out/ in the main checkout) on one page: the last 12 hours' games when this starts, then each game it
+    """the Showdown bot's games (bot/out/ in the main checkout) on one page: every ladder game so far when this starts, then each game it
     starts, as it plays it. The page moves on to a new game when it is showing the latest one."""
     def __init__(s, threads, port):
         s.dir = os.path.join(C.MAIN, 'bot', 'out'); s.threads = threads; s.port = port; s.lives = []; s.files = []; s.known = set()
@@ -410,8 +410,7 @@ class BotRunner:
         s.serve(); print(f"the bot's games: http://localhost:{s.port}", flush=True)
         while True:
             fs = sorted((f for f in glob.glob(os.path.join(s.dir, 'battle-*.log')) if re.search(r'-\d{6,}(-[a-z0-9]+)?\.log$', f)), key=os.path.getmtime)   # ladder rooms, not local test games
-            if not s.files and not s.known:                                    # at the start: the last 12 hours' games (or the newest one)
-                new = [f for f in fs if os.path.getmtime(f) > time.time() - 12 * 3600] or fs[-1:]; s.known = set(fs)
+            if not s.files and not s.known: new = fs; s.known = set(fs)         # at the start: every ladder game so far, for reviews
             else: new = [f for f in fs if f not in s.known]; s.known |= set(new)
             for f in new:
                 room = os.path.basename(f)[:-4]; num = re.search(r'-(\d+)(?:-[a-z0-9]+)?$', room).group(1); s.files.append(f)

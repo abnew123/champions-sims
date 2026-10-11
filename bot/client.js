@@ -38,6 +38,13 @@ async function refreshTop() {
   catch (e) { log('ladder fetch failed', String(e)); topBand.at = Date.now(); }
 }
 
+// ---- our own rating: the public user JSON (the room's rating lines do not name a Bo3 rating reliably), refreshed after each match
+async function refreshMyRating() {
+  if (LOCAL || !me) return;
+  try { const r = await fetch(`https://pokemonshowdown.com/users/${me.toLowerCase().replace(/[^a-z0-9]/g, '')}.json`); const j = await r.json();
+    const x = (j.ratings || {})[FORMAT]; if (x && x.elo != null) { myRating = +x.elo; log(`rating ${myRating.toFixed(0)} (${x.w}-${x.l})`); } }
+  catch (e) { log('rating fetch failed', String(e)); }
+}
 // ---- the record: bot/out/games.jsonl (no usernames: ratings and results only)
 const GAMES = path.join(OUT, LOCAL ? `games_${TAG}.jsonl` : 'games.jsonl');
 const games = () => fs.existsSync(GAMES) ? fs.readFileSync(GAMES, 'utf8').split('\n').filter(Boolean).map(l => JSON.parse(l)) : [];
@@ -96,7 +103,7 @@ async function onMessage(m) {
       if (p[1] === 'turn') R.turn = +p[2];
       if (room.startsWith('game-bestof')) {   // the match room: confirm each game's start when asked, note the match result
         if (line.includes('/confirmready') || (p[1] === 'inactive' && me && line.includes(me) && line.includes('confirm'))) { if (!R.confirmed) { R.confirmed = true; setTimeout(() => { send(`${room}|/confirmready`); R.confirmed = false; }, 2000); } }
-        if (p[1] === 'win' && !R.done) { R.done = true; const won = me && p[2].toLowerCase() === me.toLowerCase(); log('match over', room.slice(-16), won ? 'won' : 'lost'); fs.appendFileSync(path.join(OUT, LOCAL ? `matches_${TAG}.jsonl` : 'matches.jsonl'), JSON.stringify({when: new Date().toISOString(), room, won: !!won}) + '\n'); setTimeout(() => { send(`${room}|/leave`); delete rooms[room]; }, 8000); }
+        if (p[1] === 'win' && !R.done) { R.done = true; const won = me && p[2].toLowerCase() === me.toLowerCase(); log('match over', room.slice(-16), won ? 'won' : 'lost'); fs.appendFileSync(path.join(OUT, LOCAL ? `matches_${TAG}.jsonl` : 'matches.jsonl'), JSON.stringify({when: new Date().toISOString(), room, won: !!won, games: R.lines.filter(l => l.startsWith('|uhtml|game')).length}) + '\n'); setTimeout(() => { send(`${room}|/leave`); delete rooms[room]; refreshMyRating(); }, 8000); }
         continue;
       }
       if (p[1] === 'request' && p[2]) { try { R.req = JSON.parse(p[2]); } catch (e) { R.req = null; } if (R.req && !R.req.wait) handleRequest(room, R).catch(e => log('request error', room, String(e))); }
@@ -137,7 +144,7 @@ async function pickTeam() {
 }
 let currentTeam = null;
 async function onReady() {
-  await refreshTop();
+  await refreshTop(); await refreshMyRating();
   if (CHALLENGE) { await pickTeam(); await sleep(3000); send(`|/challenge ${CHALLENGE}, ${FORMAT}`); log('challenged', CHALLENGE); }
   for (;;) {
     await sleep(5000);

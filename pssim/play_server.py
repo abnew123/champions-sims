@@ -82,7 +82,7 @@ class Game:
                 self.msg = m; self.waiting = False
                 if getattr(self, 'pending_concede', False): self.pending_concede = False; threading.Thread(target=self.finish, args=('you', 'the planner conceded'), daemon=True).start()
                 if m.get('type') == 'end' and self.match is not None and self.cur:
-                    self.match['games'].append({**self.cur, 'winner': m.get('winner'), 'turns': m.get('turn')}); self.cur = None; self.save()
+                    self.match['games'].append({**self.cur, 'winner': m.get('winner'), 'turns': m.get('turn'), **({'how': m['how']} if m.get('how') else {})}); self.cur = None; self.save()
     def finish(self, winner, how):
         """end the game from the server side: your forfeit, or the planner conceding"""
         with self.lock:

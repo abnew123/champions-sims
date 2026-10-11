@@ -100,8 +100,21 @@ fn playout(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64) -> f64 {
     }
     value(&mut b, cfg)
 }
-/// the planner against itself from here to the end of the game (switches allowed, up to `max_turns` turns): 1 = side 0 won, 0 = lost,
-/// 0.5 = unfinished or drawn; for the play page's concede check (an endgame the one-turn value cannot see: PP, Struggle, a slow bleed)
+/// PLAY_CLOCK_TURNS (default 100): the turn after which a human's game, and the concede check's playouts, are decided as the game's
+/// timer decides them (clock_winner)
+pub(crate) fn clock_turns() -> usize { static F: std::sync::OnceLock<usize> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("PLAY_CLOCK_TURNS").ok().and_then(|x| x.parse().ok()).unwrap_or(100)) }
+/// the timer's tiebreak: more Pokemon left, then the higher share of HP left (sum of hp / maxhp over the living), then more HP; None = tied
+pub(crate) fn clock_winner(b: &Battle) -> Option<u8> {
+    let stat = |s: usize| { let alive: Vec<&crate::state::Pokemon> = b.sides[s].pokemon.iter().filter(|p| !p.fainted && p.hp > 0).collect();
+        (alive.len(), alive.iter().map(|p| p.hp as f64 / p.maxhp.max(1) as f64).sum::<f64>(), alive.iter().map(|p| p.hp).sum::<i64>()) };
+    let (a, b2) = (stat(0), stat(1));
+    if a.0 != b2.0 { return Some(if a.0 > b2.0 { 0 } else { 1 }); }
+    if (a.1 - b2.1).abs() > 1e-9 { return Some(if a.1 > b2.1 { 0 } else { 1 }); }
+    if a.2 != b2.2 { return Some(if a.2 > b2.2 { 0 } else { 1 }); }
+    None
+}
+/// the planner against itself from here to the end of the game (switches allowed, up to `max_turns` turns, then the clock decides):
+/// 1 = side 0 won, 0 = lost, 0.5 = tied; for the play page's concede check (an endgame the one-turn value cannot see: PP, Struggle, a slow bleed)
 pub(crate) fn playout_long(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, max_turns: usize) -> f64 {
     let mut b = start.clone(); let mut turn = 1;
     while !b.ended && turn <= max_turns {
@@ -116,7 +129,7 @@ pub(crate) fn playout_long(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, ma
         resolve_switches(&mut b, cfg, Some(&mut rng));
         turn += 1;
     }
-    if b.ended { match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 } } else { 0.5 }
+    if b.ended { match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 } } else { match clock_winner(&b) { Some(0) => 1.0, Some(_) => 0.0, None => 0.5 } }
 }
 pub(crate) fn label(b: &Battle, s: u8, c: &[PChoice; 2]) -> String {
     let name = |m: MonRef| b.dex.species.get(b.p(m).species).map(|x| x.name).unwrap_or("?").to_string();

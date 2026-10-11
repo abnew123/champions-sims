@@ -94,10 +94,9 @@ impl Human {
     }
     pub fn choose_turn(&mut self, b: &Battle, turn: usize, opts: &[[PChoice; 2]], value: f64, check: &mut dyn FnMut() -> Value) -> usize { self.prompt(b, "turn", turn, opts, Some(value), check) }
     pub fn choose_switch(&mut self, b: &Battle, turn: usize, opts: &[[PChoice; 2]]) -> usize { if opts.len() <= 1 { return 0; } let mut no = || json!({"type": "verdict", "n": 0}); self.prompt(b, "switch", turn, opts, None, &mut no) }
-    pub fn end(&mut self, b: &Battle, turn: usize, v: f64) {
+    pub fn end(&mut self, b: &Battle, turn: usize, v: f64, winner: &str, how: Option<String>) {
         let log: Vec<&String> = b.log[self.log_pos.min(b.log.len())..].iter().collect(); self.log_pos = b.log.len();
-        let winner = match b.winner { Some(Some(0)) => "you", Some(Some(1)) => "the planner", Some(_) => "draw", None => "unfinished" };
-        let out = json!({"type": "end", "turn": turn, "state": Self::state_json(b), "winner": winner, "ended": b.ended, "value": v, "log": log});
+        let out = json!({"type": "end", "turn": turn, "state": Self::state_json(b), "winner": winner, "how": how, "ended": b.ended, "value": v, "log": log});
         let so = std::io::stdout(); let mut h = so.lock(); writeln!(h, "{}", out).unwrap(); h.flush().unwrap();
     }
 }

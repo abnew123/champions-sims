@@ -105,7 +105,7 @@ async function onMessage(m) {
       if (p[1] === 'turn') R.turn = +p[2];
       if (room.startsWith('game-bestof')) {   // the match room: confirm each game's start when asked, note the match result
         if (line.includes('/confirmready') || (p[1] === 'inactive' && me && line.includes(me) && line.includes('confirm'))) { if (!R.confirmed) { R.confirmed = true; setTimeout(() => { send(`${room}|/confirmready`); R.confirmed = false; }, 2000); } }
-        if (p[1] === 'win' && !R.done) { R.done = true; const won = me && p[2].toLowerCase() === me.toLowerCase(); log('match over', room.slice(-16), won ? 'won' : 'lost'); fs.appendFileSync(path.join(OUT, LOCAL ? `matches_${TAG}.jsonl` : 'matches.jsonl'), JSON.stringify({when: new Date().toISOString(), room, won: !!won, games: R.lines.filter(l => l.startsWith('|uhtml|game')).length}) + '\n'); setTimeout(() => { send(`${room}|/leave`); delete rooms[room]; refreshMyRating(); }, 8000); }
+        if (p[1] === 'win' && !R.done) { R.done = true; const won = me && p[2].toLowerCase() === me.toLowerCase(); log('match over', room.slice(-16), won ? 'won' : 'lost'); fs.appendFileSync(path.join(OUT, LOCAL ? `matches_${TAG}.jsonl` : 'matches.jsonl'), JSON.stringify({when: new Date().toISOString(), room, won: !!won, games: R.lines.filter(l => l.startsWith('|uhtml|game')).length, team: currentTeam && currentTeam.name}) + '\n'); setTimeout(() => { send(`${room}|/leave`); delete rooms[room]; refreshMyRating(); }, 8000); }
         continue;
       }
       if (p[1] === 'request' && p[2]) { try { R.req = JSON.parse(p[2]); } catch (e) { R.req = null; } if (R.req && !R.req.wait) handleRequest(room, R).catch(e => log('request error', room, String(e))); }
@@ -142,7 +142,11 @@ function onChallenges(json) {
 let teams = null, teamIdx = 0;
 async function pickTeam() {
   if (!teams) teams = JSON.parse(fs.readFileSync(ARG('--teams') || path.join(HERE, 'teams.json')));   // --teams <file>: another team list (local tests)
-  const t = teams[teamIdx % teams.length]; teamIdx++;
+  // which six this match: drawn by the teams' weights (bot/teams.json "weight"), re-read each time so weights can change live
+  teams = JSON.parse(fs.readFileSync(ARG('--teams') || path.join(HERE, 'teams.json')));
+  const tw = teams.map(x => x.weight == null ? 1 : x.weight); let r = Math.random() * tw.reduce((a, b) => a + b, 0), k = 0;
+  while (k < teams.length - 1 && (r -= tw[k]) > 0) k++;
+  const t = teams[k]; teamIdx++;
   const packed = (await ask({type: 'pack', sets: t.sets})).packed;
   send(`|/utm ${packed}`); currentTeam = t; return t;
 }
@@ -164,8 +168,9 @@ async function handleRequest(room, R) {
   const req = R.req; const L = limits();
   if (!currentTeam && req.side) {   // after a restart mid-game: the team is the one whose species the request lists
     if (!teams) teams = JSON.parse(fs.readFileSync(ARG('--teams') || path.join(HERE, 'teams.json')));
-    const sp = new Set(req.side.pokemon.map(x => x.details.split(',')[0].replace(/-Mega.*$/, '')));
-    currentTeam = teams.find(t => t.sets.every(x => sp.has(x.species) || sp.has(x.species.replace(/-Mega.*$/, '')))) || teams.find(t => t.sets.some(x => sp.has(x.species))) || teams[0];
+    const sp = [...new Set(req.side.pokemon.map(x => x.details.split(',')[0].replace(/-Mega.*$/, '')))];
+    const covers = t => sp.filter(s => t.sets.some(x => x.species === s || x.species.replace(/-Mega.*$/, '') === s)).length;
+    currentTeam = teams.slice().sort((a, b) => covers(b) - covers(a))[0];   // the team holding every Pokemon the request lists
   }
   if (R.oppRating != null && R.oppRating >= topBand.elo && !stoppedForTop) { stoppedForTop = true; log(`opponent rated ${R.oppRating} is in the ladder's top band: this is the last game`); }
   const think = LOCAL ? 300 : req.teamPreview ? rnd(8e3, 20e3) : rnd(L.think_seconds[0] * 1e3, L.think_seconds[1] * 1e3);

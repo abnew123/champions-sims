@@ -123,6 +123,261 @@
     ]
    }
   ],
-  "sheet": "sheets/trick-room-six/picks.json"
+  "sheet": "sheets/trick-room-six/picks.json",
+  "weight": 1
+ },
+ {
+  "name": "Frankfurt-239",
+  "sets": [
+   {
+    "species": "Pelipper",
+    "item": "Focus Sash",
+    "ability": "Drizzle",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Weather Ball",
+     "Hurricane",
+     "Tailwind",
+     "Wide Guard"
+    ]
+   },
+   {
+    "species": "Swampert",
+    "item": "Swampertite",
+    "ability": "Damp",
+    "nature": "Adamant",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Wave Crash",
+     "Flip Turn",
+     "Earthquake",
+     "Protect"
+    ]
+   },
+   {
+    "species": "Archaludon",
+    "item": "Leftovers",
+    "ability": "Stamina",
+    "nature": "Modest",
+    "evs": [
+     32,
+     0,
+     1,
+     5,
+     25,
+     3
+    ],
+    "moves": [
+     "Electro Shot",
+     "Dragon Pulse",
+     "Flash Cannon",
+     "Protect"
+    ]
+   },
+   {
+    "species": "Indeedee-F",
+    "item": "Rocky Helmet",
+    "ability": "Psychic Surge",
+    "nature": "Bold",
+    "evs": [
+     32,
+     0,
+     32,
+     0,
+     2,
+     0
+    ],
+    "moves": [
+     "Psychic",
+     "Follow Me",
+     "Helping Hand",
+     "Protect"
+    ]
+   },
+   {
+    "species": "Metagross",
+    "item": "Metagrossite",
+    "ability": "Clear Body",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Steel Roller",
+     "Psychic Fangs",
+     "Stomping Tantrum",
+     "Protect"
+    ]
+   },
+   {
+    "species": "Grimmsnarl",
+    "item": "Light Clay",
+    "ability": "Prankster",
+    "nature": "Careful",
+    "evs": [
+     32,
+     0,
+     19,
+     0,
+     15,
+     0
+    ],
+    "moves": [
+     "Spirit Break",
+     "Parting Shot",
+     "Reflect",
+     "Light Screen"
+    ]
+   }
+  ],
+  "sheet": "sheets/frankfurt-239/picks.json",
+  "weight": 1
+ },
+ {
+  "name": "Frankfurt-156",
+  "sets": [
+   {
+    "species": "Basculegion",
+    "item": "Choice Scarf",
+    "ability": "Adaptability",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Flip Turn",
+     "Last Respects",
+     "Aqua Jet",
+     "Wave Crash"
+    ]
+   },
+   {
+    "species": "Pelipper",
+    "item": "Focus Sash",
+    "ability": "Drizzle",
+    "nature": "Modest",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Weather Ball",
+     "Hurricane",
+     "Wide Guard",
+     "Protect"
+    ]
+   },
+   {
+    "species": "Garchomp",
+    "item": "Garchompite Z",
+    "ability": "Rough Skin",
+    "nature": "Modest",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Dragon Pulse",
+     "Earth Power",
+     "Power Gem",
+     "Protect"
+    ]
+   },
+   {
+    "species": "Archaludon",
+    "item": "Leftovers",
+    "ability": "Stamina",
+    "nature": "Modest",
+    "evs": [
+     32,
+     0,
+     1,
+     5,
+     25,
+     3
+    ],
+    "moves": [
+     "Electro Shot",
+     "Dragon Pulse",
+     "Flash Cannon",
+     "Protect"
+    ]
+   },
+   {
+    "species": "Farigiraf",
+    "item": "Sitrus Berry",
+    "ability": "Armor Tail",
+    "nature": "Bold",
+    "evs": [
+     27,
+     0,
+     20,
+     0,
+     19,
+     0
+    ],
+    "moves": [
+     "Twin Beam",
+     "Shadow Ball",
+     "Trick Room",
+     "Protect"
+    ]
+   },
+   {
+    "species": "Golisopod",
+    "item": "Golisopite",
+    "ability": "Emergency Exit",
+    "nature": "Adamant",
+    "evs": [
+     32,
+     32,
+     0,
+     0,
+     2,
+     0
+    ],
+    "moves": [
+     "Leech Life",
+     "Sucker Punch",
+     "Protect",
+     "Swords Dance"
+    ]
+   }
+  ],
+  "sheet": "sheets/frankfurt-156/picks.json",
+  "weight": 1
  }
 ]

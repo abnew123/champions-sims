@@ -17,7 +17,7 @@ def pack(sets):
 def showteam(log, side):
     """the opponent's open sheet from the room log: |showteam|p2|<packed>  -> list of sets"""
     for l in log:
-        p = l.split('|')
+        p = l.split('|', 3)   # the packed team itself uses '|' as its field separator
         if len(p) > 3 and p[1] == 'showteam' and p[2] == side: return unpack(p[3])
     return None
 def unpack(packed):

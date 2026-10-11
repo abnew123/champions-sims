@@ -155,7 +155,7 @@ class Live:
         s.bo3 = logfile is not None or 'bo3' in room; s.threads = threads; s.port = port; os.makedirs(OUT, exist_ok=True)
         s.log = logfile or os.path.join(OUT, f'{s.tag}.log'); s.evf = os.path.join(OUT, f'{s.tag}_eval.jsonl'); s.data = None; s.status = 'connecting'
         s.weights = {}; s.hyp = {}; s.poscache = {}; s.over = False; s.skip = {}
-        s.exact = False; s.team = None; s.back = {}; s.bot_side = None      # a Showdown bot's own log (bot/): its side known from its requests
+        s.exact = False; s.team = None; s.back = {}; s.bot_side = None; s.held = None      # a Showdown bot's own log (bot/): its side known from its requests
         # the user's verdicts where the battle text and the rules disagree (broadcasts: evalbar/rules.py), kept beside the log
         s.fixf = os.path.join(OUT, f'{s.tag}_fixes.json'); s.fixes = json.load(open(s.fixf)) if logfile and os.path.exists(s.fixf) else {}; s.redo = None
     def page(s):
@@ -239,7 +239,8 @@ class Live:
         j = log.find('\n|turn|', i + 1)
         for l in log[i:j if j > 0 else len(log)].split('\n'):
             if l.startswith('|request|') and l[9:].strip():
-                rq = json.loads(l[9:])
+                try: rq = json.loads(l[9:])
+                except ValueError: continue                                  # read while the bot was rewriting the file
                 if rq.get('side') and not (rq.get('forceSwitch') or rq.get('wait') or rq.get('teamPreview')): return rq
         return None
     def build(s, log, g):
@@ -322,6 +323,10 @@ class Live:
             try: g = R.parse(log)
             except Exception as e: s.status = f'could not read the log ({type(e).__name__})'; time.sleep(1); continue
             todo = [st for st in g['steps'] if st['turn'] >= 1 and st['turn'] not in s.weights]
+            if todo and s.exact and not g['winner'] and todo[-1]['turn'] == g['steps'][-1]['turn'] and not s.request(log, todo[-1]['turn']):
+                s.held = s.held or time.time()                               # the bot logs a turn's request just after its |turn| line
+                if time.time() - s.held < 15: time.sleep(1); continue
+            s.held = None
             if todo:
                 step = todo[-1]                                              # the newest turn first; older ones fill in when there is time
                 s.status = f"evaluating turn {step['turn']}"
@@ -350,7 +355,7 @@ if __name__ == '__main__':
     elif a[0] == 'bot':
         # a game the Showdown bot (bot/) plays or played, from its own log in the main checkout's bot/out/: its side as it knows it
         room = room_of(a[1]); f = os.path.join(C.MAIN, 'bot', 'out', room + '.log')
-        L = Live(room, int(a[2]) if len(a) > 2 else 2, int(a[3]) if len(a) > 3 else 8769, logfile=f, tag='bot_' + room.split('-')[-1],
+        L = Live(room, int(a[2]) if len(a) > 2 else 2, int(a[3]) if len(a) > 3 else 8769, logfile=f, tag='bot_' + re.search(r'-(\d+)(?:-[a-z0-9]+)?$', room).group(1),
                  fmt="Bo3, open team sheets · the bot's side from its own log")
         L.exact = True
         try: L.run()

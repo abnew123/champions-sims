@@ -43,7 +43,14 @@ fn priority_block(b: &mut Battle, a: &HArgs) -> RV {
     if mv.target == "foeSide" || (mv.target == "all" && !["perishsong", "flowershield", "rototiller"].contains(&mv.id)) { return RV::Undef; }
     let holder = b.holder();
     let tgt_ally = a.source.map(|s| b.is_ally(s, holder)).unwrap_or(false);
-    if (tgt_ally || mv.target == "all") && mv.priority > 0.1 { return RV::B(false); }
+    if (tgt_ally || mv.target == "all") && mv.priority > 0.1 {
+        if b.logging {   // as Showdown: |cant|USER|ability: Armor Tail|MOVE|[of] HOLDER
+            let ab = match b.p(holder).ability { "armortail" => "Armor Tail", "queenlymajesty" => "Queenly Majesty", "dazzling" => "Dazzling", x => x };
+            let (u, h, mn) = (b.mon_name(a.t()), b.mon_name(holder), b.am(am).name); let abs = format!("ability: {}", ab); let of = format!("[of] {}", h);
+            b.add(&["cant", &u, &abs, mn, &of]);
+        }
+        return RV::B(false);
+    }
     RV::Undef
 }
 fn weather_spe(b: &mut Battle, a: &HArgs, ws: &[&str]) -> RV { let m = a.t(); let w = b.pokemon_effective_weather(m, None); if ws.contains(&w) { return b.cm(2.0, 1.0); } RV::Undef }

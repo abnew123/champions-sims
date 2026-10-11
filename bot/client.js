@@ -62,7 +62,7 @@ function mayPlay(reason) {
 let stoppedForTop = false;
 
 // ---- the connection
-let ws, me = null, searching = false, inGames = 0, pmReplied = new Set();
+let ws, me = null, searching = false, inGames = 0, pmReplied = new Set(), loginAt = 0, joinSent = new Set();
 const rooms = {};   // room id -> {lines, side, req, done, oppRating, turn}
 function send(s) { ws.send(s); }
 function connect() {
@@ -87,10 +87,13 @@ async function onMessage(m) {
     if (process.env.BOT_DEBUG && !['challstr', 'formats', 'customgroups', 'queryresponse', 'updateuser'].includes(p[1])) log(room ? '[' + room.slice(-14) + ']' : '[global]', line.slice(0, 160));
     if (!room) {   // global
       if (p[1] === 'challstr') { await login(p.slice(2).join('|')); }
-      else if (p[1] === 'updateuser') { const name = p[2].replace(/^[^A-Za-z0-9]/, '').trim(); if (p[3] === '1' && name.toLowerCase() === acct.name.toLowerCase()) { me = name; log('logged in as', me); send('|/cmd rooms'); onReady(); } }
+      else if (p[1] === 'updateuser') { const name = p[2].replace(/^[^A-Za-z0-9]/, '').trim(); if (p[3] === '1' && name.toLowerCase() === acct.name.toLowerCase()) { me = name; loginAt = Date.now(); joinSent = new Set(); log('logged in as', me); send('|/cmd rooms'); onReady(); } }
       else if (p[1] === 'pm') { onPM(p[2], p[3], p.slice(4).join('|')); }
       else if (p[1] === 'updatesearch') { try { const s = JSON.parse(p[2]); searching = (s.searching || []).length > 0; inGames = Object.keys(s.games || {}).length;
-        for (const g of Object.keys(s.games || {})) if (!rooms[g] || !rooms[g].lines.length) { rooms[g] = rooms[g] || {lines: [], side: null, req: null, done: false, oppRating: null, turn: 0}; send(`|/join ${g}`); log('rejoining', g.slice(-16)); }   // after a reconnect
+        // after a (re)connect only: games already in progress at login are joined once (a new match's rooms also show up here a
+        // moment before the server joins us to them, which is not a rejoin)
+        if (Date.now() - loginAt < 15000) for (const g of Object.keys(s.games || {})) if (!joinSent.has(g) && !(rooms[g] && rooms[g].lines.length)) {
+          joinSent.add(g); rooms[g] = rooms[g] || {lines: [], side: null, req: null, done: false, oppRating: null, turn: 0}; send(`|/join ${g}`); log('rejoining', g.slice(-16)); }
       } catch (e) {} }
       else if (p[1] === 'updatechallenges') { onChallenges(p[2]); }
       else if (p[1] === 'popup') { log('popup:', p.slice(2).join('|').slice(0, 200)); }

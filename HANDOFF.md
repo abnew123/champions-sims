@@ -1088,6 +1088,8 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     (one process: team preview by the bring heuristic against the |showteam| sheet; turns via `bot/position.py`: the Eval bar's
     `evalbar/botpos.py` builds the position (opponent as a spectator knows it, our side from the request, topk back rows), live.positions
     + engine.run evaluate it with the current build and EG_MEGA_TIE=0, a joint action is sampled from side 0's mix; replacements after a
-    faint by a type-chart rule for now, a proper mid-turn position is asked of the Eval bar). Not yet run live: the user creates the
+    faint scored by the engine's static value of the next turn's start with each candidate in (the Eval bar's `bot_replacement`, the
+    opponent's own replacement averaged over its likely ones), a type-chart rule as the fallback; `bot/test_cached.py` runs every
+    decision of a saved game through the brain (about 1 s a turn, 0.6 s a replacement)). Not yet run live: the user creates the
     account (git-ignored bot/account.json {"name", "password"}); start with `node --experimental-websocket --no-warnings bot/client.js
     --dry` to check the login, then without --dry. Teams in bot/teams.json (the Trick Room six; add pool sixes for variety).

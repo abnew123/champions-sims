@@ -239,6 +239,14 @@ fakes every decision of a saved game (preview, turns, replacements, with what th
 evalbar/botpos.py 400` built all 5,492 turns and 1,577 replacements of 400 saved games. replay.py now revives a Pokemon that Revival
 Blessing heals in the back.
 
+## The bot's games on the eval bar (live.py bot, 2026-10-11)
+
+`live.py bot <room> [threads] [port=8769]` follows a game of the Showdown bot from its own log (bot/out/<room>.log in the main checkout):
+the bot's side as its |request| shows it (the four brought, exact HP and items; logged just after each |turn| line) with its spreads from
+bot/teams.json, the opponent as a spectator sees it, and the page names the bot's real back row. No rules checks (the log is Showdown's
+own). On the first ladder game it cut the positions from 9 a turn to 1-3. The bot writes its room log only when a game ends; Battle sim
+was asked to write it as the game goes so live games can be followed. Port 8768 stays the stream watcher's (auto.py).
+
 ## Louisville day 1 (2026-10-10)
 
 The same study on the Louisville day 1 stream (12 games from 1:15 pm, read live; `study.py out/champions/louisville1.ocr.jsonl 3 14340`,

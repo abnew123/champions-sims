@@ -6,7 +6,7 @@ for a game a person is playing.
     request  the |request| JSON this decision answers (a dict or its text): a turn start (not team preview, not a replacement after a faint)
     side     the bot's side, 'p1' or 'p2'
     topk     how many of the opponent's most likely back rows to return (live.py's TOPK is 3)
-    team     the bot's team as a Showdown export, for its exact spreads (the open team sheets have none; without it they are guessed)
+    team     the bot's team as a Showdown export or a list of sets with 'evs' (bot/teams.json), for its exact spreads (the open team sheets have none; without it they are guessed)
   The specs come most likely first, the bot as side 0. live.positions(specs, outf) writes the engine positions (line '<name> p1' is the
   bot's view), engine.run(posf, outf) evaluates them, and in each result sides[0] is the bot.
 The opponent's side is what a spectator knows (live.py): team preview, the open team sheets, what the game has shown, and the Pokémon it
@@ -46,6 +46,10 @@ def export(text):
             elif l.startswith('- '): st['moves'].append(l[2:].strip())
         out[toid(sp.split('-')[0])] = st
     return out
+def team_sets(team):
+    """the bot's team, as a Showdown export or a list of sets with 'evs' (bot/teams.json) -> {base species id: set}"""
+    if not team: return {}
+    return export(team) if isinstance(team, str) else {toid(t['species'].split('-')[0]): t for t in team}
 def condition(c):
     """'150/202 par' -> (HP percent, exact; status; fainted)"""
     if 'fnt' in c: return 0, '', True
@@ -81,7 +85,7 @@ def bot_position(log, request, side, topk=1, team=None, tag='bot'):
     j = log.find('\n', i + 1); pre = log[:j + 1] if j >= 0 else log + '\n'
     gp = R.parse(pre); step = gp['steps'][-1]; st = step['state']; opp = 'p2' if side == 'p1' else 'p1'
     six, sets, dropped = LV.sets_for(gp, pre, True)
-    mine, why = own_side(st[side], sets[side], req, export(team) if team else {}, dropped)
+    mine, why = own_side(st[side], sets[side], req, team_sets(team), dropped)
     if mine is None: return [], {'skip': why}
     H, pool, need = LV.hyps(opp, st, six, sets, LV.Live.leads(None, pre), topk)
     order = sorted(st[opp]['mons'], key=lambda m: (0 if m['pos'] == 'a' else 1 if m['pos'] == 'b' else 2 if not m['f'] else 3))

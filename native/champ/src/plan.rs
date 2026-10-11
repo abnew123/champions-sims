@@ -458,6 +458,8 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 3] {
     }
     [out[0], out[1], prio_edge]
 }
+/// PLAN_KEEP_IMMUNE=0|1|both: that side's options keep damaging moves aimed at an immune target (see slot_options)
+fn keep_immune() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new(); *F.get_or_init(|| match std::env::var("PLAN_KEEP_IMMUNE").as_deref() { Ok("0") => [true, false], Ok("1") => [false, true], Ok(_) => [true, true], Err(_) => [false, false] }) }
 fn race_prio() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("RACE_PRIO").is_ok()) }
 fn race_ties_avg() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("RACE_TIES").map(|v| v == "avg").unwrap_or(false)) }
 fn perish_adj(b: &Battle, w: &[f64]) -> f64 {
@@ -573,7 +575,9 @@ pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
         if FOE_TARGETS.contains(&target) {
             for (t, f) in foes.iter().enumerate() {
                 let Some(f) = f else { continue }; if b.p(*f).fainted { continue; }
-                if mv.category != "Status" && type_mult(b, mv.mtype, *f) == 0.0 && *mid != "weatherball" && *mid != "terrainpulse" { continue; }
+                // an immune target is dropped (the move can do nothing to it) unless PLAN_KEEP_IMMUNE names this side: a human (champ
+                // play) attacks into an immune Pokemon on purpose when predicting a switch, and the move then hits the switch-in
+                if mv.category != "Status" && type_mult(b, mv.mtype, *f) == 0.0 && *mid != "weatherball" && *mid != "terrainpulse" && !keep_immune()[s as usize] { continue; }
                 out.push(PChoice::Move(k, t as i64 + 1, mega));
             }
         } else if target == "adjacentAlly" {

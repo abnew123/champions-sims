@@ -11,6 +11,9 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
    bot never Protects with the same Pokemon two turns running (`EG_NO_DOUBLE_PROTECT=0`; self-play cost -1.2 ± 0.7 against the DP2
    planner) and a hard cap of 4 Protect turns running per Pokemon (`protect_chain_cap` in limits.json). Fix after the climb: give the bot
    battle4's turn solver (DP2 + the anticipation pass) through a one-turn decide mode, then reconsider the ban.
+   Measured in self-play (800 pool starts, the opponent with the check): a side without the check loses -1.3 ± 0.6 and plays 40 Protect
+   chains of 3+ turns (23 with the check); banning back-to-back Protect on that side is free (+0.1 ± 0.8) and removes every chain. With
+   the check, the ban costs -1.2 ± 0.7. So the ban is right for the bot as it is, and the check is worth about a point more on top.
 2. **Small weights on clearly worse options.** Fictitious play (400 rounds) leaves a few percent on options several points below the
    best (Fake Out without the Mega at 2%, 5 points worse). The user is fine with these as low-probability rolls; a cleanup would drop
    options more than a point or two below the best against the opponent's mix.

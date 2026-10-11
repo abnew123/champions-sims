@@ -69,19 +69,20 @@ async function startGame(){const mine=order.map(i=>my.sets[i]); const theirs=opp
 async function poll(){let r; try{r=await (await fetch('/state')).json();}catch(e){$('status').textContent='lost the play server (start it with: pssim/battlesim-play pssim/play_server.py, then reload)'; return;} if(r.error){$('status').textContent='error: '+r.error;}
   const key=r.game+':'+(r.msg?r.msg.type+r.msg.turn+(r.msg.log_all||[]).length:'');
   if(r.msg&&key!==lastKey){lastKey=key; render(r.msg);} if(r.waiting){$('status').textContent='the planner is thinking...'; setTimeout(poll,300);} else if(r.msg&&r.msg.type!=='end'){$('status').textContent=`turn ${r.msg.turn}: your move`;} }
-function hpbar(m){const f=m.maxhp?m.hp/m.maxhp:0; return `<div class="bar ${f<.25?'low':f<.5?'mid':''}"><i style="width:${Math.round(100*f)}%"></i></div>`;}
+function hpbar(m){const f=m.maxhp?m.hp/m.maxhp:0; const w=m.hp>0?Math.max(1.5,100*f):0; return `<div class="bar ${f<.25?'low':f<.5?'mid':''}"><i style="width:${w}%"></i></div>`;}
+const pct=m=>m.hp<=0?0:Math.max(1,Math.round(100*m.hp/Math.max(1,m.maxhp)));
 const BOOST=['Atk','Def','SpA','SpD','Spe','Acc','Eva'];
 function monHtml(m,mine){if(!m)return '<div class="mon"><span class="sub">(empty)</span></div>';
   const b=m.boosts.map((v,i)=>v?`<span class="tag b">${v>0?'+':''}${v} ${BOOST[i]}</span>`:'').join('');
   const vol=(m.volatiles||[]).filter(v=>!['dynamax'].includes(v.id)).map(v=>`<span class="tag">${esc(pretty(v.id))}${v.turns!=null?' '+v.turns:''}</span>`).join('');
   const mv=m.moves.map(x=>`<span class="tag ${x.disabled?'':'b'}">${esc(x.name)} ${x.pp}/${x.maxpp}${effTxt(x.eff)}</span>`).join('');
-  return `<div class="mon"><div class="nm">${esc(m.name)}${m.mega?' (Mega)':''} <span class="sub">${esc(m.types.join('/'))}</span> ${m.status?`<span class="tag st">${esc(m.status)}</span>`:''}</div>${hpbar(m)}<div class="sub">${m.hp}/${m.maxhp} (${Math.round(100*m.hp/Math.max(1,m.maxhp))}%) · ${esc(m.item||'no item')} · ${esc(m.ability)}</div><div>${b}${vol}</div><div>${mv}</div></div>`;}
+  return `<div class="mon"><div class="nm">${esc(m.name)}${m.mega?' (Mega)':''} <span class="sub">${esc(m.types.join('/'))}</span> ${m.status?`<span class="tag st">${esc(m.status)}</span>`:''}</div>${hpbar(m)}<div class="sub">${m.hp}/${m.maxhp} (${pct(m)}%) · ${esc(m.item||'no item')} · ${esc(m.ability)}</div><div>${b}${vol}</div><div>${mv}</div></div>`;}
 const X=v=>v===0?'0×':v===0.25?'¼×':v===0.5?'½×':v===1?'1×':v+'×';
 function effTxt(e){if(!e)return ''; const k=Object.keys(e); if(!k.length)return ''; return ' <span class="sub">'+k.map(n=>`${X(e[n])} ${esc(n)}`).join(', ')+'</span>';}
 function optTxt(st,k,l){const m=st.sides[0].active[k]; if(!m)return esc(l); const [mvn,tgt]=l.replace(' (Mega)','').split(' -> '); const mv=m.moves.find(x=>x.name===mvn); if(!mv||!mv.eff)return esc(l);
   if(tgt){const t=tgt.replace(' (ally)',''); return esc(l)+(mv.eff[t]!=null?` <b>${X(mv.eff[t])}</b>`:'');} const k2=Object.keys(mv.eff); return esc(l)+(k2.length?' <b>'+k2.map(n=>`${X(mv.eff[n])} ${esc(n)}`).join(', ')+'</b>':'');}
 function sideHtml(s,mine){return s.active.map(m=>monHtml(m,mine)).join('');}
-function benchHtml(s){return 'bench: '+(s.bench.map(m=>`${esc(m.name)} ${Math.round(100*m.hp/Math.max(1,m.maxhp))}%${m.status?' '+m.status:''}`).join(', ')||'none')+(s.fainted.length?' · fainted: '+s.fainted.map(m=>esc(m.name)).join(', '):'');}
+function benchHtml(s){return 'bench: '+(s.bench.map(m=>`${esc(m.name)} ${pct(m)}%${m.status?' '+m.status:''}`).join(', ')||'none')+(s.fainted.length?' · fainted: '+s.fainted.map(m=>esc(m.name)).join(', '):'');}
 function fieldHtml(st){const f=st.field; const t=[]; if(f.weather)t.push(`<span class="tag b">${esc(pretty(f.weather))}${f.weather_turns!=null?' '+f.weather_turns:''}</span>`); if(f.terrain)t.push(`<span class="tag b">${esc(pretty(f.terrain))}${f.terrain_turns!=null?' '+f.terrain_turns:''}</span>`);
   f.pseudo.forEach(p=>t.push(`<span class="tag b">${esc(pretty(p.id))}${p.turns!=null?' '+p.turns:''}</span>`)); st.sides.forEach((s,i)=>s.conditions.forEach(c=>t.push(`<span class="tag b">${i?'their':'your'} ${esc(pretty(c.id))}${c.turns!=null?' '+c.turns:''}</span>`)));
   return t.length?t.join(''):'<span class="sub">no field effects</span>';}

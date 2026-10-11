@@ -8,7 +8,7 @@
     4,
     12
   ],
-  "accept_challenges": true,
+  "accept_challenges": false,
   "search_ladder": true,
   "pm_reply": "I'm a bot (a Pokemon Champions planner being measured against real players). I play this format only and don't chat. GG!",
   "paused": false,

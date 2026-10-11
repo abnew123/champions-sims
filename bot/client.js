@@ -55,7 +55,7 @@ function mayPlay(reason) {
 let stoppedForTop = false;
 
 // ---- the connection
-let ws, me = null, searching = false, pmReplied = new Set();
+let ws, me = null, searching = false, inGames = 0, pmReplied = new Set();
 const rooms = {};   // room id -> {lines, side, req, done, oppRating, turn}
 function send(s) { ws.send(s); }
 function connect() {
@@ -82,7 +82,7 @@ async function onMessage(m) {
       if (p[1] === 'challstr') { await login(p.slice(2).join('|')); }
       else if (p[1] === 'updateuser') { const name = p[2].replace(/^[^A-Za-z0-9]/, '').trim(); if (p[3] === '1' && name.toLowerCase() === acct.name.toLowerCase()) { me = name; log('logged in as', me); send('|/cmd rooms'); onReady(); } }
       else if (p[1] === 'pm') { onPM(p[2], p[3], p.slice(4).join('|')); }
-      else if (p[1] === 'updatesearch') { try { const s = JSON.parse(p[2]); searching = (s.searching || []).length > 0; } catch (e) {} }
+      else if (p[1] === 'updatesearch') { try { const s = JSON.parse(p[2]); searching = (s.searching || []).length > 0; inGames = Object.keys(s.games || {}).length; } catch (e) {} }
       else if (p[1] === 'updatechallenges') { onChallenges(p[2]); }
       else if (p[1] === 'popup') { log('popup:', p.slice(2).join('|').slice(0, 200)); }
     } else {
@@ -92,6 +92,11 @@ async function onMessage(m) {
       if (p[1] === 'player' && p[3] && me && p[3].toLowerCase() === me.toLowerCase()) R.side = p[2];
       if (p[1] === 'player' && p[3] && me && p[3].toLowerCase() !== me.toLowerCase() && p[5]) R.oppRating = +p[5];
       if (p[1] === 'turn') R.turn = +p[2];
+      if (room.startsWith('game-bestof')) {   // the match room: confirm each game's start when asked, note the match result
+        if (line.includes('/confirmready') || (p[1] === 'inactive' && me && line.includes(me) && line.includes('confirm'))) { if (!R.confirmed) { R.confirmed = true; setTimeout(() => { send(`${room}|/confirmready`); R.confirmed = false; }, 2000); } }
+        if (p[1] === 'win' && !R.done) { R.done = true; const won = me && p[2].toLowerCase() === me.toLowerCase(); log('match over', room.slice(-16), won ? 'won' : 'lost'); fs.appendFileSync(path.join(OUT, LOCAL ? `matches_${TAG}.jsonl` : 'matches.jsonl'), JSON.stringify({when: new Date().toISOString(), room, won: !!won}) + '\n'); setTimeout(() => { send(`${room}|/leave`); delete rooms[room]; }, 8000); }
+        continue;
+      }
       if (p[1] === 'request' && p[2]) { try { R.req = JSON.parse(p[2]); } catch (e) { R.req = null; } if (R.req && !R.req.wait) handleRequest(room, R).catch(e => log('request error', room, String(e))); }
       if (p[1] === 'raw' && me && line.includes(me) && line.includes('rating:')) { const mm = /rating: (\d+)[^0-9]+(\d+)/.exec(line); if (mm) myRating = +mm[2]; }
       if (p[1] === 'win' || p[1] === 'tie') { onEnd(room, R, p[1] === 'win' ? p[2] : null); }
@@ -126,7 +131,7 @@ async function onReady() {
   for (;;) {
     await sleep(5000);
     if (DRY || CHALLENGE) continue;
-    const busy = Object.values(rooms).some(r => !r.done && r.req);
+    const busy = inGames > 0 || Object.values(rooms).some(r => !r.done);
     const why = mayPlay();
     if (!busy && !searching && limits().search_ladder && !why) { await pickTeam(); await sleep(LOCAL ? 1000 : rnd(30e3, 120e3)); if (!searching && !mayPlay()) { send(`|/search ${FORMAT}`); searching = true; log('searching'); } }
     else if (why && !busy && !searching) { log('not searching:', why); await sleep(60e3); }

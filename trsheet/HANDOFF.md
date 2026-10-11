@@ -14,7 +14,7 @@ Talk to the other threads directly with SendMessage (names above); do not relay 
 
 ## The sheet now
 
-- Published: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6, **Version 23** (2026-10-09, the user's go-ahead): Version 22's cards replayed on champ-battle-v23 (Healing Wish and newly ported mechanics; open item 6); ladder-weighted 48.1% when both sides pick, one four changed (Other Sun). Version 22 (2026-10-07) moved the sheet to the 32 real-team cards with both-sides-pick picks; Version 21 (archetype tabs) is in `archive_v21/`.
+- Published: https://claude.ai/artifact/Qufendyuq8b42JmB56XSc6, **Version 24** (2026-10-11, the user's go-ahead): after the mix check found stronger opposing answers (the top-2-of-a-4-game-screen answer search misses some), two more both-sides-pick rounds and adoption: 7 fours changed since Version 23, ladder-weighted 45.3% single pick / 47.8% mixed (Version 23 read 48.1%); the Archaludon + Pelipper Rain card fell from 46% to 14%. Version 23 (v23 replay) and Version 22 (cards) before it; Version 21 (archetype tabs) is in `archive_v21/`.
   `sheets/trick-room-six/sheet.html` (`python3 sheetkit/kit.py trick-room-six page`); `trsheet/tr-sheet.html` is a copy of it. Older
   pages: `trsheet/tr-sheet.v11.html` ... `tr-sheet.v15.html`, Version 16 in `sheetkit/fixtures/tr-v16/published.html`, and git from here on.
 - Version 17 against Version 16: Torkoal back to 32 HP / 2 SpD (card and Matchups column); Incineroar's Matchups column with White Herb
@@ -200,6 +200,9 @@ their tabs by core group with the archetype name kept (root HANDOFF); not starte
    48.5% -> 50.2% on the answers every component met (provisional). `mix check` (fill missing cells, play each six's strongest fours
    against the mix, re-solve) is scheduled by `work/mix_at_4am.sh` for 4:00 am on the Mac, 8 threads or fewer (log `work/mix_check.log`);
    after it, commit picks.json and tell Battle sim. The page stays one pick per card.
+   Done 4:32 am: 19-20 cards mix, 47.8% mixed. Caveat for every both-sides-pick number: answers are each six's top two fours by a
+   4-game screen, so strong answers can be missed and the numbers are a ceiling; a deeper answer search (top 4, or more screen games)
+   would lower them further (the mix check alone took the sheet from 48.1% to 45.3%).
 
 ## Running full battles (the sheet thread's main tool)
 

@@ -195,6 +195,11 @@ their tabs by core group with the archetype name kept (root HANDOFF); not starte
    No Trick Room Six rerun for it (the user, 2026-10-09: Blastoise's base ability does little and nothing else holds a stone; cycling
    Intimidate is bad against this team, so the opponents' Salamence / Staraptor would not stay base). It matters for the two-stone
    Frankfurt sheets and teams like them.
+8. **Mixed brings for the ladder bot (2026-10-11, the user's go-ahead).** `kit.py trick-room-six mix write` put a per-card mix into
+   picks.json (`mix`: [{lead, back, p}], sampled per game by Battle sim's bot so Bo3 game 1 reveals nothing): 20 of 32 cards mix,
+   48.5% -> 50.2% on the answers every component met (provisional). `mix check` (fill missing cells, play each six's strongest fours
+   against the mix, re-solve) is scheduled by `work/mix_at_4am.sh` for 4:00 am on the Mac, 8 threads or fewer (log `work/mix_check.log`);
+   after it, commit picks.json and tell Battle sim. The page stays one pick per card.
 
 ## Running full battles (the sheet thread's main tool)
 

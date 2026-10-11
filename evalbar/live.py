@@ -155,6 +155,7 @@ def positions(specs, outf):
 # A broadcast's games each have a Live in one process (broadcast.py's Runner): one of them builds or evaluates at a time, so a page
 # rebuilt from a record (a restart, serve) runs one engine with `threads` workers, not one per game
 WORK = threading.Lock()
+LUCK = threading.Lock()                                                  # the luck passes, one game at a time
 class Live:
     def __init__(s, room, threads, port, logfile=None, tag=None, fmt=None):
         """room: a Showdown battle room (followed through live_feed.js); or logfile: a battle log another program writes (the broadcast
@@ -164,7 +165,8 @@ class Live:
         s.bo3 = logfile is not None or 'bo3' in room; s.threads = threads; s.port = port; os.makedirs(OUT, exist_ok=True)
         s.log = logfile or os.path.join(OUT, f'{s.tag}.log'); s.evf = os.path.join(OUT, f'{s.tag}_eval.jsonl'); s.data = None; s.status = 'connecting'
         s.weights = {}; s.hyp = {}; s.poscache = {}; s.over = False; s.skip = {}
-        s.exact = False; s.team = None; s.back = {}; s.bot_side = None; s.held = None      # a Showdown bot's own log (bot/): its side known from its requests
+        s.exact = False; s.team = None; s.back = {}; s.bot_side = None; s.held = None
+        s.luck = False; s.lf = os.path.join(OUT, f'{s.tag}_luck.jsonl'); s.luck_state = None; s.dirty = False   # luck: after the game      # a Showdown bot's own log (bot/): its side known from its requests
         # the user's verdicts where the battle text and the rules disagree (broadcasts: evalbar/rules.py), kept beside the log
         s.fixf = os.path.join(OUT, f'{s.tag}_fixes.json'); s.fixes = json.load(open(s.fixf)) if logfile and os.path.exists(s.fixf) else {}; s.redo = None
     def page(s):
@@ -255,6 +257,7 @@ class Live:
     def build(s, log, g):
         """the page's data from everything evaluated so far"""
         ev = {x['name']: x for x in map(json.loads, open(s.evf)) if 'error' not in x} if os.path.exists(s.evf) else {}
+        lev = {x['name']: x for x in map(json.loads, open(s.lf)) if 'error' not in x} if os.path.exists(s.lf) else {}   # the luck pass
         logit = lambda v: math.log(min(1 - 1e-4, max(1e-4, v)) / (1 - min(1 - 1e-4, max(1e-4, v))))
         scale = lambda v: C.sig(CAL * logit(v))
         steps = []; ps = {}; CH = s.checks(log)
@@ -286,7 +289,7 @@ class Live:
                 if not s.bo3:
                     for m in state[sd]['mons']:
                         if not m.get('pool'): m['item'] = ''                 # Bo1: items are unknown unless one activated (shown in the events)
-            ex = [(w, B.expected(ev[n + ' p1'], ps[n + ' p1'])) for w, n in zip(ws, names)]; ex = [(w, x) for w, x in ex if x is not None]
+            ex = [(w, B.expected(lev.get(n + ' p1') or ev[n + ' p1'], ps[n + ' p1'])) for w, n in zip(ws, names)]; ex = [(w, x) for w, x in ex if x is not None]
             after = sum(w * scale(ev[n + ' p1']['static']) for w, n in zip(ws, names))   # the value function here, no lookahead
             steps.append({'turn': t, 'wp': wp, 'ev': wp, 'state': state, 'events': step['events'], 'opt': opt, 'hyp': len(names), 'checks': CH.get(t, []),
                           'expected': sum(w * scale(x) for w, x in ex) / sum(w for w, _ in ex) if ex else None, 'after': after})
@@ -303,7 +306,7 @@ class Live:
         game = {'id': s.tag, 'title': 'Live', 'winner': g['winner'], 'forfeit': g['forfeit'], 'perish': g['perish'], 'rating': rating, 'live': True,
                 'steps': steps, 'final': {'wp': None if g['winner'] is None else 1.0 if g['winner'] == 'p1' else 0.0, 'state': g['final']}, 'acc': None,
                 'engine': {'turns': len(steps), 'seeds': 32, 'staged': True, 'bar': True, 'cal': CAL},
-                'luck': {'p1': sum(lk), 'turns': len(lk)} if lk else None}
+                'luck': {'p1': sum(lk), 'turns': len(lk)} if lk and s.luck_state == 'done' else None}
         d = {'games': [game], 'live': {'url': 'data.json', 'status': s.status, 'format': s.fmt or ('Bo3, open team sheets' if s.bo3 else 'Bo1, closed team sheets')}}
         blob = json.dumps(d, ensure_ascii=False); B.leak_check(blob, [h for h in g['_hidden'] if not re.fullmatch(r'Player [12]', h)])   # the broadcast reader's own labels
         s.data = d
@@ -317,6 +320,15 @@ class Live:
         """a team sheet that does not list a Pokémon on the field (a misread, or the sheet of another match), or a species the engine lacks"""
         if s.bo3 and any(R.toid(n) not in S.E['species'] for n in names): return 'is not in the engine yet'
         return 'is not on the team sheets as read' if s.bo3 else 'is not in the engine yet'
+    def luck_pass(s, log, turns):
+        """after the game, for reviews: each turn again with the payoff table (evalpos EVAL_MATRIX), one engine thread at the lowest priority
+        and one game at a time, apart from the live evaluation's lock, so a game going on is not slowed"""
+        for t in turns:
+            posf = os.path.join(OUT, f'{s.tag}_t{t}_pos.jsonl')
+            if not os.path.exists(posf): positions(s.at(log, t)[0], posf)
+            with LUCK: EN.run(posf, s.lf, 1, 32, 1, extra={'EVAL_MATRIX': '1'}, nice=19)
+            s.dirty = True
+        s.luck_state = 'done'; s.dirty = True
     def evaluate(s, log, g, step):
         sp, H = s.at(log, step['turn'])
         if not sp:
@@ -359,9 +371,11 @@ class Live:
                 continue
             last = g['steps'][-1]['turn']
             status = 'finished' if g['winner'] or feed.poll() is not None else f"turn {last}"
+            if s.luck and status == 'finished' and s.luck_state is None:
+                s.luck_state = 'running'; threading.Thread(target=s.luck_pass, args=(log, sorted(t for t, w in s.weights.items() if w)), daemon=True).start()
             if s.skip.get(last): status += f" · not evaluated: {', '.join(s.skip[last])} {s.why(s.skip[last])}"
-            if len(log) != seen_len or status != s.status:
-                s.status = status
+            if len(log) != seen_len or status != s.status or s.dirty:
+                s.status = status; s.dirty = False
                 with WORK: s.build(log, g)
                 seen_len = len(log)
             if feed.poll() is not None and not todo and not s.over:
@@ -372,7 +386,6 @@ class BotRunner:
     """the Showdown bot's games (bot/out/ in the main checkout) on one page: the last 12 hours' games when this starts, then each game it
     starts, as it plays it. The page moves on to a new game when it is showing the latest one."""
     def __init__(s, threads, port):
-        os.environ['EVAL_MATRIX'] = '1'                                     # the payoff table, for luck (about 3x the engine time)
         s.dir = os.path.join(C.MAIN, 'bot', 'out'); s.threads = threads; s.port = port; s.lives = []; s.files = []; s.known = set()
     def serve(s):
         run = s
@@ -403,7 +416,7 @@ class BotRunner:
             for f in new:
                 room = os.path.basename(f)[:-4]; num = re.search(r'-(\d+)(?:-[a-z0-9]+)?$', room).group(1); s.files.append(f)
                 lv = Live(room, s.threads, 0, logfile=f, tag='bot_' + num, fmt="Bo3, open team sheets · the bot is Player 1, its side from its own log")
-                lv.exact = True; s.lives.append(lv); threading.Thread(target=lv.run, daemon=True).start()
+                lv.exact = True; lv.luck = True; s.lives.append(lv); threading.Thread(target=lv.run, daemon=True).start()
                 print(time.strftime('%-I:%M %p'), 'following the bot\'s game', num, flush=True)
             time.sleep(5)
 if __name__ == '__main__':
@@ -421,7 +434,7 @@ if __name__ == '__main__':
         room = room_of(a[1]); f = os.path.join(C.MAIN, 'bot', 'out', room + '.log')
         L = Live(room, int(a[2]) if len(a) > 2 else 2, int(a[3]) if len(a) > 3 else 8769, logfile=f, tag='bot_' + re.search(r'-(\d+)(?:-[a-z0-9]+)?$', room).group(1),
                  fmt="Bo3, open team sheets · the bot is Player 1, its side from its own log")
-        L.exact = True; os.environ['EVAL_MATRIX'] = '1'
+        L.exact = True; L.luck = True
         try: L.run()
         except KeyboardInterrupt: pass
     elif a[0] == 'watch':

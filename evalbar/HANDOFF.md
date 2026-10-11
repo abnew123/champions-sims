@@ -260,8 +260,12 @@ give: the payoff table's cell for the actual joint actions (evalpos EVAL_MATRIX=
 show weighted by that side's mix (build.expected). Both sides of the difference use the value function before any lookahead ('static'
 at the next turn), since the solved value of a position can differ a lot from it (0.26 vs 0.72 on one turn 1). Values rescaled with CAL;
 weighted over the hypotheses. A reveal of an unseen Pokemon counts in. The page shows each turn's luck under its events and the game total
-as a chip. On by default only on the bot pages (EVAL_MATRIX makes the engine about 3x slower: 22 s -> 61 s for a 6-turn game); the
-first check, a crit Wave Crash KO on a Mega Charizard Y, was +34 for the bot.
+as a chip. It runs after a game, for reviews, not during it (the user, 2026-10-11: live evaluation must not slow down): when a bot game
+is over, Live.luck_pass evaluates its turns again with EVAL_MATRIX=1 into <tag>_luck.jsonl, one engine thread at nice 19, one game at a
+time (LUCK lock), apart from the live evaluation's WORK lock; the game's total shows once every turn is done. EVAL_MATRIX makes the engine
+about 3x slower (22 s -> 61 s for a 6-turn game). The first check, a crit Wave Crash KO on a Mega Charizard Y, was +34 for the bot; over
+62 turns of the first bot games luck averaged +0.5 points (sd 9). A move stopped by Armor Tail is now the user's choice (replay.py), or
+its unknown choice made one turn look like +48.
 
 ## Mega Evolution on the live pages (2026-10-11)
 

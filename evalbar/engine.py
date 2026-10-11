@@ -31,10 +31,12 @@ def stamp(posf, outf, threads, seeds, staged, title=None):
     json.dump({'title': title or os.environ.get('EVAL_TITLE') or os.path.basename(outf), 'out': os.path.relpath(outf, os.path.dirname(os.path.abspath(outf))),
                'total': count(posf), 'done0': count(outf), 'started': time.time(), 'threads': threads, 'seeds': seeds, 'staged': bool(staged)},
               open(outf + '.run.json', 'w'))
-def run(posf, outf, threads=1, seeds=32, staged=1):
+def run(posf, outf, threads=1, seeds=32, staged=1, extra=None, nice=0):
+    """extra: more environment for this run only (EVAL_MATRIX for the luck pass); nice: run the engine at that lower priority"""
     grid = os.path.join(C.HERE, 'out', 'emptygrid'); os.makedirs(grid, exist_ok=True); stamp(posf, outf, threads, seeds, staged)
-    env = dict(os.environ, RACE_TIES='avg', EVAL_SEEDS=str(seeds), **({'EVAL_ADAPT': '1'} if staged else {}), EG_VALUE=os.environ.get('EG_VALUE', 'egvalue9_sym2.json'), RACE='1', TRSYM='1', CALC_DATA='../native/champions_data.json', GRID_DIR=grid)
-    subprocess.run([P.exe('champ', os.environ.get('CHAMP_BIN') or BIN), 'evalpos', '../native/' + os.environ.get('CHAMP_DATA', 'engine_data_spot.json'), os.path.abspath(posf), os.path.abspath(outf), str(threads)], cwd=MP, env=env, check=True)
+    env = dict(os.environ, RACE_TIES='avg', EVAL_SEEDS=str(seeds), **({'EVAL_ADAPT': '1'} if staged else {}), EG_VALUE=os.environ.get('EG_VALUE', 'egvalue9_sym2.json'), RACE='1', TRSYM='1', CALC_DATA='../native/champions_data.json', GRID_DIR=grid, **(extra or {}))
+    subprocess.run([P.exe('champ', os.environ.get('CHAMP_BIN') or BIN), 'evalpos', '../native/' + os.environ.get('CHAMP_DATA', 'engine_data_spot.json'), os.path.abspath(posf), os.path.abspath(outf), str(threads)], cwd=MP, env=env, check=True,
+                   preexec_fn=(lambda: os.nice(nice)) if nice else None)
 if __name__ == '__main__':
     P.own()
     a = sys.argv[1:]

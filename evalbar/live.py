@@ -134,6 +134,12 @@ def specs_for(tag, g, step, six, sets, leads, own=None):
                                   'dropped': [], 'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None,
                                                            'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}))
     return out, H
+SIDE = re.compile(r'(?<![A-Za-z0-9])p([12])(?=[ab]?(?:[:|,\]"]|$))')
+def bot_first(log):
+    """a bot's own log with the bot as Player 1: when its requests say it is p2, every side reference (p1, p2a, "id":"p2", ...) is swapped"""
+    m = re.search(r'\|request\|\{.*?"side":\{[^{}]*?"id":"(p[12])"', log)
+    if not m or m.group(1) == 'p1': return log
+    return '\n'.join(SIDE.sub(lambda x: 'p' + ('2' if x.group(1) == '1' else '1'), l) for l in log.split('\n'))
 def bot_team(log, sd):
     """the bot's team with its spreads (bot/teams.json, Battle sim's): the one whose six match the bot's team preview"""
     f = os.path.join(C.MAIN, 'bot', 'teams.json')
@@ -319,6 +325,7 @@ class Live:
         while True:
             if s.redo is not None: t0, s.redo = s.redo, None; s.redo_from(t0)
             log = s.with_fixes(open(s.log).read()) if os.path.exists(s.log) else ''
+            if s.exact: log = bot_first(log)                                 # the bot on the left, as Player 1
             if '|turn|' not in log:
                 s.status = 'waiting for the battle to start' if log else 'connecting'
                 if feed.poll() is not None and not s.logfile: print('the feed stopped:', feed.stderr.read().strip()); return
@@ -362,11 +369,10 @@ class BotRunner:
                     games = []
                     for i, lv in enumerate(run.lives):
                         if lv.data and lv.data['games']:
-                            who = f" · the bot is Player {lv.bot_side[1]}" if lv.bot_side else ''
-                            games.append({**lv.data['games'][0], 'title': f'Game {i + 1}', 'idx': i, 'versus': f'Game {i + 1}{who}'})
+                            games.append({**lv.data['games'][0], 'title': f'Game {i + 1}', 'idx': i, 'versus': f'Game {i + 1}'})
                     last = run.lives[-1] if run.lives else None
                     st = "waiting for the bot's next game" if not last or last.status == 'finished' else last.status
-                    b = json.dumps({'games': games, 'live': {'url': 'data.json', 'status': st, 'format': "Bo3, open team sheets · the bot's side from its own log"}}).encode()
+                    b = json.dumps({'games': games, 'live': {'url': 'data.json', 'status': st, 'format': "Bo3, open team sheets · the bot is Player 1, its side from its own log"}}).encode()
                     ct = 'application/json'
                 elif p in ('/', '/index.html'): b = Live.page(None).encode(); ct = 'text/html; charset=utf-8'
                 else: self.send_error(404); return
@@ -382,7 +388,7 @@ class BotRunner:
             else: new = [f for f in fs if f not in s.known]; s.known |= set(new)
             for f in new:
                 room = os.path.basename(f)[:-4]; num = re.search(r'-(\d+)(?:-[a-z0-9]+)?$', room).group(1); s.files.append(f)
-                lv = Live(room, s.threads, 0, logfile=f, tag='bot_' + num, fmt="Bo3, open team sheets · the bot's side from its own log")
+                lv = Live(room, s.threads, 0, logfile=f, tag='bot_' + num, fmt="Bo3, open team sheets · the bot is Player 1, its side from its own log")
                 lv.exact = True; s.lives.append(lv); threading.Thread(target=lv.run, daemon=True).start()
                 print(time.strftime('%-I:%M %p'), 'following the bot\'s game', num, flush=True)
             time.sleep(5)
@@ -400,7 +406,7 @@ if __name__ == '__main__':
         # a game the Showdown bot (bot/) plays or played, from its own log in the main checkout's bot/out/: its side as it knows it
         room = room_of(a[1]); f = os.path.join(C.MAIN, 'bot', 'out', room + '.log')
         L = Live(room, int(a[2]) if len(a) > 2 else 2, int(a[3]) if len(a) > 3 else 8769, logfile=f, tag='bot_' + re.search(r'-(\d+)(?:-[a-z0-9]+)?$', room).group(1),
-                 fmt="Bo3, open team sheets · the bot's side from its own log")
+                 fmt="Bo3, open team sheets · the bot is Player 1, its side from its own log")
         L.exact = True
         try: L.run()
         except KeyboardInterrupt: pass

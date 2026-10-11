@@ -74,8 +74,8 @@ class Game:
                 lt = (m.get('turn') or 1) - 1 if m.get('type') == 'turn' else m.get('turn')   # a turn prompt carries the previous turn's events
                 self.log += [(lt, l) for l in m.get('log', [])]; m['log_all'] = self.log
                 if 'value' in m: self.value = m.pop('value')   # the planner's view of the turn, never sent to the page
-                if m.get('type') == 'verdict':   # the concede check: the planner concedes when it wins none of its playouts and its turn value is under 2%
-                    lost = m.get('n', 0) > 0 and m.get('planner_wins', 0) == 0 and m.get('draws', 0) == 0 and (1.0 - (m.get('value') or 0.5)) < self.threshold
+                if m.get('type') == 'verdict':   # the concede check: the planner concedes when its turn value is under 2%, or when it wins (and draws) none of its playouts
+                    lost = (1.0 - (m.get('value') or 0.5)) < self.threshold or (m.get('n', 0) > 0 and m.get('planner_wins', 0) == 0 and m.get('draws', 0) == 0)
                     self.verdict = {'conceded': lost}; m['log'] = []
                     if lost: self.pending_concede = True
                     continue

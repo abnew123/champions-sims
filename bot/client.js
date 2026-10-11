@@ -7,12 +7,16 @@
 // bot/account.json {"name": ..., "password": ...} is git-ignored; so are the logs in bot/out/.
 const fs = require('fs'), path = require('path'), {spawn} = require('child_process');
 const HERE = __dirname, ROOT = path.join(HERE, '..'), OUT = path.join(HERE, 'out'); fs.mkdirSync(OUT, {recursive: true});
-const DRY = process.argv.includes('--dry');
-const acct = JSON.parse(fs.readFileSync(path.join(HERE, 'account.json')));
+// --server <ws url> --name <guest name> --format <id> --challenge <user> --tag <label>: a local test server (pokemon-showdown start
+// --no-security), a guest login, another format, challenge that user once instead of searching, and a label for this client's log
+const ARG = k => { const i = process.argv.indexOf(k); return i >= 0 ? process.argv[i + 1] : null; };
+const DRY = process.argv.includes('--dry'), LOCAL = !!ARG('--server');
+const acct = ARG('--name') ? {name: ARG('--name'), password: null} : JSON.parse(fs.readFileSync(path.join(HERE, 'account.json')));
 const limits = () => JSON.parse(fs.readFileSync(path.join(HERE, 'limits.json')));
-const L0 = limits(); const FORMAT = L0.format;
-const WS = 'wss://sim3.psim.us/showdown/websocket';
-const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
+const L0 = limits(); const FORMAT = ARG('--format') || L0.format; const CHALLENGE = ARG('--challenge'); const TAG = ARG('--tag') || acct.name;
+const WS = ARG('--server') || 'wss://sim3.psim.us/showdown/websocket';
+const ACTION = LOCAL ? null : 'https://play.pokemonshowdown.com/action.php';
+const log = (...a) => console.log(new Date().toISOString().slice(11, 19), TAG + ':', ...a);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const rnd = (a, b) => a + Math.random() * (b - a);
 
@@ -28,18 +32,19 @@ function ask(msg) { return brainChain = brainChain.then(() => new Promise(res =>
 // ---- the public ladder: the rating of the N-th ranked player, refreshed hourly (the stop band)
 let topBand = {elo: Infinity, at: 0};
 async function refreshTop() {
-  const L = limits(); if (Date.now() - topBand.at < 3600e3) return;
+  const L = limits(); if (LOCAL || Date.now() - topBand.at < 3600e3) return;
   try { const r = await fetch(`https://pokemonshowdown.com/ladder/${FORMAT}.json`); const j = await r.json(); const t = j.toplist || [];
     const n = Math.min(L.stop_if_opponent_in_top, t.length); topBand = {elo: n ? t[n - 1].elo : Infinity, at: Date.now()}; log(`ladder top ${n}: ${topBand.elo.toFixed(0)}+`); }
   catch (e) { log('ladder fetch failed', String(e)); topBand.at = Date.now(); }
 }
 
 // ---- the record: bot/out/games.jsonl (no usernames: ratings and results only)
-const GAMES = path.join(OUT, 'games.jsonl');
+const GAMES = path.join(OUT, LOCAL ? `games_${TAG}.jsonl` : 'games.jsonl');
 const games = () => fs.existsSync(GAMES) ? fs.readFileSync(GAMES, 'utf8').split('\n').filter(Boolean).map(l => JSON.parse(l)) : [];
 let myRating = null;
 function mayPlay(reason) {
   const L = limits(); const g = games(); const now = Date.now();
+  if (LOCAL) return null;
   if (L.paused) return 'paused';
   if (g.filter(x => now - Date.parse(x.when) < 3600e3).length >= L.max_games_per_hour) return 'hourly cap';
   if (g.filter(x => now - Date.parse(x.when) < 86400e3).length >= L.max_games_per_day) return 'daily cap';
@@ -60,8 +65,9 @@ function connect() {
   ws.onerror = () => {};
 }
 async function login(challstr) {
+  if (!acct.password) { send(`|/trn ${acct.name},0,`); return; }   // a guest name on a local --no-security server
   const body = new URLSearchParams({act: 'login', name: acct.name, pass: acct.password, challstr});
-  const r = await fetch('https://play.pokemonshowdown.com/action.php', {method: 'POST', body});
+  const r = await fetch(ACTION, {method: 'POST', body});
   const t = await r.text(); const j = JSON.parse(t.slice(1));
   if (!j.assertion) { log('login failed', JSON.stringify(j).slice(0, 200)); process.exit(1); }
   send(`|/trn ${acct.name},0,${j.assertion}`);
@@ -71,6 +77,7 @@ async function onMessage(m) {
   if (lines[0].startsWith('>')) { room = lines[0].slice(1); lines.shift(); }
   for (const line of lines) {
     const p = line.split('|');
+    if (process.env.BOT_DEBUG && !['challstr', 'formats', 'customgroups', 'queryresponse', 'updateuser'].includes(p[1])) log(room ? '[' + room.slice(-14) + ']' : '[global]', line.slice(0, 160));
     if (!room) {   // global
       if (p[1] === 'challstr') { await login(p.slice(2).join('|')); }
       else if (p[1] === 'updateuser') { const name = p[2].replace(/^[^A-Za-z0-9]/, '').trim(); if (p[3] === '1' && name.toLowerCase() === acct.name.toLowerCase()) { me = name; log('logged in as', me); send('|/cmd rooms'); onReady(); } }
@@ -101,13 +108,13 @@ function onChallenges(json) {
   let c; try { c = JSON.parse(json); } catch (e) { return; }
   for (const [user, fmt] of Object.entries(c.challengesFrom || {})) {
     const L = limits(); const why = mayPlay();
-    if (!L.accept_challenges || fmt !== FORMAT || why || DRY) { send(`|/reject ${user}`); log('rejected challenge', fmt, why || ''); continue; }
+    if (!L.accept_challenges || fmt !== FORMAT || why || (DRY && !LOCAL)) { send(`|/reject ${user}`); log('rejected challenge', fmt, why || ''); continue; }
     pickTeam().then(() => { send(`|/accept ${user}`); log('accepted a challenge'); });
   }
 }
 let teams = null, teamIdx = 0;
 async function pickTeam() {
-  if (!teams) teams = JSON.parse(fs.readFileSync(path.join(HERE, 'teams.json')));
+  if (!teams) teams = JSON.parse(fs.readFileSync(ARG('--teams') || path.join(HERE, 'teams.json')));   // --teams <file>: another team list (local tests)
   const t = teams[teamIdx % teams.length]; teamIdx++;
   const packed = (await ask({type: 'pack', sets: t.sets})).packed;
   send(`|/utm ${packed}`); currentTeam = t; return t;
@@ -115,12 +122,13 @@ async function pickTeam() {
 let currentTeam = null;
 async function onReady() {
   await refreshTop();
+  if (CHALLENGE) { await pickTeam(); await sleep(3000); send(`|/challenge ${CHALLENGE}, ${FORMAT}`); log('challenged', CHALLENGE); }
   for (;;) {
     await sleep(5000);
-    if (DRY) continue;
+    if (DRY || CHALLENGE) continue;
     const busy = Object.values(rooms).some(r => !r.done && r.req);
     const why = mayPlay();
-    if (!busy && !searching && limits().search_ladder && !why) { await pickTeam(); await sleep(rnd(30e3, 120e3)); if (!searching && !mayPlay()) { send(`|/search ${FORMAT}`); searching = true; log('searching'); } }
+    if (!busy && !searching && limits().search_ladder && !why) { await pickTeam(); await sleep(LOCAL ? 1000 : rnd(30e3, 120e3)); if (!searching && !mayPlay()) { send(`|/search ${FORMAT}`); searching = true; log('searching'); } }
     else if (why && !busy && !searching) { log('not searching:', why); await sleep(60e3); }
     await refreshTop();
   }
@@ -128,7 +136,7 @@ async function onReady() {
 async function handleRequest(room, R) {
   const req = R.req; const L = limits();
   if (R.oppRating != null && R.oppRating >= topBand.elo && !stoppedForTop) { stoppedForTop = true; log(`opponent rated ${R.oppRating} is in the ladder's top band: this is the last game`); }
-  const think = req.teamPreview ? rnd(8e3, 20e3) : rnd(L.think_seconds[0] * 1e3, L.think_seconds[1] * 1e3);
+  const think = LOCAL ? 300 : req.teamPreview ? rnd(8e3, 20e3) : rnd(L.think_seconds[0] * 1e3, L.think_seconds[1] * 1e3);
   const t0 = Date.now();
   if (req.teamPreview) {   // the open sheets (|showteam|) follow the preview request by a moment: wait for the opponent's, up to 8 s
     const opp = R.side === 'p1' ? 'p2' : 'p1';

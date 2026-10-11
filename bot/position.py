@@ -11,6 +11,10 @@ os.environ.setdefault('CHAMP_BIN', os.path.join(ROOT, 'native', 'champ', 'bin', 
 os.environ.setdefault('CHAMP_DATA', 'engine_data_full.json')
 os.environ.setdefault('EG_MEGA_TIE', '0')
 import botpos as BP, live as LV, engine as EN
+import procs as P
+for _prog, _path in (('champ', os.environ['CHAMP_BIN']), ('node', None)):   # the Eval bar's process-name links, made once here so two
+    try: P.exe(_prog, _path)                                                   # brains starting together do not race to create them
+    except FileExistsError: pass
 OUT = os.path.join(ROOT, 'bot', 'out', 'pos'); os.makedirs(OUT, exist_ok=True)
 D = json.load(open(os.path.join(ROOT, 'native', 'engine_data_full.json'))); TYPES = D['types']; MOVES = D['moves']
 SPECIES = {s['name']: s for s in D['species'].values()}
@@ -87,6 +91,7 @@ def replacement(request, log, side):
         sys.stderr.write('replacement by value failed, type rule instead: ' + repr(e) + '\n')
         return replacement_by_type(request, text, side)
     cand = best[1]
+    sys.stderr.write(f"replacement by value: {cand} ({100 * best[0]:.0f}%)\n")
     return ', '.join(f'switch {team_index(request, sp)}' for sp in cand) + (', pass' * (len(slots) - len(cand)))
 def replacement_by_type(request, log, side):
     """forceSwitch: for each slot that must be filled, the bench Pokemon that takes the opponent's actives' attacking types best

@@ -84,7 +84,7 @@ async function onMessage(m) {
   if (lines[0].startsWith('>')) { room = lines[0].slice(1); lines.shift(); }
   for (const line of lines) {
     const p = line.split('|');
-    if (process.env.BOT_DEBUG && !['challstr', 'formats', 'customgroups', 'queryresponse', 'updateuser'].includes(p[1])) log(room ? '[' + room.slice(-14) + ']' : '[global]', line.slice(0, 160));
+    if (process.env.BOT_DEBUG && !['challstr', 'formats', 'customgroups', 'queryresponse', 'updateuser', 'c', 'c:', 'chat', 'pm'].includes(p[1])) log(room ? '[' + room.slice(-14) + ']' : '[global]', line.slice(0, 160));
     if (!room) {   // global
       if (p[1] === 'challstr') { await login(p.slice(2).join('|')); }
       else if (p[1] === 'updateuser') { const name = p[2].replace(/^[^A-Za-z0-9]/, '').trim(); if (p[3] === '1' && name.toLowerCase() === acct.name.toLowerCase()) { me = name; loginAt = Date.now(); joinSent = new Set(); log('logged in as', me); send('|/cmd rooms'); onReady(); } }
@@ -107,9 +107,13 @@ async function onMessage(m) {
       const R = rooms[room] || (rooms[room] = {lines: [], side: null, req: null, done: false, oppRating: null, turn: 0});
       R.last = Date.now();
       if (p[1] === 'init') { R.lines = []; }
+      // chat lines go to bot/out/chat.jsonl only, not into the room log (see noteChat)
+      if (p[1] === 'c' || p[1] === 'c:' || p[1] === 'chat') {
+        if (p[1] === 'c' && p.length > 3) noteChat(room, p[2].replace(/^[^A-Za-z0-9]/, '').trim(), p.slice(3).join('|'));
+        if (p[1] === 'c:' && p.length > 4) noteChat(room, p[3].replace(/^[^A-Za-z0-9]/, '').trim(), p.slice(4).join('|'));
+        continue;
+      }
       R.lines.push(line);
-      if (p[1] === 'c' && p.length > 3) noteChat(room, p[2].replace(/^[^A-Za-z0-9]/, '').trim(), p.slice(3).join('|'));
-      if (p[1] === 'c:' && p.length > 4) noteChat(room, p[3].replace(/^[^A-Za-z0-9]/, '').trim(), p.slice(4).join('|'));
       if (p[1] === 'player' && p[3] && me && p[3].toLowerCase() === me.toLowerCase()) R.side = p[2];
       if (p[1] === 'player' && p[3] && me && p[3].toLowerCase() !== me.toLowerCase() && p[5]) R.oppRating = +p[5];
       if (p[1] === 'turn') R.turn = +p[2];
@@ -129,10 +133,12 @@ async function onMessage(m) {
 // every chat line addressed to the bot (battle-room chat and PMs) goes to bot/out/chat.jsonl and the console, so the user can see
 // how opponents take it and stop the bot if people are unhappy
 const CHAT = path.join(OUT, LOCAL ? `chat_${TAG}.jsonl` : 'chat.jsonl');
+// chat text is written to the file only, never to the console or the room logs: an assistant reads the console and the room logs, and
+// people's messages must not reach it (the user, 2026-10-11: a perfect prompt-injection avenue); the user reads bot/out/chat.jsonl
 function noteChat(room, who, text) {
   if (!me || who.toLowerCase() === me.toLowerCase() || who === '~' || who === '&' || !text.trim() || text.startsWith('/')) return;
   fs.appendFileSync(CHAT, JSON.stringify({when: new Date().toISOString(), room, from: who, text}) + '\n');
-  log('CHAT', room ? room.slice(-14) : 'pm', who + ':', text.slice(0, 200));
+  log(`chat message recorded (${room ? 'battle room' : 'private message'}); text in bot/out/chat.jsonl, for the user`);
 }
 function onPM(from, to, text) {
   const who = from.replace(/^[^A-Za-z0-9]/, '').trim(); if (!me || who.toLowerCase() === me.toLowerCase()) return;

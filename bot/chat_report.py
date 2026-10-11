@@ -1,27 +1,12 @@
-"""Chat to the bot: every line opponents or onlookers wrote in the bot's battle rooms, and every PM, from bot/out/chat.jsonl (the client
-logs them live since 2026-10-11) plus the battle-room chat in the saved room logs (bot/out/battle-*.log). Prints them oldest first with
-the room's last digits, so the user can see how people take the bot. Outputs carry usernames: they stay in bot/out/ (git-ignored).
+"""Chat to the bot, as counts only (2026-10-11, the user: people's messages must never reach an assistant, so only the user reads the
+text, in bot/out/chat.jsonl). Prints how many messages there are, how many in battle rooms and in private, and how many are new since a
+time; never the text or the senders.
   .venv/bin/python3 bot/chat_report.py [--since 2026-10-11T03:00]"""
-import json, os, sys, glob
+import json, os, sys
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'out')
 since = sys.argv[sys.argv.index('--since') + 1] if '--since' in sys.argv else ''
-rows = []
-if os.path.exists(os.path.join(OUT, 'chat.jsonl')):
-    rows += [json.loads(l) for l in open(os.path.join(OUT, 'chat.jsonl')) if l.strip()]
-seen = {(r['room'], r['from'], r['text']) for r in rows}
-me = None
-for f in sorted(glob.glob(os.path.join(OUT, 'battle-*.log'))):
-    if '_' in os.path.basename(f) or 'regmb' in f: continue        # local test rooms
-    room = os.path.basename(f)[:-4]; when = ''
-    for l in open(f):
-        p = l.rstrip('\n').split('|')
-        if len(p) > 2 and p[1] == 't:': when = p[2]
-        if len(p) > 3 and p[1] in ('c', 'c:'):
-            who, text = (p[2], '|'.join(p[3:])) if p[1] == 'c' else (p[3], '|'.join(p[4:]))
-            who = who.lstrip('~&@%+*#☆ ').strip()
-            if who in ('', '~') or text.startswith('/') or 'bot' in who.lower(): continue
-            if (room, who, text) in seen: continue
-            rows.append({'when': when, 'room': room, 'from': who, 'text': text})
-rows = [r for r in rows if str(r['when']) >= since]
-print(f"{len(rows)} chat lines to the bot")
-for r in rows: print(f"  {str(r['when'])[:16]:16s} {r['room'][-10:]:10s} {r['from']}: {r['text'][:200]}")
+f = os.path.join(OUT, 'chat.jsonl')
+rows = [json.loads(l) for l in open(f) if l.strip()] if os.path.exists(f) else []
+new = [r for r in rows if r['when'] >= since] if since else rows
+print(f"{len(rows)} chat messages recorded ({sum(1 for r in rows if r['room'])} in battle rooms, {sum(1 for r in rows if not r['room'])} private)"
+      + (f"; {len(new)} since {since}" if since else '') + "; the text is for the user to read in bot/out/chat.jsonl")

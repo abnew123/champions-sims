@@ -535,6 +535,38 @@ pub fn value(b: &mut Battle, cfg: &Cfg) -> f64 {
 // ---------------- options ----------------
 /// EG_NO_DOUBLE_PROTECT=0 | 1 | both (experiment, 2026-10-04): that side never clicks a Protect-family move while the stall counter from
 /// last turn's successful Protect is up (no second Protect in a row). Unset: no change.
+/// EG_LAST_PROTECT=0|1|both (2026-10-11, the user): that side's last Pokemon may not Protect when protecting changes nothing (see
+/// pointless_protect); a Protect that only stalls is what makes a lost endgame drag on
+fn last_protect_rule() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new(); *F.get_or_init(|| match std::env::var("EG_LAST_PROTECT").as_deref() { Ok("0") => [true, false], Ok("1") => [false, true], Ok(_) => [true, true], Err(_) => [false, false] }) }
+/// side s is down to one Pokemon (m) and a Protect this turn would change nothing: no timed field or side effect is running (weather,
+/// terrain, Trick Room / Gravity / rooms, Tailwind, screens, Safeguard, Mist, Wish / Future Sight / Healing Wish slots), no Pokemon on
+/// the field is asleep, frozen, charging, locked, confused, Taunted, Encored, Disabled, Throat Chopped, Heal Blocked, drowsy or under
+/// Perish Song, no end-of-turn HP change (residual damage on anyone; healing for m when it is below full: Leftovers, Black Sludge, Grassy
+/// Terrain, Aqua Ring, Ingrain), no foe has a fresh Fake Out, m cannot still Mega Evolve and has no Speed Boost / Moody
+pub(crate) fn pointless_protect(b: &mut Battle, s: u8, m: MonRef) -> bool {
+    if alive(b, s).len() != 1 { return false; }
+    if !b.field.weather.is_empty() || !b.field.terrain.is_empty() || !b.field.pseudo.is_empty() { return false; }
+    for sd in 0..2usize {
+        if !b.sides[sd].side_conditions.is_empty() || b.sides[sd].slot_conditions.iter().any(|v| !v.is_empty()) { return false; }
+    }
+    const TIMED: [&str; 14] = ["yawn", "perishsong", "taunt", "encore", "disable", "throatchop", "healblock", "confusion", "twoturnmove",
+        "lockedmove", "mustrecharge", "partiallytrapped", "leechseed", "saltcure"];
+    let field: Vec<MonRef> = (0..2u8).flat_map(|sd| crate::plan::active_alive(b, sd).into_iter().map(|x| x.1).collect::<Vec<_>>()).collect();
+    for &q in &field {
+        let p = b.p(q);
+        if ["slp", "frz", "brn", "psn", "tox"].contains(&p.status) { return false; }
+        if TIMED.iter().any(|v| find(&p.volatiles, v).is_some()) || find(&p.volatiles, "curse").is_some() || find(&p.volatiles, "nightmare").is_some() { return false; }
+        if q.0 != s && p.active_move_actions == 0 && p.move_slots.iter().any(|x| x.id == "fakeout" && x.pp > 0) { return false; }
+    }
+    let p = b.p(m);
+    if p.can_mega_evo.is_some() || ["speedboost", "moody"].contains(&p.ability) { return false; }
+    if p.hp < p.maxhp {
+        let heal = p.item == "leftovers" || find(&p.volatiles, "aquaring").is_some() || find(&p.volatiles, "ingrain").is_some();
+        let sludge = p.item == "blacksludge";
+        if heal || (sludge && b.has_type(m, "Poison")) { return false; }
+    }
+    true
+}
 fn no_double_protect(s: u8) -> bool {
     static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new();
     F.get_or_init(|| match std::env::var("EG_NO_DOUBLE_PROTECT").as_deref() {
@@ -568,6 +600,7 @@ pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
         if *mid == "trickroom" && find(&b.field.pseudo, "trickroom").is_some() && tr_keep(b, s) { continue; }
         let mv = b.dex.mv(mid).tmpl.clone();
         if mv.stalling_move && no_double_protect(s) && find(&b.p(m).volatiles, "stall").is_some() { continue; }
+        if mv.stalling_move && last_protect_rule()[s as usize] && pointless_protect(b, s, m) { continue; }
         // the request's target class, as Showdown's chooseMove checks it: for a real move it is the move's own; for the recharge
         // pseudo-move (a stub with no target in the data, which used to read as "normal" and left a recharging Pokemon with no legal
         // option, ending the game early) it is "self"

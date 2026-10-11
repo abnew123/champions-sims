@@ -1102,3 +1102,13 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     "ladder top 100: 1539+"). Not yet run live: the user creates the
     account (git-ignored bot/account.json {"name", "password"}); start with `node --experimental-websocket --no-warnings bot/client.js
     --dry` to check the login, then without --dry. Teams in bot/teams.json (the Trick Room six; add pool sixes for variety).
+  - **The last Pokémon's pointless Protect (`EG_LAST_PROTECT=0|1|both`, 2026-10-11, 3 am; the user's rule).** plan.rs `pointless_protect`:
+    when a side is down to one Pokémon, Protect is not offered if it would change nothing this turn: no weather, terrain, room / Trick
+    Room / Gravity, no side or slot condition (Tailwind, screens, Wish, Future Sight), no Pokémon on the field asleep, frozen, burned,
+    poisoned, charging, locked, confused, Taunted, Encored, Disabled, Throat Chopped, Heal Blocked, drowsy, Perish-counted, Leech Seeded,
+    Salt Cured or trapped, no foe with a fresh Fake Out, our Pokémon cannot still Mega Evolve and has no Speed Boost / Moody, and no
+    healing for it below full HP (Leftovers, Black Sludge, Aqua Ring, Ingrain). Self-play on 800 pool starts: side 0 with the rule
+    **-0.2 ± 0.2** (2 games change), both sides -0.2 ± 0.2 (4 change); last-Pokémon Protects 293 -> 226 for the side using it, games
+    8.26 -> 8.19 turns. PP stalling, the case it could cost: in 4,923 cached real games a move ran out of PP in 15 (0.3%; Protect itself in
+    8), and the 7 Struggle games were too short for PP to be the cause (Taunt / Disable / Choice locks). On for the Showdown bot
+    (bot/position.py), off by default elsewhere.

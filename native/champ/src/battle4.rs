@@ -332,7 +332,14 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
             };
             if let Some(u) = new_mix { if s == 0 { x = u; } else { y = u; } }
         }
-        let i = match human.as_deref_mut() { Some(h) => h.choose_turn(&b, turn, &msw), None => sample(&x, &mut rng) }; let j = sample(&y, &mut rng);
+        let i = match human.as_deref_mut() {
+            Some(h) => {   // the turn's solved value (both mixes' supports; those cells are cached), for the page's concede check
+                let xs: Vec<usize> = (0..msw.len()).filter(|&i| x[i] > 1e-4).collect(); let ys: Vec<usize> = (0..tsw.len()).filter(|&j| y[j] > 1e-4).collect();
+                let (mut gv, mut wt) = (0.0, 0.0);
+                for &i in &xs { for &j in &ys { gv += x[i] * y[j] * cell2(i, j, &b).0; wt += x[i] * y[j]; } }
+                h.choose_turn(&b, turn, &msw, if wt > 0.0 { gv / wt } else { 0.5 }) }
+            None => sample(&x, &mut rng) };
+        let j = sample(&y, &mut rng);
         // BATTLE_MEGA_AUDIT=<jsonl> (2026-10-10, for TR sheet's audit of un-evolved attacking turns): whenever a side's sampled action
         // uses a move without the Mega although the Mega twin was on offer, record the turn with both outcomes against the other
         // side's sampled action (8 seeds: damage range and KOs per target, who moved first), the ability / type the Mega would have had,

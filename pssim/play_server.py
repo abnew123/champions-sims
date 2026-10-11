@@ -40,10 +40,10 @@ def planner_bring(their_sets, my_sets, rnd):
 class Game:
     def __init__(self):
         self.proc = None; self.msg = None; self.waiting = False; self.id = 0; self.log = []; self.tmp = None; self.lock = threading.Lock(); self.err = None
-        self.match = None; self.rnd = random.Random(); self.cur = None
+        self.match = None; self.rnd = random.Random(); self.cur = None; self.value = None
     def start(self, mine, theirs, match_key=None, their_six=None, my_six=None):
         """mine: your four in lead order; theirs: the planner's four in lead order, or None to let it choose against your six"""
-        self.stop(); self.id += 1; self.msg = None; self.log = []; self.err = None; self.waiting = True
+        self.stop(); self.id += 1; self.msg = None; self.log = []; self.err = None; self.waiting = True; self.value = None
         if match_key and self.match and self.match['key'] == match_key: pass
         else: self.match = {'key': match_key, 'games': []} if match_key else None
         if their_six and my_six: theirs = planner_bring(their_six, my_six, self.rnd) or theirs   # its own choice; the recorded bring as the fallback
@@ -66,9 +66,30 @@ class Game:
             with self.lock:
                 if gid != self.id: return
                 lt = (m.get('turn') or 1) - 1 if m.get('type') == 'turn' else m.get('turn')   # a turn prompt carries the previous turn's events
-                self.log += [(lt, l) for l in m.get('log', [])]; m['log_all'] = self.log; self.msg = m; self.waiting = False
+                self.log += [(lt, l) for l in m.get('log', [])]; m['log_all'] = self.log
+                if 'value' in m: self.value = m.pop('value')   # the planner's view of the turn, never sent to the page
+                self.msg = m; self.waiting = False
                 if m.get('type') == 'end' and self.match is not None and self.cur:
                     self.match['games'].append({**self.cur, 'winner': m.get('winner'), 'turns': m.get('turn')}); self.cur = None
+    def finish(self, winner, how):
+        """end the game from the server side: your forfeit, or the planner conceding"""
+        with self.lock:
+            m = self.msg
+            if not m or m.get('type') == 'end' or self.waiting: return False
+            end = {'type': 'end', 'turn': m.get('turn'), 'state': m.get('state'), 'winner': winner, 'how': how, 'log_all': self.log}
+            self.msg = end
+            if self.match is not None and self.cur: self.match['games'].append({**self.cur, 'winner': winner, 'turns': m.get('turn'), 'how': how}); self.cur = None
+        if self.proc:
+            try: self.proc.kill()
+            except Exception: pass
+            self.proc = None
+        return True
+    def concede_check(self, threshold=0.02):
+        """the planner concedes when its own win chance on the current turn's solve is under the threshold"""
+        v = getattr(self, 'value', None)
+        if v is None or not self.msg or self.msg.get('type') != 'turn': return {'conceded': False, 'reason': 'no position to judge'}
+        if 1.0 - v < threshold: self.finish('you', 'the planner conceded'); return {'conceded': True}
+        return {'conceded': False, 'reason': 'the planner does not consider itself lost'}
     def choose(self, i):
         if not self.proc or self.waiting or not self.msg or self.msg.get('type') == 'end': return False
         self.waiting = True
@@ -114,6 +135,8 @@ class H(BaseHTTPRequestHandler):
             G.start(body['mine'], body.get('theirs'), body.get('match_key'), body.get('their_six'), body.get('my_six'))
             self.send(200, {'ok': G.err is None, 'error': G.err})
         elif self.path == '/choose': self.send(200, {'ok': G.choose(body.get('i', 0))})
+        elif self.path == '/forfeit': self.send(200, {'ok': G.finish('the planner', 'you forfeited')})
+        elif self.path == '/concede': self.send(200, G.concede_check())
         elif self.path == '/stop': G.stop(); self.send(200, {'ok': True})
         else: self.send(404, {'error': 'no'})
 if __name__ == '__main__':

@@ -28,5 +28,6 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
    hit in a way that rules it out. `bot/speed_check.py` (2026-10-11, 111 games): only 39 move pairs were clean speed evidence (most
    turns have Trick Room, Tailwind, weather or terrain), the assumed spread got 2 clearly wrong (Modest Archaludon assumed at 0 Speed
    points but outsped a 108-Speed Archaludon; Jolly Sneasler assumed at 32 but outsped by a 178 Gengar) plus 2 the check cannot judge
-   (Prankster, Mega timing). Damage is the richer evidence (every hit narrows bulk or attack). Fix after the climb, in the builder:
-   candidate spreads per species, kept or dropped turn by turn by observed order and damage, the most likely one in the position.
+   (Prankster, Mega timing). **Partly done (Eval bar, 2026-10-11 evening, 190d732):** opponents now get the most used Smogon spread
+   with their sheet nature (no more 0-Speed fallback), refined turn by turn by the turn order seen so far (botpos.refine_opponent);
+   the bot is restarted onto it. Still open: damage as evidence (every hit narrows bulk or attack).

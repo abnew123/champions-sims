@@ -22,7 +22,7 @@ for rid, log in C.games():
             elif d['kind'] == 'turn':
                 if turns >= maxt: continue
                 turns += 1
-                specs, info = POS.build(d['log'], d['request'], 'p1'); choice, note = POS.decide(specs, d['request'], 'p1'); r = {'choice': choice, 'note': note}
+                specs, info = POS.build(d["log"], d["request"], "p1"); choice, note, value = POS.decide(specs, d["request"], "p1", log=d["log"], cap=4); r = {"choice": choice, "note": note}
             else:
                 r = {'choice': POS.replacement(d['request'], d['log'], 'p1'), 'note': 'replacement; player chose ' + json.dumps(d['actual'])}
         except Exception as e:

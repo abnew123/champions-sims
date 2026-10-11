@@ -54,7 +54,7 @@ function mayPlay(reason) {
   if (LOCAL) return null;
   if (L.paused) return 'paused';
   if (g.filter(x => now - Date.parse(x.when) < 3600e3).length >= L.max_games_per_hour) return 'hourly cap';
-  if (g.filter(x => now - Date.parse(x.when) < 86400e3).length >= L.max_games_per_day) return 'daily cap';
+  if (L.max_games_per_day != null && g.filter(x => now - Date.parse(x.when) < 86400e3).length >= L.max_games_per_day) return 'daily cap';
   if (myRating != null && myRating >= L.stop_if_rating_at_least) return `our rating ${myRating.toFixed(0)} is at the stop`;
   if (stoppedForTop) return 'met a top-of-ladder opponent';
   return null;

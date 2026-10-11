@@ -4,6 +4,7 @@ you are playing, and never pass what it shows to a player during their game.
                                                               Bo1 games, the newest Bo3 games (Bo3 rooms show no rating)
   python3 evalbar/live.py watch <room or battle URL> [threads=2] [port=8768]
                                                               follows the battle and serves the page at http://localhost:<port>
+  python3 evalbar/live.py bot [threads=2] [port=8769]       the bot's newest game, then each new one as it starts, on one page
   python3 evalbar/live.py bot <room or battle URL> [threads=2] [port=8769]
                                                               a game of the Showdown bot (bot/), from its own log: the bot's side
                                                               exactly (its requests, its team's spreads), the opponent as a spectator
@@ -13,7 +14,7 @@ not sent in yet are averaged over: for each player the TOPK most likely combinat
 recorded.py back_weight), every pairing of the two players' combinations evaluated by the engine (champ evalpos, as engine.py runs it),
 values rescaled to real outcomes. The battle log, positions and results stay in evalbar/out/live/ (git-ignored: the log has usernames).
 Needs Node with --experimental-websocket (Node 20.10+)."""
-import os, sys, json, math, time, re, itertools, subprocess, threading, collections, http.server
+import os, sys, json, math, time, re, glob, itertools, subprocess, threading, collections, http.server
 import common as C, replay as R, spots as S, recorded as RC, build as B, engine as EN, procs as P
 toid = R.toid
 OUT = os.path.join(C.HERE, 'out', 'live'); FEED = os.path.join(C.HERE, 'live_feed.js')
@@ -345,6 +346,43 @@ class Live:
                 s.over = True
                 if s.port: print(f'battle over; the page stays up at http://localhost:{s.port} until you stop this (Ctrl-C)', flush=True)
             time.sleep(1)
+class BotRunner:
+    """the Showdown bot's games (bot/out/ in the main checkout) on one page: its newest game when this starts, then each game it starts,
+    as it plays it. The page moves on to a new game when it is showing the latest one."""
+    def __init__(s, threads, port):
+        s.dir = os.path.join(C.MAIN, 'bot', 'out'); s.threads = threads; s.port = port; s.lives = []; s.files = []; s.known = set()
+    def serve(s):
+        run = s
+        class H(http.server.BaseHTTPRequestHandler):
+            def do_GET(self):
+                p = self.path.split('?')[0]
+                if p == '/data.json':
+                    games = []
+                    for i, lv in enumerate(run.lives):
+                        if lv.data and lv.data['games']:
+                            who = f" · the bot is Player {lv.bot_side[1]}" if lv.bot_side else ''
+                            games.append({**lv.data['games'][0], 'title': f'Game {i + 1}', 'idx': i, 'versus': f'Game {i + 1}{who}'})
+                    last = run.lives[-1] if run.lives else None
+                    st = "waiting for the bot's next game" if not last or last.status == 'finished' else last.status
+                    b = json.dumps({'games': games, 'live': {'url': 'data.json', 'status': st, 'format': "Bo3, open team sheets · the bot's side from its own log"}}).encode()
+                    ct = 'application/json'
+                elif p in ('/', '/index.html'): b = Live.page(None).encode(); ct = 'text/html; charset=utf-8'
+                else: self.send_error(404); return
+                self.send_response(200); self.send_header('Content-Type', ct); self.send_header('Cache-Control', 'no-store'); self.end_headers(); self.wfile.write(b)
+            def log_message(self, *a): pass
+        threading.Thread(target=http.server.ThreadingHTTPServer(('127.0.0.1', s.port), H).serve_forever, daemon=True).start()
+    def run(s):
+        s.serve(); print(f"the bot's games: http://localhost:{s.port}", flush=True)
+        while True:
+            fs = sorted(glob.glob(os.path.join(s.dir, 'battle-*.log')), key=os.path.getmtime)
+            if not s.files and not s.known: new = fs[-1:]; s.known = set(fs)          # at the start: the newest game only
+            else: new = [f for f in fs if f not in s.known]; s.known |= set(new)
+            for f in new:
+                room = os.path.basename(f)[:-4]; num = re.search(r'-(\d+)(?:-[a-z0-9]+)?$', room).group(1); s.files.append(f)
+                lv = Live(room, s.threads, 0, logfile=f, tag='bot_' + num, fmt="Bo3, open team sheets · the bot's side from its own log")
+                lv.exact = True; s.lives.append(lv); threading.Thread(target=lv.run, daemon=True).start()
+                print(time.strftime('%-I:%M %p'), 'following the bot\'s game', num, flush=True)
+            time.sleep(5)
 if __name__ == '__main__':
     P.own()
     a = sys.argv[1:]
@@ -352,6 +390,9 @@ if __name__ == '__main__':
     if a[0] == 'list':
         k = [x for x in a[1:] if x in FORMATS]; n = 1000 if 'all' in a[1:] else 8
         listing(k[0] if k else None, n)
+    elif a[0] == 'bot' and not (len(a) > 1 and 'battle-' in a[1]):          # every game the bot plays from now on, on one page
+        try: BotRunner(int(a[1]) if len(a) > 1 else 2, int(a[2]) if len(a) > 2 else 8769).run()
+        except KeyboardInterrupt: pass
     elif a[0] == 'bot':
         # a game the Showdown bot (bot/) plays or played, from its own log in the main checkout's bot/out/: its side as it knows it
         room = room_of(a[1]); f = os.path.join(C.MAIN, 'bot', 'out', room + '.log')

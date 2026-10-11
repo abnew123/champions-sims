@@ -176,6 +176,10 @@ async function handleRequest(room, R) {
   }
   const ans = await ask({type: req.teamPreview ? 'preview' : 'turn', room, side: R.side, log: R.lines, request: req, team: currentTeam});
   if (ans.error) { log('brain error', room, ans.error); return; }
+  if (ans.forfeit) {   // a lost game: say gg and forfeit this game (in a best-of-3 only this game; the match goes on)
+    await sleep(LOCAL ? 300 : rnd(3e3, 6e3)); if (R.req !== req || R.done) return;
+    send(`${room}|gg`); await sleep(1500); send(`${room}|/forfeit`); log(room.slice(-12), `T${R.turn}`, ans.note); return;
+  }
   const wait = Math.max(0, think - (Date.now() - t0)); await sleep(wait);
   if (R.req !== req) return;   // superseded
   const cmd = req.teamPreview ? `/team ${ans.order.join('')}` : `/choose ${ans.choice}`;

@@ -5,7 +5,8 @@
 Team preview: Team search's bring heuristic against the opponent's open team sheet (|showteam| in the log). Turns: the position is built
 from the room log plus our own |request| (bot/position.py; the Eval bar thread's live builder for the opponent's side), evaluated by
 champ evalpos with the kit's setup, and a joint action is sampled from the planner's mix. Never prints anything else to stdout."""
-import json, os, sys, subprocess, random, re, traceback
+import json, os, sys, subprocess, random, re, traceback, math
+CAL = 0.7538   # the rescale of the planner's value to real outcomes (the eval bar's, fitted for egvalue9_sym2)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); PS = os.path.join(ROOT, 'pssim')
 sys.path.insert(0, PS); sys.path.insert(0, os.path.join(ROOT, 'bot'))
 def out(o): sys.stdout.write(json.dumps(o) + '\n'); sys.stdout.flush()
@@ -42,7 +43,12 @@ def turn(msg):
     req = msg['request']
     if req.get('forceSwitch'): return {'choice': POS.replacement(req, msg['log'], msg['side']), 'note': 'replacement'}
     specs, info = POS.build(msg['log'], req, msg['side'], team=(msg.get('team') or {}).get('sets'))
-    choice, note = POS.decide(specs, req, msg['side'])
+    choice, note, value = POS.decide(specs, req, msg['side'])
+    # a lost game is forfeited rather than played out (the user: Protect-stalling a lost position is what would annoy people most):
+    # the planner's value rescaled to a real win chance as the eval bar does (log-odds x 0.7538), under limits.json's forfeit_below
+    real = 1 / (1 + math.exp(-CAL * math.log(max(1e-6, value) / max(1e-6, 1 - value))))
+    below = json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))).get('forfeit_below', 0.0)
+    if real < below: return {'forfeit': True, 'note': f'forfeit: win chance {100 * real:.1f}% (value {100 * value:.1f}%)'}
     return {'choice': choice, 'note': note + (f" hyp {info.get('hyp', [])[:1]}" if info.get('need') else '')}
 def main():
     for line in sys.stdin:

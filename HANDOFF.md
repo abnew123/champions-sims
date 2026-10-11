@@ -1090,6 +1090,15 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     + engine.run evaluate it with the current build and EG_MEGA_TIE=0, a joint action is sampled from side 0's mix; replacements after a
     faint scored by the engine's static value of the next turn's start with each candidate in (the Eval bar's `bot_replacement`, the
     opponent's own replacement averaged over its likely ones), a type-chart rule as the fallback; `bot/test_cached.py` runs every
-    decision of a saved game through the brain (about 1 s a turn, 0.6 s a replacement)). Not yet run live: the user creates the
+    decision of a saved game through the brain (about 1 s a turn, 0.6 s a replacement)). **Local bot-vs-bot test (2026-10-11, 11:25 pm):** the client has a local mode (`--server ws://localhost:8777/showdown/websocket
+    --name <guest> --format <id> --teams <file> [--challenge <user>]`, `BOT_DEBUG=1` logs every server line) against the Showdown
+    package in pssim/node_modules run as a server (`./pokemon-showdown start 8777 --no-security` from that folder; it predates Reg M-C,
+    so the test used `gen9championsvgc2026regmbbo3` with pool teams that validate there, bot/out/local_teams.json). Two clients
+    matched on its ladder and played a full best-of-3 through the real protocol (team preview with the open sheets, turns at 2-4 s,
+    replacements, Mega, readiness between games), after three fixes: a locked turn (charging, recharging) must be sent as `move 1`
+    with no target and the target / mega suffix now follow the request's own move list; "busy" comes from updatesearch's games list, so
+    the client no longer searches twice; the best-of match room confirms readiness (`/confirmready`), records the match
+    (bot/out/matches.jsonl) and is not counted as a game. The dry login on the real account works ("logged in as abnew123-bot",
+    "ladder top 100: 1539+"). Not yet run live: the user creates the
     account (git-ignored bot/account.json {"name", "password"}); start with `node --experimental-websocket --no-warnings bot/client.js
     --dry` to check the login, then without --dry. Teams in bot/teams.json (the Trick Room six; add pool sixes for variety).

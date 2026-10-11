@@ -43,9 +43,13 @@ def decide(specs, request, side, threads=2, seeds=32):
         c = opt['c']
         if c[0] == 'switch': cmds.append('switch ' + str(team_index(request, lab.replace('switch to ', ''))))
         else:
-            mv, t, mega = c; s = f'move {mv + 1}'
-            if t: s += f' {t}'
-            if mega: s += ' mega'
+            mv, t, mega = c
+            rmoves = (request.get('active') or [{}] * 2)[k].get('moves') or []
+            if len(rmoves) == 1: cmds.append('move 1'); continue          # a locked turn (charging, recharging, locked move): no target
+            rm = rmoves[mv] if mv < len(rmoves) else {}
+            s = f'move {mv + 1}'
+            if t and rm.get('target') in (None, 'normal', 'any', 'adjacentFoe', 'adjacentAlly', 'adjacentAllyOrSelf'): s += f' {t}'
+            if mega and (request.get('active') or [{}] * 2)[k].get('canMegaEvo'): s += ' mega'
             cmds.append(s)
     note = f"{pick['label']} ({100 * pick['w']:.0f}%, value {100 * r['value']:.0f}%)"
     return ', '.join(cmds), note

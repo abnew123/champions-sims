@@ -23,3 +23,10 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
    spread move on the other side). Invisible to opponents (an unexecuted choice never shows), so left as is.
 5. **Team-side, not planner:** Frankfurt-156's Archaludon loses its Electric STAB into Lightning Rod Raichu (absorbed twice, boosting
    Raichu), which is where its Leftovers Protect chains came from.
+6. **Opponent spreads are never updated from what the game shows.** The position builder guesses each opposing spread once (the
+   species' usual spread for its sheet nature, evalbar/spots.py `evs_for`) and keeps it, even after the opponent outspeeds or takes a
+   hit in a way that rules it out. `bot/speed_check.py` (2026-10-11, 111 games): only 39 move pairs were clean speed evidence (most
+   turns have Trick Room, Tailwind, weather or terrain), the assumed spread got 2 clearly wrong (Modest Archaludon assumed at 0 Speed
+   points but outsped a 108-Speed Archaludon; Jolly Sneasler assumed at 32 but outsped by a 178 Gengar) plus 2 the check cannot judge
+   (Prankster, Mega timing). Damage is the richer evidence (every hit narrows bulk or attack). Fix after the climb, in the builder:
+   candidate spreads per species, kept or dropped turn by turn by observed order and damage, the most likely one in the position.

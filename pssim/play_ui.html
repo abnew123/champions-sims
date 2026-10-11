@@ -96,11 +96,12 @@ function fieldHtml(st){const f=st.field; const t=[]; if(f.weather)t.push(`<span 
   return t.length?t.join(''):'<span class="sub">no field effects</span>';}
 function render(m){const st=m.state; $('field').innerHTML=fieldHtml(st); $('them').innerHTML=sideHtml(st.sides[1]); $('themb').innerHTML=benchHtml(st.sides[1]); $('me').innerHTML=sideHtml(st.sides[0]); $('meb').innerHTML=benchHtml(st.sides[0]);
   renderLog(m.log_all||[]); sel=[null,null];
-  if(m.type==='end'){$('status').textContent=`game over after ${m.turn} turns: ${m.winner==='you'?'you win':m.winner==='the planner'?'the planner wins':m.winner}`;
+  if(m.type==='end'){$('status').textContent=`game over after ${m.turn} turns: ${m.winner==='you'?'you win':m.winner==='the planner'?'the planner wins':m.winner}${m.how?' ('+m.how+')':''}`;
     $('choice').innerHTML=`<button class="go" onclick="nextGame()">Next game, same teams</button> <button onclick="location.reload()">New opponent</button>`; return;}
   const opts=m.options; if(m.type==='switch'){$('choice').innerHTML='<h2>Replacement</h2>'+opts.map(o=>`<button onclick="send(${o.i})">${esc(o.slots.filter(x=>x!=='pass').join(' | ')||'pass')}</button>`).join(''); return;}
   const per=[0,1].map(k=>[...new Set(opts.map(o=>o.slots[k]))]);
-  $('choice').innerHTML='<h2>Your turn</h2><div class="opts">'+[0,1].map(k=>`<div class="col"><div class="sub">${esc(st.sides[0].active[k]?st.sides[0].active[k].name:'slot '+(k+1))}</div>${per[k].map(l=>`<button data-k="${k}" data-l="${esc(l)}" onclick="pick(${k},this)">${optTxt(st,k,l)}</button>`).join('')}</div>`).join('')+`</div><div style="margin-top:8px"><button class="go" id="go" onclick="submit()" disabled>Submit</button> <span id="why" class="sub"></span></div>`;
+  $('choice').innerHTML='<h2>Your turn</h2><div class="opts">'+[0,1].map(k=>`<div class="col"><div class="sub">${esc(st.sides[0].active[k]?st.sides[0].active[k].name:'slot '+(k+1))}</div>${per[k].map(l=>`<button data-k="${k}" data-l="${esc(l)}" onclick="pick(${k},this)">${optTxt(st,k,l)}</button>`).join('')}</div>`).join('')+`</div><div style="margin-top:8px"><button class="go" id="go" onclick="submit()" disabled>Submit</button> <span id="why" class="sub"></span></div>
+    <div style="margin-top:14px"><button onclick="askConcede()" title="the planner concedes only if its own chances on this turn are under 2%; otherwise it says nothing more">Ask the planner to concede</button> <button onclick="forfeit()">Forfeit</button> <span id="endnote" class="sub"></span></div>`;
   window._opts=opts; if(per[0].length===1)pick(0,$('choice').querySelector('button[data-k="0"]')); if(per[1].length===1)pick(1,$('choice').querySelector('button[data-k="1"]'));}
 function pick(k,btn){sel[k]=btn.dataset.l; [...$('choice').querySelectorAll(`button[data-k="${k}"]`)].forEach(b=>b.className=b===btn?'on':'');
   const ok=[0,1].map(j=>[...$('choice').querySelectorAll(`button[data-k="${j}"]`)]); ok[1-k].forEach(b=>{b.disabled=!window._opts.some(o=>o.slots[k]===sel[k]&&o.slots[1-k]===b.dataset.l);});
@@ -109,6 +110,8 @@ function nextGame(){order=[]; lastKey=''; $('game').classList.add('hidden'); $('
 function joint(){if(sel[0]==null||sel[1]==null)return null; return window._opts.find(o=>o.slots[0]===sel[0]&&o.slots[1]===sel[1]);}
 async function submit(){const j=joint(); if(!j)return; send(j.i);}
 async function send(i){if(busy)return; busy=true; $('choice').innerHTML=''; await fetch('/choose',{method:'POST',body:JSON.stringify({i})}); busy=false; poll();}
+async function askConcede(){if(busy)return; const r=await (await fetch('/concede',{method:'POST',body:'{}'})).json(); if(r.conceded){poll();} else {$('endnote').textContent=r.reason||'no';}}
+async function forfeit(){if(busy||!confirm('Forfeit this game?'))return; await fetch('/forfeit',{method:'POST',body:'{}'}); poll();}
 function who(s){const m=/^p([12])([ab]?): (.*)$/.exec(s||''); if(!m)return esc(s||''); return `<span class="${m[1]==='1'?'side0':'side1'}"><span class="nm">${esc(m[3])}</span></span>`;}
 function tr(line){const p=line.split('|').slice(1); const c=p[0]; const a=p.slice(1);
   switch(c){case 'move':{const spread=a.slice(3).find(x=>x.startsWith('[spread]')); return `${who(a[0])} used ${esc(a[1])}${spread?' on '+spread.replace('[spread] ','').split(',').map(x=>x.trim()).map(x=>who(x.includes(': ')?x:x+': ')).join(' and '):a[2]?' on '+who(a[2]):''}`;} case '-damage':return `${who(a[0])} → ${esc(a[1])}${a[2]?' ('+esc(a[2].replace('[from] ',''))+')':''}`; case '-heal':return `${who(a[0])} healed to ${esc(a[1])}`;

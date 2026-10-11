@@ -44,3 +44,7 @@ teamsearch/cloud/bundle.tar.gz
 pssim/opp_pool.json
 sheetkit/cloud/bundle.tar.gz
 pssim/battlesim-play
+
+# Showdown bot: the account file and its game logs (usernames)
+bot/account.json
+bot/out/

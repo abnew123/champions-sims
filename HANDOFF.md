@@ -1051,3 +1051,21 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     .claude/launch.json), then http://localhost:8765. The page: your six (the Trick Room six or any 1250+ pool team), the opponent's six
     from the pool (or random), bring four by clicking in lead order, then per turn one option per slot (illegal pairs grey out), forced
     replacements as buttons, and the engine's protocol log in plain words. No sim evaluation is shown during a game.
+  - **Attacking into an immune target as a switch read (`PLAN_KEEP_IMMUNE=0|1|both`, 2026-10-10, 9:45 pm; the user, from the play
+    page: "it's not pointless, because my opponent might switch").** `slot_options` drops a damaging move aimed at an immune target;
+    the flag keeps those options for that side. The play page sets it for the human side. For the planner, head-to-head on 800 pool
+    starts vs the always-Mega sym2 baseline: **+0.4 ± 0.8 as side 0, +0.1 ± 0.8 as side 1** (37 / 41 games change; the solve takes
+    1.9x the time, every immune target being one more row). In a logged run the planner aimed 1.7% of its targeted attacks at an
+    immune Pokemon and the target switched out on 10% of those turns, below the opponent's 11.6% switch rate overall: sampled low-weight
+    branches of the mix, not reads that land. Not adopted for the planner; the flag stays for the page.
+  - **Play page follow-ups (2026-10-10 evening):** matches (next game with the same sixes; the server keeps the score and the fours
+    brought, shown under the title, survives a reload), the planner picks its four and leads against your six with Team search's bring
+    heuristic (teamsearch/bring/policy.py's model, sampled among its best six (bring, lead) choices so a match varies; the pool team's
+    recorded bring as the fallback), type effectiveness on every move and option (type chart on the target's current types; a move
+    whose type depends on the field is marked by its listed type), the opponent's six (not its four) before the bring, plain-words log
+    lines for the engine's new weather / terrain / Trick Room / side-condition / crit / effectiveness lines, Psychic Terrain blocks
+    named as such, a living Pokemon always shows a sliver of HP bar, forced replacements named by position (a Switch choice carries
+    a position, not an index: the page's label was wrong once the order had changed), the page says when the server is unreachable.
+    The server runs in the user's Terminal panel (`pssim/battlesim-play pssim/play_server.py`); a preview-started copy was stopped by
+    the app after an hour. The user's read after a few games: the planner "does feel decently strong", "it'd win a bo100 vs me", with
+    the caveat that the unfamiliar presentation makes them play worse for now.

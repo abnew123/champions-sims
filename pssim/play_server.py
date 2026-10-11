@@ -41,6 +41,12 @@ class Game:
     def __init__(self):
         self.proc = None; self.msg = None; self.waiting = False; self.id = 0; self.log = []; self.tmp = None; self.lock = threading.Lock(); self.err = None
         self.match = None; self.rnd = random.Random(); self.cur = None; self.value = None; self.verdict = None; self.pending_concede = False
+        self.store = os.path.join('results', 'play_match.json')   # the match record survives a server restart
+        try: self.match = json.load(open(self.store))
+        except Exception: self.match = None
+    def save(self):
+        try: os.makedirs('results', exist_ok=True); json.dump(self.match, open(self.store, 'w'))
+        except Exception as e: print('save:', repr(e), flush=True)
     def start(self, mine, theirs, match_key=None, their_six=None, my_six=None):
         """mine: your four in lead order; theirs: the planner's four in lead order, or None to let it choose against your six"""
         self.stop(); self.id += 1; self.msg = None; self.log = []; self.err = None; self.waiting = True; self.value = None; self.verdict = None; self.pending_concede = False
@@ -48,7 +54,7 @@ class Game:
         else: self.match = {'key': match_key, 'games': []} if match_key else None
         if their_six and my_six: theirs = planner_bring(their_six, my_six, self.rnd) or theirs   # its own choice; the recorded bring as the fallback
         if theirs is None and their_six: theirs = their_six[:4]
-        self.cur = {'my_four': [x['species'] for x in mine], 'their_four': [x['species'] for x in theirs]}
+        self.cur = {'my_four': [x['species'] for x in mine], 'their_four': [x['species'] for x in theirs]}; self.save()
         self.tmp = tempfile.mkdtemp(prefix='battlesim-play-'); os.makedirs(os.path.join(self.tmp, 'grid'), exist_ok=True)
         job = os.path.join(self.tmp, 'job.json'); start = os.path.join(self.tmp, 'start.jsonl')
         json.dump([{'mine': mine, 'theirs': theirs, 'meta': {}}], open(job, 'w'))
@@ -76,7 +82,7 @@ class Game:
                 self.msg = m; self.waiting = False
                 if getattr(self, 'pending_concede', False): self.pending_concede = False; threading.Thread(target=self.finish, args=('you', 'the planner conceded'), daemon=True).start()
                 if m.get('type') == 'end' and self.match is not None and self.cur:
-                    self.match['games'].append({**self.cur, 'winner': m.get('winner'), 'turns': m.get('turn')}); self.cur = None
+                    self.match['games'].append({**self.cur, 'winner': m.get('winner'), 'turns': m.get('turn')}); self.cur = None; self.save()
     def finish(self, winner, how):
         """end the game from the server side: your forfeit, or the planner conceding"""
         with self.lock:
@@ -84,7 +90,7 @@ class Game:
             if not m or m.get('type') == 'end' or self.waiting: return False
             end = {'type': 'end', 'turn': m.get('turn'), 'state': m.get('state'), 'winner': winner, 'how': how, 'log_all': self.log}
             self.msg = end
-            if self.match is not None and self.cur: self.match['games'].append({**self.cur, 'winner': winner, 'turns': m.get('turn'), 'how': how}); self.cur = None
+            if self.match is not None and self.cur: self.match['games'].append({**self.cur, 'winner': winner, 'turns': m.get('turn'), 'how': how}); self.cur = None; self.save()
         if self.proc:
             try: self.proc.kill()
             except Exception: pass

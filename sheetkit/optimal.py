@@ -238,7 +238,7 @@ def adopt(sheet, out=print):
         rv = sum(share[t] * mean(list(V[t][key].values())) for t in teams) / sum(share[t] for t in teams) if teams else None
         changed = not old or key != (frozenset(old['lead']), frozenset(old['back']))
         P_[a] = {'lead': r['lead'], 'back': r['back'], 'v': r['v'], 'basis': 'both sides pick', 'replay_v': round(rv, 3) if rv is not None else None,
-                 'answers': r['answers'], 'changed': changed}
+                 'answers': r['answers'], 'changed': changed, **{k: old[k] for k in ('mix', 'mix_v', 'mix_pure_v') if k in old}}   # mixes (mix.py) stay until rewritten
         n += changed; out(f"{a}: {'NEW ' if changed else ''}{'+'.join(r['lead'])} / {'+'.join(r['back'])}  {100*r['v']:.0f}% when they pick too")
     d.update(picks=P_, basis='both sides pick their four (optimal step, ' + OUT + ')'); wj(d, sheet.p('picks.json'), indent=1)
     out(f"picks.json: {n} fours changed")

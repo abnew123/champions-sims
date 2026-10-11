@@ -43,9 +43,14 @@ def sheet_pick(sheet, team, theirs):
         def overlap(k): return max((len(S & set(norm(y) for y in a['six'].split(', '))) for a in picks[k].get('answers', [])), default=0)
         g = max(picks, key=overlap); how = 'nearest group'
     pk = picks[g]; names = [x['species'] for x in team]
-    try: four = [team[names.index(sp)] for sp in pk['lead'] + pk['back']]
+    mix = pk.get('mix') or []   # the sheet's mixed bring when it has one ([{lead, back, p}]), sampled; else its single pick
+    if mix:
+        c = random.choices(mix, weights=[m['p'] for m in mix])[0]; lead, back = c['lead'], c['back']
+        tag_ = f" (mix {100 * c['p']:.0f}% of {len(mix)})" if len(mix) > 1 else ''
+    else: lead, back, tag_ = pk['lead'], pk['back'], ''
+    try: four = [team[names.index(sp)] for sp in lead + back]
     except ValueError: return None, None
-    return four, f'sheet pick for {g} ({how})'
+    return four, f'sheet pick for {g} ({how}){tag_}'
 def preview(msg):
     team = msg['team']['sets']; opp_side = 'p2' if msg['side'] == 'p1' else 'p1'
     theirs = showteam(msg['log'], opp_side)

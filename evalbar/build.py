@@ -23,9 +23,10 @@ def label(l):
     if l.startswith('switch to '): l = 'Switch to ' + R.disp(l[10:])
     elif ' -> ' in l: mv, tg = l.split(' -> ', 1); l = f"{mv} → {tg if tg == 'ally' else R.disp(tg)}"
     return l + (' (and Mega Evolve)' if mega else '')
-def same(c, a):
-    """is option c the choice a that was made? (move slot and target, or the switch target; the Mega flag is ignored)"""
-    return c[:2] == a[:2]
+def same(c, a, exact=False):
+    """is option c the choice a that was made? (move slot and target, or the switch target; with exact, the Mega flag too: an engine that
+    offers a move both with and without the Mega Evolution)"""
+    return c == a if exact else c[:2] == a[:2]
 def options(e, pos, scale):
     """evalpos line + the position line it came from -> {'p1': [slot...], 'p2': [...]}, slot = {mon, played (True, or None if unknown),
     options: [{l, w, v, played, rough}]}. rough: in the staged mode an option more than 0.15 below its side's best kept a 2-sample value."""
@@ -34,7 +35,8 @@ def options(e, pos, scale):
         out[sd] = []; best = max((o['v'] for sl in e['sides'][s]['slots'] for o in sl['options']), default=1)
         for sl in e['sides'][s]['slots']:
             a = acts[sl['slot']]; a = a['choice'] if a else None
-            opts = [{'l': label(o['label']), 'w': round(o['w'], 3), 'v': round(scale(o['v']), 3), 'played': bool(a) and same(o['c'], a),
+            exact = bool(a) and any(same(o['c'], a, True) for o in sl['options'])       # both versions offered: the one played
+            opts = [{'l': label(o['label']), 'w': round(o['w'], 3), 'v': round(scale(o['v']), 3), 'played': bool(a) and same(o['c'], a, exact),
                      'rough': 'stages' in e and o['v'] < best - 0.15} for o in sl['options']]
             out[sd].append({'mon': R.disp(sl['mon']), 'played': True if any(o['played'] for o in opts) else None, 'options': opts})
     out['value'] = {'p1': scale(e['value']), 'p2': 1 - scale(e['value'])}               # each side's win chance in this hypothesis

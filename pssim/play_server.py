@@ -14,11 +14,41 @@ def spread(species, nature):   # as opp_pool.spread, without that module's impor
 BIN = os.path.join('..', 'native', 'champ', 'bin', 'battlesim-champ'); ENGINE = os.path.join('..', 'native', 'engine_data_full.json')
 FLAGS = dict(RACE_TIES='avg', DP2='1', RACE='1', CALC_DATA=os.path.join('..', 'native', 'champions_data.json'), BATTLE_ANTICIPATE='1', TRSYM='1',
              EG_VALUE='egvalue9_sym2.json', EG_MEGA_TIE='0', PLAN_KEEP_IMMUNE='0')   # you may aim at an immune Pokemon (a switch read)
+def planner_bring(their_sets, my_sets, rnd):
+    """the planner's four and leads against your six, from Team search's bring heuristic (teamsearch/bring: fitted on what Showdown
+    M-C Bo3 players brought and led), sampled among the best few (bring, lead) choices so a match does not repeat the same four;
+    None when a species is unknown to it (the caller falls back to the pool team's recorded bring)"""
+    try:
+        for d in ('bring', ''): sys.path.insert(0, os.path.join('..', 'teamsearch', d))
+        import feats as Fx, policy as Pol, numpy as np, math
+        team = [Fx.canon(x['species']) for x in their_sets]
+        if any(g is None for g in team): return None
+        opp = [(Fx.canon(x['species']), 1.0) for x in my_sets]; opp = [(g, w) for g, w in opp if g]
+        wB, wL, pb, pl = Pol.model(); m = Fx.Matchup(team, opp); sp = [Fx.G[g]['species'] for g in team]
+        def lsm(u): u = np.asarray(u, float); return u - (u.max() + math.log(np.exp(u - u.max()).sum()))
+        uB = lsm([np.dot(wB, m.bring_feats(S) + [sum(pb.get(sp[i], 0.0) for i in S)]) for S in Fx.BRINGS])
+        cands = []
+        for b, S in enumerate(Fx.BRINGS):
+            Ls = Fx.leads(S); uL = lsm([np.dot(wL, m.lead_feats(Lp, S) + [sum(pl.get(sp[i], 0.0) for i in Lp)]) for Lp in Ls])
+            for l, Lp in enumerate(Ls): cands.append((float(uB[b] + uL[l]), Lp, tuple(i for i in S if i not in Lp)))
+        cands.sort(key=lambda c: -c[0]); top = cands[:6]
+        w = np.exp(np.array([c[0] for c in top]) - top[0][0]); w = w / w.sum()
+        v, Lp, back = top[rnd.choices(range(len(top)), weights=w)[0]]
+        return [their_sets[i] for i in list(Lp) + list(back)]
+    except Exception as e:
+        print('planner_bring:', repr(e), flush=True); return None
 class Game:
     def __init__(self):
         self.proc = None; self.msg = None; self.waiting = False; self.id = 0; self.log = []; self.tmp = None; self.lock = threading.Lock(); self.err = None
-    def start(self, mine, theirs):
+        self.match = None; self.rnd = random.Random(); self.cur = None
+    def start(self, mine, theirs, match_key=None, their_six=None, my_six=None):
+        """mine: your four in lead order; theirs: the planner's four in lead order, or None to let it choose against your six"""
         self.stop(); self.id += 1; self.msg = None; self.log = []; self.err = None; self.waiting = True
+        if match_key and self.match and self.match['key'] == match_key: pass
+        else: self.match = {'key': match_key, 'games': []} if match_key else None
+        if their_six and my_six: theirs = planner_bring(their_six, my_six, self.rnd) or theirs   # its own choice; the recorded bring as the fallback
+        if theirs is None and their_six: theirs = their_six[:4]
+        self.cur = {'my_four': [x['species'] for x in mine], 'their_four': [x['species'] for x in theirs]}
         self.tmp = tempfile.mkdtemp(prefix='battlesim-play-'); os.makedirs(os.path.join(self.tmp, 'grid'), exist_ok=True)
         job = os.path.join(self.tmp, 'job.json'); start = os.path.join(self.tmp, 'start.jsonl')
         json.dump([{'mine': mine, 'theirs': theirs, 'meta': {}}], open(job, 'w'))
@@ -37,6 +67,8 @@ class Game:
                 if gid != self.id: return
                 lt = (m.get('turn') or 1) - 1 if m.get('type') == 'turn' else m.get('turn')   # a turn prompt carries the previous turn's events
                 self.log += [(lt, l) for l in m.get('log', [])]; m['log_all'] = self.log; self.msg = m; self.waiting = False
+                if m.get('type') == 'end' and self.match is not None and self.cur:
+                    self.match['games'].append({**self.cur, 'winner': m.get('winner'), 'turns': m.get('turn')}); self.cur = None
     def choose(self, i):
         if not self.proc or self.waiting or not self.msg or self.msg.get('type') == 'end': return False
         self.waiting = True
@@ -74,12 +106,13 @@ class H(BaseHTTPRequestHandler):
             if TEAMS is None: TEAMS = teams()
             self.send(200, TEAMS)
         elif self.path == '/state':
-            with G.lock: self.send(200, {'game': G.id, 'waiting': G.waiting, 'msg': G.msg, 'error': G.err})
+            with G.lock: self.send(200, {'game': G.id, 'waiting': G.waiting, 'msg': G.msg, 'error': G.err, 'match': G.match})
         else: self.send(404, {'error': 'no'})
     def do_POST(self):
         n = int(self.headers.get('Content-Length') or 0); body = json.loads(self.rfile.read(n) or b'{}')
         if self.path == '/start':
-            G.start(body['mine'], body['theirs']); self.send(200, {'ok': G.err is None, 'error': G.err})
+            G.start(body['mine'], body.get('theirs'), body.get('match_key'), body.get('their_six'), body.get('my_six'))
+            self.send(200, {'ok': G.err is None, 'error': G.err})
         elif self.path == '/choose': self.send(200, {'ok': G.choose(body.get('i', 0))})
         elif self.path == '/stop': G.stop(); self.send(200, {'ok': True})
         else: self.send(404, {'error': 'no'})

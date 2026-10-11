@@ -22,13 +22,14 @@ select{font:inherit;padding:5px;border-radius:6px;border:1px solid var(--line);b
 .pick button{min-width:120px}.hidden{display:none}#status{color:var(--muted);margin:6px 0}
 </style></head><body>
 <h1>Play the planner</h1>
+<div id="score" class="hidden" style="color:var(--muted);margin:-6px 0 10px"></div>
 <div id="setup" class="card">
   <div class="row">
     <div><h2>Your six</h2><select id="mine"></select></div>
     <div><h2>Opponent (ladder pool, 1250+)</h2><select id="theirs"></select> <button onclick="randomOpp()">random</button></div>
   </div>
   <div style="margin-top:10px"><h2>Bring four, in lead order (click 1, 2 = leads, 3, 4 = back)</h2><div id="pick" class="pick"></div><div id="picked" class="sub"></div></div>
-  <div style="margin-top:10px"><h2>Opponent's six (open sheets; which four it brings you see at turn 1)</h2><div id="theirsix" class="sub"></div></div>
+  <div style="margin-top:10px"><h2>Opponent's six (open sheets; it picks its four against your six, and you see them at turn 1)</h2><div id="theirsix" class="sub"></div></div>
   <div style="margin-top:10px"><button class="go" id="startbtn" onclick="startGame()" disabled>Start</button></div>
 </div>
 <div id="game" class="hidden">
@@ -45,16 +46,23 @@ select{font:inherit;padding:5px;border-radius:6px;border:1px solid var(--line);b
   <div style="margin-top:8px"><button onclick="location.reload()">New game</button></div>
 </div>
 <script>
-let T=null, order=[], my=null, opp=null, lastGame=0, lastKey='', sel=[null,null], busy=false;
+let T=null, order=[], my=null, opp=null, lastGame=0, lastKey='', sel=[null,null], busy=false, match=null;
+function matchKey(){return $('mine').value+'|'+$('theirs').value;}
+function scoreTxt(){if(!match||!match.games||!match.games.length)return ''; const w=match.games.filter(g=>g.winner==='you').length, l=match.games.filter(g=>g.winner==='the planner').length; return `match: you ${w} – ${l} planner (${match.games.length} game${match.games.length>1?'s':''} played)`;}
+function showScore(){const el=$('score'); el.textContent=scoreTxt(); el.className=scoreTxt()?'':'hidden';}
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const NAMES={sunnyday:'Sun',raindance:'Rain',sandstorm:'Sand',snowscape:'Snow',hail:'Hail',trickroom:'Trick Room',grassyterrain:'Grassy Terrain',electricterrain:'Electric Terrain',psychicterrain:'Psychic Terrain',mistyterrain:'Misty Terrain',tailwind:'Tailwind',reflect:'Reflect',lightscreen:'Light Screen',auroraveil:'Aurora Veil',gravity:'Gravity',safeguard:'Safeguard',mist:'Mist',none:'cleared',brn:'burned',par:'paralysed',psn:'poisoned',tox:'badly poisoned',slp:'asleep',frz:'frozen',stall:'Protect streak',flinch:'flinch',substitute:'Substitute',taunt:'Taunt',encore:'Encore',yawn:'Yawn',confusion:'confused',leechseed:'Leech Seed',protect:'Protect',choicelock:'Choice-locked',mustrecharge:'recharging',twoturnmove:'charging',perishsong:'Perish Song',saltcure:'Salt Cure'};
 const pretty=id=>{if(!id)return ''; const k=String(id).replace(/^move: /,''); return NAMES[k]||k.replace(/([a-z])([A-Z])/g,'$1 $2');};
 const sideName=p=>p.startsWith('p1')?'your':'their';
-async function load(){T=await (await fetch('/teams')).json();
+async function load(){T=await (await fetch('/teams')).json(); let st=null; try{st=await (await fetch('/state')).json();}catch(e){}
   const m=$('mine'); T.mine.forEach((t,i)=>m.add(new Option(t.name,'m'+i))); T.pool.forEach((t,i)=>m.add(new Option(`${t.arch||'?'} ${t.rating}: ${t.sets.map(s=>s.species).join(' / ')}`,'p'+i)));
   const o=$('theirs'); T.pool.forEach((t,i)=>o.add(new Option(`${t.arch||'?'} ${t.rating}: ${t.sets.map(s=>s.species).join(' / ')}`,i)));
-  m.onchange=pickTeam; o.onchange=showOpp; pickTeam(); randomOpp();}
+  m.onchange=pickTeam; o.onchange=showOpp;
+  if(st&&st.match&&st.match.key&&st.match.games&&st.match.games.length){const [a,b]=st.match.key.split('|'); m.value=a; o.value=b; match=st.match; pickTeam(); showOpp(); showScore();
+    if(st.msg&&st.msg.type!=='end'){$('setup').classList.add('hidden'); $('game').classList.remove('hidden'); poll(); return;} }
+  else{pickTeam(); randomOpp();}
+  if(st&&st.msg&&st.msg.type!=='end'&&!(st.match&&st.match.games&&st.match.games.length)){$('setup').classList.add('hidden'); $('game').classList.remove('hidden'); poll();}}
 function team(v){return v[0]==='m'?T.mine[+v.slice(1)]:T.pool[+v.slice(1)]}
 function pickTeam(){my=team($('mine').value); order=[]; const p=$('pick'); p.innerHTML='';
   my.sets.forEach((s,i)=>{const b=document.createElement('button'); b.textContent=s.species; b.title=`${s.item} / ${s.ability} / ${s.nature}\n${s.moves.join(', ')}`; b.onclick=()=>{const k=order.indexOf(i); if(k>=0)order.splice(k,1); else if(order.length<4)order.push(i); draw();}; p.appendChild(b);}); draw();}
@@ -62,13 +70,13 @@ function draw(){[...$('pick').children].forEach((b,i)=>{const k=order.indexOf(i)
   $('picked').textContent=order.length?`lead ${order.slice(0,2).map(i=>my.sets[i].species).join(' + ')}${order.length>2?', back '+order.slice(2).map(i=>my.sets[i].species).join(' + '):''}`:''; $('startbtn').disabled=order.length!==4;}
 function randomOpp(){$('theirs').value=Math.floor(Math.random()*T.pool.length); showOpp();}
 function showOpp(){opp=T.pool[+$('theirs').value]; $('theirsix').innerHTML=opp.sets.map(s=>`<div><b>${esc(s.species)}</b> <span class="sub">${esc(s.item||'')} / ${esc(s.ability||'')} / ${esc(s.nature||'')}: ${esc((s.moves||[]).join(', '))}</span></div>`).join('');}
-async function startGame(){const mine=order.map(i=>my.sets[i]); const theirs=opp.bring.map(sp=>opp.sets.find(x=>x.species===sp));
-  $('status').textContent='building the start position...'; $('setup').classList.add('hidden'); $('game').classList.remove('hidden');
-  let r; try{r=await (await fetch('/start',{method:'POST',body:JSON.stringify({mine,theirs})})).json();}catch(e){$('status').textContent='the play server is not reachable (start it with: pssim/battlesim-play pssim/play_server.py, then reload)'; return;}
+async function startGame(){const mine=order.map(i=>my.sets[i]); const theirs=opp.bring.map(sp=>opp.sets.find(x=>x.species===sp));   // the recorded bring: the fallback
+  $('status').textContent='building the start position (the planner is choosing its four)...'; $('setup').classList.add('hidden'); $('game').classList.remove('hidden');
+  let r; try{r=await (await fetch('/start',{method:'POST',body:JSON.stringify({mine,theirs,my_six:my.sets,their_six:opp.sets,match_key:matchKey()})})).json();}catch(e){$('status').textContent='the play server is not reachable (start it with: pssim/battlesim-play pssim/play_server.py, then reload)'; return;}
   if(!r.ok){$('status').textContent='error: '+r.error; return;} poll();}
 async function poll(){let r; try{r=await (await fetch('/state')).json();}catch(e){$('status').textContent='lost the play server (start it with: pssim/battlesim-play pssim/play_server.py, then reload)'; return;} if(r.error){$('status').textContent='error: '+r.error;}
   const key=r.game+':'+(r.msg?r.msg.type+r.msg.turn+(r.msg.log_all||[]).length:'');
-  if(r.msg&&key!==lastKey){lastKey=key; render(r.msg);} if(r.waiting){$('status').textContent='the planner is thinking...'; setTimeout(poll,300);} else if(r.msg&&r.msg.type!=='end'){$('status').textContent=`turn ${r.msg.turn}: your move`;} }
+  match=r.match||match; showScore(); if(r.msg&&key!==lastKey){lastKey=key; render(r.msg);} if(r.waiting){$('status').textContent='the planner is thinking...'; setTimeout(poll,300);} else if(r.msg&&r.msg.type!=='end'){$('status').textContent=`turn ${r.msg.turn}: your move`;} }
 function hpbar(m){const f=m.maxhp?m.hp/m.maxhp:0; const w=m.hp>0?Math.max(1.5,100*f):0; return `<div class="bar ${f<.25?'low':f<.5?'mid':''}"><i style="width:${w}%"></i></div>`;}
 const pct=m=>m.hp<=0?0:Math.max(1,Math.round(100*m.hp/Math.max(1,m.maxhp)));
 const BOOST=['Atk','Def','SpA','SpD','Spe','Acc','Eva'];
@@ -88,7 +96,8 @@ function fieldHtml(st){const f=st.field; const t=[]; if(f.weather)t.push(`<span 
   return t.length?t.join(''):'<span class="sub">no field effects</span>';}
 function render(m){const st=m.state; $('field').innerHTML=fieldHtml(st); $('them').innerHTML=sideHtml(st.sides[1]); $('themb').innerHTML=benchHtml(st.sides[1]); $('me').innerHTML=sideHtml(st.sides[0]); $('meb').innerHTML=benchHtml(st.sides[0]);
   renderLog(m.log_all||[]); sel=[null,null];
-  if(m.type==='end'){$('status').textContent=`game over after ${m.turn} turns: ${m.winner==='you'?'you win':m.winner==='the planner'?'the planner wins':m.winner}`; $('choice').innerHTML=''; return;}
+  if(m.type==='end'){$('status').textContent=`game over after ${m.turn} turns: ${m.winner==='you'?'you win':m.winner==='the planner'?'the planner wins':m.winner}`;
+    $('choice').innerHTML=`<button class="go" onclick="nextGame()">Next game, same teams</button> <button onclick="location.reload()">New opponent</button>`; return;}
   const opts=m.options; if(m.type==='switch'){$('choice').innerHTML='<h2>Replacement</h2>'+opts.map(o=>`<button onclick="send(${o.i})">${esc(o.slots.filter(x=>x!=='pass').join(' | ')||'pass')}</button>`).join(''); return;}
   const per=[0,1].map(k=>[...new Set(opts.map(o=>o.slots[k]))]);
   $('choice').innerHTML='<h2>Your turn</h2><div class="opts">'+[0,1].map(k=>`<div class="col"><div class="sub">${esc(st.sides[0].active[k]?st.sides[0].active[k].name:'slot '+(k+1))}</div>${per[k].map(l=>`<button data-k="${k}" data-l="${esc(l)}" onclick="pick(${k},this)">${optTxt(st,k,l)}</button>`).join('')}</div>`).join('')+`</div><div style="margin-top:8px"><button class="go" id="go" onclick="submit()" disabled>Submit</button> <span id="why" class="sub"></span></div>`;
@@ -96,6 +105,7 @@ function render(m){const st=m.state; $('field').innerHTML=fieldHtml(st); $('them
 function pick(k,btn){sel[k]=btn.dataset.l; [...$('choice').querySelectorAll(`button[data-k="${k}"]`)].forEach(b=>b.className=b===btn?'on':'');
   const ok=[0,1].map(j=>[...$('choice').querySelectorAll(`button[data-k="${j}"]`)]); ok[1-k].forEach(b=>{b.disabled=!window._opts.some(o=>o.slots[k]===sel[k]&&o.slots[1-k]===b.dataset.l);});
   const j=joint(); $('go').disabled=!j; $('why').textContent=sel[0]&&sel[1]&&!j?'that combination is not legal':'';}
+function nextGame(){order=[]; lastKey=''; $('game').classList.add('hidden'); $('setup').classList.remove('hidden'); $('choice').innerHTML=''; $('log').innerHTML=''; draw(); showScore(); window.scrollTo(0,0);}
 function joint(){if(sel[0]==null||sel[1]==null)return null; return window._opts.find(o=>o.slots[0]===sel[0]&&o.slots[1]===sel[1]);}
 async function submit(){const j=joint(); if(!j)return; send(j.i);}
 async function send(i){if(busy)return; busy=true; $('choice').innerHTML=''; await fetch('/choose',{method:'POST',body:JSON.stringify({i})}); busy=false; poll();}

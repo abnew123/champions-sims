@@ -44,7 +44,7 @@ def raw_speed(forme, evs, nature):
     n = E['natures'].get(toid(nature), {}); m = 1.1 if n.get('plus') == 'spe' else 0.9 if n.get('minus') == 'spe' else 1.0
     return int(((2 * sp['stats']['spe'] + 31 + 2 * evs[5]) * 50 // 100 + 5) * m)
 STAGE = {-6: 2 / 8, -5: 2 / 7, -4: 2 / 6, -3: 2 / 5, -2: 2 / 4, -1: 2 / 3, 0: 1, 1: 1.5, 2: 2, 3: 2.5, 4: 3, 5: 3.5, 6: 4}
-WEATHER_SPEED = {'Swift Swim': 'RainDance', 'Chlorophyll': 'SunnyDay', 'Sand Rush': 'Sandstorm', 'Slush Rush': 'Snowscape'}
+WEATHER_SPEED = {'Swift Swim': ('Rain', 'Heavy rain'), 'Chlorophyll': ('Sun', 'Harsh sun'), 'Sand Rush': ('Sandstorm',), 'Slush Rush': ('Snow',)}   # as replay.py names weather
 def effective(raw, mods):
     """the Speed the turn order uses: stages, then Choice Scarf, a weather ability, Tailwind, paralysis"""
     v = int(raw * STAGE.get(mods['stage'], 1))
@@ -73,54 +73,124 @@ def priority(move, ability, hp_full):
     if ability == 'Triage' and (m.get('flags') or {}).get('heal'): p += 3
     if ability == 'Gale Wings' and m.get('type') == 'Flying' and hp_full: p += 1
     return p
+RESIDUAL = re.compile(r'\[from\] (Sandstorm|item: Leftovers|item: Black Sludge|Grassy Terrain|psn|brn|Leech Seed|Salt Cure)(?:\||$)')
+SWITCH_IN = {'Intimidate', 'Drought', 'Drizzle', 'Sand Stream', 'Snow Warning', 'Orichalcum Pulse', 'Hadron Engine', 'Psychic Surge', 'Grassy Surge',
+             'Electric Surge', 'Misty Surge', 'Pressure', 'Mold Breaker', 'Teravolt', 'Turboblaze', 'Trace', 'Download', 'Supreme Overlord',
+             'Hospitality', 'Costar', 'Screen Cleaner', 'Curious Medicine', 'Air Lock', 'Cloud Nine'}
 def observations(log, known_side, known_speed, sheets):
-    """the turns where a Pokemon of the other side and one of the known side moved at the same priority, nothing having changed either
-    one's Speed or the field before the second of them moved: [{turn, species, forme, first, tr, mods, known}] with known the known
-    Pokemon's effective Speed and mods the other one's modifiers (its raw Speed is what is unknown)"""
-    out = []; g = R.parse(log); steps = {s['turn']: s for s in g['steps'] if s['turn'] >= 1 and s['state']}
-    L = log.split('\n'); turn = 0; seg = []
-    def flush(t, seg):
-        st = steps.get(t)
-        if not st or any(l.startswith('|move|') and l.split('|')[3] in SKIP_TURN for l in seg): return
-        state = st['state']; f = state['field']; forme = {}; switched = set(); moves = []; dirty = False
+    """the orders the log shows between a Pokemon of the other side and one of the known side where Speed decided it (Trick Room
+    reversing it) and nothing could have changed either one's Speed or the field in between:
+      start     whose switch-in ability (Intimidate, weather, terrain, ...) went first as the battle began
+      switch    who switched out first at the start of a turn          mega   who Mega Evolved first (both at their old Speed)
+      move      who moved first at the same priority
+      residual  who took or regained HP first from the same end-of-turn effect (sand, poison, burn, Leftovers, Black Sludge, Grassy
+                Terrain, Leech Seed, Salt Cure), or counted down Perish Song first
+    [{turn, kind, species, forme, first, tr, mods, known}]: known is the known Pokemon's effective Speed, mods the other one's modifiers
+    (its raw Speed is what is unknown)"""
+    out = []; g = R.parse(log); states = {s['turn']: s['state'] for s in g['steps'] if s['turn'] >= 1 and s['state']}
+    nick = {}
+    for l in log.split('\n'):
+        p = l.split('|')
+        if len(p) > 3 and p[1] in ('switch', 'drag', 'replace'): nick[(p[2][:2], p[2].split(': ', 1)[1])] = p[3].split(',')[0]
+    base = lambda sp: toid(sp.split('-')[0])
+    def mon(state, ident):
+        sp = nick.get((ident[:2], ident.split(': ', 1)[1])) if ident and ': ' in ident else None
+        return sp and next((m for m in state[ident[:2]]['mons'] if base(m['sp']) == base(sp) and not m['f']), None)
+    def sheet(sd, m): return sheets[sd].get(toid(m['sp'])) or sheets[sd].get(base(m['sp'])) or {}
+    def forme(sd, m, now):                                                   # the forme whose Speed counts: the Mega once it has evolved
+        return (m['forme'] or mega_of(m['sp'], sheet(sd, m).get('item', '')) or m['sp']) if now and m['mega'] else (m['forme'] if m['forme'] and 'Mega' not in m['forme'] else m['sp'])
+    def add(t, kind, first, second, ctx):
+        """first acted before second, each (side, mon, forme); ctx: tr, weather, tailwind {side: bool}, stage (False: Speed stages not counted)"""
+        if first[0] == second[0] or known_side not in (first[0], second[0]) or not first[1] or not second[1]: return
+        (sk, mk, fk), (su, mu, fu) = (first, second) if first[0] == known_side else (second, first)
+        shk, shu = sheet(sk, mk), sheet(su, mu)
+        if {'Unburden', 'Quick Feet', 'Speed Boost', 'Slow Start'} & {shk.get('ability'), shu.get('ability')}: return
+        rk = known_speed(mk['sp'], fk)
+        if rk is None: return
+        def mods(sd, m, sh, forme):
+            ab = sh.get('ability'); mg = E['species'].get(toid(forme)) if toid(forme) != toid(m['sp']) else None
+            if mg and 'mega' in toid(forme): ab = (mg.get('abilities') or {}).get('0', ab)   # a Mega has its own ability (Mega Swampert: Swift Swim)
+            return {'stage': (m['b'] or {}).get('spe', 0) if ctx.get('stage', True) else 0, 'scarf': toid(sh.get('item', '')) == 'choicescarf' and not m['gone'],
+                    'tailwind': ctx['tailwind'][sd], 'par': m['st'] == 'par' and ab != 'Quick Feet', 'weather_x2': bool(ctx['weather']) and ctx['weather'] in WEATHER_SPEED.get(ab, ())}
+        out.append({'turn': t, 'kind': kind, 'species': mu['sp'], 'forme': fu, 'first': su == first[0], 'tr': ctx['tr'],
+                    'mods': mods(su, mu, shu, fu), 'known': effective(rk, mods(sk, mk, shk, fk)), 'against': mk['sp']})
+    def pairs(t, kind, actors, ctx_at):
+        for i, a in enumerate(actors):
+            for b in actors[i + 1:]: add(t, kind, a[1], b[1], ctx_at(b[0]))
+    L = log.split('\n'); cut = [i for i, l in enumerate(L) if l.startswith('|turn|')]
+    # the start of the battle: switch-in abilities in Speed order (before any weather, Speed stages, Trick Room or Tailwind)
+    if cut and 1 in states:
+        st1 = states[1]; seen = []; acts = []
+        for l in L[:cut[0]]:
+            p = l.split('|')
+            if len(p) < 4: continue
+            who = p[2] if p[1] == '-ability' and p[3] in SWITCH_IN else None
+            m_ = re.search(r'\[from\] ability: ([^|]+)\|\[of\] (p[12][ab]: [^|]+)', l)
+            if p[1] in ('-weather', '-fieldstart') and m_ and m_.group(1) in SWITCH_IN: who = m_.group(2)
+            if who and who[:3] not in seen:
+                seen.append(who[:3]); m = mon(st1, who); acts.append((len(acts), (who[:2], m, m and forme(who[:2], m, False))))
+        pairs(1, 'start', acts, lambda i: {'tr': False, 'weather': '', 'tailwind': {'p1': False, 'p2': False}, 'stage': False})
+    for k, a in enumerate(cut):
+        t = int(L[a][6:]); st = states.get(t)
+        if not st: continue
+        seg = L[a + 1:cut[k + 1] if k + 1 < len(cut) else len(L)]
+        if any(l.startswith('|move|') and l.split('|')[3] in SKIP_TURN for l in seg): continue
+        f = st['field']; tw = {sd: st[sd]['tailwind'] > 0 for sd in ('p1', 'p2')}
+        ctx0 = lambda i: {'tr': f['tr'] > 0, 'weather': f['weather'], 'tailwind': tw}
+        mon_at = lambda pos: next((m for m in st[pos[:2]]['mons'] if m['pos'] == pos[2] and not m['f']), None)
+        first_move = next((i for i, l in enumerate(seg) if l.startswith('|move|')), len(seg))
+        # the start of the turn: switches (by the Pokemon going out) and Mega Evolutions, each in Speed order
+        sw, mg, dirty = [], [], False
+        for i, l in enumerate(seg[:first_move]):
+            p = l.split('|')
+            if speed_line(l) or '-activate' in l and re.search(r'Quick Claw|Custap|Quick Draw', l): dirty = True
+            if dirty or len(p) < 3: continue
+            if p[1] == 'switch' and mon_at(p[2][:3]): m = mon_at(p[2][:3]); sw.append((i, (p[2][:2], m, forme(p[2][:2], m, True))))
+            elif p[1] == 'detailschange' and 'Mega' in l and mon_at(p[2][:3]): m = mon_at(p[2][:3]); mg.append((i, (p[2][:2], m, forme(p[2][:2], m, False))))
+        pairs(t, 'switch', sw, ctx0); pairs(t, 'mega', mg, ctx0)
+        # moves at the same priority, with the weather as it stood when they began (a Mega's Drought at the start of the turn)
+        wl = next((l.split('|')[2] for l in reversed(seg[:first_move]) if l.startswith('|-weather|') and '[upkeep]' not in l), None)
+        w_moves = f['weather'] if wl is None else '' if wl == 'none' else R.WEATHER.get(wl, wl)
+        formes = {}; switched = set(); moves = []; dirty = False
         for l in seg:
             p = l.split('|')
             if len(p) < 3: continue
             if p[1] in ('switch', 'drag', 'replace'): switched.add(p[2][:3])
-            elif p[1] == 'detailschange': forme[p[2][:3]] = p[3].split(',')[0]
+            elif p[1] == 'detailschange': formes[p[2][:3]] = p[3].split(',')[0]
             elif p[1] == '-activate' and re.search(r'Quick Claw|Custap|Quick Draw', l): dirty = True
-            elif speed_line(l) and moves: dirty = True                            # something changed Speed or the field mid-turn
+            elif speed_line(l) and moves: dirty = True
             elif p[1] == 'move' and not re.search(r'\[from\](?! lockedmove)', l) and not dirty: moves.append((p[2][:3], p[3]))
-        mon_at = lambda pos: next((m for m in state[pos[:2]]['mons'] if m['pos'] == pos[2] and not m['f']), None)
-        def mods(pos, m, item, ability):
-            sd = pos[:2]
-            return {'stage': (m['b'] or {}).get('spe', 0), 'scarf': toid(item) == 'choicescarf' and not m['gone'], 'tailwind': state[sd]['tailwind'] > 0,
-                    'par': m['st'] == 'par' and ability != 'Quick Feet', 'weather_x2': WEATHER_SPEED.get(ability) == f['weather'] and bool(f['weather'])}
         for i, (pa, ma) in enumerate(moves):
             for pb, mb in moves[i + 1:]:
-                if pa[:2] == pb[:2] or pa in switched or pb in switched: continue
-                ka, kb = (pa, pb) if pa[:2] == known_side else (pb, pa)
-                if ka[:2] != known_side: continue
-                mk, mu = mon_at(ka), mon_at(kb)
-                if not mk or not mu: continue
-                shk = sheets[ka[:2]].get(toid(mk['sp'])) or {}; shu = sheets[kb[:2]].get(toid(mu['sp'])) or {}
-                if 'Unburden' in (shk.get('ability'), shu.get('ability')) or 'Quick Feet' in (shk.get('ability'), shu.get('ability')): continue
-                movek, moveu = (ma, mb) if pa == ka else (mb, ma)
-                if priority(movek, shk.get('ability'), mk['hp'] == 100) != priority(moveu, shu.get('ability'), mu['hp'] == 100): continue
-                fk = forme.get(ka) or (mk['forme'] or mk['sp']); fu = forme.get(kb) or (mu['forme'] or mu['sp'])
-                if mk['mega'] and ka not in forme: fk = mega_of(mk['sp'], shk.get('item', '')) or fk
-                if mu['mega'] and kb not in forme: fu = mega_of(mu['sp'], shu.get('item', '')) or fu
-                rk = known_speed(mk['sp'], fk)
-                if rk is None: continue
-                out.append({'turn': t, 'species': mu['sp'], 'forme': fu, 'first': pa == kb, 'tr': f['tr'] > 0,
-                            'mods': mods(kb, mu, shu.get('item', ''), shu.get('ability')), 'known': effective(rk, mods(ka, mk, shk.get('item', ''), shk.get('ability'))),
-                            'against': mk['sp']})
-    for l in L:
-        if l.startswith('|turn|'):
-            if turn: flush(turn, seg)
-            turn = int(l[6:]); seg = []
-        elif turn: seg.append(l)
-    if turn: flush(turn, seg)
+                if pa in switched or pb in switched: continue
+                A, B = mon_at(pa), mon_at(pb)
+                if not A or not B or pa[:2] == pb[:2]: continue
+                if 'Grassy Glide' in (ma, mb): continue                          # +1 in Grassy Terrain: whether it was up at that moment
+                if priority(ma, sheet(pa[:2], A).get('ability'), A['hp'] == 100) != priority(mb, sheet(pb[:2], B).get('ability'), B['hp'] == 100): continue
+                fa = formes.get(pa) or forme(pa[:2], A, True); fb = formes.get(pb) or forme(pb[:2], B, True)
+                add(t, 'move', (pa[:2], A, fa), (pb[:2], B, fb), {'tr': f['tr'] > 0, 'weather': w_moves, 'tailwind': tw})
+        # the end of the turn: the same effect on each Pokemon in Speed order, with the field as it stood at that line
+        if '|upkeep' not in seg: continue
+        up = seg.index('|upkeep'); bl = max((i for i in range(up) if seg[i] == '|'), default=None)
+        if bl is None: continue
+        res = seg[bl + 1:up]; nxt = states.get(t + 1) or g['final']
+        if any(speed_line(l) and not re.match(r'\|-(sideend|fieldend|weather)\|', l) for l in res): continue   # Speed Boost and the like
+        w_before = next((l.split('|')[2] for l in reversed(seg[:bl]) if l.startswith('|-weather|') and '[upkeep]' not in l), None)
+        w_turn = (R.WEATHER.get(w_before, w_before) if w_before != 'none' else '') if w_before is not None else f['weather']
+        def ctx_res(i, res=res, nxt=nxt, w_turn=w_turn):
+            ended = lambda pat: any(re.search(pat, l) for l in res[:i])
+            later = lambda pat: any(re.search(pat, l) for l in res[i:])
+            return {'tr': (nxt['field']['tr'] > 0 or later(r'^\|-fieldend\|.*Trick Room')) and not ended(r'^\|-fieldend\|.*Trick Room'),
+                    'weather': '' if ended(r'^\|-weather\|none') else w_turn,
+                    'tailwind': {sd: (nxt[sd]['tailwind'] > 0 or later(rf'^\|-sideend\|{sd}: .*Tailwind')) and not ended(rf'^\|-sideend\|{sd}: .*Tailwind') for sd in ('p1', 'p2')}}
+        groups = collections.defaultdict(list)
+        for i, l in enumerate(res):
+            p = l.split('|')
+            if len(p) < 4: continue
+            key = 'perish' if p[1] == '-start' and p[3].startswith('perish') else (RESIDUAL.search(l).group(1) if p[1] in ('-damage', '-heal') and RESIDUAL.search(l) else None)
+            if key and not any(x[1][0] == p[2][:3] for x in groups[key]):
+                m = mon(nxt, p[2]); groups[key].append((i, (p[2][:3], (p[2][:2], m, m and forme(p[2][:2], m, True)))))
+        for key, items in groups.items(): pairs(t, 'residual', [(i, a) for i, (_, a) in items], ctx_res)
     return out
 def fits(evs, nature, ob):
     raw = raw_speed(ob['forme'], evs, nature)

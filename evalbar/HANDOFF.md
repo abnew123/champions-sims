@@ -275,9 +275,15 @@ opponent's Gholdengo was guessed with no Speed: spots.evs_for used the Smogon to
 to a plain HP / attack spread. With Tailwind or against a 108-Speed Archaludon that flips the turn order, so certain KOs read as -45 to -57
 luck. Now (the user's design): the species' Smogon spreads in order of use with the sheet's nature (spreads.ranked, from the moveset file:
 the top six or so, "Other" is about half), the most used one the game has not ruled out (spreads.pick). What rules a spread out: the order
-two Pokemon moved in at the same priority when the other one's Speed is exact (a bot's own), with Tailwind, Trick Room, paralysis,
-stages, Choice Scarf, weather abilities and Mega forms counted, and turns where Speed or the field changed mid-turn, Quick Claw or
-After You skipped (spreads.observations). Every listed spread ruled out: the top one with its Speed points moved as little as fits.
+two Pokemon did things in, when the other one's Speed is exact (a bot's own): who moved first at the same priority, whose switch-in
+ability went first as the battle began, who switched out or Mega Evolved first at the start of a turn, and who took or regained HP first
+from the same end-of-turn effect (sand, poison, burn, Leftovers, Black Sludge, Grassy Terrain, Leech Seed, Salt Cure) or counted down
+Perish Song first (the user's point: speed shows in more than move order). Counted: Tailwind, Trick Room (reverses all of these),
+paralysis, stages, Choice Scarf, weather abilities (by replay.py's weather names), a Mega's own ability (Mega Swampert's Swift Swim) and
+Speed. Skipped: Grassy Glide pairs, turns where Speed or the field changed between the two, Quick Claw, After You and the like,
+Unburden, Quick Feet, Speed Boost (spreads.observations). Over the bot's 117 games: 732 observations (447 moves, 185 end of turn, 37
+battle-start abilities, 37 switches, 26 Megas); of 272 opponent Pokemon with any, 250 kept Smogon's most used spread, 12 the 2nd or 3rd,
+6 the plain guess, 4 needed their Speed points moved, none contradicted every spread (the weather-name and Mega-ability bugs had made 15). Every listed spread ruled out: the top one with its Speed points moved as little as fits.
 Spectator pages get the nature-matched ranking (evs_for); bot pages and the bot itself (botpos.refine_opponent) also the turn order.
 Damage is not used yet. After it: luck on the three games -91 -> -32, -89 -> -6, -79 -> -13. Older studies used the old spreads.
 

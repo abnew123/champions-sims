@@ -41,7 +41,7 @@ def turn(msg):
     import position as POS
     req = msg['request']
     if req.get('forceSwitch'): return {'choice': POS.replacement(req, msg['log'], msg['side']), 'note': 'replacement'}
-    specs, info = POS.build(msg['log'], req, msg['side'])
+    specs, info = POS.build(msg['log'], req, msg['side'], team=(msg.get('team') or {}).get('sets'))
     choice, note = POS.decide(specs, req, msg['side'])
     return {'choice': choice, 'note': note + (f" hyp {info.get('hyp', [])[:1]}" if info.get('need') else '')}
 def main():

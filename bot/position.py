@@ -19,9 +19,17 @@ OUT = os.path.join(ROOT, 'bot', 'out', 'pos'); os.makedirs(OUT, exist_ok=True)
 D = json.load(open(os.path.join(ROOT, 'native', 'engine_data_full.json'))); TYPES = D['types']; MOVES = D['moves']
 SPECIES = {s['name']: s for s in D['species'].values()}
 toid = lambda s: re.sub(r'[^a-z0-9]', '', (s or '').lower())
-def build(log, request, side, topk=1):
+STAT = ['HP', 'Atk', 'Def', 'SpA', 'SpD', 'Spe']
+def export(sets):
+    """our team as a Showdown export (stat points on the EVs line, as botpos reads them), so our own spreads are exact, not guessed"""
+    out = []
+    for x in sets:
+        ev = ' / '.join(f'{v} {STAT[i]}' for i, v in enumerate(x.get('evs') or []) if v)
+        out.append('\n'.join([f"{x['species']} @ {x['item']}", f"Ability: {x['ability']}"] + ([f'EVs: {ev}'] if ev else []) + [f"{x['nature']} Nature"] + [f'- {m}' for m in x['moves']]))
+    return '\n\n'.join(out)
+def build(log, request, side, topk=1, team=None):
     text = '\n'.join(log) if isinstance(log, list) else log
-    specs, info = BP.bot_position(text, request, side, topk=topk, tag='bot')
+    specs, info = BP.bot_position(text, request, side, topk=topk, team=export(team) if team else None, tag='bot')
     if not specs: raise RuntimeError('no position: ' + str(info.get('skip')))
     return specs, info
 def decide(specs, request, side, threads=2, seeds=32):

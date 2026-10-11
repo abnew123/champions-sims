@@ -233,6 +233,11 @@ hypotheses, topk of them), the bot's own side from its |request| (the four it br
 log tracks (boosts, volatiles, the lock), exact spreads from a Showdown export if given. `live.positions(specs, outf)` then writes them (line
 '<name> p1' is the bot's view). Team preview and replacements after a faint are not turn starts: it returns no specs and says why. PP is not
 modelled. Checked on three cached Bo3 games from both sides (the two views mirror each other) and with an exact-HP request.
+`bot_replacement(log, request, side, replacements)` answers a forceSwitch: the next turn's start with the chosen replacements in, the
+switch-in abilities from rules.derive, and the opponent's own simultaneous replacement branched by back-row odds. `decisions(log, side)`
+fakes every decision of a saved game (preview, turns, replacements, with what the player chose) for end-to-end tests; `python3
+evalbar/botpos.py 400` built all 5,492 turns and 1,577 replacements of 400 saved games. replay.py now revives a Pokemon that Revival
+Blessing heals in the back.
 
 ## Louisville day 1 (2026-10-10)
 

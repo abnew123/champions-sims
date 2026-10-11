@@ -148,6 +148,18 @@ def parse(log):
             if 'from' in t and clean(t['from']) not in ('lockedmove',): e['head'].append(f" ({clean(t['from'])})")
             if 'miss' in t: pass
             if p[3] == 'Perish Song': perish = True
+        elif k == 'cant' and p[3].startswith('ability: ') and len(p) > 4 and t.get('of'):
+            # Armor Tail, Dazzling, Queenly Majesty: |cant|<holder>|ability: X|<move>|[of] <user>: the user's move, aimed at the holder, stopped
+            u = mon(t['of']); h = mon(p[2]); upos = t['of'][:3]
+            if u:
+                a0 = acts.get(upos)                                          # Showdown logs the move first, with no target ("[still]")
+                if a0 and a0.get('move') == p[4] and not a0.get('target'): a0['target'] = p[2][:3]
+                elif upos not in acts and active.get(upos) == start_active.get(upos):
+                    acts[upos] = {'move': p[4], 'target': p[2][:3], 'mega': id(u) in mega_now, 'unsure': False}
+                e0 = events[-1] if events else None
+                if e0 and e0['head'] == [u.ref(), ' used ', p[4]] and h: e0['head'] += [' on ', h.ref()]; cur[0] = e0
+                else: ev(u.side, [u.ref(), ' used ', p[4]] + ([' on ', h.ref()] if h else []))
+                note([u.ref(), f": stopped by {clean(p[3])}"]); moved_yet[0] = True; u.moved = True; u.last = p[4]
         elif k == 'cant':
             m = mon(p[2])
             if m:

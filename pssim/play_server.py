@@ -47,6 +47,17 @@ class Game:
     def save(self):
         try: os.makedirs('results', exist_ok=True); json.dump(self.match, open(self.store, 'w'))
         except Exception as e: print('save:', repr(e), flush=True)
+    LOG = os.path.join('results', 'play_games.jsonl')   # every finished game, whatever the match: the strength record
+    def log_game(self, g):
+        try:
+            import datetime; os.makedirs('results', exist_ok=True)
+            with open(self.LOG, 'a') as f: f.write(json.dumps({'when': datetime.datetime.now().isoformat(timespec='minutes'), 'match': self.match and self.match['key'], **g}) + '\n')
+        except Exception as e: print('log:', repr(e), flush=True)
+    def record(self):
+        """the all-time record from the games log"""
+        try: gs = [json.loads(l) for l in open(self.LOG) if l.strip()]
+        except Exception: gs = []
+        return {'games': len(gs), 'you': sum(1 for g in gs if g.get('winner') == 'you'), 'planner': sum(1 for g in gs if g.get('winner') == 'the planner')}
     def start(self, mine, theirs, match_key=None, their_six=None, my_six=None):
         """mine: your four in lead order; theirs: the planner's four in lead order, or None to let it choose against your six"""
         self.stop(); self.id += 1; self.msg = None; self.log = []; self.err = None; self.waiting = True; self.value = None; self.verdict = None; self.pending_concede = False
@@ -82,7 +93,8 @@ class Game:
                 self.msg = m; self.waiting = False
                 if getattr(self, 'pending_concede', False): self.pending_concede = False; threading.Thread(target=self.finish, args=('you', 'the planner conceded'), daemon=True).start()
                 if m.get('type') == 'end' and self.match is not None and self.cur:
-                    self.match['games'].append({**self.cur, 'winner': m.get('winner'), 'turns': m.get('turn'), **({'how': m['how']} if m.get('how') else {})}); self.cur = None; self.save()
+                    g = {**self.cur, 'winner': m.get('winner'), 'turns': m.get('turn'), **({'how': m['how']} if m.get('how') else {})}
+                    self.match['games'].append(g); self.cur = None; self.save(); self.log_game(g)
     def finish(self, winner, how):
         """end the game from the server side: your forfeit, or the planner conceding"""
         with self.lock:
@@ -90,7 +102,7 @@ class Game:
             if not m or m.get('type') == 'end' or self.waiting: return False
             end = {'type': 'end', 'turn': m.get('turn'), 'state': m.get('state'), 'winner': winner, 'how': how, 'log_all': self.log}
             self.msg = end
-            if self.match is not None and self.cur: self.match['games'].append({**self.cur, 'winner': winner, 'turns': m.get('turn'), 'how': how}); self.cur = None; self.save()
+            if self.match is not None and self.cur: g = {**self.cur, 'winner': winner, 'turns': m.get('turn'), 'how': how}; self.match['games'].append(g); self.cur = None; self.save(); self.log_game(g)
         if self.proc:
             try: self.proc.kill()
             except Exception: pass
@@ -141,7 +153,7 @@ class H(BaseHTTPRequestHandler):
             if TEAMS is None: TEAMS = teams()
             self.send(200, TEAMS)
         elif self.path == '/state':
-            with G.lock: self.send(200, {'game': G.id, 'waiting': G.waiting, 'msg': G.msg, 'error': G.err, 'match': G.match, 'verdict': getattr(G, 'verdict', None)})
+            with G.lock: self.send(200, {'game': G.id, 'waiting': G.waiting, 'msg': G.msg, 'error': G.err, 'match': G.match, 'verdict': getattr(G, 'verdict', None), 'record': G.record()})
         else: self.send(404, {'error': 'no'})
     def do_POST(self):
         n = int(self.headers.get('Content-Length') or 0); body = json.loads(self.rfile.read(n) or b'{}')

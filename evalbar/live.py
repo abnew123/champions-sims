@@ -165,7 +165,7 @@ class Live:
         s.bo3 = logfile is not None or 'bo3' in room; s.threads = threads; s.port = port; os.makedirs(OUT, exist_ok=True)
         s.log = logfile or os.path.join(OUT, f'{s.tag}.log'); s.evf = os.path.join(OUT, f'{s.tag}_eval.jsonl'); s.data = None; s.status = 'connecting'
         s.weights = {}; s.hyp = {}; s.poscache = {}; s.over = False; s.skip = {}
-        s.exact = False; s.team = None; s.back = {}; s.bot_side = None; s.held = None
+        s.exact = False; s.team = None; s.back = {}; s.bot_side = None; s.held = None; s.spread_why = {}
         s.luck = False; s.lf = os.path.join(OUT, f'{s.tag}_luck.jsonl'); s.luck_state = None; s.dirty = False   # luck: after the game      # a Showdown bot's own log (bot/): its side known from its requests
         # the user's verdicts where the battle text and the rules disagree (broadcasts: evalbar/rules.py), kept beside the log
         s.fixf = os.path.join(OUT, f'{s.tag}_fixes.json'); s.fixes = json.load(open(s.fixf)) if logfile and os.path.exists(s.fixf) else {}; s.redo = None
@@ -238,6 +238,7 @@ class Live:
             sd = rq['side']['id']; s.bot_side = sd
             if s.team is None: s.team = bot_team(pre, sd)
             mons, why = BP.own_side(step['state'][sd], sets[sd], rq, BP.team_sets(s.team), dropped)
+            s.spread_why[t] = BP.refine_opponent(pre, gp, sets, sd, rq)       # the opponent's spreads against the turn order seen so far
             if mons:
                 own = (sd, mons); seen = {toid(m['sp'].split('-')[0]) for m in step['state'][sd]['mons']}
                 s.back[t] = [r['details'].split(',')[0] for r in rq['side']['pokemon'] if toid(r['details'].split(',')[0].split('-')[0]) not in seen]

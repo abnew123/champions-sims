@@ -1,7 +1,8 @@
 """Replay -> what the engine needs to rebuild the position at the start of every turn (positions.js turns these into engine states).
 Hindsight and guesses, as the handoff allows for step 1: each side's four are the Pokemon that appeared anywhere in the game; sets are the
 open team sheet (item, ability, nature, moves); stat points are not on the sheet, so they are the species' most common spread
-(regionals/smogon_mc_sets.json) when its nature agrees with the sheet, else a plain spread that fits the nature. A brought Pokemon that never
+(regionals/smogon_mc_sets.json) when its nature agrees with the sheet, else the most used spread with the sheet's nature in the Smogon
+stats (spreads.ranked), else a plain spread that fits the nature. A brought Pokemon that never
 came in is replaced by a stand-in from the unused team-sheet entries. Moves and items the engine data lacks are dropped from the set (listed
 in the spec's 'dropped'); a species, form or ability it lacks rules the game out.
 specs(rid, log) -> (list of position specs, reason the game was skipped or '').
@@ -17,6 +18,9 @@ def evs_for(species, item, nature, moves):
     nat = E['natures'].get(toid(nature), {}); plus = nat.get('plus')
     base = SM.get(mega_of(species, item) or '') or SM.get(species)
     if base and (base['nature'] == nature or E['natures'].get(toid(base['nature']), {}).get('plus') == plus): return list(base['evs'])
+    import spreads                                                          # the most used listed spread with this nature (2026-10-11)
+    r = spreads.ranked(species, nature, item)
+    if r: return list(r[0][1])
     cat = [MV.get(toid(m), {}).get('cat') for m in moves]; att = 'atk' if cat.count('Physical') >= cat.count('Special') else 'spa'
     ev = dict.fromkeys(ORDER, 0)
     if plus == 'spe': ev.update({'spe': 32, att: 32, 'hp': 2})

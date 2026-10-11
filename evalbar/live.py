@@ -22,8 +22,10 @@ NODE = [P.exe('node'), '--experimental-websocket', '--no-warnings']
 FORMATS = {'bo1': 'gen9championsvgc2026regmc', 'bo3': 'gen9championsvgc2026regmcbo3'}
 TOPK = 3; CAL = 0.7538                           # the rescale fitted for egvalue9_sym2 (accuracy.py compare)
 # the full engine data (every species, move, item and ability Showdown knows; needs champ-battle-v17 or later): spectated teams can be
-# anything. v23 (2026-10-09) gives v17's values wherever v17 handled the turn, and handles more abilities, items and moves (Baton Pass too)
-os.environ.setdefault('CHAMP_BIN', os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v23'))
+# anything. v23 (2026-10-09) gives v17's values wherever v17 handled the turn, and handles more abilities, items and moves (Baton Pass too).
+# v25 (the bot's build) also offers a Mega Stone holder's moves without the Mega Evolution, so a player who holds it is not shown as
+# having Mega Evolved, with a tie-break toward the Mega when the two are worth the same (EG_MEGA_TIE)
+os.environ.setdefault('CHAMP_BIN', os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v25'))
 os.environ.setdefault('CHAMP_DATA', 'engine_data_full.json')
 S.E = RC.E = json.load(open(os.path.join(C.MAIN, 'native', os.environ['CHAMP_DATA'])))
 def room_of(x):
@@ -347,8 +349,8 @@ class Live:
                 if s.port: print(f'battle over; the page stays up at http://localhost:{s.port} until you stop this (Ctrl-C)', flush=True)
             time.sleep(1)
 class BotRunner:
-    """the Showdown bot's games (bot/out/ in the main checkout) on one page: its newest game when this starts, then each game it starts,
-    as it plays it. The page moves on to a new game when it is showing the latest one."""
+    """the Showdown bot's games (bot/out/ in the main checkout) on one page: the last 12 hours' games when this starts, then each game it
+    starts, as it plays it. The page moves on to a new game when it is showing the latest one."""
     def __init__(s, threads, port):
         s.dir = os.path.join(C.MAIN, 'bot', 'out'); s.threads = threads; s.port = port; s.lives = []; s.files = []; s.known = set()
     def serve(s):
@@ -374,8 +376,9 @@ class BotRunner:
     def run(s):
         s.serve(); print(f"the bot's games: http://localhost:{s.port}", flush=True)
         while True:
-            fs = sorted(glob.glob(os.path.join(s.dir, 'battle-*.log')), key=os.path.getmtime)
-            if not s.files and not s.known: new = fs[-1:]; s.known = set(fs)          # at the start: the newest game only
+            fs = sorted((f for f in glob.glob(os.path.join(s.dir, 'battle-*.log')) if re.search(r'-\d{6,}(-[a-z0-9]+)?\.log$', f)), key=os.path.getmtime)   # ladder rooms, not local test games
+            if not s.files and not s.known:                                    # at the start: the last 12 hours' games (or the newest one)
+                new = [f for f in fs if os.path.getmtime(f) > time.time() - 12 * 3600] or fs[-1:]; s.known = set(fs)
             else: new = [f for f in fs if f not in s.known]; s.known |= set(new)
             for f in new:
                 room = os.path.basename(f)[:-4]; num = re.search(r'-(\d+)(?:-[a-z0-9]+)?$', room).group(1); s.files.append(f)

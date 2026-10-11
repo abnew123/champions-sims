@@ -248,7 +248,15 @@ own). On the first ladder game it cut the positions from 9 a turn to 1-3. The bo
 now writes it on every |request| and |turn| (bot/client.js), so a game in progress can be followed. `live.py bot [threads] [port=8769]` (no
 room) runs BotRunner: the bot's newest game when it starts, then each new battle log that appears in bot/out, all on one page (the page
 moves to a new game when it is showing the latest one). A turn waits up to 15 s for its request before it is evaluated without it. Port
-8768 stays the stream watcher's (auto.py).
+8768 stays the stream watcher's (auto.py). BotRunner starts with the last 12 hours' ladder games (room numbers of six digits or more; bot/out also
+holds Battle sim's local test games).
+
+## Mega Evolution on the live pages (2026-10-11)
+
+The user saw a Froslass shown as "Protect (and Mega Evolve)" on the turn before it actually Mega Evolved. champ-battle-v23 offered a Mega
+Stone holder's moves only with the Mega, and build.same() ignored the Mega flag, so a plain Protect matched "Protect (Mega)". live.py now
+runs champ-battle-v25 (the bot's build: moves with and without the Mega, EG_MEGA_TIE tie-break toward the Mega), and same() matches the
+Mega flag whenever both versions are offered. Older results (studies, Louisville) were made with v23.
 
 ## Louisville day 1 (2026-10-10)
 

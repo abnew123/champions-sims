@@ -4,6 +4,9 @@ you are playing, and never pass what it shows to a player during their game.
                                                               Bo1 games, the newest Bo3 games (Bo3 rooms show no rating)
   python3 evalbar/live.py watch <room or battle URL> [threads=2] [port=8768]
                                                               follows the battle and serves the page at http://localhost:<port>
+  python3 evalbar/live.py bot <room or battle URL> [threads=2] [port=8769]
+                                                              a game of the Showdown bot (bot/), from its own log: the bot's side
+                                                              exactly (its requests, its team's spreads), the opponent as a spectator
 It knows what a spectator knows at the start of each turn: both team previews, the Bo3 open team sheets (Bo1: each species' most common
 Reg M-C set, with what the game has shown laid on top), the Pokemon that have come in and what happened to them. The Pokemon a player has
 not sent in yet are averaged over: for each player the TOPK most likely combinations from their preview (back rates given their leads,
@@ -99,9 +102,10 @@ def hyps(sd, state, six, sets, leads, topk=TOPK):
     hy = [(math.prod(RC.back_weight(sp, leads[sd]) for sp in c), list(c)) for c in itertools.combinations(pool, min(need, len(pool)))]
     hy.sort(key=lambda x: -x[0]); hy = hy[:topk]; tot = sum(w for w, _ in hy) or 1
     return [(w / tot, c) for w, c in hy], pool, need
-def specs_for(tag, g, step, six, sets, leads):
-    """engine position specs for one turn, one per pairing of the two players' hypotheses: [(weight, spec)]"""
-    st = step['state']; H = {sd: hyps(sd, st, six, sets, leads) for sd in ('p1', 'p2')}; out = []
+def specs_for(tag, g, step, six, sets, leads, own=None):
+    """engine position specs for one turn, one per pairing of the two players' hypotheses: [(weight, spec)]. own: (side, its Pokemon as
+    the engine plays them) for a side known exactly (a bot's own side from its request, botpos.own_side): no hypotheses for it"""
+    st = step['state']; H = {sd: ([(1.0, [])], [], 0) if own and sd == own[0] else hyps(sd, st, six, sets, leads) for sd in ('p1', 'p2')}; out = []
     order = {sd: sorted(st[sd]['mons'], key=lambda m: (0 if m['pos'] == 'a' else 1 if m['pos'] == 'b' else 2 if not m['f'] else 3)) for sd in ('p1', 'p2')}
     eng = {sd: {m['pos']: 'ab'[i] for i, m in enumerate(order[sd][:2]) if m['pos']} for sd in ('p1', 'p2')}
     def act(sd, i):
@@ -116,6 +120,7 @@ def specs_for(tag, g, step, six, sets, leads):
                 ms = order[sd]
                 bad = [m['sp'] for x in ('p1', 'p2') for m in order[x] if not sets[x].get(m['sp'])]
                 if bad: return [], {'missing': sorted(set(bad))}
+                if own and sd == own[0]: sides.append({'mons': own[1], 'tailwind': st[sd]['tailwind'], 'screens': st[sd]['screens'], 'hazards': st[sd]['hazards']}); continue
                 mons = [spec_mon(m, sets[sd][m['sp']]) for m in ms]
                 mons += [{**sets[sd][sp], 'mega': False, 'hpPct': 100, 'fainted': False, 'status': '', 'slept': 0, 'boosts': {}, 'itemNow': sets[sd][sp]['item'],
                           'moved': False, 'stall': False, 'lock': '', 'vol': [], 'onField': False, 'last': '', 'volarg': {}, 'standIn': True} for sp in extra]
@@ -126,6 +131,12 @@ def specs_for(tag, g, step, six, sets, leads):
                                   'dropped': [], 'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None,
                                                            'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}))
     return out, H
+def bot_team(log, sd):
+    """the bot's team with its spreads (bot/teams.json, Battle sim's): the one whose six match the bot's team preview"""
+    f = os.path.join(C.MAIN, 'bot', 'teams.json')
+    if not os.path.exists(f): return None
+    six = {toid(l.split('|')[3].split(',')[0]) for l in log.split('\n') if l.startswith(f'|poke|{sd}|')}
+    return next((t['sets'] for t in json.load(open(f)) if {toid(x['species']) for x in t['sets']} == six), None)
 def positions(specs, outf):
     tmp = outf + '.specs.json'; json.dump([s for _, s in specs], open(tmp, 'w'))
     subprocess.run([P.exe('node'), os.path.join(C.HERE, 'positions.js'), os.path.abspath(tmp), os.path.abspath(outf), 'p1'], cwd=os.path.join(C.MAIN, 'pssim'),
@@ -144,6 +155,7 @@ class Live:
         s.bo3 = logfile is not None or 'bo3' in room; s.threads = threads; s.port = port; os.makedirs(OUT, exist_ok=True)
         s.log = logfile or os.path.join(OUT, f'{s.tag}.log'); s.evf = os.path.join(OUT, f'{s.tag}_eval.jsonl'); s.data = None; s.status = 'connecting'
         s.weights = {}; s.hyp = {}; s.poscache = {}; s.over = False; s.skip = {}
+        s.exact = False; s.team = None; s.back = {}; s.bot_side = None      # a Showdown bot's own log (bot/): its side known from its requests
         # the user's verdicts where the battle text and the rules disagree (broadcasts: evalbar/rules.py), kept beside the log
         s.fixf = os.path.join(OUT, f'{s.tag}_fixes.json'); s.fixes = json.load(open(s.fixf)) if logfile and os.path.exists(s.fixf) else {}; s.redo = None
     def page(s):
@@ -181,7 +193,7 @@ class Live:
         json.dump(s.fixes, open(s.fixf, 'w'), indent=1); s.redo = min(s.redo or 10 ** 6, int(turn))
     def checks(s, log):
         """{turn: [check]}: where the battle text and the rules disagree (log: with the user's corrections), with the user's verdicts"""
-        if not s.logfile or not s.bo3: return {}                           # the rules need the team sheets' abilities and items
+        if not s.logfile or not s.bo3 or s.exact: return {}                           # the rules need the team sheets' abilities and items
         import rules as RU
         try: found = RU.compare(log)
         except Exception: return {}
@@ -208,8 +220,28 @@ class Live:
         """engine position specs for turn t, from what was known when it started; the choices made in it (known once it is over) filled in"""
         pre = s.upto(log, t); gp = R.parse(pre); step = next(x for x in gp['steps'] if x['turn'] == t)
         later = next((x for x in R.parse(log)['steps'] if x['turn'] == t), step); step = {**step, 'acts': later['acts']}
-        six, sets, _ = sets_for(gp, pre, s.bo3)
-        return specs_for(s.tag, gp, step, six, sets, s.leads(pre))
+        six, sets, dropped = sets_for(gp, pre, s.bo3); own = None
+        rq = s.request(log, t) if '|request|' in log else None
+        if rq:                                                              # a bot's own log: its side as its request shows it, no guessing
+            import botpos as BP
+            sd = rq['side']['id']; s.bot_side = sd
+            if s.team is None: s.team = bot_team(pre, sd)
+            mons, why = BP.own_side(step['state'][sd], sets[sd], rq, BP.team_sets(s.team), dropped)
+            if mons:
+                own = (sd, mons); seen = {toid(m['sp'].split('-')[0]) for m in step['state'][sd]['mons']}
+                s.back[t] = [r['details'].split(',')[0] for r in rq['side']['pokemon'] if toid(r['details'].split(',')[0].split('-')[0]) not in seen]
+        return specs_for(s.tag, gp, step, six, sets, s.leads(pre), own)
+    @staticmethod
+    def request(log, t):
+        """a bot's own log, which records its |request|s: the one it answered at the start of turn t (logged just after the |turn| line)"""
+        i = log.find(f'\n|turn|{t}\n')
+        if i < 0: return None
+        j = log.find('\n|turn|', i + 1)
+        for l in log[i:j if j > 0 else len(log)].split('\n'):
+            if l.startswith('|request|') and l[9:].strip():
+                rq = json.loads(l[9:])
+                if rq.get('side') and not (rq.get('forceSwitch') or rq.get('wait') or rq.get('teamPreview')): return rq
+        return None
     def build(s, log, g):
         """the page's data from everything evaluated so far"""
         ev = {x['name']: x for x in map(json.loads, open(s.evf)) if 'error' not in x} if os.path.exists(s.evf) else {}
@@ -234,6 +266,9 @@ class Live:
             for sd in ('p1', 'p2'):
                 hy, pool, need = s.hyp[t][sd]
                 state[sd]['mons'] = [m for m in state[sd]['mons'] if m['seen']]
+                if sd == s.bot_side and s.back.get(t):                          # the bot's own back row, from its request
+                    nm = ', '.join(s.back[t][:-1]) + (' and ' if len(s.back[t]) > 1 else '') + s.back[t][-1]
+                    state[sd]['mons'].append({'n': f'in the back: {nm}', 'hp': 100, 'st': '', 'f': False, 'b': {}, 'item': '', 'gone': False, 'slot': '', 'seen': False, 'pool': True})
                 if need and pool:
                     nm = ', '.join(pool[:-1]) + (' or ' if len(pool) > 1 else '') + pool[-1]
                     state[sd]['mons'].append({'n': f"{'one' if need == 1 else need} of {nm}", 'hp': 100, 'st': '', 'f': False, 'b': {}, 'item': '', 'gone': False,
@@ -312,6 +347,14 @@ if __name__ == '__main__':
     if a[0] == 'list':
         k = [x for x in a[1:] if x in FORMATS]; n = 1000 if 'all' in a[1:] else 8
         listing(k[0] if k else None, n)
+    elif a[0] == 'bot':
+        # a game the Showdown bot (bot/) plays or played, from its own log in the main checkout's bot/out/: its side as it knows it
+        room = room_of(a[1]); f = os.path.join(C.MAIN, 'bot', 'out', room + '.log')
+        L = Live(room, int(a[2]) if len(a) > 2 else 2, int(a[3]) if len(a) > 3 else 8769, logfile=f, tag='bot_' + room.split('-')[-1],
+                 fmt="Bo3, open team sheets · the bot's side from its own log")
+        L.exact = True
+        try: L.run()
+        except KeyboardInterrupt: pass
     elif a[0] == 'watch':
         try: Live(room_of(a[1]), int(a[2]) if len(a) > 2 else 2, int(a[3]) if len(a) > 3 else 8768).run()
         except KeyboardInterrupt: pass

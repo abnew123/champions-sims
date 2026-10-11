@@ -60,7 +60,7 @@ def decide(specs, request, side, threads=2, seeds=32):
             if mega and (request.get('active') or [{}] * 2)[k].get('canMegaEvo'): s += ' mega'
             cmds.append(s)
     note = f"{pick['label']} ({100 * pick['w']:.0f}%, value {100 * r['value']:.0f}%)"
-    return ', '.join(cmds), note
+    return ', '.join(cmds), note, r['value']
 def team_index(request, species):
     """1-based index in request.side.pokemon of the named Pokemon (by species, forme-insensitive)"""
     want = toid(species)

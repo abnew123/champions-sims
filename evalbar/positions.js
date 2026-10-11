@@ -82,16 +82,19 @@ function build(spec, flip) {
   const choice = (si, i) => {
     const a = acts[si][i], side = b.sides[si], p = side.active[i];
     if (!a || !p || p.fainted) return null;
+    if (a.none) return {none: a.none, by: a.by ? dex.moves.get(a.by).priority : null};   // not shown: it fainted first (to a move of that priority) or could not move
     if (a.switch) {                                    // a Mega that went back comes in again as "Golisopod-Mega": match the base species (one per team)
       const base = s => dex.species.get(s).baseSpecies;
       const k = sides[si].mons.findIndex(x => x.species === a.switch || base(x.species) === base(a.switch)); return k < 0 ? null : ['switch', k]; }
     const k = p.moveSlots.findIndex(m => m.id === toID(a.move)); if (k < 0) return null;
-    if (!a.target && ['normal', 'any', 'adjacentFoe', 'adjacentAlly', 'adjacentAllyOrSelf'].includes(dex.moves.get(a.move).target)) return null;   // it failed or only charged: the log shows no target
+    // it failed (or only charged): the log shows the move but no target. The engine reads the choice as unknown; move tells the eval bar
+    // which move it was (its luck counts that move's targets, not the whole mix)
+    if (!a.target && ['normal', 'any', 'adjacentFoe', 'adjacentAlly', 'adjacentAllyOrSelf'].includes(dex.moves.get(a.move).target)) return {move: k};
     let t = 0;
     if (a.target) { const ts = a.target.slice(0, 2), ti = a.target[2] === 'a' ? 0 : 1; t = ts === letter[si] ? (ti === i ? 0 : -(ti + 1)) : ti + 1; }
     return {c: [k, t, !!a.mega], unsure: !!a.unsure};
   };
-  const pack = si => [0, 1].map(i => { const c = choice(si, i); return c && c.c ? {choice: c.c, unsure: c.unsure} : c ? {choice: c, unsure: false} : null; });
+  const pack = si => [0, 1].map(i => { const c = choice(si, i); return c && c.c ? {choice: c.c, unsure: c.unsure} : c && c.move !== undefined ? {choice: null, move: c.move, unsure: false} : c && c.none ? {choice: null, none: c.none, by: c.by, unsure: false} : c ? {choice: c, unsure: false} : null; });
   return {name: `${spec.name} ${flip ? 'p2' : 'p1'}`, turn: spec.turn, side: flip ? 'p2' : 'p1', perish: !!spec.perish, standIns: spec.standIns || 0, dropped: spec.dropped || [], approx: [...new Set(approx)],
           actual: pack(0), their_actual: pack(1), state: exportState(b)};
 }

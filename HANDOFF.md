@@ -1075,6 +1075,6 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     HP, as the game's timer); a human game runs to that clock, not the 25-turn self-play cap; game slots (`?g=1..5`, each its own engine
     and match, a slot bar shows which is waiting); the match record in results/play_match[_N].json and every finished game in
     results/play_games.jsonl (the strength record, shown on the page as the all-time score). Engine log additions for the page: a
-    spread move's targets, Armor Tail / Queenly Majesty / Dazzling blocks. **Record so far: you 2 – 2 planner (4 games, two from before
+    spread move's targets, Armor Tail / Queenly Majesty / Dazzling blocks. **Record so far: you 2 – 3 planner (5 games, two from before
     the log, one of those reconstructed).** The user stopped there ("I apparently can't multi table pokemon like I can poker") and will
     think about a better way to get the games in; nothing is pending on this side.

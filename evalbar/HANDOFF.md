@@ -252,6 +252,17 @@ moves to a new game when it is showing the latest one). A turn waits up to 15 s 
 holds Battle sim's local test games). The bot is always Player 1 on these pages (the user asked, 2026-10-11): live.bot_first swaps every side
 reference in the bot's log (p1/p2, p1a, "id":"p2" in its requests) when its requests say it is p2, before anything reads it.
 
+## Luck (2026-10-11)
+
+The user's idea: how much of the win-chance movement came from randomness. For each turn, luck = the value of the position the turn left
+(the next turn's start, or the result after a last turn won outright) minus what the choices both sides actually made were expected to
+give: the payoff table's cell for the actual joint actions (evalpos EVAL_MATRIX=1, at full seeds), a slot whose choice the log does not
+show weighted by that side's mix (build.expected). Both sides of the difference use the value function before any lookahead ('static'
+at the next turn), since the solved value of a position can differ a lot from it (0.26 vs 0.72 on one turn 1). Values rescaled with CAL;
+weighted over the hypotheses. A reveal of an unseen Pokemon counts in. The page shows each turn's luck under its events and the game total
+as a chip. On by default only on the bot pages (EVAL_MATRIX makes the engine about 3x slower: 22 s -> 61 s for a 6-turn game); the
+first check, a crit Wave Crash KO on a Mega Charizard Y, was +34 for the bot.
+
 ## Mega Evolution on the live pages (2026-10-11)
 
 The user saw a Froslass shown as "Protect (and Mega Evolve)" on the turn before it actually Mega Evolved. champ-battle-v23 offered a Mega

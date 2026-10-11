@@ -41,6 +41,26 @@ def options(e, pos, scale):
             out[sd].append({'mon': R.disp(sl['mon']), 'played': True if any(o['played'] for o in opts) else None, 'options': opts})
     out['value'] = {'p1': scale(e['value']), 'p2': 1 - scale(e['value'])}               # each side's win chance in this hypothesis
     return out
+def expected(e, pos):
+    """what the turn was expected to give from the choices both sides made (side 0's raw win chance), from the payoff table (evalpos
+    EVAL_MATRIX): the cell of the actual joint actions, averaged over the turn's luck. A living slot whose choice the log does not show
+    (it fainted before moving, a failed move with no target shown) counts as that side's mix. None without a table."""
+    m = e.get('matrix')
+    if not m: return None
+    def pick(lines, mix, acts, s):
+        alive = {sl['slot'] for sl in e['sides'][s]['slots']}
+        def ok(row, exact):
+            for i in range(2):
+                c = acts[i]['choice'] if acts[i] else None
+                if i in alive and c is not None and not same(row[i], c, exact): return False
+            return True
+        idx = [k for k, r in enumerate(lines) if ok(r, True)] or [k for k, r in enumerate(lines) if ok(r, False)]
+        tot = sum(mix[k] for k in idx)
+        return [(k, mix[k] / tot if tot > 1e-9 else 1 / len(idx)) for k in idx]
+    rows = pick(m['rows'], m['x'], pos['actual'], 0); cols = pick(m['cols'], m['y'], pos['their_actual'], 1)
+    cells = [(wr * wc, m['v1'][r][c]) for r, wr in rows for c, wc in cols if m['v1'][r][c] is not None]
+    tot = sum(w for w, _ in cells)
+    return sum(w * v for w, v in cells) / tot if tot else None
 def merge(ws, opts):
     """options() of several hypotheses with weights ws (summing to 1) -> one: each option's picks weighted over the hypotheses, and its value
     as the side's overall win chance plus what the option gains or loses against the best play within each hypothesis where it exists. An

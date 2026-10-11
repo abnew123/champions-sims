@@ -100,6 +100,24 @@ fn playout(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64) -> f64 {
     }
     value(&mut b, cfg)
 }
+/// the planner against itself from here to the end of the game (switches allowed, up to `max_turns` turns): 1 = side 0 won, 0 = lost,
+/// 0.5 = unfinished or drawn; for the play page's concede check (an endgame the one-turn value cannot see: PP, Struggle, a slow bleed)
+pub(crate) fn playout_long(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, max_turns: usize) -> f64 {
+    let mut b = start.clone(); let mut turn = 1;
+    while !b.ended && turn <= max_turns {
+        let mine = joint(&mut b, 0, true); let theirs = joint(&mut b, 1, true);
+        if mine.is_empty() || theirs.is_empty() { break; }
+        let cs: Vec<[u16; 4]> = (0..NS).map(|k| seed4(key ^ ((turn as u64) << 40) ^ ((k as u64) << 52))).collect();
+        let m = one_turn(&b, cfg, &mine, &theirs, &cs);
+        let (x, y) = nash(&m, 400);
+        let i = sample(&x, &mut rng); let j = sample(&y, &mut rng);
+        b.prng = Prng::gen5(seed4(key.wrapping_mul(31) ^ turn as u64));
+        b.run_turn([mine[i], theirs[j]]);
+        resolve_switches(&mut b, cfg, Some(&mut rng));
+        turn += 1;
+    }
+    if b.ended { match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 } } else { 0.5 }
+}
 pub(crate) fn label(b: &Battle, s: u8, c: &[PChoice; 2]) -> String {
     let name = |m: MonRef| b.dex.species.get(b.p(m).species).map(|x| x.name).unwrap_or("?").to_string();
     (0..2).filter_map(|i| {

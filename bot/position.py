@@ -10,6 +10,7 @@ sys.path.insert(0, EB); sys.path.insert(0, os.path.join(ROOT, 'pssim'))
 os.environ.setdefault('CHAMP_BIN', os.path.join(ROOT, 'native', 'champ', 'bin', 'battlesim-champ'))   # the current build (the kit's v25 setup)
 os.environ.setdefault('CHAMP_DATA', 'engine_data_full.json')
 os.environ.setdefault('EG_MEGA_TIE', '0')
+os.environ.setdefault('EG_LAST_PROTECT', '0')   # our last Pokemon never Protects when it changes nothing (side 0 is the bot); the user, 2026-10-11
 import botpos as BP, live as LV, engine as EN
 import procs as P
 for _prog, _path in (('champ', os.environ['CHAMP_BIN']), ('node', None)):   # the Eval bar's process-name links, made once here so two

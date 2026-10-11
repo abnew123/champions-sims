@@ -509,6 +509,7 @@ function go(i) {
 }
 // where the battle text and the rules disagree about the state (broadcasts): the user says which is right, and the bar uses that
 function checks() {
+  if (DATA.live && DATA.live.public) { $('checklist').hidden = $('checks').hidden = true; return; }   // the public page is read-only
   const steps = G.steps || [], open = steps.filter(s => (s.checks || []).some(c => !c.choice)), canSave = DATA.live && G.idx !== undefined;
   $('checklist').hidden = !open.length;
   $('checklist').innerHTML = open.length ? '<span>Battle text and rules disagree at</span>' + open.map(s => `<button type="button" data-go="${steps.indexOf(s)}">turn ${s.turn}</button>`).join('') : '';
@@ -528,7 +529,7 @@ document.addEventListener('click', e => {
 });
 document.addEventListener('click', async e => {
   const g = e.target.closest('#checklist [data-go]'); if (g) { go(+g.dataset.go); return; }
-  const b = e.target.closest('#checks [data-choice]'); if (!b) return;
+  const b = e.target.closest('#checks [data-choice]'); if (!b || (DATA.live && DATA.live.public)) return;
   b.disabled = true;
   try {
     await fetch('fix', {method: 'POST', headers: {'Content-Type': 'application/json'},

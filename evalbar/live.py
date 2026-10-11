@@ -286,11 +286,24 @@ class Live:
                 if not s.bo3:
                     for m in state[sd]['mons']:
                         if not m.get('pool'): m['item'] = ''                 # Bo1: items are unknown unless one activated (shown in the events)
-            steps.append({'turn': t, 'wp': wp, 'ev': wp, 'state': state, 'events': step['events'], 'opt': opt, 'hyp': len(names), 'checks': CH.get(t, [])})
+            ex = [(w, B.expected(ev[n + ' p1'], ps[n + ' p1'])) for w, n in zip(ws, names)]; ex = [(w, x) for w, x in ex if x is not None]
+            after = sum(w * scale(ev[n + ' p1']['static']) for w, n in zip(ws, names))   # the value function here, no lookahead
+            steps.append({'turn': t, 'wp': wp, 'ev': wp, 'state': state, 'events': step['events'], 'opt': opt, 'hyp': len(names), 'checks': CH.get(t, []),
+                          'expected': sum(w * scale(x) for w, x in ex) / sum(w for w, _ in ex) if ex else None, 'after': after})
+        # luck (the user's idea, 2026-10-11): the turn's outcome against what the choices both sides made were expected to give, both
+        # with the value function before any lookahead: the next turn's start, or the result after the last turn (not a forfeit)
+        for i, st in enumerate(steps):
+            nxt = steps[i + 1] if i + 1 < len(steps) and steps[i + 1]['turn'] == st['turn'] + 1 else None
+            end = None if g['forfeit'] or not g['winner'] or nxt or st['turn'] != g['steps'][-1]['turn'] else (1.0 if g['winner'] == 'p1' else 0.0)
+            post = nxt['after'] if nxt else end
+            st['luck'] = None if post is None or st['expected'] is None else post - st['expected']
+        for st in steps: st.pop('after', None)
+        lk = [st['luck'] for st in steps if st['luck'] is not None]
         rating = g['rating']
         game = {'id': s.tag, 'title': 'Live', 'winner': g['winner'], 'forfeit': g['forfeit'], 'perish': g['perish'], 'rating': rating, 'live': True,
                 'steps': steps, 'final': {'wp': None if g['winner'] is None else 1.0 if g['winner'] == 'p1' else 0.0, 'state': g['final']}, 'acc': None,
-                'engine': {'turns': len(steps), 'seeds': 32, 'staged': True, 'bar': True, 'cal': CAL}}
+                'engine': {'turns': len(steps), 'seeds': 32, 'staged': True, 'bar': True, 'cal': CAL},
+                'luck': {'p1': sum(lk), 'turns': len(lk)} if lk else None}
         d = {'games': [game], 'live': {'url': 'data.json', 'status': s.status, 'format': s.fmt or ('Bo3, open team sheets' if s.bo3 else 'Bo1, closed team sheets')}}
         blob = json.dumps(d, ensure_ascii=False); B.leak_check(blob, [h for h in g['_hidden'] if not re.fullmatch(r'Player [12]', h)])   # the broadcast reader's own labels
         s.data = d
@@ -359,6 +372,7 @@ class BotRunner:
     """the Showdown bot's games (bot/out/ in the main checkout) on one page: the last 12 hours' games when this starts, then each game it
     starts, as it plays it. The page moves on to a new game when it is showing the latest one."""
     def __init__(s, threads, port):
+        os.environ['EVAL_MATRIX'] = '1'                                     # the payoff table, for luck (about 3x the engine time)
         s.dir = os.path.join(C.MAIN, 'bot', 'out'); s.threads = threads; s.port = port; s.lives = []; s.files = []; s.known = set()
     def serve(s):
         run = s
@@ -407,7 +421,7 @@ if __name__ == '__main__':
         room = room_of(a[1]); f = os.path.join(C.MAIN, 'bot', 'out', room + '.log')
         L = Live(room, int(a[2]) if len(a) > 2 else 2, int(a[3]) if len(a) > 3 else 8769, logfile=f, tag='bot_' + re.search(r'-(\d+)(?:-[a-z0-9]+)?$', room).group(1),
                  fmt="Bo3, open team sheets · the bot is Player 1, its side from its own log")
-        L.exact = True
+        L.exact = True; os.environ['EVAL_MATRIX'] = '1'
         try: L.run()
         except KeyboardInterrupt: pass
     elif a[0] == 'watch':

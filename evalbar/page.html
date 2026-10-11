@@ -295,7 +295,8 @@ function head() {
     const going = !G.winner && G.end == null && gi === GAMES.length - 1 && !/^finished/.test(DATA.live.status || '');
     const status = !going ? null : DATA.video && (!DATA.video.live || followVideo) ? (N ? `turn ${G.steps[N - 1].turn}` : 'waiting for the first turn in the video') : DATA.live.status;
     const sheets = bc ? (G.sheets === false ? 'no team sheets on stream' : 'team sheets from the stream') : DATA.live.format;
-    $('meta').innerHTML = [sheets, N ? `${N} turn${N === 1 ? '' : 's'}${going ? ' so far' : ''}` : null, r, status, G.winner ? `${who(G.winner)} won${G.forfeit ? ' by forfeit' : ''}` : null]
+    $('meta').innerHTML = [sheets, N ? `${N} turn${N === 1 ? '' : 's'}${going ? ' so far' : ''}` : null, r, status, G.winner ? `${who(G.winner)} won${G.forfeit ? ' by forfeit' : ''}` : null,
+        G.luck ? `luck ${luckTxt(G.luck.p1)}` : null]
       .filter(Boolean).map(x => `<span class="chip">${esc(x)}</span>`).join('');
   } else if (REC) {
     $('eyebrow').textContent = 'Your recorded ladder games';
@@ -444,6 +445,8 @@ function options() {
   }).join('')).join('');
 }
 
+// luck: win-chance points from the turn's randomness, for whichever player it favoured
+function luckTxt(l) { const p = Math.round(100 * l); return p === 0 ? 'even' : `${who(p > 0 ? 'p1' : 'p2')} +${Math.abs(p)}`; }
 function events() {
   if (cur === N) {
     $('evTitle').textContent = 'Result';
@@ -461,7 +464,9 @@ function events() {
     ${e.notes.length ? '<ul>' + e.notes.map(n => `<li>${seg(n)}</li>`).join('') + '</ul>' : ''}</li>`).join('');
   $('events').innerHTML = (rows ? `<ol class="ev">${rows}</ol>` : '<p class="none">Nothing was recorded for this turn.</p>') +
     `<div class="after"><span class="k">${cur + 1 < N ? 'Bar after this turn' : 'Result'}</span><span class="v">${who('p1')} ${a}% → ${b}%</span>
-     <span class="d">${d === 0 ? 'no change' : `${Math.abs(d)} points towards ${d > 0 ? towards('p1') : towards('p2')}`}</span></div>`;
+     <span class="d">${d === 0 ? 'no change' : `${Math.abs(d)} points towards ${d > 0 ? towards('p1') : towards('p2')}`}</span></div>` +
+    (s.luck == null ? '' : `<div class="after"><span class="k">Luck this turn</span><span class="v">${luckTxt(s.luck)}</span>
+     <span class="d">expected from the choices made: ${who('p1')} ${Math.round(100 * s.expected)}%</span></div>`);
 }
 
 const CALTXT = '0.74';
@@ -476,6 +481,7 @@ function notes() {
     html = `<p><b>How the bar is made.</b> ${G.engine ? solve : 'For each turn the battle engine plays every pair of choices one turn ahead, scores the positions that result, and solves the turn as a game between the two players.'} The bar is the value of that game for Player 1, rescaled to match how real games turned out (log-odds times ${CALTXT}). It updates a few seconds after each turn starts.</p>
     ${(DATA.live.format || '').startsWith('Champions') ? `<p><b>What it reads.</b> Both open team sheets as the broadcast shows them, the HP percentages in the four HP boxes, and the battle text. The HP boxes at each decision screen set the HP and who is on the field, so a moment the broadcast cut away from is corrected at the next turn; a move or stat change shown only during a cutaway can be missed. Stat points are not on team sheets, so the engine assumes each Pokémon's most common spread. For the Pokémon a player has not sent in yet, the three most likely combinations from their sheet (given their leads) are evaluated for each player and averaged.</p>` : ''}
     <p${(DATA.live.format || '').startsWith('Champions') ? ' hidden' : ''}><b>What it knows.</b> What a spectator knows at the start of the turn: both team previews${DATA.live.format && DATA.live.format.startsWith('Bo3') ? ' and the open team sheets' : ''}, the Pokémon that have come in and what they have shown. ${DATA.live.format && DATA.live.format.startsWith('Bo3') ? '' : 'Sets are each species\' most common Reg M-C set until the game shows otherwise (moves used, items that activated, Mega Evolution), and stat points are guesses. '}For the Pokémon a player has not sent in yet, the three most likely combinations from their preview (given their leads) are evaluated for each player and averaged.</p>
+    ${G.luck ? `<p><b>Luck.</b> For each turn, the win chance the turn left against what the choices both players made were expected to give: the engine plays those choices over 32 samples of the turn's randomness (damage rolls, critical hits, accuracy, speed ties, added effects), both measured before any lookahead. A Pokémon whose choice the log does not show (it fainted before moving) counts as the engine's mix. The total adds up the turns. When a Pokémon the opponent had not shown comes in, what that reveals counts too.</p>` : ''}
     <p><b>Fair play.</b> For watching other people's games. Do not use it on a game you are playing, and do not pass what it shows to a player while their game is going on.</p>
     ${DATA.live.public ? '<p><b>Unofficial.</b> Not affiliated with The Pokémon Company, Nintendo or Play! Pokémon. The video is the official Play! Pokémon stream, embedded from YouTube; the bar is read from it by an amateur program and can be wrong.</p>' : ''}`;
   } else if (G.engine && G.engine.bar) {

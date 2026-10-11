@@ -1,0 +1,17 @@
+{
+ "note": "the user, 2026-10-11: 60 games with each sheet team and 180 with random top-64 regional teams played without a sheet, the two arms alternated match by match (the arm with fewer games goes next) so both meet similar opponents; games counted from 'start'; the bot pauses when both are done",
+ "start": "2026-10-11T07:39:10Z",
+ "sheet": {
+  "teams": [
+   "Trick Room six",
+   "Frankfurt-239",
+   "Frankfurt-156"
+  ],
+  "games_per_team": 60
+ },
+ "regional": {
+  "pool": "bot/out/regional_pool.json",
+  "games": 180
+ },
+ "pause_when_done": true
+}

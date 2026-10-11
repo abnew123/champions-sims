@@ -96,7 +96,11 @@ async function onMessage(m) {
           joinSent.add(g); rooms[g] = rooms[g] || {lines: [], side: null, req: null, done: false, oppRating: null, turn: 0}; send(`|/join ${g}`); log('rejoining', g.slice(-16)); }
       } catch (e) {} }
       else if (p[1] === 'updatechallenges') { onChallenges(p[2]); }
-      else if (p[1] === 'popup') { log('popup:', p.slice(2).join('|').slice(0, 200)); }
+      else if (p[1] === 'popup') { const t = p.slice(2).join('|'); log('popup:', t.slice(0, 200));
+        if (t.includes('Your team was rejected') && currentTeam) {   // a team Showdown will not accept: never use it again
+          const rf = path.join(OUT, 'rejected_teams.json'); const r = fs.existsSync(rf) ? JSON.parse(fs.readFileSync(rf)) : [];
+          if (!r.includes(currentTeam.name)) { r.push(currentTeam.name); fs.writeFileSync(rf, JSON.stringify(r)); }
+          log('team rejected, will not use it again:', currentTeam.name); currentTeam = null; searching = false; } }
     } else {
       if (p[1] === 'deinit' || p[1] === 'noinit') { delete rooms[room]; continue; }   // we left the room (or it is gone): forget it
       if (!rooms[room] && !(room.startsWith('battle-') || room.startsWith('game-'))) continue;   // only battle and match rooms are tracked
@@ -111,7 +115,7 @@ async function onMessage(m) {
       if (p[1] === 'turn') R.turn = +p[2];
       if (room.startsWith('game-bestof')) {   // the match room: confirm each game's start when asked, note the match result
         if (line.includes('/confirmready') || (p[1] === 'inactive' && me && line.includes(me) && line.includes('confirm'))) { if (!R.confirmed) { R.confirmed = true; setTimeout(() => { send(`${room}|/confirmready`); R.confirmed = false; }, 2000); } }
-        if (p[1] === 'win' && !R.done) { R.done = true; const won = me && p[2].toLowerCase() === me.toLowerCase(); log('match over', room.slice(-16), won ? 'won' : 'lost'); fs.appendFileSync(path.join(OUT, LOCAL ? `matches_${TAG}.jsonl` : 'matches.jsonl'), JSON.stringify({when: new Date().toISOString(), room, won: !!won, games: R.lines.filter(l => l.startsWith('|uhtml|game')).length, team: currentTeam && currentTeam.name}) + '\n'); setTimeout(() => { send(`${room}|/leave`); delete rooms[room]; refreshMyRating(); }, 8000); }
+        if (p[1] === 'win' && !R.done) { R.done = true; const won = me && p[2].toLowerCase() === me.toLowerCase(); log('match over', room.slice(-16), won ? 'won' : 'lost'); fs.appendFileSync(path.join(OUT, LOCAL ? `matches_${TAG}.jsonl` : 'matches.jsonl'), JSON.stringify({when: new Date().toISOString(), room, won: !!won, games: R.lines.filter(l => l.startsWith('|uhtml|game')).length, team: currentTeam && currentTeam.name, arm: currentTeam && currentTeam.arm}) + '\n'); setTimeout(() => { send(`${room}|/leave`); delete rooms[room]; refreshMyRating(); }, 8000); }
         continue;
       }
       if (p[1] === 'request' && p[2]) { try { R.req = JSON.parse(p[2]); } catch (e) { R.req = null; } if (R.req && !R.req.wait) handleRequest(room, R).catch(e => log('request error', room, String(e))); }
@@ -142,11 +146,38 @@ function onChallenges(json) {
   for (const [user, fmt] of Object.entries(c.challengesFrom || {})) {
     const L = limits(); const why = mayPlay();
     if (!L.accept_challenges || fmt !== FORMAT || why || (DRY && !LOCAL)) { send(`|/reject ${user}`); log('rejected challenge', fmt, why || ''); continue; }
-    pickTeam().then(() => { send(`|/accept ${user}`); log('accepted a challenge'); });
+    pickTeam().then(t => { if (!t) { send(`|/reject ${user}`); return; } send(`|/accept ${user}`); log('accepted a challenge'); });
   }
 }
 let teams = null, teamIdx = 0;
+// bot/experiment.json (2026-10-11): the sheet arm (each sheet team up to games_per_team) and the regional arm (random pool teams, no
+// sheet, up to games) alternate match by match, the arm with fewer games first; when both are done the bot pauses itself
+function experimentTeam() {
+  const ef = path.join(HERE, 'experiment.json'); if (!fs.existsSync(ef) || LOCAL) return undefined;
+  const E = JSON.parse(fs.readFileSync(ef)); const since = Date.parse(E.start);
+  const g = games().filter(x => Date.parse(x.when) >= since);
+  const rejected = fs.existsSync(path.join(OUT, 'rejected_teams.json')) ? JSON.parse(fs.readFileSync(path.join(OUT, 'rejected_teams.json'))) : [];
+  const per = t => g.filter(x => x.team === t).length; const reg = g.filter(x => x.arm === 'regional').length;
+  const sheetOpen = E.sheet.teams.filter(t => per(t) < E.sheet.games_per_team && !rejected.includes(t));
+  const sheetN = g.filter(x => x.arm === 'sheet').length;
+  const regOpen = reg < E.regional.games;
+  if (!sheetOpen.length && !regOpen) return null;
+  const arm = !regOpen ? 'sheet' : !sheetOpen.length ? 'regional' : sheetN < reg ? 'sheet' : reg < sheetN ? 'regional' : (Math.random() < 0.5 ? 'sheet' : 'regional');
+  const all = JSON.parse(fs.readFileSync(ARG('--teams') || path.join(HERE, 'teams.json')));
+  if (arm === 'sheet') {
+    const lo = Math.min(...sheetOpen.map(per)); const pick = sheetOpen.filter(t => per(t) === lo);
+    const name = pick[Math.floor(Math.random() * pick.length)]; return {...all.find(t => t.name === name), arm};
+  }
+  const pool = JSON.parse(fs.readFileSync(path.join(ROOT, E.regional.pool))).filter(t => !rejected.includes(t.name));
+  return {...pool[Math.floor(Math.random() * pool.length)], arm};
+}
 async function pickTeam() {
+  const ex = experimentTeam();
+  if (ex === null) {   // both arms done
+    const L = limits(); if (!L.paused) { L.paused = true; fs.writeFileSync(path.join(HERE, 'limits.json'), JSON.stringify(L, null, 2)); log('experiment complete: paused'); }
+    return null;
+  }
+  if (ex) { const packed = (await ask({type: 'pack', sets: ex.sets})).packed; send(`|/utm ${packed}`); currentTeam = ex; log(`team for this match: ${ex.name} (${ex.arm})`); return ex; }
   if (!teams) teams = JSON.parse(fs.readFileSync(ARG('--teams') || path.join(HERE, 'teams.json')));   // --teams <file>: another team list (local tests)
   // which six this match: drawn by the teams' weights (bot/teams.json "weight"), re-read each time so weights can change live
   teams = JSON.parse(fs.readFileSync(ARG('--teams') || path.join(HERE, 'teams.json')));
@@ -170,7 +201,7 @@ async function onReady() {
     const why = mayPlay();
     if (Date.now() - (lastIdleLog || 0) > 5 * 60e3 && !open.some(([k, r]) => r.req)) { lastIdleLog = Date.now();
       if (busy || searching) log(`idle: ${searching ? 'searching' : ''}${inGames ? ` ${inGames} game(s) listed by the server` : ''}${open.length ? ` waiting on ${open.map(([k]) => k.slice(-16)).join(', ')}` : ''}`); }
-    if (!busy && !searching && limits().search_ladder && !why) { await pickTeam(); await sleep(LOCAL ? 1000 : rnd(30e3, 120e3)); if (!searching && !mayPlay()) { send(`|/search ${FORMAT}`); searching = true; log('searching'); } }
+    if (!busy && !searching && limits().search_ladder && !why) { const t = await pickTeam(); if (!t) continue; await sleep(LOCAL ? 1000 : rnd(30e3, 120e3)); if (!searching && !mayPlay()) { send(`|/search ${FORMAT}`); searching = true; log('searching'); } }
     else if (why && !busy && !searching) { log('not searching:', why); await sleep(60e3); }
     await refreshTop();
   }
@@ -181,7 +212,11 @@ async function handleRequest(room, R) {
     if (!teams) teams = JSON.parse(fs.readFileSync(ARG('--teams') || path.join(HERE, 'teams.json')));
     const sp = [...new Set(req.side.pokemon.map(x => x.details.split(',')[0].replace(/-Mega.*$/, '')))];
     const covers = t => sp.filter(s => t.sets.some(x => x.species === s || x.species.replace(/-Mega.*$/, '') === s)).length;
-    currentTeam = teams.slice().sort((a, b) => covers(b) - covers(a))[0];   // the team holding every Pokemon the request lists
+    let cands = teams.map(t => ({...t, arm: 'sheet'}));
+    try { const E = JSON.parse(fs.readFileSync(path.join(HERE, 'experiment.json'))); cands = cands.concat(JSON.parse(fs.readFileSync(path.join(ROOT, E.regional.pool))).map(t => ({...t, arm: 'regional'}))); } catch (e) {}
+    const sz = t => t.sets.length;   // the team holding every Pokemon the request lists (fewest extras first)
+    currentTeam = cands.filter(t => covers(t) === sp.length).sort((a, b) => sz(a) - sz(b))[0] || cands.sort((a, b) => covers(b) - covers(a))[0];
+    log('team recovered after a restart:', currentTeam.name);
   }
   if (R.oppRating != null && R.oppRating >= topBand.elo && !stoppedForTop) { stoppedForTop = true; log(`opponent rated ${R.oppRating} is in the ladder's top band: this is the last game`); }
   const think = LOCAL ? 300 : req.teamPreview ? rnd(8e3, 20e3) : rnd(L.think_seconds[0] * 1e3, L.think_seconds[1] * 1e3);
@@ -204,7 +239,7 @@ async function handleRequest(room, R) {
 function onEnd(room, R, winner) {
   if (R.done) return; R.done = true;
   const won = winner && me && winner.toLowerCase() === me.toLowerCase();
-  const g = {when: new Date().toISOString(), room, side: R.side, won: winner ? !!won : null, turns: R.turn, oppRating: R.oppRating, myRating, team: currentTeam && currentTeam.name};
+  const g = {when: new Date().toISOString(), room, side: R.side, won: winner ? !!won : null, turns: R.turn, oppRating: R.oppRating, myRating, team: currentTeam && currentTeam.name, arm: currentTeam && currentTeam.arm};
   fs.appendFileSync(GAMES, JSON.stringify(g) + '\n'); fs.writeFileSync(path.join(OUT, room + '.log'), R.lines.join('\n') + '\n');
   log('game over', room.slice(-12), won ? 'won' : winner ? 'lost' : 'tie', 'turns', R.turn, 'opp', R.oppRating, 'me', myRating);
   setTimeout(() => { send(`${room}|/leave`); delete rooms[room]; }, 5000);

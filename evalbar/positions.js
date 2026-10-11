@@ -82,7 +82,9 @@ function build(spec, flip) {
   const choice = (si, i) => {
     const a = acts[si][i], side = b.sides[si], p = side.active[i];
     if (!a || !p || p.fainted) return null;
-    if (a.switch) { const k = sides[si].mons.findIndex(x => x.species === a.switch); return k < 0 ? null : ['switch', k]; }
+    if (a.switch) {                                    // a Mega that went back comes in again as "Golisopod-Mega": match the base species (one per team)
+      const base = s => dex.species.get(s).baseSpecies;
+      const k = sides[si].mons.findIndex(x => x.species === a.switch || base(x.species) === base(a.switch)); return k < 0 ? null : ['switch', k]; }
     const k = p.moveSlots.findIndex(m => m.id === toID(a.move)); if (k < 0) return null;
     if (!a.target && ['normal', 'any', 'adjacentFoe', 'adjacentAlly', 'adjacentAllyOrSelf'].includes(dex.moves.get(a.move).target)) return null;   // it failed or only charged: the log shows no target
     let t = 0;

@@ -249,7 +249,8 @@ now writes it on every |request| and |turn| (bot/client.js), so a game in progre
 room) runs BotRunner: the bot's newest game when it starts, then each new battle log that appears in bot/out, all on one page (the page
 moves to a new game when it is showing the latest one). A turn waits up to 15 s for its request before it is evaluated without it. Port
 8768 stays the stream watcher's (auto.py). BotRunner starts with the last 12 hours' ladder games (room numbers of six digits or more; bot/out also
-holds Battle sim's local test games).
+holds Battle sim's local test games). The bot is always Player 1 on these pages (the user asked, 2026-10-11): live.bot_first swaps every side
+reference in the bot's log (p1/p2, p1a, "id":"p2" in its requests) when its requests say it is p2, before anything reads it.
 
 ## Mega Evolution on the live pages (2026-10-11)
 

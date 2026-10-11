@@ -162,6 +162,7 @@ def parse(log):
                     if cur[0] is None or phase == 'residual' and cur[0]['side']: cur[0] = None
                     note([m.ref(), txt])
                 m.hp = v
+                if k == '-heal' and v > 0 and m.fainted: m.fainted = False             # Revival Blessing brings back a fainted one in the back
                 st = p[3].split(); m.status = st[1] if len(st) > 1 and st[1] != 'fnt' else m.status
         elif k == 'faint':
             m = mon(p[2])

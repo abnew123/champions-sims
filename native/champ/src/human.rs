@@ -50,7 +50,7 @@ impl Human {
     pub fn slot_label(b: &Battle, s: u8, k: usize, c: &PChoice) -> String {
         let name = |m: crate::state::MonRef| b.dex.species.get(b.p(m).species).map(|x| x.name).unwrap_or("?").to_string();
         match *c {
-            PChoice::Switch(pos) => return format!("switch to {}", name((s, pos))),   // also a replacement for a fainted or empty slot
+            PChoice::Switch(pos) => return format!("switch to {}", b.mon_at_position(s, pos).map(name).unwrap_or_else(|| "?".into())),   // also a replacement for a fainted or empty slot
             PChoice::Pass => return "pass".into(),
             _ => {}
         }
@@ -66,7 +66,7 @@ impl Human {
                           else if t < 0 { b.sides[s as usize].active[(-t) as usize - 1].map(|x| format!(" -> {} (ally)", name((s, x)))).unwrap_or(" -> ally".into()) } else { String::new() };
                 format!("{}{}{}", mv, tgt, if mega { " (Mega)" } else { "" })
             }
-            PChoice::Switch(pos) => format!("switch to {}", name((s, pos))),
+            PChoice::Switch(pos) => format!("switch to {}", b.mon_at_position(s, pos).map(name).unwrap_or_else(|| "?".into())),
             PChoice::Pass => "pass".into(),
         }
     }

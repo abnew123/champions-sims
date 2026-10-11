@@ -30,4 +30,6 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
    points but outsped a 108-Speed Archaludon; Jolly Sneasler assumed at 32 but outsped by a 178 Gengar) plus 2 the check cannot judge
    (Prankster, Mega timing). **Partly done (Eval bar, 2026-10-11 evening, 190d732):** opponents now get the most used Smogon spread
    with their sheet nature (no more 0-Speed fallback), refined turn by turn by the turn order seen so far (botpos.refine_opponent);
-   the bot is restarted onto it. Still open: damage as evidence (every hit narrows bulk or attack).
+   the bot is restarted onto it. Still open: damage as evidence (every hit narrows bulk or attack). Measured (`bot/belief_test.py`,
+   403 of the bot's decisions rebuilt with the builder before and after): the beliefs differ in 269 (67%), but the choice moves little,
+   +0.26 points per such decision, about +0.9 a game, only 2 decisions by 5+ points (an upper estimate: the new beliefs taken as true).

@@ -244,8 +244,11 @@ Blessing heals in the back.
 `live.py bot <room> [threads] [port=8769]` follows a game of the Showdown bot from its own log (bot/out/<room>.log in the main checkout):
 the bot's side as its |request| shows it (the four brought, exact HP and items; logged just after each |turn| line) with its spreads from
 bot/teams.json, the opponent as a spectator sees it, and the page names the bot's real back row. No rules checks (the log is Showdown's
-own). On the first ladder game it cut the positions from 9 a turn to 1-3. The bot writes its room log only when a game ends; Battle sim
-was asked to write it as the game goes so live games can be followed. Port 8768 stays the stream watcher's (auto.py).
+own). On the first ladder game it cut the positions from 9 a turn to 1-3. The bot wrote its room log only when a game ended; Battle sim
+now writes it on every |request| and |turn| (bot/client.js), so a game in progress can be followed. `live.py bot [threads] [port=8769]` (no
+room) runs BotRunner: the bot's newest game when it starts, then each new battle log that appears in bot/out, all on one page (the page
+moves to a new game when it is showing the latest one). A turn waits up to 15 s for its request before it is evaluated without it. Port
+8768 stays the stream watcher's (auto.py).
 
 ## Louisville day 1 (2026-10-10)
 

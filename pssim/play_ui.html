@@ -64,8 +64,9 @@ function randomOpp(){$('theirs').value=Math.floor(Math.random()*T.pool.length); 
 function showOpp(){opp=T.pool[+$('theirs').value]; $('theirsix').innerHTML=opp.sets.map(s=>`<div><b>${esc(s.species)}</b> <span class="sub">${esc(s.item||'')} / ${esc(s.ability||'')} / ${esc(s.nature||'')}: ${esc((s.moves||[]).join(', '))}</span></div>`).join('');}
 async function startGame(){const mine=order.map(i=>my.sets[i]); const theirs=opp.bring.map(sp=>opp.sets.find(x=>x.species===sp));
   $('status').textContent='building the start position...'; $('setup').classList.add('hidden'); $('game').classList.remove('hidden');
-  const r=await (await fetch('/start',{method:'POST',body:JSON.stringify({mine,theirs})})).json(); if(!r.ok){$('status').textContent='error: '+r.error; return;} poll();}
-async function poll(){const r=await (await fetch('/state')).json(); if(r.error){$('status').textContent='error: '+r.error;}
+  let r; try{r=await (await fetch('/start',{method:'POST',body:JSON.stringify({mine,theirs})})).json();}catch(e){$('status').textContent='the play server is not reachable (start it with: pssim/battlesim-play pssim/play_server.py, then reload)'; return;}
+  if(!r.ok){$('status').textContent='error: '+r.error; return;} poll();}
+async function poll(){let r; try{r=await (await fetch('/state')).json();}catch(e){$('status').textContent='lost the play server (start it with: pssim/battlesim-play pssim/play_server.py, then reload)'; return;} if(r.error){$('status').textContent='error: '+r.error;}
   const key=r.game+':'+(r.msg?r.msg.type+r.msg.turn+(r.msg.log_all||[]).length:'');
   if(r.msg&&key!==lastKey){lastKey=key; render(r.msg);} if(r.waiting){$('status').textContent='the planner is thinking...'; setTimeout(poll,300);} else if(r.msg&&r.msg.type!=='end'){$('status').textContent=`turn ${r.msg.turn}: your move`;} }
 function hpbar(m){const f=m.maxhp?m.hp/m.maxhp:0; return `<div class="bar ${f<.25?'low':f<.5?'mid':''}"><i style="width:${Math.round(100*f)}%"></i></div>`;}

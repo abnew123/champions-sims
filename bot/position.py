@@ -11,6 +11,19 @@ os.environ.setdefault('CHAMP_BIN', os.path.join(ROOT, 'native', 'champ', 'bin', 
 os.environ.setdefault('CHAMP_DATA', 'engine_data_full.json')
 os.environ.setdefault('EG_MEGA_TIE', '0')
 os.environ.setdefault('EG_LAST_PROTECT', '0')   # our last Pokemon never Protects when it changes nothing (side 0 is the bot); the user, 2026-10-11
+os.environ.setdefault('EG_NO_DOUBLE_PROTECT', '0')   # and no Pokemon of ours Protects two turns running (the user, 2026-10-11; self-play -1.2 +- 0.7)
+STALL = {'Protect', 'Detect', 'Spiky Shield', "King's Shield", 'Baneful Bunker', 'Burning Bulwark', 'Silk Trap', 'Obstruct', 'Max Guard'}
+def protect_chains(log, side):
+    """per Pokemon of ours (by species), how many turns running it has used a Protect-type move up to now (success or not)"""
+    text = '\n'.join(log) if isinstance(log, list) else (log or ''); turn = 0; last = {}; chain = {}
+    for l in text.split('\n'):
+        p = l.split('|')
+        if len(p) > 2 and p[1] == 'turn': turn = int(p[2])
+        elif len(p) > 3 and p[1] == 'move' and p[2].startswith(side) and not any(x.startswith('[from]') for x in p[4:]):
+            mon = p[2].split(': ', 1)[-1]
+            if p[3] in STALL: chain[mon] = chain.get(mon, 0) + 1 if last.get(mon) == turn - 1 else 1; last[mon] = turn
+            else: chain[mon] = 0
+    return {m: c for m, c in chain.items() if last.get(m) == turn - 1}
 import botpos as BP, live as LV, engine as EN
 import procs as P
 for _prog, _path in (('champ', os.environ['CHAMP_BIN']), ('node', None)):   # the Eval bar's process-name links, made once here so two
@@ -33,7 +46,7 @@ def build(log, request, side, topk=1, team=None):
     specs, info = BP.bot_position(text, request, side, topk=topk, team=export(team) if team else None, tag='bot')
     if not specs: raise RuntimeError('no position: ' + str(info.get('skip')))
     return specs, info
-def decide(specs, request, side, threads=2, seeds=32):
+def decide(specs, request, side, threads=2, seeds=32, log=None, cap=None):
     tag = f"t{request.get('rqid', 0)}_{random.randrange(1 << 20):05x}"
     posf = os.path.join(OUT, tag + '.pos.jsonl'); outf = os.path.join(OUT, tag + '.eval.jsonl')
     ps = LV.positions(specs, posf)
@@ -42,6 +55,17 @@ def decide(specs, request, side, threads=2, seeds=32):
     w0, spec0 = specs[0]; name = spec0['name'] + ' p1'
     r = rows.get(name) or next(iter(rows.values()))
     s0 = r['sides'][0]; joint = [j for j in s0['joint'] if j['w'] > 0]
+    # the hard cap (limits.json protect_chain_cap, the user: 4): a Pokemon that has used Protect that many turns running may not again;
+    # the joint options that have it Protect are dropped and the rest renormalized (if nothing is left, the cap gives way)
+    if cap and log is not None:
+        ch = protect_chains(log, side)
+        def capped(j):
+            for part in j['label'].split(' | '):
+                mon, _, act = part.partition(': ')
+                if act.replace(' (Mega)', '') in STALL and max((c for m, c in ch.items() if mon.startswith(m) or m.startswith(mon.split('-Mega')[0])), default=0) >= cap: return True
+            return False
+        kept = [j for j in joint if not capped(j)]
+        if kept and len(kept) < len(joint): joint = kept
     pick = random.choices(joint, weights=[j['w'] for j in joint])[0]
     parts = [p.strip() for p in pick['label'].split(' | ')]
     cmds = []

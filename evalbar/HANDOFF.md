@@ -267,6 +267,20 @@ about 3x slower (22 s -> 61 s for a 6-turn game). The first check, a crit Wave C
 62 turns of the first bot games luck averaged +0.5 points (sd 9). A move stopped by Armor Tail is now the user's choice (replay.py), or
 its unknown choice made one turn look like +48.
 
+## Opponents' spreads (spreads.py, 2026-10-11)
+
+Checking the three unluckiest bot games (the user asked whether it was luck or play) found their big swings were spread errors. The bot's
+own spreads had been guessed for teams outside bot/teams.json (botpos.spread now solves them from the stats in its requests), and the
+opponent's Gholdengo was guessed with no Speed: spots.evs_for used the Smogon top set only when its nature matched the sheet and fell back
+to a plain HP / attack spread. With Tailwind or against a 108-Speed Archaludon that flips the turn order, so certain KOs read as -45 to -57
+luck. Now (the user's design): the species' Smogon spreads in order of use with the sheet's nature (spreads.ranked, from the moveset file:
+the top six or so, "Other" is about half), the most used one the game has not ruled out (spreads.pick). What rules a spread out: the order
+two Pokemon moved in at the same priority when the other one's Speed is exact (a bot's own), with Tailwind, Trick Room, paralysis,
+stages, Choice Scarf, weather abilities and Mega forms counted, and turns where Speed or the field changed mid-turn, Quick Claw or
+After You skipped (spreads.observations). Every listed spread ruled out: the top one with its Speed points moved as little as fits.
+Spectator pages get the nature-matched ranking (evs_for); bot pages and the bot itself (botpos.refine_opponent) also the turn order.
+Damage is not used yet. After it: luck on the three games -91 -> -32, -89 -> -6, -79 -> -13. Older studies used the old spreads.
+
 ## Mega Evolution on the live pages (2026-10-11)
 
 The user saw a Froslass shown as "Protect (and Mega Evolve)" on the turn before it actually Mega Evolved. champ-battle-v23 offered a Mega

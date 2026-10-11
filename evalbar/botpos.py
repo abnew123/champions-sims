@@ -73,6 +73,14 @@ def spread(p, st):
         hit = next((x for x in range(33) if calc(x) == want), None)
         if hit is not None: out[i] = hit
     return out
+def refine_opponent(pre, gp, sets, side, req):
+    """the opponent's spreads (in sets) picked against the turn order the log shows, the bot's own Speed being exact (spreads.py)"""
+    import spreads
+    known = {}
+    for p in req['side']['pokemon']:
+        sp = p['details'].split(',')[0]; st = next((v for k, v in sets[side].items() if v and toid(k.split('-')[0]) == toid(sp.split('-')[0])), None)
+        if st: known[toid(sp.split('-')[0])] = (spread(p, st), st['nature'])
+    return spreads.refine(pre, gp, sets, side, known)
 def fresh(st):
     return {**st, 'mega': False, 'hpPct': 100, 'fainted': False, 'status': '', 'slept': 0, 'boosts': {}, 'itemNow': st['item'], 'moved': False,
             'stall': False, 'lock': '', 'vol': [], 'onField': False, 'last': '', 'volarg': {}}
@@ -105,6 +113,7 @@ def bot_position(log, request, side, topk=1, team=None, tag='bot'):
     gp = R.parse(pre); step = gp['steps'][-1]; st = step['state']; opp = 'p2' if side == 'p1' else 'p1'
     six, sets, dropped = LV.sets_for(gp, pre, True)
     mine, why = own_side(st[side], sets[side], req, team_sets(team), dropped)
+    refine_opponent(pre, gp, sets, side, req)                                # the opponent's spreads against the turn order seen so far
     if mine is None: return [], {'skip': why}
     H, pool, need = LV.hyps(opp, st, six, sets, LV.Live.leads(None, pre), topk)
     order = sorted(st[opp]['mons'], key=lambda m: (0 if m['pos'] == 'a' else 1 if m['pos'] == 'b' else 2 if not m['f'] else 3))

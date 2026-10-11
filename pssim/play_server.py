@@ -13,7 +13,7 @@ def spread(species, nature):   # as opp_pool.spread, without that module's impor
     return [32, 32, 0, 0, 2, 0] if nature in ('Adamant', 'Jolly', 'Brave', 'Careful', 'Impish') else [32, 0, 0, 32, 2, 0]
 BIN = os.path.join('..', 'native', 'champ', 'bin', 'battlesim-champ'); ENGINE = os.path.join('..', 'native', 'engine_data_full.json')
 FLAGS = dict(RACE_TIES='avg', DP2='1', RACE='1', CALC_DATA=os.path.join('..', 'native', 'champions_data.json'), BATTLE_ANTICIPATE='1', TRSYM='1',
-             EG_VALUE='egvalue9_sym2.json', EG_MEGA_TIE='0')
+             EG_VALUE='egvalue9_sym2.json', EG_MEGA_TIE='0', PLAN_KEEP_IMMUNE='0')   # you may aim at an immune Pokemon (a switch read)
 class Game:
     def __init__(self):
         self.proc = None; self.msg = None; self.waiting = False; self.id = 0; self.log = []; self.tmp = None; self.lock = threading.Lock(); self.err = None

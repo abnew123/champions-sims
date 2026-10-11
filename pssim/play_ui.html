@@ -76,7 +76,9 @@ async function startGame(){const mine=order.map(i=>my.sets[i]); const theirs=opp
   if(!r.ok){$('status').textContent='error: '+r.error; return;} poll();}
 async function poll(){let r; try{r=await (await fetch('/state')).json();}catch(e){$('status').textContent='lost the play server (start it with: pssim/battlesim-play pssim/play_server.py, then reload)'; return;} if(r.error){$('status').textContent='error: '+r.error;}
   const key=r.game+':'+(r.msg?r.msg.type+r.msg.turn+(r.msg.log_all||[]).length:'');
-  match=r.match||match; showScore(); if(r.msg&&key!==lastKey){lastKey=key; render(r.msg);} if(r.waiting){$('status').textContent='the planner is thinking...'; setTimeout(poll,300);} else if(r.msg&&r.msg.type!=='end'){$('status').textContent=`turn ${r.msg.turn}: your move`;} }
+  match=r.match||match; showScore(); if(r.msg&&key!==lastKey){lastKey=key; render(r.msg);} if(r.waiting){$('status').textContent=askedConcede?'the planner is playing it out in its head...':'the planner is thinking...'; setTimeout(poll,300);}
+  else if(r.msg&&r.msg.type!=='end'){$('status').textContent=`turn ${r.msg.turn}: your move`; if(askedConcede){askedConcede=false; if(r.verdict&&!r.verdict.conceded){const e=$('endnote'); if(e)e.textContent='the planner does not consider itself lost';}}}
+  else if(r.msg&&r.msg.type==='end'){askedConcede=false;} }
 function hpbar(m){const f=m.maxhp?m.hp/m.maxhp:0; const w=m.hp>0?Math.max(1.5,100*f):0; return `<div class="bar ${f<.25?'low':f<.5?'mid':''}"><i style="width:${w}%"></i></div>`;}
 const pct=m=>m.hp<=0?0:Math.max(1,Math.round(100*m.hp/Math.max(1,m.maxhp)));
 const BOOST=['Atk','Def','SpA','SpD','Spe','Acc','Eva'];
@@ -110,7 +112,8 @@ function nextGame(){order=[]; lastKey=''; $('game').classList.add('hidden'); $('
 function joint(){if(sel[0]==null||sel[1]==null)return null; return window._opts.find(o=>o.slots[0]===sel[0]&&o.slots[1]===sel[1]);}
 async function submit(){const j=joint(); if(!j)return; send(j.i);}
 async function send(i){if(busy)return; busy=true; $('choice').innerHTML=''; await fetch('/choose',{method:'POST',body:JSON.stringify({i})}); busy=false; poll();}
-async function askConcede(){if(busy)return; const r=await (await fetch('/concede',{method:'POST',body:'{}'})).json(); if(r.conceded){poll();} else {$('endnote').textContent=r.reason||'no';}}
+let askedConcede=false;
+async function askConcede(){if(busy)return; const r=await (await fetch('/concede',{method:'POST',body:'{}'})).json(); if(!r.ok){$('endnote').textContent=r.reason||'not now'; return;} askedConcede=true; $('status').textContent='the planner is playing it out in its head...'; poll();}
 async function forfeit(){if(busy||!confirm('Forfeit this game?'))return; await fetch('/forfeit',{method:'POST',body:'{}'}); poll();}
 function who(s){const m=/^p([12])([ab]?): (.*)$/.exec(s||''); if(!m)return esc(s||''); return `<span class="${m[1]==='1'?'side0':'side1'}"><span class="nm">${esc(m[3])}</span></span>`;}
 function tr(line){const p=line.split('|').slice(1); const c=p[0]; const a=p.slice(1);

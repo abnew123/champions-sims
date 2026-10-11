@@ -40,10 +40,10 @@ def planner_bring(their_sets, my_sets, rnd):
 class Game:
     def __init__(self):
         self.proc = None; self.msg = None; self.waiting = False; self.id = 0; self.log = []; self.tmp = None; self.lock = threading.Lock(); self.err = None
-        self.match = None; self.rnd = random.Random(); self.cur = None; self.value = None
+        self.match = None; self.rnd = random.Random(); self.cur = None; self.value = None; self.verdict = None; self.pending_concede = False
     def start(self, mine, theirs, match_key=None, their_six=None, my_six=None):
         """mine: your four in lead order; theirs: the planner's four in lead order, or None to let it choose against your six"""
-        self.stop(); self.id += 1; self.msg = None; self.log = []; self.err = None; self.waiting = True; self.value = None
+        self.stop(); self.id += 1; self.msg = None; self.log = []; self.err = None; self.waiting = True; self.value = None; self.verdict = None; self.pending_concede = False
         if match_key and self.match and self.match['key'] == match_key: pass
         else: self.match = {'key': match_key, 'games': []} if match_key else None
         if their_six and my_six: theirs = planner_bring(their_six, my_six, self.rnd) or theirs   # its own choice; the recorded bring as the fallback
@@ -68,7 +68,13 @@ class Game:
                 lt = (m.get('turn') or 1) - 1 if m.get('type') == 'turn' else m.get('turn')   # a turn prompt carries the previous turn's events
                 self.log += [(lt, l) for l in m.get('log', [])]; m['log_all'] = self.log
                 if 'value' in m: self.value = m.pop('value')   # the planner's view of the turn, never sent to the page
+                if m.get('type') == 'verdict':   # the concede check: the planner concedes when it wins none of its playouts and its turn value is under 2%
+                    lost = m.get('n', 0) > 0 and m.get('planner_wins', 0) == 0 and m.get('draws', 0) == 0 and (1.0 - (m.get('value') or 0.5)) < self.threshold
+                    self.verdict = {'conceded': lost}; m['log'] = []
+                    if lost: self.pending_concede = True
+                    continue
                 self.msg = m; self.waiting = False
+                if getattr(self, 'pending_concede', False): self.pending_concede = False; threading.Thread(target=self.finish, args=('you', 'the planner conceded'), daemon=True).start()
                 if m.get('type') == 'end' and self.match is not None and self.cur:
                     self.match['games'].append({**self.cur, 'winner': m.get('winner'), 'turns': m.get('turn')}); self.cur = None
     def finish(self, winner, how):
@@ -84,12 +90,14 @@ class Game:
             except Exception: pass
             self.proc = None
         return True
-    def concede_check(self, threshold=0.02):
-        """the planner concedes when its own win chance on the current turn's solve is under the threshold"""
-        v = getattr(self, 'value', None)
-        if v is None or not self.msg or self.msg.get('type') != 'turn': return {'conceded': False, 'reason': 'no position to judge'}
-        if 1.0 - v < threshold: self.finish('you', 'the planner conceded'); return {'conceded': True}
-        return {'conceded': False, 'reason': 'the planner does not consider itself lost'}
+    threshold = 0.02
+    def concede_check(self):
+        """ask the engine for its verdict (8 playouts of the planner against itself plus the turn's value); the reader thread applies it"""
+        if not self.proc or self.waiting or not self.msg or self.msg.get('type') != 'turn': return {'ok': False, 'reason': 'no position to judge'}
+        self.verdict = None; self.waiting = True
+        try: self.proc.stdin.write(json.dumps({'check': 'concede'}) + '\n'); self.proc.stdin.flush()
+        except Exception as e: self.waiting = False; return {'ok': False, 'reason': str(e)}
+        return {'ok': True}
     def choose(self, i):
         if not self.proc or self.waiting or not self.msg or self.msg.get('type') == 'end': return False
         self.waiting = True
@@ -127,7 +135,7 @@ class H(BaseHTTPRequestHandler):
             if TEAMS is None: TEAMS = teams()
             self.send(200, TEAMS)
         elif self.path == '/state':
-            with G.lock: self.send(200, {'game': G.id, 'waiting': G.waiting, 'msg': G.msg, 'error': G.err, 'match': G.match})
+            with G.lock: self.send(200, {'game': G.id, 'waiting': G.waiting, 'msg': G.msg, 'error': G.err, 'match': G.match, 'verdict': getattr(G, 'verdict', None)})
         else: self.send(404, {'error': 'no'})
     def do_POST(self):
         n = int(self.headers.get('Content-Length') or 0); body = json.loads(self.rfile.read(n) or b'{}')

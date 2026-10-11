@@ -70,7 +70,7 @@ impl Human {
             PChoice::Pass => "pass".into(),
         }
     }
-    fn prompt(&mut self, b: &Battle, kind: &str, turn: usize, opts: &[[PChoice; 2]], value: Option<f64>) -> usize {
+    fn prompt(&mut self, b: &Battle, kind: &str, turn: usize, opts: &[[PChoice; 2]], value: Option<f64>, check: &mut dyn FnMut() -> Value) -> usize {
         let options: Vec<Value> = opts.iter().enumerate().map(|(i, c)| json!({"i": i, "slots": [Self::slot_label(b, 0, 0, &c[0]), Self::slot_label(b, 0, 1, &c[1])]})).collect();
         let log: Vec<&String> = b.log[self.log_pos.min(b.log.len())..].iter().collect(); self.log_pos = b.log.len();
         // value: side 0's win chance from the planner's solve of this turn (the server keeps it for "ask the planner to concede" and
@@ -81,12 +81,19 @@ impl Human {
         loop {
             line.clear();
             if std::io::stdin().lock().read_line(&mut line).unwrap_or(0) == 0 { std::process::exit(0); }
-            if let Ok(v) = serde_json::from_str::<Value>(&line) { if let Some(i) = v["choice"].as_u64() { if (i as usize) < opts.len() { return i as usize; } } }
+            if let Ok(v) = serde_json::from_str::<Value>(&line) {
+                if let Some(i) = v["choice"].as_u64() { if (i as usize) < opts.len() { return i as usize; } }
+                if v["check"].as_str() == Some("concede") {   // the verdict, then the same prompt again
+                    let verdict = check(); let so = std::io::stdout(); let mut h = so.lock(); writeln!(h, "{}", verdict).unwrap(); h.flush().unwrap();
+                    let again = json!({"type": kind, "turn": turn, "state": Self::state_json(b), "options": options, "log": [], "value": value});
+                    writeln!(h, "{}", again).unwrap(); h.flush().unwrap(); continue;
+                }
+            }
             eprintln!("play: bad reply {:?}", line.trim());
         }
     }
-    pub fn choose_turn(&mut self, b: &Battle, turn: usize, opts: &[[PChoice; 2]], value: f64) -> usize { self.prompt(b, "turn", turn, opts, Some(value)) }
-    pub fn choose_switch(&mut self, b: &Battle, turn: usize, opts: &[[PChoice; 2]]) -> usize { if opts.len() <= 1 { return 0; } self.prompt(b, "switch", turn, opts, None) }
+    pub fn choose_turn(&mut self, b: &Battle, turn: usize, opts: &[[PChoice; 2]], value: f64, check: &mut dyn FnMut() -> Value) -> usize { self.prompt(b, "turn", turn, opts, Some(value), check) }
+    pub fn choose_switch(&mut self, b: &Battle, turn: usize, opts: &[[PChoice; 2]]) -> usize { if opts.len() <= 1 { return 0; } let mut no = || json!({"type": "verdict", "n": 0}); self.prompt(b, "switch", turn, opts, None, &mut no) }
     pub fn end(&mut self, b: &Battle, turn: usize, v: f64) {
         let log: Vec<&String> = b.log[self.log_pos.min(b.log.len())..].iter().collect(); self.log_pos = b.log.len();
         let winner = match b.winner { Some(Some(0)) => "you", Some(Some(1)) => "the planner", Some(_) => "draw", None => "unfinished" };

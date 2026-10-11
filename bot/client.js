@@ -62,7 +62,7 @@ function mayPlay(reason) {
 let stoppedForTop = false;
 
 // ---- the connection
-let ws, me = null, searching = false, inGames = 0, pmReplied = new Set(), loginAt = 0, joinSent = new Set();
+let ws, me = null, searching = false, inGames = 0, pmReplied = new Set(), loginAt = 0, joinSent = new Set(), lastIdleLog = 0;
 const rooms = {};   // room id -> {lines, side, req, done, oppRating, turn}
 function send(s) { ws.send(s); }
 function connect() {
@@ -98,7 +98,10 @@ async function onMessage(m) {
       else if (p[1] === 'updatechallenges') { onChallenges(p[2]); }
       else if (p[1] === 'popup') { log('popup:', p.slice(2).join('|').slice(0, 200)); }
     } else {
+      if (p[1] === 'deinit' || p[1] === 'noinit') { delete rooms[room]; continue; }   // we left the room (or it is gone): forget it
+      if (!rooms[room] && !(room.startsWith('battle-') || room.startsWith('game-'))) continue;   // only battle and match rooms are tracked
       const R = rooms[room] || (rooms[room] = {lines: [], side: null, req: null, done: false, oppRating: null, turn: 0});
+      R.last = Date.now();
       if (p[1] === 'init') { R.lines = []; }
       R.lines.push(line);
       if (p[1] === 'c' && p.length > 3) noteChat(room, p[2].replace(/^[^A-Za-z0-9]/, '').trim(), p.slice(3).join('|'));
@@ -160,8 +163,13 @@ async function onReady() {
   for (;;) {
     await sleep(5000);
     if (DRY || CHALLENGE) continue;
-    const busy = inGames > 0 || Object.values(rooms).some(r => !r.done);
+    // busy: Showdown lists a game of ours, or a tracked room is unfinished and was active in the last 15 minutes (a room whose last
+    // line is older is stale: the bot would otherwise wait on it forever)
+    const open = Object.entries(rooms).filter(([k, r]) => !r.done && Date.now() - (r.last || 0) < 15 * 60e3);
+    const busy = inGames > 0 || open.length > 0;
     const why = mayPlay();
+    if (Date.now() - (lastIdleLog || 0) > 5 * 60e3 && !open.some(([k, r]) => r.req)) { lastIdleLog = Date.now();
+      if (busy || searching) log(`idle: ${searching ? 'searching' : ''}${inGames ? ` ${inGames} game(s) listed by the server` : ''}${open.length ? ` waiting on ${open.map(([k]) => k.slice(-16)).join(', ')}` : ''}`); }
     if (!busy && !searching && limits().search_ladder && !why) { await pickTeam(); await sleep(LOCAL ? 1000 : rnd(30e3, 120e3)); if (!searching && !mayPlay()) { send(`|/search ${FORMAT}`); searching = true; log('searching'); } }
     else if (why && !busy && !searching) { log('not searching:', why); await sleep(60e3); }
     await refreshTop();

@@ -89,7 +89,9 @@ async function onMessage(m) {
       if (p[1] === 'challstr') { await login(p.slice(2).join('|')); }
       else if (p[1] === 'updateuser') { const name = p[2].replace(/^[^A-Za-z0-9]/, '').trim(); if (p[3] === '1' && name.toLowerCase() === acct.name.toLowerCase()) { me = name; log('logged in as', me); send('|/cmd rooms'); onReady(); } }
       else if (p[1] === 'pm') { onPM(p[2], p[3], p.slice(4).join('|')); }
-      else if (p[1] === 'updatesearch') { try { const s = JSON.parse(p[2]); searching = (s.searching || []).length > 0; inGames = Object.keys(s.games || {}).length; } catch (e) {} }
+      else if (p[1] === 'updatesearch') { try { const s = JSON.parse(p[2]); searching = (s.searching || []).length > 0; inGames = Object.keys(s.games || {}).length;
+        for (const g of Object.keys(s.games || {})) if (!rooms[g] || !rooms[g].lines.length) { rooms[g] = rooms[g] || {lines: [], side: null, req: null, done: false, oppRating: null, turn: 0}; send(`|/join ${g}`); log('rejoining', g.slice(-16)); }   // after a reconnect
+      } catch (e) {} }
       else if (p[1] === 'updatechallenges') { onChallenges(p[2]); }
       else if (p[1] === 'popup') { log('popup:', p.slice(2).join('|').slice(0, 200)); }
     } else {
@@ -160,6 +162,11 @@ async function onReady() {
 }
 async function handleRequest(room, R) {
   const req = R.req; const L = limits();
+  if (!currentTeam && req.side) {   // after a restart mid-game: the team is the one whose species the request lists
+    if (!teams) teams = JSON.parse(fs.readFileSync(ARG('--teams') || path.join(HERE, 'teams.json')));
+    const sp = new Set(req.side.pokemon.map(x => x.details.split(',')[0].replace(/-Mega.*$/, '')));
+    currentTeam = teams.find(t => t.sets.every(x => sp.has(x.species) || sp.has(x.species.replace(/-Mega.*$/, '')))) || teams.find(t => t.sets.some(x => sp.has(x.species))) || teams[0];
+  }
   if (R.oppRating != null && R.oppRating >= topBand.elo && !stoppedForTop) { stoppedForTop = true; log(`opponent rated ${R.oppRating} is in the ladder's top band: this is the last game`); }
   const think = LOCAL ? 300 : req.teamPreview ? rnd(8e3, 20e3) : rnd(L.think_seconds[0] * 1e3, L.think_seconds[1] * 1e3);
   const t0 = Date.now();

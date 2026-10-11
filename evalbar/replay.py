@@ -136,6 +136,9 @@ def parse(log):
             m = mon(p[2]); tg = mon(p[4]) if len(p) > 4 and p[4] else None; last_user[0] = m
             if not m: continue
             pos = p[2][:3]; own = 'from' not in t or clean(t['from']) == 'lockedmove'
+            if own and 'from' in t and steps and tg is not None:                  # a charging move fires (Electro Shot, Solar Beam): its target
+                a0 = steps[-1]['acts'].get(pos)                                  # was chosen last turn, when the log showed none
+                if a0 and a0.get('move') == p[3] and not a0.get('target') and 'spread' not in t: a0['target'] = p[4][:3]
             if own:
                 if pos not in acts and active.get(pos) == start_active.get(pos):
                     tpos = p[4][:3] if tg is not None and 'spread' not in t else ''

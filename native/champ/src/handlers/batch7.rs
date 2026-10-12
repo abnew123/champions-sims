@@ -11,8 +11,10 @@ use crate::state::*;
 impl Battle {
     /// pokemon.transformInto(target, effect)
     pub fn transform_into(&mut self, m: MonRef, t: MonRef, effect: Option<&str>) -> bool {
-        // the engine does not model Illusion: a target with the ability counts as disguised (Showdown refuses pokemon.illusion)
-        if self.p(t).fainted || self.has_vol(t, "substitute") || self.p(t).transformed || self.p(m).transformed || self.p(t).ability == "illusion" { return false; }
+        // the engine does not model Illusion: a holder not hit since it came in counts as still disguised (Showdown refuses
+        // pokemon.illusion; a damaging hit ends it)
+        let disguised = self.p(t).ability == "illusion" && self.p(t).times_attacked == 0;
+        if self.p(t).fainted || self.has_vol(t, "substitute") || self.p(t).transformed || self.p(m).transformed || disguised { return false; }
         // Showdown's baseMoveSlots are the same objects as moveSlots until now (PP spent so far, Transform's own included, stays)
         { let p = self.pm(m); p.base_move_slots = p.move_slots.clone(); }
         let sp = self.p(t).species;

@@ -1153,3 +1153,44 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
   0.5301 with sym2 (**-0.0080 ± 0.0052**; h16: -0.0066), 3.6 vs 2.1 s a position; self-play on the 800 pool starts: side 0 +0.9 ± 2.2,
   side 1 +5.8 ± 2.2, **pooled +3.3 ± 1.5** over 1,600 games (the first evaluator change here with a self-play gain beyond 2 SE), 2.1x the
   time per game. Both nets helped side 1 more than side 0 (within noise so far).
+
+## Engine bug hunt: mid-battle differential tests and ports (2026-10-12 evening; the user, through the Eval bar: a systematic bug hunt)
+Split with the Eval bar: Battle sim runs engine-vs-Showdown differential tests and ports; the Eval bar audits handler coverage
+(evalbar/hook_audit.py: callbacks in the champions mod with no engine handler, ranked by sheet usage; counts loop and constant-valued
+registrations since its second version) and checks reachability of real logs in Showdown (evalbar/reach.py).
+- **What the old suites could not see.** `gen_turn_cases.js` starts every case right after team preview with random HP, boosts, Trick
+  Room or Tailwind; statuses, volatiles, hazards, used items, fainted allies, later-turn Fake Outs, low PP or sleep counters only arise
+  inside the one turn; sets come from the regional / model / focus pools; no attack is aimed at an ally; `diff` compares only durations.
+- **`native/gen_battle_cases.js`**: whole Showdown battles between the 8,377 distinct open team sheets of the cached Bo3 replays
+  (`native/real_teams.jsonl`, git-ignored; generic spreads by nature), random legal choices (an attack at the ally 8% of the time, the
+  Mega 70%, a switch 15%); every turn becomes a case: the state before it, the turn in lo / hi / mid / real RNG, each with the post-turn
+  state, log and next request; the battle continues from the real-RNG branch. About 110 KB a case (1,000 battles ~ 1.5 GB: write to the
+  scratchpad, delete after). `TRACE=<battle>:<turn>` prints that turn's Showdown log with the draw count per line, each draw's call stack
+  and the queue.
+- **`champ turn` additions**: `DIFF_FULL=1` compares every effect state's contents (volatiles, side and slot conditions, status, ability,
+  item, weather, terrain, pseudo-weathers), stats, types, move slots, item history, counters, the active Pokemon's disabled moves and
+  trapping as Showdown's request leaves them (locked moves trap; maybeTrapped only on the last active; hidden disables show as usable
+  there), and with `req` in the case the engine's request moves; `ORDER=1` the order of moves; `MAXEX` the example count;
+  `DRAWTRACE=1` (with LOG=1) ends each engine log line in its draw count and logs tie shuffles and handler lists. Comparing draw counts
+  between `DRAWTRACE` and `TRACE` finds where the random streams part.
+- **Engine bugs found and fixed** (each now exact): partial trapping trapped Ghosts (no tryTrap); Recharge read as target 'normal' and
+  skipped Showdown's random-target draw; Showdown's turn-start actions were missing (beforeTurnMove: Counter, Mirror Coat;
+  priorityChargeMove: Focus Punch, Beak Blast, Chilly Reception: their effects and their speed-sort draws); Mimikyu's bust damage ran
+  Disguise's onDamage twice (a tie with itself drew a shuffle); permanent forme changes logged -mega and set moveThisTurnResult for any
+  source and reset Disguise's state; a transformed Pokemon kept the copied moves after leaving the field (export_state.js now exports
+  baseMoveSlots for transformed Pokemon); 11 Mega Stones (Golurkite, Sharpedonite, Scolipite, ...) lacked the onTakeItem that keeps them
+  on their user (flagged unsupported, now data-driven in Dex::attach).
+- **Ports** (handlers/batch4.rs to batch6.rs, about 90 effects, each Showdown-exact on focused cases from real sheets or hand-built
+  carriers): No Retreat, Sweet Veil, Eelevate, Focus Energy, Dragon Cheer, Strong Jaw, Frisk, Analytic, Moxie, Beast Boost, Steadfast;
+  Reckless, Dragonize, Refrigerate, Skill Link, Iron Ball, Wise Glasses, Zoom Lens, Water Absorb, Earth Eater, Motor Drive, Overcoat,
+  Plus / Minus, Long Reach, Tangled Feet, Immunity, Anger Point, Berserk, Harvest, Flame / Toxic Orb, Gyro Ball, Synthesis / Moonlight
+  / Morning Sun, Strength Sap, Pain Split, Endeavor, Quash, High Jump Kick's crash, Worry Seed, Ceaseless Edge and Spikes; Steely
+  Spirit, Focus Band, Red Card, Leppa Berry, Metronome (item), Stored Power, Electro Ball, Avalanche, Burning Jealousy, Alluring Voice,
+  Trick-or-Treat, Forest's Curse, Raging Bull's type, Rapid Spin, Speed Swap, Power Trick, Minimize, Stockpile / Spit Up / Swallow,
+  Role Play, Smack Down, Octolock; Counter, Mirror Coat, Focus Punch, Beak Blast, Chilly Reception.
+- **Status**: 6,736 mid-battle cases (500 battles) and every earlier case file exact in all four RNG modes on the full diff; about 1%
+  of mid-battle turns still hit an unported effect (flagged, never silent). Left, by use: Imposter / Transform, Beat Up, Cute Charm
+  (needs genders), Bug Bite, Sleep Talk, Shed Tail, Instruct, Pickup, Cud Chew, Symbiosis, Liquid Ooze, Aroma Veil, Shell Bell,
+  Gluttony, the 'trapped' volatile with its trapper link (Block, Mean Look, Spirit Shackle, Anchor Shot, Jaw Lock), Unseen Fist.
+- Frozen for comparisons: `bin/champ-dev-2026-10-12d` (b26aa53; link `battlesim-champ-fc`). The live bot is unchanged (its frozen
+  `champ-bot-2026-10-12` has none of today's fixes); they go in only when the user approves.

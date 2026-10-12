@@ -104,9 +104,9 @@
     "vals": [
      [
       "Incineroar+Farigiraf",
-      0.7357878687704277,
-      0.6721047227779805,
-      0.6880255092760923,
+      0.736070973104175,
+      0.671642652068161,
+      0.6877497323271644,
       6
      ]
     ]
@@ -160,9 +160,9 @@
     "vals": [
      [
       "Incineroar+Farigiraf",
-      0.6761192075995033,
-      0.6162544298717066,
-      0.6312206243036558,
+      0.6767371712928524,
+      0.6160423498856031,
+      0.6312160552374154,
       6
      ]
     ]
@@ -244,9 +244,9 @@
     "vals": [
      [
       "Farigiraf+Blastoise",
-      0.599008116681973,
-      0.5115629931538546,
-      0.5334242740358841,
+      0.5990491551695353,
+      0.511707831032006,
+      0.5335431620663883,
       6
      ]
     ]
@@ -342,9 +342,9 @@
     "vals": [
      [
       "Incineroar+Farigiraf",
-      0.5740002019051261,
-      0.5321559743072845,
-      0.5426170312067449,
+      0.5741113245020973,
+      0.5305363531188076,
+      0.5414300959646301,
       4
      ]
     ]
@@ -356,9 +356,9 @@
     "vals": [
      [
       "Kingambit+Blastoise",
-      0.7076865417110403,
+      0.7076891824669419,
       0.5920942591802041,
-      0.6209923298129132,
+      0.6209929900018886,
       6
      ]
     ]
@@ -384,9 +384,9 @@
     "vals": [
      [
       "Incineroar+Farigiraf",
-      0.6435389005522164,
-      0.547340258798549,
-      0.5713899192369658,
+      0.6448501174908137,
+      0.5505402725813604,
+      0.5741177338087238,
       6
      ]
     ]
@@ -952,20 +952,20 @@
   },
   "Other Balance||Incineroar+Farigiraf||Garchomp + Volcarona": {
    "lines": null,
-   "pop": 0.7069486282031611,
-   "worst": 0.6494143351487497,
+   "pop": 0.7074328543686915,
+   "worst": 0.6474750481227391,
    "full": [
-    0.7071726676435812,
-    0.6501247508032633
+    0.7085076882043013,
+    0.6509239747533375
    ],
    "reader": [
     [
-     0.4949831529443951,
-     "Garchomp: Draco Meteor -> Incineroar | Volcarona: Heat Wave"
+     0.8650072802767966,
+     "Garchomp: Earth Power -> Incineroar | Volcarona: Heat Wave"
     ],
     [
-     0.4670943855122823,
-     "Garchomp: Earth Power -> Incineroar | Volcarona: Heat Wave"
+     0.13499271972320326,
+     "Garchomp: Protect | Volcarona: Heat Wave"
     ]
    ],
    "share": 0.0322,
@@ -996,11 +996,11 @@
    ],
    "reader": [
     [
-     0.5989426207098755,
+     0.5989426207098633,
      "Gholdengo: Protect | Milotic: Ice Beam -> Farigiraf"
     ],
     [
-     0.4010573792901249,
+     0.40105737929014246,
      "Gholdengo: Shadow Ball -> Blastoise | Milotic: Ice Beam -> Farigiraf"
     ]
    ],
@@ -1704,15 +1704,15 @@
    ],
    "reader": [
     [
-     0.4347494249655283,
+     0.4347494249655286,
      "Garchomp: Protect | Incineroar: Fake Out -> Blastoise"
     ],
     [
-     0.20637915150021224,
+     0.20637915150021185,
      "Garchomp: Draco Meteor -> Blastoise | Incineroar: Fake Out -> Kingambit"
     ],
     [
-     0.13864174460319356,
+     0.13864174460319448,
      "Garchomp: Draco Meteor -> Blastoise | Incineroar: Darkest Lariat -> Blastoise"
     ]
    ],
@@ -1812,19 +1812,15 @@
   },
   "Sun: Charizard + Whimsicott||Incineroar+Farigiraf||Charizard + Garchomp": {
    "lines": null,
-   "pop": 0.5802718139839939,
-   "worst": 0.5458518369088914,
+   "pop": 0.5807994047487443,
+   "worst": 0.5381621571792532,
    "full": [
-    0.5804253699967427,
-    0.5459049379055285
+    0.5803100206192675,
+    0.5424380507564711
    ],
    "reader": [
     [
-     0.6923573243842452,
-     "Charizard: Weather Ball -> Farigiraf | Garchomp: Earthquake"
-    ],
-    [
-     0.229782995310367,
+     0.9775274273955161,
      "Charizard: Heat Wave | Garchomp: Earthquake"
     ]
    ],
@@ -1837,11 +1833,11 @@
    "trCredit": 0.7129950285391675,
    "mix": [
     [
-     75,
+     70,
      "Incineroar: Fake Out -> Charizard | Farigiraf: Trick Room"
     ],
     [
-     25,
+     30,
      "Incineroar: Fake Out -> Garchomp | Farigiraf: Trick Room"
     ]
    ]
@@ -1964,20 +1960,20 @@
   },
   "Other Balance||Incineroar+Farigiraf||Garchomp + Sneasler": {
    "lines": null,
-   "pop": 0.7319639319724776,
-   "worst": 0.6666991500176407,
+   "pop": 0.7330915571577373,
+   "worst": 0.66578591468772,
    "full": [
-    0.732157239672275,
-    0.6683333785800514
+    0.7326484429479017,
+    0.6674869426535889
    ],
    "reader": [
     [
-     0.6473044605817275,
-     "Garchomp: Draco Meteor -> Incineroar | Sneasler: Close Combat -> Incineroar"
+     0.6634273658339319,
+     "Garchomp: Earth Power -> Incineroar | Sneasler: Close Combat -> Incineroar"
     ],
     [
-     0.3526955394182728,
-     "Garchomp: Earth Power -> Incineroar | Sneasler: switch"
+     0.336572634166064,
+     "Garchomp: Draco Meteor -> Incineroar | Sneasler: switch"
     ]
    ],
    "share": 0.0399,
@@ -1989,11 +1985,11 @@
    "trCredit": 1.4506866034317,
    "mix": [
     [
-     55,
+     50,
      "Incineroar: Fake Out -> Sneasler | Farigiraf: Trick Room"
     ],
     [
-     45,
+     50,
      "Incineroar: Fake Out -> Garchomp | Farigiraf: Trick Room"
     ]
    ]
@@ -2664,23 +2660,23 @@
   },
   "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler||Incineroar+Farigiraf||Armarouge + Indeedee-F": {
    "lines": null,
-   "pop": 0.6548553561721658,
-   "worst": 0.6259726175971034,
+   "pop": 0.6555133624925255,
+   "worst": 0.6292510711785104,
    "full": [
-    0.6514662818481842,
-    0.6299164093200872
+    0.653528342789883,
+    0.6310969325417111
    ],
    "reader": [
     [
-     0.3477952537877958,
-     "Armarouge: Armor Cannon -> Incineroar | Indeedee-F: Follow Me"
+     0.5220361782426941,
+     "Armarouge: Expanding Force -> Farigiraf | Indeedee-F: Follow Me"
     ],
     [
-     0.3357820047662367,
+     0.2326360100039676,
      "Armarouge: Armor Cannon -> Farigiraf | Indeedee-F: Helping Hand"
     ],
     [
-     0.2958738827544859,
+     0.2293048117631666,
      "Armarouge: switch | Indeedee-F: Trick Room"
     ]
    ],
@@ -3116,15 +3112,11 @@
    ],
    "reader": [
     [
-     0.46807950672839177,
+     0.4776183180439538,
      "Farigiraf: Protect | Golisopod: Leech Life -> Farigiraf"
     ],
     [
-     0.28354083532812535,
-     "Farigiraf: Psychic -> Blastoise | Golisopod: Drill Run -> Blastoise"
-    ],
-    [
-     0.24837965794348246,
+     0.43014720672363127,
      "Farigiraf: Protect | Golisopod: Leech Life -> Blastoise"
     ]
    ],
@@ -3148,15 +3140,15 @@
   },
   "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler||Incineroar+Farigiraf||Gardevoir + Kingambit": {
    "lines": null,
-   "pop": 0.6906870877227317,
+   "pop": 0.691286450963741,
    "worst": 0.5737933926546405,
    "full": [
-    0.6906870877227317,
+    0.691286450963741,
     0.5737933926546405
    ],
    "reader": [
     [
-     1.000000000000038,
+     0.999999999999962,
      "Gardevoir: Hyper Voice | Kingambit: Kowtow Cleave -> Farigiraf"
     ]
    ],
@@ -3896,11 +3888,11 @@
    ],
    "reader": [
     [
-     0.7976961196294039,
+     0.7976961196294023,
      "Garchomp: Dragon Pulse -> Blastoise | Volcarona: Overheat -> Kingambit"
     ],
     [
-     0.15867934197844025,
+     0.15867934197844472,
      "Garchomp: Earth Power -> Kingambit | Volcarona: Struggle Bug"
     ]
    ],
@@ -4048,19 +4040,19 @@
   },
   "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler||Incineroar+Farigiraf||Basculegion + Gardevoir": {
    "lines": null,
-   "pop": 0.49649064814028987,
-   "worst": 0.4892220901346239,
+   "pop": 0.492619219151436,
+   "worst": 0.49109595612977347,
    "full": [
-    0.49430073790488244,
-    0.4943007379048824
+    0.4945199865773878,
+    0.4945199865773878
    ],
    "reader": [
     [
-     0.5589716987935783,
+     0.5504347707624077,
      "Basculegion: Wave Crash -> Incineroar | Gardevoir: Hyper Voice"
     ],
     [
-     0.44102830120642167,
+     0.44956522923759235,
      "Basculegion: switch | Gardevoir: Hyper Voice"
     ]
    ],
@@ -4073,11 +4065,11 @@
    "trCredit": 0.7125814664718517,
    "mix": [
     [
-     65,
+     60,
      "Incineroar: Fake Out -> Gardevoir | Farigiraf: Trick Room"
     ],
     [
-     35,
+     40,
      "Incineroar: Flare Blitz -> Gardevoir | Farigiraf: Trick Room"
     ]
    ]
@@ -4304,7 +4296,7 @@
    ],
    "reader": [
     [
-     0.9648024297824633,
+     0.9626667022528528,
      "Archaludon: Snarl | Grimmsnarl: Light Screen"
     ]
    ],
@@ -4328,19 +4320,19 @@
   },
   "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler||Incineroar+Farigiraf||Gardevoir + Indeedee-F": {
    "lines": null,
-   "pop": 0.624210261085218,
-   "worst": 0.4878287542800327,
+   "pop": 0.6271606495286011,
+   "worst": 0.49323791108345766,
    "full": [
-    0.6161293247572895,
-    0.49343307787981994
+    0.619413614462857,
+    0.5024309498865482
    ],
    "reader": [
     [
-     0.6908503624098148,
+     0.7114874653333126,
      "Gardevoir: Hyper Voice | Indeedee-F: Follow Me"
     ],
     [
-     0.3091496375901852,
+     0.28851253466668736,
      "Gardevoir: Hyper Voice | Indeedee-F: Helping Hand"
     ]
    ],
@@ -4996,19 +4988,19 @@
   },
   "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler||Incineroar+Farigiraf||Gardevoir + Sneasler": {
    "lines": null,
-   "pop": 0.6948017991372377,
-   "worst": 0.5779361251939292,
+   "pop": 0.6959197451599103,
+   "worst": 0.5787608842517553,
    "full": [
-    0.6945833799471571,
-    0.5785379689370299
+    0.6954009683113023,
+    0.5801083216147881
    ],
    "reader": [
     [
-     0.6339561304171837,
+     0.6477205434771982,
      "Gardevoir: Hyper Voice | Sneasler: switch"
     ],
     [
-     0.3660438695828163,
+     0.3522794565228018,
      "Gardevoir: Hyper Voice | Sneasler: Rock Slide"
     ]
    ],
@@ -6464,23 +6456,23 @@
   },
   "Sun: Farigiraf + Garchomp + Incineroar + Sylveon||Kingambit+Blastoise||Garchomp + Sneasler": {
    "lines": null,
-   "pop": 0.5438261616708109,
+   "pop": 0.543845468191414,
    "worst": 0.45445185920918246,
    "full": [
-    0.5425935929217857,
-    0.46015009684153224
+    0.54262216346686,
+    0.46009511093701555
    ],
    "reader": [
     [
-     0.4629321149370499,
+     0.4607616037535371,
      "Garchomp: Draco Meteor -> Blastoise | Sneasler: Close Combat -> Blastoise"
     ],
     [
-     0.41483051643626284,
+     0.41395283248631803,
      "Garchomp: switch | Sneasler: Close Combat -> Kingambit"
     ],
     [
-     0.11450623037144306,
+     0.11534925873812936,
      "Garchomp: Draco Meteor -> Blastoise | Sneasler: Close Combat -> Kingambit"
     ]
    ],
@@ -6508,24 +6500,20 @@
   },
   "Other Snow||Incineroar+Farigiraf||Garchomp + Rillaboom": {
    "lines": null,
-   "pop": 0.7042406624840585,
-   "worst": 0.6631269462789244,
+   "pop": 0.70738255654294,
+   "worst": 0.6620486744394656,
    "full": [
-    0.7042489713855552,
-    0.6639555690104176
+    0.7081615894957691,
+    0.6625105792707429
    ],
    "reader": [
     [
-     0.48394330932654067,
-     "Garchomp: Protect | Rillaboom: High Horsepower -> Incineroar"
-    ],
-    [
-     0.3116733782662931,
-     "Garchomp: Earth Power -> Incineroar | Rillaboom: switch"
-    ],
-    [
-     0.20438331240716617,
+     0.7415268361514102,
      "Garchomp: Draco Meteor -> Incineroar | Rillaboom: High Horsepower -> Incineroar"
+    ],
+    [
+     0.25847316384858987,
+     "Garchomp: switch | Rillaboom: High Horsepower -> Incineroar"
     ]
    ],
    "share": 0.0356,
@@ -6537,11 +6525,11 @@
    "trCredit": 1.1447526953337674,
    "mix": [
     [
-     70,
+     75,
      "Incineroar: Fake Out -> Garchomp | Farigiraf: Trick Room"
     ],
     [
-     30,
+     25,
      "Incineroar: Fake Out -> Rillaboom | Farigiraf: Trick Room"
     ]
    ]
@@ -6804,19 +6792,23 @@
   },
   "Rain + Sun: Archaludon + Golisopod + Politoed||Farigiraf+Blastoise||Golisopod + Grimmsnarl": {
    "lines": null,
-   "pop": 0.5705306420621357,
-   "worst": 0.4945466283723767,
+   "pop": 0.5709051592996301,
+   "worst": 0.49586841884838706,
    "full": [
-    0.5662488742551725,
-    0.5020311330644984
+    0.569743766984057,
+    0.4975108216324594
    ],
    "reader": [
     [
-     0.8572919242541789,
+     0.5277693930413954,
+     "Golisopod: Drill Run -> Farigiraf | Grimmsnarl: Light Screen"
+    ],
+    [
+     0.30453071259731135,
      "Golisopod: Swords Dance | Grimmsnarl: Light Screen"
     ],
     [
-     0.1427080757458211,
+     0.16769989436129323,
      "Golisopod: Leech Life -> Farigiraf | Grimmsnarl: Light Screen"
     ]
    ],

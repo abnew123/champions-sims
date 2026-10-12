@@ -245,16 +245,54 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
     if adapt { let o = out.as_object_mut().unwrap(); o.insert("stages".into(), json!(stages)); o.insert("sims".into(), json!(cells.sims)); o.insert("cells_full".into(), json!(full)); }
     if h2 { let o = out.as_object_mut().unwrap(); o.insert("horizon".into(), json!(2)); o.insert("cells_h2".into(), json!(cells.acc2.len())); o.insert("sims_h2".into(), json!(cells.sims2)); }
     // the actual cell with the actual replacements (position field "actual_replace": {"0": [species...], "1": [...]}, the Eval bar's luck
-    // measure): the same seeds as the matrix cell, pending switches settled by resolve_switches_forced; the matrix itself is unchanged
-    if let (Some(ai), Some(aj), Some(ar)) = (act_i, act_j, sp.get("actual_replace").filter(|v| v.is_object())) {
+    // measure): the same seeds as the matrix cells, pending switches settled by resolve_switches_forced; the matrix itself is unchanged.
+    // A slot whose choice the log shows only in part ({none: fainted, by: priority}: not a switch, no move of higher priority; {none:
+    // cant}: not a switch; {move: k}: move slot k, any target; mega: true / false) is averaged over that side's mix restricted to the
+    // choices it allows (renormalised; uniform over them, at most 24, when the mix gives them nothing)
+    if let Some(ar) = sp.get("actual_replace").filter(|v| v.is_object()) {
         let lst = |k: &str| -> std::collections::VecDeque<String> { ar[k].as_array().map(|a| a.iter().filter_map(|x| x.as_str().map(|s| s.to_string())).collect()).unwrap_or_default() };
-        let (mut sum, mut nf) = (0.0, 0usize);
-        for c in 0..nseeds {
-            let mut xb = b.clone(); xb.prng = Prng::gen5(cells.cs[c]); xb.run_turn([msw[ai], tsw[aj]]);
-            let mut fq = [lst("0"), lst("1")]; nf += crate::spot::resolve_switches_forced(&mut xb, cfg, &mut fq);
-            sum += value(&mut xb, cfg);
+        let mut bb = b.clone();
+        let mut slot_ok = |s: u8, i: usize, c: &PChoice, a: &Value| -> bool {
+            if a.is_null() { return true; }
+            if let Some(m) = a.get("mega").and_then(|v| v.as_bool()) { if let PChoice::Move(_, _, mg) = c { if *mg != m { return false; } } }
+            if a.get("choice").map(|v| !v.is_null()).unwrap_or(false) { return parse_actual(&bb, s, a).map(|x| same(c, &x)).unwrap_or(true); }
+            if let Some(k) = a.get("move").and_then(|v| v.as_u64()) { return matches!(c, PChoice::Move(k2, _, _) if *k2 as u64 == k); }
+            match a.get("none").and_then(|v| v.as_str()) {
+                Some("cant") => !matches!(c, PChoice::Switch(_)),
+                Some("fainted") => match c {
+                    PChoice::Switch(_) => false,
+                    PChoice::Move(k, _, _) => {
+                        let Some(by) = a.get("by").and_then(|v| v.as_f64()) else { return true };
+                        let Some(pi) = bb.sides[s as usize].active[i] else { return true };
+                        let req = bb.request_moves((s, pi));
+                        req.get(*k).map(|(mid, _, _)| bb.dex.mv(mid).tmpl.priority <= by).unwrap_or(true)
+                    }
+                    _ => true },
+                _ => true,
+            }
+        };
+        let mut allowed = |s: u8, opts: &[[PChoice; 2]], w: &[f64], actual: &Value| -> Vec<(usize, f64)> {
+            let mut v: Vec<(usize, f64)> = (0..opts.len()).filter(|&k| (0..2).all(|i| slot_ok(s, i, &opts[k][i], &actual[i]))).map(|k| (k, w[k])).collect();
+            let tot: f64 = v.iter().map(|x| x.1).sum();
+            if tot > 1e-9 { v.retain(|x| x.1 / tot >= 1e-3); let t2: f64 = v.iter().map(|x| x.1).sum(); for x in v.iter_mut() { x.1 /= t2; } }
+            else { v.truncate(24); let n = v.len().max(1) as f64; for x in v.iter_mut() { x.1 = 1.0 / n; } }
+            v };
+        let a0 = allowed(0, &msw, &x, &sp["actual"]); let a1 = allowed(1, &tsw, &y, &sp["their_actual"]);
+        if !a0.is_empty() && !a1.is_empty() {
+            let (mut tot, mut nf, mut sims) = (0.0, 0usize, 0usize);
+            for &(i, wi) in &a0 { for &(j, wj) in &a1 {
+                let mut sum = 0.0;
+                for c in 0..nseeds {
+                    let mut xb = b.clone(); xb.prng = Prng::gen5(cells.cs[c]); xb.run_turn([msw[i], tsw[j]]);
+                    let mut fq = [lst("0"), lst("1")]; nf += crate::spot::resolve_switches_forced(&mut xb, cfg, &mut fq);
+                    sum += value(&mut xb, cfg); sims += 1;
+                }
+                tot += wi * wj * sum / nseeds as f64;
+            } }
+            let exact = a0.len() == 1 && a1.len() == 1;
+            out.as_object_mut().unwrap().insert("actual_cell".into(), json!({"v": tot, "n": nseeds, "forced": nf as f64 / sims.max(1) as f64,
+                "pairs": a0.len() * a1.len(), "exact": exact}));
         }
-        out.as_object_mut().unwrap().insert("actual_cell".into(), json!({"v": sum / nseeds as f64, "n": nseeds, "forced": nf as f64 / nseeds as f64}));
     }
     if matrix_mode.is_some() {
         let jc = |s: u8, c: &[PChoice; 2]| json!([choice_json(&b, s, &c[0]), choice_json(&b, s, &c[1])]);

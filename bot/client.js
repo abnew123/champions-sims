@@ -152,7 +152,7 @@ async function onMessage(m) {
       // a rejected choice: Showdown re-sends a request when the rejection taught it something (a trap revealed: [Unavailable choice]),
       // and the bot answers that; otherwise it falls back to Showdown's default choice at once instead of letting the turn timer run
       if (p[1] === 'error' && /\[(Invalid|Unavailable) choice\]/.test(line) && R.req && !R.req.wait) {
-        const rq = R.req; setTimeout(() => { if (R.req === rq && !R.done) { send(`${room}|/choose default|${rq.rqid}`); log(room.slice(-12), `T${R.turn}`, 'choice rejected, sent default'); } }, 1500); }
+        const rq = R.req; setTimeout(() => { if (R.req === rq && !R.done) { send(`${room}|/choose default|${rq.rqid}`); R.lines.push(`|bot-choice|${rq.rqid}|default`); log(room.slice(-12), `T${R.turn}`, 'choice rejected, sent default'); } }, 1500); }
       if ((p[1] === 'request' || p[1] === 'turn') && room.startsWith('battle-')) {   // the room log as the game goes (the Eval bar follows it live)
         try { fs.writeFileSync(path.join(OUT, room + '.log'), R.lines.join('\n') + '\n'); } catch (e) {} }
       if (p[1] === 'raw' && me && line.includes(me) && line.includes('rating:')) { const mm = /rating: (\d+)[^0-9]+(\d+)/.exec(line); if (mm) myRating = +mm[2]; }
@@ -280,12 +280,15 @@ async function handleRequest(room, R) {
   if (ans.error) { log('brain error', room, ans.error); return; }
   if (ans.forfeit) {   // a lost game: say gg and forfeit this game (in a best-of-3 only this game; the match goes on)
     await sleep(LOCAL ? 300 : rnd(3e3, 6e3)); if (R.req !== req || R.done) return;
-    send(`${room}|gg`); await sleep(1500); send(`${room}|/forfeit`); log(room.slice(-12), `T${R.turn}`, ans.note); return;
+    send(`${room}|gg`); await sleep(1500); send(`${room}|/forfeit`); R.lines.push(`|bot-choice|${req.rqid}|forfeit`); log(room.slice(-12), `T${R.turn}`, ans.note); return;
   }
   const wait = Math.max(0, think - (Date.now() - t0)); await sleep(wait);
   if (R.req !== req) return;   // superseded
   const cmd = req.teamPreview ? `/team ${ans.order.join('')}` : `/choose ${ans.choice}`;
   send(`${room}|${cmd}|${req.rqid}`); log(room.slice(-12), `T${R.turn}`, cmd, ans.note || '');
+  // the bot's own choice in its room log (the Eval bar, 2026-10-12: a choice the battle never shows, e.g. a Pokemon that fainted before
+  // acting, still tells the Speed order): |bot-choice|<rqid>|<choose string, or team 1234, or forfeit>
+  R.lines.push(`|bot-choice|${req.rqid}|${cmd.replace(/^\//, '').replace(/^choose /, '')}`);
 }
 function onEnd(room, R, winner) {
   if (R.done) return; R.done = true;

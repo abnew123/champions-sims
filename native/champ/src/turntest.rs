@@ -254,7 +254,7 @@ pub fn main(args: &[String]) {
         let ch = [parse_choice(c["choices"][0].as_str().unwrap()), parse_choice(c["choices"][1].as_str().unwrap())];
         for mode in &modes {
             let Some(exp) = c.get(*mode) else { continue };
-            let m = match *mode { "lo" => Mode::Lo, "hi" => Mode::Hi, "mid" => Mode::Mid, _ => Mode::Real };
+            let m = match *mode { "lo" => Mode::Lo, "hi" => Mode::Hi, "mid" => Mode::Mid, q if q.starts_with('q') => Mode::Frac(q[1..].parse().unwrap()), _ => Mode::Real };
             let mut b = new_battle(dex, reg, &c["pre"], m);
             if order { b.logging = true; }
             let sw: Vec<(usize, String)> = exp.get("switches").and_then(|x| x.as_array()).map(|a| a.iter().map(|e| (e[0].as_u64().unwrap() as usize, e[1].as_str().unwrap().to_string())).collect()).unwrap_or_default();

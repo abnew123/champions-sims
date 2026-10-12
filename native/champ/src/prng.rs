@@ -2,7 +2,7 @@
 //! native/gen_turn_cases.js: "lo" (every draw its lowest value), "hi" (highest), "mid" (middle).
 
 #[derive(Clone, Copy, Debug, PartialEq)]
-pub enum Mode { Real, Lo, Hi, Mid }
+pub enum Mode { Real, Lo, Hi, Mid, Frac(u16) }   // Frac(q): every draw is the fraction q/1000 ("q350"): separates chances lo/hi/mid cannot (3/10 vs 1/2)
 
 #[derive(Clone, Debug)]
 pub struct Prng { pub mode: Mode, pub seed: u64, pub draws: u64 }
@@ -21,13 +21,14 @@ impl Prng {
     }
     /// random() in [0, 1)
     pub fn frac(&mut self) -> f64 {
-        match self.mode { Mode::Real => self.next() as f64 / 4294967296.0, Mode::Lo => { self.draws += 1; 0.0 } Mode::Hi => { self.draws += 1; 0.999999 } Mode::Mid => { self.draws += 1; 0.5 } }
+        match self.mode { Mode::Real => self.next() as f64 / 4294967296.0, Mode::Lo => { self.draws += 1; 0.0 } Mode::Hi => { self.draws += 1; 0.999999 } Mode::Mid => { self.draws += 1; 0.5 } Mode::Frac(q) => { self.draws += 1; q as f64 / 1000.0 } }
     }
     /// random(n): integer in [0, n)
     pub fn below(&mut self, n: i64) -> i64 {
         match self.mode {
             Mode::Real => ((self.next() * n as u64) >> 32) as i64,
             Mode::Lo => { self.draws += 1; 0 } Mode::Hi => { self.draws += 1; n - 1 } Mode::Mid => { self.draws += 1; n / 2 }
+            Mode::Frac(q) => { self.draws += 1; (q as f64 / 1000.0 * n as f64).floor() as i64 }
         }
     }
     /// random(from, to): integer in [from, to)
@@ -35,6 +36,7 @@ impl Prng {
         match self.mode {
             Mode::Real => ((self.next() * (to - from) as u64) >> 32) as i64 + from,
             Mode::Lo => { self.draws += 1; from } Mode::Hi => { self.draws += 1; to - 1 } Mode::Mid => { self.draws += 1; from + (to - from) / 2 }
+            Mode::Frac(q) => { self.draws += 1; from + (q as f64 / 1000.0 * (to - from) as f64).floor() as i64 }
         }
     }
     pub fn chance(&mut self, num: i64, den: i64) -> bool { self.below(den) < num }

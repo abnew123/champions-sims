@@ -299,19 +299,21 @@ def damage_observations(log, known_side, mid_weather=False):
 def shown(h, M):
     """the percent Showdown shows for h of M HP"""
     return 100 if h >= M else min(99, max(1, math.ceil(100 * h / M)))
-def damage_fits(ob, r):
-    """does the hit fit Showdown's range r {lo, hi, maxhp} for this candidate?"""
+def damage_fits(ob, r, slack=1):
+    """does the hit fit Showdown's range r {lo, hi, maxhp} for this candidate? slack: HP either way (1 for the frozen bot's reading; the
+    eval bar's strict one has none: on 806 hits in simulated battles with known spreads every hit landed inside the range or missed by more)"""
     if not r or r.get('error') or r.get('lo') is None: return True                # the calculation could not be made: no evidence
-    lo, hi, M = r['lo'], r['hi'], r['maxhp']
+    lo, hi, M = r['lo'] + 1 - slack, r['hi'] - 1 + slack, r['maxhp']
     if 'd' in ob: return hi >= ob['d'] - 1 if ob['atleast'] else lo - 1 <= ob['d'] <= hi + 1
     p0, p1 = ob['pct']; H0 = [h for h in range(1, M + 1) if shown(h, M) == p0]; H1 = [0] if p1 == 0 else [h for h in range(1, M + 1) if shown(h, M) == p1]
     if not H0 or not H1: return True
     if ob['atleast']: return hi >= min(H0) - 1
     return lo - 1 <= max(H0) - min(H1) and min(H0) - max(H1) <= hi + 1
 _DCACHE = {}
-def damage_ranges(gp, sets, known_side, known_evs, dobs, cands):
+def damage_ranges(gp, sets, known_side, known_evs, dobs, cands, strict=False):
     """{(obs index, species, evs): Showdown's range} for each damage observation and each candidate spread of the other side's Pokemon
-    in it, through damage.js (cached: a hit and a spread are worked out once)"""
+    in it, through damage.js (cached: a hit and a spread are worked out once). strict: damage.js's exact reading (a percent stands for each HP
+    it could be, screens broken first by Psychic Fangs and the like)"""
     import live as LV, procs as P, subprocess, tempfile, hashlib
     steps = {x['turn']: x['state'] for x in gp['steps'] if x['state']}; other = 'p2' if known_side == 'p1' else 'p1'
     want = []; res = {}
@@ -329,7 +331,7 @@ def damage_ranges(gp, sets, known_side, known_evs, dobs, cands):
         mf = mega_of(am['sp'], aset.get('item', '')) if (am['mega'] or ob['att'] in ob['megas']) else None
         if aset.get('ability') in ORDER_ABILITIES or (mf and (E['species'].get(toid(mf), {}).get('abilities') or {}).get('0') in ORDER_ABILITIES): continue
         for evs in cands[um['sp']]:
-            key = (hashlib.md5(json.dumps([ob, um['sp'], [[m['sp'], m['hp'], m['b'], m['st'], m['gone']] for sd in ('p1', 'p2') for m in order[sd]], st['field']], sort_keys=True).encode()).hexdigest(), tuple(evs))
+            key = (hashlib.md5(json.dumps([strict, ob, um['sp'], [[m['sp'], m['hp'], m['b'], m['st'], m['gone']] for sd in ('p1', 'p2') for m in order[sd]], st['field']], sort_keys=True).encode()).hexdigest(), tuple(evs))
             if key in _DCACHE: res[(oi, um['sp'], tuple(evs))] = _DCACHE[key]; continue
             sides = []
             for sd in ('p1', 'p2'):
@@ -353,7 +355,8 @@ def damage_ranges(gp, sets, known_side, known_evs, dobs, cands):
                     'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None, 'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}
             if ob.get('weather'): spec['field']['weather'] = [SD_WEATHER[ob['weather']], 5] if SD_WEATHER[ob['weather']] else None   # as it landed
             want.append((key, (oi, um['sp'], tuple(evs)), {'spec': spec, 'att': [0 if ob['att'][:2] == 'p1' else 1, ia], 'def': [0 if ob['def'][:2] == 'p1' else 1, idf],
-                                                          'move': ob['move'], 'crit': ob['crit'], 'spread': ob['spread'], 'helping': ob['helping'], 'hp': ob['hp']}))
+                                                          'move': ob['move'], 'crit': ob['crit'], 'spread': ob['spread'], 'helping': ob['helping'], 'hp': ob['hp'],
+                                                          **({'strict': True} if strict else {})}))
     if want:
         with tempfile.TemporaryDirectory() as d:
             qf, of = os.path.join(d, 'q.json'), os.path.join(d, 'r.json'); json.dump([w[2] for w in want], open(qf, 'w'))
@@ -361,7 +364,7 @@ def damage_ranges(gp, sets, known_side, known_evs, dobs, cands):
             got = json.load(open(of)) if r.returncode == 0 and os.path.exists(of) else [None] * len(want)
         for (key, k2, _), g_ in zip(want, got): _DCACHE[key] = g_; res[k2] = g_
     return res
-def refine(log, gp, sets, known_side, known_evs, mid_weather=False):
+def refine(log, gp, sets, known_side, known_evs, strict=False):
     """the other side's spreads in sets picked against the turn order the log shows; known_evs {species id: (evs, nature)} for the known
     side's Pokemon (a bot's own). Returns {species: why}"""
     def ks(species, forme):
@@ -369,13 +372,13 @@ def refine(log, gp, sets, known_side, known_evs, mid_weather=False):
         return raw_speed(forme, *k) if k else None
     obs = observations(log, known_side, ks, gp['sheets'])
     other = 'p2' if known_side == 'p1' else 'p1'; why = {}
-    dobs = damage_observations(log, known_side, mid_weather)
+    dobs = damage_observations(log, known_side, strict)                         # strict: the eval bar's (the frozen bot's is the older reading)
     cands = {sp: [list(e) for _, e in ranked(sp, st['nature'], st['item'])] + [list(st['evs'])] for sp, st in sets[other].items() if st}
-    R_ = damage_ranges(gp, sets, known_side, known_evs, dobs, cands) if dobs else {}
+    R_ = damage_ranges(gp, sets, known_side, known_evs, dobs, cands, strict) if dobs else {}
     for sp, st in sets[other].items():
         if not st: continue
         mine = [(oi, ob) for oi, ob in enumerate(dobs) if any(k[0] == oi and k[1] == sp for k in R_)]
-        misses = lambda evs, sp=sp, mine=mine: sum(not damage_fits(ob, R_.get((oi, sp, tuple(evs)))) for oi, ob in mine)
+        misses = lambda evs, sp=sp, mine=mine: sum(not damage_fits(ob, R_.get((oi, sp, tuple(evs))), 0 if strict else 1) for oi, ob in mine)
         evs, why[sp] = pick(sp, st['nature'], st['item'], st['evs'], obs, misses if mine else None, len(mine))
         sets[other][sp] = {**st, 'evs': evs}
     return why

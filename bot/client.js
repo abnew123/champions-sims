@@ -178,7 +178,7 @@ function onChallenges(json) {
   for (const [user, fmt] of Object.entries(c.challengesFrom || {})) {
     const L = limits(); const why = mayPlay();
     if (!L.accept_challenges || fmt !== FORMAT || why || (DRY && !LOCAL)) { send(`|/reject ${user}`); log('rejected challenge', fmt, why || ''); continue; }
-    pickTeam().then(t => { if (!t) { send(`|/reject ${user}`); return; } send(`|/accept ${user}`); log('accepted a challenge'); });
+    pickTeam().then(t => { if (!t) { send(`|/reject ${user}`); return; } searchWithTeam(`|/accept ${user}`); log('accepted a challenge'); });
   }
 }
 let teams = null, teamIdx = 0;
@@ -209,20 +209,28 @@ async function pickTeam() {
     const L = limits(); if (!L.paused) { L.paused = true; fs.writeFileSync(path.join(HERE, 'limits.json'), JSON.stringify(L, null, 2)); log('experiment complete: paused'); }
     return null;
   }
-  if (ex) { const packed = (await ask({type: 'pack', sets: ex.sets})).packed; send(`|/utm ${packed}`); currentTeam = ex; log(`team for this match: ${ex.name} (${ex.arm})`); return ex; }
+  if (ex) { pendingPacked = (await ask({type: 'pack', sets: ex.sets})).packed; currentTeam = ex; log(`team for this match: ${ex.name} (${ex.arm})`); return ex; }
   if (!teams) teams = JSON.parse(fs.readFileSync(ARG('--teams') || path.join(HERE, 'teams.json')));   // --teams <file>: another team list (local tests)
   // which six this match: drawn by the teams' weights (bot/teams.json "weight"), re-read each time so weights can change live
   teams = JSON.parse(fs.readFileSync(ARG('--teams') || path.join(HERE, 'teams.json')));
   const tw = teams.map(x => x.weight == null ? 1 : x.weight); let r = Math.random() * tw.reduce((a, b) => a + b, 0), k = 0;
   while (k < teams.length - 1 && (r -= tw[k]) > 0) k++;
   const t = teams[k]; teamIdx++;
-  const packed = (await ask({type: 'pack', sets: t.sets})).packed;
-  send(`|/utm ${packed}`); currentTeam = t; return t;
+  pendingPacked = (await ask({type: 'pack', sets: t.sets})).packed; currentTeam = t; return t;
 }
-let currentTeam = null;
+let currentTeam = null, pendingPacked = null;
+// the team belongs to the account, not to the connection (2026-10-12: the Bo3 client's /utm became the Bo1 client's team), and Showdown
+// takes it when the search starts: so the team is sent right before the search, under a lock file the other client respects
+async function searchWithTeam(cmd) {
+  const lf = path.join(OUT, 'search.lock');
+  for (let i = 0; i < 30; i++) { let t = 0; try { t = +fs.readFileSync(lf, 'utf8'); } catch (e) {} if (Date.now() - t > 8000) break; await sleep(1000); }
+  try { fs.writeFileSync(lf, String(Date.now())); } catch (e) {}
+  if (pendingPacked) send(`|/utm ${pendingPacked}`);
+  await sleep(1500); send(cmd);
+}
 async function onReady() {
   await refreshTop(); await refreshMyRating();
-  if (CHALLENGE) { await pickTeam(); await sleep(3000); send(`|/challenge ${CHALLENGE}, ${FORMAT}`); log('challenged', CHALLENGE); }
+  if (CHALLENGE) { await pickTeam(); await sleep(3000); await searchWithTeam(`|/challenge ${CHALLENGE}, ${FORMAT}`); log('challenged', CHALLENGE); }
   for (;;) {
     await sleep(5000);
     if (DRY || CHALLENGE) continue;
@@ -238,14 +246,16 @@ async function onReady() {
     // matched at their wider window). The loop searches again after its usual pause.
     const maxs = limits().max_search_seconds;
     if (searching && !busy && maxs && searchStart && Date.now() - searchStart > maxs * 1e3) { send(`|/cancelsearch ${FORMAT}`); searchStart = 0; searching = false; log(`search cancelled after ${maxs} s`); await sleep(3000); continue; }
-    if (!busy && !searching && limits().search_ladder && !why) { const t = await pickTeam(); if (!t) continue; await sleep(LOCAL ? 1000 : rnd(30e3, 120e3)); if (!searching && !mayPlay()) { send(`|/search ${FORMAT}`); searching = true; searchStart = Date.now(); log('searching'); } }
+    if (!busy && !searching && limits().search_ladder && !why) { const t = await pickTeam(); if (!t) continue; await sleep(LOCAL ? 1000 : rnd(30e3, 120e3)); if (!searching && !mayPlay()) { await searchWithTeam(`|/search ${FORMAT}`); searching = true; searchStart = Date.now(); log('searching'); } }
     else if (why && !busy && !searching) { log('not searching:', why); await sleep(60e3); }
     await refreshTop();
   }
 }
 async function handleRequest(room, R) {
   const req = R.req; const L = limits();
-  if (!currentTeam && req.side) {   // after a restart mid-game: the team is the one whose species the request lists
+  const reqSp = req.side ? [...new Set(req.side.pokemon.map(x => x.details.split(',')[0].replace(/-Mega.*$/, '')))] : [];
+  const holds = t => t && reqSp.every(s => t.sets.some(x => x.species === s || x.species.replace(/-Mega.*$/, '') === s));
+  if (req.side && !holds(currentTeam)) {   // after a restart mid-game, or a request showing another six: the team whose species it lists
     if (!teams) teams = JSON.parse(fs.readFileSync(ARG('--teams') || path.join(HERE, 'teams.json')));
     const sp = [...new Set(req.side.pokemon.map(x => x.details.split(',')[0].replace(/-Mega.*$/, '')))];
     const covers = t => sp.filter(s => t.sets.some(x => x.species === s || x.species.replace(/-Mega.*$/, '') === s)).length;

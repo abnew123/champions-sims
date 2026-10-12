@@ -70,3 +70,27 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
    switches in 37% of its mix planned on the guess and 36% on the truth; decisions with 20%+ switching lose a little more (1.3 vs 0.9).
    Fix to measure after the climb: plan against the top three back rows (the eval bar's live mode already averages over three), e.g.
    the bot's mix as the hypotheses' mixes weighted by their odds, at three times the engine time per turn.
+
+## Where the strength gap is (2026-10-12, the user: even with every issue above fixed the bot would not be near the top players)
+- **The bot's estimates hold because two errors cancel** (`bot/ladder_lines.py`, 441 decisions with both plays known). Against the bot's
+  equilibrium mix, the opponents' plays should add +4.1 points a decision (the planner's charge for their departures) and the bot's own
+  play cost 0.4; what happened was +0.9. When the opponent plays inside the planner's mix the bot still slides -2.1 a decision (most
+  with regional teams, about -5; least with the Trick Room six), later in games and in lost positions most; the bot's own top plays do
+  about 2 points worse than rated while humans' agreed plays do about 2 better: choosing by the value picks the options it overrates.
+  When the opponent plays a line under 5% the bot gains +4.4 (predicted +7.3): attacks the planner dislikes are real mistakes (+7.6 for
+  the bot, charged 5.5), Protect (+1.9, charged 9.8) and setup (+1.9, charged 8.4, n 14) are not. pssim/human_lines.py's 12,272 cached
+  decisions agree (Protect net +4.9, setup +3.5, support lines +15-20). So the leak is the value, not bugs or depth.
+- **Two-turn horizon, fuller version** (2026-10-12, current build, BATTLE_HORIZON=2 with 2 seeds, 8x8 cells, 3 hits, margin 0.1; 400
+  starts per side vs 800 baseline): side 0 -2.9 ± 3.1, side 1 +6.5 ± 2.9, pooled **+1.8 ± 2.1**, 2-2.7x the time. Flat, like the
+  4,800-game run of 2026-10-07 (+0.2 ± 0.9). Depth with the same leaf value inherits its errors.
+- **Best-of-3 memory** (`bot/bo3_carry.py`): on 3,262 cached matches a player brings the same four next game 47% of the time (three of
+  four 84%), the same leads 39%; the back row at the next game's turn 1 is guessed right 45% by the population rates, 58% using the
+  previous game's four. Game 1 reads 15% of opposing spreads off the start-of-game guess (10% in Speed, by 13 at the median). Worth
+  perhaps 1-2 points per later game.
+- **Answering how humans actually choose** (`bot/exploit_test.py`): a model fitted on the cached decisions (60% softmax of the planner's
+  option values at temperature 0.16, 40% the planner's mix tilted by kind: Protect 1.6x, setup 2.2x, redirection 2x) predicts humans
+  far better than the planner's mix (log score -1.64 vs -2.20). On 470 of the bot's decisions (full matrices, exact equilibria, scored
+  against the opponents' actual plays): the best answer to the model gains **+0.78 ± 0.49 points a decision** (about +5 a game) at a
+  price of 0.52 against a perfect opponent; half and half gains +0.39 at 0.26. A perfect read is worth +9.8 a decision, so a sharper
+  model of human play (by situation, by turn, by what the player did earlier in the match) has room. Valued by the planner's own
+  matrix, so it inherits the value's errors.

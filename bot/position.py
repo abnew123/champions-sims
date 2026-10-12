@@ -7,12 +7,13 @@
 import os, sys, json, random, re, tempfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); EB = os.path.join(ROOT, 'evalbar')
 sys.path.insert(0, EB); sys.path.insert(0, os.path.join(ROOT, 'pssim'))
-# the bot's engine (2026-10-12, the user: go with the search-trained learned value): a frozen copy of the dev build (the learned value's
-# support and the race memo fix; bin/champ-bot-2026-10-12, sha256 beside it), scoring every leaf with the h64 net distilled from the one-turn
-# search on 130,759 real positions (bot/value/vnet_h64_search.json: held-out search -0.008 log loss, self-play +3.3 ± 1.5 over 1,600 games);
-# the net's inputs need RACE_PRIO and FEATS22. The damage calc data stays champions_data.json, which the net was fitted with.
+# the bot's engine (2026-10-12, the user: go with the search-trained learned value; evening: "put all the changes in"): a frozen copy of
+# the dev build with the day's Showdown-exact fixes and ports (bin/champ-bot-2026-10-12b, sha256 beside it; the morning's was -12),
+# scoring every leaf with the h64 net distilled from the one-turn search, refitted on the full damage-calc data
+# (bot/value/vnet_h64_search_fc.json: held-out search tied with the first net, self-play +4.9 ± 1.5 against the static value over 1,600
+# games); the net's inputs need RACE_PRIO and FEATS22, and CALC_DATA must be champions_data_full.json, which it was fitted with.
 os.environ.setdefault('CHAMP_BIN', os.path.join(ROOT, 'native', 'champ', 'bin', 'battlesim-champ-bot'))
-os.environ.setdefault('EG_VNET', os.path.join(ROOT, 'bot', 'value', 'vnet_h64_search.json'))
+os.environ.setdefault('EG_VNET', os.path.join(ROOT, 'bot', 'value', 'vnet_h64_search_fc.json'))
 os.environ.setdefault('RACE_PRIO', '1'); os.environ.setdefault('FEATS22', '1')
 os.environ.setdefault('CHAMP_DATA', 'engine_data_full.json')
 os.environ.setdefault('EG_MEGA_TIE', '0')
@@ -58,7 +59,7 @@ def run_eval(posf, outf, threads=2, seeds=32):
     import subprocess
     grid = os.path.join(EB, 'out', 'emptygrid'); os.makedirs(grid, exist_ok=True)
     env = {**os.environ, 'RACE_TIES': 'avg', 'EVAL_SEEDS': str(seeds), 'EVAL_ADAPT': '1', 'EG_VALUE': os.environ.get('EG_VALUE', 'egvalue9_sym2.json'), 'RACE': '1', 'TRSYM': '1',
-           'CALC_DATA': '../native/champions_data.json', 'GRID_DIR': grid}
+           'CALC_DATA': '../native/champions_data_full.json', 'GRID_DIR': grid}
     subprocess.run([os.environ['CHAMP_BIN'], 'evalpos', '../native/' + os.environ['CHAMP_DATA'], os.path.abspath(posf), os.path.abspath(outf), str(threads)],
                    cwd=os.path.join(ROOT, 'pssim'), env=env, check=True)
 def decide(specs, request, side, threads=2, seeds=32, log=None, cap=None):
@@ -139,7 +140,7 @@ def static_values(specs, tag):
     LV.positions(specs, posf)
     if os.path.exists(outf): os.remove(outf)
     grid = os.path.join(EB, 'out', 'emptygrid'); os.makedirs(grid, exist_ok=True)
-    env = dict(os.environ, RACE_TIES='avg', EG_VALUE=os.environ.get('EG_VALUE', 'egvalue9_sym2.json'), RACE='1', TRSYM='1', CALC_DATA='../native/champions_data.json', GRID_DIR=grid)
+    env = dict(os.environ, RACE_TIES='avg', EG_VALUE=os.environ.get('EG_VALUE', 'egvalue9_sym2.json'), RACE='1', TRSYM='1', CALC_DATA='../native/champions_data_full.json', GRID_DIR=grid)
     import subprocess
     subprocess.run([os.environ['CHAMP_BIN'], 'feats', '../native/' + os.environ['CHAMP_DATA'], posf, outf, '1'], cwd=os.path.join(ROOT, 'pssim'), env=env, check=True, capture_output=True)
     return {r['name']: r['static'] for r in map(json.loads, open(outf)) if 'error' not in r}

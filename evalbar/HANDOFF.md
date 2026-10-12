@@ -342,9 +342,14 @@ flinches in a row). Two were mostly the model:
 - Perish Song's count was never in the positions (Game 24, turns 5 to 7).
 - Hidden spreads: Game 24's Charizard survived a Sucker Punch on 1% that the guessed spread (Smogon's most used) could not; one or two
   points of HP more fit. Luck now uses hindsight (Live.at(..., hindsight=True), names with ' L'): each player's Pokemon and the opponent's
-  spreads as the whole game showed them, so luck counts the dice. damage_fits allows 1 HP either way, so that hit still reads as a fit.
-- spreads.damage_observations(mid_weather=True) keeps hits after a mid-turn weather change (a weather setter switching in, a Mega
-  Charizard Y), in the weather they landed in. Live.at uses it; the bot's refine_opponent call does not yet.
+  spreads as the whole game showed them, so luck counts the dice. Neither listed Charizard spread fits that hit exactly, so the pick
+  falls back to the closest (still the frail one): a search of nearby spreads (points moved into HP or defences) would settle it.
+- Damage checks are exact now (`strict`, the user asked why there was 1 HP of slack: there was no reason). spreads.refine(strict=True)
+  keeps hits after a mid-turn weather change (a weather setter switching in, a Mega Charizard Y) in the weather they landed in, and
+  damage.js with `strict`: a shown percent stands for every HP it could be (Water Spout's power), Psychic Fangs / Brick Break / Raging
+  Bull break screens first, the move counts as in use (Aqua Jet, Flip Turn, Wave Crash errored). damage_fits(slack=0). Checked on 40
+  random battles between the bot's teams with known spreads (scratch sim.js + check.py): all 806 hits inside the range, none off by 1.
+  Live.at passes strict=True; the bot's refine_opponent call does not yet (frozen).
 
 ## Louisville day 1 (2026-10-10)
 

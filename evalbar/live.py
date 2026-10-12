@@ -425,6 +425,8 @@ class Live:
             with LUCK: EN.run(posf, s.lf, 1, 32, 1, extra={'EVAL_MATRIX': '1', 'CHAMP_BIN': LUCK_BIN}, nice=19)
             s.dirty = True
         s.luck_state = 'done'; s.dirty = True
+        if s.tag.startswith('bot_'):                                        # the bot page's progress card: one line per game whose luck is done
+            with open(os.path.join(OUT, 'bot_luck.games'), 'a') as fh: fh.write(s.tag + '\n')
     def evaluate(s, log, g, step):
         sp, H = s.at(log, step['turn'])
         if not sp:
@@ -507,6 +509,11 @@ class BotRunner:
         threading.Thread(target=http.server.ThreadingHTTPServer(('127.0.0.1', s.port), H).serve_forever, daemon=True).start()
     def run(s):
         s.serve(); print(f"the bot's games: http://localhost:{s.port}", flush=True)
+        # a progress card on the shared status page (status.py): the bot's games whose luck is worked out, of all its ladder games
+        prog = os.path.join(OUT, 'bot_luck.games'); open(prog, 'w').close()
+        n = len([f for f in glob.glob(os.path.join(s.dir, 'battle-*.log')) if re.search(r'-\d{6,}(-[a-z0-9]+)?\.log$', f)])
+        json.dump({'title': "The bot's games: luck worked out (games, one engine thread at the lowest priority)", 'out': os.path.relpath(prog, os.path.join(C.HERE, 'out')),
+                   'total': n, 'done0': 0, 'started': time.time(), 'threads': 1, 'seeds': 32, 'staged': True}, open(prog + '.run.json', 'w'))
         while True:
             fs = sorted((f for f in glob.glob(os.path.join(s.dir, 'battle-*.log')) if re.search(r'-\d{6,}(-[a-z0-9]+)?\.log$', f)), key=os.path.getmtime)   # ladder rooms, not local test games
             if not s.files and not s.known: new = fs; s.known = set(fs)         # at the start: every ladder game so far, for reviews

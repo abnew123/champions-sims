@@ -36,15 +36,21 @@ for f, s in src.items():
         if lit: reg[(kind, lit)].add(ev); continue
         # a loop variable: the list in the nearest `for <var> in [...]` / `for (<var>, ..) in [...]` before it
         head = s[:m.start()]; fm = None
-        for fm_ in re.finditer(r'for\s+\(?\s*' + re.escape(var) + r'\b[^\n]*?\bin\s*\[', head): fm = fm_
+        for fm_ in re.finditer(r'for\s+\(?\s*' + re.escape(var) + r'\b[^\n]*?\bin\s*(\[|(\w+)\s*\{)', head): fm = fm_
         if not fm: continue
-        i = fm.end(); depth = 1; j = i
+        if fm.group(2):                                                        # for i in <name>: the list in `let <name> = [...]`
+            lm = None
+            for lm_ in re.finditer(r'let\s+' + re.escape(fm.group(2)) + r'\s*(?::[^=]+)?=\s*\[', head): lm = lm_
+            if not lm: continue
+            i = lm.end()
+        else: i = fm.end()
+        depth = 1; j = i
         while j < len(s) and depth: depth += {'[': 1, ']': -1}.get(s[j], 0); j += 1
         for x in re.findall(r'"([a-z0-9]+)"', s[i:j]): reg[(kind, x)].add(ev)
 KIND = {'move': 'Move', 'ability': 'Ability', 'item': 'Item'}
 rows = []
 def check(kind, i, uses, data, label=None):
-    cb = {k for k, v in (data.get('cbs') or {}).items() if not (isinstance(v, dict) and v.get('absent'))}   # 'absent': sort keys only
+    cb = {k for k, v in (data.get('cbs') or {}).items() if not (isinstance(v, dict) and (v.get('absent') or 'val' in v))}   # sort keys only; a constant (cval)
     if not cb: return
     have = reg.get((KIND.get(kind, 'Cond'), i), set()) | (reg.get(('Cond', i), set()) if kind == 'move' else set())
     if 'onStart' in have: have = have | {'onSwitchIn'}                    # the engine's getCallback: no onSwitchIn falls back to onStart

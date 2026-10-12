@@ -1,6 +1,8 @@
 """One live progress page for every thread's runs, and a viewer for built sheets. Refreshes in place every 10 s.
 
-  Running now  every active run at the top, each labelled with its thread (the same cards appear again in the sections below)
+  Using CPU now  every process using CPU, grouped by thread (process names battlesim- / evalbar- / trsheet- / teamsearch-, or the
+               thread's folder in the command line), with idle ones counted, plus the busiest other apps: nothing that uses cores is hidden
+  Running now  every active run with a progress stamp, each labelled with its thread (the same cards appear again in the sections below)
   Sheets       the sheet kit's runs (sheetkit/kit.py: bring matrix, confirmation, turn-one lines), on this Mac or pulled from a cloud box
   Battle sim   the simulator thread's batches
   Team search  that thread's stages and hill climb (its own cards, from teamsearch/status_server.py)
@@ -85,16 +87,75 @@ def team_search():
     except Exception as e: return f'<p class="idle">Couldn&rsquo;t read Team search&rsquo;s cards ({html.escape(type(e).__name__)}).</p>'
 
 def eval_bar():
-    """the Eval bar thread's own cards (evalbar/status.py cards()); in this checkout, else in the newest git worktree that has it"""
-    f = os.path.join(HERE, 'evalbar', 'status.py')
-    if not os.path.exists(f):
-        wt = sorted(glob.glob(os.path.join(HERE, '.claude', 'worktrees', '*', 'evalbar', 'status.py')), key=os.path.getmtime)
-        if not wt: return '<p class="idle">Nothing running right now.</p>'
-        f = wt[-1]
-    try: return runpy.run_path(f)['cards']()
-    except Exception as e: return f'<p class="idle">Couldn&rsquo;t read the Eval bar&rsquo;s cards ({html.escape(type(e).__name__)}).</p>'
+    """the Eval bar thread's own cards (evalbar/status.py cards()): from this checkout and from every git worktree with stamps from the
+    last two days (the thread often works in a worktree, whose runs stamp its own evalbar/out)"""
+    fs = [os.path.join(HERE, 'evalbar', 'status.py')]
+    for f in glob.glob(os.path.join(HERE, '.claude', 'worktrees', '*', 'evalbar', 'status.py')):
+        out = os.path.join(os.path.dirname(f), 'out')
+        if any(time.time() - os.path.getmtime(x) < 2 * 86400 for x in glob.glob(os.path.join(out, '**', '*.run.json'), recursive=True)): fs.append(f)
+    parts = []
+    for f in fs:
+        if not os.path.exists(f): continue
+        try: h = runpy.run_path(f)['cards']()
+        except Exception as e: h = f'<p class="idle">Couldn&rsquo;t read the Eval bar&rsquo;s cards ({html.escape(type(e).__name__)}).</p>'
+        if 'class="card' in h: parts.append(h)
+    return ''.join(parts) or '<p class="idle">Nothing running right now.</p>'
 
 THREADS = {'kit': 'TR sheet', 'sim': 'Battle sim', 'ts': 'Team search', 'eb': 'Eval bar'}
+
+# ---- every process using CPU (2026-10-12, the user: anything that uses cores must show here, progress stamp or not) ----
+PREFIX = {'battlesim-': 'Battle sim', 'evalbar-': 'Eval bar', 'trsheet-': 'TR sheet', 'teamsearch-': 'Team search'}
+PATHS = [('/evalbar/', 'Eval bar'), ('/teamsearch/', 'Team search'), ('/sheetkit/', 'TR sheet'), ('/sheets/', 'TR sheet'), ('bot/client.js', 'Battle sim (bot)'),
+         ('/bot/', 'Battle sim (bot)'), ('/pssim/', 'Battle sim'), ('/native/', 'Battle sim')]
+def etime_s(e):
+    d, _, rest = e.rpartition('-'); parts = [int(x) for x in rest.split(':')]
+    while len(parts) < 3: parts.insert(0, 0)
+    return (int(d) if d else 0) * 86400 + parts[0] * 3600 + parts[1] * 60 + parts[2]
+def dur(sec):
+    d, r = divmod(sec, 86400); h, r = divmod(r, 3600); m, s_ = divmod(r, 60)
+    return f'{d}d {h}h' if d else f'{h}h {m:02d}m' if h else f'{m}m {s_:02d}s'
+def who(args):
+    exe = os.path.basename(args.split(' ', 1)[0])
+    for k, v in PREFIX.items():
+        if exe.startswith(k): return v + (' (bot)' if exe.endswith('-bot') or ' play ' in args else '')
+    if 'claude-code/' in args or '/Claude.app/' in args: return None                     # Claude sessions: under other apps
+    if 'status_server.py' in args: return 'This progress page'
+    if 'champions-sims' in args or 'bot/client.js' in args:
+        for k, v in PATHS:
+            if k in args: return v
+        return 'Other (this project)'
+    return None
+def short(args):
+    a = args.replace(HERE + '/', '').replace(os.path.expanduser('~'), '~')
+    a = re.sub(r'/private/tmp/claude-\d+/[^ ]*/scratchpad/', 'scratch/', a)
+    a = re.sub(r'(\S*)\.claude/worktrees/[^/ ]+/', '', a)                                  # a thread's git worktree: drop the prefix
+    return a if len(a) <= 150 else a[:147] + '…'
+def cpu_section():
+    out = subprocess.run(['ps', '-axo', 'pid=,pcpu=,etime=,args='], capture_output=True, text=True).stdout.splitlines()
+    ncpu = os.cpu_count() or 1; groups = {}; others = []; total = 0.0
+    for l in out:
+        m = re.match(r'\s*(\d+)\s+([\d.]+)\s+(\S+)\s+(.*)', l)
+        if not m: continue
+        pid, cpu, et, args = int(m.group(1)), float(m.group(2)), m.group(3), m.group(4)
+        total += cpu; t = who(args)
+        if t: groups.setdefault(t, []).append((cpu, pid, etime_s(et), args))
+        elif cpu >= 5: others.append((cpu, pid, etime_s(et), args))
+    ours = sum(c for g in groups.values() for c, *_ in g)
+    rows = []
+    for t, ps_ in sorted(groups.items(), key=lambda x: -sum(c for c, *_ in x[1])):
+        busy = sorted([x for x in ps_ if x[0] >= 1], reverse=True); idle = len(ps_) - len(busy)
+        rows.append(f'<tr class="grp"><th colspan="2">{html.escape(t)}</th><th>{sum(c for c, *_ in ps_) / 100:.1f} cores</th><th></th></tr>')
+        for cpu, pid, el, args in busy:
+            rows.append(f'<tr><td>{pid}</td><td class="cmd">{html.escape(short(args))}</td><td>{cpu / 100:.2f}</td><td>{dur(el)}</td></tr>')
+        if idle: rows.append(f'<tr><td></td><td class="cmd idle">+ {idle} idle process{"es" if idle != 1 else ""} (under 1% CPU)</td><td></td><td></td></tr>')
+    if others:
+        rows.append(f'<tr class="grp"><th colspan="2">Other apps (not this project)</th><th>{sum(c for c, *_ in others) / 100:.1f} cores</th><th></th></tr>')
+        for cpu, pid, el, args in sorted(others, reverse=True)[:6]:
+            name = 'Claude (app and sessions)' if ('claude-code/' in args or '/Claude.app/' in args) else os.path.basename(args.split(' --', 1)[0])
+            rows.append(f'<tr><td>{pid}</td><td class="cmd">{html.escape(short(name))}</td><td>{cpu / 100:.2f}</td><td>{dur(el)}</td></tr>')
+    head = (f'<p class="now">This project: <b>{ours / 100:.1f}</b> of {ncpu} cores &middot; whole Mac: <b>{total / 100:.1f}</b> of {ncpu} '
+            f'(ps averages over the last minute or so)</p>')
+    return head + '<table class="cpu"><tr><th>pid</th><th>process</th><th>cores</th><th>running for</th></tr>' + ''.join(rows) + '</table>'
 def running_cards(h):
     """the running cards in a thread's cards HTML: each <div class="card running ..."> with everything up to its matching </div>"""
     out = []
@@ -111,7 +172,7 @@ def tagged(c, thread):
 def page():
     now = datetime.datetime.now()
     ps = subprocess.run(['ps', '-axo', 'command'], capture_output=True, text=True).stdout   # a local run is live while its workers are
-    local = lambda r: any((('node' in l or re.search(r'champ(-battle-v\d+)? (battle|plan|spot)', l)) and (os.path.basename(r['outdir']) in l) and
+    local = lambda r: any((('node' in l or re.search(r'champ\S* (battle|plan|spot)', l)) and (os.path.basename(r['outdir']) in l) and
                            ((' ' + r['outdir'] + ' ') in (l + ' ') or os.path.normpath(os.path.join(ROOT, r['outdir'])) in l)) for l in ps.splitlines())
     # a kit run pulled from a cloud box has no process here: it is running while unfinished results keep arriving
     cloud = lambda r: bool(r['kit']) and not r['finished'] and not r['stopped'] and r['done'] < (r['total'] or 0) and time.time() - r['mtime'] < CLOUD_FRESH
@@ -156,7 +217,7 @@ def page():
     # every active run first, labelled with its thread (not on Team search's own page, which embeds this one)
     now_running = [tagged(card(r, True), THREADS['kit' if r['kit'] else 'sim']) for r in R if live(r)] + \
                   [tagged(c, THREADS['ts']) for c in running_cards(ts)] + [tagged(c, THREADS['eb']) for c in running_cards(eb)]
-    top = '' if embedded else f'<h2>Running now</h2>' + (''.join(now_running) or '<p class="idle">Nothing running right now.</p>')
+    top = '' if embedded else f'<h2>Using CPU now</h2>{cpu_section()}<h2>Running now (with progress)</h2>' + (''.join(now_running) or '<p class="idle">Nothing with a progress stamp is running.</p>')
     body = top + f'''<h2>Sheets</h2>{section([r for r in R if r['kit']])}
 <h2>Battle sim</h2>{section([r for r in R if not r['kit']])}''' + ('' if embedded else f'<h2>Team search</h2>{ts}') + \
            f'<h2>Eval bar</h2>{eb}'
@@ -173,6 +234,7 @@ h1{{font-size:22px;margin:0 0 4px}}h2{{font-size:17px;margin:24px 0 8px}}h3{{fon
 .who{{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);margin-bottom:3px}}
 .meta{{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13.5px}}.note{{font-size:13px;color:var(--ink2);margin-top:6px}}.idle{{color:var(--ink2)}}
 table{{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}}td,th{{text-align:left;padding:3px 6px;border-top:1px solid var(--rule)}}th{{color:var(--ink2);font-weight:600}}
+tr.grp th{{color:var(--ink);padding-top:10px}}td.cmd{{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;word-break:break-all}}td.idle{{color:var(--ink2);font-family:inherit}}
 @media (max-width:520px){{table{{font-size:12px}}}}</style></head>
 <body><div class="wrap" id="wrap"><h1>Sim progress</h1><div class="now">Updated {ampm(now, True)} &middot; refreshes every 10 s</div>{body}</div>
 <script>

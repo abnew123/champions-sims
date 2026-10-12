@@ -1,10 +1,10 @@
 {
  "decisions": 487,
  "human_left": 0.468,
- "engine_left": 0.535,
- "agree": 0.643,
- "engine_left_when_human_left": 0.653,
- "engine_left_when_human_stayed": 0.43,
+ "engine_left": 0.532,
+ "agree": 0.645,
+ "engine_left_when_human_left": 0.654,
+ "engine_left_when_human_stayed": 0.425,
  "by_species": {
   "Volcarona": {
    "n": 50,
@@ -19,7 +19,7 @@
   "Incineroar": {
    "n": 28,
    "human_left": 0.5,
-   "engine_left": 0.73
+   "engine_left": 0.71
   },
   "Farigiraf": {
    "n": 27,
@@ -94,12 +94,12 @@
   "Primarina": {
    "n": 9,
    "human_left": 0.22,
-   "engine_left": 0.21
+   "engine_left": 0.17
   },
   "Grimmsnarl": {
    "n": 8,
    "human_left": 0.62,
-   "engine_left": 0.95
+   "engine_left": 0.91
   }
  },
  "rows": [
@@ -1343,8 +1343,8 @@
    "rating": 1056,
    "human_left": false,
    "human": "slept",
-   "engine_left": 0.8156137950021394,
-   "gain": 0.005855453559285724
+   "engine_left": 0.8156066665491446,
+   "gain": 0.005854979359128709
   },
   {
    "id": "gen9championsvgc2026regmcbo3-2693931997",
@@ -1783,8 +1783,8 @@
    "rating": 1275,
    "human_left": false,
    "human": "slept",
-   "engine_left": 0.4693911921179957,
-   "gain": 0.00014907447585321698
+   "engine_left": 0.08664087050410399,
+   "gain": -0.010022527618124055
   },
   {
    "id": "gen9championsvgc2026regmcbo3-2694097046",
@@ -2575,8 +2575,8 @@
    "rating": 1026,
    "human_left": false,
    "human": "slept",
-   "engine_left": 0.8393707893816311,
-   "gain": 0.012510708029207757
+   "engine_left": 0.2569048002174602,
+   "gain": 0.0023038284126721703
   },
   {
    "id": "gen9championsvgc2026regmcbo3-2694572427",
@@ -3411,8 +3411,8 @@
    "rating": 1060,
    "human_left": true,
    "human": "pivot",
-   "engine_left": 0.9983200662898255,
-   "gain": 0.07121988376911531
+   "engine_left": 0.9983605884572319,
+   "gain": 0.10581634958325827
   },
   {
    "id": "gen9championsvgc2026regmcbo3-2695247453",
@@ -3950,8 +3950,8 @@
    "rating": 1205,
    "human_left": false,
    "human": "slept",
-   "engine_left": 0.8949109348611113,
-   "gain": 0.05389479617635923
+   "engine_left": 0.583661539173183,
+   "gain": 0.08028413325852571
   },
   {
    "id": "gen9championsvgc2026regmcbo3-2695663207",
@@ -3972,8 +3972,8 @@
    "rating": 1205,
    "human_left": true,
    "human": "switched",
-   "engine_left": 0.9414426924045196,
-   "gain": 0.10554315512764648
+   "engine_left": 0.9426131063604084,
+   "gain": 0.08393452687300307
   },
   {
    "id": "gen9championsvgc2026regmcbo3-2695670178",
@@ -4027,8 +4027,8 @@
    "rating": 1205,
    "human_left": true,
    "human": "pivot",
-   "engine_left": 0.8370582841614862,
-   "gain": 0.006517551338822834
+   "engine_left": 0.8405102290183233,
+   "gain": 0.006417371249901705
   },
   {
    "id": "gen9championsvgc2026regmcbo3-2695725992",
@@ -4148,8 +4148,8 @@
    "rating": 1165,
    "human_left": true,
    "human": "switched",
-   "engine_left": 0.31945217955203964,
-   "gain": 0.023578067389543204
+   "engine_left": 0.49949651514985494,
+   "gain": 0.0017165917270329186
   },
   {
    "id": "gen9championsvgc2026regmcbo3-2695787938",

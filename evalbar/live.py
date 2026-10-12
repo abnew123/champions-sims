@@ -269,6 +269,13 @@ class Live:
         survived a Sucker Punch the guessed spread could not). Names get ' L' after the tag"""
         pre = s.upto(log, t); gp = R.parse(pre); step = next(x for x in gp['steps'] if x['turn'] == t)
         full = R.parse(log); later = next((x for x in full['steps'] if x['turn'] == t), step); step = {**step, 'acts': later['acts']}
+        rq0 = s.request(log, t) if '|bot-choice|' in log else None
+        if rq0:                                                             # the bot's own choice where the log shows it only in part
+            acts = dict(step['acts'])
+            for pos, a in s.choice(log, t, rq0).items():
+                old = acts.get(pos)
+                if not old or old.get('none') or ('move' in old and not old.get('target') and a.get('move') == old.get('move')) or not ('move' in old or 'switch' in old): acts[pos] = a
+            step = {**step, 'acts': acts}
         src, gsrc = pre, gp
         if hindsight and later is not step:
             st = json.loads(json.dumps(step['state']))
@@ -288,6 +295,24 @@ class Live:
                 s.back[t] = [r['details'].split(',')[0] for r in rq['side']['pokemon'] if toid(r['details'].split(',')[0].split('-')[0]) not in seen]
         sp, H = specs_for(s.tag + (' L' if hindsight else ''), gp, step, six, sets, s.leads(pre), own)
         return sleep_cases(sp), H
+    @staticmethod
+    def choice(log, t, rq):
+        """what the bot chose at the start of turn t, from the |bot-choice|<rqid>|<choice> line its client writes after answering a request
+        (bot/client.js, from 2026-10-12): {'p1a': act, ...} in replay.py's act format, its own side ('p1' once bot_first has run); {} if
+        the log has no such line (older games, or 'default' / 'forfeit')"""
+        m = re.search(r'\n\|bot-choice\|' + str(rq.get('rqid')) + r'\|([^\n]*)', log)
+        if not m or not rq.get('active'): return {}
+        sd = rq['side']['id']; foe = 'p2' if sd == 'p1' else 'p1'; out = {}
+        for i, part in enumerate(m.group(1).split(',')[:len(rq['active'])]):
+            w = part.split()
+            if not w or w[0] in ('default', 'forfeit', 'pass'): continue
+            if w[0] == 'switch' and len(w) > 1 and w[1].isdigit():
+                out[sd + 'ab'[i]] = {'switch': rq['side']['pokemon'][int(w[1]) - 1]['details'].split(',')[0]}
+            elif w[0] == 'move' and len(w) > 1 and w[1].isdigit():
+                mv = (rq['active'][i].get('moves') or [{}])[int(w[1]) - 1]; t_ = next((x for x in w[2:] if re.fullmatch(r'-?[12]', x)), None)
+                tgt = '' if t_ is None else (foe + 'ab'[int(t_) - 1] if int(t_) > 0 else sd + 'ab'[-int(t_) - 1])
+                out[sd + 'ab'[i]] = {'move': mv.get('move', ''), 'target': tgt, 'mega': 'mega' in w[2:], 'unsure': False}
+        return out
     @staticmethod
     def request(log, t):
         """a bot's own log, which records its |request|s: the one it answered at the start of turn t (logged just after the |turn| line)"""

@@ -30,7 +30,8 @@ def trapped(sp, own_ab, foes, vol):
         if ab == 'magnetpull' and 'Steel' in ty: return True
     return False
 def study(log, bot=None):
-    """[(side, kind, outcome, rating)] for every Yawn that landed; kind 'bot' for the bot's own Pokemon, else 'human'"""
+    """[(side, kind, outcome, rating, turn, species)] for every Yawn that landed: turn is the one after it (the decision), species the
+    drowsy Pokemon's; kind 'bot' for the bot's own Pokemon, else 'human'"""
     L = log.split('\n'); size = {'p1': 4, 'p2': 4}; sheet = {'p1': {}, 'p2': {}}; rating = {}
     for l in L:
         p = l.split('|')
@@ -67,9 +68,9 @@ def study(log, bot=None):
         me = next((m for s, m in a.items() if s[:2] == sd and m['nick'] == nick and not m['f']), None)
         if not me: continue                                                # gone before the turn started (fainted, forced out)
         on = sum(1 for s, m in a.items() if s[:2] == sd and not m['f'])
-        if size[sd] - f[sd] - on <= 0: out.append((sd, kind, 'no bench', rating.get(sd))); continue
+        if size[sd] - f[sd] - on <= 0: out.append((sd, kind, 'no bench', rating.get(sd), ty + 1, me['sp'])); continue
         foes = [(m['sp'], ability(sheet[foe], m['sp'])) for s, m in a.items() if s[:2] == foe and not m['f']]
-        if trapped(me['sp'], ability(sheet[sd], me['sp']), foes, nick in v): out.append((sd, kind, 'trapped', rating.get(sd))); continue
+        if trapped(me['sp'], ability(sheet[sd], me['sp']), foes, nick in v): out.append((sd, kind, 'trapped', rating.get(sd), ty + 1, me['sp'])); continue
         res = 'blocked'; pivot = forced = False; cur = next(s for s, m in a.items() if s[:2] == sd and m['nick'] == nick)
         for p in blocks[ty + 1]:
             if len(p) < 3: continue
@@ -81,7 +82,7 @@ def study(log, bot=None):
                 res = 'forced' if p[1] == 'drag' or forced else 'pivot' if pivot else 'switched'; break
             elif p[1] == 'faint' and who == nick and p[2][:2] == sd: res = 'fainted'; break
             elif p[1] == '-status' and who == nick and p[2][:2] == sd and len(p) > 3 and p[3] == 'slp': res = 'slept'; break
-        out.append((sd, kind, res, rating.get(sd)))
+        out.append((sd, kind, res, rating.get(sd), ty + 1, me['sp']))
     return out
 def bot_side(log):
     m = re.search(r'\|request\|\{.*?"side":\{[^{}]*?"id":"(p[12])"', log)
@@ -98,7 +99,7 @@ if __name__ == '__main__':
         if 'Yawn' not in log: continue
         rows = study(log)
         if rows: games['replays'] += 1
-        for sd, kind, res, rt in rows:
+        for sd, kind, res, rt, *_ in rows:
             groups['human (replays)'].append(res)
             if rt and rt >= 1500: groups['human (replays, rated 1500+)'].append(res)
     for f in sorted(glob.glob(os.path.join(C.MAIN, 'bot', 'out', 'battle-*.log'))):
@@ -107,7 +108,7 @@ if __name__ == '__main__':
         if 'Yawn' not in log: continue
         rows = study(log, bot_side(log))
         if rows: games['bot'] += 1
-        for sd, kind, res, rt in rows: groups['bot' if kind == 'bot' else 'human (vs the bot)'].append(res)
+        for sd, kind, res, rt, *_ in rows: groups['bot' if kind == 'bot' else 'human (vs the bot)'].append(res)
     out = {'games_with_a_yawn': dict(games), 'groups': {k: tally(v) for k, v in groups.items()}}
     json.dump(out, open(os.path.join(C.HERE, 'yawn_study.json'), 'w'), indent=1)
     for k, v in out['groups'].items(): print(f"{k:30s} {v}")

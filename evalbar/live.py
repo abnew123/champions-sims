@@ -130,7 +130,7 @@ def specs_for(tag, g, step, six, sets, leads, own=None):
                 sides.append({'mons': mons, 'tailwind': st[sd]['tailwind'], 'screens': st[sd]['screens'], 'hazards': st[sd]['hazards']})
             f = st['field']
             out.append((w1 * w2, {'name': f"{tag} t{step['turn']} h{i}{j}", 'turn': step['turn'], 'sides': sides,
-                                  'acts': [[act(sd, i) for i in (0, 1)] for sd in ('p1', 'p2')], 'perish': st['perish'], 'standIns': len(c1) + len(c2),
+                                  'acts': [[act(sd, i) for i in (0, 1)] for sd in ('p1', 'p2')], 'perish': st['perish'], 'standIns': len(c1) + len(c2), 'yawnDue': True,
                                   'dropped': [], 'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None,
                                                            'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}))
     return out, H

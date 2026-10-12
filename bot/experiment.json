@@ -1,5 +1,5 @@
 {
- "note": "the user, 2026-10-11: 60 games with each sheet team and 180 with random top-64 regional teams played without a sheet, the two arms alternated match by match (the arm with fewer games goes next) so both meet similar opponents; games counted from 'start'; the bot pauses when both are done; 2026-10-12, the user: the Frankfurt sixes stop after 21 (Frankfurt-239) and 19 (Frankfurt-156) games and the sheet arm is the Trick Room six alone from here (its target 140, so the sheet arm still totals 180), the two arms still alternated; Perish Song teams left the regional pool from here (6 games had used them)",
+ "note": "the user, 2026-10-11: 60 games with each sheet team and 180 with random top-64 regional teams played without a sheet, the two arms alternated match by match (the arm with fewer games goes next) so both meet similar opponents; games counted from 'start'; the bot pauses when both are done; 2026-10-12, the user: the Frankfurt sixes stop after 21 (Frankfurt-239) and 19 (Frankfurt-156) games and the sheet arm is the Trick Room six alone from here (its target 140, so the sheet arm still totals 180), the two arms still alternated; Perish Song teams left the regional pool from here (6 games had used them); 2026-10-12 evening, the user: the sheet / no-sheet question answered (Trick Room six with its sheet +17.4 ± 5.1 points a game above Elo expectation over 88 games, regional teams without a sheet -2.7 ± 4.5 over 116), so the experiment ends and each format gets a fixed role (by_format): Bo3 the exploiter, the Trick Room six with its sheet (contempt to come); Bo1 the generalist, random regional teams without a sheet",
  "start": "2026-10-11T07:39:10Z",
  "sheet": {
   "teams": [
@@ -11,5 +11,17 @@
   "pool": "bot/out/regional_pool.json",
   "games": 180
  },
- "pause_when_done": true
+ "pause_when_done": true,
+ "by_format": {
+  "gen9championsvgc2026regmcbo3": {
+   "arm": "sheet",
+   "teams": [
+    "Trick Room six"
+   ]
+  },
+  "gen9championsvgc2026regmc": {
+   "arm": "regional",
+   "pool": "bot/out/regional_pool.json"
+  }
+ }
 }

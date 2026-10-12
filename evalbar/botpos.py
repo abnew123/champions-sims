@@ -116,7 +116,7 @@ def bot_position(log, request, side, topk=1, team=None, tag='bot'):
     gp = R.parse(pre); step = gp['steps'][-1]; st = step['state']; opp = 'p2' if side == 'p1' else 'p1'
     six, sets, dropped = LV.sets_for(gp, pre, True)
     mine, why = own_side(st[side], sets[side], req, team_sets(team), dropped)
-    refine_opponent(pre, gp, sets, side, req, strict=True)                   # the opponent's spreads against the turn order seen so far (strict: the user, 2026-10-12)
+    refine_opponent(pre, gp, sets, side, req, strict=3)                      # the opponent's spreads against the turn order seen so far (strict: the user, 2026-10-12; level 3, exact action Speed: the user, 2026-10-12 evening)
     if mine is None: return [], {'skip': why}
     H, pool, need = LV.hyps(opp, st, six, sets, LV.Live.leads(None, pre), topk)
     order = sorted(st[opp]['mons'], key=lambda m: (0 if m['pos'] == 'a' else 1 if m['pos'] == 'b' else 2 if not m['f'] else 3))
@@ -127,7 +127,7 @@ def bot_position(log, request, side, topk=1, team=None, tag='bot'):
         theirs = seen + [{**fresh(sets[opp][sp]), 'standIn': True} for sp in back]
         sides = [{'mons': ms, 'tailwind': st[sd]['tailwind'], 'screens': st[sd]['screens'], 'hazards': st[sd]['hazards']} for sd, ms in ((side, mine), (opp, theirs))]
         out.append((w, {'name': f"{tag} t{step['turn']} h{h}", 'turn': step['turn'], 'sides': sides, 'acts': [[None, None], [None, None]],
-                        'perish': st['perish'], 'standIns': len(back), 'dropped': [], 'yawnDue': True, 'volDue': True, 'fieldDue': True,   # a Yawn at the turn start puts its target to sleep at this turn's end; Taunt / Encore / Disable / Throat Chop / Heal Block keep their remaining turns (the user, 2026-10-12)
+                        'perish': st['perish'], 'standIns': len(back), 'dropped': [], 'yawnDue': True, 'volDue': True, 'fieldDue': True, 'pctDue': True, 'abilDue': True,   # pctDue / abilDue: the user, 2026-10-12 evening   # a Yawn at the turn start puts its target to sleep at this turn's end; Taunt / Encore / Disable / Throat Chop / Heal Block keep their remaining turns (the user, 2026-10-12)
                         'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None,
                                   'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}))
     return out, {'turn': step['turn'], 'hyp': H, 'need': need, 'dropped': dropped}

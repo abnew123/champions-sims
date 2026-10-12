@@ -47,8 +47,22 @@ STAGE = {-6: 2 / 8, -5: 2 / 7, -4: 2 / 6, -3: 2 / 5, -2: 2 / 4, -1: 2 / 3, 0: 1,
 WEATHER_SPEED = {'Swift Swim': ('Rain', 'Heavy rain'), 'Chlorophyll': ('Sun', 'Harsh sun'), 'Sand Rush': ('Sandstorm',), 'Slush Rush': ('Snow',)}   # as replay.py names weather
 TERRAIN_SPEED = {'Surge Surfer': 'Electric'}                                 # as replay.py names terrain (the eval bar's strict reading)
 TERRAIN_LINE = re.compile(r'^\|-field(start|end)\|move: (\w+) Terrain')
+def exact_speed(raw, mods):
+    """Showdown's action Speed, as the engine has it exactly (Battle sim, 2026-10-12): the stage with a floor, the ModifySpe chain
+    (Tailwind, a weather or terrain ability, Choice Scarf) in 4096ths and applied rounding half down, paralysis last (its finalModify),
+    at most 10000. x2 and x1.5 are exact in 4096ths, so their order does not matter"""
+    b = max(-6, min(6, mods['stage'])); half = [2, 3, 4, 5, 6, 7, 8]
+    s = raw * half[b] // 2 if b >= 0 else raw * 2 // half[-b]
+    mod = 4096
+    for on, m in ((mods.get('tailwind'), 2), (mods.get('weather_x2'), 2), (mods.get('terrain_x2'), 2), (mods.get('scarf'), 1.5)):
+        if on: mod = (mod * int(m * 4096) + 2048) >> 12
+    s = (s * mod + 2047) // 4096
+    if mods.get('par'): s = s * 50 // 100
+    return min(s, 10000)
 def effective(raw, mods):
-    """the Speed the turn order uses: stages, then Choice Scarf, a weather or terrain ability, Tailwind, paralysis"""
+    """the Speed the turn order uses: stages, then Choice Scarf, a weather or terrain ability, Tailwind, paralysis (exact: Showdown's
+    integer arithmetic, the eval bar's strict level 3)"""
+    if mods.get('exact'): return exact_speed(raw, mods)
     v = int(raw * STAGE.get(mods['stage'], 1))
     if mods['scarf']: v *= 1.5
     if mods['weather_x2']: v *= 2
@@ -117,7 +131,8 @@ def observations(log, known_side, known_speed, sheets, strict=False):
             if mg and 'mega' in toid(forme): ab = (mg.get('abilities') or {}).get('0', ab)   # a Mega has its own ability (Mega Swampert: Swift Swim)
             return {'stage': (m['b'] or {}).get('spe', 0) if ctx.get('stage', True) else 0, 'scarf': toid(sh.get('item', '')) == 'choicescarf' and not m['gone'],
                     'tailwind': ctx['tailwind'][sd], 'par': m['st'] == 'par' and ab != 'Quick Feet', 'weather_x2': bool(ctx['weather']) and ctx['weather'] in WEATHER_SPEED.get(ab, ()),
-                    **({'terrain_x2': True} if strict and ab in TERRAIN_SPEED and ctx.get('terrain') == TERRAIN_SPEED[ab] else {})}
+                    **({'terrain_x2': True} if strict and ab in TERRAIN_SPEED and ctx.get('terrain') == TERRAIN_SPEED[ab] else {}),
+                    **({'exact': True} if strict and strict >= 3 else {})}
         out.append({'turn': t, 'kind': kind, 'species': mu['sp'], 'forme': fu, 'first': su == first[0], 'tr': ctx['tr'],
                     'mods': mods(su, mu, shu, fu), 'known': effective(rk, mods(sk, mk, shk, fk)), 'against': mk['sp']})
     def pairs(t, kind, actors, ctx_at):
@@ -206,7 +221,9 @@ def observations(log, known_side, known_speed, sheets, strict=False):
 def fits(evs, nature, ob):
     raw = raw_speed(ob['forme'], evs, nature)
     if raw is None: return True
-    u = effective(raw, ob['mods']); k = ob['known']; faster = u > k + 1; slower = u < k - 1   # within 1: a tie (or rounding), either order
+    u = effective(raw, ob['mods']); k = ob['known']
+    if ob['mods'].get('exact'): faster = u > k; slower = u < k             # exact (strict 3): only an equal Speed is a tie
+    else: faster = u > k + 1; slower = u < k - 1                            # within 1: a tie (or rounding), either order
     went_first = ob['first'] != ob['tr']                                    # under Trick Room the slower one goes first
     return not slower if went_first else not faster
 def pick(species, nature, item, guess, obs, misses=None, nd=0):

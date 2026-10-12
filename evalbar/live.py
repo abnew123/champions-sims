@@ -174,7 +174,7 @@ def bot_team(log, sd):
     return next((t['sets'] for t in json.load(open(f)) if {toid(x['species']) for x in t['sets']} == six), None)
 # the luck pass's engine: evalpos with actual_replace (Battle sim, 2026-10-12), which replays the actual joint choices' cell with the
 # Pokemon each player actually sent in after a faint or a pivot (actual_cell), so a replacement choice is not counted as luck
-LUCK_BIN = os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-dev-2026-10-12b')
+LUCK_BIN = os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-dev-2026-10-12c')   # 12c: partly known choices too
 def replacements(log, t):
     """{side: [species]} the Pokemon each side sent in during turn t after it began (U-turn, Parting Shot, Eject Button, Emergency Exit) and
     after faints at its end, in the order the log shows them; switches at its start are choices of the turn, drags are not choices"""

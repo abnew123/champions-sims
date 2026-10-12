@@ -45,8 +45,9 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
    next turn's start (position.py `replacement`, as self-play's `spot.rs resolve_switches` does), not by the one-turn search it uses
    for its turns. `bot/decision_audit.py` (2026-10-12, 144 of the bot's replacements with two or more candidates, each candidate's
    position solved by `champ evalpos` as a turn is): the search prefers another candidate in 53, by over 10 points in 10, **1.7 points
-   per replacement** on average. Fix for the bot: score the candidates with evalpos (a few seconds); for self-play, the replacement
-   matrix game on one-turn values instead of static ones (costlier; measure it).
+   per replacement** on average. **Done for the bot (2026-10-12, the user):** position.py scores each candidate with evalpos (about
+   1-2 s; the six worst audit cases now pick the search's choice). Still open for self-play: the replacement matrix game on one-turn
+   values instead of static ones (costlier; measure it).
 8. **Audit of every turn decision (2026-10-12, `bot/decision_audit.py`, 995 decisions rebuilt with today's builder).** Where the played
    option is known (667), the staged solve flags 73 as 5+ points below the best, but the staged solve gives options outside the mix
    only 2-8 simulations per cell, so the best of many such options reads high (a 62% double switch next to a 50% equilibrium). Solved

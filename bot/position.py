@@ -3,7 +3,7 @@
        it (open sheets, reveals, its most likely back row), our side exactly from the |request|; we are side 0
   decide(specs, request, side) -> ("move 1 2, move 2 1", note): live.positions writes the engine position, engine.run evaluates it
        (champ evalpos, 32 seeds, staged, the kit's value), a joint action is sampled from side 0's mix and mapped to /choose syntax
-  replacement(request, log, side) -> "switch 3[, switch 4]" for a forceSwitch request (v1: a type-chart rule, see below)"""
+  replacement(request, log, side) -> "switch 3[, switch 4]" for a forceSwitch request (each candidate by the one-turn search)"""
 import os, sys, json, random, re, tempfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); EB = os.path.join(ROOT, 'evalbar')
 sys.path.insert(0, EB); sys.path.insert(0, os.path.join(ROOT, 'pssim'))
@@ -128,10 +128,12 @@ def static_values(specs, tag):
     import subprocess
     subprocess.run([os.environ['CHAMP_BIN'], 'feats', '../native/' + os.environ['CHAMP_DATA'], posf, outf, '1'], cwd=os.path.join(ROOT, 'pssim'), env=env, check=True, capture_output=True)
     return {r['name']: r['static'] for r in map(json.loads, open(outf)) if 'error' not in r}
-def replacement(request, log, side):
-    """forceSwitch: every way to fill the slots the request marks from the living bench, each scored by the engine's static value of
-    the next turn's start with those replacements in (the Eval bar's bot_replacement: the opponent's own replacement, if it must make
-    one, averaged over its likely ones); the best is chosen, as the planner chooses for itself in self-play. Falls back to the type rule."""
+def replacement(request, log, side, team=None, threads=2, seeds=32):
+    """forceSwitch: every way to fill the slots the request marks from the living bench, each scored by the one-turn search at the next
+    turn's start with those replacements in (champ evalpos, as a turn is decided; the Eval bar's bot_replacement builds the positions:
+    the opponent's own replacement, if it must make one, averaged over its likely ones); the best is chosen. Since 2026-10-12 (the user):
+    the static value the planner uses for this in self-play picked another replacement than the search in 53 of 144 of the bot's
+    replacements, 1.7 points each on average (bot/decision_audit.py). Falls back to the static value, then to the type rule."""
     text = '\n'.join(log) if isinstance(log, list) else log
     need = request.get('forceSwitch') or []; mons = request['side']['pokemon']
     slots = [k for k, must in enumerate(need) if must]
@@ -140,21 +142,38 @@ def replacement(request, log, side):
     cands = list(itertools.permutations(bench, min(len(slots), len(bench))))
     if not slots or not cands: return 'pass'
     if len(cands) == 1: return ', '.join(f'switch {team_index(request, sp)}' for sp in cands[0]) + (', pass' * (len(slots) - len(cands[0])))
-    best = None; tag = f"r{request.get('rqid', 0)}_{random.randrange(1 << 20):05x}"
-    try:
+    tag = f"r{request.get('rqid', 0)}_{random.randrange(1 << 20):05x}"; exp = export(team) if team else None
+    groups = []
+    try:   # every candidate's positions (one per likely replacement of the opponent's), named apart, in one engine run
         for ci, cand in enumerate(cands):
             rep = {'ab'[slots[j]]: sp for j, sp in enumerate(cand)}
-            specs, info = BP.bot_replacement(text, request, side, rep, topk=1)
+            specs, info = BP.bot_replacement(text, request, side, rep, topk=1, team=exp)
             if not specs: raise RuntimeError('no replacement position: ' + str(info.get('skip')))
-            vals = static_values(specs, f'{tag}_{ci}')
-            tot = sum(w * vals.get(sp['name'] + ' p1', 0.5) for w, sp in specs) / max(1e-9, sum(w for w, _ in specs))
+            groups.append((cand, [(w, {**sp, 'name': f"c{ci} b{k} {sp['name']}"}) for k, (w, sp) in enumerate(specs)]))
+    except Exception as e:
+        sys.stderr.write('replacement positions failed, type rule instead: ' + repr(e) + '\n')
+        return replacement_by_type(request, text, side)
+    def pick(vals, how):
+        best = None
+        for cand, specs in groups:
+            ws = [(w, vals[sp['name'] + ' p1']) for w, sp in specs if sp['name'] + ' p1' in vals]
+            if not ws: continue
+            tot = sum(w * v for w, v in ws) / max(1e-9, sum(w for w, _ in ws))
             if best is None or tot > best[0]: best = (tot, cand)
+        if best is None: raise RuntimeError('no candidate evaluated')
+        sys.stderr.write(f"replacement by {how}: {best[1]} ({100 * best[0]:.0f}%)\n")
+        return ', '.join(f'switch {team_index(request, sp)}' for sp in best[1]) + (', pass' * (len(slots) - len(best[1])))
+    allspecs = [x for _, specs in groups for x in specs]
+    try:
+        posf = os.path.join(OUT, tag + '.pos.jsonl'); outf = os.path.join(OUT, tag + '.eval.jsonl')
+        LV.positions(allspecs, posf); EN.run(posf, outf, threads, seeds, 1)
+        return pick({r['name']: r['value'] for r in map(json.loads, open(outf)) if 'error' not in r}, 'search')
+    except Exception as e:
+        sys.stderr.write('replacement by search failed, static value instead: ' + repr(e) + '\n')
+    try: return pick(static_values(allspecs, tag), 'static value')
     except Exception as e:
         sys.stderr.write('replacement by value failed, type rule instead: ' + repr(e) + '\n')
         return replacement_by_type(request, text, side)
-    cand = best[1]
-    sys.stderr.write(f"replacement by value: {cand} ({100 * best[0]:.0f}%)\n")
-    return ', '.join(f'switch {team_index(request, sp)}' for sp in cand) + (', pass' * (len(slots) - len(cand)))
 def replacement_by_type(request, log, side):
     """forceSwitch: for each slot that must be filled, the bench Pokemon that takes the opponent's actives' attacking types best
     (sum over their STAB types of the type chart's multiplier against it; lower is better; ties by HP). v1 until positions can be

@@ -33,7 +33,7 @@ fn resist_berry(b: &mut Battle, a: &mut HArgs) -> RV {
 }
 fn noop(_b: &mut Battle, _a: &mut HArgs) -> RV { RV::Undef }
 /// mega stones: can't be removed from a pokemon that can use them
-fn mega_take(b: &mut Battle, a: &mut HArgs) -> RV {
+pub fn mega_take(b: &mut Battle, a: &mut HArgs) -> RV {
     let holder = a.t(); let item = b.effect.unwrap().id;
     let ms = b.dex.items[item].raw.get("megaStone").cloned().unwrap_or(serde_json::Value::Null);
     let Some(o) = ms.as_object() else { return RV::B(true) };
@@ -65,7 +65,7 @@ pub fn register(r: &mut Reg) {
         r.insert((Kind::Item, id(i), id("onSourceModifyDamage")), resist_berry as HFn);
         r.insert((Kind::Item, id(i), id("onEat")), noop as HFn);
     }
-    // every item with a megaStone table gets the same onTakeItem
+    // every item with a megaStone table gets the same onTakeItem (the list; Dex::attach also gives it to any other stone in the data)
     let megas = ["salamencite", "raichunitey", "raichunitex", "floettite", "golisopite", "charizarditey", "charizarditex", "garchompitez", "garchompite", "staraptite",
                  "gardevoirite", "tyranitarite", "gengarite", "froslassite", "metagrossite", "delphoxite", "lucarionitez", "lucarionite", "swampertite", "dragoninite",
                  "baxcalibrite", "glimmoranite", "aerodactylite", "cameruptite", "blastoisinite", "absolitez", "absolite", "blazikenite", "mawilite", "scovillainite",

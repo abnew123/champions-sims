@@ -337,7 +337,13 @@ impl Dex {
     pub fn attach(&mut self, reg: &FxMap<(Kind, Id, Id), crate::battle::HFn>) {
         for (k, m) in self.moves.iter_mut() { for (cb, c) in m.eff.cbs.iter_mut() { c.f = reg.get(&(Kind::Move, *k, *cb)).copied(); } }
         for (kind, map) in [(Kind::Item, &mut self.items), (Kind::Ability, &mut self.abilities), (Kind::Cond, &mut self.conds)] {
-            for (k, e) in map.iter_mut() { for (cb, c) in e.cbs.iter_mut() { c.f = reg.get(&(kind, *k, *cb)).copied(); } }
+            for (k, e) in map.iter_mut() { for (cb, c) in e.cbs.iter_mut() {
+                c.f = reg.get(&(kind, *k, *cb)).copied();
+                // a Mega Stone missing from items.rs's list (2026-10-12: 11 of the 92) still can't be taken from its user
+                if c.f.is_none() && kind == Kind::Item && *cb == "onTakeItem" && e.raw.get("megaStone").map(|v| v.is_object()).unwrap_or(false) {
+                    c.f = Some(crate::handlers::items::mega_take as crate::battle::HFn);
+                }
+            } }
         }
         self.index_callbacks();
     }

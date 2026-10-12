@@ -38,6 +38,13 @@ def options(e, pos, scale):
             exact = bool(a) and any(same(o['c'], a, True) for o in sl['options'])       # both versions offered: the one played
             opts = [{'l': label(o['label']), 'w': round(o['w'], 3), 'v': round(scale(o['v']), 3), 'played': bool(a) and same(o['c'], a, exact),
                      'rough': 'stages' in e and o['v'] < best - 0.15} for o in sl['options']]
+            side = pos['state']['sides'][s]; k = side['active'][sl['slot']]
+            stay = [(o, x) for o, x in zip(sl['options'], opts) if o['c'][0] != 'switch']
+            if k is not None and side['pokemon'][k].get('status') == 'slp' and len(stay) > 1 and max(o['v'] for o, _ in stay) - min(o['v'] for o, _ in stay) < 1e-3:
+                # asleep all turn (every move is worth the same): one row for staying in, played if the log shows it could not move
+                no = acts[sl['slot']] and acts[sl['slot']].get('none') == 'cant'
+                opts = [x for o, x in zip(sl['options'], opts) if o['c'][0] == 'switch'] + [{'l': 'Stay in (asleep)', 'w': round(sum(x['w'] for _, x in stay), 3),
+                        'v': max(x['v'] for _, x in stay), 'played': bool(no) or any(x['played'] for _, x in stay), 'rough': all(x['rough'] for _, x in stay)}]
             out[sd].append({'mon': R.disp(sl['mon']), 'played': True if any(o['played'] for o in opts) else None, 'options': opts})
     out['value'] = {'p1': scale(e['value']), 'p2': 1 - scale(e['value'])}               # each side's win chance in this hypothesis
     return out

@@ -146,6 +146,15 @@ def bot_team(log, sd):
     if not os.path.exists(f): return None
     six = {toid(l.split('|')[3].split(',')[0]) for l in log.split('\n') if l.startswith(f'|poke|{sd}|')}
     return next((t['sets'] for t in json.load(open(f)) if {toid(x['species']) for x in t['sets']} == six), None)
+def records(f):
+    """an engine output .jsonl -> {name: record}, without errors; a line still being written (the engine appends as it goes) is skipped"""
+    out = {}
+    if os.path.exists(f):
+        for l in open(f):
+            try: x = json.loads(l)
+            except ValueError: continue
+            if 'error' not in x: out[x['name']] = x
+    return out
 def positions(specs, outf):
     tmp = outf + '.specs.json'; json.dump([s for _, s in specs], open(tmp, 'w'))
     subprocess.run([P.exe('node'), os.path.join(C.HERE, 'positions.js'), os.path.abspath(tmp), os.path.abspath(outf), 'p1'], cwd=os.path.join(C.MAIN, 'pssim'),
@@ -257,8 +266,7 @@ class Live:
         return None
     def build(s, log, g):
         """the page's data from everything evaluated so far"""
-        ev = {x['name']: x for x in map(json.loads, open(s.evf)) if 'error' not in x} if os.path.exists(s.evf) else {}
-        lev = {x['name']: x for x in map(json.loads, open(s.lf)) if 'error' not in x} if os.path.exists(s.lf) else {}   # the luck pass
+        ev = records(s.evf); lev = records(s.lf)                          # lev: the luck pass
         logit = lambda v: math.log(min(1 - 1e-4, max(1e-4, v)) / (1 - min(1 - 1e-4, max(1e-4, v))))
         scale = lambda v: C.sig(CAL * logit(v))
         steps = []; ps = {}; CH = s.checks(log)

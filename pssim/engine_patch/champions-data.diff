@@ -1,6 +1,6 @@
 diff -ru package/dist/data/mods/champions/abilities.js ../pssim/node_modules/pokemon-showdown/dist/data/mods/champions/abilities.js
---- package/dist/data/mods/champions/abilities.js	1985-10-26 04:15:00.000000000 -0400
-+++ ../pssim/node_modules/pokemon-showdown/dist/data/mods/champions/abilities.js	2026-09-25 02:29:07.284640547 -0400
+--- package/dist/data/mods/champions/abilities.js
++++ ../pssim/node_modules/pokemon-showdown/dist/data/mods/champions/abilities.js
 @@ -1,4 +1,3 @@
 -"use strict";
  var __defProp = Object.defineProperty;
@@ -21,7 +21,23 @@ diff -ru package/dist/data/mods/champions/abilities.js ../pssim/node_modules/pok
  const Abilities = {
    angershell: {
      inherit: true,
-@@ -34,22 +33,6 @@
+@@ -28,28 +27,22 @@
+       this.effectState.checkedAngerShell = !(effect.effectType === "Move" && !effect.multihit);
+     }
+   },
++  auraguard: {
++    // new in Champions (Mega Lucario Z): halves the damage the Pokemon takes from contact moves
++    onSourceModifyDamage(damage, source, target, move) {
++      if (move.flags["contact"]) return this.chainModify(0.5);
++    },
++    flags: { breakable: 1 },
++    name: "Aura Guard",
++    rating: 3,
++    num: 319
++  },
+   berserk: {
+     inherit: true,
+     onDamage(damage, target, source, effect) {
        this.effectState.checkedBerserk = !(effect.effectType === "Move" && !effect.multihit);
      }
    },
@@ -44,7 +60,7 @@ diff -ru package/dist/data/mods/champions/abilities.js ../pssim/node_modules/pok
    dragonize: {
      inherit: true,
      isNonstandard: null
-@@ -58,6 +41,14 @@
+@@ -58,6 +51,14 @@
      inherit: true,
      isNonstandard: null
    },
@@ -59,7 +75,7 @@ diff -ru package/dist/data/mods/champions/abilities.js ../pssim/node_modules/pok
    firemane: {
      inherit: true,
      isNonstandard: null
-@@ -71,9 +62,7 @@
+@@ -71,9 +72,7 @@
            allyActive.cureStatus();
          }
        }
@@ -70,7 +86,7 @@ diff -ru package/dist/data/mods/champions/abilities.js ../pssim/node_modules/pok
    },
    megasol: {
      inherit: true,
-@@ -101,11 +90,23 @@
+@@ -101,11 +100,23 @@
        }
      }
    },
@@ -94,7 +110,7 @@ diff -ru package/dist/data/mods/champions/abilities.js ../pssim/node_modules/pok
      onModifyMove: void 0,
      // no inherit
      onHitProtect(source, target, move) {
-@@ -113,9 +114,18 @@
+@@ -113,9 +124,18 @@
          target.getMoveHitData(move).bypassProtect = this.effect;
          return false;
        }
@@ -117,8 +133,8 @@ diff -ru package/dist/data/mods/champions/abilities.js ../pssim/node_modules/pok
 +  Abilities
 +});
 diff -ru package/dist/data/mods/champions/items.js ../pssim/node_modules/pokemon-showdown/dist/data/mods/champions/items.js
---- package/dist/data/mods/champions/items.js	1985-10-26 04:15:00.000000000 -0400
-+++ ../pssim/node_modules/pokemon-showdown/dist/data/mods/champions/items.js	2026-09-25 02:29:07.287022324 -0400
+--- package/dist/data/mods/champions/items.js
++++ ../pssim/node_modules/pokemon-showdown/dist/data/mods/champions/items.js
 @@ -1,4 +1,3 @@
 -"use strict";
  var __defProp = Object.defineProperty;
@@ -244,17 +260,17 @@ diff -ru package/dist/data/mods/champions/items.js ../pssim/node_modules/pokemon
    greatball: {
      inherit: true,
      isNonstandard: "Past"
-@@ -534,6 +541,10 @@
+@@ -533,6 +540,10 @@
+   leafstone: {
      inherit: true,
      isNonstandard: "Past"
-   },
++  },
 +  leek: {
 +    inherit: true,
 +    isNonstandard: null
-+  },
+   },
    levelball: {
      inherit: true,
-     isNonstandard: "Past"
 @@ -562,6 +573,10 @@
      inherit: true,
      isNonstandard: null
@@ -288,17 +304,17 @@ diff -ru package/dist/data/mods/champions/items.js ../pssim/node_modules/pokemon
    ovalstone: {
      inherit: true,
      isNonstandard: "Past"
-@@ -758,10 +765,6 @@
-     inherit: true,
+@@ -755,10 +762,6 @@
      isNonstandard: "Past"
    },
--  psychicseed: {
+   protector: {
 -    inherit: true,
 -    isNonstandard: "Past"
 -  },
-   punchingglove: {
+-  psychicseed: {
      inherit: true,
      isNonstandard: "Past"
+   },
 @@ -802,10 +805,6 @@
      inherit: true,
      isNonstandard: "Past"
@@ -385,8 +401,8 @@ diff -ru package/dist/data/mods/champions/items.js ../pssim/node_modules/pokemon
 +  Items
 +});
 diff -ru package/dist/data/mods/champions/moves.js ../pssim/node_modules/pokemon-showdown/dist/data/mods/champions/moves.js
---- package/dist/data/mods/champions/moves.js	1985-10-26 04:15:00.000000000 -0400
-+++ ../pssim/node_modules/pokemon-showdown/dist/data/mods/champions/moves.js	2026-09-25 02:29:07.289265492 -0400
+--- package/dist/data/mods/champions/moves.js
++++ ../pssim/node_modules/pokemon-showdown/dist/data/mods/champions/moves.js
 @@ -1,4 +1,3 @@
 -"use strict";
  var __defProp = Object.defineProperty;
@@ -430,10 +446,11 @@ diff -ru package/dist/data/mods/champions/moves.js ../pssim/node_modules/pokemon
    crabhammer: {
      inherit: true,
      accuracy: 95
-@@ -192,6 +185,37 @@
+@@ -191,6 +184,37 @@
+   crushgrip: {
      inherit: true,
      isNonstandard: "Past"
-   },
++  },
 +  curse: {
 +    inherit: true,
 +    tracksTarget: true,
@@ -464,11 +481,10 @@ diff -ru package/dist/data/mods/champions/moves.js ../pssim/node_modules/pokemon
 +      delete target.volatiles["curse"];
 +      target.addVolatile("curse");
 +    }
-+  },
+   },
    cut: {
      inherit: true,
-     isNonstandard: "Past"
-@@ -219,19 +243,21 @@
+@@ -219,20 +243,22 @@
        chance: 30,
        onHit(target, source) {
          const status = this.sample(["psn", "par", "slp"]);
@@ -486,7 +502,7 @@ diff -ru package/dist/data/mods/champions/moves.js ../pssim/node_modules/pokemon
 -    desc: "Has a 30% chance to cause the target to either fall asleep, become poisoned, or become paralyzed.",
 -    shortDesc: "30% chance to sleep, poison, or paralyze target."
 +    }
-+  },
+   },
 +  disable: {
 +    inherit: true,
 +    condition: {
@@ -498,9 +514,10 @@ diff -ru package/dist/data/mods/champions/moves.js ../pssim/node_modules/pokemon
 +        }
 +      }
 +    }
-   },
++  },
    disarmingvoice: {
      inherit: true,
+     isNonstandard: "Past"
 @@ -251,7 +277,7 @@
    },
    doubleshock: {
@@ -627,26 +644,28 @@ diff -ru package/dist/data/mods/champions/moves.js ../pssim/node_modules/pokemon
    },
    moongeistbeam: {
      inherit: true,
-@@ -710,15 +719,15 @@
+@@ -710,6 +719,10 @@
      inherit: true,
      pp: 5
    },
--  orderup: {
 +  octolock: {
-     inherit: true,
--    isNonstandard: "Past"
++    inherit: true,
 +    isNonstandard: null
-   },
--  originpulse: {
-+  orderup: {
++  },
+   orderup: {
+     inherit: true,
+     isNonstandard: "Past"
+@@ -718,10 +731,6 @@
      inherit: true,
      isNonstandard: "Past"
    },
 -  overdrive: {
-+  originpulse: {
+-    inherit: true,
+-    isNonstandard: "Past"
+-  },
+   payday: {
      inherit: true,
      isNonstandard: "Past"
-   },
 @@ -798,15 +807,9 @@
      inherit: true,
      pp: 5
@@ -716,14 +735,15 @@ diff -ru package/dist/data/mods/champions/moves.js ../pssim/node_modules/pokemon
    },
    snowscape: {
      inherit: true,
-@@ -1003,12 +995,14 @@
+@@ -1002,13 +994,15 @@
+   strength: {
      inherit: true,
      isNonstandard: "Past"
-   },
++  },
 +  strengthsap: {
 +    inherit: true,
 +    pp: 5
-+  },
+   },
    stuffcheeks: {
      inherit: true,
 -    onDisableMove: void 0,
@@ -745,25 +765,25 @@ diff -ru package/dist/data/mods/champions/moves.js ../pssim/node_modules/pokemon
    },
    trickortreat: {
      inherit: true,
-@@ -1155,17 +1147,20 @@
+@@ -1155,6 +1147,10 @@
      inherit: true,
      isNonstandard: "Past"
    },
--  withdraw: {
 +  wish: {
-     inherit: true,
--    isNonstandard: "Past"
++    inherit: true,
 +    pp: 5
-   },
--  workup: {
-+  withdraw: {
++  },
+   withdraw: {
      inherit: true,
      isNonstandard: "Past"
-   },
+@@ -1162,10 +1158,9 @@
+   workup: {
+     inherit: true,
+     isNonstandard: "Past"
+-  },
 -  zingzap: {
-+  workup: {
-     inherit: true,
-     isNonstandard: "Past"
+-    inherit: true,
+-    isNonstandard: "Past"
    }
  };
 -//# sourceMappingURL=moves.js.map
@@ -772,8 +792,8 @@ diff -ru package/dist/data/mods/champions/moves.js ../pssim/node_modules/pokemon
 +  Moves
 +});
 diff -ru package/dist/data/pokedex.js ../pssim/node_modules/pokemon-showdown/dist/data/pokedex.js
---- package/dist/data/pokedex.js	1985-10-26 04:15:00.000000000 -0400
-+++ ../pssim/node_modules/pokemon-showdown/dist/data/pokedex.js	2026-09-25 02:29:07.336714053 -0400
+--- package/dist/data/pokedex.js
++++ ../pssim/node_modules/pokemon-showdown/dist/data/pokedex.js
 @@ -6764,7 +6764,7 @@
      forme: "Mega-Z",
      types: ["Dark", "Ghost"],
@@ -792,6 +812,15 @@ diff -ru package/dist/data/pokedex.js ../pssim/node_modules/pokemon-showdown/dis
      heightm: 1.9,
      weightkg: 99,
      color: "Blue",
+@@ -8301,7 +8301,7 @@
+     types: ["Fighting", "Steel"],
+     genderRatio: { M: 0.875, F: 0.125 },
+     baseStats: { hp: 70, atk: 100, def: 70, spa: 164, spd: 70, spe: 151 },
+-    abilities: { 0: "Adaptability" },
++    abilities: { 0: "Aura Guard" },
+     heightm: 1.3,
+     weightkg: 49.4,
+     color: "Gray",
 @@ -14592,7 +14592,7 @@
      forme: "Mega",
      types: ["Bug", "Steel"],

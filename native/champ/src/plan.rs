@@ -319,6 +319,8 @@ fn race_damage(b: &Battle, cd: &crate::data::Data, a: MonRef, d: MonRef, mid: Id
         let v = crate::calc::damage(cd, &cmon(b, a), &cmon(b, d), mid, &f, 7, false, &pa.stored, &pd.stored);
         let mut m = c.borrow_mut(); if m.len() > 2_000_000 { m.clear(); } m.insert(key, v); v })
 }
+/// race_damage for vfeats.rs (the learned-value features), same memo
+pub(crate) fn race_damage_pub(b: &Battle, cd: &crate::data::Data, a: MonRef, d: MonRef, mid: Id, spread: bool, scr: u8) -> Option<i64> { race_damage(b, cd, a, d, mid, spread, scr) }
 /// FEATS22 bench edge: what each side has in the back against the other side's actives: for each living bench Pokemon its best damaging
 /// move's mid-roll hit on each foe active as a share of that foe's HP (accuracy x expected hits), the best over bench and foes, capped at 1;
 /// side 0's minus side 1's. A position where the answer is on the bench reads better than one where it is not.

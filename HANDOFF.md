@@ -209,6 +209,7 @@ cd trsheet && SIX="Blastoise,Torkoal,Farigiraf,Kingambit,Incineroar" COV=../mxtr
 
 ## Gotchas
 
+- **The Showdown bot's engine is frozen (2026-10-12):** `native/champ/bin/battlesim-champ` points to `bin/champ-bot-2026-10-11` (a byte-identical copy of the build the bot runs; sha256 file beside it), not to `target/release/champ`, so a rebuild cannot change the live bot (the user: no bot changes until they say so). Develop with `CARGO_TARGET_DIR=$PWD/target_value` (link `bin/battlesim-champ-dev`); repoint `battlesim-champ` only when the user approves a bot change.
 - Lead names are ordered: newcomers first, then Indeedee-F, Hatterene, Farigiraf, Torkoal, Kingambit, Blastoise (e.g. `Incineroar+Farigiraf`, `Farigiraf+Blastoise`). Rules, Speed keys and `FB` depend on it; `jobs_team.js` keeps it.
 - The back row is a default (fill to both setters, then attackers by archetype preference). The sim doesn't choose it. It matters for turn-one switches and the Trick Room credit.
 - First-pass (1-sample) values run about 0.5 higher than refined ones for the leads that get picked (selection bias). Compare refined to refined.
@@ -1116,3 +1117,24 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     8.26 -> 8.19 turns. PP stalling, the case it could cost: in 4,923 cached real games a move ran out of PP in 15 (0.3%; Protect itself in
     8), and the 7 Struggle games were too short for PP to be the cause (Taunt / Disable / Choice locks). On for the Showdown bot
     (bot/position.py), off by default elsewhere.
+
+## A better position value (2026-10-12, started; the user: "let's start working towards a better position score")
+- Why: on the bot's ladder games the planner predicts +4.1 points a decision from opponents' plays and the bot gets +0.9 (`bot/ladder_lines.py`;
+  bot/planner_issues.md "Where the strength gap is"): the bot's own picks are drawn to positions the value overrates, and depth with the
+  same value does not help (two-turn horizon flat in self-play twice). On Eval bar's 560 held-out real games the static value's log loss is
+  0.557 and the one-turn search's 0.523 (turn 1: static 0.704, worse than a coin flip): the static value misses most of what one turn of
+  search sees.
+- Data (`pssim/value_data.py`, results/value/, git-ignored): every turn of the cached Bo3 games rebuilt by evalbar/spots.py (hindsight
+  sets) as engine positions with results: fit 28,393 positions / 3,929 games, held out 3,968 / 560 (Eval bar's accuracy games); `search`
+  adds the one-turn search value of every position (champ evalpos, 32 seeds staged, sym2; about 2 s a position on one core with the
+  current build), `feats` the 28 plan.rs features.
+- Features (`native/champ/src/vfeats.rs`, `champ vfeats`, dev build only): per side, its actives against the other side's this turn
+  (damage potential, focus fire, foes it can KO alone / first / by focus, outspeeds, priority and spread potential), what it has on hand
+  (Protect, Fake Out, redirection, speed control, setup, Intimidate on the bench, the bench's threat and safest switch-in), actives in
+  danger, boosts, statuses, Mega, locks; the field per side (Trick Room turns and whom it favours, Tailwinds, screens, terrain, weather,
+  turn). About 0.3 ms a position.
+- Fits (`pssim/value_fit.py compare`): value = sigmoid(h(e) - h(e_swapped)), symmetric by construction. On real results, a linear h on
+  the new features + the 28 old ones: held-out log loss **0.5423** vs the current static 0.5535 (-0.011 ± 0.006); one-hidden-layer nets
+  overfit the ~3,900 games' results (0.545-0.67). Next: distil the one-turn search (its values as targets, far less noisy than results),
+  then put the best h into the engine behind a flag and measure: held-out log loss of the one-turn search with it at the leaves, self-play
+  head-to-head, and the bot's ledger.

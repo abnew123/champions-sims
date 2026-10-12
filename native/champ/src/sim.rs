@@ -480,8 +480,13 @@ impl Battle {
         let new_max = sd.stats[0] + self.p(m).evs[0] + 75;
         let p = self.pm(m);
         if new_max != p.base_maxhp { p.base_maxhp = new_max; p.hp = if p.hp <= 0 { 0 } else { (new_max - (p.maxhp - p.hp)).max(1) }; p.maxhp = new_max; }
-        let name = self.mon_name(m); self.add(&["-mega", &name, sd.name]);
-        self.pm(m).move_this_turn_result = Tri::B(true);
+        // formeChange(.., isPermanent): only an item (Mega Stone) logs -mega and sets moveThisTurnResult; Disguise and Ice Face keep
+        // the ability and its state (busted) (2026-10-12: the engine did all of it for every source)
+        if source.map(|e| e.kind == Kind::Item).unwrap_or(false) {
+            let name = self.mon_name(m); self.add(&["-mega", &name, sd.name]);
+            self.pm(m).move_this_turn_result = Tri::B(true);
+        }
+        if source.map(|e| e.id == "disguise" || e.id == "iceface").unwrap_or(false) { return; }
         let ab = sd.abilities.iter().find(|(k, _)| *k == "0").map(|x| x.1).unwrap_or("");
         self.set_ability(m, ab, None, None, true);
         self.pm(m).base_ability = ab;

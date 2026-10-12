@@ -104,7 +104,7 @@ def eval_bar():
 THREADS = {'kit': 'TR sheet', 'sim': 'Battle sim', 'ts': 'Team search', 'eb': 'Eval bar'}
 
 # ---- every process using CPU (2026-10-12, the user: anything that uses cores must show here, progress stamp or not) ----
-PREFIX = {'battlesim-': 'Battle sim', 'evalbar-': 'Eval bar', 'trsheet-': 'TR sheet', 'teamsearch-': 'Team search'}
+PREFIX = {'battlesim-': 'Battle sim', 'evalbar-': 'Eval bar', 'trsheet-': 'TR sheet', 'teamsearch-': 'Team search', 'arc-': 'ARC-AGI-3'}
 SHEET_THREAD = {'trick-room-six': 'TR sheet', 'frankfurt-239': 'Frankfurt-239 sheet', 'frankfurt-156': 'Frankfurt-156 sheet'}
 def sheet_thread(slug): return SHEET_THREAD.get(slug) or ' '.join(w.capitalize() for w in slug.split('-')) + ' sheet'
 SHEET_PATHS = []
@@ -178,6 +178,13 @@ def tagged(c, thread):
     return c.replace('<div class="top">', f'<div class="who">{html.escape(thread)}</div><div class="top">', 1)
 
 def page():
+    """the page, built at most once every 8 s however many tabs poll it (a build takes ~1.5 s of CPU; the cache lives on the sys module,
+    which outlasts the runpy re-reads of this file)"""
+    c = sys.__dict__.setdefault('_status_page_cache', {})
+    if c.get('html') and time.time() - c.get('t', 0) < 8: return c['html']
+    h = build_page(); c.update(html=h, t=time.time()); return h
+
+def build_page():
     now = datetime.datetime.now()
     ps = subprocess.run(['ps', '-axo', 'command'], capture_output=True, text=True).stdout   # a local run is live while its workers are
     local = lambda r: any((('node' in l or re.search(r'champ\S* (battle|plan|spot)', l)) and (os.path.basename(r['outdir']) in l) and

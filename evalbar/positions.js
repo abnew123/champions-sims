@@ -78,7 +78,7 @@ function rebuild(spec, flip) {
         p.status = x.status; p.statusState = b.initEffectState({id: x.status, target: p});
         // the sleep counter is hidden: the case live.py's sleep_cases gives (2 or 3), else the likelier 3, less the turns slept (Early Bird: twice)
         if (x.status === 'slp') { const n = x.sleepStart || 3; p.statusState.startTime = n; p.statusState.time = Math.max(1, n - (x.slept || 0) * (p.hasAbility('earlybird') ? 2 : 1)); }
-        if (x.status === 'tox') p.statusState.stage = 1;
+        if (x.status === 'tox') p.statusState.stage = spec.chipDue ? (x.toxn || 0) : 1;   // chipDue: the ticks so far (it counts up each end of turn)
       }
       const item = toID(x.itemNow);
       if (p.item !== item) { if (!item) p.lastItem = p.item; p.item = item; p.itemState = b.initEffectState({id: item, target: p}); }
@@ -104,6 +104,13 @@ function rebuild(spec, flip) {
       // fieldDue (live.specs_for sets it, the bot's positions do not yet): Unburden doubles Speed once its item is gone while it is on the
       // field (Showdown keeps that as a volatile the log never shows), and Perish Song's count goes on (a fresh volatile would be 4)
       if (spec.fieldDue && x.unburden && p.hasAbility('unburden') && !toID(x.itemNow)) p.addVolatile('unburden');
+      // chipDue (live.specs_for; not the bot's yet): a binding move (Infestation, Whirlpool...) goes on from its user, 5 turns less those passed
+      // (Showdown draws 5 or 6, 8 with Grip Claw), with its end-of-turn damage and its trap
+      if (spec.chipDue && x.ptrap) {
+        const src = side.foe.active.find(q => q && !q.fainted && toID(q.species.baseSpecies) === toID(dex.species.get(x.ptrap[2] || '').baseSpecies || ''));
+        if (src && p.addVolatile('partiallytrapped', src, dex.getActiveMove(toID(x.ptrap[0])))) p.volatiles.partiallytrapped.duration = Math.max(1, (src.hasItem('gripclaw') ? 8 : 5) - (x.ptrap[1] || 0));
+        else approx.push('bound');
+      }
       // abilDue (live.specs_for; not the bot's yet): an ability it gained in battle (Trace, Skill Swap, Role Play), set without its start
       if (spec.abilDue && x.abilityNow && dex.abilities.get(toID(x.abilityNow)).exists) { p.ability = toID(x.abilityNow); p.abilityState = b.initEffectState({id: p.ability, target: p}); }
       if (spec.fieldDue && x.perish > 0) { if (p.addVolatile('perishsong')) p.volatiles.perishsong.duration = x.perish; else approx.push('Perish Song'); }

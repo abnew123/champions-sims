@@ -627,6 +627,14 @@ pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
     if b.p(m).fainted { return vec![PChoice::Pass]; }
     let req = b.request_moves(m);
     let locked = b.get_locked_move(m).is_some();
+    // a locked move (a charged two-turn move, Outrage...) fires at the target Showdown stored for it (side.chooseMove: volatiles[move]
+    // .targetLoc, else lastMoveTargetLoc), whatever is chosen; make_move_action does the same, so per-target options were duplicates
+    // (2026-10-12, the Eval bar: Electro Shot shown as 50/50 over two targets). One option, at the stored target.
+    if let Some(l) = b.get_locked_move(m) {
+        let p = b.p(m); let mut tl = p.last_move_target_loc.unwrap_or(0);
+        if let Some(t) = find(&p.volatiles, l).and_then(|x| x.n("targetLoc")) { if t != 0.0 { tl = t as i64; } }
+        if !req.is_empty() && FOE_TARGETS.contains(&req[0].1) { return vec![PChoice::Move(0, tl, false)]; }
+    }
     let mega = !locked && b.p(m).can_mega_evo.is_some();
     let mut out = vec![];
     let foes: Vec<Option<MonRef>> = (0..2).map(|t| b.sides[1 - s as usize].active[t].map(|x| (1 - s, x))).collect();

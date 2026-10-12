@@ -2,8 +2,8 @@
   "format": "gen9championsvgc2026regmcbo3",
   "max_games_per_day": null,
   "max_games_per_hour": 6,
-  "stop_if_rating_at_least": 1500,
-  "stop_if_opponent_in_top": 100,
+  "stop_if_rating_at_least": null,
+  "stop_if_opponent_in_top": 50,
   "think_seconds": [
     4,
     12
@@ -13,5 +13,6 @@
   "pm_reply": "I'm a bot (a Pokemon Champions planner being measured against real players). I play this format only and don't chat. GG!",
   "paused": false,
   "forfeit_below": 0.02,
-  "protect_chain_cap": 4
+  "protect_chain_cap": 4,
+  "max_search_seconds": 30
 }

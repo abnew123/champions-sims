@@ -87,9 +87,9 @@ def compare(target='outcome', parts=('fit',), configs=None):
     base = dict(rows)['current static value (sym2), rescaled']
     best = min(rows, key=lambda r: r[1].mean())
     print(f"  best: {best[0]}, {best[1].mean() - base.mean():+.4f} ± {boot(best[1] - base, H['g']):.4f} against the current static value")
-def export(hidden=16, l2=1e-3, target='search', out=None):
-    """fit h on the fit set and write it for the engine (EG_VNET): input scales, weights, and the sizes of the vfeats blocks"""
-    F = load('fit'); H = load('hold')
+def export(hidden=16, l2=1e-3, target='search', out=None, parts=('fit',)):
+    """fit h on the training parts and write it for the engine (EG_VNET): input scales, weights, and the sizes of the vfeats blocks"""
+    F = load_parts(parts); H = load('hold')
     sd = np.concatenate([F['E'], F['S']]).std(0); sd = np.where(sd < 1e-3, 1.0, sd)
     tgt = lg(F['search']) if target == 'search' else F['y']
     m = Model(hidden, l2, sd).fit(F['E'], F['S'], tgt, target)
@@ -97,7 +97,7 @@ def export(hidden=16, l2=1e-3, target='search', out=None):
     W = m.p[:hidden * d].reshape(hidden, d).tolist() if hidden else None; v = m.p[hidden * d:].tolist() if hidden else m.p.tolist()
     zh = m.z(H['E'], H['S']); c = rescale(m.z(F['E'], F['S']), F['y'])
     print(f"h{hidden} l2 {l2} on {target}: held-out log loss {ll(c * zh, H['y']).mean():.4f} (rescale {c:.3f})")
-    out = out or os.path.join(OUT, f'vnet_h{hidden}_{target}.json')
+    out = out or os.path.join(OUT, f"vnet_h{hidden}_{target}{'_' + '+'.join(parts) if parts != ('fit',) else ''}.json")
     json.dump({'hidden': hidden, 'sd': sd.tolist(), 'W': W, 'v': v, 'blocks': {'side': 32, 'field': 12, 'x': 28}, 'target': target, 'l2': l2,
                'note': 'value = sigmoid(h(e) - h(e_swapped)); e = [side 0, side 1, field for 0, plan.rs feats[:28]] (value_fit.py)'}, open(out, 'w'))
     print('->', out)
@@ -106,4 +106,5 @@ if __name__ == '__main__':
     if a[0] == 'compare':
         cf = [tuple(float(x) if '.' in x or 'e' in x else int(x) for x in c.split(':')) for c in a[3].split(',')] if len(a) > 3 else None
         compare(a[1] if len(a) > 1 else 'outcome', tuple(a[2].split(',')) if len(a) > 2 else ('fit',), cf)
-    elif a[0] == 'export': export(int(a[1]) if len(a) > 1 else 16, float(a[2]) if len(a) > 2 else 1e-3, a[3] if len(a) > 3 else 'search')
+    elif a[0] == 'export': export(int(a[1]) if len(a) > 1 else 16, float(a[2]) if len(a) > 2 else 1e-3, a[3] if len(a) > 3 else 'search',
+                                  parts=tuple(a[4].split(',')) if len(a) > 4 else ('fit',))

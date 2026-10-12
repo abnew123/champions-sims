@@ -17,14 +17,15 @@ def load(part):
         for l in open(pe):
             r = json.loads(l)
             if 'error' not in r: ev[r['name']] = r['value']
-    E, S, y, g, st, sv, names = [], [], [], [], [], [], []
+    E, S, y, g, st, sv, names, rt = [], [], [], [], [], [], [], []
     for l in open(os.path.join(OUT, f'real_{part}.vfeats.jsonl')):
         r = json.loads(l)
         if 'error' in r or r['name'] not in meta: continue
         m = meta[r['name']]; x = np.array(r['x'][:28])
         E.append(np.concatenate([r['f0'], r['f1'], r['g0'], x])); S.append(np.concatenate([r['f1'], r['f0'], r['g1'], -x]))
         y.append(m['y']); g.append(m['game']); st.append(r['static']); sv.append(ev.get(r['name'], np.nan)); names.append(r['name'])
-    return dict(E=np.array(E), S=np.array(S), y=np.array(y), g=g, static=np.array(st), search=np.array(sv), names=names)
+        rt.append(m.get('rating') or 0.0)
+    return dict(E=np.array(E), S=np.array(S), y=np.array(y), g=g, static=np.array(st), search=np.array(sv), names=names, rating=np.array(rt))
 def lg(p): p = np.clip(p, 1e-4, 1 - 1e-4); return np.log(p / (1 - p))
 def ll(z, y): z = np.clip(z, -30, 30); return np.logaddexp(0, -z) * y + np.logaddexp(0, z) * (1 - y)
 def rescale(z, y): return minimize(lambda c: ll(c[0] * z, y).mean(), [1.0], method='Nelder-Mead').x[0]
@@ -52,11 +53,14 @@ class Model:
     def fit(s, E, S, target, kind, seed=0):
         d = E.shape[1]; rnd = np.random.default_rng(seed)
         p0 = np.zeros(d) if s.h == 0 else np.concatenate([rnd.normal(0, 0.2, s.h * d), rnd.normal(0, 0.2, s.h)])
-        n = len(target)
+        n = len(target[0]) if kind == 'mix' else len(target)
         def f(p):
             z, back = s._z(p, E, S, True)
             if kind == 'outcome':
                 l = ll(z, target).mean(); e = (1 / (1 + np.exp(-np.clip(z, -30, 30))) - target) / n
+            elif kind == 'mix':
+                yv, sv = target; a = float(os.environ.get('MIX_W', 0.1)); r = z - sv
+                l = ll(z, yv).mean() + a * np.mean(r ** 2); e = (1 / (1 + np.exp(-np.clip(z, -30, 30))) - yv) / n + a * 2 * r / n
             else:
                 r = z - target; l = np.mean(r ** 2); e = 2 * r / n
             return l + s.l2 * p @ p, back(e) + 2 * s.l2 * p
@@ -64,12 +68,18 @@ class Model:
         return s
     def z(s, E, S): return s._z(s.p, E, S)
 def load_parts(parts):
+    """the training parts together; env MIN_RATING keeps only positions from games whose players' mean rating is at least that"""
     D = [load(p) for p in parts]
-    return {k: (np.concatenate([d[k] for d in D]) if isinstance(D[0][k], np.ndarray) else sum((d[k] for d in D), [])) for k in D[0]}
+    F = {k: (np.concatenate([d[k] for d in D]) if isinstance(D[0][k], np.ndarray) else sum((d[k] for d in D), [])) for k in D[0]}
+    mr = float(os.environ.get('MIN_RATING', 0))
+    if mr:
+        keep = F['rating'] >= mr
+        F = {k: (v[keep] if isinstance(v, np.ndarray) else [x for x, kk in zip(v, keep) if kk]) for k, v in F.items()}
+    return F
 def compare(target='outcome', parts=('fit',), configs=None):
     F = load_parts(parts); H = load('hold')
     sd = np.concatenate([F['E'], F['S']]).std(0); sd = np.where(sd < 1e-3, 1.0, sd)   # near-constant columns are left unscaled
-    print(f"fit {len(F['y'])} positions / {len(set(F['g']))} games, held out {len(H['y'])} / {len(set(H['g']))}; {F['E'].shape[1]} inputs per view")
+    print(f"fit {len(F['y'])} positions / {len(set(F['g']))} games{' (rating ' + os.environ['MIN_RATING'] + '+)' if os.environ.get('MIN_RATING') else ''}, held out {len(H['y'])} / {len(set(H['g']))}; {F['E'].shape[1]} inputs per view")
     rows = []
     def report(name, zf, zh):
         c = rescale(zf, F['y']); l = ll(c * zh, H['y']); rows.append((name, l))
@@ -79,8 +89,8 @@ def compare(target='outcome', parts=('fit',), configs=None):
         report('one-turn search (sym2 at the leaves)', lg(np.nan_to_num(F['search'], nan=0.5)), lg(H['search']))
     has_search = not np.isnan(F['search']).any()
     for kind in (['outcome', 'search'] if target == 'both' else [target]):
-        if kind == 'search' and not has_search: print('  (no search values for the fit set yet)'); continue
-        tgt = F['y'] if kind == 'outcome' else lg(F['search'])
+        if kind in ('search', 'mix') and not has_search: print('  (no search values for the fit set yet)'); continue
+        tgt = F['y'] if kind == 'outcome' else lg(F['search']) if kind == 'search' else (F['y'], lg(F['search']))
         for h, l2 in (configs or ((0, 1e-4), (0, 1e-3), (16, 1e-4), (16, 1e-3), (32, 1e-3), (64, 3e-3))):
             m = Model(h, l2, sd).fit(F['E'], F['S'], tgt, kind)
             report(f"{'linear' if h == 0 else f'net h{h}'} l2 {l2} on {kind}", m.z(F['E'], F['S']), m.z(H['E'], H['S']))

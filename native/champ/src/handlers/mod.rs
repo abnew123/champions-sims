@@ -18,6 +18,7 @@ pub mod conditions;
 pub mod moves;
 pub mod abilities;
 pub mod items;
+pub mod batch4;
 
 pub fn build() -> Reg {
     let mut r: Reg = FxMap::default();
@@ -25,6 +26,7 @@ pub fn build() -> Reg {
     moves::register(&mut r);
     abilities::register(&mut r);
     items::register(&mut r);
+    batch4::register(&mut r);
     r
 }
 

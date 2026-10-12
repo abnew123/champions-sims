@@ -4,7 +4,7 @@ sigmoid(h(e) - h(e_swapped)): e = [side 0's matchup features, side 1's, the fiel
 one-hidden-layer tanh net, fitted with a ridge penalty by L-BFGS. Targets: the game's result (log loss), or the one-turn search's value
 (value_data.py search: squared error on its log-odds, i.e. distilling the search into a static value). Everything is scored on the 560
 held-out games against real results, as log loss with a rescale fitted on the training games (SE by bootstrapping games).
-  ../.venv/bin/python3 value_fit.py compare [target=outcome|search|both]"""
+  ../.venv/bin/python3 value_fit.py compare [target=outcome|search|both] [parts=fit[,new]] [configs=hidden:l2,...]"""
 import os, sys, json, math, random, collections
 import numpy as np
 from scipy.optimize import minimize
@@ -63,8 +63,11 @@ class Model:
         s.p = minimize(f, p0, jac=True, method='L-BFGS-B', options={'maxiter': 3000}).x
         return s
     def z(s, E, S): return s._z(s.p, E, S)
-def compare(target='outcome'):
-    F = load('fit'); H = load('hold')
+def load_parts(parts):
+    D = [load(p) for p in parts]
+    return {k: (np.concatenate([d[k] for d in D]) if isinstance(D[0][k], np.ndarray) else sum((d[k] for d in D), [])) for k in D[0]}
+def compare(target='outcome', parts=('fit',), configs=None):
+    F = load_parts(parts); H = load('hold')
     sd = np.concatenate([F['E'], F['S']]).std(0); sd = np.where(sd < 1e-3, 1.0, sd)   # near-constant columns are left unscaled
     print(f"fit {len(F['y'])} positions / {len(set(F['g']))} games, held out {len(H['y'])} / {len(set(H['g']))}; {F['E'].shape[1]} inputs per view")
     rows = []
@@ -78,7 +81,7 @@ def compare(target='outcome'):
     for kind in (['outcome', 'search'] if target == 'both' else [target]):
         if kind == 'search' and not has_search: print('  (no search values for the fit set yet)'); continue
         tgt = F['y'] if kind == 'outcome' else lg(F['search'])
-        for h, l2 in ((0, 1e-4), (0, 1e-3), (16, 1e-4), (16, 1e-3), (32, 1e-3), (64, 3e-3)):
+        for h, l2 in (configs or ((0, 1e-4), (0, 1e-3), (16, 1e-4), (16, 1e-3), (32, 1e-3), (64, 3e-3))):
             m = Model(h, l2, sd).fit(F['E'], F['S'], tgt, kind)
             report(f"{'linear' if h == 0 else f'net h{h}'} l2 {l2} on {kind}", m.z(F['E'], F['S']), m.z(H['E'], H['S']))
     base = dict(rows)['current static value (sym2), rescaled']
@@ -100,5 +103,7 @@ def export(hidden=16, l2=1e-3, target='search', out=None):
     print('->', out)
 if __name__ == '__main__':
     a = sys.argv[1:]
-    if a[0] == 'compare': compare(a[1] if len(a) > 1 else 'outcome')
+    if a[0] == 'compare':
+        cf = [tuple(float(x) if '.' in x or 'e' in x else int(x) for x in c.split(':')) for c in a[3].split(',')] if len(a) > 3 else None
+        compare(a[1] if len(a) > 1 else 'outcome', tuple(a[2].split(',')) if len(a) > 2 else ('fit',), cf)
     elif a[0] == 'export': export(int(a[1]) if len(a) > 1 else 16, float(a[2]) if len(a) > 2 else 1e-3, a[3] if len(a) > 3 else 'search')

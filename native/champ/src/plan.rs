@@ -333,7 +333,9 @@ fn screens_of(b: &Battle, s: u8) -> Vec<String> { ["reflect", "lightscreen", "au
 fn race_damage(b: &Battle, cd: &crate::data::Data, a: MonRef, d: MonRef, mid: Id, spread: bool, scr: u8) -> Option<i64> {
     let (pa, pd) = (b.p(a), b.p(d));
     if !cd.species.contains_key(pa.species) || !cd.species.contains_key(pd.species) || !cd.moves.contains_key(mid) { return None; }
-    let hp_a = if mid == "eruption" || mid == "waterspout" { (pa.hp, pa.maxhp) } else { (0, 0) };
+    // the attacker's HP matters to Eruption / Water Spout and to the pinch abilities (Blaze, Torrent, Overgrow, Swarm at 1/3 HP or less;
+    // calc.rs `pinch`): without the flag a low-HP attacker could read a full-HP hit from the memo, or the reverse (2026-10-12)
+    let hp_a = if mid == "eruption" || mid == "waterspout" { (pa.hp, pa.maxhp) } else { ((pa.hp * 3 <= pa.maxhp) as i64, 0) };
     let hp_d = if ["hardpress", "superfang", "ruination"].contains(&mid) { (pd.hp, pd.maxhp) } else { ((pd.hp >= pd.maxhp) as i64, 0) };
     let key = DKey { mv: PId(mid), a: (PId(pa.species), PId(pa.item), PId(pa.ability), PId(pa.status)), d: (PId(pd.species), PId(pd.item), PId(pd.ability), PId(pd.status)),
         ab: [pa.boosts[0], pa.boosts[1], pa.boosts[2], pa.boosts[3], pa.boosts[4]], db: [pd.boosts[0], pd.boosts[1], pd.boosts[2], pd.boosts[3], pd.boosts[4]],

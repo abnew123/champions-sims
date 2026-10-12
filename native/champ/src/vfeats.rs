@@ -34,26 +34,28 @@ fn hits(b: &mut Battle, cd: &crate::data::Data, a: MonRef, foes: &[MonRef]) -> V
     if foes.is_empty() || !cd.species.contains_key(b.p(a).species) { return out; }
     let s = a.0; let o = 1 - s;
     let psy = b.field.terrain == "psychicterrain"; let grassy = b.field.terrain == "grassyterrain";
+    // what needs &mut Battle, once per call: grounded foes, a priority-blocking ability on their side
+    let grounded: Vec<bool> = if psy { foes.iter().map(|f| b.is_grounded(*f, false) == Some(true)).collect() } else { vec![false; foes.len()] };
     let blocks = active(b, o).iter().any(|m| ["armortail", "dazzling", "queenlymajesty"].contains(&b.p(*m).ability));
+    let b: &Battle = b;
     let lock = find(&b.p(a).volatiles, "choicelock").and_then(|cl| cl.get("move").and_then(|v| v.s()));
-    let slots: Vec<(Id, i64, bool)> = b.p(a).move_slots.iter().map(|x| (x.id, x.pp, x.disabled)).collect();
-    let scr = screens_bits(b, o);
-    for (mid, pp, disabled) in slots {
-        if pp <= 0 || disabled || mid == "fakeout" || lock.map(|l| l != mid).unwrap_or(false) || !cd.moves.contains_key(mid) { continue; }
-        let tm = b.dex.mv(mid).tmpl.clone();
+    let scr = screens_bits(b, o); let skill = b.p(a).ability == "skilllink";
+    for sl in &b.p(a).move_slots {
+        let mid = sl.id;
+        if sl.pp <= 0 || sl.disabled || mid == "fakeout" || lock.map(|l| l != mid).unwrap_or(false) || !cd.moves.contains_key(mid) { continue; }
+        let tm = &b.dex.mv(mid).tmpl;
         if tm.category == "Status" { continue; }
         let pr = if mid == "grassyglide" { if grassy { 1 } else { 0 } } else { tm.priority as i64 };
         let spread = (tm.target == "allAdjacentFoes" || tm.target == "allAdjacent") && foes.len() == 2;
         let acc = tm.accuracy.map(|x| (x / 100.0).min(1.0)).unwrap_or(1.0);
-        let nh = match tm.multihit { Some((lo, hi)) if lo == hi => lo as f64, Some((_, hi)) => if b.p(a).ability == "skilllink" { hi as f64 } else { 3.1 }, None => 1.0 };
-        let mut row = |tg: &[usize], b: &mut Battle| -> Vec<f64> {
+        let nh = match tm.multihit { Some((lo, hi)) if lo == hi => lo as f64, Some((_, hi)) => if skill { hi as f64 } else { 3.1 }, None => 1.0 };
+        let row = |tg: &[usize]| -> Vec<f64> {
             let mut d = vec![0.0; foes.len()];
             for &j in tg { if let Some(x) = race_damage_pub(b, cd, a, foes[j], mid, spread, scr) { d[j] = x as f64 * acc * nh; } }
             d };
-        let grounded: Vec<bool> = foes.iter().map(|f| b.is_grounded(*f, false) == Some(true)).collect();
         let prio_ok = |j: usize| pr > 0 && !(psy && grounded[j]) && !blocks;
-        if spread { let all: Vec<usize> = (0..foes.len()).collect(); let d = row(&all, b); out.push(Hit { dmg: d, prio: pr > 0 && (0..foes.len()).all(|j| prio_ok(j)), spread: true }); }
-        else { for j in 0..foes.len() { let d = row(&[j], b); out.push(Hit { dmg: d, prio: prio_ok(j), spread: false }); } }
+        if spread { let all: Vec<usize> = (0..foes.len()).collect(); out.push(Hit { dmg: row(&all), prio: pr > 0 && (0..foes.len()).all(|j| prio_ok(j)), spread: true }); }
+        else { for j in 0..foes.len() { out.push(Hit { dmg: row(&[j]), prio: prio_ok(j), spread: false }); } }
     }
     out
 }

@@ -101,3 +101,6 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
    first; also made `champ feats` / `vfeats` depend on thread count (2 of 3,968 held-out positions). The key now carries the pinch flag;
    features are identical on 1 and 2 threads. The live bot still runs the frozen build with the bug (rare: those four abilities near the
    line); it goes in with the next approved engine change.
+12. **Engine moves without handlers (the Eval bar, 2026-10-12):** Defog (does not clear screens / hazards / terrain), Court Change (does
+   not swap side conditions), Tidy Up (does not clear hazards / Substitutes): the move data runs, the special effects do not. Nearly
+   unused in Reg M-C (18.8k replays: Defog 4 uses, Tidy Up 4, Court Change 0); fix if a team that matters brings one.

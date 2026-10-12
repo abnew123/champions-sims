@@ -94,3 +94,10 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
   price of 0.52 against a perfect opponent; half and half gains +0.39 at 0.26. A perfect read is worth +9.8 a decision, so a sharper
   model of human play (by situation, by turn, by what the player did earlier in the match) has room. Valued by the planner's own
   matrix, so it inherits the value's errors.
+11. **The damage race's memo ignored the attacker's HP for pinch abilities (found 2026-10-12, fixed in the dev build only).** plan.rs
+   `race_damage` caches calc results by a key that had the attacker's HP only for Eruption / Water Spout, but calc.rs boosts a move 1.5x
+   for Blaze / Torrent / Overgrow / Swarm at 1/3 HP or less. Within one decision the search reaches leaves with that attacker both above
+   and below the line, so some leaves read the other's damage (the race features: KO edge, HP edge), depending on which was computed
+   first; also made `champ feats` / `vfeats` depend on thread count (2 of 3,968 held-out positions). The key now carries the pinch flag;
+   features are identical on 1 and 2 threads. The live bot still runs the frozen build with the bug (rare: those four abilities near the
+   line); it goes in with the next approved engine change.

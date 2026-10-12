@@ -7,7 +7,9 @@ part 'hold' = Eval bar's 560 accuracy-set games (the held-out set every value co
   ../.venv/bin/python3 value_data.py positions        (about 4,500 games; skips games the builder cannot rebuild)
   ../.venv/bin/python3 value_data.py search [threads=6]   results/value/real_<part>.eval.jsonl: the one-turn search on every position
       (champ evalpos as the planner runs it: 32 seeds, staged, sym2, no side-specific flags; about 1 s a position on one core)
-  ../.venv/bin/python3 value_data.py feats            results/value/real_<part>.feats.jsonl: champ feats (the 28 v22 features, static)
+  ../.venv/bin/python3 value_data.py feats [parts]    results/value/real_<part>.feats.jsonl / .vfeats.jsonl: champ feats (the 28 v22
+      features, static) and champ vfeats (the matchup features, dev build)
+  ../.venv/bin/python3 value_data.py positions new    games fetched since (in neither set) -> part 'new'; then search 6 new, feats new
 Outcomes and ratings come from the logs; names are only compared to find the winner, never kept."""
 import os, sys, json, glob, collections
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
@@ -31,22 +33,29 @@ def outcome(log):
         elif l.startswith('|win|'): win = l.split('|')[2]
     w = players.get(win) if win else None
     return (None if w is None else 1.0 if w == 'p1' else 0.0), (sum(ratings) / len(ratings) if len(ratings) == 2 else None)
-def positions():
+def positions(new=False):
+    """new: only games in neither the fit nor the held-out set (replays fetched later) -> part 'new'"""
     import spots as SP, live as LV
     held = held_games(); os.makedirs(OUT, exist_ok=True)
-    specs = {'fit': [], 'hold': []}; meta = {'fit': [], 'hold': []}; why = collections.Counter()
+    known = set()
+    if new:
+        for part in ('fit', 'hold'): known |= {json.loads(l)['game'] for l in open(os.path.join(OUT, f'real_{part}.meta.jsonl'))}
+    parts = ('new',) if new else ('fit', 'hold')
+    specs = {k: [] for k in parts}; meta = {k: [] for k in parts}; why = collections.Counter()
     for f in sorted(glob.glob(os.path.join(HERE, 'replays_protect', '*.log'))):
-        gid = os.path.basename(f)[:-4]; log = open(f, errors='replace').read()
+        gid = os.path.basename(f)[:-4]
+        if new and gid in known: continue
+        log = open(f, errors='replace').read()
         if '|showteam|' not in log: why['no open sheets'] += 1; continue
         y, rating = outcome(log)
         if y is None: why['no winner'] += 1; continue
         try: sp, w = SP.specs(gid, log)
         except Exception as e: why['builder error'] += 1; continue
         if not sp: why[w or 'nothing built'] += 1; continue
-        part = 'hold' if gid in held else 'fit'
+        part = 'new' if new else 'hold' if gid in held else 'fit'
         for s in sp:
             specs[part].append((1.0, s)); meta[part].append({'name': s['name'] + ' p1', 'game': gid, 'turn': s['turn'], 'y': y, 'rating': rating})
-    for part in ('fit', 'hold'):
+    for part in parts:
         posf = os.path.join(OUT, f'real_{part}.pos.jsonl')
         if os.path.exists(posf): os.remove(posf)
         for i in range(0, len(specs[part]), 2000):   # positions.js appends; chunks keep node's memory small
@@ -62,18 +71,22 @@ ENV = dict(RACE_TIES='avg', RACE='1', TRSYM='1', CALC_DATA='../native/champions_
 BIN = os.path.join(ROOT, 'native', 'champ', 'bin', 'battlesim-champ'); DATA = '../native/engine_data_full.json'
 def grid():
     g = os.path.join(OUT, 'emptygrid'); os.makedirs(g, exist_ok=True); return g
-def search(threads=6):
+def search(threads=6, parts=('hold', 'fit')):
     import subprocess
     env = dict(os.environ, **ENV, EVAL_SEEDS='32', EVAL_ADAPT='1', GRID_DIR=grid())
-    for part in ('hold', 'fit'):
+    for part in parts:
         subprocess.run([BIN, 'evalpos', DATA, os.path.join(OUT, f'real_{part}.pos.jsonl'), os.path.join(OUT, f'real_{part}.eval.jsonl'), str(threads)], cwd=HERE, env=env, check=True)
-def feats():
+def feats(parts=('hold', 'fit')):
+    """champ feats (the 28 v22 features) and champ vfeats (vfeats.rs, the dev build) for each part"""
     import subprocess
     env = dict(os.environ, **ENV, RACE_PRIO='1', FEATS22='1', GRID_DIR=grid())
-    for part in ('hold', 'fit'):
-        out = os.path.join(OUT, f'real_{part}.feats.jsonl')
-        if os.path.exists(out): os.remove(out)
-        subprocess.run([BIN, 'feats', DATA, os.path.join(OUT, f'real_{part}.pos.jsonl'), out, '4'], cwd=HERE, env=env, check=True)
+    for part in parts:
+        for cmd, binary in (('feats', BIN), ('vfeats', BIN + '-dev')):
+            out = os.path.join(OUT, f'real_{part}.{cmd}.jsonl')
+            if os.path.exists(out): os.remove(out)
+            subprocess.run([binary, cmd, DATA, os.path.join(OUT, f'real_{part}.pos.jsonl'), out, '2'], cwd=HERE, env=env, check=True)
 if __name__ == '__main__':
     a = sys.argv[1:]
-    {'positions': positions, 'search': lambda: search(int(a[1]) if len(a) > 1 else 6), 'feats': feats}[a[0]]()
+    P = tuple(a[2].split(',')) if len(a) > 2 else ('hold', 'fit')
+    {'positions': lambda: positions(len(a) > 1 and a[1] == 'new'), 'search': lambda: search(int(a[1]) if len(a) > 1 else 6, P),
+     'feats': lambda: feats(tuple(a[1].split(',')) if len(a) > 1 else ('hold', 'fit'))}[a[0]]()

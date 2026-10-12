@@ -1,7 +1,7 @@
 """Double-Protect check, real side (2026-10-04): fetch public Showdown replays of Reg M-C (Bo3 and ladder Bo1), cache the logs in
 replays_protect/, and measure how often a Pokemon that just Protected successfully (a fresh Protect, not itself a second one) Protects
 again on its next action, out of the times it acts again (a move, or a voluntary switch out). Also the overall Protect share of actions.
-usage: python3 protect_replays.py fetch <pages per format> [bo3: Bo3 only]   |   rated <pages> (Bo3 by rating, highest first)      (polite: ~0.3 s between requests; resumes)
+usage: python3 protect_replays.py fetch <pages per format> [bo3: Bo3 only]   |   new (Bo3 replays newer than the cache)   |   rated <pages> (Bo3 by rating, highest first)      (polite: ~0.3 s between requests; resumes)
        python3 protect_replays.py stats [min rating]"""
 import json, sys, time, urllib.request, os, re, glob, collections
 FMTS = ['gen9championsvgc2026regmcbo3', 'gen9championsvgc2026regmc']
@@ -31,6 +31,27 @@ def fetch(pages, only=None):
                 if log: open(p, 'w').write(log)
             before = res[-1]['uploadtime']; json.dump(idx, open(f'{D}/index.json', 'w'))
             print(f"{fmt} page {pg + 1}: {sum(1 for v in idx.values() if v['fmt'] == fmt)} replays", flush=True)
+def fetch_new(fmt='gen9championsvgc2026regmcbo3', max_pages=800, stop_after=3):
+    """the replays newer than the cache (2026-10-12, for the value work): walk back from the newest page and stop after `stop_after`
+    pages in a row that were all cached already"""
+    idx = json.load(open(f'{D}/index.json')) if os.path.exists(f'{D}/index.json') else {}
+    before = None; old = 0; new = 0
+    for pg in range(max_pages):
+        txt = get(f'https://replay.pokemonshowdown.com/search.json?format={fmt}' + (f'&before={before}' if before else '')); time.sleep(0.3)
+        if not txt: break
+        res = json.loads(txt)
+        if not res: break
+        fresh = 0
+        for r in res[:50]:
+            p = f"{D}/{r['id']}.log"
+            if r['id'] in idx and os.path.exists(p): continue
+            idx[r['id']] = {'fmt': fmt, 'rating': r.get('rating'), 'time': r.get('uploadtime')}; fresh += 1
+            log = get(f"https://replay.pokemonshowdown.com/{r['id']}.log"); time.sleep(0.3)
+            if log: open(p, 'w').write(log); new += 1
+        before = res[-1]['uploadtime']; json.dump(idx, open(f'{D}/index.json', 'w'))
+        old = old + 1 if fresh == 0 else 0
+        print(f"page {pg + 1}: {fresh} new on this page, {new} fetched so far", flush=True)
+        if old >= stop_after: break
 def fetch_rated(pages, fmt='gen9championsvgc2026regmcbo3'):
     """Bo3 replays in rating order (search sort=rating, page 1 = highest), for the Elo comparison"""
     idx = json.load(open(f'{D}/index.json')) if os.path.exists(f'{D}/index.json') else {}
@@ -97,6 +118,7 @@ def stats(minr=0):
         C[tag]['games'] += 1
     return C
 if __name__ == '__main__':
+    if sys.argv[1] == 'new': fetch_new(); sys.exit()
     if sys.argv[1] == 'fetch': fetch(int(sys.argv[2]), sys.argv[3] if len(sys.argv) > 3 else None)
     elif sys.argv[1] == 'rated': fetch_rated(int(sys.argv[2]))
     else:

@@ -331,6 +331,21 @@ Mega flag whenever both versions are offered. Older results (studies, Louisville
   too often with non-Megas (42% vs 54%) and leave Megas more than it does (62% vs 51%); the human choice gives up 1.3 points of win chance
   per Yawn on average (1.8 when staying, 0.6 when leaving). Half the decisions are within 2 points either way. yawn_engine.json has every row.
 
+## Was the bot's bad luck luck? (2026-10-12)
+
+The four unluckiest bot games (−87, −70, −68, −62), checked turn by turn (the user asked). Two were real dice: Game 208's turn 9 (Close
+Combat's roll left Farigiraf 1 HP above its Sitrus Berry, then Sludge Bomb rolled high, about 1 in 10) and Game 204 (two 30% Rock Slide
+flinches in a row). Two were mostly the model:
+- Unburden: Showdown keeps its doubled Speed as a volatile the log never shows; positions.js wiped it, so a Sneasler whose Psychic Seed
+  was used up had its normal Speed (Game 108, turn 4: the engine had the Scarf Basculegion first). replay.py now tracks 'unb' and Perish
+  Song's count ('perish'); positions.js applies both for specs with `fieldDue` (live.specs_for; not the bot's yet).
+- Perish Song's count was never in the positions (Game 24, turns 5 to 7).
+- Hidden spreads: Game 24's Charizard survived a Sucker Punch on 1% that the guessed spread (Smogon's most used) could not; one or two
+  points of HP more fit. Luck now uses hindsight (Live.at(..., hindsight=True), names with ' L'): each player's Pokemon and the opponent's
+  spreads as the whole game showed them, so luck counts the dice. damage_fits allows 1 HP either way, so that hit still reads as a fit.
+- spreads.damage_observations(mid_weather=True) keeps hits after a mid-turn weather change (a weather setter switching in, a Mega
+  Charizard Y), in the weather they landed in. Live.at uses it; the bot's refine_opponent call does not yet.
+
 ## Louisville day 1 (2026-10-10)
 
 The same study on the Louisville day 1 stream (12 games from 1:15 pm, read live; `study.py out/champions/louisville1.ocr.jsonl 3 14340`,

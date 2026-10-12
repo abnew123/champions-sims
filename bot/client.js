@@ -181,7 +181,7 @@ let teams = null, teamIdx = 0;
 function experimentTeam() {
   const ef = path.join(HERE, 'experiment.json'); if (!fs.existsSync(ef) || LOCAL) return undefined;
   const E = JSON.parse(fs.readFileSync(ef)); const since = Date.parse(E.start);
-  const g = games().filter(x => Date.parse(x.when) >= since);
+  const g = games().filter(x => Date.parse(x.when) >= since && (x.format || 'gen9championsvgc2026regmcbo3') === FORMAT);   // this format's games only
   const rejected = fs.existsSync(path.join(OUT, 'rejected_teams.json')) ? JSON.parse(fs.readFileSync(path.join(OUT, 'rejected_teams.json'))) : [];
   const per = t => g.filter(x => x.team === t).length; const reg = g.filter(x => x.arm === 'regional').length;
   const sheetOpen = E.sheet.teams.filter(t => per(t) < E.sheet.games_per_team && !rejected.includes(t));
@@ -254,7 +254,7 @@ async function handleRequest(room, R) {
   const t0 = Date.now();
   if (req.teamPreview) {   // the open sheets (|showteam|) follow the preview request by a moment: wait for the opponent's, up to 8 s
     const opp = R.side === 'p1' ? 'p2' : 'p1';
-    for (let i = 0; i < 40 && !R.lines.some(l => l.startsWith('|showteam|' + opp + '|')); i++) await sleep(200);
+    if (/bo\d$/.test(FORMAT)) for (let i = 0; i < 40 && !R.lines.some(l => l.startsWith('|showteam|' + opp + '|')); i++) await sleep(200);   // Bo1 has no open sheets: nothing to wait for
   }
   const ans = await ask({type: req.teamPreview ? 'preview' : 'turn', room, side: R.side, log: R.lines, request: req, team: currentTeam});
   if (ans.error) { log('brain error', room, ans.error); return; }

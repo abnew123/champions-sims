@@ -84,6 +84,12 @@ def main():
         if not line: continue
         try:
             msg = json.loads(line)
+            if msg['type'] in ('preview', 'turn') and msg.get('log') and msg.get('side'):
+                # no open team sheets (Bo1): the opponent's sets guessed from the commonest real sheets and what the game has shown,
+                # written into the log as a sheet (bot/bo1.py); our own sheet from our team. Logs that have sheets are left as they are.
+                import bo1
+                opp = 'p2' if msg['side'] == 'p1' else 'p1'
+                msg['log'] = bo1.inject(list(msg['log']), opp, (msg.get('team') or {}).get('sets'), msg['side'])
             if msg['type'] == 'pack': out({'packed': pack(msg['sets'])})
             elif msg['type'] == 'preview': out(preview(msg))
             elif msg['type'] == 'turn': out(turn(msg))

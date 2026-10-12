@@ -291,7 +291,8 @@ function onEnd(room, R, winner) {
   if (R.done) return; R.done = true;
   const won = winner && me && winner.toLowerCase() === me.toLowerCase();
   const mm = R.lines.map(l => /game-bestof\d-[a-z0-9]+-(\d+)/.exec(l)).find(Boolean);   // the best-of-3 this game belongs to (Bo1: the game itself)
-  const g = {when: new Date().toISOString(), room, side: R.side, won: winner ? !!won : null, turns: R.turn, oppRating: R.oppRating, myRating, team: currentTeam && currentTeam.name, arm: currentTeam && currentTeam.arm, match: mm ? mm[1] : room, format: FORMAT};
+  const g = {when: new Date().toISOString(), room, side: R.side, won: winner ? !!won : null, turns: R.turn, oppRating: R.oppRating, myRating, team: currentTeam && currentTeam.name, arm: currentTeam && currentTeam.arm, match: mm ? mm[1] : room, format: FORMAT,
+    ots: R.lines.some(l => l.startsWith('|showteam|'))};   // open team sheets shown (Bo3 always; Bo1 when both accepted: the user compares at 100 Bo1 games)
   fs.appendFileSync(GAMES, JSON.stringify(g) + '\n'); fs.writeFileSync(path.join(OUT, room + '.log'), R.lines.join('\n') + '\n');
   log('game over', room.slice(-12), won ? 'won' : winner ? 'lost' : 'tie', 'turns', R.turn, 'opp', R.oppRating, 'me', myRating);
   setTimeout(() => { send(`${room}|/leave`); delete rooms[room]; }, 5000);

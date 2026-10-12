@@ -17,8 +17,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, 'pssim')
 START = re.compile(r'^(\d\d:\d\d:\d\d) (\S+\.json) -> (\S+?),')
 DONE = re.compile(r'^(\d\d:\d\d:\d\d) done:')
-KIT = re.compile(r'^kit_(.+)_(matrix|confirm|t1|guide|oppbr|optimal|optimal_pool|smoke)\.log$')
-STEP = {'matrix': 'bring matrix', 'confirm': 'confirmation', 't1': 'turn-one lines', 'guide': 'strategy-guide battles', 'oppbr': 'their best four', 'optimal': 'both sides pick their four', 'optimal_pool': 'both sides pick their four (real teams)', 'smoke': 'dry run'}
+KIT = re.compile(r'^kit_(.+)_(matrix|confirm|t1|guide|oppbr|optimal|optimal_pool|mix|smoke)\.log$')
+STEP = {'matrix': 'bring matrix', 'confirm': 'confirmation', 't1': 'turn-one lines', 'guide': 'strategy-guide battles', 'oppbr': 'their best four', 'optimal': 'both sides pick their four', 'optimal_pool': 'both sides pick their four (real teams)', 'mix': 'mixed brings check', 'smoke': 'dry run'}
 CLOUD_FRESH = 25 * 60          # a pulled run counts as still running while its newest result is younger than this (pulls come every 10 min)
 
 def runs():
@@ -104,8 +104,16 @@ def eval_bar():
 THREADS = {'kit': 'TR sheet', 'sim': 'Battle sim', 'ts': 'Team search', 'eb': 'Eval bar'}
 
 # ---- every process using CPU (2026-10-12, the user: anything that uses cores must show here, progress stamp or not) ----
-PREFIX = {'battlesim-': 'Battle sim', 'evalbar-': 'Eval bar', 'trsheet-': 'TR sheet', 'teamsearch-': 'Team search', 'f239sheet-': 'Frankfurt-239 sheet', 'f156sheet-': 'Frankfurt-156 sheet'}
-PATHS = [('/evalbar/', 'Eval bar'), ('/teamsearch/', 'Team search'), ('/sheetkit/', 'TR sheet'), ('/sheets/', 'TR sheet'), ('bot/client.js', 'Battle sim (bot)'),
+PREFIX = {'battlesim-': 'Battle sim', 'evalbar-': 'Eval bar', 'trsheet-': 'TR sheet', 'teamsearch-': 'Team search'}
+SHEET_THREAD = {'trick-room-six': 'TR sheet', 'frankfurt-239': 'Frankfurt-239 sheet', 'frankfurt-156': 'Frankfurt-156 sheet'}
+def sheet_thread(slug): return SHEET_THREAD.get(slug) or ' '.join(w.capitalize() for w in slug.split('-')) + ' sheet'
+SHEET_PATHS = []
+for _f in glob.glob(os.path.join(HERE, 'sheets', '*', 'sheet.json')):           # each sheet kit's process prefix (sheet.json proc_prefix) and folder
+    _slug = os.path.basename(os.path.dirname(_f))
+    try: PREFIX[json.load(open(_f))['proc_prefix'] + '-'] = sheet_thread(_slug)
+    except Exception: pass
+    SHEET_PATHS.append((f'/sheets/{_slug}/', sheet_thread(_slug)))
+PATHS = SHEET_PATHS + [('/evalbar/', 'Eval bar'), ('/teamsearch/', 'Team search'), ('/sheetkit/', 'TR sheet'), ('/sheets/', 'TR sheet'), ('bot/client.js', 'Battle sim (bot)'),
          ('/bot/', 'Battle sim (bot)'), ('/pssim/', 'Battle sim'), ('/native/', 'Battle sim')]
 def etime_s(e):
     d, _, rest = e.rpartition('-'); parts = [int(x) for x in rest.split(':')]
@@ -215,7 +223,7 @@ def page():
     embedded = any(f.filename.endswith(os.path.join('teamsearch', 'status_server.py')) for f in inspect.stack())
     ts = '' if embedded else team_search(); eb = eval_bar()
     # every active run first, labelled with its thread (not on Team search's own page, which embeds this one)
-    now_running = [tagged(card(r, True), THREADS['kit' if r['kit'] else 'sim']) for r in R if live(r)] + \
+    now_running = [tagged(card(r, True), sheet_thread(r['kit'][0]) if r['kit'] else THREADS['sim']) for r in R if live(r)] + \
                   [tagged(c, THREADS['ts']) for c in running_cards(ts)] + [tagged(c, THREADS['eb']) for c in running_cards(eb)]
     top = '' if embedded else f'<h2>Using CPU now</h2>{cpu_section()}<h2>Running now (with progress)</h2>' + (''.join(now_running) or '<p class="idle">Nothing with a progress stamp is running.</p>')
     body = top + f'''<h2>Sheets</h2>{section([r for r in R if r['kit']])}

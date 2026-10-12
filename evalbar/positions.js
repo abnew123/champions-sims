@@ -17,8 +17,15 @@ const WEATHER = {Rain: 'raindance', Sun: 'sunnyday', Sandstorm: 'sandstorm', Sno
 const VOL = {confusion: 'confusion', Taunt: 'taunt', 'Leech Seed': 'leechseed', 'Throat Chop': 'throatchop', Yawn: 'yawn', 'Heal Block': 'healblock', Substitute: 'substitute',
              Imprison: 'imprison', 'Flash Fire': 'flashfire'};
 const STATS = ['atk', 'def', 'spa', 'spd', 'spe', 'accuracy', 'evasion'];
+// the engine's data: this Showdown package gives three Megas an older ability (Mega Golisopod Emergency Exit for Tough Claws, Mega
+// Garchomp Z Sand Force for Levitate, Mega Absol Z Magic Bounce for Sharpness); real games and the engine agree with the engine data
+const ENGINE = JSON.parse(fs.readFileSync(path.resolve('../native/engine_data_full.json')));
+function megaAbility(p) {
+  const ab = ((ENGINE.species[toID(p.species.name)] || {}).abilities || {})['0'];
+  if (ab && toID(ab) !== p.ability) { p.setAbility(ab, null, null, true); p.baseAbility = toID(ab); }
+}
 
-function build(spec, flip) {
+function rebuild(spec, flip) {
   const sides = flip ? [spec.sides[1], spec.sides[0]] : spec.sides, approx = [];
   const b = new Battle({formatid: 'gen9championsdoublescustomgame', seed: [1, 2, 3, 4]}); b.debugMode = false;
   sides.forEach((sd, si) => b.setPlayer('p' + (si + 1), {name: 'Side ' + si, team: sd.mons.map(T.toSet)}));
@@ -26,7 +33,7 @@ function build(spec, flip) {
   // Mega Evolution first (it can set weather), then wipe what the lead-off abilities did and lay the real position on top
   sides.forEach((sd, si) => {
     const side = b.sides[si];
-    sd.mons.forEach((x, k) => { if (x.mega && !x.fainted) b.actions.runMegaEvo(side.pokemon[k]); });
+    sd.mons.forEach((x, k) => { if (x.mega && !x.fainted && b.actions.runMegaEvo(side.pokemon[k])) megaAbility(side.pokemon[k]); });
     if (sd.mons.some(x => x.mega)) for (const q of side.pokemon) q.canMegaEvo = null;
   });
   b.field.clearWeather(); b.field.clearTerrain();
@@ -77,6 +84,10 @@ function build(spec, flip) {
     for (const s of STATS) p.boosts[s] = (x.boosts || {})[s] || 0;
     const item = toID(x.itemNow); if (p.item !== item) { p.item = item; p.itemState = b.initEffectState({id: item, target: p}); }
   }));
+  return {b, sides, approx};
+}
+function build(spec, flip) {
+  const {b, sides, approx} = rebuild(spec, flip);
   // what was actually chosen, in engine terms
   const acts = flip ? [spec.acts[1], spec.acts[0]] : spec.acts, letter = flip ? ['p2', 'p1'] : ['p1', 'p2'];
   const choice = (si, i) => {
@@ -98,9 +109,12 @@ function build(spec, flip) {
   return {name: `${spec.name} ${flip ? 'p2' : 'p1'}`, turn: spec.turn, side: flip ? 'p2' : 'p1', perish: !!spec.perish, standIns: spec.standIns || 0, dropped: spec.dropped || [], approx: [...new Set(approx)],
           actual: pack(0), their_actual: pack(1), state: exportState(b)};
 }
-const out = fs.createWriteStream(outf); let n = 0, bad = 0;
-for (const spec of JSON.parse(fs.readFileSync(specf))) for (const flip of views === 'p1' ? [false] : [false, true]) {
-  try { out.write(JSON.stringify(build(spec, flip)) + '\n'); n++; }
-  catch (e) { bad++; console.log(`${spec.name}: could not rebuild (${String(e.message).slice(0, 120)})`); }
+module.exports = {rebuild, build, dex, toID};                            // damage.js rebuilds positions the same way
+if (require.main === module) {
+  const out = fs.createWriteStream(outf); let n = 0, bad = 0;
+  for (const spec of JSON.parse(fs.readFileSync(specf))) for (const flip of views === 'p1' ? [false] : [false, true]) {
+    try { out.write(JSON.stringify(build(spec, flip)) + '\n'); n++; }
+    catch (e) { bad++; console.log(`${spec.name}: could not rebuild (${String(e.message).slice(0, 120)})`); }
+  }
+  out.end(); console.log(`${n} engine positions written, ${bad} failed`);
 }
-out.end(); console.log(`${n} engine positions written, ${bad} failed`);

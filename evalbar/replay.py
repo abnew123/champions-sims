@@ -150,6 +150,7 @@ def parse(log):
                 if pos not in acts and active.get(pos) == start_active.get(pos):
                     tpos = p[4][:3] if tg is not None and 'spread' not in t else ''
                     acts[pos] = {'move': p[3], 'target': tpos, 'mega': id(m) in mega_now, 'unsure': bool(tpos) and tpos[:2] in redirect}
+                    if tg is not None and 'spread' in t: acts[pos]['spreadTarget'] = p[4][:3]   # the one it aimed at (Expanding Force in Psychic Terrain)
                 moved_yet[0] = True; m.moved = True; m.last = p[3]; m.vol.discard('charging'); acted.add(id(m))
                 if toid(m.item) in ('choicescarf', 'choiceband', 'choicespecs') and not m.item_gone: m.lock = p[3]
             head = [m.ref(), ' used ', p[3]]
@@ -172,7 +173,7 @@ def parse(log):
                 note([u.ref(), f": stopped by {clean(p[3])}"]); moved_yet[0] = True; u.moved = True; u.last = p[4]; acted.add(id(u))
         elif k == 'cant':
             m = mon(p[2])
-            if m and p[2][:3] not in acts and active.get(p[2][:3]) == start_active.get(p[2][:3]): acts[p[2][:3]] = {'none': 'cant'}   # it did not switch
+            if m and p[2][:3] not in acts and active.get(p[2][:3]) == start_active.get(p[2][:3]): acts[p[2][:3]] = {'none': 'cant', 'mega': id(m) in mega_now}   # it did not switch
             if m:
                 ev(m.side, [m.ref(), ' ' + CANT.get(p[3], f"can't move ({clean(p[3])})")]); moved_yet[0] = True; m.moved = True; acted.add(id(m))
                 if p[3] == 'slp': m.slept += 1
@@ -192,7 +193,7 @@ def parse(log):
             if m:
                 pos = p[2][:3]                                                   # it fainted before acting: what it chose is not shown, but it
                 if phase != 'residual' and pos not in acts and active.get(pos) == start_active.get(pos):   # did not switch, nor
-                    acts[pos] = {'none': 'fainted', 'by': last_move[0]}          # use a move that goes before the one that knocked it out
+                    acts[pos] = {'none': 'fainted', 'by': last_move[0], 'mega': id(m) in mega_now}   # use a move that goes before the one that knocked it out
                 m.fainted = True; m.hp = 0; m.status = ''; m.boosts = {}
                 last = cur[0]['notes'][-1] if cur[0] and cur[0]['notes'] else None
                 if last and last[0] == m.ref() and '→' in str(last[1]): last.append(', fainted')

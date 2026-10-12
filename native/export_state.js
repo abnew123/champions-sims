@@ -17,6 +17,8 @@ const mon = p => ({species: p.species.id, baseSpecies: p.baseSpecies.id, set: {s
   ability: p.ability, baseAbility: p.baseAbility, abilityState: st(p.abilityState), item: p.item, itemState: st(p.itemState), lastItem: p.lastItem || '',
   usedItemThisTurn: !!p.usedItemThisTurn, ateBerry: !!p.ateBerry, itemKnockedOff: !!p.itemKnockedOff,
   moveSlots: p.moveSlots.map(m => ({id: m.id, pp: m.pp, maxpp: m.maxpp, disabled: m.disabled || false, used: !!m.used})),
+  // a transformed Pokemon's own moves, restored when it leaves the field (2026-10-12)
+  baseMoveSlots: p.transformed ? p.baseMoveSlots.map(m => ({id: m.id, pp: m.pp, maxpp: m.maxpp, disabled: m.disabled || false, used: !!m.used})) : undefined,
   position: p.position, isActive: !!p.isActive, fainted: !!p.fainted, faintQueued: !!p.faintQueued, level: p.level,
   activeTurns: p.activeTurns, activeMoveActions: p.activeMoveActions, weighthg: p.weighthg, speed: p.speed,
   lastMove: p.lastMove ? p.lastMove.id : '', lastMoveTargetLoc: p.lastMoveTargetLoc ?? null, moveThisTurn: p.moveThisTurn || '',

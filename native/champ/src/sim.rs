@@ -73,12 +73,27 @@ impl Battle {
         let mut out = vec![];
         if a.choice == Choice::Move && !mid_turn {
             let m = a.pokemon.unwrap(); let am = a.am.unwrap();
+            let mid = self.am(am).id;
+            // queue.resolveAction unshifts beforeTurnMove (Counter, Mirror Coat), the Mega, then priorityChargeMove (Focus Punch, Beak
+            // Blast, Chilly Reception), each resolved in that order: a move action without a target location draws a random target
+            // (2026-10-12: the engine had neither action, so these moves' turn-start effects and draws were missing)
+            if self.dex.mv(mid).eff.has_fn("beforeTurnCallback") {
+                let mut x = simple_action(Choice::BeforeTurnMove, 5.0); x.pokemon = Some(m); x.am = Some(am); x.target_loc = a.target_loc;
+                if x.target_loc == 0 { if let Some(t) = self.get_random_target(m, am) { x.target_loc = self.get_loc_of(m, t); } }
+                x.original_target = self.get_at_loc(m, x.target_loc);
+                self.get_action_speed(&mut x); out.insert(0, x);
+            }
             if a.mega {
                 let mut mega = simple_action(Choice::MegaEvo, 104.0); mega.pokemon = Some(m);
                 self.get_action_speed(&mut mega);
-                out.push(mega);
+                out.insert(0, mega);
             }
-            let mid = self.am(am).id;
+            if self.dex.mv(mid).eff.has_fn("priorityChargeCallback") {
+                let mut x = simple_action(Choice::PriorityChargeMove, 107.0); x.pokemon = Some(m); x.am = Some(am);
+                if let Some(t) = self.get_random_target(m, am) { x.target_loc = self.get_loc_of(m, t); }
+                x.original_target = self.get_at_loc(m, x.target_loc);
+                self.get_action_speed(&mut x); out.insert(0, x);
+            }
             a.fractional_priority = self.run_event("FractionalPriority", Tgt::Mon(m), None, Some(Eff::mv(mid, am)), RV::N(0.0), false, false).num();
         }
         if (a.choice == Choice::Switch || a.choice == Choice::InstaSwitch) && !mid_turn {
@@ -213,6 +228,17 @@ impl Battle {
                 self.run_move(a.am.unwrap(), m, a.target_loc, a.source_effect, a.original_target, false);
             }
             Choice::MegaEvo => { self.run_mega_evo(a.pokemon.unwrap()); }
+            Choice::BeforeTurnMove => {
+                let m = a.pokemon.unwrap(); if !self.p(m).is_active || self.p(m).fainted { return; }
+                let am = a.am.unwrap(); let mid = self.am(am).id;
+                let Some(t) = self.get_target(m, am, a.target_loc, None) else { return };
+                self.call_fn(Kind::Move, mid, "beforeTurnCallback", Tgt::Mon(m), Some(t), Some(Eff::mv(mid, am)));
+            }
+            Choice::PriorityChargeMove => {
+                let m = a.pokemon.unwrap(); if !self.p(m).is_active || self.p(m).fainted { return; }
+                let am = a.am.unwrap(); let mid = self.am(am).id;
+                self.call_fn(Kind::Move, mid, "priorityChargeCallback", Tgt::Mon(m), None, Some(Eff::mv(mid, am)));
+            }
             Choice::BeforeTurn => { self.each_event("BeforeTurn", None); }
             Choice::Residual => {
                 self.clear_active_move(true);

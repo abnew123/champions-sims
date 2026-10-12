@@ -218,7 +218,9 @@ pub fn register(r: &mut Reg) {
     h!(r, Ability, "disguise", "onUpdate", |b, a| {
         let m = a.t(); if b.p(m).species == "mimikyu" && b.es().has("busted") {
             b.forme_change_permanent(m, id("mimikyubusted"), b.effect);
-            b.damage(b.p(m).base_maxhp as f64 / 8.0, Some(m), Some(m), None, false);
+            // the effect is the species, as in Showdown (no onDamage): with none, the running Disguise was added to the Damage handlers
+            // a second time and its tie with itself drew a shuffle (2026-10-12)
+            b.damage(b.p(m).base_maxhp as f64 / 8.0, Some(m), Some(m), Some(Eff::new(Kind::Species, id("mimikyubusted"))), false);
         } RV::Undef });
     // ---------- immunities / absorbs ----------
     h!(r, Ability, "goodasgold", "onTryHit", |b, a| { let (t, s) = (a.t(), a.s()); if b.am(a.am()).category == "Status" && t != s { return RV::Null; } RV::Undef });

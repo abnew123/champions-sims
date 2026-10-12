@@ -114,8 +114,11 @@ impl Battle {
         self.sides[side as usize].active[l - 1].map(|i| (side, i))
     }
     pub fn get_loc_of(&self, src: MonRef, t: MonRef) -> i64 { let pos = self.p(t).position as i64 + 1; if src.0 == t.0 { -pos } else { pos } }
-    pub fn add(&mut self, parts: &[&str]) { if self.logging { self.log.push(format!("|{}", parts.join("|"))); } }
-    pub fn addl(&mut self, s: String) { if self.logging { self.log.push(s); } }
+    pub fn add(&mut self, parts: &[&str]) { if self.logging { let l = format!("|{}", parts.join("|")); self.addl(l); } }
+    /// DRAWTRACE=1: each log line ends in " #<random draws so far>", to find where the engine's draws part from Showdown's
+    pub fn addl(&mut self, s: String) { if self.logging {
+        static T: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
+        if *T.get_or_init(|| std::env::var("DRAWTRACE").is_ok()) { self.log.push(format!("{} #{}", s, self.prng.draws)); } else { self.log.push(s); } } }
     pub fn unsupported(&mut self, what: String) { if !self.unsupported.contains(&what) { self.unsupported.push(what); } }
 
     pub fn state_mut(&mut self, loc: SLoc) -> Option<&mut EState> {
@@ -410,7 +413,7 @@ impl Battle {
                 if delta > 0.0 { next = vec![i]; } else { next.push(i); }
             }
             for (k, &idx) in next.iter().enumerate() { if idx != sorted + k { list.swap(sorted + k, idx); } }
-            if next.len() > 1 { let n = next.len(); self.prng.shuffle(list, sorted, sorted + n); }
+            if next.len() > 1 { let n = next.len(); if self.logging && std::env::var("DRAWTRACE").is_ok() { let k = key(&list[sorted]); self.addl(format!("|~tie|{}|{:?}", n, k)); } self.prng.shuffle(list, sorted, sorted + n); }
             sorted += next.len();
         }
     }
@@ -519,7 +522,11 @@ impl Battle {
             hs.sort_by(|a, b| { let d = b.priority - a.priority; let d = if d != 0.0 { d } else { b.speed - a.speed };
                 let d = if d != 0.0 { d } else if matches!(a.state, SLoc::Ability(_)) && matches!(b.state, SLoc::Ability(_)) { -(b.effect_order - a.effect_order) } else { 0.0 };
                 d.partial_cmp(&0.0).unwrap() });
-        } else { self.speed_sort(&mut hs, Self::hkey); }
+        } else {
+            if hs.len() > 1 && self.logging && std::env::var("DRAWTRACE").is_ok() {
+                let l = format!("|~ev|{}|{}", ev, hs.iter().map(|h| format!("{}.{}:{}:{}:{}:{:?}:{:?}", h.eff.id, h.cb, h.priority, h.speed, h.sub_order, h.holder, h.state)).collect::<Vec<_>>().join(" ")); self.addl(l); }
+            self.speed_sort(&mut hs, Self::hkey);
+        }
         let has_relay = !matches!(relay, RV::Undef | RV::Null);
         let mut relay = if has_relay { relay } else { RV::B(true) };
         let parent = self.event.take();

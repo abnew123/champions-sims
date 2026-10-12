@@ -1,18 +1,5 @@
 [
 {
-"kind": "ability",
-"id": "steadfast",
-"uses": 186,
-"showdown": [
-"onFlinch"
-],
-"engine": [],
-"missing": [
-"onFlinch"
-],
-"named": false
-},
-{
 "kind": "move",
 "id": "strengthsap",
 "uses": 132,
@@ -22,19 +9,6 @@
 "engine": [],
 "missing": [
 "onHit"
-],
-"named": false
-},
-{
-"kind": "ability",
-"id": "moxie",
-"uses": 120,
-"showdown": [
-"onSourceAfterFaint"
-],
-"engine": [],
-"missing": [
-"onSourceAfterFaint"
 ],
 "named": false
 },
@@ -104,19 +78,6 @@
 "engine": [],
 "missing": [
 "onSwitchIn"
-],
-"named": false
-},
-{
-"kind": "ability",
-"id": "frisk",
-"uses": 79,
-"showdown": [
-"onStart"
-],
-"engine": [],
-"missing": [
-"onStart"
 ],
 "named": false
 },
@@ -214,21 +175,6 @@
 "named": false
 },
 {
-"kind": "condition",
-"id": "dragoncheer",
-"uses": 65,
-"showdown": [
-"onModifyCritRatio",
-"onStart"
-],
-"engine": [],
-"missing": [
-"onModifyCritRatio",
-"onStart"
-],
-"named": false
-},
-{
 "kind": "move",
 "id": "synthesis",
 "uses": 59,
@@ -290,21 +236,6 @@
 "engine": [],
 "missing": [
 "onHit"
-],
-"named": false
-},
-{
-"kind": "ability",
-"id": "sweetveil",
-"uses": 47,
-"showdown": [
-"onAllySetStatus",
-"onAllyTryAddVolatile"
-],
-"engine": [],
-"missing": [
-"onAllySetStatus",
-"onAllyTryAddVolatile"
 ],
 "named": false
 },
@@ -374,21 +305,6 @@
 "missing": [
 "onModifyMove",
 "onTryBoost"
-],
-"named": false
-},
-{
-"kind": "condition",
-"id": "focusenergy",
-"uses": 44,
-"showdown": [
-"onModifyCritRatio",
-"onStart"
-],
-"engine": [],
-"missing": [
-"onModifyCritRatio",
-"onStart"
 ],
 "named": false
 },
@@ -925,19 +841,6 @@
 },
 {
 "kind": "move",
-"id": "noretreat",
-"uses": 12,
-"showdown": [
-"onTry"
-],
-"engine": [],
-"missing": [
-"onTry"
-],
-"named": false
-},
-{
-"kind": "move",
 "id": "guardsplit",
 "uses": 12,
 "showdown": [
@@ -959,21 +862,6 @@
 "engine": [],
 "missing": [
 "onTryHeal"
-],
-"named": false
-},
-{
-"kind": "condition",
-"id": "noretreat",
-"uses": 12,
-"showdown": [
-"onStart",
-"onTrapPokemon"
-],
-"engine": [],
-"missing": [
-"onStart",
-"onTrapPokemon"
 ],
 "named": false
 },
@@ -1121,19 +1009,6 @@
 "engine": [],
 "missing": [
 "onTryMove"
-],
-"named": false
-},
-{
-"kind": "ability",
-"id": "analytic",
-"uses": 8,
-"showdown": [
-"onBasePower"
-],
-"engine": [],
-"missing": [
-"onBasePower"
 ],
 "named": false
 },
@@ -1692,591 +1567,6 @@
 "named": false
 },
 {
-"kind": "item",
-"id": "raichunitey",
-"uses": 11094,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "garchompitez",
-"uses": 9447,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "charizarditey",
-"uses": 6136,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "salamencite",
-"uses": 5213,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "floettite",
-"uses": 4507,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "staraptite",
-"uses": 3344,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "golisopite",
-"uses": 3125,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "delphoxite",
-"uses": 2436,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "gardevoirite",
-"uses": 2176,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "gengarite",
-"uses": 1739,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "dragoninite",
-"uses": 1708,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "tyranitarite",
-"uses": 1697,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "metagrossite",
-"uses": 1635,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "froslassite",
-"uses": 1624,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "swampertite",
-"uses": 1220,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "glimmoranite",
-"uses": 878,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "aerodactylite",
-"uses": 810,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "cameruptite",
-"uses": 773,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "lucarionitez",
-"uses": 734,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "blastoisinite",
-"uses": 696,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "blazikenite",
-"uses": 629,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "baxcalibrite",
-"uses": 480,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "meowsticite",
-"uses": 475,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "pyroarite",
-"uses": 422,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "absolitez",
-"uses": 371,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "mawilite",
-"uses": 355,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "raichunitex",
-"uses": 315,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "scovillainite",
-"uses": 279,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "sceptilite",
-"uses": 200,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "meganiumite",
-"uses": 198,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "lopunnite",
-"uses": 191,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "garchompite",
-"uses": 164,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "venusaurite",
-"uses": 154,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "kangaskhanite",
-"uses": 147,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "ability",
-"id": "shellarmor",
-"uses": 144,
-"showdown": [
-"onCriticalHit"
-],
-"engine": [],
-"missing": [
-"onCriticalHit"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "starminite",
-"uses": 134,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "altarianite",
-"uses": 126,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "ampharosite",
-"uses": 122,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "alakazite",
-"uses": 120,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "charizarditex",
-"uses": 103,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "chesnaughtite",
-"uses": 102,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "scraftinite",
-"uses": 100,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "gyaradosite",
-"uses": 100,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "drampanite",
-"uses": 83,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "manectite",
-"uses": 79,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
 "kind": "ability",
 "id": "reckless",
 "uses": 78,
@@ -2286,45 +1576,6 @@
 "engine": [],
 "missing": [
 "onBasePower"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "pidgeotite",
-"uses": 78,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "greninjite",
-"uses": 73,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "houndoominite",
-"uses": 72,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
 ],
 "named": true
 },
@@ -2360,71 +1611,6 @@
 },
 {
 "kind": "item",
-"id": "steelixite",
-"uses": 62,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "malamarite",
-"uses": 61,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "slowbronite",
-"uses": 60,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "lucarionite",
-"uses": 59,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "crabominite",
-"uses": 50,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
 "id": "ironball",
 "uses": 50,
 "showdown": [
@@ -2435,45 +1621,6 @@
 "missing": [
 "onEffectiveness",
 "onModifySpe"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "galladite",
-"uses": 49,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "aggronite",
-"uses": 47,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "skarmorite",
-"uses": 46,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
 ],
 "named": true
 },
@@ -2491,45 +1638,6 @@
 "named": true
 },
 {
-"kind": "item",
-"id": "scizorite",
-"uses": 45,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "abomasite",
-"uses": 44,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "dragalgite",
-"uses": 44,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
 "kind": "ability",
 "id": "dragonize",
 "uses": 43,
@@ -2541,123 +1649,6 @@
 "missing": [
 "onBasePower",
 "onModifyType"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "feraligite",
-"uses": 43,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "hawluchanite",
-"uses": 43,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "ability",
-"id": "eelevate",
-"uses": 42,
-"showdown": [
-"onSourceAfterFaint"
-],
-"engine": [],
-"missing": [
-"onSourceAfterFaint"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "eelektrossite",
-"uses": 42,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "chandelurite",
-"uses": 39,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "chimechite",
-"uses": 39,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "excadrite",
-"uses": 37,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "banettite",
-"uses": 37,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "audinite",
-"uses": 34,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
 ],
 "named": true
 },
@@ -2679,32 +1670,6 @@
 "named": true
 },
 {
-"kind": "item",
-"id": "beedrillite",
-"uses": 30,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "barbaracite",
-"uses": 30,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
 "kind": "ability",
 "id": "harvest",
 "uses": 29,
@@ -2714,19 +1679,6 @@
 "engine": [],
 "missing": [
 "onResidual"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "clefablite",
-"uses": 25,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
 ],
 "named": true
 },
@@ -2757,19 +1709,6 @@
 "named": true
 },
 {
-"kind": "item",
-"id": "sablenite",
-"uses": 22,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
 "kind": "condition",
 "id": "smackdown",
 "uses": 22,
@@ -2781,19 +1720,6 @@
 "missing": [
 "onRestart",
 "onStart"
-],
-"named": true
-},
-{
-"kind": "ability",
-"id": "strongjaw",
-"uses": 21,
-"showdown": [
-"onBasePower"
-],
-"engine": [],
-"missing": [
-"onBasePower"
 ],
 "named": true
 },
@@ -2829,19 +1755,6 @@
 "named": true
 },
 {
-"kind": "item",
-"id": "glalitite",
-"uses": 19,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
 "kind": "ability",
 "id": "shielddust",
 "uses": 16,
@@ -2866,19 +1779,6 @@
 "missing": [
 "onImmunity",
 "onTryHit"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "emboarite",
-"uses": 15,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
 ],
 "named": true
 },
@@ -2956,19 +1856,6 @@
 "named": true
 },
 {
-"kind": "item",
-"id": "falinksite",
-"uses": 9,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
 "kind": "ability",
 "id": "slushrush",
 "uses": 8,
@@ -2991,19 +1878,6 @@
 "engine": [],
 "missing": [
 "onModifySpA"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "victreebelite",
-"uses": 7,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
 ],
 "named": true
 },
@@ -3075,19 +1949,6 @@
 "named": true
 },
 {
-"kind": "item",
-"id": "heracronite",
-"uses": 4,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
 "kind": "move",
 "id": "mistyexplosion",
 "uses": 3,
@@ -3136,19 +1997,6 @@
 "engine": [],
 "missing": [
 "onSourceModifyDamage"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "medichamite",
-"uses": 3,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
 ],
 "named": true
 },
@@ -3205,32 +2053,6 @@
 "named": true
 },
 {
-"kind": "ability",
-"id": "battlearmor",
-"uses": 1,
-"showdown": [
-"onCriticalHit"
-],
-"engine": [],
-"missing": [
-"onCriticalHit"
-],
-"named": true
-},
-{
-"kind": "item",
-"id": "pinsirite",
-"uses": 1,
-"showdown": [
-"onTakeItem"
-],
-"engine": [],
-"missing": [
-"onTakeItem"
-],
-"named": true
-},
-{
 "kind": "condition",
 "id": "torment",
 "uses": 1,
@@ -3278,25 +2100,6 @@
 "missing": [
 "onStart",
 "onTrapPokemon"
-],
-"named": true
-},
-{
-"kind": "condition",
-"id": "mustrecharge",
-"uses": 0,
-"showdown": [
-"onBeforeMove",
-"onLockMove",
-"onStart"
-],
-"engine": [
-"onBeforeMove",
-"onStart",
-"onSwitchIn"
-],
-"missing": [
-"onLockMove"
 ],
 "named": true
 }

@@ -35,7 +35,7 @@ def teamlist(pid):
 
 if __name__ == '__main__':
     page = open(os.path.join(HERE, f'standings_{EID}.html')).read()
-    rows = re.findall(rf'<tr class="([^"]*)"><td>(\d+)</td><td><a href="/{EID}/player/(\d+)"', page)
+    rows = re.findall(rf'<tr(?: class="([^"]*)")?><td>(\d+)</td><td><a href="/{EID}/player/(\d+)"', page)
     T = json.load(open(TP)); R = json.load(open(SP))
     have = {(t['event'], t['pid']) for t in T}; added = 0
     for cls, place, pid in rows:
@@ -47,7 +47,7 @@ if __name__ == '__main__':
             if not sets or len(sets) != 6: print(f"place {place}: no full team sheet, skipped", flush=True); continue
             R[key] = sets
         six = [L.normalize(dict(s))['species'] for s in R[key]]
-        T.append(dict(event=EVENT, place=place, day2='day2' in cls.split(), pid=pid, six=six, arch=arch([norm(x) for x in six])))
+        T.append(dict(event=EVENT, place=place, day2='day2' in (cls or '').split(), pid=pid, six=six, arch=arch([norm(x) for x in six])))
         added += 1
         if added % 25 == 0: json.dump(R, open(SP, 'w')); print(time.strftime('%I:%M %p'), added, flush=True)
     json.dump(R, open(SP, 'w')); json.dump(T, open(TP, 'w'), indent=None)

@@ -62,14 +62,14 @@ pub(crate) fn resolve_switches_h(b: &mut Battle, cfg: &Cfg, mut rng: Option<&mut
         let (i, j) = if let Some(h) = human.as_deref_mut() {
             let i = h.choose_switch(b, turn, &opts[0]);
             let j = if opts[1].len() <= 1 { 0 } else {
-                let vals: Vec<f64> = opts[1].iter().map(|y| { let mut c = b.clone(); c.choose_switches([opts[0][i], *y]); let v = value2(&mut c, cfg); if cfg.vw_b.is_some() { v.1 } else { v.0 } }).collect();
+                let vals: Vec<f64> = opts[1].iter().map(|y| { let mut c = b.clone(); c.choose_switches([opts[0][i], *y]); let v = value2(&mut c, cfg); if crate::plan::two_values(cfg) { v.1 } else { v.0 } }).collect();
                 (0..vals.len()).min_by(|&a, &c| vals[a].partial_cmp(&vals[c]).unwrap()).unwrap() };
             (i, j)
         } else if opts[0].len() * opts[1].len() == 1 { (0, 0) } else {
             let a2: Vec<Vec<(f64, f64)>> = opts[0].iter().map(|x| opts[1].iter().map(|y| { let mut c = b.clone(); c.choose_switches([*x, *y]); value2(&mut c, cfg) }).collect()).collect();
             let a: Vec<Vec<f64>> = a2.iter().map(|r| r.iter().map(|v| v.0).collect()).collect();
             let (x, mut y) = nash(&a, 200);
-            if cfg.vw_b.is_some() { let ab: Vec<Vec<f64>> = a2.iter().map(|r| r.iter().map(|v| v.1).collect()).collect(); y = nash(&ab, 200).1; }   // each side by its own value
+            if crate::plan::two_values(cfg) { let ab: Vec<Vec<f64>> = a2.iter().map(|r| r.iter().map(|v| v.1).collect()).collect(); y = nash(&ab, 200).1; }   // each side by its own value
             let am = |p: &[f64]| p.iter().enumerate().fold((0, -1.0), |m, (k, v)| if *v > m.1 { (k, *v) } else { m }).0;
             match rng.as_deref_mut() { Some(r) => (sample(&x, r), sample(&y, r)), None => (am(&x), am(&y)) }
         };

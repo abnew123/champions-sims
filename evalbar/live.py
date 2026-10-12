@@ -97,7 +97,7 @@ def spec_mon(m, st):
     return {**st, 'forme': m['forme'], 'mega': m['mega'], 'hpPct': m['hp'], 'fainted': m['f'], 'status': m['st'], 'slept': m['slept'], 'boosts': m['b'],
             'itemNow': '' if m['gone'] or toid(st['item']) not in S.E['items'] else st['item'], 'moved': m['moved'], 'stall': m['stall'], 'lock': m['lock'],
             'vol': m['vol'], 'onField': bool(m['pos']), 'last': m['last'], 'volarg': m['volarg'], 'volturn': m.get('volturn') or {},
-            'unburden': m.get('unb', False), 'perish': m.get('perish', 0), 'abilityNow': m.get('abil', '')}
+            'unburden': m.get('unb', False), 'perish': m.get('perish', 0), 'abilityNow': m.get('abil', ''), 'toxn': m.get('toxn', 0), 'ptrap': m.get('ptrap')}
 def hyps(sd, state, six, sets, leads, topk=TOPK):
     """the TOPK most likely sets of Pokemon this player has not sent in yet: [(weight, [species])]"""
     known = {m['sp'] for m in state[sd]['mons']}
@@ -136,6 +136,7 @@ def specs_for(tag, g, step, six, sets, leads, own=None):
                                   'fieldDue': True,                   # Unburden's Speed after its item went, Perish Song's count (positions.js)
                                   'pctDue': True,                     # a shown percent rebuilt as an HP that shows as it (positions.js)
                                   'abilDue': True,                    # an ability gained in battle (Trace, Skill Swap) (positions.js)
+                                  'chipDue': True,                    # Toxic's count and a binding move go on (positions.js)
                                   'dropped': [], 'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None,
                                                            'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}))
     return out, H

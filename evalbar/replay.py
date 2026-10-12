@@ -16,6 +16,7 @@ WEATHER = {'RainDance': 'Rain', 'SunnyDay': 'Sun', 'Sandstorm': 'Sandstorm', 'Sn
            'DesolateLand': 'Harsh sun', 'PrimordialSea': 'Heavy rain', 'DeltaStream': 'Strong winds'}
 WROCK = {'RainDance': 'damprock', 'SunnyDay': 'heatrock', 'Sandstorm': 'smoothrock', 'Snowscape': 'icyrock', 'Snow': 'icyrock'}
 SCREENS = ('Reflect', 'Light Screen', 'Aurora Veil')
+BINDING = {'Bind', 'Wrap', 'Fire Spin', 'Whirlpool', 'Sand Tomb', 'Clamp', 'Infestation', 'Magma Storm', 'Snap Trap', 'Thunder Cage'}
 BATON_PASS = False                                                        # the eval bar's programs set it (live.py, reach.py); the bot's do not yet
 PASSED = {'Substitute', 'confusion', 'Leech Seed', 'Heal Block', 'Focus Energy', 'Curse', 'Aqua Ring', 'Ingrain', 'Magnet Rise', 'Power Trick', 'Gastro Acid',
           'Embargo', 'Telekinesis', 'Laser Focus'}                       # the volatiles Baton Pass hands on (Showdown's noCopy is false)
@@ -51,9 +52,10 @@ class Mon:
         s.moved = False; s.stall = False; s.prot = False; s.lock = ''; s.slept = 0; s.mega = False; s.last = ''; s.volarg = {}; s.volturn = {}
         s.unburden = False; s.perish = 0                                  # its item gone since it came in (Unburden); Perish Song's count
         s.abil = ''                                                         # an ability it gained in battle (Trace, Skill Swap, Role Play...)
+        s.toxn = 0; s.ptrap = None                                          # Toxic's ticks since it came in; a binding move on it [move, ticks, user]
     def leave(s):
         s.boosts = {}; s.vol = set(); s.moved = False; s.stall = False; s.prot = False; s.lock = ''; s.last = ''; s.volarg = {}; s.volturn = {}
-        s.unburden = False; s.perish = 0; s.abil = ''
+        s.unburden = False; s.perish = 0; s.abil = ''; s.toxn = 0; s.ptrap = None
         if s.temp: s.forme = s.species; s.temp = False                  # a form taken in battle (Aegislash's Blade) ends on switching out
     def ref(s): return [s.side, disp(s.forme)]
 def hpval(tok):
@@ -88,7 +90,8 @@ def parse(log):
             S[sd] = {'mons': [{'n': disp(m.forme), 'hp': m.hp, 'st': m.status, 'f': m.fainted, 'b': {k: v for k, v in m.boosts.items() if v},
                                'item': m.item, 'gone': m.item_gone, 'slot': '' if m.fainted else slot.get(nick, ''), 'seen': True,
                                'sp': m.species, 'forme': '' if m.mega or m.forme == m.species else m.forme, 'pos': slot.get(nick, ''), 'mega': m.mega, 'moved': m.moved, 'stall': m.stall, 'lock': m.lock, 'slept': m.slept, 'vol': sorted(m.vol), 'last': m.last, 'volarg': dict(m.volarg),
-                               'volturn': {v: list(x) for v, x in m.volturn.items() if v in m.vol}, 'unb': m.unburden, 'perish': m.perish, 'abil': m.abil}
+                               'volturn': {v: list(x) for v, x in m.volturn.items() if v in m.vol}, 'unb': m.unburden, 'perish': m.perish, 'abil': m.abil,
+                               'toxn': m.toxn, 'ptrap': list(m.ptrap) if m.ptrap else None}
                               for nick in order[sd] for m in [mons[sd][nick]]],
                      'tailwind': sidec[sd]['tailwind'], 'screens': {k: v for k, v in sidec[sd]['screens'].items() if v}, 'hazards': list(sidec[sd]['hazards'])}
         S['perish'] = perish
@@ -192,6 +195,8 @@ def parse(log):
                 if p[3] == 'slp': m.slept += 1
         elif k in ('-damage', '-heal', '-sethp'):
             m = mon(p[2]); v = hpval(p[3]) if len(p) > 3 else None
+            if m and k == '-damage' and clean(t.get('from', '')) == 'psn' and m.status == 'tox': m.toxn += 1
+            if m and k == '-damage' and 'partiallytrapped' in t and m.ptrap: m.ptrap[1] += 1
             if m and v is not None:
                 extra = pend.pop(id(m), [])
                 if m.hp != v or extra:
@@ -227,6 +232,8 @@ def parse(log):
             if m: note([m.ref(), ' was protected' + (f' ({clean(p[3])})' if len(p) > 3 else '')])
         elif k == '-activate':
             m = mon(p[2]) if p[2] else None; what = clean(p[3]) if len(p) > 3 else ''
+            if m and what in BINDING and t.get('of'):                           # bound: Infestation, Whirlpool, Fire Spin... (partiallytrapped)
+                u = mon(t['of']); m.ptrap = [what, 0, u.species if u else '']
             if what == 'Skill Swap' and len(p) > 5 and t.get('of'):            # the user gets the target's ability, and back
                 tg = mon(t['of'])
                 if m: m.abil = p[4]
@@ -239,7 +246,7 @@ def parse(log):
             elif m and what == 'Substitute': note([m.ref(), "'s Substitute took the hit"])
         elif k == '-status':
             m = mon(p[2])
-            if m: m.status = p[3]; m.slept = 0; note([m.ref(), ' ' + STATUS.get(p[3], p[3]) + why(t)])
+            if m: m.status = p[3]; m.slept = 0; m.toxn = 0; note([m.ref(), ' ' + STATUS.get(p[3], p[3]) + why(t)])
         elif k == '-curestatus':
             m = mon(p[2])
             if m: note([m.ref(), ' woke up' if m.status == 'slp' else ' was cured']); m.status = ''
@@ -280,6 +287,7 @@ def parse(log):
         elif k in ('-start', '-end'):
             m = mon(p[2]); what = clean(p[3]) if len(p) > 3 else ''
             if not m: continue
+            if k == '-end' and 'partiallytrapped' in t: m.ptrap = None
             if what.startswith('perish'):
                 perish = True
                 if what[-1].isdigit(): m.perish = int(what[-1])

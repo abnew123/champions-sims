@@ -212,7 +212,7 @@ fn parse_move(v: &Value) -> ActiveMove {
         id: id(v["id"].as_str().unwrap()), name: id(v["name"].as_str().unwrap()), num: v["num"].as_i64().unwrap_or(0),
         mtype: id(v["type"].as_str().unwrap()), category: id(v["category"].as_str().unwrap_or("Physical")),
         base_power: v["basePower"].as_f64().unwrap_or(0.0), accuracy: v["accuracy"].as_f64(),
-        priority: v["priority"].as_f64().unwrap_or(0.0), target: id(v["target"].as_str().unwrap_or("normal")),
+        priority: v["priority"].as_f64().unwrap_or(0.0), target: id(v["target"].as_str().unwrap_or("")),   // only "recharge" has none: Showdown's getTarget then picks a random foe (a draw) (2026-10-12)
         flags: v["flags"].as_object().map(|o| o.iter().filter(|(_, x)| truthy_json(x)).map(|(k, _)| id(k)).collect()).unwrap_or_default(),
         pp: v["pp"].as_i64().unwrap_or(0),
         base: parse_hiteff(v, ""), secondaries, self_boost: v.get("selfBoost").filter(|x| x.is_object()).map(|x| parse_hiteff(x, "selfBoost")),

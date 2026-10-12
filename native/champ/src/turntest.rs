@@ -196,7 +196,12 @@ pub fn diff_full(b: &Battle, post: &Value, req: Option<&Value>) -> Vec<String> {
             for (i, ra) in r.iter().enumerate() {
                 let Some(pi) = b.sides[s].active.get(i).copied().flatten() else { continue };
                 if b.sides[s].pokemon[pi as usize].fainted { continue; }
-                let mine: Vec<String> = bb.request_moves((s as u8, pi)).iter().map(|(m, _, dis)| format!("{}{}", m, if *dis { "(x)" } else { "" })).collect();
+                // a hidden disable (Imprison) shows as usable in the last active Pokemon's request (Showdown's restrictData)
+                let last = b.sides[s].active.iter().skip(i + 1).all(|a| a.map(|j| b.sides[s].pokemon[j as usize].fainted).unwrap_or(true));
+                let slots = &b.sides[s].pokemon[pi as usize].move_slots;
+                let mine: Vec<String> = bb.request_moves((s as u8, pi)).iter().map(|(m, _, dis)| {
+                    let hidden = last && slots.iter().any(|x| x.id == *m && x.disabled_hidden && x.pp > 0);
+                    format!("{}{}", m, if *dis && !hidden { "(x)" } else { "" }) }).collect();
                 let theirs: Vec<String> = ra["moves"].as_array().map(|a| a.iter().map(|m| format!("{}{}", m["id"].as_str().unwrap_or(""), if truthy_json(&m["disabled"]) { "(x)" } else { "" })).collect()).unwrap_or_default();
                 chk(format!("p{} request slot {}", s + 1, i), mine.join(","), theirs.join(","));
             }
@@ -236,6 +241,7 @@ pub fn main(args: &[String]) {
     let modes: Vec<&str> = args.get(2).map(|s| s.split(',').collect()).unwrap_or(vec!["lo", "hi", "mid"]);
     let only: Option<i64> = std::env::var("CASE").ok().and_then(|x| x.parse().ok());
     let full = std::env::var("DIFF_FULL").is_ok(); let order = std::env::var("ORDER").is_ok();
+    let maxex: usize = std::env::var("MAXEX").ok().and_then(|x| x.parse().ok()).unwrap_or(15);
     let text = std::fs::read_to_string(&args[1]).unwrap();
     let mut tot: BTreeMap<String, (usize, usize, usize)> = BTreeMap::new();   // mode -> (exact, mismatch, unsupported)
     let mut unsup: BTreeMap<String, usize> = BTreeMap::new();
@@ -265,7 +271,7 @@ pub fn main(args: &[String]) {
             if d.is_empty() { e.0 += 1; } else {
                 e.1 += 1;
                 for x in &d { let k: String = x.split(": native").next().unwrap().split_whitespace().last().unwrap_or("").to_string(); *bad.entry(k).or_insert(0) += 1; }
-                if examples.len() < 15 || only.is_some() {
+                if examples.len() < maxex || only.is_some() {
                     examples.push(format!("case {} [{}] choices {:?}\n    {}\n    showdown log: {}", c["id"], mode, c["choices"], d.join("\n    "),
                         exp["log"].as_array().map(|l| l.iter().map(|x| x.as_str().unwrap_or("")).collect::<Vec<_>>().join(" ")).unwrap_or_default()));
                     if b.logging { examples.push(format!("    native log: {}", b.log.join(" "))); }

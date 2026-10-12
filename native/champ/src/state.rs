@@ -123,9 +123,12 @@ fn mon(v: &Value, side: u8) -> Pokemon {
     let s = |k: &str| id(v[k].as_str().unwrap_or(""));
     let stats = |x: &Value| -> [i64; 6] { std::array::from_fn(|i| x.get(ST[i]).and_then(|y| y.as_i64()).unwrap_or(0)) };
     let set = &v["set"];
-    let slots: Vec<MoveSlot> = v["moveSlots"].as_array().unwrap().iter().map(|m| MoveSlot {
+    let parse = |a: &Value| -> Vec<MoveSlot> { a.as_array().unwrap().iter().map(|m| MoveSlot {
         id: id(m["id"].as_str().unwrap()), pp: m["pp"].as_i64().unwrap(), maxpp: m["maxpp"].as_i64().unwrap(),
-        disabled: truthy_json(&m["disabled"]), disabled_hidden: m["disabled"].as_str() == Some("hidden"), disabled_source: "", used: m["used"].as_bool().unwrap_or(false) }).collect();
+        disabled: truthy_json(&m["disabled"]), disabled_hidden: m["disabled"].as_str() == Some("hidden"), disabled_source: "", used: m["used"].as_bool().unwrap_or(false) }).collect() };
+    let slots = parse(&v["moveSlots"]);
+    // a transformed Pokemon's own moves (export_state.js exports them since 2026-10-12; older states: the current ones)
+    let base_slots = if v["baseMoveSlots"].is_array() { parse(&v["baseMoveSlots"]) } else { slots.clone() };
     Pokemon {
         ab_d: DCache::default(), it_d: DCache::default(), st_d: DCache::default(),
         side, species: s("species"), base_species: s("baseSpecies"), set_species: id(&to_id(set["species"].as_str().unwrap())), set_item: id(&to_id(set["item"].as_str().unwrap_or(""))), nature: id(&to_id(set["nature"].as_str().unwrap_or(""))),
@@ -136,7 +139,7 @@ fn mon(v: &Value, side: u8) -> Pokemon {
         status: s("status"), status_state: estate(&v["statusState"]), volatiles: states(&v["volatiles"]),
         ability: s("ability"), base_ability: s("baseAbility"), ability_state: estate(&v["abilityState"]), item: s("item"), item_state: estate(&v["itemState"]),
         last_item: s("lastItem"), used_item_this_turn: v["usedItemThisTurn"].as_bool().unwrap_or(false), ate_berry: v["ateBerry"].as_bool().unwrap_or(false),
-        item_knocked_off: v["itemKnockedOff"].as_bool().unwrap_or(false), base_move_slots: slots.clone(), move_slots: slots,
+        item_knocked_off: v["itemKnockedOff"].as_bool().unwrap_or(false), base_move_slots: base_slots, move_slots: slots,
         position: v["position"].as_u64().unwrap() as u8, is_active: v["isActive"].as_bool().unwrap(), fainted: v["fainted"].as_bool().unwrap(),
         faint_queued: v["faintQueued"].as_bool().unwrap_or(false), active_turns: v["activeTurns"].as_i64().unwrap_or(0),
         active_move_actions: v["activeMoveActions"].as_i64().unwrap_or(0), weighthg: v["weighthg"].as_i64().unwrap_or(1), speed: v["speed"].as_f64().unwrap_or(0.0),

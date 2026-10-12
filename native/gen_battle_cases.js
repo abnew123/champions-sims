@@ -97,10 +97,15 @@ while (battles < +N && tries < +N * 5) {
         const b = Battle.fromJSON(snap); b.debugMode = false;
         if (mode !== 'real') b.prng = fakePRNG(mode);
         const logStart = b.log.length;
+        // TRACE=<battle>:<turn>: that turn's real-RNG log with the number of draws so far on each line (to stderr), for DRAWTRACE=1 champ turn
+        const trace = mode === 'real' && process.env.TRACE === `${battles}:${main.turn}`;
+        if (trace) { let k = 0; const nx = b.prng.rng.next.bind(b.prng.rng); b.prng.rng.next = () => { k++; console.error(`draw ${k} [${b.getAllActive().map(p => p.species.id + ':' + p.speed).join(' ')}] q[${b.queue.list.map(a => a.choice + ':' + (a.pokemon ? a.pokemon.species.id : '')).join(' ')}]: ` + new Error().stack.split('\n').slice(2, 9).map(x => x.trim().replace(/^at /, '').replace(/ \(.*\/dist\//, ' (')).join(' < ')); return nx(); };
+          const op = b.log.push; b.log.push = function (...a) { return op.apply(this, a.map(x => `${x} #${k}`)); }; }
         if (!b.choose('p1', c1) || !b.choose('p2', c2)) { good = false; break; }
         const switches = answerSwitches(b); if (!switches) { good = false; break; }
         res[mode] = {switches, post: exportState(b), req: reqOf(b), log: b.log.slice(logStart).filter(l => LOGRE.test(l))};
         if (mode === 'real') next = b;
+        if (trace) console.error(b.log.slice(logStart).join('\n'));
       } catch (e) { errs++; good = false; break; }
     }
     if (!good) break;

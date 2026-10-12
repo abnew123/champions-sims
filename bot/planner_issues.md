@@ -62,3 +62,11 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
    the regional pool (2026-10-12, the user); an opponent's Perish Song is still played without understanding the counts.
 10. **One guess at the opponent's unseen back row.** The bot plans each turn against the single most likely pair for the opponent's
    two unseen Pokemon (botpos `topk=1`), not a weighted few, so a wrong guess plans for a back row that is not there.
+   Measured (`bot/back_test.py`, 2026-10-12, 464 decisions where the opponent still had unseen Pokemon and the game later showed its
+   whole back row): the guess is fully right in 45% (two unseen: both right 41%, one of two 58%, neither 1%; one unseen: 50%). Where it
+   is wrong (253 scored), the bot's mix planned on the guess loses a median **0.23 points** against the mix planned on the truth, two
+   thirds under 1 point, mean 1.15 (16 decisions by 5+ points, one by 28): about 3.9 points a game in the 74 games that had any (an
+   upper estimate, as in 6). The win-chance estimate moves a median 1.6 points (90th percentile 9). Switching barely changes: the bot
+   switches in 37% of its mix planned on the guess and 36% on the truth; decisions with 20%+ switching lose a little more (1.3 vs 0.9).
+   Fix to measure after the climb: plan against the top three back rows (the eval bar's live mode already averages over three), e.g.
+   the bot's mix as the hypotheses' mixes weighted by their odds, at three times the engine time per turn.

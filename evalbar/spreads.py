@@ -45,17 +45,21 @@ def raw_speed(forme, evs, nature):
     return int(((2 * sp['stats']['spe'] + 31 + 2 * evs[5]) * 50 // 100 + 5) * m)
 STAGE = {-6: 2 / 8, -5: 2 / 7, -4: 2 / 6, -3: 2 / 5, -2: 2 / 4, -1: 2 / 3, 0: 1, 1: 1.5, 2: 2, 3: 2.5, 4: 3, 5: 3.5, 6: 4}
 WEATHER_SPEED = {'Swift Swim': ('Rain', 'Heavy rain'), 'Chlorophyll': ('Sun', 'Harsh sun'), 'Sand Rush': ('Sandstorm',), 'Slush Rush': ('Snow',)}   # as replay.py names weather
+TERRAIN_SPEED = {'Surge Surfer': 'Electric'}                                 # as replay.py names terrain (the eval bar's strict reading)
+TERRAIN_LINE = re.compile(r'^\|-field(start|end)\|move: (\w+) Terrain')
 def effective(raw, mods):
-    """the Speed the turn order uses: stages, then Choice Scarf, a weather ability, Tailwind, paralysis"""
+    """the Speed the turn order uses: stages, then Choice Scarf, a weather or terrain ability, Tailwind, paralysis"""
     v = int(raw * STAGE.get(mods['stage'], 1))
     if mods['scarf']: v *= 1.5
     if mods['weather_x2']: v *= 2
+    if mods.get('terrain_x2'): v *= 2
     if mods['tailwind']: v *= 2
     if mods['par']: v *= 0.5
     return v
 SKIP_TURN = {'After You', 'Quash', 'Instruct', 'Ally Switch'}               # moves that change the order of what follows
-def speed_line(l):
-    """a line that can change a Pokemon's Speed or the turn order mid-turn"""
+def speed_line(l, strict=False):
+    """a line that can change a Pokemon's Speed or the turn order mid-turn (strict: a terrain starting or ending too, for Surge Surfer)"""
+    if strict and TERRAIN_LINE.match(l): return True
     p = l.split('|')
     if len(p) < 3: return False
     k = p[1]
@@ -77,7 +81,7 @@ RESIDUAL = re.compile(r'\[from\] (Sandstorm|item: Leftovers|item: Black Sludge|G
 SWITCH_IN = {'Intimidate', 'Drought', 'Drizzle', 'Sand Stream', 'Snow Warning', 'Orichalcum Pulse', 'Hadron Engine', 'Psychic Surge', 'Grassy Surge',
              'Electric Surge', 'Misty Surge', 'Pressure', 'Mold Breaker', 'Teravolt', 'Turboblaze', 'Trace', 'Download', 'Supreme Overlord',
              'Hospitality', 'Costar', 'Screen Cleaner', 'Curious Medicine', 'Air Lock', 'Cloud Nine'}
-def observations(log, known_side, known_speed, sheets):
+def observations(log, known_side, known_speed, sheets, strict=False):
     """the orders the log shows between a Pokemon of the other side and one of the known side where Speed decided it (Trick Room
     reversing it) and nothing could have changed either one's Speed or the field in between:
       start     whose switch-in ability (Intimidate, weather, terrain, ...) went first as the battle began
@@ -86,8 +90,9 @@ def observations(log, known_side, known_speed, sheets):
       residual  who took or regained HP first from the same end-of-turn effect (sand, poison, burn, Leftovers, Black Sludge, Grassy
                 Terrain, Leech Seed, Salt Cure), or counted down Perish Song first
     [{turn, kind, species, forme, first, tr, mods, known}]: known is the known Pokemon's effective Speed, mods the other one's modifiers
-    (its raw Speed is what is unknown)"""
+    (its raw Speed is what is unknown). strict (the eval bar's): Surge Surfer in Electric Terrain, the terrain as it stood at each point"""
     out = []; g = R.parse(log); states = {s['turn']: s['state'] for s in g['steps'] if s['turn'] >= 1 and s['state']}
+    surge = strict and any(v and v.get('ability') in TERRAIN_SPEED for sd in sheets for v in sheets[sd].values())   # terrain can change a Speed
     nick = {}
     for l in log.split('\n'):
         p = l.split('|')
@@ -100,7 +105,7 @@ def observations(log, known_side, known_speed, sheets):
     def forme(sd, m, now):                                                   # the forme whose Speed counts: the Mega once it has evolved
         return (m['forme'] or mega_of(m['sp'], sheet(sd, m).get('item', '')) or m['sp']) if now and m['mega'] else (m['forme'] if m['forme'] and 'Mega' not in m['forme'] else m['sp'])
     def add(t, kind, first, second, ctx):
-        """first acted before second, each (side, mon, forme); ctx: tr, weather, tailwind {side: bool}, stage (False: Speed stages not counted)"""
+        """first acted before second, each (side, mon, forme); ctx: tr, weather, terrain, tailwind {side: bool}, stage (False: Speed stages not counted)"""
         if first[0] == second[0] or known_side not in (first[0], second[0]) or not first[1] or not second[1]: return
         (sk, mk, fk), (su, mu, fu) = (first, second) if first[0] == known_side else (second, first)
         shk, shu = sheet(sk, mk), sheet(su, mu)
@@ -111,7 +116,8 @@ def observations(log, known_side, known_speed, sheets):
             ab = sh.get('ability'); mg = E['species'].get(toid(forme)) if toid(forme) != toid(m['sp']) else None
             if mg and 'mega' in toid(forme): ab = (mg.get('abilities') or {}).get('0', ab)   # a Mega has its own ability (Mega Swampert: Swift Swim)
             return {'stage': (m['b'] or {}).get('spe', 0) if ctx.get('stage', True) else 0, 'scarf': toid(sh.get('item', '')) == 'choicescarf' and not m['gone'],
-                    'tailwind': ctx['tailwind'][sd], 'par': m['st'] == 'par' and ab != 'Quick Feet', 'weather_x2': bool(ctx['weather']) and ctx['weather'] in WEATHER_SPEED.get(ab, ())}
+                    'tailwind': ctx['tailwind'][sd], 'par': m['st'] == 'par' and ab != 'Quick Feet', 'weather_x2': bool(ctx['weather']) and ctx['weather'] in WEATHER_SPEED.get(ab, ()),
+                    **({'terrain_x2': True} if strict and ab in TERRAIN_SPEED and ctx.get('terrain') == TERRAIN_SPEED[ab] else {})}
         out.append({'turn': t, 'kind': kind, 'species': mu['sp'], 'forme': fu, 'first': su == first[0], 'tr': ctx['tr'],
                     'mods': mods(su, mu, shu, fu), 'known': effective(rk, mods(sk, mk, shk, fk)), 'against': mk['sp']})
     def pairs(t, kind, actors, ctx_at):
@@ -136,14 +142,14 @@ def observations(log, known_side, known_speed, sheets):
         seg = L[a + 1:cut[k + 1] if k + 1 < len(cut) else len(L)]
         if any(l.startswith('|move|') and l.split('|')[3] in SKIP_TURN for l in seg): continue
         f = st['field']; tw = {sd: st[sd]['tailwind'] > 0 for sd in ('p1', 'p2')}
-        ctx0 = lambda i: {'tr': f['tr'] > 0, 'weather': f['weather'], 'tailwind': tw}
+        ctx0 = lambda i: {'tr': f['tr'] > 0, 'weather': f['weather'], 'terrain': f.get('terrain') or '', 'tailwind': tw}
         mon_at = lambda pos: next((m for m in st[pos[:2]]['mons'] if m['pos'] == pos[2] and not m['f']), None)
         first_move = next((i for i, l in enumerate(seg) if l.startswith('|move|')), len(seg))
         # the start of the turn: switches (by the Pokemon going out) and Mega Evolutions, each in Speed order
         sw, mg, dirty = [], [], False
         for i, l in enumerate(seg[:first_move]):
             p = l.split('|')
-            if speed_line(l) or '-activate' in l and re.search(r'Quick Claw|Custap|Quick Draw', l): dirty = True
+            if speed_line(l, surge) or '-activate' in l and re.search(r'Quick Claw|Custap|Quick Draw', l): dirty = True
             if dirty or len(p) < 3: continue
             if p[1] == 'switch' and mon_at(p[2][:3]): m = mon_at(p[2][:3]); sw.append((i, (p[2][:2], m, forme(p[2][:2], m, True))))
             elif p[1] == 'detailschange' and 'Mega' in l and mon_at(p[2][:3]): m = mon_at(p[2][:3]); mg.append((i, (p[2][:2], m, forme(p[2][:2], m, False))))
@@ -151,6 +157,8 @@ def observations(log, known_side, known_speed, sheets):
         # moves at the same priority, with the weather as it stood when they began (a Mega's Drought at the start of the turn)
         wl = next((l.split('|')[2] for l in reversed(seg[:first_move]) if l.startswith('|-weather|') and '[upkeep]' not in l), None)
         w_moves = f['weather'] if wl is None else '' if wl == 'none' else R.WEATHER.get(wl, wl)
+        tl = next((TERRAIN_LINE.match(l) for l in reversed(seg[:first_move]) if TERRAIN_LINE.match(l)), None)
+        t_moves = (f.get('terrain') or '') if tl is None else tl.group(2) if tl.group(1) == 'start' else ''
         formes = {}; switched = set(); moves = []; dirty = False
         for l in seg:
             p = l.split('|')
@@ -158,7 +166,7 @@ def observations(log, known_side, known_speed, sheets):
             if p[1] in ('switch', 'drag', 'replace'): switched.add(p[2][:3])
             elif p[1] == 'detailschange': formes[p[2][:3]] = p[3].split(',')[0]
             elif p[1] == '-activate' and re.search(r'Quick Claw|Custap|Quick Draw', l): dirty = True
-            elif speed_line(l) and moves: dirty = True
+            elif speed_line(l, surge) and moves: dirty = True
             elif p[1] == 'move' and not re.search(r'\[from\](?! lockedmove)', l) and not dirty: moves.append((p[2][:3], p[3]))
         for i, (pa, ma) in enumerate(moves):
             for pb, mb in moves[i + 1:]:
@@ -168,7 +176,7 @@ def observations(log, known_side, known_speed, sheets):
                 if 'Grassy Glide' in (ma, mb): continue                          # +1 in Grassy Terrain: whether it was up at that moment
                 if priority(ma, sheet(pa[:2], A).get('ability'), A['hp'] == 100) != priority(mb, sheet(pb[:2], B).get('ability'), B['hp'] == 100): continue
                 fa = formes.get(pa) or forme(pa[:2], A, True); fb = formes.get(pb) or forme(pb[:2], B, True)
-                add(t, 'move', (pa[:2], A, fa), (pb[:2], B, fb), {'tr': f['tr'] > 0, 'weather': w_moves, 'tailwind': tw})
+                add(t, 'move', (pa[:2], A, fa), (pb[:2], B, fb), {'tr': f['tr'] > 0, 'weather': w_moves, 'terrain': t_moves, 'tailwind': tw})
         # the end of the turn: the same effect on each Pokemon in Speed order, with the field as it stood at that line
         if '|upkeep' not in seg: continue
         up = seg.index('|upkeep'); bl = max((i for i in range(up) if seg[i] == '|'), default=None)
@@ -177,11 +185,14 @@ def observations(log, known_side, known_speed, sheets):
         if any(speed_line(l) and not re.match(r'\|-(sideend|fieldend|weather)\|', l) for l in res): continue   # Speed Boost and the like
         w_before = next((l.split('|')[2] for l in reversed(seg[:bl]) if l.startswith('|-weather|') and '[upkeep]' not in l), None)
         w_turn = (R.WEATHER.get(w_before, w_before) if w_before != 'none' else '') if w_before is not None else f['weather']
-        def ctx_res(i, res=res, nxt=nxt, w_turn=w_turn):
+        tb = next((TERRAIN_LINE.match(l) for l in reversed(seg[:bl]) if TERRAIN_LINE.match(l)), None)
+        t_turn = (f.get('terrain') or '') if tb is None else tb.group(2) if tb.group(1) == 'start' else ''
+        def ctx_res(i, res=res, nxt=nxt, w_turn=w_turn, t_turn=t_turn):
             ended = lambda pat: any(re.search(pat, l) for l in res[:i])
             later = lambda pat: any(re.search(pat, l) for l in res[i:])
             return {'tr': (nxt['field']['tr'] > 0 or later(r'^\|-fieldend\|.*Trick Room')) and not ended(r'^\|-fieldend\|.*Trick Room'),
                     'weather': '' if ended(r'^\|-weather\|none') else w_turn,
+                    'terrain': '' if ended(r'^\|-fieldend\|move: \w+ Terrain') else t_turn,
                     'tailwind': {sd: (nxt[sd]['tailwind'] > 0 or later(rf'^\|-sideend\|{sd}: .*Tailwind')) and not ended(rf'^\|-sideend\|{sd}: .*Tailwind') for sd in ('p1', 'p2')}}
         groups = collections.defaultdict(list)
         for i, l in enumerate(res):
@@ -370,7 +381,7 @@ def refine(log, gp, sets, known_side, known_evs, strict=False):
     def ks(species, forme):
         k = known_evs.get(toid(species)) or known_evs.get(toid(species.split('-')[0]))
         return raw_speed(forme, *k) if k else None
-    obs = observations(log, known_side, ks, gp['sheets'])
+    obs = observations(log, known_side, ks, gp['sheets'], strict)
     other = 'p2' if known_side == 'p1' else 'p1'; why = {}
     dobs = damage_observations(log, known_side, strict)                         # strict: the eval bar's (the frozen bot's is the older reading)
     cands = {sp: [list(e) for _, e in ranked(sp, st['nature'], st['item'])] + [list(st['evs'])] for sp, st in sets[other].items() if st}

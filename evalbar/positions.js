@@ -17,6 +17,24 @@ const WEATHER = {Rain: 'raindance', Sun: 'sunnyday', Sandstorm: 'sandstorm', Sno
 const VOL = {confusion: 'confusion', Taunt: 'taunt', 'Leech Seed': 'leechseed', 'Throat Chop': 'throatchop', Yawn: 'yawn', 'Heal Block': 'healblock', Substitute: 'substitute',
              Imprison: 'imprison', 'Flash Fire': 'flashfire'};
 const STATS = ['atk', 'def', 'spa', 'spd', 'spe', 'accuracy', 'evasion'];
+// volDue (live.specs_for sets it, the bot's positions do not yet): a volatile with a countdown gets what Showdown would have left of it at the
+// start of this turn: its full duration as set when it started (data/moves.js) less one for each end of turn since. x.volturn[v] = [the turn
+// it started, what the Pokemon was doing then: 'waits' (its move that turn still to come: queue.willMove), 'moving' (its own move was
+// running: Cursed Body), 'moved' (on the field since the turn started, its action done), 'new' (it came in that turn: activeTurns 0)]
+const FULL = {
+  taunt: how => 3 + (how === 'moved' || how === 'moving' ? 1 : 0),       // +1 if it had been on the field since the turn started and would not move again
+  encore: how => 3 + (how === 'waits' ? 0 : 1),                          // +1 if it would not move again that turn
+  disable: how => 5 - (how === 'waits' || how === 'moving' ? 1 : 0),     // -1 if it was still to move that turn, or moving (Cursed Body)
+  throatchop: () => 2,
+  healblock: (how, arg) => arg === 'psychicnoise' ? 2 : 5,               // Psychic Noise's 2, the move Heal Block's 5 (no Persistent in Champions)
+};
+function left(spec, x, id, arg, approx, v) {
+  const t = (x.volturn || {})[v];
+  if (!spec.volDue || !t || !FULL[id]) return null;
+  const n = FULL[id](t[1], arg) - (spec.turn - t[0]);
+  if (n < 1) approx.push(v);                                             // it should have ended: the log's -end was missed
+  return Math.max(1, n);
+}
 // the engine's data: this Showdown package gives three Megas an older ability (Mega Golisopod Emergency Exit for Tough Claws, Mega
 // Garchomp Z Sand Force for Levitate, Mega Absol Z Magic Bounce for Sharpness); real games and the engine agree with the engine data
 const ENGINE = JSON.parse(fs.readFileSync(path.resolve('../native/engine_data_full.json')));
@@ -64,11 +82,16 @@ function rebuild(spec, flip) {
       if (x.stall) p.addVolatile('stall');
       if (x.lock && p.moveSlots.some(m => m.id === toID(x.lock))) p.volatiles.choicelock = b.initEffectState({id: 'choicelock', target: p, move: toID(x.lock)});
       for (const v of x.vol || []) {
-        const arg = toID((x.volarg || {})[v]);
-        if (VOL[v]) { if (!p.addVolatile(VOL[v], side.foe.active[0])) approx.push(v); else if (v === 'Yawn' && spec.yawnDue) p.volatiles.yawn.duration = 1; }
+        const arg = toID((x.volarg || {})[v]), n = left(spec, x, VOL[v] || toID(v), arg, approx, v);
+        if (VOL[v]) {
+          if (!p.addVolatile(VOL[v], side.foe.active[0])) approx.push(v);
+          else if (v === 'Yawn' && spec.yawnDue) p.volatiles.yawn.duration = 1;
+          else if (n !== null) p.volatiles[VOL[v]].duration = n;
+        }
         // yawnDue: a Yawn on the field at the start of a turn was used last turn, so it puts its target to sleep at the end of this one
         // (Showdown's duration 2 has already lost one end of turn). live.specs_for and botpos.bot_position (the bot, from 2026-10-12) set it
-        else if ((v === 'Encore' || v === 'Disable') && arg && p.moveSlots.some(m => m.id === arg)) p.volatiles[toID(v)] = b.initEffectState({id: toID(v), target: p, move: arg, duration: v === 'Encore' ? 2 : 3});
+        else if ((v === 'Encore' || v === 'Disable') && arg && p.moveSlots.some(m => m.id === arg))
+          p.volatiles[toID(v)] = b.initEffectState({id: toID(v), target: p, move: arg, duration: n !== null ? n : v === 'Encore' ? 2 : 3});
         else approx.push(v);
       }
     });

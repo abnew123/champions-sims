@@ -42,10 +42,12 @@ class Mon:
         s.set = sheet.get(toid(species)) or sheet.get(toid(species.split('-')[0])) or {}
         s.item = s.set.get('item', ''); s.item_gone = False; s.vol = set()
         # for rebuilding the position in the engine: has it used a move action since coming in (Fake Out), did it Protect last turn,
-        # the move a Choice item locks it into, turns already slept, has it Mega Evolved
-        s.moved = False; s.stall = False; s.prot = False; s.lock = ''; s.slept = 0; s.mega = False; s.last = ''; s.volarg = {}
+        # the move a Choice item locks it into, turns already slept, has it Mega Evolved; volturn: for each volatile, [the turn it started,
+        # what the Pokemon was doing then: 'waits' (its move that turn still to come), 'moving' (its own move was running: Cursed Body),
+        # 'moved' (on the field since the turn started, its action done), 'new' (it came in that turn)], for positions.js's countdowns
+        s.moved = False; s.stall = False; s.prot = False; s.lock = ''; s.slept = 0; s.mega = False; s.last = ''; s.volarg = {}; s.volturn = {}
     def leave(s):
-        s.boosts = {}; s.vol = set(); s.moved = False; s.stall = False; s.prot = False; s.lock = ''; s.last = ''; s.volarg = {}
+        s.boosts = {}; s.vol = set(); s.moved = False; s.stall = False; s.prot = False; s.lock = ''; s.last = ''; s.volarg = {}; s.volturn = {}
         if s.temp: s.forme = s.species; s.temp = False                  # a form taken in battle (Aegislash's Blade) ends on switching out
     def ref(s): return [s.side, disp(s.forme)]
 def hpval(tok):
@@ -59,6 +61,7 @@ def parse(log):
     sidec = {s: {'tailwind': 0, 'screens': {}, 'hazards': []} for s in ('p1', 'p2')}
     steps = []; events = []; cur = [None]; pend = {}; turn = 0; phase = 'lead'; winner = None; forfeit = False; perish = False; last_user = [None]
     acts = {}; start_active = {}; moved_yet = [False]; mega_now = set(); redirect = set(); odd = set(); last_move = [None]
+    onstart = set(); acted = set()                                           # this turn: the Pokemon on the field when it started, those that have acted
     def mon(ident):
         nick = ident.split(': ', 1)[1] if ': ' in ident else ident
         return mons[ident[:2]].get(nick)
@@ -78,7 +81,8 @@ def parse(log):
             slot = {nick: pos[2] for pos, nick in active.items() if pos[:2] == sd}
             S[sd] = {'mons': [{'n': disp(m.forme), 'hp': m.hp, 'st': m.status, 'f': m.fainted, 'b': {k: v for k, v in m.boosts.items() if v},
                                'item': m.item, 'gone': m.item_gone, 'slot': '' if m.fainted else slot.get(nick, ''), 'seen': True,
-                               'sp': m.species, 'forme': '' if m.mega or m.forme == m.species else m.forme, 'pos': slot.get(nick, ''), 'mega': m.mega, 'moved': m.moved, 'stall': m.stall, 'lock': m.lock, 'slept': m.slept, 'vol': sorted(m.vol), 'last': m.last, 'volarg': dict(m.volarg)}
+                               'sp': m.species, 'forme': '' if m.mega or m.forme == m.species else m.forme, 'pos': slot.get(nick, ''), 'mega': m.mega, 'moved': m.moved, 'stall': m.stall, 'lock': m.lock, 'slept': m.slept, 'vol': sorted(m.vol), 'last': m.last, 'volarg': dict(m.volarg),
+                               'volturn': {v: list(x) for v, x in m.volturn.items() if v in m.vol}}
                               for nick in order[sd] for m in [mons[sd][nick]]],
                      'tailwind': sidec[sd]['tailwind'], 'screens': {k: v for k, v in sidec[sd]['screens'].items() if v}, 'hazards': list(sidec[sd]['hazards'])}
         S['perish'] = perish
@@ -112,6 +116,7 @@ def parse(log):
                 acts[pos] = {'switch': species}                          # a switch before anything has moved is the player's choice
             if nick not in mons[sd]: mons[sd][nick] = Mon(sd, species, sheets[sd]); order[sd].append(nick)
             m = mons[sd][nick]; active[pos] = nick
+            if k != 'replace': onstart.discard(id(m))
             if len(p) > 4:
                 v = hpval(p[4]); m.hp = v if v is not None else m.hp; st = p[4].split(); m.status = st[1] if len(st) > 1 and st[1] != 'fnt' else m.status
             if k == 'replace': ev(sd, [m.ref(), "'s Illusion ended"])
@@ -143,7 +148,7 @@ def parse(log):
                 if pos not in acts and active.get(pos) == start_active.get(pos):
                     tpos = p[4][:3] if tg is not None and 'spread' not in t else ''
                     acts[pos] = {'move': p[3], 'target': tpos, 'mega': id(m) in mega_now, 'unsure': bool(tpos) and tpos[:2] in redirect}
-                moved_yet[0] = True; m.moved = True; m.last = p[3]; m.vol.discard('charging')
+                moved_yet[0] = True; m.moved = True; m.last = p[3]; m.vol.discard('charging'); acted.add(id(m))
                 if toid(m.item) in ('choicescarf', 'choiceband', 'choicespecs') and not m.item_gone: m.lock = p[3]
             head = [m.ref(), ' used ', p[3]]
             if tg is not None and tg is not m and 'spread' not in t: head += [' on ', tg.ref()]
@@ -162,12 +167,12 @@ def parse(log):
                 e0 = events[-1] if events else None
                 if e0 and e0['head'] == [u.ref(), ' used ', p[4]] and h: e0['head'] += [' on ', h.ref()]; cur[0] = e0
                 else: ev(u.side, [u.ref(), ' used ', p[4]] + ([' on ', h.ref()] if h else []))
-                note([u.ref(), f": stopped by {clean(p[3])}"]); moved_yet[0] = True; u.moved = True; u.last = p[4]
+                note([u.ref(), f": stopped by {clean(p[3])}"]); moved_yet[0] = True; u.moved = True; u.last = p[4]; acted.add(id(u))
         elif k == 'cant':
             m = mon(p[2])
             if m and p[2][:3] not in acts and active.get(p[2][:3]) == start_active.get(p[2][:3]): acts[p[2][:3]] = {'none': 'cant'}   # it did not switch
             if m:
-                ev(m.side, [m.ref(), ' ' + CANT.get(p[3], f"can't move ({clean(p[3])})")]); moved_yet[0] = True; m.moved = True
+                ev(m.side, [m.ref(), ' ' + CANT.get(p[3], f"can't move ({clean(p[3])})")]); moved_yet[0] = True; m.moved = True; acted.add(id(m))
                 if p[3] == 'slp': m.slept += 1
         elif k in ('-damage', '-heal', '-sethp'):
             m = mon(p[2]); v = hpval(p[3]) if len(p) > 3 else None
@@ -262,8 +267,12 @@ def parse(log):
             elif k == '-start':
                 if what == 'Encore': m.volarg[what] = m.last
                 if what == 'Disable' and len(p) > 4: m.volarg[what] = p[4]
+                if what == 'Heal Block': m.volarg[what] = last_move[0] or ''      # Psychic Noise's lasts 2 turns, the move's 5
+                act = phase in ('actions', 'residual')                        # else it started before the turn's actions (switch-ins)
+                m.volturn[what] = [turn if act else turn + 1, 'moving' if act and last_user[0] is m and phase == 'actions' else 'new' if id(m) not in onstart
+                                   else 'moved' if id(m) in acted else 'waits']
                 m.vol.add(what); note([m.ref(), {'confusion': ' became confused', 'Substitute': ' put up a Substitute'}.get(what, f': {what} started')])
-            else: m.vol.discard(what); note([m.ref(), {'confusion': ' snapped out of confusion', 'Substitute': "'s Substitute broke", 'Illusion': "'s Illusion ended"}.get(what, f': {what} ended')])
+            else: m.vol.discard(what); m.volturn.pop(what, None); note([m.ref(), {'confusion': ' snapped out of confusion', 'Substitute': "'s Substitute broke", 'Illusion': "'s Illusion ended"}.get(what, f': {what} ended')])
         elif k == '-prepare':
             m = mon(p[2])
             if m: m.vol.add('charging')                                   # first turn of a two-turn move; '-anim' follows if it fires at once
@@ -334,6 +343,7 @@ def parse(log):
             for sd in mons:
                 for m in mons[sd].values(): m.stall = m.prot; m.prot = False
             state0 = snapshot(); acts = {}; start_active = dict(active); moved_yet[0] = False; mega_now.clear(); redirect.clear()
+            onstart.clear(); onstart.update(id(mons[pos[:2]][nick]) for pos, nick in active.items() if nick in mons[pos[:2]]); acted.clear()
         elif k == 'win': winner = next((s for s, n in names.items() if n == p[2]), None)
     steps.append({'turn': turn, 'state': state0 if turn else None, 'events': events, 'acts': acts})
     final = snapshot()
@@ -342,7 +352,7 @@ def parse(log):
         for sd in ('p1', 'p2'):
             for nick in order[sd][len(st[sd]['mons']):]:
                 m = mons[sd][nick]; st[sd]['mons'].append({'n': disp(m.species), 'hp': 100, 'st': '', 'f': False, 'b': {}, 'item': m.set.get('item', ''), 'gone': False, 'slot': '', 'seen': False,
-                                           'sp': m.species, 'forme': '', 'pos': '', 'mega': False, 'moved': False, 'stall': False, 'lock': '', 'slept': 0, 'vol': [], 'last': '', 'volarg': {}})
+                                           'sp': m.species, 'forme': '', 'pos': '', 'mega': False, 'moved': False, 'stall': False, 'lock': '', 'slept': 0, 'vol': [], 'last': '', 'volarg': {}, 'volturn': {}})
     # for the caller's leak check: nicknames that are not just the species, and the usernames
     hidden = sorted({n for sd in mons for n in mons[sd] if not toid(mons[sd][n].species).startswith(toid(n))} | {n for n in names.values() if n})
     return {'steps': steps, 'final': final, 'winner': winner, 'forfeit': forfeit, 'perish': perish, 'brought': {sd: len(order[sd]) for sd in order},

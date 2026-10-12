@@ -96,7 +96,7 @@ def sets_for(g, log, bo3):
 def spec_mon(m, st):
     return {**st, 'forme': m['forme'], 'mega': m['mega'], 'hpPct': m['hp'], 'fainted': m['f'], 'status': m['st'], 'slept': m['slept'], 'boosts': m['b'],
             'itemNow': '' if m['gone'] or toid(st['item']) not in S.E['items'] else st['item'], 'moved': m['moved'], 'stall': m['stall'], 'lock': m['lock'],
-            'vol': m['vol'], 'onField': bool(m['pos']), 'last': m['last'], 'volarg': m['volarg']}
+            'vol': m['vol'], 'onField': bool(m['pos']), 'last': m['last'], 'volarg': m['volarg'], 'volturn': m.get('volturn') or {}}
 def hyps(sd, state, six, sets, leads, topk=TOPK):
     """the TOPK most likely sets of Pokemon this player has not sent in yet: [(weight, [species])]"""
     known = {m['sp'] for m in state[sd]['mons']}
@@ -131,6 +131,7 @@ def specs_for(tag, g, step, six, sets, leads, own=None):
             f = st['field']
             out.append((w1 * w2, {'name': f"{tag} t{step['turn']} h{i}{j}", 'turn': step['turn'], 'sides': sides,
                                   'acts': [[act(sd, i) for i in (0, 1)] for sd in ('p1', 'p2')], 'perish': st['perish'], 'standIns': len(c1) + len(c2), 'yawnDue': True,
+                                  'volDue': True,                     # each volatile's countdown from the turn it started (positions.js)
                                   'dropped': [], 'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None,
                                                            'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}))
     return out, H

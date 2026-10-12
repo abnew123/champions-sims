@@ -130,7 +130,11 @@ pub fn register(r: &mut Reg) {
     h!(r, Move, "supercellslam", "onMoveFail", |b, a| {
         let s = a.source.unwrap(); let d = b.p(s).base_maxhp as f64 / 2.0;
         b.damage(d, Some(s), Some(s), Some(Eff::cond(id("supercellslam"))), false); RV::Undef });
+    // Aura Guard (Champions, Mega Lucario Z): contact damage halved, as Fluffy's contact half (the raw flag); breakable (2026-10-12, the
+    // Eval bar's replay check: its STAB at 1.5x, not Adaptability's 2x, and contact into it halved)
+    h!(r, Ability, "auraguard", "onSourceModifyDamage", |b, a| { if b.am(a.am()).flag("contact") { return b.cm(0.5, 1.0); } RV::Undef });
 }
+
 fn reversal_bp(b: &mut Battle, a: &mut HArgs) -> RV {
     let s = a.s(); let p = b.p(s);
     let ratio = ((p.hp * 48) as f64 / p.maxhp as f64).floor().max(1.0);

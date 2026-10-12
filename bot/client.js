@@ -14,6 +14,11 @@ const DRY = process.argv.includes('--dry'), LOCAL = !!ARG('--server');
 const acct = ARG('--name') ? {name: ARG('--name'), password: null} : JSON.parse(fs.readFileSync(path.join(HERE, 'account.json')));
 const limits = () => JSON.parse(fs.readFileSync(path.join(HERE, 'limits.json')));
 const L0 = limits(); const FORMAT = ARG('--format') || L0.format; const CHALLENGE = ARG('--challenge'); const TAG = ARG('--tag') || acct.name;
+// --secondary (2026-10-12, the user: a Bo1 bot beside the Bo3 one, same account): a second client for another format. Showdown sends an
+// account's battles to all its connections, so every client handles only its own format's rooms, searches and games; only the primary
+// one answers private messages and challenges (and records PMs), so nobody gets the canned reply twice.
+const SECONDARY = process.argv.includes('--secondary');
+const MINE = room => room.startsWith(`battle-${FORMAT}-`) || room.startsWith(`game-bestof3-${FORMAT}-`);
 const WS = ARG('--server') || 'wss://sim3.psim.us/showdown/websocket';
 const ACTION = LOCAL ? null : 'https://play.pokemonshowdown.com/action.php';
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), TAG + ':', ...a);
@@ -47,7 +52,8 @@ async function refreshMyRating() {
 }
 // ---- the record: bot/out/games.jsonl (no usernames: ratings and results only)
 const GAMES = path.join(OUT, LOCAL ? `games_${TAG}.jsonl` : 'games.jsonl');
-const games = () => fs.existsSync(GAMES) ? fs.readFileSync(GAMES, 'utf8').split('\n').filter(Boolean).map(l => JSON.parse(l)) : [];
+const allGames = () => fs.existsSync(GAMES) ? fs.readFileSync(GAMES, 'utf8').split('\n').filter(Boolean).map(l => JSON.parse(l)) : [];
+const games = () => allGames().filter(x => (x.format || 'gen9championsvgc2026regmcbo3') === FORMAT);   // this client's format (caps, stops, experiment)
 let myRating = null;
 function mayPlay(reason) {
   const L = limits(); const g = games(); const now = Date.now();
@@ -105,13 +111,13 @@ async function onMessage(m) {
       if (p[1] === 'challstr') { await login(p.slice(2).join('|')); }
       else if (p[1] === 'updateuser') { const name = p[2].replace(/^[^A-Za-z0-9]/, '').trim(); if (p[3] === '1' && name.toLowerCase() === acct.name.toLowerCase()) { me = name; loginAt = Date.now(); joinSent = new Set(); log('logged in as', me); send('|/cmd rooms'); onReady(); } }
       else if (p[1] === 'pm') { onPM(p[2], p[3], p.slice(4).join('|')); }
-      else if (p[1] === 'updatesearch') { try { const s = JSON.parse(p[2]); searching = (s.searching || []).length > 0; inGames = Object.keys(s.games || {}).length;
+      else if (p[1] === 'updatesearch') { try { const s = JSON.parse(p[2]); searching = (s.searching || []).includes(FORMAT); inGames = Object.keys(s.games || {}).filter(MINE).length;
         // after a (re)connect only: games already in progress at login are joined once (a new match's rooms also show up here a
         // moment before the server joins us to them, which is not a rejoin)
-        if (Date.now() - loginAt < 15000) for (const g of Object.keys(s.games || {})) if (!joinSent.has(g) && !(rooms[g] && rooms[g].lines.length)) {
+        if (Date.now() - loginAt < 15000) for (const g of Object.keys(s.games || {}).filter(MINE)) if (!joinSent.has(g) && !(rooms[g] && rooms[g].lines.length)) {
           joinSent.add(g); rooms[g] = rooms[g] || {lines: [], side: null, req: null, done: false, oppRating: null, turn: 0}; send(`|/join ${g}`); log('rejoining', g.slice(-16)); }
       } catch (e) {} }
-      else if (p[1] === 'updatechallenges') { onChallenges(p[2]); }
+      else if (p[1] === 'updatechallenges') { if (!SECONDARY) onChallenges(p[2]); }
       else if (p[1] === 'popup') { const t = p.slice(2).join('|'); log('popup:', t.slice(0, 200));
         if (t.includes('Your team was rejected') && currentTeam) {   // a team Showdown will not accept: never use it again
           const rf = path.join(OUT, 'rejected_teams.json'); const r = fs.existsSync(rf) ? JSON.parse(fs.readFileSync(rf)) : [];
@@ -119,7 +125,7 @@ async function onMessage(m) {
           log('team rejected, will not use it again:', currentTeam.name); currentTeam = null; searching = false; } }
     } else {
       if (p[1] === 'deinit' || p[1] === 'noinit') { delete rooms[room]; continue; }   // we left the room (or it is gone): forget it
-      if (!rooms[room] && !(room.startsWith('battle-') || room.startsWith('game-'))) continue;   // only battle and match rooms are tracked
+      if (!rooms[room] && !((room.startsWith('battle-') || room.startsWith('game-')) && (MINE(room) || LOCAL))) continue;   // only this format's battle and match rooms
       const R = rooms[room] || (rooms[room] = {lines: [], side: null, req: null, done: false, oppRating: null, turn: 0});
       R.last = Date.now();
       if (p[1] === 'init') { R.lines = []; }
@@ -161,7 +167,7 @@ function noteChat(room, who, text) {
   log(`chat message recorded (${room ? 'battle room' : 'private message'}); text in bot/out/chat.jsonl, for the user`);
 }
 function onPM(from, to, text) {
-  const who = from.replace(/^[^A-Za-z0-9]/, '').trim(); if (!me || who.toLowerCase() === me.toLowerCase()) return;
+  const who = from.replace(/^[^A-Za-z0-9]/, '').trim(); if (!me || who.toLowerCase() === me.toLowerCase() || SECONDARY) return;
   noteChat('', who, text);
   if (text.startsWith('/challenge')) return;   // handled by updatechallenges
   if (pmReplied.has(who.toLowerCase())) return; pmReplied.add(who.toLowerCase());
@@ -231,7 +237,7 @@ async function onReady() {
     // 100 and widens by 1 every 0.3 s of waiting, so 30 s keeps our side of it near 200; an opponent who has waited longer can still be
     // matched at their wider window). The loop searches again after its usual pause.
     const maxs = limits().max_search_seconds;
-    if (searching && !busy && maxs && searchStart && Date.now() - searchStart > maxs * 1e3) { send('|/cancelsearch'); searchStart = 0; searching = false; log(`search cancelled after ${maxs} s`); await sleep(3000); continue; }
+    if (searching && !busy && maxs && searchStart && Date.now() - searchStart > maxs * 1e3) { send(`|/cancelsearch ${FORMAT}`); searchStart = 0; searching = false; log(`search cancelled after ${maxs} s`); await sleep(3000); continue; }
     if (!busy && !searching && limits().search_ladder && !why) { const t = await pickTeam(); if (!t) continue; await sleep(LOCAL ? 1000 : rnd(30e3, 120e3)); if (!searching && !mayPlay()) { send(`|/search ${FORMAT}`); searching = true; searchStart = Date.now(); log('searching'); } }
     else if (why && !busy && !searching) { log('not searching:', why); await sleep(60e3); }
     await refreshTop();

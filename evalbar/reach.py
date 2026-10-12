@@ -63,7 +63,7 @@ def compare(obs, smp):
             pct = 100 * x['hp'] / x['maxhp']; shown = SPR.shown(x['hp'], x['maxhp'])
             if (abs(pct - m['hp']) > 0.6) if sd == 'p1' else (shown != round(m['hp'])): hp.append(f"{sd} {x['sp']} hp {pct:.0f} vs {m['hp']:.0f}")
     return bad, hp
-def reach(obs, states):
+def reach(obs, states, exact='p1'):
     """each observed feature against every state the runs reached, one feature at a time: [discrete features no run reached], [HP outside
     every run's range]"""
     bad, hp = [], []
@@ -88,14 +88,16 @@ def reach(obs, states):
             if m['pos']:
                 for stat in ('atk', 'def', 'spa', 'spd', 'spe'):
                     need(f'{sd} {k} {stat}', (m['b'] or {}).get(stat, 0), {x['boosts'].get(stat, 0) for x in alive if x['active']} or {0})
-            pc = [100 * x['hp'] / x['maxhp'] for x in alive] if sd == 'p1' else [SPR.shown(x['hp'], x['maxhp']) for x in alive]
-            tol = 0.6 if sd == 'p1' else 0
+            pc = [100 * x['hp'] / x['maxhp'] for x in alive] if sd == exact else [SPR.shown(x['hp'], x['maxhp']) for x in alive]
+            tol = 0.6 if sd == exact else 0
             if not (min(pc) - tol <= m['hp'] <= max(pc) + tol): hp.append(f"{sd} {k} hp {m['hp']:.0f} (runs {min(pc):.0f}-{max(pc):.0f})")
     return bad, hp
-def cases(f, seeds):
+def cases(f, seeds, bot=True):
+    """bot: one of the bot's own logs (its side exact from its requests, Player 1); else a cached replay (both sides from the team sheets
+    and the guessed spreads)"""
     room = os.path.basename(f)[:-4]; num = re.search(r'-(\d{6,})(?:-[a-z0-9]+)?$', room).group(1)
-    lv = L.Live(room, 1, 0, logfile=f, tag='reach_' + num, fmt=''); lv.exact = True
-    log = L.bot_first(open(f).read()); full = R.parse(log); steps = {s['turn']: s for s in full['steps']}
+    lv = L.Live(room, 1, 0, logfile=f, tag='reach_' + num, fmt=''); lv.exact = bot
+    log = L.bot_first(open(f).read()) if bot else open(f).read(); full = R.parse(log); steps = {s['turn']: s for s in full['steps']}
     out = []
     for t in sorted(steps):
         if t < 1 or t + 1 not in steps: continue                                  # the next turn's start is what is compared
@@ -106,29 +108,41 @@ def cases(f, seeds):
         for w, spec in sorted(sp, key=lambda x: -x[0])[:6]:
             c1, p1 = choose(spec, 0); c2, p2 = choose(spec, 1); part = part or p1 or p2
             cs.append({'spec': spec, 'choose': {'p1': c1, 'p2': c2}, 'replace': spec.get('replace') or L.replacements(log, t), 'seeds': max(8, round(seeds * w))})
-        out.append({'game': num, 'turn': t, 'cases': cs, 'partial': part, 'obs': observed(steps[t + 1]['state'], steps[t + 1]['state'])})
+        out.append({'game': num, 'turn': t, 'cases': cs, 'partial': part, 'obs': observed(steps[t + 1]['state'], steps[t + 1]['state']), 'exact': 'p1' if bot else None})
     return out
-def run(files, seeds):
+def run(files, seeds, bot=True, out=None):
+    """out: a .jsonl the rows are appended to as each game finishes (games already in it are skipped, so a run resumes)"""
     os.makedirs(OUT, exist_ok=True); rows = []
+    done = {json.loads(l)['game'] for l in open(out)} if out and os.path.exists(out) else set()
     for f in files:
-        cs = cases(f, seeds); todo = [c for c in cs if 'cases' in c]
-        rows += [c for c in cs if 'error' in c]
-        if not todo: continue
-        qf, of = os.path.join(OUT, 'q.json'), os.path.join(OUT, 'r.json'); json.dump([x for c in todo for x in c['cases']], open(qf, 'w'))
+        if re.search(r'-(\d{6,})', os.path.basename(f)).group(1) in done: continue
+        try: cs = cases(f, seeds, bot)
+        except Exception as e: cs = [{'game': re.search(r'-(\d{6,})', os.path.basename(f)).group(1), 'turn': 0, 'error': f'game: {e}'[:120]}]
+        todo = [c for c in cs if 'cases' in c]; new = [c for c in cs if 'error' in c]
+        if not todo: rows += new; continue
+        tag = f'{os.getpid()}'; qf, of = os.path.join(OUT, f'q{tag}.json'), os.path.join(OUT, f'r{tag}.json'); json.dump([x for c in todo for x in c['cases']], open(qf, 'w'))
         subprocess.run([P.exe('node'), os.path.join(C.HERE, 'reach.js'), qf, of], cwd=os.path.join(C.MAIN, 'pssim'), check=True)
         res = iter(json.load(open(of)))
         for c in todo:
             rs = [next(res) for _ in c['cases']]
             row = {'game': c['game'], 'turn': c['turn'], 'partial': c['partial'], 'choose': c['cases'][0]['choose'], 'replace': c['cases'][0]['replace']}
-            if all(r.get('error') for r in rs): row['error'] = rs[0]['error']; rows.append(row); continue
+            if all(r.get('error') for r in rs): row['error'] = rs[0]['error']; new.append(row); continue
             st = [s for r in rs for s in r.get('states', []) if s.get('turnDone')]
             if not st: row['error'] = 'the turn did not finish'; rows.append(row); continue
-            bad, hp = reach(c['obs'], st); row['n'] = len(st); row['unreached'] = bad; row['hp'] = hp
-            rows.append(row)
+            bad, hp = reach(c['obs'], st, c['exact']); row['n'] = len(st); row['unreached'] = bad; row['hp'] = hp
+            new.append(row)
+        rows += new
+        if out:
+            with open(out, 'a') as fh: fh.writelines(json.dumps(r) + '\n' for r in (new or [{'game': todo[0]['game'], 'turn': 0, 'empty': True}]))
     return rows
 if __name__ == '__main__':
     P.own()
     a = sys.argv[1:]; seeds = next((int(x[6:]) for x in a if x.startswith('seeds=')), 32); n = next((int(x) for x in a if x.isdigit()), None)
+    if a and a[0] == 'replays':                                                 # replays k/n: the k-th of n shares of the cached Bo3 replays
+        k, m = map(int, a[1].split('/'))
+        files = sorted(os.path.join(C.LOGS, rid + '.log') for rid, _ in C.games() if 'regmcbo3' in rid)[k::m]
+        rows = run(files, seeds, bot=False, out=os.path.join(OUT, f'replays_{k}of{m}.jsonl'))
+        sys.exit(print(f'share {k}/{m}: {len(rows)} new rows'))
     files = sorted((f for f in glob.glob(os.path.join(C.MAIN, 'bot', 'out', 'battle-*bo3-*.log')) if re.search(r'-\d{6,}(-[a-z0-9]+)?\.log$', f)), key=os.path.getmtime)
     rows = run(files[:n] if n else files, seeds)
     json.dump(rows, open(os.path.join(OUT, 'report.json'), 'w'), indent=0)

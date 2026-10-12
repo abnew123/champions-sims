@@ -1092,7 +1092,11 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
     opponent's own replacement averaged over its likely ones), a type-chart rule as the fallback; `bot/test_cached.py` runs every
     decision of a saved game through the brain (about 1 s a turn, 0.6 s a replacement)). **Local bot-vs-bot test (2026-10-11, 11:25 pm):** the client has a local mode (`--server ws://localhost:8777/showdown/websocket
     --name <guest> --format <id> --teams <file> [--challenge <user>]`, `BOT_DEBUG=1` logs every server line) against the Showdown
-    package in pssim/node_modules run as a server (`./pokemon-showdown start 8777 --no-security` from that folder; it predates Reg M-C,
+    package in pssim/node_modules run as a server (**`./pokemon-showdown start --skip-build 8777 --no-security`** from that folder:
+    without `--skip-build` the launcher rebuilds dist/ from the TypeScript sources, which wipes the project's Champions data patch
+    (pssim/engine_patch, copied in by setup.sh). It did exactly that on 2026-10-10 at 11:24 pm, unnoticed until TR sheet found it the
+    next evening and re-applied the patch; meanwhile three Megas carried old abilities in rebuilt positions (Golisopod, Garchomp Z,
+    Absol Z) and a few Champions move PP / data changes were missing. It predates Reg M-C,
     so the test used `gen9championsvgc2026regmbbo3` with pool teams that validate there, bot/out/local_teams.json). Two clients
     matched on its ladder and played a full best-of-3 through the real protocol (team preview with the open sheets, turns at 2-4 s,
     replacements, Mega, readiness between games), after three fixes: a locked turn (charging, recharging) must be sent as `move 1`

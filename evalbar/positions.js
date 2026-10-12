@@ -67,7 +67,7 @@ function rebuild(spec, flip) {
         const arg = toID((x.volarg || {})[v]);
         if (VOL[v]) { if (!p.addVolatile(VOL[v], side.foe.active[0])) approx.push(v); else if (v === 'Yawn' && spec.yawnDue) p.volatiles.yawn.duration = 1; }
         // yawnDue: a Yawn on the field at the start of a turn was used last turn, so it puts its target to sleep at the end of this one
-        // (Showdown's duration 2 has already lost one end of turn). Only the eval bar's specs ask for it while the bot is frozen (2026-10-12)
+        // (Showdown's duration 2 has already lost one end of turn). live.specs_for and botpos.bot_position (the bot, from 2026-10-12) set it
         else if ((v === 'Encore' || v === 'Disable') && arg && p.moveSlots.some(m => m.id === arg)) p.volatiles[toID(v)] = b.initEffectState({id: toID(v), target: p, move: arg, duration: v === 'Encore' ? 2 : 3});
         else approx.push(v);
       }

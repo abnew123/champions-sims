@@ -57,3 +57,8 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
    spreads guessed before fb4780f), and the live pipeline reproduces today: the bot's logged weights and values since its 03:33 UTC
    restart match the rebuild within 1-3 points of value. Engine and Showdown move orders agree on all 1,896 active slots checked.
    Forfeits (`bot/forfeit_check.py`, 45 of 46 rebuilt, each played out 40 times by self-play): 0.3% won on average, at most 7.5%.
+9. **Perish Song traps.** The planner cannot play the Perish trap from either side: a regional team's Politoed used Perish Song three
+   turns running and it failed each time (every Pokemon already had a count). Handled for now by leaving the 13 Perish Song teams out of
+   the regional pool (2026-10-12, the user); an opponent's Perish Song is still played without understanding the counts.
+10. **One guess at the opponent's unseen back row.** The bot plans each turn against the single most likely pair for the opponent's
+   two unseen Pokemon (botpos `topk=1`), not a weighted few, so a wrong guess plans for a back row that is not there.

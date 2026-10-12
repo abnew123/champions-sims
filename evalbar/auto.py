@@ -23,6 +23,7 @@ LIVE = os.path.join(C.HERE, 'out', 'live')
 UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36'
 LABEL = 'local.evalbar.auto'; AGENT = os.path.expanduser(f'~/Library/LaunchAgents/{LABEL}.plist')
 PAUSE, RESUME = 8, 6                                                     # other programs' busy cores
+STATUS = os.path.join(LIVE, 'auto.status.json')                          # the watcher's line on the progress page (status.py)
 def log(*a): print(time.strftime('%-m/%-d %-I:%M %p'), *a, flush=True)
 def tag(vid): return 'live_' + re.sub(r'\W', '', vid)[:16]                # as broadcast.py names a stream's files
 def keep(vid): return os.path.join(LIVE, tag(vid) + '.ocr.jsonl')
@@ -77,6 +78,7 @@ class Child:
     """the one program the supervisor runs: follow, serve or scan of one stream, in its own process group"""
     def __init__(s, threads, port):
         s.threads = threads; s.port = port; s.p = s.awake = None; s.mode = s.vid = None; s.since = 0; s.paused = False; s.fails = 0
+        s.started = 0; s.why = ''; s.page = {}
     def alive(s): return s.p is not None and s.p.poll() is None
     def start(s, mode, vid):
         s.stop(); s.mode, s.vid = mode, vid
@@ -88,8 +90,8 @@ class Child:
         s.p = subprocess.Popen([P.python(), os.path.join(C.HERE, 'broadcast.py')] + args, cwd=C.HERE, stdout=out, stderr=subprocess.STDOUT,
                                start_new_session=True)
         if s.awake: s.awake.poll()
-        if mode == 'follow': s.awake = subprocess.Popen(['caffeinate', '-s', '-w', str(s.p.pid)])   # awake while it follows, on mains power
-        s.since = time.time(); s.paused = False; log('started', ' '.join(args))
+        if mode == 'follow': s.awake = subprocess.Popen([P.exe('caffeinate'), '-s', '-w', str(s.p.pid)])   # awake while it follows, on mains power
+        s.since = s.started = time.time(); s.paused = False; s.page = {}; log('started', ' '.join(args))
     def signal(s, sig):
         try: os.killpg(s.p.pid, sig)
         except (ProcessLookupError, PermissionError): pass
@@ -106,13 +108,31 @@ class Child:
         if not s.alive(): return
         busy = others_busy(s.p.pid)                                   # its program leads its own process group
         working = s.mode != 'serve' or busy_in(s.p.pid) >= 0.5
-        if not s.paused and working and busy >= PAUSE: s.signal(signal.SIGSTOP); s.paused = True; log(f'paused: other programs keep {busy:.1f} cores busy')
+        if not s.paused and working and busy >= PAUSE:
+            s.signal(signal.SIGSTOP); s.paused = True; s.why = f"since {time.strftime('%-I:%M %p').lower()}: {busy:.1f} cores busy elsewhere"; log(f'paused: other programs keep {busy:.1f} cores busy')
         elif s.paused and busy < RESUME: s.signal(signal.SIGCONT); s.paused = False; s.since = time.time(); log(f'carrying on ({busy:.1f} cores busy)')
     def stalled(s):
         """a follow that has fetched no fragment for 5 minutes (not counting its first 5 minutes or a pause)"""
         if s.mode != 'follow' or s.paused or time.time() - s.since < 300: return False
         pos = os.path.join(LIVE, tag(s.vid) + '_sq.txt')
         return not os.path.exists(pos) or time.time() - os.path.getmtime(pos) > 300
+def report(child, title):
+    """the watcher's line on the progress page: what it runs, how far the page has got, whether it is paused"""
+    st = {'pid': os.getpid(), 'updated': time.time(), 'mode': child.mode, 'vid': child.vid, 'title': title, 'paused': child.paused,
+          'why': child.why if child.paused else '', 'started': child.started, 'threads': child.threads, 'port': child.port, 'alive': child.alive()}
+    if child.vid and child.mode != 'scan':
+        if not child.paused:
+            try:
+                import urllib.request
+                d = json.load(urllib.request.urlopen(f'http://127.0.0.1:{child.port}/data.json', timeout=3))
+                child.page = {'games': len(d['games']), 'evaluated': sum(len(g['steps']) for g in d['games']), 'status': (d.get('live') or {}).get('status')}
+            except Exception: pass
+        st.update(child.page)
+        logs = [os.path.join(LIVE, f) for f in os.listdir(LIVE) if f.startswith(tag(child.vid) + '_g') and f.endswith('.log')]
+        st['read'] = sum(sum(1 for l in open(f) if l.startswith('|turn|')) for f in logs)
+        pos = os.path.join(LIVE, tag(child.vid) + '_sq.txt')
+        if child.mode == 'follow' and os.path.exists(pos): st['at'] = int(open(pos).read() or 0) * 5; st['fetched'] = os.path.getmtime(pos)
+    json.dump(st, open(STATUS + '.tmp', 'w')); os.replace(STATUS + '.tmp', STATUS)
 def main(threads=2, port=8768):
     os.makedirs(LIVE, exist_ok=True); child = Child(threads, port); seen = []; checked = 0; pub = PB.Publisher(port)
     def publish():
@@ -143,6 +163,8 @@ def main(threads=2, port=8768):
         elif child.stalled(): log('no new fragment for 5 minutes: starting the follow again'); child.start('follow', child.vid)
         pub.title = next((x['title'] for x in seen if x['id'] == child.vid), None)
         child.guard()
+        try: report(child, pub.title)
+        except Exception as e: log('status line:', type(e).__name__, e)
         time.sleep(30)
 def install():
     """the LaunchAgent: the supervisor from the main checkout, with this shell's PATH (yt-dlp, ffmpeg)"""

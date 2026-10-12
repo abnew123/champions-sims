@@ -68,7 +68,7 @@ def preview(msg):
 def turn(msg):
     import position as POS
     req = msg['request']
-    if req.get('forceSwitch'): return {'choice': POS.replacement(req, msg['log'], msg['side']), 'note': 'replacement'}
+    if req.get('forceSwitch'): return {'choice': POS.replacement(req, msg['log'], msg['side'], team=(msg.get('team') or {}).get('sets')), 'note': 'replacement'}
     specs, info = POS.build(msg['log'], req, msg['side'], team=(msg.get('team') or {}).get('sets'))
     cap = json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))).get('protect_chain_cap')
     choice, note, value = POS.decide(specs, req, msg['side'], log=msg['log'], cap=cap)

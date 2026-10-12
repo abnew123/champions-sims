@@ -24,8 +24,10 @@ def choose(spec, si):
         if 'charging' in (m.get('vol') or []): parts.append('move 1'); continue    # locked into its charged move: no target to give
         mv = a.get('move'); moves = [toid(x) for x in m.get('moves', [])]
         if not mv or toid(mv) not in moves: partial = True; mv = m['moves'][0]
-        k = moves.index(toid(mv)); tgt_type = (E['moves'].get(toid(mv)) or {}).get('target', 'normal')
+        k = moves.index(toid(mv)); md = E['moves'].get(toid(mv)) or {}; tgt_type = md.get('target', 'normal')
+        if md.get('nonGhostTarget') and 'Ghost' not in ((E['species'].get(toid(m['species'])) or {}).get('types') or []): tgt_type = md['nonGhostTarget']   # Curse
         s = f'move {k + 1}'
+        if tgt_type in NEEDS and a.get('target') == own + 'ab'[i]: tgt_type = 'self'   # the log names the user itself: no target to give
         if tgt_type in NEEDS:
             t = a.get('target') or a.get('spreadTarget') or ''
             if not t: partial = True; t = foe + 'a'                            # no target in the log (a failed Sucker Punch): a guess
@@ -92,6 +94,18 @@ def reach(obs, states, exact='p1'):
             tol = 0.6 if sd == exact else 0
             if not (min(pc) - tol <= m['hp'] <= max(pc) + tol): hp.append(f"{sd} {k} hp {m['hp']:.0f} (runs {min(pc):.0f}-{max(pc):.0f})")
     return bad, hp
+def revived(log, t):
+    """{side: [species]} brought back by Revival Blessing in turn t, in order (the log heals them; no switch line)"""
+    i = log.find(f'\n|turn|{t}\n'); out = {'p1': [], 'p2': []}
+    if i < 0: return out
+    j = log.find('\n|turn|', i + 1); nick = {}
+    for l in log[:j if j > 0 else len(log)].split('\n'):
+        p = l.split('|')
+        if len(p) > 3 and p[1] in ('switch', 'drag', 'replace', 'poke') and ': ' in p[2]: nick[(p[2][:2], p[2].split(': ', 1)[1])] = p[3].split(',')[0]
+    for l in log[i:j if j > 0 else len(log)].split('\n'):
+        p = l.split('|')
+        if len(p) > 3 and p[1] == '-heal' and 'Revival Blessing' in l and ': ' in p[2]: out[p[2][:2]].append(nick.get((p[2][:2], p[2].split(': ', 1)[1]), p[2].split(': ', 1)[1]))
+    return out
 def cases(f, seeds, bot=True):
     """bot: one of the bot's own logs (its side exact from its requests, Player 1); else a cached replay (both sides from the team sheets
     and the guessed spreads)"""
@@ -107,7 +121,7 @@ def cases(f, seeds, bot=True):
         cs, part = [], False                                                        # every hypothesis (sleep cases, an unseen back row), seeds shared out
         for w, spec in sorted(sp, key=lambda x: -x[0])[:6]:
             c1, p1 = choose(spec, 0); c2, p2 = choose(spec, 1); part = part or p1 or p2
-            cs.append({'spec': spec, 'choose': {'p1': c1, 'p2': c2}, 'replace': spec.get('replace') or L.replacements(log, t), 'seeds': max(8, round(seeds * w))})
+            cs.append({'spec': spec, 'choose': {'p1': c1, 'p2': c2}, 'replace': spec.get('replace') or L.replacements(log, t), 'revive': revived(log, t), 'seeds': max(8, round(seeds * w))})
         out.append({'game': num, 'turn': t, 'cases': cs, 'partial': part, 'obs': observed(steps[t + 1]['state'], steps[t + 1]['state']), 'exact': 'p1' if bot else None})
     return out
 def stamp(path, title, total, done0):
@@ -146,7 +160,7 @@ def run(files, seeds, bot=True, out=None, title=None):
                 with open(prog, 'a') as fh: fh.write(todo[0]['game'] + '\n')
     return rows
 if __name__ == '__main__':
-    P.own()
+    P.own(); R.BATON_PASS = True
     a = sys.argv[1:]; seeds = next((int(x[6:]) for x in a if x.startswith('seeds=')), 32); n = next((int(x) for x in a if x.isdigit()), None)
     if a and a[0] == 'recheck':                                                 # recheck <file.jsonl>: its unreached turns again
         f = a[1]; rows = [json.loads(l) for l in open(f)]
@@ -154,7 +168,9 @@ if __name__ == '__main__':
         for r in rows:
             if r.get('unreached'): bad[r['game']].add(r['turn'])
         rid = {x.split('-')[-1]: x for x, _ in C.games()}; fixed = {}
+        prog = f[:-6] + '.recheck'; open(prog, 'w').close(); stamp(prog, f'Reachability check: recheck of {os.path.basename(f)} (games)', len(bad), 0)
         for g, ts in bad.items():
+            with open(prog, 'a') as fh: fh.write(g + '\n')
             cs = [c for c in cases(os.path.join(C.LOGS, rid[g] + '.log'), seeds, bot=False) if c['turn'] in ts and 'cases' in c]
             if not cs: continue
             qf, of = os.path.join(OUT, f'q{os.getpid()}.json'), os.path.join(OUT, f'r{os.getpid()}.json'); json.dump([x for c in cs for x in c['cases']], open(qf, 'w'))

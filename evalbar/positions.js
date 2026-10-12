@@ -158,7 +158,9 @@ function build(spec, flip) {
   };
   const pack = si => [0, 1].map(i => { const c = choice(si, i); return c && c.c ? {choice: c.c, unsure: c.unsure} : c && c.move !== undefined ? {choice: null, move: c.move, mega: c.mega, unsure: false} : c && c.none ? {choice: null, none: c.none, by: c.by, mega: c.mega, unsure: false} : c ? {choice: c, unsure: false} : null; });
   return {name: `${spec.name} ${flip ? 'p2' : 'p1'}`, turn: spec.turn, side: flip ? 'p2' : 'p1', perish: !!spec.perish, standIns: spec.standIns || 0, dropped: spec.dropped || [], approx: [...new Set(approx)],
-          actual: pack(0), their_actual: pack(1), state: exportState(b)};
+          actual: pack(0), their_actual: pack(1), state: exportState(b),
+          // the luck pass (live.py): the Pokemon each side sent in during the turn, for evalpos's actual_cell
+          ...(spec.replace ? {actual_replace: {0: spec.replace[flip ? 'p2' : 'p1'] || [], 1: spec.replace[flip ? 'p1' : 'p2'] || []}} : {})};
 }
 module.exports = {rebuild, build, dex, toID};                            // damage.js rebuilds positions the same way
 if (require.main === module) {

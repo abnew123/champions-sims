@@ -172,6 +172,20 @@ def bot_team(log, sd):
     if not os.path.exists(f): return None
     six = {toid(l.split('|')[3].split(',')[0]) for l in log.split('\n') if l.startswith(f'|poke|{sd}|')}
     return next((t['sets'] for t in json.load(open(f)) if {toid(x['species']) for x in t['sets']} == six), None)
+# the luck pass's engine: evalpos with actual_replace (Battle sim, 2026-10-12), which replays the actual joint choices' cell with the
+# Pokemon each player actually sent in after a faint or a pivot (actual_cell), so a replacement choice is not counted as luck
+LUCK_BIN = os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-dev-2026-10-12b')
+def replacements(log, t):
+    """{side: [species]} the Pokemon each side sent in during turn t after it began (U-turn, Parting Shot, Eject Button, Emergency Exit) and
+    after faints at its end, in the order the log shows them; switches at its start are choices of the turn, drags are not choices"""
+    i = log.find(f'\n|turn|{t}\n'); out = {'p1': [], 'p2': []}
+    if i < 0: return out
+    j = log.find('\n|turn|', i + 1); seg = log[i + 1:j if j > 0 else len(log)].split('\n')
+    k = next((n for n, l in enumerate(seg) if l.startswith('|move|') or l == '|upkeep'), len(seg))
+    for l in seg[k:]:
+        p = l.split('|')
+        if len(p) > 3 and p[1] == 'switch' and p[2][:2] in out: out[p[2][:2]].append(p[3].split(',')[0])
+    return out
 def records(f):
     """an engine output .jsonl -> {name: record}, without errors; a line still being written (the engine appends as it goes) is skipped"""
     out = {}
@@ -294,6 +308,9 @@ class Live:
                 own = (sd, mons); seen = {toid(m['sp'].split('-')[0]) for m in step['state'][sd]['mons']}
                 s.back[t] = [r['details'].split(',')[0] for r in rq['side']['pokemon'] if toid(r['details'].split(',')[0].split('-')[0]) not in seen]
         sp, H = specs_for(s.tag + (' L' if hindsight else ''), gp, step, six, sets, s.leads(pre), own)
+        if hindsight:                                                       # the replacements each player chose in the turn (actual_replace)
+            rep = replacements(log, t)
+            for _, x in sp: x['replace'] = rep
         return sleep_cases(sp), H
     @staticmethod
     def choice(log, t, rq):
@@ -364,7 +381,8 @@ class Live:
             after = sum(w * scale(ev[n + ' p1']['static']) for w, n in zip(ws, names))   # the value function here, no lookahead
             LW = s.lweights.get(t) or {}
             if LW and all(n in lev and n in lps for n in LW):                  # the luck pass, in hindsight: both from its own positions
-                ex = [(w, B.expected(lev[n], lps[n])) for n, w in LW.items()]; ex = [(w, x) for w, x in ex if x is not None]
+                ex = [(w, lev[n]['actual_cell']['v'] if lev[n].get('actual_cell') else B.expected(lev[n], lps[n])) for n, w in LW.items()]   # actual_cell: with the
+                ex = [(w, x) for w, x in ex if x is not None]                   # replacements made (choices all known); else the matrix's cells
                 after = sum(w * scale(lev[n]['static']) for n, w in LW.items()) / sum(LW.values())
             steps.append({'turn': t, 'wp': wp, 'ev': wp, 'state': state, 'events': step['events'], 'opt': opt, 'hyp': len(names), 'checks': CH.get(t, []),
                           'expected': sum(w * scale(x) for w, x in ex) / sum(w for w, _ in ex) if ex else None, 'after': after})
@@ -402,7 +420,7 @@ class Live:
             posf = os.path.join(OUT, f'{s.tag}_t{t}_luckpos.jsonl')         # with the choices made: their cells get every sample, and each
             sp = s.at(log, t, hindsight=True)[0]; s.lweights[t] = {x['name'] + ' p1': w for w, x in sp}
             positions(sp, posf)                                              # side's actual_v (what its choice cost) comes out
-            with LUCK: EN.run(posf, s.lf, 1, 32, 1, extra={'EVAL_MATRIX': '1'}, nice=19)
+            with LUCK: EN.run(posf, s.lf, 1, 32, 1, extra={'EVAL_MATRIX': '1', 'CHAMP_BIN': LUCK_BIN}, nice=19)
             s.dirty = True
         s.luck_state = 'done'; s.dirty = True
     def evaluate(s, log, g, step):

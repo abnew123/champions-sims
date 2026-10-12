@@ -545,7 +545,15 @@ fn tr_keep(b: &Battle, s: u8) -> bool {
 }
 /// side 0's win chance as each side sees it: (with side 0's weights, with side 1's weights); equal unless EG_VALUE_B is set
 pub fn value2(b: &mut Battle, cfg: &Cfg) -> (f64, f64) {
-    if cfg.vnet.is_some() { let v = value(b, cfg); return (v, v); }
+    if let Some(n) = &cfg.vnet {
+        // EG_VNET_SIDE=0|1 (head-to-heads): only that side plans with the net, the other with EG_VALUE
+        if let Some(side) = vnet_side() {
+            if b.ended { let v = match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 }; return (v, v); }
+            let vn = n.value(b, cfg); let vo = value_sym(b, cfg);
+            return if side == 0 { (vn, vo) } else { (vo, vn) };
+        }
+        let v = value(b, cfg); return (v, v);
+    }
     let Some((b1, w1)) = &cfg.vw_b else { let v = value(b, cfg); return (v, v); };
     if b.ended { let v = match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 }; return (v, v); }
     let f = feats(b, cfg);
@@ -553,9 +561,16 @@ pub fn value2(b: &mut Battle, cfg: &Cfg) -> (f64, f64) {
     let va = match &cfg.vw { Some((b0, w)) => ev(*b0, w), None => ev(*b1, w1) };
     (va, ev(*b1, w1))
 }
+/// each side plans with its own value (EG_VALUE_B, or EG_VNET_SIDE)
+pub(crate) fn two_values(cfg: &Cfg) -> bool { cfg.vw_b.is_some() || (cfg.vnet.is_some() && vnet_side().is_some()) }
+fn vnet_side() -> Option<u8> { static F: std::sync::OnceLock<Option<u8>> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("EG_VNET_SIDE").ok().and_then(|x| x.parse().ok())) }
 pub fn value(b: &mut Battle, cfg: &Cfg) -> f64 {
     if b.ended { return match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 }; }
-    if let Some(n) = &cfg.vnet { return n.value(b, cfg); }
+    if let Some(n) = &cfg.vnet { if vnet_side().is_none() { return n.value(b, cfg); } }
+    value_sym(b, cfg)
+}
+/// the EG_VALUE score (the logistic value over plan.rs feats), whatever EG_VNET says
+fn value_sym(b: &mut Battle, cfg: &Cfg) -> f64 {
     let f = feats(b, cfg);
     match &cfg.vw {
         Some((b0, w)) => { let mut z = *b0; for k in 0..w.len().min(f.len()) { z += w[k] * f[k]; } z += perish_adj(b, w); 1.0 / (1.0 + (-z).exp()) }

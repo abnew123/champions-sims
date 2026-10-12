@@ -1,0 +1,50 @@
+{
+ "games_with_a_yawn": {
+  "replays": 504,
+  "bot": 3
+ },
+ "groups": {
+  "human (replays)": {
+   "yawns": 720,
+   "could_switch": 487,
+   "left_by_choice": 228,
+   "left_share": 0.468,
+   "switched": 215,
+   "pivot": 13,
+   "slept": 234,
+   "fainted": 18,
+   "blocked": 7,
+   "forced": 0,
+   "no bench": 183,
+   "trapped": 50
+  },
+  "human (replays, rated 1500+)": {
+   "yawns": 1,
+   "could_switch": 1,
+   "left_by_choice": 1,
+   "left_share": 1.0,
+   "switched": 1,
+   "pivot": 0,
+   "slept": 0,
+   "fainted": 0,
+   "blocked": 0,
+   "forced": 0,
+   "no bench": 0,
+   "trapped": 0
+  },
+  "bot": {
+   "yawns": 6,
+   "could_switch": 2,
+   "left_by_choice": 0,
+   "left_share": 0.0,
+   "switched": 0,
+   "pivot": 0,
+   "slept": 2,
+   "fainted": 0,
+   "blocked": 0,
+   "forced": 0,
+   "no bench": 0,
+   "trapped": 4
+  }
+ }
+}

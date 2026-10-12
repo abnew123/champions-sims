@@ -73,6 +73,8 @@ def expected(e, pos):
                 if i in alive and c is not None and not same(row[i], c, exact): return False
                 k = acts[i].get('move') if acts[i] and c is None else None      # the move is known, its target is not: any of its targets
                 if i in alive and k is not None and row[i][0] != k: return False
+                mg = acts[i].get('mega') if acts[i] and c is None else None     # whether it Mega Evolved shows in the log even when its move does not
+                if exact and i in alive and mg is not None and row[i][0] != 'switch' and len(row[i]) > 2 and bool(row[i][2]) != bool(mg): return False
                 no = acts[i].get('none') if acts[i] and c is None else None     # not shown, but not a switch, nor a move that would have
                 if i in alive and no and (row[i][0] == 'switch' or (no == 'fainted' and acts[i].get('by') is not None and prio(s, i, row[i]) > acts[i]['by'])): return False
             return True

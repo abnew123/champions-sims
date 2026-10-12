@@ -24,7 +24,10 @@ const TEAMS = fs.readFileSync(process.env.TEAMS || path.resolve(__dirname, 'real
 const mk = s => T.toSet({species: dex.species.get(s.species).name, item: dex.items.get(s.item).name || '', ability: dex.abilities.get(s.ability).name,
   moves: s.moves.map(m => dex.moves.get(m).name), nature: dex.natures.get(s.nature).name, evs: dEV(dex.natures.get(s.nature).name)});
 function fakePRNG(mode) {
-  const r = (from, to) => from === undefined ? {lo: 0, hi: 0.999999, mid: 0.5}[mode] : to === undefined ? {lo: 0, hi: from - 1, mid: Math.floor(from / 2)}[mode] : {lo: from, hi: to - 1, mid: from + Math.floor((to - from) / 2)}[mode];
+  // q<n>: every draw is the fraction n/1000 (separates chances that lo / hi / mid cannot, e.g. 3/10 from 1/2)
+  const q = mode[0] === 'q' ? +mode.slice(1) / 1000 : null;
+  const r = q !== null ? ((from, to) => from === undefined ? q : to === undefined ? Math.floor(q * from) : from + Math.floor(q * (to - from)))
+    : (from, to) => from === undefined ? {lo: 0, hi: 0.999999, mid: 0.5}[mode] : to === undefined ? {lo: 0, hi: from - 1, mid: Math.floor(from / 2)}[mode] : {lo: from, hi: to - 1, mid: from + Math.floor((to - from) / 2)}[mode];
   return {random: r, randomChance: (n, d) => r(d) < n, sample: items => items[r(items.length)],
     shuffle(items, start = 0, end = items.length) { while (start < end - 1) { const ni = r(start, end); if (start !== ni) [items[start], items[ni]] = [items[ni], items[start]]; start++; } },
     getSeed: () => 'fake', startingSeed: 'fake', clone() { return fakePRNG(mode); }};
@@ -92,7 +95,7 @@ while (battles < +N && tries < +N * 5) {
     if (!c1 || !c2) break;
     const pre = exportState(main); const snap = JSON.stringify(main.toJSON());
     const res = {}; let good = true, next = null;
-    for (const mode of ['lo', 'hi', 'mid', 'real']) {
+    for (const mode of (process.env.RNGMODES || 'lo,hi,mid,real').split(',').sort((a, b) => (a === 'real') - (b === 'real'))) {   // real last: the battle goes on from it
       try {
         const b = Battle.fromJSON(snap); b.debugMode = false;
         if (mode !== 'real') b.prng = fakePRNG(mode);

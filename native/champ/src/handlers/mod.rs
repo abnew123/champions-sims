@@ -20,6 +20,7 @@ pub mod abilities;
 pub mod items;
 pub mod batch4;
 pub mod batch5;
+pub mod batch6;
 
 pub fn build() -> Reg {
     let mut r: Reg = FxMap::default();
@@ -29,6 +30,7 @@ pub fn build() -> Reg {
     items::register(&mut r);
     batch4::register(&mut r);
     batch5::register(&mut r);
+    batch6::register(&mut r);
     r
 }
 

@@ -323,7 +323,7 @@ pub fn register(r: &mut Reg) {
         h!(r, Ability, ab, "onTryAddVolatile", |b, a| { if a.relay == RV::S(id("yawn")) { return RV::Null; } RV::Undef });
     }
     h!(r, Ability, "healer", "onResidual", |b, a| { let m = a.t(); let allies: Vec<MonRef> = b.adjacent_allies(m).into_iter().collect();
-        for al in allies { if !b.p(al).status.is_empty() && b.rchance(3, 10) { b.cure_status(al); } } RV::Undef });
+        for al in allies { if !b.p(al).status.is_empty() && b.rchance(1, 2) { let n = b.mon_name(m); b.add(&["-activate", &n, "ability: Healer"]); b.cure_status(al); } } RV::Undef });   // Champions: 1/2 (base game 3/10) (2026-10-12)
     h!(r, Ability, "gooey", "onDamagingHit", |b, a| { let (t, s) = (a.t(), a.s()); if b.makes_contact(a.am(), s) { b.boost(vec![(4, -1)], Some(s), Some(t), None, true, false); } RV::Undef });
     h!(r, Ability, "curiousmedicine", "onStart", |b, a| { let m = a.t(); let allies: Vec<MonRef> = b.adjacent_allies(m).into_iter().collect(); for al in allies { b.pm(al).boosts = [0; 7]; } RV::Undef });
     h!(r, Ability, "seedsower", "onDamagingHit", |b, a| { b.set_terrain("grassyterrain", None, None); RV::Undef });

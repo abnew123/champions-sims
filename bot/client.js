@@ -144,6 +144,10 @@ async function onMessage(m) {
         if (p[1] === 'win' && !R.done) { R.done = true; const won = me && p[2].toLowerCase() === me.toLowerCase(); log('match over', room.slice(-16), won ? 'won' : 'lost'); fs.appendFileSync(path.join(OUT, LOCAL ? `matches_${TAG}.jsonl` : 'matches.jsonl'), JSON.stringify({when: new Date().toISOString(), room, won: !!won, games: R.lines.filter(l => l.startsWith('|uhtml|game')).length, team: currentTeam && currentTeam.name, arm: currentTeam && currentTeam.arm}) + '\n'); setTimeout(() => { send(`${room}|/leave`); delete rooms[room]; refreshMyRating(); }, 8000); }
         continue;
       }
+      // Bo1's optional open team sheets (2026-10-12, the user: accept them): when both players accept, the server shows both sheets and the
+      // bot plays on the real ones instead of guesses
+      if (p[1] === 'uhtml' && p[2] === 'otsrequest' && line.includes('/acceptopenteamsheets') && !R.otsSent) {
+        R.otsSent = true; setTimeout(() => { send(`${room}|/acceptopenteamsheets`); log(room.slice(-12), 'accepted open team sheets'); }, rnd(1500, 4000)); }
       if (p[1] === 'request' && p[2]) { try { R.req = JSON.parse(p[2]); } catch (e) { R.req = null; } if (R.req && !R.req.wait) handleRequest(room, R).catch(e => log('request error', room, String(e))); }
       // a rejected choice: Showdown re-sends a request when the rejection taught it something (a trap revealed: [Unavailable choice]),
       // and the bot answers that; otherwise it falls back to Showdown's default choice at once instead of letting the turn timer run

@@ -66,26 +66,51 @@ def decide(specs, request, side, threads=2, seeds=32, log=None, cap=None):
             return False
         kept = [j for j in joint if not capped(j)]
         if kept and len(kept) < len(joint): joint = kept
-    pick = random.choices(joint, weights=[j['w'] for j in joint])[0]
-    parts = [p.strip() for p in pick['label'].split(' | ')]
-    cmds = []
-    for k, sl in enumerate(s0['slots']):
-        lab = next((p.split(': ', 1)[1] for p in parts if p.startswith(sl['mon'] + ': ')), None)
-        opt = next((o for o in sl['options'] if o['label'] == lab), None) if lab else None
-        if not opt: cmds.append('default'); continue
-        c = opt['c']
-        if c[0] == 'switch': cmds.append('switch ' + str(team_index(request, lab.replace('switch to ', ''))))
-        else:
+    # map the engine's slots to Showdown's positions: the engine lists only living actives (a lone Pokemon is slot 0 even when it
+    # stands in position b), Showdown's request lists every position; a fainted position gets 'pass'
+    act = request.get('active') or []; team_now = request['side']['pokemon']
+    base = lambda n: toid(n.split(',')[0]).replace('mega', '') if n else ''
+    pos_slot = {}
+    for i in range(len(act)):
+        if i >= len(team_now) or team_now[i]['condition'].endswith(' fnt'): continue
+        sp = base(team_now[i]['details'])
+        k = next((x for x, sl in enumerate(s0['slots']) if base(sl['mon']) == sp or base(sl['mon']).startswith(sp) or sp.startswith(base(sl['mon']))), None)
+        if k is not None: pos_slot[i] = k
+    def command(j):
+        """the /choose string for joint option j, or None if the request rules it out (no PP, disabled, trapped, no such move)"""
+        parts = [p.strip() for p in j['label'].split(' | ')]; out = []
+        for i in range(len(act)):
+            if i not in pos_slot: out.append('pass'); continue
+            sl = s0['slots'][pos_slot[i]]
+            lab = next((p.split(': ', 1)[1] for p in parts if p.startswith(sl['mon'] + ': ')), None)
+            opt = next((o for o in sl['options'] if o['label'] == lab), None) if lab else None
+            if not opt: out.append('default'); continue
+            c = opt['c']; a = act[i]; rmoves = a.get('moves') or []
+            if c[0] == 'switch':
+                if a.get('trapped') or a.get('maybeTrapped'): return None
+                out.append('switch ' + str(team_index(request, lab.replace('switch to ', '')))); continue
             mv, t, mega = c
-            rmoves = (request.get('active') or [{}] * 2)[k].get('moves') or []
-            if len(rmoves) == 1: cmds.append('move 1'); continue          # a locked turn (charging, recharging, locked move): no target
-            rm = rmoves[mv] if mv < len(rmoves) else {}
-            s = f'move {mv + 1}'
-            if t and rm.get('target') in (None, 'normal', 'any', 'adjacentFoe', 'adjacentAlly', 'adjacentAllyOrSelf'): s += f' {t}'
-            if mega and (request.get('active') or [{}] * 2)[k].get('canMegaEvo'): s += ' mega'
-            cmds.append(s)
+            if len(rmoves) == 1: out.append('move 1'); continue                       # a locked turn (charging, recharging, locked move)
+            if mv >= len(rmoves) or rmoves[mv].get('disabled') or rmoves[mv].get('pp', 1) <= 0: return None
+            tgt = rmoves[mv].get('target')
+            cmd = f'move {mv + 1}'
+            if tgt in ('normal', 'any', 'adjacentFoe'):
+                if not t:   # the engine had no target (one foe left): aim at the foe that is there
+                    foes = [x for x in (spec_foes or [1, 2])]; t = foes[0] if foes else 1
+                cmd += f' {t}'
+            elif tgt in ('adjacentAlly', 'adjacentAllyOrSelf') and t: cmd += f' {t}'
+            if mega and a.get('canMegaEvo'): cmd += ' mega'
+            out.append(cmd)
+        return ', '.join(out)
+    try:   # the opposing positions that hold a living Pokemon (1 = a, 2 = b), from the engine position
+        st1 = (ps.get(name) or next(iter(ps.values())))['state']['sides'][1]
+        spec_foes = [i + 1 for i, x in enumerate(st1.get('active') or []) if x is not None and not st1['pokemon'][x].get('fainted')]
+    except Exception: spec_foes = None
+    valid = [(j, command(j)) for j in joint]; valid = [(j, c) for j, c in valid if c]
+    if not valid: return 'default', 'no option the request allows: default', r['value']
+    pick, choice = random.choices(valid, weights=[j['w'] for j, _ in valid])[0]
     note = f"{pick['label']} ({100 * pick['w']:.0f}%, value {100 * r['value']:.0f}%)"
-    return ', '.join(cmds), note, r['value']
+    return choice, note, r['value']
 def team_index(request, species):
     """1-based index in request.side.pokemon of the named Pokemon (by species, forme-insensitive)"""
     want = toid(species)

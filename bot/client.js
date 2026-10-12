@@ -123,6 +123,10 @@ async function onMessage(m) {
         continue;
       }
       if (p[1] === 'request' && p[2]) { try { R.req = JSON.parse(p[2]); } catch (e) { R.req = null; } if (R.req && !R.req.wait) handleRequest(room, R).catch(e => log('request error', room, String(e))); }
+      // a rejected choice: Showdown re-sends a request when the rejection taught it something (a trap revealed: [Unavailable choice]),
+      // and the bot answers that; otherwise it falls back to Showdown's default choice at once instead of letting the turn timer run
+      if (p[1] === 'error' && /\[(Invalid|Unavailable) choice\]/.test(line) && R.req && !R.req.wait) {
+        const rq = R.req; setTimeout(() => { if (R.req === rq && !R.done) { send(`${room}|/choose default|${rq.rqid}`); log(room.slice(-12), `T${R.turn}`, 'choice rejected, sent default'); } }, 1500); }
       if ((p[1] === 'request' || p[1] === 'turn') && room.startsWith('battle-')) {   // the room log as the game goes (the Eval bar follows it live)
         try { fs.writeFileSync(path.join(OUT, room + '.log'), R.lines.join('\n') + '\n'); } catch (e) {} }
       if (p[1] === 'raw' && me && line.includes(me) && line.includes('rating:')) { const mm = /rating: (\d+)[^0-9]+(\d+)/.exec(line); if (mm) myRating = +mm[2]; }

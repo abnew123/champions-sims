@@ -228,6 +228,7 @@ pub fn damage(d: &Data, a: &Mon, def: &Mon, id: &str, f: &Field, roll: i64, crit
         "multiscale" | "shadowshield" if def.hp >= def.maxhp => hs.push(H { prio: 0.0, sub: 2, num: 1, den: 2, direct: false }),
         "filter" | "solidrock" | "prismarmor" if eff > 0 => hs.push(H { prio: 0.0, sub: 2, num: 3, den: 4, direct: false }),
         "punkrock" if mv.flags.contains_key("sound") => hs.push(H { prio: 0.0, sub: 2, num: 1, den: 2, direct: false }),
+        "auraguard" if mv.flags.contains_key("contact") => hs.push(H { prio: 0.0, sub: 2, num: 1, den: 2, direct: false }),   // Mega Lucario Z (Champions), 2026-10-12
         "fluffy" => { if mv.flags.contains_key("contact") { hs.push(H { prio: 0.0, sub: 2, num: 1, den: 2, direct: false }); } if act.mtype == "Fire" { hs.push(H { prio: 0.0, sub: 2, num: 2, den: 1, direct: false }); } }
         "icescales" if !phys => hs.push(H { prio: 0.0, sub: 2, num: 1, den: 2, direct: false }),
         _ => {}

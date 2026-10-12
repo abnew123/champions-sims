@@ -326,3 +326,30 @@ pub fn feats_main(args: &[String]) {
     } }); } });
     eprintln!("{} positions in {:?}", nd.load(std::sync::atomic::Ordering::SeqCst), t0.elapsed());
 }
+/// champ vfeats: vfeats.rs matchup features per position (for fitting a learned value), with plan.rs feats and the static value
+pub fn vfeats_main(args: &[String]) {
+    let (dex, reg) = crate::turntest::load_all(&args[0]);
+    let cfg: &'static Cfg = Box::leak(Box::new(load_cfg(&std::env::var("GRID_DIR").unwrap_or("../../mxtr".into()))));
+    let threads: usize = args.get(3).and_then(|x| x.parse().ok()).unwrap_or(1);
+    let lines: Vec<String> = std::fs::read_to_string(&args[1]).unwrap().lines().filter(|l| !l.trim().is_empty()).map(|s| s.to_string()).collect();
+    let done: HashSet<String> = std::fs::read_to_string(&args[2]).map(|t| t.lines().filter_map(|l| serde_json::from_str::<Value>(l).ok())
+        .filter_map(|v| v["name"].as_str().map(|s| s.to_string())).collect()).unwrap_or_default();
+    let out = std::sync::Mutex::new(std::fs::OpenOptions::new().create(true).append(true).open(&args[2]).unwrap());
+    let next = std::sync::atomic::AtomicUsize::new(0); let t0 = std::time::Instant::now(); let nd = std::sync::atomic::AtomicUsize::new(0);
+    std::thread::scope(|sc| { for _ in 0..threads { sc.spawn(|| { let mut buf: Vec<String> = vec![]; loop {
+        let k = next.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
+        if k >= lines.len() || buf.len() >= 200 { let mut f = out.lock().unwrap(); for l in buf.drain(..) { writeln!(f, "{}", l).unwrap(); } if k >= lines.len() { break; } }
+        let Ok(sp) = serde_json::from_str::<Value>(&lines[k]) else { continue };
+        let name = sp["name"].as_str().map(|s| s.to_string()).unwrap_or(format!("line {}", k + 1));
+        if done.contains(&name) { continue; }
+        let r = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+            let mut b = crate::turntest::new_battle(dex, reg, &sp["state"], Mode::Real);
+            crate::vfeats::vfeats(&mut b, cfg) }));
+        let row = match r {
+            Ok(mut o) => { o["name"] = json!(name); o["turn"] = sp["turn"].clone(); o }
+            Err(e) => json!({"name": name, "error": e.downcast_ref::<String>().cloned().or(e.downcast_ref::<&str>().map(|s| s.to_string())).unwrap_or("panic".into())}),
+        };
+        buf.push(row.to_string()); nd.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
+    } }); } });
+    eprintln!("{} positions in {:?}", nd.load(std::sync::atomic::Ordering::SeqCst), t0.elapsed());
+}

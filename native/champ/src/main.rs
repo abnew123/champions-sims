@@ -2,7 +2,7 @@
 //!   champ damage <champions_data.json> <damage_cases.jsonl>     native damage calc vs Showdown rolls
 //!   champ turn <engine_data.json> <turn_cases.jsonl> [modes]     one full turn vs Showdown (modes: lo,hi,mid,real)
 //!   champ battle / spot / plan / evalpos ...                      see battle4.rs, spot.rs, plan.rs, evalpos.rs
-mod calc; mod data; mod prng; mod dex; mod state; mod battle; mod sim; mod handlers; mod turntest; mod plan; mod spreads; mod spot; mod battle4; mod human; mod evalpos;
+mod calc; mod data; mod prng; mod dex; mod state; mod battle; mod sim; mod handlers; mod turntest; mod plan; mod spreads; mod spot; mod battle4; mod human; mod evalpos; mod vfeats;
 use calc::*; use serde_json::Value; use std::collections::BTreeMap;
 
 // The planner allocates heavily (cloned battle states, small vectors in the event system); mimalloc is much faster than the
@@ -20,7 +20,7 @@ fn mon(v: &Value) -> Mon {
 }
 fn main() {
     let a: Vec<String> = std::env::args().collect();
-    match a.get(1).map(|s| s.as_str()) { Some("turn") => turntest::main(&a[2..]), Some("bench") => turntest::bench(&a[2..]), Some("plan") => plan::main(&a[2..]), Some("spot") => spot::main(&a[2..]), Some("battle") => battle4::main(&a[2..]), Some("play") => battle4::play_main(&a[2..]), Some("evalpos") => evalpos::main(&a[2..]), Some("feats") => evalpos::feats_main(&a[2..]), Some("spreads") => spreads::main(&a[2..]), Some("damage") => damage_main(&a[1..]), _ => damage_main(&a) }
+    match a.get(1).map(|s| s.as_str()) { Some("turn") => turntest::main(&a[2..]), Some("bench") => turntest::bench(&a[2..]), Some("plan") => plan::main(&a[2..]), Some("spot") => spot::main(&a[2..]), Some("battle") => battle4::main(&a[2..]), Some("play") => battle4::play_main(&a[2..]), Some("evalpos") => evalpos::main(&a[2..]), Some("feats") => evalpos::feats_main(&a[2..]), Some("vfeats") => evalpos::vfeats_main(&a[2..]), Some("spreads") => spreads::main(&a[2..]), Some("damage") => damage_main(&a[1..]), _ => damage_main(&a) }
 }
 fn damage_main(args: &[String]) {
     let d = data::Data::load(&args[1]);

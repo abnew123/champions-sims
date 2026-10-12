@@ -1,0 +1,79 @@
+"""Training data for a better position value (2026-10-12, the user: start working towards a better position score). Every turn of the
+cached ladder Bo3 games with open sheets (replays_protect/, both sides human) rebuilt as an engine position by the Eval bar's builder
+(evalbar/spots.py: hindsight fours and sets, the usual spreads), Player 1's view, with the game's result:
+  results/value/real_<part>.pos.jsonl   positions.js lines (state, name "<game> t<turn> p1")
+  results/value/real_<part>.meta.jsonl  {name, game, turn, y (Player 1 won), rating (the two players' mean, if shown)}
+part 'hold' = Eval bar's 560 accuracy-set games (the held-out set every value comparison here uses), 'fit' = the rest.
+  ../.venv/bin/python3 value_data.py positions        (about 4,500 games; skips games the builder cannot rebuild)
+  ../.venv/bin/python3 value_data.py search [threads=6]   results/value/real_<part>.eval.jsonl: the one-turn search on every position
+      (champ evalpos as the planner runs it: 32 seeds, staged, sym2, no side-specific flags; about 1 s a position on one core)
+  ../.venv/bin/python3 value_data.py feats            results/value/real_<part>.feats.jsonl: champ feats (the 28 v22 features, static)
+Outcomes and ratings come from the logs; names are only compared to find the winner, never kept."""
+import os, sys, json, glob, collections
+HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
+sys.path.insert(0, os.path.join(ROOT, 'evalbar'))
+OUT = os.path.join(HERE, 'results', 'value')
+HOLD_SRC = os.path.join(ROOT, '.claude', 'worktrees', 'happy-hawking-473e61', 'evalbar', 'out', 'acc_p1.jsonl')
+def held_games():
+    """the Eval bar's accuracy-set games (names of its positions), or a saved copy of the list"""
+    keep = os.path.join(OUT, 'hold_games.json')
+    if os.path.exists(keep): return set(json.load(open(keep)))
+    g = sorted({json.loads(l)['name'].split(' ')[0] for l in open(HOLD_SRC)})
+    os.makedirs(OUT, exist_ok=True); json.dump(g, open(keep, 'w')); return set(g)
+def outcome(log):
+    players, win, ratings = {}, None, []
+    for l in log.split('\n'):
+        if l.startswith('|player|'):
+            f = l.split('|')
+            if len(f) > 3 and f[3]:
+                players[f[3]] = f[2]
+                if len(f) > 5 and f[5].strip().isdigit(): ratings.append(int(f[5]))
+        elif l.startswith('|win|'): win = l.split('|')[2]
+    w = players.get(win) if win else None
+    return (None if w is None else 1.0 if w == 'p1' else 0.0), (sum(ratings) / len(ratings) if len(ratings) == 2 else None)
+def positions():
+    import spots as SP, live as LV
+    held = held_games(); os.makedirs(OUT, exist_ok=True)
+    specs = {'fit': [], 'hold': []}; meta = {'fit': [], 'hold': []}; why = collections.Counter()
+    for f in sorted(glob.glob(os.path.join(HERE, 'replays_protect', '*.log'))):
+        gid = os.path.basename(f)[:-4]; log = open(f, errors='replace').read()
+        if '|showteam|' not in log: why['no open sheets'] += 1; continue
+        y, rating = outcome(log)
+        if y is None: why['no winner'] += 1; continue
+        try: sp, w = SP.specs(gid, log)
+        except Exception as e: why['builder error'] += 1; continue
+        if not sp: why[w or 'nothing built'] += 1; continue
+        part = 'hold' if gid in held else 'fit'
+        for s in sp:
+            specs[part].append((1.0, s)); meta[part].append({'name': s['name'] + ' p1', 'game': gid, 'turn': s['turn'], 'y': y, 'rating': rating})
+    for part in ('fit', 'hold'):
+        posf = os.path.join(OUT, f'real_{part}.pos.jsonl')
+        if os.path.exists(posf): os.remove(posf)
+        for i in range(0, len(specs[part]), 2000):   # positions.js appends; chunks keep node's memory small
+            tmp = posf + f'.{i}'
+            LV.positions(specs[part][i:i + 2000], tmp)
+            with open(posf, 'a') as o: o.write(open(tmp).read())
+            os.remove(tmp)
+        with open(os.path.join(OUT, f'real_{part}.meta.jsonl'), 'w') as o:
+            for m in meta[part]: o.write(json.dumps(m) + '\n')
+        print(f"{part}: {len(meta[part])} positions from {len({m['game'] for m in meta[part]})} games -> {posf}")
+    print('skipped games:', dict(why))
+ENV = dict(RACE_TIES='avg', RACE='1', TRSYM='1', CALC_DATA='../native/champions_data.json', EG_VALUE='egvalue9_sym2.json', EG_MEGA_TIE='0')
+BIN = os.path.join(ROOT, 'native', 'champ', 'bin', 'battlesim-champ'); DATA = '../native/engine_data_full.json'
+def grid():
+    g = os.path.join(OUT, 'emptygrid'); os.makedirs(g, exist_ok=True); return g
+def search(threads=6):
+    import subprocess
+    env = dict(os.environ, **ENV, EVAL_SEEDS='32', EVAL_ADAPT='1', GRID_DIR=grid())
+    for part in ('hold', 'fit'):
+        subprocess.run([BIN, 'evalpos', DATA, os.path.join(OUT, f'real_{part}.pos.jsonl'), os.path.join(OUT, f'real_{part}.eval.jsonl'), str(threads)], cwd=HERE, env=env, check=True)
+def feats():
+    import subprocess
+    env = dict(os.environ, **ENV, RACE_PRIO='1', FEATS22='1', GRID_DIR=grid())
+    for part in ('hold', 'fit'):
+        out = os.path.join(OUT, f'real_{part}.feats.jsonl')
+        if os.path.exists(out): os.remove(out)
+        subprocess.run([BIN, 'feats', DATA, os.path.join(OUT, f'real_{part}.pos.jsonl'), out, '4'], cwd=HERE, env=env, check=True)
+if __name__ == '__main__':
+    a = sys.argv[1:]
+    {'positions': positions, 'search': lambda: search(int(a[1]) if len(a) > 1 else 6), 'feats': feats}[a[0]]()

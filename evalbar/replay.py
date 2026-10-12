@@ -46,8 +46,10 @@ class Mon:
         # what the Pokemon was doing then: 'waits' (its move that turn still to come), 'moving' (its own move was running: Cursed Body),
         # 'moved' (on the field since the turn started, its action done), 'new' (it came in that turn)], for positions.js's countdowns
         s.moved = False; s.stall = False; s.prot = False; s.lock = ''; s.slept = 0; s.mega = False; s.last = ''; s.volarg = {}; s.volturn = {}
+        s.unburden = False; s.perish = 0                                  # its item gone since it came in (Unburden); Perish Song's count
     def leave(s):
         s.boosts = {}; s.vol = set(); s.moved = False; s.stall = False; s.prot = False; s.lock = ''; s.last = ''; s.volarg = {}; s.volturn = {}
+        s.unburden = False; s.perish = 0
         if s.temp: s.forme = s.species; s.temp = False                  # a form taken in battle (Aegislash's Blade) ends on switching out
     def ref(s): return [s.side, disp(s.forme)]
 def hpval(tok):
@@ -82,7 +84,7 @@ def parse(log):
             S[sd] = {'mons': [{'n': disp(m.forme), 'hp': m.hp, 'st': m.status, 'f': m.fainted, 'b': {k: v for k, v in m.boosts.items() if v},
                                'item': m.item, 'gone': m.item_gone, 'slot': '' if m.fainted else slot.get(nick, ''), 'seen': True,
                                'sp': m.species, 'forme': '' if m.mega or m.forme == m.species else m.forme, 'pos': slot.get(nick, ''), 'mega': m.mega, 'moved': m.moved, 'stall': m.stall, 'lock': m.lock, 'slept': m.slept, 'vol': sorted(m.vol), 'last': m.last, 'volarg': dict(m.volarg),
-                               'volturn': {v: list(x) for v, x in m.volturn.items() if v in m.vol}}
+                               'volturn': {v: list(x) for v, x in m.volturn.items() if v in m.vol}, 'unb': m.unburden, 'perish': m.perish}
                               for nick in order[sd] for m in [mons[sd][nick]]],
                      'tailwind': sidec[sd]['tailwind'], 'screens': {k: v for k, v in sidec[sd]['screens'].items() if v}, 'hazards': list(sidec[sd]['hazards'])}
         S['perish'] = perish
@@ -251,16 +253,17 @@ def parse(log):
             m = mon(p[2])
             if m:
                 if k == '-enditem':
-                    m.item_gone = True
+                    m.item_gone = True; m.unburden = True
                     if toid(p[3]) == 'whiteherb' and 'eat' not in t and clean(t.get('from', '')) != 'Knock Off':   # it put lowered stats back to 0
                         m.boosts = {b: v for b, v in m.boosts.items() if v > 0}
                     note([m.ref(), f" ate its {p[3]}" if 'eat' in t else f"'s {p[3]} was knocked off" if clean(t.get('from', '')) == 'Knock Off' else f"'s {p[3]} was used up"])
-                else: m.item = p[3]; m.item_gone = False; note([m.ref(), f' now holds {p[3]}' + why(t)])
+                else: m.item = p[3]; m.item_gone = False; m.unburden = False; note([m.ref(), f' now holds {p[3]}' + why(t)])
         elif k in ('-start', '-end'):
             m = mon(p[2]); what = clean(p[3]) if len(p) > 3 else ''
             if not m: continue
             if what.startswith('perish'):
                 perish = True
+                if what[-1].isdigit(): m.perish = int(what[-1])
                 if what != 'perish3' or k == '-end': note([m.ref(), f" Perish count {what[-1]}"])
                 elif not (cur[0] and ['Perish count 3 for every Pokémon on the field'] in cur[0]['notes']): note(['Perish count 3 for every Pokémon on the field'])
             elif what == 'typechange': note([m.ref(), f" became {p[4]}-type" if len(p) > 4 else ' changed type'])

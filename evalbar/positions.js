@@ -94,6 +94,10 @@ function rebuild(spec, flip) {
           p.volatiles[toID(v)] = b.initEffectState({id: toID(v), target: p, move: arg, duration: n !== null ? n : v === 'Encore' ? 2 : 3});
         else approx.push(v);
       }
+      // fieldDue (live.specs_for sets it, the bot's positions do not yet): Unburden doubles Speed once its item is gone while it is on the
+      // field (Showdown keeps that as a volatile the log never shows), and Perish Song's count goes on (a fresh volatile would be 4)
+      if (spec.fieldDue && x.unburden && p.hasAbility('unburden') && !toID(x.itemNow)) p.addVolatile('unburden');
+      if (spec.fieldDue && x.perish > 0) { if (p.addVolatile('perishsong')) p.volatiles.perishsong.duration = x.perish; else approx.push('Perish Song'); }
     });
     const src = side.pokemon.find(p => !p.fainted), fsrc = side.foe.pokemon.find(p => !p.fainted);
     if (sd.tailwind) { side.addSideCondition('tailwind', src); side.sideConditions.tailwind.duration = sd.tailwind; }

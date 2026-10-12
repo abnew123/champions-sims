@@ -222,11 +222,15 @@ FIXED_DMG = {'Seismic Toss', 'Night Shade', 'Super Fang', 'Ruination', 'Final Ga
              # damage that depends on the order of the turn, which a rebuilt position does not have
              'Payback', 'Bolt Beak', 'Fishious Rend', 'Avalanche', 'Revenge', 'Assurance', 'Stomping Tantrum', 'Temper Flare', 'Retaliate', 'Lash Out'}
 ORDER_ABILITIES = {'Analytic', 'Stakeout'}
-def damage_observations(log, known_side):
+SD_WEATHER = {'RainDance': 'Rain', 'SunnyDay': 'Sun', 'Sandstorm': 'Sandstorm', 'Snowscape': 'Snow', 'Snow': 'Snow', 'Hail': 'Hail',
+              'DesolateLand': 'Harsh sun', 'PrimordialSea': 'Heavy rain', 'DeltaStream': 'Strong winds', 'none': None}
+def damage_observations(log, known_side, mid_weather=False):
     """hits between a Pokemon of the known side and one of the other, where nothing changed either one's stats, item or form, the
     weather, terrain or screens earlier in the turn: [{turn, n, att, def, move, crit, spread, helping, hp: {att, def}, d | pct, atleast}]
     att / def as 'p1a' positions at the start of the turn; d the exact damage when the target is the known side's (its HP is exact),
-    pct (before, after) percents when it is the other side's; atleast when it fainted or Focus Sash / Sturdy held (the hit did at least that)"""
+    pct (before, after) percents when it is the other side's; atleast when it fainted or Focus Sash / Sturdy held (the hit did at least that).
+    mid_weather (the eval bar's, not yet the frozen bot's): a hit after the weather changed earlier in the turn (a Mega Charizard Y's
+    Drought) is kept, with 'weather' the weather it landed in, instead of left out"""
     out = []; L = log.split('\n'); cut = [i for i, l in enumerate(L) if l.startswith('|turn|')]
     hp = {}                                                                   # 'p1a' -> (current, max) for the known side, percent for the other
     def read_hp(pos, tok):
@@ -241,7 +245,7 @@ def damage_observations(log, known_side):
         l = L[k]
         if True:
             t = int(l[6:]); end = cut[cut.index(k) + 1] if cut.index(k) + 1 < len(cut) else len(L); seg = L[k + 1:end]
-            changed = set(); helping = set(); switched = set(); megas = set(); n = 0; i = 0; dirty = [False]
+            changed = set(); helping = set(); switched = set(); megas = set(); n = 0; i = 0; dirty = [False]; wx = [None]
             def track(l2):
                 """what a line changes for the hits after it this turn"""
                 q = l2.split('|')
@@ -252,6 +256,7 @@ def damage_observations(log, known_side):
                 elif kind == '-clearallboost': dirty[0] = True
                 elif kind in ('-boost', '-unboost', '-setboost', '-clearboost', '-clearnegativeboost', '-swapboost', '-copyboost', '-invertboost',
                               '-status', '-enditem', '-item', '-formechange', '-transform', '-start', '-ability'): changed.add(q[2][:3])
+                elif kind == '-weather' and '[upkeep]' not in l2 and mid_weather and q[2] in SD_WEATHER: wx[0] = q[2]
                 elif kind in ('-weather', '-fieldstart', '-fieldend', '-sidestart', '-sideend') and '[upkeep]' not in l2: dirty[0] = True
                 elif kind in ('-damage', '-heal', '-sethp') and len(q) > 3:
                     v = read_hp(q[2][:3], q[3])
@@ -282,7 +287,7 @@ def damage_observations(log, known_side):
                                 d_ = y[2][:3]
                                 if d_[:2] != att[:2] and known_side in (att[:2], d_[:2]) and d_ not in changed and d_ not in switched and d_ not in nosub and d_ not in boosted and before.get(d_) is not None and v is not None:
                                     ob = {'turn': t, 'n': n, 'att': att, 'def': d_, 'move': move, 'crit': d_ in crit, 'spread': '[spread]' in l2, 'helping': att in helping,
-                                          'megas': sorted(megas), 'atleast': v == 0 or d_ in held}
+                                          'megas': sorted(megas), 'atleast': v == 0 or d_ in held, **({'weather': wx[0]} if wx[0] else {})}
                                     ha = before.get(att); hd = before[d_]
                                     ob['hp'] = {'att': ['abs', ha[0]] if isinstance(ha, tuple) else ['pct', ha] if ha else None, 'def': ['abs', hd[0]] if isinstance(hd, tuple) else ['pct', hd]}
                                     if d_[:2] == known_side: ob['d'] = hd[0] - (v[0] if isinstance(v, tuple) else 0)
@@ -346,6 +351,7 @@ def damage_ranges(gp, sets, known_side, known_evs, dobs, cands):
             f = st['field']
             spec = {'name': 'dmg', 'turn': ob['turn'], 'sides': sides, 'acts': [[None, None], [None, None]], 'perish': st['perish'], 'standIns': 0, 'dropped': [],
                     'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None, 'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}
+            if ob.get('weather'): spec['field']['weather'] = [SD_WEATHER[ob['weather']], 5] if SD_WEATHER[ob['weather']] else None   # as it landed
             want.append((key, (oi, um['sp'], tuple(evs)), {'spec': spec, 'att': [0 if ob['att'][:2] == 'p1' else 1, ia], 'def': [0 if ob['def'][:2] == 'p1' else 1, idf],
                                                           'move': ob['move'], 'crit': ob['crit'], 'spread': ob['spread'], 'helping': ob['helping'], 'hp': ob['hp']}))
     if want:
@@ -355,7 +361,7 @@ def damage_ranges(gp, sets, known_side, known_evs, dobs, cands):
             got = json.load(open(of)) if r.returncode == 0 and os.path.exists(of) else [None] * len(want)
         for (key, k2, _), g_ in zip(want, got): _DCACHE[key] = g_; res[k2] = g_
     return res
-def refine(log, gp, sets, known_side, known_evs):
+def refine(log, gp, sets, known_side, known_evs, mid_weather=False):
     """the other side's spreads in sets picked against the turn order the log shows; known_evs {species id: (evs, nature)} for the known
     side's Pokemon (a bot's own). Returns {species: why}"""
     def ks(species, forme):
@@ -363,7 +369,7 @@ def refine(log, gp, sets, known_side, known_evs):
         return raw_speed(forme, *k) if k else None
     obs = observations(log, known_side, ks, gp['sheets'])
     other = 'p2' if known_side == 'p1' else 'p1'; why = {}
-    dobs = damage_observations(log, known_side)
+    dobs = damage_observations(log, known_side, mid_weather)
     cands = {sp: [list(e) for _, e in ranked(sp, st['nature'], st['item'])] + [list(st['evs'])] for sp, st in sets[other].items() if st}
     R_ = damage_ranges(gp, sets, known_side, known_evs, dobs, cands) if dobs else {}
     for sp, st in sets[other].items():

@@ -96,7 +96,8 @@ def sets_for(g, log, bo3):
 def spec_mon(m, st):
     return {**st, 'forme': m['forme'], 'mega': m['mega'], 'hpPct': m['hp'], 'fainted': m['f'], 'status': m['st'], 'slept': m['slept'], 'boosts': m['b'],
             'itemNow': '' if m['gone'] or toid(st['item']) not in S.E['items'] else st['item'], 'moved': m['moved'], 'stall': m['stall'], 'lock': m['lock'],
-            'vol': m['vol'], 'onField': bool(m['pos']), 'last': m['last'], 'volarg': m['volarg'], 'volturn': m.get('volturn') or {}}
+            'vol': m['vol'], 'onField': bool(m['pos']), 'last': m['last'], 'volarg': m['volarg'], 'volturn': m.get('volturn') or {},
+            'unburden': m.get('unb', False), 'perish': m.get('perish', 0)}
 def hyps(sd, state, six, sets, leads, topk=TOPK):
     """the TOPK most likely sets of Pokemon this player has not sent in yet: [(weight, [species])]"""
     known = {m['sp'] for m in state[sd]['mons']}
@@ -132,6 +133,7 @@ def specs_for(tag, g, step, six, sets, leads, own=None):
             out.append((w1 * w2, {'name': f"{tag} t{step['turn']} h{i}{j}", 'turn': step['turn'], 'sides': sides,
                                   'acts': [[act(sd, i) for i in (0, 1)] for sd in ('p1', 'p2')], 'perish': st['perish'], 'standIns': len(c1) + len(c2), 'yawnDue': True,
                                   'volDue': True,                     # each volatile's countdown from the turn it started (positions.js)
+                                  'fieldDue': True,                   # Unburden's Speed after its item went, Perish Song's count (positions.js)
                                   'dropped': [], 'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None,
                                                            'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}))
     return out, H
@@ -199,7 +201,7 @@ class Live:
         s.log = logfile or os.path.join(OUT, f'{s.tag}.log'); s.evf = os.path.join(OUT, f'{s.tag}_eval.jsonl'); s.data = None; s.status = 'connecting'
         s.weights = {}; s.hyp = {}; s.poscache = {}; s.over = False; s.skip = {}
         s.exact = False; s.team = None; s.back = {}; s.bot_side = None; s.held = None; s.spread_why = {}
-        s.luck = False; s.lf = os.path.join(OUT, f'{s.tag}_luck.jsonl'); s.luck_state = None; s.dirty = False   # luck: after the game      # a Showdown bot's own log (bot/): its side known from its requests
+        s.luck = False; s.lf = os.path.join(OUT, f'{s.tag}_luck.jsonl'); s.luck_state = None; s.lweights = {}; s.dirty = False   # luck: after the game      # a Showdown bot's own log (bot/): its side known from its requests
         # the user's verdicts where the battle text and the rules disagree (broadcasts: evalbar/rules.py), kept beside the log
         s.fixf = os.path.join(OUT, f'{s.tag}_fixes.json'); s.fixes = json.load(open(s.fixf)) if logfile and os.path.exists(s.fixf) else {}; s.redo = None
     def page(s):
@@ -260,22 +262,31 @@ class Live:
     def upto(log, t):
         """the log as a spectator had it when turn t started"""
         i = log.find(f'\n|turn|{t}\n'); return log if i < 0 else log[:i + len(f'\n|turn|{t}\n')]
-    def at(s, log, t):
-        """engine position specs for turn t, from what was known when it started; the choices made in it (known once it is over) filled in"""
+    def at(s, log, t, hindsight=False):
+        """engine position specs for turn t, from what was known when it started; the choices made in it (known once it is over) filled in.
+        hindsight (the luck pass): each player's Pokemon and the opponent's spreads as the whole game showed them, so that luck counts the
+        dice (rolls, crits, accuracy, speed ties, added effects), not what was hidden at the time (the user, 2026-10-12: Game 24's Charizard
+        survived a Sucker Punch the guessed spread could not). Names get ' L' after the tag"""
         pre = s.upto(log, t); gp = R.parse(pre); step = next(x for x in gp['steps'] if x['turn'] == t)
-        later = next((x for x in R.parse(log)['steps'] if x['turn'] == t), step); step = {**step, 'acts': later['acts']}
-        six, sets, dropped = sets_for(gp, pre, s.bo3); own = None
+        full = R.parse(log); later = next((x for x in full['steps'] if x['turn'] == t), step); step = {**step, 'acts': later['acts']}
+        src, gsrc = pre, gp
+        if hindsight and later is not step:
+            st = json.loads(json.dumps(step['state']))
+            for sd in ('p1', 'p2'): st[sd] = later['state'][sd]               # all four each brought ('seen': False for those not in yet)
+            step = {**step, 'state': st}; src, gsrc = log, full
+        six, sets, dropped = sets_for(gsrc, src, s.bo3); own = None
         rq = s.request(log, t) if '|request|' in log else None
         if rq:                                                              # a bot's own log: its side as its request shows it, no guessing
             import botpos as BP
             sd = rq['side']['id']; s.bot_side = sd
             if s.team is None: s.team = bot_team(pre, sd)
             mons, why = BP.own_side(step['state'][sd], sets[sd], rq, BP.team_sets(s.team), dropped)
-            s.spread_why[t] = BP.refine_opponent(pre, gp, sets, sd, rq)       # the opponent's spreads against the turn order seen so far
+            why_sp = BP.refine_opponent(src, gsrc, sets, sd, rq, mid_weather=True)   # the opponent's spreads against the turn order seen so far
+            if not hindsight: s.spread_why[t] = why_sp
             if mons:
                 own = (sd, mons); seen = {toid(m['sp'].split('-')[0]) for m in step['state'][sd]['mons']}
                 s.back[t] = [r['details'].split(',')[0] for r in rq['side']['pokemon'] if toid(r['details'].split(',')[0].split('-')[0]) not in seen]
-        sp, H = specs_for(s.tag, gp, step, six, sets, s.leads(pre), own)
+        sp, H = specs_for(s.tag + (' L' if hindsight else ''), gp, step, six, sets, s.leads(pre), own)
         return sleep_cases(sp), H
     @staticmethod
     def request(log, t):
@@ -294,7 +305,8 @@ class Live:
         ev = records(s.evf); lev = records(s.lf)                          # lev: the luck pass
         logit = lambda v: math.log(min(1 - 1e-4, max(1e-4, v)) / (1 - min(1 - 1e-4, max(1e-4, v))))
         scale = lambda v: C.sig(CAL * logit(v))
-        steps = []; ps = {}; CH = s.checks(log)
+        steps = []; ps = {}; CH = s.checks(log); lps = {}
+        for t in s.lweights: lps.update(records(os.path.join(OUT, f'{s.tag}_t{t}_luckpos.jsonl')))
         for step in g['steps']:
             t = step['turn']
             if t < 1 or not s.weights.get(t): continue
@@ -323,8 +335,12 @@ class Live:
                 if not s.bo3 and sd != s.bot_side:                             # (the bot knows its own items)
                     for m in state[sd]['mons']:
                         if not m.get('pool'): m['item'] = ''                 # Bo1: items are unknown unless one activated (shown in the events)
-            ex = [(w, B.expected(lev.get(n + ' p1') or ev[n + ' p1'], ps[n + ' p1'])) for w, n in zip(ws, names)]; ex = [(w, x) for w, x in ex if x is not None]
+            ex = [(w, B.expected(ev[n + ' p1'], ps[n + ' p1'])) for w, n in zip(ws, names)]; ex = [(w, x) for w, x in ex if x is not None]
             after = sum(w * scale(ev[n + ' p1']['static']) for w, n in zip(ws, names))   # the value function here, no lookahead
+            LW = s.lweights.get(t) or {}
+            if LW and all(n in lev and n in lps for n in LW):                  # the luck pass, in hindsight: both from its own positions
+                ex = [(w, B.expected(lev[n], lps[n])) for n, w in LW.items()]; ex = [(w, x) for w, x in ex if x is not None]
+                after = sum(w * scale(lev[n]['static']) for n, w in LW.items()) / sum(LW.values())
             steps.append({'turn': t, 'wp': wp, 'ev': wp, 'state': state, 'events': step['events'], 'opt': opt, 'hyp': len(names), 'checks': CH.get(t, []),
                           'expected': sum(w * scale(x) for w, x in ex) / sum(w for w, _ in ex) if ex else None, 'after': after})
         # luck (the user's idea, 2026-10-11): the turn's outcome against what the choices both sides made were expected to give, both
@@ -359,7 +375,8 @@ class Live:
         and one game at a time, apart from the live evaluation's lock, so a game going on is not slowed"""
         for t in turns:
             posf = os.path.join(OUT, f'{s.tag}_t{t}_luckpos.jsonl')         # with the choices made: their cells get every sample, and each
-            positions(s.at(log, t)[0], posf)                                 # side's actual_v (what its choice cost) comes out
+            sp = s.at(log, t, hindsight=True)[0]; s.lweights[t] = {x['name'] + ' p1': w for w, x in sp}
+            positions(sp, posf)                                              # side's actual_v (what its choice cost) comes out
             with LUCK: EN.run(posf, s.lf, 1, 32, 1, extra={'EVAL_MATRIX': '1'}, nice=19)
             s.dirty = True
         s.luck_state = 'done'; s.dirty = True

@@ -194,7 +194,7 @@ class Live:
         reader), with tag naming the outputs and fmt the format line on the page"""
         s.room = room; s.logfile = logfile; s.fmt = fmt
         s.tag = tag or (room.split('-')[-1] if not re.search(r'-\d+-[a-z0-9]+$', room) else room.split('-')[-2])
-        s.bo3 = logfile is not None or 'bo3' in room; s.threads = threads; s.port = port; os.makedirs(OUT, exist_ok=True)
+        s.bo3 = 'bo3' in room if room else logfile is not None; s.threads = threads; s.port = port; os.makedirs(OUT, exist_ok=True)
         s.log = logfile or os.path.join(OUT, f'{s.tag}.log'); s.evf = os.path.join(OUT, f'{s.tag}_eval.jsonl'); s.data = None; s.status = 'connecting'
         s.weights = {}; s.hyp = {}; s.poscache = {}; s.over = False; s.skip = {}
         s.exact = False; s.team = None; s.back = {}; s.bot_side = None; s.held = None; s.spread_why = {}
@@ -319,7 +319,7 @@ class Live:
                     nm = ', '.join(pool[:-1]) + (' or ' if len(pool) > 1 else '') + pool[-1]
                     state[sd]['mons'].append({'n': f"{'one' if need == 1 else need} of {nm}", 'hp': 100, 'st': '', 'f': False, 'b': {}, 'item': '', 'gone': False,
                                               'slot': '', 'seen': False, 'pool': True})
-                if not s.bo3:
+                if not s.bo3 and sd != s.bot_side:                             # (the bot knows its own items)
                     for m in state[sd]['mons']:
                         if not m.get('pool'): m['item'] = ''                 # Bo1: items are unknown unless one activated (shown in the events)
             ex = [(w, B.expected(lev.get(n + ' p1') or ev[n + ' p1'], ps[n + ' p1'])) for w, n in zip(ws, names)]; ex = [(w, x) for w, x in ex if x is not None]
@@ -415,6 +415,9 @@ class Live:
                 s.over = True
                 if s.port: print(f'battle over; the page stays up at http://localhost:{s.port} until you stop this (Ctrl-C)', flush=True)
             time.sleep(1)
+def botfmt(room):
+    """the bot page's format line: its Bo1 games (since 2026-10-12) have no team sheets, so the opponent's sets are guessed as a spectator's"""
+    return ('Bo3, open team sheets' if 'bo3' in room else 'Bo1, closed team sheets') + ' · the bot is Player 1, its side from its own log'
 class BotRunner:
     """the Showdown bot's games (bot/out/ in the main checkout) on one page: every ladder game so far when this starts, then each game it
     starts, as it plays it. The page moves on to a new game when it is showing the latest one."""
@@ -432,7 +435,7 @@ class BotRunner:
                             games.append({**lv.data['games'][0], 'title': f'Game {i + 1}', 'idx': i, 'versus': f'Game {i + 1}'})
                     last = run.lives[-1] if run.lives else None
                     st = "waiting for the bot's next game" if not last or last.status == 'finished' else last.status
-                    b = json.dumps({'games': games, 'live': {'url': 'data.json', 'status': st, 'format': "Bo3, open team sheets · the bot is Player 1, its side from its own log"}}).encode()
+                    b = json.dumps({'games': games, 'live': {'url': 'data.json', 'status': st, 'format': last.fmt if last else botfmt('')}}).encode()
                     ct = 'application/json'
                 elif p in ('/', '/index.html'): b = Live.page(None).encode(); ct = 'text/html; charset=utf-8'
                 else: self.send_error(404); return
@@ -447,7 +450,7 @@ class BotRunner:
             else: new = [f for f in fs if f not in s.known]; s.known |= set(new)
             for f in new:
                 room = os.path.basename(f)[:-4]; num = re.search(r'-(\d+)(?:-[a-z0-9]+)?$', room).group(1); s.files.append(f)
-                lv = Live(room, s.threads, 0, logfile=f, tag='bot_' + num, fmt="Bo3, open team sheets · the bot is Player 1, its side from its own log")
+                lv = Live(room, s.threads, 0, logfile=f, tag='bot_' + num, fmt=botfmt(room))
                 lv.exact = True; lv.luck = True; s.lives.append(lv); threading.Thread(target=lv.run, daemon=True).start()
                 print(time.strftime('%-I:%M %p'), 'following the bot\'s game', num, flush=True)
             time.sleep(5)
@@ -465,7 +468,7 @@ if __name__ == '__main__':
         # a game the Showdown bot (bot/) plays or played, from its own log in the main checkout's bot/out/: its side as it knows it
         room = room_of(a[1]); f = os.path.join(C.MAIN, 'bot', 'out', room + '.log')
         L = Live(room, int(a[2]) if len(a) > 2 else 2, int(a[3]) if len(a) > 3 else 8769, logfile=f, tag='bot_' + re.search(r'-(\d+)(?:-[a-z0-9]+)?$', room).group(1),
-                 fmt="Bo3, open team sheets · the bot is Player 1, its side from its own log")
+                 fmt=botfmt(room))
         L.exact = True; L.luck = True
         try: L.run()
         except KeyboardInterrupt: pass

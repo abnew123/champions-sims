@@ -7,7 +7,13 @@
 import os, sys, json, random, re, tempfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); EB = os.path.join(ROOT, 'evalbar')
 sys.path.insert(0, EB); sys.path.insert(0, os.path.join(ROOT, 'pssim'))
-os.environ.setdefault('CHAMP_BIN', os.path.join(ROOT, 'native', 'champ', 'bin', 'battlesim-champ'))   # the current build (the kit's v25 setup)
+# the bot's engine (2026-10-12, the user: go with the search-trained learned value): a frozen copy of the dev build (the learned value's
+# support and the race memo fix; bin/champ-bot-2026-10-12, sha256 beside it), scoring every leaf with the h64 net distilled from the one-turn
+# search on 130,759 real positions (bot/value/vnet_h64_search.json: held-out search -0.008 log loss, self-play +3.3 ± 1.5 over 1,600 games);
+# the net's inputs need RACE_PRIO and FEATS22. The damage calc data stays champions_data.json, which the net was fitted with.
+os.environ.setdefault('CHAMP_BIN', os.path.join(ROOT, 'native', 'champ', 'bin', 'battlesim-champ-bot'))
+os.environ.setdefault('EG_VNET', os.path.join(ROOT, 'bot', 'value', 'vnet_h64_search.json'))
+os.environ.setdefault('RACE_PRIO', '1'); os.environ.setdefault('FEATS22', '1')
 os.environ.setdefault('CHAMP_DATA', 'engine_data_full.json')
 os.environ.setdefault('EG_MEGA_TIE', '0')
 os.environ.setdefault('EG_LAST_PROTECT', '0')   # our last Pokemon never Protects when it changes nothing (side 0 is the bot); the user, 2026-10-11
@@ -46,11 +52,20 @@ def build(log, request, side, topk=1, team=None):
     specs, info = BP.bot_position(text, request, side, topk=topk, team=export(team) if team else None, tag='bot')
     if not specs: raise RuntimeError('no position: ' + str(info.get('skip')))
     return specs, info
+def run_eval(posf, outf, threads=2, seeds=32):
+    """champ evalpos as the Eval bar's engine.run does it, but started through the bot's own link (CHAMP_BIN: battlesim-champ-bot), not
+    the shared evalbar-champ link that every caller repoints to its own binary (2026-10-12: the bot could start the Eval bar's engine)"""
+    import subprocess
+    grid = os.path.join(EB, 'out', 'emptygrid'); os.makedirs(grid, exist_ok=True)
+    env = {**os.environ, 'RACE_TIES': 'avg', 'EVAL_SEEDS': str(seeds), 'EVAL_ADAPT': '1', 'EG_VALUE': os.environ.get('EG_VALUE', 'egvalue9_sym2.json'), 'RACE': '1', 'TRSYM': '1',
+           'CALC_DATA': '../native/champions_data.json', 'GRID_DIR': grid}
+    subprocess.run([os.environ['CHAMP_BIN'], 'evalpos', '../native/' + os.environ['CHAMP_DATA'], os.path.abspath(posf), os.path.abspath(outf), str(threads)],
+                   cwd=os.path.join(ROOT, 'pssim'), env=env, check=True)
 def decide(specs, request, side, threads=2, seeds=32, log=None, cap=None):
     tag = f"t{request.get('rqid', 0)}_{random.randrange(1 << 20):05x}"
     posf = os.path.join(OUT, tag + '.pos.jsonl'); outf = os.path.join(OUT, tag + '.eval.jsonl')
     ps = LV.positions(specs, posf)
-    EN.run(posf, outf, threads, seeds, 1)
+    run_eval(posf, outf, threads, seeds)
     rows = {r['name']: r for r in map(json.loads, open(outf)) if 'error' not in r}
     w0, spec0 = specs[0]; name = spec0['name'] + ' p1'
     r = rows.get(name) or next(iter(rows.values()))
@@ -166,7 +181,7 @@ def replacement(request, log, side, team=None, threads=2, seeds=32):
     allspecs = [x for _, specs in groups for x in specs]
     try:
         posf = os.path.join(OUT, tag + '.pos.jsonl'); outf = os.path.join(OUT, tag + '.eval.jsonl')
-        LV.positions(allspecs, posf); EN.run(posf, outf, threads, seeds, 1)
+        LV.positions(allspecs, posf); run_eval(posf, outf, threads, seeds)
         return pick({r['name']: r['value'] for r in map(json.loads, open(outf)) if 'error' not in r}, 'search')
     except Exception as e:
         sys.stderr.write('replacement by search failed, static value instead: ' + repr(e) + '\n')

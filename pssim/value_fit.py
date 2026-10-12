@@ -12,13 +12,16 @@ HERE = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(HERE, 'res
 def load(part):
     meta = {m['name']: m for m in map(json.loads, open(os.path.join(OUT, f'real_{part}.meta.jsonl')))}
     ev = {}
-    pe = os.path.join(OUT, f'real_{part}.eval.jsonl')
-    if os.path.exists(pe):
-        for l in open(pe):
-            r = json.loads(l)
-            if 'error' not in r: ev[r['name']] = r['value']
+    # env VALUE_SUFFIX (e.g. _fc, 2026-10-12: features with the full calc data): features from real_<part>.vfeats<suffix>.jsonl and search
+    # values overridden by real_<part><suffix>.eval.jsonl where that file has them (the positions the search was redone for)
+    sfx = os.environ.get('VALUE_SUFFIX', '')
+    for pe in [os.path.join(OUT, f'real_{part}.eval.jsonl')] + ([os.path.join(OUT, f'real_{part}{sfx}.eval.jsonl')] if sfx else []):
+        if os.path.exists(pe):
+            for l in open(pe):
+                r = json.loads(l)
+                if 'error' not in r: ev[r['name']] = r['value']
     E, S, y, g, st, sv, names, rt = [], [], [], [], [], [], [], []
-    for l in open(os.path.join(OUT, f'real_{part}.vfeats.jsonl')):
+    for l in open(os.path.join(OUT, f"real_{part}.vfeats{os.environ.get('VALUE_SUFFIX', '')}.jsonl")):
         r = json.loads(l)
         if 'error' in r or r['name'] not in meta: continue
         m = meta[r['name']]; x = np.array(r['x'][:28])
@@ -107,7 +110,7 @@ def export(hidden=16, l2=1e-3, target='search', out=None, parts=('fit',)):
     W = m.p[:hidden * d].reshape(hidden, d).tolist() if hidden else None; v = m.p[hidden * d:].tolist() if hidden else m.p.tolist()
     zh = m.z(H['E'], H['S']); c = rescale(m.z(F['E'], F['S']), F['y'])
     print(f"h{hidden} l2 {l2} on {target}: held-out log loss {ll(c * zh, H['y']).mean():.4f} (rescale {c:.3f})")
-    out = out or os.path.join(OUT, f"vnet_h{hidden}_{target}{'_' + '+'.join(parts) if parts != ('fit',) else ''}.json")
+    out = out or os.path.join(OUT, f"vnet_h{hidden}_{target}{'_' + '+'.join(parts) if parts != ('fit',) else ''}{os.environ.get('VALUE_SUFFIX', '')}.json")
     json.dump({'hidden': hidden, 'sd': sd.tolist(), 'W': W, 'v': v, 'blocks': {'side': 32, 'field': 12, 'x': 28}, 'target': target, 'l2': l2,
                'note': 'value = sigmoid(h(e) - h(e_swapped)); e = [side 0, side 1, field for 0, plan.rs feats[:28]] (value_fit.py)'}, open(out, 'w'))
     print('->', out)

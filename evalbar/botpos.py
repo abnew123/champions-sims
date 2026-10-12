@@ -73,14 +73,14 @@ def spread(p, st):
         hit = next((x for x in range(33) if calc(x) == want), None)
         if hit is not None: out[i] = hit
     return out
-def refine_opponent(pre, gp, sets, side, req, mid_weather=False):
+def refine_opponent(pre, gp, sets, side, req, strict=False):
     """the opponent's spreads (in sets) picked against the turn order the log shows, the bot's own Speed being exact (spreads.py)"""
     import spreads
     known = {}
     for p in req['side']['pokemon']:
         sp = p['details'].split(',')[0]; st = next((v for k, v in sets[side].items() if v and toid(k.split('-')[0]) == toid(sp.split('-')[0])), None)
         if st: known[toid(sp.split('-')[0])] = (spread(p, st), st['nature'])
-    return spreads.refine(pre, gp, sets, side, known, mid_weather)
+    return spreads.refine(pre, gp, sets, side, known, strict)
 def fresh(st):
     return {**st, 'mega': False, 'hpPct': 100, 'fainted': False, 'status': '', 'slept': 0, 'boosts': {}, 'itemNow': st['item'], 'moved': False,
             'stall': False, 'lock': '', 'vol': [], 'onField': False, 'last': '', 'volarg': {}}

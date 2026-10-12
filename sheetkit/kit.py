@@ -14,6 +14,7 @@
   python3 sheetkit/kit.py <team> confirm run [--games 48] [--g0 1000] [--threads N] [--setup NAME]
   python3 sheetkit/kit.py <team> confirm decide [--write]  paired on fresh games; --write updates picks.json
   python3 sheetkit/kit.py <team> t1 jobs | run [--samples 12] [--workers N] | solve
+  python3 sheetkit/kit.py <team> t1 redo --only Garchomp,Golisopod   results with those Pokemon in a lead set aside for the next run
   python3 sheetkit/kit.py <team> optimal run [--threads N] [--only screen|matrix|more] | report  both sides pick their four -> optimal.json
                                                            (OPTIMAL_SIXES=pool: against real sixes -> optimal_pool.json)
   python3 sheetkit/kit.py <team> guide run [--games 64] [--g0 7000] [--threads N] | report   game plans and team-preview tells -> guide.json
@@ -182,6 +183,7 @@ def main():
         else: print('\n(not written: add --write to update picks.json)')
     elif step == ('t1', 'jobs'):
         jobs, items = T1.write_jobs(sheet, rj(sheet.p('picks.json'))['picks']); print(f"{len(jobs)} jobs, {len(items)} with item variants -> work/t1/")
+    elif step == ('t1', 'redo'): T1.redo(sheet, [x.strip() for x in (a.only or '').split(',') if x.strip()])
     elif step == ('t1', 'run'): T1.run_all(sheet, a.samples, a.threads, a.force)
     elif step == ('t1', 'solve'): d = T1.solve(sheet); print(f"t1.json: {len(d['plans'])} plans")
     elif step == ('optimal', 'run'):

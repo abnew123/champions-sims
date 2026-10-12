@@ -28,6 +28,25 @@ def make_jobs(sheet, picks):
             jobs.append({'arch': a, 'k': k, 'lead': sheet.lead(picks[a]['lead']), 'back': sheet.back(picks[a]['back']), 'pair': pr['pair']})
     return jobs, [j for j in jobs if 'Indeedee-F' in j['pair'].split(' + ')]
 
+def redo(sheet, species):
+    """move aside the turn-one results of every job with one of `species` in either lead (ours, or the opposing pair), so the next
+    `t1 run` plays them again: for a fix to the turn-one simulator that only touches some Pokemon (e.g. the three Mega abilities,
+    2026-10-11)"""
+    d = sheet.w('t1'); base = lambda n: n.split('-Mega')[0]; want = {base(x) for x in species}; moved = 0
+    k = 1
+    while os.path.exists(os.path.join(d, f'archive_{k}')): k += 1
+    arch = os.path.join(d, f'archive_{k}')
+    for name, res in (('jobs.json', 'res'), ('jobs_items.json', 'res_colburberry'), ('jobs_items.json', 'res_psychicseed')):
+        jp, rd = os.path.join(d, name), os.path.join(d, res)
+        if not (os.path.exists(jp) and os.path.isdir(rd)): continue
+        for i, j in enumerate(rj(jp)):
+            names = {base(x) for x in j['lead']} | {base(x) for x in j['pair'].split(' + ')}
+            f = os.path.join(rd, f'{i}.json')
+            if names & want and os.path.exists(f):
+                os.makedirs(os.path.join(arch, res), exist_ok=True); shutil.move(f, os.path.join(arch, res, f'{i}.json')); moved += 1
+    print(f"{moved} turn-one results with {', '.join(sorted(want))} in a lead moved to {os.path.relpath(arch, sheet.dir)}/" if moved else "no turn-one result has them in a lead")
+    return moved
+
 def write_jobs(sheet, picks):
     """Write work/t1/jobs.json. Results are named by job number, so a result is kept only when the job with that number is the same
     job as before (same archetype, opposing lead, lead and back row) and the six and the scoring options are unchanged; every other

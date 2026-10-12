@@ -16,6 +16,9 @@ WEATHER = {'RainDance': 'Rain', 'SunnyDay': 'Sun', 'Sandstorm': 'Sandstorm', 'Sn
            'DesolateLand': 'Harsh sun', 'PrimordialSea': 'Heavy rain', 'DeltaStream': 'Strong winds'}
 WROCK = {'RainDance': 'damprock', 'SunnyDay': 'heatrock', 'Sandstorm': 'smoothrock', 'Snowscape': 'icyrock', 'Snow': 'icyrock'}
 SCREENS = ('Reflect', 'Light Screen', 'Aurora Veil')
+BATON_PASS = False                                                        # the eval bar's programs set it (live.py, reach.py); the bot's do not yet
+PASSED = {'Substitute', 'confusion', 'Leech Seed', 'Heal Block', 'Focus Energy', 'Curse', 'Aqua Ring', 'Ingrain', 'Magnet Rise', 'Power Trick', 'Gastro Acid',
+          'Embargo', 'Telekinesis', 'Laser Focus'}                       # the volatiles Baton Pass hands on (Showdown's noCopy is false)
 CANT = {'flinch': 'flinched', 'slp': 'is asleep', 'par': 'is fully paralysed', 'frz': 'is frozen solid', 'recharge': 'must recharge',
         'Focus Punch': 'lost its focus', 'move: Taunt': "can't use the move (Taunt)", 'Disable': "can't use the move (Disable)",
         'move: Throat Chop': "can't use the move (Throat Chop)", 'move: Heal Block': "can't use the move (Heal Block)"}
@@ -113,12 +116,21 @@ def parse(log):
         elif k in ('switch', 'drag', 'replace'):
             pos = p[2][:3]; sd = pos[:2]; nick = p[2].split(': ', 1)[1]; species = p[3].split(',')[0]
             old = mons[sd].get(active.get(pos))
+            # Baton Pass hands on the stat stages and the effects Showdown copies (copyVolatileFrom); Shed Tail only its Substitute
+            via = clean(t.get('from', '')) if k == 'switch' else ''
+            passed = None
+            if BATON_PASS and old and via in ('Baton Pass', 'Shed Tail'):
+                keep = PASSED if via == 'Baton Pass' else {'Substitute'}
+                passed = (dict(old.boosts) if via == 'Baton Pass' else {}, {v for v in old.vol if v in keep},
+                          {v: x for v, x in old.volturn.items() if v in keep}, {v: x for v, x in old.volarg.items() if v in keep}, old.perish if via == 'Baton Pass' else 0)
             if old and k != 'replace': old.leave()
             if k == 'replace': odd.add('Illusion')
             if k == 'switch' and phase == 'actions' and not moved_yet[0] and pos not in acts and old is not None and not old.fainted:
                 acts[pos] = {'switch': species}                          # a switch before anything has moved is the player's choice
             if nick not in mons[sd]: mons[sd][nick] = Mon(sd, species, sheets[sd]); order[sd].append(nick)
             m = mons[sd][nick]; active[pos] = nick
+            if passed:
+                m.boosts, m.vol, m.volturn, m.volarg, m.perish = passed[0], set(passed[1]), dict(passed[2]), dict(passed[3]), passed[4]
             if k != 'replace': onstart.discard(id(m))
             if len(p) > 4:
                 v = hpval(p[4]); m.hp = v if v is not None else m.hp; st = p[4].split(); m.status = st[1] if len(st) > 1 and st[1] != 'fnt' else m.status

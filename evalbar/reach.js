@@ -38,8 +38,16 @@ function play(c, seed, mode) {
     for (const [si, side] of b.sides.entries()) {
       if (side.requestState !== 'switch') continue;
       const sd = sides[si], req = side.activeRequest, need = (req && req.forceSwitch) || [];
+      const reviving = req && req.side && req.side.pokemon.some(p => p.reviving);       // Revival Blessing: a fainted one to bring back
       const used = new Set(), parts = need.map(f => {
         if (!f) return 'pass';
+        if (reviving) {
+          const want = (c.revive && c.revive[sd] || []).shift();
+          let k = side.pokemon.findIndex((p, i) => p.fainted && !used.has(i) && want && base(p.species.name) === base(want));
+          if (k < 0) k = side.pokemon.findIndex((p, i) => p.fainted && !used.has(i));
+          if (k < 0) return 'pass';
+          used.add(k); return 'switch ' + (k + 1);
+        }
         const want = left[sd].shift(); let k = -1;
         if (want) k = side.pokemon.findIndex((p, i) => !used.has(i) && !p.isActive && !p.fainted && base(p.species.name) === base(want));
         if (k < 0) k = side.pokemon.findIndex((p, i) => !used.has(i) && !p.isActive && !p.fainted);

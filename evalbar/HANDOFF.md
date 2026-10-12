@@ -367,6 +367,20 @@ one of the bugs already fixed (Unburden, Perish, the strict spread changes; luck
   faster than guessed). The bot's client now logs `|bot-choice|<rqid>|<choice>` after each request; Live.choice reads it and fills the
   bot's acts where the log shows them only in part (its own games from 2026-10-12 on). Not yet used as a Speed reading.
 
+## The luckiest turns, and replacements in luck (2026-10-12)
+
+The user asked to keep to Bo3 and check the luckiest turns too. Of the 9 luckiest clean Bo3 turns, five were dice (misses, a full
+paralysis, ~50% knockouts). The rest:
+- Game 36's turn 3 was the charged-move bug; the stale-cache scan had missed it because the page had already rebuilt those positions
+  with the fix (approx no longer said 'charging') while the cached results were the old ones. Charged turns are now found from the logs.
+- Game 164: hits the spread checks threw away. Strict level 2 (the eval bar's; the bot is at 1): a hit after the turn changed a stat
+  stage (Intimidate, Defiant) is kept with the change applied, and a multi-hit move's first hit counts (crits read per hit).
+- Game 120: a replacement choice counted as luck. Within the luck's payoff cell, evalpos settles faint replacements and pivots by its
+  own equilibrium, so a player sending in something else showed as luck (+30). Battle sim added actual_replace to evalpos
+  (champ-dev-2026-10-12b): live.replacements reads them from the log (switches after the turn's first move, and after faints), the
+  luck pass runs that engine (LUCK_BIN, link evalbar-champ-alt), and build uses its actual_cell where every choice is known. Still to
+  come: actual_cell for partly known choices (asked Battle sim).
+
 ## Louisville day 1 (2026-10-10)
 
 The same study on the Louisville day 1 stream (12 games from 1:15 pm, read live; `study.py out/champions/louisville1.ocr.jsonl 3 14340`,

@@ -391,5 +391,51 @@ def refine(log, gp, sets, known_side, known_evs, strict=False):
         mine = [(oi, ob) for oi, ob in enumerate(dobs) if any(k[0] == oi and k[1] == sp for k in R_)]
         misses = lambda evs, sp=sp, mine=mine: sum(not damage_fits(ob, R_.get((oi, sp, tuple(evs))), 0 if strict else 1) for oi, ob in mine)
         evs, why[sp] = pick(sp, st['nature'], st['item'], st['evs'], obs, misses if mine else None, len(mine))
+        if strict and mine and misses(evs) > 0:                              # no listed spread fits the hits: look nearby
+            near = nearby(gp, sets, known_side, known_evs, dobs, sp, st, mine, obs, misses)
+            if near: evs, why[sp] = near
         sets[other][sp] = {**st, 'evs': evs}
     return why
+STATS6 = ['HP', 'Atk', 'Def', 'SpA', 'SpD', 'Spe']
+def nearby(gp, sets, known_side, known_evs, dobs, sp, st, mine, obs, misses0):
+    """the eval bar's strict reading, when the hits rule out every listed spread (about half of each species' use is outside Smogon's
+    list): the most used spreads (and the plain guess) with points moved into the stats the missed hits involve (HP and the defence a
+    hit on it used, the attack stat of a hit by it), at most two moves, keeping the turn order; fewest missed hits, then the smallest
+    change, then the most used start. (evs, why) or None if nothing nearby misses fewer hits. The user asked for it (2026-10-12): a
+    Charizard, a Gholdengo and an Indeedee survived on 1% hits their guessed spreads could not"""
+    other = 'p2' if known_side == 'p1' else 'p1'
+    bases = [(f'Smogon #{i + 1}', list(e)) for i, (_, e) in enumerate(ranked(sp, st['nature'], st['item'])[:3])] + [('the plain guess', list(st['evs']))]
+    mobs = [o for o in obs if toid(o['species']) == toid(sp)]
+    def targets(evs):
+        out = set()
+        for oi, ob in mine:
+            cat = (E['moves'].get(toid(ob['move'])) or {}).get('category')
+            if ob['def'][:2] == other: out |= {0, 2 if cat == 'Physical' else 4}
+            else: out.add(1 if cat == 'Physical' else 3)
+        return out
+    def moves(evs):
+        for t in targets(evs):
+            for f in range(6):
+                if f == t or f in targets(evs): continue
+                for d in (2, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32):
+                    if evs[f] >= d and evs[t] + d <= 32:
+                        e = list(evs); e[f] -= d; e[t] += d; yield e, d, f, t
+    best = None; m0 = misses0(bases[0][1]); allc = {}
+    frontier = [(name, e, 0, '') for name, e in bases]
+    for rnd in range(2):
+        cand = {}
+        for name, e0, d0, how0 in frontier:
+            for e, d, f, t in moves(e0):
+                if tuple(e) in cand or tuple(e) in allc or not all(fits(e, st['nature'], o) for o in mobs): continue
+                cand[tuple(e)] = (name, d0 + d, (how0 + ', ' if how0 else '') + f'{d} from {STATS6[f]} to {STATS6[t]}')
+        if not cand: break
+        allc.update(cand)
+        R2 = damage_ranges(gp, sets, known_side, known_evs, dobs, {sp: [list(e) for e in cand]}, True)
+        scored = sorted((sum(not damage_fits(ob, R2.get((oi, sp, e)), 0) for oi, ob in mine), cand[e][1], [b[0] for b in bases].index(cand[e][0]), e) for e in cand)
+        top = scored[0]
+        if best is None or top[:3] < best[:3]: best = top
+        if top[0] == 0: break
+        frontier = [(cand[e][0], list(e), cand[e][1], cand[e][2]) for _, _, _, e in scored[:4]]
+    if best is None or best[0] >= min(m0, min(misses0(e) for _, e in bases)): return None
+    name, _, how = allc[best[3]]
+    return list(best[3]), f"{name} with {how} ({'fits' if best[0] == 0 else f'misses {best[0]} of'} {len(mine)} hits; no listed spread does)"

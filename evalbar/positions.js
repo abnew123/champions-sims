@@ -98,6 +98,17 @@ function rebuild(spec, flip) {
       // field (Showdown keeps that as a volatile the log never shows), and Perish Song's count goes on (a fresh volatile would be 4)
       if (spec.fieldDue && x.unburden && p.hasAbility('unburden') && !toID(x.itemNow)) p.addVolatile('unburden');
       if (spec.fieldDue && x.perish > 0) { if (p.addVolatile('perishsong')) p.volatiles.perishsong.duration = x.perish; else approx.push('Perish Song'); }
+      // fieldDue: the second turn of a two-turn move (Electro Shot outside rain, Solar Beam, Meteor Beam, Fly...): locked into it, aimed
+      // where the log shows it fired (else the first foe), as Showdown's twoturnmove leaves it after the charging turn's end
+      if (spec.fieldDue && (x.vol || []).includes('charging') && x.last && p.moveSlots.some(m => m.id === toID(x.last))) {
+        const acts = (flip ? [spec.acts[1], spec.acts[0]] : spec.acts || [[], []])[si] || [], a = acts[k], letter = flip ? ['p2', 'p1'] : ['p1', 'p2'];
+        let foe = a && a.target && letter.indexOf(a.target.slice(0, 2)) >= 0 ? b.sides[letter.indexOf(a.target.slice(0, 2))].active[a.target[2] === 'a' ? 0 : 1] : null;
+        if (!foe || foe.fainted) foe = side.foe.active.find(q => q && !q.fainted) || null;
+        if (foe) {
+          p.lastMoveTargetLoc = p.getLocOf(foe); p.addVolatile('twoturnmove', foe, dex.getActiveMove(toID(x.last)));
+          if (p.volatiles.twoturnmove) { p.volatiles.twoturnmove.duration = 1; const ci = approx.indexOf('charging'); if (ci >= 0) approx.splice(ci, 1); }
+        }
+      }
     });
     const src = side.pokemon.find(p => !p.fainted), fsrc = side.foe.pokemon.find(p => !p.fainted);
     if (sd.tailwind) { side.addSideCondition('tailwind', src); side.sideConditions.tailwind.duration = sd.tailwind; }
@@ -120,6 +131,7 @@ function rebuild(spec, flip) {
     p.trapped = p.maybeTrapped = false; b.runEvent('TrapPokemon', p);
     if (!p.knownType || b.dex.getImmunity('trapped', p)) b.runEvent('MaybeTrapPokemon', p);
     if (p.trapped) p.trapped = true;                                       // 'hidden' (a trap the request hides) is still a trap
+    if (p.getLockedMove()) p.trapped = true;                               // as Showdown's request: a move it is locked into (a charged one)
   }
   return {b, sides, approx};
 }

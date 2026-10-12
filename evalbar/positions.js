@@ -38,6 +38,7 @@ function left(spec, x, id, arg, approx, v) {
 // the engine's data: this Showdown package gives three Megas an older ability (Mega Golisopod Emergency Exit for Tough Claws, Mega
 // Garchomp Z Sand Force for Levitate, Mega Absol Z Magic Bounce for Sharpness); real games and the engine agree with the engine data
 const ENGINE = JSON.parse(fs.readFileSync(path.resolve('../native/engine_data_full.json')));
+const SHOWN = (h, M) => h >= M ? 100 : Math.min(99, Math.max(1, Math.ceil(100 * h / M)));   // Showdown's percent for h of M HP
 function megaAbility(p) {
   const ab = ((ENGINE.species[toID(p.species.name)] || {}).abilities || {})['0'];
   if (ab && toID(ab) !== p.ability) { p.setAbility(ab, null, null, true); p.baseAbility = toID(ab); }
@@ -65,6 +66,12 @@ function rebuild(spec, flip) {
       if (x.forme && !x.fainted) p.formeChange(x.forme, null, !x.forme.startsWith('Aegislash'));
       if (x.fainted) { p.hp = 0; p.fainted = true; p.status = 'fnt'; p.isActive = false; side.pokemonLeft--; side.totalFainted++; return; }
       p.hp = Math.max(1, Math.min(p.maxhp, Math.round(p.maxhp * x.hpPct / 100)));
+      // pctDue (live.specs_for; not the bot's yet): a shown percent (Showdown rounds up, 99 until full) rebuilt as an HP that shows as it,
+      // the middle of those; rounding made 1% into 2 HP (shown 2%) and the like, half an HP too much on average (reach.py, 2026-10-12)
+      if (spec.pctDue && Number.isInteger(x.hpPct) && x.hpPct > 0 && x.hpPct < 100 && SHOWN(p.hp, p.maxhp) !== x.hpPct) {
+        const c = []; for (let h = 1; h < p.maxhp; h++) if (SHOWN(h, p.maxhp) === x.hpPct) c.push(h);
+        if (c.length) p.hp = c[Math.floor((c.length - 1) / 2)];
+      }
       for (const s of STATS) p.boosts[s] = (x.boosts || {})[s] || 0;
       p.status = ''; p.statusState = b.initEffectState({});
       if (x.status) {

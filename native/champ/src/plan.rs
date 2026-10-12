@@ -23,6 +23,29 @@ pub struct Cfg {
     pub vw_b: Option<(f64, Vec<f64>)>,
     /// RACE=1 + CALC_DATA=<champions_data.json>: the damage-race features (race_feats) are appended to the position features
     pub cdata: Option<&'static crate::data::Data>,
+    /// EG_VNET=<json> (2026-10-12, the learned value; pssim/value_fit.py export): both sides' positions are scored by the net instead of
+    /// EG_VALUE. Needs RACE=1 RACE_PRIO=1 FEATS22=1 CALC_DATA (the inputs it was fitted on).
+    pub vnet: Option<VNet>,
+}
+/// a learned value: sigmoid(h(e) - h(e_swapped)), h linear or one tanh layer over vfeats.rs's side / field features and plan.rs feats
+pub struct VNet { pub sd: Vec<f64>, pub w: Option<Vec<Vec<f64>>>, pub v: Vec<f64> }
+impl VNet {
+    fn h(&self, e: &[f64]) -> f64 {
+        match &self.w {
+            None => self.v.iter().zip(e).zip(&self.sd).map(|((v, x), s)| v * x / s).sum(),
+            Some(w) => w.iter().zip(&self.v).map(|(row, vv)| vv * row.iter().zip(e).zip(&self.sd).map(|((a, x), s)| a * x / s).sum::<f64>().tanh()).sum(),
+        }
+    }
+    pub fn value(&self, b: &mut Battle, cfg: &Cfg) -> f64 {
+        let cd = cfg.cdata.expect("EG_VNET needs RACE=1 and CALC_DATA");
+        let f0 = crate::vfeats::side_feats(b, cd, 0); let f1 = crate::vfeats::side_feats(b, cd, 1);
+        let g0 = crate::vfeats::field_feats(b, 0); let g1 = crate::vfeats::field_feats(b, 1);
+        let mut x = feats(b, cfg); x.resize(28, 0.0);
+        let e: Vec<f64> = f0.iter().chain(&f1).chain(&g0).chain(&x).copied().collect();
+        let es: Vec<f64> = f1.iter().chain(&f0).chain(&g1).copied().chain(x.iter().map(|v| -v)).collect();
+        let z = (self.h(&e) - self.h(&es)).clamp(-30.0, 30.0);
+        1.0 / (1.0 + (-z).exp())
+    }
 }
 
 pub fn load_cfg(grid_dir: &str) -> Cfg {
@@ -50,7 +73,11 @@ pub fn load_cfg(grid_dir: &str) -> Cfg {
     let cdata: Option<&'static crate::data::Data> = std::env::var("RACE").ok().map(|_| {
         let p = std::env::var("CALC_DATA").expect("RACE=1 needs CALC_DATA=<champions_data.json>");
         &*Box::leak(Box::new(crate::data::Data::load(&p))) });
-    Cfg { grid_tr, grid_notr, gfoes, vw, autopilot: std::env::var("EG_AUTOPILOT").is_ok(), vw_b, cdata }
+    let vnet = std::env::var("EG_VNET").ok().map(|p| {
+        let v: Value = serde_json::from_str(&std::fs::read_to_string(&p).expect("EG_VNET file")).unwrap();
+        let fl = |a: &Value| a.as_array().unwrap().iter().map(|x| x.as_f64().unwrap()).collect::<Vec<f64>>();
+        VNet { sd: fl(&v["sd"]), w: if v["W"].is_null() { None } else { Some(v["W"].as_array().unwrap().iter().map(fl).collect()) }, v: fl(&v["v"]) } });
+    Cfg { grid_tr, grid_notr, gfoes, vw, autopilot: std::env::var("EG_AUTOPILOT").is_ok(), vw_b, cdata, vnet }
 }
 
 /// BATTLE_POLICY_n=greedy (2026-10-10, the user: an opponent who always clicks the highest damage): a joint option's expected damage this
@@ -518,6 +545,7 @@ fn tr_keep(b: &Battle, s: u8) -> bool {
 }
 /// side 0's win chance as each side sees it: (with side 0's weights, with side 1's weights); equal unless EG_VALUE_B is set
 pub fn value2(b: &mut Battle, cfg: &Cfg) -> (f64, f64) {
+    if cfg.vnet.is_some() { let v = value(b, cfg); return (v, v); }
     let Some((b1, w1)) = &cfg.vw_b else { let v = value(b, cfg); return (v, v); };
     if b.ended { let v = match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 }; return (v, v); }
     let f = feats(b, cfg);
@@ -527,6 +555,7 @@ pub fn value2(b: &mut Battle, cfg: &Cfg) -> (f64, f64) {
 }
 pub fn value(b: &mut Battle, cfg: &Cfg) -> f64 {
     if b.ended { return match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 }; }
+    if let Some(n) = &cfg.vnet { return n.value(b, cfg); }
     let f = feats(b, cfg);
     match &cfg.vw {
         Some((b0, w)) => { let mut z = *b0; for k in 0..w.len().min(f.len()) { z += w[k] * f[k]; } z += perish_adj(b, w); 1.0 / (1.0 + (-z).exp()) }

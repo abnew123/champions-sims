@@ -381,6 +381,24 @@ paralysis, ~50% knockouts). The rest:
   luck pass runs that engine (LUCK_BIN, link evalbar-champ-alt), and build uses its actual_cell where every choice is known. Still to
   come: actual_cell for partly known choices (asked Battle sim).
 
+## Bug hunt beyond luck: hook audit and reachability check (2026-10-12)
+
+The user asked for ways to find bugs without luck swings. Three parts; Battle sim's differential testing (engine against Showdown, now
+from mid-battle positions of real sheets) is theirs and found several engine bugs the same evening.
+- hook_audit.py: Showdown's hooks for every effect on real sheets against the engine's handlers (cval constants and named-list loops
+  counted), ranked by use, in hook_audit.json. Battle sim ports from it (batches 4 to 7).
+- reach.py / reach.js: each turn rebuilt in hindsight and played in Showdown with the log's choices and replacements, over seeds plus
+  extremes (every chance, none, the typical turn, every added effect, each at both rolls); every next-turn feature checked against what
+  the runs reached. Bot games (`reach.py`) and the cached replays (`reach.py replays k/n`, resumable, a progress card per share; each
+  worker is about 2 cores with its node child), `reach.py recheck <file>` for a share's unreached turns, reach_mechanics.py ranks the
+  mechanics in unreached turns. 117,104 replay turns, no errors; of the 71,663 with every choice known, 2.9% leave a feature unreached,
+  mostly knockouts that turn on hidden spreads.
+- Found and fixed: percent-to-HP rounding (pctDue), the bot's fainted slot a (own_side slots=True), abilities gained in battle
+  (abilDue), exact Speed and no tie slack (strict 3), Baton Pass handing on stages and effects (replay.BATON_PASS: 85% of Baton Pass
+  turns unreachable before, 10% after). Harness-only fixes: a locked charge takes no target, a self-target (Curse) is no target, Revival
+  Blessing picks a fainted Pokemon, a move the log shows without a target is a guess (partial), certain events stay certain in the
+  extremes. Still above the base rate: Imposter, Moody (random), Baneful Bunker 32/342, Aura Sphere 60/703, Draining Kiss 33/409.
+
 ## Louisville day 1 (2026-10-10)
 
 The same study on the Louisville day 1 stream (12 games from 1:15 pm, read live; `study.py out/champions/louisville1.ocr.jsonl 3 14340`,

@@ -55,13 +55,14 @@ function mayPlay(reason) {
   if (L.paused) return 'paused';
   if (g.filter(x => now - Date.parse(x.when) < 3600e3).length >= L.max_games_per_hour) return 'hourly cap';
   if (L.max_games_per_day != null && g.filter(x => now - Date.parse(x.when) < 86400e3).length >= L.max_games_per_day) return 'daily cap';
-  if (myRating != null && myRating >= L.stop_if_rating_at_least) return `our rating ${myRating.toFixed(0)} is at the stop`;
+  if (myRating != null && L.stop_if_rating_at_least != null && myRating >= L.stop_if_rating_at_least) return `our rating ${myRating.toFixed(0)} is at the stop`;
   if (stoppedForTop) return 'met a top-of-ladder opponent';
   return null;
 }
 let stoppedForTop = false;
 
 // ---- the connection
+let searchStart = 0;   // when our current ladder search began (limits.json max_search_seconds cancels a longer one)
 let ws, me = null, searching = false, inGames = 0, pmReplied = new Set(), loginAt = 0, joinSent = new Set(), lastIdleLog = 0;
 const rooms = {};   // room id -> {lines, side, req, done, oppRating, turn}
 function send(s) { ws.send(s); }
@@ -211,7 +212,12 @@ async function onReady() {
     const why = mayPlay();
     if (Date.now() - (lastIdleLog || 0) > 5 * 60e3 && !open.some(([k, r]) => r.req)) { lastIdleLog = Date.now();
       if (busy || searching) log(`idle: ${searching ? 'searching' : ''}${inGames ? ` ${inGames} game(s) listed by the server` : ''}${open.length ? ` waiting on ${open.map(([k]) => k.slice(-16)).join(', ')}` : ''}`); }
-    if (!busy && !searching && limits().search_ladder && !why) { const t = await pickTeam(); if (!t) continue; await sleep(LOCAL ? 1000 : rnd(30e3, 120e3)); if (!searching && !mayPlay()) { send(`|/search ${FORMAT}`); searching = true; log('searching'); } }
+    // a search that runs longer than limits.json max_search_seconds is cancelled (the user, 2026-10-12: Showdown's rating window starts at
+    // 100 and widens by 1 every 0.3 s of waiting, so 30 s keeps our side of it near 200; an opponent who has waited longer can still be
+    // matched at their wider window). The loop searches again after its usual pause.
+    const maxs = limits().max_search_seconds;
+    if (searching && !busy && maxs && searchStart && Date.now() - searchStart > maxs * 1e3) { send('|/cancelsearch'); searchStart = 0; searching = false; log(`search cancelled after ${maxs} s`); await sleep(3000); continue; }
+    if (!busy && !searching && limits().search_ladder && !why) { const t = await pickTeam(); if (!t) continue; await sleep(LOCAL ? 1000 : rnd(30e3, 120e3)); if (!searching && !mayPlay()) { send(`|/search ${FORMAT}`); searching = true; searchStart = Date.now(); log('searching'); } }
     else if (why && !busy && !searching) { log('not searching:', why); await sleep(60e3); }
     await refreshTop();
   }

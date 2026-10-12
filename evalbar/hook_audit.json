@@ -1,0 +1,3303 @@
+[
+{
+"kind": "ability",
+"id": "steadfast",
+"uses": 186,
+"showdown": [
+"onFlinch"
+],
+"engine": [],
+"missing": [
+"onFlinch"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "strengthsap",
+"uses": 132,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "moxie",
+"uses": 120,
+"showdown": [
+"onSourceAfterFaint"
+],
+"engine": [],
+"missing": [
+"onSourceAfterFaint"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "beatup",
+"uses": 105,
+"showdown": [
+"onModifyMove"
+],
+"engine": [],
+"missing": [
+"onModifyMove"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "berserk",
+"uses": 105,
+"showdown": [
+"onAfterMoveSecondary",
+"onDamage",
+"onTryEatItem"
+],
+"engine": [],
+"missing": [
+"onAfterMoveSecondary",
+"onDamage",
+"onTryEatItem"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "cutecharm",
+"uses": 96,
+"showdown": [
+"onDamagingHit"
+],
+"engine": [],
+"missing": [
+"onDamagingHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "transform",
+"uses": 86,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "imposter",
+"uses": 86,
+"showdown": [
+"onSwitchIn"
+],
+"engine": [],
+"missing": [
+"onSwitchIn"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "frisk",
+"uses": 79,
+"showdown": [
+"onStart"
+],
+"engine": [],
+"missing": [
+"onStart"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "painsplit",
+"uses": 78,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "highjumpkick",
+"uses": 76,
+"showdown": [
+"onMoveFail"
+],
+"engine": [],
+"missing": [
+"onMoveFail"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "quash",
+"uses": 76,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "ceaselessedge",
+"uses": 75,
+"showdown": [
+"onAfterHit",
+"onAfterSubDamage"
+],
+"engine": [],
+"missing": [
+"onAfterHit",
+"onAfterSubDamage"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "bugbite",
+"uses": 67,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "endeavor",
+"uses": 65,
+"showdown": [
+"onTryImmunity"
+],
+"engine": [],
+"missing": [
+"onTryImmunity"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "angerpoint",
+"uses": 65,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "condition",
+"id": "dragoncheer",
+"uses": 65,
+"showdown": [
+"onModifyCritRatio",
+"onStart"
+],
+"engine": [],
+"missing": [
+"onModifyCritRatio",
+"onStart"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "synthesis",
+"uses": 59,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "moonlight",
+"uses": 58,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "item",
+"id": "wiseglasses",
+"uses": 58,
+"showdown": [
+"onBasePower"
+],
+"engine": [],
+"missing": [
+"onBasePower"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "aromaveil",
+"uses": 53,
+"showdown": [
+"onAllyTryAddVolatile"
+],
+"engine": [],
+"missing": [
+"onAllyTryAddVolatile"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "instruct",
+"uses": 49,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "sweetveil",
+"uses": 47,
+"showdown": [
+"onAllySetStatus",
+"onAllyTryAddVolatile"
+],
+"engine": [],
+"missing": [
+"onAllySetStatus",
+"onAllyTryAddVolatile"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "speedswap",
+"uses": 45,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "unseenfist",
+"uses": 45,
+"showdown": [
+"onHitProtect"
+],
+"engine": [],
+"missing": [
+"onHitProtect"
+],
+"named": false
+},
+{
+"kind": "item",
+"id": "golurkite",
+"uses": 45,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "simplebeam",
+"uses": 44,
+"showdown": [
+"onHit",
+"onTryHit"
+],
+"engine": [],
+"missing": [
+"onHit",
+"onTryHit"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "illuminate",
+"uses": 44,
+"showdown": [
+"onModifyMove",
+"onTryBoost"
+],
+"engine": [],
+"missing": [
+"onModifyMove",
+"onTryBoost"
+],
+"named": false
+},
+{
+"kind": "condition",
+"id": "focusenergy",
+"uses": 44,
+"showdown": [
+"onModifyCritRatio",
+"onStart"
+],
+"engine": [],
+"missing": [
+"onModifyCritRatio",
+"onStart"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "octolock",
+"uses": 40,
+"showdown": [
+"onTryImmunity"
+],
+"engine": [],
+"missing": [
+"onTryImmunity"
+],
+"named": false
+},
+{
+"kind": "condition",
+"id": "octolock",
+"uses": 40,
+"showdown": [
+"onResidual",
+"onStart",
+"onTrapPokemon"
+],
+"engine": [],
+"missing": [
+"onResidual",
+"onStart",
+"onTrapPokemon"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "piercingdrill",
+"uses": 37,
+"showdown": [
+"onHitProtect"
+],
+"engine": [],
+"missing": [
+"onHitProtect"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "supercellslam",
+"uses": 33,
+"showdown": [
+"onMoveFail"
+],
+"engine": [],
+"missing": [
+"onMoveFail"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "bigpecks",
+"uses": 32,
+"showdown": [
+"onTryBoost"
+],
+"engine": [],
+"missing": [
+"onTryBoost"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "sapsipper",
+"uses": 32,
+"showdown": [
+"onAllyTryHitSide",
+"onTryHit"
+],
+"engine": [],
+"missing": [
+"onAllyTryHitSide",
+"onTryHit"
+],
+"named": false
+},
+{
+"kind": "item",
+"id": "zoomlens",
+"uses": 32,
+"showdown": [
+"onSourceModifyAccuracy"
+],
+"engine": [],
+"missing": [
+"onSourceModifyAccuracy"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "rivalry",
+"uses": 30,
+"showdown": [
+"onBasePower"
+],
+"engine": [],
+"missing": [
+"onBasePower"
+],
+"named": false
+},
+{
+"kind": "item",
+"id": "redcard",
+"uses": 30,
+"showdown": [
+"onAfterMoveSecondary"
+],
+"engine": [],
+"missing": [
+"onAfterMoveSecondary"
+],
+"named": false
+},
+{
+"kind": "item",
+"id": "muscleband",
+"uses": 30,
+"showdown": [
+"onBasePower"
+],
+"engine": [],
+"missing": [
+"onBasePower"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "worryseed",
+"uses": 29,
+"showdown": [
+"onHit",
+"onTryHit",
+"onTryImmunity"
+],
+"engine": [],
+"missing": [
+"onHit",
+"onTryHit",
+"onTryImmunity"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "poisonpoint",
+"uses": 29,
+"showdown": [
+"onDamagingHit"
+],
+"engine": [],
+"missing": [
+"onDamagingHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "lashout",
+"uses": 28,
+"showdown": [
+"onBasePower"
+],
+"engine": [],
+"missing": [
+"onBasePower"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "acupressure",
+"uses": 28,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "shedtail",
+"uses": 28,
+"showdown": [
+"onHit",
+"onTryHit"
+],
+"engine": [],
+"missing": [
+"onHit",
+"onTryHit"
+],
+"named": false
+},
+{
+"kind": "item",
+"id": "shellbell",
+"uses": 28,
+"showdown": [
+"onAfterMoveSecondarySelf"
+],
+"engine": [],
+"missing": [
+"onAfterMoveSecondarySelf"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "steelyspirit",
+"uses": 26,
+"showdown": [
+"onAllyBasePower"
+],
+"engine": [],
+"missing": [
+"onAllyBasePower"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "eartheater",
+"uses": 25,
+"showdown": [
+"onTryHit"
+],
+"engine": [],
+"missing": [
+"onTryHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "defog",
+"uses": 23,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "waterabsorb",
+"uses": 22,
+"showdown": [
+"onTryHit"
+],
+"engine": [],
+"missing": [
+"onTryHit"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "liquidooze",
+"uses": 22,
+"showdown": [
+"onSourceTryHeal"
+],
+"engine": [],
+"missing": [
+"onSourceTryHeal"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "burnup",
+"uses": 21,
+"showdown": [
+"onTryMove"
+],
+"engine": [],
+"missing": [
+"onTryMove"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "futuresight",
+"uses": 21,
+"showdown": [
+"onTry"
+],
+"engine": [],
+"missing": [
+"onTry"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "sleeptalk",
+"uses": 21,
+"showdown": [
+"onHit",
+"onTry"
+],
+"engine": [],
+"missing": [
+"onHit",
+"onTry"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "heavymetal",
+"uses": 21,
+"showdown": [
+"onModifyWeight"
+],
+"engine": [],
+"missing": [
+"onModifyWeight"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "gravapple",
+"uses": 20,
+"showdown": [
+"onBasePower"
+],
+"engine": [],
+"missing": [
+"onBasePower"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "cudchew",
+"uses": 19,
+"showdown": [
+"onEatItem",
+"onResidual"
+],
+"engine": [],
+"missing": [
+"onEatItem",
+"onResidual"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "aurawheel",
+"uses": 18,
+"showdown": [
+"onModifyType",
+"onTry"
+],
+"engine": [],
+"missing": [
+"onModifyType",
+"onTry"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "hungerswitch",
+"uses": 18,
+"showdown": [
+"onResidual"
+],
+"engine": [],
+"missing": [
+"onResidual"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "symbiosis",
+"uses": 17,
+"showdown": [
+"onAllyAfterUseItem"
+],
+"engine": [],
+"missing": [
+"onAllyAfterUseItem"
+],
+"named": false
+},
+{
+"kind": "item",
+"id": "leppaberry",
+"uses": 17,
+"showdown": [
+"onEat",
+"onUpdate"
+],
+"engine": [],
+"missing": [
+"onEat",
+"onUpdate"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "fling",
+"uses": 16,
+"showdown": [
+"onPrepareHit"
+],
+"engine": [],
+"missing": [
+"onPrepareHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "topsyturvy",
+"uses": 16,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "roleplay",
+"uses": 15,
+"showdown": [
+"onHit",
+"onTryHit"
+],
+"engine": [],
+"missing": [
+"onHit",
+"onTryHit"
+],
+"named": false
+},
+{
+"kind": "item",
+"id": "sharpedonite",
+"uses": 15,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": false
+},
+{
+"kind": "item",
+"id": "metronome",
+"uses": 15,
+"showdown": [
+"onStart"
+],
+"engine": [],
+"missing": [
+"onStart"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "screencleaner",
+"uses": 14,
+"showdown": [
+"onStart"
+],
+"engine": [],
+"missing": [
+"onStart"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "rapidspin",
+"uses": 13,
+"showdown": [
+"onAfterHit",
+"onAfterSubDamage"
+],
+"engine": [],
+"missing": [
+"onAfterHit",
+"onAfterSubDamage"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "morningsun",
+"uses": 13,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "noretreat",
+"uses": 12,
+"showdown": [
+"onTry"
+],
+"engine": [],
+"missing": [
+"onTry"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "guardsplit",
+"uses": 12,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "item",
+"id": "bigroot",
+"uses": 12,
+"showdown": [
+"onTryHeal"
+],
+"engine": [],
+"missing": [
+"onTryHeal"
+],
+"named": false
+},
+{
+"kind": "condition",
+"id": "noretreat",
+"uses": 12,
+"showdown": [
+"onStart",
+"onTrapPokemon"
+],
+"engine": [],
+"missing": [
+"onStart",
+"onTrapPokemon"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "growth",
+"uses": 11,
+"showdown": [
+"onModifyMove"
+],
+"engine": [],
+"missing": [
+"onModifyMove"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "courtchange",
+"uses": 11,
+"showdown": [
+"onHitField"
+],
+"engine": [],
+"missing": [
+"onHitField"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "endure",
+"uses": 11,
+"showdown": [
+"onHit",
+"onPrepareHit"
+],
+"engine": [],
+"missing": [
+"onHit",
+"onPrepareHit"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "tangledfeet",
+"uses": 11,
+"showdown": [
+"onModifyAccuracy"
+],
+"engine": [],
+"missing": [
+"onModifyAccuracy"
+],
+"named": false
+},
+{
+"kind": "condition",
+"id": "endure",
+"uses": 11,
+"showdown": [
+"onDamage",
+"onStart"
+],
+"engine": [],
+"missing": [
+"onDamage",
+"onStart"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "jawlock",
+"uses": 10,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "lightmetal",
+"uses": 9,
+"showdown": [
+"onModifyWeight"
+],
+"engine": [],
+"missing": [
+"onModifyWeight"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "pickup",
+"uses": 9,
+"showdown": [
+"onResidual"
+],
+"engine": [],
+"missing": [
+"onResidual"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "uproar",
+"uses": 8,
+"showdown": [
+"onTryHit"
+],
+"engine": [],
+"missing": [
+"onTryHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "tidyup",
+"uses": 8,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "meteorbeam",
+"uses": 8,
+"showdown": [
+"onTryMove"
+],
+"engine": [],
+"missing": [
+"onTryMove"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "analytic",
+"uses": 8,
+"showdown": [
+"onBasePower"
+],
+"engine": [],
+"missing": [
+"onBasePower"
+],
+"named": false
+},
+{
+"kind": "item",
+"id": "scolipite",
+"uses": 8,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "copycat",
+"uses": 7,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "magicpowder",
+"uses": 7,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "immunity",
+"uses": 7,
+"showdown": [
+"onSetStatus",
+"onUpdate"
+],
+"engine": [],
+"missing": [
+"onSetStatus",
+"onUpdate"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "innardsout",
+"uses": 7,
+"showdown": [
+"onDamagingHit"
+],
+"engine": [],
+"missing": [
+"onDamagingHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "flyingpress",
+"uses": 6,
+"showdown": [
+"onEffectiveness"
+],
+"engine": [],
+"missing": [
+"onEffectiveness"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "trickortreat",
+"uses": 6,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "hustle",
+"uses": 6,
+"showdown": [
+"onModifyAtk",
+"onSourceModifyAccuracy"
+],
+"engine": [],
+"missing": [
+"onModifyAtk",
+"onSourceModifyAccuracy"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "motordrive",
+"uses": 6,
+"showdown": [
+"onTryHit"
+],
+"engine": [],
+"missing": [
+"onTryHit"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "gluttony",
+"uses": 6,
+"showdown": [
+"onDamage",
+"onStart"
+],
+"engine": [],
+"missing": [
+"onDamage",
+"onStart"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "thief",
+"uses": 5,
+"showdown": [
+"onAfterHit"
+],
+"engine": [],
+"missing": [
+"onAfterHit"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "merciless",
+"uses": 5,
+"showdown": [
+"onModifyCritRatio"
+],
+"engine": [],
+"missing": [
+"onModifyCritRatio"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "opportunist",
+"uses": 5,
+"showdown": [
+"onAnyAfterMega",
+"onAnyAfterMove",
+"onAnyAfterTerastallization",
+"onAnySwitchIn",
+"onEnd",
+"onFoeAfterBoost",
+"onResidual"
+],
+"engine": [],
+"missing": [
+"onAnyAfterMega",
+"onAnyAfterMove",
+"onAnyAfterTerastallization",
+"onAnySwitchIn",
+"onEnd",
+"onFoeAfterBoost",
+"onResidual"
+],
+"named": false
+},
+{
+"kind": "item",
+"id": "mistyseed",
+"uses": 5,
+"showdown": [
+"onStart",
+"onTerrainChange"
+],
+"engine": [],
+"missing": [
+"onStart",
+"onTerrainChange"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "venoshock",
+"uses": 4,
+"showdown": [
+"onBasePower"
+],
+"engine": [],
+"missing": [
+"onBasePower"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "swallow",
+"uses": 4,
+"showdown": [
+"onHit",
+"onTry"
+],
+"engine": [],
+"missing": [
+"onHit",
+"onTry"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "meanlook",
+"uses": 4,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "reflecttype",
+"uses": 3,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "skyattack",
+"uses": 3,
+"showdown": [
+"onTryMove"
+],
+"engine": [],
+"missing": [
+"onTryMove"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "recycle",
+"uses": 3,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "beakblast",
+"uses": 3,
+"showdown": [
+"onAfterMove"
+],
+"engine": [],
+"missing": [
+"onAfterMove"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "powersplit",
+"uses": 3,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "supersweetsyrup",
+"uses": 3,
+"showdown": [
+"onStart"
+],
+"engine": [],
+"missing": [
+"onStart"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "cheekpouch",
+"uses": 3,
+"showdown": [
+"onEatItem"
+],
+"engine": [],
+"missing": [
+"onEatItem"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "guarddog",
+"uses": 3,
+"showdown": [
+"onDragOut",
+"onTryBoost"
+],
+"engine": [],
+"missing": [
+"onDragOut",
+"onTryBoost"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "shedskin",
+"uses": 3,
+"showdown": [
+"onResidual"
+],
+"engine": [],
+"missing": [
+"onResidual"
+],
+"named": false
+},
+{
+"kind": "condition",
+"id": "powertrick",
+"uses": 3,
+"showdown": [
+"onCopy",
+"onEnd",
+"onRestart",
+"onStart"
+],
+"engine": [],
+"missing": [
+"onCopy",
+"onEnd",
+"onRestart",
+"onStart"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "forestscurse",
+"uses": 2,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "block",
+"uses": 2,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "fellstinger",
+"uses": 2,
+"showdown": [
+"onAfterMoveSecondarySelf"
+],
+"engine": [],
+"missing": [
+"onAfterMoveSecondarySelf"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "grasspelt",
+"uses": 2,
+"showdown": [
+"onModifyDef"
+],
+"engine": [],
+"missing": [
+"onModifyDef"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "anticipation",
+"uses": 2,
+"showdown": [
+"onStart"
+],
+"engine": [],
+"missing": [
+"onStart"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "suctioncups",
+"uses": 2,
+"showdown": [
+"onDragOut"
+],
+"engine": [],
+"missing": [
+"onDragOut"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "longreach",
+"uses": 2,
+"showdown": [
+"onModifyMove"
+],
+"engine": [],
+"missing": [
+"onModifyMove"
+],
+"named": false
+},
+{
+"kind": "item",
+"id": "focusband",
+"uses": 2,
+"showdown": [
+"onDamage"
+],
+"engine": [],
+"missing": [
+"onDamage"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "sparklingaria",
+"uses": 1,
+"showdown": [
+"onAfterMove"
+],
+"engine": [],
+"missing": [
+"onAfterMove"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "comeuppance",
+"uses": 1,
+"showdown": [
+"onModifyTarget",
+"onTry"
+],
+"engine": [],
+"missing": [
+"onModifyTarget",
+"onTry"
+],
+"named": false
+},
+{
+"kind": "move",
+"id": "pluck",
+"uses": 1,
+"showdown": [
+"onHit"
+],
+"engine": [],
+"missing": [
+"onHit"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "mimicry",
+"uses": 1,
+"showdown": [
+"onStart",
+"onTerrainChange"
+],
+"engine": [],
+"missing": [
+"onStart",
+"onTerrainChange"
+],
+"named": false
+},
+{
+"kind": "ability",
+"id": "poisonheal",
+"uses": 1,
+"showdown": [
+"onDamage"
+],
+"engine": [],
+"missing": [
+"onDamage"
+],
+"named": false
+},
+{
+"kind": "item",
+"id": "raichunitey",
+"uses": 11094,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "garchompitez",
+"uses": 9447,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "charizarditey",
+"uses": 6136,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "salamencite",
+"uses": 5213,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "floettite",
+"uses": 4507,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "staraptite",
+"uses": 3344,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "golisopite",
+"uses": 3125,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "delphoxite",
+"uses": 2436,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "gardevoirite",
+"uses": 2176,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "gengarite",
+"uses": 1739,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "dragoninite",
+"uses": 1708,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "tyranitarite",
+"uses": 1697,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "metagrossite",
+"uses": 1635,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "froslassite",
+"uses": 1624,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "swampertite",
+"uses": 1220,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "glimmoranite",
+"uses": 878,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "aerodactylite",
+"uses": 810,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "cameruptite",
+"uses": 773,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "lucarionitez",
+"uses": 734,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "blastoisinite",
+"uses": 696,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "blazikenite",
+"uses": 629,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "baxcalibrite",
+"uses": 480,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "meowsticite",
+"uses": 475,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "pyroarite",
+"uses": 422,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "absolitez",
+"uses": 371,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "mawilite",
+"uses": 355,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "raichunitex",
+"uses": 315,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "scovillainite",
+"uses": 279,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "sceptilite",
+"uses": 200,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "meganiumite",
+"uses": 198,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "lopunnite",
+"uses": 191,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "garchompite",
+"uses": 164,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "venusaurite",
+"uses": 154,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "kangaskhanite",
+"uses": 147,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "shellarmor",
+"uses": 144,
+"showdown": [
+"onCriticalHit"
+],
+"engine": [],
+"missing": [
+"onCriticalHit"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "starminite",
+"uses": 134,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "altarianite",
+"uses": 126,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "ampharosite",
+"uses": 122,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "alakazite",
+"uses": 120,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "charizarditex",
+"uses": 103,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "chesnaughtite",
+"uses": 102,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "scraftinite",
+"uses": 100,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "gyaradosite",
+"uses": 100,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "drampanite",
+"uses": 83,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "manectite",
+"uses": 79,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "reckless",
+"uses": 78,
+"showdown": [
+"onBasePower"
+],
+"engine": [],
+"missing": [
+"onBasePower"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "pidgeotite",
+"uses": 78,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "greninjite",
+"uses": 73,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "houndoominite",
+"uses": 72,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "move",
+"id": "stockpile",
+"uses": 71,
+"showdown": [
+"onTry"
+],
+"engine": [],
+"missing": [
+"onTry"
+],
+"named": true
+},
+{
+"kind": "condition",
+"id": "stockpile",
+"uses": 71,
+"showdown": [
+"onEnd",
+"onRestart",
+"onStart"
+],
+"engine": [],
+"missing": [
+"onEnd",
+"onRestart",
+"onStart"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "steelixite",
+"uses": 62,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "malamarite",
+"uses": 61,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "slowbronite",
+"uses": 60,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "lucarionite",
+"uses": 59,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "crabominite",
+"uses": 50,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "ironball",
+"uses": 50,
+"showdown": [
+"onEffectiveness",
+"onModifySpe"
+],
+"engine": [],
+"missing": [
+"onEffectiveness",
+"onModifySpe"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "galladite",
+"uses": 49,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "aggronite",
+"uses": 47,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "skarmorite",
+"uses": 46,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "move",
+"id": "mirrorcoat",
+"uses": 45,
+"showdown": [
+"onTry"
+],
+"engine": [],
+"missing": [
+"onTry"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "scizorite",
+"uses": 45,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "abomasite",
+"uses": 44,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "dragalgite",
+"uses": 44,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "dragonize",
+"uses": 43,
+"showdown": [
+"onBasePower",
+"onModifyType"
+],
+"engine": [],
+"missing": [
+"onBasePower",
+"onModifyType"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "feraligite",
+"uses": 43,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "hawluchanite",
+"uses": 43,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "eelevate",
+"uses": 42,
+"showdown": [
+"onSourceAfterFaint"
+],
+"engine": [],
+"missing": [
+"onSourceAfterFaint"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "eelektrossite",
+"uses": 42,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "chandelurite",
+"uses": 39,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "chimechite",
+"uses": 39,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "excadrite",
+"uses": 37,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "banettite",
+"uses": 37,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "audinite",
+"uses": 34,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "condition",
+"id": "minimize",
+"uses": 33,
+"showdown": [
+"onAccuracy",
+"onRestart",
+"onSourceModifyDamage"
+],
+"engine": [],
+"missing": [
+"onAccuracy",
+"onRestart",
+"onSourceModifyDamage"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "beedrillite",
+"uses": 30,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "barbaracite",
+"uses": 30,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "harvest",
+"uses": 29,
+"showdown": [
+"onResidual"
+],
+"engine": [],
+"missing": [
+"onResidual"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "clefablite",
+"uses": 25,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "purepower",
+"uses": 24,
+"showdown": [
+"onModifyAtk"
+],
+"engine": [],
+"missing": [
+"onModifyAtk"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "marvelscale",
+"uses": 23,
+"showdown": [
+"onModifyDef"
+],
+"engine": [],
+"missing": [
+"onModifyDef"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "sablenite",
+"uses": 22,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "condition",
+"id": "smackdown",
+"uses": 22,
+"showdown": [
+"onRestart",
+"onStart"
+],
+"engine": [],
+"missing": [
+"onRestart",
+"onStart"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "strongjaw",
+"uses": 21,
+"showdown": [
+"onBasePower"
+],
+"engine": [],
+"missing": [
+"onBasePower"
+],
+"named": true
+},
+{
+"kind": "move",
+"id": "ragingbull",
+"uses": 20,
+"showdown": [
+"onModifyType",
+"onTryHit"
+],
+"engine": [
+"onTryHit"
+],
+"missing": [
+"onModifyType"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "refrigerate",
+"uses": 19,
+"showdown": [
+"onBasePower",
+"onModifyType"
+],
+"engine": [],
+"missing": [
+"onBasePower",
+"onModifyType"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "glalitite",
+"uses": 19,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "shielddust",
+"uses": 16,
+"showdown": [
+"onModifySecondaries"
+],
+"engine": [],
+"missing": [
+"onModifySecondaries"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "overcoat",
+"uses": 15,
+"showdown": [
+"onImmunity",
+"onTryHit"
+],
+"engine": [],
+"missing": [
+"onImmunity",
+"onTryHit"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "emboarite",
+"uses": 15,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "condition",
+"id": "stickyweb",
+"uses": 15,
+"showdown": [
+"onSideStart",
+"onSwitchIn"
+],
+"engine": [],
+"missing": [
+"onSideStart",
+"onSwitchIn"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "plus",
+"uses": 13,
+"showdown": [
+"onModifySpA"
+],
+"engine": [],
+"missing": [
+"onModifySpA"
+],
+"named": true
+},
+{
+"kind": "move",
+"id": "solarblade",
+"uses": 11,
+"showdown": [
+"onBasePower",
+"onTryMove"
+],
+"engine": [],
+"missing": [
+"onBasePower",
+"onTryMove"
+],
+"named": true
+},
+{
+"kind": "condition",
+"id": "spikes",
+"uses": 11,
+"showdown": [
+"onSideRestart",
+"onSideStart",
+"onSwitchIn"
+],
+"engine": [],
+"missing": [
+"onSideRestart",
+"onSideStart",
+"onSwitchIn"
+],
+"named": true
+},
+{
+"kind": "move",
+"id": "counter",
+"uses": 9,
+"showdown": [
+"onTry"
+],
+"engine": [],
+"missing": [
+"onTry"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "falinksite",
+"uses": 9,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "slushrush",
+"uses": 8,
+"showdown": [
+"onModifySpe"
+],
+"engine": [],
+"missing": [
+"onModifySpe"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "minus",
+"uses": 7,
+"showdown": [
+"onModifySpA"
+],
+"engine": [],
+"missing": [
+"onModifySpA"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "victreebelite",
+"uses": 7,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "move",
+"id": "heatcrash",
+"uses": 5,
+"showdown": [
+"onTryHit"
+],
+"engine": [],
+"missing": [
+"onTryHit"
+],
+"named": true
+},
+{
+"kind": "move",
+"id": "gastroacid",
+"uses": 5,
+"showdown": [
+"onTryHit"
+],
+"engine": [],
+"missing": [
+"onTryHit"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "stickyhold",
+"uses": 5,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "skilllink",
+"uses": 5,
+"showdown": [
+"onModifyMove"
+],
+"engine": [],
+"missing": [
+"onModifyMove"
+],
+"named": true
+},
+{
+"kind": "condition",
+"id": "gastroacid",
+"uses": 5,
+"showdown": [
+"onCopy",
+"onStart"
+],
+"engine": [],
+"missing": [
+"onCopy",
+"onStart"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "heracronite",
+"uses": 4,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "move",
+"id": "mistyexplosion",
+"uses": 3,
+"showdown": [
+"onBasePower"
+],
+"engine": [],
+"missing": [
+"onBasePower"
+],
+"named": true
+},
+{
+"kind": "move",
+"id": "dig",
+"uses": 3,
+"showdown": [
+"onTryMove"
+],
+"engine": [],
+"missing": [
+"onTryMove"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "klutz",
+"uses": 3,
+"showdown": [
+"onStart"
+],
+"engine": [],
+"missing": [
+"onStart"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "fluffy",
+"uses": 3,
+"showdown": [
+"onSourceModifyDamage"
+],
+"engine": [],
+"missing": [
+"onSourceModifyDamage"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "medichamite",
+"uses": 3,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "move",
+"id": "fly",
+"uses": 2,
+"showdown": [
+"onTryMove"
+],
+"engine": [],
+"missing": [
+"onTryMove"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "quickfeet",
+"uses": 2,
+"showdown": [
+"onModifySpe"
+],
+"engine": [],
+"missing": [
+"onModifySpe"
+],
+"named": true
+},
+{
+"kind": "move",
+"id": "attract",
+"uses": 1,
+"showdown": [
+"onTryImmunity"
+],
+"engine": [],
+"missing": [
+"onTryImmunity"
+],
+"named": true
+},
+{
+"kind": "move",
+"id": "dive",
+"uses": 1,
+"showdown": [
+"onTryMove"
+],
+"engine": [],
+"missing": [
+"onTryMove"
+],
+"named": true
+},
+{
+"kind": "ability",
+"id": "battlearmor",
+"uses": 1,
+"showdown": [
+"onCriticalHit"
+],
+"engine": [],
+"missing": [
+"onCriticalHit"
+],
+"named": true
+},
+{
+"kind": "item",
+"id": "pinsirite",
+"uses": 1,
+"showdown": [
+"onTakeItem"
+],
+"engine": [],
+"missing": [
+"onTakeItem"
+],
+"named": true
+},
+{
+"kind": "condition",
+"id": "torment",
+"uses": 1,
+"showdown": [
+"onDisableMove",
+"onEnd",
+"onStart"
+],
+"engine": [],
+"missing": [
+"onDisableMove",
+"onEnd",
+"onStart"
+],
+"named": true
+},
+{
+"kind": "condition",
+"id": "attract",
+"uses": 1,
+"showdown": [
+"onBeforeMove",
+"onEnd",
+"onStart",
+"onUpdate"
+],
+"engine": [],
+"missing": [
+"onBeforeMove",
+"onEnd",
+"onStart",
+"onUpdate"
+],
+"named": true
+},
+{
+"kind": "condition",
+"id": "trapped",
+"uses": 0,
+"showdown": [
+"onStart",
+"onTrapPokemon"
+],
+"engine": [],
+"missing": [
+"onStart",
+"onTrapPokemon"
+],
+"named": true
+},
+{
+"kind": "condition",
+"id": "mustrecharge",
+"uses": 0,
+"showdown": [
+"onBeforeMove",
+"onLockMove",
+"onStart"
+],
+"engine": [
+"onBeforeMove",
+"onStart",
+"onSwitchIn"
+],
+"missing": [
+"onLockMove"
+],
+"named": true
+}
+]

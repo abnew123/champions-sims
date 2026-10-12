@@ -302,7 +302,7 @@ class Live:
             import botpos as BP
             sd = rq['side']['id']; s.bot_side = sd
             if s.team is None: s.team = bot_team(pre, sd)
-            mons, why = BP.own_side(step['state'][sd], sets[sd], rq, BP.team_sets(s.team), dropped)
+            mons, why = BP.own_side(step['state'][sd], sets[sd], rq, BP.team_sets(s.team), dropped, slots=True)
             why_sp = BP.refine_opponent(src, gsrc, sets, sd, rq, strict=2)   # the opponent's spreads against the turn order seen so far
             if not hindsight: s.spread_why[t] = why_sp
             if mons:

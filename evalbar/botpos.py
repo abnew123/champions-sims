@@ -84,7 +84,7 @@ def refine_opponent(pre, gp, sets, side, req, strict=False):
 def fresh(st):
     return {**st, 'mega': False, 'hpPct': 100, 'fainted': False, 'status': '', 'slept': 0, 'boosts': {}, 'itemNow': st['item'], 'moved': False,
             'stall': False, 'lock': '', 'vol': [], 'onField': False, 'last': '', 'volarg': {}}
-def own_side(state, sets, req, mine, dropped):
+def own_side(state, sets, req, mine, dropped, slots=False):
     """the bot's side from its request, with what the log tracks laid under it; None if the log and the request disagree"""
     out = []
     for k, p in enumerate(req['side']['pokemon']):
@@ -101,7 +101,10 @@ def own_side(state, sets, req, mine, dropped):
         d = LV.spec_mon(m, st) if m else fresh(st)
         d.update(hpPct=hp, status=status, fainted=fnt, itemNow=item, onField=bool(p.get('active')) and not fnt)
         if fnt: d['boosts'] = {}
-        out.append((0 if k == 0 and d['onField'] else 1 if k == 1 and d['onField'] else 2 if not fnt else 3, k, d))
+        # slots (the eval bar's): a fainted Pokemon still in slot a keeps it, as the log's positions (and so the turn's choices) have it;
+        # without, the one left standing moves up to slot a (the bot's positions; it maps its choices by species)
+        on = p.get('active') if slots else d['onField']
+        out.append((0 if k == 0 and on else 1 if k == 1 and on else 2 if not fnt else 3, k, d))
     return [d for _, _, d in sorted(out, key=lambda x: x[:2])], None
 def bot_position(log, request, side, topk=1, team=None, tag='bot'):
     req = json.loads(request) if isinstance(request, str) else request

@@ -3,7 +3,7 @@ position as the eval bar rebuilds it in hindsight (live.py), the choices and rep
 (reach.js), and the next turn's start as the log has it compared with every seed's. A turn no seed reproduces points at the log reading
 (replay.py), the rebuild (positions.js) or a guessed spread; one that only HP rules out is likely a spread, so the two are kept apart.
   python3 evalbar/reach.py [games] [seeds=32]          writes evalbar/out/reach/report.json and prints the turns no seed reproduces"""
-import os, re, sys, json, glob, collections, subprocess
+import os, re, sys, json, glob, time, collections, subprocess
 import common as C, live as L, replay as R, procs as P, spreads as SPR
 OUT = os.path.join(C.HERE, 'out', 'reach'); E = SPR.E
 toid = R.toid
@@ -28,7 +28,7 @@ def choose(spec, si):
         s = f'move {k + 1}'
         if tgt_type in NEEDS:
             t = a.get('target') or a.get('spreadTarget') or ''
-            if not t: partial = partial or 'move' not in a; t = foe + 'a'
+            if not t: partial = True; t = foe + 'a'                            # no target in the log (a failed Sucker Punch): a guess
             n = (1 if t[2] == 'a' else 2) if t[:2] == foe else -(1 if t[2] == 'a' else 2)
             s += f' {n}'
         if a.get('mega'): s += ' mega'
@@ -110,10 +110,18 @@ def cases(f, seeds, bot=True):
             cs.append({'spec': spec, 'choose': {'p1': c1, 'p2': c2}, 'replace': spec.get('replace') or L.replacements(log, t), 'seeds': max(8, round(seeds * w))})
         out.append({'game': num, 'turn': t, 'cases': cs, 'partial': part, 'obs': observed(steps[t + 1]['state'], steps[t + 1]['state']), 'exact': 'p1' if bot else None})
     return out
-def run(files, seeds, bot=True, out=None):
-    """out: a .jsonl the rows are appended to as each game finishes (games already in it are skipped, so a run resumes)"""
+def stamp(path, title, total, done0):
+    """a progress card on the shared status page (localhost:8766, status.py): <path>.run.json, path counted in lines (one per game)"""
+    json.dump({'title': title, 'out': os.path.relpath(path, os.path.join(C.HERE, 'out')), 'total': total, 'done0': done0, 'started': time.time(),
+               'threads': 2, 'seeds': 0, 'staged': False}, open(path + '.run.json', 'w'))
+def run(files, seeds, bot=True, out=None, title=None):
+    """out: a .jsonl the rows are appended to as each game finishes (games already in it are skipped, so a run resumes); with title, a
+    progress card (each worker is about 2 cores: this process and its Showdown child)"""
     os.makedirs(OUT, exist_ok=True); rows = []
     done = {json.loads(l)['game'] for l in open(out)} if out and os.path.exists(out) else set()
+    prog = out[:-6] + '.games' if out else None
+    if prog and title:
+        open(prog, 'w').writelines(g + '\n' for g in sorted(done)); stamp(prog, title, len(files), len(done))
     for f in files:
         if re.search(r'-(\d{6,})', os.path.basename(f)).group(1) in done: continue
         try: cs = cases(f, seeds, bot)
@@ -134,14 +142,37 @@ def run(files, seeds, bot=True, out=None):
         rows += new
         if out:
             with open(out, 'a') as fh: fh.writelines(json.dumps(r) + '\n' for r in (new or [{'game': todo[0]['game'], 'turn': 0, 'empty': True}]))
+            if prog:
+                with open(prog, 'a') as fh: fh.write(todo[0]['game'] + '\n')
     return rows
 if __name__ == '__main__':
     P.own()
     a = sys.argv[1:]; seeds = next((int(x[6:]) for x in a if x.startswith('seeds=')), 32); n = next((int(x) for x in a if x.isdigit()), None)
+    if a and a[0] == 'recheck':                                                 # recheck <file.jsonl>: its unreached turns again
+        f = a[1]; rows = [json.loads(l) for l in open(f)]
+        bad = collections.defaultdict(set)
+        for r in rows:
+            if r.get('unreached'): bad[r['game']].add(r['turn'])
+        rid = {x.split('-')[-1]: x for x, _ in C.games()}; fixed = {}
+        for g, ts in bad.items():
+            cs = [c for c in cases(os.path.join(C.LOGS, rid[g] + '.log'), seeds, bot=False) if c['turn'] in ts and 'cases' in c]
+            if not cs: continue
+            qf, of = os.path.join(OUT, f'q{os.getpid()}.json'), os.path.join(OUT, f'r{os.getpid()}.json'); json.dump([x for c in cs for x in c['cases']], open(qf, 'w'))
+            subprocess.run([P.exe('node'), os.path.join(C.HERE, 'reach.js'), qf, of], cwd=os.path.join(C.MAIN, 'pssim'), check=True)
+            res = iter(json.load(open(of)))
+            for c in cs:
+                st = [s for r in [next(res) for _ in c['cases']] for s in r.get('states', []) if s.get('turnDone')]
+                if st: b_, h_ = reach(c['obs'], st, c['exact']); fixed[(g, c['turn'])] = (b_, h_, c['partial'])
+        out = []
+        for r in rows:
+            if (r['game'], r['turn']) in fixed: r['unreached'], r['hp'], r['partial'] = fixed[(r['game'], r['turn'])]
+            out.append(r)
+        open(f, 'w').writelines(json.dumps(r) + '\n' for r in out)
+        sys.exit(print(f'{f}: {len(fixed)} turns rechecked, {sum(1 for v in fixed.values() if v[0])} still unreached'))
     if a and a[0] == 'replays':                                                 # replays k/n: the k-th of n shares of the cached Bo3 replays
         k, m = map(int, a[1].split('/'))
         files = sorted(os.path.join(C.LOGS, rid + '.log') for rid, _ in C.games() if 'regmcbo3' in rid)[k::m]
-        rows = run(files, seeds, bot=False, out=os.path.join(OUT, f'replays_{k}of{m}.jsonl'))
+        rows = run(files, seeds, bot=False, out=os.path.join(OUT, f'replays_{k}of{m}.jsonl'), title=f'Reachability check: replays, share {k + 1} of {m} (games)')
         sys.exit(print(f'share {k}/{m}: {len(rows)} new rows'))
     files = sorted((f for f in glob.glob(os.path.join(C.MAIN, 'bot', 'out', 'battle-*bo3-*.log')) if re.search(r'-\d{6,}(-[a-z0-9]+)?\.log$', f)), key=os.path.getmtime)
     rows = run(files[:n] if n else files, seeds)

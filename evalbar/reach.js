@@ -25,10 +25,12 @@ function play(c, seed, mode) {
   // besides the seeds: every chance roll succeeding (crits, secondaries, accuracy) with the highest damage ('hi') and none with the lowest
   // ('lo'); and the typical turn, the likely chances happening and the unlikely not (hits land, no crit, no 10% secondary), at the highest
   // and the lowest damage ('typ+', 'typ-')
+  // and 'sec+' / 'sec-': every added effect happening (a move's secondaries, a 30% contact ability) but nothing else unlikely (no crit,
+  // no full paralysis), at the highest and the lowest damage: a 10% effect on a target that lives is otherwise rare in the seeds
   if (mode) {
-    const top = mode === 'hi' || mode === 'typ+';
-    b.randomChance = mode === 'hi' ? () => true : mode === 'lo' ? (num, den) => num >= den : (num, den) => num / den >= 0.5;   // a certain event still happens
-    b.random = (m, n) => { if (n === undefined) { n = m; m = 0; } if (mode.startsWith('typ') && n === 100 && !m) return 99; return top ? (m || 0) : Math.max(m || 0, (n || 1) - 1); };
+    const top = mode === 'hi' || mode === 'typ+' || mode === 'sec+', sec = mode.startsWith('sec');
+    b.randomChance = mode === 'hi' ? () => true : mode === 'lo' ? (num, den) => num >= den : sec ? (num, den) => num / den >= 0.5 || den === 10 : (num, den) => num / den >= 0.5;
+    b.random = (m, n) => { if (n === undefined) { n = m; m = 0; } if (n === 100 && !m) return sec ? 0 : mode.startsWith('typ') ? 99 : top ? 0 : 99; return top ? (m || 0) : Math.max(m || 0, (n || 1) - 1); };
   }
   const t0 = b.turn, sides = ['p1', 'p2'], left = {p1: [...(c.replace.p1 || [])], p2: [...(c.replace.p2 || [])]};
   for (const sd of sides) if (!b.choose(sd, c.choose[sd] || 'default')) b.choose(sd, 'default');
@@ -50,7 +52,7 @@ function play(c, seed, mode) {
   return {...summary(b), turnDone: b.turn > t0 || b.ended, ...(c.debug ? {log: b.log.slice(-60).filter(l => !l.startsWith('|t:|') && !l.startsWith('|split'))} : {})};
 }
 const out = JSON.parse(fs.readFileSync(cf)).map(c => {
-  try { const states = ['hi', 'lo', 'typ+', 'typ-'].map(m => play(c, [1, 2, 3, 4], m)); for (let s = 0; s < (c.seeds || 32); s++) states.push(play(c, [s + 1, 7, 11, 13])); return {states}; }
+  try { const states = ['hi', 'lo', 'typ+', 'typ-', 'sec+', 'sec-'].map(m => play(c, [1, 2, 3, 4], m)); for (let s = 0; s < (c.seeds || 32); s++) states.push(play(c, [s + 1, 7, 11, 13])); return {states}; }
   catch (e) { return {error: String(e.message).slice(0, 160)}; }
 });
 fs.writeFileSync(outf, JSON.stringify(out));

@@ -1146,5 +1146,10 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
   per game (the matchup features at every leaf; not yet optimised).
 - More data: `protect_replays.py new` fetched 14,262 Bo3 replays from 2026-10-04 to 10-12 (19,194 cached); they lean low-rated (45% of
   the rated ones 1000-1099). `value_data.py positions new` / `feats new` / `search 6 new` put them in part 'new' (the fit and held-out
-  sets stay as they were for comparisons). Next: refit on fit + new (bigger nets, rating weights), a second round of distillation from
-  the search with the net at the leaves, and speeding up vfeats.
+  sets stay as they were for comparisons).
+- Refit on fit + new (130,759 positions / 17,919 games), search targets, held out as before: linear 0.5375, h16 0.5335, h32 0.5355, h64
+  (l2 3e-4) 0.5330, **h64 (l2 1e-3) 0.5317** (search 0.5219, static 0.5533: 69% of the gap). Exported: results/value/vnet_h64_search_fit+new.json.
+  With it at the leaves (dev build, which also carries the race memo fix; baselines rerun on it): held-out one-turn search 0.5221 vs
+  0.5301 with sym2 (**-0.0080 ± 0.0052**; h16: -0.0066), 3.6 vs 2.1 s a position; self-play on the 800 pool starts: side 0 +0.9 ± 2.2,
+  side 1 +5.8 ± 2.2, **pooled +3.3 ± 1.5** over 1,600 games (the first evaluator change here with a self-play gain beyond 2 SE), 2.1x the
+  time per game. Both nets helped side 1 more than side 0 (within noise so far).

@@ -16,13 +16,17 @@ def decisions():
         f = os.path.join(ROOT, 'bot', 'out', g['room'] + '.log')
         team = teams.get(g.get('team')) or pool.get(g.get('team'))
         if not os.path.exists(f) or not team: continue
-        L = open(f, errors='ignore').read().split('\n'); req = None
+        # Showdown sends a turn's request right after the log chunk that ends with |turn|N: each move request (one with a top-level
+        # 'active', not a replacement) is a decision, made on the log up to it (2026-10-12: this used to pair turn N's log with the
+        # request of turn N-1)
+        L = open(f, errors='ignore').read().split('\n'); turn = 0
         for i, l in enumerate(L):
-            if l.startswith('|request|') and '"active"' in l:
+            if l.startswith('|turn|'): turn = int(l.split('|')[2])
+            elif l.startswith('|request|'):
                 try: req = json.loads(l[9:])
-                except Exception: req = None
-            elif l.startswith('|turn|') and req and not req.get('forceSwitch'):
-                yield g, team, '\n'.join(L[:i + 1]), req, int(l.split('|')[2]); req = None
+                except Exception: continue
+                if req.get('active') and not req.get('forceSwitch') and not req.get('wait') and turn:
+                    yield g, team, '\n'.join(L[:i]), req, turn
 def build(evalbar, prefix):
     sys.path.insert(0, evalbar); sys.path.insert(0, os.path.join(ROOT, 'bot'))
     os.environ.setdefault('CHAMP_MAIN', ROOT)

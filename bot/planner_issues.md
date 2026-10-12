@@ -35,3 +35,24 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
    Garchomp Z, Mega Absol Z) in rebuilt positions. Measured (`bot/belief_test.py`,
    403 of the bot's decisions rebuilt with the builder before and after): the beliefs differ in 269 (67%), but the choice moves little,
    +0.26 points per such decision, about +0.9 a game, only 2 decisions by 5+ points (an upper estimate: the new beliefs taken as true).
+   **Remeasured 2026-10-12:** `belief_test.decisions()` had paired each turn's log with the previous turn's request (Showdown sends a
+   turn's request right after the log chunk ending in `|turn|N`), so it built a stale or inconsistent position for most turns and
+   kept 403. Fixed, all 995 decisions build; beliefs differ in 768 and the gain is **+0.44 points per such decision, about +3.1 a game**
+   over 109 games, 21 decisions by 5+ points. Still an upper estimate: the new beliefs are taken as true, and two decisions (+31.5,
+   +26.9) carry a sixth of the total, which looks like options outside the mix being valued on few simulations (see 8). The live bot
+   was not affected: it decides on the request with the log up to it.
+7. **Replacements are scored by the static value.** After a faint the bot picks its replacement by the engine's static value at the
+   next turn's start (position.py `replacement`, as self-play's `spot.rs resolve_switches` does), not by the one-turn search it uses
+   for its turns. `bot/decision_audit.py` (2026-10-12, 144 of the bot's replacements with two or more candidates, each candidate's
+   position solved by `champ evalpos` as a turn is): the search prefers another candidate in 53, by over 10 points in 10, **1.7 points
+   per replacement** on average. Fix for the bot: score the candidates with evalpos (a few seconds); for self-play, the replacement
+   matrix game on one-turn values instead of static ones (costlier; measure it).
+8. **Audit of every turn decision (2026-10-12, `bot/decision_audit.py`, 995 decisions rebuilt with today's builder).** Where the played
+   option is known (667), the staged solve flags 73 as 5+ points below the best, but the staged solve gives options outside the mix
+   only 2-8 simulations per cell, so the best of many such options reads high (a 62% double switch next to a 50% equilibrium). Solved
+   again with every cell at 32 seeds and the game solved exactly (`exact`), and leaving out 3 turns where Rage Powder pulled the bot's
+   move (the log shows where a move landed, not where it was aimed): 24 decisions 5+ points worse, 9 by 10+, about 0.4 points per
+   decision. Every one had 0% weight in today's mix; most had weight under the earlier builder (beliefs about spreads, the bot's own
+   spreads guessed before fb4780f), and the live pipeline reproduces today: the bot's logged weights and values since its 03:33 UTC
+   restart match the rebuild within 1-3 points of value. Engine and Showdown move orders agree on all 1,896 active slots checked.
+   Forfeits (`bot/forfeit_check.py`, 45 of 46 rebuilt, each played out 40 times by self-play): 0.3% won on average, at most 7.5%.

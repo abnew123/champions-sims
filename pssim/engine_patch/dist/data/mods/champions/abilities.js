@@ -27,6 +27,16 @@ const Abilities = {
       this.effectState.checkedAngerShell = !(effect.effectType === "Move" && !effect.multihit);
     }
   },
+  auraguard: {
+    // new in Champions (Mega Lucario Z): halves the damage the Pokemon takes from contact moves
+    onSourceModifyDamage(damage, source, target, move) {
+      if (move.flags["contact"]) return this.chainModify(0.5);
+    },
+    flags: { breakable: 1 },
+    name: "Aura Guard",
+    rating: 3,
+    num: 319
+  },
   berserk: {
     inherit: true,
     onDamage(damage, target, source, effect) {

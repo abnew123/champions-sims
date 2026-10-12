@@ -101,7 +101,7 @@ def export(hidden=16, l2=1e-3, target='search', out=None, parts=('fit',)):
     """fit h on the training parts and write it for the engine (EG_VNET): input scales, weights, and the sizes of the vfeats blocks"""
     F = load_parts(parts); H = load('hold')
     sd = np.concatenate([F['E'], F['S']]).std(0); sd = np.where(sd < 1e-3, 1.0, sd)
-    tgt = lg(F['search']) if target == 'search' else F['y']
+    tgt = lg(F['search']) if target == 'search' else F['y'] if target == 'outcome' else (F['y'], lg(F['search']))
     m = Model(hidden, l2, sd).fit(F['E'], F['S'], tgt, target)
     d = F['E'].shape[1]
     W = m.p[:hidden * d].reshape(hidden, d).tolist() if hidden else None; v = m.p[hidden * d:].tolist() if hidden else m.p.tolist()

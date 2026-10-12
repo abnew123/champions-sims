@@ -287,6 +287,22 @@ battle-start abilities, 37 switches, 26 Megas); of 272 opponent Pokemon with any
 Spectator pages get the nature-matched ranking (evs_for); bot pages and the bot itself (botpos.refine_opponent) also the turn order.
 Damage is not used yet. After it: luck on the three games -91 -> -32, -89 -> -6, -79 -> -13. Older studies used the old spreads.
 
+## Damage checks on spreads, and three Mega abilities (2026-10-11)
+
+The user asked for damage to rule spreads out too. spreads.damage_observations: hits between a bot's Pokemon and an opponent's where
+nothing changed either one's stats, item or form, or the weather, terrain or screens, earlier in the turn or earlier in the same move
+(Electro Shot's charge); the bot's HP is exact (damage d), the opponent's in percent (an interval through the possible HP values); a KO,
+Focus Sash or Sturdy says the hit did at least that. damage.js asks Showdown (positions.rebuild, getDamage at the lowest and highest
+roll, the move's type changes applied first) for each candidate spread's range; cached per hit and spread. Not used: multi-hit moves,
+fixed damage, damage that depends on the turn order (Payback, Analytic, ...), Substitute, Disguise. spreads.pick takes the most used
+spread that fits the turn order and the hits; when the hits rule every one out, the one missing the fewest. Over the bot's 117 games:
+795 hits; of 383 opponent Pokemon with any observation, 315 kept Smogon's most used spread, 35 the 2nd to 6th, 10 the plain guess, 23
+missed some hit with every listed spread (about half of each species' use is outside the listed spreads). Bugs found on the way: HP
+tracking re-read switch lines, lines inside a move's block did not count as mid-turn changes (a Light Screen), and three Megas: this
+Showdown package (pssim, 0.11.11) gives Mega Golisopod Emergency Exit, Mega Garchomp Z Sand Force and Mega Absol Z Magic Bounce, where
+the engine data (and the damage seen in real games) has Tough Claws, Levitate and Sharpness. positions.js now sets a Mega's ability from
+engine_data_full.json, which every engine position goes through (the bar, the studies, the bot).
+
 ## Mega Evolution on the live pages (2026-10-11)
 
 The user saw a Froslass shown as "Protect (and Mega Evolve)" on the turn before it actually Mega Evolved. champ-battle-v23 offered a Mega

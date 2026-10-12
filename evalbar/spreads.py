@@ -7,7 +7,7 @@ the most used one with its Speed points moved just enough to fit.
   observations(log, known_side, known_speed) -> [obs]   known_speed(species, forme) -> that Pokemon's raw Speed
   pick(species, nature, item, guess, obs) -> (evs, why)
 Speed in Champions at level 50: (2 base + 31 + 2 points) / 2 + 5, times the nature."""
-import os, re, json, collections
+import os, re, json, math, collections
 import common as C, replay as R
 toid = R.toid
 E = json.load(open(os.path.join(C.MAIN, 'native', 'engine_data_full.json')))
@@ -198,18 +198,163 @@ def fits(evs, nature, ob):
     u = effective(raw, ob['mods']); k = ob['known']; faster = u > k + 1; slower = u < k - 1   # within 1: a tie (or rounding), either order
     went_first = ob['first'] != ob['tr']                                    # under Trick Room the slower one goes first
     return not slower if went_first else not faster
-def pick(species, nature, item, guess, obs):
-    """the most used listed spread (with this nature) that fits what the game showed, else the old guess if it fits, else the most used one
-    with its Speed points moved as little as fits: (evs, why)"""
+def pick(species, nature, item, guess, obs, misses=None, nd=0):
+    """the most used listed spread (with this nature) that fits what the game showed (the turn order, and with misses(evs) the hits it
+    does not fit), else the old guess if it fits, else (the hits ruling every spread out) the one missing the fewest hits, and if the turn
+    order rules that out, it with its Speed points moved as little as fits: (evs, why)"""
     obs = [o for o in obs if toid(o['species']) == toid(species)]
     cands = [(w, evs, f'Smogon #{i + 1} ({100 * w:.0f}%)') for i, (w, evs) in enumerate(ranked(species, nature, item))] + [(0, list(guess), 'the plain guess')]
+    seen = (f', fits {len(obs)} observed turn orders' if obs else '') + (f', {nd} hits' if nd else '')
+    m = {tuple(e): (misses(e) if misses else 0) for _, e, _ in cands}
     for w, evs, name in cands:
-        if all(fits(evs, nature, o) for o in obs): return list(evs), name + (f', fits {len(obs)} observed turn orders' if obs else '')
+        if m[tuple(evs)] == 0 and all(fits(evs, nature, o) for o in obs): return list(evs), name + seen
+    if misses and min(m.values()) > 0:                                        # the hits rule every spread out: the closest, then the turn order
+        k = min(range(len(cands)), key=lambda i: (m[tuple(cands[i][1])], i)); cands = [cands[k]] + cands[:k] + cands[k + 1:]
+        if all(fits(cands[0][1], nature, o) for o in obs): return list(cands[0][1]), f"{cands[0][2]}, missing {m[tuple(cands[0][1])]} of {nd} hits (the closest)"
+    else: cands = sorted(cands, key=lambda c: m[tuple(c[1])] > 0)            # spreads that fit the hits first
     top = cands[0][1]
     for d in sorted(range(33), key=lambda x: abs(x - top[5])):
         evs = top[:5] + [d]
         if all(fits(evs, nature, o) for o in obs): return evs, f'{cands[0][2]} with {d} Speed points (the turn order rules out every listed spread)'
     return list(top), f'{cands[0][2]} (no spread fits every observed turn order)'
+# ---- damage (the user's next step, 2026-10-11): what a hit did, against what Showdown says each candidate spread allows ----
+FIXED_DMG = {'Seismic Toss', 'Night Shade', 'Super Fang', 'Ruination', 'Final Gambit', 'Endeavor', 'Counter', 'Mirror Coat', 'Metal Burst', 'Psywave',
+             # damage that depends on the order of the turn, which a rebuilt position does not have
+             'Payback', 'Bolt Beak', 'Fishious Rend', 'Avalanche', 'Revenge', 'Assurance', 'Stomping Tantrum', 'Temper Flare', 'Retaliate', 'Lash Out'}
+ORDER_ABILITIES = {'Analytic', 'Stakeout'}
+def damage_observations(log, known_side):
+    """hits between a Pokemon of the known side and one of the other, where nothing changed either one's stats, item or form, the
+    weather, terrain or screens earlier in the turn: [{turn, n, att, def, move, crit, spread, helping, hp: {att, def}, d | pct, atleast}]
+    att / def as 'p1a' positions at the start of the turn; d the exact damage when the target is the known side's (its HP is exact),
+    pct (before, after) percents when it is the other side's; atleast when it fainted or Focus Sash / Sturdy held (the hit did at least that)"""
+    out = []; L = log.split('\n'); cut = [i for i, l in enumerate(L) if l.startswith('|turn|')]
+    hp = {}                                                                   # 'p1a' -> (current, max) for the known side, percent for the other
+    def read_hp(pos, tok):
+        tok = tok.split()[0] if tok else ''
+        if 'fnt' in tok or tok == '0': return 0
+        m = re.match(r'(\d+)/(\d+)', tok)
+        return (int(m.group(1)), int(m.group(2))) if m and pos[:2] == known_side else int(m.group(1)) if m else None
+    for l in L[:cut[0] if cut else len(L)]:                                   # the leads
+        p = l.split('|')
+        if len(p) > 4 and p[1] in ('switch', 'drag', 'replace'): hp[p[2][:3]] = read_hp(p[2][:3], p[4])
+    for k in cut:
+        l = L[k]
+        if True:
+            t = int(l[6:]); end = cut[cut.index(k) + 1] if cut.index(k) + 1 < len(cut) else len(L); seg = L[k + 1:end]
+            changed = set(); helping = set(); switched = set(); megas = set(); n = 0; i = 0; dirty = [False]
+            def track(l2):
+                """what a line changes for the hits after it this turn"""
+                q = l2.split('|')
+                if len(q) < 3: return
+                kind = q[1]
+                if kind in ('switch', 'drag', 'replace'): switched.add(q[2][:3]); hp[q[2][:3]] = read_hp(q[2][:3], q[4] if len(q) > 4 else '')
+                elif kind == 'detailschange' and 'Mega' in l2: megas.add(q[2][:3])
+                elif kind == '-clearallboost': dirty[0] = True
+                elif kind in ('-boost', '-unboost', '-setboost', '-clearboost', '-clearnegativeboost', '-swapboost', '-copyboost', '-invertboost',
+                              '-status', '-enditem', '-item', '-formechange', '-transform', '-start', '-ability'): changed.add(q[2][:3])
+                elif kind in ('-weather', '-fieldstart', '-fieldend', '-sidestart', '-sideend') and '[upkeep]' not in l2: dirty[0] = True
+                elif kind in ('-damage', '-heal', '-sethp') and len(q) > 3:
+                    v = read_hp(q[2][:3], q[3])
+                    if v is not None: hp[q[2][:3]] = v
+            while i < len(seg):
+                l2 = seg[i]; q = l2.split('|')
+                if len(q) < 3: i += 1; continue
+                kind = q[1]
+                if kind != 'move' or re.search(r'\[from\](?! lockedmove)', l2): track(l2); i += 1; continue
+                if True:
+                    dirty_field = dirty[0]
+                    att = q[2][:3]; move = q[3]
+                    if move == 'Helping Hand' and len(q) > 4 and q[4]: helping.add(q[4][:3])
+                    block = []; j = i + 1
+                    while j < len(seg) and not re.match(r'\|(move|switch|drag|replace)\||^\|$', seg[j]): block.append(seg[j]); j += 1
+                    skip = dirty_field or att in changed or att in switched or move in FIXED_DMG or any(x.startswith('|-hitcount|') for x in block)
+                    crit = {x.split('|')[2][:3] for x in block if x.startswith('|-crit|')}
+                    held = {x.split('|')[2][:3] for x in block if re.match(r'\|-enditem\|[^|]+\|Focus Sash|\|-activate\|[^|]+\|ability: Sturdy', x)}
+                    nosub = {x.split('|')[2][:3] for x in block if re.search(r'Substitute|Disguise|Ice Face', x)}
+                    before = dict(hp); boosted = set()
+                    for x in block:                                           # the hits, and HP as the block leaves it
+                        y = x.split('|')
+                        if len(y) > 2 and y[1] in ('-boost', '-unboost', '-setboost', '-clearboost', '-enditem', '-item', '-formechange'): boosted.add(y[2][:3])   # mid-move (Electro Shot's charge)
+                        if att in boosted: skip = True
+                        if len(y) > 3 and y[1] in ('-damage', '-heal', '-sethp'):
+                            v = read_hp(y[2][:3], y[3])
+                            if y[1] == '-damage' and '[from]' not in x and not skip:
+                                d_ = y[2][:3]
+                                if d_[:2] != att[:2] and known_side in (att[:2], d_[:2]) and d_ not in changed and d_ not in switched and d_ not in nosub and d_ not in boosted and before.get(d_) is not None and v is not None:
+                                    ob = {'turn': t, 'n': n, 'att': att, 'def': d_, 'move': move, 'crit': d_ in crit, 'spread': '[spread]' in l2, 'helping': att in helping,
+                                          'megas': sorted(megas), 'atleast': v == 0 or d_ in held}
+                                    ha = before.get(att); hd = before[d_]
+                                    ob['hp'] = {'att': ['abs', ha[0]] if isinstance(ha, tuple) else ['pct', ha] if ha else None, 'def': ['abs', hd[0]] if isinstance(hd, tuple) else ['pct', hd]}
+                                    if d_[:2] == known_side: ob['d'] = hd[0] - (v[0] if isinstance(v, tuple) else 0)
+                                    else: ob['pct'] = (hd, v if isinstance(v, int) else 0)
+                                    out.append(ob); n += 1
+                        track(x)                                          # the turn goes on: screens, boosts, items set in this block
+                    i = j; continue
+    return out
+def shown(h, M):
+    """the percent Showdown shows for h of M HP"""
+    return 100 if h >= M else min(99, max(1, math.ceil(100 * h / M)))
+def damage_fits(ob, r):
+    """does the hit fit Showdown's range r {lo, hi, maxhp} for this candidate?"""
+    if not r or r.get('error') or r.get('lo') is None: return True                # the calculation could not be made: no evidence
+    lo, hi, M = r['lo'], r['hi'], r['maxhp']
+    if 'd' in ob: return hi >= ob['d'] - 1 if ob['atleast'] else lo - 1 <= ob['d'] <= hi + 1
+    p0, p1 = ob['pct']; H0 = [h for h in range(1, M + 1) if shown(h, M) == p0]; H1 = [0] if p1 == 0 else [h for h in range(1, M + 1) if shown(h, M) == p1]
+    if not H0 or not H1: return True
+    if ob['atleast']: return hi >= min(H0) - 1
+    return lo - 1 <= max(H0) - min(H1) and min(H0) - max(H1) <= hi + 1
+_DCACHE = {}
+def damage_ranges(gp, sets, known_side, known_evs, dobs, cands):
+    """{(obs index, species, evs): Showdown's range} for each damage observation and each candidate spread of the other side's Pokemon
+    in it, through damage.js (cached: a hit and a spread are worked out once)"""
+    import live as LV, procs as P, subprocess, tempfile, hashlib
+    steps = {x['turn']: x['state'] for x in gp['steps'] if x['state']}; other = 'p2' if known_side == 'p1' else 'p1'
+    want = []; res = {}
+    for oi, ob in enumerate(dobs):
+        st = steps.get(ob['turn'])
+        if not st: continue
+        upos = ob['att'] if ob['att'][:2] == other else ob['def']
+        um = next((m for m in st[other]['mons'] if m['pos'] == upos[2] and not m['f']), None)
+        if not um or um['sp'] not in cands: continue
+        order = {sd: sorted(st[sd]['mons'], key=lambda m: (0 if m['pos'] == 'a' else 1 if m['pos'] == 'b' else 2 if not m['f'] else 3)) for sd in ('p1', 'p2')}
+        def idx(pos): return next((i for i, m in enumerate(order[pos[:2]]) if m['pos'] == pos[2] and not m['f']), None)
+        ia, idf = idx(ob['att']), idx(ob['def'])
+        if ia is None or idf is None: continue
+        am = order[ob['att'][:2]][ia]; aset = sets[ob['att'][:2]].get(am['sp']) or {}
+        mf = mega_of(am['sp'], aset.get('item', '')) if (am['mega'] or ob['att'] in ob['megas']) else None
+        if aset.get('ability') in ORDER_ABILITIES or (mf and (E['species'].get(toid(mf), {}).get('abilities') or {}).get('0') in ORDER_ABILITIES): continue
+        for evs in cands[um['sp']]:
+            key = (hashlib.md5(json.dumps([ob, um['sp'], [[m['sp'], m['hp'], m['b'], m['st'], m['gone']] for sd in ('p1', 'p2') for m in order[sd]], st['field']], sort_keys=True).encode()).hexdigest(), tuple(evs))
+            if key in _DCACHE: res[(oi, um['sp'], tuple(evs))] = _DCACHE[key]; continue
+            sides = []
+            for sd in ('p1', 'p2'):
+                mons = []
+                for m in order[sd]:
+                    s_ = sets[sd].get(m['sp']) or next((v for k_, v in sets[sd].items() if v and toid(k_.split('-')[0]) == toid(m['sp'].split('-')[0])), None)
+                    if not s_: break
+                    s_ = dict(s_)
+                    if sd == known_side and known_evs.get(toid(m['sp'].split('-')[0])): s_['evs'] = list(known_evs[toid(m['sp'].split('-')[0])][0])
+                    if sd == other and m['sp'] == um['sp']: s_['evs'] = list(evs)
+                    x = LV.spec_mon(m, s_)
+                    if sd + m['pos'] in ob['megas']: x['mega'] = True
+                    mons.append(x)
+                else:
+                    while len(mons) < 4: mons.append({**mons[-1], 'fainted': True, 'onField': False})   # a full team for 'team 1234'
+                    sides.append({'mons': mons, 'tailwind': st[sd]['tailwind'], 'screens': st[sd]['screens'], 'hazards': st[sd]['hazards']}); continue
+                break
+            if len(sides) < 2: continue
+            f = st['field']
+            spec = {'name': 'dmg', 'turn': ob['turn'], 'sides': sides, 'acts': [[None, None], [None, None]], 'perish': st['perish'], 'standIns': 0, 'dropped': [],
+                    'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None, 'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}
+            want.append((key, (oi, um['sp'], tuple(evs)), {'spec': spec, 'att': [0 if ob['att'][:2] == 'p1' else 1, ia], 'def': [0 if ob['def'][:2] == 'p1' else 1, idf],
+                                                          'move': ob['move'], 'crit': ob['crit'], 'spread': ob['spread'], 'helping': ob['helping'], 'hp': ob['hp']}))
+    if want:
+        with tempfile.TemporaryDirectory() as d:
+            qf, of = os.path.join(d, 'q.json'), os.path.join(d, 'r.json'); json.dump([w[2] for w in want], open(qf, 'w'))
+            r = subprocess.run([P.exe('node'), os.path.join(C.HERE, 'damage.js'), qf, of], cwd=os.path.join(C.MAIN, 'pssim'), capture_output=True, text=True)
+            got = json.load(open(of)) if r.returncode == 0 and os.path.exists(of) else [None] * len(want)
+        for (key, k2, _), g_ in zip(want, got): _DCACHE[key] = g_; res[k2] = g_
+    return res
 def refine(log, gp, sets, known_side, known_evs):
     """the other side's spreads in sets picked against the turn order the log shows; known_evs {species id: (evs, nature)} for the known
     side's Pokemon (a bot's own). Returns {species: why}"""
@@ -218,6 +363,13 @@ def refine(log, gp, sets, known_side, known_evs):
         return raw_speed(forme, *k) if k else None
     obs = observations(log, known_side, ks, gp['sheets'])
     other = 'p2' if known_side == 'p1' else 'p1'; why = {}
+    dobs = damage_observations(log, known_side)
+    cands = {sp: [list(e) for _, e in ranked(sp, st['nature'], st['item'])] + [list(st['evs'])] for sp, st in sets[other].items() if st}
+    R_ = damage_ranges(gp, sets, known_side, known_evs, dobs, cands) if dobs else {}
     for sp, st in sets[other].items():
-        if st: evs, why[sp] = pick(sp, st['nature'], st['item'], st['evs'], obs); sets[other][sp] = {**st, 'evs': evs}
+        if not st: continue
+        mine = [(oi, ob) for oi, ob in enumerate(dobs) if any(k[0] == oi and k[1] == sp for k in R_)]
+        misses = lambda evs, sp=sp, mine=mine: sum(not damage_fits(ob, R_.get((oi, sp, tuple(evs)))) for oi, ob in mine)
+        evs, why[sp] = pick(sp, st['nature'], st['item'], st['evs'], obs, misses if mine else None, len(mine))
+        sets[other][sp] = {**st, 'evs': evs}
     return why

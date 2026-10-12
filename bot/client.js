@@ -193,6 +193,17 @@ function experimentTeam() {
   const E = JSON.parse(fs.readFileSync(ef)); const since = Date.parse(E.start);
   const g = games().filter(x => Date.parse(x.when) >= since && (x.format || 'gen9championsvgc2026regmcbo3') === FORMAT);   // this format's games only
   const rejected = fs.existsSync(path.join(OUT, 'rejected_teams.json')) ? JSON.parse(fs.readFileSync(path.join(OUT, 'rejected_teams.json'))) : [];
+  // by_format (2026-10-12 evening, the user): a fixed role per format, no counts and no pause: Bo3 the exploiter (the Trick Room six with
+  // its sheet), Bo1 the generalist (random regional teams, no sheet)
+  const F = (E.by_format || {})[FORMAT];
+  if (F) {
+    if (F.arm === 'sheet') {
+      const all = JSON.parse(fs.readFileSync(ARG('--teams') || path.join(HERE, 'teams.json'))); const open = F.teams.filter(t => !rejected.includes(t));
+      if (!open.length) return null; const name = open[Math.floor(Math.random() * open.length)]; return {...all.find(t => t.name === name), arm: 'sheet'};
+    }
+    const pool = JSON.parse(fs.readFileSync(path.join(ROOT, F.pool))).filter(t => !rejected.includes(t.name));
+    return {...pool[Math.floor(Math.random() * pool.length)], arm: 'regional'};
+  }
   const per = t => g.filter(x => x.team === t).length; const reg = g.filter(x => x.arm === 'regional').length;
   const sheetOpen = E.sheet.teams.filter(t => per(t) < E.sheet.games_per_team && !rejected.includes(t));
   const sheetN = g.filter(x => x.arm === 'sheet').length;

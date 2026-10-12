@@ -47,9 +47,10 @@ class Mon:
         # 'moved' (on the field since the turn started, its action done), 'new' (it came in that turn)], for positions.js's countdowns
         s.moved = False; s.stall = False; s.prot = False; s.lock = ''; s.slept = 0; s.mega = False; s.last = ''; s.volarg = {}; s.volturn = {}
         s.unburden = False; s.perish = 0                                  # its item gone since it came in (Unburden); Perish Song's count
+        s.abil = ''                                                         # an ability it gained in battle (Trace, Skill Swap, Role Play...)
     def leave(s):
         s.boosts = {}; s.vol = set(); s.moved = False; s.stall = False; s.prot = False; s.lock = ''; s.last = ''; s.volarg = {}; s.volturn = {}
-        s.unburden = False; s.perish = 0
+        s.unburden = False; s.perish = 0; s.abil = ''
         if s.temp: s.forme = s.species; s.temp = False                  # a form taken in battle (Aegislash's Blade) ends on switching out
     def ref(s): return [s.side, disp(s.forme)]
 def hpval(tok):
@@ -84,7 +85,7 @@ def parse(log):
             S[sd] = {'mons': [{'n': disp(m.forme), 'hp': m.hp, 'st': m.status, 'f': m.fainted, 'b': {k: v for k, v in m.boosts.items() if v},
                                'item': m.item, 'gone': m.item_gone, 'slot': '' if m.fainted else slot.get(nick, ''), 'seen': True,
                                'sp': m.species, 'forme': '' if m.mega or m.forme == m.species else m.forme, 'pos': slot.get(nick, ''), 'mega': m.mega, 'moved': m.moved, 'stall': m.stall, 'lock': m.lock, 'slept': m.slept, 'vol': sorted(m.vol), 'last': m.last, 'volarg': dict(m.volarg),
-                               'volturn': {v: list(x) for v, x in m.volturn.items() if v in m.vol}, 'unb': m.unburden, 'perish': m.perish}
+                               'volturn': {v: list(x) for v, x in m.volturn.items() if v in m.vol}, 'unb': m.unburden, 'perish': m.perish, 'abil': m.abil}
                               for nick in order[sd] for m in [mons[sd][nick]]],
                      'tailwind': sidec[sd]['tailwind'], 'screens': {k: v for k, v in sidec[sd]['screens'].items() if v}, 'hazards': list(sidec[sd]['hazards'])}
         S['perish'] = perish
@@ -214,6 +215,10 @@ def parse(log):
             if m: note([m.ref(), ' was protected' + (f' ({clean(p[3])})' if len(p) > 3 else '')])
         elif k == '-activate':
             m = mon(p[2]) if p[2] else None; what = clean(p[3]) if len(p) > 3 else ''
+            if what == 'Skill Swap' and len(p) > 5 and t.get('of'):            # the user gets the target's ability, and back
+                tg = mon(t['of'])
+                if m: m.abil = p[4]
+                if tg: tg.abil = p[5]
             if m and what in ('Protect', 'Detect', 'Spiky Shield', "King's Shield", 'Baneful Bunker', 'Silk Trap', 'Burning Bulwark', 'Obstruct', 'Wide Guard', 'Quick Guard'):
                 note([m.ref(), f' was protected ({what})' if what != 'Protect' else ' protected itself'])
             elif m and what == 'confusion': note([m.ref(), ' is confused'])
@@ -249,6 +254,7 @@ def parse(log):
                 else: m.boosts, o.boosts = o.boosts, m.boosts; note([m.ref(), ' swapped stat changes with ', o.ref()])
         elif k == '-ability':
             m = mon(p[2])
+            if m and re.search(r'\[from\] (ability: (Trace|Receiver|Power of Alchemy)|move: (Role Play|Entrainment|Doodle|Simple Beam|Worry Seed))', l): m.abil = p[3]
             if m and p[3] not in ('Stamina',): note([m.ref(), f"'s {p[3]}"])
         elif k in ('-enditem', '-item'):
             m = mon(p[2])

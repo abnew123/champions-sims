@@ -81,11 +81,14 @@ fn horizon_sides() -> [bool; 2] {
 }
 
 /// switch_slots / slot_decisions: active Pokemon that switched voluntarily / active Pokemon that could have (bench available, not trapped)
-struct Out { v: f64, unsupported: Vec<String>, feats: Vec<Vec<f64>>, turns: usize, tr_turns: usize, tr_by: [bool; 3], switches: [usize; 2], slot_decisions: [usize; 2], switch_slots: [usize; 2], log: Vec<String>, states: Vec<Value>, dp2: [usize; 4], dplog: Vec<Value>, h2: usize }
+struct Out { sdlog: Vec<String>, v: f64, unsupported: Vec<String>, feats: Vec<Vec<f64>>, turns: usize, tr_turns: usize, tr_by: [bool; 3], switches: [usize; 2], slot_decisions: [usize; 2], switch_slots: [usize; 2], log: Vec<String>, states: Vec<Value>, dp2: [usize; 4], dplog: Vec<Value>, h2: usize }
 
 fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_job: i64, st_g: u64, mut human: Option<&mut crate::human::Human>) -> Out {
     let mut b = start.clone(); let mut turn = 1;
     if human.is_some() { b.logging = false; }   // the planner's sims must not log; the real turn is logged below
+    // BATTLE_SDLOG=1 (2026-10-12, the Eval bar's Yawn study): the real turns' Showdown protocol lines, drained after each turn so the
+    // planner's clones never copy them; written out as "sdlog" (pssim/selfplay_logs.py makes spectator logs of them)
+    let sd_on = human.is_none() && std::env::var("BATTLE_SDLOG").is_ok(); let mut sdlog: Vec<String> = vec![];
     let (mut tr_turns, mut tr_by, mut switches, mut log) = (0, [false; 3], [0usize; 2], vec![]);
     let (mut slot_decisions, mut switch_slots) = ([0usize; 2], [0usize; 2]);
     let mut uns: Vec<String> = vec![]; let mut dp2s = [0usize; 4]; let mut dplog: Vec<Value> = vec![]; let mut h2cells = 0usize;
@@ -416,10 +419,11 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
         }
         if keep_log { log.push(format!("T{} {} || {}  [{}+{} x {}+{}]", turn, label(&b, 0, &msw[i]), label(&b, 1, &tsw[j]), mns.len(), msw.len() - mns.len(), tns.len(), tsw.len() - tns.len())); }
         b.prng = Prng::gen5(seed4(key.wrapping_mul(31) ^ turn as u64));
-        if human.is_some() { b.logging = true; }
+        if human.is_some() || sd_on { b.logging = true; }
         b.run_turn([msw[i], tsw[j]]);
         resolve_switches_h(&mut b, cfg, Some(&mut rng), human.as_deref_mut(), turn);
-        if human.is_some() { b.logging = false; }
+        if human.is_some() || sd_on { b.logging = false; }
+        if sd_on { sdlog.push(format!("|turn|{}", turn)); sdlog.extend(b.log.drain(..)); }
         for u in &b.unsupported { if !uns.contains(u) { uns.push(u.clone()); } }
         if find(&b.field.pseudo, "trickroom").is_some() { tr_turns += 1; if turn <= 3 { for k in (turn - 1)..3 { tr_by[k] = true; } } }
         turn += 1;
@@ -430,7 +434,7 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
             else { let w = crate::spot::clock_winner(&b); (match w { Some(0) => "you", Some(_) => "the planner", None => "draw" }, Some(format!("the clock ran out after {} turns: {}", turn - 1,
                    match w { Some(_) => "more Pokemon left, or more HP", None => "dead even" }))) };
         h.end(&b, turn - 1, v, winner, how); }
-    Out { v, unsupported: uns, feats: fx, turns: turn - 1, tr_turns, tr_by, switches, slot_decisions, switch_slots, log, states, dp2: dp2s, dplog, h2: h2cells }
+    Out { sdlog, v, unsupported: uns, feats: fx, turns: turn - 1, tr_turns, tr_by, switches, slot_decisions, switch_slots, log, states, dp2: dp2s, dplog, h2: h2cells }
 }
 /// champ play <engine_data.json> <start.jsonl> : the first start line, a human on side 0 (see human.rs)
 pub fn play_main(args: &[String]) {
@@ -475,7 +479,7 @@ pub fn main(args: &[String]) {
         let r = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| play(&b, cfg, st["rng"].as_f64().unwrap(), key, keep_log, job, g, None)));
         let row = match r {
             Ok(o) => json!({"g": g, "v": o.v, "turns": o.turns, "trTurns": o.tr_turns, "trBy": o.tr_by, "switches": o.switches, "slotDecisions": o.slot_decisions, "switchSlots": o.switch_slots, "dp2": o.dp2, "h2": o.h2, "dp2log": if o.dplog.is_empty() { Value::Null } else { json!(o.dplog) }, "unsupported": o.unsupported, "F": if o.feats.is_empty() { Value::Null } else { json!(o.feats) }, "ms": tg.elapsed().as_millis() as u64,
-                            "log": if keep_log { json!(o.log) } else { Value::Null }, "states": if o.states.is_empty() { Value::Null } else { json!(o.states) }}),
+                            "log": if keep_log { json!(o.log) } else { Value::Null }, "sdlog": if o.sdlog.is_empty() { Value::Null } else { json!(o.sdlog) }, "states": if o.states.is_empty() { Value::Null } else { json!(o.states) }}),
             Err(e) => json!({"g": g, "v": Value::Null, "error": e.downcast_ref::<String>().cloned().or(e.downcast_ref::<&str>().map(|s| s.to_string())).unwrap_or_default()}),
         };
         eprintln!("job {} game {}: {} ({} ms)", job, g, row["v"], tg.elapsed().as_millis());

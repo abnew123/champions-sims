@@ -310,6 +310,27 @@ Stone holder's moves only with the Mega, and build.same() ignored the Mega flag,
 runs champ-battle-v25 (the bot's build: moves with and without the Mega, EG_MEGA_TIE tie-break toward the Mega), and same() matches the
 Mega flag whenever both versions are offered. Older results (studies, Louisville) were made with v23.
 
+## Trapping, sleep and Yawn in positions; the Yawn study (2026-10-12)
+
+- Trapping: positions.js runs Showdown's TrapPokemon / MaybeTrapPokemon events on the rebuilt position (as Showdown does at the end of a
+  turn). The engine takes the root's `trapped` flag as given, so before this a side facing Mega Gengar's Shadow Tag (or Arena Trap, Magnet
+  Pull) was offered switches it did not have. 18 bot games were redone. The bot builds through positions.js too, so it got this at once.
+- Sleep: Champions sleep counters are 2 (1/3) or 3 (2/3) (the champions mod's slp onStart; the engine's conditions.rs), counted down at each
+  attempt to move, so a Pokemon sleeps one turn or two; switching out pauses it. live.sleep_cases splits each sleeping Pokemon on the field
+  by its counter (names get s2/s3), less the turns slept (Early Bird counts double); positions.js reads `sleepStart`, default 3. The pages
+  use it; the bot does not (Battle sim's call).
+- Yawn: a Yawn on the field at a turn start lands at the end of that turn. Specs with `yawnDue` (live.specs_for, and botpos.bot_position
+  since the user OK'd it for the bot) get duration 1 instead of a fresh 2. Taunt, Throat Chop and Heal Block still get fresh durations.
+- A Pokemon asleep all turn (every move worth the same) shows one row, "Stay in (asleep)", played when the log shows it could not move.
+- The bot's Bo1 games (from 2026-10-12) have no team sheets: the page guesses sets as a spectator page does (live.botfmt).
+- The bot is frozen (the user, 2026-10-12): positions.js, live.py's spec helpers, botpos.py and spreads.py reach the live bot without a
+  restart, so message Battle sim before changing what they build.
+- yawn_study.py: after a Yawn, did the player take the drowsy Pokemon out on the next turn? Humans (18.8k Bo3 replays): 228 of 487 Yawns
+  where they could (47%). yawn_engine.py runs the engine in those same positions (the player's own four exact, the opponent's back row
+  guessed, champions_data_full.json for the calc): its mix leaves 53%; it agrees with the human's choice 64% of the time; humans stay in
+  too often with non-Megas (42% vs 54%) and leave Megas more than it does (62% vs 51%); the human choice gives up 1.3 points of win chance
+  per Yawn on average (1.8 when staying, 0.6 when leaving). Half the decisions are within 2 points either way. yawn_engine.json has every row.
+
 ## Louisville day 1 (2026-10-10)
 
 The same study on the Louisville day 1 stream (12 games from 1:15 pm, read live; `study.py out/champions/louisville1.ocr.jsonl 3 14340`,

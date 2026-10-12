@@ -134,6 +134,7 @@ def specs_for(tag, g, step, six, sets, leads, own=None):
                                   'acts': [[act(sd, i) for i in (0, 1)] for sd in ('p1', 'p2')], 'perish': st['perish'], 'standIns': len(c1) + len(c2), 'yawnDue': True,
                                   'volDue': True,                     # each volatile's countdown from the turn it started (positions.js)
                                   'fieldDue': True,                   # Unburden's Speed after its item went, Perish Song's count (positions.js)
+                                  'pctDue': True,                     # a shown percent rebuilt as an HP that shows as it (positions.js)
                                   'dropped': [], 'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None,
                                                            'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}))
     return out, H

@@ -9,7 +9,7 @@ import os, re, sys, json, time, glob, random, statistics, subprocess, collection
 import common as C, live as L, replay as R, spreads as SPR, procs as P
 OUT = os.path.join(C.HERE, 'out', 'megacheck'); E = SPR.E
 toid = R.toid
-def hits(rid, log):
+def hits(rid, log, sample=0.1):
     """this game's clean hits with a Mega in them (and about one in ten without, for the baseline): [(query, meta)]"""
     full = R.parse(log); steps = {s['turn']: s for s in full['steps'] if s.get('state')}
     six, sets, dropped = L.sets_for(full, log, True); leads = L.Live.leads(None, log)
@@ -40,12 +40,13 @@ def hits(rid, log):
             if o.get('weather'): s2['field']['weather'] = [SPR.SD_WEATHER[o['weather']], 5] if SPR.SD_WEATHER[o['weather']] else None
             mega = lambda m: (SPR.mega_of(m['species'], m.get('item', '')) if m.get('mega') else None)
             amega, dmega = mega(am), mega(dm)
-            if not amega and not dmega and rng.random() > 0.1: continue
+            if not amega and not dmega and rng.random() > sample: continue
             mv = E['moves'].get(toid(o['move'])) or {}
             if mv.get('category') not in ('Physical', 'Special'): continue
             aform = amega or am['species']; atypes = (E['species'].get(toid(aform)) or {}).get('types') or []
             q = {'spec': s2, 'att': a, 'def': d, 'move': o['move'], 'crit': False, 'spread': o['spread'], 'helping': o['helping'], 'hp': o['hp'], 'strict': 2}
             out.append((q, {'game': rid.split('-')[-1], 'turn': t, 'att': aform, 'amega': bool(amega), 'def': dmega or dm['species'], 'dmega': bool(dmega),
+                            'abase': am['species'], 'anat': am.get('nature'), 'dbase': dm['species'], 'dnat': dm.get('nature'),
                             'move': o['move'], 'cat': mv['category'], 'type': mv.get('type'), 'stab': mv.get('type') in atypes,
                             'contact': bool((mv.get('flags') or {}).get('contact')), 'pct': o['pct']}))
     return out

@@ -358,7 +358,7 @@ pub fn register(r: &mut Reg) {
         let div = b.es().n("boundDivisor").unwrap_or(8.0);
         b.damage(b.p(m).base_maxhp as f64 / div, None, None, None, false); RV::Undef });
     h!(r, Cond, "partiallytrapped", "onEnd", |b, a| { RV::Undef });
-    h!(r, Cond, "partiallytrapped", "onTrapPokemon", |b, a| { let m = a.t(); if b.es().source.map(|s| b.p(s).is_active).unwrap_or(false) { b.pm(m).trapped = true; } RV::Undef });
+    h!(r, Cond, "partiallytrapped", "onTrapPokemon", |b, a| { let m = a.t(); if b.es().source.map(|s| b.p(s).is_active).unwrap_or(false) { b.try_trap(m, false); } RV::Undef });   // tryTrap: a Ghost is not trapped (2026-10-12)
     h!(r, Cond, "destinybond", "onStart", |b, a| { RV::Undef });
     h!(r, Cond, "destinybond", "onFaint", |b, a| {
         let t = a.t(); let (Some(s), Some(e)) = (a.source, a.src_eff) else { return RV::Undef };

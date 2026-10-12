@@ -76,6 +76,60 @@ pub(crate) fn resolve_switches_h(b: &mut Battle, cfg: &Cfg, mut rng: Option<&mut
         b.choose_switches([opts[0][i], opts[1][j]]);
     }
 }
+/// one switch request's replacement equilibrium, as resolve_switches_h settles it without rng: both sides' options (every assignment of
+/// bench Pokemon to the open slots), the matrix game on the position value, each side's most likely choice
+fn eq_switch_pick(b: &mut Battle, cfg: &Cfg, req: &[[bool; 2]; 2]) -> [[PChoice; 2]; 2] {
+    let opts: Vec<Vec<[PChoice; 2]>> = (0..2u8).map(|s| {
+        let slots: Vec<usize> = (0..2).filter(|i| req[s as usize][*i]).collect(); let bn = bench(b, s);
+        let mut o: Vec<[PChoice; 2]> = vec![];
+        match slots.len() {
+            0 => o.push([PChoice::Pass; 2]),
+            1 => { for &p in &bn { let mut c = [PChoice::Pass; 2]; c[slots[0]] = PChoice::Switch(p); o.push(c); } }
+            _ => { for &p in &bn { for &q in &bn { if p != q { let mut c = [PChoice::Pass; 2]; c[slots[0]] = PChoice::Switch(p); c[slots[1]] = PChoice::Switch(q); o.push(c); } } }
+                   if bn.len() == 1 { for &k in &slots { let mut c = [PChoice::Pass; 2]; c[k] = PChoice::Switch(bn[0]); o.push(c); } } }
+        }
+        if o.is_empty() { o.push([PChoice::Pass; 2]); }
+        o }).collect();
+    if opts[0].len() * opts[1].len() == 1 { return [opts[0][0], opts[1][0]]; }
+    let a2: Vec<Vec<(f64, f64)>> = opts[0].iter().map(|x| opts[1].iter().map(|y| { let mut c = b.clone(); c.choose_switches([*x, *y]); value2(&mut c, cfg) }).collect()).collect();
+    let a: Vec<Vec<f64>> = a2.iter().map(|r| r.iter().map(|v| v.0).collect()).collect();
+    let (x, mut y) = nash(&a, 200);
+    if crate::plan::two_values(cfg) { let ab: Vec<Vec<f64>> = a2.iter().map(|r| r.iter().map(|v| v.1).collect()).collect(); y = nash(&ab, 200).1; }
+    let am = |p: &[f64]| p.iter().enumerate().fold((0, -1.0), |m, (k, v)| if *v > m.1 { (k, *v) } else { m }).0;
+    [opts[0][am(&x)], opts[1][am(&y)]]
+}
+/// pending switches settled with the replacements a side actually made (2026-10-12, the Eval bar's luck measure: the actual cell's
+/// samples used the replacement equilibrium, so a player's own choice of replacement read as luck). `forced[s]` lists side s's
+/// replacements in the order the log showed them (base species ids); each switch request takes the next ones that are legal for that
+/// side, and a side with none left (or none legal) falls back to its equilibrium choice. Returns how many replacements were forced.
+pub(crate) fn resolve_switches_forced(b: &mut Battle, cfg: &Cfg, forced: &mut [std::collections::VecDeque<String>; 2]) -> usize {
+    let base = |x: &str| -> String { let t = crate::dex::to_id(x); match t.find("mega") { Some(k) if k > 0 => t[..k].to_string(), _ => t } };
+    let mut n = 0; let mut guard = 0;
+    while b.request_switch && !b.ended && guard < 8 {
+        guard += 1;
+        let req = b.switch_request();
+        let mut pick: [Option<[PChoice; 2]>; 2] = [None, None];
+        for s in 0..2u8 {
+            let slots: Vec<usize> = (0..2).filter(|i| req[s as usize][*i]).collect();
+            if slots.is_empty() { pick[s as usize] = Some([PChoice::Pass; 2]); continue; }
+            let bn = bench(b, s); let mut c = [PChoice::Pass; 2]; let mut used: Vec<u8> = vec![]; let mut took = 0;
+            for &k in &slots {
+                let Some(want) = forced[s as usize].front().cloned() else { break };
+                let Some(&p) = bn.iter().find(|&&p| !used.contains(&p) && base(b.p((s, p)).species) == base(&want)) else { break };
+                c[k] = PChoice::Switch(p); used.push(p); forced[s as usize].pop_front(); took += 1;
+            }
+            if took == slots.len() || (took > 0 && bn.len() == took) { pick[s as usize] = Some(c); n += took; }
+        }
+        if pick[0].is_none() || pick[1].is_none() {
+            // a side without a forced choice takes its choice in this request's replacement equilibrium (as resolve_switches_h with no
+            // rng: each side's most likely option), the other side's forced one kept
+            let eq = eq_switch_pick(b, cfg, &req);
+            for s in 0..2 { if pick[s].is_none() { pick[s] = Some(eq[s]); } }
+        }
+        b.choose_switches([pick[0].unwrap(), pick[1].unwrap()]);
+    }
+    n
+}
 /// one-turn matrix (each cell: the turn played with NS planning seeds, switches resolved greedily, position value)
 fn one_turn(b: &Battle, cfg: &Cfg, mine: &[[PChoice; 2]], theirs: &[[PChoice; 2]], cseeds: &[[u16; 4]]) -> Vec<Vec<f64>> {
     mine.iter().map(|r| theirs.iter().map(|c| {

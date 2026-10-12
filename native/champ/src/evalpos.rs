@@ -244,6 +244,18 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
            "ms": t0.elapsed().as_millis() as u64, "unsupported": cells.uns, "sides": [s0, s1]});
     if adapt { let o = out.as_object_mut().unwrap(); o.insert("stages".into(), json!(stages)); o.insert("sims".into(), json!(cells.sims)); o.insert("cells_full".into(), json!(full)); }
     if h2 { let o = out.as_object_mut().unwrap(); o.insert("horizon".into(), json!(2)); o.insert("cells_h2".into(), json!(cells.acc2.len())); o.insert("sims_h2".into(), json!(cells.sims2)); }
+    // the actual cell with the actual replacements (position field "actual_replace": {"0": [species...], "1": [...]}, the Eval bar's luck
+    // measure): the same seeds as the matrix cell, pending switches settled by resolve_switches_forced; the matrix itself is unchanged
+    if let (Some(ai), Some(aj), Some(ar)) = (act_i, act_j, sp.get("actual_replace").filter(|v| v.is_object())) {
+        let lst = |k: &str| -> std::collections::VecDeque<String> { ar[k].as_array().map(|a| a.iter().filter_map(|x| x.as_str().map(|s| s.to_string())).collect()).unwrap_or_default() };
+        let (mut sum, mut nf) = (0.0, 0usize);
+        for c in 0..nseeds {
+            let mut xb = b.clone(); xb.prng = Prng::gen5(cells.cs[c]); xb.run_turn([msw[ai], tsw[aj]]);
+            let mut fq = [lst("0"), lst("1")]; nf += crate::spot::resolve_switches_forced(&mut xb, cfg, &mut fq);
+            sum += value(&mut xb, cfg);
+        }
+        out.as_object_mut().unwrap().insert("actual_cell".into(), json!({"v": sum / nseeds as f64, "n": nseeds, "forced": nf as f64 / nseeds as f64}));
+    }
     if matrix_mode.is_some() {
         let jc = |s: u8, c: &[PChoice; 2]| json!([choice_json(&b, s, &c[0]), choice_json(&b, s, &c[1])]);
         let cell1 = |i: usize, j: usize| cells.acc.get(&(i, j)).copied().map(|(sum, c)| (if c > 0 { json!(sum / c as f64) } else { Value::Null }, c)).unwrap_or((Value::Null, 0));

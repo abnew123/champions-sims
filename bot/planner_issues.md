@@ -104,3 +104,7 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
 12. **Engine moves without handlers (the Eval bar, 2026-10-12):** Defog (does not clear screens / hazards / terrain), Court Change (does
    not swap side conditions), Tidy Up (does not clear hazards / Substitutes): the move data runs, the special effects do not. Nearly
    unused in Reg M-C (18.8k replays: Defog 4 uses, Tidy Up 4, Court Change 0); fix if a team that matters brings one.
+13. **A small order dependence left in evalpos (2026-10-12):** the same position solved twice in one run (a copy, on another thread) gave a
+   payoff cell of 0.2906 and 0.2908 with the same seeds. The race memo's pinch-ability key fix removed the large case (thread-count
+   dependent features); something else in a memo or cache key still differs by order. Small; find it before trusting cell-level diffs
+   under 0.001.

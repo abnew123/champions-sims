@@ -104,7 +104,7 @@ def eval_bar():
 THREADS = {'kit': 'TR sheet', 'sim': 'Battle sim', 'ts': 'Team search', 'eb': 'Eval bar'}
 
 # ---- every process using CPU (2026-10-12, the user: anything that uses cores must show here, progress stamp or not) ----
-PREFIX = {'battlesim-': 'Battle sim', 'evalbar-': 'Eval bar', 'trsheet-': 'TR sheet', 'teamsearch-': 'Team search'}
+PREFIX = {'battlesim-': 'Battle sim', 'evalbar-': 'Eval bar', 'trsheet-': 'TR sheet', 'teamsearch-': 'Team search', 'f239sheet-': 'Frankfurt-239 sheet', 'f156sheet-': 'Frankfurt-156 sheet'}
 PATHS = [('/evalbar/', 'Eval bar'), ('/teamsearch/', 'Team search'), ('/sheetkit/', 'TR sheet'), ('/sheets/', 'TR sheet'), ('bot/client.js', 'Battle sim (bot)'),
          ('/bot/', 'Battle sim (bot)'), ('/pssim/', 'Battle sim'), ('/native/', 'Battle sim')]
 def etime_s(e):

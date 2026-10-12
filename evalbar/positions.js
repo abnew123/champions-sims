@@ -104,6 +104,8 @@ function rebuild(spec, flip) {
       // fieldDue (live.specs_for sets it, the bot's positions do not yet): Unburden doubles Speed once its item is gone while it is on the
       // field (Showdown keeps that as a volatile the log never shows), and Perish Song's count goes on (a fresh volatile would be 4)
       if (spec.fieldDue && x.unburden && p.hasAbility('unburden') && !toID(x.itemNow)) p.addVolatile('unburden');
+      // abilDue (live.specs_for; not the bot's yet): an ability it gained in battle (Trace, Skill Swap, Role Play), set without its start
+      if (spec.abilDue && x.abilityNow && dex.abilities.get(toID(x.abilityNow)).exists) { p.ability = toID(x.abilityNow); p.abilityState = b.initEffectState({id: p.ability, target: p}); }
       if (spec.fieldDue && x.perish > 0) { if (p.addVolatile('perishsong')) p.volatiles.perishsong.duration = x.perish; else approx.push('Perish Song'); }
       // fieldDue: the second turn of a two-turn move (Electro Shot outside rain, Solar Beam, Meteor Beam, Fly...): locked into it, aimed
       // where the log shows it fired (else the first foe), as Showdown's twoturnmove leaves it after the charging turn's end

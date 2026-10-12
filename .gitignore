@@ -34,6 +34,7 @@ recordings/batch*/
 recordings/demo/
 pssim/replays_protect/
 regionals/standings_*.html
+regionals/vr_*.html
 teamsearch/regmatch/
 pssim/pro_games.json
 teamsearch/bring/previews.json

@@ -51,7 +51,8 @@ function rebuild(spec, flip) {
       p.status = ''; p.statusState = b.initEffectState({});
       if (x.status) {
         p.status = x.status; p.statusState = b.initEffectState({id: x.status, target: p});
-        if (x.status === 'slp') { p.statusState.startTime = 3; p.statusState.time = Math.max(1, 3 - (x.slept || 0)); }   // sleep length is hidden: assume the middle case
+        // the sleep counter is hidden: the case live.py's sleep_cases gives (2 or 3), else the likelier 3, less the turns slept (Early Bird: twice)
+        if (x.status === 'slp') { const n = x.sleepStart || 3; p.statusState.startTime = n; p.statusState.time = Math.max(1, n - (x.slept || 0) * (p.hasAbility('earlybird') ? 2 : 1)); }
         if (x.status === 'tox') p.statusState.stage = 1;
       }
       const item = toID(x.itemNow);
@@ -84,6 +85,13 @@ function rebuild(spec, flip) {
     for (const s of STATS) p.boosts[s] = (x.boosts || {})[s] || 0;
     const item = toID(x.itemNow); if (p.item !== item) { p.item = item; p.itemState = b.initEffectState({id: item, target: p}); }
   }));
+  // trapping, as Showdown works it out at the end of each turn (Shadow Tag, Arena Trap, Magnet Pull): the engine reads it from the state
+  for (const side of b.sides) for (const p of side.active) {
+    if (!p || p.fainted) continue;
+    p.trapped = p.maybeTrapped = false; b.runEvent('TrapPokemon', p);
+    if (!p.knownType || b.dex.getImmunity('trapped', p)) b.runEvent('MaybeTrapPokemon', p);
+    if (p.trapped) p.trapped = true;                                       // 'hidden' (a trap the request hides) is still a trap
+  }
   return {b, sides, approx};
 }
 function build(spec, flip) {

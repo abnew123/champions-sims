@@ -134,6 +134,29 @@ def specs_for(tag, g, step, six, sets, leads, own=None):
                                   'dropped': [], 'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None,
                                                            'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}))
     return out, H
+SLEEP = ((2, 1 / 3), (3, 2 / 3))                                        # Champions: a sleep counter of 2 or 3 (Showdown's champions mod)
+def sleep_cases(specs):
+    """[(weight, spec)] -> the same with each Pokemon asleep on the field split by its hidden sleep counter: 2 (1/3) or 3 (2/3), less the
+    turns it has already slept (Early Bird counts each twice), the cases it would already have woken in left out. sleepStart tells
+    positions.js which; a sleeping Pokemon on the bench keeps the likelier 3"""
+    out = []
+    for w, sp in specs:
+        cases = [(w, sp, [])]
+        for si, sd in enumerate(sp['sides']):
+            for k, m in enumerate(sd['mons']):
+                if m.get('status') != 'slp' or not m.get('onField') or m.get('fainted'): continue
+                d = 2 if toid(m.get('ability')) == 'earlybird' else 1
+                ok = [(n, q) for n, q in SLEEP if n - d * (m.get('slept') or 0) >= 1]
+                tot = sum(q for _, q in ok)
+                if len(ok) < 2: continue
+                cases = [(cw * q / tot, cs, tags + [(si, k, n)]) for cw, cs, tags in cases for n, q in ok]
+        for cw, cs, tags in cases:
+            if not tags: out.append((cw, cs)); continue
+            x = json.loads(json.dumps(cs))
+            for si, k, n in tags: x['sides'][si]['mons'][k]['sleepStart'] = n
+            x['name'] = cs['name'] + 's' + ''.join(str(n) for _, _, n in tags)
+            out.append((cw, x))
+    return out
 SIDE = re.compile(r'(?<![A-Za-z0-9])p([12])(?=[ab]?(?:[:|,\]"]|$))')
 def bot_first(log):
     """a bot's own log with the bot as Player 1: when its requests say it is p2, every side reference (p1, p2a, "id":"p2", ...) is swapped"""
@@ -251,7 +274,8 @@ class Live:
             if mons:
                 own = (sd, mons); seen = {toid(m['sp'].split('-')[0]) for m in step['state'][sd]['mons']}
                 s.back[t] = [r['details'].split(',')[0] for r in rq['side']['pokemon'] if toid(r['details'].split(',')[0].split('-')[0]) not in seen]
-        return specs_for(s.tag, gp, step, six, sets, s.leads(pre), own)
+        sp, H = specs_for(s.tag, gp, step, six, sets, s.leads(pre), own)
+        return sleep_cases(sp), H
     @staticmethod
     def request(log, t):
         """a bot's own log, which records its |request|s: the one it answered at the start of turn t (logged just after the |turn| line)"""

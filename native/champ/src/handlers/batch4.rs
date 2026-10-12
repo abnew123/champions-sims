@@ -33,7 +33,7 @@ pub fn register(r: &mut Reg) {
     h!(r, Ability, "frisk", "onStart", |b, a| {
         let m = a.t();
         for t in b.foes(m) { let it = b.p(t).item; if !it.is_empty() {
-            let (tn, mn) = (b.mon_name(t), b.mon_name(m)); let name = b.dex.items[it].name;
+            let (tn, mn) = (b.mon_name(t), b.mon_name(m)); let name = b.dex.items.get(it).map(|x| x.name).unwrap_or(it);
             b.add(&["-item", &tn, name, "[from] ability: Frisk", &format!("[of] {}", mn)]); } }
         RV::Undef });
     h!(r, Ability, "sweetveil", "onAllySetStatus", |b, a| {

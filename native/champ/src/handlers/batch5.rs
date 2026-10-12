@@ -125,7 +125,7 @@ pub fn register(r: &mut Reg) {
             let li = b.p(m).last_item;
             if b.p(m).hp > 0 && b.p(m).item.is_empty() && b.is_berry(li) {
                 b.set_item(m, li, None, None); b.pm(m).last_item = "";
-                let n = b.mon_name(m); let name = b.dex.items[li].name; b.add(&["-item", &n, name, "[from] ability: Harvest"]);
+                let n = b.mon_name(m); let name = b.dex.items.get(li).map(|x| x.name).unwrap_or(li); b.add(&["-item", &n, name, "[from] ability: Harvest"]);
             }
         }
         RV::Undef });

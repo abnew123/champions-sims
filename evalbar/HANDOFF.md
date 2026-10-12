@@ -351,6 +351,22 @@ flinches in a row). Two were mostly the model:
   random battles between the bot's teams with known spreads (scratch sim.js + check.py): all 806 hits inside the range, none off by 1.
   Live.at passes strict=True; the bot's refine_opponent call does not yet (frozen).
 
+## More unlucky turns, more bugs (2026-10-12, the user asked)
+
+The worst single-turn luck from the luck values made before the day's fixes, leaving out turns whose position or the next turn's had
+one of the bugs already fixed (Unburden, Perish, the strict spread changes; luck compares with the next turn's start). Real dice: Games
+197, 92, 96, 166, 110 (crits), 129 (the lowest roll, then a crit), 75 (a miss, a paralysed Pokemon moving). Model problems found:
+- Two-turn moves: the turn after a charge, positions rebuilt the charger as free, so the engine had Electro Shot charging again in the
+  sun (Game 201, −64). positions.js now rebuilds twoturnmove + the move's volatile (targetLoc from where the log shows it fired), duration
+  1, trapped as Showdown's request has it (fieldDue). The engine still offers a locked charge both targets (Battle sim is fixing it).
+- Luck with a choice the log shows only in part (fainted first, could not move, no target): the expected value took in cells where it
+  Mega Evolved, which the log rules out; and Expanding Force spreading in Psychic Terrain lost its target (replay.py `spreadTarget`).
+  Game 237's turn 3: 76% expected, 41% with the exact choice.
+- Hidden bulk (Games 24, 220, 113, 195): spreads.nearby (strict), see above. Bo1 sets also guess items, which no spread fixes.
+- Hidden Speed with the bot's choice unseen (Game 165: its Farigiraf chose Psychic and fainted first, so the opponent's Kingambit was
+  faster than guessed). The bot's client now logs `|bot-choice|<rqid>|<choice>` after each request; Live.choice reads it and fills the
+  bot's acts where the log shows them only in part (its own games from 2026-10-12 on). Not yet used as a Speed reading.
+
 ## Louisville day 1 (2026-10-10)
 
 The same study on the Louisville day 1 stream (12 games from 1:15 pm, read live; `study.py out/champions/louisville1.ocr.jsonl 3 14340`,

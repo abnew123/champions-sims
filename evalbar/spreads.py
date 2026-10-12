@@ -240,8 +240,9 @@ def damage_observations(log, known_side, mid_weather=False):
     weather, terrain or screens earlier in the turn: [{turn, n, att, def, move, crit, spread, helping, hp: {att, def}, d | pct, atleast}]
     att / def as 'p1a' positions at the start of the turn; d the exact damage when the target is the known side's (its HP is exact),
     pct (before, after) percents when it is the other side's; atleast when it fainted or Focus Sash / Sturdy held (the hit did at least that).
-    mid_weather (the eval bar's, not yet the frozen bot's): a hit after the weather changed earlier in the turn (a Mega Charizard Y's
-    Drought) is kept, with 'weather' the weather it landed in, instead of left out"""
+    mid_weather (strict, a level: the bot's is 1 since the user OK'd it on 2026-10-12, the eval bar's 2): a hit after the weather changed
+    earlier in the turn (a Mega Charizard Y's Drought) is kept, with 'weather' the weather it landed in, instead of left out; at 2 also a
+    hit after the turn changed a stat stage (Intimidate, Defiant: 'boosts', applied) and a multi-hit move's first hit"""
     out = []; L = log.split('\n'); cut = [i for i, l in enumerate(L) if l.startswith('|turn|')]
     hp = {}                                                                   # 'p1a' -> (current, max) for the known side, percent for the other
     def read_hp(pos, tok):
@@ -256,7 +257,7 @@ def damage_observations(log, known_side, mid_weather=False):
         l = L[k]
         if True:
             t = int(l[6:]); end = cut[cut.index(k) + 1] if cut.index(k) + 1 < len(cut) else len(L); seg = L[k + 1:end]
-            changed = set(); helping = set(); switched = set(); megas = set(); n = 0; i = 0; dirty = [False]; wx = [None]
+            changed = set(); helping = set(); switched = set(); megas = set(); n = 0; i = 0; dirty = [False]; wx = [None]; bd = {}
             def track(l2):
                 """what a line changes for the hits after it this turn"""
                 q = l2.split('|')
@@ -265,6 +266,9 @@ def damage_observations(log, known_side, mid_weather=False):
                 if kind in ('switch', 'drag', 'replace'): switched.add(q[2][:3]); hp[q[2][:3]] = read_hp(q[2][:3], q[4] if len(q) > 4 else '')
                 elif kind == 'detailschange' and 'Mega' in l2: megas.add(q[2][:3])
                 elif kind == '-clearallboost': dirty[0] = True
+                elif mid_weather >= 2 and kind in ('-boost', '-unboost') and len(q) > 4 and q[4].isdigit():   # strict 2: kept as a change to its stages
+                    c_ = bd.setdefault(q[2][:3], {}); c_[q[3]] = c_.get(q[3], 0) + (int(q[4]) if kind == '-boost' else -int(q[4]))
+                elif mid_weather >= 2 and kind == '-ability' and len(q) > 3 and q[3] == 'Intimidate': pass   # the holder's own stats are as they were
                 elif kind in ('-boost', '-unboost', '-setboost', '-clearboost', '-clearnegativeboost', '-swapboost', '-copyboost', '-invertboost',
                               '-status', '-enditem', '-item', '-formechange', '-transform', '-start', '-ability'): changed.add(q[2][:3])
                 elif kind == '-weather' and '[upkeep]' not in l2 and mid_weather and q[2] in SD_WEATHER: wx[0] = q[2]
@@ -283,22 +287,25 @@ def damage_observations(log, known_side, mid_weather=False):
                     if move == 'Helping Hand' and len(q) > 4 and q[4]: helping.add(q[4][:3])
                     block = []; j = i + 1
                     while j < len(seg) and not re.match(r'\|(move|switch|drag|replace)\||^\|$', seg[j]): block.append(seg[j]); j += 1
-                    skip = dirty_field or att in changed or att in switched or move in FIXED_DMG or any(x.startswith('|-hitcount|') for x in block)
+                    multi = any(x.startswith('|-hitcount|') for x in block); first = set()   # strict 2: a multi-hit move's first hit is an ordinary hit
+                    skip = dirty_field or att in changed or att in switched or move in FIXED_DMG or (multi and not mid_weather >= 2)
                     crit = {x.split('|')[2][:3] for x in block if x.startswith('|-crit|')}
                     held = {x.split('|')[2][:3] for x in block if re.match(r'\|-enditem\|[^|]+\|Focus Sash|\|-activate\|[^|]+\|ability: Sturdy', x)}
                     nosub = {x.split('|')[2][:3] for x in block if re.search(r'Substitute|Disguise|Ice Face', x)}
-                    before = dict(hp); boosted = set()
+                    before = dict(hp); boosted = set(); pcrit = set()
                     for x in block:                                           # the hits, and HP as the block leaves it
                         y = x.split('|')
+                        if len(y) > 2 and y[1] == '-crit': pcrit.add(y[2][:3])         # a crit marks the hit that follows it (each hit of a multi-hit move)
                         if len(y) > 2 and y[1] in ('-boost', '-unboost', '-setboost', '-clearboost', '-enditem', '-item', '-formechange'): boosted.add(y[2][:3])   # mid-move (Electro Shot's charge)
                         if att in boosted: skip = True
                         if len(y) > 3 and y[1] in ('-damage', '-heal', '-sethp'):
                             v = read_hp(y[2][:3], y[3])
-                            if y[1] == '-damage' and '[from]' not in x and not skip:
-                                d_ = y[2][:3]
+                            if y[1] == '-damage' and '[from]' not in x and not skip and not (multi and y[2][:3] in first):
+                                d_ = y[2][:3]; first.add(d_)
                                 if d_[:2] != att[:2] and known_side in (att[:2], d_[:2]) and d_ not in changed and d_ not in switched and d_ not in nosub and d_ not in boosted and before.get(d_) is not None and v is not None:
-                                    ob = {'turn': t, 'n': n, 'att': att, 'def': d_, 'move': move, 'crit': d_ in crit, 'spread': '[spread]' in l2, 'helping': att in helping,
-                                          'megas': sorted(megas), 'atleast': v == 0 or d_ in held, **({'weather': wx[0]} if wx[0] else {})}
+                                    ob = {'turn': t, 'n': n, 'att': att, 'def': d_, 'move': move, 'crit': (d_ in pcrit) if multi else d_ in crit, 'spread': '[spread]' in l2, 'helping': att in helping,
+                                          'megas': sorted(megas), 'atleast': v == 0 or d_ in held, **({'weather': wx[0]} if wx[0] else {}),
+                                          **({'boosts': {k_: dict(bd[k_]) for k_ in (att, d_) if bd.get(k_)}} if bd.get(att) or bd.get(d_) else {})}
                                     ha = before.get(att); hd = before[d_]
                                     ob['hp'] = {'att': ['abs', ha[0]] if isinstance(ha, tuple) else ['pct', ha] if ha else None, 'def': ['abs', hd[0]] if isinstance(hd, tuple) else ['pct', hd]}
                                     if d_[:2] == known_side: ob['d'] = hd[0] - (v[0] if isinstance(v, tuple) else 0)
@@ -355,6 +362,9 @@ def damage_ranges(gp, sets, known_side, known_evs, dobs, cands, strict=False):
                     if sd == other and m['sp'] == um['sp']: s_['evs'] = list(evs)
                     x = LV.spec_mon(m, s_)
                     if sd + m['pos'] in ob['megas']: x['mega'] = True
+                    if (ob.get('boosts') or {}).get(sd + m['pos']):                # stages changed earlier in the turn (Intimidate, Defiant)
+                        x['boosts'] = {**(x.get('boosts') or {})}
+                        for k_, v_ in ob['boosts'][sd + m['pos']].items(): x['boosts'][k_] = max(-6, min(6, x['boosts'].get(k_, 0) + v_))
                     mons.append(x)
                 else:
                     while len(mons) < 4: mons.append({**mons[-1], 'fainted': True, 'onField': False})   # a full team for 'team 1234'
@@ -367,7 +377,7 @@ def damage_ranges(gp, sets, known_side, known_evs, dobs, cands, strict=False):
             if ob.get('weather'): spec['field']['weather'] = [SD_WEATHER[ob['weather']], 5] if SD_WEATHER[ob['weather']] else None   # as it landed
             want.append((key, (oi, um['sp'], tuple(evs)), {'spec': spec, 'att': [0 if ob['att'][:2] == 'p1' else 1, ia], 'def': [0 if ob['def'][:2] == 'p1' else 1, idf],
                                                           'move': ob['move'], 'crit': ob['crit'], 'spread': ob['spread'], 'helping': ob['helping'], 'hp': ob['hp'],
-                                                          **({'strict': True} if strict else {})}))
+                                                          **({'strict': int(strict)} if strict else {})}))
     if want:
         with tempfile.TemporaryDirectory() as d:
             qf, of = os.path.join(d, 'q.json'), os.path.join(d, 'r.json'); json.dump([w[2] for w in want], open(qf, 'w'))
@@ -392,12 +402,12 @@ def refine(log, gp, sets, known_side, known_evs, strict=False):
         misses = lambda evs, sp=sp, mine=mine: sum(not damage_fits(ob, R_.get((oi, sp, tuple(evs))), 0 if strict else 1) for oi, ob in mine)
         evs, why[sp] = pick(sp, st['nature'], st['item'], st['evs'], obs, misses if mine else None, len(mine))
         if strict and mine and misses(evs) > 0:                              # no listed spread fits the hits: look nearby
-            near = nearby(gp, sets, known_side, known_evs, dobs, sp, st, mine, obs, misses)
+            near = nearby(gp, sets, known_side, known_evs, dobs, sp, st, mine, obs, misses, strict)
             if near: evs, why[sp] = near
         sets[other][sp] = {**st, 'evs': evs}
     return why
 STATS6 = ['HP', 'Atk', 'Def', 'SpA', 'SpD', 'Spe']
-def nearby(gp, sets, known_side, known_evs, dobs, sp, st, mine, obs, misses0):
+def nearby(gp, sets, known_side, known_evs, dobs, sp, st, mine, obs, misses0, strict=True):
     """the eval bar's strict reading, when the hits rule out every listed spread (about half of each species' use is outside Smogon's
     list): the most used spreads (and the plain guess) with points moved into the stats the missed hits involve (HP and the defence a
     hit on it used, the attack stat of a hit by it), at most two moves, keeping the turn order; fewest missed hits, then the smallest
@@ -430,7 +440,7 @@ def nearby(gp, sets, known_side, known_evs, dobs, sp, st, mine, obs, misses0):
                 cand[tuple(e)] = (name, d0 + d, (how0 + ', ' if how0 else '') + f'{d} from {STATS6[f]} to {STATS6[t]}')
         if not cand: break
         allc.update(cand)
-        R2 = damage_ranges(gp, sets, known_side, known_evs, dobs, {sp: [list(e) for e in cand]}, True)
+        R2 = damage_ranges(gp, sets, known_side, known_evs, dobs, {sp: [list(e) for e in cand]}, strict)
         scored = sorted((sum(not damage_fits(ob, R2.get((oi, sp, e)), 0) for oi, ob in mine), cand[e][1], [b[0] for b in bases].index(cand[e][0]), e) for e in cand)
         top = scored[0]
         if best is None or top[:3] < best[:3]: best = top

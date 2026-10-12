@@ -288,7 +288,7 @@ class Live:
             sd = rq['side']['id']; s.bot_side = sd
             if s.team is None: s.team = bot_team(pre, sd)
             mons, why = BP.own_side(step['state'][sd], sets[sd], rq, BP.team_sets(s.team), dropped)
-            why_sp = BP.refine_opponent(src, gsrc, sets, sd, rq, strict=True)   # the opponent's spreads against the turn order seen so far
+            why_sp = BP.refine_opponent(src, gsrc, sets, sd, rq, strict=2)   # the opponent's spreads against the turn order seen so far
             if not hindsight: s.spread_why[t] = why_sp
             if mons:
                 own = (sd, mons); seen = {toid(m['sp'].split('-')[0]) for m in step['state'][sd]['mons']}

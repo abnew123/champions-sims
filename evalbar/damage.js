@@ -28,7 +28,7 @@ const out = JSON.parse(fs.readFileSync(qf)).map(q => {
     if (q.strict && BREAKS.has(toID(q.move))) for (const c of ['reflect', 'lightscreen', 'auroraveil']) def.side.removeSideCondition(c);
     const roll = r => {
       const move = dex.getActiveMove(toID(q.move));
-      if (q.strict) { b.activeMove = move; b.activePokemon = att; b.activeTarget = def; }   // as a move in use (some handlers read these)
+      if (q.strict) { b.activeMove = move; b.activePokemon = att; b.activeTarget = def; if (q.strict >= 2) move.hit = 1; }   // a move in use; its first hit (strict 2)
       b.singleEvent('ModifyType', move, null, att, def, move, move); b.runEvent('ModifyType', att, def, move, move);
       b.singleEvent('ModifyMove', move, null, att, def, move, move); b.runEvent('ModifyMove', att, def, move, move);
       move.willCrit = !!q.crit; if (q.spread) move.spreadHit = true;

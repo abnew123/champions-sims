@@ -1153,6 +1153,13 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
   0.5301 with sym2 (**-0.0080 ± 0.0052**; h16: -0.0066), 3.6 vs 2.1 s a position; self-play on the 800 pool starts: side 0 +0.9 ± 2.2,
   side 1 +5.8 ± 2.2, **pooled +3.3 ± 1.5** over 1,600 games (the first evaluator change here with a self-play gain beyond 2 SE), 2.1x the
   time per game. Both nets helped side 1 more than side 0 (within noise so far).
+- **Full damage-calc data (2026-10-12 evening, pssim/value_fc.sh):** champions_data.json lacked 1,250 species (Basculegion-F among
+  them), so the race features fell back for them. With native/champions_data_full.json: the positions it changes re-searched, the h64
+  net refitted (bot/value/vnet_h64_search_fc.json). Held out: 0.5219 vs the deployed net's 0.5221 (-0.0001 ± 0.0013, a tie); self-play
+  on the 800 pool starts (frozen engine champ-dev-2026-10-12d, full calc data, sym2 on the other side): side 0 +4.5 ± 2.2, side 1
+  +5.3 ± 2.1, **pooled +4.9 ± 1.5** (the deployed net had +3.3 ± 1.5 on the older engine and calc data; no direct net-vs-net
+  head-to-head: the engine takes one net and one calc file). A first run of the self-play arms used the dev link while the engine was
+  being rebuilt and was discarded: freeze the binary before long comparisons.
 
 ## Engine bug hunt: mid-battle differential tests and ports (2026-10-12 evening; the user, through the Eval bar: a systematic bug hunt)
 Split with the Eval bar: Battle sim runs engine-vs-Showdown differential tests and ports; the Eval bar audits handler coverage

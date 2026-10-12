@@ -14,5 +14,7 @@
   "paused": false,
   "forfeit_below": 0.02,
   "protect_chain_cap": 4,
-  "max_search_seconds": 30
+  "max_search_seconds": 30,
+  "top_band_window": 20,
+  "top_band_max": 3
 }

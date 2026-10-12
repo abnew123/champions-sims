@@ -56,10 +56,25 @@ function mayPlay(reason) {
   if (g.filter(x => now - Date.parse(x.when) < 3600e3).length >= L.max_games_per_hour) return 'hourly cap';
   if (L.max_games_per_day != null && g.filter(x => now - Date.parse(x.when) < 86400e3).length >= L.max_games_per_day) return 'daily cap';
   if (myRating != null && L.stop_if_rating_at_least != null && myRating >= L.stop_if_rating_at_least) return `our rating ${myRating.toFixed(0)} is at the stop`;
-  if (stoppedForTop) return 'met a top-of-ladder opponent';
+  const tb = topBandShare(); if (tb && tb.top >= (L.top_band_max || 3)) return `${tb.top} of the last ${tb.n} matches were against the top ${L.stop_if_opponent_in_top}`;
   return null;
 }
 let stoppedForTop = false;
+// the stop near the top (the user, 2026-10-12: no single match is safe to stop on, since a top player who has waited long enough is
+// matched with anyone): stop once top_band_max (3) of the last top_band_window (20) matches were against a player rated at or above the
+// ladder's stop_if_opponent_in_top-th (50th). Matches, not games: a best-of-3 against one top player is two or three games. Games are
+// grouped into matches by their best-of-3 room (games.jsonl 'match'), or, for older records, by consecutive games against the same rating.
+function topBandShare() {
+  const L = limits(); if (!isFinite(topBand.elo)) return null;
+  const M = []; let prev = null;
+  for (const x of games()) {
+    const key = x.match || `${x.oppRating}`;
+    if (!prev || key !== prev.key || Date.parse(x.when) - prev.t > 30 * 60e3) { prev = {key, opp: x.oppRating || 0, t: Date.parse(x.when)}; M.push(prev); }
+    else { prev.opp = Math.max(prev.opp, x.oppRating || 0); prev.t = Date.parse(x.when); }
+  }
+  const last = M.slice(-(L.top_band_window || 20));
+  return {n: last.length, top: last.filter(m => m.opp >= topBand.elo).length};
+}
 
 // ---- the connection
 let searchStart = 0;   // when our current ladder search began (limits.json max_search_seconds cancels a longer one)
@@ -234,7 +249,7 @@ async function handleRequest(room, R) {
     currentTeam = cands.filter(t => covers(t) === sp.length).sort((a, b) => sz(a) - sz(b))[0] || cands.sort((a, b) => covers(b) - covers(a))[0];
     log('team recovered after a restart:', currentTeam.name);
   }
-  if (R.oppRating != null && R.oppRating >= topBand.elo && !stoppedForTop) { stoppedForTop = true; log(`opponent rated ${R.oppRating} is in the ladder's top band: this is the last game`); }
+  if (R.oppRating != null && R.oppRating >= topBand.elo && !R.topNoted) { R.topNoted = true; log(`opponent rated ${R.oppRating} is in the ladder's top ${limits().stop_if_opponent_in_top} (counts toward the stop)`); }
   const think = LOCAL ? 300 : req.teamPreview ? rnd(8e3, 20e3) : rnd(L.think_seconds[0] * 1e3, L.think_seconds[1] * 1e3);
   const t0 = Date.now();
   if (req.teamPreview) {   // the open sheets (|showteam|) follow the preview request by a moment: wait for the opponent's, up to 8 s
@@ -255,7 +270,8 @@ async function handleRequest(room, R) {
 function onEnd(room, R, winner) {
   if (R.done) return; R.done = true;
   const won = winner && me && winner.toLowerCase() === me.toLowerCase();
-  const g = {when: new Date().toISOString(), room, side: R.side, won: winner ? !!won : null, turns: R.turn, oppRating: R.oppRating, myRating, team: currentTeam && currentTeam.name, arm: currentTeam && currentTeam.arm};
+  const mm = R.lines.map(l => /game-bestof\d-[a-z0-9]+-(\d+)/.exec(l)).find(Boolean);   // the best-of-3 this game belongs to (Bo1: the game itself)
+  const g = {when: new Date().toISOString(), room, side: R.side, won: winner ? !!won : null, turns: R.turn, oppRating: R.oppRating, myRating, team: currentTeam && currentTeam.name, arm: currentTeam && currentTeam.arm, match: mm ? mm[1] : room, format: FORMAT};
   fs.appendFileSync(GAMES, JSON.stringify(g) + '\n'); fs.writeFileSync(path.join(OUT, room + '.log'), R.lines.join('\n') + '\n');
   log('game over', room.slice(-12), won ? 'won' : winner ? 'lost' : 'tie', 'turns', R.turn, 'opp', R.oppRating, 'me', myRating);
   setTimeout(() => { send(`${room}|/leave`); delete rooms[room]; }, 5000);

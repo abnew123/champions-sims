@@ -251,7 +251,7 @@
    }
   ],
   "sheet": "sheets/frankfurt-239/picks.json",
-  "weight": 1
+  "weight": 0
  },
  {
   "name": "Frankfurt-156",
@@ -378,6 +378,6 @@
    }
   ],
   "sheet": "sheets/frankfurt-156/picks.json",
-  "weight": 1
+  "weight": 0
  }
 ]

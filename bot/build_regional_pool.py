@@ -1,7 +1,8 @@
 """The no-sheet arm's team pool (2026-10-11, the user: random teams from recent regionals, played with no sheet): the top 64 of each of
 the latest regionals with open team sheets (teamsearch/regmatch/f192..f194.json), each six as the bot's team format, spreads by the
 species' usual spread (regionals/smogon_mc_sets.json; the sheets show none), minus the two Frankfurt sixes the bot already plays with
-sheets and any team with a species, item, ability or move the engine data lacks. Written to bot/out/regional_pool.json (git-ignored;
+sheets, any team with a species, item, ability or move the engine data lacks, and (2026-10-12, the user) any team with Perish Song:
+the planner can't play the Perish trap, so those games would measure that blind spot instead of sheet against no sheet. Written to bot/out/regional_pool.json (git-ignored;
 teams are named by event and placing only).
   .venv/bin/python3 bot/build_regional_pool.py [top=64]"""
 import json, os, sys, re
@@ -42,6 +43,7 @@ for ev in ('f192', 'f193', 'f194'):
             if toid(m.get('ability')) not in ABIL: why = 'ability ' + str(m.get('ability')); break
             nat = m.get('stat_alignment') or 'Serious'
             sets.append({'species': sp, 'item': m.get('item') or '', 'ability': m['ability'], 'nature': nat, 'evs': spread(sp, nat), 'moves': mv})
+        if not why and any('Perish Song' in x['moves'] for x in sets): why = 'Perish Song'
         if why: skipped[why] = skipped.get(why, 0) + 1; continue
         if sorted(x['species'] for x in sets) in sheets: skipped['a sheet team'] = skipped.get('a sheet team', 0) + 1; continue
         pool.append({'name': f'{ev} #{p["placing"]}', 'sets': sets})

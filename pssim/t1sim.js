@@ -4,6 +4,20 @@
 const {Battle, Dex, Teams} = require('pokemon-showdown');
 const dex = Dex.mod('champions');
 const fs = require('fs');
+// pokemon-showdown 0.11.11's champions mod gives three Megas an outdated ability (Golisopod-Mega Emergency Exit, Garchomp-Mega-Z Sand
+// Force, Absol-Mega-Z Magic Bounce; real games: Tough Claws, Levitate, Sharpness; found by Eval bar, 2026-10-11). Its species data is
+// frozen, so each battle's Mega Evolution is wrapped to give the Mega the engine data's ability (as evalbar/positions.js does).
+const MEGA_ABILITY = {};
+for (const [id, s] of Object.entries(JSON.parse(fs.readFileSync(__dirname + '/../native/engine_data_full.json')).species)) {
+  const sp = dex.species.get(id);
+  if (/mega/.test(id) && s.abilities && s.abilities['0'] && sp.exists && sp.abilities['0'] !== s.abilities['0']) MEGA_ABILITY[id] = s.abilities['0'];
+}
+function fixMegas(b) {
+  const run = b.actions.runMegaEvo.bind(b.actions);
+  b.actions.runMegaEvo = (p) => { const r = run(p); const ab = MEGA_ABILITY[p.species.id];
+    if (r && ab && dex.toID(ab) !== p.ability) { p.setAbility(ab, null, null, true); p.baseAbility = dex.toID(ab); } return r; };
+  return b;
+}
 const foes = JSON.parse(fs.readFileSync(__dirname + '/../foes.json'));
 // OPP_MODEL=<file>: another opponent model in the same shape (e.g. the sheet kit's per-group models built from real teams); default the archetypes
 const OPP = process.env.OPP_MODEL ? JSON.parse(fs.readFileSync(process.env.OPP_MODEL))
@@ -161,7 +175,7 @@ function sig(b) {  // battle state signature, mega formes folded into base speci
   return parts.join('|');
 }
 function runCell(myTeam, oppTeam, prim, c1, c2, seed) {
-  const b = new Battle({formatid: 'gen9championsdoublescustomgame', seed}); b.debugMode = false;
+  const b = fixMegas(new Battle({formatid: 'gen9championsdoublescustomgame', seed})); b.debugMode = false;
   b.setPlayer('p1', {name: 'Me', team: myTeam}); b.setPlayer('p2', {name: 'Them', team: oppTeam});
   b.choose('p1', 'team 1234'); b.choose('p2', 'team 1234');
   const s0 = sig(b);
@@ -219,7 +233,7 @@ function run(B, seeds) {
     oppTeam: B.oppTeam.map(s => `${s.species} @ ${s.item} (${s.ability}) ${s.nature} [${s.moves.join(',')}] ${Object.values(s.evs).join('/')}`)};
 }
 function matchup(arch, pairIdx, myLead, myBack, seeds) { return run(build(arch, pairIdx, myLead, myBack), seeds); }
-module.exports = {matchup, build, run, myOptions, theirOptions, MY, OPP, oppSet, parseDist, runCell, toSet, feats, primary};
+module.exports = {matchup, build, run, myOptions, theirOptions, MY, OPP, oppSet, parseDist, runCell, toSet, feats, primary, fixMegas, MEGA_ABILITY};
 if (require.main === module) {
   const [arch, idx, l1, l2, b1, b2, nseed, out] = process.argv.slice(2);
   const seeds = Array.from({length: +nseed}, (_, k) => require('./seedmix.js')(k + 1));

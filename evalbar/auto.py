@@ -11,8 +11,8 @@ Every 30 seconds (the channel page every 5 minutes):
     on mains power only (caffeinate -s)
   - none is live: serve the newest VGC stream. One never read (the Mac was off) is read from the recording first (scan, 1 OCR worker
     and 2 fetchers), then served
-  - CPU: a follow or scan pauses (its whole process group, the page too) while other programs keep 8 or more cores busy, and carries
-    on below 6
+  - CPU: a follow or scan, or a serve while it is evaluating, pauses (its whole process group, the page too) while everything else on the
+    Mac (the Eval bar thread's other programs included) keeps 8 or more cores busy, and carries on below 6
   - the public page on the user's site: every 10 seconds what changed goes up (publish.py), once ~/.config/evalbar/site.json exists
 The supervisor's log is evalbar/out/live/auto.log, its programs' output evalbar/out/live/auto_child.log."""
 import os, re, sys, json, time, signal, plistlib, threading, subprocess
@@ -54,14 +54,24 @@ def streams():
             for y in x: walk(y)
     walk(json.loads(m.group(1)))
     return out
-def others_busy():
-    """cores busy with programs other than this thread's (ps's recent CPU share, summed)"""
+def busy_in(group):
+    """cores busy in one process group"""
     tot = 0.0
-    for l in subprocess.run(['ps', '-Aceo', 'pcpu=,comm='], capture_output=True, text=True).stdout.splitlines():
-        p = l.strip().split(None, 1)
-        if len(p) == 2 and not p[1].startswith('evalbar-'):
-            try: tot += float(p[0])
-            except ValueError: pass
+    for l in subprocess.run(['ps', '-Aeo', 'pgid=,pcpu='], capture_output=True, text=True).stdout.splitlines():
+        p = l.split()
+        try:
+            if len(p) == 2 and int(p[0]) == group: tot += float(p[1])
+        except ValueError: pass
+    return tot / 100
+def others_busy(group=None):
+    """cores busy with everything but the supervisor and its program's process group (ps's recent CPU share, summed); the Eval bar
+    thread's other evalbar- processes count, since they are not the supervisor's to pause"""
+    tot = 0.0
+    for l in subprocess.run(['ps', '-Aeo', 'pid=,pgid=,pcpu='], capture_output=True, text=True).stdout.splitlines():
+        p = l.split()
+        try:
+            if len(p) == 3 and int(p[0]) != os.getpid() and int(p[1]) != group: tot += float(p[2])
+        except ValueError: pass
     return tot / 100
 class Child:
     """the one program the supervisor runs: follow, serve or scan of one stream, in its own process group"""
@@ -91,10 +101,12 @@ class Child:
         except subprocess.TimeoutExpired: s.signal(signal.SIGKILL); s.p.wait()
         log('stopped', s.mode, s.vid); s.p = None
     def guard(s):
-        """pause a follow or scan while the rest of the Mac is busy"""
-        if s.mode not in ('follow', 'scan') or not s.alive(): return
-        busy = others_busy()
-        if not s.paused and busy >= PAUSE: s.signal(signal.SIGSTOP); s.paused = True; log(f'paused: other programs keep {busy:.1f} cores busy')
+        """pause the program while the rest of the Mac is busy: a follow or scan always, a serve only while it is evaluating (an idle
+        serve costs nothing, and pausing it would take the page down)"""
+        if not s.alive(): return
+        busy = others_busy(s.p.pid)                                   # its program leads its own process group
+        working = s.mode != 'serve' or busy_in(s.p.pid) >= 0.5
+        if not s.paused and working and busy >= PAUSE: s.signal(signal.SIGSTOP); s.paused = True; log(f'paused: other programs keep {busy:.1f} cores busy')
         elif s.paused and busy < RESUME: s.signal(signal.SIGCONT); s.paused = False; s.since = time.time(); log(f'carrying on ({busy:.1f} cores busy)')
     def stalled(s):
         """a follow that has fetched no fragment for 5 minutes (not counting its first 5 minutes or a pause)"""

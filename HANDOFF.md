@@ -1135,6 +1135,16 @@ also removes predict-the-switch rows in the anticipation pass, and side 0 never 
   turn). About 0.3 ms a position.
 - Fits (`pssim/value_fit.py compare`): value = sigmoid(h(e) - h(e_swapped)), symmetric by construction. On real results, a linear h on
   the new features + the 28 old ones: held-out log loss **0.5423** vs the current static 0.5535 (-0.011 ± 0.006); one-hidden-layer nets
-  overfit the ~3,900 games' results (0.545-0.67). Next: distil the one-turn search (its values as targets, far less noisy than results),
-  then put the best h into the engine behind a flag and measure: held-out log loss of the one-turn search with it at the leaves, self-play
-  head-to-head, and the bot's ledger.
+  overfit the ~3,900 games' results (0.545-0.67). Distilling the one-turn search (its log-odds as the target, squared error): linear
+  0.5374, a 16-unit tanh net **0.5342** (-0.019 vs the static value; the search itself 0.5225: 60% of the gap closed). Exported with
+  `value_fit.py export 16 1e-3 search` -> results/value/vnet_h16_search.json.
+- In the engine (`EG_VNET=<json>`, dev build; needs RACE=1 RACE_PRIO=1 FEATS22=1 CALC_DATA): the net scores both sides' leaves
+  (`EG_VNET_SIDE=0|1`: only that side, for head-to-heads; replacements honour per-side values). Matches the Python model to 1e-15;
+  0.15 ms a position. One-turn search with the net at the leaves on 1,503 held-out positions (220 games): log loss 0.5235 vs 0.5301 with
+  sym2 at the leaves, **-0.0065 ± 0.0051**, same cost (2.15 vs 2.04 s a position). Self-play head-to-head on the 800 pool starts (sym2
+  baseline run with the same flags): net on side 0 +0.6 ± 2.2, side 1 +3.0 ± 2.1, **pooled +1.8 ± 1.5** over 1,600 games; 2.2x the time
+  per game (the matchup features at every leaf; not yet optimised).
+- More data: `protect_replays.py new` fetched 14,262 Bo3 replays from 2026-10-04 to 10-12 (19,194 cached); they lean low-rated (45% of
+  the rated ones 1000-1099). `value_data.py positions new` / `feats new` / `search 6 new` put them in part 'new' (the fit and held-out
+  sets stay as they were for comparisons). Next: refit on fit + new (bigger nets, rating weights), a second round of distillation from
+  the search with the net at the leaves, and speeding up vfeats.

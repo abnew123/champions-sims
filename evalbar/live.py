@@ -231,7 +231,7 @@ class Live:
         s.log = logfile or os.path.join(OUT, f'{s.tag}.log'); s.evf = os.path.join(OUT, f'{s.tag}_eval.jsonl'); s.data = None; s.status = 'connecting'
         s.weights = {}; s.hyp = {}; s.poscache = {}; s.over = False; s.skip = {}
         s.exact = False; s.team = None; s.back = {}; s.bot_side = None; s.held = None; s.spread_why = {}
-        s.luck = False; s.lf = os.path.join(OUT, f'{s.tag}_luck.jsonl'); s.luck_state = None; s.lweights = {}; s.dirty = False   # luck: after the game      # a Showdown bot's own log (bot/): its side known from its requests
+        s.luck = False; s.lf = os.path.join(OUT, f'{s.tag}_luck.jsonl'); s.luck_state = None; s.lweights = {}; s.dirty = False; s.page_cache = None   # luck: after the game      # a Showdown bot's own log (bot/): its side known from its requests
         # the user's verdicts where the battle text and the rules disagree (broadcasts: evalbar/rules.py), kept beside the log
         s.fixf = os.path.join(OUT, f'{s.tag}_fixes.json'); s.fixes = json.load(open(s.fixf)) if logfile and os.path.exists(s.fixf) else {}; s.redo = None
     def page(s):
@@ -438,7 +438,7 @@ class Live:
             positions(sp, posf)                                              # side's actual_v (what its choice cost) comes out
             with LUCK: EN.run(posf, s.lf, 1, 32, 1, extra={'EVAL_MATRIX': '1', 'CHAMP_BIN': LUCK_BIN}, nice=19)
             s.dirty = True
-        s.luck_state = 'done'; s.dirty = True
+        s.dirty = True; s.luck_state = 'done'                                # dirty first: the run loop saves a finished page only once it is rebuilt with the luck
         if s.tag.startswith('bot_'):                                        # the bot page's progress card: one line per game whose luck is done
             with open(os.path.join(OUT, 'bot_luck.games'), 'a') as fh: fh.write(s.tag + '\n')
     def evaluate(s, log, g, step):
@@ -490,10 +490,19 @@ class Live:
                 s.status = status; s.dirty = False
                 with WORK: s.build(log, g)
                 seen_len = len(log)
+            if s.page_cache and status == 'finished' and not todo and (not s.luck or s.luck_state == 'done') and not s.dirty:
+                tmp = s.page_cache + '.tmp'; json.dump({'v': PAGE_V, 'data': s.data}, open(tmp, 'w'), ensure_ascii=False); os.replace(tmp, s.page_cache)
+                return                                                       # the bot page: a finished game is read from its file from now on
             if feed.poll() is not None and not todo and not s.over:
                 s.over = True
                 if s.port: print(f'battle over; the page stays up at http://localhost:{s.port} until you stop this (Ctrl-C)', flush=True)
             time.sleep(1)
+# the bot page's finished games are saved as their pages (out/live/bot_<n>_page.json) once evaluated and their luck worked out, so a restart
+# reads them instead of rebuilding every turn (about an hour for 400 games). PAGE_V: raise it when a change should rebuild them all
+PAGE_V = 1
+class Finished:
+    """a finished bot game read from its saved page: what BotRunner.serve needs of a Live"""
+    def __init__(s, room, fmt, data): s.room, s.fmt, s.data, s.status = room, fmt, data, 'finished'
 def botfmt(room):
     """the bot page's format line: its Bo1 games (since 2026-10-12) have no team sheets, so the opponent's sets are guessed as a spectator's"""
     return ('Bo3, open team sheets' if 'bo3' in room else 'Bo1, closed team sheets') + ' · the bot is Player 1, its side from its own log'
@@ -537,7 +546,13 @@ class BotRunner:
             else: new = [f for f in fs if f not in s.known]; s.known |= set(new)
             for f in new:
                 room = os.path.basename(f)[:-4]; num = re.search(r'-(\d+)(?:-[a-z0-9]+)?$', room).group(1); s.files.append(f)
-                lv = Live(room, s.threads, 0, logfile=f, tag='bot_' + num, fmt=botfmt(room))
+                pc = os.path.join(OUT, f'bot_{num}_page.json'); c = None
+                if os.path.exists(pc):
+                    try: c = json.load(open(pc))
+                    except Exception: c = None
+                if c and c.get('v') == PAGE_V:                               # a finished game: its page as saved, no thread (2026-10-13)
+                    s.lives.append(Finished(room, botfmt(room), c['data'])); continue
+                lv = Live(room, s.threads, 0, logfile=f, tag='bot_' + num, fmt=botfmt(room)); lv.page_cache = pc
                 lv.exact = True; lv.luck = True; s.lives.append(lv); threading.Thread(target=lv.run, daemon=True).start()
                 print(time.strftime('%-I:%M %p'), 'following the bot\'s game', num, flush=True)
             time.sleep(5)

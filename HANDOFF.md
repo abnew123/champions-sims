@@ -1218,3 +1218,20 @@ registrations since its second version) and checks reachability of real logs in 
 - **battle_starts.js job.meta.seed_index (2026-10-13, Team search):** with SEED_PER_JOB, a job's battle and sampling seeds use it in
   place of the job index, so the same four against the same opponent entry plays the same game wherever it sits in the list (tested:
   identical start lines and games at different positions). champ battle's own seeds already come from seedKey (their four) and g.
+- **Style bias of the learned value (2026-10-13, 1:51 pm; the user, through Team search: "how does the current model look bias wise?").**
+  replay_pairs.py on the Oct 7 set (2,094 real pairings, both players 1150+, both brings seen, the humans' own leads and brings), v27
+  with the climb's frozen flags, sim minus real win rate by style:
+  | style | sym2 (v27s) | h64 net (v27) |
+  |---|---|---|
+  | Rain | +1.7 | +0.8 |
+  | Sun | +0.9 | +2.7 |
+  | Trick Room | -5.1 | -1.1 |
+  | Indeedee TR | -9.7 | -3.4 |
+  | Tailwind | +8.2 | +1.6 |
+  | Snow | +7.0 | +5.4 |
+  | Balance | -7.0 | -0.6 |
+  | Sand | +0.0 | -5.4 |
+  | Rain + Sun | +8.9 | -0.9 |
+  (± about 2.5-5 by style, the same games for both.) RMS over the nine non-Perish styles: sym2 **6.4** (Oct 7: 5.6), net **3.0**, about
+  what sampling noise alone gives. Agreement with the real winner 54.7% -> **55.9%**. The net removes the Tailwind-over / Indeedee TR and
+  Balance-under shape that no value or depth change touched on Oct 7; Snow +5 and Sand -5 remain, both within 1.4 SE.

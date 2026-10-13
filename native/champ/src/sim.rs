@@ -36,10 +36,13 @@ impl Battle {
             if l == "recharge" { return vec![(id("recharge"), id("self"), false)]; }
             return vec![(l, self.dex.mv(l).tmpl.target, false)];
         }
+        // a hidden disable (Imprison) shows as usable in the side's last active Pokemon's request (getMoves' restrictData = isLastActive,
+        // 2026-10-13: an Imprisoned Farigiraf mirror read as Struggle); the move then fails when used
+        let last = { let s = m.0 as usize; let pos = self.p(m).position as usize; self.p(m).is_active && ((pos + 1)..2).all(|i| self.sides[s].active[i].map(|x| self.sides[s].pokemon[x as usize].fainted).unwrap_or(true)) };
         let p = self.p(m);
         let mut out = vec![]; let mut any = false;
         for s in &p.move_slots {
-            let disabled = s.disabled || s.pp <= 0;
+            let disabled = if s.pp <= 0 { true } else if s.disabled && s.disabled_hidden { !last } else { s.disabled };
             if !disabled { any = true; }
             out.push((s.id, self.dex.mv(s.id).tmpl.target, disabled));
         }
@@ -186,7 +189,13 @@ impl Battle {
         for s in 0..2u8 { for i in 0..2 {
             if !req[s as usize][i] { continue; }
             let Some(pi) = self.sides[s as usize].active[i] else { continue };
-            if let PChoice::Switch(pos) = choices[s as usize][i] { if let Some(t) = self.mon_at_position(s, pos) { acts.push(switch_action(Choice::InstaSwitch, (s, pi), t)); } }
+            if let PChoice::Switch(pos) = choices[s as usize][i] { if let Some(t) = self.mon_at_position(s, pos) {
+                // Revival Blessing (2026-10-13, the Eval bar: it revived nothing): the user's slot holds the condition, the choice names a
+                // fainted Pokemon, and the action revives it (side.ts chooseSwitch: order 6, the user stays in)
+                if self.revive_slot(s, i) {
+                    if self.p(t).fainted { self.pm((s, pi)).switch_flag = None; let mut a = simple_action(Choice::RevivalBlessing, 6.0); a.pokemon = Some((s, pi)); a.target = Some(t); acts.push(a); }
+                } else { acts.push(switch_action(Choice::InstaSwitch, (s, pi), t)); }
+            } }
         } }
         for a in acts { let r = self.resolve_action(a, false); self.queue.extend(r); }
         self.sort_queue();
@@ -194,6 +203,10 @@ impl Battle {
         self.request_switch = false;
         self.turn_loop();
     }
+    /// active slot i of side s holds Revival Blessing's slot condition: its switch request picks a fainted Pokemon to revive
+    pub fn revive_slot(&self, s: u8, i: usize) -> bool { find(&self.sides[s as usize].slot_conditions[i], "revivalblessing").is_some() }
+    /// the team positions of side s's fainted Pokemon (Revival Blessing's choices)
+    pub fn fainted_positions(&self, s: u8) -> Vec<u8> { let mut v: Vec<u8> = self.sides[s as usize].pokemon.iter().filter(|p| p.fainted).map(|p| p.position).collect(); v.sort(); v }
     pub fn mon_at_position(&self, s: u8, pos: u8) -> Option<MonRef> {
         self.sides[s as usize].pokemon.iter().position(|p| p.position == pos).map(|i| (s, i as u8))
     }
@@ -252,6 +265,15 @@ impl Battle {
                 if self.switch_in(a.target.unwrap(), self.p(m).position, a.source_effect, false) == SwitchResult::PursuitFaint { /* gen 5+: the switch just doesn't happen */ }
             }
             Choice::RunSwitch => { self.run_switch(a.pokemon.unwrap()); }
+            Choice::RevivalBlessing => {
+                let (m, t) = (a.pokemon.unwrap(), a.target.unwrap()); let s = m.0;
+                self.sides[s as usize].pokemon_left += 1;
+                if (self.p(t).position as usize) < 2 { let r = self.resolve_action(switch_action(Choice::InstaSwitch, t, t), false); self.queue.extend(r); }   // queue.addChoice: pushed, not sorted
+                { let p = self.pm(t); p.fainted = false; p.faint_queued = false; p.status = id(""); p.hp = 1;   // statusState left as it was (battle.ts sets only status)
+                  let half = (p.maxhp as f64 / 2.0).trunc() as i64; p.hp = half.max(1).min(p.maxhp); }
+                if self.logging { let n = self.mon_name(t); let p = self.p(t); let hp = format!("{}/{}", p.hp, p.maxhp); self.add(&["-heal", &n, &hp, "[from] move: Revival Blessing"]); }
+                let pos = self.p(m).position; self.remove_slot_condition(s, pos, id("revivalblessing"));
+            }
             _ => {}
         }
         for s in 0..2u8 { for m in self.side_active(s) { if self.p(m).force_switch_flag {
@@ -276,12 +298,13 @@ impl Battle {
         for s in 0..2u8 { switches[s as usize] = self.side_active(s).iter().any(|m| self.p(*m).switch_flag.is_some()); }
         for s in 0..2u8 {
             if switches[s as usize] && self.can_switch(s) == 0 {
-                for m in self.side_active(s) { self.pm(m).switch_flag = None; }
-                switches[s as usize] = false;
+                let mut revive = false;
+                for m in self.side_active(s) { if self.revive_slot(s, self.p(m).position as usize) { revive = true; continue; } self.pm(m).switch_flag = None; }
+                if !revive { switches[s as usize] = false; }
             } else if switches[s as usize] {
                 for m in self.side_active(s) {
                     let p = self.p(m);
-                    if p.hp > 0 && p.switch_flag.is_some() && !p.skip_before_switch_out {
+                    if p.hp > 0 && p.switch_flag.is_some() && p.switch_flag != Some("revivalblessing") && !p.skip_before_switch_out {
                         self.run_event("BeforeSwitchOut", Tgt::Mon(m), None, None, RV::Undef, false, false);
                         self.pm(m).skip_before_switch_out = true;
                         self.faint_messages(false, false, true);

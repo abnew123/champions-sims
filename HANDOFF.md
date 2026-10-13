@@ -1235,3 +1235,14 @@ registrations since its second version) and checks reachability of real logs in 
   (± about 2.5-5 by style, the same games for both.) RMS over the nine non-Perish styles: sym2 **6.4** (Oct 7: 5.6), net **3.0**, about
   what sampling noise alone gives. Agreement with the real winner 54.7% -> **55.9%**. The net removes the Tailwind-over / Indeedee TR and
   Balance-under shape that no value or depth change touched on Oct 7; Snow +5 and Sand -5 remain, both within 1.4 SE.
+- **champ-battle-v28 + the refitted net (2026-10-13, 7:15 pm; the user: a Bo1 game's Mega Raichu-Y Zap Cannon).** v28 = v27 + hit_chance
+  in the analytic features (No Guard, weather accuracy, accuracy / evasion stages, Compound Eyes, Hustle, Victory Star, Wide Lens,
+  Bright Powder, Sand Veil, Snow Cloak, Gravity); the turn simulation was always right, only the leaf values counted listed accuracy.
+  The one-turn search redone for the 62,958 training positions (47%) where a living Pokemon brings an accuracy modifier into play
+  (pssim/value_acc.sh; Thunder / Hurricane / Blizzard with weather possible 16k+, Raichunite Y ~13k, No Guard ~13k, Muddy Water ~6k),
+  the h64 net refitted on top of the _fc layer (value_fit.py, VALUE_EVAL_SUFFIXES=_fc,_acc): **bot/value/vnet_h64_search_acc.json**.
+  Checks (pssim/v28_checks.sh): self-play on the 800 pool starts vs v28 sym2: side 0 +1.7 ± 2.1, side 1 +5.1 ± 2.1, **pooled +3.4 ± 1.5**
+  (v27's net +4.9 ± 1.5 against v27's sym2; the baselines differ). Real-pairings bias: RMS 3.6 (v27 net 3.0; noise alone ~3.7),
+  agreement 54.6% (55.9%); Raichunite Y sides -5.1 -> **-2.4**; v28 sym2: RMS 5.8, agreement 56.1%. Held-out outcomes (the static net):
+  log loss 0.5340 vs 0.5320 (+0.0020 ± 0.0015); on No Guard / Raichunite Y positions +0.0116 ± 0.0039: both nets over-rate the No Guard
+  side there (49-50% predicted vs 39% real, n 857 from few games), and the fix values it more. Shipped to Team search's climb.

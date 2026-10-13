@@ -11,13 +11,22 @@ TS = os.path.dirname(os.path.abspath(__file__))
 J = lambda *p: os.path.join(TS, *p)
 CLIMB_DIRS = ['', os.path.join('cloud_results', 'v12'), 'cloud_results']
 def climb_dir():
-    """(folder relative to teamsearch/, path joiner) for the hill climb's files: TS_CLIMB_DIR, else the candidate with the newest activity"""
-    cd = os.environ.get('TS_CLIMB_DIR')
+    """(folder relative to teamsearch/, path joiner) for the hill climb's files: TS_CLIMB_DIR, else the candidate with the newest activity.
+    Climbs with their own file names (TS_STATE=climb_v27_state.json ...: climb_v27_progress.json, climb_v27_log.jsonl) are found in
+    any cloud_results/* folder; the joiner maps climb_progress.json / climb_state.json / climb_log.jsonl to that climb's names."""
+    cd = os.environ.get('TS_CLIMB_DIR'); pre = 'climb'
     if cd is None:
-        newest = lambda d: max([os.path.getmtime(f) for f in (J(d, 'climb_progress.json'), J(d, 'climb_state.json'), J(d, 'round.log'),
-                                                              J(d, 'round1.log')) if os.path.exists(f)] + [0])
-        cd = max(CLIMB_DIRS, key=newest)
-    return cd, (lambda *p: os.path.join(TS, cd, *p)) if cd else J
+        cands = [(d, 'climb') for d in CLIMB_DIRS]
+        for f in glob.glob(J('cloud_results', '*', 'climb_*progress.json')) + glob.glob(J('climb_*progress.json')):
+            d = os.path.relpath(os.path.dirname(f), TS); d = '' if d == '.' else d
+            cands.append((d, os.path.basename(f)[:-len('_progress.json')]))
+        def newest(c):
+            d, p = c
+            return max([os.path.getmtime(f) for f in (J(d, f'{p}_progress.json'), J(d, f'{p}_state.json'), J(d, 'round.log'),
+                                                      J(d, 'round1.log')) if os.path.exists(f)] + [0])
+        cd, pre = max(cands, key=newest)
+    ren = lambda x: pre + x[len('climb'):] if pre != 'climb' and x in ('climb_progress.json', 'climb_state.json', 'climb_log.jsonl') else x
+    return cd, (lambda *p: os.path.join(TS, cd, *p[:-1], ren(p[-1])) if p else os.path.join(TS, cd))
 
 def ampm(t, sec=False): return t.strftime('%-I:%M:%S %p' if sec else '%-I:%M %p').lower()
 def fmt(sec):

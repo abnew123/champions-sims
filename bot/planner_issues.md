@@ -147,3 +147,7 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     Psych Up 39/53, Beat Up 18/24, Simple Beam 13/21 (a boosted or Contrary partner), Charm 84/146, Skill Swap 29/72. Sometimes: Roar
     14/84, Fake Tears 11/90 (Competitive / Defiant / Contrary), Soak 14/285, U-turn 37/2,517, Parting Shot 105/8,887, Grassy Glide
     15/6,240 (Soak / Roar: reasons vary, lowest priority).
+    **Scope (the user, 2026-10-13, through the Eval bar): the partner is offered for the moves aimed at it over 10% of the time** —
+    Speed Swap, After You, Heal Pulse, Decorate, Entrainment, Instruct, Beat Up, Psych Up, Simple Beam, Charm, Skill Swap, Roar, Fake
+    Tears (on 8.5% of the 7,407 Bo3 sheets, 1.5% of Pokemon); not Soak, U-turn, Parting Shot, Grassy Glide (on 64.5% of sheets: an extra
+    option in most positions for a rare payoff). The conditions above may narrow the 13 further where they apply.

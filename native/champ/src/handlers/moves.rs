@@ -307,6 +307,8 @@ pub fn register(r: &mut Reg) {
         match w { "raindance" | "primordialsea" => b.amm(am).accuracy = None, "sunnyday" | "desolateland" => b.amm(am).accuracy = Some(50.0), _ => {} } RV::Undef });
     h!(r, Move, "blizzard", "onModifyMove", |b, a| { let w = b.effective_weather(); if w == "hail" || w == "snowscape" { let am = a.am(); b.amm(am).accuracy = None; } RV::Undef });
     h!(r, Move, "freezedry", "onEffectiveness", |b, a| { if b.eff_type == "Water" { return RV::N(1.0); } RV::Undef });
+    // Flying Press (2026-10-13, v29: the Eval bar's unsupported list): its Fighting effectiveness plus Flying's against each type
+    h!(r, Move, "flyingpress", "onEffectiveness", |b, a| { RV::N(a.relay.num() + b.dex.effectiveness("Flying", b.eff_type) as f64) });
     h!(r, Move, "facade", "onBasePower", |b, a| { let m = a.t(); let st = b.p(m).status; if !st.is_empty() && st != "slp" { return b.cm(2.0, 1.0); } RV::Undef });
     h!(r, Move, "barbbarrage", "onBasePower", |b, a| { let t = a.s(); let st = b.p(t).status; if st == "psn" || st == "tox" { return b.cm(2.0, 1.0); } RV::Undef });
     h!(r, Move, "ficklebeam", "onBasePower", |b, a| { if b.rchance(3, 10) { return b.cm(2.0, 1.0); } RV::Undef });

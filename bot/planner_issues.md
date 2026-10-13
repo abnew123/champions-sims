@@ -113,3 +113,8 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
    payoff cell of 0.2906 and 0.2908 with the same seeds. The race memo's pinch-ability key fix removed the large case (thread-count
    dependent features); something else in a memo or cache key still differs by order. Small; find it before trusting cell-level diffs
    under 0.001.
+14. **Rare decisive outcomes sampled away (the Eval bar, 2026-10-13).** The one-turn search samples 32 luck seeds a cell, so a 1-in-24 crit
+    that is the only out is missing from every sample about a quarter of the time: game 331 (…2697462543) turn 14, Farigiraf 83/225 vs a
+    2% Incineroar that moves first, true value ~95.8% (loses only to a crit Throat Chop), evaluated 0.9994, then 0.968 / 0.937 / 0.999 on
+    reruns. The same noise can push a ~4% crit-only out under the 2% forfeit line. Ideas: more seeds when one outcome decides the game,
+    or exact crit / miss odds on the final hits; check what EVAL_ADAPT already does there. After the v28 net.

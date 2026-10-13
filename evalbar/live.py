@@ -286,9 +286,11 @@ class Live:
         """a correction at turn t0: that turn and the later ones are evaluated again"""
         for t in [t for t in s.weights if t >= t0]: s.weights.pop(t, None); s.hyp.pop(t, None)
         s.poscache = {k: v for k, v in s.poscache.items() if k[0] < t0}
-        if os.path.exists(s.evf):
-            keep = [l for l in open(s.evf) if int((re.search(r' t(\d+) ', json.loads(l).get('name', '')) or [0, 0])[1]) < t0]
-            open(s.evf, 'w').writelines(keep)
+        with LUCK:                                                           # a background read under way ends first; its turns go too
+            for f in (s.evf, s.rf):
+                if os.path.exists(f):
+                    keep = [l for l in open(f) if int((re.search(r' t(\d+) ', json.loads(l).get('name', '')) or [0, 0])[1]) < t0]
+                    open(f, 'w').writelines(keep)
     @staticmethod
     def upto(log, t):
         """the log as a spectator had it when turn t started"""

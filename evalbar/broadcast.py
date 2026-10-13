@@ -631,7 +631,34 @@ class Runner:
         """video: {'id': YouTube id, 'start': seconds, 'live': bool} to embed the player on the page; t0: the video time of the first frame"""
         import live as LV
         s.LV = LV; s.tag = tag; s.threads = threads; s.port = port; s.reader = Reader(); s.reader.t0 = t0; s.lives = []; s.written = []; s.video = video
-        os.makedirs(LV.OUT, exist_ok=True); s.serve()
+        os.makedirs(LV.OUT, exist_ok=True); s.serve(); threading.Thread(target=s.refine, daemon=True).start()
+    def refine(s):
+        """two reads (the user, 2026-10-13, as on the bot page): each turn read quickly as it comes (live.LIVE_SEEDS) is read again at
+        live.REFINE_SEEDS, the newest game and turn first, on one engine thread at the lowest priority; its game's page picks it up. A
+        progress card counts the turns read again against the turns read so far"""
+        LV = s.LV; prog = os.path.join(LV.OUT, f'{s.tag}_refined.turns'); shown = None; tried = {}   # (game, turn) -> its positions file's time
+        if not os.path.exists(prog): open(prog, 'w').close()
+        while True:
+            todo = []
+            try:
+                for lv in reversed(list(s.lives)):
+                    ev, rv = LV.records(lv.evf), LV.records(lv.rf)
+                    for t in sorted(list(lv.weights), reverse=True):
+                        names = [n + ' p1' for n in dict(lv.weights.get(t) or {})]
+                        posf = os.path.join(LV.OUT, f'{lv.tag}_t{t}_pos.jsonl')
+                        if not names or not os.path.exists(posf) or tried.get((lv.tag, t)) == os.path.getmtime(posf): continue
+                        if all(n in ev for n in names) and not all(n in rv for n in names): todo.append((lv, t, posf))
+            except RuntimeError: time.sleep(1); continue                      # a game's thread changed its turns meanwhile: look again
+            total = sum(1 for _ in open(prog)) + len(todo)
+            if total != shown:                                              # the card's total grows as the stream goes on
+                json.dump({'title': f'Stream {s.tag}: turns read again at {LV.REFINE_SEEDS} rolls (one engine thread at the lowest priority)',
+                           'out': os.path.relpath(prog, os.path.join(C.HERE, 'out')), 'total': total, 'done0': 0, 'started': time.time(), 'threads': 1,
+                           'seeds': LV.REFINE_SEEDS, 'staged': True, 'proc': 'broadcast.py'}, open(prog + '.run.json', 'w')); shown = total
+            if not todo: time.sleep(10); continue
+            lv, t, posf = todo[0]; tried[(lv.tag, t)] = os.path.getmtime(posf)   # once a version of its positions (a correction writes them again)
+            with LV.LUCK: LV.EN.run(posf, lv.rf, 1, LV.REFINE_SEEDS, 1, nice=19)
+            with open(prog, 'a') as fh: fh.write(f'{lv.tag} t{t}\n')
+            lv.dirty = True
     def serve(s):
         import http.server
         run = s
@@ -644,7 +671,7 @@ class Runner:
                         if lv.data and lv.data['games']:
                             lm = run.reader.logs_meta(); m = lm[i][1] if i < len(lm) else {}
                             pl = {sd: c.most_common(1)[0][0] for sd, c in m.get('who', {}).items() if c} or None
-                            g = {**lv.data['games'][0], 'title': f"M{m.get('match', '?')} G{m.get('game', '?')}", 'end': m.get('end'), 'idx': i, 'players': pl,
+                            g = {**lv.data['games'][0], 'title': f"M{m.get('match', '?')} G{m.get('game', '?')}", 'end': m.get('end'), 'idx': i, 'players': pl, 'refines': True,
                                  'versus': f"{pl.get('p1', 'Player 1')} vs {pl.get('p2', 'Player 2')}" if pl else None, 'sheets': not m.get('closed')}
                             g['steps'] = [{**st, 'vt': (m.get('times') or {}).get(st['turn'])} for st in g['steps']]
                             games.append(g)
@@ -681,6 +708,7 @@ class Runner:
             if i >= len(s.lives):
                 closed = (s.reader.logs_meta()[i][1] if i < len(s.reader.logs_meta()) else {}).get('closed')
                 lv = s.LV.Live(None, s.threads, 0, logfile=f, tag=f'{s.tag}_g{i + 1}', fmt='Champions broadcast, ' + ('no team sheets shown' if closed else 'open team sheets'))
+                lv.live_seeds = s.LV.LIVE_SEEDS                                   # the quick read; refine() reads it again
                 if closed: lv.bo3 = False                                          # each species' most common set, what the game shows laid on top
                 s.lives.append(lv)
                 threading.Thread(target=lv.run, daemon=True).start()

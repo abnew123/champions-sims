@@ -118,3 +118,9 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     2% Incineroar that moves first, true value ~95.8% (loses only to a crit Throat Chop), evaluated 0.9994, then 0.968 / 0.937 / 0.999 on
     reruns. The same noise can push a ~4% crit-only out under the 2% forfeit line. Ideas: more seeds when one outcome decides the game,
     or exact crit / miss odds on the final hits; check what EVAL_ADAPT already does there. After the v28 net.
+15. **Revival Blessing revives nothing in the engine (the Eval bar, 2026-10-13; confirmed).** Only its onTryHit (fails with no fainted
+    ally) is ported: no slotCondition, no choice of a fainted Pokemon, no revive at half HP, and since it has a handler it is not
+    flagged unsupported. Game 349 (Bo1 c-2697493451) turn 4: valued 1.000 with Pawmot left; after the real revive the position is 0.69.
+    Reach: Pawmot only, alive in 0.6% of training positions, on 4 bot team sheets, used in 2 games. To port after the v28 net (v29):
+    Showdown's slotCondition + the switch-style request to pick the fainted Pokemon, revive at maxhp / 2, instaswitch into an empty
+    active slot; differential cases with Pawmot.

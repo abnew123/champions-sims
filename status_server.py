@@ -128,6 +128,7 @@ def who(args):
         if exe.startswith(k): return v + (' (bot)' if exe.endswith('-bot') or ' play ' in args else '')
     if 'claude-code/' in args or '/Claude.app/' in args: return None                     # Claude sessions: under other apps
     if 'status_server.py' in args: return 'This progress page'
+    if '/Kaggle/arc-prize-2026-arc-agi-3' in args: return 'ARC-AGI-3'                    # its Python shows as Homebrew's Python, not arc-* (the ARC thread, 2026-10-13)
     if 'champions-sims' in args or 'bot/client.js' in args:
         for k, v in PATHS:
             if k in args: return v

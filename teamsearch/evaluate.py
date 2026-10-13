@@ -66,6 +66,13 @@ SIMS = {
     'v26': dict(bin='champ-battle-v26', eg='egvalue9_sym2.json', grid=False,
                 env=dict(V26_ENV, EG_VNET='../bot/value/vnet_h64_search_fc.json')),
     'v26s': dict(bin='champ-battle-v26', eg='egvalue9_sym2.json', grid=False, env=dict(V26_ENV)),
+    # v27 (Battle sim, 2026-10-13): v26 game for game, 17% less CPU with the net (the calc data maps on the Fx hasher). The climb's
+    # frozen setup. seedkey: pool jobs carry meta.seed_index (from group and entry only), so a game is the same wherever it sits in
+    # a job list and TS_GAME_CACHE (gamecache.py) can reuse it across teams; this changes which seeds games get, so v27 results
+    # are not paired with v26 ones.
+    'v27': dict(bin='champ-battle-v27', eg='egvalue9_sym2.json', grid=False, seedkey=True,
+                env=dict(V26_ENV, EG_VNET='../bot/value/vnet_h64_search_fc.json')),
+    'v27s': dict(bin='champ-battle-v27', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V26_ENV)),
 }
 def sim(): return os.environ.get('TS_SIM', 'v3')
 def out_tag(seed0, per_job): return f'{seed0}_{per_job}' if sim() == 'v3' else f'{sim()}_{seed0}_{per_job}'
@@ -150,6 +157,24 @@ def run_team(gids, per_job, seed0, threads, fixed=None, label=''):
     return read(d, out_tag(seed0, per_job))
 
 def run_jobs(gids, jobs, per_job, seed0, threads, label, extra=None):
+    """run_jobs_raw behind the cross-team game cache (gamecache.py), when TS_GAME_CACHE is set, the setup has a seed key and every
+    job carries meta.seed_index: cached games are returned as they are, only the others are played (in a sub-run of their own)"""
+    path = os.environ.get('TS_GAME_CACHE')
+    if not (path and SIMS[sim()].get('seedkey') and jobs and all('seed_index' in (j.get('meta') or {}) for j in jobs)):
+        return run_jobs_raw(gids, jobs, per_job, seed0, threads, label, extra)
+    import gamecache as GC
+    ed = (extra or {}).get('TS_ENGINE_DATA', os.environ.get('TS_ENGINE_DATA', '../native/engine_data_spot.json'))
+    keys = [GC.key(sim(), ed, seed0, per_job, j) for j in jobs]; have = GC.get_many(path, list(set(keys)))
+    miss = sorted({k: i for i, k in reversed(list(enumerate(keys))) if k not in have}.values())     # one run per distinct missing game
+    if miss:
+        sub = [jobs[i] for i in miss]; h = hashlib.md5(json.dumps(sub, sort_keys=True).encode()).hexdigest()[:8]
+        rows = run_jobs_raw(gids, sub, per_job, seed0, threads, f'{label}_c{h}', extra)
+        GC.put_many(path, [(keys[i], r) for i, r in zip(miss, rows)]); have.update({keys[i]: r for i, r in zip(miss, rows)})
+    CACHE_STATS['jobs'] += len(jobs); CACHE_STATS['played'] += len(miss)
+    return [have[k] for k in keys]
+CACHE_STATS = {'jobs': 0, 'played': 0}
+
+def run_jobs_raw(gids, jobs, per_job, seed0, threads, label, extra=None):
     """battles for an explicit job list (archetype mode: {arch, k, lead, back} with my species names) -> list of per-job rows.
     extra: environment for this run only (e.g. TS_ENGINE_DATA, SEED_PER_JOB), never written to os.environ: teams run in threads of one
     process, and a shared os.environ let one team unset another's engine data mid-launch (2026-10-06)"""

@@ -137,6 +137,7 @@ def specs_for(tag, g, step, six, sets, leads, own=None):
                                   'pctDue': True,                     # a shown percent rebuilt as an HP that shows as it (positions.js)
                                   'abilDue': True,                    # an ability gained in battle (Trace, Skill Swap) (positions.js)
                                   'chipDue': True,                    # Toxic's count and a binding move go on (positions.js)
+                                  'fallenDue': True,                  # Supreme Overlord's count of fallen allies (positions.js)
                                   'dropped': [], 'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None,
                                                            'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}))
     return out, H

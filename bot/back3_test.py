@@ -5,7 +5,8 @@ truth, and solved with the bot's current settings. The bot's mix now is the top 
 weighted by their odds. Both are valued in the true position (each joint option's value against the opponent's equilibrium there),
 against the mix planned on the truth: the loss of each, per decision, all decisions counted (a right first guess too, where mixing can
 cost).
-  .venv/bin/python3 bot/back3_test.py build | eval [threads] | evaltruth [threads] | score"""
+  .venv/bin/python3 bot/back3_test.py build | eval [threads] | evaltruth [threads] | score
+  meval [threads] | bayes: one game over the guesses (the opponent knowing its back row) instead of mixing the guesses' mixes"""
 import os, sys, json, collections, time, math
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'evalbar')); sys.path.insert(0, os.path.join(ROOT, 'bot'))
@@ -13,6 +14,7 @@ os.environ.setdefault('CHAMP_MAIN', ROOT)
 OUT = os.path.join(ROOT, 'bot', 'out', 'back3'); os.makedirs(OUT, exist_ok=True)
 POS, EVAL, META = os.path.join(OUT, 'pos.jsonl'), os.path.join(OUT, 'eval.jsonl'), os.path.join(OUT, 'meta.json')
 TPOS, TEVAL = os.path.join(OUT, 'truth_pos.jsonl'), os.path.join(OUT, 'truth_eval.jsonl')   # the true positions again, every joint option reported
+MPOS, MEVAL = os.path.join(OUT, 'hyp_pos.jsonl'), os.path.join(OUT, 'hyp_meval.jsonl')     # the hypotheses again, with the bot's matrix (EVAL_MATRIX=1)
 K = 3
 def build():
     import replay as R; R.BATON_PASS = True
@@ -51,6 +53,62 @@ def evaltruth(threads=2):
         for l in open(POS):
             if json.loads(l)['name'].endswith(' truth p1'): o.write(l)
     C.run_evalpos(TPOS, TEVAL, 'back row: the true positions, every option', 'back3_truth', threads, False, {'EVAL_TOP': '2000'})
+def meval(threads=2):
+    """the hypotheses' positions with the payoff matrix the live bot builds under contempt (the staged search, then EVAL_MATRIX=1)"""
+    import contempt as C
+    with open(MPOS, 'w') as o:
+        for l in open(POS):
+            if not json.loads(l)['name'].endswith(' truth p1'): o.write(l)
+    C.run_evalpos(MPOS, MEVAL, 'back row: one game over the top three guesses (matrices)', 'back3m', threads, False, {'EVAL_MATRIX': '1'})
+def bayes():
+    """One game over the back-row guesses: the opponent knows its back row, we only know the odds. Our mix x (over the joint options
+    every guess's matrix has) maximises sum_h p_h min_j (x.A_h)_j, each guess's columns its own (an LP). Against the top guess's
+    equilibrium on its matrix and the mixes-weighted version; all valued in the true position as in score (planner points)."""
+    import numpy as np
+    from scipy.optimize import linprog
+    meta = json.load(open(META)); E = {r['name']: r for r in map(json.loads, open(MEVAL)) if 'error' not in r and 'matrix' in r}
+    T = {r['name']: r for r in map(json.loads, open(TEVAL)) if 'error' not in r}
+    def lp(As, ps):
+        n = As[0].shape[0]; H = len(As)
+        A_ub = np.vstack([np.c_[-A.T, np.eye(H)[[h] * A.shape[1]]] for h, A in enumerate(As)])
+        res = linprog(np.r_[np.zeros(n), -np.array(ps)], A_ub=A_ub, b_ub=np.zeros(len(A_ub)), A_eq=np.r_[np.ones(n), np.zeros(H)][None], b_eq=[1.0],
+                      bounds=[(0, None)] * n + [(None, None)] * H, method='highs')
+        return res.x[:n]
+    out = collections.defaultdict(list); G = []; skipped = collections.Counter()
+    for m in meta:
+        hs = [E.get(f"{m['name']} h{h} p1") for h in range(len(m['weights']))]; tr = T.get(f"{m['name']} truth p1")
+        if tr is None or any(h is None for h in hs): skipped['missing'] += 1; continue
+        vt = {j['label']: j['v'] for j in tr['sides'][0]['joint']}
+        mats = []
+        for r in hs:
+            A = np.array([[np.nan if x is None else x for x in row] for row in r['matrix']['v1']], float)
+            if np.isnan(A).any(): A = np.where(np.isnan(A), np.nanmean(A, axis=1)[:, None], A)
+            mats.append((r['matrix']['rl'], A, np.array(r['matrix']['x'], float)))
+        rows = [l for l in mats[0][0] if all(l in set(rl) for rl, _, _ in mats[1:])]
+        if not rows: skipped['no shared rows'] += 1; continue
+        As = [A[[rl.index(l) for l in rows]] for rl, A, _ in mats]
+        def val(x):
+            if any(l not in vt for l, w in x.items() if w > 1e-6): return None
+            return sum(w * vt[l] for l, w in x.items() if w > 1e-6) / sum(x.values())
+        x1 = dict(zip(mats[0][0], mats[0][2]))                                   # the top guess's equilibrium (the bot's mix now)
+        x3 = collections.Counter()
+        for w, (rl, _, x) in zip(m['weights'], mats):
+            for l, p in zip(rl, x): x3[l] += w * p
+        xb = dict(zip(rows, lp(As, m['weights'])))
+        xt = {j['label']: j['w'] for j in tr['sides'][0]['joint'] if j['w'] > 1e-4}
+        v1, v3, vb, vtt = val(x1), val(dict(x3)), val(xb), val(xt)
+        if None in (v1, v3, vb, vtt): skipped['an option missing in the true position'] += 1; continue
+        out['top guess (matrix equilibrium)'].append(vtt - v1); out['mixes weighted'].append(vtt - v3); out['one game over the guesses'].append(vtt - vb)
+        out['one game minus top guess (gain)'].append(vb - v1)
+        out['  first guess right' if m['truth_rank'] == 0 else '  first guess wrong'].append(vb - v1)
+        G.append(m['room'])
+    print(f"{len(G)} decisions ({len(set(G))} games); skipped {dict(skipped)}; planner points per decision below the mix planned on the truth "
+          "(± clustered by game)")
+    Ga = np.array(G)
+    for k, xs in out.items():
+        xs = np.array(xs); g = Ga if len(xs) == len(Ga) else None
+        se = (math.sqrt(sum(((xs[g == x] - xs.mean()).sum()) ** 2 for x in set(G))) / len(xs)) if g is not None else xs.std(ddof=1) / len(xs) ** 0.5
+        print(f"  {k:36s} {100 * xs.mean():+6.2f}  ± {100 * se:.2f}  (n {len(xs)})")
 def score():
     meta = json.load(open(META)); E = {r['name']: r for r in map(json.loads, open(EVAL)) if 'error' not in r}
     if os.path.exists(TEVAL): E.update({r['name']: r for r in map(json.loads, open(TEVAL)) if 'error' not in r})
@@ -78,4 +136,5 @@ def score():
         print(f"  {k:36s} {100 * mu:+6.2f}  ± {100 * sd / n ** 0.5:.2f}  (n {n})")
 if __name__ == '__main__':
     a = sys.argv[1:]
-    {'build': build, 'eval': lambda: evaluate(int(a[1]) if len(a) > 1 else 2), 'evaltruth': lambda: evaltruth(int(a[1]) if len(a) > 1 else 2), 'score': score}[a[0]]()
+    {'build': build, 'eval': lambda: evaluate(int(a[1]) if len(a) > 1 else 2), 'evaltruth': lambda: evaltruth(int(a[1]) if len(a) > 1 else 2), 'score': score,
+     'meval': lambda: meval(int(a[1]) if len(a) > 1 else 2), 'bayes': bayes}[a[0]]()

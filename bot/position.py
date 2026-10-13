@@ -98,17 +98,55 @@ def contempt_mix(r, c):
                   bounds=[(0, None)] * n + [(None, None)], method='highs')
     x = res.x[:n]
     return [{'label': mx['rl'][i], 'w': float(x[i]), 'v': float(A[i] @ q)} for i in range(n) if x[i] > 1e-4]
+# the back-row game (2026-10-12 night, the user: towards a trustworthy best move): limits.json "back_row_game": {format: k}, read every
+# decision; with k > 1 and the opponent's back row unseen, the bot builds its k most likely back rows (botpos) and plays one game over
+# them: the opponent knows its back row, the bot only the odds, max_x sum_h p_h [c x.A_h.q_h + (1 - c) min_j x.A_h_j] over the joint
+# options every guess's matrix has (c = the contempt, 0 for the equilibrium). Measured on 781 of the bot's own decisions with the back
+# row later shown (bot/back3_test.py bayes): 0.52 ± 0.07 planner points a decision below the plan on the true back row, against 0.90 for
+# the top guess alone and 0.97 for the guesses' mixes weighted (a gain of +0.38 ± 0.09; +0.86 when the top guess is wrong, -0.16 ± 0.10
+# when it is right). The k positions run on k threads: about the time of one (median 5.8 s vs 5.2 s on 12 saved decisions).
+def back_row_k(fmt):
+    try: return max(1, int((json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))).get('back_row_game') or {}).get(fmt or '', 1)))
+    except Exception: return 1
+def guesses_mix(hs, c):
+    """[{label, w, v}] over the bot's joint options: one game over the back-row guesses hs [(weight, eval row with a matrix)]"""
+    import numpy as np
+    from scipy.optimize import linprog
+    import human_lines as HL
+    M = json.load(open(CONTEMPT_MODEL)) if c > 0 else None
+    tot = sum(w for w, _ in hs); G = []
+    for w, r in hs:
+        mx = r['matrix']; A0 = np.array([[np.nan if x is None else x for x in row] for row in mx['v1']], float)
+        if np.isnan(A0).any(): rm = np.nanmean(A0, axis=1); A0 = np.where(np.isnan(A0), rm[:, None], A0)
+        G.append((w / tot, mx['rl'], np.vectorize(lambda v: HL.resc(v, 0.7538))(A0), np.array(opponent_model(r, M)) if c > 0 else None,
+                  np.array(mx['y'], float) / (sum(mx['y']) or 1.0)))
+    rows = [l for l in G[0][1] if all(l in set(g[1]) for g in G[1:])]
+    if not rows: return None
+    As = [A[[rl.index(l) for l in rows]] for _, rl, A, _, _ in G]; ps = np.array([g[0] for g in G]); n, H = len(rows), len(G)
+    obj = np.r_[-c * sum(p * (A @ q) for (p, _, _, q, _), A in zip(G, As)) if c > 0 else np.zeros(n), -(1 - c) * ps]
+    A_ub = np.vstack([np.c_[-A.T, np.tile(np.eye(H)[h], (A.shape[1], 1))] for h, A in enumerate(As)])
+    res = linprog(obj, A_ub=A_ub, b_ub=np.zeros(len(A_ub)), A_eq=np.r_[np.ones(n), np.zeros(H)][None], b_eq=[1.0],
+                  bounds=[(0, None)] * n + [(None, None)] * H, method='highs')
+    if res.status != 0: return None
+    x = res.x[:n]; v = sum(p * (A @ y) for (p, _, _, _, y), A in zip(G, As))
+    return [{'label': rows[i], 'w': float(x[i]), 'v': float(v[i])} for i in range(n) if x[i] > 1e-4]
 def decide(specs, request, side, threads=2, seeds=32, log=None, cap=None, fmt=None):
     tag = f"t{request.get('rqid', 0)}_{random.randrange(1 << 20):05x}"
     posf = os.path.join(OUT, tag + '.pos.jsonl'); outf = os.path.join(OUT, tag + '.eval.jsonl')
     ps = LV.positions(specs, posf)
-    c = contempt_of(fmt)
-    run_eval(posf, outf, threads, seeds, {'EVAL_MATRIX': '1'} if c > 0 else None)
+    c = contempt_of(fmt); multi = len(specs) > 1
+    run_eval(posf, outf, max(threads, len(specs)) if multi else threads, seeds, {'EVAL_MATRIX': '1'} if c > 0 or multi else None)
     rows = {r['name']: r for r in map(json.loads, open(outf)) if 'error' not in r}
     w0, spec0 = specs[0]; name = spec0['name'] + ' p1'
     r = rows.get(name) or next(iter(rows.values()))
-    s0 = r['sides'][0]; joint = [j for j in s0['joint'] if j['w'] > 0]
-    if c > 0 and r.get('matrix'):
+    s0 = r['sides'][0]; joint = [j for j in s0['joint'] if j['w'] > 0]; value = r['value']; how = ''
+    hs = [(w, rows[sp['name'] + ' p1']) for w, sp in specs if rows.get(sp['name'] + ' p1', {}).get('matrix')] if multi else []
+    if len(hs) > 1:
+        try:
+            mix = guesses_mix(hs, c)
+            if mix: joint = mix; value = sum(w * h['value'] for w, h in hs) / sum(w for w, _ in hs); how = f', one game over {len(hs)} back rows'
+        except Exception as e: sys.stderr.write(f'back-row game failed, the top guess played: {e}\n')
+    if not how and c > 0 and r.get('matrix'):
         try: joint = contempt_mix(r, c) or joint
         except Exception as e: sys.stderr.write(f'contempt failed, equilibrium played: {e}\n')
     # the hard cap (limits.json protect_chain_cap, the user: 4): a Pokemon that has used Protect that many turns running may not again;
@@ -163,10 +201,10 @@ def decide(specs, request, side, threads=2, seeds=32, log=None, cap=None, fmt=No
         spec_foes = [i + 1 for i, x in enumerate(st1.get('active') or []) if x is not None and not st1['pokemon'][x].get('fainted')]
     except Exception: spec_foes = None
     valid = [(j, command(j)) for j in joint]; valid = [(j, c) for j, c in valid if c]
-    if not valid: return 'default', 'no option the request allows: default', r['value']
+    if not valid: return 'default', 'no option the request allows: default', value
     pick, choice = random.choices(valid, weights=[j['w'] for j, _ in valid])[0]
-    note = f"{pick['label']} ({100 * pick['w']:.0f}%, value {100 * r['value']:.0f}%" + (f", contempt {c}" if c > 0 else '') + ")"
-    return choice, note, r['value']
+    note = f"{pick['label']} ({100 * pick['w']:.0f}%, value {100 * value:.0f}%" + (f", contempt {c}" if c > 0 else '') + how + ")"
+    return choice, note, value
 def team_index(request, species):
     """1-based index in request.side.pokemon of the named Pokemon (by species, forme-insensitive)"""
     want = toid(species)

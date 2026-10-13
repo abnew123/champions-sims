@@ -70,6 +70,11 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
    switches in 37% of its mix planned on the guess and 36% on the truth; decisions with 20%+ switching lose a little more (1.3 vs 0.9).
    Fix to measure after the climb: plan against the top three back rows (the eval bar's live mode already averages over three), e.g.
    the bot's mix as the hypotheses' mixes weighted by their odds, at three times the engine time per turn.
+   **Measured 2026-10-12 evening (`bot/back3_test.py`, the bot's current settings, 783 decisions with unseen opposing Pokemon, right
+   first guesses included):** the top guess loses 0.78 ± 0.09 planner points a decision against planning on the truth; the top three's
+   mixes weighted by their odds lose 0.87 ± 0.06 (gain -0.08 ± 0.06: +0.37 where the first guess was wrong, -0.59 where it was right).
+   Averaging separate solutions does not help; the bot keeps the top guess. What could: one game over the hypotheses (payoffs averaged
+   by their odds, the opposing switches to unseen Pokemon mapped by bench slot), not yet built.
 
 ## Where the strength gap is (2026-10-12, the user: even with every issue above fixed the bot would not be near the top players)
 - **The bot's estimates hold because two errors cancel** (`bot/ladder_lines.py`, 441 decisions with both plays known). Against the bot's

@@ -70,8 +70,12 @@ def preview(msg):
 def turn(msg):
     import position as POS
     req = msg['request']
-    if req.get('forceSwitch'): return {'choice': POS.replacement(req, msg['log'], msg['side'], team=(msg.get('team') or {}).get('sets')), 'note': 'replacement'}
     fmt = (msg.get('room') or '').split('-')[1] if (msg.get('room') or '').count('-') >= 2 else None   # battle-<format>-<id>
+    # the Eval bar's fitted default spreads for the opponent (spreads.FITTED), per format from limits.json fitted_spreads, read every
+    # decision. On the bot's own 376 games, the bot's side at its real sets (2026-10-13): Bo3 hits dealt observed / predicted 0.985 -> 0.995,
+    # in the predicted range 72.0% -> 77.3% (z +3.9), hits taken 0.975 -> 0.991 (z +0.5): on. Bo1 both a little worse (z -0.8, -1.2): off
+    import spreads; spreads.FITTED = bool((json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))).get('fitted_spreads') or {}).get(fmt or '', False))
+    if req.get('forceSwitch'): return {'choice': POS.replacement(req, msg['log'], msg['side'], team=(msg.get('team') or {}).get('sets')), 'note': 'replacement'}
     specs, info = POS.build(msg['log'], req, msg['side'], topk=POS.back_row_k(fmt), team=(msg.get('team') or {}).get('sets'))
     cap = json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))).get('protect_chain_cap')
     choice, note, value = POS.decide(specs, req, msg['side'], log=msg['log'], cap=cap, fmt=fmt)

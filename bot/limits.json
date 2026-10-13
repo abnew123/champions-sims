@@ -21,5 +21,9 @@
     "gen9championsvgc2026regmcbo3": 0.5,
     "gen9championsvgc2026regmc": 0.0
   },
-  "bo1_setguess": true
+  "bo1_setguess": true,
+  "fitted_spreads": {
+    "gen9championsvgc2026regmcbo3": true,
+    "gen9championsvgc2026regmc": false
+  }
 }

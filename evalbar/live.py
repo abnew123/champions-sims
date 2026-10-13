@@ -511,7 +511,8 @@ class BotRunner:
                     games = []
                     for i, lv in enumerate(run.lives):
                         if lv.data and lv.data['games']:
-                            games.append({**lv.data['games'][0], 'title': f'Game {i + 1}', 'idx': i, 'versus': f'Game {i + 1}'})
+                            games.append({**lv.data['games'][0], 'title': f'Game {i + 1}', 'idx': i, 'versus': f'Game {i + 1}',
+                                          'group': 'Bo3' if 'bo3' in lv.room else 'Bo1', 'format': lv.fmt})   # the page's format toggle and game list (the user, 2026-10-13)
                     last = run.lives[-1] if run.lives else None
                     st = "waiting for the bot's next game" if not last or last.status == 'finished' else last.status
                     b = json.dumps({'games': games, 'live': {'url': 'data.json', 'status': st, 'format': last.fmt if last else botfmt('')}}).encode()
@@ -529,7 +530,9 @@ class BotRunner:
         json.dump({'title': "The bot's games: luck worked out (games, one engine thread at the lowest priority)", 'out': os.path.relpath(prog, os.path.join(C.HERE, 'out')),
                    'total': n, 'done0': 0, 'started': time.time(), 'threads': 1, 'seeds': 32, 'staged': True}, open(prog + '.run.json', 'w'))
         while True:
-            fs = sorted((f for f in glob.glob(os.path.join(s.dir, 'battle-*.log')) if re.search(r'-\d{6,}(-[a-z0-9]+)?\.log$', f)), key=os.path.getmtime)   # ladder rooms, not local test games
+            fs = sorted((f for f in glob.glob(os.path.join(s.dir, 'battle-*.log')) if re.search(r'-\d{6,}(-[a-z0-9]+)?\.log$', f)),
+                        key=lambda f: int(re.search(r'-(\d{6,})(?:-[a-z0-9]+)?\.log$', f).group(1)))   # ladder rooms, not local test games; by battle number,
+            # which keeps each game's number (by modification time a log touched after its game moved, 2026-10-13)
             if not s.files and not s.known: new = fs; s.known = set(fs)         # at the start: every ladder game so far, for reviews
             else: new = [f for f in fs if f not in s.known]; s.known |= set(new)
             for f in new:

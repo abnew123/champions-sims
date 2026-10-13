@@ -18,6 +18,7 @@ WROCK = {'RainDance': 'damprock', 'SunnyDay': 'heatrock', 'Sandstorm': 'smoothro
 SCREENS = ('Reflect', 'Light Screen', 'Aurora Veil')
 BINDING = {'Bind', 'Wrap', 'Fire Spin', 'Whirlpool', 'Sand Tomb', 'Clamp', 'Infestation', 'Magma Storm', 'Snap Trap', 'Thunder Cage'}
 BATON_PASS = False                                                        # the eval bar's programs set it (live.py, reach.py); the bot's do not yet
+MEGA_ABIL = False                                                         # Mega Evolution ends an ability gained in battle (Trace's); the eval bar's programs set it, the bot's not yet
 PASSED = {'Substitute', 'confusion', 'Leech Seed', 'Heal Block', 'Focus Energy', 'Curse', 'Aqua Ring', 'Ingrain', 'Magnet Rise', 'Power Trick', 'Gastro Acid',
           'Embargo', 'Telekinesis', 'Laser Focus'}                       # the volatiles Baton Pass hands on (Showdown's noCopy is false)
 CANT = {'flinch': 'flinched', 'slp': 'is asleep', 'par': 'is fully paralysed', 'frz': 'is frozen solid', 'recharge': 'must recharge',
@@ -153,7 +154,11 @@ def parse(log):
             m = mon(p[2])
             if m:
                 m.forme = p[3].split(',')[0]
-                if k == 'detailschange' and 'Mega' in m.forme: m.mega = True; mega_now.add(id(m)); ev(m.side, [[m.side, disp(m.species)], ' Mega Evolved'])
+                if k == 'detailschange' and 'Mega' in m.forme:
+                    m.mega = True; mega_now.add(id(m)); ev(m.side, [[m.side, disp(m.species)], ' Mega Evolved'])
+                    # its Mega ability replaces what Trace copied (kept, positions.js's abilDue gave Mega Gardevoir the traced Intimidate for
+                    # Pixilate: its Hyper Voice came out Normal-type, a median 1.7 of predicted in 131 hits; mega_check.py, 2026-10-12)
+                    if MEGA_ABIL: m.abil = ''
                 elif k == '-formechange': m.temp = m.forme != m.species
         elif k == 'move':
             m = mon(p[2]); tg = mon(p[4]) if len(p) > 4 and p[4] else None; last_user[0] = m; last_move[0] = p[3]

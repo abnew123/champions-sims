@@ -35,7 +35,7 @@ def hits(rid, log, sample=0.1):
             if not a or not d: continue
             s2 = json.loads(json.dumps(spec)); am, dm = s2['sides'][a[0]]['mons'][a[1]], s2['sides'][d[0]]['mons'][d[1]]
             for pos, m in ((o['att'], am), (o['def'], dm)):
-                if pos in o['megas']: m['mega'] = True
+                if pos in o['megas']: m['mega'] = True; m['abilityNow'] = ''       # Mega Evolving this turn: its Mega ability, not one traced before
                 for k_, v_ in ((o.get('boosts') or {}).get(pos) or {}).items(): m.setdefault('boosts', {}); m['boosts'][k_] = max(-6, min(6, m['boosts'].get(k_, 0) + v_))
             if o.get('weather'): s2['field']['weather'] = [SPR.SD_WEATHER[o['weather']], 5] if SPR.SD_WEATHER[o['weather']] else None
             mega = lambda m: (SPR.mega_of(m['species'], m.get('item', '')) if m.get('mega') else None)
@@ -96,7 +96,7 @@ def report():
 def math_log(x):
     import math; return math.log(max(1e-3, x))
 if __name__ == '__main__':
-    P.own(); R.BATON_PASS = True
+    P.own(); R.BATON_PASS = R.MEGA_ABIL = True
     a = sys.argv[1:]
     if a and a[0] == 'run': k, n = map(int, a[1].split('/')); run(k, n)
     elif a and a[0] == 'report': report()

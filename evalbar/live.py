@@ -526,7 +526,7 @@ class BotRunner:
                 print(time.strftime('%-I:%M %p'), 'following the bot\'s game', num, flush=True)
             time.sleep(5)
 if __name__ == '__main__':
-    P.own(); R.BATON_PASS = True                                            # Baton Pass hands on stages and effects (replay.py; the bot's own runs leave it off)
+    P.own(); R.BATON_PASS = R.MEGA_ABIL = True                                            # Baton Pass hands on stages and effects (replay.py; the bot's own runs leave it off)
     a = sys.argv[1:]
     if not a: sys.exit(__doc__)
     if a[0] == 'list':

@@ -122,7 +122,7 @@ def fit():
     print(f"{len(report)} species+natures fitted; held out (>= 20 pieces of evidence): Smogon's spread fits {sum(r['held_out_fit'][0] * r['held_out_n'] for r in ho) / max(1, sum(r['held_out_n'] for r in ho)):.3f}, the fitted one {sum(r['held_out_fit'][1] * r['held_out_n'] for r in ho) / max(1, sum(r['held_out_n'] for r in ho)):.3f}")
     for r in report[:25]: print(f"  {r['species']:18s} {r['nature']:8s} n={r['evidence']:5d}  Smogon {r['smogon']} -> {r['fitted']}  held out {r['held_out_fit']} (n={r['held_out_n']})")
 if __name__ == '__main__':
-    P.own(); R.BATON_PASS = True
+    P.own(); R.BATON_PASS = R.MEGA_ABIL = True
     a = sys.argv[1:]
     if a and a[0] == 'collect':
         k, n = map(int, a[1].split('/')); collect(k, n, next((int(x[6:]) for x in a if x.startswith('games=')), None))

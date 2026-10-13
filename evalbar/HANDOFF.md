@@ -398,6 +398,16 @@ from mid-battle positions of real sheets) is theirs and found several engine bug
   turns unreachable before, 10% after). Harness-only fixes: a locked charge takes no target, a self-target (Curse) is no target, Revival
   Blessing picks a fainted Pokemon, a move the log shows without a target is a guess (partial), certain events stay certain in the
   extremes. Still above the base rate: Imposter, Moody (random), Baneful Bunker 32/342, Aura Sphere 60/703, Draining Kiss 33/409.
+- mega_check.py (`run k/n`, `report` -> mega_check.json): every clean hit a Mega gave or took in the Bo3 replays (53,074 hits over 18,782
+  games) against damage.js, by class (own-type / other moves given, contact / other hits taken), each against the same class among non-Megas.
+  It found Mega Lucario Z's Aura Guard (Battle sim, cb9cf51) and three rebuild gaps, fixed behind flags the bot does not set yet:
+  replay.MEGA_ABIL (a traced ability kept after Mega Evolving: Trace Mega Gardevoir lost Pixilate), fallenDue (Supreme Overlord's count),
+  typeDue (Soak, Protean / Libero, Double Shock, Burn Up, Forest's Curse; damage.js applies Protean as it hits). The rest of the table moves
+  with spreads (bulkier than Smogon's: Mega Floette, Gardevoir, Froslass; more offence: Mega Staraptor, whose Smogon spread has 2-4 Atk), which
+  popfit.py fits (`collect k/n`, `fit` -> default_spreads.json, for review; nothing reads it yet). Mega Delphox gives and takes about 5% more
+  than predicted with Smogon's spread already all Sp. Atk and no bulk: unexplained.
+- The -start lines in the replays against what positions.js carries: still left out (approx) are Charge (38 games), Stockpile (28), Focus
+  Energy / Dragon Cheer (26), Salt Cure (7), Curse (9), Octolock (6), Smack Down (4), Future Sight (4), No Retreat (3).
 
 ## Louisville day 1 (2026-10-10)
 

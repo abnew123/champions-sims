@@ -31,6 +31,9 @@ const out = JSON.parse(fs.readFileSync(qf)).map(q => {
       if (q.strict) { b.activeMove = move; b.activePokemon = att; b.activeTarget = def; if (q.strict >= 2) move.hit = 1; }   // a move in use; its first hit (strict 2)
       b.singleEvent('ModifyType', move, null, att, def, move, move); b.runEvent('ModifyType', att, def, move, move);
       b.singleEvent('ModifyMove', move, null, att, def, move, move); b.runEvent('ModifyMove', att, def, move, move);
+      // typeDue: Protean / Libero make the user the move's type as it hits (onPrepareHit, not run here), once a stint; Mega Greninja's other
+      // moves came out at 1.6 of predicted without it (mega_check.py, 2026-10-12)
+      if (q.spec.typeDue && (att.ability === 'protean' || att.ability === 'libero') && !att.abilityState[att.ability] && move.type !== '???' && att.getTypes().join() !== move.type) att.setType(move.type);
       move.willCrit = !!q.crit; if (q.spread) move.spreadHit = true;
       b.randomizer = d => Math.trunc(Math.trunc(d * (100 - r)) / 100);
       const d = b.actions.getDamage(att, def, move, true);

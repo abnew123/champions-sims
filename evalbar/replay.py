@@ -54,9 +54,10 @@ class Mon:
         s.unburden = False; s.perish = 0                                  # its item gone since it came in (Unburden); Perish Song's count
         s.abil = ''                                                         # an ability it gained in battle (Trace, Skill Swap, Role Play...)
         s.toxn = 0; s.ptrap = None                                          # Toxic's ticks since it came in; a binding move on it [move, ticks, user]
+        s.types = None; s.tadd = ''; s.protean = False                      # types changed in battle (Soak, Protean, Double Shock), a type added, Protean / Libero used
     def leave(s):
         s.boosts = {}; s.vol = set(); s.moved = False; s.stall = False; s.prot = False; s.lock = ''; s.last = ''; s.volarg = {}; s.volturn = {}
-        s.unburden = False; s.perish = 0; s.abil = ''; s.toxn = 0; s.ptrap = None
+        s.unburden = False; s.perish = 0; s.abil = ''; s.toxn = 0; s.ptrap = None; s.types = None; s.tadd = ''; s.protean = False
         if s.temp: s.forme = s.species; s.temp = False                  # a form taken in battle (Aegislash's Blade) ends on switching out
     def ref(s): return [s.side, disp(s.forme)]
 def hpval(tok):
@@ -92,7 +93,7 @@ def parse(log):
                                'item': m.item, 'gone': m.item_gone, 'slot': '' if m.fainted else slot.get(nick, ''), 'seen': True,
                                'sp': m.species, 'forme': '' if m.mega or m.forme == m.species else m.forme, 'pos': slot.get(nick, ''), 'mega': m.mega, 'moved': m.moved, 'stall': m.stall, 'lock': m.lock, 'slept': m.slept, 'vol': sorted(m.vol), 'last': m.last, 'volarg': dict(m.volarg),
                                'volturn': {v: list(x) for v, x in m.volturn.items() if v in m.vol}, 'unb': m.unburden, 'perish': m.perish, 'abil': m.abil,
-                               'toxn': m.toxn, 'ptrap': list(m.ptrap) if m.ptrap else None}
+                               'toxn': m.toxn, 'ptrap': list(m.ptrap) if m.ptrap else None, 'types': m.types, 'tadd': m.tadd, 'protean': m.protean}
                               for nick in order[sd] for m in [mons[sd][nick]]],
                      'tailwind': sidec[sd]['tailwind'], 'screens': {k: v for k, v in sidec[sd]['screens'].items() if v}, 'hazards': list(sidec[sd]['hazards'])}
         S['perish'] = perish
@@ -159,6 +160,7 @@ def parse(log):
                     # its Mega ability replaces what Trace copied (kept, positions.js's abilDue gave Mega Gardevoir the traced Intimidate for
                     # Pixilate: its Hyper Voice came out Normal-type, a median 1.7 of predicted in 131 hits; mega_check.py, 2026-10-12)
                     if MEGA_ABIL: m.abil = ''
+                    m.types = None; m.tadd = ''; m.protean = False             # a new species: its own types (setSpecies), a fresh ability state
                 elif k == '-formechange': m.temp = m.forme != m.species
         elif k == 'move':
             m = mon(p[2]); tg = mon(p[4]) if len(p) > 4 and p[4] else None; last_user[0] = m; last_move[0] = p[3]
@@ -298,7 +300,13 @@ def parse(log):
                 if what[-1].isdigit(): m.perish = int(what[-1])
                 if what != 'perish3' or k == '-end': note([m.ref(), f" Perish count {what[-1]}"])
                 elif not (cur[0] and ['Perish count 3 for every Pokémon on the field'] in cur[0]['notes']): note(['Perish count 3 for every Pokémon on the field'])
-            elif what == 'typechange': note([m.ref(), f" became {p[4]}-type" if len(p) > 4 else ' changed type'])
+            elif what == 'typechange':
+                if k == '-start' and len(p) > 4: m.types = p[4].split('/')       # Soak, Protean / Libero, Double Shock and Burn Up ('???' for a lost only type)
+                if k == '-start' and re.search(r'\[from\] ability: (Protean|Libero)', l): m.protean = True   # once per switch-in
+                note([m.ref(), f" became {p[4]}-type" if len(p) > 4 else ' changed type'])
+            elif what == 'typeadd':
+                if k == '-start' and len(p) > 4: m.tadd = p[4]                   # Forest's Curse, Trick-or-Treat
+                note([m.ref(), f" gained the {p[4]} type" if len(p) > 4 else ' gained a type'])
             elif k == '-start':
                 if what == 'Encore': m.volarg[what] = m.last
                 if what == 'Disable' and len(p) > 4: m.volarg[what] = p[4]

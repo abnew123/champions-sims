@@ -116,6 +116,13 @@ function rebuild(spec, flip) {
       }
       // abilDue (live.specs_for; not the bot's yet): an ability it gained in battle (Trace, Skill Swap, Role Play), set without its start
       if (spec.abilDue && x.abilityNow && dex.abilities.get(toID(x.abilityNow)).exists) { p.ability = toID(x.abilityNow); p.abilityState = b.initEffectState({id: p.ability, target: p}); }
+      // typeDue (live.specs_for; not the bot's yet): types changed in battle (Soak, Protean / Libero, Double Shock, Burn Up: the log's -start
+      // typechange) and a type added (Forest's Curse); before, a Soaked Pokemon kept its own types. Protean / Libero used since it came in: once a stint
+      if (spec.typeDue) {
+        if (x.typesNow && x.typesNow.length) p.setType(x.typesNow, true);
+        if (x.typeAdd) p.addedType = x.typeAdd;
+        if (x.proteanUsed && (p.ability === 'protean' || p.ability === 'libero')) p.abilityState[p.ability] = true;
+      }
       if (spec.fieldDue && x.perish > 0) { if (p.addVolatile('perishsong')) p.volatiles.perishsong.duration = x.perish; else approx.push('Perish Song'); }
       // fieldDue: the second turn of a two-turn move (Electro Shot outside rain, Solar Beam, Meteor Beam, Fly...): locked into it, aimed
       // where the log shows it fired (else the first foe), as Showdown's twoturnmove leaves it after the charging turn's end

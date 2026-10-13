@@ -23,6 +23,8 @@ also make it score well.
 # 999 games with both players rated 1300+ (median 1368; 1,975 decisions, refitted model): c 0.25 +0.46 ± 0.08 for ~0; c 0.5 +0.95 ± 0.11
 # for +0.34; c 0.75 +1.15 ± 0.16 for +2.1; c 1.0 +0.62 ± 0.26 for +8.9 (full exploitation overshoots: the model is not that good).
 # Opponents rated 1368+: c 0.5 +0.97 ± 0.16. Valued by the bot's own matrix (an upper estimate), luck independent between choice and score.
+# The live version (the bot's staged search + EVAL_MATRIX=1, the plays hidden; scored on the full matrices): c 0.5 +0.88 ± 0.10 for 2.28
+# against a perfect opponent where the bot's current mix pays 2.34 (no extra price); c 0.25 +0.51 for 1.82. On for the Bo3 bot at 0.5.
 import os, sys, json, math, random, collections, time
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'pssim')); sys.path.insert(0, os.path.join(ROOT, 'bot')); sys.path.insert(0, os.path.join(ROOT, 'evalbar'))

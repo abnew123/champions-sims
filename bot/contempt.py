@@ -17,6 +17,10 @@ also make it score well.
   fit                 the model refitted (fit on half the games, scored on the other half) -> bot/out/contempt/human_model.json, which
                       score uses from then on (the first model, bot/out/pos/human_model.json, was fitted on the static value's options)
   .venv/bin/python3 bot/contempt.py pick 400 | eval 2 | score"""
+# Results (2026-10-12 evening): pilot 300 games (lean low-rated): c 0.5 +1.02 ± 0.18 a decision for +0.54 against a perfect opponent.
+# 999 games with both players rated 1300+ (median 1368; 1,975 decisions, refitted model): c 0.25 +0.46 ± 0.08 for ~0; c 0.5 +0.95 ± 0.11
+# for +0.34; c 0.75 +1.15 ± 0.16 for +2.1; c 1.0 +0.62 ± 0.26 for +8.9 (full exploitation overshoots: the model is not that good).
+# Opponents rated 1368+: c 0.5 +0.97 ± 0.16. Valued by the bot's own matrix (an upper estimate), luck independent between choice and score.
 import os, sys, json, math, random, collections, time
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'pssim')); sys.path.insert(0, os.path.join(ROOT, 'bot')); sys.path.insert(0, os.path.join(ROOT, 'evalbar'))

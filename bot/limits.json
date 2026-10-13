@@ -1,7 +1,7 @@
 {
   "format": "gen9championsvgc2026regmcbo3",
   "max_games_per_day": null,
-  "max_games_per_hour": 6,
+  "max_games_per_hour": 9,
   "stop_if_rating_at_least": null,
   "stop_if_opponent_in_top": 50,
   "think_seconds": [

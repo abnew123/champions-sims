@@ -156,3 +156,13 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     Mega Staraptor, 16); U-turn and Grassy Glide at a Weak Armor or Stamina partner only (Annihilape into Armarouge 12; Rillaboom into
     Stamina Archaludon 7 + 5); not Incineroar's Parting Shot at the partner to make sure of the switch (85 uses, but Incineroar is on
     most teams: an option nearly everywhere).
+18. **Selective two-turn search (the user, 2026-10-13: "could a pruned model seeing more moves ahead outperform our current model";
+    queued after v29).** On 333 real positions (games with a 1450+ player): a slot has a median 8 options (90th pct 12) and 95% of its
+    equilibrium mix sits in 3 (4); a side has a median 55 joint options (106) and 95% of the mix in 5 (9); the human's actual move is in
+    the search's top 4 by value 85% of the time, top 6 95%, top 8 99%. Plan: (1) a prototype behind an env flag: the one-turn search
+    as now at the root, the top ~6-8 joint options per side (~95% of the mix) expanded a turn deeper (a few luck samples a cell, a
+    pruned one-turn search at each child, ~4 options a slot, the net at the leaves), unexpanded cells keep their one-turn values;
+    est. 4-10x today's cost. (2) Scored on held-out real positions (log loss against results, as for the net) and in self-play against
+    the one-turn search, with the time per decision. (3) If it wins, its values become the net's training targets (offline, an AWS
+    box), so the climb and the bot get the depth at today's speed: the one-turn distillation was the largest self-play gain so far.
+    Caution: earlier depth-like changes (anticipation passes, the full switch matrix) were flat; the equilibrium opponent caps it.

@@ -18,6 +18,10 @@ also make it score well.
                       score uses from then on (the first model, bot/out/pos/human_model.json, was fitted on the static value's options)
   live / livescore    the bot's live version: the staged one-turn search it runs now plus the matrix at each cell's precision
                       (EVAL_MATRIX=1), the plays hidden (as live), choosing; scored on the set's full matrices (luck sample B)
+  hipick [nfit]      stronger players (bot/out/contempt/hi_pools.json): nfit fit positions from unused games with both players rated
+                      1300-1449 and two scoring turns from each unused game with a 1450+ player (CONTEMPT_SET=hi)
+  CONTEMPT_SET picks the files (<set>pos.jsonl ...); CONTEMPT_MODEL the human model score / livescore use; CONTEMPT_OPPMIN keeps only
+  the decisions against players rated that or more
   .venv/bin/python3 bot/contempt.py pick 400 | eval 2 | score"""
 # Results (2026-10-12 evening): pilot 300 games (lean low-rated): c 0.5 +1.02 ± 0.18 a decision for +0.54 against a perfect opponent.
 # 999 games with both players rated 1300+ (median 1368; 1,975 decisions, refitted model): c 0.25 +0.46 ± 0.08 for ~0; c 0.5 +0.95 ± 0.11
@@ -25,16 +29,34 @@ also make it score well.
 # Opponents rated 1368+: c 0.5 +0.97 ± 0.16. Valued by the bot's own matrix (an upper estimate), luck independent between choice and score.
 # The live version (the bot's staged search + EVAL_MATRIX=1, the plays hidden; scored on the full matrices): c 0.5 +0.88 ± 0.10 for 2.28
 # against a perfect opponent where the bot's current mix pays 2.34 (no extra price); c 0.25 +0.51 for 1.82. On for the Bo3 bot at 0.5.
+# Stronger players (the same evening): 186 unused games with a 1450+ player (CONTEMPT_SET=hi), live version, decisions against 1450+
+# players (359): c 0.5 +0.97 ± 0.28 for 2.45 where c 0 pays 2.55; c 0.25 +0.73 ± 0.16 for 1.99; c 0.75 +1.27 ± 0.47 for 4.66. The 999-game
+# set's 240 decisions against 1450+ players: c 0.5 +0.63 ± 0.26, c 0.25 +0.61 ± 0.16. So the gain holds at the top of the ladder.
+# The model refitted on 733 games with both players 1300-1449 (bot/out/contempt/human_model_hi.json, lam 0.5, tau 0.16): log score per
+# slot decision of 1450+ players -1.625 vs the deployed model's -1.627 (the planner's mix -2.033); c 0.5 +1.02 and +0.61 on the two sets.
+# No better: the deployed model stays.
 import os, sys, json, math, random, collections, time
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'pssim')); sys.path.insert(0, os.path.join(ROOT, 'bot')); sys.path.insert(0, os.path.join(ROOT, 'evalbar'))
 OUT = os.path.join(ROOT, 'bot', 'out', 'contempt'); os.makedirs(OUT, exist_ok=True)
 TAG = os.environ.get('CONTEMPT_SET', '')   # a further scoring set: CONTEMPT_SET=s2 -> s2pos.jsonl / s2eval.jsonl (the pilot is the default)
 POS, EVAL = os.path.join(OUT, TAG + 'pos.jsonl'), os.path.join(OUT, TAG + 'eval.jsonl')
-FITPOS, FITEVAL, MODEL = os.path.join(OUT, 'fit_pos.jsonl'), os.path.join(OUT, 'fit_eval.jsonl'), os.path.join(OUT, 'human_model.json')
+FITPOS, FITEVAL = os.path.join(OUT, TAG + 'fit_pos.jsonl'), os.path.join(OUT, TAG + 'fit_eval.jsonl')
+MODEL_OUT = os.path.join(OUT, f'human_model{"_" + TAG if TAG else ""}.json')                 # what fit writes
+MODEL = os.environ.get('CONTEMPT_MODEL') or os.path.join(OUT, 'human_model.json')           # what score / livescore use
+OPPMIN = int(os.environ.get('CONTEMPT_OPPMIN', '0'))                                          # score only the decisions against players rated this or more
 CAL = 0.7538
 CS = [0.0, 0.1, 0.25, 0.5, 0.75, 1.0]
 
+def ratings(game):
+    """{'p1': rating, 'p2': rating} from the cached replay"""
+    f = os.path.join(ROOT, 'pssim', 'replays_protect', game + '.log'); out = {}
+    if os.path.exists(f):
+        for l in open(f, errors='ignore'):
+            if l.startswith('|player|'):
+                p = l.rstrip('\n').split('|')
+                if len(p) >= 6 and p[5].strip().isdigit(): out[p[2]] = int(p[5])
+    return out
 def known(a):
     return bool(a) and all(x is not None and x.get('choice') is not None and not x.get('unsure') for x in a)
 def pick(n, seed=1):
@@ -91,7 +113,7 @@ def livescore():
     import numpy as np
     from scipy.optimize import linprog
     import exploit_test as XT, human_lines as HL
-    M = json.load(open(MODEL if os.path.exists(MODEL) else XT.MODEL))
+    M = json.load(open(MODEL if os.path.exists(MODEL) else XT.MODEL)); print('human model:', MODEL if os.path.exists(MODEL) else XT.MODEL)
     real = np.vectorize(lambda v: HL.resc(v, CAL))
     def solve(A, q=None, c=0.0):
         n, k = A.shape; obj = np.r_[np.zeros(n), -1.0] if q is None else np.r_[-c * (A @ q), -(1 - c)]
@@ -99,7 +121,7 @@ def livescore():
         return res.x[:n], (-res.fun if q is None else None)
     L = {r['name'].rsplit(' s', 1)[0]: r for r in map(json.loads, open(LEVAL)) if 'error' not in r and 'matrix' in r}
     B = {r['name'].rsplit(' s', 1)[0]: r for r in map(json.loads, open(EVAL)) if 'error' not in r and 'matrix' in r and r['name'].endswith(' sB')}
-    res = collections.defaultdict(list); games = []; nan_cells = 0; skipped = collections.Counter()
+    res = collections.defaultdict(list); games = []; opp_rating = []; nan_cells = 0; skipped = collections.Counter()
     for base, l in L.items():
         b = B.get(base)
         if not b: skipped['no full matrix'] += 1; continue
@@ -121,17 +143,45 @@ def livescore():
             q = np.array([math.prod(sp[i].get(json.dumps(c[i]), 1e-6) for i in range(len(c))) for c in cols]); q /= q.sum()
             x_live = np.array(l['matrix']['x'] if us == 0 else l['matrix']['y'], float); x_live /= x_live.sum()   # the mix the bot plays now
             vB = solve(Bm)[1]; base_v = x_live @ Bm[:, act]
-            res['c=0 (the bot now): price vs a perfect opponent'].append(vB - (x_live @ Bm).min())
+            res['c=0 (no contempt): price vs a perfect opponent'].append(vB - (x_live @ Bm).min())
             for c in (0.25, 0.5, 0.75):
                 x = solve(A, q, c)[0]
                 res[f'c={c:.2f} gain vs the actual play'].append(x @ Bm[:, act] - base_v)
                 res[f'c={c:.2f} price vs a perfect opponent'].append(vB - (x @ Bm).min())
             games.append(base.split(' ')[0])
+            pv = base.split(' ')[-1]; opp_rating.append(ratings(games[-1]).get([pv, 'p2' if pv == 'p1' else 'p1'][them], -1))
     print(f"{len(games)} decisions ({len(set(games))} games); never-sampled cells filled: {nan_cells}; skipped: {dict(skipped)}")
-    G = np.array(games)
-    for k, xs in res.items():
-        xs = np.array(xs); se = math.sqrt(sum(((xs[G == g] - xs.mean()).sum()) ** 2 for g in set(games))) / len(xs)
-        print(f"  {k:52s} {100 * xs.mean():+7.2f}  ± {100 * se:.2f}")
+    G = np.array(games); OR = np.array(opp_rating)
+    def show(mask, label):
+        print(label)
+        for k, xs in res.items():
+            xs = np.array(xs)[mask]; g = G[mask]
+            if not len(xs): continue
+            se = math.sqrt(sum(((xs[g == x] - xs.mean()).sum()) ** 2 for x in set(g))) / len(xs)
+            print(f"  {k:52s} {100 * xs.mean():+7.2f}  ± {100 * se:.2f}")
+    show(OR >= OPPMIN if OPPMIN else np.ones(len(G), bool), f'opponent rated {OPPMIN}+ ({int((OR >= OPPMIN).sum())} decisions)' if OPPMIN else 'all')
+def hipick(nfit=3000, per_game=2, seed=7):
+    """from bot/out/contempt/hi_pools.json: CONTEMPT_SET's fit positions (any turn of the fit games, nfit of them) and its scoring
+    positions (per_game turns with both plays known from each eval game, each twice for luck samples A and B)"""
+    P = json.load(open(os.path.join(OUT, 'hi_pools.json'))); fit_g, ev_g = set(P['fit']), set(P['eval'])
+    fitrows, evrows = [], collections.defaultdict(list)
+    for part in ('fit', 'hold', 'new'):
+        for l in open(os.path.join(ROOT, 'pssim', 'results', 'value', f'real_{part}.pos.jsonl')):
+            g = l[l.index('"name": "') + 9:].split(' ')[0] if '"name": "' in l else json.loads(l)['name'].split(' ')[0]
+            if g in fit_g: fitrows.append(l)
+            elif g in ev_g:
+                r = json.loads(l)
+                if known(r.get('actual')) and known(r.get('their_actual')): evrows[g].append(r)
+    rnd = random.Random(seed); rnd.shuffle(fitrows)
+    with open(FITPOS, 'w') as o:
+        for l in fitrows[:nfit]: o.write(l if l.endswith('\n') else l + '\n')
+    n = 0
+    with open(POS, 'w') as o:
+        for g in sorted(evrows):
+            for r in rnd.sample(evrows[g], min(per_game, len(evrows[g]))):
+                for tag in ('A', 'B'): o.write(json.dumps({**r, 'name': f"{r['name']} s{tag}"}) + '\n')
+                n += 1
+    print(f'{min(nfit, len(fitrows))} fit positions -> {FITPOS}; {n} scoring positions from {len(evrows)} games -> {POS}')
 def fitpick(n, seed=2):
     taken = {json.loads(l)['name'].split(' ')[0] for l in open(POS)} if os.path.exists(POS) else set()
     by_game = collections.defaultdict(list)
@@ -162,7 +212,7 @@ def fit():
     old = json.load(open(XT.MODEL))
     print(f"{len(A) + len(B)} human slot decisions from {len(games)} games (fit on half the games, scored on the other half; log score, higher is better):")
     print(f"  planner's mix (2% floor) {ll({'lam': 0.02, 'tau': 10.0, 'fac': {}}, B):.3f};  the first model {ll(old, B):.3f};  refitted {ll(best, B):.3f} (lam {best['lam']}, tau {best['tau']})")
-    json.dump(best, open(MODEL, 'w'))
+    json.dump(best, open(MODEL_OUT, 'w')); print('->', MODEL_OUT)
 
 def score():
     import numpy as np
@@ -186,14 +236,6 @@ def score():
         if 'error' in r or 'matrix' not in r: continue
         base, tag = r['name'].rsplit(' s', 1); rows[base][tag] = r
     res = collections.defaultdict(list); games = []; opp_rating = []
-    def ratings(game):
-        f = os.path.join(ROOT, 'pssim', 'replays_protect', game + '.log'); out = {}
-        if os.path.exists(f):
-            for l in open(f, errors='ignore'):
-                if l.startswith('|player|'):
-                    p = l.rstrip('\n').split('|')
-                    if len(p) >= 6 and p[5].strip().isdigit(): out[p[2]] = int(p[5])
-        return out
     for base, d in rows.items():
         if 'A' not in d or 'B' not in d: continue
         a_, b_ = d['A'], d['B']
@@ -224,6 +266,9 @@ def score():
             games.append(base.split(' ')[0])
             rt = ratings(base.split(' ')[0]); pv = base.split(' ')[-1]          # the position's view (p1 / p2) is side 0
             sides = [pv, 'p2' if pv == 'p1' else 'p1']; opp_rating.append(rt.get(sides[them]))
+            if OPPMIN and (opp_rating[-1] or 0) < OPPMIN:                         # (the rows just added are dropped below)
+                for k in list(res): res[k].pop()
+                games.pop(); opp_rating.pop(); continue
     n = len(res['ceiling: best answer to the actual play'])
     print(f"{n} decisions ({len(set(games))} games), real win chance points per decision; ± one standard error, clustered by game")
     G = np.array(games); OR = np.array([r if r is not None else -1 for r in opp_rating])
@@ -250,4 +295,5 @@ if __name__ == '__main__':
     elif a[0] == 'fiteval': fiteval(int(a[1]) if len(a) > 1 else 2)
     elif a[0] == 'fit': fit()
     elif a[0] == 'live': live(int(a[1]) if len(a) > 1 else 2)
+    elif a[0] == 'hipick': hipick(int(a[1]) if len(a) > 1 else 3000)
     elif a[0] == 'livescore': livescore()

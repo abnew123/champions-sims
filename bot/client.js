@@ -86,7 +86,9 @@ function topBandShare() {
 let searchStart = 0;   // when our current ladder search began (limits.json max_search_seconds cancels a longer one)
 let ws, me = null, searching = false, inGames = 0, pmReplied = new Set(), loginAt = 0, joinSent = new Set(), lastIdleLog = 0;
 const rooms = {};   // room id -> {lines, side, req, done, oppRating, turn}
-function send(s) { ws.send(s); }
+function send(s) {   // a send while the socket is down (a reconnect after the Mac slept, 2026-10-13) is dropped, not thrown: it crashed the Bo3 client
+  if (!ws || ws.readyState !== WebSocket.OPEN) { log('not connected, dropped:', s.split('|').slice(-1)[0].slice(0, 40)); return; }
+  ws.send(s); }
 function connect() {
   ws = new WebSocket(WS);
   ws.onmessage = e => { for (const m of String(e.data).split('\n>').map((x, i) => i ? '>' + x : x)) onMessage(m); };
@@ -119,7 +121,10 @@ async function onMessage(m) {
       } catch (e) {} }
       else if (p[1] === 'updatechallenges') { if (!SECONDARY) onChallenges(p[2]); }
       else if (p[1] === 'popup') { const t = p.slice(2).join('|'); log('popup:', t.slice(0, 200));
-        if (t.includes('Your team was rejected') && currentTeam) {   // a team Showdown will not accept: never use it again
+        // a team Showdown will not accept: never use it again. Not "requires you to use your own team": that is the search sent in a
+        // reconnect's gap (2026-10-13), not the team; the search just goes again
+        if (t.includes('Your team was rejected') && t.includes('use your own team')) { searching = false; }
+        else if (t.includes('Your team was rejected') && currentTeam) {
           const rf = path.join(OUT, 'rejected_teams.json'); const r = fs.existsSync(rf) ? JSON.parse(fs.readFileSync(rf)) : [];
           if (!r.includes(currentTeam.name)) { r.push(currentTeam.name); fs.writeFileSync(rf, JSON.stringify(r)); }
           log('team rejected, will not use it again:', currentTeam.name); currentTeam = null; searching = false; } }

@@ -173,3 +173,15 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     the 96 Revival Blessing cases -> 100%; all turns 96.8% -> 100% of supported in lo / hi / real. Found on the way: hidden disables
     (Imprison) shown as usable in the last active slot's request (getMoves' restrictData), as Showdown does; an Imprison mirror read as
     Struggle. 200 random real-team battles (2,674 cases): 99.9% -> 100%.
+    **Reshaped as an anytime search (the user, through the Eval bar, 2026-10-13):** one loop under a budget instead of a fixed
+    two-turn expansion: score every cell cheaply (few rolls, the net at the next turn), solve, then refine the cell with the highest
+    row weight x column weight x remaining uncertainty, either by more rolls (a cell one roll decides: item 14's lone crit) or by one more
+    turn as a smaller sub-table on the same loop with a share of the budget; re-solve and repeat; every cell keeps a small floor of
+    attention (the mixes move as cells sharpen). Roughly simultaneous-move MCTS with the net at the leaves; back-row hypotheses could
+    share the budget by weight (if the user ever wants them). Budgets: ~1 min a position for net training, 15 s for the bot, 5 s for team
+    search; counted in search steps (leaf evaluations), not seconds, except the bot, which converts its 15 s at startup (this Mac is
+    shared). Each budget needs its own CAL. Engine asks from the Eval bar: an evalpos budget (steps and time), deterministic results for
+    a given seed (resuming saved search state only if cheap), and a per-position uncertainty (from the cells' sample variances through
+    the solved mixes). Today's EVAL_ADAPT staging is the special case "refine by rolls, top options only". Order: after v29; first cut
+    = refine by rolls with the priority rule + value_se output (no depth), then depth for the top cells; the Eval bar scores budgets
+    1 / 5 / 15 / 60 s on the 461 bot games and the replays to see where the gain flattens.

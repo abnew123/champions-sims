@@ -1246,3 +1246,7 @@ registrations since its second version) and checks reachability of real logs in 
   agreement 54.6% (55.9%); Raichunite Y sides -5.1 -> **-2.4**; v28 sym2: RMS 5.8, agreement 56.1%. Held-out outcomes (the static net):
   log loss 0.5340 vs 0.5320 (+0.0020 ± 0.0015); on No Guard / Raichunite Y positions +0.0116 ± 0.0039: both nets over-rate the No Guard
   side there (49-50% predicted vs 39% real, n 857 from few games), and the fix values it more. Shipped to Team search's climb.
+- **The live bot stays on champ-bot-2026-10-12c + vnet_h64_search_fc.json (the user, 2026-10-13 evening).** Held-out one-turn search
+  against results (1,503 positions): bot now 0.5218, v28 + its net 0.5238 (+0.0019 ± 0.0017; No Guard / Raichunite Y +0.0072 ± 0.0043),
+  the same lean as the static net and the real-pairings agreement. v28 goes to the climb (mechanics); the bot moves with v29 after the
+  same checks.

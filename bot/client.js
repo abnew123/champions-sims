@@ -268,16 +268,26 @@ async function onReady() {
 }
 async function handleRequest(room, R) {
   const req = R.req; const L = limits();
-  const reqSp = req.side ? [...new Set(req.side.pokemon.map(x => x.details.split(',')[0].replace(/-Mega.*$/, '')))] : [];
-  const holds = t => t && reqSp.every(s => t.sets.some(x => x.species === s || x.species.replace(/-Mega.*$/, '') === s));
+  // the request's species, a Mega under its base forme's name: Floette-Eternal Mega Evolves into "Floette-Mega" (2026-10-13: read as
+  // another team, recovered the wrong six and the brain had no set for it), so a Mega also matches a set whose species shares its base
+  const reqSp = req.side ? [...new Set(req.side.pokemon.map(x => x.details.split(',')[0]))] : [];
+  const fits = (x, s) => x.species === s || x.species.replace(/-Mega.*$/, '') === s.replace(/-Mega.*$/, '') ||
+    (/-Mega/.test(s) && !/-Mega/.test(x.species) && x.species.split('-')[0] === s.split('-')[0]);
+  const holds = t => t && reqSp.every(s => t.sets.some(x => fits(x, s)));
   if (req.side && !holds(currentTeam)) {   // after a restart mid-game, or a request showing another six: the team whose species it lists
     if (!teams) teams = JSON.parse(fs.readFileSync(ARG('--teams') || path.join(HERE, 'teams.json')));
-    const sp = [...new Set(req.side.pokemon.map(x => x.details.split(',')[0].replace(/-Mega.*$/, '')))];
-    const covers = t => sp.filter(s => t.sets.some(x => x.species === s || x.species.replace(/-Mega.*$/, '') === s)).length;
+    const sp = reqSp;
+    const covers = t => sp.filter(s => t.sets.some(x => fits(x, s))).length;
+    const rejected = fs.existsSync(path.join(OUT, 'rejected_teams.json')) ? JSON.parse(fs.readFileSync(path.join(OUT, 'rejected_teams.json'))) : [];
     let cands = teams.map(t => ({...t, arm: 'sheet'}));
     try { const E = JSON.parse(fs.readFileSync(path.join(HERE, 'experiment.json'))); cands = cands.concat(JSON.parse(fs.readFileSync(path.join(ROOT, E.regional.pool))).map(t => ({...t, arm: 'regional'}))); } catch (e) {}
+    cands = cands.filter(t => !rejected.includes(t.name));   // a team Showdown refused is never the one in play
     const sz = t => t.sets.length;   // the team holding every Pokemon the request lists (fewest extras first)
-    currentTeam = cands.filter(t => covers(t) === sp.length).sort((a, b) => sz(a) - sz(b))[0] || cands.sort((a, b) => covers(b) - covers(a))[0];
+    // regional teams often share their six species: the request's items and moves pick the one in play (2026-10-13: f194 #4 was read as f192 #51)
+    const tid = x => String(x || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const same = t => req.side.pokemon.reduce((n, p) => { const x = t.sets.find(x => fits(x, p.details.split(',')[0])); if (!x) return n;
+      return n + (tid(x.item) === tid(p.item) ? 1 : 0) + (p.moves || []).filter(m => (x.moves || []).some(y => tid(y) === tid(m))).length; }, 0);
+    currentTeam = cands.filter(t => covers(t) === sp.length).sort((a, b) => same(b) - same(a) || sz(a) - sz(b))[0] || cands.sort((a, b) => covers(b) - covers(a) || same(b) - same(a))[0];
     log('team recovered after a restart:', currentTeam.name);
   }
   if (R.oppRating != null && R.oppRating >= topBand.elo && !R.topNoted) { R.topNoted = true; log(`opponent rated ${R.oppRating} is in the ladder's top ${limits().stop_if_opponent_in_top} (counts toward the stop)`); }

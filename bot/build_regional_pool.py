@@ -5,6 +5,7 @@ sheets, any team with a species, item, ability or move the engine data lacks, an
 the planner can't play the Perish trap, so those games would measure that blind spot instead of sheet against no sheet. Written to bot/out/regional_pool.json (git-ignored;
 teams are named by event and placing only).
   .venv/bin/python3 bot/build_regional_pool.py [top=64]"""
+import unicodedata
 import json, os, sys, re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 top = int(sys.argv[1]) if len(sys.argv) > 1 else 64
@@ -41,7 +42,7 @@ for ev in ('f192', 'f193', 'f194'):
             if None in mv or not mv: why = 'move in ' + sp; break
             if m.get('item') and toid(m['item']) not in ITEMS: why = 'item ' + m['item']; break
             if toid(m.get('ability')) not in ABIL: why = 'ability ' + str(m.get('ability')); break
-            nat = m.get('stat_alignment') or 'Serious'
+            nat = unicodedata.normalize('NFKD', m.get('stat_alignment') or 'Serious').encode('ascii', 'ignore').decode()   # 'Naïve': Showdown reads the packed team's 'nave' (2026-10-13)
             sets.append({'species': sp, 'item': m.get('item') or '', 'ability': m['ability'], 'nature': nat, 'evs': spread(sp, nat), 'moves': mv})
         if not why and any('Perish Song' in x['moves'] for x in sets): why = 'Perish Song'
         if why: skipped[why] = skipped.get(why, 0) + 1; continue

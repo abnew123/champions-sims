@@ -1,0 +1,122 @@
+{
+ "Garchomp": {
+  "species": "Garchomp",
+  "item": "Focus Sash",
+  "ability": "Rough Skin",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Rock Slide",
+   "Stomping Tantrum",
+   "Dragon Claw"
+  ]
+ },
+ "Volcarona": {
+  "species": "Volcarona",
+  "item": "Grassy Seed",
+  "ability": "Flame Body",
+  "nature": "Modest",
+  "evs": [
+   21,
+   0,
+   15,
+   5,
+   1,
+   24
+  ],
+  "moves": [
+   "Protect",
+   "Fiery Dance",
+   "Bug Buzz",
+   "Quiver Dance"
+  ]
+ },
+ "Ninetales-Alola": {
+  "species": "Ninetales-Alola",
+  "item": "Choice Scarf",
+  "ability": "Snow Warning",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Blizzard",
+   "Icy Wind",
+   "Encore",
+   "Freeze-Dry"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Chople Berry",
+  "ability": "Intimidate",
+  "nature": "Impish",
+  "evs": [
+   32,
+   0,
+   20,
+   0,
+   14,
+   0
+  ],
+  "moves": [
+   "Parting Shot",
+   "Flare Blitz",
+   "Fake Out",
+   "Throat Chop"
+  ]
+ },
+ "Raichu": {
+  "species": "Raichu",
+  "item": "Raichunite Y",
+  "ability": "Lightning Rod",
+  "nature": "Timid",
+  "evs": [
+   32,
+   0,
+   11,
+   0,
+   0,
+   23
+  ],
+  "moves": [
+   "Protect",
+   "Zap Cannon",
+   "Focus Blast",
+   "Fake Out"
+  ]
+ },
+ "Rillaboom": {
+  "species": "Rillaboom",
+  "item": "Sitrus Berry",
+  "ability": "Grassy Surge",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "U-turn",
+   "Wood Hammer",
+   "Grassy Glide",
+   "Fake Out"
+  ]
+ }
+}

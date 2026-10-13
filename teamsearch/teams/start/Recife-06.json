@@ -1,0 +1,122 @@
+{
+ "Rillaboom": {
+  "species": "Rillaboom",
+  "item": "Miracle Seed",
+  "ability": "Grassy Surge",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Wood Hammer",
+   "Fake Out",
+   "High Horsepower",
+   "Grassy Glide"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "White Herb",
+  "ability": "Unburden",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Close Combat",
+   "Fake Out",
+   "Quick Guard",
+   "Dire Claw"
+  ]
+ },
+ "Dragonite": {
+  "species": "Dragonite",
+  "item": "Dragoninite",
+  "ability": "Multiscale",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Dragon Pulse",
+   "Heat Wave",
+   "Tailwind"
+  ]
+ },
+ "Delphox": {
+  "species": "Delphox",
+  "item": "Delphoxite",
+  "ability": "Blaze",
+  "nature": "Timid",
+  "evs": [
+   9,
+   0,
+   14,
+   11,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Psyshock",
+   "Heat Wave",
+   "Nasty Plot"
+  ]
+ },
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Life Orb",
+  "ability": "Defiant",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Protect",
+   "Kowtow Cleave",
+   "Low Kick",
+   "Sucker Punch"
+  ]
+ },
+ "Basculegion": {
+  "species": "Basculegion",
+  "item": "Focus Sash",
+  "ability": "Adaptability",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Liquidation",
+   "Last Respects",
+   "Aqua Jet"
+  ]
+ }
+}

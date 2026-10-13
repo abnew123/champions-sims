@@ -1,23 +1,23 @@
 [
  {
   "forme": "Rillaboom",
-  "use": 56.1,
-  "cluster_share": 73,
+  "use": 52.8,
+  "cluster_share": 74,
   "fallback": false,
   "one_item": false,
   "gid": "Rillaboom#1"
  },
  {
   "forme": "Rillaboom",
-  "use": 56.1,
-  "cluster_share": 9,
+  "use": 52.8,
+  "cluster_share": 8,
   "fallback": true,
   "one_item": false,
   "gid": "Rillaboom#3"
  },
  {
   "forme": "Rillaboom",
-  "use": 56.1,
+  "use": 52.8,
   "cluster_share": 7,
   "fallback": true,
   "one_item": false,
@@ -25,79 +25,71 @@
  },
  {
   "forme": "Sneasler",
-  "use": 38.5,
-  "cluster_share": 33,
+  "use": 37.9,
+  "cluster_share": 34,
+  "fallback": false,
+  "one_item": false,
+  "gid": "Sneasler#7"
+ },
+ {
+  "forme": "Sneasler",
+  "use": 37.9,
+  "cluster_share": 28,
   "fallback": false,
   "one_item": false,
   "gid": "Sneasler#1"
  },
  {
   "forme": "Sneasler",
-  "use": 38.5,
-  "cluster_share": 31,
-  "fallback": false,
-  "one_item": false,
-  "gid": "Sneasler#5"
- },
- {
-  "forme": "Sneasler",
-  "use": 38.5,
-  "cluster_share": 19,
+  "use": 37.9,
+  "cluster_share": 20,
   "fallback": true,
   "one_item": false,
   "gid": "Sneasler#4"
  },
  {
   "forme": "Sneasler",
-  "use": 38.5,
-  "cluster_share": 14,
+  "use": 37.9,
+  "cluster_share": 16,
   "fallback": true,
   "one_item": false,
   "gid": "Sneasler#3"
  },
  {
-  "forme": "Gholdengo",
-  "use": 31.9,
-  "cluster_share": 89,
-  "fallback": false,
-  "one_item": true,
-  "gid": "Gholdengo#1"
- },
- {
   "forme": "Incineroar",
-  "use": 31.1,
-  "cluster_share": 67,
+  "use": 33.1,
+  "cluster_share": 68,
   "fallback": false,
   "one_item": false,
   "gid": "Incineroar#1"
  },
  {
   "forme": "Incineroar",
-  "use": 31.1,
+  "use": 33.1,
   "cluster_share": 10,
+  "fallback": true,
+  "one_item": false,
+  "gid": "Incineroar#21"
+ },
+ {
+  "forme": "Incineroar",
+  "use": 33.1,
+  "cluster_share": 8,
   "fallback": true,
   "one_item": false,
   "gid": "Incineroar#8"
  },
  {
-  "forme": "Incineroar",
-  "use": 31.1,
-  "cluster_share": 7,
-  "fallback": true,
-  "one_item": false,
-  "gid": "Incineroar#13"
- },
- {
-  "forme": "Incineroar",
-  "use": 31.1,
-  "cluster_share": 6,
-  "fallback": true,
-  "one_item": false,
-  "gid": "Incineroar#20"
+  "forme": "Gholdengo",
+  "use": 28.9,
+  "cluster_share": 90,
+  "fallback": false,
+  "one_item": true,
+  "gid": "Gholdengo#2"
  },
  {
   "forme": "Raichu-Mega-Y",
-  "use": 27.9,
+  "use": 28.1,
   "cluster_share": 100,
   "fallback": false,
   "one_item": true,
@@ -105,15 +97,15 @@
  },
  {
   "forme": "Kingambit",
-  "use": 27.1,
-  "cluster_share": 34,
+  "use": 26.0,
+  "cluster_share": 35,
   "fallback": false,
   "one_item": false,
   "gid": "Kingambit#1"
  },
  {
   "forme": "Kingambit",
-  "use": 27.1,
+  "use": 26.0,
   "cluster_share": 32,
   "fallback": false,
   "one_item": false,
@@ -121,23 +113,23 @@
  },
  {
   "forme": "Kingambit",
-  "use": 27.1,
-  "cluster_share": 20,
+  "use": 26.0,
+  "cluster_share": 21,
   "fallback": true,
   "one_item": false,
   "gid": "Kingambit#3"
  },
  {
   "forme": "Kingambit",
-  "use": 27.1,
-  "cluster_share": 11,
+  "use": 26.0,
+  "cluster_share": 10,
   "fallback": true,
   "one_item": false,
   "gid": "Kingambit#5"
  },
  {
   "forme": "Salamence-Mega",
-  "use": 26.7,
+  "use": 22.9,
   "cluster_share": 100,
   "fallback": false,
   "one_item": true,
@@ -145,7 +137,7 @@
  },
  {
   "forme": "Arcanine-Hisui",
-  "use": 22.0,
+  "use": 19.2,
   "cluster_share": 99,
   "fallback": false,
   "one_item": true,
@@ -153,71 +145,63 @@
  },
  {
   "forme": "Archaludon",
-  "use": 16.8,
-  "cluster_share": 95,
+  "use": 18.2,
+  "cluster_share": 96,
   "fallback": false,
   "one_item": true,
-  "gid": "Archaludon#3"
- },
- {
-  "forme": "Milotic",
-  "use": 15.5,
-  "cluster_share": 38,
-  "fallback": false,
-  "one_item": false,
-  "gid": "Milotic#5"
- },
- {
-  "forme": "Milotic",
-  "use": 15.5,
-  "cluster_share": 38,
-  "fallback": false,
-  "one_item": false,
-  "gid": "Milotic#2"
- },
- {
-  "forme": "Milotic",
-  "use": 15.5,
-  "cluster_share": 17,
-  "fallback": true,
-  "one_item": false,
-  "gid": "Milotic#1"
- },
- {
-  "forme": "Milotic",
-  "use": 15.5,
-  "cluster_share": 5,
-  "fallback": true,
-  "one_item": false,
-  "gid": "Milotic#17"
+  "gid": "Archaludon#1"
  },
  {
   "forme": "Charizard-Mega-Y",
-  "use": 14.7,
+  "use": 16.7,
   "cluster_share": 100,
   "fallback": false,
   "one_item": true,
   "gid": "M-Charizard Y#2"
  },
  {
-  "forme": "Staraptor-Mega",
-  "use": 14.2,
-  "cluster_share": 100,
+  "forme": "Basculegion",
+  "use": 13.9,
+  "cluster_share": 48,
   "fallback": false,
-  "one_item": true,
-  "gid": "M-Staraptor#1"
+  "one_item": false,
+  "gid": "Basculegion#1"
+ },
+ {
+  "forme": "Basculegion",
+  "use": 13.9,
+  "cluster_share": 23,
+  "fallback": true,
+  "one_item": false,
+  "gid": "Basculegion#2"
+ },
+ {
+  "forme": "Basculegion",
+  "use": 13.9,
+  "cluster_share": 14,
+  "fallback": true,
+  "one_item": false,
+  "gid": "Basculegion#3"
+ },
+ {
+  "forme": "Basculegion",
+  "use": 13.9,
+  "cluster_share": 6,
+  "fallback": true,
+  "one_item": false,
+  "gid": "Basculegion#8"
  },
  {
   "forme": "Farigiraf",
-  "use": 13.9,
-  "cluster_share": 82,
+  "use": 13.8,
+  "cluster_share": 81,
   "fallback": false,
   "one_item": false,
   "gid": "Farigiraf#1"
  },
  {
   "forme": "Farigiraf",
-  "use": 13.9,
+  "use": 13.8,
   "cluster_share": 8,
   "fallback": true,
   "one_item": false,
@@ -225,31 +209,23 @@
  },
  {
   "forme": "Farigiraf",
-  "use": 13.9,
+  "use": 13.8,
   "cluster_share": 6,
   "fallback": true,
   "one_item": false,
-  "gid": "Farigiraf#16"
- },
- {
-  "forme": "Floette-Mega",
-  "use": 13.3,
-  "cluster_share": 100,
-  "fallback": false,
-  "one_item": true,
-  "gid": "M-Floette#1"
+  "gid": "Farigiraf#14"
  },
  {
   "forme": "Indeedee-F",
-  "use": 13.2,
-  "cluster_share": 55,
+  "use": 13.6,
+  "cluster_share": 56,
   "fallback": false,
   "one_item": false,
   "gid": "Indeedee-F#2"
  },
  {
   "forme": "Indeedee-F",
-  "use": 13.2,
+  "use": 13.6,
   "cluster_share": 21,
   "fallback": true,
   "one_item": false,
@@ -257,335 +233,391 @@
  },
  {
   "forme": "Indeedee-F",
-  "use": 13.2,
-  "cluster_share": 17,
+  "use": 13.6,
+  "cluster_share": 16,
   "fallback": true,
   "one_item": false,
   "gid": "Indeedee-F#3"
  },
  {
   "forme": "Indeedee-F",
-  "use": 13.2,
+  "use": 13.6,
   "cluster_share": 6,
   "fallback": true,
   "one_item": false,
   "gid": "Indeedee-F#12"
  },
  {
-  "forme": "Basculegion",
-  "use": 12.9,
-  "cluster_share": 42,
-  "fallback": false,
-  "one_item": false,
-  "gid": "Basculegion#1"
- },
- {
-  "forme": "Basculegion",
-  "use": 12.9,
-  "cluster_share": 32,
-  "fallback": false,
-  "one_item": false,
-  "gid": "Basculegion#2"
- },
- {
-  "forme": "Basculegion",
-  "use": 12.9,
-  "cluster_share": 17,
-  "fallback": true,
-  "one_item": false,
-  "gid": "Basculegion#3"
- },
- {
-  "forme": "Golisopod-Mega",
-  "use": 11.1,
+  "forme": "Staraptor-Mega",
+  "use": 13.2,
   "cluster_share": 100,
   "fallback": false,
   "one_item": true,
-  "gid": "M-Golisopod#1"
+  "gid": "M-Staraptor#1"
  },
  {
-  "forme": "Sylveon",
-  "use": 10.9,
-  "cluster_share": 96,
+  "forme": "Milotic",
+  "use": 13.1,
+  "cluster_share": 39,
+  "fallback": false,
+  "one_item": false,
+  "gid": "Milotic#5"
+ },
+ {
+  "forme": "Milotic",
+  "use": 13.1,
+  "cluster_share": 37,
+  "fallback": false,
+  "one_item": false,
+  "gid": "Milotic#2"
+ },
+ {
+  "forme": "Milotic",
+  "use": 13.1,
+  "cluster_share": 16,
+  "fallback": true,
+  "one_item": false,
+  "gid": "Milotic#1"
+ },
+ {
+  "forme": "Milotic",
+  "use": 13.1,
+  "cluster_share": 6,
+  "fallback": true,
+  "one_item": false,
+  "gid": "Milotic#19"
+ },
+ {
+  "forme": "Floette-Mega",
+  "use": 12.8,
+  "cluster_share": 100,
   "fallback": false,
   "one_item": true,
-  "gid": "Sylveon#1"
+  "gid": "M-Floette#1"
  },
  {
   "forme": "Pelipper",
-  "use": 10.5,
-  "cluster_share": 49,
+  "use": 12.4,
+  "cluster_share": 45,
+  "fallback": false,
+  "one_item": false,
+  "gid": "Pelipper#1"
+ },
+ {
+  "forme": "Pelipper",
+  "use": 12.4,
+  "cluster_share": 38,
   "fallback": false,
   "one_item": false,
   "gid": "Pelipper#2"
  },
  {
   "forme": "Pelipper",
-  "use": 10.5,
-  "cluster_share": 38,
-  "fallback": false,
-  "one_item": false,
-  "gid": "Pelipper#1"
- },
- {
-  "forme": "Garchomp",
-  "use": 9.2,
-  "cluster_share": 44,
-  "fallback": false,
-  "one_item": false,
-  "gid": "Garchomp#1"
- },
- {
-  "forme": "Garchomp",
-  "use": 9.2,
-  "cluster_share": 41,
-  "fallback": false,
-  "one_item": false,
-  "gid": "Garchomp#2"
- },
- {
-  "forme": "Garchomp",
-  "use": 9.2,
+  "use": 12.4,
   "cluster_share": 7,
   "fallback": true,
   "one_item": false,
-  "gid": "Garchomp#24"
- },
- {
-  "forme": "Volcarona",
-  "use": 8.7,
-  "cluster_share": 43,
-  "fallback": false,
-  "one_item": false,
-  "gid": "Volcarona#1"
- },
- {
-  "forme": "Volcarona",
-  "use": 8.7,
-  "cluster_share": 27,
-  "fallback": false,
-  "one_item": false,
-  "gid": "Volcarona#4"
- },
- {
-  "forme": "Volcarona",
-  "use": 8.7,
-  "cluster_share": 19,
-  "fallback": true,
-  "one_item": false,
-  "gid": "Volcarona#2"
- },
- {
-  "forme": "Gengar-Mega",
-  "use": 8.5,
-  "cluster_share": 100,
-  "fallback": false,
-  "one_item": true,
-  "gid": "M-Gengar#1"
- },
- {
-  "forme": "Politoed",
-  "use": 8.2,
-  "cluster_share": 49,
-  "fallback": false,
-  "one_item": false,
-  "gid": "Politoed#1"
- },
- {
-  "forme": "Politoed",
-  "use": 8.2,
-  "cluster_share": 33,
-  "fallback": false,
-  "one_item": false,
-  "gid": "Politoed#2"
- },
- {
-  "forme": "Politoed",
-  "use": 8.2,
-  "cluster_share": 8,
-  "fallback": true,
-  "one_item": false,
-  "gid": "Politoed#5"
- },
- {
-  "forme": "Tyranitar-Mega",
-  "use": 7.6,
-  "cluster_share": 100,
-  "fallback": false,
-  "one_item": true,
-  "gid": "M-Tyranitar#1"
- },
- {
-  "forme": "Indeedee",
-  "use": 7.3,
-  "cluster_share": 70,
-  "fallback": false,
-  "one_item": false,
-  "gid": "Indeedee#1"
- },
- {
-  "forme": "Indeedee",
-  "use": 7.3,
-  "cluster_share": 23,
-  "fallback": true,
-  "one_item": false,
-  "gid": "Indeedee#2"
- },
- {
-  "forme": "Excadrill",
-  "use": 7.2,
-  "cluster_share": 95,
-  "fallback": false,
-  "one_item": true,
-  "gid": "Excadrill#1"
+  "gid": "Pelipper#26"
  },
  {
   "forme": "Garchomp-Mega-Z",
-  "use": 6.9,
+  "use": 12.2,
   "cluster_share": 100,
   "fallback": false,
   "one_item": true,
   "gid": "M-Garchomp Z#1"
  },
  {
-  "forme": "Froslass-Mega",
-  "use": 6.2,
+  "forme": "Sylveon",
+  "use": 11.3,
+  "cluster_share": 95,
+  "fallback": false,
+  "one_item": true,
+  "gid": "Sylveon#1"
+ },
+ {
+  "forme": "Golisopod-Mega",
+  "use": 10.4,
   "cluster_share": 100,
   "fallback": false,
   "one_item": true,
-  "gid": "M-Froslass#1"
+  "gid": "M-Golisopod#1"
+ },
+ {
+  "forme": "Garchomp",
+  "use": 10.4,
+  "cluster_share": 47,
+  "fallback": false,
+  "one_item": false,
+  "gid": "Garchomp#1"
+ },
+ {
+  "forme": "Garchomp",
+  "use": 10.4,
+  "cluster_share": 38,
+  "fallback": false,
+  "one_item": false,
+  "gid": "Garchomp#2"
+ },
+ {
+  "forme": "Garchomp",
+  "use": 10.4,
+  "cluster_share": 5,
+  "fallback": true,
+  "one_item": false,
+  "gid": "Garchomp#24"
+ },
+ {
+  "forme": "Volcarona",
+  "use": 10.2,
+  "cluster_share": 41,
+  "fallback": false,
+  "one_item": false,
+  "gid": "Volcarona#1"
+ },
+ {
+  "forme": "Volcarona",
+  "use": 10.2,
+  "cluster_share": 31,
+  "fallback": false,
+  "one_item": false,
+  "gid": "Volcarona#7"
+ },
+ {
+  "forme": "Volcarona",
+  "use": 10.2,
+  "cluster_share": 20,
+  "fallback": true,
+  "one_item": false,
+  "gid": "Volcarona#2"
+ },
+ {
+  "forme": "Politoed",
+  "use": 7.2,
+  "cluster_share": 51,
+  "fallback": false,
+  "one_item": false,
+  "gid": "Politoed#1"
+ },
+ {
+  "forme": "Politoed",
+  "use": 7.2,
+  "cluster_share": 35,
+  "fallback": false,
+  "one_item": false,
+  "gid": "Politoed#2"
+ },
+ {
+  "forme": "Politoed",
+  "use": 7.2,
+  "cluster_share": 6,
+  "fallback": true,
+  "one_item": false,
+  "gid": "Politoed#5"
+ },
+ {
+  "forme": "Tyranitar-Mega",
+  "use": 7.1,
+  "cluster_share": 100,
+  "fallback": false,
+  "one_item": true,
+  "gid": "M-Tyranitar#1"
  },
  {
   "forme": "Grimmsnarl",
-  "use": 6.1,
-  "cluster_share": 100,
+  "use": 7.1,
+  "cluster_share": 99,
   "fallback": false,
   "one_item": true,
   "gid": "Grimmsnarl#1"
  },
  {
-  "forme": "Sinistcha",
-  "use": 5.9,
-  "cluster_share": 42,
+  "forme": "Gengar-Mega",
+  "use": 7.1,
+  "cluster_share": 100,
+  "fallback": false,
+  "one_item": true,
+  "gid": "M-Gengar#1"
+ },
+ {
+  "forme": "Excadrill",
+  "use": 6.7,
+  "cluster_share": 96,
+  "fallback": false,
+  "one_item": true,
+  "gid": "Excadrill#2"
+ },
+ {
+  "forme": "Indeedee",
+  "use": 6.7,
+  "cluster_share": 67,
   "fallback": false,
   "one_item": false,
-  "gid": "Sinistcha#1"
+  "gid": "Indeedee#1"
  },
  {
-  "forme": "Sinistcha",
-  "use": 5.9,
-  "cluster_share": 18,
+  "forme": "Indeedee",
+  "use": 6.7,
+  "cluster_share": 22,
   "fallback": true,
   "one_item": false,
-  "gid": "Sinistcha#2"
+  "gid": "Indeedee#2"
  },
  {
-  "forme": "Sinistcha",
-  "use": 5.9,
-  "cluster_share": 16,
+  "forme": "Indeedee",
+  "use": 6.7,
+  "cluster_share": 5,
   "fallback": true,
   "one_item": false,
-  "gid": "Sinistcha#3"
+  "gid": "Indeedee#26"
  },
  {
-  "forme": "Sinistcha",
-  "use": 5.9,
-  "cluster_share": 9,
-  "fallback": true,
+  "forme": "Venusaur",
+  "use": 6.5,
+  "cluster_share": 77,
+  "fallback": false,
   "one_item": false,
-  "gid": "Sinistcha#6"
+  "gid": "Venusaur#1"
  },
  {
-  "forme": "Sinistcha",
-  "use": 5.9,
-  "cluster_share": 7,
+  "forme": "Venusaur",
+  "use": 6.5,
+  "cluster_share": 20,
   "fallback": true,
   "one_item": false,
-  "gid": "Sinistcha#21"
- },
- {
-  "forme": "Sinistcha",
-  "use": 5.9,
-  "cluster_share": 7,
-  "fallback": true,
-  "one_item": false,
-  "gid": "Sinistcha#18"
+  "gid": "Venusaur#2"
  },
  {
   "forme": "Delphox-Mega",
-  "use": 5.7,
+  "use": 6.4,
   "cluster_share": 100,
   "fallback": false,
   "one_item": true,
   "gid": "M-Delphox#1"
  },
  {
+  "forme": "Sinistcha",
+  "use": 6.1,
+  "cluster_share": 43,
+  "fallback": false,
+  "one_item": false,
+  "gid": "Sinistcha#1"
+ },
+ {
+  "forme": "Sinistcha",
+  "use": 6.1,
+  "cluster_share": 16,
+  "fallback": true,
+  "one_item": false,
+  "gid": "Sinistcha#2"
+ },
+ {
+  "forme": "Sinistcha",
+  "use": 6.1,
+  "cluster_share": 12,
+  "fallback": true,
+  "one_item": false,
+  "gid": "Sinistcha#18"
+ },
+ {
+  "forme": "Sinistcha",
+  "use": 6.1,
+  "cluster_share": 10,
+  "fallback": true,
+  "one_item": false,
+  "gid": "Sinistcha#3"
+ },
+ {
+  "forme": "Sinistcha",
+  "use": 6.1,
+  "cluster_share": 7,
+  "fallback": true,
+  "one_item": false,
+  "gid": "Sinistcha#20"
+ },
+ {
+  "forme": "Sinistcha",
+  "use": 6.1,
+  "cluster_share": 7,
+  "fallback": true,
+  "one_item": false,
+  "gid": "Sinistcha#6"
+ },
+ {
   "forme": "Kommo-o",
-  "use": 5.3,
-  "cluster_share": 63,
+  "use": 6.1,
+  "cluster_share": 58,
   "fallback": false,
   "one_item": false,
   "gid": "Kommo-o#1"
  },
  {
   "forme": "Kommo-o",
-  "use": 5.3,
-  "cluster_share": 29,
+  "use": 6.1,
+  "cluster_share": 32,
   "fallback": false,
   "one_item": false,
   "gid": "Kommo-o#2"
  },
  {
   "forme": "Kommo-o",
-  "use": 5.3,
-  "cluster_share": 7,
+  "use": 6.1,
+  "cluster_share": 6,
   "fallback": true,
   "one_item": false,
   "gid": "Kommo-o#4"
  },
  {
-  "forme": "Metagross-Mega",
-  "use": 5.2,
+  "forme": "Froslass-Mega",
+  "use": 5.8,
   "cluster_share": 100,
   "fallback": false,
   "one_item": true,
-  "gid": "M-Metagross#2"
+  "gid": "M-Froslass#1"
  },
  {
   "forme": "Gardevoir-Mega",
-  "use": 5.1,
+  "use": 5.7,
   "cluster_share": 100,
   "fallback": false,
   "one_item": true,
-  "gid": "M-Gardevoir#1"
+  "gid": "M-Gardevoir#9"
  },
  {
   "forme": "Armarouge",
-  "use": 4.8,
-  "cluster_share": 35,
-  "fallback": false,
-  "one_item": false,
-  "gid": "Armarouge#1"
- },
- {
-  "forme": "Armarouge",
-  "use": 4.8,
-  "cluster_share": 35,
+  "use": 4.9,
+  "cluster_share": 38,
   "fallback": false,
   "one_item": false,
   "gid": "Armarouge#3"
  },
  {
   "forme": "Armarouge",
-  "use": 4.8,
-  "cluster_share": 16,
+  "use": 4.9,
+  "cluster_share": 34,
+  "fallback": false,
+  "one_item": false,
+  "gid": "Armarouge#1"
+ },
+ {
+  "forme": "Armarouge",
+  "use": 4.9,
+  "cluster_share": 11,
   "fallback": true,
   "one_item": false,
   "gid": "Armarouge#2"
  },
  {
   "forme": "Armarouge",
-  "use": 4.8,
+  "use": 4.9,
+  "cluster_share": 5,
+  "fallback": true,
+  "one_item": false,
+  "gid": "Armarouge#18"
+ },
+ {
+  "forme": "Armarouge",
+  "use": 4.9,
   "cluster_share": 5,
   "fallback": true,
   "one_item": false,
@@ -593,50 +625,74 @@
  },
  {
   "forme": "Whimsicott",
-  "use": 4.7,
-  "cluster_share": 72,
+  "use": 4.6,
+  "cluster_share": 75,
   "fallback": false,
   "one_item": false,
   "gid": "Whimsicott#1"
  },
  {
   "forme": "Whimsicott",
-  "use": 4.7,
-  "cluster_share": 11,
-  "fallback": true,
-  "one_item": false,
-  "gid": "Whimsicott#4"
- },
- {
-  "forme": "Whimsicott",
-  "use": 4.7,
-  "cluster_share": 8,
+  "use": 4.6,
+  "cluster_share": 12,
   "fallback": true,
   "one_item": false,
   "gid": "Whimsicott#2"
  },
  {
   "forme": "Whimsicott",
-  "use": 4.7,
+  "use": 4.6,
+  "cluster_share": 8,
+  "fallback": true,
+  "one_item": false,
+  "gid": "Whimsicott#4"
+ },
+ {
+  "forme": "Metagross-Mega",
+  "use": 4.5,
+  "cluster_share": 100,
+  "fallback": false,
+  "one_item": true,
+  "gid": "M-Metagross#2"
+ },
+ {
+  "forme": "Primarina",
+  "use": 4.4,
+  "cluster_share": 52,
+  "fallback": false,
+  "one_item": false,
+  "gid": "Primarina#1"
+ },
+ {
+  "forme": "Primarina",
+  "use": 4.4,
+  "cluster_share": 26,
+  "fallback": false,
+  "one_item": false,
+  "gid": "Primarina#4"
+ },
+ {
+  "forme": "Primarina",
+  "use": 4.4,
+  "cluster_share": 10,
+  "fallback": true,
+  "one_item": false,
+  "gid": "Primarina#2"
+ },
+ {
+  "forme": "Primarina",
+  "use": 4.4,
   "cluster_share": 6,
   "fallback": true,
   "one_item": false,
-  "gid": "Whimsicott#7"
+  "gid": "Primarina#7"
  },
  {
   "forme": "Dragapult",
-  "use": 4.6,
+  "use": 4.1,
   "cluster_share": 89,
   "fallback": false,
   "one_item": true,
   "gid": "Dragapult#1"
- },
- {
-  "forme": "Swampert-Mega",
-  "use": 4.2,
-  "cluster_share": 100,
-  "fallback": false,
-  "one_item": true,
-  "gid": "M-Swampert#1"
  }
 ]

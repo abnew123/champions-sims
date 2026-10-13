@@ -1,0 +1,122 @@
+{
+ "Froslass": {
+  "species": "Froslass",
+  "item": "Froslassite",
+  "ability": "Cursed Body",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Blizzard",
+   "Shadow Ball",
+   "Aurora Veil",
+   "Protect"
+  ]
+ },
+ "Whimsicott": {
+  "species": "Whimsicott",
+  "item": "Fairy Feather",
+  "ability": "Prankster",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Moonblast",
+   "Encore",
+   "Tailwind",
+   "Charm"
+  ]
+ },
+ "Staraptor": {
+  "species": "Staraptor",
+  "item": "Staraptite",
+  "ability": "Intimidate",
+  "nature": "Jolly",
+  "evs": [
+   29,
+   1,
+   0,
+   0,
+   4,
+   32
+  ],
+  "moves": [
+   "Close Combat",
+   "Brave Bird",
+   "Roost",
+   "Protect"
+  ]
+ },
+ "Glimmora": {
+  "species": "Glimmora",
+  "item": "Focus Sash",
+  "ability": "Toxic Debris",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Power Gem",
+   "Earth Power",
+   "Sludge Bomb",
+   "Spiky Shield"
+  ]
+ },
+ "Armarouge": {
+  "species": "Armarouge",
+  "item": "Sitrus Berry",
+  "ability": "Flash Fire",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Armor Cannon",
+   "Psyshock",
+   "Wide Guard",
+   "Trick Room"
+  ]
+ },
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Life Orb",
+  "ability": "Defiant",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Kowtow Cleave",
+   "Sucker Punch",
+   "Iron Head",
+   "Protect"
+  ]
+ }
+}

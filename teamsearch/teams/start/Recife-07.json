@@ -1,0 +1,122 @@
+{
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "White Herb",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Dire Claw",
+   "Close Combat",
+   "Fake Out"
+  ]
+ },
+ "Salamence": {
+  "species": "Salamence",
+  "item": "Salamencite",
+  "ability": "Intimidate",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Hyper Voice",
+   "Draco Meteor",
+   "Tailwind"
+  ]
+ },
+ "Raichu": {
+  "species": "Raichu",
+  "item": "Raichunite Y",
+  "ability": "Lightning Rod",
+  "nature": "Timid",
+  "evs": [
+   32,
+   0,
+   11,
+   0,
+   0,
+   23
+  ],
+  "moves": [
+   "Protect",
+   "Zap Cannon",
+   "Focus Blast",
+   "Encore"
+  ]
+ },
+ "Rillaboom": {
+  "species": "Rillaboom",
+  "item": "Miracle Seed",
+  "ability": "Grassy Surge",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Wood Hammer",
+   "High Horsepower",
+   "Grassy Glide",
+   "Fake Out"
+  ]
+ },
+ "Volcarona": {
+  "species": "Volcarona",
+  "item": "Sitrus Berry",
+  "ability": "Flame Body",
+  "nature": "Calm",
+  "evs": [
+   32,
+   0,
+   2,
+   0,
+   32,
+   0
+  ],
+  "moves": [
+   "Protect",
+   "Struggle Bug",
+   "Overheat",
+   "Rage Powder"
+  ]
+ },
+ "Arcanine-Hisui": {
+  "species": "Arcanine-Hisui",
+  "item": "Focus Sash",
+  "ability": "Rock Head",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Flare Blitz",
+   "Head Smash",
+   "Extreme Speed"
+  ]
+ }
+}

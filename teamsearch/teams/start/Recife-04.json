@@ -1,0 +1,122 @@
+{
+ "Swampert": {
+  "species": "Swampert",
+  "item": "Swampertite",
+  "ability": "Torrent",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Wave Crash",
+   "Earthquake",
+   "Ice Punch",
+   "Protect"
+  ]
+ },
+ "Pelipper": {
+  "species": "Pelipper",
+  "item": "Sitrus Berry",
+  "ability": "Drizzle",
+  "nature": "Bold",
+  "evs": [
+   31,
+   0,
+   0,
+   0,
+   24,
+   11
+  ],
+  "moves": [
+   "Hurricane",
+   "Weather Ball",
+   "Tailwind",
+   "Wide Guard"
+  ]
+ },
+ "Venusaur": {
+  "species": "Venusaur",
+  "item": "Focus Sash",
+  "ability": "Chlorophyll",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Leaf Storm",
+   "Sludge Bomb",
+   "Sleep Powder",
+   "Protect"
+  ]
+ },
+ "Charizard": {
+  "species": "Charizard",
+  "item": "Charizardite Y",
+  "ability": "Blaze",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Heat Wave",
+   "Hurricane",
+   "Weather Ball",
+   "Protect"
+  ]
+ },
+ "Grimmsnarl": {
+  "species": "Grimmsnarl",
+  "item": "Light Clay",
+  "ability": "Prankster",
+  "nature": "Careful",
+  "evs": [
+   32,
+   0,
+   19,
+   0,
+   15,
+   0
+  ],
+  "moves": [
+   "Spirit Break",
+   "Reflect",
+   "Light Screen",
+   "Parting Shot"
+  ]
+ },
+ "Archaludon": {
+  "species": "Archaludon",
+  "item": "Leftovers",
+  "ability": "Stamina",
+  "nature": "Calm",
+  "evs": [
+   32,
+   0,
+   1,
+   1,
+   21,
+   11
+  ],
+  "moves": [
+   "Flash Cannon",
+   "Dragon Pulse",
+   "Electro Shot",
+   "Protect"
+  ]
+ }
+}

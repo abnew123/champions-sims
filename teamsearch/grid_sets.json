@@ -18,7 +18,7 @@
 "Iron Head",
 "Rock Slide"
 ],
-"regional_count": 23
+"regional_count": 36
 },
 "M-Salamence#2": {
 "species": "Salamence",
@@ -39,7 +39,7 @@
 "Flamethrower",
 "Hyper Voice"
 ],
-"regional_count": 29
+"regional_count": 44
 },
 "M-Tyranitar#1": {
 "species": "Tyranitar",
@@ -60,7 +60,7 @@
 "Low Kick",
 "Protect"
 ],
-"regional_count": 34
+"regional_count": 50
 },
 "Indeedee#1": {
 "species": "Indeedee",
@@ -81,7 +81,7 @@
 "Trick",
 "Mystical Fire"
 ],
-"regional_count": 19
+"regional_count": 25
 },
 "Corviknight#1": {
 "species": "Corviknight",
@@ -102,7 +102,7 @@
 "Bulk Up",
 "Roost"
 ],
-"regional_count": 13
+"regional_count": 22
 },
 "Sneasler#7": {
 "species": "Sneasler",
@@ -123,7 +123,7 @@
 "Coaching",
 "Protect"
 ],
-"regional_count": 16
+"regional_count": 25
 },
 "M-Golisopod#1": {
 "species": "Golisopod",
@@ -144,7 +144,7 @@
 "Drill Run",
 "Protect"
 ],
-"regional_count": 27
+"regional_count": 35
 },
 "M-Charizard Y#2": {
 "species": "Charizard",
@@ -165,7 +165,7 @@
 "Hurricane",
 "Protect"
 ],
-"regional_count": 25
+"regional_count": 48
 },
 "Politoed#2": {
 "species": "Politoed",
@@ -186,7 +186,7 @@
 "Ice Beam",
 "Protect"
 ],
-"regional_count": 21
+"regional_count": 27
 },
 "Archaludon#4": {
 "species": "Archaludon",
@@ -207,7 +207,7 @@
 "Snarl",
 "Protect"
 ],
-"regional_count": 17
+"regional_count": 21
 },
 "Grimmsnarl#1": {
 "species": "Grimmsnarl",
@@ -228,7 +228,7 @@
 "Light Screen",
 "Parting Shot"
 ],
-"regional_count": 29
+"regional_count": 43
 },
 "Farigiraf#4": {
 "species": "Farigiraf",
@@ -270,7 +270,7 @@
 "Dragon Pulse",
 "Flash Cannon"
 ],
-"regional_count": 20
+"regional_count": 28
 },
 "Incineroar#9": {
 "species": "Incineroar",
@@ -312,7 +312,7 @@
 "Weather Ball",
 "Encore"
 ],
-"regional_count": 22
+"regional_count": 26
 },
 "Vivillon#1": {
 "species": "Vivillon",
@@ -333,7 +333,7 @@
 "Sleep Powder",
 "Hurricane"
 ],
-"regional_count": 14
+"regional_count": 19
 },
 "Rillaboom#7": {
 "species": "Rillaboom",
@@ -354,7 +354,7 @@
 "U-turn",
 "Grassy Glide"
 ],
-"regional_count": 9
+"regional_count": 10
 },
 "M-Gengar#1": {
 "species": "Gengar",
@@ -375,7 +375,7 @@
 "Shadow Ball",
 "Sludge Bomb"
 ],
-"regional_count": 37
+"regional_count": 49
 },
 "M-Salamence#9": {
 "species": "Salamence",
@@ -396,7 +396,7 @@
 "Heat Wave",
 "Protect"
 ],
-"regional_count": 4
+"regional_count": 5
 },
 "Arcanine-H#1": {
 "species": "Arcanine-Hisui",
@@ -417,7 +417,7 @@
 "Head Smash",
 "Protect"
 ],
-"regional_count": 139
+"regional_count": 178
 },
 "Indeedee#6": {
 "species": "Indeedee",
@@ -480,7 +480,7 @@
 "Body Press",
 "Protect"
 ],
-"regional_count": 4
+"regional_count": 6
 },
 "Sneasler#32": {
 "species": "Sneasler",
@@ -501,7 +501,7 @@
 "Rock Slide",
 "Throat Chop"
 ],
-"regional_count": 2
+"regional_count": 4
 },
 "Milotic#2": {
 "species": "Milotic",
@@ -522,7 +522,7 @@
 "Ice Beam",
 "Coil"
 ],
-"regional_count": 18
+"regional_count": 22
 },
 "M-Raichu Y#1": {
 "species": "Raichu",
@@ -543,7 +543,7 @@
 "Zap Cannon",
 "Protect"
 ],
-"regional_count": 171
+"regional_count": 256
 },
 "Ceruledge#1": {
 "species": "Ceruledge",
@@ -564,7 +564,7 @@
 "Swords Dance",
 "Protect"
 ],
-"regional_count": 21
+"regional_count": 25
 },
 "M-Staraptor#1": {
 "species": "Staraptor",
@@ -585,7 +585,7 @@
 "Tailwind",
 "Protect"
 ],
-"regional_count": 85
+"regional_count": 115
 },
 "Gholdengo#2": {
 "species": "Gholdengo",
@@ -606,7 +606,7 @@
 "Nasty Plot",
 "Protect"
 ],
-"regional_count": 97
+"regional_count": 151
 },
 "Rillaboom#1": {
 "species": "Rillaboom",
@@ -627,7 +627,7 @@
 "Fake Out",
 "High Horsepower"
 ],
-"regional_count": 233
+"regional_count": 317
 },
 "M-Froslass#1": {
 "species": "Froslass",
@@ -648,7 +648,7 @@
 "Aurora Veil",
 "Protect"
 ],
-"regional_count": 33
+"regional_count": 43
 },
 "M-Raichu Y#2": {
 "species": "Raichu",
@@ -669,7 +669,7 @@
 "Encore",
 "Protect"
 ],
-"regional_count": 33
+"regional_count": 47
 },
 "Rillaboom#3": {
 "species": "Rillaboom",
@@ -690,7 +690,7 @@
 "Wood Hammer",
 "High Horsepower"
 ],
-"regional_count": 19
+"regional_count": 22
 },
 "Kingambit#1": {
 "species": "Kingambit",
@@ -711,7 +711,7 @@
 "Sucker Punch",
 "Protect"
 ],
-"regional_count": 52
+"regional_count": 72
 },
 "Sneasler#5": {
 "species": "Sneasler",
@@ -732,7 +732,7 @@
 "Dire Claw",
 "Close Combat"
 ],
-"regional_count": 17
+"regional_count": 24
 },
 "Gholdengo#1": {
 "species": "Gholdengo",
@@ -753,7 +753,7 @@
 "Nasty Plot",
 "Protect"
 ],
-"regional_count": 118
+"regional_count": 136
 },
 "Sylveon#2": {
 "species": "Sylveon",
@@ -774,7 +774,7 @@
 "Hyper Beam",
 "Quick Attack"
 ],
-"regional_count": 13
+"regional_count": 16
 },
 "M-Floette#2": {
 "species": "Floette-Eternal",
@@ -795,7 +795,7 @@
 "Calm Mind",
 "Protect"
 ],
-"regional_count": 23
+"regional_count": 30
 },
 "Sneasler#3": {
 "species": "Sneasler",
@@ -816,7 +816,7 @@
 "Close Combat",
 "Quick Guard"
 ],
-"regional_count": 20
+"regional_count": 28
 },
 "Incineroar#17": {
 "species": "Incineroar",
@@ -837,7 +837,7 @@
 "Throat Chop",
 "Parting Shot"
 ],
-"regional_count": 3
+"regional_count": 5
 },
 "M-Delphox#1": {
 "species": "Delphox",
@@ -858,7 +858,7 @@
 "Nasty Plot",
 "Protect"
 ],
-"regional_count": 37
+"regional_count": 55
 },
 "Armarouge#1": {
 "species": "Armarouge",
@@ -879,7 +879,7 @@
 "Wide Guard",
 "Protect"
 ],
-"regional_count": 10
+"regional_count": 13
 },
 "Dragapult#2": {
 "species": "Dragapult",
@@ -900,7 +900,7 @@
 "Will-O-Wisp",
 "Protect"
 ],
-"regional_count": 4
+"regional_count": 8
 },
 "M-Gengar#2": {
 "species": "Gengar",
@@ -921,7 +921,7 @@
 "Focus Blast",
 "Protect"
 ],
-"regional_count": 5
+"regional_count": 6
 },
 "Milotic#1": {
 "species": "Milotic",
@@ -942,7 +942,7 @@
 "Hypnosis",
 "Recover"
 ],
-"regional_count": 19
+"regional_count": 22
 },
 "Indeedee-F#1": {
 "species": "Indeedee-F",
@@ -963,7 +963,7 @@
 "Follow Me",
 "Trick Room"
 ],
-"regional_count": 18
+"regional_count": 26
 },
 "M-Staraptor#2": {
 "species": "Staraptor",
@@ -984,7 +984,7 @@
 "Roost",
 "Brave Bird"
 ],
-"regional_count": 13
+"regional_count": 17
 },
 "Rillaboom#38": {
 "species": "Rillaboom",
@@ -1005,7 +1005,7 @@
 "Grassy Glide",
 "U-turn"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Archaludon#7": {
 "species": "Archaludon",
@@ -1026,7 +1026,7 @@
 "Dragon Pulse",
 "Protect"
 ],
-"regional_count": 5
+"regional_count": 6
 },
 "Incineroar#53": {
 "species": "Incineroar",
@@ -1047,7 +1047,7 @@
 "Throat Chop",
 "Parting Shot"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "M-Golisopod#3": {
 "species": "Golisopod",
@@ -1068,7 +1068,7 @@
 "Protect",
 "Swords Dance"
 ],
-"regional_count": 10
+"regional_count": 12
 },
 "Garchomp#4": {
 "species": "Garchomp",
@@ -1110,7 +1110,7 @@
 "Trick Room",
 "Protect"
 ],
-"regional_count": 10
+"regional_count": 13
 },
 "M-Aerodactyl#2": {
 "species": "Aerodactyl",
@@ -1131,7 +1131,7 @@
 "Tailwind",
 "Wide Guard"
 ],
-"regional_count": 8
+"regional_count": 9
 },
 "Sylveon#1": {
 "species": "Sylveon",
@@ -1152,7 +1152,7 @@
 "Quick Attack",
 "Detect"
 ],
-"regional_count": 51
+"regional_count": 67
 },
 "M-Charizard Y#5": {
 "species": "Charizard",
@@ -1173,7 +1173,7 @@
 "Solar Beam",
 "Protect"
 ],
-"regional_count": 13
+"regional_count": 20
 },
 "Kingambit#3": {
 "species": "Kingambit",
@@ -1194,7 +1194,7 @@
 "Iron Head",
 "Low Kick"
 ],
-"regional_count": 30
+"regional_count": 41
 },
 "Sinistcha#1": {
 "species": "Sinistcha",
@@ -1215,7 +1215,7 @@
 "Trick Room",
 "Protect"
 ],
-"regional_count": 15
+"regional_count": 22
 },
 "M-Floette#1": {
 "species": "Floette-Eternal",
@@ -1236,7 +1236,7 @@
 "Moonblast",
 "Calm Mind"
 ],
-"regional_count": 44
+"regional_count": 68
 },
 "Incineroar#2": {
 "species": "Incineroar",
@@ -1257,7 +1257,7 @@
 "Throat Chop",
 "Parting Shot"
 ],
-"regional_count": 26
+"regional_count": 43
 },
 "Ceruledge#4": {
 "species": "Ceruledge",
@@ -1362,7 +1362,7 @@
 "Protect",
 "Calm Mind"
 ],
-"regional_count": 2
+"regional_count": 4
 },
 "Sneasler#67": {
 "species": "Sneasler",
@@ -1383,7 +1383,7 @@
 "Throat Chop",
 "Fake Out"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Klefki#2": {
 "species": "Klefki",
@@ -1404,7 +1404,7 @@
 "Light Screen",
 "Dazzling Gleam"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Garchomp#2": {
 "species": "Garchomp",
@@ -1425,7 +1425,7 @@
 "Dragon Claw",
 "Protect"
 ],
-"regional_count": 15
+"regional_count": 21
 },
 "Volcarona#2": {
 "species": "Volcarona",
@@ -1446,7 +1446,7 @@
 "Tailwind",
 "Rage Powder"
 ],
-"regional_count": 6
+"regional_count": 9
 },
 "Archaludon#1": {
 "species": "Archaludon",
@@ -1467,7 +1467,7 @@
 "Electro Shot",
 "Protect"
 ],
-"regional_count": 26
+"regional_count": 55
 },
 "M-Salamence#1": {
 "species": "Salamence",
@@ -1488,7 +1488,7 @@
 "Tailwind",
 "Protect"
 ],
-"regional_count": 105
+"regional_count": 121
 },
 "M-Glimmora#1": {
 "species": "Glimmora",
@@ -1509,7 +1509,7 @@
 "Spiky Shield",
 "Earth Power"
 ],
-"regional_count": 13
+"regional_count": 21
 },
 "M-Gardevoir#4": {
 "species": "Gardevoir",
@@ -1530,7 +1530,7 @@
 "Calm Mind",
 "Protect"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "Sneasler#9": {
 "species": "Sneasler",
@@ -1551,7 +1551,7 @@
 "Close Combat",
 "Protect"
 ],
-"regional_count": 13
+"regional_count": 22
 },
 "M-Salamence#13": {
 "species": "Salamence",
@@ -1593,7 +1593,7 @@
 "Parting Shot",
 "Fake Out"
 ],
-"regional_count": 8
+"regional_count": 22
 },
 "Indeedee-F#7": {
 "species": "Indeedee-F",
@@ -1656,7 +1656,7 @@
 "Rock Slide",
 "Protect"
 ],
-"regional_count": 15
+"regional_count": 17
 },
 "Altaria#1": {
 "species": "Altaria",
@@ -1677,7 +1677,7 @@
 "Tailwind",
 "Protect"
 ],
-"regional_count": 5
+"regional_count": 6
 },
 "M-Metagross#2": {
 "species": "Metagross",
@@ -1698,7 +1698,7 @@
 "Psych Up",
 "Protect"
 ],
-"regional_count": 5
+"regional_count": 7
 },
 "Indeedee-F#2": {
 "species": "Indeedee-F",
@@ -1719,7 +1719,7 @@
 "Helping Hand",
 "Protect"
 ],
-"regional_count": 15
+"regional_count": 18
 },
 "M-Salamence#3": {
 "species": "Salamence",
@@ -1740,7 +1740,7 @@
 "Tailwind",
 "Protect"
 ],
-"regional_count": 19
+"regional_count": 20
 },
 "Primarina#4": {
 "species": "Primarina",
@@ -1761,7 +1761,7 @@
 "Dazzling Gleam",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "M-Tyranitar#2": {
 "species": "Tyranitar",
@@ -1782,7 +1782,7 @@
 "Low Kick",
 "Protect"
 ],
-"regional_count": 10
+"regional_count": 13
 },
 "Sinistcha#21": {
 "species": "Sinistcha",
@@ -1866,7 +1866,7 @@
 "Encore",
 "Protect"
 ],
-"regional_count": 13
+"regional_count": 22
 },
 "Basculegion#3": {
 "species": "Basculegion",
@@ -1887,7 +1887,7 @@
 "Aqua Jet",
 "Protect"
 ],
-"regional_count": 12
+"regional_count": 16
 },
 "Kommo-o#2": {
 "species": "Kommo-o",
@@ -1908,7 +1908,7 @@
 "Flamethrower",
 "Protect"
 ],
-"regional_count": 8
+"regional_count": 13
 },
 "M-Pyroar#1": {
 "species": "Pyroar",
@@ -1929,7 +1929,7 @@
 "Scorching Sands",
 "Protect"
 ],
-"regional_count": 4
+"regional_count": 5
 },
 "Lycanroc-Dusk#1": {
 "species": "Lycanroc Dusk",
@@ -1971,7 +1971,7 @@
 "Aqua Jet",
 "Protect"
 ],
-"regional_count": 28
+"regional_count": 30
 },
 "Kingambit#5": {
 "species": "Kingambit",
@@ -1992,7 +1992,7 @@
 "Swords Dance",
 "Protect"
 ],
-"regional_count": 12
+"regional_count": 14
 },
 "M-Scovillain#2": {
 "species": "Scovillain",
@@ -2013,7 +2013,7 @@
 "Rage Powder",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Rillaboom#28": {
 "species": "Rillaboom",
@@ -2055,7 +2055,7 @@
 "Tailwind",
 "Protect"
 ],
-"regional_count": 13
+"regional_count": 16
 },
 "M-Golisopod#13": {
 "species": "Golisopod",
@@ -2076,7 +2076,7 @@
 "Close Combat",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Archaludon#6": {
 "species": "Archaludon",
@@ -2097,7 +2097,7 @@
 "Protect",
 "Snarl"
 ],
-"regional_count": 6
+"regional_count": 10
 },
 "Basculegion#1": {
 "species": "Basculegion",
@@ -2118,7 +2118,7 @@
 "Aqua Jet",
 "Wave Crash"
 ],
-"regional_count": 34
+"regional_count": 55
 },
 "M-Blastoise#2": {
 "species": "Blastoise",
@@ -2139,7 +2139,7 @@
 "Shell Smash",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 4
 },
 "Indeedee-F#15": {
 "species": "Indeedee-F",
@@ -2181,7 +2181,7 @@
 "Protect",
 "Nasty Plot"
 ],
-"regional_count": 2
+"regional_count": 4
 },
 "Sinistcha#13": {
 "species": "Sinistcha",
@@ -2223,7 +2223,7 @@
 "Fake Out",
 "Revival Blessing"
 ],
-"regional_count": 5
+"regional_count": 6
 },
 "Sneasler#75": {
 "species": "Sneasler",
@@ -2244,7 +2244,7 @@
 "Close Combat",
 "Fake Out"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Kingambit#2": {
 "species": "Kingambit",
@@ -2265,7 +2265,7 @@
 "Kowtow Cleave",
 "Sucker Punch"
 ],
-"regional_count": 36
+"regional_count": 44
 },
 "Rillaboom#2": {
 "species": "Rillaboom",
@@ -2286,7 +2286,7 @@
 "U-turn",
 "Wood Hammer"
 ],
-"regional_count": 46
+"regional_count": 81
 },
 "Kingambit#15": {
 "species": "Kingambit",
@@ -2328,7 +2328,7 @@
 "Weather Ball",
 "Helping Hand"
 ],
-"regional_count": 2
+"regional_count": 7
 },
 "Hatterene#1": {
 "species": "Hatterene",
@@ -2349,7 +2349,7 @@
 "Trick Room",
 "Protect"
 ],
-"regional_count": 8
+"regional_count": 10
 },
 "Glimmora#1": {
 "species": "Glimmora",
@@ -2370,7 +2370,7 @@
 "Power Gem",
 "Earth Power"
 ],
-"regional_count": 5
+"regional_count": 8
 },
 "M-Blaziken#2": {
 "species": "Blaziken",
@@ -2412,7 +2412,7 @@
 "Helping Hand",
 "Trick Room"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "M-Golisopod#2": {
 "species": "Golisopod",
@@ -2433,7 +2433,7 @@
 "Swords Dance",
 "Sucker Punch"
 ],
-"regional_count": 11
+"regional_count": 13
 },
 "Armarouge#2": {
 "species": "Armarouge",
@@ -2517,7 +2517,7 @@
 "Close Combat",
 "Rock Tomb"
 ],
-"regional_count": 23
+"regional_count": 27
 },
 "M-Garchomp Z#4": {
 "species": "Garchomp",
@@ -2580,7 +2580,7 @@
 "Solar Beam",
 "Protect"
 ],
-"regional_count": 25
+"regional_count": 35
 },
 "M-Garchomp Z#3": {
 "species": "Garchomp",
@@ -2601,7 +2601,7 @@
 "Power Gem",
 "Protect"
 ],
-"regional_count": 7
+"regional_count": 17
 },
 "M-Lucario Z#1": {
 "species": "Lucario",
@@ -2622,7 +2622,7 @@
 "Calm Mind",
 "Detect"
 ],
-"regional_count": 4
+"regional_count": 5
 },
 "Incineroar#5": {
 "species": "Incineroar",
@@ -2643,7 +2643,7 @@
 "Helping Hand",
 "Parting Shot"
 ],
-"regional_count": 11
+"regional_count": 12
 },
 "M-Floette#5": {
 "species": "Floette-Eternal",
@@ -2664,7 +2664,7 @@
 "Calm Mind",
 "Protect"
 ],
-"regional_count": 7
+"regional_count": 9
 },
 "Rillaboom#34": {
 "species": "Rillaboom",
@@ -2685,7 +2685,7 @@
 "U-turn",
 "Wood Hammer"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Sneasler#10": {
 "species": "Sneasler",
@@ -2706,7 +2706,7 @@
 "Rock Tomb",
 "Protect"
 ],
-"regional_count": 9
+"regional_count": 12
 },
 "Indeedee#2": {
 "species": "Indeedee",
@@ -2748,7 +2748,7 @@
 "Flare Blitz",
 "Fake Out"
 ],
-"regional_count": 7
+"regional_count": 11
 },
 "Sneasler#11": {
 "species": "Sneasler",
@@ -2769,7 +2769,7 @@
 "Protect",
 "Close Combat"
 ],
-"regional_count": 8
+"regional_count": 10
 },
 "Sylveon#7": {
 "species": "Sylveon",
@@ -2811,7 +2811,7 @@
 "Close Combat",
 "Rock Slide"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "M-Garchomp Z#6": {
 "species": "Garchomp",
@@ -2832,7 +2832,7 @@
 "Power Gem",
 "Flamethrower"
 ],
-"regional_count": 3
+"regional_count": 5
 },
 "M-Gardevoir#1": {
 "species": "Gardevoir",
@@ -2853,7 +2853,7 @@
 "Trick Room",
 "Protect"
 ],
-"regional_count": 6
+"regional_count": 7
 },
 "Sneasler#68": {
 "species": "Sneasler",
@@ -2916,7 +2916,7 @@
 "Trick Room",
 "Helping Hand"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "M-Charizard Y#6": {
 "species": "Charizard",
@@ -2937,7 +2937,7 @@
 "Hurricane",
 "Protect"
 ],
-"regional_count": 9
+"regional_count": 13
 },
 "M-Swampert#1": {
 "species": "Swampert",
@@ -2958,7 +2958,7 @@
 "Ice Punch",
 "Protect"
 ],
-"regional_count": 13
+"regional_count": 19
 },
 "Pelipper#1": {
 "species": "Pelipper",
@@ -2979,7 +2979,7 @@
 "Tailwind",
 "Wide Guard"
 ],
-"regional_count": 17
+"regional_count": 39
 },
 "Venusaur#1": {
 "species": "Venusaur",
@@ -3000,7 +3000,7 @@
 "Sleep Powder",
 "Protect"
 ],
-"regional_count": 18
+"regional_count": 41
 },
 "Sneasler#34": {
 "species": "Sneasler",
@@ -3063,7 +3063,7 @@
 "Sleep Powder",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Incineroar#10": {
 "species": "Incineroar",
@@ -3084,7 +3084,7 @@
 "Flare Blitz",
 "Parting Shot"
 ],
-"regional_count": 5
+"regional_count": 9
 },
 "Noivern#1": {
 "species": "Noivern",
@@ -3168,7 +3168,7 @@
 "Protect",
 "Trick Room"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Incineroar#79": {
 "species": "Incineroar",
@@ -3189,7 +3189,7 @@
 "Fake Out",
 "Close Combat"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "M-Camerupt#1": {
 "species": "Camerupt",
@@ -3210,7 +3210,7 @@
 "Ancient Power",
 "Protect"
 ],
-"regional_count": 11
+"regional_count": 12
 },
 "Kingambit#8": {
 "species": "Kingambit",
@@ -3252,7 +3252,7 @@
 "Follow Me",
 "Helping Hand"
 ],
-"regional_count": 10
+"regional_count": 13
 },
 "Garchomp#7": {
 "species": "Garchomp",
@@ -3273,7 +3273,7 @@
 "Earthquake",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "M-Aerodactyl#1": {
 "species": "Aerodactyl",
@@ -3294,7 +3294,7 @@
 "Rock Slide",
 "Dual Wingbeat"
 ],
-"regional_count": 11
+"regional_count": 17
 },
 "Farigiraf#7": {
 "species": "Farigiraf",
@@ -3315,7 +3315,7 @@
 "Trick Room",
 "Protect"
 ],
-"regional_count": 3
+"regional_count": 5
 },
 "Sneasler#20": {
 "species": "Sneasler",
@@ -3336,7 +3336,7 @@
 "Fake Out",
 "Protect"
 ],
-"regional_count": 3
+"regional_count": 8
 },
 "Swampert#2": {
 "species": "Swampert",
@@ -3378,7 +3378,7 @@
 "Will-O-Wisp",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Volcarona#11": {
 "species": "Volcarona",
@@ -3420,7 +3420,7 @@
 "Flash Cannon",
 "Protect"
 ],
-"regional_count": 23
+"regional_count": 32
 },
 "Sinistcha#19": {
 "species": "Sinistcha",
@@ -3483,7 +3483,7 @@
 "Sucker Punch",
 "Protect"
 ],
-"regional_count": 5
+"regional_count": 14
 },
 "M-Gengar#5": {
 "species": "Gengar",
@@ -3525,7 +3525,7 @@
 "Parting Shot",
 "Fake Out"
 ],
-"regional_count": 11
+"regional_count": 17
 },
 "Hippowdon#1": {
 "species": "Hippowdon",
@@ -3567,7 +3567,7 @@
 "Reflect",
 "Light Screen"
 ],
-"regional_count": 13
+"regional_count": 22
 },
 "Pelipper#3": {
 "species": "Pelipper",
@@ -3588,7 +3588,7 @@
 "Hurricane",
 "Weather Ball"
 ],
-"regional_count": 9
+"regional_count": 15
 },
 "M-Charizard Y#4": {
 "species": "Charizard",
@@ -3609,7 +3609,7 @@
 "Ancient Power",
 "Protect"
 ],
-"regional_count": 13
+"regional_count": 24
 },
 "Archaludon#11": {
 "species": "Archaludon",
@@ -3756,7 +3756,7 @@
 "Throat Chop",
 "Parting Shot"
 ],
-"regional_count": 34
+"regional_count": 47
 },
 "Sneasler#1": {
 "species": "Sneasler",
@@ -3777,7 +3777,7 @@
 "Rock Slide",
 "Protect"
 ],
-"regional_count": 25
+"regional_count": 32
 },
 "M-Floette#4": {
 "species": "Floette-Eternal",
@@ -3798,7 +3798,7 @@
 "Calm Mind",
 "Protect"
 ],
-"regional_count": 8
+"regional_count": 11
 },
 "Garchomp#5": {
 "species": "Garchomp",
@@ -3819,7 +3819,7 @@
 "Rock Slide",
 "Rock Tomb"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "M-Charizard Y#3": {
 "species": "Charizard",
@@ -3840,7 +3840,7 @@
 "Weather Ball",
 "Protect"
 ],
-"regional_count": 14
+"regional_count": 25
 },
 "Rillaboom#8": {
 "species": "Rillaboom",
@@ -3861,7 +3861,7 @@
 "High Horsepower",
 "Fake Out"
 ],
-"regional_count": 9
+"regional_count": 10
 },
 "M-Gardevoir#18": {
 "species": "Gardevoir",
@@ -3882,7 +3882,7 @@
 "Thunderbolt",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 3
 },
 "Armarouge#5": {
 "species": "Armarouge",
@@ -3903,7 +3903,7 @@
 "Wide Guard",
 "Trick Room"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Sneasler#30": {
 "species": "Sneasler",
@@ -3924,7 +3924,7 @@
 "Fake Out",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 5
 },
 "Kingambit#16": {
 "species": "Kingambit",
@@ -3945,7 +3945,7 @@
 "Sucker Punch",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Torkoal#1": {
 "species": "Torkoal",
@@ -3966,7 +3966,7 @@
 "Earth Power",
 "Protect"
 ],
-"regional_count": 3
+"regional_count": 10
 },
 "Annihilape#3": {
 "species": "Annihilape",
@@ -4008,7 +4008,7 @@
 "Fake Out",
 "Grassy Glide"
 ],
-"regional_count": 8
+"regional_count": 9
 },
 "Farigiraf#34": {
 "species": "Farigiraf",
@@ -4050,7 +4050,7 @@
 "Earth Power",
 "Spiky Shield"
 ],
-"regional_count": 12
+"regional_count": 13
 },
 "Kommo-o#4": {
 "species": "Kommo-o",
@@ -4113,7 +4113,7 @@
 "Trick Room",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 5
 },
 "Indeedee-F#4": {
 "species": "Indeedee-F",
@@ -4134,7 +4134,7 @@
 "Trick Room",
 "Helping Hand"
 ],
-"regional_count": 9
+"regional_count": 15
 },
 "Rillaboom#5": {
 "species": "Rillaboom",
@@ -4155,7 +4155,7 @@
 "Wood Hammer",
 "High Horsepower"
 ],
-"regional_count": 14
+"regional_count": 22
 },
 "Incineroar#22": {
 "species": "Incineroar",
@@ -4239,7 +4239,7 @@
 "Coil",
 "Protect"
 ],
-"regional_count": 6
+"regional_count": 7
 },
 "Sneasler#8": {
 "species": "Sneasler",
@@ -4260,7 +4260,7 @@
 "Protect",
 "Rock Tomb"
 ],
-"regional_count": 14
+"regional_count": 17
 },
 "Farigiraf#5": {
 "species": "Farigiraf",
@@ -4281,7 +4281,7 @@
 "Helping Hand",
 "Trick Room"
 ],
-"regional_count": 5
+"regional_count": 6
 },
 "Garchomp#29": {
 "species": "Garchomp",
@@ -4323,7 +4323,7 @@
 "Earthquake",
 "Rock Slide"
 ],
-"regional_count": 17
+"regional_count": 38
 },
 "Delphox#2": {
 "species": "Delphox",
@@ -4365,7 +4365,7 @@
 "Calm Mind",
 "Protect"
 ],
-"regional_count": 4
+"regional_count": 5
 },
 "M-Dragonite#2": {
 "species": "Dragonite",
@@ -4386,7 +4386,7 @@
 "Tailwind",
 "Protect"
 ],
-"regional_count": 4
+"regional_count": 8
 },
 "Arcanine-H#4": {
 "species": "Arcanine-Hisui",
@@ -4407,7 +4407,7 @@
 "Rock Slide",
 "Extreme Speed"
 ],
-"regional_count": 5
+"regional_count": 6
 },
 "Volcarona#5": {
 "species": "Volcarona",
@@ -4533,7 +4533,7 @@
 "Icy Wind",
 "Protect"
 ],
-"regional_count": 11
+"regional_count": 13
 },
 "Sneasler#22": {
 "species": "Sneasler",
@@ -4554,7 +4554,7 @@
 "Close Combat",
 "Coaching"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "M-Baxcalibur#2": {
 "species": "Baxcalibur",
@@ -4638,7 +4638,7 @@
 "Close Combat",
 "Throat Chop"
 ],
-"regional_count": 1
+"regional_count": 3
 },
 "Milotic#4": {
 "species": "Milotic",
@@ -4659,7 +4659,7 @@
 "Icy Wind",
 "Protect"
 ],
-"regional_count": 9
+"regional_count": 12
 },
 "M-Tyranitar#3": {
 "species": "Tyranitar",
@@ -4722,7 +4722,7 @@
 "Protect",
 "Iron Head"
 ],
-"regional_count": 9
+"regional_count": 14
 },
 "Farigiraf#2": {
 "species": "Farigiraf",
@@ -4743,7 +4743,7 @@
 "Trick Room",
 "Protect"
 ],
-"regional_count": 9
+"regional_count": 12
 },
 "Incineroar#40": {
 "species": "Incineroar",
@@ -4785,7 +4785,7 @@
 "Protect",
 "Aura Sphere"
 ],
-"regional_count": 17
+"regional_count": 27
 },
 "M-Swampert#2": {
 "species": "Swampert",
@@ -4806,7 +4806,7 @@
 "High Horsepower",
 "Ice Punch"
 ],
-"regional_count": 9
+"regional_count": 10
 },
 "M-Gengar#4": {
 "species": "Gengar",
@@ -4995,7 +4995,7 @@
 "Focus Blast",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "M-Floette#10": {
 "species": "Floette-Eternal",
@@ -5016,7 +5016,7 @@
 "Calm Mind",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 3
 },
 "Gholdengo#3": {
 "species": "Gholdengo",
@@ -5037,7 +5037,7 @@
 "Nasty Plot",
 "Protect"
 ],
-"regional_count": 11
+"regional_count": 13
 },
 "Tyranitar#3": {
 "species": "Tyranitar",
@@ -5100,7 +5100,7 @@
 "Moonblast",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "M-Pidgeot#2": {
 "species": "Pidgeot",
@@ -5142,7 +5142,7 @@
 "Earthquake",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 6
 },
 "Kommo-o#12": {
 "species": "Kommo-o",
@@ -5226,7 +5226,7 @@
 "Ice Punch",
 "Earthquake"
 ],
-"regional_count": 8
+"regional_count": 10
 },
 "M-Golisopod#9": {
 "species": "Golisopod",
@@ -5268,7 +5268,7 @@
 "Iron Head",
 "Protect"
 ],
-"regional_count": 14
+"regional_count": 30
 },
 "M-Aerodactyl#3": {
 "species": "Aerodactyl",
@@ -5289,7 +5289,7 @@
 "Ice Fang",
 "Tailwind"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "Excadrill#7": {
 "species": "Excadrill",
@@ -5373,7 +5373,7 @@
 "Tailwind",
 "Encore"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "M-Metagross#4": {
 "species": "Metagross",
@@ -5499,7 +5499,7 @@
 "Aurora Veil",
 "Protect"
 ],
-"regional_count": 6
+"regional_count": 10
 },
 "Talonflame#1": {
 "species": "Talonflame",
@@ -5520,7 +5520,7 @@
 "Tailwind",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Swampert#4": {
 "species": "Swampert",
@@ -5604,7 +5604,7 @@
 "Parting Shot",
 "Helping Hand"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Sneasler#15": {
 "species": "Sneasler",
@@ -5625,7 +5625,7 @@
 "Close Combat",
 "Fake Out"
 ],
-"regional_count": 4
+"regional_count": 12
 },
 "Excadrill#6": {
 "species": "Excadrill",
@@ -5751,7 +5751,7 @@
 "Acrobatics",
 "Protect"
 ],
-"regional_count": 6
+"regional_count": 7
 },
 "Toxapex#2": {
 "species": "Toxapex",
@@ -5814,7 +5814,7 @@
 "Light of Ruin",
 "Protect"
 ],
-"regional_count": 10
+"regional_count": 12
 },
 "Toxapex#1": {
 "species": "Toxapex",
@@ -5835,7 +5835,7 @@
 "Toxic",
 "Infestation"
 ],
-"regional_count": 4
+"regional_count": 11
 },
 "Farigiraf#12": {
 "species": "Farigiraf",
@@ -6022,7 +6022,7 @@
 "Flamethrower",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 3
 },
 "Farigiraf#56": {
 "species": "Farigiraf",
@@ -6043,7 +6043,7 @@
 "Helping Hand",
 "Trick Room"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Primarina#5": {
 "species": "Primarina",
@@ -6127,7 +6127,7 @@
 "Rock Slide",
 "Detect"
 ],
-"regional_count": 3
+"regional_count": 6
 },
 "Primarina#3": {
 "species": "Primarina",
@@ -6148,7 +6148,7 @@
 "Aqua Jet",
 "Protect"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "Torkoal#2": {
 "species": "Torkoal",
@@ -6211,7 +6211,7 @@
 "Soak",
 "Flip Turn"
 ],
-"regional_count": 1
+"regional_count": 7
 },
 "Pelipper#4": {
 "species": "Pelipper",
@@ -6232,7 +6232,7 @@
 "Tailwind",
 "Weather Ball"
 ],
-"regional_count": 8
+"regional_count": 12
 },
 "Rillaboom#4": {
 "species": "Rillaboom",
@@ -6253,7 +6253,7 @@
 "Grassy Glide",
 "U-turn"
 ],
-"regional_count": 14
+"regional_count": 19
 },
 "Pelipper#5": {
 "species": "Pelipper",
@@ -6274,7 +6274,7 @@
 "Wide Guard",
 "Protect"
 ],
-"regional_count": 5
+"regional_count": 8
 },
 "Incineroar#32": {
 "species": "Incineroar",
@@ -6379,7 +6379,7 @@
 "Throat Chop",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "M-Floette#6": {
 "species": "Floette-Eternal",
@@ -6400,7 +6400,7 @@
 "Dazzling Gleam",
 "Protect"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "M-Salamence#4": {
 "species": "Salamence",
@@ -6421,7 +6421,7 @@
 "Tailwind",
 "Protect"
 ],
-"regional_count": 7
+"regional_count": 8
 },
 "Primarina#6": {
 "species": "Primarina",
@@ -6463,7 +6463,7 @@
 "Parting Shot",
 "Fake Out"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Kingambit#12": {
 "species": "Kingambit",
@@ -6568,7 +6568,7 @@
 "Stomping Tantrum",
 "Rock Slide"
 ],
-"regional_count": 5
+"regional_count": 7
 },
 "Sylveon#11": {
 "species": "Sylveon",
@@ -6673,7 +6673,7 @@
 "Trick Room",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 4
 },
 "Indeedee-F#9": {
 "species": "Indeedee-F",
@@ -6799,7 +6799,7 @@
 "Calm Mind",
 "Detect"
 ],
-"regional_count": 3
+"regional_count": 5
 },
 "Milotic#13": {
 "species": "Milotic",
@@ -6841,7 +6841,7 @@
 "Iron Head",
 "Sucker Punch"
 ],
-"regional_count": 4
+"regional_count": 6
 },
 "M-Salamence#19": {
 "species": "Salamence",
@@ -6883,7 +6883,7 @@
 "Quiver Dance",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Sneasler#6": {
 "species": "Sneasler",
@@ -6904,7 +6904,7 @@
 "Fake Out",
 "Protect"
 ],
-"regional_count": 16
+"regional_count": 17
 },
 "Milotic#7": {
 "species": "Milotic",
@@ -6946,7 +6946,7 @@
 "Fake Out",
 "Parting Shot"
 ],
-"regional_count": 16
+"regional_count": 36
 },
 "Volcarona#32": {
 "species": "Volcarona",
@@ -6988,7 +6988,7 @@
 "Calm Mind",
 "Protect"
 ],
-"regional_count": 8
+"regional_count": 24
 },
 "Tyranitar#1": {
 "species": "Tyranitar",
@@ -7030,7 +7030,7 @@
 "Rock Slide",
 "Protect"
 ],
-"regional_count": 23
+"regional_count": 27
 },
 "Sneasler#62": {
 "species": "Sneasler",
@@ -7114,7 +7114,7 @@
 "Iron Head",
 "Protect"
 ],
-"regional_count": 4
+"regional_count": 7
 },
 "Indeedee-F#41": {
 "species": "Indeedee-F",
@@ -7282,7 +7282,7 @@
 "Follow Me",
 "Trick Room"
 ],
-"regional_count": 4
+"regional_count": 7
 },
 "Kingambit#17": {
 "species": "Kingambit",
@@ -7324,7 +7324,7 @@
 "Recover",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "M-Baxcalibur#4": {
 "species": "Baxcalibur",
@@ -7366,7 +7366,7 @@
 "Aurora Veil",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Sneasler#13": {
 "species": "Sneasler",
@@ -7387,7 +7387,7 @@
 "Coaching",
 "Dire Claw"
 ],
-"regional_count": 5
+"regional_count": 9
 },
 "Sneasler#31": {
 "species": "Sneasler",
@@ -7429,7 +7429,7 @@
 "Helping Hand",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Gholdengo#6": {
 "species": "Gholdengo",
@@ -7492,7 +7492,7 @@
 "Bulk Up",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 4
 },
 "Milotic#21": {
 "species": "Milotic",
@@ -7513,7 +7513,7 @@
 "Hypnosis",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Staraptor#1": {
 "species": "Staraptor",
@@ -7660,7 +7660,7 @@
 "Rock Slide",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Rillaboom#37": {
 "species": "Rillaboom",
@@ -7702,7 +7702,7 @@
 "Protect",
 "Head Smash"
 ],
-"regional_count": 5
+"regional_count": 8
 },
 "Sneasler#47": {
 "species": "Sneasler",
@@ -7744,7 +7744,7 @@
 "Fake Out",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "M-Froslass#6": {
 "species": "Froslass",
@@ -7849,7 +7849,7 @@
 "Wave Crash",
 "Flip Turn"
 ],
-"regional_count": 2
+"regional_count": 4
 },
 "Sneasler#4": {
 "species": "Sneasler",
@@ -7870,7 +7870,7 @@
 "Rock Slide",
 "Protect"
 ],
-"regional_count": 17
+"regional_count": 23
 },
 "M-Golisopod#4": {
 "species": "Golisopod",
@@ -7891,7 +7891,7 @@
 "Swords Dance",
 "Protect"
 ],
-"regional_count": 6
+"regional_count": 8
 },
 "Pelipper#23": {
 "species": "Pelipper",
@@ -7933,7 +7933,7 @@
 "Wood Hammer",
 "U-turn"
 ],
-"regional_count": 12
+"regional_count": 16
 },
 "Dragapult#13": {
 "species": "Dragapult",
@@ -7975,7 +7975,7 @@
 "Reflect",
 "Light Screen"
 ],
-"regional_count": 2
+"regional_count": 4
 },
 "Pelipper#21": {
 "species": "Pelipper",
@@ -8227,7 +8227,7 @@
 "Quiver Dance",
 "Protect"
 ],
-"regional_count": 4
+"regional_count": 5
 },
 "Mamoswine#1": {
 "species": "Mamoswine",
@@ -8416,7 +8416,7 @@
 "Trick",
 "Protect"
 ],
-"regional_count": 3
+"regional_count": 5
 },
 "Milotic#12": {
 "species": "Milotic",
@@ -8542,7 +8542,7 @@
 "Flamethrower",
 "Protect"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "Incineroar#13": {
 "species": "Incineroar",
@@ -8962,7 +8962,7 @@
 "U-turn",
 "Fake Out"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Incineroar#72": {
 "species": "Incineroar",
@@ -9025,7 +9025,7 @@
 "Protect",
 "Fake Out"
 ],
-"regional_count": 5
+"regional_count": 6
 },
 "Kommo-o#3": {
 "species": "Kommo-o",
@@ -9046,7 +9046,7 @@
 "Aura Sphere",
 "Protect"
 ],
-"regional_count": 3
+"regional_count": 5
 },
 "Incineroar#8": {
 "species": "Incineroar",
@@ -9088,7 +9088,7 @@
 "Trick Room",
 "Wide Guard"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Sneasler#16": {
 "species": "Sneasler",
@@ -9130,7 +9130,7 @@
 "Draco Meteor",
 "Flamethrower"
 ],
-"regional_count": 5
+"regional_count": 6
 },
 "Indeedee-F#12": {
 "species": "Indeedee-F",
@@ -9214,7 +9214,7 @@
 "Follow Me",
 "Protect"
 ],
-"regional_count": 4
+"regional_count": 8
 },
 "Whimsicott#5": {
 "species": "Whimsicott",
@@ -9277,7 +9277,7 @@
 "Quiver Dance",
 "Protect"
 ],
-"regional_count": 9
+"regional_count": 20
 },
 "M-Metagross#14": {
 "species": "Metagross",
@@ -9466,7 +9466,7 @@
 "Power Gem",
 "Protect"
 ],
-"regional_count": 17
+"regional_count": 49
 },
 "M-Dragonite#3": {
 "species": "Dragonite",
@@ -9487,7 +9487,7 @@
 "Heat Wave",
 "Extreme Speed"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "M-Steelix#1": {
 "species": "Steelix",
@@ -9592,7 +9592,7 @@
 "Flare Blitz",
 "Parting Shot"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "M-Tyranitar#6": {
 "species": "Tyranitar",
@@ -9655,7 +9655,7 @@
 "Fake Out",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Sylveon#8": {
 "species": "Sylveon",
@@ -9781,7 +9781,7 @@
 "Trick Room",
 "Imprison"
 ],
-"regional_count": 1
+"regional_count": 3
 },
 "M-Gardevoir#15": {
 "species": "Gardevoir",
@@ -9802,7 +9802,7 @@
 "Hyper Beam",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "M-Staraptor#3": {
 "species": "Staraptor",
@@ -9823,7 +9823,7 @@
 "Roost",
 "Close Combat"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "M-Manectric#1": {
 "species": "Manectric",
@@ -9886,7 +9886,7 @@
 "Fake Out",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 4
 },
 "Garchomp#26": {
 "species": "Garchomp",
@@ -10033,7 +10033,7 @@
 "Parting Shot",
 "Fake Out"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "Volcarona#9": {
 "species": "Volcarona",
@@ -10075,7 +10075,7 @@
 "Icy Wind",
 "Scald"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "M-Baxcalibur#3": {
 "species": "Baxcalibur",
@@ -10138,7 +10138,7 @@
 "Flamethrower",
 "Protect"
 ],
-"regional_count": 6
+"regional_count": 12
 },
 "M-Metagross#1": {
 "species": "Metagross",
@@ -10243,7 +10243,7 @@
 "Helping Hand",
 "Parting Shot"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Aerodactyl#1": {
 "species": "Aerodactyl",
@@ -10264,7 +10264,7 @@
 "Dual Wingbeat",
 "Tailwind"
 ],
-"regional_count": 2
+"regional_count": 5
 },
 "M-Lucario Z#3": {
 "species": "Lucario",
@@ -10348,7 +10348,7 @@
 "Earth Power",
 "Protect"
 ],
-"regional_count": 4
+"regional_count": 12
 },
 "M-Staraptor#4": {
 "species": "Staraptor",
@@ -10369,7 +10369,7 @@
 "Tailwind",
 "Protect"
 ],
-"regional_count": 3
+"regional_count": 5
 },
 "Volcarona#10": {
 "species": "Volcarona",
@@ -10390,7 +10390,7 @@
 "Flamethrower",
 "Giga Drain"
 ],
-"regional_count": 2
+"regional_count": 4
 },
 "M-Metagross#5": {
 "species": "Metagross",
@@ -10411,7 +10411,7 @@
 "Stomping Tantrum",
 "Protect"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "M-Gardevoir#20": {
 "species": "Gardevoir",
@@ -10474,7 +10474,7 @@
 "Life Dew",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Indeedee-F#36": {
 "species": "Indeedee-F",
@@ -10684,7 +10684,7 @@
 "Overheat",
 "Tailwind"
 ],
-"regional_count": 4
+"regional_count": 5
 },
 "Basculegion#19": {
 "species": "Basculegion",
@@ -10726,7 +10726,7 @@
 "Power Gem",
 "Protect"
 ],
-"regional_count": 10
+"regional_count": 27
 },
 "Basculegion#8": {
 "species": "Basculegion",
@@ -10747,7 +10747,7 @@
 "Aqua Jet",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 9
 },
 "M-Garchomp#2": {
 "species": "Garchomp",
@@ -10768,7 +10768,7 @@
 "Protect",
 "Rock Slide"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Incineroar#76": {
 "species": "Incineroar",
@@ -10915,7 +10915,7 @@
 "Rock Slide",
 "Protect"
 ],
-"regional_count": 5
+"regional_count": 17
 },
 "Sinistcha#22": {
 "species": "Sinistcha",
@@ -11041,7 +11041,7 @@
 "Calm Mind",
 "Trick Room"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Kingambit#13": {
 "species": "Kingambit",
@@ -11062,7 +11062,7 @@
 "Low Kick",
 "Sucker Punch"
 ],
-"regional_count": 3
+"regional_count": 5
 },
 "Torkoal#6": {
 "species": "Torkoal",
@@ -11083,7 +11083,7 @@
 "Solar Beam",
 "Earth Power"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Indeedee-F#33": {
 "species": "Indeedee-F",
@@ -11104,7 +11104,7 @@
 "Skill Swap",
 "Trick Room"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "M-Glimmora#3": {
 "species": "Glimmora",
@@ -11125,7 +11125,7 @@
 "Earth Power",
 "Energy Ball"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Rillaboom#49": {
 "species": "Rillaboom",
@@ -11230,7 +11230,7 @@
 "Fake Out",
 "Flare Blitz"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Milotic#18": {
 "species": "Milotic",
@@ -11335,7 +11335,7 @@
 "Feint",
 "Super Fang"
 ],
-"regional_count": 4
+"regional_count": 5
 },
 "M-Blastoise#1": {
 "species": "Blastoise",
@@ -11356,7 +11356,7 @@
 "Shell Smash",
 "Protect"
 ],
-"regional_count": 5
+"regional_count": 8
 },
 "Sinistcha#2": {
 "species": "Sinistcha",
@@ -11377,7 +11377,7 @@
 "Trick Room",
 "Protect"
 ],
-"regional_count": 5
+"regional_count": 6
 },
 "Farigiraf#6": {
 "species": "Farigiraf",
@@ -11461,7 +11461,7 @@
 "Ice Shard",
 "Swords Dance"
 ],
-"regional_count": 4
+"regional_count": 5
 },
 "Volcarona#30": {
 "species": "Volcarona",
@@ -11545,7 +11545,7 @@
 "Close Combat",
 "Fake Out"
 ],
-"regional_count": 1
+"regional_count": 4
 },
 "M-Salamence#14": {
 "species": "Salamence",
@@ -11566,7 +11566,7 @@
 "Tailwind",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "M-Scovillain#3": {
 "species": "Scovillain",
@@ -11650,7 +11650,7 @@
 "Fake Out",
 "Quick Guard"
 ],
-"regional_count": 3
+"regional_count": 5
 },
 "Kingambit#14": {
 "species": "Kingambit",
@@ -11692,7 +11692,7 @@
 "Trick Room",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 5
 },
 "Pelipper#17": {
 "species": "Pelipper",
@@ -11734,7 +11734,7 @@
 "Taunt",
 "Fake Out"
 ],
-"regional_count": 4
+"regional_count": 5
 },
 "Garchomp#10": {
 "species": "Garchomp",
@@ -11776,7 +11776,7 @@
 "Dark Pulse",
 "Detect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Rillaboom#12": {
 "species": "Rillaboom",
@@ -11881,7 +11881,7 @@
 "Low Kick",
 "Protect"
 ],
-"regional_count": 4
+"regional_count": 10
 },
 "M-Froslass#7": {
 "species": "Froslass",
@@ -12091,7 +12091,7 @@
 "Wide Guard",
 "Tailwind"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "M-Lucario Z#6": {
 "species": "Lucario",
@@ -12196,7 +12196,7 @@
 "Flamethrower",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 3
 },
 "Excadrill#5": {
 "species": "Excadrill",
@@ -12238,7 +12238,7 @@
 "Sucker Punch",
 "Low Kick"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "M-Meowstic-M#1": {
 "species": "Meowstic-F",
@@ -12259,7 +12259,7 @@
 "Thunderbolt",
 "Protect"
 ],
-"regional_count": 4
+"regional_count": 7
 },
 "Indeedee#9": {
 "species": "Indeedee",
@@ -12301,7 +12301,7 @@
 "Rock Tomb",
 "Fake Out"
 ],
-"regional_count": 4
+"regional_count": 5
 },
 "Gliscor#1": {
 "species": "Gliscor",
@@ -12364,7 +12364,7 @@
 "Quiver Dance",
 "Protect"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "Dragapult#10": {
 "species": "Dragapult",
@@ -12490,7 +12490,7 @@
 "Aqua Jet",
 "Protect"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "M-Salamence#16": {
 "species": "Salamence",
@@ -12574,7 +12574,7 @@
 "Icy Wind",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Incineroar#41": {
 "species": "Incineroar",
@@ -12910,7 +12910,7 @@
 "Ice Punch",
 "U-turn"
 ],
-"regional_count": 5
+"regional_count": 6
 },
 "Armarouge#15": {
 "species": "Armarouge",
@@ -12994,7 +12994,7 @@
 "Power Gem",
 "Trick"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Archaludon#15": {
 "species": "Archaludon",
@@ -13099,7 +13099,7 @@
 "Helping Hand",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 4
 },
 "Sinistcha#7": {
 "species": "Sinistcha",
@@ -13183,7 +13183,7 @@
 "Dragon Dance",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Dragapult#15": {
 "species": "Dragapult",
@@ -13225,7 +13225,7 @@
 "Dire Claw",
 "Coaching"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "Sinistcha#15": {
 "species": "Sinistcha",
@@ -13372,7 +13372,7 @@
 "Flash Cannon",
 "Draco Meteor"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "Farigiraf#37": {
 "species": "Farigiraf",
@@ -13603,7 +13603,7 @@
 "Dragon Pulse",
 "Snarl"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "M-Salamence#18": {
 "species": "Salamence",
@@ -13708,7 +13708,7 @@
 "High Horsepower",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Incineroar#48": {
 "species": "Incineroar",
@@ -14044,7 +14044,7 @@
 "Swords Dance",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "M-Mawile#6": {
 "species": "Mawile",
@@ -14128,7 +14128,7 @@
 "Throat Chop",
 "Fake Out"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Whimsicott#15": {
 "species": "Whimsicott",
@@ -14254,7 +14254,7 @@
 "Freeze-Dry",
 "Encore"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Incineroar#54": {
 "species": "Incineroar",
@@ -14317,7 +14317,7 @@
 "Parting Shot",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 4
 },
 "Politoed#17": {
 "species": "Politoed",
@@ -14422,7 +14422,7 @@
 "Trick Room",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 3
 },
 "M-Tyranitar#10": {
 "species": "Tyranitar",
@@ -14506,7 +14506,7 @@
 "Yawn",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 4
 },
 "M-Charizard Y#8": {
 "species": "Charizard",
@@ -14569,7 +14569,7 @@
 "Wood Hammer",
 "Stomping Tantrum"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Pelipper#6": {
 "species": "Pelipper",
@@ -14590,7 +14590,7 @@
 "Tailwind",
 "Wide Guard"
 ],
-"regional_count": 5
+"regional_count": 6
 },
 "M-Metagross#15": {
 "species": "Metagross",
@@ -14695,7 +14695,7 @@
 "Rock Slide",
 "Fake Out"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "M-Golisopod#16": {
 "species": "Golisopod",
@@ -14863,7 +14863,7 @@
 "Trick Room",
 "Thunderbolt"
 ],
-"regional_count": 3
+"regional_count": 5
 },
 "Pelipper#19": {
 "species": "Pelipper",
@@ -15199,7 +15199,7 @@
 "Power Gem",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 12
 },
 "Milotic#36": {
 "species": "Milotic",
@@ -15262,7 +15262,7 @@
 "Trick",
 "Power Gem"
 ],
-"regional_count": 4
+"regional_count": 5
 },
 "Archaludon#20": {
 "species": "Archaludon",
@@ -15304,7 +15304,7 @@
 "Protect",
 "Iron Head"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "M-Meganium#2": {
 "species": "Meganium",
@@ -15388,7 +15388,7 @@
 "Stomping Tantrum",
 "Rock Slide"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Dragapult#6": {
 "species": "Dragapult",
@@ -15661,7 +15661,7 @@
 "Fake Out",
 "Parting Shot"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "Gallade#2": {
 "species": "Gallade",
@@ -16207,7 +16207,7 @@
 "Electro Shot",
 "Protect"
 ],
-"regional_count": 4
+"regional_count": 11
 },
 "M-Charizard Y#15": {
 "species": "Charizard",
@@ -16459,7 +16459,7 @@
 "Psychic Fangs",
 "Stomping Tantrum"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Indeedee#7": {
 "species": "Indeedee",
@@ -16585,7 +16585,7 @@
 "Parting Shot",
 "Snarl"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Rillaboom#33": {
 "species": "Rillaboom",
@@ -16711,7 +16711,7 @@
 "Clangorous Soul",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 3
 },
 "M-Gengar#12": {
 "species": "Gengar",
@@ -16753,7 +16753,7 @@
 "Fake Out",
 "Parting Shot"
 ],
-"regional_count": 5
+"regional_count": 6
 },
 "Rillaboom#50": {
 "species": "Rillaboom",
@@ -16795,7 +16795,7 @@
 "Protect",
 "Helping Hand"
 ],
-"regional_count": 2
+"regional_count": 4
 },
 "Sneasler#50": {
 "species": "Sneasler",
@@ -17152,7 +17152,7 @@
 "Grassy Glide",
 "U-turn"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Incineroar#30": {
 "species": "Incineroar",
@@ -17425,7 +17425,7 @@
 "Protect",
 "Play Rough"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Gallade#1": {
 "species": "Gallade",
@@ -17509,7 +17509,7 @@
 "Perish Song",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 3
 },
 "Incineroar#77": {
 "species": "Incineroar",
@@ -18160,7 +18160,7 @@
 "Dragon Pulse",
 "Tailwind"
 ],
-"regional_count": 2
+"regional_count": 4
 },
 "M-Staraptor#6": {
 "species": "Staraptor",
@@ -18244,7 +18244,7 @@
 "Rock Slide",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 3
 },
 "Farigiraf#32": {
 "species": "Farigiraf",
@@ -18286,7 +18286,7 @@
 "Snarl",
 "Protect"
 ],
-"regional_count": 10
+"regional_count": 15
 },
 "M-Golisopod#6": {
 "species": "Golisopod",
@@ -18307,7 +18307,7 @@
 "Drill Run",
 "Protect"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "Politoed#5": {
 "species": "Politoed",
@@ -18349,7 +18349,7 @@
 "Body Press",
 "Psychic Fangs"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "M-Gengar#10": {
 "species": "Gengar",
@@ -18538,7 +18538,7 @@
 "Last Respects",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 6
 },
 "M-Lucario Z#4": {
 "species": "Lucario",
@@ -19189,7 +19189,7 @@
 "Shadow Ball",
 "Thunderbolt"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Milotic#22": {
 "species": "Milotic",
@@ -19585,7 +19585,7 @@
 "moves": [
 "Transform"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Sneasler#45": {
 "species": "Sneasler",
@@ -19627,7 +19627,7 @@
 "Protect",
 "Aqua Jet"
 ],
-"regional_count": 2
+"regional_count": 4
 },
 "Sneasler#48": {
 "species": "Sneasler",
@@ -20026,7 +20026,7 @@
 "Tailwind",
 "Rage Powder"
 ],
-"regional_count": 3
+"regional_count": 17
 },
 "Farigiraf#64": {
 "species": "Farigiraf",
@@ -20047,7 +20047,7 @@
 "Helping Hand",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 7
 },
 "Sylveon#3": {
 "species": "Sylveon",
@@ -20068,7 +20068,7 @@
 "Yawn",
 "Detect"
 ],
-"regional_count": 4
+"regional_count": 8
 },
 "Incineroar#21": {
 "species": "Incineroar",
@@ -20089,7 +20089,7 @@
 "Darkest Lariat",
 "Parting Shot"
 ],
-"regional_count": 2
+"regional_count": 11
 },
 "Indeedee#20": {
 "species": "Indeedee",
@@ -20110,7 +20110,7 @@
 "Imprison",
 "Trick Room"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "M-Dragonite#1": {
 "species": "Dragonite",
@@ -20131,7 +20131,7 @@
 "Protect",
 "Tailwind"
 ],
-"regional_count": 9
+"regional_count": 12
 },
 "M-Floette#9": {
 "species": "Floette-Eternal",
@@ -20152,7 +20152,7 @@
 "Calm Mind",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Incineroar#18": {
 "species": "Incineroar",
@@ -20215,7 +20215,7 @@
 "Quick Attack",
 "Detect"
 ],
-"regional_count": 3
+"regional_count": 10
 },
 "Incineroar#67": {
 "species": "Incineroar",
@@ -20236,7 +20236,7 @@
 "Flare Blitz",
 "Parting Shot"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Sinistcha#12": {
 "species": "Sinistcha",
@@ -20278,7 +20278,7 @@
 "Tailwind",
 "Weather Ball"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Farigiraf#55": {
 "species": "Farigiraf",
@@ -20404,7 +20404,7 @@
 "Tailwind",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "M-Gengar#8": {
 "species": "Gengar",
@@ -20551,7 +20551,7 @@
 "Dire Claw",
 "Close Combat"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Incineroar#64": {
 "species": "Incineroar",
@@ -20614,7 +20614,7 @@
 "Liquidation",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 4
 },
 "Indeedee#21": {
 "species": "Indeedee",
@@ -20677,7 +20677,7 @@
 "Tailwind",
 "Wide Guard"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Garchomp#27": {
 "species": "Garchomp",
@@ -20719,7 +20719,7 @@
 "Earth Power",
 "Protect"
 ],
-"regional_count": 3
+"regional_count": 6
 },
 "M-Charizard Y#10": {
 "species": "Charizard",
@@ -20866,7 +20866,7 @@
 "Flamethrower",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Volcarona#20": {
 "species": "Volcarona",
@@ -20887,7 +20887,7 @@
 "Quiver Dance",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 3
 },
 "M-Garchomp Z#8": {
 "species": "Garchomp",
@@ -20929,7 +20929,7 @@
 "Earth Power",
 "Sludge Bomb"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "M-Metagross#8": {
 "species": "Metagross",
@@ -20971,7 +20971,7 @@
 "Calm Mind",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Rillaboom#15": {
 "species": "Rillaboom",
@@ -21097,7 +21097,7 @@
 "Last Respects",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 4
 },
 "Aegislash#1": {
 "species": "Aegislash",
@@ -21139,7 +21139,7 @@
 "Protect",
 "Sunny Day"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Garchomp#12": {
 "species": "Garchomp",
@@ -21181,7 +21181,7 @@
 "Fake Out",
 "U-turn"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Volcarona#15": {
 "species": "Volcarona",
@@ -21391,7 +21391,7 @@
 "Snarl",
 "Protect"
 ],
-"regional_count": 3
+"regional_count": 4
 },
 "M-Pyroar#2": {
 "species": "Pyroar",
@@ -21643,7 +21643,7 @@
 "Weather Ball",
 "Scorching Sands"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Sneasler#54": {
 "species": "Sneasler",
@@ -21769,7 +21769,7 @@
 "Rage Powder",
 "Life Dew"
 ],
-"regional_count": 1
+"regional_count": 3
 },
 "Maushold#2": {
 "species": "Maushold",
@@ -21958,7 +21958,7 @@
 "Bulk Up",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Ninetales-Alola#10": {
 "species": "Ninetales-Alola",
@@ -22000,7 +22000,7 @@
 "Quiver Dance",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "M-Raichu Y#3": {
 "species": "Raichu",
@@ -22042,7 +22042,7 @@
 "Ice Punch",
 "U-turn"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Milotic#27": {
 "species": "Milotic",
@@ -22210,7 +22210,7 @@
 "Wide Guard",
 "Baneful Bunker"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Swampert#1": {
 "species": "Swampert",
@@ -22252,7 +22252,7 @@
 "Thunderbolt",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 3
 },
 "Indeedee-F#14": {
 "species": "Indeedee-F",
@@ -22273,7 +22273,7 @@
 "Helping Hand",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Armarouge#9": {
 "species": "Armarouge",
@@ -22378,7 +22378,7 @@
 "Armor Cannon",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Indeedee-F#16": {
 "species": "Indeedee-F",
@@ -22399,7 +22399,7 @@
 "Trick Room",
 "Helping Hand"
 ],
-"regional_count": 1
+"regional_count": 4
 },
 "Sinistcha#20": {
 "species": "Sinistcha",
@@ -22483,7 +22483,7 @@
 "Fake Out",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 3
 },
 "M-Delphox#3": {
 "species": "Delphox",
@@ -22504,7 +22504,7 @@
 "Nasty Plot",
 "Protect"
 ],
-"regional_count": 2
+"regional_count": 7
 },
 "Indeedee-F#40": {
 "species": "Indeedee-F",
@@ -22567,7 +22567,7 @@
 "Aqua Jet",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Sneasler#81": {
 "species": "Sneasler",
@@ -22588,7 +22588,7 @@
 "Close Combat",
 "Rock Slide"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Tsareena#2": {
 "species": "Tsareena",
@@ -22651,7 +22651,7 @@
 "Dire Claw",
 "Fake Out"
 ],
-"regional_count": 2
+"regional_count": 4
 },
 "Hydreigon#7": {
 "species": "Hydreigon",
@@ -22945,7 +22945,7 @@
 "Earth Power",
 "Detect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Sneasler#66": {
 "species": "Sneasler",
@@ -22966,7 +22966,7 @@
 "Rock Slide",
 "Fake Out"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Rotom-Heat#1": {
 "species": "Rotom-Heat",
@@ -23197,7 +23197,7 @@
 "Aura Sphere",
 "Clanging Scales"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Drampa#1": {
 "species": "Drampa",
@@ -23344,7 +23344,7 @@
 "Sucker Punch",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Pelipper#15": {
 "species": "Pelipper",
@@ -23533,7 +23533,7 @@
 "Grassy Glide",
 "U-turn"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Hydreigon#2": {
 "species": "Hydreigon",
@@ -23554,7 +23554,7 @@
 "Dark Pulse",
 "Earth Power"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Volcarona#24": {
 "species": "Volcarona",
@@ -23869,7 +23869,7 @@
 "Encore",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Rillaboom#46": {
 "species": "Rillaboom",
@@ -23911,7 +23911,7 @@
 "High Horsepower",
 "Fake Out"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "M-Garchomp#1": {
 "species": "Garchomp",
@@ -23953,7 +23953,7 @@
 "Dire Claw",
 "Coaching"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Pelipper#10": {
 "species": "Pelipper",
@@ -24121,7 +24121,7 @@
 "Rock Tomb",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Volcarona#33": {
 "species": "Volcarona",
@@ -24142,7 +24142,7 @@
 "Rage Powder",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Volcarona#21": {
 "species": "Volcarona",
@@ -24520,7 +24520,7 @@
 "Wood Hammer",
 "Fake Out"
 ],
-"regional_count": 1
+"regional_count": 3
 },
 "Scizor#1": {
 "species": "Scizor",
@@ -24688,7 +24688,7 @@
 "Quick Attack",
 "Detect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "M-Blastoise#3": {
 "species": "Blastoise",
@@ -24730,7 +24730,7 @@
 "Darkest Lariat",
 "Parting Shot"
 ],
-"regional_count": 1
+"regional_count": 4
 },
 "Farigiraf#20": {
 "species": "Farigiraf",
@@ -24793,7 +24793,7 @@
 "Earth Power",
 "Flamethrower"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Delphox#1": {
 "species": "Delphox",
@@ -24982,7 +24982,7 @@
 "Stomping Tantrum",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 2
 },
 "Whimsicott#11": {
 "species": "Whimsicott",
@@ -25024,7 +25024,7 @@
 "Rock Slide",
 "Protect"
 ],
-"regional_count": 1
+"regional_count": 3
 },
 "M-Staraptor#8": {
 "species": "Staraptor",
@@ -25257,6 +25257,8448 @@
 ],
 "regional_count": 1
 },
+"Sylveon#16": {
+"species": "Sylveon",
+"item": "Fairy Feather",
+"ability": "Pixilate",
+"nature": "Modest",
+"evs": [
+9,
+0,
+22,
+20,
+0,
+15
+],
+"moves": [
+"Hyper Voice",
+"Moonblast",
+"Yawn",
+"Protect"
+],
+"regional_count": 1
+},
+"Pelipper#35": {
+"species": "Pelipper",
+"item": "Sitrus Berry",
+"ability": "Drizzle",
+"nature": "Calm",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Weather Ball",
+"Hurricane",
+"Tailwind",
+"Protect"
+],
+"regional_count": 1
+},
+"Garchomp#31": {
+"species": "Garchomp",
+"item": "Choice Scarf",
+"ability": "Rough Skin",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Bulldoze",
+"Earthquake",
+"Rock Slide",
+"Dragon Claw"
+],
+"regional_count": 1
+},
+"M-Raichu X#3": {
+"species": "Raichu",
+"item": "Raichunite X",
+"ability": "Lightning Rod",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Fake Out",
+"Volt Switch",
+"Feint",
+"Volt Tackle"
+],
+"regional_count": 1
+},
+"Gholdengo#18": {
+"species": "Gholdengo",
+"item": "Life Orb",
+"ability": "Good as Gold",
+"nature": "Timid",
+"evs": [
+7,
+0,
+0,
+27,
+0,
+32
+],
+"moves": [
+"Protect",
+"Make It Rain",
+"Shadow Ball",
+"Power Gem"
+],
+"regional_count": 2
+},
+"Sinistcha#23": {
+"species": "Sinistcha",
+"item": "Colbur Berry",
+"ability": "Hospitality",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+2,
+0,
+0
+],
+"moves": [
+"Matcha Gotcha",
+"Rage Powder",
+"Trick Room",
+"Protect"
+],
+"regional_count": 3
+},
+"Pelipper#31": {
+"species": "Pelipper",
+"item": "Life Orb",
+"ability": "Drizzle",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Weather Ball",
+"Muddy Water",
+"Hurricane",
+"Protect"
+],
+"regional_count": 1
+},
+"Sneasler#100": {
+"species": "Sneasler",
+"item": "White Herb",
+"ability": "Unburden",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Close Combat",
+"Gunk Shot",
+"U-turn",
+"Protect"
+],
+"regional_count": 1
+},
+"Whimsicott#22": {
+"species": "Whimsicott",
+"item": "Fairy Feather",
+"ability": "Prankster",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Moonblast",
+"Encore",
+"Tailwind",
+"Charm"
+],
+"regional_count": 1
+},
+"Basculegion-F#1": {
+"species": "Basculegion-F",
+"item": "Focus Sash",
+"ability": "Swift Swim",
+"nature": "Modest",
+"evs": [
+0,
+0,
+0,
+32,
+2,
+32
+],
+"moves": [
+"Protect",
+"Ice Beam",
+"Muddy Water",
+"Shadow Ball"
+],
+"regional_count": 8
+},
+"Pelipper#26": {
+"species": "Pelipper",
+"item": "Damp Rock",
+"ability": "Drizzle",
+"nature": "Bold",
+"evs": [
+31,
+0,
+0,
+0,
+24,
+11
+],
+"moves": [
+"Weather Ball",
+"Wide Guard",
+"Helping Hand",
+"Hurricane"
+],
+"regional_count": 7
+},
+"Kingambit#37": {
+"species": "Kingambit",
+"item": "Occa Berry",
+"ability": "Defiant",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Kowtow Cleave",
+"Sucker Punch",
+"Iron Head",
+"Protect"
+],
+"regional_count": 1
+},
+"Torkoal#9": {
+"species": "Torkoal",
+"item": "Charcoal",
+"ability": "Drought",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Eruption",
+"Earth Power",
+"Heat Wave",
+"Protect"
+],
+"regional_count": 4
+},
+"Farigiraf#90": {
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"nature": "Sassy",
+"evs": [
+32,
+0,
+0,
+2,
+32,
+0
+],
+"moves": [
+"Hyper Voice",
+"Psychic",
+"Trick Room",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Garchomp Z#14": {
+"species": "Garchomp",
+"item": "Garchompite Z",
+"ability": "Rough Skin",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Draco Meteor",
+"Earth Power",
+"Power Gem",
+"Protect"
+],
+"regional_count": 6
+},
+"Alcremie#1": {
+"species": "Alcremie",
+"item": "Rocky Helmet",
+"ability": "Sweet Veil",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Decorate",
+"Helping Hand",
+"Dazzling Gleam",
+"Mystical Fire"
+],
+"regional_count": 1
+},
+"Milotic#49": {
+"species": "Milotic",
+"item": "Grassy Seed",
+"ability": "Competitive",
+"nature": "Modest",
+"evs": [
+32,
+0,
+11,
+10,
+0,
+13
+],
+"moves": [
+"Protect",
+"Muddy Water",
+"Ice Beam",
+"Recover"
+],
+"regional_count": 1
+},
+"Milotic#51": {
+"species": "Milotic",
+"item": "Leftovers",
+"ability": "Competitive",
+"nature": "Calm",
+"evs": [
+32,
+0,
+29,
+0,
+5,
+0
+],
+"moves": [
+"Muddy Water",
+"Coil",
+"Recover",
+"Hypnosis"
+],
+"regional_count": 1
+},
+"Politoed#20": {
+"species": "Politoed",
+"item": "Sitrus Berry",
+"ability": "Drizzle",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Weather Ball",
+"Muddy Water",
+"Protect",
+"Icy Wind"
+],
+"regional_count": 1
+},
+"Venusaur#9": {
+"species": "Venusaur",
+"item": "Focus Sash",
+"ability": "Chlorophyll",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Sludge Bomb",
+"Sleep Powder",
+"Protect",
+"Energy Ball"
+],
+"regional_count": 2
+},
+"Sneasler#87": {
+"species": "Sneasler",
+"item": "Focus Sash",
+"ability": "Poison Touch",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Close Combat",
+"Dire Claw",
+"Fake Out",
+"Feint"
+],
+"regional_count": 1
+},
+"M-Delphox#9": {
+"species": "Delphox",
+"item": "Delphoxite",
+"ability": "Blaze",
+"nature": "Timid",
+"evs": [
+9,
+0,
+14,
+11,
+0,
+32
+],
+"moves": [
+"Heat Wave",
+"Psychic",
+"Encore",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Raichu Y#12": {
+"species": "Raichu",
+"item": "Raichunite Y",
+"ability": "Lightning Rod",
+"nature": "Timid",
+"evs": [
+32,
+0,
+11,
+0,
+0,
+23
+],
+"moves": [
+"Protect",
+"Zap Cannon",
+"Helping Hand",
+"Focus Blast"
+],
+"regional_count": 1
+},
+"Incineroar#86": {
+"species": "Incineroar",
+"item": "Chople Berry",
+"ability": "Intimidate",
+"nature": "Careful",
+"evs": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"moves": [
+"Protect",
+"Throat Chop",
+"Parting Shot",
+"Fake Out"
+],
+"regional_count": 1
+},
+"Sinistcha-Masterpiece#3": {
+"species": "Sinistcha-Masterpiece",
+"item": "Colbur Berry",
+"ability": "Hospitality",
+"nature": "Calm",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Matcha Gotcha",
+"Rage Powder",
+"Trick Room",
+"Protect"
+],
+"regional_count": 1
+},
+"Basculegion#22": {
+"species": "Basculegion",
+"item": "Choice Scarf",
+"ability": "Adaptability",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Wave Crash",
+"Last Respects",
+"Phantom Force",
+"Flip Turn"
+],
+"regional_count": 1
+},
+"Farigiraf#68": {
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"nature": "Calm",
+"evs": [
+29,
+0,
+14,
+0,
+23,
+0
+],
+"moves": [
+"Psychic",
+"Helping Hand",
+"Trick Room",
+"Protect"
+],
+"regional_count": 4
+},
+"Incineroar#84": {
+"species": "Incineroar",
+"item": "Chople Berry",
+"ability": "Intimidate",
+"nature": "Calm",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Darkest Lariat",
+"Parting Shot",
+"Fake Out",
+"Flare Blitz"
+],
+"regional_count": 1
+},
+"Talonflame#6": {
+"species": "Talonflame",
+"item": "Charcoal",
+"ability": "Gale Wings",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Brave Bird",
+"Flare Blitz",
+"Tailwind",
+"Protect"
+],
+"regional_count": 1
+},
+"Sneasler#86": {
+"species": "Sneasler",
+"item": "Electric Seed",
+"ability": "Unburden",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Dire Claw",
+"Close Combat",
+"Swords Dance",
+"Protect"
+],
+"regional_count": 2
+},
+"Sylveon#18": {
+"species": "Sylveon",
+"item": "Fairy Feather",
+"ability": "Pixilate",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Hyper Voice",
+"Quick Attack",
+"Yawn",
+"Detect"
+],
+"regional_count": 1
+},
+"Pelipper#30": {
+"species": "Pelipper",
+"item": "Focus Sash",
+"ability": "Drizzle",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Hurricane",
+"Muddy Water",
+"Icy Wind",
+"Protect"
+],
+"regional_count": 1
+},
+"Tsareena#6": {
+"species": "Tsareena",
+"item": "Choice Scarf",
+"ability": "Queenly Majesty",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Power Whip",
+"Triple Axel",
+"Zen Headbutt",
+"Aromatic Mist"
+],
+"regional_count": 1
+},
+"M-Greninja#1": {
+"species": "Greninja",
+"item": "Greninjite",
+"ability": "Protean",
+"nature": "Mild",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Dark Pulse",
+"Rock Slide",
+"Gunk Shot",
+"Ice Beam"
+],
+"regional_count": 1
+},
+"Talonflame#8": {
+"species": "Talonflame",
+"item": "Life Orb",
+"ability": "Gale Wings",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Dual Wingbeat",
+"Will-O-Wisp",
+"Tailwind",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Swampert#8": {
+"species": "Swampert",
+"item": "Swampertite",
+"ability": "Torrent",
+"nature": "Modest",
+"evs": [
+32,
+0,
+17,
+16,
+0,
+1
+],
+"moves": [
+"Muddy Water",
+"Ice Beam",
+"Earth Power",
+"Protect"
+],
+"regional_count": 1
+},
+"Venusaur#12": {
+"species": "Venusaur",
+"item": "Focus Sash",
+"ability": "Chlorophyll",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Sludge Bomb",
+"Energy Ball",
+"Sleep Powder",
+"Protect"
+],
+"regional_count": 1
+},
+"Gholdengo#20": {
+"species": "Gholdengo",
+"item": "Life Orb",
+"ability": "Good as Gold",
+"nature": "Modest",
+"evs": [
+17,
+0,
+0,
+17,
+0,
+32
+],
+"moves": [
+"Make It Rain",
+"Shadow Ball",
+"Protect",
+"Focus Blast"
+],
+"regional_count": 1
+},
+"Farigiraf#79": {
+"species": "Farigiraf",
+"item": "Silk Scarf",
+"ability": "Armor Tail",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Psychic",
+"Trick Room",
+"Imprison",
+"Hyper Voice"
+],
+"regional_count": 1
+},
+"Watchog#1": {
+"species": "Watchog",
+"item": "Chople Berry",
+"ability": "Analytic",
+"nature": "Impish",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Ice Punch",
+"Detect",
+"Low Kick",
+"Thunder Wave"
+],
+"regional_count": 1
+},
+"M-Charizard Y#23": {
+"species": "Charizard",
+"item": "Charizardite Y",
+"ability": "Blaze",
+"nature": "Modest",
+"evs": [
+28,
+0,
+13,
+1,
+0,
+24
+],
+"moves": [
+"Heat Wave",
+"Ancient Power",
+"Focus Blast",
+"Protect"
+],
+"regional_count": 1
+},
+"Pelipper#38": {
+"species": "Pelipper",
+"item": "",
+"ability": "Drizzle",
+"nature": "Bold",
+"evs": [
+31,
+0,
+0,
+0,
+24,
+11
+],
+"moves": [
+"Hurricane",
+"Helping Hand",
+"Wide Guard",
+"Tailwind"
+],
+"regional_count": 1
+},
+"Annihilape#17": {
+"species": "Annihilape",
+"item": "Leftovers",
+"ability": "Defiant",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Drain Punch",
+"Rage Fist",
+"Bulk Up",
+"Protect"
+],
+"regional_count": 1
+},
+"Swampert#7": {
+"species": "Swampert",
+"item": "Sitrus Berry",
+"ability": "Torrent",
+"nature": "Careful",
+"evs": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"moves": [
+"High Horsepower",
+"Wave Crash",
+"Yawn",
+"Wide Guard"
+],
+"regional_count": 1
+},
+"Volcarona#40": {
+"species": "Volcarona",
+"item": "Rocky Helmet",
+"ability": "Flame Body",
+"nature": "Calm",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Heat Wave",
+"Struggle Bug",
+"Rage Powder",
+"Protect"
+],
+"regional_count": 1
+},
+"Sinistcha-Masterpiece#1": {
+"species": "Sinistcha-Masterpiece",
+"item": "Colbur Berry",
+"ability": "Hospitality",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Matcha Gotcha",
+"Shadow Ball",
+"Rage Powder",
+"Protect"
+],
+"regional_count": 1
+},
+"Sneasler#91": {
+"species": "Sneasler",
+"item": "Focus Sash",
+"ability": "Unburden",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Fake Out",
+"Dire Claw",
+"Rock Slide",
+"Close Combat"
+],
+"regional_count": 1
+},
+"Rillaboom#57": {
+"species": "Rillaboom",
+"item": "Eject Button",
+"ability": "Grassy Surge",
+"nature": "Careful",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Fake Out",
+"Grassy Glide",
+"Wood Hammer",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Delphox#7": {
+"species": "Delphox",
+"item": "Delphoxite",
+"ability": "Blaze",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Heat Wave",
+"Psychic",
+"Nasty Plot",
+"Protect"
+],
+"regional_count": 2
+},
+"Sinistcha-Masterpiece#2": {
+"species": "Sinistcha-Masterpiece",
+"item": "Colbur Berry",
+"ability": "Hospitality",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Matcha Gotcha",
+"Rage Powder",
+"Trick Room",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Gardevoir#21": {
+"species": "Gardevoir",
+"item": "Gardevoirite",
+"ability": "Synchronize",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Hyper Voice",
+"Expanding Force",
+"Thunderbolt",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Venusaur#13": {
+"species": "Venusaur",
+"item": "Life Orb",
+"ability": "Chlorophyll",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Sludge Bomb",
+"Leaf Storm",
+"Weather Ball",
+"Sleep Powder"
+],
+"regional_count": 1
+},
+"Politoed#19": {
+"species": "Politoed",
+"item": "Mystic Water",
+"ability": "Drizzle",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"moves": [
+"Protect",
+"Muddy Water",
+"Weather Ball",
+"Ice Beam"
+],
+"regional_count": 1
+},
+"Samurott-Hisui#1": {
+"species": "Samurott-Hisui",
+"item": "Focus Sash",
+"ability": "Sharpness",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Detect",
+"Aqua Cutter",
+"Sacred Sword",
+"Night Slash"
+],
+"regional_count": 1
+},
+"Politoed#22": {
+"species": "Politoed",
+"item": "Sitrus Berry",
+"ability": "Drizzle",
+"nature": "Calm",
+"evs": [
+32,
+0,
+24,
+0,
+7,
+3
+],
+"moves": [
+"Protect",
+"Perish Song",
+"Encore",
+"Muddy Water"
+],
+"regional_count": 1
+},
+"Incineroar#89": {
+"species": "Incineroar",
+"item": "Chople Berry",
+"ability": "Intimidate",
+"nature": "Sassy",
+"evs": [
+31,
+0,
+15,
+0,
+20,
+0
+],
+"moves": [
+"Protect",
+"Fake Out",
+"Darkest Lariat",
+"Parting Shot"
+],
+"regional_count": 1
+},
+"Annihilape#15": {
+"species": "Annihilape",
+"item": "Choice Scarf",
+"ability": "Defiant",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Close Combat",
+"Phantom Force",
+"Ice Punch",
+"U-turn"
+],
+"regional_count": 1
+},
+"Primarina#10": {
+"species": "Primarina",
+"item": "Life Orb",
+"ability": "Liquid Voice",
+"nature": "Modest",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Moonblast",
+"Calm Mind"
+],
+"regional_count": 2
+},
+"M-Camerupt#7": {
+"species": "Camerupt",
+"item": "Cameruptite",
+"ability": "Solid Rock",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"moves": [
+"Heat Wave",
+"Fire Blast",
+"Earth Power",
+"Ancient Power"
+],
+"regional_count": 1
+},
+"Farigiraf#91": {
+"species": "Farigiraf",
+"item": "Wise Glasses",
+"ability": "Armor Tail",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Expanding Force",
+"Thunderbolt",
+"Sunny Day",
+"Trick Room"
+],
+"regional_count": 1
+},
+"M-Gardevoir#28": {
+"species": "Gardevoir",
+"item": "Gardevoirite",
+"ability": "Trace",
+"nature": "Quiet",
+"evs": [
+30,
+0,
+9,
+27,
+0,
+0
+],
+"moves": [
+"Hyper Voice",
+"Expanding Force",
+"Calm Mind",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Salamence#26": {
+"species": "Salamence",
+"item": "Salamencite",
+"ability": "Intimidate",
+"nature": "Hasty",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Draco Meteor",
+"Double-Edge",
+"Hyper Voice",
+"Protect"
+],
+"regional_count": 1
+},
+"Rillaboom#60": {
+"species": "Rillaboom",
+"item": "Focus Sash",
+"ability": "Grassy Surge",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Fake Out",
+"Wood Hammer",
+"Grassy Glide",
+"High Horsepower"
+],
+"regional_count": 1
+},
+"Garchomp#35": {
+"species": "Garchomp",
+"item": "Rocky Helmet",
+"ability": "Rough Skin",
+"nature": "Careful",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Stomping Tantrum",
+"Rock Slide",
+"Dragon Claw",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Garchomp Z#15": {
+"species": "Garchomp",
+"item": "Garchompite Z",
+"ability": "Rough Skin",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Dragon Pulse",
+"Power Gem",
+"Substitute",
+"Protect"
+],
+"regional_count": 2
+},
+"Incineroar#83": {
+"species": "Incineroar",
+"item": "Black Glasses",
+"ability": "Intimidate",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Flare Blitz",
+"Darkest Lariat",
+"Parting Shot",
+"Fake Out"
+],
+"regional_count": 1
+},
+"Gliscor#2": {
+"species": "Gliscor",
+"item": "Life Orb",
+"ability": "Hyper Cutter",
+"nature": "Jolly",
+"evs": [
+1,
+32,
+0,
+0,
+1,
+32
+],
+"moves": [
+"Protect",
+"High Horsepower",
+"Rock Slide",
+"Tailwind"
+],
+"regional_count": 1
+},
+"Torkoal#10": {
+"species": "Torkoal",
+"item": "Charcoal",
+"ability": "Drought",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Eruption",
+"Flamethrower",
+"Solar Beam",
+"Protect"
+],
+"regional_count": 2
+},
+"Indeedee-F#49": {
+"species": "Indeedee-F",
+"item": "Psychic Seed",
+"ability": "Psychic Surge",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Follow Me",
+"Trick Room",
+"Protect",
+"Mystical Fire"
+],
+"regional_count": 1
+},
+"Rotom-Heat#5": {
+"species": "Rotom-Heat",
+"item": "Choice Scarf",
+"ability": "Levitate",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Volt Switch",
+"Overheat",
+"Discharge",
+"Trick"
+],
+"regional_count": 1
+},
+"Basculegion#23": {
+"species": "Basculegion",
+"item": "Choice Scarf",
+"ability": "Adaptability",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Last Respects",
+"Wave Crash",
+"Icy Wind",
+"Soak"
+],
+"regional_count": 1
+},
+"M-Garchomp Z#17": {
+"species": "Garchomp",
+"item": "Garchompite Z",
+"ability": "Rough Skin",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Draco Meteor",
+"Dragon Pulse",
+"Power Gem",
+"Protect"
+],
+"regional_count": 1
+},
+"Indeedee-F#50": {
+"species": "Indeedee-F",
+"item": "Rocky Helmet",
+"ability": "Psychic Surge",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Imprison",
+"Helping Hand",
+"Trick Room",
+"Follow Me"
+],
+"regional_count": 1
+},
+"Maushold-Four#1": {
+"species": "Maushold-Four",
+"item": "Wide Lens",
+"ability": "Technician",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Population Bomb",
+"Feint",
+"Follow Me"
+],
+"regional_count": 1
+},
+"M-Salamence#30": {
+"species": "Salamence",
+"item": "Salamencite",
+"ability": "Intimidate",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Tailwind",
+"Hurricane",
+"Draco Meteor"
+],
+"regional_count": 1
+},
+"Archaludon#23": {
+"species": "Archaludon",
+"item": "Leftovers",
+"ability": "Stamina",
+"nature": "Calm",
+"evs": [
+32,
+0,
+1,
+1,
+21,
+11
+],
+"moves": [
+"Protect",
+"Aura Sphere",
+"Electro Shot",
+"Dragon Pulse"
+],
+"regional_count": 1
+},
+"M-Clefable#1": {
+"species": "Clefable",
+"item": "Clefablite",
+"ability": "Unaware",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Protect",
+"Follow Me",
+"Helping Hand",
+"Moonblast"
+],
+"regional_count": 1
+},
+"Krookodile#3": {
+"species": "Krookodile",
+"item": "Choice Scarf",
+"ability": "Intimidate",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Crunch",
+"Earthquake",
+"High Horsepower",
+"Rock Tomb"
+],
+"regional_count": 1
+},
+"Overqwil#4": {
+"species": "Overqwil",
+"item": "Life Orb",
+"ability": "Swift Swim",
+"nature": "Adamant",
+"evs": [
+1,
+32,
+0,
+0,
+1,
+32
+],
+"moves": [
+"Protect",
+"Liquidation",
+"Throat Chop",
+"Poison Jab"
+],
+"regional_count": 1
+},
+"Pelipper#27": {
+"species": "Pelipper",
+"item": "Damp Rock",
+"ability": "Drizzle",
+"nature": "Bold",
+"evs": [
+31,
+0,
+0,
+0,
+24,
+11
+],
+"moves": [
+"Wide Guard",
+"Tailwind",
+"Hurricane",
+"Weather Ball"
+],
+"regional_count": 1
+},
+"M-Froslass#10": {
+"species": "Froslass",
+"item": "Froslassite",
+"ability": "Snow Cloak",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Blizzard",
+"Shadow Ball",
+"Aurora Veil",
+"Protect"
+],
+"regional_count": 1
+},
+"Primarina#14": {
+"species": "Primarina",
+"item": "Life Orb",
+"ability": "Liquid Voice",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"moves": [
+"Moonblast",
+"Hyper Voice",
+"Dazzling Gleam",
+"Protect"
+],
+"regional_count": 1
+},
+"Sylveon#20": {
+"species": "Sylveon",
+"item": "Kebia Berry",
+"ability": "Pixilate",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Detect",
+"Hyper Voice",
+"Hyper Beam",
+"Quick Attack"
+],
+"regional_count": 1
+},
+"Annihilape#12": {
+"species": "Annihilape",
+"item": "Choice Scarf",
+"ability": "Defiant",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Shadow Claw",
+"Close Combat",
+"Rock Tomb",
+"U-turn"
+],
+"regional_count": 2
+},
+"Kommo-o#16": {
+"species": "Kommo-o",
+"item": "Life Orb",
+"ability": "Soundproof",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Aura Sphere",
+"Clanging Scales",
+"Draco Meteor"
+],
+"regional_count": 1
+},
+"Milotic#54": {
+"species": "Milotic",
+"item": "Sitrus Berry",
+"ability": "Competitive",
+"nature": "Calm",
+"evs": [
+32,
+0,
+29,
+0,
+5,
+0
+],
+"moves": [
+"Hydro Pump",
+"Coil",
+"Hypnosis",
+"Protect"
+],
+"regional_count": 1
+},
+"Incineroar#85": {
+"species": "Incineroar",
+"item": "Chople Berry",
+"ability": "Intimidate",
+"nature": "Careful",
+"evs": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"moves": [
+"Flare Blitz",
+"Darkest Lariat",
+"Fake Out",
+"Parting Shot"
+],
+"regional_count": 1
+},
+"Sneasler#90": {
+"species": "Sneasler",
+"item": "Focus Sash",
+"ability": "Poison Touch",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Fake Out",
+"Close Combat",
+"Poison Jab",
+"Rock Tomb"
+],
+"regional_count": 1
+},
+"M-Delphox#8": {
+"species": "Delphox",
+"item": "Delphoxite",
+"ability": "Blaze",
+"nature": "Timid",
+"evs": [
+9,
+0,
+14,
+11,
+0,
+32
+],
+"moves": [
+"Protect",
+"Heat Wave",
+"Psyshock",
+"Calm Mind"
+],
+"regional_count": 1
+},
+"Volcarona#38": {
+"species": "Volcarona",
+"item": "Sitrus Berry",
+"ability": "Flame Body",
+"nature": "Calm",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Struggle Bug",
+"Overheat",
+"Rage Powder",
+"Protect"
+],
+"regional_count": 4
+},
+"Farigiraf#69": {
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Trick Room",
+"Psychic",
+"Helping Hand"
+],
+"regional_count": 3
+},
+"Incineroar#96": {
+"species": "Incineroar",
+"item": "Leftovers",
+"ability": "Intimidate",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Flare Blitz",
+"Parting Shot",
+"Fake Out",
+"Snarl"
+],
+"regional_count": 1
+},
+"Clefable#3": {
+"species": "Clefable",
+"item": "Sitrus Berry",
+"ability": "Unaware",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Protect",
+"Follow Me",
+"Helping Hand",
+"Moonblast"
+],
+"regional_count": 1
+},
+"M-Garchomp#4": {
+"species": "Garchomp",
+"item": "Garchompite",
+"ability": "Rough Skin",
+"nature": "Modest",
+"evs": [
+10,
+0,
+0,
+30,
+0,
+26
+],
+"moves": [
+"Protect",
+"Earth Power",
+"Dragon Pulse",
+"Power Gem"
+],
+"regional_count": 1
+},
+"Overqwil#3": {
+"species": "Overqwil",
+"item": "Life Orb",
+"ability": "Swift Swim",
+"nature": "Adamant",
+"evs": [
+1,
+32,
+0,
+0,
+1,
+32
+],
+"moves": [
+"Throat Chop",
+"Gunk Shot",
+"Liquidation",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Salamence#24": {
+"species": "Salamence",
+"item": "Salamencite",
+"ability": "Intimidate",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Hyper Voice",
+"Draco Meteor",
+"Flamethrower",
+"Tailwind"
+],
+"regional_count": 2
+},
+"Sneasler#99": {
+"species": "Sneasler",
+"item": "White Herb",
+"ability": "Unburden",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Close Combat",
+"Gunk Shot",
+"Rock Slide",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Gardevoir#23": {
+"species": "Gardevoir",
+"item": "Gardevoirite",
+"ability": "Telepathy",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Psychic",
+"Expanding Force"
+],
+"regional_count": 1
+},
+"Farigiraf#84": {
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Psychic",
+"Helping Hand",
+"Trick Room",
+"Protect"
+],
+"regional_count": 1
+},
+"Garchomp#36": {
+"species": "Garchomp",
+"item": "Soft Sand",
+"ability": "Rough Skin",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Earthquake",
+"Dragon Claw",
+"Stomping Tantrum"
+],
+"regional_count": 1
+},
+"Indeedee#31": {
+"species": "Indeedee",
+"item": "Choice Scarf",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Expanding Force",
+"Trick Room",
+"Imprison",
+"Trick"
+],
+"regional_count": 1
+},
+"Annihilape#16": {
+"species": "Annihilape",
+"item": "Choice Scarf",
+"ability": "Defiant",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Close Combat",
+"Shadow Claw",
+"Rock Slide",
+"U-turn"
+],
+"regional_count": 1
+},
+"M-Dragonite#11": {
+"species": "Dragonite",
+"item": "Dragoninite",
+"ability": "Multiscale",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Dragon Pulse",
+"Thunderbolt",
+"Tailwind",
+"Protect"
+],
+"regional_count": 1
+},
+"Ninetales#3": {
+"species": "Ninetales",
+"item": "Focus Sash",
+"ability": "Drought",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Weather Ball",
+"Snarl",
+"Helping Hand",
+"Protect"
+],
+"regional_count": 1
+},
+"Rillaboom#59": {
+"species": "Rillaboom",
+"item": "Expert Belt",
+"ability": "Grassy Surge",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Wood Hammer",
+"Grassy Glide",
+"High Horsepower",
+"Fake Out"
+],
+"regional_count": 1
+},
+"M-Gardevoir#25": {
+"species": "Gardevoir",
+"item": "Gardevoirite",
+"ability": "Trace",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Psyshock",
+"Expanding Force",
+"Hyper Voice"
+],
+"regional_count": 1
+},
+"Swampert#6": {
+"species": "Swampert",
+"item": "Sitrus Berry",
+"ability": "Torrent",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Protect",
+"Ice Punch",
+"High Horsepower",
+"Wave Crash"
+],
+"regional_count": 1
+},
+"Whimsicott#24": {
+"species": "Whimsicott",
+"item": "Focus Sash",
+"ability": "Prankster",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Moonblast",
+"Tailwind",
+"Light Screen",
+"Sunny Day"
+],
+"regional_count": 1
+},
+"M-Swampert#6": {
+"species": "Swampert",
+"item": "Swampertite",
+"ability": "Damp",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Wave Crash",
+"High Horsepower",
+"Ice Punch",
+"Protect"
+],
+"regional_count": 1
+},
+"Meowscarada#1": {
+"species": "Meowscarada",
+"item": "Choice Scarf",
+"ability": "Protean",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Flower Trick",
+"Knock Off",
+"Triple Axel",
+"U-turn"
+],
+"regional_count": 1
+},
+"Farigiraf#82": {
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"nature": "Bold",
+"evs": [
+27,
+0,
+20,
+0,
+19,
+0
+],
+"moves": [
+"Twin Beam",
+"Thunderbolt",
+"Nasty Plot",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Kingambit#36": {
+"species": "Kingambit",
+"item": "Occa Berry",
+"ability": "Defiant",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Kowtow Cleave",
+"Sucker Punch",
+"Iron Head",
+"Rock Tomb"
+],
+"regional_count": 1
+},
+"Rillaboom#67": {
+"species": "Rillaboom",
+"item": "Sitrus Berry",
+"ability": "Grassy Surge",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Wood Hammer",
+"Grassy Glide",
+"Low Kick",
+"Fake Out"
+],
+"regional_count": 1
+},
+"Volcarona#39": {
+"species": "Volcarona",
+"item": "Focus Sash",
+"ability": "Flame Body",
+"nature": "Timid",
+"evs": [
+32,
+0,
+11,
+0,
+0,
+23
+],
+"moves": [
+"Heat Wave",
+"Tailwind",
+"Rage Powder",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Gardevoir#26": {
+"species": "Gardevoir",
+"item": "Gardevoirite",
+"ability": "Trace",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Hyper Voice",
+"Psychic",
+"Mystical Fire",
+"Protect"
+],
+"regional_count": 1
+},
+"Incineroar#100": {
+"species": "Incineroar",
+"item": "Sitrus Berry",
+"ability": "Intimidate",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Fake Out",
+"Flare Blitz",
+"Parting Shot",
+"Protect"
+],
+"regional_count": 1
+},
+"Rillaboom#62": {
+"species": "Rillaboom",
+"item": "Life Orb",
+"ability": "Grassy Surge",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"High Horsepower",
+"Wood Hammer",
+"Grassy Glide",
+"Protect"
+],
+"regional_count": 1
+},
+"Farigiraf#70": {
+"species": "Farigiraf",
+"item": "Colbur Berry",
+"ability": "Armor Tail",
+"nature": "Bold",
+"evs": [
+27,
+0,
+20,
+0,
+19,
+0
+],
+"moves": [
+"Psychic",
+"Helping Hand",
+"Trick Room",
+"Protect"
+],
+"regional_count": 1
+},
+"Politoed#18": {
+"species": "Politoed",
+"item": "Mystic Water",
+"ability": "Drizzle",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Ice Beam",
+"Muddy Water",
+"Weather Ball",
+"Protect"
+],
+"regional_count": 1
+},
+"Milotic#55": {
+"species": "Milotic",
+"item": "Sitrus Berry",
+"ability": "Competitive",
+"nature": "Calm",
+"evs": [
+32,
+0,
+29,
+0,
+5,
+0
+],
+"moves": [
+"Scald",
+"Light Screen",
+"Ice Beam",
+"Protect"
+],
+"regional_count": 1
+},
+"Indeedee#35": {
+"species": "Indeedee",
+"item": "Twisted Spoon",
+"ability": "Psychic Surge",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Expanding Force",
+"Trick Room",
+"Imprison"
+],
+"regional_count": 1
+},
+"M-Kangaskhan#3": {
+"species": "Kangaskhan",
+"item": "Kangaskhanite",
+"ability": "Scrappy",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Fake Out",
+"Double-Edge",
+"Rock Tomb",
+"Hammer Arm"
+],
+"regional_count": 1
+},
+"Kingambit#32": {
+"species": "Kingambit",
+"item": "Black Glasses",
+"ability": "Defiant",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Kowtow Cleave",
+"Sucker Punch",
+"Low Kick",
+"Protect"
+],
+"regional_count": 1
+},
+"Farigiraf#85": {
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Expanding Force",
+"Helping Hand",
+"Protect",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Indeedee-F#52": {
+"species": "Indeedee-F",
+"item": "Sitrus Berry",
+"ability": "Psychic Surge",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Psychic",
+"Follow Me",
+"Helping Hand",
+"Protect"
+],
+"regional_count": 1
+},
+"Venusaur#14": {
+"species": "Venusaur",
+"item": "Life Orb",
+"ability": "Chlorophyll",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Sludge Bomb",
+"Solar Beam",
+"Sleep Powder",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Salamence#28": {
+"species": "Salamence",
+"item": "Salamencite",
+"ability": "Intimidate",
+"nature": "Naive",
+"evs": [
+1,
+21,
+0,
+15,
+0,
+29
+],
+"moves": [
+"Hyper Voice",
+"Draco Meteor",
+"Double-Edge",
+"Protect"
+],
+"regional_count": 1
+},
+"Volcarona#43": {
+"species": "Volcarona",
+"item": "Sitrus Berry",
+"ability": "Flame Body",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Heat Wave",
+"Whirlwind",
+"Rage Powder",
+"Protect"
+],
+"regional_count": 1
+},
+"Aegislash#5": {
+"species": "Aegislash",
+"item": "Leftovers",
+"ability": "Stance Change",
+"nature": "Modest",
+"evs": [
+32,
+0,
+1,
+15,
+7,
+11
+],
+"moves": [
+"Shadow Ball",
+"Flash Cannon",
+"Wide Guard",
+"King's Shield"
+],
+"regional_count": 1
+},
+"M-Metagross#20": {
+"species": "Metagross",
+"item": "Metagrossite",
+"ability": "Clear Body",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Bullet Punch",
+"Psychic Fangs",
+"Stomping Tantrum",
+"Protect"
+],
+"regional_count": 1
+},
+"Tyranitar#8": {
+"species": "Tyranitar",
+"item": "Focus Sash",
+"ability": "Sand Stream",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Rock Slide",
+"Knock Off",
+"Low Kick",
+"Protect"
+],
+"regional_count": 1
+},
+"Venusaur#8": {
+"species": "Venusaur",
+"item": "Focus Sash",
+"ability": "Chlorophyll",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Leaf Storm",
+"Sludge Bomb",
+"Earth Power",
+"Sleep Powder"
+],
+"regional_count": 2
+},
+"Volcarona#41": {
+"species": "Volcarona",
+"item": "Rocky Helmet",
+"ability": "Flame Body",
+"nature": "Modest",
+"evs": [
+21,
+0,
+15,
+5,
+1,
+24
+],
+"moves": [
+"Protect",
+"Heat Wave",
+"Bug Buzz",
+"Quiver Dance"
+],
+"regional_count": 1
+},
+"Archaludon#21": {
+"species": "Archaludon",
+"item": "Leftovers",
+"ability": "Stamina",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Electro Shot",
+"Flash Cannon",
+"Protect",
+"Draco Meteor"
+],
+"regional_count": 2
+},
+"M-Lopunny#4": {
+"species": "Lopunny",
+"item": "Lopunnite",
+"ability": "Limber",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Close Combat",
+"Fake Out",
+"Triple Axel"
+],
+"regional_count": 1
+},
+"Armarouge#23": {
+"species": "Armarouge",
+"item": "Life Orb",
+"ability": "Flash Fire",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Heat Wave",
+"Expanding Force",
+"Protect",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Milotic#53": {
+"species": "Milotic",
+"item": "Psychic Seed",
+"ability": "Competitive",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Muddy Water",
+"Ice Beam",
+"Coil",
+"Hypnosis"
+],
+"regional_count": 1
+},
+"Garchomp#32": {
+"species": "Garchomp",
+"item": "Choice Scarf",
+"ability": "Rough Skin",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Stomping Tantrum",
+"Dragon Claw",
+"Rock Slide",
+"Poison Jab"
+],
+"regional_count": 1
+},
+"Sinistcha#24": {
+"species": "Sinistcha",
+"item": "Kasib Berry",
+"ability": "Hospitality",
+"nature": "Bold",
+"evs": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"moves": [
+"Matcha Gotcha",
+"Shadow Ball",
+"Rage Powder",
+"Protect"
+],
+"regional_count": 1
+},
+"Milotic#48": {
+"species": "Milotic",
+"item": "Grassy Seed",
+"ability": "Competitive",
+"nature": "Modest",
+"evs": [
+32,
+0,
+11,
+10,
+0,
+13
+],
+"moves": [
+"Muddy Water",
+"Ice Beam",
+"Icy Wind",
+"Protect"
+],
+"regional_count": 1
+},
+"Lycanroc-Dusk#3": {
+"species": "Lycanroc-Dusk",
+"item": "Focus Sash",
+"ability": "Tough Claws",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Close Combat",
+"Accelerock",
+"Rock Slide"
+],
+"regional_count": 1
+},
+"Garchomp#33": {
+"species": "Garchomp",
+"item": "Life Orb",
+"ability": "Rough Skin",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Dragon Claw",
+"Stomping Tantrum",
+"Earthquake",
+"Rock Slide"
+],
+"regional_count": 1
+},
+"M-Gardevoir#22": {
+"species": "Gardevoir",
+"item": "Gardevoirite",
+"ability": "Telepathy",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Hyper Voice",
+"Expanding Force",
+"Mystical Fire",
+"Protect"
+],
+"regional_count": 1
+},
+"Dragapult#19": {
+"species": "Dragapult",
+"item": "Focus Sash",
+"ability": "Clear Body",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Dragon Darts",
+"Phantom Force",
+"U-turn",
+"Protect"
+],
+"regional_count": 1
+},
+"Kommo-o#17": {
+"species": "Kommo-o",
+"item": "Life Orb",
+"ability": "Soundproof",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Clanging Scales",
+"Aura Sphere",
+"Vacuum Wave"
+],
+"regional_count": 1
+},
+"Armarouge#20": {
+"species": "Armarouge",
+"item": "Focus Sash",
+"ability": "Weak Armor",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Armor Cannon",
+"Wide Guard",
+"Expanding Force"
+],
+"regional_count": 2
+},
+"M-Gardevoir#29": {
+"species": "Gardevoir",
+"item": "Gardevoirite",
+"ability": "Trace",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Expanding Force",
+"Shadow Ball",
+"Hyper Voice",
+"Protect"
+],
+"regional_count": 1
+},
+"Talonflame#5": {
+"species": "Talonflame",
+"item": "Expert Belt",
+"ability": "Gale Wings",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Flare Blitz",
+"Brave Bird",
+"Tailwind"
+],
+"regional_count": 2
+},
+"M-Gardevoir#30": {
+"species": "Gardevoir",
+"item": "Gardevoirite",
+"ability": "Trace",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Expanding Force",
+"Thunderbolt"
+],
+"regional_count": 1
+},
+"Garchomp#30": {
+"species": "Garchomp",
+"item": "Focus Sash",
+"ability": "Rough Skin",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Dragon Claw",
+"Stomping Tantrum",
+"Rock Slide",
+"Protect"
+],
+"regional_count": 2
+},
+"Incineroar#82": {
+"species": "Incineroar",
+"item": "Chople Berry",
+"ability": "Intimidate",
+"nature": "Impish",
+"evs": [
+32,
+0,
+20,
+0,
+14,
+0
+],
+"moves": [
+"Throat Chop",
+"Flare Blitz",
+"Fake Out",
+"Parting Shot"
+],
+"regional_count": 2
+},
+"M-Charizard Y#27": {
+"species": "Charizard",
+"item": "Charizardite Y",
+"ability": "Solar Power",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Heat Wave",
+"Weather Ball",
+"Dragon Pulse",
+"Protect"
+],
+"regional_count": 1
+},
+"Basculegion#26": {
+"species": "Basculegion",
+"item": "Grassy Seed",
+"ability": "Adaptability",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Last Respects",
+"Protect",
+"Wave Crash",
+"Aqua Jet"
+],
+"regional_count": 1
+},
+"Talonflame#10": {
+"species": "Talonflame",
+"item": "Sharp Beak",
+"ability": "Gale Wings",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Overheat",
+"Air Slash",
+"Tailwind",
+"Protect"
+],
+"regional_count": 1
+},
+"Kommo-o#14": {
+"species": "Kommo-o",
+"item": "Dragon Fang",
+"ability": "Soundproof",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Clanging Scales",
+"Aura Sphere",
+"Clangorous Soul",
+"Protect"
+],
+"regional_count": 1
+},
+"Indeedee-F#53": {
+"species": "Indeedee-F",
+"item": "Sitrus Berry",
+"ability": "Psychic Surge",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Psychic",
+"Follow Me",
+"Helping Hand",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Dragapult#18": {
+"species": "Dragapult",
+"item": "Life Orb",
+"ability": "Clear Body",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Dragon Pulse",
+"Shadow Ball",
+"Will-O-Wisp",
+"Protect"
+],
+"regional_count": 2
+},
+"Sylveon#14": {
+"species": "Sylveon",
+"item": "Fairy Feather",
+"ability": "Pixilate",
+"nature": "Modest",
+"evs": [
+9,
+0,
+22,
+20,
+0,
+15
+],
+"moves": [
+"Detect",
+"Calm Mind",
+"Hyper Voice",
+"Quick Attack"
+],
+"regional_count": 1
+},
+"Sinistcha#27": {
+"species": "Sinistcha",
+"item": "Rocky Helmet",
+"ability": "Hospitality",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+2,
+0,
+0
+],
+"moves": [
+"Matcha Gotcha",
+"Trick Room",
+"Rage Powder",
+"Protect"
+],
+"regional_count": 1
+},
+"Sneasler#92": {
+"species": "Sneasler",
+"item": "Grassy Seed",
+"ability": "Unburden",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Close Combat",
+"Dire Claw",
+"Taunt"
+],
+"regional_count": 1
+},
+"Tyranitar#7": {
+"species": "Tyranitar",
+"item": "Air Balloon",
+"ability": "Sand Stream",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Rock Slide",
+"Knock Off",
+"Protect",
+"Brick Break"
+],
+"regional_count": 1
+},
+"Indeedee#30": {
+"species": "Indeedee",
+"item": "Choice Scarf",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Imprison",
+"Expanding Force",
+"Hyper Voice",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Primarina#13": {
+"species": "Primarina",
+"item": "Life Orb",
+"ability": "Liquid Voice",
+"nature": "Modest",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Helping Hand",
+"Hyper Voice",
+"Moonblast",
+"Protect"
+],
+"regional_count": 1
+},
+"Milotic#56": {
+"species": "Milotic",
+"item": "Sitrus Berry",
+"ability": "Competitive",
+"nature": "Modest",
+"evs": [
+32,
+0,
+11,
+10,
+0,
+13
+],
+"moves": [
+"Scald",
+"Icy Wind",
+"Haze",
+"Protect"
+],
+"regional_count": 1
+},
+"Incineroar#81": {
+"species": "Incineroar",
+"item": "Charcoal",
+"ability": "Intimidate",
+"nature": "Impish",
+"evs": [
+32,
+0,
+20,
+0,
+14,
+0
+],
+"moves": [
+"Flare Blitz",
+"Parting Shot",
+"Close Combat",
+"Fake Out"
+],
+"regional_count": 2
+},
+"Sylveon#19": {
+"species": "Sylveon",
+"item": "Fairy Feather",
+"ability": "Pixilate",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Hyper Beam",
+"Yawn"
+],
+"regional_count": 1
+},
+"Venusaur#10": {
+"species": "Venusaur",
+"item": "Focus Sash",
+"ability": "Chlorophyll",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Leaf Storm",
+"Sleep Powder",
+"Sludge Bomb",
+"Protect"
+],
+"regional_count": 2
+},
+"Dragapult#17": {
+"species": "Dragapult",
+"item": "Life Orb",
+"ability": "Clear Body",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Draco Meteor",
+"Shadow Ball",
+"U-turn",
+"Protect"
+],
+"regional_count": 2
+},
+"Indeedee#27": {
+"species": "Indeedee",
+"item": "Focus Sash",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Expanding Force",
+"Mystical Fire",
+"Trick Room",
+"Imprison"
+],
+"regional_count": 2
+},
+"Farigiraf#75": {
+"species": "Farigiraf",
+"item": "Grassy Seed",
+"ability": "Armor Tail",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Psychic",
+"Thunderbolt",
+"Helping Hand",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Sylveon#21": {
+"species": "Sylveon",
+"item": "Leftovers",
+"ability": "Pixilate",
+"nature": "Modest",
+"evs": [
+9,
+0,
+22,
+20,
+0,
+15
+],
+"moves": [
+"Hyper Voice",
+"Calm Mind",
+"Detect",
+"Moonblast"
+],
+"regional_count": 1
+},
+"Milotic#47": {
+"species": "Milotic",
+"item": "Grassy Seed",
+"ability": "Competitive",
+"nature": "Calm",
+"evs": [
+32,
+0,
+29,
+0,
+5,
+0
+],
+"moves": [
+"Scald",
+"Ice Beam",
+"Dragon Tail",
+"Protect"
+],
+"regional_count": 1
+},
+"Incineroar#90": {
+"species": "Incineroar",
+"item": "Eject Button",
+"ability": "Intimidate",
+"nature": "Impish",
+"evs": [
+32,
+0,
+20,
+0,
+14,
+0
+],
+"moves": [
+"Parting Shot",
+"Protect",
+"Fake Out",
+"Flare Blitz"
+],
+"regional_count": 1
+},
+"Chesnaught#1": {
+"species": "Chesnaught",
+"item": "Life Orb",
+"ability": "Bulletproof",
+"nature": "Adamant",
+"evs": [
+32,
+23,
+0,
+0,
+11,
+0
+],
+"moves": [
+"Spiky Shield",
+"Wide Guard",
+"Close Combat",
+"Knock Off"
+],
+"regional_count": 1
+},
+"Garchomp#37": {
+"species": "Garchomp",
+"item": "",
+"ability": "Rough Skin",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Dragon Claw",
+"Stomping Tantrum",
+"Earthquake",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Staraptor#10": {
+"species": "Staraptor",
+"item": "Staraptite",
+"ability": "Intimidate",
+"nature": "Adamant",
+"evs": [
+32,
+4,
+0,
+0,
+0,
+30
+],
+"moves": [
+"Close Combat",
+"Dual Wingbeat",
+"Roost",
+"Protect"
+],
+"regional_count": 1
+},
+"Grimmsnarl#8": {
+"species": "Grimmsnarl",
+"item": "Light Clay",
+"ability": "Prankster",
+"nature": "Calm",
+"evs": [
+32,
+0,
+19,
+0,
+15,
+0
+],
+"moves": [
+"Reflect",
+"Light Screen",
+"Parting Shot",
+"Scary Face"
+],
+"regional_count": 1
+},
+"Pelipper#36": {
+"species": "Pelipper",
+"item": "Sitrus Berry",
+"ability": "Drizzle",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Hurricane",
+"Soak",
+"Tailwind",
+"Wide Guard"
+],
+"regional_count": 1
+},
+"M-Swampert#7": {
+"species": "Swampert",
+"item": "Swampertite",
+"ability": "Damp",
+"nature": "Mild",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Wave Crash",
+"Earth Power",
+"Ice Beam",
+"Protect"
+],
+"regional_count": 1
+},
+"Grimmsnarl#11": {
+"species": "Grimmsnarl",
+"item": "Light Clay",
+"ability": "Prankster",
+"nature": "Sassy",
+"evs": [
+29,
+0,
+22,
+0,
+15,
+0
+],
+"moves": [
+"Spirit Break",
+"Misty Terrain",
+"Light Screen",
+"Reflect"
+],
+"regional_count": 1
+},
+"Venusaur#11": {
+"species": "Venusaur",
+"item": "Focus Sash",
+"ability": "Chlorophyll",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Sludge Bomb",
+"Earth Power",
+"Leaf Storm",
+"Protect"
+],
+"regional_count": 1
+},
+"Farigiraf#83": {
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"nature": "Bold",
+"evs": [
+27,
+0,
+20,
+0,
+19,
+0
+],
+"moves": [
+"Roar",
+"Twin Beam",
+"Trick Room",
+"Thunderbolt"
+],
+"regional_count": 1
+},
+"Farigiraf#88": {
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Trick Room",
+"Helping Hand",
+"Psychic",
+"Sunny Day"
+],
+"regional_count": 1
+},
+"Kingambit#35": {
+"species": "Kingambit",
+"item": "Life Orb",
+"ability": "Defiant",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Kowtow Cleave",
+"Iron Head",
+"Sucker Punch",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Camerupt#6": {
+"species": "Camerupt",
+"item": "Cameruptite",
+"ability": "Solid Rock",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"moves": [
+"Eruption",
+"Earth Power",
+"Ancient Power",
+"Protect"
+],
+"regional_count": 1
+},
+"Politoed#23": {
+"species": "Politoed",
+"item": "Sitrus Berry",
+"ability": "Drizzle",
+"nature": "Calm",
+"evs": [
+32,
+0,
+24,
+0,
+7,
+3
+],
+"moves": [
+"Muddy Water",
+"Psych Up",
+"Perish Song",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Raichu X#5": {
+"species": "Raichu",
+"item": "Raichunite X",
+"ability": "Lightning Rod",
+"nature": "Timid",
+"evs": [
+32,
+0,
+2,
+0,
+0,
+32
+],
+"moves": [
+"Volt Switch",
+"Fake Out",
+"Light Screen",
+"Reflect"
+],
+"regional_count": 1
+},
+"Espathra#3": {
+"species": "Espathra",
+"item": "Electric Seed",
+"ability": "Speed Boost",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Lumina Crash",
+"Calm Mind",
+"Baton Pass",
+"Protect"
+],
+"regional_count": 2
+},
+"Incineroar#92": {
+"species": "Incineroar",
+"item": "Eject Button",
+"ability": "Intimidate",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Throat Chop",
+"Fake Out",
+"Parting Shot",
+"Protect"
+],
+"regional_count": 1
+},
+"Incineroar#101": {
+"species": "Incineroar",
+"item": "Sitrus Berry",
+"ability": "Intimidate",
+"nature": "Sassy",
+"evs": [
+31,
+0,
+15,
+0,
+20,
+0
+],
+"moves": [
+"Flare Blitz",
+"Snarl",
+"Fake Out",
+"Parting Shot"
+],
+"regional_count": 1
+},
+"Farigiraf#81": {
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"nature": "Bold",
+"evs": [
+27,
+0,
+20,
+0,
+19,
+0
+],
+"moves": [
+"Imprison",
+"Trick Room",
+"Psychic",
+"Protect"
+],
+"regional_count": 1
+},
+"Grimmsnarl#10": {
+"species": "Grimmsnarl",
+"item": "Light Clay",
+"ability": "Prankster",
+"nature": "Impish",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Taunt",
+"Parting Shot",
+"Reflect",
+"Light Screen"
+],
+"regional_count": 1
+},
+"Rillaboom#56": {
+"species": "Rillaboom",
+"item": "Eject Button",
+"ability": "Grassy Surge",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Fake Out",
+"Wood Hammer",
+"High Horsepower",
+"U-turn"
+],
+"regional_count": 1
+},
+"Rillaboom#65": {
+"species": "Rillaboom",
+"item": "Sitrus Berry",
+"ability": "Grassy Surge",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Grassy Glide",
+"High Horsepower",
+"Fake Out",
+"Brick Break"
+],
+"regional_count": 1
+},
+"M-Salamence#31": {
+"species": "Salamence",
+"item": "Salamencite",
+"ability": "Intimidate",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Dragon Pulse",
+"Heat Wave"
+],
+"regional_count": 1
+},
+"Kingambit#30": {
+"species": "Kingambit",
+"item": "Focus Sash",
+"ability": "Defiant",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Kowtow Cleave",
+"Sucker Punch",
+"Brick Break",
+"Iron Head"
+],
+"regional_count": 2
+},
+"Hydreigon#9": {
+"species": "Hydreigon",
+"item": "Choice Scarf",
+"ability": "Levitate",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Draco Meteor",
+"Dark Pulse",
+"Snarl",
+"Flamethrower"
+],
+"regional_count": 1
+},
+"Altaria#2": {
+"species": "Altaria",
+"item": "Haban Berry",
+"ability": "Cloud Nine",
+"nature": "Sassy",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Perish Song",
+"Helping Hand",
+"Will-O-Wisp",
+"Protect"
+],
+"regional_count": 1
+},
+"Vivillon#4": {
+"species": "Vivillon",
+"item": "Focus Sash",
+"ability": "Compound Eyes",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Sleep Powder",
+"Bug Buzz",
+"Rage Powder",
+"Protect"
+],
+"regional_count": 1
+},
+"Primarina#12": {
+"species": "Primarina",
+"item": "Leftovers",
+"ability": "Liquid Voice",
+"nature": "Modest",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Protect",
+"Perish Song",
+"Hyper Voice",
+"Moonblast"
+],
+"regional_count": 1
+},
+"Pelipper#34": {
+"species": "Pelipper",
+"item": "Sitrus Berry",
+"ability": "Drizzle",
+"nature": "Bold",
+"evs": [
+31,
+0,
+0,
+0,
+24,
+11
+],
+"moves": [
+"Protect",
+"Tailwind",
+"Weather Ball",
+"Hurricane"
+],
+"regional_count": 1
+},
+"M-Manectric#3": {
+"species": "Manectric",
+"item": "Manectite",
+"ability": "Lightning Rod",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Snarl",
+"Thunder",
+"Rain Dance"
+],
+"regional_count": 1
+},
+"Politoed#21": {
+"species": "Politoed",
+"item": "Sitrus Berry",
+"ability": "Drizzle",
+"nature": "Calm",
+"evs": [
+32,
+0,
+24,
+0,
+7,
+3
+],
+"moves": [
+"Protect",
+"Perish Song",
+"Weather Ball",
+"Dive"
+],
+"regional_count": 1
+},
+"M-Charizard Y#28": {
+"species": "Charizard",
+"item": "Charizardite Y",
+"ability": "Solar Power",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Heat Wave",
+"Weather Ball",
+"Hurricane",
+"Protect"
+],
+"regional_count": 1
+},
+"Annihilape#13": {
+"species": "Annihilape",
+"item": "Choice Scarf",
+"ability": "Defiant",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Rage Fist",
+"Close Combat",
+"Ice Punch",
+"Throat Chop"
+],
+"regional_count": 1
+},
+"Incineroar#97": {
+"species": "Incineroar",
+"item": "Passho Berry",
+"ability": "Intimidate",
+"nature": "Impish",
+"evs": [
+32,
+0,
+20,
+0,
+14,
+0
+],
+"moves": [
+"Fake Out",
+"Flare Blitz",
+"Snarl",
+"Parting Shot"
+],
+"regional_count": 1
+},
+"M-Raichu X#4": {
+"species": "Raichu",
+"item": "Raichunite X",
+"ability": "Lightning Rod",
+"nature": "Timid",
+"evs": [
+32,
+0,
+2,
+0,
+0,
+32
+],
+"moves": [
+"Fake Out",
+"Rising Voltage",
+"Helping Hand",
+"Protect"
+],
+"regional_count": 1
+},
+"Politoed#25": {
+"species": "Politoed",
+"item": "Sitrus Berry",
+"ability": "Drizzle",
+"nature": "Modest",
+"evs": [
+32,
+0,
+0,
+30,
+0,
+4
+],
+"moves": [
+"Muddy Water",
+"Weather Ball",
+"Psych Up",
+"Protect"
+],
+"regional_count": 1
+},
+"Grimmsnarl#12": {
+"species": "Grimmsnarl",
+"item": "Light Clay",
+"ability": "Prankster",
+"nature": "Sassy",
+"evs": [
+29,
+0,
+22,
+0,
+15,
+0
+],
+"moves": [
+"Protect",
+"Reflect",
+"Light Screen",
+"Spirit Break"
+],
+"regional_count": 1
+},
+"Sneasler#98": {
+"species": "Sneasler",
+"item": "White Herb",
+"ability": "Unburden",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Close Combat",
+"Dire Claw",
+"X-Scissor"
+],
+"regional_count": 1
+},
+"M-Froslass#11": {
+"species": "Froslass",
+"item": "Froslassite",
+"ability": "Snow Cloak",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Blizzard",
+"Protect",
+"Destiny Bond",
+"Shadow Ball"
+],
+"regional_count": 1
+},
+"Basculegion#21": {
+"species": "Basculegion",
+"item": "Choice Scarf",
+"ability": "Adaptability",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Wave Crash",
+"Aqua Jet",
+"Psychic Fangs",
+"Last Respects"
+],
+"regional_count": 1
+},
+"Indeedee#34": {
+"species": "Indeedee",
+"item": "Twisted Spoon",
+"ability": "Psychic Surge",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Hyper Voice",
+"Trick Room",
+"Protect",
+"Expanding Force"
+],
+"regional_count": 1
+},
+"Arcanine-H#10": {
+"species": "Arcanine-Hisui",
+"item": "Focus Sash",
+"ability": "Rock Head",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Wild Charge",
+"Head Smash",
+"Flare Blitz"
+],
+"regional_count": 1
+},
+"M-Dragonite#10": {
+"species": "Dragonite",
+"item": "Dragoninite",
+"ability": "Multiscale",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Tailwind",
+"Draco Meteor",
+"Heat Wave"
+],
+"regional_count": 1
+},
+"Indeedee#29": {
+"species": "Indeedee",
+"item": "Choice Scarf",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Trick",
+"Expanding Force",
+"Dazzling Gleam",
+"Mystical Fire"
+],
+"regional_count": 1
+},
+"Volcarona#44": {
+"species": "Volcarona",
+"item": "Sitrus Berry",
+"ability": "Flame Body",
+"nature": "Modest",
+"evs": [
+21,
+0,
+15,
+5,
+1,
+24
+],
+"moves": [
+"Heat Wave",
+"Rage Powder",
+"Bug Buzz",
+"Tailwind"
+],
+"regional_count": 1
+},
+"M-Golisopod#28": {
+"species": "Golisopod",
+"item": "Golisopite",
+"ability": "Emergency Exit",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Liquidation",
+"Leech Life",
+"Iron Head",
+"Wide Guard"
+],
+"regional_count": 1
+},
+"Mimikyu#1": {
+"species": "Mimikyu",
+"item": "Bright Powder",
+"ability": "Disguise",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Play Rough",
+"Light Screen",
+"Shadow Sneak",
+"Phantom Force"
+],
+"regional_count": 1
+},
+"Kommo-o#19": {
+"species": "Kommo-o",
+"item": "White Herb",
+"ability": "Soundproof",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Clanging Scales",
+"Clangorous Soul",
+"Aura Sphere",
+"Protect"
+],
+"regional_count": 1
+},
+"Jolteon#1": {
+"species": "Jolteon",
+"item": "Life Orb",
+"ability": "Volt Absorb",
+"nature": "Modest",
+"evs": [
+26,
+0,
+0,
+32,
+0,
+8
+],
+"moves": [
+"Thunderbolt",
+"Shadow Ball",
+"Fake Tears",
+"Detect"
+],
+"regional_count": 1
+},
+"Grimmsnarl#7": {
+"species": "Grimmsnarl",
+"item": "Light Clay",
+"ability": "Prankster",
+"nature": "Calm",
+"evs": [
+32,
+0,
+19,
+0,
+15,
+0
+],
+"moves": [
+"Foul Play",
+"Reflect",
+"Light Screen",
+"Parting Shot"
+],
+"regional_count": 2
+},
+"Sinistcha#29": {
+"species": "Sinistcha",
+"item": "Sitrus Berry",
+"ability": "Hospitality",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+2,
+0,
+0
+],
+"moves": [
+"Matcha Gotcha",
+"Protect",
+"Rage Powder",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Farigiraf#74": {
+"species": "Farigiraf",
+"item": "Grassy Seed",
+"ability": "Armor Tail",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Psychic Noise",
+"Thunderbolt",
+"Helping Hand",
+"Trick Room"
+],
+"regional_count": 1
+},
+"M-Charizard Y#22": {
+"species": "Charizard",
+"item": "Charizardite Y",
+"ability": "Blaze",
+"nature": "Calm",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Weather Ball",
+"Solar Beam",
+"Heat Wave",
+"Protect"
+],
+"regional_count": 1
+},
+"Incineroar#91": {
+"species": "Incineroar",
+"item": "Eject Button",
+"ability": "Intimidate",
+"nature": "Impish",
+"evs": [
+32,
+0,
+20,
+0,
+14,
+0
+],
+"moves": [
+"Fake Out",
+"Throat Chop",
+"Parting Shot",
+"Protect"
+],
+"regional_count": 1
+},
+"Sylveon#15": {
+"species": "Sylveon",
+"item": "Fairy Feather",
+"ability": "Pixilate",
+"nature": "Modest",
+"evs": [
+9,
+0,
+22,
+20,
+0,
+15
+],
+"moves": [
+"Hyper Voice",
+"Quick Attack",
+"Calm Mind",
+"Protect"
+],
+"regional_count": 1
+},
+"Kingambit#33": {
+"species": "Kingambit",
+"item": "Chople Berry",
+"ability": "Supreme Overlord",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Kowtow Cleave",
+"Sucker Punch",
+"Protect",
+"Iron Head"
+],
+"regional_count": 1
+},
+"M-Charizard Y#26": {
+"species": "Charizard",
+"item": "Charizardite Y",
+"ability": "Solar Power",
+"nature": "Modest",
+"evs": [
+28,
+0,
+13,
+1,
+0,
+24
+],
+"moves": [
+"Heat Wave",
+"Solar Beam",
+"Roar",
+"Protect"
+],
+"regional_count": 1
+},
+"Dragapult#21": {
+"species": "Dragapult",
+"item": "Life Orb",
+"ability": "Clear Body",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Dragon Darts",
+"Sucker Punch",
+"Dragon Claw",
+"Phantom Force"
+],
+"regional_count": 1
+},
+"M-Raichu Y#13": {
+"species": "Raichu",
+"item": "Raichunite Y",
+"ability": "Lightning Rod",
+"nature": "Timid",
+"evs": [
+32,
+0,
+11,
+0,
+0,
+23
+],
+"moves": [
+"Zap Cannon",
+"Focus Blast",
+"Upper Hand",
+"Protect"
+],
+"regional_count": 1
+},
+"Indeedee-F#42": {
+"species": "Indeedee-F",
+"item": "Rocky Helmet",
+"ability": "Psychic Surge",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Follow Me",
+"Imprison",
+"Trick Room",
+"Psychic"
+],
+"regional_count": 2
+},
+"M-Staraptor#11": {
+"species": "Staraptor",
+"item": "Staraptite",
+"ability": "Intimidate",
+"nature": "Jolly",
+"evs": [
+29,
+1,
+0,
+0,
+4,
+32
+],
+"moves": [
+"Close Combat",
+"Brave Bird",
+"Blaze Kick",
+"Protect"
+],
+"regional_count": 1
+},
+"Hisuian Typhlosion#2": {
+"species": "Hisuian Typhlosion",
+"item": "Choice Scarf",
+"ability": "Blaze",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Eruption",
+"Heat Wave",
+"Solar Beam",
+"Shadow Ball"
+],
+"regional_count": 1
+},
+"Archaludon#25": {
+"species": "Archaludon",
+"item": "Leftovers",
+"ability": "Stamina",
+"nature": "Calm",
+"evs": [
+32,
+0,
+1,
+1,
+21,
+11
+],
+"moves": [
+"Flash Cannon",
+"Electro Shot",
+"Snarl",
+"Protect"
+],
+"regional_count": 1
+},
+"Indeedee-F#48": {
+"species": "Indeedee-F",
+"item": "Psychic Seed",
+"ability": "Psychic Surge",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Helping Hand",
+"Mystical Fire",
+"Protect",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Whimsicott#23": {
+"species": "Whimsicott",
+"item": "Focus Sash",
+"ability": "Chlorophyll",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Taunt",
+"Tailwind",
+"Encore",
+"Moonblast"
+],
+"regional_count": 1
+},
+"Garchomp#34": {
+"species": "Garchomp",
+"item": "Life Orb",
+"ability": "Rough Skin",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Stomping Tantrum",
+"Rock Slide",
+"Earthquake",
+"Protect"
+],
+"regional_count": 1
+},
+"Incineroar#98": {
+"species": "Incineroar",
+"item": "Sitrus Berry",
+"ability": "Intimidate",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Fake Out",
+"Flare Blitz",
+"Throat Chop",
+"Parting Shot"
+],
+"regional_count": 1
+},
+"Kommo-o#15": {
+"species": "Kommo-o",
+"item": "Focus Sash",
+"ability": "Soundproof",
+"nature": "Jolly",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Aura Sphere",
+"Clanging Scales",
+"Vacuum Wave",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Meowstic-M#2": {
+"species": "Meowstic-F",
+"item": "Meowsticite",
+"ability": "Competitive",
+"nature": "Modest",
+"evs": [
+27,
+0,
+14,
+17,
+2,
+6
+],
+"moves": [
+"Expanding Force",
+"Thunderbolt",
+"Fake Out",
+"Protect"
+],
+"regional_count": 1
+},
+"Sneasler#95": {
+"species": "Sneasler",
+"item": "Psychic Seed",
+"ability": "Unburden",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Dire Claw",
+"Close Combat",
+"Rock Slide",
+"Protect"
+],
+"regional_count": 1
+},
+"Indeedee-F#54": {
+"species": "Indeedee-F",
+"item": "Sitrus Berry",
+"ability": "Psychic Surge",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Helping Hand",
+"Follow Me",
+"Trick Room",
+"Imprison"
+],
+"regional_count": 1
+},
+"M-Charizard Y#21": {
+"species": "Charizard",
+"item": "Charizardite Y",
+"ability": "Blaze",
+"nature": "Calm",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Weather Ball",
+"Heat Wave",
+"Ancient Power",
+"Protect"
+],
+"regional_count": 1
+},
+"Armarouge#22": {
+"species": "Armarouge",
+"item": "Life Orb",
+"ability": "Flash Fire",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Energy Ball",
+"Expanding Force",
+"Armor Cannon"
+],
+"regional_count": 1
+},
+"Indeedee-F#43": {
+"species": "Indeedee-F",
+"item": "Colbur Berry",
+"ability": "Psychic Surge",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Protect",
+"Psychic",
+"Follow Me",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Kommo-o#18": {
+"species": "Kommo-o",
+"item": "Psychic Seed",
+"ability": "Soundproof",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Clangorous Soul",
+"Drain Punch",
+"Dragon Claw"
+],
+"regional_count": 1
+},
+"M-Aggron#1": {
+"species": "Aggron",
+"item": "Aggronite",
+"ability": "Sturdy",
+"nature": "Sassy",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Protect",
+"Body Press",
+"Iron Defense",
+"Heavy Slam"
+],
+"regional_count": 1
+},
+"Farigiraf#76": {
+"species": "Farigiraf",
+"item": "Grassy Seed",
+"ability": "Armor Tail",
+"nature": "Sassy",
+"evs": [
+32,
+0,
+0,
+2,
+32,
+0
+],
+"moves": [
+"Protect",
+"Light Screen",
+"Psychic",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Milotic#52": {
+"species": "Milotic",
+"item": "Leftovers",
+"ability": "Competitive",
+"nature": "Sassy",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Muddy Water",
+"Hypnosis",
+"Recover",
+"Coil"
+],
+"regional_count": 1
+},
+"Indeedee#28": {
+"species": "Indeedee",
+"item": "Choice Scarf",
+"ability": "Psychic Surge",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Expanding Force",
+"Dazzling Gleam",
+"Trick Room",
+"Imprison"
+],
+"regional_count": 1
+},
+"M-Golisopod#27": {
+"species": "Golisopod",
+"item": "Golisopite",
+"ability": "Emergency Exit",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Sucker Punch",
+"Iron Head",
+"Drill Run",
+"Protect"
+],
+"regional_count": 1
+},
+"Farigiraf#72": {
+"species": "Farigiraf",
+"item": "Colbur Berry",
+"ability": "Armor Tail",
+"nature": "Calm",
+"evs": [
+29,
+0,
+14,
+0,
+23,
+0
+],
+"moves": [
+"Protect",
+"Helping Hand",
+"Twin Beam",
+"Trick Room"
+],
+"regional_count": 1
+},
+"M-Tyranitar#14": {
+"species": "Tyranitar",
+"item": "Tyranitarite",
+"ability": "Sand Stream",
+"nature": "Jolly",
+"evs": [
+17,
+17,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Rock Slide",
+"Knock Off",
+"Protect",
+"High Horsepower"
+],
+"regional_count": 1
+},
+"Hisuian Typhlosion#1": {
+"species": "Hisuian Typhlosion",
+"item": "Choice Scarf",
+"ability": "Blaze",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Eruption",
+"Heat Wave",
+"Overheat",
+"Shadow Ball"
+],
+"regional_count": 2
+},
+"Pelipper#28": {
+"species": "Pelipper",
+"item": "Damp Rock",
+"ability": "Drizzle",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Hurricane",
+"Tailwind",
+"Weather Ball",
+"Wide Guard"
+],
+"regional_count": 1
+},
+"Rillaboom#66": {
+"species": "Rillaboom",
+"item": "Sitrus Berry",
+"ability": "Grassy Surge",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Fake Out",
+"Grassy Glide",
+"Knock Off",
+"Taunt"
+],
+"regional_count": 1
+},
+"Sneasler#101": {
+"species": "Sneasler",
+"item": "White Herb",
+"ability": "Unburden",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Fake Out",
+"Close Combat",
+"Throat Chop",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Metagross#21": {
+"species": "Metagross",
+"item": "Metagrossite",
+"ability": "Clear Body",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Steel Roller",
+"Psychic Fangs",
+"High Horsepower",
+"Protect"
+],
+"regional_count": 1
+},
+"Sylveon#22": {
+"species": "Sylveon",
+"item": "Life Orb",
+"ability": "Pixilate",
+"nature": "Modest",
+"evs": [
+9,
+0,
+22,
+20,
+0,
+15
+],
+"moves": [
+"Hyper Voice",
+"Hyper Beam",
+"Quick Attack",
+"Detect"
+],
+"regional_count": 1
+},
+"Pelipper#33": {
+"species": "Pelipper",
+"item": "Rocky Helmet",
+"ability": "Drizzle",
+"nature": "Bold",
+"evs": [
+31,
+0,
+0,
+0,
+24,
+11
+],
+"moves": [
+"Hurricane",
+"Weather Ball",
+"Tailwind",
+"Wide Guard"
+],
+"regional_count": 1
+},
+"Farigiraf#86": {
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Expanding Force",
+"Helping Hand",
+"Roar",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Pelipper#29": {
+"species": "Pelipper",
+"item": "Focus Sash",
+"ability": "Drizzle",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Tailwind",
+"Wide Guard",
+"Muddy Water",
+"Hurricane"
+],
+"regional_count": 1
+},
+"Arcanine-H#12": {
+"species": "Arcanine-Hisui",
+"item": "Leftovers",
+"ability": "Rock Head",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Extreme Speed",
+"Flare Blitz",
+"Head Smash",
+"Protect"
+],
+"regional_count": 1
+},
+"Hatterene#5": {
+"species": "Hatterene",
+"item": "Life Orb",
+"ability": "Magic Bounce",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"moves": [
+"Expanding Force",
+"Dazzling Gleam",
+"Skill Swap",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Torkoal#11": {
+"species": "Torkoal",
+"item": "Charcoal",
+"ability": "Drought",
+"nature": "Modest",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Eruption",
+"Weather Ball",
+"Earth Power",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Camerupt#8": {
+"species": "Camerupt",
+"item": "Cameruptite",
+"ability": "Solid Rock",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"moves": [
+"Flamethrower",
+"Eruption",
+"Earth Power",
+"Protect"
+],
+"regional_count": 1
+},
+"Indeedee-F#51": {
+"species": "Indeedee-F",
+"item": "Rocky Helmet",
+"ability": "Psychic Surge",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Follow Me",
+"Dazzling Gleam",
+"Helping Hand",
+"Trick Room"
+],
+"regional_count": 1
+},
+"M-Drampa#1": {
+"species": "Drampa",
+"item": "Drampanite",
+"ability": "Cloud Nine",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Dragon Pulse",
+"Hyper Voice",
+"Calm Mind",
+"Protect"
+],
+"regional_count": 1
+},
+"Gallade#5": {
+"species": "Gallade",
+"item": "White Herb",
+"ability": "Sharpness",
+"nature": "Brave",
+"evs": [
+32,
+32,
+2,
+0,
+0,
+0
+],
+"moves": [
+"Sacred Sword",
+"Psycho Cut",
+"Wide Guard",
+"Trick Room"
+],
+"regional_count": 1
+},
+"M-Floette#12": {
+"species": "Floette-Eternal",
+"item": "Floettite",
+"ability": "Fairy Aura",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Light of Ruin",
+"Dazzling Gleam",
+"Moonblast",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Salamence#25": {
+"species": "Salamence",
+"item": "Salamencite",
+"ability": "Intimidate",
+"nature": "Calm",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Protect",
+"Tailwind",
+"Hyper Voice",
+"Dragon Pulse"
+],
+"regional_count": 1
+},
+"Salazzle#1": {
+"species": "Salazzle",
+"item": "Focus Sash",
+"ability": "Corrosion",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Fake Out",
+"Sludge Wave",
+"Toxic",
+"Overheat"
+],
+"regional_count": 1
+},
+"Sableye#6": {
+"species": "Sableye",
+"item": "Light Clay",
+"ability": "Prankster",
+"nature": "Careful",
+"evs": [
+32,
+2,
+0,
+0,
+32,
+0
+],
+"moves": [
+"Reflect",
+"Light Screen",
+"Fake Out",
+"Skill Swap"
+],
+"regional_count": 1
+},
+"Goodra-Hisui#2": {
+"species": "Goodra-Hisui",
+"item": "Chople Berry",
+"ability": "Shell Armor",
+"nature": "Calm",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Thunderbolt",
+"Life Dew",
+"Shelter",
+"Body Press"
+],
+"regional_count": 1
+},
+"Farigiraf#80": {
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"nature": "Bold",
+"evs": [
+27,
+0,
+20,
+0,
+19,
+0
+],
+"moves": [
+"Trick Room",
+"Expanding Force",
+"Protect",
+"Dazzling Gleam"
+],
+"regional_count": 1
+},
+"M-Golisopod#31": {
+"species": "Golisopod",
+"item": "Golisopite",
+"ability": "Emergency Exit",
+"nature": "Sassy",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Drill Run",
+"Leech Life",
+"Iron Head",
+"Protect"
+],
+"regional_count": 1
+},
+"Primarina#11": {
+"species": "Primarina",
+"item": "Leftovers",
+"ability": "Liquid Voice",
+"nature": "Modest",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Hyper Voice",
+"Draining Kiss",
+"Calm Mind",
+"Protect"
+],
+"regional_count": 1
+},
+"Arcanine-H#11": {
+"species": "Arcanine-Hisui",
+"item": "Focus Sash",
+"ability": "Rock Head",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Flare Blitz",
+"Rock Slide",
+"Wild Charge",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Lucario Z#10": {
+"species": "Lucario",
+"item": "Lucarionite Z",
+"ability": "Inner Focus",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Steel Beam",
+"Aura Sphere",
+"Dark Pulse",
+"Detect"
+],
+"regional_count": 1
+},
+"Incineroar#99": {
+"species": "Incineroar",
+"item": "Sitrus Berry",
+"ability": "Intimidate",
+"nature": "Careful",
+"evs": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"moves": [
+"Throat Chop",
+"Flare Blitz",
+"Fake Out",
+"Snarl"
+],
+"regional_count": 1
+},
+"Toxtricity#1": {
+"species": "Toxtricity",
+"item": "Choice Scarf",
+"ability": "Punk Rock",
+"nature": "Timid",
+"evs": [
+1,
+0,
+0,
+32,
+1,
+32
+],
+"moves": [
+"Overdrive",
+"Sludge Bomb",
+"Psychic Noise",
+"Snarl"
+],
+"regional_count": 1
+},
+"Gallade#4": {
+"species": "Gallade",
+"item": "Scope Lens",
+"ability": "Sharpness",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+2,
+0,
+0,
+0
+],
+"moves": [
+"Psycho Cut",
+"Sacred Sword",
+"Leaf Blade",
+"Wide Guard"
+],
+"regional_count": 1
+},
+"Clawitzer#1": {
+"species": "Clawitzer",
+"item": "Life Orb",
+"ability": "Mega Launcher",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Water Pulse",
+"Aura Sphere",
+"Dark Pulse",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Lucario Z#12": {
+"species": "Lucario",
+"item": "Lucarionite Z",
+"ability": "Steadfast",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Flash Cannon",
+"Aura Sphere",
+"Vacuum Wave",
+"Detect"
+],
+"regional_count": 1
+},
+"M-Charizard Y#25": {
+"species": "Charizard",
+"item": "Charizardite Y",
+"ability": "Solar Power",
+"nature": "Modest",
+"evs": [
+28,
+0,
+13,
+1,
+0,
+24
+],
+"moves": [
+"Protect",
+"Solar Beam",
+"Ancient Power",
+"Heat Wave"
+],
+"regional_count": 1
+},
+"Armarouge#25": {
+"species": "Armarouge",
+"item": "Life Orb",
+"ability": "Weak Armor",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Heat Wave",
+"Trick Room",
+"Wide Guard",
+"Expanding Force"
+],
+"regional_count": 1
+},
+"M-Lucario Z#11": {
+"species": "Lucario",
+"item": "Lucarionite Z",
+"ability": "Inner Focus",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Aura Sphere",
+"Flash Cannon",
+"Steel Beam",
+"Detect"
+],
+"regional_count": 1
+},
+"Sneasler#89": {
+"species": "Sneasler",
+"item": "Focus Sash",
+"ability": "Poison Touch",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Close Combat",
+"Poison Jab",
+"Fake Out",
+"Iron Defense"
+],
+"regional_count": 1
+},
+"M-Staraptor#9": {
+"species": "Staraptor",
+"item": "Staraptite",
+"ability": "Intimidate",
+"nature": "Jolly",
+"evs": [
+29,
+1,
+0,
+0,
+4,
+32
+],
+"moves": [
+"Roost",
+"Close Combat",
+"Dual Wingbeat",
+"Protect"
+],
+"regional_count": 2
+},
+"M-Scovillain#5": {
+"species": "Scovillain",
+"item": "Scovillainite",
+"ability": "Moody",
+"nature": "Bold",
+"evs": [
+31,
+0,
+15,
+0,
+15,
+5
+],
+"moves": [
+"Giga Drain",
+"Rage Powder",
+"Protect",
+"Flamethrower"
+],
+"regional_count": 1
+},
+"Espathra#4": {
+"species": "Espathra",
+"item": "Leftovers",
+"ability": "Speed Boost",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Calm Mind",
+"Protect",
+"Dazzling Gleam",
+"Stored Power"
+],
+"regional_count": 1
+},
+"Rillaboom#68": {
+"species": "Rillaboom",
+"item": "Terrain Extender",
+"ability": "Grassy Surge",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Fake Out",
+"Grassy Glide",
+"Wood Hammer",
+"High Horsepower"
+],
+"regional_count": 1
+},
+"Sneasler#93": {
+"species": "Sneasler",
+"item": "Grassy Seed",
+"ability": "Unburden",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Close Combat",
+"Dire Claw",
+"Throat Chop",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Dragonite#12": {
+"species": "Dragonite",
+"item": "Dragoninite",
+"ability": "Multiscale",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Draco Meteor",
+"Thunder",
+"Rock Slide",
+"Hurricane"
+],
+"regional_count": 1
+},
+"Grimmsnarl#13": {
+"species": "Grimmsnarl",
+"item": "Rocky Helmet",
+"ability": "Prankster",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Parting Shot",
+"Fake Out",
+"Spirit Break",
+"Misty Terrain"
+],
+"regional_count": 1
+},
+"Zoroark-Hisui#4": {
+"species": "Zoroark-Hisui",
+"item": "Focus Sash",
+"ability": "Illusion",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Extrasensory",
+"Shadow Ball",
+"Icy Wind",
+"Dark Pulse"
+],
+"regional_count": 1
+},
+"M-Scrafty#1": {
+"species": "Scrafty",
+"item": "Scraftinite",
+"ability": "Intimidate",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Drain Punch",
+"Poison Jab",
+"Throat Chop",
+"Fake Out"
+],
+"regional_count": 1
+},
+"Politoed#24": {
+"species": "Politoed",
+"item": "Sitrus Berry",
+"ability": "Drizzle",
+"nature": "Modest",
+"evs": [
+32,
+0,
+0,
+30,
+0,
+4
+],
+"moves": [
+"Weather Ball",
+"Protect",
+"Perish Song",
+"Icy Wind"
+],
+"regional_count": 1
+},
+"Armarouge#24": {
+"species": "Armarouge",
+"item": "Life Orb",
+"ability": "Weak Armor",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Armor Cannon",
+"Expanding Force",
+"Aura Sphere",
+"Protect"
+],
+"regional_count": 1
+},
+"Grimmsnarl#9": {
+"species": "Grimmsnarl",
+"item": "Light Clay",
+"ability": "Prankster",
+"nature": "Careful",
+"evs": [
+32,
+0,
+19,
+0,
+15,
+0
+],
+"moves": [
+"Spirit Break",
+"Foul Play",
+"Reflect",
+"Light Screen"
+],
+"regional_count": 1
+},
+"M-Salamence#27": {
+"species": "Salamence",
+"item": "Salamencite",
+"ability": "Intimidate",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Double-Edge",
+"Breaking Swipe",
+"Tailwind",
+"Protect"
+],
+"regional_count": 1
+},
+"Farigiraf#71": {
+"species": "Farigiraf",
+"item": "Colbur Berry",
+"ability": "Armor Tail",
+"nature": "Bold",
+"evs": [
+27,
+0,
+20,
+0,
+19,
+0
+],
+"moves": [
+"Trick Room",
+"Roar",
+"Protect",
+"Psychic"
+],
+"regional_count": 1
+},
+"Galarian Slowbro#1": {
+"species": "Galarian Slowbro",
+"item": "Quick Claw",
+"ability": "Quick Draw",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Shell Side Arm",
+"Expanding Force",
+"Fire Blast",
+"Focus Blast"
+],
+"regional_count": 1
+},
+"M-Manectric#2": {
+"species": "Manectric",
+"item": "Manectite",
+"ability": "Lightning Rod",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Thunderbolt",
+"Overheat",
+"Snarl",
+"Flamethrower"
+],
+"regional_count": 1
+},
+"M-Froslass#8": {
+"species": "Froslass",
+"item": "Froslassite",
+"ability": "Cursed Body",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Blizzard",
+"Shadow Ball",
+"Thunderbolt",
+"Destiny Bond"
+],
+"regional_count": 1
+},
+"Sneasler#96": {
+"species": "Sneasler",
+"item": "Psychic Seed",
+"ability": "Unburden",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Dire Claw",
+"Close Combat",
+"Rock Slide",
+"Upper Hand"
+],
+"regional_count": 1
+},
+"Annihilape#14": {
+"species": "Annihilape",
+"item": "Choice Scarf",
+"ability": "Defiant",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Rock Slide",
+"Close Combat",
+"Gunk Shot",
+"Shadow Claw"
+],
+"regional_count": 1
+},
+"M-Kangaskhan#2": {
+"species": "Kangaskhan",
+"item": "Kangaskhanite",
+"ability": "Scrappy",
+"nature": "Adamant",
+"evs": [
+31,
+32,
+1,
+0,
+2,
+0
+],
+"moves": [
+"Double-Edge",
+"Drain Punch",
+"Fake Out",
+"Sucker Punch"
+],
+"regional_count": 1
+},
+"Sinistcha#28": {
+"species": "Sinistcha",
+"item": "Sitrus Berry",
+"ability": "Hospitality",
+"nature": "Bold",
+"evs": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"moves": [
+"Matcha Gotcha",
+"Shadow Ball",
+"Rage Powder",
+"Trick Room"
+],
+"regional_count": 1
+},
+"M-Absol Z#6": {
+"species": "Absol",
+"item": "Absolite Z",
+"ability": "Justified",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Night Slash",
+"Protect",
+"Shadow Claw",
+"Close Combat"
+],
+"regional_count": 1
+},
+"Incineroar#95": {
+"species": "Incineroar",
+"item": "Leftovers",
+"ability": "Intimidate",
+"nature": "Careful",
+"evs": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"moves": [
+"Darkest Lariat",
+"Parting Shot",
+"Fake Out",
+"Flare Blitz"
+],
+"regional_count": 1
+},
+"Milotic#50": {
+"species": "Milotic",
+"item": "Leftovers",
+"ability": "Competitive",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Scald",
+"Ice Beam",
+"Dragon Cheer",
+"Protect"
+],
+"regional_count": 1
+},
+"Armarouge#27": {
+"species": "Armarouge",
+"item": "Passho Berry",
+"ability": "Flash Fire",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Heat Wave",
+"Expanding Force",
+"Will-O-Wisp",
+"Wide Guard"
+],
+"regional_count": 1
+},
+"Rillaboom#63": {
+"species": "Rillaboom",
+"item": "Miracle Seed",
+"ability": "Grassy Surge",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Fake Out",
+"Grassy Glide",
+"Knock Off",
+"Protect"
+],
+"regional_count": 1
+},
+"Incineroar#93": {
+"species": "Incineroar",
+"item": "Focus Sash",
+"ability": "Intimidate",
+"nature": "Careful",
+"evs": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"moves": [
+"Flare Blitz",
+"Throat Chop",
+"Fake Out",
+"Parting Shot"
+],
+"regional_count": 1
+},
+"M-Garchomp Z#16": {
+"species": "Garchomp",
+"item": "Garchompite Z",
+"ability": "Rough Skin",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Earth Power",
+"Dragon Pulse",
+"Power Gem",
+"Protect"
+],
+"regional_count": 1
+},
+"Incineroar#102": {
+"species": "Incineroar",
+"item": "Sitrus Berry",
+"ability": "Intimidate",
+"nature": "Sassy",
+"evs": [
+31,
+0,
+15,
+0,
+20,
+0
+],
+"moves": [
+"Flare Blitz",
+"Throat Chop",
+"Parting Shot",
+"Fake Out"
+],
+"regional_count": 1
+},
+"Volcarona#42": {
+"species": "Volcarona",
+"item": "Rocky Helmet",
+"ability": "Flame Body",
+"nature": "Timid",
+"evs": [
+32,
+0,
+11,
+0,
+0,
+23
+],
+"moves": [
+"Tailwind",
+"Rage Powder",
+"Fiery Dance",
+"Struggle Bug"
+],
+"regional_count": 1
+},
+"Pelipper#37": {
+"species": "Pelipper",
+"item": "Wacan Berry",
+"ability": "Drizzle",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Weather Ball",
+"Tailwind",
+"Wide Guard",
+"Protect"
+],
+"regional_count": 1
+},
+"Archaludon#26": {
+"species": "Archaludon",
+"item": "Leftovers",
+"ability": "Stamina",
+"nature": "Modest",
+"evs": [
+32,
+0,
+1,
+5,
+25,
+3
+],
+"moves": [
+"Thunderbolt",
+"Dragon Pulse",
+"Electro Shot",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Charizard Y#20": {
+"species": "Charizard",
+"item": "Charizardite Y",
+"ability": "Blaze",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Weather Ball",
+"Ancient Power",
+"Roar",
+"Protect"
+],
+"regional_count": 1
+},
+"Rillaboom#64": {
+"species": "Rillaboom",
+"item": "Occa Berry",
+"ability": "Grassy Surge",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Grassy Glide",
+"Wood Hammer",
+"Fake Out",
+"U-turn"
+],
+"regional_count": 1
+},
+"Farigiraf#87": {
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Protect",
+"Twin Beam",
+"Helping Hand",
+"Trick Room"
+],
+"regional_count": 1
+},
+"M-Gardevoir#27": {
+"species": "Gardevoir",
+"item": "Gardevoirite",
+"ability": "Trace",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Psychic",
+"Hyper Voice",
+"Shadow Ball",
+"Protect"
+],
+"regional_count": 1
+},
+"Talonflame#7": {
+"species": "Talonflame",
+"item": "Expert Belt",
+"ability": "Gale Wings",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Air Slash",
+"Tailwind",
+"Overheat",
+"Protect"
+],
+"regional_count": 1
+},
+"Armarouge#21": {
+"species": "Armarouge",
+"item": "Focus Sash",
+"ability": "Weak Armor",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Armor Cannon",
+"Expanding Force",
+"Energy Ball",
+"Protect"
+],
+"regional_count": 1
+},
+"Talonflame#9": {
+"species": "Talonflame",
+"item": "Sharp Beak",
+"ability": "Gale Wings",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Tailwind",
+"Brave Bird",
+"Flare Blitz"
+],
+"regional_count": 1
+},
+"Tyrantrum#1": {
+"species": "Tyrantrum",
+"item": "Choice Scarf",
+"ability": "Strong Jaw",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"High Horsepower",
+"Rock Slide",
+"Psychic Fangs",
+"Ice Fang"
+],
+"regional_count": 1
+},
+"Gholdengo#19": {
+"species": "Gholdengo",
+"item": "Leftovers",
+"ability": "Good as Gold",
+"nature": "Modest",
+"evs": [
+17,
+0,
+0,
+17,
+0,
+32
+],
+"moves": [
+"Shadow Ball",
+"Focus Blast",
+"Protect",
+"Substitute"
+],
+"regional_count": 1
+},
+"Hippowdon#2": {
+"species": "Hippowdon",
+"item": "Sitrus Berry",
+"ability": "Sand Stream",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Rock Tomb",
+"High Horsepower",
+"Slack Off",
+"Protect"
+],
+"regional_count": 1
+},
+"Mimikyu#2": {
+"species": "Mimikyu",
+"item": "Life Orb",
+"ability": "Disguise",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Play Rough",
+"Phantom Force",
+"Protect",
+"Shadow Sneak"
+],
+"regional_count": 1
+},
+"Glimmora#4": {
+"species": "Glimmora",
+"item": "Focus Sash",
+"ability": "Toxic Debris",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Power Gem",
+"Earth Power",
+"Mortal Spin",
+"Spiky Shield"
+],
+"regional_count": 1
+},
+"Indeedee-F#44": {
+"species": "Indeedee-F",
+"item": "Colbur Berry",
+"ability": "Psychic Surge",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Follow Me",
+"Helping Hand",
+"Psychic",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Basculegion#20": {
+"species": "Basculegion",
+"item": "Choice Scarf",
+"ability": "Adaptability",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Flip Turn",
+"Last Respects",
+"Wave Crash",
+"Head Smash"
+],
+"regional_count": 1
+},
+"Indeedee-F#47": {
+"species": "Indeedee-F",
+"item": "Psychic Seed",
+"ability": "Psychic Surge",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Follow Me",
+"Psychic",
+"Protect",
+"Helping Hand"
+],
+"regional_count": 1
+},
+"Milotic#46": {
+"species": "Milotic",
+"item": "Leftovers",
+"ability": "Competitive",
+"nature": "Modest",
+"evs": [
+32,
+0,
+11,
+10,
+0,
+13
+],
+"moves": [
+"Scald",
+"Icy Wind",
+"Protect",
+"Recover"
+],
+"regional_count": 2
+},
+"Rotom-Heat#6": {
+"species": "Rotom-Heat",
+"item": "Choice Scarf",
+"ability": "Levitate",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Electroweb",
+"Volt Switch",
+"Overheat",
+"Will-O-Wisp"
+],
+"regional_count": 1
+},
+"M-Salamence#29": {
+"species": "Salamence",
+"item": "Salamencite",
+"ability": "Intimidate",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Hyper Voice",
+"Double-Edge",
+"Flamethrower",
+"Protect"
+],
+"regional_count": 1
+},
+"Indeedee#33": {
+"species": "Indeedee",
+"item": "Life Orb",
+"ability": "Psychic Surge",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Expanding Force",
+"Mystical Fire",
+"Dazzling Gleam",
+"Helping Hand"
+],
+"regional_count": 1
+},
+"Jolteon#2": {
+"species": "Jolteon",
+"item": "Life Orb",
+"ability": "Volt Absorb",
+"nature": "Modest",
+"evs": [
+26,
+0,
+0,
+32,
+0,
+8
+],
+"moves": [
+"Thunderbolt",
+"Volt Switch",
+"Shadow Ball",
+"Protect"
+],
+"regional_count": 1
+},
+"Sneasler#88": {
+"species": "Sneasler",
+"item": "Focus Sash",
+"ability": "Poison Touch",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Dire Claw",
+"Fake Out",
+"Protect",
+"Brick Break"
+],
+"regional_count": 1
+},
+"M-Golisopod#29": {
+"species": "Golisopod",
+"item": "Golisopite",
+"ability": "Emergency Exit",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Poison Jab",
+"Protect",
+"Liquidation",
+"Leech Life"
+],
+"regional_count": 1
+},
+"Sinistcha#26": {
+"species": "Sinistcha",
+"item": "Leftovers",
+"ability": "Hospitality",
+"nature": "Calm",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Matcha Gotcha",
+"Trick Room",
+"Rage Powder",
+"Protect"
+],
+"regional_count": 1
+},
+"Torkoal#12": {
+"species": "Torkoal",
+"item": "Rocky Helmet",
+"ability": "Drought",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Eruption",
+"Earth Power",
+"Weather Ball",
+"Protect"
+],
+"regional_count": 1
+},
+"Incineroar#94": {
+"species": "Incineroar",
+"item": "Grassy Seed",
+"ability": "Intimidate",
+"nature": "Impish",
+"evs": [
+32,
+0,
+20,
+0,
+14,
+0
+],
+"moves": [
+"Fake Out",
+"Flare Blitz",
+"Throat Chop",
+"Parting Shot"
+],
+"regional_count": 1
+},
+"Pawmot#8": {
+"species": "Pawmot",
+"item": "Focus Sash",
+"ability": "Iron Fist",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Double Shock",
+"Close Combat",
+"Ice Punch",
+"Fake Out"
+],
+"regional_count": 1
+},
+"Sirfetch\u2019d#2": {
+"species": "Sirfetch'd",
+"item": "Leek",
+"ability": "Scrappy",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Meteor Assault",
+"Night Slash",
+"Leaf Blade",
+"Detect"
+],
+"regional_count": 1
+},
+"M-Tyranitar#13": {
+"species": "Tyranitar",
+"item": "Tyranitarite",
+"ability": "Sand Stream",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Rock Slide",
+"Knock Off",
+"High Horsepower",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Golisopod#30": {
+"species": "Golisopod",
+"item": "Golisopite",
+"ability": "Emergency Exit",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Leech Life",
+"Iron Head",
+"Close Combat",
+"Wide Guard"
+],
+"regional_count": 1
+},
+"Aerodactyl#5": {
+"species": "Aerodactyl",
+"item": "Focus Sash",
+"ability": "Unnerve",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Rock Slide",
+"Dual Wingbeat",
+"Taunt",
+"Tailwind"
+],
+"regional_count": 1
+},
+"Indeedee-F#45": {
+"species": "Indeedee-F",
+"item": "Colbur Berry",
+"ability": "Psychic Surge",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Psychic",
+"Follow Me",
+"Trick Room",
+"Protect"
+],
+"regional_count": 1
+},
+"Archaludon#24": {
+"species": "Archaludon",
+"item": "Leftovers",
+"ability": "Stamina",
+"nature": "Calm",
+"evs": [
+32,
+0,
+1,
+1,
+21,
+11
+],
+"moves": [
+"Protect",
+"Electro Ball",
+"Flash Cannon",
+"Dragon Pulse"
+],
+"regional_count": 1
+},
+"Rillaboom#58": {
+"species": "Rillaboom",
+"item": "Eject Button",
+"ability": "Grassy Surge",
+"nature": "Sassy",
+"evs": [
+32,
+0,
+4,
+0,
+30,
+0
+],
+"moves": [
+"High Horsepower",
+"Fake Out",
+"Grassy Glide",
+"U-turn"
+],
+"regional_count": 1
+},
+"Farigiraf#89": {
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"nature": "Sassy",
+"evs": [
+32,
+0,
+0,
+2,
+32,
+0
+],
+"moves": [
+"Helping Hand",
+"Protect",
+"Twin Beam",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Indeedee#32": {
+"species": "Indeedee",
+"item": "Colbur Berry",
+"ability": "Psychic Surge",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Expanding Force",
+"Energy Ball",
+"Protect",
+"Imprison"
+],
+"regional_count": 1
+},
+"M-Raichu Y#14": {
+"species": "Raichu",
+"item": "Raichunite Y",
+"ability": "Lightning Rod",
+"nature": "Timid",
+"evs": [
+32,
+0,
+11,
+0,
+0,
+23
+],
+"moves": [
+"Protect",
+"Volt Switch",
+"Zap Cannon",
+"Focus Blast"
+],
+"regional_count": 1
+},
+"Sneasler#94": {
+"species": "Sneasler",
+"item": "Psychic Seed",
+"ability": "Unburden",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Fake Out",
+"Close Combat",
+"Dire Claw",
+"Protect"
+],
+"regional_count": 1
+},
+"Lycanroc-Dusk#2": {
+"species": "Lycanroc Dusk",
+"item": "Hard Stone",
+"ability": "Tough Claws",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Accelerock",
+"Rock Slide",
+"Taunt",
+"Protect"
+],
+"regional_count": 1
+},
+"Farigiraf#77": {
+"species": "Farigiraf",
+"item": "Leftovers",
+"ability": "Armor Tail",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Twin Beam",
+"Thunderbolt",
+"Helping Hand",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Rillaboom#61": {
+"species": "Rillaboom",
+"item": "Life Orb",
+"ability": "Grassy Surge",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Grassy Glide",
+"Sunny Day",
+"High Horsepower",
+"Fake Out"
+],
+"regional_count": 1
+},
+"M-Blaziken#4": {
+"species": "Blaziken",
+"item": "Blazikenite",
+"ability": "Speed Boost",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"U-turn",
+"Close Combat",
+"Flare Blitz",
+"Detect"
+],
+"regional_count": 1
+},
+"M-Froslass#9": {
+"species": "Froslass",
+"item": "Froslassite",
+"ability": "Cursed Body",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Blizzard",
+"Shadow Ball",
+"Haze",
+"Protect"
+],
+"regional_count": 1
+},
+"Basculegion#25": {
+"species": "Basculegion",
+"item": "Expert Belt",
+"ability": "Adaptability",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Last Respects",
+"Aqua Jet",
+"Wave Crash",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Pinsir#1": {
+"species": "Pinsir",
+"item": "Pinsirite",
+"ability": "Hyper Cutter",
+"nature": "Jolly",
+"evs": [
+1,
+32,
+0,
+0,
+1,
+32
+],
+"moves": [
+"Feint",
+"Body Slam",
+"Storm Throw",
+"Protect"
+],
+"regional_count": 1
+},
+"Kingambit#31": {
+"species": "Kingambit",
+"item": "Black Glasses",
+"ability": "Defiant",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Sucker Punch",
+"Kowtow Cleave",
+"Iron Head",
+"Low Kick"
+],
+"regional_count": 1
+},
+"Basculegion#24": {
+"species": "Basculegion",
+"item": "Choice Scarf",
+"ability": "Swift Swim",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Liquidation",
+"Flip Turn",
+"Last Respects",
+"Psychic Fangs"
+],
+"regional_count": 1
+},
+"M-Gardevoir#24": {
+"species": "Gardevoir",
+"item": "Gardevoirite",
+"ability": "Telepathy",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Psychic",
+"Hyper Voice",
+"Imprison",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Sneasler#97": {
+"species": "Sneasler",
+"item": "White Herb",
+"ability": "Unburden",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Dire Claw",
+"U-turn",
+"Fake Out",
+"Close Combat"
+],
+"regional_count": 1
+},
+"M-Alakazam#1": {
+"species": "Alakazam",
+"item": "Alakazite",
+"ability": "Magic Guard",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Expanding Force",
+"Dazzling Gleam",
+"Shadow Ball",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Raichu Y#11": {
+"species": "Raichu",
+"item": "Raichunite Y",
+"ability": "Lightning Rod",
+"nature": "Timid",
+"evs": [
+32,
+0,
+11,
+0,
+0,
+23
+],
+"moves": [
+"Zap Cannon",
+"Focus Blast",
+"Dazzling Gleam",
+"Protect"
+],
+"regional_count": 1
+},
+"Armarouge#28": {
+"species": "Armarouge",
+"item": "Sitrus Berry",
+"ability": "Flash Fire",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Heat Wave",
+"Expanding Force",
+"Wide Guard",
+"Protect"
+],
+"regional_count": 1
+},
+"Indeedee-F#46": {
+"species": "Indeedee-F",
+"item": "Focus Sash",
+"ability": "Psychic Surge",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Follow Me",
+"Dazzling Gleam",
+"Trick Room",
+"Mystical Fire"
+],
+"regional_count": 1
+},
+"Hawlucha#2": {
+"species": "Hawlucha",
+"item": "White Herb",
+"ability": "Unburden",
+"nature": "Jolly",
+"evs": [
+1,
+32,
+0,
+0,
+11,
+22
+],
+"moves": [
+"Rock Slide",
+"High Jump Kick",
+"Iron Head",
+"Detect"
+],
+"regional_count": 1
+},
+"Sinistcha#25": {
+"species": "Sinistcha",
+"item": "Leftovers",
+"ability": "Hospitality",
+"nature": "Calm",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Matcha Gotcha",
+"Life Dew",
+"Rage Powder",
+"Trick Room"
+],
+"regional_count": 1
+},
+"Archaludon#22": {
+"species": "Archaludon",
+"item": "Chople Berry",
+"ability": "Stalwart",
+"nature": "Modest",
+"evs": [
+32,
+0,
+1,
+5,
+25,
+3
+],
+"moves": [
+"Electro Shot",
+"Dragon Pulse",
+"Flash Cannon",
+"Protect"
+],
+"regional_count": 1
+},
+"Tinkaton#1": {
+"species": "Tinkaton",
+"item": "Shuca Berry",
+"ability": "Mold Breaker",
+"nature": "Jolly",
+"evs": [
+23,
+15,
+0,
+0,
+0,
+28
+],
+"moves": [
+"Gigaton Hammer",
+"Play Rough",
+"Fake Out",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Heracross#1": {
+"species": "Heracross",
+"item": "Heracronite",
+"ability": "Moxie",
+"nature": "Adamant",
+"evs": [
+14,
+32,
+0,
+0,
+1,
+19
+],
+"moves": [
+"Close Combat",
+"Detect",
+"Pin Missile",
+"Rock Blast"
+],
+"regional_count": 1
+},
+"Whimsicott#21": {
+"species": "Whimsicott",
+"item": "Fairy Feather",
+"ability": "Prankster",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Moonblast",
+"Tailwind",
+"Helping Hand",
+"Protect"
+],
+"regional_count": 1
+},
+"Pelipper#32": {
+"species": "Pelipper",
+"item": "Life Orb",
+"ability": "Drizzle",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Hurricane",
+"Tailwind",
+"Weather Ball",
+"Wide Guard"
+],
+"regional_count": 1
+},
+"Kingambit#34": {
+"species": "Kingambit",
+"item": "Focus Sash",
+"ability": "Defiant",
+"nature": "Adamant",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Low Kick",
+"Kowtow Cleave",
+"Iron Head",
+"Protect"
+],
+"regional_count": 1
+},
+"Ninetales-Alola#13": {
+"species": "Ninetales-Alola",
+"item": "Focus Sash",
+"ability": "Snow Warning",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Blizzard",
+"Encore",
+"Freeze-Dry"
+],
+"regional_count": 1
+},
+"Incineroar#88": {
+"species": "Incineroar",
+"item": "Chople Berry",
+"ability": "Intimidate",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Flare Blitz",
+"Parting Shot",
+"Fake Out",
+"Snarl"
+],
+"regional_count": 1
+},
+"M-Ampharos#1": {
+"species": "Ampharos",
+"item": "Ampharosite",
+"ability": "Static",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Cotton Guard",
+"Dragon Pulse",
+"Protect",
+"Thunderbolt"
+],
+"regional_count": 1
+},
+"M-Heracross#2": {
+"species": "Heracross",
+"item": "Heracronite",
+"ability": "Moxie",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Brick Break",
+"Detect",
+"Lunge",
+"Rock Blast"
+],
+"regional_count": 1
+},
+"Farigiraf#78": {
+"species": "Farigiraf",
+"item": "Mental Herb",
+"ability": "Armor Tail",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Expanding Force",
+"Hyper Voice",
+"Trick Room",
+"Helping Hand"
+],
+"regional_count": 1
+},
+"Whimsicott#25": {
+"species": "Whimsicott",
+"item": "Focus Sash",
+"ability": "Prankster",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Moonblast",
+"Worry Seed",
+"Tailwind",
+"Taunt"
+],
+"regional_count": 1
+},
+"Primarina#15": {
+"species": "Primarina",
+"item": "Sitrus Berry",
+"ability": "Liquid Voice",
+"nature": "Modest",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Moonblast",
+"Protect",
+"Haze",
+"Hyper Voice"
+],
+"regional_count": 1
+},
+"Incineroar#87": {
+"species": "Incineroar",
+"item": "Chople Berry",
+"ability": "Intimidate",
+"nature": "Naughty",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Flare Blitz",
+"Close Combat",
+"Fake Out",
+"Darkest Lariat"
+],
+"regional_count": 1
+},
+"Dragapult#20": {
+"species": "Dragapult",
+"item": "Life Orb",
+"ability": "Clear Body",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Dragon Darts",
+"Phantom Force",
+"Steel Wing",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Charizard Y#24": {
+"species": "Charizard",
+"item": "Charizardite Y",
+"ability": "Blaze",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Flamethrower",
+"Protect",
+"Solar Beam",
+"Ancient Power"
+],
+"regional_count": 1
+},
+"Farigiraf#73": {
+"species": "Farigiraf",
+"item": "Colbur Berry",
+"ability": "Armor Tail",
+"nature": "Mild",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Hyper Voice",
+"Helping Hand",
+"Expanding Force",
+"Protect"
+],
+"regional_count": 1
+},
+"Sylveon#17": {
+"species": "Sylveon",
+"item": "Fairy Feather",
+"ability": "Pixilate",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Hyper Voice",
+"Hyper Beam",
+"Yawn",
+"Detect"
+],
+"regional_count": 1
+},
+"Armarouge#26": {
+"species": "Armarouge",
+"item": "Mental Herb",
+"ability": "Flash Fire",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Expanding Force",
+"Armor Cannon",
+"Trick Room",
+"Protect"
+],
+"regional_count": 1
+},
+"M-Abomasnow#1": {
+"species": "Abomasnow",
+"item": "Abomasite",
+"ability": "Snow Warning",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"moves": [
+"Giga Drain",
+"Blizzard",
+"Protect",
+"Weather Ball"
+],
+"regional_count": 1
+},
+"Gholdengo#21": {
+"species": "Gholdengo",
+"item": "Metal Coat",
+"ability": "Good as Gold",
+"nature": "Timid",
+"evs": [
+7,
+0,
+0,
+27,
+0,
+32
+],
+"moves": [
+"Protect",
+"Thunderbolt",
+"Shadow Ball",
+"Make It Rain"
+],
+"regional_count": 1
+},
+"M-Metagross#19": {
+"species": "Metagross",
+"item": "Metagrossite",
+"ability": "Clear Body",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Meteor Mash",
+"Thunder Punch",
+"Stealth Rock",
+"Rock Slide"
+],
+"regional_count": 1
+},
+"M-Garchomp#5": {
+"species": "Garchomp",
+"item": "Garchompite",
+"ability": "Sand Veil",
+"nature": "Adamant",
+"evs": [
+15,
+21,
+1,
+0,
+25,
+4
+],
+"moves": [
+"Earthquake",
+"Iron Head",
+"Liquidation",
+"Facade"
+],
+"regional_count": 1
+},
+"Charizard#1": {
+"species": "Charizard",
+"item": "Focus Band",
+"ability": "Blaze",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Flamethrower",
+"Outrage",
+"Weather Ball",
+"Blast Burn"
+],
+"regional_count": 1
+},
+"Orthworm#1": {
+"species": "Orthworm",
+"item": "Quick Claw",
+"ability": "Earth Eater",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Heavy Slam",
+"Iron Defense",
+"Stealth Rock",
+"Rock Blast"
+],
+"regional_count": 1
+},
+"Hawlucha#1": {
+"species": "Hawlucha",
+"item": "Sitrus Berry",
+"ability": "Unburden",
+"nature": "Naive",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Flying Press",
+"Taunt",
+"Entrainment",
+"Roost"
+],
+"regional_count": 1
+},
+"Hisuian Samurott#1": {
+"species": "Hisuian Samurott",
+"item": "Focus Sash",
+"ability": "Torrent",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Ceaseless Edge",
+"Lash Out",
+"Razor Shell",
+"Rain Dance"
+],
+"regional_count": 1
+},
 "M-Blastoise#5": {
 "species": "Blastoise",
 "item": "Blastoisinite",
@@ -25403,6 +33845,27 @@
 "Low Kick"
 ],
 "regional_count": 0
+},
+"Pinsir#1": {
+"species": "Pinsir",
+"item": "Pinsirite",
+"ability": "Hyper Cutter",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Feint",
+"Body Slam",
+"Storm Throw",
+"Protect"
+],
+"regional_count": 1
 },
 "Torkoal#8": {
 "species": "Torkoal",

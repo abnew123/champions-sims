@@ -26,7 +26,7 @@ E_S = int(os.environ.get('TS_POOL_ES', 2)); E_C = int(os.environ.get('TS_POOL_EC
 def keys():
     """(bring groups, their normalised weights): regional shares, or with TS_POOL_WEIGHT=blend (user, 2026-10-08) half the regional
     share and half the ladder share (the pool's entry counts); groups at >= 1% and with >= 8 pool entries"""
-    K = json.load(open(os.path.join(HERE, 'pool_keys.json')))['keys']
+    K = json.load(open(os.path.join(HERE, os.environ.get('TS_POOL_KEYS', 'pool_keys.json'))))['keys']   # TS_POOL_KEYS: build_pool_keys.py's newer weights
     if os.environ.get('TS_POOL_WEIGHT') == 'blend':
         tr, tp = sum(v['share'] for v in K.values()), sum(v['pool'] for v in K.values())
         w = {k: 0.5 * v['share'] / tr + 0.5 * v['pool'] / tp for k, v in K.items()}

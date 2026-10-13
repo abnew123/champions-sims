@@ -8,7 +8,7 @@ Star raise p before the rule doubles the miss chance), and more inaccurate moves
 import json, os, sys, collections
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import evaluate as E
-M = json.load(open(os.path.join(HERE, '..', 'native', 'champions_data.json')))['moves']
+M = json.load(open(os.path.join(HERE, '..', 'native', 'champions_data_full.json')))['moves']
 mid = lambda n: ''.join(c for c in n.lower() if c.isalnum())
 BOOSTED = {'stompingtantrum', 'temperflare'}
 ABIL = {'No Guard', 'Compound Eyes', 'Keen Eye', 'Victory Star', 'Hustle'}

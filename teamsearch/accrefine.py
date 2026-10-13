@@ -19,7 +19,7 @@ import json, os, sys, time, subprocess
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import climb as C, evaluate as E, poolmode as PM, bringplan as BP
 G = C.GRID; SUPPORT = json.load(open(os.path.join(HERE, 'support.json')))
-MOVES = json.load(open(os.path.join(HERE, '..', 'native', 'champions_data.json')))['moves']
+MOVES = json.load(open(os.path.join(HERE, '..', 'native', 'champions_data_full.json')))['moves']
 mid = lambda n: ''.join(c for c in n.lower() if c.isalnum())
 ALT = int(os.environ.get('TS_ACC_ALT', 3)); Z = float(os.environ.get('TS_ACC_Z', 1.0)); TOP = int(os.environ.get('TS_ACC_TOP', 2))
 OUT = os.path.join(HERE, 'runs', 'accrefine.json')

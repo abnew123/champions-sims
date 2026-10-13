@@ -1,0 +1,122 @@
+{
+ "Gholdengo": {
+  "species": "Gholdengo",
+  "item": "Life Orb",
+  "ability": "Good as Gold",
+  "nature": "Timid",
+  "evs": [
+   7,
+   0,
+   0,
+   27,
+   0,
+   32
+  ],
+  "moves": [
+   "Make It Rain",
+   "Shadow Ball",
+   "Power Gem",
+   "Protect"
+  ]
+ },
+ "Archaludon": {
+  "species": "Archaludon",
+  "item": "Leftovers",
+  "ability": "Stamina",
+  "nature": "Calm",
+  "evs": [
+   32,
+   0,
+   1,
+   1,
+   21,
+   11
+  ],
+  "moves": [
+   "Dragon Pulse",
+   "Electro Shot",
+   "Flash Cannon",
+   "Protect"
+  ]
+ },
+ "Pelipper": {
+  "species": "Pelipper",
+  "item": "Sitrus Berry",
+  "ability": "Drizzle",
+  "nature": "Bold",
+  "evs": [
+   31,
+   0,
+   0,
+   0,
+   24,
+   11
+  ],
+  "moves": [
+   "Weather Ball",
+   "Hurricane",
+   "Tailwind",
+   "Wide Guard"
+  ]
+ },
+ "Swampert": {
+  "species": "Swampert",
+  "item": "Swampertite",
+  "ability": "Torrent",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Wave Crash",
+   "Ice Punch",
+   "Earthquake",
+   "Protect"
+  ]
+ },
+ "Staraptor": {
+  "species": "Staraptor",
+  "item": "Staraptite",
+  "ability": "Intimidate",
+  "nature": "Jolly",
+  "evs": [
+   29,
+   1,
+   0,
+   0,
+   4,
+   32
+  ],
+  "moves": [
+   "Brave Bird",
+   "Close Combat",
+   "Tailwind",
+   "Protect"
+  ]
+ },
+ "Sinistcha": {
+  "species": "Sinistcha",
+  "item": "Colbur Berry",
+  "ability": "Hospitality",
+  "nature": "Relaxed",
+  "evs": [
+   32,
+   0,
+   32,
+   2,
+   0,
+   0
+  ],
+  "moves": [
+   "Matcha Gotcha",
+   "Rage Powder",
+   "Trick Room",
+   "Protect"
+  ]
+ }
+}

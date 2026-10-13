@@ -9,7 +9,7 @@ since = sys.argv[sys.argv.index('--since') + 1] if '--since' in sys.argv else ''
 f = os.path.join(OUT, 'chat.jsonl')
 rows = [json.loads(l) for l in open(f) if l.strip()] if os.path.exists(f) else []
 new = [r for r in rows if r['when'] >= since] if since else rows
-gg = lambda r: r['text'].strip().lower().rstrip('!').strip() in ('gg', 'ggwp', 'gg wp')   # 2026-10-12 evening, the user: ggwp counts too
+gg = lambda r: r['text'].strip().lower().rstrip('!').strip() in ('gg', 'ggwp', 'gg wp', 'ggs')   # 2026-10-12 evening, the user: ggwp counts too; 2026-10-13: ggs
 other = [r for r in rows if not gg(r)]
 print(f"{len(rows)} chat messages recorded: {len(rows) - len(other)} just gg / ggwp, {len(other)} other ({sum(1 for r in other if r['room'])} in battle rooms, "
       f"{sum(1 for r in other if not r['room'])} private)" + (f"; since {since}: {sum(1 for r in new if gg(r))} gg, {sum(1 for r in new if not gg(r))} other" if since else '')

@@ -163,7 +163,7 @@ def run_jobs(gids, jobs, per_job, seed0, threads, label, extra=None):
         subprocess.run([procs.node(), '../native/battle_starts.js', os.path.join(d, 'jobs.json'), starts + '.tmp', str(per_job), str(seed0)],
                        cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL)
         os.replace(starts + '.tmp', starts)
-    env.update(sim_env(), GRID_DIR=grid_dir(d))
+    env.update(sim_env(), GRID_DIR=grid_dir(d)); threads = max(threads, BOOST[0])
     subprocess.run(['nice', '-n', '10', procs.battle(bin_path()), 'battle', env.get('TS_ENGINE_DATA', '../native/engine_data_spot.json'), starts, out, str(threads)],
                    cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return [json.load(open(os.path.join(out, f'{j}.json'))) for j in range(len(jobs))]
@@ -216,14 +216,20 @@ def search_team(gids, seed0, threads, K=None, sp=1):
     return dict(score=sum(P.ARCH_SHARE[a] * by_arch[a] for a in ARCHS) / sum(P.ARCH_SHARE.values()), by_arch=by_arch, per_job=per,
                 games=sum(n for _, n in val.values()), chosen={a: R[a][best[a]] for a in live}, rank={a: best[a] + 1 for a in live})
 
+BOOST = [0]     # threads per battle run while a stage has fewer items than TS_PARALLEL (set by parallel(), read by run_jobs)
 def parallel(fn, items, label):
+    """fn over items, TS_PARALLEL at once. A stage with fewer items than that spreads all TS_PARALLEL x TS_THREADS threads over them
+    (2026-10-13: the last climb's late rounds ran 13 teams x 3 threads on a 96-core box, 60% idle); thread counts don't change results"""
     par = int(os.environ.get('TS_PARALLEL', 1)); done = [0]; t0 = time.time()
+    thr = int(os.environ.get('TS_THREADS', 3)); BOOST[0] = (par * thr) // len(items) if 0 < len(items) < par else 0
     def one(x):
         r = fn(x); done[0] += 1
         if done[0] % 10 == 0 or done[0] == len(items):
             print(time.strftime('%I:%M %p'), f'  {label}: {done[0]}/{len(items)} teams, {(time.time() - t0) / 60:.0f} min', flush=True)
         return r
-    with ThreadPoolExecutor(par) as ex: return list(ex.map(one, items))
+    try:
+        with ThreadPoolExecutor(par) as ex: return list(ex.map(one, items))
+    finally: BOOST[0] = 0
 
 def pool_mode(): return os.environ.get('TS_OPP') == 'pool'        # real-game opponent pool (poolmode.py) instead of archetype models
 

@@ -53,24 +53,64 @@ def build(log, request, side, topk=1, team=None):
     specs, info = BP.bot_position(text, request, side, topk=topk, team=export(team) if team else None, tag='bot')
     if not specs: raise RuntimeError('no position: ' + str(info.get('skip')))
     return specs, info
-def run_eval(posf, outf, threads=2, seeds=32):
+def run_eval(posf, outf, threads=2, seeds=32, extra=None):
     """champ evalpos as the Eval bar's engine.run does it, but started through the bot's own link (CHAMP_BIN: battlesim-champ-bot), not
     the shared evalbar-champ link that every caller repoints to its own binary (2026-10-12: the bot could start the Eval bar's engine)"""
     import subprocess
     grid = os.path.join(EB, 'out', 'emptygrid'); os.makedirs(grid, exist_ok=True)
     env = {**os.environ, 'RACE_TIES': 'avg', 'EVAL_SEEDS': str(seeds), 'EVAL_ADAPT': '1', 'EG_VALUE': os.environ.get('EG_VALUE', 'egvalue9_sym2.json'), 'RACE': '1', 'TRSYM': '1',
-           'CALC_DATA': '../native/champions_data_full.json', 'GRID_DIR': grid}
+           'CALC_DATA': '../native/champions_data_full.json', 'GRID_DIR': grid, **(extra or {})}
     subprocess.run([os.environ['CHAMP_BIN'], 'evalpos', '../native/' + os.environ['CHAMP_DATA'], os.path.abspath(posf), os.path.abspath(outf), str(threads)],
                    cwd=os.path.join(ROOT, 'pssim'), env=env, check=True)
-def decide(specs, request, side, threads=2, seeds=32, log=None, cap=None):
+# contempt (2026-10-12 evening, the user: the Bo3 bot as the exploiter): limits.json "contempt": {format: c}, read every decision; 0 = the
+# equilibrium as before. With c > 0 the bot plays the restricted Nash response of bot/contempt.py: the opponent plays the human model's
+# prediction with probability c and adversarially otherwise, solved on the turn's payoff matrix at each cell's precision (EVAL_MATRIX=1).
+# Measured offline on 999 rated human games: c 0.5 +0.95 ± 0.11 real points a decision against what people played, +0.34 against a
+# perfect opponent.
+CONTEMPT_MODEL = os.path.join(ROOT, 'bot', 'out', 'contempt', 'human_model.json')
+def contempt_of(fmt):
+    try: return float((json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))).get('contempt') or {}).get(fmt or '', 0.0))
+    except Exception: return 0.0
+def opponent_model(r, M):
+    """the human model's probability of each opposing joint option (columns of r's matrix), the slots taken as independent"""
+    import exploit_test as XT
+    sp = {}
+    for sl in r['sides'][1]['slots']:
+        sp[sl['slot']] = {json.dumps(o['c']): p for o, p in zip(sl['options'], XT.probs([(o['label'], o['w'], o['v']) for o in sl['options']], M))}
+    out = []
+    for col in r['matrix']['cols']:
+        pr = 1.0
+        for i, c in enumerate(col):
+            if c is not None and i in sp: pr *= sp[i].get(json.dumps(c), 1e-6)
+        out.append(pr)
+    t = sum(out) or 1.0
+    return [x / t for x in out]
+def contempt_mix(r, c):
+    """[{label, w}] over the bot's joint options: max_x c x.A.q + (1 - c) min_j x.A_j on the matrix in real win chance"""
+    import numpy as np
+    from scipy.optimize import linprog
+    import human_lines as HL
+    M = json.load(open(CONTEMPT_MODEL)); mx = r['matrix']
+    A0 = np.array([[np.nan if x is None else x for x in row] for row in mx['v1']], float)
+    if np.isnan(A0).any(): rm = np.nanmean(A0, axis=1); A0 = np.where(np.isnan(A0), rm[:, None], A0)
+    A = np.vectorize(lambda v: HL.resc(v, 0.7538))(A0); q = np.array(opponent_model(r, M)); n, k = A.shape
+    res = linprog(np.r_[-c * (A @ q), -(1 - c)], A_ub=np.c_[-A.T, np.ones(k)], b_ub=np.zeros(k), A_eq=np.r_[np.ones(n), 0.0][None], b_eq=[1.0],
+                  bounds=[(0, None)] * n + [(None, None)], method='highs')
+    x = res.x[:n]
+    return [{'label': mx['rl'][i], 'w': float(x[i]), 'v': float(A[i] @ q)} for i in range(n) if x[i] > 1e-4]
+def decide(specs, request, side, threads=2, seeds=32, log=None, cap=None, fmt=None):
     tag = f"t{request.get('rqid', 0)}_{random.randrange(1 << 20):05x}"
     posf = os.path.join(OUT, tag + '.pos.jsonl'); outf = os.path.join(OUT, tag + '.eval.jsonl')
     ps = LV.positions(specs, posf)
-    run_eval(posf, outf, threads, seeds)
+    c = contempt_of(fmt)
+    run_eval(posf, outf, threads, seeds, {'EVAL_MATRIX': '1'} if c > 0 else None)
     rows = {r['name']: r for r in map(json.loads, open(outf)) if 'error' not in r}
     w0, spec0 = specs[0]; name = spec0['name'] + ' p1'
     r = rows.get(name) or next(iter(rows.values()))
     s0 = r['sides'][0]; joint = [j for j in s0['joint'] if j['w'] > 0]
+    if c > 0 and r.get('matrix'):
+        try: joint = contempt_mix(r, c) or joint
+        except Exception as e: sys.stderr.write(f'contempt failed, equilibrium played: {e}\n')
     # the hard cap (limits.json protect_chain_cap, the user: 4): a Pokemon that has used Protect that many turns running may not again;
     # the joint options that have it Protect are dropped and the rest renormalized (if nothing is left, the cap gives way)
     if cap and log is not None:
@@ -125,7 +165,7 @@ def decide(specs, request, side, threads=2, seeds=32, log=None, cap=None):
     valid = [(j, command(j)) for j in joint]; valid = [(j, c) for j, c in valid if c]
     if not valid: return 'default', 'no option the request allows: default', r['value']
     pick, choice = random.choices(valid, weights=[j['w'] for j, _ in valid])[0]
-    note = f"{pick['label']} ({100 * pick['w']:.0f}%, value {100 * r['value']:.0f}%)"
+    note = f"{pick['label']} ({100 * pick['w']:.0f}%, value {100 * r['value']:.0f}%" + (f", contempt {c}" if c > 0 else '') + ")"
     return choice, note, r['value']
 def team_index(request, species):
     """1-based index in request.side.pokemon of the named Pokemon (by species, forme-insensitive)"""

@@ -73,7 +73,8 @@ def turn(msg):
     if req.get('forceSwitch'): return {'choice': POS.replacement(req, msg['log'], msg['side'], team=(msg.get('team') or {}).get('sets')), 'note': 'replacement'}
     specs, info = POS.build(msg['log'], req, msg['side'], team=(msg.get('team') or {}).get('sets'))
     cap = json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))).get('protect_chain_cap')
-    choice, note, value = POS.decide(specs, req, msg['side'], log=msg['log'], cap=cap)
+    fmt = (msg.get('room') or '').split('-')[1] if (msg.get('room') or '').count('-') >= 2 else None   # battle-<format>-<id>
+    choice, note, value = POS.decide(specs, req, msg['side'], log=msg['log'], cap=cap, fmt=fmt)
     # a lost game is forfeited rather than played out (the user: Protect-stalling a lost position is what would annoy people most):
     # the planner's value rescaled to a real win chance as the eval bar does (log-odds x 0.7538), under limits.json's forfeit_below
     real = 1 / (1 + math.exp(-CAL * math.log(max(1e-6, value) / max(1e-6, 1 - value))))

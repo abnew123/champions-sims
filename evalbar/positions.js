@@ -97,6 +97,9 @@ function rebuild(spec, flip) {
         }
         // yawnDue: a Yawn on the field at the start of a turn was used last turn, so it puts its target to sleep at the end of this one
         // (Showdown's duration 2 has already lost one end of turn). live.specs_for and botpos.bot_position (the bot, from 2026-10-12) set it
+        // fallenDue (live.specs_for; not the bot's yet): Supreme Overlord's count of fallen allies, taken when it came in (the log's
+        // -start fallenN); a Kingambit already on the field otherwise hit with none of it (the engine reads the ability state's 'fallen')
+        else if (spec.fallenDue && /^fallen[1-5]$/.test(v) && p.hasAbility('supremeoverlord')) p.abilityState.fallen = +v.slice(6);
         else if ((v === 'Encore' || v === 'Disable') && arg && p.moveSlots.some(m => m.id === arg))
           p.volatiles[toID(v)] = b.initEffectState({id: toID(v), target: p, move: arg, duration: n !== null ? n : v === 'Encore' ? 2 : 3});
         else approx.push(v);

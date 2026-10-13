@@ -1201,3 +1201,10 @@ registrations since its second version) and checks reachability of real logs in 
   Gluttony, the 'trapped' volatile with its trapper link (Block, Mean Look, Spirit Shackle, Anchor Shot, Jaw Lock), Unseen Fist.
 - Frozen for comparisons: `bin/champ-dev-2026-10-12d` (b26aa53; link `battlesim-champ-fc`). The live bot is unchanged (its frozen
   `champ-bot-2026-10-12` has none of today's fixes); they go in only when the user approves.
+- **champ-battle-v26 (2026-10-13, for Team search's climb):** the source as of cb9cf51 (every Oct 12 port and fix; the source the live
+  bot's champ-bot-2026-10-12c was built from), `native/champ/src_battle_v26.tar.gz`, built from the tarball itself; on 12 pool starts it
+  plays the bot binary's games exactly (timings apart). Sha file `native/champ/bin/champ-battle-v26.sha256`. The setup recommended for
+  the climb (the Oct 12 self-play arms' flags, the net on both sides): RACE_TIES=avg RACE=1 TRSYM=1 RACE_PRIO=1 FEATS22=1
+  EG_VALUE=egvalue9_sym2.json EG_VNET=bot/value/vnet_h64_search_fc.json EG_MEGA_TIE=0 DP2=1 BATTLE_ANTICIPATE=1, no EG_MEGA_ALWAYS (free
+  Mega choice), CALC_DATA=native/champions_data_full.json, engine data native/engine_data_full.json, GRID_DIR an empty directory. The
+  net costs about 2.2x the time a game of sym2 alone (12 starts: 17 s on 4 threads).

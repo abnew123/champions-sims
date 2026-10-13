@@ -16,6 +16,8 @@ also make it score well.
   fiteval [threads]   the staged one-turn search on them (the bot's settings, no matrix)
   fit                 the model refitted (fit on half the games, scored on the other half) -> bot/out/contempt/human_model.json, which
                       score uses from then on (the first model, bot/out/pos/human_model.json, was fitted on the static value's options)
+  live / livescore    the bot's live version: the staged one-turn search it runs now plus the matrix at each cell's precision
+                      (EVAL_MATRIX=1), the plays hidden (as live), choosing; scored on the set's full matrices (luck sample B)
   .venv/bin/python3 bot/contempt.py pick 400 | eval 2 | score"""
 # Results (2026-10-12 evening): pilot 300 games (lean low-rated): c 0.5 +1.02 ± 0.18 a decision for +0.54 against a perfect opponent.
 # 999 games with both players rated 1300+ (median 1368; 1,975 decisions, refitted model): c 0.25 +0.46 ± 0.08 for ~0; c 0.5 +0.95 ± 0.11
@@ -75,6 +77,59 @@ def run_evalpos(posf, outf, title, card, threads, matrix, extra=None):
     subprocess.run([os.path.join(ROOT, 'native', 'champ', 'bin', 'battlesim-champ-bot'), 'evalpos', '../native/engine_data_full.json', posf, outf, str(threads)],
                    cwd=pssim, env=env, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 def evaluate(threads=2): run_evalpos(POS, EVAL, f'contempt, full payoff matrices on human games{" (" + TAG + ")" if TAG else ""}', 'contempt' + TAG, threads, True)
+LPOS, LEVAL = os.path.join(OUT, TAG + 'live_pos.jsonl'), os.path.join(OUT, TAG + 'live_eval.jsonl')
+def live(threads=2):
+    with open(LPOS, 'w') as o:
+        for l in open(POS):
+            r = json.loads(l)
+            if r['name'].endswith(' sA'):
+                r['name'] = r['name'][:-3] + ' sL'; r['actual'] = [None, None]; r['their_actual'] = [None, None]; o.write(json.dumps(r) + '\n')
+    run_evalpos(LPOS, LEVAL, f'contempt, the live version on human games{" (" + TAG + ")" if TAG else ""}', 'contempt_live' + TAG, threads, False, {'EVAL_MATRIX': '1'})
+def livescore():
+    import numpy as np
+    from scipy.optimize import linprog
+    import exploit_test as XT, human_lines as HL
+    M = json.load(open(MODEL if os.path.exists(MODEL) else XT.MODEL))
+    real = np.vectorize(lambda v: HL.resc(v, CAL))
+    def solve(A, q=None, c=0.0):
+        n, k = A.shape; obj = np.r_[np.zeros(n), -1.0] if q is None else np.r_[-c * (A @ q), -(1 - c)]
+        res = linprog(obj, A_ub=np.c_[-A.T, np.ones(k)], b_ub=np.zeros(k), A_eq=np.r_[np.ones(n), 0.0][None], b_eq=[1.0], bounds=[(0, None)] * n + [(None, None)], method='highs')
+        return res.x[:n], (-res.fun if q is None else None)
+    L = {r['name'].rsplit(' s', 1)[0]: r for r in map(json.loads, open(LEVAL)) if 'error' not in r and 'matrix' in r}
+    B = {r['name'].rsplit(' s', 1)[0]: r for r in map(json.loads, open(EVAL)) if 'error' not in r and 'matrix' in r and r['name'].endswith(' sB')}
+    res = collections.defaultdict(list); games = []; nan_cells = 0; skipped = collections.Counter()
+    for base, l in L.items():
+        b = B.get(base)
+        if not b: skipped['no full matrix'] += 1; continue
+        if l['matrix']['rows'] != b['matrix']['rows'] or l['matrix']['cols'] != b['matrix']['cols']: skipped['option lists differ'] += 1; continue
+        A0 = np.array([[np.nan if x is None else x for x in row] for row in l['matrix']['v1']], float); B0 = np.array(b['matrix']['v1'], float)
+        if np.isnan(A0).any():   # a cell never sampled: its row's mean
+            nan_cells += int(np.isnan(A0).sum()); rm = np.nanmean(A0, axis=1); A0 = np.where(np.isnan(A0), rm[:, None], A0)
+        for us in (0, 1):
+            them = 1 - us
+            A = real(A0) if us == 0 else 1 - real(A0).T; Bm = real(B0) if us == 0 else 1 - real(B0).T
+            cols = b['matrix']['cols'] if us == 0 else b['matrix']['rows']
+            played = [next((o for o in sl['options'] if o.get('actual')), None) for sl in b['sides'][them]['slots']]
+            if any(p is None for p in played): skipped['play not found'] += 1; continue
+            want = [p['c'] for p in played]
+            act = next((j for j, c in enumerate(cols) if all(x == y for x, y in zip(c, want))), None)
+            if act is None: skipped['play not found'] += 1; continue
+            slots = l['sides'][them]['slots']
+            sp = [{json.dumps(o['c']): p for o, p in zip(sl['options'], XT.probs([(o['label'], o['w'], o['v']) for o in sl['options']], M))} for sl in slots]
+            q = np.array([math.prod(sp[i].get(json.dumps(c[i]), 1e-6) for i in range(len(c))) for c in cols]); q /= q.sum()
+            x_live = np.array(l['matrix']['x'] if us == 0 else l['matrix']['y'], float); x_live /= x_live.sum()   # the mix the bot plays now
+            vB = solve(Bm)[1]; base_v = x_live @ Bm[:, act]
+            res['c=0 (the bot now): price vs a perfect opponent'].append(vB - (x_live @ Bm).min())
+            for c in (0.25, 0.5, 0.75):
+                x = solve(A, q, c)[0]
+                res[f'c={c:.2f} gain vs the actual play'].append(x @ Bm[:, act] - base_v)
+                res[f'c={c:.2f} price vs a perfect opponent'].append(vB - (x @ Bm).min())
+            games.append(base.split(' ')[0])
+    print(f"{len(games)} decisions ({len(set(games))} games); never-sampled cells filled: {nan_cells}; skipped: {dict(skipped)}")
+    G = np.array(games)
+    for k, xs in res.items():
+        xs = np.array(xs); se = math.sqrt(sum(((xs[G == g] - xs.mean()).sum()) ** 2 for g in set(games))) / len(xs)
+        print(f"  {k:52s} {100 * xs.mean():+7.2f}  ± {100 * se:.2f}")
 def fitpick(n, seed=2):
     taken = {json.loads(l)['name'].split(' ')[0] for l in open(POS)} if os.path.exists(POS) else set()
     by_game = collections.defaultdict(list)
@@ -192,3 +247,5 @@ if __name__ == '__main__':
     elif a[0] == 'fitpick': fitpick(int(a[1]), int(a[2]) if len(a) > 2 else 2)
     elif a[0] == 'fiteval': fiteval(int(a[1]) if len(a) > 1 else 2)
     elif a[0] == 'fit': fit()
+    elif a[0] == 'live': live(int(a[1]) if len(a) > 1 else 2)
+    elif a[0] == 'livescore': livescore()

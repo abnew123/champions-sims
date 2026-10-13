@@ -73,6 +73,13 @@ SIMS = {
     'v27': dict(bin='champ-battle-v27', eg='egvalue9_sym2.json', grid=False, seedkey=True,
                 env=dict(V26_ENV, EG_VNET='../bot/value/vnet_h64_search_fc.json')),
     'v27s': dict(bin='champ-battle-v27', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V26_ENV)),
+    # v28 (Battle sim, 2026-10-13; the climb's frozen setup, at the user's wish): v27 with accuracy-aware value features (hit_chance:
+    # No Guard, rain Thunder / Hurricane, sun, snow Blizzard, Compound Eyes, Hustle, Wide Lens, accuracy stages; the turn simulation
+    # unchanged) and the h64 net refitted on them (vnet_h64_search_acc.json: self-play +3.4 +- 1.5 over v28s; real-pairings style
+    # bias RMS 3.6, about noise). Same flags and data as v27.
+    'v28': dict(bin='champ-battle-v28', eg='egvalue9_sym2.json', grid=False, seedkey=True,
+                env=dict(V26_ENV, EG_VNET='../bot/value/vnet_h64_search_acc.json')),
+    'v28s': dict(bin='champ-battle-v28', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V26_ENV)),
 }
 def sim(): return os.environ.get('TS_SIM', 'v3')
 def out_tag(seed0, per_job): return f'{seed0}_{per_job}' if sim() == 'v3' else f'{sim()}_{seed0}_{per_job}'

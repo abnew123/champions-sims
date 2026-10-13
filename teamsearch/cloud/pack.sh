@@ -4,7 +4,7 @@
 # the first AWS climb's results and any local climb state or pre-filter caches (so a new climb on the box starts fresh), and
 # regmatch/ and bring/previews.json (names; the climb needs neither: perish_stock.json and the fitted bring models cover them).
 # usage: [EXTRA_SRC='src_battle_v21.tar.gz ...'] teamsearch/cloud/pack.sh [battle source tarball, default src_battle_v20.tar.gz]
-# the v27 climb (2026-10-13): EXTRA_SRC='' teamsearch/cloud/pack.sh src_battle_v27.tar.gz, then remote_setup.sh src_battle_v27.tar.gz on the box
+# the v27 climb (2026-10-13): EXTRA_SRC='' teamsearch/cloud/pack.sh src_battle_v28.tar.gz, then remote_setup.sh src_battle_v28.tar.gz on the box
 set -e
 cd "$(dirname "$0")/../.."                      # project root
 SRC=${1:-src_battle_v20.tar.gz}
@@ -17,7 +17,7 @@ COPYFILE_DISABLE=1 tar --no-xattrs -czf "$OUT" \
   setup.sh foes.json \
   pssim/package.json pssim/package-lock.json pssim/engine_patch pssim/t1sim.js pssim/seedmix.js pssim/pro_replays.py pssim/cluster_opps.py pssim/opp_pool.py pssim/opp_pool.json pssim/h2test.py \
   pssim/results/core_rules_both_100.json native/engine_data_full.json \
-  pssim/opp_model_a.json pssim/opp_model_b.json pssim/myteam_c_incin.json $EGV native/champions_data_full.json bot/value/vnet_h64_search_fc.json \
+  pssim/opp_model_a.json pssim/opp_model_b.json pssim/myteam_c_incin.json $EGV native/champions_data_full.json bot/value/vnet_h64_search_fc.json bot/value/vnet_h64_search_acc.json \
   native/battle_starts.js native/export_state.js native/engine_data_spot.json native/champions_data.json \
   "native/champ/$SRC" $EXTRA native/champ/bin/*.sha256 \
   regionals/regional_teams.json regionals/regional_sets.json regionals/smogon_mc_sets.json regionals/smogon_mc_2026-09_moveset.txt \

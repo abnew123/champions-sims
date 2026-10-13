@@ -93,12 +93,20 @@ def ranked(team, key):
     r = sorted(((float(np.dot(w, FO.feats(m, hl, Lp, B))), Lp, B) for (Lp, B) in hl), key=lambda t: -t[0])
     return [([team[i] for i in Lp], [team[i] for i in B]) for _, Lp, B in r]
 
-def job(team, lead, back, e):
+def job(team, lead, back, e, si=None):
+    """one pool game's job. si: the seed key of (group, entry) for setups with seedkey (v27+): battle_starts.js seeds the game from it
+    instead of the job's position, so the same four against the same entry plays the same game in any job list (gamecache.py)"""
     from opp_pool import spread
     mine = [{k: E.G[g][k] for k in ('species', 'item', 'ability', 'nature', 'evs', 'moves')} for g in list(lead) + list(back)]
     six = {m['species']: m for m in e['six']}
     theirs = [{**six[x], 'evs': spread(x, six[x]['nature'])} for x in e['bring']]
-    return dict(mine=mine, theirs=theirs, meta=dict(pool_id=e['id'], pool_side=e['side'], group=e['group'], arch=e['arch'], rating=e['rating']))
+    meta = dict(pool_id=e['id'], pool_side=e['side'], group=e['group'], arch=e['arch'], rating=e['rating'])
+    if si is not None and E.SIMS[E.sim()].get('seedkey'): meta['seed_index'] = si
+    return dict(mine=mine, theirs=theirs, meta=meta)
+
+def sidx(k, ei):
+    """the seed key of entry ei (its rank in the group's rating-weighted order for this seed) of group k: < 64 entries per group"""
+    return keys()[0].index(k) * 64 + ei
 
 def _run(gids, jobs, seed0, threads, label):
     return E.run_jobs(gids, jobs, 1, seed0, threads, label, extra=dict(TS_ENGINE_DATA=FULL, SEED_PER_JOB='1'))   # per run, not os.environ (threads)
@@ -139,7 +147,7 @@ def search_team_plan(gids, seed0, threads):
         for k in G_:
             for c in cands[k]:
                 for ei in which:
-                    jobs.append(job(gids, R[k][c][0], R[k][c][1], ents[k][ei])); meta.append((k, c, ei))
+                    jobs.append(job(gids, R[k][c][0], R[k][c][1], ents[k][ei], sidx(k, ei))); meta.append((k, c, ei))
         rows = _run(gids, jobs, seed0 + stage, threads, f'pplan{stage}_{E.sim()}_{_jobhash(jobs)}')
         return {m: _wins(r) for m, r in zip(meta, rows)}
     s1 = list(range(PLAN_S1)); s2 = list(range(PLAN_S1, PLAN_S1 + PLAN_S2))
@@ -159,7 +167,7 @@ def search_team(gids, seed0, threads, K=None, sp=1):
     jobs, meta = [], []
     for k in G_:
         for c, (lead, back) in enumerate(R[k]):
-            for ei, e in enumerate(ents[k]): jobs.append(job(gids, lead, back, e)); meta.append((k, c, ei))
+            for ei, e in enumerate(ents[k]): jobs.append(job(gids, lead, back, e, sidx(k, ei))); meta.append((k, c, ei))
     rows = _run(gids, jobs, seed0, threads, f'psearch{K}_{E.sim()}' + (f'_es{E_S}' if E_S != 2 else ''))   # outputs are cached by job index: never share a dir across sample sizes
     val = {}
     for (k, c, ei), r in zip(meta, rows): val[(k, c, ei)] = _wins(r)
@@ -174,7 +182,7 @@ def evaluate_team(gids, brings, seed0, threads):
     jobs, slots = [], []
     for k in G_:
         lead, back = brings[k]
-        for ei, e in enumerate(ents[k]): jobs.append(job(gids, lead, back, e)); slots.append((k, ei))
+        for ei, e in enumerate(ents[k]): jobs.append(job(gids, lead, back, e, sidx(k, ei))); slots.append((k, ei))
     h = hashlib.md5(json.dumps({k: (list(v[0]), list(v[1])) for k, v in brings.items()}, sort_keys=True).encode()).hexdigest()[:8]
     rows = _run(gids, jobs, seed0, threads, f'pool_{E.sim()}_{h}_{seed0}' + (f'_ec{E_C}' if E_C != 8 else ''))
     val = {}

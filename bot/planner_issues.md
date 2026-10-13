@@ -132,3 +132,11 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     1.52% of 18,715 evaluated real positions): Cute Charm 34, Beat Up 25, Bug Bite 24, Magician 19, Future Sight 17, Guard Split 17, Sleep
     Talk 16, Unseen Fist 15 (Urshifu through Protect), Defog 12, Poison Point 9, Grass Pelt 8, Flying Press 7, Jaw Lock 7; also Shed Tail,
     Instruct, Curse (no handlers, none in the sample). To port with Revival Blessing in v29, Unseen Fist and Flying Press first.
+17. **Moves aimed at the partner are never planned (the Eval bar, 2026-10-13).** plan.rs FOE_TARGETS ("normal", "any", "adjacentFoe")
+    get foe targets only; only "adjacentAlly" moves get the partner. So neither side of the search sees Charm onto a Contrary partner
+    (game 348, Bo3 …2697490021, turn 6: Raichu Charm -> Mega Staraptor +2, Close Combat KOs Farigiraf, 95% -> 72%), Heal Pulse / Pollen
+    Puff / Instruct / Skill Swap / Entrainment / Psych Up on the partner, Beat Up into Justified, or an absorbing partner hit on purpose.
+    In the 18,782 Bo3 replays, partner-aimed uses of normal / any moves: Parting Shot 105, Charm 84, Heal Pulse 64, Psych Up 39, U-turn
+    37, Instruct 33, Skill Swap 29, Entrainment 23, Beat Up 18. Plan for v29: offer the partner for those moves only where they do
+    something (stat drops into Contrary / Defiant / Competitive, heals on a hurt partner, Instruct / Psych Up / Skill Swap / Entrainment,
+    Beat Up into Justified, a hit the partner absorbs or that trips its Weakness Policy), so the option count barely grows; self-play.

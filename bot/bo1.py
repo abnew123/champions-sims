@@ -8,7 +8,7 @@ sheet picks, the position builder) works as with open sheets; spreads are then i
   reveals(lines, side) -> {species id: {'moves', 'item', 'ability'}}
   guess(species, rev) -> (species, item, ability, nature, moves)          (packed names, as sheets write them)
   inject(lines, side, my_sets=None) -> lines with |showteam| for side (guessed) and, given our sets, for us (known), if absent"""
-import os, re, json
+import os, re, json, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 toid = lambda s: re.sub(r'[^a-z0-9]', '', (s or '').lower())
 pack = lambda s: re.sub(r'[^A-Za-z0-9]', '', s or '')
@@ -55,11 +55,24 @@ def reveals(lines, side):
                 if f.startswith('item:') and m['item'] is None: m['item'] = what
                 if f.startswith('ability:') and m['ability'] is None and not m['mega']: m['ability'] = what
     return out
-def guess(species, rev=None):
-    """the commonest whole set consistent with the reveals, else part by part; None if the species was never seen on a sheet"""
+def use_setguess():
+    """limits.json bo1_setguess (2026-10-12 evening, the Eval bar's evalbar/setguess.py: the set given the whole previewed team, by team
+    cores; whole set right 40% vs 25% for the species' commonest, held out by team)"""
+    try: return bool(json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))).get('bo1_setguess'))
+    except Exception: return False
+def guess(species, rev=None, teammates=None):
+    """the commonest whole set consistent with the reveals, else part by part; None if the species was never seen on a sheet. With
+    bo1_setguess on and the other five known, the Eval bar's setguess.best_set (the team's other Pokemon count) comes first"""
     P = prior().get(toid(species))
-    if not P: return None
     rev = rev or {'moves': set(), 'item': None, 'ability': None}
+    if teammates is not None and use_setguess():
+        try:
+            sys.path.insert(0, os.path.join(ROOT, 'evalbar')); import setguess as SG
+            r = {'moves': sorted(rev['moves']), **({'item': rev['item']} if rev['item'] else {}), **({'ability': rev['ability']} if rev['ability'] else {})}
+            b = SG.best_set(base(species), [base(t) for t in teammates], r)
+            if b: return ((P or {}).get('species') or base(species), b['item'], b['ability'], b['nature'], list(b['moves']))
+        except Exception as e: sys.stderr.write(f'setguess failed, the species prior used: {e}\n')
+    if not P: return None
     ok = lambda s: (rev['item'] is None or toid(s[1][0]) == rev['item']) and (rev['ability'] is None or toid(s[1][1]) == rev['ability']) \
         and rev['moves'] <= {toid(m) for m in s[2]}
     for n, (item, ab, nat), moves in P['sets']:
@@ -78,7 +91,7 @@ def inject(lines, side, my_sets=None, my_side=None):
     if side not in have:
         six = [l.split('|')[3].split(',')[0] for l in lines if l.startswith(f'|poke|{side}|')]
         rv = reveals(lines, side)
-        sets = [g for g in (guess(sp, rv.get(toid(base(sp)))) for sp in six) if g]
+        sets = [g for g in (guess(sp, rv.get(toid(base(sp))), [x for x in six if x != sp]) for sp in six) if g]
         if sets: add.append(f'|showteam|{side}|{packed(sets)}')
     if my_sets and my_side and my_side not in have:
         add.append(f"|showteam|{my_side}|{packed([(s['species'], pack(s['item']), pack(s['ability']), s['nature'], [pack(m) for m in s['moves']]) for s in my_sets])}")

@@ -38,6 +38,23 @@ def ranked(species, nature, item=''):
         rows = [(w, evs) for w, n, evs in T.get(key, []) if n == nature]
         if rows: return rows
     return []
+# fitted defaults (the user, 2026-10-13: "wire them in"): for each species and nature the whole spread that fits the most of the replays'
+# evidence (popfit.py: hits taken and given, turn order; held out, it fits 87.9% of each Pokemon's evidence against 85.1% for Smogon's most
+# used). With FITTED the eval bar's programs take it as the default and as the first candidate when a game's hits and turn order pick one;
+# the bot's do not set it yet, and the analyses that measure against Smogon's list (popfit, spread_fit) leave it off
+FITTED = False
+_FIT = None
+def fitted(species, nature):
+    """the fitted spread for this species (its base form, as the sheets name it) and nature, or None"""
+    global _FIT
+    if _FIT is None:
+        f = os.path.join(C.HERE, 'default_spreads.json'); _FIT = json.load(open(f))['spreads'] if os.path.exists(f) else {}
+    e = _FIT.get(f"{toid(species)}|{nature}") or _FIT.get(f"{toid(species.split('-')[0])}|{nature}")
+    return list(e) if e else None
+def candidates(species, nature, item=''):
+    """[(share, evs, name)]: the fitted spread first (with FITTED), then Smogon's listed ones, most used first"""
+    f = fitted(species, nature) if FITTED else None
+    return ([(None, f, 'fitted to the replays')] if f else []) + [(w, list(e), f'Smogon #{i + 1} ({100 * w:.0f}%)') for i, (w, e) in enumerate(ranked(species, nature, item))]
 def raw_speed(forme, evs, nature):
     sp = E['species'].get(toid(forme))
     if not sp: return None
@@ -231,7 +248,7 @@ def pick(species, nature, item, guess, obs, misses=None, nd=0):
     does not fit), else the old guess if it fits, else (the hits ruling every spread out) the one missing the fewest hits, and if the turn
     order rules that out, it with its Speed points moved as little as fits: (evs, why)"""
     obs = [o for o in obs if toid(o['species']) == toid(species)]
-    cands = [(w, evs, f'Smogon #{i + 1} ({100 * w:.0f}%)') for i, (w, evs) in enumerate(ranked(species, nature, item))] + [(0, list(guess), 'the plain guess')]
+    cands = candidates(species, nature, item) + [(0, list(guess), 'the plain guess')]
     seen = (f', fits {len(obs)} observed turn orders' if obs else '') + (f', {nd} hits' if nd else '')
     m = {tuple(e): (misses(e) if misses else 0) for _, e, _ in cands}
     for w, evs, name in cands:
@@ -411,7 +428,7 @@ def refine(log, gp, sets, known_side, known_evs, strict=False):
     obs = observations(log, known_side, ks, gp['sheets'], strict)
     other = 'p2' if known_side == 'p1' else 'p1'; why = {}
     dobs = damage_observations(log, known_side, strict)                         # strict: the eval bar's (the frozen bot's is the older reading)
-    cands = {sp: [list(e) for _, e in ranked(sp, st['nature'], st['item'])] + [list(st['evs'])] for sp, st in sets[other].items() if st}
+    cands = {sp: [list(e) for _, e, _ in candidates(sp, st['nature'], st['item'])] + [list(st['evs'])] for sp, st in sets[other].items() if st}
     R_ = damage_ranges(gp, sets, known_side, known_evs, dobs, cands, strict) if dobs else {}
     for sp, st in sets[other].items():
         if not st: continue
@@ -431,7 +448,7 @@ def nearby(gp, sets, known_side, known_evs, dobs, sp, st, mine, obs, misses0, st
     change, then the most used start. (evs, why) or None if nothing nearby misses fewer hits. The user asked for it (2026-10-12): a
     Charizard, a Gholdengo and an Indeedee survived on 1% hits their guessed spreads could not"""
     other = 'p2' if known_side == 'p1' else 'p1'
-    bases = [(f'Smogon #{i + 1}', list(e)) for i, (_, e) in enumerate(ranked(sp, st['nature'], st['item'])[:3])] + [('the plain guess', list(st['evs']))]
+    bases = [(name.split(' (')[0], list(e)) for _, e, name in candidates(sp, st['nature'], st['item'])[:4 if FITTED else 3]] + [('the plain guess', list(st['evs']))]
     mobs = [o for o in obs if toid(o['species']) == toid(sp)]
     def targets(evs):
         out = set()

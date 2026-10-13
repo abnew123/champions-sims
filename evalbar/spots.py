@@ -15,6 +15,8 @@ MV = json.load(open(os.path.join(C.PSSIM, 'dex_moves_types.json')))['moves']
 toid = R.toid; ORDER = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
 def mega_of(species, item): return (E['items'].get(toid(item), {}).get('megaStone') or {}).get(species)
 def evs_for(species, item, nature, moves):
+    import spreads
+    if spreads.FITTED and spreads.fitted(species, nature): return spreads.fitted(species, nature)   # the eval bar's: fitted to the replays
     nat = E['natures'].get(toid(nature), {}); plus = nat.get('plus')
     base = SM.get(mega_of(species, item) or '') or SM.get(species)
     if base and (base['nature'] == nature or E['natures'].get(toid(base['nature']), {}).get('plus') == plus): return list(base['evs'])

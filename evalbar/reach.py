@@ -161,6 +161,7 @@ def run(files, seeds, bot=True, out=None, title=None):
     return rows
 if __name__ == '__main__':
     P.own(); R.BATON_PASS = R.MEGA_ABIL = True
+    import spreads; spreads.FITTED = True
     a = sys.argv[1:]; seeds = next((int(x[6:]) for x in a if x.startswith('seeds=')), 32); n = next((int(x) for x in a if x.isdigit()), None)
     if a and a[0] == 'recheck':                                                 # recheck <file.jsonl>: its unreached turns again
         f = a[1]; rows = [json.loads(l) for l in open(f)]

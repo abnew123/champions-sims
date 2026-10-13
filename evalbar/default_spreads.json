@@ -1,0 +1,14033 @@
+{
+"spreads": {
+"rillaboom|Adamant": [
+2,
+24,
+20,
+0,
+20,
+0
+],
+"incineroar|Impish": [
+30,
+0,
+20,
+0,
+16,
+0
+],
+"raichu|Timid": [
+20,
+0,
+12,
+2,
+0,
+32
+],
+"garchomp|Modest": [
+0,
+2,
+0,
+32,
+0,
+32
+],
+"gholdengo|Modest": [
+24,
+0,
+0,
+4,
+20,
+18
+],
+"incineroar|Careful": [
+26,
+0,
+16,
+0,
+24,
+0
+],
+"kingambit|Adamant": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"sylveon|Modest": [
+12,
+0,
+30,
+24,
+0,
+0
+],
+"archaludon|Calm": [
+32,
+0,
+8,
+0,
+26,
+0
+],
+"volcarona|Timid": [
+18,
+0,
+28,
+0,
+0,
+20
+],
+"arcaninehisui|Jolly": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"volcarona|Modest": [
+16,
+0,
+16,
+8,
+4,
+22
+],
+"floetteeternal|Modest": [
+24,
+0,
+16,
+6,
+0,
+20
+],
+"delphox|Timid": [
+4,
+0,
+8,
+18,
+4,
+32
+],
+"archaludon|Modest": [
+32,
+0,
+0,
+8,
+26,
+0
+],
+"incineroar|Relaxed": [
+30,
+4,
+20,
+0,
+12,
+0
+],
+"salamence|Timid": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"primarina|Modest": [
+22,
+0,
+16,
+8,
+4,
+16
+],
+"staraptor|Jolly": [
+22,
+4,
+0,
+0,
+8,
+32
+],
+"garchomp|Adamant": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"gholdengo|Timid": [
+8,
+0,
+4,
+22,
+0,
+32
+],
+"golisopod|Adamant": [
+32,
+30,
+0,
+0,
+4,
+0
+],
+"gengar|Modest": [
+28,
+0,
+8,
+10,
+12,
+8
+],
+"charizard|Modest": [
+12,
+0,
+20,
+2,
+0,
+32
+],
+"incineroar|Adamant": [
+22,
+16,
+12,
+0,
+16,
+0
+],
+"kommoo|Modest": [
+12,
+0,
+0,
+22,
+0,
+32
+],
+"milotic|Calm": [
+32,
+0,
+26,
+4,
+4,
+0
+],
+"charizard|Timid": [
+4,
+0,
+20,
+10,
+8,
+24
+],
+"archaludon|Bold": [
+32,
+0,
+4,
+4,
+26,
+0
+],
+"garchomp|Timid": [
+0,
+2,
+0,
+32,
+0,
+32
+],
+"basculegion|Jolly": [
+0,
+30,
+4,
+0,
+0,
+32
+],
+"farigiraf|Bold": [
+26,
+0,
+24,
+0,
+16,
+0
+],
+"venusaur|Modest": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"sneasler|Jolly": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"farigiraf|Modest": [
+30,
+0,
+28,
+0,
+8,
+0
+],
+"pelipper|Modest": [
+4,
+0,
+16,
+22,
+4,
+20
+],
+"dragonite|Modest": [
+8,
+2,
+0,
+24,
+0,
+32
+],
+"gardevoir|Modest": [
+28,
+0,
+0,
+22,
+0,
+16
+],
+"pelipper|Bold": [
+30,
+0,
+4,
+0,
+16,
+16
+],
+"incineroar|Sassy": [
+30,
+0,
+12,
+0,
+24,
+0
+],
+"milotic|Modest": [
+26,
+0,
+16,
+16,
+4,
+4
+],
+"basculegion|Adamant": [
+4,
+22,
+12,
+0,
+0,
+28
+],
+"indeedeef|Relaxed": [
+32,
+0,
+30,
+0,
+0,
+4
+],
+"indeedeef|Bold": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"excadrill|Adamant": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"tyranitar|Jolly": [
+16,
+18,
+0,
+0,
+0,
+32
+],
+"garchomp|Jolly": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"sinistcha|Bold": [
+30,
+0,
+16,
+0,
+20,
+0
+],
+"milotic|Bold": [
+32,
+4,
+26,
+0,
+0,
+4
+],
+"gengar|Timid": [
+24,
+0,
+0,
+10,
+0,
+32
+],
+"torkoal|Quiet": [
+30,
+0,
+0,
+32,
+4,
+0
+],
+"froslass|Timid": [
+16,
+0,
+8,
+14,
+4,
+24
+],
+"swampert|Adamant": [
+6,
+32,
+0,
+0,
+4,
+24
+],
+"tyranitar|Adamant": [
+24,
+26,
+4,
+4,
+0,
+8
+],
+"farigiraf|Sassy": [
+26,
+0,
+16,
+0,
+24,
+0
+],
+"farigiraf|Relaxed": [
+22,
+0,
+28,
+0,
+16,
+0
+],
+"farigiraf|Quiet": [
+22,
+0,
+16,
+12,
+16,
+0
+],
+"whimsicott|Timid": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"rillaboom|Careful": [
+30,
+12,
+0,
+0,
+24,
+0
+],
+"floetteeternal|Timid": [
+14,
+0,
+24,
+4,
+0,
+24
+],
+"basculegionf|Modest": [
+0,
+0,
+0,
+32,
+2,
+32
+],
+"politoed|Calm": [
+32,
+0,
+22,
+0,
+12,
+0
+],
+"politoed|Modest": [
+30,
+0,
+4,
+20,
+4,
+8
+],
+"indeedee|Timid": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"camerupt|Quiet": [
+24,
+0,
+4,
+30,
+8,
+0
+],
+"indeedee|Modest": [
+4,
+0,
+0,
+32,
+0,
+30
+],
+"salamence|Modest": [
+0,
+0,
+4,
+22,
+20,
+20
+],
+"annihilape|Adamant": [
+4,
+32,
+0,
+0,
+0,
+30
+],
+"sneasler|Adamant": [
+8,
+26,
+0,
+0,
+4,
+28
+],
+"grimmsnarl|Sassy": [
+26,
+0,
+20,
+0,
+20,
+0
+],
+"corviknight|Careful": [
+32,
+0,
+0,
+0,
+26,
+8
+],
+"blastoise|Modest": [
+12,
+0,
+0,
+32,
+0,
+22
+],
+"golisopod|Brave": [
+30,
+32,
+4,
+0,
+0,
+0
+],
+"metagross|Jolly": [
+0,
+30,
+0,
+0,
+4,
+32
+],
+"aerodactyl|Jolly": [
+4,
+30,
+0,
+0,
+0,
+32
+],
+"excadrill|Jolly": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"gardevoir|Timid": [
+0,
+0,
+0,
+26,
+8,
+32
+],
+"armarouge|Modest": [
+8,
+0,
+0,
+26,
+0,
+32
+],
+"floetteeternal|Bold": [
+32,
+0,
+30,
+0,
+0,
+4
+],
+"volcarona|Bold": [
+30,
+0,
+28,
+8,
+0,
+0
+],
+"toxapex|Relaxed": [
+32,
+0,
+14,
+4,
+16,
+0
+],
+"grimmsnarl|Careful": [
+32,
+4,
+18,
+0,
+12,
+0
+],
+"metagross|Adamant": [
+26,
+12,
+0,
+0,
+0,
+28
+],
+"pelipper|Timid": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"staraptor|Adamant": [
+22,
+12,
+0,
+0,
+4,
+28
+],
+"ninetalesalola|Timid": [
+0,
+0,
+20,
+22,
+0,
+24
+],
+"glimmora|Timid": [
+0,
+8,
+0,
+26,
+0,
+32
+],
+"rillaboom|Sassy": [
+30,
+4,
+0,
+0,
+32,
+0
+],
+"farigiraf|Calm": [
+30,
+0,
+16,
+0,
+20,
+0
+],
+"annihilape|Jolly": [
+0,
+26,
+8,
+0,
+0,
+32
+],
+"kingambit|Brave": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"ceruledge|Adamant": [
+32,
+8,
+6,
+0,
+0,
+20
+],
+"sinistcha|Calm": [
+30,
+0,
+16,
+0,
+20,
+0
+],
+"lucario|Timid": [
+14,
+0,
+0,
+24,
+8,
+20
+],
+"hatterene|Quiet": [
+30,
+0,
+4,
+28,
+4,
+0
+],
+"kommoo|Timid": [
+0,
+0,
+12,
+30,
+4,
+20
+],
+"dragapult|Timid": [
+0,
+0,
+4,
+32,
+0,
+30
+],
+"indeedeef|Sassy": [
+32,
+0,
+20,
+0,
+14,
+0
+],
+"baxcalibur|Adamant": [
+20,
+10,
+4,
+0,
+12,
+20
+],
+"glimmora|Modest": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"incineroar|Brave": [
+32,
+28,
+0,
+0,
+6,
+0
+],
+"pyroar|Timid": [
+0,
+0,
+0,
+30,
+4,
+32
+],
+"meowsticf|Timid": [
+6,
+0,
+0,
+28,
+0,
+32
+],
+"hippowdon|Careful": [
+22,
+4,
+8,
+0,
+32,
+0
+],
+"rillaboom|Jolly": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"volcarona|Calm": [
+28,
+0,
+16,
+0,
+16,
+6
+],
+"sylveon|Quiet": [
+24,
+0,
+14,
+28,
+0,
+0
+],
+"indeedeef|Calm": [
+30,
+0,
+28,
+0,
+8,
+0
+],
+"salamence|Naive": [
+4,
+8,
+0,
+22,
+0,
+32
+],
+"salamence|Hasty": [
+4,
+8,
+0,
+22,
+0,
+32
+],
+"raichu|Hasty": [
+0,
+4,
+0,
+30,
+0,
+32
+],
+"rillaboom|Brave": [
+30,
+32,
+0,
+0,
+0,
+4
+],
+"toxapex|Bold": [
+32,
+0,
+26,
+0,
+8,
+0
+],
+"weavile|Jolly": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"torkoal|Modest": [
+32,
+0,
+0,
+30,
+4,
+0
+],
+"blaziken|Adamant": [
+4,
+32,
+0,
+16,
+0,
+14
+],
+"dragonite|Timid": [
+0,
+2,
+0,
+32,
+0,
+32
+],
+"rotomheat|Timid": [
+4,
+0,
+4,
+32,
+0,
+26
+],
+"milotic|Timid": [
+14,
+0,
+32,
+0,
+0,
+20
+],
+"hydreigon|Modest": [
+4,
+0,
+0,
+32,
+0,
+30
+],
+"arcaninehisui|Adamant": [
+0,
+32,
+4,
+0,
+0,
+30
+],
+"lucario|Modest": [
+8,
+0,
+8,
+18,
+0,
+32
+],
+"archaludon|Timid": [
+6,
+0,
+4,
+24,
+0,
+32
+],
+"lopunny|Jolly": [
+0,
+32,
+0,
+2,
+0,
+32
+],
+"pawmot|Jolly": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"armarouge|Quiet": [
+22,
+0,
+8,
+28,
+8,
+0
+],
+"grimmsnarl|Impish": [
+30,
+4,
+20,
+0,
+12,
+0
+],
+"froslass|Modest": [
+4,
+0,
+0,
+26,
+8,
+28
+],
+"absol|Jolly": [
+4,
+28,
+0,
+6,
+0,
+28
+],
+"rillaboom|Impish": [
+26,
+8,
+12,
+0,
+20,
+0
+],
+"pelipper|Calm": [
+32,
+0,
+0,
+6,
+28,
+0
+],
+"corviknight|Impish": [
+32,
+0,
+12,
+0,
+22,
+0
+],
+"sceptile|Timid": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"armarouge|Timid": [
+4,
+0,
+0,
+30,
+0,
+32
+],
+"mawile|Brave": [
+28,
+28,
+0,
+6,
+4,
+0
+],
+"scrafty|Adamant": [
+18,
+32,
+4,
+0,
+12,
+0
+],
+"sylveon|Calm": [
+20,
+4,
+14,
+12,
+0,
+16
+],
+"dragapult|Adamant": [
+4,
+30,
+0,
+0,
+0,
+32
+],
+"politoed|Bold": [
+32,
+0,
+26,
+0,
+0,
+8
+],
+"primarina|Quiet": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"sinistchamasterpiece|Bold": [
+32,
+0,
+12,
+0,
+18,
+4
+],
+"meganium|Modest": [
+20,
+0,
+4,
+30,
+12,
+0
+],
+"sinistcha|Relaxed": [
+32,
+0,
+32,
+2,
+0,
+0
+],
+"talonflame|Jolly": [
+4,
+32,
+0,
+0,
+4,
+26
+],
+"klefki|Bold": [
+32,
+0,
+26,
+0,
+8,
+0
+],
+"dragonite|Adamant": [
+12,
+26,
+0,
+0,
+8,
+20
+],
+"mausholdfour|Jolly": [
+22,
+12,
+4,
+0,
+4,
+24
+],
+"hydreigon|Timid": [
+4,
+0,
+8,
+22,
+4,
+28
+],
+"toxapex|Careful": [
+30,
+0,
+12,
+0,
+12,
+12
+],
+"toxapex|Calm": [
+32,
+0,
+4,
+0,
+30,
+0
+],
+"typhlosionhisui|Modest": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"kangaskhan|Adamant": [
+24,
+30,
+8,
+0,
+4,
+0
+],
+"empoleon|Modest": [
+30,
+0,
+0,
+32,
+4,
+0
+],
+"raichu|Modest": [
+0,
+12,
+4,
+18,
+0,
+32
+],
+"drampa|Quiet": [
+32,
+0,
+0,
+30,
+4,
+0
+],
+"mawile|Adamant": [
+24,
+28,
+4,
+2,
+8,
+0
+],
+"rillaboom|Serious": [
+32,
+30,
+0,
+0,
+4,
+0
+],
+"dragapult|Modest": [
+0,
+0,
+4,
+32,
+0,
+30
+],
+"clefable|Bold": [
+32,
+0,
+30,
+4,
+0,
+0
+],
+"dragapult|Jolly": [
+4,
+32,
+0,
+0,
+0,
+30
+],
+"whimsicott|Modest": [
+0,
+0,
+4,
+30,
+0,
+32
+],
+"scovillain|Calm": [
+24,
+0,
+12,
+2,
+28,
+0
+],
+"clefable|Calm": [
+26,
+0,
+12,
+4,
+24,
+0
+],
+"whimsicott|Bold": [
+22,
+0,
+8,
+12,
+0,
+24
+],
+"ninetalesalola|Modest": [
+0,
+0,
+4,
+32,
+0,
+30
+],
+"altaria|Calm": [
+26,
+0,
+8,
+8,
+20,
+4
+],
+"gliscor|Adamant": [
+22,
+32,
+0,
+0,
+4,
+8
+],
+"incineroar|Jolly": [
+26,
+0,
+16,
+0,
+8,
+16
+],
+"scizor|Adamant": [
+30,
+28,
+0,
+0,
+8,
+0
+],
+"scovillain|Bold": [
+30,
+0,
+24,
+0,
+12,
+0
+],
+"empoleon|Bold": [
+32,
+0,
+26,
+8,
+0,
+0
+],
+"vivillon|Timid": [
+4,
+0,
+0,
+30,
+0,
+32
+],
+"kangaskhan|Brave": [
+18,
+28,
+8,
+0,
+12,
+0
+],
+"azumarill|Adamant": [
+30,
+32,
+4,
+0,
+0,
+0
+],
+"absol|Adamant": [
+0,
+20,
+8,
+6,
+0,
+32
+],
+"bellibolt|Modest": [
+30,
+0,
+8,
+0,
+28,
+0
+],
+"salamence|Jolly": [
+8,
+6,
+0,
+28,
+8,
+16
+],
+"slowbro|Relaxed": [
+32,
+0,
+0,
+2,
+32,
+0
+],
+"sinistchamasterpiece|Calm": [
+32,
+0,
+12,
+0,
+22,
+0
+],
+"rotomheat|Modest": [
+30,
+0,
+4,
+20,
+0,
+12
+],
+"rotomwash|Timid": [
+8,
+0,
+0,
+22,
+4,
+32
+],
+"raichu|Jolly": [
+16,
+14,
+4,
+0,
+0,
+32
+],
+"mamoswine|Adamant": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"overqwil|Adamant": [
+0,
+32,
+0,
+8,
+0,
+26
+],
+"espathra|Timid": [
+12,
+0,
+16,
+6,
+20,
+12
+],
+"baxcalibur|Jolly": [
+0,
+22,
+12,
+0,
+0,
+32
+],
+"corviknight|Adamant": [
+26,
+24,
+0,
+0,
+16,
+0
+],
+"aegislash|Adamant": [
+28,
+32,
+0,
+0,
+4,
+2
+],
+"cinderace|Jolly": [
+4,
+6,
+4,
+0,
+24,
+28
+],
+"alakazam|Timid": [
+0,
+0,
+4,
+30,
+0,
+32
+],
+"primarina|Bold": [
+26,
+0,
+20,
+12,
+8,
+0
+],
+"basculegion|Careful": [
+16,
+10,
+4,
+0,
+32,
+4
+],
+"altaria|Modest": [
+22,
+0,
+4,
+32,
+0,
+8
+],
+"politoed|Quiet": [
+32,
+0,
+4,
+30,
+0,
+0
+],
+"typhlosionhisui|Timid": [
+0,
+0,
+0,
+30,
+4,
+32
+],
+"gyarados|Adamant": [
+0,
+32,
+0,
+0,
+8,
+26
+],
+"gardevoir|Quiet": [
+26,
+0,
+8,
+32,
+0,
+0
+],
+"manectric|Timid": [
+4,
+0,
+0,
+14,
+16,
+32
+],
+"annihilape|Careful": [
+12,
+10,
+12,
+0,
+4,
+28
+],
+"gliscor|Jolly": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"venusaur|Timid": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"tyranitar|Brave": [
+20,
+30,
+4,
+8,
+4,
+0
+],
+"kleavor|Jolly": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"scrafty|Brave": [
+24,
+32,
+4,
+0,
+6,
+0
+],
+"alcremie|Bold": [
+30,
+0,
+32,
+4,
+0,
+0
+],
+"salamence|Adamant": [
+0,
+0,
+0,
+30,
+4,
+32
+],
+"sableye|Calm": [
+30,
+4,
+8,
+0,
+24,
+0
+],
+"politoed|Sassy": [
+32,
+0,
+22,
+0,
+8,
+4
+],
+"klefki|Calm": [
+10,
+0,
+20,
+4,
+32,
+0
+],
+"maushold|Jolly": [
+8,
+14,
+16,
+0,
+4,
+24
+],
+"dragapult|Naive": [
+4,
+32,
+0,
+2,
+0,
+28
+],
+"overqwil|Careful": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"skeledirge|Bold": [
+26,
+0,
+0,
+8,
+32,
+0
+],
+"kommoo|Bold": [
+8,
+0,
+4,
+22,
+0,
+32
+],
+"grapploct|Adamant": [
+26,
+32,
+8,
+0,
+0,
+0
+],
+"sinistchamasterpiece|Modest": [
+22,
+0,
+16,
+12,
+16,
+0
+],
+"ceruledge|Jolly": [
+0,
+30,
+0,
+0,
+4,
+32
+],
+"umbreon|Calm": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"palafin|Adamant": [
+16,
+18,
+0,
+0,
+0,
+32
+],
+"pidgeot|Timid": [
+0,
+0,
+0,
+30,
+4,
+32
+],
+"venusaur|Bold": [
+12,
+0,
+28,
+2,
+24,
+0
+],
+"charizard|Adamant": [
+16,
+6,
+8,
+0,
+4,
+32
+],
+"swampert|Jolly": [
+6,
+28,
+0,
+16,
+0,
+16
+],
+"hippowdon|Sassy": [
+22,
+8,
+8,
+0,
+28,
+0
+],
+"tyranitar|Careful": [
+8,
+26,
+8,
+0,
+24,
+0
+],
+"goodrahisui|Modest": [
+22,
+0,
+4,
+32,
+8,
+0
+],
+"garchomp|Impish": [
+16,
+14,
+20,
+0,
+16,
+0
+],
+"golisopod|Sassy": [
+30,
+4,
+0,
+0,
+32,
+0
+],
+"araquanid|Brave": [
+30,
+32,
+0,
+0,
+4,
+0
+],
+"kleavor|Adamant": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"toxapex|Impish": [
+32,
+4,
+26,
+0,
+4,
+0
+],
+"camerupt|Modest": [
+12,
+0,
+0,
+32,
+16,
+6
+],
+"vanilluxe|Timid": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"toxapex|Sassy": [
+30,
+0,
+4,
+8,
+24,
+0
+],
+"tinkaton|Jolly": [
+6,
+24,
+0,
+0,
+4,
+32
+],
+"mimikyu|Adamant": [
+2,
+20,
+16,
+0,
+8,
+20
+],
+"maushold|Bold": [
+30,
+0,
+20,
+0,
+16,
+0
+],
+"sinistcha|Modest": [
+30,
+0,
+12,
+16,
+8,
+0
+],
+"aerodactyl|Adamant": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"houndoom|Timid": [
+8,
+0,
+0,
+32,
+0,
+26
+],
+"swalot|Calm": [
+24,
+0,
+24,
+2,
+12,
+4
+],
+"indeedeef|Timid": [
+30,
+0,
+8,
+12,
+0,
+16
+],
+"skeledirge|Modest": [
+22,
+0,
+0,
+28,
+4,
+12
+],
+"grapploct|Brave": [
+32,
+14,
+4,
+0,
+16,
+0
+],
+"krookodile|Adamant": [
+4,
+32,
+0,
+0,
+0,
+30
+],
+"maushold|Impish": [
+30,
+0,
+16,
+0,
+20,
+0
+],
+"bastiodon|Relaxed": [
+32,
+0,
+4,
+0,
+30,
+0
+],
+"swalot|Sassy": [
+24,
+0,
+4,
+10,
+28,
+0
+],
+"rotomwash|Modest": [
+26,
+0,
+4,
+28,
+8,
+0
+],
+"ampharos|Quiet": [
+24,
+0,
+8,
+30,
+4,
+0
+],
+"gallade|Jolly": [
+4,
+30,
+0,
+0,
+0,
+32
+],
+"sableye|Bold": [
+30,
+4,
+24,
+0,
+8,
+0
+],
+"altaria|Adamant": [
+30,
+28,
+4,
+0,
+0,
+4
+],
+"blastoise|Quiet": [
+32,
+0,
+2,
+28,
+4,
+0
+],
+"meganium|Timid": [
+4,
+0,
+4,
+30,
+8,
+20
+],
+"delphox|Modest": [
+8,
+0,
+0,
+22,
+4,
+32
+],
+"volcarona|Serious": [
+12,
+0,
+24,
+12,
+0,
+18
+],
+"swampert|Careful": [
+26,
+12,
+0,
+0,
+24,
+4
+],
+"inteleon|Timid": [
+0,
+0,
+0,
+30,
+4,
+32
+],
+"samurotthisui|Adamant": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"indeedeef|Modest": [
+22,
+0,
+24,
+16,
+4,
+0
+],
+"tsareena|Adamant": [
+4,
+26,
+0,
+0,
+8,
+28
+],
+"incineroar|Serious": [
+14,
+12,
+20,
+0,
+20,
+0
+],
+"milotic|Relaxed": [
+32,
+0,
+30,
+0,
+4,
+0
+],
+"rotomwash|Bold": [
+20,
+0,
+0,
+2,
+16,
+28
+],
+"tsareena|Jolly": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"dragonite|Jolly": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"grimmsnarl|Calm": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"ninetales|Timid": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"sneasler|Naive": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"lycanrocdusk|Adamant": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"clefable|Modest": [
+32,
+0,
+22,
+4,
+8,
+0
+],
+"pincurchin|Quiet": [
+32,
+0,
+4,
+26,
+4,
+0
+],
+"ditto|Timid": [
+32,
+0,
+0,
+0,
+2,
+32
+],
+"aggron|Careful": [
+28,
+0,
+4,
+2,
+32,
+0
+],
+"gardevoir|Bold": [
+24,
+0,
+12,
+26,
+0,
+4
+],
+"starmie|Jolly": [
+4,
+32,
+0,
+2,
+0,
+28
+],
+"sinistchamasterpiece|Quiet": [
+32,
+0,
+4,
+0,
+30,
+0
+],
+"sirfetchd|Adamant": [
+26,
+32,
+8,
+0,
+0,
+0
+],
+"tinkaton|Rash": [
+10,
+12,
+24,
+0,
+4,
+16
+],
+"araquanid|Adamant": [
+10,
+28,
+0,
+0,
+20,
+8
+],
+"indeedeef|Quiet": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"meowscarada|Jolly": [
+8,
+26,
+0,
+0,
+0,
+32
+],
+"pawmot|Adamant": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"gengar|Calm": [
+16,
+0,
+0,
+22,
+24,
+4
+],
+"goodrahisui|Bold": [
+28,
+0,
+32,
+6,
+0,
+0
+],
+"talonflame|Adamant": [
+4,
+22,
+0,
+0,
+8,
+32
+],
+"tyranitar|Relaxed": [
+16,
+10,
+8,
+24,
+0,
+8
+],
+"drampa|Calm": [
+30,
+0,
+16,
+4,
+16,
+0
+],
+"gyarados|Jolly": [
+0,
+26,
+4,
+12,
+0,
+24
+],
+"blaziken|Modest": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"swampert|Relaxed": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"steelix|Brave": [
+4,
+28,
+0,
+2,
+16,
+16
+],
+"sneasler|Serious": [
+4,
+32,
+0,
+0,
+4,
+26
+],
+"torkoal|Relaxed": [
+30,
+0,
+8,
+16,
+12,
+0
+],
+"floetteeternal|Calm": [
+28,
+0,
+0,
+2,
+8,
+28
+],
+"ninetales|Modest": [
+4,
+0,
+0,
+32,
+0,
+30
+],
+"samurotthisui|Jolly": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"banette|Adamant": [
+0,
+16,
+0,
+18,
+0,
+32
+],
+"snorlax|Impish": [
+32,
+0,
+30,
+0,
+4,
+0
+],
+"chandelure|Modest": [
+20,
+0,
+0,
+18,
+20,
+8
+],
+"gallade|Adamant": [
+32,
+32,
+2,
+0,
+0,
+0
+],
+"rotomwash|Calm": [
+32,
+0,
+0,
+2,
+32,
+0
+],
+"sableye|Careful": [
+30,
+0,
+8,
+0,
+28,
+0
+],
+"dragapult|Hasty": [
+0,
+24,
+0,
+10,
+0,
+32
+],
+"reuniclus|Quiet": [
+10,
+0,
+20,
+12,
+24,
+0
+],
+"indeedee|Bold": [
+4,
+0,
+0,
+26,
+24,
+12
+],
+"feraligatr|Adamant": [
+18,
+32,
+0,
+0,
+12,
+4
+],
+"rotom|Timid": [
+12,
+0,
+4,
+10,
+8,
+32
+],
+"sinistcha|Sassy": [
+32,
+0,
+4,
+0,
+30,
+0
+],
+"mausholdfour|Timid": [
+26,
+0,
+4,
+0,
+12,
+24
+],
+"talonflame|Timid": [
+4,
+0,
+0,
+30,
+8,
+24
+],
+"zoroarkhisui|Timid": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"vivillongarden|Timid": [
+4,
+0,
+8,
+22,
+0,
+32
+],
+"garchomp|Serious": [
+0,
+18,
+0,
+16,
+0,
+32
+],
+"gallade|Brave": [
+30,
+28,
+0,
+0,
+0,
+8
+],
+"hawlucha|Jolly": [
+0,
+10,
+24,
+0,
+8,
+24
+],
+"sylveon|Serious": [
+8,
+0,
+32,
+26,
+0,
+0
+],
+"volcarona|Bashful": [
+32,
+0,
+0,
+12,
+4,
+18
+],
+"eelektross|Modest": [
+0,
+0,
+0,
+26,
+16,
+24
+],
+"golurk|Adamant": [
+4,
+20,
+8,
+2,
+24,
+8
+],
+"sylveon|Sassy": [
+20,
+0,
+14,
+0,
+32,
+0
+],
+"primarina|Sassy": [
+32,
+0,
+0,
+14,
+20,
+0
+],
+"scovillain|Modest": [
+4,
+0,
+0,
+30,
+20,
+12
+],
+"mamoswine|Jolly": [
+4,
+32,
+0,
+0,
+0,
+30
+],
+"raichu|Adamant": [
+4,
+24,
+0,
+6,
+4,
+28
+],
+"dragonite|Quiet": [
+20,
+6,
+4,
+32,
+4,
+0
+],
+"sableye|Relaxed": [
+32,
+0,
+28,
+0,
+6,
+0
+],
+"tyranitar|Serious": [
+24,
+10,
+8,
+0,
+0,
+24
+],
+"persianalola|Jolly": [
+14,
+12,
+16,
+0,
+0,
+24
+],
+"bellibolt|Quiet": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"chesnaught|Adamant": [
+32,
+22,
+0,
+0,
+12,
+0
+],
+"alakazam|Modest": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"gengar|Bold": [
+20,
+0,
+32,
+10,
+0,
+4
+],
+"aromatisse|Sassy": [
+20,
+0,
+20,
+14,
+4,
+8
+],
+"rhyperior|Brave": [
+32,
+26,
+0,
+0,
+8,
+0
+],
+"mudsdale|Brave": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"basculegionf|Timid": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"dragalge|Modest": [
+24,
+0,
+0,
+32,
+8,
+2
+],
+"feraligatr|Jolly": [
+14,
+32,
+0,
+0,
+0,
+20
+],
+"greninja|Modest": [
+22,
+0,
+0,
+32,
+0,
+12
+],
+"tinkaton|Lonely": [
+18,
+28,
+12,
+0,
+8,
+0
+],
+"baxcalibur|Careful": [
+20,
+2,
+8,
+0,
+28,
+8
+],
+"sinistchamasterpiece|Relaxed": [
+32,
+0,
+24,
+0,
+10,
+0
+],
+"hippowdon|Impish": [
+18,
+4,
+24,
+0,
+20,
+0
+],
+"torkoal|Sassy": [
+32,
+0,
+4,
+10,
+20,
+0
+],
+"meowstic|Calm": [
+32,
+0,
+12,
+0,
+22,
+0
+],
+"politoed|Timid": [
+14,
+0,
+24,
+0,
+4,
+24
+],
+"malamar|Careful": [
+26,
+4,
+4,
+0,
+28,
+4
+],
+"overqwil|Jolly": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"starmie|Adamant": [
+0,
+20,
+0,
+2,
+12,
+32
+],
+"palafin|Jolly": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"goodrahisui|Sassy": [
+20,
+0,
+0,
+30,
+8,
+8
+],
+"kingambit|Serious": [
+2,
+32,
+0,
+0,
+32,
+0
+],
+"zoroarkhisui|Modest": [
+4,
+0,
+8,
+22,
+0,
+32
+],
+"azumarill|Brave": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"chimecho|Modest": [
+28,
+0,
+0,
+22,
+12,
+4
+],
+"krookodile|Jolly": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"snorlax|Careful": [
+14,
+24,
+16,
+0,
+12,
+0
+],
+"quaquaval|Adamant": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"tinkaton|Impish": [
+30,
+4,
+24,
+0,
+8,
+0
+],
+"garchomp|Naive": [
+0,
+2,
+0,
+32,
+0,
+32
+],
+"oranguru|Relaxed": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"empoleon|Calm": [
+30,
+0,
+8,
+8,
+20,
+0
+],
+"clawitzer|Quiet": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"skarmory|Adamant": [
+16,
+24,
+16,
+2,
+0,
+8
+],
+"cofagrigus|Sassy": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"torkoal|Careful": [
+32,
+0,
+0,
+10,
+24,
+0
+],
+"incineroar|Calm": [
+32,
+8,
+4,
+0,
+22,
+0
+],
+"rillaboom|Relaxed": [
+32,
+32,
+0,
+0,
+2,
+0
+]
+},
+"report": [
+{
+"species": "Rillaboom",
+"nature": "Adamant",
+"evidence": 17358,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+2,
+24,
+20,
+0,
+20,
+0
+],
+"train_fit": [
+0.915,
+0.916
+],
+"held_out_fit": [
+0.922,
+0.924
+],
+"held_out_n": 4324
+},
+{
+"species": "Incineroar",
+"nature": "Impish",
+"evidence": 9088,
+"smogon": [
+32,
+0,
+20,
+0,
+14,
+0
+],
+"fitted": [
+30,
+0,
+20,
+0,
+16,
+0
+],
+"train_fit": [
+0.943,
+0.946
+],
+"held_out_fit": [
+0.942,
+0.945
+],
+"held_out_n": 2251
+},
+{
+"species": "Raichu",
+"nature": "Timid",
+"evidence": 8464,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+20,
+0,
+12,
+2,
+0,
+32
+],
+"train_fit": [
+0.872,
+0.929
+],
+"held_out_fit": [
+0.877,
+0.937
+],
+"held_out_n": 2029
+},
+{
+"species": "Garchomp",
+"nature": "Modest",
+"evidence": 7702,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+0,
+2,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.929,
+0.948
+],
+"held_out_fit": [
+0.93,
+0.955
+],
+"held_out_n": 1947
+},
+{
+"species": "Gholdengo",
+"nature": "Modest",
+"evidence": 7753,
+"smogon": [
+17,
+0,
+0,
+17,
+0,
+32
+],
+"fitted": [
+24,
+0,
+0,
+4,
+20,
+18
+],
+"train_fit": [
+0.898,
+0.917
+],
+"held_out_fit": [
+0.887,
+0.905
+],
+"held_out_n": 1714
+},
+{
+"species": "Incineroar",
+"nature": "Careful",
+"evidence": 6746,
+"smogon": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"fitted": [
+26,
+0,
+16,
+0,
+24,
+0
+],
+"train_fit": [
+0.93,
+0.933
+],
+"held_out_fit": [
+0.924,
+0.923
+],
+"held_out_n": 1466
+},
+{
+"species": "Kingambit",
+"nature": "Adamant",
+"evidence": 6346,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"train_fit": [
+0.895,
+0.895
+],
+"held_out_fit": [
+0.894,
+0.894
+],
+"held_out_n": 1609
+},
+{
+"species": "Sylveon",
+"nature": "Modest",
+"evidence": 5641,
+"smogon": [
+9,
+0,
+22,
+20,
+0,
+15
+],
+"fitted": [
+12,
+0,
+30,
+24,
+0,
+0
+],
+"train_fit": [
+0.838,
+0.902
+],
+"held_out_fit": [
+0.858,
+0.911
+],
+"held_out_n": 1254
+},
+{
+"species": "Archaludon",
+"nature": "Calm",
+"evidence": 4879,
+"smogon": [
+32,
+0,
+1,
+1,
+21,
+11
+],
+"fitted": [
+32,
+0,
+8,
+0,
+26,
+0
+],
+"train_fit": [
+0.821,
+0.91
+],
+"held_out_fit": [
+0.827,
+0.885
+],
+"held_out_n": 1061
+},
+{
+"species": "Volcarona",
+"nature": "Timid",
+"evidence": 4670,
+"smogon": [
+32,
+0,
+11,
+0,
+0,
+23
+],
+"fitted": [
+18,
+0,
+28,
+0,
+0,
+20
+],
+"train_fit": [
+0.906,
+0.913
+],
+"held_out_fit": [
+0.918,
+0.928
+],
+"held_out_n": 1178
+},
+{
+"species": "Arcanine-Hisui",
+"nature": "Jolly",
+"evidence": 4584,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.942,
+0.942
+],
+"held_out_fit": [
+0.942,
+0.942
+],
+"held_out_n": 1008
+},
+{
+"species": "Volcarona",
+"nature": "Modest",
+"evidence": 4570,
+"smogon": [
+21,
+0,
+15,
+5,
+1,
+24
+],
+"fitted": [
+16,
+0,
+16,
+8,
+4,
+22
+],
+"train_fit": [
+0.916,
+0.919
+],
+"held_out_fit": [
+0.919,
+0.917
+],
+"held_out_n": 979
+},
+{
+"species": "Floette-Eternal",
+"nature": "Modest",
+"evidence": 4390,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+24,
+0,
+16,
+6,
+0,
+20
+],
+"train_fit": [
+0.81,
+0.884
+],
+"held_out_fit": [
+0.805,
+0.869
+],
+"held_out_n": 937
+},
+{
+"species": "Delphox",
+"nature": "Timid",
+"evidence": 3963,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+8,
+18,
+4,
+32
+],
+"train_fit": [
+0.868,
+0.895
+],
+"held_out_fit": [
+0.864,
+0.896
+],
+"held_out_n": 875
+},
+{
+"species": "Archaludon",
+"nature": "Modest",
+"evidence": 3839,
+"smogon": [
+32,
+0,
+1,
+5,
+25,
+3
+],
+"fitted": [
+32,
+0,
+0,
+8,
+26,
+0
+],
+"train_fit": [
+0.815,
+0.874
+],
+"held_out_fit": [
+0.83,
+0.886
+],
+"held_out_n": 955
+},
+{
+"species": "Incineroar",
+"nature": "Relaxed",
+"evidence": 3964,
+"smogon": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"fitted": [
+30,
+4,
+20,
+0,
+12,
+0
+],
+"train_fit": [
+0.903,
+0.932
+],
+"held_out_fit": [
+0.891,
+0.926
+],
+"held_out_n": 826
+},
+{
+"species": "Salamence",
+"nature": "Timid",
+"evidence": 3622,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.923,
+0.923
+],
+"held_out_fit": [
+0.909,
+0.909
+],
+"held_out_n": 976
+},
+{
+"species": "Primarina",
+"nature": "Modest",
+"evidence": 3636,
+"smogon": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"fitted": [
+22,
+0,
+16,
+8,
+4,
+16
+],
+"train_fit": [
+0.823,
+0.86
+],
+"held_out_fit": [
+0.844,
+0.805
+],
+"held_out_n": 871
+},
+{
+"species": "Staraptor",
+"nature": "Jolly",
+"evidence": 3609,
+"smogon": [
+32,
+2,
+0,
+0,
+0,
+32
+],
+"fitted": [
+22,
+4,
+0,
+0,
+8,
+32
+],
+"train_fit": [
+0.891,
+0.897
+],
+"held_out_fit": [
+0.901,
+0.929
+],
+"held_out_n": 860
+},
+{
+"species": "Garchomp",
+"nature": "Adamant",
+"evidence": 3344,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.901,
+0.901
+],
+"held_out_fit": [
+0.886,
+0.886
+],
+"held_out_n": 871
+},
+{
+"species": "Gholdengo",
+"nature": "Timid",
+"evidence": 3319,
+"smogon": [
+7,
+0,
+0,
+27,
+0,
+32
+],
+"fitted": [
+8,
+0,
+4,
+22,
+0,
+32
+],
+"train_fit": [
+0.89,
+0.897
+],
+"held_out_fit": [
+0.861,
+0.862
+],
+"held_out_n": 850
+},
+{
+"species": "Golisopod",
+"nature": "Adamant",
+"evidence": 3265,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+32,
+30,
+0,
+0,
+4,
+0
+],
+"train_fit": [
+0.91,
+0.918
+],
+"held_out_fit": [
+0.917,
+0.927
+],
+"held_out_n": 799
+},
+{
+"species": "Gengar",
+"nature": "Modest",
+"evidence": 3321,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+28,
+0,
+8,
+10,
+12,
+8
+],
+"train_fit": [
+0.802,
+0.889
+],
+"held_out_fit": [
+0.814,
+0.88
+],
+"held_out_n": 700
+},
+{
+"species": "Charizard",
+"nature": "Modest",
+"evidence": 3222,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+12,
+0,
+20,
+2,
+0,
+32
+],
+"train_fit": [
+0.745,
+0.857
+],
+"held_out_fit": [
+0.735,
+0.854
+],
+"held_out_n": 780
+},
+{
+"species": "Incineroar",
+"nature": "Adamant",
+"evidence": 3069,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+22,
+16,
+12,
+0,
+16,
+0
+],
+"train_fit": [
+0.873,
+0.903
+],
+"held_out_fit": [
+0.892,
+0.91
+],
+"held_out_n": 777
+},
+{
+"species": "Kommo-o",
+"nature": "Modest",
+"evidence": 3023,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+12,
+0,
+0,
+22,
+0,
+32
+],
+"train_fit": [
+0.859,
+0.885
+],
+"held_out_fit": [
+0.859,
+0.881
+],
+"held_out_n": 793
+},
+{
+"species": "Milotic",
+"nature": "Calm",
+"evidence": 2863,
+"smogon": [
+32,
+0,
+29,
+0,
+5,
+0
+],
+"fitted": [
+32,
+0,
+26,
+4,
+4,
+0
+],
+"train_fit": [
+0.879,
+0.888
+],
+"held_out_fit": [
+0.847,
+0.851
+],
+"held_out_n": 932
+},
+{
+"species": "Charizard",
+"nature": "Timid",
+"evidence": 2951,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+20,
+10,
+8,
+24
+],
+"train_fit": [
+0.784,
+0.877
+],
+"held_out_fit": [
+0.775,
+0.877
+],
+"held_out_n": 699
+},
+{
+"species": "Archaludon",
+"nature": "Bold",
+"evidence": 2825,
+"smogon": [
+32,
+0,
+1,
+1,
+32,
+0
+],
+"fitted": [
+32,
+0,
+4,
+4,
+26,
+0
+],
+"train_fit": [
+0.876,
+0.89
+],
+"held_out_fit": [
+0.881,
+0.882
+],
+"held_out_n": 764
+},
+{
+"species": "Garchomp",
+"nature": "Timid",
+"evidence": 2834,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+0,
+2,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.826,
+0.873
+],
+"held_out_fit": [
+0.805,
+0.862
+],
+"held_out_n": 754
+},
+{
+"species": "Basculegion",
+"nature": "Jolly",
+"evidence": 2823,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+0,
+30,
+4,
+0,
+0,
+32
+],
+"train_fit": [
+0.88,
+0.89
+],
+"held_out_fit": [
+0.84,
+0.846
+],
+"held_out_n": 701
+},
+{
+"species": "Farigiraf",
+"nature": "Bold",
+"evidence": 2803,
+"smogon": [
+27,
+0,
+20,
+0,
+19,
+0
+],
+"fitted": [
+26,
+0,
+24,
+0,
+16,
+0
+],
+"train_fit": [
+0.894,
+0.898
+],
+"held_out_fit": [
+0.874,
+0.893
+],
+"held_out_n": 693
+},
+{
+"species": "Venusaur",
+"nature": "Modest",
+"evidence": 2791,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.872,
+0.872
+],
+"held_out_fit": [
+0.877,
+0.877
+],
+"held_out_n": 601
+},
+{
+"species": "Sneasler",
+"nature": "Jolly",
+"evidence": 2708,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.894,
+0.894
+],
+"held_out_fit": [
+0.9,
+0.9
+],
+"held_out_n": 678
+},
+{
+"species": "Farigiraf",
+"nature": "Modest",
+"evidence": 2783,
+"smogon": [
+27,
+0,
+20,
+0,
+19,
+0
+],
+"fitted": [
+30,
+0,
+28,
+0,
+8,
+0
+],
+"train_fit": [
+0.836,
+0.885
+],
+"held_out_fit": [
+0.842,
+0.885
+],
+"held_out_n": 600
+},
+{
+"species": "Pelipper",
+"nature": "Modest",
+"evidence": 2580,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+16,
+22,
+4,
+20
+],
+"train_fit": [
+0.707,
+0.757
+],
+"held_out_fit": [
+0.738,
+0.808
+],
+"held_out_n": 600
+},
+{
+"species": "Dragonite",
+"nature": "Modest",
+"evidence": 2457,
+"smogon": [
+7,
+32,
+0,
+0,
+0,
+27
+],
+"fitted": [
+8,
+2,
+0,
+24,
+0,
+32
+],
+"train_fit": [
+0.805,
+0.873
+],
+"held_out_fit": [
+0.788,
+0.838
+],
+"held_out_n": 624
+},
+{
+"species": "Gardevoir",
+"nature": "Modest",
+"evidence": 2414,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+28,
+0,
+0,
+22,
+0,
+16
+],
+"train_fit": [
+0.751,
+0.819
+],
+"held_out_fit": [
+0.745,
+0.836
+],
+"held_out_n": 636
+},
+{
+"species": "Pelipper",
+"nature": "Bold",
+"evidence": 2385,
+"smogon": [
+31,
+0,
+0,
+0,
+24,
+11
+],
+"fitted": [
+30,
+0,
+4,
+0,
+16,
+16
+],
+"train_fit": [
+0.795,
+0.824
+],
+"held_out_fit": [
+0.818,
+0.842
+],
+"held_out_n": 628
+},
+{
+"species": "Incineroar",
+"nature": "Sassy",
+"evidence": 2345,
+"smogon": [
+31,
+0,
+15,
+0,
+20,
+0
+],
+"fitted": [
+30,
+0,
+12,
+0,
+24,
+0
+],
+"train_fit": [
+0.907,
+0.918
+],
+"held_out_fit": [
+0.908,
+0.908
+],
+"held_out_n": 414
+},
+{
+"species": "Milotic",
+"nature": "Modest",
+"evidence": 1996,
+"smogon": [
+32,
+0,
+11,
+10,
+0,
+13
+],
+"fitted": [
+26,
+0,
+16,
+16,
+4,
+4
+],
+"train_fit": [
+0.838,
+0.876
+],
+"held_out_fit": [
+0.822,
+0.862
+],
+"held_out_n": 618
+},
+{
+"species": "Basculegion",
+"nature": "Adamant",
+"evidence": 2094,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+4,
+22,
+12,
+0,
+0,
+28
+],
+"train_fit": [
+0.815,
+0.825
+],
+"held_out_fit": [
+0.85,
+0.837
+],
+"held_out_n": 520
+},
+{
+"species": "Indeedee-F",
+"nature": "Relaxed",
+"evidence": 2119,
+"smogon": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"fitted": [
+32,
+0,
+30,
+0,
+0,
+4
+],
+"train_fit": [
+0.843,
+0.851
+],
+"held_out_fit": [
+0.892,
+0.87
+],
+"held_out_n": 455
+},
+{
+"species": "Indeedee-F",
+"nature": "Bold",
+"evidence": 2138,
+"smogon": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"fitted": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"train_fit": [
+0.9,
+0.9
+],
+"held_out_fit": [
+0.876,
+0.876
+],
+"held_out_n": 410
+},
+{
+"species": "Excadrill",
+"nature": "Adamant",
+"evidence": 1968,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.887,
+0.887
+],
+"held_out_fit": [
+0.894,
+0.894
+],
+"held_out_n": 502
+},
+{
+"species": "Tyranitar",
+"nature": "Jolly",
+"evidence": 1911,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+16,
+18,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.86,
+0.896
+],
+"held_out_fit": [
+0.822,
+0.848
+],
+"held_out_n": 545
+},
+{
+"species": "Garchomp",
+"nature": "Jolly",
+"evidence": 1940,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.889,
+0.889
+],
+"held_out_fit": [
+0.872,
+0.872
+],
+"held_out_n": 405
+},
+{
+"species": "Sinistcha",
+"nature": "Bold",
+"evidence": 1912,
+"smogon": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"fitted": [
+30,
+0,
+16,
+0,
+20,
+0
+],
+"train_fit": [
+0.854,
+0.855
+],
+"held_out_fit": [
+0.866,
+0.874
+],
+"held_out_n": 404
+},
+{
+"species": "Milotic",
+"nature": "Bold",
+"evidence": 1772,
+"smogon": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"fitted": [
+32,
+4,
+26,
+0,
+0,
+4
+],
+"train_fit": [
+0.836,
+0.858
+],
+"held_out_fit": [
+0.848,
+0.842
+],
+"held_out_n": 468
+},
+{
+"species": "Gengar",
+"nature": "Timid",
+"evidence": 1819,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+24,
+0,
+0,
+10,
+0,
+32
+],
+"train_fit": [
+0.824,
+0.889
+],
+"held_out_fit": [
+0.852,
+0.886
+],
+"held_out_n": 378
+},
+{
+"species": "Torkoal",
+"nature": "Quiet",
+"evidence": 1759,
+"smogon": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"fitted": [
+30,
+0,
+0,
+32,
+4,
+0
+],
+"train_fit": [
+0.885,
+0.887
+],
+"held_out_fit": [
+0.893,
+0.902
+],
+"held_out_n": 429
+},
+{
+"species": "Froslass",
+"nature": "Timid",
+"evidence": 1773,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+16,
+0,
+8,
+14,
+4,
+24
+],
+"train_fit": [
+0.766,
+0.845
+],
+"held_out_fit": [
+0.782,
+0.871
+],
+"held_out_n": 403
+},
+{
+"species": "Swampert",
+"nature": "Adamant",
+"evidence": 1635,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+6,
+32,
+0,
+0,
+4,
+24
+],
+"train_fit": [
+0.747,
+0.846
+],
+"held_out_fit": [
+0.797,
+0.865
+],
+"held_out_n": 526
+},
+{
+"species": "Tyranitar",
+"nature": "Adamant",
+"evidence": 1673,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+24,
+26,
+4,
+4,
+0,
+8
+],
+"train_fit": [
+0.708,
+0.816
+],
+"held_out_fit": [
+0.655,
+0.775
+],
+"held_out_n": 435
+},
+{
+"species": "Farigiraf",
+"nature": "Sassy",
+"evidence": 1632,
+"smogon": [
+32,
+0,
+0,
+2,
+32,
+0
+],
+"fitted": [
+26,
+0,
+16,
+0,
+24,
+0
+],
+"train_fit": [
+0.775,
+0.856
+],
+"held_out_fit": [
+0.772,
+0.842
+],
+"held_out_n": 448
+},
+{
+"species": "Farigiraf",
+"nature": "Relaxed",
+"evidence": 1696,
+"smogon": [
+27,
+0,
+20,
+0,
+19,
+0
+],
+"fitted": [
+22,
+0,
+28,
+0,
+16,
+0
+],
+"train_fit": [
+0.844,
+0.849
+],
+"held_out_fit": [
+0.862,
+0.87
+],
+"held_out_n": 376
+},
+{
+"species": "Farigiraf",
+"nature": "Quiet",
+"evidence": 1556,
+"smogon": [
+27,
+0,
+20,
+0,
+19,
+0
+],
+"fitted": [
+22,
+0,
+16,
+12,
+16,
+0
+],
+"train_fit": [
+0.786,
+0.832
+],
+"held_out_fit": [
+0.822,
+0.818
+],
+"held_out_n": 428
+},
+{
+"species": "Whimsicott",
+"nature": "Timid",
+"evidence": 1463,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.866,
+0.866
+],
+"held_out_fit": [
+0.866,
+0.866
+],
+"held_out_n": 372
+},
+{
+"species": "Rillaboom",
+"nature": "Careful",
+"evidence": 1525,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+30,
+12,
+0,
+0,
+24,
+0
+],
+"train_fit": [
+0.744,
+0.864
+],
+"held_out_fit": [
+0.75,
+0.882
+],
+"held_out_n": 304
+},
+{
+"species": "Floette-Eternal",
+"nature": "Timid",
+"evidence": 1468,
+"smogon": [
+32,
+0,
+2,
+0,
+0,
+32
+],
+"fitted": [
+14,
+0,
+24,
+4,
+0,
+24
+],
+"train_fit": [
+0.764,
+0.821
+],
+"held_out_fit": [
+0.806,
+0.831
+],
+"held_out_n": 356
+},
+{
+"species": "Basculegion-F",
+"nature": "Modest",
+"evidence": 1430,
+"smogon": [
+0,
+0,
+0,
+32,
+2,
+32
+],
+"fitted": [
+0,
+0,
+0,
+32,
+2,
+32
+],
+"train_fit": [
+0.881,
+0.881
+],
+"held_out_fit": [
+0.908,
+0.908
+],
+"held_out_n": 357
+},
+{
+"species": "Politoed",
+"nature": "Calm",
+"evidence": 1484,
+"smogon": [
+32,
+0,
+24,
+0,
+7,
+3
+],
+"fitted": [
+32,
+0,
+22,
+0,
+12,
+0
+],
+"train_fit": [
+0.877,
+0.884
+],
+"held_out_fit": [
+0.908,
+0.898
+],
+"held_out_n": 284
+},
+{
+"species": "Politoed",
+"nature": "Modest",
+"evidence": 1411,
+"smogon": [
+32,
+0,
+0,
+30,
+0,
+4
+],
+"fitted": [
+30,
+0,
+4,
+20,
+4,
+8
+],
+"train_fit": [
+0.778,
+0.799
+],
+"held_out_fit": [
+0.839,
+0.833
+],
+"held_out_n": 347
+},
+{
+"species": "Indeedee",
+"nature": "Timid",
+"evidence": 1346,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.874,
+0.874
+],
+"held_out_fit": [
+0.872,
+0.872
+],
+"held_out_n": 405
+},
+{
+"species": "Camerupt",
+"nature": "Quiet",
+"evidence": 1347,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+24,
+0,
+4,
+30,
+8,
+0
+],
+"train_fit": [
+0.699,
+0.898
+],
+"held_out_fit": [
+0.66,
+0.893
+],
+"held_out_n": 373
+},
+{
+"species": "Indeedee",
+"nature": "Modest",
+"evidence": 1307,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+0,
+32,
+0,
+30
+],
+"train_fit": [
+0.843,
+0.841
+],
+"held_out_fit": [
+0.841,
+0.844
+],
+"held_out_n": 314
+},
+{
+"species": "Salamence",
+"nature": "Modest",
+"evidence": 1196,
+"smogon": [
+0,
+0,
+1,
+32,
+1,
+32
+],
+"fitted": [
+0,
+0,
+4,
+22,
+20,
+20
+],
+"train_fit": [
+0.791,
+0.821
+],
+"held_out_fit": [
+0.757,
+0.806
+],
+"held_out_n": 412
+},
+{
+"species": "Annihilape",
+"nature": "Adamant",
+"evidence": 1289,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+4,
+32,
+0,
+0,
+0,
+30
+],
+"train_fit": [
+0.811,
+0.814
+],
+"held_out_fit": [
+0.785,
+0.805
+],
+"held_out_n": 298
+},
+{
+"species": "Sneasler",
+"nature": "Adamant",
+"evidence": 1233,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+8,
+26,
+0,
+0,
+4,
+28
+],
+"train_fit": [
+0.659,
+0.717
+],
+"held_out_fit": [
+0.647,
+0.678
+],
+"held_out_n": 317
+},
+{
+"species": "Grimmsnarl",
+"nature": "Sassy",
+"evidence": 1282,
+"smogon": [
+29,
+0,
+22,
+0,
+15,
+0
+],
+"fitted": [
+26,
+0,
+20,
+0,
+20,
+0
+],
+"train_fit": [
+0.867,
+0.868
+],
+"held_out_fit": [
+0.861,
+0.869
+],
+"held_out_n": 245
+},
+{
+"species": "Corviknight",
+"nature": "Careful",
+"evidence": 1247,
+"smogon": [
+32,
+2,
+0,
+0,
+32,
+0
+],
+"fitted": [
+32,
+0,
+0,
+0,
+26,
+8
+],
+"train_fit": [
+0.827,
+0.854
+],
+"held_out_fit": [
+0.836,
+0.859
+],
+"held_out_n": 256
+},
+{
+"species": "Blastoise",
+"nature": "Modest",
+"evidence": 1253,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+12,
+0,
+0,
+32,
+0,
+22
+],
+"train_fit": [
+0.797,
+0.832
+],
+"held_out_fit": [
+0.786,
+0.803
+],
+"held_out_n": 229
+},
+{
+"species": "Golisopod",
+"nature": "Brave",
+"evidence": 1167,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+30,
+32,
+4,
+0,
+0,
+0
+],
+"train_fit": [
+0.887,
+0.895
+],
+"held_out_fit": [
+0.855,
+0.858
+],
+"held_out_n": 303
+},
+{
+"species": "Metagross",
+"nature": "Jolly",
+"evidence": 1102,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+0,
+30,
+0,
+0,
+4,
+32
+],
+"train_fit": [
+0.854,
+0.86
+],
+"held_out_fit": [
+0.866,
+0.861
+],
+"held_out_n": 337
+},
+{
+"species": "Aerodactyl",
+"nature": "Jolly",
+"evidence": 1194,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+4,
+30,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.829,
+0.832
+],
+"held_out_fit": [
+0.799,
+0.803
+],
+"held_out_n": 239
+},
+{
+"species": "Excadrill",
+"nature": "Jolly",
+"evidence": 1141,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.907,
+0.907
+],
+"held_out_fit": [
+0.892,
+0.892
+],
+"held_out_n": 278
+},
+{
+"species": "Gardevoir",
+"nature": "Timid",
+"evidence": 1071,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+0,
+0,
+26,
+8,
+32
+],
+"train_fit": [
+0.83,
+0.838
+],
+"held_out_fit": [
+0.836,
+0.84
+],
+"held_out_n": 293
+},
+{
+"species": "Armarouge",
+"nature": "Modest",
+"evidence": 1026,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+8,
+0,
+0,
+26,
+0,
+32
+],
+"train_fit": [
+0.79,
+0.799
+],
+"held_out_fit": [
+0.786,
+0.789
+],
+"held_out_n": 304
+},
+{
+"species": "Floette-Eternal",
+"nature": "Bold",
+"evidence": 1054,
+"smogon": [
+32,
+0,
+32,
+0,
+0,
+2
+],
+"fitted": [
+32,
+0,
+30,
+0,
+0,
+4
+],
+"train_fit": [
+0.891,
+0.898
+],
+"held_out_fit": [
+0.936,
+0.932
+],
+"held_out_n": 250
+},
+{
+"species": "Volcarona",
+"nature": "Bold",
+"evidence": 1059,
+"smogon": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"fitted": [
+30,
+0,
+28,
+8,
+0,
+0
+],
+"train_fit": [
+0.863,
+0.864
+],
+"held_out_fit": [
+0.844,
+0.873
+],
+"held_out_n": 237
+},
+{
+"species": "Toxapex",
+"nature": "Relaxed",
+"evidence": 1032,
+"smogon": [
+32,
+0,
+18,
+0,
+16,
+0
+],
+"fitted": [
+32,
+0,
+14,
+4,
+16,
+0
+],
+"train_fit": [
+0.891,
+0.896
+],
+"held_out_fit": [
+0.906,
+0.901
+],
+"held_out_n": 203
+},
+{
+"species": "Grimmsnarl",
+"nature": "Careful",
+"evidence": 927,
+"smogon": [
+32,
+0,
+19,
+0,
+15,
+0
+],
+"fitted": [
+32,
+4,
+18,
+0,
+12,
+0
+],
+"train_fit": [
+0.862,
+0.873
+],
+"held_out_fit": [
+0.883,
+0.896
+],
+"held_out_n": 298
+},
+{
+"species": "Metagross",
+"nature": "Adamant",
+"evidence": 957,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+26,
+12,
+0,
+0,
+0,
+28
+],
+"train_fit": [
+0.73,
+0.814
+],
+"held_out_fit": [
+0.703,
+0.781
+],
+"held_out_n": 219
+},
+{
+"species": "Pelipper",
+"nature": "Timid",
+"evidence": 921,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.817,
+0.817
+],
+"held_out_fit": [
+0.804,
+0.804
+],
+"held_out_n": 214
+},
+{
+"species": "Staraptor",
+"nature": "Adamant",
+"evidence": 932,
+"smogon": [
+32,
+4,
+0,
+0,
+0,
+30
+],
+"fitted": [
+22,
+12,
+0,
+0,
+4,
+28
+],
+"train_fit": [
+0.807,
+0.842
+],
+"held_out_fit": [
+0.778,
+0.841
+],
+"held_out_n": 189
+},
+{
+"species": "Ninetales-Alola",
+"nature": "Timid",
+"evidence": 883,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+0,
+20,
+22,
+0,
+24
+],
+"train_fit": [
+0.778,
+0.798
+],
+"held_out_fit": [
+0.783,
+0.778
+],
+"held_out_n": 230
+},
+{
+"species": "Glimmora",
+"nature": "Timid",
+"evidence": 804,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+8,
+0,
+26,
+0,
+32
+],
+"train_fit": [
+0.861,
+0.862
+],
+"held_out_fit": [
+0.87,
+0.848
+],
+"held_out_n": 184
+},
+{
+"species": "Rillaboom",
+"nature": "Sassy",
+"evidence": 816,
+"smogon": [
+32,
+0,
+4,
+0,
+30,
+0
+],
+"fitted": [
+30,
+4,
+0,
+0,
+32,
+0
+],
+"train_fit": [
+0.853,
+0.864
+],
+"held_out_fit": [
+0.836,
+0.848
+],
+"held_out_n": 171
+},
+{
+"species": "Farigiraf",
+"nature": "Calm",
+"evidence": 799,
+"smogon": [
+29,
+0,
+14,
+0,
+23,
+0
+],
+"fitted": [
+30,
+0,
+16,
+0,
+20,
+0
+],
+"train_fit": [
+0.86,
+0.874
+],
+"held_out_fit": [
+0.902,
+0.885
+],
+"held_out_n": 183
+},
+{
+"species": "Annihilape",
+"nature": "Jolly",
+"evidence": 733,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+0,
+26,
+8,
+0,
+0,
+32
+],
+"train_fit": [
+0.847,
+0.85
+],
+"held_out_fit": [
+0.886,
+0.852
+],
+"held_out_n": 237
+},
+{
+"species": "Kingambit",
+"nature": "Brave",
+"evidence": 738,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"train_fit": [
+0.888,
+0.888
+],
+"held_out_fit": [
+0.898,
+0.898
+],
+"held_out_n": 187
+},
+{
+"species": "Ceruledge",
+"nature": "Adamant",
+"evidence": 735,
+"smogon": [
+31,
+7,
+24,
+0,
+3,
+1
+],
+"fitted": [
+32,
+8,
+6,
+0,
+0,
+20
+],
+"train_fit": [
+0.759,
+0.793
+],
+"held_out_fit": [
+0.802,
+0.845
+],
+"held_out_n": 187
+},
+{
+"species": "Sinistcha",
+"nature": "Calm",
+"evidence": 750,
+"smogon": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"fitted": [
+30,
+0,
+16,
+0,
+20,
+0
+],
+"train_fit": [
+0.865,
+0.867
+],
+"held_out_fit": [
+0.833,
+0.827
+],
+"held_out_n": 162
+},
+{
+"species": "Lucario",
+"nature": "Timid",
+"evidence": 698,
+"smogon": [
+32,
+0,
+2,
+0,
+0,
+32
+],
+"fitted": [
+14,
+0,
+0,
+24,
+8,
+20
+],
+"train_fit": [
+0.785,
+0.838
+],
+"held_out_fit": [
+0.773,
+0.796
+],
+"held_out_n": 211
+},
+{
+"species": "Hatterene",
+"nature": "Quiet",
+"evidence": 692,
+"smogon": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"fitted": [
+30,
+0,
+4,
+28,
+4,
+0
+],
+"train_fit": [
+0.853,
+0.863
+],
+"held_out_fit": [
+0.827,
+0.842
+],
+"held_out_n": 202
+},
+{
+"species": "Kommo-o",
+"nature": "Timid",
+"evidence": 690,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+0,
+12,
+30,
+4,
+20
+],
+"train_fit": [
+0.842,
+0.865
+],
+"held_out_fit": [
+0.842,
+0.848
+],
+"held_out_n": 165
+},
+{
+"species": "Dragapult",
+"nature": "Timid",
+"evidence": 704,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+0,
+4,
+32,
+0,
+30
+],
+"train_fit": [
+0.886,
+0.906
+],
+"held_out_fit": [
+0.875,
+0.875
+],
+"held_out_n": 112
+},
+{
+"species": "Indeedee-F",
+"nature": "Sassy",
+"evidence": 648,
+"smogon": [
+32,
+0,
+0,
+2,
+32,
+0
+],
+"fitted": [
+32,
+0,
+20,
+0,
+14,
+0
+],
+"train_fit": [
+0.711,
+0.776
+],
+"held_out_fit": [
+0.697,
+0.8
+],
+"held_out_n": 165
+},
+{
+"species": "Baxcalibur",
+"nature": "Adamant",
+"evidence": 586,
+"smogon": [
+1,
+32,
+0,
+0,
+1,
+32
+],
+"fitted": [
+20,
+10,
+4,
+0,
+12,
+20
+],
+"train_fit": [
+0.717,
+0.833
+],
+"held_out_fit": [
+0.756,
+0.787
+],
+"held_out_n": 225
+},
+{
+"species": "Glimmora",
+"nature": "Modest",
+"evidence": 636,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.877,
+0.877
+],
+"held_out_fit": [
+0.842,
+0.842
+],
+"held_out_n": 139
+},
+{
+"species": "Incineroar",
+"nature": "Brave",
+"evidence": 589,
+"smogon": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"fitted": [
+32,
+28,
+0,
+0,
+6,
+0
+],
+"train_fit": [
+0.699,
+0.874
+],
+"held_out_fit": [
+0.697,
+0.854
+],
+"held_out_n": 178
+},
+{
+"species": "Pyroar",
+"nature": "Timid",
+"evidence": 622,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+0,
+0,
+30,
+4,
+32
+],
+"train_fit": [
+0.868,
+0.875
+],
+"held_out_fit": [
+0.886,
+0.846
+],
+"held_out_n": 123
+},
+{
+"species": "Meowstic-F",
+"nature": "Timid",
+"evidence": 605,
+"smogon": [
+32,
+0,
+15,
+0,
+19,
+0
+],
+"fitted": [
+6,
+0,
+0,
+28,
+0,
+32
+],
+"train_fit": [
+0.592,
+0.873
+],
+"held_out_fit": [
+0.612,
+0.871
+],
+"held_out_n": 116
+},
+{
+"species": "Hippowdon",
+"nature": "Careful",
+"evidence": 653,
+"smogon": [
+32,
+2,
+0,
+0,
+32,
+0
+],
+"fitted": [
+22,
+4,
+8,
+0,
+32,
+0
+],
+"train_fit": [
+0.907,
+0.916
+],
+"held_out_fit": [
+0.812,
+0.859
+],
+"held_out_n": 64
+},
+{
+"species": "Rillaboom",
+"nature": "Jolly",
+"evidence": 565,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.865,
+0.865
+],
+"held_out_fit": [
+0.802,
+0.802
+],
+"held_out_n": 131
+},
+{
+"species": "Volcarona",
+"nature": "Calm",
+"evidence": 556,
+"smogon": [
+21,
+0,
+15,
+5,
+1,
+24
+],
+"fitted": [
+28,
+0,
+16,
+0,
+16,
+6
+],
+"train_fit": [
+0.763,
+0.887
+],
+"held_out_fit": [
+0.655,
+0.77
+],
+"held_out_n": 113
+},
+{
+"species": "Sylveon",
+"nature": "Quiet",
+"evidence": 467,
+"smogon": [
+9,
+0,
+22,
+20,
+0,
+15
+],
+"fitted": [
+24,
+0,
+14,
+28,
+0,
+0
+],
+"train_fit": [
+0.685,
+0.833
+],
+"held_out_fit": [
+0.685,
+0.797
+],
+"held_out_n": 143
+},
+{
+"species": "Indeedee-F",
+"nature": "Calm",
+"evidence": 489,
+"smogon": [
+32,
+0,
+25,
+0,
+9,
+0
+],
+"fitted": [
+30,
+0,
+28,
+0,
+8,
+0
+],
+"train_fit": [
+0.812,
+0.826
+],
+"held_out_fit": [
+0.784,
+0.784
+],
+"held_out_n": 111
+},
+{
+"species": "Salamence",
+"nature": "Naive",
+"evidence": 488,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+8,
+0,
+22,
+0,
+32
+],
+"train_fit": [
+0.787,
+0.859
+],
+"held_out_fit": [
+0.864,
+0.855
+],
+"held_out_n": 110
+},
+{
+"species": "Salamence",
+"nature": "Hasty",
+"evidence": 456,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+8,
+0,
+22,
+0,
+32
+],
+"train_fit": [
+0.746,
+0.789
+],
+"held_out_fit": [
+0.771,
+0.84
+],
+"held_out_n": 131
+},
+{
+"species": "Raichu",
+"nature": "Hasty",
+"evidence": 425,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+4,
+0,
+30,
+0,
+32
+],
+"train_fit": [
+0.835,
+0.838
+],
+"held_out_fit": [
+0.895,
+0.895
+],
+"held_out_n": 57
+},
+{
+"species": "Rillaboom",
+"nature": "Brave",
+"evidence": 369,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+30,
+32,
+0,
+0,
+0,
+4
+],
+"train_fit": [
+0.805,
+0.816
+],
+"held_out_fit": [
+0.865,
+0.823
+],
+"held_out_n": 96
+},
+{
+"species": "Toxapex",
+"nature": "Bold",
+"evidence": 381,
+"smogon": [
+32,
+0,
+18,
+0,
+16,
+0
+],
+"fitted": [
+32,
+0,
+26,
+0,
+8,
+0
+],
+"train_fit": [
+0.89,
+0.908
+],
+"held_out_fit": [
+0.917,
+0.905
+],
+"held_out_n": 84
+},
+{
+"species": "Weavile",
+"nature": "Jolly",
+"evidence": 364,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.819,
+0.819
+],
+"held_out_fit": [
+0.894,
+0.894
+],
+"held_out_n": 94
+},
+{
+"species": "Torkoal",
+"nature": "Modest",
+"evidence": 357,
+"smogon": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"fitted": [
+32,
+0,
+0,
+30,
+4,
+0
+],
+"train_fit": [
+0.849,
+0.857
+],
+"held_out_fit": [
+0.933,
+0.876
+],
+"held_out_n": 89
+},
+{
+"species": "Blaziken",
+"nature": "Adamant",
+"evidence": 374,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+4,
+32,
+0,
+16,
+0,
+14
+],
+"train_fit": [
+0.695,
+0.709
+],
+"held_out_fit": [
+0.549,
+0.606
+],
+"held_out_n": 71
+},
+{
+"species": "Dragonite",
+"nature": "Timid",
+"evidence": 347,
+"smogon": [
+7,
+32,
+0,
+0,
+0,
+27
+],
+"fitted": [
+0,
+2,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.709,
+0.844
+],
+"held_out_fit": [
+0.716,
+0.916
+],
+"held_out_n": 95
+},
+{
+"species": "Rotom-Heat",
+"nature": "Timid",
+"evidence": 333,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+4,
+32,
+0,
+26
+],
+"train_fit": [
+0.787,
+0.835
+],
+"held_out_fit": [
+0.909,
+0.875
+],
+"held_out_n": 88
+},
+{
+"species": "Milotic",
+"nature": "Timid",
+"evidence": 339,
+"smogon": [
+32,
+0,
+29,
+0,
+5,
+0
+],
+"fitted": [
+14,
+0,
+32,
+0,
+0,
+20
+],
+"train_fit": [
+0.658,
+0.752
+],
+"held_out_fit": [
+0.605,
+0.753
+],
+"held_out_n": 81
+},
+{
+"species": "Hydreigon",
+"nature": "Modest",
+"evidence": 351,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+0,
+32,
+0,
+30
+],
+"train_fit": [
+0.812,
+0.815
+],
+"held_out_fit": [
+0.683,
+0.683
+],
+"held_out_n": 60
+},
+{
+"species": "Arcanine-Hisui",
+"nature": "Adamant",
+"evidence": 307,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+0,
+32,
+4,
+0,
+0,
+30
+],
+"train_fit": [
+0.818,
+0.821
+],
+"held_out_fit": [
+0.842,
+0.842
+],
+"held_out_n": 101
+},
+{
+"species": "Lucario",
+"nature": "Modest",
+"evidence": 326,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+8,
+0,
+8,
+18,
+0,
+32
+],
+"train_fit": [
+0.801,
+0.847
+],
+"held_out_fit": [
+0.79,
+0.84
+],
+"held_out_n": 81
+},
+{
+"species": "Archaludon",
+"nature": "Timid",
+"evidence": 335,
+"smogon": [
+32,
+0,
+1,
+1,
+32,
+0
+],
+"fitted": [
+6,
+0,
+4,
+24,
+0,
+32
+],
+"train_fit": [
+0.63,
+0.77
+],
+"held_out_fit": [
+0.69,
+0.761
+],
+"held_out_n": 71
+},
+{
+"species": "Lopunny",
+"nature": "Jolly",
+"evidence": 344,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+32,
+0,
+2,
+0,
+32
+],
+"train_fit": [
+0.654,
+0.843
+],
+"held_out_fit": [
+0.742,
+0.919
+],
+"held_out_n": 62
+},
+{
+"species": "Pawmot",
+"nature": "Jolly",
+"evidence": 327,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.881,
+0.881
+],
+"held_out_fit": [
+0.887,
+0.887
+],
+"held_out_n": 71
+},
+{
+"species": "Armarouge",
+"nature": "Quiet",
+"evidence": 325,
+"smogon": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"fitted": [
+22,
+0,
+8,
+28,
+8,
+0
+],
+"train_fit": [
+0.868,
+0.874
+],
+"held_out_fit": [
+0.786,
+0.786
+],
+"held_out_n": 70
+},
+{
+"species": "Grimmsnarl",
+"nature": "Impish",
+"evidence": 337,
+"smogon": [
+29,
+0,
+22,
+0,
+15,
+0
+],
+"fitted": [
+30,
+4,
+20,
+0,
+12,
+0
+],
+"train_fit": [
+0.875,
+0.878
+],
+"held_out_fit": [
+0.875,
+0.929
+],
+"held_out_n": 56
+},
+{
+"species": "Froslass",
+"nature": "Modest",
+"evidence": 323,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+0,
+26,
+8,
+28
+],
+"train_fit": [
+0.721,
+0.771
+],
+"held_out_fit": [
+0.635,
+0.712
+],
+"held_out_n": 52
+},
+{
+"species": "Absol",
+"nature": "Jolly",
+"evidence": 292,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+28,
+0,
+6,
+0,
+28
+],
+"train_fit": [
+0.75,
+0.863
+],
+"held_out_fit": [
+0.642,
+0.84
+],
+"held_out_n": 81
+},
+{
+"species": "Rillaboom",
+"nature": "Impish",
+"evidence": 272,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+26,
+8,
+12,
+0,
+20,
+0
+],
+"train_fit": [
+0.757,
+0.904
+],
+"held_out_fit": [
+0.811,
+0.895
+],
+"held_out_n": 95
+},
+{
+"species": "Pelipper",
+"nature": "Calm",
+"evidence": 288,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+32,
+0,
+0,
+6,
+28,
+0
+],
+"train_fit": [
+0.5,
+0.858
+],
+"held_out_fit": [
+0.478,
+0.821
+],
+"held_out_n": 67
+},
+{
+"species": "Corviknight",
+"nature": "Impish",
+"evidence": 263,
+"smogon": [
+32,
+2,
+0,
+0,
+32,
+0
+],
+"fitted": [
+32,
+0,
+12,
+0,
+22,
+0
+],
+"train_fit": [
+0.715,
+0.741
+],
+"held_out_fit": [
+0.824,
+0.824
+],
+"held_out_n": 74
+},
+{
+"species": "Sceptile",
+"nature": "Timid",
+"evidence": 253,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.885,
+0.885
+],
+"held_out_fit": [
+0.829,
+0.829
+],
+"held_out_n": 82
+},
+{
+"species": "Armarouge",
+"nature": "Timid",
+"evidence": 251,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+0,
+30,
+0,
+32
+],
+"train_fit": [
+0.805,
+0.817
+],
+"held_out_fit": [
+0.8,
+0.8
+],
+"held_out_n": 75
+},
+{
+"species": "Mawile",
+"nature": "Brave",
+"evidence": 234,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+28,
+28,
+0,
+6,
+4,
+0
+],
+"train_fit": [
+0.432,
+0.855
+],
+"held_out_fit": [
+0.395,
+0.86
+],
+"held_out_n": 86
+},
+{
+"species": "Scrafty",
+"nature": "Adamant",
+"evidence": 270,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+18,
+32,
+4,
+0,
+12,
+0
+],
+"train_fit": [
+0.856,
+0.874
+],
+"held_out_fit": [
+0.826,
+0.848
+],
+"held_out_n": 46
+},
+{
+"species": "Sylveon",
+"nature": "Calm",
+"evidence": 235,
+"smogon": [
+9,
+0,
+22,
+20,
+0,
+15
+],
+"fitted": [
+20,
+4,
+14,
+12,
+0,
+16
+],
+"train_fit": [
+0.791,
+0.843
+],
+"held_out_fit": [
+0.812,
+0.8
+],
+"held_out_n": 80
+},
+{
+"species": "Dragapult",
+"nature": "Adamant",
+"evidence": 247,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+4,
+30,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.87,
+0.879
+],
+"held_out_fit": [
+0.855,
+0.871
+],
+"held_out_n": 62
+},
+{
+"species": "Politoed",
+"nature": "Bold",
+"evidence": 264,
+"smogon": [
+32,
+0,
+24,
+0,
+7,
+3
+],
+"fitted": [
+32,
+0,
+26,
+0,
+0,
+8
+],
+"train_fit": [
+0.875,
+0.886
+],
+"held_out_fit": [
+0.828,
+0.828
+],
+"held_out_n": 29
+},
+{
+"species": "Primarina",
+"nature": "Quiet",
+"evidence": 250,
+"smogon": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"fitted": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"train_fit": [
+0.788,
+0.788
+],
+"held_out_fit": [
+0.837,
+0.837
+],
+"held_out_n": 43
+},
+{
+"species": "Sinistcha-Masterpiece",
+"nature": "Bold",
+"evidence": 244,
+"smogon": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"fitted": [
+32,
+0,
+12,
+0,
+18,
+4
+],
+"train_fit": [
+0.836,
+0.84
+],
+"held_out_fit": [
+0.81,
+0.81
+],
+"held_out_n": 42
+},
+{
+"species": "Meganium",
+"nature": "Modest",
+"evidence": 240,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+20,
+0,
+4,
+30,
+12,
+0
+],
+"train_fit": [
+0.704,
+0.825
+],
+"held_out_fit": [
+0.684,
+0.842
+],
+"held_out_n": 38
+},
+{
+"species": "Sinistcha",
+"nature": "Relaxed",
+"evidence": 208,
+"smogon": [
+32,
+0,
+32,
+2,
+0,
+0
+],
+"fitted": [
+32,
+0,
+32,
+2,
+0,
+0
+],
+"train_fit": [
+0.822,
+0.822
+],
+"held_out_fit": [
+0.797,
+0.797
+],
+"held_out_n": 69
+},
+{
+"species": "Talonflame",
+"nature": "Jolly",
+"evidence": 213,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+4,
+32,
+0,
+0,
+4,
+26
+],
+"train_fit": [
+0.831,
+0.869
+],
+"held_out_fit": [
+0.77,
+0.787
+],
+"held_out_n": 61
+},
+{
+"species": "Klefki",
+"nature": "Bold",
+"evidence": 212,
+"smogon": [
+32,
+0,
+19,
+0,
+15,
+0
+],
+"fitted": [
+32,
+0,
+26,
+0,
+8,
+0
+],
+"train_fit": [
+0.807,
+0.816
+],
+"held_out_fit": [
+0.678,
+0.763
+],
+"held_out_n": 59
+},
+{
+"species": "Dragonite",
+"nature": "Adamant",
+"evidence": 185,
+"smogon": [
+7,
+32,
+0,
+0,
+0,
+27
+],
+"fitted": [
+12,
+26,
+0,
+0,
+8,
+20
+],
+"train_fit": [
+0.746,
+0.795
+],
+"held_out_fit": [
+0.776,
+0.842
+],
+"held_out_n": 76
+},
+{
+"species": "Maushold-Four",
+"nature": "Jolly",
+"evidence": 216,
+"smogon": [
+32,
+0,
+20,
+0,
+14,
+0
+],
+"fitted": [
+22,
+12,
+4,
+0,
+4,
+24
+],
+"train_fit": [
+0.542,
+0.833
+],
+"held_out_fit": [
+0.439,
+0.805
+],
+"held_out_n": 41
+},
+{
+"species": "Hydreigon",
+"nature": "Timid",
+"evidence": 193,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+8,
+22,
+4,
+28
+],
+"train_fit": [
+0.813,
+0.85
+],
+"held_out_fit": [
+0.855,
+0.823
+],
+"held_out_n": 62
+},
+{
+"species": "Toxapex",
+"nature": "Careful",
+"evidence": 237,
+"smogon": [
+32,
+0,
+18,
+0,
+16,
+0
+],
+"fitted": [
+30,
+0,
+12,
+0,
+12,
+12
+],
+"train_fit": [
+0.916,
+0.949
+],
+"held_out_fit": [
+0.833,
+0.833
+],
+"held_out_n": 18
+},
+{
+"species": "Toxapex",
+"nature": "Calm",
+"evidence": 183,
+"smogon": [
+32,
+0,
+16,
+0,
+18,
+0
+],
+"fitted": [
+32,
+0,
+4,
+0,
+30,
+0
+],
+"train_fit": [
+0.923,
+0.962
+],
+"held_out_fit": [
+0.944,
+0.93
+],
+"held_out_n": 71
+},
+{
+"species": "Typhlosion-Hisui",
+"nature": "Modest",
+"evidence": 198,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.879,
+0.879
+],
+"held_out_fit": [
+0.75,
+0.75
+],
+"held_out_n": 52
+},
+{
+"species": "Kangaskhan",
+"nature": "Adamant",
+"evidence": 203,
+"smogon": [
+0,
+32,
+14,
+0,
+17,
+3
+],
+"fitted": [
+24,
+30,
+8,
+0,
+4,
+0
+],
+"train_fit": [
+0.734,
+0.773
+],
+"held_out_fit": [
+0.745,
+0.809
+],
+"held_out_n": 47
+},
+{
+"species": "Empoleon",
+"nature": "Modest",
+"evidence": 192,
+"smogon": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"fitted": [
+30,
+0,
+0,
+32,
+4,
+0
+],
+"train_fit": [
+0.865,
+0.87
+],
+"held_out_fit": [
+0.807,
+0.842
+],
+"held_out_n": 57
+},
+{
+"species": "Raichu",
+"nature": "Modest",
+"evidence": 226,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+12,
+4,
+18,
+0,
+32
+],
+"train_fit": [
+0.739,
+0.757
+],
+"held_out_fit": [
+0.688,
+0.688
+],
+"held_out_n": 16
+},
+{
+"species": "Drampa",
+"nature": "Quiet",
+"evidence": 177,
+"smogon": [
+17,
+0,
+16,
+17,
+16,
+0
+],
+"fitted": [
+32,
+0,
+0,
+30,
+4,
+0
+],
+"train_fit": [
+0.746,
+0.808
+],
+"held_out_fit": [
+0.902,
+0.918
+],
+"held_out_n": 61
+},
+{
+"species": "Mawile",
+"nature": "Adamant",
+"evidence": 193,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+24,
+28,
+4,
+2,
+8,
+0
+],
+"train_fit": [
+0.503,
+0.896
+],
+"held_out_fit": [
+0.45,
+0.95
+],
+"held_out_n": 40
+},
+{
+"species": "Rillaboom",
+"nature": "Serious",
+"evidence": 180,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+32,
+30,
+0,
+0,
+4,
+0
+],
+"train_fit": [
+0.817,
+0.833
+],
+"held_out_fit": [
+0.917,
+0.917
+],
+"held_out_n": 48
+},
+{
+"species": "Dragapult",
+"nature": "Modest",
+"evidence": 195,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+0,
+4,
+32,
+0,
+30
+],
+"train_fit": [
+0.887,
+0.892
+],
+"held_out_fit": [
+0.867,
+0.867
+],
+"held_out_n": 30
+},
+{
+"species": "Clefable",
+"nature": "Bold",
+"evidence": 182,
+"smogon": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"fitted": [
+32,
+0,
+30,
+4,
+0,
+0
+],
+"train_fit": [
+0.857,
+0.874
+],
+"held_out_fit": [
+0.86,
+0.837
+],
+"held_out_n": 43
+},
+{
+"species": "Dragapult",
+"nature": "Jolly",
+"evidence": 163,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+4,
+32,
+0,
+0,
+0,
+30
+],
+"train_fit": [
+0.871,
+0.877
+],
+"held_out_fit": [
+0.782,
+0.8
+],
+"held_out_n": 55
+},
+{
+"species": "Whimsicott",
+"nature": "Modest",
+"evidence": 167,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+0,
+4,
+30,
+0,
+32
+],
+"train_fit": [
+0.778,
+0.796
+],
+"held_out_fit": [
+0.76,
+0.78
+],
+"held_out_n": 50
+},
+{
+"species": "Scovillain",
+"nature": "Calm",
+"evidence": 177,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+24,
+0,
+12,
+2,
+28,
+0
+],
+"train_fit": [
+0.559,
+0.91
+],
+"held_out_fit": [
+0.7,
+0.875
+],
+"held_out_n": 40
+},
+{
+"species": "Clefable",
+"nature": "Calm",
+"evidence": 193,
+"smogon": [
+32,
+0,
+0,
+2,
+32,
+0
+],
+"fitted": [
+26,
+0,
+12,
+4,
+24,
+0
+],
+"train_fit": [
+0.788,
+0.834
+],
+"held_out_fit": [
+0.667,
+0.75
+],
+"held_out_n": 24
+},
+{
+"species": "Whimsicott",
+"nature": "Bold",
+"evidence": 179,
+"smogon": [
+32,
+0,
+32,
+2,
+0,
+0
+],
+"fitted": [
+22,
+0,
+8,
+12,
+0,
+24
+],
+"train_fit": [
+0.709,
+0.771
+],
+"held_out_fit": [
+0.844,
+0.781
+],
+"held_out_n": 32
+},
+{
+"species": "Ninetales-Alola",
+"nature": "Modest",
+"evidence": 166,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+0,
+4,
+32,
+0,
+30
+],
+"train_fit": [
+0.873,
+0.88
+],
+"held_out_fit": [
+0.707,
+0.732
+],
+"held_out_n": 41
+},
+{
+"species": "Altaria",
+"nature": "Calm",
+"evidence": 187,
+"smogon": [
+32,
+0,
+5,
+0,
+0,
+29
+],
+"fitted": [
+26,
+0,
+8,
+8,
+20,
+4
+],
+"train_fit": [
+0.749,
+0.85
+],
+"held_out_fit": [
+0.842,
+1.0
+],
+"held_out_n": 19
+},
+{
+"species": "Gliscor",
+"nature": "Adamant",
+"evidence": 139,
+"smogon": [
+30,
+32,
+0,
+0,
+4,
+0
+],
+"fitted": [
+22,
+32,
+0,
+0,
+4,
+8
+],
+"train_fit": [
+0.777,
+0.827
+],
+"held_out_fit": [
+0.797,
+0.828
+],
+"held_out_n": 64
+},
+{
+"species": "Incineroar",
+"nature": "Jolly",
+"evidence": 137,
+"smogon": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"fitted": [
+26,
+0,
+16,
+0,
+8,
+16
+],
+"train_fit": [
+0.664,
+0.847
+],
+"held_out_fit": [
+0.698,
+0.81
+],
+"held_out_n": 63
+},
+{
+"species": "Scizor",
+"nature": "Adamant",
+"evidence": 173,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+30,
+28,
+0,
+0,
+8,
+0
+],
+"train_fit": [
+0.74,
+0.769
+],
+"held_out_fit": [
+0.84,
+0.88
+],
+"held_out_n": 25
+},
+{
+"species": "Scovillain",
+"nature": "Bold",
+"evidence": 163,
+"smogon": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"fitted": [
+30,
+0,
+24,
+0,
+12,
+0
+],
+"train_fit": [
+0.791,
+0.883
+],
+"held_out_fit": [
+0.697,
+0.788
+],
+"held_out_n": 33
+},
+{
+"species": "Empoleon",
+"nature": "Bold",
+"evidence": 123,
+"smogon": [
+32,
+0,
+32,
+1,
+0,
+1
+],
+"fitted": [
+32,
+0,
+26,
+8,
+0,
+0
+],
+"train_fit": [
+0.862,
+0.862
+],
+"held_out_fit": [
+0.833,
+0.833
+],
+"held_out_n": 72
+},
+{
+"species": "Vivillon",
+"nature": "Timid",
+"evidence": 166,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+0,
+30,
+0,
+32
+],
+"train_fit": [
+0.886,
+0.892
+],
+"held_out_fit": [
+0.926,
+0.926
+],
+"held_out_n": 27
+},
+{
+"species": "Kangaskhan",
+"nature": "Brave",
+"evidence": 161,
+"smogon": [
+32,
+32,
+2,
+0,
+0,
+0
+],
+"fitted": [
+18,
+28,
+8,
+0,
+12,
+0
+],
+"train_fit": [
+0.82,
+0.839
+],
+"held_out_fit": [
+0.935,
+0.871
+],
+"held_out_n": 31
+},
+{
+"species": "Azumarill",
+"nature": "Adamant",
+"evidence": 155,
+"smogon": [
+29,
+32,
+0,
+0,
+2,
+3
+],
+"fitted": [
+30,
+32,
+4,
+0,
+0,
+0
+],
+"train_fit": [
+0.935,
+0.929
+],
+"held_out_fit": [
+0.838,
+0.838
+],
+"held_out_n": 37
+},
+{
+"species": "Absol",
+"nature": "Adamant",
+"evidence": 140,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+20,
+8,
+6,
+0,
+32
+],
+"train_fit": [
+0.807,
+0.893
+],
+"held_out_fit": [
+0.769,
+0.904
+],
+"held_out_n": 52
+},
+{
+"species": "Bellibolt",
+"nature": "Modest",
+"evidence": 174,
+"smogon": [
+28,
+0,
+14,
+1,
+23,
+0
+],
+"fitted": [
+30,
+0,
+8,
+0,
+28,
+0
+],
+"train_fit": [
+0.931,
+0.948
+],
+"held_out_fit": [
+0.941,
+1.0
+],
+"held_out_n": 17
+},
+{
+"species": "Salamence",
+"nature": "Jolly",
+"evidence": 160,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+8,
+6,
+0,
+28,
+8,
+16
+],
+"train_fit": [
+0.7,
+0.819
+],
+"held_out_fit": [
+0.839,
+0.742
+],
+"held_out_n": 31
+},
+{
+"species": "Slowbro",
+"nature": "Relaxed",
+"evidence": 112,
+"smogon": [
+32,
+0,
+10,
+24,
+0,
+0
+],
+"fitted": [
+32,
+0,
+0,
+2,
+32,
+0
+],
+"train_fit": [
+0.652,
+0.884
+],
+"held_out_fit": [
+0.646,
+0.924
+],
+"held_out_n": 79
+},
+{
+"species": "Sinistcha-Masterpiece",
+"nature": "Calm",
+"evidence": 156,
+"smogon": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"fitted": [
+32,
+0,
+12,
+0,
+22,
+0
+],
+"train_fit": [
+0.814,
+0.814
+],
+"held_out_fit": [
+0.938,
+0.938
+],
+"held_out_n": 32
+},
+{
+"species": "Rotom-Heat",
+"nature": "Modest",
+"evidence": 154,
+"smogon": [
+32,
+0,
+1,
+17,
+4,
+12
+],
+"fitted": [
+30,
+0,
+4,
+20,
+0,
+12
+],
+"train_fit": [
+0.753,
+0.799
+],
+"held_out_fit": [
+0.706,
+0.735
+],
+"held_out_n": 34
+},
+{
+"species": "Rotom-Wash",
+"nature": "Timid",
+"evidence": 123,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+8,
+0,
+0,
+22,
+4,
+32
+],
+"train_fit": [
+0.691,
+0.764
+],
+"held_out_fit": [
+0.712,
+0.729
+],
+"held_out_n": 59
+},
+{
+"species": "Raichu",
+"nature": "Jolly",
+"evidence": 153,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+16,
+14,
+4,
+0,
+0,
+32
+],
+"train_fit": [
+0.673,
+0.752
+],
+"held_out_fit": [
+0.786,
+0.786
+],
+"held_out_n": 28
+},
+{
+"species": "Mamoswine",
+"nature": "Adamant",
+"evidence": 148,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.865,
+0.865
+],
+"held_out_fit": [
+0.815,
+0.815
+],
+"held_out_n": 27
+},
+{
+"species": "Overqwil",
+"nature": "Adamant",
+"evidence": 127,
+"smogon": [
+1,
+32,
+0,
+0,
+1,
+32
+],
+"fitted": [
+0,
+32,
+0,
+8,
+0,
+26
+],
+"train_fit": [
+0.701,
+0.74
+],
+"held_out_fit": [
+0.723,
+0.745
+],
+"held_out_n": 47
+},
+{
+"species": "Espathra",
+"nature": "Timid",
+"evidence": 137,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+12,
+0,
+16,
+6,
+20,
+12
+],
+"train_fit": [
+0.175,
+0.679
+],
+"held_out_fit": [
+0.222,
+0.778
+],
+"held_out_n": 36
+},
+{
+"species": "Baxcalibur",
+"nature": "Jolly",
+"evidence": 148,
+"smogon": [
+1,
+32,
+0,
+0,
+1,
+32
+],
+"fitted": [
+0,
+22,
+12,
+0,
+0,
+32
+],
+"train_fit": [
+0.736,
+0.811
+],
+"held_out_fit": [
+0.87,
+0.913
+],
+"held_out_n": 23
+},
+{
+"species": "Corviknight",
+"nature": "Adamant",
+"evidence": 134,
+"smogon": [
+32,
+13,
+0,
+0,
+21,
+0
+],
+"fitted": [
+26,
+24,
+0,
+0,
+16,
+0
+],
+"train_fit": [
+0.821,
+0.881
+],
+"held_out_fit": [
+0.727,
+0.758
+],
+"held_out_n": 33
+},
+{
+"species": "Aegislash",
+"nature": "Adamant",
+"evidence": 145,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+28,
+32,
+0,
+0,
+4,
+2
+],
+"train_fit": [
+0.607,
+0.807
+],
+"held_out_fit": [
+0.5,
+0.773
+],
+"held_out_n": 22
+},
+{
+"species": "Cinderace",
+"nature": "Jolly",
+"evidence": 161,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+4,
+6,
+4,
+0,
+24,
+28
+],
+"train_fit": [
+0.82,
+0.87
+],
+"held_out_fit": [
+1.0,
+0.5
+],
+"held_out_n": 6
+},
+{
+"species": "Alakazam",
+"nature": "Timid",
+"evidence": 151,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+0,
+4,
+30,
+0,
+32
+],
+"train_fit": [
+0.874,
+0.881
+],
+"held_out_fit": [
+0.812,
+0.75
+],
+"held_out_n": 16
+},
+{
+"species": "Primarina",
+"nature": "Bold",
+"evidence": 145,
+"smogon": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"fitted": [
+26,
+0,
+20,
+12,
+8,
+0
+],
+"train_fit": [
+0.779,
+0.848
+],
+"held_out_fit": [
+0.579,
+0.789
+],
+"held_out_n": 19
+},
+{
+"species": "Basculegion",
+"nature": "Careful",
+"evidence": 120,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+16,
+10,
+4,
+0,
+32,
+4
+],
+"train_fit": [
+0.617,
+0.933
+],
+"held_out_fit": [
+0.476,
+0.881
+],
+"held_out_n": 42
+},
+{
+"species": "Altaria",
+"nature": "Modest",
+"evidence": 135,
+"smogon": [
+32,
+0,
+5,
+0,
+0,
+29
+],
+"fitted": [
+22,
+0,
+4,
+32,
+0,
+8
+],
+"train_fit": [
+0.57,
+0.756
+],
+"held_out_fit": [
+0.692,
+0.692
+],
+"held_out_n": 26
+},
+{
+"species": "Politoed",
+"nature": "Quiet",
+"evidence": 124,
+"smogon": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"fitted": [
+32,
+0,
+4,
+30,
+0,
+0
+],
+"train_fit": [
+0.782,
+0.806
+],
+"held_out_fit": [
+0.865,
+0.865
+],
+"held_out_n": 37
+},
+{
+"species": "Typhlosion-Hisui",
+"nature": "Timid",
+"evidence": 117,
+"smogon": [
+1,
+0,
+0,
+32,
+1,
+32
+],
+"fitted": [
+0,
+0,
+0,
+30,
+4,
+32
+],
+"train_fit": [
+0.846,
+0.855
+],
+"held_out_fit": [
+0.929,
+0.881
+],
+"held_out_n": 42
+},
+{
+"species": "Gyarados",
+"nature": "Adamant",
+"evidence": 136,
+"smogon": [
+1,
+32,
+0,
+0,
+1,
+32
+],
+"fitted": [
+0,
+32,
+0,
+0,
+8,
+26
+],
+"train_fit": [
+0.794,
+0.809
+],
+"held_out_fit": [
+0.826,
+0.826
+],
+"held_out_n": 23
+},
+{
+"species": "Gardevoir",
+"nature": "Quiet",
+"evidence": 144,
+"smogon": [
+30,
+0,
+9,
+27,
+0,
+0
+],
+"fitted": [
+26,
+0,
+8,
+32,
+0,
+0
+],
+"train_fit": [
+0.792,
+0.819
+],
+"held_out_fit": [
+0.846,
+0.846
+],
+"held_out_n": 13
+},
+{
+"species": "Manectric",
+"nature": "Timid",
+"evidence": 136,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+0,
+14,
+16,
+32
+],
+"train_fit": [
+0.699,
+0.831
+],
+"held_out_fit": [
+0.833,
+0.833
+],
+"held_out_n": 18
+},
+{
+"species": "Annihilape",
+"nature": "Careful",
+"evidence": 108,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+12,
+10,
+12,
+0,
+4,
+28
+],
+"train_fit": [
+0.63,
+0.806
+],
+"held_out_fit": [
+0.744,
+0.791
+],
+"held_out_n": 43
+},
+{
+"species": "Gliscor",
+"nature": "Jolly",
+"evidence": 113,
+"smogon": [
+1,
+32,
+0,
+0,
+1,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.858,
+0.858
+],
+"held_out_fit": [
+0.73,
+0.73
+],
+"held_out_n": 37
+},
+{
+"species": "Venusaur",
+"nature": "Timid",
+"evidence": 124,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.855,
+0.855
+],
+"held_out_fit": [
+0.96,
+0.96
+],
+"held_out_n": 25
+},
+{
+"species": "Tyranitar",
+"nature": "Brave",
+"evidence": 130,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+20,
+30,
+4,
+8,
+4,
+0
+],
+"train_fit": [
+0.531,
+0.831
+],
+"held_out_fit": [
+0.474,
+0.895
+],
+"held_out_n": 19
+},
+{
+"species": "Kleavor",
+"nature": "Jolly",
+"evidence": 107,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.888,
+0.888
+],
+"held_out_fit": [
+0.85,
+0.85
+],
+"held_out_n": 40
+},
+{
+"species": "Scrafty",
+"nature": "Brave",
+"evidence": 132,
+"smogon": [
+12,
+30,
+0,
+0,
+24,
+0
+],
+"fitted": [
+24,
+32,
+4,
+0,
+6,
+0
+],
+"train_fit": [
+0.841,
+0.894
+],
+"held_out_fit": [
+0.786,
+0.786
+],
+"held_out_n": 14
+},
+{
+"species": "Alcremie",
+"nature": "Bold",
+"evidence": 105,
+"smogon": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"fitted": [
+30,
+0,
+32,
+4,
+0,
+0
+],
+"train_fit": [
+0.829,
+0.838
+],
+"held_out_fit": [
+0.8,
+0.8
+],
+"held_out_n": 40
+},
+{
+"species": "Salamence",
+"nature": "Adamant",
+"evidence": 109,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+0,
+0,
+30,
+4,
+32
+],
+"train_fit": [
+0.807,
+0.844
+],
+"held_out_fit": [
+0.75,
+0.75
+],
+"held_out_n": 36
+},
+{
+"species": "Sableye",
+"nature": "Calm",
+"evidence": 114,
+"smogon": [
+32,
+0,
+9,
+0,
+25,
+0
+],
+"fitted": [
+30,
+4,
+8,
+0,
+24,
+0
+],
+"train_fit": [
+0.825,
+0.851
+],
+"held_out_fit": [
+0.889,
+0.889
+],
+"held_out_n": 27
+},
+{
+"species": "Politoed",
+"nature": "Sassy",
+"evidence": 113,
+"smogon": [
+32,
+0,
+24,
+0,
+7,
+3
+],
+"fitted": [
+32,
+0,
+22,
+0,
+8,
+4
+],
+"train_fit": [
+0.92,
+0.929
+],
+"held_out_fit": [
+0.889,
+0.889
+],
+"held_out_n": 27
+},
+{
+"species": "Klefki",
+"nature": "Calm",
+"evidence": 105,
+"smogon": [
+32,
+0,
+21,
+0,
+13,
+0
+],
+"fitted": [
+10,
+0,
+20,
+4,
+32,
+0
+],
+"train_fit": [
+0.79,
+0.867
+],
+"held_out_fit": [
+0.857,
+0.857
+],
+"held_out_n": 35
+},
+{
+"species": "Maushold",
+"nature": "Jolly",
+"evidence": 103,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+8,
+14,
+16,
+0,
+4,
+24
+],
+"train_fit": [
+0.786,
+0.835
+],
+"held_out_fit": [
+0.6,
+0.714
+],
+"held_out_n": 35
+},
+{
+"species": "Dragapult",
+"nature": "Naive",
+"evidence": 114,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+32,
+0,
+2,
+0,
+28
+],
+"train_fit": [
+0.649,
+0.912
+],
+"held_out_fit": [
+0.583,
+0.792
+],
+"held_out_n": 24
+},
+{
+"species": "Overqwil",
+"nature": "Careful",
+"evidence": 132,
+"smogon": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"fitted": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"train_fit": [
+0.773,
+0.773
+],
+"held_out_fit": [
+0.833,
+0.833
+],
+"held_out_n": 6
+},
+{
+"species": "Skeledirge",
+"nature": "Bold",
+"evidence": 132,
+"smogon": [
+32,
+0,
+32,
+2,
+0,
+0
+],
+"fitted": [
+26,
+0,
+0,
+8,
+32,
+0
+],
+"train_fit": [
+0.727,
+0.886
+],
+"held_out_fit": [
+0.5,
+1.0
+],
+"held_out_n": 6
+},
+{
+"species": "Kommo-o",
+"nature": "Bold",
+"evidence": 98,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+8,
+0,
+4,
+22,
+0,
+32
+],
+"train_fit": [
+0.847,
+0.908
+],
+"held_out_fit": [
+0.821,
+0.872
+],
+"held_out_n": 39
+},
+{
+"species": "Grapploct",
+"nature": "Adamant",
+"evidence": 116,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+26,
+32,
+8,
+0,
+0,
+0
+],
+"train_fit": [
+0.853,
+0.871
+],
+"held_out_fit": [
+0.947,
+0.895
+],
+"held_out_n": 19
+},
+{
+"species": "Sinistcha-Masterpiece",
+"nature": "Modest",
+"evidence": 84,
+"smogon": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"fitted": [
+22,
+0,
+16,
+12,
+16,
+0
+],
+"train_fit": [
+0.75,
+0.893
+],
+"held_out_fit": [
+0.816,
+0.918
+],
+"held_out_n": 49
+},
+{
+"species": "Ceruledge",
+"nature": "Jolly",
+"evidence": 122,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+0,
+30,
+0,
+0,
+4,
+32
+],
+"train_fit": [
+0.902,
+0.91
+],
+"held_out_fit": [
+0.909,
+0.909
+],
+"held_out_n": 11
+},
+{
+"species": "Umbreon",
+"nature": "Calm",
+"evidence": 87,
+"smogon": [
+32,
+0,
+29,
+0,
+5,
+0
+],
+"fitted": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"train_fit": [
+0.885,
+0.897
+],
+"held_out_fit": [
+0.674,
+0.696
+],
+"held_out_n": 46
+},
+{
+"species": "Palafin",
+"nature": "Adamant",
+"evidence": 92,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+16,
+18,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.728,
+0.804
+],
+"held_out_fit": [
+0.875,
+0.75
+],
+"held_out_n": 40
+},
+{
+"species": "Pidgeot",
+"nature": "Timid",
+"evidence": 115,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+0,
+0,
+30,
+4,
+32
+],
+"train_fit": [
+0.783,
+0.817
+],
+"held_out_fit": [
+0.688,
+0.562
+],
+"held_out_n": 16
+},
+{
+"species": "Venusaur",
+"nature": "Bold",
+"evidence": 102,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+12,
+0,
+28,
+2,
+24,
+0
+],
+"train_fit": [
+0.5,
+0.873
+],
+"held_out_fit": [
+0.536,
+0.821
+],
+"held_out_n": 28
+},
+{
+"species": "Charizard",
+"nature": "Adamant",
+"evidence": 114,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+16,
+6,
+8,
+0,
+4,
+32
+],
+"train_fit": [
+0.746,
+0.912
+],
+"held_out_fit": [
+0.812,
+0.5
+],
+"held_out_n": 16
+},
+{
+"species": "Swampert",
+"nature": "Jolly",
+"evidence": 98,
+"smogon": [
+32,
+0,
+17,
+16,
+0,
+1
+],
+"fitted": [
+6,
+28,
+0,
+16,
+0,
+16
+],
+"train_fit": [
+0.531,
+0.847
+],
+"held_out_fit": [
+0.387,
+0.839
+],
+"held_out_n": 31
+},
+{
+"species": "Hippowdon",
+"nature": "Sassy",
+"evidence": 116,
+"smogon": [
+32,
+2,
+0,
+0,
+32,
+0
+],
+"fitted": [
+22,
+8,
+8,
+0,
+28,
+0
+],
+"train_fit": [
+0.845,
+0.905
+],
+"held_out_fit": [
+0.923,
+0.846
+],
+"held_out_n": 13
+},
+{
+"species": "Tyranitar",
+"nature": "Careful",
+"evidence": 103,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+8,
+26,
+8,
+0,
+24,
+0
+],
+"train_fit": [
+0.621,
+0.874
+],
+"held_out_fit": [
+0.346,
+0.462
+],
+"held_out_n": 26
+},
+{
+"species": "Goodra-Hisui",
+"nature": "Modest",
+"evidence": 109,
+"smogon": [
+21,
+0,
+5,
+30,
+0,
+10
+],
+"fitted": [
+22,
+0,
+4,
+32,
+8,
+0
+],
+"train_fit": [
+0.817,
+0.853
+],
+"held_out_fit": [
+0.889,
+0.889
+],
+"held_out_n": 18
+},
+{
+"species": "Garchomp",
+"nature": "Impish",
+"evidence": 91,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+16,
+14,
+20,
+0,
+16,
+0
+],
+"train_fit": [
+0.549,
+0.868
+],
+"held_out_fit": [
+0.8,
+0.657
+],
+"held_out_n": 35
+},
+{
+"species": "Golisopod",
+"nature": "Sassy",
+"evidence": 112,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+30,
+4,
+0,
+0,
+32,
+0
+],
+"train_fit": [
+0.759,
+0.839
+],
+"held_out_fit": [
+0.667,
+0.833
+],
+"held_out_n": 12
+},
+{
+"species": "Araquanid",
+"nature": "Brave",
+"evidence": 103,
+"smogon": [
+32,
+32,
+2,
+0,
+0,
+0
+],
+"fitted": [
+30,
+32,
+0,
+0,
+4,
+0
+],
+"train_fit": [
+0.874,
+0.893
+],
+"held_out_fit": [
+0.6,
+0.6
+],
+"held_out_n": 20
+},
+{
+"species": "Kleavor",
+"nature": "Adamant",
+"evidence": 100,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.9,
+0.9
+],
+"held_out_fit": [
+0.636,
+0.636
+],
+"held_out_n": 22
+},
+{
+"species": "Toxapex",
+"nature": "Impish",
+"evidence": 120,
+"smogon": [
+32,
+0,
+18,
+0,
+16,
+0
+],
+"fitted": [
+32,
+4,
+26,
+0,
+4,
+0
+],
+"train_fit": [
+0.9,
+0.933
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 2
+},
+{
+"species": "Camerupt",
+"nature": "Modest",
+"evidence": 98,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+12,
+0,
+0,
+32,
+16,
+6
+],
+"train_fit": [
+0.735,
+0.918
+],
+"held_out_fit": [
+0.625,
+0.792
+],
+"held_out_n": 24
+},
+{
+"species": "Vanilluxe",
+"nature": "Timid",
+"evidence": 83,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.892,
+0.892
+],
+"held_out_fit": [
+0.816,
+0.816
+],
+"held_out_n": 38
+},
+{
+"species": "Toxapex",
+"nature": "Sassy",
+"evidence": 86,
+"smogon": [
+32,
+0,
+18,
+0,
+16,
+0
+],
+"fitted": [
+30,
+0,
+4,
+8,
+24,
+0
+],
+"train_fit": [
+0.93,
+0.977
+],
+"held_out_fit": [
+0.939,
+0.879
+],
+"held_out_n": 33
+},
+{
+"species": "Tinkaton",
+"nature": "Jolly",
+"evidence": 109,
+"smogon": [
+23,
+15,
+0,
+0,
+0,
+28
+],
+"fitted": [
+6,
+24,
+0,
+0,
+4,
+32
+],
+"train_fit": [
+0.853,
+0.881
+],
+"held_out_fit": [
+0.667,
+0.889
+],
+"held_out_n": 9
+},
+{
+"species": "Mimikyu",
+"nature": "Adamant",
+"evidence": 98,
+"smogon": [
+32,
+32,
+2,
+0,
+0,
+0
+],
+"fitted": [
+2,
+20,
+16,
+0,
+8,
+20
+],
+"train_fit": [
+0.796,
+0.867
+],
+"held_out_fit": [
+0.6,
+0.75
+],
+"held_out_n": 20
+},
+{
+"species": "Maushold",
+"nature": "Bold",
+"evidence": 70,
+"smogon": [
+32,
+0,
+20,
+0,
+14,
+0
+],
+"fitted": [
+30,
+0,
+20,
+0,
+16,
+0
+],
+"train_fit": [
+0.814,
+0.886
+],
+"held_out_fit": [
+0.875,
+0.833
+],
+"held_out_n": 48
+},
+{
+"species": "Sinistcha",
+"nature": "Modest",
+"evidence": 102,
+"smogon": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"fitted": [
+30,
+0,
+12,
+16,
+8,
+0
+],
+"train_fit": [
+0.745,
+0.833
+],
+"held_out_fit": [
+0.5,
+0.688
+],
+"held_out_n": 16
+},
+{
+"species": "Aerodactyl",
+"nature": "Adamant",
+"evidence": 100,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.66,
+0.66
+],
+"held_out_fit": [
+0.938,
+0.938
+],
+"held_out_n": 16
+},
+{
+"species": "Houndoom",
+"nature": "Timid",
+"evidence": 100,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+8,
+0,
+0,
+32,
+0,
+26
+],
+"train_fit": [
+0.89,
+0.91
+],
+"held_out_fit": [
+0.688,
+0.625
+],
+"held_out_n": 16
+},
+{
+"species": "Swalot",
+"nature": "Calm",
+"evidence": 73,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+24,
+0,
+24,
+2,
+12,
+4
+],
+"train_fit": [
+0.562,
+0.959
+],
+"held_out_fit": [
+0.41,
+0.821
+],
+"held_out_n": 39
+},
+{
+"species": "Indeedee-F",
+"nature": "Timid",
+"evidence": 88,
+"smogon": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"fitted": [
+30,
+0,
+8,
+12,
+0,
+16
+],
+"train_fit": [
+0.716,
+0.807
+],
+"held_out_fit": [
+0.522,
+0.783
+],
+"held_out_n": 23
+},
+{
+"species": "Skeledirge",
+"nature": "Modest",
+"evidence": 86,
+"smogon": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"fitted": [
+22,
+0,
+0,
+28,
+4,
+12
+],
+"train_fit": [
+0.814,
+0.884
+],
+"held_out_fit": [
+0.609,
+0.783
+],
+"held_out_n": 23
+},
+{
+"species": "Grapploct",
+"nature": "Brave",
+"evidence": 99,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+32,
+14,
+4,
+0,
+16,
+0
+],
+"train_fit": [
+0.838,
+0.768
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 9
+},
+{
+"species": "Krookodile",
+"nature": "Adamant",
+"evidence": 68,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+4,
+32,
+0,
+0,
+0,
+30
+],
+"train_fit": [
+0.853,
+0.868
+],
+"held_out_fit": [
+0.846,
+0.846
+],
+"held_out_n": 39
+},
+{
+"species": "Maushold",
+"nature": "Impish",
+"evidence": 83,
+"smogon": [
+32,
+0,
+20,
+0,
+14,
+0
+],
+"fitted": [
+30,
+0,
+16,
+0,
+20,
+0
+],
+"train_fit": [
+0.795,
+0.843
+],
+"held_out_fit": [
+0.762,
+0.571
+],
+"held_out_n": 21
+},
+{
+"species": "Bastiodon",
+"nature": "Relaxed",
+"evidence": 84,
+"smogon": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"fitted": [
+32,
+0,
+4,
+0,
+30,
+0
+],
+"train_fit": [
+0.952,
+0.964
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 18
+},
+{
+"species": "Swalot",
+"nature": "Sassy",
+"evidence": 97,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+24,
+0,
+4,
+10,
+28,
+0
+],
+"train_fit": [
+0.732,
+0.845
+],
+"held_out_fit": [
+0.2,
+0.6
+],
+"held_out_n": 5
+},
+{
+"species": "Rotom-Wash",
+"nature": "Modest",
+"evidence": 83,
+"smogon": [
+32,
+0,
+0,
+12,
+22,
+0
+],
+"fitted": [
+26,
+0,
+4,
+28,
+8,
+0
+],
+"train_fit": [
+0.747,
+0.855
+],
+"held_out_fit": [
+0.556,
+0.667
+],
+"held_out_n": 18
+},
+{
+"species": "Ampharos",
+"nature": "Quiet",
+"evidence": 93,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+24,
+0,
+8,
+30,
+4,
+0
+],
+"train_fit": [
+0.72,
+0.957
+],
+"held_out_fit": [
+0.25,
+0.875
+],
+"held_out_n": 8
+},
+{
+"species": "Gallade",
+"nature": "Jolly",
+"evidence": 76,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+4,
+30,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.724,
+0.776
+],
+"held_out_fit": [
+0.609,
+0.609
+],
+"held_out_n": 23
+},
+{
+"species": "Sableye",
+"nature": "Bold",
+"evidence": 81,
+"smogon": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"fitted": [
+30,
+4,
+24,
+0,
+8,
+0
+],
+"train_fit": [
+0.778,
+0.914
+],
+"held_out_fit": [
+0.944,
+1.0
+],
+"held_out_n": 18
+},
+{
+"species": "Altaria",
+"nature": "Adamant",
+"evidence": 64,
+"smogon": [
+32,
+0,
+5,
+0,
+0,
+29
+],
+"fitted": [
+30,
+28,
+4,
+0,
+0,
+4
+],
+"train_fit": [
+0.609,
+0.859
+],
+"held_out_fit": [
+0.886,
+0.886
+],
+"held_out_n": 35
+},
+{
+"species": "Blastoise",
+"nature": "Quiet",
+"evidence": 87,
+"smogon": [
+32,
+0,
+20,
+3,
+11,
+0
+],
+"fitted": [
+32,
+0,
+2,
+28,
+4,
+0
+],
+"train_fit": [
+0.667,
+0.931
+],
+"held_out_fit": [
+0.818,
+1.0
+],
+"held_out_n": 11
+},
+{
+"species": "Meganium",
+"nature": "Timid",
+"evidence": 79,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+4,
+30,
+8,
+20
+],
+"train_fit": [
+0.861,
+0.924
+],
+"held_out_fit": [
+0.667,
+0.667
+],
+"held_out_n": 18
+},
+{
+"species": "Delphox",
+"nature": "Modest",
+"evidence": 85,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+8,
+0,
+0,
+22,
+4,
+32
+],
+"train_fit": [
+0.788,
+0.906
+],
+"held_out_fit": [
+0.727,
+0.818
+],
+"held_out_n": 11
+},
+{
+"species": "Volcarona",
+"nature": "Serious",
+"evidence": 80,
+"smogon": [
+21,
+0,
+15,
+5,
+1,
+24
+],
+"fitted": [
+12,
+0,
+24,
+12,
+0,
+18
+],
+"train_fit": [
+0.875,
+0.925
+],
+"held_out_fit": [
+0.8,
+0.8
+],
+"held_out_n": 15
+},
+{
+"species": "Swampert",
+"nature": "Careful",
+"evidence": 70,
+"smogon": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"fitted": [
+26,
+12,
+0,
+0,
+24,
+4
+],
+"train_fit": [
+0.743,
+0.9
+],
+"held_out_fit": [
+0.84,
+0.76
+],
+"held_out_n": 25
+},
+{
+"species": "Inteleon",
+"nature": "Timid",
+"evidence": 82,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+0,
+0,
+30,
+4,
+32
+],
+"train_fit": [
+0.89,
+0.927
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 12
+},
+{
+"species": "Samurott-Hisui",
+"nature": "Adamant",
+"evidence": 77,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.818,
+0.818
+],
+"held_out_fit": [
+0.75,
+0.75
+],
+"held_out_n": 16
+},
+{
+"species": "Indeedee-F",
+"nature": "Modest",
+"evidence": 80,
+"smogon": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"fitted": [
+22,
+0,
+24,
+16,
+4,
+0
+],
+"train_fit": [
+0.713,
+0.738
+],
+"held_out_fit": [
+0.615,
+0.846
+],
+"held_out_n": 13
+},
+{
+"species": "Tsareena",
+"nature": "Adamant",
+"evidence": 72,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+4,
+26,
+0,
+0,
+8,
+28
+],
+"train_fit": [
+0.764,
+0.819
+],
+"held_out_fit": [
+0.65,
+0.6
+],
+"held_out_n": 20
+},
+{
+"species": "Incineroar",
+"nature": "Serious",
+"evidence": 90,
+"smogon": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"fitted": [
+14,
+12,
+20,
+0,
+20,
+0
+],
+"train_fit": [
+0.878,
+0.933
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 2
+},
+{
+"species": "Milotic",
+"nature": "Relaxed",
+"evidence": 92,
+"smogon": [
+32,
+0,
+29,
+0,
+5,
+0
+],
+"fitted": [
+32,
+0,
+30,
+0,
+4,
+0
+],
+"train_fit": [
+0.913,
+0.913
+],
+"held_out_fit": null,
+"held_out_n": 0
+},
+{
+"species": "Rotom-Wash",
+"nature": "Bold",
+"evidence": 66,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+20,
+0,
+0,
+2,
+16,
+28
+],
+"train_fit": [
+0.47,
+0.879
+],
+"held_out_fit": [
+0.538,
+0.692
+],
+"held_out_n": 26
+},
+{
+"species": "Tsareena",
+"nature": "Jolly",
+"evidence": 66,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.833,
+0.833
+],
+"held_out_fit": [
+0.8,
+0.8
+],
+"held_out_n": 25
+},
+{
+"species": "Dragonite",
+"nature": "Jolly",
+"evidence": 83,
+"smogon": [
+7,
+32,
+0,
+0,
+0,
+27
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.892,
+0.916
+],
+"held_out_fit": [
+0.875,
+0.875
+],
+"held_out_n": 8
+},
+{
+"species": "Grimmsnarl",
+"nature": "Calm",
+"evidence": 76,
+"smogon": [
+32,
+0,
+19,
+0,
+15,
+0
+],
+"fitted": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"train_fit": [
+0.829,
+0.882
+],
+"held_out_fit": [
+0.75,
+0.75
+],
+"held_out_n": 12
+},
+{
+"species": "Ninetales",
+"nature": "Timid",
+"evidence": 79,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.886,
+0.886
+],
+"held_out_fit": [
+0.778,
+0.778
+],
+"held_out_n": 9
+},
+{
+"species": "Sneasler",
+"nature": "Naive",
+"evidence": 61,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.787,
+0.787
+],
+"held_out_fit": [
+0.769,
+0.769
+],
+"held_out_n": 26
+},
+{
+"species": "Lycanroc-Dusk",
+"nature": "Adamant",
+"evidence": 54,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.852,
+0.852
+],
+"held_out_fit": [
+0.818,
+0.818
+],
+"held_out_n": 33
+},
+{
+"species": "Clefable",
+"nature": "Modest",
+"evidence": 77,
+"smogon": [
+32,
+0,
+27,
+1,
+6,
+0
+],
+"fitted": [
+32,
+0,
+22,
+4,
+8,
+0
+],
+"train_fit": [
+0.844,
+0.896
+],
+"held_out_fit": [
+0.889,
+0.778
+],
+"held_out_n": 9
+},
+{
+"species": "Pincurchin",
+"nature": "Quiet",
+"evidence": 74,
+"smogon": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"fitted": [
+32,
+0,
+4,
+26,
+4,
+0
+],
+"train_fit": [
+0.851,
+0.905
+],
+"held_out_fit": [
+0.833,
+0.667
+],
+"held_out_n": 12
+},
+{
+"species": "Ditto",
+"nature": "Timid",
+"evidence": 54,
+"smogon": [
+32,
+0,
+0,
+0,
+2,
+32
+],
+"fitted": [
+32,
+0,
+0,
+0,
+2,
+32
+],
+"train_fit": [
+0.444,
+0.444
+],
+"held_out_fit": [
+0.625,
+0.625
+],
+"held_out_n": 32
+},
+{
+"species": "Aggron",
+"nature": "Careful",
+"evidence": 76,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+28,
+0,
+4,
+2,
+32,
+0
+],
+"train_fit": [
+0.632,
+0.974
+],
+"held_out_fit": [
+0.778,
+1.0
+],
+"held_out_n": 9
+},
+{
+"species": "Gardevoir",
+"nature": "Bold",
+"evidence": 68,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+24,
+0,
+12,
+26,
+0,
+4
+],
+"train_fit": [
+0.691,
+0.882
+],
+"held_out_fit": [
+0.471,
+0.824
+],
+"held_out_n": 17
+},
+{
+"species": "Starmie",
+"nature": "Jolly",
+"evidence": 66,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+32,
+0,
+2,
+0,
+28
+],
+"train_fit": [
+0.742,
+0.879
+],
+"held_out_fit": [
+0.882,
+1.0
+],
+"held_out_n": 17
+},
+{
+"species": "Sinistcha-Masterpiece",
+"nature": "Quiet",
+"evidence": 72,
+"smogon": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"fitted": [
+32,
+0,
+4,
+0,
+30,
+0
+],
+"train_fit": [
+0.806,
+0.903
+],
+"held_out_fit": [
+0.818,
+0.818
+],
+"held_out_n": 11
+},
+{
+"species": "Sirfetch\u2019d",
+"nature": "Adamant",
+"evidence": 63,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+26,
+32,
+8,
+0,
+0,
+0
+],
+"train_fit": [
+0.825,
+0.857
+],
+"held_out_fit": [
+0.895,
+0.842
+],
+"held_out_n": 19
+},
+{
+"species": "Tinkaton",
+"nature": "Rash",
+"evidence": 76,
+"smogon": [
+32,
+0,
+25,
+0,
+9,
+0
+],
+"fitted": [
+10,
+12,
+24,
+0,
+4,
+16
+],
+"train_fit": [
+0.553,
+0.829
+],
+"held_out_fit": [
+1.0,
+0.5
+],
+"held_out_n": 6
+},
+{
+"species": "Araquanid",
+"nature": "Adamant",
+"evidence": 77,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+10,
+28,
+0,
+0,
+20,
+8
+],
+"train_fit": [
+0.779,
+0.896
+],
+"held_out_fit": [
+0.8,
+0.4
+],
+"held_out_n": 5
+},
+{
+"species": "Indeedee-F",
+"nature": "Quiet",
+"evidence": 65,
+"smogon": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"fitted": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"train_fit": [
+0.708,
+0.8
+],
+"held_out_fit": [
+0.875,
+0.875
+],
+"held_out_n": 16
+},
+{
+"species": "Meowscarada",
+"nature": "Jolly",
+"evidence": 77,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+8,
+26,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.87,
+0.883
+],
+"held_out_fit": [
+0.75,
+0.75
+],
+"held_out_n": 4
+},
+{
+"species": "Pawmot",
+"nature": "Adamant",
+"evidence": 73,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.918,
+0.918
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 8
+},
+{
+"species": "Gengar",
+"nature": "Calm",
+"evidence": 76,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+16,
+0,
+0,
+22,
+24,
+4
+],
+"train_fit": [
+0.908,
+0.987
+],
+"held_out_fit": [
+0.8,
+0.8
+],
+"held_out_n": 5
+},
+{
+"species": "Goodra-Hisui",
+"nature": "Bold",
+"evidence": 65,
+"smogon": [
+21,
+0,
+5,
+30,
+0,
+10
+],
+"fitted": [
+28,
+0,
+32,
+6,
+0,
+0
+],
+"train_fit": [
+0.615,
+0.908
+],
+"held_out_fit": [
+0.688,
+0.875
+],
+"held_out_n": 16
+},
+{
+"species": "Talonflame",
+"nature": "Adamant",
+"evidence": 70,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+4,
+22,
+0,
+0,
+8,
+32
+],
+"train_fit": [
+0.8,
+0.843
+],
+"held_out_fit": [
+0.9,
+0.9
+],
+"held_out_n": 10
+},
+{
+"species": "Tyranitar",
+"nature": "Relaxed",
+"evidence": 59,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+16,
+10,
+8,
+24,
+0,
+8
+],
+"train_fit": [
+0.627,
+0.915
+],
+"held_out_fit": [
+0.667,
+0.762
+],
+"held_out_n": 21
+},
+{
+"species": "Drampa",
+"nature": "Calm",
+"evidence": 71,
+"smogon": [
+17,
+0,
+16,
+17,
+16,
+0
+],
+"fitted": [
+30,
+0,
+16,
+4,
+16,
+0
+],
+"train_fit": [
+0.817,
+0.901
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 9
+},
+{
+"species": "Gyarados",
+"nature": "Jolly",
+"evidence": 73,
+"smogon": [
+5,
+31,
+0,
+0,
+0,
+30
+],
+"fitted": [
+0,
+26,
+4,
+12,
+0,
+24
+],
+"train_fit": [
+0.808,
+0.863
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 5
+},
+{
+"species": "Blaziken",
+"nature": "Modest",
+"evidence": 65,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.662,
+0.662
+],
+"held_out_fit": [
+0.667,
+0.667
+],
+"held_out_n": 12
+},
+{
+"species": "Swampert",
+"nature": "Relaxed",
+"evidence": 56,
+"smogon": [
+31,
+2,
+20,
+0,
+13,
+0
+],
+"fitted": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"train_fit": [
+0.661,
+0.839
+],
+"held_out_fit": [
+0.75,
+0.65
+],
+"held_out_n": 20
+},
+{
+"species": "Steelix",
+"nature": "Brave",
+"evidence": 51,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+28,
+0,
+2,
+16,
+16
+],
+"train_fit": [
+0.608,
+0.922
+],
+"held_out_fit": [
+0.652,
+0.783
+],
+"held_out_n": 23
+},
+{
+"species": "Sneasler",
+"nature": "Serious",
+"evidence": 64,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+4,
+32,
+0,
+0,
+4,
+26
+],
+"train_fit": [
+0.812,
+0.844
+],
+"held_out_fit": [
+0.7,
+0.7
+],
+"held_out_n": 10
+},
+{
+"species": "Torkoal",
+"nature": "Relaxed",
+"evidence": 73,
+"smogon": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"fitted": [
+30,
+0,
+8,
+16,
+12,
+0
+],
+"train_fit": [
+0.822,
+0.89
+],
+"held_out_fit": [
+0.0,
+0.0
+],
+"held_out_n": 1
+},
+{
+"species": "Floette-Eternal",
+"nature": "Calm",
+"evidence": 73,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+28,
+0,
+0,
+2,
+8,
+28
+],
+"train_fit": [
+0.534,
+0.767
+],
+"held_out_fit": null,
+"held_out_n": 0
+},
+{
+"species": "Ninetales",
+"nature": "Modest",
+"evidence": 72,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+0,
+32,
+0,
+30
+],
+"train_fit": [
+0.903,
+0.931
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 1
+},
+{
+"species": "Samurott-Hisui",
+"nature": "Jolly",
+"evidence": 72,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.917,
+0.917
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 1
+},
+{
+"species": "Banette",
+"nature": "Adamant",
+"evidence": 64,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+16,
+0,
+18,
+0,
+32
+],
+"train_fit": [
+0.703,
+0.719
+],
+"held_out_fit": [
+0.556,
+0.778
+],
+"held_out_n": 9
+},
+{
+"species": "Snorlax",
+"nature": "Impish",
+"evidence": 51,
+"smogon": [
+32,
+2,
+32,
+0,
+0,
+0
+],
+"fitted": [
+32,
+0,
+30,
+0,
+4,
+0
+],
+"train_fit": [
+0.922,
+0.961
+],
+"held_out_fit": [
+0.955,
+0.955
+],
+"held_out_n": 22
+},
+{
+"species": "Chandelure",
+"nature": "Modest",
+"evidence": 58,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+20,
+0,
+0,
+18,
+20,
+8
+],
+"train_fit": [
+0.603,
+0.793
+],
+"held_out_fit": [
+0.714,
+0.714
+],
+"held_out_n": 14
+},
+{
+"species": "Gallade",
+"nature": "Adamant",
+"evidence": 61,
+"smogon": [
+32,
+32,
+2,
+0,
+0,
+0
+],
+"fitted": [
+32,
+32,
+2,
+0,
+0,
+0
+],
+"train_fit": [
+0.787,
+0.787
+],
+"held_out_fit": [
+0.545,
+0.545
+],
+"held_out_n": 11
+},
+{
+"species": "Rotom-Wash",
+"nature": "Calm",
+"evidence": 60,
+"smogon": [
+32,
+0,
+0,
+2,
+32,
+0
+],
+"fitted": [
+32,
+0,
+0,
+2,
+32,
+0
+],
+"train_fit": [
+0.9,
+0.9
+],
+"held_out_fit": [
+0.909,
+0.909
+],
+"held_out_n": 11
+},
+{
+"species": "Sableye",
+"nature": "Careful",
+"evidence": 45,
+"smogon": [
+32,
+2,
+0,
+0,
+32,
+0
+],
+"fitted": [
+30,
+0,
+8,
+0,
+28,
+0
+],
+"train_fit": [
+0.911,
+0.933
+],
+"held_out_fit": [
+0.923,
+0.846
+],
+"held_out_n": 26
+},
+{
+"species": "Dragapult",
+"nature": "Hasty",
+"evidence": 67,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+24,
+0,
+10,
+0,
+32
+],
+"train_fit": [
+0.701,
+0.836
+],
+"held_out_fit": [
+0.0,
+0.5
+],
+"held_out_n": 4
+},
+{
+"species": "Reuniclus",
+"nature": "Quiet",
+"evidence": 61,
+"smogon": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"fitted": [
+10,
+0,
+20,
+12,
+24,
+0
+],
+"train_fit": [
+0.738,
+0.787
+],
+"held_out_fit": [
+0.889,
+0.889
+],
+"held_out_n": 9
+},
+{
+"species": "Indeedee",
+"nature": "Bold",
+"evidence": 53,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+0,
+26,
+24,
+12
+],
+"train_fit": [
+0.453,
+0.717
+],
+"held_out_fit": [
+0.75,
+0.875
+],
+"held_out_n": 16
+},
+{
+"species": "Feraligatr",
+"nature": "Adamant",
+"evidence": 57,
+"smogon": [
+32,
+32,
+0,
+0,
+0,
+2
+],
+"fitted": [
+18,
+32,
+0,
+0,
+12,
+4
+],
+"train_fit": [
+0.754,
+0.825
+],
+"held_out_fit": [
+0.818,
+0.909
+],
+"held_out_n": 11
+},
+{
+"species": "Rotom",
+"nature": "Timid",
+"evidence": 61,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+12,
+0,
+4,
+10,
+8,
+32
+],
+"train_fit": [
+0.328,
+0.705
+],
+"held_out_fit": [
+0.571,
+0.714
+],
+"held_out_n": 7
+},
+{
+"species": "Sinistcha",
+"nature": "Sassy",
+"evidence": 65,
+"smogon": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"fitted": [
+32,
+0,
+4,
+0,
+30,
+0
+],
+"train_fit": [
+0.877,
+0.831
+],
+"held_out_fit": [
+0.5,
+0.5
+],
+"held_out_n": 2
+},
+{
+"species": "Maushold-Four",
+"nature": "Timid",
+"evidence": 47,
+"smogon": [
+32,
+0,
+20,
+0,
+14,
+0
+],
+"fitted": [
+26,
+0,
+4,
+0,
+12,
+24
+],
+"train_fit": [
+0.745,
+0.957
+],
+"held_out_fit": [
+0.8,
+0.9
+],
+"held_out_n": 20
+},
+{
+"species": "Talonflame",
+"nature": "Timid",
+"evidence": 59,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+0,
+30,
+8,
+24
+],
+"train_fit": [
+0.831,
+0.898
+],
+"held_out_fit": [
+0.857,
+0.714
+],
+"held_out_n": 7
+},
+{
+"species": "Zoroark-Hisui",
+"nature": "Timid",
+"evidence": 58,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.828,
+0.828
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 8
+},
+{
+"species": "Vivillon-Garden",
+"nature": "Timid",
+"evidence": 59,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+8,
+22,
+0,
+32
+],
+"train_fit": [
+0.831,
+0.966
+],
+"held_out_fit": [
+0.857,
+0.714
+],
+"held_out_n": 7
+},
+{
+"species": "Garchomp",
+"nature": "Serious",
+"evidence": 56,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+0,
+18,
+0,
+16,
+0,
+32
+],
+"train_fit": [
+0.75,
+0.875
+],
+"held_out_fit": [
+0.889,
+0.889
+],
+"held_out_n": 9
+},
+{
+"species": "Gallade",
+"nature": "Brave",
+"evidence": 56,
+"smogon": [
+32,
+32,
+2,
+0,
+0,
+0
+],
+"fitted": [
+30,
+28,
+0,
+0,
+0,
+8
+],
+"train_fit": [
+0.821,
+0.857
+],
+"held_out_fit": [
+1.0,
+0.889
+],
+"held_out_n": 9
+},
+{
+"species": "Hawlucha",
+"nature": "Jolly",
+"evidence": 49,
+"smogon": [
+1,
+32,
+0,
+0,
+11,
+22
+],
+"fitted": [
+0,
+10,
+24,
+0,
+8,
+24
+],
+"train_fit": [
+0.714,
+0.878
+],
+"held_out_fit": [
+0.812,
+0.75
+],
+"held_out_n": 16
+},
+{
+"species": "Sylveon",
+"nature": "Serious",
+"evidence": 49,
+"smogon": [
+9,
+0,
+22,
+20,
+0,
+15
+],
+"fitted": [
+8,
+0,
+32,
+26,
+0,
+0
+],
+"train_fit": [
+0.837,
+0.857
+],
+"held_out_fit": [
+0.812,
+0.875
+],
+"held_out_n": 16
+},
+{
+"species": "Volcarona",
+"nature": "Bashful",
+"evidence": 45,
+"smogon": [
+21,
+0,
+15,
+5,
+1,
+24
+],
+"fitted": [
+32,
+0,
+0,
+12,
+4,
+18
+],
+"train_fit": [
+0.711,
+0.889
+],
+"held_out_fit": [
+0.632,
+0.632
+],
+"held_out_n": 19
+},
+{
+"species": "Eelektross",
+"nature": "Modest",
+"evidence": 55,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+0,
+0,
+26,
+16,
+24
+],
+"train_fit": [
+0.782,
+0.927
+],
+"held_out_fit": [
+0.778,
+0.889
+],
+"held_out_n": 9
+},
+{
+"species": "Golurk",
+"nature": "Adamant",
+"evidence": 42,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+20,
+8,
+2,
+24,
+8
+],
+"train_fit": [
+0.405,
+0.857
+],
+"held_out_fit": [
+0.524,
+0.81
+],
+"held_out_n": 21
+},
+{
+"species": "Sylveon",
+"nature": "Sassy",
+"evidence": 57,
+"smogon": [
+9,
+0,
+22,
+20,
+0,
+15
+],
+"fitted": [
+20,
+0,
+14,
+0,
+32,
+0
+],
+"train_fit": [
+0.491,
+0.895
+],
+"held_out_fit": [
+0.667,
+0.833
+],
+"held_out_n": 6
+},
+{
+"species": "Primarina",
+"nature": "Sassy",
+"evidence": 50,
+"smogon": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"fitted": [
+32,
+0,
+0,
+14,
+20,
+0
+],
+"train_fit": [
+0.76,
+0.8
+],
+"held_out_fit": [
+0.667,
+0.833
+],
+"held_out_n": 12
+},
+{
+"species": "Scovillain",
+"nature": "Modest",
+"evidence": 47,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+0,
+30,
+20,
+12
+],
+"train_fit": [
+0.596,
+0.745
+],
+"held_out_fit": [
+0.714,
+0.786
+],
+"held_out_n": 14
+},
+{
+"species": "Mamoswine",
+"nature": "Jolly",
+"evidence": 54,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+4,
+32,
+0,
+0,
+0,
+30
+],
+"train_fit": [
+0.778,
+0.852
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 6
+},
+{
+"species": "Raichu",
+"nature": "Adamant",
+"evidence": 48,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+24,
+0,
+6,
+4,
+28
+],
+"train_fit": [
+0.646,
+0.854
+],
+"held_out_fit": [
+0.833,
+0.917
+],
+"held_out_n": 12
+},
+{
+"species": "Dragonite",
+"nature": "Quiet",
+"evidence": 59,
+"smogon": [
+7,
+32,
+0,
+0,
+0,
+27
+],
+"fitted": [
+20,
+6,
+4,
+32,
+4,
+0
+],
+"train_fit": [
+0.407,
+0.797
+],
+"held_out_fit": null,
+"held_out_n": 0
+},
+{
+"species": "Sableye",
+"nature": "Relaxed",
+"evidence": 56,
+"smogon": [
+32,
+0,
+5,
+0,
+29,
+0
+],
+"fitted": [
+32,
+0,
+28,
+0,
+6,
+0
+],
+"train_fit": [
+0.804,
+0.946
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 3
+},
+{
+"species": "Tyranitar",
+"nature": "Serious",
+"evidence": 55,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+24,
+10,
+8,
+0,
+0,
+24
+],
+"train_fit": [
+0.673,
+0.891
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 4
+},
+{
+"species": "Persian-Alola",
+"nature": "Jolly",
+"evidence": 52,
+"smogon": [
+28,
+0,
+9,
+0,
+1,
+28
+],
+"fitted": [
+14,
+12,
+16,
+0,
+0,
+24
+],
+"train_fit": [
+0.885,
+0.942
+],
+"held_out_fit": [
+0.5,
+0.833
+],
+"held_out_n": 6
+},
+{
+"species": "Bellibolt",
+"nature": "Quiet",
+"evidence": 50,
+"smogon": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"fitted": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"train_fit": [
+0.9,
+0.9
+],
+"held_out_fit": [
+0.857,
+0.857
+],
+"held_out_n": 7
+},
+{
+"species": "Chesnaught",
+"nature": "Adamant",
+"evidence": 49,
+"smogon": [
+32,
+23,
+0,
+0,
+11,
+0
+],
+"fitted": [
+32,
+22,
+0,
+0,
+12,
+0
+],
+"train_fit": [
+0.898,
+0.898
+],
+"held_out_fit": [
+0.875,
+0.75
+],
+"held_out_n": 8
+},
+{
+"species": "Alakazam",
+"nature": "Modest",
+"evidence": 52,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.962,
+0.962
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 5
+},
+{
+"species": "Gengar",
+"nature": "Bold",
+"evidence": 51,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+20,
+0,
+32,
+10,
+0,
+4
+],
+"train_fit": [
+0.686,
+0.843
+],
+"held_out_fit": [
+0.333,
+0.667
+],
+"held_out_n": 6
+},
+{
+"species": "Aromatisse",
+"nature": "Sassy",
+"evidence": 56,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+20,
+0,
+20,
+14,
+4,
+8
+],
+"train_fit": [
+0.536,
+0.804
+],
+"held_out_fit": null,
+"held_out_n": 0
+},
+{
+"species": "Rhyperior",
+"nature": "Brave",
+"evidence": 46,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+32,
+26,
+0,
+0,
+8,
+0
+],
+"train_fit": [
+0.804,
+0.891
+],
+"held_out_fit": [
+0.889,
+1.0
+],
+"held_out_n": 9
+},
+{
+"species": "Mudsdale",
+"nature": "Brave",
+"evidence": 40,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"train_fit": [
+0.825,
+0.825
+],
+"held_out_fit": [
+0.867,
+0.867
+],
+"held_out_n": 15
+},
+{
+"species": "Basculegion-F",
+"nature": "Timid",
+"evidence": 49,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.837,
+0.837
+],
+"held_out_fit": [
+0.833,
+0.833
+],
+"held_out_n": 6
+},
+{
+"species": "Dragalge",
+"nature": "Modest",
+"evidence": 50,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+24,
+0,
+0,
+32,
+8,
+2
+],
+"train_fit": [
+0.62,
+0.98
+],
+"held_out_fit": [
+0.4,
+1.0
+],
+"held_out_n": 5
+},
+{
+"species": "Feraligatr",
+"nature": "Jolly",
+"evidence": 53,
+"smogon": [
+32,
+32,
+0,
+0,
+0,
+2
+],
+"fitted": [
+14,
+32,
+0,
+0,
+0,
+20
+],
+"train_fit": [
+0.736,
+0.925
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 1
+},
+{
+"species": "Greninja",
+"nature": "Modest",
+"evidence": 47,
+"smogon": [
+26,
+0,
+0,
+32,
+0,
+8
+],
+"fitted": [
+22,
+0,
+0,
+32,
+0,
+12
+],
+"train_fit": [
+0.681,
+0.83
+],
+"held_out_fit": [
+0.571,
+0.571
+],
+"held_out_n": 7
+},
+{
+"species": "Tinkaton",
+"nature": "Lonely",
+"evidence": 44,
+"smogon": [
+32,
+0,
+25,
+0,
+9,
+0
+],
+"fitted": [
+18,
+28,
+12,
+0,
+8,
+0
+],
+"train_fit": [
+0.545,
+0.773
+],
+"held_out_fit": [
+0.6,
+0.7
+],
+"held_out_n": 10
+},
+{
+"species": "Baxcalibur",
+"nature": "Careful",
+"evidence": 48,
+"smogon": [
+1,
+32,
+0,
+0,
+1,
+32
+],
+"fitted": [
+20,
+2,
+8,
+0,
+28,
+8
+],
+"train_fit": [
+0.583,
+0.917
+],
+"held_out_fit": [
+0.5,
+0.5
+],
+"held_out_n": 6
+},
+{
+"species": "Sinistcha-Masterpiece",
+"nature": "Relaxed",
+"evidence": 40,
+"smogon": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"fitted": [
+32,
+0,
+24,
+0,
+10,
+0
+],
+"train_fit": [
+0.725,
+0.925
+],
+"held_out_fit": [
+0.714,
+0.714
+],
+"held_out_n": 14
+},
+{
+"species": "Hippowdon",
+"nature": "Impish",
+"evidence": 52,
+"smogon": [
+32,
+2,
+0,
+0,
+32,
+0
+],
+"fitted": [
+18,
+4,
+24,
+0,
+20,
+0
+],
+"train_fit": [
+0.596,
+0.75
+],
+"held_out_fit": [
+0.0,
+0.0
+],
+"held_out_n": 1
+},
+{
+"species": "Torkoal",
+"nature": "Sassy",
+"evidence": 53,
+"smogon": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"fitted": [
+32,
+0,
+4,
+10,
+20,
+0
+],
+"train_fit": [
+0.509,
+0.811
+],
+"held_out_fit": null,
+"held_out_n": 0
+},
+{
+"species": "Meowstic",
+"nature": "Calm",
+"evidence": 52,
+"smogon": [
+32,
+0,
+15,
+0,
+19,
+0
+],
+"fitted": [
+32,
+0,
+12,
+0,
+22,
+0
+],
+"train_fit": [
+0.942,
+0.942
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 1
+},
+{
+"species": "Politoed",
+"nature": "Timid",
+"evidence": 45,
+"smogon": [
+32,
+0,
+24,
+0,
+7,
+3
+],
+"fitted": [
+14,
+0,
+24,
+0,
+4,
+24
+],
+"train_fit": [
+0.578,
+0.778
+],
+"held_out_fit": [
+0.75,
+0.75
+],
+"held_out_n": 8
+},
+{
+"species": "Malamar",
+"nature": "Careful",
+"evidence": 53,
+"smogon": [
+31,
+2,
+1,
+0,
+21,
+11
+],
+"fitted": [
+26,
+4,
+4,
+0,
+28,
+4
+],
+"train_fit": [
+0.868,
+0.943
+],
+"held_out_fit": null,
+"held_out_n": 0
+},
+{
+"species": "Overqwil",
+"nature": "Jolly",
+"evidence": 43,
+"smogon": [
+1,
+32,
+0,
+0,
+1,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.837,
+0.837
+],
+"held_out_fit": [
+0.556,
+0.556
+],
+"held_out_n": 9
+},
+{
+"species": "Starmie",
+"nature": "Adamant",
+"evidence": 44,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+0,
+20,
+0,
+2,
+12,
+32
+],
+"train_fit": [
+0.659,
+0.727
+],
+"held_out_fit": [
+0.875,
+0.75
+],
+"held_out_n": 8
+},
+{
+"species": "Palafin",
+"nature": "Jolly",
+"evidence": 44,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.773,
+0.773
+],
+"held_out_fit": [
+0.875,
+0.875
+],
+"held_out_n": 8
+},
+{
+"species": "Goodra-Hisui",
+"nature": "Sassy",
+"evidence": 48,
+"smogon": [
+21,
+0,
+5,
+30,
+0,
+10
+],
+"fitted": [
+20,
+0,
+0,
+30,
+8,
+8
+],
+"train_fit": [
+0.958,
+0.979
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 4
+},
+{
+"species": "Kingambit",
+"nature": "Serious",
+"evidence": 40,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+2,
+32,
+0,
+0,
+32,
+0
+],
+"train_fit": [
+0.775,
+0.9
+],
+"held_out_fit": [
+0.727,
+0.727
+],
+"held_out_n": 11
+},
+{
+"species": "Zoroark-Hisui",
+"nature": "Modest",
+"evidence": 44,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+4,
+0,
+8,
+22,
+0,
+32
+],
+"train_fit": [
+0.795,
+0.864
+],
+"held_out_fit": [
+0.833,
+0.833
+],
+"held_out_n": 6
+},
+{
+"species": "Azumarill",
+"nature": "Brave",
+"evidence": 46,
+"smogon": [
+29,
+32,
+2,
+0,
+3,
+0
+],
+"fitted": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"train_fit": [
+0.913,
+0.935
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 4
+},
+{
+"species": "Chimecho",
+"nature": "Modest",
+"evidence": 50,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+28,
+0,
+0,
+22,
+12,
+4
+],
+"train_fit": [
+0.4,
+0.84
+],
+"held_out_fit": null,
+"held_out_n": 0
+},
+{
+"species": "Krookodile",
+"nature": "Jolly",
+"evidence": 43,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.86,
+0.86
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 6
+},
+{
+"species": "Snorlax",
+"nature": "Careful",
+"evidence": 48,
+"smogon": [
+32,
+2,
+0,
+0,
+32,
+0
+],
+"fitted": [
+14,
+24,
+16,
+0,
+12,
+0
+],
+"train_fit": [
+0.771,
+0.875
+],
+"held_out_fit": [
+1.0,
+0.0
+],
+"held_out_n": 1
+},
+{
+"species": "Quaquaval",
+"nature": "Adamant",
+"evidence": 40,
+"smogon": [
+1,
+32,
+0,
+0,
+1,
+32
+],
+"fitted": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"train_fit": [
+0.9,
+0.9
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 9
+},
+{
+"species": "Tinkaton",
+"nature": "Impish",
+"evidence": 48,
+"smogon": [
+32,
+0,
+25,
+0,
+9,
+0
+],
+"fitted": [
+30,
+4,
+24,
+0,
+8,
+0
+],
+"train_fit": [
+0.917,
+0.958
+],
+"held_out_fit": [
+0.0,
+1.0
+],
+"held_out_n": 1
+},
+{
+"species": "Garchomp",
+"nature": "Naive",
+"evidence": 40,
+"smogon": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"fitted": [
+0,
+2,
+0,
+32,
+0,
+32
+],
+"train_fit": [
+0.825,
+0.85
+],
+"held_out_fit": [
+0.889,
+0.889
+],
+"held_out_n": 9
+},
+{
+"species": "Oranguru",
+"nature": "Relaxed",
+"evidence": 44,
+"smogon": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"fitted": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"train_fit": [
+0.864,
+0.864
+],
+"held_out_fit": [
+0.75,
+0.75
+],
+"held_out_n": 4
+},
+{
+"species": "Empoleon",
+"nature": "Calm",
+"evidence": 47,
+"smogon": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"fitted": [
+30,
+0,
+8,
+8,
+20,
+0
+],
+"train_fit": [
+0.617,
+0.851
+],
+"held_out_fit": null,
+"held_out_n": 0
+},
+{
+"species": "Clawitzer",
+"nature": "Quiet",
+"evidence": 46,
+"smogon": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"fitted": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"train_fit": [
+0.761,
+0.761
+],
+"held_out_fit": [
+0.0,
+0.0
+],
+"held_out_n": 1
+},
+{
+"species": "Skarmory",
+"nature": "Adamant",
+"evidence": 44,
+"smogon": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"fitted": [
+16,
+24,
+16,
+2,
+0,
+8
+],
+"train_fit": [
+0.659,
+0.977
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 2
+},
+{
+"species": "Cofagrigus",
+"nature": "Sassy",
+"evidence": 43,
+"smogon": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"fitted": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"train_fit": [
+0.86,
+0.86
+],
+"held_out_fit": null,
+"held_out_n": 0
+},
+{
+"species": "Torkoal",
+"nature": "Careful",
+"evidence": 42,
+"smogon": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"fitted": [
+32,
+0,
+0,
+10,
+24,
+0
+],
+"train_fit": [
+0.548,
+0.905
+],
+"held_out_fit": null,
+"held_out_n": 0
+},
+{
+"species": "Incineroar",
+"nature": "Calm",
+"evidence": 40,
+"smogon": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"fitted": [
+32,
+8,
+4,
+0,
+22,
+0
+],
+"train_fit": [
+0.75,
+0.775
+],
+"held_out_fit": [
+1.0,
+1.0
+],
+"held_out_n": 2
+},
+{
+"species": "Rillaboom",
+"nature": "Relaxed",
+"evidence": 40,
+"smogon": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"fitted": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"train_fit": [
+0.75,
+0.75
+],
+"held_out_fit": null,
+"held_out_n": 0
+}
+]
+}

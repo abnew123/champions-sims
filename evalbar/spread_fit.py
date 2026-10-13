@@ -19,7 +19,7 @@ def fits(pct, r):
     if not r or r.get('lo') is None: return None
     return SPR.damage_fits({'pct': tuple(pct), 'atleast': False}, r, 0)
 if __name__ == '__main__':
-    P.own(); R.BATON_PASS = True
+    P.own(); R.BATON_PASS = R.MEGA_ABIL = True
     who = sys.argv[1]; n = next((int(x[6:]) for x in sys.argv[2:] if x.startswith('games=')), 400)
     os.makedirs(OUT, exist_ok=True); prog = os.path.join(OUT, who + '.games'); open(prog, 'w').close()
     games = [(rid, log) for rid, log in C.games() if 'regmcbo3' in rid and who.split('-')[0] in log]

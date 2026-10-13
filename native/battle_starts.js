@@ -8,6 +8,9 @@
 //   seeds from (job index, g), so two runs with the same job order and G0 play paired games (same RNG streams).
 //   SEED_PER_JOB=1: the battle and sampling seeds also depend on the job index (seedmix(1e6 + g + 7919 * job)), for explicit-mode runs
 //   with one game per job (an opponent pool), where every job would otherwise share one battle seed and so one stream of luck.
+//   job.meta.seed_index (2026-10-13, Team search: games reusable across teams): when present, SEED_PER_JOB uses it in place of the job
+//   index, so a job's luck depends on what it is (e.g. the opponent entry), not where it sits in the list; champ battle's turn and
+//   planning seeds already come from the line's seedKey (their four) and g, never the job index. Jobs without one are unchanged.
 const path = require('path'), fs = require('fs');
 const {Battle} = require(path.resolve('node_modules/pokemon-showdown'));
 const T = require(path.resolve('t1sim.js')); const seedmix = require(path.resolve('seedmix.js'));
@@ -19,7 +22,8 @@ jobs.forEach((j, i) => {
   const B = j.mine ? {myTeam: j.mine.map(mk), oppTeam: j.theirs.map(mk), P: {pair: j.theirs.slice(0, 2).map(s => s.species).join(' + '), share: 1}}
                    : T.build(j.arch, j.k, j.lead, j.back);
   for (let g = +g0; g < +g0 + +games; g++) {
-    const gs = process.env.SEED_PER_JOB ? g + 7919 * i : g;
+    const si = j.meta && j.meta.seed_index != null ? j.meta.seed_index : i;
+    const gs = process.env.SEED_PER_JOB ? g + 7919 * si : g;
     const b = new Battle({formatid: 'gen9championsdoublescustomgame', seed: seedmix(1e6 + gs)}); b.debugMode = false;
     b.setPlayer('p1', {name: 'Me', team: B.myTeam}); b.setPlayer('p2', {name: 'Them', team: B.oppTeam});
     b.choose('p1', 'team 1234'); b.choose('p2', 'team 1234');

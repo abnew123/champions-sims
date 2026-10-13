@@ -1,7 +1,9 @@
 //! Champions data exported from Showdown's Champions mod (native/export_data.js).
 use serde::Deserialize;
 use serde_json::Value;
-use std::collections::HashMap;
+// the calc data maps use the engine's Fx hasher (2026-10-13): race_damage looks species and moves up before its memo, and SipHash was
+// about a tenth of a game with the learned value; only lookups, never iterated in an order that matters (games identical)
+type HashMap<K, V> = std::collections::HashMap<K, V, crate::dex::FxBuild>;
 
 #[derive(Deserialize, Clone, Debug)]
 pub struct Stats { pub hp: i64, pub atk: i64, pub def: i64, pub spa: i64, pub spd: i64, pub spe: i64 }

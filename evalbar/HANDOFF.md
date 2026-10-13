@@ -410,6 +410,12 @@ from mid-battle positions of real sheets) is theirs and found several engine bug
   (teams are built around cores, the user's point), with naive Bayes on single teammates as the fallback, then filtered to what has been
   revealed. Held out by team, the whole set right 24.6% (the species' most common set) -> 40.2%. live.sets_for's Bo1 branch and the bot's
   bo1.guess (Battle sim's flag) use it; `build` retunes it and writes out/setguess.json (git-ignored; built in a second if missing).
+- Fitted default spreads (spreads.FITTED, set by live.py and reach.py): popfit.py's whole spread per species and nature from the replays'
+  hits and turn order (default_spreads.json) is the default and the first candidate the in-game reading tries. Held out: 87.9% of each
+  Pokemon's evidence fitted against 85.1% for Smogon's (the 1630 and 1760 cutoffs fit worse); damage with both sides fitted, observed /
+  predicted median 0.964 -> 0.999, within 10% 60% -> 67%. Its attack stats run low (judged against targets at Smogon's frailer spreads):
+  right as a whole, not stat by stat; a joint refit (each side against the other's fitted spread) would fix that. Team cores add +0.6
+  points for spreads (popfit.py ctx), not used.
 - The -start lines in the replays against what positions.js carries: still left out (approx) are Charge (38 games), Stockpile (28), Focus
   Energy / Dragon Cheer (26), Salt Cure (7), Curse (9), Octolock (6), Smack Down (4), Future Sight (4), No Retreat (3).
 

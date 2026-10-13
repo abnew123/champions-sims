@@ -510,6 +510,16 @@ PAGE_V = 1
 # the lowest priority, sharing the luck pass's) and saves its page again; the page marks turns still on the quick read. The engine's budgeted
 # search (Battle sim's planner_issues 18) will replace the seed counts with budgets and a per-position uncertainty
 LIVE_SEEDS, REFINE_SEEDS = 8, 128
+BUSY = 9.0                                                                   # the background read waits while everything else keeps this many cores busy
+def others_busy():
+    """cores busy outside this program's process group (its engines included), ps's recent CPU share summed, as auto.py counts them"""
+    tot, me = 0.0, os.getpgrp()
+    for l in subprocess.run(['ps', '-Aeo', 'pgid=,pcpu='], capture_output=True, text=True).stdout.splitlines():
+        p = l.split()
+        try:
+            if len(p) == 2 and int(p[0]) != me: tot += float(p[1])
+        except ValueError: pass
+    return tot / 100
 class Finished:
     """a finished bot game read from its saved page: what BotRunner.serve needs of a Live"""
     def __init__(s, room, fmt, data, refined=False): s.room, s.fmt, s.data, s.status, s.refined = room, fmt, data, 'finished', refined
@@ -555,6 +565,7 @@ class BotRunner:
             i = todo[-1]; old = s.lives[i]; num = re.search(r'-(\d+)(?:-[a-z0-9]+)?$', old.room).group(1); tag = 'bot_' + num
             rf = os.path.join(OUT, f'{tag}_refined.jsonl')
             for posf in sorted(glob.glob(os.path.join(OUT, f'{tag}_t*_pos.jsonl')), key=lambda f: -int(re.search(r'_t(\d+)_pos', f).group(1))):
+                while others_busy() >= BUSY: time.sleep(30)                   # the lowest-priority work on the Mac: it waits under the 10-core cap
                 with LUCK: EN.run(posf, rf, 1, REFINE_SEEDS, 1, nice=19)
             f = os.path.join(s.dir, old.room + '.log'); pc = os.path.join(OUT, f'{tag}_page.json')
             lv = Live(old.room, s.threads, 0, logfile=f, tag=tag, fmt=botfmt(old.room)); lv.page_cache = pc; lv.exact = True; lv.luck = True; lv.refining = True

@@ -211,6 +211,12 @@ pub fn register(r: &mut Reg) {
         let t = a.t(); let am = a.am(); if b.p(t).species != "mimikyu" { return RV::Undef; }
         if b.has_vol(t, "substitute") && !b.am(am).flag("bypasssub") && !b.am(am).infiltrates { return RV::Undef; }
         if !b.run_immunity_move(t, am, false) { return RV::Undef; } RV::B(false) });
+    // Unseen Fist, Champions (mods/champions: onHitProtect, 2026-10-13, v29): a contact move goes through Protect and its kin for a
+    // quarter of the damage (the hit's bypassProtect, the same 0.25 as a Z-move through Protect)
+    h!(r, Ability, "unseenfist", "onHitProtect", |b, a| {
+        let am = a.am(); let Some(d) = a.source else { return RV::Undef };
+        if b.am(am).flag("contact") { let slot = b.slot_name(d); b.amm(am).hd(slot).bypass_protect = true; return RV::B(false); }
+        RV::Undef });
     h!(r, Ability, "disguise", "onEffectiveness", |b, a| {
         let t = a.t(); let am = a.am(); if b.am(am).category == "Status" || b.p(t).species != "mimikyu" { return RV::Undef; }
         if b.has_vol(t, "substitute") && !b.am(am).flag("bypasssub") && !b.am(am).infiltrates { return RV::Undef; }

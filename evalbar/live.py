@@ -231,7 +231,8 @@ class Live:
         s.log = logfile or os.path.join(OUT, f'{s.tag}.log'); s.evf = os.path.join(OUT, f'{s.tag}_eval.jsonl'); s.data = None; s.status = 'connecting'
         s.weights = {}; s.hyp = {}; s.poscache = {}; s.over = False; s.skip = {}
         s.exact = False; s.team = None; s.back = {}; s.bot_side = None; s.held = None; s.spread_why = {}
-        s.luck = False; s.lf = os.path.join(OUT, f'{s.tag}_luck.jsonl'); s.luck_state = None; s.lweights = {}; s.dirty = False; s.page_cache = None   # luck: after the game      # a Showdown bot's own log (bot/): its side known from its requests
+        s.luck = False; s.lf = os.path.join(OUT, f'{s.tag}_luck.jsonl'); s.luck_state = None; s.lweights = {}; s.dirty = False; s.page_cache = None
+        s.rf = os.path.join(OUT, f'{s.tag}_refined.jsonl'); s.live_seeds = 32; s.refining = False; s.saved = False   # the two reads (2026-10-13)   # luck: after the game      # a Showdown bot's own log (bot/): its side known from its requests
         # the user's verdicts where the battle text and the rules disagree (broadcasts: evalbar/rules.py), kept beside the log
         s.fixf = os.path.join(OUT, f'{s.tag}_fixes.json'); s.fixes = json.load(open(s.fixf)) if logfile and os.path.exists(s.fixf) else {}; s.redo = None
     def page(s):
@@ -361,6 +362,7 @@ class Live:
     def build(s, log, g):
         """the page's data from everything evaluated so far"""
         ev = records(s.evf); lev = records(s.lf)                          # lev: the luck pass
+        rv = records(s.rf); ev.update(rv)                                  # the background read (REFINE_SEEDS) where it is done, over the quick one
         logit = lambda v: math.log(min(1 - 1e-4, max(1e-4, v)) / (1 - min(1 - 1e-4, max(1e-4, v))))
         scale = lambda v: C.sig(CAL * logit(v))
         steps = []; ps = {}; CH = s.checks(log); lps = {}
@@ -401,6 +403,7 @@ class Live:
                 ex = [(w, x) for w, x in ex if x is not None]                   # replacements made (choices all known); else the matrix's cells
                 after = sum(w * scale(lev[n]['static']) for n, w in LW.items()) / sum(LW.values())
             steps.append({'turn': t, 'wp': wp, 'ev': wp, 'state': state, 'events': step['events'], 'opt': opt, 'hyp': len(names), 'checks': CH.get(t, []),
+                          'tier': 'refined' if all(n + ' p1' in rv for n in names) else 'quick',
                           'expected': sum(w * scale(x) for w, x in ex) / sum(w for w, _ in ex) if ex else None, 'after': after})
         # luck (the user's idea, 2026-10-11): the turn's outcome against what the choices both sides made were expected to give, both
         # with the value function before any lookahead: the next turn's start, or the result after the last turn (not a forfeit)
@@ -448,7 +451,7 @@ class Live:
             return s.why(s.skip[step['turn']]) + ': ' + ', '.join(s.skip[step['turn']])
         posf = os.path.join(OUT, f"{s.tag}_t{step['turn']}_pos.jsonl"); positions(sp, posf)
         os.environ['EVAL_TITLE'] = f"Live spectator: turn {step['turn']} ({len(sp)} positions)"
-        EN.run(posf, s.evf, s.threads, 32, 1)
+        EN.run(posf, s.evf, s.threads, s.live_seeds, 1)
         s.weights[step['turn']] = {x['name']: w for w, x in sp}; s.hyp[step['turn']] = H
         return ''
     def run(s):
@@ -491,8 +494,8 @@ class Live:
                 with WORK: s.build(log, g)
                 seen_len = len(log)
             if s.page_cache and status == 'finished' and not todo and (not s.luck or s.luck_state == 'done') and not s.dirty:
-                tmp = s.page_cache + '.tmp'; json.dump({'v': PAGE_V, 'data': s.data}, open(tmp, 'w'), ensure_ascii=False); os.replace(tmp, s.page_cache)
-                return                                                       # the bot page: a finished game is read from its file from now on
+                tmp = s.page_cache + '.tmp'; json.dump({'v': PAGE_V, 'data': s.data, 'refined': s.refining}, open(tmp, 'w'), ensure_ascii=False); os.replace(tmp, s.page_cache)
+                s.saved = True; return                                                       # the bot page: a finished game is read from its file from now on
             if feed.poll() is not None and not todo and not s.over:
                 s.over = True
                 if s.port: print(f'battle over; the page stays up at http://localhost:{s.port} until you stop this (Ctrl-C)', flush=True)
@@ -500,9 +503,14 @@ class Live:
 # the bot page's finished games are saved as their pages (out/live/bot_<n>_page.json) once evaluated and their luck worked out, so a restart
 # reads them instead of rebuilding every turn (about an hour for 400 games). PAGE_V: raise it when a change should rebuild them all
 PAGE_V = 1
+# two reads (the user, 2026-10-13: "run a fast version for live, then rerun a slower version in the background"): the bot page reads each turn
+# quickly as it is played (LIVE_SEEDS), and a background pass reads every saved game again (REFINE_SEEDS, newest first, one engine thread at
+# the lowest priority, sharing the luck pass's) and saves its page again; the page marks turns still on the quick read. The engine's budgeted
+# search (Battle sim's planner_issues 18) will replace the seed counts with budgets and a per-position uncertainty
+LIVE_SEEDS, REFINE_SEEDS = 8, 128
 class Finished:
     """a finished bot game read from its saved page: what BotRunner.serve needs of a Live"""
-    def __init__(s, room, fmt, data): s.room, s.fmt, s.data, s.status = room, fmt, data, 'finished'
+    def __init__(s, room, fmt, data, refined=False): s.room, s.fmt, s.data, s.status, s.refined = room, fmt, data, 'finished', refined
 def botfmt(room):
     """the bot page's format line: its Bo1 games (since 2026-10-12) have no team sheets, so the opponent's sets are guessed as a spectator's"""
     return ('Bo3, open team sheets' if 'bo3' in room else 'Bo1, closed team sheets') + ' · the bot is Player 1, its side from its own log'
@@ -521,7 +529,7 @@ class BotRunner:
                     for i, lv in enumerate(run.lives):
                         if lv.data and lv.data['games']:
                             games.append({**lv.data['games'][0], 'title': f'Game {i + 1}', 'idx': i, 'versus': f'Game {i + 1}',
-                                          'group': 'Bo3' if 'bo3' in lv.room else 'Bo1', 'format': lv.fmt})   # the page's format toggle and game list (the user, 2026-10-13)
+                                          'group': 'Bo3' if 'bo3' in lv.room else 'Bo1', 'format': lv.fmt, 'refines': True})   # the page's format toggle and game list (the user, 2026-10-13)
                     last = run.lives[-1] if run.lives else None
                     st = "waiting for the bot's next game" if not last or last.status == 'finished' else last.status
                     b = json.dumps({'games': games, 'live': {'url': 'data.json', 'status': st, 'format': last.fmt if last else botfmt('')}}).encode()
@@ -531,8 +539,29 @@ class BotRunner:
                 self.send_response(200); self.send_header('Content-Type', ct); self.send_header('Cache-Control', 'no-store'); self.end_headers(); self.wfile.write(b)
             def log_message(self, *a): pass
         threading.Thread(target=http.server.ThreadingHTTPServer(('127.0.0.1', s.port), H).serve_forever, daemon=True).start()
+    def refine(s):
+        """the background read: the newest saved game not yet refined gets every turn's positions read again at REFINE_SEEDS, then its page
+        is rebuilt from them (a Live on its cached files, in this thread) and saved again with refined set"""
+        prog = os.path.join(OUT, 'bot_refined.games')
+        if not os.path.exists(prog): open(prog, 'w').close()
+        json.dump({'title': f"The bot's games: read again at {REFINE_SEEDS} rolls (games, one engine thread at the lowest priority)",
+                   'out': os.path.relpath(prog, os.path.join(C.HERE, 'out')), 'total': len(s.lives), 'done0': 0, 'started': time.time(), 'threads': 1,
+                   'seeds': REFINE_SEEDS, 'staged': True}, open(prog + '.run.json', 'w'))
+        while True:
+            todo = [i for i, lv in enumerate(s.lives) if (isinstance(lv, Finished) and not lv.refined) or (isinstance(lv, Live) and lv.saved and not lv.refining)]
+            if not todo: time.sleep(30); continue
+            i = todo[-1]; old = s.lives[i]; num = re.search(r'-(\d+)(?:-[a-z0-9]+)?$', old.room).group(1); tag = 'bot_' + num
+            rf = os.path.join(OUT, f'{tag}_refined.jsonl')
+            for posf in sorted(glob.glob(os.path.join(OUT, f'{tag}_t*_pos.jsonl')), key=lambda f: -int(re.search(r'_t(\d+)_pos', f).group(1))):
+                with LUCK: EN.run(posf, rf, 1, REFINE_SEEDS, 1, nice=19)
+            f = os.path.join(s.dir, old.room + '.log'); pc = os.path.join(OUT, f'{tag}_page.json')
+            lv = Live(old.room, s.threads, 0, logfile=f, tag=tag, fmt=botfmt(old.room)); lv.page_cache = pc; lv.exact = True; lv.luck = True; lv.refining = True
+            lv.run()                                                         # the old page stays up until the rebuilt one replaces it
+            s.lives[i] = Finished(old.room, botfmt(old.room), lv.data, True)
+            with open(prog, 'a') as fh: fh.write(num + '\n')
     def run(s):
         s.serve(); print(f"the bot's games: http://localhost:{s.port}", flush=True)
+        threading.Thread(target=s.refine, daemon=True).start()
         # a progress card on the shared status page (status.py): the bot's games whose luck is worked out, of all its ladder games
         prog = os.path.join(OUT, 'bot_luck.games'); open(prog, 'w').close()
         n = len([f for f in glob.glob(os.path.join(s.dir, 'battle-*.log')) if re.search(r'-\d{6,}(-[a-z0-9]+)?\.log$', f)])
@@ -551,8 +580,8 @@ class BotRunner:
                     try: c = json.load(open(pc))
                     except Exception: c = None
                 if c and c.get('v') == PAGE_V:                               # a finished game: its page as saved, no thread (2026-10-13)
-                    s.lives.append(Finished(room, botfmt(room), c['data'])); continue
-                lv = Live(room, s.threads, 0, logfile=f, tag='bot_' + num, fmt=botfmt(room)); lv.page_cache = pc
+                    s.lives.append(Finished(room, botfmt(room), c['data'], c.get('refined', False))); continue
+                lv = Live(room, s.threads, 0, logfile=f, tag='bot_' + num, fmt=botfmt(room)); lv.page_cache = pc; lv.live_seeds = LIVE_SEEDS
                 lv.exact = True; lv.luck = True; s.lives.append(lv); threading.Thread(target=lv.run, daemon=True).start()
                 print(time.strftime('%-I:%M %p'), 'following the bot\'s game', num, flush=True)
             time.sleep(5)

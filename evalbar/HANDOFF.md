@@ -416,6 +416,11 @@ from mid-battle positions of real sheets) is theirs and found several engine bug
   predicted median 0.964 -> 0.999, within 10% 60% -> 67%. Its attack stats run low (judged against targets at Smogon's frailer spreads):
   right as a whole, not stat by stat; a joint refit (each side against the other's fitted spread) would fix that. Team cores add +0.6
   points for spreads (popfit.py ctx), not used.
+- Two reads on the bot page (the user, 2026-10-13): live turns are read quickly (LIVE_SEEDS 8), and BotRunner.refine reads every saved game
+  again (REFINE_SEEDS 128, newest first, one engine thread at the lowest priority, sharing the luck pass's lock) into <tag>_refined.jsonl,
+  rebuilds its page and saves it with refined set; build prefers refined values and marks each turn's tier; the page shows "quick read" on
+  the rest. Saved pages (bot_<n>_page.json, PAGE_V) make a restart take seconds. Battle sim's budgeted engine (planner_issues 18: EVAL_BUDGET,
+  value_se) will replace the seed counts; each budget needs its own CAL, and a 1/5/15/60 s accuracy check on the bot games is promised.
 - The -start lines in the replays against what positions.js carries: still left out (approx) are Charge (38 games), Stockpile (28), Focus
   Energy / Dragon Cheer (26), Salt Cure (7), Curse (9), Octolock (6), Smack Down (4), Future Sight (4), No Retreat (3).
 

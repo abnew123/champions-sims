@@ -353,7 +353,7 @@ function bar() {
   $('evn').innerHTML = e ? `${e}<small>eval</small>` : ''; $('evn').className = 'evn' + (!e || e === '0.0' ? '' : WP[cur] > 0.5 ? ' p1' : ' p2');
   $('barA').style.flexBasis = `calc(${a}% - 1px)`;
   $('bar').setAttribute('aria-label', `${who('p1')} ${a}%, ${who('p2')} ${b}%`);
-  $('where').innerHTML = cur < N ? `Turn ${G.steps[cur].turn}${G.live && G.winner == null ? '' : ' of ' + G.steps[N - 1].turn}<small>${G.live && cur === M ? 'the latest turn' : 'at the start of the turn'}</small>`
+  $('where').innerHTML = cur < N ? `Turn ${G.steps[cur].turn}${G.live && G.winner == null ? '' : ' of ' + G.steps[N - 1].turn}<small>${G.live && cur === M ? 'the latest turn' : 'at the start of the turn'}${G.refines && G.steps[cur].tier !== 'refined' ? ' · quick read, a closer one follows' : ''}</small>`
     : `Result<small>${G.winner ? who(G.winner) + ' won' + (G.forfeit ? ' by forfeit' : '') : 'no winner recorded'}</small>`;
   if (NAMES && cur === N) $('where').innerHTML = `Result<small>${G.result === 'win' ? 'You won' : 'You lost'}</small>`;
   $('prev').disabled = cur === 0; $('next').disabled = cur >= M;

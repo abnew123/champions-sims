@@ -14,8 +14,10 @@ def load(part):
     ev = {}
     # env VALUE_SUFFIX (e.g. _fc, 2026-10-12: features with the full calc data): features from real_<part>.vfeats<suffix>.jsonl and search
     # values overridden by real_<part><suffix>.eval.jsonl where that file has them (the positions the search was redone for)
-    sfx = os.environ.get('VALUE_SUFFIX', '')
-    for pe in [os.path.join(OUT, f'real_{part}.eval.jsonl')] + ([os.path.join(OUT, f'real_{part}{sfx}.eval.jsonl')] if sfx else []):
+    # VALUE_EVAL_SUFFIXES (2026-10-13): several override layers in order, e.g. _fc,_acc (the accuracy fix's redone searches over the full
+    # calc data's); default VALUE_SUFFIX alone
+    sfx = os.environ.get('VALUE_SUFFIX', ''); layers = [x for x in os.environ.get('VALUE_EVAL_SUFFIXES', sfx).split(',') if x]
+    for pe in [os.path.join(OUT, f'real_{part}.eval.jsonl')] + [os.path.join(OUT, f'real_{part}{x}.eval.jsonl') for x in layers]:
         if os.path.exists(pe):
             for l in open(pe):
                 r = json.loads(l)

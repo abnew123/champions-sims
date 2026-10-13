@@ -80,6 +80,41 @@ pub fn load_cfg(grid_dir: &str) -> Cfg {
     Cfg { grid_tr, grid_notr, gfoes, vw, autopilot: std::env::var("EG_AUTOPILOT").is_ok(), vw_b, cdata, vnet }
 }
 
+/// a move's chance to hit as Showdown works it out, for the analytic features (2026-10-13, the user: a Bo1 game's Mega Raichu-Y Zap
+/// Cannon; the features took the listed accuracy, so No Guard's 120-power hit counted at 50% and Hurricane / Thunder in rain at 70%):
+/// always-hit moves, No Guard on either side, Thunder / Hurricane in rain (sure) and sun (50), Blizzard in snow, accuracy and evasion
+/// stages (Keen Eye, Mind's Eye and Unaware ignore evasion; an Unaware target ignores accuracy), Compound Eyes, Hustle (physical),
+/// Victory Star, Wide Lens, the target's Bright Powder, Sand Veil and Snow Cloak (not against Mold Breaker and its kin), Gravity. Capped
+/// at 1. d None: no particular target (the target's side of it left out).
+pub(crate) fn hit_chance(b: &Battle, a: MonRef, d: Option<MonRef>, mid: Id) -> f64 {
+    let tm = &b.dex.mv(mid).tmpl;
+    let Some(base) = tm.accuracy else { return 1.0 };
+    let pa = b.p(a); let pd = d.map(|x| b.p(x));
+    if pa.ability == "noguard" || pd.map(|x| x.ability == "noguard").unwrap_or(false) { return 1.0; }
+    let wx = if pa.item == "utilityumbrella" { "" } else { b.effective_weather() };
+    let mut acc = base;
+    if mid == "thunder" || mid == "hurricane" {
+        match wx { "raindance" | "primordialsea" => return 1.0, "sunnyday" | "desolateland" => acc = 50.0, _ => {} }
+    }
+    if mid == "blizzard" && (b.field.weather == "snowscape" || b.field.weather == "snow" || b.field.weather == "hail") { return 1.0; }
+    let breaker = ["moldbreaker", "teravolt", "turboblaze"].contains(&pa.ability);
+    let ign_eva = ["keeneye", "mindseye", "unaware"].contains(&pa.ability);
+    let acc_st = if pd.map(|x| x.ability == "unaware").unwrap_or(false) { 0 } else { pa.boosts[5] };
+    let eva_st = if ign_eva { 0 } else { pd.map(|x| x.boosts[6]).unwrap_or(0) };
+    let st = (acc_st - eva_st).clamp(-6, 6);
+    acc *= if st >= 0 { (3 + st) as f64 / 3.0 } else { 3.0 / (3 - st) as f64 };
+    if pa.ability == "compoundeyes" { acc *= 1.3; }
+    if pa.ability == "hustle" && tm.category == "Physical" { acc *= 0.8; }
+    if pa.ability == "victorystar" { acc *= 1.1; }
+    if pa.item == "widelens" { acc *= 1.1; }
+    if let Some(x) = pd {
+        if x.item == "brightpowder" { acc *= 0.9; }
+        if !breaker && x.ability == "sandveil" && b.field.weather == "sandstorm" { acc *= 0.8; }
+        if !breaker && x.ability == "snowcloak" && (b.field.weather == "snowscape" || b.field.weather == "snow" || b.field.weather == "hail") { acc *= 0.8; }
+    }
+    if find(&b.field.pseudo, "gravity").is_some() { acc *= 5.0 / 3.0; }
+    (acc / 100.0).clamp(0.0, 1.0)
+}
 /// BATTLE_POLICY_n=greedy (2026-10-10, the user: an opponent who always clicks the highest damage): a joint option's expected damage this
 /// turn, both slots' moves on their targets (calc damage x accuracy x hits, capped at the target's HP, as a share of its max HP;
 /// spread moves on both foes); status moves, Fake Out, switches and locked turns score 0
@@ -97,12 +132,11 @@ pub fn greedy_damage(b: &Battle, cfg: &Cfg, s: u8, c: &[PChoice; 2]) -> f64 {
         let tm = &b.dex.mv(mid).tmpl;
         if tm.category == "Status" { continue; }
         let spread = (tm.target == "allAdjacentFoes" || tm.target == "allAdjacent") && foes.len() == 2;
-        let acc = tm.accuracy.map(|a| (a / 100.0).min(1.0)).unwrap_or(1.0);
         let hits = match tm.multihit { Some((lo, hi)) if lo == hi => lo as f64, Some((_, hi)) => if p.ability == "skilllink" { hi as f64 } else { 3.1 }, None => 1.0 };
         let tgts: Vec<MonRef> = if spread { foes.clone() } else if t > 0 { b.sides[1 - s as usize].active[t as usize - 1].map(|x| (1 - s, x)).into_iter().filter(|f| !b.p(*f).fainted).collect() } else { vec![] };
         for f in tgts {
             if !cd.species.contains_key(b.p(f).species) { continue; }
-            if let Some(d) = race_damage(b, cd, m, f, mid, spread, scr) { tot += (d as f64 * acc * hits).min(b.p(f).hp as f64) / b.p(f).maxhp.max(1) as f64; }
+            if let Some(d) = race_damage(b, cd, m, f, mid, spread, scr) { tot += (d as f64 * hit_chance(b, m, Some(f), mid) * hits).min(b.p(f).hp as f64) / b.p(f).maxhp.max(1) as f64; }
         }
     }
     tot
@@ -364,11 +398,10 @@ fn bench_edge(b: &mut Battle, cd: &crate::data::Data) -> f64 {
             let slots: Vec<Id> = b.p(m).move_slots.iter().filter(|x| x.pp > 0 && !x.disabled).map(|x| x.id).collect();
             for mid in slots {
                 let tm = &b.dex.mv(mid).tmpl; if tm.category == "Status" || mid == "fakeout" { continue; }
-                let acc = tm.accuracy.map(|a| (a / 100.0).min(1.0)).unwrap_or(1.0);
                 let hits = match tm.multihit { Some((lo, hi)) if lo == hi => lo as f64, Some(_) => 3.1, None => 1.0 };
                 let spread = (tm.target == "allAdjacentFoes" || tm.target == "allAdjacent") && foes.len() == 2;
                 for &f in &foes {
-                    if let Some(d) = race_damage(b, cd, m, f, mid, spread, scr) { best = best.max((d as f64 * acc * hits / b.p(f).maxhp.max(1) as f64).min(1.0)); }
+                    if let Some(d) = race_damage(b, cd, m, f, mid, spread, scr) { best = best.max((d as f64 * hit_chance(b, m, Some(f), mid) * hits / b.p(f).maxhp.max(1) as f64).min(1.0)); }
                 }
             }
         }
@@ -409,13 +442,13 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 3] {
             let prio = if !prio_on { 0 } else if mid == "grassyglide" { if grassy { 1 } else { 0 } } else { tm.priority as i64 };
             let prio_ok = |j: usize| prio <= 0 || (!(psy && grounded[j]) && !blocks[side(j) as usize]);
             let spread = (tm.target == "allAdjacentFoes" || tm.target == "allAdjacent") && foes.len() == 2;
-            let acc = tm.accuracy.map(|a| (a / 100.0).min(1.0)).unwrap_or(1.0);
-            let acc = if crate::battle::Battle::miss_double() == Some(s) { (2.0 * acc - 1.0).max(0.0) } else { acc };   // MISS_DOUBLE: that side's analytic accuracy too
+            let md = crate::battle::Battle::miss_double() == Some(s);   // MISS_DOUBLE: that side's analytic accuracy too
+            let acc_of = |j: usize| { let a = hit_chance(b, m, Some(units[j]), mid); if md { (2.0 * a - 1.0).max(0.0) } else { a } };
             let hits = match tm.multihit { Some((lo, hi)) if lo == hi => lo as f64, Some((_, hi)) => if b.p(m).ability == "skilllink" { hi as f64 } else { 3.1 }, None => 1.0 };
             let mut row = |tgts: &[usize]| -> Vec<f64> {
                 let mut out = vec![0.0; n];
                 for &j in tgts {
-                    if let Some(dmg) = race_damage(b, cd, units[i], units[j], mid, spread, scr_bits[side(j) as usize]) { out[j] = dmg as f64 * acc * hits; }
+                    if let Some(dmg) = race_damage(b, cd, units[i], units[j], mid, spread, scr_bits[side(j) as usize]) { out[j] = dmg as f64 * acc_of(j) * hits; }
                 }
                 out };
             if spread { if foes.iter().all(|&j| prio_ok(j)) { let r = row(&foes); opts[i].push(r); oprio[i].push(prio); } }
@@ -701,11 +734,12 @@ pub(crate) fn reduced_options_n(b: &mut Battle, s: u8, i: usize, nhits: usize) -
         if mv.stalling_move { if prot.is_none() { prot = Some(*c); } continue; }
         if mv.category == "Status" || mv.base_power <= 0.0 { continue; }
         let ty = move_type(b, m, mid); let stab = if types.contains(&ty) { 1.5 } else { 1.0 };
-        let acc = mv.accuracy.map(|a| (a / 100.0).min(1.0)).unwrap_or(1.0);
-        let acc = if crate::battle::Battle::miss_double() == Some(s) { (2.0 * acc - 1.0).max(0.0) } else { acc };
-        let eff = if t >= 1 { match foes[(t - 1) as usize] { Some(f) if !b.p(f).fainted => type_mult(b, ty, f), _ => 0.0 } }
-                  else { let fs: Vec<MonRef> = foes.iter().flatten().copied().filter(|f| !b.p(*f).fainted).collect(); fs.iter().map(|f| 0.75 * type_mult(b, ty, *f)).sum() };
-        dmg.push((mv.base_power * stab * eff * acc, *c));
+        let md = crate::battle::Battle::miss_double() == Some(s);
+        let accs: Vec<f64> = foes.iter().map(|f| f.map(|f| { let a = hit_chance(b, m, Some(f), mid); if md { (2.0 * a - 1.0).max(0.0) } else { a } }).unwrap_or(0.0)).collect();
+        let eff = if t >= 1 { match foes[(t - 1) as usize] { Some(f) if !b.p(f).fainted => type_mult(b, ty, f) * accs[(t - 1) as usize], _ => 0.0 } }
+                  else { let fs: Vec<(MonRef, f64)> = foes.iter().zip(&accs).filter_map(|(f, a)| f.map(|f| (f, *a))).filter(|(f, _)| !b.p(*f).fainted).collect();
+                         fs.iter().map(|(f, a)| 0.75 * type_mult(b, ty, *f) * a).sum() };
+        dmg.push((mv.base_power * stab * eff, *c));
     }
     dmg.sort_by(|a, c| c.0.partial_cmp(&a.0).unwrap());
     let mut out: Vec<PChoice> = dmg.into_iter().take(nhits).map(|x| x.1).collect();

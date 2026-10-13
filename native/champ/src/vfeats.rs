@@ -8,7 +8,7 @@
 //!   champ vfeats <engine_data.json> <positions.jsonl> <out.jsonl> [threads]   (env as for battles: RACE=1 CALC_DATA=... for feats)
 use crate::battle::*;
 use crate::dex::*;
-use crate::plan::{alive, race_damage_pub, Cfg};
+use crate::plan::{alive, hit_chance, race_damage_pub, Cfg};
 use crate::state::*;
 
 pub const SIDE_NAMES: [&str; 32] = ["alive", "hp", "actives", "bench alive", "bench hp", "damage potential", "focus potential",
@@ -47,11 +47,10 @@ fn hits(b: &mut Battle, cd: &crate::data::Data, a: MonRef, foes: &[MonRef]) -> V
         if tm.category == "Status" { continue; }
         let pr = if mid == "grassyglide" { if grassy { 1 } else { 0 } } else { tm.priority as i64 };
         let spread = (tm.target == "allAdjacentFoes" || tm.target == "allAdjacent") && foes.len() == 2;
-        let acc = tm.accuracy.map(|x| (x / 100.0).min(1.0)).unwrap_or(1.0);
         let nh = match tm.multihit { Some((lo, hi)) if lo == hi => lo as f64, Some((_, hi)) => if skill { hi as f64 } else { 3.1 }, None => 1.0 };
         let row = |tg: &[usize]| -> Vec<f64> {
             let mut d = vec![0.0; foes.len()];
-            for &j in tg { if let Some(x) = race_damage_pub(b, cd, a, foes[j], mid, spread, scr) { d[j] = x as f64 * acc * nh; } }
+            for &j in tg { if let Some(x) = race_damage_pub(b, cd, a, foes[j], mid, spread, scr) { d[j] = x as f64 * hit_chance(b, a, Some(foes[j]), mid) * nh; } }
             d };
         let prio_ok = |j: usize| pr > 0 && !(psy && grounded[j]) && !blocks;
         if spread { let all: Vec<usize> = (0..foes.len()).collect(); out.push(Hit { dmg: row(&all), prio: pr > 0 && (0..foes.len()).all(|j| prio_ok(j)), spread: true }); }

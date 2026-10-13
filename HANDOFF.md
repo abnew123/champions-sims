@@ -1208,3 +1208,13 @@ registrations since its second version) and checks reachability of real logs in 
   EG_VALUE=egvalue9_sym2.json EG_VNET=bot/value/vnet_h64_search_fc.json EG_MEGA_TIE=0 DP2=1 BATTLE_ANTICIPATE=1, no EG_MEGA_ALWAYS (free
   Mega choice), CALC_DATA=native/champions_data_full.json, engine data native/engine_data_full.json, GRID_DIR an empty directory. The
   net costs about 2.2x the time a game of sym2 alone (12 starts: 17 s on 4 threads).
+- **champ-battle-v27 (2026-10-13) = v26 + the calc data maps on the engine's Fx hasher** (data.rs): race_damage and vfeats look species
+  and moves up before the damage memo, and SipHash was about a tenth of a game with the learned value. Game-for-game identical to v26
+  (40 pool starts with the net, and 12 from the tarball build); with the net, 17% less CPU (277 vs 332 thread-s on the 40 starts).
+  A profile of a net game: the net's call 58% of the time, of which the side features 46%, the plan features (sym2 computes them too)
+  29%, the network arithmetic 22%: f32 or batching would gain little. `src_battle_v27.tar.gz`, sha file `bin/champ-battle-v27.sha256`.
+  Building with RUSTFLAGS="-C target-cpu=native" should keep games identical (no mul_add, no fast-math in the source; Rust does not fuse
+  into FMA on its own; exp / tanh come from the system libm either way): check against the Mac reference as usual.
+- **battle_starts.js job.meta.seed_index (2026-10-13, Team search):** with SEED_PER_JOB, a job's battle and sampling seeds use it in
+  place of the job index, so the same four against the same opponent entry plays the same game wherever it sits in the list (tested:
+  identical start lines and games at different positions). champ battle's own seeds already come from seedKey (their four) and g.

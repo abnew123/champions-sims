@@ -88,8 +88,18 @@ def sets_for(g, log, bo3):
                 r = rv.get((sd, sp), {'moves': [], 'item': '', 'ability': ''})
                 # a revealed ability counts only if the species can have it (not one its Mega form gained)
                 own = set((S.E['species'].get(toid(sp), {}).get('abilities') or {}).values())
-                raw = base and {**base, 'moves': list(dict.fromkeys(r['moves'] + base['moves']))[:4], 'item': r['item'] or base['item'],
-                                'ability': r['ability'] if r['ability'] in own else base['ability']}
+                # the likeliest whole set given the other five at team preview and what it has shown (setguess.py): Volcarona runs Quiver
+                # Dance on 79% of the Bo3 teams that also have Rillaboom and Basculegion, 47% of all its teams (its most common set is support)
+                import setguess as SG, spreads as SPR
+                gs = SG.best_set(sp, [x for x in six[sd] if x != sp], {**r, 'ability': r['ability'] if r['ability'] in own else ''})
+                if gs:
+                    it, nat, mv = R.camel(gs['item']), gs['nature'], [R.camel(m) for m in gs['moves']]
+                    rk = SPR.ranked(sp, nat, it)
+                    raw = {'species': sp, 'item': it, 'ability': R.camel(gs['ability']), 'nature': nat, 'moves': mv,
+                           'evs': list(rk[0][1]) if rk else S.evs_for(sp, it, nat, mv)}
+                else:
+                    raw = base and {**base, 'moves': list(dict.fromkeys(r['moves'] + base['moves']))[:4], 'item': r['item'] or base['item'],
+                                    'ability': r['ability'] if r['ability'] in own else base['ability']}
             st, bad = S.fit_set(raw, dropped) if raw else (None, [sp])
             out[sd][sp] = st
     return six, out, dropped

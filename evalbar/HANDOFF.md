@@ -406,6 +406,10 @@ from mid-battle positions of real sheets) is theirs and found several engine bug
   with spreads (bulkier than Smogon's: Mega Floette, Gardevoir, Froslass; more offence: Mega Staraptor, whose Smogon spread has 2-4 Atk), which
   popfit.py fits (`collect k/n`, `fit` -> default_spreads.json, for review; nothing reads it yet). Mega Delphox gives and takes about 5% more
   than predicted with Smogon's spread already all Sp. Atk and no bulk: unexplained.
+- setguess.py: Bo1 set guesses from the rest of the team. Every Bo3 six with the species counts, weighted 20^(shared teammates - 5)
+  (teams are built around cores, the user's point), with naive Bayes on single teammates as the fallback, then filtered to what has been
+  revealed. Held out by team, the whole set right 24.6% (the species' most common set) -> 40.2%. live.sets_for's Bo1 branch and the bot's
+  bo1.guess (Battle sim's flag) use it; `build` retunes it and writes out/setguess.json (git-ignored; built in a second if missing).
 - The -start lines in the replays against what positions.js carries: still left out (approx) are Charge (38 games), Stockpile (28), Focus
   Energy / Dragon Cheer (26), Salt Cure (7), Curse (9), Octolock (6), Smack Down (4), Future Sight (4), No Retreat (3).
 

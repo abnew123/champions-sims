@@ -124,3 +124,11 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     Reach: Pawmot only, alive in 0.6% of training positions, on 4 bot team sheets, used in 2 games. To port after the v28 net (v29):
     Showdown's slotCondition + the switch-style request to pick the fainted Pokemon, revive at maxhp / 2, instaswitch into an empty
     active slot; differential cases with Pawmot.
+16. **Audit for silent gaps like Revival Blessing (2026-10-13, the user: "are there other moves like revival blessing").** (a) Moves
+    Showdown special-cases in its core code (battle / battle-actions / side / pokemon / field): Revival Blessing is the only silent gap;
+    Feint (a message), Trick / Switcheroo (Leppa staleness), Toxic's Poison sure-hit (in the engine) are fine. (b) Move data fields: the
+    engine reads every gameplay field (unread: names, Z / Max data, contest type, noPPBoosts, Curse's nonGhostTarget). Healing Wish is
+    complete (the replacement fully healed and cured); Lunar Dance is not in Champions. (c) Not silent but missing (flagged unsupported,
+    1.52% of 18,715 evaluated real positions): Cute Charm 34, Beat Up 25, Bug Bite 24, Magician 19, Future Sight 17, Guard Split 17, Sleep
+    Talk 16, Unseen Fist 15 (Urshifu through Protect), Defog 12, Poison Point 9, Grass Pelt 8, Flying Press 7, Jaw Lock 7; also Shed Tail,
+    Instruct, Curse (no handlers, none in the sample). To port with Revival Blessing in v29, Unseen Fist and Flying Press first.

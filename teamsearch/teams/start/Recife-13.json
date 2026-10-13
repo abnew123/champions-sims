@@ -1,0 +1,122 @@
+{
+ "Gardevoir": {
+  "species": "Gardevoir",
+  "item": "Gardevoirite",
+  "ability": "Trace",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Hyper Voice",
+   "Expanding Force",
+   "Thunderbolt"
+  ]
+ },
+ "Indeedee-F": {
+  "species": "Indeedee-F",
+  "item": "Rocky Helmet",
+  "ability": "Psychic Surge",
+  "nature": "Bold",
+  "evs": [
+   32,
+   0,
+   32,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Protect",
+   "Follow Me",
+   "Psyshock",
+   "Helping Hand"
+  ]
+ },
+ "Armarouge": {
+  "species": "Armarouge",
+  "item": "Focus Sash",
+  "ability": "Weak Armor",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Armor Cannon",
+   "Wide Guard",
+   "Expanding Force"
+  ]
+ },
+ "Kommo-o": {
+  "species": "Kommo-o",
+  "item": "Life Orb",
+  "ability": "Bulletproof",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Aura Sphere",
+   "Clanging Scales",
+   "Flamethrower"
+  ]
+ },
+ "Talonflame": {
+  "species": "Talonflame",
+  "item": "Expert Belt",
+  "ability": "Gale Wings",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Flare Blitz",
+   "Brave Bird",
+   "Tailwind"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "Psychic Seed",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Protect",
+   "Dire Claw",
+   "Close Combat",
+   "Fake Out"
+  ]
+ }
+}

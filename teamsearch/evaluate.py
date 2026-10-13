@@ -22,6 +22,8 @@ ARCHS = list(P.ARCH_SHARE)
 # Protect check, damage-race value features, egvalue7 (status/Tailwind weights from real games). Outputs of non-default setups
 # go to out_<sim>_<seed>_<pj>, so caches of different setups never mix.
 V12_ENV = {'BATTLE_ANTICIPATE': '1', 'DP2': '1', 'RACE': '1', 'CALC_DATA': '../native/champions_data.json'}
+V26_ENV = {'BATTLE_ANTICIPATE': '1', 'DP2': '1', 'RACE': '1', 'RACE_TIES': 'avg', 'TRSYM': '1', 'RACE_PRIO': '1', 'FEATS22': '1',
+           'EG_MEGA_TIE': '0', 'CALC_DATA': '../native/champions_data_full.json'}
 SIMS = {
     'v3': dict(bin='champ-battle-v3', eg='egvalue5.json', env={'BATTLE_ANTICIPATE': '1'}),
     'v8': dict(bin='champ-battle-v8', eg='egvalue7.json',
@@ -57,12 +59,24 @@ SIMS = {
     # recharge turn are identical. The miss-doubling climb runs as v20m.
     'v20g': dict(bin='champ-battle-v20', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg')),
     'v20m': dict(bin='champ-battle-v20', eg='egvalue9.json', env=dict(V12_ENV, RACE_TIES='avg', MISS_DOUBLE='0')),
+    # v26 (Battle sim, 2026-10-13; the next climb's frozen setup): the engine at cb9cf51 with every Oct 12 port and fix (what the
+    # live bot runs), the full damage-calc data (1,469 species), Mega choice free (no EG_MEGA_ALWAYS), the h64 value net on both
+    # sides on top of egvalue9_sym2 (self-play +4.9 +- 1.5 over sym2 alone; ~2.2x the time per game), and an empty GRID_DIR (the
+    # planner no longer reads one-on-one cells; the bring model still does). v26s: the same without the net, its cheaper fallback.
+    'v26': dict(bin='champ-battle-v26', eg='egvalue9_sym2.json', grid=False,
+                env=dict(V26_ENV, EG_VNET='../bot/value/vnet_h64_search_fc.json')),
+    'v26s': dict(bin='champ-battle-v26', eg='egvalue9_sym2.json', grid=False, env=dict(V26_ENV)),
 }
 def sim(): return os.environ.get('TS_SIM', 'v3')
 def out_tag(seed0, per_job): return f'{seed0}_{per_job}' if sim() == 'v3' else f'{sim()}_{seed0}_{per_job}'
 def bin_path():
     """the battle binary, read at call time: TS_BATTLE_BIN if set (climb.py's legacy per-round pin), else the TS_SIM setup's"""
     return os.environ.get('TS_BATTLE_BIN', os.path.join(ROOT, 'native', 'champ', 'bin', SIMS[sim()]['bin']))
+EMPTY_GRID = os.path.join(HERE, 'runs', '_empty_grid')
+def grid_dir(d):
+    """GRID_DIR for a team's battles: its merged one-on-one cells, or an empty folder when the setup's planner reads none (v26)"""
+    if SIMS[sim()].get('grid', True): return os.path.join(d, 'grid')
+    os.makedirs(EMPTY_GRID, exist_ok=True); return EMPTY_GRID
 def sim_env():
     e = dict(SIMS[sim()]['env']); e['EG_VALUE'] = os.environ.get('TS_EG_VALUE', os.path.join(PS, SIMS[sim()]['eg']))
     if SIMS[sim()].get('eg_b'): e['EG_VALUE_B'] = os.path.join(PS, SIMS[sim()]['eg_b'])
@@ -130,7 +144,7 @@ def run_team(gids, per_job, seed0, threads, fixed=None, label=''):
         subprocess.run([procs.node(), '../native/battle_starts.js', jobs_f, starts + '.tmp', str(per_job), str(seed0)],
                        cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL)
         os.replace(starts + '.tmp', starts)
-    env.update(sim_env(), GRID_DIR=os.path.join(d, 'grid'))
+    env.update(sim_env(), GRID_DIR=grid_dir(d))
     subprocess.run(['nice', '-n', '10', procs.battle(bin_path()), 'battle', os.environ.get('TS_ENGINE_DATA', '../native/engine_data_spot.json'), starts, out, str(threads)],
                    cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return read(d, out_tag(seed0, per_job))
@@ -142,14 +156,14 @@ def run_jobs(gids, jobs, per_job, seed0, threads, label, extra=None):
     d = os.path.join(HERE, 'runs', f'{label}_{team_key(gids)}'); os.makedirs(d, exist_ok=True)
     team = {G[g]['species']: {k: G[g][k] for k in ('species', 'item', 'ability', 'nature', 'evs', 'moves')} for g in gids}
     json.dump(team, open(os.path.join(d, 'myteam.json'), 'w'), indent=1); json.dump(jobs, open(os.path.join(d, 'jobs.json'), 'w'))
-    if MG.merge_gids(os.path.join(d, 'grid'), gids): raise RuntimeError('missing one-on-one cells')
+    if SIMS[sim()].get('grid', True) and MG.merge_gids(os.path.join(d, 'grid'), gids): raise RuntimeError('missing one-on-one cells')
     starts, out = os.path.join(d, f'starts_{seed0}_{per_job}.jsonl'), os.path.join(d, f'out_{out_tag(seed0, per_job)}')
     env = dict(os.environ, MYTEAM=os.path.join(d, 'myteam.json'), **(extra or {}))
     if not os.path.exists(starts):
         subprocess.run([procs.node(), '../native/battle_starts.js', os.path.join(d, 'jobs.json'), starts + '.tmp', str(per_job), str(seed0)],
                        cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL)
         os.replace(starts + '.tmp', starts)
-    env.update(sim_env(), GRID_DIR=os.path.join(d, 'grid'))
+    env.update(sim_env(), GRID_DIR=grid_dir(d))
     subprocess.run(['nice', '-n', '10', procs.battle(bin_path()), 'battle', env.get('TS_ENGINE_DATA', '../native/engine_data_spot.json'), starts, out, str(threads)],
                    cwd=PS, env=env, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return [json.load(open(os.path.join(out, f'{j}.json'))) for j in range(len(jobs))]

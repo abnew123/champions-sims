@@ -1,0 +1,122 @@
+{
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "White Herb",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Dire Claw",
+   "Close Combat",
+   "Rock Tomb",
+   "Protect"
+  ]
+ },
+ "Basculegion": {
+  "species": "Basculegion",
+  "item": "Mystic Water",
+  "ability": "Adaptability",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Wave Crash",
+   "Last Respects",
+   "Aqua Jet",
+   "Protect"
+  ]
+ },
+ "Whimsicott": {
+  "species": "Whimsicott",
+  "item": "Focus Sash",
+  "ability": "Prankster",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Moonblast",
+   "Encore",
+   "Tailwind",
+   "Protect"
+  ]
+ },
+ "Garchomp": {
+  "species": "Garchomp",
+  "item": "Life Orb",
+  "ability": "Rough Skin",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Dragon Claw",
+   "Earthquake",
+   "Rock Slide",
+   "Protect"
+  ]
+ },
+ "Charizard": {
+  "species": "Charizard",
+  "item": "Charizardite Y",
+  "ability": "Blaze",
+  "nature": "Modest",
+  "evs": [
+   28,
+   0,
+   13,
+   1,
+   0,
+   24
+  ],
+  "moves": [
+   "Heat Wave",
+   "Solar Beam",
+   "Weather Ball",
+   "Protect"
+  ]
+ },
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Chople Berry",
+  "ability": "Defiant",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Kowtow Cleave",
+   "Iron Head",
+   "Sucker Punch",
+   "Low Kick"
+  ]
+ }
+}

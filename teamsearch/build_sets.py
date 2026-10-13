@@ -19,7 +19,8 @@ ONE_ITEM = 0.85          # a species "clearly uses one item" when its top item i
 FALLBACK_MIN = 0.05
 T = json.load(open(os.path.join(L.ROOT, 'regionals', 'regional_teams.json')))
 R = json.load(open(os.path.join(L.ROOT, 'regionals', 'regional_sets.json')))
-RUST_UNSUPPORTED = {'Revival Blessing', 'Healing Wish', 'Baton Pass', 'Ally Switch', 'Beat Up', 'Magician', 'Wandering Spirit'}
+RUST_UNSUPPORTED = {'Revival Blessing', 'Beat Up', 'Magician', 'Wandering Spirit'}   # Healing Wish (v22), Baton Pass and Ally Switch (v23)
+                                                                                       # are ported (Battle sim)
 
 def forme_id(forme):
     """threat-style name: Salamence-Mega -> M-Salamence, Charizard-Mega-Y -> M-Charizard Y, Arcanine-Hisui -> Arcanine-H"""
@@ -81,14 +82,17 @@ GPATH = os.path.join(HERE, 'grid_sets.json')
 if os.path.exists(GPATH):                       # ids are cache keys for mx/out: never renumber
     for g, s in json.load(open(GPATH)).items():
         s = {k: v for k, v in s.items() if k != 'regional_count'}
-        gid[L.set_key(s)] = g; fid, n = g.rsplit('#', 1); per[fid] = max(per[fid], int(n))
+        gid[L.set_key(s)] = g; fid, n = g.rsplit('#', 1)
+        if n.isdigit(): per[fid] = max(per[fid], int(n))          # hand-added sets (Incineroar#u1) keep their own ids
 for k in sorted(sets, key=lambda k: (-seen[k], k)):
     if k in gid: continue
     fid = forme_id(L.battle_forme(sets[k]['species'], sets[k]['item']))
     per[fid] += 1; gid[k] = f"{fid}#{per[fid]}"
 grid = {gid[k]: dict(sets[k], regional_count=seen[k]) for k in sets}
-if os.path.exists(GPATH):                       # keep sets no longer used (e.g. a user team's old spread): old results name them
-    for g, s in json.load(open(GPATH)).items(): grid.setdefault(g, s)
+OLD = json.load(open(GPATH)) if os.path.exists(GPATH) else {}
+for g, s in OLD.items():                        # an existing id keeps its stored set exactly (move order too), only its count updates
+    if g in grid: grid[g] = dict({k: v for k, v in s.items() if k != 'regional_count'}, regional_count=grid[g]['regional_count'])
+for g, s in OLD.items(): grid.setdefault(g, s)   # keep sets no longer used (e.g. a user team's old spread): old results name them
 json.dump(grid, open(GPATH, 'w'), indent=0)
 for p in pool: p['gid'] = gid[p.pop('key')]
 json.dump(pool, open(os.path.join(HERE, 'swap_pool.json'), 'w'), indent=1)

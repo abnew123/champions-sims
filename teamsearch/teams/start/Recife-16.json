@@ -1,0 +1,122 @@
+{
+ "Archaludon": {
+  "species": "Archaludon",
+  "item": "Leftovers",
+  "ability": "Stamina",
+  "nature": "Calm",
+  "evs": [
+   32,
+   0,
+   1,
+   1,
+   21,
+   11
+  ],
+  "moves": [
+   "Electro Shot",
+   "Dragon Pulse",
+   "Flash Cannon",
+   "Protect"
+  ]
+ },
+ "Grimmsnarl": {
+  "species": "Grimmsnarl",
+  "item": "Light Clay",
+  "ability": "Prankster",
+  "nature": "Sassy",
+  "evs": [
+   29,
+   0,
+   22,
+   0,
+   15,
+   0
+  ],
+  "moves": [
+   "Spirit Break",
+   "Parting Shot",
+   "Light Screen",
+   "Reflect"
+  ]
+ },
+ "Charizard": {
+  "species": "Charizard",
+  "item": "Charizardite Y",
+  "ability": "Blaze",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Heat Wave",
+   "Weather Ball",
+   "Hurricane",
+   "Protect"
+  ]
+ },
+ "Garchomp": {
+  "species": "Garchomp",
+  "item": "Garchompite Z",
+  "ability": "Rough Skin",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Draco Meteor",
+   "Earth Power",
+   "Power Gem",
+   "Protect"
+  ]
+ },
+ "Pelipper": {
+  "species": "Pelipper",
+  "item": "Sitrus Berry",
+  "ability": "Drizzle",
+  "nature": "Bold",
+  "evs": [
+   31,
+   0,
+   0,
+   0,
+   24,
+   11
+  ],
+  "moves": [
+   "Hurricane",
+   "Weather Ball",
+   "Tailwind",
+   "Wide Guard"
+  ]
+ },
+ "Venusaur": {
+  "species": "Venusaur",
+  "item": "Focus Sash",
+  "ability": "Chlorophyll",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Sludge Bomb",
+   "Leaf Storm",
+   "Sleep Powder",
+   "Protect"
+  ]
+ }
+}

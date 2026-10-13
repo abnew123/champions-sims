@@ -1,0 +1,122 @@
+{
+ "Basculegion-F": {
+  "species": "Basculegion-F",
+  "item": "Focus Sash",
+  "ability": "Swift Swim",
+  "nature": "Modest",
+  "evs": [
+   0,
+   0,
+   0,
+   32,
+   2,
+   32
+  ],
+  "moves": [
+   "Muddy Water",
+   "Shadow Ball",
+   "Ice Beam",
+   "Protect"
+  ]
+ },
+ "Raichu": {
+  "species": "Raichu",
+  "item": "Raichunite Y",
+  "ability": "Lightning Rod",
+  "nature": "Timid",
+  "evs": [
+   32,
+   0,
+   11,
+   0,
+   0,
+   23
+  ],
+  "moves": [
+   "Zap Cannon",
+   "Focus Blast",
+   "Fake Out",
+   "Protect"
+  ]
+ },
+ "Golisopod": {
+  "species": "Golisopod",
+  "item": "Golisopite",
+  "ability": "Emergency Exit",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Leech Life",
+   "Iron Head",
+   "Sucker Punch",
+   "Protect"
+  ]
+ },
+ "Pelipper": {
+  "species": "Pelipper",
+  "item": "Damp Rock",
+  "ability": "Drizzle",
+  "nature": "Bold",
+  "evs": [
+   31,
+   0,
+   0,
+   0,
+   24,
+   11
+  ],
+  "moves": [
+   "Weather Ball",
+   "Hurricane",
+   "Helping Hand",
+   "Wide Guard"
+  ]
+ },
+ "Archaludon": {
+  "species": "Archaludon",
+  "item": "Leftovers",
+  "ability": "Stamina",
+  "nature": "Bold",
+  "evs": [
+   32,
+   0,
+   1,
+   1,
+   32,
+   0
+  ],
+  "moves": [
+   "Electro Shot",
+   "Dragon Pulse",
+   "Flash Cannon",
+   "Protect"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "White Herb",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Dire Claw",
+   "Close Combat",
+   "Rock Slide",
+   "Protect"
+  ]
+ }
+}

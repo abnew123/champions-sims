@@ -1,0 +1,122 @@
+{
+ "Golisopod": {
+  "species": "Golisopod",
+  "item": "Golisopite",
+  "ability": "Emergency Exit",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Leech Life",
+   "Iron Head",
+   "Drill Run",
+   "Protect"
+  ]
+ },
+ "Garchomp": {
+  "species": "Garchomp",
+  "item": "Garchompite Z",
+  "ability": "Rough Skin",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Earth Power",
+   "Draco Meteor",
+   "Power Gem",
+   "Protect"
+  ]
+ },
+ "Pelipper": {
+  "species": "Pelipper",
+  "item": "Life Orb",
+  "ability": "Drizzle",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Weather Ball",
+   "Muddy Water",
+   "Hurricane",
+   "Protect"
+  ]
+ },
+ "Archaludon": {
+  "species": "Archaludon",
+  "item": "Leftovers",
+  "ability": "Stamina",
+  "nature": "Bold",
+  "evs": [
+   32,
+   0,
+   1,
+   1,
+   32,
+   0
+  ],
+  "moves": [
+   "Electro Shot",
+   "Dragon Pulse",
+   "Snarl",
+   "Protect"
+  ]
+ },
+ "Farigiraf": {
+  "species": "Farigiraf",
+  "item": "Sitrus Berry",
+  "ability": "Armor Tail",
+  "nature": "Bold",
+  "evs": [
+   27,
+   0,
+   20,
+   0,
+   19,
+   0
+  ],
+  "moves": [
+   "Psychic",
+   "Helping Hand",
+   "Trick Room",
+   "Protect"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "White Herb",
+  "ability": "Unburden",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Close Combat",
+   "Gunk Shot",
+   "U-turn",
+   "Protect"
+  ]
+ }
+}

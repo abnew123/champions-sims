@@ -1,0 +1,122 @@
+{
+ "Venusaur": {
+  "species": "Venusaur",
+  "item": "Focus Sash",
+  "ability": "Chlorophyll",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Sleep Powder",
+   "Protect",
+   "Earth Power",
+   "Sludge Bomb"
+  ]
+ },
+ "Politoed": {
+  "species": "Politoed",
+  "item": "Mystic Water",
+  "ability": "Drizzle",
+  "nature": "Modest",
+  "evs": [
+   32,
+   0,
+   0,
+   30,
+   0,
+   4
+  ],
+  "moves": [
+   "Weather Ball",
+   "Protect",
+   "Ice Beam",
+   "Muddy Water"
+  ]
+ },
+ "Grimmsnarl": {
+  "species": "Grimmsnarl",
+  "item": "Light Clay",
+  "ability": "Prankster",
+  "nature": "Sassy",
+  "evs": [
+   29,
+   0,
+   22,
+   0,
+   15,
+   0
+  ],
+  "moves": [
+   "Spirit Break",
+   "Reflect",
+   "Light Screen",
+   "Parting Shot"
+  ]
+ },
+ "Raichu": {
+  "species": "Raichu",
+  "item": "Raichunite X",
+  "ability": "Lightning Rod",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Fake Out",
+   "Volt Switch",
+   "Feint",
+   "Volt Tackle"
+  ]
+ },
+ "Archaludon": {
+  "species": "Archaludon",
+  "item": "Leftovers",
+  "ability": "Stamina",
+  "nature": "Bold",
+  "evs": [
+   32,
+   0,
+   1,
+   1,
+   32,
+   0
+  ],
+  "moves": [
+   "Dragon Pulse",
+   "Electro Shot",
+   "Protect",
+   "Snarl"
+  ]
+ },
+ "Charizard": {
+  "species": "Charizard",
+  "item": "Charizardite Y",
+  "ability": "Blaze",
+  "nature": "Modest",
+  "evs": [
+   28,
+   0,
+   13,
+   1,
+   0,
+   24
+  ],
+  "moves": [
+   "Heat Wave",
+   "Weather Ball",
+   "Protect",
+   "Hurricane"
+  ]
+ }
+}

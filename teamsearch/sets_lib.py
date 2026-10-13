@@ -7,7 +7,7 @@ Mega Stone holder), else a role default (see fill_spread).
 import json, os, re
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, '..')
-DEX = json.load(open(os.path.join(ROOT, 'native', 'champions_data.json')))
+DEX = json.load(open(os.path.join(ROOT, 'native', 'champions_data_full.json')))
 def idf(s): return re.sub(r'[^a-z0-9]', '', s.lower())
 
 def parse_moveset(path=os.path.join(ROOT, 'regionals', 'smogon_mc_2026-09_moveset.txt')):

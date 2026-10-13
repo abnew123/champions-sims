@@ -17,7 +17,7 @@ import json, os, sys, functools, collections
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import climb as C, sets_lib as L
 G = C.GRID
-MOVES = json.load(open(os.path.join(HERE, '..', 'native', 'champions_data.json')))['moves']
+MOVES = json.load(open(os.path.join(HERE, '..', 'native', 'champions_data_full.json')))['moves']
 mid = lambda n: ''.join(c for c in n.lower() if c.isalnum())
 K_PLAN = int(os.environ.get('TS_PLAN_K', 7))
 SETUP = {'Swords Dance', 'Nasty Plot', 'Dragon Dance', 'Calm Mind', 'Coil', 'Quiver Dance', 'Bulk Up', 'Shell Smash', 'Belly Drum',

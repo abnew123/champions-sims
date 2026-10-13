@@ -1,0 +1,122 @@
+{
+ "Garchomp": {
+  "species": "Garchomp",
+  "item": "Garchompite Z",
+  "ability": "Rough Skin",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Dragon Pulse",
+   "Earth Power",
+   "Power Gem",
+   "Protect"
+  ]
+ },
+ "Politoed": {
+  "species": "Politoed",
+  "item": "Mystic Water",
+  "ability": "Drizzle",
+  "nature": "Modest",
+  "evs": [
+   32,
+   0,
+   0,
+   30,
+   0,
+   4
+  ],
+  "moves": [
+   "Muddy Water",
+   "Ice Beam",
+   "Weather Ball",
+   "Protect"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Chople Berry",
+  "ability": "Intimidate",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Flare Blitz",
+   "Darkest Lariat",
+   "Parting Shot",
+   "Fake Out"
+  ]
+ },
+ "Archaludon": {
+  "species": "Archaludon",
+  "item": "Leftovers",
+  "ability": "Stamina",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Dragon Pulse",
+   "Electro Shot",
+   "Snarl",
+   "Protect"
+  ]
+ },
+ "Farigiraf": {
+  "species": "Farigiraf",
+  "item": "Sitrus Berry",
+  "ability": "Armor Tail",
+  "nature": "Calm",
+  "evs": [
+   29,
+   0,
+   14,
+   0,
+   23,
+   0
+  ],
+  "moves": [
+   "Psychic",
+   "Trick Room",
+   "Protect",
+   "Helping Hand"
+  ]
+ },
+ "Golisopod": {
+  "species": "Golisopod",
+  "item": "Golisopite",
+  "ability": "Emergency Exit",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Leech Life",
+   "Drill Run",
+   "Iron Head",
+   "Protect"
+  ]
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "Charizard": {
+  "species": "Charizard",
+  "item": "Charizardite Y",
+  "ability": "Blaze",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Heat Wave",
+   "Weather Ball",
+   "Ancient Power",
+   "Protect"
+  ]
+ },
+ "Sylveon": {
+  "species": "Sylveon",
+  "item": "Fairy Feather",
+  "ability": "Pixilate",
+  "nature": "Modest",
+  "evs": [
+   9,
+   0,
+   22,
+   20,
+   0,
+   15
+  ],
+  "moves": [
+   "Hyper Voice",
+   "Quick Attack",
+   "Yawn",
+   "Detect"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Sitrus Berry",
+  "ability": "Intimidate",
+  "nature": "Impish",
+  "evs": [
+   32,
+   0,
+   20,
+   0,
+   14,
+   0
+  ],
+  "moves": [
+   "Fake Out",
+   "Flare Blitz",
+   "Throat Chop",
+   "Parting Shot"
+  ]
+ },
+ "Venusaur": {
+  "species": "Venusaur",
+  "item": "Life Orb",
+  "ability": "Chlorophyll",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Leaf Storm",
+   "Sludge Bomb",
+   "Earth Power",
+   "Protect"
+  ]
+ },
+ "Toxapex": {
+  "species": "Toxapex",
+  "item": "Leftovers",
+  "ability": "Regenerator",
+  "nature": "Relaxed",
+  "evs": [
+   32,
+   0,
+   18,
+   0,
+   16,
+   0
+  ],
+  "moves": [
+   "Toxic",
+   "Infestation",
+   "Wide Guard",
+   "Baneful Bunker"
+  ]
+ },
+ "Garchomp": {
+  "species": "Garchomp",
+  "item": "Choice Scarf",
+  "ability": "Rough Skin",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Dragon Claw",
+   "Earthquake",
+   "Rock Slide",
+   "Stomping Tantrum"
+  ]
+ }
+}

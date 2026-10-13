@@ -1,0 +1,122 @@
+{
+ "Floette-Eternal": {
+  "species": "Floette-Eternal",
+  "item": "Floettite",
+  "ability": "Flower Veil",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Moonblast",
+   "Dazzling Gleam",
+   "Calm Mind",
+   "Protect"
+  ]
+ },
+ "Sneasler": {
+  "species": "Sneasler",
+  "item": "White Herb",
+  "ability": "Unburden",
+  "nature": "Jolly",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Close Combat",
+   "Dire Claw",
+   "Fake Out",
+   "Protect"
+  ]
+ },
+ "Whimsicott": {
+  "species": "Whimsicott",
+  "item": "Focus Sash",
+  "ability": "Prankster",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Moonblast",
+   "Tailwind",
+   "Encore",
+   "Protect"
+  ]
+ },
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Chople Berry",
+  "ability": "Defiant",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Kowtow Cleave",
+   "Sucker Punch",
+   "Iron Head",
+   "Protect"
+  ]
+ },
+ "Basculegion": {
+  "species": "Basculegion",
+  "item": "Life Orb",
+  "ability": "Adaptability",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Wave Crash",
+   "Last Respects",
+   "Aqua Jet",
+   "Protect"
+  ]
+ },
+ "Garchomp": {
+  "species": "Garchomp",
+  "item": "Garchompite Z",
+  "ability": "Rough Skin",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Draco Meteor",
+   "Flamethrower",
+   "Power Gem",
+   "Protect"
+  ]
+ }
+}

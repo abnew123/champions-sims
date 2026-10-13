@@ -1,0 +1,122 @@
+{
+ "Farigiraf": {
+  "species": "Farigiraf",
+  "item": "Sitrus Berry",
+  "ability": "Armor Tail",
+  "nature": "Quiet",
+  "evs": [
+   32,
+   0,
+   0,
+   32,
+   2,
+   0
+  ],
+  "moves": [
+   "Psychic",
+   "Thunderbolt",
+   "Helping Hand",
+   "Trick Room"
+  ]
+ },
+ "Incineroar": {
+  "species": "Incineroar",
+  "item": "Chople Berry",
+  "ability": "Intimidate",
+  "nature": "Adamant",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Flare Blitz",
+   "Darkest Lariat",
+   "Parting Shot",
+   "Fake Out"
+  ]
+ },
+ "Charizard": {
+  "species": "Charizard",
+  "item": "Charizardite Y",
+  "ability": "Blaze",
+  "nature": "Modest",
+  "evs": [
+   28,
+   0,
+   13,
+   1,
+   0,
+   24
+  ],
+  "moves": [
+   "Heat Wave",
+   "Weather Ball",
+   "Ancient Power",
+   "Protect"
+  ]
+ },
+ "Sylveon": {
+  "species": "Sylveon",
+  "item": "Fairy Feather",
+  "ability": "Pixilate",
+  "nature": "Modest",
+  "evs": [
+   9,
+   0,
+   22,
+   20,
+   0,
+   15
+  ],
+  "moves": [
+   "Hyper Voice",
+   "Moonblast",
+   "Yawn",
+   "Protect"
+  ]
+ },
+ "Venusaur": {
+  "species": "Venusaur",
+  "item": "Focus Sash",
+  "ability": "Chlorophyll",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Leaf Storm",
+   "Sludge Bomb",
+   "Sleep Powder",
+   "Protect"
+  ]
+ },
+ "Garchomp": {
+  "species": "Garchomp",
+  "item": "Choice Scarf",
+  "ability": "Rough Skin",
+  "nature": "Adamant",
+  "evs": [
+   2,
+   32,
+   0,
+   0,
+   0,
+   32
+  ],
+  "moves": [
+   "Rock Slide",
+   "Stomping Tantrum",
+   "Dragon Claw",
+   "Earthquake"
+  ]
+ }
+}

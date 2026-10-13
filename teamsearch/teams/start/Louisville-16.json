@@ -1,0 +1,122 @@
+{
+ "Kingambit": {
+  "species": "Kingambit",
+  "item": "Occa Berry",
+  "ability": "Defiant",
+  "nature": "Brave",
+  "evs": [
+   32,
+   32,
+   0,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Kowtow Cleave",
+   "Sucker Punch",
+   "Iron Head",
+   "Protect"
+  ]
+ },
+ "Torkoal": {
+  "species": "Torkoal",
+  "item": "Charcoal",
+  "ability": "Drought",
+  "nature": "Quiet",
+  "evs": [
+   32,
+   0,
+   0,
+   32,
+   2,
+   0
+  ],
+  "moves": [
+   "Eruption",
+   "Heat Wave",
+   "Earth Power",
+   "Protect"
+  ]
+ },
+ "Farigiraf": {
+  "species": "Farigiraf",
+  "item": "Sitrus Berry",
+  "ability": "Armor Tail",
+  "nature": "Sassy",
+  "evs": [
+   32,
+   0,
+   0,
+   2,
+   32,
+   0
+  ],
+  "moves": [
+   "Hyper Voice",
+   "Psychic",
+   "Trick Room",
+   "Protect"
+  ]
+ },
+ "Venusaur": {
+  "species": "Venusaur",
+  "item": "Focus Sash",
+  "ability": "Chlorophyll",
+  "nature": "Modest",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Leaf Storm",
+   "Sludge Bomb",
+   "Sleep Powder",
+   "Protect"
+  ]
+ },
+ "Garchomp": {
+  "species": "Garchomp",
+  "item": "Garchompite Z",
+  "ability": "Rough Skin",
+  "nature": "Timid",
+  "evs": [
+   2,
+   0,
+   0,
+   32,
+   0,
+   32
+  ],
+  "moves": [
+   "Draco Meteor",
+   "Earth Power",
+   "Power Gem",
+   "Protect"
+  ]
+ },
+ "Alcremie": {
+  "species": "Alcremie",
+  "item": "Rocky Helmet",
+  "ability": "Sweet Veil",
+  "nature": "Bold",
+  "evs": [
+   32,
+   0,
+   32,
+   0,
+   2,
+   0
+  ],
+  "moves": [
+   "Decorate",
+   "Helping Hand",
+   "Dazzling Gleam",
+   "Mystical Fire"
+  ]
+ }
+}

@@ -1,4 +1,4 @@
-"""Build matchup-style MINE entries from teamsearch/pool.json, using Showdown's Champions data (native/champions_data.json).
+"""Build matchup-style MINE entries from teamsearch/pool.json, using Showdown's Champions data (native/champions_data_full.json: a superset of champions_data.json, 2026-10-13).
 
 Called from matchup.py (and from spgame.py, which execs matchup's source) with that namespace's M / FAKE_OUT / stats,
 so the move dicts have exactly the fields the one-on-one code expects. Champions stats: HP = base + 75 + SP,
@@ -7,7 +7,7 @@ status moves, accuracy, crits and secondary chances under 100%.
 """
 import json, os, re
 HERE = os.path.dirname(os.path.abspath(__file__))
-DEX = json.load(open(os.path.join(HERE, '..', '..', 'native', 'champions_data.json')))
+DEX = json.load(open(os.path.join(HERE, '..', '..', 'native', 'champions_data_full.json')))
 POOL = json.load(open(os.environ.get('POOL_FILE', os.path.join(HERE, '..', 'grid_sets.json'))))
 def idf(s): return re.sub(r'[^a-z0-9]', '', s.lower())
 

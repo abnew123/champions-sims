@@ -10,7 +10,7 @@ CAL = 0.7538   # the rescale of the planner's value to real outcomes (the eval b
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); PS = os.path.join(ROOT, 'pssim')
 sys.path.insert(0, PS); sys.path.insert(0, os.path.join(ROOT, 'bot'))
 sys.path.insert(0, os.path.join(ROOT, 'evalbar'))
-import replay; replay.BATON_PASS = True   # the log reading passes boosts and volatiles on a Baton Pass / Shed Tail (the user, 2026-10-12 evening)
+import replay; replay.BATON_PASS = True; replay.MEGA_ABIL = True   # the log reading: Baton Pass / Shed Tail pass boosts and volatiles; Mega Evolution clears a gained ability (the user, 2026-10-12 evening)
 def out(o): sys.stdout.write(json.dumps(o) + '\n'); sys.stdout.flush()
 def err(e): sys.stderr.write(e + '\n'); sys.stderr.flush()
 def pack(sets):

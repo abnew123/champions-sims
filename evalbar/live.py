@@ -94,7 +94,7 @@ def sets_for(g, log, bo3):
                 gs = SG.best_set(sp, [x for x in six[sd] if x != sp], {**r, 'ability': r['ability'] if r['ability'] in own else ''})
                 if gs:
                     it, nat, mv = R.camel(gs['item']), gs['nature'], [R.camel(m) for m in gs['moves']]
-                    rk = SPR.ranked(sp, nat, it)
+                    rk = SPR.candidates(sp, nat, it)
                     raw = {'species': sp, 'item': it, 'ability': R.camel(gs['ability']), 'nature': nat, 'moves': mv,
                            'evs': list(rk[0][1]) if rk else S.evs_for(sp, it, nat, mv)}
                 else:
@@ -540,6 +540,7 @@ class BotRunner:
             time.sleep(5)
 if __name__ == '__main__':
     P.own(); R.BATON_PASS = R.MEGA_ABIL = True                                            # Baton Pass hands on stages and effects (replay.py; the bot's own runs leave it off)
+    import spreads; spreads.FITTED = True                                                 # fitted default spreads (spreads.fitted; the bot's runs leave it off)
     a = sys.argv[1:]
     if not a: sys.exit(__doc__)
     if a[0] == 'list':

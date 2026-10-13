@@ -21,7 +21,8 @@ import os, sys, json, math, random, collections, time
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'pssim')); sys.path.insert(0, os.path.join(ROOT, 'bot')); sys.path.insert(0, os.path.join(ROOT, 'evalbar'))
 OUT = os.path.join(ROOT, 'bot', 'out', 'contempt'); os.makedirs(OUT, exist_ok=True)
-POS, EVAL = os.path.join(OUT, 'pos.jsonl'), os.path.join(OUT, 'eval.jsonl')
+TAG = os.environ.get('CONTEMPT_SET', '')   # a further scoring set: CONTEMPT_SET=s2 -> s2pos.jsonl / s2eval.jsonl (the pilot is the default)
+POS, EVAL = os.path.join(OUT, TAG + 'pos.jsonl'), os.path.join(OUT, TAG + 'eval.jsonl')
 FITPOS, FITEVAL, MODEL = os.path.join(OUT, 'fit_pos.jsonl'), os.path.join(OUT, 'fit_eval.jsonl'), os.path.join(OUT, 'human_model.json')
 CAL = 0.7538
 CS = [0.0, 0.1, 0.25, 0.5, 0.75, 1.0]
@@ -34,7 +35,21 @@ def pick(n, seed=1):
         for l in f:
             r = json.loads(l)
             if known(r.get('actual')) and known(r.get('their_actual')): by_game[r['name'].split(' ')[0]].append(l)
-    rnd = random.Random(seed); games = sorted(by_game); rnd.shuffle(games)
+    minr = int(os.environ.get('CONTEMPT_MINRATING', '0'))   # both players rated at least this (closer to the bot's opponents)
+    if minr:
+        def rated(g):
+            f = os.path.join(ROOT, 'pssim', 'replays_protect', g + '.log'); rs = []
+            if os.path.exists(f):
+                for l in open(f, errors='ignore'):
+                    if l.startswith('|player|'):
+                        p = l.rstrip('\n').split('|')
+                        if len(p) >= 6 and p[5].strip().isdigit(): rs.append(int(p[5]))
+            return len(rs) == 2 and min(rs) >= minr
+        by_game = {g: v for g, v in by_game.items() if rated(g)}
+    used = set()   # games already in another set (the pilot, the model fit, earlier scoring sets)
+    for f in [os.path.join(OUT, x) for x in os.listdir(OUT) if x.endswith('pos.jsonl') and os.path.join(OUT, x) != POS]:
+        used |= {json.loads(l)['name'].split(' ')[0] for l in open(f)}
+    rnd = random.Random(seed); games = sorted(g for g in by_game if g not in used); rnd.shuffle(games)
     with open(POS, 'w') as o:
         for g in games[:n]:
             r = json.loads(rnd.choice(by_game[g]))
@@ -55,7 +70,7 @@ def run_evalpos(posf, outf, title, card, threads, matrix):
     import subprocess
     subprocess.run([os.path.join(ROOT, 'native', 'champ', 'bin', 'battlesim-champ-bot'), 'evalpos', '../native/engine_data_full.json', posf, outf, str(threads)],
                    cwd=pssim, env=env, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-def evaluate(threads=2): run_evalpos(POS, EVAL, 'contempt, full payoff matrices on human games', 'contempt', threads, True)
+def evaluate(threads=2): run_evalpos(POS, EVAL, f'contempt, full payoff matrices on human games{" (" + TAG + ")" if TAG else ""}', 'contempt' + TAG, threads, True)
 def fitpick(n, seed=2):
     taken = {json.loads(l)['name'].split(' ')[0] for l in open(POS)} if os.path.exists(POS) else set()
     by_game = collections.defaultdict(list)
@@ -109,7 +124,15 @@ def score():
     for r in map(json.loads, open(EVAL)):
         if 'error' in r or 'matrix' not in r: continue
         base, tag = r['name'].rsplit(' s', 1); rows[base][tag] = r
-    res = collections.defaultdict(list); games = []
+    res = collections.defaultdict(list); games = []; opp_rating = []
+    def ratings(game):
+        f = os.path.join(ROOT, 'pssim', 'replays_protect', game + '.log'); out = {}
+        if os.path.exists(f):
+            for l in open(f, errors='ignore'):
+                if l.startswith('|player|'):
+                    p = l.rstrip('\n').split('|')
+                    if len(p) >= 6 and p[5].strip().isdigit(): out[p[2]] = int(p[5])
+        return out
     for base, d in rows.items():
         if 'A' not in d or 'B' not in d: continue
         a_, b_ = d['A'], d['B']
@@ -138,13 +161,24 @@ def score():
                 res[f'c={c:.2f} gain vs the actual play'].append(x @ B[:, act] - base_v)
                 res[f'c={c:.2f} price vs a perfect opponent'].append(vB - (x @ B).min())
             games.append(base.split(' ')[0])
+            rt = ratings(base.split(' ')[0]); pv = base.split(' ')[-1]          # the position's view (p1 / p2) is side 0
+            sides = [pv, 'p2' if pv == 'p1' else 'p1']; opp_rating.append(rt.get(sides[them]))
     n = len(res['ceiling: best answer to the actual play'])
     print(f"{n} decisions ({len(set(games))} games), real win chance points per decision; ± one standard error, clustered by game")
-    G = np.array(games)
-    for k, xs in res.items():
-        xs = np.array(xs)
-        se = math.sqrt(sum(((xs[G == g] - xs.mean()).sum()) ** 2 for g in set(games))) / len(xs)
-        print(f"  {k:46s} {100 * xs.mean():+7.2f}  ± {100 * se:.2f}")
+    G = np.array(games); OR = np.array([r if r is not None else -1 for r in opp_rating])
+    def show(mask, label):
+        print(label)
+        for k, xs in res.items():
+            xs = np.array(xs)[mask]; g = G[mask]
+            if not len(xs): continue
+            se = math.sqrt(sum(((xs[g == x] - xs.mean()).sum()) ** 2 for x in set(g))) / len(xs)
+            print(f"  {k:46s} {100 * xs.mean():+7.2f}  ± {100 * se:.2f}")
+    show(np.ones(len(G), bool), 'all')
+    known_r = OR[OR > 0]
+    if len(known_r) > 20:
+        cut = float(np.median(known_r))
+        show((OR > 0) & (OR < cut), f'opponent rated under {cut:.0f} ({int(((OR > 0) & (OR < cut)).sum())} decisions)')
+        show(OR >= cut, f'opponent rated {cut:.0f} or more ({int((OR >= cut).sum())} decisions)')
 
 if __name__ == '__main__':
     a = sys.argv[1:]

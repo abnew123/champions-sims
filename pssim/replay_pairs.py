@@ -42,6 +42,19 @@ def report(dirs):
             if len(sim) < 30: continue
             ms = sum(sim) / len(sim); mr = sum(real) / len(real); se = math.sqrt(2 * 0.25 / len(sim))
             print(f"{s:12s} {len(sim):5d} {100 * ms:8.1f} {100 * mr:9.1f} {100 * (ms - mr):+8.1f} ± {100 * se:3.1f}")
+        # PAIRS=<jobs.json> (2026-10-13, the user: Mega Raichu-Y, No Guard's sure Zap Cannon / Focus Blast): the same by the side that
+        # brought a Pokemon holding the item, if the job file is given; one row per item in PAIRS_ITEMS (default Raichunite Y)
+        if os.environ.get('PAIRS'):
+            J = json.load(open(os.environ['PAIRS']))
+            for item in os.environ.get('PAIRS_ITEMS', 'Raichunite Y').split(','):
+                sim, real = [], []
+                for j in rows:
+                    jb = J[j['job']]
+                    if any(x.get('item') == item for x in jb['mine']): sim.append(j['v']); real.append(j['real_won'])
+                    if any(x.get('item') == item for x in jb['theirs']): sim.append(1 - j['v']); real.append(1 - j['real_won'])
+                if sim:
+                    ms = sum(sim) / len(sim); mr = sum(real) / len(real); se = math.sqrt(2 * 0.25 / len(sim))
+                    print(f"{'brought ' + item:22s} {len(sim):5d} {100 * ms:8.1f} {100 * mr:9.1f} {100 * (ms - mr):+8.1f} ± {100 * se:3.1f}")
         for lo, hi in ((1150, 1250), (1250, 1350), (1350, 9999)):
             rr = [j for j in rows if lo <= j['rating'] < hi]
             if rr: print(f"  rating {lo}-{hi}: {len(rr)} games, agreement {100 * sum(1 for j in rr if (j['v'] > 0.5) == bool(j['real_won'])) / len(rr):.1f}%")

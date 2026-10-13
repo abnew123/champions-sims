@@ -151,3 +151,8 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     Speed Swap, After You, Heal Pulse, Decorate, Entrainment, Instruct, Beat Up, Psych Up, Simple Beam, Charm, Skill Swap, Roar, Fake
     Tears (on 8.5% of the 7,407 Bo3 sheets, 1.5% of Pokemon); not Soak, U-turn, Parting Shot, Grassy Glide (on 64.5% of sheets: an extra
     option in most positions for a rare payoff). The conditions above may narrow the 13 further where they apply.
+    **The four under 10% (the user, 2026-10-13, through the Eval bar):** Soak at the partner always (Basculegion soaking its own
+    Volcarona to pure Water against Rock: 14 uses, 12 games, one archetype); Parting Shot at a Contrary partner only (Grimmsnarl into its
+    Mega Staraptor, 16); U-turn and Grassy Glide at a Weak Armor or Stamina partner only (Annihilape into Armarouge 12; Rillaboom into
+    Stamina Archaludon 7 + 5); not Incineroar's Parting Shot at the partner to make sure of the switch (85 uses, but Incineroar is on
+    most teams: an option nearly everywhere).

@@ -12,12 +12,17 @@ also make it score well.
   eval  [threads]    champ evalpos with the bot's settings, every cell of the payoff matrix (EVAL_MATRIX=full, 8 seeds a cell)
   score              per decision and per c: the gain over the equilibrium against what the opponent actually did, and the price
                      against a perfect opponent (exploitability); both sides of each position are scored, in real win chance (x CAL)
+  fitpick <n> [seed]  n positions for refitting the human model on the bot's current values (the learned net), from other games
+  fiteval [threads]   the staged one-turn search on them (the bot's settings, no matrix)
+  fit                 the model refitted (fit on half the games, scored on the other half) -> bot/out/contempt/human_model.json, which
+                      score uses from then on (the first model, bot/out/pos/human_model.json, was fitted on the static value's options)
   .venv/bin/python3 bot/contempt.py pick 400 | eval 2 | score"""
 import os, sys, json, math, random, collections, time
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'pssim')); sys.path.insert(0, os.path.join(ROOT, 'bot')); sys.path.insert(0, os.path.join(ROOT, 'evalbar'))
 OUT = os.path.join(ROOT, 'bot', 'out', 'contempt'); os.makedirs(OUT, exist_ok=True)
 POS, EVAL = os.path.join(OUT, 'pos.jsonl'), os.path.join(OUT, 'eval.jsonl')
+FITPOS, FITEVAL, MODEL = os.path.join(OUT, 'fit_pos.jsonl'), os.path.join(OUT, 'fit_eval.jsonl'), os.path.join(OUT, 'human_model.json')
 CAL = 0.7538
 CS = [0.0, 0.1, 0.25, 0.5, 0.75, 1.0]
 
@@ -36,25 +41,58 @@ def pick(n, seed=1):
             for tag in ('A', 'B'): o.write(json.dumps({**r, 'name': f"{r['name']} s{tag}"}) + '\n')
     print(f'{min(n, len(games))} positions from {len(by_game)} games with both plays known -> {POS} (twice each)')
 
-def evaluate(threads=2):
+def run_evalpos(posf, outf, title, card, threads, matrix):
     pssim = os.path.join(ROOT, 'pssim')
-    n = sum(1 for _ in open(POS))
+    n = sum(1 for _ in open(posf))
     d = os.path.join(ROOT, 'evalbar', 'out', 'battlesim'); os.makedirs(d, exist_ok=True)
-    json.dump({'title': 'Battle sim: contempt, full payoff matrices on human games', 'out': os.path.relpath(EVAL, os.path.join(ROOT, 'evalbar', 'out')),
-               'total': n, 'done0': sum(1 for _ in open(EVAL)) if os.path.exists(EVAL) else 0, 'started': time.time(), 'threads': threads, 'seeds': 8, 'staged': False},
-              open(os.path.join(d, 'contempt.run.json'), 'w'))
-    env = {**os.environ, 'RACE_TIES': 'avg', 'EVAL_SEEDS': '8', 'EG_VALUE': 'egvalue9_sym2.json', 'RACE': '1', 'TRSYM': '1', 'RACE_PRIO': '1', 'FEATS22': '1',
+    json.dump({'title': 'Battle sim: ' + title, 'out': os.path.relpath(outf, os.path.join(ROOT, 'evalbar', 'out')),
+               'total': n, 'done0': sum(1 for _ in open(outf)) if os.path.exists(outf) else 0, 'started': time.time(), 'threads': threads,
+               'seeds': 8 if matrix else 32, 'staged': not matrix}, open(os.path.join(d, card + '.run.json'), 'w'))
+    env = {**os.environ, 'RACE_TIES': 'avg', 'EG_VALUE': 'egvalue9_sym2.json', 'RACE': '1', 'TRSYM': '1', 'RACE_PRIO': '1', 'FEATS22': '1',
            'CALC_DATA': '../native/champions_data_full.json', 'EG_VNET': os.path.join(ROOT, 'bot', 'value', 'vnet_h64_search_fc.json'),
-           'GRID_DIR': os.path.join(pssim, 'results', 'value', 'emptygrid'), 'EVAL_MATRIX': 'full', 'EG_MEGA_TIE': '0'}
+           'GRID_DIR': os.path.join(pssim, 'results', 'value', 'emptygrid'), 'EG_MEGA_TIE': '0',
+           **({'EVAL_MATRIX': 'full', 'EVAL_SEEDS': '8'} if matrix else {'EVAL_SEEDS': '32', 'EVAL_ADAPT': '1'})}
     import subprocess
-    subprocess.run([os.path.join(ROOT, 'native', 'champ', 'bin', 'battlesim-champ-bot'), 'evalpos', '../native/engine_data_full.json', POS, EVAL, str(threads)],
+    subprocess.run([os.path.join(ROOT, 'native', 'champ', 'bin', 'battlesim-champ-bot'), 'evalpos', '../native/engine_data_full.json', posf, outf, str(threads)],
                    cwd=pssim, env=env, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+def evaluate(threads=2): run_evalpos(POS, EVAL, 'contempt, full payoff matrices on human games', 'contempt', threads, True)
+def fitpick(n, seed=2):
+    taken = {json.loads(l)['name'].split(' ')[0] for l in open(POS)} if os.path.exists(POS) else set()
+    by_game = collections.defaultdict(list)
+    with open(os.path.join(ROOT, 'pssim', 'results', 'value', 'real_new.pos.jsonl')) as f:
+        for l in f:
+            g = json.loads(l)['name'].split(' ')[0]
+            if g not in taken: by_game[g].append(l)
+    rnd = random.Random(seed); games = sorted(by_game); rnd.shuffle(games)
+    with open(FITPOS, 'w') as o:
+        for g in games[:n]: o.write(rnd.choice(by_game[g]))
+    print(f'{min(n, len(games))} positions for the model fit, none from the {len(taken)} scoring games -> {FITPOS}')
+def fiteval(threads=2): run_evalpos(FITPOS, FITEVAL, 'contempt, human model refit (one-turn search on human games)', 'contempt_fit', threads, False)
+def fit():
+    import exploit_test as XT, human_lines as HL
+    rows = [json.loads(l) for l in open(FITEVAL) if 'error' not in l]
+    by = collections.defaultdict(list)
+    for r in rows: by[r['name'].split(' ')[0]].append(r)
+    games = sorted(by); random.Random(3).shuffle(games); half = set(games[:len(games) // 2])
+    A = list(XT.slot_rows([r for g in games if g in half for r in by[g]])); B = list(XT.slot_rows([r for g in games if g not in half for r in by[g]]))
+    hum = collections.Counter(); plan = collections.Counter()
+    for opts, k in A:
+        hum[HL.kind(opts[k][0])[0]] += 1
+        for l, w, v in opts: plan[HL.kind(l)[0]] += w
+    fac = {kd: (hum[kd] + 1) / (plan[kd] + 1) for kd in set(hum) | set(plan)}
+    ll = lambda M, part: sum(math.log(max(1e-9, XT.probs(opts, M)[k])) for opts, k in part) / len(part)
+    best = max(({'lam': lam, 'tau': tau, 'fac': fac} for lam in (0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8) for tau in (0.01, 0.02, 0.04, 0.08, 0.16, 0.3, 0.5, 1.0)),
+               key=lambda M: ll(M, A))
+    old = json.load(open(XT.MODEL))
+    print(f"{len(A) + len(B)} human slot decisions from {len(games)} games (fit on half the games, scored on the other half; log score, higher is better):")
+    print(f"  planner's mix (2% floor) {ll({'lam': 0.02, 'tau': 10.0, 'fac': {}}, B):.3f};  the first model {ll(old, B):.3f};  refitted {ll(best, B):.3f} (lam {best['lam']}, tau {best['tau']})")
+    json.dump(best, open(MODEL, 'w'))
 
 def score():
     import numpy as np
     from scipy.optimize import linprog
     import exploit_test as XT, human_lines as HL
-    M = json.load(open(XT.MODEL))
+    M = json.load(open(MODEL if os.path.exists(MODEL) else XT.MODEL)); print('human model:', MODEL if os.path.exists(MODEL) else XT.MODEL)
     real = np.vectorize(lambda v: HL.resc(v, CAL))
     def nash(A):
         n, k = A.shape
@@ -113,3 +151,6 @@ if __name__ == '__main__':
     if a[0] == 'pick': pick(int(a[1]), int(a[2]) if len(a) > 2 else 1)
     elif a[0] == 'eval': evaluate(int(a[1]) if len(a) > 1 else 2)
     elif a[0] == 'score': score()
+    elif a[0] == 'fitpick': fitpick(int(a[1]), int(a[2]) if len(a) > 2 else 2)
+    elif a[0] == 'fiteval': fiteval(int(a[1]) if len(a) > 1 else 2)
+    elif a[0] == 'fit': fit()

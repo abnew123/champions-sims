@@ -56,7 +56,7 @@ def pick(n, seed=1):
             for tag in ('A', 'B'): o.write(json.dumps({**r, 'name': f"{r['name']} s{tag}"}) + '\n')
     print(f'{min(n, len(games))} positions from {len(by_game)} games with both plays known -> {POS} (twice each)')
 
-def run_evalpos(posf, outf, title, card, threads, matrix):
+def run_evalpos(posf, outf, title, card, threads, matrix, extra=None):
     pssim = os.path.join(ROOT, 'pssim')
     n = sum(1 for _ in open(posf))
     d = os.path.join(ROOT, 'evalbar', 'out', 'battlesim'); os.makedirs(d, exist_ok=True)
@@ -66,7 +66,7 @@ def run_evalpos(posf, outf, title, card, threads, matrix):
     env = {**os.environ, 'RACE_TIES': 'avg', 'EG_VALUE': 'egvalue9_sym2.json', 'RACE': '1', 'TRSYM': '1', 'RACE_PRIO': '1', 'FEATS22': '1',
            'CALC_DATA': '../native/champions_data_full.json', 'EG_VNET': os.path.join(ROOT, 'bot', 'value', 'vnet_h64_search_fc.json'),
            'GRID_DIR': os.path.join(pssim, 'results', 'value', 'emptygrid'), 'EG_MEGA_TIE': '0',
-           **({'EVAL_MATRIX': 'full', 'EVAL_SEEDS': '8'} if matrix else {'EVAL_SEEDS': '32', 'EVAL_ADAPT': '1'})}
+           **({'EVAL_MATRIX': 'full', 'EVAL_SEEDS': '8'} if matrix else {'EVAL_SEEDS': '32', 'EVAL_ADAPT': '1'}), **(extra or {})}
     import subprocess
     subprocess.run([os.path.join(ROOT, 'native', 'champ', 'bin', 'battlesim-champ-bot'), 'evalpos', '../native/engine_data_full.json', posf, outf, str(threads)],
                    cwd=pssim, env=env, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

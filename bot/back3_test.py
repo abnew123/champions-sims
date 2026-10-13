@@ -5,13 +5,14 @@ truth, and solved with the bot's current settings. The bot's mix now is the top 
 weighted by their odds. Both are valued in the true position (each joint option's value against the opponent's equilibrium there),
 against the mix planned on the truth: the loss of each, per decision, all decisions counted (a right first guess too, where mixing can
 cost).
-  .venv/bin/python3 bot/back3_test.py build | eval [threads] | score"""
+  .venv/bin/python3 bot/back3_test.py build | eval [threads] | evaltruth [threads] | score"""
 import os, sys, json, collections, time, math
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'evalbar')); sys.path.insert(0, os.path.join(ROOT, 'bot'))
 os.environ.setdefault('CHAMP_MAIN', ROOT)
 OUT = os.path.join(ROOT, 'bot', 'out', 'back3'); os.makedirs(OUT, exist_ok=True)
 POS, EVAL, META = os.path.join(OUT, 'pos.jsonl'), os.path.join(OUT, 'eval.jsonl'), os.path.join(OUT, 'meta.json')
+TPOS, TEVAL = os.path.join(OUT, 'truth_pos.jsonl'), os.path.join(OUT, 'truth_eval.jsonl')   # the true positions again, every joint option reported
 K = 3
 def build():
     import replay as R; R.BATON_PASS = True
@@ -42,8 +43,17 @@ def build():
 def evaluate(threads=2):
     import contempt as C
     C.run_evalpos(POS, EVAL, 'back row: top three guesses vs one, bot decisions', 'back3', threads, False)
+def evaltruth(threads=2):
+    """the true positions with every joint option's value (EVAL_TOP: the default reports the top 8 only, too few to value the
+    hypotheses' mixes in the true position)"""
+    import contempt as C
+    with open(TPOS, 'w') as o:
+        for l in open(POS):
+            if json.loads(l)['name'].endswith(' truth p1'): o.write(l)
+    C.run_evalpos(TPOS, TEVAL, 'back row: the true positions, every option', 'back3_truth', threads, False, {'EVAL_TOP': '2000'})
 def score():
     meta = json.load(open(META)); E = {r['name']: r for r in map(json.loads, open(EVAL)) if 'error' not in r}
+    if os.path.exists(TEVAL): E.update({r['name']: r for r in map(json.loads, open(TEVAL)) if 'error' not in r})
     out = collections.defaultdict(list); G = []
     for m in meta:
         hs = [E.get(f"{m['name']} h{h} p1") for h in range(len(m['weights']))]; tr = E.get(f"{m['name']} truth p1")
@@ -68,4 +78,4 @@ def score():
         print(f"  {k:36s} {100 * mu:+6.2f}  ± {100 * sd / n ** 0.5:.2f}  (n {n})")
 if __name__ == '__main__':
     a = sys.argv[1:]
-    {'build': build, 'eval': lambda: evaluate(int(a[1]) if len(a) > 1 else 2), 'score': score}[a[0]]()
+    {'build': build, 'eval': lambda: evaluate(int(a[1]) if len(a) > 1 else 2), 'evaltruth': lambda: evaltruth(int(a[1]) if len(a) > 1 else 2), 'score': score}[a[0]]()

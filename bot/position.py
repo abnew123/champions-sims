@@ -104,7 +104,8 @@ def contempt_mix(r, c):
 # options every guess's matrix has (c = the contempt, 0 for the equilibrium). Measured on 781 of the bot's own decisions with the back
 # row later shown (bot/back3_test.py bayes): 0.52 ± 0.07 planner points a decision below the plan on the true back row, against 0.90 for
 # the top guess alone and 0.97 for the guesses' mixes weighted (a gain of +0.38 ± 0.09; +0.86 when the top guess is wrong, -0.16 ± 0.10
-# when it is right). The k positions run on k threads: about the time of one (median 5.8 s vs 5.2 s on 12 saved decisions).
+# when it is right). The k positions run on k threads: about the time of one (median 5.8 s vs 5.2 s on 12 saved decisions). The user
+# (2026-10-12): the bot sticks to the top guess only; back_row_game stays unset.
 def back_row_k(fmt):
     try: return max(1, int((json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))).get('back_row_game') or {}).get(fmt or '', 1)))
     except Exception: return 1

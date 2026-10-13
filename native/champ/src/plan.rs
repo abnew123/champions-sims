@@ -702,6 +702,9 @@ pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
                 if mv.category != "Status" && type_mult(b, mv.mtype, *f) == 0.0 && *mid != "weatherball" && *mid != "terrainpulse" && !keep_immune()[s as usize] { continue; }
                 out.push(PChoice::Move(k, t as i64 + 1, mega));
             }
+            // the partner as the target (planner_issues 17, the user's scope, 2026-10-13): the moves players aim at their partner over
+            // 10% of the time, where they do something to it (Instruct and Beat Up wait for their ports)
+            if let Some(a) = b.sides[s as usize].active[1 - i] { if !b.p((s, a)).fainted && partner_target(b, s, mid, (s, a)) { out.push(PChoice::Move(k, if i == 0 { -2 } else { -1 }, mega)); } }
         } else if target == "adjacentAlly" {
             if let Some(a) = b.sides[s as usize].active[1 - i] { if !b.p((s, a)).fainted { out.push(PChoice::Move(k, if i == 0 { -2 } else { -1 }, mega)); } }
         } else { out.push(PChoice::Move(k, 0, mega)); }
@@ -711,6 +714,25 @@ pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
     // Staraptor) or leave the Mega to its partner. EG_MEGA_ALWAYS=1 restores the old rule (the first move always Mega Evolves).
     if mega && !mega_always()[s as usize] { let n = out.len(); for j in 0..n { if let PChoice::Move(k, t, true) = out[j] { out.push(PChoice::Move(k, t, false)); } } }
     if out.is_empty() { vec![PChoice::Move(0, 0, false)] } else { out }
+}
+/// a normal / any move worth aiming at the partner (planner_issues 17; PARTNER_TARGETS=0 turns it off for head-to-heads): always for the
+/// moves played at the partner nearly always or whose effect suits it (Decorate, After You, Speed Swap, Heal Pulse, Soak, Skill Swap,
+/// Entrainment, Roar); a stat drop into Contrary (Charm, Fake Tears, Parting Shot: Defiant and Competitive ignore an ally's drop);
+/// Psych Up onto a boosted partner; Simple Beam onto a boosted partner or one held back by its ability; U-turn and Grassy Glide into
+/// Weak Armor or Stamina. PARTNER_TARGETS=0 off, s0 / s1 for one side only (head-to-heads), on otherwise
+fn partner_target(b: &Battle, s: u8, mid: Id, a: MonRef) -> bool {
+    static ON: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new();
+    let on = *ON.get_or_init(|| match std::env::var("PARTNER_TARGETS").as_deref() { Ok("0") => [false, false], Ok("s0") => [true, false], Ok("s1") => [false, true], _ => [true, true] });
+    if !on[s as usize] { return false; }
+    let p = b.p(a); let ab = p.ability; let boosted = p.boosts.iter().any(|x| *x > 0);
+    match mid {
+        "decorate" | "afteryou" | "speedswap" | "healpulse" | "soak" | "skillswap" | "entrainment" | "roar" => true,
+        "charm" | "faketears" | "partingshot" => ab == "contrary",
+        "psychup" => boosted,
+        "simplebeam" => boosted || ["truant", "slowstart", "defeatist", "klutz"].contains(&ab),
+        "uturn" | "grassyglide" => ab == "weakarmor" || ab == "stamina",
+        _ => false,
+    }
 }
 /// EG_MEGA_ALWAYS=1 (or both): both sides keep the old rule; =0 / =1 as a side number: only that side does (head-to-head tests)
 fn mega_always() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new(); *F.get_or_init(|| match std::env::var("EG_MEGA_ALWAYS").as_deref() { Ok("s0") => [true, false], Ok("s1") => [false, true], Ok(_) => [true, true], Err(_) => [false, false] }) }

@@ -19,6 +19,22 @@ pub(crate) fn seed4(x: u64) -> [u16; 4] {
     let mut z = x.wrapping_add(0x9E3779B97F4A7C15); z = (z ^ (z >> 30)).wrapping_mul(0xBF58476D1CE4E5B9); z = (z ^ (z >> 27)).wrapping_mul(0x94D049BB133111EB); z ^= z >> 31;
     [z as u16, (z >> 16) as u16, (z >> 32) as u16, (z >> 48) as u16]
 }
+/// one switch request's options for side s: every assignment of candidates to its open slots, a slot's candidates being the bench, or
+/// the fainted Pokemon for a slot with Revival Blessing's condition (2026-10-13)
+pub(crate) fn switch_opts(b: &Battle, s: u8, req_s: &[bool; 2]) -> Vec<[PChoice; 2]> {
+    let slots: Vec<usize> = (0..2).filter(|i| req_s[*i]).collect();
+    let cands = |k: usize| if b.revive_slot(s, k) { b.fainted_positions(s) } else { bench(b, s) };
+    let mut o: Vec<[PChoice; 2]> = vec![];
+    match slots.len() {
+        0 => o.push([PChoice::Pass; 2]),
+        1 => { for p in cands(slots[0]) { let mut c = [PChoice::Pass; 2]; c[slots[0]] = PChoice::Switch(p); o.push(c); } }
+        _ => { let (c0, c1) = (cands(slots[0]), cands(slots[1]));
+               for &p in &c0 { for &q in &c1 { if p != q { let mut c = [PChoice::Pass; 2]; c[slots[0]] = PChoice::Switch(p); c[slots[1]] = PChoice::Switch(q); o.push(c); } } }
+               if !b.revive_slot(s, slots[0]) && !b.revive_slot(s, slots[1]) && c0.len() == 1 { for &k in &slots { let mut c = [PChoice::Pass; 2]; c[k] = PChoice::Switch(c0[0]); o.push(c); } } }
+    }
+    if o.is_empty() { o.push([PChoice::Pass; 2]); }
+    o
+}
 pub(crate) fn bench(b: &Battle, s: u8) -> Vec<u8> {
     let mut v: Vec<u8> = b.sides[s as usize].pokemon.iter().filter(|p| !p.fainted && p.position >= 2).map(|p| p.position).collect(); v.sort(); v
 }
@@ -48,17 +64,7 @@ pub(crate) fn resolve_switches_h(b: &mut Battle, cfg: &Cfg, mut rng: Option<&mut
     while b.request_switch && !b.ended && guard < 8 {
         guard += 1;
         let req = b.switch_request();
-        let opts: Vec<Vec<[PChoice; 2]>> = (0..2u8).map(|s| {
-            let slots: Vec<usize> = (0..2).filter(|i| req[s as usize][*i]).collect(); let bn = bench(b, s);
-            let mut o: Vec<[PChoice; 2]> = vec![];
-            match slots.len() {
-                0 => o.push([PChoice::Pass; 2]),
-                1 => { for &p in &bn { let mut c = [PChoice::Pass; 2]; c[slots[0]] = PChoice::Switch(p); o.push(c); } }
-                _ => { for &p in &bn { for &q in &bn { if p != q { let mut c = [PChoice::Pass; 2]; c[slots[0]] = PChoice::Switch(p); c[slots[1]] = PChoice::Switch(q); o.push(c); } } }
-                       if bn.len() == 1 { for &k in &slots { let mut c = [PChoice::Pass; 2]; c[k] = PChoice::Switch(bn[0]); o.push(c); } } }
-            }
-            if o.is_empty() { o.push([PChoice::Pass; 2]); }
-            o }).collect();
+        let opts: Vec<Vec<[PChoice; 2]>> = (0..2u8).map(|s| switch_opts(b, s, &req[s as usize])).collect();
         let (i, j) = if let Some(h) = human.as_deref_mut() {
             let i = h.choose_switch(b, turn, &opts[0]);
             let j = if opts[1].len() <= 1 { 0 } else {
@@ -79,17 +85,7 @@ pub(crate) fn resolve_switches_h(b: &mut Battle, cfg: &Cfg, mut rng: Option<&mut
 /// one switch request's replacement equilibrium, as resolve_switches_h settles it without rng: both sides' options (every assignment of
 /// bench Pokemon to the open slots), the matrix game on the position value, each side's most likely choice
 fn eq_switch_pick(b: &mut Battle, cfg: &Cfg, req: &[[bool; 2]; 2]) -> [[PChoice; 2]; 2] {
-    let opts: Vec<Vec<[PChoice; 2]>> = (0..2u8).map(|s| {
-        let slots: Vec<usize> = (0..2).filter(|i| req[s as usize][*i]).collect(); let bn = bench(b, s);
-        let mut o: Vec<[PChoice; 2]> = vec![];
-        match slots.len() {
-            0 => o.push([PChoice::Pass; 2]),
-            1 => { for &p in &bn { let mut c = [PChoice::Pass; 2]; c[slots[0]] = PChoice::Switch(p); o.push(c); } }
-            _ => { for &p in &bn { for &q in &bn { if p != q { let mut c = [PChoice::Pass; 2]; c[slots[0]] = PChoice::Switch(p); c[slots[1]] = PChoice::Switch(q); o.push(c); } } }
-                   if bn.len() == 1 { for &k in &slots { let mut c = [PChoice::Pass; 2]; c[k] = PChoice::Switch(bn[0]); o.push(c); } } }
-        }
-        if o.is_empty() { o.push([PChoice::Pass; 2]); }
-        o }).collect();
+    let opts: Vec<Vec<[PChoice; 2]>> = (0..2u8).map(|s| switch_opts(b, s, &req[s as usize])).collect();
     if opts[0].len() * opts[1].len() == 1 { return [opts[0][0], opts[1][0]]; }
     let a2: Vec<Vec<(f64, f64)>> = opts[0].iter().map(|x| opts[1].iter().map(|y| { let mut c = b.clone(); c.choose_switches([*x, *y]); value2(&mut c, cfg) }).collect()).collect();
     let a: Vec<Vec<f64>> = a2.iter().map(|r| r.iter().map(|v| v.0).collect()).collect();

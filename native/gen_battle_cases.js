@@ -64,6 +64,9 @@ function answerSwitches(b) {
       const req = s.activeRequest; if (!req || !req.forceSwitch) continue;
       let avail = s.pokemon.map((q, k) => k).filter(k => k >= 2 && !s.pokemon[k].fainted); const parts = [];
       for (let i = 0; i < 2; i++) {
+        // Revival Blessing (2026-10-13): that slot's request takes a fainted Pokemon to revive, not a bench one
+        const a = s.active[i]; const revive = req.forceSwitch[i] && a && s.slotConditions[a.position] && s.slotConditions[a.position]['revivalblessing'];
+        if (revive) { const f = s.pokemon.map((q, k) => k).filter(k => s.pokemon[k].fainted); if (!f.length) { parts.push('pass'); continue; } parts.push(`switch ${pick(f) + 1}`); continue; }
         if (!req.forceSwitch[i] || !avail.length) { parts.push('pass'); continue; }
         const k = pick(avail); avail = avail.filter(x => x !== k); parts.push(`switch ${k + 1}`);
       }

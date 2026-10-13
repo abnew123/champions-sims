@@ -51,7 +51,7 @@ pub struct Handler {
 }
 
 #[derive(Clone, Copy, Debug, PartialEq)]
-pub enum Choice { Move, MegaEvo, BeforeTurn, Residual, BeforeTurnMove, PriorityChargeMove, Pass, Switch, InstaSwitch, RunSwitch }
+pub enum Choice { Move, MegaEvo, BeforeTurn, Residual, BeforeTurnMove, PriorityChargeMove, Pass, Switch, InstaSwitch, RunSwitch, RevivalBlessing }
 #[derive(Clone, Debug)]
 pub struct Action {
     pub choice: Choice, pub order: f64, pub priority: f64, pub fractional_priority: f64, pub speed: f64, pub sub_order: f64, pub effect_order: f64,

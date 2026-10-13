@@ -155,6 +155,16 @@ def best_spread(T, base, eps=1e-6):
         v, xs = max(dp.values()); v -= eps * abs(h - base[0])
         if best is None or v > best[0]: best = (v, [h] + xs)
     return best[1]
+def smogon(path):
+    """default(sp, nat) from another of Smogon's stats files (out/smogon: the same month at the 1630 and 1760 cutoffs, the user, 2026-10-12)"""
+    old = (SPR.STATS, SPR._TABLE); SPR.STATS, SPR._TABLE = path, None; t = SPR.table(); SPR.STATS, SPR._TABLE = old; memo = {}
+    def d(sp, nat):
+        if (sp, nat) not in memo:
+            keep = SPR._TABLE; SPR._TABLE = t
+            try: memo[(sp, nat)] = default(sp, nat)
+            finally: SPR._TABLE = keep
+        return memo[(sp, nat)]
+    return d
 def ctx(B=20.0, F=4.0, kappa=2.0, nq=6000, minsh=3):
     """spreads by team core and set (the user, 2026-10-12: like setguess.py, for spreads): each held-out player's Pokemon (game, side,
     species) gets the spread that fits the most training evidence of its species and nature, each piece counted B^(teammates shared - 5)
@@ -172,6 +182,8 @@ def ctx(B=20.0, F=4.0, kappa=2.0, nq=6000, minsh=3):
             x['N'] += 1
     by = collections.defaultdict(list)
     for (sp, nat, g, sd), x in inst.items(): by[(sp, nat)].append(x)
+    alts = [(os.path.basename(f).split('-')[-1][:-4], smogon(f)) for f in sorted(glob.glob(os.path.join(C.HERE, 'out', 'smogon', '*.txt')))]
+    alt = collections.defaultdict(float)                                # held-out evidence Smogon's spread fits at the other cutoffs
     rng = random.Random(7); tot = [0.0, 0.0, 0.0, 0]; per = collections.defaultdict(lambda: [0.0, 0.0, 0.0, 0])
     queries = [(k, x) for k, xs in by.items() for x in xs if x['hold']]; rng.shuffle(queries)
     pre = {}
@@ -199,8 +211,10 @@ def ctx(B=20.0, F=4.0, kappa=2.0, nq=6000, minsh=3):
                             + T.get(OFF['dp'] + G.index(nearest(s_[1])), 0) + T.get(OFF['ds'] + G.index(nearest(s_[3])), 0) + T.get(OFF['spe'] + G.index(nearest(s_[5])), 0))
         for acc in (tot, per[sp]):
             acc[0] += score(base); acc[1] += score(glob_best); acc[2] += score(e); acc[3] += q['N']
+        for c, d in alts: alt[c] += score(d(sp, nat) or base)
     print(f"held-out evidence fitted ({tot[3]} pieces, {min(int(nq), len(queries))} Pokemon): Smogon's spread {tot[0] / max(1, tot[3]):.3f}, "
           f"species and nature fit {tot[1] / max(1, tot[3]):.3f}, by team core and set {tot[2] / max(1, tot[3]):.3f}  (B {B}, F {F}, kappa {kappa})")
+    if alts: print("  Smogon's spread at the 1500 cutoff " + f"{tot[0] / max(1, tot[3]):.3f}, " + ', '.join(f"{c} {alt[c] / max(1, tot[3]):.3f}" for c, _ in alts))
     for sp, v in sorted(per.items(), key=lambda kv: -kv[1][3])[:15]: print(f"  {sp:18s} {v[3]:5d}  {v[0] / v[3]:.3f}  {v[1] / v[3]:.3f}  {v[2] / v[3]:.3f}")
     return tot
 if __name__ == '__main__':

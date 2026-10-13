@@ -140,3 +140,10 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     37, Instruct 33, Skill Swap 29, Entrainment 23, Beat Up 18. Plan for v29: offer the partner for those moves only where they do
     something (stat drops into Contrary / Defiant / Competitive, heals on a hurt partner, Instruct / Psych Up / Skill Swap / Entrainment,
     Beat Up into Justified, a hit the partner absorbs or that trips its Weakness Policy), so the option count barely grows; self-play.
+    **The Eval bar's fuller count (partner uses / all uses, Bo3 replays):** adjacentAlly (offered): Helping Hand 5,420/5,421, Coaching
+    510/510, Dragon Cheer 14/14. Normal / any moves played at the partner almost always, so the planner can only misuse them: Decorate
+    56/59 (target "normal" in the data: not handled), Heal Pulse 64/66, Instruct 33/36, Entrainment 23/25, Speed Swap 17/17, After You
+    17/17 -> offer the partner always (Decorate, After You, Speed Swap, Heal Pulse) or by condition (Instruct, Entrainment). Often:
+    Psych Up 39/53, Beat Up 18/24, Simple Beam 13/21 (a boosted or Contrary partner), Charm 84/146, Skill Swap 29/72. Sometimes: Roar
+    14/84, Fake Tears 11/90 (Competitive / Defiant / Contrary), Soak 14/285, U-turn 37/2,517, Parting Shot 105/8,887, Grassy Glide
+    15/6,240 (Soak / Roar: reasons vary, lowest priority).

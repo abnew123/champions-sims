@@ -11,6 +11,6 @@ with open(OUT, 'w') as o:
         if not l.strip(): continue
         r = json.loads(l); n += 1
         t = datetime.datetime.fromisoformat(r['when'].replace('Z', '+00:00')).astimezone().strftime('%Y-%m-%d %I:%M %p').replace(' 0', ' ')
-        where = ('battle ' + r['room'].split('-')[-1][:14]) if r.get('room') else 'PM'
+        where = ('battle ' + r['room'].split('-')[-1][:14]) if r.get('room') else ('PM to ' + r['to'] if r.get('to') else 'PM to the bot')
         o.write(f"{t}  {where}  {r.get('from', '')}: {r.get('text', '')}\n")
 print(f'{n} messages -> {OUT}')

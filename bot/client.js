@@ -174,6 +174,16 @@ function noteChat(room, who, text) {
   if (!me || who.toLowerCase() === me.toLowerCase() || who === '~' || who === '&' || !text.trim() || text.startsWith('/')) return;
   fs.appendFileSync(CHAT, JSON.stringify({when: new Date().toISOString(), room, from: who, text}) + '\n');
   log(`chat message recorded (${room ? 'battle room' : 'private message'}); text in bot/out/chat.jsonl, for the user`);
+  // anyone can stop the bot by writing "pause" in any case (the user, 2026-10-14): the text is matched here, never shown or logged
+  if (/pause/i.test(text)) autoPause(room);
+}
+// set limits.json "paused" (both bots read it: no new searches; games in progress finish), and note when and where, without the text
+function autoPause(room) {
+  if (LOCAL) return;
+  const f = path.join(HERE, 'limits.json'); const L = JSON.parse(fs.readFileSync(f));
+  if (!L.paused) { L.paused = true; fs.writeFileSync(f, JSON.stringify(L, null, 2) + '\n'); }
+  fs.appendFileSync(path.join(OUT, 'auto_pause.jsonl'), JSON.stringify({when: new Date().toISOString(), room: room || 'private message'}) + '\n');
+  log(`auto-paused: a chat message asked for a pause (${room ? 'battle room' : 'private message'}); no new searches until the user unpauses`);
 }
 function onPM(from, to, text) {
   const who = from.replace(/^[^A-Za-z0-9]/, '').trim(); if (!me || who.toLowerCase() === me.toLowerCase() || SECONDARY) return;

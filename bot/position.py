@@ -205,6 +205,19 @@ def decide(specs, request, side, threads=2, seeds=32, log=None, cap=None, fmt=No
         spec_foes = [i + 1 for i, x in enumerate(st1.get('active') or []) if x is not None and not st1['pokemon'][x].get('fainted')]
     except Exception: spec_foes = None
     valid = [(j, command(j)) for j in joint]; valid = [(j, c) for j, c in valid if c]
+    if not valid:
+        # nothing in the mix is allowed (a choice refused and the request re-sent, e.g. a hidden Imprison disable revealed; 2026-10-13):
+        # the best-valued joint option the request allows, from the listed joint options, then from each slot's own options
+        listed = sorted(s0['joint'], key=lambda j: -j.get('v', 0.0))
+        valid = [(j, cm) for j, cm in ((j, command(j)) for j in listed) if cm][:1]
+        if not valid:
+            import itertools
+            tops = [sorted(sl['options'], key=lambda o: -o.get('v', 0.0))[:5] for sl in s0['slots']]
+            for combo in sorted(itertools.product(*tops), key=lambda cb: -sum(o.get('v', 0.0) for o in cb)):
+                j = {'label': ' | '.join(f"{sl['mon']}: {o['label']}" for sl, o in zip(s0['slots'], combo)), 'w': 1.0}
+                cm = command(j)
+                if cm: valid = [(j, cm)]; break
+        if valid: valid = [({**valid[0][0], 'w': 1.0}, valid[0][1])]
     if not valid: return 'default', 'no option the request allows: default', value
     pick, choice = random.choices(valid, weights=[j['w'] for j, _ in valid])[0]
     note = f"{pick['label']} ({100 * pick['w']:.0f}%, value {100 * value:.0f}%" + (f", contempt {c}" if c > 0 else '') + how + ")"

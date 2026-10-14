@@ -1264,3 +1264,11 @@ registrations since its second version) and checks reachability of real logs in 
 - **Moving the bot to v29 (checklist):** CHAMP_BIN to a champ-bot copy of v29, EG_VNET to vnet_h64_search_acc.json, and `'syrupDue': True` in
   evalbar/botpos.py's spec (the Eval bar's positions.js sets p.syrupTriggered from replay.py's syrupDone under it, 2026-10-13); client
   restarts between games / matches. Only after the v29 gate checks and the user's go.
+- **champ-battle-v30 (2026-10-13, 10:05 pm) = v29 with the hidden-disable fix reverted for planning.** v29 showed an Imprisoned move as
+  usable in the last active slot's move list (Showdown's request does), and planned on that list; but choosing it is refused
+  ("[Unavailable choice]") and the request re-sent with it disabled. request_moves (what can be chosen: hidden disables count) is the
+  planner's again; request_moves_shown (the displayed list) only for the differential test, which stays exact on every set. The bot's
+  decide() no longer falls to Showdown's 'default' when the mix has nothing the request allows: the best-valued allowed joint option.
+  Found on a Bo3 game (…2698029711 turn 2): the opponent's Farigiraf Imprisoned ours (Protect and Trick Room both), the bot planned on
+  both, its Protect was refused and the re-sent request answered 'default'. The bot's positions carry no Imprison volatile (a
+  battle-reading gap: the Eval bar's replay.py / positions.js). Bot: battlesim-champ29-bot -> champ-bot-2026-10-13b (v30).

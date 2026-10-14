@@ -29,16 +29,21 @@ trait Entry { fn entry(&mut self, k: (u8, Id)) -> &mut (u64, u64); }
 impl Entry for Vec<((u8, Id), (u64, u64))> { fn entry(&mut self, k: (u8, Id)) -> &mut (u64, u64) { if let Some(i) = self.iter().position(|e| e.0 == k) { &mut self[i].1 } else { self.push((k, (0, 0))); &mut self.last_mut().unwrap().1 } } }
 impl Battle {
     // ======================= choices and the queue =======================
-    /// pokemon.getMoves(lockedMove) as the request lists them: (move id, target, disabled)
-    pub fn request_moves(&mut self, m: MonRef) -> Vec<(Id, Id, bool)> {
+    /// the moves a player can actually choose: (move id, target, disabled). A hidden disable (Imprison) counts as disabled: Showdown's
+    /// request may show the move as usable (below), but choosing it is refused ("[Unavailable choice]") and the request re-sent with it
+    /// disabled (2026-10-13: v29 planned on the shown list and the bot's mix put all its weight on an Imprisoned Protect)
+    pub fn request_moves(&mut self, m: MonRef) -> Vec<(Id, Id, bool)> { self.request_moves_ex(m, false) }
+    /// pokemon.getMoves(lockedMove, restrictData) as the request lists them (the differential test compares this)
+    pub fn request_moves_shown(&mut self, m: MonRef) -> Vec<(Id, Id, bool)> { self.request_moves_ex(m, true) }
+    fn request_moves_ex(&mut self, m: MonRef, shown: bool) -> Vec<(Id, Id, bool)> {
         let locked = self.get_locked_move(m);
         if let Some(l) = locked {
             if l == "recharge" { return vec![(id("recharge"), id("self"), false)]; }
             return vec![(l, self.dex.mv(l).tmpl.target, false)];
         }
         // a hidden disable (Imprison) shows as usable in the side's last active Pokemon's request (getMoves' restrictData = isLastActive,
-        // 2026-10-13: an Imprisoned Farigiraf mirror read as Struggle); the move then fails when used
-        let last = { let s = m.0 as usize; let pos = self.p(m).position as usize; self.p(m).is_active && ((pos + 1)..2).all(|i| self.sides[s].active[i].map(|x| self.sides[s].pokemon[x as usize].fainted).unwrap_or(true)) };
+        // 2026-10-13: an Imprisoned Farigiraf mirror read as Struggle); choosing it is then refused (request_moves above)
+        let last = shown && { let s = m.0 as usize; let pos = self.p(m).position as usize; self.p(m).is_active && ((pos + 1)..2).all(|i| self.sides[s].active[i].map(|x| self.sides[s].pokemon[x as usize].fainted).unwrap_or(true)) };
         let p = self.p(m);
         let mut out = vec![]; let mut any = false;
         for s in &p.move_slots {

@@ -17,8 +17,10 @@ WEATHER = {'RainDance': 'Rain', 'SunnyDay': 'Sun', 'Sandstorm': 'Sandstorm', 'Sn
 WROCK = {'RainDance': 'damprock', 'SunnyDay': 'heatrock', 'Sandstorm': 'smoothrock', 'Snowscape': 'icyrock', 'Snow': 'icyrock'}
 SCREENS = ('Reflect', 'Light Screen', 'Aurora Veil')
 BINDING = {'Bind', 'Wrap', 'Fire Spin', 'Whirlpool', 'Sand Tomb', 'Clamp', 'Infestation', 'Magma Storm', 'Snap Trap', 'Thunder Cage'}
-BATON_PASS = False                                                        # the eval bar's programs set it (live.py, reach.py); the bot's do not yet
-MEGA_ABIL = False                                                         # Mega Evolution ends an ability gained in battle (Trace's); the eval bar's programs set it, the bot's not yet
+# the parser's fixes, on for every reader (an outside review, 2026-10-14: the replays' and training's reconstruction never switched them on, so a
+# cached replay rebuilt Mega Gardevoir with a traced Grassy Surge); the bot already set both. False only to reproduce an older reading
+BATON_PASS = True                                                         # Baton Pass hands on stages and effects
+MEGA_ABIL = True                                                          # Mega Evolution ends an ability gained in battle (Trace's)
 PASSED = {'Substitute', 'confusion', 'Leech Seed', 'Heal Block', 'Focus Energy', 'Curse', 'Aqua Ring', 'Ingrain', 'Magnet Rise', 'Power Trick', 'Gastro Acid',
           'Embargo', 'Telekinesis', 'Laser Focus'}                       # the volatiles Baton Pass hands on (Showdown's noCopy is false)
 CANT = {'flinch': 'flinched', 'slp': 'is asleep', 'par': 'is fully paralysed', 'frz': 'is frozen solid', 'recharge': 'must recharge',

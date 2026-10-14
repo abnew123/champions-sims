@@ -41,11 +41,15 @@ impl Stats {
 struct Cell { st: Vec<f64>, sum: f64, sq: f64, deep: Vec<Deep> }
 /// a deep roll: the child's value; node None when the child position is over or has no choices (its static value is then exact)
 struct Deep { v: f64, node: Option<Box<Node>> }
+/// EVAL_DEEP_K0 (default 0, 2026-10-14, the user: steady the decisions with depth): a cell's mean correction counts K / (K + k0) of
+/// itself with K deep rolls, so one costly child with a large correction no longer swings the cell (and the mixes) by all of it
+fn deep_k0() -> f64 { static F: std::sync::OnceLock<f64> = std::sync::OnceLock::new(); *F.get_or_init(|| envf("EVAL_DEEP_K0", 0.0).max(0.0)) }
 impl Cell {
     fn est(&self) -> f64 {
         let ms = self.sum / self.st.len().max(1) as f64;
         if self.deep.is_empty() { return ms; }
-        ms + self.deep.iter().enumerate().map(|(q, d)| d.v - self.st[q]).sum::<f64>() / self.deep.len() as f64
+        let k = self.deep.len() as f64;
+        ms + k / (k + deep_k0()) * self.deep.iter().enumerate().map(|(q, d)| d.v - self.st[q]).sum::<f64>() / k
     }
     fn var_st(&self) -> f64 { let n = self.st.len() as f64; if n < 2.0 { 0.0 } else { ((self.sq - self.sum * self.sum / n) / (n - 1.0)).max(0.0) } }
     fn var_err(&self) -> Option<f64> {

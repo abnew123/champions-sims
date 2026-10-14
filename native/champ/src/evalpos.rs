@@ -408,7 +408,9 @@ pub fn main(args: &[String]) {
             let mut b = crate::turntest::new_battle(dex, reg, &sp["state"], Mode::Real);
             if std::env::var("EVAL_REFRESH_DISABLES").map(|v| v != "0").unwrap_or(true) { b.refresh_disables(); }   // see Battle::refresh_disables
             let b = b;
-            eval_one(&b, cfg, &sp, h ^ 0xE7A1, nseeds, top) }));
+            // EVAL_KEY_SALT (2026-10-14): another draw of every seed, for measuring how much a search's answer moves with its luck alone
+            let salt: u64 = std::env::var("EVAL_KEY_SALT").ok().and_then(|x| x.parse().ok()).unwrap_or(0);
+            eval_one(&b, cfg, &sp, h ^ 0xE7A1 ^ salt.wrapping_mul(0x9E3779B97F4A7C15), nseeds, top) }));
         let mut row = match r {
             Ok(v) => v,
             Err(e) => json!({"error": e.downcast_ref::<String>().cloned().or(e.downcast_ref::<&str>().map(|s| s.to_string())).unwrap_or("panic".into())}),

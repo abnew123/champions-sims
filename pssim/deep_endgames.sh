@@ -17,5 +17,5 @@ arm() {
   echo "$(date +%H:%M:%S) done: arm $a" >> deep_end_${TAG}_$a.log
 }
 arm B & arm C & wait
-../.venv/bin/python3 deep_endgames.py report $ST $SP/deepend/${TAG}_B $SP/deepend/${TAG}_C
+${PY:-../.venv/bin/python3} deep_endgames.py report $ST $SP/deepend/${TAG}_B $SP/deepend/${TAG}_C   # PY: python3 on the AWS box
 echo "$(date '+%I:%M %p') done"

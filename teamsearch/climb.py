@@ -220,13 +220,16 @@ def run_round(mode):
     games = sum(60 * (cfg['bring_k'] * (1 + len(p['top']) + len(p['rand'])) + cfg['confirm_pj'] * (1 + cfg['top_k'])) for p in plan.values())
     print(f"round {rnd} ({mode}): {len(active)} teams, about {games} games", flush=True)
     uniq = lambda ts: list({key_s(t): t for t in ts}.values())
-    scr_teams = uniq([p['cur'] for p in plan.values()] + [x[3] for p in plan.values() for x in p['top'] + p['rand']])
+    # starts interleaved (2026-10-14): a start's neighbours share most fours, so run them apart and the later ones find those games in
+    # the game cache instead of playing them at the same time (the order never changes a result)
+    mix = lambda ls: [l[i] for i in range(max(map(len, ls), default=0)) for l in ls if i < len(l)]
+    scr_teams = uniq([p['cur'] for p in plan.values()] + mix([[x[3] for x in p['top'] + p['rand']] for p in plan.values()]))
     progress(round=rnd, mode=mode, phase='screen', starts=len(active), teams=len(scr_teams), seed=seed_s, per_job=1, jobs_per_team=live_jobs('screen'))
     os.environ['TS_BRING_K'] = str(cfg['bring_k'])
     scr = dict(zip(map(key_s, scr_teams), E.search_many(scr_teams, seed_s)))
     for n, p in plan.items():
         p['ranked'] = sorted(p['top'] + p['rand'], key=lambda x: -paired(scr[key_s(p['cur'])], scr[key_s(x[3])])[0])[:cfg['top_k']]
-    con_teams = uniq([p['cur'] for p in plan.values()] + [x[3] for p in plan.values() for x in p['ranked']])
+    con_teams = uniq([p['cur'] for p in plan.values()] + mix([[x[3] for x in p['ranked']] for p in plan.values()]))
     progress(round=rnd, mode=mode, phase='confirm', starts=len(active), teams=len(con_teams), seed=seed_c, per_job=1 if os.environ.get('TS_OPP') == 'pool' else cfg['confirm_pj'], jobs_per_team=live_jobs())
     con = dict(zip(map(key_s, con_teams), E.evaluate_fixed(con_teams, [scr[key_s(t)]['chosen'] for t in con_teams], cfg['confirm_pj'], seed_c)))
     accepted_megas = []

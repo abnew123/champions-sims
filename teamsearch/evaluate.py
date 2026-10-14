@@ -8,7 +8,7 @@ can't run ('unsupported') are dropped.
 Per team, under runs/<team key>/: myteam.json, jobs.json, grid/ (one-on-one cells for the planner), starts_*.jsonl, out_*/.
   env: TS_SIM (sim setup, see SIMS), TS_PERISH=real (Perish trap from real data, see perish_stock.py), TS_EG_VALUE (value weights, default pssim/egvalue5.json: 4v4 self-play, second round), TS_ANTICIPATE (default 1), TS_PARALLEL (teams at once, default 1), TS_THREADS (threads each)
 """
-import json, os, sys, hashlib, subprocess, time, shutil
+import json, os, sys, hashlib, subprocess, time, shutil, threading
 from concurrent.futures import ThreadPoolExecutor
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, '..'); PS = os.path.join(ROOT, 'pssim')
@@ -165,21 +165,41 @@ def run_team(gids, per_job, seed0, threads, fixed=None, label=''):
 
 def run_jobs(gids, jobs, per_job, seed0, threads, label, extra=None):
     """run_jobs_raw behind the cross-team game cache (gamecache.py), when TS_GAME_CACHE is set, the setup has a seed key and every
-    job carries meta.seed_index: cached games are returned as they are, only the others are played (in a sub-run of their own)"""
+    job carries meta.seed_index: cached games are returned as they are, only the others are played (in a sub-run of their own).
+    A game another team of this process is already playing is waited for, not played twice (outside review, 2026-10-14)."""
     path = os.environ.get('TS_GAME_CACHE')
     if not (path and SIMS[sim()].get('seedkey') and jobs and all('seed_index' in (j.get('meta') or {}) for j in jobs)):
         return run_jobs_raw(gids, jobs, per_job, seed0, threads, label, extra)
     import gamecache as GC
     ed = (extra or {}).get('TS_ENGINE_DATA', os.environ.get('TS_ENGINE_DATA', '../native/engine_data_spot.json'))
-    keys = [GC.key(sim(), ed, seed0, per_job, j) for j in jobs]; have = GC.get_many(path, list(set(keys)))
-    miss = sorted({k: i for i, k in reversed(list(enumerate(keys))) if k not in have}.values())     # one run per distinct missing game
-    if miss:
-        sub = [jobs[i] for i in miss]; h = hashlib.md5(json.dumps(sub, sort_keys=True).encode()).hexdigest()[:8]
-        rows = run_jobs_raw(gids, sub, per_job, seed0, threads, f'{label}_c{h}', extra)
-        GC.put_many(path, [(keys[i], r) for i, r in zip(miss, rows)]); have.update({keys[i]: r for i, r in zip(miss, rows)})
-    CACHE_STATS['jobs'] += len(jobs); CACHE_STATS['played'] += len(miss)
+    keys = [GC.key(sim(), ed, seed0, per_job, j) for j in jobs]; first = {}
+    for i, k in enumerate(keys): first.setdefault(k, i)
+    have = GC.get_many(path, list(first)); mine, wait = [], {}
+    with _PLOCK:
+        for k in first:
+            if k in have: continue
+            if k in _PENDING: wait[k] = _PENDING[k]
+            else: _PENDING[k] = threading.Event(); mine.append(k)
+    def play(ks, tag):
+        sub = [jobs[first[k]] for k in ks]; h = hashlib.md5(json.dumps(sub, sort_keys=True).encode()).hexdigest()[:8]
+        rows = run_jobs_raw(gids, sub, per_job, seed0, threads, f'{label}_{tag}{h}', extra)
+        GC.put_many(path, list(zip(ks, rows))); have.update(zip(ks, rows))
+    try:
+        if mine: play(mine, 'c')
+    finally:
+        with _PLOCK:
+            for k in mine: _PENDING.pop(k).set()
+    if wait:
+        for ev in wait.values(): ev.wait()
+        have.update(GC.get_many(path, list(wait)))
+        left = [k for k in wait if k not in have]                       # the other team's run failed: play them here
+        if left: play(left, 'w')
+    with _PLOCK:
+        CACHE_STATS['jobs'] += len(jobs); CACHE_STATS['unique'] += len(first); CACHE_STATS['played'] += len(mine)
+        CACHE_STATS['waited'] += len(wait)
     return [have[k] for k in keys]
-CACHE_STATS = {'jobs': 0, 'played': 0}
+CACHE_STATS = {'jobs': 0, 'unique': 0, 'played': 0, 'waited': 0}
+_PENDING = {}; _PLOCK = threading.Lock()
 
 def run_jobs_raw(gids, jobs, per_job, seed0, threads, label, extra=None):
     """battles for an explicit job list (archetype mode: {arch, k, lead, back} with my species names) -> list of per-job rows.
@@ -187,9 +207,15 @@ def run_jobs_raw(gids, jobs, per_job, seed0, threads, label, extra=None):
     process, and a shared os.environ let one team unset another's engine data mid-launch (2026-10-06)"""
     d = os.path.join(HERE, 'runs', f'{label}_{team_key(gids)}'); os.makedirs(d, exist_ok=True)
     team = {G[g]['species']: {k: G[g][k] for k in ('species', 'item', 'ability', 'nature', 'evs', 'moves')} for g in gids}
-    json.dump(team, open(os.path.join(d, 'myteam.json'), 'w'), indent=1); json.dump(jobs, open(os.path.join(d, 'jobs.json'), 'w'))
-    if SIMS[sim()].get('grid', True) and MG.merge_gids(os.path.join(d, 'grid'), gids): raise RuntimeError('missing one-on-one cells')
     starts, out = os.path.join(d, f'starts_{seed0}_{per_job}.jsonl'), os.path.join(d, f'out_{out_tag(seed0, per_job)}')
+    jp = os.path.join(d, 'jobs.json')
+    if os.path.exists(jp) and (os.path.exists(starts) or os.path.exists(out)) and \
+            json.dumps(json.load(open(jp)), sort_keys=True) != json.dumps(jobs, sort_keys=True):
+        stamp = time.strftime('%Y%m%d%H%M%S')                    # same label, other jobs (a changed shortlist or pool; outside review,
+        for f in (starts, out):                                   # 2026-10-14): never attach the old games to the new jobs
+            if os.path.exists(f): os.replace(f, f'{f}.stale{stamp}')
+    json.dump(team, open(os.path.join(d, 'myteam.json'), 'w'), indent=1); json.dump(jobs, open(jp, 'w'))
+    if SIMS[sim()].get('grid', True) and MG.merge_gids(os.path.join(d, 'grid'), gids): raise RuntimeError('missing one-on-one cells')
     env = dict(os.environ, MYTEAM=os.path.join(d, 'myteam.json'), **(extra or {}))
     if not os.path.exists(starts):
         subprocess.run([procs.node(), '../native/battle_starts.js', os.path.join(d, 'jobs.json'), starts + '.tmp', str(per_job), str(seed0)],
@@ -248,20 +274,30 @@ def search_team(gids, seed0, threads, K=None, sp=1):
     return dict(score=sum(P.ARCH_SHARE[a] * by_arch[a] for a in ARCHS) / sum(P.ARCH_SHARE.values()), by_arch=by_arch, per_job=per,
                 games=sum(n for _, n in val.values()), chosen={a: R[a][best[a]] for a in live}, rank={a: best[a] + 1 for a in live})
 
-BOOST = [0]     # threads per battle run while a stage has fewer items than TS_PARALLEL (set by parallel(), read by run_jobs)
+_TL = threading.local()   # per worker thread: battle threads for the item it runs (set by parallel(), read by run_jobs_raw)
+class _Boost:
+    def __getitem__(self, i): return getattr(_TL, 'boost', 0)
+BOOST = _Boost()
 def parallel(fn, items, label):
-    """fn over items, TS_PARALLEL at once. A stage with fewer items than that spreads all TS_PARALLEL x TS_THREADS threads over them
-    (2026-10-13: the last climb's late rounds ran 13 teams x 3 threads on a 96-core box, 60% idle); thread counts don't change results"""
-    par = int(os.environ.get('TS_PARALLEL', 1)); done = [0]; t0 = time.time()
-    thr = int(os.environ.get('TS_THREADS', 3)); BOOST[0] = (par * thr) // len(items) if 0 < len(items) < par else 0
+    """fn over items, TS_PARALLEL at once. An item that starts when fewer than TS_PARALLEL items are left (a small stage, or a stage's
+    tail) runs with TS_PARALLEL x TS_THREADS / (items left) threads (2026-10-13: the last climb's late rounds left 60% of the box idle;
+    outside review 2026-10-14: the tail of a stage too). Thread counts never change results. Prints the stage's game counts."""
+    par = int(os.environ.get('TS_PARALLEL', 1)); done = [0]; started = [0]; t0 = time.time(); lk = threading.Lock()
+    thr = int(os.environ.get('TS_THREADS', 3)); c0 = dict(CACHE_STATS)
     def one(x):
-        r = fn(x); done[0] += 1
-        if done[0] % 10 == 0 or done[0] == len(items):
-            print(time.strftime('%I:%M %p'), f'  {label}: {done[0]}/{len(items)} teams, {(time.time() - t0) / 60:.0f} min', flush=True)
+        with lk: started[0] += 1; left = len(items) - started[0] + 1
+        _TL.boost = (par * thr) // left if left < par else 0
+        try: r = fn(x)
+        finally: _TL.boost = 0
+        with lk: done[0] += 1; n = done[0]
+        if n % 10 == 0 or n == len(items):
+            print(time.strftime('%I:%M %p'), f'  {label}: {n}/{len(items)} teams, {(time.time() - t0) / 60:.0f} min', flush=True)
         return r
-    try:
-        with ThreadPoolExecutor(par) as ex: return list(ex.map(one, items))
-    finally: BOOST[0] = 0
+    with ThreadPoolExecutor(par) as ex: res = list(ex.map(one, items))
+    d = {k: CACHE_STATS[k] - c0[k] for k in CACHE_STATS}
+    if d['jobs']: print(time.strftime('%I:%M %p'), f"  {label}: games asked {d['jobs']}, distinct per team {d['unique']}, played {d['played']}, "
+                        f"waited for another team {d['waited']}, cached {d['unique'] - d['played'] - d['waited']} ({(time.time() - t0) / 60:.0f} min)", flush=True)
+    return res
 
 def pool_mode(): return os.environ.get('TS_OPP') == 'pool'        # real-game opponent pool (poolmode.py) instead of archetype models
 

@@ -1261,3 +1261,6 @@ registrations since its second version) and checks reachability of real logs in 
   Bug Bite, Shed Tail, Instruct, Curse). Partner-target self-play on the 800 pool starts: -0.1 ± 0.2 (794 / 798 games unchanged).
   The net is v28's (vnet_h64_search_acc.json): the features are v28's. `src_battle_v29.tar.gz`, `bin/champ-battle-v29.sha256`.
   Positions built from logs must set syrupTriggered for a Pokemon whose Supersweet Syrup has activated (else it fires again).
+- **Moving the bot to v29 (checklist):** CHAMP_BIN to a champ-bot copy of v29, EG_VNET to vnet_h64_search_acc.json, and `'syrupDue': True` in
+  evalbar/botpos.py's spec (the Eval bar's positions.js sets p.syrupTriggered from replay.py's syrupDone under it, 2026-10-13); client
+  restarts between games / matches. Only after the v29 gate checks and the user's go.

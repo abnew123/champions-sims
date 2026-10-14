@@ -189,6 +189,7 @@ function onPM(from, to, text) {
   const who = from.replace(/^[^A-Za-z0-9]/, '').trim(); if (!me || who.toLowerCase() === me.toLowerCase() || SECONDARY) return;
   noteChat('', who, text);
   if (text.startsWith('/challenge')) return;   // handled by updatechallenges
+  if ('~&@%#'.includes(from.trim()[0])) return;   // no canned "I'm a bot" reply to staff (the registration ticket's ~Staff, moderators)
   if (pmReplied.has(who.toLowerCase())) return; pmReplied.add(who.toLowerCase());
   send(`|/pm ${who}, ${limits().pm_reply}`);
 }

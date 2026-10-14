@@ -309,6 +309,46 @@ pub fn register(r: &mut Reg) {
     h!(r, Move, "freezedry", "onEffectiveness", |b, a| { if b.eff_type == "Water" { return RV::N(1.0); } RV::Undef });
     // Flying Press (2026-10-13, v29: the Eval bar's unsupported list): its Fighting effectiveness plus Flying's against each type
     h!(r, Move, "flyingpress", "onEffectiveness", |b, a| { RV::N(a.relay.num() + b.dex.effectiveness("Flying", b.eff_type) as f64) });
+    // Sleep Talk (v29): only while asleep (or Comatose); a random move of the user's, not a charging or nosleeptalk one, used outright
+    h!(r, Move, "sleeptalk", "onTry", |b, a| { let m = a.t(); RV::B(b.p(m).status == "slp" || b.has_ability(m, "comatose")) });
+    h!(r, Move, "sleeptalk", "onHit", |b, a| {
+        let m = a.t(); let am = a.am();
+        let ids: Vec<Id> = b.p(m).move_slots.iter().map(|x| x.id).filter(|x| { let t = &b.dex.mv(x).tmpl; !t.flag("nosleeptalk") && !t.flag("charge") }).collect();
+        if ids.is_empty() { return RV::B(false); }
+        let mid = ids[b.prng.sample_idx(ids.len())];
+        let ni = b.new_am(b.dex.active_move(mid)); b.use_move(ni, m, None, Some(Eff::mv(id("sleeptalk"), am)));
+        RV::Undef });
+    // Beat Up (v29): one hit per party member that is the user or unfainted without a status (in party order), each 5 + base Attack / 10
+    h!(r, Move, "beatup", "onModifyMove", |b, a| {
+        let (m, am) = (a.t(), a.am()); let s = m.0 as usize;
+        let mut party: Vec<(u8, f64)> = b.sides[s].pokemon.iter().enumerate()
+            .filter(|(i, p)| (m.0, *i as u8) == m || (!p.fainted && p.status.is_empty()))
+            .map(|(_, p)| (p.position, b.dex.species.get(p.set_species).map(|x| x.stats[1]).unwrap_or(0) as f64)).collect();
+        party.sort_by_key(|x| x.0); let n = party.len() as i64;
+        for (k, (_, atk)) in party.iter().enumerate() { b.amm(am).set_misc(&format!("beatup{}", k), *atk); }
+        b.amm(am).set_misc("beatupi", 0.0); b.amm(am).multihit = Some((n, n)); RV::Undef });
+    h!(r, Move, "beatup", "basePowerCallback", |b, a| {
+        let am = a.am(); let i = b.am(am).misc("beatupi").unwrap_or(0.0) as usize;
+        let atk = b.am(am).misc(&format!("beatup{}", i)).unwrap_or(0.0); b.amm(am).set_misc("beatupi", (i + 1) as f64);
+        RV::N(5.0 + (atk / 10.0).floor()) });
+    // Guard Split (v29, the unsupported list): the two Pokemon's stored Defense and Special Defense averaged (stored: hp atk def spa spd spe)
+    h!(r, Move, "guardsplit", "onHit", |b, a| {
+        let (t, s) = (a.t(), a.s());
+        for k in [2usize, 4] { let v = (b.p(t).stored[k] + b.p(s).stored[k]).div_euclid(2); b.pm(t).stored[k] = v; b.pm(s).stored[k] = v; }
+        if b.logging { let (ns, nt) = (b.mon_name(s), b.mon_name(t)); let of = format!("[of] {}", nt); b.add(&["-activate", &ns, "move: Guard Split", &of]); }
+        RV::Undef });
+    // Defog (v29): the target's evasion down (not through a Substitute), screens / Safeguard / Mist / hazards off the target's side,
+    // hazards off the user's, the terrain cleared
+    h!(r, Move, "defog", "onHit", |b, a| {
+        let (t, s) = (a.t(), a.s()); let am = a.am(); let mut ok = false;
+        if !b.has_vol(t, "substitute") || b.am(am).infiltrates { ok = b.boost(vec![(6, -1)], Some(t), Some(s), None, false, false).truthy(); }
+        let all = ["spikes", "toxicspikes", "stealthrock", "stickyweb", "gmaxsteelsurge"];
+        for c in ["reflect", "lightscreen", "auroraveil", "safeguard", "mist", "spikes", "toxicspikes", "stealthrock", "stickyweb", "gmaxsteelsurge"] {
+            if b.remove_side_condition(t.0, c) && all.contains(&c) { ok = true; }
+        }
+        for c in all { if b.remove_side_condition(s.0, c) { ok = true; } }
+        b.clear_terrain();
+        RV::B(ok) });
     h!(r, Move, "facade", "onBasePower", |b, a| { let m = a.t(); let st = b.p(m).status; if !st.is_empty() && st != "slp" { return b.cm(2.0, 1.0); } RV::Undef });
     h!(r, Move, "barbbarrage", "onBasePower", |b, a| { let t = a.s(); let st = b.p(t).status; if st == "psn" || st == "tox" { return b.cm(2.0, 1.0); } RV::Undef });
     h!(r, Move, "ficklebeam", "onBasePower", |b, a| { if b.rchance(3, 10) { return b.cm(2.0, 1.0); } RV::Undef });

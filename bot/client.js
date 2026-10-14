@@ -302,6 +302,7 @@ async function searchWithTeam(cmd) {
   try { if (fs.readFileSync(lf, 'utf8').split(' ')[1] === LOCK_ID) fs.unlinkSync(lf); } catch (e) {}
   return true;
 }
+let loopOn = false;
 async function onReady() {
   await refreshTop(); await refreshMyRating();
   if (loopOn) return; loopOn = true;   // a later login (reconnect, logged back in) keeps the one loop

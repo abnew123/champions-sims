@@ -421,6 +421,10 @@ from mid-battle positions of real sheets) is theirs and found several engine bug
   rebuilds its page and saves it with refined set; build prefers refined values and marks each turn's tier; the page shows "quick read" on
   the rest. Saved pages (bot_<n>_page.json, PAGE_V) make a restart take seconds. Battle sim's budgeted engine (planner_issues 18: EVAL_BUDGET,
   value_se) will replace the seed counts; each budget needs its own CAL, and a 1/5/15/60 s accuracy check on the bot games is promised.
+- live.evalbar_mode() switches on the eval bar's own reading: Baton Pass, a Mega ending a traced ability, fitted spreads, and the damage
+  check's positions with battlestate.FLAGS (spreads.DMG_FLAGS). live.py, broadcast.py (the streams, which had none of these before
+  2026-10-14) and reach.py call it; the bot never does. The calibration set (out/acc_p1.jsonl, CAL 0.676) predates battlestate: rebuild
+  it through spots.specs before the next CAL refit (the Stream watcher found 299 of 403 sampled states differ).
 - The -start lines in the replays against what positions.js carries: still left out (approx) are Charge (38 games), Stockpile (28), Focus
   Energy / Dragon Cheer (26), Salt Cure (7), Curse (9), Octolock (6), Smack Down (4), Future Sight (4), No Retreat (3).
 

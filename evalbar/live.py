@@ -512,6 +512,13 @@ def others_busy():
 class Finished:
     """a finished bot game read from its saved page: what BotRunner.serve needs of a Live"""
     def __init__(s, room, fmt, data, refined=False): s.room, s.fmt, s.data, s.status, s.refined = room, fmt, data, 'finished', refined
+def evalbar_mode():
+    """the eval bar's own reading, switched on by its programs' entry points (live.py, broadcast.py for the streams, reach.py), never by the
+    bot's, which sets its own: Baton Pass hands on stages and effects, a Mega Evolution ends a traced ability, the fitted default spreads, and
+    the damage check's positions with the same positions.js fixes as the rest (battlestate.FLAGS). The streams had none of these until
+    2026-10-14 (broadcast.py's entry point never set them)"""
+    import spreads, battlestate as BS
+    R.BATON_PASS = R.MEGA_ABIL = True; spreads.FITTED = True; spreads.DMG_FLAGS = dict(BS.FLAGS)
 def botfmt(room):
     """the bot page's format line: its Bo1 games (since 2026-10-12) have no team sheets, so the opponent's sets are guessed as a spectator's"""
     return ('Bo3, open team sheets' if 'bo3' in room else 'Bo1, closed team sheets') + ' · the bot is Player 1, its side from its own log'
@@ -604,8 +611,7 @@ class BotRunner:
                 print(time.strftime('%-I:%M %p'), 'following the bot\'s game', num, flush=True)
             time.sleep(5)
 if __name__ == '__main__':
-    P.own(); R.BATON_PASS = R.MEGA_ABIL = True                                            # Baton Pass hands on stages and effects (replay.py; the bot's own runs leave it off)
-    import spreads; spreads.FITTED = True                                                 # fitted default spreads (spreads.fitted; the bot's runs leave it off)
+    P.own(); evalbar_mode()
     a = sys.argv[1:]
     if not a: sys.exit(__doc__)
     if a[0] == 'list':

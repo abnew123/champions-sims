@@ -11,7 +11,7 @@ part 'hold' = Eval bar's 560 accuracy-set games (the held-out set every value co
       features, static) and champ vfeats (the matchup features, dev build)
   ../.venv/bin/python3 value_data.py positions new    games fetched since (in neither set) -> part 'new'; then search 6 new, feats new
 Outcomes and ratings come from the logs; names are only compared to find the winner, never kept."""
-import os, sys, json, glob, collections
+import os, sys, json, glob, collections, hashlib
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(ROOT, 'evalbar'))
 OUT = os.path.join(HERE, 'results', 'value')
@@ -22,6 +22,20 @@ def held_games():
     if os.path.exists(keep): return set(json.load(open(keep)))
     g = sorted({json.loads(l)['name'].split(' ')[0] for l in open(HOLD_SRC)})
     os.makedirs(OUT, exist_ok=True); json.dump(g, open(keep, 'w')); return set(g)
+def sha(path):
+    h = hashlib.sha256()
+    with open(path, 'rb') as f:
+        for chunk in iter(lambda: f.read(1 << 20), b''): h.update(chunk)
+    return h.hexdigest()
+def stale(out, src):
+    """an output made from another version of its positions file (its <out>.src stamp differs, or it has none) is removed, so evalpos's
+    resume-by-name never keeps search targets of positions that were rebuilt (the outside review, 2026-10-14: a position rebuilt from a
+    win to a loss still scored 1.0). Returns the source's hash, to stamp the output with once it is complete."""
+    h = sha(src); st = out + '.src'
+    if os.path.exists(out) and (not os.path.exists(st) or open(st).read().strip() != h):
+        os.remove(out); print('removed a stale output:', os.path.basename(out))
+    return h
+def stamp(out, h): open(out + '.src', 'w').write(h + '\n')
 def outcome(log):
     players, win, ratings = {}, None, []
     for l in log.split('\n'):
@@ -75,16 +89,18 @@ def search(threads=6, parts=('hold', 'fit')):
     import subprocess
     env = dict(os.environ, **ENV, EVAL_SEEDS='32', EVAL_ADAPT='1', GRID_DIR=grid())
     for part in parts:
-        subprocess.run([BIN, 'evalpos', DATA, os.path.join(OUT, f'real_{part}.pos.jsonl'), os.path.join(OUT, f'real_{part}.eval.jsonl'), str(threads)], cwd=HERE, env=env, check=True)
+        src, out = os.path.join(OUT, f'real_{part}.pos.jsonl'), os.path.join(OUT, f'real_{part}.eval.jsonl')
+        h = stale(out, src)   # a resumed run continues only on the same positions
+        subprocess.run([BIN, 'evalpos', DATA, src, out, str(threads)], cwd=HERE, env=env, check=True); stamp(out, h)
 def feats(parts=('hold', 'fit')):
     """champ feats (the 28 v22 features) and champ vfeats (vfeats.rs, the dev build) for each part"""
     import subprocess
     env = dict(os.environ, **ENV, RACE_PRIO='1', FEATS22='1', GRID_DIR=grid())
     for part in parts:
         for cmd, binary in (('feats', BIN), ('vfeats', BIN + '-dev')):
-            out = os.path.join(OUT, f'real_{part}.{cmd}.jsonl')
+            out, src = os.path.join(OUT, f'real_{part}.{cmd}.jsonl'), os.path.join(OUT, f'real_{part}.pos.jsonl')
             if os.path.exists(out): os.remove(out)
-            subprocess.run([binary, cmd, DATA, os.path.join(OUT, f'real_{part}.pos.jsonl'), out, '2'], cwd=HERE, env=env, check=True)
+            h = sha(src); subprocess.run([binary, cmd, DATA, src, out, '2'], cwd=HERE, env=env, check=True); stamp(out, h)
 if __name__ == '__main__':
     a = sys.argv[1:]
     P = tuple(a[2].split(',')) if len(a) > 2 else ('hold', 'fit')

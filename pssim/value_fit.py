@@ -17,13 +17,24 @@ def load(part):
     # VALUE_EVAL_SUFFIXES (2026-10-13): several override layers in order, e.g. _fc,_acc (the accuracy fix's redone searches over the full
     # calc data's); default VALUE_SUFFIX alone
     sfx = os.environ.get('VALUE_SUFFIX', ''); layers = [x for x in os.environ.get('VALUE_EVAL_SUFFIXES', sfx).split(',') if x]
-    for pe in [os.path.join(OUT, f'real_{part}.eval.jsonl')] + [os.path.join(OUT, f'real_{part}{x}.eval.jsonl') for x in layers]:
-        if os.path.exists(pe):
+    # once the base search is stamped with its positions' hash (value_data.py, 2026-10-14), every file read must carry the same stamp:
+    # the _fc / _acc layers and features of an older rebuild are refused rather than mixed in by name (the outside review)
+    base = os.path.join(OUT, f'real_{part}.eval.jsonl')
+    want = open(base + '.src').read().strip() if os.path.exists(base + '.src') else None
+    def ok(f):
+        if want is None: return True
+        got = open(f + '.src').read().strip() if os.path.exists(f + '.src') else None
+        if got != want: print(f'  skipping {os.path.basename(f)}: made from other positions than the current real_{part}.pos.jsonl'); return False
+        return True
+    for pe in [base] + [os.path.join(OUT, f'real_{part}{x}.eval.jsonl') for x in layers]:
+        if os.path.exists(pe) and ok(pe):
             for l in open(pe):
                 r = json.loads(l)
                 if 'error' not in r: ev[r['name']] = r['value']
     E, S, y, g, st, sv, names, rt = [], [], [], [], [], [], [], []
-    for l in open(os.path.join(OUT, f"real_{part}.vfeats{os.environ.get('VALUE_SUFFIX', '')}.jsonl")):
+    vf = os.path.join(OUT, f"real_{part}.vfeats{os.environ.get('VALUE_SUFFIX', '')}.jsonl")
+    if not ok(vf): raise SystemExit(f'the features in {os.path.basename(vf)} do not belong to the current positions: run value_data.py feats')
+    for l in open(vf):
         r = json.loads(l)
         if 'error' in r or r['name'] not in meta: continue
         m = meta[r['name']]; x = np.array(r['x'][:28])

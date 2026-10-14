@@ -8,7 +8,7 @@ can't run ('unsupported') are dropped.
 Per team, under runs/<team key>/: myteam.json, jobs.json, grid/ (one-on-one cells for the planner), starts_*.jsonl, out_*/.
   env: TS_SIM (sim setup, see SIMS), TS_PERISH=real (Perish trap from real data, see perish_stock.py), TS_EG_VALUE (value weights, default pssim/egvalue5.json: 4v4 self-play, second round), TS_ANTICIPATE (default 1), TS_PARALLEL (teams at once, default 1), TS_THREADS (threads each)
 """
-import json, os, sys, hashlib, subprocess, time, shutil, threading
+import json, os, sys, glob, hashlib, subprocess, time, shutil, threading
 from concurrent.futures import ThreadPoolExecutor
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, '..'); PS = os.path.join(ROOT, 'pssim')
@@ -80,6 +80,13 @@ SIMS = {
     'v28': dict(bin='champ-battle-v28', eg='egvalue9_sym2.json', grid=False, seedkey=True,
                 env=dict(V26_ENV, EG_VNET='../bot/value/vnet_h64_search_acc.json')),
     'v28s': dict(bin='champ-battle-v28', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V26_ENV)),
+    # v32 (Battle sim, 2026-10-14; the climb's frozen setup): v28's flags and net on the engine with v29-v32's ports (Revival Blessing,
+    # Beat Up, Defog, Sleep Talk, ...), partner-target options (moves players aim at their partner > 10%), Imprison as a disable, and
+    # the planner's immunity filter fixed (Pixilate / Aerilate / Scrappy single-target attacks into an immunity were dropped). deep.rs
+    # is inert (EVAL_DEPTH / BATTLE_EVAL unset).
+    'v32': dict(bin='champ-battle-v32', eg='egvalue9_sym2.json', grid=False, seedkey=True,
+                env=dict(V26_ENV, EG_VNET='../bot/value/vnet_h64_search_acc.json')),
+    'v32s': dict(bin='champ-battle-v32', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V26_ENV)),
 }
 def sim(): return os.environ.get('TS_SIM', 'v3')
 def out_tag(seed0, per_job): return f'{seed0}_{per_job}' if sim() == 'v3' else f'{sim()}_{seed0}_{per_job}'
@@ -209,11 +216,10 @@ def run_jobs_raw(gids, jobs, per_job, seed0, threads, label, extra=None):
     team = {G[g]['species']: {k: G[g][k] for k in ('species', 'item', 'ability', 'nature', 'evs', 'moves')} for g in gids}
     starts, out = os.path.join(d, f'starts_{seed0}_{per_job}.jsonl'), os.path.join(d, f'out_{out_tag(seed0, per_job)}')
     jp = os.path.join(d, 'jobs.json')
-    if os.path.exists(jp) and (os.path.exists(starts) or os.path.exists(out)) and \
-            json.dumps(json.load(open(jp)), sort_keys=True) != json.dumps(jobs, sort_keys=True):
+    if os.path.exists(jp) and json.dumps(json.load(open(jp)), sort_keys=True) != json.dumps(jobs, sort_keys=True):
         stamp = time.strftime('%Y%m%d%H%M%S')                    # same label, other jobs (a changed shortlist or pool; outside review,
-        for f in (starts, out):                                   # 2026-10-14): never attach the old games to the new jobs
-            if os.path.exists(f): os.replace(f, f'{f}.stale{stamp}')
+        for f in glob.glob(os.path.join(d, 'starts_*.jsonl')) + glob.glob(os.path.join(d, 'out_*')):   # 2026-10-14): every seed's
+            if '.stale' not in f: os.replace(f, f'{f}.stale{stamp}')                                     # files, not just this one's
     json.dump(team, open(os.path.join(d, 'myteam.json'), 'w'), indent=1); json.dump(jobs, open(jp, 'w'))
     if SIMS[sim()].get('grid', True) and MG.merge_gids(os.path.join(d, 'grid'), gids): raise RuntimeError('missing one-on-one cells')
     env = dict(os.environ, MYTEAM=os.path.join(d, 'myteam.json'), **(extra or {}))
@@ -279,16 +285,20 @@ class _Boost:
     def __getitem__(self, i): return getattr(_TL, 'boost', 0)
 BOOST = _Boost()
 def parallel(fn, items, label):
-    """fn over items, TS_PARALLEL at once. An item that starts when fewer than TS_PARALLEL items are left (a small stage, or a stage's
-    tail) runs with TS_PARALLEL x TS_THREADS / (items left) threads (2026-10-13: the last climb's late rounds left 60% of the box idle;
-    outside review 2026-10-14: the tail of a stage too). Thread counts never change results. Prints the stage's game counts."""
-    par = int(os.environ.get('TS_PARALLEL', 1)); done = [0]; started = [0]; t0 = time.time(); lk = threading.Lock()
+    """fn over items, TS_PARALLEL at once. Each item starts with max(TS_THREADS, free threads / items not yet started), free = TS_PARALLEL x
+    TS_THREADS minus what running items hold: a small stage spreads the whole budget (2026-10-13: the last climb's late rounds left 60% of
+    the box idle), and the budget is never exceeded. Thread counts never change results. Prints the stage's game counts."""
+    par = int(os.environ.get('TS_PARALLEL', 1)); done = [0]; started = [0]; held = [0]; t0 = time.time(); lk = threading.Lock()
     thr = int(os.environ.get('TS_THREADS', 3)); c0 = dict(CACHE_STATS)
     def one(x):
-        with lk: started[0] += 1; left = len(items) - started[0] + 1
-        _TL.boost = (par * thr) // left if left < par else 0
+        with lk:                                    # only free capacity is handed out: the budget minus the threads running items hold
+            started[0] += 1; left = len(items) - started[0] + 1          # (outside review, 2026-10-14: the first rule oversubscribed)
+            t = max(thr, (par * thr - held[0]) // left); held[0] += t
+        _TL.boost = t
         try: r = fn(x)
-        finally: _TL.boost = 0
+        finally:
+            _TL.boost = 0
+            with lk: held[0] -= t
         with lk: done[0] += 1; n = done[0]
         if n % 10 == 0 or n == len(items):
             print(time.strftime('%I:%M %p'), f'  {label}: {n}/{len(items)} teams, {(time.time() - t0) / 60:.0f} min', flush=True)

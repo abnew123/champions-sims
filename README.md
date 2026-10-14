@@ -58,7 +58,7 @@ Run from the repo root unless noted.
 | Eval bar page for one replay | `python3 evalbar/build.py <replay id>`, written to `evalbar/out/` |
 | Follow a Showdown battle as a spectator | `python3 evalbar/live.py list`, then `python3 evalbar/live.py watch <room>` |
 | Broadcast watcher (a LaunchAgent; page on http://localhost:8768) | `python3 evalbar/auto.py streams`, `install` or `uninstall` |
-| Hill climb | on a cloud box, from `teamsearch/` (setup: `teamsearch/cloud/README.md`): `. cloud/run_env_v32.sh && ../.venv/bin/python3 climb.py round thorough climb_v32`; `python3 climb.py stats` |
+| Hill climb | on a cloud box, from `teamsearch/` (setup: `teamsearch/cloud/README.md`): `. cloud/run_env_v33.sh && ../.venv/bin/python3 climb.py round thorough climb_v33`; `python3 climb.py stats` |
 | Value training data | from `pssim/`: `../.venv/bin/python3 value_data.py positions`, then `search`, then `feats` |
 | Engine tests against Showdown | `champ damage …`, `champ turn …` (see the header of `native/champ/src/main.rs`) |
 | Bot, logged in but not searching | `node --experimental-websocket --no-warnings bot/client.js --dry` |

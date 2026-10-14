@@ -4,7 +4,7 @@
 # the first AWS climb's results and any local climb state or pre-filter caches (so a new climb on the box starts fresh), and
 # regmatch/ and bring/previews.json (names; the climb needs neither: perish_stock.json and the fitted bring models cover them).
 # usage: [EXTRA_SRC='src_battle_v21.tar.gz ...'] teamsearch/cloud/pack.sh [battle source tarball, default src_battle_v20.tar.gz]
-# the v27 climb (2026-10-13): EXTRA_SRC='' teamsearch/cloud/pack.sh src_battle_v32.tar.gz, then remote_setup.sh src_battle_v32.tar.gz on the box
+# the v27 climb (2026-10-13): EXTRA_SRC='' teamsearch/cloud/pack.sh src_battle_v33.tar.gz, then remote_setup.sh src_battle_v33.tar.gz on the box
 set -e
 cd "$(dirname "$0")/../.."                      # project root
 SRC=${1:-src_battle_v20.tar.gz}

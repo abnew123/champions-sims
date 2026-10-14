@@ -17,6 +17,7 @@ const WEATHER = {Rain: 'raindance', Sun: 'sunnyday', Sandstorm: 'sandstorm', Sno
 const VOL = {confusion: 'confusion', Taunt: 'taunt', 'Leech Seed': 'leechseed', 'Throat Chop': 'throatchop', Yawn: 'yawn', 'Heal Block': 'healblock', Substitute: 'substitute',
              Imprison: 'imprison', 'Flash Fire': 'flashfire'};
 const STATS = ['atk', 'def', 'spa', 'spd', 'spe', 'accuracy', 'evasion'];
+const SELF_VOL = new Set(['imprison', 'substitute', 'flashfire']);          // volatiles a Pokemon puts on itself (srcDue)
 // volDue (live.specs_for sets it, the bot's positions do not yet): a volatile with a countdown gets what Showdown would have left of it at the
 // start of this turn: its full duration as set when it started (data/moves.js) less one for each end of turn since. x.volturn[v] = [the turn
 // it started, what the Pokemon was doing then: 'waits' (its move that turn still to come: queue.willMove), 'moving' (its own move was
@@ -94,7 +95,13 @@ function rebuild(spec, flip) {
       for (const v of x.vol || []) {
         const arg = toID((x.volarg || {})[v]), n = left(spec, x, VOL[v] || toID(v), arg, approx, v);
         if (VOL[v]) {
-          if (!p.addVolatile(VOL[v], side.foe.active[0])) approx.push(v);
+          // srcDue (live.specs_for; not the bot's yet): a volatile's source as Showdown has it, not the foe in the first slot: the holder for the
+          // ones it puts on itself (Imprison's handlers disable what the source knows), and for Leech Seed the slot it was seeded from, which
+          // its drain heals (Battle sim, 2026-10-13)
+          let src = side.foe.active[0];
+          if (spec.srcDue && SELF_VOL.has(VOL[v])) src = p;
+          else if (spec.srcDue && v === 'Leech Seed' && /^[af][ab]$/.test(arg)) src = (arg[0] === 'a' ? side : side.foe).active[arg[1] === 'a' ? 0 : 1] || src;
+          if (!p.addVolatile(VOL[v], src)) approx.push(v);
           else if (v === 'Yawn' && spec.yawnDue) p.volatiles.yawn.duration = 1;
           else if (n !== null) p.volatiles[VOL[v]].duration = n;
         }

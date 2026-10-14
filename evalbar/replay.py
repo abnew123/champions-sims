@@ -313,6 +313,9 @@ def parse(log):
                 if what == 'Encore': m.volarg[what] = m.last
                 if what == 'Disable' and len(p) > 4: m.volarg[what] = p[4]
                 if what == 'Heal Block': m.volarg[what] = last_move[0] or ''      # Psychic Noise's lasts 2 turns, the move's 5
+                if what == 'Leech Seed' and last_user[0]:                        # who seeded it: its slot, on this side ('a') or the other ('f')
+                    u = last_user[0]; up = next((q for q, nk in active.items() if q[:2] == u.side and nk and mons[u.side].get(nk) is u), None)
+                    if up: m.volarg[what] = ('a' if u.side == m.side else 'f') + up[2]
                 act = phase in ('actions', 'residual')                        # else it started before the turn's actions (switch-ins)
                 m.volturn[what] = [turn if act else turn + 1, 'moving' if act and last_user[0] is m and phase == 'actions' else 'new' if id(m) not in onstart
                                    else 'moved' if id(m) in acted else 'waits']

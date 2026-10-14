@@ -25,8 +25,13 @@ info: {'turn', 'hyp': [(weight, the opponent's back row)], 'need', 'dropped'}, o
     game showed by its end (the four brought; HP in percent, as a spectator sees it), and what the player chose.
   python3 evalbar/botpos.py [games=50]   every decision of that many saved Bo3 games (C.games()), both sides, built; counts what failed"""
 import re, json, math, itertools, collections
-import live as LV, replay as R, spots as S, rules as RU
+import live as LV, replay as R, spots as S, rules as RU, battlestate as BS
 toid = R.toid
+# the positions.js fixes the bot's positions ask for (battlestate.FLAGS has the eval bar's). Battle sim switches each on for the bot: yawnDue
+# and volDue (a Yawn at the turn start puts its target to sleep at this turn's end; Taunt, Encore, Disable, Throat Chop and Heal Block keep
+# their remaining turns) the user, 2026-10-12; pctDue, abilDue, chipDue (Toxic's stage, binding moves), fallenDue (Supreme Overlord's count)
+# and typeDue (types changed in battle) the user, 2026-10-12 evening; then syrupDue and srcDue
+BOT_FLAGS = dict.fromkeys(('yawnDue', 'volDue', 'fieldDue', 'pctDue', 'abilDue', 'chipDue', 'fallenDue', 'typeDue', 'syrupDue', 'srcDue'), True)
 STATK = {'hp': 'hp', 'atk': 'atk', 'def': 'def', 'spa': 'spa', 'spd': 'spd', 'spe': 'spe'}
 def export(text):
     """a Showdown team export -> {base species id: set with its spread}"""
@@ -81,9 +86,6 @@ def refine_opponent(pre, gp, sets, side, req, strict=False):
         sp = p['details'].split(',')[0]; st = next((v for k, v in sets[side].items() if v and toid(k.split('-')[0]) == toid(sp.split('-')[0])), None)
         if st: known[toid(sp.split('-')[0])] = (spread(p, st), st['nature'])
     return spreads.refine(pre, gp, sets, side, known, strict)
-def fresh(st):
-    return {**st, 'mega': False, 'hpPct': 100, 'fainted': False, 'status': '', 'slept': 0, 'boosts': {}, 'itemNow': st['item'], 'moved': False,
-            'stall': False, 'lock': '', 'vol': [], 'onField': False, 'last': '', 'volarg': {}}
 def own_side(state, sets, req, mine, dropped, slots=False):
     """the bot's side from its request, with what the log tracks laid under it; None if the log and the request disagree"""
     out = []
@@ -98,7 +100,7 @@ def own_side(state, sets, req, mine, dropped, slots=False):
         if not st: return None, f'no set for {sp}'
         st = {**st, 'evs': spread(p, st)}                                    # the exact spread, from the stats the request shows
         hp, status, fnt = condition(p['condition']); item = (S.E['items'].get(p.get('item') or '') or {}).get('name', '')
-        d = LV.spec_mon(m, st) if m else fresh(st)
+        d = BS.mon(m, st, BOT_FLAGS) if m else BS.fresh(st)
         d.update(hpPct=hp, status=status, fainted=fnt, itemNow=item, onField=bool(p.get('active')) and not fnt)
         if fnt: d['boosts'] = {}
         # slots (the eval bar's): a fainted Pokemon still in slot a keeps it, as the log's positions (and so the turn's choices) have it;
@@ -119,17 +121,14 @@ def bot_position(log, request, side, topk=1, team=None, tag='bot'):
     refine_opponent(pre, gp, sets, side, req, strict=3)                      # the opponent's spreads against the turn order seen so far (strict: the user, 2026-10-12; level 3, exact action Speed: the user, 2026-10-12 evening)
     if mine is None: return [], {'skip': why}
     H, pool, need = LV.hyps(opp, st, six, sets, LV.Live.leads(None, pre), topk)
-    order = sorted(st[opp]['mons'], key=lambda m: (0 if m['pos'] == 'a' else 1 if m['pos'] == 'b' else 2 if not m['f'] else 3))
+    order = BS.order(st[opp])
     bad = [m['sp'] for m in order if not sets[opp].get(m['sp'])]
     if bad: return [], {'skip': 'no set for ' + ', '.join(bad)}
-    seen = [LV.spec_mon(m, sets[opp][m['sp']]) for m in order]; f = st['field']; out = []
+    seen = [BS.mon(m, sets[opp][m['sp']], BOT_FLAGS) for m in order]; out = []
     for h, (w, back) in enumerate(H):
-        theirs = seen + [{**fresh(sets[opp][sp]), 'standIn': True} for sp in back]
-        sides = [{'mons': ms, 'tailwind': st[sd]['tailwind'], 'screens': st[sd]['screens'], 'hazards': st[sd]['hazards']} for sd, ms in ((side, mine), (opp, theirs))]
-        out.append((w, {'name': f"{tag} t{step['turn']} h{h}", 'turn': step['turn'], 'sides': sides, 'acts': [[None, None], [None, None]],
-                        'perish': st['perish'], 'standIns': len(back), 'dropped': [], 'yawnDue': True, 'volDue': True, 'fieldDue': True, 'pctDue': True, 'abilDue': True, 'chipDue': True, 'fallenDue': True, 'typeDue': True, 'syrupDue': True, 'srcDue': True,   # pctDue / abilDue / chipDue (Toxic's stage, binding moves) / fallenDue (Supreme Overlord's count) / typeDue (types changed in battle): the user, 2026-10-12 evening   # a Yawn at the turn start puts its target to sleep at this turn's end; Taunt / Encore / Disable / Throat Chop / Heal Block keep their remaining turns (the user, 2026-10-12)
-                        'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None,
-                                  'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}))
+        theirs = seen + [BS.fresh(sets[opp][sp], True) for sp in back]
+        sides = [BS.side(st[sd], ms) for sd, ms in ((side, mine), (opp, theirs))]
+        out.append((w, BS.spec(f"{tag} t{step['turn']} h{h}", step, sides, [[None, None], [None, None]], len(back), BOT_FLAGS)))
     return out, {'turn': step['turn'], 'hyp': H, 'need': need, 'dropped': dropped}
 def nicks(log, sd):
     """{species: the nickname the log calls it by}"""

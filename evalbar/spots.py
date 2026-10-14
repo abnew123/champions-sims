@@ -5,7 +5,8 @@ open team sheet (item, ability, nature, moves); stat points are not on the sheet
 stats (spreads.ranked), else a plain spread that fits the nature. A brought Pokemon that never
 came in is replaced by a stand-in from the unused team-sheet entries. Moves and items the engine data lacks are dropped from the set (listed
 in the spec's 'dropped'); a species, form or ability it lacks rules the game out.
-specs(rid, log) -> (list of position specs, reason the game was skipped or '').
+specs(rid, log) -> (list of position specs, reason the game was skipped or ''); each turn's position through battlestate.py, as the
+live page and the bot build theirs.
 usage: python3 evalbar/spots.py <out.json> <replay id> [more ids]     (ids as in the replay cache, without .log)"""
 import os, sys, json
 import common as C, replay as R
@@ -72,23 +73,13 @@ def specs(rid, log):
             st, bad = fit_set({'species': sh['species'], 'item': sh['item'], 'ability': sh['ability'], 'nature': sh['nature'], 'moves': sh['moves']}, [])
             if st: guess[sd].append(st)
         if len(g['final'][sd]['mons']) + len(guess[sd]) < 4: return [], 'a brought Pokemon never appeared and no stand-in is in the engine data'
+    import battlestate as BS                                                # the builder every reader uses (it imports this module)
     out = []
     for s in g['steps']:
         if s['turn'] < 1: continue
-        sides = []
-        for sd in ('p1', 'p2'):
-            S = s['state'][sd]; ms = S['mons']
-            order = sorted(ms, key=lambda m: (0 if m['pos'] == 'a' else 1 if m['pos'] == 'b' else 2 if not m['f'] else 3))
-            mons = [{**sets[(sd, m['sp'])], 'forme': m['forme'], 'mega': m['mega'], 'hpPct': m['hp'], 'fainted': m['f'], 'status': m['st'], 'slept': m['slept'], 'boosts': m['b'],
-                     'itemNow': '' if m['gone'] or toid(m['item']) not in E['items'] else m['item'], 'moved': m['moved'], 'stall': m['stall'], 'lock': m['lock'], 'vol': m['vol'], 'onField': bool(m['pos']),
-                     'last': m['last'], 'volarg': m['volarg']} for m in order]
-            mons += [{**st, 'mega': False, 'hpPct': 100, 'fainted': False, 'status': '', 'slept': 0, 'boosts': {}, 'itemNow': st['item'], 'moved': False, 'stall': False,
-                      'lock': '', 'vol': [], 'onField': False, 'last': '', 'volarg': {}, 'standIn': True} for st in guess[sd]]
-            sides.append({'mons': mons, 'tailwind': S['tailwind'], 'screens': S['screens'], 'hazards': S['hazards']})
-        f = s['state']['field']
-        acts = [[s['acts'].get(sd + x) for x in 'ab'] for sd in ('p1', 'p2')]
-        out.append({'name': f"{rid} t{s['turn']}", 'turn': s['turn'], 'sides': sides, 'acts': acts, 'perish': s['state']['perish'], 'standIns': len(guess['p1']) + len(guess['p2']), 'dropped': dropped,
-                    'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None, 'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}})
+        order = {sd: BS.order(s['state'][sd]) for sd in ('p1', 'p2')}
+        sides = [BS.side(s['state'][sd], [BS.mon(m, sets[(sd, m['sp'])]) for m in order[sd]] + [BS.fresh(st, True) for st in guess[sd]]) for sd in ('p1', 'p2')]
+        out.append(BS.spec(f"{rid} t{s['turn']}", s, sides, BS.acts(s, order), len(guess['p1']) + len(guess['p2']), dropped=dropped))
     return out, ''
 if __name__ == '__main__':
     allspecs = []

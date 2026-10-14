@@ -366,7 +366,7 @@ def damage_ranges(gp, sets, known_side, known_evs, dobs, cands, strict=False):
     """{(obs index, species, evs): Showdown's range} for each damage observation and each candidate spread of the other side's Pokemon
     in it, through damage.js (cached: a hit and a spread are worked out once). strict: damage.js's exact reading (a percent stands for each HP
     it could be, screens broken first by Psychic Fangs and the like)"""
-    import live as LV, procs as P, subprocess, tempfile, hashlib
+    import live as LV, procs as P, battlestate as BS, subprocess, tempfile, hashlib
     steps = {x['turn']: x['state'] for x in gp['steps'] if x['state']}; other = 'p2' if known_side == 'p1' else 'p1'
     want = []; res = {}
     for oi, ob in enumerate(dobs):
@@ -394,7 +394,7 @@ def damage_ranges(gp, sets, known_side, known_evs, dobs, cands, strict=False):
                     s_ = dict(s_)
                     if sd == known_side and known_evs.get(toid(m['sp'].split('-')[0])): s_['evs'] = list(known_evs[toid(m['sp'].split('-')[0])][0])
                     if sd == other and m['sp'] == um['sp']: s_['evs'] = list(evs)
-                    x = LV.spec_mon(m, s_)
+                    x = BS.mon(m, s_, {})                        # the damage check's positions ask for none of positions.js's fixes
                     if sd + m['pos'] in ob['megas']: x['mega'] = True
                     if (ob.get('boosts') or {}).get(sd + m['pos']):                # stages changed earlier in the turn (Intimidate, Defiant)
                         x['boosts'] = {**(x.get('boosts') or {})}

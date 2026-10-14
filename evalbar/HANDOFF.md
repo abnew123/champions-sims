@@ -424,6 +424,25 @@ from mid-battle positions of real sheets) is theirs and found several engine bug
 - The -start lines in the replays against what positions.js carries: still left out (approx) are Charge (38 games), Stockpile (28), Focus
   Energy / Dragon Cheer (26), Salt Cure (7), Curse (9), Octolock (6), Smack Down (4), Future Sight (4), No Retreat (3).
 
+## One builder for every reader (battlestate.py, 2026-10-14)
+- An outside review (the user had it done; the Stream watcher checked it and passed each thread its part) found the position builders had
+  drifted apart. `spots.specs` (the replays' positions: the accuracy set, and Battle sim's value data through `pssim/value_data.py`) lacked
+  what `live.spec_mon` passed (Unburden, gained abilities, changed types, Perish and Toxic counts, binding moves, volatile countdowns,
+  Protean, Syrup) and every positions.js flag; `live.spec_mon` took the item from the set, so an item received by Trick was lost.
+- `battlestate.py` now builds every spec (`mon`, `fresh`, `order`, `acts`, `side`, `spec`): live.specs_for, spots.specs, botpos (the bot's
+  positions) and spreads.py's damage check all go through it. `battlestate.FLAGS` is the eval bar's list of positions.js fixes (live and
+  replay positions alike); the bot's is `botpos.BOT_FLAGS`, which Battle sim switches on fix by fix. A new fix's flag goes into FLAGS, not
+  into one builder.
+- `itemDue` (FLAGS; not the bot's yet): replay.py marks a Pokemon whose item an `-item` line showed (`iset`), and `mon` takes the log's item
+  over the set's. A replay where a Dragapult received a Choice Scarf by Trick: Focus Sash before, Choice Scarf now. It is read in `mon`,
+  not positions.js, which sets items twice (the second time after the field is laid).
+- Checked against main on 300 held-out replays (2,080 positions), 40 of them through live.specs_for, and the 4 botcmp games: the bot's
+  specs and states identical; live's identical apart from the new flag; the replay positions gained the fields and flags (779 Pokemon
+  with an item gone since they came in, 107 Perish counts, 72 volatile countdowns, 67 gained abilities, 17 changed types; 299 of 403
+  rebuilt states differ). Their actions now go by engine slot as live's do (none of the 2,080 changed).
+- Files built from the old replay positions are stale until rebuilt: Battle sim's `pssim/results/value/real_*` (positions, searches,
+  features) and the accuracy set the rescale (CAL) was fitted on.
+
 ## Louisville day 1 (2026-10-10)
 
 The same study on the Louisville day 1 stream (12 games from 1:15 pm, read live; `study.py out/champions/louisville1.ocr.jsonl 3 14340`,

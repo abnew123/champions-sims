@@ -310,6 +310,19 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
         //   uniform non-switch option e of the time; noise:<e> plays its own mix 1-e of the time and a uniform non-switch option e of
         //   the time (the opponent the exploiter imagines). Side 0's policy is applied first, so an exploiter on side 0 models side 1's
         //   solved mix before side 1's own noise is added.
+        // BATTLE_EVAL=1 (2026-10-14): each side's mix from the anytime search instead (deep.rs: BATTLE_EVAL_BUDGET leaf evaluations,
+        // BATTLE_EVAL_DEPTH_0 / _1 turns beyond this one, per-side budgets BATTLE_EVAL_BUDGET_0 / _1), both sides on the same key so
+        // equal settings see the same table
+        if let Some(sides) = crate::deep::battle_eval() {
+            let p = crate::deep::Params::from_env(2, 256);
+            for s in 0..2u8 {
+                let [budget, depth] = sides[s as usize];
+                let Some((root, st)) = crate::deep::search(&b, cfg, key ^ ((turn as u64) << 40) ^ 0xE7A1, depth, &p, budget, 0, (None, None), std::time::Instant::now()) else { continue };
+                for u in &st.uns { if !uns.contains(u) { uns.push(u.clone()); } }
+                h2cells += st.deep_rolls;   // the row's h2 counts the deep rolls under BATTLE_EVAL
+                if s == 0 && root.msw == msw { x = root.x.clone(); } else if s == 1 && root.tsw == tsw { y = root.y.clone(); }
+            }
+        }
         let pol = policy();
         for s in 0..2usize {
             let (n_own, own_ns, opp_ns) = if s == 0 { (msw.len(), &mns, &tns) } else { (tsw.len(), &tns, &mns) };

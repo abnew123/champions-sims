@@ -18,6 +18,7 @@
 //!   champ evalpos <engine_data.json> <positions.jsonl> <out.jsonl> [threads=1]
 //! env: EG_VALUE (and RACE / CALC_DATA, TRSYM, GRID_DIR as for battles), EVAL_SEEDS, EVAL_TOP (joint actions listed, default 8),
 //!      EVAL_ADAPT=1 (staged seeds: see eval_one; adds stages, sims, cells_full to the output), EVAL_STAGES, EVAL_MARGINS
+//!      EVAL_BUDGET / EVAL_BUDGET_MS (the anytime search: see eval_one) and EVAL_DEPTH (with a budget: the search as a tree, deep.rs)
 //!      EVAL_HORIZON=2 (two-turn values for the options in contention: see eval_one; adds horizon, cells_h2, sims_h2), EVAL_H2_SEEDS,
 //!      EVAL_H2_MARGIN, EVAL_H2_HITS
 //!      EVAL_MATRIX=1 | full: adds "matrix" to each line: rows / cols (both sides' joint actions as [slot 0 c, slot 1 c]), rl / cl (their
@@ -190,6 +191,19 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
         if !(0..2).all(|i| !alive[i] || act[i].is_some()) { return None; }
         opts.iter().position(|c| (0..2).all(|i| !alive[i] || same(&c[i], act[i].as_ref().unwrap()))) };
     let (act_i, act_j) = (actual_joint(0, &msw, &sp["actual"]), actual_joint(1, &tsw, &sp["their_actual"]));
+    // EVAL_DEPTH=<d> with a budget (2026-10-14, the user: the budgeted search was meant to look past the next turn): the anytime search
+    // as a tree (deep.rs), d turns beyond this one; EVAL_DEPTH=0 is the same allocation without depth (for comparisons at matched
+    // compute). The fixed stages, EVAL_HORIZON, EVAL_MATRIX and actual_replace below are not part of it.
+    if let Some(depth) = std::env::var("EVAL_DEPTH").ok().and_then(|x| x.parse::<usize>().ok()) { if budgeted {
+        let p = crate::deep::Params::from_env(base0, seeds_max);
+        if let Some((root, st)) = crate::deep::search(&b, cfg, key, depth, &p, budget, budget_ms, (act_i, act_j), t0) {
+            let own1: Vec<f64> = root.cv.iter().map(|z| 1.0 - z).collect();
+            let s0 = side_report(&b, 0, &root.msw, &root.x, &root.rv, &sp["actual"], top); let s1 = side_report(&b, 1, &root.tsw, &root.y, &own1, &sp["their_actual"], top);
+            return json!({"value": root.v, "static": stat, "feats": f, "seeds": nseeds, "options": [root.msw.len(), root.tsw.len()], "ms": t0.elapsed().as_millis() as u64,
+                "unsupported": st.uns, "sides": [s0, s1], "sims": st.sims, "budget": budget, "depth": depth, "nodes": st.nodes, "deep_rolls": st.deep_rolls,
+                "levels": root.levels(), "rms_correction": st.rms_correction()});
+        }
+    } }
     // the anytime search (2026-10-14, the user: think as long as the budget allows): every cell starts at the base rolls; then, round
     // after round, the cells whose next rolls shrink the position value's uncertainty most get one more roll each, and the turn is solved
     // again. A cell's priority is (x_i + f/rows)^2 (y_j + f/cols)^2 sd_ij^2 / (n (n + 1)) (the drop in the variance of x.A.y that one

@@ -25,7 +25,7 @@ TOPK = 3; CAL_V25 = 0.7538                       # the rescale fitted for champ-
 # bot runs it (Battle sim) but without the bot's own-side rules (EG_LAST_PROTECT, EG_NO_DOUBLE_PROTECT). Its reads go to files named for it
 # (<tag>_eval_v30.jsonl, _refined_v30, _luck_v30); v25's stay readable, each rescaled with its own CAL, until a turn is read again
 ENGINE = 'v31'                                                               # v31 (Battle sim, 2026-10-13): Imprison's source is its holder; a loaded position's disables (Choice lock, Disable, Taunt) are recomputed
-CAL = 0.676                                                                  # the rescale fitted for v29 (accuracy.py compare, 3,968 replay positions: log loss 0.5185 against v25's 0.5240); v30 reads 3 of them differently (Imprison up)
+CAL = 0.676                                                                  # the rescale (accuracy.py compare, 3,968 replay positions): v31 0.676, log loss 0.5186 against v25's 0.5240 (v29: 0.676, 0.5185)
 EVAL_ENV = {'CHAMP_BIN': os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v31'), 'EG_VNET': os.path.join(C.MAIN, 'bot', 'value', 'vnet_h64_search_acc.json'),
             'RACE_PRIO': '1', 'FEATS22': '1', 'EG_MEGA_TIE': '0', 'CALC_DATA': '../native/champions_data_full.json', 'CHAMP_DATA': 'engine_data_full.json'}
 # the full engine data (every species, move, item and ability Showdown knows; needs champ-battle-v17 or later): spectated teams can be

@@ -581,8 +581,9 @@ class BotRunner:
             i = todo[-1]; old = s.lives[i]; num = re.search(r'-(\d+)(?:-[a-z0-9]+)?$', old.room).group(1); tag = 'bot_' + num
             rf = os.path.join(OUT, f'{tag}_refined_{ENGINE}.jsonl')
             for posf in sorted(glob.glob(os.path.join(OUT, f'{tag}_t*_pos.jsonl')), key=lambda f: -int(re.search(r'_t(\d+)_pos', f).group(1))):
-                while others_busy() >= BUSY: time.sleep(30)                   # the lowest-priority work on the Mac: it waits under the 10-core cap
-                with LUCK: EN.run(posf, rf, 1, REFINE_SEEDS, 1, extra=EVAL_ENV, nice=19)
+                while (busy := others_busy()) >= BUSY: time.sleep(30)         # the lowest-priority work on the Mac: it waits under the 10-core cap,
+                thr = 3 if busy < 5 else 2 if busy < 7 else 1                  # and takes more threads when the Mac is quiet
+                with LUCK: EN.run(posf, rf, thr, REFINE_SEEDS, 1, extra=EVAL_ENV, nice=19)
             f = os.path.join(s.dir, old.room + '.log'); pc = os.path.join(OUT, f'{tag}_page.json')
             lv = Live(old.room, s.threads, 0, logfile=f, tag=tag, fmt=botfmt(old.room)); lv.page_cache = pc; lv.exact = True; lv.luck = True; lv.refining = True
             lv.run()                                                         # the old page stays up until the rebuilt one replaces it

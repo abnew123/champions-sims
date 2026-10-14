@@ -585,7 +585,7 @@ class BotRunner:
         if not os.path.exists(prog): open(prog, 'w').close()
         json.dump({'title': f"The bot's games: read again at {REFINE_SEEDS} rolls (games, one engine thread at the lowest priority)",
                    'out': os.path.relpath(prog, os.path.join(C.HERE, 'out')), 'total': len(s.lives), 'done0': 0, 'started': time.time(), 'threads': 1,
-                   'seeds': REFINE_SEEDS, 'staged': True}, open(prog + '.run.json', 'w'))
+                   'seeds': REFINE_SEEDS, 'staged': True, 'pid': os.getpid()}, open(prog + '.run.json', 'w'))   # pid: running while this page is
         while True:
             todo = [i for i, lv in enumerate(s.lives) if (isinstance(lv, Finished) and lv.refined != ENGINE) or (isinstance(lv, Live) and lv.saved and not lv.refining)]
             if not todo: time.sleep(30); continue
@@ -607,7 +607,7 @@ class BotRunner:
         prog = os.path.join(OUT, 'bot_luck.games'); open(prog, 'w').close()
         n = len([f for f in glob.glob(os.path.join(s.dir, 'battle-*.log')) if re.search(r'-\d{6,}(-[a-z0-9]+)?\.log$', f)])
         json.dump({'title': "The bot's games: luck worked out (games, one engine thread at the lowest priority)", 'out': os.path.relpath(prog, os.path.join(C.HERE, 'out')),
-                   'total': n, 'done0': 0, 'started': time.time(), 'threads': 1, 'seeds': 32, 'staged': True}, open(prog + '.run.json', 'w'))
+                   'total': n, 'done0': 0, 'started': time.time(), 'threads': 1, 'seeds': 32, 'staged': True, 'pid': os.getpid()}, open(prog + '.run.json', 'w'))
         while True:
             fs = sorted((f for f in glob.glob(os.path.join(s.dir, 'battle-*.log')) if re.search(r'-\d{6,}(-[a-z0-9]+)?\.log$', f)),
                         key=lambda f: int(re.search(r'-(\d{6,})(?:-[a-z0-9]+)?\.log$', f).group(1)))   # ladder rooms, not local test games; by battle number,

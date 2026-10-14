@@ -334,7 +334,9 @@ function head() {
     const label = (g, k) => {
       const res = g.winner === 'p1' ? 'won' : g.winner === 'p2' ? 'lost' : g.live ? 'playing' : '', last = g.steps.length ? g.steps[g.steps.length - 1].turn : 0;
       const luck = g.luck && typeof g.luck.p1 === 'number' ? `luck ${g.luck.p1 >= 0 ? '+' : '−'}${Math.abs(Math.round(100 * g.luck.p1))}` : '';
-      return [g.title || 'Game ' + (k + 1), res + (g.forfeit && res ? ' by forfeit' : ''), last ? `${last} turn${last === 1 ? '' : 's'}` : '', g.rating ? `vs ${Math.round(g.rating)}` : '', luck].filter(Boolean).join(' · ');
+      const d = g.when ? new Date(g.when) : null;                      // the viewer's local time, 12-hour
+      const at = d && !isNaN(d) ? `${d.toLocaleString('en-US', {month: 'short'})} ${d.getDate()} ${(d.getHours() + 11) % 12 + 1}:${String(d.getMinutes()).padStart(2, '0')} ${d.getHours() < 12 ? 'am' : 'pm'}` : '';
+      return [g.title || 'Game ' + (k + 1), at, res + (g.forfeit && res ? ' by forfeit' : ''), last ? `${last} turn${last === 1 ? '' : 's'}` : '', g.rating ? `vs ${Math.round(g.rating)}` : '', luck].filter(Boolean).join(' · ');
     };
     $('gsel').innerHTML = GAMES.map((g, k) => [g, k]).filter(([g]) => g.group === grp).reverse()
       .map(([g, k]) => `<option value="${k}"${k === gi ? ' selected' : ''}>${esc(label(g, k))}</option>`).join('');

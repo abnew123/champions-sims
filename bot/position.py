@@ -299,12 +299,10 @@ def replacement_by_type(request, log, side):
     built mid-turn."""
     opp = 'p2' if side == 'p1' else 'p1'; text = '\n'.join(log) if isinstance(log, list) else log
     foes = {}
-    for l in text.split('\n'):
+    for l in text.split('\n'):   # once, in order: a faint empties the slot, a later switch-in fills it again (the third review pass)
         p = l.split('|')
         if len(p) > 3 and p[1] in ('switch', 'drag', 'detailschange', 'replace') and p[2].startswith(opp): foes[p[2][:3]] = p[3].split(',')[0]
-    for l in text.split('\n'):
-        p = l.split('|')
-        if len(p) > 2 and p[1] == 'faint' and p[2][:3] in foes: foes.pop(p[2][:3], None)
+        elif len(p) > 2 and p[1] == 'faint' and p[2].startswith(opp): foes.pop(p[2][:3], None)
     atk_types = []
     for sp in foes.values():
         s = SPECIES.get(sp) or SPECIES.get(sp.split('-')[0])

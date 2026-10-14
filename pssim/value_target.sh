@@ -5,7 +5,7 @@
 # (fit + new: ~130k real positions / ~18k games, v28 features, the _fc,_acc search layers) is fitted on the games' results ("outcome")
 # or on both ("mix": result log loss + MIX_W x squared error to the search's log-odds), scored on the 560 held-out games' results.
 # One single-threaded fit per job, 4 at a time; each job's report goes to results/value/vtarget_<tag>.txt; a progress card counts jobs.
-cd "$(dirname $0)"
+ME=${0:A}; cd "$(dirname $ME)"   # the absolute path first: xargs re-runs this file after the cd (the third review pass)
 R=results/value; P=${P:-4}; DONE=$R/vtarget_done.txt
 run() {
   local kind=$1 cfg=$2 w=$3 tag=$4
@@ -28,6 +28,6 @@ JOBS=(
 )
 python3 -c "import json,os,time,sys; d='../evalbar/out/battlesim'; os.makedirs(d,exist_ok=True); json.dump({'title': 'Battle sim: value net targets (outcome / mix / search fits)', 'out': os.path.relpath(os.path.abspath('$DONE'), os.path.abspath('../evalbar/out')), 'total': ${#JOBS}, 'done0': 0, 'started': time.time(), 'threads': $P}, open(os.path.join(d, 'vtarget.run.json'),'w'))"
 echo "$(date '+%I:%M %p') ${#JOBS} fits, $P at a time"
-printf '%s\n' $JOBS | xargs -P $P -L 1 zsh $0 one; st=$?   # one fit per line, P at a time; xargs exits non-zero if any fit failed
+printf '%s\n' $JOBS | xargs -P $P -L 1 zsh $ME one; st=$?   # one fit per line, P at a time; xargs exits non-zero if any fit failed
 echo "$(date '+%I:%M %p') all done"; grep -h -E 'current static|one-turn search|on (outcome|mix|search)' $R/vtarget_*.txt | sort -u
 exit $st

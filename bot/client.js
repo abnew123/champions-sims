@@ -216,7 +216,7 @@ function onChallenges(json) {
   for (const [user, fmt] of Object.entries(c.challengesFrom || {})) {
     const L = limits(); const why = mayPlay();
     if (!L.accept_challenges || fmt !== FORMAT || why || (DRY && !LOCAL)) { send(`|/reject ${user}`); log('rejected challenge', fmt, why || ''); continue; }
-    pickTeam().then(t => { if (!t) { send(`|/reject ${user}`); return; } searchWithTeam(`|/accept ${user}`); log('accepted a challenge'); });
+    pickTeam().then(t => { if (!t) { send(`|/reject ${user}`); return; } searchWithTeam(`|/accept ${user}`).then(ok => { if (ok) log('accepted a challenge'); else send(`|/reject ${user}`); }); });
   }
 }
 let teams = null, teamIdx = 0;
@@ -271,30 +271,41 @@ let currentTeam = null, pendingPacked = null;
 // the team belongs to the account, not to the connection (2026-10-12: the Bo3 client's /utm became the Bo1 client's team), and Showdown
 // takes it when the search starts: so the team is sent right before the search, under a lock file the other client respects
 // the team is the account's, shared by every connection, so only one client at a time may go from /utm to /search: the lock is taken
-// with an exclusive create and released only by its owner once its search is out; one older than 8 s is stale (a client that died
-// holding it). Before 2026-10-14 (the outside review) both clients could read an expired lock, both /utm, and search with the second team.
+// with an exclusive create and released only by its owner once its search is out. One older than 8 s is stale (a client that died
+// holding it) and is broken by renaming it to a name of our own, which only one client's rename can do; the rest retry the create.
+// Without the lock nothing is uploaded or sent: the caller skips this round (returns false). Before 2026-10-14 (the outside review,
+// two passes) both clients could break the same stale lock, or go on without it, and both search with the second team.
 const LOCK_ID = `${process.pid}-${TAG}`;
-async function searchWithTeam(cmd) {
-  const lf = path.join(OUT, 'search.lock');
+async function takeLock(lf) {
   for (let i = 0; i < 30; i++) {
-    try { fs.writeFileSync(lf, `${Date.now()} ${LOCK_ID}`, {flag: 'wx'}); break; }
+    try { fs.writeFileSync(lf, `${Date.now()} ${LOCK_ID}`, {flag: 'wx'}); return true; }
     catch (e) {
-      if (e.code !== 'EEXIST') break;
-      let held = ''; try { held = fs.readFileSync(lf, 'utf8'); } catch (e2) { continue; }
-      if (Date.now() - +held.split(' ')[0] > 8000) { try { if (fs.readFileSync(lf, 'utf8') === held) fs.unlinkSync(lf); } catch (e3) {} continue; }
+      if (e.code !== 'EEXIST') { log('search lock:', e.code); return false; }
+      let held = ''; try { held = fs.readFileSync(lf, 'utf8'); } catch (e2) { continue; }   // gone meanwhile: try again
+      if (Date.now() - +held.split(' ')[0] > 8000) {
+        const mine = `${lf}.stale-${LOCK_ID}-${i}`;
+        try { fs.renameSync(lf, mine); } catch (e3) { continue; }                          // another client broke it first
+        try { const got = fs.readFileSync(mine, 'utf8'); fs.unlinkSync(mine); if (got !== held) log('search lock: broke a fresh lock by a race'); } catch (e4) {}
+        continue;
+      }
       await sleep(1000);
     }
   }
+  return false;
+}
+async function searchWithTeam(cmd) {
+  const lf = path.join(OUT, 'search.lock');
+  if (!await takeLock(lf)) { log('search lock not taken: skipping this round'); return false; }
   if (pendingPacked) send(`|/utm ${pendingPacked}`);
   await sleep(1500); send(cmd);
   await sleep(1500);
   try { if (fs.readFileSync(lf, 'utf8').split(' ')[1] === LOCK_ID) fs.unlinkSync(lf); } catch (e) {}
+  return true;
 }
-let loopOn = false;
 async function onReady() {
   await refreshTop(); await refreshMyRating();
   if (loopOn) return; loopOn = true;   // a later login (reconnect, logged back in) keeps the one loop
-  if (CHALLENGE) { await pickTeam(); await sleep(3000); await searchWithTeam(`|/challenge ${CHALLENGE}, ${FORMAT}`); log('challenged', CHALLENGE); }
+  if (CHALLENGE) { await pickTeam(); await sleep(3000); if (await searchWithTeam(`|/challenge ${CHALLENGE}, ${FORMAT}`)) log('challenged', CHALLENGE); }
   for (;;) {
     await sleep(5000);
     if (DRY || CHALLENGE) continue;
@@ -310,7 +321,7 @@ async function onReady() {
     // matched at their wider window). The loop searches again after its usual pause.
     const maxs = limits().max_search_seconds;
     if (searching && !busy && maxs && searchStart && Date.now() - searchStart > maxs * 1e3) { send(`|/cancelsearch ${FORMAT}`); searchStart = 0; searching = false; log(`search cancelled after ${maxs} s`); await sleep(3000); continue; }
-    if (!busy && !searching && limits().search_ladder && !why) { const t = await pickTeam(); if (!t) continue; await sleep(LOCAL ? 1000 : rnd(30e3, 120e3)); if (!searching && !mayPlay()) { await searchWithTeam(`|/search ${FORMAT}`); searching = true; searchStart = Date.now(); log('searching'); } }
+    if (!busy && !searching && limits().search_ladder && !why) { const t = await pickTeam(); if (!t) continue; await sleep(LOCAL ? 1000 : rnd(30e3, 120e3)); if (!searching && !mayPlay() && await searchWithTeam(`|/search ${FORMAT}`)) { searching = true; searchStart = Date.now(); log('searching'); } }
     else if (why && !busy && !searching) { log('not searching:', why); await sleep(60e3); }
     await refreshTop();
   }

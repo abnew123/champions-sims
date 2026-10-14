@@ -173,7 +173,8 @@ fn type_mult(b: &mut Battle, ty: &str, m: MonRef) -> f64 {
 /// judged with base Altaria's Natural Cure); None: its ability now.
 fn immune_to(b: &mut Battle, a: MonRef, mid: Id, f: MonRef, mega_ab: Option<&str>) -> bool {
     if mid == "weatherball" || mid == "terrainpulse" { return false; }
-    let has = |b: &Battle, ab: &str| match mega_ab { Some(x) => x == ab, None => b.has_ability(a, ab) };
+    // the Mega's ability is suppressed as the current one would be (Neutralizing Gas, Gastro Acid: the third review pass)
+    let has = |b: &Battle, ab: &str| match mega_ab { Some(x) => x == ab && !b.ignoring_ability(a), None => b.has_ability(a, ab) };
     let mv = b.dex.mv(mid).tmpl.clone();
     let no_mod = ["judgment", "multiattack", "naturalgift", "revelationdance", "technoblast"];
     let mut ty: Id = mv.mtype;

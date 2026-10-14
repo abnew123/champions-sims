@@ -96,7 +96,7 @@ def contempt_mix(r, c):
     M = json.load(open(CONTEMPT_MODEL)); mx = r['matrix']
     A0 = np.array([[np.nan if x is None else x for x in row] for row in mx['v1']], float)
     if np.isnan(A0).any(): rm = np.nanmean(A0, axis=1); A0 = np.where(np.isnan(A0), rm[:, None], A0)
-    A = np.vectorize(lambda v: HL.resc(v, 0.7538))(A0); q = np.array(opponent_model(r, M)); n, k = A.shape
+    A = np.vectorize(lambda v: HL.resc(v, LV.CAL))(A0); q = np.array(opponent_model(r, M)); n, k = A.shape
     res = linprog(np.r_[-c * (A @ q), -(1 - c)], A_ub=np.c_[-A.T, np.ones(k)], b_ub=np.zeros(k), A_eq=np.r_[np.ones(n), 0.0][None], b_eq=[1.0],
                   bounds=[(0, None)] * n + [(None, None)], method='highs')
     x = res.x[:n]
@@ -122,7 +122,7 @@ def guesses_mix(hs, c):
     for w, r in hs:
         mx = r['matrix']; A0 = np.array([[np.nan if x is None else x for x in row] for row in mx['v1']], float)
         if np.isnan(A0).any(): rm = np.nanmean(A0, axis=1); A0 = np.where(np.isnan(A0), rm[:, None], A0)
-        G.append((w / tot, mx['rl'], np.vectorize(lambda v: HL.resc(v, 0.7538))(A0), np.array(opponent_model(r, M)) if c > 0 else None,
+        G.append((w / tot, mx['rl'], np.vectorize(lambda v: HL.resc(v, LV.CAL))(A0), np.array(opponent_model(r, M)) if c > 0 else None,
                   np.array(mx['y'], float) / (sum(mx['y']) or 1.0)))
     rows = [l for l in G[0][1] if all(l in set(g[1]) for g in G[1:])]
     if not rows: return None
@@ -185,7 +185,9 @@ def decide(specs, request, side, threads=2, seeds=32, log=None, cap=None, fmt=No
             if not opt: out.append('default'); continue
             c = opt['c']; a = act[i]; rmoves = a.get('moves') or []
             if c[0] == 'switch':
-                if a.get('trapped') or a.get('maybeTrapped'): return None
+                # trapped only: maybeTrapped is Showdown hiding whether a foe's ability traps, and the switch is legal unless it does (the
+                # server then refuses it and re-sends the request with trapped; the outside review, 2026-10-14)
+                if a.get('trapped'): return None
                 out.append('switch ' + str(team_index(request, lab.replace('switch to ', '')))); continue
             mv, t, mega = c
             if len(rmoves) == 1: out.append('move 1'); continue                       # a locked turn (charging, recharging, locked move)
@@ -247,6 +249,9 @@ def replacement(request, log, side, team=None, threads=2, seeds=32):
     replacements, 1.7 points each on average (bot/decision_audit.py). Falls back to the static value, then to the type rule."""
     text = '\n'.join(log) if isinstance(log, list) else log
     need = request.get('forceSwitch') or []; mons = request['side']['pokemon']
+    # Revival Blessing (the outside review, 2026-10-14): a slot whose active Pokemon is marked reviving is filled by naming a fainted
+    # Pokemon (Showdown refuses a living one); no position is built for a revival, so the type rule picks among the fainted
+    if any(p.get('reviving') for p in mons if p.get('active')): return replacement_by_type(request, text, side)
     slots = [k for k, must in enumerate(need) if must]
     bench = [p['details'].split(',')[0] for p in mons if not p.get('active') and not p['condition'].endswith(' fnt') and p['condition'] != '0 fnt']
     import itertools
@@ -313,11 +318,15 @@ def replacement_by_type(request, log, side):
         hp = p['condition'].split('/')[0]; frac = int(hp.split()[0]) / max(1, int(p['condition'].split('/')[1].split()[0])) if '/' in p['condition'] else 0
         return tot - 0.01 * frac
     need = request.get('forceSwitch') or []; mons = request['side']['pokemon']
-    bench = [i for i, p in enumerate(mons) if not p.get('active') and not p['condition'].endswith(' fnt') and p['condition'] != '0 fnt']
-    bench.sort(key=lambda i: score(mons[i]))
+    fnt = lambda p: p['condition'].endswith(' fnt') or p['condition'] == '0 fnt'
+    bench = [i for i, p in enumerate(mons) if not p.get('active') and not fnt(p)]
+    dead = [i for i, p in enumerate(mons) if fnt(p)]   # a reviving slot names one of these (any team slot)
+    bench.sort(key=lambda i: score(mons[i])); dead.sort(key=lambda i: score(mons[i]))
+    active = [p for p in mons if p.get('active')]
     cmds = []
     for k, must in enumerate(need):
         if not must: cmds.append('pass'); continue
-        if not bench: cmds.append('pass'); continue
-        cmds.append('switch ' + str(bench.pop(0) + 1))
+        pool = dead if k < len(active) and active[k].get('reviving') else bench
+        if not pool: cmds.append('pass'); continue
+        cmds.append('switch ' + str(pool.pop(0) + 1))
     return ', '.join(cmds)

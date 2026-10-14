@@ -55,6 +55,7 @@ class Mon:
         s.abil = ''                                                         # an ability it gained in battle (Trace, Skill Swap, Role Play...)
         s.toxn = 0; s.ptrap = None                                          # Toxic's ticks since it came in; a binding move on it [move, ticks, user]
         s.types = None; s.tadd = ''; s.protean = False                      # types changed in battle (Soak, Protean, Double Shock), a type added, Protean / Libero used
+        s.syrup = False                                                     # its Supersweet Syrup has activated: once a battle, kept through switches
     def leave(s):
         s.boosts = {}; s.vol = set(); s.moved = False; s.stall = False; s.prot = False; s.lock = ''; s.last = ''; s.volarg = {}; s.volturn = {}
         s.unburden = False; s.perish = 0; s.abil = ''; s.toxn = 0; s.ptrap = None; s.types = None; s.tadd = ''; s.protean = False
@@ -93,7 +94,7 @@ def parse(log):
                                'item': m.item, 'gone': m.item_gone, 'slot': '' if m.fainted else slot.get(nick, ''), 'seen': True,
                                'sp': m.species, 'forme': '' if m.mega or m.forme == m.species else m.forme, 'pos': slot.get(nick, ''), 'mega': m.mega, 'moved': m.moved, 'stall': m.stall, 'lock': m.lock, 'slept': m.slept, 'vol': sorted(m.vol), 'last': m.last, 'volarg': dict(m.volarg),
                                'volturn': {v: list(x) for v, x in m.volturn.items() if v in m.vol}, 'unb': m.unburden, 'perish': m.perish, 'abil': m.abil,
-                               'toxn': m.toxn, 'ptrap': list(m.ptrap) if m.ptrap else None, 'types': m.types, 'tadd': m.tadd, 'protean': m.protean}
+                               'toxn': m.toxn, 'ptrap': list(m.ptrap) if m.ptrap else None, 'types': m.types, 'tadd': m.tadd, 'protean': m.protean, 'syrup': m.syrup}
                               for nick in order[sd] for m in [mons[sd][nick]]],
                      'tailwind': sidec[sd]['tailwind'], 'screens': {k: v for k, v in sidec[sd]['screens'].items() if v}, 'hazards': list(sidec[sd]['hazards'])}
         S['perish'] = perish
@@ -281,6 +282,7 @@ def parse(log):
         elif k == '-ability':
             m = mon(p[2])
             if m and re.search(r'\[from\] (ability: (Trace|Receiver|Power of Alchemy)|move: (Role Play|Entrainment|Doodle|Simple Beam|Worry Seed))', l): m.abil = p[3]
+            if m and p[3] == 'Supersweet Syrup' and '[from]' not in l: m.syrup = True
             if m and p[3] not in ('Stamina',): note([m.ref(), f"'s {p[3]}"])
         elif k in ('-enditem', '-item'):
             m = mon(p[2])

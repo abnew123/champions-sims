@@ -80,6 +80,9 @@ function rebuild(spec, flip) {
         if (x.status === 'slp') { const n = x.sleepStart || 3; p.statusState.startTime = n; p.statusState.time = Math.max(1, n - (x.slept || 0) * (p.hasAbility('earlybird') ? 2 : 1)); }
         if (x.status === 'tox') p.statusState.stage = spec.chipDue ? (x.toxn || 0) : 1;   // chipDue: the ticks so far (it counts up each end of turn)
       }
+      // syrupDue (live.specs_for; not the bot's yet): Supersweet Syrup acts once a battle; the log showed it (champ-battle-v29 reads the field,
+      // Battle sim, 2026-10-13). Left to the rebuild, a lead holder had it set at the rebuild's start and one that came in earlier did not
+      if (spec.syrupDue) p.syrupTriggered = !!x.syrupDone;
       const item = toID(x.itemNow);
       if (p.item !== item) { if (!item) p.lastItem = p.item; p.item = item; p.itemState = b.initEffectState({id: item, target: p}); }
       for (const v of Object.keys(p.volatiles)) delete p.volatiles[v];

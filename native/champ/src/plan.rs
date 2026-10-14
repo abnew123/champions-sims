@@ -168,21 +168,24 @@ fn type_mult(b: &mut Battle, ty: &str, m: MonRef) -> f64 {
 /// Arrows) and Ring Target ignore it; Scrappy / Mind's Eye and a Foresight / Odor Sleuth mark let Normal and Fighting hit Ghosts,
 /// Miracle Eye Psychic hit Darks; Ground follows isGrounded (Gravity, Smack Down, Iron Ball, Air Balloon, Magnet Rise; Levitate is an
 /// ability's immunity and stays offered, as before). The outside review (2026-10-14): the data type alone dropped Scrappy Kangaskhan's
-/// Fake Out into a Ghost and Pixilate Sylveon's Quick Attack into Dragapult, which land.
-fn immune_to(b: &mut Battle, a: MonRef, mid: Id, f: MonRef) -> bool {
+/// Fake Out into a Ghost and Pixilate Sylveon's Quick Attack into Dragapult, which land. mega_ab: the attacker's ability after this turn's
+/// Mega Evolution (an id), for the Mega copy of an option (the second review: Mega Altaria's Pixilate Double-Edge into Dragapult was
+/// judged with base Altaria's Natural Cure); None: its ability now.
+fn immune_to(b: &mut Battle, a: MonRef, mid: Id, f: MonRef, mega_ab: Option<&str>) -> bool {
     if mid == "weatherball" || mid == "terrainpulse" { return false; }
+    let has = |b: &Battle, ab: &str| match mega_ab { Some(x) => x == ab, None => b.has_ability(a, ab) };
     let mv = b.dex.mv(mid).tmpl.clone();
     let no_mod = ["judgment", "multiattack", "naturalgift", "revelationdance", "technoblast"];
     let mut ty: Id = mv.mtype;
-    if b.has_ability(a, "normalize") && !no_mod.contains(&mid) { ty = "Normal"; }
+    if has(b, "normalize") && !no_mod.contains(&mid) { ty = "Normal"; }
     else if ty == "Normal" && !no_mod.contains(&mid) {
-        for (ab, t) in [("pixilate", "Fairy"), ("aerilate", "Flying"), ("refrigerate", "Ice"), ("galvanize", "Electric"), ("dragonize", "Dragon")] { if b.has_ability(a, ab) { ty = t; } }
+        for (ab, t) in [("pixilate", "Fairy"), ("aerilate", "Flying"), ("refrigerate", "Ice"), ("galvanize", "Electric"), ("dragonize", "Dragon")] { if has(b, ab) { ty = t; } }
     }
-    if b.has_ability(a, "liquidvoice") && mv.flags.contains(&"sound") { ty = "Water"; }
+    if has(b, "liquidvoice") && mv.flags.contains(&"sound") { ty = "Water"; }
     match &mv.ignore_immunity { Some(IgnImm::All(true)) => return false, Some(IgnImm::Types(v)) if v.contains(&ty) => return false, _ => {} }
     if b.p(f).item == "ringtarget" && !b.ignoring_item(f) { return false; }
     if ty == "Ground" { return b.is_grounded(f, false) == Some(false); }
-    let scrappy = (ty == "Normal" || ty == "Fighting") && (b.has_ability(a, "scrappy") || b.has_ability(a, "mindseye") || find(&b.p(f).volatiles, "foresight").is_some());
+    let scrappy = (ty == "Normal" || ty == "Fighting") && (has(b, "scrappy") || has(b, "mindseye") || find(&b.p(f).volatiles, "foresight").is_some());
     let eye = ty == "Psychic" && find(&b.p(f).volatiles, "miracleeye").is_some();
     let types = b.get_types(f);
     types.iter().any(|t| b.dex.immune_type(ty, &[*t]) && !(scrappy && *t == "Ghost") && !(eye && *t == "Dark"))
@@ -702,6 +705,10 @@ pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
         if !req.is_empty() && FOE_TARGETS.contains(&req[0].1) { return vec![PChoice::Move(0, tl, false)]; }
     }
     let mega = !locked && b.p(m).can_mega_evo.is_some();
+    // the Mega's ability (an id), for judging the Mega copies of options; with and without it the immune-target filter can differ
+    let mega_ab: Option<String> = if mega { b.p(m).can_mega_evo.and_then(|sp| b.dex.species.get(sp)).and_then(|x| x.abilities.iter().find(|(k, _)| *k == "0").map(|x| x.1))
+        .map(|n| n.chars().filter(|c| c.is_ascii_alphanumeric()).collect::<String>().to_lowercase()) } else { None };
+    let (mut mega_only, mut base_only): (Vec<(usize, i64)>, Vec<PChoice>) = (vec![], vec![]);
     let mut out = vec![];
     let foes: Vec<Option<MonRef>> = (0..2).map(|t| b.sides[1 - s as usize].active[t].map(|x| (1 - s, x))).collect();
     for (k, (mid, rtarget, disabled)) in req.iter().enumerate() {
@@ -732,7 +739,12 @@ pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
                 let Some(f) = f else { continue }; if b.p(*f).fainted { continue; }
                 // an immune target is dropped (the move can do nothing to it) unless PLAN_KEEP_IMMUNE names this side: a human (champ
                 // play) attacks into an immune Pokemon on purpose when predicting a switch, and the move then hits the switch-in
-                if mv.category != "Status" && immune_to(b, m, mid, *f) && !keep_immune()[s as usize] { continue; }
+                let check = mv.category != "Status" && !keep_immune()[s as usize];
+                let im_now = check && immune_to(b, m, mid, *f, None);
+                let im_mega = if mega && check { immune_to(b, m, mid, *f, mega_ab.as_deref()) } else { im_now };
+                if im_now && im_mega { continue; }
+                if mega && im_mega { base_only.push(PChoice::Move(k, t as i64 + 1, false)); continue; }   // it lands only without the Mega
+                if mega && im_now { mega_only.push((k, t as i64 + 1)); }                                // only with it: no plain copy
                 out.push(PChoice::Move(k, t as i64 + 1, mega));
             }
             // the partner as the target (planner_issues 17, the user's scope, 2026-10-13): the moves players aim at their partner over
@@ -745,7 +757,10 @@ pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
     // Mega choice (the user, 2026-10-10, through TR sheet: "always mega evolving feels wrong in general"): a stone holder's moves are
     // offered with and without the Mega Evolution, so it can keep its base ability or typing (Lightning Rod Raichu, Intimidate
     // Staraptor) or leave the Mega to its partner. EG_MEGA_ALWAYS=1 restores the old rule (the first move always Mega Evolves).
-    if mega && !mega_always()[s as usize] { let n = out.len(); for j in 0..n { if let PChoice::Move(k, t, true) = out[j] { out.push(PChoice::Move(k, t, false)); } } }
+    if mega && !mega_always()[s as usize] {
+        let n = out.len(); for j in 0..n { if let PChoice::Move(k, t, true) = out[j] { if !mega_only.contains(&(k, t)) { out.push(PChoice::Move(k, t, false)); } } }
+        out.extend(base_only);
+    }
     if out.is_empty() { vec![PChoice::Move(0, 0, false)] } else { out }
 }
 /// a normal / any move worth aiming at the partner (planner_issues 17; PARTNER_TARGETS=0 turns it off for head-to-heads): always for the

@@ -1287,3 +1287,9 @@ registrations since its second version) and checks reachability of real logs in 
   of 135 random positions unchanged (the other: Pixilate Hyper Beam into Basculegion). Battle mechanics untouched, so no differential
   rerun. (2) deep.rs: the budgeted search as a tree (EVAL_DEPTH / BATTLE_EVAL), deterministic, every evaluation counted; inert without
   those variables. Bot: battlesim-champ29-bot -> champ-bot-2026-10-14a (v32). `src_battle_v32.tar.gz`, `bin/champ-battle-v32.sha256`.
+- **champ-battle-v33 (2026-10-14, 3:30 pm) = v32 + the immunity filter per Mega copy (the review's second pass).** A Mega copy of an
+  option is judged with the Mega's ability (Evolution comes before the move), the plain copy with the current one: a move that lands only
+  with the Mega gets no plain copy, one that lands only without it only the plain copy. v32 judged both with the pre-Mega ability, so
+  Mega Salamence's Aerilate Double-Edge (and Mega Altaria / Gardevoir / Glalie / Lopunny cases) into Ghosts stayed dropped. On 60 such
+  positions the Mega copy came back in all 60 (9% of the mix on average), nothing removed, no plain copy added; 59 of 60 random
+  positions unchanged (the other a real Mega Salamence case). Bot: battlesim-champ29-bot -> champ-bot-2026-10-14b (v33).

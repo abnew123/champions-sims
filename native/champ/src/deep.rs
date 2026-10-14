@@ -13,13 +13,14 @@
 //! the root get the floor again), sd a cell's roll spread (at least EVAL_SD_FLOOR), e^2 the spread of the cell's corrections (with fewer
 //! than two deep rolls: the mean square correction over the tree so far, starting from EVAL_DEEP_SD0 = 0.05). A node deepens while it
 //! has depth left (EVAL_DEPTH at the root: turns beyond the root's turn). Rounds spend about EVAL_ROUND (2%) of the budget; only the
-//! nodes whose cells changed are solved again. Every value is side 0's win chance.
+//! nodes whose cells changed are solved again. Every value is side 0's win chance. Deterministic: cells in key order, ties broken by
+//! path and action.
 use crate::battle::*;
 use crate::plan::*;
 use crate::prng::Prng;
 use crate::sim::PChoice;
 use crate::spot::{joint, resolve_switches, seed4};
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 
 fn envf(name: &str, d: f64) -> f64 { std::env::var(name).ok().and_then(|x| x.parse().ok()).unwrap_or(d) }
 
@@ -54,9 +55,9 @@ impl Cell {
     }
 }
 pub struct Node { b: Battle, pub msw: Vec<[PChoice; 2]>, pub tsw: Vec<[PChoice; 2]>, mns: Vec<usize>, tns: Vec<usize>,
-    cells: HashMap<(usize, usize), Cell>, pub x: Vec<f64>, pub y: Vec<f64>, pub rv: Vec<f64>, pub cv: Vec<f64>, pub v: f64,
+    cells: BTreeMap<(usize, usize), Cell>, pub x: Vec<f64>, pub y: Vec<f64>, pub rv: Vec<f64>, pub cv: Vec<f64>, pub v: f64,
     depth: usize, key: u64, base: usize, dirty: bool, act: (Option<usize>, Option<usize>) }
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 enum Act { Roll(usize, usize), Deep(usize, usize) }
 struct Cand { pri: f64, path: Vec<(usize, usize, usize)>, act: Act }
 
@@ -71,7 +72,7 @@ impl Node {
         if msw.is_empty() || tsw.is_empty() { return None; }
         let mns: Vec<usize> = (0..msw.len()).filter(|&i| no_sw(&msw[i])).collect();
         let tns: Vec<usize> = (0..tsw.len()).filter(|&j| no_sw(&tsw[j])).collect();
-        let mut n = Node { b, msw, tsw, mns, tns, cells: HashMap::new(), x: vec![], y: vec![], rv: vec![], cv: vec![], v: 0.5, depth, key, base, dirty: true, act: (None, None) };
+        let mut n = Node { b, msw, tsw, mns, tns, cells: BTreeMap::new(), x: vec![], y: vec![], rv: vec![], cv: vec![], v: 0.5, depth, key, base, dirty: true, act: (None, None) };
         st.nodes += 1; n.solve(cfg, st);
         Some(n)
     }
@@ -171,7 +172,8 @@ pub fn search(b: &Battle, cfg: &Cfg, key: u64, depth: usize, p: &Params, budget:
         let cc = if st.cost_n > 0 { st.cost_sum / st.cost_n as f64 } else { (root.cells.len() * p.child_base) as f64 }.max(1.0);
         let mut cands = vec![]; root.collect(1.0, &mut vec![], p, st.err_ms(p), cc, &mut cands);
         if cands.is_empty() { break; }
-        cands.sort_by(|a, c| c.pri.partial_cmp(&a.pri).unwrap_or(std::cmp::Ordering::Equal));
+        // highest priority first; ties by path and action, so the same position always gets the same search (the review, 2026-10-14)
+        cands.sort_by(|a, c| c.pri.partial_cmp(&a.pri).unwrap_or(std::cmp::Ordering::Equal).then_with(|| a.path.cmp(&c.path)).then_with(|| a.act.cmp(&c.act)));
         let quota = if budget > 0 { budget as f64 * p.round } else { st.sims as f64 * 0.05 }.max(32.0);
         let start = st.sims;
         for c in &cands {

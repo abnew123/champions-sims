@@ -199,3 +199,7 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     a little better than Thunderbolt (0.504) against a 71% Imprison, because Trick Room wins big when they do not Imprison. The real
     gap is (b): a human who led Imprison in game 1 does it again; the mixed-strategy opponent does not.
     **(b) not to be done (the user, 2026-10-14):** no Bo3 match memory; the bot keeps treating each game of a match on its own.
+    **First cut measured (2026-10-14, 10:50 am):** the budgeted search (rolls only) on the 1,503 held-out positions against results:
+    staged 0.5241; same rolls 0.5229 (-0.0012 ± 0.0014, 1.2x the time); 2x rolls 0.5227 (-0.0014 ± 0.0014); 4x rolls on the first 720
+    no better than 2x. value_se median 0.0016 (1x) -> 0.0010 (4x). Luck sampling is not what limits the evaluation at today's budget:
+    the value and the one-turn horizon are. Depth (the second cut) is where a gain could come from.

@@ -105,7 +105,9 @@ async function login(challstr) {
 }
 // logged out from elsewhere (2026-10-14: a logout of the account anywhere, a browser tab included, logs out every connection of it; both
 // clients then played two games as a guest name, unable to find their side, slow to the timer each turn): log back in on this
-// connection, which keeps its games. More than three logouts within an hour stop the client instead (the watcher reports it).
+// connection, so the next search is ours again. A game in progress cannot be saved: a rated battle forfeits a player whose name changes
+// ("forfeited by changing their name", room-battle onRename), logging out included. More than three logouts within an hour stop the
+// client instead (the watcher reports it).
 let lastChallstr = null; const logouts = [];
 function relogin(name) {
   me = null; searching = false; const now = Date.now(); logouts.push(now);

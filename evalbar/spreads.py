@@ -384,8 +384,6 @@ def damage_ranges(gp, sets, known_side, known_evs, dobs, cands, strict=False):
         mf = mega_of(am['sp'], aset.get('item', '')) if (am['mega'] or ob['att'] in ob['megas']) else None
         if aset.get('ability') in ORDER_ABILITIES or (mf and (E['species'].get(toid(mf), {}).get('abilities') or {}).get('0') in ORDER_ABILITIES): continue
         for evs in cands[um['sp']]:
-            key = (hashlib.md5(json.dumps([strict, ob, um['sp'], [[m['sp'], m['hp'], m['b'], m['st'], m['gone']] for sd in ('p1', 'p2') for m in order[sd]], st['field']], sort_keys=True).encode()).hexdigest(), tuple(evs))
-            if key in _DCACHE: res[(oi, um['sp'], tuple(evs))] = _DCACHE[key]; continue
             sides = []
             for sd in ('p1', 'p2'):
                 mons = []
@@ -410,9 +408,13 @@ def damage_ranges(gp, sets, known_side, known_evs, dobs, cands, strict=False):
             spec = {'name': 'dmg', 'turn': ob['turn'], 'sides': sides, 'acts': [[None, None], [None, None]], 'perish': st['perish'], 'standIns': 0, 'dropped': [], **DMG_FLAGS,
                     'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None, 'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}
             if ob.get('weather'): spec['field']['weather'] = [SD_WEATHER[ob['weather']], 5] if SD_WEATHER[ob['weather']] else None   # as it landed
-            want.append((key, (oi, um['sp'], tuple(evs)), {'spec': spec, 'att': [0 if ob['att'][:2] == 'p1' else 1, ia], 'def': [0 if ob['def'][:2] == 'p1' else 1, idf],
-                                                          'move': ob['move'], 'crit': ob['crit'], 'spread': ob['spread'], 'helping': ob['helping'], 'hp': ob['hp'],
-                                                          **({'strict': int(strict)} if strict else {})}))
+            q = {'spec': spec, 'att': [0 if ob['att'][:2] == 'p1' else 1, ia], 'def': [0 if ob['def'][:2] == 'p1' else 1, idf],
+                 'move': ob['move'], 'crit': ob['crit'], 'spread': ob['spread'], 'helping': ob['helping'], 'hp': ob['hp'], **({'strict': int(strict)} if strict else {})}
+            # the cache key is the whole query damage.js gets (an outside review, 2026-10-14: a summary of species, HP, boosts and status missed a
+            # changed type, a shown item, abilities and the flags, so a long-lived process served 186-222 for a hit that was 46-55)
+            key = hashlib.md5(json.dumps(q, sort_keys=True).encode()).hexdigest()
+            if key in _DCACHE: res[(oi, um['sp'], tuple(evs))] = _DCACHE[key]; continue
+            want.append((key, (oi, um['sp'], tuple(evs)), q))
     if want:
         with tempfile.TemporaryDirectory() as d:
             qf, of = os.path.join(d, 'q.json'), os.path.join(d, 'r.json'); json.dump([w[2] for w in want], open(qf, 'w'))

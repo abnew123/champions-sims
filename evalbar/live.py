@@ -514,9 +514,9 @@ class Finished:
     def __init__(s, room, fmt, data, refined=False): s.room, s.fmt, s.data, s.status, s.refined = room, fmt, data, 'finished', refined
 def evalbar_mode():
     """the eval bar's own reading, switched on by its programs' entry points (live.py, broadcast.py for the streams, reach.py), never by the
-    bot's, which sets its own: Baton Pass hands on stages and effects, a Mega Evolution ends a traced ability, the fitted default spreads, and
-    the damage check's positions with the same positions.js fixes as the rest (battlestate.FLAGS). The streams had none of these until
-    2026-10-14 (broadcast.py's entry point never set them)"""
+    bot's, which makes its own choices: the fitted default spreads and the damage check's positions with the same positions.js fixes as the
+    rest (battlestate.FLAGS). The parser's fixes (Baton Pass, a Mega ending a traced ability) are on by default for every reader since
+    2026-10-14; set here too for older code. The streams had none of these until 2026-10-14 (broadcast.py's entry point never set them)"""
     import spreads, battlestate as BS
     R.BATON_PASS = R.MEGA_ABIL = True; spreads.FITTED = True; spreads.DMG_FLAGS = dict(BS.FLAGS)
 def botfmt(room):

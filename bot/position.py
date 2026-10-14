@@ -143,6 +143,9 @@ def decide(specs, request, side, threads=2, seeds=32, log=None, cap=None, fmt=No
     rows = {r['name']: r for r in map(json.loads, open(outf)) if 'error' not in r}
     w0, spec0 = specs[0]; name = spec0['name'] + ' p1'
     r = rows.get(name) or next(iter(rows.values()))
+    # the engine finds nothing to choose (its position is over, or a side has no options, e.g. a last Pokemon locked into a charge):
+    # Showdown's default, which is the only move then (a local test game, 2026-10-14)
+    if 'sides' not in r: return 'default', 'no engine choices: ' + str(r.get('note', '')), r.get('value', 0.5)
     s0 = r['sides'][0]; joint = [j for j in s0['joint'] if j['w'] > 0]; value = r['value']; how = ''
     hs = [(w, rows[sp['name'] + ' p1']) for w, sp in specs if rows.get(sp['name'] + ' p1', {}).get('matrix')] if multi else []
     if len(hs) > 1:

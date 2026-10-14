@@ -58,7 +58,7 @@ fn hits(b: &mut Battle, cd: &crate::data::Data, a: MonRef, foes: &[MonRef]) -> V
     }
     out
 }
-fn has_move(b: &Battle, m: MonRef, ids: &[&str]) -> bool { b.p(m).move_slots.iter().any(|x| x.pp > 0 && !x.disabled && ids.contains(&x.id)) }
+fn has_move(b: &Battle, m: MonRef, ids: &[&str]) -> bool { b.p(m).move_slots.iter().any(|x| x.pp > 0 && !x.disabled && ids.contains(&x.id) && !crate::plan::imprisoned(b, m.0, x.id)) }   // an Imprisoned move does not count (2026-10-14)
 fn spe(b: &mut Battle, m: MonRef) -> f64 { b.get_stat(m, 5, false, false) as f64 }
 /// side s's features (SIDE_NAMES)
 pub fn side_feats(b: &mut Battle, cd: &crate::data::Data, s: u8) -> Vec<f64> {

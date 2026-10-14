@@ -37,12 +37,12 @@ def report(prefix, db, dc):
     for k in sorted(set(B) & set(C)):
         vb, vc = B[k]['v'], C[k]['v']
         if vb is None or vc is None: continue
-        g = (vb - vc) / 2; gains[B[k]['kind']].append(g); gains['all'].append(g)
+        g = (vb - vc) / 2; gains[B[k].get('kind') or B[k].get('my_arch') or '?'].append(g); gains['all'].append(g)   # endgame kind, or side 0's style
         turns['all'].append((B[k]['rows'][0]['turns'], C[k]['rows'][0]['turns'])); ms[0] += B[k]['rows'][0]['ms']; ms[1] += C[k]['rows'][0]['ms']
         turns['deep'].append(B[k]['rows'][0].get('h2', 0) + C[k]['rows'][0].get('h2', 0))
     def line(name, d):
         n = len(d); mu = sum(d) / n; se = (sum((x - mu) ** 2 for x in d) / max(n - 1, 1)) ** 0.5 / n ** 0.5
-        print(f"  {name:4s} {n:4d} starts  the deep side's gain {100 * mu:+5.1f} ± {100 * se:3.1f} points  (results differ in {sum(1 for x in d if abs(x) > 1e-9)})")
+        print(f"  {name:11s} {n:4d} starts  the deep side's gain {100 * mu:+5.1f} ± {100 * se:3.1f} points  (results differ in {sum(1 for x in d if abs(x) > 1e-9)})")
     n = len(gains['all'])
     if not n: print('nothing to compare yet'); return
     print(f"{n} endgames played both ways; {ms[0] / n / 1000:.1f} / {ms[1] / n / 1000:.1f} s a game; deep rolls a game {sum(turns['deep']) / (2 * n):.0f} (games with none: {sum(1 for x in turns['deep'] if x == 0)} of {n} pairs)")

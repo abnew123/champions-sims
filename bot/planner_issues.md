@@ -220,3 +220,9 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
       about half the sides (mixes 0.41 apart), without depth 0.09. A few costly deep rolls with large corrections swing the tables, which
       fits the flat playouts. So depth looks more useful as training targets (a net fitted on deep values, decisions at today's speed and
       stability) than live at the bot's budget.
+    - Steadying it (the user chose live depth first): EVAL_DEEP_K0 shrinks a cell's mean correction by K / (K + k0). On 301 held-out
+      positions at the bot's budget, each setting run twice on other luck (EVAL_KEY_SALT): how far the joint mixes move with luck alone
+      / how often a side's top option differs / log loss against no depth: none 0.18 / 26%; depth 2 0.44 / 52% / -0.0106 +- 0.0105;
+      k0 2 0.37 / 44% / -0.0091 +- 0.0047; k0 4 0.34 / 41% / -0.0072 +- 0.0041; k0 2 with two-roll children 0.35 / 43% / -0.0044 +-
+      0.0040. k0 2 keeps most of the gain (about 2 SE) with a third of the extra noise gone. Self-play at the bot's budget (20,000 leaf
+      evaluations a decision, 800 pool starts both ways, depth 2 k0 2 vs none) started at 6 pm, about 9 hours on 4 threads.

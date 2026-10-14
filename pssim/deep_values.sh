@@ -1,0 +1,22 @@
+#!/bin/zsh
+# Does the anytime search's depth predict real results better? (2026-10-14, after the endgame playouts were flat: on 200 endgames depth 3
+# changed a side's top choice in 144 and the log loss against the real results went 0.2995 -> 0.2780, -0.022 +- 0.034.) The same search
+# with and without depth, at the same budget, on (1) the 600 endgame starts (depth 3, 20,000 leaf evaluations) and (2) the 1,503 held-out
+# positions (depth 2, each its staged search's own budget: EVAL_BUDGET=spec). Scored by deep_values.py. 4 threads, one run at a time;
+# each run shows on the progress page.
+#   SP=<scratch dir: battlesim-champ-deep, deepend/eg600.pos.jsonl, hold_sub_b.pos.jsonl> ./deep_values.sh
+ME=${0:A}; cd "$(dirname $ME)"
+SP=${SP:?scratch dir}; T=${T:-4}; B=$SP/battlesim-champ-deep; ED=../native/engine_data_full.json
+F=(RACE_TIES=avg RACE=1 TRSYM=1 EG_VALUE=egvalue9_sym2.json EG_MEGA_TIE=0 GRID_DIR=$SP/grid CALC_DATA=../native/champions_data_full.json
+   RACE_PRIO=1 FEATS22=1 EVAL_SEEDS=32 EG_VNET=$PWD/../bot/value/vnet_h64_search_acc.json EVAL_TOP=200)
+run() {   # run <tag> <positions> <budget env> <depth>
+  local tag=$1 pos=$2 bud=$3 d=$4 out=$SP/deepval_$1.eval.jsonl
+  python3 -c "import json,os,time,sys; d='../evalbar/out/battlesim'; os.makedirs(d,exist_ok=True); json.dump({'title': 'Battle sim: depth vs none, real results ($tag)', 'out': os.path.relpath('$out', os.path.abspath('../evalbar/out')), 'total': sum(1 for _ in open('$pos')), 'done0': 0, 'started': time.time(), 'threads': $T}, open(os.path.join(d, 'deepval_$tag.run.json'),'w'))"
+  echo "$(date '+%I:%M %p') $tag"
+  env $F ${=bud} EVAL_DEPTH=$d nice -n 10 $B evalpos $ED $pos $out $T > /dev/null 2>&1
+}
+run eg_d0 $SP/deepend/eg600.pos.jsonl "EVAL_BUDGET=20000" 0
+run eg_d3 $SP/deepend/eg600.pos.jsonl "EVAL_BUDGET=20000" 3
+run hold_d0 $SP/hold_sub_b.pos.jsonl "EVAL_BUDGET=spec" 0
+run hold_d2 $SP/hold_sub_b.pos.jsonl "EVAL_BUDGET=spec" 2
+echo "$(date '+%I:%M %p') done"

@@ -331,7 +331,9 @@ pub fn main(args: &[String]) {
         if done.contains(&name) { continue; }
         let mut h: u64 = 0xcbf29ce484222325; for c in name.bytes() { h ^= c as u64; h = h.wrapping_mul(0x100000001b3); }      // FNV-1a of the name
         let r = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
-            let b = crate::turntest::new_battle(dex, reg, &sp["state"], Mode::Real);
+            let mut b = crate::turntest::new_battle(dex, reg, &sp["state"], Mode::Real);
+            if std::env::var("EVAL_REFRESH_DISABLES").map(|v| v != "0").unwrap_or(true) { b.refresh_disables(); }   // see Battle::refresh_disables
+            let b = b;
             eval_one(&b, cfg, &sp, h ^ 0xE7A1, nseeds, top) }));
         let mut row = match r {
             Ok(v) => v,

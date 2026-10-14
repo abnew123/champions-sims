@@ -1272,3 +1272,10 @@ registrations since its second version) and checks reachability of real logs in 
   Found on a Bo3 game (…2698029711 turn 2): the opponent's Farigiraf Imprisoned ours (Protect and Trick Room both), the bot planned on
   both, its Protect was refused and the re-sent request answered 'default'. The bot's positions carry no Imprison volatile (a
   battle-reading gap: the Eval bar's replay.py / positions.js). Bot: battlesim-champ29-bot -> champ-bot-2026-10-13b (v30).
+- **champ-battle-v31 (2026-10-13, 10:30 pm) = v30 + two position fixes.** (1) Imprison's handlers use the holder as the source (it always
+  is: target self); the bot's rebuilt position gave the volatile the opposing active as its source, so the engine Imprisoned our
+  Incineroar's moves and not the ones the opponent's Farigiraf knows. (2) evalpos recomputes the request's disables when it loads a
+  position (Battle::refresh_disables, end_turn's DisableMove pass alone; EVAL_REFRESH_DISABLES=0 turns it off): positions rebuilt from
+  logs carry volatiles (Imprison, Choice lock, Disable, Taunt...) but not the disables Showdown derives from them, so the planner offered
+  a Choice-locked Pokemon every move and an Imprisoned Farigiraf its Trick Room. On 120 held-out positions, 12 change (Choice lock,
+  Disable), none from thread noise. Every differential set still exact. Bot: battlesim-champ29-bot -> champ-bot-2026-10-13c (v31).

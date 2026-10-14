@@ -108,7 +108,7 @@ def spec_mon(m, st):
             'itemNow': '' if m['gone'] or toid(st['item']) not in S.E['items'] else st['item'], 'moved': m['moved'], 'stall': m['stall'], 'lock': m['lock'],
             'vol': m['vol'], 'onField': bool(m['pos']), 'last': m['last'], 'volarg': m['volarg'], 'volturn': m.get('volturn') or {},
             'unburden': m.get('unb', False), 'perish': m.get('perish', 0), 'abilityNow': m.get('abil', ''), 'toxn': m.get('toxn', 0), 'ptrap': m.get('ptrap'),
-            'typesNow': m.get('types'), 'typeAdd': m.get('tadd', ''), 'proteanUsed': m.get('protean', False)}
+            'typesNow': m.get('types'), 'typeAdd': m.get('tadd', ''), 'proteanUsed': m.get('protean', False), 'syrupDone': m.get('syrup', False)}
 def hyps(sd, state, six, sets, leads, topk=TOPK):
     """the TOPK most likely sets of Pokemon this player has not sent in yet: [(weight, [species])]"""
     known = {m['sp'] for m in state[sd]['mons']}
@@ -150,6 +150,7 @@ def specs_for(tag, g, step, six, sets, leads, own=None):
                                   'chipDue': True,                    # Toxic's count and a binding move go on (positions.js)
                                   'fallenDue': True,                  # Supreme Overlord's count of fallen allies (positions.js)
                                   'typeDue': True,                    # types changed in battle (Soak, Protean, Double Shock) (positions.js, damage.js)
+                                  'syrupDue': True,                   # a Supersweet Syrup that has activated stays spent (positions.js; the v29 engine reads it)
                                   'dropped': [], 'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None,
                                                            'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}))
     return out, H

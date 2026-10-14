@@ -185,3 +185,10 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     the solved mixes). Today's EVAL_ADAPT staging is the special case "refine by rolls, top options only". Order: after v29; first cut
     = refine by rolls with the priority rule + value_se output (no depth), then depth for the top cells; the Eval bar scores budgets
     1 / 5 / 15 / 60 s on the 461 bot games and the replays to see where the gain flattens.
+19. **Trick Room into a known Imprison (lyph88, Bo3 …2698115565 / …2698116132, 2026-10-14; the opponent asked why we kept clicking
+    Trick Room).** Their Timid Indeedee (Imprison, Trick Room on the sheet) led both games and Imprisoned first; our Farigiraf's Trick
+    Room was blocked both times. Rebuilt turn 1: the bot predicted Imprison 71% and still played Trick Room 81%. (a) The value features'
+    Trick Room potential ignores an opposing Imprison holder that knows Trick Room, so the Imprisoned position still reads as a live
+    Trick Room plan; zero it while such a foe is active (rare in the training data: no refit needed). (b) No Bo3 match memory: game 2
+    repeated game 1's lead and Imprison; let game 1's plays raise their weight in the human model for games 2-3. After the budgeted
+    search (the user, 2026-10-14).

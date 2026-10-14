@@ -92,7 +92,8 @@ function send(s) {   // a send while the socket is down (a reconnect after the M
 function connect() {
   ws = new WebSocket(WS);
   ws.onmessage = e => { for (const m of String(e.data).split('\n>').map((x, i) => i ? '>' + x : x)) onMessage(m); };
-  ws.onclose = () => { log('socket closed; reconnecting in 10 s'); searching = false; setTimeout(connect, 10000); };
+  // me = null: a new connection starts as a guest, which is not a logout (relogin would count it toward its three-an-hour stop)
+  ws.onclose = () => { log('socket closed; reconnecting in 10 s'); searching = false; me = null; setTimeout(connect, 10000); };
   ws.onerror = () => {};
 }
 async function login(challstr) {
@@ -130,7 +131,9 @@ async function onMessage(m) {
       else if (p[1] === 'updatesearch') { try { const s = JSON.parse(p[2]); searching = (s.searching || []).includes(FORMAT); inGames = Object.keys(s.games || {}).filter(MINE).length;
         // after a (re)connect only: games already in progress at login are joined once (a new match's rooms also show up here a
         // moment before the server joins us to them, which is not a rejoin)
-        if (Date.now() - loginAt < 15000) for (const g of Object.keys(s.games || {}).filter(MINE)) if (!joinSent.has(g) && !(rooms[g] && rooms[g].lines.length)) {
+        // A room we already track counts as joined only if it has had a line since this login: a socket reconnect keeps `rooms`, and
+        // the old test (any lines at all) sent no /join, so the bot could wait on it forever (the outside review, 2026-10-14)
+        if (Date.now() - loginAt < 15000) for (const g of Object.keys(s.games || {}).filter(MINE)) if (!joinSent.has(g) && !(rooms[g] && (rooms[g].last || 0) > loginAt)) {
           joinSent.add(g); rooms[g] = rooms[g] || {lines: [], side: null, req: null, done: false, oppRating: null, turn: 0}; send(`|/join ${g}`); log('rejoining', g.slice(-16)); }
       } catch (e) {} }
       else if (p[1] === 'updatechallenges') { if (!SECONDARY) onChallenges(p[2]); }
@@ -158,6 +161,7 @@ async function onMessage(m) {
       if (p[1] === 'player' && p[3] && me && p[3].toLowerCase() === me.toLowerCase()) R.side = p[2];
       if (p[1] === 'player' && p[3] && me && p[3].toLowerCase() !== me.toLowerCase() && p[5]) R.oppRating = +p[5];
       if (p[1] === 'turn') R.turn = +p[2];
+      if (p[1] === 'turn' && LOCAL && process.env.BOT_TEST_DROP && +p[2] === +process.env.BOT_TEST_DROP && !R.dropped) { R.dropped = true; log('test: closing the socket at turn', p[2]); setTimeout(() => ws.close(), 500); }   // reconnect test, local server only
       if (room.startsWith('game-bestof')) {   // the match room: confirm each game's start when asked, note the match result
         if (line.includes('/confirmready') || (p[1] === 'inactive' && me && line.includes(me) && line.includes('confirm'))) { if (!R.confirmed) { R.confirmed = true; setTimeout(() => { send(`${room}|/confirmready`); R.confirmed = false; }, 2000); } }
         if (p[1] === 'win' && !R.done) { R.done = true; const won = me && p[2].toLowerCase() === me.toLowerCase(); log('match over', room.slice(-16), won ? 'won' : 'lost'); fs.appendFileSync(path.join(OUT, LOCAL ? `matches_${TAG}.jsonl` : 'matches.jsonl'), JSON.stringify({when: new Date().toISOString(), room, won: !!won, games: R.lines.filter(l => l.startsWith('|uhtml|game')).length, team: currentTeam && currentTeam.name, arm: currentTeam && currentTeam.arm}) + '\n'); setTimeout(() => { send(`${room}|/leave`); delete rooms[room]; refreshMyRating(); }, 8000); }
@@ -266,12 +270,25 @@ async function pickTeam() {
 let currentTeam = null, pendingPacked = null;
 // the team belongs to the account, not to the connection (2026-10-12: the Bo3 client's /utm became the Bo1 client's team), and Showdown
 // takes it when the search starts: so the team is sent right before the search, under a lock file the other client respects
+// the team is the account's, shared by every connection, so only one client at a time may go from /utm to /search: the lock is taken
+// with an exclusive create and released only by its owner once its search is out; one older than 8 s is stale (a client that died
+// holding it). Before 2026-10-14 (the outside review) both clients could read an expired lock, both /utm, and search with the second team.
+const LOCK_ID = `${process.pid}-${TAG}`;
 async function searchWithTeam(cmd) {
   const lf = path.join(OUT, 'search.lock');
-  for (let i = 0; i < 30; i++) { let t = 0; try { t = +fs.readFileSync(lf, 'utf8'); } catch (e) {} if (Date.now() - t > 8000) break; await sleep(1000); }
-  try { fs.writeFileSync(lf, String(Date.now())); } catch (e) {}
+  for (let i = 0; i < 30; i++) {
+    try { fs.writeFileSync(lf, `${Date.now()} ${LOCK_ID}`, {flag: 'wx'}); break; }
+    catch (e) {
+      if (e.code !== 'EEXIST') break;
+      let held = ''; try { held = fs.readFileSync(lf, 'utf8'); } catch (e2) { continue; }
+      if (Date.now() - +held.split(' ')[0] > 8000) { try { if (fs.readFileSync(lf, 'utf8') === held) fs.unlinkSync(lf); } catch (e3) {} continue; }
+      await sleep(1000);
+    }
+  }
   if (pendingPacked) send(`|/utm ${pendingPacked}`);
   await sleep(1500); send(cmd);
+  await sleep(1500);
+  try { if (fs.readFileSync(lf, 'utf8').split(' ')[1] === LOCK_ID) fs.unlinkSync(lf); } catch (e) {}
 }
 let loopOn = false;
 async function onReady() {

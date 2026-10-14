@@ -45,7 +45,7 @@ FITPOS, FITEVAL = os.path.join(OUT, TAG + 'fit_pos.jsonl'), os.path.join(OUT, TA
 MODEL_OUT = os.path.join(OUT, f'human_model{"_" + TAG if TAG else ""}.json')                 # what fit writes
 MODEL = os.environ.get('CONTEMPT_MODEL') or os.path.join(OUT, 'human_model.json')           # what score / livescore use
 OPPMIN = int(os.environ.get('CONTEMPT_OPPMIN', '0'))                                          # score only the decisions against players rated this or more
-CAL = 0.7538
+import live as LV; CAL = LV.CAL   # the Eval bar's rescale for the engine and net the bot runs (0.676; 0.7538 was v25's, until 2026-10-14)
 CS = [0.0, 0.1, 0.25, 0.5, 0.75, 1.0]
 
 def ratings(game):

@@ -31,7 +31,8 @@ toid = R.toid
 # and volDue (a Yawn at the turn start puts its target to sleep at this turn's end; Taunt, Encore, Disable, Throat Chop and Heal Block keep
 # their remaining turns) the user, 2026-10-12; pctDue, abilDue, chipDue (Toxic's stage, binding moves), fallenDue (Supreme Overlord's count)
 # and typeDue (types changed in battle) the user, 2026-10-12 evening; then syrupDue and srcDue
-BOT_FLAGS = dict.fromkeys(('yawnDue', 'volDue', 'fieldDue', 'pctDue', 'abilDue', 'chipDue', 'fallenDue', 'typeDue', 'syrupDue', 'srcDue'), True)
+BOT_FLAGS = dict.fromkeys(('yawnDue', 'volDue', 'fieldDue', 'pctDue', 'abilDue', 'chipDue', 'fallenDue', 'typeDue', 'syrupDue', 'srcDue',
+                           'rechargeDue', 'itemDue'), True)   # rechargeDue / itemDue: on for the bot 2026-10-14 (Battle sim, the standing rule)
 STATK = {'hp': 'hp', 'atk': 'atk', 'def': 'def', 'spa': 'spa', 'spd': 'spd', 'spe': 'spe'}
 def export(text):
     """a Showdown team export -> {base species id: set with its spread}"""

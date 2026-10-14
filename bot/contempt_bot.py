@@ -71,7 +71,7 @@ def score(show=12):
     import numpy as np
     from scipy.optimize import linprog
     import human_lines as HL, position as POS_
-    real = np.vectorize(lambda v: HL.resc(v, 0.7538))
+    import live as LV; real = np.vectorize(lambda v: HL.resc(v, LV.CAL))   # the bot's own logged values: its engine's CAL (0.676 since 2026-10-14)
     meta = {m['name']: m for m in json.load(open(META))}
     L = {r['name'][:-5]: r for r in map(json.loads, open(LEVAL)) if 'error' not in r and 'matrix' in r}
     B = {r['name'][:-5]: r for r in map(json.loads, open(BEVAL)) if 'error' not in r and 'matrix' in r}

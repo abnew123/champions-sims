@@ -6,7 +6,6 @@ Team preview: Team search's bring heuristic against the opponent's open team she
 from the room log plus our own |request| (bot/position.py; the Eval bar thread's live builder for the opponent's side), evaluated by
 champ evalpos with the kit's setup, and a joint action is sampled from the planner's mix. Never prints anything else to stdout."""
 import json, os, sys, subprocess, random, re, traceback, math
-CAL = 0.7538   # the rescale of the planner's value to real outcomes (the eval bar's, fitted for egvalue9_sym2)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); PS = os.path.join(ROOT, 'pssim')
 sys.path.insert(0, PS); sys.path.insert(0, os.path.join(ROOT, 'bot'))
 sys.path.insert(0, os.path.join(ROOT, 'evalbar'))
@@ -80,8 +79,10 @@ def turn(msg):
     cap = json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))).get('protect_chain_cap')
     choice, note, value = POS.decide(specs, req, msg['side'], log=msg['log'], cap=cap, fmt=fmt)
     # a lost game is forfeited rather than played out (the user: Protect-stalling a lost position is what would annoy people most):
-    # the planner's value rescaled to a real win chance as the eval bar does (log-odds x 0.7538), under limits.json's forfeit_below
-    real = 1 / (1 + math.exp(-CAL * math.log(max(1e-6, value) / max(1e-6, 1 - value))))
+    # the planner's value rescaled to a real win chance as the eval bar does (log-odds x CAL), under limits.json's forfeit_below. CAL is
+    # the Eval bar's, fitted for the engine and net the bot runs (live.CAL: 0.676 for v31 + the h64 net); until the outside review
+    # (2026-10-14) it was v25's 0.7538 with egvalue9_sym2, which forfeited a little early (raw 0.4%: 1.5% instead of 2.3%)
+    real = 1 / (1 + math.exp(-POS.LV.CAL * math.log(max(1e-6, value) / max(1e-6, 1 - value))))
     below = json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))).get('forfeit_below', 0.0)
     if real < below: return {'forfeit': True, 'note': f'forfeit: win chance {100 * real:.1f}% (value {100 * value:.1f}%)'}
     return {'choice': choice, 'note': note + (f" hyp {info.get('hyp', [])[:1]}" if info.get('need') else '')}

@@ -15,7 +15,7 @@ recorded.py back_weight), every pairing of the two players' combinations evaluat
 values rescaled to real outcomes. The battle log, positions and results stay in evalbar/out/live/ (git-ignored: the log has usernames).
 Needs Node with --experimental-websocket (Node 20.10+)."""
 import os, sys, json, math, time, re, glob, itertools, subprocess, threading, collections, http.server
-import common as C, replay as R, spots as S, recorded as RC, build as B, engine as EN, procs as P
+import common as C, replay as R, spots as S, recorded as RC, build as B, engine as EN, procs as P, battlestate as BS
 toid = R.toid
 OUT = os.path.join(C.HERE, 'out', 'live'); FEED = os.path.join(C.HERE, 'live_feed.js')
 NODE = [P.exe('node'), '--experimental-websocket', '--no-warnings']
@@ -110,12 +110,6 @@ def sets_for(g, log, bo3):
             st, bad = S.fit_set(raw, dropped) if raw else (None, [sp])
             out[sd][sp] = st
     return six, out, dropped
-def spec_mon(m, st):
-    return {**st, 'forme': m['forme'], 'mega': m['mega'], 'hpPct': m['hp'], 'fainted': m['f'], 'status': m['st'], 'slept': m['slept'], 'boosts': m['b'],
-            'itemNow': '' if m['gone'] or toid(st['item']) not in S.E['items'] else st['item'], 'moved': m['moved'], 'stall': m['stall'], 'lock': m['lock'],
-            'vol': m['vol'], 'onField': bool(m['pos']), 'last': m['last'], 'volarg': m['volarg'], 'volturn': m.get('volturn') or {},
-            'unburden': m.get('unb', False), 'perish': m.get('perish', 0), 'abilityNow': m.get('abil', ''), 'toxn': m.get('toxn', 0), 'ptrap': m.get('ptrap'),
-            'typesNow': m.get('types'), 'typeAdd': m.get('tadd', ''), 'proteanUsed': m.get('protean', False), 'syrupDone': m.get('syrup', False)}
 def hyps(sd, state, six, sets, leads, topk=TOPK):
     """the TOPK most likely sets of Pokemon this player has not sent in yet: [(weight, [species])]"""
     known = {m['sp'] for m in state[sd]['mons']}
@@ -128,40 +122,14 @@ def specs_for(tag, g, step, six, sets, leads, own=None):
     """engine position specs for one turn, one per pairing of the two players' hypotheses: [(weight, spec)]. own: (side, its Pokemon as
     the engine plays them) for a side known exactly (a bot's own side from its request, botpos.own_side): no hypotheses for it"""
     st = step['state']; H = {sd: ([(1.0, [])], [], 0) if own and sd == own[0] else hyps(sd, st, six, sets, leads) for sd in ('p1', 'p2')}; out = []
-    order = {sd: sorted(st[sd]['mons'], key=lambda m: (0 if m['pos'] == 'a' else 1 if m['pos'] == 'b' else 2 if not m['f'] else 3)) for sd in ('p1', 'p2')}
-    eng = {sd: {m['pos']: 'ab'[i] for i, m in enumerate(order[sd][:2]) if m['pos']} for sd in ('p1', 'p2')}
-    def act(sd, i):
-        m = order[sd][i] if i < len(order[sd]) else None
-        a = step['acts'].get(sd + m['pos']) if m and m['pos'] else None
-        if a and a.get('target'): a = {**a, 'target': a['target'][:2] + eng[a['target'][:2]].get(a['target'][2], a['target'][2])}
-        return a
+    order = {sd: BS.order(st[sd]) for sd in ('p1', 'p2')}; acts = BS.acts(step, order)
+    bad = [m['sp'] for x in ('p1', 'p2') for m in order[x] if not sets[x].get(m['sp'])]
+    if bad: return [], {'missing': sorted(set(bad))}
     for i, (w1, c1) in enumerate(H['p1'][0]):
         for j, (w2, c2) in enumerate(H['p2'][0]):
-            sides = []
-            for sd, extra in (('p1', c1), ('p2', c2)):
-                ms = order[sd]
-                bad = [m['sp'] for x in ('p1', 'p2') for m in order[x] if not sets[x].get(m['sp'])]
-                if bad: return [], {'missing': sorted(set(bad))}
-                if own and sd == own[0]: sides.append({'mons': own[1], 'tailwind': st[sd]['tailwind'], 'screens': st[sd]['screens'], 'hazards': st[sd]['hazards']}); continue
-                mons = [spec_mon(m, sets[sd][m['sp']]) for m in ms]
-                mons += [{**sets[sd][sp], 'mega': False, 'hpPct': 100, 'fainted': False, 'status': '', 'slept': 0, 'boosts': {}, 'itemNow': sets[sd][sp]['item'],
-                          'moved': False, 'stall': False, 'lock': '', 'vol': [], 'onField': False, 'last': '', 'volarg': {}, 'standIn': True} for sp in extra]
-                sides.append({'mons': mons, 'tailwind': st[sd]['tailwind'], 'screens': st[sd]['screens'], 'hazards': st[sd]['hazards']})
-            f = st['field']
-            out.append((w1 * w2, {'name': f"{tag} t{step['turn']} h{i}{j}", 'turn': step['turn'], 'sides': sides,
-                                  'acts': [[act(sd, i) for i in (0, 1)] for sd in ('p1', 'p2')], 'perish': st['perish'], 'standIns': len(c1) + len(c2), 'yawnDue': True,
-                                  'volDue': True,                     # each volatile's countdown from the turn it started (positions.js)
-                                  'fieldDue': True,                   # Unburden's Speed after its item went, Perish Song's count (positions.js)
-                                  'pctDue': True,                     # a shown percent rebuilt as an HP that shows as it (positions.js)
-                                  'abilDue': True,                    # an ability gained in battle (Trace, Skill Swap) (positions.js)
-                                  'chipDue': True,                    # Toxic's count and a binding move go on (positions.js)
-                                  'fallenDue': True,                  # Supreme Overlord's count of fallen allies (positions.js)
-                                  'typeDue': True,                    # types changed in battle (Soak, Protean, Double Shock) (positions.js, damage.js)
-                                  'syrupDue': True,                   # a Supersweet Syrup that has activated stays spent (positions.js; the v29 engine reads it)
-                                  'srcDue': True,                     # a volatile's source as Showdown has it: the holder for Imprison and the like, the seeder's slot for Leech Seed (positions.js)
-                                  'rechargeDue': True,                # a Pokemon that must recharge (Hyper Beam) has only that (positions.js)
-                                  'dropped': [], 'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None,
-                                                           'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}))
+            sides = [BS.side(st[sd], own[1] if own and sd == own[0] else [BS.mon(m, sets[sd][m['sp']]) for m in order[sd]] + [BS.fresh(sets[sd][sp], True) for sp in extra])
+                     for sd, extra in (('p1', c1), ('p2', c2))]
+            out.append((w1 * w2, BS.spec(f"{tag} t{step['turn']} h{i}{j}", step, sides, acts, len(c1) + len(c2))))
     return out, H
 SLEEP = ((2, 1 / 3), (3, 2 / 3))                                        # Champions: a sleep counter of 2 or 3 (Showdown's champions mod)
 def sleep_cases(specs):

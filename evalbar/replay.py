@@ -56,6 +56,7 @@ class Mon:
         s.toxn = 0; s.ptrap = None                                          # Toxic's ticks since it came in; a binding move on it [move, ticks, user]
         s.types = None; s.tadd = ''; s.protean = False                      # types changed in battle (Soak, Protean, Double Shock), a type added, Protean / Libero used
         s.syrup = False                                                     # its Supersweet Syrup has activated: once a battle, kept through switches
+        s.item_set = False                                                  # an -item line showed its item (Trick, Switcheroo, Thief, Frisk): s.item is it
     def leave(s):
         s.boosts = {}; s.vol = set(); s.moved = False; s.stall = False; s.prot = False; s.lock = ''; s.last = ''; s.volarg = {}; s.volturn = {}
         s.unburden = False; s.perish = 0; s.abil = ''; s.toxn = 0; s.ptrap = None; s.types = None; s.tadd = ''; s.protean = False
@@ -94,7 +95,7 @@ def parse(log):
                                'item': m.item, 'gone': m.item_gone, 'slot': '' if m.fainted else slot.get(nick, ''), 'seen': True,
                                'sp': m.species, 'forme': '' if m.mega or m.forme == m.species else m.forme, 'pos': slot.get(nick, ''), 'mega': m.mega, 'moved': m.moved, 'stall': m.stall, 'lock': m.lock, 'slept': m.slept, 'vol': sorted(m.vol), 'last': m.last, 'volarg': dict(m.volarg),
                                'volturn': {v: list(x) for v, x in m.volturn.items() if v in m.vol}, 'unb': m.unburden, 'perish': m.perish, 'abil': m.abil,
-                               'toxn': m.toxn, 'ptrap': list(m.ptrap) if m.ptrap else None, 'types': m.types, 'tadd': m.tadd, 'protean': m.protean, 'syrup': m.syrup}
+                               'toxn': m.toxn, 'ptrap': list(m.ptrap) if m.ptrap else None, 'types': m.types, 'tadd': m.tadd, 'protean': m.protean, 'syrup': m.syrup, 'iset': m.item_set}
                               for nick in order[sd] for m in [mons[sd][nick]]],
                      'tailwind': sidec[sd]['tailwind'], 'screens': {k: v for k, v in sidec[sd]['screens'].items() if v}, 'hazards': list(sidec[sd]['hazards'])}
         S['perish'] = perish
@@ -293,7 +294,7 @@ def parse(log):
                     if toid(p[3]) == 'whiteherb' and 'eat' not in t and clean(t.get('from', '')) != 'Knock Off':   # it put lowered stats back to 0
                         m.boosts = {b: v for b, v in m.boosts.items() if v > 0}
                     note([m.ref(), f" ate its {p[3]}" if 'eat' in t else f"'s {p[3]} was knocked off" if clean(t.get('from', '')) == 'Knock Off' else f"'s {p[3]} was used up"])
-                else: m.item = p[3]; m.item_gone = False; m.unburden = False; note([m.ref(), f' now holds {p[3]}' + why(t)])
+                else: m.item = p[3]; m.item_gone = False; m.unburden = False; m.item_set = True; note([m.ref(), f' now holds {p[3]}' + why(t)])
         elif k in ('-start', '-end'):
             m = mon(p[2]); what = clean(p[3]) if len(p) > 3 else ''
             if not m: continue

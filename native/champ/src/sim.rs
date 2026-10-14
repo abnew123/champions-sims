@@ -1882,6 +1882,24 @@ impl Battle {
             _ => {}
         }
     }
+    /// the request's disables recomputed for every active Pokemon (end_turn's DisableMove pass alone): a position rebuilt from a log
+    /// carries the volatiles (Imprison, Taunt, ...) but not the disables Showdown derives from them for the request, so the planner offered
+    /// an Imprisoned Trick Room (2026-10-13); on an exported Showdown state it reproduces the request's own disables
+    pub fn refresh_disables(&mut self) {
+        for s in 0..2u8 { for m in self.side_active(s) {
+            if self.p(m).fainted { continue; }
+            { let p = self.pm(m); p.maybe_disabled = false; for sl in p.move_slots.iter_mut() { sl.disabled = false; sl.disabled_hidden = false; sl.disabled_source = ""; } }
+            self.run_event("DisableMove", Tgt::Mon(m), None, None, RV::Undef, false, false);
+            let slots: Vec<Id> = self.p(m).move_slots.iter().map(|x| x.id).collect();
+            for sid in slots {
+                if self.dex.mv(sid).eff.cbs.contains_key("onDisableMove") {
+                    let am = self.new_am(self.dex.active_move(sid));
+                    self.single_event("DisableMove", Eff::mv(sid, am), None, Tgt::Mon(m), None, None, RV::Undef);
+                }
+                if self.dex.mv(sid).tmpl.flag("cantusetwice") && self.p(m).last_move == Some(sid) { self.disable_move(m, sid, false, ""); }
+            }
+        } }
+    }
     pub fn end_turn(&mut self) {
         self.turn += 1;
         self.last_successful_move_this_turn = None;

@@ -252,13 +252,15 @@ pub fn register(r: &mut Reg) {
     h!(r, Cond, "disable", "onBeforeMove", |b, a| { let mv = b.am(a.am()); if Some(mv.id) == b.es_ref().and_then(|s| s.get("move")).and_then(|v| v.s()) && !mv.flag("cantusetwice") { return RV::B(false); } RV::Undef });
     h!(r, Cond, "disable", "onDisableMove", |b, a| { let m = a.t(); if let Some(mv) = b.es().get("move").and_then(|v| v.s()) { b.disable_move(m, mv, false, "disable"); } RV::Undef });
     h!(r, Cond, "imprison", "onStart", |b, a| { RV::Undef });
+    // the source is always the Imprison user, which holds the volatile (target self), so the holder is used: a position rebuilt from a
+    // log gave it the opposing active as its source (2026-10-13: the bot planned on an Imprisoned Protect and Trick Room)
     h!(r, Cond, "imprison", "onFoeDisableMove", |b, a| {
-        let m = a.t(); let Some(src) = b.es().source else { return RV::Undef };
+        let m = a.t(); let src = b.holder();
         let ids: Vec<Id> = b.p(src).move_slots.iter().map(|s| s.id).collect();
         for i in ids { if i != "struggle" { b.disable_move(m, i, true, "imprison"); } }
         b.pm(m).maybe_disabled = true; RV::Undef });
     h!(r, Cond, "imprison", "onFoeBeforeMove", |b, a| {
-        let mv = b.am(a.am()).id; let Some(src) = b.es().source else { return RV::Undef };
+        let mv = b.am(a.am()).id; let src = b.holder();
         if mv != "struggle" && b.p(src).move_slots.iter().any(|s| s.id == mv) { return RV::B(false); } RV::Undef });
     // 2026-10-09: slot conditions (sim.rs add_slot_condition): Wish heals whoever is in the user's slot at the end of the next turn,
     // Healing Wish the next Pokemon to come into the slot

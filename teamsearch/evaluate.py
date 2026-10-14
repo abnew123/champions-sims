@@ -87,6 +87,12 @@ SIMS = {
     'v32': dict(bin='champ-battle-v32', eg='egvalue9_sym2.json', grid=False, seedkey=True,
                 env=dict(V26_ENV, EG_VNET='../bot/value/vnet_h64_search_acc.json')),
     'v32s': dict(bin='champ-battle-v32', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V26_ENV)),
+    # v33 (Battle sim, 2026-10-14; the climb's frozen setup, what the live bot runs): v32 + a Mega copy of an option judged with the
+    # Mega's ability (v32 still dropped Mega Salamence's Aerilate Double-Edge into Ghosts, and Mega Altaria / Gardevoir / Glalie / Lopunny
+    # cases). Same flags and net as v28 / v32.
+    'v33': dict(bin='champ-battle-v33', eg='egvalue9_sym2.json', grid=False, seedkey=True,
+                env=dict(V26_ENV, EG_VNET='../bot/value/vnet_h64_search_acc.json')),
+    'v33s': dict(bin='champ-battle-v33', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V26_ENV)),
 }
 def sim(): return os.environ.get('TS_SIM', 'v3')
 def out_tag(seed0, per_job): return f'{seed0}_{per_job}' if sim() == 'v3' else f'{sim()}_{seed0}_{per_job}'

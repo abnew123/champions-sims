@@ -100,7 +100,7 @@ function rebuild(spec, flip) {
           // its drain heals (Battle sim, 2026-10-13)
           let src = side.foe.active[0];
           if (spec.srcDue && SELF_VOL.has(VOL[v])) src = p;
-          else if (spec.srcDue && v === 'Leech Seed' && /^[af][ab]$/.test(arg)) src = (arg[0] === 'a' ? side : side.foe).active[arg[1] === 'a' ? 0 : 1] || src;
+          else if (spec.srcDue && (v === 'Leech Seed' || v === 'Yawn') && /^[af][ab]$/.test(arg)) src = (arg[0] === 'a' ? side : side.foe).active[arg[1] === 'a' ? 0 : 1] || src;   // the Yawner: the sleep's source
           if (!p.addVolatile(VOL[v], src)) approx.push(v);
           else if (v === 'Yawn' && spec.yawnDue) p.volatiles.yawn.duration = 1;
           else if (n !== null) p.volatiles[VOL[v]].duration = n;

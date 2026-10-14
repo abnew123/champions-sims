@@ -547,7 +547,17 @@ class BotRunner:
     """the Showdown bot's games (bot/out/ in the main checkout) on one page: every ladder game so far when this starts, then each game it
     starts, as it plays it. The page moves on to a new game when it is showing the latest one."""
     def __init__(s, threads, port):
-        s.dir = os.path.join(C.MAIN, 'bot', 'out'); s.threads = threads; s.port = port; s.lives = []; s.files = []; s.known = set()
+        s.dir = os.path.join(C.MAIN, 'bot', 'out'); s.threads = threads; s.port = port; s.lives = []; s.files = []; s.known = set(); s._when = (None, {})
+    def when(s, room):
+        """when the bot played this room (bot/out/games.jsonl, UTC), for the game list (the user, 2026-10-14: a game found by its time)"""
+        f = os.path.join(s.dir, 'games.jsonl'); m = os.path.getmtime(f) if os.path.exists(f) else None
+        if m != s._when[0]:
+            w = {}
+            for l in open(f) if m else []:
+                try: x = json.loads(l); w[x['room']] = x.get('when')
+                except Exception: pass
+            s._when = (m, w)
+        return s._when[1].get(room) or s._when[1].get(re.sub(r'-[a-z0-9]+$', '', room) if room.count('-') > 2 else room)
     def serve(s):
         run = s
         class H(http.server.BaseHTTPRequestHandler):
@@ -558,7 +568,7 @@ class BotRunner:
                     for i, lv in enumerate(run.lives):
                         if lv.data and lv.data['games']:
                             games.append({**lv.data['games'][0], 'title': f'Game {i + 1}', 'idx': i, 'versus': f'Game {i + 1}',
-                                          'group': 'Bo3' if 'bo3' in lv.room else 'Bo1', 'format': lv.fmt, 'refines': True})   # the page's format toggle and game list (the user, 2026-10-13)
+                                          'group': 'Bo3' if 'bo3' in lv.room else 'Bo1', 'format': lv.fmt, 'refines': True, 'when': run.when(lv.room)})   # the page's format toggle and game list (the user, 2026-10-13)
                     last = run.lives[-1] if run.lives else None
                     st = "waiting for the bot's next game" if not last or last.status == 'finished' else last.status
                     b = json.dumps({'games': games, 'live': {'url': 'data.json', 'status': st, 'format': last.fmt if last else botfmt('')}}).encode()

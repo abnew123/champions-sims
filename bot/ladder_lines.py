@@ -13,7 +13,7 @@ import os, sys, json, math, collections
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'pssim'))
 import human_lines as HL
-CAL = 0.7538   # the sym2-era solves this analysis was run on (v25); the live bot uses live.CAL (0.676) since 2026-10-14
+CAL = float(os.environ.get('LEDGER_CAL', 0.7538))   # the sym2-era solves this analysis was run on (v25); LEDGER_CAL=0.676 for today's engine and net (live.CAL)
 real = lambda v: HL.resc(v, CAL)
 def cse(pairs):
     """mean and game-clustered standard error of values given as (game, x)"""

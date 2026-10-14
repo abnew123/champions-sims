@@ -21,7 +21,11 @@ def games():
     pf = os.path.join(ROOT, 'bot', 'out', 'regional_pool.json')
     # games with a team no longer in the pool (the Perish Song teams, dropped 2026-10-12) are skipped
     pool ={t['name']: t for t in json.load(open(pf))} if os.path.exists(pf) else {}
+    # AUDIT_FORMAT / AUDIT_SINCE / AUDIT_UNTIL (2026-10-14, the Bo1 slump): only that format's games, recorded in [since, until) (UTC ISO)
+    fmt, since, until = os.environ.get('AUDIT_FORMAT'), os.environ.get('AUDIT_SINCE', ''), os.environ.get('AUDIT_UNTIL', '9')
     for g in G:
+        if fmt and g.get('format', 'gen9championsvgc2026regmcbo3') != fmt: continue
+        if not (since <= g['when'] < until): continue
         f = os.path.join(ROOT, 'bot', 'out', g['room'] + '.log')
         team = teams.get(g.get('team')) or pool.get(g.get('team'))
         if os.path.exists(f) and team: yield g, team, open(f, errors='ignore').read().split('\n')
@@ -44,7 +48,8 @@ def build(prefix):
             if not l.startswith('|request|'): continue
             try: req = json.loads(l[9:])
             except Exception: continue
-            log = '\n'.join(L[:i])
+            # as brain.py does: a log without open sheets (Bo1) gets the opponent's guessed sets and ours written in as sheets (bot/bo1.py)
+            import bo1; log = '\n'.join(bo1.inject(list(L[:i]), op, team['sets'], me))
             if req.get('active') and not req.get('forceSwitch') and not req.get('wait') and turn:
                 try: specs, info = BP.bot_position(log, req, me, topk=1, team=exp, tag='bot')
                 except Exception: continue
@@ -90,6 +95,14 @@ def build(prefix):
     json.dump(meta, open(prefix + '.meta.json', 'w'))
     print(f"{len(meta['turns'])} turn decisions ({len(turn_specs)} positions), {len(meta['reps'])} replacements ({len(rep_specs)} positions) -> {prefix}_*.pos.jsonl")
 def evaluate(prefix, threads=6):
+    if os.environ.get('AUDIT_LIVE'):   # the bot's own pipeline (position.run_eval: its engine link, net, calc data and own-side rules)
+        import position as POS
+        for tag in ('turns', 'reps'):
+            posf = f'{prefix}_{tag}.pos.jsonl'; outf = f'{prefix}_{tag}.eval.jsonl'
+            if os.path.exists(posf):
+                if os.path.exists(outf): os.remove(outf)
+                POS.run_eval(posf, outf, threads, 32)
+        return
     import engine as EN
     env = {'EG_MEGA_TIE': '0', 'EG_LAST_PROTECT': '0', 'EG_NO_DOUBLE_PROTECT': '0'}
     os.environ.update({k: v for k, v in env.items() if k not in os.environ})

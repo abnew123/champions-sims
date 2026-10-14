@@ -213,6 +213,15 @@ pub fn register(r: &mut Reg) {
         if !b.run_immunity_move(t, am, false) { return RV::Undef; } RV::B(false) });
     // Unseen Fist, Champions (mods/champions: onHitProtect, 2026-10-13, v29): a contact move goes through Protect and its kin for a
     // quarter of the damage (the hit's bypassProtect, the same 0.25 as a Z-move through Protect)
+    // Muscle Band (v29): physical moves x 4505/4096, as Wise Glasses for special ones
+    h!(r, Item, "muscleband", "onBasePower", |b, a| { if b.am(a.am()).category == "Physical" { return b.cm(4505.0, 4096.0); } RV::Undef });
+    // Supersweet Syrup (v29): once a battle (syrupTriggered, kept in the state), the adjacent foes' evasion down a stage (not through a
+    // Substitute)
+    h!(r, Ability, "supersweetsyrup", "onStart", |b, a| {
+        let m = a.t(); if b.p(m).syrup_triggered { return RV::Undef; } b.pm(m).syrup_triggered = true;
+        if b.logging { let n = b.mon_name(m); b.add(&["-ability", &n, "Supersweet Syrup"]); }
+        for t in b.adjacent_foes(m) { if b.has_vol(t, "substitute") { if b.logging { let n = b.mon_name(t); b.add(&["-immune", &n]); } } else { b.boost(vec![(6, -1)], Some(t), Some(m), None, true, false); } }
+        RV::Undef });
     // Poison Point and Grass Pelt (v29, the unsupported list): as Static (30% on contact) with poison; Defense x1.5 in Grassy Terrain
     h!(r, Ability, "poisonpoint", "onDamagingHit", |b, a| { let (t, s) = (a.t(), a.s()); if b.makes_contact(a.am(), s) && b.rchance(3, 10) { b.try_set_status(s, "psn", Some(t), None); } RV::Undef });
     h!(r, Ability, "grasspelt", "onModifyDef", |b, a| { if b.field.terrain == "grassyterrain" { return b.cm(1.5, 1.0); } RV::Undef });

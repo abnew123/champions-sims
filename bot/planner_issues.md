@@ -203,3 +203,14 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     staged 0.5241; same rolls 0.5229 (-0.0012 ± 0.0014, 1.2x the time); 2x rolls 0.5227 (-0.0014 ± 0.0014); 4x rolls on the first 720
     no better than 2x. value_se median 0.0016 (1x) -> 0.0010 (4x). Luck sampling is not what limits the evaluation at today's budget:
     the value and the one-turn horizon are. Depth (the second cut) is where a gain could come from.
+    **Depth built and checked (2026-10-14 afternoon; the user: the point of the budgeted search was to look past the next turn).**
+    native/champ/src/deep.rs: the budgeted search as a tree of one-turn tables (a cell's rolls can be deepened one by one into child
+    tables, the static rolls kept as a control variate; every round takes the most variance removed per leaf evaluation anywhere in the
+    tree; EVAL_DEPTH for evalpos, BATTLE_EVAL for self-play). Checks at the bot's budget:
+    - 600 real endgames (both sides with at most two Pokemon, none benched) played both ways on the same luck, depth 3 vs none: +0.1 +- 0.6
+      points; on the 170 where random play changes the result (random play -46 there) -0.2 +- 1.7. The harness sees a random-play side
+      lose 13.1 +- 0.9 overall, so it works; with the race-feature value alone (no net) depth was +0.8 +- 0.6.
+    - Depth does change the decisions: a side's top joint option differs in about half the endgames (mixes 0.46 apart, total variation),
+      mostly among options that end the same way. Against the real results (deep_values.py): endgames 0.2845 -> 0.2836 (-0.0009 +-
+      0.022); the 1,503 held-out positions, depth 2 at each position's staged budget, 0.5323 -> 0.5261 (-0.0062 +- 0.0047) with a median
+      of only 8 deep rolls a position (midgame tables are large). Next: the same at 4x the budget, against 4x rolls only.

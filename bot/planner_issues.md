@@ -192,3 +192,9 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     Trick Room plan; zero it while such a foe is active (rare in the training data: no refit needed). (b) No Bo3 match memory: game 2
     repeated game 1's lead and Imprison; let game 1's plays raise their weight in the human model for games 2-3. After the budgeted
     search (the user, 2026-10-14).
+    **(a) checked, 2026-10-14 morning:** the value features already saw an Imprison on an *active* Trick Room setter: end_turn's
+    disable pass marks the Imprisoned Trick Room disabled at every searched leaf, and the potentials skip disabled moves. plan.rs
+    `imprisoned()` now also covers bench setters and positions loaded without the disable refresh (features 25 / f0[16]: 1.0 -> 0.0 on a
+    hand-built Imprison position), but the lyph88 decision is unchanged to 4 decimals: by the engine's values Trick Room (0.511) is still
+    a little better than Thunderbolt (0.504) against a 71% Imprison, because Trick Room wins big when they do not Imprison. The real
+    gap is (b): a human who led Imprison in game 1 does it again; the mixed-strategy opponent does not.

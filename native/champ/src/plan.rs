@@ -86,6 +86,13 @@ pub fn load_cfg(grid_dir: &str) -> Cfg {
 /// stages (Keen Eye, Mind's Eye and Unaware ignore evasion; an Unaware target ignores accuracy), Compound Eyes, Hustle (physical),
 /// Victory Star, Wide Lens, the target's Bright Powder, Sand Veil and Snow Cloak (not against Mold Breaker and its kin), Gravity. Capped
 /// at 1. d None: no particular target (the target's side of it left out).
+/// the move is blocked for side s by an active foe holding Imprison that knows it (planner_issues 19, 2026-10-14: lyph88's Imprison
+/// Indeedee; the Trick Room potential still credited our Farigiraf, so the Imprisoned position read as a live Trick Room plan). Bench
+/// Pokemon count too: Imprison stops them as soon as they come in, for as long as the Imprisoner stays.
+pub(crate) fn imprisoned(b: &Battle, s: u8, mv: &str) -> bool {
+    b.sides[1 - s as usize].active.iter().flatten().any(|&i| { let p = &b.sides[1 - s as usize].pokemon[i as usize];
+        !p.fainted && find(&p.volatiles, "imprison").is_some() && p.move_slots.iter().any(|x| x.id == mv) })
+}
 pub(crate) fn hit_chance(b: &Battle, a: MonRef, d: Option<MonRef>, mid: Id) -> f64 {
     let tm = &b.dex.mv(mid).tmpl;
     let Some(base) = tm.accuracy else { return 1.0 };
@@ -320,7 +327,7 @@ pub fn feats(b: &mut Battle, cfg: &Cfg) -> Vec<f64> {
                     for m in alive(b, s) {
                         let p = b.p(m);
                         if p.is_active && find(&p.volatiles, "taunt").is_some() { continue; }
-                        if p.move_slots.iter().any(|x| x.id == mv && x.pp > 0 && !x.disabled) { best = best.max(p.hp as f64 / p.maxhp.max(1) as f64); }
+                        if p.move_slots.iter().any(|x| x.id == mv && x.pp > 0 && !x.disabled) && !imprisoned(b, s, mv) { best = best.max(p.hp as f64 / p.maxhp.max(1) as f64); }
                     }
                     best };
                 let tr_phase = tr.map(|t| t <= 1).unwrap_or(true);

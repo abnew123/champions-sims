@@ -38,6 +38,8 @@ fn env_usize(name: &str, default: usize) -> usize { std::env::var(name).ok().and
 
 struct Cells<'a> { b: &'a Battle, cfg: &'a Cfg, msw: &'a [[PChoice; 2]], tsw: &'a [[PChoice; 2]], cs: Vec<[u16; 4]>, base: usize,
                    acc: HashMap<(usize, usize), (f64, usize)>, sims: usize, uns: Vec<String>,
+                   /// each cell's sum of squared values (the budgeted search's per-cell spread)
+                   sq: HashMap<(usize, usize), f64>,
                    /// EVAL_HORIZON=2: two-turn values (the next turn solved as a small matrix game after this one) and their seeds; a cell
                    /// that has one is read from here by get()
                    cs2: Vec<[u16; 4]>, acc2: HashMap<(usize, usize), (f64, usize)>, sims2: usize }
@@ -60,7 +62,7 @@ impl<'a> Cells<'a> {
         if c >= n { return s / c as f64; }
         while c < n {
             let mut x = self.b.clone(); x.prng = Prng::gen5(self.cs[c]); x.run_turn([self.msw[i], self.tsw[j]]); resolve_switches(&mut x, self.cfg, None);
-            s += value(&mut x, self.cfg);
+            let v = value(&mut x, self.cfg); s += v; *self.sq.entry((i, j)).or_insert(0.0) += v * v;
             for u in &x.unsupported { if !self.uns.contains(u) { self.uns.push(u.clone()); } }
             c += 1; self.sims += 1;
         }
@@ -132,7 +134,16 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
     let no_sw = |c: &[PChoice; 2]| !c.iter().any(|x| matches!(x, PChoice::Switch(_)));
     let mns: Vec<usize> = (0..msw.len()).filter(|i| no_sw(&msw[*i])).collect();
     let tns: Vec<usize> = (0..tsw.len()).filter(|j| no_sw(&tsw[*j])).collect();
-    let cs: Vec<[u16; 4]> = (0..nseeds).map(|k| seed4(key ^ ((k as u64) << 52))).collect();
+    // EVAL_BUDGET (leaf evaluations) / EVAL_BUDGET_MS: the anytime search below; its cells may take up to EVAL_SEEDS_MAX rolls (default 256)
+    // EVAL_BUDGET=spec: the position's own "budget" field (comparisons at matched compute), times EVAL_BUDGET_MULT (default 1)
+    let mult: f64 = std::env::var("EVAL_BUDGET_MULT").ok().and_then(|x| x.parse().ok()).unwrap_or(1.0);
+    let budget = match std::env::var("EVAL_BUDGET").as_deref() {
+        Ok("spec") => (sp["budget"].as_f64().unwrap_or(0.0) * mult).round() as usize,
+        Ok(x) => (x.parse::<f64>().unwrap_or(0.0) * mult).round() as usize, _ => 0 };
+    let budget_ms = env_usize("EVAL_BUDGET_MS", 0) as u128;
+    let budgeted = budget > 0 || budget_ms > 0;
+    let seeds_max = if budgeted { env_usize("EVAL_SEEDS_MAX", 256).max(nseeds) } else { nseeds };
+    let cs: Vec<[u16; 4]> = (0..seeds_max).map(|k| seed4(key ^ ((k as u64) << 52))).collect();
     // EVAL_ADAPT=1: luck samples go where they matter. Every cell gets the first stage's seeds; then, stage by stage, only the options
     // still in contention (in a side's mix, or within the stage's margin of that side's best option) get their cells against the other
     // side's contenders raised to the next stage's seeds, and the turn is solved again. Default stages 2, 8, EVAL_SEEDS with margins
@@ -142,8 +153,9 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
     let mut stages: Vec<usize> = if adapt { list("EVAL_STAGES").map(|v| v.iter().map(|x| *x as usize).collect()).unwrap_or(vec![2, 8, nseeds]) } else { vec![nseeds] };
     stages.retain(|n| *n >= 1 && *n <= nseeds); stages.sort(); stages.dedup(); if stages.last() != Some(&nseeds) { stages.push(nseeds); }
     let margins: Vec<f64> = list("EVAL_MARGINS").unwrap_or(vec![0.15, 0.06]);
-    let cs2: Vec<[u16; 4]> = (0..nseeds).map(|k| seed4(key ^ ((k as u64) << 52) ^ (0xD3u64 << 44))).collect();
-    let mut cells = Cells { b: &b, cfg, msw: &msw, tsw: &tsw, cs, base: stages[0], acc: HashMap::new(), sims: 0, uns: vec![], cs2, acc2: HashMap::new(), sims2: 0 };
+    let cs2: Vec<[u16; 4]> = (0..seeds_max).map(|k| seed4(key ^ ((k as u64) << 52) ^ (0xD3u64 << 44))).collect();
+    let base0 = if budgeted { env_usize("EVAL_BUDGET_BASE", 2).clamp(1, seeds_max) } else { stages[0] };
+    let mut cells = Cells { b: &b, cfg, msw: &msw, tsw: &tsw, cs, base: base0, acc: HashMap::new(), sims: 0, uns: vec![], sq: HashMap::new(), cs2, acc2: HashMap::new(), sims2: 0 };
     // one solve at the cells' current precision: each side's own matrix (all its options against the other side staying in, as
     // battle4.rs), the anticipation pass, then every option's value against the other side's mix (its support above 0.01%)
     let solve = |cells: &mut Cells| -> (Vec<f64>, Vec<f64>, Vec<f64>, Vec<f64>) {
@@ -178,7 +190,41 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
         if !(0..2).all(|i| !alive[i] || act[i].is_some()) { return None; }
         opts.iter().position(|c| (0..2).all(|i| !alive[i] || same(&c[i], act[i].as_ref().unwrap()))) };
     let (act_i, act_j) = (actual_joint(0, &msw, &sp["actual"]), actual_joint(1, &tsw, &sp["their_actual"]));
+    // the anytime search (2026-10-14, the user: think as long as the budget allows): every cell starts at the base rolls; then, round
+    // after round, the cells whose next rolls shrink the position value's uncertainty most get one more roll each, and the turn is solved
+    // again. A cell's priority is (x_i + f/rows)^2 (y_j + f/cols)^2 sd_ij^2 / (n (n + 1)) (the drop in the variance of x.A.y that one
+    // more roll buys), sd floored at EVAL_SD_FLOOR (0.03: two equal rolls are not certainty), f = EVAL_FLOOR (0.05): every cell keeps
+    // some attention, since the mixes move as cells sharpen; the actual plays' rows and columns get the floor's attention again. Rounds
+    // refine EVAL_BATCH of the cells (0.05). Stops at EVAL_BUDGET leaf evaluations or EVAL_BUDGET_MS milliseconds. The fixed stages
+    // below are skipped.
+    if budgeted {
+        let floor = std::env::var("EVAL_FLOOR").ok().and_then(|x| x.parse().ok()).unwrap_or(0.05f64);
+        let sd_floor = std::env::var("EVAL_SD_FLOOR").ok().and_then(|x| x.parse().ok()).unwrap_or(0.03f64);
+        let frac = std::env::var("EVAL_BATCH").ok().and_then(|x| x.parse().ok()).unwrap_or(0.05f64);
+        let (nr, nc) = (msw.len() as f64, tsw.len() as f64);
+        loop {
+            if budget > 0 && cells.sims >= budget { break; }
+            if budget_ms > 0 && t0.elapsed().as_millis() >= budget_ms { break; }
+            let (xt, yt) = (x.iter().sum::<f64>().max(1e-9), y.iter().sum::<f64>().max(1e-9));
+            let mut pr: Vec<(f64, usize, usize, usize)> = cells.acc.iter().filter(|(_, &(_, c))| c < seeds_max).map(|(&(i, j), &(sm, c))| {
+                let n = c as f64; let m = sm / n; let q = cells.sq.get(&(i, j)).copied().unwrap_or(0.0);
+                let var = if c > 1 { ((q - n * m * m) / (n - 1.0)).max(0.0) } else { 0.0 };
+                let sd = var.sqrt().max(sd_floor);
+                let wx = x[i] / xt + floor / nr + if Some(i) == act_i { floor } else { 0.0 };
+                let wy = y[j] / yt + floor / nc + if Some(j) == act_j { floor } else { 0.0 };
+                ((wx * wy * sd).powi(2) / (n * (n + 1.0)), i, j, c) }).collect();
+            if pr.is_empty() { break; }
+            pr.sort_by(|a, c| c.0.partial_cmp(&a.0).unwrap().then((a.1, a.2).cmp(&(c.1, c.2))));
+            let k = ((pr.len() as f64 * frac).ceil() as usize).max(1);
+            for &(_, i, j, c) in pr.iter().take(k) {
+                cells.ensure(i, j, c + 1);
+                if budget > 0 && cells.sims >= budget { break; }
+            }
+            (x, y, rv, cv) = solve(&mut cells);
+        }
+    }
     for (r, &n) in stages.iter().enumerate().skip(1) {
+        if budgeted { break; }
         let margin = margins.get(r - 1).or(margins.last()).copied().unwrap_or(0.06);
         for _ in 0..3 {
             let best_r = rv.iter().cloned().fold(f64::MIN, f64::max); let best_c = cv.iter().cloned().fold(f64::MAX, f64::min);
@@ -243,6 +289,19 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
     let mut out = json!({"value": v, "static": stat, "feats": f, "seeds": nseeds, "options": [msw.len(), tsw.len()], "cells": cells.acc.len(),
            "ms": t0.elapsed().as_millis() as u64, "unsupported": cells.uns, "sides": [s0, s1]});
     if adapt { let o = out.as_object_mut().unwrap(); o.insert("stages".into(), json!(stages)); o.insert("sims".into(), json!(cells.sims)); o.insert("cells_full".into(), json!(full)); }
+    {   // value_se: the standard error of x.A.y from the cells' sample spreads (cells independent; a cell with one roll counts at the floor)
+        let (xt, yt) = (x.iter().sum::<f64>().max(1e-9), y.iter().sum::<f64>().max(1e-9));
+        let sdf = std::env::var("EVAL_SD_FLOOR").ok().and_then(|x| x.parse().ok()).unwrap_or(0.03f64);
+        let mut var = 0.0;
+        for (&(i, j), &(sm, c)) in cells.acc.iter() {
+            let w = x[i] / xt * y[j] / yt; if w <= 0.0 { continue; }
+            let n = c as f64; let m = sm / n; let q = cells.sq.get(&(i, j)).copied().unwrap_or(0.0);
+            let v = if c > 1 { ((q - n * m * m) / (n - 1.0)).max(0.0) } else { sdf * sdf };
+            var += w * w * v / n;
+        }
+        let o = out.as_object_mut().unwrap(); o.insert("value_se".into(), json!(var.sqrt()));
+        if budgeted { o.insert("sims".into(), json!(cells.sims)); o.insert("budget".into(), json!(if budget > 0 { budget } else { 0 })); }
+    }
     if h2 { let o = out.as_object_mut().unwrap(); o.insert("horizon".into(), json!(2)); o.insert("cells_h2".into(), json!(cells.acc2.len())); o.insert("sims_h2".into(), json!(cells.sims2)); }
     // the actual cell with the actual replacements (position field "actual_replace": {"0": [species...], "1": [...]}, the Eval bar's luck
     // measure): the same seeds as the matrix cells, pending switches settled by resolve_switches_forced; the matrix itself is unchanged.

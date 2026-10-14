@@ -159,6 +159,7 @@ def specs_for(tag, g, step, six, sets, leads, own=None):
                                   'typeDue': True,                    # types changed in battle (Soak, Protean, Double Shock) (positions.js, damage.js)
                                   'syrupDue': True,                   # a Supersweet Syrup that has activated stays spent (positions.js; the v29 engine reads it)
                                   'srcDue': True,                     # a volatile's source as Showdown has it: the holder for Imprison and the like, the seeder's slot for Leech Seed (positions.js)
+                                  'rechargeDue': True,                # a Pokemon that must recharge (Hyper Beam) has only that (positions.js)
                                   'dropped': [], 'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None,
                                                            'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}))
     return out, H

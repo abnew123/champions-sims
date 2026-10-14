@@ -110,6 +110,9 @@ function rebuild(spec, flip) {
         // fallenDue (live.specs_for; not the bot's yet): Supreme Overlord's count of fallen allies, taken when it came in (the log's
         // -start fallenN); a Kingambit already on the field otherwise hit with none of it (the engine reads the ability state's 'fallen')
         else if (spec.fallenDue && /^fallen[1-5]$/.test(v) && p.hasAbility('supremeoverlord')) p.abilityState.fallen = +v.slice(6);
+        // rechargeDue (live.specs_for; not the bot's yet): it used Hyper Beam or the like last turn, so this turn it can only recharge (one end of
+        // turn left); before, it was offered every move and nothing was flagged (an outside review, 2026-10-14: 12 of 735 bot logs)
+        else if (spec.rechargeDue && v === 'mustrecharge') { if (p.addVolatile('mustrecharge')) p.volatiles.mustrecharge.duration = 1; else approx.push(v); }
         else if ((v === 'Encore' || v === 'Disable') && arg && p.moveSlots.some(m => m.id === arg))
           p.volatiles[toID(v)] = b.initEffectState({id: toID(v), target: p, move: arg, duration: n !== null ? n : v === 'Encore' ? 2 : 3});
         else approx.push(v);

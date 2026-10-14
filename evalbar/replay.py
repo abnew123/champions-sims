@@ -197,6 +197,7 @@ def parse(log):
                 note([u.ref(), f": stopped by {clean(p[3])}"]); moved_yet[0] = True; u.moved = True; u.last = p[4]; acted.add(id(u))
         elif k == 'cant':
             m = mon(p[2])
+            if m and len(p) > 3 and p[3] == 'recharge': m.vol.discard('mustrecharge')
             if m and p[2][:3] not in acts and active.get(p[2][:3]) == start_active.get(p[2][:3]): acts[p[2][:3]] = {'none': 'cant', 'mega': id(m) in mega_now}   # it did not switch
             if m:
                 ev(m.side, [m.ref(), ' ' + CANT.get(p[3], f"can't move ({clean(p[3])})")]); moved_yet[0] = True; m.moved = True; acted.add(id(m))
@@ -334,7 +335,7 @@ def parse(log):
         elif k == '-ohko': note(['One-hit KO'])
         elif k == '-mustrecharge':
             m = mon(p[2])
-            if m: note([m.ref(), ' must recharge next turn'])
+            if m: m.vol.add('mustrecharge'); note([m.ref(), ' must recharge next turn'])   # until its recharge turn's 'cant ... recharge' (or it leaves)
         elif k == '-transform':
             m = mon(p[2]); o = mon(p[3])
             if m and o: note([m.ref(), ' transformed into ', o.ref()]); odd.add('Transform')

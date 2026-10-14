@@ -198,3 +198,4 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     hand-built Imprison position), but the lyph88 decision is unchanged to 4 decimals: by the engine's values Trick Room (0.511) is still
     a little better than Thunderbolt (0.504) against a 71% Imprison, because Trick Room wins big when they do not Imprison. The real
     gap is (b): a human who led Imprison in game 1 does it again; the mixed-strategy opponent does not.
+    **(b) not to be done (the user, 2026-10-14):** no Bo3 match memory; the bot keeps treating each game of a match on its own.

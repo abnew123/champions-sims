@@ -1250,3 +1250,14 @@ registrations since its second version) and checks reachability of real logs in 
   against results (1,503 positions): bot now 0.5218, v28 + its net 0.5238 (+0.0019 ± 0.0017; No Guard / Raichunite Y +0.0072 ± 0.0043),
   the same lean as the static net and the real-pairings agreement. v28 goes to the climb (mechanics); the bot moves with v29 after the
   same checks.
+- **champ-battle-v29 (2026-10-13, 8:40 pm) = v28 + ports + partner targets.** Ported: Revival Blessing (the request kept for its slot,
+  a fainted Pokemon chosen, revived at half HP, instaswitched into an empty slot; spot.rs switch_opts), Flying Press, Champions'
+  Unseen Fist (contact through Protect at x0.25), Guard Split, Power Split, Defog, Sleep Talk, Beat Up, Poison Point, Grass Pelt,
+  Muscle Band, Supersweet Syrup (its once-a-battle flag carried in the state: export_state.js syrupTriggered); hidden disables
+  (Imprison) usable in the last active slot's request, as Showdown does. Partner targets (planner_issues 17, PARTNER_TARGETS=0/s0/s1).
+  Differential vs Showdown (lo / hi / real, gen_battle_cases.js, which now answers Revival Blessing requests): every set built
+  today 0 mismatches; the unsupported callbacks these sets hit went from hundreds a mode to Opportunist, Future Sight, Fling, Spirit
+  Shackle, Uproar, Copycat (left for later, with Jaw Lock (linked volatiles), Attract / Cute Charm (no gender in the state), Magician,
+  Bug Bite, Shed Tail, Instruct, Curse). Partner-target self-play on the 800 pool starts: -0.1 ± 0.2 (794 / 798 games unchanged).
+  The net is v28's (vnet_h64_search_acc.json): the features are v28's. `src_battle_v29.tar.gz`, `bin/champ-battle-v29.sha256`.
+  Positions built from logs must set syrupTriggered for a Pokemon whose Supersweet Syrup has activated (else it fires again).

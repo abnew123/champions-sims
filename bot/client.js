@@ -347,7 +347,14 @@ async function handleRequest(room, R) {
     if (/bo\d$/.test(FORMAT)) for (let i = 0; i < 40 && !R.lines.some(l => l.startsWith('|showteam|' + opp + '|')); i++) await sleep(200);   // Bo1 has no open sheets: nothing to wait for
   }
   const ans = await ask({type: req.teamPreview ? 'preview' : 'turn', room, side: R.side, log: R.lines, request: req, team: currentTeam});
-  if (ans.error) { log('brain error', room, ans.error); return; }
+  // a brain error answers Showdown's default at once (team preview: the first four in order) rather than nothing: an unanswered request
+  // runs to the timer every turn, as it did for two games on 2026-10-14 and drew a complaint about slow play
+  if (ans.error) {
+    log('brain error', room, ans.error, '-> default');
+    if (R.req !== req) return;
+    const cmd = req.teamPreview ? '/team 1234' : '/choose default';
+    send(`${room}|${cmd}|${req.rqid}`); R.lines.push(`|bot-choice|${req.rqid}|${cmd.replace(/^\//, '').replace(/^choose /, '')}`); return;
+  }
   if (ans.forfeit) {   // a lost game: say gg and forfeit this game (in a best-of-3 only this game; the match goes on)
     await sleep(LOCAL ? 300 : rnd(3e3, 6e3)); if (R.req !== req || R.done) return;
     send(`${room}|gg`); await sleep(1500); send(`${room}|/forfeit`); R.lines.push(`|bot-choice|${req.rqid}|forfeit`); log(room.slice(-12), `T${R.turn}`, ans.note); return;

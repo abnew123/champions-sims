@@ -50,7 +50,10 @@ def cards():
         except Exception: continue
         if WATCHED.search(r['out']): continue
         outf = os.path.join(OUT, r['out']); done = lines(outf); tot = r['total']; now = time.time()
-        live = any(r.get('proc', 'evalpos') in l and (outf in l or os.path.basename(outf) in l) for l in ps)
+        # its process: the output's full path, or its folder and name (a bare name like eval.jsonl matched any engine run whose output ended
+        # in it, so finished cards showed as running, 2026-10-14)
+        key = os.path.join(os.path.basename(os.path.dirname(outf)), os.path.basename(outf))
+        live = any(r.get('proc', 'evalpos') in l and (outf in l or key in l) for l in ps)
         if not live and (now - os.path.getmtime(st) > 2 * 86400 or r.get('title', '').startswith('Live spectator')): continue
         last = os.path.getmtime(outf) if os.path.exists(outf) else r['started']
         el = (now if live else last) - r['started']; rate = (done - r['done0']) / el if el > 0 else 0

@@ -21,12 +21,12 @@ OUT = os.path.join(C.HERE, 'out', 'live'); FEED = os.path.join(C.HERE, 'live_fee
 NODE = [P.exe('node'), '--experimental-websocket', '--no-warnings']
 FORMATS = {'bo1': 'gen9championsvgc2026regmc', 'bo3': 'gen9championsvgc2026regmcbo3'}
 TOPK = 3; CAL_V25 = 0.7538                       # the rescale fitted for champ-battle-v25 with egvalue9_sym2 (accuracy.py compare)
-# the engine the eval bar reads with (the user, 2026-10-13: "lets move both over"): champ-battle-v29 with the learned value net, set as the
+# the engine the eval bar reads with (the user, 2026-10-13: "lets move both over"): champ-battle-v30 (v29 fixed) with the learned value net, set as the
 # bot runs it (Battle sim) but without the bot's own-side rules (EG_LAST_PROTECT, EG_NO_DOUBLE_PROTECT). Its reads go to files named for it
-# (<tag>_eval_v29.jsonl, _refined_v29, _luck_v29); v25's stay readable, each rescaled with its own CAL, until a turn is read again
-ENGINE = 'v29'
-CAL = 0.676                                                                  # the rescale for v29 (accuracy.py compare, 3,968 replay positions: log loss 0.5185 against v25's 0.5240)
-EVAL_ENV = {'CHAMP_BIN': os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v29'), 'EG_VNET': os.path.join(C.MAIN, 'bot', 'value', 'vnet_h64_search_acc.json'),
+# (<tag>_eval_v30.jsonl, _refined_v30, _luck_v30); v25's stay readable, each rescaled with its own CAL, until a turn is read again
+ENGINE = 'v30'                                                               # v30 (Battle sim, 2026-10-13): v29 planned on Imprison-disabled moves Showdown refuses
+CAL = 0.676                                                                  # the rescale fitted for v29 (accuracy.py compare, 3,968 replay positions: log loss 0.5185 against v25's 0.5240); v30 reads 3 of them differently (Imprison up)
+EVAL_ENV = {'CHAMP_BIN': os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v30'), 'EG_VNET': os.path.join(C.MAIN, 'bot', 'value', 'vnet_h64_search_acc.json'),
             'RACE_PRIO': '1', 'FEATS22': '1', 'EG_MEGA_TIE': '0', 'CALC_DATA': '../native/champions_data_full.json', 'CHAMP_DATA': 'engine_data_full.json'}
 # the full engine data (every species, move, item and ability Showdown knows; needs champ-battle-v17 or later): spectated teams can be
 # anything. v23 (2026-10-09) gives v17's values wherever v17 handled the turn, and handles more abilities, items and moves (Baton Pass too).

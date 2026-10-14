@@ -18,7 +18,7 @@ const VOL = {confusion: 'confusion', Taunt: 'taunt', 'Leech Seed': 'leechseed', 
              Imprison: 'imprison', 'Flash Fire': 'flashfire'};
 const STATS = ['atk', 'def', 'spa', 'spd', 'spe', 'accuracy', 'evasion'];
 const SELF_VOL = new Set(['imprison', 'substitute', 'flashfire']);          // volatiles a Pokemon puts on itself (srcDue)
-// volDue (live.specs_for sets it, the bot's positions do not yet): a volatile with a countdown gets what Showdown would have left of it at the
+// volDue (battlestate.FLAGS; the bot's: botpos.BOT_FLAGS): a volatile with a countdown gets what Showdown would have left of it at the
 // start of this turn: its full duration as set when it started (data/moves.js) less one for each end of turn since. x.volturn[v] = [the turn
 // it started, what the Pokemon was doing then: 'waits' (its move that turn still to come: queue.willMove), 'moving' (its own move was
 // running: Cursed Body), 'moved' (on the field since the turn started, its action done), 'new' (it came in that turn: activeTurns 0)]
@@ -67,7 +67,7 @@ function rebuild(spec, flip) {
       if (x.forme && !x.fainted) p.formeChange(x.forme, null, !x.forme.startsWith('Aegislash'));
       if (x.fainted) { p.hp = 0; p.fainted = true; p.status = 'fnt'; p.isActive = false; side.pokemonLeft--; side.totalFainted++; return; }
       p.hp = Math.max(1, Math.min(p.maxhp, Math.round(p.maxhp * x.hpPct / 100)));
-      // pctDue (live.specs_for; not the bot's yet): a shown percent (Showdown rounds up, 99 until full) rebuilt as an HP that shows as it,
+      // pctDue (battlestate.FLAGS; the bot's: botpos.BOT_FLAGS): a shown percent (Showdown rounds up, 99 until full) rebuilt as an HP that shows as it,
       // the middle of those; rounding made 1% into 2 HP (shown 2%) and the like, half an HP too much on average (reach.py, 2026-10-12)
       if (spec.pctDue && Number.isInteger(x.hpPct) && x.hpPct > 0 && x.hpPct < 100 && SHOWN(p.hp, p.maxhp) !== x.hpPct) {
         const c = []; for (let h = 1; h < p.maxhp; h++) if (SHOWN(h, p.maxhp) === x.hpPct) c.push(h);
@@ -81,7 +81,7 @@ function rebuild(spec, flip) {
         if (x.status === 'slp') { const n = x.sleepStart || 3; p.statusState.startTime = n; p.statusState.time = Math.max(1, n - (x.slept || 0) * (p.hasAbility('earlybird') ? 2 : 1)); }
         if (x.status === 'tox') p.statusState.stage = spec.chipDue ? (x.toxn || 0) : 1;   // chipDue: the ticks so far (it counts up each end of turn)
       }
-      // syrupDue (live.specs_for; not the bot's yet): Supersweet Syrup acts once a battle; the log showed it (champ-battle-v29 reads the field,
+      // syrupDue (battlestate.FLAGS; the bot's: botpos.BOT_FLAGS): Supersweet Syrup acts once a battle; the log showed it (champ-battle-v29 reads the field,
       // Battle sim, 2026-10-13). Left to the rebuild, a lead holder had it set at the rebuild's start and one that came in earlier did not
       if (spec.syrupDue) p.syrupTriggered = !!x.syrupDone;
       const item = toID(x.itemNow);
@@ -95,7 +95,7 @@ function rebuild(spec, flip) {
       for (const v of x.vol || []) {
         const arg = toID((x.volarg || {})[v]), n = left(spec, x, VOL[v] || toID(v), arg, approx, v);
         if (VOL[v]) {
-          // srcDue (live.specs_for; not the bot's yet): a volatile's source as Showdown has it, not the foe in the first slot: the holder for the
+          // srcDue (battlestate.FLAGS; the bot's: botpos.BOT_FLAGS): a volatile's source as Showdown has it, not the foe in the first slot: the holder for the
           // ones it puts on itself (Imprison's handlers disable what the source knows), and for Leech Seed the slot it was seeded from, which
           // its drain heals (Battle sim, 2026-10-13)
           let src = side.foe.active[0];
@@ -107,29 +107,29 @@ function rebuild(spec, flip) {
         }
         // yawnDue: a Yawn on the field at the start of a turn was used last turn, so it puts its target to sleep at the end of this one
         // (Showdown's duration 2 has already lost one end of turn). live.specs_for and botpos.bot_position (the bot, from 2026-10-12) set it
-        // fallenDue (live.specs_for; not the bot's yet): Supreme Overlord's count of fallen allies, taken when it came in (the log's
+        // fallenDue (battlestate.FLAGS; the bot's: botpos.BOT_FLAGS): Supreme Overlord's count of fallen allies, taken when it came in (the log's
         // -start fallenN); a Kingambit already on the field otherwise hit with none of it (the engine reads the ability state's 'fallen')
         else if (spec.fallenDue && /^fallen[1-5]$/.test(v) && p.hasAbility('supremeoverlord')) p.abilityState.fallen = +v.slice(6);
-        // rechargeDue (live.specs_for; not the bot's yet): it used Hyper Beam or the like last turn, so this turn it can only recharge (one end of
+        // rechargeDue (battlestate.FLAGS; the bot's: botpos.BOT_FLAGS): it used Hyper Beam or the like last turn, so this turn it can only recharge (one end of
         // turn left); before, it was offered every move and nothing was flagged (an outside review, 2026-10-14: 12 of 735 bot logs)
         else if (spec.rechargeDue && v === 'mustrecharge') { if (p.addVolatile('mustrecharge')) p.volatiles.mustrecharge.duration = 1; else approx.push(v); }
         else if ((v === 'Encore' || v === 'Disable') && arg && p.moveSlots.some(m => m.id === arg))
           p.volatiles[toID(v)] = b.initEffectState({id: toID(v), target: p, move: arg, duration: n !== null ? n : v === 'Encore' ? 2 : 3});
         else approx.push(v);
       }
-      // fieldDue (live.specs_for sets it, the bot's positions do not yet): Unburden doubles Speed once its item is gone while it is on the
+      // fieldDue (battlestate.FLAGS; the bot's: botpos.BOT_FLAGS): Unburden doubles Speed once its item is gone while it is on the
       // field (Showdown keeps that as a volatile the log never shows), and Perish Song's count goes on (a fresh volatile would be 4)
       if (spec.fieldDue && x.unburden && p.hasAbility('unburden') && !toID(x.itemNow)) p.addVolatile('unburden');
-      // chipDue (live.specs_for; not the bot's yet): a binding move (Infestation, Whirlpool...) goes on from its user, 5 turns less those passed
+      // chipDue (battlestate.FLAGS; the bot's: botpos.BOT_FLAGS): a binding move (Infestation, Whirlpool...) goes on from its user, 5 turns less those passed
       // (Showdown draws 5 or 6, 8 with Grip Claw), with its end-of-turn damage and its trap
       if (spec.chipDue && x.ptrap) {
         const src = side.foe.active.find(q => q && !q.fainted && toID(q.species.baseSpecies) === toID(dex.species.get(x.ptrap[2] || '').baseSpecies || ''));
         if (src && p.addVolatile('partiallytrapped', src, dex.getActiveMove(toID(x.ptrap[0])))) p.volatiles.partiallytrapped.duration = Math.max(1, (src.hasItem('gripclaw') ? 8 : 5) - (x.ptrap[1] || 0));
         else approx.push('bound');
       }
-      // abilDue (live.specs_for; not the bot's yet): an ability it gained in battle (Trace, Skill Swap, Role Play), set without its start
+      // abilDue (battlestate.FLAGS; the bot's: botpos.BOT_FLAGS): an ability it gained in battle (Trace, Skill Swap, Role Play), set without its start
       if (spec.abilDue && x.abilityNow && dex.abilities.get(toID(x.abilityNow)).exists) { p.ability = toID(x.abilityNow); p.abilityState = b.initEffectState({id: p.ability, target: p}); }
-      // typeDue (live.specs_for; not the bot's yet): types changed in battle (Soak, Protean / Libero, Double Shock, Burn Up: the log's -start
+      // typeDue (battlestate.FLAGS; the bot's: botpos.BOT_FLAGS): types changed in battle (Soak, Protean / Libero, Double Shock, Burn Up: the log's -start
       // typechange) and a type added (Forest's Curse); before, a Soaked Pokemon kept its own types. Protean / Libero used since it came in: once a stint
       if (spec.typeDue) {
         if (x.typesNow && x.typesNow.length) p.setType(x.typesNow, true);

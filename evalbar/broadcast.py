@@ -841,7 +841,7 @@ def youtube(x):
     """a YouTube link, or just its video id (no quotes needed in zsh, which reads the '?' of a link as a wildcard)"""
     return x if x.startswith('http') or os.path.exists(x) else f'https://www.youtube.com/watch?v={x}'
 if __name__ == '__main__':
-    P.own()
+    P.own(); import live; live.evalbar_mode()                                # the eval bar's reading (fitted spreads, Baton Pass...)
     a = sys.argv[1:]
     if not a: sys.exit(__doc__)
     if a[0] in ('watch', 'scan', 'frames') and len(a) > 1: a[1] = youtube(a[1])

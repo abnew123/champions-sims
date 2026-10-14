@@ -43,6 +43,7 @@ def ranked(species, nature, item=''):
 # used). With FITTED the eval bar's programs take it as the default and as the first candidate when a game's hits and turn order pick one;
 # the bot's do not set it yet, and the analyses that measure against Smogon's list (popfit, spread_fit) leave it off
 FITTED = False
+DMG_FLAGS = {}                                                               # the damage check's positions.js fixes (battlestate.FLAGS): live.evalbar_mode sets them
 _FIT = None
 def fitted(species, nature):
     """the fitted spread for this species (its base form, as the sheets name it) and nature, or None"""
@@ -394,7 +395,7 @@ def damage_ranges(gp, sets, known_side, known_evs, dobs, cands, strict=False):
                     s_ = dict(s_)
                     if sd == known_side and known_evs.get(toid(m['sp'].split('-')[0])): s_['evs'] = list(known_evs[toid(m['sp'].split('-')[0])][0])
                     if sd == other and m['sp'] == um['sp']: s_['evs'] = list(evs)
-                    x = BS.mon(m, s_, {})                        # the damage check's positions ask for none of positions.js's fixes
+                    x = BS.mon(m, s_, DMG_FLAGS)                 # the eval bar's: positions.js's fixes (live.evalbar_mode); the bot's: none
                     if sd + m['pos'] in ob['megas']: x['mega'] = True
                     if (ob.get('boosts') or {}).get(sd + m['pos']):                # stages changed earlier in the turn (Intimidate, Defiant)
                         x['boosts'] = {**(x.get('boosts') or {})}
@@ -406,7 +407,7 @@ def damage_ranges(gp, sets, known_side, known_evs, dobs, cands, strict=False):
                 break
             if len(sides) < 2: continue
             f = st['field']
-            spec = {'name': 'dmg', 'turn': ob['turn'], 'sides': sides, 'acts': [[None, None], [None, None]], 'perish': st['perish'], 'standIns': 0, 'dropped': [],
+            spec = {'name': 'dmg', 'turn': ob['turn'], 'sides': sides, 'acts': [[None, None], [None, None]], 'perish': st['perish'], 'standIns': 0, 'dropped': [], **DMG_FLAGS,
                     'field': {'weather': [f['weather'], f['wturns']] if f['weather'] else None, 'terrain': [f['terrain'], f['tturns']] if f['terrain'] else None, 'trickroom': f['tr']}}
             if ob.get('weather'): spec['field']['weather'] = [SD_WEATHER[ob['weather']], 5] if SD_WEATHER[ob['weather']] else None   # as it landed
             want.append((key, (oi, um['sp'], tuple(evs)), {'spec': spec, 'att': [0 if ob['att'][:2] == 'p1' else 1, ia], 'def': [0 if ob['def'][:2] == 'p1' else 1, idf],

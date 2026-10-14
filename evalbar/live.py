@@ -20,7 +20,14 @@ toid = R.toid
 OUT = os.path.join(C.HERE, 'out', 'live'); FEED = os.path.join(C.HERE, 'live_feed.js')
 NODE = [P.exe('node'), '--experimental-websocket', '--no-warnings']
 FORMATS = {'bo1': 'gen9championsvgc2026regmc', 'bo3': 'gen9championsvgc2026regmcbo3'}
-TOPK = 3; CAL = 0.7538                           # the rescale fitted for egvalue9_sym2 (accuracy.py compare)
+TOPK = 3; CAL_V25 = 0.7538                       # the rescale fitted for champ-battle-v25 with egvalue9_sym2 (accuracy.py compare)
+# the engine the eval bar reads with (the user, 2026-10-13: "lets move both over"): champ-battle-v29 with the learned value net, set as the
+# bot runs it (Battle sim) but without the bot's own-side rules (EG_LAST_PROTECT, EG_NO_DOUBLE_PROTECT). Its reads go to files named for it
+# (<tag>_eval_v29.jsonl, _refined_v29, _luck_v29); v25's stay readable, each rescaled with its own CAL, until a turn is read again
+ENGINE = 'v29'
+CAL = 0.676                                                                  # the rescale for v29 (accuracy.py compare, 3,968 replay positions: log loss 0.5185 against v25's 0.5240)
+EVAL_ENV = {'CHAMP_BIN': os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v29'), 'EG_VNET': os.path.join(C.MAIN, 'bot', 'value', 'vnet_h64_search_acc.json'),
+            'RACE_PRIO': '1', 'FEATS22': '1', 'EG_MEGA_TIE': '0', 'CALC_DATA': '../native/champions_data_full.json', 'CHAMP_DATA': 'engine_data_full.json'}
 # the full engine data (every species, move, item and ability Showdown knows; needs champ-battle-v17 or later): spectated teams can be
 # anything. v23 (2026-10-09) gives v17's values wherever v17 handled the turn, and handles more abilities, items and moves (Baton Pass too).
 # v25 (the bot's build) also offers a Mega Stone holder's moves without the Mega Evolution, so a player who holds it is not shown as
@@ -229,11 +236,12 @@ class Live:
         s.room = room; s.logfile = logfile; s.fmt = fmt
         s.tag = tag or (room.split('-')[-1] if not re.search(r'-\d+-[a-z0-9]+$', room) else room.split('-')[-2])
         s.bo3 = 'bo3' in room if room else logfile is not None; s.threads = threads; s.port = port; os.makedirs(OUT, exist_ok=True)
-        s.log = logfile or os.path.join(OUT, f'{s.tag}.log'); s.evf = os.path.join(OUT, f'{s.tag}_eval.jsonl'); s.data = None; s.status = 'connecting'
+        s.log = logfile or os.path.join(OUT, f'{s.tag}.log'); s.evf = os.path.join(OUT, f'{s.tag}_eval_{ENGINE}.jsonl'); s.data = None; s.status = 'connecting'
+        s.evf_old = os.path.join(OUT, f'{s.tag}_eval.jsonl'); s.lf_old = os.path.join(OUT, f'{s.tag}_luck.jsonl')   # champ-battle-v25's reads, until read again
         s.weights = {}; s.hyp = {}; s.poscache = {}; s.over = False; s.skip = {}
         s.exact = False; s.team = None; s.back = {}; s.bot_side = None; s.held = None; s.spread_why = {}
-        s.luck = False; s.lf = os.path.join(OUT, f'{s.tag}_luck.jsonl'); s.luck_state = None; s.lweights = {}; s.dirty = False; s.page_cache = None
-        s.rf = os.path.join(OUT, f'{s.tag}_refined.jsonl'); s.live_seeds = 32; s.refining = False; s.saved = False   # the two reads (2026-10-13)   # luck: after the game      # a Showdown bot's own log (bot/): its side known from its requests
+        s.luck = False; s.lf = os.path.join(OUT, f'{s.tag}_luck_{ENGINE}.jsonl'); s.luck_state = None; s.lweights = {}; s.dirty = False; s.page_cache = None
+        s.rf = os.path.join(OUT, f'{s.tag}_refined_{ENGINE}.jsonl'); s.live_seeds = 32; s.refining = False; s.saved = False   # the two reads (2026-10-13)   # luck: after the game      # a Showdown bot's own log (bot/): its side known from its requests
         # the user's verdicts where the battle text and the rules disagree (broadcasts: evalbar/rules.py), kept beside the log
         s.fixf = os.path.join(OUT, f'{s.tag}_fixes.json'); s.fixes = json.load(open(s.fixf)) if logfile and os.path.exists(s.fixf) else {}; s.redo = None
     def page(s):
@@ -288,7 +296,7 @@ class Live:
         for t in [t for t in s.weights if t >= t0]: s.weights.pop(t, None); s.hyp.pop(t, None)
         s.poscache = {k: v for k, v in s.poscache.items() if k[0] < t0}
         with LUCK:                                                           # a background read under way ends first; its turns go too
-            for f in (s.evf, s.rf):
+            for f in (s.evf, s.rf, s.evf_old):
                 if os.path.exists(f):
                     keep = [l for l in open(f) if int((re.search(r' t(\d+) ', json.loads(l).get('name', '')) or [0, 0])[1]) < t0]
                     open(f, 'w').writelines(keep)
@@ -364,10 +372,14 @@ class Live:
         return None
     def build(s, log, g):
         """the page's data from everything evaluated so far"""
-        ev = records(s.evf); lev = records(s.lf)                          # lev: the luck pass
-        rv = records(s.rf); ev.update(rv)                                  # the background read (REFINE_SEEDS) where it is done, over the quick one
+        # each name's read: the background one (REFINE_SEEDS) where it is done, else the quick one, else champ-battle-v25's from before the
+        # switch, each rescaled with its own engine's CAL
         logit = lambda v: math.log(min(1 - 1e-4, max(1e-4, v)) / (1 - min(1 - 1e-4, max(1e-4, v))))
-        scale = lambda v: C.sig(CAL * logit(v))
+        ev, cal = {}, {}; rv = records(s.rf)
+        for src, c in ((records(s.evf_old), CAL_V25), (records(s.evf), CAL), (rv, CAL)):
+            for n, x in src.items(): ev[n] = x; cal[n] = c
+        sc = lambda n: (lambda v: C.sig(cal[n] * logit(v)))
+        lev_new, lev_old = records(s.lf), records(s.lf_old)                 # the luck pass: this engine's, else v25's
         steps = []; ps = {}; CH = s.checks(log); lps = {}
         for t in s.lweights: lps.update(records(os.path.join(OUT, f'{s.tag}_t{t}_luckpos.jsonl')))
         for step in g['steps']:
@@ -382,8 +394,8 @@ class Live:
             W = s.weights[t]; names = [n for n in W if n + ' p1' in ev and n + ' p1' in ps]
             if not names: continue
             tot = sum(W[n] for n in names); ws = [W[n] / tot for n in names]
-            wp = sum(w * scale(ev[n + ' p1']['value']) for w, n in zip(ws, names))
-            opt = B.merge(ws, [B.options(ev[n + ' p1'], ps[n + ' p1'], scale) for n in names])
+            wp = sum(w * sc(n + ' p1')(ev[n + ' p1']['value']) for w, n in zip(ws, names))
+            opt = B.merge(ws, [B.options(ev[n + ' p1'], ps[n + ' p1'], sc(n + ' p1')) for n in names])
             state = json.loads(json.dumps(next(x for x in R.parse(s.upto(log, t))['steps'] if x['turn'] == t)['state']))
             for sd in ('p1', 'p2'):
                 hy, pool, need = s.hyp[t][sd]
@@ -398,16 +410,18 @@ class Live:
                 if not s.bo3 and sd != s.bot_side:                             # (the bot knows its own items)
                     for m in state[sd]['mons']:
                         if not m.get('pool'): m['item'] = ''                 # Bo1: items are unknown unless one activated (shown in the events)
-            ex = [(w, B.expected(ev[n + ' p1'], ps[n + ' p1'])) for w, n in zip(ws, names)]; ex = [(w, x) for w, x in ex if x is not None]
-            after = sum(w * scale(ev[n + ' p1']['static']) for w, n in zip(ws, names))   # the value function here, no lookahead
+            ex = [(w, B.expected(ev[n + ' p1'], ps[n + ' p1']), sc(n + ' p1')) for w, n in zip(ws, names)]; ex = [(w, f(x)) for w, x, f in ex if x is not None]
+            after = sum(w * sc(n + ' p1')(ev[n + ' p1']['static']) for w, n in zip(ws, names))   # the value function here, no lookahead
             LW = s.lweights.get(t) or {}
+            lev, lc = (lev_new, CAL) if LW and all(n in lev_new for n in LW) else (lev_old, CAL_V25)
+            lscale = lambda v: C.sig(lc * logit(v))
             if LW and all(n in lev and n in lps for n in LW):                  # the luck pass, in hindsight: both from its own positions
                 ex = [(w, lev[n]['actual_cell']['v'] if lev[n].get('actual_cell') else B.expected(lev[n], lps[n])) for n, w in LW.items()]   # actual_cell: with the
-                ex = [(w, x) for w, x in ex if x is not None]                   # replacements made (choices all known); else the matrix's cells
-                after = sum(w * scale(lev[n]['static']) for n, w in LW.items()) / sum(LW.values())
+                ex = [(w, lscale(x)) for w, x in ex if x is not None]           # replacements made (choices all known); else the matrix's cells
+                after = sum(w * lscale(lev[n]['static']) for n, w in LW.items()) / sum(LW.values())
             steps.append({'turn': t, 'wp': wp, 'ev': wp, 'state': state, 'events': step['events'], 'opt': opt, 'hyp': len(names), 'checks': CH.get(t, []),
                           'tier': 'refined' if all(n + ' p1' in rv for n in names) else 'quick',
-                          'expected': sum(w * scale(x) for w, x in ex) / sum(w for w, _ in ex) if ex else None, 'after': after})
+                          'expected': sum(w * x for w, x in ex) / sum(w for w, _ in ex) if ex else None, 'after': after})
         # luck (the user's idea, 2026-10-11): the turn's outcome against what the choices both sides made were expected to give, both
         # with the value function before any lookahead: the next turn's start, or the result after the last turn (not a forfeit)
         for i, st in enumerate(steps):
@@ -442,7 +456,7 @@ class Live:
             posf = os.path.join(OUT, f'{s.tag}_t{t}_luckpos.jsonl')         # with the choices made: their cells get every sample, and each
             sp = s.at(log, t, hindsight=True)[0]; s.lweights[t] = {x['name'] + ' p1': w for w, x in sp}
             positions(sp, posf)                                              # side's actual_v (what its choice cost) comes out
-            with LUCK: EN.run(posf, s.lf, 1, 32, 1, extra={'EVAL_MATRIX': '1', 'CHAMP_BIN': LUCK_BIN}, nice=19)
+            with LUCK: EN.run(posf, s.lf, 1, 32, 1, extra={**EVAL_ENV, 'EVAL_MATRIX': '1'}, nice=19)
             s.dirty = True
         s.dirty = True; s.luck_state = 'done'                                # dirty first: the run loop saves a finished page only once it is rebuilt with the luck
         if s.tag.startswith('bot_'):                                        # the bot page's progress card: one line per game whose luck is done
@@ -454,7 +468,8 @@ class Live:
             return s.why(s.skip[step['turn']]) + ': ' + ', '.join(s.skip[step['turn']])
         posf = os.path.join(OUT, f"{s.tag}_t{step['turn']}_pos.jsonl"); positions(sp, posf)
         os.environ['EVAL_TITLE'] = f"Live spectator: turn {step['turn']} ({len(sp)} positions)"
-        EN.run(posf, s.evf, s.threads, s.live_seeds, 1)
+        have = set(records(s.rf)) | set(records(s.evf)) | set(records(s.evf_old))
+        if not all(x['name'] + ' p1' in have for _, x in sp): EN.run(posf, s.evf, s.threads, s.live_seeds, 1, extra=EVAL_ENV)   # a turn read before is not read again
         s.weights[step['turn']] = {x['name']: w for w, x in sp}; s.hyp[step['turn']] = H
         return ''
     def run(s):
@@ -497,7 +512,7 @@ class Live:
                 with WORK: s.build(log, g)
                 seen_len = len(log)
             if s.page_cache and status == 'finished' and not todo and (not s.luck or s.luck_state == 'done') and not s.dirty:
-                tmp = s.page_cache + '.tmp'; json.dump({'v': PAGE_V, 'data': s.data, 'refined': s.refining}, open(tmp, 'w'), ensure_ascii=False); os.replace(tmp, s.page_cache)
+                tmp = s.page_cache + '.tmp'; json.dump({'v': PAGE_V, 'data': s.data, 'refined': ENGINE if s.refining else False}, open(tmp, 'w'), ensure_ascii=False); os.replace(tmp, s.page_cache)
                 s.saved = True; return                                                       # the bot page: a finished game is read from its file from now on
             if feed.poll() is not None and not todo and not s.over:
                 s.over = True
@@ -561,17 +576,17 @@ class BotRunner:
                    'out': os.path.relpath(prog, os.path.join(C.HERE, 'out')), 'total': len(s.lives), 'done0': 0, 'started': time.time(), 'threads': 1,
                    'seeds': REFINE_SEEDS, 'staged': True}, open(prog + '.run.json', 'w'))
         while True:
-            todo = [i for i, lv in enumerate(s.lives) if (isinstance(lv, Finished) and not lv.refined) or (isinstance(lv, Live) and lv.saved and not lv.refining)]
+            todo = [i for i, lv in enumerate(s.lives) if (isinstance(lv, Finished) and lv.refined != ENGINE) or (isinstance(lv, Live) and lv.saved and not lv.refining)]
             if not todo: time.sleep(30); continue
             i = todo[-1]; old = s.lives[i]; num = re.search(r'-(\d+)(?:-[a-z0-9]+)?$', old.room).group(1); tag = 'bot_' + num
-            rf = os.path.join(OUT, f'{tag}_refined.jsonl')
+            rf = os.path.join(OUT, f'{tag}_refined_{ENGINE}.jsonl')
             for posf in sorted(glob.glob(os.path.join(OUT, f'{tag}_t*_pos.jsonl')), key=lambda f: -int(re.search(r'_t(\d+)_pos', f).group(1))):
                 while others_busy() >= BUSY: time.sleep(30)                   # the lowest-priority work on the Mac: it waits under the 10-core cap
-                with LUCK: EN.run(posf, rf, 1, REFINE_SEEDS, 1, nice=19)
+                with LUCK: EN.run(posf, rf, 1, REFINE_SEEDS, 1, extra=EVAL_ENV, nice=19)
             f = os.path.join(s.dir, old.room + '.log'); pc = os.path.join(OUT, f'{tag}_page.json')
             lv = Live(old.room, s.threads, 0, logfile=f, tag=tag, fmt=botfmt(old.room)); lv.page_cache = pc; lv.exact = True; lv.luck = True; lv.refining = True
             lv.run()                                                         # the old page stays up until the rebuilt one replaces it
-            s.lives[i] = Finished(old.room, botfmt(old.room), lv.data, True)
+            s.lives[i] = Finished(old.room, botfmt(old.room), lv.data, ENGINE)
             with open(prog, 'a') as fh: fh.write(num + '\n')
     def run(s):
         s.serve(); print(f"the bot's games: http://localhost:{s.port}", flush=True)

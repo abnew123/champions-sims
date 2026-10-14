@@ -37,7 +37,7 @@ def run(posf, outf, threads=1, seeds=32, staged=1, extra=None, nice=0):
     env = {**os.environ, 'RACE_TIES': 'avg', 'EVAL_SEEDS': str(seeds), **({'EVAL_ADAPT': '1'} if staged else {}), 'EG_VALUE': os.environ.get('EG_VALUE', 'egvalue9_sym2.json'), 'RACE': '1', 'TRSYM': '1',
            'CALC_DATA': '../native/champions_data.json', 'GRID_DIR': grid, **(extra or {})}       # extra can override any of these
     alt = (extra or {}).get('CHAMP_BIN')                                     # another engine for this run only (the luck pass), under its own link
-    subprocess.run([P.exe('champ', alt, name='champ-alt') if alt else P.exe('champ', os.environ.get('CHAMP_BIN') or BIN), 'evalpos', '../native/' + os.environ.get('CHAMP_DATA', 'engine_data_spot.json'), os.path.abspath(posf), os.path.abspath(outf), str(threads)], cwd=MP, env=env, check=True,
+    subprocess.run([P.exe('champ', alt, name='champ-alt') if alt else P.exe('champ', os.environ.get('CHAMP_BIN') or BIN), 'evalpos', '../native/' + ((extra or {}).get('CHAMP_DATA') or os.environ.get('CHAMP_DATA', 'engine_data_spot.json')), os.path.abspath(posf), os.path.abspath(outf), str(threads)], cwd=MP, env=env, check=True,
                    preexec_fn=(lambda: os.nice(nice)) if nice else None)
 if __name__ == '__main__':
     P.own()

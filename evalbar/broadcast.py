@@ -656,7 +656,7 @@ class Runner:
                            'seeds': LV.REFINE_SEEDS, 'staged': True, 'proc': 'broadcast.py'}, open(prog + '.run.json', 'w')); shown = total
             if not todo: time.sleep(10); continue
             lv, t, posf = todo[0]; tried[(lv.tag, t)] = os.path.getmtime(posf)   # once a version of its positions (a correction writes them again)
-            with LV.LUCK: LV.EN.run(posf, lv.rf, 1, LV.REFINE_SEEDS, 1, nice=19)
+            with LV.LUCK: LV.EN.run(posf, lv.rf, 1, LV.REFINE_SEEDS, 1, extra=LV.EVAL_ENV, nice=19)
             with open(prog, 'a') as fh: fh.write(f'{lv.tag} t{t}\n')
             lv.dirty = True
     def serve(s):

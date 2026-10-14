@@ -29,7 +29,7 @@ head2head() {   # head2head <job> <budget> <depth> <extra settings> [ARM_B ARM_C
   SP=$SP STARTS=$SP/inputs/mid_starts BIN=$SP/battlesim-champ-deep2 TAG=$job BUDGET=$2 DEPTH=$3 EXTRA="$4" ARM_B="$5" ARM_C="$6" T=$H PY=python3 \
     zsh pssim/deep_endgames.sh > $SP/$job.report.txt 2>&1 && touch $SP/$job.done
 }
-for job in ${JOBS:-mid_d2k2 acc mid4_d2k2 mid4_ctrl mid_d2k4 mid_d3k2}; do
+for job in ${JOBS:-mid_d2k2 acc mid4_ctrl mid4_d2k2 mid_d2k4 mid_d3k2}; do
   case $job in
     mid_d2k2)  head2head mid_d2k2 20000 2 "EVAL_DEEP_K0=2";;
     mid4_d2k2) head2head mid4_d2k2 80000 2 "EVAL_DEEP_K0=2";;
@@ -42,4 +42,4 @@ for job in ${JOBS:-mid_d2k2 acc mid4_d2k2 mid4_ctrl mid_d2k4 mid_d3k2}; do
          SP=$SP BIN=$SP/battlesim-champ-deep2 RUNS="holdall_d0 holdall_d2k2" T=$T zsh pssim/deep_values.sh > $SP/acc.log 2>&1 && touch $SP/acc.done;;
   esac
 done
-echo "$(date -u +%H:%M) all jobs done"
+echo "$(date -u +%H:%M) all jobs done"; touch $SP/ALL_DONE

@@ -213,6 +213,9 @@ pub fn register(r: &mut Reg) {
         if !b.run_immunity_move(t, am, false) { return RV::Undef; } RV::B(false) });
     // Unseen Fist, Champions (mods/champions: onHitProtect, 2026-10-13, v29): a contact move goes through Protect and its kin for a
     // quarter of the damage (the hit's bypassProtect, the same 0.25 as a Z-move through Protect)
+    // Poison Point and Grass Pelt (v29, the unsupported list): as Static (30% on contact) with poison; Defense x1.5 in Grassy Terrain
+    h!(r, Ability, "poisonpoint", "onDamagingHit", |b, a| { let (t, s) = (a.t(), a.s()); if b.makes_contact(a.am(), s) && b.rchance(3, 10) { b.try_set_status(s, "psn", Some(t), None); } RV::Undef });
+    h!(r, Ability, "grasspelt", "onModifyDef", |b, a| { if b.field.terrain == "grassyterrain" { return b.cm(1.5, 1.0); } RV::Undef });
     h!(r, Ability, "unseenfist", "onHitProtect", |b, a| {
         let am = a.am(); let Some(d) = a.source else { return RV::Undef };
         if b.am(am).flag("contact") { let slot = b.slot_name(d); b.amm(am).hd(slot).bypass_protect = true; return RV::B(false); }

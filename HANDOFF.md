@@ -1279,3 +1279,11 @@ registrations since its second version) and checks reachability of real logs in 
   logs carry volatiles (Imprison, Choice lock, Disable, Taunt...) but not the disables Showdown derives from them, so the planner offered
   a Choice-locked Pokemon every move and an Imprisoned Farigiraf its Trick Room. On 120 held-out positions, 12 change (Choice lock,
   Disable), none from thread noise. Every differential set still exact. Bot: battlesim-champ29-bot -> champ-bot-2026-10-13c (v31).
+- **champ-battle-v32 (2026-10-14, 2 pm) = v31 + the planner's immunity filter (an outside review, item 1) + the anytime search.** (1) The
+  immune-target filter (plan.rs immune_to) uses the move's type as used and Showdown's immunity rules: -ate abilities (Dragonize too),
+  Normalize, Liquid Voice, the move's ignoreImmunity, Ring Target, Scrappy / Mind's Eye / Foresight vs Ghosts, Miracle Eye vs Darks,
+  isGrounded for Ground. v31 dropped single-target moves that land (Pixilate Quick Attack / Hyper Beam into Ghosts, Aerilate Double-Edge,
+  Scrappy Fake Out): 555 of 32,361 real positions. On 200 of them the restored options take 16% of the mix (over half in 20 slots); 134
+  of 135 random positions unchanged (the other: Pixilate Hyper Beam into Basculegion). Battle mechanics untouched, so no differential
+  rerun. (2) deep.rs: the budgeted search as a tree (EVAL_DEPTH / BATTLE_EVAL), deterministic, every evaluation counted; inert without
+  those variables. Bot: battlesim-champ29-bot -> champ-bot-2026-10-14a (v32). `src_battle_v32.tar.gz`, `bin/champ-battle-v32.sha256`.

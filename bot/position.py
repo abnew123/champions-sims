@@ -12,8 +12,11 @@ sys.path.insert(0, EB); sys.path.insert(0, os.path.join(ROOT, 'pssim'))
 # scoring every leaf with the h64 net distilled from the one-turn search, refitted on the full damage-calc data
 # (bot/value/vnet_h64_search_fc.json: held-out search tied with the first net, self-play +4.9 ± 1.5 against the static value over 1,600
 # games); the net's inputs need RACE_PRIO and FEATS22, and CALC_DATA must be champions_data_full.json, which it was fitted with.
-os.environ.setdefault('CHAMP_BIN', os.path.join(ROOT, 'native', 'champ', 'bin', 'battlesim-champ-bot'))
-os.environ.setdefault('EG_VNET', os.path.join(ROOT, 'bot', 'value', 'vnet_h64_search_fc.json'))
+# 2026-10-13 evening (the user: "lets move both over"): champ-battle-v29 (the accuracy fix, Revival Blessing, Unseen Fist, Flying Press
+# and the other ports, partner targets) through its own link, so a brain started before the move keeps the old engine and net together
+# until its restart; the net refitted after the accuracy fix (vnet_h64_search_acc.json: the features changed with it)
+os.environ.setdefault('CHAMP_BIN', os.path.join(ROOT, 'native', 'champ', 'bin', 'battlesim-champ29-bot'))
+os.environ.setdefault('EG_VNET', os.path.join(ROOT, 'bot', 'value', 'vnet_h64_search_acc.json'))
 os.environ.setdefault('RACE_PRIO', '1'); os.environ.setdefault('FEATS22', '1')
 os.environ.setdefault('CHAMP_DATA', 'engine_data_full.json')
 os.environ.setdefault('EG_MEGA_TIE', '0')

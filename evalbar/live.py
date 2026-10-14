@@ -527,6 +527,9 @@ PAGE_V = 1
 # the lowest priority, sharing the luck pass's) and saves its page again; the page marks turns still on the quick read. The engine's budgeted
 # search (Battle sim's planner_issues 18) will replace the seed counts with budgets and a per-position uncertainty
 LIVE_SEEDS, REFINE_SEEDS = 8, 128
+# the bot page's background read is off (the user, 2026-10-14: hundreds of games re-read take longer than an engine version lasts); its games
+# are read once, at the full 32 rolls, and the page shows no "quick read" note. Streams keep both reads (a stream day is about 3 hours of it)
+BOT_REFINE = False
 BUSY = 9.0                                                                   # the background read waits while everything else keeps this many cores busy
 def others_busy():
     """cores busy outside this program's process group (its engines included), ps's recent CPU share summed, as auto.py counts them"""
@@ -568,7 +571,7 @@ class BotRunner:
                     for i, lv in enumerate(run.lives):
                         if lv.data and lv.data['games']:
                             games.append({**lv.data['games'][0], 'title': f'Game {i + 1}', 'idx': i, 'versus': f'Game {i + 1}',
-                                          'group': 'Bo3' if 'bo3' in lv.room else 'Bo1', 'format': lv.fmt, 'refines': True, 'when': run.when(lv.room)})   # the page's format toggle and game list (the user, 2026-10-13)
+                                          'group': 'Bo3' if 'bo3' in lv.room else 'Bo1', 'format': lv.fmt, 'refines': BOT_REFINE, 'when': run.when(lv.room)})   # the page's format toggle and game list (the user, 2026-10-13)
                     last = run.lives[-1] if run.lives else None
                     st = "waiting for the bot's next game" if not last or last.status == 'finished' else last.status
                     b = json.dumps({'games': games, 'live': {'url': 'data.json', 'status': st, 'format': last.fmt if last else botfmt('')}}).encode()
@@ -605,7 +608,7 @@ class BotRunner:
             s.lives[i] = Finished(old.room, botfmt(old.room), lv.data, ENGINE)
     def run(s):
         s.serve(); print(f"the bot's games: http://localhost:{s.port}", flush=True)
-        if os.environ.get('EVALBAR_REFINE', '1') == '1': threading.Thread(target=s.refine, daemon=True).start()   # =0: no background read (a CAL refit pending)
+        if BOT_REFINE and os.environ.get('EVALBAR_REFINE', '1') == '1': threading.Thread(target=s.refine, daemon=True).start()   # =0: none (a CAL refit pending)
         # a progress card on the shared status page (status.py): the bot's games whose luck is worked out, of all its ladder games
         prog = os.path.join(OUT, 'bot_luck.games'); open(prog, 'w').close()
         n = len([f for f in glob.glob(os.path.join(s.dir, 'battle-*.log')) if re.search(r'-\d{6,}(-[a-z0-9]+)?\.log$', f)])
@@ -627,7 +630,7 @@ class BotRunner:
                     s.lives.append(Finished(room, botfmt(room), c['data'], c.get('refined', False)))
                     with open(os.path.join(OUT, 'bot_luck.games'), 'a') as fh: fh.write('bot_' + num + '\n')   # its luck is worked out (the card)
                     continue
-                lv = Live(room, s.threads, 0, logfile=f, tag='bot_' + num, fmt=botfmt(room)); lv.page_cache = pc; lv.live_seeds = LIVE_SEEDS
+                lv = Live(room, s.threads, 0, logfile=f, tag='bot_' + num, fmt=botfmt(room)); lv.page_cache = pc; lv.live_seeds = LIVE_SEEDS if BOT_REFINE else 32
                 lv.exact = True; lv.luck = True; s.lives.append(lv); threading.Thread(target=lv.run, daemon=True).start()
                 print(time.strftime('%-I:%M %p'), 'following the bot\'s game', num, flush=True)
             time.sleep(5)

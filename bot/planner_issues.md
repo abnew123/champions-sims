@@ -214,3 +214,9 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
       mostly among options that end the same way. Against the real results (deep_values.py): endgames 0.2845 -> 0.2836 (-0.0009 +-
       0.022); the 1,503 held-out positions, depth 2 at each position's staged budget, 0.5323 -> 0.5261 (-0.0062 +- 0.0047) with a median
       of only 8 deep rolls a position (midgame tables are large). Next: the same at 4x the budget, against 4x rolls only.
+    - At 4x the budget (median 49 deep rolls): depth 2 vs none 0.5318 -> 0.5252 (-0.0067 +- 0.0066); 4x vs 1x without depth -0.0005 +-
+      0.0006; depth 2 at 4x vs at 1x -0.0010 +- 0.0036. Depth's edge (about 0.006-0.007, the size of the net's own gain over sym2) holds
+      but does not grow with the budget, and its decisions are unstable: with depth the top joint option differs between 1x and 4x for
+      about half the sides (mixes 0.41 apart), without depth 0.09. A few costly deep rolls with large corrections swing the tables, which
+      fits the flat playouts. So depth looks more useful as training targets (a net fitted on deep values, decisions at today's speed and
+      stability) than live at the bot's budget.

@@ -309,6 +309,12 @@ pub fn register(r: &mut Reg) {
     h!(r, Move, "freezedry", "onEffectiveness", |b, a| { if b.eff_type == "Water" { return RV::N(1.0); } RV::Undef });
     // Flying Press (2026-10-13, v29: the Eval bar's unsupported list): its Fighting effectiveness plus Flying's against each type
     h!(r, Move, "flyingpress", "onEffectiveness", |b, a| { RV::N(a.relay.num() + b.dex.effectiveness("Flying", b.eff_type) as f64) });
+    // Power Split (v29): as Guard Split, Attack and Special Attack
+    h!(r, Move, "powersplit", "onHit", |b, a| {
+        let (t, s) = (a.t(), a.s());
+        for k in [1usize, 3] { let v = (b.p(t).stored[k] + b.p(s).stored[k]).div_euclid(2); b.pm(t).stored[k] = v; b.pm(s).stored[k] = v; }
+        if b.logging { let (ns, nt) = (b.mon_name(s), b.mon_name(t)); let of = format!("[of] {}", nt); b.add(&["-activate", &ns, "move: Power Split", &of]); }
+        RV::Undef });
     // Sleep Talk (v29): only while asleep (or Comatose); a random move of the user's, not a charging or nosleeptalk one, used outright
     h!(r, Move, "sleeptalk", "onTry", |b, a| { let m = a.t(); RV::B(b.p(m).status == "slp" || b.has_ability(m, "comatose")) });
     h!(r, Move, "sleeptalk", "onHit", |b, a| {

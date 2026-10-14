@@ -26,7 +26,7 @@ const mon = p => ({species: p.species.id, baseSpecies: p.baseSpecies.id, set: {s
   lastDamage: p.lastDamage || 0, hurtThisTurn: p.hurtThisTurn ?? null, timesAttacked: p.timesAttacked || 0,
   attackedBy: p.attackedBy.map(a => ({source: enc(a.source), damage: a.damage, move: a.move, thisTurn: a.thisTurn, slot: a.slot})),
   statsRaisedThisTurn: !!p.statsRaisedThisTurn, statsLoweredThisTurn: !!p.statsLoweredThisTurn, switchFlag: p.switchFlag || false, forceSwitchFlag: !!p.forceSwitchFlag,
-  newlySwitched: !!p.newlySwitched, beingCalledBack: !!p.beingCalledBack, canMegaEvo: p.canMegaEvo || null, transformed: !!p.transformed,
+  newlySwitched: !!p.newlySwitched, syrupTriggered: !!p.syrupTriggered, beingCalledBack: !!p.beingCalledBack, canMegaEvo: p.canMegaEvo || null, transformed: !!p.transformed,
   trapped: p.trapped || false, maybeTrapped: !!p.maybeTrapped, maybeDisabled: !!p.maybeDisabled, maybeLocked: !!p.maybeLocked});
 function exportState(b) {
   return {turn: b.turn, effectOrder: b.effectOrder, ended: b.ended, winner: b.winner || '', prng: b.prng.rng && b.prng.rng.seed ? [...b.prng.rng.seed] : null,

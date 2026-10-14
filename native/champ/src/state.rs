@@ -52,7 +52,7 @@ pub struct Pokemon {
     pub last_move: Option<Id>, pub last_move_target_loc: Option<i64>, pub last_move_used: Option<Id>, pub move_this_turn: Id,
     pub move_this_turn_result: Tri, pub move_last_turn_result: Tri, pub last_damage: i64, pub hurt_this_turn: Option<i64>, pub times_attacked: i64,
     pub attacked_by: Vec<Attack>, pub stats_raised_this_turn: bool, pub stats_lowered_this_turn: bool, pub switch_flag: Option<Id>, pub force_switch_flag: bool,
-    pub newly_switched: bool, pub being_called_back: bool, pub can_mega_evo: Option<Id>, pub transformed: bool,
+    pub newly_switched: bool, pub syrup_triggered: bool, pub being_called_back: bool, pub can_mega_evo: Option<Id>, pub transformed: bool,
     pub trapped: bool, pub maybe_trapped: bool, pub maybe_disabled: bool, pub maybe_locked: bool, pub skip_before_switch_out: bool,
     /// cached effect data of the current ability / item / status (Battle::ab_data etc.): each entry is checked against the current id
     /// before use, so it can never go stale
@@ -150,7 +150,7 @@ fn mon(v: &Value, side: u8) -> Pokemon {
             mv: id(x["move"].as_str().unwrap_or("")), this_turn: x["thisTurn"].as_bool().unwrap_or(false), slot: id(x["slot"].as_str().unwrap_or("")) }).collect()).unwrap_or_default(),
         stats_raised_this_turn: v["statsRaisedThisTurn"].as_bool().unwrap_or(false), stats_lowered_this_turn: v["statsLoweredThisTurn"].as_bool().unwrap_or(false),
         switch_flag: match &v["switchFlag"] { Value::String(x) => Some(id(x)), Value::Bool(true) => Some(id("true")), _ => None },
-        force_switch_flag: v["forceSwitchFlag"].as_bool().unwrap_or(false), newly_switched: v["newlySwitched"].as_bool().unwrap_or(false),
+        force_switch_flag: v["forceSwitchFlag"].as_bool().unwrap_or(false), newly_switched: v["newlySwitched"].as_bool().unwrap_or(false), syrup_triggered: v["syrupTriggered"].as_bool().unwrap_or(false),
         being_called_back: v["beingCalledBack"].as_bool().unwrap_or(false), can_mega_evo: v["canMegaEvo"].as_str().map(|x| id(&to_id(x))),
         transformed: v["transformed"].as_bool().unwrap_or(false), trapped: truthy_json(&v["trapped"]), maybe_trapped: v["maybeTrapped"].as_bool().unwrap_or(false),
         maybe_disabled: v["maybeDisabled"].as_bool().unwrap_or(false), maybe_locked: v["maybeLocked"].as_bool().unwrap_or(false), skip_before_switch_out: false,

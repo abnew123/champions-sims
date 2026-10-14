@@ -162,6 +162,32 @@ fn type_mult(b: &mut Battle, ty: &str, m: MonRef) -> f64 {
     x
 }
 
+/// the planner's immune-target filter: does the move, as it would be used, do nothing to this foe by type? Showdown's ModifyType and
+/// runImmunity for what our teams meet: Weather Ball / Terrain Pulse never count (their types move); the -ate abilities (Dragonize too)
+/// turn Normal moves, Normalize turns every move Normal, Liquid Voice turns sound moves Water; the move's own ignoreImmunity (Thousand
+/// Arrows) and Ring Target ignore it; Scrappy / Mind's Eye and a Foresight / Odor Sleuth mark let Normal and Fighting hit Ghosts,
+/// Miracle Eye Psychic hit Darks; Ground follows isGrounded (Gravity, Smack Down, Iron Ball, Air Balloon, Magnet Rise; Levitate is an
+/// ability's immunity and stays offered, as before). The outside review (2026-10-14): the data type alone dropped Scrappy Kangaskhan's
+/// Fake Out into a Ghost and Pixilate Sylveon's Quick Attack into Dragapult, which land.
+fn immune_to(b: &mut Battle, a: MonRef, mid: Id, f: MonRef) -> bool {
+    if mid == "weatherball" || mid == "terrainpulse" { return false; }
+    let mv = b.dex.mv(mid).tmpl.clone();
+    let no_mod = ["judgment", "multiattack", "naturalgift", "revelationdance", "technoblast"];
+    let mut ty: Id = mv.mtype;
+    if b.has_ability(a, "normalize") && !no_mod.contains(&mid) { ty = "Normal"; }
+    else if ty == "Normal" && !no_mod.contains(&mid) {
+        for (ab, t) in [("pixilate", "Fairy"), ("aerilate", "Flying"), ("refrigerate", "Ice"), ("galvanize", "Electric"), ("dragonize", "Dragon")] { if b.has_ability(a, ab) { ty = t; } }
+    }
+    if b.has_ability(a, "liquidvoice") && mv.flags.contains(&"sound") { ty = "Water"; }
+    match &mv.ignore_immunity { Some(IgnImm::All(true)) => return false, Some(IgnImm::Types(v)) if v.contains(&ty) => return false, _ => {} }
+    if b.p(f).item == "ringtarget" && !b.ignoring_item(f) { return false; }
+    if ty == "Ground" { return b.is_grounded(f, false) == Some(false); }
+    let scrappy = (ty == "Normal" || ty == "Fighting") && (b.has_ability(a, "scrappy") || b.has_ability(a, "mindseye") || find(&b.p(f).volatiles, "foresight").is_some());
+    let eye = ty == "Psychic" && find(&b.p(f).volatiles, "miracleeye").is_some();
+    let types = b.get_types(f);
+    types.iter().any(|t| b.dex.immune_type(ty, &[*t]) && !(scrappy && *t == "Ghost") && !(eye && *t == "Dark"))
+}
+
 // ---------------- position value ----------------
 fn prim(b: &Battle, m: MonRef) -> usize {
     let (mut ph, mut sp) = (0, 0);
@@ -706,7 +732,7 @@ pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
                 let Some(f) = f else { continue }; if b.p(*f).fainted { continue; }
                 // an immune target is dropped (the move can do nothing to it) unless PLAN_KEEP_IMMUNE names this side: a human (champ
                 // play) attacks into an immune Pokemon on purpose when predicting a switch, and the move then hits the switch-in
-                if mv.category != "Status" && type_mult(b, mv.mtype, *f) == 0.0 && *mid != "weatherball" && *mid != "terrainpulse" && !keep_immune()[s as usize] { continue; }
+                if mv.category != "Status" && immune_to(b, m, mid, *f) && !keep_immune()[s as usize] { continue; }
                 out.push(PChoice::Move(k, t as i64 + 1, mega));
             }
             // the partner as the target (planner_issues 17, the user's scope, 2026-10-13): the moves players aim at their partner over

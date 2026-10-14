@@ -182,7 +182,6 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
         let cv: Vec<f64> = (0..tsw.len()).map(|j| xsup.iter().map(|&i| x[i] * cells.get(i, j)).sum::<f64>() / xtot).collect();
         (x, y, rv, cv)
     };
-    let (mut x, mut y, mut rv, mut cv) = solve(&mut cells);
     // the joint actions actually made (when every living slot's choice is known) always count as in contention, so what a played
     // move cost is measured at full precision even when it is far from the best options
     let actual_joint = |s: u8, opts: &[[PChoice; 2]], actual: &Value| -> Option<usize> {
@@ -193,7 +192,8 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
     let (act_i, act_j) = (actual_joint(0, &msw, &sp["actual"]), actual_joint(1, &tsw, &sp["their_actual"]));
     // EVAL_DEPTH=<d> with a budget (2026-10-14, the user: the budgeted search was meant to look past the next turn): the anytime search
     // as a tree (deep.rs), d turns beyond this one; EVAL_DEPTH=0 is the same allocation without depth (for comparisons at matched
-    // compute). The fixed stages, EVAL_HORIZON, EVAL_MATRIX and actual_replace below are not part of it.
+    // compute). The fixed stages, EVAL_HORIZON, EVAL_MATRIX and actual_replace below are not part of it. Before the first solve, so the
+    // search's count covers every leaf evaluation (the review, 2026-10-14).
     if let Some(depth) = std::env::var("EVAL_DEPTH").ok().and_then(|x| x.parse::<usize>().ok()) { if budgeted {
         let p = crate::deep::Params::from_env(base0, seeds_max);
         if let Some((root, st)) = crate::deep::search(&b, cfg, key, depth, &p, budget, budget_ms, (act_i, act_j), t0) {
@@ -204,6 +204,7 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
                 "levels": root.levels(), "rms_correction": st.rms_correction()});
         }
     } }
+    let (mut x, mut y, mut rv, mut cv) = solve(&mut cells);
     // the anytime search (2026-10-14, the user: think as long as the budget allows): every cell starts at the base rolls; then, round
     // after round, the cells whose next rolls shrink the position value's uncertainty most get one more roll each, and the turn is solved
     // again. A cell's priority is (x_i + f/rows)^2 (y_j + f/cols)^2 sd_ij^2 / (n (n + 1)) (the drop in the variance of x.A.y that one

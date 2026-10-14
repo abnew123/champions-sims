@@ -12,6 +12,10 @@ def lines(f):
             for b in iter(lambda: h.read(1 << 20), b''): n += b.count(b'\n')
     except OSError: pass
     return n
+def pid_alive(pid):
+    if not pid: return False
+    try: os.kill(int(pid), 0); return True
+    except (OSError, ValueError): return False
 def ampm(t): return datetime.datetime.fromtimestamp(t).strftime('%-I:%M %p').lower()
 def fmt(sec):
     sec = int(max(0, sec)); h, r = divmod(sec, 3600); m, s = divmod(r, 60)
@@ -53,8 +57,9 @@ def cards():
         # its process: the output's full path, or its folder and name (a bare name like eval.jsonl matched any engine run whose output ended
         # in it, so finished cards showed as running, 2026-10-14)
         key = os.path.join(os.path.basename(os.path.dirname(outf)), os.path.basename(outf))
-        live = any(r.get('proc', 'evalpos') in l and (outf in l or key in l) for l in ps)
+        live = any(r.get('proc', 'evalpos') in l and (outf in l or key in l) for l in ps) or pid_alive(r.get('pid'))   # a long-lived program's own card
         if not live and (now - os.path.getmtime(st) > 2 * 86400 or r.get('title', '').startswith('Live spectator')): continue
+        if live and r.get('pid') and done >= tot and not any(r.get('proc', 'evalpos') in l and (outf in l or key in l) for l in ps): live = False   # its work is done
         last = os.path.getmtime(outf) if os.path.exists(outf) else r['started']
         el = (now if live else last) - r['started']; rate = (done - r['done0']) / el if el > 0 else 0
         frac = min(1.0, done / tot) if tot else 0

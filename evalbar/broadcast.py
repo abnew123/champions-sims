@@ -653,7 +653,7 @@ class Runner:
             if total != shown:                                              # the card's total grows as the stream goes on
                 json.dump({'title': f'Stream {s.tag}: turns read again at {LV.REFINE_SEEDS} rolls (one engine thread at the lowest priority)',
                            'out': os.path.relpath(prog, os.path.join(C.HERE, 'out')), 'total': total, 'done0': 0, 'started': time.time(), 'threads': 1,
-                           'seeds': LV.REFINE_SEEDS, 'staged': True, 'proc': 'broadcast.py'}, open(prog + '.run.json', 'w')); shown = total
+                           'seeds': LV.REFINE_SEEDS, 'staged': True, 'proc': 'broadcast.py', 'pid': os.getpid()}, open(prog + '.run.json', 'w')); shown = total
             if not todo: time.sleep(10); continue
             lv, t, posf = todo[0]; tried[(lv.tag, t)] = os.path.getmtime(posf)   # once a version of its positions (a correction writes them again)
             with LV.LUCK: LV.EN.run(posf, lv.rf, 1, LV.REFINE_SEEDS, 1, extra=LV.EVAL_ENV, nice=19)

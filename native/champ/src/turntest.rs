@@ -199,7 +199,7 @@ pub fn diff_full(b: &Battle, post: &Value, req: Option<&Value>) -> Vec<String> {
                 // a hidden disable (Imprison) shows as usable in the last active Pokemon's request (Showdown's restrictData)
                 let last = b.sides[s].active.iter().skip(i + 1).all(|a| a.map(|j| b.sides[s].pokemon[j as usize].fainted).unwrap_or(true));
                 let slots = &b.sides[s].pokemon[pi as usize].move_slots;
-                let mine: Vec<String> = bb.request_moves((s as u8, pi)).iter().map(|(m, _, dis)| {
+                let mine: Vec<String> = bb.request_moves_shown((s as u8, pi)).iter().map(|(m, _, dis)| {
                     let hidden = last && slots.iter().any(|x| x.id == *m && x.disabled_hidden && x.pp > 0);
                     format!("{}{}", m, if *dis && !hidden { "(x)" } else { "" }) }).collect();
                 let theirs: Vec<String> = ra["moves"].as_array().map(|a| a.iter().map(|m| format!("{}{}", m["id"].as_str().unwrap_or(""), if truthy_json(&m["disabled"]) { "(x)" } else { "" })).collect()).unwrap_or_default();

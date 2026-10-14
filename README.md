@@ -20,7 +20,7 @@ The work is split between Claude sessions ("threads"). Each owns its folders and
 | Showdown bot | `bot/` | Battle sim | the headers of `bot/client.js` and `bot/brain.py`; `bot/limits.json` |
 | Eval bar | `evalbar/`: the replay reader (`replay.py`), the position builder (`battlestate.py`), evaluation, pages, accuracy | Eval bar | `evalbar/HANDOFF.md` |
 | Broadcast watcher, public page | `evalbar/auto.py`, `evalbar/publish.py`, `page.html`'s public mode | Stream watcher | `evalbar/HANDOFF.md`, "Hands-free" and "The public page" |
-| Trick Room Six sheet, sheet kit | `trsheet/`, `sheetkit/`, `sheets/trick-room-six/`, the root `tr_*.py`, `mxtr/`, `recordings/`, the turn-one lead pipeline in `pssim/` (`t1sim.js`, `tr_final.py`, `run_jobs.sh`) | TR sheet | `trsheet/HANDOFF.md`, `sheetkit/README.md` |
+| Trick Room Six sheet, sheet kit | `trsheet/`, `sheetkit/`, `sheets/trick-room-six/`, the root `tr_*.py`, `mxtr/`, `recordings/`, the turn-one lead pipeline in `pssim/` (`t1sim.js`, `tr_final.py`, `run_jobs.sh`), Showdown's Champions data patch (`pssim/engine_patch/`) | TR sheet | `trsheet/HANDOFF.md`, `sheetkit/README.md` |
 | Frankfurt sheets | `sheets/frankfurt-239/`, `sheets/frankfurt-156/` | Frankfurt-239 sheet, Frankfurt-156 sheet | `sheetkit/README.md` |
 | Team search | `teamsearch/` | Team search | `teamsearch/HANDOFF.md` |
 | Progress page | `status_server.py`; each thread supplies its own cards (`evalbar/status.py`, `teamsearch/status_server.py`) | Battle sim | its docstring |

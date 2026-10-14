@@ -581,12 +581,16 @@ class BotRunner:
     def refine(s):
         """the background read: the newest saved game not yet refined gets every turn's positions read again at REFINE_SEEDS, then its page
         is rebuilt from them (a Live on its cached files, in this thread) and saved again with refined set"""
-        prog = os.path.join(OUT, 'bot_refined.games')
-        if not os.path.exists(prog): open(prog, 'w').close()
-        json.dump({'title': f"The bot's games: read again at {REFINE_SEEDS} rolls (games, one engine thread at the lowest priority)",
-                   'out': os.path.relpath(prog, os.path.join(C.HERE, 'out')), 'total': len(s.lives), 'done0': 0, 'started': time.time(), 'threads': 1,
-                   'seeds': REFINE_SEEDS, 'staged': True, 'pid': os.getpid()}, open(prog + '.run.json', 'w'))   # pid: running while this page is
+        prog = os.path.join(OUT, 'bot_refined.games'); shown = None; t0 = time.time()
+        while not s.lives: time.sleep(5)
         while True:
+            done = [re.search(r'-(\d+)(?:-[a-z0-9]+)?$', lv.room).group(1) for lv in list(s.lives) if isinstance(lv, Finished) and lv.refined == ENGINE]
+            if (len(done), len(s.lives)) != shown:                         # the card: games read again (from earlier runs too) of all games loaded
+                open(prog, 'w').writelines(x + '\n' for x in done)
+                if shown is None: d0 = len(done)
+                json.dump({'title': f"The bot's games: read again at {REFINE_SEEDS} rolls (games, up to 3 engine threads at the lowest priority)",
+                           'out': os.path.relpath(prog, os.path.join(C.HERE, 'out')), 'total': len(s.lives), 'done0': d0, 'started': t0, 'threads': 3,
+                           'seeds': REFINE_SEEDS, 'staged': True, 'pid': os.getpid(), 'unit': 'games'}, open(prog + '.run.json', 'w')); shown = (len(done), len(s.lives))   # pid: running while this page is
             todo = [i for i, lv in enumerate(s.lives) if (isinstance(lv, Finished) and lv.refined != ENGINE) or (isinstance(lv, Live) and lv.saved and not lv.refining)]
             if not todo: time.sleep(30); continue
             i = todo[-1]; old = s.lives[i]; num = re.search(r'-(\d+)(?:-[a-z0-9]+)?$', old.room).group(1); tag = 'bot_' + num
@@ -599,7 +603,6 @@ class BotRunner:
             lv = Live(old.room, s.threads, 0, logfile=f, tag=tag, fmt=botfmt(old.room)); lv.page_cache = pc; lv.exact = True; lv.luck = True; lv.refining = True
             lv.run()                                                         # the old page stays up until the rebuilt one replaces it
             s.lives[i] = Finished(old.room, botfmt(old.room), lv.data, ENGINE)
-            with open(prog, 'a') as fh: fh.write(num + '\n')
     def run(s):
         s.serve(); print(f"the bot's games: http://localhost:{s.port}", flush=True)
         if os.environ.get('EVALBAR_REFINE', '1') == '1': threading.Thread(target=s.refine, daemon=True).start()   # =0: no background read (a CAL refit pending)
@@ -607,7 +610,7 @@ class BotRunner:
         prog = os.path.join(OUT, 'bot_luck.games'); open(prog, 'w').close()
         n = len([f for f in glob.glob(os.path.join(s.dir, 'battle-*.log')) if re.search(r'-\d{6,}(-[a-z0-9]+)?\.log$', f)])
         json.dump({'title': "The bot's games: luck worked out (games, one engine thread at the lowest priority)", 'out': os.path.relpath(prog, os.path.join(C.HERE, 'out')),
-                   'total': n, 'done0': 0, 'started': time.time(), 'threads': 1, 'seeds': 32, 'staged': True, 'pid': os.getpid()}, open(prog + '.run.json', 'w'))
+                   'total': n, 'done0': 0, 'started': time.time(), 'threads': 1, 'seeds': 32, 'staged': True, 'pid': os.getpid(), 'unit': 'games'}, open(prog + '.run.json', 'w'))
         while True:
             fs = sorted((f for f in glob.glob(os.path.join(s.dir, 'battle-*.log')) if re.search(r'-\d{6,}(-[a-z0-9]+)?\.log$', f)),
                         key=lambda f: int(re.search(r'-(\d{6,})(?:-[a-z0-9]+)?\.log$', f).group(1)))   # ladder rooms, not local test games; by battle number,
@@ -621,7 +624,9 @@ class BotRunner:
                     try: c = json.load(open(pc))
                     except Exception: c = None
                 if c and c.get('v') == PAGE_V:                               # a finished game: its page as saved, no thread (2026-10-13)
-                    s.lives.append(Finished(room, botfmt(room), c['data'], c.get('refined', False))); continue
+                    s.lives.append(Finished(room, botfmt(room), c['data'], c.get('refined', False)))
+                    with open(os.path.join(OUT, 'bot_luck.games'), 'a') as fh: fh.write('bot_' + num + '\n')   # its luck is worked out (the card)
+                    continue
                 lv = Live(room, s.threads, 0, logfile=f, tag='bot_' + num, fmt=botfmt(room)); lv.page_cache = pc; lv.live_seeds = LIVE_SEEDS
                 lv.exact = True; lv.luck = True; s.lives.append(lv); threading.Thread(target=lv.run, daemon=True).start()
                 print(time.strftime('%-I:%M %p'), 'following the bot\'s game', num, flush=True)

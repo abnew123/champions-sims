@@ -103,6 +103,17 @@ async function login(challstr) {
   if (!j.assertion) { log('login failed', JSON.stringify(j).slice(0, 200)); process.exit(1); }
   send(`|/trn ${acct.name},0,${j.assertion}`);
 }
+// logged out from elsewhere (2026-10-14: a logout of the account anywhere, a browser tab included, logs out every connection of it; both
+// clients then played two games as a guest name, unable to find their side, slow to the timer each turn): log back in on this
+// connection, which keeps its games. More than three logouts within an hour stop the client instead (the watcher reports it).
+let lastChallstr = null; const logouts = [];
+function relogin(name) {
+  me = null; searching = false; const now = Date.now(); logouts.push(now);
+  const recent = logouts.filter(t => now - t < 3600e3).length;
+  log(`logged out (now ${name}); ${recent > 3 ? 'more than three logouts this hour: stopping' : 'logging back in'}`);
+  if (recent > 3) process.exit(1);
+  setTimeout(() => login(lastChallstr).catch(e => log('login again failed', String(e).slice(0, 120))), 5000);
+}
 async function onMessage(m) {
   const lines = m.split('\n'); let room = '';
   if (lines[0].startsWith('>')) { room = lines[0].slice(1); lines.shift(); }
@@ -110,8 +121,9 @@ async function onMessage(m) {
     const p = line.split('|');
     if (process.env.BOT_DEBUG && !['challstr', 'formats', 'customgroups', 'queryresponse', 'updateuser', 'c', 'c:', 'chat', 'pm'].includes(p[1])) log(room ? '[' + room.slice(-14) + ']' : '[global]', line.slice(0, 160));
     if (!room) {   // global
-      if (p[1] === 'challstr') { await login(p.slice(2).join('|')); }
-      else if (p[1] === 'updateuser') { const name = p[2].replace(/^[^A-Za-z0-9]/, '').trim(); if (p[3] === '1' && name.toLowerCase() === acct.name.toLowerCase()) { me = name; loginAt = Date.now(); joinSent = new Set(); log('logged in as', me); send('|/cmd rooms'); onReady(); } }
+      if (p[1] === 'challstr') { lastChallstr = p.slice(2).join('|'); await login(lastChallstr); }
+      else if (p[1] === 'updateuser') { const name = p[2].replace(/^[^A-Za-z0-9]/, '').trim(); if (p[3] === '1' && name.toLowerCase() === acct.name.toLowerCase()) { me = name; loginAt = Date.now(); joinSent = new Set(); log('logged in as', me); send('|/cmd rooms'); onReady(); }
+        else if (me && name.toLowerCase() !== acct.name.toLowerCase()) relogin(name); }
       else if (p[1] === 'pm') { onPM(p[2], p[3], p.slice(4).join('|')); }
       else if (p[1] === 'updatesearch') { try { const s = JSON.parse(p[2]); searching = (s.searching || []).includes(FORMAT); inGames = Object.keys(s.games || {}).filter(MINE).length;
         // after a (re)connect only: games already in progress at login are joined once (a new match's rooms also show up here a
@@ -153,7 +165,7 @@ async function onMessage(m) {
       // bot plays on the real ones instead of guesses
       if (p[1] === 'uhtml' && p[2] === 'otsrequest' && line.includes('/acceptopenteamsheets') && !R.otsSent) {
         R.otsSent = true; setTimeout(() => { send(`${room}|/acceptopenteamsheets`); log(room.slice(-12), 'accepted open team sheets'); }, rnd(1500, 4000)); }
-      if (p[1] === 'request' && p[2]) { try { R.req = JSON.parse(p[2]); } catch (e) { R.req = null; } if (R.req && !R.req.wait) handleRequest(room, R).catch(e => log('request error', room, String(e))); }
+      if (p[1] === 'request' && p[2]) { try { R.req = JSON.parse(p[2]); } catch (e) { R.req = null; } if (R.req && R.req.side && R.req.side.id) R.side = R.req.side.id; if (R.req && !R.req.wait) handleRequest(room, R).catch(e => log('request error', room, String(e))); }
       // a rejected choice: Showdown re-sends a request when the rejection taught it something (a trap revealed: [Unavailable choice]),
       // and the bot answers that; otherwise it falls back to Showdown's default choice at once instead of letting the turn timer run
       if (p[1] === 'error' && /\[(Invalid|Unavailable) choice\]/.test(line) && R.req && !R.req.wait) {
@@ -259,8 +271,10 @@ async function searchWithTeam(cmd) {
   if (pendingPacked) send(`|/utm ${pendingPacked}`);
   await sleep(1500); send(cmd);
 }
+let loopOn = false;
 async function onReady() {
   await refreshTop(); await refreshMyRating();
+  if (loopOn) return; loopOn = true;   // a later login (reconnect, logged back in) keeps the one loop
   if (CHALLENGE) { await pickTeam(); await sleep(3000); await searchWithTeam(`|/challenge ${CHALLENGE}, ${FORMAT}`); log('challenged', CHALLENGE); }
   for (;;) {
     await sleep(5000);

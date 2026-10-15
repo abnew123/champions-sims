@@ -20,7 +20,10 @@ def load(part):
     sfx = os.environ.get('VALUE_SUFFIX', ''); layers = [x for x in os.environ.get('VALUE_EVAL_SUFFIXES', sfx).split(',') if x]
     # once the base search is stamped with its positions' hash (value_data.py, 2026-10-14), every file read must carry the same stamp:
     # the _fc / _acc layers and features of an older rebuild are refused rather than mixed in by name (the outside review)
-    base = os.path.join(OUT, f'real_{part}.eval.jsonl')
+    # VALUE_RUN=x1|d4 (2026-10-15, value_box.sh on the AWS box): that run's search values (results/value2/box/real_<part>_<run>.eval.jsonl,
+    # stamped like the base) are the base search instead
+    run = os.environ.get('VALUE_RUN')
+    base = os.path.join(OUT, 'box', f'real_{part}_{run}.eval.jsonl') if run else os.path.join(OUT, f'real_{part}.eval.jsonl')
     want = open(base + '.src').read().strip() if os.path.exists(base + '.src') else None
     def ok(f):
         if want is None: return True
@@ -124,7 +127,7 @@ def export(hidden=16, l2=1e-3, target='search', out=None, parts=('fit',)):
     W = m.p[:hidden * d].reshape(hidden, d).tolist() if hidden else None; v = m.p[hidden * d:].tolist() if hidden else m.p.tolist()
     zh = m.z(H['E'], H['S']); c = rescale(m.z(F['E'], F['S']), F['y'])
     print(f"h{hidden} l2 {l2} on {target}: held-out log loss {ll(c * zh, H['y']).mean():.4f} (rescale {c:.3f})")
-    out = out or os.path.join(OUT, f"vnet_h{hidden}_{target}{'_' + '+'.join(parts) if parts != ('fit',) else ''}{os.environ.get('VALUE_SUFFIX', '')}.json")
+    out = out or os.path.join(OUT, f"vnet_h{hidden}_{target}{'_' + '+'.join(parts) if parts != ('fit',) else ''}{os.environ.get('VALUE_SUFFIX', '')}{'_' + os.environ['VALUE_RUN'] if os.environ.get('VALUE_RUN') else ''}.json")
     json.dump({'hidden': hidden, 'sd': sd.tolist(), 'W': W, 'v': v, 'blocks': {'side': 32, 'field': 12, 'x': 28}, 'target': target, 'l2': l2,
                'note': 'value = sigmoid(h(e) - h(e_swapped)); e = [side 0, side 1, field for 0, plan.rs feats[:28]] (value_fit.py)'}, open(out, 'w'))
     print('->', out)

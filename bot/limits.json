@@ -25,5 +25,6 @@
   "fitted_spreads": {
     "gen9championsvgc2026regmcbo3": true,
     "gen9championsvgc2026regmc": false
-  }
+  },
+  "idle_timer_minutes": 5
 }

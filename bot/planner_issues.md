@@ -235,3 +235,7 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
       -2.0 +- 1.1 points for the one-seed side, no style beyond about 1.5 SE. The style-bias check at 1 vs 2 seeds (ns_bias.sh) decides
       whether the climb can use it (Team search). Exact speedups in the engine (an evaluation memo, the net's zero inputs skipped): 1.2x,
       games identical.
+    - Style bias at one vs two seeds (ns_bias.sh, 2,094 real pairings, the climb's v33 setup): agreement with the real winner 54.8% ->
+      55.9%, per-style RMS of sim - real 3.9 -> 3.0; the shifts between the two settings are within about 1 SE everywhere (the largest
+      styles move 1.1 points or less). Team search moves the climb to v34 + BATTLE_NS=1 from round 2 (finals and the sure-hit pass on
+      two seeds): about 1.9x a game.

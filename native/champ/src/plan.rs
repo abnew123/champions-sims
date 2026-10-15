@@ -26,6 +26,9 @@ pub struct Cfg {
     /// EG_VNET=<json> (2026-10-12, the learned value; pssim/value_fit.py export): both sides' positions are scored by the net instead of
     /// EG_VALUE. Needs RACE=1 RACE_PRIO=1 FEATS22=1 CALC_DATA (the inputs it was fitted on).
     pub vnet: Option<VNet>,
+    /// EG_VNET_B=<json> (2026-10-15, net against net): side 1 plans with this net and side 0 with EG_VNET (value2 / two_values; under
+    /// BATTLE_EVAL each side's search scores its leaves with its own net, see as_side). None = both sides on EG_VNET
+    pub vnet_b: Option<VNet>,
 }
 /// a learned value: sigmoid(h(e) - h(e_swapped)), h linear or one tanh layer over vfeats.rs's side / field features and plan.rs feats
 pub struct VNet { pub sd: Vec<f64>, pub w: Option<Vec<Vec<f64>>>, pub v: Vec<f64> }
@@ -80,11 +83,13 @@ pub fn load_cfg(grid_dir: &str) -> Cfg {
     let cdata: Option<&'static crate::data::Data> = std::env::var("RACE").ok().map(|_| {
         let p = std::env::var("CALC_DATA").expect("RACE=1 needs CALC_DATA=<champions_data.json>");
         &*Box::leak(Box::new(crate::data::Data::load(&p))) });
-    let vnet = std::env::var("EG_VNET").ok().map(|p| {
+    let load_net = |var: &str| std::env::var(var).ok().map(|p| {
         let v: Value = serde_json::from_str(&std::fs::read_to_string(&p).expect("EG_VNET file")).unwrap();
         let fl = |a: &Value| a.as_array().unwrap().iter().map(|x| x.as_f64().unwrap()).collect::<Vec<f64>>();
         VNet { sd: fl(&v["sd"]), w: if v["W"].is_null() { None } else { Some(v["W"].as_array().unwrap().iter().map(fl).collect()) }, v: fl(&v["v"]) } });
-    Cfg { grid_tr, grid_notr, gfoes, vw, autopilot: std::env::var("EG_AUTOPILOT").is_ok(), vw_b, cdata, vnet }
+    let vnet = load_net("EG_VNET"); let vnet_b = load_net("EG_VNET_B");
+    assert!(vnet_b.is_none() || (vnet.is_some() && std::env::var("EG_VNET_SIDE").is_err()), "EG_VNET_B needs EG_VNET and no EG_VNET_SIDE");
+    Cfg { grid_tr, grid_notr, gfoes, vw, autopilot: std::env::var("EG_AUTOPILOT").is_ok(), vw_b, cdata, vnet, vnet_b }
 }
 
 /// a move's chance to hit as Showdown works it out, for the analytic features (2026-10-13, the user: a Bo1 game's Mega Raichu-Y Zap
@@ -665,6 +670,10 @@ pub fn value2(b: &mut Battle, cfg: &Cfg) -> (f64, f64) {
             let vn = n.value(b, cfg); let vo = value_sym(b, cfg);
             return if side == 0 { (vn, vo) } else { (vo, vn) };
         }
+        if let Some(nb) = &cfg.vnet_b {
+            if b.ended { let v = match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 }; return (v, v); }
+            return (n.value(b, cfg), nb.value(b, cfg));
+        }
         let v = value(b, cfg); return (v, v);
     }
     let Some((b1, w1)) = &cfg.vw_b else { let v = value(b, cfg); return (v, v); };
@@ -675,11 +684,20 @@ pub fn value2(b: &mut Battle, cfg: &Cfg) -> (f64, f64) {
     (va, ev(*b1, w1))
 }
 /// each side plans with its own value (EG_VALUE_B, or EG_VNET_SIDE)
-pub(crate) fn two_values(cfg: &Cfg) -> bool { cfg.vw_b.is_some() || (cfg.vnet.is_some() && vnet_side().is_some()) }
+pub(crate) fn two_values(cfg: &Cfg) -> bool { cfg.vw_b.is_some() || cfg.vnet_b.is_some() || (cfg.vnet.is_some() && vnet_side().is_some()) }
+thread_local! { static SIDE: std::cell::Cell<u8> = const { std::cell::Cell::new(0) }; }
+/// run f as side s's search (EG_VNET_B): value() inside it scores with side s's net. Searches that take one value (deep.rs) call value();
+/// battle4 wraps each side's BATTLE_EVAL search in this. Outside it value() is side 0's net.
+pub fn as_side<R>(s: u8, f: impl FnOnce() -> R) -> R {
+    let old = SIDE.with(|c| c.replace(s)); let r = f(); SIDE.with(|c| c.set(old)); r
+}
 fn vnet_side() -> Option<u8> { static F: std::sync::OnceLock<Option<u8>> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("EG_VNET_SIDE").ok().and_then(|x| x.parse().ok())) }
 pub fn value(b: &mut Battle, cfg: &Cfg) -> f64 {
     if b.ended { return match b.winner { Some(Some(0)) => 1.0, Some(Some(_)) => 0.0, _ => 0.5 }; }
-    if let Some(n) = &cfg.vnet { if vnet_side().is_none() { return n.value(b, cfg); } }
+    if let Some(n) = &cfg.vnet { if vnet_side().is_none() {
+        if let Some(nb) = &cfg.vnet_b { if SIDE.with(|c| c.get()) == 1 { return nb.value(b, cfg); } }
+        return n.value(b, cfg);
+    } }
     value_sym(b, cfg)
 }
 /// the EG_VALUE score (the logistic value over plan.rs feats), whatever EG_VNET says

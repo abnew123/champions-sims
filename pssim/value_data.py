@@ -10,11 +10,12 @@ part 'hold' = Eval bar's 560 accuracy-set games (the held-out set every value co
   ../.venv/bin/python3 value_data.py feats [parts]    results/value/real_<part>.feats.jsonl / .vfeats.jsonl: champ feats (the 28 v22
       features, static) and champ vfeats (the matchup features, dev build)
   ../.venv/bin/python3 value_data.py positions new    games fetched since (in neither set) -> part 'new'; then search 6 new, feats new
+  VALUE_OUT=results/value2 ../.venv/bin/python3 value_data.py rebuild    the rebuild by match (2026-10-15; see rebuild)
 Outcomes and ratings come from the logs; names are only compared to find the winner, never kept."""
 import os, sys, json, glob, collections, hashlib
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(ROOT, 'evalbar'))
-OUT = os.path.join(HERE, 'results', 'value')
+OUT = os.environ.get('VALUE_OUT') or os.path.join(HERE, 'results', 'value')   # VALUE_OUT: another data folder (the rebuild, results/value2)
 HOLD_SRC = os.path.join(ROOT, '.claude', 'worktrees', 'happy-hawking-473e61', 'evalbar', 'out', 'acc_p1.jsonl')
 def held_games():
     """the Eval bar's accuracy-set games (names of its positions), or a saved copy of the list"""
@@ -81,6 +82,51 @@ def positions(new=False):
             for m in meta[part]: o.write(json.dumps(m) + '\n')
         print(f"{part}: {len(meta[part])} positions from {len({m['game'] for m in meta[part]})} games -> {posf}")
     print('skipped games:', dict(why))
+def match_key(log):
+    """the Bo3 match a cached game belongs to: its two players (compared, never kept) and its day; a rematch the same day joins it"""
+    names = sorted(l.split('|')[3].strip().lower() for l in log.split('\n') if l.startswith('|player|') and len(l.split('|')) > 3 and l.split('|')[3])
+    t = next((int(l.split('|')[2]) for l in log.split('\n') if l.startswith('|t:|') and l.split('|')[2].strip().isdigit()), 0)
+    return hashlib.sha256(('|'.join(names) + '|' + str(t // 86400)).encode()).hexdigest()[:16]
+def rebuild():
+    """The value data rebuilt (2026-10-15, the outside review: the cached positions predate the shared builder's fixes, and 238 of the 560
+    held-out games share a Bo3 match with a training game). Every cached game with open sheets through the Eval bar's current builder
+    (spots.specs: battlestate, the parser fixes on by default), read as the Bo3 bot reads (spreads.FITTED on, DMG_FLAGS empty), and split
+    by match: 'hold' = every match holding one of the Eval bar's 560 accuracy games (the final test), 'val' = a fixed tenth of the other
+    matches (model selection), 'fit' = the rest. Into VALUE_OUT (results/value2), with the match on each meta line."""
+    import spots as SP, live as LV, spreads
+    spreads.FITTED = True; spreads.DMG_FLAGS = {}
+    held = held_games(); os.makedirs(OUT, exist_ok=True)
+    games = []; why = collections.Counter()
+    for f in sorted(glob.glob(os.path.join(HERE, 'replays_protect', '*.log'))):
+        gid = os.path.basename(f)[:-4]; log = open(f, errors='replace').read()
+        if '|showteam|' not in log: why['no open sheets'] += 1; continue
+        y, rating = outcome(log)
+        if y is None: why['no winner'] += 1; continue
+        games.append((gid, log, y, rating, match_key(log)))
+    if os.environ.get('REBUILD_LIMIT'): games = games[:int(os.environ['REBUILD_LIMIT'])]   # a smoke test on the first n games
+    hold_m = {m for gid, _, _, _, m in games if gid in held}
+    part_of = lambda gid, m: 'hold' if m in hold_m else 'val' if int(m, 16) % 10 == 0 else 'fit'
+    parts = ('fit', 'val', 'hold'); specs = {k: [] for k in parts}; meta = {k: [] for k in parts}
+    for i, (gid, log, y, rating, m) in enumerate(games):
+        if i % 2000 == 0: print(f"{i} / {len(games)} games", flush=True)
+        try: sp, w = SP.specs(gid, log)
+        except Exception as e: why['builder error'] += 1; continue
+        if not sp: why[w or 'nothing built'] += 1; continue
+        part = part_of(gid, m)
+        for x in sp:
+            specs[part].append((1.0, x)); meta[part].append({'name': x['name'] + ' p1', 'game': gid, 'match': m, 'turn': x['turn'], 'y': y, 'rating': rating})
+    for part in parts:
+        posf = os.path.join(OUT, f'real_{part}.pos.jsonl')
+        if os.path.exists(posf): os.remove(posf)
+        for i in range(0, len(specs[part]), 2000):
+            tmp = posf + f'.{i}'
+            LV.positions(specs[part][i:i + 2000], tmp)
+            with open(posf, 'a') as o: o.write(open(tmp).read())
+            os.remove(tmp)
+        with open(os.path.join(OUT, f'real_{part}.meta.jsonl'), 'w') as o:
+            for x in meta[part]: o.write(json.dumps(x) + '\n')
+        print(f"{part}: {len(meta[part])} positions from {len({x['game'] for x in meta[part]})} games, {len({x['match'] for x in meta[part]})} matches -> {posf}", flush=True)
+    print('skipped games:', dict(why))
 ENV = dict(RACE_TIES='avg', RACE='1', TRSYM='1', CALC_DATA='../native/champions_data.json', EG_VALUE='egvalue9_sym2.json', EG_MEGA_TIE='0')
 BIN = os.path.join(ROOT, 'native', 'champ', 'bin', 'battlesim-champ'); DATA = '../native/engine_data_full.json'
 def grid():
@@ -104,5 +150,5 @@ def feats(parts=('hold', 'fit')):
 if __name__ == '__main__':
     a = sys.argv[1:]
     P = tuple(a[2].split(',')) if len(a) > 2 else ('hold', 'fit')
-    {'positions': lambda: positions(len(a) > 1 and a[1] == 'new'), 'search': lambda: search(int(a[1]) if len(a) > 1 else 6, P),
+    {'rebuild': rebuild, 'positions': lambda: positions(len(a) > 1 and a[1] == 'new'), 'search': lambda: search(int(a[1]) if len(a) > 1 else 6, P),
      'feats': lambda: feats(tuple(a[1].split(',')) if len(a) > 1 else ('hold', 'fit'))}[a[0]]()

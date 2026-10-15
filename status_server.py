@@ -85,8 +85,8 @@ BOX_FRESH = 45 * 60            # a pulled box run (box_plan.json) counts as runn
 
 def box_cards():
     """Battle sim's runs on the cloud box, from a box_plan.json in each pulled folder (pssim/results/**/box_plan.json:
-    {"title", "start" (ISO, local), "jobs": [{"name", "file", "positions", "cost"}]}): a job counts as done when <name>.done was pulled,
-    otherwise by its result file's lines; cost weighs the jobs (a 4x-budget search costs about 4 one-turn ones). Returns [(html, live)]."""
+    {"title", "start" (ISO, local), "jobs": [{"name", "file" or "dir", "positions", "cost"}]}): a job counts as done when <name>.done was
+    pulled, otherwise by its result file's lines (or the result files in its dir); cost weighs the jobs (a 4x-budget search costs about 4 one-turn ones). Returns [(html, live)]."""
     out = []
     for plan in glob.glob(os.path.join(ROOT, 'results', '**', 'box_plan.json'), recursive=True):
         d = os.path.dirname(plan)
@@ -94,12 +94,15 @@ def box_cards():
             p = json.load(open(plan)); st = datetime.datetime.fromisoformat(p['start'])
             done = tot = 0; newest = st.timestamp(); jobs_done = 0
             for j in p['jobs']:
-                f = os.path.join(d, j['file']); w = j.get('cost', 1); tot += j['positions'] * w
+                f = os.path.join(d, j['file']) if j.get('file') else None; w = j.get('cost', 1); tot += j['positions'] * w
                 if os.path.exists(os.path.join(d, j['name'] + '.done')): n = j['positions']; jobs_done += 1
+                elif j.get('dir'):   # a battle run: one result file a start in its folder
+                    fs = glob.glob(os.path.join(d, j['dir'], '*.json')); n = min(j['positions'], len(fs))
+                    if fs: newest = max(newest, max(os.path.getmtime(x) for x in fs))
                 elif os.path.exists(f): n = min(j['positions'], sum(1 for _ in open(f, errors='replace')))
                 else: n = 0
                 done += n * w
-                if os.path.exists(f): newest = max(newest, os.path.getmtime(f))
+                if f and os.path.exists(f): newest = max(newest, os.path.getmtime(f))
         except Exception: continue
         finished = os.path.exists(os.path.join(d, 'ALL_DONE')); live = not finished and time.time() - newest < BOX_FRESH
         frac = min(1.0, done / tot) if tot else 0; el = newest - st.timestamp(); ended = datetime.datetime.fromtimestamp(newest)

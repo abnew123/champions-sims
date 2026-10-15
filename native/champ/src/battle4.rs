@@ -68,6 +68,13 @@ pub(crate) fn rjoint(b: &mut Battle, s: u8) -> Vec<[PChoice; 2]> {
     out
 }
 fn ns() -> usize { std::env::var("BATTLE_NS").ok().and_then(|x| x.parse().ok()).unwrap_or(2) }
+/// BATTLE_NS_0 / BATTLE_NS_1 (2026-10-14, the user: could the climb run on half the luck samples?): one side's own number of luck seeds
+/// a cell (default BATTLE_NS). A cell is played on the larger number; each side averages its first n (the seeds are the same list),
+/// so with both unset or equal every value is as before.
+fn ns_sides() -> [usize; 2] {
+    static F: std::sync::OnceLock<[usize; 2]> = std::sync::OnceLock::new();
+    *F.get_or_init(|| std::array::from_fn(|s| std::env::var(format!("BATTLE_NS_{}", s)).ok().and_then(|x| x.parse().ok()).unwrap_or(ns()).max(1)))
+}
 /// EG_MEGA_TIE (default 0.002): margin of the Mega tie-break in play(); 0 keeps every mix as solved
 fn mega_tie() -> f64 { static F: std::sync::OnceLock<f64> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("EG_MEGA_TIE").ok().and_then(|x| x.parse().ok()).unwrap_or(0.002)) }
 /// BATTLE_FULLSW=0|1|both: which sides solve the full matrix game (the other side's switches included) instead of the one-layer one
@@ -121,14 +128,15 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
         let no_sw = |c: &[PChoice; 2]| !c.iter().any(|x| matches!(x, PChoice::Switch(_)));
         let mns: Vec<usize> = (0..msw.len()).filter(|i| no_sw(&msw[*i])).collect();
         let tns: Vec<usize> = (0..tsw.len()).filter(|j| no_sw(&tsw[*j])).collect();
-        let cs: Vec<[u16; 4]> = (0..ns()).map(|k| seed4(key ^ ((turn as u64) << 40) ^ ((k as u64) << 52))).collect();
+        let nss = ns_sides();
+        let cs: Vec<[u16; 4]> = (0..nss[0].max(nss[1])).map(|k| seed4(key ^ ((turn as u64) << 40) ^ ((k as u64) << 52))).collect();
         let mut cache: HashMap<(usize, usize), (f64, f64)> = HashMap::new();
         // each cell as (side 0's value, side 1's value); the two differ only with EG_VALUE_B
         let mut cell2 = |i: usize, j: usize, b: &Battle| -> (f64, f64) {
             *cache.entry((i, j)).or_insert_with(|| {
                 let mut s = (0.0, 0.0);
-                for c in &cs { let mut x = b.clone(); x.prng = Prng::gen5(*c); x.run_turn([msw[i], tsw[j]]); resolve_switches(&mut x, cfg, None); let v = value2(&mut x, cfg); s.0 += v.0; s.1 += v.1; }
-                (s.0 / cs.len() as f64, s.1 / cs.len() as f64) })
+                for (k, c) in cs.iter().enumerate() { let mut x = b.clone(); x.prng = Prng::gen5(*c); x.run_turn([msw[i], tsw[j]]); resolve_switches(&mut x, cfg, None); let v = value2(&mut x, cfg); if k < nss[0] { s.0 += v.0; } if k < nss[1] { s.1 += v.1; } }
+                (s.0 / nss[0] as f64, s.1 / nss[1] as f64) })
         };
         // BATTLE_FULLSW=1 (champ-battle-v21): one full matrix game, both sides' switches in both sides' matrices (the one-layer model
         // below assumes the opponent stays in; the shared no-switch block means the full game costs only the switch x switch cells more)

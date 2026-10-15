@@ -9,5 +9,8 @@ export TS_SIM=${TS_SIM:-v33} TS_OPP=pool TS_POOL_WEIGHT=blend TS_POOL_KEYS=pool_
 export TS_INDEX=teams/top8_start/index.json
 export TS_STATE=climb_v33_state.json TS_LOG=climb_v33_log.jsonl TS_PROGRESS=climb_v33_progress.json
 export TS_CACHE_DIR=cache_v33 CLIMB_SESSION=climb_v33 CLIMB_LOG=round_v33.log TS_GAME_CACHE=cache_v33/games.sqlite
-unset TS_PERISH TS_BATTLE_BIN
+unset TS_PERISH
+# v34 (Battle sim, 2026-10-14): v33 game for game (200 of 200 identical; the box's build matched the v33 smoke exactly), 1.25x faster.
+# The setup stays named v33 (labels, game cache); only the binary changes, from mid round 1 (relaunch, finished games reused).
+export TS_BATTLE_BIN=$HOME/champions-sims/native/champ/bin/champ-battle-v34
 mkdir -p cache_v33

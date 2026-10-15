@@ -54,6 +54,26 @@ def card(title, state, done, total, unit, started=None, live=False, rate_files=N
       <div class="bar"><div style="width:{100 * frac:.1f}%"></div></div>
       <div class="meta">{"".join(f"<span>{x}</span>" for x in meta)}</div>{f'<div class="note">{note}</div>' if note else ''}</div>'''
 
+def log_progress(C, phase):
+    """(teams done, teams in the stage, teams per minute or None, log mtime) of the current round stage, from the climb's round log
+    (round_<name>.log next to climb_<name>_progress.json): the log's "<stage>: n/N teams, m min" lines since the round's last start.
+    The rate skips a relaunch's fast-forward through finished teams (lines under 5 min); the log's mtime is when its last line was
+    written. Counting result files can't follow a pool climb: its bring search runs two stages under other seeds, and the game cache
+    serves many games without a file (2026-10-15, the user: the card showed 0 of 383,786)."""
+    base = os.path.basename(C('climb_progress.json'))[len('climb'):-len('_progress.json')]
+    log = C(f'round{base}.log')
+    if not os.path.exists(log): return None
+    label = {'screen': 'bring search', 'confirm': 'confirm games', 'sharpen': 'confirm games'}.get(phase)
+    seg = []
+    for l in open(log, errors='replace'):
+        if re.match(r'^round \d+: sim setup', l) or l.startswith('--- relaunched'): seg = []
+        m = re.match(r'^\d\d:\d\d [AP]M\s+' + re.escape(label or '') + r'[^:]*: (\d+)/(\d+) teams, (\d+) min', l)
+        if m: seg.append(tuple(map(int, m.groups())))
+    if not label or not seg: return None
+    n, N, _ = seg[-1]; pts = [x for x in seg if x[2] >= 5]
+    rate = (pts[-1][0] - pts[0][0]) / (pts[-1][2] - pts[0][2]) if len(pts) >= 2 and pts[-1][2] > pts[0][2] else None
+    return n, N, rate, os.path.getmtime(log)
+
 def other_thread():
     """the other thread's progress cards (the project's status_server.py, run read-only), or a link if its layout changes"""
     try:
@@ -120,8 +140,18 @@ def cards():
             outs = files(C('runs', '*', f"out_{sfx}" if tag == 'v3' else f"out_{tag}_{sfx}", '*.json'))
             title = f"Hill climb round {rnd} ({pr['mode']}): " + {'screen': 'screening swaps (bring search)', 'confirm': 'confirming the best swaps (fresh games)',
                                                                   'sharpen': f"extra paired batch {pr.get('batch', '')} for undecided swaps"}[phase]
-            cards.append(card(title, 'running' if live else 'stopped', len(outs), pr['teams'] * pr.get('jobs_per_team', 60), f"jobs ({pr['per_job']} games each)",
-                              pr['at'], live, outs, [f"{pr['teams']} teams for {pr['starts']} start teams"]))
+            lp = log_progress(C, phase) if os.environ.get('TS_CLIMB_FILES') != '1' else None
+            if lp:                                      # pool climbs: teams done from the round log (see log_progress)
+                n, N, rate, t_last = lp; extra = []
+                if live and rate:
+                    left = (N - n) / rate * 60; done_at = t_last + left
+                    extra.append(f"about {fmt(max(0, done_at - time.time()))} left (done around {ampm(dt(done_at))}), {rate:.1f} teams a minute")
+                elif live: extra.append('estimating time left…')
+                cards.append(card(title, 'running' if live else 'stopped', n, N, 'teams', None, live, None,
+                                  extra + [f"{pr['teams']} teams for {pr['starts']} start teams; the log counts teams in tens"]))
+            else:
+                cards.append(card(title, 'running' if live else 'stopped', len(outs), pr['teams'] * pr.get('jobs_per_team', 60), f"jobs ({pr['per_job']} games each)",
+                                  pr['at'], live, outs, [f"{pr['teams']} teams for {pr['starts']} start teams"]))
         else:
             label = {'prefilter': 'matrix pre-filter', 'done': 'finished'}[phase]
             cards.append(card(f"Hill climb round {rnd} ({pr['mode']}): {label}", 'running' if live else 'finished' if phase == 'done' else 'stopped',

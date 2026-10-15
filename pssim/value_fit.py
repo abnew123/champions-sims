@@ -8,7 +8,8 @@ held-out games against real results, as log loss with a rescale fitted on the tr
 import os, sys, json, math, random, collections
 import numpy as np
 from scipy.optimize import minimize
-HERE = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(HERE, 'results', 'value')
+HERE = os.path.dirname(os.path.abspath(__file__)); OUT = os.environ.get('VALUE_OUT') or os.path.join(HERE, 'results', 'value')   # VALUE_OUT: the rebuild (results/value2)
+EVAL_PART = os.environ.get('VALUE_EVAL_PART', 'hold')   # the part every score is on: 'val' for choosing models on the rebuild, 'hold' only for the final test
 def load(part):
     meta = {m['name']: m for m in map(json.loads, open(os.path.join(OUT, f'real_{part}.meta.jsonl')))}
     ev = {}
@@ -93,7 +94,7 @@ def load_parts(parts):
         F = {k: (v[keep] if isinstance(v, np.ndarray) else [x for x, kk in zip(v, keep) if kk]) for k, v in F.items()}
     return F
 def compare(target='outcome', parts=('fit',), configs=None):
-    F = load_parts(parts); H = load('hold')
+    F = load_parts(parts); H = load(EVAL_PART)
     sd = np.concatenate([F['E'], F['S']]).std(0); sd = np.where(sd < 1e-3, 1.0, sd)   # near-constant columns are left unscaled
     print(f"fit {len(F['y'])} positions / {len(set(F['g']))} games{' (rating ' + os.environ['MIN_RATING'] + '+)' if os.environ.get('MIN_RATING') else ''}, held out {len(H['y'])} / {len(set(H['g']))}; {F['E'].shape[1]} inputs per view")
     rows = []
@@ -115,7 +116,7 @@ def compare(target='outcome', parts=('fit',), configs=None):
     print(f"  best: {best[0]}, {best[1].mean() - base.mean():+.4f} ± {boot(best[1] - base, H['g']):.4f} against the current static value")
 def export(hidden=16, l2=1e-3, target='search', out=None, parts=('fit',)):
     """fit h on the training parts and write it for the engine (EG_VNET): input scales, weights, and the sizes of the vfeats blocks"""
-    F = load_parts(parts); H = load('hold')
+    F = load_parts(parts); H = load(EVAL_PART)
     sd = np.concatenate([F['E'], F['S']]).std(0); sd = np.where(sd < 1e-3, 1.0, sd)
     tgt = lg(F['search']) if target == 'search' else F['y'] if target == 'outcome' else (F['y'], lg(F['search']))
     m = Model(hidden, l2, sd).fit(F['E'], F['S'], tgt, target)

@@ -5,7 +5,11 @@
 # (group, entry) and the cross-team game cache (gamecache.py, TS_GAME_CACHE). Opponents: real pool entries weighted half by
 # regional share (pool_keys_2026-10-12.json: all five regionals) and half by ladder share. Plan-aware brings, hold batch, normal accuracy.
 #   RUN_ENV=cloud/run_env_v33.sh cloud/relaunch.sh <P> <T>        RUN_ENV=cloud/run_env_v33.sh setsid nohup cloud/auto_rounds.sh <cap> 900 &
-export TS_SIM=${TS_SIM:-v33} TS_OPP=pool TS_POOL_WEIGHT=blend TS_POOL_KEYS=pool_keys_2026-10-12.json TS_ARCH_LOCK=1 TS_BRING_MODE=plan
+# Rounds 2+ on one seed per cell (v33n1; the user's idea, Battle sim's checks on 2026-10-14: strength -2.0 +- 1.1, the real-pairings
+# style shifts flat, RMS 2.1 within noise), round 1 on two: the setup follows the climb's state, so a restart of an uncommitted round
+# keeps its own setup. TS_SIM set by the caller wins (the post-climb chain pins v33).
+[ -f climb_v33_state.json ] && _ts=v33n1 || _ts=v33
+export TS_SIM=${TS_SIM:-$_ts} TS_OPP=pool TS_POOL_WEIGHT=blend TS_POOL_KEYS=pool_keys_2026-10-12.json TS_ARCH_LOCK=1 TS_BRING_MODE=plan
 export TS_INDEX=teams/top8_start/index.json
 export TS_STATE=climb_v33_state.json TS_LOG=climb_v33_log.jsonl TS_PROGRESS=climb_v33_progress.json
 export TS_CACHE_DIR=cache_v33 CLIMB_SESSION=climb_v33 CLIMB_LOG=round_v33.log TS_GAME_CACHE=cache_v33/games.sqlite

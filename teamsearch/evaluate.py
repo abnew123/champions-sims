@@ -93,6 +93,10 @@ SIMS = {
     'v33': dict(bin='champ-battle-v33', eg='egvalue9_sym2.json', grid=False, seedkey=True,
                 env=dict(V26_ENV, EG_VNET='../bot/value/vnet_h64_search_acc.json')),
     'v33s': dict(bin='champ-battle-v33', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V26_ENV)),
+    # v33n1 (the user, via Battle sim, 2026-10-14): v33 with one luck seed per planner cell instead of two (BATTLE_NS=1): about half the
+    # time per game; both sides plan with it. For the climb's rounds, with the finals verified on v33 (two seeds).
+    'v33n1': dict(bin='champ-battle-v33', eg='egvalue9_sym2.json', grid=False, seedkey=True,
+                  env=dict(V26_ENV, EG_VNET='../bot/value/vnet_h64_search_acc.json', BATTLE_NS='1')),
 }
 def sim(): return os.environ.get('TS_SIM', 'v3')
 def out_tag(seed0, per_job): return f'{seed0}_{per_job}' if sim() == 'v3' else f'{sim()}_{seed0}_{per_job}'

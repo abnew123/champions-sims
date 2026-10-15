@@ -1293,3 +1293,10 @@ registrations since its second version) and checks reachability of real logs in 
   Mega Salamence's Aerilate Double-Edge (and Mega Altaria / Gardevoir / Glalie / Lopunny cases) into Ghosts stayed dropped. On 60 such
   positions the Mega copy came back in all 60 (9% of the mix on average), nothing removed, no plain copy added; 59 of 60 random
   positions unchanged (the other a real Mega Salamence case). Bot: battlesim-champ29-bot -> champ-bot-2026-10-14b (v33).
+- **champ-battle-v34 (2026-10-14, 11 pm) = v33, about 1.25x faster, games identical.** (1) plan.rs EvalMemo: VNet::value opens a memo
+  for one leaf evaluation, and the features read each Speed, hit chance, mid-roll damage and the effective weather once (EVAL_NOMEMO=1
+  turns it off). (2) VNet::h sums only the non-zero inputs (bit for bit the same sums). (3) The Mega copy's ability is suppressed as the
+  current one would be (Neutralizing Gas, Gastro Acid; the review's third pass). Also inert unless set: BATTLE_NS_0 / _1 (per-side luck
+  seeds a cell), EVAL_DEEP_K0 and EVAL_KEY_SALT (deep.rs). Profile of the climb's v33 setup: the leaf value about 58% of game time, the
+  turn simulation about 28%. 200 games with the climb's v33 setup: all identical (result, length, final value), CPU 836 -> 671 s.
+  Bot: battlesim-champ29-bot -> champ-bot-2026-10-14c (v34). `src_battle_v34.tar.gz`, `bin/champ-battle-v34.sha256`.

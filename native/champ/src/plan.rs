@@ -33,11 +33,18 @@ impl VNet {
     fn h(&self, e: &[f64]) -> f64 {
         match &self.w {
             None => self.v.iter().zip(e).zip(&self.sd).map(|((v, x), s)| v * x / s).sum(),
-            Some(w) => w.iter().zip(&self.v).map(|(row, vv)| vv * row.iter().zip(e).zip(&self.sd).map(|((a, x), s)| a * x / s).sum::<f64>().tanh()).sum(),
+            // only the non-zero inputs (2026-10-14, the review's speed item): a zero input adds +-0.0 to a sum that starts at +0.0, which
+            // never changes it, so each row's sum is bit for bit the one over every input, without a multiply and a divide per zero
+            Some(w) => {
+                let n = e.len().min(self.sd.len()).min(w.first().map(|r| r.len()).unwrap_or(0));
+                let nz: Vec<usize> = (0..n).filter(|&k| e[k] != 0.0).collect();
+                w.iter().zip(&self.v).map(|(row, vv)| vv * nz.iter().map(|&k| row[k] * e[k] / self.sd[k]).sum::<f64>().tanh()).sum()
+            }
         }
     }
     pub fn value(&self, b: &mut Battle, cfg: &Cfg) -> f64 {
         let cd = cfg.cdata.expect("EG_VNET needs RACE=1 and CALC_DATA");
+        let _memo = MemoScope::open();   // speeds, hit chances, damage and weather read once for this position
         let f0 = crate::vfeats::side_feats(b, cd, 0); let f1 = crate::vfeats::side_feats(b, cd, 1);
         let g0 = crate::vfeats::field_feats(b, 0); let g1 = crate::vfeats::field_feats(b, 1);
         let mut x = feats(b, cfg); x.resize(28, 0.0);
@@ -93,12 +100,40 @@ pub(crate) fn imprisoned(b: &Battle, s: u8, mv: &str) -> bool {
     b.sides[1 - s as usize].active.iter().flatten().any(|&i| { let p = &b.sides[1 - s as usize].pokemon[i as usize];
         !p.fainted && find(&p.volatiles, "imprison").is_some() && p.move_slots.iter().any(|x| x.id == mv) })
 }
+/// one leaf evaluation's memo (2026-10-14, the outside review's speed item: the learned value's features recomputed speeds, hit chances,
+/// mid-roll damage and the effective weather many times over the same position). VNet::value opens it for the length of one call; while
+/// it is open those reads are made once. The position does not change inside an evaluation, so each read returns what the uncached call
+/// would (games identical; EVAL_NOMEMO=1 turns it off for that check).
+#[derive(Default)]
+pub(crate) struct EvalMemo { spe: FxMap<MonRef, f64>, hit: FxMap<(MonRef, Option<MonRef>, PId), f64>, dmg: FxMap<(MonRef, MonRef, PId, bool, u8), Option<i64>>, wx: Option<Id> }
+thread_local! { static MEMO: std::cell::RefCell<Option<EvalMemo>> = const { std::cell::RefCell::new(None) }; }
+fn nomemo() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("EVAL_NOMEMO").is_ok()) }
+pub(crate) struct MemoScope(bool);
+impl MemoScope { pub(crate) fn open() -> MemoScope { if nomemo() { return MemoScope(false); } MEMO.with(|m| *m.borrow_mut() = Some(EvalMemo::default())); MemoScope(true) } }
+impl Drop for MemoScope { fn drop(&mut self) { if self.0 { MEMO.with(|m| *m.borrow_mut() = None); } } }
+/// a Pokemon's Speed (get_stat), once per open memo
+pub(crate) fn memo_spe(b: &mut Battle, m: MonRef) -> f64 {
+    if let Some(v) = MEMO.with(|c| c.borrow().as_ref().and_then(|e| e.spe.get(&m).copied())) { return v; }
+    let v = b.get_stat(m, 5, false, false) as f64;
+    MEMO.with(|c| if let Some(e) = c.borrow_mut().as_mut() { e.spe.insert(m, v); }); v
+}
+fn memo_weather(b: &Battle) -> Id {
+    if let Some(w) = MEMO.with(|c| c.borrow().as_ref().and_then(|e| e.wx)) { return w; }
+    let w = b.effective_weather();
+    MEMO.with(|c| if let Some(e) = c.borrow_mut().as_mut() { e.wx = Some(w); }); w
+}
 pub(crate) fn hit_chance(b: &Battle, a: MonRef, d: Option<MonRef>, mid: Id) -> f64 {
+    let k = (a, d, PId(mid));
+    if let Some(v) = MEMO.with(|c| c.borrow().as_ref().and_then(|e| e.hit.get(&k).copied())) { return v; }
+    let v = hit_chance_raw(b, a, d, mid);
+    MEMO.with(|c| if let Some(e) = c.borrow_mut().as_mut() { e.hit.insert(k, v); }); v
+}
+fn hit_chance_raw(b: &Battle, a: MonRef, d: Option<MonRef>, mid: Id) -> f64 {
     let tm = &b.dex.mv(mid).tmpl;
     let Some(base) = tm.accuracy else { return 1.0 };
     let pa = b.p(a); let pd = d.map(|x| b.p(x));
     if pa.ability == "noguard" || pd.map(|x| x.ability == "noguard").unwrap_or(false) { return 1.0; }
-    let wx = if pa.item == "utilityumbrella" { "" } else { b.effective_weather() };
+    let wx = if pa.item == "utilityumbrella" { "" } else { memo_weather(b) };
     let mut acc = base;
     if mid == "thunder" || mid == "hurricane" {
         match wx { "raindance" | "primordialsea" => return 1.0, "sunnyday" | "desolateland" => acc = 50.0, _ => {} }
@@ -402,6 +437,12 @@ fn cmon(b: &Battle, m: MonRef) -> crate::calc::Mon {
 fn screens_of(b: &Battle, s: u8) -> Vec<String> { ["reflect", "lightscreen", "auroraveil"].iter().filter(|k| find(&b.sides[s as usize].side_conditions, k).is_some()).map(|k| k.to_string()).collect() }
 /// calc.rs mid-roll damage of `mid` by `a` on `d` in the current field, memoised per thread (DKey); None = immune / no damage
 fn race_damage(b: &Battle, cd: &crate::data::Data, a: MonRef, d: MonRef, mid: Id, spread: bool, scr: u8) -> Option<i64> {
+    let k = (a, d, PId(mid), spread, scr);
+    if let Some(v) = MEMO.with(|c| c.borrow().as_ref().and_then(|e| e.dmg.get(&k).copied())) { return v; }
+    let v = race_damage_raw(b, cd, a, d, mid, spread, scr);
+    MEMO.with(|c| if let Some(e) = c.borrow_mut().as_mut() { e.dmg.insert(k, v); }); v
+}
+fn race_damage_raw(b: &Battle, cd: &crate::data::Data, a: MonRef, d: MonRef, mid: Id, spread: bool, scr: u8) -> Option<i64> {
     let (pa, pd) = (b.p(a), b.p(d));
     if !cd.species.contains_key(pa.species) || !cd.species.contains_key(pd.species) || !cd.moves.contains_key(mid) { return None; }
     // the attacker's HP matters to Eruption / Water Spout and to the pinch abilities (Blaze, Torrent, Overgrow, Swarm at 1/3 HP or less;
@@ -496,7 +537,7 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 3] {
     let prio_edge: f64 = if !prio_on { 0.0 } else { (0..n).map(|i| {
         let best = (0..opts[i].len()).filter(|&k| oprio[i][k] > 0).map(|k| (0..n).map(|j| if b.p(units[j]).maxhp > 0 { opts[i][k][j] / b.p(units[j]).maxhp as f64 } else { 0.0 }).fold(0.0, f64::max)).fold(0.0, f64::max).min(1.0);
         if side(i) == 0 { best } else { -best } }).sum() };
-    let spe: Vec<f64> = (0..n).map(|i| b.get_stat(units[i], 5, false, false) as f64).collect();
+    let spe: Vec<f64> = (0..n).map(|i| memo_spe(b, units[i])).collect();
     let hp0: Vec<f64> = (0..n).map(|i| b.p(units[i]).hp as f64).collect();
     let maxhp: Vec<f64> = (0..n).map(|i| b.p(units[i]).maxhp.max(1) as f64).collect();
     let status: Vec<Id> = (0..n).map(|i| b.p(units[i]).status).collect();

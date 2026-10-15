@@ -226,3 +226,12 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
       k0 2 0.37 / 44% / -0.0091 +- 0.0047; k0 4 0.34 / 41% / -0.0072 +- 0.0041; k0 2 with two-roll children 0.35 / 43% / -0.0044 +-
       0.0040. k0 2 keeps most of the gain (about 2 SE) with a third of the extra noise gone. Self-play at the bot's budget (20,000 leaf
       evaluations a decision, 800 pool starts both ways, depth 2 k0 2 vs none) started at 6 pm, about 9 hours on 4 threads.
+    - Results (the shared AWS box, 32 threads): self-play at the bot's budget, 800 pool starts both ways, depth 2 k0 2 vs none: -0.0 +-
+      1.0 points (1,699 deep rolls a game; no style beyond noise). All 3,964 held-out positions at 20,000: -0.0013 +- 0.0028 log loss
+      (the 301-position subset's -0.009 was mostly noise). Depth does not help the bot at its budget, in play or in prediction; the box's
+      4x runs (and a 4x-vs-1x control without depth) go on overnight.
+    - The other direction (the user, 2026-10-14 evening: if 4x plays like 1x, maybe less is fine, and the climb could run faster): the
+      climb's self-play solver on one luck seed a cell vs its two (BATTLE_NS_0 / _1, the climb's v33 setup, 800 pool starts both ways):
+      -2.0 +- 1.1 points for the one-seed side, no style beyond about 1.5 SE. The style-bias check at 1 vs 2 seeds (ns_bias.sh) decides
+      whether the climb can use it (Team search). Exact speedups in the engine (an evaluation memo, the net's zero inputs skipped): 1.2x,
+      games identical.

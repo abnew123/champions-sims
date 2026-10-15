@@ -165,6 +165,16 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     est. 4-10x today's cost. (2) Scored on held-out real positions (log loss against results, as for the net) and in self-play against
     the one-turn search, with the time per decision. (3) If it wins, its values become the net's training targets (offline, an AWS
     box), so the climb and the bot get the depth at today's speed: the one-turn distillation was the largest self-play gain so far.
+    - Depth as training targets (the user, 2026-10-15: train the net on deeper search values; value_box.sh on the shared AWS box, the
+      rebuilt data in results/value2, fit on fit_sub, chosen on val, tested on hold). As predictors of the real results the depth-at-4x
+      searches (EVAL_BUDGET 80,000, depth 2, k0 2) beat the one-turn search at the bot's budget: val 0.4857 -> 0.4760 (-0.0097 +-
+      0.0012), hold 0.4890 -> 0.4786 (-0.0105 +- 0.0016). h64 nets fitted on each (l2 3e-3, best on val for both): static val log loss
+      0.5083 (d4) / 0.5116 (x1) / 0.5098 (fitted on results) / 0.5192 (deployed). On the 560 accuracy games both new nets are 0.010
+      better than the deployed one (-0.0103 +- 0.0031 / -0.0104 +- 0.0038); on all of hold d4 loses one game's positions badly
+      (…2692649738: p1 at 0.95-0.97 lost; 68% of its gap to x1). Self-play at the bot's budget with each side on its own net (v35's
+      EG_VNET_B; net_h2h_box.sh, 800 pool starts both ways): d4 vs deployed -1.3 +- 1.1, d4 vs x1 +0.4 +- 1.1, x1 vs deployed +0.6 +-
+      1.1 points. The deeper targets reach the net only as about 0.003 of static log loss (the features cap what it can copy) and do not
+      change play; the bot keeps its net.
     Caution: earlier depth-like changes (anticipation passes, the full switch matrix) were flat; the equilibrium opponent caps it.
     **Done for v29 (2026-10-13 evening):** Revival Blessing ported (sim.rs: a side that cannot switch keeps the request for a slot with the
     condition, no BeforeSwitchOut for it, the choice names a fainted Pokemon, an order-6 RevivalBlessing action revives it at half HP and

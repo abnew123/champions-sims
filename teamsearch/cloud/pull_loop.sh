@@ -1,7 +1,8 @@
 #!/bin/bash
 # Copy the cloud run's results back to the Mac every 15 minutes, into teamsearch/<dest> (default cloud_results; the v12 rerun
 # uses cloud_results/v12 so the first AWS climb's tracked results aren't overwritten). Kept apart from the local runs/. Skips the big starts files. Keeps the Mac awake (idle sleep only) while
-# it runs; stops once the instance has been unreachable for 30 minutes (the watchdog powered it off) or after 10 hours.
+# it runs; stops once the instance has been unreachable for 30 minutes (the watchdog powered it off) or after PULL_MAX_H hours
+# (default 30; it was a fixed 10 until 2026-10-15, when the v33 climb's pulls stopped at 4:42 am and the box died unwatched at 6:39).
 # usage: teamsearch/cloud/pull_loop.sh <host> <key file> [dest = cloud_results]
 cd "$(dirname "$0")/.."
 HOST=${1:?host}; KEY=${2:?key file}; DEST=${3:-cloud_results}
@@ -11,7 +12,7 @@ for p in bash rsync ssh caffeinate; do [ -e bin/teamsearch-$p ] || ln -sf "$(com
 bin/teamsearch-caffeinate -i -w $$ &
 SSH="ssh -n -i $KEY -o ConnectTimeout=20 -o ServerAliveInterval=30"
 mkdir -p "$DEST"; fails=0; start=$(date +%s)
-while [ $(( $(date +%s) - start )) -lt 36000 ]; do
+while [ $(( $(date +%s) - start )) -lt $(( ${PULL_MAX_H:-30} * 3600 )) ]; do
   bin/teamsearch-rsync -az -e "$PWD/bin/teamsearch-ssh -i $KEY -o ConnectTimeout=20" --exclude 'starts_*.jsonl' --exclude 'grid/' \
        "ubuntu@$HOST:champions-sims/teamsearch/climb_*" "ubuntu@$HOST:champions-sims/teamsearch/round*.log" \
        "ubuntu@$HOST:champions-sims/teamsearch/runs" "$DEST/" 2>/dev/null; rc=$?

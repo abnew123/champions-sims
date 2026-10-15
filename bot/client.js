@@ -88,6 +88,8 @@ let ws, me = null, searching = false, inGames = 0, pmReplied = new Set(), loginA
 const rooms = {};   // room id -> {lines, side, req, done, oppRating, turn}
 function send(s) {   // a send while the socket is down (a reconnect after the Mac slept, 2026-10-13) is dropped, not thrown: it crashed the Bo3 client
   if (!ws || ws.readyState !== WebSocket.OPEN) { log('not connected, dropped:', s.split('|').slice(-1)[0].slice(0, 40)); return; }
+  // a choice sent in a battle: from now on we wait on the opponent (the idle timer below; cleared when a request gives us the turn)
+  const sp = s.split('|'); if (rooms[sp[0]] && /^\/(choose|team) /.test(sp[1] || '')) rooms[sp[0]].waitingSince = Date.now();
   ws.send(s); }
 function connect() {
   ws = new WebSocket(WS);
@@ -171,7 +173,7 @@ async function onMessage(m) {
       // bot plays on the real ones instead of guesses
       if (p[1] === 'uhtml' && p[2] === 'otsrequest' && line.includes('/acceptopenteamsheets') && !R.otsSent) {
         R.otsSent = true; setTimeout(() => { send(`${room}|/acceptopenteamsheets`); log(room.slice(-12), 'accepted open team sheets'); }, rnd(1500, 4000)); }
-      if (p[1] === 'request' && p[2]) { try { R.req = JSON.parse(p[2]); } catch (e) { R.req = null; } if (R.req && R.req.side && R.req.side.id) R.side = R.req.side.id; if (R.req && !R.req.wait) handleRequest(room, R).catch(e => log('request error', room, String(e))); }
+      if (p[1] === 'request' && p[2]) { try { R.req = JSON.parse(p[2]); } catch (e) { R.req = null; } if (R.req && R.req.side && R.req.side.id) R.side = R.req.side.id; if (R.req && !R.req.wait) R.waitingSince = null; if (R.req && !R.req.wait) handleRequest(room, R).catch(e => log('request error', room, String(e))); }
       // a rejected choice: Showdown re-sends a request when the rejection taught it something (a trap revealed: [Unavailable choice]),
       // and the bot answers that; otherwise it falls back to Showdown's default choice at once instead of letting the turn timer run
       if (p[1] === 'error' && /\[(Invalid|Unavailable) choice\]/.test(line) && R.req && !R.req.wait) {
@@ -315,6 +317,14 @@ async function onReady() {
     const open = Object.entries(rooms).filter(([k, r]) => !r.done && Date.now() - (r.last || 0) < 15 * 60e3);
     const busy = inGames > 0 || open.length > 0;
     const why = mayPlay();
+    // an opponent idle for limits.json idle_timer_minutes (the user, 2026-10-15: 5, maybe 3 later) since our choice gets the battle
+    // timer turned on, once a game: the bot never starts it on a player who is moving, but a game held open for an hour (a Bo1 opponent
+    // stopped at turn 3 at 1:08 am, 2026-10-15) blocked the bot, which does not search while a game is open
+    const idleMin = LOCAL && process.env.BOT_TEST_IDLE_MIN ? +process.env.BOT_TEST_IDLE_MIN : limits().idle_timer_minutes;   // the env: local tests only
+    if (idleMin) for (const [room, R] of Object.entries(rooms)) {
+      if (!room.startsWith('battle-') || R.done || R.timerOn || !R.waitingSince || Date.now() - R.waitingSince < idleMin * 60e3) continue;
+      R.timerOn = true; send(`${room}|/timer on`); log(room.slice(-12), `the opponent has been idle ${idleMin} min: battle timer on`);
+    }
     if (Date.now() - (lastIdleLog || 0) > 5 * 60e3 && !open.some(([k, r]) => r.req)) { lastIdleLog = Date.now();
       if (busy || searching) log(`idle: ${searching ? 'searching' : ''}${inGames ? ` ${inGames} game(s) listed by the server` : ''}${open.length ? ` waiting on ${open.map(([k]) => k.slice(-16)).join(', ')}` : ''}`); }
     // a search that runs longer than limits.json max_search_seconds is cancelled (the user, 2026-10-12: Showdown's rating window starts at
@@ -328,6 +338,7 @@ async function onReady() {
   }
 }
 async function handleRequest(room, R) {
+  if (LOCAL && process.env.BOT_TEST_IDLE && R.turn >= 2) { log(room.slice(-12), 'test: idle, not answering'); return; }   // the idle-opponent test, local only
   const req = R.req; const L = limits();
   // the request's species, a Mega under its base forme's name: Floette-Eternal Mega Evolves into "Floette-Mega" (2026-10-13: read as
   // another team, recovered the wrong six and the brain had no set for it), so a Mega also matches a set whose species shares its base

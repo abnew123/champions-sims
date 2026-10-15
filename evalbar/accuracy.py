@@ -20,7 +20,11 @@ import common as C, procs as P
 RF = C.replay_feats(); sys.path.insert(0, C.PSSIM)
 from fit_real_value import fit
 EDGES = [0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1.0000001]
-fold = lambda rid: zlib.crc32(rid.encode()) % 5
+# folds by match (the games of one Bo3 together), from Battle sim's grouping (pssim/results/value2/match_groups.json: game id -> a hash of the two
+# players and the day, no names); a game it lacks is its own match. Until 2026-10-15 folds split by game, so a Bo3 could sit in two folds
+_MG = os.path.join(C.MAIN, 'pssim', 'results', 'value2', 'match_groups.json')
+MATCH = json.load(open(_MG)) if os.path.exists(_MG) else {}
+fold = lambda rid: zlib.crc32(MATCH.get(rid, rid).encode()) % 5
 logit = lambda v: math.log(min(1 - 1e-4, max(1e-4, v)) / (1 - min(1 - 1e-4, max(1e-4, v))))
 def score(rows):
     """rows: (game, turn, player 1's win chance, player 1 won)"""

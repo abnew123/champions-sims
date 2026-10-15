@@ -81,6 +81,42 @@ def title(r):
     variant = re.search(r'res_(\w+)$', r['outdir'])
     return f"{name}: {STEP[step]}" + (f" ({variant.group(1)} variant)" if variant else '')
 
+BOX_FRESH = 45 * 60            # a pulled box run (box_plan.json) counts as running while its newest result is younger than this (pulls every 20 min)
+
+def box_cards():
+    """Battle sim's runs on the cloud box, from a box_plan.json in each pulled folder (pssim/results/**/box_plan.json:
+    {"title", "start" (ISO, local), "jobs": [{"name", "file", "positions", "cost"}]}): a job counts as done when <name>.done was pulled,
+    otherwise by its result file's lines; cost weighs the jobs (a 4x-budget search costs about 4 one-turn ones). Returns [(html, live)]."""
+    out = []
+    for plan in glob.glob(os.path.join(ROOT, 'results', '**', 'box_plan.json'), recursive=True):
+        d = os.path.dirname(plan)
+        try:
+            p = json.load(open(plan)); st = datetime.datetime.fromisoformat(p['start'])
+            done = tot = 0; newest = st.timestamp(); jobs_done = 0
+            for j in p['jobs']:
+                f = os.path.join(d, j['file']); w = j.get('cost', 1); tot += j['positions'] * w
+                if os.path.exists(os.path.join(d, j['name'] + '.done')): n = j['positions']; jobs_done += 1
+                elif os.path.exists(f): n = min(j['positions'], sum(1 for _ in open(f, errors='replace')))
+                else: n = 0
+                done += n * w
+                if os.path.exists(f): newest = max(newest, os.path.getmtime(f))
+        except Exception: continue
+        finished = os.path.exists(os.path.join(d, 'ALL_DONE')); live = not finished and time.time() - newest < BOX_FRESH
+        frac = min(1.0, done / tot) if tot else 0; el = newest - st.timestamp(); ended = datetime.datetime.fromtimestamp(newest)
+        lines = [f'{jobs_done} of {len(p["jobs"])} jobs done, {100*frac:.0f}% of the work']
+        if live:
+            left = (tot - done) / (done / el) if done > 0 and el > 60 else None
+            lines += [f'started {ampm(st)}, last results pulled {ampm(ended)}',
+                      f'about {fmt(left)} left (done around {ampm(ended + datetime.timedelta(seconds=left))})' if left is not None else 'estimating time left…']
+            state, label = 'running', 'Running on the cloud box'
+        else:
+            lines.append(f'{ampm(st)} to {ampm(ended)}'); state, label = ('finished', 'Complete') if finished else ('stopped', 'Incomplete')
+        out.append((f'''<div class="card {state}"><div class="top"><b>{html.escape(p.get('title', os.path.relpath(d, ROOT)))}</b><span class="st">{label}</span></div>
+          <div class="bar"><div style="width:{100*frac:.1f}%"></div></div>
+          <div class="meta">{"".join(f"<span>{x}</span>" for x in lines)}</div></div>''', live, st))
+    out.sort(key=lambda c: c[2], reverse=True)
+    return [(h, live) for h, live, st in out if live or (datetime.datetime.now() - st).total_seconds() < 2 * 86400]
+
 def team_search():
     """the Team search thread's own cards (teamsearch/status_server.py cards(): it picks its climb folder itself)"""
     try: return runpy.run_path(os.path.join(HERE, 'teamsearch', 'status_server.py'))['cards']()
@@ -222,20 +258,23 @@ def build_page():
           <div class="bar"><div style="width:{100*frac:.1f}%"></div></div>
           <div class="meta">{"".join(f"<span>{x}</span>" for x in lines)}</div>
           {f'<div class="note">{note}</div>' if note else ''}</div>'''
-    def section(rs):
+    box = box_cards()
+    def section(rs, extra=()):
         active = [r for r in rs if live(r)]
         recent = [r for r in rs if r not in active and (now - r['start']).total_seconds() < 2 * 86400][:3]
-        return (''.join(card(r, True) for r in active) or '<p class="idle">Nothing running right now.</p>') + \
-               ('<h3>Recent</h3>' + ''.join(card(r, False) for r in recent) if recent else '')
+        on = ''.join(card(r, True) for r in active) + ''.join(h for h, lv in extra if lv)
+        old = ''.join(card(r, False) for r in recent) + ''.join(h for h, lv in extra if not lv)
+        return (on or '<p class="idle">Nothing running right now.</p>') + ('<h3>Recent</h3>' + old if old else '')
     # when Team search's page embeds this one (its own port), leave its section to it
     embedded = any(f.filename.endswith(os.path.join('teamsearch', 'status_server.py')) for f in inspect.stack())
     ts = '' if embedded else team_search(); eb = eval_bar()
     # every active run first, labelled with its thread (not on Team search's own page, which embeds this one)
     now_running = [tagged(card(r, True), sheet_thread(r['kit'][0]) if r['kit'] else THREADS['sim']) for r in R if live(r)] + \
+                  [tagged(h, THREADS['sim']) for h, lv in box if lv] + \
                   [tagged(c, THREADS['ts']) for c in running_cards(ts)] + [tagged(c, THREADS['eb']) for c in running_cards(eb)]
     top = '' if embedded else f'<h2>Using CPU now</h2>{cpu_section()}<h2>Running now (with progress)</h2>' + (''.join(now_running) or '<p class="idle">Nothing with a progress stamp is running.</p>')
     body = top + f'''<h2>Sheets</h2>{section([r for r in R if r['kit']])}
-<h2>Battle sim</h2>{section([r for r in R if not r['kit']])}''' + ('' if embedded else f'<h2>Team search</h2>{ts}') + \
+<h2>Battle sim</h2>{section([r for r in R if not r['kit']], box)}''' + ('' if embedded else f'<h2>Team search</h2>{ts}') + \
            f'<h2>Eval bar</h2>{eb}'
     return f'''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sim progress</title><style>

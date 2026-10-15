@@ -325,7 +325,8 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
             let p = crate::deep::Params::from_env(2, 256);
             for s in 0..2u8 {
                 let [budget, depth] = sides[s as usize];
-                let Some((root, st)) = crate::deep::search(&b, cfg, key ^ ((turn as u64) << 40) ^ 0xE7A1, depth, &p, budget, 0, (None, None), std::time::Instant::now()) else { continue };
+                // each side's leaves scored with its own net when EG_VNET_B is set (plan.rs as_side)
+                let Some((root, st)) = crate::plan::as_side(s, || crate::deep::search(&b, cfg, key ^ ((turn as u64) << 40) ^ 0xE7A1, depth, &p, budget, 0, (None, None), std::time::Instant::now())) else { continue };
                 for u in &st.uns { if !uns.contains(u) { uns.push(u.clone()); } }
                 h2cells += st.deep_rolls;   // the row's h2 counts the deep rolls under BATTLE_EVAL
                 if s == 0 && root.msw == msw { x = root.x.clone(); } else if s == 1 && root.tsw == tsw { y = root.y.clone(); }

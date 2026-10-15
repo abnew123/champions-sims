@@ -1300,3 +1300,8 @@ registrations since its second version) and checks reachability of real logs in 
   seeds a cell), EVAL_DEEP_K0 and EVAL_KEY_SALT (deep.rs). Profile of the climb's v33 setup: the leaf value about 58% of game time, the
   turn simulation about 28%. 200 games with the climb's v33 setup: all identical (result, length, final value), CPU 836 -> 671 s.
   Bot: battlesim-champ29-bot -> champ-bot-2026-10-14c (v34). `src_battle_v34.tar.gz`, `bin/champ-battle-v34.sha256`.
+- **champ-battle-v35 (2026-10-15, 1 pm) = v34 + EG_VNET_B (net against net), games identical when unset.** Side 1 plans with the
+  EG_VNET_B net and side 0 with EG_VNET (value2 / two_values; under BATTLE_EVAL each side's search scores its leaves with its own net,
+  plan::as_side). For testing a net trained on deeper search targets (pssim/value_box.sh). Checks: 4 BATTLE_EVAL games identical to v34
+  without it and with EG_VNET_B = EG_VNET (all fields but timing); with two nets, side 0's turn-one choices match the games where both
+  sides use EG_VNET, side 1's those where both use EG_VNET_B. The bot stays on v34. `src_battle_v35.tar.gz`, `bin/champ-battle-v35.sha256`.

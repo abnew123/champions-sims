@@ -239,3 +239,9 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
       55.9%, per-style RMS of sim - real 3.9 -> 3.0; the shifts between the two settings are within about 1 SE everywhere (the largest
       styles move 1.1 points or less). Team search moves the climb to v34 + BATTLE_NS=1 from round 2 (finals and the sure-hit pass on
       two seeds): about 1.9x a game.
+    - **Depth pays at a bigger budget (the box, overnight 2026-10-14/15; 800 pool starts both ways, self-play with BATTLE_EVAL):** both
+      sides at 4x the bot's budget (80,000 leaf evaluations a decision), depth 2 k0 2 vs none: **+3.9 +- 1.1 points** (5,810 deep rolls
+      a game, 266 vs 145 s a game). Controls: 4x vs 1x without depth +0.8 +- 0.9; at 1x, depth 2 k0 4 +0.3 +- 1.0 and depth 3 k0 2
+      -0.3 +- 1.0 (depth 2 k0 2 -0.0 +- 1.0). More rolls alone buy nothing; the extra budget is worth it only spent on depth, and depth
+      needs that budget (at 1x a position gets about 8 deep rolls, at 4x about 50). Next: whether it holds for the bot (its decision
+      time at 4x, the timer), and deep values at 4x as the net's training targets.

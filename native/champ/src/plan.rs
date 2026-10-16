@@ -53,7 +53,8 @@ impl VNet {
         let mut x = feats(b, cfg); x.resize(28, 0.0);
         let e: Vec<f64> = f0.iter().chain(&f1).chain(&g0).chain(&x).copied().collect();
         let es: Vec<f64> = f1.iter().chain(&f0).chain(&g1).copied().chain(x.iter().map(|v| -v)).collect();
-        let z = (self.h(&e) - self.h(&es)).clamp(-30.0, 30.0);
+        let mut z = (self.h(&e) - self.h(&es)).clamp(-30.0, 30.0);
+        if vnet_perish() { if let Some((_, w)) = &cfg.vw { z += perish_adj_mode(b, w, true); } }
         1.0 / (1.0 + (-z).exp())
     }
 }
@@ -609,7 +610,12 @@ fn race_feats(b: &mut Battle, cd: &crate::data::Data) -> [f64; 3] {
 fn keep_immune() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new(); *F.get_or_init(|| match std::env::var("PLAN_KEEP_IMMUNE").as_deref() { Ok("0") => [true, false], Ok("1") => [false, true], Ok(_) => [true, true], Err(_) => [false, false] }) }
 fn race_prio() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("RACE_PRIO").is_ok()) }
 fn race_ties_avg() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("RACE_TIES").map(|v| v == "avg").unwrap_or(false)) }
-fn perish_adj(b: &Battle, w: &[f64]) -> f64 {
+fn perish_adj(b: &Battle, w: &[f64]) -> f64 { perish_adj_mode(b, w, perish2()) }
+/// VNET_PERISH=1 (2026-10-16, the user: fix Perish rather than avoid it): the learned value had no Perish input at all (vfeats has no
+/// count, and perish_adj was only added on the EG_VALUE path), so at the leaves a trapped Pokemon on its last count looked healthy and
+/// singing, escaping or KOing the trapper earned nothing. With it the net's log-odds get PERISH2's term, in EG_VALUE's units
+fn vnet_perish() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("VNET_PERISH").map(|v| v != "0").unwrap_or(false)) }
+fn perish_adj_mode(b: &Battle, w: &[f64], p2: bool) -> f64 {
     let al = [alive(b, 0), alive(b, 1)];
     let t = |m: &MonRef| find(&b.p(*m).volatiles, "perishsong").and_then(|s| s.duration);
     if al[0].is_empty() || al[1].is_empty() { return 0.0; }
@@ -622,7 +628,7 @@ fn perish_adj(b: &Battle, w: &[f64]) -> f64 {
         last.sort_by(|a, c| if tr_then { a.1.cmp(&c.1) } else { c.1.cmp(&a.1) });   // stable, like JS sort
         return if last.last().unwrap().0 == 0 { 3.0 } else { -3.0 };
     }
-    if perish2() {
+    if p2 {
         // PERISH2=1 (champ-battle-v11): a Perish count only dooms a Pokemon that cannot leave. Per side, the counted Pokemon that are not
         // trapped take the bench slots (healthiest first) and are charged a small tempo cost; the rest (trapped by Shadow Tag / Arena Trap /
         // Magnet Pull / a trapping move, or no bench left) are charged most of their worth, more the fewer turns remain, and for trapped
@@ -651,6 +657,18 @@ fn perish_adj(b: &Battle, w: &[f64]) -> f64 {
         z += (if k == 0 { -1.0 } else { 1.0 }) * 0.8 * (w[0] * b.p(*m).hp as f64 / b.p(*m).maxhp as f64 + w[1]) / (tt.max(1) as f64);
     } } }
     z
+}
+/// a Perish fight is on (2026-10-16, the user: a search for Perish specifically): a count running on an active Pokemon, or a side with an
+/// active Perish Song user (PP left, not disabled) while it has a trapper in (an active Shadow Tag / Arena Trap / Magnet Pull, or a
+/// Gengar holding Gengarite, a Shadow Tag after its Mega Evolution) or a foe already trapped
+pub fn perish_on(b: &Battle) -> bool {
+    if (0..2u8).any(|s| active_alive(b, s).iter().any(|(_, m)| find(&b.p(*m).volatiles, "perishsong").is_some())) { return true; }
+    (0..2u8).any(|s| {
+        let act = active_alive(b, s);
+        let sings = act.iter().any(|(_, m)| b.p(*m).move_slots.iter().any(|x| x.id == "perishsong" && x.pp > 0 && !x.disabled));
+        sings && (act.iter().any(|(_, m)| ["shadowtag", "arenatrap", "magnetpull"].contains(&b.p(*m).ability) || b.p(*m).item == "gengarite")
+                  || active_alive(b, 1 - s).iter().any(|(_, m)| b.p(*m).trapped))
+    })
 }
 fn perish2() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("PERISH2").is_ok()) }
 fn trsym() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("TRSYM").is_ok()) }

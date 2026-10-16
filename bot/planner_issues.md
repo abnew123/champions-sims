@@ -280,3 +280,6 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     (real 47.4%): where they sang 83.3 -> 70.0 (15 games); the 44 without the song stay about 12 points high (TR sheet's Shadow Tag
     question; not seen in human-vs-human games). On in the bot from 6:13 pm (with CAL 0.736 and the matrix cap); offered to Team search
     and TR sheet.
+    The sheets' setup (v23-dp2-race-eg9-full, EG_VALUE with the old perish_adj; pssim/perish_sheet.sh): 41.2% (+7.9 +- 3.3; brought
+    +10.2), singing in 16%; with PERISH2=1 45.2% (+4.0 +- 3.3; brought +4.2), singing in 34%. TR sheet takes the choice (PERISH2 on the
+    Perish cards, or the whole sheet on the current setup) to the user.

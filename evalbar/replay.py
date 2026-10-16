@@ -59,9 +59,11 @@ class Mon:
         s.types = None; s.tadd = ''; s.protean = False                      # types changed in battle (Soak, Protean, Double Shock), a type added, Protean / Libero used
         s.syrup = False                                                     # its Supersweet Syrup has activated: once a battle, kept through switches
         s.item_set = False                                                  # an -item line showed its item (Trick, Switcheroo, Thief, Frisk): s.item is it
+        s.aborted = False                                                   # its charged move was stopped before it fired (a flinch, full paralysis, a
+                                                                            # confusion self-hit): Showdown's twoturnmove ends there (onMoveAborted)
     def leave(s):
         s.boosts = {}; s.vol = set(); s.moved = False; s.stall = False; s.prot = False; s.lock = ''; s.last = ''; s.volarg = {}; s.volturn = {}
-        s.unburden = False; s.perish = 0; s.abil = ''; s.toxn = 0; s.ptrap = None; s.types = None; s.tadd = ''; s.protean = False
+        s.unburden = False; s.perish = 0; s.abil = ''; s.toxn = 0; s.ptrap = None; s.types = None; s.tadd = ''; s.protean = False; s.aborted = False
         if s.temp: s.forme = s.species; s.temp = False                  # a form taken in battle (Aegislash's Blade) ends on switching out
     def ref(s): return [s.side, disp(s.forme)]
 def hpval(tok):
@@ -97,7 +99,7 @@ def parse(log):
                                'item': m.item, 'gone': m.item_gone, 'slot': '' if m.fainted else slot.get(nick, ''), 'seen': True,
                                'sp': m.species, 'forme': '' if m.mega or m.forme == m.species else m.forme, 'pos': slot.get(nick, ''), 'mega': m.mega, 'moved': m.moved, 'stall': m.stall, 'lock': m.lock, 'slept': m.slept, 'vol': sorted(m.vol), 'last': m.last, 'volarg': dict(m.volarg),
                                'volturn': {v: list(x) for v, x in m.volturn.items() if v in m.vol}, 'unb': m.unburden, 'perish': m.perish, 'abil': m.abil,
-                               'toxn': m.toxn, 'ptrap': list(m.ptrap) if m.ptrap else None, 'types': m.types, 'tadd': m.tadd, 'protean': m.protean, 'syrup': m.syrup, 'iset': m.item_set}
+                               'toxn': m.toxn, 'ptrap': list(m.ptrap) if m.ptrap else None, 'types': m.types, 'tadd': m.tadd, 'protean': m.protean, 'syrup': m.syrup, 'iset': m.item_set, 'cabort': m.aborted}
                               for nick in order[sd] for m in [mons[sd][nick]]],
                      'tailwind': sidec[sd]['tailwind'], 'screens': {k: v for k, v in sidec[sd]['screens'].items() if v}, 'hazards': list(sidec[sd]['hazards'])}
         S['perish'] = perish
@@ -178,7 +180,7 @@ def parse(log):
                     tpos = p[4][:3] if tg is not None and 'spread' not in t else ''
                     acts[pos] = {'move': p[3], 'target': tpos, 'mega': id(m) in mega_now, 'unsure': bool(tpos) and tpos[:2] in redirect}
                     if tg is not None and 'spread' in t: acts[pos]['spreadTarget'] = p[4][:3]   # the one it aimed at (Expanding Force in Psychic Terrain)
-                moved_yet[0] = True; m.moved = True; m.last = p[3]; m.vol.discard('charging'); acted.add(id(m))
+                moved_yet[0] = True; m.moved = True; m.last = p[3]; m.vol.discard('charging'); m.aborted = False; acted.add(id(m))
                 if toid(m.item) in ('choicescarf', 'choiceband', 'choicespecs') and not m.item_gone: m.lock = p[3]
             head = [m.ref(), ' used ', p[3]]
             if tg is not None and tg is not m and 'spread' not in t: head += [' on ', tg.ref()]
@@ -201,6 +203,7 @@ def parse(log):
         elif k == 'cant':
             m = mon(p[2])
             if m and len(p) > 3 and p[3] == 'recharge': m.vol.discard('mustrecharge')
+            if m and 'charging' in m.vol: m.aborted = True                  # the charge is lost (battlestate's chargeDue reads it)
             if m and p[2][:3] not in acts and active.get(p[2][:3]) == start_active.get(p[2][:3]): acts[p[2][:3]] = {'none': 'cant', 'mega': id(m) in mega_now}   # it did not switch
             if m:
                 ev(m.side, [m.ref(), ' ' + CANT.get(p[3], f"can't move ({clean(p[3])})")]); moved_yet[0] = True; m.moved = True; acted.add(id(m))
@@ -209,6 +212,7 @@ def parse(log):
             m = mon(p[2]); v = hpval(p[3]) if len(p) > 3 else None
             if m and k == '-damage' and clean(t.get('from', '')) == 'psn' and m.status == 'tox': m.toxn += 1
             if m and k == '-damage' and 'partiallytrapped' in t and m.ptrap: m.ptrap[1] += 1
+            if m and k == '-damage' and clean(t.get('from', '')) == 'confusion' and 'charging' in m.vol: m.aborted = True   # hit itself: no 'cant' line
             if m and v is not None:
                 extra = pend.pop(id(m), [])
                 if m.hp != v or extra:
@@ -329,7 +333,7 @@ def parse(log):
             else: m.vol.discard(what); m.volturn.pop(what, None); note([m.ref(), {'confusion': ' snapped out of confusion', 'Substitute': "'s Substitute broke", 'Illusion': "'s Illusion ended"}.get(what, f': {what} ended')])
         elif k == '-prepare':
             m = mon(p[2])
-            if m: m.vol.add('charging')                                   # first turn of a two-turn move; '-anim' follows if it fires at once
+            if m: m.vol.add('charging'); m.aborted = False                # first turn of a two-turn move; '-anim' follows if it fires at once
         elif k == '-anim':
             m = mon(p[2]); pos = p[2][:3]
             if m: m.vol.discard('charging')

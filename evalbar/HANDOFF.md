@@ -440,6 +440,12 @@ from mid-battle positions of real sheets) is theirs and found several engine bug
 - `itemDue` (FLAGS; not the bot's yet): replay.py marks a Pokemon whose item an `-item` line showed (`iset`), and `mon` takes the log's item
   over the set's. A replay where a Dragapult received a Choice Scarf by Trick: Focus Sash before, Choice Scarf now. It is read in `mon`,
   not positions.js, which sets items twice (the second time after the field is laid).
+- `chargeDue` (FLAGS, 2026-10-16; not the bot's yet): a charged move stopped before it fires (flinch, full paralysis, sleep, Disable, a
+  confusion self-hit) loses its charge, as Showdown's twoturnmove does on MoveAborted. replay.py marks it (`cabort`) and `mon` drops
+  'charging'. Before, the Pokemon stayed locked into the charge: a bot game's turn 7 (an Archaludon flinched mid Electro Shot) gave evalpos
+  "no choices to make", and build.options' KeyError killed that game's page thread, so it never showed. In the bot's logs and the cached
+  replays: 22 lost charges, none fired the old charge next turn (13 other moves, 9 charged again); 32 turn starts in 25 games change, none in
+  the calibration hold set. build.options / merge now take a "no choices" line as no options.
 - Checked against main on 300 held-out replays (2,080 positions), 40 of them through live.specs_for, and the 4 botcmp games: the bot's
   specs and states identical; live's identical apart from the new flag; the replay positions gained the fields and flags (779 Pokemon
   with an item gone since they came in, 107 Perish counts, 72 volatile countdowns, 67 gained abilities, 17 changed types; 299 of 403

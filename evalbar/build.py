@@ -31,7 +31,8 @@ def options(e, pos, scale):
     """evalpos line + the position line it came from -> {'p1': [slot...], 'p2': [...]}, slot = {mon, played (True, or None if unknown),
     options: [{l, w, v, played, rough}]}. rough: in the staged mode an option more than 0.15 below its side's best kept a 2-sample value."""
     out = {}
-    for s, sd, acts in ((0, 'p1', pos['actual']), (1, 'p2', pos['their_actual'])):
+    if 'sides' not in e: return {'p1': [], 'p2': []}                        # evalpos's "no choices to make": the value alone (2026-10-16: one bot
+    for s, sd, acts in ((0, 'p1', pos['actual']), (1, 'p2', pos['their_actual'])):   # game's page thread died on it)
         out[sd] = []; best = max((o['v'] for sl in e['sides'][s]['slots'] for o in sl['options']), default=1)
         for sl in e['sides'][s]['slots']:
             a = acts[sl['slot']]; a = a['choice'] if a else None
@@ -94,10 +95,10 @@ def merge(ws, opts):
     out = {}
     for sd in ('p1', 'p2'):
         out[sd] = []; V = sum(w * o['value'][sd] for w, o in zip(ws, opts)) if all('value' in o for o in opts) else None
-        for i, sl in enumerate(opts[0][sd]):
+        for i, sl in enumerate(next((o[sd] for o in opts if o[sd]), [])):
             acc = {}
             for w, o in zip(ws, opts):
-                for x in o[sd][i]['options']:
+                for x in (o[sd][i]['options'] if i < len(o[sd]) else []):   # a hypothesis with no choices to make has no slots
                     a = acc.setdefault(x['l'], {'l': x['l'], 'w': 0, 'vw': 0, 'n': 0, 'played': x['played'], 'rough': x['rough']})
                     a['w'] += w * x['w']; a['vw'] += w * (x['v'] - o['value'][sd] if V is not None else x['v']); a['n'] += w; a['rough'] = a['rough'] and x['rough']
             out[sd].append({'mon': sl['mon'], 'played': sl['played'],

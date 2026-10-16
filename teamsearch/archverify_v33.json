@@ -1,0 +1,737 @@
+{
+ "Balance": [
+  {
+   "start": "Frankfurt-1",
+   "start_score": 0.6240329576048962,
+   "final_score": 0.626672283686144,
+   "gain": 0.0016277156114038807,
+   "se": 0.025085142266504695,
+   "swaps": [
+    [
+     "Incineroar#3",
+     "Milotic#2"
+    ],
+    [
+     "M-Raichu Y#1",
+     "Kingambit#2"
+    ]
+   ],
+   "team": [
+    "Gholdengo#2",
+    "Volcarona#7",
+    "M-Garchomp Z#1",
+    "Milotic#2",
+    "Rillaboom#2",
+    "Kingambit#2"
+   ]
+  },
+  {
+   "start": "Brisbane-3",
+   "start_score": 0.560919259090868,
+   "final_score": 0.560919259090868,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Garchomp#2",
+    "Sneasler#22",
+    "M-Floette#4",
+    "Incineroar#33",
+    "Rillaboom#1",
+    "Kingambit#1"
+   ]
+  },
+  {
+   "start": "Frankfurt-4",
+   "start_score": 0.5684911164723443,
+   "final_score": 0.5797655891957472,
+   "gain": 0.011290401781911978,
+   "se": 0.021210858518000728,
+   "swaps": [
+    [
+     "M-Floette#9",
+     "M-Raichu Y#1"
+    ]
+   ],
+   "team": [
+    "Gholdengo#2",
+    "M-Dragonite#1",
+    "Incineroar#2",
+    "Rillaboom#1",
+    "Sneasler#8",
+    "M-Raichu Y#1"
+   ]
+  },
+  {
+   "start": "Recife-6",
+   "start_score": 0.6209423143011076,
+   "final_score": 0.6209423143011076,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Rillaboom#1",
+    "Sneasler#80",
+    "M-Dragonite#2",
+    "M-Delphox#3",
+    "Kingambit#11",
+    "Basculegion#9"
+   ]
+  },
+  {
+   "start": "Brisbane-7",
+   "start_score": 0.5981974662432515,
+   "final_score": 0.5981974662432515,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Kingambit#3",
+    "Sneasler#14",
+    "M-Garchomp Z#2",
+    "M-Floette#5",
+    "Rillaboom#1",
+    "Volcarona#4"
+   ]
+  },
+  {
+   "start": "Baltimore-8",
+   "start_score": 0.6189067756875575,
+   "final_score": 0.6189067756875575,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Floette#2",
+    "Kingambit#1",
+    "Rillaboom#1",
+    "Sneasler#3",
+    "Incineroar#17",
+    "M-Delphox#1"
+   ]
+  },
+  {
+   "start": "Frankfurt-8",
+   "start_score": 0.5521757463768642,
+   "final_score": 0.5688898850037791,
+   "gain": 0.015623155450934404,
+   "se": 0.028253218674308075,
+   "swaps": [
+    [
+     "Sneasler#8",
+     "Basculegion#1"
+    ]
+   ],
+   "team": [
+    "M-Floette#2",
+    "Rillaboom#1",
+    "Incineroar#11",
+    "M-Dragonite#1",
+    "Gholdengo#2",
+    "Basculegion#1"
+   ]
+  },
+  {
+   "start": "Louisville-8",
+   "start_score": 0.6330443317071219,
+   "final_score": 0.6330443317071219,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Gholdengo#2",
+    "M-Dragonite#9",
+    "Incineroar#6",
+    "Sneasler#8",
+    "Rillaboom#1",
+    "Garchomp#1"
+   ]
+  },
+  {
+   "start": "Recife-8",
+   "start_score": 0.5970778779420849,
+   "final_score": 0.5970778779420849,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Gholdengo#2",
+    "Incineroar#3",
+    "M-Garchomp Z#1",
+    "Rillaboom#1",
+    "M-Floette#1",
+    "Volcarona#1"
+   ]
+  }
+ ],
+ "Tailwind": [
+  {
+   "start": "Brisbane-2",
+   "start_score": 0.6108924160330567,
+   "final_score": 0.6525761229698406,
+   "gain": 0.04092119672452556,
+   "se": 0.025745307370821393,
+   "swaps": [
+    [
+     "Rillaboom#1",
+     "Kommo-o#1"
+    ]
+   ],
+   "team": [
+    "M-Floette#1",
+    "Kingambit#4",
+    "Basculegion#8",
+    "Kommo-o#1",
+    "M-Salamence#5",
+    "Sneasler#15"
+   ]
+  },
+  {
+   "start": "Recife-3",
+   "start_score": 0.5979153152556032,
+   "final_score": 0.5979153152556032,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Salamence#24",
+    "Basculegion#8",
+    "Kingambit#4",
+    "Sneasler#15",
+    "Rillaboom#5",
+    "M-Floette#1"
+   ]
+  },
+  {
+   "start": "Baltimore-5",
+   "start_score": 0.638278501150664,
+   "final_score": 0.6238460491026435,
+   "gain": -0.01420861730955533,
+   "se": 0.026459778768899652,
+   "swaps": [
+    [
+     "M-Raichu Y#1",
+     "Excadrill#2"
+    ]
+   ],
+   "team": [
+    "Milotic#2",
+    "Excadrill#2",
+    "Ceruledge#1",
+    "M-Staraptor#1",
+    "Gholdengo#2",
+    "Rillaboom#1"
+   ]
+  },
+  {
+   "start": "Louisville-5",
+   "start_score": 0.6295542851840643,
+   "final_score": 0.6295542851840643,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Rillaboom#2",
+    "Kingambit#4",
+    "Sneasler#15",
+    "M-Floette#10",
+    "M-Salamence#5",
+    "Basculegion#16"
+   ]
+  },
+  {
+   "start": "Baltimore-7",
+   "start_score": 0.5864911320339834,
+   "final_score": 0.6065894761548098,
+   "gain": 0.019923046582547763,
+   "se": 0.026872902065396557,
+   "swaps": [
+    [
+     "M-Raichu Y#1",
+     "Basculegion#1"
+    ]
+   ],
+   "team": [
+    "Arcanine-H#1",
+    "Rillaboom#1",
+    "Gholdengo#1",
+    "M-Staraptor#1",
+    "Basculegion#1",
+    "Sylveon#2"
+   ]
+  },
+  {
+   "start": "Louisville-7",
+   "start_score": 0.6108924160330567,
+   "final_score": 0.6108924160330567,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Basculegion#8",
+    "Rillaboom#1",
+    "M-Floette#1",
+    "Sneasler#15",
+    "M-Salamence#5",
+    "Kingambit#4"
+   ]
+  },
+  {
+   "start": "Recife-7",
+   "start_score": 0.5699287780073355,
+   "final_score": 0.5699287780073355,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Sneasler#5",
+    "M-Salamence#1",
+    "M-Raichu Y#2",
+    "Rillaboom#1",
+    "Volcarona#38",
+    "Arcanine-H#1"
+   ]
+  }
+ ],
+ "Rain + Sun": [
+  {
+   "start": "Brisbane-1",
+   "start_score": 0.6502920411966561,
+   "final_score": 0.6502920411966561,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Archaludon#1",
+    "Pelipper#1",
+    "Grimmsnarl#1",
+    "M-Charizard Y#2",
+    "M-Garchomp Z#2",
+    "Venusaur#1"
+   ]
+  },
+  {
+   "start": "Baltimore-2",
+   "start_score": 0.6157826685124987,
+   "final_score": 0.6157826685124987,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Golisopod#1",
+    "M-Charizard Y#2",
+    "Politoed#2",
+    "Archaludon#4",
+    "Grimmsnarl#1",
+    "Farigiraf#4"
+   ]
+  },
+  {
+   "start": "Louisville-2",
+   "start_score": 0.6633355861818808,
+   "final_score": 0.6633355861818808,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Archaludon#6",
+    "M-Charizard Y#6",
+    "Pelipper#35",
+    "Venusaur#1",
+    "Grimmsnarl#3",
+    "Garchomp#31"
+   ]
+  },
+  {
+   "start": "Louisville-3",
+   "start_score": 0.6369624951209683,
+   "final_score": 0.6369624951209683,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Venusaur#3",
+    "Politoed#2",
+    "Grimmsnarl#1",
+    "M-Raichu X#3",
+    "Archaludon#4",
+    "M-Charizard Y#6"
+   ]
+  },
+  {
+   "start": "Recife-4",
+   "start_score": 0.6413661698470956,
+   "final_score": 0.6413661698470956,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Swampert#1",
+    "Pelipper#1",
+    "Venusaur#1",
+    "M-Charizard Y#2",
+    "Grimmsnarl#2",
+    "Archaludon#1"
+   ]
+  },
+  {
+   "start": "Brisbane-8",
+   "start_score": 0.7001593102430348,
+   "final_score": 0.7001593102430348,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Archaludon#1",
+    "Grimmsnarl#2",
+    "Venusaur#1",
+    "Pelipper#3",
+    "M-Swampert#1",
+    "M-Charizard Y#6"
+   ]
+  }
+ ],
+ "Sun": [
+  {
+   "start": "Louisville-1",
+   "start_score": 0.6163043402643777,
+   "final_score": 0.6730789177428573,
+   "gain": 0.05655545261865677,
+   "se": 0.02795075179208029,
+   "swaps": [
+    [
+     "Farigiraf#56",
+     "Kingambit#5"
+    ]
+   ],
+   "team": [
+    "Kingambit#5",
+    "Incineroar#21",
+    "M-Charizard Y#4",
+    "Sylveon#16",
+    "Venusaur#1",
+    "Garchomp#1"
+   ]
+  },
+  {
+   "start": "Recife-1",
+   "start_score": 0.6257446574840227,
+   "final_score": 0.6257446574840227,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Sylveon#6",
+    "Toxapex#1",
+    "Garchomp#1",
+    "Venusaur#2",
+    "M-Charizard Y#3",
+    "Incineroar#2"
+   ]
+  },
+  {
+   "start": "Frankfurt-2",
+   "start_score": 0.6395453442206251,
+   "final_score": 0.6395453442206251,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Farigiraf#64",
+    "M-Garchomp Z#3",
+    "Sneasler#20",
+    "Torkoal#1",
+    "Sylveon#3",
+    "Incineroar#21"
+   ]
+  },
+  {
+   "start": "Frankfurt-3",
+   "start_score": 0.5412796267833375,
+   "final_score": 0.5412796267833375,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Charizard Y#4",
+    "Kingambit#4",
+    "M-Meowstic-M#1",
+    "Sneasler#4",
+    "Indeedee#20",
+    "Kommo-o#1"
+   ]
+  },
+  {
+   "start": "Recife-5",
+   "start_score": 0.574513122318819,
+   "final_score": 0.597392340796557,
+   "gain": 0.023365926486616617,
+   "se": 0.02404535610942112,
+   "swaps": [
+    [
+     "Farigiraf#64",
+     "Farigiraf#1"
+    ]
+   ],
+   "team": [
+    "Torkoal#9",
+    "Incineroar#21",
+    "Farigiraf#1",
+    "Sneasler#20",
+    "Sylveon#3",
+    "M-Garchomp Z#3"
+   ]
+  },
+  {
+   "start": "Frankfurt-6",
+   "start_score": 0.6348665810647397,
+   "final_score": 0.6348665810647397,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Toxapex#1",
+    "Sylveon#5",
+    "Garchomp#1",
+    "Incineroar#2",
+    "Venusaur#2",
+    "M-Charizard Y#3"
+   ]
+  }
+ ],
+ "Rain": [
+  {
+   "start": "Recife-2",
+   "start_score": 0.6105157621558458,
+   "final_score": 0.6438950103811132,
+   "gain": 0.034664995629455866,
+   "se": 0.026729271241472213,
+   "swaps": [
+    [
+     "Incineroar#21",
+     "Basculegion#1"
+    ],
+    [
+     "Archaludon#18",
+     "Archaludon#1"
+    ],
+    [
+     "M-Garchomp Z#1",
+     "M-Staraptor#1"
+    ]
+   ],
+   "team": [
+    "M-Staraptor#1",
+    "Politoed#2",
+    "Basculegion#1",
+    "Archaludon#1",
+    "Farigiraf#68",
+    "M-Golisopod#1"
+   ]
+  },
+  {
+   "start": "Brisbane-4",
+   "start_score": 0.620285189631556,
+   "final_score": 0.6941022216155646,
+   "gain": 0.07427209962714211,
+   "se": 0.02569732564092851,
+   "swaps": [
+    [
+     "Sneasler#5",
+     "M-Staraptor#1"
+    ]
+   ],
+   "team": [
+    "M-Staraptor#1",
+    "Basculegion#1",
+    "M-Floette#1",
+    "Archaludon#2",
+    "Pelipper#2",
+    "Incineroar#10"
+   ]
+  },
+  {
+   "start": "Louisville-4",
+   "start_score": 0.6905348221445528,
+   "final_score": 0.6905348221445528,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Gholdengo#18",
+    "Archaludon#1",
+    "Pelipper#1",
+    "M-Swampert#1",
+    "M-Staraptor#1",
+    "Sinistcha#23"
+   ]
+  },
+  {
+   "start": "Brisbane-6",
+   "start_score": 0.5816296582570227,
+   "final_score": 0.5816296582570227,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Salamence#15",
+    "Armarouge#10",
+    "Sneasler#79",
+    "Indeedee-F#22",
+    "Politoed#4",
+    "Archaludon#4"
+   ]
+  },
+  {
+   "start": "Louisville-6",
+   "start_score": 0.6611396262084029,
+   "final_score": 0.6036686384543382,
+   "gain": -0.05924374212899947,
+   "se": 0.02765174600519028,
+   "swaps": [
+    [
+     "M-Garchomp Z#2",
+     "Politoed#2"
+    ]
+   ],
+   "team": [
+    "M-Golisopod#1",
+    "Politoed#2",
+    "Pelipper#31",
+    "Archaludon#4",
+    "Farigiraf#2",
+    "Sneasler#100"
+   ]
+  }
+ ],
+ "Perish": [
+  {
+   "start": "Baltimore-3",
+   "start_score": 0.5056825765456576,
+   "final_score": 0.5413178655885266,
+   "gain": 0.036462499718770365,
+   "se": 0.029131518740497003,
+   "swaps": [
+    [
+     "Rillaboom#7",
+     "Garchomp#1"
+    ]
+   ],
+   "team": [
+    "Archaludon#3",
+    "Incineroar#9",
+    "Politoed#1",
+    "Vivillon#1",
+    "Garchomp#1",
+    "M-Gengar#1"
+   ]
+  },
+  {
+   "start": "Brisbane-5",
+   "start_score": 0.6068068628113292,
+   "final_score": 0.6068068628113292,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Rillaboom#1",
+    "M-Gengar#5",
+    "Incineroar#76",
+    "Kingambit#1",
+    "Sneasler#1",
+    "M-Floette#2"
+   ]
+  },
+  {
+   "start": "Frankfurt-5",
+   "start_score": 0.3753694315120372,
+   "final_score": 0.538054890593993,
+   "gain": 0.1626654833163219,
+   "se": 0.026622597249191183,
+   "swaps": [
+    [
+     "Politoed#1",
+     "Kingambit#1"
+    ]
+   ],
+   "team": [
+    "Vivillon#1",
+    "Kingambit#1",
+    "M-Gengar#1",
+    "Incineroar#18",
+    "Rillaboom#20",
+    "Kommo-o#1"
+   ]
+  }
+ ],
+ "Snow": [
+  {
+   "start": "Baltimore-6",
+   "start_score": 0.6659063621755512,
+   "final_score": 0.6659063621755512,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Froslass#1",
+    "M-Raichu Y#2",
+    "Rillaboom#3",
+    "Kingambit#1",
+    "Sneasler#5",
+    "Arcanine-H#1"
+   ]
+  },
+  {
+   "start": "Frankfurt-7",
+   "start_score": 0.6499166328674066,
+   "final_score": 0.6499166328674066,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Froslass#1",
+    "Incineroar#3",
+    "Basculegion#1",
+    "M-Glimmora#1",
+    "Rillaboom#2",
+    "Volcarona#1"
+   ]
+  }
+ ],
+ "Sand": [
+  {
+   "start": "Baltimore-1",
+   "start_score": 0.5214250120033259,
+   "final_score": 0.5214250120033259,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Excadrill#2",
+    "M-Salamence#2",
+    "M-Tyranitar#1",
+    "Indeedee#1",
+    "Corviknight#1",
+    "Sneasler#7"
+   ]
+  }
+ ],
+ "Indeedee TR": [
+  {
+   "start": "Baltimore-4",
+   "start_score": 0.5820922700295241,
+   "final_score": 0.5820922700295241,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Salamence#9",
+    "Arcanine-H#1",
+    "Indeedee#6",
+    "Milotic#5",
+    "M-Metagross#3",
+    "Sneasler#32"
+   ]
+  }
+ ]
+}

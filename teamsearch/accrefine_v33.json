@@ -1,0 +1,476 @@
+{
+ "Louisville-8": {
+  "team": [
+   "Gholdengo#2",
+   "M-Dragonite#9",
+   "Incineroar#6",
+   "Sneasler#5",
+   "Rillaboom#2",
+   "Garchomp#1"
+  ],
+  "path": [
+   {
+    "out": "Sneasler#8",
+    "into": "Sneasler#5",
+    "accurate_gain": 1,
+    "diff": -6.668336174946599e-05,
+    "se": 0.017683512503930396
+   },
+   {
+    "out": "Rillaboom#1",
+    "into": "Rillaboom#2",
+    "accurate_gain": 1,
+    "diff": -0.013205537621473971,
+    "se": 0.01672353887397079
+   }
+  ],
+  "done": true,
+  "accurate0": 19,
+  "total": {
+   "diff": -0.027456937601672886,
+   "se": 0.02382424077304692,
+   "before": 0.6273689292602496,
+   "after": 0.6001743926417489
+  }
+ },
+ "Frankfurt-1": {
+  "team": [
+   "Gholdengo#2",
+   "Volcarona#10",
+   "M-Garchomp Z#1",
+   "Milotic#8",
+   "Rillaboom#2",
+   "Kingambit#2"
+  ],
+  "path": [
+   {
+    "out": "Volcarona#7",
+    "into": "Volcarona#10",
+    "accurate_gain": 1,
+    "diff": 0.056931189413986207,
+    "se": 0.027374931955581085
+   },
+   {
+    "out": "Milotic#2",
+    "into": "Milotic#4",
+    "accurate_gain": 1,
+    "diff": -0.0023090853745459895,
+    "se": 0.021371316560057273
+   },
+   {
+    "out": "Milotic#4",
+    "into": "Milotic#8",
+    "accurate_gain": 1,
+    "diff": 0.008332297681566672,
+    "se": 0.01390158413711545
+   }
+  ],
+  "done": true,
+  "accurate0": 20,
+  "total": {
+   "diff": -0.07630849225108277,
+   "se": 0.026166962601802273,
+   "before": 0.6341372735715002,
+   "after": 0.5568189837181868
+  }
+ },
+ "Brisbane-2": {
+  "team": [
+   "M-Floette#1",
+   "Kingambit#4",
+   "Basculegion#8",
+   "Kommo-o#1",
+   "M-Salamence#5",
+   "Sneasler#15"
+  ],
+  "path": [],
+  "done": true,
+  "accurate0": 24
+ },
+ "Baltimore-5": {
+  "team": [
+   "Milotic#3",
+   "Excadrill#4",
+   "Ceruledge#1",
+   "M-Staraptor#1",
+   "Gholdengo#2",
+   "Rillaboom#2"
+  ],
+  "path": [
+   {
+    "out": "Rillaboom#1",
+    "into": "Rillaboom#2",
+    "accurate_gain": 1,
+    "diff": 0.01837323042950459,
+    "se": 0.02384355053609307
+   },
+   {
+    "out": "Excadrill#2",
+    "into": "Excadrill#4",
+    "accurate_gain": 1,
+    "diff": 0.05574420305843124,
+    "se": 0.024629559632852897
+   },
+   {
+    "out": "Milotic#2",
+    "into": "Milotic#3",
+    "accurate_gain": 1,
+    "diff": 0.00014048492216650382,
+    "se": 0.02645638310834185
+   }
+  ],
+  "done": true,
+  "accurate0": 18,
+  "total": {
+   "diff": -0.020851183292143083,
+   "se": 0.028721095863906355,
+   "before": 0.6179245391650052,
+   "after": 0.597122993239442
+  }
+ },
+ "Brisbane-8": {
+  "team": [
+   "Archaludon#1",
+   "Grimmsnarl#2",
+   "Venusaur#9",
+   "Pelipper#3",
+   "M-Swampert#1",
+   "M-Charizard Y#6"
+  ],
+  "path": [
+   {
+    "out": "Venusaur#1",
+    "into": "Venusaur#9",
+    "accurate_gain": 1,
+    "diff": 0.014155754060758134,
+    "se": 0.020619621232596006
+   }
+  ],
+  "done": true,
+  "accurate0": 21,
+  "total": {
+   "diff": 0.013811550608550742,
+   "se": 0.019455559599679834,
+   "before": 0.653622876712234,
+   "after": 0.6675114161097869
+  }
+ },
+ "Louisville-3": {
+  "team": [
+   "Venusaur#3",
+   "Politoed#3",
+   "Grimmsnarl#1",
+   "M-Raichu X#3",
+   "Archaludon#3",
+   "M-Charizard Y#6"
+  ],
+  "path": [
+   {
+    "out": "Archaludon#4",
+    "into": "Archaludon#3",
+    "accurate_gain": 1,
+    "diff": 0.01237714593472347,
+    "se": 0.0275663340522521
+   },
+   {
+    "out": "Politoed#2",
+    "into": "Politoed#3",
+    "accurate_gain": 1,
+    "diff": 0.004569388145141387,
+    "se": 0.026525962456360363
+   }
+  ],
+  "done": true,
+  "accurate0": 20,
+  "total": {
+   "diff": -0.047160745604240474,
+   "se": 0.027759500511441326,
+   "before": 0.6327890894524627,
+   "after": 0.5865386794382872
+  }
+ },
+ "Louisville-1": {
+  "team": [
+   "Kingambit#5",
+   "Incineroar#21",
+   "M-Charizard Y#4",
+   "Sylveon#16",
+   "Venusaur#9",
+   "Garchomp#2"
+  ],
+  "path": [
+   {
+    "out": "Venusaur#1",
+    "into": "Venusaur#9",
+    "accurate_gain": 1,
+    "diff": 0.007204282849931779,
+    "se": 0.015763371531498423
+   },
+   {
+    "out": "Garchomp#1",
+    "into": "Garchomp#2",
+    "accurate_gain": 1,
+    "diff": -0.010762058086174031,
+    "se": 0.02648532308601457
+   }
+  ],
+  "done": true,
+  "accurate0": 20,
+  "total": {
+   "diff": -0.029579560906028254,
+   "se": 0.027021603693805827,
+   "before": 0.634128402096292,
+   "after": 0.6044989440809436
+  }
+ },
+ "Frankfurt-2": {
+  "team": [
+   "Farigiraf#64",
+   "M-Garchomp Z#1",
+   "Sneasler#5",
+   "Torkoal#1",
+   "Sylveon#5",
+   "Incineroar#21"
+  ],
+  "path": [
+   {
+    "out": "M-Garchomp Z#3",
+    "into": "M-Garchomp Z#1",
+    "accurate_gain": 1,
+    "diff": 0.06566140566328561,
+    "se": 0.026762734753939272
+   },
+   {
+    "out": "Sneasler#20",
+    "into": "Sneasler#5",
+    "accurate_gain": 1,
+    "diff": 0.014004896567892909,
+    "se": 0.02359827312479364
+   },
+   {
+    "out": "Sylveon#3",
+    "into": "Sylveon#5",
+    "accurate_gain": 1,
+    "diff": 0.0029005469397165888,
+    "se": 0.01463406973718872
+   }
+  ],
+  "done": true,
+  "accurate0": 21,
+  "total": {
+   "diff": 0.023505147798456694,
+   "se": 0.026337287915943752,
+   "before": 0.5808116669720094,
+   "after": 0.6044673530772094
+  }
+ },
+ "Brisbane-4": {
+  "team": [
+   "M-Staraptor#1",
+   "Basculegion#1",
+   "M-Floette#1",
+   "Archaludon#2",
+   "Pelipper#2",
+   "Incineroar#3"
+  ],
+  "path": [
+   {
+    "out": "Incineroar#10",
+    "into": "Incineroar#3",
+    "accurate_gain": 1,
+    "diff": 0.036712682490299645,
+    "se": 0.01898043679706997
+   }
+  ],
+  "done": true,
+  "accurate0": 23,
+  "total": {
+   "diff": 0.010728824969294525,
+   "se": 0.014886037867743084,
+   "before": 0.692087130668208,
+   "after": 0.7028665880444056
+  }
+ },
+ "Louisville-4": {
+  "team": [
+   "Gholdengo#18",
+   "Archaludon#1",
+   "Pelipper#1",
+   "M-Swampert#1",
+   "M-Staraptor#1",
+   "Sinistcha#23"
+  ],
+  "path": [],
+  "done": true,
+  "accurate0": 22
+ },
+ "Brisbane-5": {
+  "team": [
+   "Rillaboom#2",
+   "M-Gengar#5",
+   "Incineroar#76",
+   "Kingambit#1",
+   "Sneasler#5",
+   "M-Floette#2"
+  ],
+  "path": [
+   {
+    "out": "Sneasler#1",
+    "into": "Sneasler#5",
+    "accurate_gain": 1,
+    "diff": -0.006267930725954881,
+    "se": 0.02592722065594084
+   },
+   {
+    "out": "Rillaboom#1",
+    "into": "Rillaboom#2",
+    "accurate_gain": 1,
+    "diff": 0.0008409987380739749,
+    "se": 0.022921336127330116
+   }
+  ],
+  "done": true,
+  "accurate0": 22,
+  "total": {
+   "diff": -0.07510828734900876,
+   "se": 0.02602821278180762,
+   "before": 0.6181428441854441,
+   "after": 0.5428126289411142
+  }
+ },
+ "Baltimore-3": {
+  "team": [
+   "Archaludon#3",
+   "Incineroar#9",
+   "Politoed#1",
+   "Vivillon#1",
+   "Garchomp#2",
+   "M-Gengar#1"
+  ],
+  "path": [
+   {
+    "out": "Garchomp#1",
+    "into": "Garchomp#2",
+    "accurate_gain": 1,
+    "diff": -0.0009217613164379127,
+    "se": 0.02646023346480832
+   }
+  ],
+  "done": true,
+  "accurate0": 22,
+  "total": {
+   "diff": -0.06637887794533218,
+   "se": 0.02624517054470666,
+   "before": 0.5944820285161888,
+   "after": 0.5281287834901343
+  }
+ },
+ "Baltimore-6": {
+  "team": [
+   "M-Froslass#1",
+   "M-Raichu Y#2",
+   "Rillaboom#4",
+   "Kingambit#1",
+   "Sneasler#5",
+   "Arcanine-H#1"
+  ],
+  "path": [
+   {
+    "out": "Rillaboom#3",
+    "into": "Rillaboom#4",
+    "accurate_gain": 1,
+    "diff": -0.0017976186770608483,
+    "se": 0.023396910578779097
+   }
+  ],
+  "done": true,
+  "accurate0": 22,
+  "total": {
+   "diff": 0.008255901034579564,
+   "se": 0.022913768406221842,
+   "before": 0.6365096876047658,
+   "after": 0.6447707991968845
+  }
+ },
+ "Frankfurt-7": {
+  "team": [
+   "M-Froslass#1",
+   "Incineroar#3",
+   "Basculegion#1",
+   "M-Glimmora#1",
+   "Rillaboom#2",
+   "Volcarona#8"
+  ],
+  "path": [
+   {
+    "out": "Volcarona#1",
+    "into": "Volcarona#8",
+    "accurate_gain": 1,
+    "diff": -0.010306214253362755,
+    "se": 0.02599136085597497
+   }
+  ],
+  "done": true,
+  "accurate0": 23,
+  "total": {
+   "diff": -0.0012367713656807112,
+   "se": 0.022184580503136715,
+   "before": 0.6187574510192166,
+   "after": 0.6178167063070389
+  }
+ },
+ "Baltimore-1": {
+  "team": [
+   "Excadrill#2",
+   "M-Salamence#2",
+   "M-Tyranitar#1",
+   "Indeedee#1",
+   "Corviknight#1",
+   "Sneasler#7"
+  ],
+  "path": [],
+  "done": true,
+  "accurate0": 20
+ },
+ "Baltimore-4": {
+  "team": [
+   "M-Salamence#3",
+   "Arcanine-H#1",
+   "Indeedee#6",
+   "Milotic#8",
+   "M-Metagross#3",
+   "Sneasler#9"
+  ],
+  "path": [
+   {
+    "out": "M-Salamence#9",
+    "into": "M-Salamence#3",
+    "accurate_gain": 2,
+    "diff": -0.0014966612910339147,
+    "se": 0.01659811723526496
+   },
+   {
+    "out": "Milotic#5",
+    "into": "Milotic#8",
+    "accurate_gain": 1,
+    "diff": 0.008326059269854722,
+    "se": 0.021397899600536653
+   },
+   {
+    "out": "Sneasler#32",
+    "into": "Sneasler#9",
+    "accurate_gain": 1,
+    "diff": 0.021966316726046518,
+    "se": 0.027368355617740637
+   }
+  ],
+  "done": true,
+  "accurate0": 19,
+  "total": {
+   "diff": -0.08627515424154361,
+   "se": 0.027395015657768286,
+   "before": 0.6324671619464615,
+   "after": 0.5455820996707591
+  }
+ }
+}

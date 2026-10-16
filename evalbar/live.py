@@ -23,10 +23,21 @@ FORMATS = {'bo1': 'gen9championsvgc2026regmc', 'bo3': 'gen9championsvgc2026regmc
 TOPK = 3; CAL_V25 = 0.7538                       # the rescale fitted for champ-battle-v25 with egvalue9_sym2 (accuracy.py compare)
 # the engine the eval bar reads with (the user, 2026-10-13: "lets move both over"): champ-battle-v30 (v29 fixed) with the learned value net, set as the
 # bot runs it (Battle sim) but without the bot's own-side rules (EG_LAST_PROTECT, EG_NO_DOUBLE_PROTECT). Its reads go to files named for it
-# (<tag>_eval_v30.jsonl, _refined_v30, _luck_v30); v25's stay readable, each rescaled with its own CAL, until a turn is read again
-ENGINE = 'v31'                                                               # v31 (Battle sim, 2026-10-13): Imprison's source is its holder; a loaded position's disables (Choice lock, Disable, Taunt) are recomputed
-CAL = 0.676                                                                  # the rescale (accuracy.py compare, 3,968 replay positions): v31 0.676, log loss 0.5186 against v25's 0.5240 (v29: 0.676, 0.5185)
-EVAL_ENV = {'CHAMP_BIN': os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v31'), 'EG_VNET': os.path.join(C.MAIN, 'bot', 'value', 'vnet_h64_search_acc.json'),
+# (<tag>_eval_<ENGINE>.jsonl, _refined_<ENGINE>, _luck_<ENGINE>); earlier engines' (EARLIER) stay readable, each rescaled with its own CAL, until a
+# turn is read again, and a turn or luck pass read by one is not read again
+ENGINE = 'v34'                                                               # v34 (Battle sim, 2026-10-14): v31 plus the immune-target filter judging a move by its type as used
+                                                                             # (v32) and a Mega copy by the Mega's ability (v33): an -ate move into a Ghost, Scrappy Fake Out; 1.25x faster
+# each engine's rescale for the bar (accuracy.py compare, 32 seeds staged). v31's and v34's (2026-10-16): Battle sim's rebuild of the 891 hold
+# games through today's spots.specs (pssim/results/value2/real_hold.pos.jsonl, 6,381 positions; on the 560 calibration games alone 0.754 and
+# 0.758). The rebuilt positions predict better: on the 560 games' 3,968, v31 0.5003 against 0.5172 on the Oct 5 build (-0.0169 +- 0.0049);
+# v34 0.4997, -0.0004 +- 0.0003 against v31 on all 6,381. The bar's v31 reads were mostly of positions built this way (live.specs_for, then
+# battlestate from 2026-10-14), so they take the new weight
+CALS = {'v25': CAL_V25, 'v31': 0.782, 'v34': 0.785}
+BAR_CAL = CALS[ENGINE]
+EARLIER = [('', CALS['v25']), ('_v31', CALS['v31'])]                         # earlier engines' reads (file suffix, CAL), oldest first: shown with their own CAL until read again
+CAL = 0.676                                                                  # the bot's, not the bar's: bot/brain.py, position.py, contempt.py and contempt_bot.py read live.CAL (v31's
+                                                                             # on the Oct 5 calibration positions, log loss 0.5186); a change here changes the live bot's play
+EVAL_ENV = {'CHAMP_BIN': os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v34'), 'EG_VNET': os.path.join(C.MAIN, 'bot', 'value', 'vnet_h64_search_acc.json'),
             'RACE_PRIO': '1', 'FEATS22': '1', 'EG_MEGA_TIE': '0', 'CALC_DATA': '../native/champions_data_full.json', 'CHAMP_DATA': 'engine_data_full.json'}
 # the full engine data (every species, move, item and ability Showdown knows; needs champ-battle-v17 or later): spectated teams can be
 # anything. v23 (2026-10-09) gives v17's values wherever v17 handled the turn, and handles more abilities, items and moves (Baton Pass too).
@@ -207,7 +218,7 @@ class Live:
         s.tag = tag or (room.split('-')[-1] if not re.search(r'-\d+-[a-z0-9]+$', room) else room.split('-')[-2])
         s.bo3 = 'bo3' in room if room else logfile is not None; s.threads = threads; s.port = port; os.makedirs(OUT, exist_ok=True)
         s.log = logfile or os.path.join(OUT, f'{s.tag}.log'); s.evf = os.path.join(OUT, f'{s.tag}_eval_{ENGINE}.jsonl'); s.data = None; s.status = 'connecting'
-        s.evf_old = os.path.join(OUT, f'{s.tag}_eval.jsonl'); s.lf_old = os.path.join(OUT, f'{s.tag}_luck.jsonl')   # champ-battle-v25's reads, until read again
+        s.prior = [{k: os.path.join(OUT, f'{s.tag}_{k}{x}.jsonl') for k in ('eval', 'refined', 'luck')} | {'cal': c} for x, c in EARLIER]   # earlier engines' reads
         s.weights = {}; s.hyp = {}; s.poscache = {}; s.over = False; s.skip = {}
         s.exact = False; s.team = None; s.back = {}; s.bot_side = None; s.held = None; s.spread_why = {}
         s.luck = False; s.lf = os.path.join(OUT, f'{s.tag}_luck_{ENGINE}.jsonl'); s.luck_state = None; s.lweights = {}; s.dirty = False; s.page_cache = None
@@ -266,7 +277,7 @@ class Live:
         for t in [t for t in s.weights if t >= t0]: s.weights.pop(t, None); s.hyp.pop(t, None)
         s.poscache = {k: v for k, v in s.poscache.items() if k[0] < t0}
         with LUCK:                                                           # a background read under way ends first; its turns go too
-            for f in (s.evf, s.rf, s.evf_old):
+            for f in [s.evf, s.rf] + [p[k] for p in s.prior for k in ('eval', 'refined')]:
                 if os.path.exists(f):
                     keep = [l for l in open(f) if int((re.search(r' t(\d+) ', json.loads(l).get('name', '')) or [0, 0])[1]) < t0]
                     open(f, 'w').writelines(keep)
@@ -342,14 +353,16 @@ class Live:
         return None
     def build(s, log, g):
         """the page's data from everything evaluated so far"""
-        # each name's read: the background one (REFINE_SEEDS) where it is done, else the quick one, else champ-battle-v25's from before the
-        # switch, each rescaled with its own engine's CAL
+        # each name's read: the background one (REFINE_SEEDS) where it is done, else the quick one; this engine's, else the newest earlier
+        # engine's from before a switch, each rescaled with its own engine's CAL
         logit = lambda v: math.log(min(1 - 1e-4, max(1e-4, v)) / (1 - min(1 - 1e-4, max(1e-4, v))))
-        ev, cal = {}, {}; rv = records(s.rf)
-        for src, c in ((records(s.evf_old), CAL_V25), (records(s.evf), CAL), (rv, CAL)):
-            for n, x in src.items(): ev[n] = x; cal[n] = c
+        ev, cal, rv = {}, {}, set()
+        for p in s.prior + [{'eval': s.evf, 'refined': s.rf, 'cal': BAR_CAL}]:
+            for k in ('eval', 'refined'):
+                for n, x in records(p[k]).items():
+                    ev[n] = x; cal[n] = p['cal']; (rv.add if k == 'refined' else rv.discard)(n)
         sc = lambda n: (lambda v: C.sig(cal[n] * logit(v)))
-        lev_new, lev_old = records(s.lf), records(s.lf_old)                 # the luck pass: this engine's, else v25's
+        lucks = [(records(s.lf), BAR_CAL)] + [(records(p['luck']), p['cal']) for p in reversed(s.prior)]   # the luck pass: this engine's, else the newest earlier one
         steps = []; ps = {}; CH = s.checks(log); lps = {}
         for t in s.lweights: lps.update(records(os.path.join(OUT, f'{s.tag}_t{t}_luckpos.jsonl')))
         for step in g['steps']:
@@ -383,7 +396,7 @@ class Live:
             ex = [(w, B.expected(ev[n + ' p1'], ps[n + ' p1']), sc(n + ' p1')) for w, n in zip(ws, names)]; ex = [(w, f(x)) for w, x, f in ex if x is not None]
             after = sum(w * sc(n + ' p1')(ev[n + ' p1']['static']) for w, n in zip(ws, names))   # the value function here, no lookahead
             LW = s.lweights.get(t) or {}
-            lev, lc = (lev_new, CAL) if LW and all(n in lev_new for n in LW) else (lev_old, CAL_V25)
+            lev, lc = next(((L, c) for L, c in lucks if LW and all(n in L for n in LW)), lucks[0])
             lscale = lambda v: C.sig(lc * logit(v))
             if LW and all(n in lev and n in lps for n in LW):                  # the luck pass, in hindsight: both from its own positions
                 ex = [(w, lev[n]['actual_cell']['v'] if lev[n].get('actual_cell') else B.expected(lev[n], lps[n])) for n, w in LW.items()]   # actual_cell: with the
@@ -404,7 +417,7 @@ class Live:
         rating = g['rating']
         game = {'id': s.tag, 'title': 'Live', 'winner': g['winner'], 'forfeit': g['forfeit'], 'perish': g['perish'], 'rating': rating, 'live': True,
                 'steps': steps, 'final': {'wp': None if g['winner'] is None else 1.0 if g['winner'] == 'p1' else 0.0, 'state': g['final']}, 'acc': None,
-                'engine': {'turns': len(steps), 'seeds': 32, 'staged': True, 'bar': True, 'cal': CAL},
+                'engine': {'turns': len(steps), 'seeds': 32, 'staged': True, 'bar': True, 'cal': BAR_CAL},
                 'luck': {'p1': sum(lk), 'turns': len(lk)} if lk and s.luck_state == 'done' else None}
         d = {'games': [game], 'live': {'url': 'data.json', 'status': s.status, 'format': s.fmt or ('Bo3, open team sheets' if s.bo3 else 'Bo1, closed team sheets')}}
         blob = json.dumps(d, ensure_ascii=False); B.leak_check(blob, [h for h in g['_hidden'] if not re.fullmatch(r'Player [12]', h)])   # the broadcast reader's own labels
@@ -425,6 +438,7 @@ class Live:
         for t in turns:
             posf = os.path.join(OUT, f'{s.tag}_t{t}_luckpos.jsonl')         # with the choices made: their cells get every sample, and each
             sp = s.at(log, t, hindsight=True)[0]; s.lweights[t] = {x['name'] + ' p1': w for w, x in sp}
+            if os.path.exists(posf) and any(all(n in records(p['luck']) for n in s.lweights[t]) for p in s.prior): continue   # an earlier engine's: kept
             positions(sp, posf)                                              # side's actual_v (what its choice cost) comes out
             with LUCK: EN.run(posf, s.lf, 1, 32, 1, extra={**EVAL_ENV, 'EVAL_MATRIX': '1'}, nice=19)
             s.dirty = True
@@ -436,10 +450,12 @@ class Live:
         if not sp:
             s.weights[step['turn']] = {}; s.hyp[step['turn']] = H; s.skip[step['turn']] = H.get('missing', [])
             return s.why(s.skip[step['turn']]) + ': ' + ', '.join(s.skip[step['turn']])
-        posf = os.path.join(OUT, f"{s.tag}_t{step['turn']}_pos.jsonl"); positions(sp, posf)
+        posf = os.path.join(OUT, f"{s.tag}_t{step['turn']}_pos.jsonl")
         os.environ['EVAL_TITLE'] = f"Live spectator: turn {step['turn']} ({len(sp)} positions)"
-        have = set(records(s.rf)) | set(records(s.evf)) | set(records(s.evf_old))
-        if not all(x['name'] + ' p1' in have for _, x in sp): EN.run(posf, s.evf, s.threads, s.live_seeds, 1, extra=EVAL_ENV)   # a turn read before is not read again
+        have = set(records(s.rf)) | set(records(s.evf)) | {n for p in s.prior for k in ('eval', 'refined') for n in records(p[k])}
+        read = all(x['name'] + ' p1' in have for _, x in sp)                 # a turn read before is not read again (a page rebuilt after a switch
+        if not read or not os.path.exists(posf): positions(sp, posf)          # keeps its positions file too)
+        if not read: EN.run(posf, s.evf, s.threads, s.live_seeds, 1, extra=EVAL_ENV)
         s.weights[step['turn']] = {x['name']: w for w, x in sp}; s.hyp[step['turn']] = H
         return ''
     def run(s):
@@ -490,7 +506,7 @@ class Live:
             time.sleep(1)
 # the bot page's finished games are saved as their pages (out/live/bot_<n>_page.json) once evaluated and their luck worked out, so a restart
 # reads them instead of rebuilding every turn (about an hour for 400 games). PAGE_V: raise it when a change should rebuild them all
-PAGE_V = 1
+PAGE_V = 2                                                                   # 2: the v34 switch (2026-10-16), every saved page rescaled with its reads' CAL
 # two reads (the user, 2026-10-13: "run a fast version for live, then rerun a slower version in the background"): the bot page reads each turn
 # quickly as it is played (LIVE_SEEDS), and a background pass reads every saved game again (REFINE_SEEDS, newest first, one engine thread at
 # the lowest priority, sharing the luck pass's) and saves its page again; the page marks turns still on the quick read. The engine's budgeted

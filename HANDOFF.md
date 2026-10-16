@@ -1313,6 +1313,16 @@ registrations since its second version) and checks reachability of real logs in 
   the tree search. Checks: 12 bot positions identical to v34 in the staged search with the matrix and in the tree search without it
   (apart from value_se's last digits); bot/position.py contempt_mix runs on the tree's tables. Bot: battlesim-champ29-bot ->
   champ-bot-2026-10-16a (v36). `src_battle_v36.tar.gz`, `bin/champ-battle-v36.sha256`.
+- **champ-battle-v37 (2026-10-16, 6 pm) = v36 + the Perish fixes and a cap on the matrix pass, all inert unless set; the bot's outputs
+  identical (12 positions, the staged search with the matrix and the tree search with it).** (1) VNET_PERISH=1 (s0 / s1: one side's
+  searches): the learned value gets PERISH2's term; the net had no Perish input, so neither side saw a reason to sing, escape or KO
+  the trapper. On the 244 real Bo3 pairings with a Perish side (both players' real brings and leads, the climb's setup): the sim's
+  Perish side 42.6% -> 48.5% against a real 49.2% (real - sim +6.6 +- 3.5 -> +0.7 +- 3.5; with Perish Song brought +9.4 -> +0.3),
+  singing in 9% -> 37% of playouts (humans 32%); self-play of the term against none on them +1.6 +- 1.3. (2) plan::perish_on (a count
+  running, or a Perish Song user with a trapper in or a foe trapped; PERISH_TRAP=1 widens it to any trapper or trapped Pokemon) triggers
+  a deeper tree search: BATTLE_PERISH_DEPTH / _BUDGET (battle4, the climb's setup too), EVAL_PERISH_DEPTH / _BUDGET (evalpos). (3)
+  EVAL_MATRIX_MS caps the tree search's matrix pass (the Bo3 bot's decisions reached 33 s uncapped). `src_battle_v37.tar.gz`,
+  `bin/champ-battle-v37.sha256`. Bot: battlesim-champ29-bot -> champ-bot-2026-10-16b (v37).
 
 ## The climb's simulator against the bot's ladder games (2026-10-16; the user: check the sim before trusting what the climb finds)
 bot/ladder_sim.py + pssim/ladder_sim.sh: the bot's 1,128 saved games (689 Bo3, 439 Bo1) rebuilt at turn 1 as the bot saw them (botpos,

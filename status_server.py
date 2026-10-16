@@ -95,10 +95,10 @@ def box_cards():
             done = tot = 0; newest = st.timestamp(); jobs_done = 0
             for j in p['jobs']:
                 f = os.path.join(d, j['file']) if j.get('file') else None; w = j.get('cost', 1); tot += j['positions'] * w
+                fs = glob.glob(os.path.join(d, j['dir'], '*.json')) if j.get('dir') else []   # a battle run: one result file a start
+                if fs: newest = max(newest, max(os.path.getmtime(x) for x in fs))
                 if os.path.exists(os.path.join(d, j['name'] + '.done')): n = j['positions']; jobs_done += 1
-                elif j.get('dir'):   # a battle run: one result file a start in its folder
-                    fs = glob.glob(os.path.join(d, j['dir'], '*.json')); n = min(j['positions'], len(fs))
-                    if fs: newest = max(newest, max(os.path.getmtime(x) for x in fs))
+                elif j.get('dir'): n = min(j['positions'], len(fs))
                 elif os.path.exists(f): n = min(j['positions'], sum(1 for _ in open(f, errors='replace')))
                 else: n = 0
                 done += n * w

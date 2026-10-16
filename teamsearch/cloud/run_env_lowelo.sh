@@ -6,7 +6,7 @@
 #   RUN_ENV=cloud/run_env_lowelo.sh cloud/relaunch.sh <P> <T>     RUN_ENV=cloud/run_env_lowelo.sh setsid nohup cloud/auto_rounds.sh <cap> 600 &
 export TS_SIM=${TS_SIM:-v33n1} TS_OPP=pool TS_POOL_WEIGHT=blend TS_POOL_KEYS=pool_keys_2026-10-12.json TS_ARCH_LOCK=1
 unset TS_BRING_MODE TS_PERISH
-export TS_BATTLE_BIN=$HOME/champions-sims/native/champ/bin/champ-battle-v34
+export TS_BATTLE_BIN=$PWD/../native/champ/bin/champ-battle-v34       # sourced from teamsearch/: works on a box and on the Mac
 export TS_INDEX=teams/lowelo_start/index.json
 export TS_STATE=climb_lowelo_state.json TS_LOG=climb_lowelo_log.jsonl TS_PROGRESS=climb_lowelo_progress.json
 export TS_CACHE_DIR=cache_lowelo CLIMB_SESSION=climb_lowelo CLIMB_LOG=round_lowelo.log TS_GAME_CACHE=cache_lowelo/games.sqlite

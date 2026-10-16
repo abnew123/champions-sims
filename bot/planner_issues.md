@@ -267,3 +267,16 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
       -0.3 +- 1.0 (depth 2 k0 2 -0.0 +- 1.0). More rolls alone buy nothing; the extra budget is worth it only spent on depth, and depth
       needs that budget (at 1x a position gets about 8 deep rolls, at 4x about 50). Next: whether it holds for the bot (its decision
       time at 4x, the timer), and deep values at 4x as the net's training targets.
+
+20. **Perish Song with the learned value (the user, 2026-10-16: "we need to actually work on fixing it"; TR sheet's note).** The net
+    (the leaf since v28, the bot's and the climb's) had no Perish input: vfeats has no count and plan.rs perish_adj was only added on
+    the sym2 path. So at the leaves a trapped Pokemon on its last count looked healthy, and singing, escaping or KOing the trapper earned
+    nothing. In the bot's 78 games against Gengar teams the sim had us at 83.3% where the opponent sang (real 46.7%), 58.8% where it
+    did not (real 47.6%). **Fix (v37, VNET_PERISH=1): PERISH2's term in the net's log-odds.** On the 244 real Bo3 pairings with a Perish
+    side (pssim/perish_fix.sh, the climb's setup, both players' real brings and leads; humans sang in 32%, the Perish side won 49.2%):
+    sim 42.6% -> 48.5% (real - sim +6.6 +- 3.5 -> +0.7 +- 3.5; with Perish Song brought +9.4 -> +0.3), singing in 9% -> 37% of
+    playouts; self-play of the term against none +1.6 +- 1.3. A Perish-triggered deeper search on top (BATTLE_PERISH_DEPTH 2, 20,000)
+    adds nothing (+0.6); widened to any trapper (PERISH_TRAP) +2.6 +- 3.5. On the bot's own 78 Gengar games the sim moves 63.5 -> 60.3%
+    (real 47.4%): where they sang 83.3 -> 70.0 (15 games); the 44 without the song stay about 12 points high (TR sheet's Shadow Tag
+    question; not seen in human-vs-human games). On in the bot from 6:13 pm (with CAL 0.736 and the matrix cap); offered to Team search
+    and TR sheet.

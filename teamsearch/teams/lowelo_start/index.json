@@ -1,0 +1,302 @@
+{
+ "Ladder-01": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1043,
+  "arch": "Rain",
+  "pid": null,
+  "gids": [
+   "Pelipper#39",
+   "Archaludon#10",
+   "Indeedee-F#55",
+   "M-Lopunny#5",
+   "Basculegion#27",
+   "Incineroar#6"
+  ]
+ },
+ "Ladder-02": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1000,
+  "arch": "Trick Room",
+  "pid": null,
+  "gids": [
+   "Malamar#1",
+   "M-Hawlucha#1",
+   "Snorlax#1",
+   "Sinistcha#30",
+   "Incineroar#103",
+   "Kingambit#35"
+  ]
+ },
+ "Ladder-03": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1050,
+  "arch": "Balance",
+  "pid": null,
+  "gids": [
+   "M-Garchomp Z#1",
+   "M-Floette#1",
+   "Gholdengo#22",
+   "Incineroar#1",
+   "Rillaboom#1",
+   "Sneasler#1"
+  ]
+ },
+ "Ladder-04": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1029,
+  "arch": "Sun",
+  "pid": null,
+  "gids": [
+   "M-Garchomp Z#2",
+   "Incineroar#96",
+   "Rillaboom#69",
+   "M-Charizard Y#4",
+   "Sylveon#6",
+   "Farigiraf#69"
+  ]
+ },
+ "Ladder-05": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1030,
+  "arch": "Balance",
+  "pid": null,
+  "gids": [
+   "Gholdengo#22",
+   "Volcarona#45",
+   "M-Garchomp Z#1",
+   "Incineroar#3",
+   "Rillaboom#1",
+   "M-Raichu Y#1"
+  ]
+ },
+ "Ladder-06": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1041,
+  "arch": "Rain",
+  "pid": null,
+  "gids": [
+   "M-Swampert#2",
+   "Pelipper#7",
+   "Grimmsnarl#14",
+   "Clefable#4",
+   "Archaludon#27",
+   "Sneasler#11"
+  ]
+ },
+ "Ladder-07": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1095,
+  "arch": "Tailwind",
+  "pid": null,
+  "gids": [
+   "M-Salamence#32",
+   "Rillaboom#1",
+   "Arcanine-H#1",
+   "Gholdengo#23",
+   "M-Raichu Y#1",
+   "Sylveon#2"
+  ]
+ },
+ "Ladder-08": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1000,
+  "arch": "Rain",
+  "pid": null,
+  "gids": [
+   "Pelipper#40",
+   "M-Swampert#9",
+   "M-Meganium#3",
+   "Rillaboom#70",
+   "Sylveon#23",
+   "Volcarona#46"
+  ]
+ },
+ "Ladder-09": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1042,
+  "arch": "Tailwind",
+  "pid": null,
+  "gids": [
+   "M-Gallade#1",
+   "Zoroark-Hisui#5",
+   "Scizor#2",
+   "Basculegion#28",
+   "M-Salamence#32",
+   "Sneasler#102"
+  ]
+ },
+ "Ladder-10": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1064,
+  "arch": "Sun",
+  "pid": null,
+  "gids": [
+   "M-Mawile#1",
+   "Farigiraf#92",
+   "Rillaboom#71",
+   "Politoed#12",
+   "Torkoal#13",
+   "M-Camerupt#9"
+  ]
+ },
+ "Ladder-11": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1000,
+  "arch": "Tailwind",
+  "pid": null,
+  "gids": [
+   "M-Golisopod#5",
+   "Cofagrigus#1",
+   "Annihilape#18",
+   "Dragalge#1",
+   "Whimsicott#26",
+   "M-Metagross#22"
+  ]
+ },
+ "Ladder-12": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1069,
+  "arch": "Rain",
+  "pid": null,
+  "gids": [
+   "Basculegion-F#2",
+   "Pelipper#41",
+   "Archaludon#6",
+   "M-Golisopod#5",
+   "Grimmsnarl#3",
+   "Garchomp#38"
+  ]
+ },
+ "Ladder-13": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1000,
+  "arch": "Trick Room",
+  "pid": null,
+  "gids": [
+   "M-Salamence#33",
+   "Sylveon#24",
+   "Farigiraf#93",
+   "Rillaboom#72",
+   "Arboliva#1",
+   "Milotic#21"
+  ]
+ },
+ "Ladder-14": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1053,
+  "arch": "Indeedee TR",
+  "pid": null,
+  "gids": [
+   "M-Gardevoir#9",
+   "M-Absol Z#7",
+   "Indeedee#19",
+   "Empoleon#3",
+   "Volcarona#47",
+   "Sneasler#5"
+  ]
+ },
+ "Ladder-15": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1074,
+  "arch": "Perish",
+  "pid": null,
+  "gids": [
+   "M-Gengar#1",
+   "Incineroar#8",
+   "Politoed#1",
+   "Rillaboom#73",
+   "Volcarona#48",
+   "Garchomp#17"
+  ]
+ },
+ "Ladder-16": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1000,
+  "arch": "Balance",
+  "pid": null,
+  "gids": [
+   "M-Dragonite#1",
+   "M-Floette#2",
+   "Rillaboom#1",
+   "Incineroar#11",
+   "Sneasler#8",
+   "Gholdengo#22"
+  ]
+ },
+ "Ladder-17": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1050,
+  "arch": "Balance",
+  "pid": null,
+  "gids": [
+   "M-Floette#1",
+   "M-Garchomp Z#2",
+   "Rillaboom#69",
+   "Incineroar#67",
+   "Gholdengo#24",
+   "Sneasler#2"
+  ]
+ },
+ "Ladder-18": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1049,
+  "arch": "Balance",
+  "pid": null,
+  "gids": [
+   "M-Dragonite#1",
+   "Sylveon#3",
+   "Gholdengo#23",
+   "Sneasler#49",
+   "Incineroar#11",
+   "Rillaboom#1"
+  ]
+ },
+ "Ladder-19": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1133,
+  "arch": "Trick Room",
+  "pid": null,
+  "gids": [
+   "M-Raichu Y#1",
+   "Farigiraf#35",
+   "Rillaboom#69",
+   "Kingambit#5",
+   "M-Floette#4",
+   "Sneasler#1"
+  ]
+ },
+ "Ladder-20": {
+  "event": "ladder",
+  "place": null,
+  "rating": 1028,
+  "arch": "Indeedee TR",
+  "pid": null,
+  "gids": [
+   "Sneasler#103",
+   "Incineroar#4",
+   "Rillaboom#1",
+   "M-Raichu Y#15",
+   "Indeedee#36",
+   "M-Garchomp Z#18"
+  ]
+ }
+}

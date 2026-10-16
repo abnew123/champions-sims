@@ -33,6 +33,12 @@
       "EVAL_DEPTH": "2",
       "EVAL_DEEP_K0": "2",
       "EVAL_BUDGET_MS": "15000"
+    },
+    "gen9championsvgc2026regmcbo3": {
+      "EVAL_BUDGET": "80000",
+      "EVAL_DEPTH": "2",
+      "EVAL_DEEP_K0": "2",
+      "EVAL_BUDGET_MS": "15000"
     }
   }
 }

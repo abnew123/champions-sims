@@ -182,6 +182,11 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
       joint option the same in 25. On for the Bo1 bot through limits.json "search" (a 15 s cap); the Bo3 bot keeps the staged search,
       since contempt needs the payoff matrix and the tree search does not give one yet. Next: the matrix from the tree's root cells for
       Bo3, and the bot's CAL refit on its own decisions with the new search.
+    - Bo3 too (2026-10-16, 10:18 am; the user: swap if it looks good): v36 gives the tree search's root table as the matrix. contempt.py's
+      live test on the s2 set (999 rated human games, 1,703 decisions, both on v36 with the acc net): contempt 0.5's gain against what
+      people played +0.74 +- 0.09 on the staged search, +0.77 +- 0.09 on the tree search; its extra price against a perfect opponent
+      +0.06 / -0.09 (the one-turn scoring matrices can't credit depth itself, so only the contempt layer is compared here). On for the
+      Bo3 bot with contempt 0.5; Bo1 stays at contempt 0. Both bots restarted at 8:31 am (brain.py loads Python once).
     Caution: earlier depth-like changes (anticipation passes, the full switch matrix) were flat; the equilibrium opponent caps it.
     **Done for v29 (2026-10-13 evening):** Revival Blessing ported (sim.rs: a side that cannot switch keeps the request for a slot with the
     condition, no BeforeSwitchOut for it, the choice names a fainted Pokemon, an order-6 RevivalBlessing action revives it at half HP and

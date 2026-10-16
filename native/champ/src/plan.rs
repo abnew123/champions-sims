@@ -663,6 +663,10 @@ fn perish_adj_mode(b: &Battle, w: &[f64], p2: bool) -> f64 {
 /// Gengar holding Gengarite, a Shadow Tag after its Mega Evolution) or a foe already trapped
 pub fn perish_on(b: &Battle) -> bool {
     if (0..2u8).any(|s| active_alive(b, s).iter().any(|(_, m)| find(&b.p(*m).volatiles, "perishsong").is_some())) { return true; }
+    // PERISH_TRAP=1 (TR sheet, 2026-10-16: the sim overrates us against Mega Gengar teams without Perish Song too): any trapper in (an
+    // active Shadow Tag / Arena Trap / Magnet Pull, or a Gengar holding Gengarite) or any active Pokemon trapped counts as well
+    if perish_trap() && (0..2u8).any(|s| active_alive(b, s).iter().any(|(_, m)| ["shadowtag", "arenatrap", "magnetpull"].contains(&b.p(*m).ability)
+        || b.p(*m).item == "gengarite" || b.p(*m).trapped)) { return true; }
     (0..2u8).any(|s| {
         let act = active_alive(b, s);
         let sings = act.iter().any(|(_, m)| b.p(*m).move_slots.iter().any(|x| x.id == "perishsong" && x.pp > 0 && !x.disabled));
@@ -670,6 +674,7 @@ pub fn perish_on(b: &Battle) -> bool {
                   || active_alive(b, 1 - s).iter().any(|(_, m)| b.p(*m).trapped))
     })
 }
+fn perish_trap() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("PERISH_TRAP").map(|v| v != "0").unwrap_or(false)) }
 fn perish2() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("PERISH2").is_ok()) }
 fn trsym() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("TRSYM").is_ok()) }
 /// who refuses to click Trick Room while it is up: side 0 only (the original rule, written for the slow Trick Room six), or with TRSYM=1

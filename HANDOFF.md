@@ -1305,6 +1305,14 @@ registrations since its second version) and checks reachability of real logs in 
   plan::as_side). For testing a net trained on deeper search targets (pssim/value_box.sh). Checks: 4 BATTLE_EVAL games identical to v34
   without it and with EG_VNET_B = EG_VNET (all fields but timing); with two nets, side 0's turn-one choices match the games where both
   sides use EG_VNET, side 1's those where both use EG_VNET_B. The bot stays on v34. `src_battle_v35.tar.gz`, `bin/champ-battle-v35.sha256`.
+- **champ-battle-v36 (2026-10-16, 8 am) = v35 + BATTLE_ADAPT_SIDE + a payoff matrix from the tree search, games and the bot's current
+  outputs identical.** (1) battle4 BATTLE_ADAPT_SIDE=0|1 (under BATTLE_EVAL): that side chooses by evalpos's own staged search (the bot's),
+  for self-play of a new bot search against the live one (pssim/depth_confirm.sh: depth 2 k0 2 at 80,000 +3.2 +- 1.1 points). (2) evalpos
+  with EVAL_DEPTH and EVAL_MATRIX: as the staged search's matrix pass, the contempt rows / cols get EVAL_SEEDS static rolls, the tree is
+  solved again, and the root's table goes out as "matrix" (deep.rs Node::table / ensure / resolve), so the Bo3 bot's contempt can run on
+  the tree search. Checks: 12 bot positions identical to v34 in the staged search with the matrix and in the tree search without it
+  (apart from value_se's last digits); bot/position.py contempt_mix runs on the tree's tables. Bot: battlesim-champ29-bot ->
+  champ-bot-2026-10-16a (v36). `src_battle_v36.tar.gz`, `bin/champ-battle-v36.sha256`.
 
 ## The climb's simulator against the bot's ladder games (2026-10-16; the user: check the sim before trusting what the climb finds)
 bot/ladder_sim.py + pssim/ladder_sim.sh: the bot's 1,128 saved games (689 Bo3, 439 Bo1) rebuilt at turn 1 as the bot saw them (botpos,

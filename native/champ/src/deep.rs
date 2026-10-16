@@ -131,6 +131,18 @@ impl Node {
         self.x = x; self.y = y; self.rv = rv; self.cv = cv; self.dirty = false;
     }
     /// solve again every node whose cells changed, deepest first, carrying the children's values up
+    /// the table for reading departures from the equilibrium (EVAL_MATRIX with depth, 2026-10-16: the Bo3 bot's contempt): each cell's
+    /// estimate (None where it was never rolled) and its static rolls
+    pub fn table(&self) -> (Vec<Vec<Option<f64>>>, Vec<Vec<usize>>) {
+        let (nm, nt) = (self.msw.len(), self.tsw.len());
+        ((0..nm).map(|i| (0..nt).map(|j| self.cells.get(&(i, j)).map(|c| c.est())).collect()).collect(),
+         (0..nm).map(|i| (0..nt).map(|j| self.cells.get(&(i, j)).map(|c| c.st.len()).unwrap_or(0)).collect()).collect())
+    }
+    /// cell (i, j) brought to at least n static rolls (the staged search's matrix pass); solve again with resolve()
+    pub fn ensure(&mut self, cfg: &Cfg, i: usize, j: usize, n: usize, st: &mut Stats) {
+        while self.cells.get(&(i, j)).map(|c| c.st.len()).unwrap_or(0) < n { self.roll(cfg, i, j, st); self.dirty = true; }
+    }
+    pub fn resolve(&mut self, cfg: &Cfg, st: &mut Stats) { self.refresh(cfg, st); }
     fn refresh(&mut self, cfg: &Cfg, st: &mut Stats) {
         if !self.dirty { return; }
         for c in self.cells.values_mut() { for d in c.deep.iter_mut() { if let Some(n) = d.node.as_mut() { if n.dirty { n.refresh(cfg, st); d.v = n.v; } } } }

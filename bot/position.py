@@ -74,6 +74,13 @@ CONTEMPT_MODEL = os.path.join(ROOT, 'bot', 'out', 'contempt', 'human_model.json'
 def contempt_of(fmt):
     try: return float((json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))).get('contempt') or {}).get(fmt or '', 0.0))
     except Exception: return 0.0
+# search (2026-10-16, the user: depth at 4x once confirmed): limits.json "search": {format: {env}} sets the turn search's engine settings,
+# read every decision, e.g. {"EVAL_BUDGET": "80000", "EVAL_DEPTH": "2", "EVAL_DEEP_K0": "2", "EVAL_BUDGET_MS": "15000"} (deep.rs: the
+# anytime search as a tree; self-play against the live search +3.2 +- 1.1 points, pssim/depth_confirm.sh). Used only where nothing needs
+# the payoff matrix (no contempt, one back-row guess): the tree search does not give one. Replacements keep the staged search.
+def search_of(fmt):
+    try: return {k: str(v) for k, v in ((json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))).get('search') or {}).get(fmt or '') or {}).items()}
+    except Exception: return {}
 def opponent_model(r, M):
     """the human model's probability of each opposing joint option (columns of r's matrix), the slots taken as independent"""
     import exploit_test as XT
@@ -139,7 +146,8 @@ def decide(specs, request, side, threads=2, seeds=32, log=None, cap=None, fmt=No
     posf = os.path.join(OUT, tag + '.pos.jsonl'); outf = os.path.join(OUT, tag + '.eval.jsonl')
     ps = LV.positions(specs, posf)
     c = contempt_of(fmt); multi = len(specs) > 1
-    run_eval(posf, outf, max(threads, len(specs)) if multi else threads, seeds, {'EVAL_MATRIX': '1'} if c > 0 or multi else None)
+    srch = search_of(fmt) if c <= 0 and not multi else {}
+    run_eval(posf, outf, max(threads, len(specs)) if multi else threads, seeds, {'EVAL_MATRIX': '1'} if c > 0 or multi else (srch or None))
     rows = {r['name']: r for r in map(json.loads, open(outf)) if 'error' not in r}
     w0, spec0 = specs[0]; name = spec0['name'] + ' p1'
     r = rows.get(name) or next(iter(rows.values()))

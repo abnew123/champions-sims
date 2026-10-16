@@ -10,6 +10,7 @@ F=(BATTLE_ANTICIPATE=1 DP2=1 RACE=1 RACE_TIES=avg TRSYM=1 RACE_PRIO=1 FEATS22=1 
    EG_VALUE=egvalue9_sym2.json EG_VNET=$PWD/../bot/value/vnet_h64_search_acc.json GRID_DIR=$SP/grid BATTLE_NS=1)
 ln -sf $PWD/$B $SP/battlesim-champ-ladder 2>/dev/null || ln -sf $B $SP/battlesim-champ-ladder
 out=$SP/ladder_out; rm -rf $out
+echo "Climb's simulator vs the bot's real ladder games" > $out.title   # the progress card's name
 echo "$(date +%H:%M:%S) $SP/ladder.jobs.json -> $out, $T threads (the climb's sim on the bot's ladder games)" > ladder_sim.log
 env $F nice -n 10 $SP/battlesim-champ-ladder battle $ED $SP/ladder.jsonl $out $T >> ladder_sim.log 2>&1
 echo "$(date +%H:%M:%S) done:" >> ladder_sim.log

@@ -36,6 +36,8 @@ fn policy() -> [Policy; 2] {
         Ok(v) if v.starts_with("noise:") => Policy::Noise(v[6..].parse().unwrap_or(0.1)),
         _ => Policy::Eq }))
 }
+fn adapt_side() -> Option<u8> { static F: std::sync::OnceLock<Option<u8>> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("BATTLE_ADAPT_SIDE").ok().and_then(|x| x.parse().ok())) }
+fn adapt_seeds() -> usize { static F: std::sync::OnceLock<usize> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("BATTLE_ADAPT_SEEDS").ok().and_then(|x| x.parse().ok()).unwrap_or(32)) }
 fn dp2() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("DP2").is_ok()) }
 /// DP2: side 0's value of a position after one more turn played as a small matrix game (reduced_options for both sides, one seed)
 pub(crate) fn next_value(b: &Battle, cfg: &Cfg, seed: [u16; 4], s: u8) -> f64 {
@@ -324,6 +326,16 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
         if let Some(sides) = crate::deep::battle_eval() {
             let p = crate::deep::Params::from_env(2, 256);
             for s in 0..2u8 {
+                // BATTLE_ADAPT_SIDE=0|1 (2026-10-16): that side chooses by the bot's own search (evalpos eval_one: EVAL_ADAPT's staged seeds,
+                // BATTLE_ADAPT_SEEDS a cell at most, default 32) instead of the anytime search, for testing a new bot search against the
+                // live one
+                if adapt_side() == Some(s) {
+                    if let Some((m0, m1, x2, y2)) = crate::evalpos::mix(&b, cfg, key ^ ((turn as u64) << 40) ^ 0xADA7, adapt_seeds()) {
+                        if s == 0 && m0 == msw { x = x2; } else if s == 1 && m1 == tsw { y = y2; }
+                        else { let u = "BATTLE_ADAPT_SIDE: options differ from battle4's".to_string(); if !uns.contains(&u) { uns.push(u); } }
+                    }
+                    continue;
+                }
                 let [budget, depth] = sides[s as usize];
                 // each side's leaves scored with its own net when EG_VNET_B is set (plan.rs as_side)
                 let Some((root, st)) = crate::plan::as_side(s, || crate::deep::search(&b, cfg, key ^ ((turn as u64) << 40) ^ 0xE7A1, depth, &p, budget, 0, (None, None), std::time::Instant::now())) else { continue };

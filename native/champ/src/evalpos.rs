@@ -126,6 +126,16 @@ fn side_report(b: &Battle, s: u8, opts: &[[PChoice; 2]], w: &[f64], own: &[f64],
     let actual_v = if known && found { opts.iter().position(|c| (0..2).all(|i| !alive[i] || same(&c[i], act[i].as_ref().unwrap()))).map(|q| json!(own[q])).unwrap_or(Value::Null) } else { Value::Null };
     json!({"slots": slots, "joint": jn, "actual_v": actual_v, "actual_found": found})
 }
+thread_local! { static LAST_MIX: std::cell::RefCell<Option<Mix>> = const { std::cell::RefCell::new(None) }; }
+type Mix = (Vec<[PChoice; 2]>, Vec<[PChoice; 2]>, Vec<f64>, Vec<f64>);
+/// the bot's search as a player (2026-10-16, battle4.rs BATTLE_ADAPT_SIDE: the bot's exact search against another in self-play): eval_one
+/// on b with no recorded plays, returning both sides' joint options and solved mixes; None when it ended early (no choices to make, or
+/// EVAL_DEPTH's tree search, which battle4 runs itself). Reads the same env as evalpos (EVAL_ADAPT, EVAL_SEEDS's count is nseeds here).
+pub fn mix(b: &Battle, cfg: &Cfg, key: u64, nseeds: usize) -> Option<Mix> {
+    LAST_MIX.with(|c| *c.borrow_mut() = None);
+    eval_one(b, cfg, &json!({}), key, nseeds, 0);
+    LAST_MIX.with(|c| c.borrow_mut().take())
+}
 fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: usize) -> Value {
     let t0 = std::time::Instant::now();
     let mut b = b0.clone();
@@ -296,6 +306,7 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
         for &j in &cols { for i in 0..msw.len() { cells.ensure(i, j, nseeds); } }
         (x, y, rv, cv) = solve(&mut cells);
     }
+    LAST_MIX.with(|c| *c.borrow_mut() = Some((msw.clone(), tsw.clone(), x.clone(), y.clone())));   // for mix()
     let xsup: Vec<usize> = (0..msw.len()).filter(|i| x[*i] > 1e-4).collect(); let xtot: f64 = xsup.iter().map(|&i| x[i]).sum();
     let v = xsup.iter().map(|&i| x[i] * rv[i]).sum::<f64>() / xtot;
     let own1: Vec<f64> = cv.iter().map(|z| 1.0 - z).collect();

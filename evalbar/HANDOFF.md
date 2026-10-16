@@ -423,8 +423,8 @@ from mid-battle positions of real sheets) is theirs and found several engine bug
   value_se) will replace the seed counts; each budget needs its own CAL, and a 1/5/15/60 s accuracy check on the bot games is promised.
 - live.evalbar_mode() switches on the eval bar's own reading: Baton Pass, a Mega ending a traced ability, fitted spreads, and the damage
   check's positions with battlestate.FLAGS (spreads.DMG_FLAGS). live.py, broadcast.py (the streams, which had none of these before
-  2026-10-14) and reach.py call it; the bot never does. The calibration set (out/acc_p1.jsonl, CAL 0.676) predates battlestate: rebuild
-  it through spots.specs before the next CAL refit (the Stream watcher found 299 of 403 sampled states differ).
+  2026-10-14) and reach.py call it; the bot never does. The calibration set (out/acc_p1.jsonl, CAL 0.676) predated battlestate; the refit on the
+  rebuilt positions is under Engine version and the rescale (the Stream watcher found 299 of 403 sampled states differ).
 - The -start lines in the replays against what positions.js carries: still left out (approx) are Charge (38 games), Stockpile (28), Focus
   Energy / Dragon Cheer (26), Salt Cure (7), Curse (9), Octolock (6), Smack Down (4), Future Sight (4), No Retreat (3).
 
@@ -609,13 +609,24 @@ give; "<trainer> withdrew X!" frees X's slot; a game closes when Pokemon on neit
 Each target's evidence and VOD time is kept in meta['aims'] for spot checks. The popup-to-slot mapping was checked against the video by the user
 (M4 G1 turn 1: Night Slash on the right-side Tyranitar, Wood Hammer on the left-side Milotic, both as read).
 
-## Engine version
+## Engine version and the rescale (CAL)
 
-The live and broadcast modes use champ-battle-v23 (Battle sim, 2026-10-09) with engine_data_full: on 16 regional positions it gives v17's
-(and v22's) values and mixes exactly, and it handles mechanics v17 skipped: Static, Snow Cloak, Own Tempo, slot conditions (Wish, Healing
-Wish), more berries, Rest, Salt Cure, and in v23 Baton Pass (the day-1 Espathra positions now evaluate with nothing unsupported), Encore's
-override, Ally Switch, Gravity, Curse, Entrainment and others. Still unsupported: Unseen Fist (a Protect bypass) and Cute Charm (the engine
-has no genders). reads.py and uncertain.py stay on v18 so their committed results reproduce.
+- The bar (live.py, broadcast.py) reads with `live.ENGINE` = v34 (2026-10-16; Battle sim: v31 plus the immune-target filter judging a
+  move by its type as used and a Mega copy by the Mega's ability, 1.25x faster) and the acc value net, set by `live.EVAL_ENV`. Reads go to
+  files named for the engine (`<tag>_eval_v34.jsonl`, `_refined_v34`, `_luck_v34`). `live.EARLIER` lists earlier engines' files (v25's
+  unsuffixed, v31's): they stay on the pages, each rescaled with its own `CALS` weight, and a turn or luck pass one of them read is not read
+  again, so a switch costs no engine time on saved games. `PAGE_V` 2 rebuilt every saved bot page once with the new weights.
+- `CALS` (accuracy.py compare, 32 seeds staged, folds by match): v25 0.754 (Oct 5 calibration build); v31 0.782 and v34 0.785 on Battle
+  sim's rebuild of the 891 hold games through today's spots.specs (pssim/results/value2/real_hold.pos.jsonl, 6,381 positions: the 560
+  calibration games plus the other games of their matches). Runs: out/acc_hold_v31.jsonl, out/acc_hold_v34.jsonl.
+  - The rebuilt positions predict real results better: on the 3,968 calibration positions v31 scores 0.5003 against 0.5172 on the Oct 5
+    build (-0.0169 +- 0.0049). The engine change adds little: v34 minus v31 -0.0004 +- 0.0003 on all 6,381.
+  - At 0.785 the calibration bands match: rated 96.6% -> won 96.6% at 90%+, 85.0 -> 86.4 at 80-90, 75.0 -> 72.4 at 70-80.
+- `live.CAL` (0.676) is the bot's, not the bar's: bot/brain.py, position.py, contempt.py and contempt_bot.py read it, so changing it
+  changes the live bot's play. The bar uses `BAR_CAL` = CALS[ENGINE]. Moving the bot to the new weight is Battle sim's call, behind its flag.
+- If the bot moves to depth search (planner_issues 18, a 12-hour confirmation from 2026-10-16), score real_hold.pos.jsonl with that search
+  too and give its weight to Battle sim.
+- reads.py and uncertain.py stay on v18 so their committed results reproduce.
 
 ## Process names (the user asked, 2026-10-06)
 

@@ -126,6 +126,20 @@ fn side_report(b: &Battle, s: u8, opts: &[[PChoice; 2]], w: &[f64], own: &[f64],
     let actual_v = if known && found { opts.iter().position(|c| (0..2).all(|i| !alive[i] || same(&c[i], act[i].as_ref().unwrap()))).map(|q| json!(own[q])).unwrap_or(Value::Null) } else { Value::Null };
     json!({"slots": slots, "joint": jn, "actual_v": actual_v, "actual_found": found})
 }
+/// EVAL_MATRIX=1's rows / cols: the joint options holding a living slot's actual choice or its most-weighted option
+fn matrix_pick(b: &Battle, s: u8, opts: &[[PChoice; 2]], w: &[f64], actual: &Value) -> Vec<usize> {
+    let mut keep: Vec<usize> = vec![];
+    for i in 0..2 {
+        let alive = b.sides[s as usize].active[i].map(|p| !b.p((s, p)).fainted).unwrap_or(false); if !alive { continue; }
+        let mut agg: Vec<(PChoice, f64)> = vec![];
+        for k in 0..opts.len() { if let Some(e) = agg.iter_mut().find(|e| e.0 == opts[k][i]) { e.1 += w[k]; } else { agg.push((opts[k][i], w[k])); } }
+        let mut want: Vec<PChoice> = vec![];
+        if let Some(t) = agg.iter().max_by(|a, c| a.1.partial_cmp(&c.1).unwrap()) { want.push(t.0); }
+        if let Some(a) = parse_actual(b, s, &actual[i]) { want.push(a); }
+        for k in 0..opts.len() { if want.iter().any(|c| same(&opts[k][i], c)) && !keep.contains(&k) { keep.push(k); } }
+    }
+    keep
+}
 thread_local! { static LAST_MIX: std::cell::RefCell<Option<Mix>> = const { std::cell::RefCell::new(None) }; }
 type Mix = (Vec<[PChoice; 2]>, Vec<[PChoice; 2]>, Vec<f64>, Vec<f64>);
 /// the bot's search as a player (2026-10-16, battle4.rs BATTLE_ADAPT_SIDE: the bot's exact search against another in self-play): eval_one
@@ -206,12 +220,32 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
     // search's count covers every leaf evaluation (the review, 2026-10-14).
     if let Some(depth) = std::env::var("EVAL_DEPTH").ok().and_then(|x| x.parse::<usize>().ok()) { if budgeted {
         let p = crate::deep::Params::from_env(base0, seeds_max);
-        if let Some((root, st)) = crate::deep::search(&b, cfg, key, depth, &p, budget, budget_ms, (act_i, act_j), t0) {
+        if let Some((mut root, mut st)) = crate::deep::search(&b, cfg, key, depth, &p, budget, budget_ms, (act_i, act_j), t0) {
+            // EVAL_MATRIX with depth (2026-10-16, the Bo3 bot's contempt): as the staged search's matrix pass, the rows / cols that hold a
+            // living slot's actual choice or most-weighted option (every one with "full") get all their cells to EVAL_SEEDS static rolls,
+            // the tree is solved again, and the root's table goes out as "matrix" (v1: each cell's estimate with its deep correction)
+            let matrix_mode = std::env::var("EVAL_MATRIX").ok().filter(|m| !m.is_empty() && m != "0");
+            if let Some(mode) = &matrix_mode {
+                let (nm, nt) = (root.msw.len(), root.tsw.len());
+                let (rows, cols): (Vec<usize>, Vec<usize>) = if mode == "full" { ((0..nm).collect(), (0..nt).collect()) } else {
+                    (matrix_pick(&b, 0, &root.msw, &root.x, &sp["actual"]), matrix_pick(&b, 1, &root.tsw, &root.y, &sp["their_actual"])) };
+                for &i in &rows { for j in 0..nt { root.ensure(cfg, i, j, nseeds, &mut st); } }
+                for &j in &cols { for i in 0..nm { root.ensure(cfg, i, j, nseeds, &mut st); } }
+                root.resolve(cfg, &mut st);
+            }
             let own1: Vec<f64> = root.cv.iter().map(|z| 1.0 - z).collect();
             let s0 = side_report(&b, 0, &root.msw, &root.x, &root.rv, &sp["actual"], top); let s1 = side_report(&b, 1, &root.tsw, &root.y, &own1, &sp["their_actual"], top);
-            return json!({"value": root.v, "static": stat, "feats": f, "seeds": nseeds, "options": [root.msw.len(), root.tsw.len()], "ms": t0.elapsed().as_millis() as u64,
+            let mut out = json!({"value": root.v, "static": stat, "feats": f, "seeds": nseeds, "options": [root.msw.len(), root.tsw.len()], "ms": t0.elapsed().as_millis() as u64,
                 "unsupported": st.uns, "sides": [s0, s1], "sims": st.sims, "budget": budget, "depth": depth, "nodes": st.nodes, "deep_rolls": st.deep_rolls,
                 "levels": root.levels(), "rms_correction": st.rms_correction()});
+            if matrix_mode.is_some() {
+                let jc = |s: u8, c: &[PChoice; 2]| json!([choice_json(&b, s, &c[0]), choice_json(&b, s, &c[1])]);
+                let (v1, n1) = root.table();
+                out.as_object_mut().unwrap().insert("matrix".into(), json!({"rows": root.msw.iter().map(|c| jc(0, c)).collect::<Vec<Value>>(),
+                    "rl": root.msw.iter().map(|c| label(&b, 0, c)).collect::<Vec<String>>(), "cols": root.tsw.iter().map(|c| jc(1, c)).collect::<Vec<Value>>(),
+                    "cl": root.tsw.iter().map(|c| label(&b, 1, c)).collect::<Vec<String>>(), "x": root.x, "y": root.y, "v1": v1, "n1": n1}));
+            }
+            return out;
         }
     } }
     let (mut x, mut y, mut rv, mut cv) = solve(&mut cells);
@@ -288,20 +322,7 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
     let matrix_mode = std::env::var("EVAL_MATRIX").ok().filter(|m| !m.is_empty() && m != "0");
     if let Some(mode) = &matrix_mode {
         let (rows, cols): (Vec<usize>, Vec<usize>) = if mode == "full" { ((0..msw.len()).collect(), (0..tsw.len()).collect()) } else {
-            // rows / cols holding a living slot's actual choice or its most-weighted option
-            let pick = |s: u8, opts: &[[PChoice; 2]], w: &[f64], actual: &Value| -> Vec<usize> {
-                let mut keep: Vec<usize> = vec![];
-                for i in 0..2 {
-                    let alive = b.sides[s as usize].active[i].map(|p| !b.p((s, p)).fainted).unwrap_or(false); if !alive { continue; }
-                    let mut agg: Vec<(PChoice, f64)> = vec![];
-                    for k in 0..opts.len() { if let Some(e) = agg.iter_mut().find(|e| e.0 == opts[k][i]) { e.1 += w[k]; } else { agg.push((opts[k][i], w[k])); } }
-                    let mut want: Vec<PChoice> = vec![];
-                    if let Some(t) = agg.iter().max_by(|a, c| a.1.partial_cmp(&c.1).unwrap()) { want.push(t.0); }
-                    if let Some(a) = parse_actual(&b, s, &actual[i]) { want.push(a); }
-                    for k in 0..opts.len() { if want.iter().any(|c| same(&opts[k][i], c)) && !keep.contains(&k) { keep.push(k); } }
-                }
-                keep };
-            (pick(0, &msw, &x, &sp["actual"]), pick(1, &tsw, &y, &sp["their_actual"])) };
+            (matrix_pick(&b, 0, &msw, &x, &sp["actual"]), matrix_pick(&b, 1, &tsw, &y, &sp["their_actual"])) };
         for &i in &rows { for j in 0..tsw.len() { cells.ensure(i, j, nseeds); } }
         for &j in &cols { for i in 0..msw.len() { cells.ensure(i, j, nseeds); } }
         (x, y, rv, cv) = solve(&mut cells);

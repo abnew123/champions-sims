@@ -36,6 +36,9 @@ fn policy() -> [Policy; 2] {
         Ok(v) if v.starts_with("noise:") => Policy::Noise(v[6..].parse().unwrap_or(0.1)),
         _ => Policy::Eq }))
 }
+fn perish_search() -> Option<[usize; 2]> { static F: std::sync::OnceLock<Option<[usize; 2]>> = std::sync::OnceLock::new(); *F.get_or_init(|| {
+    let d: usize = std::env::var("BATTLE_PERISH_DEPTH").ok()?.parse().ok()?;
+    Some([std::env::var("BATTLE_PERISH_BUDGET").ok().and_then(|x| x.parse().ok()).unwrap_or(20000), d]) }) }
 fn adapt_side() -> Option<u8> { static F: std::sync::OnceLock<Option<u8>> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("BATTLE_ADAPT_SIDE").ok().and_then(|x| x.parse().ok())) }
 fn adapt_seeds() -> usize { static F: std::sync::OnceLock<usize> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("BATTLE_ADAPT_SEEDS").ok().and_then(|x| x.parse().ok()).unwrap_or(32)) }
 fn dp2() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("DP2").is_ok()) }
@@ -323,7 +326,16 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
         // BATTLE_EVAL=1 (2026-10-14): each side's mix from the anytime search instead (deep.rs: BATTLE_EVAL_BUDGET leaf evaluations,
         // BATTLE_EVAL_DEPTH_0 / _1 turns beyond this one, per-side budgets BATTLE_EVAL_BUDGET_0 / _1), both sides on the same key so
         // equal settings see the same table
-        if let Some(sides) = crate::deep::battle_eval() {
+        // BATTLE_PERISH_DEPTH=<d> (2026-10-16, the user: a search for Perish specifically): on turns with a Perish fight on
+        // (plan::perish_on) both sides choose by the tree search with at least d turns beyond this one at BATTLE_PERISH_BUDGET (default
+        // 20000) leaf evaluations at least, with or without BATTLE_EVAL
+        let mut eval_sides = crate::deep::battle_eval();
+        if let Some([pb, pd]) = perish_search() { if crate::plan::perish_on(&b) {
+            let mut sd = eval_sides.unwrap_or([[pb, pd]; 2]);
+            for x in sd.iter_mut() { x[0] = x[0].max(pb); x[1] = x[1].max(pd); }
+            eval_sides = Some(sd);
+        } }
+        if let Some(sides) = eval_sides {
             let p = crate::deep::Params::from_env(2, 256);
             for s in 0..2u8 {
                 // BATTLE_ADAPT_SIDE=0|1 (2026-10-16): that side chooses by the bot's own search (evalpos eval_one: EVAL_ADAPT's staged seeds,

@@ -162,9 +162,15 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
     // EVAL_BUDGET (leaf evaluations) / EVAL_BUDGET_MS: the anytime search below; its cells may take up to EVAL_SEEDS_MAX rolls (default 256)
     // EVAL_BUDGET=spec: the position's own "budget" field (comparisons at matched compute), times EVAL_BUDGET_MULT (default 1)
     let mult: f64 = std::env::var("EVAL_BUDGET_MULT").ok().and_then(|x| x.parse().ok()).unwrap_or(1.0);
-    let budget = match std::env::var("EVAL_BUDGET").as_deref() {
+    let mut budget = match std::env::var("EVAL_BUDGET").as_deref() {
         Ok("spec") => (sp["budget"].as_f64().unwrap_or(0.0) * mult).round() as usize,
         Ok(x) => (x.parse::<f64>().unwrap_or(0.0) * mult).round() as usize, _ => 0 };
+    // EVAL_PERISH_DEPTH=<d> (2026-10-16): with a Perish fight on (plan::perish_on), the tree search with at least d turns beyond this one
+    // at EVAL_PERISH_BUDGET (default 80000) leaf evaluations at least
+    let mut depth_env: Option<usize> = std::env::var("EVAL_DEPTH").ok().and_then(|x| x.parse::<usize>().ok());
+    if let Some(pd) = std::env::var("EVAL_PERISH_DEPTH").ok().and_then(|x| x.parse::<usize>().ok()) { if crate::plan::perish_on(&b) {
+        depth_env = Some(depth_env.unwrap_or(0).max(pd)); budget = budget.max(env_usize("EVAL_PERISH_BUDGET", 80000));
+    } }
     let budget_ms = env_usize("EVAL_BUDGET_MS", 0) as u128;
     let budgeted = budget > 0 || budget_ms > 0;
     let seeds_max = if budgeted { env_usize("EVAL_SEEDS_MAX", 256).max(nseeds) } else { nseeds };
@@ -218,7 +224,7 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
     // as a tree (deep.rs), d turns beyond this one; EVAL_DEPTH=0 is the same allocation without depth (for comparisons at matched
     // compute). The fixed stages, EVAL_HORIZON, EVAL_MATRIX and actual_replace below are not part of it. Before the first solve, so the
     // search's count covers every leaf evaluation (the review, 2026-10-14).
-    if let Some(depth) = std::env::var("EVAL_DEPTH").ok().and_then(|x| x.parse::<usize>().ok()) { if budgeted {
+    if let Some(depth) = depth_env { if budgeted {
         let p = crate::deep::Params::from_env(base0, seeds_max);
         if let Some((mut root, mut st)) = crate::deep::search(&b, cfg, key, depth, &p, budget, budget_ms, (act_i, act_j), t0) {
             // EVAL_MATRIX with depth (2026-10-16, the Bo3 bot's contempt): as the staged search's matrix pass, the rows / cols that hold a

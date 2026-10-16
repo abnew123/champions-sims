@@ -54,27 +54,43 @@ def card(title, state, done, total, unit, started=None, live=False, rate_files=N
       <div class="bar"><div style="width:{100 * frac:.1f}%"></div></div>
       <div class="meta">{"".join(f"<span>{x}</span>" for x in meta)}</div>{f'<div class="note">{note}</div>' if note else ''}</div>'''
 
-def log_progress(C, phase):
-    """(teams done, teams in the stage, teams per minute or None, log mtime) of the current round stage, from the climb's round log
-    (round_<name>.log next to climb_<name>_progress.json): the log's "<stage>: n/N teams, m min" lines since the round's last start.
-    The rate skips a relaunch's fast-forward through finished teams (lines under 5 min); the log's mtime is when its last line was
-    written. Counting result files can't follow a pool climb: its bring search runs two stages under other seeds, and the game cache
-    serves many games without a file (2026-10-15, the user: the card showed 0 of 383,786)."""
-    base = os.path.basename(C('climb_progress.json'))[len('climb'):-len('_progress.json')]
-    log = C(f'round{base}.log')
-    if not os.path.exists(log): return None
-    label = {'screen': 'bring search', 'confirm': 'confirm games', 'sharpen': 'confirm games'}.get(phase)
-    seg = []
-    for l in open(log, errors='replace'):
-        if re.match(r'^round \d+: sim setup', l) or l.startswith('--- relaunched'): seg = []
-        m = re.match(r'^\d\d:\d\d [AP]M\s+' + re.escape(label or '') + r'[^:]*: (\d+)/(\d+) teams, (\d+) min', l)
-        if m: seg.append(tuple(map(int, m.groups())))
-    if not label or not seg: return None
-    n, N, _ = seg[-1]; pts = [x for x in seg if x[2] >= 5]
-    rate = (pts[-1][0] - pts[0][0]) / (pts[-1][2] - pts[0][2]) if len(pts) >= 2 and pts[-1][2] > pts[0][2] else None
-    return n, N, rate, os.path.getmtime(log)
+def log_rate(seg):
+    """teams per minute from a stage's "n/N teams, m min" points: the slope over points at 5+ minutes (a relaunch fast-forwards through
+    finished teams in under 5), or n/m from one point when the stage has no fast-forward lines"""
+    pts = [x for x in seg if x[2] >= 5]
+    if len(pts) >= 2 and pts[-1][2] > pts[0][2]: return (pts[-1][0] - pts[0][0]) / (pts[-1][2] - pts[0][2])
+    return pts[-1][0] / pts[-1][2] if pts and len(pts) == len(seg) else None
 
-def step_card(path, title, done_marker):
+def log_progress(C, pr):
+    """(teams done, teams in the stage, teams per minute or None, time of the latest progress) of the current round stage, from the
+    climb's round log (round_<name>.log next to climb_<name>_progress.json): the log's "<stage> (seed s): n/N teams, m min" lines for
+    the progress file's seed since the round's last start; the log's mtime is when its last line was written. Counting result files
+    can't follow a pool climb: its bring search runs two stages under other seeds, and the game cache serves many games without a file
+    (2026-10-15, the user: the card showed 0 of 383,786). Each extra batch of the sharpen step is a stage of its own under a new seed;
+    before its first line (the log writes one every 10 teams) it is 0 done since the progress file's time, at the last stage's rate
+    (2026-10-16, the user: batch 6's card showed batch 5's 23 of 23, due half an hour before)."""
+    base = os.path.basename(C('climb_progress.json'))[len('climb'):-len('_progress.json')]
+    log = C(f'round{base}.log'); label = {'screen': 'bring search', 'confirm': 'confirm games', 'sharpen': 'confirm games'}.get(pr['phase'])
+    if not label or not os.path.exists(log): return None
+    segs = {}                                           # stage label (with its seed) -> points, in log order
+    for l in open(log, errors='replace'):
+        if re.match(r'^round \d+: sim setup', l) or l.startswith('--- relaunched'): segs = {}
+        m = re.match(r'^\d\d:\d\d [AP]M\s+(' + re.escape(label) + r'[^:]*): (\d+)/(\d+) teams, (\d+) min', l)
+        if m: segs.setdefault(m.group(1), []).append(tuple(map(int, m.groups()[1:])))
+    if not segs and not pr.get('at'): return None
+    tag = f"(seed {pr['seed']})" if pr.get('seed') is not None else None
+    cur = next((v for k, v in segs.items() if tag and tag in k), None) if tag else (list(segs.values())[-1] if segs else None)
+    if cur: return cur[-1][0], cur[-1][1], log_rate(cur), os.path.getmtime(log)
+    prev = [v for k, v in segs.items() if not tag or tag not in k]
+    return 0, pr['teams'], log_rate(prev[-1]) if prev else None, pr['at']
+
+def late(due, n, N, remote):
+    """the time-left text once the estimate has passed: a pulled copy of the log is older than the run (2026-10-15, the user); a local
+    run is slower than the estimate, and its next log line comes at the next ten teams (2026-10-16, the user)"""
+    if remote: return f"due around {ampm(dt(due))}; likely finished, waiting for the next copy from the box"
+    return f"running past the estimate of {ampm(dt(due))}; the log's next line comes at {min(N, n // 10 * 10 + 10)} teams"
+
+def step_card(path, title, done_marker, remote=True):
     """a card for a post-climb step (archverify.py, accrefine.py) from its log: the current stage's "<stage>: n/N teams, m min" lines
     since the step's last header ("round 2: 8 teams, 27 candidates", "final check: ..."), time left from the recent rate, finished on
     its done line, stopped on a "failed" line or when the log has been quiet for 30 minutes (the user, 2026-10-15: "make sure it
@@ -86,25 +102,23 @@ def step_card(path, title, done_marker):
     if any(done_marker in l for l in L): return card(title, 'finished', 1, 1, 'step', lines=[f"finished {ampm(dt(mt))}"])
     failed = next((l for l in reversed(L) if ' failed' in l and 'UTC' in l), None)
     head = next((l[9:].strip() for l in reversed(L) if re.match(r'^\d\d:\d\d [AP]M (round \d+:|v\d+\w*:|final check:)', l)), '')
-    seg, label = [], None
+    seg, label, stage = [], None, None
     for l in L:
-        if re.match(r'^\d\d:\d\d [AP]M (round \d+:|final check:)', l): seg, label = [], None
-        m = re.match(r'^\d\d:\d\d [AP]M\s+(bring search|confirm games|confirm|final check)[^:]*: (\d+)/(\d+) teams, (\d+) min', l)
+        if re.match(r'^\d\d:\d\d [AP]M (round \d+:|final check:)', l): seg, label, stage = [], None, None
+        m = re.match(r'^\d\d:\d\d [AP]M\s+((bring search|confirm games|confirm|final check)[^:]*): (\d+)/(\d+) teams, (\d+) min', l)
         if m:
-            if m.group(1) != label: seg, label = [], m.group(1)
-            seg.append(tuple(map(int, m.groups()[1:])))
+            if m.group(1) != stage: seg, stage, label = [], m.group(1), m.group(2)       # a new seed is a new stage
+            seg.append(tuple(map(int, m.groups()[2:])))
     state = 'stopped' if failed or quiet else 'running'; extra = [head] if head else []
     if failed: extra.append(failed.split('UTC: ', 1)[-1])
     if not seg: return card(title, state, 0, 0, '', lines=extra + ([] if failed or quiet else ['starting the next stage…']))
-    n, N, _ = seg[-1]; pts = [x for x in seg if x[2] >= 2]
-    rate = (pts[-1][0] - pts[0][0]) / (pts[-1][2] - pts[0][2]) if len(pts) >= 2 and pts[-1][2] > pts[0][2] else None
+    n, N, _ = seg[-1]; rate = log_rate(seg)
     if state == 'running':
         if rate and mt + (N - n) / rate * 60 > time.time():
             done_at = mt + (N - n) / rate * 60; extra.append(f"{label}: about {fmt(done_at - time.time())} left in this stage (done around {ampm(dt(done_at))})")
-        elif rate:                                  # the estimate has passed: the copy of the log is older than the run (2026-10-15, the user)
-            extra.append(f"{label}: due around {ampm(dt(mt + (N - n) / rate * 60))}; likely finished, waiting for the next copy from the box")
+        elif rate: extra.append(f"{label}: " + late(mt + (N - n) / rate * 60, n, N, remote))
         else: extra.append(f"{label}: estimating time left…")
-        if time.time() - mt > 300: extra.append(f"progress as of {ampm(dt(mt))} (results copy from the box every 15 minutes)")
+        if remote and time.time() - mt > 300: extra.append(f"progress as of {ampm(dt(mt))} (results copy from the box every 15 minutes)")
     return card(title, state, n, N, f'teams ({label})', None, state == 'running', None, extra)
 
 def other_thread():
@@ -173,15 +187,15 @@ def cards():
             outs = files(C('runs', '*', f"out_{sfx}" if tag == 'v3' else f"out_{tag}_{sfx}", '*.json'))
             title = f"Hill climb round {rnd} ({pr['mode']}): " + {'screen': 'screening swaps (bring search)', 'confirm': 'confirming the best swaps (fresh games)',
                                                                   'sharpen': f"extra paired batch {pr.get('batch', '')} for undecided swaps"}[phase]
-            lp = log_progress(C, phase) if os.environ.get('TS_CLIMB_FILES') != '1' else None
+            lp = log_progress(C, pr) if os.environ.get('TS_CLIMB_FILES') != '1' else None
             if lp:                                      # pool climbs: teams done from the round log (see log_progress)
                 n, N, rate, t_last = lp; extra = []
                 if live and rate:
                     done_at = t_last + (N - n) / rate * 60
                     extra.append(f"about {fmt(done_at - time.time())} left (done around {ampm(dt(done_at))}), {rate:.1f} teams a minute" if done_at > time.time()
-                                 else f"due around {ampm(dt(done_at))}; likely finished, waiting for the next copy from the box")
+                                 else late(done_at, n, N, bool(CD)))
                 elif live: extra.append('estimating time left…')
-                if live and time.time() - t_last > 300: extra.append(f"progress as of {ampm(dt(t_last))} (results copy from the box every 15 minutes)")
+                if live and CD and time.time() - t_last > 300: extra.append(f"progress as of {ampm(dt(t_last))} (results copy from the box every 15 minutes)")
                 cards.append(card(title, 'running' if live else 'stopped', n, N, 'teams', None, live, None,
                                   extra + [f"{pr['teams']} teams for {pr['starts']} start teams; the log counts teams in tens"]))
             else:
@@ -193,7 +207,7 @@ def cards():
                               0, 0, '', lines=[f"{pr.get('moved', '?')} of {pr['starts']} start teams moved to a better team" if phase == 'done' else '']))
     for logname, title, done in (('round_archverify.log', 'Finals verified against their starts (fresh games, two seeds)', 'verification done'),
                                  ('round_accrefine.log', 'Sure-hit pass (set swaps toward more sure hits, then a final check)', 'accuracy refinement done')):
-        c = step_card(C(logname), title, done)
+        c = step_card(C(logname), title, done, bool(CD))
         if c and (not pr or pr.get('phase') == 'done' or os.path.getmtime(C(logname)) > (pr.get('at') or 0)): cards.append(c)
     if stt:
         act = sum(1 for t in stt['teams'].values() if not t['done'])

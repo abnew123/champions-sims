@@ -50,7 +50,8 @@ def runs():
             files = glob.glob(os.path.join(outdir, '*.json')) if os.path.isdir(outdir) else []
             new = sum(os.path.getmtime(f) >= st.timestamp() for f in files)
             stopped = done_line is None and later_start
-            out.append(dict(log=os.path.basename(log), jobs=m.group(2), outdir=m.group(3), start=st, done=len(files), new=new, total=total,
+            dm = re.search(r'\(([^()]*)\)\s*$', l)
+            out.append(dict(log=os.path.basename(log), jobs=m.group(2), outdir=m.group(3), start=st, done=len(files), new=new, total=total, desc=dm.group(1) if dm else None,
                             finished=done_line is not None, stopped=stopped, mtime=max([os.path.getmtime(f) for f in files] or [st.timestamp()]),
                             kit=kit.groups() if kit else None))
     out.sort(key=lambda r: r['start'], reverse=True)
@@ -74,7 +75,13 @@ def crashed_workers(r):
     return n
 
 def title(r):
-    if not r['kit']: return r['outdir'].replace('results/', '')
+    # a run's name (2026-10-16, the user: not a file path): <outdir>.title if the run wrote one, else the description in brackets at the
+    # end of its start line, else the output folder's last two parts
+    if not r['kit']:
+        try: return open(os.path.join(ROOT, r['outdir']) + '.title').read().strip()
+        except OSError: pass
+        if r.get('desc'): return r['desc'][0].upper() + r['desc'][1:]
+        return '/'.join(os.path.normpath(r['outdir']).split(os.sep)[-2:]).replace('results/', '')
     team, step = r['kit']
     try: name = json.load(open(os.path.join(HERE, 'sheets', team, 'sheet.json'))).get('name', team)
     except Exception: name = team

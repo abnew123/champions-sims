@@ -235,8 +235,12 @@ fn eval_one(b0: &Battle, cfg: &Cfg, sp: &Value, key: u64, nseeds: usize, top: us
                 let (nm, nt) = (root.msw.len(), root.tsw.len());
                 let (rows, cols): (Vec<usize>, Vec<usize>) = if mode == "full" { ((0..nm).collect(), (0..nt).collect()) } else {
                     (matrix_pick(&b, 0, &root.msw, &root.x, &sp["actual"]), matrix_pick(&b, 1, &root.tsw, &root.y, &sp["their_actual"])) };
-                for &i in &rows { for j in 0..nt { root.ensure(cfg, i, j, nseeds, &mut st); } }
-                for &j in &cols { for i in 0..nm { root.ensure(cfg, i, j, nseeds, &mut st); } }
+                // EVAL_MATRIX_MS (2026-10-16, the Bo3 bot: the pass took up to 33 s): no more cells raised once the position has run that
+                // long (the rest keep the rolls the search gave them)
+                let cap_ms = env_usize("EVAL_MATRIX_MS", 0) as u128;
+                let over = |t: &std::time::Instant| cap_ms > 0 && t.elapsed().as_millis() >= cap_ms;
+                'rows: for &i in &rows { for j in 0..nt { if over(&t0) { break 'rows; } root.ensure(cfg, i, j, nseeds, &mut st); } }
+                'cols: for &j in &cols { for i in 0..nm { if over(&t0) { break 'cols; } root.ensure(cfg, i, j, nseeds, &mut st); } }
                 root.resolve(cfg, &mut st);
             }
             let own1: Vec<f64> = root.cv.iter().map(|z| 1.0 - z).collect();

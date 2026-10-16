@@ -32,7 +32,10 @@ toid = R.toid
 # their remaining turns) the user, 2026-10-12; pctDue, abilDue, chipDue (Toxic's stage, binding moves), fallenDue (Supreme Overlord's count)
 # and typeDue (types changed in battle) the user, 2026-10-12 evening; then syrupDue and srcDue
 BOT_FLAGS = dict.fromkeys(('yawnDue', 'volDue', 'fieldDue', 'pctDue', 'abilDue', 'chipDue', 'fallenDue', 'typeDue', 'syrupDue', 'srcDue',
-                           'rechargeDue', 'itemDue'), True)   # rechargeDue / itemDue: on for the bot 2026-10-14 (Battle sim, the standing rule)
+                           'rechargeDue', 'itemDue', 'chargeDue'), True)   # rechargeDue / itemDue: on for the bot 2026-10-14 (Battle sim, the standing rule)
+# chargeDue: on 2026-10-16 (Battle sim, the standing rule): a charged move stopped before it fired is no longer charging; of the bot's
+# 1,933 decisions in its 243 games with a charged move, only …2698578723's turn 7 changes (their Archaludon, flinched mid Electro Shot,
+# was read as locked into the charge; it used Protect)
 STATK = {'hp': 'hp', 'atk': 'atk', 'def': 'def', 'spa': 'spa', 'spd': 'spd', 'spe': 'spe'}
 def export(text):
     """a Showdown team export -> {base species id: set with its spread}"""

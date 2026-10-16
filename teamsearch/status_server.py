@@ -99,8 +99,12 @@ def step_card(path, title, done_marker):
     n, N, _ = seg[-1]; pts = [x for x in seg if x[2] >= 2]
     rate = (pts[-1][0] - pts[0][0]) / (pts[-1][2] - pts[0][2]) if len(pts) >= 2 and pts[-1][2] > pts[0][2] else None
     if state == 'running':
-        if rate: done_at = mt + (N - n) / rate * 60; extra.append(f"{label}: about {fmt(max(0, done_at - time.time()))} left in this stage (done around {ampm(dt(done_at))})")
+        if rate and mt + (N - n) / rate * 60 > time.time():
+            done_at = mt + (N - n) / rate * 60; extra.append(f"{label}: about {fmt(done_at - time.time())} left in this stage (done around {ampm(dt(done_at))})")
+        elif rate:                                  # the estimate has passed: the copy of the log is older than the run (2026-10-15, the user)
+            extra.append(f"{label}: due around {ampm(dt(mt + (N - n) / rate * 60))}; likely finished, waiting for the next copy from the box")
         else: extra.append(f"{label}: estimating time left…")
+        if time.time() - mt > 300: extra.append(f"progress as of {ampm(dt(mt))} (results copy from the box every 15 minutes)")
     return card(title, state, n, N, f'teams ({label})', None, state == 'running', None, extra)
 
 def other_thread():
@@ -173,9 +177,11 @@ def cards():
             if lp:                                      # pool climbs: teams done from the round log (see log_progress)
                 n, N, rate, t_last = lp; extra = []
                 if live and rate:
-                    left = (N - n) / rate * 60; done_at = t_last + left
-                    extra.append(f"about {fmt(max(0, done_at - time.time()))} left (done around {ampm(dt(done_at))}), {rate:.1f} teams a minute")
+                    done_at = t_last + (N - n) / rate * 60
+                    extra.append(f"about {fmt(done_at - time.time())} left (done around {ampm(dt(done_at))}), {rate:.1f} teams a minute" if done_at > time.time()
+                                 else f"due around {ampm(dt(done_at))}; likely finished, waiting for the next copy from the box")
                 elif live: extra.append('estimating time left…')
+                if live and time.time() - t_last > 300: extra.append(f"progress as of {ampm(dt(t_last))} (results copy from the box every 15 minutes)")
                 cards.append(card(title, 'running' if live else 'stopped', n, N, 'teams', None, live, None,
                                   extra + [f"{pr['teams']} teams for {pr['starts']} start teams; the log counts teams in tens"]))
             else:

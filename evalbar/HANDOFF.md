@@ -632,6 +632,11 @@ Each target's evidence and VOD time is kept in meta['aims'] for spot checks. The
   changes the live bot's play. The bar uses `BAR_CAL` = CALS[ENGINE]. Moving the bot to the new weight is Battle sim's call, behind its flag.
 - If the bot moves to depth search (planner_issues 18, a 12-hour confirmation from 2026-10-16), score real_hold.pos.jsonl with that search
   too and give its weight to Battle sim.
+- Depth at 4x (the Bo1 bot's search from 2026-10-16: EVAL_BUDGET 80000, EVAL_DEPTH 2, EVAL_DEEP_K0 2, 32 seeds, not staged) on the same
+  6,381 positions (out/acc_hold_d4.jsonl): log loss 0.4787 against the one-turn v34's 0.4889 (-0.0101 +- 0.0016; on the 3,968 calibration
+  positions -0.0113 +- 0.0021), weight 0.765 (0.744 on the 560 games). Its output has the same sides / slots / options as evalpos, no
+  payoff matrix (the luck pass keeps the one-turn EVAL_MATRIX). One core: 5.4 s a position, against 1.7 s for one turn at 32 rolls staged
+  and 4.5 s at 128 (the streams' background read). Not used by the bar yet.
 - reads.py and uncertain.py stay on v18 so their committed results reproduce.
 
 ## Process names (the user asked, 2026-10-06)

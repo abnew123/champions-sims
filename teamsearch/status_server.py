@@ -189,7 +189,8 @@ def cards():
                                                                   'sharpen': f"extra paired batch {pr.get('batch', '')} for undecided swaps"}[phase]
             lp = log_progress(C, pr) if os.environ.get('TS_CLIMB_FILES') != '1' else None
             if lp:                                      # pool climbs: teams done from the round log (see log_progress)
-                n, N, rate, t_last = lp; extra = []
+                n, N, rate, t_last = lp      # the progress file is written as each stage starts (2026-10-16, the user: a started time)
+                extra = [f"started {ampm(dt(pr['at']))}" + (f", running {fmt(time.time() - pr['at'])}" if live else '')] if pr.get('at') else []
                 if live and rate:
                     done_at = t_last + (N - n) / rate * 60
                     extra.append(f"about {fmt(done_at - time.time())} left (done around {ampm(dt(done_at))}), {rate:.1f} teams a minute" if done_at > time.time()

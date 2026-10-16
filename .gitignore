@@ -49,3 +49,5 @@ pssim/battlesim-play
 # Showdown bot: the account file and its game logs (usernames)
 bot/account.json
 bot/out/
+teamsearch/climb_lowelo_*
+teamsearch/cache_lowelo/

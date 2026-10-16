@@ -1305,3 +1305,18 @@ registrations since its second version) and checks reachability of real logs in 
   plan::as_side). For testing a net trained on deeper search targets (pssim/value_box.sh). Checks: 4 BATTLE_EVAL games identical to v34
   without it and with EG_VNET_B = EG_VNET (all fields but timing); with two nets, side 0's turn-one choices match the games where both
   sides use EG_VNET, side 1's those where both use EG_VNET_B. The bot stays on v34. `src_battle_v35.tar.gz`, `bin/champ-battle-v35.sha256`.
+
+## The climb's simulator against the bot's ladder games (2026-10-16; the user: check the sim before trusting what the climb finds)
+bot/ladder_sim.py + pssim/ladder_sim.sh: the bot's 1,128 saved games (689 Bo3, 439 Bo1) rebuilt at turn 1 as the bot saw them (botpos,
+top back-row guess; open sheets in Bo3, guessed sets in Bo1), each played out 4 times with the climb's v33n1 setup. Report:
+pssim/results/ladder_sim_report.txt (git-ignored).
+- **On average the sim is right**: sim 50.9% vs real 50.5% (-0.3 +- 1.6); the Trick Room six 51.7 vs 51.7 (549 games), the regional
+  pool teams 49.7 vs 49.8 (530). The sim's favourite won 61.5% of the 849 games it did not call even.
+- **Per game it is overconfident**: real results move 0.62 +- 0.09 per unit of the sim's win chance (the 4-playout noise taken out;
+  Bo3 0.67, Bo1 0.55: hidden sets and back rows cost the most where less is known; the back-row guess was right in 282 of 896 games).
+  If that carries to team averages, real gaps between teams are about 0.6 of the sim's, with the order kept.
+- **Style biases (real - sim, ~30 rows, so one or two at 2 SE by chance)**: our Balance teams -16.5 +- 5.5 (65 games, 29% real vs 46%
+  sim; matches the Bo1 Balance slump); Perish opponents -16.0 +- 7.0 (the sim cannot play the trap; the climb's TS_PERISH=real covers
+  it); Rain + Sun opponents -8.3 +- 5.4; Indeedee TR opponents +8.5 +- 5.6; our Tailwind teams +10.1 +- 5.2. The Trick Room six by
+  opponent: Balance +7.8 +- 5.2, Rain +8.3 +- 7.3, the Trick Room mirror -10.4 +- 7.1, Rain + Sun -8.3 +- 7.2, Perish -16.3 +- 9.2,
+  Sun 0.0 +- 5.4.

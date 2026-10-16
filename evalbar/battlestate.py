@@ -24,12 +24,13 @@ FLAGS = {'yawnDue': True,       # a Yawn at the turn start puts its target to sl
          'syrupDue': True,      # a Supersweet Syrup that has activated stays spent (the v29 engine reads it)
          'srcDue': True,        # a volatile's source as Showdown has it: the holder for Imprison and the like, the seeder's slot for Leech Seed
          'rechargeDue': True,   # a Pokemon that must recharge (Hyper Beam) has only that
-         'itemDue': True}       # the item a log line showed (Trick, Switcheroo, Thief), not the set's (the review; mon() reads it, not positions.js)
+         'itemDue': True,       # the item a log line showed (Trick, Switcheroo, Thief), not the set's (the review; mon() reads it, not positions.js)
+         'chargeDue': True}     # a charged move stopped before it fired (flinch, full paralysis, confusion) is no longer charging (mon() reads it)
 def mon(m, st, flags=FLAGS):
     item = m['item'] if flags.get('itemDue') and m.get('iset') else st['item']
     return {**st, 'forme': m['forme'], 'mega': m['mega'], 'hpPct': m['hp'], 'fainted': m['f'], 'status': m['st'], 'slept': m['slept'], 'boosts': m['b'],
             'itemNow': '' if m['gone'] or toid(item) not in S.E['items'] else item, 'moved': m['moved'], 'stall': m['stall'], 'lock': m['lock'],
-            'vol': m['vol'], 'onField': bool(m['pos']), 'last': m['last'], 'volarg': m['volarg'], 'volturn': m.get('volturn') or {},
+            'vol': [v for v in m['vol'] if v != 'charging'] if flags.get('chargeDue') and m.get('cabort') else m['vol'], 'onField': bool(m['pos']), 'last': m['last'], 'volarg': m['volarg'], 'volturn': m.get('volturn') or {},
             'unburden': m.get('unb', False), 'perish': m.get('perish', 0), 'abilityNow': m.get('abil', ''), 'toxn': m.get('toxn', 0), 'ptrap': m.get('ptrap'),
             'typesNow': m.get('types'), 'typeAdd': m.get('tadd', ''), 'proteanUsed': m.get('protean', False), 'syrupDone': m.get('syrup', False)}
 def fresh(st, stand_in=False):

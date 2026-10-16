@@ -175,6 +175,13 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
       EG_VNET_B; net_h2h_box.sh, 800 pool starts both ways): d4 vs deployed -1.3 +- 1.1, d4 vs x1 +0.4 +- 1.1, x1 vs deployed +0.6 +-
       1.1 points. The deeper targets reach the net only as about 0.003 of static log loss (the features cap what it can copy) and do not
       change play; the bot keeps its net.
+    - Live (2026-10-16, the user: confirm, then give the bot depth at 4x): self-play of depth 2 (k0 2) at 80,000 against the bot's
+      exact live search (evalpos's staged search, 32 seeds; battle4's BATTLE_ADAPT_SIDE), 800 pool starts both ways with the bot's own
+      rules on both sides: +3.2 +- 1.1 points (Sun +7.0, Rain +5.5, Balance +5.0, Indeedee TR +4.4, Snow +3.0, Sand +2.0, Trick Room
+      +0.1, Tailwind -1.6, each +- about 3). On 40 recent bot positions: median 5.1 s, p90 7.8 s (the live search 1.5 / 4.8), the top
+      joint option the same in 25. On for the Bo1 bot through limits.json "search" (a 15 s cap); the Bo3 bot keeps the staged search,
+      since contempt needs the payoff matrix and the tree search does not give one yet. Next: the matrix from the tree's root cells for
+      Bo3, and the bot's CAL refit on its own decisions with the new search.
     Caution: earlier depth-like changes (anticipation passes, the full switch matrix) were flat; the equilibrium opponent caps it.
     **Done for v29 (2026-10-13 evening):** Revival Blessing ported (sim.rs: a side that cannot switch keeps the request for a slot with the
     condition, no BeforeSwitchOut for it, the choice names a fainted Pokemon, an order-6 RevivalBlessing action revives it at half HP and

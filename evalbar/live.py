@@ -222,7 +222,9 @@ class Live:
         s.weights = {}; s.hyp = {}; s.poscache = {}; s.over = False; s.skip = {}
         s.exact = False; s.team = None; s.back = {}; s.bot_side = None; s.held = None; s.spread_why = {}
         s.luck = False; s.lf = os.path.join(OUT, f'{s.tag}_luck_{ENGINE}.jsonl'); s.luck_state = None; s.lweights = {}; s.dirty = False; s.page_cache = None
-        s.rf = os.path.join(OUT, f'{s.tag}_refined_{ENGINE}.jsonl'); s.live_seeds = 32; s.refining = False; s.saved = False   # the two reads (2026-10-13)   # luck: after the game      # a Showdown bot's own log (bot/): its side known from its requests
+        s.rf = os.path.join(OUT, f'{s.tag}_refined_{REFINED}.jsonl'); s.live_seeds = 32; s.refining = False; s.saved = False   # the two reads (2026-10-13)   # luck: after the game      # a Showdown bot's own log (bot/): its side known from its requests
+        s.reads = ([(p[k], p['cal'], k == 'refined') for p in s.prior for k in ('eval', 'refined')] + [(s.evf, BAR_CAL, False),   # every read, oldest
+                   (os.path.join(OUT, f'{s.tag}_refined_{ENGINE}.jsonl'), BAR_CAL, True), (s.rf, REFINE_CAL, True)])   # first: (file, CAL, background read)
         # the user's verdicts where the battle text and the rules disagree (broadcasts: evalbar/rules.py), kept beside the log
         s.fixf = os.path.join(OUT, f'{s.tag}_fixes.json'); s.fixes = json.load(open(s.fixf)) if logfile and os.path.exists(s.fixf) else {}; s.redo = None
     def page(s):
@@ -277,7 +279,7 @@ class Live:
         for t in [t for t in s.weights if t >= t0]: s.weights.pop(t, None); s.hyp.pop(t, None)
         s.poscache = {k: v for k, v in s.poscache.items() if k[0] < t0}
         with LUCK:                                                           # a background read under way ends first; its turns go too
-            for f in [s.evf, s.rf] + [p[k] for p in s.prior for k in ('eval', 'refined')]:
+            for f in [x[0] for x in s.reads]:
                 if os.path.exists(f):
                     keep = [l for l in open(f) if int((re.search(r' t(\d+) ', json.loads(l).get('name', '')) or [0, 0])[1]) < t0]
                     open(f, 'w').writelines(keep)
@@ -353,14 +355,12 @@ class Live:
         return None
     def build(s, log, g):
         """the page's data from everything evaluated so far"""
-        # each name's read: the background one (REFINE_SEEDS) where it is done, else the quick one; this engine's, else the newest earlier
-        # engine's from before a switch, each rescaled with its own engine's CAL
+        # each name's read: the background one (REFINE_KIND) where it is done, else the quick one; this engine's, else the newest earlier
+        # engine's from before a switch, each rescaled with its own CAL (s.reads, oldest first)
         logit = lambda v: math.log(min(1 - 1e-4, max(1e-4, v)) / (1 - min(1 - 1e-4, max(1e-4, v))))
         ev, cal, rv = {}, {}, set()
-        for p in s.prior + [{'eval': s.evf, 'refined': s.rf, 'cal': BAR_CAL}]:
-            for k in ('eval', 'refined'):
-                for n, x in records(p[k]).items():
-                    ev[n] = x; cal[n] = p['cal']; (rv.add if k == 'refined' else rv.discard)(n)
+        for f, c, bg in s.reads:
+            for n, x in records(f).items(): ev[n] = x; cal[n] = c; (rv.add if bg else rv.discard)(n)
         sc = lambda n: (lambda v: C.sig(cal[n] * logit(v)))
         lucks = [(records(s.lf), BAR_CAL)] + [(records(p['luck']), p['cal']) for p in reversed(s.prior)]   # the luck pass: this engine's, else the newest earlier one
         steps = []; ps = {}; CH = s.checks(log); lps = {}
@@ -452,7 +452,7 @@ class Live:
             return s.why(s.skip[step['turn']]) + ': ' + ', '.join(s.skip[step['turn']])
         posf = os.path.join(OUT, f"{s.tag}_t{step['turn']}_pos.jsonl")
         os.environ['EVAL_TITLE'] = f"Live spectator: turn {step['turn']} ({len(sp)} positions)"
-        have = set(records(s.rf)) | set(records(s.evf)) | {n for p in s.prior for k in ('eval', 'refined') for n in records(p[k])}
+        have = {n for f, _, _ in s.reads for n in records(f)}
         read = all(x['name'] + ' p1' in have for _, x in sp)                 # a turn read before is not read again (a page rebuilt after a switch
         if not read or not os.path.exists(posf): positions(sp, posf)          # keeps its positions file too)
         if not read: EN.run(posf, s.evf, s.threads, s.live_seeds, 1, extra=EVAL_ENV)
@@ -498,7 +498,7 @@ class Live:
                 with WORK: s.build(log, g)
                 seen_len = len(log)
             if s.page_cache and status == 'finished' and not todo and (not s.luck or s.luck_state == 'done') and not s.dirty:
-                tmp = s.page_cache + '.tmp'; json.dump({'v': PAGE_V, 'data': s.data, 'refined': ENGINE if s.refining else False}, open(tmp, 'w'), ensure_ascii=False); os.replace(tmp, s.page_cache)
+                tmp = s.page_cache + '.tmp'; json.dump({'v': PAGE_V, 'data': s.data, 'refined': REFINED if s.refining else False}, open(tmp, 'w'), ensure_ascii=False); os.replace(tmp, s.page_cache)
                 s.saved = True; return                                                       # the bot page: a finished game is read from its file from now on
             if feed.poll() is not None and not todo and not s.over:
                 s.over = True
@@ -512,6 +512,14 @@ PAGE_V = 2                                                                   # 2
 # the lowest priority, sharing the luck pass's) and saves its page again; the page marks turns still on the quick read. The engine's budgeted
 # search (Battle sim's planner_issues 18) will replace the seed counts with budgets and a per-position uncertainty
 LIVE_SEEDS, REFINE_SEEDS = 8, 128
+# the background read from 2026-10-16 (the user): the bots' search, depth at 4x (EVAL_BUDGET 80000, EVAL_DEPTH 2, EVAL_DEEP_K0 2, 32 seeds,
+# not staged). On the 6,381 rebuilt hold positions: log loss -0.0101 +- 0.0016 against one turn, weight 0.765; 5.4 s a position on one core
+# against 4.5 s at REFINE_SEEDS. Its reads go to <tag>_refined_<ENGINE>_d4.jsonl; the 128-roll ones (<tag>_refined_<ENGINE>.jsonl) stay readable
+REFINE_KIND = 'd4'; REFINED = f'{ENGINE}_{REFINE_KIND}'
+REFINE_ENV = {'EVAL_BUDGET': '80000', 'EVAL_DEPTH': '2', 'EVAL_DEEP_K0': '2'}; REFINE_CAL = 0.765
+def refine_run(posf, outf, threads=1):
+    """the background read of a positions file (the caller holds LUCK)"""
+    EN.run(posf, outf, threads, 32, 0, extra={**EVAL_ENV, **REFINE_ENV}, nice=19)
 # the bot page's background read is off (the user, 2026-10-14: hundreds of games re-read take longer than an engine version lasts); its games
 # are read once, at the full 32 rolls, and the page shows no "quick read" note. Streams keep both reads (a stream day is about 3 hours of it)
 BOT_REFINE = False
@@ -574,30 +582,30 @@ class BotRunner:
             def log_message(self, *a): pass
         threading.Thread(target=http.server.ThreadingHTTPServer(('127.0.0.1', s.port), H).serve_forever, daemon=True).start()
     def refine(s):
-        """the background read: the newest saved game not yet refined gets every turn's positions read again at REFINE_SEEDS, then its page
+        """the background read: the newest saved game not yet refined gets every turn's positions read again (refine_run), then its page
         is rebuilt from them (a Live on its cached files, in this thread) and saved again with refined set"""
         prog = os.path.join(OUT, 'bot_refined.games'); shown = None; t0 = time.time()
         while not s.lives: time.sleep(5)
         while True:
-            done = [re.search(r'-(\d+)(?:-[a-z0-9]+)?$', lv.room).group(1) for lv in list(s.lives) if isinstance(lv, Finished) and lv.refined == ENGINE]
+            done = [re.search(r'-(\d+)(?:-[a-z0-9]+)?$', lv.room).group(1) for lv in list(s.lives) if isinstance(lv, Finished) and lv.refined == REFINED]
             if (len(done), len(s.lives)) != shown:                         # the card: games read again (from earlier runs too) of all games loaded
                 open(prog, 'w').writelines(x + '\n' for x in done)
                 if shown is None: d0 = len(done)
-                json.dump({'title': f"The bot's games: read again at {REFINE_SEEDS} rolls (games, up to 3 engine threads at the lowest priority)",
+                json.dump({'title': "The bot's games: read again with depth at 4x (games, up to 3 engine threads at the lowest priority)",
                            'out': os.path.relpath(prog, os.path.join(C.HERE, 'out')), 'total': len(s.lives), 'done0': d0, 'started': t0, 'threads': 3,
-                           'seeds': REFINE_SEEDS, 'staged': True, 'pid': os.getpid(), 'unit': 'games'}, open(prog + '.run.json', 'w')); shown = (len(done), len(s.lives))   # pid: running while this page is
-            todo = [i for i, lv in enumerate(s.lives) if (isinstance(lv, Finished) and lv.refined != ENGINE) or (isinstance(lv, Live) and lv.saved and not lv.refining)]
+                           'seeds': 32, 'staged': False, 'pid': os.getpid(), 'unit': 'games'}, open(prog + '.run.json', 'w')); shown = (len(done), len(s.lives))   # pid: running while this page is
+            todo = [i for i, lv in enumerate(s.lives) if (isinstance(lv, Finished) and lv.refined != REFINED) or (isinstance(lv, Live) and lv.saved and not lv.refining)]
             if not todo: time.sleep(30); continue
             i = todo[-1]; old = s.lives[i]; num = re.search(r'-(\d+)(?:-[a-z0-9]+)?$', old.room).group(1); tag = 'bot_' + num
-            rf = os.path.join(OUT, f'{tag}_refined_{ENGINE}.jsonl')
+            rf = os.path.join(OUT, f'{tag}_refined_{REFINED}.jsonl')
             for posf in sorted(glob.glob(os.path.join(OUT, f'{tag}_t*_pos.jsonl')), key=lambda f: -int(re.search(r'_t(\d+)_pos', f).group(1))):
                 while (busy := others_busy()) >= BUSY: time.sleep(30)         # the lowest-priority work on the Mac: it waits under the 10-core cap,
                 thr = 3 if busy < 5 else 2 if busy < 7 else 1                  # and takes more threads when the Mac is quiet
-                with LUCK: EN.run(posf, rf, thr, REFINE_SEEDS, 1, extra=EVAL_ENV, nice=19)
+                with LUCK: refine_run(posf, rf, thr)
             f = os.path.join(s.dir, old.room + '.log'); pc = os.path.join(OUT, f'{tag}_page.json')
             lv = Live(old.room, s.threads, 0, logfile=f, tag=tag, fmt=botfmt(old.room)); lv.page_cache = pc; lv.exact = True; lv.luck = True; lv.refining = True
             lv.run()                                                         # the old page stays up until the rebuilt one replaces it
-            s.lives[i] = Finished(old.room, botfmt(old.room), lv.data, ENGINE)
+            s.lives[i] = Finished(old.room, botfmt(old.room), lv.data, REFINED)
     def run(s):
         s.serve(); print(f"the bot's games: http://localhost:{s.port}", flush=True)
         if BOT_REFINE and os.environ.get('EVALBAR_REFINE', '1') == '1': threading.Thread(target=s.refine, daemon=True).start()   # =0: none (a CAL refit pending)

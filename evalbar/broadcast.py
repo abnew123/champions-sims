@@ -634,7 +634,7 @@ class Runner:
         os.makedirs(LV.OUT, exist_ok=True); s.serve(); threading.Thread(target=s.refine, daemon=True).start()
     def refine(s):
         """two reads (the user, 2026-10-13, as on the bot page): each turn read quickly as it comes (live.LIVE_SEEDS) is read again at
-        live.REFINE_SEEDS, the newest game and turn first, on one engine thread at the lowest priority; its game's page picks it up. A
+        live.refine_run (depth at 4x since 2026-10-16), the newest game and turn first, on one engine thread at the lowest priority; its game's page picks it up. A
         progress card counts the turns read again against the turns read so far"""
         LV = s.LV; prog = os.path.join(LV.OUT, f'{s.tag}_refined.turns'); shown = None; tried = {}   # (game, turn) -> its positions file's time
         if not os.path.exists(prog): open(prog, 'w').close()
@@ -651,12 +651,12 @@ class Runner:
             except RuntimeError: time.sleep(1); continue                      # a game's thread changed its turns meanwhile: look again
             total = sum(1 for _ in open(prog)) + len(todo)
             if total != shown:                                              # the card's total grows as the stream goes on
-                json.dump({'title': f'Stream {s.tag}: turns read again at {LV.REFINE_SEEDS} rolls (one engine thread at the lowest priority)',
+                json.dump({'title': f'Stream {s.tag}: turns read again with depth at 4x (one engine thread at the lowest priority)',
                            'out': os.path.relpath(prog, os.path.join(C.HERE, 'out')), 'total': total, 'done0': 0, 'started': time.time(), 'threads': 1,
-                           'seeds': LV.REFINE_SEEDS, 'staged': True, 'proc': 'broadcast.py', 'pid': os.getpid()}, open(prog + '.run.json', 'w')); shown = total
+                           'seeds': 32, 'staged': False, 'proc': 'broadcast.py', 'pid': os.getpid()}, open(prog + '.run.json', 'w')); shown = total
             if not todo: time.sleep(10); continue
             lv, t, posf = todo[0]; tried[(lv.tag, t)] = os.path.getmtime(posf)   # once a version of its positions (a correction writes them again)
-            with LV.LUCK: LV.EN.run(posf, lv.rf, 1, LV.REFINE_SEEDS, 1, extra=LV.EVAL_ENV, nice=19)
+            with LV.LUCK: LV.refine_run(posf, lv.rf)
             with open(prog, 'a') as fh: fh.write(f'{lv.tag} t{t}\n')
             lv.dirty = True
     def serve(s):

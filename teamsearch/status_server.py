@@ -74,6 +74,35 @@ def log_progress(C, phase):
     rate = (pts[-1][0] - pts[0][0]) / (pts[-1][2] - pts[0][2]) if len(pts) >= 2 and pts[-1][2] > pts[0][2] else None
     return n, N, rate, os.path.getmtime(log)
 
+def step_card(path, title, done_marker):
+    """a card for a post-climb step (archverify.py, accrefine.py) from its log: the current stage's "<stage>: n/N teams, m min" lines
+    since the step's last header ("round 2: 8 teams, 27 candidates", "final check: ..."), time left from the recent rate, finished on
+    its done line, stopped on a "failed" line or when the log has been quiet for 30 minutes (the user, 2026-10-15: "make sure it
+    shows up on the status page")"""
+    if not os.path.exists(path): return None
+    L = [l.rstrip('\n') for l in open(path, errors='replace') if 'RuntimeWarning' not in l and 'frozen site' not in l]
+    if not L: return None
+    mt = os.path.getmtime(path); quiet = time.time() - mt > 1800
+    if any(done_marker in l for l in L): return card(title, 'finished', 1, 1, 'step', lines=[f"finished {ampm(dt(mt))}"])
+    failed = next((l for l in reversed(L) if ' failed' in l and 'UTC' in l), None)
+    head = next((l[9:].strip() for l in reversed(L) if re.match(r'^\d\d:\d\d [AP]M (round \d+:|v\d+\w*:|final check:)', l)), '')
+    seg, label = [], None
+    for l in L:
+        if re.match(r'^\d\d:\d\d [AP]M (round \d+:|final check:)', l): seg, label = [], None
+        m = re.match(r'^\d\d:\d\d [AP]M\s+(bring search|confirm games|confirm|final check)[^:]*: (\d+)/(\d+) teams, (\d+) min', l)
+        if m:
+            if m.group(1) != label: seg, label = [], m.group(1)
+            seg.append(tuple(map(int, m.groups()[1:])))
+    state = 'stopped' if failed or quiet else 'running'; extra = [head] if head else []
+    if failed: extra.append(failed.split('UTC: ', 1)[-1])
+    if not seg: return card(title, state, 0, 0, '', lines=extra + ([] if failed or quiet else ['starting the next stage…']))
+    n, N, _ = seg[-1]; pts = [x for x in seg if x[2] >= 2]
+    rate = (pts[-1][0] - pts[0][0]) / (pts[-1][2] - pts[0][2]) if len(pts) >= 2 and pts[-1][2] > pts[0][2] else None
+    if state == 'running':
+        if rate: done_at = mt + (N - n) / rate * 60; extra.append(f"{label}: about {fmt(max(0, done_at - time.time()))} left in this stage (done around {ampm(dt(done_at))})")
+        else: extra.append(f"{label}: estimating time left…")
+    return card(title, state, n, N, f'teams ({label})', None, state == 'running', None, extra)
+
 def other_thread():
     """the other thread's progress cards (the project's status_server.py, run read-only), or a link if its layout changes"""
     try:
@@ -156,6 +185,10 @@ def cards():
             label = {'prefilter': 'matrix pre-filter', 'done': 'finished'}[phase]
             cards.append(card(f"Hill climb round {rnd} ({pr['mode']}): {label}", 'running' if live else 'finished' if phase == 'done' else 'stopped',
                               0, 0, '', lines=[f"{pr.get('moved', '?')} of {pr['starts']} start teams moved to a better team" if phase == 'done' else '']))
+    for logname, title, done in (('round_archverify.log', 'Finals verified against their starts (fresh games, two seeds)', 'verification done'),
+                                 ('round_accrefine.log', 'Sure-hit pass (set swaps toward more sure hits, then a final check)', 'accuracy refinement done')):
+        c = step_card(C(logname), title, done)
+        if c and (not pr or pr.get('phase') == 'done' or os.path.getmtime(C(logname)) > (pr.get('at') or 0)): cards.append(c)
     if stt:
         act = sum(1 for t in stt['teams'].values() if not t['done'])
         moves = [json.loads(l) for l in open(C('climb_log.jsonl'))] if os.path.exists(C('climb_log.jsonl')) else []

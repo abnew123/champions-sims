@@ -54,7 +54,7 @@ impl VNet {
         let e: Vec<f64> = f0.iter().chain(&f1).chain(&g0).chain(&x).copied().collect();
         let es: Vec<f64> = f1.iter().chain(&f0).chain(&g1).copied().chain(x.iter().map(|v| -v)).collect();
         let mut z = (self.h(&e) - self.h(&es)).clamp(-30.0, 30.0);
-        if vnet_perish() { if let Some((_, w)) = &cfg.vw { z += perish_adj_mode(b, w, true); } }
+        if vnet_perish()[SIDE.with(|c| c.get()) as usize & 1] { if let Some((_, w)) = &cfg.vw { z += perish_adj_mode(b, w, true); } }
         1.0 / (1.0 + (-z).exp())
     }
 }
@@ -614,7 +614,9 @@ fn perish_adj(b: &Battle, w: &[f64]) -> f64 { perish_adj_mode(b, w, perish2()) }
 /// VNET_PERISH=1 (2026-10-16, the user: fix Perish rather than avoid it): the learned value had no Perish input at all (vfeats has no
 /// count, and perish_adj was only added on the EG_VALUE path), so at the leaves a trapped Pokemon on its last count looked healthy and
 /// singing, escaping or KOing the trapper earned nothing. With it the net's log-odds get PERISH2's term, in EG_VALUE's units
-fn vnet_perish() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("VNET_PERISH").map(|v| v != "0").unwrap_or(false)) }
+/// (VNET_PERISH=s0 / s1: only that side's searches, under BATTLE_EVAL's as_side, for self-play of the term against none)
+fn vnet_perish() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new(); *F.get_or_init(|| match std::env::var("VNET_PERISH").as_deref() {
+    Err(_) | Ok("0") | Ok("") => [false, false], Ok("s0") => [true, false], Ok("s1") => [false, true], Ok(_) => [true, true] }) }
 fn perish_adj_mode(b: &Battle, w: &[f64], p2: bool) -> f64 {
     let al = [alive(b, 0), alive(b, 1)];
     let t = |m: &MonRef| find(&b.p(*m).volatiles, "perishsong").and_then(|s| s.duration);

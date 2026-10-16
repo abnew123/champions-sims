@@ -22,6 +22,7 @@ os.environ.setdefault('CHAMP_DATA', 'engine_data_full.json')
 os.environ.setdefault('EG_MEGA_TIE', '0')
 os.environ.setdefault('EG_LAST_PROTECT', '0')   # our last Pokemon never Protects when it changes nothing (side 0 is the bot); the user, 2026-10-11
 os.environ.setdefault('EG_NO_DOUBLE_PROTECT', '0')   # and no Pokemon of ours Protects two turns running (the user, 2026-10-11; self-play -1.2 +- 0.7)
+os.environ.setdefault('VNET_PERISH', '1')   # the net's value with the Perish term (v37; 2026-10-16, the user: fix Perish: the sim's Perish side now matches people)
 STALL = {'Protect', 'Detect', 'Spiky Shield', "King's Shield", 'Baneful Bunker', 'Burning Bulwark', 'Silk Trap', 'Obstruct', 'Max Guard'}
 def protect_chains(log, side):
     """per Pokemon of ours (by species), how many turns running it has used a Protect-type move up to now (success or not)"""
@@ -35,6 +36,10 @@ def protect_chains(log, side):
             else: chain[mon] = 0
     return {m: c for m, c in chain.items() if last.get(m) == turn - 1}
 import botpos as BP, live as LV, engine as EN
+# the bot's CAL (2026-10-16, bot/cal_fit.py: its own games at turns 1/3/5 under its live depth-at-4x search, 3,532 positions in 1,242
+# games: 0.736 +- 0.039; the Eval bar's fit on open-sheet replays was 0.765, live.CAL's 0.676 the older search's): the forfeit line and
+# contempt's real win chance
+LV.CAL = 0.736
 import procs as P
 for _prog, _path in (('champ', os.environ['CHAMP_BIN']), ('node', None)):   # the Eval bar's process-name links, made once here so two
     try: P.exe(_prog, _path)                                                   # brains starting together do not race to create them

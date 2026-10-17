@@ -5,8 +5,8 @@
   "stop_if_rating_at_least": null,
   "stop_if_opponent_in_top": 50,
   "think_seconds": [
-    4,
-    12
+    1,
+    4
   ],
   "accept_challenges": false,
   "search_ladder": true,

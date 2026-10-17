@@ -205,7 +205,9 @@ class Reader:
             if s.team(sd): s.emit(s.sheet_line(sd))
         s.emit('|teampreview|4', '|start')
         for (sd, sl), (n, p) in sorted(boxes.items()):
-            sp = s.species(sd, n); s.active[(sd, sl)] = sp; s.hp[(sd, sl)] = p; s.note_seen(sd, sp)
+            sp = s.species(sd, n)
+            if not sp: continue                                                  # a name that matches no species (Nice Day 1, 2026-10-17: it ended the
+            s.active[(sd, sl)] = sp; s.hp[(sd, sl)] = p; s.note_seen(sd, sp)     # follow at 7:34 am): the slot fills at the next decision screen, as reconcile does
             s.emit(f"|switch|{sd}{sl}: {s.nick(sp)}|{sp}, L50|{p}/100")
         s.started = True
     def note_seen(s, sd, sp):

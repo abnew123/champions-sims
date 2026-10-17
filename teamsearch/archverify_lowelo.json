@@ -1,0 +1,404 @@
+{
+ "Rain": [
+  {
+   "start": "Ladder-01",
+   "start_score": 0.5350728253474855,
+   "final_score": 0.5948872981511666,
+   "gain": 0.05199810366070885,
+   "se": 0.03534144263950417,
+   "swaps": [
+    [
+     "Indeedee-F#55",
+     "Rillaboom#1"
+    ]
+   ],
+   "team": [
+    "Pelipper#39",
+    "Archaludon#10",
+    "Rillaboom#1",
+    "M-Lopunny#5",
+    "Basculegion#27",
+    "Incineroar#6"
+   ]
+  },
+  {
+   "start": "Ladder-06",
+   "start_score": 0.5477063409700147,
+   "final_score": 0.5477063409700147,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Swampert#2",
+    "Pelipper#7",
+    "Grimmsnarl#14",
+    "Clefable#4",
+    "Archaludon#27",
+    "Sneasler#11"
+   ]
+  },
+  {
+   "start": "Ladder-08",
+   "start_score": 0.42320659084227896,
+   "final_score": 0.42320659084227896,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Pelipper#40",
+    "M-Swampert#9",
+    "M-Meganium#3",
+    "Rillaboom#70",
+    "Sylveon#23",
+    "Volcarona#46"
+   ]
+  },
+  {
+   "start": "Ladder-12",
+   "start_score": 0.5128557163244538,
+   "final_score": 0.6746542429107688,
+   "gain": 0.16118336882817963,
+   "se": 0.03504823220997202,
+   "swaps": [
+    [
+     "Garchomp#38",
+     "Garchomp#1"
+    ],
+    [
+     "Basculegion-F#2",
+     "M-Staraptor#1"
+    ]
+   ],
+   "team": [
+    "M-Staraptor#1",
+    "Pelipper#41",
+    "Archaludon#6",
+    "M-Golisopod#5",
+    "Grimmsnarl#3",
+    "Garchomp#1"
+   ]
+  }
+ ],
+ "Trick Room": [
+  {
+   "start": "Ladder-02",
+   "start_score": 0.2993170416100561,
+   "final_score": 0.6176203824239772,
+   "gain": 0.3175461550166639,
+   "se": 0.039290154358822736,
+   "swaps": [
+    [
+     "M-Hawlucha#1",
+     "M-Staraptor#1"
+    ],
+    [
+     "Malamar#1",
+     "Primarina#2"
+    ],
+    [
+     "Snorlax#1",
+     "M-Floette#1"
+    ]
+   ],
+   "team": [
+    "Primarina#2",
+    "M-Staraptor#1",
+    "M-Floette#1",
+    "Sinistcha#30",
+    "Incineroar#103",
+    "Kingambit#35"
+   ]
+  },
+  {
+   "start": "Ladder-13",
+   "start_score": 0.38928386311446406,
+   "final_score": 0.5567741061005593,
+   "gain": 0.16430642062043066,
+   "se": 0.03897073329523344,
+   "swaps": [
+    [
+     "Arboliva#1",
+     "Arcanine-H#1"
+    ],
+    [
+     "Rillaboom#72",
+     "Garchomp#2"
+    ]
+   ],
+   "team": [
+    "M-Salamence#33",
+    "Sylveon#24",
+    "Farigiraf#93",
+    "Garchomp#2",
+    "Arcanine-H#1",
+    "Milotic#21"
+   ]
+  },
+  {
+   "start": "Ladder-19",
+   "start_score": 0.6337262540145088,
+   "final_score": 0.6337262540145088,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Raichu Y#1",
+    "Farigiraf#35",
+    "Rillaboom#69",
+    "Kingambit#5",
+    "M-Floette#4",
+    "Sneasler#1"
+   ]
+  }
+ ],
+ "Balance": [
+  {
+   "start": "Ladder-03",
+   "start_score": 0.5809955261824479,
+   "final_score": 0.5809955261824479,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Garchomp Z#1",
+    "M-Floette#1",
+    "Gholdengo#22",
+    "Incineroar#1",
+    "Rillaboom#1",
+    "Sneasler#1"
+   ]
+  },
+  {
+   "start": "Ladder-05",
+   "start_score": 0.6067660216568012,
+   "final_score": 0.6067660216568012,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Gholdengo#22",
+    "Volcarona#45",
+    "M-Garchomp Z#1",
+    "Incineroar#3",
+    "Rillaboom#1",
+    "M-Raichu Y#1"
+   ]
+  },
+  {
+   "start": "Ladder-16",
+   "start_score": 0.573597200202153,
+   "final_score": 0.6153993449806063,
+   "gain": 0.040108311079318636,
+   "se": 0.021425299453695177,
+   "swaps": [
+    [
+     "M-Floette#2",
+     "Basculegion#1"
+    ]
+   ],
+   "team": [
+    "M-Dragonite#1",
+    "Basculegion#1",
+    "Rillaboom#1",
+    "Incineroar#11",
+    "Sneasler#8",
+    "Gholdengo#22"
+   ]
+  },
+  {
+   "start": "Ladder-17",
+   "start_score": 0.5490058381517833,
+   "final_score": 0.5490058381517833,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Floette#1",
+    "M-Garchomp Z#2",
+    "Rillaboom#69",
+    "Incineroar#67",
+    "Gholdengo#24",
+    "Sneasler#2"
+   ]
+  },
+  {
+   "start": "Ladder-18",
+   "start_score": 0.5507210222585068,
+   "final_score": 0.5507210222585068,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Dragonite#1",
+    "Sylveon#3",
+    "Gholdengo#23",
+    "Sneasler#49",
+    "Incineroar#11",
+    "Rillaboom#1"
+   ]
+  }
+ ],
+ "Sun": [
+  {
+   "start": "Ladder-04",
+   "start_score": 0.5598516955390079,
+   "final_score": 0.5598516955390079,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Garchomp Z#2",
+    "Incineroar#96",
+    "Rillaboom#69",
+    "M-Charizard Y#4",
+    "Sylveon#6",
+    "Farigiraf#69"
+   ]
+  },
+  {
+   "start": "Ladder-10",
+   "start_score": 0.5455702670770399,
+   "final_score": 0.5455702670770399,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Mawile#1",
+    "Farigiraf#92",
+    "Rillaboom#71",
+    "Politoed#12",
+    "Torkoal#13",
+    "M-Camerupt#9"
+   ]
+  }
+ ],
+ "Tailwind": [
+  {
+   "start": "Ladder-07",
+   "start_score": 0.5490138951758221,
+   "final_score": 0.5490138951758221,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Salamence#32",
+    "Rillaboom#1",
+    "Arcanine-H#1",
+    "Gholdengo#23",
+    "M-Raichu Y#1",
+    "Sylveon#2"
+   ]
+  },
+  {
+   "start": "Ladder-09",
+   "start_score": 0.42976567869177146,
+   "final_score": 0.5849044466864568,
+   "gain": 0.15374402344674512,
+   "se": 0.03756636369658887,
+   "swaps": [
+    [
+     "Zoroark-Hisui#5",
+     "Kingambit#2"
+    ]
+   ],
+   "team": [
+    "M-Gallade#1",
+    "Kingambit#2",
+    "Scizor#2",
+    "Basculegion#28",
+    "M-Salamence#32",
+    "Sneasler#102"
+   ]
+  },
+  {
+   "start": "Ladder-11",
+   "start_score": 0.3860685557756095,
+   "final_score": 0.5717120775308486,
+   "gain": 0.18620549326255748,
+   "se": 0.036696779309768904,
+   "swaps": [
+    [
+     "Cofagrigus#1",
+     "Garchomp#1"
+    ],
+    [
+     "M-Metagross#22",
+     "Volcarona#1"
+    ],
+    [
+     "Dragalge#1",
+     "M-Staraptor#1"
+    ],
+    [
+     "Whimsicott#26",
+     "Milotic#1"
+    ]
+   ],
+   "team": [
+    "M-Golisopod#5",
+    "Garchomp#1",
+    "Annihilape#18",
+    "M-Staraptor#1",
+    "Milotic#1",
+    "Volcarona#1"
+   ]
+  }
+ ],
+ "Indeedee TR": [
+  {
+   "start": "Ladder-14",
+   "start_score": 0.5209602027482472,
+   "final_score": 0.5209602027482472,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "M-Gardevoir#9",
+    "M-Absol Z#7",
+    "Indeedee#19",
+    "Empoleon#3",
+    "Volcarona#47",
+    "Sneasler#5"
+   ]
+  },
+  {
+   "start": "Ladder-20",
+   "start_score": 0.5388570074313027,
+   "final_score": 0.5388570074313027,
+   "gain": 0.0,
+   "se": 0.0,
+   "swaps": [],
+   "team": [
+    "Sneasler#103",
+    "Incineroar#4",
+    "Rillaboom#1",
+    "M-Raichu Y#15",
+    "Indeedee#36",
+    "M-Garchomp Z#18"
+   ]
+  }
+ ],
+ "Perish": [
+  {
+   "start": "Ladder-15",
+   "start_score": 0.36364391649557526,
+   "final_score": 0.5217019324999549,
+   "gain": 0.15796591943333618,
+   "se": 0.036818641513499804,
+   "swaps": [
+    [
+     "Politoed#1",
+     "Kingambit#3"
+    ]
+   ],
+   "team": [
+    "M-Gengar#1",
+    "Incineroar#8",
+    "Kingambit#3",
+    "Rillaboom#73",
+    "Volcarona#48",
+    "Garchomp#17"
+   ]
+  }
+ ]
+}

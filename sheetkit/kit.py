@@ -23,6 +23,7 @@
   python3 sheetkit/kit.py <team> flagged [--write]         battle results with a game flagged unsupported; --write moves them out to replay
                                                            (--moves healingwish,memento: also results where either four carries one)
                                                            (--stones 2: also results where either four holds two Mega Stones)
+                                                           (--moves-only: only those, not the unsupported-mechanic results)
 
 Long runs: start them in the background (nohup ... &); every run resumes where it stopped and shows on the progress page (port 8766).
 On the Mac the default is 3 workers and more than 10 is refused (--force); ask before any multi-core run. See sheetkit/README.md."""
@@ -42,6 +43,7 @@ def status(sheet):
     print(f"{sheet.cfg.get('name', sheet.slug)}  ({sheet.dir})")
     print(f"  six: {', '.join(sheet.names)}")
     print(f"  current sim setup: {S['current']}  ({S['setups'][S['current']]['status']})")
+    if sheet.cfg.get('setup'): print(f"  this sheet plays on: {sheet.cfg['setup']} (sheet.json 'setup')")
     g = os.path.normpath(sheet.p(sheet.cfg.get('grid_dir', 'work/grid')))
     print(f"  grid      {'ok' if os.path.exists(os.path.join(g, 'gx_cells_tr_inc.json')) else 'MISSING (run: grid)'}  {os.path.relpath(g, ROOT)}")
     mj = len(rj(sheet.w('matrix', 'jobs.json'))) if os.path.exists(sheet.w('matrix', 'jobs.json')) else 0; mr = n('matrix', 'res')
@@ -114,34 +116,40 @@ def has_moves(sheet, d, r, moves, cache={}):
     idm = lambda m: m.lower().replace(' ', '').replace('-', '')
     mine = any(idm(m) in moves for n in r.get('lead', []) + r.get('back', []) for m in sheet.team.get(n, {}).get('moves', []))
     if mine: return True
+    if 'six' in r and r.get('arch'):                              # an optimal result: their sets are the real six's (by species, so a
+        if 'sixes' not in cache: cache['sixes'] = rj(sheet.w('optimal', 'sixes.json'))      # set-aside result with an old job number works too)
+        six = {x['species']: x for x in cache['sixes'][r['arch']][r['six']]['six']}
+        return any(idm(m) in moves for sp in r.get('theirs', []) for m in six.get(sp, {}).get('moves', []))
     if os.path.exists(d + '.json'):                               # an optimal queue: the opposing sets are in the job
         if d not in cache: cache[d] = rj(d + '.json')
         return any(idm(m) in moves for s in cache[d][r['job']]['theirs'] for m in s.get('moves', []))
     sets = opp_model().get(r.get('arch'), {}).get('sets', {})        # the card model's set for each of their four
     return any(any(m in sets.get(sp, '').split('|')[-1].split(' (')[0].split('/') for m in moves) for sp in r.get('theirs', []))
 
-def flagged(sheet, move=False, moves=(), stones=0):
+def flagged(sheet, move=False, moves=(), stones=0, only_moves=False, tag=None):
     """Battle results with a game the simulator flagged unsupported (a mechanic it had not ported), per result folder; with --write
-    they move to <folder>.flagged/, so the next run of that step plays just those jobs again (on a setup that ports the mechanic and
-    shares the folders, e.g. SHEET_SETUP=v22-dp2-race-eg9-full)"""
+    they move to <folder>.flagged/ (.flagged_<tag> with --tag), so the next run of that step plays just those jobs again (on a setup
+    that ports the mechanic and shares the folders, e.g. SHEET_SETUP=v22-dp2-race-eg9-full). The folder's set-aside results (.stale)
+    are checked too and matches moved out as stale_<n>.json: otherwise a run would reuse them by content, or matrix_cells read them"""
     import collections, glob
     dirs = sorted(d for d in glob.glob(sheet.w('*', 'res*')) + glob.glob(sheet.w('optimal*', 'screen_*')) + glob.glob(sheet.w('optimal*', 'matrix*'))
                   if os.path.isdir(d) and '.' not in os.path.basename(d) and os.path.basename(os.path.dirname(d)) != 't1')
     mech = collections.Counter(); total = 0
     for d in dirs:
         bad = []
-        for f in glob.glob(os.path.join(d, '*.json')):
+        for f in glob.glob(os.path.join(d, '*.json')) + glob.glob(os.path.join(d + '.stale', '*.json')):
             try: rows = json.load(open(f)).get('rows', [])
             except Exception: continue
-            u = [m for g in rows for m in (g.get('unsupported') or [])]
+            u = [] if only_moves else [m for g in rows for m in (g.get('unsupported') or [])]      # --moves-only: just the moves / stones
             if not u and moves and has_moves(sheet, d, json.load(open(f)), moves): u = ['move ' + '/'.join(sorted(moves))]
             if not u and stones and max(stone_holders(sheet, d, json.load(open(f)))) >= stones: u = [f'{stones}+ stone holders in a four']
             if u: bad.append(f); mech.update(set(u))
         if not bad: continue
-        total += len(bad); print(f"{os.path.relpath(d, sheet.w())}: {len(bad)} results with a flagged game")
+        ns = sum(f.startswith(d + '.stale' + os.sep) for f in bad)
+        total += len(bad); print(f"{os.path.relpath(d, sheet.w())}: {len(bad)} results with a flagged game" + (f" ({ns} of them set aside in .stale)" if ns else ''))
         if move:
-            os.makedirs(d + '.flagged', exist_ok=True)
-            for f in bad: os.replace(f, os.path.join(d + '.flagged', os.path.basename(f)))
+            out = d + ('.flagged_' + tag if tag else '.flagged'); os.makedirs(out, exist_ok=True)
+            for f in bad: os.replace(f, os.path.join(out, ('stale_' if f.startswith(d + '.stale' + os.sep) else '') + os.path.basename(f)))
     print(f"{total} results" + (f"; mechanics (results they appear in): {', '.join(f'{m} {n}' for m, n in mech.most_common(12))}" if total else ''))
     if total: print('moved to <folder>.flagged/: run the same steps again (e.g. SHEET_SETUP=... sheetkit/cloud/all.sh, then more.sh) to replay them'
                     if move else '(nothing moved: add --write to move them out for a replay)')
@@ -152,13 +160,14 @@ def main():
     ap.add_argument('--games', type=int); ap.add_argument('--g0', type=int); ap.add_argument('--threads', '--workers', type=int, dest='threads')
     ap.add_argument('--only'); ap.add_argument('--setup'); ap.add_argument('--top', type=int, default=5); ap.add_argument('--samples', type=int, default=12)
     ap.add_argument('--write', action='store_true'); ap.add_argument('--force', action='store_true'); ap.add_argument('--compare'); ap.add_argument('--out'); ap.add_argument('--moves'); ap.add_argument('--stones', type=int)
+    ap.add_argument('--moves-only', action='store_true'); ap.add_argument('--tag')
     a = ap.parse_args()
     if a.step == 'init': return init(a.team)
     sheet = Sheet(a.team); step = (a.step, a.sub); G = sheet.cfg.get('games', {})      # sheet.json "games": default game counts per step
     import procs; procs.own(sheet)                               # show as <prefix>-py in top
     if a.step == 'status': status(sheet)
     elif a.step == 'smoke': smoke(sheet)
-    elif a.step == 'flagged': flagged(sheet, a.write, tuple(x.strip() for x in (a.moves or '').split(',') if x.strip()), a.stones or 0)
+    elif a.step == 'flagged': flagged(sheet, a.write, tuple(x.strip() for x in (a.moves or '').split(',') if x.strip()), a.stones or 0, a.moves_only, a.tag)
     elif a.step == 'grid':
         import grid; grid.build(sheet, threads_arg(a.threads, a.force))
     elif a.step == 'charts':

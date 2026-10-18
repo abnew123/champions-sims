@@ -512,5 +512,6 @@
   "answers": 2,
   "candidates": 4
  },
- "trim_note": "A cheaper run than the kit's defaults (no cloud box on 2026-10-06): the bring matrix plays only the 39 fours that were in the top 10 of any archetype in the archetype-era matrix (final simulator, 86,400 games), 8 games per opposing lead; the confirmation 32; both-sides-pick uses each card's 4 most common real sixes, 4 games per four in the screen, our 4 best candidates against the 2 strongest answers per six; game plans 32 games."
+ "trim_note": "A cheaper run than the kit's defaults (no cloud box on 2026-10-06): the bring matrix plays only the 39 fours that were in the top 10 of any archetype in the archetype-era matrix (final simulator, 86,400 games), 8 games per opposing lead; the confirmation 32; both-sides-pick uses each card's 4 most common real sixes, 4 games per four in the screen, our 4 best candidates against the 2 strongest answers per six; game plans 32 games.",
+ "setup": "v23p2-dp2-race-eg9-full"
 }

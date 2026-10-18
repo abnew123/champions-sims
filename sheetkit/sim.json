@@ -180,6 +180,24 @@
    ],
    "status": "Battle sim, 2026-10-09: v24 plus matchup-grid names by the current forme (an un-evolved stone holder no longer counts as its Mega in the grid features) and an optional tie-break toward Mega Evolving, off here (EG_MEGA_TIE=0): players hold the Mega on 21% of holders in the replays (15.6% delay, mostly on Protect turns), the planner 12.8% without the tie-break and 8.3% with it. Own folders (the grid fix changes the kit's games). Use it instead of v24 for new sheets and full reruns, with t1.mega_choice: true. Linux source: native/champ/src_battle_v25.tar.gz.",
    "games": "v25-dp2-race-eg9"
+  },
+  "v23p2-dp2-race-eg9-full": {
+   "binary": "native/champ/bin/champ-battle-v23",
+   "value": "pssim/egvalue9.json",
+   "engine_data": "native/engine_data_full.json",
+   "env": {
+    "BATTLE_ANTICIPATE": "1",
+    "DP2": "1",
+    "RACE": "1",
+    "RACE_TIES": "avg",
+    "CALC_DATA": "native/champions_data.json",
+    "PERISH2": "1"
+   },
+   "env_paths": [
+    "CALC_DATA"
+   ],
+   "status": "TR sheet, 2026-10-17: v23 with PERISH2=1, the trap-aware Perish term on the EG_VALUE path (a count dooms only a Pokemon that cannot leave; v11's flag). Battle sim's check on 244 real human pairings with a Perish side: the Perish side's sim win 41.2% -> 45.2% against a real 49.2%, songs in 16% -> 33.5% of playouts against the humans' 32% (v23 as is overrates the side facing Perish by ~8 points). It plays v23's games wherever no Perish count can arise, so it shares v23's result folders: `kit.py <team> flagged --write --moves perishsong --moves-only`, then the steps on this setup. The Trick Room Six sheet uses it (sheet.json 'setup'; the user's choice over moving the sheet to the bot's net setup, 2026-10-17).",
+   "games": "v13-dp2-race-eg9"
   }
  }
 }

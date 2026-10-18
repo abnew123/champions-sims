@@ -95,7 +95,7 @@ def battle_run(sheet, step, jobs_path, outdir, games, g0, threads, setup, log, o
     """Play jobs_path's jobs (all, or the job numbers in `only`) for games g0 .. g0+games-1 with the full-battle sim. The jobs are dealt
     round-robin to battle processes of a few threads each, so every process gets the same mix and they finish together.
     Resumes: jobs with a result file are skipped."""
-    S = sim_setup(setup); jobs = rj(jobs_path); sd = outdir + '.starts'; os.makedirs(outdir, exist_ok=True)
+    S = sim_setup(setup or os.environ.get('SHEET_SETUP') or sheet.cfg.get('setup')); jobs = rj(jobs_path)     # a sheet can pin its setup (sheet.json 'setup'); sd = outdir + '.starts'; os.makedirs(outdir, exist_ok=True)
     stamp(outdir, {'setup': S.get('games', S['name']), 'games': games, 'g0': g0, 'team': team_hash(sheet), 'opponents': OPPONENTS['kind'],
                    'grid': grid_hash(sheet)})      # 'games': a faster build of the same games; 'grid': the planner's one-on-one grid, which its value reads
     stale = 0
@@ -149,7 +149,8 @@ def load(pattern):
     """(arch, opposing lead pair) -> four (lead frozenset, back frozenset) -> {game: value}; plus share, the four's names, their four, ms"""
     V = collections.defaultdict(dict); share = {}; names = {}; theirs = {}; ms = collections.defaultdict(list)
     for f in glob.glob(pattern):
-        try: r = rj(f)
+        if '.' in os.path.basename(os.path.dirname(f)): continue  # res.stale / res.flagged*: set-aside results, not this run's (a 'res*'
+        try: r = rj(f)                                            # pattern used to read them too, and an archived result could win)
         except Exception: continue                                # a file still being written
         key = (frozenset(r['lead']), frozenset(r['back'])); names[key] = (r['lead'], r['back']); t = (r['arch'], r['pair'])
         V[t][key] = {g['g']: g['v'] for g in r['rows'] if g.get('v') is not None}

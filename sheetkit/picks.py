@@ -95,7 +95,7 @@ def battle_run(sheet, step, jobs_path, outdir, games, g0, threads, setup, log, o
     """Play jobs_path's jobs (all, or the job numbers in `only`) for games g0 .. g0+games-1 with the full-battle sim. The jobs are dealt
     round-robin to battle processes of a few threads each, so every process gets the same mix and they finish together.
     Resumes: jobs with a result file are skipped."""
-    S = sim_setup(setup or os.environ.get('SHEET_SETUP') or sheet.cfg.get('setup')); jobs = rj(jobs_path)     # a sheet can pin its setup (sheet.json 'setup'); sd = outdir + '.starts'; os.makedirs(outdir, exist_ok=True)
+    S = sim_setup(setup or os.environ.get('SHEET_SETUP') or sheet.cfg.get('setup')); jobs = rj(jobs_path); sd = outdir + '.starts'; os.makedirs(outdir, exist_ok=True)   # a sheet can pin its setup (sheet.json 'setup')
     stamp(outdir, {'setup': S.get('games', S['name']), 'games': games, 'g0': g0, 'team': team_hash(sheet), 'opponents': OPPONENTS['kind'],
                    'grid': grid_hash(sheet)})      # 'games': a faster build of the same games; 'grid': the planner's one-on-one grid, which its value reads
     stale = 0

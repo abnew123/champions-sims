@@ -252,7 +252,8 @@ def report(sheet, out=print):
         if a not in picks: continue
         ts = S6[a]; rows = ranking(sheet, a, S6, M)
         pk = four_key(picks[a]['lead'], picks[a]['back']); ok = lambda ours: four_key(ours[0].split('+'), ours[1].split('+')) in done[a]
-        out(f"\n=== {a}: sheet {100*picks[a].get('replay_v', picks[a]['v']):.0f}% against the replay-average fours")
+        rv = picks[a].get('replay_v')                             # None when the confirmation never played the pick
+        out(f"\n=== {a}: " + (f"sheet {100*rv:.0f}% against the replay-average fours" if rv is not None else "the sheet pick has no fresh-game number"))
         for v, ours, per in rows:
             out(f"   {four(ours[0].split('+'), ours[1].split('+')):42s} {100*v:5.1f}% when each opposing six brings its best four"
                 + ('' if ok(ours) else '   (its own answers not searched)') + ('   <- sheet pick' if four_key(ours[0].split('+'), ours[1].split('+')) == pk else ''))

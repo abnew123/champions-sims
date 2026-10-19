@@ -93,46 +93,50 @@
   },
   "Sun: Gardevoir + Indeedee-F + Kingambit + Sneasler": {
    "lines": [
-    "Turn two: attack with both 45%, one switch 33% (mostly Farigiraf out for Kingambit), click Trick Room 18%.",
-    "Trick Room is up on turn two in 38% of games; when it runs out, Farigiraf sets it again in 47% (around turn 3).",
-    "Kingambit comes in around turn 3; Blastoise comes in around turn 4.",
-    "Blastoise Mega Evolves around turn 4."
+    "Turn two: attack with both 52%, one switch 20% (mostly Farigiraf out for Incineroar), click Trick Room 19%.",
+    "Trick Room is up on turn two in 42% of games; when it runs out, Farigiraf sets it again in 49% (around turn 3).",
+    "Incineroar comes in around turn 3; Blastoise comes in around turn 4.",
+    "Blastoise Mega Evolves around turn 4.",
+    "With Trick Room up on turn two you win 47%; without it 31%.",
+    "Losing Farigiraf by turn three (16% of games) drops you to 23%: keep it safe early."
    ],
    "facts": {
     "turn2": {
-     "a Protect": 0.047,
-     "attack with both": 0.446,
-     "one switch": 0.329,
-     "click Trick Room": 0.178
+     "attack with both": 0.52,
+     "one switch": 0.201,
+     "click Trick Room": 0.186,
+     "a Protect": 0.052,
+     "double switch": 0.04
     },
-    "tr_turn1": 0.735,
-    "tr_up_turn2": 0.382,
-    "tr_set_later": 0.468,
-    "their_tr_per_game": 1.14,
-    "win": 0.376,
+    "tr_turn1": 0.762,
+    "tr_up_turn2": 0.421,
+    "tr_set_later": 0.487,
+    "their_tr_per_game": 1.11,
+    "win": 0.381,
     "games": 192
    }
   },
   "Indeedee TR: Gardevoir + Indeedee-F + Sneasler (no Kingambit)": {
    "lines": [
-    "Turn two: one switch 36%, attack with both 35%, click Trick Room 20%.",
-    "Trick Room is up on turn two in 59% of games; when it runs out, Farigiraf sets it again in 62% (around turn 4).",
-    "Torkoal comes in around turn 3; Kingambit comes in around turn 4 (89% of games).",
-    "With Trick Room up on turn two you win 82%; without it 66%."
+    "Turn two: attack with both 38%, one switch 24% (mostly Farigiraf out for Kingambit), click Trick Room 23%.",
+    "Trick Room is up on turn two in 56% of games; when it runs out, Farigiraf sets it again in 70% (around turn 4).",
+    "Kingambit comes in around turn 3; Blastoise comes in around turn 4.",
+    "Blastoise Mega Evolves around turn 4 (87% of games).",
+    "With Trick Room up on turn two you win 64%; without it 40%."
    ],
    "facts": {
     "turn2": {
-     "a Protect": 0.064,
-     "click Trick Room": 0.2,
-     "attack with both": 0.35,
-     "one switch": 0.358,
-     "double switch": 0.029
+     "a Protect": 0.112,
+     "click Trick Room": 0.234,
+     "attack with both": 0.381,
+     "double switch": 0.028,
+     "one switch": 0.245
     },
-    "tr_turn1": 0.779,
-    "tr_up_turn2": 0.594,
-    "tr_set_later": 0.621,
-    "their_tr_per_game": 1.33,
-    "win": 0.755,
+    "tr_turn1": 0.774,
+    "tr_up_turn2": 0.565,
+    "tr_set_later": 0.698,
+    "their_tr_per_game": 1.25,
+    "win": 0.532,
     "games": 192
    }
   },
@@ -210,46 +214,46 @@
   },
   "Sand: Excadrill + Salamence + Tyranitar (no Sneasler)": {
    "lines": [
-    "Turn two: attack with both 54%, one switch 38% (mostly Farigiraf out for Kingambit).",
-    "Trick Room is up on turn two in 82% of games; when it runs out, Farigiraf sets it again in 58% (around turn 6).",
-    "Incineroar comes in around turn 4; Kingambit comes in around turn 4.",
-    "Blastoise Mega Evolves on turn 1."
+    "Turn two: attack with both 59%, one switch 36% (mostly Blastoise out for Incineroar).",
+    "No Trick Room on turn one; Farigiraf sets it later in 75% of games, around turn 4.",
+    "Incineroar comes in around turn 4 (87% of games); Farigiraf comes in around turn 4 (82% of games).",
+    "Blastoise Mega Evolves on turn 1.",
+    "Losing Kingambit by turn three (20% of games) drops you to 38%: keep it safe early."
    ],
    "facts": {
     "turn2": {
-     "double switch": 0.009,
-     "one switch": 0.383,
-     "attack with both": 0.538,
-     "click Trick Room": 0.07
+     "one switch": 0.358,
+     "attack with both": 0.591,
+     "double switch": 0.038,
+     "click Trick Room": 0.013
     },
-    "tr_turn1": 0.935,
-    "tr_up_turn2": 0.816,
-    "tr_set_later": 0.581,
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.751,
     "their_tr_per_game": 0.0,
-    "win": 0.738,
+    "win": 0.722,
     "games": 160
    }
   },
   "Trick Room: Delphox + Floette + Incineroar + Sinistcha": {
    "lines": [
-    "Turn two: one switch 49% (mostly Farigiraf out for Torkoal), attack with both 43%.",
-    "Trick Room is up on turn two in 90% of games; when it runs out, Farigiraf sets it again in 51% (around turn 5).",
-    "Torkoal comes in around turn 4 (89% of games); Blastoise comes in around turn 5 (79% of games).",
-    "Blastoise Mega Evolves around turn 5 (77% of games)."
+    "Turn two: one switch 51% (mostly Indeedee out for Incineroar), attack with both 26%, click Trick Room 14%.",
+    "Trick Room is up on turn two in 51% of games; when it runs out, Indeedee sets it again in 31% (around turn 4).",
+    "Torkoal comes in around turn 3; Incineroar comes in around turn 3.",
+    "Blastoise Mega Evolves on turn 1."
    ],
    "facts": {
     "turn2": {
-     "attack with both": 0.428,
-     "one switch": 0.486,
-     "click Trick Room": 0.044,
-     "a Protect": 0.017,
-     "double switch": 0.024
+     "one switch": 0.508,
+     "attack with both": 0.258,
+     "double switch": 0.098,
+     "click Trick Room": 0.136
     },
-    "tr_turn1": 0.916,
-    "tr_up_turn2": 0.901,
-    "tr_set_later": 0.507,
-    "their_tr_per_game": 0.57,
-    "win": 0.83,
+    "tr_turn1": 0.524,
+    "tr_up_turn2": 0.511,
+    "tr_set_later": 0.309,
+    "their_tr_per_game": 0.47,
+    "win": 0.81,
     "games": 192
    }
   },
@@ -279,49 +283,48 @@
   },
   "Rain + Sun: Archaludon + Golisopod + Politoed": {
    "lines": [
-    "Turn two: attack with both 48%, one switch 43% (mostly Farigiraf out for Torkoal).",
-    "Trick Room is up on turn two in 38% of games; when it runs out, Farigiraf sets it again in 61% (around turn 6).",
-    "Torkoal comes in around turn 4; Incineroar comes in around turn 3.",
-    "Blastoise Mega Evolves on turn 1.",
-    "With Trick Room up on turn two you win 37%; without it 48%."
+    "Turn two: one switch 73% (mostly Incineroar out for Torkoal), attack with both 22%.",
+    "No Trick Room on turn one; Farigiraf sets it later in 72% of games, around turn 5.",
+    "Torkoal comes in around turn 3; Farigiraf comes in around turn 4.",
+    "Blastoise Mega Evolves on turn 1."
    ],
    "facts": {
     "turn2": {
-     "one switch": 0.427,
-     "attack with both": 0.48,
-     "a Protect": 0.033,
-     "double switch": 0.05,
-     "click Trick Room": 0.01
+     "one switch": 0.725,
+     "attack with both": 0.216,
+     "a Protect": 0.012,
+     "double switch": 0.008,
+     "click Trick Room": 0.039
     },
-    "tr_turn1": 0.376,
-    "tr_up_turn2": 0.376,
-    "tr_set_later": 0.612,
-    "their_tr_per_game": 0.24,
-    "win": 0.44,
+    "tr_turn1": 0.0,
+    "tr_up_turn2": 0.0,
+    "tr_set_later": 0.724,
+    "their_tr_per_game": 0.19,
+    "win": 0.547,
     "games": 192
    }
   },
   "Perish: Archaludon + Politoed (no Golisopod)": {
    "lines": [
-    "Turn two: one switch 47% (mostly Farigiraf out for Torkoal), attack with both 28%, double switch 23%.",
+    "Turn two: one switch 44% (mostly Farigiraf out for Torkoal), attack with both 27%, double switch 25%.",
     "Trick Room is up on turn two in 66% of games; when it runs out, Farigiraf sets it again in 75% (around turn 7).",
     "Torkoal comes in around turn 3; Blastoise comes in around turn 5.",
     "Blastoise Mega Evolves around turn 5.",
-    "With Trick Room up on turn two you win 72%; without it 88%."
+    "With Trick Room up on turn two you win 77%; without it 91%."
    ],
    "facts": {
     "turn2": {
-     "one switch": 0.474,
-     "attack with both": 0.284,
-     "double switch": 0.232,
-     "a Protect": 0.003,
-     "click Trick Room": 0.007
+     "one switch": 0.441,
+     "click Trick Room": 0.037,
+     "attack with both": 0.267,
+     "double switch": 0.252,
+     "a Protect": 0.003
     },
-    "tr_turn1": 0.957,
-    "tr_up_turn2": 0.662,
-    "tr_set_later": 0.745,
+    "tr_turn1": 0.896,
+    "tr_up_turn2": 0.657,
+    "tr_set_later": 0.753,
     "their_tr_per_game": 0.0,
-    "win": 0.777,
+    "win": 0.817,
     "games": 192
    }
   },
@@ -351,23 +354,23 @@
   },
   "Tailwind: Glimmora + Rillaboom + Volcarona (no Basculegion)": {
    "lines": [
-    "Turn two: attack with both 68%, one switch 27% (mostly Farigiraf out for Kingambit).",
-    "Trick Room is up on turn two in 87% of games; when it runs out, Farigiraf sets it again in 54% (around turn 6).",
-    "Torkoal comes in around turn 4; Kingambit comes in around turn 4 (90% of games).",
-    "Blastoise Mega Evolves on turn 1."
+    "Turn two: attack with both 63%, one switch 30% (mostly Farigiraf out for Torkoal).",
+    "Trick Room is up on turn two in 94% of games; when it runs out, Farigiraf sets it again in 34% (around turn 6).",
+    "Torkoal comes in around turn 4; Blastoise comes in around turn 5 (73% of games).",
+    "Blastoise Mega Evolves around turn 5 (71% of games)."
    ],
    "facts": {
     "turn2": {
-     "attack with both": 0.684,
-     "one switch": 0.275,
-     "double switch": 0.009,
-     "click Trick Room": 0.031
+     "one switch": 0.297,
+     "attack with both": 0.628,
+     "a Protect": 0.067,
+     "click Trick Room": 0.008
     },
-    "tr_turn1": 0.906,
-    "tr_up_turn2": 0.873,
-    "tr_set_later": 0.544,
+    "tr_turn1": 0.992,
+    "tr_up_turn2": 0.938,
+    "tr_set_later": 0.341,
     "their_tr_per_game": 0.0,
-    "win": 0.708,
+    "win": 0.683,
     "games": 96
    }
   },
@@ -397,22 +400,23 @@
   },
   "Sun: Charizard + Whimsicott": {
    "lines": [
-    "Turn two: attack with both 73%, one switch 17% (mostly Incineroar out for Torkoal).",
-    "Trick Room is up on turn two in 86% of games; when it runs out, Farigiraf sets it again in 58% (around turn 6).",
-    "Torkoal comes in around turn 4 (86% of games); Kingambit comes in around turn 5 (85% of games)."
+    "Turn two: attack with both 81%, one switch 12%.",
+    "Trick Room is up on turn two in 90% of games; when it runs out, Farigiraf sets it again in 64% (around turn 6).",
+    "Incineroar comes in around turn 5 (79% of games); Kingambit comes in around turn 5 (73% of games).",
+    "Blastoise Mega Evolves on turn 1."
    ],
    "facts": {
     "turn2": {
-     "attack with both": 0.727,
-     "one switch": 0.168,
-     "click Trick Room": 0.063,
-     "a Protect": 0.043
+     "attack with both": 0.807,
+     "one switch": 0.119,
+     "a Protect": 0.05,
+     "click Trick Room": 0.024
     },
-    "tr_turn1": 0.889,
-    "tr_up_turn2": 0.863,
-    "tr_set_later": 0.581,
+    "tr_turn1": 0.958,
+    "tr_up_turn2": 0.897,
+    "tr_set_later": 0.639,
     "their_tr_per_game": 0.0,
-    "win": 0.709,
+    "win": 0.737,
     "games": 128
    }
   },
@@ -440,23 +444,23 @@
   },
   "Indeedee TR: Metagross + Milotic + Sneasler": {
    "lines": [
-    "Turn two: one switch 41% (mostly Farigiraf out for Kingambit), attack with both 25%, click Trick Room 25%.",
-    "Trick Room is up on turn two in 44% of games; when it runs out, Farigiraf sets it again in 53% (around turn 4).",
-    "Torkoal comes in around turn 3; Kingambit comes in around turn 3 (84% of games)."
+    "Turn two: one switch 56%, attack with both 22%, click Trick Room 19%.",
+    "Trick Room is up on turn two in 53% of games; when it runs out, Farigiraf sets it again in 34% (around turn 4).",
+    "Torkoal comes in around turn 3; Blastoise comes in around turn 4 (84% of games).",
+    "Blastoise Mega Evolves around turn 3 (81% of games)."
    ],
    "facts": {
     "turn2": {
-     "attack with both": 0.25,
-     "one switch": 0.406,
-     "click Trick Room": 0.25,
-     "a Protect": 0.062,
-     "double switch": 0.031
+     "one switch": 0.563,
+     "attack with both": 0.219,
+     "a Protect": 0.031,
+     "click Trick Room": 0.187
     },
-    "tr_turn1": 0.594,
-    "tr_up_turn2": 0.437,
-    "tr_set_later": 0.531,
+    "tr_turn1": 0.531,
+    "tr_up_turn2": 0.531,
+    "tr_set_later": 0.344,
     "their_tr_per_game": 0.0,
-    "win": 0.75,
+    "win": 0.656,
     "games": 32
    }
   },
@@ -508,46 +512,46 @@
   },
   "Perish: Gengar + Kommo-o + Rillaboom": {
    "lines": [
-    "Turn two: attack with both 63%, one switch 32%.",
-    "Trick Room is up on turn two in 95% of games; when it runs out, Farigiraf sets it again in 57% (around turn 7).",
-    "Kingambit comes in around turn 4; Blastoise comes in around turn 5 (88% of games).",
-    "Blastoise Mega Evolves around turn 5 (82% of games)."
+    "Turn two: attack with both 58%, one switch 23% (mostly Blastoise out for Incineroar), double switch 16%.",
+    "Trick Room is up on turn two in 93% of games; when it runs out, Farigiraf sets it again in 45% (around turn 7).",
+    "Incineroar comes in around turn 4; Kingambit comes in around turn 5.",
+    "Blastoise Mega Evolves on turn 1."
    ],
    "facts": {
     "turn2": {
-     "one switch": 0.315,
-     "attack with both": 0.632,
-     "click Trick Room": 0.011,
-     "double switch": 0.033,
-     "a Protect": 0.01
+     "one switch": 0.226,
+     "attack with both": 0.583,
+     "double switch": 0.16,
+     "click Trick Room": 0.03
     },
-    "tr_turn1": 0.948,
-    "tr_up_turn2": 0.948,
-    "tr_set_later": 0.568,
+    "tr_turn1": 0.934,
+    "tr_up_turn2": 0.934,
+    "tr_set_later": 0.454,
     "their_tr_per_game": 0.0,
-    "win": 0.868,
+    "win": 0.91,
     "games": 192
    }
   },
   "Indeedee TR: Basculegion + Whimsicott": {
    "lines": [
-    "Turn two: attack with both 83%, one switch 16% (mostly Farigiraf out for Kingambit).",
-    "Trick Room is up on turn two in 90% of games; when it runs out, Farigiraf sets it again in 37% (around turn 6).",
-    "Incineroar comes in around turn 4 (90% of games); Kingambit comes in around turn 4 (82% of games).",
+    "Turn two: attack with both 71%, one switch 23% (mostly Farigiraf out for Kingambit).",
+    "Trick Room is up on turn two in 87% of games; when it runs out, Farigiraf sets it again in 43% (around turn 6).",
+    "Torkoal comes in around turn 4 (83% of games); Kingambit comes in around turn 4 (80% of games).",
     "Blastoise Mega Evolves on turn 1.",
-    "Hardest when they bring Indeedee F (50% won), then Kommo-o (50%)."
+    "Hardest when they bring Indeedee F (60% won), then Kommo-o (60%)."
    ],
    "facts": {
     "turn2": {
-     "attack with both": 0.833,
-     "one switch": 0.161,
-     "a Protect": 0.005
+     "attack with both": 0.714,
+     "one switch": 0.229,
+     "a Protect": 0.036,
+     "click Trick Room": 0.021
     },
     "tr_turn1": 0.974,
-    "tr_up_turn2": 0.901,
-    "tr_set_later": 0.37,
+    "tr_up_turn2": 0.87,
+    "tr_set_later": 0.432,
     "their_tr_per_game": 0.0,
-    "win": 0.693,
+    "win": 0.719,
     "games": 128
    }
   },
@@ -577,26 +581,25 @@
   },
   "Other Sun": {
    "lines": [
-    "Turn two: attack with both 68%, one switch 13% (mostly Farigiraf out for Torkoal), click Trick Room 12%.",
-    "Trick Room is up on turn two in 48% of games; when it runs out, Farigiraf sets it again in 41% (around turn 5).",
-    "Torkoal comes in around turn 4; Kingambit comes in around turn 5 (83% of games).",
+    "Turn two: attack with both 63%, one switch 19%, click Trick Room 12%.",
+    "Trick Room is up on turn two in 48% of games; when it runs out, Farigiraf sets it again in 35% (around turn 5).",
+    "Incineroar comes in around turn 4; Torkoal comes in around turn 4 (85% of games).",
     "Blastoise Mega Evolves on turn 1.",
-    "With Trick Room up on turn two you win 66%; without it 52%.",
-    "Hardest when they bring Kingambit (47% won), then Sneasler (47%)."
+    "Hardest when they bring Garchomp (53% won), then Venusaur (53%)."
    ],
    "facts": {
     "turn2": {
-     "click Trick Room": 0.12,
-     "attack with both": 0.677,
-     "one switch": 0.135,
-     "a Protect": 0.056,
+     "attack with both": 0.63,
+     "click Trick Room": 0.117,
+     "one switch": 0.186,
+     "a Protect": 0.055,
      "double switch": 0.011
     },
-    "tr_turn1": 0.611,
-    "tr_up_turn2": 0.478,
-    "tr_set_later": 0.412,
-    "their_tr_per_game": 0.15,
-    "win": 0.587,
+    "tr_turn1": 0.599,
+    "tr_up_turn2": 0.482,
+    "tr_set_later": 0.346,
+    "their_tr_per_game": 0.23,
+    "win": 0.666,
     "games": 192
    }
   },
@@ -626,24 +629,23 @@
   },
   "Other Rain": {
    "lines": [
-    "Turn two: attack with both 57%, one switch 25% (mostly Kingambit out for Farigiraf), click Trick Room 17%.",
-    "No Trick Room on turn one; Farigiraf sets it later in 89% of games, around turn 4.",
-    "Farigiraf comes in around turn 4; Torkoal comes in around turn 5.",
-    "Blastoise Mega Evolves on turn 1.",
-    "Hardest when they bring Metagross (55% won)."
+    "Turn two: attack with both 74%, one switch 19%.",
+    "Trick Room is up on turn two in 93% of games; when it runs out, Farigiraf sets it again in 43% (around turn 6).",
+    "Torkoal comes in around turn 4 (87% of games); Blastoise comes in around turn 5 (85% of games).",
+    "Blastoise Mega Evolves around turn 5 (83% of games)."
    ],
    "facts": {
     "turn2": {
-     "one switch": 0.25,
-     "attack with both": 0.568,
-     "click Trick Room": 0.167,
-     "double switch": 0.015
+     "attack with both": 0.737,
+     "one switch": 0.189,
+     "a Protect": 0.029,
+     "click Trick Room": 0.045
     },
-    "tr_turn1": 0.0,
-    "tr_up_turn2": 0.0,
-    "tr_set_later": 0.885,
+    "tr_turn1": 0.969,
+    "tr_up_turn2": 0.93,
+    "tr_set_later": 0.426,
     "their_tr_per_game": 0.0,
-    "win": 0.648,
+    "win": 0.663,
     "games": 192
    }
   },
@@ -719,23 +721,23 @@
   },
   "Other Perish": {
    "lines": [
-    "Turn two: attack with both 63%, one switch 25%, double switch 11%.",
-    "Trick Room is up on turn two in 99% of games; when it runs out, Farigiraf sets it again in 66% (around turn 7).",
+    "Turn two: attack with both 63%, one switch 22% (mostly Farigiraf out for Torkoal), double switch 14%.",
+    "Trick Room is up on turn two in 97% of games; when it runs out, Farigiraf sets it again in 62% (around turn 7).",
     "Torkoal comes in around turn 4; Kingambit comes in around turn 5 (88% of games).",
     "Blastoise Mega Evolves on turn 1."
    ],
    "facts": {
     "turn2": {
-     "double switch": 0.107,
-     "attack with both": 0.631,
-     "one switch": 0.247,
-     "a Protect": 0.015
+     "double switch": 0.142,
+     "attack with both": 0.626,
+     "one switch": 0.218,
+     "click Trick Room": 0.015
     },
-    "tr_turn1": 1.0,
-    "tr_up_turn2": 0.989,
-    "tr_set_later": 0.663,
+    "tr_turn1": 0.97,
+    "tr_up_turn2": 0.97,
+    "tr_set_later": 0.623,
     "their_tr_per_game": 0.0,
-    "win": 0.87,
+    "win": 0.888,
     "games": 96
    }
   }
@@ -756,7 +758,7 @@
    "mine": [
     [
      "Blastoise",
-     6
+     5
     ]
    ],
    "teams": 12
@@ -770,7 +772,7 @@
     ],
     [
      "Incineroar",
-     5
+     6
     ],
     [
      "Blastoise",
@@ -784,7 +786,11 @@
    "mine": [
     [
      "Torkoal",
-     9
+     10
+    ],
+    [
+     "Farigiraf",
+     -5
     ]
    ],
    "teams": 13
@@ -807,16 +813,16 @@
    "them": "Grimmsnarl",
    "mine": [
     [
-     "Incineroar",
-     7
-    ],
-    [
      "Kingambit",
      5
     ],
     [
+     "Incineroar",
+     5
+    ],
+    [
      "Farigiraf",
-     -16
+     -15
     ]
    ],
    "teams": 6
@@ -826,11 +832,11 @@
    "mine": [
     [
      "Blastoise",
-     6
+     5
     ],
     [
      "Farigiraf",
-     -6
+     -5
     ]
    ],
    "teams": 8
@@ -840,28 +846,24 @@
    "mine": [
     [
      "Farigiraf",
-     19
+     18
     ],
     [
      "Torkoal",
-     -8
+     -7
     ]
    ],
    "teams": 3
   },
   {
-   "them": "Staraptor",
+   "them": "Delphox",
    "mine": [
     [
-     "Incineroar",
-     7
-    ],
-    [
-     "Torkoal",
-     -4
+     "Blastoise",
+     5
     ]
    ],
-   "teams": 4
+   "teams": 9
   },
   {
    "them": "Swampert",
@@ -881,11 +883,7 @@
    "them": "Floette",
    "mine": [
     [
-     "Farigiraf",
-     7
-    ],
-    [
-     "Blastoise",
+     "Incineroar",
      -9
     ]
    ],
@@ -896,7 +894,7 @@
    "mine": [
     [
      "Blastoise",
-     12
+     11
     ],
     [
      "Torkoal",
@@ -904,7 +902,7 @@
     ],
     [
      "Farigiraf",
-     -14
+     -15
     ]
    ],
    "teams": 3
@@ -914,7 +912,7 @@
    "mine": [
     [
      "Farigiraf",
-     10
+     14
     ],
     [
      "Indeedee",
@@ -928,11 +926,15 @@
    "mine": [
     [
      "Farigiraf",
-     13
+     11
+    ],
+    [
+     "Torkoal",
+     7
     ],
     [
      "Incineroar",
-     -7
+     -9
     ],
     [
      "Blastoise",
@@ -954,11 +956,11 @@
     ],
     [
      "Farigiraf",
-     7
+     5
     ],
     [
      "Indeedee",
-     -10
+     -9
     ],
     [
      "Incineroar",

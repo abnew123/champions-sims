@@ -1,0 +1,245 @@
+{
+ "choices": 256108,
+ "games": 18436,
+ "cal": 0.765,
+ "parts": "hold,val,fit_sub",
+ "min_turn": 0,
+ "rating": null,
+ "fit": {
+  "a": -0.019012354787395318,
+  "b": 0.634974072459671
+ },
+ "kinds": [
+  {
+   "kind": "single-target attack",
+   "n": 102861,
+   "games": 18064,
+   "human_share": 0.4016313430271604,
+   "engine_share": 0.41805261579206454,
+   "claimed": 0.01085668384467491,
+   "realized": -0.01382669677023411,
+   "residual": -0.001708054737099139,
+   "residual_se": 0.0011925810969302681
+  },
+  {
+   "kind": "Protect",
+   "n": 35867,
+   "games": 14143,
+   "human_share": 0.1400463866806191,
+   "engine_share": 0.11233550867854926,
+   "claimed": 0.02049553812035647,
+   "realized": 0.004490902668964285,
+   "residual": 0.010489122148824427,
+   "residual_se": 0.0023090198328406717
+  },
+  {
+   "kind": "switch",
+   "n": 30099,
+   "games": 13576,
+   "human_share": 0.11752463804332547,
+   "engine_share": 0.14223979837990425,
+   "claimed": 0.016508905931323162,
+   "realized": -0.002766281709607977,
+   "residual": 0.005763345846721455,
+   "residual_se": 0.0022806539763623856
+  },
+  {
+   "kind": "spread attack",
+   "n": 26306,
+   "games": 12459,
+   "human_share": 0.10271447982882222,
+   "engine_share": 0.1103793381204176,
+   "claimed": 0.006414599877474642,
+   "realized": -0.018367293166667832,
+   "residual": -0.0034280429866718966,
+   "residual_se": 0.0027496558854908193
+  },
+  {
+   "kind": "Mega Evolves now",
+   "n": 22049,
+   "games": 14804,
+   "human_share": 0.6680098160996152,
+   "engine_share": 0.6627915079574517,
+   "claimed": 0.012634208165556621,
+   "realized": -0.015620793506042419,
+   "residual": -0.004630833329833817,
+   "residual_se": 0.002391645560463978
+  },
+  {
+   "kind": "Fake Out",
+   "n": 15078,
+   "games": 9686,
+   "human_share": 0.05887360019991566,
+   "engine_share": 0.05112997015305766,
+   "claimed": 0.010599384726519077,
+   "realized": -0.0031125300821955664,
+   "residual": 0.009169490219835097,
+   "residual_se": 0.0037426335051156737
+  },
+  {
+   "kind": "holds the Mega",
+   "n": 10958,
+   "games": 7884,
+   "human_share": 0.33199018390038476,
+   "engine_share": 0.3372084920425483,
+   "claimed": 0.017279047919637285,
+   "realized": 0.0149269816554106,
+   "residual": 0.022967589017048023,
+   "residual_se": 0.004681666543773369
+  },
+  {
+   "kind": "setup / self-boost",
+   "n": 9482,
+   "games": 6780,
+   "human_share": 0.03702344323488528,
+   "engine_share": 0.02535033600894602,
+   "claimed": 0.01757282738425198,
+   "realized": -0.04849850372026791,
+   "residual": -0.040644438701681905,
+   "residual_se": 0.005069840630025881
+  },
+  {
+   "kind": "pivot (U-turn, Parting Shot...)",
+   "n": 7251,
+   "games": 4856,
+   "human_share": 0.028312274509191434,
+   "engine_share": 0.03572218539021471,
+   "claimed": 0.012494003653589986,
+   "realized": -0.008181916203452978,
+   "residual": 0.002897070202696297,
+   "residual_se": 0.005694223786180439
+  },
+  {
+   "kind": "status move on a foe (Taunt, Spore, Will-O-Wisp...)",
+   "n": 5156,
+   "games": 3353,
+   "human_share": 0.020132131756915052,
+   "engine_share": 0.01973118433771838,
+   "claimed": 0.029030543735395545,
+   "realized": -0.01637158130840976,
+   "residual": -0.01579286910239714,
+   "residual_se": 0.007451431760666642
+  },
+  {
+   "kind": "Tailwind",
+   "n": 4440,
+   "games": 3597,
+   "human_share": 0.01733643619098193,
+   "engine_share": 0.019816392698981073,
+   "claimed": 0.006076744455264959,
+   "realized": -0.002161854237386817,
+   "residual": 0.012991925375952187,
+   "residual_se": 0.006957846894229442
+  },
+  {
+   "kind": "redirection",
+   "n": 4120,
+   "games": 3185,
+   "human_share": 0.0160869633123526,
+   "engine_share": 0.008923357213813222,
+   "claimed": 0.022210108009546828,
+   "realized": -0.02582655453454074,
+   "residual": -0.020917042479736532,
+   "residual_se": 0.007269942515923894
+  },
+  {
+   "kind": "priority attack",
+   "n": 4026,
+   "games": 3054,
+   "human_share": 0.015719930654255237,
+   "engine_share": 0.015436503891730855,
+   "claimed": 0.015059081362532634,
+   "realized": -0.029835389479983033,
+   "residual": -0.02038516091285659,
+   "residual_se": 0.006750693287341813
+  },
+  {
+   "kind": "Trick Room",
+   "n": 3374,
+   "games": 3081,
+   "human_share": 0.01317412966404798,
+   "engine_share": 0.014885250816896189,
+   "claimed": 0.008501044097008944,
+   "realized": -0.0009350210246262116,
+   "residual": 0.012679391172332096,
+   "residual_se": 0.008269759241160413
+  },
+  {
+   "kind": "Helping Hand",
+   "n": 3112,
+   "games": 2413,
+   "human_share": 0.012151123744670218,
+   "engine_share": 0.007058375301936831,
+   "claimed": 0.02024721687897941,
+   "realized": 0.008220627905204338,
+   "residual": 0.014376524934979913,
+   "residual_se": 0.007923310802613477
+  },
+  {
+   "kind": "screens",
+   "n": 2134,
+   "games": 1751,
+   "human_share": 0.008332422259359333,
+   "engine_share": 0.01120656008646179,
+   "claimed": 0.004116912676605408,
+   "realized": 0.030994731032447008,
+   "residual": 0.04739295301161734,
+   "residual_se": 0.01041047614078543
+  },
+  {
+   "kind": "speed-control attack (Icy Wind...)",
+   "n": 1188,
+   "games": 861,
+   "human_share": 0.004638668061911381,
+   "engine_share": 0.003595321322740987,
+   "claimed": 0.014545132244971015,
+   "realized": -0.0171115574400179,
+   "residual": -0.007334984508676301,
+   "residual_se": 0.01572980375604291
+  },
+  {
+   "kind": "Wide / Quick Guard",
+   "n": 845,
+   "games": 717,
+   "human_share": 0.00329938932013057,
+   "engine_share": 0.0026483195276827205,
+   "claimed": 0.025546490290765594,
+   "realized": -0.03600056303467568,
+   "residual": -0.03320956722425923,
+   "residual_se": 0.01662501628953006
+  },
+  {
+   "kind": "status move on the partner",
+   "n": 535,
+   "games": 459,
+   "human_share": 0.0020889624689584083,
+   "engine_share": 0.0010536998992997921,
+   "claimed": 0.028641372340657625,
+   "realized": -0.027719138213251105,
+   "residual": -0.02689331226183693,
+   "residual_se": 0.020364427197402297
+  },
+  {
+   "kind": "weather / terrain",
+   "n": 231,
+   "games": 205,
+   "human_share": 0.0009019632342605464,
+   "engine_share": 0.00043041339990921516,
+   "claimed": 0.03282060667067625,
+   "realized": -0.0063507623912624715,
+   "residual": -0.008178641882143496,
+   "residual_se": 0.03024753993696342
+  },
+  {
+   "kind": "attack on the partner",
+   "n": 3,
+   "games": 3,
+   "human_share": 1.1713808237149952e-05,
+   "engine_share": 4.868979670031409e-06,
+   "claimed": 0.05424045684984038,
+   "realized": -0.41731009337860536,
+   "residual": -0.43273902236922623,
+   "residual_se": 0.15826451424276378
+  }
+ ]
+}

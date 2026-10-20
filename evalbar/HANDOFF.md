@@ -206,6 +206,36 @@ Players set up about twice as often as the planner (regional day 1: 4.7% of deci
 their setup moves carry about twice the regret of their other plays (3.6 and 4.3 points vs 1.8 and 2.1). With the boosted positions rated
 right, that reads as players overvaluing setup (the user's guess: habits from single-player games, where setup sweeps).
 
+## Where humans part from the engine, and who is right (diverge.py, 2026-10-20)
+
+The user asked whether there are enough games to find where humans diverge from the bot's expectations: places humans underperform
+(for the user's own games) or bot deficiencies. `diverge.py`: 256,108 human choices in 18,436 Showdown Bo3 games (Battle sim's rebuilt
+value data, both sides, scored by depth at 4x with CAL 0.765), grouped by kind of choice. Over every choice, realized = -1.90 + 0.63 x
+claimed: about two thirds of the engine's claimed costs show up in results. The residual per kind is realized less that line, in points
+of win chance (below 0: the kind does better against humans than the engine expects; above 0: worse). Results in results/diverge.json.
+
+| kind | human | engine | claimed | residual | turn 4+ | rating above median | below |
+|---|---|---|---|---|---|---|---|
+| setup / self-boost | 3.7% | 2.5% | 1.8 | -4.1 ± 0.5 | -3.0 ± 0.8 | -3.5 ± 0.7 | -5.0 ± 0.8 |
+| screens | 0.8% | 1.1% | 0.4 | +4.7 ± 1.0 | +8.5 ± 1.7 | +3.6 ± 1.7 | +4.0 ± 1.5 |
+| holds the Mega (of slots that can) | 33% | 34% | 1.7 | +2.3 ± 0.5 | +1.5 ± 0.9 | +2.5 ± 0.7 | +2.8 ± 0.7 |
+| priority attack | 1.6% | 1.5% | 1.5 | -2.0 ± 0.7 | -2.4 ± 0.7 | -2.1 ± 1.0 | -1.3 ± 0.9 |
+| Protect | 14.0% | 11.2% | 2.1 | +1.1 ± 0.2 | +0.8 ± 0.3 | +0.2 ± 0.4 | +2.2 ± 0.4 |
+| Fake Out | 5.9% | 5.1% | 1.1 | +0.9 ± 0.4 | +1.4 ± 0.6 | +1.1 ± 0.6 | +0.4 ± 0.6 |
+| redirection | 1.6% | 0.9% | 2.2 | -2.1 ± 0.7 | +0.1 ± 0.9 | -1.3 ± 1.2 | -2.5 ± 1.1 |
+| switch | 11.8% | 14.2% | 1.7 | +0.6 ± 0.2 | +1.0 ± 0.3 | +1.2 ± 0.3 | -0.1 ± 0.4 |
+
+- Bot candidates (the residual holds in every slice): setup does 3-5 points better against humans than the search expects; screens
+  4-8 worse; holding a Mega Evolution 1.5-3 worse; priority attacks about 2 better. Either the search misjudges these or human
+  opponents respond to them badly; the bot plays humans, so both matter. Not yet checked on the bot's own games.
+- Human errors the engine's costs confirm: over-Protecting (14% against 11%, about 2 points claimed each, and worse than claimed below
+  the median rating), and later Fake Outs.
+- This reverses the reading of the earlier setup study (aftermath.py: the boosted positions rated right, so players overvalue setup):
+  that measured the positions after setup with an older engine on 397 positions; this measures the choice against results, and setup
+  comes out undervalued by the current search.
+- Caveats: the engine knows in hindsight the back row each player brought (turn 4+ is the check); per-slot choices, so double-targeting
+  and other joint plays are not split out; rare kinds (weather, moves on the partner) are too thin to read.
+
 ## What is a read worth? (influence.py)
 
 The user's question (2026-10-06): if a player could make the opponent put an extra 20% on one option, how much does playing to exploit it

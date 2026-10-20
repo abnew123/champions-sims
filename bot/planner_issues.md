@@ -283,3 +283,16 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     The sheets' setup (v23-dp2-race-eg9-full, EG_VALUE with the old perish_adj; pssim/perish_sheet.sh): 41.2% (+7.9 +- 3.3; brought
     +10.2), singing in 16%; with PERISH2=1 45.2% (+4.0 +- 3.3; brought +4.2), singing in 34%. TR sheet takes the choice (PERISH2 on the
     Perish cards, or the whole sheet on the current setup) to the user.
+21. **Accuracy and evasion stages, and the stall the value cannot see (the user, 2026-10-20: "we should be able to account for
+    evasion/accuracy boosts and drops").** Both the analytic features and the learned value's already apply accuracy and evasion stages
+    to every hit chance (plan.rs hit_chance, 2026-10-13: Keen Eye / Mind's Eye / Unaware, Compound Eyes, Bright Powder, Sand Veil and
+    the rest), and the learned value's damage options skip moves with no PP. Neither has a stage feature of its own, and nothing weighs
+    a side's damage against the other side's recovery. In the bot's 2,182 logged games, accuracy or evasion stages changed in 162 (our
+    accuracy lowered in 115, theirs raised in 32, their evasion raised in 2, both lost); per game (88 with our hits made less likely,
+    clean decision-to-game matching) the value at the first such decision was 44.7% against 39.8% won (-5 +- 5 points, about right). Over
+    decisions it reads 57.5% against 34.1% won, but one game carries that: Bo1 …2699800290 (2026-10-16, 53 turns), where Audino's
+    Simple Beam let Overqwil reach +6 evasion and +6 Def / SpD (Minimize, Stockpile), Spite drained our PP and Toxapex ended on Struggle
+    (25% recoil a turn against Leftovers). The value read 95-100% from turn 6 to turn 45 and still 68% in the last 1-v-1 on Struggle:
+    with no KO inside the race's few turns, the race reads even and "3 more Pokemon" carries the value. A fix would be a progress check
+    (can a side's expected damage, hit chance with stages included, beat the other side's recovery within its remaining PP), as a
+    correction on the net's log-odds like VNET_PERISH; worth about 2 games in 2,182, so it waits behind the Protect / setup leak.

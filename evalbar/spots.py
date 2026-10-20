@@ -79,6 +79,7 @@ def specs(rid, log):
         if s['turn'] < 1: continue
         order = {sd: BS.order(s['state'][sd]) for sd in ('p1', 'p2')}
         sides = [BS.side(s['state'][sd], [BS.mon(m, sets[(sd, m['sp'])]) for m in order[sd]] + [BS.fresh(st, True) for st in guess[sd]]) for sd in ('p1', 'p2')]
+        BS.pp(sides, log, s['turn'])
         out.append(BS.spec(f"{rid} t{s['turn']}", s, sides, BS.acts(s, order), len(guess['p1']) + len(guess['p2']), dropped=dropped))
     return out, ''
 if __name__ == '__main__':

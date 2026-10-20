@@ -446,6 +446,12 @@ from mid-battle positions of real sheets) is theirs and found several engine bug
   "no choices to make", and build.options' KeyError killed that game's page thread, so it never showed. In the bot's logs and the cached
   replays: 22 lost charges, none fired the old charge next turn (13 other moves, 9 charged again); 32 turn starts in 25 games change, none in
   the calibration hold set. build.options / merge now take a "no choices" line as no options.
+- `ppDue` (FLAGS, 2026-10-20; the bot's since 64593a4): each move's PP left, from the bot's own count (botpos.pp_used: one a |move| line
+  without [from], so a locked turn or a called move costs none; Spite's drain), applied by `battlestate.pp(sides, log, turn)` in
+  live.specs_for and spots.specs; positions.js sets moveSlots[].pp. Only for Showdown logs: the broadcast reader's logs carry no [from]
+  tags (0 of 1,878 move lines), so live passes log=None for them and their moves keep full PP. On 26 bot games the bar's count for the
+  bot's actives matches its requests in 1,760 of 1,760 move readings; the Spite game (…2699800290) now shows the bot's Toxapex at 0 PP
+  with only Struggle by turn 53. In 120 hold games, 7 of 6,920 Pokemon-positions had a move used 8+ times: no CAL refit.
 - Checked against main on 300 held-out replays (2,080 positions), 40 of them through live.specs_for, and the 4 botcmp games: the bot's
   specs and states identical; live's identical apart from the new flag; the replay positions gained the fields and flags (779 Pokemon
   with an item gone since they came in, 107 Perish counts, 72 volatile countdowns, 67 gained abilities, 17 changed types; 299 of 403

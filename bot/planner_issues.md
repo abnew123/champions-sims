@@ -303,3 +303,8 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     actions on moves that could not make progress (Toxic into the Poison type 8 times, Baneful Bunker 8, Wide Guard 4, Protect 2,
     Parting Shot 2) plus many switches: at 99.8% every option reads the same. That saturation is otherwise harmless (592 won games that
     reached 98% ended a median 1 turn later, at most 8); it costs only when the won read is wrong, which the progress check would fix.
+    **Fixed 2026-10-20 (v38, the user: "we should definitely fix this case"):** VNET_PROGRESS (the progress check above, as a correction
+    to the net's log-odds in endgames of 5 or fewer Pokemon) and ppDue (the bot's positions had every move at full PP; now counted from
+    the log, its actives exact from the request). The Overqwil game now attacks mid-game and forfeits at turn 48; real endgames: log
+    loss on the 3% of positions it changes 1.74 -> 0.98, 24 games forfeited earlier (all lost); self-play +0.1 +- 0.2. In the bot from
+    1:50 pm. Not covered: recovery moves (Recover and the like), Pressure, Spite before it happens.

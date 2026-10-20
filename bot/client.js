@@ -107,8 +107,11 @@ function connect() {
 async function login(challstr) {
   if (!acct.password) { send(`|/trn ${acct.name},0,`); return; }   // a guest name on a local --no-security server
   const body = new URLSearchParams({act: 'login', name: acct.name, pass: acct.password, challstr});
-  const r = await fetch(ACTION, {method: 'POST', body});
-  const t = await r.text(); const j = JSON.parse(t.slice(1));
+  // a failed login request (2026-10-20: a connect timeout to the login server at start-up threw out of here and ended the Bo3 client)
+  // closes the socket instead, so the reconnect 10 s later brings a new challstr and tries again
+  let j;
+  try { const r = await fetch(ACTION, {method: 'POST', body}); const t = await r.text(); j = JSON.parse(t.slice(1)); }
+  catch (e) { log('login request failed; reconnecting:', String((e.cause && e.cause.code) || e).slice(0, 120)); try { ws.close(); } catch (_) {} return; }
   if (!j.assertion) { log('login failed', JSON.stringify(j).slice(0, 200)); process.exit(1); }
   send(`|/trn ${acct.name},0,${j.assertion}`);
 }

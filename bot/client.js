@@ -70,7 +70,9 @@ let stoppedForTop = false;
 // matched with anyone): stop once top_band_max (3) of the last top_band_window (20) games were wins against a player rated at or above
 // the ladder's stop_if_opponent_in_top-th (50th). Losses to them don't count (the user, 2026-10-20: "I'm not that concerned if we lose
 // to them"; the Bo1 bot had stopped on three losses to top-50 players that morning). Games, not matches, as the user put it: in
-// best-of-3 a 2-0 over a top player is two.
+// best-of-3 a 2-0 over a top player is two. A forfeit counts too, even one at team preview (the user, 2026-10-20: "it still affects the
+// top 50 negatively, and if a lot of people are dodging our bot that's a sign we shouldn't have it up"; a 1770 player had forfeited
+// at preview twice that day).
 function topBandShare() {
   const L = limits(); if (!isFinite(topBand.elo)) return null;
   const last = games().slice(-(L.top_band_window || 20));

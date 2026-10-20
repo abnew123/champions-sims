@@ -129,9 +129,10 @@ def hyps(sd, state, six, sets, leads, topk=TOPK):
     hy = [(math.prod(RC.back_weight(sp, leads[sd]) for sp in c), list(c)) for c in itertools.combinations(pool, min(need, len(pool)))]
     hy.sort(key=lambda x: -x[0]); hy = hy[:topk]; tot = sum(w for w, _ in hy) or 1
     return [(w / tot, c) for w, c in hy], pool, need
-def specs_for(tag, g, step, six, sets, leads, own=None):
+def specs_for(tag, g, step, six, sets, leads, own=None, log=None):
     """engine position specs for one turn, one per pairing of the two players' hypotheses: [(weight, spec)]. own: (side, its Pokemon as
-    the engine plays them) for a side known exactly (a bot's own side from its request, botpos.own_side): no hypotheses for it"""
+    the engine plays them) for a side known exactly (a bot's own side from its request, botpos.own_side): no hypotheses for it. log: a
+    Showdown log, for the PP used (battlestate.pp); None for the broadcast reader's"""
     st = step['state']; H = {sd: ([(1.0, [])], [], 0) if own and sd == own[0] else hyps(sd, st, six, sets, leads) for sd in ('p1', 'p2')}; out = []
     order = {sd: BS.order(st[sd]) for sd in ('p1', 'p2')}; acts = BS.acts(step, order)
     bad = [m['sp'] for x in ('p1', 'p2') for m in order[x] if not sets[x].get(m['sp'])]
@@ -140,6 +141,7 @@ def specs_for(tag, g, step, six, sets, leads, own=None):
         for j, (w2, c2) in enumerate(H['p2'][0]):
             sides = [BS.side(st[sd], own[1] if own and sd == own[0] else [BS.mon(m, sets[sd][m['sp']]) for m in order[sd]] + [BS.fresh(sets[sd][sp], True) for sp in extra])
                      for sd, extra in (('p1', c1), ('p2', c2))]
+            BS.pp(sides, log, step['turn'])
             out.append((w1 * w2, BS.spec(f"{tag} t{step['turn']} h{i}{j}", step, sides, acts, len(c1) + len(c2))))
     return out, H
 SLEEP = ((2, 1 / 3), (3, 2 / 3))                                        # Champions: a sleep counter of 2 or 3 (Showdown's champions mod)
@@ -318,7 +320,7 @@ class Live:
             if mons:
                 own = (sd, mons); seen = {toid(m['sp'].split('-')[0]) for m in step['state'][sd]['mons']}
                 s.back[t] = [r['details'].split(',')[0] for r in rq['side']['pokemon'] if toid(r['details'].split(',')[0].split('-')[0]) not in seen]
-        sp, H = specs_for(s.tag + (' L' if hindsight else ''), gp, step, six, sets, s.leads(pre), own)
+        sp, H = specs_for(s.tag + (' L' if hindsight else ''), gp, step, six, sets, s.leads(pre), own, None if s.logfile and not s.exact else pre)
         if hindsight:                                                       # the replacements each player chose in the turn (actual_replace)
             rep = replacements(log, t)
             for _, x in sp: x['replace'] = rep

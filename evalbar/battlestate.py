@@ -25,7 +25,8 @@ FLAGS = {'yawnDue': True,       # a Yawn at the turn start puts its target to sl
          'srcDue': True,        # a volatile's source as Showdown has it: the holder for Imprison and the like, the seeder's slot for Leech Seed
          'rechargeDue': True,   # a Pokemon that must recharge (Hyper Beam) has only that
          'itemDue': True,       # the item a log line showed (Trick, Switcheroo, Thief), not the set's (the review; mon() reads it, not positions.js)
-         'chargeDue': True}     # a charged move stopped before it fired (flinch, full paralysis, confusion) is no longer charging (mon() reads it)
+         'chargeDue': True,     # a charged move stopped before it fired (flinch, full paralysis, confusion) is no longer charging (mon() reads it)
+         'ppDue': True}         # the PP each move has left (pp(): the bot's count from a Showdown log; positions.js sets it)
 def mon(m, st, flags=FLAGS):
     item = m['item'] if flags.get('itemDue') and m.get('iset') else st['item']
     return {**st, 'forme': m['forme'], 'mega': m['mega'], 'hpPct': m['hp'], 'fainted': m['f'], 'status': m['st'], 'slept': m['slept'], 'boosts': m['b'],
@@ -52,6 +53,14 @@ def acts(step, orders):
     return [[act(sd, i) for i in (0, 1)] for sd in ('p1', 'p2')]
 def side(S_, mons):
     return {'mons': mons, 'tailwind': S_['tailwind'], 'screens': S_['screens'], 'hazards': S_['hazards']}
+def pp(sides, log, turn, flags=FLAGS):
+    """ppDue: each Pokemon's PP used by the start of `turn`, both sides (sides: [p1, p2]), counted from a Showdown log the way the bot counts
+    it (botpos.pp_used: one a |move| line without [from], so a locked turn or a called move costs none; Spite's drain). Not for the broadcast
+    reader's logs, which carry no [from] tags: callers pass log=None there and the moves keep full PP"""
+    if not flags.get('ppDue') or not log: return
+    import botpos as BP
+    i = log.find(f'\n|turn|{turn}\n'); pre = log if i < 0 else log[:i]
+    for sd, s_ in zip(('p1', 'p2'), sides): BP.set_pp(s_['mons'], pre, sd)
 def spec(name, step, sides, acts_, stand_ins, flags=FLAGS, dropped=()):
     st = step['state']; f = st['field']
     return {'name': name, 'turn': step['turn'], 'sides': sides, 'acts': acts_, 'perish': st['perish'], 'standIns': stand_ins, **flags,

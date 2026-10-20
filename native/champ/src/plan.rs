@@ -55,6 +55,7 @@ impl VNet {
         let es: Vec<f64> = f1.iter().chain(&f0).chain(&g1).copied().chain(x.iter().map(|v| -v)).collect();
         let mut z = (self.h(&e) - self.h(&es)).clamp(-30.0, 30.0);
         if vnet_perish()[SIDE.with(|c| c.get()) as usize & 1] { if let Some((_, w)) = &cfg.vw { z += perish_adj_mode(b, w, true); } }
+        if crate::progress::on()[SIDE.with(|c| c.get()) as usize & 1] { z = crate::progress::adjust(b, cd, z); }   // VNET_PROGRESS (planner_issues 21)
         1.0 / (1.0 + (-z).exp())
     }
 }

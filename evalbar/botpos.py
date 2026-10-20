@@ -32,7 +32,7 @@ toid = R.toid
 # their remaining turns) the user, 2026-10-12; pctDue, abilDue, chipDue (Toxic's stage, binding moves), fallenDue (Supreme Overlord's count)
 # and typeDue (types changed in battle) the user, 2026-10-12 evening; then syrupDue and srcDue
 BOT_FLAGS = dict.fromkeys(('yawnDue', 'volDue', 'fieldDue', 'pctDue', 'abilDue', 'chipDue', 'fallenDue', 'typeDue', 'syrupDue', 'srcDue',
-                           'rechargeDue', 'itemDue', 'chargeDue'), True)   # rechargeDue / itemDue: on for the bot 2026-10-14 (Battle sim, the standing rule)
+                           'rechargeDue', 'itemDue', 'chargeDue', 'ppDue'), True)   # rechargeDue / itemDue: on for the bot 2026-10-14 (Battle sim, the standing rule)
 # chargeDue: on 2026-10-16 (Battle sim, the standing rule): a charged move stopped before it fired is no longer charging; of the bot's
 # 1,933 decisions in its 243 games with a charged move, only …2698578723's turn 7 changes (their Archaludon, flinched mid Electro Shot,
 # was read as locked into the charge; it used Protect)
@@ -90,6 +90,37 @@ def refine_opponent(pre, gp, sets, side, req, strict=False):
         sp = p['details'].split(',')[0]; st = next((v for k, v in sets[side].items() if v and toid(k.split('-')[0]) == toid(sp.split('-')[0])), None)
         if st: known[toid(sp.split('-')[0])] = (spread(p, st), st['nature'])
     return spreads.refine(pre, gp, sets, side, known, strict)
+# ppDue: on 2026-10-20 (Battle sim, planner_issues 21; the user: "we played 47 turns horribly"): the bot's positions had every move at full
+# PP, so Spite draining a move and a Pokemon left with only Struggle were never seen (Bo1 …2699800290: Toxapex Struggled for five turns
+# while the bot read 70%). PP used per Pokemon and move is counted from the log (one a use, none for a move called by another or locked in,
+# Spite's count; Pressure and Leppa Berry left out), and the bot's own actives take the exact PP their request shows (a request that offers
+# only Struggle: every move is out). positions.js sets each move slot's PP from it under the flag.
+def pp_used(log):
+    """{(side, base species id): {move id: PP used}}, from the log: one a |move| line, none for a line with [from] (a move called by another,
+    and a locked turn: a charged move firing and a rampage's later turns are logged "[from] lockedmove", and Showdown's runMove deducts no PP
+    for them; the Eval bar, 2026-10-20), Spite's count. Checked against the bot's own requests in its 2,182 logged games (2026-10-20)"""
+    nick = {}; out = collections.defaultdict(collections.Counter)
+    for l in log.split('\n'):
+        p = l.split('|')
+        if len(p) < 4: continue
+        k = (p[2][:2], p[2].split(': ', 1)[-1])
+        if p[1] in ('switch', 'drag', 'replace'): nick[k] = toid(p[3].split(',')[0].split('-')[0])
+        elif p[1] == 'move' and '[from]' not in l and toid(p[3]) != 'struggle' and k in nick: out[(k[0], nick[k])][toid(p[3])] += 1
+        elif p[1] == '-activate' and len(p) > 5 and p[3] == 'move: Spite' and k in nick: out[(k[0], nick[k])][toid(p[4])] += int(p[5]) if p[5].isdigit() else 4
+    return out
+def set_pp(ms, log, sd, req=None):
+    """each Pokemon dict in ms gets ppUsed {move id: used}: from the log, and for the bot's actives from its request"""
+    U = pp_used(log); base = lambda sp: toid(sp.split('-')[0])
+    for d in ms: d['ppUsed'] = dict(U.get((sd, base(d['species'])), {}))
+    if not req: return
+    rows = req['side']['pokemon']
+    for k, a in enumerate(req.get('active') or []):
+        if k >= len(rows) or not rows[k].get('active'): continue
+        d = next((x for x in ms if base(x['species']) == base(rows[k]['details'].split(',')[0])), None)
+        if d is None: continue
+        mv = a.get('moves') or []
+        if len(mv) == 1 and mv[0].get('id') == 'struggle': d['ppUsed'] = {toid(m): 999 for m in d.get('moves', [])}
+        else: d['ppUsed'] = {m['id']: m['maxpp'] - m['pp'] for m in mv if m.get('maxpp') is not None and m.get('pp') is not None}
 def own_side(state, sets, req, mine, dropped, slots=False):
     """the bot's side from its request, with what the log tracks laid under it; None if the log and the request disagree"""
     out = []
@@ -129,6 +160,7 @@ def bot_position(log, request, side, topk=1, team=None, tag='bot'):
     bad = [m['sp'] for m in order if not sets[opp].get(m['sp'])]
     if bad: return [], {'skip': 'no set for ' + ', '.join(bad)}
     seen = [BS.mon(m, sets[opp][m['sp']], BOT_FLAGS) for m in order]; out = []
+    if BOT_FLAGS.get('ppDue'): set_pp(mine, pre, side, req); set_pp(seen, pre, opp)
     for h, (w, back) in enumerate(H):
         theirs = seen + [BS.fresh(sets[opp][sp], True) for sp in back]
         sides = [BS.side(st[sd], ms) for sd, ms in ((side, mine), (opp, theirs))]

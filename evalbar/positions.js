@@ -86,6 +86,9 @@ function rebuild(spec, flip) {
       if (spec.syrupDue) p.syrupTriggered = !!x.syrupDone;
       const item = toID(x.itemNow);
       if (p.item !== item) { if (!item) p.lastItem = p.item; p.item = item; p.itemState = b.initEffectState({id: item, target: p}); }
+      // ppDue (botpos.BOT_FLAGS; Battle sim, 2026-10-20, planner_issues 21): the PP each move has left, from the PP used that botpos counts (its
+      // own actives' from the request); without it every move keeps full PP, as before
+      if (spec.ppDue && x.ppUsed) for (const m of p.moveSlots) { const u = x.ppUsed[m.id]; if (u) m.pp = Math.max(0, m.maxpp - u); }
       for (const v of Object.keys(p.volatiles)) delete p.volatiles[v];
       if (!x.onField) return;
       if (x.last && p.moveSlots.some(m => m.id === toID(x.last))) p.lastMove = dex.getActiveMove(toID(x.last));

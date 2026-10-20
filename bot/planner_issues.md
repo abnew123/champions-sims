@@ -296,3 +296,10 @@ for opponents (a last Pokemon stalling, lost games played out) is fixed on the s
     with no KO inside the race's few turns, the race reads even and "3 more Pokemon" carries the value. A fix would be a progress check
     (can a side's expected damage, hit chance with stages included, beat the other side's recovery within its remaining PP), as a
     correction on the net's log-odds like VNET_PERISH; worth about 2 games in 2,182, so it waits behind the Protect / setup leak.
+    **Did the evasion matter (the user, 2026-10-20)?** Yes. Hits that landed on the +6 Def / SpD Overqwil: Flare Blitz 17%, Dragon Claw
+    10%, Throat Chop 4%, Infestation 1%, against Leftovers' 6.25% a turn: without evasion, two attackers every turn KO in about five
+    turns and Spite cannot drain PP that fast. At +6 evasion hits land about one in three, so the same two attacks average about 9% a
+    turn, a grind Spite can win. And the bot did not grind: from turn 7 (Overqwil alone) it made 29 attacks in 47 turns and spent 24
+    actions on moves that could not make progress (Toxic into the Poison type 8 times, Baneful Bunker 8, Wide Guard 4, Protect 2,
+    Parting Shot 2) plus many switches: at 99.8% every option reads the same. That saturation is otherwise harmless (592 won games that
+    reached 98% ended a median 1 turn later, at most 8); it costs only when the won read is wrong, which the progress check would fix.

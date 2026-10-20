@@ -62,7 +62,7 @@ function mayPlay(reason) {
   if (g.filter(x => now - Date.parse(x.when) < 3600e3).length >= L.max_games_per_hour) return 'hourly cap';
   if (L.max_games_per_day != null && g.filter(x => now - Date.parse(x.when) < 86400e3).length >= L.max_games_per_day) return 'daily cap';
   if (myRating != null && L.stop_if_rating_at_least != null && myRating >= L.stop_if_rating_at_least) return `our rating ${myRating.toFixed(0)} is at the stop`;
-  const tb = topBandShare(); if (tb && tb.top >= (L.top_band_max || 3)) return `${tb.top} of the last ${tb.n} games were wins against the top ${L.stop_if_opponent_in_top}`;
+  const tb = topBandStop(); if (tb) return `${tb.n} of ${L.top_band_window || 20} games were wins against the top ${L.stop_if_opponent_in_top}: paused until ${new Date(tb.until).toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'})}`;
   return null;
 }
 let stoppedForTop = false;
@@ -73,10 +73,19 @@ let stoppedForTop = false;
 // best-of-3 a 2-0 over a top player is two. A forfeit counts too, even one at team preview (the user, 2026-10-20: "it still affects the
 // top 50 negatively, and if a lot of people are dodging our bot that's a sign we shouldn't have it up"; a 1770 player had forfeited
 // at preview twice that day).
-function topBandShare() {
+// A stop lasts top_band_pause_hours (6) from the game that made it, then the bot plays again; the wins that made a stop are spent and do
+// not count toward the next (the user, 2026-10-20: "rather than a full stop (since right now the condition will never clear, unlike the
+// hourly cap), let's stop for 6 hours, then resume ... if we hit it often, we'll pause often"). Worked out from the record each time
+// (games.jsonl, this format), so a restart keeps it; the ladder's current top-50 line is used for the older games too.
+function topBandStop() {
   const L = limits(); if (!isFinite(topBand.elo)) return null;
-  const last = games().slice(-(L.top_band_window || 20));
-  return {n: last.length, top: last.filter(x => x.won && (x.oppRating || 0) >= topBand.elo).length};
+  const W = L.top_band_window || 20, K = L.top_band_max || 3, H = (L.top_band_pause_hours ?? 6) * 3600e3;
+  const g = games().slice(-(W + 300)); const spent = new Set(); let last = null;
+  for (let i = 0; i < g.length; i++) {
+    const hits = []; for (let j = Math.max(0, i - W + 1); j <= i; j++) if (!spent.has(j) && g[j].won && (g[j].oppRating || 0) >= topBand.elo) hits.push(j);
+    if (hits.length >= K) { hits.forEach(j => spent.add(j)); last = {at: Date.parse(g[i].when), n: hits.length}; }
+  }
+  return last && Date.now() - last.at < H ? {until: last.at + H, n: last.n} : null;
 }
 
 // ---- the connection

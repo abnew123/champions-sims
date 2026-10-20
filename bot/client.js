@@ -58,6 +58,9 @@ let myRating = null;
 function mayPlay(reason) {
   const L = limits(); const g = games(); const now = Date.now();
   if (LOCAL) return null;
+  // logged in first (2026-10-20, 6:53 pm: after Showdown's server restart the socket reconnected as a guest and searched while the slow
+  // login was still out; it was matched as "Guest 2552", and the login going through mid-game forfeited that game)
+  if (!me) return 'not logged in yet';
   if (L.paused) return 'paused';
   if (g.filter(x => now - Date.parse(x.when) < 3600e3).length >= L.max_games_per_hour) return 'hourly cap';
   if (L.max_games_per_day != null && g.filter(x => now - Date.parse(x.when) < 86400e3).length >= L.max_games_per_day) return 'daily cap';
@@ -139,7 +142,7 @@ async function onMessage(m) {
       else if (p[1] === 'updateuser') { const name = p[2].replace(/^[^A-Za-z0-9]/, '').trim(); if (p[3] === '1' && name.toLowerCase() === acct.name.toLowerCase()) { me = name; loginAt = Date.now(); joinSent = new Set(); log('logged in as', me); send('|/cmd rooms'); onReady(); }
         else if (me && name.toLowerCase() !== acct.name.toLowerCase()) relogin(name); }
       else if (p[1] === 'pm') { onPM(p[2], p[3], p.slice(4).join('|')); }
-      else if (p[1] === 'updatesearch') { try { const s = JSON.parse(p[2]); searching = (s.searching || []).includes(FORMAT); inGames = Object.keys(s.games || {}).filter(MINE).length;
+      else if (p[1] === 'updatesearch') { try { const s = JSON.parse(p[2]); searching = (s.searching || []).includes(FORMAT); inGames = Object.keys(s.games || {}).filter(MINE).filter(g => !(rooms[g] && rooms[g].done)).length;   // a finished game the server still lists does not hold the bot (2026-10-20: the forfeited guest game stayed listed 20 min and the Bo1 client never searched)
         // after a (re)connect only: games already in progress at login are joined once (a new match's rooms also show up here a
         // moment before the server joins us to them, which is not a rejoin)
         // A room we already track counts as joined only if it has had a line since this login: a socket reconnect keeps `rooms`, and

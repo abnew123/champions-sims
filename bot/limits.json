@@ -17,6 +17,7 @@
   "max_search_seconds": 30,
   "top_band_window": 20,
   "top_band_max": 3,
+  "top_band_pause_hours": 6,
   "contempt": {
     "gen9championsvgc2026regmcbo3": 0.5,
     "gen9championsvgc2026regmc": 0.0

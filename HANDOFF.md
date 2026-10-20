@@ -1323,6 +1323,22 @@ registrations since its second version) and checks reachability of real logs in 
   a deeper tree search: BATTLE_PERISH_DEPTH / _BUDGET (battle4, the climb's setup too), EVAL_PERISH_DEPTH / _BUDGET (evalpos). (3)
   EVAL_MATRIX_MS caps the tree search's matrix pass (the Bo3 bot's decisions reached 33 s uncapped). `src_battle_v37.tar.gz`,
   `bin/champ-battle-v37.sha256`. Bot: battlesim-champ29-bot -> champ-bot-2026-10-16b (v37).
+- **champ-battle-v38 (2026-10-20, 1:50 pm) = v37 + VNET_PROGRESS, the endgame progress check (src/progress.rs; planner_issues 21), inert
+  unless set.** With 5 or fewer Pokemon left in all, each side's damage is played to the end (two attackers a turn on the foes one at a
+  time, calc mid roll x hit chance with accuracy / evasion stages x hits, PP spent) against the target's recovery (Leftovers, Black
+  Sludge, Grassy Terrain, Aqua Ring, Ingrain, Poison Heal) and chip (poison, burn, Leech Seed, Struggle recoil): a side that cannot KO
+  the other's team while the other can reads lost (z -6), one that can while the other cannot reads won, the sooner the better (z = 5 -
+  0.8 ln(1 + turns)), two long races (4+ turns each) keep the net within 1.5 of the race's log-odds; off under Perish Song;
+  s0 / s1 for one side; PROGRESS_DEBUG=1 prints the turn counts. Goes with ppDue (evalbar/botpos.py pp_used / set_pp, positions.js):
+  the bot's positions had every move at full PP; now PP used comes from the log (one per |move| line without [from], Spite's count;
+  matches the bot's requests in 125,564 of 125,572 readings) and the bot's actives' exact PP from its request (the Eval bar's
+  positions use the same count since 1d2891f). Checks: the Overqwil game (Bo1 ...2699800290: Simple Beam, +6 evasion and defences,
+  Spite to Struggle; the bot read 95-100% to turn 45 and 70% on Struggle) now attacks mid-game and forfeits at turn 48 (0.25%);
+  3,982 real endgame positions in the bot's games: 3% change, log loss on those 1.74 -> 0.98, 24 games forfeited earlier (all lost),
+  none no longer forfeited; endgame decisions 4.8 -> 5.0 s (median, the bot's search); self-play on 750 real endgames (pssim/
+  results/progress, deep_endgames.sh with ARM_B / ARM_C VNET_PROGRESS=s0 / s1) +0.1 +- 0.2 (7 results differ). `src_battle_v38.tar.gz`,
+  `bin/champ-battle-v38.sha256`. Bot: battlesim-champ29-bot -> champ-bot-2026-10-20 (v38), VNET_PROGRESS=1 in bot/position.py and
+  ppDue in botpos.BOT_FLAGS from the 1:50 pm client restart.
 
 ## The climb's simulator against the bot's ladder games (2026-10-16; the user: check the sim before trusting what the climb finds)
 bot/ladder_sim.py + pssim/ladder_sim.sh: the bot's 1,128 saved games (689 Bo3, 439 Bo1) rebuilt at turn 1 as the bot saw them (botpos,

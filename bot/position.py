@@ -23,6 +23,8 @@ os.environ.setdefault('EG_MEGA_TIE', '0')
 os.environ.setdefault('EG_LAST_PROTECT', '0')   # our last Pokemon never Protects when it changes nothing (side 0 is the bot); the user, 2026-10-11
 os.environ.setdefault('EG_NO_DOUBLE_PROTECT', '0')   # and no Pokemon of ours Protects two turns running (the user, 2026-10-11; self-play -1.2 +- 0.7)
 os.environ.setdefault('VNET_PERISH', '1')   # the net's value with the Perish term (v37; 2026-10-16, the user: fix Perish: the sim's Perish side now matches people)
+os.environ.setdefault('VNET_PROGRESS', '1')   # the endgame progress check (v38; 2026-10-20, planner_issues 21, the user: "we should definitely fix
+# this case"): can each side's damage beat the other's recovery before its PP runs out; with botpos ppDue (the PP each move has left)
 STALL = {'Protect', 'Detect', 'Spiky Shield', "King's Shield", 'Baneful Bunker', 'Burning Bulwark', 'Silk Trap', 'Obstruct', 'Max Guard'}
 def protect_chains(log, side):
     """per Pokemon of ours (by species), how many turns running it has used a Protect-type move up to now (success or not)"""

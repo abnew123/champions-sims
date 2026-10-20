@@ -8,7 +8,9 @@ uses the same test (other_count) to decide whether there is anything new for the
 import json, os, re, sys
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'out')
 PLEASANTRIES = {'gg', 'ggs', 'ggwp', 'gl', 'glhf', 'hf', 'wp', 'ty', 'tygg', 'ggty', 'goodgame', 'thanks'}
-def pleasantry(text): return re.sub(r'[^a-z0-9]', '', text.lower()) in PLEASANTRIES
+# emoticons whose letters or digits would survive the punctuation strip ("gl hf <3" read as glhf3; the user, 2026-10-20)
+EMOTICON = re.compile(r'<3+|(?<![a-z0-9])(?:[:;=]-?[dpo3]+|x+d+)(?![a-z0-9])')
+def pleasantry(text): return re.sub(r'[^a-z0-9]', '', EMOTICON.sub(' ', text.lower())) in PLEASANTRIES
 def rows():
     f = os.path.join(OUT, 'chat.jsonl')
     return [json.loads(l) for l in open(f) if l.strip()] if os.path.exists(f) else []

@@ -236,6 +236,29 @@ of win chance (below 0: the kind does better against humans than the engine expe
 - Caveats: the engine knows in hindsight the back row each player brought (turn 4+ is the check); per-slot choices, so double-targeting
   and other joint plays are not split out; rare kinds (weather, moves on the partner) are too thin to read.
 
+## The bot's own games: what people do that it doesn't expect (botstudy.py, 2026-10-20)
+
+The user asked whether the bot consistently misses lines, or overestimates how often its opponents do certain things. `botstudy.py`
+reads the bot page's luck pass (each turn's payoff table in hindsight, with both sides' plays) for 953 Bo1 and 1,236 Bo3 games.
+Results in results/botstudy.json.
+- What people do against the bot, against the engine's mix (and the Bo3 bot's own human model, contempt 0.5):
+  - Bo3: Protect 19.4% (engine 14.7%, human model 12.9%); single-target attacks 37.2% (40.6%, 44.0%); spread attacks 13.5%
+    (15.6%, 12.1%); setup 2.9% (1.1%, 1.9%); switches 13.9% (15.1%, 14.6%).
+  - Bo1: Protect 13.5% (10.5%), switches 12.1% (14.7%), setup 3.2% (1.8%). People Protect and set up more and attack and switch less
+    than the bot expects. The human model moves Protect the wrong way.
+- Missed lines: none large. For each kind of play the bot did not choose, its best option of that kind, scored against what people
+  actually did, is within about 1 point of what the engine expected (Bo3 Tailwind +2.6 ± 1.3 on 108 turns is the largest).
+  People's extra Protecting makes the bot's own Protect, redirection, Wide Guard and holding the Mega 0.5-2 points worse than expected.
+  The bot's own choices score +4.1 ± 0.2 (Bo1) and +3.8 ± 0.2 (Bo3) points better against people's actual plays than against the
+  predicted mix: it gains from people's mistakes and is not out-guessed turn to turn.
+- Turn 1 (in hindsight, before any forfeit):
+  - Bo1 rated 49.0%, won 51.9% ± 1.6.
+  - Bo3 by game of the match: game 1 rated 55.0%, won 56.8% ± 2.2; game 2 rated 54.0%, won 45.5% ± 2.3; game 3 rated 52.5%, won
+    47.5% ± 3.4.
+  - So the Bo3 shortfall is in games 2 and 3: people adapt after game 1 beyond their bring, and the bot plays each game alone. The user
+    declined match memory on 2026-10-14.
+- The bot resigns about 4 games in 10 (positions it judges lost): outcome measures keep those games.
+
 ## What is a read worth? (influence.py)
 
 The user's question (2026-10-06): if a player could make the opponent put an extra 20% on one option, how much does playing to exploit it

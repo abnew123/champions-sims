@@ -259,6 +259,35 @@ Results in results/botstudy.json.
     declined match memory on 2026-10-14.
 - The bot resigns about 4 games in 10 (positions it judges lost): outcome measures keep those games.
 
+## Where the opponents' mistakes go: a ledger of the bot's games (ledger.py, 2026-10-20)
+
+The user: if the gauge were right, the bot's rated chance would climb through a game as people err (an engine against a person ends at
+1); how much do the opponents' mistakes come to, and where does the value go? `ledger.py` splits every bot game, turn by turn in the luck
+pass's payoff tables (hindsight, rescaled), into parts that add up exactly to the result less the turn-1 rating. Points a game:
+
+| | Bo1 (953) | Bo3 (1,236) | Bo3 game 1 / 2 / 3 |
+|---|---|---|---|
+| opponent's departures from its mix (the engine's charge) | +32.8 | +31.5 | +32.7 / +30.0 / +32.4 |
+| bot's departures from the bar's mix | -16.2 | -8.9 | -8.4 / -9.5 / -8.6 |
+| how the two plays met | -1.8 | -1.4 | -0.9 / -2.1 / -0.5 |
+| dice (next value against the played cell) | -2.0 | -3.4 | -3.4 / -2.4 / -5.1 |
+| drift (search less value function, same position) | -12.8 | -22.6 | -19.9 / -25.1 / -22.6 |
+| forfeits | +2.6 | +0.6 | +1.0 / +0.8 / -0.4 |
+| result less turn-1 rating | +2.7 | -4.0 | +1.1 / -8.3 / -4.8 |
+
+- Most of the charge comes back as drift: at each new turn the one-turn search rates the bot's position 2.1 (Bo1) to 3.5 (Bo3) points
+  under the value function's reading of the same position. Not a Player 1 lean: on the replay calibration set, search less value
+  function is -0.11 ± 0.12 (v34) and -0.12 ± 0.14 (depth at 4x). So it is particular to the positions the bot reaches.
+- Drift is largest after the opponent Protects (Bo3 -5.2 against -2.9 a step otherwise), uses a status move (-6.3), screens (-6.6) or
+  sets up (-4.5), and after the bot's own Fake Out (Bo3 -5.7 against -3.1; Bo1 -4.0 against -2.0). It is smallest after the bot's Trick
+  Room (-1.7) or switches. Turns where the bot played the bar's top option drift as much as the rest (-3.3 against -3.7).
+- Two readings, not yet told apart: the engine overcharges people's Protect / setup / status plays (diverge.py found the same), and the
+  value function then overrates what the bot gets from them; or the bot, choosing by noisy values, lands where they are too high (Battle
+  sim's 2026-10-12 ledger: "the bot's own top plays do about 2 points worse than rated"). Either way the leak is in the value, as Battle
+  sim concluded then on 441 decisions.
+- The bot's own term is bigger in Bo1 (closed sheets: its choices are made without the sets the hindsight table knows). "How the plays
+  met" is not positive in Bo3, so contempt's answer to people does not show a gain here.
+
 ## What is a read worth? (influence.py)
 
 The user's question (2026-10-06): if a player could make the opponent put an extra 20% on one option, how much does playing to exploit it

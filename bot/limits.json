@@ -50,7 +50,7 @@
       "odd": {
         "name": "d4",
         "EG_VNET": "bot/value/vnet_h64_search_d4.json",
-        "cal": 0.619
+        "cal": 0.57
       },
       "even": {
         "name": "acc",

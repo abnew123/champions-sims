@@ -66,6 +66,21 @@ def preview(msg):
         four = team[:4]
     order = [team.index(x) + 1 for x in four]
     return {'order': order, 'note': 'bring ' + '/'.join(x['species'] for x in four) + ('' if theirs else ' (no sheet seen)')}
+# the Bo1 net A/B (2026-10-21, the user: "set up the bo1 A/B"): the deployed net against the one fitted on the depth-at-4x search's values
+# (pssim/drift_nets.py: it removes most of the drift by kind of play, after Fake Out -3.0 -> -0.8 and Protect +2.2 -> +0.2, the leak the
+# Eval bar's ledger found; the same log loss against results). limits.json "net_ab": {format: {odd / even: {name, EG_VNET, cal}}}: a game's
+# arm by its battle number's parity, so every engine call of the game (turns, replacements) runs on that arm's net and its forfeit line
+# on that net's CAL (d4: 0.736 x 0.671 / 0.798, the bot's CAL scaled by the two nets' rescales on the value rebuild's held-out games).
+# Other formats keep the defaults position.py set. The team preview's bring does not use the net.
+DEFAULTS = {}
+def net_arm(msg, fmt, POS):
+    if not DEFAULTS: DEFAULTS.update(EG_VNET=os.environ['EG_VNET'], cal=POS.LV.CAL)
+    ab = (json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))).get('net_ab') or {}).get(fmt or '')
+    num = (msg.get('room') or '').split('-')
+    arm = ab and len(num) > 2 and num[2].isdigit() and ab.get('odd' if int(num[2]) % 2 else 'even')
+    os.environ['EG_VNET'] = os.path.join(ROOT, arm['EG_VNET']) if arm else DEFAULTS['EG_VNET']
+    POS.LV.CAL = arm['cal'] if arm else DEFAULTS['cal']
+    return arm['name'] if arm else None
 def turn(msg):
     import position as POS
     req = msg['request']
@@ -74,6 +89,7 @@ def turn(msg):
     # decision. On the bot's own 376 games, the bot's side at its real sets (2026-10-13): Bo3 hits dealt observed / predicted 0.985 -> 0.995,
     # in the predicted range 72.0% -> 77.3% (z +3.9), hits taken 0.975 -> 0.991 (z +0.5): on. Bo1 both a little worse (z -0.8, -1.2): off
     import spreads; spreads.FITTED = bool((json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))).get('fitted_spreads') or {}).get(fmt or '', False))
+    net_arm(msg, fmt, POS)
     if req.get('forceSwitch'): return {'choice': POS.replacement(req, msg['log'], msg['side'], team=(msg.get('team') or {}).get('sets')), 'note': 'replacement'}
     specs, info = POS.build(msg['log'], req, msg['side'], topk=POS.back_row_k(fmt), team=(msg.get('team') or {}).get('sets'))
     cap = json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))).get('protect_chain_cap')

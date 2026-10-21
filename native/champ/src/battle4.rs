@@ -26,15 +26,70 @@ fn dp2_log() -> bool { static F: std::sync::OnceLock<bool> = std::sync::OnceLock
 /// DP2_SIDE=0|1 (champ-battle-v12): run the two-turn Protect check for that side only
 fn dp2_side() -> Option<u8> { static F: std::sync::OnceLock<Option<u8>> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("DP2_SIDE").ok().and_then(|x| x.parse().ok())) }
 #[derive(Clone, Copy)]
-enum Policy { Eq, Random, Pure, Greedy, Exploit(f64), Noise(f64) }
-/// BATTLE_POLICY_0 / BATTLE_POLICY_1 = eq | random | pure | greedy | exploit:<e> | noise:<e> (see the turn loop)
+enum Policy { Eq, Random, Pure, Greedy, Exploit(f64), Noise(f64), Human }
+/// BATTLE_POLICY_0 / BATTLE_POLICY_1 = eq | random | pure | greedy | exploit:<e> | noise:<e> | human (see the turn loop)
 fn policy() -> [Policy; 2] {
     static F: std::sync::OnceLock<[Policy; 2]> = std::sync::OnceLock::new();
     *F.get_or_init(|| std::array::from_fn(|s| match std::env::var(format!("BATTLE_POLICY_{}", s)).as_deref() {
-        Ok("random") => Policy::Random, Ok("pure") => Policy::Pure, Ok("greedy") => Policy::Greedy,
+        Ok("random") => Policy::Random, Ok("pure") => Policy::Pure, Ok("greedy") => Policy::Greedy, Ok("human") => Policy::Human,
         Ok(v) if v.starts_with("exploit:") => Policy::Exploit(v[8..].parse().unwrap_or(0.1)),
         Ok(v) if v.starts_with("noise:") => Policy::Noise(v[6..].parse().unwrap_or(0.1)),
         _ => Policy::Eq }))
+}
+/// BATTLE_POLICY_<s>=human (2026-10-21, the user: a sparring partner that plays like the bot's opponents, to test nets against people's
+/// habits in self-play): the side plays the human model of bot/contempt.py (HUMAN_MODEL, a human_model*.json: lam, tau, fac by kind;
+/// bot/out/contempt/human_model_bot.json is the one refitted on the bot's own Bo3 opponents, who Protect in 18% of slot decisions). Each
+/// slot's choices get the model's chance, (1 - lam) x [its mix weight x the kind's factor, normalized] + lam x softmax(value / tau), the
+/// weight and value as evalpos reports them for a slot (the sum of the joint options' mix weights, the best of their values against the
+/// other side's mix); a joint option's chance is the product of its slots', over the joint options that exist
+struct HumanModel { lam: f64, tau: f64, fac: std::collections::HashMap<String, f64> }
+fn human_model() -> &'static HumanModel {
+    static F: std::sync::OnceLock<HumanModel> = std::sync::OnceLock::new();
+    F.get_or_init(|| {
+        let p = std::env::var("HUMAN_MODEL").expect("BATTLE_POLICY_<s>=human needs HUMAN_MODEL (a human_model*.json)");
+        let v: Value = serde_json::from_str(&std::fs::read_to_string(&p).expect("HUMAN_MODEL unreadable")).expect("HUMAN_MODEL: not JSON");
+        HumanModel { lam: v["lam"].as_f64().unwrap_or(0.5), tau: v["tau"].as_f64().unwrap_or(0.16),
+                     fac: v["fac"].as_object().map(|o| o.iter().filter_map(|(k, x)| x.as_f64().map(|f| (k.clone(), f))).collect()).unwrap_or_default() }
+    })
+}
+/// the kind of a slot's choice, as pssim/human_lines.py kind() classes it (the same rules on the move's raw data)
+fn human_kind(b: &Battle, s: u8, slot: usize, c: &PChoice) -> &'static str {
+    let k = match c { PChoice::Move(k, _, _) => *k, PChoice::Switch(_) => return "switch", _ => return "other" };
+    let Some(p) = b.sides[s as usize].active[slot] else { return "other" };
+    let Some(ms) = b.p((s, p)).move_slots.get(k) else { return "other" };
+    let mid = ms.id; let r = &b.dex.mv(mid).eff.raw;
+    let truthy = |x: &Value| !(x.is_null() || x == &Value::Bool(false) || x.as_str() == Some(""));
+    if mid == "fakeout" { return "Fake Out"; }
+    if truthy(&r["stallingMove"]) { return "Protect"; }
+    if mid == "wideguard" || mid == "quickguard" { return "Wide/Quick Guard"; }
+    if mid == "followme" || mid == "ragepowder" { return "redirection"; }
+    if mid == "allyswitch" { return "Ally Switch"; }
+    if mid == "trickroom" { return "Trick Room"; }
+    if mid == "tailwind" { return "Tailwind"; }
+    if matches!(r["sideCondition"].as_str(), Some("reflect") | Some("lightscreen") | Some("auroraveil")) { return "screen"; }
+    if matches!(mid, "helpinghand" | "coaching" | "decorate") { return "Helping Hand"; }
+    if truthy(&r["selfSwitch"]) { return "pivot"; }
+    let target = r["target"].as_str().unwrap_or("");
+    if r["category"].as_str() == Some("Status") {
+        const SETUP: [&str; 33] = ["swordsdance", "dragondance", "nastyplot", "calmmind", "bulkup", "irondefense", "coil", "agility", "shellsmash",
+            "quiverdance", "curse", "bellydrum", "tidyup", "shiftgear", "victorydance", "honeclaws", "workup", "growth", "stockpile", "amnesia",
+            "acidarmor", "cosmicpower", "clangoroussoul", "noretreat", "filletaway", "geomancy", "rockpolish", "autotomize", "howl", "meditate",
+            "sharpen", "defendorder", "cottonguard"];
+        let selfboost = target == "self" && r["boosts"].as_object().map(|o| o.values().any(|v| v.as_f64().unwrap_or(0.0) > 0.0)).unwrap_or(false);
+        if SETUP.contains(&mid) || selfboost { return "setup"; }
+        if truthy(&r["status"]) || matches!(mid, "yawn" | "spore" | "sleeppowder" | "hypnosis" | "darkvoid") { return "status move"; }
+        if matches!(mid, "taunt" | "encore" | "disable" | "imprison" | "haze" | "trick" | "switcheroo" | "perishsong" | "skillswap" | "roar" | "whirlwind") { return "disruption"; }
+        if truthy(&r["weather"]) || truthy(&r["terrain"]) { return "weather/terrain"; }
+        if truthy(&r["heal"]) || matches!(mid, "healpulse" | "lifedew" | "wish" | "pollenpuff" | "junglehealing") { return "heal"; }
+        if mid == "substitute" { return "Substitute"; }
+        return "other status";
+    }
+    let sec = &r["secondary"];
+    let spread = target == "allAdjacentFoes" || target == "allAdjacent";
+    if sec["chance"].as_f64() == Some(100.0) && sec["boosts"].as_object().map(|o| !o.is_empty() && o.values().all(|v| v.as_f64().unwrap_or(0.0) < 0.0)).unwrap_or(false) && spread { return "speed/stat control"; }
+    if r["priority"].as_f64().unwrap_or(0.0) > 0.0 { return "priority attack"; }
+    if spread { return "spread attack"; }
+    "attack"
 }
 fn perish_search() -> Option<[usize; 2]> { static F: std::sync::OnceLock<Option<[usize; 2]>> = std::sync::OnceLock::new(); *F.get_or_init(|| {
     let d: usize = std::env::var("BATTLE_PERISH_DEPTH").ok()?.parse().ok()?;
@@ -380,6 +435,24 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
                         .map(|j| model[j] * if s == 0 { cell2(i, j, &b).0 } else { 1.0 - cell2(j, i, &b).1 }).sum()).collect();
                     let k = (0..n_own).max_by(|&a, &c| vals[a].partial_cmp(&vals[c]).unwrap()).unwrap();
                     let mut u = vec![0.0; n_own]; u[k] = 1.0; Some(u) }
+                Policy::Human => { let m = human_model();
+                    let own: &Vec<[PChoice; 2]> = if s == 0 { &msw } else { &tsw };
+                    let (mix, opp) = if s == 0 { (x.clone(), y.clone()) } else { (y.clone(), x.clone()) };
+                    let osup: Vec<usize> = (0..opp.len()).filter(|&j| opp[j] > 1e-6).collect(); let ot: f64 = osup.iter().map(|&j| opp[j]).sum::<f64>().max(1e-12);
+                    let val: Vec<f64> = (0..n_own).map(|i| osup.iter().map(|&j| opp[j] * if s == 0 { cell2(i, j, &b).0 } else { 1.0 - cell2(j, i, &b).1 }).sum::<f64>() / ot).collect();
+                    let mut sp: Vec<Vec<(PChoice, f64)>> = vec![];
+                    for k in 0..2usize {
+                        let mut ch: Vec<PChoice> = vec![]; for o in own.iter() { if !ch.contains(&o[k]) { ch.push(o[k]); } }
+                        let w: Vec<f64> = ch.iter().map(|c| (0..n_own).filter(|&q| own[q][k] == *c).map(|q| mix[q]).sum()).collect();
+                        let v: Vec<f64> = ch.iter().map(|c| (0..n_own).filter(|&q| own[q][k] == *c).map(|q| val[q]).fold(f64::MIN, f64::max)).collect();
+                        let a: Vec<f64> = ch.iter().zip(&w).map(|(c, w)| w * m.fac.get(human_kind(&b, s as u8, k, c)).copied().unwrap_or(1.0)).collect();
+                        let sa = a.iter().sum::<f64>().max(1e-12); let mx = v.iter().cloned().fold(f64::MIN, f64::max);
+                        let e: Vec<f64> = v.iter().map(|v| ((v - mx) / m.tau).exp()).collect(); let se: f64 = e.iter().sum::<f64>().max(1e-12);
+                        sp.push(ch.iter().enumerate().map(|(i, c)| (*c, (1.0 - m.lam) * a[i] / sa + m.lam * e[i] / se)).collect());
+                    }
+                    let mut u: Vec<f64> = (0..n_own).map(|q| (0..2).map(|k| sp[k].iter().find(|(c, _)| *c == own[q][k]).map(|x| x.1).unwrap_or(0.0)).product()).collect();
+                    let t: f64 = u.iter().sum();
+                    if t > 0.0 { for v in u.iter_mut() { *v /= t; } Some(u) } else { None } }
             };
             if let Some(u) = new_mix { if s == 0 { x = u; } else { y = u; } }
         }

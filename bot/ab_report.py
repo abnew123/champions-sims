@@ -9,7 +9,7 @@ def main():
     L = json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))); out = []
     for fmt, ab in (L.get('net_ab') or {}).items():
         G = [json.loads(l) for l in open(os.path.join(ROOT, 'bot', 'out', 'games.jsonl')) if '"arm"' in l]
-        G = [g for g in G if g.get('format') == fmt and g['when'][:10] >= ab.get('start', '')]
+        G = [g for g in G if g.get('format') == fmt and g['when'][:len(ab.get('start', ''))] >= ab.get('start', '')]
         by = {}
         for g in G:
             num = g['room'].split('-')[2]

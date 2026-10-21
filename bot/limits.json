@@ -46,7 +46,7 @@
   },
   "net_ab": {
     "gen9championsvgc2026regmc": {
-      "start": "2026-10-21",
+      "start": "2026-10-21T04:46",
       "odd": {
         "name": "d4",
         "EG_VNET": "bot/value/vnet_h64_search_d4.json",

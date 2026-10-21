@@ -15,7 +15,10 @@ Over a game these add up exactly to the result less V at turn 1, so a gap betwee
 up in one of the others. Bo1 and Bo3 apart, and Bo3 by game of the match.
   replays    the same drift in people's games (diverge.py's data: Showdown Bo3, depth at 4x), from a side's view, by what it and its
              opponent played the turn before, and by whether it played the engine's top option (a winner's curse would show there)
-usage (numpy: the main folder's .venv): python3 evalbar/ledger.py [replays]   writes evalbar/results/ledger.json (ledger_replays.json)"""
+  ab         Battle sim's Bo1 net A/B (bot/limits.json net_ab; the arm by the battle number's parity, from its start): per arm, wins,
+             wins less the turn-1 rating, and wins less the turn-1 rating less the dice, the main measure (it needs about 0.72x the games
+             of raw wins for the same precision on the bot's Bo1 games). Every game is read by the bar's net, the same yardstick for both
+usage (numpy: the main folder's .venv): python3 evalbar/ledger.py [replays | ab]   writes evalbar/results/ledger.json (ledger_replays.json)"""
 import os, sys, json, re, math, collections
 import numpy as np
 import common as C, procs as P, botstudy as BS, diverge as D
@@ -112,9 +115,45 @@ def replays():
         if n < 300: continue
         x = out['after_own'][k] = ms([r for r in rows if k in r['own']]); print(f"    {k[:44]:44s} {100 * x['mean']:+.2f} ± {100 * x['se']:.2f} ({x['n']})")
     json.dump(out, open(os.path.join(C.HERE, 'results', 'ledger_replays.json'), 'w'), indent=1)
+def ab(fmt_room='gen9championsvgc2026regmc'):
+    """the net A/B's games by arm (odd / even battle numbers) from its start: wins, less the turn-1 rating, less the dice as well"""
+    cfg = json.load(open(os.path.join(C.MAIN, 'bot', 'limits.json')))['net_ab'][fmt_room]
+    when = {}
+    for l in open(os.path.join(BS.BOT, 'games.jsonl')):
+        try: g = json.loads(l)
+        except ValueError: continue
+        m = re.search(r'-(\d+)(?:-[a-z0-9]+)?$', g.get('room', ''))
+        if m and re.search(rf'-{fmt_room}-\d', g['room']): when[m.group(1)] = g.get('when', '')
+    G = BS.games(); E = endings(); arms = collections.defaultdict(list); pending = collections.Counter()
+    for num, (room, won, fmt, _) in G.items():
+        if when.get(num, '') < cfg['start'] or not re.search(rf'-{fmt_room}-\d', room): continue
+        arm = cfg['odd']['name'] if int(num) % 2 else cfg['even']['name']
+        try: L = game(num, won, E.get(room))
+        except Exception: L = None
+        if L: arms[arm].append(L)
+        else: pending[arm] += 1
+    out = {'start': cfg['start'], 'arms': {}}
+    keys = (('wins', lambda r: r['result']), ('wins - turn-1 rating', lambda r: r['result'] - r['start']),
+            ('wins - turn-1 rating - dice', lambda r: r['result'] - r['start'] - r['dice']), ('drift', lambda r: r['drift']), ('opponent', lambda r: r['opponent']))
+    print(f"Bo1 net A/B from {cfg['start']} UTC (odd battle numbers: {cfg['odd']['name']}, even: {cfg['even']['name']}); points, ± one standard error")
+    for arm, rs in arms.items():
+        out['arms'][arm] = {'games': len(rs), 'not_read_yet': pending[arm]}
+        print(f"  {arm}: {len(rs)} games read ({pending[arm]} not read yet)")
+        for k, f in keys:
+            a = np.array([f(r) for r in rs]); out['arms'][arm][k] = {'mean': float(a.mean()), 'se': float(a.std() / math.sqrt(len(a)))}
+            print(f"    {k:30s} {100 * a.mean():+7.2f} ± {100 * a.std() / math.sqrt(len(a)):.2f}")
+    a1, a0 = cfg['odd']['name'], cfg['even']['name']
+    if a1 in arms and a0 in arms:
+        out['difference'] = {}
+        for k, f in keys[:3]:
+            x = np.array([f(r) for r in arms[a1]]); y = np.array([f(r) for r in arms[a0]])
+            d, se = x.mean() - y.mean(), math.sqrt(x.var() / len(x) + y.var() / len(y)); out['difference'][k] = {'mean': float(d), 'se': float(se)}
+            print(f"  {a1} - {a0}, {k:30s} {100 * d:+7.2f} ± {100 * se:.2f}")
+    json.dump(out, open(os.path.join(C.HERE, 'results', 'ledger_ab.json'), 'w'), indent=1)
 if __name__ == '__main__':
     P.own()
     if sys.argv[1:] == ['replays']: replays(); sys.exit()
+    if sys.argv[1:] == ['ab']: ab(); sys.exit()
     G = BS.games(); E = endings(); gn = BS.game_numbers(); rows = []
     for num, (room, won, fmt, _) in G.items():
         try: L = game(num, won, E.get(room))

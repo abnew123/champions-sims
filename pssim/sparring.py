@@ -1,7 +1,11 @@
 """Report of the sparring partner (sparring.sh): the bot with the d4 net against the bot with the deployed net, both against the same
 human-model opponent on the same starts and luck (the opponent built on the deployed net, and in the _h4 arms on the d4 net). Per start the d4 net's gain is v(d4_0) - v(acc0) with the bot on side 0 (v: side 0's
 result) and v(acc1) - v(d4_1) with it on side 1; standard errors over starts. Arms not yet run are left out.
-  ../.venv/bin/python3 sparring.py [scratch dir, default results/sparring]"""
+  ../.venv/bin/python3 sparring.py [scratch dir, default results/sparring]
+Result (2026-10-21, 400 pool starts an arm, BATTLE_EVAL 20,000): against the opponent built on the deployed net d4 - deployed -2.5 +- 2.5
+(bot on side 0) and -5.6 +- 2.7 (side 1); against the one built on the d4 net +5.1 +- 2.4 (side 0). Each net does about 4 points a game
+better against an opponent that judges positions as it does; averaged over the two opponents d4 - deployed is +1.3 +- 1.7: no clear
+difference against human-like play, so a large ladder gain (8+ points a game) is unlikely."""
 import os, sys, json, glob, math
 HERE = os.path.dirname(os.path.abspath(__file__))
 SP = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, 'results', 'sparring')

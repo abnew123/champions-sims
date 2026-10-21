@@ -281,10 +281,16 @@ pass's payoff tables (hindsight, rescaled), into parts that add up exactly to th
 - Drift is largest after the opponent Protects (Bo3 -5.2 against -2.9 a step otherwise), uses a status move (-6.3), screens (-6.6) or
   sets up (-4.5), and after the bot's own Fake Out (Bo3 -5.7 against -3.1; Bo1 -4.0 against -2.0). It is smallest after the bot's Trick
   Room (-1.7) or switches. Turns where the bot played the bar's top option drift as much as the rest (-3.3 against -3.7).
-- Two readings, not yet told apart: the engine overcharges people's Protect / setup / status plays (diverge.py found the same), and the
-  value function then overrates what the bot gets from them; or the bot, choosing by noisy values, lands where they are too high (Battle
-  sim's 2026-10-12 ledger: "the bot's own top plays do about 2 points worse than rated"). Either way the leak is in the value, as Battle
-  sim concluded then on 441 decisions.
+- Mispricing, not a winner's curse (`ledger.py replays`, 19,122 side-steps in 2,478 people's games, depth at 4x): a side that played the
+  engine's top option in every slot drifts +0.23 ± 0.24 next turn (no curse), but drift follows the kind of play, the same way as in
+  the bot's games. After a side's own Fake Out the value function overrates it by 3.0 ± 0.3 points against the next search; Tailwind 1.9,
+  Helping Hand 1.3, screens 1.4, spread attacks 1.0, single-target attacks 0.8. After a Protect it underrates the protecting side by
+  2.2 ± 0.15; status moves 1.8, redirection 1.1, switches 0.7. The bot attacks and Fake Outs and its opponents Protect more than people do
+  against each other, so each turn lands it on the wrong side: about the -2 to -3.5 a step seen. The leak is in the value function, as
+  Battle sim concluded on 2026-10-12 (441 decisions). Candidates for what it misses: Fake Out spent after its first turn, Tailwind's
+  turns left, what a Protect turn cost the attacker (a re-search fresh positions would show which). Results in results/ledger_replays.json.
+  (A fresh-seed re-run of the luck tables would not test this: the value function's error has no rolls in it, and the bot chose in its
+  own live run, not the luck pass's.)
 - The bot's own term is bigger in Bo1 (closed sheets: its choices are made without the sets the hindsight table knows). "How the plays
   met" is not positive in Bo3, so contempt's answer to people does not show a gain here.
 

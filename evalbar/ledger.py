@@ -13,10 +13,12 @@ a turn t, with x and y the two sides' equilibrium mixes and M the table (the bot
   forfeit    a game that ended by a forfeit (or a timer): the result less the value at the start of the turn it ended in
 Over a game these add up exactly to the result less V at turn 1, so a gap between the opponents' mistakes and the bot's gain has to show
 up in one of the others. Bo1 and Bo3 apart, and Bo3 by game of the match.
-usage (numpy: the main folder's .venv): python3 evalbar/ledger.py   writes evalbar/results/ledger.json"""
+  replays    the same drift in people's games (diverge.py's data: Showdown Bo3, depth at 4x), from a side's view, by what it and its
+             opponent played the turn before, and by whether it played the engine's top option (a winner's curse would show there)
+usage (numpy: the main folder's .venv): python3 evalbar/ledger.py [replays]   writes evalbar/results/ledger.json (ledger_replays.json)"""
 import os, sys, json, re, math, collections
 import numpy as np
-import common as C, procs as P, botstudy as BS
+import common as C, procs as P, botstudy as BS, diverge as D
 sig = lambda x: 1 / (1 + math.exp(-x))
 logit = lambda v: math.log(min(1 - 1e-4, max(1e-4, v)) / (1 - min(1 - 1e-4, max(1e-4, v))))
 PARTS = ('opponent', 'bot', 'together', 'dice', 'drift', 'forfeit')
@@ -68,8 +70,51 @@ def game(num, won, ended):
         led['dice'] += (per[t + 1][1] if t + 1 in per and t + 1 <= turns[-1] else y) - cell
     led['start'] = per[1][0]; led['result'] = y; led['turns'] = len(turns); led['forfeited'] = ended == 'forfeit'
     return led
+def replays():
+    """drift (search less value function at a position, from a side's view) in people's games, by what that side and its opponent
+    played the turn before, and whether the side played the engine's top option in every slot"""
+    Mv = json.load(open(os.path.join(C.MAIN, 'native', 'engine_data_full.json')))['moves']; pos = {}
+    for part in ('hold', 'val', 'fit_sub'):
+        for l in open(os.path.join(D.V2, 'box', f'real_{part}_d4.eval.jsonl')):
+            e = json.loads(l)
+            if 'sides' not in e or e.get('static') is None: continue
+            info = []
+            for s_ in (0, 1):
+                top, kinds, known = True, set(), True
+                for sl in e['sides'][s_]['slots']:
+                    o = sl['options']
+                    if len(o) < 2: continue
+                    pl = [x for x in o if x.get('actual')]
+                    if not pl: known = False; continue
+                    kinds.add(D.kind(pl[0]['label'], pl[0]['c'], Mv)); top = top and bool(max(o, key=lambda x: x['w']).get('actual'))
+                info.append({'top': top and known, 'kinds': kinds, 'known': known})
+            pos[(e['name'].split(' ')[0], e['turn'])] = {'d': D.R(e['value']) - D.R(e['static']), 'info': info}
+    rows = []
+    for (g, t), p_ in pos.items():
+        q = pos.get((g, t + 1))
+        if not q: continue
+        for s_ in (0, 1):
+            if p_['info'][s_]['known'] and p_['info'][1 - s_]['known']:
+                rows.append({'g': g, 'd': q['d'] if s_ == 0 else -q['d'], 'top': p_['info'][s_]['top'], 'own': p_['info'][s_]['kinds'], 'opp_top': p_['info'][1 - s_]['top']})
+    def ms(xs):
+        by = collections.defaultdict(lambda: [0.0, 0])
+        for r in xs: by[r['g']][0] += r['d']; by[r['g']][1] += 1
+        S = np.array([v[0] for v in by.values()]); N = np.array([v[1] for v in by.values()])
+        pick = np.random.default_rng(1).integers(0, len(S), (400, len(S)))
+        return {'mean': float(S.sum() / N.sum()), 'se': float(np.std(S[pick].sum(1) / N[pick].sum(1))), 'n': len(xs)}
+    out = {'steps': len(rows), 'games': len({r['g'] for r in rows}), 'top': {}, 'after_own': {}}
+    print(f"{len(rows)} side-steps in {out['games']} people's games; drift for the side, points")
+    for lab, f in (('played the top option in every slot, the opponent did not', lambda r: r['top'] and not r['opp_top']), ('did not, the opponent did', lambda r: r['opp_top'] and not r['top']),
+                   ('both did', lambda r: r['top'] and r['opp_top']), ('neither did', lambda r: not r['top'] and not r['opp_top'])):
+        x = out['top'][lab] = ms([r for r in rows if f(r)]); print(f"  {lab:60s} {100 * x['mean']:+.2f} ± {100 * x['se']:.2f} ({x['n']})")
+    print('  by what the side itself played the turn before:')
+    for k, n in collections.Counter(k for r in rows for k in r['own']).most_common():
+        if n < 300: continue
+        x = out['after_own'][k] = ms([r for r in rows if k in r['own']]); print(f"    {k[:44]:44s} {100 * x['mean']:+.2f} ± {100 * x['se']:.2f} ({x['n']})")
+    json.dump(out, open(os.path.join(C.HERE, 'results', 'ledger_replays.json'), 'w'), indent=1)
 if __name__ == '__main__':
     P.own()
+    if sys.argv[1:] == ['replays']: replays(); sys.exit()
     G = BS.games(); E = endings(); gn = BS.game_numbers(); rows = []
     for num, (room, won, fmt, _) in G.items():
         try: L = game(num, won, E.get(room))

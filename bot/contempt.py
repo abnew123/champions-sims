@@ -286,6 +286,133 @@ def score():
         show((OR > 0) & (OR < cut), f'opponent rated under {cut:.0f} ({int(((OR > 0) & (OR < cut)).sum())} decisions)')
         show(OR >= cut, f'opponent rated {cut:.0f} or more ({int((OR >= cut).sum())} decisions)')
 
+# botfit / botscore (2026-10-20, the user: "go ahead with the human model refit"): the model refitted on the people the bot actually plays.
+# The Eval bar's study of the bot's games (evalbar/botstudy.py, 94f21d9) found its Bo3 opponents Protect in 19.4% of slot decisions, the
+# engine's mix 14.7%, the model (fitted on human-vs-human replays) 12.9%. Source: the bot page's luck pass, every turn of every bot game in
+# hindsight (both sides' Pokemon as the game showed them; the opponent's options with the engine's weight and value, and what it played;
+# the bot is side 0), the newest engine's read of each turn; LUCK_DIR, the Eval bar's evalbar/out/live (its worktree's while it works in one).
+LUCK_DIR = os.environ.get('LUCK_DIR') or os.path.join(ROOT, 'evalbar', 'out', 'live')
+LCALS = {'': 0.7538, '_v31': 0.782, '_v34': 0.785}   # live.CALS by file suffix
+# Result (2026-10-20, 1,213 Bo3 games, fit on half, scored on the other): the kind factors moment-matched inside the mixture (the plain
+# ratio kept Protect at 12.6%) bring the model to the people's shares (Protect 17.1% vs their 18.0%, the live model 11.9%; attacks 39.3%
+# vs 38.3%, live 44.5%), log score -1.5768 -> -1.5682. Contempt on 3,463 held-out decisions (597 games): c 0.25 / 0.5 / 0.75 / 1.0 gain
+# +0.30 / +0.39 / +0.30 / -0.06 live, +0.31 / +0.42 / +0.25 / -0.01 refitted (refitted - live +0.01 / +0.02 / -0.06 / +0.06, all
+# +- 0.02-0.15), the price against a perfect opponent a little higher refitted (0.65 -> 0.80 at 0.5). Better predictions, no gain the
+# bot can use: the live model and c 0.5 stay (the user's call); human_model_bot.json kept for reference.
+BOT_MODEL = os.path.join(OUT, 'human_model_bot.json')
+BOT_CS = [float(x) for x in os.environ.get('BOTSCORE_CS', '0.5').split(',')]   # contempt levels botscore compares
+def luck_games(fmt):
+    """{battle number: [(luck line, CAL)]} for the bot's games in fmt"""
+    import re, glob
+    fm = {}
+    for l in open(os.path.join(ROOT, 'bot', 'out', 'games.jsonl')):
+        if '"arm"' not in l: continue
+        g = json.loads(l); m = re.match(r'battle-([a-z0-9]+)-(\d+)', g['room'])
+        if m: fm[m.group(2)] = m.group(1)
+    by = collections.defaultdict(dict)
+    for suf in ('', '_v31', '_v34'):                                       # a newer engine's turn replaces an older one's
+        for f in glob.glob(os.path.join(LUCK_DIR, f'bot_*_luck{suf}.jsonl')):
+            m = re.match(r'bot_(\d+)_luck' + re.escape(suf) + r'\.jsonl$', os.path.basename(f))
+            if not m or fm.get(m.group(1)) != fmt: continue
+            t = collections.defaultdict(list)
+            for l in open(f):
+                try: d = json.loads(l)
+                except ValueError: continue
+                if d.get('matrix') and 'sides' in d: t[d['turn']].append((d, LCALS[suf]))
+            by[m.group(1)].update(t)
+    return {g: [x for t in sorted(v) for x in v[t]] for g, v in by.items()}
+def opp_rows(lines):
+    """the opponent's slot decisions: (options [(label, w, v)], index of its play)"""
+    for d, _ in lines:
+        for sl in d['sides'][1]['slots']:
+            k = next((i for i, o in enumerate(sl['options']) if o.get('actual')), None)
+            if k is not None and len(sl['options']) > 1: yield [(o['label'], o['w'], o['v']) for o in sl['options']], k
+def botfit():
+    import exploit_test as XT, human_lines as HL
+    ll = lambda M, part: sum(math.log(max(1e-9, XT.probs(opts, M)[k])) for opts, k in part) / len(part)
+    old = json.load(open(MODEL)); res = {}
+    for name, fmt in (('Bo3', 'gen9championsvgc2026regmcbo3'), ('Bo1', 'gen9championsvgc2026regmc')):
+        G = luck_games(fmt); games = sorted(G); random.Random(3).shuffle(games); half = set(games[:len(games) // 2])
+        A = [r for g in games if g in half for r in opp_rows(G[g])]; B = [r for g in games if g not in half for r in opp_rows(G[g])]
+        hum = collections.Counter(); plan = collections.Counter()
+        for opts, k in A:
+            hum[HL.kind(opts[k][0])[0]] += 1
+            for l, w, v in opts: plan[HL.kind(l)[0]] += w
+        fac = {kd: (hum[kd] + 1) / (plan[kd] + 1) for kd in set(hum) | set(plan)}
+        share = lambda part, kd: sum(1 for o, k in part if HL.kind(o[k][0])[0] == kd) / len(part)
+        pred = lambda M, part, kd: sum(p for o, k in part for (l, _, _), p in zip(o, XT.probs(o, M)) if HL.kind(l)[0] == kd) / len(part)
+        # the kind factors fitted inside the mixture (the plain ratio above ignores the value softmax, which keeps Protect low): moment
+        # matching, each kind's factor scaled until the model's share of it on the fit half is the people's, for each (lam, tau)
+        def matched(lam, tau):
+            M = {'lam': lam, 'tau': tau, 'fac': dict(fac)}; kinds = [kd for kd in fac if hum[kd] >= 20]
+            obs = {kd: hum[kd] / len(A) for kd in kinds}
+            for _ in range(12):
+                tot = collections.Counter()
+                for o, k in A:
+                    for (l, _, _), p in zip(o, XT.probs(o, M)): tot[HL.kind(l)[0]] += p
+                for kd in kinds: M['fac'][kd] *= (obs[kd] / max(1e-9, tot[kd] / len(A))) ** 0.8
+            return M
+        cands = [{'lam': lam, 'tau': tau, 'fac': fac} for lam in (0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8) for tau in (0.01, 0.02, 0.04, 0.08, 0.16, 0.3, 0.5, 1.0)]
+        top = sorted(cands, key=lambda M: -ll(M, A))[:4]
+        best = max([matched(M['lam'], M['tau']) for M in top] + [matched(lam, tau) for lam in (0.2, 0.3) for tau in (0.08, 0.16)], key=lambda M: ll(M, A))
+        print(f"{name}: {len(A) + len(B)} opponent slot decisions in {len(games)} games (fit on half the games, scored on the other half; log score, higher is better)")
+        print(f"  engine's mix (2% floor) {ll({'lam': 0.02, 'tau': 10.0, 'fac': {}}, B):.4f};  the live model {ll(old, B):.4f};  refitted {ll(best, B):.4f} (lam {best['lam']}, tau {best['tau']})")
+        for kd in ('Protect', 'attack', 'setup', 'switch', 'Fake Out', 'spread attack'):
+            print(f"    {kd:14s} people {share(B, kd):.3f}  live model {pred(old, B, kd):.3f}  refitted {pred(best, B, kd):.3f}")
+        res[name] = (best, half)
+    json.dump(res['Bo3'][0], open(BOT_MODEL, 'w')); print('->', BOT_MODEL, '(the Bo3 fit)')
+def botscore():
+    """contempt's gain on the held-out half of the Bo3 games, the live model against the refitted one: each turn's luck-pass payoff table
+    (the bot's joint actions by the opponent's, in real win chance with the file's CAL), the restricted Nash response to each model's
+    prediction scored against the opponent's actual column. The table both chooses and scores (one luck sample), so both models' gains
+    are optimistic by the same kind of margin; their difference is the measure"""
+    import numpy as np
+    from scipy.optimize import linprog
+    import exploit_test as XT
+    def nash(A):
+        n, k = A.shape
+        r = linprog(np.r_[np.zeros(n), -1.0], A_ub=np.c_[-A.T, np.ones(k)], b_ub=np.zeros(k), A_eq=np.r_[np.ones(n), 0.0][None], b_eq=[1.0],
+                    bounds=[(0, None)] * n + [(None, None)], method='highs')
+        return r.x[:n], -r.fun
+    def rnr(A, q, c):
+        n, k = A.shape
+        r = linprog(np.r_[-c * (A @ q), -(1 - c)], A_ub=np.c_[-A.T, np.ones(k)], b_ub=np.zeros(k), A_eq=np.r_[np.ones(n), 0.0][None], b_eq=[1.0],
+                    bounds=[(0, None)] * n + [(None, None)], method='highs')
+        return r.x[:n]
+    models = {'live': json.load(open(MODEL)), 'refitted': json.load(open(BOT_MODEL))}
+    G = luck_games('gen9championsvgc2026regmcbo3'); games = sorted(G); random.Random(3).shuffle(games); held = games[len(games) // 2:]
+    lim = int(os.environ.get('BOTSCORE_N', '0')) or None
+    sig = lambda x: 1 / (1 + math.exp(-x)); lg = lambda v: math.log(min(1 - 1e-4, max(1e-4, v)) / (1 - min(1 - 1e-4, max(1e-4, v))))
+    out = collections.defaultdict(list); gid = []
+    for g in held[:lim]:
+        for d, cal in G[g]:
+            m = d['matrix']; V = np.array([[x if x is not None else np.nan for x in r] for r in m['v1']], float)
+            if V.shape[0] < 2 or V.shape[1] < 2 or np.isnan(V).mean() > 0.5: continue
+            if np.isnan(V).any(): rm = np.nanmean(V, axis=1); V = np.where(np.isnan(V), rm[:, None], V)   # as the live bot fills them (position.contempt_mix)
+            A = np.vectorize(lambda v: sig(cal * lg(v)))(V)
+            slots = d['sides'][1]['slots']; played = [next((o for o in sl['options'] if o.get('actual')), None) for sl in slots]
+            if any(p is None for p in played): continue
+            want = [p['c'] for p in played]
+            act = next((j for j, c in enumerate(m['cols']) if all(x == y for x, y in zip(c, want))), None)
+            if act is None: continue
+            x0, v0 = nash(A); base = x0 @ A[:, act]
+            for nm, M in models.items():
+                sp = [{json.dumps(o['c']): p for o, p in zip(sl['options'], XT.probs([(o['label'], o['w'], o['v']) for o in sl['options']], M))} for sl in slots]
+                q = np.array([math.prod(sp[i].get(json.dumps(c[i]), 1e-6) for i in range(min(len(c), len(sp))) if c[i] is not None) for c in m['cols']]); q /= q.sum()
+                out[f'{nm}: model probability of the actual column'].append(q[act])
+                for c in BOT_CS:
+                    x = rnr(A, q, c)
+                    out[f'{nm}: c={c:.2f} gain vs the actual play'].append(x @ A[:, act] - base)
+                    out[f'{nm}: c={c:.2f} price vs a perfect opponent'].append(v0 - (x @ A).min())
+            gid.append(g)
+    G_ = np.array(gid); n = len(gid)
+    print(f"{n} bot decisions in {len(set(gid))} held-out Bo3 games, real win chance points per decision; ± one standard error, clustered by game")
+    def se(xs): return math.sqrt(sum(((xs[G_ == x] - xs.mean()).sum()) ** 2 for x in set(gid))) / len(xs)
+    for k, xs in out.items(): xs = np.array(xs); print(f"  {k:52s} {100 * xs.mean():+7.2f}  ± {100 * se(xs):.2f}")
+    for c in BOT_CS:
+        dlt = np.array(out[f'refitted: c={c:.2f} gain vs the actual play']) - np.array(out[f'live: c={c:.2f} gain vs the actual play'])
+        print(f"  {f'refitted - live at c={c:.2f}, gain vs the actual play':52s} {100 * dlt.mean():+7.2f}  ± {100 * se(dlt):.2f}")
+
 if __name__ == '__main__':
     a = sys.argv[1:]
     if a[0] == 'pick': pick(int(a[1]), int(a[2]) if len(a) > 2 else 1)
@@ -297,3 +424,5 @@ if __name__ == '__main__':
     elif a[0] == 'live': live(int(a[1]) if len(a) > 1 else 2)
     elif a[0] == 'hipick': hipick(int(a[1]) if len(a) > 1 else 3000)
     elif a[0] == 'livescore': livescore()
+    elif a[0] == 'botfit': botfit()
+    elif a[0] == 'botscore': botscore()

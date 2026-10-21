@@ -291,6 +291,12 @@ pass's payoff tables (hindsight, rescaled), into parts that add up exactly to th
   turns left, what a Protect turn cost the attacker (a re-search fresh positions would show which). Results in results/ledger_replays.json.
   (A fresh-seed re-run of the luck tables would not test this: the value function's error has no rolls in it, and the bot chose in its
   own live run, not the luck pass's.)
+- The Bo1 net A/B (Battle sim, from 2026-10-21 12:47 am; odd battle numbers on the d4 net, even on acc): `ledger.py ab`. The A/A
+  check before it (same net on both parities, about 170 games each): +9.3 ± 5.4 raw wins, +3.3 ± 4.6 luck-adjusted, noise alone.
+  About 1,600 games an arm show a 3-point difference at 2 SE (230 for 8 points). The d4 net on real_hold.pos.jsonl (v34, the bar's
+  one-turn read, out/acc_hold_v34_d4net.jsonl): weight 0.606 against acc's 0.785 (log loss 0.4996 against 0.4889, +0.011 ± 0.012).
+  The ratio 0.77 is lower than the static nets' 0.84 that set the A/B's forfeit CAL (0.619 = 0.736 x 0.671 / 0.798); by this one it
+  would be about 0.57.
 - The bot's own term is bigger in Bo1 (closed sheets: its choices are made without the sets the hindsight table knows). "How the plays
   met" is not positive in Bo3, so contempt's answer to people does not show a gain here.
 

@@ -117,7 +117,8 @@ def replays():
     json.dump(out, open(os.path.join(C.HERE, 'results', 'ledger_replays.json'), 'w'), indent=1)
 def ab(fmt_room='gen9championsvgc2026regmc'):
     """the net A/B's games by arm (odd / even battle numbers) from its start: wins, less the turn-1 rating, less the dice as well"""
-    cfg = json.load(open(os.path.join(C.MAIN, 'bot', 'limits.json')))['net_ab'][fmt_room]
+    cfg = (json.load(open(os.path.join(C.MAIN, 'bot', 'limits.json'))).get('net_ab') or {}).get(fmt_room)
+    if not cfg: print(f'no net A/B for {fmt_room} in bot/limits.json (net_ab)'); return
     when = {}
     for l in open(os.path.join(BS.BOT, 'games.jsonl')):
         try: g = json.loads(l)

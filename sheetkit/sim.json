@@ -198,6 +198,25 @@
    ],
    "status": "TR sheet, 2026-10-17: v23 with PERISH2=1, the trap-aware Perish term on the EG_VALUE path (a count dooms only a Pokemon that cannot leave; v11's flag). Battle sim's check on 244 real human pairings with a Perish side: the Perish side's sim win 41.2% -> 45.2% against a real 49.2%, songs in 16% -> 33.5% of playouts against the humans' 32% (v23 as is overrates the side facing Perish by ~8 points). It plays v23's games wherever no Perish count can arise, so it shares v23's result folders: `kit.py <team> flagged --write --moves perishsong --moves-only`, then the steps on this setup. The Trick Room Six sheet uses it (sheet.json 'setup'; the user's choice over moving the sheet to the bot's net setup, 2026-10-17).",
    "games": "v13-dp2-race-eg9"
+  },
+  "v38p2-dp2-race-eg9-full": {
+   "binary": "native/champ/bin/champ-battle-v38",
+   "value": "pssim/egvalue9.json",
+   "engine_data": "native/engine_data_full.json",
+   "env": {
+    "BATTLE_ANTICIPATE": "1",
+    "DP2": "1",
+    "RACE": "1",
+    "RACE_TIES": "avg",
+    "EG_MEGA_TIE": "0",
+    "PERISH2": "1",
+    "CALC_DATA": "native/champions_data_full.json"
+   },
+   "env_paths": [
+    "CALC_DATA"
+   ],
+   "status": "Battle sim and the TR sheet, 2026-10-22 (asked for by the Frankfurt-156 sheet's full rerun, the user's choice): the newest engine on the kit's EG_VALUE path. v38 plays v34's games with these flags (12/12 pool starts move for move; v35-v38's additions are inert unless set). Since v23: the Mega choice (v24, EG_MEGA_ALWAYS unset; EG_MEGA_TIE=0 as v25), the grid by current forme (v25), the engine's Showdown-exact fixes and ports of v26-v34 (Revival Blessing, Defog, Beat Up, ...), partner targets (v29, on by default), the immunity filter (v32) and its Mega follow-up (v33), Aura Guard, and PERISH2=1 (the trap-aware Perish term; see v23p2). CALC_DATA is the full calc data (about 1,250 species champions_data.json lacked fell back in the race). Not the climb's TRSYM / RACE_PRIO / FEATS22 (they go with egvalue9_sym2 or the net; egvalue9 was fitted with the side-0 Trick Room rule), nor BATTLE_PERISH_DEPTH (added nothing) or the bot-only rules. Its own folders. Use it for full reruns (with sheet.json t1.mega_choice: true), pinned per sheet with sheet.json 'setup'; 'current' stays v23. Linux source: native/champ/src_battle_v38.tar.gz.",
+   "games": "v38p2-dp2-race-eg9"
   }
  }
 }

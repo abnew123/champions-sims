@@ -104,7 +104,8 @@ turn-one lines and game plans in order (log `work/all.log`), then `more.sh` the 
   otherwise, and never compare numbers across setups. Only the kit maintainer moves `current`, when the Battle sim thread says a setup
   is final. Tell Battle sim if results look wrong. A setup with the same `games` as another plays the same games and shares its result
   folders; `SHEET_SETUP=<name>` in front of any kit command or cloud script (`push.sh`, `build.sh`, `all.sh`, `more.sh`) runs that
-  setup instead of `current`.
+  setup instead of `current`, and a sheet can pin one in its sheet.json (`"setup": "<name>"`), which the kit and the cloud scripts
+  follow (`sheetkit/cloud/setup_of.py`; on a shared box `build.sh <team>`).
 - **Flagged games.** A game that hits a mechanic the simulator has not ported is flagged `unsupported` in its result.
   `kit.py <team> flagged` counts the results with one per folder; `--write` moves them to `<folder>.flagged/`. Then run the steps again
   on a setup that ports them and shares the folders (for v20's results: `SHEET_SETUP=v23-dp2-race-eg9-full`, `all.sh` then `more.sh`

@@ -1351,7 +1351,10 @@ registrations since its second version) and checks reachability of real logs in 
   playouts change, the Perish side +0.1 +- 0.4, real - sim +0.7 -> +0.6 +- 3.5, singing 37.3 -> 38.8%. (The first run there, out_vp39 /
   out_doom, is invalid: started as exec -a battlesim-... zsh, zsh emulated sh and only the first of the script's settings reached the
   engine; perish_fix.sh and deep_endgames.sh now start with emulate -R zsh.) `src_battle_v39.tar.gz`, `bin/champ-battle-v39.sha256`.
-  Self-play of the rule against none on those pairings running (deep_endgames.sh TAG=doom, PERISH_DOOM=s0 / s1). The bot stays on v38.
+  Self-play of the rule against none on those pairings (pssim/deep_endgames.sh TAG=doom, BATTLE_EVAL one turn, VNET_PERISH=1 both
+  sides, PERISH_DOOM=s0 / s1): +0.8 +- 0.4 points for the side with it, 4 of 244 results differ, all for it (Perish starts +1.3 +- 0.8).
+  The Eval bar runs v39 with both flags since bdb869e. The bot stays on v38 until the user says (it would take VNET_PERISH +
+  PERISH_DOOM=1 in bot/position.py and a client restart).
 
 ## The climb's simulator against the bot's ladder games (2026-10-16; the user: check the sim before trusting what the climb finds)
 bot/ladder_sim.py + pssim/ladder_sim.sh: the bot's 1,128 saved games (689 Bo3, 439 Bo1) rebuilt at turn 1 as the bot saw them (botpos,

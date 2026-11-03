@@ -4,6 +4,7 @@
 # jobs, both players' own brings and leads, 4 playouts each) played by the climb's v33n1 setup, once per arm; perish_fix.py report compares
 # the sim's Perish-side win share and Perish Song use with the real games'. Arms: base (as now), vp (VNET_PERISH=1), more via ARMS/EXTRA_<arm>.
 #   SP=<folder with starts.jsonl / starts.jobs.json / perish_pairs.json> BIN=<champ with VNET_PERISH> T=1 ./perish_fix.sh
+emulate -R zsh   # started under a renamed argv[0] (exec -a battlesim-...), zsh emulates sh for names starting with b or s: $F would pass only its first setting
 ME=${0:A}; cd "$(dirname $ME)"
 SP=${SP:?folder}; T=${T:-1}; B=${BIN:?champ binary}; ED=../native/engine_data_full.json; mkdir -p $SP/grid
 F=(BATTLE_ANTICIPATE=1 DP2=1 RACE=1 RACE_TIES=avg TRSYM=1 RACE_PRIO=1 FEATS22=1 EG_MEGA_TIE=0 CALC_DATA=../native/champions_data_full.json

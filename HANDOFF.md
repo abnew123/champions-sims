@@ -1339,6 +1339,19 @@ registrations since its second version) and checks reachability of real logs in 
   results/progress, deep_endgames.sh with ARM_B / ARM_C VNET_PROGRESS=s0 / s1) +0.1 +- 0.2 (7 results differ). `src_battle_v38.tar.gz`,
   `bin/champ-battle-v38.sha256`. Bot: battlesim-champ29-bot -> champ-bot-2026-10-20 (v38), VNET_PROGRESS=1 in bot/position.py and
   ppDue in botpos.BOT_FLAGS from the 1:50 pm client restart.
+- **champ-battle-v39 (2026-11-03, 2:40 am) = v38 + the sparring partner's human policy (4806ef9) + PERISH_DOOM, the doomed-side rule in
+  plan.rs perish_adj_mode, inert unless set.** The Eval bar's Gdansk 1 M2 G1 turn 13: Player 2's last Pokemon, Garchomp, on a count of 2
+  against a counted Gengar and a fresh Sneasler read 76.7% for Player 1 at one turn with VNET_PERISH (92.1% at depth 4x): PERISH2 charges
+  each counted Pokemon a share of its worth, and Gengar's charge about cancelled Garchomp's. A side whose every living Pokemon has a count
+  has no bench to escape to (a switch clears the count, benched Pokemon carry none), so against a living uncounted Pokemon it is lost as
+  surely as the both-counted case: log-odds -+3. With it the position reads 86.1% at one turn (turn 12: 81.4 -> 95.9%), positions
+  without counts unchanged. Applies wherever perish_adj does (the net's term under VNET_PERISH, and EG_VALUE). s0 / s1 for one side's
+  searches, which only BATTLE_EVAL's as_side sets (in plain battle4 every search reads as side 0, so s0 = both and s1 = none). On the 244
+  real Bo3 pairings with a Perish side (pssim/perish_fix.sh, the climb's setup with VNET_PERISH; pssim/results/perish_doom): 18 of 976
+  playouts change, the Perish side +0.1 +- 0.4, real - sim +0.7 -> +0.6 +- 3.5, singing 37.3 -> 38.8%. (The first run there, out_vp39 /
+  out_doom, is invalid: started as exec -a battlesim-... zsh, zsh emulated sh and only the first of the script's settings reached the
+  engine; perish_fix.sh and deep_endgames.sh now start with emulate -R zsh.) `src_battle_v39.tar.gz`, `bin/champ-battle-v39.sha256`.
+  Self-play of the rule against none on those pairings running (deep_endgames.sh TAG=doom, PERISH_DOOM=s0 / s1). The bot stays on v38.
 
 ## The climb's simulator against the bot's ladder games (2026-10-16; the user: check the sim before trusting what the climb finds)
 bot/ladder_sim.py + pssim/ladder_sim.sh: the bot's 1,128 saved games (689 Bo3, 439 Bo1) rebuilt at turn 1 as the bot saw them (botpos,

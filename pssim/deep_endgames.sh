@@ -4,6 +4,7 @@
 # deep side (ARM_B / ARM_C: other per-arm settings instead, e.g. a control with BATTLE_POLICY_0=random). Each arm shows on the progress
 # page (pssim/deep_end_<tag>_<arm>.log). Usage:
 #   SP=<scratch dir with starts.jsonl / starts.jobs.json and battlesim-champ-deep> TAG=b20k BUDGET=20000 DEPTH=3 ./deep_endgames.sh
+emulate -R zsh   # a renamed argv[0] starting with b or s makes zsh emulate sh, and $F would pass only its first setting
 cd "$(dirname $0)"
 SP=${SP:?scratch dir}; TAG=${TAG:-b20k}; BUDGET=${BUDGET:-20000}; DEPTH=${DEPTH:-3}; T=${T:-3}
 B=${BIN:-$SP/battlesim-champ-deep}; ED=../native/engine_data_full.json; ST=${STARTS:-$SP/deepend/starts}   # STARTS: <prefix> of .jsonl / .jobs.json

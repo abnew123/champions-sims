@@ -618,6 +618,8 @@ fn perish_adj(b: &Battle, w: &[f64]) -> f64 { perish_adj_mode(b, w, perish2()) }
 /// (VNET_PERISH=s0 / s1: only that side's searches, under BATTLE_EVAL's as_side, for self-play of the term against none)
 fn vnet_perish() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new(); *F.get_or_init(|| match std::env::var("VNET_PERISH").as_deref() {
     Err(_) | Ok("0") | Ok("") => [false, false], Ok("s0") => [true, false], Ok("s1") => [false, true], Ok(_) => [true, true] }) }
+fn perish_doom() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new(); *F.get_or_init(|| match std::env::var("PERISH_DOOM").as_deref() {
+    Err(_) | Ok("0") | Ok("") => [false, false], Ok("s0") => [true, false], Ok("s1") => [false, true], Ok(_) => [true, true] }) }
 fn perish_adj_mode(b: &Battle, w: &[f64], p2: bool) -> f64 {
     let al = [alive(b, 0), alive(b, 1)];
     let t = |m: &MonRef| find(&b.p(*m).volatiles, "perishsong").and_then(|s| s.duration);
@@ -630,6 +632,16 @@ fn perish_adj_mode(b: &Battle, w: &[f64], p2: bool) -> f64 {
         for k in 0..2 { for m in &al[k] { if t(m) == Some(tmax[k]) { last.push((k as u8, b.p(*m).stored[5])); } } }
         last.sort_by(|a, c| if tr_then { a.1.cmp(&c.1) } else { c.1.cmp(&a.1) });   // stable, like JS sort
         return if last.last().unwrap().0 == 0 { 3.0 } else { -3.0 };
+    }
+    // PERISH_DOOM=1 (v39, 2026-11-03, the Eval bar's Gdansk 1 M2 G1 turn 13: one Garchomp on a count against a counted Gengar and a fresh
+    // Sneasler, 75% at one turn against 92% at depth): a side whose every living Pokemon has a count has no bench to escape to (a switch
+    // clears the count and benched Pokemon carry none), so it loses when its last count runs out unless the other side is gone first;
+    // against a living uncounted Pokemon that is as sure as the both-counted case above. PERISH2 charged each counted Pokemon its share
+    // instead, which about cancelled out here. s0 / s1: only that side's searches (self-play of the rule against none)
+    if perish_doom()[SIDE.with(|c| c.get()) as usize & 1] {
+        for k in 0..2usize {
+            if al[k].iter().all(|m| t(m).is_some()) && al[1 - k].iter().any(|m| t(m).is_none()) { return if k == 0 { -3.0 } else { 3.0 }; }
+        }
     }
     if p2 {
         // PERISH2=1 (champ-battle-v11): a Perish count only dooms a Pokemon that cannot leave. Per side, the counted Pokemon that are not

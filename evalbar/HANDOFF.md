@@ -600,6 +600,12 @@ and keep the outcome that matches the HP boxes: abilities like Stamina, item use
   after the digit are taken. The message also closes an open move first, as end-of-turn damage does: before, a Perish faint could be read
   as the open move's target (Gdansk Day 2 M4 G3 had a Gholdengo's Shadow Ball aimed at its own partner). On the four stream days (Nice 1-2,
   Gdansk 1-2) 11 of the 12 games with Perish Song now carry counts; the 12th ended the turn it was used. The logs are otherwise unchanged.
+- Two messages alike but about different Pokemon, back to back with no blank frame ("The opposing Staraptor's perish count fell to 3!",
+  then Sinistcha's), were read as one (the run splits only below 0.85 similarity): Reader.other_mon now splits them when both name a
+  Pokemon, not the same one, and the names as read differ more than a misread (similarity under 0.8). On the four days it adds 11 lines and
+  removes none: 10 Perish counts in 5 games (both sides' Sneasler in Gdansk 1 M2 G1; all three counted each turn in Gdansk 2 M4 G1) and
+  a miss. Nice Day 2 M8 G1 (the Stream watcher's case): Sinistcha's count was lost; the last turn goes from 0.1% to 99.2% for Player 1,
+  who won.
 - Gdansk Day 1 M2 G1, the last-turn upset (Player 1 at 7-8%, won): mostly a missed Grassy Terrain. Rillaboom's Grassy Surge on its turn-10
   return never showed in the text; the reconciler lists it (turn 11: text none, rules Grassy Terrain). Turn 13 with the rules' terrain:
   62.9% for Player 1 at depth 4x without counts, 91.3% with them (one-turn 75.5% and 75.3%). The one-turn read does not move with the count

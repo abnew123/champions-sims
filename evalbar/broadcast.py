@@ -239,6 +239,14 @@ class Reader:
             if not m: return sd, None, body
             sp = s.species(sd, m.group(1)); return sd, sp, body[len(m.group(1)):]
         return sd, best[0], body[len(best[1]):]
+    def other_mon(s, a, b):
+        """two messages alike but about different Pokemon ("The opposing Staraptor's perish count fell to 3!", then Sinistcha's, with no
+        blank frame between): both name a Pokemon, not the same one, and the names as read differ more than a misread would (2026-11-03,
+        the Stream watcher: Nice Day 2 M8 G1 lost Sinistcha's count)"""
+        (sa, pa, ra), (sb, pb, rb) = s.who(a), s.who(b)
+        if not pa or not pb or (sa, pa) == (sb, pb): return False
+        na, nb = a[:len(a) - len(ra)], b[:len(b) - len(rb)]
+        return difflib.SequenceMatcher(None, na, nb).ratio() < 0.8
     def slot_of(s, sd, sp):
         return next((sl for (x, sl), v in s.active.items() if x == sd and v == sp), None)
     def mon(s, sd, sp):
@@ -527,7 +535,7 @@ class Reader:
         # a message stays on screen for a few frames: read it once, when it leaves, in its most common reading (the first frame of a
         # message is sometimes misread: "Archaludop's Defensé rose!")
         s.gap = 0 if text else s.gap + 1                                       # one empty frame inside a message is a misread
-        if s.run and (decision or s.gap >= 2 or (text and difflib.SequenceMatcher(None, text, s.run[-1]).ratio() <= 0.85)):
+        if s.run and (decision or s.gap >= 2 or (text and (difflib.SequenceMatcher(None, text, s.run[-1]).ratio() <= 0.85 or s.other_mon(text, s.run[-1])))):
             best = collections.Counter(s.run).most_common(1)[0][0]; s.run = []
             if s.started and not s.ended: s.message(best)
             elif s.pre_on: s.pre.append(best)                                  # before turn 1 (Intimidate, weather, terrain): applied at the start

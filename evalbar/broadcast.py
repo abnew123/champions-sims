@@ -245,7 +245,7 @@ class Reader:
         sl = s.slot_of(sd, sp) or 'a'; return f"{sd}{sl}: {s.nick(sp)}"
     def message(s, text):
         text = re.sub(r'!+[^!]*$', '!', text.strip())
-        if s.open and re.search(r'(hurt by|buffeted by|pelted by|restored (a little )?HP|regained health|is hurt|was hurt)', text): s.shut()   # end-of-turn damage and healing
+        if s.open and re.search(r'(hurt by|buffeted by|pelted by|restored (a little )?HP|regained health|is hurt|was hurt|perish count fell)', text): s.shut()   # end-of-turn damage, healing, Perish counts
         if re.search(r"won the battle|forfeit|\b(lost|won)!$|You won", text, re.I) and 'lost some' not in text:
             if not s.ended:
                 if 'forfeit' in text: s.forfeit = True; return                  # who forfeited: the "... lost!" message that follows says
@@ -326,6 +326,8 @@ class Reader:
             return
         me = s.mon(sd, sp); rest = rest.strip()
         k = (sd, s.slot_of(sd, sp))
+        pc = re.match(r"[’']s perish count fell to ([0-3O])", rest, re.I)          # Perish Song's count at each turn's end, each Pokemon its own (the user,
+        if pc: s.emit(f"|-start|{me}|perish{pc.group(1).replace('O', '0')}"); return   # 2026-11-03; OCR reads 0 as O and adds junk after the digit)
         if re.match(r'is protected by the Psychic Terrain', rest):                # a priority move it blocked: a fact for the rules
             s.emit(f'|-activate|{me}|move: Psychic Terrain'); return
         if re.match(r'avoided the attack', rest):

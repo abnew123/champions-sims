@@ -595,6 +595,15 @@ Text is not enough on its own, so the reader also keeps track of state:
   of a set, when the reader is still between games.
 A further step would be to replay each turn with the engine (its turntest loads the state before a turn and plays both sides' choices)
 and keep the outcome that matches the HP boxes: abilities like Stamina, item use and durations would then come from the simulation.
+- Perish Song's count (the user, 2026-11-03, through the Stream watcher): "<mon>'s perish count fell to N!" at each turn's end becomes
+  |-start|<mon>|perishN (replay.parse sets the count, positions.js gives perishsong that duration under fieldDue); OCR's O for 0 and junk
+  after the digit are taken. The message also closes an open move first, as end-of-turn damage does: before, a Perish faint could be read
+  as the open move's target (Gdansk Day 2 M4 G3 had a Gholdengo's Shadow Ball aimed at its own partner). On the four stream days (Nice 1-2,
+  Gdansk 1-2) 11 of the 12 games with Perish Song now carry counts; the 12th ended the turn it was used. The logs are otherwise unchanged.
+- Gdansk Day 1 M2 G1, the last-turn upset (Player 1 at 7-8%, won): mostly a missed Grassy Terrain. Rillaboom's Grassy Surge on its turn-10
+  return never showed in the text; the reconciler lists it (turn 11: text none, rules Grassy Terrain). Turn 13 with the rules' terrain:
+  62.9% for Player 1 at depth 4x without counts, 91.3% with them (one-turn 75.5% and 75.3%). The one-turn read does not move with the count
+  (a faint two turns out is past its horizon, and the value function seems not to read it); the streams' depth-at-4x background read does.
 
 ## Watching a game again (2026-10-10)
 

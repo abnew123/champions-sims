@@ -11,7 +11,7 @@
   "accept_challenges": false,
   "search_ladder": true,
   "pm_reply": "I'm a bot (a Pokemon Champions planner being measured against real players). I play this format only and don't chat. GG!",
-  "paused": true,
+  "paused": false,
   "forfeit_below": 0.02,
   "protect_chain_cap": 4,
   "max_search_seconds": 30,

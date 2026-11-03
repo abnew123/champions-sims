@@ -1353,8 +1353,11 @@ registrations since its second version) and checks reachability of real logs in 
   engine; perish_fix.sh and deep_endgames.sh now start with emulate -R zsh.) `src_battle_v39.tar.gz`, `bin/champ-battle-v39.sha256`.
   Self-play of the rule against none on those pairings (pssim/deep_endgames.sh TAG=doom, BATTLE_EVAL one turn, VNET_PERISH=1 both
   sides, PERISH_DOOM=s0 / s1): +0.8 +- 0.4 points for the side with it, 4 of 244 results differ, all for it (Perish starts +1.3 +- 0.8).
-  The Eval bar runs v39 with both flags since bdb869e. The bot stays on v38 until the user says (it would take VNET_PERISH +
-  PERISH_DOOM=1 in bot/position.py and a client restart).
+  The Eval bar runs v39 with both flags since bdb869e. Bot (the user, 2026-11-03 12:40 pm: "deploy v39 to the bot"):
+  battlesim-champ29-bot -> champ-bot-2026-11-03 (v39, `bin/champ-bot-2026-11-03.sha256`), PERISH_DOOM=1 in bot/position.py (evalpos
+  reads every search as side 0, so 1 = s0 there) from the clients' 12:42 pm (Bo3) and 12:45 pm (Bo1, after its game: limits.json
+  paused for the 2 minutes between) restarts. Before the swap: v39 with the flag
+  off gave v38's mixes and values on the bot's last 6 positions (only ms and value_se's last digits differ).
 
 ## The climb's simulator against the bot's ladder games (2026-10-16; the user: check the sim before trusting what the climb finds)
 bot/ladder_sim.py + pssim/ladder_sim.sh: the bot's 1,128 saved games (689 Bo3, 439 Bo1) rebuilt at turn 1 as the bot saw them (botpos,

@@ -25,6 +25,8 @@ os.environ.setdefault('EG_NO_DOUBLE_PROTECT', '0')   # and no Pokemon of ours Pr
 os.environ.setdefault('VNET_PERISH', '1')   # the net's value with the Perish term (v37; 2026-10-16, the user: fix Perish: the sim's Perish side now matches people)
 os.environ.setdefault('VNET_PROGRESS', '1')   # the endgame progress check (v38; 2026-10-20, planner_issues 21, the user: "we should definitely fix
 # this case"): can each side's damage beat the other's recovery before its PP runs out; with botpos ppDue (the PP each move has left)
+os.environ.setdefault('PERISH_DOOM', '1')   # the doomed-side rule (v39; 2026-11-03, the user: "deploy v39 to the bot"): a side whose every living
+# Pokemon has a Perish count, against a living uncounted one, reads lost (self-play +0.8 +- 0.4 on the 244 real Perish pairings)
 STALL = {'Protect', 'Detect', 'Spiky Shield', "King's Shield", 'Baneful Bunker', 'Burning Bulwark', 'Silk Trap', 'Obstruct', 'Max Guard'}
 def protect_chains(log, side):
     """per Pokemon of ours (by species), how many turns running it has used a Protect-type move up to now (success or not)"""

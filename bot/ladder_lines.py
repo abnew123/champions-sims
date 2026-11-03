@@ -26,7 +26,7 @@ def cse(pairs):
     return mu, var ** 0.5, n
 def main(prefix):
     meta = json.load(open(prefix + '.meta.json'))['turns']
-    rows = {r['name']: r for r in map(json.loads, open(prefix + '_turns.eval.jsonl')) if 'error' not in r}
+    rows = {r['name']: r for r in map(json.loads, open(prefix + '_turns.eval.jsonl')) if 'error' not in r and 'sides' in r}
     G = {g['room']: g for g in map(json.loads, open(os.path.join(ROOT, 'bot', 'out', 'games.jsonl')))}
     seq = collections.defaultdict(list)
     for name, m in meta.items():

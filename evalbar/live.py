@@ -25,20 +25,24 @@ TOPK = 3; CAL_V25 = 0.7538                       # the rescale fitted for champ-
 # bot runs it (Battle sim) but without the bot's own-side rules (EG_LAST_PROTECT, EG_NO_DOUBLE_PROTECT). Its reads go to files named for it
 # (<tag>_eval_<ENGINE>.jsonl, _refined_<ENGINE>, _luck_<ENGINE>); earlier engines' (EARLIER) stay readable, each rescaled with its own CAL, until a
 # turn is read again, and a turn or luck pass read by one is not read again
-ENGINE = 'v34'                                                               # v34 (Battle sim, 2026-10-14): v31 plus the immune-target filter judging a move by its type as used
-                                                                             # (v32) and a Mega copy by the Mega's ability (v33): an -ate move into a Ghost, Scrappy Fake Out; 1.25x faster
+ENGINE = 'v39'                                                               # v39 (Battle sim, 2026-11-03): v34's play plus Perish Song in the value (VNET_PERISH,
+                                                                             # v37) and the doomed-side rule (PERISH_DOOM: a side whose every living Pokemon has a count,
+                                                                             # against a side with one that has none, is lost); otherwise v34's values (139 of 139 checked)
 # each engine's rescale for the bar (accuracy.py compare, 32 seeds staged). v31's and v34's (2026-10-16): Battle sim's rebuild of the 891 hold
 # games through today's spots.specs (pssim/results/value2/real_hold.pos.jsonl, 6,381 positions; on the 560 calibration games alone 0.754 and
 # 0.758). The rebuilt positions predict better: on the 560 games' 3,968, v31 0.5003 against 0.5172 on the Oct 5 build (-0.0169 +- 0.0049);
 # v34 0.4997, -0.0004 +- 0.0003 against v31 on all 6,381. The bar's v31 reads were mostly of positions built this way (live.specs_for, then
 # battlestate from 2026-10-14), so they take the new weight
-CALS = {'v25': CAL_V25, 'v31': 0.782, 'v34': 0.785}
+CALS = {'v25': CAL_V25, 'v31': 0.782, 'v34': 0.785, 'v39': 0.789}             # v39: v34's runs with the 389 Perish positions read again (log loss
+                                                                             # -0.0022 +- 0.0014 one turn, -0.0019 +- 0.0012 at depth 4x)
 BAR_CAL = CALS[ENGINE]
-EARLIER = [('', CALS['v25']), ('_v31', CALS['v31'])]                         # earlier engines' reads (file suffix, CAL), oldest first: shown with their own CAL until read again
+EARLIER = [('', CALS['v25'], None), ('_v31', CALS['v31'], None), ('_v34', CALS['v34'], 0.765)]   # earlier engines' reads (file suffix, CAL, the
+                                                                             # depth-at-4x background read's CAL), oldest first: shown with their own CAL until read again
 CAL = 0.676                                                                  # the bot's, not the bar's: bot/brain.py, position.py, contempt.py and contempt_bot.py read live.CAL (v31's
                                                                              # on the Oct 5 calibration positions, log loss 0.5186); a change here changes the live bot's play
-EVAL_ENV = {'CHAMP_BIN': os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v34'), 'EG_VNET': os.path.join(C.MAIN, 'bot', 'value', 'vnet_h64_search_acc.json'),
-            'RACE_PRIO': '1', 'FEATS22': '1', 'EG_MEGA_TIE': '0', 'CALC_DATA': '../native/champions_data_full.json', 'CHAMP_DATA': 'engine_data_full.json'}
+EVAL_ENV = {'CHAMP_BIN': os.path.join(C.MAIN, 'native', 'champ', 'bin', 'champ-battle-v39'), 'EG_VNET': os.path.join(C.MAIN, 'bot', 'value', 'vnet_h64_search_acc.json'),
+            'RACE_PRIO': '1', 'FEATS22': '1', 'EG_MEGA_TIE': '0', 'CALC_DATA': '../native/champions_data_full.json', 'CHAMP_DATA': 'engine_data_full.json',
+            'VNET_PERISH': '1', 'PERISH_DOOM': '1'}                           # (the Perish term is in EG_VALUE's units: engine.run loads egvalue9_sym2)
 # the full engine data (every species, move, item and ability Showdown knows; needs champ-battle-v17 or later): spectated teams can be
 # anything. v23 (2026-10-09) gives v17's values wherever v17 handled the turn, and handles more abilities, items and moves (Baton Pass too).
 # v25 (the bot's build) also offers a Mega Stone holder's moves without the Mega Evolution, so a player who holds it is not shown as
@@ -220,12 +224,14 @@ class Live:
         s.tag = tag or (room.split('-')[-1] if not re.search(r'-\d+-[a-z0-9]+$', room) else room.split('-')[-2])
         s.bo3 = 'bo3' in room if room else logfile is not None; s.threads = threads; s.port = port; os.makedirs(OUT, exist_ok=True)
         s.log = logfile or os.path.join(OUT, f'{s.tag}.log'); s.evf = os.path.join(OUT, f'{s.tag}_eval_{ENGINE}.jsonl'); s.data = None; s.status = 'connecting'
-        s.prior = [{k: os.path.join(OUT, f'{s.tag}_{k}{x}.jsonl') for k in ('eval', 'refined', 'luck')} | {'cal': c} for x, c in EARLIER]   # earlier engines' reads
+        s.prior = [{k: os.path.join(OUT, f'{s.tag}_{k}{x}.jsonl') for k in ('eval', 'refined', 'luck')} | {'deep': os.path.join(OUT, f'{s.tag}_refined{x}_{REFINE_KIND}.jsonl'),
+                    'cal': c, 'deep_cal': cd} for x, c, cd in EARLIER]           # earlier engines' reads
         s.weights = {}; s.hyp = {}; s.poscache = {}; s.over = False; s.skip = {}
         s.exact = False; s.team = None; s.back = {}; s.bot_side = None; s.held = None; s.spread_why = {}
         s.luck = False; s.lf = os.path.join(OUT, f'{s.tag}_luck_{ENGINE}.jsonl'); s.luck_state = None; s.lweights = {}; s.dirty = False; s.page_cache = None
         s.rf = os.path.join(OUT, f'{s.tag}_refined_{REFINED}.jsonl'); s.live_seeds = 32; s.refining = False; s.saved = False   # the two reads (2026-10-13)   # luck: after the game      # a Showdown bot's own log (bot/): its side known from its requests
-        s.reads = ([(p[k], p['cal'], k == 'refined') for p in s.prior for k in ('eval', 'refined')] + [(s.evf, BAR_CAL, False),   # every read, oldest
+        s.reads = ([r for p in s.prior for r in [(p['eval'], p['cal'], False), (p['refined'], p['cal'], True)] + ([(p['deep'], p['deep_cal'], True)] if p['deep_cal'] else [])]
+                   + [(s.evf, BAR_CAL, False),                                 # every read, oldest
                    (os.path.join(OUT, f'{s.tag}_refined_{ENGINE}.jsonl'), BAR_CAL, True), (s.rf, REFINE_CAL, True)])   # first: (file, CAL, background read)
         # the user's verdicts where the battle text and the rules disagree (broadcasts: evalbar/rules.py), kept beside the log
         s.fixf = os.path.join(OUT, f'{s.tag}_fixes.json'); s.fixes = json.load(open(s.fixf)) if logfile and os.path.exists(s.fixf) else {}; s.redo = None
@@ -518,7 +524,7 @@ LIVE_SEEDS, REFINE_SEEDS = 8, 128
 # not staged). On the 6,381 rebuilt hold positions: log loss -0.0101 +- 0.0016 against one turn, weight 0.765; 5.4 s a position on one core
 # against 4.5 s at REFINE_SEEDS. Its reads go to <tag>_refined_<ENGINE>_d4.jsonl; the 128-roll ones (<tag>_refined_<ENGINE>.jsonl) stay readable
 REFINE_KIND = 'd4'; REFINED = f'{ENGINE}_{REFINE_KIND}'
-REFINE_ENV = {'EVAL_BUDGET': '80000', 'EVAL_DEPTH': '2', 'EVAL_DEEP_K0': '2'}; REFINE_CAL = 0.765
+REFINE_ENV = {'EVAL_BUDGET': '80000', 'EVAL_DEPTH': '2', 'EVAL_DEEP_K0': '2'}; REFINE_CAL = 0.768   # v39's (v34's 0.765 in EARLIER)
 def refine_run(posf, outf, threads=1):
     """the background read of a positions file (the caller holds LUCK)"""
     EN.run(posf, outf, threads, 32, 0, extra={**EVAL_ENV, **REFINE_ENV}, nice=19)

@@ -754,6 +754,12 @@ Each target's evidence and VOD time is kept in meta['aims'] for spot checks. The
   and 4.5 s at 128. The streams' background read since 2026-10-16 (the user): live.refine_run, files <tag>_refined_v34_d4.jsonl,
   REFINE_CAL 0.765; the 128-roll reads stay readable in s.reads (each read file with its CAL, oldest first). The bot page has no
   background read (BOT_REFINE False); if it gets one, it is this one.
+- v39 (2026-11-03; Battle sim's doomed-side rule): the bar runs champ-battle-v39 with VNET_PERISH=1 and PERISH_DOOM=1, Perish Song in
+  the value function. Off Perish, v39 gives v34's values: on 150 hold positions, the 139 where no one knows Perish Song are identical, and
+  the 11 others differ (Perish Song is an option there). So only the 389 hold positions with Perish Song known or counted were read
+  again (out/acc_hold_v39p.jsonl, acc_hold_d4_v39p.jsonl). Log loss -0.0022 ± 0.0014 one turn, -0.0019 ± 0.0012 at depth 4x on all
+  6,381; CAL 0.789 and 0.768 (v34: 0.785, 0.765). EARLIER now carries each engine's depth-at-4x CAL too, so v34's background reads stay
+  on the pages with 0.765; no page rebuild (PAGE_V 2).
 - reads.py and uncertain.py stay on v18 so their committed results reproduce.
 
 ## Process names (the user asked, 2026-10-06)

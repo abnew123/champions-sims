@@ -1358,6 +1358,27 @@ registrations since its second version) and checks reachability of real logs in 
   reads every search as side 0, so 1 = s0 there) from the clients' 12:42 pm (Bo3) and 12:45 pm (Bo1, after its game: limits.json
   paused for the 2 minutes between) restarts. Before the swap: v39 with the flag
   off gave v38's mixes and values on the bot's last 6 positions (only ms and value_se's last digits differ).
+- **champ-battle-v40 (2026-11-04, 2:00 pm) = v39 + TR_CORR / TR_CORR_AFTER, the Trick Room correction in plan.rs VNet::value, inert
+  unless set** (the user: "let's fit a correction for trick room turns left"). The Bo3 bot lost 22 of 39 matches to one rain bot overnight
+  (Pelipper / Archaludon rain, stalling our Trick Room with Protect and switches); the audits (Oct 20, Nov 3, Nov 4) found the engine
+  overrating the Trick Room six by 7 to 11 points a decision with 1 to 3 Trick Room turns left. bot/tr_fit.py: every rebuilt ladder
+  decision (bot/out/pos/trfit, AUDIT_LIVE builds; the bot played no ladder games Oct 21 - Nov 1) with the static value, a logistic fit of
+  the result on the value's log-odds plus a term per phase for the side Trick Room favours (the slower on average, tr_keep's TRSYM rule;
+  not the setter, since the position builder records every Trick Room up at the root as side 0's). Real log-odds for the favoured side,
+  Oct 11-20 (15818 decisions, 2186 games) / Nov 2-4 held out (5852, 739): Trick Room up with 1 / 2 / 3 / 4 turns left -0.63 / -0.55 /
+  -0.38 / -0.12 and -0.63 / -0.61 / -0.59 / -0.31; down again after the slower side used a Trick Room (a Trick Room slot short of its PP)
+  -0.65 and -0.61; before its first Trick Room or with none on the team about 0. Engine log-odds from both sets: TR_CORR=0.74,0.66,0.51,0.20
+  TR_CORR_AFTER=0.75. Held-out log loss with the train-only fit -0.0059 +- 0.0027 a decision (Trick Room up alone -0.0040 +- 0.0016); the
+  bot's Trick Room positions there were 54.9% predicted, 50.4% with it, 47.4% won; the opponent's 45.0%, 52.0%, 52.4%. Off, v40 gives v39's
+  static values on all 5852 held-out positions. **Self-play says it does not help play** (pssim/results/tr_corr, deep_endgames.sh
+  TR_CORR_SIDE=s0 / s1, the bot's Perish and progress flags on both sides; 721 distinct real starts over trcorr2 / trcorr3): -1.2 +- 0.9
+  points for the side with it; from the Trick Room six's turn 1 -2.6 +- 1.3 (it sets Trick Room a little later: up 1.66 of the first 3
+  turns against 1.88), with the bot's Trick Room just up +1.0 +- 1.5, the opponent's -1.0 +- 1.9. The engine on the other side does not
+  stall Trick Room the way the ladder's strong bots do, so there Trick Room is worth what the uncorrected value says. On 904 real Trick
+  Room positions the bot's search with it moves values (facing Trick Room 47.7 -> 54.7%, under its own 62.0 -> 54.0%) but hardly its
+  choices (Protect / switch weight 33.2 -> 33.5% facing Trick Room, 20.8 -> 21.2% under its own): one turn's leaves share a Trick Room
+  count, so the term shifts them alike. A calibration fix (the Eval bar, loss studies), not a play fix; the bot stays on v39.
+  `bin/champ-battle-v40.sha256`, `src_battle_v40.tar.gz`. The first self-play run (trcorr, TR_CORR alone) was stopped at 35 starts.
 
 ## The climb's simulator against the bot's ladder games (2026-10-16; the user: check the sim before trusting what the climb finds)
 bot/ladder_sim.py + pssim/ladder_sim.sh: the bot's 1,128 saved games (689 Bo3, 439 Bo1) rebuilt at turn 1 as the bot saw them (botpos,

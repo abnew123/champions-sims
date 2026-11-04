@@ -55,6 +55,7 @@ impl VNet {
         let es: Vec<f64> = f1.iter().chain(&f0).chain(&g1).copied().chain(x.iter().map(|v| -v)).collect();
         let mut z = (self.h(&e) - self.h(&es)).clamp(-30.0, 30.0);
         if vnet_perish()[SIDE.with(|c| c.get()) as usize & 1] { if let Some((_, w)) = &cfg.vw { z += perish_adj_mode(b, w, true); } }
+        z += tr_corr(b);   // TR_CORR (v40)
         if crate::progress::on()[SIDE.with(|c| c.get()) as usize & 1] { z = crate::progress::adjust(b, cd, z); }   // VNET_PROGRESS (planner_issues 21)
         1.0 / (1.0 + (-z).exp())
     }
@@ -620,6 +621,32 @@ fn vnet_perish() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::
     Err(_) | Ok("0") | Ok("") => [false, false], Ok("s0") => [true, false], Ok("s1") => [false, true], Ok(_) => [true, true] }) }
 fn perish_doom() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new(); *F.get_or_init(|| match std::env::var("PERISH_DOOM").as_deref() {
     Err(_) | Ok("0") | Ok("") => [false, false], Ok("s0") => [true, false], Ok("s1") => [false, true], Ok(_) => [true, true] }) }
+/// TR_CORR=c1,c2,... (v40, 2026-11-04, the user: "let's fit a correction for trick room turns left"): the learned value overrates the side
+/// that set Trick Room while it runs down. The net was fitted on self-play, where nobody stalls Trick Room out; on the ladder the Trick
+/// Room six lost 7 to 11 points a decision more than the engine expected with 1 to 3 turns left (bot/out/pos audits of Oct 20, Nov 3 and
+/// Nov 4). c_k log-odds are taken from the side Trick Room favours, the slower on average (tr_keep's TRSYM rule), with k turns left (the
+/// last value for any more): not its setter, since the bot's position builder records every Trick Room up at the root as side 0's.
+/// TR_CORR_AFTER=c: the slower side stays as overrated once Trick Room is down again and it has used a Trick Room (some Pokemon of its,
+/// fainted or not, has a Trick Room slot short of its PP): the same fit, 0.76 there against about 0 before its first Trick Room or with
+/// no Trick Room on the team. TR_CORR_SIDE=s0 / s1: only that side's searches (self-play of the terms against none)
+fn tr_corr_w() -> &'static Vec<f64> { static F: std::sync::OnceLock<Vec<f64>> = std::sync::OnceLock::new(); F.get_or_init(|| std::env::var("TR_CORR")
+    .map(|v| v.split(',').filter(|x| !x.trim().is_empty()).map(|x| x.trim().parse().expect("TR_CORR: numbers")).collect()).unwrap_or_default()) }
+fn tr_corr_on() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new(); *F.get_or_init(|| match std::env::var("TR_CORR_SIDE").as_deref() {
+    Ok("s0") => [true, false], Ok("s1") => [false, true], _ => [true, true] }) }
+fn tr_corr_after() -> f64 { static F: std::sync::OnceLock<f64> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("TR_CORR_AFTER").ok()
+    .map(|v| v.trim().parse().expect("TR_CORR_AFTER: a number")).unwrap_or(0.0)) }
+fn tr_corr(b: &Battle) -> f64 {
+    let w = tr_corr_w(); let after = tr_corr_after();
+    if (w.is_empty() && after == 0.0) || !tr_corr_on()[SIDE.with(|c| c.get()) as usize & 1] { return 0.0; }
+    let ms = |x: u8| { let a = alive(b, x); a.iter().map(|m| b.p(*m).stored[5] as f64).sum::<f64>() / a.len().max(1) as f64 };
+    let (m0, m1) = (ms(0), ms(1)); if m0 == m1 { return 0.0; }
+    let slow: u8 = if m0 < m1 { 0 } else { 1 };
+    let c = match find(&b.field.pseudo, "trickroom").and_then(|s| s.duration) {
+        Some(d) => if w.is_empty() { 0.0 } else { w[(d.max(1) as usize).min(w.len()) - 1] },
+        None => if after != 0.0 && b.sides[slow as usize].pokemon.iter().any(|p| p.move_slots.iter().any(|x| x.id == "trickroom" && x.pp < x.maxpp)) { after } else { 0.0 },
+    };
+    if slow == 0 { -c } else { c }
+}
 fn perish_adj_mode(b: &Battle, w: &[f64], p2: bool) -> f64 {
     let al = [alive(b, 0), alive(b, 1)];
     let t = |m: &MonRef| find(&b.p(*m).volatiles, "perishsong").and_then(|s| s.duration);

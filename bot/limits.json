@@ -3,7 +3,7 @@
   "max_games_per_day": null,
   "max_games_per_hour": 15,
   "stop_if_rating_at_least": null,
-  "stop_if_opponent_in_top": 50,
+  "stop_if_opponent_in_top": null,
   "think_seconds": [
     1,
     4

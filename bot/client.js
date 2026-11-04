@@ -2,7 +2,7 @@
 // searches the Reg M-C Bo3 ladder (and accepts challenges in that format), keeps each room's log, and on every |request| asks the
 // brain (bot/brain.py, one long-lived process) what to click. Plays at a human pace, never starts the timer, answers PMs with one
 // canned line, and stops searching when bot/limits.json says so: paused, the hourly / daily game caps, our rating at or above the stop,
-// or an opponent whose rating is in the top band of the public ladder (the user: do not warp the top of the standings).
+// or (off since 2026-11-03) wins over players in the top band of the public ladder (the user: do not warp the top of the standings).
 // usage (from the repo root): node --experimental-websocket --no-warnings bot/client.js [--dry]     (--dry: log in, no searching)
 // bot/account.json {"name": ..., "password": ...} is git-ignored; so are the logs in bot/out/.
 const fs = require('fs'), path = require('path'), {spawn} = require('child_process');
@@ -38,6 +38,7 @@ function ask(msg) { return brainChain = brainChain.then(() => new Promise(res =>
 let topBand = {elo: Infinity, at: 0};
 async function refreshTop() {
   const L = limits(); if (LOCAL || Date.now() - topBand.at < 3600e3) return;
+  if (L.stop_if_opponent_in_top == null) { topBand = {elo: Infinity, at: Date.now()}; return; }   // the stop is off (see topBandStop)
   try { const r = await fetch(`https://pokemonshowdown.com/ladder/${FORMAT}.json`); const j = await r.json(); const t = j.toplist || [];
     const n = Math.min(L.stop_if_opponent_in_top, t.length); topBand = {elo: n ? t[n - 1].elo : Infinity, at: Date.now()}; log(`ladder top ${n}: ${topBand.elo.toFixed(0)}+`); }
   catch (e) { log('ladder fetch failed', String(e)); topBand.at = Date.now(); }
@@ -80,8 +81,10 @@ let stoppedForTop = false;
 // not count toward the next (the user, 2026-10-20: "rather than a full stop (since right now the condition will never clear, unlike the
 // hourly cap), let's stop for 6 hours, then resume ... if we hit it often, we'll pause often"). Worked out from the record each time
 // (games.jsonl, this format), so a restart keeps it; the ladder's current top-50 line is used for the older games too.
+// Off since 2026-11-03 (the user: "let's remove the top 50 rule"; most opponents are other bots since Showdown's bot opt-in, and Bo3 had
+// been stopped 6 hours on 3 wins over the top 50): limits.json stop_if_opponent_in_top null turns it off, at once, with no restart.
 function topBandStop() {
-  const L = limits(); if (!isFinite(topBand.elo)) return null;
+  const L = limits(); if (L.stop_if_opponent_in_top == null || !isFinite(topBand.elo)) return null;
   const W = L.top_band_window || 20, K = L.top_band_max || 3, H = (L.top_band_pause_hours ?? 6) * 3600e3;
   const g = games().slice(-(W + 300)); const spent = new Set(); let last = null;
   for (let i = 0; i < g.length; i++) {

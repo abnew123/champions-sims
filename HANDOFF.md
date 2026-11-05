@@ -1379,6 +1379,24 @@ registrations since its second version) and checks reachability of real logs in 
   choices (Protect / switch weight 33.2 -> 33.5% facing Trick Room, 20.8 -> 21.2% under its own): one turn's leaves share a Trick Room
   count, so the term shifts them alike. A calibration fix (the Eval bar, loss studies), not a play fix; the bot stays on v39.
   `bin/champ-battle-v40.sha256`, `src_battle_v40.tar.gz`. The first self-play run (trcorr, TR_CORR alone) was stopped at 35 starts.
+- **champ-battle-v41 (2026-11-04, 6:40 pm) = v40 + BATTLE_VFEATS (battle4: the net's inputs and static value at each turn's start) + TR_HEAD,
+  the Trick Room head in plan.rs VNet::value, inert unless set** (the user: "Yes" to fitting what the net gets wrong in Trick Room positions
+  on self-play). Why self-play: on the same real starts the engine overrates the side Trick Room favours against itself too (our Trick Room
+  just up: 60.1% predicted, 50.0 +- 3.2% in self-play, 46.0 +- 3.5% real; the Trick Room six's turn 1: 56.5 / 49.7 / 46.0%), so that bot
+  was doing nothing our engine doesn't. Data (pssim/tr_value_data.sh, results/tr_value): 2959 real starts (bot/tr_fit.py starts: 1447 Trick
+  Room six turn 1s, 1358 with our Trick Room just up, 154 with the opponent's) played once with the bot's settings, 2:45 on 6 cores. Fit
+  (bot/tr_value.py, 2367 games; job % 5 == 0 held out): the static log-odds plus per phase (Trick Room up 1-4 turns left, after it) a
+  constant for the favoured side and, for up / after, slopes on the net's antisymmetric inputs (f0 - f1, g0 - g1, x), ridge by 5-fold CV
+  over games (300). Cross-validated self-play log loss 0.4111 -> 0.4063 with the constants (-0.0048 +- 0.0016), 0.3987 with the slopes
+  (-0.0125 +- 0.0023). Its constants match the real-game fit's (engine log-odds for the favoured side 0.94 / 0.62 / 0.48 / 0.28, after 0.67;
+  v40's 0.74 / 0.66 / 0.51 / 0.20 / 0.75); largest slopes: defence boosts, speed control and setup on hand, bench HP up; Fake Out on hand,
+  Intimidate on the bench down. Applied unchanged to the 21670 real ladder decisions: log loss -0.0064 +- 0.0016. **Self-play of the head
+  against none on the 592 held-out starts, twice each** (deep_endgames.sh TR_HEAD_SIDE=s0 / s1, the bot's Perish and progress flags):
+  **+1.6 +- 0.8 points for the side with it**, from the Trick Room six's turn 1 +2.1 +- 1.2, our Trick Room just up +1.0 +- 1.2, the
+  opponent's +1.7 +- 3.4 (62 starts). With it the Trick Room side switches less under its own Trick Room (1.68 against 1.93 a game) and the
+  Trick Room six wins 53.5 against 49.3% from turn 1 though its Trick Room is up a little later (1.74 against 1.97 of the first 3 turns).
+  Unlike v40's flat shift, the slopes differ between one turn's leaves. Off, v41 gives v39's mixes and values on the bot's last 6 positions.
+  The head is bot/value/trhead_v41.json (TR_HEAD=<it>). `bin/champ-battle-v41.sha256`, `src_battle_v41.tar.gz`. Not on the bot yet.
 
 ## The climb's simulator against the bot's ladder games (2026-10-16; the user: check the sim before trusting what the climb finds)
 bot/ladder_sim.py + pssim/ladder_sim.sh: the bot's 1,128 saved games (689 Bo3, 439 Bo1) rebuilt at turn 1 as the bot saw them (botpos,

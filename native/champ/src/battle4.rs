@@ -148,7 +148,7 @@ fn horizon_sides() -> [bool; 2] {
 }
 
 /// switch_slots / slot_decisions: active Pokemon that switched voluntarily / active Pokemon that could have (bench available, not trapped)
-struct Out { sdlog: Vec<String>, v: f64, unsupported: Vec<String>, feats: Vec<Vec<f64>>, turns: usize, tr_turns: usize, tr_by: [bool; 3], switches: [usize; 2], slot_decisions: [usize; 2], switch_slots: [usize; 2], log: Vec<String>, states: Vec<Value>, dp2: [usize; 4], dplog: Vec<Value>, h2: usize }
+struct Out { sdlog: Vec<String>, v: f64, unsupported: Vec<String>, feats: Vec<Vec<f64>>, vf: Vec<Value>, turns: usize, tr_turns: usize, tr_by: [bool; 3], switches: [usize; 2], slot_decisions: [usize; 2], switch_slots: [usize; 2], log: Vec<String>, states: Vec<Value>, dp2: [usize; 4], dplog: Vec<Value>, h2: usize }
 
 fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_job: i64, st_g: u64, mut human: Option<&mut crate::human::Human>) -> Out {
     let mut b = start.clone(); let mut turn = 1;
@@ -161,6 +161,7 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
     let mut uns: Vec<String> = vec![]; let mut dp2s = [0usize; 4]; let mut dplog: Vec<Value> = vec![]; let mut h2cells = 0usize;
     let want_states = std::env::var("BATTLE_TURNS").is_ok(); let mut states: Vec<Value> = vec![];
     let want_feats = std::env::var("BATTLE_FEATS").is_ok(); let mut fx: Vec<Vec<f64>> = vec![];
+    let want_vf = std::env::var("BATTLE_VFEATS").is_ok(); let mut vf: Vec<Value> = vec![];
     let human_game = human.is_some();   // a human's game runs until the clock (PLAY_CLOCK_TURNS, default 100), not to the self-play cap
     let clock = crate::spot::clock_turns();
     while !b.ended && (if human_game { turn <= clock } else { turn <= MAXTURN || (turn <= STALL_MAXTURN && !can_damage(&b, 0) && !can_damage(&b, 1)) }) {
@@ -185,6 +186,15 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
             break;
         }
         if want_feats { fx.push(feats(&mut b, cfg)); }   // position at the start of the turn, for refitting the value on 4v4 games
+        // BATTLE_VFEATS=1 (2026-11-04, the Trick Room study): the learned value's inputs (vfeats: f0 f1 g0 g1 x) and its static value at the
+        // start of each turn, with Trick Room's turns left, each side's mean Speed over its living Pokemon and whether it has used a Trick Room
+        if want_vf {
+            let mut o = crate::vfeats::vfeats(&mut b, cfg);
+            let ms = |x: u8| { let a = crate::plan::alive(&b, x); a.iter().map(|m| b.p(*m).stored[5] as f64).sum::<f64>() / a.len().max(1) as f64 };
+            let used = |x: usize| b.sides[x].pokemon.iter().any(|p| p.move_slots.iter().any(|m| m.id == "trickroom" && m.pp < m.maxpp));
+            o["t"] = json!(turn); o["tr"] = json!(find(&b.field.pseudo, "trickroom").and_then(|x| x.duration).unwrap_or(0));
+            o["spe"] = json!([ms(0), ms(1)]); o["tru"] = json!([used(0), used(1)]); vf.push(o);
+        }
         let no_sw = |c: &[PChoice; 2]| !c.iter().any(|x| matches!(x, PChoice::Switch(_)));
         let mns: Vec<usize> = (0..msw.len()).filter(|i| no_sw(&msw[*i])).collect();
         let tns: Vec<usize> = (0..tsw.len()).filter(|j| no_sw(&tsw[*j])).collect();
@@ -553,7 +563,7 @@ fn play(start: &Battle, cfg: &Cfg, mut rng: f64, key: u64, keep_log: bool, st_jo
             else { let w = crate::spot::clock_winner(&b); (match w { Some(0) => "you", Some(_) => "the planner", None => "draw" }, Some(format!("the clock ran out after {} turns: {}", turn - 1,
                    match w { Some(_) => "more Pokemon left, or more HP", None => "dead even" }))) };
         h.end(&b, turn - 1, v, winner, how); }
-    Out { sdlog, v, unsupported: uns, feats: fx, turns: turn - 1, tr_turns, tr_by, switches, slot_decisions, switch_slots, log, states, dp2: dp2s, dplog, h2: h2cells }
+    Out { sdlog, v, unsupported: uns, feats: fx, vf, turns: turn - 1, tr_turns, tr_by, switches, slot_decisions, switch_slots, log, states, dp2: dp2s, dplog, h2: h2cells }
 }
 /// champ play <engine_data.json> <start.jsonl> : the first start line, a human on side 0 (see human.rs)
 pub fn play_main(args: &[String]) {
@@ -597,7 +607,7 @@ pub fn main(args: &[String]) {
         let tg = std::time::Instant::now();
         let r = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| play(&b, cfg, st["rng"].as_f64().unwrap(), key, keep_log, job, g, None)));
         let row = match r {
-            Ok(o) => json!({"g": g, "v": o.v, "turns": o.turns, "trTurns": o.tr_turns, "trBy": o.tr_by, "switches": o.switches, "slotDecisions": o.slot_decisions, "switchSlots": o.switch_slots, "dp2": o.dp2, "h2": o.h2, "dp2log": if o.dplog.is_empty() { Value::Null } else { json!(o.dplog) }, "unsupported": o.unsupported, "F": if o.feats.is_empty() { Value::Null } else { json!(o.feats) }, "ms": tg.elapsed().as_millis() as u64,
+            Ok(o) => json!({"g": g, "v": o.v, "turns": o.turns, "trTurns": o.tr_turns, "trBy": o.tr_by, "switches": o.switches, "slotDecisions": o.slot_decisions, "switchSlots": o.switch_slots, "dp2": o.dp2, "h2": o.h2, "dp2log": if o.dplog.is_empty() { Value::Null } else { json!(o.dplog) }, "unsupported": o.unsupported, "F": if o.feats.is_empty() { Value::Null } else { json!(o.feats) }, "VF": if o.vf.is_empty() { Value::Null } else { json!(o.vf) }, "ms": tg.elapsed().as_millis() as u64,
                             "log": if keep_log { json!(o.log) } else { Value::Null }, "sdlog": if o.sdlog.is_empty() { Value::Null } else { json!(o.sdlog) }, "states": if o.states.is_empty() { Value::Null } else { json!(o.states) }}),
             Err(e) => json!({"g": g, "v": Value::Null, "error": e.downcast_ref::<String>().cloned().or(e.downcast_ref::<&str>().map(|s| s.to_string())).unwrap_or_default()}),
         };

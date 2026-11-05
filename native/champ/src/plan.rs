@@ -56,6 +56,7 @@ impl VNet {
         let mut z = (self.h(&e) - self.h(&es)).clamp(-30.0, 30.0);
         if vnet_perish()[SIDE.with(|c| c.get()) as usize & 1] { if let Some((_, w)) = &cfg.vw { z += perish_adj_mode(b, w, true); } }
         z += tr_corr(b);   // TR_CORR (v40)
+        if let Some(h) = tr_head() { if tr_head_on()[SIDE.with(|c| c.get()) as usize & 1] { z += h.adjust(b, &f0, &f1, &g0, &g1, &x); } }   // TR_HEAD (v41)
         if crate::progress::on()[SIDE.with(|c| c.get()) as usize & 1] { z = crate::progress::adjust(b, cd, z); }   // VNET_PROGRESS (planner_issues 21)
         1.0 / (1.0 + (-z).exp())
     }
@@ -632,6 +633,33 @@ fn perish_doom() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::
 fn tr_corr_w() -> &'static Vec<f64> { static F: std::sync::OnceLock<Vec<f64>> = std::sync::OnceLock::new(); F.get_or_init(|| std::env::var("TR_CORR")
     .map(|v| v.split(',').filter(|x| !x.trim().is_empty()).map(|x| x.trim().parse().expect("TR_CORR: numbers")).collect()).unwrap_or_default()) }
 fn tr_corr_on() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new(); *F.get_or_init(|| match std::env::var("TR_CORR_SIDE").as_deref() {
+    Ok("s0") => [true, false], Ok("s1") => [false, true], _ => [true, true] }) }
+/// TR_HEAD=<json> (v41, 2026-11-04, the user: fit what the net gets wrong in Trick Room positions on self-play): bot/tr_value.py's fit on
+/// self-play from real Trick Room starts, where the engine overrates the side Trick Room favours against itself too (60% predicted, 50%
+/// played out). Added to the net's log-odds (side 0's view): const[phase] x s + w . u, phase Trick Room up with 1-4 turns left (w = up)
+/// or down after the slower side used a Trick Room (w = after), s = +1 when Trick Room favours side 0 (the slower on average), u = the
+/// net's antisymmetric inputs (f0 - f1, g0 - g1, x). Unlike TR_CORR's flat shift it differs between one turn's leaves, so it can move
+/// choices. TR_HEAD_SIDE=s0 / s1: only that side's searches (self-play of the term against none)
+pub struct TrHead { c: Vec<f64>, up: Vec<f64>, after: Vec<f64> }
+impl TrHead {
+    fn adjust(&self, b: &Battle, f0: &[f64], f1: &[f64], g0: &[f64], g1: &[f64], x: &[f64]) -> f64 {
+        let ms = |s: u8| { let a = alive(b, s); a.iter().map(|m| b.p(*m).stored[5] as f64).sum::<f64>() / a.len().max(1) as f64 };
+        let (m0, m1) = (ms(0), ms(1)); if m0 == m1 { return 0.0; }
+        let (sg, slow) = if m0 < m1 { (1.0, 0usize) } else { (-1.0, 1usize) };
+        let (k, w) = match find(&b.field.pseudo, "trickroom").and_then(|s| s.duration) {
+            Some(d) => ((d.clamp(1, 4) - 1) as usize, &self.up),
+            None if b.sides[slow].pokemon.iter().any(|p| p.move_slots.iter().any(|m| m.id == "trickroom" && m.pp < m.maxpp)) => (4, &self.after),
+            None => return 0.0,
+        };
+        let u = f0.iter().zip(f1).map(|(a, c)| a - c).chain(g0.iter().zip(g1).map(|(a, c)| a - c)).chain(x.iter().take(28).copied());
+        self.c[k] * sg + w.iter().zip(u).map(|(a, c)| a * c).sum::<f64>()
+    }
+}
+fn tr_head() -> Option<&'static TrHead> { static F: std::sync::OnceLock<Option<TrHead>> = std::sync::OnceLock::new(); F.get_or_init(|| std::env::var("TR_HEAD").ok().map(|p| {
+    let v: Value = serde_json::from_str(&std::fs::read_to_string(&p).expect("TR_HEAD file")).expect("TR_HEAD json");
+    let vec = |k: &str| v[k].as_array().expect("TR_HEAD fields const / up / after").iter().map(|x| x.as_f64().unwrap()).collect::<Vec<f64>>();
+    let h = TrHead { c: vec("const"), up: vec("up"), after: vec("after") }; assert!(h.c.len() == 5 && h.up.len() == 72 && h.after.len() == 72, "TR_HEAD sizes"); h })).as_ref() }
+fn tr_head_on() -> [bool; 2] { static F: std::sync::OnceLock<[bool; 2]> = std::sync::OnceLock::new(); *F.get_or_init(|| match std::env::var("TR_HEAD_SIDE").as_deref() {
     Ok("s0") => [true, false], Ok("s1") => [false, true], _ => [true, true] }) }
 fn tr_corr_after() -> f64 { static F: std::sync::OnceLock<f64> = std::sync::OnceLock::new(); *F.get_or_init(|| std::env::var("TR_CORR_AFTER").ok()
     .map(|v| v.trim().parse().expect("TR_CORR_AFTER: a number")).unwrap_or(0.0)) }

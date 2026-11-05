@@ -10,7 +10,9 @@ exact sixes they brought, the fours they chose, and every four of ours, in self-
   report    win rate of each of our fours against each opposing four and overall, with the bring the bot actually used
   .venv/bin/python3 bot/rain_study.py configs [opponent ...]        -> pssim/results/rain/configs.json
   .venv/bin/python3 bot/rain_study.py jobs <min games a four=3>     -> pssim/results/rain/jobs.json
-  .venv/bin/python3 bot/rain_study.py report <result dir>"""
+  .venv/bin/python3 bot/rain_study.py report <result dir>
+  .venv/bin/python3 bot/rain_study.py confirm <matrix result dir> [top=6]  -> pssim/results/rain/confirm_jobs.json (then rain_matrix.sh
+            JOBS=.../confirm_jobs.json TAG=confirm G0=1000 G=24)"""
 import os, sys, json, glob, itertools, collections, re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'bot')); sys.path.insert(0, os.path.join(ROOT, 'evalbar'))
@@ -122,14 +124,40 @@ def report(d):
     wt = [c['games'] for c in cfgs]; W = sum(wt)
     def score(k):
         per = [sum(R[k][i]) / len(R[k][i]) if R[k][i] else float('nan') for i in range(len(cfgs))]
-        return sum(w * p for w, p in zip(wt, per)) / W, per, sum(len(R[k][i]) for i in range(len(cfgs)))
+        have = [(w, p) for w, p in zip(wt, per) if p == p]   # a run still going: the opposing fours played so far, reweighted
+        return (sum(w * p for w, p in have) / sum(w for w, _ in have) if have else float('nan')), per, sum(len(R[k][i]) for i in range(len(cfgs)))
     rows = sorted(((score(k), k) for k in R), key=lambda x: -x[0][0])
     print(f"{len(R)} fours of ours; win rate against each opposing four (weighted by its real games: " + ', '.join(f'{i}: {c["games"]}' for i, c in enumerate(cfgs)) + ')')
     for (s, per, n), k in rows[:15] + [x for x in rows[15:] if used[x[1]]]:
         print(f"  {s:5.1%}  lead {' + '.join(k[0]):24s} back {' + '.join(k[1]):24s} " + ' '.join(f'{p:5.1%}' for p in per) + f"  ({n} games)" + (f"   <- the bot brought it {used[k]} times" if used[k] else ''))
 
 
+def confirm(d, top=6):
+    """the matrix's top fours and every four the bot brought, against the same opposing fours, for a run on fresh game indices
+    (rain_matrix.sh JOBS=confirm_jobs.json TAG=confirm G0=1000): the best of 90 on the same games is flattered, fresh games are not"""
+    J = json.load(open(os.path.join(OUT, 'jobs.json'))); C = json.load(open(os.path.join(OUT, 'configs.json')))
+    R = collections.defaultdict(list)
+    for f in glob.glob(os.path.join(d, '*.json')):
+        j = json.load(open(f)); R[(tuple(sorted(j['lead'])), tuple(sorted(j['back'])))] += [r['v'] for r in j.get('rows', []) if r.get('v') is not None]
+    cfgs = json.load(open(os.path.join(OUT, 'cfgs.json'))); wt = [c['games'] for c in cfgs]
+    def sc(k):
+        per = collections.defaultdict(list)
+        for f in glob.glob(os.path.join(d, '*.json')):
+            j = json.load(open(f))
+            if (tuple(sorted(j['lead'])), tuple(sorted(j['back']))) == k: per[j['cfg']] += [r['v'] for r in j['rows'] if r.get('v') is not None]
+        return sum(wt[i] * sum(v) / len(v) for i, v in per.items() if v) / sum(wt[i] for i, v in per.items() if v)
+    ranked = sorted(R, key=lambda k: -sc(k))
+    used = [k for c in C for k in [(tuple(sorted(f['lead'])), tuple(sorted(f['back']))) for f in c['our_fours'] if f['games'] >= 5]]
+    keep = list(dict.fromkeys(ranked[:top] + used))
+    key = lambda j: (tuple(sorted(x['species'] for x in j['mine'][:2])), tuple(sorted(x['species'] for x in j['mine'][2:])))
+    CJ = [j for j in J if key(j) in keep]
+    json.dump(CJ, open(os.path.join(OUT, 'confirm_jobs.json'), 'w'))
+    print(f"{len(CJ)} jobs: {len(keep)} fours against {len(cfgs)} opposing fours")
+    for k in keep: print(f"  lead {' + '.join(k[0])}, back {' + '.join(k[1])}" + ('  (the bot brought it)' if k in used else ''))
+
+
 if __name__ == '__main__':
     if sys.argv[1] == 'configs': configs(sys.argv[2:] or json.load(open(os.path.join(ROOT, 'bot', 'out', 'rain_opponents.json'))))
     elif sys.argv[1] == 'jobs': jobs(int(sys.argv[2]) if len(sys.argv) > 2 else 3)
     elif sys.argv[1] == 'report': report(sys.argv[2])
+    elif sys.argv[1] == 'confirm': confirm(sys.argv[2], int(sys.argv[3]) if len(sys.argv) > 3 else 6)

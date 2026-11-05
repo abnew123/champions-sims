@@ -1396,7 +1396,10 @@ registrations since its second version) and checks reachability of real logs in 
   opponent's +1.7 +- 3.4 (62 starts). With it the Trick Room side switches less under its own Trick Room (1.68 against 1.93 a game) and the
   Trick Room six wins 53.5 against 49.3% from turn 1 though its Trick Room is up a little later (1.74 against 1.97 of the first 3 turns).
   Unlike v40's flat shift, the slopes differ between one turn's leaves. Off, v41 gives v39's mixes and values on the bot's last 6 positions.
-  The head is bot/value/trhead_v41.json (TR_HEAD=<it>). `bin/champ-battle-v41.sha256`, `src_battle_v41.tar.gz`. Not on the bot yet.
+  The head is bot/value/trhead_v41.json (TR_HEAD=<it>). `bin/champ-battle-v41.sha256`, `src_battle_v41.tar.gz`. Bot (the user, 2026-11-05
+  10:15 am: "deploy v41 to the bot"): battlesim-champ29-bot -> champ-bot-2026-11-05 (v41, `bin/champ-bot-2026-11-05.sha256`), TR_HEAD in
+  bot/position.py, both clients restarted at 10:20 am (they had sat at "not logged in yet" since a socket close at 9:25 am, so no game was
+  in progress); Bo3 still on Frankfurt-239.
 
 ## The climb's simulator against the bot's ladder games (2026-10-16; the user: check the sim before trusting what the climb finds)
 bot/ladder_sim.py + pssim/ladder_sim.sh: the bot's 1,128 saved games (689 Bo3, 439 Bo1) rebuilt at turn 1 as the bot saw them (botpos,

@@ -27,6 +27,9 @@ os.environ.setdefault('VNET_PROGRESS', '1')   # the endgame progress check (v38;
 # this case"): can each side's damage beat the other's recovery before its PP runs out; with botpos ppDue (the PP each move has left)
 os.environ.setdefault('PERISH_DOOM', '1')   # the doomed-side rule (v39; 2026-11-03, the user: "deploy v39 to the bot"): a side whose every living
 # Pokemon has a Perish count, against a living uncounted one, reads lost (self-play +0.8 +- 0.4 on the 244 real Perish pairings)
+os.environ.setdefault('TR_HEAD', os.path.join(ROOT, 'bot', 'value', 'trhead_v41.json'))   # the Trick Room head (v41; 2026-11-05, the user: "deploy v41
+# to the bot"): the net overrates the side Trick Room favours as Trick Room runs down and after it; fitted on self-play from real Trick Room
+# starts (bot/tr_value.py), self-play against none on held-out starts +1.6 +- 0.8 points, real ladder log loss -0.0064 +- 0.0016
 STALL = {'Protect', 'Detect', 'Spiky Shield', "King's Shield", 'Baneful Bunker', 'Burning Bulwark', 'Silk Trap', 'Obstruct', 'Max Guard'}
 def protect_chains(log, side):
     """per Pokemon of ours (by species), how many turns running it has used a Protect-type move up to now (success or not)"""

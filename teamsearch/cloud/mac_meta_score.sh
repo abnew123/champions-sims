@@ -11,5 +11,6 @@ export TS_SIM=v41n1 TS_OPP=pool TS_POOL=$META/pool_2026-10-13_2026-11-06.json TS
 export TS_POOL_BY_PLAYER=1 TS_GAME_CACHE=cache_meta/games.sqlite TS_PARALLEL=1 TS_THREADS=3 TS_PREFILTER_PROCS=3 NPROC=3
 unset TS_BRING_MODE TS_PERISH TS_POOL_WEIGHT TS_BATTLE_BIN
 export PYTHONPATH="$(../.venv/bin/python3 -c 'import site; print(site.getsitepackages()[0])'):$PWD"
+export TS_PROC_EXE=$PWD/bin/teamsearch-py                         # multiprocessing workers (the cells' grid_pool.py) keep the name
 echo "$(date '+%m-%d %I:%M %p'): scoring $TEAMS, $B batches, $TS_SIM" > round_scoreteams.log
 nice -n 10 bin/teamsearch-py scoreteams.py "$TEAMS" "$B" >> round_scoreteams.log 2>&1 || echo "$(date -u '+%m-%d %H:%M UTC'): scoring failed (exit $?)" >> round_scoreteams.log

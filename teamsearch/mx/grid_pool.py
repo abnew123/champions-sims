@@ -76,7 +76,9 @@ if __name__ == "__main__":
     todo = [g for g in ids if not os.path.exists(os.path.join(OUT, g.replace("/", "_") + ".json"))]
     print(time.strftime("%I:%M %p"), f"{TAG}: {len(todo)} of {len(ids)} sets to do", flush=True)
     t0 = time.time(); n = 0
-    with mp.get_context("spawn").Pool(int(os.environ.get("NPROC", "1")), maxtasksperchild=4) as pool:
+    ctx = mp.get_context("spawn")
+    if os.environ.get("TS_PROC_EXE"): ctx.set_executable(os.environ["TS_PROC_EXE"])   # workers as teamsearch-py, not "Python", on the progress page
+    with ctx.Pool(int(os.environ.get("NPROC", "1")), maxtasksperchild=4) as pool:
         for gid, dt in pool.imap_unordered(job, todo):
             n += 1
             print(time.strftime("%I:%M %p"), f"{TAG} {n}/{len(todo)} {gid} {dt:.0f}s", flush=True)

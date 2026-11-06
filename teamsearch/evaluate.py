@@ -24,6 +24,8 @@ ARCHS = list(P.ARCH_SHARE)
 V12_ENV = {'BATTLE_ANTICIPATE': '1', 'DP2': '1', 'RACE': '1', 'CALC_DATA': '../native/champions_data.json'}
 V26_ENV = {'BATTLE_ANTICIPATE': '1', 'DP2': '1', 'RACE': '1', 'RACE_TIES': 'avg', 'TRSYM': '1', 'RACE_PRIO': '1', 'FEATS22': '1',
            'EG_MEGA_TIE': '0', 'CALC_DATA': '../native/champions_data_full.json'}
+V41_ENV = dict(V26_ENV, EG_VNET='../bot/value/vnet_h64_search_acc.json', VNET_PERISH='1', VNET_PROGRESS='1', PERISH_DOOM='1',
+               TR_HEAD='../bot/value/trhead_v41.json')
 SIMS = {
     'v3': dict(bin='champ-battle-v3', eg='egvalue5.json', env={'BATTLE_ANTICIPATE': '1'}),
     'v8': dict(bin='champ-battle-v8', eg='egvalue7.json',
@@ -97,6 +99,12 @@ SIMS = {
     # time per game; both sides plan with it. For the climb's rounds, with the finals verified on v33 (two seeds).
     'v33n1': dict(bin='champ-battle-v33', eg='egvalue9_sym2.json', grid=False, seedkey=True,
                   env=dict(V26_ENV, EG_VNET='../bot/value/vnet_h64_search_acc.json', BATTLE_NS='1')),
+    # v41 (Battle sim, 2026-11-06, for scoring teams against TR sheet's current-meta pool): v33's flags and net on the v41 binary
+    # (v34-v41 play v33's games unless set) with the bot's value flags: VNET_PERISH (the Perish term in the net: the Perish side's
+    # real - sim +6.6 -> +0.7 on 244 real pairings), VNET_PROGRESS, PERISH_DOOM and the Trick Room value head (TR_HEAD, v41; it
+    # replaces v40's TR_CORR, left out). Bot-only settings (Bo3 contempt, the back-row guess) are out. v41n1: one luck seed per cell.
+    'v41': dict(bin='champ-battle-v41', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V41_ENV)),
+    'v41n1': dict(bin='champ-battle-v41', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V41_ENV, BATTLE_NS='1')),
 }
 def sim(): return os.environ.get('TS_SIM', 'v3')
 def out_tag(seed0, per_job): return f'{seed0}_{per_job}' if sim() == 'v3' else f'{sim()}_{seed0}_{per_job}'

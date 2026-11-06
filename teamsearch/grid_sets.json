@@ -35084,5 +35084,47 @@
 "Protect"
 ],
 "regional_count": 0
+},
+"Sinistcha#31": {
+"species": "Sinistcha",
+"item": "Rocky Helmet",
+"ability": "Hospitality",
+"nature": "Bold",
+"evs": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"moves": [
+"Matcha Gotcha",
+"Strength Sap",
+"Rage Powder",
+"Protect"
+],
+"regional_count": 0
+},
+"Sneasler#104": {
+"species": "Sneasler",
+"item": "Electric Seed",
+"ability": "Unburden",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Poison Jab",
+"Close Combat",
+"Swords Dance",
+"Protect"
+],
+"regional_count": 0
 }
 }

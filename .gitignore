@@ -51,3 +51,4 @@ bot/account.json
 bot/out/
 teamsearch/climb_lowelo_*
 teamsearch/cache_lowelo/
+teamsearch/cache_meta/

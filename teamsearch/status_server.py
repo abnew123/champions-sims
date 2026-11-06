@@ -105,7 +105,7 @@ def step_card(path, title, done_marker, remote=True):
     seg, label, stage = [], None, None
     for l in L:
         if re.match(r'^\d\d:\d\d [AP]M (round \d+:|final check:)', l): seg, label, stage = [], None, None
-        m = re.match(r'^\d\d:\d\d [AP]M\s+((bring search|confirm games|confirm|final check)[^:]*): (\d+)/(\d+) teams, (\d+) min', l)
+        m = re.match(r'^\d\d:\d\d [AP]M\s+((bring search|confirm games|confirm|final check|score)[^:]*): (\d+)/(\d+) teams, (\d+) min', l)
         if m:
             if m.group(1) != stage: seg, stage, label = [], m.group(1), m.group(2)       # a new seed is a new stage
             seg.append(tuple(map(int, m.groups()[2:])))
@@ -207,7 +207,8 @@ def cards():
             cards.append(card(f"Hill climb round {rnd} ({pr['mode']}): {label}", 'running' if live else 'finished' if phase == 'done' else 'stopped',
                               0, 0, '', lines=[f"{pr.get('moved', '?')} of {pr['starts']} start teams moved to a better team" if phase == 'done' else '']))
     for logname, title, done in (('round_archverify.log', 'Finals verified against their starts (fresh games, two seeds)', 'verification done'),
-                                 ('round_accrefine.log', 'Sure-hit pass (set swaps toward more sure hits, then a final check)', 'accuracy refinement done')):
+                                 ('round_accrefine.log', 'Sure-hit pass (set swaps toward more sure hits, then a final check)', 'accuracy refinement done'),
+                                 ('round_scoreteams.log', 'Scoring candidate teams against the current-meta pool', 'scores (win share')):
         c = step_card(C(logname), title, done, bool(CD))
         if c and (not pr or pr.get('phase') == 'done' or os.path.getmtime(C(logname)) > (pr.get('at') or 0)): cards.append(c)
     if stt:

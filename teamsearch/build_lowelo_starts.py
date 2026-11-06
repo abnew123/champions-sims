@@ -10,8 +10,6 @@ HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE); sys
 import sets_lib as L
 from pro_replays import arch
 from cluster_opps import norm
-N = int(sys.argv[1]) if len(sys.argv) > 1 else 20; MAXR = int(sys.argv[2]) if len(sys.argv) > 2 else 1150
-SEED = int(sys.argv[3]) if len(sys.argv) > 3 else 20261016
 GPATH = os.path.join(HERE, 'grid_sets.json'); G = json.load(open(GPATH))
 ENG = json.load(open(os.path.join(HERE, '..', 'native', 'engine_data_full.json')))
 UNPORTED = {'Revival Blessing', 'Beat Up', 'Magician', 'Wandering Spirit'}
@@ -31,6 +29,8 @@ def runnable(f):
     return ok and all(L.idf(m) in ENG['moves'] for m in f['moves']) and not (UNPORTED & set(f['moves'] + [f['ability']])) and len(f['moves']) == 4
 
 if __name__ == '__main__':
+    N = int(sys.argv[1]) if len(sys.argv) > 1 else 20; MAXR = int(sys.argv[2]) if len(sys.argv) > 2 else 1150
+    SEED = int(sys.argv[3]) if len(sys.argv) > 3 else 20261016
     P = json.load(open(os.path.join(HERE, '..', 'pssim', 'opp_pool.json')))['entries']
     cands = {}
     for e in P:

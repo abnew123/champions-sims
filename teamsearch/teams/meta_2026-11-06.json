@@ -1,0 +1,122 @@
+{
+ "bot: Trick Room six": [
+  "M-Blastoise#5",
+  "Torkoal#1",
+  "Indeedee-F#24",
+  "Farigiraf#67",
+  "Kingambit#12",
+  "Incineroar#16"
+ ],
+ "bot: Frankfurt-239": [
+  "Pelipper#6",
+  "M-Swampert#4",
+  "Archaludon#2",
+  "Indeedee-F#2",
+  "M-Metagross#18",
+  "Grimmsnarl#2"
+ ],
+ "bot: Frankfurt-156": [
+  "Basculegion#1",
+  "Pelipper#5",
+  "M-Garchomp Z#1",
+  "Archaludon#2",
+  "Farigiraf#39",
+  "M-Golisopod#3"
+ ],
+ "v33 final: Brisbane-8": [
+  "Archaludon#1",
+  "Grimmsnarl#2",
+  "Venusaur#1",
+  "Pelipper#3",
+  "M-Swampert#1",
+  "M-Charizard Y#6"
+ ],
+ "v33 final: Brisbane-4": [
+  "M-Staraptor#1",
+  "Basculegion#1",
+  "M-Floette#1",
+  "Archaludon#2",
+  "Pelipper#2",
+  "Incineroar#10"
+ ],
+ "v33 final: Louisville-4": [
+  "Gholdengo#18",
+  "Archaludon#1",
+  "Pelipper#1",
+  "M-Swampert#1",
+  "M-Staraptor#1",
+  "Sinistcha#23"
+ ],
+ "v33 final: Louisville-1": [
+  "Kingambit#5",
+  "Incineroar#21",
+  "M-Charizard Y#4",
+  "Sylveon#16",
+  "Venusaur#1",
+  "Garchomp#1"
+ ],
+ "v33 final: Baltimore-6": [
+  "M-Froslass#1",
+  "M-Raichu Y#2",
+  "Rillaboom#3",
+  "Kingambit#1",
+  "Sneasler#5",
+  "Arcanine-H#1"
+ ],
+ "v33 final: Louisville-2": [
+  "Archaludon#6",
+  "M-Charizard Y#6",
+  "Pelipper#35",
+  "Venusaur#1",
+  "Grimmsnarl#3",
+  "Garchomp#31"
+ ],
+ "meta 1: Excadrill, Gholdengo, Milotic, Sinistcha, Staraptor, Tyranitar (4.4% of players)": [
+  "Excadrill#1",
+  "Gholdengo#22",
+  "Milotic#7",
+  "Sinistcha#31",
+  "M-Staraptor#1",
+  "M-Tyranitar#3"
+ ],
+ "meta 2: Archaludon, Basculegion-F, Golisopod, Pelipper, Raichu, Sneasler (3.7% of players)": [
+  "Archaludon#5",
+  "Basculegion-F#1",
+  "M-Golisopod#5",
+  "Pelipper#26",
+  "M-Raichu X#3",
+  "Sneasler#104"
+ ],
+ "meta 3: Basculegion, Charizard, Kingambit, Salamence, Sneasler, Whimsicott (3.5% of players)": [
+  "Basculegion#16",
+  "M-Charizard Y#1",
+  "Kingambit#2",
+  "M-Salamence#7",
+  "Sneasler#99",
+  "Whimsicott#1"
+ ],
+ "meta 4: Arcanine-Hisui, Gholdengo, Primarina, Raichu, Rillaboom, Staraptor (3.2% of players)": [
+  "Arcanine-H#1",
+  "Gholdengo#22",
+  "Primarina#1",
+  "M-Raichu Y#1",
+  "Rillaboom#1",
+  "M-Staraptor#1"
+ ],
+ "meta 5: Delphox, Floette-Eternal, Incineroar, Kingambit, Sinistcha, Sneasler (2.1% of players)": [
+  "M-Delphox#1",
+  "M-Floette#1",
+  "Incineroar#10",
+  "Kingambit#1",
+  "Sinistcha#2",
+  "Sneasler#3"
+ ],
+ "meta 6: Basculegion, Charizard, Garchomp, Kingambit, Sneasler, Whimsicott (2.1% of players)": [
+  "Basculegion#3",
+  "M-Charizard Y#1",
+  "Garchomp#18",
+  "Kingambit#2",
+  "Sneasler#8",
+  "Whimsicott#1"
+ ]
+}

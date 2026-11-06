@@ -18,7 +18,9 @@ def pleasantry(text): return squeeze(re.sub(r'[^a-z0-9]', '', EMOTICON.sub(' ', 
 # bot/out/chat_canned.json (they name the bots' accounts), with case, spaces and punctuation ignored
 CANNED_F = os.path.join(OUT, 'chat_canned.json')
 CANNED = [c for c in (re.sub(r'[^a-z0-9]', '', s.lower()) for s in (json.load(open(CANNED_F)) if os.path.exists(CANNED_F) else [])) if c]
-def canned(text): t = re.sub(r'[^a-z0-9]', '', text.lower()); return any(c in t for c in CANNED)
+# and any message that starts with one of these, same matching (the user, 2026-11-06: "Hi! I am an experimental AI")
+CANNED_PREFIXES = [re.sub(r'[^a-z0-9]', '', s.lower()) for s in ['Hi! I am an experimental AI']]
+def canned(text): t = re.sub(r'[^a-z0-9]', '', text.lower()); return any(c in t for c in CANNED) or any(t.startswith(p) for p in CANNED_PREFIXES)
 def routine(text): return pleasantry(text) or canned(text)
 def rows():
     f = os.path.join(OUT, 'chat.jsonl')

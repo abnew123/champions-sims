@@ -12,6 +12,10 @@ climbs (e.g. with and without MISS_DOUBLE) can share one box. Results look like 
 w_job, the weight of every job in the score, which climb.paired uses.
   env: TS_POOL_ES (2), TS_POOL_EC (8), TS_BRING_K (3); TS_BRING_MODE=plan: the plan-aware bring search (bringplan.py; TS_PLAN_K 7,
        TS_PLAN_S1 2, TS_PLAN_S2 6, TS_PLAN_KEEP 2)
+  TS_POOL_FIELD=1: a self-play field (backtest/selfplay.py) in place of real games: each field team is its own group (entry 'group'),
+       its entry carries exact spreads ('evs' per set) and its bring against each other field team ('bring_by_group'; against a team
+       outside the field, its bring against the field team sharing the most sets); entries are drawn with replacement, groups need no
+       minimum entry count, and the group's species profile counts every bring it uses
 """
 import collections, json, os, sys, random, hashlib, functools, math
 import numpy as np
@@ -22,6 +26,8 @@ P = E.P; Fx = P.Fx
 FULL = os.path.join('..', 'native', 'engine_data_full.json')
 E_S = int(os.environ.get('TS_POOL_ES', 2)); E_C = int(os.environ.get('TS_POOL_EC', 8))
 
+def field(): return os.environ.get('TS_POOL_FIELD') == '1'
+
 @functools.lru_cache(maxsize=None)
 def keys():
     """(bring groups, their normalised weights): regional shares, or with TS_POOL_WEIGHT=blend (user, 2026-10-08) half the regional
@@ -31,7 +37,7 @@ def keys():
         tr, tp = sum(v['share'] for v in K.values()), sum(v['pool'] for v in K.values())
         w = {k: 0.5 * v['share'] / tr + 0.5 * v['pool'] / tp for k, v in K.items()}
     else: w = {k: v['share'] for k, v in K.items()}
-    use = [k for k, v in K.items() if w[k] >= 0.01 and v['pool'] >= 8]
+    use = [k for k, v in K.items() if w[k] >= 0.01 and (v['pool'] >= 8 or field())]
     tot = sum(w[k] for k in use)
     return tuple(use), {k: w[k] / tot for k in use}
 
@@ -50,7 +56,7 @@ def entries():
     path is from teamsearch/. pssim/opp_pool.json is Battle sim's file and stays the default."""
     out = {}
     for e in json.load(open(os.path.join(HERE, os.environ.get('TS_POOL', os.path.join(PS, 'opp_pool.json')))))['entries']:
-        if len(e['bring']) == 4: out.setdefault(group_of([s['species'] for s in e['six']]), []).append(e)
+        if len(e['bring']) == 4: out.setdefault(e['group'] if field() else group_of([s['species'] for s in e['six']]), []).append(e)
     return out
 
 def sample(key, n, seed):
@@ -59,6 +65,7 @@ def sample(key, n, seed):
     player counts about once however much they play (TR sheet, 2026-11-06: the 10 busiest players, mostly ladder bots, play 18% of
     the current pool's sides)"""
     c = entries()[key]; rng = random.Random(f'{key}|{seed}')
+    if field(): return rng.choices(c, k=n)
     w = [3 if (e['rating'] or 0) >= 1500 else 2 if (e['rating'] or 0) >= 1300 else 1 for e in c]
     if os.environ.get('TS_POOL_BY_PLAYER') == '1':
         per = collections.Counter(e.get('player') for e in c); w = [x / per[e.get('player')] if e.get('player') is not None else x for x, e in zip(w, c)]
@@ -70,7 +77,9 @@ def opp_six(key, min_w=0.05):
     """the group's species profile for the bring model: share of the group's entries that brought each species (like policy.opp_six)"""
     es = entries()[key]; w = {}
     for e in es:
-        for sp in e['bring']: w[sp] = w.get(sp, 0) + 1 / len(es)
+        bs = list(e['bring_by_group'].values()) if field() and e.get('bring_by_group') else [e['bring']]
+        for b in bs:
+            for sp in b: w[sp] = w.get(sp, 0) + 1 / len(es) / len(bs)
     out = [(Fx.canon(sp), round(x, 3)) for sp, x in sorted(w.items(), key=lambda t: -t[1]) if x >= min_w]
     return tuple((g, x) for g, x in out if g)
 
@@ -106,13 +115,23 @@ def job(team, lead, back, e, si=None):
     from opp_pool import spread
     mine = [{k: E.G[g][k] for k in ('species', 'item', 'ability', 'nature', 'evs', 'moves')} for g in list(lead) + list(back)]
     six = {m['species']: m for m in e['six']}
-    theirs = [{**six[x], 'evs': spread(x, six[x]['nature'])} for x in e['bring']]
+    bring = e.get('bring_by_group', {}).get(_group_of_gids(tuple(team)), e['bring']) if field() else e['bring']
+    theirs = [{**six[x], 'evs': six[x].get('evs') or spread(x, six[x]['nature'])} for x in bring]
     meta = dict(pool_id=e['id'], pool_side=e['side'], group=e['group'], arch=e['arch'], rating=e['rating'])
     if si is not None and E.SIMS[E.sim()].get('seedkey'): meta['seed_index'] = si
     return dict(mine=mine, theirs=theirs, meta=meta)
 
+@functools.lru_cache(maxsize=None)
+def _group_of_gids(team):
+    """(TS_POOL_FIELD) the field team this team plays as: itself if it is one, else the one sharing the most sets (a climb's neighbour
+    of a field team: its start)"""
+    F = {e['group']: set(e['gids']) for es in entries().values() for e in es}
+    return max(F, key=lambda k: (len(F[k] & set(team)), k))
+
 def sidx(k, ei):
-    """the seed key of entry ei (its rank in the group's rating-weighted order for this seed) of group k: < 64 entries per group"""
+    """the seed key of entry ei (its rank in the group's rating-weighted order for this seed) of group k: < 64 entries per group.
+    TS_POOL_FIELD: from the group's name, not its place, so a pair of field teams replays the same games when the field changes"""
+    if field(): return int(hashlib.md5(k.encode()).hexdigest()[:8], 16) % 100000 * 64 + ei
     return keys()[0].index(k) * 64 + ei
 
 def _run(gids, jobs, seed0, threads, label):

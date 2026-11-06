@@ -32,8 +32,10 @@ def opp_six(arch, min_w=0.05):
 
 @functools.lru_cache(maxsize=None)
 def model(path=os.path.join(HERE, 'bring_model.json')):
-    m = json.load(open(path))
-    return (np.array(list(m['bring'].values())), np.array(list(m['lead'].values())), m['prior_bring'], m['prior_lead'])
+    m = json.load(open(path)); pb, pl = m['prior_bring'], m['prior_lead']
+    if os.environ.get('TS_PRIOR_ZERO'):                                # species whose fitted priors would leak later data (the M-B backtest)
+        z = set(json.load(open(os.environ['TS_PRIOR_ZERO']))); pb = {k: v for k, v in pb.items() if k not in z}; pl = {k: v for k, v in pl.items() if k not in z}
+    return (np.array(list(m['bring'].values())), np.array(list(m['lead'].values())), pb, pl)
 
 def choose(team, arch, path=os.path.join(HERE, 'bring_model.json')):
     """team: 6 grid ids -> (lead gids, back gids, log-prob of that choice)"""

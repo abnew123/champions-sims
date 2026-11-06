@@ -33,7 +33,7 @@ def parse_moveset(path=os.path.join(ROOT, 'regionals', 'smogon_mc_2026-09_movese
             if mm: out[cur]['Spreads'].append((mm.group(1), [int(x) for x in mm.group(2).split('/')], float(mm.group(3))))
     return out
 
-MS = parse_moveset()
+MS = parse_moveset(os.environ['TS_MOVESET']) if os.environ.get('TS_MOVESET') else parse_moveset()   # TS_MOVESET: another month's stats (the M-B backtest: Aug 2026 Reg M-B)
 NATURES = DEX['natures']
 
 def battle_forme(species, item):

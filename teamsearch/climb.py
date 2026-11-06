@@ -20,7 +20,7 @@ import multiprocessing as mp
 import sets_lib as L
 HERE = L.HERE
 GRID = json.load(open(os.path.join(HERE, 'grid_sets.json')))
-POOL = json.load(open(os.path.join(HERE, 'swap_pool.json')))
+POOL = json.load(open(os.path.join(HERE, os.environ.get('TS_SWAP_POOL', 'swap_pool.json'))))      # TS_SWAP_POOL: another catalog (backtest/: M-B sets + blind ones)
 INDEX = json.load(open(os.environ.get('TS_INDEX') or os.path.join(HERE, 'teams', 'start', 'index.json')))   # TS_INDEX: e.g. teams/arch_start/index.json
 CANDS = [p['gid'] for p in POOL if not p['fallback']]
 FALLBACKS = collections.defaultdict(list)                      # forme -> fallback gids, most common item first
@@ -346,7 +346,18 @@ def learned_prefilter(log_path, lam=3.0):
     return lambda o, i, m: (w[ii[i]] if i in ii else 0.0) + (w[oi[o]] if o in oi else 0.0) + w[-1] * m
 def _matrix_score(team):
     import evaluate as E                                               # (puts bring/ on the path in a spawned worker)
+    if os.environ.get('TS_PREFILTER') == 'pool': return _pool_matrix_score(team)
     return E.P.matrix_score(team)
+def _pool_matrix_score(team):
+    """policy.matrix_score with the pool's bring groups and shares in place of the replay archetypes (TS_PREFILTER=pool; the M-B
+    backtest's self-play field, whose meta isn't M-C's)"""
+    import poolmode as PM, evaluate as E
+    Fx = E.P.Fx; K, SH = PM.keys(); tot = 0.0
+    for k in K:
+        lead, back = PM.ranked(list(team), k)[0]
+        m = Fx.Matchup(list(team), list(PM.opp_six(k))); S = tuple(sorted(list(team).index(g) for g in lead + back))
+        f = m.bring_feats(S); tot += SH[k] * ((f[1] if f[7] else f[0]) + f[2]) / 2
+    return tot
 
 if __name__ == '__main__':
     starts = {n: v['gids'] for n, v in INDEX.items()}

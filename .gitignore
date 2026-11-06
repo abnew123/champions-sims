@@ -52,3 +52,7 @@ bot/out/
 teamsearch/climb_lowelo_*
 teamsearch/cache_lowelo/
 teamsearch/cache_meta/
+teamsearch/backtest/replays_mb/
+teamsearch/backtest/learnsets_champions_upstream.ts
+teamsearch/backtest/dex_mb.json
+teamsearch/backtest/mb_pool.json

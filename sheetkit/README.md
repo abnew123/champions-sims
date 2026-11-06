@@ -85,6 +85,11 @@ other game indices (`<folder>.run.json` records them). Move the old folder aside
   game plans) screens, for each card whose best four so far has not been searched, that four, and plays every candidate against its
   answers; repeat until it says there is nothing to do. A result is only reused while its job still holds the same fours (a changed pick
   moves the old results to `<folder>.stale/`).
+- Sixes a card's pool misses (teams that showed up later, a ladder regular) go in a file in the team folder named by sheet.json
+  `"optimal": {"extra": "<file>"}`: per card `share` (the card's weight they take together, split by `games`), `sixes`
+  (`{label, games, six}`) and optional `candidates` (`[lead, back]` fours of ours to try against them besides the confirmation's).
+  They are numbered after the pool's sixes, so earlier results keep theirs. `optimal run --only extra` screens every four already
+  searched against them and plays every candidate against the answers; then the usual `more` rounds, `report` and `adopt`.
 
 A result folder records which opponents it was played against, and the kit refuses to mix them.
 

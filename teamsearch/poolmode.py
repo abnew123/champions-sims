@@ -13,7 +13,7 @@ w_job, the weight of every job in the score, which climb.paired uses.
   env: TS_POOL_ES (2), TS_POOL_EC (8), TS_BRING_K (3); TS_BRING_MODE=plan: the plan-aware bring search (bringplan.py; TS_PLAN_K 7,
        TS_PLAN_S1 2, TS_PLAN_S2 6, TS_PLAN_KEEP 2)
 """
-import json, os, sys, random, hashlib, functools, math
+import collections, json, os, sys, random, hashlib, functools, math
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); PS = os.path.join(HERE, '..', 'pssim')
 if PS not in sys.path: sys.path.insert(0, PS)
@@ -45,16 +45,23 @@ def rules(): return json.load(open(os.path.join(PS, 'results', 'core_rules_both_
 
 @functools.lru_cache(maxsize=None)
 def entries():
-    """bring group -> pool entries (with four brought)"""
+    """bring group -> pool entries (with four brought). TS_POOL: another pool file in opp_pool.json's shape (TR sheet's current-meta
+    pools, 2026-11-06: sheets/trick-room-six/work/meta/pool_<first>_<last>.json, with its pool_keys_*.json as TS_POOL_KEYS); a relative
+    path is from teamsearch/. pssim/opp_pool.json is Battle sim's file and stays the default."""
     out = {}
-    for e in json.load(open(os.path.join(PS, 'opp_pool.json')))['entries']:
+    for e in json.load(open(os.path.join(HERE, os.environ.get('TS_POOL', os.path.join(PS, 'opp_pool.json')))))['entries']:
         if len(e['bring']) == 4: out.setdefault(group_of([s['species'] for s in e['six']]), []).append(e)
     return out
 
 def sample(key, n, seed):
-    """n entries of a group, rating-weighted without replacement (>= 1500: 3, >= 1300: 2, else 1), fixed by (group, seed)"""
+    """n entries of a group, rating-weighted without replacement (>= 1500: 3, >= 1300: 2, else 1), fixed by (group, seed).
+    TS_POOL_BY_PLAYER=1 (pools with a 'player' number per entry): each entry's weight over its player's entries in the group, so a
+    player counts about once however much they play (TR sheet, 2026-11-06: the 10 busiest players, mostly ladder bots, play 18% of
+    the current pool's sides)"""
     c = entries()[key]; rng = random.Random(f'{key}|{seed}')
     w = [3 if (e['rating'] or 0) >= 1500 else 2 if (e['rating'] or 0) >= 1300 else 1 for e in c]
+    if os.environ.get('TS_POOL_BY_PLAYER') == '1':
+        per = collections.Counter(e.get('player') for e in c); w = [x / per[e.get('player')] if e.get('player') is not None else x for x, e in zip(w, c)]
     order = sorted(range(len(c)), key=lambda i: rng.random() ** (1 / w[i]), reverse=True)
     return [c[i] for i in order[:n]]
 

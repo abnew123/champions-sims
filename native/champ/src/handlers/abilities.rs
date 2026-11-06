@@ -14,6 +14,19 @@ impl Battle {
 }
 fn mon_code(m: MonRef) -> f64 { (m.0 as f64) * 16.0 + m.1 as f64 + 1.0 }
 fn code_mon(x: f64) -> MonRef { let c = x as i64 - 1; ((c / 16) as u8, (c % 16) as u8) }
+/// Fairy Aura / Dark Aura's onAnyBasePower: moves of the aura's type (not the holder's own target, not status) take x 5448/4096 from the
+/// first holder found (move.auraBooster), x 3072/4096 once Aura Break has marked the move (move.hasAuraBreak, set by its
+/// onAnyTryPrimaryHit) (Dark Aura and Aura Break 2026-11-06, batch8.rs)
+pub(crate) fn aura_bp(b: &mut Battle, a: &HArgs, ty: &str, ab: &str) -> RV {
+    let (src, tgt, am) = (a.t(), a.s(), a.am()); let mv = b.am(am);
+    if tgt == src || mv.category == "Status" || mv.mtype != ty { return RV::Undef; }
+    let holder = b.holder();
+    let cur = b.am(am).misc("auraBooster").map(code_mon);
+    if !cur.map(|c| b.has_ability(c, ab)).unwrap_or(false) { b.amm(am).set_misc("auraBooster", mon_code(holder)); }
+    if b.am(am).misc("auraBooster").map(code_mon) != Some(holder) { return RV::Undef; }
+    let num = if b.am(am).misc("hasAuraBreak").map(|x| x != 0.0).unwrap_or(false) { 3072.0 } else { 5448.0 };
+    b.cm(num, 4096.0)
+}
 fn boosts_of(rv: &RV) -> Boosts { if let RV::Boosts(b) = rv { b.clone() } else { vec![] } }
 fn ate(b: &mut Battle, a: &HArgs, ty: Id) -> RV {
     let am = a.am(); let mv = b.am(am);
@@ -169,14 +182,7 @@ pub fn register(r: &mut Reg) {
     h!(r, Ability, "sheerforce", "onBasePower", |b, a| { let am = a.am(); let id_ = b.am(am).id; if b.am(am).has_sheer_force || b.dex.mv(id_).eff.b("hasSheerForceBoost") { return b.cm(5325.0, 4096.0); } RV::Undef });
     h!(r, Ability, "sandforce", "onBasePower", |b, a| { if b.effective_weather() == "sandstorm" && ["Rock", "Ground", "Steel"].contains(&b.am(a.am()).mtype) { return b.cm(5325.0, 4096.0); } RV::Undef });
     h!(r, Ability, "sandforce", "onImmunity", |b, a| { if a.relay == RV::S(id("sandstorm")) { return RV::B(false); } RV::Undef });
-    h!(r, Ability, "fairyaura", "onAnyBasePower", |b, a| {
-        let (src, tgt, am) = (a.t(), a.s(), a.am()); let mv = b.am(am);
-        if tgt == src || mv.category == "Status" || mv.mtype != "Fairy" { return RV::Undef; }
-        let holder = b.holder();
-        let cur = b.am(am).misc("auraBooster").map(code_mon);
-        if !cur.map(|c| b.has_ability(c, "fairyaura")).unwrap_or(false) { b.amm(am).set_misc("auraBooster", mon_code(holder)); }
-        if b.am(am).misc("auraBooster").map(code_mon) != Some(holder) { return RV::Undef; }
-        b.cm(5448.0, 4096.0) });
+    h!(r, Ability, "fairyaura", "onAnyBasePower", |b, a| { aura_bp(b, a, "Fairy", "fairyaura") });
     h!(r, Ability, "hugepower", "onModifyAtk", |b, a| { b.cm(2.0, 1.0) });
     h!(r, Ability, "adaptability", "onModifySTAB", |b, a| {
         let s = a.t(); let am = a.am(); let mt = b.am(am).mtype;

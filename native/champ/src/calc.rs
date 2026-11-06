@@ -63,6 +63,12 @@ pub fn prepare(d: &Data, a: &Mon, f: &Field, id: &str) -> Active {
 
 /// type effectiveness exponent; None = immune
 pub fn effectiveness(d: &Data, act: &Active, def: &Mon, atk_ability: &str) -> Option<i64> {
+    // Thousand Arrows (ignoreImmunity Ground, 2026-11-06): a Flying type that isn't grounded takes it neutral; a Levitate / Air Balloon
+    // holder by its types, the Ground immunity ignored
+    if act.mv.id == "thousandarrows" && act.mtype == "Ground" && !grounded(d, def) {
+        if has_type(d, def, "Flying") { return Some(0); }
+        return Some(types(d, def).iter().map(|ty| d.eff1(&act.mtype, ty).unwrap_or(0)).sum());
+    }
     if act.mtype == "Ground" && !grounded(d, def) { return None; }
     let scrappy = ["scrappy", "mindseye"].contains(&atk_ability) && (act.mtype == "Normal" || act.mtype == "Fighting"); let mut e = 0;
     for ty in types(d, def) {
@@ -129,7 +135,12 @@ pub fn damage(d: &Data, a: &Mon, def: &Mon, id: &str, f: &Field, roll: i64, crit
         "supremeoverlord" => if a.fallen > 0 { hs.push(H { prio: ap("onBasePower"), sub: 1, num: [4096, 4506, 4915, 5325, 5734, 6144][a.fallen.clamp(0, 5) as usize], den: 4096, direct: false }) },
         _ => {}
     }
-    if act.mtype == "Fairy" && (a.ability == "fairyaura" || def.ability == "fairyaura") { hs.push(H { prio: 20.0, sub: 1, num: 5448, den: 4096, direct: false }); }
+    // Fairy Aura / Dark Aura (x 5448/4096), reversed to x 3072/4096 by Aura Break (Dark Aura and Aura Break 2026-11-06; the attacker's and
+    // the defender's abilities only)
+    let aura = |x: &str| a.ability == x || def.ability == x;
+    let aura_num = if aura("aurabreak") { 3072 } else { 5448 };
+    if act.mtype == "Fairy" && aura("fairyaura") { hs.push(H { prio: 20.0, sub: 1, num: aura_num, den: 4096, direct: false }); }
+    if act.mtype == "Dark" && aura("darkaura") { hs.push(H { prio: 20.0, sub: 1, num: aura_num, den: 4096, direct: false }); }
     let type_item = match a.item.as_str() { "miracleseed" => "Grass", "fairyfeather" => "Fairy", "mysticwater" => "Water", "blackglasses" => "Dark", "charcoal" => "Fire",
         "sharpbeak" => "Flying", "twistedspoon" => "Psychic", "nevermeltice" => "Ice", "magnet" => "Electric", "blackbelt" => "Fighting", "dragonfang" => "Dragon",
         "spelltag" => "Ghost", "silkscarf" => "Normal", "softsand" => "Ground", "hardstone" => "Rock", "metalcoat" => "Steel", "poisonbarb" => "Poison", "silverpowder" => "Bug", _ => "" };

@@ -847,6 +847,8 @@ pub(crate) fn slot_options(b: &mut Battle, s: u8, i: usize) -> Vec<PChoice> {
     let Some(pi) = b.sides[s as usize].active[i] else { return vec![PChoice::Pass] };
     let m = (s, pi);
     if b.p(m).fainted { return vec![PChoice::Pass]; }
+    // a commanding Tatsugiri has no choice: Showdown passes its slot (Commander, 2026-11-06), so it costs the search nothing
+    if b.has_vol(m, "commanding") { return vec![PChoice::Pass]; }
     let req = b.request_moves(m);
     let locked = b.get_locked_move(m).is_some();
     // a locked move (a charged two-turn move, Outrage...) fires at the target Showdown stored for it (side.chooseMove: volatiles[move]
@@ -984,11 +986,13 @@ pub(crate) fn valid(b: &mut Battle, s: u8, ch: &[PChoice; 2]) -> bool {
         let Some(pi) = b.sides[s as usize].active[i] else { continue };
         let m = (s, pi);
         match ch[i] {
-            PChoice::Pass => { if !b.p(m).fainted { return false; } }
+            // a commanding Tatsugiri passes and does nothing else (side.getChoiceIndex skips its slot)
+            PChoice::Pass => { if !b.p(m).fainted && !b.has_vol(m, "commanding") { return false; } }
             // a voluntary switch (only spot.rs offers these): to a living Pokemon on the bench
-            PChoice::Switch(pos) => { if b.p(m).fainted || b.mon_at_position(s, pos).map(|t| b.p(t).fainted || b.p(t).position < 2).unwrap_or(true) { return false; } }
+            PChoice::Switch(pos) => { if b.p(m).fainted || b.has_vol(m, "commanding") || b.mon_at_position(s, pos).map(|t| b.p(t).fainted || b.p(t).position < 2).unwrap_or(true) { return false; } }
             PChoice::Move(k, t, mega) => {
                 if b.p(m).fainted { continue; }
+                if b.has_vol(m, "commanding") { return false; }
                 let req = b.request_moves(m);
                 if k >= req.len() { return false; }
                 let tt = req[k].1;
@@ -1032,7 +1036,7 @@ fn auto_choice(b: &mut Battle, s: u8) -> [PChoice; 2] {
     let mut parts = [PChoice::Pass; 2]; let mut mega_used = false;
     for i in 0..2 {
         let Some(pi) = b.sides[s as usize].active[i] else { continue };
-        let m = (s, pi); if b.p(m).fainted { continue; }
+        let m = (s, pi); if b.p(m).fainted || b.has_vol(m, "commanding") { continue; }
         let locked = b.get_locked_move(m).is_some();
         let mega = !locked && b.p(m).can_mega_evo.is_some() && !mega_used; if mega { mega_used = true; }
         let moves: Vec<(usize, Id)> = b.request_moves(m).into_iter().enumerate().filter(|(_, x)| !x.2).map(|(k, x)| (k, x.0)).collect();
@@ -1117,7 +1121,7 @@ pub fn play_game(start: &Battle, cfg: &Cfg, rng0: f64, cseeds: &[Vec<[u16; 4]>])
             // nothing the engine accepts on one side: Showdown's autoChoose for both sides (first usable move, default target)
             let auto = |b: &mut Battle, s: u8| -> [PChoice; 2] { std::array::from_fn(|i| {
                 let Some(pi) = b.sides[s as usize].active[i] else { return PChoice::Pass };
-                if b.p((s, pi)).fainted { return PChoice::Pass; }
+                if b.p((s, pi)).fainted || b.has_vol((s, pi), "commanding") { return PChoice::Pass; }
                 let req = b.request_moves((s, pi));
                 PChoice::Move(req.iter().position(|x| !x.2).unwrap_or(0), 0, false) }) };
             let ch = [auto(&mut b, 0), auto(&mut b, 1)];

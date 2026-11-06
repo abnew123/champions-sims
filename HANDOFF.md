@@ -1413,6 +1413,24 @@ registrations since its second version) and checks reachability of real logs in 
   59.4 and drops the card's four 34.8 -> 24.3. Robust answer: Blastoise + Incineroar lead (two Fake Outs, Blastoise resists Muddy Water and
   Ice Beam, their rain boosts Water Spout; Torkoal + Incineroar's Fire is halved and the bot switched Torkoal out on turn 1 in 16 of 16
   logged games). No card or bring change without the user's go-ahead.
+- **champ-battle-v42 (2026-11-06, 6 pm) = v41 + the Regulation M-D candidates' handlers (the user: "tell battle sim to start work on
+  potential upcoming abilities"), inert in M-C.** The audit (pssim/results/md_audit, git-ignored: 12 games with Mega Heatran / Darkrai /
+  Zygarde / Zeraora / Magearna / Tatsugiri, Latios / Latias, Dondozo) found already handled Flash Fire, Flame Body, Volt Absorb, Levitate,
+  Unaware, Oblivious, Magma Storm, Fleur Cannon, Luster Purge, Mist Ball; missing, now ported from Showdown's JS in src/handlers/batch8.rs:
+  Commander (commanding: the action cancelled every turn, invulnerable, trapped, no drag-out; commanded: +2 Atk / Def / SpA / SpD / Spe,
+  trapped; ends when Dondozo faints), Order Up, Soul-Heart, Storm Drain, Water Veil, Bad Dreams, Dark Aura + Aura Break (abilities.rs
+  aura_bp, calc.rs too), Power Construct (forme_change_permanent; formeRegression back to the set's forme on fainting; a Complete
+  Zygarde can then Mega Evolve, Zygardite being keyed to Zygarde-Complete), Thousand Arrows, Thousand Waves (linked trapped / trapper
+  volatiles, sim.rs add_volatile_ex / remove_linked_volatiles), Core Enforcer (gastroacid), Dark Void's Darkrai check, Ion Deluge (Plasma
+  Fists). A commanding Tatsugiri's slot is Pass only (plan.rs slot_options / valid / auto_choice, sim.rs run_turn: 40 joint options -> 5 on
+  the audit's turn 1). One deliberate difference from Showdown: Order Up under a Mega Tatsugiri boosts by its form (Droopy-Mega Def,
+  Stretchy-Mega Spe); Showdown's code gives Atk to all three Megas (baseSpecies.forme reads "Droopy-Mega"), the only mismatches in the
+  differential check: 250 whole battles of candidate + real M-C sets, 4,180 turns x lo / hi / mid / real, exact apart from those (a build
+  with Showdown's literal rule: 0); 1,500 aura / Thousand Arrows calc cases exact (v41 82.9%). M-C: 838 turn cases from M-C sheets same on
+  v41 and v42; the first 40 rain confirmation starts identical with BATTLE_EVAL=0 and 8 more with BATTLE_EVAL=1 (budget 3000). The value
+  net and vfeats do not model Commander (the Tatsugiri reads as an ordinary active). Stats and abilities of the M-D Megas are the data's
+  placeholders until M-D is announced. Test scripts: pssim/results/md_audit/v42_check (gen_md_cases.js, gen_md_damage.js, cmp.py).
+  `bin/champ-battle-v42.sha256`, `src_battle_v42.tar.gz`. Not on the bot.
 
 ## The climb's simulator against the bot's ladder games (2026-10-16; the user: check the sim before trusting what the climb finds)
 bot/ladder_sim.py + pssim/ladder_sim.sh: the bot's 1,128 saved games (689 Bo3, 439 Bo1) rebuilt at turn 1 as the bot saw them (botpos,

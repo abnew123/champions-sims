@@ -167,6 +167,8 @@ impl Battle {
                 let Some(pi) = self.sides[s as usize].active[i] else { continue };
                 let m = (s, pi);
                 if self.p(m).fainted { continue; }
+                // a commanding Tatsugiri gets no action whatever is chosen for it: Showdown's side.getChoiceIndex passes its slot (2026-11-06)
+                if self.has_vol(m, "commanding") { continue; }
                 match choices[s as usize][i] {
                     PChoice::Move(idx, tloc, mega) => { let a = self.make_move_action(m, idx, tloc, mega); acts.push(a); }
                     PChoice::Switch(pos) => { if let Some(t) = self.mon_at_position(s, pos) { acts.push(switch_action(Choice::Switch, m, t)); } }
@@ -386,6 +388,8 @@ impl Battle {
         let vols: Vec<(Id, EState)> = self.p(o).volatiles.iter().filter(|(k, _)| !NOCOPY.contains(k) && *k != "yawn").cloned().collect();
         let ids: Vec<Id> = vols.iter().map(|(k, _)| *k).collect();
         self.pm(m).volatiles = vols;
+        // the passer's own clearVolatile ends its linked volatiles (trapped / trapper are noCopy, so none were copied) (2026-11-06)
+        self.remove_all_linked(o);
         self.pm(o).volatiles.clear();
         for v in ids { self.single_event("Copy", Eff::cond(v), Some(SLoc::Vol(m, v)), Tgt::Mon(m), None, None, RV::Undef); }
     }
@@ -464,7 +468,12 @@ impl Battle {
                 let ab = self.p(m).ability; let it = self.p(m).item;
                 self.single_event("End", Eff::new(Kind::Ability, ab), Some(SLoc::Ability(m)), Tgt::Mon(m), None, None, RV::Undef);
                 self.single_event("End", Eff::new(Kind::Item, it), Some(SLoc::Item(m)), Tgt::Mon(m), None, None, RV::Undef);
+                // formeRegression (2026-11-06): Power Construct sets it (a Champions Mega never reverts), so a Zygarde that became Complete
+                // (and maybe then Mega) faints back into its set's forme and ability, its max HP with it
+                let regress = self.forme_regression(m);
+                if regress && !self.p(m).transformed { let p = self.pm(m); p.base_species = p.set_species; p.base_ability = p.set_ability; }
                 self.clear_volatile(m, false);
+                if regress { self.update_max_hp(m); }
                 let p = self.pm(m);
                 p.fainted = true; p.is_active = false;
                 self.sides[s].fainted_this_turn = Some(m);
@@ -486,6 +495,8 @@ impl Battle {
         let p = self.pm(m);
         p.boosts = [0; 7]; if p.transformed { p.move_slots = p.base_move_slots.clone(); }   // baseMoveSlots.slice() shares the slot objects
         p.transformed = false; p.ability = p.base_ability;
+        self.remove_all_linked(m);   // removeLinkedVolatiles for each volatile with a linkedStatus (2026-11-06, Thousand Waves)
+        let p = self.pm(m);
         p.volatiles.clear();
         if include_switch_flags { p.switch_flag = None; p.force_switch_flag = false; }
         p.last_move = None; p.last_move_used = None; p.move_this_turn = ""; p.move_last_turn_result = Tri::Undef; p.move_this_turn_result = Tri::Undef;
@@ -519,9 +530,20 @@ impl Battle {
         let Some(sp) = self.p(m).can_mega_evo else { return false };
         let item = self.p(m).item;
         self.forme_change_permanent(m, sp, Some(Eff::new(Kind::Item, item)));
-        for i in 0..self.sides[m.0 as usize].pokemon.len() { self.sides[m.0 as usize].pokemon[i].can_mega_evo = None; }
+        for i in 0..self.sides[m.0 as usize].pokemon.len() { let q = &mut self.sides[m.0 as usize].pokemon[i]; q.can_mega_evo = None; q.mega_spent = true; }
         self.run_event("AfterMega", Tgt::Mon(m), None, None, RV::Undef, false, false);
         true
+    }
+    /// pokemon.formeRegression, which the state export leaves out: in Champions only Power Construct sets it (the Champions formeChange
+    /// sets it for a sourceless permanent change, which nothing in scope makes), so it is on exactly for a Zygarde set whose permanent
+    /// forme is now Zygarde-Complete or Zygarde-Mega (Zygardite's stone is for Zygarde-Complete)
+    pub fn forme_regression(&self, m: MonRef) -> bool { let p = self.p(m); p.base_species != p.set_species && (p.base_species == "zygardecomplete" || p.base_species == "zygardemega") }
+    /// pokemon.updateMaxHp: Champions HP = base + SP + 75
+    pub fn update_max_hp(&mut self, m: MonRef) {
+        let sp = self.p(m).species;
+        let new_max = self.dex.species[sp].stats[0] + self.p(m).evs[0] + 75;
+        let p = self.pm(m);
+        if new_max != p.base_maxhp { p.base_maxhp = new_max; p.hp = if p.hp <= 0 { 0 } else { (new_max - (p.maxhp - p.hp)).max(1) }; p.maxhp = new_max; }
     }
     /// Champions formeChange(species, source, isPermanent=true)
     pub fn forme_change_permanent(&mut self, m: MonRef, sp: Id, source: Option<Eff>) {
@@ -531,9 +553,7 @@ impl Battle {
         self.pm(m).base_species = sp;
         // updateMaxHp: Champions HP = base + SP + 75
         let sd = self.dex.species[sp].clone();
-        let new_max = sd.stats[0] + self.p(m).evs[0] + 75;
-        let p = self.pm(m);
-        if new_max != p.base_maxhp { p.base_maxhp = new_max; p.hp = if p.hp <= 0 { 0 } else { (new_max - (p.maxhp - p.hp)).max(1) }; p.maxhp = new_max; }
+        self.update_max_hp(m);
         // formeChange(.., isPermanent): only an item (Mega Stone) logs -mega and sets moveThisTurnResult; Disguise and Ice Face keep
         // the ability and its state (busted) (2026-10-12: the engine did all of it for every source)
         if source.map(|e| e.kind == Kind::Item).unwrap_or(false) {
@@ -1559,10 +1579,15 @@ impl Battle {
         let n = self.mon_name(m); let s = self.p(m).status; self.add(&["-curestatus", &n, s]);
         self.set_status(m, "", None, None, false); true
     }
-    pub fn add_volatile(&mut self, m: MonRef, v: &str, source: Option<MonRef>, src_eff: Option<Eff>) -> RV {
+    pub fn add_volatile(&mut self, m: MonRef, v: &str, source: Option<MonRef>, src_eff: Option<Eff>) -> RV { self.add_volatile_ex(m, v, source, src_eff, None) }
+    /// pokemon.addVolatile(status, source, sourceEffect, linkedStatus): with a linked status (2026-11-06: Thousand Waves' 'trapper'),
+    /// the source gets that volatile too and each state lists the other Pokemon (linkedPokemon / linkedStatus, as Showdown stores them),
+    /// so either one ending, switching out or fainting ends its partner's (remove_linked_volatiles)
+    pub fn add_volatile_ex(&mut self, m: MonRef, v: &str, source: Option<MonRef>, src_eff: Option<Eff>, linked: Option<&str>) -> RV {
         let v = id(v);
         let cd = self.dex.conds.get(v);
         if self.p(m).hp == 0 && !cd.map(|c| c.b("affectsFainted")).unwrap_or(false) { return RV::B(false); }
+        if linked.is_some() && source.map(|s| self.p(s).hp == 0).unwrap_or(false) { return RV::B(false); }
         let (mut source, mut src_eff) = (source, src_eff);
         if let Some(ev) = &self.event { if source.is_none() { source = ev.source; } if src_eff.is_none() { src_eff = self.effect; } }
         let source = source.or(Some(m));
@@ -1587,15 +1612,45 @@ impl Battle {
         }
         let r = self.single_event("Start", Eff::cond(v), Some(SLoc::Vol(m, v)), Tgt::Mon(m), source, src_eff, RV::Undef);
         if !r.truthy() { self.pm(m).volatiles.retain(|(k, _)| *k != v); return r; }
+        if let (Some(l), Some(s)) = (linked, source) {
+            let l = id(l);
+            if find(&self.p(s).volatiles, l).is_none() {
+                self.add_volatile_ex(s, l, Some(m), src_eff, None);
+                if let Some(st) = find_mut(&mut self.pm(s).volatiles, l) { st.set("linkedPokemon", SV::L(vec![m])); st.set("linkedStatus", SV::E(EType::Condition, v)); }
+            } else if let Some(st) = find_mut(&mut self.pm(s).volatiles, l) {
+                let mut lp = match st.get("linkedPokemon") { Some(SV::L(x)) => x.clone(), _ => vec![] }; lp.push(m); st.set("linkedPokemon", SV::L(lp));
+            }
+            if let Some(st) = find_mut(&mut self.pm(m).volatiles, v) { st.set("linkedPokemon", SV::L(vec![s])); st.set("linkedStatus", SV::S(l)); }
+        }
         RV::B(true)
     }
     pub fn remove_volatile(&mut self, m: MonRef, v: &str) -> bool {
         if self.p(m).hp == 0 { return false; }
         let v = id(v);
-        if find(&self.p(m).volatiles, v).is_none() { return false; }
+        let Some(st) = find(&self.p(m).volatiles, v) else { return false };
+        let link = linked_of(st);
         self.single_event("End", Eff::cond(v), Some(SLoc::Vol(m, v)), Tgt::Mon(m), None, None, RV::Undef);
         self.pm(m).volatiles.retain(|(k, _)| *k != v);
+        if let Some((ls, lp)) = link { self.remove_linked_volatiles(m, ls, lp); }
         true
+    }
+    /// pokemon.removeLinkedVolatiles(linkedStatus, linkedPokemon): m leaves each linked Pokemon's list; a list left empty ends that volatile
+    pub fn remove_linked_volatiles(&mut self, m: MonRef, status: Id, linked: Vec<MonRef>) {
+        for lp in linked {
+            let Some(st) = find_mut(&mut self.pm(lp).volatiles, status) else { continue };
+            let mut list = match st.get("linkedPokemon") { Some(SV::L(x)) => x.clone(), _ => vec![] };
+            // splice(indexOf(this), 1): an absent entry (-1) takes the last one
+            match list.iter().position(|x| *x == m) { Some(i) => { list.remove(i); } None => { list.pop(); } }
+            let empty = list.is_empty();
+            st.set("linkedPokemon", SV::L(list));
+            if empty { self.remove_volatile(lp, status); }
+        }
+    }
+    /// clearVolatile's loop: removeLinkedVolatiles for each of m's volatiles that has a linkedStatus
+    pub fn remove_all_linked(&mut self, m: MonRef) {
+        if !self.p(m).volatiles.iter().any(|(_, s)| s.get("linkedStatus").is_some()) { return; }
+        let links: Vec<(Id, Vec<MonRef>)> = self.p(m).volatiles.iter().filter_map(|(_, s)| linked_of(s)).collect();
+        for (ls, lp) in links { self.remove_linked_volatiles(m, ls, lp); }
     }
     pub fn add_side_condition(&mut self, s: u8, c: &str, source: Option<MonRef>, src_eff: Option<Eff>) -> RV {
         let c = id(c);
@@ -1948,6 +2003,13 @@ impl Battle {
     }
 }
 
+/// a volatile's link (linkedStatus, linkedPokemon), when it has one: the status is a string on the volatile the move gave (Thousand
+/// Waves' 'trapper') and the condition itself on its partner, as Showdown's export writes them
+fn linked_of(st: &EState) -> Option<(Id, Vec<MonRef>)> {
+    let ls = match st.get("linkedStatus") { Some(SV::S(x)) => *x, Some(SV::E(_, x)) => *x, _ => return None };
+    let lp = match st.get("linkedPokemon") { Some(SV::L(l)) => l.clone(), _ => vec![] };
+    Some((ls, lp))
+}
 pub fn simple_action(choice: Choice, order: f64) -> Action {
     Action { choice, order, priority: 0.0, fractional_priority: 0.0, speed: 0.0, sub_order: 0.0, effect_order: 0.0, pokemon: None, target_loc: 0,
              original_target: None, am: None, mega: false, source_effect: None, target: None }

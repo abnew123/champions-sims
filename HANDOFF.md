@@ -1400,6 +1400,19 @@ registrations since its second version) and checks reachability of real logs in 
   10:15 am: "deploy v41 to the bot"): battlesim-champ29-bot -> champ-bot-2026-11-05 (v41, `bin/champ-bot-2026-11-05.sha256`), TR_HEAD in
   bot/position.py, both clients restarted at 10:20 am (they had sat at "not logged in yet" since a socket close at 9:25 am, so no game was
   in progress); Bo3 still on Frankfurt-239.
+- **Rain study (2026-11-05/06; the user: "let's study the rain matchup in self-play")**: bot/rain_study.py + pssim/rain_matrix.sh, results
+  in pssim/results/rain (git-ignored). Two ladder bots' Pelipper + Archaludon sixes lead Basculegion-F (Focus Sash, special) + Mega
+  Golisopod or Charizard + Grimmsnarl; brain.sheet_pick files every Basculegion-F six under the sheet's "Rain: Archaludon + Pelipper (no
+  Grimmsnarl)" card, whose four modeled sixes have none of them, so the bot brought Incineroar + Torkoal / Blastoise + Farigiraf (real
+  31/111 against them). Fresh-seed run (TAG=big, G0 3000, 96 games a pairing, v41, configs 0-2 weighted 51/36/22), paired against that
+  four: Blastoise + Incineroar / Farigiraf + Torkoal **+25.2 +- 4.3**, Incineroar + Kingambit / Blastoise + Torkoal +26.6 +- 4.2. The TR
+  sheet's cross-check on the 56 confirmation jobs (sheets/trick-room-six/work/rain_check): Blastoise + Incineroar +23.8 +- 5.2 (v23p2),
+  +20.3 +- 6.1 (v38p2); Kingambit + Incineroar +6.2 / +6.9 only. One-variable runs on the Basculegion-F configs (0/2/5, G0 1000, G 32):
+  BATTLE_EVAL=0 takes Kingambit + Incineroar from 78.0 to 34.7% (its edge is the one-turn search's; the four has no Farigiraf, so Trick
+  Room never goes up and TR_HEAD cannot touch it); a zero TR_HEAD (results/rain/trhead_zero.json) leaves Blastoise + Incineroar 57.1 ->
+  59.4 and drops the card's four 34.8 -> 24.3. Robust answer: Blastoise + Incineroar lead (two Fake Outs, Blastoise resists Muddy Water and
+  Ice Beam, their rain boosts Water Spout; Torkoal + Incineroar's Fire is halved and the bot switched Torkoal out on turn 1 in 16 of 16
+  logged games). No card or bring change without the user's go-ahead.
 
 ## The climb's simulator against the bot's ladder games (2026-10-16; the user: check the sim before trusting what the climb finds)
 bot/ladder_sim.py + pssim/ladder_sim.sh: the bot's 1,128 saved games (689 Bo3, 439 Bo1) rebuilt at turn 1 as the bot saw them (botpos,

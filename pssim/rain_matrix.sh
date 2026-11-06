@@ -10,10 +10,10 @@ SP=$PWD/results/rain; T=${T:-6}; G=${G:-4}; G0=${G0:-0}; BUDGET=${BUDGET:-20000}
 OUTD=$SP/${TAG:-matrix}; mkdir -p $SP/grid $OUTD
 JOBS=${JOBS:-$SP/jobs.json}   # JOBS: another job list (bot/rain_study.py confirm)
 node ../native/battle_starts.js $JOBS $SP/${TAG:-matrix}_starts.jsonl $G $G0 || exit 1
-node -e "const n=JSON.parse(require('fs').readFileSync('$JOBS')).length; require('fs').writeFileSync('$SP/${TAG:-matrix}_jobs.json', JSON.stringify([...Array(n).keys()]))"
+node -e "const n=JSON.parse(require('fs').readFileSync('$JOBS')).length; require('fs').writeFileSync('$SP/${TAG:-matrix}_idx.json', JSON.stringify([...Array(n).keys()]))"   # not <TAG>_jobs.json: that can be JOBS itself
 F=(RACE_TIES=avg RACE=1 TRSYM=1 EG_MEGA_TIE=0 GRID_DIR=$SP/grid CALC_DATA=../native/champions_data_full.json RACE_PRIO=1 FEATS22=1
    EG_VALUE=egvalue9_sym2.json EG_VNET=$PWD/../bot/value/vnet_h64_search_acc.json BATTLE_NS=1 BATTLE_EVAL=1 BATTLE_EVAL_BUDGET=$BUDGET
    VNET_PERISH=1 VNET_PROGRESS=1 PERISH_DOOM=1 TR_HEAD=$PWD/../bot/value/trhead_v41.json ${=EXTRA:-})
-echo "$(date +%H:%M:%S) $SP/${TAG:-matrix}_jobs.json -> $OUTD, $T threads (rain study: Trick Room six bring matrix, $G games a four)" > rain_${TAG:-matrix}.log
+echo "$(date +%H:%M:%S) $SP/${TAG:-matrix}_idx.json -> $OUTD, $T threads (rain study: Trick Room six bring matrix, $G games a four)" > rain_${TAG:-matrix}.log
 env $F nice -n 10 $B battle $ED $SP/${TAG:-matrix}_starts.jsonl $OUTD $T >> rain_${TAG:-matrix}.log 2>&1
 echo "$(date +%H:%M:%S) done: rain ${TAG:-matrix}" >> rain_${TAG:-matrix}.log

@@ -105,6 +105,12 @@ SIMS = {
     # replaces v40's TR_CORR, left out). Bot-only settings (Bo3 contempt, the back-row guess) are out. v41n1: one luck seed per cell.
     'v41': dict(bin='champ-battle-v41', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V41_ENV)),
     'v41n1': dict(bin='champ-battle-v41', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V41_ENV, BATTLE_NS='1')),
+    # v42 (Battle sim, 2026-11-06, commit e2dfbc8; the user asked for likely M-D abilities ahead of the announcement): v41 plus Commander
+    # with Order Up, Soul-Heart, Storm Drain, Water Veil, Bad Dreams, Dark Aura / Aura Break, Power Construct, Thousand Arrows / Waves,
+    # Core Enforcer, Dark Void's Darkrai check, Ion Deluge. M-C games are identical to v41 (search on and off), so M-C results stand;
+    # for M-D, the same flags. The value net doesn't model Commander and has never seen these species; Mega stats are placeholders.
+    'v42': dict(bin='champ-battle-v42', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V41_ENV)),
+    'v42n1': dict(bin='champ-battle-v42', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V41_ENV, BATTLE_NS='1')),
 }
 def sim(): return os.environ.get('TS_SIM', 'v3')
 def out_tag(seed0, per_job): return f'{seed0}_{per_job}' if sim() == 'v3' else f'{sim()}_{seed0}_{per_job}'

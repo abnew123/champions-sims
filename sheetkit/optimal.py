@@ -26,8 +26,16 @@ def _w(sheet, *p): return sheet.w(OUT, *p)
 
 def opt(sheet, k, default):
     """sheet.json "optimal" settings, for a run that has to be cheaper: sixes (per card, most common first), screen_games (per four
-    where a card has several sixes), answers (their strongest fours per six that the candidates meet), candidates (ours, best first)"""
+    where a card has several sixes), answers (their strongest fours per six that the candidates meet), candidates (ours, best first);
+    and extra (a file in the team folder: see extra())"""
     return sheet.cfg.get('optimal', {}).get(k, default)
+
+def extra(sheet):
+    """sixes a card's pool misses and fours of ours to try against them, from sheet.json "optimal" "extra" (a file in the team folder):
+    {card: {"share": the card's weight they take together (split by games), "src": where they come from, "sixes": [{label, games, six}],
+    "candidates": [[lead, back], ...]}}. They come after the pool's sixes, so results played before keep their six numbers."""
+    f = opt(sheet, 'extra', None)
+    return rj(sheet.p(f)) if f else {}
 
 def pool_sixes(sheet):
     """per tab, the TOP_SIXES most common real sixes in Battle sim's pool (pssim/opp_pool.py: Showdown Bo3 sides with open team sheets),
@@ -71,10 +79,14 @@ def card_sixes(sheet):
     os.remove(tmp); return out
 
 def sixes(sheet):
-    """the opposing sixes per tab or card, cut to the "sixes" most common (weights renormalised)"""
-    S = _sixes(sheet); n = opt(sheet, 'sixes', 99); out = {}
+    """the opposing sixes per tab or card, cut to the "sixes" most common (weights renormalised), then the extra file's (extra())"""
+    S = _sixes(sheet); n = opt(sheet, 'sixes', 99); X = extra(sheet); out = {}
     for a, ts in S.items():
         ts = ts[:n]; W = sum(t['weight'] for t in ts); out[a] = [dict(t, weight=t['weight'] / W) for t in ts]
+        if a in X:
+            x = X[a]; g = sum(t['games'] for t in x['sixes'])
+            out[a] = [dict(t, weight=t['weight'] * (1 - x['share'])) for t in out[a]] + \
+                     [dict(t, weight=x['share'] * t['games'] / g, count=t['games'], extra=True) for t in x['sixes']]
     return out
 
 def _sixes(sheet):
@@ -102,6 +114,17 @@ def candidates(sheet, a):
     pick = rj(sheet.p('picks.json'))['picks'][a]
     if not any(set(l) == set(pick['lead']) and set(b) == set(pick['back']) for l, b in out): out.append((pick['lead'], pick['back']))
     return [(list(l), list(b)) for l, b in out]
+
+def capped(sheet, a):
+    """the candidates a matrix plays: candidates() cut to the sheet's "candidates", then the extra file's for the card (never cut)"""
+    out = candidates(sheet, a)[:opt(sheet, 'candidates', 99)]
+    for l, b in extra(sheet).get(a, {}).get('candidates', []):
+        if four_key(l, b) not in {four_key(*c) for c in out}: out.append((sheet.lead(l), sheet.back(b)))
+    return out
+
+def next_round(sheet):
+    """the number of the next later round's queues (round 2, 3, ...; the first extra round of the Trick Room Six run of 2026-10-06 is r1)"""
+    return 1 + max([int(m.group(1)) for p in queues(sheet, 'screen') + queues(sheet, 'matrix') for m in [re.search(r'_r(\d+)', p)] if m] + [1])
 
 def job(sheet, a, si, lead, back, theirs):
     return {'mine': [sheet.team[n] for n in lead + back], 'theirs': theirs,
@@ -157,7 +180,7 @@ def matrix_jobs(sheet, scr, archs, top, have=None):
     jobs = []; have = have or {}
     for a in ARCHS:
         if a not in archs: continue
-        cands = candidates(sheet, a)[:opt(sheet, 'candidates', 99)]
+        cands = capped(sheet, a)
         for (arch, si), rows in sorted(scr.items()):
             if arch != a: continue
             for _, names, theirs in rows[:top]:
@@ -200,8 +223,7 @@ def run_more(sheet, threads, log):
     todo = list(target)
     if not todo: print("every tab's best four has been searched; nothing to do"); return
     print(f"{len(todo)} tabs: their best four's answers not searched yet")
-    n = 1 + max([int(m.group(1)) for p in queues(sheet, 'screen') for m in [re.search(r'_r(\d+)_', p)] if m] + [1])    # round 2, 3, ...
-                                                                  # (the first extra round of the Trick Room Six run of 2026-10-06 is named r1)
+    n = next_round(sheet)
     g8 = opt(sheet, 'screen_games', 8)
     for games in (16, g8):
         jobs = [job(sheet, a, si, *target[a], f)
@@ -214,9 +236,37 @@ def run_more(sheet, threads, log):
     wj(jobs, f'{d}/matrix_r{n}.json')
     P.battle_run(sheet, 'optimal', f'{d}/matrix_r{n}.json', f'{d}/matrix_r{n}', MATRIX_GAMES, MATRIX_G0, threads, None, log)
 
+def run_extra(sheet, threads, log):
+    """the extra file's sixes and candidates (extra()): every four of the card already searched is screened against every four of each
+    extra six (so it stays searched), then every candidate, the extra ones included, plays each six's strongest answers from all those
+    screens; cells already played are skipped, so it resumes. Then the usual "more" rounds."""
+    X = extra(sheet); todo = [a for a in ARCHS if a in X]
+    if not todo: print("no extra sixes or candidates in the sheet; nothing to do"); return
+    S6 = sixes(sheet); d = _w(sheet); n = next_round(sheet); g8 = opt(sheet, 'screen_games', 8); scr = screen_results(sheet)
+    four = lambda k: (sheet.lead(list(k[0])), sheet.back(list(k[1])))
+    jobs = [job(sheet, a, si, *four(k), f) for a in todo for k in screened(sheet)[a] for si in range(len(S6[a]))
+            if (a, si, k) not in scr for f in fours_of(S6[a][si]['six'])]
+    if jobs:
+        wj(jobs, f'{d}/screen_r{n}_{g8}.json')
+        P.battle_run(sheet, 'optimal', f'{d}/screen_r{n}_{g8}.json', f'{d}/screen_r{n}_{g8}', g8, SCREEN_G0, threads, None, log)
+    scr = screen_results(sheet); M = matrix_cells(sheet); done = screened(sheet); jobs = []; seen = set()
+    for a in todo:
+        for si in range(len(S6[a])):
+            ans = {}
+            for k in done[a]:
+                for _, names, theirs in scr.get((a, si, k), [])[:opt(sheet, 'answers', 3)]: ans['+'.join(names)] = theirs
+            for lead, back in capped(sheet, a):
+                for names, theirs in ans.items():
+                    j = job(sheet, a, si, lead, back, theirs)
+                    if (si, names) not in M.get((a, ('+'.join(lead), '+'.join(back))), {}) and P.job_key(j) not in seen: seen.add(P.job_key(j)); jobs.append(j)
+    if not jobs: print("every candidate has met every answer; nothing to do"); return
+    wj(jobs, f'{d}/matrix_r{n}.json')
+    P.battle_run(sheet, 'optimal', f'{d}/matrix_r{n}.json', f'{d}/matrix_r{n}', MATRIX_GAMES, MATRIX_G0, threads, None, log)
+
 def run(sheet, threads=None, force=False, stage='all'):
     threads = threads_arg(threads, force); log = RunLog(sheet, OUT)
     if stage == 'more': return run_more(sheet, threads, log)
+    if stage == 'extra': return run_extra(sheet, threads, log)
     if stage in ('all', 'screen'): run_screen(sheet, threads, log)
     if stage in ('all', 'matrix'): run_matrix(sheet, threads, log)
     if stage == 'all':                                            # later rounds' queues: play whatever is missing (e.g. moved out by

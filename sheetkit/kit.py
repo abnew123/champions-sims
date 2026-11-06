@@ -15,7 +15,7 @@
   python3 sheetkit/kit.py <team> confirm decide [--write]  paired on fresh games; --write updates picks.json
   python3 sheetkit/kit.py <team> t1 jobs | run [--samples 12] [--workers N] | solve
   python3 sheetkit/kit.py <team> t1 redo --only Garchomp,Golisopod   results with those Pokemon in a lead set aside for the next run
-  python3 sheetkit/kit.py <team> optimal run [--threads N] [--only screen|matrix|more] | report  both sides pick their four -> optimal.json
+  python3 sheetkit/kit.py <team> optimal run [--threads N] [--only screen|matrix|more|extra] | report  both sides pick their four -> optimal.json
                                                            (OPTIMAL_SIXES=pool: against real sixes -> optimal_pool.json)
   python3 sheetkit/kit.py <team> guide run [--games 64] [--g0 7000] [--threads N] | report   game plans and team-preview tells -> guide.json
   python3 sheetkit/kit.py <team> page [--compare other.html]   -> sheets/<team>/sheet.html
@@ -117,7 +117,7 @@ def has_moves(sheet, d, r, moves, cache={}):
     mine = any(idm(m) in moves for n in r.get('lead', []) + r.get('back', []) for m in sheet.team.get(n, {}).get('moves', []))
     if mine: return True
     if 'six' in r and r.get('arch'):                              # an optimal result: their sets are the real six's (by species, so a
-        if 'sixes' not in cache: cache['sixes'] = rj(sheet.w('optimal', 'sixes.json'))      # set-aside result with an old job number works too)
+        if 'sixes' not in cache: import optimal; cache['sixes'] = optimal.sixes(sheet)        # set-aside result with an old job number works too; the extra file's sixes included)
         six = {x['species']: x for x in cache['sixes'][r['arch']][r['six']]['six']}
         return any(idm(m) in moves for sp in r.get('theirs', []) for m in six.get(sp, {}).get('moves', []))
     if os.path.exists(d + '.json'):                               # an optimal queue: the opposing sets are in the job

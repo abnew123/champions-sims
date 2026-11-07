@@ -104,11 +104,19 @@ function send(s) {   // a send while the socket is down (a reconnect after the M
   const sp = s.split('|'); if (rooms[sp[0]] && /^\/(choose|team) /.test(sp[1] || '')) rooms[sp[0]].waitingSince = Date.now();
   ws.send(s); }
 function connect() {
-  ws = new WebSocket(WS);
+  const w = ws = new WebSocket(WS);
   ws.onmessage = e => { for (const m of String(e.data).split('\n>').map((x, i) => i ? '>' + x : x)) onMessage(m); };
   // me = null: a new connection starts as a guest, which is not a logout (relogin would count it toward its three-an-hour stop)
   ws.onclose = () => { log('socket closed; reconnecting in 10 s'); searching = false; me = null; setTimeout(connect, 10000); };
   ws.onerror = () => {};
+  // still not logged in 60 s after connecting: drop this socket and connect again (2026-11-07: after the Mac slept from 1:21 pm and woke
+  // at 3:11 pm, both clients' reconnects hung, never opening or closing, and they sat "not logged in yet" until restarted at 4:27 pm)
+  setTimeout(() => {
+    if (ws !== w || me) return;
+    log('not logged in 60 s after connecting; connecting again');
+    w.onclose = w.onmessage = null; try { w.close(); } catch (_) {}
+    searching = false; connect();
+  }, 60000);
 }
 async function login(challstr) {
   if (!acct.password) { send(`|/trn ${acct.name},0,`); return; }   // a guest name on a local --no-security server

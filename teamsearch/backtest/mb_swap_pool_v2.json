@@ -1,0 +1,1985 @@
+[
+ {
+  "forme": "Kingambit",
+  "use": 42.9,
+  "cluster_share": 31,
+  "gid": "Kingambit#2",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Kingambit",
+  "use": 42.9,
+  "cluster_share": 29,
+  "gid": "Kingambit#5",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Kingambit",
+  "use": 42.9,
+  "cluster_share": 21,
+  "gid": "Kingambit#1",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Kingambit",
+  "use": 42.9,
+  "cluster_share": 10,
+  "gid": "Kingambit#3",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Sneasler",
+  "use": 33.8,
+  "cluster_share": 51,
+  "gid": "Sneasler#5",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Sneasler",
+  "use": 33.8,
+  "cluster_share": 42,
+  "gid": "Sneasler#3",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Garchomp",
+  "use": 32.8,
+  "cluster_share": 50,
+  "gid": "Garchomp#18",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Garchomp",
+  "use": 32.8,
+  "cluster_share": 24,
+  "gid": "Garchomp#1",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Garchomp",
+  "use": 32.8,
+  "cluster_share": 14,
+  "gid": "Garchomp#39",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Basculegion",
+  "use": 31.5,
+  "cluster_share": 38,
+  "gid": "Basculegion#2",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Basculegion",
+  "use": 31.5,
+  "cluster_share": 28,
+  "gid": "Basculegion#1",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Basculegion",
+  "use": 31.5,
+  "cluster_share": 20,
+  "gid": "Basculegion#3",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Basculegion",
+  "use": 31.5,
+  "cluster_share": 7,
+  "gid": "Basculegion#10",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Incineroar",
+  "use": 31.0,
+  "cluster_share": 65,
+  "gid": "Incineroar#1",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Incineroar",
+  "use": 31.0,
+  "cluster_share": 12,
+  "gid": "Incineroar#104",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Incineroar",
+  "use": 31.0,
+  "cluster_share": 8,
+  "gid": "Incineroar#22",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Whimsicott",
+  "use": 27.8,
+  "cluster_share": 75,
+  "gid": "Whimsicott#1",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Whimsicott",
+  "use": 27.8,
+  "cluster_share": 10,
+  "gid": "Whimsicott#27",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Whimsicott",
+  "use": 27.8,
+  "cluster_share": 7,
+  "gid": "Whimsicott#2",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Charizard-Mega-Y",
+  "use": 24.1,
+  "cluster_share": 100,
+  "gid": "M-Charizard Y#29",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Farigiraf",
+  "use": 23.8,
+  "cluster_share": 70,
+  "gid": "Farigiraf#94",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Farigiraf",
+  "use": 23.8,
+  "cluster_share": 18,
+  "gid": "Farigiraf#95",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Sinistcha",
+  "use": 22.8,
+  "cluster_share": 26,
+  "gid": "Sinistcha#1",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Sinistcha",
+  "use": 22.8,
+  "cluster_share": 24,
+  "gid": "Sinistcha#20",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Sinistcha",
+  "use": 22.8,
+  "cluster_share": 17,
+  "gid": "Sinistcha#12",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Sinistcha",
+  "use": 22.8,
+  "cluster_share": 16,
+  "gid": "Sinistcha#2",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Sinistcha",
+  "use": 22.8,
+  "cluster_share": 6,
+  "gid": "Sinistcha#32",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Floette-Mega",
+  "use": 19.2,
+  "cluster_share": 100,
+  "gid": "M-Floette#13",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Sylveon",
+  "use": 18.4,
+  "cluster_share": 92,
+  "gid": "Sylveon#25",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Staraptor-Mega",
+  "use": 18.0,
+  "cluster_share": 100,
+  "gid": "M-Staraptor#1",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Raichu-Mega-Y",
+  "use": 14.4,
+  "cluster_share": 100,
+  "gid": "M-Raichu Y#1",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Pelipper",
+  "use": 13.5,
+  "cluster_share": 38,
+  "gid": "Pelipper#3",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Pelipper",
+  "use": 13.5,
+  "cluster_share": 36,
+  "gid": "Pelipper#4",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Pelipper",
+  "use": 13.5,
+  "cluster_share": 11,
+  "gid": "Pelipper#42",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Archaludon",
+  "use": 13.4,
+  "cluster_share": 80,
+  "gid": "Archaludon#28",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Delphox-Mega",
+  "use": 12.5,
+  "cluster_share": 100,
+  "gid": "M-Delphox#10",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Gholdengo",
+  "use": 11.1,
+  "cluster_share": 61,
+  "gid": "Gholdengo#22",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Gholdengo",
+  "use": 11.1,
+  "cluster_share": 10,
+  "gid": "Gholdengo#25",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Gholdengo",
+  "use": 11.1,
+  "cluster_share": 7,
+  "gid": "Gholdengo#26",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Froslass-Mega",
+  "use": 10.9,
+  "cluster_share": 100,
+  "gid": "M-Froslass#1",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Venusaur",
+  "use": 9.9,
+  "cluster_share": 41,
+  "gid": "Venusaur#1",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Venusaur",
+  "use": 9.9,
+  "cluster_share": 39,
+  "gid": "Venusaur#2",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Venusaur",
+  "use": 9.9,
+  "cluster_share": 7,
+  "gid": "Venusaur#15",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Venusaur",
+  "use": 9.9,
+  "cluster_share": 6,
+  "gid": "Venusaur#7",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Swampert-Mega",
+  "use": 9.6,
+  "cluster_share": 100,
+  "gid": "M-Swampert#1",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Grimmsnarl",
+  "use": 9.4,
+  "cluster_share": 87,
+  "gid": "Grimmsnarl#2",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Tyranitar-Mega",
+  "use": 8.7,
+  "cluster_share": 100,
+  "gid": "M-Tyranitar#2",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Aerodactyl-Mega",
+  "use": 8.6,
+  "cluster_share": 100,
+  "gid": "M-Aerodactyl#3",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Milotic",
+  "use": 8.3,
+  "cluster_share": 57,
+  "gid": "Milotic#57",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Milotic",
+  "use": 8.3,
+  "cluster_share": 34,
+  "gid": "Milotic#58",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Scovillain-Mega",
+  "use": 8.2,
+  "cluster_share": 100,
+  "gid": "M-Scovillain#6",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Blastoise-Mega",
+  "use": 8.0,
+  "cluster_share": 100,
+  "gid": "M-Blastoise#1",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Dragonite-Mega",
+  "use": 7.7,
+  "cluster_share": 100,
+  "gid": "M-Dragonite#3",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Arcanine-Hisui",
+  "use": 7.4,
+  "cluster_share": 78,
+  "gid": "Arcanine-H#1",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Arcanine-Hisui",
+  "use": 7.4,
+  "cluster_share": 7,
+  "gid": "Arcanine-H#13",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Arcanine-Hisui",
+  "use": 7.4,
+  "cluster_share": 6,
+  "gid": "Arcanine-H#14",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Gengar-Mega",
+  "use": 7.3,
+  "cluster_share": 100,
+  "gid": "M-Gengar#4",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Ninetales-Alola",
+  "use": 7.0,
+  "cluster_share": 28,
+  "gid": "Ninetales-Alola#14",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Ninetales-Alola",
+  "use": 7.0,
+  "cluster_share": 25,
+  "gid": "Ninetales-Alola#15",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Ninetales-Alola",
+  "use": 7.0,
+  "cluster_share": 20,
+  "gid": "Ninetales-Alola#16",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Ninetales-Alola",
+  "use": 7.0,
+  "cluster_share": 18,
+  "gid": "Ninetales-Alola#1",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Lycanroc-Dusk",
+  "use": 6.7,
+  "cluster_share": 93,
+  "gid": "Lycanroc-Dusk#4",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Excadrill",
+  "use": 6.7,
+  "cluster_share": 72,
+  "gid": "Excadrill#1",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Excadrill",
+  "use": 6.7,
+  "cluster_share": 10,
+  "gid": "Excadrill#10",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Excadrill",
+  "use": 6.7,
+  "cluster_share": 10,
+  "gid": "Excadrill#11",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Torkoal",
+  "use": 6.6,
+  "cluster_share": 81,
+  "gid": "Torkoal#3",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Torkoal",
+  "use": 6.6,
+  "cluster_share": 7,
+  "gid": "Torkoal#14",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Torkoal",
+  "use": 6.6,
+  "cluster_share": 5,
+  "gid": "Torkoal#15",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Sinistcha-Masterpiece",
+  "use": 6.4,
+  "cluster_share": 30,
+  "gid": "Sinistcha-Masterpiece#4",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Sinistcha-Masterpiece",
+  "use": 6.4,
+  "cluster_share": 24,
+  "gid": "Sinistcha-Masterpiece#2",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Sinistcha-Masterpiece",
+  "use": 6.4,
+  "cluster_share": 16,
+  "gid": "Sinistcha-Masterpiece#5",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Sinistcha-Masterpiece",
+  "use": 6.4,
+  "cluster_share": 10,
+  "gid": "Sinistcha-Masterpiece#6",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Sinistcha-Masterpiece",
+  "use": 6.4,
+  "cluster_share": 7,
+  "gid": "Sinistcha-Masterpiece#7",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Sinistcha-Masterpiece",
+  "use": 6.4,
+  "cluster_share": 5,
+  "gid": "Sinistcha-Masterpiece#8",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Rotom-Wash",
+  "use": 6.3,
+  "cluster_share": 34,
+  "gid": "Rotom-Wash#2",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Rotom-Wash",
+  "use": 6.3,
+  "cluster_share": 25,
+  "gid": "Rotom-Wash#3",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Rotom-Wash",
+  "use": 6.3,
+  "cluster_share": 18,
+  "gid": "Rotom-Wash#4",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Rotom-Wash",
+  "use": 6.3,
+  "cluster_share": 6,
+  "gid": "Rotom-Wash#5",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Talonflame",
+  "use": 5.7,
+  "cluster_share": 48,
+  "gid": "Talonflame#11",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Talonflame",
+  "use": 5.7,
+  "cluster_share": 19,
+  "gid": "Talonflame#12",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Talonflame",
+  "use": 5.7,
+  "cluster_share": 9,
+  "gid": "Talonflame#1",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Toxapex",
+  "use": 5.4,
+  "cluster_share": 89,
+  "gid": "Toxapex#3",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Politoed",
+  "use": 5.2,
+  "cluster_share": 61,
+  "gid": "Politoed#26",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Politoed",
+  "use": 5.2,
+  "cluster_share": 14,
+  "gid": "Politoed#27",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Politoed",
+  "use": 5.2,
+  "cluster_share": 7,
+  "gid": "Politoed#28",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Politoed",
+  "use": 5.2,
+  "cluster_share": 6,
+  "gid": "Politoed#29",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Metagross-Mega",
+  "use": 5.0,
+  "cluster_share": 100,
+  "gid": "M-Metagross#4",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Dragonite",
+  "use": 5.0,
+  "cluster_share": 57,
+  "gid": "Dragonite#3",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Dragonite",
+  "use": 5.0,
+  "cluster_share": 9,
+  "gid": "Dragonite#4",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Dragonite",
+  "use": 5.0,
+  "cluster_share": 6,
+  "gid": "Dragonite#5",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Dragonite",
+  "use": 5.0,
+  "cluster_share": 6,
+  "gid": "Dragonite#6",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Mawile-Mega",
+  "use": 5.0,
+  "cluster_share": 100,
+  "gid": "M-Mawile#2",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Sableye",
+  "use": 4.8,
+  "cluster_share": 30,
+  "gid": "Sableye#7",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Sableye",
+  "use": 4.8,
+  "cluster_share": 28,
+  "gid": "Sableye#8",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Sableye",
+  "use": 4.8,
+  "cluster_share": 13,
+  "gid": "Sableye#9",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Sableye",
+  "use": 4.8,
+  "cluster_share": 11,
+  "gid": "Sableye#10",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Sableye",
+  "use": 4.8,
+  "cluster_share": 8,
+  "gid": "Sableye#11",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Primarina",
+  "use": 4.8,
+  "cluster_share": 40,
+  "gid": "Primarina#3",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Primarina",
+  "use": 4.8,
+  "cluster_share": 26,
+  "gid": "Primarina#16",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Primarina",
+  "use": 4.8,
+  "cluster_share": 16,
+  "gid": "Primarina#17",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Primarina",
+  "use": 4.8,
+  "cluster_share": 9,
+  "gid": "Primarina#18",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Aerodactyl",
+  "use": 4.6,
+  "cluster_share": 80,
+  "gid": "Aerodactyl#1",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Tyranitar",
+  "use": 4.1,
+  "cluster_share": 37,
+  "gid": "Tyranitar#3",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Tyranitar",
+  "use": 4.1,
+  "cluster_share": 31,
+  "gid": "Tyranitar#1",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Tyranitar",
+  "use": 4.1,
+  "cluster_share": 7,
+  "gid": "Tyranitar#8",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Tyranitar",
+  "use": 4.1,
+  "cluster_share": 5,
+  "gid": "Tyranitar#9",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Glimmora",
+  "use": 3.9,
+  "cluster_share": 80,
+  "gid": "Glimmora#5",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Glimmora",
+  "use": 3.9,
+  "cluster_share": 6,
+  "gid": "Glimmora#6",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Blaziken-Mega",
+  "use": 3.8,
+  "cluster_share": 100,
+  "gid": "M-Blaziken#1",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Corviknight",
+  "use": 3.8,
+  "cluster_share": 60,
+  "gid": "Corviknight#11",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Corviknight",
+  "use": 3.8,
+  "cluster_share": 13,
+  "gid": "Corviknight#12",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Corviknight",
+  "use": 3.8,
+  "cluster_share": 11,
+  "gid": "Corviknight#13",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Hydreigon",
+  "use": 3.7,
+  "cluster_share": 58,
+  "gid": "Hydreigon#1",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Hydreigon",
+  "use": 3.7,
+  "cluster_share": 13,
+  "gid": "Hydreigon#10",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Hydreigon",
+  "use": 3.7,
+  "cluster_share": 7,
+  "gid": "Hydreigon#11",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Maushold-Four",
+  "use": 3.6,
+  "cluster_share": 35,
+  "gid": "Maushold-Four#1",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Maushold-Four",
+  "use": 3.6,
+  "cluster_share": 27,
+  "gid": "Maushold-Four#2",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Maushold-Four",
+  "use": 3.6,
+  "cluster_share": 21,
+  "gid": "Maushold-Four#3",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Tsareena",
+  "use": 3.6,
+  "cluster_share": 44,
+  "gid": "Tsareena#7",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Tsareena",
+  "use": 3.6,
+  "cluster_share": 17,
+  "gid": "Tsareena#8",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Tsareena",
+  "use": 3.6,
+  "cluster_share": 11,
+  "gid": "Tsareena#9",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Tsareena",
+  "use": 3.6,
+  "cluster_share": 6,
+  "gid": "Tsareena#10",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Annihilape",
+  "use": 3.4,
+  "cluster_share": 23,
+  "gid": "Annihilape#19",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Annihilape",
+  "use": 3.4,
+  "cluster_share": 23,
+  "gid": "Annihilape#10",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Annihilape",
+  "use": 3.4,
+  "cluster_share": 21,
+  "gid": "Annihilape#20",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Annihilape",
+  "use": 3.4,
+  "cluster_share": 14,
+  "gid": "Annihilape#18",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Venusaur-Mega",
+  "use": 3.3,
+  "cluster_share": 100,
+  "gid": "M-Venusaur#4",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Kommo-o",
+  "use": 3.1,
+  "cluster_share": 45,
+  "gid": "Kommo-o#17",
+  "fallback": false,
+  "one_item": false
+ },
+ {
+  "forme": "Kommo-o",
+  "use": 3.1,
+  "cluster_share": 25,
+  "gid": "Kommo-o#1",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Kommo-o",
+  "use": 3.1,
+  "cluster_share": 8,
+  "gid": "Kommo-o#7",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Kommo-o",
+  "use": 3.1,
+  "cluster_share": 8,
+  "gid": "Kommo-o#20",
+  "fallback": true,
+  "one_item": false
+ },
+ {
+  "forme": "Camerupt-Mega",
+  "use": 3.1,
+  "cluster_share": 100,
+  "gid": "M-Camerupt#1",
+  "fallback": false,
+  "one_item": true
+ },
+ {
+  "forme": "Wigglytuff",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Wigglytuff#1",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Wigglytuff",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Wigglytuff#2",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Wigglytuff",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Wigglytuff#3",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Wigglytuff",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Wigglytuff#4",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Wigglytuff",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Wigglytuff#5",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Wigglytuff",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Wigglytuff#6",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Persian",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Persian#4",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Persian",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Persian#5",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Persian",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Persian#6",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Persian-Alola",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Persian-Alola#8",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Persian-Alola",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Persian-Alola#9",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Persian-Alola",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Persian-Alola#10",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Persian-Alola",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Persian-Alola#11",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Persian-Alola",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Persian-Alola#12",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Persian-Alola",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Persian-Alola#13",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Farfetch\u2019d",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Farfetch\u2019d#1",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Farfetch\u2019d",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Farfetch\u2019d#2",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Farfetch\u2019d",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Farfetch\u2019d#3",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Mr. Mime",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Mr. Mime#7",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Mr. Mime",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Mr. Mime#8",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Mr. Mime",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Mr. Mime#9",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Swalot",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Swalot#4",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Swalot",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Swalot#5",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Swalot",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Swalot#6",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Salamence",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Salamence#7",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Salamence",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Salamence#8",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Salamence",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Salamence#9",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Salamence",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Salamence#10",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Salamence",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Salamence#11",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Salamence",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Salamence#12",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Gogoat",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Gogoat#4",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Gogoat",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Gogoat#5",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Gogoat",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Gogoat#6",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Golisopod",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Golisopod#2",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Golisopod",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Golisopod#3",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Golisopod",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Golisopod#4",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Rillaboom",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Rillaboom#77",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Rillaboom",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Rillaboom#78",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Rillaboom",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Rillaboom#79",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Cinderace",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Cinderace#1",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Cinderace",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Cinderace#2",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Cinderace",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Cinderace#3",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Inteleon",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Inteleon#4",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Inteleon",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Inteleon#5",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Inteleon",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Inteleon#6",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Thievul",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Thievul#1",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Thievul",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Thievul#2",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Thievul",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Thievul#3",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Thievul",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Thievul#4",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Thievul",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Thievul#5",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Thievul",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Thievul#6",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Toxtricity",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Toxtricity#5",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Toxtricity",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Toxtricity#6",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Toxtricity",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Toxtricity#7",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Toxtricity-Low-Key",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Toxtricity-Low-Key#4",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Toxtricity-Low-Key",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Toxtricity-Low-Key#5",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Toxtricity-Low-Key",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Toxtricity-Low-Key#6",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Grapploct",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Grapploct#6",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Grapploct",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Grapploct#7",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Grapploct",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Grapploct#8",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Perrserker",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Perrserker#1",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Perrserker",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Perrserker#2",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Perrserker",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Perrserker#3",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Sirfetch\u2019d",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Sirfetch\u2019d#3",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Sirfetch\u2019d",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Sirfetch\u2019d#4",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Sirfetch\u2019d",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Sirfetch\u2019d#5",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Pincurchin",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Pincurchin#5",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Pincurchin",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Pincurchin#6",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Pincurchin",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Pincurchin#7",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Indeedee",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Indeedee#43",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Indeedee",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Indeedee#44",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Indeedee",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Indeedee#45",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Indeedee",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Indeedee#46",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Indeedee",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Indeedee#47",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Indeedee",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Indeedee#48",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Indeedee-F",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Indeedee-F#56",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Indeedee-F",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Indeedee-F#57",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Indeedee-F",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Indeedee-F#58",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Indeedee-F",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Indeedee-F#59",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Indeedee-F",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Indeedee-F#60",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Indeedee-F",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Indeedee-F#61",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Arboliva",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Arboliva#5",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Arboliva",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Arboliva#6",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Arboliva",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Arboliva#7",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Squawkabilly",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Squawkabilly#1",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Squawkabilly",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Squawkabilly#2",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Squawkabilly",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Squawkabilly#3",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Squawkabilly",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Squawkabilly#4",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Squawkabilly",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Squawkabilly#5",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Squawkabilly",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Squawkabilly#6",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Mabosstiff",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Mabosstiff#1",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Mabosstiff",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Mabosstiff#2",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Mabosstiff",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Mabosstiff#3",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Baxcalibur",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Baxcalibur#3",
+  "fallback": false,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Baxcalibur",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Baxcalibur#4",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Baxcalibur",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "Baxcalibur#5",
+  "fallback": true,
+  "one_item": false,
+  "blind": true
+ },
+ {
+  "forme": "Absol-Mega-Z",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "M-Absol Z#9",
+  "fallback": false,
+  "one_item": true,
+  "blind": true
+ },
+ {
+  "forme": "Salamence-Mega",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "M-Salamence#1",
+  "fallback": false,
+  "one_item": true,
+  "blind": true
+ },
+ {
+  "forme": "Salamence-Mega",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "M-Salamence#9",
+  "fallback": false,
+  "one_item": true,
+  "blind": true
+ },
+ {
+  "forme": "Garchomp-Mega-Z",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "M-Garchomp Z#14",
+  "fallback": false,
+  "one_item": true,
+  "blind": true
+ },
+ {
+  "forme": "Lucario-Mega-Z",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "M-Lucario Z#14",
+  "fallback": false,
+  "one_item": true,
+  "blind": true
+ },
+ {
+  "forme": "Golisopod-Mega",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "M-Golisopod#32",
+  "fallback": false,
+  "one_item": true,
+  "blind": true
+ },
+ {
+  "forme": "Baxcalibur-Mega",
+  "use": 0.0,
+  "cluster_share": 50,
+  "gid": "M-Baxcalibur#7",
+  "fallback": false,
+  "one_item": true,
+  "blind": true
+ }
+]

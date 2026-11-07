@@ -1,6 +1,6 @@
 // M-B backtest: Showdown's Champions data (pssim's copy predates M-C, so its legality is M-B's) for the blind-set generator
 // (build_mb.py): per species, its types, base stats, abilities with Showdown's generic ratings, and its learnable moves that are legal
-// (not 'Past') with what the generator needs. Megas learn their base species' moves. An optional third file maps species names to
+// (not 'Past') with what the generator needs (v2 adds the move flags abilities act on, secondaries, self-drops and pivots). Megas learn their base species' moves. An optional third file maps species names to
 // move ids that replace their learnset, all legal (M-C's new species: Showdown's current Champions learnsets, part of an announcement)
 //   node backtest/dexdump.js <species json list> <out json> [learnset overrides json]
 const fs = require('fs');
@@ -23,7 +23,11 @@ for (const name of JSON.parse(fs.readFileSync(inp, 'utf8'))) {
     if (!m.exists || (m.isNonstandard === 'Past' && !OVER[name]) || m.isZ || m.isMax) continue;
     moves[m.name] = {type: m.type, cat: m.category, bp: m.basePower, acc: m.accuracy === true ? 100 : m.accuracy, pri: m.priority,
                      target: m.target, multihit: m.multihit || null, recharge: !!(m.self && m.self.volatileStatus === 'mustrecharge'),
-                     charge: !!(m.flags && m.flags.charge), selfdestruct: !!m.selfdestruct, recoil: !!m.recoil};
+                     charge: !!(m.flags && m.flags.charge), selfdestruct: !!m.selfdestruct, recoil: !!m.recoil,
+                     // v2 (ability-aware values): the flags abilities key on, secondary effects (Sheer Force), self stat drops, pivots
+                     flags: Object.keys(m.flags || {}).filter(f => ['contact', 'punch', 'bite', 'slicing', 'sound', 'pulse'].includes(f)),
+                     secondary: !!(m.secondary || m.secondaries), selfdrop: !!(m.self && m.self.boosts && Object.values(m.self.boosts).some(v => v < 0)),
+                     pivot: !!m.selfSwitch && m.selfSwitch !== 'copyvolatile'};
   }
   const abilities = {};
   for (const a of Object.values(sp.abilities)) { const x = d.abilities.get(a); abilities[a] = x.exists ? x.rating : null; }

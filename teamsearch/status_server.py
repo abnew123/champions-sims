@@ -209,7 +209,8 @@ def cards():
     for logname, title, done in (('round_archverify.log', 'Finals verified against their starts (fresh games, two seeds)', 'verification done'),
                                  ('round_accrefine.log', 'Sure-hit pass (set swaps toward more sure hits, then a final check)', 'accuracy refinement done'),
                                  ('round_scoreteams.log', 'Scoring candidate teams against the current-meta pool', 'scores (win share'),
-                                 ('backtest/selfplay.log', 'M-B to M-C self-play backtest (field scoring; its climbs show as the climb card)', 'self-play backtest finished')):
+                                 ('backtest/selfplay.log', 'M-B to M-C self-play backtest (field scoring; its climbs show as the climb card)', 'self-play backtest finished'),
+                                 ('backtest/v2/selfplay.log', 'M-B to M-C self-play backtest v2 (field scoring; its climbs show as the climb card)', 'self-play backtest finished')):
         c = step_card(C(logname), title, done, bool(CD))
         if c and (not pr or pr.get('phase') == 'done' or os.path.getmtime(C(logname)) > (pr.get('at') or 0)): cards.append(c)
     if stt:

@@ -39200,5 +39200,1118 @@
 "Power Gem"
 ],
 "regional_count": 0
+},
+"Persian#4": {
+"species": "Persian",
+"item": "Life Orb",
+"ability": "Technician",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Icy Wind",
+"Snarl"
+],
+"regional_count": 0
+},
+"Persian#5": {
+"species": "Persian",
+"item": "Focus Sash",
+"ability": "Technician",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Icy Wind",
+"Snarl"
+],
+"regional_count": 0
+},
+"Persian#6": {
+"species": "Persian",
+"item": "Sitrus Berry",
+"ability": "Technician",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Icy Wind",
+"Snarl"
+],
+"regional_count": 0
+},
+"Persian-Alola#8": {
+"species": "Persian-Alola",
+"item": "Life Orb",
+"ability": "Fur Coat",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Parting Shot",
+"Protect",
+"Hyper Voice",
+"Dark Pulse"
+],
+"regional_count": 0
+},
+"Persian-Alola#9": {
+"species": "Persian-Alola",
+"item": "Focus Sash",
+"ability": "Fur Coat",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Parting Shot",
+"Protect",
+"Hyper Voice",
+"Dark Pulse"
+],
+"regional_count": 0
+},
+"Persian-Alola#10": {
+"species": "Persian-Alola",
+"item": "Sitrus Berry",
+"ability": "Fur Coat",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Parting Shot",
+"Protect",
+"Hyper Voice",
+"Dark Pulse"
+],
+"regional_count": 0
+},
+"Persian-Alola#11": {
+"species": "Persian-Alola",
+"item": "Life Orb",
+"ability": "Fur Coat",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Dark Pulse",
+"Thunderbolt"
+],
+"regional_count": 0
+},
+"Persian-Alola#12": {
+"species": "Persian-Alola",
+"item": "Focus Sash",
+"ability": "Fur Coat",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Dark Pulse",
+"Thunderbolt"
+],
+"regional_count": 0
+},
+"Persian-Alola#13": {
+"species": "Persian-Alola",
+"item": "Sitrus Berry",
+"ability": "Fur Coat",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Dark Pulse",
+"Thunderbolt"
+],
+"regional_count": 0
+},
+"Mr. Mime#7": {
+"species": "Mr. Mime",
+"item": "Life Orb",
+"ability": "Technician",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Dazzling Gleam",
+"Psychic",
+"Icy Wind"
+],
+"regional_count": 0
+},
+"Mr. Mime#8": {
+"species": "Mr. Mime",
+"item": "Focus Sash",
+"ability": "Technician",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Dazzling Gleam",
+"Psychic",
+"Icy Wind"
+],
+"regional_count": 0
+},
+"Mr. Mime#9": {
+"species": "Mr. Mime",
+"item": "Sitrus Berry",
+"ability": "Technician",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Dazzling Gleam",
+"Psychic",
+"Icy Wind"
+],
+"regional_count": 0
+},
+"Swalot#4": {
+"species": "Swalot",
+"item": "Life Orb",
+"ability": "Liquid Ooze",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Gunk Shot",
+"Earthquake",
+"Double-Edge"
+],
+"regional_count": 0
+},
+"Swalot#5": {
+"species": "Swalot",
+"item": "Focus Sash",
+"ability": "Liquid Ooze",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Gunk Shot",
+"Earthquake",
+"Double-Edge"
+],
+"regional_count": 0
+},
+"Swalot#6": {
+"species": "Swalot",
+"item": "Sitrus Berry",
+"ability": "Liquid Ooze",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Gunk Shot",
+"Earthquake",
+"Double-Edge"
+],
+"regional_count": 0
+},
+"Salamence#7": {
+"species": "Salamence",
+"item": "Life Orb",
+"ability": "Intimidate",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Tailwind",
+"Draco Meteor",
+"Heat Wave"
+],
+"regional_count": 0
+},
+"Salamence#8": {
+"species": "Salamence",
+"item": "Focus Sash",
+"ability": "Intimidate",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Tailwind",
+"Draco Meteor",
+"Heat Wave"
+],
+"regional_count": 0
+},
+"Salamence#9": {
+"species": "Salamence",
+"item": "Sitrus Berry",
+"ability": "Intimidate",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Tailwind",
+"Draco Meteor",
+"Heat Wave"
+],
+"regional_count": 0
+},
+"Salamence#10": {
+"species": "Salamence",
+"item": "Life Orb",
+"ability": "Intimidate",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Draco Meteor",
+"Heat Wave",
+"Hyper Voice"
+],
+"regional_count": 0
+},
+"Salamence#11": {
+"species": "Salamence",
+"item": "Focus Sash",
+"ability": "Intimidate",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Draco Meteor",
+"Heat Wave",
+"Hyper Voice"
+],
+"regional_count": 0
+},
+"Salamence#12": {
+"species": "Salamence",
+"item": "Sitrus Berry",
+"ability": "Intimidate",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Draco Meteor",
+"Heat Wave",
+"Hyper Voice"
+],
+"regional_count": 0
+},
+"Gogoat#4": {
+"species": "Gogoat",
+"item": "Life Orb",
+"ability": "Sap Sipper",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Leaf Blade",
+"Rock Slide",
+"Earthquake"
+],
+"regional_count": 0
+},
+"Gogoat#5": {
+"species": "Gogoat",
+"item": "Focus Sash",
+"ability": "Sap Sipper",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Leaf Blade",
+"Rock Slide",
+"Earthquake"
+],
+"regional_count": 0
+},
+"Gogoat#6": {
+"species": "Gogoat",
+"item": "Sitrus Berry",
+"ability": "Sap Sipper",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Leaf Blade",
+"Rock Slide",
+"Earthquake"
+],
+"regional_count": 0
+},
+"Rillaboom#77": {
+"species": "Rillaboom",
+"item": "Miracle Seed",
+"ability": "Grassy Surge",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Fake Out",
+"Protect",
+"Wood Hammer",
+"Grassy Glide"
+],
+"regional_count": 0
+},
+"Rillaboom#78": {
+"species": "Rillaboom",
+"item": "Life Orb",
+"ability": "Grassy Surge",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Fake Out",
+"Protect",
+"Wood Hammer",
+"Grassy Glide"
+],
+"regional_count": 0
+},
+"Rillaboom#79": {
+"species": "Rillaboom",
+"item": "Focus Sash",
+"ability": "Grassy Surge",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Fake Out",
+"Protect",
+"Wood Hammer",
+"Grassy Glide"
+],
+"regional_count": 0
+},
+"Inteleon#4": {
+"species": "Inteleon",
+"item": "Life Orb",
+"ability": "Torrent",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Snipe Shot",
+"Shadow Ball",
+"Ice Beam"
+],
+"regional_count": 0
+},
+"Inteleon#5": {
+"species": "Inteleon",
+"item": "Focus Sash",
+"ability": "Torrent",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Snipe Shot",
+"Shadow Ball",
+"Ice Beam"
+],
+"regional_count": 0
+},
+"Inteleon#6": {
+"species": "Inteleon",
+"item": "Sitrus Berry",
+"ability": "Torrent",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Snipe Shot",
+"Shadow Ball",
+"Ice Beam"
+],
+"regional_count": 0
+},
+"Toxtricity#5": {
+"species": "Toxtricity",
+"item": "Life Orb",
+"ability": "Punk Rock",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Overdrive",
+"Boomburst",
+"Sludge Bomb"
+],
+"regional_count": 0
+},
+"Toxtricity#6": {
+"species": "Toxtricity",
+"item": "Focus Sash",
+"ability": "Punk Rock",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Overdrive",
+"Boomburst",
+"Sludge Bomb"
+],
+"regional_count": 0
+},
+"Toxtricity#7": {
+"species": "Toxtricity",
+"item": "Sitrus Berry",
+"ability": "Punk Rock",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Overdrive",
+"Boomburst",
+"Sludge Bomb"
+],
+"regional_count": 0
+},
+"Toxtricity-Low-Key#4": {
+"species": "Toxtricity-Low-Key",
+"item": "Life Orb",
+"ability": "Punk Rock",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Overdrive",
+"Boomburst",
+"Sludge Bomb"
+],
+"regional_count": 0
+},
+"Toxtricity-Low-Key#5": {
+"species": "Toxtricity-Low-Key",
+"item": "Focus Sash",
+"ability": "Punk Rock",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Overdrive",
+"Boomburst",
+"Sludge Bomb"
+],
+"regional_count": 0
+},
+"Toxtricity-Low-Key#6": {
+"species": "Toxtricity-Low-Key",
+"item": "Sitrus Berry",
+"ability": "Punk Rock",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Overdrive",
+"Boomburst",
+"Sludge Bomb"
+],
+"regional_count": 0
+},
+"Grapploct#6": {
+"species": "Grapploct",
+"item": "Black Belt",
+"ability": "Technician",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Close Combat",
+"Protect",
+"Sucker Punch",
+"Mach Punch"
+],
+"regional_count": 0
+},
+"Grapploct#7": {
+"species": "Grapploct",
+"item": "Life Orb",
+"ability": "Technician",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Close Combat",
+"Protect",
+"Sucker Punch",
+"Mach Punch"
+],
+"regional_count": 0
+},
+"Grapploct#8": {
+"species": "Grapploct",
+"item": "Focus Sash",
+"ability": "Technician",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Close Combat",
+"Protect",
+"Sucker Punch",
+"Mach Punch"
+],
+"regional_count": 0
+},
+"Pincurchin#5": {
+"species": "Pincurchin",
+"item": "Life Orb",
+"ability": "Electric Surge",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Protect",
+"Rising Voltage",
+"Scald",
+"Hex"
+],
+"regional_count": 0
+},
+"Pincurchin#6": {
+"species": "Pincurchin",
+"item": "Focus Sash",
+"ability": "Electric Surge",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Protect",
+"Rising Voltage",
+"Scald",
+"Hex"
+],
+"regional_count": 0
+},
+"Pincurchin#7": {
+"species": "Pincurchin",
+"item": "Sitrus Berry",
+"ability": "Electric Surge",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Protect",
+"Rising Voltage",
+"Scald",
+"Hex"
+],
+"regional_count": 0
+},
+"Indeedee#43": {
+"species": "Indeedee",
+"item": "Life Orb",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Expanding Force",
+"Trick Room",
+"Hyper Voice"
+],
+"regional_count": 0
+},
+"Indeedee#44": {
+"species": "Indeedee",
+"item": "Focus Sash",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Expanding Force",
+"Trick Room",
+"Hyper Voice"
+],
+"regional_count": 0
+},
+"Indeedee#45": {
+"species": "Indeedee",
+"item": "Sitrus Berry",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Expanding Force",
+"Trick Room",
+"Hyper Voice"
+],
+"regional_count": 0
+},
+"Indeedee#46": {
+"species": "Indeedee",
+"item": "Life Orb",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Expanding Force",
+"Hyper Voice",
+"Dazzling Gleam"
+],
+"regional_count": 0
+},
+"Indeedee#47": {
+"species": "Indeedee",
+"item": "Focus Sash",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Expanding Force",
+"Hyper Voice",
+"Dazzling Gleam"
+],
+"regional_count": 0
+},
+"Indeedee#48": {
+"species": "Indeedee",
+"item": "Sitrus Berry",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Expanding Force",
+"Hyper Voice",
+"Dazzling Gleam"
+],
+"regional_count": 0
+},
+"Arboliva#5": {
+"species": "Arboliva",
+"item": "Life Orb",
+"ability": "Seed Sower",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Leaf Storm",
+"Dazzling Gleam"
+],
+"regional_count": 0
+},
+"Arboliva#6": {
+"species": "Arboliva",
+"item": "Focus Sash",
+"ability": "Seed Sower",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Leaf Storm",
+"Dazzling Gleam"
+],
+"regional_count": 0
+},
+"Arboliva#7": {
+"species": "Arboliva",
+"item": "Sitrus Berry",
+"ability": "Seed Sower",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Leaf Storm",
+"Dazzling Gleam"
+],
+"regional_count": 0
+},
+"M-Absol Z#9": {
+"species": "Absol",
+"item": "Absolite Z",
+"ability": "Pressure",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Sucker Punch",
+"Protect",
+"Night Slash",
+"Shadow Claw"
+],
+"regional_count": 0
+},
+"M-Lucario Z#14": {
+"species": "Lucario",
+"item": "Lucarionite Z",
+"ability": "Justified",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Aura Sphere",
+"Flash Cannon",
+"Psychic"
+],
+"regional_count": 0
 }
 }

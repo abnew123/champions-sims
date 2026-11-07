@@ -12,6 +12,7 @@ backtest/:
 Spreads: sheets don't show them; L.fill_spread fills them from Smogon's August 2026 Reg M-B Bo3 stats (TS_MOVESET, required here), else
 the nature's role default; never September's M-C stats. New sets join grid_sets.json under new ids (existing ids never change).
   TS_MOVESET=backtest/smogon_mb_2026-08_moveset.txt python3 backtest/build_mb.py
+  BLIND=2 ... : the v2 blind sets (blind2(); the user, 2026-11-07) into mb_swap_pool_v2.json and mb_blind_v2.json; the rest as v1
 """
 import json, os, sys, glob, random, datetime, collections, subprocess
 HERE = os.path.dirname(os.path.abspath(__file__)); TS = os.path.dirname(HERE); ROOT = os.path.dirname(TS)
@@ -163,8 +164,135 @@ def blind(name, d, base_d, p, items):
             out.append(dict(species=(base_d or d)['name'], item=it, ability=ability, nature=nat, moves=list(moves), kind=kind, fallback=k > 0))
     return out
 
+# ---- v2 blind sets (the user, 2026-11-07: "fix the set generator and try the second version"). v1 valued moves by their bare numbers:
+# Rillaboom never ran Grassy Glide (priority only in its own Grassy Terrain, and one attack per type kept Wood Hammer instead), Mega
+# Salamence never ran Hyper Voice (Aerilate), and sets mixed categories (a Jolly Draco Meteor, a Timid Close Combat). v2 is generic
+# game mechanics only, fixed before the v2 run and applied to every new species alike (still no M-C usage or sets):
+#   - a move's value under the set's own ability (a Mega's: its Mega ability): -ate abilities, its own terrain (x1.3, Grassy Glide
+#     priority, Expanding Force), its own weather, Technician, Tough Claws / Iron Fist / Strong Jaw / Sharpness / Punk Rock / Mega
+#     Launcher, type boosters, Adaptability, Libero / Protean, Huge Power, Hustle, Reckless, Sheer Force, Skill Link
+#   - one attacking category per set: the category whose best three attacks (one per type) are worth more, physical attacks
+#     discounted by M-B's Intimidate rate (the chance a physical attacker is at -1)
+#   - a priority attack doesn't share a slot type with the same type's non-priority attacks
+#   - doubles weights fixed beforehand: spread x1.3, partner-hitting spread x1.0, priority x1.2, self stat drop x0.85, recoil x0.85,
+#     pivot x1.15
+#   - a move the ability makes work (ability-boosted >= 1.3x or priority it gains) scores with popularity at least the 0.3 default
+#   - item: the type-boosting item when two of the set's attacks share its best attack's type; else M-B's role items (as v1)
+ATE = {'Aerilate': 'Flying', 'Pixilate': 'Fairy', 'Refrigerate': 'Ice', 'Galvanize': 'Electric'}
+SURGE = {'Grassy Surge': 'Grass', 'Psychic Surge': 'Psychic', 'Electric Surge': 'Electric'}
+WEATHER = {'Drought': ('Fire', 'Water'), 'Drizzle': ('Water', 'Fire'), 'Orichalcum Pulse': ('Fire', 'Water')}
+FLAG_BOOST = {'Tough Claws': ('contact', 1.3), 'Iron Fist': ('punch', 1.2), 'Strong Jaw': ('bite', 1.5), 'Sharpness': ('slicing', 1.5),
+              'Punk Rock': ('sound', 1.3), 'Mega Launcher': ('pulse', 1.5)}
+TYPE_BOOST = {'Steelworker': ('Steel', 1.5), 'Steely Spirit': ('Steel', 1.5), 'Transistor': ('Electric', 1.3), "Dragon's Maw": ('Dragon', 1.5),
+              'Rocky Payload': ('Rock', 1.5), 'Water Bubble': ('Water', 2.0)}
+TYPE_ITEM = {'Normal': 'Silk Scarf', 'Fire': 'Charcoal', 'Water': 'Mystic Water', 'Grass': 'Miracle Seed', 'Electric': 'Magnet',
+             'Ice': 'Never-Melt Ice', 'Fighting': 'Black Belt', 'Poison': 'Poison Barb', 'Ground': 'Soft Sand', 'Flying': 'Sharp Beak',
+             'Psychic': 'Twisted Spoon', 'Bug': 'Silver Powder', 'Rock': 'Hard Stone', 'Ghost': 'Spell Tag', 'Dragon': 'Dragon Fang',
+             'Dark': 'Black Glasses', 'Steel': 'Metal Coat', 'Fairy': 'Fairy Feather'}
+SPREAD, ALLY_HIT, PRIORITY, SELFDROP, RECOIL, PIVOT = 1.3, 1.0, 1.2, 0.85, 0.85, 1.15
+
+def value2(m, x, d, ab, intim):
+    """(value, slot type key, ability-made) of an attack for a set with ability ab, or None for a status move"""
+    if x['cat'] == 'Status' or not x['bp']: return None
+    t, bp, pri, tgt, acc, charge = x['type'], x['bp'], x['pri'], x['target'], min(x['acc'], 100), x['charge']
+    hits = x['multihit']; hits = (3 if isinstance(hits, list) else hits) or 1
+    if ab == 'Technician' and bp <= 60: bp *= 1.5
+    if ab in ATE and t == 'Normal': t, bp = ATE[ab], bp * 1.2
+    if ab in SURGE:
+        if t == SURGE[ab]: bp *= 1.3
+        if m == 'Grassy Glide' and ab == 'Grassy Surge': pri = 1
+        if m == 'Expanding Force' and ab == 'Psychic Surge': bp, tgt = bp * 1.5, 'allAdjacentFoes'
+        if m == 'Rising Voltage' and ab == 'Electric Surge': bp *= 2
+    if ab in WEATHER:
+        bp *= 1.5 if t == WEATHER[ab][0] else 0.5 if t == WEATHER[ab][1] else 1.0
+        if m in ('Solar Beam', 'Solar Blade') and ab != 'Drizzle': charge = False
+    if ab in FLAG_BOOST and FLAG_BOOST[ab][0] in x.get('flags', []): bp *= FLAG_BOOST[ab][1]
+    if ab in TYPE_BOOST and t == TYPE_BOOST[ab][0]: bp *= TYPE_BOOST[ab][1]
+    if ab == 'Reckless' and x['recoil']: bp *= 1.2
+    if ab == 'Sheer Force' and x.get('secondary'): bp *= 1.3
+    if ab == 'Skill Link' and isinstance(x['multihit'], list): hits = x['multihit'][1]
+    phys = x['cat'] == 'Physical'
+    if ab == 'Hustle' and phys: bp, acc = bp * 1.5, acc * 0.8
+    stab = (2.0 if ab == 'Adaptability' else 1.5) if (t in d['types'] or ab in ('Libero', 'Protean')) else 1.0
+    stat = d['stats']['atk'] * (2 if ab in ('Huge Power', 'Pure Power') else 1) if phys else d['stats']['spa']
+    v = bp * hits * stab * stat * acc / 100
+    v *= SPREAD if tgt == 'allAdjacentFoes' else ALLY_HIT if tgt == 'allAdjacent' else 1.0
+    v *= 0.4 if x['recharge'] else 0.5 if charge else 0.3 if x['selfdestruct'] else RECOIL if x['recoil'] else 1.0
+    v *= SELFDROP if x.get('selfdrop') else 1.0
+    v *= PIVOT if x.get('pivot') else 1.0
+    v *= PRIORITY if pri > 0 else 1.0
+    v *= intim if phys else 1.0
+    bare = attack_value(m, x, d)
+    made = (pri > 0 and x['pri'] <= 0) or (bare and v / (intim if phys else 1.0) >= 1.3 * bare)
+    return v, (t, pri > 0), made
+
+def blind2(name, d, base_d, p, items, intim):
+    """v2 of blind(): same move pool, Protect rule, two kinds ('balanced', 'offense') and nature rule; values from value2 under the
+    ability the set battles with, one attacking category, slot types per value2, item rule above"""
+    eng = lambda m: L.idf(m) in B.ENG['moves'] and m not in B.UNPORTED and m not in EXCLUDE
+    mv = {m: x for m, x in d['moves'].items() if eng(m) and (x['cat'] == 'Status' or (x['acc'] >= 80 and x['pri'] >= 0) or m == 'Grassy Glide')}
+    pr = [m for m in PROTECTS if m in mv]; prot = max(pr, key=lambda m: (p.get(m, 0.0), m == 'Protect')) if pr else None
+    for m in pr:
+        if m != prot: mv.pop(m)
+    ab_d = base_d or d
+    ability = max(ab_d['abilities'], key=lambda a: (ab_d['abilities'][a] or 0, -list(ab_d['abilities']).index(a)))
+    bat = next(iter(d['abilities'])) if base_d else ability                  # a Mega battles with its Mega ability
+    V = {m: value2(m, x, d, bat, intim) for m, x in mv.items()}; V = {m: v for m, v in V.items() if v}
+    def best3(cat):
+        out, keys = [], set()
+        for m in sorted((m for m in V if mv[m]['cat'] == cat), key=lambda m: -V[m][0]):
+            if V[m][1] in keys: continue
+            out.append(V[m][0]); keys.add(V[m][1])
+            if len(out) == 3: break
+        return sum(out)
+    cat = 'Physical' if best3('Physical') >= best3('Special') else 'Special'
+    att = {m: v for m, v in V.items() if mv[m]['cat'] == cat}
+    stat_moves = {m for m in mv if mv[m]['cat'] == 'Status'}
+    mv = {m: x for m, x in mv.items() if m in att or m in stat_moves}
+    top = max(v[0] for v in att.values()) if att else 1.0; an = {m: v[0] / top for m, v in att.items()}
+    pp = lambda m: max(p.get(m, 0.3), 0.3) if m in att and att[m][2] else p.get(m, 0.3 if m in att else 0.05)
+    score = {m: max(pp(m), 0.5 * an[m] + 0.5 * pp(m)) if m in an else pp(m) for m in mv}
+    stab = lambda m: m in att and att[m][1][0] in d['types']
+    def pick(order, n=4):
+        out, keys = [], set()
+        for m in order:
+            if m in att and att[m][1] in keys: continue
+            out.append(m); keys |= {att[m][1]} if m in att else set()
+            if len(out) == n: break
+        if out and not any(stab(m) for m in out) and any(stab(m) for m in att):
+            best = max((m for m in att if stab(m)), key=lambda m: an[m]); worst = min((m for m in out if m in att), key=lambda m: score[m], default=out[-1])
+            out[out.index(worst)] = best
+        return out
+    balanced = pick(sorted(mv, key=lambda m: (-score[m], m)))
+    offense = ([prot] if prot else []) + pick(sorted(an, key=lambda m: (-score[m], m)), 4 - bool(prot))
+    st = d['stats']; phys = cat == 'Physical'; out = []
+    for kind, moves in (('balanced', balanced), ('offense', offense)):
+        if len(moves) < 4 or any(set(moves) == set(o['moves']) for o in out): continue
+        r = role(moves, d)
+        if d['requiredItem']: cands = [d['requiredItem']]
+        else:
+            status = any(mv[m]['cat'] == 'Status' for m in moves)
+            cands = [i for i, _ in items[r].most_common() if not (status and i.startswith('Choice'))][:3]
+            ms = [m for m in moves if m in att]
+            if ms:
+                t0 = att[max(ms, key=lambda m: att[m][0])][1][0]
+                if sum(att[m][1][0] == t0 for m in ms) >= 2 and TYPE_ITEM.get(t0): cands = [TYPE_ITEM[t0]] + [i for i in cands if i != TYPE_ITEM[t0]][:2]
+        if st['spe'] <= 50: nat = 'Brave' if phys else 'Quiet'
+        elif r == 'support': nat = 'Careful' if phys else 'Calm'
+        elif st['spe'] >= 80: nat = 'Jolly' if phys else 'Timid'
+        else: nat = 'Adamant' if phys else 'Modest'
+        for k, it in enumerate(cands):
+            out.append(dict(species=(base_d or d)['name'], item=it, ability=ability, nature=nat, moves=list(moves), kind=kind, fallback=k > 0))
+    return out
+
+def intimidate_rate(full):
+    """share of M-B sheets with an Intimidate user -> the factor on physical attacks: 1 - rate / 2 (on the field half the time) / 3"""
+    q = sum(any(s.get('ability') == 'Intimidate' for s in e['six']) for e in full) / max(1, len(full))
+    return q, 1 - q / 2 / 3
+
 def main():
     assert os.environ.get('TS_MOVESET', '').endswith('smogon_mb_2026-08_moveset.txt'), 'run with TS_MOVESET=backtest/smogon_mb_2026-08_moveset.txt'
+    V2 = os.environ.get('BLIND') == '2'; tag = '_v2' if V2 else ''         # BLIND=2: v2 sets -> mb_swap_pool_v2.json, mb_blind_v2.json
     E = pool(); last = max(e['day'] for e in E); first = min(e['day'] for e in E)
     fstart = (datetime.date.fromisoformat(last) - datetime.timedelta(days=FIELD_DAYS - 1)).isoformat()
     note = (f'one entry per side of a cached public Showdown Reg M-B Bo3 game with an open team sheet, {first} to {last} (local dates); '
@@ -185,6 +313,8 @@ def main():
     dd = dexdump([forme(s) for s in sets] + [s['species'] for s in sets] + NEW + NEW_MEGA + [x.split('-Mega')[0] for x in NEW_MEGA],
                  upstream_learnsets(NEW + NEW_MEGA + [x.split('-Mega')[0] for x in NEW_MEGA if x.split('-Mega')[0] in NEW]))
     p, items = priors(sets, dd)
+    q, intim = intimidate_rate(full)
+    if V2: print(f"v2 sets: Intimidate on {100 * q:.0f}% of M-B sheets -> physical attacks x{intim:.3f}")
     gid = {L.set_key({k: v for k, v in s.items() if k != 'regional_count'}): g for g, s in B.G.items()}
     nper = collections.Counter()
     for g in B.G:
@@ -214,7 +344,7 @@ def main():
         d = dd.get(name)
         if not d: print('no data for', name); continue
         base_d = dd.get(name.split('-Mega')[0]) if '-Mega' in name else None
-        for s in blind(name, d, base_d, p, items):
+        for s in (blind2(name, d, base_d, p, items, intim) if V2 else blind(name, d, base_d, p, items)):
             f = B.full({k: v for k, v in s.items() if k not in ('kind', 'fallback')})
             if not B.runnable(f): print('  not runnable:', name, f['moves'], f['ability']); continue
             g = gid_of(f, gid, nper); why[g] = dict(forme=name, kind=s['kind'], fallback=s['fallback'])
@@ -235,10 +365,10 @@ def main():
         field[f"mb{len(field) + 1}"] = dict(gids=[gid_of(f, gid, nper) for f in team], players=len(ps), share=len(ps) / fplay,
                                            species=[forme(f) for f in team])
     if os.environ.get('DRY') != '1': json.dump(B.G, open(B.GPATH, 'w'), indent=0)        # DRY=1: a test run on a partial fetch
-    json.dump(swap, open(os.path.join(HERE, 'mb_swap_pool.json'), 'w'), indent=1)
+    json.dump(swap, open(os.path.join(HERE, f'mb_swap_pool{tag}.json'), 'w'), indent=1)
     json.dump(field, open(os.path.join(HERE, 'mb_field.json'), 'w'), indent=1)
     json.dump(dict(priors={m: round(x, 3) for m, x in sorted(p.items(), key=lambda t: -t[1])}, items={r: c.most_common(8) for r, c in items.items()},
-                   sets={g: dict(why[g], set=B.G[g]) for g in why}), open(os.path.join(HERE, 'mb_blind.json'), 'w'), indent=1, ensure_ascii=False)
+                   sets={g: dict(why[g], set=B.G[g]) for g in why}), open(os.path.join(HERE, f'mb_blind{tag}.json'), 'w'), indent=1, ensure_ascii=False)
     json.dump(sorted({L.DEX['species'].get(L.idf(x), {}).get('name', x) for x in NEW} | {x.split('-Mega')[0] for x in NEW_MEGA if x.split('-Mega')[0] in NEW}),
               open(os.path.join(HERE, 'prior_zero.json'), 'w'), ensure_ascii=False)
     has = lambda g: all(os.path.exists(os.path.join(TS, 'mx', 'out', t, g.replace('/', '_') + '.json')) for t in ('tr', 'notr'))

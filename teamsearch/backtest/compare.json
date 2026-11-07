@@ -29,7 +29,28 @@
     "spearman": 0.41,
     "tv": 0.304,
     "n": 68
-   }
+   },
+   "flagged": [],
+   "false_alarms": []
+  },
+  "16 M-B teams (start)": {
+   "M-C weeks 1-2": {
+    "spearman": 0.301,
+    "tv": 0.494,
+    "n": 58
+   },
+   "M-C weeks 3-5": {
+    "spearman": 0.341,
+    "tv": 0.514,
+    "n": 59
+   },
+   "M-C settled": {
+    "spearman": 0.399,
+    "tv": 0.479,
+    "n": 60
+   },
+   "flagged": [],
+   "false_alarms": []
   },
   "self-play 1": {
    "M-C weeks 1-2": {
@@ -46,7 +67,9 @@
     "spearman": 0.34,
     "tv": 0.506,
     "n": 58
-   }
+   },
+   "flagged": [],
+   "false_alarms": []
   },
   "self-play 2": {
    "M-C weeks 1-2": {
@@ -63,7 +86,9 @@
     "spearman": 0.343,
     "tv": 0.529,
     "n": 57
-   }
+   },
+   "flagged": [],
+   "false_alarms": []
   },
   "self-play 3": {
    "M-C weeks 1-2": {
@@ -80,7 +105,9 @@
     "spearman": 0.298,
     "tv": 0.54,
     "n": 56
-   }
+   },
+   "flagged": [],
+   "false_alarms": []
   },
   "self-play 4": {
    "M-C weeks 1-2": {
@@ -97,7 +124,32 @@
     "spearman": 0.34,
     "tv": 0.613,
     "n": 54
-   }
+   },
+   "flagged": [
+    "Golisopod-Mega"
+   ],
+   "false_alarms": []
+  },
+  "M-B + shift 4": {
+   "M-C weeks 1-2": {
+    "spearman": 0.064,
+    "tv": 0.549,
+    "n": 64
+   },
+   "M-C weeks 3-5": {
+    "spearman": 0.026,
+    "tv": 0.523,
+    "n": 65
+   },
+   "M-C settled": {
+    "spearman": 0.085,
+    "tv": 0.467,
+    "n": 63
+   },
+   "flagged": [
+    "Golisopod-Mega"
+   ],
+   "false_alarms": []
   }
  },
  "new": {
@@ -105,109 +157,140 @@
    "settled": 0.34119859386734985,
    "early": 0.5695036620994799,
    "M-B carried over": 0.0009372121336551409,
+   "16 M-B teams (start)": 0,
    "self-play 1": 0,
    "self-play 2": 0,
    "self-play 3": 0,
-   "self-play 4": 0
+   "self-play 4": 0,
+   "M-B + shift 4": 0.0009372121336551409
   },
   "Garchomp-Mega-Z": {
    "settled": 0.12827362345323046,
    "early": 0.08576340894400633,
    "M-B carried over": 0.00026946914578280785,
+   "16 M-B teams (start)": 0,
    "self-play 1": 0,
    "self-play 2": 0,
    "self-play 3": 0,
-   "self-play 4": 0
+   "self-play 4": 0,
+   "M-B + shift 4": 0.00026946914578280785
   },
   "Indeedee-F": {
    "settled": 0.11999671506010595,
    "early": 0.15951846987714682,
    "M-B carried over": 0.00014970508099044884,
+   "16 M-B teams (start)": 0,
    "self-play 1": 0,
    "self-play 2": 0,
    "self-play 3": 0,
-   "self-play 4": 0
+   "self-play 4": 0,
+   "M-B + shift 4": 0.00014970508099044884
   },
   "Golisopod-Mega": {
    "settled": 0.11438795004987523,
    "early": 0.10496276240256985,
    "M-B carried over": 0,
+   "16 M-B teams (start)": 0,
    "self-play 1": 0,
    "self-play 2": 0,
    "self-play 3": 0,
-   "self-play 4": 0.22953244520580315
+   "self-play 4": 0.22953244520580315,
+   "M-B + shift 4": 0.22953244520580315
   },
   "Salamence-Mega": {
    "settled": 0.10296935148376153,
    "early": 0.31330642887527604,
    "M-B carried over": 0.0004657966662817107,
+   "16 M-B teams (start)": 0,
    "self-play 1": 0,
    "self-play 2": 0,
    "self-play 3": 0,
-   "self-play 4": 0
+   "self-play 4": 0,
+   "M-B + shift 4": 0.0004657966662817107
   },
   "Indeedee": {
    "settled": 0.0424405007761278,
    "early": 0.07311504707170839,
    "M-B carried over": 0,
+   "16 M-B teams (start)": 0,
    "self-play 1": 0,
    "self-play 2": 0,
    "self-play 3": 0,
-   "self-play 4": 0
+   "self-play 4": 0,
+   "M-B + shift 4": 0
   },
   "Lucario-Mega-Z": {
    "settled": 0.0196051687101231,
    "early": 0.033095747662360814,
    "M-B carried over": 6.736728644570196e-05,
+   "16 M-B teams (start)": 0,
    "self-play 1": 0,
    "self-play 2": 0,
    "self-play 3": 0,
-   "self-play 4": 0
+   "self-play 4": 0,
+   "M-B + shift 4": 6.736728644570196e-05
   },
   "Baxcalibur-Mega": {
    "settled": 0.012269805964414484,
    "early": 0.01131621187800963,
    "M-B carried over": 0.0007410401509027216,
+   "16 M-B teams (start)": 0,
    "self-play 1": 0,
    "self-play 2": 0,
    "self-play 3": 0,
-   "self-play 4": 0
+   "self-play 4": 0,
+   "M-B + shift 4": 0.0007410401509027216
   },
   "Absol-Mega-Z": {
    "settled": 0.011944418440793253,
    "early": 0.0013185049300619123,
    "M-B carried over": 0,
+   "16 M-B teams (start)": 0,
    "self-play 1": 0,
    "self-play 2": 0,
    "self-play 3": 0,
-   "self-play 4": 0
+   "self-play 4": 0,
+   "M-B + shift 4": 0
   },
   "Grapploct": {
    "settled": 0.006290445888357691,
    "early": 0.002140181915462814,
    "M-B carried over": 0,
+   "16 M-B teams (start)": 0,
    "self-play 1": 0,
    "self-play 2": 0,
    "self-play 3": 0,
-   "self-play 4": 0
+   "self-play 4": 0,
+   "M-B + shift 4": 0
   },
   "Pincurchin": {
    "settled": 0.005198705952128712,
    "early": 0,
    "M-B carried over": 0,
+   "16 M-B teams (start)": 0,
    "self-play 1": 0,
    "self-play 2": 0,
    "self-play 3": 0,
-   "self-play 4": 0
+   "self-play 4": 0,
+   "M-B + shift 4": 0
   },
   "Baxcalibur": {
    "settled": 0.003994997414627387,
    "early": 0.0072231139646869984,
    "M-B carried over": 0,
+   "16 M-B teams (start)": 0,
    "self-play 1": 0,
    "self-play 2": 0,
    "self-play 3": 0,
-   "self-play 4": 0
+   "self-play 4": 0,
+   "M-B + shift 4": 0
   }
- }
+ },
+ "big_new": [
+  "Garchomp-Mega-Z",
+  "Golisopod-Mega",
+  "Indeedee-F",
+  "Rillaboom",
+  "Salamence-Mega"
+ ]
 }

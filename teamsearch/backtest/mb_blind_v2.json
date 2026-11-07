@@ -1,0 +1,3233 @@
+{
+ "priors": {
+  "Transform": 1.0,
+  "Matcha Gotcha": 0.987,
+  "Last Respects": 0.986,
+  "Bitter Blade": 0.986,
+  "Make It Rain": 0.98,
+  "Kowtow Cleave": 0.979,
+  "Stone Axe": 0.972,
+  "Flower Trick": 0.969,
+  "Baneful Bunker": 0.968,
+  "Decorate": 0.966,
+  "Electro Shot": 0.962,
+  "Accelerock": 0.953,
+  "Torch Song": 0.952,
+  "Triple Arrows": 0.935,
+  "Parting Shot": 0.921,
+  "Rage Powder": 0.913,
+  "Gigaton Hammer": 0.91,
+  "Instruct": 0.893,
+  "Follow Me": 0.892,
+  "Clanging Scales": 0.882,
+  "Spiky Shield": 0.868,
+  "Water Spout": 0.85,
+  "Jet Punch": 0.849,
+  "No Retreat": 0.828,
+  "Salt Cure": 0.828,
+  "Fake Out": 0.813,
+  "Lumina Crash": 0.764,
+  "Wave Crash": 0.756,
+  "Eruption": 0.732,
+  "Dire Claw": 0.729,
+  "Armor Cannon": 0.727,
+  "Zap Cannon": 0.727,
+  "Spirit Break": 0.706,
+  "Rage Fist": 0.679,
+  "Protect": 0.668,
+  "Tailwind": 0.659,
+  "Extreme Speed": 0.652,
+  "Bitter Malice": 0.639,
+  "Sleep Powder": 0.62,
+  "Sacred Sword": 0.612,
+  "Moonblast": 0.608,
+  "Aurora Veil": 0.589,
+  "Dragon Darts": 0.574,
+  "Sucker Punch": 0.547,
+  "Close Combat": 0.539,
+  "Population Bomb": 0.526,
+  "Chilly Reception": 0.516,
+  "Aqua Jet": 0.507,
+  "Infestation": 0.499,
+  "Bullet Punch": 0.498,
+  "Headlong Rush": 0.468,
+  "Clangorous Soul": 0.459,
+  "Barb Barrage": 0.45,
+  "Trick Room": 0.427,
+  "Brave Bird": 0.423,
+  "Perish Song": 0.405,
+  "Shell Smash": 0.391,
+  "Wide Guard": 0.377,
+  "Detect": 0.363,
+  "Flare Blitz": 0.358,
+  "Fiery Dance": 0.35,
+  "Darkest Lariat": 0.347,
+  "Trop Kick": 0.344,
+  "Shelter": 0.333,
+  "Heat Wave": 0.316,
+  "Simple Beam": 0.304,
+  "Ceaseless Edge": 0.303,
+  "Rock Slide": 0.297,
+  "Dragon Claw": 0.287,
+  "Encore": 0.279,
+  "Weather Ball": 0.27,
+  "Parabolic Charge": 0.268,
+  "Raging Bull": 0.257,
+  "Shed Tail": 0.256,
+  "Water Shuriken": 0.25,
+  "Dual Wingbeat": 0.249,
+  "Hyper Voice": 0.248,
+  "Coil": 0.243,
+  "Volt Switch": 0.242,
+  "Razor Shell": 0.237,
+  "Aqua Cutter": 0.23,
+  "Mach Punch": 0.227,
+  "Shadow Sneak": 0.216,
+  "Sludge Bomb": 0.216,
+  "Ice Hammer": 0.214,
+  "First Impression": 0.213,
+  "Leaf Blade": 0.213,
+  "High Horsepower": 0.21,
+  "Quiver Dance": 0.203,
+  "Life Dew": 0.196,
+  "Flip Turn": 0.192,
+  "Twin Beam": 0.187,
+  "Speed Swap": 0.186,
+  "Sticky Web": 0.185,
+  "Wood Hammer": 0.183,
+  "Earth Power": 0.179,
+  "Aura Sphere": 0.178,
+  "Sheer Cold": 0.176,
+  "Psychic": 0.171,
+  "Meteor Mash": 0.17,
+  "Iron Head": 0.163,
+  "Slack Off": 0.162,
+  "Scald": 0.161,
+  "Thunderbolt": 0.159,
+  "Bug Bite": 0.159,
+  "Eerie Spell": 0.156,
+  "Earthquake": 0.155,
+  "Knock Off": 0.151,
+  "Hurricane": 0.147,
+  "Dazzling Gleam": 0.143,
+  "Draco Meteor": 0.139,
+  "Fell Stinger": 0.138,
+  "Entrainment": 0.136,
+  "Super Fang": 0.131,
+  "Shadow Ball": 0.13,
+  "Head Smash": 0.128,
+  "Triple Axel": 0.127,
+  "Blizzard": 0.124,
+  "Recover": 0.118,
+  "Dragon Pulse": 0.118,
+  "Roost": 0.118,
+  "Yawn": 0.116,
+  "Ice Shard": 0.114,
+  "Icicle Crash": 0.114,
+  "Flash Cannon": 0.111,
+  "Ice Punch": 0.11,
+  "Power Gem": 0.11,
+  "Quash": 0.11,
+  "Psycho Cut": 0.109,
+  "Leaf Storm": 0.108,
+  "Ancient Power": 0.105,
+  "Low Kick": 0.104,
+  "Quick Attack": 0.1,
+  "Infernal Parade": 0.095,
+  "Minimize": 0.095,
+  "Glare": 0.094,
+  "Giga Drain": 0.093,
+  "High Jump Kick": 0.091,
+  "Electrify": 0.091,
+  "Solar Beam": 0.089,
+  "Body Press": 0.089,
+  "Strength Sap": 0.089,
+  "Supercell Slam": 0.088,
+  "Swords Dance": 0.087,
+  "Discharge": 0.085,
+  "Stomping Tantrum": 0.085,
+  "Disable": 0.082,
+  "Overheat": 0.081,
+  "Electroweb": 0.081,
+  "Dragon Dance": 0.077,
+  "Nasty Plot": 0.077,
+  "Power Whip": 0.076,
+  "Throat Chop": 0.075,
+  "Feint": 0.073,
+  "Coaching": 0.071,
+  "Calm Mind": 0.07,
+  "Psychic Fangs": 0.068,
+  "Bug Buzz": 0.067,
+  "Drain Punch": 0.067,
+  "Dark Pulse": 0.067,
+  "Moonlight": 0.067,
+  "Play Rough": 0.065,
+  "Crabhammer": 0.065,
+  "Heal Pulse": 0.065,
+  "Hypnosis": 0.063,
+  "Mortal Spin": 0.062,
+  "Ice Beam": 0.06,
+  "Helping Hand": 0.059,
+  "Ice Fang": 0.058,
+  "Tidy Up": 0.058,
+  "Light Screen": 0.058,
+  "Spirit Shackle": 0.057,
+  "Toxic": 0.057,
+  "Final Gambit": 0.057,
+  "Poison Jab": 0.057,
+  "Heavy Slam": 0.056,
+  "Quick Guard": 0.054,
+  "Reflect": 0.054,
+  "Hydro Pump": 0.053,
+  "Icy Wind": 0.051,
+  "Destiny Bond": 0.051,
+  "Leech Seed": 0.05,
+  "Gunk Shot": 0.05,
+  "Liquidation": 0.049,
+  "Volt Tackle": 0.048,
+  "Nuzzle": 0.047,
+  "Boomburst": 0.047,
+  "Bone Rush": 0.045,
+  "Focus Blast": 0.045,
+  "Muddy Water": 0.044,
+  "Poltergeist": 0.044,
+  "Hammer Arm": 0.042,
+  "Taunt": 0.041,
+  "Psyshock": 0.041,
+  "After You": 0.041,
+  "Draining Kiss": 0.037,
+  "Pin Missile": 0.037,
+  "Rock Wrecker": 0.037,
+  "Expanding Force": 0.037,
+  "Flying Press": 0.036,
+  "Charm": 0.036,
+  "Leech Life": 0.035,
+  "Energy Ball": 0.035,
+  "Struggle Bug": 0.032,
+  "Bulk Up": 0.031,
+  "Cosmic Power": 0.031,
+  "Lunge": 0.03,
+  "Belly Drum": 0.03,
+  "Fissure": 0.029,
+  "Haze": 0.029,
+  "Superpower": 0.029,
+  "Drill Peck": 0.028,
+  "Vacuum Wave": 0.028,
+  "Ally Switch": 0.027,
+  "Drill Run": 0.027,
+  "Waterfall": 0.026,
+  "Extrasensory": 0.026,
+  "Explosion": 0.026,
+  "Pollen Puff": 0.026,
+  "Psychic Terrain": 0.026,
+  "Megahorn": 0.026,
+  "Rising Voltage": 0.025,
+  "Flamethrower": 0.025,
+  "Snarl": 0.025,
+  "Phantom Force": 0.024,
+  "Ice Spinner": 0.024,
+  "Recycle": 0.023,
+  "Last Resort": 0.023,
+  "Mystical Fire": 0.023,
+  "Foul Play": 0.023,
+  "Storm Throw": 0.022,
+  "Psychic Noise": 0.021,
+  "Hyper Beam": 0.019,
+  "Wild Charge": 0.018,
+  "Thunder": 0.018,
+  "Alluring Voice": 0.018,
+  "Lava Plume": 0.018,
+  "Soak": 0.018,
+  "Sludge Wave": 0.018,
+  "Thunder Wave": 0.017,
+  "Iron Defense": 0.016,
+  "Air Slash": 0.016,
+  "Dynamic Punch": 0.016,
+  "Stockpile": 0.016,
+  "Gravity": 0.016,
+  "Fake Tears": 0.016,
+  "Solar Blade": 0.015,
+  "Night Slash": 0.015,
+  "Acid Armor": 0.015,
+  "Clear Smog": 0.015,
+  "Horn Drill": 0.014,
+  "Comeuppance": 0.014,
+  "Frost Breath": 0.014,
+  "Crunch": 0.014,
+  "Skill Swap": 0.013,
+  "Bullet Seed": 0.013,
+  "Power Trick": 0.013,
+  "Trick": 0.013,
+  "Baton Pass": 0.013,
+  "Blaze Kick": 0.012,
+  "Synthesis": 0.012,
+  "Imprison": 0.012,
+  "Howl": 0.011,
+  "Spicy Extract": 0.011,
+  "Rock Blast": 0.011,
+  "Surf": 0.01,
+  "Magic Powder": 0.01,
+  "Thunder Punch": 0.01,
+  "Rock Tomb": 0.01,
+  "Sing": 0.01,
+  "Rain Dance": 0.01,
+  "Cotton Guard": 0.009,
+  "Beat Up": 0.009,
+  "Grass Knot": 0.009,
+  "Roar": 0.009,
+  "Upper Hand": 0.009,
+  "Acrobatics": 0.009,
+  "Tickle": 0.009,
+  "Stone Edge": 0.008,
+  "Sparkling Aria": 0.008,
+  "Power Split": 0.008,
+  "Sunny Day": 0.008,
+  "Water Pulse": 0.008,
+  "Brick Break": 0.008,
+  "Healing Wish": 0.008,
+  "Worry Seed": 0.008,
+  "Curse": 0.007,
+  "Rapid Spin": 0.007,
+  "Burn Up": 0.007,
+  "Scorching Sands": 0.007,
+  "Gyro Ball": 0.007,
+  "Breaking Swipe": 0.007,
+  "Cross Poison": 0.007,
+  "Whirlwind": 0.007,
+  "Toxic Spikes": 0.007,
+  "Shadow Claw": 0.007,
+  "Scale Shot": 0.007,
+  "Electric Terrain": 0.007,
+  "Hex": 0.006,
+  "Gastro Acid": 0.006,
+  "Stun Spore": 0.006,
+  "Eerie Impulse": 0.006,
+  "Stealth Rock": 0.006,
+  "Substitute": 0.006,
+  "Acid Spray": 0.006,
+  "Aromatic Mist": 0.006,
+  "Zen Headbutt": 0.006,
+  "Pain Split": 0.005,
+  "Fire Punch": 0.005,
+  "Cross Chop": 0.005,
+  "Dragon Tail": 0.005,
+  "Wish": 0.005,
+  "Circle Throw": 0.005,
+  "Seed Bomb": 0.005,
+  "Poison Fang": 0.005,
+  "Role Play": 0.005,
+  "Hydro Cannon": 0.005,
+  "Morning Sun": 0.005,
+  "Tri Attack": 0.005,
+  "Terrain Pulse": 0.005,
+  "Stored Power": 0.005,
+  "Chilling Water": 0.005,
+  "Mirror Coat": 0.005,
+  "Raging Fury": 0.005,
+  "Steel Beam": 0.005,
+  "Avalanche": 0.005,
+  "Endeavor": 0.004,
+  "Memento": 0.004,
+  "Skitter Smack": 0.004,
+  "Fire Blast": 0.004,
+  "Defog": 0.004,
+  "Petal Blizzard": 0.004,
+  "Magnet Rise": 0.004,
+  "Future Sight": 0.004,
+  "Cotton Spore": 0.004,
+  "Outrage": 0.004,
+  "Psych Up": 0.004,
+  "Grassy Glide": 0.004,
+  "Burning Jealousy": 0.004,
+  "Body Slam": 0.004,
+  "Venoshock": 0.004,
+  "Hard Press": 0.004,
+  "Meteor Beam": 0.003,
+  "Acupressure": 0.003,
+  "Feather Dance": 0.003,
+  "Teeter Dance": 0.003,
+  "Heat Crash": 0.003,
+  "Growth": 0.003,
+  "Icicle Spear": 0.003,
+  "Fire Fang": 0.003,
+  "Temper Flare": 0.003,
+  "Shadow Punch": 0.003,
+  "Swagger": 0.003,
+  "Copycat": 0.003,
+  "Lash Out": 0.002,
+  "Reflect Type": 0.002,
+  "Dragon Cheer": 0.002,
+  "Switcheroo": 0.002,
+  "Flame Charge": 0.002,
+  "Power Trip": 0.002,
+  "Smack Down": 0.002,
+  "Dragon Rush": 0.002,
+  "Electro Ball": 0.002,
+  "Air Cutter": 0.002,
+  "Whirlpool": 0.002,
+  "Belch": 0.002,
+  "Grassy Terrain": 0.002,
+  "Trailblaze": 0.002,
+  "Flatter": 0.002,
+  "Thunder Fang": 0.002,
+  "Assurance": 0.002,
+  "Bounce": 0.002,
+  "Sandstorm": 0.002,
+  "Counter": 0.002,
+  "Power Swap": 0.002,
+  "Aqua Tail": 0.002,
+  "Charge Beam": 0.002,
+  "Steel Roller": 0.002,
+  "Screech": 0.002,
+  "Sand Tomb": 0.002,
+  "Blast Burn": 0.002,
+  "Fire Spin": 0.002,
+  "Bite": 0.002,
+  "Aerial Ace": 0.002,
+  "Aqua Ring": 0.002,
+  "Ingrain": 0.001,
+  "Scary Face": 0.001,
+  "Agility": 0.001,
+  "Iron Tail": 0.001,
+  "Misty Terrain": 0.001,
+  "Wonder Room": 0.001,
+  "Sweet Scent": 0.001,
+  "Night Shade": 0.001,
+  "Swallow": 0.001,
+  "Snowscape": 0.001,
+  "Magic Room": 0.001,
+  "Fling": 0.001,
+  "Pounce": 0.001,
+  "Charge": 0.001,
+  "Steel Wing": 0.001,
+  "Rest": 0.001,
+  "Low Sweep": 0.001,
+  "Round": 0.001,
+  "Focus Punch": 0.001,
+  "Heal Bell": 0.001,
+  "Focus Energy": 0.001,
+  "Block": 0.001,
+  "Safeguard": 0.001,
+  "Mega Kick": 0.001,
+  "Facade": 0.001,
+  "Smart Strike": 0.001,
+  "Frenzy Plant": 0.001,
+  "Spikes": 0.001,
+  "Bulldoze": 0.001,
+  "Confuse Ray": 0.001,
+  "Guillotine": 0.001,
+  "Attract": 0.001,
+  "Spit Up": 0.001,
+  "Mud Shot": 0.001,
+  "Mean Look": 0.001,
+  "Misty Explosion": 0.001,
+  "Double Hit": 0.001,
+  "Metal Burst": 0.001,
+  "Fly": 0.001,
+  "Guard Swap": 0.0,
+  "Double Team": 0.0,
+  "Inferno": 0.0,
+  "Metal Sound": 0.0,
+  "Giga Impact": 0.0,
+  "Payback": 0.0,
+  "Sleep Talk": 0.0,
+  "Flail": 0.0,
+  "Torment": 0.0,
+  "Spite": 0.0,
+  "Amnesia": 0.0,
+  "Reversal": 0.0,
+  "Brutal Swing": 0.0,
+  "Dig": 0.0,
+  "Endure": 0.0,
+  "Thief": 0.0,
+  "Thrash": 0.0,
+  "Snore": 0.0,
+  "Double-Edge": 0.0,
+  "String Shot": 0.0,
+  "U-turn": 0.0,
+  "Will-O-Wisp": 0.0,
+  "Petal Dance": 0.0,
+  "Poison Powder": 0.0,
+  "Uproar": 0.0,
+  "Dive": 0.0,
+  "Sky Attack": 0.0,
+  "King's Shield": 0.0,
+  "Mud-Slap": 0.0,
+  "Crush Claw": 0.0,
+  "X-Scissor": 0.0,
+  "Sweet Kiss": 0.0,
+  "Seismic Toss": 0.0,
+  "Wrap": 0.0,
+  "Covet": 0.0,
+  "Light of Ruin": 0.0,
+  "Tearful Look": 0.0,
+  "Corrosive Gas": 0.0,
+  "Self-Destruct": 0.0,
+  "Pound": 0.0,
+  "Baby-Doll Eyes": 0.0,
+  "Freeze-Dry": 0.0,
+  "Tail Slap": 0.0,
+  "Rock Polish": 0.0,
+  "Noble Roar": 0.0,
+  "Pluck": 0.0,
+  "Lock-On": 0.0,
+  "Night Daze": 0.0,
+  "Axe Kick": 0.0,
+  "Bind": 0.0,
+  "Magnetic Flux": 0.0,
+  "Guard Split": 0.0,
+  "Fire Lash": 0.0,
+  "Fairy Lock": 0.0,
+  "Topsy-Turvy": 0.0
+ },
+ "items": {
+  "support": [
+   [
+    "Sitrus Berry",
+    1951
+   ],
+   [
+    "Focus Sash",
+    1850
+   ],
+   [
+    "Leftovers",
+    870
+   ],
+   [
+    "Colbur Berry",
+    598
+   ],
+   [
+    "Light Clay",
+    584
+   ],
+   [
+    "Occa Berry",
+    417
+   ],
+   [
+    "Mental Herb",
+    309
+   ],
+   [
+    "Fairy Feather",
+    295
+   ]
+  ],
+  "offense": [
+   [
+    "Life Orb",
+    4283
+   ],
+   [
+    "Focus Sash",
+    3514
+   ],
+   [
+    "Sitrus Berry",
+    2578
+   ],
+   [
+    "Choice Scarf",
+    2105
+   ],
+   [
+    "Leftovers",
+    1628
+   ],
+   [
+    "White Herb",
+    1173
+   ],
+   [
+    "Chople Berry",
+    1129
+   ],
+   [
+    "Black Glasses",
+    801
+   ]
+  ]
+ },
+ "sets": {
+  "Wigglytuff#1": {
+   "forme": "Wigglytuff",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Wigglytuff",
+    "item": "Life Orb",
+    "ability": "Competitive",
+    "nature": "Quiet",
+    "evs": [
+     32,
+     0,
+     0,
+     32,
+     2,
+     0
+    ],
+    "moves": [
+     "Moonblast",
+     "Protect",
+     "Hyper Voice",
+     "Perish Song"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Wigglytuff#2": {
+   "forme": "Wigglytuff",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Wigglytuff",
+    "item": "Focus Sash",
+    "ability": "Competitive",
+    "nature": "Quiet",
+    "evs": [
+     32,
+     0,
+     0,
+     32,
+     2,
+     0
+    ],
+    "moves": [
+     "Moonblast",
+     "Protect",
+     "Hyper Voice",
+     "Perish Song"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Wigglytuff#3": {
+   "forme": "Wigglytuff",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Wigglytuff",
+    "item": "Sitrus Berry",
+    "ability": "Competitive",
+    "nature": "Quiet",
+    "evs": [
+     32,
+     0,
+     0,
+     32,
+     2,
+     0
+    ],
+    "moves": [
+     "Moonblast",
+     "Protect",
+     "Hyper Voice",
+     "Perish Song"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Wigglytuff#4": {
+   "forme": "Wigglytuff",
+   "kind": "offense",
+   "fallback": false,
+   "set": {
+    "species": "Wigglytuff",
+    "item": "Life Orb",
+    "ability": "Competitive",
+    "nature": "Quiet",
+    "evs": [
+     32,
+     0,
+     0,
+     32,
+     2,
+     0
+    ],
+    "moves": [
+     "Protect",
+     "Moonblast",
+     "Hyper Voice",
+     "Psychic"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Wigglytuff#5": {
+   "forme": "Wigglytuff",
+   "kind": "offense",
+   "fallback": true,
+   "set": {
+    "species": "Wigglytuff",
+    "item": "Focus Sash",
+    "ability": "Competitive",
+    "nature": "Quiet",
+    "evs": [
+     32,
+     0,
+     0,
+     32,
+     2,
+     0
+    ],
+    "moves": [
+     "Protect",
+     "Moonblast",
+     "Hyper Voice",
+     "Psychic"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Wigglytuff#6": {
+   "forme": "Wigglytuff",
+   "kind": "offense",
+   "fallback": true,
+   "set": {
+    "species": "Wigglytuff",
+    "item": "Sitrus Berry",
+    "ability": "Competitive",
+    "nature": "Quiet",
+    "evs": [
+     32,
+     0,
+     0,
+     32,
+     2,
+     0
+    ],
+    "moves": [
+     "Protect",
+     "Moonblast",
+     "Hyper Voice",
+     "Psychic"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Persian#4": {
+   "forme": "Persian",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Persian",
+    "item": "Life Orb",
+    "ability": "Technician",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Hyper Voice",
+     "Icy Wind",
+     "Snarl"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Persian#5": {
+   "forme": "Persian",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Persian",
+    "item": "Focus Sash",
+    "ability": "Technician",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Hyper Voice",
+     "Icy Wind",
+     "Snarl"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Persian#6": {
+   "forme": "Persian",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Persian",
+    "item": "Sitrus Berry",
+    "ability": "Technician",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Hyper Voice",
+     "Icy Wind",
+     "Snarl"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Persian-Alola#8": {
+   "forme": "Persian-Alola",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Persian-Alola",
+    "item": "Life Orb",
+    "ability": "Fur Coat",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Parting Shot",
+     "Protect",
+     "Hyper Voice",
+     "Dark Pulse"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Persian-Alola#9": {
+   "forme": "Persian-Alola",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Persian-Alola",
+    "item": "Focus Sash",
+    "ability": "Fur Coat",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Parting Shot",
+     "Protect",
+     "Hyper Voice",
+     "Dark Pulse"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Persian-Alola#10": {
+   "forme": "Persian-Alola",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Persian-Alola",
+    "item": "Sitrus Berry",
+    "ability": "Fur Coat",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Parting Shot",
+     "Protect",
+     "Hyper Voice",
+     "Dark Pulse"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Persian-Alola#11": {
+   "forme": "Persian-Alola",
+   "kind": "offense",
+   "fallback": false,
+   "set": {
+    "species": "Persian-Alola",
+    "item": "Life Orb",
+    "ability": "Fur Coat",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Hyper Voice",
+     "Dark Pulse",
+     "Thunderbolt"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Persian-Alola#12": {
+   "forme": "Persian-Alola",
+   "kind": "offense",
+   "fallback": true,
+   "set": {
+    "species": "Persian-Alola",
+    "item": "Focus Sash",
+    "ability": "Fur Coat",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Hyper Voice",
+     "Dark Pulse",
+     "Thunderbolt"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Persian-Alola#13": {
+   "forme": "Persian-Alola",
+   "kind": "offense",
+   "fallback": true,
+   "set": {
+    "species": "Persian-Alola",
+    "item": "Sitrus Berry",
+    "ability": "Fur Coat",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Hyper Voice",
+     "Dark Pulse",
+     "Thunderbolt"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Farfetch’d#1": {
+   "forme": "Farfetch’d",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Farfetch’d",
+    "item": "Life Orb",
+    "ability": "Defiant",
+    "nature": "Adamant",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Brave Bird",
+     "Protect",
+     "Close Combat",
+     "Slash"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Farfetch’d#2": {
+   "forme": "Farfetch’d",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Farfetch’d",
+    "item": "Focus Sash",
+    "ability": "Defiant",
+    "nature": "Adamant",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Brave Bird",
+     "Protect",
+     "Close Combat",
+     "Slash"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Farfetch’d#3": {
+   "forme": "Farfetch’d",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Farfetch’d",
+    "item": "Sitrus Berry",
+    "ability": "Defiant",
+    "nature": "Adamant",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Brave Bird",
+     "Protect",
+     "Close Combat",
+     "Slash"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Mr. Mime#7": {
+   "forme": "Mr. Mime",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Mr. Mime",
+    "item": "Life Orb",
+    "ability": "Technician",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Dazzling Gleam",
+     "Psychic",
+     "Icy Wind"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Mr. Mime#8": {
+   "forme": "Mr. Mime",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Mr. Mime",
+    "item": "Focus Sash",
+    "ability": "Technician",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Dazzling Gleam",
+     "Psychic",
+     "Icy Wind"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Mr. Mime#9": {
+   "forme": "Mr. Mime",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Mr. Mime",
+    "item": "Sitrus Berry",
+    "ability": "Technician",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Dazzling Gleam",
+     "Psychic",
+     "Icy Wind"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Swalot#4": {
+   "forme": "Swalot",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Swalot",
+    "item": "Life Orb",
+    "ability": "Liquid Ooze",
+    "nature": "Adamant",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Gunk Shot",
+     "Earthquake",
+     "Double-Edge"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Swalot#5": {
+   "forme": "Swalot",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Swalot",
+    "item": "Focus Sash",
+    "ability": "Liquid Ooze",
+    "nature": "Adamant",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Gunk Shot",
+     "Earthquake",
+     "Double-Edge"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Swalot#6": {
+   "forme": "Swalot",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Swalot",
+    "item": "Sitrus Berry",
+    "ability": "Liquid Ooze",
+    "nature": "Adamant",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Gunk Shot",
+     "Earthquake",
+     "Double-Edge"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Salamence#7": {
+   "forme": "Salamence",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Salamence",
+    "item": "Life Orb",
+    "ability": "Intimidate",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Tailwind",
+     "Draco Meteor",
+     "Heat Wave"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Salamence#8": {
+   "forme": "Salamence",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Salamence",
+    "item": "Focus Sash",
+    "ability": "Intimidate",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Tailwind",
+     "Draco Meteor",
+     "Heat Wave"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Salamence#9": {
+   "forme": "Salamence",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Salamence",
+    "item": "Sitrus Berry",
+    "ability": "Intimidate",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Tailwind",
+     "Draco Meteor",
+     "Heat Wave"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Salamence#10": {
+   "forme": "Salamence",
+   "kind": "offense",
+   "fallback": false,
+   "set": {
+    "species": "Salamence",
+    "item": "Life Orb",
+    "ability": "Intimidate",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Draco Meteor",
+     "Heat Wave",
+     "Hyper Voice"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Salamence#11": {
+   "forme": "Salamence",
+   "kind": "offense",
+   "fallback": true,
+   "set": {
+    "species": "Salamence",
+    "item": "Focus Sash",
+    "ability": "Intimidate",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Draco Meteor",
+     "Heat Wave",
+     "Hyper Voice"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Salamence#12": {
+   "forme": "Salamence",
+   "kind": "offense",
+   "fallback": true,
+   "set": {
+    "species": "Salamence",
+    "item": "Sitrus Berry",
+    "ability": "Intimidate",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Draco Meteor",
+     "Heat Wave",
+     "Hyper Voice"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Gogoat#4": {
+   "forme": "Gogoat",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Gogoat",
+    "item": "Life Orb",
+    "ability": "Sap Sipper",
+    "nature": "Adamant",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Leaf Blade",
+     "Rock Slide",
+     "Earthquake"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Gogoat#5": {
+   "forme": "Gogoat",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Gogoat",
+    "item": "Focus Sash",
+    "ability": "Sap Sipper",
+    "nature": "Adamant",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Leaf Blade",
+     "Rock Slide",
+     "Earthquake"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Gogoat#6": {
+   "forme": "Gogoat",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Gogoat",
+    "item": "Sitrus Berry",
+    "ability": "Sap Sipper",
+    "nature": "Adamant",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Leaf Blade",
+     "Rock Slide",
+     "Earthquake"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Golisopod#2": {
+   "forme": "Golisopod",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Golisopod",
+    "item": "Life Orb",
+    "ability": "Emergency Exit",
+    "nature": "Brave",
+    "evs": [
+     32,
+     32,
+     0,
+     0,
+     2,
+     0
+    ],
+    "moves": [
+     "Protect",
+     "Close Combat",
+     "First Impression",
+     "Sucker Punch"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Golisopod#3": {
+   "forme": "Golisopod",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Golisopod",
+    "item": "Focus Sash",
+    "ability": "Emergency Exit",
+    "nature": "Brave",
+    "evs": [
+     32,
+     32,
+     0,
+     0,
+     2,
+     0
+    ],
+    "moves": [
+     "Protect",
+     "Close Combat",
+     "First Impression",
+     "Sucker Punch"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Golisopod#4": {
+   "forme": "Golisopod",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Golisopod",
+    "item": "Sitrus Berry",
+    "ability": "Emergency Exit",
+    "nature": "Brave",
+    "evs": [
+     32,
+     32,
+     0,
+     0,
+     2,
+     0
+    ],
+    "moves": [
+     "Protect",
+     "Close Combat",
+     "First Impression",
+     "Sucker Punch"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Rillaboom#77": {
+   "forme": "Rillaboom",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Rillaboom",
+    "item": "Miracle Seed",
+    "ability": "Grassy Surge",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Fake Out",
+     "Protect",
+     "Wood Hammer",
+     "Grassy Glide"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Rillaboom#78": {
+   "forme": "Rillaboom",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Rillaboom",
+    "item": "Life Orb",
+    "ability": "Grassy Surge",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Fake Out",
+     "Protect",
+     "Wood Hammer",
+     "Grassy Glide"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Rillaboom#79": {
+   "forme": "Rillaboom",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Rillaboom",
+    "item": "Focus Sash",
+    "ability": "Grassy Surge",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Fake Out",
+     "Protect",
+     "Wood Hammer",
+     "Grassy Glide"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Cinderace#1": {
+   "forme": "Cinderace",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Cinderace",
+    "item": "Life Orb",
+    "ability": "Libero",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Flare Blitz",
+     "Sucker Punch",
+     "High Jump Kick"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Cinderace#2": {
+   "forme": "Cinderace",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Cinderace",
+    "item": "Focus Sash",
+    "ability": "Libero",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Flare Blitz",
+     "Sucker Punch",
+     "High Jump Kick"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Cinderace#3": {
+   "forme": "Cinderace",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Cinderace",
+    "item": "Sitrus Berry",
+    "ability": "Libero",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Flare Blitz",
+     "Sucker Punch",
+     "High Jump Kick"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Inteleon#4": {
+   "forme": "Inteleon",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Inteleon",
+    "item": "Life Orb",
+    "ability": "Torrent",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Snipe Shot",
+     "Shadow Ball",
+     "Ice Beam"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Inteleon#5": {
+   "forme": "Inteleon",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Inteleon",
+    "item": "Focus Sash",
+    "ability": "Torrent",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Snipe Shot",
+     "Shadow Ball",
+     "Ice Beam"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Inteleon#6": {
+   "forme": "Inteleon",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Inteleon",
+    "item": "Sitrus Berry",
+    "ability": "Torrent",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Snipe Shot",
+     "Shadow Ball",
+     "Ice Beam"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Thievul#1": {
+   "forme": "Thievul",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Thievul",
+    "item": "Life Orb",
+    "ability": "Stakeout",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Parting Shot",
+     "Protect",
+     "Dark Pulse",
+     "Psychic"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Thievul#2": {
+   "forme": "Thievul",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Thievul",
+    "item": "Focus Sash",
+    "ability": "Stakeout",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Parting Shot",
+     "Protect",
+     "Dark Pulse",
+     "Psychic"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Thievul#3": {
+   "forme": "Thievul",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Thievul",
+    "item": "Sitrus Berry",
+    "ability": "Stakeout",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Parting Shot",
+     "Protect",
+     "Dark Pulse",
+     "Psychic"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Thievul#4": {
+   "forme": "Thievul",
+   "kind": "offense",
+   "fallback": false,
+   "set": {
+    "species": "Thievul",
+    "item": "Life Orb",
+    "ability": "Stakeout",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Dark Pulse",
+     "Psychic",
+     "Shadow Ball"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Thievul#5": {
+   "forme": "Thievul",
+   "kind": "offense",
+   "fallback": true,
+   "set": {
+    "species": "Thievul",
+    "item": "Focus Sash",
+    "ability": "Stakeout",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Dark Pulse",
+     "Psychic",
+     "Shadow Ball"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Thievul#6": {
+   "forme": "Thievul",
+   "kind": "offense",
+   "fallback": true,
+   "set": {
+    "species": "Thievul",
+    "item": "Sitrus Berry",
+    "ability": "Stakeout",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Dark Pulse",
+     "Psychic",
+     "Shadow Ball"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Toxtricity#5": {
+   "forme": "Toxtricity",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Toxtricity",
+    "item": "Life Orb",
+    "ability": "Punk Rock",
+    "nature": "Modest",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Overdrive",
+     "Boomburst",
+     "Sludge Bomb"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Toxtricity#6": {
+   "forme": "Toxtricity",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Toxtricity",
+    "item": "Focus Sash",
+    "ability": "Punk Rock",
+    "nature": "Modest",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Overdrive",
+     "Boomburst",
+     "Sludge Bomb"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Toxtricity#7": {
+   "forme": "Toxtricity",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Toxtricity",
+    "item": "Sitrus Berry",
+    "ability": "Punk Rock",
+    "nature": "Modest",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Overdrive",
+     "Boomburst",
+     "Sludge Bomb"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Toxtricity-Low-Key#4": {
+   "forme": "Toxtricity-Low-Key",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Toxtricity-Low-Key",
+    "item": "Life Orb",
+    "ability": "Punk Rock",
+    "nature": "Modest",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Overdrive",
+     "Boomburst",
+     "Sludge Bomb"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Toxtricity-Low-Key#5": {
+   "forme": "Toxtricity-Low-Key",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Toxtricity-Low-Key",
+    "item": "Focus Sash",
+    "ability": "Punk Rock",
+    "nature": "Modest",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Overdrive",
+     "Boomburst",
+     "Sludge Bomb"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Toxtricity-Low-Key#6": {
+   "forme": "Toxtricity-Low-Key",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Toxtricity-Low-Key",
+    "item": "Sitrus Berry",
+    "ability": "Punk Rock",
+    "nature": "Modest",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Overdrive",
+     "Boomburst",
+     "Sludge Bomb"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Grapploct#6": {
+   "forme": "Grapploct",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Grapploct",
+    "item": "Black Belt",
+    "ability": "Technician",
+    "nature": "Brave",
+    "evs": [
+     32,
+     32,
+     0,
+     0,
+     2,
+     0
+    ],
+    "moves": [
+     "Close Combat",
+     "Protect",
+     "Sucker Punch",
+     "Mach Punch"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Grapploct#7": {
+   "forme": "Grapploct",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Grapploct",
+    "item": "Life Orb",
+    "ability": "Technician",
+    "nature": "Brave",
+    "evs": [
+     32,
+     32,
+     0,
+     0,
+     2,
+     0
+    ],
+    "moves": [
+     "Close Combat",
+     "Protect",
+     "Sucker Punch",
+     "Mach Punch"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Grapploct#8": {
+   "forme": "Grapploct",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Grapploct",
+    "item": "Focus Sash",
+    "ability": "Technician",
+    "nature": "Brave",
+    "evs": [
+     32,
+     32,
+     0,
+     0,
+     2,
+     0
+    ],
+    "moves": [
+     "Close Combat",
+     "Protect",
+     "Sucker Punch",
+     "Mach Punch"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Perrserker#1": {
+   "forme": "Perrserker",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Perrserker",
+    "item": "Life Orb",
+    "ability": "Tough Claws",
+    "nature": "Brave",
+    "evs": [
+     32,
+     32,
+     0,
+     0,
+     2,
+     0
+    ],
+    "moves": [
+     "Fake Out",
+     "Close Combat",
+     "Protect",
+     "Iron Head"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Perrserker#2": {
+   "forme": "Perrserker",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Perrserker",
+    "item": "Focus Sash",
+    "ability": "Tough Claws",
+    "nature": "Brave",
+    "evs": [
+     32,
+     32,
+     0,
+     0,
+     2,
+     0
+    ],
+    "moves": [
+     "Fake Out",
+     "Close Combat",
+     "Protect",
+     "Iron Head"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Perrserker#3": {
+   "forme": "Perrserker",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Perrserker",
+    "item": "Sitrus Berry",
+    "ability": "Tough Claws",
+    "nature": "Brave",
+    "evs": [
+     32,
+     32,
+     0,
+     0,
+     2,
+     0
+    ],
+    "moves": [
+     "Fake Out",
+     "Close Combat",
+     "Protect",
+     "Iron Head"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Sirfetch’d#3": {
+   "forme": "Sirfetch’d",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Sirfetch’d",
+    "item": "Life Orb",
+    "ability": "Scrappy",
+    "nature": "Adamant",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Close Combat",
+     "Protect",
+     "Brave Bird",
+     "First Impression"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Sirfetch’d#4": {
+   "forme": "Sirfetch’d",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Sirfetch’d",
+    "item": "Focus Sash",
+    "ability": "Scrappy",
+    "nature": "Adamant",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Close Combat",
+     "Protect",
+     "Brave Bird",
+     "First Impression"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Sirfetch’d#5": {
+   "forme": "Sirfetch’d",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Sirfetch’d",
+    "item": "Sitrus Berry",
+    "ability": "Scrappy",
+    "nature": "Adamant",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Close Combat",
+     "Protect",
+     "Brave Bird",
+     "First Impression"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Pincurchin#5": {
+   "forme": "Pincurchin",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Pincurchin",
+    "item": "Life Orb",
+    "ability": "Electric Surge",
+    "nature": "Quiet",
+    "evs": [
+     32,
+     0,
+     0,
+     32,
+     2,
+     0
+    ],
+    "moves": [
+     "Protect",
+     "Rising Voltage",
+     "Scald",
+     "Hex"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Pincurchin#6": {
+   "forme": "Pincurchin",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Pincurchin",
+    "item": "Focus Sash",
+    "ability": "Electric Surge",
+    "nature": "Quiet",
+    "evs": [
+     32,
+     0,
+     0,
+     32,
+     2,
+     0
+    ],
+    "moves": [
+     "Protect",
+     "Rising Voltage",
+     "Scald",
+     "Hex"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Pincurchin#7": {
+   "forme": "Pincurchin",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Pincurchin",
+    "item": "Sitrus Berry",
+    "ability": "Electric Surge",
+    "nature": "Quiet",
+    "evs": [
+     32,
+     0,
+     0,
+     32,
+     2,
+     0
+    ],
+    "moves": [
+     "Protect",
+     "Rising Voltage",
+     "Scald",
+     "Hex"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Indeedee#43": {
+   "forme": "Indeedee",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Indeedee",
+    "item": "Life Orb",
+    "ability": "Psychic Surge",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Expanding Force",
+     "Trick Room",
+     "Hyper Voice"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Indeedee#44": {
+   "forme": "Indeedee",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Indeedee",
+    "item": "Focus Sash",
+    "ability": "Psychic Surge",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Expanding Force",
+     "Trick Room",
+     "Hyper Voice"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Indeedee#45": {
+   "forme": "Indeedee",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Indeedee",
+    "item": "Sitrus Berry",
+    "ability": "Psychic Surge",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Expanding Force",
+     "Trick Room",
+     "Hyper Voice"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Indeedee#46": {
+   "forme": "Indeedee",
+   "kind": "offense",
+   "fallback": false,
+   "set": {
+    "species": "Indeedee",
+    "item": "Life Orb",
+    "ability": "Psychic Surge",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Expanding Force",
+     "Hyper Voice",
+     "Dazzling Gleam"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Indeedee#47": {
+   "forme": "Indeedee",
+   "kind": "offense",
+   "fallback": true,
+   "set": {
+    "species": "Indeedee",
+    "item": "Focus Sash",
+    "ability": "Psychic Surge",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Expanding Force",
+     "Hyper Voice",
+     "Dazzling Gleam"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Indeedee#48": {
+   "forme": "Indeedee",
+   "kind": "offense",
+   "fallback": true,
+   "set": {
+    "species": "Indeedee",
+    "item": "Sitrus Berry",
+    "ability": "Psychic Surge",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Expanding Force",
+     "Hyper Voice",
+     "Dazzling Gleam"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Indeedee-F#56": {
+   "forme": "Indeedee-F",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Indeedee-F",
+    "item": "Life Orb",
+    "ability": "Psychic Surge",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Follow Me",
+     "Protect",
+     "Hyper Voice",
+     "Psychic"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Indeedee-F#57": {
+   "forme": "Indeedee-F",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Indeedee-F",
+    "item": "Focus Sash",
+    "ability": "Psychic Surge",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Follow Me",
+     "Protect",
+     "Hyper Voice",
+     "Psychic"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Indeedee-F#58": {
+   "forme": "Indeedee-F",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Indeedee-F",
+    "item": "Sitrus Berry",
+    "ability": "Psychic Surge",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Follow Me",
+     "Protect",
+     "Hyper Voice",
+     "Psychic"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Indeedee-F#59": {
+   "forme": "Indeedee-F",
+   "kind": "offense",
+   "fallback": false,
+   "set": {
+    "species": "Indeedee-F",
+    "item": "Life Orb",
+    "ability": "Psychic Surge",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Hyper Voice",
+     "Psychic",
+     "Dazzling Gleam"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Indeedee-F#60": {
+   "forme": "Indeedee-F",
+   "kind": "offense",
+   "fallback": true,
+   "set": {
+    "species": "Indeedee-F",
+    "item": "Focus Sash",
+    "ability": "Psychic Surge",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Hyper Voice",
+     "Psychic",
+     "Dazzling Gleam"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Indeedee-F#61": {
+   "forme": "Indeedee-F",
+   "kind": "offense",
+   "fallback": true,
+   "set": {
+    "species": "Indeedee-F",
+    "item": "Sitrus Berry",
+    "ability": "Psychic Surge",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Hyper Voice",
+     "Psychic",
+     "Dazzling Gleam"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Arboliva#5": {
+   "forme": "Arboliva",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Arboliva",
+    "item": "Life Orb",
+    "ability": "Seed Sower",
+    "nature": "Quiet",
+    "evs": [
+     32,
+     0,
+     0,
+     32,
+     2,
+     0
+    ],
+    "moves": [
+     "Protect",
+     "Hyper Voice",
+     "Leaf Storm",
+     "Dazzling Gleam"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Arboliva#6": {
+   "forme": "Arboliva",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Arboliva",
+    "item": "Focus Sash",
+    "ability": "Seed Sower",
+    "nature": "Quiet",
+    "evs": [
+     32,
+     0,
+     0,
+     32,
+     2,
+     0
+    ],
+    "moves": [
+     "Protect",
+     "Hyper Voice",
+     "Leaf Storm",
+     "Dazzling Gleam"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Arboliva#7": {
+   "forme": "Arboliva",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Arboliva",
+    "item": "Sitrus Berry",
+    "ability": "Seed Sower",
+    "nature": "Quiet",
+    "evs": [
+     32,
+     0,
+     0,
+     32,
+     2,
+     0
+    ],
+    "moves": [
+     "Protect",
+     "Hyper Voice",
+     "Leaf Storm",
+     "Dazzling Gleam"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Squawkabilly#1": {
+   "forme": "Squawkabilly",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Squawkabilly",
+    "item": "Sitrus Berry",
+    "ability": "Intimidate",
+    "nature": "Careful",
+    "evs": [
+     32,
+     0,
+     2,
+     0,
+     32,
+     0
+    ],
+    "moves": [
+     "Parting Shot",
+     "Brave Bird",
+     "Protect",
+     "Tailwind"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Squawkabilly#2": {
+   "forme": "Squawkabilly",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Squawkabilly",
+    "item": "Focus Sash",
+    "ability": "Intimidate",
+    "nature": "Careful",
+    "evs": [
+     32,
+     0,
+     2,
+     0,
+     32,
+     0
+    ],
+    "moves": [
+     "Parting Shot",
+     "Brave Bird",
+     "Protect",
+     "Tailwind"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Squawkabilly#3": {
+   "forme": "Squawkabilly",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Squawkabilly",
+    "item": "Leftovers",
+    "ability": "Intimidate",
+    "nature": "Careful",
+    "evs": [
+     32,
+     0,
+     2,
+     0,
+     32,
+     0
+    ],
+    "moves": [
+     "Parting Shot",
+     "Brave Bird",
+     "Protect",
+     "Tailwind"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Squawkabilly#4": {
+   "forme": "Squawkabilly",
+   "kind": "offense",
+   "fallback": false,
+   "set": {
+    "species": "Squawkabilly",
+    "item": "Life Orb",
+    "ability": "Intimidate",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Brave Bird",
+     "Double-Edge",
+     "Foul Play"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Squawkabilly#5": {
+   "forme": "Squawkabilly",
+   "kind": "offense",
+   "fallback": true,
+   "set": {
+    "species": "Squawkabilly",
+    "item": "Focus Sash",
+    "ability": "Intimidate",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Brave Bird",
+     "Double-Edge",
+     "Foul Play"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Squawkabilly#6": {
+   "forme": "Squawkabilly",
+   "kind": "offense",
+   "fallback": true,
+   "set": {
+    "species": "Squawkabilly",
+    "item": "Sitrus Berry",
+    "ability": "Intimidate",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Brave Bird",
+     "Double-Edge",
+     "Foul Play"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Mabosstiff#1": {
+   "forme": "Mabosstiff",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Mabosstiff",
+    "item": "Life Orb",
+    "ability": "Stakeout",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Jaw Lock",
+     "Double-Edge",
+     "Psychic Fangs"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Mabosstiff#2": {
+   "forme": "Mabosstiff",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Mabosstiff",
+    "item": "Focus Sash",
+    "ability": "Stakeout",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Jaw Lock",
+     "Double-Edge",
+     "Psychic Fangs"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Mabosstiff#3": {
+   "forme": "Mabosstiff",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Mabosstiff",
+    "item": "Sitrus Berry",
+    "ability": "Stakeout",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Jaw Lock",
+     "Double-Edge",
+     "Psychic Fangs"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Baxcalibur#3": {
+   "forme": "Baxcalibur",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Baxcalibur",
+    "item": "Life Orb",
+    "ability": "Thermal Exchange",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Glaive Rush",
+     "Icicle Crash",
+     "High Horsepower"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Baxcalibur#4": {
+   "forme": "Baxcalibur",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Baxcalibur",
+    "item": "Focus Sash",
+    "ability": "Thermal Exchange",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Glaive Rush",
+     "Icicle Crash",
+     "High Horsepower"
+    ],
+    "regional_count": 0
+   }
+  },
+  "Baxcalibur#5": {
+   "forme": "Baxcalibur",
+   "kind": "balanced",
+   "fallback": true,
+   "set": {
+    "species": "Baxcalibur",
+    "item": "Sitrus Berry",
+    "ability": "Thermal Exchange",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Glaive Rush",
+     "Icicle Crash",
+     "High Horsepower"
+    ],
+    "regional_count": 0
+   }
+  },
+  "M-Absol Z#9": {
+   "forme": "Absol-Mega-Z",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Absol",
+    "item": "Absolite Z",
+    "ability": "Pressure",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Sucker Punch",
+     "Protect",
+     "Night Slash",
+     "Shadow Claw"
+    ],
+    "regional_count": 0
+   }
+  },
+  "M-Salamence#1": {
+   "forme": "Salamence-Mega",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Salamence",
+    "item": "Salamencite",
+    "ability": "Intimidate",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Hyper Voice",
+     "Draco Meteor",
+     "Tailwind",
+     "Protect"
+    ],
+    "regional_count": 121
+   }
+  },
+  "M-Salamence#9": {
+   "forme": "Salamence-Mega",
+   "kind": "offense",
+   "fallback": false,
+   "set": {
+    "species": "Salamence",
+    "item": "Salamencite",
+    "ability": "Intimidate",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Hyper Voice",
+     "Draco Meteor",
+     "Heat Wave",
+     "Protect"
+    ],
+    "regional_count": 5
+   }
+  },
+  "M-Garchomp Z#14": {
+   "forme": "Garchomp-Mega-Z",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Garchomp",
+    "item": "Garchompite Z",
+    "ability": "Rough Skin",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Draco Meteor",
+     "Earth Power",
+     "Power Gem",
+     "Protect"
+    ],
+    "regional_count": 6
+   }
+  },
+  "M-Lucario Z#14": {
+   "forme": "Lucario-Mega-Z",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Lucario",
+    "item": "Lucarionite Z",
+    "ability": "Justified",
+    "nature": "Timid",
+    "evs": [
+     2,
+     0,
+     0,
+     32,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Aura Sphere",
+     "Flash Cannon",
+     "Psychic"
+    ],
+    "regional_count": 0
+   }
+  },
+  "M-Golisopod#32": {
+   "forme": "Golisopod-Mega",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Golisopod",
+    "item": "Golisopite",
+    "ability": "Emergency Exit",
+    "nature": "Brave",
+    "evs": [
+     32,
+     32,
+     0,
+     0,
+     2,
+     0
+    ],
+    "moves": [
+     "Protect",
+     "Close Combat",
+     "First Impression",
+     "Sucker Punch"
+    ],
+    "regional_count": 0
+   }
+  },
+  "M-Baxcalibur#7": {
+   "forme": "Baxcalibur-Mega",
+   "kind": "balanced",
+   "fallback": false,
+   "set": {
+    "species": "Baxcalibur",
+    "item": "Baxcalibrite",
+    "ability": "Thermal Exchange",
+    "nature": "Jolly",
+    "evs": [
+     2,
+     32,
+     0,
+     0,
+     0,
+     32
+    ],
+    "moves": [
+     "Protect",
+     "Glaive Rush",
+     "Icicle Crash",
+     "High Horsepower"
+    ],
+    "regional_count": 0
+   }
+  }
+ }
+}

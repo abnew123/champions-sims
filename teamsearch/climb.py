@@ -216,19 +216,34 @@ def run_round(mode):
         rng = random.Random(f'{n}|{rnd}')
         rest = [x for _, x in ms[cfg['prefilter']:]]
         plan[n] = dict(cur=cur, top=[x for _, x in ms[:cfg['prefilter']]], rand=rng.sample(rest, min(cfg['random_extra'], len(rest))),
-                       mscore={key_s(x[3]): sc for sc, x in ms}, n_nb=len(nb))
-    games = sum(60 * (cfg['bring_k'] * (1 + len(p['top']) + len(p['rand'])) + cfg['confirm_pj'] * (1 + cfg['top_k'])) for p in plan.values())
+                       mscore={key_s(x[3]): sc for sc, x in ms}, n_nb=len(nb), order=[x for _, x in ms], forced=[])
+    if os.environ.get('TS_FORCE_NEW') == '1':
+        # M-B backtest v2 (the user, 2026-11-07): v1's pre-filter never let Rillaboom or Indeedee-F be screened (one-on-one cells don't
+        # see Fake Out, Follow Me or terrain). Each catalog forme marked blind gets one screened swap per round: its best swap by the
+        # pre-filter on one start, the starts taking turns (round and TS_FORCE_OFFSET rotate which start gets which forme), at most
+        # TS_FORCE_MAX (8) a start: every forme in a round with 5 starts, fewer in later rounds with fewer starts left
+        act = sorted(plan); off = rnd + int(os.environ.get('TS_FORCE_OFFSET', 0)); cap = int(os.environ.get('TS_FORCE_MAX', 8))
+        fm = sorted({q['forme'] for q in POOL if q.get('blind')}); fm = fm[off % len(fm):] + fm[:off % len(fm)]
+        for k, f in enumerate(fm):
+            for j in range(len(act)):                                   # the next start that has a swap to this forme
+                p = plan[act[(k + off + j) % len(act)]]; have = {key_s(x[3]) for x in p['top'] + p['rand'] + p['forced']}
+                x = next((x for x in p['order'] if forme(x[2]) == f), None)
+                if x is None or len(p['forced']) >= cap: continue
+                if key_s(x[3]) not in have: p['forced'].append(x)
+                break
+        print(f"round {rnd}: {sum(len(p['forced']) for p in plan.values())} forced swaps to new formes", flush=True)
+    games = sum(60 * (cfg['bring_k'] * (1 + len(p['top']) + len(p['rand']) + len(p['forced'])) + cfg['confirm_pj'] * (1 + cfg['top_k'])) for p in plan.values())
     print(f"round {rnd} ({mode}): {len(active)} teams, about {games} games", flush=True)
     uniq = lambda ts: list({key_s(t): t for t in ts}.values())
     # starts interleaved (2026-10-14): a start's neighbours share most fours, so run them apart and the later ones find those games in
     # the game cache instead of playing them at the same time (the order never changes a result)
     mix = lambda ls: [l[i] for i in range(max(map(len, ls), default=0)) for l in ls if i < len(l)]
-    scr_teams = uniq([p['cur'] for p in plan.values()] + mix([[x[3] for x in p['top'] + p['rand']] for p in plan.values()]))
+    scr_teams = uniq([p['cur'] for p in plan.values()] + mix([[x[3] for x in p['top'] + p['rand'] + p['forced']] for p in plan.values()]))
     progress(round=rnd, mode=mode, phase='screen', starts=len(active), teams=len(scr_teams), seed=seed_s, per_job=1, jobs_per_team=live_jobs('screen'))
     os.environ['TS_BRING_K'] = str(cfg['bring_k'])
     scr = dict(zip(map(key_s, scr_teams), E.search_many(scr_teams, seed_s)))
     for n, p in plan.items():
-        p['ranked'] = sorted(p['top'] + p['rand'], key=lambda x: -paired(scr[key_s(p['cur'])], scr[key_s(x[3])])[0])[:cfg['top_k']]
+        p['ranked'] = sorted(p['top'] + p['rand'] + p['forced'], key=lambda x: -paired(scr[key_s(p['cur'])], scr[key_s(x[3])])[0])[:cfg['top_k']]
     con_teams = uniq([p['cur'] for p in plan.values()] + mix([[x[3] for x in p['ranked']] for p in plan.values()]))
     progress(round=rnd, mode=mode, phase='confirm', starts=len(active), teams=len(con_teams), seed=seed_c, per_job=1 if os.environ.get('TS_OPP') == 'pool' else cfg['confirm_pj'], jobs_per_team=live_jobs())
     con = dict(zip(map(key_s, con_teams), E.evaluate_fixed(con_teams, [scr[key_s(t)]['chosen'] for t in con_teams], cfg['confirm_pj'], seed_c)))
@@ -251,7 +266,7 @@ def run_round(mode):
                    best=dict(slot=x[0], out=x[1], into=x[2], note=x[4], diff=m, se=se, matrix=p['mscore'][key_s(x[3])],
                              from_random=x in p['rand']),
                    screened=[dict(out=y[1], into=y[2], diff=paired(scr[key_s(p['cur'])], scr[key_s(y[3])])[0], matrix=p['mscore'][key_s(y[3])],
-                                  random=y in p['rand']) for y in p['top'] + p['rand']], cap=st['cap'],
+                                  random=y in p['rand'], forced=y in p['forced']) for y in p['top'] + p['rand'] + p['forced']], cap=st['cap'],
                    verdict=it['verdict'], seq=SEQ, confirmed=[dict(out=cc['x'][1], into=cc['x'][2], diff=mm, se=ss, batches=len(cc['batches']), holds_failed=cc.get('holds_failed', 0))
                                                               for (mm, ss), cc in stats])
         if it['verdict'] == 'move':
@@ -335,8 +350,9 @@ def learned_prefilter(log_path, lam=3.0):
     within-team correlation of +0.20 with the screened gain; incoming/outgoing set effects + the matrix score, ridge, +0.30 on
     held-out starts). Returns score(out gid, in gid, matrix score of the new team) or None if there's no history."""
     import numpy as np
-    if not os.path.exists(log_path): return None
-    rows = [(s['out'], s['into'], s['matrix'], s['diff']) for l in open(log_path) for s in json.loads(l).get('screened', [])]
+    paths = [p for p in [log_path] + os.environ.get('TS_LEARN_HIST', '').split(':') if p and os.path.exists(p)]   # TS_LEARN_HIST: earlier
+    if not paths: return None                                          # climbs' logs (the M-B backtest v2: earlier self-play iterations)
+    rows = [(s['out'], s['into'], s['matrix'], s['diff']) for f in paths for l in open(f) for s in json.loads(l).get('screened', [])]
     if len(rows) < 50: return None
     intos = sorted({r[1] for r in rows}); outs = sorted({r[0] for r in rows})
     ii = {g: i for i, g in enumerate(intos)}; oi = {g: len(intos) + i for i, g in enumerate(outs)}; k = len(intos) + len(outs) + 1

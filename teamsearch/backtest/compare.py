@@ -6,6 +6,10 @@ mc_truth.json (usage only). Predictions: M-B's own usage over its last 14 days, 
 each self-play iteration's weighted field (sp_pred_<i>.json: a team's weight on each of its six formes).
 Scores per prediction and window: Spearman rank correlation over the formes at >= 2% real or predicted usage; total variation distance
 of the usage vectors (each normalised to sum 1); and M-C's new formes: real usage against predicted.
+v2 (the user, 2026-11-07; fixed before the v2 run): also v2's iterations (backtest/v2/), the 16-team starting field on its own, and
+"M-B + shift": all of M-B's usage plus the field's change since the start (the field is about a third of M-B's players). New-forme
+readouts per prediction: flagged = the new formes at >= 5% real settled usage that it puts at >= 3%; false alarms = new formes it puts
+at >= 5% that are under 2% real settled.
   python3 backtest/compare.py            -> report on stdout, compare.json
 """
 import json, os, sys, glob, datetime, collections
@@ -73,27 +77,41 @@ def score(pred, real):
     tv = 0.5 * sum(abs(pred.get(f, 0) / tp - real.get(f, 0) / tr) for f in set(pred) | set(real))
     return dict(spearman=round(sp, 3), tv=round(tv, 3), n=len(fs))
 
+def preds_of(d):
+    out = {}
+    for f in glob.glob(os.path.join(d, 'sp_pred_*.json')):
+        p = json.load(open(f)); out[p['iteration']] = p['usage']
+    return dict(sorted(out.items()))
+
 def main():
     T = truth(); mb = mb_usage(); preds = {'M-B carried over': mb}
-    for f in sorted(glob.glob(os.path.join(HERE, 'sp_pred_*.json')), key=lambda f: int(f.rsplit('_', 1)[1][:-5])):
-        p = json.load(open(f))
-        if p['iteration'] > 0: preds[f"self-play {p['iteration']}"] = p['usage']
+    v1, v2 = preds_of(HERE), preds_of(os.path.join(HERE, 'v2'))
+    shift = lambda v, i: {f: max(0.0, mb.get(f, 0) + v[i].get(f, 0) - v[0].get(f, 0)) for f in set(mb) | set(v[i]) | set(v[0])}
+    if 0 in v1: preds['16 M-B teams (start)'] = v1[0]
+    preds.update({f'self-play {i}': u for i, u in v1.items() if i > 0})
+    if v1 and 0 in v1: preds[f'M-B + shift {max(v1)}'] = shift(v1, max(v1))
+    preds.update({f'v2 self-play {i}': u for i, u in v2.items() if i > 0})
+    preds.update({f'v2 M-B + shift {i}': shift(v2, i) for i in v2 if i > 0 and 0 in v2})
     sys.path.insert(0, HERE); from build_mb import NEW, NEW_MEGA
     new = {L.DEX['species'].get(L.idf(x), {}).get('name', x) for x in NEW} | set(NEW_MEGA)
-    out = dict(windows={w: dict(players=T[w]['players'], sheets=T[w]['sheets']) for w in WIN}, scores={}, new={})
-    print('rank correlation / distance (lower is closer) against real usage, one vote per player:')
-    print(f"  {'prediction':22s}" + ''.join(f"{w:>24s}" for w in WIN))
+    real = T['M-C settled']['usage']; big = sorted(f for f in new if real.get(f, 0) >= 0.05)
+    out = dict(windows={w: dict(players=T[w]['players'], sheets=T[w]['sheets']) for w in WIN}, scores={}, new={}, big_new=big)
+    print('rank correlation / distance (lower is closer) against real usage, one vote per player; new formes flagged (of '
+          f'{len(big)} at >= 5% real) and false alarms:')
+    print(f"  {'prediction':24s}" + ''.join(f"{w:>24s}" for w in WIN) + '   flagged  false alarms')
     for n, p in preds.items():
-        out['scores'][n] = {w: score(p, T[w]['usage']) for w in WIN}
-        print(f"  {n:22s}" + ''.join(f"{s['spearman']:>13.2f} / {s['tv']:.2f}  " for s in out['scores'][n].values()))
-    print("\nM-C's new formes: real usage (settled; weeks 1-2) against each prediction")
-    rows = sorted(new, key=lambda f: -T['M-C settled']['usage'].get(f, 0))
-    print(f"  {'forme':20s} {'settled':>8s} {'wk 1-2':>7s}" + ''.join(f"{n[-14:]:>15s}" for n in preds))
-    for f in rows:
-        r = T['M-C settled']['usage'].get(f, 0); e = T['M-C weeks 1-2']['usage'].get(f, 0)
+        fl = [f for f in big if p.get(f, 0) >= 0.03]; fa = [f for f in new if p.get(f, 0) >= 0.05 and real.get(f, 0) < 0.02]
+        out['scores'][n] = dict({w: score(p, T[w]['usage']) for w in WIN}, flagged=fl, false_alarms=fa)
+        print(f"  {n:24s}" + ''.join(f"{s['spearman']:>13.2f} / {s['tv']:.2f}  " for w, s in out['scores'][n].items() if w in WIN)
+              + f"   {len(fl)} of {len(big)}   {len(fa)}" + (f"  ({', '.join(fa)})" if fa else ''))
+    cols = ['M-B carried over'] + [n for n in preds if n.startswith('self-play')][-1:] + [n for n in preds if n.startswith('v2 self-play')]
+    print("\nM-C's new formes: real usage (settled; weeks 1-2) against predictions")
+    print(f"  {'forme':20s} {'settled':>8s} {'wk 1-2':>7s}" + ''.join(f"{n.replace('self-play', 'sp')[-12:]:>13s}" for n in cols))
+    for f in sorted(new, key=lambda f: -real.get(f, 0)):
+        r = real.get(f, 0); e = T['M-C weeks 1-2']['usage'].get(f, 0)
         if r < 0.005 and e < 0.005 and all(p.get(f, 0) < 0.005 for p in preds.values()): continue
         out['new'][f] = dict(settled=r, early=e, **{n: p.get(f, 0) for n, p in preds.items()})
-        print(f"  {f:20s} {100 * r:7.1f}% {100 * e:6.1f}%" + ''.join(f"{100 * p.get(f, 0):14.1f}%" for p in preds.values()))
+        print(f"  {f:20s} {100 * r:7.1f}% {100 * e:6.1f}%" + ''.join(f"{100 * preds[n].get(f, 0):12.1f}%" for n in cols))
     json.dump(out, open(os.path.join(HERE, 'compare.json'), 'w'), indent=1)
 
 if __name__ == '__main__': main()

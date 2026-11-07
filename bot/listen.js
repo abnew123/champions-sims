@@ -13,13 +13,21 @@ const PASS = JSON.parse(fs.readFileSync(path.join(HERE, 'account.json'))).passwo
 const WS = 'wss://sim3.psim.us/showdown/websocket', ACTION = 'https://play.pokemonshowdown.com/action.php';
 const CHAT = path.join(OUT, 'chat.jsonl');
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), 'owner:', ...a);
-let ws, me = null, lastChallstr = null; const logouts = [];
+let ws, me = null, lastChallstr = null; const logouts = [], failed = [];
 function send(s) { if (ws && ws.readyState === WebSocket.OPEN) ws.send(s); }
 function connect() {
-  ws = new WebSocket(WS);
+  const w = ws = new WebSocket(WS);
   ws.onmessage = e => { for (const line of String(e.data).split('\n')) onLine(line).catch(err => log('error', String(err).slice(0, 120))); };
   ws.onclose = () => { log('socket closed; reconnecting in 10 s'); me = null; setTimeout(connect, 10000); };
   ws.onerror = () => {};
+  // still not logged in 60 s after connecting (a hung reconnect after the Mac woke, or a login request that failed): connect again, as
+  // bot/client.js does (2026-11-07)
+  setTimeout(() => {
+    if (ws !== w || me) return;
+    log('not logged in 60 s after connecting; connecting again');
+    w.onclose = w.onmessage = null; try { w.close(); } catch (_) {}
+    connect();
+  }, 60000);
 }
 async function onLine(line) {
   const p = line.split('|');
@@ -40,7 +48,10 @@ async function onLine(line) {
 async function login() {
   const body = new URLSearchParams({act: 'login', name: USER, pass: PASS, challstr: lastChallstr});
   const t = await (await fetch(ACTION, {method: 'POST', body})).text(); const j = JSON.parse(t.slice(1));
-  if (!j.assertion) { log('login failed'); process.exit(1); }
+  // a refused login stops the listener only after the fourth within an hour (2026-11-07: it had stopped after the Mac slept on Nov 5 and
+  // again today); the earlier ones wait for the 60 s check above to connect again with a new challstr
+  if (!j.assertion) { const now = Date.now(); failed.push(now); const recent = failed.filter(t => now - t < 3600e3).length;
+    log(`login failed${recent > 3 ? ': the fourth this hour, stopping' : ''}`); if (recent > 3) process.exit(1); return; }
   send(`|/trn ${USER},0,${j.assertion}`);
 }
 function PM(p) {

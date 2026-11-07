@@ -102,13 +102,13 @@ def step_card(path, title, done_marker, remote=True):
     if any(done_marker in l for l in L): return card(title, 'finished', 1, 1, 'step', lines=[f"finished {ampm(dt(mt))}"])
     failed = next((l for l in reversed(L) if ' failed' in l and 'UTC' in l), None)
     head = next((l[9:].strip() for l in reversed(L) if re.match(r'^\d\d:\d\d [AP]M (round \d+:|v\d+\w*:|final check:)', l)), '')
-    seg, label, stage = [], None, None
+    seg, label, stage, unit = [], None, None, 'teams'
     for l in L:
         if re.match(r'^\d\d:\d\d [AP]M (round \d+:|final check:)', l): seg, label, stage = [], None, None
-        m = re.match(r'^\d\d:\d\d [AP]M\s+((bring search|confirm games|confirm|final check|score)[^:]*): (\d+)/(\d+) teams, (\d+) min', l)
+        m = re.match(r'^\d\d:\d\d [AP]M\s+((bring search|confirm games|confirm|final check|score)[^:]*): (\d+)/(\d+) (teams|games), (\d+) min', l)
         if m:
             if m.group(1) != stage: seg, stage, label = [], m.group(1), m.group(2)       # a new seed is a new stage
-            seg.append(tuple(map(int, m.groups()[2:])))
+            seg.append((int(m.group(3)), int(m.group(4)), int(m.group(6)))); unit = m.group(5)   # games: the M-B calibration sims
     state = 'stopped' if failed or quiet else 'running'; extra = [head] if head else []
     if failed: extra.append(failed.split('UTC: ', 1)[-1])
     if not seg: return card(title, state, 0, 0, '', lines=extra + ([] if failed or quiet else ['starting the next stage…']))
@@ -119,7 +119,7 @@ def step_card(path, title, done_marker, remote=True):
         elif rate: extra.append(f"{label}: " + late(mt + (N - n) / rate * 60, n, N, remote))
         else: extra.append(f"{label}: estimating time left…")
         if remote and time.time() - mt > 300: extra.append(f"progress as of {ampm(dt(mt))} (results copy from the box every 15 minutes)")
-    return card(title, state, n, N, f'teams ({label})', None, state == 'running', None, extra)
+    return card(title, state, n, N, f'{unit} ({label})', None, state == 'running', None, extra)
 
 def other_thread():
     """the other thread's progress cards (the project's status_server.py, run read-only), or a link if its layout changes"""
@@ -210,7 +210,8 @@ def cards():
                                  ('round_accrefine.log', 'Sure-hit pass (set swaps toward more sure hits, then a final check)', 'accuracy refinement done'),
                                  ('round_scoreteams.log', 'Scoring candidate teams against the current-meta pool', 'scores (win share'),
                                  ('backtest/selfplay.log', 'M-B to M-C self-play backtest (field scoring; its climbs show as the climb card)', 'self-play backtest finished'),
-                                 ('backtest/v2/selfplay.log', 'M-B to M-C self-play backtest v2 (field scoring; its climbs show as the climb card)', 'self-play backtest finished')):
+                                 ('backtest/v2/selfplay.log', 'M-B to M-C self-play backtest v2 (field scoring; its climbs show as the climb card)', 'self-play backtest finished'),
+                                 ('backtest/calib_mb.log', 'M-B calibration sims: the sim plays real M-B ladder matchups (both sheets, the brings played)', 'calibration sims done')):
         c = step_card(C(logname), title, done, bool(CD))
         if c and (not pr or pr.get('phase') == 'done' or os.path.getmtime(C(logname)) > (pr.get('at') or 0)): cards.append(c)
     if stt:

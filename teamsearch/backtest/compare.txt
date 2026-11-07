@@ -1,0 +1,22 @@
+rank correlation / distance (lower is closer) against real usage, one vote per player:
+  prediction                       M-C weeks 1-2           M-C weeks 3-5             M-C settled
+  M-B carried over               0.34 / 0.42           0.37 / 0.35           0.41 / 0.30  
+  self-play 1                    0.20 / 0.50           0.29 / 0.54           0.34 / 0.51  
+  self-play 2                    0.22 / 0.53           0.28 / 0.56           0.34 / 0.53  
+  self-play 3                    0.21 / 0.54           0.24 / 0.58           0.30 / 0.54  
+  self-play 4                    0.25 / 0.61           0.24 / 0.66           0.34 / 0.61  
+
+M-C's new formes: real usage (settled; weeks 1-2) against each prediction
+  forme                 settled  wk 1-2 B carried over    self-play 1    self-play 2    self-play 3    self-play 4
+  Rillaboom               34.1%   57.0%           0.1%           0.0%           0.0%           0.0%           0.0%
+  Garchomp-Mega-Z         12.8%    8.6%           0.0%           0.0%           0.0%           0.0%           0.0%
+  Indeedee-F              12.0%   16.0%           0.0%           0.0%           0.0%           0.0%           0.0%
+  Golisopod-Mega          11.4%   10.5%           0.0%           0.0%           0.0%           0.0%          23.0%
+  Salamence-Mega          10.3%   31.3%           0.0%           0.0%           0.0%           0.0%           0.0%
+  Indeedee                 4.2%    7.3%           0.0%           0.0%           0.0%           0.0%           0.0%
+  Lucario-Mega-Z           2.0%    3.3%           0.0%           0.0%           0.0%           0.0%           0.0%
+  Baxcalibur-Mega          1.2%    1.1%           0.1%           0.0%           0.0%           0.0%           0.0%
+  Absol-Mega-Z             1.2%    0.1%           0.0%           0.0%           0.0%           0.0%           0.0%
+  Grapploct                0.6%    0.2%           0.0%           0.0%           0.0%           0.0%           0.0%
+  Pincurchin               0.5%    0.0%           0.0%           0.0%           0.0%           0.0%           0.0%
+  Baxcalibur               0.4%    0.7%           0.0%           0.0%           0.0%           0.0%           0.0%

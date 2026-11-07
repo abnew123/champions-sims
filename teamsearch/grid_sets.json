@@ -35126,5 +35126,4079 @@
 "Protect"
 ],
 "regional_count": 0
+},
+"Garchomp#39": {
+"species": "Garchomp",
+"item": "Sitrus Berry",
+"ability": "Rough Skin",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Earthquake",
+"Rock Slide",
+"Dragon Claw",
+"Protect"
+],
+"regional_count": 0
+},
+"Incineroar#104": {
+"species": "Incineroar",
+"item": "Passho Berry",
+"ability": "Intimidate",
+"nature": "Impish",
+"evs": [
+32,
+0,
+21,
+0,
+10,
+3
+],
+"moves": [
+"Fake Out",
+"Throat Chop",
+"Parting Shot",
+"Protect"
+],
+"regional_count": 0
+},
+"Whimsicott#27": {
+"species": "Whimsicott",
+"item": "Occa Berry",
+"ability": "Prankster",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Moonblast",
+"Tailwind",
+"Charm",
+"Light Screen"
+],
+"regional_count": 0
+},
+"M-Charizard Y#29": {
+"species": "Charizard",
+"item": "Charizardite Y",
+"ability": "Blaze",
+"nature": "Modest",
+"evs": [
+20,
+0,
+32,
+1,
+0,
+13
+],
+"moves": [
+"Heat Wave",
+"Solar Beam",
+"Weather Ball",
+"Protect"
+],
+"regional_count": 0
+},
+"Farigiraf#94": {
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"nature": "Bold",
+"evs": [
+25,
+0,
+26,
+0,
+15,
+0
+],
+"moves": [
+"Psychic",
+"Thunderbolt",
+"Trick Room",
+"Protect"
+],
+"regional_count": 0
+},
+"Farigiraf#95": {
+"species": "Farigiraf",
+"item": "Colbur Berry",
+"ability": "Armor Tail",
+"nature": "Sassy",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Helping Hand",
+"Psychic",
+"Protect",
+"Trick Room"
+],
+"regional_count": 0
+},
+"Sinistcha#32": {
+"species": "Sinistcha",
+"item": "Leftovers",
+"ability": "Hospitality",
+"nature": "Bold",
+"evs": [
+32,
+0,
+14,
+0,
+20,
+0
+],
+"moves": [
+"Matcha Gotcha",
+"Rage Powder",
+"Trick Room",
+"Protect"
+],
+"regional_count": 0
+},
+"M-Floette#13": {
+"species": "Floette-Eternal",
+"item": "Floettite",
+"ability": "Flower Veil",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Dazzling Gleam",
+"Lightof Ruin",
+"Moonblast",
+"Protect"
+],
+"regional_count": 0
+},
+"Sylveon#25": {
+"species": "Sylveon",
+"item": "Fairy Feather",
+"ability": "Pixilate",
+"nature": "Modest",
+"evs": [
+13,
+0,
+22,
+23,
+0,
+8
+],
+"moves": [
+"Detect",
+"Hyper Voice",
+"Hyper Beam",
+"Quick Attack"
+],
+"regional_count": 0
+},
+"Pelipper#42": {
+"species": "Pelipper",
+"item": "Damp Rock",
+"ability": "Drizzle",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Hurricane",
+"Weather Ball",
+"Tailwind",
+"Protect"
+],
+"regional_count": 0
+},
+"Archaludon#28": {
+"species": "Archaludon",
+"item": "Leftovers",
+"ability": "Stamina",
+"nature": "Modest",
+"evs": [
+32,
+0,
+0,
+1,
+29,
+4
+],
+"moves": [
+"Electro Shot",
+"Flash Cannon",
+"Dragon Pulse",
+"Protect"
+],
+"regional_count": 0
+},
+"M-Delphox#10": {
+"species": "Delphox",
+"item": "Delphoxite",
+"ability": "Blaze",
+"nature": "Timid",
+"evs": [
+13,
+0,
+12,
+18,
+0,
+23
+],
+"moves": [
+"Heat Wave",
+"Psychic",
+"Nasty Plot",
+"Protect"
+],
+"regional_count": 0
+},
+"Gholdengo#25": {
+"species": "Gholdengo",
+"item": "Choice Scarf",
+"ability": "Goodas Gold",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Trick",
+"Power Gem",
+"Make It Rain",
+"Shadow Ball"
+],
+"regional_count": 0
+},
+"Gholdengo#26": {
+"species": "Gholdengo",
+"item": "Metal Coat",
+"ability": "Goodas Gold",
+"nature": "Modest",
+"evs": [
+17,
+0,
+0,
+17,
+0,
+32
+],
+"moves": [
+"Make It Rain",
+"Shadow Ball",
+"Nasty Plot",
+"Protect"
+],
+"regional_count": 0
+},
+"Venusaur#15": {
+"species": "Venusaur",
+"item": "Occa Berry",
+"ability": "Chlorophyll",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Leaf Storm",
+"Sludge Bomb",
+"Sleep Powder",
+"Protect"
+],
+"regional_count": 0
+},
+"Milotic#57": {
+"species": "Milotic",
+"item": "Leftovers",
+"ability": "Competitive",
+"nature": "Calm",
+"evs": [
+20,
+0,
+20,
+4,
+8,
+14
+],
+"moves": [
+"Muddy Water",
+"Coil",
+"Hypnosis",
+"Recover"
+],
+"regional_count": 0
+},
+"Milotic#58": {
+"species": "Milotic",
+"item": "Sitrus Berry",
+"ability": "Competitive",
+"nature": "Calm",
+"evs": [
+20,
+0,
+20,
+4,
+8,
+14
+],
+"moves": [
+"Scald",
+"Icy Wind",
+"Ice Beam",
+"Protect"
+],
+"regional_count": 0
+},
+"M-Scovillain#6": {
+"species": "Scovillain",
+"item": "Scovillainite",
+"ability": "Moody",
+"nature": "Bold",
+"evs": [
+32,
+0,
+15,
+0,
+15,
+4
+],
+"moves": [
+"Giga Drain",
+"Overheat",
+"Rage Powder",
+"Protect"
+],
+"regional_count": 0
+},
+"Arcanine-H#13": {
+"species": "Arcanine-Hisui",
+"item": "Life Orb",
+"ability": "Rock Head",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Head Smash",
+"Flare Blitz",
+"Extreme Speed",
+"Protect"
+],
+"regional_count": 0
+},
+"Arcanine-H#14": {
+"species": "Arcanine-Hisui",
+"item": "Choice Scarf",
+"ability": "Rock Head",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Rock Slide",
+"Flare Blitz",
+"Head Smash",
+"Extreme Speed"
+],
+"regional_count": 0
+},
+"Ninetales-Alola#14": {
+"species": "Ninetales-Alola",
+"item": "Never Melt Ice",
+"ability": "Snow Warning",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Blizzard",
+"Freeze Dry",
+"Encore",
+"Protect"
+],
+"regional_count": 0
+},
+"Ninetales-Alola#15": {
+"species": "Ninetales-Alola",
+"item": "Choice Scarf",
+"ability": "Snow Warning",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Icy Wind",
+"Blizzard",
+"Freeze Dry",
+"Encore"
+],
+"regional_count": 0
+},
+"Ninetales-Alola#16": {
+"species": "Ninetales-Alola",
+"item": "Focus Sash",
+"ability": "Snow Warning",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Blizzard",
+"Aurora Veil",
+"Freeze Dry"
+],
+"regional_count": 0
+},
+"Lycanroc-Dusk#4": {
+"species": "Lycanroc-Dusk",
+"item": "Focus Sash",
+"ability": "Tough Claws",
+"nature": "Adamant",
+"evs": [
+0,
+32,
+0,
+0,
+2,
+32
+],
+"moves": [
+"Protect",
+"Accelerock",
+"Rock Slide",
+"Close Combat"
+],
+"regional_count": 0
+},
+"Excadrill#10": {
+"species": "Excadrill",
+"item": "Life Orb",
+"ability": "Sand Rush",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Rock Slide",
+"High Horsepower",
+"Iron Head",
+"Protect"
+],
+"regional_count": 0
+},
+"Excadrill#11": {
+"species": "Excadrill",
+"item": "Expert Belt",
+"ability": "Sand Rush",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"High Horsepower",
+"Earthquake",
+"Iron Head"
+],
+"regional_count": 0
+},
+"Torkoal#14": {
+"species": "Torkoal",
+"item": "Leftovers",
+"ability": "Drought",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Eruption",
+"Body Press",
+"Helping Hand",
+"Protect"
+],
+"regional_count": 0
+},
+"Torkoal#15": {
+"species": "Torkoal",
+"item": "Heat Rock",
+"ability": "Drought",
+"nature": "Modest",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Eruption",
+"Protect",
+"Solar Beam",
+"Earth Power"
+],
+"regional_count": 0
+},
+"Sinistcha-Masterpiece#4": {
+"species": "Sinistcha-Masterpiece",
+"item": "Sitrus Berry",
+"ability": "Hospitality",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Matcha Gotcha",
+"Trick Room",
+"Rage Powder",
+"Protect"
+],
+"regional_count": 0
+},
+"Sinistcha-Masterpiece#5": {
+"species": "Sinistcha-Masterpiece",
+"item": "Leftovers",
+"ability": "Hospitality",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Rage Powder",
+"Matcha Gotcha",
+"Shadow Ball",
+"Protect"
+],
+"regional_count": 0
+},
+"Sinistcha-Masterpiece#6": {
+"species": "Sinistcha-Masterpiece",
+"item": "Kasib Berry",
+"ability": "Hospitality",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Matcha Gotcha",
+"Protect",
+"Rage Powder",
+"Life Dew"
+],
+"regional_count": 0
+},
+"Sinistcha-Masterpiece#7": {
+"species": "Sinistcha-Masterpiece",
+"item": "Occa Berry",
+"ability": "Hospitality",
+"nature": "Relaxed",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Matcha Gotcha",
+"Rage Powder",
+"Trick Room",
+"Protect"
+],
+"regional_count": 0
+},
+"Sinistcha-Masterpiece#8": {
+"species": "Sinistcha-Masterpiece",
+"item": "Focus Sash",
+"ability": "Hospitality",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Matcha Gotcha",
+"Scald",
+"Rage Powder",
+"Trick Room"
+],
+"regional_count": 0
+},
+"Rotom-Wash#2": {
+"species": "Rotom-Wash",
+"item": "Sitrus Berry",
+"ability": "Levitate",
+"nature": "Modest",
+"evs": [
+32,
+0,
+0,
+32,
+0,
+2
+],
+"moves": [
+"Thunderbolt",
+"Hydro Pump",
+"Will OWisp",
+"Protect"
+],
+"regional_count": 0
+},
+"Rotom-Wash#3": {
+"species": "Rotom-Wash",
+"item": "Leftovers",
+"ability": "Levitate",
+"nature": "Modest",
+"evs": [
+32,
+0,
+0,
+32,
+0,
+2
+],
+"moves": [
+"Thunderbolt",
+"Will OWisp",
+"Hydro Pump",
+"Protect"
+],
+"regional_count": 0
+},
+"Rotom-Wash#4": {
+"species": "Rotom-Wash",
+"item": "Choice Scarf",
+"ability": "Levitate",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Electroweb",
+"Volt Switch",
+"Thunderbolt",
+"Hydro Pump"
+],
+"regional_count": 0
+},
+"Rotom-Wash#5": {
+"species": "Rotom-Wash",
+"item": "Wide Lens",
+"ability": "Levitate",
+"nature": "Modest",
+"evs": [
+32,
+0,
+0,
+32,
+0,
+2
+],
+"moves": [
+"Will OWisp",
+"Volt Switch",
+"Hydro Pump",
+"Protect"
+],
+"regional_count": 0
+},
+"Talonflame#11": {
+"species": "Talonflame",
+"item": "Sharp Beak",
+"ability": "Gale Wings",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Dual Wingbeat",
+"Flare Blitz",
+"Tailwind",
+"Protect"
+],
+"regional_count": 0
+},
+"Talonflame#12": {
+"species": "Talonflame",
+"item": "Focus Sash",
+"ability": "Gale Wings",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Tailwind",
+"Flare Blitz",
+"Brave Bird",
+"Protect"
+],
+"regional_count": 0
+},
+"Politoed#26": {
+"species": "Politoed",
+"item": "Sitrus Berry",
+"ability": "Drizzle",
+"nature": "Calm",
+"evs": [
+31,
+0,
+23,
+0,
+12,
+0
+],
+"moves": [
+"Weather Ball",
+"Protect",
+"Perish Song",
+"Encore"
+],
+"regional_count": 0
+},
+"Politoed#27": {
+"species": "Politoed",
+"item": "Leftovers",
+"ability": "Drizzle",
+"nature": "Bold",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Weather Ball",
+"Encore",
+"Perish Song",
+"Protect"
+],
+"regional_count": 0
+},
+"Politoed#28": {
+"species": "Politoed",
+"item": "Damp Rock",
+"ability": "Drizzle",
+"nature": "Calm",
+"evs": [
+31,
+0,
+23,
+0,
+12,
+0
+],
+"moves": [
+"Weather Ball",
+"Helping Hand",
+"Encore",
+"Protect"
+],
+"regional_count": 0
+},
+"Politoed#29": {
+"species": "Politoed",
+"item": "Mystic Water",
+"ability": "Drizzle",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Muddy Water",
+"Weather Ball",
+"Ice Beam"
+],
+"regional_count": 0
+},
+"Dragonite#3": {
+"species": "Dragonite",
+"item": "Life Orb",
+"ability": "Inner Focus",
+"nature": "Adamant",
+"evs": [
+29,
+32,
+0,
+0,
+0,
+5
+],
+"moves": [
+"Dragon Claw",
+"Superpower",
+"Extreme Speed",
+"Protect"
+],
+"regional_count": 0
+},
+"Dragonite#4": {
+"species": "Dragonite",
+"item": "Dragon Fang",
+"ability": "Inner Focus",
+"nature": "Adamant",
+"evs": [
+29,
+32,
+0,
+0,
+0,
+5
+],
+"moves": [
+"Dragon Claw",
+"Protect",
+"Extreme Speed",
+"Low Kick"
+],
+"regional_count": 0
+},
+"Dragonite#5": {
+"species": "Dragonite",
+"item": "Leftovers",
+"ability": "Multiscale",
+"nature": "Adamant",
+"evs": [
+29,
+32,
+0,
+0,
+0,
+5
+],
+"moves": [
+"Dragon Dance",
+"Earthquake",
+"Extreme Speed",
+"Outrage"
+],
+"regional_count": 0
+},
+"Dragonite#6": {
+"species": "Dragonite",
+"item": "Lum Berry",
+"ability": "Multiscale",
+"nature": "Adamant",
+"evs": [
+29,
+32,
+0,
+0,
+0,
+5
+],
+"moves": [
+"Fire Punch",
+"Protect",
+"Extreme Speed",
+"Dragon Claw"
+],
+"regional_count": 0
+},
+"Sableye#7": {
+"species": "Sableye",
+"item": "Roseli Berry",
+"ability": "Prankster",
+"nature": "Careful",
+"evs": [
+32,
+0,
+9,
+0,
+25,
+0
+],
+"moves": [
+"Rain Dance",
+"Encore",
+"Will OWisp",
+"Fake Out"
+],
+"regional_count": 0
+},
+"Sableye#8": {
+"species": "Sableye",
+"item": "Light Clay",
+"ability": "Prankster",
+"nature": "Calm",
+"evs": [
+32,
+0,
+9,
+0,
+25,
+0
+],
+"moves": [
+"Rain Dance",
+"Will OWisp",
+"Reflect",
+"Light Screen"
+],
+"regional_count": 0
+},
+"Sableye#9": {
+"species": "Sableye",
+"item": "Focus Sash",
+"ability": "Prankster",
+"nature": "Careful",
+"evs": [
+32,
+0,
+9,
+0,
+25,
+0
+],
+"moves": [
+"Fake Out",
+"Rain Dance",
+"Will OWisp",
+"Encore"
+],
+"regional_count": 0
+},
+"Sableye#10": {
+"species": "Sableye",
+"item": "Mental Herb",
+"ability": "Prankster",
+"nature": "Impish",
+"evs": [
+32,
+0,
+32,
+0,
+2,
+0
+],
+"moves": [
+"Fake Out",
+"Knock Off",
+"Taunt",
+"Rain Dance"
+],
+"regional_count": 0
+},
+"Sableye#11": {
+"species": "Sableye",
+"item": "Sitrus Berry",
+"ability": "Prankster",
+"nature": "Careful",
+"evs": [
+32,
+0,
+9,
+0,
+25,
+0
+],
+"moves": [
+"Encore",
+"Disable",
+"Will OWisp",
+"Fake Out"
+],
+"regional_count": 0
+},
+"Primarina#16": {
+"species": "Primarina",
+"item": "Leftovers",
+"ability": "Liquid Voice",
+"nature": "Modest",
+"evs": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"moves": [
+"Hyper Voice",
+"Calm Mind",
+"Protect",
+"Moonblast"
+],
+"regional_count": 0
+},
+"Primarina#17": {
+"species": "Primarina",
+"item": "Mystic Water",
+"ability": "Liquid Voice",
+"nature": "Modest",
+"evs": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"moves": [
+"Hyper Voice",
+"Moonblast",
+"Calm Mind",
+"Protect"
+],
+"regional_count": 0
+},
+"Primarina#18": {
+"species": "Primarina",
+"item": "Sitrus Berry",
+"ability": "Liquid Voice",
+"nature": "Modest",
+"evs": [
+32,
+0,
+2,
+32,
+0,
+0
+],
+"moves": [
+"Hyper Voice",
+"Moonblast",
+"Energy Ball",
+"Protect"
+],
+"regional_count": 0
+},
+"Tyranitar#9": {
+"species": "Tyranitar",
+"item": "Life Orb",
+"ability": "Sand Stream",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Rock Slide",
+"Protect",
+"Knock Off",
+"Low Kick"
+],
+"regional_count": 0
+},
+"Glimmora#5": {
+"species": "Glimmora",
+"item": "Focus Sash",
+"ability": "Toxic Debris",
+"nature": "Timid",
+"evs": [
+1,
+0,
+1,
+32,
+0,
+32
+],
+"moves": [
+"Spiky Shield",
+"Sludge Bomb",
+"Earth Power",
+"Power Gem"
+],
+"regional_count": 0
+},
+"Glimmora#6": {
+"species": "Glimmora",
+"item": "Choice Scarf",
+"ability": "Toxic Debris",
+"nature": "Modest",
+"evs": [
+1,
+0,
+1,
+32,
+0,
+32
+],
+"moves": [
+"Sludge Bomb",
+"Sludge Wave",
+"Earth Power",
+"Power Gem"
+],
+"regional_count": 0
+},
+"Corviknight#11": {
+"species": "Corviknight",
+"item": "Leftovers",
+"ability": "Mirror Armor",
+"nature": "Impish",
+"evs": [
+32,
+0,
+5,
+0,
+26,
+3
+],
+"moves": [
+"Iron Head",
+"Brave Bird",
+"Tailwind",
+"Protect"
+],
+"regional_count": 0
+},
+"Corviknight#12": {
+"species": "Corviknight",
+"item": "Occa Berry",
+"ability": "Mirror Armor",
+"nature": "Adamant",
+"evs": [
+27,
+23,
+0,
+0,
+0,
+16
+],
+"moves": [
+"Iron Head",
+"Protect",
+"Brave Bird",
+"Tailwind"
+],
+"regional_count": 0
+},
+"Corviknight#13": {
+"species": "Corviknight",
+"item": "Sitrus Berry",
+"ability": "Mirror Armor",
+"nature": "Impish",
+"evs": [
+32,
+0,
+5,
+0,
+26,
+3
+],
+"moves": [
+"Tailwind",
+"Iron Head",
+"Brave Bird",
+"Protect"
+],
+"regional_count": 0
+},
+"Hydreigon#10": {
+"species": "Hydreigon",
+"item": "Life Orb",
+"ability": "Levitate",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Dark Pulse",
+"Earth Power",
+"Draco Meteor"
+],
+"regional_count": 0
+},
+"Hydreigon#11": {
+"species": "Hydreigon",
+"item": "Haban Berry",
+"ability": "Levitate",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Draco Meteor",
+"Dark Pulse",
+"Earth Power",
+"Protect"
+],
+"regional_count": 0
+},
+"Maushold-Four#2": {
+"species": "Maushold-Four",
+"item": "Chople Berry",
+"ability": "Friend Guard",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Follow Me",
+"Super Fang",
+"Feint",
+"Protect"
+],
+"regional_count": 0
+},
+"Maushold-Four#3": {
+"species": "Maushold-Four",
+"item": "Focus Sash",
+"ability": "Friend Guard",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Super Fang",
+"Taunt",
+"Protect",
+"Follow Me"
+],
+"regional_count": 0
+},
+"Tsareena#7": {
+"species": "Tsareena",
+"item": "Wide Lens",
+"ability": "Queenly Majesty",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"High Jump Kick",
+"Power Whip",
+"Triple Axel",
+"Protect"
+],
+"regional_count": 0
+},
+"Tsareena#8": {
+"species": "Tsareena",
+"item": "Focus Sash",
+"ability": "Queenly Majesty",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Power Whip",
+"Triple Axel",
+"Low Kick",
+"Protect"
+],
+"regional_count": 0
+},
+"Tsareena#9": {
+"species": "Tsareena",
+"item": "Choice Scarf",
+"ability": "Queenly Majesty",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Power Whip",
+"Low Kick",
+"Triple Axel",
+"Uturn"
+],
+"regional_count": 0
+},
+"Tsareena#10": {
+"species": "Tsareena",
+"item": "Sitrus Berry",
+"ability": "Queenly Majesty",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Trop Kick",
+"Triple Axel",
+"Low Kick",
+"Helping Hand"
+],
+"regional_count": 0
+},
+"Annihilape#19": {
+"species": "Annihilape",
+"item": "Choice Scarf",
+"ability": "Defiant",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Close Combat",
+"Ice Punch",
+"Rock Slide",
+"Uturn"
+],
+"regional_count": 0
+},
+"Annihilape#20": {
+"species": "Annihilape",
+"item": "Focus Sash",
+"ability": "Defiant",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Close Combat",
+"Phantom Force",
+"Rock Tomb",
+"Protect"
+],
+"regional_count": 0
+},
+"M-Venusaur#4": {
+"species": "Venusaur",
+"item": "Venusaurite",
+"ability": "Chlorophyll",
+"nature": "Modest",
+"evs": [
+30,
+0,
+0,
+18,
+0,
+18
+],
+"moves": [
+"Protect",
+"Sludge Bomb",
+"Earth Power",
+"Giga Drain"
+],
+"regional_count": 0
+},
+"Kommo-o#20": {
+"species": "Kommo-o",
+"item": "Sitrus Berry",
+"ability": "Soundproof",
+"nature": "Timid",
+"evs": [
+1,
+0,
+0,
+32,
+1,
+32
+],
+"moves": [
+"Clanging Scales",
+"Aura Sphere",
+"Clangorous Soul",
+"Protect"
+],
+"regional_count": 0
+},
+"Wigglytuff#1": {
+"species": "Wigglytuff",
+"item": "Life Orb",
+"ability": "Competitive",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Moonblast",
+"Protect",
+"Hyper Voice",
+"Perish Song"
+],
+"regional_count": 0
+},
+"Wigglytuff#2": {
+"species": "Wigglytuff",
+"item": "Focus Sash",
+"ability": "Competitive",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Moonblast",
+"Protect",
+"Hyper Voice",
+"Perish Song"
+],
+"regional_count": 0
+},
+"Wigglytuff#3": {
+"species": "Wigglytuff",
+"item": "Sitrus Berry",
+"ability": "Competitive",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Moonblast",
+"Protect",
+"Hyper Voice",
+"Perish Song"
+],
+"regional_count": 0
+},
+"Wigglytuff#4": {
+"species": "Wigglytuff",
+"item": "Life Orb",
+"ability": "Competitive",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Protect",
+"Moonblast",
+"Hyper Voice",
+"Psychic"
+],
+"regional_count": 0
+},
+"Wigglytuff#5": {
+"species": "Wigglytuff",
+"item": "Focus Sash",
+"ability": "Competitive",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Protect",
+"Moonblast",
+"Hyper Voice",
+"Psychic"
+],
+"regional_count": 0
+},
+"Wigglytuff#6": {
+"species": "Wigglytuff",
+"item": "Sitrus Berry",
+"ability": "Competitive",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Protect",
+"Moonblast",
+"Hyper Voice",
+"Psychic"
+],
+"regional_count": 0
+},
+"Persian#1": {
+"species": "Persian",
+"item": "Life Orb",
+"ability": "Technician",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Fake Out",
+"Protect",
+"Thunderbolt",
+"Gunk Shot"
+],
+"regional_count": 0
+},
+"Persian#2": {
+"species": "Persian",
+"item": "Focus Sash",
+"ability": "Technician",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Fake Out",
+"Protect",
+"Thunderbolt",
+"Gunk Shot"
+],
+"regional_count": 0
+},
+"Persian#3": {
+"species": "Persian",
+"item": "Sitrus Berry",
+"ability": "Technician",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Fake Out",
+"Protect",
+"Thunderbolt",
+"Gunk Shot"
+],
+"regional_count": 0
+},
+"Persian-Alola#2": {
+"species": "Persian-Alola",
+"item": "Life Orb",
+"ability": "Fur Coat",
+"nature": "Timid",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Parting Shot",
+"Protect",
+"Fake Out",
+"Dark Pulse"
+],
+"regional_count": 0
+},
+"Persian-Alola#3": {
+"species": "Persian-Alola",
+"item": "Focus Sash",
+"ability": "Fur Coat",
+"nature": "Timid",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Parting Shot",
+"Protect",
+"Fake Out",
+"Dark Pulse"
+],
+"regional_count": 0
+},
+"Persian-Alola#4": {
+"species": "Persian-Alola",
+"item": "Sitrus Berry",
+"ability": "Fur Coat",
+"nature": "Timid",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Parting Shot",
+"Protect",
+"Fake Out",
+"Dark Pulse"
+],
+"regional_count": 0
+},
+"Persian-Alola#5": {
+"species": "Persian-Alola",
+"item": "Life Orb",
+"ability": "Fur Coat",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Fake Out",
+"Dark Pulse",
+"Thunderbolt"
+],
+"regional_count": 0
+},
+"Persian-Alola#6": {
+"species": "Persian-Alola",
+"item": "Focus Sash",
+"ability": "Fur Coat",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Fake Out",
+"Dark Pulse",
+"Thunderbolt"
+],
+"regional_count": 0
+},
+"Persian-Alola#7": {
+"species": "Persian-Alola",
+"item": "Sitrus Berry",
+"ability": "Fur Coat",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Fake Out",
+"Dark Pulse",
+"Thunderbolt"
+],
+"regional_count": 0
+},
+"Farfetch\u2019d#1": {
+"species": "Farfetch\u2019d",
+"item": "Life Orb",
+"ability": "Defiant",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Brave Bird",
+"Protect",
+"Close Combat",
+"Slash"
+],
+"regional_count": 0
+},
+"Farfetch\u2019d#2": {
+"species": "Farfetch\u2019d",
+"item": "Focus Sash",
+"ability": "Defiant",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Brave Bird",
+"Protect",
+"Close Combat",
+"Slash"
+],
+"regional_count": 0
+},
+"Farfetch\u2019d#3": {
+"species": "Farfetch\u2019d",
+"item": "Sitrus Berry",
+"ability": "Defiant",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Brave Bird",
+"Protect",
+"Close Combat",
+"Slash"
+],
+"regional_count": 0
+},
+"Mr. Mime#1": {
+"species": "Mr. Mime",
+"item": "Life Orb",
+"ability": "Technician",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Dazzling Gleam",
+"Psychic",
+"Trick Room"
+],
+"regional_count": 0
+},
+"Mr. Mime#2": {
+"species": "Mr. Mime",
+"item": "Focus Sash",
+"ability": "Technician",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Dazzling Gleam",
+"Psychic",
+"Trick Room"
+],
+"regional_count": 0
+},
+"Mr. Mime#3": {
+"species": "Mr. Mime",
+"item": "Sitrus Berry",
+"ability": "Technician",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Dazzling Gleam",
+"Psychic",
+"Trick Room"
+],
+"regional_count": 0
+},
+"Mr. Mime#4": {
+"species": "Mr. Mime",
+"item": "Life Orb",
+"ability": "Technician",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Dazzling Gleam",
+"Psychic",
+"Thunderbolt"
+],
+"regional_count": 0
+},
+"Mr. Mime#5": {
+"species": "Mr. Mime",
+"item": "Focus Sash",
+"ability": "Technician",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Dazzling Gleam",
+"Psychic",
+"Thunderbolt"
+],
+"regional_count": 0
+},
+"Mr. Mime#6": {
+"species": "Mr. Mime",
+"item": "Sitrus Berry",
+"ability": "Technician",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Dazzling Gleam",
+"Psychic",
+"Thunderbolt"
+],
+"regional_count": 0
+},
+"Swalot#1": {
+"species": "Swalot",
+"item": "Life Orb",
+"ability": "Liquid Ooze",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Sludge Bomb",
+"Earthquake",
+"Double-Edge"
+],
+"regional_count": 0
+},
+"Swalot#2": {
+"species": "Swalot",
+"item": "Focus Sash",
+"ability": "Liquid Ooze",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Sludge Bomb",
+"Earthquake",
+"Double-Edge"
+],
+"regional_count": 0
+},
+"Swalot#3": {
+"species": "Swalot",
+"item": "Sitrus Berry",
+"ability": "Liquid Ooze",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Sludge Bomb",
+"Earthquake",
+"Double-Edge"
+],
+"regional_count": 0
+},
+"Salamence#1": {
+"species": "Salamence",
+"item": "Life Orb",
+"ability": "Intimidate",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Tailwind",
+"Dragon Claw",
+"Dual Wingbeat"
+],
+"regional_count": 0
+},
+"Salamence#2": {
+"species": "Salamence",
+"item": "Focus Sash",
+"ability": "Intimidate",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Tailwind",
+"Dragon Claw",
+"Dual Wingbeat"
+],
+"regional_count": 0
+},
+"Salamence#3": {
+"species": "Salamence",
+"item": "Sitrus Berry",
+"ability": "Intimidate",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Tailwind",
+"Dragon Claw",
+"Dual Wingbeat"
+],
+"regional_count": 0
+},
+"Salamence#4": {
+"species": "Salamence",
+"item": "Life Orb",
+"ability": "Intimidate",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Dragon Claw",
+"Dual Wingbeat",
+"Rock Slide"
+],
+"regional_count": 0
+},
+"Salamence#5": {
+"species": "Salamence",
+"item": "Focus Sash",
+"ability": "Intimidate",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Dragon Claw",
+"Dual Wingbeat",
+"Rock Slide"
+],
+"regional_count": 0
+},
+"Salamence#6": {
+"species": "Salamence",
+"item": "Sitrus Berry",
+"ability": "Intimidate",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Dragon Claw",
+"Dual Wingbeat",
+"Rock Slide"
+],
+"regional_count": 0
+},
+"Gogoat#1": {
+"species": "Gogoat",
+"item": "Life Orb",
+"ability": "Sap Sipper",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Leaf Storm",
+"Rock Slide",
+"High Horsepower"
+],
+"regional_count": 0
+},
+"Gogoat#2": {
+"species": "Gogoat",
+"item": "Focus Sash",
+"ability": "Sap Sipper",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Leaf Storm",
+"Rock Slide",
+"High Horsepower"
+],
+"regional_count": 0
+},
+"Gogoat#3": {
+"species": "Gogoat",
+"item": "Sitrus Berry",
+"ability": "Sap Sipper",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Leaf Storm",
+"Rock Slide",
+"High Horsepower"
+],
+"regional_count": 0
+},
+"Golisopod#2": {
+"species": "Golisopod",
+"item": "Life Orb",
+"ability": "Emergency Exit",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Protect",
+"Close Combat",
+"First Impression",
+"Sucker Punch"
+],
+"regional_count": 0
+},
+"Golisopod#3": {
+"species": "Golisopod",
+"item": "Focus Sash",
+"ability": "Emergency Exit",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Protect",
+"Close Combat",
+"First Impression",
+"Sucker Punch"
+],
+"regional_count": 0
+},
+"Golisopod#4": {
+"species": "Golisopod",
+"item": "Sitrus Berry",
+"ability": "Emergency Exit",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Protect",
+"Close Combat",
+"First Impression",
+"Sucker Punch"
+],
+"regional_count": 0
+},
+"Rillaboom#74": {
+"species": "Rillaboom",
+"item": "Life Orb",
+"ability": "Grassy Surge",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Fake Out",
+"Protect",
+"Wood Hammer",
+"Superpower"
+],
+"regional_count": 0
+},
+"Rillaboom#75": {
+"species": "Rillaboom",
+"item": "Focus Sash",
+"ability": "Grassy Surge",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Fake Out",
+"Protect",
+"Wood Hammer",
+"Superpower"
+],
+"regional_count": 0
+},
+"Rillaboom#76": {
+"species": "Rillaboom",
+"item": "Sitrus Berry",
+"ability": "Grassy Surge",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Fake Out",
+"Protect",
+"Wood Hammer",
+"Superpower"
+],
+"regional_count": 0
+},
+"Cinderace#1": {
+"species": "Cinderace",
+"item": "Life Orb",
+"ability": "Libero",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Flare Blitz",
+"Sucker Punch",
+"High Jump Kick"
+],
+"regional_count": 0
+},
+"Cinderace#2": {
+"species": "Cinderace",
+"item": "Focus Sash",
+"ability": "Libero",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Flare Blitz",
+"Sucker Punch",
+"High Jump Kick"
+],
+"regional_count": 0
+},
+"Cinderace#3": {
+"species": "Cinderace",
+"item": "Sitrus Berry",
+"ability": "Libero",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Flare Blitz",
+"Sucker Punch",
+"High Jump Kick"
+],
+"regional_count": 0
+},
+"Inteleon#1": {
+"species": "Inteleon",
+"item": "Life Orb",
+"ability": "Torrent",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Snipe Shot",
+"Sucker Punch",
+"Ice Beam"
+],
+"regional_count": 0
+},
+"Inteleon#2": {
+"species": "Inteleon",
+"item": "Focus Sash",
+"ability": "Torrent",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Snipe Shot",
+"Sucker Punch",
+"Ice Beam"
+],
+"regional_count": 0
+},
+"Inteleon#3": {
+"species": "Inteleon",
+"item": "Sitrus Berry",
+"ability": "Torrent",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Snipe Shot",
+"Sucker Punch",
+"Ice Beam"
+],
+"regional_count": 0
+},
+"Thievul#1": {
+"species": "Thievul",
+"item": "Life Orb",
+"ability": "Stakeout",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Parting Shot",
+"Protect",
+"Dark Pulse",
+"Psychic"
+],
+"regional_count": 0
+},
+"Thievul#2": {
+"species": "Thievul",
+"item": "Focus Sash",
+"ability": "Stakeout",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Parting Shot",
+"Protect",
+"Dark Pulse",
+"Psychic"
+],
+"regional_count": 0
+},
+"Thievul#3": {
+"species": "Thievul",
+"item": "Sitrus Berry",
+"ability": "Stakeout",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Parting Shot",
+"Protect",
+"Dark Pulse",
+"Psychic"
+],
+"regional_count": 0
+},
+"Thievul#4": {
+"species": "Thievul",
+"item": "Life Orb",
+"ability": "Stakeout",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Dark Pulse",
+"Psychic",
+"Shadow Ball"
+],
+"regional_count": 0
+},
+"Thievul#5": {
+"species": "Thievul",
+"item": "Focus Sash",
+"ability": "Stakeout",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Dark Pulse",
+"Psychic",
+"Shadow Ball"
+],
+"regional_count": 0
+},
+"Thievul#6": {
+"species": "Thievul",
+"item": "Sitrus Berry",
+"ability": "Stakeout",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Dark Pulse",
+"Psychic",
+"Shadow Ball"
+],
+"regional_count": 0
+},
+"Toxtricity#2": {
+"species": "Toxtricity",
+"item": "Life Orb",
+"ability": "Punk Rock",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Overdrive",
+"Sludge Bomb",
+"Hyper Voice"
+],
+"regional_count": 0
+},
+"Toxtricity#3": {
+"species": "Toxtricity",
+"item": "Focus Sash",
+"ability": "Punk Rock",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Overdrive",
+"Sludge Bomb",
+"Hyper Voice"
+],
+"regional_count": 0
+},
+"Toxtricity#4": {
+"species": "Toxtricity",
+"item": "Sitrus Berry",
+"ability": "Punk Rock",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Overdrive",
+"Sludge Bomb",
+"Hyper Voice"
+],
+"regional_count": 0
+},
+"Toxtricity-Low-Key#1": {
+"species": "Toxtricity-Low-Key",
+"item": "Life Orb",
+"ability": "Punk Rock",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Overdrive",
+"Sludge Bomb",
+"Hyper Voice"
+],
+"regional_count": 0
+},
+"Toxtricity-Low-Key#2": {
+"species": "Toxtricity-Low-Key",
+"item": "Focus Sash",
+"ability": "Punk Rock",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Overdrive",
+"Sludge Bomb",
+"Hyper Voice"
+],
+"regional_count": 0
+},
+"Toxtricity-Low-Key#3": {
+"species": "Toxtricity-Low-Key",
+"item": "Sitrus Berry",
+"ability": "Punk Rock",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Overdrive",
+"Sludge Bomb",
+"Hyper Voice"
+],
+"regional_count": 0
+},
+"Grapploct#3": {
+"species": "Grapploct",
+"item": "Life Orb",
+"ability": "Technician",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Close Combat",
+"Protect",
+"Sucker Punch",
+"Ice Punch"
+],
+"regional_count": 0
+},
+"Grapploct#4": {
+"species": "Grapploct",
+"item": "Focus Sash",
+"ability": "Technician",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Close Combat",
+"Protect",
+"Sucker Punch",
+"Ice Punch"
+],
+"regional_count": 0
+},
+"Grapploct#5": {
+"species": "Grapploct",
+"item": "Sitrus Berry",
+"ability": "Technician",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Close Combat",
+"Protect",
+"Sucker Punch",
+"Ice Punch"
+],
+"regional_count": 0
+},
+"Perrserker#1": {
+"species": "Perrserker",
+"item": "Life Orb",
+"ability": "Tough Claws",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Fake Out",
+"Close Combat",
+"Protect",
+"Iron Head"
+],
+"regional_count": 0
+},
+"Perrserker#2": {
+"species": "Perrserker",
+"item": "Focus Sash",
+"ability": "Tough Claws",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Fake Out",
+"Close Combat",
+"Protect",
+"Iron Head"
+],
+"regional_count": 0
+},
+"Perrserker#3": {
+"species": "Perrserker",
+"item": "Sitrus Berry",
+"ability": "Tough Claws",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Fake Out",
+"Close Combat",
+"Protect",
+"Iron Head"
+],
+"regional_count": 0
+},
+"Sirfetch\u2019d#3": {
+"species": "Sirfetch\u2019d",
+"item": "Life Orb",
+"ability": "Scrappy",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Close Combat",
+"Protect",
+"Brave Bird",
+"First Impression"
+],
+"regional_count": 0
+},
+"Sirfetch\u2019d#4": {
+"species": "Sirfetch\u2019d",
+"item": "Focus Sash",
+"ability": "Scrappy",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Close Combat",
+"Protect",
+"Brave Bird",
+"First Impression"
+],
+"regional_count": 0
+},
+"Sirfetch\u2019d#5": {
+"species": "Sirfetch\u2019d",
+"item": "Sitrus Berry",
+"ability": "Scrappy",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Close Combat",
+"Protect",
+"Brave Bird",
+"First Impression"
+],
+"regional_count": 0
+},
+"Pincurchin#2": {
+"species": "Pincurchin",
+"item": "Life Orb",
+"ability": "Electric Surge",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Protect",
+"Zing Zap",
+"Sucker Punch",
+"Scald"
+],
+"regional_count": 0
+},
+"Pincurchin#3": {
+"species": "Pincurchin",
+"item": "Focus Sash",
+"ability": "Electric Surge",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Protect",
+"Zing Zap",
+"Sucker Punch",
+"Scald"
+],
+"regional_count": 0
+},
+"Pincurchin#4": {
+"species": "Pincurchin",
+"item": "Sitrus Berry",
+"ability": "Electric Surge",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Protect",
+"Zing Zap",
+"Sucker Punch",
+"Scald"
+],
+"regional_count": 0
+},
+"Indeedee#37": {
+"species": "Indeedee",
+"item": "Life Orb",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Psychic",
+"Trick Room"
+],
+"regional_count": 0
+},
+"Indeedee#38": {
+"species": "Indeedee",
+"item": "Focus Sash",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Psychic",
+"Trick Room"
+],
+"regional_count": 0
+},
+"Indeedee#39": {
+"species": "Indeedee",
+"item": "Sitrus Berry",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Psychic",
+"Trick Room"
+],
+"regional_count": 0
+},
+"Indeedee#40": {
+"species": "Indeedee",
+"item": "Life Orb",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Psychic",
+"Dazzling Gleam"
+],
+"regional_count": 0
+},
+"Indeedee#41": {
+"species": "Indeedee",
+"item": "Focus Sash",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Psychic",
+"Dazzling Gleam"
+],
+"regional_count": 0
+},
+"Indeedee#42": {
+"species": "Indeedee",
+"item": "Sitrus Berry",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Psychic",
+"Dazzling Gleam"
+],
+"regional_count": 0
+},
+"Indeedee-F#56": {
+"species": "Indeedee-F",
+"item": "Life Orb",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Follow Me",
+"Protect",
+"Hyper Voice",
+"Psychic"
+],
+"regional_count": 0
+},
+"Indeedee-F#57": {
+"species": "Indeedee-F",
+"item": "Focus Sash",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Follow Me",
+"Protect",
+"Hyper Voice",
+"Psychic"
+],
+"regional_count": 0
+},
+"Indeedee-F#58": {
+"species": "Indeedee-F",
+"item": "Sitrus Berry",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Follow Me",
+"Protect",
+"Hyper Voice",
+"Psychic"
+],
+"regional_count": 0
+},
+"Indeedee-F#59": {
+"species": "Indeedee-F",
+"item": "Life Orb",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Psychic",
+"Dazzling Gleam"
+],
+"regional_count": 0
+},
+"Indeedee-F#60": {
+"species": "Indeedee-F",
+"item": "Focus Sash",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Psychic",
+"Dazzling Gleam"
+],
+"regional_count": 0
+},
+"Indeedee-F#61": {
+"species": "Indeedee-F",
+"item": "Sitrus Berry",
+"ability": "Psychic Surge",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Psychic",
+"Dazzling Gleam"
+],
+"regional_count": 0
+},
+"Arboliva#2": {
+"species": "Arboliva",
+"item": "Life Orb",
+"ability": "Seed Sower",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Leaf Storm",
+"Earth Power"
+],
+"regional_count": 0
+},
+"Arboliva#3": {
+"species": "Arboliva",
+"item": "Focus Sash",
+"ability": "Seed Sower",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Leaf Storm",
+"Earth Power"
+],
+"regional_count": 0
+},
+"Arboliva#4": {
+"species": "Arboliva",
+"item": "Sitrus Berry",
+"ability": "Seed Sower",
+"nature": "Quiet",
+"evs": [
+32,
+0,
+0,
+32,
+2,
+0
+],
+"moves": [
+"Protect",
+"Hyper Voice",
+"Leaf Storm",
+"Earth Power"
+],
+"regional_count": 0
+},
+"Squawkabilly#1": {
+"species": "Squawkabilly",
+"item": "Sitrus Berry",
+"ability": "Intimidate",
+"nature": "Careful",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Parting Shot",
+"Brave Bird",
+"Protect",
+"Tailwind"
+],
+"regional_count": 0
+},
+"Squawkabilly#2": {
+"species": "Squawkabilly",
+"item": "Focus Sash",
+"ability": "Intimidate",
+"nature": "Careful",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Parting Shot",
+"Brave Bird",
+"Protect",
+"Tailwind"
+],
+"regional_count": 0
+},
+"Squawkabilly#3": {
+"species": "Squawkabilly",
+"item": "Leftovers",
+"ability": "Intimidate",
+"nature": "Careful",
+"evs": [
+32,
+0,
+2,
+0,
+32,
+0
+],
+"moves": [
+"Parting Shot",
+"Brave Bird",
+"Protect",
+"Tailwind"
+],
+"regional_count": 0
+},
+"Squawkabilly#4": {
+"species": "Squawkabilly",
+"item": "Life Orb",
+"ability": "Intimidate",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Brave Bird",
+"Double-Edge",
+"Foul Play"
+],
+"regional_count": 0
+},
+"Squawkabilly#5": {
+"species": "Squawkabilly",
+"item": "Focus Sash",
+"ability": "Intimidate",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Brave Bird",
+"Double-Edge",
+"Foul Play"
+],
+"regional_count": 0
+},
+"Squawkabilly#6": {
+"species": "Squawkabilly",
+"item": "Sitrus Berry",
+"ability": "Intimidate",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Brave Bird",
+"Double-Edge",
+"Foul Play"
+],
+"regional_count": 0
+},
+"Mabosstiff#1": {
+"species": "Mabosstiff",
+"item": "Life Orb",
+"ability": "Stakeout",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Jaw Lock",
+"Double-Edge",
+"Psychic Fangs"
+],
+"regional_count": 0
+},
+"Mabosstiff#2": {
+"species": "Mabosstiff",
+"item": "Focus Sash",
+"ability": "Stakeout",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Jaw Lock",
+"Double-Edge",
+"Psychic Fangs"
+],
+"regional_count": 0
+},
+"Mabosstiff#3": {
+"species": "Mabosstiff",
+"item": "Sitrus Berry",
+"ability": "Stakeout",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Jaw Lock",
+"Double-Edge",
+"Psychic Fangs"
+],
+"regional_count": 0
+},
+"Baxcalibur#3": {
+"species": "Baxcalibur",
+"item": "Life Orb",
+"ability": "Thermal Exchange",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Glaive Rush",
+"Icicle Crash",
+"High Horsepower"
+],
+"regional_count": 0
+},
+"Baxcalibur#4": {
+"species": "Baxcalibur",
+"item": "Focus Sash",
+"ability": "Thermal Exchange",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Glaive Rush",
+"Icicle Crash",
+"High Horsepower"
+],
+"regional_count": 0
+},
+"Baxcalibur#5": {
+"species": "Baxcalibur",
+"item": "Sitrus Berry",
+"ability": "Thermal Exchange",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Glaive Rush",
+"Icicle Crash",
+"High Horsepower"
+],
+"regional_count": 0
+},
+"M-Absol Z#8": {
+"species": "Absol",
+"item": "Absolite Z",
+"ability": "Pressure",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Close Combat",
+"Sucker Punch",
+"Protect",
+"Rock Slide"
+],
+"regional_count": 0
+},
+"M-Salamence#34": {
+"species": "Salamence",
+"item": "Salamencite",
+"ability": "Intimidate",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Tailwind",
+"Draco Meteor",
+"Dual Wingbeat"
+],
+"regional_count": 0
+},
+"M-Salamence#35": {
+"species": "Salamence",
+"item": "Salamencite",
+"ability": "Intimidate",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Draco Meteor",
+"Dual Wingbeat",
+"Rock Slide"
+],
+"regional_count": 0
+},
+"M-Garchomp Z#19": {
+"species": "Garchomp",
+"item": "Garchompite Z",
+"ability": "Rough Skin",
+"nature": "Timid",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Draco Meteor",
+"Rock Slide",
+"Slash"
+],
+"regional_count": 0
+},
+"M-Lucario Z#13": {
+"species": "Lucario",
+"item": "Lucarionite Z",
+"ability": "Justified",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Close Combat",
+"Flash Cannon",
+"Psychic"
+],
+"regional_count": 0
+},
+"M-Golisopod#32": {
+"species": "Golisopod",
+"item": "Golisopite",
+"ability": "Emergency Exit",
+"nature": "Brave",
+"evs": [
+32,
+32,
+0,
+0,
+2,
+0
+],
+"moves": [
+"Protect",
+"Close Combat",
+"First Impression",
+"Sucker Punch"
+],
+"regional_count": 0
+},
+"M-Baxcalibur#7": {
+"species": "Baxcalibur",
+"item": "Baxcalibrite",
+"ability": "Thermal Exchange",
+"nature": "Jolly",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Glaive Rush",
+"Icicle Crash",
+"High Horsepower"
+],
+"regional_count": 0
+},
+"Farigiraf#96": {
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"nature": "Calm",
+"evs": [
+29,
+0,
+21,
+0,
+16,
+0
+],
+"moves": [
+"Psychic",
+"Helping Hand",
+"Trick Room",
+"Protect"
+],
+"regional_count": 0
+},
+"M-Floette#14": {
+"species": "Floette-Eternal",
+"item": "Floettite",
+"ability": "Flower Veil",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Moonblast",
+"Dazzling Gleam",
+"Lightof Ruin",
+"Protect"
+],
+"regional_count": 0
+},
+"Sylveon#26": {
+"species": "Sylveon",
+"item": "Fairy Feather",
+"ability": "Pixilate",
+"nature": "Modest",
+"evs": [
+13,
+0,
+22,
+23,
+0,
+8
+],
+"moves": [
+"Hyper Voice",
+"Hyper Beam",
+"Quick Attack",
+"Protect"
+],
+"regional_count": 0
+},
+"Archaludon#29": {
+"species": "Archaludon",
+"item": "Leftovers",
+"ability": "Stamina",
+"nature": "Calm",
+"evs": [
+32,
+0,
+1,
+1,
+25,
+7
+],
+"moves": [
+"Electro Shot",
+"Dragon Pulse",
+"Flash Cannon",
+"Protect"
+],
+"regional_count": 0
+},
+"M-Charizard Y#30": {
+"species": "Charizard",
+"item": "Charizardite Y",
+"ability": "Blaze",
+"nature": "Modest",
+"evs": [
+20,
+0,
+32,
+1,
+0,
+13
+],
+"moves": [
+"Heat Wave",
+"Weather Ball",
+"Hurricane",
+"Protect"
+],
+"regional_count": 0
+},
+"Grimmsnarl#15": {
+"species": "Grimmsnarl",
+"item": "Light Clay",
+"ability": "Prankster",
+"nature": "Sassy",
+"evs": [
+32,
+0,
+19,
+0,
+15,
+0
+],
+"moves": [
+"Spirit Break",
+"Reflect",
+"Light Screen",
+"Parting Shot"
+],
+"regional_count": 0
+},
+"M-Charizard Y#31": {
+"species": "Charizard",
+"item": "Charizardite Y",
+"ability": "Blaze",
+"nature": "Modest",
+"evs": [
+20,
+0,
+32,
+1,
+0,
+13
+],
+"moves": [
+"Weather Ball",
+"Heat Wave",
+"Ancient Power",
+"Protect"
+],
+"regional_count": 0
+},
+"Incineroar#105": {
+"species": "Incineroar",
+"item": "Sitrus Berry",
+"ability": "Intimidate",
+"nature": "Impish",
+"evs": [
+32,
+0,
+21,
+0,
+10,
+3
+],
+"moves": [
+"Flare Blitz",
+"Fake Out",
+"Darkest Lariat",
+"Parting Shot"
+],
+"regional_count": 0
+},
+"Sylveon#27": {
+"species": "Sylveon",
+"item": "Fairy Feather",
+"ability": "Pixilate",
+"nature": "Modest",
+"evs": [
+13,
+0,
+22,
+23,
+0,
+8
+],
+"moves": [
+"Hyper Voice",
+"Quick Attack",
+"Yawn",
+"Detect"
+],
+"regional_count": 0
+},
+"Milotic#59": {
+"species": "Milotic",
+"item": "Sitrus Berry",
+"ability": "Competitive",
+"nature": "Modest",
+"evs": [
+32,
+0,
+11,
+10,
+0,
+13
+],
+"moves": [
+"Scald",
+"Ice Beam",
+"Icy Wind",
+"Recover"
+],
+"regional_count": 0
+},
+"M-Dragonite#13": {
+"species": "Dragonite",
+"item": "Dragoninite",
+"ability": "Inner Focus",
+"nature": "Modest",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Dragon Pulse",
+"Heat Wave",
+"Thunderbolt",
+"Protect"
+],
+"regional_count": 0
+},
+"Kleavor#6": {
+"species": "Kleavor",
+"item": "Focus Sash",
+"ability": "Sharpness",
+"nature": "Adamant",
+"evs": [
+2,
+32,
+0,
+0,
+0,
+32
+],
+"moves": [
+"Protect",
+"Stone Axe",
+"XScissor",
+"Feint"
+],
+"regional_count": 0
+},
+"M-Gengar#14": {
+"species": "Gengar",
+"item": "Gengarite",
+"ability": "Cursed Body",
+"nature": "Modest",
+"evs": [
+20,
+0,
+4,
+10,
+0,
+32
+],
+"moves": [
+"Shadow Ball",
+"Sludge Bomb",
+"Perish Song",
+"Protect"
+],
+"regional_count": 0
+},
+"Farigiraf#97": {
+"species": "Farigiraf",
+"item": "Sitrus Berry",
+"ability": "Armor Tail",
+"nature": "Bold",
+"evs": [
+25,
+0,
+26,
+0,
+15,
+0
+],
+"moves": [
+"Psychic",
+"Thunderbolt",
+"Nasty Plot",
+"Trick Room"
+],
+"regional_count": 0
+},
+"Gholdengo#27": {
+"species": "Gholdengo",
+"item": "Life Orb",
+"ability": "Goodas Gold",
+"nature": "Timid",
+"evs": [
+2,
+0,
+0,
+32,
+0,
+32
+],
+"moves": [
+"Protect",
+"Shadow Ball",
+"Make It Rain",
+"Power Gem"
+],
+"regional_count": 0
 }
 }

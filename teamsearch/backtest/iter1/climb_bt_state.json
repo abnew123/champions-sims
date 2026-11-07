@@ -1,0 +1,103 @@
+{
+ "round": 2,
+ "cap": null,
+ "teams": {
+  "mb4": {
+   "team": [
+    "M-Charizard Y#29",
+    "M-Dragonite#3",
+    "M-Floette#14",
+    "Garchomp#1",
+    "Kingambit#2",
+    "Sneasler#41"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 0,
+     "out": "Basculegion#2",
+     "into": "M-Charizard Y#29",
+     "note": "",
+     "diff": 0.04790692482096602,
+     "se": 0.021308067774641695,
+     "matrix": 0.4930263219651466,
+     "from_random": false
+    }
+   ],
+   "arch": "Balance"
+  },
+  "mb16": {
+   "team": [
+    "Excadrill#11",
+    "Farigiraf#97",
+    "Gholdengo#27",
+    "M-Staraptor#1",
+    "Tyranitar#3",
+    "Whimsicott#12"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Sand"
+  },
+  "mb9": {
+   "team": [
+    "Excadrill#1",
+    "Gholdengo#22",
+    "Milotic#59",
+    "Sinistcha#1",
+    "M-Staraptor#1",
+    "M-Tyranitar#2"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Sand"
+  },
+  "mb2": {
+   "team": [
+    "Basculegion#2",
+    "M-Froslass#1",
+    "Kingambit#5",
+    "Lycanroc-Dusk#4",
+    "M-Scovillain#6",
+    "Sneasler#5"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Snow"
+  },
+  "mb11": {
+   "team": [
+    "M-Charizard Y#29",
+    "Farigiraf#94",
+    "Kingambit#10",
+    "Corviknight#11",
+    "Torkoal#3",
+    "Venusaur#15"
+   ],
+   "done": false,
+   "path": [
+    {
+     "slot": 3,
+     "out": "Primarina#3",
+     "into": "Corviknight#11",
+     "note": "",
+     "diff": 0.0896005256289582,
+     "se": 0.030023621983946907,
+     "matrix": 0.4360800059444891,
+     "from_random": true
+    },
+    {
+     "slot": 0,
+     "out": "M-Blaziken#1",
+     "into": "M-Charizard Y#29",
+     "note": "",
+     "diff": 0.09169046014908447,
+     "se": 0.043188905402361415,
+     "matrix": 0.08491897729681988,
+     "from_random": false
+    }
+   ],
+   "arch": "Sun"
+  }
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "mb4": {
+  "event": "selfplay",
+  "place": null,
+  "rating": null,
+  "arch": "Balance",
+  "pid": null,
+  "gids": [
+   "Basculegion#2",
+   "M-Dragonite#3",
+   "M-Floette#14",
+   "Garchomp#1",
+   "Kingambit#2",
+   "Sneasler#41"
+  ]
+ },
+ "mb16": {
+  "event": "selfplay",
+  "place": null,
+  "rating": null,
+  "arch": "Sand",
+  "pid": null,
+  "gids": [
+   "Excadrill#11",
+   "Farigiraf#97",
+   "Gholdengo#27",
+   "M-Staraptor#1",
+   "Tyranitar#3",
+   "Whimsicott#12"
+  ]
+ },
+ "mb9": {
+  "event": "selfplay",
+  "place": null,
+  "rating": null,
+  "arch": "Sand",
+  "pid": null,
+  "gids": [
+   "Excadrill#1",
+   "Gholdengo#22",
+   "Milotic#59",
+   "Sinistcha#1",
+   "M-Staraptor#1",
+   "M-Tyranitar#2"
+  ]
+ },
+ "mb2": {
+  "event": "selfplay",
+  "place": null,
+  "rating": null,
+  "arch": "Snow",
+  "pid": null,
+  "gids": [
+   "Basculegion#2",
+   "M-Froslass#1",
+   "Kingambit#5",
+   "Lycanroc-Dusk#4",
+   "M-Scovillain#6",
+   "Sneasler#5"
+  ]
+ },
+ "mb11": {
+  "event": "selfplay",
+  "place": null,
+  "rating": null,
+  "arch": "Sun",
+  "pid": null,
+  "gids": [
+   "M-Blaziken#1",
+   "Farigiraf#94",
+   "Kingambit#10",
+   "Primarina#3",
+   "Torkoal#3",
+   "Venusaur#15"
+  ]
+ }
+}

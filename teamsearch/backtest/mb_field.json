@@ -1,0 +1,322 @@
+{
+ "mb1": {
+  "gids": [
+   "Basculegion#2",
+   "M-Charizard Y#29",
+   "M-Floette#13",
+   "Garchomp#18",
+   "Kingambit#2",
+   "Whimsicott#1"
+  ],
+  "players": 206,
+  "share": 0.055510644031258424,
+  "species": [
+   "Basculegion",
+   "Charizard-Mega-Y",
+   "Floette-Mega",
+   "Garchomp",
+   "Kingambit",
+   "Whimsicott"
+  ]
+ },
+ "mb2": {
+  "gids": [
+   "Basculegion#2",
+   "M-Froslass#1",
+   "Kingambit#5",
+   "Lycanroc-Dusk#4",
+   "M-Scovillain#6",
+   "Sneasler#5"
+  ],
+  "players": 187,
+  "share": 0.05039073026138507,
+  "species": [
+   "Basculegion",
+   "Froslass-Mega",
+   "Kingambit",
+   "Lycanroc-Dusk",
+   "Scovillain-Mega",
+   "Sneasler"
+  ]
+ },
+ "mb3": {
+  "gids": [
+   "Arcanine-H#1",
+   "Farigiraf#96",
+   "Kingambit#1",
+   "M-Raichu Y#1",
+   "M-Staraptor#4",
+   "Sylveon#25"
+  ],
+  "players": 120,
+  "share": 0.03233629749393695,
+  "species": [
+   "Arcanine-Hisui",
+   "Farigiraf",
+   "Kingambit",
+   "Raichu-Mega-Y",
+   "Staraptor-Mega",
+   "Sylveon"
+  ]
+ },
+ "mb4": {
+  "gids": [
+   "Basculegion#2",
+   "M-Dragonite#3",
+   "M-Floette#14",
+   "Garchomp#1",
+   "Kingambit#2",
+   "Sneasler#41"
+  ],
+  "players": 104,
+  "share": 0.02802479116141202,
+  "species": [
+   "Basculegion",
+   "Dragonite-Mega",
+   "Floette-Mega",
+   "Garchomp",
+   "Kingambit",
+   "Sneasler"
+  ]
+ },
+ "mb5": {
+  "gids": [
+   "M-Blastoise#1",
+   "M-Delphox#10",
+   "Incineroar#1",
+   "Kingambit#1",
+   "Sinistcha#1",
+   "Sneasler#3"
+  ],
+  "players": 88,
+  "share": 0.023713284828887092,
+  "species": [
+   "Blastoise-Mega",
+   "Delphox-Mega",
+   "Incineroar",
+   "Kingambit",
+   "Sinistcha",
+   "Sneasler"
+  ]
+ },
+ "mb6": {
+  "gids": [
+   "M-Aerodactyl#3",
+   "M-Charizard Y#29",
+   "Farigiraf#94",
+   "Garchomp#2",
+   "Kingambit#3",
+   "Sylveon#26"
+  ],
+  "players": 76,
+  "share": 0.020479655079493397,
+  "species": [
+   "Aerodactyl-Mega",
+   "Charizard-Mega-Y",
+   "Farigiraf",
+   "Garchomp",
+   "Kingambit",
+   "Sylveon"
+  ]
+ },
+ "mb7": {
+  "gids": [
+   "Archaludon#29",
+   "M-Charizard Y#30",
+   "Grimmsnarl#15",
+   "Pelipper#3",
+   "M-Swampert#1",
+   "Venusaur#1"
+  ],
+  "players": 67,
+  "share": 0.018054432767448128,
+  "species": [
+   "Archaludon",
+   "Charizard-Mega-Y",
+   "Grimmsnarl",
+   "Pelipper",
+   "Swampert-Mega",
+   "Venusaur"
+  ]
+ },
+ "mb8": {
+  "gids": [
+   "M-Charizard Y#31",
+   "Garchomp#1",
+   "Incineroar#105",
+   "Sylveon#27",
+   "Toxapex#3",
+   "Venusaur#2"
+  ],
+  "players": 62,
+  "share": 0.016707087038534088,
+  "species": [
+   "Charizard-Mega-Y",
+   "Garchomp",
+   "Incineroar",
+   "Sylveon",
+   "Toxapex",
+   "Venusaur"
+  ]
+ },
+ "mb9": {
+  "gids": [
+   "Excadrill#1",
+   "Gholdengo#22",
+   "Milotic#59",
+   "Sinistcha#1",
+   "M-Staraptor#1",
+   "M-Tyranitar#2"
+  ],
+  "players": 56,
+  "share": 0.01509027216383724,
+  "species": [
+   "Excadrill",
+   "Gholdengo",
+   "Milotic",
+   "Sinistcha",
+   "Staraptor-Mega",
+   "Tyranitar-Mega"
+  ]
+ },
+ "mb10": {
+  "gids": [
+   "M-Blastoise#1",
+   "M-Delphox#10",
+   "Incineroar#1",
+   "Kingambit#1",
+   "Sinistcha-Masterpiece#2",
+   "Sneasler#3"
+  ],
+  "players": 34,
+  "share": 0.009161950956615468,
+  "species": [
+   "Blastoise-Mega",
+   "Delphox-Mega",
+   "Incineroar",
+   "Kingambit",
+   "Sinistcha-Masterpiece",
+   "Sneasler"
+  ]
+ },
+ "mb11": {
+  "gids": [
+   "M-Blaziken#1",
+   "Farigiraf#94",
+   "Kingambit#10",
+   "Primarina#3",
+   "Torkoal#3",
+   "Venusaur#15"
+  ],
+  "players": 32,
+  "share": 0.008623012665049851,
+  "species": [
+   "Blaziken-Mega",
+   "Farigiraf",
+   "Kingambit",
+   "Primarina",
+   "Torkoal",
+   "Venusaur"
+  ]
+ },
+ "mb12": {
+  "gids": [
+   "Archaludon#29",
+   "Basculegion#1",
+   "M-Charizard Y#29",
+   "Grimmsnarl#15",
+   "Pelipper#3",
+   "Venusaur#3"
+  ],
+  "players": 30,
+  "share": 0.008084074373484237,
+  "species": [
+   "Archaludon",
+   "Basculegion",
+   "Charizard-Mega-Y",
+   "Grimmsnarl",
+   "Pelipper",
+   "Venusaur"
+  ]
+ },
+ "mb13": {
+  "gids": [
+   "Basculegion#2",
+   "M-Dragonite#13",
+   "M-Floette#14",
+   "Kingambit#2",
+   "Sneasler#81",
+   "Whimsicott#1"
+  ],
+  "players": 27,
+  "share": 0.007275666936135812,
+  "species": [
+   "Basculegion",
+   "Dragonite-Mega",
+   "Floette-Mega",
+   "Kingambit",
+   "Sneasler",
+   "Whimsicott"
+  ]
+ },
+ "mb14": {
+  "gids": [
+   "Basculegion#2",
+   "Kingambit#6",
+   "Kleavor#6",
+   "M-Metagross#4",
+   "M-Raichu Y#1",
+   "Whimsicott#2"
+  ],
+  "players": 27,
+  "share": 0.007275666936135812,
+  "species": [
+   "Basculegion",
+   "Kingambit",
+   "Kleavor",
+   "Metagross-Mega",
+   "Raichu-Mega-Y",
+   "Whimsicott"
+  ]
+ },
+ "mb15": {
+  "gids": [
+   "Archaludon#28",
+   "M-Gengar#14",
+   "Incineroar#53",
+   "Politoed#26",
+   "M-Swampert#1",
+   "Vivillon#1"
+  ],
+  "players": 26,
+  "share": 0.007006197790353005,
+  "species": [
+   "Archaludon",
+   "Gengar-Mega",
+   "Incineroar",
+   "Politoed",
+   "Swampert-Mega",
+   "Vivillon"
+  ]
+ },
+ "mb16": {
+  "gids": [
+   "Excadrill#11",
+   "Farigiraf#97",
+   "Gholdengo#27",
+   "M-Staraptor#1",
+   "Tyranitar#3",
+   "Whimsicott#12"
+  ],
+  "players": 26,
+  "share": 0.007006197790353005,
+  "species": [
+   "Excadrill",
+   "Farigiraf",
+   "Gholdengo",
+   "Staraptor-Mega",
+   "Tyranitar",
+   "Whimsicott"
+  ]
+ }
+}

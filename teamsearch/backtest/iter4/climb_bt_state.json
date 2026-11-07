@@ -1,0 +1,71 @@
+{
+ "round": 1,
+ "cap": 2,
+ "teams": {
+  "mb4": {
+   "team": [
+    "Basculegion#2",
+    "M-Dragonite#3",
+    "M-Floette#14",
+    "Garchomp#1",
+    "Kingambit#2",
+    "Sneasler#41"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Balance"
+  },
+  "sp3-mb4": {
+   "team": [
+    "Basculegion#2",
+    "M-Dragonite#3",
+    "M-Floette#14",
+    "Garchomp#1",
+    "Kingambit#2",
+    "M-Golisopod#32"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Balance"
+  },
+  "sp1-mb4": {
+   "team": [
+    "M-Charizard Y#29",
+    "M-Dragonite#3",
+    "M-Floette#14",
+    "Garchomp#1",
+    "Kingambit#2",
+    "Sneasler#41"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Sun"
+  },
+  "mb2": {
+   "team": [
+    "Basculegion#2",
+    "M-Froslass#1",
+    "Kingambit#5",
+    "Lycanroc-Dusk#4",
+    "M-Scovillain#6",
+    "Sneasler#5"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Snow"
+  },
+  "mb13": {
+   "team": [
+    "Basculegion#2",
+    "M-Dragonite#13",
+    "M-Floette#14",
+    "Kingambit#2",
+    "Sneasler#81",
+    "Whimsicott#1"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Tailwind"
+  }
+ }
+}

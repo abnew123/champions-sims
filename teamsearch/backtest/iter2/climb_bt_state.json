@@ -1,0 +1,82 @@
+{
+ "round": 2,
+ "cap": 2,
+ "teams": {
+  "sp1-mb4": {
+   "team": [
+    "M-Charizard Y#29",
+    "M-Dragonite#3",
+    "M-Floette#14",
+    "Garchomp#1",
+    "Kingambit#2",
+    "Sneasler#41"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Sun"
+  },
+  "mb2": {
+   "team": [
+    "Basculegion#2",
+    "M-Froslass#1",
+    "Kingambit#5",
+    "Lycanroc-Dusk#4",
+    "M-Scovillain#6",
+    "Sneasler#5"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Snow"
+  },
+  "mb16": {
+   "team": [
+    "Excadrill#11",
+    "Farigiraf#97",
+    "Gholdengo#27",
+    "M-Staraptor#1",
+    "Tyranitar#3",
+    "Whimsicott#12"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Sand"
+  },
+  "mb13": {
+   "team": [
+    "Basculegion#2",
+    "M-Dragonite#13",
+    "M-Floette#14",
+    "Kingambit#2",
+    "Sneasler#81",
+    "Whimsicott#1"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Tailwind"
+  },
+  "mb7": {
+   "team": [
+    "Archaludon#29",
+    "Arcanine-H#13",
+    "Grimmsnarl#15",
+    "Pelipper#3",
+    "M-Swampert#1",
+    "Venusaur#1"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 1,
+     "out": "M-Charizard Y#30",
+     "into": "Arcanine-H#13",
+     "note": "item clause: Focus Sash -> Life Orb",
+     "diff": 0.0768350749416939,
+     "se": 0.03106234452816257,
+     "matrix": 0.40154324724004925,
+     "from_random": true
+    }
+   ],
+   "arch": "Rain + Sun"
+  }
+ }
+}

@@ -1,0 +1,103 @@
+{
+ "round": 2,
+ "cap": null,
+ "teams": {
+  "mb2": {
+   "team": [
+    "Basculegion#2",
+    "M-Froslass#1",
+    "Kingambit#5",
+    "Lycanroc-Dusk#4",
+    "M-Scovillain#6",
+    "Sneasler#5"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Snow"
+  },
+  "sp1-mb4": {
+   "team": [
+    "M-Charizard Y#29",
+    "M-Dragonite#3",
+    "M-Floette#14",
+    "Garchomp#1",
+    "Kingambit#2",
+    "Sneasler#41"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Sun"
+  },
+  "mb16": {
+   "team": [
+    "Excadrill#11",
+    "Farigiraf#97",
+    "Gholdengo#27",
+    "M-Staraptor#1",
+    "Tyranitar#3",
+    "Whimsicott#12"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Sand"
+  },
+  "mb4": {
+   "team": [
+    "Basculegion#2",
+    "M-Dragonite#3",
+    "M-Floette#14",
+    "Garchomp#1",
+    "Kingambit#2",
+    "M-Golisopod#32"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 5,
+     "out": "Sneasler#41",
+     "into": "M-Golisopod#32",
+     "note": "",
+     "diff": 0.17530161649700668,
+     "se": 0.05789346634352122,
+     "matrix": 0.4978395317462562,
+     "from_random": false
+    }
+   ],
+   "arch": "Balance"
+  },
+  "mb13": {
+   "team": [
+    "Basculegion#2",
+    "M-Golisopod#32",
+    "M-Raichu Y#1",
+    "Kingambit#2",
+    "Sneasler#81",
+    "Whimsicott#1"
+   ],
+   "done": false,
+   "path": [
+    {
+     "slot": 1,
+     "out": "M-Dragonite#13",
+     "into": "M-Golisopod#32",
+     "note": "",
+     "diff": 0.10779157799805371,
+     "se": 0.03641342897161474,
+     "matrix": 0.48423863395968314,
+     "from_random": false
+    },
+    {
+     "slot": 2,
+     "out": "M-Floette#14",
+     "into": "M-Raichu Y#1",
+     "note": "",
+     "diff": 0.09273922363810855,
+     "se": 0.030532980581867694,
+     "matrix": 0.018957375393630172,
+     "from_random": false
+    }
+   ],
+   "arch": "Tailwind"
+  }
+ }
+}

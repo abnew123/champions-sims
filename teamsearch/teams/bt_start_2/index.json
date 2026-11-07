@@ -1,0 +1,77 @@
+{
+ "sp1-mb4": {
+  "event": "selfplay",
+  "place": null,
+  "rating": null,
+  "arch": "Sun",
+  "pid": null,
+  "gids": [
+   "M-Charizard Y#29",
+   "M-Dragonite#3",
+   "M-Floette#14",
+   "Garchomp#1",
+   "Kingambit#2",
+   "Sneasler#41"
+  ]
+ },
+ "mb2": {
+  "event": "selfplay",
+  "place": null,
+  "rating": null,
+  "arch": "Snow",
+  "pid": null,
+  "gids": [
+   "Basculegion#2",
+   "M-Froslass#1",
+   "Kingambit#5",
+   "Lycanroc-Dusk#4",
+   "M-Scovillain#6",
+   "Sneasler#5"
+  ]
+ },
+ "mb16": {
+  "event": "selfplay",
+  "place": null,
+  "rating": null,
+  "arch": "Sand",
+  "pid": null,
+  "gids": [
+   "Excadrill#11",
+   "Farigiraf#97",
+   "Gholdengo#27",
+   "M-Staraptor#1",
+   "Tyranitar#3",
+   "Whimsicott#12"
+  ]
+ },
+ "mb13": {
+  "event": "selfplay",
+  "place": null,
+  "rating": null,
+  "arch": "Tailwind",
+  "pid": null,
+  "gids": [
+   "Basculegion#2",
+   "M-Dragonite#13",
+   "M-Floette#14",
+   "Kingambit#2",
+   "Sneasler#81",
+   "Whimsicott#1"
+  ]
+ },
+ "mb7": {
+  "event": "selfplay",
+  "place": null,
+  "rating": null,
+  "arch": "Rain + Sun",
+  "pid": null,
+  "gids": [
+   "Archaludon#29",
+   "M-Charizard Y#30",
+   "Grimmsnarl#15",
+   "Pelipper#3",
+   "M-Swampert#1",
+   "Venusaur#1"
+  ]
+ }
+}

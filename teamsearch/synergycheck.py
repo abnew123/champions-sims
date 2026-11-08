@@ -12,11 +12,14 @@ area); if breaks clearly hurt, the climb's one-swap search is the bigger problem
   TS_SYN_BRINGS=human: human-typical brings and leads (imitation model) instead of the climb's bring search; =plan: the plan-aware
   bring search (bringplan.py, TS_BRING_MODE=plan)
   TS_SYN_TEST=1: plumbing check (2 teams, 1 break + control, one entry per group)
+  TS_SYN_ONE=1 (the user, 2026-11-08: re-check on the current engine, on the Mac, before scoring generated sixes): one break per team
+  (the first generalist it can take) beside its control, so break and control usually bring the same newcomer; the summary adds the
+  paired gap (break minus control within a team, mean +- SE across teams, per plan). Output runs/synergy_<sim>_<brings>_one.json
 """
 import json, os, sys, time, random, subprocess
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 os.environ['TS_OPP'] = 'pool'; os.environ.setdefault('TS_SIM', 'v20g')
-TEST = os.environ.get('TS_SYN_TEST') == '1'
+TEST = os.environ.get('TS_SYN_TEST') == '1'; ONE = os.environ.get('TS_SYN_ONE') == '1'
 BRINGS = os.environ.get('TS_SYN_BRINGS', 'search')     # search: the climb's bring search; human: the most human-like bring and leads
                                                         # per group from the ladder-fitted imitation model, no battles (Battle sim's
                                                         # test of whether the climb's bring step is where plans lose their value)
@@ -75,7 +78,7 @@ def plan():
         for g in GENERALISTS:
             x = swap_to(team, e[1], G[g]['species'])
             if x and all(y[2] != x[2] for y in vs): vs.append(('break', e[1], x[2], x[3]))
-            if len(vs) == (1 if TEST else 3): break
+            if len(vs) == (1 if TEST or ONE else 3): break
         others = [g for g in team if g != e[1]]; rng = random.Random(n)
         for o in rng.sample(others, len(others)):
             x = next((swap_to(team, o, G[g]['species']) for g in GENERALISTS if swap_to(team, o, G[g]['species'])), None)
@@ -130,7 +133,17 @@ def run(B):
     if len(tr) > 3:                                                    # Battle sim's check: does removing the setter cost less on fast teams?
         import numpy as np
         print(f"  Trick Room breaks: gain vs the team's own average base Speed, correlation {np.corrcoef([r['avg_spe'][0] for r in tr], [r['diff'] for r in tr])[0, 1]:+.2f} (n {len(tr)})")
-    json.dump(out, open(os.path.join(HERE, 'runs', f'synergy_{E.sim()}_{BRINGS}.json'), 'w'), indent=1)
+    ms = lambda xs: (sum(xs) / len(xs), (sum((x - sum(xs) / len(xs)) ** 2 for x in xs) / max(1, len(xs) - 1) / len(xs)) ** 0.5) if xs else (0, 0)
+    gap = {}
+    for n in {r['start'] for r in out}:
+        b = [r['diff'] for r in out if r['start'] == n and r['kind'] == 'break']; c = [r['diff'] for r in out if r['start'] == n and r['kind'] == 'control']
+        if b and c: gap[n] = (next(r['plan'] for r in out if r['start'] == n), sum(b) / len(b) - c[0])
+    m, se = ms([g for _, g in gap.values()]); (bm, bse), (cm, cse) = ms(agg['break']), ms(agg['control'])
+    print(f"\nbreaks {100 * bm:+.1f} +- {100 * bse:.1f}, controls {100 * cm:+.1f} +- {100 * cse:.1f}; paired gap (break - control, same team) "
+          f"{100 * m:+.1f} +- {100 * se:.1f} over {len(gap)} teams (negative: the sim values the plan beyond an ordinary swap)")
+    for p in sorted({p for p, _ in gap.values()}):
+        gm, gse = ms([g for q, g in gap.values() if q == p]); print(f"  {p:16s} gap {100 * gm:+5.1f} +- {100 * gse:.1f} (n {sum(1 for q, _ in gap.values() if q == p)})")
+    json.dump(out, open(os.path.join(HERE, 'runs', f"synergy_{E.sim()}_{BRINGS}{'_one' if ONE else ''}.json"), 'w'), indent=1)
 
 if __name__ == '__main__':
     cmd = sys.argv[1] if len(sys.argv) > 1 else 'plan'

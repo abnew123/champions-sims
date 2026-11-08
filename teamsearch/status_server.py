@@ -211,7 +211,8 @@ def cards():
                                  ('round_scoreteams.log', 'Scoring candidate teams against the current-meta pool', 'scores (win share'),
                                  ('backtest/selfplay.log', 'M-B to M-C self-play backtest (field scoring; its climbs show as the climb card)', 'self-play backtest finished'),
                                  ('backtest/v2/selfplay.log', 'M-B to M-C self-play backtest v2 (field scoring; its climbs show as the climb card)', 'self-play backtest finished'),
-                                 ('backtest/calib_mb.log', 'M-B calibration sims: the sim plays real M-B ladder matchups (both sheets, the brings played)', 'calibration sims done')):
+                                 ('backtest/calib_mb.log', 'M-B calibration sims: the sim plays real M-B ladder matchups (both sheets, the brings played)', 'calibration sims done'),
+                                 ('round_synergy_v43.log', 'Synergy check on v43n1: does the sim value a team\'s game plan beyond an ordinary swap?', 'synergy check done')):
         c = step_card(C(logname), title, done, bool(CD))
         if c and (not pr or pr.get('phase') == 'done' or os.path.getmtime(C(logname)) > (pr.get('at') or 0)): cards.append(c)
     if stt:

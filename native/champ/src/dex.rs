@@ -190,6 +190,8 @@ pub struct ActiveMove {
     pub hit: i64, pub total_damage: i64, pub spread_hit: bool, pub last_hit: bool, pub has_bounced: bool, pub prankster_boosted: bool,
     pub self_dropped: bool, pub source_effect: Option<Id>, pub is_external: bool, pub type_changer_boosted: Option<Id>,
     pub hit_data: Vec<(Id, HitData)>, pub hit_targets: Vec<(u8, u8)>, pub misc: Vec<(Id, f64)>, pub stab_override: Option<f64>,
+    /// Fling's move.onHit (v43): the flung berry, or the item whose fling.effect runs on the target (White Herb, Mental Herb)
+    pub fling_item: Option<Id>,
 }
 impl ActiveMove {
     pub fn flag(&self, f: &str) -> bool { self.flags.iter().any(|x| *x == f) }
@@ -233,6 +235,7 @@ fn parse_move(v: &Value) -> ActiveMove {
         is_z: b("isZ"), is_max: b("isMax"), crit_modifier: v.get("critModifier").and_then(|x| x.as_f64()), thaws_target: b("thawsTarget"),
         hit: 0, total_damage: 0, spread_hit: false, last_hit: false, has_bounced: false, prankster_boosted: false, self_dropped: false,
         source_effect: None, is_external: false, type_changer_boosted: None, hit_data: vec![], hit_targets: vec![], misc: vec![], stab_override: None,
+        fling_item: None,
     }
 }
 
@@ -346,6 +349,32 @@ impl Dex {
             } }
         }
         self.index_callbacks();
+    }
+    /// every function callback of the data with no Rust port, after attach (`champ missing <engine_data.json>`, 2026-11-07): event
+    /// callbacks (cbs entries that are neither constants nor absent), non-event functions (fns: basePowerCallback, durationCallback, ...),
+    /// move parts' functions as the engine names them (self.onHit, secondaries.N.onHit, secondaries.N.self.onHit) and items' fling.effect.
+    /// One "Kind:id.callback" a line, sorted. (Species callbacks, onType and onBattleStart, are not loaded: the engine never runs them.)
+    pub fn missing(&self, reg: &FxMap<(Kind, Id, Id), crate::battle::HFn>) -> Vec<String> {
+        let mut out = vec![];
+        let has = |k: Kind, i: &str, cb: &str| reg.contains_key(&(k, id(i), id(cb)));
+        for (k, m) in self.moves.iter() {
+            for (cb, c) in m.eff.cbs.iter() { if !c.absent && c.cval.is_none() && c.f.is_none() { out.push(format!("Move:{}.{}", k, cb)); } }
+            for f in &m.eff.fns { if !has(Kind::Move, k, f) { out.push(format!("Move:{}.{}", k, f)); } }
+            let mut parts: Vec<&HitEff> = vec![];
+            if let Some(s) = &m.tmpl.base.self_eff { parts.push(s); }
+            for s in m.tmpl.secondaries.iter().flatten() { parts.push(s); if let Some(x) = &s.self_eff { parts.push(x); } }
+            for p in parts { if p.on_hit { let cb = cbp(p.part, "Hit"); if !has(Kind::Move, k, cb) { out.push(format!("Move:{}.{}", k, cb)); } } }
+        }
+        for (kind, map, name) in [(Kind::Item, &self.items, "Item"), (Kind::Ability, &self.abilities, "Ability"), (Kind::Cond, &self.conds, "Cond")] {
+            for (k, e) in map.iter() {
+                for (cb, c) in e.cbs.iter() { if !c.absent && c.cval.is_none() && c.f.is_none() { out.push(format!("{}:{}.{}", name, k, cb)); } }
+                for f in &e.fns { if !has(kind, k, f) { out.push(format!("{}:{}.{}", name, k, f)); } }
+                if kind == Kind::Item && e.raw.get("fling").and_then(|x| x.get("effect")).map(|x| x == "__fn").unwrap_or(false) && !has(kind, k, "fling.effect") {
+                    out.push(format!("Item:{}.fling.effect", k));
+                }
+            }
+        }
+        out.sort(); out
     }
     pub fn evn(&self, ev: &str) -> &'static EvNames {
         let key = (ev.as_ptr() as usize, ev.len());

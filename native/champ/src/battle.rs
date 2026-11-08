@@ -71,6 +71,9 @@ pub struct Battle {
     pub effect: Option<Eff>, pub effect_state: SLoc, pub event: Option<EventCtx>, pub event_depth: i32, pub temp: Vec<EState>,
     pub log: Vec<String>, pub logging: bool, pub mid_turn: bool, pub request_switch: bool, pub last_successful_move_this_turn: Option<Id>, pub last_move: Option<usize>,
     pub unsupported: Vec<String>, pub quick_claw_roll: bool, pub eff_type: Id, pub nevents: u64, pub nfind: u64, pub speed_order: Vec<i64>,
+    /// battle.lastMove's id, kept across turns (last_move above is an ActiveMove slot, cleared with them at the end of a turn); Copycat
+    /// reads it (2026-11-07)
+    pub last_move_id: Option<Id>,
 }
 
 /// up to four pokemon refs without allocating (derefs to a slice)
@@ -619,6 +622,8 @@ impl Battle {
     /// pokemon.getStat(stat, unboosted, unmodified); i in 1..=5 (atk..spe)
     pub fn get_stat(&mut self, m: MonRef, i: usize, unboosted: bool, unmodified: bool) -> i64 {
         let mut stat = self.p(m).stored[i];
+        // Wonder Room: an unmodified read takes the other defence's boosts and modifiers (the stat itself stays; v43)
+        let i = if unmodified && (i == 2 || i == 4) && find(&self.field.pseudo, "wonderroom").is_some() { 6 - i } else { i };
         if !unboosted {
             let mut boosts: Boosts = (0..7).map(|k| (k as u8, self.p(m).boosts[k])).collect();
             if !unmodified {

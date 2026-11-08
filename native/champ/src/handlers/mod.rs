@@ -23,6 +23,7 @@ pub mod batch5;
 pub mod batch6;
 pub mod batch7;
 pub mod batch8;
+pub mod batch9;
 
 pub fn build() -> Reg {
     let mut r: Reg = FxMap::default();
@@ -35,6 +36,7 @@ pub fn build() -> Reg {
     batch6::register(&mut r);
     batch7::register(&mut r);
     batch8::register(&mut r);
+    batch9::register(&mut r);
     r
 }
 

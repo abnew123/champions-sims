@@ -18,7 +18,8 @@ pub fn new_battle(dex: &'static Dex, reg: &'static crate::handlers::Reg, pre: &V
     Battle { dex, reg, prng, field: l.field, sides: l.sides, queue: vec![], turn: l.turn, effect_order: l.effect_order, ended: false, winner: None,
              faint_queue: vec![], amoves: vec![], active_move: None, active_pokemon: None, active_target: None, effect: None, effect_state: SLoc::Nil,
              event: None, event_depth: 0, temp: vec![], log: vec![], logging: std::env::var("LOG").is_ok(), mid_turn: false, request_switch: false,
-             last_successful_move_this_turn: None, last_move: None, unsupported: vec![], quick_claw_roll: false, eff_type: "", nevents: 0, nfind: 0, speed_order: vec![] }
+             last_successful_move_this_turn: None, last_move: None, unsupported: vec![], quick_claw_roll: false, eff_type: "", nevents: 0, nfind: 0, speed_order: vec![],
+             last_move_id: l.last_move }
 }
 /// "move 2 1 mega, switch 3" -> per active slot: move (request index, target loc, mega) / switch (team position) / pass
 pub fn parse_choice(s: &str) -> [PChoice; 2] {
@@ -119,7 +120,8 @@ fn canon_en(v: &SV, mon: &dyn Fn(MonRef) -> String) -> Option<String> {
         SV::L(l) => if l.is_empty() { None } else { Some(format!("[{}]", l.iter().map(|m| format!("mon:{}", mon(*m))).collect::<Vec<_>>().join(","))) },
     }
 }
-const SKIP: [&str; 5] = ["id", "effectOrder", "duration", "target", "name"];
+/// moveData: Future Sight's stored move (an object in Showdown's slot condition; the engine rebuilds it from the move id, v43)
+const SKIP: [&str; 6] = ["id", "effectOrder", "duration", "target", "name", "moveData"];
 fn est_sd(v: &Value, mon: &dyn Fn(usize, usize) -> String) -> String {
     let mut m: BTreeMap<String, String> = BTreeMap::new();
     if let Some(o) = v.as_object() { for (k, x) in o { if SKIP.contains(&k.as_str()) { continue; } if let Some(c) = canon_sd(x, mon) { m.insert(k.clone(), c); } } }
@@ -248,6 +250,9 @@ pub fn main(args: &[String]) {
     let mut bad: BTreeMap<String, usize> = BTreeMap::new();
     let mut examples = vec![];
     let t0 = std::time::Instant::now(); let mut turns = 0;
+    // TURN_OUT=<file> (v43): one line per case and mode, {id, mode, r: exact / mismatch / unsupported, d: the differences or the unsupported list}
+    let mut tout = std::env::var("TURN_OUT").ok().map(|f| std::io::BufWriter::new(std::fs::File::create(f).expect("TURN_OUT")));
+    let mut put = |id: &Value, mode: &str, r: &str, d: &[String]| { if let Some(w) = tout.as_mut() { use std::io::Write; let _ = writeln!(w, "{}", serde_json::json!({"id": id, "mode": mode, "r": r, "d": d})); } };
     for line in text.lines() {
         let c: Value = serde_json::from_str(line).unwrap();
         if let Some(o) = only { if c["id"].as_i64() != Some(o) { continue; } }
@@ -263,11 +268,13 @@ pub fn main(args: &[String]) {
             let e = tot.entry(mode.to_string()).or_insert((0, 0, 0));
             let b = match r { Ok(b) => b, Err(p) => {
                 e.2 += 1; let msg = p.downcast_ref::<String>().cloned().or(p.downcast_ref::<&str>().map(|s| s.to_string())).unwrap_or_default();
-                *unsup.entry(format!("PANIC {}", msg.chars().take(80).collect::<String>())).or_insert(0) += 1; continue; } };
-            if !b.unsupported.is_empty() { e.2 += 1; for u in &b.unsupported { *unsup.entry(u.clone()).or_insert(0) += 1; } continue; }
+                let pm = format!("PANIC {}", msg.chars().take(80).collect::<String>()); put(&c["id"], mode, "unsupported", &[pm.clone()]);
+                *unsup.entry(pm).or_insert(0) += 1; continue; } };
+            if !b.unsupported.is_empty() { e.2 += 1; put(&c["id"], mode, "unsupported", &b.unsupported); for u in &b.unsupported { *unsup.entry(u.clone()).or_insert(0) += 1; } continue; }
             let mut d = diff(&b, &exp["post"]);
             if full { d.extend(diff_full(&b, &exp["post"], exp.get("req"))); }
             if order { d.extend(diff_order(&b, &exp["log"])); }
+            put(&c["id"], mode, if d.is_empty() { "exact" } else { "mismatch" }, &d);
             if d.is_empty() { e.0 += 1; } else {
                 e.1 += 1;
                 for x in &d { let k: String = x.split(": native").next().unwrap().split_whitespace().last().unwrap_or("").to_string(); *bad.entry(k).or_insert(0) += 1; }

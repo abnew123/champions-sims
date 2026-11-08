@@ -1431,6 +1431,48 @@ registrations since its second version) and checks reachability of real logs in 
   net and vfeats do not model Commander (the Tatsugiri reads as an ordinary active). Stats and abilities of the M-D Megas are the data's
   placeholders until M-D is announced. Test scripts: pssim/results/md_audit/v42_check (gen_md_cases.js, gen_md_damage.js, cmp.py).
   `bin/champ-battle-v42.sha256`, `src_battle_v42.tar.gz`. Not on the bot.
+- **champ-battle-v43 (2026-11-07, 7:45 pm) = v42 + every mechanic real M-B / M-C sets use that the engine still reported unsupported (Team
+  search: 6% of its M-B calibration sims were dropped for them; the user: "we should support Bug Bite, Cute Charm, Castform's Forecast, Shed
+  Tail, Morpeko's Hunger Switch, Aura Wheel"), plus Assault Vest (the user, 2026-11-07: it may come to the game).** New in
+  src/handlers/batch9.rs: Bug Bite / Pluck, Cute Charm with the attract condition and Attract, Forecast, Solar Blade, Shed Tail (the
+  Substitute passes: sim.rs copy_volatile_from with 'shedtail'), Gluttony (its flag only: no pinch berry is in M-B / M-C), Poison Heal,
+  Hunger Switch, Aura Wheel, Cud Chew, Merciless, Spirit Shackle, Copycat (battle.lastMove: Battle::last_move_id, kept across turns),
+  Fling (ActiveMove::fling_item for its move.onHit; White / Mental Herb's fling.effect), Heat Crash, Instruct, Assault Vest, and from the
+  sweep: Endure, Piercing Drill, Sap Sipper's side hits, Tidy Up, Water Shuriken, Rivalry, Fell Stinger, Symbiosis, Sticky Web, Future
+  Sight (the futuremove slot condition and its delayed hit), Big Root, Slush Rush, Heavy / Light Metal, Innards Out, Big Pecks, White
+  Smoke, Grav Apple, Growth, Topsy-Turvy, Tri Attack, Hustle, Fluffy, Aqua Ring, Eerie Spell, Spite, Electrify, Cheek Pouch, Fly / Bounce
+  / Dig / Dive / Sky Attack and their semi-invulnerable states, Recycle, Quick Feet, Stakeout, Acupressure, Klutz, Anticipation, Mimicry,
+  Jaw Lock, Mean Look, Block, Magic Powder, Pickup, Shed Skin, Hydration, Heal Bell, Wonder Room (the defence swap: sim.rs calculate_stat,
+  battle.rs get_stat) and Magic Room, Guard Swap, Sparkling Aria, Effect Spore, Opportunist, Ingrain, Syrup Bomb, Torment, Uproar, Magnet
+  Rise, Comeuppance, Court Change, Misty Explosion, Thief, Receiver, Sand Spit, Sticky Hold, Suction Cups, Guard Dog, Gastro Acid, Belch,
+  Reflect Type, Misty Seed, Oran / Persim Berry, Shed Shell, and Wandering Spirit and Magician (abilities.rs had them report themselves
+  unsupported). Genders: export_state.js writes each Pokemon's gender, battle.lastMove and whether each attackedBy damage was a number
+  (Comeuppance) only with `exportState(b, {v43: true})`; native/battle_starts.js passes it, the eval bar's and bot's positions.js don't
+  (a state without genders reads as genderless: Cute Charm, Attract and Rivalry never act). `champ missing <engine data>` lists every data
+  callback without a port; pssim/results/v43_audit (git-ignored): cond_refs.js, cross.py against effects_used.json: v42 lacked 1,016
+  callbacks, 167 of them used by real M-B or M-C sets (106 effects, conditions counted through the effects that create them); v43: 847,
+  none used. Left out on purpose: Neutralizing Gas, Mind's Eye, Choice Band, Power Herb, Ability Shield (only Sep 1-4 M-B sheets).
+  **Exact against Showdown**: 1,700 whole battles (v43_check/gen_v43_cases.js: 1-3 real M-B / M-C carriers of a mechanic a team, always
+  brought, the rest a real six; 600 open, 1,100 aimed at the rarer mechanics; Fling with White / Mental Herb or a berry and two Stakeout
+  sets are synthetic), 21,112 turns x lo / hi / mid / real on the full diff: 84,435 of 84,448 exact, 0 unsupported (v42: 27,790
+  unsupported, 0 exact turns lost); every mechanic exact on the turns that ran its code (cmp_v42_v43.txt) apart from 13 results in 4 turns,
+  all wrong on v42 too: an Ally Switch whose partner aimed at the slot it then stood in (2 turns; Showdown's getTarget returns null and
+  the move fails [notarget], the engine's use_move retargets a foe because it reads null as undefined), and a Healing Wish cure's
+  statusState source (2 turns). **M-C unchanged**: native/turn_cases_*.jsonl, 69,600 results: 69,499 identical to v42 with the same
+  difference lists, the other 101 were v42-unsupported and are exact; rain confirmation starts (remade with genders): the first 40 with
+  BATTLE_EVAL=0 and 8 with BATTLE_EVAL=1 at budget 3000 play identically on v41, v42 and v43 (v, turns, log and every non-timing field).
+  **M-B calibration starts** (regress_mb: built as calib_mb.py builds them, the v41n1 setup): 404 simulated games of 134 real ones (the
+  34 whose calibration sims had reported unsupported, 3 seeds a side, and 100 others, 1 a side). v41 = v42 on all 404; v43 = v42 on 198
+  of 198 whose brought fours carry no v43 mechanic, and on 73 of 102 that carry one with nothing reported on v41: the planner simulates
+  options it never picks, so a carried Shed Tail (10), Heat Crash (5), Rivalry (4), Cute Charm (4), Copycat (3), Fling (3), Sticky Web
+  (2), Tidy Up (2) or Bug Bite (1) changes its values. The 104 that reported unsupported on v41 (26 real games): 98 now report none, the
+  other 6 (one Sep 1-4 game) Neutralizing Gas / Mind's Eye. So Team search should replay the calibration games whose brought fours carry
+  a v43 mechanic, not only those that reported unsupported: affected_games.py lists them, 258 of the 2,500 (Bug Bite 76, Cute Charm 32,
+  Shed Tail 23, ...). Deliberate differences: Sticky Hold lets an item go when no move is active (Showdown throws); Metal Burst's port
+  still counts status moves in getLastDamagedBy (unchanged, so its games stay v42's; Comeuppance has the filter). The planner never aims
+  Instruct at the partner (partner_target unchanged, so games without the mechanics stay identical). Test scripts:
+  pssim/results/v43_audit/v43_check (sets_v43.py, gen_v43_cases.js, cmp_cases.py, coverage_v43.py), regress_mc, regress_mb, regress_rain.
+  `champ turn` writes per-case results with TURN_OUT. `bin/champ-battle-v43.sha256`, `src_battle_v43.tar.gz`. Not on the bot.
 
 ## The climb's simulator against the bot's ladder games (2026-10-16; the user: check the sim before trusting what the climb finds)
 bot/ladder_sim.py + pssim/ladder_sim.sh: the bot's 1,128 saved games (689 Bo3, 439 Bo1) rebuilt at turn 1 as the bot saw them (botpos,

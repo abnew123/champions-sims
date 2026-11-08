@@ -34,7 +34,9 @@ jobs.forEach((j, i) => {
     // seedKey: what champ-battle-v3 derives its turn/planning seeds from (with g), so every team or bring facing the same opponent shares
     // them (common random numbers): archetype mode keys on (arch, their lead pair k); explicit mode on their four in order
     const seedKey = j.mine ? 'x|' + j.theirs.map(s => s.species).join(',') : `a|${j.arch}|${j.k}`;
-    out.write(JSON.stringify({job: i, g, seedKey, meta, rng: r[0] * 65536 + r[1], state: exportState(b)}) + '\n'); n++;
+    // {v43: true} (2026-11-07): the state also carries genders, battle.lastMove and which attackedBy damages were numbers, for
+    // champ-battle-v43 (Cute Charm, Attract, Rivalry, Copycat, Comeuppance); older engines ignore them, so their games are unchanged
+    out.write(JSON.stringify({job: i, g, seedKey, meta, rng: r[0] * 65536 + r[1], state: exportState(b, {v43: true})}) + '\n'); n++;
   }
 });
 out.end(); console.log(`${n} starting positions (${jobs.length} jobs) -> ${outf}`);

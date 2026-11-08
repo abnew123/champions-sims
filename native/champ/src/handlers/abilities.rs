@@ -396,7 +396,7 @@ pub fn register(r: &mut Reg) {
     h!(r, Ability, "supremeoverlord", "onStart", |b, a| { let m = a.t(); let tf = b.sides[m.0 as usize].total_fainted; if tf != 0 { b.es().set("fallen", SV::N(tf.min(5) as f64)); } RV::Undef });
     h!(r, Ability, "supremeoverlord", "onEnd", |b, a| { RV::Undef });
     h!(r, Ability, "supremeoverlord", "onBasePower", |b, a| { let f = b.es().n("fallen").unwrap_or(0.0); if f != 0.0 { let pm = [4096.0, 4506.0, 4915.0, 5325.0, 5734.0, 6144.0]; return b.cm(pm[f as usize], 4096.0); } RV::Undef });
-    h!(r, Ability, "wanderingspirit", "onDamagingHit", |b, a| { let (t, s) = (a.t(), a.s()); if b.makes_contact(a.am(), s) { b.unsupported("wanderingspirit skill swap".into()); } RV::Undef });
+    // Wandering Spirit: batch9.rs (v43; it was reported unsupported)
     h!(r, Ability, "synchronize", "onAfterSetStatus", |b, a| {
         let t = a.t(); let Some(s) = a.source else { return RV::Undef }; if s == t { return RV::Undef; }
         if a.src_eff.map(|e| e.id) == Some("toxicspikes") { return RV::Undef; }
@@ -411,7 +411,7 @@ pub fn register(r: &mut Reg) {
         if !dn.is_empty() { let k = dn[b.prng.sample_idx(dn.len())]; bo.push((k, -1)); }
         bo.sort_by_key(|x| x.0);   // JS object keys keep insertion order of the boost table (atk..spe)
         b.boost(bo, Some(m), Some(m), None, false, false); RV::Undef });
-    h!(r, Ability, "magician", "onAfterMoveSecondarySelf", |b, a| { b.unsupported("magician".into()); RV::Undef });
+    // Magician: batch9.rs (v43; it was reported unsupported)
     h!(r, Ability, "pickpocket", "onAfterMoveSecondary", |b, a| {
         let t = a.t(); let Some(s) = a.source else { return RV::Undef }; let am = a.am();
         if s != t && b.am(am).flag("contact") {

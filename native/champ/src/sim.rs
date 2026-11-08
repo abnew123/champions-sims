@@ -339,7 +339,8 @@ impl Battle {
         let old = self.sides[s as usize].active[pos as usize].map(|i| (s, i));
         if let Some(o) = old { if self.p(o).hp > 0 {
             self.pm(o).being_called_back = true;
-            let copy = source_effect.map(|se| se.kind == Kind::Move && self.dex.mv(se.id).tmpl.base.self_switch == Some("copyvolatile")).unwrap_or(false);
+            // switchCopyFlag: a move's string selfSwitch, Baton Pass's 'copyvolatile' or Shed Tail's 'shedtail' (v43)
+            let copy = source_effect.and_then(|se| if se.kind == Kind::Move { self.dex.mv(se.id).tmpl.base.self_switch } else { None }).filter(|x| *x == "copyvolatile" || *x == "shedtail");
             if !self.p(o).skip_before_switch_out && !is_drag {
                 self.run_event("BeforeSwitchOut", Tgt::Mon(o), None, None, RV::Undef, false, false);
                 self.each_event("Update", None);
@@ -351,7 +352,7 @@ impl Battle {
             self.single_event("End", Eff::new(Kind::Ability, ab), Some(SLoc::Ability(o)), Tgt::Mon(o), None, None, RV::Undef);
             self.single_event("End", Eff::new(Kind::Item, it), Some(SLoc::Item(o)), Tgt::Mon(o), None, None, RV::Undef);
             self.queue.retain(|q| q.pokemon != Some(o));
-            if copy { self.copy_volatile_from(m, o); }   // Baton Pass (2026-10-09)
+            if let Some(cause) = copy { self.copy_volatile_from(m, o, cause); }   // Baton Pass (2026-10-09), Shed Tail (v43)
             self.clear_volatile(o, true);
         } }
         if let Some(o) = old {
@@ -378,14 +379,16 @@ impl Battle {
         }
         SwitchResult::Ok
     }
-    /// pokemon.copyVolatileFrom(old, 'batonpass'): boosts and the volatiles without noCopy move to the switch-in (Baton Pass)
-    pub fn copy_volatile_from(&mut self, m: MonRef, o: MonRef) {
+    /// pokemon.copyVolatileFrom(old, switchCause): boosts and the volatiles without noCopy move to the switch-in (Baton Pass); for
+    /// Shed Tail ('shedtail', v43) only the Substitute, and no boosts
+    pub fn copy_volatile_from(&mut self, m: MonRef, o: MonRef, cause: Id) {
         const NOCOPY: [&str; 30] = ["attract", "choicelock", "commanded", "commanding", "counter", "defensecurl", "destinybond", "disable", "dynamax", "encore", "flashfire",
             "foresight", "glaiverush", "gmaxchistrike", "imprison", "lockon", "minimize", "miracleeye", "mirrorcoat", "nightmare", "protosynthesis", "quarkdrive", "saltcure",
             "smackdown", "spotlight", "stockpile", "syrupbomb", "torment", "trapped", "trapper"];
         self.clear_volatile(m, true);
-        self.pm(m).boosts = self.p(o).boosts;
-        let vols: Vec<(Id, EState)> = self.p(o).volatiles.iter().filter(|(k, _)| !NOCOPY.contains(k) && *k != "yawn").cloned().collect();
+        let shed = cause == "shedtail";
+        if !shed { self.pm(m).boosts = self.p(o).boosts; }
+        let vols: Vec<(Id, EState)> = self.p(o).volatiles.iter().filter(|(k, _)| !NOCOPY.contains(k) && *k != "yawn" && (!shed || *k == "substitute")).cloned().collect();
         let ids: Vec<Id> = vols.iter().map(|(k, _)| *k).collect();
         self.pm(m).volatiles = vols;
         // the passer's own clearVolatile ends its linked volatiles (trapped / trapper are noCopy, so none were copied) (2026-11-06)
@@ -434,7 +437,7 @@ impl Battle {
         side.pokemon.iter().enumerate().filter(|(i, p)| !p.fainted && !side.active.contains(&Some(*i as u8))).count()
     }
     pub fn clear_active_move(&mut self, failed: bool) {
-        if let Some(am) = self.active_move { if !failed { self.last_move = Some(am); } self.active_move = None; self.active_pokemon = None; self.active_target = None; }
+        if let Some(am) = self.active_move { if !failed { self.last_move = Some(am); self.last_move_id = Some(self.am(am).id); } self.active_move = None; self.active_pokemon = None; self.active_target = None; }
     }
     pub fn set_active_move(&mut self, am: Option<usize>, p: Option<MonRef>, t: Option<MonRef>) { self.active_move = am; self.active_pokemon = p; self.active_target = t.or(p); }
     pub fn check_fainted(&mut self) {
@@ -1048,7 +1051,7 @@ impl Battle {
                 let md = move_damage.get(i).cloned().unwrap_or(RV::Undef);
                 let dn = if let RV::N(x) = md { x as i64 } else { 0 };
                 let slot = self.slot_name(m); let mid = self.am(am).id;
-                self.pm(*t).attacked_by.push(Attack { source: m, damage: dn, mv: mid, this_turn: true, slot });
+                self.pm(*t).attacked_by.push(Attack { source: m, damage: dn, mv: mid, this_turn: true, slot, numeric: matches!(md, RV::N(_)) });
                 if let RV::N(_) = md { let add = if self.am(am).smart_target.unwrap_or(false) { 1 } else { hit - 1 }; self.pm(*t).times_attacked += add; }
             } }
         }
@@ -1202,6 +1205,7 @@ impl Battle {
                     if self.has_part_fn(mid, md, "onHitSide") { let r = self.single_event("HitSide", md_eff, None, Tgt::Side(t.0), Some(m), Some(e), RV::Undef); did = combine(&did, &r); }
                 } else {
                     if self.has_part_fn(mid, md, "onHit") { let r = self.single_event("Hit", md_eff, None, Tgt::Mon(t), Some(m), Some(e), RV::Undef); did = combine(&did, &r); }
+                    else if md.part.is_empty() && self.am(am).fling_item.is_some() { let r = crate::handlers::batch9::fling_hit(self, t, m, am); did = combine(&did, &r); }   // Fling's move.onHit (v43)
                     if !is_self && !is_secondary { self.run_event("Hit", Tgt::Mon(t), Some(m), Some(e), RV::Undef, false, false); }
                 }
             }
@@ -1315,7 +1319,9 @@ impl Battle {
         d.max(1)
     }
     fn calculate_stat(&mut self, m: MonRef, i: usize, boost: i64, user: MonRef) -> i64 {
-        let stat = self.p(m).stored[i];
+        let mut stat = self.p(m).stored[i];
+        // Wonder Room swaps the defences before anything else (v43)
+        if (i == 2 || i == 4) && find(&self.field.pseudo, "wonderroom").is_some() { stat = self.p(m).stored[6 - i]; }
         let b: Boosts = vec![((i - 1) as u8, boost)];
         let boost = match self.run_event("ModifyBoost", Tgt::Mon(user), None, None, RV::Boosts(b), false, false) {
             RV::Boosts(r) => r.iter().find(|(k, _)| *k as usize == i - 1).map(|x| x.1).unwrap_or(boost), _ => boost };

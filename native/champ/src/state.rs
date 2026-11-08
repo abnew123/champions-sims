@@ -34,7 +34,9 @@ impl EState {
 pub struct MoveSlot { pub id: Id, pub pp: i64, pub maxpp: i64, pub disabled: bool, pub disabled_hidden: bool, pub disabled_source: Id, pub used: bool }
 
 #[derive(Clone, Debug)]
-pub struct Attack { pub source: MonRef, pub damage: i64, pub mv: Id, pub this_turn: bool, pub slot: Id }
+/// numeric: Showdown's damageValue was a number (a damaging hit, 0 included; not a status move), as getLastDamagedBy filters (v43; a
+/// state exported without it reads as numeric)
+pub struct Attack { pub source: MonRef, pub damage: i64, pub mv: Id, pub this_turn: bool, pub slot: Id, pub numeric: bool }
 
 /// tri-state result (moveThisTurnResult): undefined / null / bool
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -57,6 +59,9 @@ pub struct Pokemon {
     /// them apart, 2026-11-06)
     pub mega_spent: bool,
     pub trapped: bool, pub maybe_trapped: bool, pub maybe_disabled: bool, pub maybe_locked: bool, pub skip_before_switch_out: bool,
+    /// "M", "F" or "" (genderless, or a state exported without genders: export_state.js writes them with {v43: true}); Cute Charm,
+    /// Attract and Rivalry read it (2026-11-07)
+    pub gender: Id,
     /// cached effect data of the current ability / item / status (Battle::ab_data etc.): each entry is checked against the current id
     /// before use, so it can never go stale
     pub ab_d: DCache, pub it_d: DCache, pub st_d: DCache,
@@ -150,17 +155,20 @@ fn mon(v: &Value, side: u8) -> Pokemon {
         move_this_turn: s("moveThisTurn"), move_this_turn_result: tri(&v["moveThisTurnResult"]), move_last_turn_result: tri(&v["moveLastTurnResult"]),
         last_damage: v["lastDamage"].as_i64().unwrap_or(0), hurt_this_turn: v["hurtThisTurn"].as_i64(), times_attacked: v["timesAttacked"].as_i64().unwrap_or(0),
         attacked_by: v["attackedBy"].as_array().map(|a| a.iter().map(|x| Attack { source: sv(&x["source"]).mon().unwrap_or((0, 0)), damage: x["damage"].as_i64().unwrap_or(0),
-            mv: id(x["move"].as_str().unwrap_or("")), this_turn: x["thisTurn"].as_bool().unwrap_or(false), slot: id(x["slot"].as_str().unwrap_or("")) }).collect()).unwrap_or_default(),
+            mv: id(x["move"].as_str().unwrap_or("")), this_turn: x["thisTurn"].as_bool().unwrap_or(false), slot: id(x["slot"].as_str().unwrap_or("")),
+            numeric: x["numeric"].as_bool().unwrap_or(true) }).collect()).unwrap_or_default(),
         stats_raised_this_turn: v["statsRaisedThisTurn"].as_bool().unwrap_or(false), stats_lowered_this_turn: v["statsLoweredThisTurn"].as_bool().unwrap_or(false),
         switch_flag: match &v["switchFlag"] { Value::String(x) => Some(id(x)), Value::Bool(true) => Some(id("true")), _ => None },
         force_switch_flag: v["forceSwitchFlag"].as_bool().unwrap_or(false), newly_switched: v["newlySwitched"].as_bool().unwrap_or(false), syrup_triggered: v["syrupTriggered"].as_bool().unwrap_or(false),
         being_called_back: v["beingCalledBack"].as_bool().unwrap_or(false), can_mega_evo: v["canMegaEvo"].as_str().map(|x| id(&to_id(x))), mega_spent: v["canMegaEvo"] == Value::Bool(false),
         transformed: v["transformed"].as_bool().unwrap_or(false), trapped: truthy_json(&v["trapped"]), maybe_trapped: v["maybeTrapped"].as_bool().unwrap_or(false),
         maybe_disabled: v["maybeDisabled"].as_bool().unwrap_or(false), maybe_locked: v["maybeLocked"].as_bool().unwrap_or(false), skip_before_switch_out: false,
+        gender: id(v["gender"].as_str().filter(|g| *g == "M" || *g == "F").unwrap_or("")),
     }
 }
 
-pub struct Loaded { pub turn: i64, pub effect_order: i64, pub prng: Option<Prng>, pub field: Field, pub sides: [Side; 2] }
+/// last_move: battle.lastMove's id (Copycat; export_state.js writes it with {v43: true})
+pub struct Loaded { pub turn: i64, pub effect_order: i64, pub prng: Option<Prng>, pub field: Field, pub sides: [Side; 2], pub last_move: Option<Id> }
 pub fn load_state(v: &Value) -> Loaded {
     let f = &v["field"];
     let field = Field { weather: id(f["weather"].as_str().unwrap_or("")), weather_state: estate(&f["weatherState"]), terrain: id(f["terrain"].as_str().unwrap_or("")),
@@ -175,7 +183,8 @@ pub fn load_state(v: &Value) -> Loaded {
                side_conditions: states(&s["sideConditions"]), slot_conditions: [states(&sc[0]), states(&sc[1])] }
     };
     let prng = v["prng"].as_array().map(|a| Prng::gen5(std::array::from_fn(|i| a[i].as_u64().unwrap() as u16)));
-    Loaded { turn: v["turn"].as_i64().unwrap(), effect_order: v["effectOrder"].as_i64().unwrap_or(0), prng, field, sides: [side(0), side(1)] }
+    Loaded { turn: v["turn"].as_i64().unwrap(), effect_order: v["effectOrder"].as_i64().unwrap_or(0), prng, field, sides: [side(0), side(1)],
+             last_move: v["lastMove"].as_str().filter(|x| !x.is_empty()).map(id) }
 }
 
 // ---------- comparable export (the fields the differential test checks) ----------

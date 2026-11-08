@@ -1,22 +1,38 @@
-rank correlation / distance (lower is closer) against real usage, one vote per player:
-  prediction                       M-C weeks 1-2           M-C weeks 3-5             M-C settled
-  M-B carried over               0.34 / 0.42           0.37 / 0.35           0.41 / 0.30  
-  self-play 1                    0.20 / 0.50           0.29 / 0.54           0.34 / 0.51  
-  self-play 2                    0.22 / 0.53           0.28 / 0.56           0.34 / 0.53  
-  self-play 3                    0.21 / 0.54           0.24 / 0.58           0.30 / 0.54  
-  self-play 4                    0.25 / 0.61           0.24 / 0.66           0.34 / 0.61  
+rank correlation / distance (lower is closer) against real usage, one vote per player; new formes flagged (of 5 at >= 5% real) and false alarms:
+  prediction                         M-C weeks 1-2           M-C weeks 3-5             M-C settled   flagged  false alarms
+  M-B carried over                 0.34 / 0.42           0.37 / 0.35           0.41 / 0.30     0 of 5   0
+  16 M-B teams (start)             0.30 / 0.49           0.34 / 0.51           0.40 / 0.48     0 of 5   0
+  self-play 1                      0.20 / 0.50           0.29 / 0.54           0.34 / 0.51     0 of 5   0
+  self-play 2                      0.22 / 0.53           0.28 / 0.56           0.34 / 0.53     0 of 5   0
+  self-play 3                      0.21 / 0.54           0.24 / 0.58           0.30 / 0.54     0 of 5   0
+  self-play 4                      0.25 / 0.61           0.24 / 0.66           0.34 / 0.61     1 of 5   0
+  M-B + shift 4                    0.06 / 0.55           0.03 / 0.52           0.09 / 0.47     1 of 5   0
+  v2 self-play 1                   0.27 / 0.50           0.31 / 0.53           0.37 / 0.49     0 of 5   0
+  v2 self-play 2                   0.27 / 0.51           0.30 / 0.54           0.38 / 0.50     0 of 5   0
+  v2 self-play 3                   0.32 / 0.52           0.33 / 0.55           0.39 / 0.52     0 of 5   0
+  v2 self-play 4                   0.34 / 0.53           0.35 / 0.57           0.41 / 0.53     1 of 5   0
+  v2 M-B + shift 1                 0.32 / 0.43           0.34 / 0.36           0.38 / 0.32     0 of 5   0
+  v2 M-B + shift 2                 0.29 / 0.43           0.29 / 0.38           0.34 / 0.33     0 of 5   0
+  v2 M-B + shift 3                 0.28 / 0.44           0.28 / 0.40           0.33 / 0.35     0 of 5   0
+  v2 M-B + shift 4                 0.29 / 0.45           0.27 / 0.42           0.31 / 0.37     1 of 5   0
+  v2 cal 0.72 sp 4                 0.34 / 0.52           0.36 / 0.56           0.42 / 0.52     1 of 5   0
+  v2 cal 0.72 + shift 4            0.31 / 0.44           0.31 / 0.40           0.35 / 0.35     1 of 5   0
+  v2 cal 0.64 sp 4                 0.35 / 0.52           0.37 / 0.55           0.43 / 0.52     1 of 5   0
+  v2 cal 0.64 + shift 4            0.31 / 0.44           0.32 / 0.39           0.37 / 0.35     1 of 5   0
+  v2 cal 0.54 sp 4                 0.35 / 0.51           0.37 / 0.55           0.43 / 0.52     1 of 5   0
+  v2 cal 0.54 + shift 4            0.32 / 0.43           0.33 / 0.39           0.37 / 0.34     1 of 5   0
 
-M-C's new formes: real usage (settled; weeks 1-2) against each prediction
-  forme                 settled  wk 1-2 B carried over    self-play 1    self-play 2    self-play 3    self-play 4
-  Rillaboom               34.1%   57.0%           0.1%           0.0%           0.0%           0.0%           0.0%
-  Garchomp-Mega-Z         12.8%    8.6%           0.0%           0.0%           0.0%           0.0%           0.0%
-  Indeedee-F              12.0%   16.0%           0.0%           0.0%           0.0%           0.0%           0.0%
-  Golisopod-Mega          11.4%   10.5%           0.0%           0.0%           0.0%           0.0%          23.0%
-  Salamence-Mega          10.3%   31.3%           0.0%           0.0%           0.0%           0.0%           0.0%
-  Indeedee                 4.2%    7.3%           0.0%           0.0%           0.0%           0.0%           0.0%
-  Lucario-Mega-Z           2.0%    3.3%           0.0%           0.0%           0.0%           0.0%           0.0%
-  Baxcalibur-Mega          1.2%    1.1%           0.1%           0.0%           0.0%           0.0%           0.0%
-  Absol-Mega-Z             1.2%    0.1%           0.0%           0.0%           0.0%           0.0%           0.0%
-  Grapploct                0.6%    0.2%           0.0%           0.0%           0.0%           0.0%           0.0%
-  Pincurchin               0.5%    0.0%           0.0%           0.0%           0.0%           0.0%           0.0%
-  Baxcalibur               0.4%    0.7%           0.0%           0.0%           0.0%           0.0%           0.0%
+M-C's new formes: real usage (settled; weeks 1-2) against predictions
+  forme                 settled  wk 1-2 carried over         sp 4      v2 sp 1      v2 sp 2      v2 sp 3      v2 sp 4  v2 cal sp 4
+  Rillaboom               34.1%   57.0%         0.1%         0.0%         0.0%         0.0%         2.9%         9.0%         8.8%
+  Garchomp-Mega-Z         12.8%    8.6%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%
+  Indeedee-F              12.0%   16.0%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%
+  Golisopod-Mega          11.4%   10.5%         0.0%        23.0%         0.0%         0.0%         0.0%         0.0%         0.0%
+  Salamence-Mega          10.3%   31.3%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%
+  Indeedee                 4.2%    7.3%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%
+  Lucario-Mega-Z           2.0%    3.3%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%
+  Baxcalibur-Mega          1.2%    1.1%         0.1%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%
+  Absol-Mega-Z             1.2%    0.1%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%
+  Grapploct                0.6%    0.2%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%
+  Pincurchin               0.5%    0.0%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%
+  Baxcalibur               0.4%    0.7%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%         0.0%

@@ -1,0 +1,77 @@
+{
+ "mb2": {
+  "event": "selfplay",
+  "place": null,
+  "rating": null,
+  "arch": "Snow",
+  "pid": null,
+  "gids": [
+   "Basculegion#2",
+   "M-Froslass#1",
+   "Kingambit#5",
+   "Lycanroc-Dusk#4",
+   "M-Scovillain#6",
+   "Sneasler#5"
+  ]
+ },
+ "mb1": {
+  "event": "selfplay",
+  "place": null,
+  "rating": null,
+  "arch": "Sun",
+  "pid": null,
+  "gids": [
+   "Basculegion#2",
+   "M-Charizard Y#29",
+   "M-Floette#13",
+   "Garchomp#18",
+   "Kingambit#2",
+   "Whimsicott#1"
+  ]
+ },
+ "mb4": {
+  "event": "selfplay",
+  "place": null,
+  "rating": null,
+  "arch": "Balance",
+  "pid": null,
+  "gids": [
+   "Basculegion#2",
+   "M-Dragonite#3",
+   "M-Floette#14",
+   "Garchomp#1",
+   "Kingambit#2",
+   "Sneasler#41"
+  ]
+ },
+ "mb3": {
+  "event": "selfplay",
+  "place": null,
+  "rating": null,
+  "arch": "Trick Room",
+  "pid": null,
+  "gids": [
+   "Arcanine-H#1",
+   "Farigiraf#96",
+   "Kingambit#1",
+   "M-Raichu Y#1",
+   "M-Staraptor#4",
+   "Sylveon#25"
+  ]
+ },
+ "mb5": {
+  "event": "selfplay",
+  "place": null,
+  "rating": null,
+  "arch": "Trick Room",
+  "pid": null,
+  "gids": [
+   "M-Blastoise#1",
+   "M-Delphox#10",
+   "Incineroar#1",
+   "Kingambit#1",
+   "Sinistcha#1",
+   "Sneasler#3"
+  ]
+ }
+}

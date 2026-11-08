@@ -150,6 +150,288 @@
     "Golisopod-Mega"
    ],
    "false_alarms": []
+  },
+  "v2 self-play 1": {
+   "M-C weeks 1-2": {
+    "spearman": 0.273,
+    "tv": 0.503,
+    "n": 56
+   },
+   "M-C weeks 3-5": {
+    "spearman": 0.308,
+    "tv": 0.529,
+    "n": 57
+   },
+   "M-C settled": {
+    "spearman": 0.372,
+    "tv": 0.493,
+    "n": 58
+   },
+   "flagged": [],
+   "false_alarms": []
+  },
+  "v2 self-play 2": {
+   "M-C weeks 1-2": {
+    "spearman": 0.272,
+    "tv": 0.509,
+    "n": 54
+   },
+   "M-C weeks 3-5": {
+    "spearman": 0.305,
+    "tv": 0.538,
+    "n": 56
+   },
+   "M-C settled": {
+    "spearman": 0.376,
+    "tv": 0.502,
+    "n": 57
+   },
+   "flagged": [],
+   "false_alarms": []
+  },
+  "v2 self-play 3": {
+   "M-C weeks 1-2": {
+    "spearman": 0.315,
+    "tv": 0.519,
+    "n": 55
+   },
+   "M-C weeks 3-5": {
+    "spearman": 0.326,
+    "tv": 0.554,
+    "n": 57
+   },
+   "M-C settled": {
+    "spearman": 0.387,
+    "tv": 0.521,
+    "n": 58
+   },
+   "flagged": [],
+   "false_alarms": []
+  },
+  "v2 self-play 4": {
+   "M-C weeks 1-2": {
+    "spearman": 0.341,
+    "tv": 0.526,
+    "n": 54
+   },
+   "M-C weeks 3-5": {
+    "spearman": 0.347,
+    "tv": 0.566,
+    "n": 56
+   },
+   "M-C settled": {
+    "spearman": 0.407,
+    "tv": 0.533,
+    "n": 57
+   },
+   "flagged": [
+    "Rillaboom"
+   ],
+   "false_alarms": []
+  },
+  "v2 M-B + shift 1": {
+   "M-C weeks 1-2": {
+    "spearman": 0.315,
+    "tv": 0.428,
+    "n": 69
+   },
+   "M-C weeks 3-5": {
+    "spearman": 0.34,
+    "tv": 0.365,
+    "n": 69
+   },
+   "M-C settled": {
+    "spearman": 0.381,
+    "tv": 0.318,
+    "n": 68
+   },
+   "flagged": [],
+   "false_alarms": []
+  },
+  "v2 M-B + shift 2": {
+   "M-C weeks 1-2": {
+    "spearman": 0.287,
+    "tv": 0.434,
+    "n": 68
+   },
+   "M-C weeks 3-5": {
+    "spearman": 0.295,
+    "tv": 0.38,
+    "n": 69
+   },
+   "M-C settled": {
+    "spearman": 0.341,
+    "tv": 0.333,
+    "n": 67
+   },
+   "flagged": [],
+   "false_alarms": []
+  },
+  "v2 M-B + shift 3": {
+   "M-C weeks 1-2": {
+    "spearman": 0.285,
+    "tv": 0.439,
+    "n": 68
+   },
+   "M-C weeks 3-5": {
+    "spearman": 0.285,
+    "tv": 0.401,
+    "n": 69
+   },
+   "M-C settled": {
+    "spearman": 0.328,
+    "tv": 0.352,
+    "n": 67
+   },
+   "flagged": [],
+   "false_alarms": []
+  },
+  "v2 M-B + shift 4": {
+   "M-C weeks 1-2": {
+    "spearman": 0.291,
+    "tv": 0.447,
+    "n": 68
+   },
+   "M-C weeks 3-5": {
+    "spearman": 0.274,
+    "tv": 0.416,
+    "n": 68
+   },
+   "M-C settled": {
+    "spearman": 0.313,
+    "tv": 0.372,
+    "n": 66
+   },
+   "flagged": [
+    "Rillaboom"
+   ],
+   "false_alarms": []
+  },
+  "v2 cal 0.72 sp 4": {
+   "M-C weeks 1-2": {
+    "spearman": 0.341,
+    "tv": 0.518,
+    "n": 54
+   },
+   "M-C weeks 3-5": {
+    "spearman": 0.362,
+    "tv": 0.557,
+    "n": 56
+   },
+   "M-C settled": {
+    "spearman": 0.424,
+    "tv": 0.522,
+    "n": 57
+   },
+   "flagged": [
+    "Rillaboom"
+   ],
+   "false_alarms": []
+  },
+  "v2 cal 0.72 + shift 4": {
+   "M-C weeks 1-2": {
+    "spearman": 0.306,
+    "tv": 0.437,
+    "n": 68
+   },
+   "M-C weeks 3-5": {
+    "spearman": 0.312,
+    "tv": 0.398,
+    "n": 68
+   },
+   "M-C settled": {
+    "spearman": 0.355,
+    "tv": 0.352,
+    "n": 66
+   },
+   "flagged": [
+    "Rillaboom"
+   ],
+   "false_alarms": []
+  },
+  "v2 cal 0.64 sp 4": {
+   "M-C weeks 1-2": {
+    "spearman": 0.347,
+    "tv": 0.515,
+    "n": 54
+   },
+   "M-C weeks 3-5": {
+    "spearman": 0.37,
+    "tv": 0.554,
+    "n": 56
+   },
+   "M-C settled": {
+    "spearman": 0.431,
+    "tv": 0.519,
+    "n": 57
+   },
+   "flagged": [
+    "Rillaboom"
+   ],
+   "false_alarms": []
+  },
+  "v2 cal 0.64 + shift 4": {
+   "M-C weeks 1-2": {
+    "spearman": 0.314,
+    "tv": 0.436,
+    "n": 68
+   },
+   "M-C weeks 3-5": {
+    "spearman": 0.319,
+    "tv": 0.394,
+    "n": 69
+   },
+   "M-C settled": {
+    "spearman": 0.368,
+    "tv": 0.347,
+    "n": 67
+   },
+   "flagged": [
+    "Rillaboom"
+   ],
+   "false_alarms": []
+  },
+  "v2 cal 0.54 sp 4": {
+   "M-C weeks 1-2": {
+    "spearman": 0.346,
+    "tv": 0.512,
+    "n": 55
+   },
+   "M-C weeks 3-5": {
+    "spearman": 0.367,
+    "tv": 0.551,
+    "n": 57
+   },
+   "M-C settled": {
+    "spearman": 0.427,
+    "tv": 0.516,
+    "n": 58
+   },
+   "flagged": [
+    "Rillaboom"
+   ],
+   "false_alarms": []
+  },
+  "v2 cal 0.54 + shift 4": {
+   "M-C weeks 1-2": {
+    "spearman": 0.321,
+    "tv": 0.435,
+    "n": 68
+   },
+   "M-C weeks 3-5": {
+    "spearman": 0.325,
+    "tv": 0.389,
+    "n": 69
+   },
+   "M-C settled": {
+    "spearman": 0.374,
+    "tv": 0.341,
+    "n": 67
+   },
+   "flagged": [
+    "Rillaboom"
+   ],
+   "false_alarms": []
   }
  },
  "new": {
@@ -162,7 +444,21 @@
    "self-play 2": 0,
    "self-play 3": 0,
    "self-play 4": 0,
-   "M-B + shift 4": 0.0009372121336551409
+   "M-B + shift 4": 0.0009372121336551409,
+   "v2 self-play 1": 0,
+   "v2 self-play 2": 0,
+   "v2 self-play 3": 0.028711714178882464,
+   "v2 self-play 4": 0.09028754299607397,
+   "v2 M-B + shift 1": 0.0009372121336551409,
+   "v2 M-B + shift 2": 0.0009372121336551409,
+   "v2 M-B + shift 3": 0.029648926312537606,
+   "v2 M-B + shift 4": 0.09122475512972911,
+   "v2 cal 0.72 sp 4": 0.08851321502349087,
+   "v2 cal 0.72 + shift 4": 0.089450427157146,
+   "v2 cal 0.64 sp 4": 0.08803145298713427,
+   "v2 cal 0.64 + shift 4": 0.08896866512078941,
+   "v2 cal 0.54 sp 4": 0.08747393005324533,
+   "v2 cal 0.54 + shift 4": 0.08841114218690047
   },
   "Garchomp-Mega-Z": {
    "settled": 0.12827362345323046,
@@ -173,7 +469,21 @@
    "self-play 2": 0,
    "self-play 3": 0,
    "self-play 4": 0,
-   "M-B + shift 4": 0.00026946914578280785
+   "M-B + shift 4": 0.00026946914578280785,
+   "v2 self-play 1": 0,
+   "v2 self-play 2": 0,
+   "v2 self-play 3": 0,
+   "v2 self-play 4": 0,
+   "v2 M-B + shift 1": 0.00026946914578280785,
+   "v2 M-B + shift 2": 0.00026946914578280785,
+   "v2 M-B + shift 3": 0.00026946914578280785,
+   "v2 M-B + shift 4": 0.00026946914578280785,
+   "v2 cal 0.72 sp 4": 0,
+   "v2 cal 0.72 + shift 4": 0.00026946914578280785,
+   "v2 cal 0.64 sp 4": 0,
+   "v2 cal 0.64 + shift 4": 0.00026946914578280785,
+   "v2 cal 0.54 sp 4": 0,
+   "v2 cal 0.54 + shift 4": 0.00026946914578280785
   },
   "Indeedee-F": {
    "settled": 0.11999671506010595,
@@ -184,7 +494,21 @@
    "self-play 2": 0,
    "self-play 3": 0,
    "self-play 4": 0,
-   "M-B + shift 4": 0.00014970508099044884
+   "M-B + shift 4": 0.00014970508099044884,
+   "v2 self-play 1": 0,
+   "v2 self-play 2": 0,
+   "v2 self-play 3": 0,
+   "v2 self-play 4": 0,
+   "v2 M-B + shift 1": 0.00014970508099044884,
+   "v2 M-B + shift 2": 0.00014970508099044884,
+   "v2 M-B + shift 3": 0.00014970508099044884,
+   "v2 M-B + shift 4": 0.00014970508099044884,
+   "v2 cal 0.72 sp 4": 0,
+   "v2 cal 0.72 + shift 4": 0.00014970508099044884,
+   "v2 cal 0.64 sp 4": 0,
+   "v2 cal 0.64 + shift 4": 0.00014970508099044884,
+   "v2 cal 0.54 sp 4": 0,
+   "v2 cal 0.54 + shift 4": 0.00014970508099044884
   },
   "Golisopod-Mega": {
    "settled": 0.11438795004987523,
@@ -195,7 +519,21 @@
    "self-play 2": 0,
    "self-play 3": 0,
    "self-play 4": 0.22953244520580315,
-   "M-B + shift 4": 0.22953244520580315
+   "M-B + shift 4": 0.22953244520580315,
+   "v2 self-play 1": 0,
+   "v2 self-play 2": 0,
+   "v2 self-play 3": 0,
+   "v2 self-play 4": 0,
+   "v2 M-B + shift 1": 0,
+   "v2 M-B + shift 2": 0,
+   "v2 M-B + shift 3": 0,
+   "v2 M-B + shift 4": 0,
+   "v2 cal 0.72 sp 4": 0,
+   "v2 cal 0.72 + shift 4": 0,
+   "v2 cal 0.64 sp 4": 0,
+   "v2 cal 0.64 + shift 4": 0,
+   "v2 cal 0.54 sp 4": 0,
+   "v2 cal 0.54 + shift 4": 0
   },
   "Salamence-Mega": {
    "settled": 0.10296935148376153,
@@ -206,7 +544,21 @@
    "self-play 2": 0,
    "self-play 3": 0,
    "self-play 4": 0,
-   "M-B + shift 4": 0.0004657966662817107
+   "M-B + shift 4": 0.0004657966662817107,
+   "v2 self-play 1": 0,
+   "v2 self-play 2": 0,
+   "v2 self-play 3": 0,
+   "v2 self-play 4": 0,
+   "v2 M-B + shift 1": 0.0004657966662817107,
+   "v2 M-B + shift 2": 0.0004657966662817107,
+   "v2 M-B + shift 3": 0.0004657966662817107,
+   "v2 M-B + shift 4": 0.0004657966662817107,
+   "v2 cal 0.72 sp 4": 0,
+   "v2 cal 0.72 + shift 4": 0.0004657966662817107,
+   "v2 cal 0.64 sp 4": 0,
+   "v2 cal 0.64 + shift 4": 0.0004657966662817107,
+   "v2 cal 0.54 sp 4": 0,
+   "v2 cal 0.54 + shift 4": 0.0004657966662817107
   },
   "Indeedee": {
    "settled": 0.0424405007761278,
@@ -217,7 +569,21 @@
    "self-play 2": 0,
    "self-play 3": 0,
    "self-play 4": 0,
-   "M-B + shift 4": 0
+   "M-B + shift 4": 0,
+   "v2 self-play 1": 0,
+   "v2 self-play 2": 0,
+   "v2 self-play 3": 0,
+   "v2 self-play 4": 0,
+   "v2 M-B + shift 1": 0,
+   "v2 M-B + shift 2": 0,
+   "v2 M-B + shift 3": 0,
+   "v2 M-B + shift 4": 0,
+   "v2 cal 0.72 sp 4": 0,
+   "v2 cal 0.72 + shift 4": 0,
+   "v2 cal 0.64 sp 4": 0,
+   "v2 cal 0.64 + shift 4": 0,
+   "v2 cal 0.54 sp 4": 0,
+   "v2 cal 0.54 + shift 4": 0
   },
   "Lucario-Mega-Z": {
    "settled": 0.0196051687101231,
@@ -228,7 +594,21 @@
    "self-play 2": 0,
    "self-play 3": 0,
    "self-play 4": 0,
-   "M-B + shift 4": 6.736728644570196e-05
+   "M-B + shift 4": 6.736728644570196e-05,
+   "v2 self-play 1": 0,
+   "v2 self-play 2": 0,
+   "v2 self-play 3": 0,
+   "v2 self-play 4": 0,
+   "v2 M-B + shift 1": 6.736728644570196e-05,
+   "v2 M-B + shift 2": 6.736728644570196e-05,
+   "v2 M-B + shift 3": 6.736728644570196e-05,
+   "v2 M-B + shift 4": 6.736728644570196e-05,
+   "v2 cal 0.72 sp 4": 0,
+   "v2 cal 0.72 + shift 4": 6.736728644570196e-05,
+   "v2 cal 0.64 sp 4": 0,
+   "v2 cal 0.64 + shift 4": 6.736728644570196e-05,
+   "v2 cal 0.54 sp 4": 0,
+   "v2 cal 0.54 + shift 4": 6.736728644570196e-05
   },
   "Baxcalibur-Mega": {
    "settled": 0.012269805964414484,
@@ -239,7 +619,21 @@
    "self-play 2": 0,
    "self-play 3": 0,
    "self-play 4": 0,
-   "M-B + shift 4": 0.0007410401509027216
+   "M-B + shift 4": 0.0007410401509027216,
+   "v2 self-play 1": 0,
+   "v2 self-play 2": 0,
+   "v2 self-play 3": 0,
+   "v2 self-play 4": 0,
+   "v2 M-B + shift 1": 0.0007410401509027216,
+   "v2 M-B + shift 2": 0.0007410401509027216,
+   "v2 M-B + shift 3": 0.0007410401509027216,
+   "v2 M-B + shift 4": 0.0007410401509027216,
+   "v2 cal 0.72 sp 4": 0,
+   "v2 cal 0.72 + shift 4": 0.0007410401509027216,
+   "v2 cal 0.64 sp 4": 0,
+   "v2 cal 0.64 + shift 4": 0.0007410401509027216,
+   "v2 cal 0.54 sp 4": 0,
+   "v2 cal 0.54 + shift 4": 0.0007410401509027216
   },
   "Absol-Mega-Z": {
    "settled": 0.011944418440793253,
@@ -250,7 +644,21 @@
    "self-play 2": 0,
    "self-play 3": 0,
    "self-play 4": 0,
-   "M-B + shift 4": 0
+   "M-B + shift 4": 0,
+   "v2 self-play 1": 0,
+   "v2 self-play 2": 0,
+   "v2 self-play 3": 0,
+   "v2 self-play 4": 0,
+   "v2 M-B + shift 1": 0,
+   "v2 M-B + shift 2": 0,
+   "v2 M-B + shift 3": 0,
+   "v2 M-B + shift 4": 0,
+   "v2 cal 0.72 sp 4": 0,
+   "v2 cal 0.72 + shift 4": 0,
+   "v2 cal 0.64 sp 4": 0,
+   "v2 cal 0.64 + shift 4": 0,
+   "v2 cal 0.54 sp 4": 0,
+   "v2 cal 0.54 + shift 4": 0
   },
   "Grapploct": {
    "settled": 0.006290445888357691,
@@ -261,7 +669,21 @@
    "self-play 2": 0,
    "self-play 3": 0,
    "self-play 4": 0,
-   "M-B + shift 4": 0
+   "M-B + shift 4": 0,
+   "v2 self-play 1": 0,
+   "v2 self-play 2": 0,
+   "v2 self-play 3": 0,
+   "v2 self-play 4": 0,
+   "v2 M-B + shift 1": 0,
+   "v2 M-B + shift 2": 0,
+   "v2 M-B + shift 3": 0,
+   "v2 M-B + shift 4": 0,
+   "v2 cal 0.72 sp 4": 0,
+   "v2 cal 0.72 + shift 4": 0,
+   "v2 cal 0.64 sp 4": 0,
+   "v2 cal 0.64 + shift 4": 0,
+   "v2 cal 0.54 sp 4": 0,
+   "v2 cal 0.54 + shift 4": 0
   },
   "Pincurchin": {
    "settled": 0.005198705952128712,
@@ -272,7 +694,21 @@
    "self-play 2": 0,
    "self-play 3": 0,
    "self-play 4": 0,
-   "M-B + shift 4": 0
+   "M-B + shift 4": 0,
+   "v2 self-play 1": 0,
+   "v2 self-play 2": 0,
+   "v2 self-play 3": 0,
+   "v2 self-play 4": 0,
+   "v2 M-B + shift 1": 0,
+   "v2 M-B + shift 2": 0,
+   "v2 M-B + shift 3": 0,
+   "v2 M-B + shift 4": 0,
+   "v2 cal 0.72 sp 4": 0,
+   "v2 cal 0.72 + shift 4": 0,
+   "v2 cal 0.64 sp 4": 0,
+   "v2 cal 0.64 + shift 4": 0,
+   "v2 cal 0.54 sp 4": 0,
+   "v2 cal 0.54 + shift 4": 0
   },
   "Baxcalibur": {
    "settled": 0.003994997414627387,
@@ -283,7 +719,21 @@
    "self-play 2": 0,
    "self-play 3": 0,
    "self-play 4": 0,
-   "M-B + shift 4": 0
+   "M-B + shift 4": 0,
+   "v2 self-play 1": 0,
+   "v2 self-play 2": 0,
+   "v2 self-play 3": 0,
+   "v2 self-play 4": 0,
+   "v2 M-B + shift 1": 0,
+   "v2 M-B + shift 2": 0,
+   "v2 M-B + shift 3": 0,
+   "v2 M-B + shift 4": 0,
+   "v2 cal 0.72 sp 4": 0,
+   "v2 cal 0.72 + shift 4": 0,
+   "v2 cal 0.64 sp 4": 0,
+   "v2 cal 0.64 + shift 4": 0,
+   "v2 cal 0.54 sp 4": 0,
+   "v2 cal 0.54 + shift 4": 0
   }
  },
  "big_new": [

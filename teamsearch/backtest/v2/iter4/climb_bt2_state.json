@@ -1,0 +1,104 @@
+{
+ "round": 1,
+ "cap": null,
+ "teams": {
+  "mb2": {
+   "team": [
+    "Basculegion#2",
+    "M-Froslass#1",
+    "Kingambit#5",
+    "M-Garchomp Z#14",
+    "M-Scovillain#6",
+    "Sneasler#5"
+   ],
+   "done": false,
+   "path": [
+    {
+     "slot": 3,
+     "out": "Lycanroc-Dusk#4",
+     "into": "M-Garchomp Z#14",
+     "note": "",
+     "diff": 0.07788413357366789,
+     "se": 0.026533205533777787,
+     "matrix": 0.08681554573809672,
+     "from_random": false
+    }
+   ],
+   "arch": "Snow"
+  },
+  "mb4": {
+   "team": [
+    "Basculegion#2",
+    "M-Dragonite#3",
+    "M-Floette#14",
+    "Garchomp#1",
+    "Kingambit#2",
+    "Sneasler#41"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Balance"
+  },
+  "mb1": {
+   "team": [
+    "Basculegion#2",
+    "M-Blaziken#1",
+    "M-Floette#13",
+    "Garchomp#18",
+    "Kingambit#2",
+    "Whimsicott#1"
+   ],
+   "done": false,
+   "path": [
+    {
+     "slot": 1,
+     "out": "M-Charizard Y#29",
+     "into": "M-Blaziken#1",
+     "note": "",
+     "diff": 0.14818440209950864,
+     "se": 0.04824366834583322,
+     "matrix": 0.0950744083327203,
+     "from_random": false
+    }
+   ],
+   "arch": "Sun"
+  },
+  "mb3": {
+   "team": [
+    "Arcanine-H#1",
+    "Farigiraf#96",
+    "Kingambit#1",
+    "M-Blastoise#1",
+    "M-Staraptor#4",
+    "Sylveon#25"
+   ],
+   "done": false,
+   "path": [
+    {
+     "slot": 3,
+     "out": "M-Raichu Y#1",
+     "into": "M-Blastoise#1",
+     "note": "",
+     "diff": 0.13303249296973635,
+     "se": 0.042456763898262403,
+     "matrix": 0.08914962468338865,
+     "from_random": false
+    }
+   ],
+   "arch": "Trick Room"
+  },
+  "mb6": {
+   "team": [
+    "M-Aerodactyl#3",
+    "M-Charizard Y#29",
+    "Farigiraf#94",
+    "Garchomp#2",
+    "Kingambit#3",
+    "Sylveon#26"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Sun"
+  }
+ }
+}

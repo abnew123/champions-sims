@@ -1,0 +1,124 @@
+{
+ "round": 2,
+ "cap": null,
+ "teams": {
+  "mb2": {
+   "team": [
+    "Basculegion#2",
+    "M-Froslass#1",
+    "Kingambit#5",
+    "Lycanroc-Dusk#4",
+    "M-Scovillain#6",
+    "Sneasler#5"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Snow"
+  },
+  "mb1": {
+   "team": [
+    "Basculegion#2",
+    "M-Charizard Y#29",
+    "M-Floette#13",
+    "M-Blaziken#1",
+    "Kingambit#2",
+    "Whimsicott#1"
+   ],
+   "done": false,
+   "path": [
+    {
+     "slot": 3,
+     "out": "Garchomp#18",
+     "into": "M-Blastoise#1",
+     "note": "",
+     "diff": 0.09250180294591656,
+     "se": 0.04089019302643561,
+     "matrix": 0.08792299105715601,
+     "from_random": false
+    },
+    {
+     "slot": 3,
+     "out": "M-Blastoise#1",
+     "into": "M-Blaziken#1",
+     "note": "",
+     "diff": 0.0923036530201463,
+     "se": 0.026520684246042238,
+     "matrix": 0.10661353997209291,
+     "from_random": false
+    }
+   ],
+   "arch": "Sun"
+  },
+  "mb4": {
+   "team": [
+    "Basculegion#2",
+    "M-Dragonite#3",
+    "M-Floette#14",
+    "M-Charizard Y#29",
+    "Kingambit#2",
+    "Sneasler#41"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 3,
+     "out": "Garchomp#1",
+     "into": "M-Charizard Y#29",
+     "note": "",
+     "diff": 0.12699845152051492,
+     "se": 0.035107639688436186,
+     "matrix": 0.08678258845514979,
+     "from_random": false
+    }
+   ],
+   "arch": "Balance"
+  },
+  "mb3": {
+   "team": [
+    "Arcanine-H#1",
+    "Farigiraf#96",
+    "M-Charizard Y#29",
+    "Rillaboom#77",
+    "M-Staraptor#4",
+    "Sylveon#25"
+   ],
+   "done": false,
+   "path": [
+    {
+     "slot": 2,
+     "out": "Kingambit#1",
+     "into": "M-Charizard Y#29",
+     "note": "",
+     "diff": 0.07940665972966775,
+     "se": 0.024464299051285974,
+     "matrix": 0.06880418940755716,
+     "from_random": false
+    },
+    {
+     "slot": 3,
+     "out": "M-Raichu Y#1",
+     "into": "Rillaboom#77",
+     "note": "",
+     "diff": 0.08182077869189544,
+     "se": 0.035764078046271866,
+     "matrix": 0.06717882024229355,
+     "from_random": false
+    }
+   ],
+   "arch": "Trick Room"
+  },
+  "mb5": {
+   "team": [
+    "M-Blastoise#1",
+    "M-Delphox#10",
+    "Incineroar#1",
+    "Kingambit#1",
+    "Sinistcha#1",
+    "Sneasler#3"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Trick Room"
+  }
+ }
+}

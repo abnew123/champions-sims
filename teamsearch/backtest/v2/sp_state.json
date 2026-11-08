@@ -1,0 +1,2826 @@
+{
+ "iter": 3,
+ "step": "climb",
+ "field": {
+  "mb2": {
+   "gids": [
+    "Basculegion#2",
+    "M-Froslass#1",
+    "Kingambit#5",
+    "Lycanroc-Dusk#4",
+    "M-Scovillain#6",
+    "Sneasler#5"
+   ],
+   "w": 0.22678797984991916,
+   "origin": "M-B",
+   "bring": [
+    "Froslass",
+    "Sneasler",
+    "Basculegion",
+    "Kingambit"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Froslass",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb4": [
+     "Froslass",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb1": [
+     "Froslass",
+     "Lycanroc-Dusk",
+     "Kingambit",
+     "Sneasler"
+    ],
+    "mb3": [
+     "Scovillain",
+     "Sneasler",
+     "Kingambit",
+     "Lycanroc-Dusk"
+    ],
+    "mb5": [
+     "Basculegion",
+     "Sneasler",
+     "Kingambit",
+     "Scovillain"
+    ],
+    "mb7": [
+     "Scovillain",
+     "Sneasler",
+     "Basculegion",
+     "Lycanroc-Dusk"
+    ],
+    "mb6": [
+     "Froslass",
+     "Sneasler",
+     "Kingambit",
+     "Lycanroc-Dusk"
+    ],
+    "mb9": [
+     "Froslass",
+     "Sneasler",
+     "Basculegion",
+     "Lycanroc-Dusk"
+    ],
+    "sp2-mb1": [
+     "Scovillain",
+     "Sneasler",
+     "Kingambit",
+     "Lycanroc-Dusk"
+    ],
+    "mb13": [
+     "Froslass",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb8": [
+     "Froslass",
+     "Sneasler",
+     "Basculegion",
+     "Lycanroc-Dusk"
+    ],
+    "sp2-mb4": [
+     "Froslass",
+     "Sneasler",
+     "Basculegion",
+     "Lycanroc-Dusk"
+    ],
+    "sp2-mb3": [
+     "Basculegion",
+     "Froslass",
+     "Kingambit",
+     "Lycanroc-Dusk"
+    ],
+    "mb16": [
+     "Froslass",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb10": [
+     "Basculegion",
+     "Sneasler",
+     "Kingambit",
+     "Scovillain"
+    ],
+    "sp1-mb6": [
+     "Froslass",
+     "Lycanroc-Dusk",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb11": [
+     "Froslass",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb14": [
+     "Scovillain",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "sp3-mb2": [
+     "Scovillain",
+     "Sneasler",
+     "Kingambit",
+     "Lycanroc-Dusk"
+    ],
+    "sp3-mb3": [
+     "Scovillain",
+     "Sneasler",
+     "Kingambit",
+     "Lycanroc-Dusk"
+    ]
+   },
+   "fit": 0.545406476576771
+  },
+  "mb4": {
+   "gids": [
+    "Basculegion#2",
+    "M-Dragonite#3",
+    "M-Floette#14",
+    "Garchomp#1",
+    "Kingambit#2",
+    "Sneasler#41"
+   ],
+   "w": 0.1557190414332677,
+   "origin": "M-B",
+   "bring": [
+    "Garchomp",
+    "Sneasler",
+    "Dragonite",
+    "Kingambit"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Garchomp",
+     "Kingambit",
+     "Floette-Eternal",
+     "Sneasler"
+    ],
+    "mb4": [
+     "Floette-Eternal",
+     "Sneasler",
+     "Basculegion",
+     "Garchomp"
+    ],
+    "mb1": [
+     "Garchomp",
+     "Kingambit",
+     "Floette-Eternal",
+     "Sneasler"
+    ],
+    "mb3": [
+     "Garchomp",
+     "Sneasler",
+     "Floette-Eternal",
+     "Kingambit"
+    ],
+    "mb5": [
+     "Garchomp",
+     "Sneasler",
+     "Dragonite",
+     "Kingambit"
+    ],
+    "mb7": [
+     "Dragonite",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb6": [
+     "Garchomp",
+     "Kingambit",
+     "Basculegion",
+     "Floette-Eternal"
+    ],
+    "mb9": [
+     "Floette-Eternal",
+     "Garchomp",
+     "Basculegion",
+     "Sneasler"
+    ],
+    "sp2-mb1": [
+     "Garchomp",
+     "Sneasler",
+     "Floette-Eternal",
+     "Kingambit"
+    ],
+    "mb13": [
+     "Garchomp",
+     "Sneasler",
+     "Basculegion",
+     "Floette-Eternal"
+    ],
+    "mb8": [
+     "Dragonite",
+     "Garchomp",
+     "Basculegion",
+     "Sneasler"
+    ],
+    "sp2-mb4": [
+     "Garchomp",
+     "Sneasler",
+     "Dragonite",
+     "Kingambit"
+    ],
+    "sp2-mb3": [
+     "Floette-Eternal",
+     "Garchomp",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb16": [
+     "Floette-Eternal",
+     "Kingambit",
+     "Garchomp",
+     "Sneasler"
+    ],
+    "mb10": [
+     "Dragonite",
+     "Garchomp",
+     "Kingambit",
+     "Sneasler"
+    ],
+    "sp1-mb6": [
+     "Garchomp",
+     "Kingambit",
+     "Basculegion",
+     "Floette-Eternal"
+    ],
+    "mb11": [
+     "Garchomp",
+     "Sneasler",
+     "Dragonite",
+     "Kingambit"
+    ],
+    "mb14": [
+     "Dragonite",
+     "Garchomp",
+     "Kingambit",
+     "Sneasler"
+    ],
+    "sp3-mb2": [
+     "Dragonite",
+     "Kingambit",
+     "Garchomp",
+     "Sneasler"
+    ],
+    "sp3-mb3": [
+     "Dragonite",
+     "Sneasler",
+     "Garchomp",
+     "Kingambit"
+    ]
+   },
+   "fit": 0.5201501940371351
+  },
+  "mb1": {
+   "gids": [
+    "Basculegion#2",
+    "M-Charizard Y#29",
+    "M-Floette#13",
+    "Garchomp#18",
+    "Kingambit#2",
+    "Whimsicott#1"
+   ],
+   "w": 0.09090679916886615,
+   "origin": "M-B",
+   "bring": [
+    "Charizard",
+    "Garchomp",
+    "Basculegion",
+    "Kingambit"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Charizard",
+     "Garchomp",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb4": [
+     "Floette-Eternal",
+     "Kingambit",
+     "Basculegion",
+     "Garchomp"
+    ],
+    "mb1": [
+     "Charizard",
+     "Garchomp",
+     "Kingambit",
+     "Whimsicott"
+    ],
+    "mb3": [
+     "Garchomp",
+     "Kingambit",
+     "Floette-Eternal",
+     "Whimsicott"
+    ],
+    "mb5": [
+     "Charizard",
+     "Garchomp",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb7": [
+     "Charizard",
+     "Kingambit",
+     "Basculegion",
+     "Garchomp"
+    ],
+    "mb6": [
+     "Garchomp",
+     "Kingambit",
+     "Charizard",
+     "Whimsicott"
+    ],
+    "mb9": [
+     "Charizard",
+     "Garchomp",
+     "Kingambit",
+     "Whimsicott"
+    ],
+    "sp2-mb1": [
+     "Charizard",
+     "Garchomp",
+     "Kingambit",
+     "Whimsicott"
+    ],
+    "mb13": [
+     "Floette-Eternal",
+     "Kingambit",
+     "Basculegion",
+     "Garchomp"
+    ],
+    "mb8": [
+     "Charizard",
+     "Garchomp",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "sp2-mb4": [
+     "Charizard",
+     "Garchomp",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "sp2-mb3": [
+     "Charizard",
+     "Garchomp",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb16": [
+     "Kingambit",
+     "Whimsicott",
+     "Charizard",
+     "Garchomp"
+    ],
+    "mb10": [
+     "Charizard",
+     "Kingambit",
+     "Basculegion",
+     "Garchomp"
+    ],
+    "sp1-mb6": [
+     "Garchomp",
+     "Kingambit",
+     "Basculegion",
+     "Floette-Eternal"
+    ],
+    "mb11": [
+     "Charizard",
+     "Garchomp",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb14": [
+     "Charizard",
+     "Garchomp",
+     "Kingambit",
+     "Whimsicott"
+    ],
+    "sp3-mb2": [
+     "Charizard",
+     "Kingambit",
+     "Garchomp",
+     "Whimsicott"
+    ],
+    "sp3-mb3": [
+     "Charizard",
+     "Garchomp",
+     "Kingambit",
+     "Whimsicott"
+    ]
+   },
+   "fit": 0.44337822238350133
+  },
+  "mb3": {
+   "gids": [
+    "Arcanine-H#1",
+    "Farigiraf#96",
+    "Kingambit#1",
+    "M-Raichu Y#1",
+    "M-Staraptor#4",
+    "Sylveon#25"
+   ],
+   "w": 0.07715069197448893,
+   "origin": "M-B",
+   "bring": [
+    "Arcanine-Hisui",
+    "Raichu",
+    "Farigiraf",
+    "Kingambit"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Arcanine-Hisui",
+     "Raichu",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb4": [
+     "Raichu",
+     "Sylveon",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb1": [
+     "Raichu",
+     "Sylveon",
+     "Arcanine-Hisui",
+     "Farigiraf"
+    ],
+    "mb3": [
+     "Raichu",
+     "Sylveon",
+     "Arcanine-Hisui",
+     "Farigiraf"
+    ],
+    "mb5": [
+     "Kingambit",
+     "Raichu",
+     "Arcanine-Hisui",
+     "Farigiraf"
+    ],
+    "mb7": [
+     "Kingambit",
+     "Raichu",
+     "Arcanine-Hisui",
+     "Farigiraf"
+    ],
+    "mb6": [
+     "Raichu",
+     "Sylveon",
+     "Arcanine-Hisui",
+     "Kingambit"
+    ],
+    "mb9": [
+     "Kingambit",
+     "Raichu",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "sp2-mb1": [
+     "Farigiraf",
+     "Raichu",
+     "Arcanine-Hisui",
+     "Kingambit"
+    ],
+    "mb13": [
+     "Farigiraf",
+     "Raichu",
+     "Arcanine-Hisui",
+     "Kingambit"
+    ],
+    "mb8": [
+     "Arcanine-Hisui",
+     "Raichu",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "sp2-mb4": [
+     "Arcanine-Hisui",
+     "Raichu",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "sp2-mb3": [
+     "Arcanine-Hisui",
+     "Raichu",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb16": [
+     "Kingambit",
+     "Raichu",
+     "Arcanine-Hisui",
+     "Farigiraf"
+    ],
+    "mb10": [
+     "Arcanine-Hisui",
+     "Raichu",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "sp1-mb6": [
+     "Raichu",
+     "Sylveon",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb11": [
+     "Arcanine-Hisui",
+     "Raichu",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb14": [
+     "Arcanine-Hisui",
+     "Raichu",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "sp3-mb2": [
+     "Kingambit",
+     "Staraptor",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "sp3-mb3": [
+     "Arcanine-Hisui",
+     "Raichu",
+     "Kingambit",
+     "Sylveon"
+    ]
+   },
+   "fit": 0.4401141135588019
+  },
+  "mb6": {
+   "gids": [
+    "M-Aerodactyl#3",
+    "M-Charizard Y#29",
+    "Farigiraf#94",
+    "Garchomp#2",
+    "Kingambit#3",
+    "Sylveon#26"
+   ],
+   "w": 0.0460947604158705,
+   "origin": "M-B",
+   "bring": [
+    "Charizard",
+    "Garchomp",
+    "Farigiraf",
+    "Kingambit"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Charizard",
+     "Farigiraf",
+     "Garchomp",
+     "Kingambit"
+    ],
+    "mb4": [
+     "Aerodactyl",
+     "Kingambit",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb1": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb3": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb5": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb7": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb6": [
+     "Aerodactyl",
+     "Kingambit",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb9": [
+     "Charizard",
+     "Kingambit",
+     "Farigiraf",
+     "Garchomp"
+    ],
+    "sp2-mb1": [
+     "Charizard",
+     "Kingambit",
+     "Farigiraf",
+     "Garchomp"
+    ],
+    "mb13": [
+     "Aerodactyl",
+     "Kingambit",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb8": [
+     "Aerodactyl",
+     "Garchomp",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "sp2-mb4": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "sp2-mb3": [
+     "Aerodactyl",
+     "Kingambit",
+     "Farigiraf",
+     "Garchomp"
+    ],
+    "mb16": [
+     "Aerodactyl",
+     "Kingambit",
+     "Farigiraf",
+     "Garchomp"
+    ],
+    "mb10": [
+     "Charizard",
+     "Kingambit",
+     "Farigiraf",
+     "Garchomp"
+    ],
+    "sp1-mb6": [
+     "Aerodactyl",
+     "Sylveon",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb11": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb14": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "sp3-mb2": [
+     "Charizard",
+     "Kingambit",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "sp3-mb3": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Kingambit"
+    ]
+   },
+   "fit": 0.567745388712922
+  },
+  "mb7": {
+   "gids": [
+    "Archaludon#29",
+    "M-Charizard Y#30",
+    "Grimmsnarl#15",
+    "Pelipper#3",
+    "M-Swampert#1",
+    "Venusaur#1"
+   ],
+   "w": 0.042017995227057174,
+   "origin": "M-B",
+   "bring": [
+    "Swampert",
+    "Venusaur",
+    "Archaludon",
+    "Pelipper"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Charizard",
+     "Venusaur",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "mb4": [
+     "Swampert",
+     "Venusaur",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "mb1": [
+     "Swampert",
+     "Venusaur",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "mb3": [
+     "Grimmsnarl",
+     "Swampert",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "mb5": [
+     "Grimmsnarl",
+     "Swampert",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "mb7": [
+     "Archaludon",
+     "Venusaur",
+     "Pelipper",
+     "Swampert"
+    ],
+    "mb6": [
+     "Grimmsnarl",
+     "Swampert",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "mb9": [
+     "Swampert",
+     "Venusaur",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "sp2-mb1": [
+     "Charizard",
+     "Venusaur",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "mb13": [
+     "Swampert",
+     "Venusaur",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "mb8": [
+     "Swampert",
+     "Venusaur",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "sp2-mb4": [
+     "Charizard",
+     "Venusaur",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "sp2-mb3": [
+     "Grimmsnarl",
+     "Swampert",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "mb16": [
+     "Grimmsnarl",
+     "Swampert",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "mb10": [
+     "Swampert",
+     "Venusaur",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "sp1-mb6": [
+     "Swampert",
+     "Venusaur",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "mb11": [
+     "Swampert",
+     "Venusaur",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "mb14": [
+     "Charizard",
+     "Venusaur",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "sp3-mb2": [
+     "Charizard",
+     "Venusaur",
+     "Archaludon",
+     "Pelipper"
+    ],
+    "sp3-mb3": [
+     "Grimmsnarl",
+     "Swampert",
+     "Archaludon",
+     "Pelipper"
+    ]
+   },
+   "fit": 0.48395472922354343
+  },
+  "mb5": {
+   "gids": [
+    "M-Blastoise#1",
+    "M-Delphox#10",
+    "Incineroar#1",
+    "Kingambit#1",
+    "Sinistcha#1",
+    "Sneasler#3"
+   ],
+   "w": 0.036547779875541773,
+   "origin": "M-B",
+   "bring": [
+    "Delphox",
+    "Sneasler",
+    "Kingambit",
+    "Sinistcha"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Delphox",
+     "Sneasler",
+     "Kingambit",
+     "Sinistcha"
+    ],
+    "mb4": [
+     "Delphox",
+     "Sneasler",
+     "Incineroar",
+     "Sinistcha"
+    ],
+    "mb1": [
+     "Delphox",
+     "Sneasler",
+     "Kingambit",
+     "Sinistcha"
+    ],
+    "mb3": [
+     "Blastoise",
+     "Sneasler",
+     "Incineroar",
+     "Sinistcha"
+    ],
+    "mb5": [
+     "Delphox",
+     "Sneasler",
+     "Incineroar",
+     "Sinistcha"
+    ],
+    "mb7": [
+     "Delphox",
+     "Kingambit",
+     "Sinistcha",
+     "Sneasler"
+    ],
+    "mb6": [
+     "Blastoise",
+     "Sneasler",
+     "Incineroar",
+     "Kingambit"
+    ],
+    "mb9": [
+     "Delphox",
+     "Sneasler",
+     "Kingambit",
+     "Sinistcha"
+    ],
+    "sp2-mb1": [
+     "Blastoise",
+     "Sneasler",
+     "Incineroar",
+     "Kingambit"
+    ],
+    "mb13": [
+     "Delphox",
+     "Sneasler",
+     "Kingambit",
+     "Sinistcha"
+    ],
+    "mb8": [
+     "Delphox",
+     "Sneasler",
+     "Incineroar",
+     "Kingambit"
+    ],
+    "sp2-mb4": [
+     "Delphox",
+     "Sneasler",
+     "Kingambit",
+     "Sinistcha"
+    ],
+    "sp2-mb3": [
+     "Delphox",
+     "Sneasler",
+     "Kingambit",
+     "Sinistcha"
+    ],
+    "mb16": [
+     "Delphox",
+     "Sneasler",
+     "Incineroar",
+     "Kingambit"
+    ],
+    "mb10": [
+     "Delphox",
+     "Sneasler",
+     "Incineroar",
+     "Sinistcha"
+    ],
+    "sp1-mb6": [
+     "Delphox",
+     "Sneasler",
+     "Kingambit",
+     "Sinistcha"
+    ],
+    "mb11": [
+     "Blastoise",
+     "Sneasler",
+     "Incineroar",
+     "Kingambit"
+    ],
+    "mb14": [
+     "Blastoise",
+     "Sneasler",
+     "Kingambit",
+     "Sinistcha"
+    ],
+    "sp3-mb2": [
+     "Blastoise",
+     "Sneasler",
+     "Kingambit",
+     "Sinistcha"
+    ],
+    "sp3-mb3": [
+     "Blastoise",
+     "Sneasler",
+     "Incineroar",
+     "Sinistcha"
+    ]
+   },
+   "fit": 0.39802993078656146
+  },
+  "mb9": {
+   "gids": [
+    "Excadrill#1",
+    "Gholdengo#22",
+    "Milotic#59",
+    "Sinistcha#1",
+    "M-Staraptor#1",
+    "M-Tyranitar#2"
+   ],
+   "w": 0.034834082613495326,
+   "origin": "M-B",
+   "bring": [
+    "Gholdengo",
+    "Staraptor",
+    "Excadrill",
+    "Sinistcha"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Gholdengo",
+     "Staraptor",
+     "Excadrill",
+     "Sinistcha"
+    ],
+    "mb4": [
+     "Milotic",
+     "Staraptor",
+     "Gholdengo",
+     "Sinistcha"
+    ],
+    "mb1": [
+     "Milotic",
+     "Staraptor",
+     "Excadrill",
+     "Gholdengo"
+    ],
+    "mb3": [
+     "Excadrill",
+     "Tyranitar",
+     "Gholdengo",
+     "Sinistcha"
+    ],
+    "mb5": [
+     "Milotic",
+     "Staraptor",
+     "Gholdengo",
+     "Sinistcha"
+    ],
+    "mb7": [
+     "Excadrill",
+     "Gholdengo",
+     "Sinistcha",
+     "Tyranitar"
+    ],
+    "mb6": [
+     "Excadrill",
+     "Milotic",
+     "Gholdengo",
+     "Tyranitar"
+    ],
+    "mb9": [
+     "Excadrill",
+     "Milotic",
+     "Sinistcha",
+     "Staraptor"
+    ],
+    "sp2-mb1": [
+     "Gholdengo",
+     "Milotic",
+     "Excadrill",
+     "Staraptor"
+    ],
+    "mb13": [
+     "Milotic",
+     "Staraptor",
+     "Excadrill",
+     "Gholdengo"
+    ],
+    "mb8": [
+     "Excadrill",
+     "Milotic",
+     "Sinistcha",
+     "Tyranitar"
+    ],
+    "sp2-mb4": [
+     "Gholdengo",
+     "Staraptor",
+     "Excadrill",
+     "Milotic"
+    ],
+    "sp2-mb3": [
+     "Milotic",
+     "Tyranitar",
+     "Excadrill",
+     "Gholdengo"
+    ],
+    "mb16": [
+     "Milotic",
+     "Tyranitar",
+     "Excadrill",
+     "Gholdengo"
+    ],
+    "mb10": [
+     "Milotic",
+     "Staraptor",
+     "Excadrill",
+     "Sinistcha"
+    ],
+    "sp1-mb6": [
+     "Excadrill",
+     "Milotic",
+     "Gholdengo",
+     "Tyranitar"
+    ],
+    "mb11": [
+     "Milotic",
+     "Staraptor",
+     "Excadrill",
+     "Sinistcha"
+    ],
+    "mb14": [
+     "Gholdengo",
+     "Staraptor",
+     "Excadrill",
+     "Sinistcha"
+    ],
+    "sp3-mb2": [
+     "Gholdengo",
+     "Staraptor",
+     "Excadrill",
+     "Tyranitar"
+    ],
+    "sp3-mb3": [
+     "Excadrill",
+     "Staraptor",
+     "Gholdengo",
+     "Sinistcha"
+    ]
+   },
+   "fit": 0.5637842510234943
+  },
+  "sp2-mb4": {
+   "gids": [
+    "Basculegion#2",
+    "M-Dragonite#3",
+    "M-Floette#14",
+    "M-Charizard Y#29",
+    "Kingambit#2",
+    "Sneasler#41"
+   ],
+   "w": 0.03193599702257545,
+   "origin": "climbed from mb4 in iteration 2",
+   "bring": [
+    "Charizard",
+    "Sneasler",
+    "Basculegion",
+    "Kingambit"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Charizard",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb4": [
+     "Floette-Eternal",
+     "Kingambit",
+     "Basculegion",
+     "Sneasler"
+    ],
+    "mb1": [
+     "Floette-Eternal",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb3": [
+     "Floette-Eternal",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb5": [
+     "Charizard",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb7": [
+     "Charizard",
+     "Kingambit",
+     "Basculegion",
+     "Sneasler"
+    ],
+    "mb6": [
+     "Floette-Eternal",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb9": [
+     "Charizard",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "sp2-mb1": [
+     "Charizard",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb13": [
+     "Dragonite",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb8": [
+     "Dragonite",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "sp2-mb4": [
+     "Dragonite",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "sp2-mb3": [
+     "Basculegion",
+     "Sneasler",
+     "Charizard",
+     "Kingambit"
+    ],
+    "mb16": [
+     "Floette-Eternal",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb10": [
+     "Dragonite",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "sp1-mb6": [
+     "Floette-Eternal",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb11": [
+     "Floette-Eternal",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb14": [
+     "Dragonite",
+     "Kingambit",
+     "Basculegion",
+     "Sneasler"
+    ],
+    "sp3-mb2": [
+     "Charizard",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "sp3-mb3": [
+     "Charizard",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ]
+   },
+   "fit": 0.5629621272681089
+  },
+  "sp3-mb3": {
+   "gids": [
+    "Arcanine-H#1",
+    "Farigiraf#96",
+    "Kingambit#1",
+    "Rillaboom#77",
+    "M-Staraptor#4",
+    "Sylveon#25"
+   ],
+   "w": 0.031078329471225696,
+   "origin": "climbed from mb3 in iteration 3",
+   "bring": [
+    "Arcanine-Hisui",
+    "Staraptor",
+    "Farigiraf",
+    "Kingambit"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Kingambit",
+     "Staraptor",
+     "Arcanine-Hisui",
+     "Farigiraf"
+    ],
+    "mb4": [
+     "Farigiraf",
+     "Sylveon",
+     "Kingambit",
+     "Staraptor"
+    ],
+    "mb1": [
+     "Arcanine-Hisui",
+     "Staraptor",
+     "Kingambit",
+     "Sylveon"
+    ],
+    "mb3": [
+     "Staraptor",
+     "Sylveon",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb5": [
+     "Arcanine-Hisui",
+     "Staraptor",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb7": [
+     "Arcanine-Hisui",
+     "Rillaboom",
+     "Kingambit",
+     "Staraptor"
+    ],
+    "mb6": [
+     "Arcanine-Hisui",
+     "Staraptor",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb9": [
+     "Kingambit",
+     "Staraptor",
+     "Farigiraf",
+     "Rillaboom"
+    ],
+    "sp2-mb1": [
+     "Arcanine-Hisui",
+     "Staraptor",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb13": [
+     "Staraptor",
+     "Sylveon",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb8": [
+     "Arcanine-Hisui",
+     "Sylveon",
+     "Farigiraf",
+     "Staraptor"
+    ],
+    "sp2-mb4": [
+     "Arcanine-Hisui",
+     "Farigiraf",
+     "Kingambit",
+     "Staraptor"
+    ],
+    "sp2-mb3": [
+     "Arcanine-Hisui",
+     "Sylveon",
+     "Farigiraf",
+     "Staraptor"
+    ],
+    "mb16": [
+     "Kingambit",
+     "Staraptor",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb10": [
+     "Rillaboom",
+     "Staraptor",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "sp1-mb6": [
+     "Arcanine-Hisui",
+     "Sylveon",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb11": [
+     "Kingambit",
+     "Staraptor",
+     "Farigiraf",
+     "Rillaboom"
+    ],
+    "mb14": [
+     "Arcanine-Hisui",
+     "Rillaboom",
+     "Kingambit",
+     "Staraptor"
+    ],
+    "sp3-mb2": [
+     "Kingambit",
+     "Staraptor",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "sp3-mb3": [
+     "Kingambit",
+     "Staraptor",
+     "Farigiraf",
+     "Sylveon"
+    ]
+   },
+   "fit": 0.541138096593527
+  },
+  "sp2-mb1": {
+   "gids": [
+    "Basculegion#2",
+    "M-Charizard Y#29",
+    "M-Floette#13",
+    "M-Blaziken#1",
+    "Kingambit#2",
+    "Whimsicott#1"
+   ],
+   "w": 0.03098456202966152,
+   "origin": "climbed from mb1 in iteration 2",
+   "bring": [
+    "Basculegion",
+    "Blaziken",
+    "Kingambit",
+    "Whimsicott"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Basculegion",
+     "Blaziken",
+     "Kingambit",
+     "Whimsicott"
+    ],
+    "mb4": [
+     "Floette-Eternal",
+     "Kingambit",
+     "Basculegion",
+     "Whimsicott"
+    ],
+    "mb1": [
+     "Basculegion",
+     "Blaziken",
+     "Kingambit",
+     "Whimsicott"
+    ],
+    "mb3": [
+     "Basculegion",
+     "Blaziken",
+     "Kingambit",
+     "Whimsicott"
+    ],
+    "mb5": [
+     "Blaziken",
+     "Whimsicott",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb7": [
+     "Charizard",
+     "Blaziken",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb6": [
+     "Blaziken",
+     "Kingambit",
+     "Basculegion",
+     "Whimsicott"
+    ],
+    "mb9": [
+     "Charizard",
+     "Kingambit",
+     "Basculegion",
+     "Whimsicott"
+    ],
+    "sp2-mb1": [
+     "Basculegion",
+     "Blaziken",
+     "Charizard",
+     "Kingambit"
+    ],
+    "mb13": [
+     "Floette-Eternal",
+     "Kingambit",
+     "Basculegion",
+     "Whimsicott"
+    ],
+    "mb8": [
+     "Blaziken",
+     "Whimsicott",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "sp2-mb4": [
+     "Blaziken",
+     "Kingambit",
+     "Basculegion",
+     "Whimsicott"
+    ],
+    "sp2-mb3": [
+     "Blaziken",
+     "Kingambit",
+     "Basculegion",
+     "Whimsicott"
+    ],
+    "mb16": [
+     "Kingambit",
+     "Whimsicott",
+     "Basculegion",
+     "Charizard"
+    ],
+    "mb10": [
+     "Basculegion",
+     "Blaziken",
+     "Kingambit",
+     "Whimsicott"
+    ],
+    "sp1-mb6": [
+     "Blaziken",
+     "Whimsicott",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb11": [
+     "Basculegion",
+     "Blaziken",
+     "Kingambit",
+     "Whimsicott"
+    ],
+    "mb14": [
+     "Blaziken",
+     "Kingambit",
+     "Basculegion",
+     "Whimsicott"
+    ],
+    "sp3-mb2": [
+     "Basculegion",
+     "Blaziken",
+     "Kingambit",
+     "Whimsicott"
+    ],
+    "sp3-mb3": [
+     "Basculegion",
+     "Blaziken",
+     "Kingambit",
+     "Whimsicott"
+    ]
+   },
+   "fit": 0.5302660108841211
+  },
+  "sp3-mb2": {
+   "gids": [
+    "Basculegion#2",
+    "M-Froslass#1",
+    "Kingambit#5",
+    "Rillaboom#77",
+    "M-Scovillain#6",
+    "Sneasler#5"
+   ],
+   "w": 0.03098351576803432,
+   "origin": "climbed from mb2 in iteration 3",
+   "bring": [
+    "Froslass",
+    "Sneasler",
+    "Basculegion",
+    "Kingambit"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Froslass",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb4": [
+     "Froslass",
+     "Sneasler",
+     "Basculegion",
+     "Rillaboom"
+    ],
+    "mb1": [
+     "Froslass",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb3": [
+     "Scovillain",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb5": [
+     "Scovillain",
+     "Sneasler",
+     "Basculegion",
+     "Rillaboom"
+    ],
+    "mb7": [
+     "Froslass",
+     "Sneasler",
+     "Kingambit",
+     "Rillaboom"
+    ],
+    "mb6": [
+     "Scovillain",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb9": [
+     "Froslass",
+     "Sneasler",
+     "Basculegion",
+     "Rillaboom"
+    ],
+    "sp2-mb1": [
+     "Scovillain",
+     "Sneasler",
+     "Basculegion",
+     "Rillaboom"
+    ],
+    "mb13": [
+     "Froslass",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb8": [
+     "Froslass",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "sp2-mb4": [
+     "Froslass",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "sp2-mb3": [
+     "Froslass",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb16": [
+     "Froslass",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb10": [
+     "Scovillain",
+     "Sneasler",
+     "Basculegion",
+     "Rillaboom"
+    ],
+    "sp1-mb6": [
+     "Basculegion",
+     "Froslass",
+     "Kingambit",
+     "Rillaboom"
+    ],
+    "mb11": [
+     "Basculegion",
+     "Sneasler",
+     "Froslass",
+     "Kingambit"
+    ],
+    "mb14": [
+     "Scovillain",
+     "Sneasler",
+     "Basculegion",
+     "Rillaboom"
+    ],
+    "sp3-mb2": [
+     "Kingambit",
+     "Sneasler",
+     "Rillaboom",
+     "Scovillain"
+    ],
+    "sp3-mb3": [
+     "Scovillain",
+     "Sneasler",
+     "Kingambit",
+     "Rillaboom"
+    ]
+   },
+   "fit": 0.539610366043627
+  },
+  "mb13": {
+   "gids": [
+    "Basculegion#2",
+    "M-Dragonite#13",
+    "M-Floette#14",
+    "Kingambit#2",
+    "Sneasler#81",
+    "Whimsicott#1"
+   ],
+   "w": 0.029098453518029435,
+   "origin": "M-B",
+   "bring": [
+    "Dragonite",
+    "Sneasler",
+    "Basculegion",
+    "Kingambit"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Basculegion",
+     "Sneasler",
+     "Floette-Eternal",
+     "Kingambit"
+    ],
+    "mb4": [
+     "Floette-Eternal",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb1": [
+     "Floette-Eternal",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb3": [
+     "Floette-Eternal",
+     "Kingambit",
+     "Basculegion",
+     "Sneasler"
+    ],
+    "mb5": [
+     "Basculegion",
+     "Sneasler",
+     "Dragonite",
+     "Kingambit"
+    ],
+    "mb7": [
+     "Basculegion",
+     "Dragonite",
+     "Kingambit",
+     "Sneasler"
+    ],
+    "mb6": [
+     "Dragonite",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb9": [
+     "Dragonite",
+     "Sneasler",
+     "Basculegion",
+     "Whimsicott"
+    ],
+    "sp2-mb1": [
+     "Dragonite",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb13": [
+     "Dragonite",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb8": [
+     "Dragonite",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "sp2-mb4": [
+     "Dragonite",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "sp2-mb3": [
+     "Dragonite",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb16": [
+     "Floette-Eternal",
+     "Kingambit",
+     "Basculegion",
+     "Sneasler"
+    ],
+    "mb10": [
+     "Dragonite",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "sp1-mb6": [
+     "Floette-Eternal",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb11": [
+     "Floette-Eternal",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb14": [
+     "Dragonite",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "sp3-mb2": [
+     "Dragonite",
+     "Sneasler",
+     "Kingambit",
+     "Whimsicott"
+    ],
+    "sp3-mb3": [
+     "Dragonite",
+     "Sneasler",
+     "Basculegion",
+     "Kingambit"
+    ]
+   },
+   "fit": 0.5133581898022668
+  },
+  "sp2-mb3": {
+   "gids": [
+    "Arcanine-H#1",
+    "Farigiraf#96",
+    "M-Charizard Y#29",
+    "Rillaboom#77",
+    "M-Staraptor#4",
+    "Sylveon#25"
+   ],
+   "w": 0.02822569775681396,
+   "origin": "climbed from mb3 in iteration 2",
+   "bring": [
+    "Charizard",
+    "Rillaboom",
+    "Farigiraf",
+    "Sylveon"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Charizard",
+     "Rillaboom",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb4": [
+     "Charizard",
+     "Sylveon",
+     "Farigiraf",
+     "Rillaboom"
+    ],
+    "mb1": [
+     "Arcanine-Hisui",
+     "Rillaboom",
+     "Charizard",
+     "Sylveon"
+    ],
+    "mb3": [
+     "Staraptor",
+     "Sylveon",
+     "Arcanine-Hisui",
+     "Farigiraf"
+    ],
+    "mb5": [
+     "Rillaboom",
+     "Staraptor",
+     "Arcanine-Hisui",
+     "Farigiraf"
+    ],
+    "mb7": [
+     "Arcanine-Hisui",
+     "Rillaboom",
+     "Farigiraf",
+     "Charizard"
+    ],
+    "mb6": [
+     "Arcanine-Hisui",
+     "Staraptor",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb9": [
+     "Charizard",
+     "Rillaboom",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "sp2-mb1": [
+     "Arcanine-Hisui",
+     "Rillaboom",
+     "Farigiraf",
+     "Charizard"
+    ],
+    "mb13": [
+     "Charizard",
+     "Sylveon",
+     "Farigiraf",
+     "Rillaboom"
+    ],
+    "mb8": [
+     "Arcanine-Hisui",
+     "Sylveon",
+     "Farigiraf",
+     "Charizard"
+    ],
+    "sp2-mb4": [
+     "Farigiraf",
+     "Charizard",
+     "Arcanine-Hisui",
+     "Rillaboom"
+    ],
+    "sp2-mb3": [
+     "Arcanine-Hisui",
+     "Charizard",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb16": [
+     "Charizard",
+     "Rillaboom",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb10": [
+     "Arcanine-Hisui",
+     "Staraptor",
+     "Farigiraf",
+     "Rillaboom"
+    ],
+    "sp1-mb6": [
+     "Arcanine-Hisui",
+     "Sylveon",
+     "Farigiraf",
+     "Staraptor"
+    ],
+    "mb11": [
+     "Rillaboom",
+     "Staraptor",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb14": [
+     "Charizard",
+     "Rillaboom",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "sp3-mb2": [
+     "Charizard",
+     "Rillaboom",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "sp3-mb3": [
+     "Arcanine-Hisui",
+     "Staraptor",
+     "Farigiraf",
+     "Sylveon"
+    ]
+   },
+   "fit": 0.5149452160204528
+  },
+  "mb16": {
+   "gids": [
+    "Excadrill#11",
+    "Farigiraf#97",
+    "Gholdengo#27",
+    "M-Staraptor#1",
+    "Tyranitar#3",
+    "Whimsicott#12"
+   ],
+   "w": 0.02477179065043476,
+   "origin": "M-B",
+   "bring": [
+    "Excadrill",
+    "Gholdengo",
+    "Farigiraf",
+    "Staraptor"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Gholdengo",
+     "Staraptor",
+     "Excadrill",
+     "Farigiraf"
+    ],
+    "mb4": [
+     "Staraptor",
+     "Whimsicott",
+     "Farigiraf",
+     "Gholdengo"
+    ],
+    "mb1": [
+     "Gholdengo",
+     "Staraptor",
+     "Farigiraf",
+     "Whimsicott"
+    ],
+    "mb3": [
+     "Excadrill",
+     "Tyranitar",
+     "Gholdengo",
+     "Staraptor"
+    ],
+    "mb5": [
+     "Farigiraf",
+     "Tyranitar",
+     "Gholdengo",
+     "Staraptor"
+    ],
+    "mb7": [
+     "Excadrill",
+     "Farigiraf",
+     "Gholdengo",
+     "Staraptor"
+    ],
+    "mb6": [
+     "Excadrill",
+     "Tyranitar",
+     "Farigiraf",
+     "Staraptor"
+    ],
+    "mb9": [
+     "Excadrill",
+     "Staraptor",
+     "Farigiraf",
+     "Gholdengo"
+    ],
+    "sp2-mb1": [
+     "Excadrill",
+     "Gholdengo",
+     "Farigiraf",
+     "Staraptor"
+    ],
+    "mb13": [
+     "Excadrill",
+     "Gholdengo",
+     "Farigiraf",
+     "Staraptor"
+    ],
+    "mb8": [
+     "Gholdengo",
+     "Staraptor",
+     "Farigiraf",
+     "Tyranitar"
+    ],
+    "sp2-mb4": [
+     "Excadrill",
+     "Gholdengo",
+     "Farigiraf",
+     "Staraptor"
+    ],
+    "sp2-mb3": [
+     "Gholdengo",
+     "Staraptor",
+     "Excadrill",
+     "Tyranitar"
+    ],
+    "mb16": [
+     "Gholdengo",
+     "Staraptor",
+     "Excadrill",
+     "Farigiraf"
+    ],
+    "mb10": [
+     "Gholdengo",
+     "Staraptor",
+     "Farigiraf",
+     "Tyranitar"
+    ],
+    "sp1-mb6": [
+     "Tyranitar",
+     "Whimsicott",
+     "Excadrill",
+     "Farigiraf"
+    ],
+    "mb11": [
+     "Excadrill",
+     "Staraptor",
+     "Farigiraf",
+     "Tyranitar"
+    ],
+    "mb14": [
+     "Excadrill",
+     "Gholdengo",
+     "Farigiraf",
+     "Staraptor"
+    ],
+    "sp3-mb2": [
+     "Gholdengo",
+     "Staraptor",
+     "Farigiraf",
+     "Tyranitar"
+    ],
+    "sp3-mb3": [
+     "Excadrill",
+     "Staraptor",
+     "Farigiraf",
+     "Tyranitar"
+    ]
+   },
+   "fit": 0.5174126244357725
+  },
+  "mb8": {
+   "gids": [
+    "M-Charizard Y#31",
+    "Garchomp#1",
+    "Incineroar#105",
+    "Sylveon#27",
+    "Toxapex#3",
+    "Venusaur#2"
+   ],
+   "w": 0.024393521012007747,
+   "origin": "M-B",
+   "bring": [
+    "Garchomp",
+    "Venusaur",
+    "Charizard",
+    "Toxapex"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Garchomp",
+     "Venusaur",
+     "Charizard",
+     "Toxapex"
+    ],
+    "mb4": [
+     "Garchomp",
+     "Venusaur",
+     "Charizard",
+     "Sylveon"
+    ],
+    "mb1": [
+     "Garchomp",
+     "Venusaur",
+     "Charizard",
+     "Toxapex"
+    ],
+    "mb3": [
+     "Garchomp",
+     "Venusaur",
+     "Charizard",
+     "Incineroar"
+    ],
+    "mb5": [
+     "Charizard",
+     "Garchomp",
+     "Incineroar",
+     "Toxapex"
+    ],
+    "mb7": [
+     "Charizard",
+     "Venusaur",
+     "Incineroar",
+     "Toxapex"
+    ],
+    "mb6": [
+     "Garchomp",
+     "Venusaur",
+     "Charizard",
+     "Incineroar"
+    ],
+    "mb9": [
+     "Garchomp",
+     "Venusaur",
+     "Charizard",
+     "Toxapex"
+    ],
+    "sp2-mb1": [
+     "Garchomp",
+     "Venusaur",
+     "Charizard",
+     "Incineroar"
+    ],
+    "mb13": [
+     "Garchomp",
+     "Venusaur",
+     "Charizard",
+     "Toxapex"
+    ],
+    "mb8": [
+     "Garchomp",
+     "Venusaur",
+     "Charizard",
+     "Incineroar"
+    ],
+    "sp2-mb4": [
+     "Garchomp",
+     "Venusaur",
+     "Charizard",
+     "Toxapex"
+    ],
+    "sp2-mb3": [
+     "Charizard",
+     "Garchomp",
+     "Sylveon",
+     "Toxapex"
+    ],
+    "mb16": [
+     "Garchomp",
+     "Incineroar",
+     "Charizard",
+     "Sylveon"
+    ],
+    "mb10": [
+     "Garchomp",
+     "Incineroar",
+     "Charizard",
+     "Toxapex"
+    ],
+    "sp1-mb6": [
+     "Garchomp",
+     "Venusaur",
+     "Charizard",
+     "Incineroar"
+    ],
+    "mb11": [
+     "Garchomp",
+     "Incineroar",
+     "Charizard",
+     "Sylveon"
+    ],
+    "mb14": [
+     "Garchomp",
+     "Venusaur",
+     "Charizard",
+     "Sylveon"
+    ],
+    "sp3-mb2": [
+     "Charizard",
+     "Venusaur",
+     "Incineroar",
+     "Toxapex"
+    ],
+    "sp3-mb3": [
+     "Garchomp",
+     "Incineroar",
+     "Charizard",
+     "Sylveon"
+    ]
+   },
+   "fit": 0.42530861094111266
+  },
+  "sp1-mb6": {
+   "gids": [
+    "M-Aerodactyl#3",
+    "M-Charizard Y#29",
+    "Farigiraf#94",
+    "Garchomp#2",
+    "Pelipper#42",
+    "Sylveon#26"
+   ],
+   "w": 0.016348211999167767,
+   "origin": "climbed from mb6 in iteration 1",
+   "bring": [
+    "Charizard",
+    "Garchomp",
+    "Farigiraf",
+    "Sylveon"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Pelipper"
+    ],
+    "mb4": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb1": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb3": [
+     "Aerodactyl",
+     "Garchomp",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb5": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Pelipper"
+    ],
+    "mb7": [
+     "Charizard",
+     "Farigiraf",
+     "Garchomp",
+     "Sylveon"
+    ],
+    "mb6": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb9": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "sp2-mb1": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Pelipper"
+    ],
+    "mb13": [
+     "Charizard",
+     "Sylveon",
+     "Farigiraf",
+     "Pelipper"
+    ],
+    "mb8": [
+     "Aerodactyl",
+     "Garchomp",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "sp2-mb4": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "sp2-mb3": [
+     "Aerodactyl",
+     "Garchomp",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb16": [
+     "Aerodactyl",
+     "Garchomp",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb10": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Pelipper"
+    ],
+    "sp1-mb6": [
+     "Aerodactyl",
+     "Garchomp",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb11": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "mb14": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Sylveon"
+    ],
+    "sp3-mb2": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Pelipper"
+    ],
+    "sp3-mb3": [
+     "Charizard",
+     "Garchomp",
+     "Farigiraf",
+     "Sylveon"
+    ]
+   },
+   "fit": 0.42084343542877417
+  },
+  "mb10": {
+   "gids": [
+    "M-Blastoise#1",
+    "M-Delphox#10",
+    "Incineroar#1",
+    "Kingambit#1",
+    "Sinistcha-Masterpiece#2",
+    "Sneasler#3"
+   ],
+   "w": 0.016218019918138003,
+   "origin": "M-B",
+   "bring": [
+    "Delphox",
+    "Sneasler",
+    "Kingambit",
+    "Sinistcha-Masterpiece"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Delphox",
+     "Sneasler",
+     "Incineroar",
+     "Kingambit"
+    ],
+    "mb4": [
+     "Delphox",
+     "Sneasler",
+     "Kingambit",
+     "Sinistcha-Masterpiece"
+    ],
+    "mb1": [
+     "Blastoise",
+     "Sneasler",
+     "Incineroar",
+     "Sinistcha-Masterpiece"
+    ],
+    "mb3": [
+     "Blastoise",
+     "Sneasler",
+     "Incineroar",
+     "Sinistcha-Masterpiece"
+    ],
+    "mb5": [
+     "Delphox",
+     "Sneasler",
+     "Incineroar",
+     "Sinistcha-Masterpiece"
+    ],
+    "mb7": [
+     "Delphox",
+     "Sneasler",
+     "Kingambit",
+     "Sinistcha-Masterpiece"
+    ],
+    "mb6": [
+     "Blastoise",
+     "Sneasler",
+     "Kingambit",
+     "Sinistcha-Masterpiece"
+    ],
+    "mb9": [
+     "Delphox",
+     "Sneasler",
+     "Incineroar",
+     "Kingambit"
+    ],
+    "sp2-mb1": [
+     "Blastoise",
+     "Sneasler",
+     "Incineroar",
+     "Kingambit"
+    ],
+    "mb13": [
+     "Delphox",
+     "Sneasler",
+     "Kingambit",
+     "Sinistcha-Masterpiece"
+    ],
+    "mb8": [
+     "Delphox",
+     "Sneasler",
+     "Kingambit",
+     "Sinistcha-Masterpiece"
+    ],
+    "sp2-mb4": [
+     "Delphox",
+     "Sneasler",
+     "Kingambit",
+     "Sinistcha-Masterpiece"
+    ],
+    "sp2-mb3": [
+     "Delphox",
+     "Sneasler",
+     "Incineroar",
+     "Sinistcha-Masterpiece"
+    ],
+    "mb16": [
+     "Delphox",
+     "Sneasler",
+     "Incineroar",
+     "Kingambit"
+    ],
+    "mb10": [
+     "Delphox",
+     "Sneasler",
+     "Incineroar",
+     "Kingambit"
+    ],
+    "sp1-mb6": [
+     "Blastoise",
+     "Sneasler",
+     "Kingambit",
+     "Sinistcha-Masterpiece"
+    ],
+    "mb11": [
+     "Blastoise",
+     "Sneasler",
+     "Incineroar",
+     "Kingambit"
+    ],
+    "mb14": [
+     "Blastoise",
+     "Sneasler",
+     "Kingambit",
+     "Sinistcha-Masterpiece"
+    ],
+    "sp3-mb2": [
+     "Blastoise",
+     "Sneasler",
+     "Incineroar",
+     "Kingambit"
+    ],
+    "sp3-mb3": [
+     "Blastoise",
+     "Sneasler",
+     "Incineroar",
+     "Kingambit"
+    ]
+   },
+   "fit": 0.40162271665514365
+  },
+  "mb11": {
+   "gids": [
+    "M-Blaziken#1",
+    "Farigiraf#94",
+    "Kingambit#10",
+    "Primarina#3",
+    "Torkoal#3",
+    "Venusaur#15"
+   ],
+   "w": 0.016009850739199038,
+   "origin": "M-B",
+   "bring": [
+    "Blaziken",
+    "Kingambit",
+    "Farigiraf",
+    "Primarina"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Blaziken",
+     "Farigiraf",
+     "Kingambit",
+     "Primarina"
+    ],
+    "mb4": [
+     "Blaziken",
+     "Primarina",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb1": [
+     "Blaziken",
+     "Kingambit",
+     "Farigiraf",
+     "Primarina"
+    ],
+    "mb3": [
+     "Blaziken",
+     "Kingambit",
+     "Farigiraf",
+     "Primarina"
+    ],
+    "mb5": [
+     "Blaziken",
+     "Farigiraf",
+     "Kingambit",
+     "Primarina"
+    ],
+    "mb7": [
+     "Blaziken",
+     "Venusaur",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb6": [
+     "Blaziken",
+     "Primarina",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "mb9": [
+     "Blaziken",
+     "Farigiraf",
+     "Kingambit",
+     "Primarina"
+    ],
+    "sp2-mb1": [
+     "Blaziken",
+     "Venusaur",
+     "Farigiraf",
+     "Torkoal"
+    ],
+    "mb13": [
+     "Blaziken",
+     "Farigiraf",
+     "Kingambit",
+     "Primarina"
+    ],
+    "mb8": [
+     "Blaziken",
+     "Farigiraf",
+     "Kingambit",
+     "Primarina"
+    ],
+    "sp2-mb4": [
+     "Blaziken",
+     "Farigiraf",
+     "Kingambit",
+     "Torkoal"
+    ],
+    "sp2-mb3": [
+     "Blaziken",
+     "Kingambit",
+     "Farigiraf",
+     "Torkoal"
+    ],
+    "mb16": [
+     "Blaziken",
+     "Kingambit",
+     "Farigiraf",
+     "Primarina"
+    ],
+    "mb10": [
+     "Blaziken",
+     "Farigiraf",
+     "Kingambit",
+     "Primarina"
+    ],
+    "sp1-mb6": [
+     "Blaziken",
+     "Kingambit",
+     "Farigiraf",
+     "Primarina"
+    ],
+    "mb11": [
+     "Blaziken",
+     "Kingambit",
+     "Farigiraf",
+     "Primarina"
+    ],
+    "mb14": [
+     "Blaziken",
+     "Venusaur",
+     "Kingambit",
+     "Torkoal"
+    ],
+    "sp3-mb2": [
+     "Blaziken",
+     "Kingambit",
+     "Farigiraf",
+     "Primarina"
+    ],
+    "sp3-mb3": [
+     "Blaziken",
+     "Kingambit",
+     "Farigiraf",
+     "Primarina"
+    ]
+   },
+   "fit": 0.498499016037419
+  },
+  "mb14": {
+   "gids": [
+    "Basculegion#2",
+    "Kingambit#6",
+    "Kleavor#6",
+    "M-Metagross#4",
+    "M-Raichu Y#1",
+    "Whimsicott#2"
+   ],
+   "w": 0.00989291955620559,
+   "origin": "M-B",
+   "bring": [
+    "Basculegion",
+    "Raichu",
+    "Kingambit",
+    "Kleavor"
+   ],
+   "bring_by_group": {
+    "mb2": [
+     "Kingambit",
+     "Metagross",
+     "Basculegion",
+     "Kleavor"
+    ],
+    "mb4": [
+     "Basculegion",
+     "Metagross",
+     "Kingambit",
+     "Kleavor"
+    ],
+    "mb1": [
+     "Raichu",
+     "Whimsicott",
+     "Basculegion",
+     "Kleavor"
+    ],
+    "mb3": [
+     "Basculegion",
+     "Raichu",
+     "Kingambit",
+     "Kleavor"
+    ],
+    "mb5": [
+     "Basculegion",
+     "Raichu",
+     "Kingambit",
+     "Kleavor"
+    ],
+    "mb7": [
+     "Kleavor",
+     "Raichu",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb6": [
+     "Kleavor",
+     "Metagross",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb9": [
+     "Kingambit",
+     "Raichu",
+     "Basculegion",
+     "Whimsicott"
+    ],
+    "sp2-mb1": [
+     "Basculegion",
+     "Raichu",
+     "Kingambit",
+     "Kleavor"
+    ],
+    "mb13": [
+     "Kingambit",
+     "Metagross",
+     "Basculegion",
+     "Kleavor"
+    ],
+    "mb8": [
+     "Kleavor",
+     "Metagross",
+     "Basculegion",
+     "Whimsicott"
+    ],
+    "sp2-mb4": [
+     "Metagross",
+     "Raichu",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "sp2-mb3": [
+     "Kleavor",
+     "Metagross",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb16": [
+     "Kingambit",
+     "Raichu",
+     "Basculegion",
+     "Kleavor"
+    ],
+    "mb10": [
+     "Basculegion",
+     "Raichu",
+     "Kingambit",
+     "Kleavor"
+    ],
+    "sp1-mb6": [
+     "Kleavor",
+     "Metagross",
+     "Basculegion",
+     "Whimsicott"
+    ],
+    "mb11": [
+     "Kleavor",
+     "Raichu",
+     "Basculegion",
+     "Kingambit"
+    ],
+    "mb14": [
+     "Kingambit",
+     "Raichu",
+     "Kleavor",
+     "Whimsicott"
+    ],
+    "sp3-mb2": [
+     "Kleavor",
+     "Raichu",
+     "Kingambit",
+     "Whimsicott"
+    ],
+    "sp3-mb3": [
+     "Basculegion",
+     "Raichu",
+     "Kingambit",
+     "Kleavor"
+    ]
+   },
+   "fit": 0.421502674389554
+  }
+ }
+}

@@ -1,0 +1,226 @@
+{
+ "iteration": 1,
+ "c": 0.64,
+ "eta": 2.0,
+ "field": {
+  "mb1": {
+   "w": 0.17625823026331836,
+   "species": [
+    "Basculegion",
+    "Charizard-Mega-Y",
+    "Floette-Mega",
+    "Garchomp",
+    "Kingambit",
+    "Whimsicott"
+   ]
+  },
+  "mb2": {
+   "w": 0.16091620278588528,
+   "species": [
+    "Basculegion",
+    "Froslass-Mega",
+    "Kingambit",
+    "Lycanroc-Dusk",
+    "Scovillain-Mega",
+    "Sneasler"
+   ]
+  },
+  "mb4": {
+   "w": 0.11608655429463158,
+   "species": [
+    "Basculegion",
+    "Dragonite-Mega",
+    "Floette-Mega",
+    "Garchomp",
+    "Kingambit",
+    "Sneasler"
+   ]
+  },
+  "mb3": {
+   "w": 0.09898749296443861,
+   "species": [
+    "Arcanine-Hisui",
+    "Farigiraf",
+    "Kingambit",
+    "Raichu-Mega-Y",
+    "Staraptor-Mega",
+    "Sylveon"
+   ]
+  },
+  "mb5": {
+   "w": 0.06980816408879269,
+   "species": [
+    "Blastoise-Mega",
+    "Delphox-Mega",
+    "Incineroar",
+    "Kingambit",
+    "Sinistcha",
+    "Sneasler"
+   ]
+  },
+  "mb6": {
+   "w": 0.06651724149409297,
+   "species": [
+    "Aerodactyl-Mega",
+    "Charizard-Mega-Y",
+    "Farigiraf",
+    "Garchomp",
+    "Kingambit",
+    "Sylveon"
+   ]
+  },
+  "mb7": {
+   "w": 0.05642013775072766,
+   "species": [
+    "Archaludon",
+    "Charizard-Mega-Y",
+    "Grimmsnarl",
+    "Pelipper",
+    "Swampert-Mega",
+    "Venusaur"
+   ]
+  },
+  "mb8": {
+   "w": 0.0463108983474587,
+   "species": [
+    "Charizard-Mega-Y",
+    "Garchomp",
+    "Incineroar",
+    "Sylveon",
+    "Toxapex",
+    "Venusaur"
+   ]
+  },
+  "mb9": {
+   "w": 0.04408530638395859,
+   "species": [
+    "Excadrill",
+    "Gholdengo",
+    "Milotic",
+    "Sinistcha",
+    "Staraptor-Mega",
+    "Tyranitar-Mega"
+   ]
+  },
+  "mb10": {
+   "w": 0.030290537522471843,
+   "species": [
+    "Blastoise-Mega",
+    "Delphox-Mega",
+    "Incineroar",
+    "Kingambit",
+    "Sinistcha-Masterpiece",
+    "Sneasler"
+   ]
+  },
+  "mb13": {
+   "w": 0.025727565669002462,
+   "species": [
+    "Basculegion",
+    "Dragonite-Mega",
+    "Floette-Mega",
+    "Kingambit",
+    "Sneasler",
+    "Whimsicott"
+   ]
+  },
+  "mb11": {
+   "w": 0.025037254419341733,
+   "species": [
+    "Blaziken-Mega",
+    "Farigiraf",
+    "Kingambit",
+    "Primarina",
+    "Torkoal",
+    "Venusaur"
+   ]
+  },
+  "mb16": {
+   "w": 0.024307441434085343,
+   "species": [
+    "Excadrill",
+    "Farigiraf",
+    "Gholdengo",
+    "Staraptor-Mega",
+    "Tyranitar",
+    "Whimsicott"
+   ]
+  },
+  "mb12": {
+   "w": 0.022818801470038758,
+   "species": [
+    "Archaludon",
+    "Basculegion",
+    "Charizard-Mega-Y",
+    "Grimmsnarl",
+    "Pelipper",
+    "Venusaur"
+   ]
+  },
+  "mb15": {
+   "w": 0.018261516587783255,
+   "species": [
+    "Archaludon",
+    "Gengar-Mega",
+    "Incineroar",
+    "Politoed",
+    "Swampert-Mega",
+    "Vivillon"
+   ]
+  },
+  "mb14": {
+   "w": 0.018166654523971856,
+   "species": [
+    "Basculegion",
+    "Kingambit",
+    "Kleavor",
+    "Metagross-Mega",
+    "Raichu-Mega-Y",
+    "Whimsicott"
+   ]
+  }
+ },
+ "usage": {
+  "Kingambit": 0.7877958980259473,
+  "Basculegion": 0.5199740090068483,
+  "Garchomp": 0.4051729243995016,
+  "Sneasler": 0.4028290243607839,
+  "Charizard-Mega-Y": 0.36832530932563645,
+  "Floette-Mega": 0.3180723502269524,
+  "Whimsicott": 0.24445989189037803,
+  "Farigiraf": 0.21484943031195866,
+  "Sylveon": 0.21181563280599028,
+  "Staraptor-Mega": 0.16738024078248254,
+  "Incineroar": 0.16467111654650649,
+  "Froslass-Mega": 0.16091620278588528,
+  "Lycanroc-Dusk": 0.16091620278588528,
+  "Scovillain-Mega": 0.16091620278588528,
+  "Venusaur": 0.15058709198756684,
+  "Dragonite-Mega": 0.14181411996363405,
+  "Raichu-Mega-Y": 0.11715414748841046,
+  "Sinistcha": 0.11389347047275128,
+  "Blastoise-Mega": 0.10009870161126452,
+  "Delphox-Mega": 0.10009870161126452,
+  "Arcanine-Hisui": 0.09898749296443861,
+  "Archaludon": 0.09750045580854967,
+  "Grimmsnarl": 0.07923893922076641,
+  "Pelipper": 0.07923893922076641,
+  "Swampert-Mega": 0.07468165433851091,
+  "Excadrill": 0.06839274781804394,
+  "Gholdengo": 0.06839274781804394,
+  "Aerodactyl-Mega": 0.06651724149409297,
+  "Toxapex": 0.0463108983474587,
+  "Milotic": 0.04408530638395859,
+  "Tyranitar-Mega": 0.04408530638395859,
+  "Sinistcha-Masterpiece": 0.030290537522471843,
+  "Blaziken-Mega": 0.025037254419341733,
+  "Primarina": 0.025037254419341733,
+  "Torkoal": 0.025037254419341733,
+  "Tyranitar": 0.024307441434085343,
+  "Gengar-Mega": 0.018261516587783255,
+  "Politoed": 0.018261516587783255,
+  "Vivillon": 0.018261516587783255,
+  "Kleavor": 0.018166654523971856,
+  "Metagross-Mega": 0.018166654523971856
+ }
+}

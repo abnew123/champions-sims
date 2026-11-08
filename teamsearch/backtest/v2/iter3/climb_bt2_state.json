@@ -1,0 +1,93 @@
+{
+ "round": 2,
+ "cap": 2,
+ "teams": {
+  "mb2": {
+   "team": [
+    "Basculegion#2",
+    "M-Froslass#1",
+    "Kingambit#5",
+    "Rillaboom#77",
+    "M-Scovillain#6",
+    "Sneasler#5"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 3,
+     "out": "Lycanroc-Dusk#4",
+     "into": "Rillaboom#77",
+     "note": "",
+     "diff": 0.09675289158492908,
+     "se": 0.047778290006865114,
+     "matrix": 0.1826899082305411,
+     "from_random": false
+    }
+   ],
+   "arch": "Snow"
+  },
+  "mb4": {
+   "team": [
+    "Basculegion#2",
+    "M-Dragonite#3",
+    "M-Floette#14",
+    "Garchomp#1",
+    "Kingambit#2",
+    "Sneasler#41"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Balance"
+  },
+  "mb1": {
+   "team": [
+    "Basculegion#2",
+    "M-Charizard Y#29",
+    "M-Floette#13",
+    "Garchomp#18",
+    "Kingambit#2",
+    "Whimsicott#1"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Sun"
+  },
+  "mb3": {
+   "team": [
+    "Arcanine-H#1",
+    "Farigiraf#96",
+    "Kingambit#1",
+    "Rillaboom#77",
+    "M-Staraptor#4",
+    "Sylveon#25"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 3,
+     "out": "M-Raichu Y#1",
+     "into": "Rillaboom#77",
+     "note": "",
+     "diff": 0.15809920765534025,
+     "se": 0.06110942911696419,
+     "matrix": 0.0736151080187585,
+     "from_random": false
+    }
+   ],
+   "arch": "Trick Room"
+  },
+  "mb5": {
+   "team": [
+    "M-Blastoise#1",
+    "M-Delphox#10",
+    "Incineroar#1",
+    "Kingambit#1",
+    "Sinistcha#1",
+    "Sneasler#3"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Trick Room"
+  }
+ }
+}

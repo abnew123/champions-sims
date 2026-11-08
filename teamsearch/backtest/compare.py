@@ -3,7 +3,8 @@ Real usage per forme (battle forme, Megas apart), one vote per player: per playe
 over players. From the cached public M-C Bo3 logs (pssim/replays_protect; protocol lines only, players numbered in memory, nothing
 named is written), in three windows: weeks 1-2 (Sep 9-22), weeks 3-5 (Sep 23 - Oct 13), settled (Oct 14 - Nov 6); cached in
 mc_truth.json (usage only). Predictions: M-B's own usage over its last 14 days, counted the same way (the carry-over baseline), and
-each self-play iteration's weighted field (sp_pred_<i>.json: a team's weight on each of its six formes).
+each self-play iteration's weighted field (sp_pred_<i>.json: a team's weight on each of its six formes); v2's last iteration replayed
+on calibrated payoffs (backtest/v2/cal<c>/, calib_replay.py) as "v2 cal <c>".
 Scores per prediction and window: Spearman rank correlation over the formes at >= 2% real or predicted usage; total variation distance
 of the usage vectors (each normalised to sum 1); and M-C's new formes: real usage against predicted.
 v2 (the user, 2026-11-07; fixed before the v2 run): also v2's iterations (backtest/v2/), the 16-team starting field on its own, and
@@ -92,6 +93,10 @@ def main():
     if v1 and 0 in v1: preds[f'M-B + shift {max(v1)}'] = shift(v1, max(v1))
     preds.update({f'v2 self-play {i}': u for i, u in v2.items() if i > 0})
     preds.update({f'v2 M-B + shift {i}': shift(v2, i) for i in v2 if i > 0 and 0 in v2})
+    for d in sorted(glob.glob(os.path.join(HERE, 'v2', 'cal*')), reverse=True):        # v2 replayed on calibrated payoffs (calib_replay.py)
+        cal = preds_of(d); c = os.path.basename(d)[3:]; i = max(cal)
+        preds[f'v2 cal {c} sp {i}'] = cal[i]
+        if 0 in v2: preds[f'v2 cal {c} + shift {i}'] = shift({**cal, 0: v2[0]}, i)
     sys.path.insert(0, HERE); from build_mb import NEW, NEW_MEGA
     new = {L.DEX['species'].get(L.idf(x), {}).get('name', x) for x in NEW} | set(NEW_MEGA)
     real = T['M-C settled']['usage']; big = sorted(f for f in new if real.get(f, 0) >= 0.05)
@@ -104,9 +109,9 @@ def main():
         out['scores'][n] = dict({w: score(p, T[w]['usage']) for w in WIN}, flagged=fl, false_alarms=fa)
         print(f"  {n:24s}" + ''.join(f"{s['spearman']:>13.2f} / {s['tv']:.2f}  " for w, s in out['scores'][n].items() if w in WIN)
               + f"   {len(fl)} of {len(big)}   {len(fa)}" + (f"  ({', '.join(fa)})" if fa else ''))
-    cols = ['M-B carried over'] + [n for n in preds if n.startswith('self-play')][-1:] + [n for n in preds if n.startswith('v2 self-play')]
+    cols = ['M-B carried over'] + [n for n in preds if n.startswith('self-play')][-1:] + [n for n in preds if n.startswith('v2 self-play')] + [n for n in preds if n.startswith('v2 cal 0.64 sp')]
     print("\nM-C's new formes: real usage (settled; weeks 1-2) against predictions")
-    print(f"  {'forme':20s} {'settled':>8s} {'wk 1-2':>7s}" + ''.join(f"{n.replace('self-play', 'sp')[-12:]:>13s}" for n in cols))
+    print(f"  {'forme':20s} {'settled':>8s} {'wk 1-2':>7s}" + ''.join(f"{n.replace('self-play', 'sp').replace('cal 0.64', 'cal')[-12:]:>13s}" for n in cols))
     for f in sorted(new, key=lambda f: -real.get(f, 0)):
         r = real.get(f, 0); e = T['M-C weeks 1-2']['usage'].get(f, 0)
         if r < 0.005 and e < 0.005 and all(p.get(f, 0) < 0.005 for p in preds.values()): continue

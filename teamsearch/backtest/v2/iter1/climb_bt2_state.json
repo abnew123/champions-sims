@@ -1,0 +1,82 @@
+{
+ "round": 2,
+ "cap": 2,
+ "teams": {
+  "mb1": {
+   "team": [
+    "Basculegion#2",
+    "M-Charizard Y#29",
+    "M-Floette#13",
+    "Garchomp#18",
+    "Kingambit#2",
+    "Whimsicott#1"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Sun"
+  },
+  "mb2": {
+   "team": [
+    "Basculegion#2",
+    "M-Froslass#1",
+    "Kingambit#5",
+    "Lycanroc-Dusk#4",
+    "M-Scovillain#6",
+    "Sneasler#5"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Snow"
+  },
+  "mb4": {
+   "team": [
+    "Basculegion#2",
+    "M-Dragonite#3",
+    "M-Floette#14",
+    "Garchomp#1",
+    "Kingambit#2",
+    "Sneasler#41"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Balance"
+  },
+  "mb3": {
+   "team": [
+    "Arcanine-H#1",
+    "Farigiraf#96",
+    "Kingambit#1",
+    "M-Raichu Y#1",
+    "M-Staraptor#4",
+    "Sylveon#25"
+   ],
+   "done": true,
+   "path": [],
+   "arch": "Trick Room"
+  },
+  "mb6": {
+   "team": [
+    "M-Aerodactyl#3",
+    "M-Charizard Y#29",
+    "Farigiraf#94",
+    "Garchomp#2",
+    "Pelipper#42",
+    "Sylveon#26"
+   ],
+   "done": true,
+   "path": [
+    {
+     "slot": 4,
+     "out": "Kingambit#3",
+     "into": "Pelipper#42",
+     "note": "item clause: Sitrus Berry -> Damp Rock",
+     "diff": 0.04740422753129256,
+     "se": 0.023391552995251235,
+     "matrix": 0.4359763262333517,
+     "from_random": true
+    }
+   ],
+   "arch": "Sun"
+  }
+ }
+}

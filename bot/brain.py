@@ -100,8 +100,10 @@ def turn(msg):
     # (2026-10-14) it was v25's 0.7538 with egvalue9_sym2, which forfeited a little early (raw 0.4%: 1.5% instead of 2.3%)
     real = 1 / (1 + math.exp(-POS.LV.CAL * math.log(max(1e-6, value) / max(1e-6, 1 - value))))
     below = json.load(open(os.path.join(ROOT, 'bot', 'limits.json'))).get('forfeit_below', 0.0)
-    if real < below: return {'forfeit': True, 'note': f'forfeit: win chance {100 * real:.1f}% (value {100 * value:.1f}%)'}
-    return {'choice': choice, 'note': note + (f" hyp {info.get('hyp', [])[:1]}" if info.get('need') else '')}
+    # value and real go back to the client, which keeps them per turn in games.jsonl ("wc"; the user, 2026-11-08: is the bot misjudging
+    # rain, or is rain a bad matchup?)
+    if real < below: return {'forfeit': True, 'note': f'forfeit: win chance {100 * real:.1f}% (value {100 * value:.1f}%)', 'value': value, 'real': real}
+    return {'choice': choice, 'note': note + (f" hyp {info.get('hyp', [])[:1]}" if info.get('need') else ''), 'value': value, 'real': real}
 def main():
     for line in sys.stdin:
         line = line.strip()

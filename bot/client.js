@@ -393,6 +393,9 @@ async function handleRequest(room, R) {
     if (/bo\d$/.test(FORMAT)) for (let i = 0; i < 40 && !R.lines.some(l => l.startsWith('|showteam|' + opp + '|')); i++) await sleep(200);   // Bo1 has no open sheets: nothing to wait for
   }
   const ans = await ask({type: req.teamPreview ? 'preview' : 'turn', room, side: R.side, log: R.lines, request: req, team: currentTeam});
+  // the bot's own win chance each turn, [turn, win chance, planner value], kept in games.jsonl as "wc" (the user, 2026-11-08: does the
+  // bot misjudge rain, or is rain a bad matchup?). Replacements carry none.
+  if (typeof ans.real === 'number') (R.wc = R.wc || []).push([R.turn, +ans.real.toFixed(4), +ans.value.toFixed(4)]);
   // a brain error answers Showdown's default at once (team preview: the first four in order) rather than nothing: an unanswered request
   // runs to the timer every turn, as it did for two games on 2026-10-14 and drew a complaint about slow play
   if (ans.error) {
@@ -418,7 +421,8 @@ function onEnd(room, R, winner) {
   const won = winner && me && winner.toLowerCase() === me.toLowerCase();
   const mm = R.lines.map(l => /game-bestof\d-[a-z0-9]+-(\d+)/.exec(l)).find(Boolean);   // the best-of-3 this game belongs to (Bo1: the game itself)
   const g = {when: new Date().toISOString(), room, side: R.side, won: winner ? !!won : null, turns: R.turn, oppRating: R.oppRating, myRating, team: currentTeam && currentTeam.name, arm: currentTeam && currentTeam.arm, match: mm ? mm[1] : room, format: FORMAT,
-    ots: R.lines.some(l => l.startsWith('|showteam|'))};   // open team sheets shown (Bo3 always; Bo1 when both accepted: the user compares at 100 Bo1 games)
+    ots: R.lines.some(l => l.startsWith('|showteam|')),   // open team sheets shown (Bo3 always; Bo1 when both accepted: the user compares at 100 Bo1 games)
+    wc: R.wc || []};   // the bot's win chance per turn (above)
   fs.appendFileSync(GAMES, JSON.stringify(g) + '\n'); fs.writeFileSync(path.join(OUT, room + '.log'), R.lines.join('\n') + '\n');
   log('game over', room.slice(-12), won ? 'won' : winner ? 'lost' : 'tie', 'turns', R.turn, 'opp', R.oppRating, 'me', myRating);
   setTimeout(() => { send(`${room}|/leave`); delete rooms[room]; }, 5000);

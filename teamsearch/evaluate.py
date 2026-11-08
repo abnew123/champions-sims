@@ -111,6 +111,12 @@ SIMS = {
     # for M-D, the same flags. The value net doesn't model Commander and has never seen these species; Mega stats are placeholders.
     'v42': dict(bin='champ-battle-v42', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V41_ENV)),
     'v42n1': dict(bin='champ-battle-v42', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V41_ENV, BATTLE_NS='1')),
+    # v43 (Battle sim, 2026-11-07, commit f1a0492; the user: "we should support Bug Bite, Cute Charm, ... Aura Wheel"): v42 plus every
+    # mechanic real M-B / M-C sets use that v42 left unsupported (Bug Bite, Cute Charm, Forecast, Shed Tail, Hunger Switch, Aura Wheel,
+    # Fling, Copycat, Instruct, Heat Crash and about 90 more) and Assault Vest. Games whose fours carry none of them are identical to
+    # v42 / v41. Genders (Cute Charm, Attract, Rivalry) come from starts built by battle_starts.js since Nov 7; older starts read genderless.
+    'v43': dict(bin='champ-battle-v43', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V41_ENV)),
+    'v43n1': dict(bin='champ-battle-v43', eg='egvalue9_sym2.json', grid=False, seedkey=True, env=dict(V41_ENV, BATTLE_NS='1')),
 }
 def sim(): return os.environ.get('TS_SIM', 'v3')
 def out_tag(seed0, per_job): return f'{seed0}_{per_job}' if sim() == 'v3' else f'{sim()}_{seed0}_{per_job}'

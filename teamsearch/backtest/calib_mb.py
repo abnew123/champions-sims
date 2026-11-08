@@ -11,6 +11,11 @@ gets min(its games, a cap), the cap set so the total is N.
 Out: backtest/calib_mb.jsonl, one line per game (game id, side p1's result, ratings, both sides' generic traits, the sim's wins as
 each side); resumable (done games are skipped; the game cache keeps finished battles). Log backtest/calib_mb.log (progress card).
   TS_MOVESET=backtest/smogon_mb_2026-08_moveset.txt bin/teamsearch-py backtest/calib_mb.py [N=2500] [R=6]
+v43 (the user, 2026-11-07: "we should support Bug Bite, Cute Charm, ..."): v41 left some mechanics unsupported (6% of sim games).
+Battle sim's champ-battle-v43 ports them; games whose brought fours carry none of them are identical on v41 and v43. The games whose
+fours carry one (calib_v43_affected.json, 258 of the 2,500) are left out of the v41 pass and played on v43n1 (starts rebuilt with
+genders) into calib_mb_v43.jsonl; the fit takes a game's v43 line over its v41 line.
+  TS_MOVESET=... bin/teamsearch-py backtest/calib_mb.py v43 [N=2500] [R=6]
 """
 import json, os, sys, time, random, hashlib, collections
 HERE = os.path.dirname(os.path.abspath(__file__)); TS = os.path.dirname(HERE)
@@ -19,7 +24,10 @@ os.environ.setdefault('TS_SIM', 'v41n1'); os.environ.setdefault('TS_GAME_CACHE',
 import sets_lib as L
 import evaluate as E
 import build_lowelo_starts as B
-OUT = os.path.join(HERE, 'calib_mb.jsonl'); LOG = os.path.join(HERE, 'calib_mb.log'); CHUNK = 100; SEED0 = 770000
+V43 = len(sys.argv) > 1 and sys.argv[1] == 'v43'
+if V43: sys.argv.pop(1); os.environ['TS_SIM'] = 'v43n1'
+AFF = set(json.load(open(os.path.join(HERE, 'calib_v43_affected.json')))['affected'])
+OUT = os.path.join(HERE, 'calib_mb_v43.jsonl' if V43 else 'calib_mb.jsonl'); LOG = os.path.join(HERE, 'calib_mb.log'); CHUNK = 100; SEED0 = 770000
 FULL = os.path.join('..', 'native', 'engine_data_full.json')
 WEATHER = {'Drought': 'sun', 'Drizzle': 'rain', 'Sand Stream': 'sand', 'Snow Warning': 'snow', 'Orichalcum Pulse': 'sun'}
 REDIRECT = {'Follow Me', 'Rage Powder'}; SCREENS = {'Reflect', 'Light Screen', 'Aurora Veil'}
@@ -91,10 +99,12 @@ def main():
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 2500; R = int(sys.argv[2]) if len(sys.argv) > 2 else 6
     thr = int(os.environ.get('TS_THREADS', 3))
     G, full = games(); pick, strata, cap = sample(G, n)
+    pick = [g for g in pick if (g[0] in AFF) == V43]                     # v43 mechanics: on v43n1 only; the rest on v41n1
     done = {json.loads(l)['id'] for l in open(OUT)} if os.path.exists(OUT) else set()
     todo = [g for g in pick if g[0] not in done]
-    say(f"v41n1: calibration sims on {len(pick)} of {len(G)} usable M-B games ({len(todo)} to play), {R} games a side each, {thr} threads; "
-        f"type pairs capped at {cap} games: " + ', '.join(f'{k} {v}' for k, v in strata.items()))
+    say(f"{E.sim()}: calibration sims on {len(pick)} of {len(G)} usable M-B games ({len(todo)} to play), {R} games a side each, {thr} threads; "
+        + ("the games whose fours carry a v43 mechanic" if V43 else
+           f"type pairs capped at {cap} games, less the {len(AFF)} on v43: " + ', '.join(f'{k} {v}' for k, v in strata.items())))
     gids = tuple(json.load(open(os.path.join(HERE, 'mb_field.json')))['mb1']['gids'])         # names the run folders only (explicit jobs)
     import poolmode as PM
     t0 = time.time(); nd = len(pick) - len(todo)
@@ -122,7 +132,7 @@ def main():
                                         sim=dict(p1_wins=w1, p1_n=n1, p2_wins=w2, p2_n=n2),
                                         p_sim=round((w1 + (n2 - w2)) / (n1 + n2), 4) if n1 + n2 else None)) + '\n')
         nd += len(part)
-        say(f"  score (real M-B games): {nd}/{len(pick)} games, {int((time.time() - t0) / 60)} min")
-    say('calibration sims done')
+        say(f"  score (real M-B games{', v43' if V43 else ''}): {nd}/{len(pick)} games, {int((time.time() - t0) / 60)} min")
+    say('calibration sims on v43 done' if V43 else 'calibration sims done')
 
 if __name__ == '__main__': main()

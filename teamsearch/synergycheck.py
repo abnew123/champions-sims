@@ -152,8 +152,8 @@ if __name__ == '__main__':
         for n, p, e, vs in P:
             print(f"{n:16s} {p:16s} enabler {show(e)}")
             for kind, o, i, t in vs:
-                print(f"    {kind:7s} {o:16s} -> {i}{'' if has_cells(i) else '   (no cells yet)'}"); miss |= {i} if not has_cells(i) else set()
-        print(f"\n{len(P)} teams, {sum(len(vs) for *_, vs in P)} variants; {len(miss)} sets without cells")
+                print(f"    {kind:7s} {o:16s} -> {i}{'' if has_cells(i) else '   (no cells yet)'}"); miss |= {g for g in t if not has_cells(g)}
+        print(f"\n{len(P)} teams, {sum(len(vs) for *_, vs in P)} variants; {len(miss)} sets without cells (run 'synergycheck.py cells')")
     elif cmd == 'cells':
         miss = sorted({g for *_, vs in plan() for v in vs for g in v[3] if not has_cells(g)})
         print(f"{len(miss)} sets need cells", flush=True)

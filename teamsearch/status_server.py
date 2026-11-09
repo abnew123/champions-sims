@@ -102,17 +102,20 @@ def step_card(path, title, done_marker, remote=True):
     if any(done_marker in l for l in L): return card(title, 'finished', 1, 1, 'step', lines=[f"finished {ampm(dt(mt))}"])
     failed = next((l for l in reversed(L) if ' failed' in l and 'UTC' in l), None)
     head = next((l[9:].strip() for l in reversed(L) if re.match(r'^\d\d:\d\d [AP]M (round \d+:|v\d+\w*:|final check:)', l)), '')
-    seg, label, stage, unit = [], None, None, 'teams'
+    seg, label, stage, unit, k = [], None, None, 'teams', 0
+    paused = re.match(r'^\d\d:\d\d [AP]M paused', L[-1])                     # cloud/pause_until.sh
     for l in L:
-        if re.match(r'^\d\d:\d\d [AP]M (round \d+:|final check:)', l): seg, label, stage = [], None, None
+        if re.match(r'^\d\d:\d\d [AP]M (round \d+:|final check:)', l): seg, label, stage, k = [], None, None, 0
+        if re.match(r'^\d\d:\d\d [AP]M resumed', l): k = len(seg)             # the stage's minutes include the pause: rate from here
         m = re.match(r'^\d\d:\d\d [AP]M\s+((bring search|confirm games|confirm|final check|score)[^:]*): (\d+)/(\d+) (teams|games), (\d+) min', l)
         if m:
-            if m.group(1) != stage: seg, stage, label = [], m.group(1), m.group(2)       # a new seed is a new stage
+            if m.group(1) != stage: seg, stage, label, k = [], m.group(1), m.group(2), 0   # a new seed is a new stage
             seg.append((int(m.group(3)), int(m.group(4)), int(m.group(6)))); unit = m.group(5)   # games: the M-B calibration sims
-    state = 'stopped' if failed or quiet else 'running'; extra = [head] if head else []
+    state = 'stopped' if failed else 'waiting' if paused else 'stopped' if quiet else 'running'; extra = [head] if head else []
     if failed: extra.append(failed.split('UTC: ', 1)[-1])
-    if not seg: return card(title, state, 0, 0, '', lines=extra + ([] if failed or quiet else ['starting the next stage…']))
-    n, N, _ = seg[-1]; rate = log_rate(seg)
+    if paused: extra.append(L[-1][9:].strip())
+    if not seg: return card(title, state, 0, 0, '', lines=extra + ([] if failed or quiet or paused else ['starting the next stage…']))
+    n, N, _ = seg[-1]; rate = log_rate(seg[k:]) if not k or len(seg) - k >= 2 else None
     if state == 'running':
         if rate and mt + (N - n) / rate * 60 > time.time():
             done_at = mt + (N - n) / rate * 60; extra.append(f"{label}: about {fmt(done_at - time.time())} left in this stage (done around {ampm(dt(done_at))})")

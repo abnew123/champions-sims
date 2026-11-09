@@ -1,0 +1,1804 @@
+[
+ {
+  "start": "Baltimore-01",
+  "plan": "Sand",
+  "kind": "break",
+  "out": "M-Tyranitar#1",
+  "into": "Kingambit#1",
+  "diff": 0.03184984172203812,
+  "se": 0.03160362810024707,
+  "avg_spe": [
+   93.5,
+   90.0
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Baltimore-01",
+  "plan": "Sand",
+  "kind": "control",
+  "out": "Sneasler#7",
+  "into": "Kingambit#1",
+  "diff": 0.05516041053532179,
+  "se": 0.023926589240523786,
+  "avg_spe": [
+   93.5,
+   81.83333333333333
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Baltimore-04",
+  "plan": "Trick Room",
+  "kind": "break",
+  "out": "Indeedee#6",
+  "into": "Kingambit#1",
+  "diff": -0.028748081037871916,
+  "se": 0.041605019561823796,
+  "avg_spe": [
+   102.66666666666667,
+   95.16666666666667
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Baltimore-04",
+  "plan": "Trick Room",
+  "kind": "control",
+  "out": "Arcanine-H#1",
+  "into": "Kingambit#1",
+  "diff": 0.05686559034046882,
+  "se": 0.023763132730721066,
+  "avg_spe": [
+   102.66666666666667,
+   96.0
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Baltimore-05",
+  "plan": "Tailwind",
+  "kind": "break",
+  "out": "M-Staraptor#1",
+  "into": "Kingambit#3",
+  "diff": 0.018288934426229503,
+  "se": 0.013342451184891019,
+  "avg_spe": [
+   95.83333333333333,
+   85.83333333333333
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Baltimore-05",
+  "plan": "Tailwind",
+  "kind": "control",
+  "out": "M-Raichu Y#1",
+  "into": "Kingambit#3",
+  "diff": 0.061926831037562385,
+  "se": 0.03961741527085854,
+  "avg_spe": [
+   95.83333333333333,
+   82.5
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Baltimore-07",
+  "plan": "Tailwind",
+  "kind": "break",
+  "out": "M-Staraptor#1",
+  "into": "Kingambit#5",
+  "diff": 0.008811475409836067,
+  "se": 0.012485024647759595,
+  "avg_spe": [
+   93.16666666666667,
+   83.16666666666667
+  ],
+  "slow": [
+   1,
+   2
+  ]
+ },
+ {
+  "start": "Baltimore-07",
+  "plan": "Tailwind",
+  "kind": "control",
+  "out": "M-Raichu Y#1",
+  "into": "Kingambit#5",
+  "diff": -0.012781762295081971,
+  "se": 0.04385267972069082,
+  "avg_spe": [
+   93.16666666666667,
+   79.83333333333333
+  ],
+  "slow": [
+   1,
+   2
+  ]
+ },
+ {
+  "start": "Baltimore-11",
+  "plan": "Sun",
+  "kind": "break",
+  "out": "M-Charizard Y#5",
+  "into": "Gholdengo#2",
+  "diff": -0.1106999539519363,
+  "se": 0.028042525366061794,
+  "avg_spe": [
+   87.0,
+   84.33333333333333
+  ],
+  "slow": [
+   3,
+   3
+  ]
+ },
+ {
+  "start": "Baltimore-11",
+  "plan": "Sun",
+  "kind": "control",
+  "out": "Sylveon#1",
+  "into": "Gholdengo#2",
+  "diff": -0.02614110077736078,
+  "se": 0.01741305152751767,
+  "avg_spe": [
+   87.0,
+   91.0
+  ],
+  "slow": [
+   3,
+   2
+  ]
+ },
+ {
+  "start": "Baltimore-12",
+  "plan": "Trick Room",
+  "kind": "break",
+  "out": "Sinistcha#1",
+  "into": "M-Garchomp Z#1",
+  "diff": 0.05049026466610633,
+  "se": 0.041859715560865096,
+  "avg_spe": [
+   89.33333333333333,
+   102.83333333333333
+  ],
+  "slow": [
+   2,
+   2
+  ]
+ },
+ {
+  "start": "Baltimore-12",
+  "plan": "Trick Room",
+  "kind": "control",
+  "out": "Sneasler#3",
+  "into": "M-Garchomp Z#1",
+  "diff": -0.010188391105178298,
+  "se": 0.038746228847983476,
+  "avg_spe": [
+   89.33333333333333,
+   94.5
+  ],
+  "slow": [
+   2,
+   2
+  ]
+ },
+ {
+  "start": "Baltimore-13",
+  "plan": "Trick Room",
+  "kind": "break",
+  "out": "Indeedee-F#8",
+  "into": "Kingambit#5",
+  "diff": -0.04929187004869289,
+  "se": 0.03841245132151351,
+  "avg_spe": [
+   100.83333333333333,
+   95.0
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Baltimore-13",
+  "plan": "Trick Room",
+  "kind": "control",
+  "out": "M-Gardevoir#8",
+  "into": "Kingambit#5",
+  "diff": -0.046551894420054675,
+  "se": 0.031635799179941373,
+  "avg_spe": [
+   100.83333333333333,
+   92.5
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Baltimore-14",
+  "plan": "Tailwind",
+  "kind": "break",
+  "out": "Volcarona#2",
+  "into": "Kingambit#3",
+  "diff": -0.0586239373550579,
+  "se": 0.041735035330902,
+  "avg_spe": [
+   97.16666666666667,
+   88.83333333333333
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Baltimore-14",
+  "plan": "Tailwind",
+  "kind": "control",
+  "out": "Klefki#2",
+  "into": "Kingambit#3",
+  "diff": 0.017631185595761763,
+  "se": 0.031995149439975404,
+  "avg_spe": [
+   97.16666666666667,
+   93.0
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Baltimore-15",
+  "plan": "Psychic Terrain",
+  "kind": "break",
+  "out": "Indeedee-F#7",
+  "into": "Kingambit#3",
+  "diff": -0.006178437521702125,
+  "se": 0.04054407434253202,
+  "avg_spe": [
+   94.83333333333333,
+   89.0
+  ],
+  "slow": [
+   1,
+   2
+  ]
+ },
+ {
+  "start": "Baltimore-15",
+  "plan": "Psychic Terrain",
+  "kind": "control",
+  "out": "Gholdengo#1",
+  "into": "Kingambit#1",
+  "diff": -0.033145491803278686,
+  "se": 0.039405220778777894,
+  "avg_spe": [
+   94.83333333333333,
+   89.16666666666667
+  ],
+  "slow": [
+   1,
+   2
+  ]
+ },
+ {
+  "start": "Baltimore-16",
+  "plan": "Psychic Terrain",
+  "kind": "break",
+  "out": "Indeedee-F#2",
+  "into": "Kingambit#5",
+  "diff": 0.004551720275807386,
+  "se": 0.03939852125896036,
+  "avg_spe": [
+   98.0,
+   92.16666666666667
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Baltimore-16",
+  "plan": "Psychic Terrain",
+  "kind": "control",
+  "out": "Arcanine-H#2",
+  "into": "Kingambit#3",
+  "diff": -0.010942056460549132,
+  "se": 0.03352237630168267,
+  "avg_spe": [
+   98.0,
+   91.33333333333333
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Brisbane-02",
+  "plan": "Tailwind",
+  "kind": "break",
+  "out": "M-Salamence#5",
+  "into": "Gholdengo#2",
+  "diff": -0.05722336065573771,
+  "se": 0.04396178830323427,
+  "avg_spe": [
+   92.5,
+   86.5
+  ],
+  "slow": [
+   1,
+   1
+  ]
+ },
+ {
+  "start": "Brisbane-02",
+  "plan": "Tailwind",
+  "kind": "control",
+  "out": "M-Floette#1",
+  "into": "Gholdengo#2",
+  "diff": -0.059375000000000004,
+  "se": 0.03294454794530228,
+  "avg_spe": [
+   92.5,
+   89.5
+  ],
+  "slow": [
+   1,
+   1
+  ]
+ },
+ {
+  "start": "Brisbane-04",
+  "plan": "Rain",
+  "kind": "break",
+  "out": "Pelipper#2",
+  "into": "Kingambit#1",
+  "diff": 0.022925204918032786,
+  "se": 0.03125357148704105,
+  "avg_spe": [
+   85.0,
+   82.5
+  ],
+  "slow": [
+   1,
+   2
+  ]
+ },
+ {
+  "start": "Brisbane-04",
+  "plan": "Rain",
+  "kind": "control",
+  "out": "Incineroar#10",
+  "into": "Kingambit#1",
+  "diff": 0.013789846801602237,
+  "se": 0.026520794426478034,
+  "avg_spe": [
+   85.0,
+   83.33333333333333
+  ],
+  "slow": [
+   1,
+   1
+  ]
+ },
+ {
+  "start": "Brisbane-06",
+  "plan": "Rain",
+  "kind": "break",
+  "out": "Politoed#4",
+  "into": "Kingambit#1",
+  "diff": -0.1072222404399598,
+  "se": 0.037813944056060096,
+  "avg_spe": [
+   92.5,
+   89.16666666666667
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Brisbane-06",
+  "plan": "Rain",
+  "kind": "control",
+  "out": "Armarouge#10",
+  "into": "Kingambit#1",
+  "diff": -0.01359969272885011,
+  "se": 0.030312691997659263,
+  "avg_spe": [
+   92.5,
+   88.33333333333333
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Brisbane-09",
+  "plan": "Rain",
+  "kind": "break",
+  "out": "Pelipper#8",
+  "into": "Kingambit#1",
+  "diff": 0.014059027780857353,
+  "se": 0.03425130510257583,
+  "avg_spe": [
+   65.0,
+   62.5
+  ],
+  "slow": [
+   2,
+   3
+  ]
+ },
+ {
+  "start": "Brisbane-09",
+  "plan": "Rain",
+  "kind": "control",
+  "out": "Sableye#5",
+  "into": "Kingambit#1",
+  "diff": 0.08152829007593931,
+  "se": 0.0364982949010897,
+  "avg_spe": [
+   65.0,
+   65.0
+  ],
+  "slow": [
+   2,
+   2
+  ]
+ },
+ {
+  "start": "Brisbane-10",
+  "plan": "Trick Room",
+  "kind": "break",
+  "out": "Sinistcha#1",
+  "into": "M-Garchomp Z#1",
+  "diff": 0.035860655737704916,
+  "se": 0.03962011825553996,
+  "avg_spe": [
+   89.33333333333333,
+   102.83333333333333
+  ],
+  "slow": [
+   2,
+   2
+  ]
+ },
+ {
+  "start": "Brisbane-10",
+  "plan": "Trick Room",
+  "kind": "control",
+  "out": "Kingambit#1",
+  "into": "Gholdengo#2",
+  "diff": -0.0298155737704918,
+  "se": 0.03953108610259891,
+  "avg_spe": [
+   89.33333333333333,
+   95.0
+  ],
+  "slow": [
+   2,
+   1
+  ]
+ },
+ {
+  "start": "Brisbane-11",
+  "plan": "Sand",
+  "kind": "break",
+  "out": "M-Tyranitar#1",
+  "into": "Kingambit#1",
+  "diff": -0.0023569672917869867,
+  "se": 0.026361782843825367,
+  "avg_spe": [
+   93.5,
+   90.0
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Brisbane-11",
+  "plan": "Sand",
+  "kind": "control",
+  "out": "Corviknight#1",
+  "into": "Kingambit#1",
+  "diff": 0.06821908351680417,
+  "se": 0.04062735180397279,
+  "avg_spe": [
+   93.5,
+   90.66666666666667
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Brisbane-12",
+  "plan": "Sun",
+  "kind": "break",
+  "out": "Torkoal#6",
+  "into": "Gholdengo#2",
+  "diff": 0.0537167956351883,
+  "se": 0.03150547790390757,
+  "avg_spe": [
+   73.5,
+   84.16666666666667
+  ],
+  "slow": [
+   2,
+   1
+  ]
+ },
+ {
+  "start": "Brisbane-12",
+  "plan": "Sun",
+  "kind": "control",
+  "out": "Kingambit#13",
+  "into": "M-Garchomp Z#1",
+  "diff": 0.0887278559064012,
+  "se": 0.04289987708883849,
+  "avg_spe": [
+   73.5,
+   90.33333333333333
+  ],
+  "slow": [
+   2,
+   1
+  ]
+ },
+ {
+  "start": "Brisbane-15",
+  "plan": "Psychic Terrain",
+  "kind": "break",
+  "out": "Indeedee#4",
+  "into": "Kingambit#1",
+  "diff": -0.1512252370745336,
+  "se": 0.03888439792825993,
+  "avg_spe": [
+   102.66666666666667,
+   95.16666666666667
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Brisbane-15",
+  "plan": "Psychic Terrain",
+  "kind": "control",
+  "out": "M-Metagross#1",
+  "into": "Kingambit#1",
+  "diff": -0.042109531091684256,
+  "se": 0.0391197731892477,
+  "avg_spe": [
+   102.66666666666667,
+   92.66666666666667
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Brisbane-16",
+  "plan": "Sun",
+  "kind": "break",
+  "out": "M-Charizard Y#1",
+  "into": "Kingambit#5",
+  "diff": 0.03891460935539924,
+  "se": 0.03207451027973848,
+  "avg_spe": [
+   95.83333333333333,
+   87.5
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Brisbane-16",
+  "plan": "Sun",
+  "kind": "control",
+  "out": "Indeedee#25",
+  "into": "Kingambit#5",
+  "diff": 0.151078993139602,
+  "se": 0.03647525224018175,
+  "avg_spe": [
+   95.83333333333333,
+   88.33333333333333
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Frankfurt-02",
+  "plan": "Sun",
+  "kind": "break",
+  "out": "Torkoal#1",
+  "into": "Kingambit#1",
+  "diff": -0.090963154007337,
+  "se": 0.040612818119858285,
+  "avg_spe": [
+   78.5,
+   83.5
+  ],
+  "slow": [
+   4,
+   4
+  ]
+ },
+ {
+  "start": "Frankfurt-02",
+  "plan": "Sun",
+  "kind": "control",
+  "out": "Sylveon#3",
+  "into": "Kingambit#1",
+  "diff": -0.00904846843140309,
+  "se": 0.028333302948980683,
+  "avg_spe": [
+   78.5,
+   76.83333333333333
+  ],
+  "slow": [
+   4,
+   4
+  ]
+ },
+ {
+  "start": "Frankfurt-03",
+  "plan": "Sun",
+  "kind": "break",
+  "out": "M-Charizard Y#4",
+  "into": "Gholdengo#2",
+  "diff": -0.03310436076197261,
+  "se": 0.017761310042345425,
+  "avg_spe": [
+   95.66666666666667,
+   93.0
+  ],
+  "slow": [
+   1,
+   1
+  ]
+ },
+ {
+  "start": "Frankfurt-03",
+  "plan": "Sun",
+  "kind": "control",
+  "out": "Indeedee#20",
+  "into": "Gholdengo#2",
+  "diff": -0.11567622950819673,
+  "se": 0.03970146879038535,
+  "avg_spe": [
+   95.66666666666667,
+   93.83333333333333
+  ],
+  "slow": [
+   1,
+   1
+  ]
+ },
+ {
+  "start": "Frankfurt-06",
+  "plan": "Sun",
+  "kind": "break",
+  "out": "M-Charizard Y#3",
+  "into": "Kingambit#3",
+  "diff": -0.11001720052382272,
+  "se": 0.03626497050186545,
+  "avg_spe": [
+   72.83333333333333,
+   64.5
+  ],
+  "slow": [
+   3,
+   4
+  ]
+ },
+ {
+  "start": "Frankfurt-06",
+  "plan": "Sun",
+  "kind": "control",
+  "out": "Sylveon#5",
+  "into": "Kingambit#3",
+  "diff": 0.02760743087985238,
+  "se": 0.03651601181820034,
+  "avg_spe": [
+   72.83333333333333,
+   71.16666666666667
+  ],
+  "slow": [
+   3,
+   3
+  ]
+ },
+ {
+  "start": "Frankfurt-09",
+  "plan": "Tailwind",
+  "kind": "break",
+  "out": "M-Salamence#1",
+  "into": "M-Garchomp Z#1",
+  "diff": 0.03009733606557377,
+  "se": 0.021502586224660225,
+  "avg_spe": [
+   99.16666666666667,
+   104.33333333333333
+  ],
+  "slow": [
+   1,
+   1
+  ]
+ },
+ {
+  "start": "Frankfurt-09",
+  "plan": "Tailwind",
+  "kind": "control",
+  "out": "M-Raichu Y#1",
+  "into": "M-Garchomp Z#1",
+  "diff": 0.06693135245901638,
+  "se": 0.04018419038895985,
+  "avg_spe": [
+   99.16666666666667,
+   102.66666666666667
+  ],
+  "slow": [
+   1,
+   1
+  ]
+ },
+ {
+  "start": "Frankfurt-10",
+  "plan": "Trick Room",
+  "kind": "break",
+  "out": "Sinistcha#12",
+  "into": "Gholdengo#2",
+  "diff": 0.0029462960836698446,
+  "se": 0.04126640682309931,
+  "avg_spe": [
+   88.16666666666667,
+   90.5
+  ],
+  "slow": [
+   2,
+   2
+  ]
+ },
+ {
+  "start": "Frankfurt-10",
+  "plan": "Trick Room",
+  "kind": "control",
+  "out": "Kingambit#3",
+  "into": "Gholdengo#2",
+  "diff": -0.012185866474612284,
+  "se": 0.0404703130073253,
+  "avg_spe": [
+   88.16666666666667,
+   93.83333333333333
+  ],
+  "slow": [
+   2,
+   1
+  ]
+ },
+ {
+  "start": "Frankfurt-11",
+  "plan": "Rain",
+  "kind": "break",
+  "out": "Pelipper#9",
+  "into": "Gholdengo#2",
+  "diff": -0.057024817225474755,
+  "se": 0.028677438536488548,
+  "avg_spe": [
+   71.66666666666667,
+   74.83333333333333
+  ],
+  "slow": [
+   3,
+   3
+  ]
+ },
+ {
+  "start": "Frankfurt-11",
+  "plan": "Rain",
+  "kind": "control",
+  "out": "M-Golisopod#1",
+  "into": "M-Garchomp Z#1",
+  "diff": -0.02291000467399921,
+  "se": 0.04241570057761061,
+  "avg_spe": [
+   71.66666666666667,
+   90.16666666666667
+  ],
+  "slow": [
+   3,
+   2
+  ]
+ },
+ {
+  "start": "Frankfurt-12",
+  "plan": "Sand",
+  "kind": "break",
+  "out": "M-Tyranitar#1",
+  "into": "Kingambit#1",
+  "diff": -0.022668174140091587,
+  "se": 0.03183217037261503,
+  "avg_spe": [
+   93.5,
+   90.0
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Frankfurt-12",
+  "plan": "Sand",
+  "kind": "control",
+  "out": "Corviknight#7",
+  "into": "Kingambit#1",
+  "diff": 0.028544413036915687,
+  "se": 0.028468120320554242,
+  "avg_spe": [
+   93.5,
+   90.66666666666667
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Frankfurt-13",
+  "plan": "Tailwind",
+  "kind": "break",
+  "out": "M-Staraptor#1",
+  "into": "Kingambit#5",
+  "diff": -0.0006915983606557395,
+  "se": 0.011238022565900233,
+  "avg_spe": [
+   93.16666666666667,
+   83.16666666666667
+  ],
+  "slow": [
+   1,
+   2
+  ]
+ },
+ {
+  "start": "Frankfurt-13",
+  "plan": "Tailwind",
+  "kind": "control",
+  "out": "Gholdengo#2",
+  "into": "Kingambit#1",
+  "diff": 0.03980532786885247,
+  "se": 0.04006864353230583,
+  "avg_spe": [
+   93.16666666666667,
+   87.5
+  ],
+  "slow": [
+   1,
+   2
+  ]
+ },
+ {
+  "start": "Frankfurt-14",
+  "plan": "Rain",
+  "kind": "break",
+  "out": "Pelipper#7",
+  "into": "Kingambit#1",
+  "diff": -0.020290950050441812,
+  "se": 0.022490684952518786,
+  "avg_spe": [
+   80.33333333333333,
+   77.83333333333333
+  ],
+  "slow": [
+   2,
+   3
+  ]
+ },
+ {
+  "start": "Frankfurt-14",
+  "plan": "Rain",
+  "kind": "control",
+  "out": "M-Golisopod#1",
+  "into": "Kingambit#1",
+  "diff": 0.03142175806462759,
+  "se": 0.020877737427007548,
+  "avg_spe": [
+   80.33333333333333,
+   82.0
+  ],
+  "slow": [
+   2,
+   2
+  ]
+ },
+ {
+  "start": "Frankfurt-16",
+  "plan": "Tailwind",
+  "kind": "break",
+  "out": "M-Staraptor#1",
+  "into": "Kingambit#5",
+  "diff": 0.017008196721311476,
+  "se": 0.009812501632570837,
+  "avg_spe": [
+   93.16666666666667,
+   83.16666666666667
+  ],
+  "slow": [
+   1,
+   2
+  ]
+ },
+ {
+  "start": "Frankfurt-16",
+  "plan": "Tailwind",
+  "kind": "control",
+  "out": "M-Raichu Y#1",
+  "into": "Kingambit#5",
+  "diff": -0.034528688524590165,
+  "se": 0.04313935394077104,
+  "avg_spe": [
+   93.16666666666667,
+   79.83333333333333
+  ],
+  "slow": [
+   1,
+   2
+  ]
+ },
+ {
+  "start": "Louisville-01",
+  "plan": "Sun",
+  "kind": "break",
+  "out": "M-Charizard Y#4",
+  "into": "Kingambit#1",
+  "diff": -0.14974267082144924,
+  "se": 0.03572474614219416,
+  "avg_spe": [
+   77.0,
+   68.66666666666667
+  ],
+  "slow": [
+   3,
+   4
+  ]
+ },
+ {
+  "start": "Louisville-01",
+  "plan": "Sun",
+  "kind": "control",
+  "out": "Sylveon#16",
+  "into": "Kingambit#1",
+  "diff": 0.007120772850498652,
+  "se": 0.03249880843082981,
+  "avg_spe": [
+   77.0,
+   75.33333333333333
+  ],
+  "slow": [
+   3,
+   3
+  ]
+ },
+ {
+  "start": "Louisville-04",
+  "plan": "Rain",
+  "kind": "break",
+  "out": "Pelipper#1",
+  "into": "Kingambit#3",
+  "diff": -0.11129618885169011,
+  "se": 0.032747475256951875,
+  "avg_spe": [
+   80.66666666666667,
+   78.16666666666667
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Louisville-04",
+  "plan": "Rain",
+  "kind": "control",
+  "out": "Gholdengo#18",
+  "into": "Kingambit#1",
+  "diff": 0.04910443088548498,
+  "se": 0.039428253878735574,
+  "avg_spe": [
+   80.66666666666667,
+   75.0
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Louisville-05",
+  "plan": "Tailwind",
+  "kind": "break",
+  "out": "M-Salamence#5",
+  "into": "M-Garchomp Z#1",
+  "diff": 0.012628073770491806,
+  "se": 0.042444638538187245,
+  "avg_spe": [
+   92.5,
+   97.66666666666667
+  ],
+  "slow": [
+   1,
+   1
+  ]
+ },
+ {
+  "start": "Louisville-05",
+  "plan": "Tailwind",
+  "kind": "control",
+  "out": "Kingambit#4",
+  "into": "M-Garchomp Z#1",
+  "diff": 0.003150614754098358,
+  "se": 0.03769181235301413,
+  "avg_spe": [
+   92.5,
+   109.33333333333333
+  ],
+  "slow": [
+   1,
+   0
+  ]
+ },
+ {
+  "start": "Louisville-06",
+  "plan": "Rain",
+  "kind": "break",
+  "out": "Pelipper#31",
+  "into": "Kingambit#1",
+  "diff": -0.02937671199114249,
+  "se": 0.03624656794398282,
+  "avg_spe": [
+   86.83333333333333,
+   84.33333333333333
+  ],
+  "slow": [
+   2,
+   3
+  ]
+ },
+ {
+  "start": "Louisville-06",
+  "plan": "Rain",
+  "kind": "control",
+  "out": "Archaludon#4",
+  "into": "Kingambit#3",
+  "diff": 0.0006753791911201026,
+  "se": 0.04020110412028175,
+  "avg_spe": [
+   86.83333333333333,
+   81.0
+  ],
+  "slow": [
+   2,
+   3
+  ]
+ },
+ {
+  "start": "Louisville-07",
+  "plan": "Tailwind",
+  "kind": "break",
+  "out": "M-Salamence#5",
+  "into": "Gholdengo#2",
+  "diff": -0.05722336065573771,
+  "se": 0.04396178830323427,
+  "avg_spe": [
+   92.5,
+   86.5
+  ],
+  "slow": [
+   1,
+   1
+  ]
+ },
+ {
+  "start": "Louisville-07",
+  "plan": "Tailwind",
+  "kind": "control",
+  "out": "Basculegion#8",
+  "into": "Gholdengo#2",
+  "diff": -0.05909051427265022,
+  "se": 0.03965590966590175,
+  "avg_spe": [
+   92.5,
+   93.5
+  ],
+  "slow": [
+   1,
+   1
+  ]
+ },
+ {
+  "start": "Louisville-09",
+  "plan": "Sun",
+  "kind": "break",
+  "out": "M-Charizard Y#3",
+  "into": "Kingambit#3",
+  "diff": -0.11001720052382272,
+  "se": 0.03626497050186545,
+  "avg_spe": [
+   72.83333333333333,
+   64.5
+  ],
+  "slow": [
+   3,
+   4
+  ]
+ },
+ {
+  "start": "Louisville-09",
+  "plan": "Sun",
+  "kind": "control",
+  "out": "Sylveon#5",
+  "into": "Kingambit#3",
+  "diff": 0.02760743087985238,
+  "se": 0.03651601181820034,
+  "avg_spe": [
+   72.83333333333333,
+   71.16666666666667
+  ],
+  "slow": [
+   3,
+   3
+  ]
+ },
+ {
+  "start": "Louisville-10",
+  "plan": "Sun",
+  "kind": "break",
+  "out": "M-Charizard Y#1",
+  "into": "Incineroar#1",
+  "diff": -0.13719174863115816,
+  "se": 0.04321056655142101,
+  "avg_spe": [
+   94.33333333333333,
+   87.66666666666667
+  ],
+  "slow": [
+   1,
+   2
+  ]
+ },
+ {
+  "start": "Louisville-10",
+  "plan": "Sun",
+  "kind": "control",
+  "out": "Kingambit#2",
+  "into": "Incineroar#1",
+  "diff": -0.03867162572837335,
+  "se": 0.03488542319571022,
+  "avg_spe": [
+   94.33333333333333,
+   96.0
+  ],
+  "slow": [
+   1,
+   1
+  ]
+ },
+ {
+  "start": "Louisville-11",
+  "plan": "Tailwind",
+  "kind": "break",
+  "out": "Whimsicott#1",
+  "into": "Gholdengo#2",
+  "diff": -0.05716269368969364,
+  "se": 0.030414826126714187,
+  "avg_spe": [
+   97.66666666666667,
+   92.33333333333333
+  ],
+  "slow": [
+   1,
+   1
+  ]
+ },
+ {
+  "start": "Louisville-11",
+  "plan": "Tailwind",
+  "kind": "control",
+  "out": "Sneasler#14",
+  "into": "Gholdengo#2",
+  "diff": -0.0333842359998537,
+  "se": 0.044640417360279246,
+  "avg_spe": [
+   97.66666666666667,
+   91.66666666666667
+  ],
+  "slow": [
+   1,
+   1
+  ]
+ },
+ {
+  "start": "Louisville-12",
+  "plan": "Sun",
+  "kind": "break",
+  "out": "M-Charizard Y#3",
+  "into": "Kingambit#3",
+  "diff": -0.11001720052382272,
+  "se": 0.03626497050186545,
+  "avg_spe": [
+   72.83333333333333,
+   64.5
+  ],
+  "slow": [
+   3,
+   4
+  ]
+ },
+ {
+  "start": "Louisville-12",
+  "plan": "Sun",
+  "kind": "control",
+  "out": "Incineroar#2",
+  "into": "Kingambit#3",
+  "diff": 0.03395418564608157,
+  "se": 0.02920057251954437,
+  "avg_spe": [
+   72.83333333333333,
+   71.16666666666667
+  ],
+  "slow": [
+   3,
+   3
+  ]
+ },
+ {
+  "start": "Louisville-14",
+  "plan": "Rain",
+  "kind": "break",
+  "out": "Pelipper#26",
+  "into": "Kingambit#1",
+  "diff": -0.14982160690728397,
+  "se": 0.03551173162040042,
+  "avg_spe": [
+   86.33333333333333,
+   83.83333333333333
+  ],
+  "slow": [
+   1,
+   2
+  ]
+ },
+ {
+  "start": "Louisville-14",
+  "plan": "Rain",
+  "kind": "control",
+  "out": "Basculegion-F#1",
+  "into": "Kingambit#1",
+  "diff": -0.11228251906436856,
+  "se": 0.035025884841338936,
+  "avg_spe": [
+   86.33333333333333,
+   81.66666666666667
+  ],
+  "slow": [
+   1,
+   2
+  ]
+ },
+ {
+  "start": "Louisville-15",
+  "plan": "Sand",
+  "kind": "break",
+  "out": "M-Tyranitar#1",
+  "into": "Kingambit#1",
+  "diff": 0.03184984172203812,
+  "se": 0.03160362810024707,
+  "avg_spe": [
+   93.5,
+   90.0
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Louisville-15",
+  "plan": "Sand",
+  "kind": "control",
+  "out": "Corviknight#1",
+  "into": "Kingambit#1",
+  "diff": 0.07866104977928971,
+  "se": 0.036747404619094065,
+  "avg_spe": [
+   93.5,
+   90.66666666666667
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Louisville-16",
+  "plan": "Sun",
+  "kind": "break",
+  "out": "Torkoal#9",
+  "into": "Gholdengo#2",
+  "diff": 0.05107235896991969,
+  "se": 0.03377116198436583,
+  "avg_spe": [
+   70.83333333333333,
+   81.5
+  ],
+  "slow": [
+   3,
+   2
+  ]
+ },
+ {
+  "start": "Louisville-16",
+  "plan": "Sun",
+  "kind": "control",
+  "out": "M-Garchomp Z#14",
+  "into": "Gholdengo#2",
+  "diff": 0.05725747593744346,
+  "se": 0.0431266113561837,
+  "avg_spe": [
+   70.83333333333333,
+   59.666666666666664
+  ],
+  "slow": [
+   3,
+   3
+  ]
+ },
+ {
+  "start": "Recife-01",
+  "plan": "Sun",
+  "kind": "break",
+  "out": "M-Charizard Y#3",
+  "into": "Kingambit#3",
+  "diff": -0.20934847046928248,
+  "se": 0.043856530123940696,
+  "avg_spe": [
+   72.83333333333333,
+   64.5
+  ],
+  "slow": [
+   3,
+   4
+  ]
+ },
+ {
+  "start": "Recife-01",
+  "plan": "Sun",
+  "kind": "control",
+  "out": "Garchomp#1",
+  "into": "Kingambit#3",
+  "diff": -0.07556352459016394,
+  "se": 0.04185111282722037,
+  "avg_spe": [
+   72.83333333333333,
+   64.16666666666667
+  ],
+  "slow": [
+   3,
+   4
+  ]
+ },
+ {
+  "start": "Recife-02",
+  "plan": "Rain",
+  "kind": "break",
+  "out": "Politoed#2",
+  "into": "Kingambit#1",
+  "diff": -0.05773565573770492,
+  "se": 0.03422032399195624,
+  "avg_spe": [
+   77.66666666666667,
+   74.33333333333333
+  ],
+  "slow": [
+   3,
+   4
+  ]
+ },
+ {
+  "start": "Recife-02",
+  "plan": "Rain",
+  "kind": "control",
+  "out": "Incineroar#21",
+  "into": "Kingambit#1",
+  "diff": 0.006787909836065576,
+  "se": 0.01762997606431673,
+  "avg_spe": [
+   77.66666666666667,
+   76.0
+  ],
+  "slow": [
+   3,
+   3
+  ]
+ },
+ {
+  "start": "Recife-03",
+  "plan": "Tailwind",
+  "kind": "break",
+  "out": "M-Salamence#24",
+  "into": "M-Garchomp Z#1",
+  "diff": 0.0204405737704918,
+  "se": 0.042265646148049486,
+  "avg_spe": [
+   92.5,
+   97.66666666666667
+  ],
+  "slow": [
+   1,
+   1
+  ]
+ },
+ {
+  "start": "Recife-03",
+  "plan": "Tailwind",
+  "kind": "control",
+  "out": "Basculegion#8",
+  "into": "M-Garchomp Z#1",
+  "diff": -0.07540103241242899,
+  "se": 0.04282641305964975,
+  "avg_spe": [
+   92.5,
+   104.66666666666667
+  ],
+  "slow": [
+   1,
+   1
+  ]
+ },
+ {
+  "start": "Recife-05",
+  "plan": "Sun",
+  "kind": "break",
+  "out": "Torkoal#9",
+  "into": "Kingambit#1",
+  "diff": -0.04198236114069341,
+  "se": 0.0394937305756279,
+  "avg_spe": [
+   78.5,
+   83.5
+  ],
+  "slow": [
+   4,
+   4
+  ]
+ },
+ {
+  "start": "Recife-05",
+  "plan": "Sun",
+  "kind": "control",
+  "out": "M-Garchomp Z#3",
+  "into": "Kingambit#1",
+  "diff": -0.06972950549206802,
+  "se": 0.03802929186752208,
+  "avg_spe": [
+   78.5,
+   61.666666666666664
+  ],
+  "slow": [
+   4,
+   5
+  ]
+ },
+ {
+  "start": "Recife-07",
+  "plan": "Tailwind",
+  "kind": "break",
+  "out": "M-Salamence#1",
+  "into": "Kingambit#1",
+  "diff": -0.01644912963820141,
+  "se": 0.030896966459462067,
+  "avg_spe": [
+   107.5,
+   95.83333333333333
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Recife-07",
+  "plan": "Tailwind",
+  "kind": "control",
+  "out": "Rillaboom#1",
+  "into": "Kingambit#1",
+  "diff": 0.012551229508196721,
+  "se": 0.04038870665918159,
+  "avg_spe": [
+   107.5,
+   101.66666666666667
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Recife-09",
+  "plan": "Psychic Terrain",
+  "kind": "break",
+  "out": "Indeedee-F#27",
+  "into": "Kingambit#5",
+  "diff": -0.11100208693375585,
+  "se": 0.03970185535308854,
+  "avg_spe": [
+   98.5,
+   92.66666666666667
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Recife-09",
+  "plan": "Psychic Terrain",
+  "kind": "control",
+  "out": "Talonflame#5",
+  "into": "Kingambit#5",
+  "diff": 0.011382549219047734,
+  "se": 0.025299818427892588,
+  "avg_spe": [
+   98.5,
+   85.83333333333333
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Recife-10",
+  "plan": "Trick Room",
+  "kind": "break",
+  "out": "Sinistcha#23",
+  "into": "M-Garchomp Z#1",
+  "diff": -0.01936215733736113,
+  "se": 0.04291948668079115,
+  "avg_spe": [
+   89.33333333333333,
+   102.83333333333333
+  ],
+  "slow": [
+   2,
+   2
+  ]
+ },
+ {
+  "start": "Recife-10",
+  "plan": "Trick Room",
+  "kind": "control",
+  "out": "Sneasler#3",
+  "into": "M-Garchomp Z#1",
+  "diff": -0.05147151319045842,
+  "se": 0.03677517551923994,
+  "avg_spe": [
+   89.33333333333333,
+   94.5
+  ],
+  "slow": [
+   2,
+   2
+  ]
+ },
+ {
+  "start": "Recife-11",
+  "plan": "Sun",
+  "kind": "break",
+  "out": "M-Charizard Y#1",
+  "into": "Incineroar#21",
+  "diff": -0.08295067223738245,
+  "se": 0.030501327849234275,
+  "avg_spe": [
+   87.0,
+   80.33333333333333
+  ],
+  "slow": [
+   3,
+   4
+  ]
+ },
+ {
+  "start": "Recife-11",
+  "plan": "Sun",
+  "kind": "control",
+  "out": "Sylveon#2",
+  "into": "Incineroar#21",
+  "diff": -0.00635245901639344,
+  "se": 0.02147849742196095,
+  "avg_spe": [
+   87.0,
+   87.0
+  ],
+  "slow": [
+   3,
+   3
+  ]
+ },
+ {
+  "start": "Recife-12",
+  "plan": "Tailwind",
+  "kind": "break",
+  "out": "Whimsicott#1",
+  "into": "Incineroar#1",
+  "diff": 0.028534836065573773,
+  "se": 0.022903439853128805,
+  "avg_spe": [
+   102.83333333333333,
+   93.5
+  ],
+  "slow": [
+   1,
+   2
+  ]
+ },
+ {
+  "start": "Recife-12",
+  "plan": "Tailwind",
+  "kind": "control",
+  "out": "Sneasler#11",
+  "into": "Incineroar#1",
+  "diff": -0.03975068027524012,
+  "se": 0.038143311170234104,
+  "avg_spe": [
+   102.83333333333333,
+   92.83333333333333
+  ],
+  "slow": [
+   1,
+   2
+  ]
+ },
+ {
+  "start": "Recife-13",
+  "plan": "Psychic Terrain",
+  "kind": "break",
+  "out": "Indeedee-F#27",
+  "into": "Kingambit#5",
+  "diff": -0.030451443612947347,
+  "se": 0.039652715560221014,
+  "avg_spe": [
+   98.5,
+   92.66666666666667
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Recife-13",
+  "plan": "Psychic Terrain",
+  "kind": "control",
+  "out": "Talonflame#5",
+  "into": "Kingambit#5",
+  "diff": -0.002746456792583068,
+  "se": 0.03244239744257153,
+  "avg_spe": [
+   98.5,
+   85.83333333333333
+  ],
+  "slow": [
+   0,
+   1
+  ]
+ },
+ {
+  "start": "Recife-15",
+  "plan": "Tailwind",
+  "kind": "break",
+  "out": "M-Staraptor#1",
+  "into": "Kingambit#5",
+  "diff": -0.0006915983606557395,
+  "se": 0.011238022565900233,
+  "avg_spe": [
+   93.16666666666667,
+   83.16666666666667
+  ],
+  "slow": [
+   1,
+   2
+  ]
+ },
+ {
+  "start": "Recife-15",
+  "plan": "Tailwind",
+  "kind": "control",
+  "out": "Rillaboom#1",
+  "into": "Kingambit#5",
+  "diff": -0.023053278688524595,
+  "se": 0.040207229806182895,
+  "avg_spe": [
+   93.16666666666667,
+   87.33333333333333
+  ],
+  "slow": [
+   1,
+   2
+  ]
+ },
+ {
+  "start": "trick_room_six",
+  "plan": "Trick Room",
+  "kind": "break",
+  "out": "Indeedee-F#24",
+  "into": "Gholdengo#2",
+  "diff": 0.04839786238035399,
+  "se": 0.02780253333876333,
+  "avg_spe": [
+   58.833333333333336,
+   58.666666666666664
+  ],
+  "slow": [
+   4,
+   4
+  ]
+ },
+ {
+  "start": "trick_room_six",
+  "plan": "Trick Room",
+  "kind": "control",
+  "out": "Incineroar#16",
+  "into": "Gholdengo#2",
+  "diff": -0.025430408099406002,
+  "se": 0.03711839338962145,
+  "avg_spe": [
+   58.833333333333336,
+   62.833333333333336
+  ],
+  "slow": [
+   4,
+   3
+  ]
+ }
+]

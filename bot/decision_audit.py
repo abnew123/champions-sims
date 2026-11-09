@@ -23,9 +23,12 @@ def games():
     pool ={t['name']: t for t in json.load(open(pf))} if os.path.exists(pf) else {}
     # AUDIT_FORMAT / AUDIT_SINCE / AUDIT_UNTIL (2026-10-14, the Bo1 slump): only that format's games, recorded in [since, until) (UTC ISO)
     fmt, since, until = os.environ.get('AUDIT_FORMAT'), os.environ.get('AUDIT_SINCE', ''), os.environ.get('AUDIT_UNTIL', '9')
+    # AUDIT_ROOMS (2026-11-08, the user: what do the opponents who outplay the bot do differently?): a file of room ids, one a line; only those
+    rooms = set(open(os.environ['AUDIT_ROOMS']).read().split()) if os.environ.get('AUDIT_ROOMS') else None
     for g in G:
         if fmt and g.get('format', 'gen9championsvgc2026regmcbo3') != fmt: continue
         if not (since <= g['when'] < until): continue
+        if rooms is not None and g['room'] not in rooms: continue
         f = os.path.join(ROOT, 'bot', 'out', g['room'] + '.log')
         team = teams.get(g.get('team')) or pool.get(g.get('team'))
         if os.path.exists(f) and team: yield g, team, open(f, errors='ignore').read().split('\n')
@@ -68,7 +71,7 @@ def build(prefix):
                     sp['acts'] = [[act(me, 0), act(me, 1)], [act(op, 0), act(op, 1)]]
                     turn_specs.append((w, sp))
                 meta['turns'][name] = {'room': g['room'], 'turn': turn, 'team': g['team'], 'won': g['won'], 'w': [w for w, _ in specs]}
-            elif req.get('forceSwitch') and not req.get('wait'):
+            elif req.get('forceSwitch') and not req.get('wait') and not os.environ.get('AUDIT_NO_REPS'):   # AUDIT_NO_REPS: turn decisions only
                 need = req['forceSwitch']; mons = req['side']['pokemon']; slots = [k for k, m in enumerate(need) if m]
                 bench = [p['details'].split(',')[0] for p in mons if not p.get('active') and not p['condition'].endswith(' fnt')]
                 cands = list(itertools.permutations(bench, min(len(slots), len(bench))))

@@ -6,14 +6,22 @@ sides and the sixes in bot/teams.json are left out. Cards, their models and thei
 built from this pool, weighted, in the shapes opp_pool.model and opp_pool.sixes write. No usernames are stored: "player" is a number
 within the file.
 
-  sheet.json  "pool": {"from": "2026-10-13", "to": "2026-11-13", "by_player": true}
-  python3 sheetkit/kit.py <team> opponents     builds work/pool.json, then the cards in sheets/<team>/opponents/ (opponents.py)"""
+The cards' categories are Battle sim's core rules (pssim/results/core_rules_both_100.json, mined from September's regionals and ladder)
+unless the pool names its own "rules" file: when that file does not exist yet, build() mines it from the window's teams with Battle
+sim's method (cluster_opps.mine_rules: greedy above-chance species cores, a pair grown to a triple or split on a 30-70% species), each
+player's distinct sixes counted once, at "min_support" teams and "lift" (default 60 and 2.0, as the September rules' lift).
+
+  sheet.json  "pool": {"from": "2026-10-13", "to": "2026-11-13", "by_player": true, "rules": "opponents/rules.json", "min_support": 60}
+  python3 sheetkit/kit.py <team> opponents     builds work/pool.json (and the rules, if missing), then the cards in
+                                               sheets/<team>/opponents/ (opponents.py)"""
 import os, sys, json, glob, random, datetime, collections
 from common import ROOT, PSSIM, rj, wj
 
 RULES_FILE = os.path.join(PSSIM, 'results', 'core_rules_both_100.json')
 
 def path(sheet): return sheet.w('pool.json')
+def rules_path(sheet): return sheet.p(sheet.cfg['pool']['rules']) if sheet.cfg.get('pool', {}).get('rules') else RULES_FILE
+def rules(sheet): return rj(rules_path(sheet))
 def card_group(e): return e['group'] if e['group'] != 'other' else 'other:' + e['arch']
 
 def build(sheet):
@@ -23,7 +31,7 @@ def build(sheet):
     from pro_replays import arch
     from cluster_opps import tag, norm
     cfg = sheet.cfg['pool']; A, B = cfg['from'], cfg['to']
-    RP = os.path.join(PSSIM, 'replays_protect'); rules = rj(RULES_FILE)
+    RP = os.path.join(PSSIM, 'replays_protect')
     own = {frozenset(s['species'] for s in t['sets']) for t in rj(os.path.join(ROOT, 'bot', 'teams.json'))}
     bot = {}                                                     # our ladder bot's games: game id -> its side
     for l in open(os.path.join(ROOT, 'bot', 'out', 'games.jsonl')):
@@ -47,6 +55,8 @@ def build(sheet):
                  'mega': sd['mega'], 'day': day(t), 'player': players.setdefault(who.get(s, gid + s), len(players))}
             entries.append(e); by_six[frozenset(species)].append(e)
     players.clear()
+    if not os.path.exists(rules_path(sheet)): mine(sheet, entries)
+    rules = rj(rules_path(sheet))
     rng = random.Random(0)                                       # brings filled to four as opp_pool.build does
     for e in entries:
         species = [m['species'] for m in e['six']]; bring = list(e['seen'])[:4]; e['bring_seen'] = len(bring)
@@ -66,6 +76,27 @@ def build(sheet):
     W = sum(e['w'] for e in entries)
     print(f"{len(entries)} sides from {len(set(e['id'] for e in entries))} games, {A} to {B}; {len(set(e['player'] for e in entries))} players; "
           f"weight {W:.0f}; in a core group {100 * sum(e['w'] for e in entries if e['group'] != 'other') / W:.1f}%")
+
+def mine(sheet, entries):
+    """the sheet's own categories from its window (see the top): cluster_opps.rules' output shape, plus a .txt summary beside it"""
+    from cluster_opps import mine_rules, norm
+    from pro_replays import arch
+    cfg = sheet.cfg['pool']; ms = cfg.get('min_support', 60); lift = cfg.get('lift', 2.0)
+    rows = sorted({(e['player'], frozenset(norm(m['species']) for m in e['six'])) for e in entries}, key=lambda r: (r[0], sorted(r[1])))
+    rows = [(six, 'ladder') for _, six in rows]; n = len(rows)
+    groups, left, sixes = mine_rules(rows, ms, lift); js = []
+    txt = [f"{n} teams (each player's distinct sixes once, public Bo3 {cfg['from']} to {cfg['to']}); min support {ms}, lift >= {lift}: "
+           f"{len(groups)} rules cover {100 * (1 - len(left) / n):.0f}%, other {len(left)}",
+           "apply in order; the first rule whose species are all present (and none of the excluded ones) names the team"]
+    for k, (core, none, members) in enumerate(groups):
+        comp = collections.Counter(arch(sorted(sixes[i])) for i in members); near = comp.most_common(1)[0][0]; tot = len(members)
+        others = collections.Counter(x for i in members for x in sixes[i] if x not in core)
+        name = f"{near}: {' + '.join(sorted(core))}" + (f" (no {', '.join(sorted(none))})" if none else '')
+        js.append({'name': name, 'all': sorted(core), 'none': sorted(none), 'teams': tot, 'nearest': near,
+                   'with': [(x, round(v / tot, 3)) for x, v in others.most_common(8)], 'rules_now': {a: round(v / tot, 3) for a, v in comp.items()}})
+        txt.append(f"{k + 1:2d}. {name:62s} {tot:5d} teams | usually with {', '.join(f'{x} {100 * v / tot:.0f}%' for x, v in others.most_common(4))}")
+    wj(js, rules_path(sheet), indent=1); open(rules_path(sheet)[:-5] + '.txt', 'w').write('\n'.join(txt) + '\n')
+    print('\n'.join(txt))
 
 def load(sheet):
     if not os.path.exists(path(sheet)): sys.exit(f"no {os.path.relpath(path(sheet), ROOT)}: run `kit.py {sheet.slug} opponents` first")

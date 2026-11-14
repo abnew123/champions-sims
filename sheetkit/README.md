@@ -96,7 +96,9 @@ other game indices (`<folder>.run.json` records them). Move the old folder aside
   cached public Bo3 games of that window (`pssim/protect_replays.py new` fetches the newest first; our bot's sides and own sixes are left
   out) and the cards from it in `sheets/<team>/opponents/`, same rules and shapes; with `by_player` every entry is weighted so each
   player counts once per card (card shares, lead models and sixes), since the busiest players, mostly ladder bots, would otherwise fill a
-  card with one team. Everything after that runs on the sheet's own cards (`sheetkit/pool.py`).
+  card with one team. With `"rules": "opponents/rules.json"` the sheet also gets its own categories, mined from the window's teams with
+  Battle sim's method (`cluster_opps.mine_rules`, each player's distinct sixes once, `"min_support"` 60 and `"lift"` 2.0 by default)
+  when that file does not exist yet. Everything after that runs on the sheet's own cards (`sheetkit/pool.py`).
 
 A result folder records which opponents it was played against, and the kit refuses to mix them.
 

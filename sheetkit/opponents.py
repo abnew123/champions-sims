@@ -59,19 +59,19 @@ def build(sheet=None):
     py = VENV_PY if os.path.exists(VENV_PY) else sys.executable
     if sheet is not None and sheet.cfg.get('pool'):
         import pool as POOL
-        pool = POOL.load(sheet); out = sheet.p('opponents'); mine = pool
+        pool = POOL.load(sheet); out = sheet.p('opponents'); mine = pool; rules = POOL.rules(sheet)
         src = f"{os.path.relpath(POOL.path(sheet), ROOT)} (Showdown Reg M-C Bo3 sides with open team sheets, {sheet.cfg['pool']['from']} to " \
               f"{sheet.cfg['pool']['to']}{', one vote per player and card' if sheet.cfg['pool'].get('by_player') else ''})"
     else:
         if not os.path.exists(os.path.join(PSSIM, 'opp_pool.json')): subprocess.run([py, 'opp_pool.py', 'build'], cwd=PSSIM, check=True, stdout=subprocess.DEVNULL)
         pool = rj(os.path.join(PSSIM, 'opp_pool.json'))['entries']; out = OUT; mine = None
         for e in pool: e['w'] = 1
-        src = 'pssim/opp_pool.json (Showdown Reg M-C Bo3 sides with open team sheets)'
+        src = 'pssim/opp_pool.json (Showdown Reg M-C Bo3 sides with open team sheets)'; rules = rj(RULES)
     N = sum(e['w'] for e in pool); count = collections.Counter(); other = collections.Counter()
     for e in pool:
         count[e['group']] += e['w']
         if e['group'] == 'other': other[e['arch']] += e['w']
-    rules = rj(RULES); os.makedirs(out, exist_ok=True); tmp = os.path.join(out, 'tmp_model.json')
+    os.makedirs(out, exist_ok=True); tmp = os.path.join(out, 'tmp_model.json')
     cards, models, guide = [], {}, []
     def add(name, group, tab, label, rule):
         m = pool_model(group, tmp, mine)
@@ -89,7 +89,8 @@ def build(sheet=None):
     if os.path.exists(tmp): os.remove(tmp)
     tabs = [{'key': k, 'tab': TAB_NAME[k], 'cards': [c['model'] for c in sorted((c for c in cards if c['tab'] == k), key=lambda c: (c['rule'] is None, -c['share']))]}
             for k in TAB_ORDER]
-    wj({'source': src + ' grouped by pssim/results/core_rules_both_100.json',
+    rsrc = os.path.relpath(POOL.rules_path(sheet), ROOT) if mine else 'pssim/results/core_rules_both_100.json'
+    wj({'source': src + ' grouped by ' + rsrc,
         'teams': round(N, 2) if mine else N, 'in_a_core_group': round(1 - count['other'] / N, 3), 'cards': cards, 'tabs': [t for t in tabs if t['cards']],
         'guide_rules': guide_rules(rules, cards), 'guide_fallback': FALLBACK_GUIDE}, os.path.join(out, 'cards.json'), indent=1)
     wj(models, os.path.join(out, 'opp_model.json'))

@@ -7,6 +7,8 @@
   python3 sheetkit/kit.py <team> grid [--workers N]        one-on-one cells for the six (the full-battle planner needs them)
   python3 sheetkit/kit.py <team> charts [--workers N]      Coverage and Matchups for the page, from the grid -> charts.json
   python3 sheetkit/kit.py <team> speed                     the Speed table: the six among the common opposing spreads -> speed.json
+  python3 sheetkit/kit.py <team> opponents [cards]         a sheet with its own pool (sheet.json "pool"): work/pool.json from the
+                                                           replays in its window, then its cards in sheets/<team>/opponents/
   python3 sheetkit/kit.py <team> matrix jobs               all 90 fours x each archetype's opposing leads
   python3 sheetkit/kit.py <team> matrix run [--games 16] [--g0 600] [--threads N] [--only 0,3] [--setup NAME]
   python3 sheetkit/kit.py <team> matrix report             best fours, worth of bringing each Pokemon, species tells
@@ -167,6 +169,11 @@ def main():
     import procs; procs.own(sheet)                               # show as <prefix>-py in top
     if a.step == 'status': status(sheet)
     elif a.step == 'smoke': smoke(sheet)
+    elif a.step == 'opponents':                                    # a sheet's own pool (sheet.json "pool") and its cards
+        if not sheet.cfg.get('pool'): sys.exit('this sheet uses the kit\'s cards (sheetkit/opponents/); give it a "pool" in sheet.json for its own')
+        py, env = procs.python(sheet, venv=True)
+        if a.sub != 'cards': run([py, os.path.join(KIT, 'pool.py'), sheet.slug, 'build'], env=env)     # 'opponents cards': the cards only
+        import opponents; opponents.build(sheet); use_opponents('cards', sheet.p('opponents'))
     elif a.step == 'flagged': flagged(sheet, a.write, tuple(x.strip() for x in (a.moves or '').split(',') if x.strip()), a.stones or 0, a.moves_only, a.tag)
     elif a.step == 'grid':
         import grid; grid.build(sheet, threads_arg(a.threads, a.force))

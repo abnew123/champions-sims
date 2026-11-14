@@ -8,7 +8,8 @@ most common set), so every kit step runs on cards exactly as it ran on archetype
 
   python3 sheetkit/opponents.py        -> sheetkit/opponents/cards.json (the cards, their shares, tabs and guide) and
                                           sheetkit/opponents/opp_model.json (the models, keyed by card name)
-A sheet uses them with "opponents": "cards" in its sheet.json."""
+A sheet uses them with "opponents": "cards" in its sheet.json. A sheet with its own pool (sheet.json "pool", see pool.py) gets its own
+cards from that pool, weighted, in sheets/<team>/opponents/ (`kit.py <team> opponents`)."""
 import json, os, re, subprocess, sys, collections
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import KIT, ROOT, PSSIM, VENV_PY, rj, wj
@@ -28,7 +29,12 @@ FALLBACK_GUIDE = [['Gengar', 'perish'], ['Charizard + Pelipper or Politoed', 'ra
 
 def slug(s): return re.sub(r'[^a-z0-9]+', '-', s.lower()).strip('-')
 
-def pool_model(group, out):
+def pool_model(group, out, entries=None):
+    if entries is not None:                                     # a sheet's own pool (pool.py), weighted
+        import pool as POOL
+        m = POOL.model(entries, group, 12)
+        m['pairs'] = [p for p in m['pairs'] if p['n'] >= MIN_PAIR][:6]
+        return m
     py = VENV_PY if os.path.exists(VENV_PY) else sys.executable
     subprocess.run([py, 'opp_pool.py', 'model', group, out, '12'], cwd=PSSIM, check=True, stdout=subprocess.DEVNULL)
     m = rj(out)
@@ -48,15 +54,27 @@ def guide_rules(rules, cards):
         out.append({'label': label, 'tab': tab, 'card': card, 'all': r['all'], 'none': r['none']})
     return out
 
-def build():
+def build(sheet=None):
+    """Battle sim's pool -> sheetkit/opponents/; with a sheet that has its own pool, that pool (weighted) -> sheets/<team>/opponents/"""
     py = VENV_PY if os.path.exists(VENV_PY) else sys.executable
-    if not os.path.exists(os.path.join(PSSIM, 'opp_pool.json')): subprocess.run([py, 'opp_pool.py', 'build'], cwd=PSSIM, check=True, stdout=subprocess.DEVNULL)
-    pool = rj(os.path.join(PSSIM, 'opp_pool.json'))['entries']; N = len(pool)
-    count = collections.Counter(e['group'] for e in pool); other = collections.Counter(e['arch'] for e in pool if e['group'] == 'other')
-    rules = rj(RULES); os.makedirs(OUT, exist_ok=True); tmp = os.path.join(OUT, 'tmp_model.json')
+    if sheet is not None and sheet.cfg.get('pool'):
+        import pool as POOL
+        pool = POOL.load(sheet); out = sheet.p('opponents'); mine = pool
+        src = f"{os.path.relpath(POOL.path(sheet), ROOT)} (Showdown Reg M-C Bo3 sides with open team sheets, {sheet.cfg['pool']['from']} to " \
+              f"{sheet.cfg['pool']['to']}{', one vote per player and card' if sheet.cfg['pool'].get('by_player') else ''})"
+    else:
+        if not os.path.exists(os.path.join(PSSIM, 'opp_pool.json')): subprocess.run([py, 'opp_pool.py', 'build'], cwd=PSSIM, check=True, stdout=subprocess.DEVNULL)
+        pool = rj(os.path.join(PSSIM, 'opp_pool.json'))['entries']; out = OUT; mine = None
+        for e in pool: e['w'] = 1
+        src = 'pssim/opp_pool.json (Showdown Reg M-C Bo3 sides with open team sheets)'
+    N = sum(e['w'] for e in pool); count = collections.Counter(); other = collections.Counter()
+    for e in pool:
+        count[e['group']] += e['w']
+        if e['group'] == 'other': other[e['arch']] += e['w']
+    rules = rj(RULES); os.makedirs(out, exist_ok=True); tmp = os.path.join(out, 'tmp_model.json')
     cards, models, guide = [], {}, []
     def add(name, group, tab, label, rule):
-        m = pool_model(group, tmp)
+        m = pool_model(group, tmp, mine)
         if not m['pairs']: print(f"  skipped {name}: no lead pair seen {MIN_PAIR}+ times"); return
         share = (count[group] if not group.startswith('other:') else other[group[6:]]) / N
         models[name] = {'n': m['n'], 'sets': m['sets'], 'pairs': m['pairs']}
@@ -68,13 +86,13 @@ def build():
         add(r['name'], r['name'], TAB[arch], label, {'all': r['all'], 'none': r['none']})
     for arch in TAB:
         if other[arch] / N >= MIN_OTHER: add(f'Other {arch}', f'other:{arch}', TAB[arch], 'anything else', None)
-    os.remove(tmp)
+    if os.path.exists(tmp): os.remove(tmp)
     tabs = [{'key': k, 'tab': TAB_NAME[k], 'cards': [c['model'] for c in sorted((c for c in cards if c['tab'] == k), key=lambda c: (c['rule'] is None, -c['share']))]}
             for k in TAB_ORDER]
-    wj({'source': 'pssim/opp_pool.json (Showdown Reg M-C Bo3 sides with open team sheets) grouped by pssim/results/core_rules_both_100.json',
-        'teams': N, 'in_a_core_group': round(1 - count['other'] / N, 3), 'cards': cards, 'tabs': [t for t in tabs if t['cards']],
-        'guide_rules': guide_rules(rules, cards), 'guide_fallback': FALLBACK_GUIDE}, os.path.join(OUT, 'cards.json'), indent=1)
-    wj(models, os.path.join(OUT, 'opp_model.json'))
-    print(f"{len(cards)} cards ({sum(c['share'] for c in cards):.0f}% of {N} teams) -> sheetkit/opponents/")
+    wj({'source': src + ' grouped by pssim/results/core_rules_both_100.json',
+        'teams': round(N, 2) if mine else N, 'in_a_core_group': round(1 - count['other'] / N, 3), 'cards': cards, 'tabs': [t for t in tabs if t['cards']],
+        'guide_rules': guide_rules(rules, cards), 'guide_fallback': FALLBACK_GUIDE}, os.path.join(out, 'cards.json'), indent=1)
+    wj(models, os.path.join(out, 'opp_model.json'))
+    print(f"{len(cards)} cards ({sum(c['share'] for c in cards):.0f}% of {N:.0f} teams) -> {os.path.relpath(out, ROOT)}/")
 
 if __name__ == '__main__': build()

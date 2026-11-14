@@ -15,24 +15,27 @@ def wj(obj, path, **kw):
 # The opponents a sheet is built against. Two kinds, chosen by the sheet's "opponents" (see use_opponents):
 #   archetypes  (the default, the sheets through 2026-10-05) ten archetype models mined from replays (pssim/opp_model_a/b.json)
 #   cards       real teams grouped by core rules (sheetkit/opponents/, built by opponents.py): one card per group, shown under the tab
-#               of its nearest archetype, plus one "other" card per archetype
+#               of its nearest archetype, plus one "other" card per archetype; a sheet with its own pool (sheet.json "pool", pool.py)
+#               has its own cards in sheets/<team>/opponents/
 # ARCHS (the opponent names every step iterates over, in a fixed order), SHARE, TABS, BY_KEY, GUIDE and CARDS are filled in place, so
 # modules that imported them by name see the sheet's opponents.
 _A = rj(os.path.join(KIT, 'archetypes.json'))
 THEIR_NAMES = _A['their_names']                                  # how opposing Pokemon are written on the page
 ARCHS, SHARE, TABS, BY_KEY, GUIDE, CARDS = [], {}, [], {}, [], {}
-OPPONENTS = {'kind': 'archetypes'}
+OPPONENTS = {'kind': 'archetypes', 'dir': os.path.join(KIT, 'opponents')}
 
-def use_opponents(kind='archetypes'):
+def use_opponents(kind='archetypes', d=None):
     ARCHS.clear(); SHARE.clear(); TABS.clear(); BY_KEY.clear(); GUIDE.clear(); CARDS.clear(); OPPONENTS['kind'] = kind
+    OPPONENTS['dir'] = d = d or os.path.join(KIT, 'opponents')    # where the cards are: the kit's, or a sheet's own (its "pool")
     if kind == 'archetypes':
         os.environ.pop('OPP_MODEL', None)
         for a in _A['archetypes']:
             ARCHS.append(a['model']); SHARE[a['model']] = a['share']; BY_KEY[a['key']] = dict(a, models=[a['model']])
         TABS.extend(BY_KEY[k] for k in _A['tab_order']); GUIDE.extend(_A['guide'])
     elif kind == 'cards':
-        C = rj(os.path.join(KIT, 'opponents', 'cards.json'))
-        os.environ['OPP_MODEL'] = os.path.join(KIT, 'opponents', 'opp_model.json')       # every node child (t1sim.js) reads these models
+        if not os.path.exists(os.path.join(d, 'cards.json')): sys.exit(f"no cards in {os.path.relpath(d, ROOT)}: run the 'opponents' step first")
+        C = rj(os.path.join(d, 'cards.json'))
+        os.environ['OPP_MODEL'] = os.path.join(d, 'opp_model.json')                      # every node child (t1sim.js) reads these models
         for c in C['cards']: ARCHS.append(c['model']); SHARE[c['model']] = c['share']; CARDS[c['model']] = c
         for t in C['tabs']: BY_KEY[t['key']] = {'key': t['key'], 'tab': t['tab'], 'models': t['cards']}; TABS.append(BY_KEY[t['key']])
         GUIDE.extend(C['guide_fallback'])
@@ -60,7 +63,8 @@ class Sheet:
         self.lead_order = self.cfg.get('lead_order', self.names) # how a lead pair is written (and simulated on turn one): first name first
         assert sorted(self.lead_order) == sorted(self.names), 'lead_order must list the same six as team.json'
         self.my_names = self.cfg.get('my_names', {})             # display names for my Pokemon, e.g. {"Indeedee-F": "Indeedee"}
-        use_opponents(self.cfg.get('opponents', 'archetypes'))
+        if self.cfg.get('pool') and not os.path.exists(self.p('opponents', 'cards.json')): return     # the 'opponents' step builds them
+        use_opponents(self.cfg.get('opponents', 'archetypes'), self.p('opponents') if self.cfg.get('pool') else None)
     def p(self, *parts): return os.path.join(self.dir, *parts)
     def w(self, *parts): return os.path.join(self.dir, 'work', *parts)
     def lead(self, pair): return sorted(pair, key=self.lead_order.index)

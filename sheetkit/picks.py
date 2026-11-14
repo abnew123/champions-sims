@@ -68,8 +68,15 @@ def same_job(r, j):
     if (r.get('arch'), r.get('lead'), r.get('back')) != (m.get('arch'), *mine): return False
     return 'their_lead' not in m or (r.get('their_lead'), r.get('their_back')) == (m['their_lead'], m['their_back'])
 
-def grid_hash(sheet):
+def planner_grid(sheet, S):
+    """GRID_DIR for the battles: the sheet's grid, or an empty folder for a setup with "grid": false (the value-net setups since v26:
+    the net was fitted without one-on-one cells, and the bot and Team search give the planner none)"""
+    if S.get('grid', True): return sheet.grid_dir()
+    d = sheet.w('empty_grid'); os.makedirs(d, exist_ok=True); return d
+
+def grid_hash(sheet, S=None):
     """the one-on-one grid the battles read (GRID_DIR): a rebuilt grid can change the games, so a result folder records it"""
+    if S is not None and not S.get('grid', True): return 'none'
     h = hashlib.sha1()                                            # the fields the planner reads; the detail text ('det') is display only
     for f in sorted(glob.glob(os.path.join(sheet.grid_dir(), 'gx_cells_*.json'))):
         cells = rj(f); h.update(json.dumps({k: [c.get('v'), c.get('roll')] for k, c in sorted(cells.items())}).encode())   # plan.rs reads v and roll
@@ -97,7 +104,7 @@ def battle_run(sheet, step, jobs_path, outdir, games, g0, threads, setup, log, o
     Resumes: jobs with a result file are skipped."""
     S = sim_setup(setup or os.environ.get('SHEET_SETUP') or sheet.cfg.get('setup')); jobs = rj(jobs_path); sd = outdir + '.starts'; os.makedirs(outdir, exist_ok=True)   # a sheet can pin its setup (sheet.json 'setup')
     stamp(outdir, {'setup': S.get('games', S['name']), 'games': games, 'g0': g0, 'team': team_hash(sheet), 'opponents': OPPONENTS['kind'],
-                   'grid': grid_hash(sheet)})      # 'games': a faster build of the same games; 'grid': the planner's one-on-one grid, which its value reads
+                   'grid': grid_hash(sheet, S)})      # 'games': a faster build of the same games; 'grid': the planner's one-on-one grid, which its value reads
     stale = 0
     for f in glob.glob(os.path.join(outdir, '*.json')):           # a result cut off by a stopped run would count as done: drop it
         try: r = json.load(open(f))
@@ -125,7 +132,7 @@ def battle_run(sheet, step, jobs_path, outdir, games, g0, threads, setup, log, o
         with concurrent.futures.ThreadPoolExecutor(min(16, threads)) as ex:
             n = sum(ex.map(lambda c: make_starts(sheet, jobs, parts[c], f'{sd}/{c}.jsonl', games, g0), range(nproc)))
         log.line(f"{now()} {n} starting positions")
-        env = dict(os.environ, **S['env'], GRID_DIR=sheet.grid_dir())
+        env = dict(os.environ, **S['env'], GRID_DIR=planner_grid(sheet, S))
         with open(outdir + '.err', 'a') as err:
             binary = procs.exe(sheet, S['binary'], S['binary'])
             ps = [subprocess.Popen(['nice', '-n', '10', binary, 'battle', S['engine_data'], f'{sd}/{c}.jsonl', outdir, str(min(per, threads))],

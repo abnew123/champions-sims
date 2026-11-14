@@ -91,6 +91,13 @@ other game indices (`<folder>.run.json` records them). Move the old folder aside
   They are numbered after the pool's sixes, so earlier results keep theirs. `optimal run --only extra` screens every four already
   searched against them and plays every candidate against the answers; then the usual `more` rounds, `report` and `adopt`.
 
+- A sheet built for a later meta than Battle sim's pool (Sep 9 - Oct 4) can have its own pool: sheet.json
+  `"pool": {"from": "2026-10-13", "to": "2026-11-13", "by_player": true}`. `kit.py <team> opponents` builds `work/pool.json` from the
+  cached public Bo3 games of that window (`pssim/protect_replays.py new` fetches the newest first; our bot's sides and own sixes are left
+  out) and the cards from it in `sheets/<team>/opponents/`, same rules and shapes; with `by_player` every entry is weighted so each
+  player counts once per card (card shares, lead models and sixes), since the busiest players, mostly ladder bots, would otherwise fill a
+  card with one team. Everything after that runs on the sheet's own cards (`sheetkit/pool.py`).
+
 A result folder records which opponents it was played against, and the kit refuses to mix them.
 
 On a fresh box of its own: `sheetkit/cloud/bundle.sh <team>` on the Mac, copy `sheetkit/cloud/bundle.tar.gz` there, unpack it into
@@ -110,7 +117,9 @@ turn-one lines and game plans in order (log `work/all.log`), then `more.sh` the 
   is final. Tell Battle sim if results look wrong. A setup with the same `games` as another plays the same games and shares its result
   folders; `SHEET_SETUP=<name>` in front of any kit command or cloud script (`push.sh`, `build.sh`, `all.sh`, `more.sh`) runs that
   setup instead of `current`, and a sheet can pin one in its sheet.json (`"setup": "<name>"`), which the kit and the cloud scripts
-  follow (`sheetkit/cloud/setup_of.py`; on a shared box `build.sh <team>`).
+  follow (`sheetkit/cloud/setup_of.py`; on a shared box `build.sh <team>`). A setup with `"grid": false` (the value-net setups,
+  `v43-full` and `v43n1-full`) gives the planner an empty one-on-one grid, as the bot and Team search do; the `grid` step is still
+  needed for the charts.
 - **Flagged games.** A game that hits a mechanic the simulator has not ported is flagged `unsupported` in its result.
   `kit.py <team> flagged` counts the results with one per folder; `--write` moves them to `<folder>.flagged/`. Then run the steps again
   on a setup that ports them and shares the folders (for v20's results: `SHEET_SETUP=v23-dp2-race-eg9-full`, `all.sh` then `more.sh`

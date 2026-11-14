@@ -63,16 +63,21 @@ def pool_sixes(sheet):
     return out
 
 def card_sixes(sheet):
-    """per card, its group's TOP_SIXES most common real sixes (pssim/opp_pool.py sixes), weighted by how often each was seen"""
+    """per card, its group's TOP_SIXES most common real sixes (pssim/opp_pool.py sixes, or the sheet's own pool: pool.py), weighted by
+    how often each was seen"""
     py = VENV_PY if os.path.exists(VENV_PY) else sys.executable; tmp = _w(sheet, 'pool_card.json'); out = {}
     SM = rj(os.path.join(ROOT, 'regionals', 'smogon_mc_sets.json'))
     def spread(species, nature):                                   # as opp_pool.spread (importing that module needs numpy)
         x = SM.get(species) or SM.get(species.split('-')[0])
         if x and x.get('evs'): return x['evs']
         return [32, 32, 0, 0, 2, 0] if nature in ('Adamant', 'Jolly', 'Brave', 'Careful', 'Impish') else [32, 0, 0, 32, 2, 0]
+    if sheet.cfg.get('pool'):                                     # the sheet's own pool (pool.py), weighted
+        import pool as POOL
+        E = POOL.load(sheet)
     for m, c in CARDS.items():
         group = m if c['rule'] else 'other:' + m[len('Other '):]
-        subprocess.run([py, 'opp_pool.py', 'sixes', group, str(TOP_SIXES), tmp], cwd=PSSIM, stdout=subprocess.DEVNULL, check=True)
+        if sheet.cfg.get('pool'): wj(POOL.sixes(E, group, TOP_SIXES), tmp)
+        else: subprocess.run([py, 'opp_pool.py', 'sixes', group, str(TOP_SIXES), tmp], cwd=PSSIM, stdout=subprocess.DEVNULL, check=True)
         xs = [x for x in rj(tmp)['sixes'] if len(x['six']) == 6]; W = sum(x['count'] for x in xs)
         out[m] = [{'label': ', '.join(s['species'] for s in x['six']), 'weight': x['count'] / W, 'count': x['count'],
                    'six': [{**s, 'evs': spread(s['species'], s['nature'])} for s in x['six']]} for x in xs]

@@ -87,7 +87,7 @@ def guide_html(L):
     if not CARDS:
         return ('<p class="lguide" id="lguide"><b>Which tab:</b> take the first match in their six. ' + ' &middot; '.join(
             f'{w}&nbsp;&rarr;&nbsp;<button type="button" class="lgk" data-k="{k}">{BY_KEY[k]["tab"]}</button>' for w, k in GUIDE) + '</p>')
-    C = rj(os.path.join(KIT, 'opponents', 'cards.json')); pos = {}
+    C = rj(os.path.join(OPPONENTS['dir'], 'cards.json')); pos = {}
     for t in L:
         for i, c in enumerate(t['picks']): pos[t['k'], c['when'].split(' &middot; ')[0]] = i
     def at(card):                                                 # (tab key, the card's place on its tab)

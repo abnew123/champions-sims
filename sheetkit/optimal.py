@@ -216,30 +216,49 @@ def run_more(sheet, threads, log):
     """one more round: for each tab whose best four on the numbers so far is one nobody searched answers for (after a first round, every
     candidate but the screened pick), screen it against every opposing four, then play every candidate against its new strongest
     answers. An unsearched four only met answers found against another four, which flatters it; repeat until the best four of every
-    tab has been searched."""
-    picks = rj(sheet.p('picks.json'))['picks']; S6 = sixes(sheet); done = screened(sheet); d = _w(sheet); M = matrix_cells(sheet)
-    target = {}
-    for a in ARCHS:
-        if a not in picks: continue
-        rows = ranking(sheet, a, S6, M)
-        top = rows[0][1] if rows else ('+'.join(picks[a]['lead']), '+'.join(picks[a]['back']))
-        lead, back = top[0].split('+'), top[1].split('+')
-        if four_key(lead, back) not in done[a]: target[a] = (lead, back)
-    todo = list(target)
-    if not todo: print("every tab's best four has been searched; nothing to do"); return
-    print(f"{len(todo)} tabs: their best four's answers not searched yet")
-    n = next_round(sheet)
-    g8 = opt(sheet, 'screen_games', 8)
-    for games in (16, g8):
-        jobs = [job(sheet, a, si, *target[a], f)
-                for a in todo for si, t in enumerate(S6[a]) if (len(S6[a]) == 1) == (games == 16) for f in fours_of(t['six'])]
-        if not jobs: continue
-        wj(jobs, f'{d}/screen_r{n}_{games}.json')
-        P.battle_run(sheet, 'optimal', f'{d}/screen_r{n}_{games}.json', f'{d}/screen_r{n}_{games}', games, SCREEN_G0, threads, None, log)
-    scr = {(a, si): rows for (a, si, k), rows in screen_results(sheet).items() if a in todo and k == four_key(*target[a])}
-    jobs = matrix_jobs(sheet, scr, set(todo), opt(sheet, 'answers', 3), matrix_cells(sheet))
-    wj(jobs, f'{d}/matrix_r{n}.json')
-    P.battle_run(sheet, 'optimal', f'{d}/matrix_r{n}.json', f'{d}/matrix_r{n}', MATRIX_GAMES, MATRIX_G0, threads, None, log)
+    tab has been searched. A round a stop cut short is finished first, on its own queues."""
+    S6 = sixes(sheet); d = _w(sheet); u = unfinished(sheet)
+    if u:
+        n, target = u; todo = list(target); print(f"round {n} was stopped before its end; finishing it ({len(todo)} tabs)")
+        for p in [p for p in queues(sheet, 'screen') if re.search(rf'_r{n}_\d+\.json$', p)]:
+            P.battle_run(sheet, 'optimal', p, p[:-5], int(p.rsplit('_', 1)[1][:-5]), SCREEN_G0, threads, None, log)
+    else:
+        picks = rj(sheet.p('picks.json'))['picks']; done = screened(sheet); M = matrix_cells(sheet)
+        target = {}
+        for a in ARCHS:
+            if a not in picks: continue
+            rows = ranking(sheet, a, S6, M)
+            top = rows[0][1] if rows else ('+'.join(picks[a]['lead']), '+'.join(picks[a]['back']))
+            lead, back = top[0].split('+'), top[1].split('+')
+            if four_key(lead, back) not in done[a]: target[a] = (lead, back)
+        todo = list(target)
+        if not todo: print("every tab's best four has been searched; nothing to do"); return
+        print(f"{len(todo)} tabs: their best four's answers not searched yet")
+        n = next_round(sheet)
+        g8 = opt(sheet, 'screen_games', 8)
+        for games in (16, g8):
+            jobs = [job(sheet, a, si, *target[a], f)
+                    for a in todo for si, t in enumerate(S6[a]) if (len(S6[a]) == 1) == (games == 16) for f in fours_of(t['six'])]
+            if not jobs: continue
+            wj(jobs, f'{d}/screen_r{n}_{games}.json')
+            P.battle_run(sheet, 'optimal', f'{d}/screen_r{n}_{games}.json', f'{d}/screen_r{n}_{games}', games, SCREEN_G0, threads, None, log)
+    q = f'{d}/matrix_r{n}.json'
+    if not os.path.exists(q):
+        scr = {(a, si): rows for (a, si, k), rows in screen_results(sheet).items() if a in todo and k == four_key(*target[a])}
+        wj(matrix_jobs(sheet, scr, set(todo), opt(sheet, 'answers', 3), matrix_cells(sheet)), q)
+    P.battle_run(sheet, 'optimal', q, q[:-5], MATRIX_GAMES, MATRIX_G0, threads, None, log)
+
+def unfinished(sheet):
+    """the last later round if a stop cut it short (its matrix not written, or not all played) and it is a "more" round (one four of ours
+    per tab): (n, {tab: that four}), read from the round's own queues. Its targets can't be worked out again: a part-played screen
+    already counts its four as searched, so a fresh round would leave the rest of it unplayed. Else None"""
+    d = _w(sheet); n = next_round(sheet) - 1; scr = [p for p in queues(sheet, 'screen') if re.search(rf'_r{n}_\d+\.json$', p)]; q = f'{d}/matrix_r{n}.json'
+    if not scr or (os.path.exists(q) and len(glob.glob(f'{q[:-5]}/*.json')) >= len(rj(q))): return None
+    fours = collections.defaultdict(set)
+    for p in scr:
+        for j in rj(p): fours[j['meta']['arch']].add((tuple(j['meta']['our_lead']), tuple(j['meta']['our_back'])))
+    if any(len(f) != 1 for f in fours.values()): return None       # an extra round (run_extra): several fours per tab
+    return n, {a: tuple(map(list, next(iter(f)))) for a, f in fours.items()}
 
 def run_extra(sheet, threads, log):
     """the extra file's sixes and candidates (extra()): every four of the card already searched is screened against every four of each

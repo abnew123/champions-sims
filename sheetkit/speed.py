@@ -12,6 +12,10 @@ sheet.json "speed" options (all optional):
           (default: from 15 below the six's slowest to 15 above its fastest)
   para_groups  N: a run of more than N of their Speeds between two of yours becomes one row per place a paralysed foe (half Speed)
           lands among your six, its Speeds given as a range (default: off)
+  scarf   share: also list a Choice Scarf version (Speed x 1.5) of each listed Pokemon that holds one on at least this share of
+          its sets (e.g. 0.2; default: off). Smogon gives items and spreads apart, so its Speeds are its listed spreads' x 1.5
+  merge_faster  true: a Pokemon whose every common spread (5%+ of its sets) outspeeds your fastest gets one row, "<its slowest>+" (default: off)
+Range rows (para_groups, merge_faster) carry a line with the Speeds a paralysed foe drops to and where they fall among your six.
 A speed.json with "hand": true was written by hand and is not overwritten (--force does)."""
 import re
 from common import *
@@ -21,7 +25,7 @@ STATS = os.path.join(ROOT, 'regionals', 'smogon_mc_2026-09_moveset.txt')
 SECTIONS = ('Abilities', 'Items', 'Spreads', 'Moves', 'Teammates', 'Checks and Counters')
 
 def moveset(path=STATS):
-    """{species as Smogon names it: {count, spreads: [(nature, [6 SP], %)]}}, most used first"""
+    """{species as Smogon names it: {count, spreads: [(nature, [6 SP], %)], items: {item: %}}}, most used first"""
     out, cur, sec = {}, None, None; lines = open(path).read().splitlines()
     for i, ln in enumerate(lines):
         m = re.match(r'^\| (.+?) +\|$', ln)
@@ -29,13 +33,16 @@ def moveset(path=STATS):
         txt = m.group(1).strip()
         if lines[i - 1].startswith('+') and i + 1 < len(lines) and lines[i + 1].startswith('+') and txt not in SECTIONS \
                 and not txt.startswith(('Raw count', 'Avg', 'Viability')):
-            cur = txt; out[cur] = {'count': 0, 'spreads': []}; sec = None; continue
+            cur = txt; out[cur] = {'count': 0, 'spreads': [], 'items': {}}; sec = None; continue
         if cur is None: continue
         if txt in SECTIONS: sec = txt
         elif txt.startswith('Raw count'): out[cur]['count'] = int(txt.split(':')[1])
         elif sec == 'Spreads':
             mm = re.match(r'^(\w+):([\d/]+) ([\d.]+)%$', txt)
             if mm: out[cur]['spreads'].append((mm.group(1), [int(x) for x in mm.group(2).split('/')], float(mm.group(3))))
+        elif sec == 'Items':
+            mm = re.match(r'^(.+?) +([\d.]+)%$', txt)
+            if mm: out[cur]['items'][mm.group(1)] = float(mm.group(2))
     return dict(sorted(out.items(), key=lambda kv: -kv[1]['count']))
 
 def shown(name):
@@ -69,16 +76,32 @@ def tiers(species, spreads, keep=0):
         out.append((v, f"{shown(species)} ({', '.join(nats)}{', ' + pt if shared else ''})"))
     return out
 
-def para_fold(rows, mine, theirs, n, usage):
+def common_speeds(species, spreads, min_pct=5):
+    """the Speeds of a Pokemon's listed spreads that together make at least min_pct% of its sets"""
+    sp = dex()['species'].get(idf(species)); by = {}
+    if not sp: return []
+    for nat, pts, pct in spreads: v = stats(sp['stats'], nat, pts)[5]; by[v] = by.get(v, 0) + pct
+    return sorted(v for v, p in by.items() if p >= min_pct)
+
+def para_where(mine, h0, h1=None):
+    """where a paralysed foe at h0 (..h1) falls among your Speeds"""
+    ms = sorted(mine); name = lambda v: ', '.join(mine[v]); h1 = h0 if h1 is None else h1
+    place = lambda h: (sum(m < h for m in ms), sum(m <= h for m in ms))
+    if place(h0) != place(h1): return 'either side of ' + ' and '.join(name(m) for m in ms if h0 <= m <= h1)
+    if h0 in mine: return f"ties {name(h0)}"
+    lo = [m for m in ms if m < h0]; hi = [m for m in ms if m > h0]
+    return (f"between {name(hi[0])} and {name(lo[-1])}" if lo and hi else f"slower than {name(hi[0])}" if hi else f"faster than {name(lo[-1])}")
+
+def para_line(mine, v0, v1):
+    h0, h1 = v0 // 2, v1 // 2
+    return f'<span class="u">paralysed {h0 if h0 == h1 else f"{h0}–{h1}"}: {para_where(mine, h0, h1)}</span>'
+
+def para_fold(rows, mine, theirs, n, usage, plain=shown):
     """rows (slowest first, [speed, yours, theirs, tie]): each run of more than n rows of theirs only, with one of yours on both sides,
     becomes one row per place floor(Speed / 2) lands among your Speeds (between two of them, or tied with one). A Pokemon whose listed
     Speeds all fall in one such row is named plainly; one spread over several rows keeps its nature labels."""
-    ms = sorted(mine); name = lambda v: ', '.join(mine[v])
+    ms = sorted(mine)
     def place(h): return (sum(m < h for m in ms), sum(m <= h for m in ms))
-    def where(h):
-        if h in mine: return f"ties {name(h)}"
-        lo = [m for m in ms if m < h]; hi = [m for m in ms if m > h]
-        return (f"between {name(hi[0])} and {name(lo[-1])}" if lo and hi else f"slower than {name(hi[0])}" if hi else f"faster than {name(lo[-1])}")
     out, run = [], []
     def flush(nxt):
         if len(run) > n and out and out[-1][1] and nxt is not None and nxt[1]:
@@ -89,10 +112,8 @@ def para_fold(rows, mine, theirs, n, usage):
                 for v in vs:
                     for sp, label in theirs[v]: sps.setdefault(sp, []).append(label)
                 spread_out = lambda sp: any(s == sp and v not in vs for v, xs in theirs.items() for s, _ in xs)
-                names = [shown(sp) if not spread_out(sp) else ', '.join(dict.fromkeys(sps[sp])) for sp in sorted(sps, key=usage)]
-                h0, h1 = min(vs) // 2, max(vs) // 2
-                out.append([f"{min(vs)}–{max(vs)}" if len(set(vs)) > 1 else min(vs), '', ', '.join(names) +
-                            f'<span class="u">paralysed {h0 if h0 == h1 else f"{h0}–{h1}"}: {where(h0)}</span>', ''])
+                names = [plain(sp) if not spread_out(sp) else ', '.join(dict.fromkeys(sps[sp])) for sp in sorted(sps, key=usage)]
+                out.append([f"{min(vs)}–{max(vs)}" if len(set(vs)) > 1 else min(vs), '', ', '.join(names) + para_line(mine, min(vs), max(vs)), ''])
         else: out.extend(run)
         run.clear()
     for r in rows:
@@ -115,22 +136,41 @@ def build(sheet, out=None, force=False):
         mine.setdefault(stats(sp['stats'], s['nature'], s['evs'])[5], []).append(name)
     # theirs: the most-used Pokemon plus the team's Matchups threats, most used first within a row
     want = list(MS)[:c.get('top', 30)] + [smogon_name(t) for t in sheet.cfg.get('threats', []) if smogon_name(t) in MS]
-    theirs = {}
+    # a key is the species, or "<species>|scarf" for its Choice Scarf version
+    base = lambda k: k.split('|')[0]; usage = lambda k: -MS[base(k)]['count']
+    plain = lambda k: shown(base(k)) + (' (Choice Scarf)' if k.endswith('|scarf') else '')
+    def scarfed(label): return label[:-1] + ', Choice Scarf)' if label.endswith(')') else label + ' (Choice Scarf)'
+    keys = {}                                                    # key -> [(Speed, label)], the shown tiers
+    allv = {}                                                    # key -> its common Speeds, 5%+ of its sets (merge_faster looks at all of them)
     for species in sorted(dict.fromkeys(want), key=lambda s: -MS[s]['count']):
-        for v, label in tiers(species, MS[species]['spreads'], c.get('tiers', 2)): theirs.setdefault(v, []).append((species, label))
+        keys[species] = tiers(species, MS[species]['spreads'], c.get('tiers', 2)); allv[species] = common_speeds(species, MS[species]['spreads'])
+        if c.get('scarf') and MS[species]['items'].get('Choice Scarf', 0) >= 100 * c['scarf']:
+            k = species + '|scarf'; keys[k] = [(v * 3 // 2, scarfed(l)) for v, l in keys[species]]; allv[k] = [v * 3 // 2 for v in allv[species]]
+    merged = {k: (min(allv[k]), max(allv[k])) for k in keys if c.get('merge_faster') and allv[k] and min(allv[k]) > max(mine)}
+    theirs = {}
+    for k, ts in keys.items():
+        if k in merged: continue
+        for v, label in ts: theirs.setdefault(v, []).append((k, label))
     lo, hi = c.get('range', [min(mine) - 15, max(mine) + 15])
     rows = [[v, ', '.join(mine.get(v, [])), ', '.join(l for _, l in theirs.get(v, [])), 'Tie' if v in mine and v in theirs else '']
             for v in sorted(set(mine) | set(theirs)) if lo <= v <= hi]
-    if c.get('para_groups'): rows = para_fold(rows, mine, theirs, c['para_groups'], lambda sp: -MS[sp]['count'])
-    inside = {sp for v in theirs if lo <= v <= hi for sp, _ in theirs[v]}
+    if c.get('para_groups'): rows = para_fold(rows, mine, theirs, c['para_groups'], usage, plain)
+    first = lambda r: r[0] if isinstance(r[0], int) else int(re.match(r'\d+', r[0]).group(0))
+    for k, (v0, v1) in sorted(merged.items(), key=lambda kv: (kv[1][0], usage(kv[0]))):       # one row each, after the rows at or below its slowest
+        if v0 > hi: continue
+        at = next((i for i, r in enumerate(rows) if first(r) > v0), len(rows))
+        rows.insert(at, [f"{v0}+", '', plain(k) + para_line(mine, v0, v1), ''])
+    out_of = {v: list(xs) for v, xs in theirs.items()}           # what folds into the "everything else" rows: merged ones at their slowest
+    for k, (v0, _) in merged.items(): out_of.setdefault(v0, []).append((k, plain(k)))
+    inside = {k for v in theirs if lo <= v <= hi for k, _ in theirs[v]}
     def rest(vals, word):                                        # the most-used Pokemon with a spread out there (with its nature if it has a row too)
-        names = sorted({sp for v in vals for sp, _ in theirs[v]}, key=lambda sp: -MS[sp]['count'])
-        lab = lambda sp: ', '.join(dict.fromkeys(l for v in vals for s, l in theirs[v] if s == sp)) if sp in inside else shown(sp)
-        return f"Everything {word}, including {', '.join(lab(sp) for sp in names[:8])}"
-    exact = lambda v: [v, '', ', '.join(l for _, l in theirs[v]), '']      # a single Speed out there: its own row, not "everything else"
-    below = sorted(v for v in theirs if v < lo); above = sorted(v for v in theirs if v > hi)
+        names = sorted({k for v in vals for k, _ in out_of[v]}, key=usage)
+        lab = lambda k: ', '.join(dict.fromkeys(l for v in vals for s, l in out_of[v] if s == k)) if k in inside else plain(k)
+        return f"Everything {word}, including {', '.join(lab(k) for k in names[:8])}"
+    exact = lambda v: [v, '', ', '.join(l for _, l in out_of[v]), '']      # a single Speed out there: its own row, not "everything else"
+    below = sorted(v for v in out_of if v < lo); above = sorted(v for v in out_of if v > hi)
     if below: rows.insert(0, exact(below[0]) if len(below) == 1 else [f"{below[-1]} or less", '', rest(below, 'slower'), ''])
-    if above: rows.append(exact(above[0]) if len(above) == 1 else [f"{above[0]}+", '', rest(above, 'faster'), ''])
+    if above: rows.append(exact(above[0]) if len(above) == 1 and not any(k in merged for k, _ in out_of[above[0]]) else [f"{above[0]}+", '', rest(above, 'faster'), ''])
     if not slow_first: rows.reverse()
     wj({'made': f"kit speed step from {os.path.basename(STATS)}", 'order': 'slowest-first' if slow_first else 'fastest-first', 'rows': rows}, out,
        indent=1, ensure_ascii=False)

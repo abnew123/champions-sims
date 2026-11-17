@@ -17,10 +17,11 @@ ITEMNOTE = {"Focus Sash": "Sash", "Chople": "Chople", "Colbur": "Colbur", "Sitru
 def build(sheet, workers=1, out=None):
     G.build(sheet, workers, quiet=True)
     threats = sheet.cfg.get('threats') or list(USAGE); d = sheet.w('charts'); os.makedirs(d, exist_ok=True)
+    boosted = sheet.cfg.get('cov_boosted') or []      # Coverage only: [{"name": "Sylveon", "stages": {"spa": 1}, "label": "+1 Sylveon"}], listed last in each row
     py, penv = procs.python(sheet, venv=True)
     def one(tr):
         tag = 'tr' if tr else 'notr'; job = os.path.join(d, f'job_{tag}.json'); res = os.path.join(d, f'res_{tag}.json')
-        wj({'names': sheet.names, 'threats': threats, 'cells': {n: G.cell_path(sheet, n, tr) for n in sheet.names}}, job)
+        wj({'names': sheet.names, 'threats': threats, 'cells': {n: G.cell_path(sheet, n, tr) for n in sheet.names}, 'boosted': boosted}, job)
         r = subprocess.run(['nice', '-n', '10', py, os.path.join(KIT, 'charts_worker.py'), job, res], capture_output=True, text=True,
                            env=dict(os.environ, **penv, TR='1' if tr else '0', POOL_FILE=sheet.w('grid', 'pool.json')))
         if r.returncode: sys.exit(f"charts ({tag}) failed:\n{(r.stderr or r.stdout).strip()[-1500:]}")
@@ -35,8 +36,13 @@ def build(sheet, workers=1, out=None):
         rank = sorted(((n, cov[f][n]) for n in attackers if n in cov[f]), key=lambda kv: -kv[1][0])       # ties: team order
         if not rank: continue
         name = their(f) + (f" ({ITEMNOTE[item[f]]})" if item[f] in ITEMNOTE else '')
-        rows.append((sum(1 for _, v in rank if v[3] == 16), round(rank[0][1][0], 1),
-                     [name, usage(f), 1 if item[f] == 'Focus Sash' else 0, [[mine(n), v[1], v[2], round(v[0], 1), v[3]] for n, v in rank]]))
+        ents = [[mine(n), v[1], v[2], round(v[0], 1), v[3]] for n, v in rank]; kos = {n for n, v in rank if v[3] == 16}
+        for b in boosted:                                            # after the plain hits; 6th field 1: its Pokemon one-shots unboosted already,
+            v = R[0].get('cov_boosted', {}).get(f, {}).get(b['label'])   # so the Guaranteed KO badge does not count it twice
+            if not v: continue
+            ents.append([b['label'], v[1], v[2], round(v[0], 1), v[3], 1 if b['name'] in kos else 0])
+            if v[3] == 16: kos.add(b['name'])
+        rows.append((len(kos), round(rank[0][1][0], 1), [name, usage(f), 1 if item[f] == 'Focus Sash' else 0, ents]))
     rows.sort(key=lambda r: (r[0], r[1]))                            # fewest guaranteed knockouts first, then the weakest best hit
     def cell(c):
         o = {'v': c['v'], 't': c['det']}

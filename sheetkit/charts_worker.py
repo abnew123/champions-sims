@@ -71,11 +71,12 @@ def page_cell(mine, foe, c):
         if x.get("sw_c1", 0) > 1 - 1e-9 and sw_p.startswith(("loses", "stalemate")): sw_p = "stalls"
     return dict(v=c["v"], pct=c.get("pct"), dep=dep or "", note=note, det=f"{pre} · switching in {sw_p}, already out {fd_p}")
 
-def best_hits(foe):
+def best_hits(foe, who=None, stages=None):
     """each of my attackers' hardest hit on the threat: {mine: [max %, move, effectiveness, KO rolls of 16]}; pessimistic (bulkiest spread
-    for the side hit, Focus Sash and resist berries applied, their weather and terrain up, my full Attack, Fake Out left out)"""
+    for the side hit, Focus Sash and resist berries applied, their weather and terrain up, my full Attack, Fake Out left out).
+    who/stages: only these attackers, at these stat stages (a boosted attacker, sheet.json "cov_boosted")"""
     t, b, nat, sps, item, u = M.F[foe]; per = {}
-    for mine in job["names"]:
+    for mine in who or job["names"]:
         md = M.MINE[mine]
         for mv in md["moves"]:
             if mv.get("flinch") or mv.get("setup") or mv.get("status"): continue
@@ -88,15 +89,18 @@ def best_hits(foe):
             field = M.init_field(mine, foe, "field")
             M.entry(them, me, field); me["stg"] = {k: 0 for k in me["stg"]}
             if mv.get("charge"): me["stg"]["spa"] = 1                  # Electro Shot, Meteor Beam: +1 Sp. Atk before the hit
+            for k, v in (stages or {}).items(): me["stg"][k] = min(6, me["stg"][k] + v)
             dm = [M.damage(me, them, mv, field, r / 100) for r in range(85, 101)]
             if max(dm) == 0: continue
             hp = them["maxhp"]; ko = 0 if item == "Focus Sash" else sum(1 for d in dm if d >= hp); p = 100 * dm[-1] / hp
             if mine not in per or p > per[mine][0]: per[mine] = [p, mv["n"], M.eff(mv["t"], t), ko]
     return per
 
-res = {"cells": {}, "cov": {}, "item": {f: M.F[f][4] for f in job["threats"]}}
+res = {"cells": {}, "cov": {}, "cov_boosted": {}, "item": {f: M.F[f][4] for f in job["threats"]}}
 for n in job["names"]:
     cells = json.load(open(job["cells"][n]))["cells"]
     for f in job["threats"]: res["cells"][f"{f}|{n}"] = page_cell(n, f, cells[f])
-if not TRM: res["cov"] = {f: best_hits(f) for f in job["threats"]}
+if not TRM:
+    res["cov"] = {f: best_hits(f) for f in job["threats"]}
+    res["cov_boosted"] = {f: {b["label"]: best_hits(f, [b["name"]], b["stages"]).get(b["name"]) for b in job.get("boosted", [])} for f in job["threats"]}
 json.dump(res, open(out, "w"))

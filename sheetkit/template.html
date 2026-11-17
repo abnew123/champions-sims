@@ -374,7 +374,7 @@ const tb=document.getElementById("covbody");
 const us=u=>typeof u==="string"?u:(u?u.toFixed(1)+"%":"\u2014");
 const pc=x=>(x<100?Math.floor(x):Math.round(x))+"%";
 const ef=e=>(e===0.5?"\u00bd":e===0.25?"\u00bc":e)+"\u00d7";
-function badge(r){const ks=r[3].filter(x=>x[4]===16);
+function badge(r){const ks=r[3].filter(x=>x[4]===16&&!x[5]);
   if(r[2]) return '<span class="badge b-warn"><span class="lg">Sash: two hits</span><span class="sm">Sash</span></span>';
   if(!ks.length) return '<span class="badge b-off">none</span>';
   if(ks.length===1) return `<span class="badge b-warn"><span class="lg">only ${ks[0][0]}</span><span class="sm">${ks[0][0]}</span></span>`;

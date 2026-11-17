@@ -10,6 +10,8 @@ sheet.json "speed" options (all optional):
   tiers   at most this many Speeds per Pokemon, its most common first (default 2; 0 = every listed spread)
   range   [low, high]: Speeds outside it are folded into one "everything else" row at each end
           (default: from 15 below the six's slowest to 15 above its fastest)
+  para_groups  N: a run of more than N of their Speeds between two of yours becomes one row per place a paralysed foe (half Speed)
+          lands among your six, its Speeds given as a range (default: off)
 A speed.json with "hand": true was written by hand and is not overwritten (--force does)."""
 import re
 from common import *
@@ -67,6 +69,38 @@ def tiers(species, spreads, keep=0):
         out.append((v, f"{shown(species)} ({', '.join(nats)}{', ' + pt if shared else ''})"))
     return out
 
+def para_fold(rows, mine, theirs, n, usage):
+    """rows (slowest first, [speed, yours, theirs, tie]): each run of more than n rows of theirs only, with one of yours on both sides,
+    becomes one row per place floor(Speed / 2) lands among your Speeds (between two of them, or tied with one). A Pokemon whose listed
+    Speeds all fall in one such row is named plainly; one spread over several rows keeps its nature labels."""
+    ms = sorted(mine); name = lambda v: ', '.join(mine[v])
+    def place(h): return (sum(m < h for m in ms), sum(m <= h for m in ms))
+    def where(h):
+        if h in mine: return f"ties {name(h)}"
+        lo = [m for m in ms if m < h]; hi = [m for m in ms if m > h]
+        return (f"between {name(hi[0])} and {name(lo[-1])}" if lo and hi else f"slower than {name(hi[0])}" if hi else f"faster than {name(lo[-1])}")
+    out, run = [], []
+    def flush(nxt):
+        if len(run) > n and out and out[-1][1] and nxt is not None and nxt[1]:
+            groups = {}
+            for r in run: groups.setdefault(place(r[0] // 2), []).append(r[0])
+            for vs in sorted(groups.values()):
+                sps = {}
+                for v in vs:
+                    for sp, label in theirs[v]: sps.setdefault(sp, []).append(label)
+                spread_out = lambda sp: any(s == sp and v not in vs for v, xs in theirs.items() for s, _ in xs)
+                names = [shown(sp) if not spread_out(sp) else ', '.join(dict.fromkeys(sps[sp])) for sp in sorted(sps, key=usage)]
+                h0, h1 = min(vs) // 2, max(vs) // 2
+                out.append([f"{min(vs)}–{max(vs)}" if len(set(vs)) > 1 else min(vs), '', ', '.join(names) +
+                            f'<span class="u">paralysed {h0 if h0 == h1 else f"{h0}–{h1}"}: {where(h0)}</span>', ''])
+        else: out.extend(run)
+        run.clear()
+    for r in rows:
+        if isinstance(r[0], int) and not r[1]: run.append(r); continue
+        flush(r); out.append(r)
+    flush(None)
+    return out
+
 def build(sheet, out=None, force=False):
     out = out or sheet.p('speed.json')
     if os.path.exists(out) and rj(out).get('hand') and not force: sys.exit(f"{os.path.relpath(out, ROOT)} is hand-written (\"hand\": true); --force overwrites it")
@@ -87,6 +121,7 @@ def build(sheet, out=None, force=False):
     lo, hi = c.get('range', [min(mine) - 15, max(mine) + 15])
     rows = [[v, ', '.join(mine.get(v, [])), ', '.join(l for _, l in theirs.get(v, [])), 'Tie' if v in mine and v in theirs else '']
             for v in sorted(set(mine) | set(theirs)) if lo <= v <= hi]
+    if c.get('para_groups'): rows = para_fold(rows, mine, theirs, c['para_groups'], lambda sp: -MS[sp]['count'])
     def rest(vals, word):                                        # the most-used Pokemon with a spread out there
         names = sorted({sp for v in vals for sp, _ in theirs[v]}, key=lambda sp: -MS[sp]['count'])
         return f"Everything {word}, including {', '.join(shown(sp) for sp in names[:8])}"

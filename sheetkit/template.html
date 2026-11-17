@@ -161,6 +161,7 @@ table.spd tr.mine td.who{color:var(--ink);font-weight:600}
 .spdnote{margin-top:14px}
 @media(max-width:600px){table.spd th,table.spd td{padding:8px 7px}table.spd td.s{width:40px}table.spd td.who{font-size:13px}}
 table.spd td.tie{color:var(--warn);font-weight:600;white-space:nowrap}
+table.spd td.rng{white-space:nowrap}
 
 footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--ink3);line-height:1.7;max-width:90ch}
 footer a{color:var(--ink2)}
@@ -434,7 +435,7 @@ function flip(r){const d=document.getElementById(r.dataset.d); if(!d) return; d.
 (function(){
 {{R_DATA}}
 document.getElementById("spdt").innerHTML=`<thead><tr><th scope="col">Speed</th><th scope="col">Yours</th><th scope="col">Theirs</th><th scope="col"></th></tr></thead><tbody>`+
-  R.map(r=>`<tr${r[1]?' class="mine"':''}><td class="s">${r[0]}</td><td class="who">${r[1]}</td><td>${r[2]}</td><td class="tie">${r[3]}</td></tr>`).join("")+`</tbody>`;
+  R.map(r=>`<tr${r[1]?' class="mine"':''}><td class="s${/^\d+–\d+$/.test(r[0])?" rng":""}">${r[0]}</td><td class="who">${r[1]}</td><td>${r[2]}</td><td class="tie">${r[3]}</td></tr>`).join("")+`</tbody>`;
 })();
 
 @@end

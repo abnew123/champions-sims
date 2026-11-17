@@ -122,12 +122,15 @@ def build(sheet, out=None, force=False):
     rows = [[v, ', '.join(mine.get(v, [])), ', '.join(l for _, l in theirs.get(v, [])), 'Tie' if v in mine and v in theirs else '']
             for v in sorted(set(mine) | set(theirs)) if lo <= v <= hi]
     if c.get('para_groups'): rows = para_fold(rows, mine, theirs, c['para_groups'], lambda sp: -MS[sp]['count'])
-    def rest(vals, word):                                        # the most-used Pokemon with a spread out there
+    inside = {sp for v in theirs if lo <= v <= hi for sp, _ in theirs[v]}
+    def rest(vals, word):                                        # the most-used Pokemon with a spread out there (with its nature if it has a row too)
         names = sorted({sp for v in vals for sp, _ in theirs[v]}, key=lambda sp: -MS[sp]['count'])
-        return f"Everything {word}, including {', '.join(shown(sp) for sp in names[:8])}"
+        lab = lambda sp: ', '.join(dict.fromkeys(l for v in vals for s, l in theirs[v] if s == sp)) if sp in inside else shown(sp)
+        return f"Everything {word}, including {', '.join(lab(sp) for sp in names[:8])}"
+    exact = lambda v: [v, '', ', '.join(l for _, l in theirs[v]), '']      # a single Speed out there: its own row, not "everything else"
     below = sorted(v for v in theirs if v < lo); above = sorted(v for v in theirs if v > hi)
-    if below: rows.insert(0, [f"{below[-1]} or less", '', rest(below, 'slower'), ''])
-    if above: rows.append([f"{above[0]}+", '', rest(above, 'faster'), ''])
+    if below: rows.insert(0, exact(below[0]) if len(below) == 1 else [f"{below[-1]} or less", '', rest(below, 'slower'), ''])
+    if above: rows.append(exact(above[0]) if len(above) == 1 else [f"{above[0]}+", '', rest(above, 'faster'), ''])
     if not slow_first: rows.reverse()
     wj({'made': f"kit speed step from {os.path.basename(STATS)}", 'order': 'slowest-first' if slow_first else 'fastest-first', 'rows': rows}, out,
        indent=1, ensure_ascii=False)

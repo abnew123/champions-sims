@@ -20,7 +20,13 @@ CANNED_F = os.path.join(OUT, 'chat_canned.json')
 CANNED = [c for c in (re.sub(r'[^a-z0-9]', '', s.lower()) for s in (json.load(open(CANNED_F)) if os.path.exists(CANNED_F) else [])) if c]
 # and any message that starts with one of these, same matching (the user, 2026-11-06: "Hi! I am an experimental AI")
 CANNED_PREFIXES = [re.sub(r'[^a-z0-9]', '', s.lower()) for s in ['Hi! I am an experimental AI']]
-def canned(text): t = re.sub(r'[^a-z0-9]', '', text.lower()); return any(c in t for c in CANNED) or any(t.startswith(p) for p in CANNED_PREFIXES)
+# any message that is exactly one of these, and any that contains one of the second list, same matching (the user, 2026-11-21)
+CANNED_EXACT = [re.sub(r'[^a-z0-9]', '', s.lower()) for s in ['Hi! Good luck, have fun!']]
+CANNED_ANYWHERE = [re.sub(r'[^a-z0-9]', '', s.lower()) for s in ['is a registered bot']]
+def canned(text):
+    t = re.sub(r'[^a-z0-9]', '', text.lower())
+    return (any(c in t for c in CANNED + CANNED_ANYWHERE) or any(t.startswith(p) for p in CANNED_PREFIXES)
+            or t in CANNED_EXACT)
 def routine(text): return pleasantry(text) or canned(text)
 def rows():
     f = os.path.join(OUT, 'chat.jsonl')

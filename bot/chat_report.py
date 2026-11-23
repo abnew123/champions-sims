@@ -23,10 +23,12 @@ CANNED_PREFIXES = [re.sub(r'[^a-z0-9]', '', s.lower()) for s in ['Hi! I am an ex
 # any message that is exactly one of these, and any that contains one of the second list, same matching (the user, 2026-11-21)
 CANNED_EXACT = [re.sub(r'[^a-z0-9]', '', s.lower()) for s in ['Hi! Good luck, have fun!']]
 CANNED_ANYWHERE = [re.sub(r'[^a-z0-9]', '', s.lower()) for s in ['is a registered bot']]
+# and any message containing these as whole words, case and the spacing or punctuation between them ignored (the user, 2026-11-23)
+CANNED_WORDS = [re.compile(r'\b' + r'\W+'.join(w.split()) + r'\b', re.I) for w in ['I am a bot']]
 def canned(text):
     t = re.sub(r'[^a-z0-9]', '', text.lower())
     return (any(c in t for c in CANNED + CANNED_ANYWHERE) or any(t.startswith(p) for p in CANNED_PREFIXES)
-            or t in CANNED_EXACT)
+            or t in CANNED_EXACT or any(r.search(text) for r in CANNED_WORDS))
 def routine(text): return pleasantry(text) or canned(text)
 def rows():
     f = os.path.join(OUT, 'chat.jsonl')

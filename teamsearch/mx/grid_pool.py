@@ -58,7 +58,10 @@ def job(gid):
     path = os.path.join(OUT, gid.replace("/", "_") + ".json")
     if os.path.exists(path): return gid, None
     t = time.time(); res = {}
-    for foe in FOES: res[foe] = cell(gid, foe)
+    try:
+        for foe in FOES: res[foe] = cell(gid, foe)
+    except Exception as e:                                          # a move the duel calc lacks (e.g. Wild Charge): no file, so the
+        return gid, f"skipped ({type(e).__name__}: {e})"            # bring features read this set's cells as unknown (feats.cells)
     json.dump(dict(gid=gid, tr=TRM, secs=round(time.time() - t, 1), cells=res), open(path + ".tmp", "w"))
     os.replace(path + ".tmp", path)
     return gid, time.time() - t
@@ -81,5 +84,5 @@ if __name__ == "__main__":
     with ctx.Pool(int(os.environ.get("NPROC", "1")), maxtasksperchild=4) as pool:
         for gid, dt in pool.imap_unordered(job, todo):
             n += 1
-            print(time.strftime("%I:%M %p"), f"{TAG} {n}/{len(todo)} {gid} {dt:.0f}s", flush=True)
+            print(time.strftime("%I:%M %p"), f"{TAG} {n}/{len(todo)} {gid} " + (dt if isinstance(dt, str) else f"{dt:.0f}s"), flush=True)
     print(time.strftime("%I:%M %p"), f"{TAG} done in {(time.time()-t0)/60:.1f} min", flush=True)

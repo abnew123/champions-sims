@@ -1,6 +1,6 @@
 #!/bin/bash
-# The Reg M-C regionals through the sim on the Mac (the user, 2026-11-25: "lets do it locally"): regsim.py sets, the one-on-one cells
-# its new sets need (grid_pool.py, both modes), every real match between known teams, then the report. Waits for
+# The Reg M-C regionals through the sim on the Mac (the user, 2026-11-25: "lets do it locally"): regsim.py sets, every real match
+# between known teams, then the report. Waits for
 # regionals/fetch_field.py to finish and for AC power before the heavy steps. Game cache cache_reg/: a relaunch resumes.
 # usage: teamsearch/bin/teamsearch-bash teamsearch/cloud/mac_regsim.sh [threads=4]
 cd "$(dirname "$0")/.."
@@ -18,11 +18,6 @@ if ! pmset -g batt | grep -q "AC Power"; then
 fi
 echo "$(date '+%I:%M %p') v43n1: building the field's sets" >> $LOG
 [ -s regsim/teams.json ] || nice -n 10 $PY regsim.py sets >> $LOG 2>&1 || fail sets $?
-ids=(); while IFS= read -r l; do [ -n "$l" ] && ids+=("$l"); done < cells_regsim.txt
-if [ ${#ids[@]} -gt 0 ]; then
-  echo "$(date '+%I:%M %p') v43n1: one-on-one cells for ${#ids[@]} sets" >> $LOG
-  for t in 0 1; do (cd mx && TR=$t NPROC=$TS_THREADS nice -n 10 $PY grid_pool.py "${ids[@]}" >> ../round_cells.log 2>&1) || fail cells $?; done
-  : > cells_regsim.txt
-fi
+# no cells step: regsim.Brings stands a species' standard set in for a set without cells (3,800 new sets would take ~8 h)
 nice -n 10 $PY regsim.py play >> $LOG 2>&1 || fail play $?
 nice -n 10 $PY regsim.py report > regsim/report.out 2>&1 || fail report $?

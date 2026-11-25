@@ -5,7 +5,8 @@ Louisville). Sheets have no stat points: spreads are filled from the M-C usage s
 grid_sets.json under new ids as in build_lowelo_starts.py. A team with a set the engine can't run is left out (unknown).
 Odds of one match: R games with each player as the engine's "mine" side (v43n1); each game, each side brings four and leads two
 sampled from the ladder-fitted imitation model (bring/policy.py) against the opposing six: how players pick, not the climb's bring
-search, which under-leads Trick Room setters. Game win chance p -> best-of-3 p^2 (3 - 2p).
+search, which under-leads Trick Room setters. Its one-on-one cell features use a set's own cells when they exist, else its species'
+standard set's (as in the replays the model was fitted on); computing cells for the field's 3,800 new sets would take ~8 h. Game win chance p -> best-of-3 p^2 (3 - 2p).
   sets      field sets into grid_sets.json; regsim/teams.json {"<event>|<pid>": {gids, arch}}; cells_regsim.txt (sets without cells)
   play      every real match between two known teams; regsim/games.jsonl, one line a match (resumes; game cache cache_reg/)
   report    way 2 (the real pairings, the sim's odds in place of the results) and way 1 (Monte Carlo of each event: a team-strength
@@ -77,11 +78,19 @@ class Brings:
     """the imitation model's (lead, back) distribution for a six against a given opposing six"""
     def __init__(self):
         import evaluate as E
-        self.P = E.P; self.Fx = E.P.Fx; self.m = self.P.model(); self.cache = {}
+        self.P = E.P; self.Fx = E.P.Fx; self.m = self.P.model(); self.cache = {}; self.alias = {}
+    def cellset(self, g):
+        """the set whose one-on-one cells stand in for g's: its own, else its species' standard set (the model was fitted on replays
+        with those), else its own without cells (read as unknown)"""
+        if g not in self.alias:
+            has = lambda x: x and all(os.path.exists(os.path.join(HERE, 'mx', 'out', m, x.replace('/', '_') + '.json')) for m in ('tr', 'notr'))
+            c = self.Fx.canon(self.Fx.G[g]['species']); self.alias[g] = g if has(g) else c if has(c) else g
+        return self.alias[g]
     def dist(self, team, opp):
         k = (tuple(team), tuple(opp))
         if k not in self.cache:
             wB, wL, pb, pl = self.m; Fx = self.Fx
+            team_, opp = team, [self.cellset(g) for g in opp]; team = [self.cellset(g) for g in team]
             m = Fx.Matchup(list(team), [(g, 4 / 6) for g in opp]); sp = [Fx.G[g]['species'] for g in team]
             lsm = lambda u: np.asarray(u) - (max(u) + math.log(sum(math.exp(x - max(u)) for x in u)))
             uB = lsm([float(np.dot(wB, m.bring_feats(S) + [sum(pb.get(sp[i], 0.0) for i in S)])) for S in Fx.BRINGS])
@@ -89,7 +98,7 @@ class Brings:
             for b, S in enumerate(Fx.BRINGS):
                 Ls = Fx.leads(S)
                 uL = lsm([float(np.dot(wL, m.lead_feats(Lp, S) + [sum(pl.get(sp[i], 0.0) for i in Lp)])) for Lp in Ls])
-                for l, Lp in enumerate(Ls): ch.append([team[i] for i in Lp] + [team[i] for i in S if i not in Lp]); lp.append(uB[b] + uL[l])
+                for l, Lp in enumerate(Ls): ch.append([team_[i] for i in Lp] + [team_[i] for i in S if i not in Lp]); lp.append(uB[b] + uL[l])
             pr = np.exp(np.array(lp) - max(lp)); self.cache[k] = (ch, pr / pr.sum())
             if len(self.cache) > 20000: self.cache.pop(next(iter(self.cache)))
         return self.cache[k]

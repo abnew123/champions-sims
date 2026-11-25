@@ -30,6 +30,13 @@ def say(s):
 
 def sets():
     import build_lowelo_starts as B, sets_lib as L
+    from pro_replays import arch
+    from cluster_opps import norm
+    UNPORTED = {'Revival Blessing', 'Beat Up'}                               # v43 runs Magician and Wandering Spirit (B.UNPORTED predates it)
+    E_ = B.ENG
+    runnable = lambda f: (L.idf(f['species']) in E_['species'] and (not f['item'] or L.idf(f['item']) in E_['items'])
+                          and L.idf(f['ability']) in E_['abilities'] and all(L.idf(m) in E_['moves'] for m in f['moves'])
+                          and len(f['moves']) == 4 and not UNPORTED & set(f['moves'] + [f['ability']]))
     T = json.load(open(os.path.join(REG, 'field_teams.json')))
     RS = json.load(open(os.path.join(REG, 'regional_sets.json'))); FS = json.load(open(os.path.join(REG, 'field_sets.json')))
     G = B.G; gid = {L.set_key({k: v for k, v in s.items() if k != 'regional_count'}): g for g, s in G.items()}
@@ -42,7 +49,7 @@ def sets():
         k = f"{t['event']}|{t['pid']}"; raw = RS.get(k) or FS.get(k)
         try: team = [B.full(s) for s in raw]
         except Exception: why['sheet'] += 1; continue
-        if not all(B.runnable(f) for f in team): why['engine'] += 1; continue
+        if not all(runnable(f) for f in team): why['engine'] += 1; continue
         gids = []
         for f in team:
             sk = L.set_key(f)
@@ -50,7 +57,7 @@ def sets():
                 fid = B.forme_id(L.battle_forme(f['species'], f['item'])); per[fid] += 1; gid[sk] = f"{fid}#{per[fid]}"
                 G[gid[sk]] = dict(f, regional_count=0); new += 1
             gids.append(gid[sk])
-        teams[k] = dict(gids=gids, arch=t['arch'])
+        teams[k] = dict(gids=gids, arch=arch([norm(f['species']) for f in team]))       # from the Showdown names (fetch_field's predate species_name)
     json.dump(G, open(B.GPATH, 'w'), indent=0); json.dump(teams, open(TEAMS, 'w'))
     has = lambda g: all(os.path.exists(os.path.join(HERE, 'mx', 'out', m, g.replace('/', '_') + '.json')) for m in ('tr', 'notr'))
     miss = sorted({g for v in teams.values() for g in v['gids'] if not has(g)})

@@ -68,10 +68,23 @@ SPECIES_ALIAS = {'Alolan Ninetales': 'Ninetales-Alola', 'Alolan Persian': 'Persi
                  'Hisuian Arcanine': 'Arcanine-Hisui', 'Hisuian Goodra': 'Goodra-Hisui', 'Hisuian Zoroark': 'Zoroark-Hisui',
                  'Paldean Tauros Aqua Breed': 'Tauros-Paldea-Aqua'}
 
+REGION = {'Alolan': 'Alola', 'Galarian': 'Galar', 'Hisuian': 'Hisui', 'Paldean': 'Paldea'}
+
+def species_name(sp):
+    """a team-sheet species name in Showdown's: the alias table, then the patterns Limitless uses for formes ("Hisuian Typhlosion",
+    "Female Basculegion", "Mow Rotom"; regional sims, 2026-11-25)"""
+    if sp in SPECIES_ALIAS: return SPECIES_ALIAS[sp]
+    w = sp.split(' ')
+    if len(w) == 2 and w[0] in REGION: return f'{w[1]}-{REGION[w[0]]}'
+    if len(w) == 2 and w[0] == 'Female': return f'{w[1]}-F'
+    if len(w) == 2 and w[1] == 'Rotom': return f'Rotom-{w[0]}'
+    if len(w) == 4 and w[:2] == ['Paldean', 'Tauros'] and w[3] == 'Breed': return f'Tauros-Paldea-{w[2]}'
+    return sp
+
 def normalize(s):
     """an open-team-sheet set in Showdown names (empty move slots and the parser's 'Held Item:' glitch dropped)"""
     out = dict(s)
-    out['species'] = SPECIES_ALIAS.get(s['species'], s['species'])
+    out['species'] = species_name(s['species'])
     out['moves'] = [m for m in s['moves'] if m and m != '-']
     if not s.get('item') or s['item'] == 'Held Item:': out['item'] = ''
     out['nature'] = (s.get('nature') or 'Serious').replace('Naïve', 'Naive')

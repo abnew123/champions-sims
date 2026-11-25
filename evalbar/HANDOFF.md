@@ -600,6 +600,21 @@ and keep the outcome that matches the HP boxes: abilities like Stamina, item use
   after the digit are taken. The message also closes an open move first, as end-of-turn damage does: before, a Perish faint could be read
   as the open move's target (Gdansk Day 2 M4 G3 had a Gholdengo's Shadow Ball aimed at its own partner). On the four stream days (Nice 1-2,
   Gdansk 1-2) 11 of the 12 games with Perish Song now carry counts; the 12th ended the turn it was used. The logs are otherwise unchanged.
+- The LAIC 2027 final's video (the user, 2026-11-25; a clip with no team sheets) showed four reading faults, fixed on its frames and
+  checked on every saved stream (168 games, old reader against new):
+  - A message's Pokemon read without a sheet kept its 's ("Garchomp's perish count fell to 3!" was read as "Garchomp's" and " perish
+    count ..."), so stat changes and Perish counts were dropped in sheet-less games: 54 of the 168 games gain lines (Intimidate,
+    Defiant, Draco Meteor's drop, Parting Shot's target); none lose any.
+  - "<name> lost!" decided the winner by Player 2's name alone; a four-letter name read differently in its "sent out" and its
+    "lost!" gave the game to the side with fewer Pokemon left. Now the name decides only when it clearly is (> 0.75) or clearly is
+    not (< 0.5) Player 2's most common recent reading, or when the Pokemon left are even: 1 of the 168 winners changes (the final's G1).
+  - One frame without "Trainers are choosing actions" (read "choosing actionẠạ", or a mirrored transition frame) made a new, empty
+    turn; such turns also ended weather and terrain a turn early. A gap of one frame now keeps the decision screen: 32 games lose an
+    empty turn, 3 of them a weather / terrain end that came a turn early; no game boundary moves.
+  - A sheet whose header was not read was keyed by its species (a frozenset) and compared with a name: the reader crashed, which
+    is why the LAIC Day 2 page restarted every 30 minutes with 6 games.
+  After the broadcast's "Game Winner" banner it replays the game's highlights ("REPLAY" in the corner); the reader already ignores
+  them, since the game has ended.
 - Two messages alike but about different Pokemon, back to back with no blank frame ("The opposing Staraptor's perish count fell to 3!",
   then Sinistcha's), were read as one (the run splits only below 0.85 similarity): Reader.other_mon now splits them when both name a
   Pokemon, not the same one, and the names as read differ more than a misread (similarity under 0.8). On the four days it adds 11 lines and

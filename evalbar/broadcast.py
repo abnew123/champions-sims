@@ -173,11 +173,12 @@ class Reader:
     def __init__(s):
         s.games = []; s.meta = []; s.sheets = {}; s.raw_sheets = []; s.frame = 0; s.names = collections.deque(maxlen=600); s.note = ''
         s.board = None; s.match = 0; s.game_in_match = 0; s.prev_end = 0; s.owners = {}; s.t0 = 0; s.pre = []; s.pre_on = False; s.pre_frame = 0; s.p2_label = ''
+        s.p2_labels = collections.deque(maxlen=12)   # Player 2's recent name readings (sent out / withdrew), for the lost / won message
         s.run = []; s.gap = 0; s.at_msg = None; s.seen = {'p1': [], 'p2': []}; s.new_game()   # run: the message on screen, kept across games
     def new_game(s):
         s.out = []; s.games.append(s.out); s.meta.append({}); s.started = False; s.turn = 0; s.in_decision = False; s.ended = False
         s.active = {}; s.hp = {}; s.last_text = None; s.slot_free = {'p1': [], 'p2': []}; s.megas = {'p1': False, 'p2': False}
-        s.fainted = {'p1': set(), 'p2': set()}; s.open = None; s.cur = {}; s.changed = {}; s.foreign = 0; s.timed = {}; s.sent = []; s.forfeit = False; s.closed = False; s.poked = {'p1': set(), 'p2': set()}; s.lead_seen = False; s.pending = []; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False; s.settle = []
+        s.fainted = {'p1': set(), 'p2': set()}; s.open = None; s.cur = {}; s.changed = {}; s.foreign = 0; s.timed = {}; s.sent = []; s.forfeit = False; s.closed = False; s.poked = {'p1': set(), 'p2': set()}; s.lead_seen = False; s.pending = []; s.pairs = {'p1': -999, 'p2': -999}; s.game_names = collections.Counter(); s.sides_checked = False; s.settle = []; s.off = 0
     def team(s, sd): return s.sheets.get(sd, [])
     def species(s, sd, name):
         """an OCR'd Pokémon name on side sd -> the species on that side's sheet (Mega names map back to the base)"""
@@ -237,7 +238,8 @@ class Reader:
         if not best:
             m = re.match(r"([A-Z][\w.'-]*(?: [A-Z][\w.'-]*)?)", body)
             if not m: return sd, None, body
-            sp = s.species(sd, m.group(1)); return sd, sp, body[len(m.group(1)):]
+            nm = re.split(r"'s\b", m.group(1))[0]                            # the name without its 's: "Garchomp's perish count fell", "Venusaur's
+            sp = s.species(sd, nm); return sd, sp, body[len(nm):]             # Sp. Atk harshly fell" (no team sheets: the LAIC 2027 final's video)
         return sd, best[0], body[len(best[1]):]
     def other_mon(s, a, b):
         """two messages alike but about different Pokemon ("The opposing Staraptor's perish count fell to 3!", then Sinistcha's, with no
@@ -247,6 +249,10 @@ class Reader:
         if not pa or not pb or (sa, pa) == (sb, pb): return False
         na, nb = a[:len(a) - len(ra)], b[:len(b) - len(rb)]
         return difflib.SequenceMatcher(None, na, nb).ratio() < 0.8
+    def p2_like(s, name):
+        """how alike a name is to Player 2's: the best of its most common recent reading and its latest"""
+        labs = {s.p2_label} | ({collections.Counter(s.p2_labels).most_common(1)[0][0]} if s.p2_labels else set())
+        return max(difflib.SequenceMatcher(None, name.lower(), x.lower()).ratio() for x in labs)
     def slot_of(s, sd, sp):
         return next((sl for (x, sl), v in s.active.items() if x == sd and v == sp), None)
     def mon(s, sd, sp):
@@ -261,8 +267,10 @@ class Reader:
                 win = 'p1' if left['p1'] > left['p2'] else 'p2' if left['p2'] > left['p1'] else None
                 m = re.match(r"'?(.+?) (lost|won)!$", text)
                 if m and s.p2_label:                                             # "<Player 2's name> lost!": Player 2 lost; any other name: Player 1
-                    side = 'p2' if difflib.SequenceMatcher(None, m.group(1).lower(), s.p2_label.lower()).ratio() > 0.75 else 'p1'
-                    win = side if m.group(2) == 'won' else ('p1' if side == 'p2' else 'p2')
+                    r = s.p2_like(m.group(1))
+                    if r > 0.75 or r < 0.5 or win is None:                       # a short name misread both ways (its "sent out" and its
+                        side = 'p2' if r > 0.625 else 'p1'                       # "lost!" read with different letters, LAIC 2027 final G1)
+                        win = side if m.group(2) == 'won' else ('p1' if side == 'p2' else 'p2')   # is not evidence against the Pokemon left
                 if win: s.emit('|', f"|win|Player {win[1]}")
                 s.ended = True; s.prev_end = s.frame; s.meta[-1]['end'] = s.now()
                 if s.game_names: s.board = s.game_names.most_common(1)[0][0]      # who played this game, for telling the next one apart
@@ -290,7 +298,7 @@ class Reader:
                 if sl: s.shut(); s.slot_free[sd].append(sl); s.active.pop((sd, sl), None); break
             return
         lab = re.match(r'(.+?) (?:sent out|withdrew) ', text)
-        if lab and not text.startswith('Go!'): s.p2_label = lab.group(1).strip()          # "The Trainer", or the player's name: Player 2's messages
+        if lab and not text.startswith('Go!'): s.p2_label = lab.group(1).strip(); s.p2_labels.append(s.p2_label)   # "The Trainer", or the player's name: Player 2's messages
         m = re.search(r'Go! (.+?)!$', text) or re.search(r'sent out (.+?)!$', text)
         if m:
             if ' and ' in m.group(1): s.pairs['p1' if text.startswith('Go!') else 'p2'] = s.frame
@@ -549,7 +557,8 @@ class Reader:
         if s.started and not s.ended and boxes:                                         # mid-turn, the box of the Pokemon hit pops up alone
             if s.pending: s.place(boxes)
             s.watch_hp(boxes)
-        if len(boxes) < 2 and not text: s.in_decision = False if not decision else s.in_decision; return
+        s.off = 0 if decision else s.off + 1                                 # frames since the decision screen was last read
+        if len(boxes) < 2 and not text: s.in_decision = s.in_decision and (decision or s.off < 2); return
         if not s.started:
             if text and re.search(r'^Go! .+ and .+!$|sent out .+ and .+!$', text): s.lead_seen = True
             fresh = s.lead_seen or turn == 1 or (len(boxes) == 4 and all(p == 100 for n, p in boxes.values()))
@@ -584,14 +593,17 @@ class Reader:
             if len(s.settle) < 4 and (len(s.settle) < 2 or s.settle[-2] != seen): return
             s.shut(); s.reconcile(boxes); s.expire(); s.turn = max(s.turn + 1, turn or 0); s.emit('|upkeep', '|', f'|turn|{s.turn}'); s.mark()   # upkeep: durations count down
         if not decision: s.settle = []
-        s.in_decision = decision
+        s.in_decision = decision or (s.in_decision and s.off < 2 and not text)  # one frame without it (read "choosing actionẠạ", a mirrored
+                                                                                # frame) is not a new turn: LAIC 2027 final, two empty turns
 
     def assign_sheets(s, boxes, board=None):
         """the team sheets shown before the battle -> sides. Sheet screens come in runs, one player's sheet per run; each run's reads are
         merged (the fullest read of each Pokémon). A run goes to the side whose scoreboard name matches its header; failing that, to the
         side whose Pokémon on the field it has."""
         runs = []
-        sim = lambda a, b: difflib.SequenceMatcher(None, a, b).ratio() if a and b else 0
+        # names only: a sheet whose header was not read is keyed by its species (a frozenset), which compared with a name crashed the
+        # reader (LAIC 2027 Day 2: the stream's page restarted every 30 minutes)
+        sim = lambda a, b: difflib.SequenceMatcher(None, a, b).ratio() if a and b and isinstance(a, str) and isinstance(b, str) else 0
         for fr, owner, sets in s.raw_sheets:
             # only sheets shown since the last game ended and in the 20 minutes before this game: others belong to other matches
             if fr <= s.prev_end or fr < s.frame - 20 * 120: continue

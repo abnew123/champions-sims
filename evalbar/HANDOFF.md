@@ -615,6 +615,18 @@ and keep the outcome that matches the HP boxes: abilities like Stamina, item use
     is why the LAIC Day 2 page restarted every 30 minutes with 6 games.
   After the broadcast's "Game Winner" banner it replays the game's highlights ("REPLAY" in the corner); the reader already ignores
   them, since the game has ended.
+- Two more from the final's luck (the user asked why a Draco Meteor that was never close to a KO showed +25): a read forfeit ("The
+  battle has ended due to a forfeit.") now goes into the log as Showdown writes it ("|-message|Player N forfeited."), so replay.parse
+  marks the game a forfeit and the last turn's luck is not measured against the result (the final's G1: +16 of the +25 was the
+  concession). And "<mon> is fast asleep." becomes |cant|<mon>|slp, so replay.parse counts the turns slept and positions.js knows how
+  few are left (before, a Pokemon asleep twice was read as able to sleep on: G1's Politoed waking showed +50). On the 168 saved games:
+  55 gain a forfeit line, 20 gain slept turns (each sleep at most two, as Champions allows), nothing else changes. A first version
+  put the new method inside close() and cut its last line (the board names): a one-turn false start then split a match in two
+  and lost its sheets (Day 1 of one stream, 3 games); the check above is of the fixed version.
+- Known engine blind spot (Battle sim's, vfeats.rs): the value net's "asleep/frozen" input has no turns left, so a Pokemon one turn from
+  waking counts as nearly lost while it sits on the bench. One-turn payoff tables (the luck pass, decision costs) then mark switching
+  it out as a blunder: the final's G1 turn 5 read 34 points, 4 with Politoed read as awake at depth 4x. The bar's depth-4x read is
+  barely touched (73% and 71% on turns 5-6); a sleep input with the turns left would need a net retrain.
 - Two messages alike but about different Pokemon, back to back with no blank frame ("The opposing Staraptor's perish count fell to 3!",
   then Sinistcha's), were read as one (the run splits only below 0.85 similarity): Reader.other_mon now splits them when both name a
   Pokemon, not the same one, and the names as read differ more than a misread (similarity under 0.8). On the four days it adds 11 lines and

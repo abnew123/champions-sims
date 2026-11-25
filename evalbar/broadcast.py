@@ -128,7 +128,7 @@ PIVOT = {'Baton Pass', 'U-turn', 'Volt Switch', 'Flip Turn', 'Parting Shot', 'Te
 BOXES = (('p1', 'a', 0.0, 0.16), ('p1', 'b', 0.16, 0.42), ('p2', 'a', 0.58, 0.81), ('p2', 'b', 0.81, 1.0))
 # the battle messages that end with a full stop (the others end with "!" or "..."); other text in that part of the screen is the overlay's
 PERIOD = re.compile(r"(rain stopped|sunlight faded|sandstorm subsided|snow stopped|disappeared from the battlefield|weirdness disappeared|"
-                    r"electricity disappeared|mist disappeared|returned to normal|ended due to a forfeit)\.$")
+                    r"electricity disappeared|mist disappeared|returned to normal|ended due to a forfeit|is fast asleep)\.$")
 # what can happen as the leads come in, before turn 1: Intimidate and other stat changes, weather and terrain starting
 PRE = re.compile(r"('s .+ (fell|rose)|started to rain|sunlight turned harsh|sandstorm kicked up|started to snow|battlefield got weird|Grass grew|"
                  r"electric current ran|Mist swirled)", re.I)
@@ -271,7 +271,7 @@ class Reader:
                     if r > 0.75 or r < 0.5 or win is None:                       # a short name misread both ways (its "sent out" and its
                         side = 'p2' if r > 0.625 else 'p1'                       # "lost!" read with different letters, LAIC 2027 final G1)
                         win = side if m.group(2) == 'won' else ('p1' if side == 'p2' else 'p2')   # is not evidence against the Pokemon left
-                if win: s.emit('|', f"|win|Player {win[1]}")
+                if win: s.emit(*s.forfeit_line(win), '|', f"|win|Player {win[1]}")
                 s.ended = True; s.prev_end = s.frame; s.meta[-1]['end'] = s.now()
                 if s.game_names: s.board = s.game_names.most_common(1)[0][0]      # who played this game, for telling the next one apart
             return
@@ -388,6 +388,9 @@ class Reader:
         for pat, st in ((r'was burned', 'brn'), (r'is paralyzed', 'par'), (r'fell asleep', 'slp'), (r'was badly poisoned', 'tox'), (r'was poisoned', 'psn'), (r'was frozen', 'frz')):
             if re.match(pat, rest): s.emit(f'|-status|{me}|{st}'); return
         if re.match(r'woke up', rest): s.emit(f'|-curestatus|{me}|slp'); return
+        if re.match(r'is fast asleep', rest): s.emit(f'|cant|{me}|slp'); return     # a turn slept: replay.parse counts them, so the engine knows how
+                                                                                # few turns the sleep has left (LAIC 2027 final G1: Politoed, asleep
+                                                                                # twice, read as certain to sleep on, so its waking was +50 "luck")
         im = re.search(r'using its (.+?)!$', rest) or re.search(r'(ate its .+?)!$', rest)
         if im:
             item = fuzzy(re.sub(r'^ate its ', '', im.group(1)), 'items')
@@ -515,9 +518,13 @@ class Reader:
         left = {sd: 4 - len(s.fainted[sd]) for sd in ('p1', 'p2')}
         win = 'p1' if left['p2'] <= 0 < left['p1'] else 'p2' if left['p1'] <= 0 < left['p2'] else None
         if win is None and s.forfeit and left['p1'] != left['p2']: win = 'p1' if left['p1'] > left['p2'] else 'p2'   # a forfeit: the side behind
-        if win: s.emit('|', f'|win|Player {win[1]}')
+        if win: s.emit(*s.forfeit_line(win), '|', f'|win|Player {win[1]}')
         s.ended = True; s.prev_end = s.frame - 1; s.meta[-1]['end'] = s.now()
         if s.game_names: s.board = s.game_names.most_common(1)[0][0]
+    def forfeit_line(s, win):
+        """a forfeit read ("The battle has ended due to a forfeit."), as Showdown logs it, so replay.parse marks the game a forfeit: the
+        last turn's luck is then not measured against the result (a concession is not dice; the LAIC 2027 final's G1 had +16 from it)"""
+        return [f"|-message|Player {'2' if win == 'p1' else '1'} forfeited."] if s.forfeit else []
     def now(s): return s.t0 + (s.frame - 1) / 2                         # the video time of the current frame, in seconds
     def mark(s): s.meta[-1].setdefault('times', {})[s.turn] = s.now()
     def feed(s, lines):

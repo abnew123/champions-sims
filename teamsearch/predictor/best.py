@@ -1,12 +1,15 @@
 """Best teams by the matchup predictor (the user, 2026-11-27: separate "what the ladder settles to" from "what the best teams are,
 on ladder and in pro play"). This is the second question: which sixes score highest against a given field.
 
-Fields (one vote per player, the last DAYS days of the regulation's data): the ladder field (ladder replays) and the tournament
-field (online tournaments, scored with the model's tournament weights). Candidates: every six seen in the last 2 x DAYS days by
+Field (one vote per player, the last DAYS days of the regulation's data): the online-tournament field. The ladder field (--ladder)
+is off by default: validated on the following week, neither this ranking nor a six's own record picked the ladder winners
+(Nov 27: correlation -0.08 / -0.06 and -0.01 / -0.25); on tournament results the predictor's top fifth won 55.0% against 52.7%
+for all, about as well as their own earlier record (54.1-54.9%), with a weaker correlation (0.03-0.14 vs 0.19-0.24). Candidates: every six seen in the last 2 x DAYS days by
 2+ players, plus one-Pokemon swaps of the best 150 of them against each field (each species' most common recent set; species and
 item clauses kept). Each candidate's score is its predicted game win share against the field. Bootstrap refits (resampled
 matches) give a spread, and the ranking uses mean - 1 sd, so a team with thin evidence does not win on noise.
-  teamsearch/bin/teamsearch-py predictor/best.py [reg=M-C] [days=14]     -> predictor/best_<reg>.json and .txt
+  teamsearch/bin/teamsearch-py predictor/best.py [reg=M-C] [days=14] [--ladder]   -> predictor/best_<reg>.json and .txt
+  teamsearch/bin/teamsearch-py predictor/best.py validate [reg] [ladder|online]
 """
 import os, sys, json, time, random, hashlib, collections
 import numpy as np
@@ -14,6 +17,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import model as M, meta as X
 L = X.L
 BOOT = int(os.environ.get('TS_BEST_BOOT', 8)); TOPK = 150; NSWAP = 60; SHOW = 15
+USE = ('sp', 'tok', 'attr', 'pair', 'tpair', 'pl', 'rat')   # ladder and tournament games pooled: own tournament weights (sp_on, tok_on)
+                                                           # did no better on held-out games (evaluate.py online, Nov 27)
+
+LADDER = '--ladder' in sys.argv     # the ladder-field list is off by default: no out-of-sample signal there (validate, Nov 27)
 
 def lambdas():
     lam = json.load(open(os.path.join(M.HERE, 'lambdas.json')))
@@ -91,9 +98,9 @@ def main(reg='M-C', days=14):
     last = max(X.day(g['t']) for g in meta if g['reg'] == reg)
     d = lambda n: time.strftime('%Y-%m-%d', time.localtime(time.mktime(time.strptime(last, '%Y-%m-%d')) - 86400 * n))
     lo, lo2 = d(days - 1), d(2 * days - 1)
-    use = ('sp', 'tok', 'attr', 'pair', 'tpair', 'pl', 'rat') + (('sp_on', 'tok_on') if any(g['src'] == 'online' for g in meta) else ())
+    use = USE
     lam = lambdas(); m = M.Model(lam, use=use).fit(rows, y)
-    fields = {k: f for k, f in (('ladder', field(meta, rows, reg, lo, last, 'ladder')), ('tournaments', field(meta, rows, reg, lo, last, 'online'))) if f}
+    fields = {k: f for k, f in (('ladder', field(meta, rows, reg, lo, last, 'ladder') if LADDER else None), ('tournaments', field(meta, rows, reg, lo, last, 'online'))) if f}
     C = candidates(meta, rows, reg, lo2, last); keys = list(C)
     psets = recent_sets(meta, reg, lo2, last)
     use_sp = collections.Counter(M.idf(s['species']) for g in meta if g['reg'] == reg and lo <= X.day(g['t']) <= last for v in (g['sets1'], g['sets2']) for s in (v or []))
@@ -167,7 +174,7 @@ def validate(reg='M-C', days=14, hold=7, src='ladder'):
     last = max(X.day(g['t']) for g in meta if g['reg'] == reg)
     d = lambda n: time.strftime('%Y-%m-%d', time.localtime(time.mktime(time.strptime(last, '%Y-%m-%d')) - 86400 * n))
     cut = d(hold); lo, lo2 = d(hold + days - 1), d(hold + 2 * days - 1)
-    use = ('sp', 'tok', 'attr', 'pair', 'tpair', 'pl', 'rat') + (('sp_on', 'tok_on') if any(g['src'] == 'online' for g in meta) else ())
+    use = USE
     lam = lambdas(); later = np.array([X.day(g['t']) > cut for g in meta])
     F = field(meta, rows, reg, lo, cut, src); C = candidates(meta, rows, reg, lo2, cut); keys = list(C)
     pred = crossfit(rows, y, lam, use, keys, [C[k][0] for k in keys], F, int(src == 'online'), skip=later)
@@ -189,5 +196,6 @@ def validate(reg='M-C', days=14, hold=7, src='ladder'):
     M.say(msg); print(msg)
 
 if __name__ == '__main__':
-    if sys.argv[1:2] == ['validate']: validate(*(sys.argv[2:3] or ['M-C']))
-    else: main(*(sys.argv[1:2] or ['M-C']), *[int(a) for a in sys.argv[2:3]])
+    a = [x for x in sys.argv[1:] if not x.startswith('--')]
+    if a[:1] == ['validate']: validate(*(a[1:2] or ['M-C']), src=(a[2] if len(a) > 2 else 'ladder'))
+    else: main(*(a[:1] or ['M-C']), *[int(x) for x in a[1:2]])

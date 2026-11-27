@@ -11,7 +11,7 @@ backtest/compare.py: rank correlation over formes at >= 2% and total variation d
   M-B: known up to Aug 25 -> real Sep 5-8 (our M-B replays start Aug 19; Sep 1-4 holds the out-of-format window, left out)
   M-C: known up to Oct 6 and up to Oct 13 -> real "settled" window Oct 14 - Nov 6 (backtest/mc_truth.json)
 The number of steps is read off M-B and then applied to M-C, so M-C is a fair test.
-  teamsearch/bin/teamsearch-py predictor/meta.py backtest    -> predictor/meta_backtest.json, lines in predictor.log
+  teamsearch/bin/teamsearch-py predictor/meta.py backtest [--ladder-only]   -> predictor/meta_backtest.json, lines in predictor.log
 """
 import os, sys, json, math, time, datetime, collections
 import numpy as np
@@ -69,10 +69,11 @@ def use_of(x, F):
     return dict(u)
 
 def predict(rows, y, meta, reg, known_lo, known_hi, lam):
-    """fit on every game up to known_hi; pool = `reg` sheets in [known_lo, known_hi]; returns readings by step"""
+    """fit on every game up to known_hi (ladder and, when loaded, online tournaments: they predict both better, evaluate.py
+    online); pool = `reg` ladder sheets in [known_lo, known_hi]; returns readings by step"""
     fit = [i for i, g in enumerate(meta) if day(g['t']) <= known_hi]
     m = M.Model(lam, use=('sp', 'tok', 'attr', 'pair', 'tpair', 'pl', 'rat')).fit([rows[i] for i in fit], y[fit])
-    sd = sides(meta, rows, reg, known_lo, known_hi); seen, _ = usage([(p, f) for p, _, _, f in sd])
+    sd = sides(meta, rows, reg, known_lo, known_hi, 'ladder'); seen, _ = usage([(p, f) for p, _, _, f in sd])
     keys, groups, F, x0, cover = pool(sd)
     Z = M.Pool(m, groups).logits(); P = 1 / (1 + np.exp(-Z))
     xs = replicate(P, x0); base = use_of(x0, F)
@@ -83,14 +84,16 @@ def predict(rows, y, meta, reg, known_lo, known_hi, lam):
     return dict(fit_games=len(fit), sheets=len(sd), pool=len(keys), cover=cover, seen=seen, pred=pred, m=m, keys=keys, xs=xs, F=F)
 
 def backtest():
-    rows, y, meta = M.load(lambda g: g['src'] == 'ladder'); lam = json.load(open(os.path.join(M.HERE, 'lambdas.json')))
-    J = {}
+    srcs = ('ladder',) + (('online',) if '--ladder-only' not in sys.argv else ())
+    rows, y, meta = M.load(lambda g: g['src'] in srcs); lam = json.load(open(os.path.join(M.HERE, 'lambdas.json')))
+    J = dict(fit_on='+'.join(srcs))
+    M.say(f"meta backtest: the predictor fitted on {' and '.join(srcs)} games")
     cases = [('M-B: known to Aug 25, real Sep 5-8', 'M-B', ('2026-08-01', '2026-08-25'), ('2026-09-05', '2026-09-08')),
              ('M-C: known to Oct 6, real settled', 'M-C', ('2026-09-09', '2026-10-06'), ('2026-10-14', '2026-11-06')),
              ('M-C: known to Oct 13, real settled', 'M-C', ('2026-09-09', '2026-10-13'), ('2026-10-14', '2026-11-06'))]
     for name, reg, (klo, khi), (rlo, rhi) in cases:
         t0 = time.time(); r = predict(rows, y, meta, reg, klo, khi, lam)
-        real, n = usage([(p, f) for p, _, _, f in sides(meta, rows, reg, rlo, rhi)])
+        real, n = usage([(p, f) for p, _, _, f in sides(meta, rows, reg, rlo, rhi, 'ladder')])
         res = dict(fit_games=r['fit_games'], sheets=r['sheets'], pool=r['pool'], cover=r['cover'], real_players=n,
                    carried=score(r['seen'], real), steps={s: dict(pool=score(v['pool'], real), shift=score(v['shift'], real)) for s, v in r['pred'].items()})
         J[name] = res
@@ -109,4 +112,4 @@ def backtest():
     M.say("meta backtest done")
 
 if __name__ == '__main__':
-    if sys.argv[1:] == ['backtest']: backtest()
+    if sys.argv[1:2] == ['backtest']: backtest()

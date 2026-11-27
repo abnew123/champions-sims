@@ -4,6 +4,10 @@
   2. regionals: fit on every ladder game, score the 14,811 real M-C regional matches (open team sheets, Bo3) beside the battle
      sim's scores on the same matches (regsim/report.json)
   3. new species: fit on M-B only, score M-C ladder games, split by whether they hold species M-B never had (the M-D situation)
+  4. online: what the online-tournament games (Limitless, fetch_tours.py) add. Ridge for the tournament blocks (sp_on, tok_on:
+     fit before the 60% mark, validate on M-C tournament games at 60-80%) -> lambdas_online.json; the last 20% of ladder and
+     tournament games under three fits (ladder games only / tournament games pooled in / pooled with their own weights); the
+     regionals with every game, and with only the games played before each event (what the predictor could have said then)
 Team-only scores leave the rating gap out at prediction time (the model's use is team against team).
   teamsearch/bin/teamsearch-py predictor/evaluate.py [ladder|regionals|newspecies|all]  -> predictor/eval.json, lines in predictor.log
 """
@@ -92,6 +96,84 @@ def regional_rows():
         rows.append((A, B, None)); y.append(int(d['winner'] == d['p1'])); meta.append(dict(d, a=a, b=b))
     return rows, np.array(y, dtype=float), meta
 
+def match_score(z, ry):
+    """game log-odds -> Bo3 match log loss, favourite hit rate and the slope of real results on the predicted match log-odds"""
+    p = 1 / (1 + np.exp(-z)); q = np.clip(BO3(p), 1e-9, 1 - 1e-9); zq = np.log(q / (1 - q)); s = score(zq, ry); b = 0.0
+    for _ in range(30):
+        pp = 1 / (1 + np.exp(-b * zq)); b += np.sum(zq * (ry - pp)) / max(np.sum(zq * zq * pp * (1 - pp)), 1e-9)
+    s['slope'] = float(b); return s
+
+TUNE_ON = os.path.join(HERE, 'lambdas_online.json')
+GRID_ON = (300.0, 1000.0, 3000.0, 10000.0, 30000.0)
+ON = ('sp_on', 'tok_on')
+EVENTS = {'Baltimore': '2026-09-18', 'Brisbane': '2026-09-26', 'Frankfurt': '2026-09-26', 'Recife': '2026-10-03', 'Louisville': '2026-10-09'}
+
+def as_ctx(rows, c): return [(A, B, None, None, c) for A, B, *_ in rows]
+
+def online(J):
+    import calendar
+    rows, y, meta = M.load(lambda g: g['src'] in ('ladder', 'online')); lam = json.load(open(TUNE))
+    I = lambda f: [i for i, g in enumerate(meta) if f(g)]
+    lad = lambda g: g['src'] == 'ladder'; mc = lambda g: g['reg'] == 'M-C'
+    tc = sorted(g['t'] for g in meta if mc(g) and lad(g)); c60, c80 = tc[int(0.6 * len(tc))], tc[int(0.8 * len(tc))]
+    tr_a = I(lambda g: not mc(g) or g['t'] < c60)
+    va_l = I(lambda g: mc(g) and lad(g) and c60 <= g['t'] < c80); va_o = I(lambda g: mc(g) and not lad(g) and c60 <= g['t'] < c80)
+    te_l = I(lambda g: mc(g) and lad(g) and g['t'] >= c80); te_o = I(lambda g: mc(g) and not lad(g) and g['t'] >= c80)
+    rr, ry, rmeta = regional_rows()
+    nfit = (0 if os.path.exists(TUNE_ON) else 2 * len(GRID_ON)) + 3 + 3 + 3 * len(EVENTS); k = [0]; t0 = time.time()
+    def fit(idx, use, lm):
+        m = M.Model(lm, use=use).fit([rows[i] for i in idx], y[idx]); k[0] += 1
+        M.say(f"  score (tournament test): {k[0]}/{nfit} fits, {int((time.time() - t0) / 60)} min"); return m
+    day = lambda t: time.strftime('%b %d', time.gmtime(t))
+    M.say(f"evaluate online: {len(rows)} games ({sum(1 for g in meta if not lad(g))} from online tournaments); split at {day(c60)} / {day(c80)}")
+    J['online'] = dict(split=[c60, c80])
+    # 1. ridge for the tournament blocks
+    if os.path.exists(TUNE_ON): lon = json.load(open(TUNE_ON))
+    else:
+        lon = dict(sp_on=1000.0, tok_on=1000.0); V = as_ctx([rows[i] for i in va_o], 1)
+        for b in ON:
+            res = {v: M.logloss(fit(tr_a, FULL + ON, lam | lon | {b: v}).logit(V), y[va_o]) for v in GRID_ON}
+            lon[b] = min(res, key=res.get)
+            M.say(f"  {b:6s} ridge {lon[b]:g}: tournament validation log loss {res[lon[b]]:.4f}   (" + ', '.join(f"{a:g} {x:.4f}" for a, x in res.items()) + ")")
+        json.dump(lon, open(TUNE_ON, 'w'), indent=1)
+    J['online']['lambdas'] = lon; L2 = lam | lon
+    # 2. the last 20% of M-C, ladder and tournament games
+    fits = [('ladder games only', [i for i in tr_a + va_l + va_o if lad(meta[i])], FULL),
+            ('+ tournament games, pooled', tr_a + va_l + va_o, FULL), ('+ tournament games, own weights', tr_a + va_l + va_o, FULL + ON)]
+    M.say(f"  last 20%: {len(te_l)} ladder games, {len(te_o)} tournament games, from {day(c80)}")
+    J['online']['holdout'] = {}
+    for name, idx, use in fits:
+        m = fit(idx, use, L2); on = 'sp_on' in use
+        sl = score(m.logit(as_ctx([rows[i] for i in te_l], 0)), y[te_l]); so = score(m.logit(as_ctx([rows[i] for i in te_o], int(on))), y[te_o])
+        J['online']['holdout'][name] = dict(ladder=sl, tournament=so)
+        M.say(f"    {name:32s} ladder {sl['logloss']:.4f} / {100 * sl['acc']:.1f}%   tournament {so['logloss']:.4f} / {100 * so['acc']:.1f}%")
+    # 3. regionals: with every game (as test 2), then with only the games before each event
+    J['online']['regionals_all'] = {}
+    M.say(f"  regionals, fitted on every game ({len(rr)} matches; the sim: 0.7212 raw, 0.6862 with a hindsight shrink, 54.7%)")
+    for name, f, use in (('ladder games only', lad, FULL), ('+ tournament games, pooled', None, FULL), ('+ tournament games, own weights', None, FULL + ON)):
+        m = fit(I(f) if f else list(range(len(rows))), use, L2)
+        for c in ((0, 1) if 'sp_on' in use else (0,)):
+            s = match_score(m.logit(as_ctx(rr, c)), ry); nm = name + (', as a tournament' if c else ''); J['online']['regionals_all'][nm] = s
+            M.say(f"    {nm:46s} {s['logloss']:.4f} / {100 * s['acc']:.1f}%, slope {s['slope']:.2f}")
+    ev = np.array([d['ev'] for d in rmeta]); zs = collections.defaultdict(lambda: np.zeros(len(rr)))
+    for e, d0 in EVENTS.items():
+        t_e = calendar.timegm(time.strptime(d0, '%Y-%m-%d')); sel = np.where(ev == e)[0]; R = [rr[i] for i in sel]
+        before = lambda g: g['t'] < t_e
+        nl = sum(1 for g in meta if before(g) and mc(g) and lad(g)); no = sum(1 for g in meta if before(g) and mc(g) and not lad(g))
+        msg = []
+        for name, f, use in (('ladder games only', lambda g: lad(g) and before(g), FULL), ('+ tournament games, pooled', before, FULL),
+                             ('+ tournament games, own weights', before, FULL + ON)):
+            m = fit(I(f), use, L2)
+            for c in ((0, 1) if 'sp_on' in use else (0,)):
+                nm = name + (', as a tournament' if c else ''); z = m.logit(as_ctx(R, c)); zs[nm][sel] = z
+                s = match_score(z, ry[sel]); msg.append(f"{nm} {s['logloss']:.4f}/{100 * s['acc']:.1f}%")
+        M.say(f"    {e} ({d0}; M-C games before it: ladder {nl}, tournament {no}, sheets {len(sel)} matches): " + '; '.join(msg))
+    J['online']['regionals_before'] = {}
+    M.say(f"  regionals, each fitted only on the games before it (all five events together):")
+    for nm, z in zs.items():
+        s = match_score(z, ry); J['online']['regionals_before'][nm] = s
+        M.say(f"    {nm:46s} {s['logloss']:.4f} / {100 * s['acc']:.1f}%, slope {s['slope']:.2f}")
+
 def regionals(J):
     rows, y, meta = M.load(lambda g: g['src'] == 'ladder'); lam = lambdas(rows, y, meta)
     rr, ry, rmeta = regional_rows()
@@ -138,6 +220,6 @@ if __name__ == '__main__':
     J = json.load(open(OUT)) if os.path.exists(OUT) else {}
     if what == 'tune':
         rows, y, meta = M.load(lambda g: g['src'] == 'ladder'); tune(rows, y, meta)
-    for k, f in (('ladder', ladder), ('regionals', regionals), ('newspecies', newspecies)):
+    for k, f in (('ladder', ladder), ('regionals', regionals), ('newspecies', newspecies), ('online', online)):
         if what in (k, 'all'): f(J); json.dump(J, open(OUT, 'w'), indent=1)
     M.say(f"evaluate {what} done")

@@ -270,5 +270,105 @@
     "acc": 0.54348140645348
    }
   }
+ },
+ "online": {
+  "split": [
+   1793158416,
+   1794230781
+  ],
+  "lambdas": {
+   "sp_on": 300.0,
+   "tok_on": 30000.0
+  },
+  "holdout": {
+   "ladder games only": {
+    "ladder": {
+     "n": 15553,
+     "logloss": 0.6884225016495847,
+     "acc": 0.5331447309200797
+    },
+    "tournament": {
+     "n": 25151,
+     "logloss": 0.6853106140130435,
+     "acc": 0.5482485785853445
+    }
+   },
+   "+ tournament games, pooled": {
+    "ladder": {
+     "n": 15553,
+     "logloss": 0.6876197365590965,
+     "acc": 0.5343020639104996
+    },
+    "tournament": {
+     "n": 25151,
+     "logloss": 0.6832210641261521,
+     "acc": 0.5538149576557592
+    }
+   },
+   "+ tournament games, own weights": {
+    "ladder": {
+     "n": 15553,
+     "logloss": 0.6877149325586592,
+     "acc": 0.534109175078763
+    },
+    "tournament": {
+     "n": 25151,
+     "logloss": 0.6834215124601185,
+     "acc": 0.5538547175062621
+    }
+   }
+  },
+  "regionals_all": {
+   "ladder games only": {
+    "n": 14813,
+    "logloss": 0.6812266696384331,
+    "acc": 0.5593060149868359,
+    "slope": 0.8425725538979062
+   },
+   "+ tournament games, pooled": {
+    "n": 14813,
+    "logloss": 0.6764467242941677,
+    "acc": 0.5682171065955579,
+    "slope": 0.9420199029122199
+   },
+   "+ tournament games, own weights": {
+    "n": 14813,
+    "logloss": 0.6774664476705137,
+    "acc": 0.5660568419631404,
+    "slope": 0.9118986346609107
+   },
+   "+ tournament games, own weights, as a tournament": {
+    "n": 14813,
+    "logloss": 0.6765101683875172,
+    "acc": 0.5686221562141363,
+    "slope": 0.9228960055033898
+   }
+  },
+  "regionals_before": {
+   "ladder games only": {
+    "n": 14813,
+    "logloss": 0.6907890374177671,
+    "acc": 0.5466144602713833,
+    "slope": 0.5460626629136611
+   },
+   "+ tournament games, pooled": {
+    "n": 14813,
+    "logloss": 0.6825270555769734,
+    "acc": 0.5576858165125228,
+    "slope": 0.7365994143788525
+   },
+   "+ tournament games, own weights": {
+    "n": 14813,
+    "logloss": 0.6837636788586923,
+    "acc": 0.5572132586241815,
+    "slope": 0.6985779581364332
+   },
+   "+ tournament games, own weights, as a tournament": {
+    "n": 14813,
+    "logloss": 0.6828606052379368,
+    "acc": 0.5557955849591575,
+    "slope": 0.7222252580891906
+   }
+  }
  }
 }

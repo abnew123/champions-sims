@@ -1,0 +1,2717 @@
+{
+ "reg": "M-C",
+ "data_to": "2026-11-27",
+ "days": 14,
+ "fields": {
+  "tournaments": {
+   "players": 1889,
+   "sheets": 36438
+  }
+ },
+ "tournaments": {
+  "seen sixes (2+ players since 2026-10-31)": [
+   {
+    "rank": 1,
+    "formes": [
+     "Charizard-Mega-Y",
+     "Venusaur",
+     "Annihilape",
+     "Archaludon",
+     "Pelipper",
+     "Swampert-Mega"
+    ],
+    "sets": [
+     {
+      "ability": "Blaze",
+      "item": "Charizardite Y",
+      "moves": [
+       "Heat Wave",
+       "Weather Ball",
+       "Ancient Power",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "charizard"
+     },
+     {
+      "ability": "Chlorophyll",
+      "item": "Focus Sash",
+      "moves": [
+       "Protect",
+       "Sludge Bomb",
+       "Sleep Powder",
+       "Leaf Storm"
+      ],
+      "nature": "Modest",
+      "species": "venusaur"
+     },
+     {
+      "ability": "Defiant",
+      "item": "Choice Scarf",
+      "moves": [
+       "Close Combat",
+       "Phantom Force",
+       "Ice Punch",
+       "U-turn"
+      ],
+      "nature": "Jolly",
+      "species": "annihilape"
+     },
+     {
+      "ability": "Stamina",
+      "item": "Leftovers",
+      "moves": [
+       "Protect",
+       "Dragon Pulse",
+       "Snarl",
+       "Electro Shot"
+      ],
+      "nature": "Bold",
+      "species": "archaludon"
+     },
+     {
+      "ability": "Drizzle",
+      "item": "Sitrus Berry",
+      "moves": [
+       "Hurricane",
+       "Weather Ball",
+       "Wide Guard",
+       "Tailwind"
+      ],
+      "nature": "Bold",
+      "species": "pelipper"
+     },
+     {
+      "ability": "Torrent",
+      "item": "Swampertite",
+      "moves": [
+       "Wave Crash",
+       "High Horsepower",
+       "Ice Punch",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "swampert"
+     }
+    ],
+    "mean": 0.5975336338743006,
+    "sd": 0.007671968727318784,
+    "swap": null,
+    "games": 19,
+    "wins": 8
+   },
+   {
+    "rank": 2,
+    "formes": [
+     "Whimsicott",
+     "Glimmora",
+     "Kingambit",
+     "Garchomp",
+     "Charizard-Mega-Y",
+     "Metagross-Mega"
+    ],
+    "sets": [
+     {
+      "ability": "Prankster",
+      "item": "OccaBerry",
+      "moves": [
+       "Moonblast",
+       "Tailwind",
+       "Encore",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "Whimsicott"
+     },
+     {
+      "ability": "ToxicDebris",
+      "item": "FocusSash",
+      "moves": [
+       "SludgeBomb",
+       "PowerGem",
+       "EarthPower",
+       "SpikyShield"
+      ],
+      "nature": "Modest",
+      "species": "Glimmora"
+     },
+     {
+      "ability": "Defiant",
+      "item": "LifeOrb",
+      "moves": [
+       "KowtowCleave",
+       "SuckerPunch",
+       "LowKick",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "Kingambit"
+     },
+     {
+      "ability": "RoughSkin",
+      "item": "ChoiceScarf",
+      "moves": [
+       "DragonClaw",
+       "StompingTantrum",
+       "Earthquake",
+       "RockSlide"
+      ],
+      "nature": "Adamant",
+      "species": "Garchomp"
+     },
+     {
+      "ability": "Blaze",
+      "item": "CharizarditeY",
+      "moves": [
+       "WeatherBall",
+       "SolarBeam",
+       "HeatWave",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "Charizard"
+     },
+     {
+      "ability": "ClearBody",
+      "item": "Metagrossite",
+      "moves": [
+       "PsychicFangs",
+       "BulletPunch",
+       "StompingTantrum",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "Metagross"
+     }
+    ],
+    "mean": 0.5886043149417308,
+    "sd": 0.007398006272189822,
+    "swap": null,
+    "games": 15,
+    "wins": 9
+   },
+   {
+    "rank": 3,
+    "formes": [
+     "Charizard-Mega-Y",
+     "Venusaur",
+     "Annihilape",
+     "Dragonite-Mega",
+     "Kingambit",
+     "Farigiraf"
+    ],
+    "sets": [
+     {
+      "ability": "Blaze",
+      "item": "Charizardite Y",
+      "moves": [
+       "Protect",
+       "Heat Wave",
+       "Weather Ball",
+       "Ancient Power"
+      ],
+      "nature": "Timid",
+      "species": "charizard"
+     },
+     {
+      "ability": "Chlorophyll",
+      "item": "Focus Sash",
+      "moves": [
+       "Protect",
+       "Sleep Powder",
+       "Sludge Bomb",
+       "Leaf Storm"
+      ],
+      "nature": "Timid",
+      "species": "venusaur"
+     },
+     {
+      "ability": "Defiant",
+      "item": "Choice Scarf",
+      "moves": [
+       "Close Combat",
+       "Rock Slide",
+       "Ice Punch",
+       "Phantom Force"
+      ],
+      "nature": "Adamant",
+      "species": "annihilape"
+     },
+     {
+      "ability": "Multiscale",
+      "item": "Dragoninite",
+      "moves": [
+       "Dragon Pulse",
+       "Heat Wave",
+       "Tailwind",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "dragonite"
+     },
+     {
+      "ability": "Defiant",
+      "item": "Chople Berry",
+      "moves": [
+       "Kowtow Cleave",
+       "Sucker Punch",
+       "Low Kick",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "kingambit"
+     },
+     {
+      "ability": "Armor Tail",
+      "item": "Sitrus Berry",
+      "moves": [
+       "Imprison",
+       "Trick Room",
+       "Expanding Force",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "farigiraf"
+     }
+    ],
+    "mean": 0.5962909209146418,
+    "sd": 0.015237532730817738,
+    "swap": null,
+    "games": 35,
+    "wins": 19
+   },
+   {
+    "rank": 4,
+    "formes": [
+     "Glimmora-Mega",
+     "Froslass-Mega",
+     "Rillaboom",
+     "Kingambit",
+     "Armarouge",
+     "Garchomp"
+    ],
+    "sets": [
+     {
+      "ability": "Toxic Debris",
+      "item": "Glimmoranite",
+      "moves": [
+       "Sludge Bomb",
+       "Power Gem",
+       "Earth Power",
+       "Spiky Shield"
+      ],
+      "nature": "Timid",
+      "species": "glimmora"
+     },
+     {
+      "ability": "Cursed Body",
+      "item": "Froslassite",
+      "moves": [
+       "Blizzard",
+       "Shadow Ball",
+       "Aurora Veil",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "froslass"
+     },
+     {
+      "ability": "Grassy Surge",
+      "item": "Miracle Seed",
+      "moves": [
+       "Wood Hammer",
+       "Grassy Glide",
+       "High Horsepower",
+       "Fake Out"
+      ],
+      "nature": "Adamant",
+      "species": "rillaboom"
+     },
+     {
+      "ability": "Defiant",
+      "item": "Life Orb",
+      "moves": [
+       "Kowtow Cleave",
+       "Sucker Punch",
+       "Swords Dance",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "kingambit"
+     },
+     {
+      "ability": "Weak Armor",
+      "item": "Focus Sash",
+      "moves": [
+       "Armor Cannon",
+       "Psyshock",
+       "Wide Guard",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "armarouge"
+     },
+     {
+      "ability": "Rough Skin",
+      "item": "Choice Scarf",
+      "moves": [
+       "Dragon Claw",
+       "Stomping Tantrum",
+       "Rock Tomb",
+       "Rock Slide"
+      ],
+      "nature": "Adamant",
+      "species": "garchomp"
+     }
+    ],
+    "mean": 0.5786295714552003,
+    "sd": 0.003722707291335302,
+    "swap": null,
+    "games": 59,
+    "wins": 32
+   },
+   {
+    "rank": 5,
+    "formes": [
+     "Dragonite-Mega",
+     "Basculegion",
+     "Sneasler",
+     "Kingambit",
+     "Rillaboom",
+     "Floette-Mega"
+    ],
+    "sets": [
+     {
+      "ability": "Inner Focus",
+      "item": "Dragoninite",
+      "moves": [
+       "Dragon Pulse",
+       "Heat Wave",
+       "Tailwind",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "dragonite"
+     },
+     {
+      "ability": "Adaptability",
+      "item": "Mystic Water",
+      "moves": [
+       "Wave Crash",
+       "Last Respects",
+       "Aqua Jet",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "basculegion"
+     },
+     {
+      "ability": "Poison Touch",
+      "item": "Focus Sash",
+      "moves": [
+       "Poison Jab",
+       "Close Combat",
+       "Fake Out",
+       "Protect"
+      ],
+      "nature": "Jolly",
+      "species": "sneasler"
+     },
+     {
+      "ability": "Defiant",
+      "item": "Life Orb",
+      "moves": [
+       "Kowtow Cleave",
+       "Sucker Punch",
+       "Swords Dance",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "kingambit"
+     },
+     {
+      "ability": "Grassy Surge",
+      "item": "Miracle Seed",
+      "moves": [
+       "Wood Hammer",
+       "Grassy Glide",
+       "High Horsepower",
+       "Fake Out"
+      ],
+      "nature": "Adamant",
+      "species": "rillaboom"
+     },
+     {
+      "ability": "Flower Veil",
+      "item": "Floettite",
+      "moves": [
+       "Moonblast",
+       "Dazzling Gleam",
+       "Calm Mind",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "floette-eternal"
+     }
+    ],
+    "mean": 0.5800320626185976,
+    "sd": 0.00606291495852691,
+    "swap": null,
+    "games": 230,
+    "wins": 110
+   },
+   {
+    "rank": 6,
+    "formes": [
+     "Charizard-Mega-Y",
+     "Venusaur",
+     "Pelipper",
+     "Archaludon",
+     "Garchomp",
+     "Kingambit"
+    ],
+    "sets": [
+     {
+      "ability": "Blaze",
+      "item": "CharizarditeY",
+      "moves": [
+       "WeatherBall",
+       "HeatWave",
+       "Hurricane",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "Charizard"
+     },
+     {
+      "ability": "Chlorophyll",
+      "item": "FocusSash",
+      "moves": [
+       "Protect",
+       "SleepPowder",
+       "SludgeBomb",
+       "LeafStorm"
+      ],
+      "nature": "Modest",
+      "species": "Venusaur"
+     },
+     {
+      "ability": "Drizzle",
+      "item": "SitrusBerry",
+      "moves": [
+       "Hurricane",
+       "WeatherBall",
+       "Tailwind",
+       "WideGuard"
+      ],
+      "nature": "Bold",
+      "species": "Pelipper"
+     },
+     {
+      "ability": "Stamina",
+      "item": "Leftovers",
+      "moves": [
+       "Protect",
+       "ElectroShot",
+       "DragonPulse",
+       "Snarl"
+      ],
+      "nature": "Calm",
+      "species": "Archaludon"
+     },
+     {
+      "ability": "RoughSkin",
+      "item": "ChoiceScarf",
+      "moves": [
+       "DragonRush",
+       "StompingTantrum",
+       "Earthquake",
+       "RockSlide"
+      ],
+      "nature": "Adamant",
+      "species": "Garchomp"
+     },
+     {
+      "ability": "Defiant",
+      "item": "ExpertBelt",
+      "moves": [
+       "KowtowCleave",
+       "SuckerPunch",
+       "IronHead",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "Kingambit"
+     }
+    ],
+    "mean": 0.5787553487268841,
+    "sd": 0.005197689022022075,
+    "swap": null,
+    "games": 7,
+    "wins": 4
+   },
+   {
+    "rank": 7,
+    "formes": [
+     "Sinistcha",
+     "Delphox-Mega",
+     "Incineroar",
+     "Kingambit",
+     "Sneasler",
+     "Floette-Mega"
+    ],
+    "sets": [
+     {
+      "ability": "Hospitality",
+      "item": "Colbur Berry",
+      "moves": [
+       "Matcha Gotcha",
+       "Rage Powder",
+       "Trick Room",
+       "Protect"
+      ],
+      "nature": "Bold",
+      "species": "sinistcha"
+     },
+     {
+      "ability": "Blaze",
+      "item": "Delphoxite",
+      "moves": [
+       "Heat Wave",
+       "Psychic",
+       "Nasty Plot",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "delphox"
+     },
+     {
+      "ability": "Intimidate",
+      "item": "Sitrus Berry",
+      "moves": [
+       "Fake Out",
+       "Flare Blitz",
+       "Throat Chop",
+       "Parting Shot"
+      ],
+      "nature": "Careful",
+      "species": "incineroar"
+     },
+     {
+      "ability": "Defiant",
+      "item": "Life Orb",
+      "moves": [
+       "Kowtow Cleave",
+       "Sucker Punch",
+       "Swords Dance",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "kingambit"
+     },
+     {
+      "ability": "Poison Touch",
+      "item": "Focus Sash",
+      "moves": [
+       "Fake Out",
+       "Poison Jab",
+       "Close Combat",
+       "Quick Guard"
+      ],
+      "nature": "Jolly",
+      "species": "sneasler"
+     },
+     {
+      "ability": "Flower Veil",
+      "item": "Floettite",
+      "moves": [
+       "Dazzling Gleam",
+       "Moonblast",
+       "Protect",
+       "Calm Mind"
+      ],
+      "nature": "Modest",
+      "species": "floette-eternal"
+     }
+    ],
+    "mean": 0.5750968706815631,
+    "sd": 0.003964140028775642,
+    "swap": null,
+    "games": 2586,
+    "wins": 1380
+   },
+   {
+    "rank": 8,
+    "formes": [
+     "Pelipper",
+     "Venusaur",
+     "Archaludon",
+     "Charizard-Mega-Y",
+     "Garchomp-Mega-Z",
+     "Annihilape"
+    ],
+    "sets": [
+     {
+      "ability": "Drizzle",
+      "item": "Sitrus Berry",
+      "moves": [
+       "Weather Ball",
+       "Hurricane",
+       "Tailwind",
+       "Wide Guard"
+      ],
+      "nature": "Modest",
+      "species": "pelipper"
+     },
+     {
+      "ability": "Chlorophyll",
+      "item": "Focus Sash",
+      "moves": [
+       "Leaf Storm",
+       "Sludge Bomb",
+       "Sleep Powder",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "venusaur"
+     },
+     {
+      "ability": "Stamina",
+      "item": "Leftovers",
+      "moves": [
+       "Draco Meteor",
+       "Flash Cannon",
+       "Protect",
+       "Electro Shot"
+      ],
+      "nature": "Bold",
+      "species": "archaludon"
+     },
+     {
+      "ability": "Blaze",
+      "item": "Charizardite Y",
+      "moves": [
+       "Heat Wave",
+       "Weather Ball",
+       "Ancient Power",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "charizard"
+     },
+     {
+      "ability": "Rough Skin",
+      "item": "Garchompite Z",
+      "moves": [
+       "Draco Meteor",
+       "Stomping Tantrum",
+       "Rock Slide",
+       "Protect"
+      ],
+      "nature": "Jolly",
+      "species": "garchomp"
+     },
+     {
+      "ability": "Defiant",
+      "item": "Choice Scarf",
+      "moves": [
+       "Close Combat",
+       "Shadow Claw",
+       "Bulldoze",
+       "Ice Punch"
+      ],
+      "nature": "Jolly",
+      "species": "annihilape"
+     }
+    ],
+    "mean": 0.5783567578196563,
+    "sd": 0.008864484762837821,
+    "swap": null,
+    "games": 54,
+    "wins": 34
+   },
+   {
+    "rank": 9,
+    "formes": [
+     "Salamence-Mega",
+     "Sneasler",
+     "Basculegion",
+     "Raichu-Mega-X",
+     "Kingambit",
+     "Volcarona"
+    ],
+    "sets": [
+     {
+      "ability": "Intimidate",
+      "item": "Salamencite",
+      "moves": [
+       "Hyper Voice",
+       "Draco Meteor",
+       "Tailwind",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "salamence"
+     },
+     {
+      "ability": "Unburden",
+      "item": "Electric Seed",
+      "moves": [
+       "Close Combat",
+       "Rock Slide",
+       "Swords Dance",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "sneasler"
+     },
+     {
+      "ability": "Adaptability",
+      "item": "Life Orb",
+      "moves": [
+       "Wave Crash",
+       "Last Respects",
+       "Aqua Jet",
+       "Protect"
+      ],
+      "nature": "Jolly",
+      "species": "basculegion"
+     },
+     {
+      "ability": "Lightning Rod",
+      "item": "Raichunite X",
+      "moves": [
+       "Fake Out",
+       "Volt Tackle",
+       "Feint",
+       "Protect"
+      ],
+      "nature": "Jolly",
+      "species": "raichu"
+     },
+     {
+      "ability": "Defiant",
+      "item": "Black Glasses",
+      "moves": [
+       "Kowtow Cleave",
+       "Iron Head",
+       "Sucker Punch",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "kingambit"
+     },
+     {
+      "ability": "Flame Body",
+      "item": "Leftovers",
+      "moves": [
+       "Struggle Bug",
+       "Heat Wave",
+       "Quiver Dance",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "volcarona"
+     }
+    ],
+    "mean": 0.5791375368860711,
+    "sd": 0.012732106122770865,
+    "swap": null,
+    "games": 15,
+    "wins": 6
+   },
+   {
+    "rank": 10,
+    "formes": [
+     "Charizard-Mega-Y",
+     "Golisopod-Mega",
+     "Venusaur",
+     "Archaludon",
+     "Pelipper",
+     "Farigiraf"
+    ],
+    "sets": [
+     {
+      "ability": "Blaze",
+      "item": "Charizardite Y",
+      "moves": [
+       "Heat Wave",
+       "Weather Ball",
+       "Hurricane",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "charizard"
+     },
+     {
+      "ability": "Emergency Exit",
+      "item": "Golisopite",
+      "moves": [
+       "Leech Life",
+       "Iron Head",
+       "Wide Guard",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "golisopod"
+     },
+     {
+      "ability": "Chlorophyll",
+      "item": "Life Orb",
+      "moves": [
+       "Leaf Storm",
+       "Sludge Bomb",
+       "Earth Power",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "venusaur"
+     },
+     {
+      "ability": "Stamina",
+      "item": "Leftovers",
+      "moves": [
+       "Dragon Pulse",
+       "Snarl",
+       "Electro Shot",
+       "Protect"
+      ],
+      "nature": "Bold",
+      "species": "archaludon"
+     },
+     {
+      "ability": "Drizzle",
+      "item": "Focus Sash",
+      "moves": [
+       "Hurricane",
+       "Tailwind",
+       "Weather Ball",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "pelipper"
+     },
+     {
+      "ability": "Armor Tail",
+      "item": "Sitrus Berry",
+      "moves": [
+       "Psychic",
+       "Trick Room",
+       "Helping Hand",
+       "Protect"
+      ],
+      "nature": "Bold",
+      "species": "farigiraf"
+     }
+    ],
+    "mean": 0.571954444453008,
+    "sd": 0.0059784773134712674,
+    "swap": null,
+    "games": 21,
+    "wins": 10
+   },
+   {
+    "rank": 11,
+    "formes": [
+     "Floette-Mega",
+     "Sneasler",
+     "Volcarona",
+     "Kingambit",
+     "Rillaboom",
+     "Raichu-Mega-Y"
+    ],
+    "sets": [
+     {
+      "ability": "Flower Veil",
+      "item": "Floettite",
+      "moves": [
+       "Moonblast",
+       "Dazzling Gleam",
+       "Calm Mind",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "floette-eternal"
+     },
+     {
+      "ability": "Unburden",
+      "item": "White Herb",
+      "moves": [
+       "Dire Claw",
+       "Close Combat",
+       "Fake Out",
+       "Protect"
+      ],
+      "nature": "Jolly",
+      "species": "sneasler"
+     },
+     {
+      "ability": "Flame Body",
+      "item": "Rocky Helmet",
+      "moves": [
+       "Overheat",
+       "Tailwind",
+       "Rage Powder",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "volcarona"
+     },
+     {
+      "ability": "Defiant",
+      "item": "Life Orb",
+      "moves": [
+       "Kowtow Cleave",
+       "Sucker Punch",
+       "Swords Dance",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "kingambit"
+     },
+     {
+      "ability": "Grassy Surge",
+      "item": "Miracle Seed",
+      "moves": [
+       "Fake Out",
+       "Grassy Glide",
+       "Wood Hammer",
+       "U-turn"
+      ],
+      "nature": "Adamant",
+      "species": "rillaboom"
+     },
+     {
+      "ability": "Lightning Rod",
+      "item": "Raichunite Y",
+      "moves": [
+       "Zap Cannon",
+       "Focus Blast",
+       "Encore",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "raichu"
+     }
+    ],
+    "mean": 0.5711227686793042,
+    "sd": 0.006437830800855673,
+    "swap": null,
+    "games": 48,
+    "wins": 27
+   },
+   {
+    "rank": 12,
+    "formes": [
+     "Floette-Mega",
+     "Kingambit",
+     "Rillaboom",
+     "Sneasler",
+     "Incineroar",
+     "Delphox-Mega"
+    ],
+    "sets": [
+     {
+      "ability": "FlowerVeil",
+      "item": "Floettite",
+      "moves": [
+       "DazzlingGleam",
+       "DrainingKiss",
+       "CalmMind",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "Floette-Eternal"
+     },
+     {
+      "ability": "Defiant",
+      "item": "LifeOrb",
+      "moves": [
+       "KowtowCleave",
+       "SuckerPunch",
+       "SwordsDance",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "Kingambit"
+     },
+     {
+      "ability": "GrassySurge",
+      "item": "MiracleSeed",
+      "moves": [
+       "WoodHammer",
+       "GrassyGlide",
+       "FakeOut",
+       "HighHorsepower"
+      ],
+      "nature": "Adamant",
+      "species": "Rillaboom"
+     },
+     {
+      "ability": "PoisonTouch",
+      "item": "FocusSash",
+      "moves": [
+       "PoisonJab",
+       "CloseCombat",
+       "FakeOut",
+       "QuickGuard"
+      ],
+      "nature": "Jolly",
+      "species": "Sneasler"
+     },
+     {
+      "ability": "Intimidate",
+      "item": "PasshoBerry",
+      "moves": [
+       "FlareBlitz",
+       "ThroatChop",
+       "FakeOut",
+       "PartingShot"
+      ],
+      "nature": "Careful",
+      "species": "Incineroar"
+     },
+     {
+      "ability": "Blaze",
+      "item": "Delphoxite",
+      "moves": [
+       "HeatWave",
+       "Psychic",
+       "NastyPlot",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "Delphox"
+     }
+    ],
+    "mean": 0.5699454086601455,
+    "sd": 0.005964371365929731,
+    "swap": null,
+    "games": 134,
+    "wins": 81
+   },
+   {
+    "rank": 13,
+    "formes": [
+     "Charizard-Mega-Y",
+     "Dragonite-Mega",
+     "Garchomp",
+     "Kingambit",
+     "Basculegion",
+     "Venusaur"
+    ],
+    "sets": [
+     {
+      "ability": "Blaze",
+      "item": "CharizarditeY",
+      "moves": [
+       "HeatWave",
+       "Protect",
+       "SolarBeam",
+       "WeatherBall"
+      ],
+      "nature": "Modest",
+      "species": "Charizard"
+     },
+     {
+      "ability": "Multiscale",
+      "item": "Dragoninite",
+      "moves": [
+       "ExtremeSpeed",
+       "HeatWave",
+       "Protect",
+       "DragonPulse"
+      ],
+      "nature": "Modest",
+      "species": "Dragonite"
+     },
+     {
+      "ability": "RoughSkin",
+      "item": "LifeOrb",
+      "moves": [
+       "Earthquake",
+       "Protect",
+       "RockSlide",
+       "DragonClaw"
+      ],
+      "nature": "Jolly",
+      "species": "Garchomp"
+     },
+     {
+      "ability": "Defiant",
+      "item": "OccaBerry",
+      "moves": [
+       "KowtowCleave",
+       "IronHead",
+       "SuckerPunch",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "Kingambit"
+     },
+     {
+      "ability": "Adaptability",
+      "item": "ChoiceScarf",
+      "moves": [
+       "WaveCrash",
+       "LastRespects",
+       "AquaJet",
+       "FlipTurn"
+      ],
+      "nature": "Jolly",
+      "species": "Basculegion"
+     },
+     {
+      "ability": "Chlorophyll",
+      "item": "FocusSash",
+      "moves": [
+       "LeafStorm",
+       "SludgeBomb",
+       "Protect",
+       "SleepPowder"
+      ],
+      "nature": "Modest",
+      "species": "Venusaur"
+     }
+    ],
+    "mean": 0.5705078159348408,
+    "sd": 0.006904490078443773,
+    "swap": null,
+    "games": 8,
+    "wins": 6
+   },
+   {
+    "rank": 14,
+    "formes": [
+     "Blaziken-Mega",
+     "Torkoal",
+     "Primarina",
+     "Venusaur",
+     "Farigiraf",
+     "Kingambit"
+    ],
+    "sets": [
+     {
+      "ability": "Speed Boost",
+      "item": "Blazikenite",
+      "moves": [
+       "Detect",
+       "Flare Blitz",
+       "Close Combat",
+       "Rock Slide"
+      ],
+      "nature": "Adamant",
+      "species": "blaziken"
+     },
+     {
+      "ability": "Drought",
+      "item": "Charcoal",
+      "moves": [
+       "Eruption",
+       "Weather Ball",
+       "Helping Hand",
+       "Protect"
+      ],
+      "nature": "Quiet",
+      "species": "torkoal"
+     },
+     {
+      "ability": "Liquid Voice",
+      "item": "Life Orb",
+      "moves": [
+       "Protect",
+       "Hyper Voice",
+       "Moonblast",
+       "Aqua Jet"
+      ],
+      "nature": "Quiet",
+      "species": "primarina"
+     },
+     {
+      "ability": "Chlorophyll",
+      "item": "Focus Sash",
+      "moves": [
+       "Leaf Storm",
+       "Sludge Bomb",
+       "Sleep Powder",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "venusaur"
+     },
+     {
+      "ability": "Armor Tail",
+      "item": "Sitrus Berry",
+      "moves": [
+       "Thunderbolt",
+       "Helping Hand",
+       "Psychic Noise",
+       "Trick Room"
+      ],
+      "nature": "Bold",
+      "species": "farigiraf"
+     },
+     {
+      "ability": "Defiant",
+      "item": "Chople Berry",
+      "moves": [
+       "Protect",
+       "Kowtow Cleave",
+       "Sucker Punch",
+       "Iron Head"
+      ],
+      "nature": "Adamant",
+      "species": "kingambit"
+     }
+    ],
+    "mean": 0.5710797528800622,
+    "sd": 0.007762037811556856,
+    "swap": null,
+    "games": 43,
+    "wins": 21
+   },
+   {
+    "rank": 15,
+    "formes": [
+     "Sneasler",
+     "Kingambit",
+     "Whimsicott",
+     "Charizard-Mega-Y",
+     "Floette-Mega",
+     "Basculegion"
+    ],
+    "sets": [
+     {
+      "ability": "Poison Touch",
+      "item": "Life Orb",
+      "moves": [
+       "Close Combat",
+       "Dire Claw",
+       "Rock Slide",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "sneasler"
+     },
+     {
+      "ability": "Defiant",
+      "item": "Focus Sash",
+      "moves": [
+       "Kowtow Cleave",
+       "Sucker Punch",
+       "Low Kick",
+       "Iron Head"
+      ],
+      "nature": "Adamant",
+      "species": "kingambit"
+     },
+     {
+      "ability": "Prankster",
+      "item": "Fairy Feather",
+      "moves": [
+       "Tailwind",
+       "Moonblast",
+       "Encore",
+       "Protect"
+      ],
+      "nature": "Mild",
+      "species": "whimsicott"
+     },
+     {
+      "ability": "Blaze",
+      "item": "Charizardite Y",
+      "moves": [
+       "Heat Wave",
+       "Weather Ball",
+       "Ancient Power",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "charizard"
+     },
+     {
+      "ability": "Flower Veil",
+      "item": "Floettite",
+      "moves": [
+       "Moonblast",
+       "Dazzling Gleam",
+       "Light of Ruin",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "floette-eternal"
+     },
+     {
+      "ability": "Adaptability",
+      "item": "Mystic Water",
+      "moves": [
+       "Wave Crash",
+       "Aqua Jet",
+       "Last Respects",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "basculegion"
+     }
+    ],
+    "mean": 0.5639452210339451,
+    "sd": 0.002836166725398983,
+    "swap": null,
+    "games": 44,
+    "wins": 19
+   }
+  ],
+  "one-swap variants (speculative: never played as a six)": [
+   {
+    "rank": 1,
+    "formes": [
+     "Kommo-o",
+     "Charizard-Mega-Y",
+     "Pelipper",
+     "Archaludon",
+     "Sneasler",
+     "Froslass-Mega"
+    ],
+    "sets": [
+     {
+      "species": "kommo-o",
+      "item": "Dragon Fang",
+      "ability": "Soundproof",
+      "nature": "Modest",
+      "moves": [
+       "Aura Sphere",
+       "Clanging Scales",
+       "Clangorous Soul",
+       "Protect"
+      ]
+     },
+     {
+      "ability": "Blaze",
+      "item": "Charizardite Y",
+      "moves": [
+       "Heat Wave",
+       "Weather Ball",
+       "Hurricane",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "charizard"
+     },
+     {
+      "ability": "Drizzle",
+      "item": "Sitrus Berry",
+      "moves": [
+       "Hurricane",
+       "Weather Ball",
+       "Wide Guard",
+       "Tailwind"
+      ],
+      "nature": "Modest",
+      "species": "pelipper"
+     },
+     {
+      "ability": "Stamina",
+      "item": "Leftovers",
+      "moves": [
+       "Electro Shot",
+       "Dragon Pulse",
+       "Snarl",
+       "Protect"
+      ],
+      "nature": "Calm",
+      "species": "archaludon"
+     },
+     {
+      "ability": "Poison Touch",
+      "item": "Life Orb",
+      "moves": [
+       "Close Combat",
+       "Poison Jab",
+       "Throat Chop",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "sneasler"
+     },
+     {
+      "ability": "Cursed Body",
+      "item": "Froslassite",
+      "moves": [
+       "Blizzard",
+       "Aurora Veil",
+       "Rain Dance",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "froslass"
+     }
+    ],
+    "mean": 0.6717901642248589,
+    "sd": 0.0059185201685596454,
+    "swap": "castform -> kommo-o",
+    "games": 0,
+    "wins": 0
+   },
+   {
+    "rank": 2,
+    "formes": [
+     "Basculegion-F",
+     "Charizard-Mega-Y",
+     "Pelipper",
+     "Archaludon",
+     "Sneasler",
+     "Froslass-Mega"
+    ],
+    "sets": [
+     {
+      "species": "Basculegion-F",
+      "item": "FocusSash",
+      "ability": "SwiftSwim",
+      "nature": "Modest",
+      "moves": [
+       "IceBeam",
+       "MuddyWater",
+       "Protect",
+       "ShadowBall"
+      ]
+     },
+     {
+      "ability": "Blaze",
+      "item": "Charizardite Y",
+      "moves": [
+       "Heat Wave",
+       "Weather Ball",
+       "Hurricane",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "charizard"
+     },
+     {
+      "ability": "Drizzle",
+      "item": "Sitrus Berry",
+      "moves": [
+       "Hurricane",
+       "Weather Ball",
+       "Wide Guard",
+       "Tailwind"
+      ],
+      "nature": "Modest",
+      "species": "pelipper"
+     },
+     {
+      "ability": "Stamina",
+      "item": "Leftovers",
+      "moves": [
+       "Electro Shot",
+       "Dragon Pulse",
+       "Snarl",
+       "Protect"
+      ],
+      "nature": "Calm",
+      "species": "archaludon"
+     },
+     {
+      "ability": "Poison Touch",
+      "item": "Life Orb",
+      "moves": [
+       "Close Combat",
+       "Poison Jab",
+       "Throat Chop",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "sneasler"
+     },
+     {
+      "ability": "Cursed Body",
+      "item": "Froslassite",
+      "moves": [
+       "Blizzard",
+       "Aurora Veil",
+       "Rain Dance",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "froslass"
+     }
+    ],
+    "mean": 0.6605170026789228,
+    "sd": 0.007226718599878843,
+    "swap": "castform -> Basculegion-F",
+    "games": 0,
+    "wins": 0
+   },
+   {
+    "rank": 3,
+    "formes": [
+     "Dragonite-Mega",
+     "Basculegion",
+     "Sneasler",
+     "Kingambit",
+     "Archaludon",
+     "Floette-Mega"
+    ],
+    "sets": [
+     {
+      "ability": "Inner Focus",
+      "item": "Dragoninite",
+      "moves": [
+       "Dragon Pulse",
+       "Heat Wave",
+       "Tailwind",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "dragonite"
+     },
+     {
+      "ability": "Adaptability",
+      "item": "Mystic Water",
+      "moves": [
+       "Wave Crash",
+       "Last Respects",
+       "Aqua Jet",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "basculegion"
+     },
+     {
+      "ability": "Poison Touch",
+      "item": "Focus Sash",
+      "moves": [
+       "Poison Jab",
+       "Close Combat",
+       "Fake Out",
+       "Protect"
+      ],
+      "nature": "Jolly",
+      "species": "sneasler"
+     },
+     {
+      "ability": "Defiant",
+      "item": "Life Orb",
+      "moves": [
+       "Kowtow Cleave",
+       "Sucker Punch",
+       "Swords Dance",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "kingambit"
+     },
+     {
+      "species": "archaludon",
+      "item": "Leftovers",
+      "ability": "Stamina",
+      "nature": "Calm",
+      "moves": [
+       "Dragon Pulse",
+       "Electro Shot",
+       "Protect",
+       "Snarl"
+      ]
+     },
+     {
+      "ability": "Flower Veil",
+      "item": "Floettite",
+      "moves": [
+       "Moonblast",
+       "Dazzling Gleam",
+       "Calm Mind",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "floette-eternal"
+     }
+    ],
+    "mean": 0.6467935317267293,
+    "sd": 0.00599969473633047,
+    "swap": "rillaboom -> archaludon",
+    "games": 0,
+    "wins": 0
+   },
+   {
+    "rank": 4,
+    "formes": [
+     "Annihilape",
+     "Glimmora",
+     "Kingambit",
+     "Garchomp",
+     "Charizard-Mega-Y",
+     "Metagross-Mega"
+    ],
+    "sets": [
+     {
+      "species": "annihilape",
+      "item": "Choice Scarf",
+      "ability": "Defiant",
+      "nature": "Adamant",
+      "moves": [
+       "Close Combat",
+       "Ice Punch",
+       "Rock Tomb",
+       "Shadow Claw"
+      ]
+     },
+     {
+      "ability": "ToxicDebris",
+      "item": "FocusSash",
+      "moves": [
+       "SludgeBomb",
+       "PowerGem",
+       "EarthPower",
+       "SpikyShield"
+      ],
+      "nature": "Modest",
+      "species": "Glimmora"
+     },
+     {
+      "ability": "Defiant",
+      "item": "LifeOrb",
+      "moves": [
+       "KowtowCleave",
+       "SuckerPunch",
+       "LowKick",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "Kingambit"
+     },
+     {
+      "ability": "RoughSkin",
+      "item": "ChoiceScarf",
+      "moves": [
+       "DragonClaw",
+       "StompingTantrum",
+       "Earthquake",
+       "RockSlide"
+      ],
+      "nature": "Adamant",
+      "species": "Garchomp"
+     },
+     {
+      "ability": "Blaze",
+      "item": "CharizarditeY",
+      "moves": [
+       "WeatherBall",
+       "SolarBeam",
+       "HeatWave",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "Charizard"
+     },
+     {
+      "ability": "ClearBody",
+      "item": "Metagrossite",
+      "moves": [
+       "PsychicFangs",
+       "BulletPunch",
+       "StompingTantrum",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "Metagross"
+     }
+    ],
+    "mean": 0.6393392985536314,
+    "sd": 0.007781292071882267,
+    "swap": "Whimsicott -> annihilape",
+    "games": 0,
+    "wins": 0
+   },
+   {
+    "rank": 5,
+    "formes": [
+     "Glimmora-Mega",
+     "Froslass-Mega",
+     "Archaludon",
+     "Kingambit",
+     "Armarouge",
+     "Garchomp"
+    ],
+    "sets": [
+     {
+      "ability": "Toxic Debris",
+      "item": "Glimmoranite",
+      "moves": [
+       "Sludge Bomb",
+       "Power Gem",
+       "Earth Power",
+       "Spiky Shield"
+      ],
+      "nature": "Timid",
+      "species": "glimmora"
+     },
+     {
+      "ability": "Cursed Body",
+      "item": "Froslassite",
+      "moves": [
+       "Blizzard",
+       "Shadow Ball",
+       "Aurora Veil",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "froslass"
+     },
+     {
+      "species": "archaludon",
+      "item": "Leftovers",
+      "ability": "Stamina",
+      "nature": "Calm",
+      "moves": [
+       "Dragon Pulse",
+       "Electro Shot",
+       "Protect",
+       "Snarl"
+      ]
+     },
+     {
+      "ability": "Defiant",
+      "item": "Life Orb",
+      "moves": [
+       "Kowtow Cleave",
+       "Sucker Punch",
+       "Swords Dance",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "kingambit"
+     },
+     {
+      "ability": "Weak Armor",
+      "item": "Focus Sash",
+      "moves": [
+       "Armor Cannon",
+       "Psyshock",
+       "Wide Guard",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "armarouge"
+     },
+     {
+      "ability": "Rough Skin",
+      "item": "Choice Scarf",
+      "moves": [
+       "Dragon Claw",
+       "Stomping Tantrum",
+       "Rock Tomb",
+       "Rock Slide"
+      ],
+      "nature": "Adamant",
+      "species": "garchomp"
+     }
+    ],
+    "mean": 0.6350018829353845,
+    "sd": 0.005313463734221538,
+    "swap": "rillaboom -> archaludon",
+    "games": 0,
+    "wins": 0
+   },
+   {
+    "rank": 6,
+    "formes": [
+     "Floette-Mega",
+     "Sneasler",
+     "Volcarona",
+     "Kingambit",
+     "Archaludon",
+     "Raichu-Mega-Y"
+    ],
+    "sets": [
+     {
+      "ability": "Flower Veil",
+      "item": "Floettite",
+      "moves": [
+       "Moonblast",
+       "Dazzling Gleam",
+       "Calm Mind",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "floette-eternal"
+     },
+     {
+      "ability": "Unburden",
+      "item": "White Herb",
+      "moves": [
+       "Dire Claw",
+       "Close Combat",
+       "Fake Out",
+       "Protect"
+      ],
+      "nature": "Jolly",
+      "species": "sneasler"
+     },
+     {
+      "ability": "Flame Body",
+      "item": "Rocky Helmet",
+      "moves": [
+       "Overheat",
+       "Tailwind",
+       "Rage Powder",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "volcarona"
+     },
+     {
+      "ability": "Defiant",
+      "item": "Life Orb",
+      "moves": [
+       "Kowtow Cleave",
+       "Sucker Punch",
+       "Swords Dance",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "kingambit"
+     },
+     {
+      "species": "archaludon",
+      "item": "Leftovers",
+      "ability": "Stamina",
+      "nature": "Calm",
+      "moves": [
+       "Dragon Pulse",
+       "Electro Shot",
+       "Protect",
+       "Snarl"
+      ]
+     },
+     {
+      "ability": "Lightning Rod",
+      "item": "Raichunite Y",
+      "moves": [
+       "Zap Cannon",
+       "Focus Blast",
+       "Encore",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "raichu"
+     }
+    ],
+    "mean": 0.6376565815203534,
+    "sd": 0.008575814698158858,
+    "swap": "rillaboom -> archaludon",
+    "games": 0,
+    "wins": 0
+   },
+   {
+    "rank": 7,
+    "formes": [
+     "Archaludon",
+     "Glimmora",
+     "Kingambit",
+     "Garchomp",
+     "Charizard-Mega-Y",
+     "Metagross-Mega"
+    ],
+    "sets": [
+     {
+      "species": "archaludon",
+      "item": "Leftovers",
+      "ability": "Stamina",
+      "nature": "Calm",
+      "moves": [
+       "Dragon Pulse",
+       "Electro Shot",
+       "Protect",
+       "Snarl"
+      ]
+     },
+     {
+      "ability": "ToxicDebris",
+      "item": "FocusSash",
+      "moves": [
+       "SludgeBomb",
+       "PowerGem",
+       "EarthPower",
+       "SpikyShield"
+      ],
+      "nature": "Modest",
+      "species": "Glimmora"
+     },
+     {
+      "ability": "Defiant",
+      "item": "LifeOrb",
+      "moves": [
+       "KowtowCleave",
+       "SuckerPunch",
+       "LowKick",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "Kingambit"
+     },
+     {
+      "ability": "RoughSkin",
+      "item": "ChoiceScarf",
+      "moves": [
+       "DragonClaw",
+       "StompingTantrum",
+       "Earthquake",
+       "RockSlide"
+      ],
+      "nature": "Adamant",
+      "species": "Garchomp"
+     },
+     {
+      "ability": "Blaze",
+      "item": "CharizarditeY",
+      "moves": [
+       "WeatherBall",
+       "SolarBeam",
+       "HeatWave",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "Charizard"
+     },
+     {
+      "ability": "ClearBody",
+      "item": "Metagrossite",
+      "moves": [
+       "PsychicFangs",
+       "BulletPunch",
+       "StompingTantrum",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "Metagross"
+     }
+    ],
+    "mean": 0.6387226110997178,
+    "sd": 0.010031634949186678,
+    "swap": "Whimsicott -> archaludon",
+    "games": 0,
+    "wins": 0
+   },
+   {
+    "rank": 8,
+    "formes": [
+     "Charizard-Mega-Y",
+     "Venusaur",
+     "Annihilape",
+     "Archaludon",
+     "Kommo-o",
+     "Swampert-Mega"
+    ],
+    "sets": [
+     {
+      "ability": "Blaze",
+      "item": "Charizardite Y",
+      "moves": [
+       "Heat Wave",
+       "Weather Ball",
+       "Ancient Power",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "charizard"
+     },
+     {
+      "ability": "Chlorophyll",
+      "item": "Focus Sash",
+      "moves": [
+       "Protect",
+       "Sludge Bomb",
+       "Sleep Powder",
+       "Leaf Storm"
+      ],
+      "nature": "Modest",
+      "species": "venusaur"
+     },
+     {
+      "ability": "Defiant",
+      "item": "Choice Scarf",
+      "moves": [
+       "Close Combat",
+       "Phantom Force",
+       "Ice Punch",
+       "U-turn"
+      ],
+      "nature": "Jolly",
+      "species": "annihilape"
+     },
+     {
+      "ability": "Stamina",
+      "item": "Leftovers",
+      "moves": [
+       "Protect",
+       "Dragon Pulse",
+       "Snarl",
+       "Electro Shot"
+      ],
+      "nature": "Bold",
+      "species": "archaludon"
+     },
+     {
+      "species": "kommo-o",
+      "item": "Life Orb",
+      "ability": "Soundproof",
+      "nature": "Modest",
+      "moves": [
+       "Aura Sphere",
+       "Clanging Scales",
+       "Flamethrower",
+       "Protect"
+      ]
+     },
+     {
+      "ability": "Torrent",
+      "item": "Swampertite",
+      "moves": [
+       "Wave Crash",
+       "High Horsepower",
+       "Ice Punch",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "swampert"
+     }
+    ],
+    "mean": 0.6365697469074523,
+    "sd": 0.008138728131852537,
+    "swap": "pelipper -> kommo-o",
+    "games": 0,
+    "wins": 0
+   },
+   {
+    "rank": 9,
+    "formes": [
+     "Archaludon",
+     "Armarouge",
+     "Basculegion",
+     "Raichu-Mega-Y",
+     "Kingambit",
+     "Staraptor-Mega"
+    ],
+    "sets": [
+     {
+      "species": "archaludon",
+      "item": "Leftovers",
+      "ability": "Stamina",
+      "nature": "Calm",
+      "moves": [
+       "Dragon Pulse",
+       "Electro Shot",
+       "Protect",
+       "Snarl"
+      ]
+     },
+     {
+      "ability": "FlashFire",
+      "item": "LifeOrb",
+      "moves": [
+       "ArmorCannon",
+       "ExpandingForce",
+       "WideGuard",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "Armarouge"
+     },
+     {
+      "ability": "Adaptability",
+      "item": "SitrusBerry",
+      "moves": [
+       "AquaJet",
+       "WaveCrash",
+       "LastRespects",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "Basculegion"
+     },
+     {
+      "ability": "LightningRod",
+      "item": "RaichuniteY",
+      "moves": [
+       "ZapCannon",
+       "FocusBlast",
+       "Encore",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "Raichu"
+     },
+     {
+      "ability": "Defiant",
+      "item": "BlackGlasses",
+      "moves": [
+       "SuckerPunch",
+       "KowtowCleave",
+       "IronHead",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "Kingambit"
+     },
+     {
+      "ability": "Intimidate",
+      "item": "Staraptite",
+      "moves": [
+       "CloseCombat",
+       "Tailwind",
+       "BraveBird",
+       "Protect"
+      ],
+      "nature": "Jolly",
+      "species": "Staraptor"
+     }
+    ],
+    "mean": 0.6332616898117378,
+    "sd": 0.006426743979704694,
+    "swap": "Indeedee-F -> archaludon",
+    "games": 0,
+    "wins": 0
+   },
+   {
+    "rank": 10,
+    "formes": [
+     "Charizard-Mega-Y",
+     "Venusaur",
+     "Annihilape",
+     "Archaludon",
+     "Kingambit",
+     "Farigiraf"
+    ],
+    "sets": [
+     {
+      "ability": "Blaze",
+      "item": "Charizardite Y",
+      "moves": [
+       "Protect",
+       "Heat Wave",
+       "Weather Ball",
+       "Ancient Power"
+      ],
+      "nature": "Timid",
+      "species": "charizard"
+     },
+     {
+      "ability": "Chlorophyll",
+      "item": "Focus Sash",
+      "moves": [
+       "Protect",
+       "Sleep Powder",
+       "Sludge Bomb",
+       "Leaf Storm"
+      ],
+      "nature": "Timid",
+      "species": "venusaur"
+     },
+     {
+      "ability": "Defiant",
+      "item": "Choice Scarf",
+      "moves": [
+       "Close Combat",
+       "Rock Slide",
+       "Ice Punch",
+       "Phantom Force"
+      ],
+      "nature": "Adamant",
+      "species": "annihilape"
+     },
+     {
+      "species": "archaludon",
+      "item": "Leftovers",
+      "ability": "Stamina",
+      "nature": "Calm",
+      "moves": [
+       "Dragon Pulse",
+       "Electro Shot",
+       "Protect",
+       "Snarl"
+      ]
+     },
+     {
+      "ability": "Defiant",
+      "item": "Chople Berry",
+      "moves": [
+       "Kowtow Cleave",
+       "Sucker Punch",
+       "Low Kick",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "kingambit"
+     },
+     {
+      "ability": "Armor Tail",
+      "item": "Sitrus Berry",
+      "moves": [
+       "Imprison",
+       "Trick Room",
+       "Expanding Force",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "farigiraf"
+     }
+    ],
+    "mean": 0.6387510583685597,
+    "sd": 0.012838971188647073,
+    "swap": "dragonite -> archaludon",
+    "games": 0,
+    "wins": 0
+   },
+   {
+    "rank": 11,
+    "formes": [
+     "Froslass-Mega",
+     "Gallade",
+     "Dragonite-Mega",
+     "Archaludon",
+     "Kingambit",
+     "Basculegion"
+    ],
+    "sets": [
+     {
+      "ability": "CursedBody",
+      "item": "Froslassite",
+      "moves": [
+       "Blizzard",
+       "ShadowBall",
+       "AuroraVeil",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "Froslass"
+     },
+     {
+      "ability": "Sharpness",
+      "item": "FocusSash",
+      "moves": [
+       "PsychoCut",
+       "SacredSword",
+       "WideGuard",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "Gallade"
+     },
+     {
+      "ability": "InnerFocus",
+      "item": "Dragoninite",
+      "moves": [
+       "DragonPulse",
+       "HeatWave",
+       "Tailwind",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "Dragonite"
+     },
+     {
+      "species": "archaludon",
+      "item": "Leftovers",
+      "ability": "Stamina",
+      "nature": "Calm",
+      "moves": [
+       "Dragon Pulse",
+       "Electro Shot",
+       "Protect",
+       "Snarl"
+      ]
+     },
+     {
+      "ability": "Defiant",
+      "item": "LifeOrb",
+      "moves": [
+       "KowtowCleave",
+       "SuckerPunch",
+       "SwordsDance",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "Kingambit"
+     },
+     {
+      "ability": "Adaptability",
+      "item": "ChoiceScarf",
+      "moves": [
+       "WaveCrash",
+       "LastRespects",
+       "FlipTurn",
+       "AquaJet"
+      ],
+      "nature": "Jolly",
+      "species": "Basculegion"
+     }
+    ],
+    "mean": 0.6328289023581712,
+    "sd": 0.007527640470013225,
+    "swap": "Rillaboom -> archaludon",
+    "games": 0,
+    "wins": 0
+   },
+   {
+    "rank": 12,
+    "formes": [
+     "Dragonite-Mega",
+     "Basculegion",
+     "Sneasler",
+     "Kingambit",
+     "Basculegion-F",
+     "Floette-Mega"
+    ],
+    "sets": [
+     {
+      "ability": "Inner Focus",
+      "item": "Dragoninite",
+      "moves": [
+       "Dragon Pulse",
+       "Heat Wave",
+       "Tailwind",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "dragonite"
+     },
+     {
+      "ability": "Adaptability",
+      "item": "Mystic Water",
+      "moves": [
+       "Wave Crash",
+       "Last Respects",
+       "Aqua Jet",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "basculegion"
+     },
+     {
+      "ability": "Poison Touch",
+      "item": "Focus Sash",
+      "moves": [
+       "Poison Jab",
+       "Close Combat",
+       "Fake Out",
+       "Protect"
+      ],
+      "nature": "Jolly",
+      "species": "sneasler"
+     },
+     {
+      "ability": "Defiant",
+      "item": "Life Orb",
+      "moves": [
+       "Kowtow Cleave",
+       "Sucker Punch",
+       "Swords Dance",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "kingambit"
+     },
+     {
+      "species": "Basculegion-F",
+      "item": "FocusSash",
+      "ability": "SwiftSwim",
+      "nature": "Modest",
+      "moves": [
+       "IceBeam",
+       "MuddyWater",
+       "Protect",
+       "ShadowBall"
+      ]
+     },
+     {
+      "ability": "Flower Veil",
+      "item": "Floettite",
+      "moves": [
+       "Moonblast",
+       "Dazzling Gleam",
+       "Calm Mind",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "floette-eternal"
+     }
+    ],
+    "mean": 0.6316502044089111,
+    "sd": 0.006845920760276388,
+    "swap": "rillaboom -> Basculegion-F",
+    "games": 0,
+    "wins": 0
+   },
+   {
+    "rank": 13,
+    "formes": [
+     "Archaludon",
+     "Delphox-Mega",
+     "Incineroar",
+     "Kingambit",
+     "Sneasler",
+     "Floette-Mega"
+    ],
+    "sets": [
+     {
+      "species": "archaludon",
+      "item": "Leftovers",
+      "ability": "Stamina",
+      "nature": "Calm",
+      "moves": [
+       "Dragon Pulse",
+       "Electro Shot",
+       "Protect",
+       "Snarl"
+      ]
+     },
+     {
+      "ability": "Blaze",
+      "item": "Delphoxite",
+      "moves": [
+       "Heat Wave",
+       "Psychic",
+       "Nasty Plot",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "delphox"
+     },
+     {
+      "ability": "Intimidate",
+      "item": "Sitrus Berry",
+      "moves": [
+       "Fake Out",
+       "Flare Blitz",
+       "Throat Chop",
+       "Parting Shot"
+      ],
+      "nature": "Careful",
+      "species": "incineroar"
+     },
+     {
+      "ability": "Defiant",
+      "item": "Life Orb",
+      "moves": [
+       "Kowtow Cleave",
+       "Sucker Punch",
+       "Swords Dance",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "kingambit"
+     },
+     {
+      "ability": "Poison Touch",
+      "item": "Focus Sash",
+      "moves": [
+       "Fake Out",
+       "Poison Jab",
+       "Close Combat",
+       "Quick Guard"
+      ],
+      "nature": "Jolly",
+      "species": "sneasler"
+     },
+     {
+      "ability": "Flower Veil",
+      "item": "Floettite",
+      "moves": [
+       "Dazzling Gleam",
+       "Moonblast",
+       "Protect",
+       "Calm Mind"
+      ],
+      "nature": "Modest",
+      "species": "floette-eternal"
+     }
+    ],
+    "mean": 0.6327499822778286,
+    "sd": 0.00878945166041864,
+    "swap": "sinistcha -> archaludon",
+    "games": 0,
+    "wins": 0
+   },
+   {
+    "rank": 14,
+    "formes": [
+     "Froslass-Mega",
+     "Gallade",
+     "Dragonite-Mega",
+     "Annihilape",
+     "Kingambit",
+     "Basculegion"
+    ],
+    "sets": [
+     {
+      "ability": "CursedBody",
+      "item": "Froslassite",
+      "moves": [
+       "Blizzard",
+       "ShadowBall",
+       "AuroraVeil",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "Froslass"
+     },
+     {
+      "ability": "Sharpness",
+      "item": "FocusSash",
+      "moves": [
+       "PsychoCut",
+       "SacredSword",
+       "WideGuard",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "Gallade"
+     },
+     {
+      "ability": "InnerFocus",
+      "item": "Dragoninite",
+      "moves": [
+       "DragonPulse",
+       "HeatWave",
+       "Tailwind",
+       "Protect"
+      ],
+      "nature": "Modest",
+      "species": "Dragonite"
+     },
+     {
+      "species": "annihilape",
+      "item": "Choice Scarf",
+      "ability": "Defiant",
+      "nature": "Adamant",
+      "moves": [
+       "Close Combat",
+       "Ice Punch",
+       "Rock Tomb",
+       "Shadow Claw"
+      ]
+     },
+     {
+      "ability": "Defiant",
+      "item": "LifeOrb",
+      "moves": [
+       "KowtowCleave",
+       "SuckerPunch",
+       "SwordsDance",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "Kingambit"
+     },
+     {
+      "ability": "Adaptability",
+      "item": "ChoiceScarf",
+      "moves": [
+       "WaveCrash",
+       "LastRespects",
+       "FlipTurn",
+       "AquaJet"
+      ],
+      "nature": "Jolly",
+      "species": "Basculegion"
+     }
+    ],
+    "mean": 0.6331733791132993,
+    "sd": 0.00992355310456687,
+    "swap": "Rillaboom -> annihilape",
+    "games": 0,
+    "wins": 0
+   },
+   {
+    "rank": 15,
+    "formes": [
+     "Charizard-Mega-Y",
+     "Venusaur",
+     "Kommo-o",
+     "Archaludon",
+     "Pelipper",
+     "Swampert-Mega"
+    ],
+    "sets": [
+     {
+      "ability": "Blaze",
+      "item": "Charizardite Y",
+      "moves": [
+       "Heat Wave",
+       "Weather Ball",
+       "Ancient Power",
+       "Protect"
+      ],
+      "nature": "Timid",
+      "species": "charizard"
+     },
+     {
+      "ability": "Chlorophyll",
+      "item": "Focus Sash",
+      "moves": [
+       "Protect",
+       "Sludge Bomb",
+       "Sleep Powder",
+       "Leaf Storm"
+      ],
+      "nature": "Modest",
+      "species": "venusaur"
+     },
+     {
+      "species": "kommo-o",
+      "item": "Life Orb",
+      "ability": "Soundproof",
+      "nature": "Modest",
+      "moves": [
+       "Aura Sphere",
+       "Clanging Scales",
+       "Flamethrower",
+       "Protect"
+      ]
+     },
+     {
+      "ability": "Stamina",
+      "item": "Leftovers",
+      "moves": [
+       "Protect",
+       "Dragon Pulse",
+       "Snarl",
+       "Electro Shot"
+      ],
+      "nature": "Bold",
+      "species": "archaludon"
+     },
+     {
+      "ability": "Drizzle",
+      "item": "Sitrus Berry",
+      "moves": [
+       "Hurricane",
+       "Weather Ball",
+       "Wide Guard",
+       "Tailwind"
+      ],
+      "nature": "Bold",
+      "species": "pelipper"
+     },
+     {
+      "ability": "Torrent",
+      "item": "Swampertite",
+      "moves": [
+       "Wave Crash",
+       "High Horsepower",
+       "Ice Punch",
+       "Protect"
+      ],
+      "nature": "Adamant",
+      "species": "swampert"
+     }
+    ],
+    "mean": 0.6307272548261269,
+    "sd": 0.007809447385999681,
+    "swap": "annihilape -> kommo-o",
+    "games": 0,
+    "wins": 0
+   }
+  ]
+ }
+}

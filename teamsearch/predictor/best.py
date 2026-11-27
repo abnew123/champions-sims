@@ -16,7 +16,7 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import model as M, meta as X
 L = X.L
-BOOT = int(os.environ.get('TS_BEST_BOOT', 8)); TOPK = 150; NSWAP = 60; SHOW = 15
+BOOT = int(os.environ.get('TS_BEST_BOOT', 8)); TOPK = 150; NSWAP = 60; SHOW = 15; PER_BASE = 2
 USE = ('sp', 'tok', 'attr', 'pair', 'tpair', 'pl', 'rat')   # ladder and tournament games pooled: own tournament weights (sp_on, tok_on)
                                                            # did no better on held-out games (evaluate.py online, Nov 27)
 
@@ -154,10 +154,15 @@ def main(reg='M-C', days=14):
         txt.append(f"\n{name} field ({J['fields'][name]['players']} players, {lo} to {last}): predicted game win share against it (seen sixes scored by models that"
                    f" never saw their games; a swap adds the change it makes), mean ± sd over {BOOT} refits")
         for part, keep in (('seen sixes (2+ players since ' + lo2 + ')', lambda c: c[3] is None), ('one-swap variants (speculative: never played as a six)', lambda c: c[3] is not None)):
-            idx = [i for i in np.argsort(-lcb) if keep(out[name]['cand'][i])][:SHOW]; J[name][part] = []
+            idx, per = [], collections.Counter()                        # at most PER_BASE variants of one base six (else one weak
+            for i in np.argsort(-lcb):                                  # member swapped for anything fills the list)
+                c = out[name]['cand'][i]
+                if keep(c) and (c[3] is None or per[c[4]] < PER_BASE): idx.append(i); per[c[4]] += c[3] is not None
+                if len(idx) >= SHOW: break
+            J[name][part] = []
             txt.append(f"  {part}:")
             for r, i in enumerate(idx, 1):
-                key, sets, _, how = out[name]['cand'][i]; w, n = rec.get(key, (0, 0))
+                key, sets, _, how, _ = out[name]["cand"][i]; w, n = rec.get(key, (0, 0))
                 formes = [L.battle_forme(s['species'], s['item']) for s in sets]
                 J[name][part].append(dict(rank=r, formes=formes, sets=sets, mean=float(mu[i]), sd=float(sd[i]), swap=how, games=n, wins=w))
                 txt.append(f"    {r:2d}. {100 * mu[i]:.1f}% ± {100 * sd[i]:.1f}  {' / '.join(formes)}" + (f"   [swap: {how}]" if how else '')

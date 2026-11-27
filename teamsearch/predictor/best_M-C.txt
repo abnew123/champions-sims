@@ -1,0 +1,35 @@
+Best teams by the matchup predictor, M-C, data to 2026-11-27
+
+tournaments field (1889 players, 2026-11-14 to 2026-11-27): predicted game win share against it (seen sixes scored by models that never saw their games; a swap adds the change it makes), mean ± sd over 8 refits
+  seen sixes (2+ players since 2026-10-31):
+     1. 59.8% ± 0.8  Charizard-Mega-Y / Venusaur / Annihilape / Archaludon / Pelipper / Swampert-Mega   real: 42% of 19 games
+     2. 58.9% ± 0.7  Whimsicott / Glimmora / Kingambit / Garchomp / Charizard-Mega-Y / Metagross-Mega   real: 60% of 15 games
+     3. 59.6% ± 1.5  Charizard-Mega-Y / Venusaur / Annihilape / Dragonite-Mega / Kingambit / Farigiraf   real: 54% of 35 games
+     4. 57.9% ± 0.4  Glimmora-Mega / Froslass-Mega / Rillaboom / Kingambit / Armarouge / Garchomp   real: 54% of 59 games
+     5. 58.0% ± 0.6  Dragonite-Mega / Basculegion / Sneasler / Kingambit / Rillaboom / Floette-Mega   real: 48% of 230 games
+     6. 57.9% ± 0.5  Charizard-Mega-Y / Venusaur / Pelipper / Archaludon / Garchomp / Kingambit   real: 57% of 7 games
+     7. 57.5% ± 0.4  Sinistcha / Delphox-Mega / Incineroar / Kingambit / Sneasler / Floette-Mega   real: 53% of 2586 games
+     8. 57.8% ± 0.9  Pelipper / Venusaur / Archaludon / Charizard-Mega-Y / Garchomp-Mega-Z / Annihilape   real: 63% of 54 games
+     9. 57.9% ± 1.3  Salamence-Mega / Sneasler / Basculegion / Raichu-Mega-X / Kingambit / Volcarona   real: 40% of 15 games
+    10. 57.2% ± 0.6  Charizard-Mega-Y / Golisopod-Mega / Venusaur / Archaludon / Pelipper / Farigiraf   real: 48% of 21 games
+    11. 57.1% ± 0.6  Floette-Mega / Sneasler / Volcarona / Kingambit / Rillaboom / Raichu-Mega-Y   real: 56% of 48 games
+    12. 57.0% ± 0.6  Floette-Mega / Kingambit / Rillaboom / Sneasler / Incineroar / Delphox-Mega   real: 60% of 134 games
+    13. 57.1% ± 0.7  Charizard-Mega-Y / Dragonite-Mega / Garchomp / Kingambit / Basculegion / Venusaur   real: 75% of 8 games
+    14. 57.1% ± 0.8  Blaziken-Mega / Torkoal / Primarina / Venusaur / Farigiraf / Kingambit   real: 49% of 43 games
+    15. 56.4% ± 0.3  Sneasler / Kingambit / Whimsicott / Charizard-Mega-Y / Floette-Mega / Basculegion   real: 43% of 44 games
+  one-swap variants (speculative: never played as a six):
+     1. 67.2% ± 0.6  Kommo-o / Charizard-Mega-Y / Pelipper / Archaludon / Sneasler / Froslass-Mega   [swap: castform -> kommo-o]
+     2. 66.1% ± 0.7  Basculegion-F / Charizard-Mega-Y / Pelipper / Archaludon / Sneasler / Froslass-Mega   [swap: castform -> Basculegion-F]
+     3. 64.7% ± 0.6  Dragonite-Mega / Basculegion / Sneasler / Kingambit / Archaludon / Floette-Mega   [swap: rillaboom -> archaludon]
+     4. 63.9% ± 0.8  Annihilape / Glimmora / Kingambit / Garchomp / Charizard-Mega-Y / Metagross-Mega   [swap: Whimsicott -> annihilape]
+     5. 63.5% ± 0.5  Glimmora-Mega / Froslass-Mega / Archaludon / Kingambit / Armarouge / Garchomp   [swap: rillaboom -> archaludon]
+     6. 63.8% ± 0.9  Floette-Mega / Sneasler / Volcarona / Kingambit / Archaludon / Raichu-Mega-Y   [swap: rillaboom -> archaludon]
+     7. 63.9% ± 1.0  Archaludon / Glimmora / Kingambit / Garchomp / Charizard-Mega-Y / Metagross-Mega   [swap: Whimsicott -> archaludon]
+     8. 63.7% ± 0.8  Charizard-Mega-Y / Venusaur / Annihilape / Archaludon / Kommo-o / Swampert-Mega   [swap: pelipper -> kommo-o]
+     9. 63.3% ± 0.6  Archaludon / Armarouge / Basculegion / Raichu-Mega-Y / Kingambit / Staraptor-Mega   [swap: Indeedee-F -> archaludon]
+    10. 63.9% ± 1.3  Charizard-Mega-Y / Venusaur / Annihilape / Archaludon / Kingambit / Farigiraf   [swap: dragonite -> archaludon]
+    11. 63.3% ± 0.8  Froslass-Mega / Gallade / Dragonite-Mega / Archaludon / Kingambit / Basculegion   [swap: Rillaboom -> archaludon]
+    12. 63.2% ± 0.7  Dragonite-Mega / Basculegion / Sneasler / Kingambit / Basculegion-F / Floette-Mega   [swap: rillaboom -> Basculegion-F]
+    13. 63.3% ± 0.9  Archaludon / Delphox-Mega / Incineroar / Kingambit / Sneasler / Floette-Mega   [swap: sinistcha -> archaludon]
+    14. 63.3% ± 1.0  Froslass-Mega / Gallade / Dragonite-Mega / Annihilape / Kingambit / Basculegion   [swap: Rillaboom -> annihilape]
+    15. 63.1% ± 0.8  Charizard-Mega-Y / Venusaur / Kommo-o / Archaludon / Pelipper / Swampert-Mega   [swap: annihilape -> kommo-o]

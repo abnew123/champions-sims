@@ -153,3 +153,31 @@ def load(filter=None):
 
 def logloss(z, y):
     return float(np.mean(np.logaddexp(0, z) - y * z))
+
+class Pool:
+    """many teams at once: each team is a group of sheets with the same six species (set details averaged over the group);
+    logits() gives the full matrix of A-beats-B log-odds in a few matrix products (no skill controls)"""
+    def __init__(self, model, groups):
+        m = model; self.m = m; N = len(groups)
+        sp_ix = {s: i for i, s in enumerate(sorted({s for g in groups for T in g for s in T.sp}))}
+        self.lin = np.zeros(N); S = np.zeros((N, len(sp_ix))); C = np.zeros((N, len(TYPES)))
+        ws = m.weights('sp') if 'sp' in m.blocks else {}; wt = m.weights('tok') if 'tok' in m.blocks else {}; wa = m.weights('attr') if 'attr' in m.blocks else {}
+        ti = {t: i for i, t in enumerate(TYPES)}
+        for i, g in enumerate(groups):
+            k = len(g)
+            self.lin[i] = (sum(ws.get(s, 0.0) for s in g[0].sp) + sum(wt.get(t, 0.0) * n for T in g for t, n in T.tok.items()) / k
+                           + sum(wa.get(a, 0.0) * v for T in g for a, v in T.attr.items()) / k)
+            for s in g[0].sp: S[i, sp_ix[s]] = 1.0
+            for t, n in g[0].types.items(): C[i, ti[t]] = n
+        K = len(sp_ix); Wp = np.zeros((K, K))
+        if 'pair' in m.blocks:
+            for (u, v), w in m.weights('pair').items():
+                if u in sp_ix and v in sp_ix: Wp[sp_ix[u], sp_ix[v]] = w; Wp[sp_ix[v], sp_ix[u]] = -w
+        Wt = np.zeros((len(TYPES), len(TYPES)))
+        if 'tpair' in m.blocks:
+            for (u, v), w in m.weights('tpair').items():
+                if u != v: Wt[ti[u], ti[v]] = w / 6.0; Wt[ti[v], ti[u]] = -w / 6.0
+        self.S, self.C, self.Wp, self.Wt = S, C, Wp, Wt
+
+    def logits(self):
+        return self.lin[:, None] - self.lin[None, :] + self.S @ self.Wp @ self.S.T + self.C @ self.Wt @ self.C.T

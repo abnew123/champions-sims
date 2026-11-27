@@ -2,7 +2,8 @@
 the battle sim, so the M-D meta can be estimated from many simulated teams; it should be accurate in general rather than
 encode our understanding of the game).
 
-Reads the saved Showdown replays: M-C Bo3 / Bo1 (pssim/replays_protect) and M-B Bo3 (teamsearch/backtest/replays_mb).
+Reads the saved Showdown replays: M-C Bo3 / Bo1 (pssim/replays_protect), M-B Bo3 (teamsearch/backtest/replays_mb), and what
+collect.py saves from Nov 27 on (predictor/replays: the rest of M-C, then M-D and later regulations).
 One row per game: both sixes from team preview, full sets when the players accepted open team sheets, which Pokemon
 Mega Evolved, which four were brought, the winner, both players' ladder ratings before the game, and the Bo3 match.
 Player names are never written: a player is a number assigned in this run (stable for a given set of files). Games with
@@ -13,7 +14,7 @@ M-B's dex, or Assault Vest, Choice Band, Power Herb, Ability Shield).
 import os, re, sys, json, gzip, glob, time
 from multiprocessing import Pool
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(os.path.dirname(HERE))
-SRC = [os.path.join(ROOT, 'pssim', 'replays_protect'), os.path.join(ROOT, 'teamsearch', 'backtest', 'replays_mb')]
+SRC = [os.path.join(ROOT, 'pssim', 'replays_protect'), os.path.join(ROOT, 'teamsearch', 'backtest', 'replays_mb'), os.path.join(HERE, 'replays')]
 OUT = os.path.join(HERE, 'games.jsonl.gz'); LOG = os.path.join(HERE, 'predictor.log')
 MB_DEX = set(json.load(open(os.path.join(ROOT, 'teamsearch', 'backtest', 'dex_mb.json'))))
 MB_BAD_ITEMS = {'AssaultVest', 'ChoiceBand', 'PowerHerb', 'AbilityShield', 'Assault Vest', 'Choice Band', 'Power Herb', 'Ability Shield'}
@@ -67,7 +68,7 @@ def parse(path):
     return g
 
 def main():
-    files = sorted(f for d in SRC for f in glob.glob(os.path.join(d, '*.log')))
+    files = sorted({os.path.basename(f): f for d in SRC for f in glob.glob(os.path.join(d, '*.log'))}.values())
     botname = json.load(open(os.path.join(ROOT, 'bot', 'account.json')))['name'].lower()
     say(f"parse: {len(files)} replay files")
     pid, rows, skip = {}, [], {'unreadable or incomplete': 0, 'the ladder bot': 0, 'M-B out-of-format sheet': 0, 'not Champions': 0}
@@ -76,14 +77,14 @@ def main():
             if k % 10000 == 0: say(f"  parse: {k}/{len(files)} files")
             if g is None: skip['unreadable or incomplete'] += 1; continue
             fmt = re.sub(r'^(smogtours-|eternity-)', '', g['id']).rsplit('-', 1)[0]
-            if 'champions' not in fmt: skip['not Champions'] += 1; continue
+            if 'champions' not in fmt or not re.search(r'regm[a-z]', fmt): skip['not Champions'] += 1; continue
             if any(n.lower() == botname for n in g['names'].values()): skip['the ladder bot'] += 1; continue
             if 'regmb' in fmt and (any(x not in MB_DEX for x in g['six']['p1'] + g['six']['p2'])
                                    or any(s['item'] in MB_BAD_ITEMS for v in g['sets'].values() for s in v)): skip['M-B out-of-format sheet'] += 1; continue
             ids = {s: pid.setdefault(g['names'].get(s, f"?{g['id']}{s}").lower(), len(pid)) for s in ('p1', 'p2')}
             win = 1 if g['win'] == g['names'].get('p1') else 0 if g['win'] == g['names'].get('p2') else None
             if win is None: skip['unreadable or incomplete'] += 1; continue
-            rows.append(dict(id=g['id'], fmt=fmt, reg='M-B' if 'regmb' in fmt else 'M-C', src='tour' if g['id'].startswith(('smogtours', 'eternity')) else 'ladder',
+            rows.append(dict(id=g['id'], fmt=fmt, reg='M-' + re.search(r'regm([a-z])', fmt).group(1).upper(), src='tour' if g['id'].startswith(('smogtours', 'eternity')) else 'ladder',
                              t=g['t'], g=g['g'], match=g['match'], p1=ids['p1'], p2=ids['p2'], r1=g['rating'].get('p1'), r2=g['rating'].get('p2'),
                              six1=g['six']['p1'], six2=g['six']['p2'], sets1=g['sets'].get('p1'), sets2=g['sets'].get('p2'),
                              mega1=g['mega'].get('p1'), mega2=g['mega'].get('p2'), b1=g['brought']['p1'], b2=g['brought']['p2'], win=win))

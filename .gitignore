@@ -56,3 +56,7 @@ teamsearch/backtest/replays_mb/
 teamsearch/backtest/learnsets_champions_upstream.ts
 teamsearch/backtest/dex_mb.json
 teamsearch/backtest/mb_pool.json
+
+# matchup predictor games table: rebuilt from the (ignored) replays by teamsearch/predictor/parse_games.py
+teamsearch/predictor/games.jsonl.gz
+teamsearch/predictor/evaluate.out

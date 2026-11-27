@@ -107,7 +107,7 @@ def step_card(path, title, done_marker, remote=True):
     for l in L:
         if re.match(r'^\d\d:\d\d [AP]M (round \d+:|final check:)', l): seg, label, stage, k = [], None, None, 0
         if re.match(r'^\d\d:\d\d [AP]M resumed', l): k = len(seg)             # the stage's minutes include the pause: rate from here
-        m = re.match(r'^\d\d:\d\d [AP]M\s+((bring search|confirm games|confirm|final check|score)[^:]*): (\d+)/(\d+) (teams|games), (\d+) min', l)
+        m = re.match(r'^\d\d:\d\d [AP]M\s+((bring search|confirm games|confirm|final check|score)[^:]*): (\d+)/(\d+) (teams|games|fits), (\d+) min', l)
         if m:
             if m.group(1) != stage: seg, stage, label, k = [], m.group(1), m.group(2), 0   # a new seed is a new stage
             seg.append((int(m.group(3)), int(m.group(4)), int(m.group(6)))); unit = m.group(5)   # games: the M-B calibration sims
@@ -216,7 +216,8 @@ def cards():
                                  ('backtest/v2/selfplay.log', 'M-B to M-C self-play backtest v2 (field scoring; its climbs show as the climb card)', 'self-play backtest finished'),
                                  ('backtest/calib_mb.log', 'M-B calibration sims: the sim plays real M-B ladder matchups (both sheets, the brings played)', 'calibration sims done'),
                                  ('round_synergy_v43.log', 'Synergy check on v43n1: does the sim value a team\'s game plan beyond an ordinary swap?', 'synergy check done'),
-                                 ('regsim/regsim.log', 'Regional sims: the five M-C regionals through v43n1 (real pairings, then Monte Carlo)', 'report done')):
+                                 ('regsim/regsim.log', 'Regional sims: the five M-C regionals through v43n1 (real pairings, then Monte Carlo)', 'report done'),
+                                 ('predictor/predictor.log', 'Matchup predictor: a model fitted to real games (ridge tuning, then the three tests)', 'done')):
         c = step_card(C(logname), title, done, bool(CD))
         if c and (not pr or pr.get('phase') == 'done' or os.path.getmtime(C(logname)) > (pr.get('at') or 0)): cards.append(c)
     if stt:

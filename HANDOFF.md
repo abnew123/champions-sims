@@ -1473,6 +1473,23 @@ registrations since its second version) and checks reachability of real logs in 
   Instruct at the partner (partner_target unchanged, so games without the mechanics stay identical). Test scripts:
   pssim/results/v43_audit/v43_check (sets_v43.py, gen_v43_cases.js, cmp_cases.py, coverage_v43.py), regress_mc, regress_mb, regress_rain.
   `champ turn` writes per-case results with TURN_OUT. `bin/champ-battle-v43.sha256`, `src_battle_v43.tar.gz`. Not on the bot.
+- **champ-battle-v44 (2026-11-27, 12:30 am) = v43 + more Regulation M-D candidates (the user's Nov 6 go-ahead; the list from Team
+  search, who checked an unofficial M-D prediction list against v43), inert in M-C.** v43's `champ missing` on engine_data_full listed,
+  for the predicted species: Doodle (Grafaiai), Well-Baked Body (Dachsbun), Costar (Flamigo), Thick Club (Marowak), Water Compaction
+  (reported for Mega Heatran), Download (Porygon-Z), Toxic Boost (Zangoose), Color Change (Kecleon, with the Curse glitch), Present
+  (Delibird), Conversion; all ported in src/handlers/batch10.rs, plus Ability Shield's onSetAbility (Past in Champions) so Doodle's
+  blocked branch is checked, and Battle::set_ability_rv (Showdown's false / null / old-ability return; set_ability unchanged). Already
+  covered, nothing to do: Heatran, Latios, Latias and their Megas, Cobalion, Terrakion, Virizion, Crobat, Grumpig, Seviper, Sawk, Throh,
+  Amoonguss, Cryogonal, Carbink, Dondozo, Tatsugiri. The data's Heatran-Mega still has Flash Fire / Flame Body: changed only when M-D
+  confirms its ability; Mega Tatsugiri's reported +1 SpA ability has no name yet. `champ missing`: 807 -> 796 callbacks. **Exact against
+  Showdown**: 650 whole battles of carrier + partner sets mixed with real M-C sets (v44_check/gen_v44_cases.js, from v42's generator),
+  7,371 turns x lo / hi / mid / real, all exact, 0 unsupported (v43: about half unsupported); coverage_v44.py on all of them (turn x
+  mode results): every mechanic ran (Doodle 1,608, Download boosts 2,964, Color Change 557, Conversion's type change 230, Present heals
+  892, Water Compaction 78, Well-Baked Body 582, Flamigo active with boosts 3,555, Marowak attacking 6,339, Zangoose poisoned 3,035). **M-C unchanged**: native/turn_cases_*.jsonl, 69,600 results
+  identical to v43 (whole TURN_OUT rows); the rain confirmation starts (v43's s40 / s8) play identically on v43 and v44, 40 with
+  BATTLE_EVAL=0 and 8 with BATTLE_EVAL=1 at budget 3000, and v44 matches v43's Nov 7 run. Test scripts: pssim/results/md_audit/v44_check
+  (git-ignored: gen_v44_cases.js, coverage_v44.py, regress_mc, regress_rain/run.sh). `bin/champ-battle-v44.sha256`,
+  `src_battle_v44.tar.gz`. Not on the bot.
 
 ## The climb's simulator against the bot's ladder games (2026-10-16; the user: check the sim before trusting what the climb finds)
 bot/ladder_sim.py + pssim/ladder_sim.sh: the bot's 1,128 saved games (689 Bo3, 439 Bo1) rebuilt at turn 1 as the bot saw them (botpos,

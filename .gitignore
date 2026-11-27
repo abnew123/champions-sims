@@ -63,3 +63,4 @@ teamsearch/predictor/evaluate.out
 teamsearch/predictor/replays/
 teamsearch/predictor/*.out
 teamsearch/predictor/collect.err
+teamsearch/predictor/tours/

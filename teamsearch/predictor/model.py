@@ -11,6 +11,8 @@ Feature blocks (each with its own ridge strength):
   tpair type-versus-type, the same way over the two sheets' type counts (transfers to new species)
   pl    each player (+1 / -1): skill control only, left out when predicting teams
   rat   the rating gap when both players were rated (log-odds of the Elo expectation): skill control only, zero when predicting teams
+  sp_on, tok_on  species and set details again, times 1 for online-tournament games: what differs between tournament and ladder
+        play (stronger players, a different field); predicting a tournament matchup adds them in
 Ridge strengths are in games: the penalty is lam * w^2 / 2 against the summed log loss.
 Fitted by L-BFGS on the mean log loss plus the ridge terms.
 """
@@ -59,9 +61,9 @@ class Team:
                     if k.startswith('t:'): self.types[k[2:]] += 1
 
 class Model:
-    BLOCKS = ('sp', 'tok', 'attr', 'pair', 'tpair', 'pl', 'rat')
+    BLOCKS = ('sp', 'tok', 'attr', 'pair', 'tpair', 'pl', 'rat', 'sp_on', 'tok_on')
     def __init__(self, lam=None, use=None, min_sp=20, min_tok=20, min_pair=300):
-        self.lam = dict(sp=300.0, tok=300.0, attr=100.0, pair=3000.0, tpair=1000.0, pl=100.0, rat=1.0) | (lam or {})
+        self.lam = dict(sp=300.0, tok=300.0, attr=100.0, pair=3000.0, tpair=1000.0, pl=100.0, rat=1.0, sp_on=1000.0, tok_on=1000.0) | (lam or {})
         self.use = set(use or ('sp', 'tok', 'attr', 'pair', 'tpair', 'rat'))
         self.min_sp, self.min_tok, self.min_pair = min_sp, min_tok, min_pair
 
@@ -69,7 +71,7 @@ class Model:
         c_sp, c_tok = collections.Counter(), collections.Counter()
         for A, B, *_ in rows:
             for T in (A, B): c_sp.update(T.sp); c_tok.update(T.tok.keys())
-        rows = [r if len(r) > 3 else (*r, ()) for r in rows]
+        rows = [r if len(r) > 3 and r[3] else (*r[:3], ()) for r in rows]
         self.sp_ix = {s: i for i, s in enumerate(sorted(s for s, n in c_sp.items() if n >= self.min_sp))}
         self.tok_ix = {s: i for i, s in enumerate(sorted(s for s, n in c_tok.items() if n >= self.min_tok))}
         common = sorted(s for s, n in c_sp.items() if n >= self.min_pair)
@@ -77,15 +79,17 @@ class Model:
         self.attr_ix = {k: i for i, k in enumerate([f't:{t}' for t in TYPES] + [f's:{s}' for s in STATS])}
         self.tpair_ix = {(u, v): i for i, (u, v) in enumerate((u, v) for a, u in enumerate(TYPES) for v in TYPES[a + 1:])}
         self.tpair_ix |= {(u, u): len(self.tpair_ix) + i for i, u in enumerate(TYPES)}  # never set (antisymmetric), kept for shape
-        c_pl = collections.Counter(p for *_, pl in rows for p in pl)
+        c_pl = collections.Counter(p for r in rows for p in r[3])
         self.pl_ix = {p: i for i, p in enumerate(sorted(p for p, n in c_pl.items() if n >= 5))}
         off = 0; self.blocks = {}
-        for b, ix in (('sp', self.sp_ix), ('tok', self.tok_ix), ('attr', self.attr_ix), ('pair', self.pair_ix), ('tpair', self.tpair_ix), ('pl', self.pl_ix), ('rat', {0: 0})):
+        for b, ix in (('sp', self.sp_ix), ('tok', self.tok_ix), ('attr', self.attr_ix), ('pair', self.pair_ix), ('tpair', self.tpair_ix), ('pl', self.pl_ix), ('rat', {0: 0}),
+                      ('sp_on', self.sp_ix), ('tok_on', self.tok_ix)):
             if b in self.use: self.blocks[b] = (off, off + len(ix)); off += len(ix)
         self.d = off
 
-    def row(self, A, B, rgap=None, pl=None):
-        """sparse feature row (cols, vals) for A vs B; pl = (player A, player B) for the skill-control block, None when predicting"""
+    def row(self, A, B, rgap=None, pl=None, ctx=0):
+        """sparse feature row (cols, vals) for A vs B; pl = (player A, player B) for the skill-control block, None when predicting;
+        ctx = 1 for a tournament game (the sp_on / tok_on blocks: how species and set details do differently there)"""
         cols, vals = [], []
         o = self.blocks
         def add(b, ix, key, v):
@@ -95,6 +99,10 @@ class Model:
         for s, n in collections.Counter(A.sp).items(): add('sp', self.sp_ix, s, n)
         for s, n in collections.Counter(B.sp).items(): add('sp', self.sp_ix, s, -n)
         for k in set(A.tok) | set(B.tok): add('tok', self.tok_ix, k, A.tok[k] - B.tok[k])
+        if ctx:
+            for s, n in collections.Counter(A.sp).items(): add('sp_on', self.sp_ix, s, n * ctx)
+            for s, n in collections.Counter(B.sp).items(): add('sp_on', self.sp_ix, s, -n * ctx)
+            for k in set(A.tok) | set(B.tok): add('tok_on', self.tok_ix, k, (A.tok[k] - B.tok[k]) * ctx)
         for k in set(A.attr) | set(B.attr): add('attr', self.attr_ix, k, A.attr[k] - B.attr[k])
         pc = collections.Counter()
         for u in A.sp:
@@ -116,8 +124,8 @@ class Model:
 
     def matrix(self, rows):
         indptr, cols, vals = [0], [], []
-        for A, B, rg, *pl in rows:
-            c, v = self.row(A, B, rg, pl[0] if pl else None); cols += c; vals += v; indptr.append(len(cols))
+        for r in rows:
+            c, v = self.row(r[0], r[1], r[2], r[3] if len(r) > 3 else None, r[4] if len(r) > 4 else 0); cols += c; vals += v; indptr.append(len(cols))
         return sp.csr_matrix((np.array(vals, dtype=np.float64), np.array(cols, dtype=np.int32), np.array(indptr)), shape=(len(rows), self.d))
 
     def fit(self, rows, y, w0=None):
@@ -137,7 +145,8 @@ class Model:
         return self.matrix(rows) @ self.w
 
     def weights(self, block):
-        a, z = self.blocks[block]; ix = {'sp': self.sp_ix, 'tok': self.tok_ix, 'attr': self.attr_ix, 'pair': self.pair_ix, 'tpair': self.tpair_ix, 'pl': self.pl_ix}[block]
+        a, z = self.blocks[block]; ix = {'sp': self.sp_ix, 'tok': self.tok_ix, 'attr': self.attr_ix, 'pair': self.pair_ix, 'tpair': self.tpair_ix, 'pl': self.pl_ix,
+                                         'sp_on': self.sp_ix, 'tok_on': self.tok_ix}[block]
         return {k: self.w[a + i] for k, i in ix.items()}
 
 def rgap(g):
@@ -148,26 +157,31 @@ def load(filter=None):
     for l in gzip.open(GAMES, 'rt'):
         g = json.loads(l)
         if filter and not filter(g): continue
-        rows.append((Team(g['six1'], g['sets1']), Team(g['six2'], g['sets2']), rgap(g), (g['p1'], g['p2']))); y.append(g['win']); meta.append(g)
+        rows.append((Team(g['six1'], g['sets1']), Team(g['six2'], g['sets2']), rgap(g), (g['p1'], g['p2']), int(g['src'] == 'online'))); y.append(g['win']); meta.append(g)
     return rows, np.array(y, dtype=float), meta
 
 def logloss(z, y):
     return float(np.mean(np.logaddexp(0, z) - y * z))
 
 class Pool:
-    """many teams at once: each team is a group of sheets with the same six species (set details averaged over the group);
-    logits() gives the full matrix of A-beats-B log-odds in a few matrix products (no skill controls)"""
-    def __init__(self, model, groups):
+    """many teams at once: each team is a group of sheets with the same six species (set details averaged over the group).
+    logits() gives the full matrix of A-beats-B log-odds among the pool, cross(other) against another pool, in a few matrix
+    products (no skill controls; ctx = 1 adds the tournament weights)"""
+    def __init__(self, model, groups, ctx=0):
         m = model; self.m = m; N = len(groups)
-        sp_ix = {s: i for i, s in enumerate(sorted({s for g in groups for T in g for s in T.sp}))}
+        self.sp_ix = sp_ix = {s: i for i, s in enumerate(sorted(m.sp_ix))}
         self.lin = np.zeros(N); S = np.zeros((N, len(sp_ix))); C = np.zeros((N, len(TYPES)))
         ws = m.weights('sp') if 'sp' in m.blocks else {}; wt = m.weights('tok') if 'tok' in m.blocks else {}; wa = m.weights('attr') if 'attr' in m.blocks else {}
+        if ctx:
+            ws = {k: v + ctx * m.weights('sp_on').get(k, 0.0) for k, v in ws.items()} if 'sp_on' in m.blocks else ws
+            wt = {k: v + ctx * m.weights('tok_on').get(k, 0.0) for k, v in wt.items()} if 'tok_on' in m.blocks else wt
         ti = {t: i for i, t in enumerate(TYPES)}
         for i, g in enumerate(groups):
             k = len(g)
             self.lin[i] = (sum(ws.get(s, 0.0) for s in g[0].sp) + sum(wt.get(t, 0.0) * n for T in g for t, n in T.tok.items()) / k
                            + sum(wa.get(a, 0.0) * v for T in g for a, v in T.attr.items()) / k)
-            for s in g[0].sp: S[i, sp_ix[s]] = 1.0
+            for s in g[0].sp:
+                if s in sp_ix: S[i, sp_ix[s]] = 1.0
             for t, n in g[0].types.items(): C[i, ti[t]] = n
         K = len(sp_ix); Wp = np.zeros((K, K))
         if 'pair' in m.blocks:
@@ -179,5 +193,9 @@ class Pool:
                 if u != v: Wt[ti[u], ti[v]] = w / 6.0; Wt[ti[v], ti[u]] = -w / 6.0
         self.S, self.C, self.Wp, self.Wt = S, C, Wp, Wt
 
+    def cross(self, other):
+        """log-odds that each team here beats each team in `other` (same model)"""
+        return self.lin[:, None] - other.lin[None, :] + self.S @ self.Wp @ other.S.T + self.C @ self.Wt @ other.C.T
+
     def logits(self):
-        return self.lin[:, None] - self.lin[None, :] + self.S @ self.Wp @ self.S.T + self.C @ self.Wt @ self.C.T
+        return self.cross(self)

@@ -30,11 +30,12 @@ def formes(six, sets):
     by = {M.idf(s['species']): s for s in (sets or [])}
     return [L.battle_forme(x, (by.get(M.idf(x)) or {}).get('item')) for x in six]
 
-def sides(meta, rows, reg, lo, hi):
-    """[(player, six key, Team, formes)] for every sheet of `reg` played between day lo and day hi (inclusive)"""
+def sides(meta, rows, reg, lo, hi, src=None):
+    """[(player, six key, Team, formes)] for every sheet of `reg` played between day lo and day hi (inclusive); src: 'ladder' /
+    'online' / None for both"""
     out = []
     for g, (A, B, *_) in zip(meta, rows):
-        if g['reg'] != reg or not (lo <= day(g['t']) <= hi): continue
+        if g['reg'] != reg or not (lo <= day(g['t']) <= hi) or (src and g['src'] != src): continue
         out.append((g['p1'], tuple(sorted(A.sp)), A, formes(g['six1'], g['sets1'])))
         out.append((g['p2'], tuple(sorted(B.sp)), B, formes(g['six2'], g['sets2'])))
     return out

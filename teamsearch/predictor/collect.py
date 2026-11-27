@@ -6,9 +6,11 @@ are picked up the day they appear; the guessed M-D ids are tried as well), then 
 newest page back and save the logs not yet saved, stopping at two fully saved pages in a row. The newest regulation goes first.
 A run fetches at most CAP logs (the M-C backlog since Nov 13 fills over several runs). Polite: one request each 0.5 s.
 Logs carry player names, so they go to predictor/replays/ (git-ignored) with an index of id, format, rating and upload time.
+Then fetch_tours.py for the online tournaments.
   teamsearch/bin/teamsearch-py predictor/collect.py            -> predictor/replays/, lines in predictor/collect.log
 """
 import os, re, sys, json, time, fcntl, urllib.request
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(os.path.dirname(HERE))
 D = os.path.join(HERE, 'replays'); OLD = os.path.join(ROOT, 'pssim', 'replays_protect'); LOG = os.path.join(HERE, 'collect.log')
 UA = {'User-Agent': 'champions-sims research (personal, low rate)'}
@@ -71,6 +73,8 @@ def main():
         json.dump(idx, open(os.path.join(D, 'index.json'), 'w'))
     n = collections_count(idx)
     say(f"collect: {', '.join(out) or 'nothing listed'}; saved so far: {n}; {int(time.time() - t0)} s")
+    lock.close()
+    import fetch_tours; fetch_tours.main()                               # the online tournaments (it skips itself if a run is going)
 
 def collections_count(idx):
     c = {}

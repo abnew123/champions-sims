@@ -209,6 +209,14 @@ def report(runs=int(os.environ.get('TS_REG_RUNS', 1000))):
                 p = 1 / (1 + np.exp(-b * z)); b += np.sum(z * (y - p)) / max(np.sum(z * z * p * (1 - p)), 1e-9)
             J['way2'][f'{kind}_c{c}'] = dict(logloss=ll, acc=acc, slope=b)
             out(f"  {kind:6s} odds{'' if c == 1 else f', game odds x{c}':15s}: favourite won {100 * acc:.1f}%, log loss {ll:.4f} (coin flip 0.6931), slope {b:.2f}")
+    xm = np.array([x['model'] for x in rows]); ym = np.array([x['y'] for x in rows])
+    def ll_c(c):
+        q = np.clip(BO3(1 / (1 + np.exp(-c * xm))), 1e-9, 1 - 1e-9); return -np.mean(ym * np.log(q) + (1 - ym) * np.log(1 - q))
+    cb = min(np.linspace(0.02, 1, 99), key=ll_c); J['way2']['model_best_c'] = dict(c=cb, logloss=ll_c(cb))
+    out(f"  model odds, best game-odds shrink x{cb:.2f}: log loss {ll_c(cb):.4f} (coin flip 0.6931)")
+    for lo, hi in ((1, 4), (5, 8), (9, 99)):
+        m = np.array([lo <= x['r'] <= hi for x in rows])
+        out(f"    rounds {lo}-{hi if hi < 99 else 'end'}: {m.sum()} matches, model favourite won {100 * np.mean((xm[m] > 0) == (ym[m] == 1)):.1f}%")
     exp, act, cnt = collections.Counter(), collections.Counter(), collections.Counter()
     for x in rows:
         q = BO3(sig(x['model']))
@@ -243,6 +251,11 @@ def report(runs=int(os.environ.get('TS_REG_RUNS', 1000))):
         st = {p: (s[keyof[p]] if p in known else mean_s) for p in players}; ar_ = {p: teams[keyof[p]]['arch'] if p in known else None for p in players}
         J['way1'][ev] = dict(players=len(players), known=len(known), day1=d1, day2=d2, cut=cut, day2_wins=d2w)
         out(f"  {ev}: {len(players)} players ({len(known)} known teams), {d1} Day 1 rounds, Day 2 at {d2w}+ wins, {d2} Day 2 rounds, top {cut}")
+        sv = np.array([s[keyof[p]] for p in known])
+        pct = lambda S: float(np.mean([100 * np.mean(sv < s[keyof[p]]) for p in S if p in known])) if any(p in known for p in S) else float('nan')
+        J['way1'][ev]['strength_pct'] = dict(winner=pct([champ]), top=pct(topr), day2=pct(later))
+        out(f"    sim team strength percentile (100 = strongest in the event): real winner {pct([champ]):.0f}, real top {cut} {pct(topr):.0f},"
+            f" real Day 2 {pct(later):.0f}")
         for c in (1.0, C_CAL):
             cache = {}
             def q(a, b, c=c):
@@ -272,7 +285,7 @@ def report(runs=int(os.environ.get('TS_REG_RUNS', 1000))):
                                       top_teams=[dict(arch=ar_[p], win=nw[p] / runs, top=nt[p] / runs, day2=pd2[p], real_day2=p in later,
                                                       real_top=p in topr, real_win=p == champ) for p in ranks[:10]])
             out(f"    {tag:5s}: real Day 2 players had a {100 * np.mean(real2):.0f}% sim chance of Day 2 (others {100 * np.mean(other):.0f}%; AUC {auc:.2f});"
-                f" the real winner won {100 * nw[champ] / runs:.1f}% of runs (rank {cr})")
+                f" the real winner won {100 * nw[champ] / runs:.1f}% of runs, top {cut} in {100 * nt[champ] / runs:.0f}%")
             top_a = sorted(arch2, key=lambda a: -arch2[a])[:6]
             out("           Day 2 by archetype, sim vs real: " + ', '.join(f"{a} {arch2[a]:.0f}/{arch2r[a]}" for a in top_a))
             if cut > 1: out(f"           top {cut} by archetype, sim vs real: " + ', '.join(f"{a} {archt[a]:.1f}/{archtr[a]}" for a in sorted(archt, key=lambda a: -archt[a])[:6]))

@@ -1,0 +1,2048 @@
+{
+ "way2": {
+  "direct_c1.0": {
+   "logloss": 0.7877414835787709,
+   "acc": 0.5450678549726554,
+   "slope": 0.1797604973541697
+  },
+  "direct_c0.72": {
+   "logloss": 0.7326927248986771,
+   "acc": 0.5450678549726554,
+   "slope": 0.2535839799319017
+  },
+  "model_c1.0": {
+   "logloss": 0.7212063257721583,
+   "acc": 0.5465532374586456,
+   "slope": 0.2944370656424412
+  },
+  "model_c0.72": {
+   "logloss": 0.6992280801132116,
+   "acc": 0.5465532374586456,
+   "slope": 0.41197910177461783
+  },
+  "model_best_c": {
+   "c": 0.30000000000000004,
+   "logloss": 0.6861827636019387
+  },
+  "player_corr": 0.12468304946737817,
+  "arch": {
+   "Trick Room": {
+    "n": 2080,
+    "real": 0.48173076923076924,
+    "sim": 0.4649770865734923
+   },
+   "Tailwind": {
+    "n": 6485,
+    "real": 0.5067077872012337,
+    "sim": 0.5420690716262041
+   },
+   "Snow": {
+    "n": 1916,
+    "real": 0.4791231732776618,
+    "sim": 0.5265969053896404
+   },
+   "Indeedee TR": {
+    "n": 2948,
+    "real": 0.48846675712347354,
+    "sim": 0.4517865177643688
+   },
+   "Rain": {
+    "n": 3124,
+    "real": 0.4791933418693982,
+    "sim": 0.4959930364128751
+   },
+   "Sand": {
+    "n": 2428,
+    "real": 0.4757001647446458,
+    "sim": 0.4897532264217621
+   },
+   "Perish": {
+    "n": 1567,
+    "real": 0.5245692405871091,
+    "sim": 0.46885957271053835
+   },
+   "Balance": {
+    "n": 3757,
+    "real": 0.5155709342560554,
+    "sim": 0.4969140158908647
+   },
+   "Rain + Sun": {
+    "n": 1755,
+    "real": 0.5276353276353276,
+    "sim": 0.5350233611520188
+   },
+   "Sun": {
+    "n": 3562,
+    "real": 0.5131948343627176,
+    "sim": 0.47965340226508935
+   }
+  }
+ },
+ "way1": {
+  "Baltimore": {
+   "players": 1081,
+   "known": 1058,
+   "day1": 8,
+   "day2": 5,
+   "cut": 16,
+   "day2_wins": 6,
+   "strength_pct": {
+    "winner": 60.396975425330815,
+    "top": 68.41646066598807,
+    "day2": 60.45894415303147
+   },
+   "raw": {
+    "day2_auc": 0.6189636752136752,
+    "champ_p": 0.0,
+    "champ_rank": 1012,
+    "real_day2_mean": 0.17339102564102563,
+    "arch_day2": {
+     "Trick Room": {
+      "sim": 7.494999999999995,
+      "real": 9
+     },
+     "Tailwind": {
+      "sim": 52.51000000000002,
+      "real": 46
+     },
+     "Snow": {
+      "sim": 14.573,
+      "real": 11
+     },
+     "Indeedee TR": {
+      "sim": 13.447999999999997,
+      "real": 21
+     },
+     "Rain": {
+      "sim": 14.422,
+      "real": 8
+     },
+     "Sand": {
+      "sim": 10.222999999999997,
+      "real": 9
+     },
+     "Perish": {
+      "sim": 6.047000000000002,
+      "real": 9
+     },
+     "Balance": {
+      "sim": 13.436,
+      "real": 12
+     },
+     "unknown": {
+      "sim": 1.983,
+      "real": 5
+     },
+     "Rain + Sun": {
+      "sim": 6.413,
+      "real": 5
+     },
+     "Sun": {
+      "sim": 15.894,
+      "real": 21
+     }
+    },
+    "arch_top": {
+     "Trick Room": {
+      "sim": 0.4460000000000001,
+      "real": 1
+     },
+     "Tailwind": {
+      "sim": 6.256999999999992,
+      "real": 2
+     },
+     "Snow": {
+      "sim": 1.9609999999999992,
+      "real": 1
+     },
+     "Indeedee TR": {
+      "sim": 1.3230000000000004,
+      "real": 2
+     },
+     "Rain": {
+      "sim": 1.6069999999999989,
+      "real": 0
+     },
+     "Sand": {
+      "sim": 0.7170000000000003,
+      "real": 1
+     },
+     "Perish": {
+      "sim": 0.4650000000000001,
+      "real": 3
+     },
+     "Balance": {
+      "sim": 1.1230000000000002,
+      "real": 1
+     },
+     "unknown": {
+      "sim": 0.04800000000000001,
+      "real": 0
+     },
+     "Rain + Sun": {
+      "sim": 0.7430000000000002,
+      "real": 1
+     },
+     "Sun": {
+      "sim": 1.309999999999999,
+      "real": 1
+     }
+    },
+    "top_teams": [
+     {
+      "arch": "Tailwind",
+      "win": 0.162,
+      "top": 0.621,
+      "day2": 0.912,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.102,
+      "top": 0.481,
+      "day2": 0.847,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Indeedee TR",
+      "win": 0.059,
+      "top": 0.331,
+      "day2": 0.746,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.056,
+      "top": 0.353,
+      "day2": 0.777,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain",
+      "win": 0.044,
+      "top": 0.32,
+      "day2": 0.768,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Snow",
+      "win": 0.027,
+      "top": 0.247,
+      "day2": 0.723,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain + Sun",
+      "win": 0.022,
+      "top": 0.262,
+      "day2": 0.712,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Balance",
+      "win": 0.02,
+      "top": 0.201,
+      "day2": 0.672,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Sun",
+      "win": 0.019,
+      "top": 0.214,
+      "day2": 0.658,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.016,
+      "top": 0.18,
+      "day2": 0.65,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     }
+    ]
+   },
+   "x0.72": {
+    "day2_auc": 0.6143803418803419,
+    "champ_p": 0.001,
+    "champ_rank": 236,
+    "real_day2_mean": 0.17012179487179488,
+    "arch_day2": {
+     "Trick Room": {
+      "sim": 8.338999999999997,
+      "real": 9
+     },
+     "Tailwind": {
+      "sim": 49.77299999999999,
+      "real": 46
+     },
+     "Snow": {
+      "sim": 13.959000000000001,
+      "real": 11
+     },
+     "Indeedee TR": {
+      "sim": 13.934999999999997,
+      "real": 21
+     },
+     "Rain": {
+      "sim": 14.377999999999997,
+      "real": 8
+     },
+     "Sand": {
+      "sim": 10.759,
+      "real": 9
+     },
+     "Perish": {
+      "sim": 6.351,
+      "real": 9
+     },
+     "Balance": {
+      "sim": 13.574999999999998,
+      "real": 12
+     },
+     "unknown": {
+      "sim": 2.5780000000000003,
+      "real": 5
+     },
+     "Rain + Sun": {
+      "sim": 6.181000000000001,
+      "real": 5
+     },
+     "Sun": {
+      "sim": 16.573999999999998,
+      "real": 21
+     }
+    },
+    "arch_top": {
+     "Trick Room": {
+      "sim": 0.6060000000000003,
+      "real": 1
+     },
+     "Tailwind": {
+      "sim": 5.937999999999995,
+      "real": 2
+     },
+     "Snow": {
+      "sim": 1.7959999999999996,
+      "real": 1
+     },
+     "Indeedee TR": {
+      "sim": 1.264,
+      "real": 2
+     },
+     "Rain": {
+      "sim": 1.5589999999999988,
+      "real": 0
+     },
+     "Sand": {
+      "sim": 0.8720000000000003,
+      "real": 1
+     },
+     "Perish": {
+      "sim": 0.5090000000000001,
+      "real": 3
+     },
+     "Balance": {
+      "sim": 1.2180000000000004,
+      "real": 1
+     },
+     "unknown": {
+      "sim": 0.10000000000000003,
+      "real": 0
+     },
+     "Rain + Sun": {
+      "sim": 0.713,
+      "real": 1
+     },
+     "Sun": {
+      "sim": 1.4249999999999987,
+      "real": 1
+     }
+    },
+    "top_teams": [
+     {
+      "arch": "Tailwind",
+      "win": 0.103,
+      "top": 0.409,
+      "day2": 0.794,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.054,
+      "top": 0.317,
+      "day2": 0.712,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain",
+      "win": 0.042,
+      "top": 0.24,
+      "day2": 0.667,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Indeedee TR",
+      "win": 0.034,
+      "top": 0.213,
+      "day2": 0.64,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Snow",
+      "win": 0.03,
+      "top": 0.183,
+      "day2": 0.584,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain + Sun",
+      "win": 0.024,
+      "top": 0.185,
+      "day2": 0.57,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.02,
+      "top": 0.216,
+      "day2": 0.591,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.018,
+      "top": 0.112,
+      "day2": 0.499,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.016,
+      "top": 0.149,
+      "day2": 0.535,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain",
+      "win": 0.014,
+      "top": 0.121,
+      "day2": 0.502,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     }
+    ]
+   }
+  },
+  "Brisbane": {
+   "players": 327,
+   "known": 322,
+   "day1": 8,
+   "day2": 3,
+   "cut": 16,
+   "day2_wins": 6,
+   "strength_pct": {
+    "winner": 47.82608695652174,
+    "top": 56.521739130434796,
+    "day2": 55.72882251883178
+   },
+   "raw": {
+    "day2_auc": 0.5466565349544072,
+    "champ_p": 0.001,
+    "champ_rank": 114,
+    "real_day2_mean": 0.1425744680851064,
+    "arch_day2": {
+     "Rain": {
+      "sim": 4.787,
+      "real": 7
+     },
+     "Balance": {
+      "sim": 2.5929999999999995,
+      "real": 3
+     },
+     "Snow": {
+      "sim": 3.0460000000000003,
+      "real": 3
+     },
+     "Perish": {
+      "sim": 2.357,
+      "real": 5
+     },
+     "Trick Room": {
+      "sim": 2.8879999999999995,
+      "real": 8
+     },
+     "Tailwind": {
+      "sim": 15.789000000000007,
+      "real": 9
+     },
+     "unknown": {
+      "sim": 0.453,
+      "real": 0
+     },
+     "Indeedee TR": {
+      "sim": 2.7240000000000006,
+      "real": 3
+     },
+     "Sun": {
+      "sim": 4.0840000000000005,
+      "real": 5
+     },
+     "Rain + Sun": {
+      "sim": 4.347,
+      "real": 3
+     },
+     "Sand": {
+      "sim": 4.345999999999998,
+      "real": 1
+     }
+    },
+    "arch_top": {
+     "Rain": {
+      "sim": 1.6669999999999996,
+      "real": 3
+     },
+     "Balance": {
+      "sim": 0.7920000000000001,
+      "real": 2
+     },
+     "Snow": {
+      "sim": 0.9860000000000001,
+      "real": 0
+     },
+     "Perish": {
+      "sim": 0.56,
+      "real": 1
+     },
+     "Trick Room": {
+      "sim": 0.9970000000000001,
+      "real": 1
+     },
+     "Tailwind": {
+      "sim": 5.666,
+      "real": 1
+     },
+     "unknown": {
+      "sim": 0.081,
+      "real": 0
+     },
+     "Indeedee TR": {
+      "sim": 0.8280000000000002,
+      "real": 0
+     },
+     "Sun": {
+      "sim": 1.3050000000000002,
+      "real": 0
+     },
+     "Rain + Sun": {
+      "sim": 1.9640000000000002,
+      "real": 2
+     },
+     "Sand": {
+      "sim": 1.1540000000000001,
+      "real": 1
+     }
+    },
+    "top_teams": [
+     {
+      "arch": "Rain + Sun",
+      "win": 0.13,
+      "top": 0.542,
+      "day2": 0.758,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.081,
+      "top": 0.468,
+      "day2": 0.709,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.063,
+      "top": 0.388,
+      "day2": 0.65,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain + Sun",
+      "win": 0.054,
+      "top": 0.377,
+      "day2": 0.619,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.045,
+      "top": 0.338,
+      "day2": 0.607,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain + Sun",
+      "win": 0.036,
+      "top": 0.343,
+      "day2": 0.59,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Trick Room",
+      "win": 0.032,
+      "top": 0.289,
+      "day2": 0.508,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.028,
+      "top": 0.277,
+      "day2": 0.542,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain",
+      "win": 0.027,
+      "top": 0.234,
+      "day2": 0.518,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Balance",
+      "win": 0.025,
+      "top": 0.248,
+      "day2": 0.505,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     }
+    ]
+   },
+   "x0.72": {
+    "day2_auc": 0.5450607902735563,
+    "champ_p": 0.001,
+    "champ_rank": 153,
+    "real_day2_mean": 0.145468085106383,
+    "arch_day2": {
+     "Rain": {
+      "sim": 4.9350000000000005,
+      "real": 7
+     },
+     "Balance": {
+      "sim": 2.7539999999999996,
+      "real": 3
+     },
+     "Snow": {
+      "sim": 3.015,
+      "real": 3
+     },
+     "Perish": {
+      "sim": 2.614,
+      "real": 5
+     },
+     "Trick Room": {
+      "sim": 2.8489999999999993,
+      "real": 8
+     },
+     "Tailwind": {
+      "sim": 15.0,
+      "real": 9
+     },
+     "unknown": {
+      "sim": 0.542,
+      "real": 0
+     },
+     "Indeedee TR": {
+      "sim": 2.753,
+      "real": 3
+     },
+     "Sun": {
+      "sim": 4.185999999999999,
+      "real": 5
+     },
+     "Rain + Sun": {
+      "sim": 4.0649999999999995,
+      "real": 3
+     },
+     "Sand": {
+      "sim": 4.712,
+      "real": 1
+     }
+    },
+    "arch_top": {
+     "Rain": {
+      "sim": 1.6350000000000002,
+      "real": 3
+     },
+     "Balance": {
+      "sim": 0.8490000000000002,
+      "real": 2
+     },
+     "Snow": {
+      "sim": 0.9550000000000001,
+      "real": 0
+     },
+     "Perish": {
+      "sim": 0.7280000000000001,
+      "real": 1
+     },
+     "Trick Room": {
+      "sim": 0.9340000000000002,
+      "real": 1
+     },
+     "Tailwind": {
+      "sim": 5.452,
+      "real": 1
+     },
+     "unknown": {
+      "sim": 0.134,
+      "real": 0
+     },
+     "Indeedee TR": {
+      "sim": 0.8560000000000001,
+      "real": 0
+     },
+     "Sun": {
+      "sim": 1.299,
+      "real": 0
+     },
+     "Rain + Sun": {
+      "sim": 1.7780000000000002,
+      "real": 2
+     },
+     "Sand": {
+      "sim": 1.3800000000000001,
+      "real": 1
+     }
+    },
+    "top_teams": [
+     {
+      "arch": "Rain + Sun",
+      "win": 0.077,
+      "top": 0.425,
+      "day2": 0.638,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.048,
+      "top": 0.351,
+      "day2": 0.585,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.042,
+      "top": 0.259,
+      "day2": 0.472,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.04,
+      "top": 0.248,
+      "day2": 0.468,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain + Sun",
+      "win": 0.039,
+      "top": 0.28,
+      "day2": 0.511,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain + Sun",
+      "win": 0.034,
+      "top": 0.271,
+      "day2": 0.484,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Trick Room",
+      "win": 0.028,
+      "top": 0.22,
+      "day2": 0.443,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Balance",
+      "win": 0.022,
+      "top": 0.192,
+      "day2": 0.411,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.022,
+      "top": 0.212,
+      "day2": 0.399,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain",
+      "win": 0.019,
+      "top": 0.194,
+      "day2": 0.399,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     }
+    ]
+   }
+  },
+  "Frankfurt": {
+   "players": 1129,
+   "known": 1116,
+   "day1": 8,
+   "day2": 5,
+   "cut": 16,
+   "day2_wins": 6,
+   "strength_pct": {
+    "winner": 82.52688172043011,
+    "top": 59.67741935483871,
+    "day2": 56.298951281030135
+   },
+   "raw": {
+    "day2_auc": 0.5751329243353783,
+    "champ_p": 0.0,
+    "champ_rank": 1041,
+    "real_day2_mean": 0.16593865030674845,
+    "arch_day2": {
+     "Sun": {
+      "sim": 12.610999999999997,
+      "real": 16
+     },
+     "Sand": {
+      "sim": 12.572,
+      "real": 11
+     },
+     "Rain": {
+      "sim": 14.638999999999998,
+      "real": 12
+     },
+     "Tailwind": {
+      "sim": 52.79599999999995,
+      "real": 39
+     },
+     "Indeedee TR": {
+      "sim": 12.431999999999993,
+      "real": 14
+     },
+     "Balance": {
+      "sim": 17.136000000000003,
+      "real": 27
+     },
+     "Trick Room": {
+      "sim": 7.115000000000001,
+      "real": 6
+     },
+     "Snow": {
+      "sim": 14.884999999999998,
+      "real": 12
+     },
+     "Perish": {
+      "sim": 7.149000000000001,
+      "real": 13
+     },
+     "Rain + Sun": {
+      "sim": 10.767,
+      "real": 12
+     },
+     "unknown": {
+      "sim": 1.2639999999999998,
+      "real": 1
+     }
+    },
+    "arch_top": {
+     "Sun": {
+      "sim": 1.0590000000000002,
+      "real": 3
+     },
+     "Sand": {
+      "sim": 0.8990000000000002,
+      "real": 1
+     },
+     "Rain": {
+      "sim": 1.2259999999999993,
+      "real": 1
+     },
+     "Tailwind": {
+      "sim": 5.839999999999993,
+      "real": 1
+     },
+     "Indeedee TR": {
+      "sim": 0.8420000000000002,
+      "real": 0
+     },
+     "Balance": {
+      "sim": 1.3329999999999986,
+      "real": 3
+     },
+     "Trick Room": {
+      "sim": 0.6280000000000001,
+      "real": 1
+     },
+     "Snow": {
+      "sim": 1.9439999999999993,
+      "real": 1
+     },
+     "Perish": {
+      "sim": 0.638,
+      "real": 1
+     },
+     "Rain + Sun": {
+      "sim": 1.562999999999999,
+      "real": 0
+     },
+     "unknown": {
+      "sim": 0.028000000000000004,
+      "real": 0
+     }
+    },
+    "top_teams": [
+     {
+      "arch": "Tailwind",
+      "win": 0.297,
+      "top": 0.726,
+      "day2": 0.955,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain + Sun",
+      "win": 0.067,
+      "top": 0.402,
+      "day2": 0.823,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Snow",
+      "win": 0.049,
+      "top": 0.323,
+      "day2": 0.777,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain + Sun",
+      "win": 0.038,
+      "top": 0.274,
+      "day2": 0.721,
+      "real_day2": true,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Snow",
+      "win": 0.026,
+      "top": 0.256,
+      "day2": 0.751,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain + Sun",
+      "win": 0.022,
+      "top": 0.235,
+      "day2": 0.675,
+      "real_day2": true,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.019,
+      "top": 0.177,
+      "day2": 0.612,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Perish",
+      "win": 0.017,
+      "top": 0.166,
+      "day2": 0.607,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.016,
+      "top": 0.204,
+      "day2": 0.66,
+      "real_day2": true,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Snow",
+      "win": 0.016,
+      "top": 0.182,
+      "day2": 0.638,
+      "real_day2": true,
+      "real_top": false,
+      "real_win": false
+     }
+    ]
+   },
+   "x0.72": {
+    "day2_auc": 0.5758179959100205,
+    "champ_p": 0.0,
+    "champ_rank": 1049,
+    "real_day2_mean": 0.16312269938650306,
+    "arch_day2": {
+     "Sun": {
+      "sim": 13.035999999999998,
+      "real": 16
+     },
+     "Sand": {
+      "sim": 12.853,
+      "real": 11
+     },
+     "Rain": {
+      "sim": 14.863000000000003,
+      "real": 12
+     },
+     "Tailwind": {
+      "sim": 50.86600000000002,
+      "real": 39
+     },
+     "Indeedee TR": {
+      "sim": 13.520999999999997,
+      "real": 14
+     },
+     "Balance": {
+      "sim": 17.358999999999998,
+      "real": 27
+     },
+     "Trick Room": {
+      "sim": 7.5559999999999965,
+      "real": 6
+     },
+     "Snow": {
+      "sim": 13.789999999999997,
+      "real": 12
+     },
+     "Perish": {
+      "sim": 7.653999999999998,
+      "real": 13
+     },
+     "Rain + Sun": {
+      "sim": 10.371999999999996,
+      "real": 12
+     },
+     "unknown": {
+      "sim": 1.4700000000000004,
+      "real": 1
+     }
+    },
+    "arch_top": {
+     "Sun": {
+      "sim": 1.0720000000000003,
+      "real": 3
+     },
+     "Sand": {
+      "sim": 1.0709999999999997,
+      "real": 1
+     },
+     "Rain": {
+      "sim": 1.3569999999999995,
+      "real": 1
+     },
+     "Tailwind": {
+      "sim": 5.525999999999995,
+      "real": 1
+     },
+     "Indeedee TR": {
+      "sim": 0.9910000000000003,
+      "real": 0
+     },
+     "Balance": {
+      "sim": 1.4919999999999984,
+      "real": 3
+     },
+     "Trick Room": {
+      "sim": 0.6060000000000002,
+      "real": 1
+     },
+     "Snow": {
+      "sim": 1.8509999999999993,
+      "real": 1
+     },
+     "Perish": {
+      "sim": 0.662,
+      "real": 1
+     },
+     "Rain + Sun": {
+      "sim": 1.3189999999999997,
+      "real": 0
+     },
+     "unknown": {
+      "sim": 0.053000000000000005,
+      "real": 0
+     }
+    },
+    "top_teams": [
+     {
+      "arch": "Tailwind",
+      "win": 0.161,
+      "top": 0.508,
+      "day2": 0.838,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain + Sun",
+      "win": 0.05,
+      "top": 0.271,
+      "day2": 0.692,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Snow",
+      "win": 0.034,
+      "top": 0.237,
+      "day2": 0.64,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain + Sun",
+      "win": 0.024,
+      "top": 0.174,
+      "day2": 0.552,
+      "real_day2": true,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Snow",
+      "win": 0.024,
+      "top": 0.186,
+      "day2": 0.551,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.021,
+      "top": 0.144,
+      "day2": 0.555,
+      "real_day2": true,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain + Sun",
+      "win": 0.02,
+      "top": 0.172,
+      "day2": 0.585,
+      "real_day2": true,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.018,
+      "top": 0.139,
+      "day2": 0.5,
+      "real_day2": true,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Trick Room",
+      "win": 0.013,
+      "top": 0.105,
+      "day2": 0.489,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.012,
+      "top": 0.121,
+      "day2": 0.507,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     }
+    ]
+   }
+  },
+  "Recife": {
+   "players": 222,
+   "known": 220,
+   "day1": 8,
+   "day2": 2,
+   "cut": 16,
+   "day2_wins": 6,
+   "strength_pct": {
+    "winner": 11.818181818181818,
+    "top": 70.37878787878788,
+    "day2": 58.09384164222873
+   },
+   "raw": {
+    "day2_auc": 0.6080898496875528,
+    "champ_p": 0.0,
+    "champ_rank": 204,
+    "real_day2_mean": 0.18209677419354833,
+    "arch_day2": {
+     "Trick Room": {
+      "sim": 1.824,
+      "real": 2
+     },
+     "Rain + Sun": {
+      "sim": 3.3019999999999996,
+      "real": 5
+     },
+     "Indeedee TR": {
+      "sim": 1.783,
+      "real": 3
+     },
+     "Tailwind": {
+      "sim": 9.273999999999997,
+      "real": 6
+     },
+     "Sun": {
+      "sim": 4.892999999999999,
+      "real": 4
+     },
+     "Perish": {
+      "sim": 0.8640000000000001,
+      "real": 0
+     },
+     "Balance": {
+      "sim": 5.2540000000000004,
+      "real": 6
+     },
+     "Rain": {
+      "sim": 1.1800000000000002,
+      "real": 1
+     },
+     "Sand": {
+      "sim": 2.4069999999999996,
+      "real": 3
+     },
+     "Snow": {
+      "sim": 1.161,
+      "real": 1
+     },
+     "unknown": {
+      "sim": 0.203,
+      "real": 0
+     }
+    },
+    "arch_top": {
+     "Trick Room": {
+      "sim": 0.8320000000000001,
+      "real": 1
+     },
+     "Rain + Sun": {
+      "sim": 1.715,
+      "real": 1
+     },
+     "Indeedee TR": {
+      "sim": 0.803,
+      "real": 1
+     },
+     "Tailwind": {
+      "sim": 5.208000000000001,
+      "real": 3
+     },
+     "Sun": {
+      "sim": 2.4329999999999994,
+      "real": 3
+     },
+     "Perish": {
+      "sim": 0.3650000000000001,
+      "real": 0
+     },
+     "Balance": {
+      "sim": 2.473,
+      "real": 2
+     },
+     "Rain": {
+      "sim": 0.45399999999999996,
+      "real": 1
+     },
+     "Sand": {
+      "sim": 1.0530000000000002,
+      "real": 0
+     },
+     "Snow": {
+      "sim": 0.599,
+      "real": 0
+     },
+     "unknown": {
+      "sim": 0.065,
+      "real": 0
+     }
+    },
+    "top_teams": [
+     {
+      "arch": "Tailwind",
+      "win": 0.109,
+      "top": 0.539,
+      "day2": 0.706,
+      "real_day2": true,
+      "real_top": true,
+      "real_win": false
+     },
+     {
+      "arch": "Rain + Sun",
+      "win": 0.062,
+      "top": 0.439,
+      "day2": 0.62,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.054,
+      "top": 0.395,
+      "day2": 0.564,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.037,
+      "top": 0.339,
+      "day2": 0.5,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Snow",
+      "win": 0.037,
+      "top": 0.313,
+      "day2": 0.484,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Sand",
+      "win": 0.037,
+      "top": 0.265,
+      "day2": 0.43,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.033,
+      "top": 0.302,
+      "day2": 0.499,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.031,
+      "top": 0.275,
+      "day2": 0.445,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Sun",
+      "win": 0.031,
+      "top": 0.261,
+      "day2": 0.433,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Sun",
+      "win": 0.03,
+      "top": 0.341,
+      "day2": 0.5,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     }
+    ]
+   },
+   "x0.72": {
+    "day2_auc": 0.6118898834656308,
+    "champ_p": 0.0,
+    "champ_rank": 209,
+    "real_day2_mean": 0.1753870967741936,
+    "arch_day2": {
+     "Trick Room": {
+      "sim": 1.9160000000000001,
+      "real": 2
+     },
+     "Rain + Sun": {
+      "sim": 3.136,
+      "real": 5
+     },
+     "Indeedee TR": {
+      "sim": 1.841,
+      "real": 3
+     },
+     "Tailwind": {
+      "sim": 8.501999999999999,
+      "real": 6
+     },
+     "Sun": {
+      "sim": 5.087000000000001,
+      "real": 4
+     },
+     "Perish": {
+      "sim": 0.997,
+      "real": 0
+     },
+     "Balance": {
+      "sim": 5.272000000000001,
+      "real": 6
+     },
+     "Rain": {
+      "sim": 1.4010000000000002,
+      "real": 1
+     },
+     "Sand": {
+      "sim": 2.5859999999999994,
+      "real": 3
+     },
+     "Snow": {
+      "sim": 1.135,
+      "real": 1
+     },
+     "unknown": {
+      "sim": 0.22799999999999998,
+      "real": 0
+     }
+    },
+    "arch_top": {
+     "Trick Room": {
+      "sim": 0.9010000000000001,
+      "real": 1
+     },
+     "Rain + Sun": {
+      "sim": 1.6190000000000002,
+      "real": 1
+     },
+     "Indeedee TR": {
+      "sim": 0.8390000000000002,
+      "real": 1
+     },
+     "Tailwind": {
+      "sim": 4.713,
+      "real": 3
+     },
+     "Sun": {
+      "sim": 2.512,
+      "real": 3
+     },
+     "Perish": {
+      "sim": 0.4460000000000001,
+      "real": 0
+     },
+     "Balance": {
+      "sim": 2.5159999999999996,
+      "real": 2
+     },
+     "Rain": {
+      "sim": 0.625,
+      "real": 1
+     },
+     "Sand": {
+      "sim": 1.1600000000000001,
+      "real": 0
+     },
+     "Snow": {
+      "sim": 0.5710000000000001,
+      "real": 0
+     },
+     "unknown": {
+      "sim": 0.098,
+      "real": 0
+     }
+    },
+    "top_teams": [
+     {
+      "arch": "Tailwind",
+      "win": 0.063,
+      "top": 0.407,
+      "day2": 0.574,
+      "real_day2": true,
+      "real_top": true,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.047,
+      "top": 0.316,
+      "day2": 0.458,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain + Sun",
+      "win": 0.047,
+      "top": 0.335,
+      "day2": 0.502,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.029,
+      "top": 0.274,
+      "day2": 0.417,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Sun",
+      "win": 0.028,
+      "top": 0.266,
+      "day2": 0.404,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.027,
+      "top": 0.234,
+      "day2": 0.37,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Snow",
+      "win": 0.027,
+      "top": 0.254,
+      "day2": 0.398,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.026,
+      "top": 0.258,
+      "day2": 0.424,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Sun",
+      "win": 0.024,
+      "top": 0.192,
+      "day2": 0.336,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Sand",
+      "win": 0.024,
+      "top": 0.223,
+      "day2": 0.383,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     }
+    ]
+   }
+  },
+  "Louisville": {
+   "players": 1013,
+   "known": 999,
+   "day1": 8,
+   "day2": 4,
+   "cut": 32,
+   "day2_wins": 6,
+   "strength_pct": {
+    "winner": 46.546546546546544,
+    "top": 55.14014014014013,
+    "day2": 58.70095447560236
+   },
+   "raw": {
+    "day2_auc": 0.6071212121212122,
+    "champ_p": 0.0,
+    "champ_rank": 800,
+    "real_day2_mean": 0.17200699300699301,
+    "arch_day2": {
+     "Balance": {
+      "sim": 29.778999999999996,
+      "real": 33
+     },
+     "Tailwind": {
+      "sim": 22.00700000000001,
+      "real": 17
+     },
+     "Trick Room": {
+      "sim": 10.512,
+      "real": 4
+     },
+     "Indeedee TR": {
+      "sim": 8.834000000000001,
+      "real": 7
+     },
+     "Rain": {
+      "sim": 22.515,
+      "real": 21
+     },
+     "Sand": {
+      "sim": 9.418999999999997,
+      "real": 4
+     },
+     "Rain + Sun": {
+      "sim": 14.362000000000005,
+      "real": 11
+     },
+     "Sun": {
+      "sim": 15.417000000000012,
+      "real": 30
+     },
+     "Snow": {
+      "sim": 8.991,
+      "real": 10
+     },
+     "unknown": {
+      "sim": 1.218,
+      "real": 1
+     },
+     "Perish": {
+      "sim": 3.575,
+      "real": 5
+     }
+    },
+    "arch_top": {
+     "Balance": {
+      "sim": 7.003,
+      "real": 2
+     },
+     "Tailwind": {
+      "sim": 5.126999999999999,
+      "real": 4
+     },
+     "Trick Room": {
+      "sim": 2.108999999999999,
+      "real": 0
+     },
+     "Indeedee TR": {
+      "sim": 1.994999999999998,
+      "real": 0
+     },
+     "Rain": {
+      "sim": 5.219999999999999,
+      "real": 3
+     },
+     "Sand": {
+      "sim": 2.2049999999999987,
+      "real": 1
+     },
+     "Rain + Sun": {
+      "sim": 3.0659999999999994,
+      "real": 2
+     },
+     "Sun": {
+      "sim": 2.6599999999999975,
+      "real": 5
+     },
+     "Snow": {
+      "sim": 2.0119999999999996,
+      "real": 2
+     },
+     "unknown": {
+      "sim": 0.095,
+      "real": 0
+     },
+     "Perish": {
+      "sim": 0.508,
+      "real": 1
+     }
+    },
+    "top_teams": [
+     {
+      "arch": "Tailwind",
+      "win": 0.134,
+      "top": 0.666,
+      "day2": 0.867,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Sand",
+      "win": 0.101,
+      "top": 0.636,
+      "day2": 0.872,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Balance",
+      "win": 0.074,
+      "top": 0.521,
+      "day2": 0.813,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Balance",
+      "win": 0.06,
+      "top": 0.464,
+      "day2": 0.759,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.033,
+      "top": 0.444,
+      "day2": 0.737,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Snow",
+      "win": 0.029,
+      "top": 0.392,
+      "day2": 0.705,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain",
+      "win": 0.023,
+      "top": 0.316,
+      "day2": 0.649,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Trick Room",
+      "win": 0.023,
+      "top": 0.289,
+      "day2": 0.628,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain",
+      "win": 0.018,
+      "top": 0.252,
+      "day2": 0.588,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Balance",
+      "win": 0.017,
+      "top": 0.278,
+      "day2": 0.592,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     }
+    ]
+   },
+   "x0.72": {
+    "day2_auc": 0.6066899766899767,
+    "champ_p": 0.0,
+    "champ_rank": 812,
+    "real_day2_mean": 0.16816783216783218,
+    "arch_day2": {
+     "Balance": {
+      "sim": 28.812000000000005,
+      "real": 33
+     },
+     "Tailwind": {
+      "sim": 21.788999999999998,
+      "real": 17
+     },
+     "Trick Room": {
+      "sim": 10.982999999999999,
+      "real": 4
+     },
+     "Indeedee TR": {
+      "sim": 9.129999999999999,
+      "real": 7
+     },
+     "Rain": {
+      "sim": 21.763999999999996,
+      "real": 21
+     },
+     "Sand": {
+      "sim": 9.581999999999999,
+      "real": 4
+     },
+     "Rain + Sun": {
+      "sim": 13.969000000000005,
+      "real": 11
+     },
+     "Sun": {
+      "sim": 16.019999999999992,
+      "real": 30
+     },
+     "Snow": {
+      "sim": 8.893,
+      "real": 10
+     },
+     "unknown": {
+      "sim": 1.5819999999999999,
+      "real": 1
+     },
+     "Perish": {
+      "sim": 4.087,
+      "real": 5
+     }
+    },
+    "arch_top": {
+     "Balance": {
+      "sim": 6.664,
+      "real": 2
+     },
+     "Tailwind": {
+      "sim": 5.066999999999996,
+      "real": 4
+     },
+     "Trick Room": {
+      "sim": 2.208999999999999,
+      "real": 0
+     },
+     "Indeedee TR": {
+      "sim": 1.9319999999999993,
+      "real": 0
+     },
+     "Rain": {
+      "sim": 5.137999999999999,
+      "real": 3
+     },
+     "Sand": {
+      "sim": 2.153999999999999,
+      "real": 1
+     },
+     "Rain + Sun": {
+      "sim": 3.0719999999999987,
+      "real": 2
+     },
+     "Sun": {
+      "sim": 2.997999999999996,
+      "real": 5
+     },
+     "Snow": {
+      "sim": 1.9419999999999995,
+      "real": 2
+     },
+     "unknown": {
+      "sim": 0.19899999999999998,
+      "real": 0
+     },
+     "Perish": {
+      "sim": 0.6250000000000002,
+      "real": 1
+     }
+    },
+    "top_teams": [
+     {
+      "arch": "Tailwind",
+      "win": 0.092,
+      "top": 0.499,
+      "day2": 0.745,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Sand",
+      "win": 0.061,
+      "top": 0.455,
+      "day2": 0.72,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Balance",
+      "win": 0.047,
+      "top": 0.384,
+      "day2": 0.695,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Tailwind",
+      "win": 0.042,
+      "top": 0.349,
+      "day2": 0.641,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Balance",
+      "win": 0.032,
+      "top": 0.306,
+      "day2": 0.595,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Snow",
+      "win": 0.024,
+      "top": 0.27,
+      "day2": 0.578,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Trick Room",
+      "win": 0.021,
+      "top": 0.226,
+      "day2": 0.51,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Trick Room",
+      "win": 0.015,
+      "top": 0.213,
+      "day2": 0.497,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain + Sun",
+      "win": 0.015,
+      "top": 0.175,
+      "day2": 0.471,
+      "real_day2": true,
+      "real_top": false,
+      "real_win": false
+     },
+     {
+      "arch": "Rain",
+      "win": 0.014,
+      "top": 0.255,
+      "day2": 0.521,
+      "real_day2": false,
+      "real_top": false,
+      "real_win": false
+     }
+    ]
+   }
+  }
+ }
+}

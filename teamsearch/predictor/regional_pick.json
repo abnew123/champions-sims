@@ -1,0 +1,475 @@
+{
+ "players": 3721,
+ "ways": {
+  "field": {
+   "corr": 0.2785959384022032,
+   "corr_seen": 0.1582166277623041,
+   "top5": {
+    "n": 183,
+    "win": 0.5477258167841127,
+    "day2": 0.2185792349726776,
+    "top": 0.02185792349726776
+   },
+   "top10": {
+    "n": 369,
+    "win": 0.5565681961030798,
+    "day2": 0.24661246612466126,
+    "top": 0.032520325203252036
+   }
+  },
+  "oracle": {
+   "corr": 0.27706919525903917,
+   "corr_seen": 0.15434511671399878,
+   "top5": {
+    "n": 183,
+    "win": 0.5438709677419354,
+    "day2": 0.20765027322404372,
+    "top": 0.02185792349726776
+   },
+   "top10": {
+    "n": 369,
+    "win": 0.5551342812006319,
+    "day2": 0.24390243902439024,
+    "top": 0.02981029810298103
+   }
+  },
+  "popular": {
+   "corr": 0.020716489408255566,
+   "corr_seen": -0.060613538033955895,
+   "top5": {
+    "n": 183,
+    "win": 0.514070006863418,
+    "day2": 0.12021857923497267,
+    "top": 0.01092896174863388
+   },
+   "top10": {
+    "n": 369,
+    "win": 0.505259586019681,
+    "day2": 0.12195121951219512,
+    "top": 0.013550135501355014
+   }
+  },
+  "record": {
+   "corr": 0.10611930754967623,
+   "corr_seen": 0.11571082137708046,
+   "top5": {
+    "n": 183,
+    "win": 0.5705407085146054,
+    "day2": 0.26229508196721313,
+    "top": 0.04371584699453552
+   },
+   "top10": {
+    "n": 369,
+    "win": 0.544620253164557,
+    "day2": 0.21138211382113822,
+    "top": 0.02710027100271003
+   }
+  },
+  "topcut": {
+   "corr": 0.06287535537545348,
+   "corr_seen": 0.06580080882670933,
+   "top5": {
+    "n": 183,
+    "win": 0.5535264483627204,
+    "day2": 0.23497267759562843,
+    "top": 0.02185792349726776
+   },
+   "top10": {
+    "n": 369,
+    "win": 0.5253623188405797,
+    "day2": 0.16260162601626016,
+    "top": 0.018970189701897018
+   }
+  },
+  "sim": {
+   "corr": 0.21749653274844102,
+   "corr_seen": 0.08277337978539585,
+   "top5": {
+    "n": 183,
+    "win": 0.5065292096219931,
+    "day2": 0.12568306010928962,
+    "top": 0.00546448087431694
+   },
+   "top10": {
+    "n": 369,
+    "win": 0.5172064777327935,
+    "day2": 0.14634146341463414,
+    "top": 0.013550135501355014
+   }
+  },
+  "field + record": {
+   "corr": 0.23951082381081973,
+   "corr_seen": 0.15444535135719836,
+   "top5": {
+    "n": 183,
+    "win": 0.5615577889447236,
+    "day2": 0.2459016393442623,
+    "top": 0.03278688524590164
+   },
+   "top10": {
+    "n": 369,
+    "win": 0.5594493116395495,
+    "day2": 0.23848238482384823,
+    "top": 0.02981029810298103
+   }
+  },
+  "field + topcut": {
+   "corr": 0.22366810591944253,
+   "corr_seen": 0.12299869358719963,
+   "top5": {
+    "n": 183,
+    "win": 0.5565438373570522,
+    "day2": 0.22950819672131148,
+    "top": 0.03278688524590164
+   },
+   "top10": {
+    "n": 369,
+    "win": 0.5476952624839949,
+    "day2": 0.2086720867208672,
+    "top": 0.024390243902439025
+   }
+  },
+  "field + record + topcut": {
+   "corr": 0.20798843385436958,
+   "corr_seen": 0.13638728360579574,
+   "top5": {
+    "n": 183,
+    "win": 0.5521628498727735,
+    "day2": 0.23497267759562843,
+    "top": 0.03825136612021858
+   },
+   "top10": {
+    "n": 369,
+    "win": 0.5466495671689644,
+    "day2": 0.2086720867208672,
+    "top": 0.018970189701897018
+   }
+  },
+  "record + topcut": {
+   "corr": 0.10002194987625117,
+   "corr_seen": 0.10531104666175868,
+   "top5": {
+    "n": 183,
+    "win": 0.5381107491856677,
+    "day2": 0.19672131147540983,
+    "top": 0.0273224043715847
+   },
+   "top10": {
+    "n": 369,
+    "win": 0.5423892100192679,
+    "day2": 0.1951219512195122,
+    "top": 0.02168021680216802
+   }
+  }
+ },
+ "picks": {
+  "field": {
+   "Baltimore": {
+    "six": [
+     "armarouge",
+     "camerupt",
+     "farigiraf",
+     "indeedeef",
+     "kingambit",
+     "staraptor"
+    ],
+    "pilots": 1,
+    "wins": 4,
+    "matches": 7,
+    "day2": 0,
+    "top": 0
+   },
+   "Brisbane": {
+    "six": [
+     "delphox",
+     "floetteeternal",
+     "incineroar",
+     "kingambit",
+     "sinistcha",
+     "sneasler"
+    ],
+    "pilots": 9,
+    "wins": 62,
+    "matches": 94,
+    "day2": 7,
+    "top": 1
+   },
+   "Frankfurt": {
+    "six": [
+     "basculegion",
+     "glimmora",
+     "kingambit",
+     "raichu",
+     "rillaboom",
+     "volcarona"
+    ],
+    "pilots": 1,
+    "wins": 1,
+    "matches": 5,
+    "day2": 0,
+    "top": 0
+   },
+   "Recife": {
+    "six": [
+     "annihilape",
+     "archaludon",
+     "charizard",
+     "garchomp",
+     "pelipper",
+     "venusaur"
+    ],
+    "pilots": 2,
+    "wins": 5,
+    "matches": 12,
+    "day2": 0,
+    "top": 0
+   },
+   "Louisville": {
+    "six": [
+     "basculegion",
+     "delphox",
+     "dragonite",
+     "garchomp",
+     "kingambit",
+     "sneasler"
+    ],
+    "pilots": 3,
+    "wins": 18,
+    "matches": 28,
+    "day2": 1,
+    "top": 0
+   }
+  },
+  "record": {
+   "Baltimore": {
+    "six": [
+     "dragonite",
+     "floetteeternal",
+     "gholdengo",
+     "incineroar",
+     "rillaboom",
+     "sneasler"
+    ],
+    "pilots": 1,
+    "wins": 1,
+    "matches": 5,
+    "day2": 0,
+    "top": 0
+   },
+   "Brisbane": {
+    "six": [
+     "annihilape",
+     "arcaninehisui",
+     "gholdengo",
+     "raichu",
+     "rillaboom",
+     "salamence"
+    ],
+    "pilots": 1,
+    "wins": 4,
+    "matches": 8,
+    "day2": 0,
+    "top": 0
+   },
+   "Frankfurt": {
+    "six": [
+     "annihilape",
+     "arcaninehisui",
+     "gholdengo",
+     "raichu",
+     "rillaboom",
+     "salamence"
+    ],
+    "pilots": 3,
+    "wins": 13,
+    "matches": 24,
+    "day2": 0,
+    "top": 0
+   },
+   "Recife": {
+    "six": [
+     "delphox",
+     "incineroar",
+     "kingambit",
+     "raichu",
+     "rillaboom",
+     "sneasler"
+    ],
+    "pilots": 1,
+    "wins": 4,
+    "matches": 8,
+    "day2": 0,
+    "top": 0
+   },
+   "Louisville": {
+    "six": [
+     "archaludon",
+     "basculegionf",
+     "floetteeternal",
+     "golisopod",
+     "pelipper",
+     "sneasler"
+    ],
+    "pilots": 9,
+    "wins": 37,
+    "matches": 67,
+    "day2": 1,
+    "top": 0
+   }
+  },
+  "topcut": {
+   "Baltimore": {
+    "six": [
+     "arcaninehisui",
+     "gholdengo",
+     "raichu",
+     "rillaboom",
+     "staraptor",
+     "sylveon"
+    ],
+    "pilots": 49,
+    "wins": 231,
+    "matches": 422,
+    "day2": 11,
+    "top": 1
+   },
+   "Brisbane": {
+    "six": [
+     "blastoise",
+     "delphox",
+     "incineroar",
+     "indeedeef",
+     "pawmot",
+     "sinistcha"
+    ],
+    "pilots": 1,
+    "wins": 0,
+    "matches": 4,
+    "day2": 0,
+    "top": 0
+   },
+   "Frankfurt": {
+    "six": [
+     "arcaninehisui",
+     "farigiraf",
+     "kingambit",
+     "rillaboom",
+     "salamence",
+     "sylveon"
+    ],
+    "pilots": 4,
+    "wins": 14,
+    "matches": 32,
+    "day2": 0,
+    "top": 0
+   },
+   "Recife": {
+    "six": [
+     "annihilape",
+     "archaludon",
+     "charizard",
+     "pelipper",
+     "swampert",
+     "venusaur"
+    ],
+    "pilots": 1,
+    "wins": 4,
+    "matches": 8,
+    "day2": 0,
+    "top": 0
+   },
+   "Louisville": {
+    "six": [
+     "blastoise",
+     "delphox",
+     "incineroar",
+     "indeedeef",
+     "pawmot",
+     "sinistcha"
+    ],
+    "pilots": 3,
+    "wins": 16,
+    "matches": 26,
+    "day2": 1,
+    "top": 0
+   }
+  },
+  "field + record + topcut": {
+   "Baltimore": {
+    "six": [
+     "excadrill",
+     "indeedee",
+     "milotic",
+     "salamence",
+     "sneasler",
+     "tyranitar"
+    ],
+    "pilots": 9,
+    "wins": 29,
+    "matches": 63,
+    "day2": 0,
+    "top": 0
+   },
+   "Brisbane": {
+    "six": [
+     "delphox",
+     "floetteeternal",
+     "incineroar",
+     "kingambit",
+     "sinistcha",
+     "sneasler"
+    ],
+    "pilots": 9,
+    "wins": 62,
+    "matches": 94,
+    "day2": 7,
+    "top": 1
+   },
+   "Frankfurt": {
+    "six": [
+     "delphox",
+     "floetteeternal",
+     "incineroar",
+     "kingambit",
+     "sinistcha",
+     "sneasler"
+    ],
+    "pilots": 6,
+    "wins": 28,
+    "matches": 53,
+    "day2": 1,
+    "top": 0
+   },
+   "Recife": {
+    "six": [
+     "annihilape",
+     "archaludon",
+     "charizard",
+     "pelipper",
+     "swampert",
+     "venusaur"
+    ],
+    "pilots": 1,
+    "wins": 4,
+    "matches": 8,
+    "day2": 0,
+    "top": 0
+   },
+   "Louisville": {
+    "six": [
+     "arcaninehisui",
+     "gardevoir",
+     "gengar",
+     "indeedeef",
+     "milotic",
+     "sneasler"
+    ],
+    "pilots": 2,
+    "wins": 10,
+    "matches": 16,
+    "day2": 0,
+    "top": 0
+   }
+  }
+ }
+}

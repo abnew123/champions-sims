@@ -64,3 +64,4 @@ teamsearch/predictor/replays/
 teamsearch/predictor/*.out
 teamsearch/predictor/collect.err
 teamsearch/predictor/tours/
+teamsearch/predictor/regional_links.json
